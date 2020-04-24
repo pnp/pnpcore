@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
+    <ProjectReference Include="..\..\sdk\PnP.Core\PnP.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
