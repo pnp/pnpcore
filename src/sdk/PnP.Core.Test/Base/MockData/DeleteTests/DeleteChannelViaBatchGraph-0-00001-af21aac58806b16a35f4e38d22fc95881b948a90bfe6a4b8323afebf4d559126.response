@@ -1,0 +1,19 @@
+{"responses": [{"id": "2","status":404,"body":{
+  "error": {
+    "code": "NotFound",
+    "message": "No Team found with Group id: a7ea7e26-5a76-4b72-ad99-1465b74857c8",
+    "innerError": {
+      "request-id": "6e9f55db-9c8a-4bda-add6-f623c5a2bff4",
+      "date": "2020-04-16T15:33:50"
+    }
+  }
+}},{"id": "1","status":404,"body":{
+  "error": {
+    "code": "NotFound",
+    "message": "No team found with Group Id a7ea7e26-5a76-4b72-ad99-1465b74857c8",
+    "innerError": {
+      "request-id": "6e9f55db-9c8a-4bda-add6-f623c5a2bff4",
+      "date": "2020-04-16T15:33:50"
+    }
+  }
+}}]}

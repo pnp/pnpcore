@@ -1,0 +1,1 @@
+﻿# Add here tests of the Teams model entities

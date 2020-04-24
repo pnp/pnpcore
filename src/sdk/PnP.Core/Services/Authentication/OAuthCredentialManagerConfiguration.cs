@@ -1,0 +1,25 @@
+﻿using System;
+
+namespace PnP.Core.Services
+{
+    /// <summary>
+    /// Public type to define the Authentication based on Credential Manager
+    /// </summary>
+    public class OAuthCredentialManagerConfiguration : IAuthenticationProviderConfiguration
+    {
+        /// <summary>
+        /// The Name of the configuration
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Defines the type of the IAuthenticationProvider to create
+        /// </summary>
+        public Type AuthenticationProviderType => typeof(OAuthAuthenticationProvider);
+
+        /// <summary>
+        /// The name of the Windows Credential Manager settings to use
+        /// </summary>
+        public string CredentialManagerName { get; set; }
+    }
+}

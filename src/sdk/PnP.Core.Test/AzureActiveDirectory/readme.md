@@ -1,0 +1,1 @@
+﻿# Add here tests of the Azure Active Directory model entities

@@ -1,0 +1,10 @@
+--batchresponse_7855cce0-1e63-4a1d-8c68-f8d825127ff6
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 204 No Content
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "20ba9657-ca6b-4d2c-8bcc-8a492efb8249,3"
+
+
+--batchresponse_7855cce0-1e63-4a1d-8c68-f8d825127ff6--

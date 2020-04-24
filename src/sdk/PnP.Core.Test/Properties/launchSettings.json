@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PnP.Core.Test": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "Hosting:EnvironmentName": "bertonline"
+      }
+    }
+  }
+}

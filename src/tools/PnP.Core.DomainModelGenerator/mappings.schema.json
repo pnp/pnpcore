@@ -1,0 +1,136 @@
+{
+  "$id": "http://schemas.sharepointpnp.com/pnp.m365.domainmodelgenerator/mappings",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PnP.M365.DomainModelGenerator Mapping Schema",
+  "description": "Defines the mapping rules for PnP.M365.DomainModelGenerator",
+  "definitions": {
+    "providerType": {
+      "type": "string",
+      "enum": ["SPO","MSGraph"],
+      "description": "The name of the metadata provider to map the property from"
+    },
+    "modelEntity": {
+      "type": "object",
+      "description": "A Model Entity in the target Domain Model",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the property in the Domain Model"          
+        },
+        "mappings": {
+          "type": "array",
+          "description": "The actual mappings for the properties",
+          "items": {
+            "type": "object",
+            "description": "A type mapping for the current property",
+            "properties": {
+              "provider": {
+                "$ref": "#/definitions/providerType"
+              },
+              "providerEntity": {
+                "type": "object",
+                "description": "Defines the name of the entity in the provider's metadata",
+                "properties": {
+                  "namespace": {
+                    "type": "string",
+                    "description": "The namespace of the entity in the EDMX provider's metadata"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the entity in the EDMX provider's metadata"
+                  }
+                },
+                "required": ["namespace", "name"]
+              },
+              "properties": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "providerName": { "type": "string" }
+                  },
+                  "required": ["name", "providerName"],
+                  "minItems": 1
+                } 
+              },        
+              "excludedProperties":{
+                "type": "array",
+                "description": "The properties to exclude while processing the metadata",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "restUrl": { 
+                "type": "string",
+                "description": "The URL of the REST API to consume the entity with the target provider"
+              }
+            },
+            "required": ["provider", "providerEntity"]
+          }
+        }
+      },
+      "required": ["name"]
+    },
+    "modelNamespace": {
+      "description": "A Model Namespace in the target Domain Model",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the target namespace in the Domain Model"
+        },
+        "types": {
+          "type": "array",
+          "description": "The types that belog to the current namespace in the Domain Model",
+          "items": {
+            "$ref": "#/definitions/modelEntity",
+            "description": "A single type defined in the Domain Model"
+          }
+        },
+        "namespaces": {
+          "description": "A list of namespaces to declare in the Domain Model",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/modelNamespace"
+            },
+            "minItems": 1
+          }
+        },
+      "required": ["name","types"]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "providers": {
+      "type": "array",
+      "description": "A list of metadata providers with their settings",
+      "items": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "$ref": "#/definitions/providerType"
+          },
+          "edmxNamespace": {
+            "type": "string",
+            "description": "The XML Namespace of the Edmx element in the metadata file"
+          },
+          "schemaNamespace": {
+            "type": "string",
+            "description": "The XML Namespace of the schema element in the metadata file"
+          }
+        },
+        "required": ["provider","emdxNamespace","schemaNamespace"]
+      }
+    },
+    "namespaces": {
+      "type": "array",
+      "description": "A list of namespaces to declare in the Domain Model",
+      "items": {
+        "$ref": "#/definitions/modelNamespace"
+        },
+        "minItems": 1
+      }
+    },
+  "required": [ "providers", "namespaces" ]
+}
