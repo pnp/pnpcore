@@ -1,0 +1,20 @@
+- name: Getting Started
+  items:
+  - name: Introduction
+    href: intro.md
+- name: User documentation
+  items:
+  - name: Introcution
+    href: consumer/readme.md
+- name: Contributor documentation
+  items:
+  - name: Introduction
+    href: contributor/readme.md
+  - name: Microsoft Graph
+    href: contributor/extending%20the%20model%20-%20Microsoft%20Graph.md 
+  - name: SharePoint REST
+    href: contributor/extending%20the%20model%20-%20SharePoint%20REST.md 
+  - name: Event handlers
+    href: contributor/event%20handlers.md 
+  - name: Model tokens
+    href: contributor/model%20tokens.md 
