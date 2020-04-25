@@ -6,12 +6,12 @@ using System.Net.Http;
 namespace PnP.Core.Model
 {
     /// <summary>
-    /// Defines a batch of requests to execute
+    /// Defines a <see cref="Batch"/> of requests to execute
     /// </summary>
     public class Batch
     {
         /// <summary>
-        /// Instantiates a batch for a given id
+        /// Instantiates a <see cref="Batch"/> for a given id
         /// </summary>
         /// <param name="id">Id of the batch</param>
         internal Batch(Guid id)
@@ -20,12 +20,12 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Default public constructor, instantiates a batch
+        /// Default public constructor, instantiates a <see cref="Batch"/>
         /// </summary>
         public Batch() : this(Guid.NewGuid()) { }
 
         /// <summary>
-        /// Id of the batch
+        /// Id of the <see cref="Batch"/>
         /// </summary>
         internal Guid Id { get; private set; }
 
@@ -35,7 +35,7 @@ namespace PnP.Core.Model
         internal SortedList<int, BatchRequest> Requests { get; private set; } = new SortedList<int, BatchRequest>();
 
         /// <summary>
-        /// Was this batch executed
+        /// Was this <see cref="Batch"/> executed?
         /// </summary>
         internal bool Executed { get; set; } = false;
 
@@ -53,7 +53,7 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Returns true if this batch contains both SharePoint REST as Microsoft Graph requests
+        /// Returns true if this <see cref="Batch"/> contains both SharePoint REST as Microsoft Graph requests
         /// </summary>
         internal bool HasMixedApiTypes
         {
@@ -71,7 +71,7 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Returns true if this batch can be completely executed via SPO REST
+        /// Returns true if this <see cref="Batch"/> can be completely executed via SPO REST
         /// </summary>
         internal bool CanFallBackToSPORest
         {
@@ -87,7 +87,7 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Add a new request to this batch
+        /// Add a new request to this <see cref="Batch"/>
         /// </summary>
         /// <param name="model">Entity object on for which this request was meant</param>
         /// <param name="entityInfo">Info about the entity object</param>
