@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// Site class, write your custom code here
     /// </summary>
     [SharePointType("SP.Site", SharePointUri = "_api/Site")]
-    [GraphType(GraphId = "id", GraphGet = "sites/{hostname}:{serverrelativepath}")]
+    [GraphType(GraphGet = "sites/{hostname}:{serverrelativepath}")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class Site
     {

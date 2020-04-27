@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// ListItem class, write your custom code here
     /// </summary>
     [SharePointType("SP.ListItem", SharePointUri = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})")]
-    [GraphType(GraphId = "id", GraphOverflowProperty = "fields")]
+    [GraphType(GraphOverflowProperty = "fields")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class ListItem
     {

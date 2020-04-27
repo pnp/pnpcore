@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Model.AzureActiveDirectory
 {
-    [GraphType(GraphId = "id", GraphGet = "users/{GraphId}")]
+    [GraphType(GraphGet = "users/{GraphId}")]
     internal partial class User
     {
 

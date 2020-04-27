@@ -74,7 +74,7 @@ namespace PnP.Core.Model
 
                     if (graphTypeAttribute != null)
                     {
-                        classInfo.GraphId = graphTypeAttribute.GraphId;
+                        classInfo.GraphId = !string.IsNullOrEmpty(graphTypeAttribute.GraphId) ? graphTypeAttribute.GraphId : "id";
                         classInfo.GraphGet = !string.IsNullOrEmpty(graphTypeAttribute.GraphGet) ? graphTypeAttribute.GraphGet : graphTypeAttribute.GraphUri;
                         classInfo.GraphOverflowProperty = graphTypeAttribute.GraphOverflowProperty;
                         classInfo.GraphUpdate = !string.IsNullOrEmpty(graphTypeAttribute.GraphUpdate) ? graphTypeAttribute.GraphUpdate : graphTypeAttribute.GraphUri;
