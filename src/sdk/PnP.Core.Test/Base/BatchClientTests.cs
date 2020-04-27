@@ -196,7 +196,7 @@ namespace PnP.Core.Test.Base
             }
         }
         
-        //[TestMethod]
+        [TestMethod]
         public async Task MergeGetBatchResults()
         {
             //TestCommon.Instance.Mocking = false;
