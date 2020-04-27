@@ -2,7 +2,6 @@
 {
     internal partial class TeamApp : BaseDataModel<ITeamApp>, ITeamApp
     {
-        [GraphProperty("id", IsKey = true)]
         public string Id { get => GetValue<string>(); set => SetValue(value); }
 
         [GraphProperty("teamsApp", JsonPath = "id")]
@@ -14,6 +13,7 @@
         [GraphProperty("teamsApp", JsonPath = "distributionMethod")]
         public TeamsAppDistributionMethod DistributionMethod { get => GetValue<TeamsAppDistributionMethod>(); set => SetValue(value); }
 
+        [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = (string)value; }
     }
 }

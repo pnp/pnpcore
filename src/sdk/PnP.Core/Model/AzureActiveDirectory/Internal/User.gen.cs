@@ -2,7 +2,6 @@
 {
     internal partial class User: BaseDataModel<IUser>, IUser
     {
-        [GraphProperty("id", IsKey = true)]
         public string Id { get => GetValue<string>(); set => SetValue(value); }
 
         public string ExternalId { get => GetValue<string>(); set => SetValue(value); }
@@ -18,5 +17,8 @@
         public string OfficeLocation { get => GetValue<string>(); set => SetValue(value); }
         
         public string UserPrincipalName { get => GetValue<string>(); set => SetValue(value); }
+
+        [KeyProperty("Id")]
+        public override object Key { get => this.Id; set => this.Id = value.ToString(); }
     }
 }

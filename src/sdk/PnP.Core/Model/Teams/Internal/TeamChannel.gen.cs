@@ -4,7 +4,6 @@ namespace PnP.Core.Model.Teams
 {
     internal partial class TeamChannel : BaseDataModel<ITeamChannel>, ITeamChannel
     {
-        [GraphProperty("id", IsKey = true)]
         public string Id { get => GetValue<string>(); set => SetValue(value); }
         
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
@@ -19,6 +18,7 @@ namespace PnP.Core.Model.Teams
         
         public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
 
+        [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = (string)value; }
     }
 }

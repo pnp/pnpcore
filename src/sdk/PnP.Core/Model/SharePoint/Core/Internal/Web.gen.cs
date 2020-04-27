@@ -10,8 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     internal partial class Web : BaseDataModel<IWeb>, IWeb
     {
-        [SharePointProperty("Id", IsKey = true)]
-        [GraphProperty("sharepointIds", JsonPath = "webId", IsKey = true)]
+        [GraphProperty("sharepointIds", JsonPath = "webId")]
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
         [GraphProperty("name")]
@@ -103,6 +102,7 @@ namespace PnP.Core.Model.SharePoint
         // Not in Web object, requires extra work to load
         public IAlternateUICultureCollection AlternateUICultures { get; set; } = new AlternateUICultureCollection();
 
+        [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

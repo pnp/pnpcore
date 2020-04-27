@@ -881,7 +881,7 @@ namespace PnP.Core.Model
                         foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
                         {
                             // Let's set its value into the update message
-                            ((ExpandoObject)updateMessage).SetProperty(ToCamelCase(changedProp.Key), changedProp.Value);
+                            ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
                         }
                     }
                     else if (JsonMappingHelper.IsComplexType(changedField.PropertyInfo.PropertyType))
@@ -892,15 +892,15 @@ namespace PnP.Core.Model
                         // Get the properties that have changed in the complex type
                         foreach (string changedProp in complexObject.ChangedProperties)
                         {
-                            ((ExpandoObject)updateMessageComplexType).SetProperty(ToCamelCase(changedProp), complexObject.GetValue(changedProp));
+                            ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp, complexObject.GetValue(changedProp));
                         }
                         // Add this as value to the original changed property
-                        ((ExpandoObject)updateMessage).SetProperty(ToCamelCase(changedField.GraphName), updateMessageComplexType as object);
+                        ((ExpandoObject)updateMessage).SetProperty(changedField.GraphName, updateMessageComplexType as object);
                     }
                     else
                     {
                         // Let's set its value into the update message
-                        ((ExpandoObject)updateMessage).SetProperty(ToCamelCase(changedField.GraphName), this.GetValue(changedField.Name));
+                        ((ExpandoObject)updateMessage).SetProperty(changedField.GraphName, this.GetValue(changedField.Name));
                     }
                 }
             }
@@ -1013,16 +1013,6 @@ namespace PnP.Core.Model
 
             return call;
         }
-
-        private static string ToCamelCase(string str)
-        {
-            if (!string.IsNullOrEmpty(str) && str.Length > 1)
-            {
-                return Char.ToLowerInvariant(str[0]) + str.Substring(1);
-            }
-            return str;
-        }
-
         #endregion
 
         #region Delete

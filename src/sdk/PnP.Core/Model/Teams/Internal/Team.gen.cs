@@ -5,7 +5,6 @@ namespace PnP.Core.Model.Teams
 {
     internal partial class Team : BaseDataModel<ITeam>, ITeam
     {
-        [GraphProperty("id", IsKey = true)]
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
         
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
@@ -110,6 +109,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
+        [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

@@ -80,7 +80,8 @@ namespace PnP.Core.Model
                         classInfo.GraphUpdate = !string.IsNullOrEmpty(graphTypeAttribute.GraphUpdate) ? graphTypeAttribute.GraphUpdate : graphTypeAttribute.GraphUri;
                         classInfo.GraphDelete = !string.IsNullOrEmpty(graphTypeAttribute.GraphDelete) ? graphTypeAttribute.GraphDelete : graphTypeAttribute.GraphUri;
                     }
-                    
+
+                    string keyPropertyName = null;
                     foreach (var property in type.GetProperties())
                     {
                         EntityFieldInfo classField = null;
@@ -99,20 +100,24 @@ namespace PnP.Core.Model
                                         classField.SharePointExpandable = sharePointPropertyAttribute.Expandable;
                                         classField.ExpandableByDefault = sharePointPropertyAttribute.ExpandByDefault;
                                         classField.SharePointUseCustomMapping = sharePointPropertyAttribute.UseCustomMapping;
-                                        classField.IsSharePointKey = sharePointPropertyAttribute.IsKey;
                                         classField.SharePointJsonPath = sharePointPropertyAttribute.JsonPath;
                                         break;
                                     }
                                 case GraphPropertyAttribute graphPropertyAttribute:
                                     {
                                         classField = EnsureClassField(type, property, classInfo);
-                                        classField.GraphName = !string.IsNullOrEmpty(graphPropertyAttribute.FieldName) ? graphPropertyAttribute.FieldName : property.Name;
+                                        classField.GraphName = !string.IsNullOrEmpty(graphPropertyAttribute.FieldName) ? graphPropertyAttribute.FieldName : ToCamelCase(property.Name);
                                         classField.GraphExpandable = graphPropertyAttribute.Expandable;
                                         classField.ExpandableByDefault = graphPropertyAttribute.ExpandByDefault;
                                         classField.GraphUseCustomMapping = graphPropertyAttribute.UseCustomMapping;
-                                        classField.IsGraphKey = graphPropertyAttribute.IsKey;
                                         classField.GraphJsonPath = graphPropertyAttribute.JsonPath;
                                         classField.GraphGet = graphPropertyAttribute.GraphGet;
+                                        break;
+                                    }
+                                case KeyPropertyAttribute keyPropertyAttribute:
+                                    {
+                                        keyPropertyName = keyPropertyAttribute.KeyPropertyName;
+                                        skipField = true;
                                         break;
                                     }
                                 case SystemPropertyAttribute systemPropertyAttribute:
@@ -130,15 +135,34 @@ namespace PnP.Core.Model
                             if (string.IsNullOrEmpty(classInfo.SharePointType))
                             {
                                 // This is a Graph only property
-                                classField.GraphName = property.Name;
+                                classField.GraphName = ToCamelCase(property.Name);
                             }
                             else
                             {
-                                // This is SharePoint/Graph property
+                                // This is SharePoint/Graph property, we're not setting the GraphName here because in "mixed" objects the Graph properties must be explicitely marked with the GraphProperty attribute
                                 classField.SharePointName = property.Name;
                             }
                         }
+                    }
 
+                    // Find the property set as key field and mark it as such
+                    if (!string.IsNullOrEmpty(keyPropertyName))
+                    {
+                        var keyProperty = classInfo.Fields.FirstOrDefault(p => p.Name == keyPropertyName);
+                        if (keyProperty != null)
+                        {
+                            if (!string.IsNullOrEmpty(classInfo.SharePointType))
+                            {
+                                keyProperty.IsSharePointKey = true;
+                            }
+
+                            keyProperty.IsGraphKey = true;
+                            // If a property is defined as graph key then ensure the GraphName is correctly set
+                            if (string.IsNullOrEmpty(keyProperty.GraphName))
+                            {
+                                keyProperty.GraphName = ToCamelCase(keyProperty.Name);
+                            }
+                        }
                     }
 
                     // Update the field used for overflow, this field was added (as it's part of the ExpandoBaseDataModel base data class),
@@ -171,7 +195,7 @@ namespace PnP.Core.Model
                 }
             }
         }
-
+        
         /// <summary>
         /// Creates a concrete instance of a domain model type based on the reference type
         /// </summary>
@@ -333,6 +357,15 @@ namespace PnP.Core.Model
             }
 
             return classField;
+        }
+
+        private static string ToCamelCase(string str)
+        {
+            if (!string.IsNullOrEmpty(str) && str.Length > 1)
+            {
+                return Char.ToLowerInvariant(str[0]) + str.Substring(1);
+            }
+            return str;
         }
     }
 }
