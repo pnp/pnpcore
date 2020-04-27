@@ -562,8 +562,6 @@ namespace PnP.Core.Model
 
             StringBuilder sb = new StringBuilder();
 
-            string graphIdField = entity.GraphId;
-
             // Only add select statement whenever there was a filter specified
             if (entity.GraphFieldsLoadedViaExpression)
             {
