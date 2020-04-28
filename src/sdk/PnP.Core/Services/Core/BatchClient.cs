@@ -305,12 +305,8 @@ namespace PnP.Core.Services
                         TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
                     }
 
-                    // PAOLO: I slightly changed the behavior here, so that we get data 
-                    // if it is not yet available, to avoid having all the mock-based tests
-                    // to fail when we don't have data
-
                     // If we are not mocking data, or if the mock data is not yet available
-                    if (PnPContext.Mode != PnPContextMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
+                    if (PnPContext.Mode != PnPContextMode.Mock)
                     {
 #endif
                         // Ensure the request contains authentication information
