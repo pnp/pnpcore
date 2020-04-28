@@ -81,6 +81,11 @@ namespace PnP.Core.Model
         internal string GraphGet { get; set; }
 
         /// <summary>
+        /// Specifies if this property requires the Graph beta endpoint
+        /// </summary>
+        internal bool GraphBeta { get; set; }
+
+        /// <summary>
         /// Force a call out to the custom mapping handler for this field / the default mapping logic will not be applied
         /// </summary>
         public bool SharePointUseCustomMapping { get; set; }

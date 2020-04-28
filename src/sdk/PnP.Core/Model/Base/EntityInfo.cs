@@ -29,6 +29,7 @@ namespace PnP.Core.Model
             SharePointType = entityInfo.SharePointType;
             SharePointUri = entityInfo.SharePointUri;
             GraphId = entityInfo.GraphId;
+            GraphBeta = entityInfo.GraphBeta;
             GraphGet = entityInfo.GraphGet;
             SharePointGet = entityInfo.SharePointGet;
             UseOverflowField = entityInfo.UseOverflowField;
@@ -59,6 +60,11 @@ namespace PnP.Core.Model
         /// Value of the id field used to load graph relationships (e.g. load lists from a given site)
         /// </summary>
         internal string GraphId { get; set; }
+
+        /// <summary>
+        /// Specifies if this class requires the Microsoft Graph beta endpoint
+        /// </summary>
+        internal bool GraphBeta { get; set; }
 
         /// <summary>
         /// API call for a Graph get

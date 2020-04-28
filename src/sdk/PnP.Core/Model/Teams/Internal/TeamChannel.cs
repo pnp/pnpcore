@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.Teams
 {
-    [GraphType(GraphUri = V)]
+    [GraphType(Uri = V)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TeamChannel
     {

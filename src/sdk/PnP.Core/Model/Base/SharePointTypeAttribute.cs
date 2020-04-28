@@ -14,37 +14,37 @@ namespace PnP.Core.Model
         /// <param name="sharePointType">SharePoint REST type</param>
         internal SharePointTypeAttribute(string sharePointType)
         {
-            SharePointType = sharePointType;
+            Type = sharePointType;
         }
 
         /// <summary>
         /// Defines the OData name of this SharePoint REST type (e.g. SP.Web)
         /// </summary>
-        public string SharePointType { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// URI that identifies an object in SharePoint REST, used for get, update and delete requests
         /// </summary>
-        public string SharePointUri { get; set; }
+        public string Uri { get; set; }
 
         /// <summary>
         /// Get API URI, overrides the global SharePointURI when specified
         /// </summary>
-        public string SharePointGet { get; set; }
+        public string Get { get; set; }
 
         /// <summary>
         /// Update API URI, overrides the global SharePointURI when specified
         /// </summary>
-        public string SharePointUpdate { get; set; }
+        public string Update { get; set; }
 
         /// <summary>
         /// Delete API URI, overrides the global SharePointURI when specified
         /// </summary>
-        public string SharePointDelete { get; set; }
+        public string Delete { get; set; }
 
         /// <summary>
         /// Model property name that will hold dynamic data (e.g. List Item property/value pairs)
         /// </summary>
-        public string SharePointOverflowProperty { get; set; }
+        public string OverflowProperty { get; set; }
     }
 }

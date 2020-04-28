@@ -90,7 +90,7 @@ namespace PnP.Core.Model.SharePoint
         public string ValidationMessage { get => GetValue<string>(); set => SetValue(value); }
 
         [SharePointProperty("Items", Expandable = true)]
-        [GraphProperty("items", GraphGet = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
+        [GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
         public IListItemCollection Items
         {
             get

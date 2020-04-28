@@ -61,7 +61,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
-        [GraphProperty("channels", ExpandByDefault = true, GraphGet = "teams/{Site.GroupId}/channels")]
+        [GraphProperty("channels", ExpandByDefault = true, Get = "teams/{Site.GroupId}/channels")]
         public ITeamChannelCollection Channels
         {
             get
@@ -79,7 +79,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
-        [GraphProperty("installedApps", GraphGet = "teams/{Site.GroupId}/installedapps?expand=TeamsApp")]
+        [GraphProperty("installedApps", Get = "teams/{Site.GroupId}/installedapps?expand=TeamsApp")]
         public ITeamAppCollection InstalledApps
         {
             get
@@ -97,7 +97,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
-        [GraphProperty("owners", GraphGet = "groups/{Site.GroupId}/owners")]
+        [GraphProperty("owners", Get = "groups/{Site.GroupId}/owners")]
         public IUserCollection Owners
         {
             get
@@ -115,7 +115,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
-        [GraphProperty("members", GraphGet = "groups/{Site.GroupId}/members")]
+        [GraphProperty("members", Get = "groups/{Site.GroupId}/members")]
         public IUserCollection Members
         {
             get

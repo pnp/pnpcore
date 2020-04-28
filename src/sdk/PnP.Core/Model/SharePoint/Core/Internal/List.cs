@@ -10,8 +10,8 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// List class, write your custom code here
     /// </summary>
-    [SharePointType("SP.List", SharePointUri = "_api/Web/Lists(guid'{Id}')", SharePointGet = "_api/web/lists", SharePointUpdate = "_api/web/lists/getbyid(guid'{Id}')")]
-    [GraphType(GraphGet = "sites/{Parent.GraphId}/lists/{GraphId}")]
+    [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')")]
+    [GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class List
     {

@@ -64,21 +64,22 @@ namespace PnP.Core.Model
 
                     if (sharePointTypeAttribute != null)
                     {
-                        classInfo.SharePointType = sharePointTypeAttribute.SharePointType;
-                        classInfo.SharePointUri = sharePointTypeAttribute.SharePointUri;
-                        classInfo.SharePointGet = !string.IsNullOrEmpty(sharePointTypeAttribute.SharePointGet) ? sharePointTypeAttribute.SharePointGet : sharePointTypeAttribute.SharePointUri;
-                        classInfo.SharePointOverflowProperty = sharePointTypeAttribute.SharePointOverflowProperty;
-                        classInfo.SharePointUpdate = !string.IsNullOrEmpty(sharePointTypeAttribute.SharePointUpdate) ? sharePointTypeAttribute.SharePointUpdate : sharePointTypeAttribute.SharePointUpdate;
-                        classInfo.SharePointDelete = !string.IsNullOrEmpty(sharePointTypeAttribute.SharePointDelete) ? sharePointTypeAttribute.SharePointDelete : sharePointTypeAttribute.SharePointDelete;
+                        classInfo.SharePointType = sharePointTypeAttribute.Type;
+                        classInfo.SharePointUri = sharePointTypeAttribute.Uri;
+                        classInfo.SharePointGet = !string.IsNullOrEmpty(sharePointTypeAttribute.Get) ? sharePointTypeAttribute.Get : sharePointTypeAttribute.Uri;
+                        classInfo.SharePointOverflowProperty = sharePointTypeAttribute.OverflowProperty;
+                        classInfo.SharePointUpdate = !string.IsNullOrEmpty(sharePointTypeAttribute.Update) ? sharePointTypeAttribute.Update : sharePointTypeAttribute.Update;
+                        classInfo.SharePointDelete = !string.IsNullOrEmpty(sharePointTypeAttribute.Delete) ? sharePointTypeAttribute.Delete : sharePointTypeAttribute.Delete;
                     }
 
                     if (graphTypeAttribute != null)
                     {
-                        classInfo.GraphId = !string.IsNullOrEmpty(graphTypeAttribute.GraphId) ? graphTypeAttribute.GraphId : "id";
-                        classInfo.GraphGet = !string.IsNullOrEmpty(graphTypeAttribute.GraphGet) ? graphTypeAttribute.GraphGet : graphTypeAttribute.GraphUri;
-                        classInfo.GraphOverflowProperty = graphTypeAttribute.GraphOverflowProperty;
-                        classInfo.GraphUpdate = !string.IsNullOrEmpty(graphTypeAttribute.GraphUpdate) ? graphTypeAttribute.GraphUpdate : graphTypeAttribute.GraphUri;
-                        classInfo.GraphDelete = !string.IsNullOrEmpty(graphTypeAttribute.GraphDelete) ? graphTypeAttribute.GraphDelete : graphTypeAttribute.GraphUri;
+                        classInfo.GraphId = !string.IsNullOrEmpty(graphTypeAttribute.Id) ? graphTypeAttribute.Id : "id";
+                        classInfo.GraphGet = !string.IsNullOrEmpty(graphTypeAttribute.Get) ? graphTypeAttribute.Get : graphTypeAttribute.Uri;
+                        classInfo.GraphOverflowProperty = graphTypeAttribute.OverflowProperty;
+                        classInfo.GraphUpdate = !string.IsNullOrEmpty(graphTypeAttribute.Update) ? graphTypeAttribute.Update : graphTypeAttribute.Uri;
+                        classInfo.GraphDelete = !string.IsNullOrEmpty(graphTypeAttribute.Delete) ? graphTypeAttribute.Delete : graphTypeAttribute.Uri;
+                        classInfo.GraphBeta = graphTypeAttribute.Beta;
                     }
 
                     string keyPropertyName = null;
@@ -111,7 +112,8 @@ namespace PnP.Core.Model
                                         classField.ExpandableByDefault = graphPropertyAttribute.ExpandByDefault;
                                         classField.GraphUseCustomMapping = graphPropertyAttribute.UseCustomMapping;
                                         classField.GraphJsonPath = graphPropertyAttribute.JsonPath;
-                                        classField.GraphGet = graphPropertyAttribute.GraphGet;
+                                        classField.GraphGet = graphPropertyAttribute.Get;
+                                        classField.GraphBeta = graphPropertyAttribute.Beta;
                                         break;
                                     }
                                 case KeyPropertyAttribute keyPropertyAttribute:
