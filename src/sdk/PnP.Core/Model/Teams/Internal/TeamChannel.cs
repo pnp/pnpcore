@@ -26,7 +26,7 @@ namespace PnP.Core.Model.Teams
             };
 
             // Handler to construct the Add request for this channel
-            AddApiCallHandler = () =>
+            AddApiCallHandler = (keyValuePairs) =>
             {
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();

@@ -41,6 +41,11 @@ namespace PnP.Core.Model.Teams
         /// The Web URL of the Team Channel
         /// </summary>
         public Uri WebUrl { get; set; }
+
+        /// <summary>
+        /// Tabs in this Channel
+        /// </summary>
+        public ITeamChannelTabCollection Tabs { get; }
     }
 
     /// <summary>

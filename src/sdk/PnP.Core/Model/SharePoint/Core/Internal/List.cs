@@ -48,7 +48,7 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Handler to construct the Add request for this list
-            AddApiCallHandler = () =>
+            AddApiCallHandler = (keyValuePairs) =>
             {
                 return new ApiCall($"_api/web/lists", ApiType.SPORest, JsonSerializer.Serialize(new ListAdd(this, TemplateType, Title)));
             };

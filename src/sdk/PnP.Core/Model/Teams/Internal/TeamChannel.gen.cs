@@ -18,6 +18,24 @@ namespace PnP.Core.Model.Teams
         
         public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
 
+        [GraphProperty("tabs", GraphGet = "teams/{Site.GroupId}/channels/{GraphId}/tabs?$expand=teamsApp")]
+        public ITeamChannelTabCollection Tabs
+        {
+            get
+            {
+                if (!HasValue(nameof(Tabs)))
+                {
+                    var channelTabs = new TeamChannelTabCollection
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(channelTabs);
+                }
+                return GetValue<ITeamChannelTabCollection>();
+            }
+        }
+
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = (string)value; }
     }

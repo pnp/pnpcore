@@ -22,7 +22,7 @@ namespace PnP.Core.Model
     /// Delegate for requesting the Api call for doing an ADD operation
     /// </summary>
     /// <returns>API call for adding a model entity</returns>
-    internal delegate ApiCall AddApiCall();
+    internal delegate ApiCall AddApiCall(Dictionary<string, object> keyValuePairs = null);
 
     /// <summary>
     /// Delegate for overriding the default API call in case of a GET request
@@ -186,9 +186,9 @@ namespace PnP.Core.Model
         /// Adds a domain model instance
         /// </summary>
         /// <returns>The added domain model</returns>
-        internal virtual BaseDataModel<TModel> Add()
+        internal virtual BaseDataModel<TModel> Add(Dictionary<string, object> keyValuePairs = null)
         {
-            var call = AddApiCallHandler?.Invoke();
+            var call = AddApiCallHandler?.Invoke(keyValuePairs);
             if (call.HasValue)
             {
                 BaseBatchAdd(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
@@ -205,9 +205,9 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
         /// <returns>The added domain model</returns>
-        internal virtual BaseDataModel<TModel> Add(Batch batch)
+        internal virtual BaseDataModel<TModel> Add(Batch batch, Dictionary<string, object> keyValuePairs = null)
         {
-            var call = AddApiCallHandler?.Invoke();
+            var call = AddApiCallHandler?.Invoke(keyValuePairs);
             if (call.HasValue)
             {
                 BaseBatchAdd(batch, call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
@@ -223,9 +223,9 @@ namespace PnP.Core.Model
         /// Adds a domain model instance
         /// </summary>
         /// <returns>The added domain model</returns>
-        internal virtual async Task<BaseDataModel<TModel>> AddAsync()
+        internal virtual async Task<BaseDataModel<TModel>> AddAsync(Dictionary<string, object> keyValuePairs = null)
         {
-            var call = AddApiCallHandler?.Invoke();
+            var call = AddApiCallHandler?.Invoke(keyValuePairs);
             if (call.HasValue)
             {
                 await BaseAdd(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
