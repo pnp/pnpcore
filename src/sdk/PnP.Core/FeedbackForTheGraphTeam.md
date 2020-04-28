@@ -7,3 +7,4 @@
 # Teams
 
 - We miss a single call that load all Teams with their properties
+- Doing batching of tab creation works inconsistently: getting "BadGateway", "Failed to execute backend request." errors. Lowering the batch size to less than the max 20 seems to make it more reliable
