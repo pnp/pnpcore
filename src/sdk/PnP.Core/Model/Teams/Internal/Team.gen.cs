@@ -5,6 +5,8 @@ namespace PnP.Core.Model.Teams
 {
     internal partial class Team : BaseDataModel<ITeam>, ITeam
     {
+        private bool primaryChannelInstantiated = false;
+
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
         
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
@@ -35,7 +37,29 @@ namespace PnP.Core.Model.Teams
         
         public ITeamClassSettings ClassSettings { get => GetValue<ITeamClassSettings>(); set => SetValue(value); }
         
-        public ITeamChannel PrimaryChannel { get => GetValue<ITeamChannel>(); set => SetValue(value); }
+        [GraphProperty("primaryChannel", Expandable = true)]
+        public ITeamChannel PrimaryChannel 
+        {
+            get
+            {
+                if (!primaryChannelInstantiated)
+                {
+                    var teamChannel = new TeamChannel
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(teamChannel);
+                    primaryChannelInstantiated = true;
+                }
+                return GetValue<ITeamChannel>();
+            }
+            set
+            {
+                primaryChannelInstantiated = true;
+                SetValue(value);
+            }
+        }
 
         [GraphProperty("channels", ExpandByDefault = true, GraphGet = "teams/{Site.GroupId}/channels")]
         public ITeamChannelCollection Channels
