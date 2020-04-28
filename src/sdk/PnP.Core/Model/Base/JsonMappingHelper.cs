@@ -440,7 +440,7 @@ namespace PnP.Core.Model
                         // Regular field loaded
 
                         // Grab id field, should be present in all graph objects
-                        if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals("id"))
+                        if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.GraphId))
                         {
                             idFieldValue = property.Value.GetString();
                         }
@@ -502,7 +502,7 @@ namespace PnP.Core.Model
                     {
                         TrackMetaData(metadataBasedObject, property);
                     }
-                    else if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals("id"))
+                    else if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.GraphId))
                     {
                         idFieldValue = property.Value.GetString();
                     }
