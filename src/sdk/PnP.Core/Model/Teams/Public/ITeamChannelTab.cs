@@ -18,6 +18,11 @@ namespace PnP.Core.Model.Teams
         public string DisplayName { get; set; }
 
         /// <summary>
+        /// Index of the order used for sorting tabs.
+        /// </summary>
+        public string SortOrderIndex { get; set; }
+
+        /// <summary>
         /// Deep link url of the tab instance. Read only.
         /// </summary>
         public Uri WebUrl { get; set; }

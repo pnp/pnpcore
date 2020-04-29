@@ -12,6 +12,8 @@ namespace PnP.Core.Model.Teams
 
         public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
 
+        public string SortOrderIndex { get => GetValue<string>(); set => SetValue(value); }
+
         public ITeamChannelTabConfiguration Configuration { get => GetValue<ITeamChannelTabConfiguration>(); set => SetValue(value); }
 
         public ITeamApp TeamsApp 
