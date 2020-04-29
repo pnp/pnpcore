@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace PnP.Core.Model
@@ -57,8 +55,14 @@ namespace PnP.Core.Model
                 // Replace {Parent.Id}
                 if (match.Value.Equals("{Parent.Id}"))
                 {
-                    // there's always a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
-                    var model = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
+                    // there's either a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
+                    // or
+                    // the parent is model class itself (e.g. Web --> Site.RootWeb)
+                    if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible model))
+                    {
+                        // Parent is a collection, so jump one level up
+                        model = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
+                    }
 
                     if (model.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
                     {
@@ -80,8 +84,14 @@ namespace PnP.Core.Model
                 // Replace {Parent.GraphId}
                 if (match.Value.Equals("{Parent.GraphId}"))
                 {
-                    // there's always a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
-                    var parent = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
+                    // there's either a collection object inbetween (e.g. TeamChannel --> TeamChannelCollection --> Team), so take the parent of the parent
+                    // or
+                    // the parent is model class itself (e.g. TeamChannel --> Team.PrimaryChannel)
+                    if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible parent))
+                    {
+                        // Parent is a collection, so jump one level up
+                        parent = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
+                    }
 
                     if (parent.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                     {
