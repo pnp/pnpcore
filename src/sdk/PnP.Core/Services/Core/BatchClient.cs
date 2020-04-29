@@ -271,20 +271,22 @@ namespace PnP.Core.Services
 
         private async Task ExecuteMicrosoftGraphBatchAsync(Batch batch)
         {
-            // Split the provided batch in multiple batches if needed
+            // Split the provided batch in multiple batches if needed. Possible split reasons are:
+            // - too many requests
             var graphBatches = MicrosoftGraphBatchSplitting(batch);
 
             foreach (var graphBatch in graphBatches)
             {
+                string graphEndpoint = DetermineGraphEndpoint(graphBatch);
+
                 (string requestBody, string requestKey) = BuildMicrosoftGraphBatchRequestContent(graphBatch);
 
-                PnPContext.Logger.LogDebug(requestBody);
+                PnPContext.Logger.LogDebug($"{graphEndpoint} : {requestBody}");
 
                 // Make the batch call
                 using StringContent content = new StringContent(requestBody);
 
-                // PAOLO: Should we make the choice to use beta or v1.0 somehow parametric?
-                using (var request = new HttpRequestMessage(HttpMethod.Post, $"beta/$batch"))
+                using (var request = new HttpRequestMessage(HttpMethod.Post, $"{graphEndpoint}/$batch"))
                 {
                     // Remove the default Content-Type content header
                     if (content.Headers.Contains("Content-Type"))
@@ -355,6 +357,28 @@ namespace PnP.Core.Services
             batch.Executed = true;
         }
 
+        private string DetermineGraphEndpoint(Batch graphBatch)
+        {
+            // If a request is in the batch it means we allowed to use Graph beta. To
+            // maintain batch integretity we move a complete batch to beta if there's one
+            // of the requests in the batch requiring Graph beta.
+            if (PnPContext.GraphAlwaysUseBeta)
+            {
+                return PnPConstants.GraphBetaEndpoint;
+            }
+            else
+            {
+                if (graphBatch.Requests.Any(p => p.Value.ApiCall.Type == ApiType.GraphBeta))
+                {
+                    return PnPConstants.GraphBetaEndpoint;
+                }
+                else
+                {
+                    return PnPConstants.GraphV1Endpoint;
+                }
+            }
+        }
+
         private async Task ProcessGraphRestBatchResponse(Batch batch, string batchResponse)
         {
             using (var tracer = Tracer.Track(PnPContext.Logger, "ExecuteSharePointGraphBatchAsync-JSONToModel"))
@@ -365,8 +389,7 @@ namespace PnP.Core.Services
                 // Map the retrieved JSON to our domain model
                 foreach (var batchRequest in batch.Requests.Values)
                 {
-                    await JsonMappingHelper
-                        .MapJsonToModel(batchRequest).ConfigureAwait(false);
+                    await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
                 }
             }
         }
@@ -445,7 +468,7 @@ namespace PnP.Core.Services
                 if (!string.IsNullOrEmpty(request.ApiCall.JsonBody))
                 {
                     bodiesToReplace.Add(counter, request.ApiCall.JsonBody);
-                    graphRequest.Body = $"@#|Body{counter}|#@" /*request.ApiCall.JsonBody*/;
+                    graphRequest.Body = $"@#|Body{counter}|#@";
                     graphRequest.Headers = new Dictionary<string, string>
                     {
                         { "Content-Type", "application/json" }
