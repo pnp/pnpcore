@@ -414,12 +414,14 @@ namespace PnP.Core.Model
 
             // PAOLO: The following syntax is more efficient because it skips any not needed check
 
-            bool useGraph = (PnPContext.GraphFirst &&           // See if Graph First is enabled/configured
+            bool useGraph = (
+                (PnPContext.GraphFirst &&                       // See if Graph First is enabled/configured
+                entity.CanUseGraphGet &&                        // and if the entity supports GET via Graph 
                 !forceSPORest &&                                // and if we are not forced to use SPO REST
-                entity.CanUseGraphGet ||                           // and if the entity supports GET via Graph 
                 (!apiOverride.Equals(default(ApiCall)) &&
-                    apiOverride.Type == ApiType.Graph)) ||      // and if there isn't an overriding request, otherwise we use what is set in the query override
-                string.IsNullOrEmpty(entity.SharePointType);    // or if there isn't a SPO rest setting, we need to forcibly fallback to Graph
+                    apiOverride.Type == ApiType.Graph)) &&      // and if there isn't an overriding request, otherwise we use what is set in the query override
+                string.IsNullOrEmpty(entity.SharePointType)     // and if there isn't a SPO rest setting, we need to forcibly fallback to Graph
+                );
 
             #region Code that must be removed after sucessfull tests
 

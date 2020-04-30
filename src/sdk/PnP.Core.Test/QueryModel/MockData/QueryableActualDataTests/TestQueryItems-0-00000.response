@@ -1,0 +1,17 @@
+--batchresponse_a6f80ca3-79db-441b-86e8-ff5b85d5d343
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 404 Not Found
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"error":{"code":"-1, System.ArgumentException","message":{"lang":"en-US","value":"List 'Shared Documents' does not exist at site with URL 'https://piasysdev.sharepoint.com/sites/prov-1'."}}}
+--batchresponse_a6f80ca3-79db-441b-86e8-ff5b85d5d343
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 400 Bad Request
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"error":{"code":"-1, Microsoft.SharePoint.Client.InvalidClientQueryException","message":{"lang":"en-US","value":"The expression \"web/lists/getbyid(guid'{Parent.Id}')/items({Id})\" is not valid."}}}
+--batchresponse_a6f80ca3-79db-441b-86e8-ff5b85d5d343--
