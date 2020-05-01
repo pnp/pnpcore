@@ -39,7 +39,8 @@ namespace PnP.Core.Test.QueryModel
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var query = (from i in context.Web.Lists.GetByTitle("Documents").Items
-                            select i)
+                             where i.Title == "Sample Document 01"
+                             select i)
                             .Load(l => l.Id, l => l.Title);
 
                 var queryResult = query.ToList();
