@@ -124,7 +124,6 @@ namespace PnP.Core.Services
         /// <returns>Ensured batch</returns>
         private Batch EnsureBatch(Guid id)
         {
-            // PAOLO: batches is created with the BatchClient and cannot be null
             if (ContainsBatch(id))
             {
                 return batches[id];
@@ -144,7 +143,6 @@ namespace PnP.Core.Services
         /// <returns>True if still listed, false otherwise</returns>
         internal bool ContainsBatch(Guid id)
         {
-            // PAOLO: Simplified. Batches is created with the BatchClient and cannot be null
             return batches.ContainsKey(id);
         }
 
@@ -155,7 +153,6 @@ namespace PnP.Core.Services
         /// <returns>The found batch, null otherwise</returns>
         internal Batch GetBatchById(Guid id)
         {
-            // PAOLO: batches is created with the BatchClient and cannot be null
             if (ContainsBatch(id))
             {
                 return batches[id];
@@ -213,11 +210,6 @@ namespace PnP.Core.Services
                 }
             }
 
-            // PAOLO: Here we provide the batch.UseGraphBatch boolean argument
-            // but we can read it from the UseGraphBatch property of the first 
-            // input argument of MergeBatchResultsWithModel, and this method
-            // is invoked only once, right here. I refactored it.
-
             // Executing a batch might have resulted in a mismatch between the model and the data in SharePoint:
             // Getting entities can result in duplicate entities (e.g. 2 lists when getting the same list twice in a single batch)
             // Adding entities can result in an entity in the model that does not have the proper key value set (as that value is only retrievable after the add in SharePoint)
@@ -236,7 +228,6 @@ namespace PnP.Core.Services
             // Make the batch call
             using StringContent content = new StringContent(requestBody);
 
-            // PAOLO: Should we make the choice to use beta or v1.0 somehow parametric?
             using (var request = new HttpRequestMessage(HttpMethod.Post, $"beta/$batch"))
             {
                 // Remove the default Content-Type content header
@@ -257,10 +248,6 @@ namespace PnP.Core.Services
                     // Write request
                     TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
                 }
-
-                // PAOLO: I slightly changed the behavior here, so that we get data 
-                // if it is not yet available, to avoid having all the mock-based tests
-                // to fail when we don't have data
 
                 // If we are not mocking data, or if the mock data is not yet available
                 if (PnPContext.Mode != PnPContextMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
@@ -458,9 +445,6 @@ namespace PnP.Core.Services
                     batches.Add(restBatch);
                 }
 
-                // PAOLO: Are we sure about the logic that we use here
-                // to preserve the order? When we split, what order should we preserve?
-
                 // Add request to existing batch, we're adding the original request which ensures that once 
                 // we update the new batch with results these results are also part of the original batch
                 restBatch.Batch.Requests.Add(request.Value.Order, request.Value);
@@ -504,10 +488,6 @@ namespace PnP.Core.Services
                             // Write request
                             TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
                         }
-
-                        // PAOLO: I slightly changed the behavior here, so that we get data 
-                        // if it is not yet available, to avoid having all the mock-based tests
-                        // to fail when we don't have data
 
                         // If we are not mocking or if there is no mock data
                         if (PnPContext.Mode != PnPContextMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
@@ -584,7 +564,6 @@ namespace PnP.Core.Services
             // - https://www.andrewconnell.com/blog/part-1-sharepoint-rest-api-batching-understanding-batching-requests
             // - http://connell59.rssing.com/chan-9164895/all_p12.html (scroll to Part 2 - SharePoint REST API Batching - Exploring Batch Requests, Responses and Changesets)
 
-            // PAOLO: Requests are now already ordered, due to the SortedList<TKey, TValue> internal behavior
             foreach (var request in batch.Requests.Values)
             {
                 if (request.Method == HttpMethod.Get)
@@ -780,7 +759,6 @@ namespace PnP.Core.Services
             // Only dedup get requests, a batch can contain multiple identical add requests
             var requestsToDedup = batch.Requests.Where(p => p.Value.Method == HttpMethod.Get);
 
-            // PAOLO: the result of Where is never null, eventually just an empty enumerator
             if (requestsToDedup.Any())
             {
                 foreach (var request in requestsToDedup.ToList())

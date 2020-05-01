@@ -45,7 +45,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -85,7 +85,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -130,7 +130,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -167,7 +167,7 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -202,7 +202,7 @@ namespace PnP.Core.Test.Base
             var web = context.Web.Get(p => p.Lists);
             context.ExecuteAsync().Wait();
 
-            var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+            var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
             if (myList == null)
             {

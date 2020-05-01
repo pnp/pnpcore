@@ -4,6 +4,7 @@ using System;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -81,6 +82,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static ApiCall GetByTitleApiCall(string title)
         {
+            title = HttpUtility.UrlEncode(title);
             return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest); 
         }
 

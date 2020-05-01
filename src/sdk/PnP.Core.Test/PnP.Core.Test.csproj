@@ -44,9 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Base\MockData\AddExpandoTests\" />
-    <Folder Include="Base\MockData\AddTests\" />
-    <Folder Include="Base\MockData\BatchClientTests\" />
+    <Folder Include="Base\MockData\" />
   </ItemGroup>
 
 </Project>

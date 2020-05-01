@@ -412,54 +412,20 @@ namespace PnP.Core.Model
 
             // Can we use Microsoft Graph for this GET request?
 
-            // PAOLO: The following syntax is more efficient because it skips any not needed check
-
-            bool useGraph = (
-                (PnPContext.GraphFirst &&                       // See if Graph First is enabled/configured
-                entity.CanUseGraphGet &&                        // and if the entity supports GET via Graph 
-                !forceSPORest &&                                // and if we are not forced to use SPO REST
-                (!apiOverride.Equals(default(ApiCall)) &&
-                    apiOverride.Type == ApiType.Graph)) &&      // and if there isn't an overriding request, otherwise we use what is set in the query override
-                string.IsNullOrEmpty(entity.SharePointType)     // and if there isn't a SPO rest setting, we need to forcibly fallback to Graph
-                );
-
-            #region Code that must be removed after sucessfull tests
-
-            // Did we disable graph first behaviour?
-            bool useGraphOld = PnPContext.GraphFirst;
-
-            if (useGraphOld)
-            {
-                // Do the loaded entity prevent/require/allow to use graph?
-                useGraphOld = entity.CanUseGraphGet;
-            }
-
-            // forceSPORest is true in case we already created a graph query for the same purpose but also want 
-            // to create a backup rest query. That one potentially will be used when we end up with a batch
-            // that mixes rest and graph queries
-            if (forceSPORest)
-            {
-                useGraphOld = false;
-            }
-
-            // If we've override the query then simply take what was set in the query override
-            if (!apiOverride.Equals(default(ApiCall)))
-            {
-                useGraphOld = apiOverride.Type == ApiType.Graph;
-            }
+            bool useGraph = PnPContext.GraphFirst &&    // See if Graph First is enabled/configured
+                !forceSPORest &&                        // and if we are not forced to use SPO REST
+                entity.CanUseGraphGet;                  // and if the entity supports GET via Graph 
 
             // If entity cannot be surfaced with SharePoint Rest then force graph
             if (string.IsNullOrEmpty(entity.SharePointType))
             {
-                useGraphOld = true;
+                useGraph = true;
             }
-
-            if (useGraphOld != useGraph)
+            // Else if we've overriden the query then simply take what was set in the query override
+            else if (!apiOverride.Equals(default(ApiCall)))
             {
-                throw new ApplicationException("Wrong logic for new useGraph");
+                useGraph = apiOverride.Type == ApiType.Graph;
             }
-
-            #endregion
 
             if (useGraph)
             {

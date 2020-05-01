@@ -35,7 +35,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "DeleteListItemViaRest";
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList == null)
                 {
@@ -108,7 +108,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 string listTitle = "DeleteListItemViaBatchRest";
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList == null)
                 {

@@ -90,7 +90,7 @@ namespace PnP.Core.QueryModel.Query
                     .GetEntityConcreteInstance(this.parent.GetType());
                 var parentEntityWithMappingHandlers = (IDataModelMappingHandler)concreteParentEntity;
 
-                var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
+                var requestUrl = $"{this.context.Uri}/{parentEntityInfo.SharePointUri}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
 
                 this.context.CurrentBatch.Add(
                     this.parent as TransientObject,

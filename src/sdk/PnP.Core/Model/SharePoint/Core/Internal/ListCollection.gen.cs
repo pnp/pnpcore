@@ -16,12 +16,6 @@ namespace PnP.Core.Model.SharePoint
             this.Parent = parent;
         }
 
-        // PAOLO: It looks like this method is not used
-        //public override IList Add()
-        //{
-        //    return AddNewList();
-        //}
-
         public override IList CreateNew()
         {
             return NewList();

@@ -117,16 +117,22 @@ namespace PnP.Core.Model
                         // Cast object to call the needed methods on it (e.g. ListCollection)
                         var typedCollection = propertyToSetValue as IManageableCollection;
 
-                        // Try to get the results property
+                        // Try to get the results property, start with a default value
                         JsonElement resultsProperty = default(JsonElement);
-                        if ((property.Value.ValueKind != JsonValueKind.Array && 
-                            !property.Value.TryGetProperty("results", out resultsProperty)) ||
-                            property.Name == "results")
+
+                        // If the property is named "results" and is of type Array, it means it is a collection of items
+                        if (property.Name == "results" && property.Value.ValueKind == JsonValueKind.Array)
                         {
+                            // and we use it directly
                             resultsProperty = property.Value;
                         }
+                        else
+                        {
+                            // otherwise we try to get the child property called "results", if any
+                            property.Value.TryGetProperty("results", out resultsProperty);
+                        }
 
-                        // Expanded objects are under the results property
+                        // Expanded objects are under the results property, if any (i.e. it is not the default one)
                         if (!resultsProperty.Equals(default(JsonElement)))
                         {
                             PropertyInfo pnpChildIdProperty = null;
@@ -427,7 +433,7 @@ namespace PnP.Core.Model
                         // Map returned fields
                         foreach (var childProperty in property.Value.EnumerateObject())
                         {
-                            EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                            EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).FirstOrDefault(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase));
                             if (entityChildField != null)
                             {
                                 if (!string.IsNullOrEmpty(entityChildField.GraphJsonPath))
@@ -564,7 +570,7 @@ namespace PnP.Core.Model
                     {
                         EntityFieldInfo id = null;
                         PropertyInfo idField = null;
-                        id = entity.Fields.Where(p => p.IsSharePointKey).FirstOrDefault();
+                        id = entity.Fields.FirstOrDefault(p => p.IsSharePointKey);
                         if (id != null)
                         {
                             idField = pnpObject.GetType().GetProperty(id.Name);

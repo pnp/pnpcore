@@ -206,8 +206,6 @@ namespace PnP.Core.Test.Base
                 var list1Again = context.Web.Lists.GetByTitle("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
                 await context.ExecuteAsync();
 
-                // PAOLO: Here we have a problem, the Requested property of
-                // context.Web.Lists should be true, but it is false
                 var siteAssetsCount = context.Web.Lists.Where(p => p.Title == "Site Assets");
                 
                 // The 2 individual loads should have been merged to a single loaded list

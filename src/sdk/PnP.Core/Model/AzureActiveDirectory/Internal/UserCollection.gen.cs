@@ -9,14 +9,6 @@ namespace PnP.Core.Model.AzureActiveDirectory
             return NewUser();
         }
 
-        // PAOLO: It looks like we can remove this method
-        //private User AddNewUser()
-        //{
-        //    var newUser = NewUser();
-        //    this.items.Add(newUser);
-        //    return newUser;
-        //}
-
         private User NewUser()
         {
             var newUser = new User

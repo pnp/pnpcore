@@ -46,7 +46,6 @@ namespace PnP.Core.Model
         {
             get
             {
-                // PAOLO: Simplified logic
                 return !Requests
                     .Any(r => r.Value.ApiCall.Type == ApiType.SPORest);
             }
@@ -59,8 +58,6 @@ namespace PnP.Core.Model
         {
             get
             {
-                // PAOLO: The following code is the most readable
-                // but slightly less efficient
                 bool foundRest = Requests
                     .Any(r => r.Value.ApiCall.Type == ApiType.SPORest);
                 bool foundGraph = Requests
@@ -77,8 +74,6 @@ namespace PnP.Core.Model
         {
             get
             {
-                // PAOLO: the following code is more efficient 
-                // and maintainable
                 return !Requests.Any(r => 
                     r.Value.ApiCall.Type == ApiType.Graph &&
                     (r.Value.BackupApiCall.Equals(default(ApiCall)) ||
@@ -98,7 +93,6 @@ namespace PnP.Core.Model
         /// <param name="postMappingJson">Delegate for post mapping</param>
         internal void Add(TransientObject model, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
         {
-            // PAOLO: Changed to support SortedList<TKey, TValue>
             var lastAddedRequest = GetLastRequest();
             int order = 0;
             if (lastAddedRequest != null)
@@ -115,7 +109,6 @@ namespace PnP.Core.Model
         /// <returns>The request at the given order</returns>
         internal BatchRequest GetRequest(int order)
         {
-            // PAOLO: Simplified using the SortedList<TKey, TValue>
             return Requests[order];
         }
 
@@ -124,7 +117,6 @@ namespace PnP.Core.Model
         /// </summary>
         internal void MakeSPORestOnlyBatch()
         {
-            // PAOLO: Changed to support SortedList<TKey, TValue>
             foreach (var request in Requests.Where(p => p.Value.ApiCall.Type == ApiType.Graph).ToList())
             {
                 request.Value.ApiCall = request.Value.BackupApiCall;
@@ -137,7 +129,6 @@ namespace PnP.Core.Model
         /// <returns>The last request, null if there were no requests</returns>
         private BatchRequest GetLastRequest()
         {
-            // PAOLO: Improved using the SortedList<TKey, TValue> out of the box behavior
             var last = Requests.LastOrDefault();
             return last.Value ?? null;
         }

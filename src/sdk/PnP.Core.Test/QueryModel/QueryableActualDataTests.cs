@@ -38,7 +38,7 @@ namespace PnP.Core.Test.QueryModel
             TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var query = (from i in context.Web.Lists.GetByTitle("Shared Documents").Items
+                var query = (from i in context.Web.Lists.GetByTitle("Documents").Items
                             select i)
                             .Load(l => l.Id, l => l.Title);
 
