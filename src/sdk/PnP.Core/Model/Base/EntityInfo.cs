@@ -26,8 +26,11 @@ namespace PnP.Core.Model
             SharePointType = entityInfo.SharePointType;
             SharePointUri = entityInfo.SharePointUri;
             GraphId = entityInfo.GraphId;
+            GraphBeta = entityInfo.GraphBeta;
             GraphGet = entityInfo.GraphGet;
             SharePointGet = entityInfo.SharePointGet;
+            GraphLinqGet = entityInfo.GraphLinqGet;
+            SharePointLinqGet = entityInfo.SharePointLinqGet;
             UseOverflowField = entityInfo.UseOverflowField;
             SharePointOverflowProperty = entityInfo.SharePointOverflowProperty;
             GraphOverflowProperty = entityInfo.GraphOverflowProperty;
@@ -58,6 +61,11 @@ namespace PnP.Core.Model
         internal string GraphId { get; set; }
 
         /// <summary>
+        /// Specifies if this class requires the Microsoft Graph beta endpoint
+        /// </summary>
+        internal bool GraphBeta { get; set; }
+
+        /// <summary>
         /// API call for a Graph get
         /// </summary>
         internal string GraphGet { get; set; }
@@ -66,6 +74,16 @@ namespace PnP.Core.Model
         /// API call for a REST get
         /// </summary>
         internal string SharePointGet { get; set; }
+
+        /// <summary>
+        /// API call for a Graph LINQ get
+        /// </summary>
+        internal string GraphLinqGet { get; set; }
+
+        /// <summary>
+        /// API call for a REST LINQ get
+        /// </summary>
+        internal string SharePointLinqGet { get; set; }
 
         /// <summary>
         /// Indicates if this class must be handled as a generic dictionary by populating data in the provided field

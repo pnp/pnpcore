@@ -34,84 +34,143 @@ namespace PnP.Core.QueryModel.Query
             this.parent = parent;
         }
 
-        public IEnumerable<TModel> ExecuteQuery(ODataQuery<TModel> query)
+        public object ExecuteQuery(Type expressionType, ODataQuery<TModel> query)
         {
             // TODO: Implement real method
-            Console.WriteLine($"{typeof(TModel)} => {query}");
+            Console.WriteLine($"{expressionType.Name} - {typeof(TModel)} => {query}");
 
-            if (typeof(TModel).IsAssignableFrom(typeof(IList)))
+            // If the expression type implements IQueryable, we need to return
+            // a collection of results
+            if (expressionType.ImplementsInterface(typeof(IQueryable)))
             {
-                // Get the concrete entity that the query targets
-                var concreteEntity = EntityManager.Instance
-                    .GetEntityConcreteInstance<TModel>(typeof(TModel));
-                var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
-                var entityWithMappingHandlers = (IDataModelMappingHandler)concreteEntity;
+                if (typeof(TModel).IsAssignableFrom(typeof(IList)))
+                {
+                    // Get the concrete entity that the query targets
+                    var concreteEntity = EntityManager.Instance
+                        .GetEntityConcreteInstance<TModel>(typeof(TModel));
+                    var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
+                    var entityWithMappingHandlers = (IDataModelMappingHandler)concreteEntity;
 
-                // Get the parent (container) instance, if any
-                var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.parent.GetType());
-                var concreteParentEntity = EntityManager.Instance
-                    .GetEntityConcreteInstance(this.parent.GetType());
-                var parentEntityWithMappingHandlers = (IDataModelMappingHandler)concreteParentEntity;
+                    // Get the parent (container) instance, if any
+                    var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.parent.GetType());
+                    var concreteParentEntity = EntityManager.Instance
+                        .GetEntityConcreteInstance(this.parent.GetType());
+                    var parentEntityWithMappingHandlers = (IDataModelMappingHandler)concreteParentEntity;
 
-                // var requestUrl = "https://piasysdev.sharepoint.com/sites/prov-1/_api/web?$select=Id%2cLists&$expand=Lists";
-                // var requestUrl = "https://piasysdev.sharepoint.com/sites/prov-1/_api/web/lists?$select=Id";
-                var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
+                    var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
 
-                this.context.CurrentBatch.Add(
-                    this.parent as TransientObject,
-                    parentEntityInfo,
-                    HttpMethod.Get,
-                    new ApiCall // First option is Graph
+                    this.context.CurrentBatch.Add(
+                        this.parent as TransientObject,
+                        parentEntityInfo,
+                        HttpMethod.Get,
+                        new ApiCall // First option is Graph
                     {
-                        Type = ApiType.SPORest,
-                        ReceivingProperty = "Lists",
-                        Request = requestUrl
-                    },
-                    default(ApiCall),
-                    parentEntityWithMappingHandlers.MappingHandler,
-                    parentEntityWithMappingHandlers.PostMappingHandler
-                    );
+                            Type = ApiType.SPORest,
+                            ReceivingProperty = "Lists",
+                            Request = requestUrl
+                        },
+                        default(ApiCall),
+                        parentEntityWithMappingHandlers.MappingHandler,
+                        parentEntityWithMappingHandlers.PostMappingHandler
+                        );
 
-                this.context.ExecuteAsync().GetAwaiter().GetResult();
+                    this.context.ExecuteAsync().GetAwaiter().GetResult();
 
-                return (this.parent as dynamic).Lists as IEnumerable<TModel>;
+                    return (this.parent as dynamic).Lists as IEnumerable<TModel>;
+                }
+                else if (typeof(TModel).IsAssignableFrom(typeof(IListItem)))
+                {
+                    // Get the concrete entity that the query targets
+                    var concreteEntity = EntityManager.Instance
+                        .GetEntityConcreteInstance<TModel>(typeof(TModel));
+                    var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
+                    var entityWithMappingHandlers = (IDataModelMappingHandler)concreteEntity;
+
+                    // Get the parent (container) instance, if any
+                    var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.parent.GetType());
+                    var concreteParentEntity = EntityManager.Instance
+                        .GetEntityConcreteInstance(this.parent.GetType());
+                    var parentEntityWithMappingHandlers = (IDataModelMappingHandler)concreteParentEntity;
+
+                    var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointLinqGet.Replace("{Parent.Id}", "f623a809-eb28-404b-b4d3-00db80239ee9")}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
+
+                    this.context.CurrentBatch.Add(
+                        this.parent as TransientObject,
+                        parentEntityInfo,
+                        HttpMethod.Get,
+                        new ApiCall // First option is Graph
+                    {
+                            Type = ApiType.SPORest,
+                            ReceivingProperty = "Items",
+                            Request = requestUrl
+                        },
+                        default(ApiCall),
+                        parentEntityWithMappingHandlers.MappingHandler,
+                        parentEntityWithMappingHandlers.PostMappingHandler
+                        );
+
+                    this.context.ExecuteAsync().GetAwaiter().GetResult();
+
+                    return (this.parent as dynamic).Items as IEnumerable<TModel>;
+                }
+                else if (typeof(TModel).IsAssignableFrom(typeof(IWeb)))
+                {
+                    return Enumerable.Empty<IWeb>();
+                }
             }
-            else if (typeof(TModel).IsAssignableFrom(typeof(IListItem)))
+            // Otherwise if the expression type is the type of TModel, we need
+            // to return a single item
+            else
             {
-                // Get the concrete entity that the query targets
-                var concreteEntity = EntityManager.Instance
-                    .GetEntityConcreteInstance<TModel>(typeof(TModel));
-                var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
-                var entityWithMappingHandlers = (IDataModelMappingHandler)concreteEntity;
+                if (typeof(TModel).IsAssignableFrom(typeof(IList)))
+                {
+                    // Get the concrete entity that the query targets
+                    var concreteEntity = EntityManager.Instance
+                        .GetEntityConcreteInstance<TModel>(typeof(TModel));
+                    var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
+                    var entityWithMappingHandlers = (IDataModelMappingHandler)concreteEntity;
 
-                // Get the parent (container) instance, if any
-                var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.parent.GetType());
-                var concreteParentEntity = EntityManager.Instance
-                    .GetEntityConcreteInstance(this.parent.GetType());
-                var parentEntityWithMappingHandlers = (IDataModelMappingHandler)concreteParentEntity;
+                    // Get the parent (container) instance, if any
+                    var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.parent.GetType());
+                    var concreteParentEntity = EntityManager.Instance
+                        .GetEntityConcreteInstance(this.parent.GetType());
+                    var parentEntityWithMappingHandlers = (IDataModelMappingHandler)concreteParentEntity;
 
-                var requestUrl = $"{this.context.Uri}/{parentEntityInfo.SharePointUri.Replace("{Id}", "f623a809-eb28-404b-b4d3-00db80239ee9")}/items?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
+                    var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
 
-                this.context.CurrentBatch.Add(
-                    this.parent as TransientObject,
-                    parentEntityInfo,
-                    HttpMethod.Get,
-                    new ApiCall // First option is Graph
+                    this.context.CurrentBatch.Add(
+                        this.parent as TransientObject,
+                        parentEntityInfo,
+                        HttpMethod.Get,
+                        new ApiCall // First option is Graph
+                        {
+                            Type = ApiType.SPORest,
+                            ReceivingProperty = "Lists",
+                            Request = requestUrl
+                        },
+                        default(ApiCall),
+                        parentEntityWithMappingHandlers.MappingHandler,
+                        parentEntityWithMappingHandlers.PostMappingHandler
+                        );
+
+                    this.context.ExecuteAsync().GetAwaiter().GetResult();
+
+                    // In case we need to retrieve just one item make
+                    // sure that the result will be just one item
+                    if (query.Top == 1)
                     {
-                        Type = ApiType.SPORest,
-                        ReceivingProperty = "Items",
-                        Request = requestUrl
-                    },
-                    default(ApiCall),
-                    parentEntityWithMappingHandlers.MappingHandler,
-                    parentEntityWithMappingHandlers.PostMappingHandler
-                    );
-
-                this.context.ExecuteAsync().GetAwaiter().GetResult();
-
-                return (this.parent as dynamic).Items as IEnumerable<TModel>;
+                        return ((this.parent as dynamic).Lists as IEnumerable<TModel>).FirstOrDefault();
+                    }
+                    else
+                    {
+                        return default(TModel);
+                    }
+                }
+                else
+                {
+                    return default(TModel);
+                }
             }
-
 
             // So far we just provide a fake empty response
             return Enumerable.Empty<TModel>();

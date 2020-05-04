@@ -12,8 +12,7 @@ namespace PnP.Core.Model.SharePoint
     {
         private bool rootWebInstantiated = false;
 
-        [SharePointProperty("Id", IsKey = true)]
-        [GraphProperty("sharepointIds", JsonPath = "siteId", IsKey = true)]
+        [GraphProperty("sharepointIds", JsonPath = "siteId")]
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
         public Guid GroupId { get => GetValue<Guid>(); set => SetValue(value); }
@@ -72,6 +71,7 @@ namespace PnP.Core.Model.SharePoint
         /* Not directly a field in the Site object*/
         public string SearchCenterUrl { get => GetValue<string>(); set => SetValue(value); }
 
+        [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

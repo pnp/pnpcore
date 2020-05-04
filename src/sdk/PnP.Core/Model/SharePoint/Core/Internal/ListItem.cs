@@ -9,8 +9,8 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// ListItem class, write your custom code here
     /// </summary>
-    [SharePointType("SP.ListItem", SharePointUri = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})")]
-    [GraphType(GraphId = "id", GraphOverflowProperty = "fields")]
+    [SharePointType("SP.ListItem", Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})", LinqGet = "_api/web/lists(guid'{Parent.Id}')/items")]
+    [GraphType(OverflowProperty = "fields")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class ListItem
     {
@@ -61,7 +61,7 @@ namespace PnP.Core.Model.SharePoint
                 // Extra processing of returned json
             };
 
-            AddApiCallHandler = () =>
+            AddApiCallHandler = (keyValuePairs) =>
             {
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')

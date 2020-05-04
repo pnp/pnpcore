@@ -28,7 +28,7 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 Assert.IsNotNull(context.BatchClient.PnPContext == context);
-                Assert.IsNotNull(context.BatchClient.EnsureBatch());                
+                Assert.IsNotNull(context.BatchClient.EnsureBatch());
             }
         }
 
@@ -55,7 +55,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.BatchClient.ContainsBatch(batch.Id));
             }
         }
-        
+
         [TestMethod]
         public async Task RemoveProcessedBatch()
         {
@@ -78,7 +78,7 @@ namespace PnP.Core.Test.Base
                 await context.Web.GetAsync();
 
                 Assert.IsFalse(context.BatchClient.ContainsBatch(implicitBatchId));
-            }    
+            }
         }
 
         [TestMethod]
@@ -195,8 +195,8 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Title));
             }
         }
-        
-        //[TestMethod]
+
+        [TestMethod]
         public async Task MergeGetBatchResults()
         {
             //TestCommon.Instance.Mocking = false;
@@ -207,7 +207,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 var siteAssetsCount = context.Web.Lists.Where(p => p.Title == "Site Assets");
-                
+
                 // The 2 individual loads should have been merged to a single loaded list
                 Assert.IsTrue(siteAssetsCount.Count() == 1);
                 // The properties from both loads should available on the first loaded model
@@ -217,6 +217,54 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.Items));
                 // Site Assets should have items
                 Assert.IsTrue(list1.Items.Count() > 0);
+            }
+        }
+
+
+        //[TestMethod]
+        public async Task HandleMaxRequestsInGraphBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(p => p.Channels);
+
+                // Find first updatable channel
+                var generalChannel = team.Channels.Where(p => p.DisplayName == "General").FirstOrDefault();
+
+                if (generalChannel != null)
+                {
+                    // Load tabs
+                    await generalChannel.GetAsync(p => p.Tabs);
+
+                    //await generalChannel.Tabs.AddDocumentLibraryTabAsync("Tab1", new Uri($"{context.Uri}/Shared Documents"));
+                    //await generalChannel.Tabs.AddWikiTabAsync("Tab1");
+
+                    // Batch up 21 tab creations...this triggers the batch splitting
+                    for (int i = 1; i <= 21; i++)
+                    {
+                        generalChannel.Tabs.AddWikiTab($"Tab{i}");
+                    }
+
+                    // Send batch to the server
+                    await context.ExecuteAsync();
+
+
+                    // Cleanup created tabs
+                    await generalChannel.GetAsync(p => p.Tabs);
+
+                    foreach (var tab in generalChannel.Tabs)
+                    {
+                        if (tab.DisplayName.StartsWith("Tab"))
+                        {
+                            // Batch up delete
+                            tab.Delete();
+                        }
+                    }
+
+                    // Send batch to the server
+                    await context.ExecuteAsync();
+                }
             }
         }
         

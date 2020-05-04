@@ -30,11 +30,6 @@ namespace PnP.Core.Model
         public string JsonPath { get; set; }
 
         /// <summary>
-        /// Is this field a unique key value?
-        /// </summary>
-        public bool IsKey { get; set; }
-
-        /// <summary>
         /// Force a call out to the custom mapping handler for this field / the default mapping logic will not be applied
         /// </summary>
         public bool UseCustomMapping { get; set; } = false;

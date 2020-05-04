@@ -5,7 +5,7 @@ using System.Net.Http;
 namespace PnP.Core.Model
 {
     /// <summary>
-    /// Defines a request in a batch
+    /// Defines a request in a <see cref="Batch"/>
     /// </summary>
     internal class BatchRequest
     {
@@ -63,7 +63,7 @@ namespace PnP.Core.Model
         internal ApiCall ApiCall { get; set; }
 
         /// <summary>
-        /// Backup rest api call, will be used in case we encounter a mixed batch
+        /// Backup rest api call, will be used in case we encounter a mixed <see cref="Batch"/>
         /// </summary>
         internal ApiCall BackupApiCall { get; private set; }
 
@@ -73,17 +73,17 @@ namespace PnP.Core.Model
         internal int Order { get; private set; }
 
         /// <summary>
-        /// Json response for this request (only populated when the batch was executed)
+        /// Json response for this request (only populated when the <see cref="Batch"/> was executed)
         /// </summary>
         internal string ResponseJson { get; private set; }
 
         /// <summary>
-        /// Http response code for this request (only populated when the batch was executed)
+        /// Http response code for this request (only populated when the <see cref="Batch"/> was executed)
         /// </summary>
         internal HttpStatusCode ResponseHttpStatusCode { get; private set; }
 
         /// <summary>
-        /// Records the response of a request (fired as part of the execution of a batch)
+        /// Records the response of a request (fired as part of the execution of a <see cref="Batch"/>)
         /// </summary>
         /// <param name="json">Json response for this request</param>
         /// <param name="responseHttpStatusCode">Http response status code for this request</param>

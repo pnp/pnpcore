@@ -50,6 +50,9 @@ namespace PnP.Core.QueryModel.Query
                     case "Where":
                         VisitWhere(m);
                         return m;
+                    case "FirstOrDefault":
+                        VisitFirstOrDefault(m);
+                        return m;
                     case "Take":
                         VisitTake(m);
                         return m;
@@ -177,6 +180,49 @@ namespace PnP.Core.QueryModel.Query
 
                     break;
             }
+        }
+
+        private void VisitFirstOrDefault(MethodCallExpression m)
+        {
+            this.Visit(m.Arguments[0]);
+
+            // If the FirstOrDefault method includes a filtering expression
+            if (m.Arguments.Count > 1)
+            {
+                LambdaExpression lambda = (LambdaExpression)m.Arguments[1].StripQuotes();
+
+                switch (lambda.Body)
+                {
+                    case BinaryExpression binary:
+                        this.AddFilter(binary);
+                        break;
+
+                    case MethodCallExpression methodCall:
+                        if (methodCall.Type != typeof(bool))
+                        {
+                            throw new NotSupportedException($"Expression {methodCall} is not valid because it must return a boolean result");
+                        }
+
+                        string methodField = GetFilterField(methodCall);
+                        // Should never happen
+                        if (methodField == null)
+                        {
+                            throw new NotSupportedException($"Expression {methodCall} is not valid");
+                        }
+
+                        this.AddFilterToStack(new FilterItem
+                        {
+                            Field = methodField,
+                            Criteria = FilteringCriteria.Equal,
+                            Value = true
+                        });
+
+                        break;
+                }
+            }
+
+            // FirstOrDefault corresponds to $take=1
+            this.query.Top = 1;
         }
 
         private void VisitTake(MethodCallExpression m)

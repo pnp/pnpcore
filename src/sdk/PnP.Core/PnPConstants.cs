@@ -18,6 +18,16 @@ namespace PnP.Core
         public static readonly Uri MicrosoftGraphBaseUri = new Uri(MicrosoftGraphBaseUrl);
 
         /// <summary>
+        /// Graph v1 endpoint
+        /// </summary>
+        public static readonly string GraphV1Endpoint = "v1.0";
+
+        /// <summary>
+        /// Graph beta endpoint 
+        /// </summary>
+        public static readonly string GraphBetaEndpoint = "beta";
+
+        /// <summary>
         /// The name of the URI metadata attribute
         /// </summary>
         public const string MetaDataUri = "uri";

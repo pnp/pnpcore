@@ -12,8 +12,6 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>    
     internal partial class List : BaseDataModel<IList>, IList
     {
-        [SharePointProperty("Id", IsKey = true)]
-        [GraphProperty("id", IsKey = true)]
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
         [GraphProperty("displayName")]
@@ -92,7 +90,7 @@ namespace PnP.Core.Model.SharePoint
         public string ValidationMessage { get => GetValue<string>(); set => SetValue(value); }
 
         [SharePointProperty("Items", Expandable = true)]
-        [GraphProperty("items", GraphGet = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
+        [GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
         public IListItemCollection Items
         {
             get
@@ -106,6 +104,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

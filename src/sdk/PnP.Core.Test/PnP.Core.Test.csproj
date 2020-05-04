@@ -45,6 +45,7 @@
 
   <ItemGroup>
     <Folder Include="Base\MockData\" />
+    <Folder Include="QueryModel\MockData\" />
   </ItemGroup>
 
 </Project>

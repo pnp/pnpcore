@@ -11,8 +11,14 @@
         SPORest = 0,
 
         /// <summary>
-        /// Using the Microsoft Graph REST API
+        /// Using the production v1 Microsoft Graph REST API
         /// </summary>
-        Graph = 1
+        Graph = 1,
+
+        /// <summary>
+        /// Using the beta Microsoft Graph REST API
+        /// </summary>
+        GraphBeta = 2
+
     }
 }

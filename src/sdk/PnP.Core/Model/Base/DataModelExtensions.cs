@@ -52,7 +52,7 @@ namespace PnP.Core.Model
         /// <typeparam name="TModel">Model type (e.g. IWeb)</typeparam>
         /// <param name="model">Implementation of the model (e.g. Web)</param>
         /// <param name="expression">Expression listing the property to load</param>
-        /// <returns></returns>
+        /// <returns>True if property was loaded, false otherwise</returns>
         public static bool IsPropertyAvailable<TModel>(this IDataModel<TModel> model, Expression<Func<TModel, object>> expression)
         {
             if (model == null)
@@ -70,5 +70,28 @@ namespace PnP.Core.Model
             return model.HasValue(body.Member.Name);
         }
 
+        /// <summary>
+        /// Checks if a property is loaded or not on a complex type
+        /// </summary>
+        /// <typeparam name="TModel">Model type (e.g. ITeamFunSettings)</typeparam>
+        /// <param name="model">Implementation of the model (e.g. TeamFunSettings)</param>
+        /// <param name="expression">Expression listing the property to load</param>
+        /// <returns>True if property was loaded, false otherwise</returns>
+        public static bool IsPropertyAvailable<TModel>(this IComplexType model, Expression<Func<TModel, object>> expression)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
+
+            return (model as TransientObject).HasValue(body.Member.Name);
+        }
     }
 }

@@ -5,7 +5,8 @@ namespace PnP.Core.Model.Teams
 {
     internal partial class Team : BaseDataModel<ITeam>, ITeam
     {
-        [GraphProperty("id", IsKey = true)]
+        private bool primaryChannelInstantiated = false;
+
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
         
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
@@ -36,9 +37,31 @@ namespace PnP.Core.Model.Teams
         
         public ITeamClassSettings ClassSettings { get => GetValue<ITeamClassSettings>(); set => SetValue(value); }
         
-        public ITeamChannel PrimaryChannel { get => GetValue<ITeamChannel>(); set => SetValue(value); }
+        [GraphProperty("primaryChannel", Expandable = true)]
+        public ITeamChannel PrimaryChannel 
+        {
+            get
+            {
+                if (!primaryChannelInstantiated)
+                {
+                    var teamChannel = new TeamChannel
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(teamChannel);
+                    primaryChannelInstantiated = true;
+                }
+                return GetValue<ITeamChannel>();
+            }
+            set
+            {
+                primaryChannelInstantiated = true;
+                SetValue(value);
+            }
+        }
 
-        [GraphProperty("channels", ExpandByDefault = true, GraphGet = "teams/{Site.GroupId}/channels")]
+        [GraphProperty("channels", ExpandByDefault = true, Get = "teams/{Site.GroupId}/channels")]
         public ITeamChannelCollection Channels
         {
             get
@@ -56,7 +79,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
-        [GraphProperty("installedApps", GraphGet = "teams/{Site.GroupId}/installedapps?expand=TeamsApp")]
+        [GraphProperty("installedApps", Get = "teams/{Site.GroupId}/installedapps?expand=TeamsApp")]
         public ITeamAppCollection InstalledApps
         {
             get
@@ -74,7 +97,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
-        [GraphProperty("owners", GraphGet = "groups/{Site.GroupId}/owners")]
+        [GraphProperty("owners", Get = "groups/{Site.GroupId}/owners")]
         public IUserCollection Owners
         {
             get
@@ -92,7 +115,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
-        [GraphProperty("members", GraphGet = "groups/{Site.GroupId}/members")]
+        [GraphProperty("members", Get = "groups/{Site.GroupId}/members")]
         public IUserCollection Members
         {
             get
@@ -110,6 +133,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
+        [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

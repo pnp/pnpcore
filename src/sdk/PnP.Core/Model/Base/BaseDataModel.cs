@@ -22,7 +22,7 @@ namespace PnP.Core.Model
     /// Delegate for requesting the Api call for doing an ADD operation
     /// </summary>
     /// <returns>API call for adding a model entity</returns>
-    internal delegate ApiCall AddApiCall();
+    internal delegate ApiCall AddApiCall(Dictionary<string, object> keyValuePairs = null);
 
     /// <summary>
     /// Delegate for overriding the default API call in case of a GET request
@@ -186,9 +186,9 @@ namespace PnP.Core.Model
         /// Adds a domain model instance
         /// </summary>
         /// <returns>The added domain model</returns>
-        internal virtual BaseDataModel<TModel> Add()
+        internal virtual BaseDataModel<TModel> Add(Dictionary<string, object> keyValuePairs = null)
         {
-            var call = AddApiCallHandler?.Invoke();
+            var call = AddApiCallHandler?.Invoke(keyValuePairs);
             if (call.HasValue)
             {
                 BaseBatchAdd(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
@@ -205,9 +205,9 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
         /// <returns>The added domain model</returns>
-        internal virtual BaseDataModel<TModel> Add(Batch batch)
+        internal virtual BaseDataModel<TModel> Add(Batch batch, Dictionary<string, object> keyValuePairs = null)
         {
-            var call = AddApiCallHandler?.Invoke();
+            var call = AddApiCallHandler?.Invoke(keyValuePairs);
             if (call.HasValue)
             {
                 BaseBatchAdd(batch, call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
@@ -223,9 +223,9 @@ namespace PnP.Core.Model
         /// Adds a domain model instance
         /// </summary>
         /// <returns>The added domain model</returns>
-        internal virtual async Task<BaseDataModel<TModel>> AddAsync()
+        internal virtual async Task<BaseDataModel<TModel>> AddAsync(Dictionary<string, object> keyValuePairs = null)
         {
-            var call = AddApiCallHandler?.Invoke();
+            var call = AddApiCallHandler?.Invoke(keyValuePairs);
             if (call.HasValue)
             {
                 await BaseAdd(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
@@ -352,7 +352,7 @@ namespace PnP.Core.Model
 
                 // The domain model for Graph can have non expandable collections, hence these require an additional API call to populate. 
                 // Let's ensure these additional API calls's are included in a single batch
-                if (api.ApiCall.Type == ApiType.Graph)
+                if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
                 {
                     AddBatchRequestsForNonExpandableCollections(batch, entityInfo, expressions, fromJsonCasting, postMappingJson);
                 }
@@ -384,7 +384,7 @@ namespace PnP.Core.Model
             // Also try to build the rest equivalent, this will be used in case we encounter mixed rest/graph batches
             ApiCallRequest apiRestBackup = new ApiCallRequest(default);
             // Only build a backup call when the type can be requested via SharePoint REST
-            if (api.ApiCall.Type == ApiType.Graph && !string.IsNullOrEmpty(entityInfo.SharePointType))
+            if ((api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta) && !string.IsNullOrEmpty(entityInfo.SharePointType))
             {
                 // Try to get the API call, but this time using rest
                 apiRestBackup = BuildGetAPICall(entityInfo, apiOverride, true);
@@ -394,7 +394,7 @@ namespace PnP.Core.Model
 
             // The domain model for Graph can have non expandable collections, hence these require an additional API call to populate. 
             // Let's ensure these additional API calls's are included in a single batch
-            if (api.ApiCall.Type == ApiType.Graph)
+            if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
                 AddBatchRequestsForNonExpandableCollections(batch, entityInfo, expressions, fromJsonCasting, postMappingJson);
             }
@@ -524,13 +524,28 @@ namespace PnP.Core.Model
 
         private ApiCallRequest BuildGetAPICallGraph(EntityInfo entity, ApiCall apiOverride)
         {
+            ApiType apiType = ApiType.Graph;
+
+            if (entity.GraphBeta)
+            {
+                if (CanUseGraphBeta(entity))
+                {
+                    apiType = ApiType.GraphBeta;
+                }
+                else
+                {
+                    // we can't make this request
+                    var cancelledApiCallRequest = new ApiCallRequest(default);
+                    cancelledApiCallRequest.CancelRequest($"Getting {entity.GraphGet} requires the Graph Beta endpoint which was not configured to be allowed");
+                    return cancelledApiCallRequest;
+                }
+            }
+
             IEnumerable<EntityFieldInfo> fields = entity.Fields.Where(p => p.Load);
 
             Dictionary<string, string> urlParameters = new Dictionary<string, string>(2);
 
             StringBuilder sb = new StringBuilder();
-
-            string graphIdField = entity.GraphId;
 
             // Only add select statement whenever there was a filter specified
             if (entity.GraphFieldsLoadedViaExpression)
@@ -542,7 +557,24 @@ namespace PnP.Core.Model
                     // Don't add the field in the select if it will be added as expandable field
                     if (!string.IsNullOrEmpty(field.GraphName))
                     {
-                        sb.Append(JsonMappingHelper.GetGraphField(field));
+                        bool addExpand = true;
+                        if (field.GraphBeta)
+                        {
+                            if (CanUseGraphBeta(field))
+                            {
+                                apiType = ApiType.GraphBeta;
+                            }
+                            else
+                            {
+                                // Field will be skipped as we're forced to use v1
+                                addExpand = false;
+                            }
+                        }
+                        
+                        if (addExpand)
+                        {
+                            sb.Append(JsonMappingHelper.GetGraphField(field));
+                        }
                     }
 
                     sb.Append(",");
@@ -561,8 +593,7 @@ namespace PnP.Core.Model
                     sb.Append($"{entity.GraphId},");
                 }
 
-                // Let's not use $select for graph: https://docs.microsoft.com/en-us/graph/query-parameters?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#select-parameter
-                urlParameters.Add("select", sb.ToString().TrimEnd(new char[] { ',' }));
+                urlParameters.Add("$select", sb.ToString().TrimEnd(new char[] { ',' }));
                 sb.Clear();
             }
 
@@ -573,18 +604,54 @@ namespace PnP.Core.Model
                 {
                     if (entity.GraphFieldsLoadedViaExpression)
                     {
-                        sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
+                        bool addExpand = true;
+
+                        if (field.GraphBeta)
+                        {
+                            if (CanUseGraphBeta(field))
+                            {
+                                apiType = ApiType.GraphBeta;
+                            }
+                            else
+                            {
+                                // Expand will be skipped since we're bound to v1 graph
+                                addExpand = false;
+                            }
+                        }                        
+
+                        if (addExpand)
+                        {
+                            sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
+                        }
                     }
                     else
                     {
                         if (field.ExpandableByDefault)
                         {
-                            sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
+                            bool addExpand = true;
+
+                            if (field.GraphBeta)
+                            {
+                                if (CanUseGraphBeta(field))
+                                {
+                                    apiType = ApiType.GraphBeta;
+                                }
+                                else
+                                {
+                                    // Expand will be skipped since we're bound to v1 graph
+                                    addExpand = false;
+                                }
+                            }
+
+                            if (addExpand)
+                            {
+                                sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
+                            }
                         }
                     }
                 }
             }
-            urlParameters.Add("expand", sb.ToString().TrimEnd(new char[] { ',' }));
+            urlParameters.Add("$expand", sb.ToString().TrimEnd(new char[] { ',' }));
             sb.Clear();
 
             // Build the API call
@@ -623,7 +690,7 @@ namespace PnP.Core.Model
             }
 
             // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(sb.ToString(), ApiType.Graph));
+            var call = new ApiCallRequest(new ApiCall(sb.ToString(), apiType));
             if (GetApiCallOverrideHandler != null)
             {
                 call = GetApiCallOverrideHandler.Invoke(call);
@@ -634,6 +701,8 @@ namespace PnP.Core.Model
 
         private void AddBatchRequestsForNonExpandableCollections(Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
         {
+            ApiType apiType = ApiType.Graph;
+
             var nonExpandableFields = entityInfo.GraphNonExpandableCollections;
             if (nonExpandableFields.Any())
             {
@@ -650,8 +719,25 @@ namespace PnP.Core.Model
 
                     if (needed)
                     {
-                        ApiCall extraApiCall = new ApiCall(ApiHelper.ParseApiRequest(this, nonExpandableField.GraphGet), ApiType.Graph, receivingProperty: nonExpandableField.Name);
-                        batch.Add(this, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson);
+                        bool addExpandableCollection = true;
+                        if (nonExpandableField.GraphBeta)
+                        {
+                            if (CanUseGraphBeta(nonExpandableField))
+                            {
+                                apiType = ApiType.GraphBeta;
+                            }
+                            else
+                            {
+                                // Can't add this non expanable collection request since we're bound to Graph v1
+                                addExpandableCollection = false;
+                            }
+                        }
+
+                        if (addExpandableCollection)
+                        {
+                            ApiCall extraApiCall = new ApiCall(ApiHelper.ParseApiRequest(this, nonExpandableField.GraphGet), apiType, receivingProperty: nonExpandableField.Name);
+                            batch.Add(this, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson);
+                        }
                     }
                 }
             }
@@ -830,6 +916,23 @@ namespace PnP.Core.Model
 
         internal ApiCallRequest BuildUpdateAPICallGraph(EntityInfo entity)
         {
+            ApiType apiType = ApiType.Graph;
+
+            if (entity.GraphBeta)
+            {
+                if (CanUseGraphBeta(entity))
+                {
+                    apiType = ApiType.GraphBeta;
+                }
+                else
+                {
+                    // we can't make this request
+                    var cancelledApiCallRequest = new ApiCallRequest(default);
+                    cancelledApiCallRequest.CancelRequest($"Updating {entity.GraphUpdate} requires the Graph Beta endpoint which was not configured to be allowed");
+                    return cancelledApiCallRequest;
+                }
+            }
+
             IEnumerable<EntityFieldInfo> fields = entity.Fields;
 
             // Define the JSON body of the update request based on the actual changes
@@ -844,33 +947,49 @@ namespace PnP.Core.Model
                 // If we found a field 
                 if (changedField != null)
                 {
-                    if (changedField.DataType.FullName == typeof(TransientDictionary).FullName)
+                    bool addField = true;
+                    if (changedField.GraphBeta)
                     {
-                        // Get the changed properties in the dictionary
-                        var dictionaryObject = (TransientDictionary)cp.GetValue(this);
-                        foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
+                        if (CanUseGraphBeta(changedField))
+                        {
+                            apiType = ApiType.GraphBeta;
+                        }
+                        else
+                        {
+                            addField = false;
+                        }
+                    }
+
+                    if (addField)
+                    {
+                        if (changedField.DataType.FullName == typeof(TransientDictionary).FullName)
+                        {
+                            // Get the changed properties in the dictionary
+                            var dictionaryObject = (TransientDictionary)cp.GetValue(this);
+                            foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
+                            {
+                                // Let's set its value into the update message
+                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
+                            }
+                        }
+                        else if (JsonMappingHelper.IsComplexType(changedField.PropertyInfo.PropertyType))
+                        {
+                            // Build a new dynamic object that will hold the changed properties of the complex type
+                            dynamic updateMessageComplexType = new ExpandoObject();
+                            var complexObject = this.GetValue(changedField.Name) as TransientObject;
+                            // Get the properties that have changed in the complex type
+                            foreach (string changedProp in complexObject.ChangedProperties)
+                            {
+                                ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp, complexObject.GetValue(changedProp));
+                            }
+                            // Add this as value to the original changed property
+                            ((ExpandoObject)updateMessage).SetProperty(changedField.GraphName, updateMessageComplexType as object);
+                        }
+                        else
                         {
                             // Let's set its value into the update message
-                            ((ExpandoObject)updateMessage).SetProperty(ToCamelCase(changedProp.Key), changedProp.Value);
+                            ((ExpandoObject)updateMessage).SetProperty(changedField.GraphName, this.GetValue(changedField.Name));
                         }
-                    }
-                    else if (JsonMappingHelper.IsComplexType(changedField.PropertyInfo.PropertyType))
-                    {
-                        // Build a new dynamic object that will hold the changed properties of the complex type
-                        dynamic updateMessageComplexType = new ExpandoObject();
-                        var complexObject = this.GetValue(changedField.Name) as TransientObject;
-                        // Get the properties that have changed in the complex type
-                        foreach (string changedProp in complexObject.ChangedProperties)
-                        {
-                            ((ExpandoObject)updateMessageComplexType).SetProperty(ToCamelCase(changedProp), complexObject.GetValue(changedProp));
-                        }
-                        // Add this as value to the original changed property
-                        ((ExpandoObject)updateMessage).SetProperty(ToCamelCase(changedField.GraphName), updateMessageComplexType as object);
-                    }
-                    else
-                    {
-                        // Let's set its value into the update message
-                        ((ExpandoObject)updateMessage).SetProperty(ToCamelCase(changedField.GraphName), this.GetValue(changedField.Name));
                     }
                 }
             }
@@ -890,7 +1009,7 @@ namespace PnP.Core.Model
             var updateUrl = ApiHelper.ParseApiCall(this, entity.GraphUpdate, true);
 
             // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.Graph, jsonUpdateMessage));
+            var call = new ApiCallRequest(new ApiCall(updateUrl, apiType, jsonUpdateMessage));
             if (UpdateApiCallOverrideHandler != null)
             {
                 call = UpdateApiCallOverrideHandler.Invoke(call);
@@ -983,16 +1102,6 @@ namespace PnP.Core.Model
 
             return call;
         }
-
-        private static string ToCamelCase(string str)
-        {
-            if (!string.IsNullOrEmpty(str) && str.Length > 1)
-            {
-                return Char.ToLowerInvariant(str[0]) + str.Substring(1);
-            }
-            return str;
-        }
-
         #endregion
 
         #region Delete
@@ -1083,11 +1192,28 @@ namespace PnP.Core.Model
 
         internal ApiCallRequest BuildDeleteAPICallGraph(EntityInfo entity)
         {
+            ApiType apiType = ApiType.Graph;
+
+            if (entity.GraphBeta)
+            {
+                if (CanUseGraphBeta(entity))
+                {
+                    apiType = ApiType.GraphBeta;
+                }
+                else
+                {
+                    // we can't make this request
+                    var cancelledApiCallRequest = new ApiCallRequest(default);
+                    cancelledApiCallRequest.CancelRequest($"Deleting {entity.GraphDelete} requires the Graph Beta endpoint which was not configured to be allowed");
+                    return cancelledApiCallRequest;
+                }
+            }
+
             // Prepare the variable to contain the target URL for the delete operation
             var deleteUrl = ApiHelper.ParseApiCall(this, entity.GraphDelete, true);
 
             // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.Graph));
+            var call = new ApiCallRequest(new ApiCall(deleteUrl, apiType));
             if (DeleteApiCallOverrideHandler != null)
             {
                 call = DeleteApiCallOverrideHandler.Invoke(call);
@@ -1110,6 +1236,20 @@ namespace PnP.Core.Model
 
             return call;
         }
+        #endregion
+
+        #region Graph vs GraphBeta handling
+
+        private bool CanUseGraphBeta(EntityFieldInfo field)
+        {
+            return PnPContext.GraphCanUseBeta && field.GraphBeta;            
+        }
+
+        private bool CanUseGraphBeta(EntityInfo entity)
+        {
+            return PnPContext.GraphCanUseBeta && entity.GraphBeta;
+        }
+
         #endregion
 
         #region Metadata handling

@@ -6,8 +6,8 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Web class, write your custom code here
     /// </summary>
-    [SharePointType("SP.Web", SharePointUri = "_api/web")]
-    [GraphType(GraphId = "id", GraphGet = "sites/{hostname}:{serverrelativepath}")]
+    [SharePointType("SP.Web", Uri = "_api/web")]
+    [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
     internal partial class Web
     {
         public Web()

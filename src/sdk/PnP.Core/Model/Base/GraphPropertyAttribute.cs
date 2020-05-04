@@ -13,6 +13,11 @@
         /// <summary>
         /// Url to get this field, needed in case the field cannot be loaded via an expand
         /// </summary>
-        public string GraphGet { get; set; }
+        public string Get { get; set; }
+
+        /// <summary>
+        /// Model property to define that a property can only be handled using the Microsoft Graph beta endpoint
+        /// </summary>
+        public bool Beta { get; set; }
     }
 }

@@ -47,6 +47,8 @@ namespace PnP.Core.QueryModel.Query
 
         #region Public extension methods for IQueryable<TResult>
 
+        #region Include implementation
+
         /// <summary>
         /// Extension method to declare the collection properties to expand while querying the REST service
         /// </summary>
@@ -103,6 +105,10 @@ namespace PnP.Core.QueryModel.Query
             return result;
         }
 
+        #endregion
+
+        #region Load implementation
+
         /// <summary>
         /// Extension method to declare a field/metadata property to load while executing the REST query
         /// </summary>
@@ -158,6 +164,41 @@ namespace PnP.Core.QueryModel.Query
 
             return result;
         }
+
+        #endregion
+
+        #region GetByTitle for Lists implementation
+
+        /// <summary>
+        /// Extension method to select a list (IList) by title
+        /// </summary>
+        /// <typeparam name="TResult">The type of the target entity</typeparam>
+        /// <param name="collection">The collection of items to load fields/metadata from</param>
+        /// <param name="selectors">An array of selectors for the fields/metadata</param>
+        /// <returns>The resulting collection</returns>
+        public static PnP.Core.Model.SharePoint.IList GetByTitle(
+            this IQueryable<PnP.Core.Model.SharePoint.IList> source, string title)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (title is null)
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            Expression<Func<PnP.Core.Model.SharePoint.IList, bool>> predicate = l => l.Title == title;
+
+            return source.Provider.Execute<PnP.Core.Model.SharePoint.IList>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, source, predicate),
+                    new Expression[] { source.Expression, Expression.Quote(predicate) }
+                    ));
+        }
+
+        #endregion
 
         #endregion
     }

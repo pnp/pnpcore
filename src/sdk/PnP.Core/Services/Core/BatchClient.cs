@@ -109,6 +109,11 @@ namespace PnP.Core.Services
         internal PnPContext PnPContext { get; private set; }
 
         /// <summary>
+        /// Max requests in a single Microsoft Graph batch
+        /// </summary>
+        internal static int MaxRequestsInGraphBatch => 20;
+
+        /// <summary>
         /// Creates a new batch
         /// </summary>
         /// <returns>Newly created batch</returns>
@@ -219,79 +224,150 @@ namespace PnP.Core.Services
 
         #region Graph batching
 
+        private static List<Batch> MicrosoftGraphBatchSplitting(Batch batch)
+        {
+            List<Batch> batches = new List<Batch>();
+
+            // Only split if we have more than 20 requests in a single batch
+            if (batch.Requests.Count <= MaxRequestsInGraphBatch)
+            {
+                batches.Add(batch);
+                return batches;
+            }
+
+            int counter = 0;
+            int order = 0;
+            Batch currentBatch = new Batch();
+            foreach (var request in batch.Requests.OrderBy(p => p.Value.Order))
+            {
+                currentBatch.Requests.Add(order, request.Value);
+                order++;
+
+                counter++;
+                if (counter % MaxRequestsInGraphBatch == 0)
+                {
+                    order = 0;
+                    batches.Add(currentBatch);
+                    currentBatch = new Batch();
+                }
+            }
+
+            // Add the last part
+            if (currentBatch.Requests.Count > 0)
+            {
+                batches.Add(currentBatch);
+            }
+
+            return batches;
+        }
+
         private async Task ExecuteMicrosoftGraphBatchAsync(Batch batch)
         {
-            (string requestBody, string requestKey) = BuildMicrosoftGraphBatchRequestContent(batch);
-            
-            PnPContext.Logger.LogDebug(requestBody);
+            // Split the provided batch in multiple batches if needed. Possible split reasons are:
+            // - too many requests
+            var graphBatches = MicrosoftGraphBatchSplitting(batch);
 
-            // Make the batch call
-            using StringContent content = new StringContent(requestBody);
-
-            using (var request = new HttpRequestMessage(HttpMethod.Post, $"beta/$batch"))
+            foreach (var graphBatch in graphBatches)
             {
-                // Remove the default Content-Type content header
-                if (content.Headers.Contains("Content-Type"))
+                string graphEndpoint = DetermineGraphEndpoint(graphBatch);
+
+                (string requestBody, string requestKey) = BuildMicrosoftGraphBatchRequestContent(graphBatch);
+
+                PnPContext.Logger.LogDebug($"{graphEndpoint} : {requestBody}");
+
+                // Make the batch call
+                using StringContent content = new StringContent(requestBody);
+
+                using (var request = new HttpRequestMessage(HttpMethod.Post, $"{graphEndpoint}/$batch"))
                 {
-                    content.Headers.Remove("Content-Type");
-                }
-                // Add the batch Content-Type header
-                content.Headers.Add($"Content-Type", "application/json");
-
-                // Connect content to request
-                request.Content = content;
-
-#if DEBUG
-                // Test recording
-                if (PnPContext.Mode == PnPContextMode.Record && PnPContext.GenerateTestMockingDebugFiles)
-                {
-                    // Write request
-                    TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
-                }
-
-                // If we are not mocking data, or if the mock data is not yet available
-                if (PnPContext.Mode != PnPContextMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
-                {
-#endif
-                    // Ensure the request contains authentication information
-                    await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(PnPConstants.MicrosoftGraphBaseUri, request).ConfigureAwait(false);
-
-                    // Send the request
-                    HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request).ConfigureAwait(false);
-
-                    // Process the request response
-                    if (response.IsSuccessStatusCode)
+                    // Remove the default Content-Type content header
+                    if (content.Headers.Contains("Content-Type"))
                     {
-                        // Get the response string
-                        string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        content.Headers.Remove("Content-Type");
+                    }
+                    // Add the batch Content-Type header
+                    content.Headers.Add($"Content-Type", "application/json");
+
+                    // Connect content to request
+                    request.Content = content;
 
 #if DEBUG
-                        if (PnPContext.Mode == PnPContextMode.Record)
+                    // Test recording
+                    if (PnPContext.Mode == PnPContextMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                    {
+                        // Write request
+                        TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
+                    }
+
+                    // If we are not mocking data, or if the mock data is not yet available
+                    if (PnPContext.Mode != PnPContextMode.Mock)
+                    {
+#endif
+                        // Ensure the request contains authentication information
+                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(PnPConstants.MicrosoftGraphBaseUri, request).ConfigureAwait(false);
+
+                        // Send the request
+                        HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request).ConfigureAwait(false);
+
+                        // Process the request response
+                        if (response.IsSuccessStatusCode)
                         {
-                            // Write response
-                            TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                        }
+                            // Get the response string
+                            string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+#if DEBUG
+                            if (PnPContext.Mode == PnPContextMode.Record)
+                            {
+                                // Write response
+                                TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                            }
 #endif
 
-                        await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
+                            await ProcessGraphRestBatchResponse(graphBatch, batchResponse).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            // Something went wrong...
+                            throw new Exception(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        }
+#if DEBUG
                     }
                     else
                     {
-                        // Something went wrong...
-                        throw new Exception(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+
+                        await ProcessGraphRestBatchResponse(graphBatch, batchResponse).ConfigureAwait(false);
                     }
-#if DEBUG
+#endif
+
+                    // Mark batch as executed
+                    graphBatch.Executed = true;
+                }
+            }
+
+            // Mark the original (non split) batch as complete
+            batch.Executed = true;
+        }
+
+        private string DetermineGraphEndpoint(Batch graphBatch)
+        {
+            // If a request is in the batch it means we allowed to use Graph beta. To
+            // maintain batch integretity we move a complete batch to beta if there's one
+            // of the requests in the batch requiring Graph beta.
+            if (PnPContext.GraphAlwaysUseBeta)
+            {
+                return PnPConstants.GraphBetaEndpoint;
+            }
+            else
+            {
+                if (graphBatch.Requests.Any(p => p.Value.ApiCall.Type == ApiType.GraphBeta))
+                {
+                    return PnPConstants.GraphBetaEndpoint;
                 }
                 else
                 {
-                    string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
-
-                    await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
+                    return PnPConstants.GraphV1Endpoint;
                 }
-#endif
-
-                // Mark batch as executed
-                batch.Executed = true;
             }
         }
 
@@ -305,8 +381,7 @@ namespace PnP.Core.Services
                 // Map the retrieved JSON to our domain model
                 foreach (var batchRequest in batch.Requests.Values)
                 {
-                    await JsonMappingHelper
-                        .MapJsonToModel(batchRequest).ConfigureAwait(false);
+                    await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
                 }
             }
         }
@@ -385,7 +460,7 @@ namespace PnP.Core.Services
                 if (!string.IsNullOrEmpty(request.ApiCall.JsonBody))
                 {
                     bodiesToReplace.Add(counter, request.ApiCall.JsonBody);
-                    graphRequest.Body = $"@#|Body{counter}|#@" /*request.ApiCall.JsonBody*/;
+                    graphRequest.Body = $"@#|Body{counter}|#@";
                     graphRequest.Headers = new Dictionary<string, string>
                     {
                         { "Content-Type", "application/json" }
@@ -428,7 +503,7 @@ namespace PnP.Core.Services
         {
             List<SPORestBatch> batches = new List<SPORestBatch>();
             
-            foreach(var request in batch.Requests)
+            foreach(var request in batch.Requests.OrderBy(p => p.Value.Order))
             {
                 // Group batched based up on the site url, a single batch must be scoped to a single web
                 Uri site = new Uri(request.Value.ApiCall.Request.Substring(0, request.Value.ApiCall.Request.IndexOf("/_api/", 0)));

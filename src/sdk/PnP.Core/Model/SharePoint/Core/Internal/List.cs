@@ -11,8 +11,8 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// List class, write your custom code here
     /// </summary>
-    [SharePointType("SP.List", SharePointUri = "_api/Web/Lists(guid'{Id}')", SharePointGet = "_api/web/lists", SharePointUpdate = "_api/web/lists/getbyid(guid'{Id}')")]
-    [GraphType(GraphId = "id", GraphGet = "sites/{Parent.GraphId}/lists/{GraphId}")]
+    [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
+    [GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class List
     {
@@ -49,7 +49,7 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Handler to construct the Add request for this list
-            AddApiCallHandler = () =>
+            AddApiCallHandler = (keyValuePairs) =>
             {
                 return new ApiCall($"_api/web/lists", ApiType.SPORest, JsonSerializer.Serialize(new ListAdd(this, TemplateType, Title)));
             };
@@ -82,7 +82,6 @@ namespace PnP.Core.Model.SharePoint
 
         private static ApiCall GetByTitleApiCall(string title)
         {
-            title = HttpUtility.UrlEncode(title);
             return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest); 
         }
 

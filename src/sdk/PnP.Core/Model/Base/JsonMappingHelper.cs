@@ -68,7 +68,7 @@ namespace PnP.Core.Model
             {
                 await FromJsonRest(pnpObject, entity, apiResponse, fromJsonCasting).ConfigureAwait(false);
             }
-            else if (apiResponse.ApiCall.Type == ApiType.Graph)
+            else
             {
                 await FromJsonGraph(pnpObject, entity, apiResponse, fromJsonCasting).ConfigureAwait(false);
             }
@@ -462,7 +462,7 @@ namespace PnP.Core.Model
                         // Regular field loaded
 
                         // Grab id field, should be present in all graph objects
-                        if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals("id"))
+                        if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.GraphId))
                         {
                             idFieldValue = property.Value.GetString();
                         }
@@ -524,7 +524,7 @@ namespace PnP.Core.Model
                     {
                         TrackMetaData(metadataBasedObject, property);
                     }
-                    else if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals("id"))
+                    else if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.GraphId))
                     {
                         idFieldValue = property.Value.GetString();
                     }
@@ -639,7 +639,7 @@ namespace PnP.Core.Model
             {
                 entityField = entity.Fields.FirstOrDefault(p => p.SharePointName == property.Name);
             }
-            else if (apiResponse.ApiCall.Type == ApiType.Graph)
+            else
             {
                 // Use case insentive match for Graph as we get json in camel case while we use pascal case for the model
                 entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase));
