@@ -38,7 +38,26 @@ namespace PnP.Core.Model.Teams
             }
         }
 
+        [GraphProperty("messages", Get = "teams/{Site.GroupId}/channels/{GraphId}/messages", Beta = true)]
+        public ITeamChatMessageCollection Messages
+        {
+            get
+            {
+                if (!HasValue(nameof(Messages)))
+                {
+                    var chatMessages = new TeamChatMessageCollection
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(chatMessages);
+                }
+                return GetValue<ITeamChatMessageCollection>();
+            }
+        }
+
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = (string)value; }
+
     }
 }

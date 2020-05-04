@@ -393,47 +393,7 @@ namespace PnP.Core.Model
                     // Are we loading a complex type
                     else if (IsComplexType(entityField.PropertyInfo.PropertyType))
                     {
-                        // Do we still need to instantiate this object
-                        if (!pnpObject.HasValue(entityField.Name))
-                        {
-                            // entityField.PropertyInfo.PropertyType.Namespace = PnP.Core.Model.Teams
-                            // entityField.PropertyInfo.PropertyType.Name = ITeamDiscoverySettings
-                            entityField.PropertyInfo.SetValue(pnpObject, Activator.CreateInstance(Type.GetType($"{entityField.PropertyInfo.PropertyType.Namespace}.{entityField.PropertyInfo.PropertyType.Name.Substring(1)}")));
-                        }
-
-                        // Get instance of the model property
-                        var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
-                        var typedModel = propertyToSetValue as IDataModelMappingHandler;
-
-                        // Get class info
-                        var complexModelEntity = EntityManager.Instance.GetStaticClassInfo(propertyToSetValue.GetType());
-                        
-                        // Map returned fields
-                        foreach (var childProperty in property.Value.EnumerateObject())
-                        {
-                            EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-                            if (entityChildField != null)
-                            {
-                                if (!string.IsNullOrEmpty(entityChildField.GraphJsonPath))
-                                {
-                                    var jsonPathFields = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(entityChildField.GraphName));
-                                    if (jsonPathFields.Any())
-                                    {
-                                        foreach (var jsonPathField in jsonPathFields)
-                                        {
-                                            jsonPathField.PropertyInfo?.SetValue(propertyToSetValue, 
-                                                GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
-                                                GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath), jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    // We only map fields that exist
-                                    entityChildField.PropertyInfo?.SetValue(propertyToSetValue, GetJsonFieldValue(contextAwareObject, entityChildField.Name, childProperty.Value, entityChildField.DataType, entityChildField.GraphUseCustomMapping, typedModel?.MappingHandler));
-                                }
-                            }
-                        }
+                        ProcessComplexType(pnpObject, contextAwareObject, property, entityField);
                     }
                     else
                     {
@@ -573,6 +533,59 @@ namespace PnP.Core.Model
             if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId) && !string.IsNullOrEmpty(idFieldValue))
             {
                 metadataBasedObject.Metadata.Add(PnPConstants.MetaDataGraphId, idFieldValue);
+            }
+        }
+
+        private static void ProcessComplexType(TransientObject pnpObject, IDataModelWithContext contextAwareObject, JsonProperty property, EntityFieldInfo entityField)
+        {
+            // Do we still need to instantiate this object
+            if (!pnpObject.HasValue(entityField.Name))
+            {
+                // entityField.PropertyInfo.PropertyType.Namespace = PnP.Core.Model.Teams
+                // entityField.PropertyInfo.PropertyType.Name = ITeamDiscoverySettings
+                entityField.PropertyInfo.SetValue(pnpObject, Activator.CreateInstance(Type.GetType($"{entityField.PropertyInfo.PropertyType.Namespace}.{entityField.PropertyInfo.PropertyType.Name.Substring(1)}")));
+            }
+
+            // Get instance of the model property
+            var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
+            var typedModel = propertyToSetValue as IDataModelMappingHandler;
+
+            // Get class info
+            var complexModelEntity = EntityManager.Instance.GetStaticClassInfo(propertyToSetValue.GetType());
+
+            // Map returned fields
+            foreach (var childProperty in property.Value.EnumerateObject())
+            {
+                EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                if (entityChildField != null)
+                {
+                    // if the complex type contains another complex type and there's a value provided then let's recursively call this method again
+                    if (IsComplexType(entityChildField.PropertyInfo.PropertyType) && childProperty.Value.ValueKind != JsonValueKind.Null)
+                    {
+                        ProcessComplexType(propertyToSetValue as TransientObject, propertyToSetValue as IDataModelWithContext, childProperty, entityChildField);
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(entityChildField.GraphJsonPath))
+                        {
+                            var jsonPathFields = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(entityChildField.GraphName));
+                            if (jsonPathFields.Any())
+                            {
+                                foreach (var jsonPathField in jsonPathFields)
+                                {
+                                    jsonPathField.PropertyInfo?.SetValue(propertyToSetValue,
+                                        GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                        GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath), jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // We only map fields that exist
+                            entityChildField.PropertyInfo?.SetValue(propertyToSetValue, GetJsonFieldValue(contextAwareObject, entityChildField.Name, childProperty.Value, entityChildField.DataType, entityChildField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                        }
+                    }
+                }
             }
         }
 
@@ -716,7 +729,7 @@ namespace PnP.Core.Model
             // If a field mandates a custom mapping then the field handling is fully handled via the custom mapping handler
             if (useCustomMapping)
             {
-                return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject.PnPContext.Logger));
+                return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger));
             }
 
             switch (propertyType.FullName)
@@ -885,10 +898,21 @@ namespace PnP.Core.Model
                         }
                         return null;
                     }
+                case "System.DateTimeOffset":
+                    {
+                        if (jsonElement.ValueKind != JsonValueKind.Null)
+                        {
+                            return jsonElement.GetDateTimeOffset();
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
                 default:
                     {
                         // Do a call back for the cases where we don't have a default mapping
-                        return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject.PnPContext.Logger));
+                        return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger));
                     }
             }
         }
