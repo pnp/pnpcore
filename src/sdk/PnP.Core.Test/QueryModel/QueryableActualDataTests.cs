@@ -110,7 +110,26 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var actual = context.Web.Lists.AsQueryable<PnP.Core.Model.SharePoint.IList>().GetByTitle(expected);
+                var actual = context.Web.Lists.GetByTitle(expected);
+
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual.Title);
+            }
+        }
+
+        [TestMethod]
+        public void TestQueryGetByTitleWithFieldsLINQ()
+        {
+            var expected = "Documents";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var actual = context.Web.Lists.GetByTitle(expected,
+                    l => l.Id,
+                    l => l.Title,
+                    l => l.TemplateType
+                    );
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);

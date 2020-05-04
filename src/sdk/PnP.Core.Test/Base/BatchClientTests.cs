@@ -202,8 +202,8 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var list1 = context.Web.Lists.GetByTitle("Site Assets", p => p.Title, p => p.NoCrawl);
-                var list1Again = context.Web.Lists.GetByTitle("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
+                var list1 = context.Web.Lists.GetByTitleLegacy("Site Assets", p => p.Title, p => p.NoCrawl);
+                var list1Again = context.Web.Lists.GetByTitleLegacy("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
                 await context.ExecuteAsync();
 
                 var siteAssetsCount = context.Web.Lists.Where(p => p.Title == "Site Assets");
