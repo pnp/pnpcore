@@ -204,8 +204,9 @@ namespace PnP.Core.Model
         /// Creates a concrete instance of a domain model type based on the reference type
         /// </summary>
         /// <param name="type">The reference model type, can be an interface or a class</param>
+        /// <param name="parent">Parent of the domain model object, optional</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal object GetEntityConcreteInstance<TModel>(Type type)
+        internal object GetEntityConcreteInstance<TModel>(Type type, IDataModelParent parent = null)
         {
             if (type is null)
             {
@@ -213,8 +214,14 @@ namespace PnP.Core.Model
             }
 
             type = GetEntityConcreteType(type);
+            var result = (TModel)Activator.CreateInstance(type);
 
-            return (TModel)Activator.CreateInstance(type);
+            if (result is IDataModelParent modelWithParent)
+            {
+                modelWithParent.Parent = parent;
+            }
+
+            return result;
         }
 
         /// <summary>

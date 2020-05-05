@@ -5,6 +5,9 @@
     /// </summary>
     public interface IDataModelParent
     {
+        /// <summary>
+        /// Represents the parent of the current domain model object
+        /// </summary>
         IDataModelParent Parent { get; set; }
     }
 }

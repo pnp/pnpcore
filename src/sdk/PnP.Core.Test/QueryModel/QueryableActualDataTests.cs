@@ -3,6 +3,7 @@ using System.Linq;
 using PnP.Core.QueryModel.Query;
 using System;
 using PnP.Core.Test.Utilities;
+using PnP.Core.Model.SharePoint;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -35,7 +36,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestQueryItems()
         {
-            // TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var query = (from i in context.Web.Lists.GetByTitle("Documents").Items
@@ -43,12 +44,19 @@ namespace PnP.Core.Test.QueryModel
                              select i)
                              .Load(l => l.Id, l => l.Title);
 
-                var queryResult = query.ToList();
+                var queryResult = new System.Collections.Generic.List<IListItem>(query);
 
                 foreach (var i in query)
                 {
                     Assert.IsNotNull(i);
                 }
+
+                //var query2 = context.Web.Lists.Where(l => l.Title == "Something");
+
+                //foreach (var i in query2)
+                //{
+                //    Assert.IsNotNull(i);
+                //}
 
                 //Assert.IsTrue(true);
                 //Assert.IsNotNull(queryResult);

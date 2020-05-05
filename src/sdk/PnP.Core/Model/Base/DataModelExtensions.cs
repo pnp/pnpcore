@@ -93,5 +93,46 @@ namespace PnP.Core.Model
 
             return (model as TransientObject).HasValue(body.Member.Name);
         }
+
+
+        /// <summary>
+        /// Ensures the basic properties (mainly IDs) of the parent of the current domain model object
+        /// </summary>
+        /// <param name="model">The domain model to which we have to ensure the parent</param>
+        public static async Task EnsureParentObjectAsync(this IDataModelParent model)
+        {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (model.Parent != null)
+            {
+                // there's either a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
+                // or
+                // the parent is model class itself (e.g. Web --> Site.RootWeb)
+                if (!(model.Parent is IMetadataExtensible parent))
+                {
+                    // Parent is a collection, so jump one level up
+                    parent = model.Parent.Parent as IMetadataExtensible;
+                }
+
+                // Let's try to get the parent object as an IRequestable and IDataModelGet instance
+                var requestableParent = (IRequestable)parent;
+                var gettableParent = (IDataModelGet)parent;
+                var contextAwareParent = (IDataModelWithContext)parent;
+                // and if successfull, see if it has been already requested
+                if (requestableParent != null &&
+                    gettableParent != null &&
+                    !requestableParent.Requested)
+                {
+                    // If not, make an explicit request for its basic properties
+                    // PAOLO: Should we request the IDs only?
+                    var ensureParentBatch = contextAwareParent.PnPContext.NewBatch();
+                    gettableParent.Get(ensureParentBatch);
+                    await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(true);
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using PnP.Core.Model;
+﻿using Microsoft.IdentityModel.Tokens;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel.OData;
 using PnP.Core.Services;
@@ -47,7 +48,7 @@ namespace PnP.Core.QueryModel.Query
                 {
                     // Get the concrete entity that the query targets
                     var concreteEntity = EntityManager.Instance
-                        .GetEntityConcreteInstance<TModel>(typeof(TModel));
+                        .GetEntityConcreteInstance<TModel>(typeof(TModel), this.parent);
                     var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
                     var entityWithMappingHandlers = (IDataModelMappingHandler)concreteEntity;
 
@@ -82,24 +83,30 @@ namespace PnP.Core.QueryModel.Query
                 {
                     // Get the concrete entity that the query targets
                     var concreteEntity = EntityManager.Instance
-                        .GetEntityConcreteInstance<TModel>(typeof(TModel));
+                        .GetEntityConcreteInstance<TModel>(typeof(TModel), this.parent);
                     var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
                     var entityWithMappingHandlers = (IDataModelMappingHandler)concreteEntity;
 
-                    // Get the parent (container) instance, if any
+                    //// Get the parent (container) instance, if any
                     var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.parent.GetType());
-                    var concreteParentEntity = EntityManager.Instance
-                        .GetEntityConcreteInstance(this.parent.GetType());
-                    var parentEntityWithMappingHandlers = (IDataModelMappingHandler)concreteParentEntity;
+                    //var concreteParentEntity = EntityManager.Instance
+                    //    .GetEntityConcreteInstance(this.parent.GetType());
+                    var parentEntityWithMappingHandlers = (IDataModelMappingHandler)this.parent;
 
-                    var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointLinqGet.Replace("{Parent.Id}", "f623a809-eb28-404b-b4d3-00db80239ee9")}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
+                    // Resolve tokens
+                    // EnsureParent (recursive chain via batch)
+                    // Final resolve
+
+                    // var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointLinqGet.Replace("{Parent.Id}", ((IDataModelWithKey)this.parent).Key.ToString())}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
+                    var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
+                    requestUrl = TokensHandler.ResolveTokens(concreteEntity as IMetadataExtensible, requestUrl).GetAwaiter().GetResult();
 
                     this.context.CurrentBatch.Add(
                         this.parent as TransientObject,
                         parentEntityInfo,
                         HttpMethod.Get,
                         new ApiCall // First option is Graph
-                    {
+                        {
                             Type = ApiType.SPORest,
                             ReceivingProperty = "Items",
                             Request = requestUrl
@@ -126,7 +133,7 @@ namespace PnP.Core.QueryModel.Query
                 {
                     // Get the concrete entity that the query targets
                     var concreteEntity = EntityManager.Instance
-                        .GetEntityConcreteInstance<TModel>(typeof(TModel));
+                        .GetEntityConcreteInstance<TModel>(typeof(TModel), this.parent);
                     var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
                     var entityWithMappingHandlers = (IDataModelMappingHandler)concreteEntity;
 

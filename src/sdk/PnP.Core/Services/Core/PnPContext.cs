@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Model;
+using PnP.Core.Model.Base;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using System;
@@ -14,7 +15,7 @@ namespace PnP.Core.Services
     /// </summary>
     public class PnPContext : IDisposable
     {
-        private bool disposed = false;
+        #region Lazy properties for fluent API
 
         private readonly Lazy<IWeb> web = new Lazy<IWeb>(() =>
         {
@@ -31,12 +32,18 @@ namespace PnP.Core.Services
             return new Team();
         }, true);
 
+        #endregion
+
+        #region Private properties
+
         private readonly ILogger log;
         private readonly IAuthenticationProvider authProvider;
         private readonly SharePointRestClient restClient;
         private readonly MicrosoftGraphClient graphClient;
         private readonly BatchClient batchClient;
         private Batch currentBatch;
+
+        #endregion
 
         #region Constructors
 
@@ -333,6 +340,8 @@ namespace PnP.Core.Services
 #endif
 
         #region IDisposable implementation
+
+        private bool disposed = false;
 
         public void Dispose()
         {
