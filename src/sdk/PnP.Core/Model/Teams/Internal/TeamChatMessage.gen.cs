@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PnP.Core.Model.Teams
 {
@@ -25,6 +26,48 @@ namespace PnP.Core.Model.Teams
         public ITeamChatMessageContent Body { get => GetValue<ITeamChatMessageContent>(); set => SetValue(value); }
 
         public string Summary { get => GetValue<string>(); set => SetValue(value); }
+
+        public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
+
+        public string Locale { get => GetValue<string>(); set => SetValue(value); }
+
+        public ChatMessageImportance Importance { get => GetValue<ChatMessageImportance>(); set => SetValue(value); }
+
+        public List<ITeamChatMessageReaction> Reactions
+        {
+            get
+            {
+                if (!HasValue(nameof(Reactions)))
+                {
+                    SetValue(new List<ITeamChatMessageReaction>());
+                }
+                return GetValue<List<ITeamChatMessageReaction>>();
+            }
+        }
+
+        public List<ITeamChatMessageMention> Mentions
+        {
+            get
+            {
+                if (!HasValue(nameof(Mentions)))
+                {
+                    SetValue(new List<ITeamChatMessageMention>());
+                }
+                return GetValue<List<ITeamChatMessageMention>>();
+            }
+        }
+
+        public List<ITeamChatMessageAttachment> Attachments
+        {
+            get
+            {
+                if (!HasValue(nameof(Attachments)))
+                {
+                    SetValue(new List<ITeamChatMessageAttachment>());
+                }
+                return GetValue<List<ITeamChatMessageAttachment>>();
+            }
+        }
 
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = value.ToString(); }

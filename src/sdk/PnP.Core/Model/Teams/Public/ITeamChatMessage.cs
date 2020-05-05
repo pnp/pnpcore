@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint;
+using System;
+using System.Collections.Generic;
 
 namespace PnP.Core.Model.Teams
 {
@@ -6,7 +8,7 @@ namespace PnP.Core.Model.Teams
     /// Represents an individual chat message within a channel or chat. The chat message can be a root chat message or 
     /// part of a reply thread that is defined by the replyToId property in the chat message.
     /// </summary>
-    public interface ITeamChatMessage: IDataModel<ITeamChatMessage>
+    public interface ITeamChatMessage : IDataModel<ITeamChatMessage>
     {
 
         /// <summary>
@@ -65,6 +67,36 @@ namespace PnP.Core.Model.Teams
         /// Only applies to channel chat messages, not chat messages in a chat.
         /// </summary>
         public string Summary { get; set; }
+
+        /// <summary>
+        /// The importance of the chat message.
+        /// </summary>
+        public ChatMessageImportance Importance { get; set; }
+
+        /// <summary>
+        /// The Web URL of the team chat message
+        /// </summary>
+        public Uri WebUrl { get; set; }
+
+        /// <summary>
+        /// Locale of the team chat message
+        /// </summary>
+        public string Locale { get; set; }
+
+        /// <summary>
+        /// Reactions for this chat message (for example, Like).
+        /// </summary>
+        public List<ITeamChatMessageReaction> Reactions { get; }
+
+        /// <summary>
+        /// List of entities mentioned in the chat message. Currently supports user, bot, team, channel.
+        /// </summary>
+        public List<ITeamChatMessageMention> Mentions { get; }
+
+        /// <summary>
+        /// Attached files. Attachments are currently read-only – sending attachments is not supported.
+        /// </summary>
+        public List<ITeamChatMessageAttachment> Attachments { get; }
 
     }
 }

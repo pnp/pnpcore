@@ -16,6 +16,7 @@ namespace PnP.Core.Model.Teams
                 switch (input.TargetType.Name)
                 {
                     case "ChatMessageType": return JsonMappingHelper.ToEnum<ChatMessageType>(input.JsonElement);
+                    case "ChatMessageImportance": return JsonMappingHelper.ToEnum<ChatMessageImportance>(input.JsonElement);
                 }
 
                 input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");

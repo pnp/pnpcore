@@ -21,5 +21,10 @@
         /// Unique identity of the tenant (optional).
         /// </summary>
         public string TenantId { get; set; }
+
+        /// <summary>
+        /// In case the identity is a user this property contains the user type of the user
+        /// </summary>
+        public string UserIdentityType { get; set; }
     }
 }

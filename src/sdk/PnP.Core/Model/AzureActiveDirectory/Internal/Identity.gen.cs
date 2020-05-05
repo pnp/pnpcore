@@ -8,5 +8,7 @@
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
         
         public string TenantId { get => GetValue<string>(); set => SetValue(value); }
+
+        public string UserIdentityType { get => GetValue<string>(); set => SetValue(value); }
     }
 }
