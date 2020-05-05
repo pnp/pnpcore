@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -363,7 +364,7 @@ namespace PnP.Core.Model
 
                                 // Only add to collection when not yet added
                                 // or replace the already existing item, if any
-                                typedCollection.AddOrUpdate(pnpChild, 
+                                typedCollection.AddOrUpdate(pnpChild,
                                     i => ((IDataModelWithKey)i).Key.Equals(pnpChildIdPropertyValue));
                             }
                             else
@@ -394,6 +395,64 @@ namespace PnP.Core.Model
                     else if (IsComplexType(entityField.PropertyInfo.PropertyType))
                     {
                         ProcessComplexType(pnpObject, contextAwareObject, property, entityField);
+                    }
+                    // Are we loading a list of complex types
+                    else if (IsGenericList(entityField.PropertyInfo.PropertyType))
+                    {
+                        // Get the actual current value of the property we're setting...as that allows to detect it's type
+                        var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
+
+                        // Always clear the list on load
+                        (propertyToSetValue as System.Collections.IList).Clear();
+
+                        // Load each child as a complex type class in the list
+                        foreach (var childJson in property.Value.EnumerateArray())
+                        {
+                            // create the list item 
+                            var typeToCreate = Type.GetType($"{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Namespace}.{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Name.Substring(1)}");
+                            var complexTypeInstance = Activator.CreateInstance(typeToCreate);
+                            (propertyToSetValue as System.Collections.IList).Add(complexTypeInstance);
+
+                            // Get the complex model metadata
+                            var complexModelEntity = EntityManager.Instance.GetStaticClassInfo(typeToCreate);
+
+                            // Map returned fields
+                            foreach (var childProperty in childJson.EnumerateObject())
+                            {
+                                EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                                if (entityChildField != null)
+                                {
+                                    // if the complex type contains another complex type and there's a value provided then let's recursively call this method again
+                                    if (IsComplexType(entityChildField.PropertyInfo.PropertyType) && childProperty.Value.ValueKind != JsonValueKind.Null)
+                                    {
+                                        ProcessComplexType(complexTypeInstance as TransientObject, complexTypeInstance as IDataModelWithContext, childProperty, entityChildField);
+                                    }
+                                    else
+                                    {
+                                        var typedModel = complexTypeInstance as IDataModelMappingHandler;
+
+                                        if (!string.IsNullOrEmpty(entityChildField.GraphJsonPath))
+                                        {
+                                            var jsonPathFields = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(entityChildField.GraphName));
+                                            if (jsonPathFields.Any())
+                                            {
+                                                foreach (var jsonPathField in jsonPathFields)
+                                                {
+                                                    jsonPathField.PropertyInfo?.SetValue(complexTypeInstance,
+                                                        GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                                        GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath), jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            // We only map fields that exist
+                                            entityChildField.PropertyInfo?.SetValue(complexTypeInstance, GetJsonFieldValue(contextAwareObject, entityChildField.Name, childProperty.Value, entityChildField.DataType, entityChildField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                     else
                     {
@@ -952,6 +1011,11 @@ namespace PnP.Core.Model
         internal static bool IsModelCollection(Type propertyType)
         {
             return propertyType.ImplementsInterface(typeof(IDataModelCollection<>));
+        }
+
+        internal static bool IsGenericList(Type propertyType)
+        {
+            return (propertyType.IsGenericType && (propertyType.GetGenericTypeDefinition() == typeof(List<>)));
         }
 
         internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property)
