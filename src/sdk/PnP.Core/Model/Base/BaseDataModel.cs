@@ -788,10 +788,14 @@ namespace PnP.Core.Model
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
-            if (!string.IsNullOrEmpty(entityInfo.SharePointType))
+
+            // Prefix API request with context url if needed
+            postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
+
+            // Ensure there's no Graph beta endpoint being used when that was not allowed
+            if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
             {
-                // Prefix API request with context url
-                postApiCall.Request = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{postApiCall.Request}";
+                return;
             }
 
             // Add the request to the batch
@@ -810,16 +814,45 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
 
-            if (!string.IsNullOrEmpty(entityInfo.SharePointType))
+            // Prefix API request with context url if needed
+            postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
+
+            // Ensure there's no Graph beta endpoint being used when that was not allowed
+            if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
             {
-                // Prefix API request with context url
-                postApiCall.Request = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{postApiCall.Request}";
+                throw new Exception("Adding this entity requires the use of the Graph beta endpoint");
             }
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
             batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson);
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
+        }
+
+        private ApiCall PrefixAddApiCall(ApiCall postApiCall, EntityInfo entityInfo)
+        {
+            if (!string.IsNullOrEmpty(entityInfo.SharePointType))
+            {
+                // Prefix API request with context url
+                postApiCall.Request = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{postApiCall.Request}";
+            }
+
+            return postApiCall;
+        }
+
+        private bool CanUseGraphBetaForAdd(ApiCall postApiCall, EntityInfo entityInfo)
+        {
+            if (postApiCall.Type == ApiType.GraphBeta && !PnPContext.GraphCanUseBeta)
+            {
+                ApiCallRequest addRequest = new ApiCallRequest(postApiCall);
+                addRequest.CancelRequest($"Adding {entityInfo.GraphGet} requires the Graph Beta endpoint which was not configured to be allowed");
+                ApiCancellationMessage(addRequest);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         #endregion
