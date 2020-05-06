@@ -15,6 +15,7 @@ namespace PnP.Core.Services
     public class PnPContext : IDisposable
     {
         private bool disposed = false;
+        private bool graphCanUseBeta = true;
 
         private readonly Lazy<IWeb> web = new Lazy<IWeb>(() =>
         {
@@ -190,8 +191,30 @@ namespace PnP.Core.Services
         /// <summary>
         /// If true than the Graph beta endpoint is used when there's no other option, default approach stays using the v1 endpoint
         /// </summary>
-        public bool GraphCanUseBeta { get; set; } = true;
-        
+        public bool GraphCanUseBeta
+        {
+            get
+            {
+                if (GraphAlwaysUseBeta)
+                {
+                    return true;
+                }
+                else
+                {
+                    return graphCanUseBeta;
+                }
+            }
+
+            set
+            {
+                if (GraphAlwaysUseBeta && value == false)
+                {
+                    throw new Exception("The GraphAlwaysUseBeta is set to true, you can't turn off the 'on-demand' beta support. First set GraphAlwaysUseBeta to false before turning of GraphCanUseBeta");
+                }
+
+                graphCanUseBeta = value;
+            }
+        }
         #endregion
 
         /// <summary>
