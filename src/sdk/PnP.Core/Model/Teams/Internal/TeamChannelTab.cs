@@ -53,7 +53,7 @@ namespace PnP.Core.Model.Teams
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(tab, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
 
-                return new ApiCall(ApiHelper.ParseApiRequest(this, baseUri), ApiType.Graph, bodyContent);
+                return new ApiCall(ApiHelper.ParseApiRequest(this, baseUri), ApiType.GraphBeta, bodyContent);
             };
         }
     }

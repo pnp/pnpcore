@@ -222,9 +222,46 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        // Since graph batching with Teams is not reliable whenever the batch size grows these tests are commented out
+        // TODO: rewrite using other Graph entities
+        //[TestMethod]
+        public async Task HandleMaxRequestsInGraphBatch2()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Get the primary channel without expression...should default to v1.0 graph
+                var team = await context.Team.GetAsync(p => p.PrimaryChannel);
+
+                // Are the expected properties populated
+                Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
+                Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.Id));
+
+                // Add 21 messages to the Channel..this triggers the batch splitting
+                for (int i = 1; i <= 21; i++)
+                {
+                    team.PrimaryChannel.Messages.Add($"Message{i}");
+                }
+                await context.ExecuteAsync();
+
+                // Try to get the beta property messages, this is a collection
+                await team.PrimaryChannel.GetAsync(p => p.Messages);
+
+                for (int i = 1; i <= 21; i++)
+                {
+                    var message = team.PrimaryChannel.Messages.FirstOrDefault(p => p.Body.Content == $"Message{i}");
+                    if (message == null)
+                    {
+                        Assert.Fail("Message was not found");
+                    }
+                }
+
+            }
+        }
+
 
         //[TestMethod]
-        public async Task HandleMaxRequestsInGraphBatch()
+        public async Task HandleMaxRequestsInGraphBatch1()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
