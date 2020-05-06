@@ -77,7 +77,7 @@ namespace PnP.Core.Model
         /// <param name="model">Implementation of the model (e.g. TeamFunSettings)</param>
         /// <param name="expression">Expression listing the property to load</param>
         /// <returns>True if property was loaded, false otherwise</returns>
-        public static bool IsPropertyAvailable<TModel>(this IComplexType model, Expression<Func<TModel, object>> expression)
+        public static bool IsPropertyAvailable<TModel>(this TModel model, Expression<Func<TModel, object>> expression)
         {
             if (model == null)
             {
