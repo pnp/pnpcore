@@ -72,25 +72,6 @@ namespace PnP.Core.Model
                             result = result.Replace("{Parent.Id}", p.Metadata[PnPConstants.MetaDataRestId]);
                         }
                     }
-
-                    /* TODO: remove after full test run
-                    if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible parent))
-                    {
-                        // Parent is a collection, so jump one level up
-                        parent = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
-                    }
-
-                    // Ensure the parent object
-                    if (parent != null)
-                    {
-                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(true);
-                    }
-
-                    if (parent.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
-                    {
-                        result = result.Replace("{Parent.Id}", parent.Metadata[PnPConstants.MetaDataRestId]);
-                    }
-                    */
                 }
 
                 // Replace {GraphId}
@@ -132,25 +113,6 @@ namespace PnP.Core.Model
                             result = result.Replace("{Parent.GraphId}", p.Metadata[PnPConstants.MetaDataGraphId]);
                         }
                     }
-
-                    /* TODO: remove after full test run
-                    if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible parent))
-                    {
-                        // Parent is a collection, so jump one level up
-                        parent = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
-                    }
-
-                    // Ensure the parent object
-                    if (parent != null)
-                    {
-                        await ((IDataModelParent)parent).EnsureParentObjectAsync().ConfigureAwait(true);
-                    }
-
-                    if (parent.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
-                    {
-                        result = result.Replace("{Parent.GraphId}", parent.Metadata[PnPConstants.MetaDataGraphId]);
-                    }
-                    */
                 }
 
                 // Replace tokens coming from the Site object connected to the current PnPContext

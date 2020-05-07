@@ -119,14 +119,6 @@ namespace PnP.Core.Model
                     parent = (model as IDataModelParent).Parent.Parent;
                 }
 
-                /*TODO: remove after full test run
-                if (!(model.Parent is IMetadataExtensible parent))
-                {
-                    // Parent is a collection, so jump one level up
-                    parent = model.Parent.Parent as IMetadataExtensible;
-                }
-                */
-
                 // Let's try to get the parent object as an IRequestable and IDataModelGet instance
                 var requestableParent = (IRequestable)parent;
                 var gettableParent = (IDataModelGet)parent;
