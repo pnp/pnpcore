@@ -202,12 +202,10 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var list1 = context.Web.Lists.GetByTitle("Site Assets", p => p.Title, p => p.NoCrawl);
-                var list1Again = context.Web.Lists.GetByTitle("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
+                var list1 = context.Web.Lists.GetByTitleLegacy("Site Assets", p => p.Title, p => p.NoCrawl);
+                var list1Again = context.Web.Lists.GetByTitleLegacy("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
                 await context.ExecuteAsync();
 
-                // PAOLO: Here we have a problem, the Requested property of
-                // context.Web.Lists should be true, but it is false
                 var siteAssetsCount = context.Web.Lists.Where(p => p.Title == "Site Assets");
 
                 // The 2 individual loads should have been merged to a single loaded list

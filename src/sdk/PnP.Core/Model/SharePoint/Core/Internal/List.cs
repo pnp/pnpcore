@@ -4,13 +4,14 @@ using System;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// List class, write your custom code here
     /// </summary>
-    [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')")]
+    [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
     [GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class List
@@ -40,6 +41,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     case "ListExperience": return JsonMappingHelper.ToEnum<ListExperience>(input.JsonElement);
                     case "ListReadingDirection": return JsonMappingHelper.ToEnum<ListReadingDirection>(input.JsonElement);
+                    case "ListTemplateType": return JsonMappingHelper.ToEnum<ListTemplateType>(input.JsonElement);
                 }
 
                 input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");

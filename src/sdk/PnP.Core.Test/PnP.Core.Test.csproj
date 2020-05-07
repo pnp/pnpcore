@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="appsettings.paolopia.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="appsettings.edogbert.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -41,9 +44,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Base\MockData\AddExpandoTests\" />
-    <Folder Include="Base\MockData\AddTests\" />
-    <Folder Include="Base\MockData\BatchClientTests\" />
+    <Folder Include="Base\MockData\" />
+    <Folder Include="QueryModel\MockData\" />
   </ItemGroup>
 
 </Project>

@@ -22,9 +22,9 @@ namespace PnP.Core.QueryModel.Model
         #region Constructors
 
         // Keep this constructor protected to avoid creation from outside
-        protected QueryableDataModelCollection(PnPContext context, IDataModelParent parent)
+        protected QueryableDataModelCollection(PnPContext context, IDataModelParent parent, string memberName = null)
         {
-            var queryService = new DataModelQueryService<TModel>(context, parent);
+            var queryService = new DataModelQueryService<TModel>(context, parent, memberName);
             this.provider = new DataModelQueryProvider<TModel>(queryService);
             this.Expression = Expression.Constant(this);
         }

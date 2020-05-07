@@ -33,7 +33,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "DeleteListViaRest";
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList == null)
                 {
@@ -78,7 +78,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 string listTitle = "DeleteListViaBatchRest";
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList == null)
                 {
@@ -127,7 +127,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "DeleteListViaExplicitBatchRest";
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList == null)
                 {
@@ -182,7 +182,7 @@ namespace PnP.Core.Test.Base
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Channels.Where(p => p.DisplayName == channelName).FirstOrDefault();
+                var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
@@ -230,7 +230,7 @@ namespace PnP.Core.Test.Base
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Channels.Where(p => p.DisplayName == channelName).FirstOrDefault();
+                var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {
@@ -282,7 +282,7 @@ namespace PnP.Core.Test.Base
                 string channelName = $"Channel test {new Random().Next()}";
 
                 // Find first updatable channel
-                var channelToDelete = team.Channels.Where(p => p.DisplayName == channelName).FirstOrDefault();
+                var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
                 if (channelToDelete == null)
                 {

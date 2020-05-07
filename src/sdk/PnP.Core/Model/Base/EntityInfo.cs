@@ -21,9 +21,6 @@ namespace PnP.Core.Model
         /// <param name="entityInfo">An instance of EntityInfo to construct the new EntityInfo from</param>
         internal EntityInfo(EntityInfo entityInfo)
         {
-            // PAOLO: the previous code copied a reference to the items and as such
-            // the collection of fields was not unique, but shared across instances
-            // between the static type instance and the non-static type instance
             entityInfo.Fields.ForEach(f => Fields.Add((EntityFieldInfo)f.Clone()));
 
             SharePointType = entityInfo.SharePointType;
@@ -32,6 +29,8 @@ namespace PnP.Core.Model
             GraphBeta = entityInfo.GraphBeta;
             GraphGet = entityInfo.GraphGet;
             SharePointGet = entityInfo.SharePointGet;
+            GraphLinqGet = entityInfo.GraphLinqGet;
+            SharePointLinqGet = entityInfo.SharePointLinqGet;
             UseOverflowField = entityInfo.UseOverflowField;
             SharePointOverflowProperty = entityInfo.SharePointOverflowProperty;
             GraphOverflowProperty = entityInfo.GraphOverflowProperty;
@@ -77,6 +76,16 @@ namespace PnP.Core.Model
         internal string SharePointGet { get; set; }
 
         /// <summary>
+        /// API call for a Graph LINQ get
+        /// </summary>
+        internal string GraphLinqGet { get; set; }
+
+        /// <summary>
+        /// API call for a REST LINQ get
+        /// </summary>
+        internal string SharePointLinqGet { get; set; }
+
+        /// <summary>
         /// Indicates if this class must be handled as a generic dictionary by populating data in the provided field
         /// </summary>
         internal bool UseOverflowField { get; set; }
@@ -120,7 +129,6 @@ namespace PnP.Core.Model
         {
             get
             {
-                // PAOLO: Optimized logic and cached result
                 if (_sharePointKeyField == null)
                 {
                     _sharePointKeyField = Fields.FirstOrDefault(f => f.IsSharePointKey);
@@ -138,7 +146,6 @@ namespace PnP.Core.Model
         {
             get
             {
-                // PAOLO: Optimized logic and cached result
                 if (_graphKeyField == null)
                 {
                     _graphKeyField = Fields.FirstOrDefault(f => f.IsGraphKey);
@@ -156,7 +163,6 @@ namespace PnP.Core.Model
         {
             get
             {
-                // PAOLO: Cached result
                 if (_graphNonExpandableCollections == null)
                 {
                     _graphNonExpandableCollections =
@@ -165,10 +171,6 @@ namespace PnP.Core.Model
                 return _graphNonExpandableCollections;
             }
         }
-
-        // PAOLO: I changed the name of the following 2 props because "Filtered" could
-        // be misleading and let people think about the $filter clause, while here we
-        // are talking about loading properties through the remote API
 
         /// <summary>
         /// Was there an expression provided to build up the fields lists of this entity
@@ -192,8 +194,6 @@ namespace PnP.Core.Model
                 {
                     return true;
                 }
-
-                // PAOLO: Simplified for better maintenance
 
                 // get collection of fields that need to be loaded
                 return Fields

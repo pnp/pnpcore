@@ -97,7 +97,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (!HasValue(nameof(Items)))
                 {
-                    var items = new ListItemCollection(this.PnPContext, this);
+                    var items = new ListItemCollection(this.PnPContext, this, nameof(Items));
                     SetValue(items);
                 }
                 return GetValue<IListItemCollection>();

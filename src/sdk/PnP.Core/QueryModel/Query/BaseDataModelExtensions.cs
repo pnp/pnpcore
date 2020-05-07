@@ -47,12 +47,14 @@ namespace PnP.Core.QueryModel.Query
 
         #region Public extension methods for IQueryable<TResult>
 
+        #region Include implementation
+
         /// <summary>
         /// Extension method to declare the collection properties to expand while querying the REST service
         /// </summary>
         /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="collection">The collection of items to expand properties from</param>
-        /// <param name="selector">An array of selectors for the expandable properties</param>
+        /// <param name="source">The collection of items to expand properties from</param>
+        /// <param name="selector">A selector for the expandable properties</param>
         /// <returns>The resulting collection</returns>
         public static IQueryable<TResult> Include<TResult>(
             this IQueryable<TResult> source, Expression<Func<TResult, object>> selector)
@@ -78,8 +80,8 @@ namespace PnP.Core.QueryModel.Query
         /// Extension method to declare the collection properties to expand while querying the REST service
         /// </summary>
         /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="collection">The collection of items to expand properties from</param>
-        /// <param name="selector">An array of selectors for the expandable properties</param>
+        /// <param name="source">The collection of items to expand properties from</param>
+        /// <param name="selectors">An array of selectors for the expandable properties</param>
         /// <returns>The resulting collection</returns>
         public static IQueryable<TResult> Include<TResult>(
             this IQueryable<TResult> source, params Expression<Func<TResult, object>>[] selectors)
@@ -103,11 +105,15 @@ namespace PnP.Core.QueryModel.Query
             return result;
         }
 
+        #endregion
+
+        #region Load implementation
+
         /// <summary>
         /// Extension method to declare a field/metadata property to load while executing the REST query
         /// </summary>
         /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="collection">The collection of items to load the field/metadata from</param>
+        /// <param name="source">The collection of items to load the field/metadata from</param>
         /// <param name="selector">A selector for a field/metadata</param>
         /// <returns>The resulting collection</returns>
         public static IQueryable<TResult> Load<TResult>(
@@ -134,7 +140,7 @@ namespace PnP.Core.QueryModel.Query
         /// Extension method to declare the fields/metadata properties to load while executing the REST query
         /// </summary>
         /// <typeparam name="TResult">The type of the target entity</typeparam>
-        /// <param name="collection">The collection of items to load fields/metadata from</param>
+        /// <param name="source">The collection of items to load fields/metadata from</param>
         /// <param name="selectors">An array of selectors for the fields/metadata</param>
         /// <returns>The resulting collection</returns>
         public static IQueryable<TResult> Load<TResult>(
@@ -158,6 +164,66 @@ namespace PnP.Core.QueryModel.Query
 
             return result;
         }
+
+        #endregion
+
+        #region GetByTitle for Lists implementation
+
+        /// <summary>
+        /// Extension method to select a list (IList) by title
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="title">The title to search for</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static PnP.Core.Model.SharePoint.IList GetByTitle(
+            this IQueryable<PnP.Core.Model.SharePoint.IList> source, string title)
+        {
+            // Just rely on the below overload, without providing any selector
+            return GetByTitle(source, title, null);
+        }
+
+        /// <summary>
+        /// Extension method to select a list (IList) by title
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static PnP.Core.Model.SharePoint.IList GetByTitle(
+            this IQueryable<PnP.Core.Model.SharePoint.IList> source, 
+            string title, 
+            params Expression<Func<PnP.Core.Model.SharePoint.IList, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (title is null)
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            IQueryable<PnP.Core.Model.SharePoint.IList> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<PnP.Core.Model.SharePoint.IList, bool>> predicate = l => l.Title == title;
+
+            return source.Provider.Execute<PnP.Core.Model.SharePoint.IList>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    ));
+        }
+
+        #endregion
 
         #endregion
     }

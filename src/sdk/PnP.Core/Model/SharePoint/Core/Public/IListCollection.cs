@@ -24,7 +24,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="title">Title of the list to get</param>
         /// <returns>Loaded list, null is not found</returns>
-        public IList GetByTitle(string title, params Expression<Func<IList, object>>[] expressions);
+        public IList GetByTitleLegacy(string title, params Expression<Func<IList, object>>[] expressions);
 
         /// <summary>
         /// Adds a new list

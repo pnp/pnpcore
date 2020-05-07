@@ -33,7 +33,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.Lists);
 
                 string listTitle = "Documents";
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -77,7 +77,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 string listTitle = "Documents";
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -125,7 +125,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "Documents";
-                var myList = web.Lists.Where(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
@@ -177,7 +177,7 @@ namespace PnP.Core.Test.Base
                 var team = await context.Team.GetAsync(p => p.Channels);
 
                 // Find first updatable channel
-                var channelToUpdate = team.Channels.Where(p => p.DisplayName != "General").FirstOrDefault();
+                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName != "General");
 
                 if (channelToUpdate == null)
                 {
@@ -215,7 +215,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync();
 
                 // Find first updatable channel
-                var channelToUpdate = team.Channels.Where(p => p.DisplayName != "General").FirstOrDefault();
+                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName != "General");
 
                 if (channelToUpdate == null)
                 {
@@ -257,7 +257,7 @@ namespace PnP.Core.Test.Base
                 await context.ExecuteAsync(batch);
 
                 // Find first updatable channel
-                var channelToUpdate = team.Channels.Where(p => p.DisplayName != "General").FirstOrDefault();
+                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName != "General");
 
                 if (channelToUpdate == null)
                 {

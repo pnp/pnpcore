@@ -100,6 +100,13 @@ namespace PnP.Core.Model
             {
                 // Find the model field linked to this field
                 EntityFieldInfo entityField = LookupEntityField(entity, apiResponse, property);
+
+                // Do we need to re-parent this json mapping to a non expandable collection in the current model?
+                if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("results"))
+                {
+                    entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
+                }
+
                 // Entity field should be populated for the actual fields we've requested
                 if (entityField != null)
                 {
@@ -111,8 +118,23 @@ namespace PnP.Core.Model
                         // Cast object to call the needed methods on it (e.g. ListCollection)
                         var typedCollection = propertyToSetValue as IManageableCollection;
 
-                        // Expanded objects are under the results property
-                        if (property.Value.TryGetProperty("results", out JsonElement resultsProperty))
+                        // Try to get the results property, start with a default value
+                        JsonElement resultsProperty = default(JsonElement);
+
+                        // If the property is named "results" and is of type Array, it means it is a collection of items
+                        if (property.Name == "results" && property.Value.ValueKind == JsonValueKind.Array)
+                        {
+                            // and we use it directly
+                            resultsProperty = property.Value;
+                        }
+                        else
+                        {
+                            // otherwise we try to get the child property called "results", if any
+                            property.Value.TryGetProperty("results", out resultsProperty);
+                        }
+
+                        // Expanded objects are under the results property, if any (i.e. it is not the default one)
+                        if (!resultsProperty.Equals(default(JsonElement)))
                         {
                             PropertyInfo pnpChildIdProperty = null;
                             foreach (var childJson in resultsProperty.EnumerateArray())
@@ -314,7 +336,7 @@ namespace PnP.Core.Model
                 // Do we need to re-parent this json mapping to a non expandable collection in the current model?
                 if (!string.IsNullOrEmpty(apiResponse.ApiCall.ReceivingProperty) && property.NameEquals("value"))
                 {
-                    entityField = entity.Fields.Where(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                    entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(apiResponse.ApiCall.ReceivingProperty, StringComparison.InvariantCultureIgnoreCase));
                 }
 
                 // Entity field should be populate for the actual fields we've requested
@@ -567,7 +589,7 @@ namespace PnP.Core.Model
                     {
                         EntityFieldInfo id = null;
                         PropertyInfo idField = null;
-                        id = entity.Fields.Where(p => p.IsSharePointKey).FirstOrDefault();
+                        id = entity.Fields.FirstOrDefault(p => p.IsSharePointKey);
                         if (id != null)
                         {
                             idField = pnpObject.GetType().GetProperty(id.Name);

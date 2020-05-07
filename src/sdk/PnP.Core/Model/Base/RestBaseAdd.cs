@@ -26,8 +26,6 @@ namespace PnP.Core.Model
         internal RestBaseAdd(BaseDataModel<TModel> model)
         {
             // Get entity information for the entity to load
-
-            // PAOLO: Moved the logic to handle the ClassInfo into the singleton EntityManager
             var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(model.GetType());
 
             // Each model that can be handled via SharePoint rest does need to have it's type defined, so populate that by default

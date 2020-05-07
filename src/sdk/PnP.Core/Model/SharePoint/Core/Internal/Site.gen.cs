@@ -49,10 +49,6 @@ namespace PnP.Core.Model.SharePoint
 
         public IWebCollection AllWebs
         {
-            // PAOLO: Do we need to use TransientObject GetValue/SetValue here?
-            // PAOLO: Here, and almost everywhere, we don't have code to guarantee
-            // thread safety for instance members, which is the OOB behavior of Microsoft
-            // libraries, too ... but just to keep it in mind ...
             get
             {
                 if (allWebs == null)

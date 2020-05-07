@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
 {
     internal partial class ListCollection
     {
-        public IList GetByTitle(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
+        public IList GetByTitleLegacy(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
             // Was this list previously loaded?
             if (!(items.FirstOrDefault(p => p.IsPropertyAvailable(p => p.Title) && p.Title.Equals(title, StringComparison.InvariantCultureIgnoreCase)) is List listToLoad))
@@ -20,9 +20,9 @@ namespace PnP.Core.Model.SharePoint
             return listToLoad.GetByTitle(batch, title, expressions);
         }
 
-        public IList GetByTitle(string title, params Expression<Func<IList, object>>[] expressions)
+        public IList GetByTitleLegacy(string title, params Expression<Func<IList, object>>[] expressions)
         {
-            return GetByTitle(PnPContext.CurrentBatch, title, expressions);
+            return GetByTitleLegacy(PnPContext.CurrentBatch, title, expressions);
         }
 
         public async Task<IList> GetByTitleAsync(string title, params Expression<Func<IList, object>>[] expressions)
