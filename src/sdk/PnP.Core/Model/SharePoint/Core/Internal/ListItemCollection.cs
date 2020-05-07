@@ -8,8 +8,8 @@ namespace PnP.Core.Model.SharePoint
 {
     internal partial class ListItemCollection
     {
-        public ListItemCollection(PnPContext context, IDataModelParent parent)
-            : base(context, parent)
+        public ListItemCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
         {
             this.PnPContext = context;
             this.Parent = parent;

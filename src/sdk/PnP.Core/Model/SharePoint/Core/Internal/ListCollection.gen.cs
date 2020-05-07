@@ -9,8 +9,8 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     internal partial class ListCollection : QueryableDataModelCollection<IList>, IListCollection
     {
-        public ListCollection(PnPContext context, IDataModelParent parent)
-            : base(context, parent)
+        public ListCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
         {
             this.PnPContext = context;
             this.Parent = parent;
