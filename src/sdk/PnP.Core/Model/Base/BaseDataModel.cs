@@ -59,11 +59,6 @@ namespace PnP.Core.Model
         public Dictionary<string, string> Metadata { get; } = new Dictionary<string, string>();
 
         /// <summary>
-        /// Dictionary to access the domain model object Deferred properties
-        /// </summary>
-        public Dictionary<string, string> Deferred { get; } = new Dictionary<string, string>();
-
-        /// <summary>
         /// PnP Context
         /// </summary>
         [SystemProperty]

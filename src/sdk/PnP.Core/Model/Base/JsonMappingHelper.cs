@@ -1,5 +1,4 @@
-﻿using PnP.Core.Model.SharePoint;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -177,9 +176,9 @@ namespace PnP.Core.Model
                             //    "uri": "https://bertonline.sharepoint.com/sites/modern/_api/site/RootWeb/WorkflowAssociations"
                             //}
 
-                            if (!metadataBasedObject.Deferred.ContainsKey(entityField.Name))
+                            if (!metadataBasedObject.Metadata.ContainsKey(entityField.Name))
                             {
-                                metadataBasedObject.Deferred.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
+                                metadataBasedObject.Metadata.Add(entityField.Name, deferredProperty.GetProperty("uri").GetString());
                             }
                         }
                     }
@@ -320,13 +319,15 @@ namespace PnP.Core.Model
                 // Entity field should be populate for the actual fields we've requested
                 if (entityField != null)
                 {
-                    // Are we loading a collection (e.g. Web.Lists)?
+                    // Are we loading a collection (e.g. Team.Channels)?
                     if (IsModelCollection(entityField.PropertyInfo.PropertyType))
                     {
                         // Get the actual current value of the property we're setting...as that allows to detect it's type
                         var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
-                        // Cast object to call the needed methods on it (e.g. ListCollection)
+                        // Cast object to call the needed methods on it (e.g. TeamChannelCollection)
                         var typedCollection = propertyToSetValue as IManageableCollection;
+                        // Cast object to handle metadata on the collection
+                        var typedMetaDataCollection = propertyToSetValue as IMetadataExtensible;
 
                         // expanded objects are under the results property
                         PropertyInfo pnpChildIdProperty = null;

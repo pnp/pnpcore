@@ -3,14 +3,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model
 {
     /// <summary>
     /// Base abstract class for every Domain Model objects collection
     /// </summary>
-    internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>
+    internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging, IMetadataExtensible
     {
+        /// <summary>
+        /// Dictionary to access the domain model object Metadata
+        /// </summary>
+        public Dictionary<string, string> Metadata { get; } = new Dictionary<string, string>();
+
         /// <summary>
         /// List of items in the collection
         /// </summary>
@@ -190,5 +196,19 @@ namespace PnP.Core.Model
         {
             return this.Remove((TModel)item);
         }
+
+        #region Paging
+        
+        public Task GetNextPageAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task GetAllPagesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
