@@ -8,6 +8,14 @@ namespace PnP.Core.Model
     public interface ISupportPaging
     {
         /// <summary>
+        /// Determines whether paging is possible
+        /// </summary>
+        bool CanPage
+        {
+            get;
+        }
+
+        /// <summary>
         /// Gets the next page in a series
         /// </summary>
         /// <returns></returns>

@@ -94,6 +94,9 @@ namespace PnP.Core.Model
             // variable to capture the id value
             string idFieldValue = null;
 
+            // collect metadata
+            Dictionary<string, string> metadata = new Dictionary<string, string>();
+
             // Enumerate the received properties and try to map them to the model
             foreach (var property in apiResponse.JsonElement.EnumerateObject())
             {
@@ -239,7 +242,7 @@ namespace PnP.Core.Model
                     // Let's also store the EntityTypeName value as metadata as it's usefull for constructing future rest calls
                     else if (property.Name == "EntityTypeName")
                     {
-                        TrackMetaData(metadataBasedObject, property);
+                        TrackMetaData(metadataBasedObject, property, ref metadata);
                     }
                     else if (useOverflowField)
                     {
@@ -326,6 +329,9 @@ namespace PnP.Core.Model
             // variable to capture the id value
             string idFieldValue = null;
 
+            // collect metadata
+            Dictionary<string, string> metadata = new Dictionary<string, string>();
+
             // Enumerate the received properties and try to map them to the model
             foreach (var property in apiResponse.JsonElement.EnumerateObject())
             {
@@ -350,6 +356,22 @@ namespace PnP.Core.Model
                         var typedCollection = propertyToSetValue as IManageableCollection;
                         // Cast object to handle metadata on the collection
                         var typedMetaDataCollection = propertyToSetValue as IMetadataExtensible;
+
+                        // copy over collected metadata to collection
+                        if (metadata.Count > 0)
+                        {
+                            foreach(var data in metadata)
+                            {
+                                if (typedMetaDataCollection.Metadata.ContainsKey(data.Key))
+                                {
+                                    typedMetaDataCollection.Metadata[data.Key] = data.Value;
+                                }
+                                else
+                                {
+                                    typedMetaDataCollection.Metadata.Add(data.Key, data.Value);
+                                }
+                            }
+                        }
 
                         // expanded objects are under the results property
                         PropertyInfo pnpChildIdProperty = null;
@@ -495,7 +517,7 @@ namespace PnP.Core.Model
                                 // Let's keep track of the object metadata, useful when creating new requests
                                 if (overflowField.Name.StartsWith("@odata.", StringComparison.InvariantCultureIgnoreCase))
                                 {
-                                    TrackMetaData(metadataBasedObject, overflowField);
+                                    TrackMetaData(metadataBasedObject, overflowField, ref metadata);
                                 }
                                 else
                                 {
@@ -542,7 +564,7 @@ namespace PnP.Core.Model
                     // Let's keep track of the object metadata, useful when creating new requests
                     if (property.Name.StartsWith("@odata.", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        TrackMetaData(metadataBasedObject, property);
+                        TrackMetaData(metadataBasedObject, property, ref metadata);
                     }
                     else if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.GraphId))
                     {
@@ -1041,11 +1063,16 @@ namespace PnP.Core.Model
             return (propertyType.IsGenericType && (propertyType.GetGenericTypeDefinition() == typeof(List<>)));
         }
 
-        internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property)
+        internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property, ref Dictionary<string,string> metadata)
         {
             if (!target.Metadata.ContainsKey(property.Name))
             {
                 target.Metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
+            }
+
+            if (!metadata.ContainsKey(property.Name))
+            {
+                metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
             }
         }
 
