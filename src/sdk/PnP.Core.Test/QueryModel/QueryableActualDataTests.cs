@@ -14,7 +14,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestQueryLists()
         {
-            // TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var query = (from l in context.Web.Lists
@@ -24,19 +24,19 @@ namespace PnP.Core.Test.QueryModel
                 var queryResult = query.ToList();
 
                 Assert.IsNotNull(queryResult);
-                Assert.AreEqual(17, queryResult.Count);
+                Assert.IsTrue(queryResult.Count >= 5);
             }
         }
 
         [TestMethod]
         public void TestQueryItems()
         {
-            var expectedListItemTitle = "Sample Document 01";
+            var expectedListItemTitle = "Home";
 
-            // TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var query = (from i in context.Web.Lists.GetByTitle("Documents").Items
+                var query = (from i in context.Web.Lists.GetByTitle("Site Pages").Items
                              where i.Title == expectedListItemTitle
                              select i)
                              .Load(l => l.Id, l => l.Title);
