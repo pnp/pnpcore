@@ -7,7 +7,7 @@ namespace PnP.Core.Model
     /// </summary>
     /// <typeparam name="TModel">The actual type of the Domain Model objects</typeparam>
 
-    public interface IDataModelCollection<TModel> : ICollection<TModel>, IDataModelParent, IDataModelWithContext, IRequestableCollection
+    public interface IDataModelCollection<TModel> : IEnumerable<TModel>, IDataModelParent, IDataModelWithContext, IRequestableCollection
     {
     }
 }

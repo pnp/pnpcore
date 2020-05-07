@@ -99,7 +99,7 @@ namespace PnP.Core.QueryModel.Query
 
                     // var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointLinqGet.Replace("{Parent.Id}", ((IDataModelWithKey)this.parent).Key.ToString())}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
                     var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
-                    requestUrl = TokensHandler.ResolveTokens(concreteEntity as IMetadataExtensible, requestUrl).GetAwaiter().GetResult();
+                    requestUrl = Core.Model.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).GetAwaiter().GetResult();
 
                     this.context.CurrentBatch.Add(
                         this.parent as TransientObject,

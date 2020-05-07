@@ -10,7 +10,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Handler class to help managing tokens replacement
     /// </summary>
-    public static class TokensHandler
+    internal static class TokenHandler
     {
         /// <summary>
         /// Method to resolve a set of tokens in a provided tokenized string
@@ -18,7 +18,7 @@ namespace PnP.Core.Model
         /// <param name="tokenizedValue">A string with tokens</param>
         /// <param name="pnpObject">The domain model object to use as the target reference</param>
         /// <returns>The string with tokens resolved</returns>
-        public static async Task<string> ResolveTokens(IMetadataExtensible pnpObject, string tokenizedValue)
+        public static async Task<string> ResolveTokensAsync(IMetadataExtensible pnpObject, string tokenizedValue)
         {
             // Define the result variable
             string result = tokenizedValue;

@@ -44,19 +44,19 @@ namespace PnP.Core.Test.QueryModel
                              select i)
                              .Load(l => l.Id, l => l.Title);
 
-                var queryResult = new System.Collections.Generic.List<IListItem>(query);
+                var queryResult = query.ToList(); // new System.Collections.Generic.List<IListItem>(query);
 
                 foreach (var i in query)
                 {
                     Assert.IsNotNull(i);
                 }
 
-                //var query2 = context.Web.Lists.Where(l => l.Title == "Something");
+                var query2 = context.Web.GetAsync(w => w.Lists).GetAwaiter().GetResult(); // .Lists.Where(l => l.Title == "Something");
 
-                //foreach (var i in query2)
-                //{
-                //    Assert.IsNotNull(i);
-                //}
+                foreach (var i in query2.Lists)
+                {
+                    Assert.IsNotNull(i);
+                }
 
                 //Assert.IsTrue(true);
                 //Assert.IsNotNull(queryResult);
