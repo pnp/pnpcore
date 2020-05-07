@@ -12,6 +12,8 @@ namespace PnP.Core.Model
     /// </summary>
     internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging, IMetadataExtensible
     {
+        #region Core properties
+
         /// <summary>
         /// Dictionary to access the domain model object Metadata
         /// </summary>
@@ -46,6 +48,10 @@ namespace PnP.Core.Model
         public int Length => this.items.Count;
 
         public System.Collections.IEnumerable RequestedItems { get => this.items; }
+
+        #endregion
+
+        #region ICollection methods
 
         /// <summary>
         /// Standard add method to add a model to the collection
@@ -111,6 +117,10 @@ namespace PnP.Core.Model
 
             return items.Remove(item);
         }
+
+        #endregion
+
+        #region Items management methods
 
         /// <summary>
         /// Purges the items marked as deleted

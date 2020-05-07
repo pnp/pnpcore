@@ -67,6 +67,7 @@ namespace PnP.Core.Model
                         classInfo.SharePointType = sharePointTypeAttribute.Type;
                         classInfo.SharePointUri = sharePointTypeAttribute.Uri;
                         classInfo.SharePointGet = !string.IsNullOrEmpty(sharePointTypeAttribute.Get) ? sharePointTypeAttribute.Get : sharePointTypeAttribute.Uri;
+                        classInfo.SharePointLinqGet = !string.IsNullOrEmpty(sharePointTypeAttribute.LinqGet) ? sharePointTypeAttribute.LinqGet : sharePointTypeAttribute.Uri;
                         classInfo.SharePointOverflowProperty = sharePointTypeAttribute.OverflowProperty;
                         classInfo.SharePointUpdate = !string.IsNullOrEmpty(sharePointTypeAttribute.Update) ? sharePointTypeAttribute.Update : sharePointTypeAttribute.Update;
                         classInfo.SharePointDelete = !string.IsNullOrEmpty(sharePointTypeAttribute.Delete) ? sharePointTypeAttribute.Delete : sharePointTypeAttribute.Delete;
@@ -76,6 +77,7 @@ namespace PnP.Core.Model
                     {
                         classInfo.GraphId = !string.IsNullOrEmpty(graphTypeAttribute.Id) ? graphTypeAttribute.Id : "id";
                         classInfo.GraphGet = !string.IsNullOrEmpty(graphTypeAttribute.Get) ? graphTypeAttribute.Get : graphTypeAttribute.Uri;
+                        classInfo.GraphLinqGet = !string.IsNullOrEmpty(graphTypeAttribute.LinqGet) ? graphTypeAttribute.Get : graphTypeAttribute.Uri;
                         classInfo.GraphOverflowProperty = graphTypeAttribute.OverflowProperty;
                         classInfo.GraphUpdate = !string.IsNullOrEmpty(graphTypeAttribute.Update) ? graphTypeAttribute.Update : graphTypeAttribute.Uri;
                         classInfo.GraphDelete = !string.IsNullOrEmpty(graphTypeAttribute.Delete) ? graphTypeAttribute.Delete : graphTypeAttribute.Uri;
@@ -202,8 +204,9 @@ namespace PnP.Core.Model
         /// Creates a concrete instance of a domain model type based on the reference type
         /// </summary>
         /// <param name="type">The reference model type, can be an interface or a class</param>
+        /// <param name="parent">Parent of the domain model object, optional</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal object GetEntityConcreteInstance<TModel>(Type type)
+        internal object GetEntityConcreteInstance<TModel>(Type type, IDataModelParent parent = null)
         {
             if (type is null)
             {
@@ -211,8 +214,14 @@ namespace PnP.Core.Model
             }
 
             type = GetEntityConcreteType(type);
+            var result = (TModel)Activator.CreateInstance(type);
 
-            return (TModel)Activator.CreateInstance(type);
+            if (result is IDataModelParent modelWithParent)
+            {
+                modelWithParent.Parent = parent;
+            }
+
+            return result;
         }
 
         /// <summary>

@@ -19,6 +19,11 @@ namespace PnP.Core.Model
         public string Uri { get; set; }
 
         /// <summary>
+        /// Get LINQ query API URI, overrides the global SharePointURI when specified
+        /// </summary>
+        public string LinqGet { get; set; }
+
+        /// <summary>
         /// Get API URI, overrides the global GraphURI when specified
         /// </summary>
         public string Get { get; set; }

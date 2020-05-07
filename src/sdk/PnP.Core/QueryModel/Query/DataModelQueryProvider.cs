@@ -45,7 +45,7 @@ namespace PnP.Core.QueryModel.Query
             var query = this.Translate(expression);
 
             // Execute the query via the target Query Service
-            return queryService.ExecuteQuery(query);
+            return queryService.ExecuteQuery(expression.Type, query);
         }
 
         public override IQueryable CreateQuery(Expression expression)

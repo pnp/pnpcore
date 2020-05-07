@@ -407,14 +407,20 @@ namespace PnP.Core.Model
 
             // Can we use Microsoft Graph for this GET request?
 
-            // PAOLO: The following syntax is more efficient because it skips any not needed check
+            bool useGraph = PnPContext.GraphFirst &&    // See if Graph First is enabled/configured
+                !forceSPORest &&                        // and if we are not forced to use SPO REST
+                entity.CanUseGraphGet;                  // and if the entity supports GET via Graph 
 
-            bool useGraph = (PnPContext.GraphFirst &&           // See if Graph First is enabled/configured
-                !forceSPORest &&                                // and if we are not forced to use SPO REST
-                entity.CanUseGraphGet ||                           // and if the entity supports GET via Graph 
-                (!apiOverride.Equals(default(ApiCall)) &&
-                    apiOverride.Type == ApiType.Graph)) ||      // and if there isn't an overriding request, otherwise we use what is set in the query override
-                string.IsNullOrEmpty(entity.SharePointType);    // or if there isn't a SPO rest setting, we need to forcibly fallback to Graph
+            // If entity cannot be surfaced with SharePoint Rest then force graph
+            if (string.IsNullOrEmpty(entity.SharePointType))
+            {
+                useGraph = true;
+            }
+            // Else if we've overriden the query then simply take what was set in the query override
+            else if (!apiOverride.Equals(default(ApiCall)))
+            {
+                useGraph = apiOverride.Type == ApiType.Graph;
+            }
 
             if (useGraph)
             {

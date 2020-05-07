@@ -3,7 +3,7 @@
     "PnP.Core.Test": {
       "commandName": "Project",
       "environmentVariables": {
-        "Hosting:EnvironmentName": "bertonline"
+        "Hosting:EnvironmentName": "paolopia"
       }
     }
   }
