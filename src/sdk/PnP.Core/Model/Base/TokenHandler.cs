@@ -50,6 +50,30 @@ namespace PnP.Core.Model
                     // there's either a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
                     // or
                     // the parent is model class itself (e.g. Web --> Site.RootWeb)
+
+                    var parent = (pnpObject as IDataModelParent).Parent;
+
+                    if (parent is IManageableCollection)
+                    {
+                        // Parent is a collection, so jump one level up
+                        parent = (pnpObject as IDataModelParent).Parent.Parent;
+                    }
+
+                    // Ensure the parent object
+                    if (parent != null)
+                    {
+                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(true);
+                    }
+
+                    if (parent is IMetadataExtensible p)
+                    {
+                        if (p.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                        {
+                            result = result.Replace("{Parent.Id}", p.Metadata[PnPConstants.MetaDataRestId]);
+                        }
+                    }
+
+                    /* TODO: remove after full test run
                     if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible parent))
                     {
                         // Parent is a collection, so jump one level up
@@ -66,6 +90,7 @@ namespace PnP.Core.Model
                     {
                         result = result.Replace("{Parent.Id}", parent.Metadata[PnPConstants.MetaDataRestId]);
                     }
+                    */
                 }
 
                 // Replace {GraphId}
@@ -85,6 +110,30 @@ namespace PnP.Core.Model
                     // there's either a collection object inbetween (e.g. TeamChannel --> TeamChannelCollection --> Team), so take the parent of the parent
                     // or
                     // the parent is model class itself (e.g. TeamChannel --> Team.PrimaryChannel)
+
+                    var parent = (pnpObject as IDataModelParent).Parent;
+
+                    if (parent is IManageableCollection)
+                    {
+                        // Parent is a collection, so jump one level up
+                        parent = (pnpObject as IDataModelParent).Parent.Parent;
+                    }
+
+                    // Ensure the parent object
+                    if (parent != null)
+                    {
+                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(true);
+                    }
+
+                    if (parent is IMetadataExtensible p)
+                    {
+                        if (p.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                        {
+                            result = result.Replace("{Parent.GraphId}", p.Metadata[PnPConstants.MetaDataGraphId]);
+                        }
+                    }
+
+                    /* TODO: remove after full test run
                     if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible parent))
                     {
                         // Parent is a collection, so jump one level up
@@ -101,6 +150,7 @@ namespace PnP.Core.Model
                     {
                         result = result.Replace("{Parent.GraphId}", parent.Metadata[PnPConstants.MetaDataGraphId]);
                     }
+                    */
                 }
 
                 // Replace tokens coming from the Site object connected to the current PnPContext
