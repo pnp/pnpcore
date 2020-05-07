@@ -14,7 +14,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestQueryLists()
         {
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var query = (from l in context.Web.Lists
@@ -33,7 +33,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expectedListItemTitle = "Home";
 
-            TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var query = (from i in context.Web.Lists.GetByTitle("Site Pages").Items
