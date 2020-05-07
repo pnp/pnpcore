@@ -46,6 +46,11 @@ namespace PnP.Core.Model.Teams
         /// Tabs in this Channel
         /// </summary>
         public ITeamChannelTabCollection Tabs { get; }
+
+        /// <summary>
+        /// Messages in this Team Channel
+        /// </summary>
+        public ITeamChatMessageCollection Messages { get; }
     }
 
     /// <summary>
