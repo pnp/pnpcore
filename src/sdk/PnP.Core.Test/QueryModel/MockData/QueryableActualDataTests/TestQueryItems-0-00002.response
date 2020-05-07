@@ -1,9 +1,9 @@
---batchresponse_7176817a-c0bf-4207-8cd6-1a4f4f5538e4
+--batchresponse_027988c0-0eaf-4fed-9cfd-f63afed85c9b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"15c5ff83-5b2f-4d0b-b536-74dec3178053","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f623a809-eb28-404b-b4d3-00db80239ee9')/Items(105)","etag":"\"2\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":105,"Title":"Sample Document 01","ID":105}]}}
---batchresponse_7176817a-c0bf-4207-8cd6-1a4f4f5538e4--
+{"d":{"results":[{"__metadata":{"id":"ddcc98fc-5a24-44b5-a5d1-cafd216f10d1","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'529b1d62-8f36-44b7-83da-75d1b4433ecb')/Items(1)","etag":"\"3\"","type":"SP.Data.SitePagesItem"},"Id":1,"Title":"Home","ID":1}]}}
+--batchresponse_027988c0-0eaf-4fed-9cfd-f63afed85c9b--
