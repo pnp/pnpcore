@@ -207,8 +207,10 @@ namespace PnP.Core.Model
             return this.Remove((TModel)item);
         }
 
+        #endregion
+
         #region Paging
-        
+
         public Task GetNextPageAsync()
         {
             throw new NotImplementedException();
