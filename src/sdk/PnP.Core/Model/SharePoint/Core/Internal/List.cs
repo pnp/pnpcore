@@ -41,6 +41,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     case "ListExperience": return JsonMappingHelper.ToEnum<ListExperience>(input.JsonElement);
                     case "ListReadingDirection": return JsonMappingHelper.ToEnum<ListReadingDirection>(input.JsonElement);
+                    case "ListTemplateType": return JsonMappingHelper.ToEnum<ListTemplateType>(input.JsonElement);
                 }
 
                 input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");

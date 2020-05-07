@@ -4,6 +4,7 @@ using PnP.Core.QueryModel.Query;
 using System;
 using PnP.Core.Test.Utilities;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Model.SharePoint.Core;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -18,48 +19,37 @@ namespace PnP.Core.Test.QueryModel
             {
                 var query = (from l in context.Web.Lists
                              select l)
-                            // .Where(l => l.Title == "Shared Documents")
                             .Load(l => l.Id, l => l.Title, l => l.Description);
 
                 var queryResult = query.ToList();
 
-                foreach (var l in query)
-                {
-                    Assert.IsNotNull(l);
-                }
-
-                //Assert.IsTrue(true);
-                //Assert.IsNotNull(queryResult);
+                Assert.IsNotNull(queryResult);
+                Assert.AreEqual(17, queryResult.Count);
             }
         }
 
         [TestMethod]
         public void TestQueryItems()
         {
-            TestCommon.Instance.Mocking = false;
+            var expectedListItemTitle = "Sample Document 01";
+
+            // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var query = (from i in context.Web.Lists.GetByTitle("Documents").Items
-                             where i.Title == "Sample Document 01"
+                             where i.Title == expectedListItemTitle
                              select i)
                              .Load(l => l.Id, l => l.Title);
 
-                var queryResult = query.ToList(); // new System.Collections.Generic.List<IListItem>(query);
+                var queryResult = query.ToList();
 
-                foreach (var i in query)
-                {
-                    Assert.IsNotNull(i);
-                }
+                // Ensure that we have 1 list in the collection of lists
+                Assert.AreEqual(1, context.Web.Lists.Length);
 
-                var query2 = context.Web.GetAsync(w => w.Lists).GetAwaiter().GetResult(); // .Lists.Where(l => l.Title == "Something");
-
-                foreach (var i in query2.Lists)
-                {
-                    Assert.IsNotNull(i);
-                }
-
-                //Assert.IsTrue(true);
-                //Assert.IsNotNull(queryResult);
+                // Ensure that we have 1 item in the result and that its title is the expected one
+                Assert.IsNotNull(queryResult);
+                Assert.AreEqual(1, queryResult.Count);
+                Assert.AreEqual(expectedListItemTitle, queryResult[0].Title);
             }
         }
 
@@ -141,6 +131,8 @@ namespace PnP.Core.Test.QueryModel
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);
+                Assert.AreNotEqual(Guid.Empty, actual.Id);
+                Assert.AreEqual(ListTemplateType.DocumentLibrary, actual.TemplateType);
             }
         }
     }
