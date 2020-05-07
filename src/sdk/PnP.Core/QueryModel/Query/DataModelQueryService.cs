@@ -41,6 +41,11 @@ namespace PnP.Core.QueryModel.Query
 
         public object ExecuteQuery(Type expressionType, ODataQuery<TModel> query)
         {
+            if (String.IsNullOrEmpty(this.memberName))
+            {
+                throw new Exception($"Missing value for {nameof(this.memberName)} in {this.GetType().Name}");
+            }
+
             // At this point in time we support querying collections of 
             // IList and IListItem or single elements of those collections
             if (typeof(TModel).IsAssignableFrom(typeof(IList)) ||
