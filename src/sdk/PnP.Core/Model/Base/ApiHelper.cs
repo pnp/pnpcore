@@ -58,15 +58,21 @@ namespace PnP.Core.Model
                     // there's either a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
                     // or
                     // the parent is model class itself (e.g. Web --> Site.RootWeb)
-                    if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible model))
+
+                    var parent = (pnpObject as IDataModelParent).Parent;
+
+                    if (parent is IManageableCollection)
                     {
                         // Parent is a collection, so jump one level up
-                        model = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
+                        parent = (pnpObject as IDataModelParent).Parent.Parent;
                     }
 
-                    if (model.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                    if (parent is IMetadataExtensible p)
                     {
-                        input = input.Replace("{Parent.Id}", model.Metadata[PnPConstants.MetaDataRestId]);
+                        if (p.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                        {
+                            input = input.Replace("{Parent.Id}", p.Metadata[PnPConstants.MetaDataRestId]);
+                        }
                     }
                 }
 
@@ -87,15 +93,21 @@ namespace PnP.Core.Model
                     // there's either a collection object inbetween (e.g. TeamChannel --> TeamChannelCollection --> Team), so take the parent of the parent
                     // or
                     // the parent is model class itself (e.g. TeamChannel --> Team.PrimaryChannel)
-                    if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible parent))
+
+                    var parent = (pnpObject as IDataModelParent).Parent;
+
+                    if (parent is IManageableCollection)
                     {
                         // Parent is a collection, so jump one level up
-                        parent = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
+                        parent = (pnpObject as IDataModelParent).Parent.Parent;
                     }
 
-                    if (parent.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                    if (parent is IMetadataExtensible p)
                     {
-                        input = input.Replace("{Parent.GraphId}", parent.Metadata[PnPConstants.MetaDataGraphId]);
+                        if (p.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                        {
+                            input = input.Replace("{Parent.GraphId}", p.Metadata[PnPConstants.MetaDataGraphId]);
+                        }
                     }
                 }
 

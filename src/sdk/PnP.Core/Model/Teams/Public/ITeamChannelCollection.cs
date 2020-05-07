@@ -5,7 +5,7 @@ namespace PnP.Core.Model.Teams
     /// <summary>
     /// Public interface to define a collection of Team Channels
     /// </summary>
-    public interface ITeamChannelCollection : IDataModelCollection<ITeamChannel>
+    public interface ITeamChannelCollection : IDataModelCollection<ITeamChannel>, ISupportPaging
     {
 
         /// <summary>

@@ -50,10 +50,13 @@ namespace PnP.Core.Model
                     // there's either a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
                     // or
                     // the parent is model class itself (e.g. Web --> Site.RootWeb)
-                    if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible parent))
+
+                    var parent = (pnpObject as IDataModelParent).Parent;
+
+                    if (parent is IManageableCollection)
                     {
                         // Parent is a collection, so jump one level up
-                        parent = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
+                        parent = (pnpObject as IDataModelParent).Parent.Parent;
                     }
 
                     // Ensure the parent object
@@ -62,9 +65,12 @@ namespace PnP.Core.Model
                         await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(true);
                     }
 
-                    if (parent.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                    if (parent is IMetadataExtensible p)
                     {
-                        result = result.Replace("{Parent.Id}", parent.Metadata[PnPConstants.MetaDataRestId]);
+                        if (p.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                        {
+                            result = result.Replace("{Parent.Id}", p.Metadata[PnPConstants.MetaDataRestId]);
+                        }
                     }
                 }
 
@@ -85,21 +91,27 @@ namespace PnP.Core.Model
                     // there's either a collection object inbetween (e.g. TeamChannel --> TeamChannelCollection --> Team), so take the parent of the parent
                     // or
                     // the parent is model class itself (e.g. TeamChannel --> Team.PrimaryChannel)
-                    if (!((pnpObject as IDataModelParent).Parent is IMetadataExtensible parent))
+
+                    var parent = (pnpObject as IDataModelParent).Parent;
+
+                    if (parent is IManageableCollection)
                     {
                         // Parent is a collection, so jump one level up
-                        parent = (pnpObject as IDataModelParent).Parent.Parent as IMetadataExtensible;
+                        parent = (pnpObject as IDataModelParent).Parent.Parent;
                     }
 
                     // Ensure the parent object
                     if (parent != null)
                     {
-                        await ((IDataModelParent)parent).EnsureParentObjectAsync().ConfigureAwait(true);
+                        await ((IDataModelParent)pnpObject).EnsureParentObjectAsync().ConfigureAwait(true);
                     }
 
-                    if (parent.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                    if (parent is IMetadataExtensible p)
                     {
-                        result = result.Replace("{Parent.GraphId}", parent.Metadata[PnPConstants.MetaDataGraphId]);
+                        if (p.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                        {
+                            result = result.Replace("{Parent.GraphId}", p.Metadata[PnPConstants.MetaDataGraphId]);
+                        }
                     }
                 }
 

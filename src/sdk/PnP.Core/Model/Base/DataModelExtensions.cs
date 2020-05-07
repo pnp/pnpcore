@@ -111,10 +111,12 @@ namespace PnP.Core.Model
                 // there's either a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
                 // or
                 // the parent is model class itself (e.g. Web --> Site.RootWeb)
-                if (!(model.Parent is IMetadataExtensible parent))
+
+                var parent = (model as IDataModelParent).Parent;
+                if (model.Parent is IManageableCollection)
                 {
                     // Parent is a collection, so jump one level up
-                    parent = model.Parent.Parent as IMetadataExtensible;
+                    parent = (model as IDataModelParent).Parent.Parent;
                 }
 
                 // Let's try to get the parent object as an IRequestable and IDataModelGet instance

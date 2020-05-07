@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
+﻿using System.Collections.Generic;
 
 namespace PnP.Core.Model
 {
@@ -15,10 +12,5 @@ namespace PnP.Core.Model
         /// Dictionary to access the domain model object Metadata
         /// </summary>
         Dictionary<string, string> Metadata { get; }
-
-        /// <summary>
-        /// Dictionary to access the domain model object Deferred properties
-        /// </summary>
-        Dictionary<string, string> Deferred { get; }
     }
 }

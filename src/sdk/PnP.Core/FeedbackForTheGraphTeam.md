@@ -7,6 +7,8 @@
 # Teams
 
 - We miss a single call that load all Teams with their properties
-- Doing batching of tab creation works inconsistently: getting "BadGateway", "Failed to execute backend request." errors. Lowering the batch size to less than the max 20 seems to make it more reliable
+- Doing batching of tab creation works inconsistently: getting "BadGateway", "Failed to execute backend request." errors. 
+	- Lowering the batch size to less than the max 20 seems to make it more reliable but failing most of the time
+	- Trying the same with adding messages to a channel gives HTTP 412	Precondition Failed (https://docs.microsoft.com/en-us/graph/errors), even with lowered batch count ==> it seems to work with 5 messages in a batch
 - When getting a Teams channel message there's no way to know if the message has replies besides querying each message independently for replies
 - One can update MemberSettings.AllowCreatePrivateChannels using v1.0 endpoint, but not read it

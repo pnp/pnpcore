@@ -6,7 +6,7 @@ namespace PnP.Core.Model.Teams
     /// <summary>
     /// Public interface to define a collection of Tabs for a Team Channel
     /// </summary>
-    public interface ITeamChannelTabCollection : IDataModelCollection<ITeamChannelTab>
+    public interface ITeamChannelTabCollection : IDataModelCollection<ITeamChannelTab>, ISupportPaging
     {
         /// <summary>
         /// Adds a new wiki channel tab

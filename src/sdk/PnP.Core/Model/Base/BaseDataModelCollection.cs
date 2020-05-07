@@ -3,15 +3,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model
 {
     /// <summary>
     /// Base abstract class for every Domain Model objects collection
     /// </summary>
-    internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>
+    internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging, IMetadataExtensible
     {
+        private const string GraphNextLink = "@odata.nextLink";
+
         #region Core properties
+
+        /// <summary>
+        /// Dictionary to access the domain model object Metadata
+        /// </summary>
+        public Dictionary<string, string> Metadata { get; } = new Dictionary<string, string>();
 
         /// <summary>
         /// List of items in the collection
@@ -199,6 +208,109 @@ namespace PnP.Core.Model
         public virtual bool Remove(object item)
         {
             return this.Remove((TModel)item);
+        }
+
+        #endregion
+
+        #region Paging
+
+        public bool CanPage
+        {
+            get
+            {
+                return Metadata.ContainsKey(GraphNextLink);
+            }
+        }
+
+        public async Task GetNextPageAsync()
+        {
+
+            if (CanPage)
+            {
+                // Get the parent (container) entity info
+                var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.Parent.GetType());
+                // and cast it to the IDataModelMappingHandler interface
+                var parentEntityWithMappingHandlers = (IDataModelMappingHandler)this.Parent;
+
+                // Determine the receiving property
+                var receivingProperty = GetReceivingProperty(parentEntityInfo);
+                if (string.IsNullOrEmpty(receivingProperty))
+                {
+                    throw new Exception("Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming");
+                }
+
+                // Prepare api call
+                string nextLink;
+                ApiType nextLinkApiType;
+                // important: the skiptoken is case sensitive, so ensure to keep it the way is was provided to you by Graph
+                if (Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphBetaEndpoint}/", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}/{PnPConstants.GraphBetaEndpoint}/", "");
+                    nextLinkApiType = ApiType.GraphBeta;
+                }
+                else if (Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphV1Endpoint}/", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}/{PnPConstants.GraphV1Endpoint}/", "");
+                    nextLinkApiType = ApiType.Graph;
+                }
+                else
+                {
+                    // SPO Rest
+                    throw new Exception("Not yet supported");
+                }
+
+                PnPContext.CurrentBatch.Add(
+                    this.Parent as TransientObject,
+                    parentEntityInfo,
+                    HttpMethod.Get,
+                    new ApiCall // First option is Graph
+                    {
+                        Type = nextLinkApiType,
+                        ReceivingProperty = receivingProperty,
+                        Request = nextLink
+                    },
+                    default,
+                    parentEntityWithMappingHandlers.MappingHandler,
+                    parentEntityWithMappingHandlers.PostMappingHandler
+                    );
+
+                await PnPContext.ExecuteAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                throw new Exception("Please ensure you load this collection once before calling GetAllPages or GetNextPage");
+            }
+
+        }
+
+        public async Task GetAllPagesAsync()
+        {
+            bool loadNextPage = true;
+            int currentItemCount = items.Count;
+            while (loadNextPage)
+            {
+                await GetNextPageAsync().ConfigureAwait(false);
+
+                // Keep requesting pages until the total item count is not increasing anymore
+                if (items.Count == currentItemCount)
+                {
+                    loadNextPage = false;
+                }
+                else
+                {
+                    currentItemCount = items.Count;
+                }
+            }
+        }
+
+        private string GetReceivingProperty(EntityInfo parentEntityInfo)
+        {
+            var internalCollectionType = this.GetType();
+            var publicCollectionType = Type.GetType($"{internalCollectionType.Namespace}.I{internalCollectionType.Name}");
+
+            var propertyInParent = parentEntityInfo.Fields.FirstOrDefault(p => p.DataType == publicCollectionType);
+
+            return propertyInParent?.Name;
         }
 
         #endregion
