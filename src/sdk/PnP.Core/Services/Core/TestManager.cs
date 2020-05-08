@@ -1,9 +1,11 @@
 ﻿#if DEBUG
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 
 namespace PnP.Core.Services
 {
@@ -94,6 +96,59 @@ namespace PnP.Core.Services
             }
         }
 
+        /// <summary>
+        /// Saves test properties that need to be persisted to enable offline testing to a file
+        /// </summary>
+        /// <param name="context">Current PnPContext</param>
+        /// <param name="properties">Dictionary of properties to save</param>
+        internal static void SaveProperties(PnPContext context, Dictionary<string, string> properties)
+        {
+            string fileName = GetPropertiesFile(context);
+
+            var bodyContent = JsonSerializer.Serialize(properties, typeof(Dictionary<string, string>), new JsonSerializerOptions { WriteIndented = false });
+
+            // Write serialized properties to a file, overwrites the existing file if needed
+            File.WriteAllText(fileName, bodyContent);
+        }
+
+        /// <summary>
+        /// Loads persisted test properties into a dictionary
+        /// </summary>
+        /// <param name="context">Current PnPContext</param>
+        /// <returns>Dictionary of properties</returns>
+        internal static Dictionary<string, string> GetProperties(PnPContext context)
+        {
+            string fileName = GetPropertiesFile(context);
+
+            string body;
+            if (File.Exists(fileName))
+            {
+                 body = File.ReadAllText(fileName);
+            }
+            else
+            {
+                throw new Exception($"Test [{context.TestName}] is missing properties file {fileName}.");
+            }
+
+            var properties = JsonSerializer.Deserialize<Dictionary<string, string>>(body);
+
+            return properties;
+        }
+
+        /// <summary>
+        /// Deletes the persisted properties
+        /// </summary>
+        /// <param name="context">Current PnPContext</param>
+        internal static void DeleteProperties(PnPContext context)
+        {
+            string fileName = GetPropertiesFile(context);
+
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);                
+            }
+        }
+
         private static string GetResponseFile(PnPContext context, string hash, string orderPrefix)
         {
             //return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}-{hash}.response");
@@ -110,6 +165,11 @@ namespace PnP.Core.Services
         {
             //return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}-{hash}.debug");
             return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}.debug");
+        }
+
+        private static string GetPropertiesFile(PnPContext context)
+        {
+            return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}.properties");
         }
 
         private static string GetPath(PnPContext context)
