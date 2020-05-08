@@ -1,6 +1,4 @@
-﻿using PnP.Core.Model.Base;
-
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     [ConcreteType(typeof(ListItem))]
     public interface IListItem : IDataModel<IListItem>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel

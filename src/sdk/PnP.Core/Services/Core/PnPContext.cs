@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Model;
-using PnP.Core.Model.Base;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using System;

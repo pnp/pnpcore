@@ -1,5 +1,4 @@
-﻿using PnP.Core.Model.Base;
-using System;
+﻿using System;
 
 namespace PnP.Core.Model.SharePoint
 {

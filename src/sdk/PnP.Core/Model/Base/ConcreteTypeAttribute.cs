@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace PnP.Core.Model.Base
+namespace PnP.Core.Model
 {
     /// <summary>
     /// Attribute to declare the concrete type for this interface
