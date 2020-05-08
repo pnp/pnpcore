@@ -6,8 +6,8 @@
 
 If you want (and you should) use and extend these unit tests then:
 
-1. Right click on the PnP.Core.Test project and select **Properties**
-2. Add an environment variable with name **Hosting:EnvironmentName** and provide it with a value the value **mine**
+1. Copy env.sample to env.txt
+2. Open env.txt and put as content the value **mine** (or another name in case you want to use other test environment names)
 3. Open `appsettings.mine.json` and update the url's and accounts to match with what's available in your tenant. The test system requires that you have setup the following sites (optionally use `setuptestenv.ps1` to help create the needed sites):
 
    1. A modern, group connected, team site (recommended name is **pnpcoresdktestgroup**) which was teamified and which has a sub site (recommended name is **subsite**)

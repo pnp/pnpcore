@@ -1,3 +1,6 @@
+# Ignore file that specifies which test environment to load
+**/env.txt
+
 # Ignore user specific appsettings 
 **/appsettings.*.json
 

@@ -5,6 +5,7 @@ using PnP.Core.Test.Services;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace PnP.Core.Test.Utilities
 {
@@ -88,11 +89,18 @@ namespace PnP.Core.Test.Utilities
                 return pnpContextFactoryCache;
             }
 
-            // Define Hosting:EnvironmentName as environment variable in Debug tab of the test project settings or as environemnt variable in your host
-            var environmentName = Environment.GetEnvironmentVariable("Hosting:EnvironmentName");
+            // Define the test environment by: 
+            // - Copying env.sample to env.txt  
+            // - Putting the test environment name in env.txt ==> this should be same name as used in your settings file:
+            //   When using appsettings.mine.json then you need to put mine as content in env.txt
+            var environmentName = LoadTestEnvironment();
+
+            if (string.IsNullOrEmpty(environmentName))
+            {
+                throw new Exception("Please ensure you've a env.txt file in the root of the test project. This file should contain the name of the test environment you want to use.");
+            }
 
             var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables()
             .Build();
@@ -157,5 +165,21 @@ namespace PnP.Core.Test.Utilities
 
             return pnpContextFactory;
         }
+
+        private static string LoadTestEnvironment()
+        {
+            string testEnvironmentFile = "..\\..\\..\\env.txt";
+            if (File.Exists(testEnvironmentFile))
+            {
+                string content = File.ReadAllText(testEnvironmentFile);
+                if (!string.IsNullOrEmpty(content))
+                {
+                    return content.Trim();
+                }
+            }
+
+            return null;
+        }
+
     }
 }
