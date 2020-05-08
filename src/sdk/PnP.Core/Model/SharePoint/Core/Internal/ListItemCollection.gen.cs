@@ -1,5 +1,4 @@
 ﻿using PnP.Core.QueryModel.Model;
-using System.ComponentModel;
 
 namespace PnP.Core.Model.SharePoint
 {
