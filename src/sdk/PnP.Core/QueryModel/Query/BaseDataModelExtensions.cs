@@ -225,6 +225,60 @@ namespace PnP.Core.QueryModel.Query
 
         #endregion
 
+        #region GetById for List Items implementation
+
+        /// <summary>
+        /// Extension method to select a list item (IListItem) by Id
+        /// </summary>
+        /// <param name="source">The collection of lists items to get the item by Id from</param>
+        /// <param name="id">The Id to search for</param>
+        /// <returns>The resulting list item instance, if any</returns>
+        public static PnP.Core.Model.SharePoint.IListItem GetById(
+            this IQueryable<PnP.Core.Model.SharePoint.IListItem> source, int id)
+        {
+            // Just rely on the below overload, without providing any selector
+            return GetById(source, id, null);
+        }
+
+        /// <summary>
+        /// Extension method to select a list item (IListItem) by Id
+        /// </summary>
+        /// <param name="source">The collection of lists items to get the item by Id from</param>
+        /// <param name="id">The Id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list item instance, if any</returns>
+        public static PnP.Core.Model.SharePoint.IListItem GetById(
+            this IQueryable<PnP.Core.Model.SharePoint.IListItem> source,
+            int id,
+            params Expression<Func<PnP.Core.Model.SharePoint.IListItem, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            IQueryable<PnP.Core.Model.SharePoint.IListItem> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<PnP.Core.Model.SharePoint.IListItem, bool>> predicate = l => l.Id == id;
+
+            return source.Provider.Execute<PnP.Core.Model.SharePoint.IListItem>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    ));
+        }
+
+        #endregion
+
         #endregion
     }
 }

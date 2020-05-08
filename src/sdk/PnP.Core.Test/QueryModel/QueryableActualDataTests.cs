@@ -135,5 +135,25 @@ namespace PnP.Core.Test.QueryModel
                 Assert.AreEqual(ListTemplateType.DocumentLibrary, actual.TemplateType);
             }
         }
+
+        [TestMethod]
+        public void TestQueryGetByIdLINQ()
+        {
+            var targetListTitle = "Site Pages";
+            var expectedTitle = "Home";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var sitePages = context.Web.Lists.GetByTitle(targetListTitle);
+                var firstItem = sitePages.Items.GetById(1, 
+                    i => i.Id, 
+                    i => i.Title);
+
+                Assert.IsNotNull(firstItem);
+                Assert.AreEqual(1, firstItem.Id);
+                Assert.AreEqual(firstItem.Title, expectedTitle);
+            }
+        }
     }
 }
