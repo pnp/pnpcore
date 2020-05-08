@@ -1,5 +1,5 @@
 ﻿Notes:
-- Page size is variable, the first request for messages does not always return 20 messages, seems to return the x messages in a timewindow with a max of 20
+- Page size is variable, the first request for messages does not always return 20 messages, seems to return the x messages in a timewindow with a max of ?
 
 https://graph.microsoft.com/beta/teams/b32780e9-df70-4548-a735-4e7f055415a1/channels/19:9f4c089b2a87472ebd357031a7c11be9@thread.tacv2/messages
 
