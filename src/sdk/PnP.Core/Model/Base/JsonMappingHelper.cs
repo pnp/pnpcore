@@ -1040,7 +1040,7 @@ namespace PnP.Core.Model
                 return field.GraphName;
             }
 
-            throw new Exception("GraphName was not set");
+            throw new ClientException(ErrorType.ModelMetadataIncorrect, "GraphName was not set");
         }
 
         internal static bool IsModelType(Type propertyType)

@@ -199,7 +199,7 @@ namespace PnP.Core.Model
                 }
                 else
                 {
-                    throw new Exception($"Property {key} does not exist in this entity");
+                    throw new ClientException(ErrorType.PropertyNotLoaded, $"Property {key} does not exist in this entity");
                 }
             }
             set

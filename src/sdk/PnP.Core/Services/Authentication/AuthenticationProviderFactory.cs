@@ -65,7 +65,7 @@ namespace PnP.Core.Services
             var configuration = this.options.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
             {
-                throw new Exception($"Invalid configuration name '{name}' for IAuthenticationProvider creation!");
+                throw new ClientException(ErrorType.ConfigurationError, $"Invalid configuration name '{name}' for IAuthenticationProvider creation!");
             }
 
             // Use the configuration to create a new instance of IAuthenticationProvider

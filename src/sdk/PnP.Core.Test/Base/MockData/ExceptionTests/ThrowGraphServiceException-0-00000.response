@@ -1,0 +1,10 @@
+{"responses": [{"id": "1","status":400,"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "teamId needs to be a valid GUID.",
+    "innerError": {
+      "request-id": "20f77f91-ecc8-42cd-9d95-73de099e4292",
+      "date": "2020-05-08T13:02:52"
+    }
+  }
+}}]}

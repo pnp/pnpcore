@@ -72,7 +72,7 @@ namespace PnP.Core.Model.SharePoint
                 // If this list we're adding items to was not fetched from the server than throw an error
                 if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri))
                 {
-                    throw new Exception($"Please first fetch this list from SharePoint before doing operations on it");
+                    throw new ClientException(ErrorType.PropertyNotLoaded, $"Please first fetch this list from SharePoint before doing operations on it");
                 }
 
                 // drop the everything in front of _api as the batching logic will add that automatically

@@ -194,7 +194,7 @@ namespace PnP.Core.Model
                 }
                 else
                 {
-                    throw new Exception("Each domain model object must be decorated with a ClassMapping attribute");
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect, "Each domain model object must be decorated with a ClassMapping attribute");
                 }
             }
         }

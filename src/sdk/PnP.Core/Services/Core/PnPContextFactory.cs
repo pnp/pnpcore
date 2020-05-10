@@ -49,7 +49,7 @@ namespace PnP.Core.Services
             var configuration = this.options.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
             {
-                throw new Exception($"Invalid configuration name '{name}' for SPOContext creation!");
+                throw new ClientException(ErrorType.ConfigurationError, $"Invalid configuration name '{name}' for SPOContext creation!");
             }
 
             return Create(configuration.SiteUrl, configuration.AuthenticationProviderName);
@@ -79,7 +79,7 @@ namespace PnP.Core.Services
             var authProvider = authProviderFactory.Create(authenticationProviderName);
             if (authProvider == null)
             {
-                throw new Exception($"Invalid Authentication Provider name '{authenticationProviderName}' for '{url.AbsoluteUri}' during SPOContext creation!");
+                throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for '{url.AbsoluteUri}' during SPOContext creation!");
             }
 
             // Use the provided settings to create a new instance of SPOContext

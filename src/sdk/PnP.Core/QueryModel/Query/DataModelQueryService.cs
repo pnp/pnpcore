@@ -43,7 +43,7 @@ namespace PnP.Core.QueryModel.Query
         {
             if (String.IsNullOrEmpty(this.memberName))
             {
-                throw new Exception($"Missing value for {nameof(this.memberName)} in {this.GetType().Name}");
+                throw new ClientException(ErrorType.LinqError, $"Missing value for {nameof(this.memberName)} in {this.GetType().Name}");
             }
 
             // At this point in time we support querying collections of 

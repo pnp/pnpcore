@@ -153,7 +153,7 @@ namespace PnP.Core
                 if (!written)
                 {
                     int lastError = Marshal.GetLastWin32Error();
-                    throw new Exception($"CredWrite failed with the error code {lastError}");
+                    throw new ClientException($"CredWrite failed with the error code {lastError}");
                 }
             }
         }

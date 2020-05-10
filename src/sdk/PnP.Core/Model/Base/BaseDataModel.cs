@@ -190,7 +190,7 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new Exception("Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+                throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
             }
             return this;
         }
@@ -209,7 +209,7 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new Exception("Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+                throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
             }
             return this;
         }
@@ -227,7 +227,7 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new Exception("Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+                throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
             }
             return this;
         }
@@ -660,7 +660,7 @@ namespace PnP.Core.Model
             {
                 if (string.IsNullOrEmpty(entity.GraphGet))
                 {
-                    throw new Exception($"Specify the GraphGet field of the ClassMapping property.");
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect, $"Specify the GraphGet field of the ClassMapping property.");
                 }
 
                 baseApiCall = entity.GraphGet.Replace("{hostname}", PnPContext.Uri.DnsSafeHost).Replace("{serverrelativepath}", PnPContext.Uri.PathAndQuery);
@@ -826,7 +826,7 @@ namespace PnP.Core.Model
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
             {
-                throw new Exception("Adding this entity requires the use of the Graph beta endpoint");
+                throw new ClientException(ErrorType.GraphBetaNotAllowed, "Adding this entity requires the use of the Graph beta endpoint");
             }
 
             // Add the request to the batch

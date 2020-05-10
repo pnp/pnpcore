@@ -236,7 +236,7 @@ namespace PnP.Core.Model
                 var receivingProperty = GetReceivingProperty(parentEntityInfo);
                 if (string.IsNullOrEmpty(receivingProperty))
                 {
-                    throw new Exception("Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming");
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect, "Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming");
                 }
 
                 // Prepare api call
@@ -256,7 +256,7 @@ namespace PnP.Core.Model
                 else
                 {
                     // SPO Rest
-                    throw new Exception("Not yet supported");
+                    throw new ClientException(ErrorType.Unsupported, "Not yet supported");
                 }
 
                 PnPContext.CurrentBatch.Add(
@@ -278,7 +278,7 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new Exception("Please ensure you load this collection once before calling GetAllPages or GetNextPage");
+                throw new ClientException(ErrorType.CollectionNotLoaded, "Please ensure you load this collection once before calling GetAllPages or GetNextPage");
             }
 
         }

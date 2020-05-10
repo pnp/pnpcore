@@ -96,8 +96,7 @@ namespace PnP.Core.Model
                 return value;
             }
 
-            // TODO: replace with custom pnp exception type
-            throw new Exception($"Property {propertyName} was not yet loaded");
+            throw new ClientException(ErrorType.PropertyNotLoaded, $"Property {propertyName} was not yet loaded");
         }
 
         protected virtual T GetValue<T>([System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
@@ -109,8 +108,7 @@ namespace PnP.Core.Model
                 return (T)value;
             }
 
-            // TODO: replace with custom pnp exception type
-            throw new Exception($"Property {propertyName} was not yet loaded");
+            throw new ClientException(ErrorType.PropertyNotLoaded, $"Property {propertyName} was not yet loaded");
         }
 
         protected virtual bool SetValue<T>(T value, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
@@ -242,7 +240,7 @@ namespace PnP.Core.Model
         {
             if (Deleted)
             {
-                throw new Exception($"This model instance was deleted, you can't use it anymore");
+                throw new ClientException(ErrorType.InstanceWasDeleted, $"This model instance was deleted, you can't use it anymore");
             }
         }
 

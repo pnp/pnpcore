@@ -328,7 +328,7 @@ namespace PnP.Core.Services
                         else
                         {
                             // Something went wrong...
-                            throw new Exception(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                         }
 #if DEBUG
                     }
@@ -412,7 +412,7 @@ namespace PnP.Core.Services
                         // If one of the requests in the batch failed then throw an exception
                         if (!HttpRequestSucceeded(graphBatchResponse.Status))
                         {
-                            throw new Exception($"Request {batchRequest.ApiCall.Request} failed with status code {graphBatchResponse.Status}. Internal error: {bodyContent}");
+                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)graphBatchResponse.Status, bodyContent);
                         }
                         // All was good, connect response to the original request
                         batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status);
@@ -593,7 +593,7 @@ namespace PnP.Core.Services
                             else
                             {
                                 // Something went wrong...
-                                throw new Exception(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
                             }
 #if DEBUG
                         }
@@ -755,7 +755,7 @@ namespace PnP.Core.Services
                     }
                     else
                     {
-                        throw new Exception("Unexpected HTTP result value in returned batch response");
+                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 0, "Unexpected HTTP result value in returned batch response");
                     }
                 }
 
@@ -766,7 +766,7 @@ namespace PnP.Core.Services
                     if (!HttpRequestSucceeded(httpStatusCode))
                     {
                         // Todo: parsing json in line to provide a more structured error message + add to logging
-                        throw new Exception($"Request {batchRequest.ApiCall.Request} failed with status code {httpStatusCode}: {line}");
+                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)httpStatusCode, line);
                     }
 
                     if (httpStatusCode == HttpStatusCode.NoContent)
