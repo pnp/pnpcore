@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -282,17 +283,36 @@ namespace PnP.Core.Model
                 // SP.Web requires a special id value
                 if (entity.SharePointType.Equals("SP.Web"))
                 {
-                    // Call EnsurePropertiesAsync to ensure Site.Id is loaded if it was not yet the case
-                    await contextAwareObject.PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
-
-                    if (contextAwareObject.PnPContext.Site.IsPropertyAvailable(p => p.Id) && contextAwareObject.PnPContext.Web.IsPropertyAvailable(p => p.Id))
+                    if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                     {
-                        metadataBasedObject.Metadata.Add(PnPConstants.MetaDataGraphId, $"{contextAwareObject.PnPContext.Uri.DnsSafeHost},{contextAwareObject.PnPContext.Site.Id},{contextAwareObject.PnPContext.Web.Id}");
+                        // Ensure site and web id's are loaded, use batching to load them both in one go in case that would be needed
+                        if (!contextAwareObject.PnPContext.Site.IsPropertyAvailable(p => p.Id) || !contextAwareObject.PnPContext.Web.IsPropertyAvailable(p => p.Id))
+                        {
+                            var idBatch = contextAwareObject.PnPContext.NewBatch();
+                            if (!contextAwareObject.PnPContext.Site.IsPropertyAvailable(p => p.Id))
+                            {
+                                contextAwareObject.PnPContext.Site.Get(idBatch, p => p.Id);
+                            }
+                            if (!contextAwareObject.PnPContext.Web.IsPropertyAvailable(p => p.Id))
+                            {
+                                contextAwareObject.PnPContext.Web.Get(idBatch, p => p.Id);
+                            }
+                            await contextAwareObject.PnPContext.ExecuteAsync(idBatch).ConfigureAwait(false);
+                        }
+
+                        if (contextAwareObject.PnPContext.Site.IsPropertyAvailable(p => p.Id) && contextAwareObject.PnPContext.Web.IsPropertyAvailable(p => p.Id))
+                        {
+                            // Check again here due to the recursive nature of this code
+                            if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                            {
+                                metadataBasedObject.Metadata.Add(PnPConstants.MetaDataGraphId, $"{contextAwareObject.PnPContext.Uri.DnsSafeHost},{contextAwareObject.PnPContext.Site.Id},{contextAwareObject.PnPContext.Web.Id}");
+                            }
+                        }
                     }
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(idFieldValue))
+                    if (!string.IsNullOrEmpty(idFieldValue) && !metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                     {
                         metadataBasedObject.Metadata.Add(PnPConstants.MetaDataGraphId, idFieldValue);
                     }
