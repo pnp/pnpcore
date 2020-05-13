@@ -417,5 +417,19 @@ namespace PnP.Core.Test.QueryModel
                 Assert.AreEqual(updatedItem.Title, expectedUpdatedTitle);
             }
         }
+
+        [TestMethod]
+        public async Task TestQueryListFollowedByGraphQueryConsistency()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Load list via Linq query --> this should now ensure the GraphId property of the web model is populated
+                var list = context.Web.Lists.GetByTitle("Site Pages", l => l.Id, l => l.Title, l => l.Description);
+
+                // Get the list items -- will happen via Graph
+                await list.GetAsync(p => p.Items);
+            }
+        }
     }
 }
