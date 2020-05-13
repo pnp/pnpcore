@@ -829,7 +829,7 @@ namespace PnP.Core.Services
         /// <param name="batch">Batch to deduplicate</param>
         private static void DedupBatchRequests(ref Batch batch)
         {
-            List<ApiCall> queries = new List<ApiCall>();
+            List<Tuple<TransientObject, ApiCall>> queries = new List<Tuple<TransientObject, ApiCall>>();
 
             // Only dedup get requests, a batch can contain multiple identical add requests
             var requestsToDedup = batch.Requests.Where(p => p.Value.Method == HttpMethod.Get);
@@ -838,9 +838,10 @@ namespace PnP.Core.Services
             {
                 foreach (var request in requestsToDedup.ToList())
                 {
-                    if (!queries.Contains(request.Value.ApiCall))
+                    var query = new Tuple<TransientObject, ApiCall>(request.Value.Model, request.Value.ApiCall);
+                    if (!queries.Contains(query))
                     {
-                        queries.Add(request.Value.ApiCall);
+                        queries.Add(query);
                     }
                     else
                     {
