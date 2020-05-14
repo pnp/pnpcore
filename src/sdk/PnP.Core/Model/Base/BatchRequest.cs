@@ -22,6 +22,7 @@ namespace PnP.Core.Model
         /// <param name="order">Order of the request in the list of requests</param>
         internal BatchRequest(TransientObject modelInstance, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, int order)
         {
+            Id = Guid.NewGuid();
             Model = modelInstance;
             EntityInfo = entityInfo;
             Method = method;
@@ -31,6 +32,11 @@ namespace PnP.Core.Model
             PostMappingJson = postMappingJson;
             Order = order;
         }
+
+        /// <summary>
+        /// Id of the <see cref="BatchRequest"/>
+        /// </summary>
+        internal Guid Id { get; private set; }
 
         /// <summary>
         /// Entity object on for which this request was meant
