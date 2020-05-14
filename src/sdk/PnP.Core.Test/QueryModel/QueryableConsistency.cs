@@ -421,7 +421,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryListFollowedByGraphQueryConsistency()
         {
-            //TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 // Load list via Linq query --> this should now ensure the GraphId property of the web model is populated
@@ -429,6 +429,26 @@ namespace PnP.Core.Test.QueryModel
 
                 // Get the list items -- will happen via Graph
                 await list.GetAsync(p => p.Items);
+
+                Assert.IsNotNull(list);
+                Assert.AreEqual(1, list.Items.Length);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryListWithItemsFollowedByGraphQueryConsistency()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Load list via Linq query --> this should now ensure the GraphId property of the web model is populated
+                var list = context.Web.Lists.Include(l => l.Items).GetByTitle("Site Pages", l => l.Id, l => l.Title, l => l.Description);
+
+                // Get the list items -- will happen via Graph
+                await list.GetAsync(p => p.Items);
+
+                Assert.IsNotNull(list);
+                Assert.AreEqual(1, list.Items.Length);
             }
         }
     }
