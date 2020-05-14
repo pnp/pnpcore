@@ -67,7 +67,7 @@ namespace PnP.Core.QueryModel.Query
                 requestUrl = Core.Model.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).GetAwaiter().GetResult();
 
                 // Add the request to the current batch
-                this.context.CurrentBatch.Add(
+                var batchRequestId = this.context.CurrentBatch.Add(
                     this.parent as TransientObject,
                     parentEntityInfo,
                     HttpMethod.Get,
@@ -102,7 +102,7 @@ namespace PnP.Core.QueryModel.Query
                     // sure that the result will be just one item
                     if (query.Top == 1)
                     {
-                        return resultValue.FirstOrDefault();
+                        return resultValue.FirstOrDefault(p => (p as TransientObject).BatchRequestId == batchRequestId);
                     }
                     else
                     {
