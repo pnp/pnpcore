@@ -1,51 +1,59 @@
 
 # Extending the model via SharePoint REST
 
-The PnP Core SDK model contains model, collection and complex type classes which are populated via either Microsoft Graph or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the SharePoint REST API.
+The PnP Core SDK model contains model, collection and complex type classes which are populated via either Microsoft Graph and/or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the SharePoint REST API.
 
 ## Configuring model classes
 
-### Class decoration
+### Public model (interface) decoration
 
-Each model class does need to have a `ClassMapping` attribute which is defined on the coded model class (e.g. List.cs):
+For model classes that **are linq queriable** one needs to to link the concrete (so the implementation) to the public interface via the `ConcreteType` class attribute:
 
 ```csharp
-[ClassMapping(SharePointType = "SP.List",
-              SharePointUri = "_api/Web/Lists(guid'{Id}')",
-              SharePointGet = "_api/web/lists",
-              SharePointUpdate = "_api/web/lists/getbyid(guid'{Id}')")]
+[ConcreteType(typeof(List))]
+public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
+{
+    // Ommitted for brevity
+}
+```
+
+### Class decoration
+
+Each model class that uses SharePoint REST does need to have a `SharePointType` attribute which is defined on the coded model class (e.g. List.cs):
+
+```csharp
+[SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
 internal partial class List
 {
     // Ommitted for brevity
 }
 ```
 
-When configuring the `ClassMapping` attribute for SharePoint REST you need to set attribute properties:
+When configuring the `SharePointType` attribute for SharePoint REST you need to set attribute properties:
 
 Property | Required | Description
 ---------|----------|------------
-SharePointType | Yes | Defines the SharePoint REST type that maps with the model class. Each model that requires SharePoint REST requires this attribute
-SharePointUri | Yes | Defines the URI that uniquely identifies this object. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use
-SharePointGet | No | Overrides the SharePointUri property for **get** operations.
-SharePointUpdate | No | Overrides the SharePointUri property for **update** operations.
-SharePointDelete | No | Overrides the SharePointUri property for **delete** operations.
-SharePointOverflowFieldName | No | Used when working with a dynamic property/value pair (e.g. fields in a SharePoint ListItem) whenever the SharePoint REST field containing these dynamic properties is not named `Values`
+Type | Yes | Defines the SharePoint REST type that maps with the model class. Each model that requires SharePoint REST requires this attribute, hence the type is requested via the attribute constructor.
+Uri | Yes | Defines the URI that uniquely identifies this object. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use.
+Get | No | Overrides the Uri property for **get** operations.
+LinqGet | No | Some model classes do support linq queries which are translated in corresponding server calls. If a class supports linq in this way, then it also needs to have the LinqGet attribute set.
+Update | No | Overrides the Uri property for **update** operations.
+Delete | No | Overrides the Uri property for **delete** operations.
+OverflowProperty | No | Used when working with a dynamic property/value pair (e.g. fields in a SharePoint ListItem) whenever the SharePoint REST field containing these dynamic properties is not named `Values`.
 
 ### Property decoration
 
-The property level decoration is done using the `SharePointFieldMapping` attribute. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. List.gen.cs) the decoration via attributes needs to happen in this class as well.
+The property level decoration is done using the `SharePointProperty` and `KeyProperty` attributes. Each model instance does require to have a override of the `Key` property and that `Key` property **must** be decorated with the `KeyProperty` attribute which specifies which of the actual fields in the model must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.
+
+Whereas the `KeyProperty` attribute is always there once in each model class, the usage of the `SharePointProperty` attribute is only needed whenever it makes sense. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. List.gen.cs) the decoration via attributes needs to happen in this class as well.
 
 ```csharp
 // Configure the SharePoint REST field used to populate this model property
-[SharePointFieldMapping(FieldName = "DocumentTemplateUrl")]
+[SharePointProperty("DocumentTemplateUrl")]
 public string DocumentTemplate { get => GetValue<string>(); set => SetValue(value); }
 
-// Mark the property that serves as Key field (used to ensure there are no duplicates in collections)
-[SharePointFieldMapping(IsKey = true)]
-public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
-
 // Define a collection as expandable
-[SharePointFieldMapping(Expandable = true)]
+[SharePointProperty("Items", Expandable = true)]
 public IListItemCollection Items
 {
     get
@@ -62,14 +70,17 @@ public IListItemCollection Items
         return GetValue<IListItemCollection>();
     }
 }
+
+// Set the keyfield for this model class
+[KeyProperty("Id")]
+public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
 ```
 
 You can set following properties on this attribute:
 
 Property | Required | Description
 ---------|----------|------------
-FieldName | No | Use this property when the SharePoint REST fieldname differs from the model property name
-IsKey | No | Marks the model property as holding a unique value. This value is used to ensure no duplicate model class instances are loaded in collection classes, if the model class has a unique property then that property should be decorated
+FieldName | Yes | Use this property when the SharePoint REST fieldname differs from the model property name, since the field name is required by the default constructor you always need to provide this value when you add this property
 JsonPath | No | When the information returned from SharePoint REST is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild)
 Expandable | No | Defines that a collection is expandable, meaning it can be loaded via the $expand query parameter and used in the lambda expression in `Get` and `GetAsync` operations
 ExpandByDefault | No | When the model contains a collection of other model objects then setting this attribute to true will automatically result in the population of that collection. This can negatively impact performance, so only set this when the collection is almost always needed
@@ -102,7 +113,7 @@ Below code snippets show the above three concepts. First one shows the collectio
 /// <summary>
 /// Public interface to define a collection of List objects of SharePoint Online
 /// </summary>
-public interface IListCollection : IDataModelCollection<IList>
+public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, ISupportPaging
 {
     /// <summary>
     /// Adds a new list
