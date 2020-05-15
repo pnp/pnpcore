@@ -4,7 +4,7 @@
     href: intro.md
 - name: User documentation
   items:
-  - name: Introcution
+  - name: Introduction
     href: consumer/readme.md
 - name: Contributor documentation
   items:
