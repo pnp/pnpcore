@@ -44,7 +44,7 @@ namespace PnP.Core.Model
                 }
 
                 // Map the returned JSON to the respective entities
-                await FromJson(batchRequest.Model, batchRequest.EntityInfo, new ApiResponse(batchRequest.ApiCall, root), batchRequest.FromJsonCasting).ConfigureAwait(false);
+                await FromJson(batchRequest.Model, batchRequest.EntityInfo, new ApiResponse(batchRequest.ApiCall, root, batchRequest.Id), batchRequest.FromJsonCasting).ConfigureAwait(false);
                 batchRequest.PostMappingJson?.Invoke(batchRequest.ResponseJson);
             }
         }
@@ -81,6 +81,9 @@ namespace PnP.Core.Model
             var pnpObjectType = pnpObject.GetType();
             var metadataBasedObject = pnpObject as IMetadataExtensible;
             var contextAwareObject = pnpObject as IDataModelWithContext;
+
+            // Set the batch request id property
+            SetBatchRequestId(pnpObject, apiResponse.BatchRequestId);
 
             // Check if we somehow require pushing values into a generic dictionary
             TransientDictionary dictionaryPropertyToAddValueTo = null;
@@ -122,7 +125,7 @@ namespace PnP.Core.Model
                         var typedCollection = propertyToSetValue as IManageableCollection;
 
                         // Try to get the results property, start with a default value
-                        JsonElement resultsProperty = default(JsonElement);
+                        JsonElement resultsProperty = default;
 
                         // If the property is named "results" and is of type Array, it means it is a collection of items
                         if (property.Name == "results" && property.Value.ValueKind == JsonValueKind.Array)
@@ -144,13 +147,17 @@ namespace PnP.Core.Model
                             {
                                 // Create a new model instance to add to the collection
                                 var pnpChild = typedCollection.CreateNew();
+
+                                // Set the batch request id property
+                                SetBatchRequestId(pnpChild as TransientObject, apiResponse.BatchRequestId);
+
                                 var contextAwarePnPChild = pnpChild as IDataModelWithContext;
 
                                 // Set PnPContext via a dynamic property
                                 contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
 
                                 // Recursively map properties, call the method from the actual object as the object could have overriden it
-                                await ((IDataModelGet)pnpChild).GetAsync(new ApiResponse(apiResponse.ApiCall, childJson)).ConfigureAwait(false);
+                                await ((IDataModelGet)pnpChild).GetAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
 
                                 // Check if we've marked a field to be the key field for the entities in this collection
                                 if (pnpChildIdProperty == null)
@@ -174,7 +181,7 @@ namespace PnP.Core.Model
 
                                     // Only add to collection when not yet added
                                     // or replace the already existing item, if any
-                                    typedCollection.AddOrUpdate(pnpChild, 
+                                    typedCollection.AddOrUpdate(pnpChild,
                                         i => ((IDataModelWithKey)i).Key.Equals(pnpChildIdPropertyValue));
                                 }
                                 else
@@ -213,14 +220,17 @@ namespace PnP.Core.Model
                     {
                         // Get instance of the model property
                         var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
-                        
+
+                        // Set the batch request id property
+                        SetBatchRequestId(propertyToSetValue as TransientObject, apiResponse.BatchRequestId);
+
                         // Set PnPContext via a dynamic property
                         ((IDataModelWithContext)propertyToSetValue).PnPContext = contextAwareObject.PnPContext;
 
                         // Set parent
                         ((IDataModelParent)propertyToSetValue).Parent = (IDataModelParent)pnpObject;
 
-                        await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value)).ConfigureAwait(false);
+                        await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
                     }
                     else
                     {
@@ -321,6 +331,7 @@ namespace PnP.Core.Model
 
         }
 
+
         /// <summary>
         /// Maps JSON to model classes
         /// </summary>
@@ -335,6 +346,9 @@ namespace PnP.Core.Model
             var pnpObjectType = pnpObject.GetType();
             var metadataBasedObject = pnpObject as IMetadataExtensible;
             var contextAwareObject = pnpObject as IDataModelWithContext;
+
+            // Set the batch request id property
+            SetBatchRequestId(pnpObject, apiResponse.BatchRequestId);
 
             // Check if we somehow require pushing values into a generic dictionary
             TransientDictionary dictionaryPropertyToAddValueTo = null;
@@ -399,13 +413,17 @@ namespace PnP.Core.Model
                         {
                             // Create a new model instance to add to the collection
                             var pnpChild = typedCollection.CreateNew();
+
+                            // Set the batch request id property
+                            SetBatchRequestId(pnpChild as TransientObject, apiResponse.BatchRequestId);
+
                             var contextAwarePnPChild = pnpChild as IDataModelWithContext;
 
                             // Set PnPContext via a dynamic property
                             contextAwarePnPChild.PnPContext = contextAwareObject.PnPContext;
 
                             // Recursively map properties, call the method from the actual object as the object could have overriden it
-                            await ((IDataModelGet)pnpChild).GetAsync(new ApiResponse(apiResponse.ApiCall, childJson)).ConfigureAwait(false);
+                            await ((IDataModelGet)pnpChild).GetAsync(new ApiResponse(apiResponse.ApiCall, childJson, apiResponse.BatchRequestId)).ConfigureAwait(false);
 
                             // Check if we've marked a field to be the key field for the entities in this collection
                             if (pnpChildIdProperty == null)
@@ -454,7 +472,10 @@ namespace PnP.Core.Model
                         // Get instance of the model property
                         var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
 
-                        await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value)).ConfigureAwait(false);
+                        // Set the batch request id property
+                        SetBatchRequestId(propertyToSetValue as TransientObject, apiResponse.BatchRequestId);
+
+                        await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
                     }
                     // Are we loading a complex type
                     else if (IsComplexType(entityField.PropertyInfo.PropertyType))
@@ -476,6 +497,10 @@ namespace PnP.Core.Model
                             // create the list item 
                             var typeToCreate = Type.GetType($"{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Namespace}.{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Name.Substring(1)}");
                             var complexTypeInstance = Activator.CreateInstance(typeToCreate);
+
+                            // Set the batch request id property
+                            SetBatchRequestId(complexTypeInstance as TransientObject, apiResponse.BatchRequestId);
+
                             (propertyToSetValue as System.Collections.IList).Add(complexTypeInstance);
 
                             // Get the complex model metadata
@@ -674,6 +699,10 @@ namespace PnP.Core.Model
             var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
             var typedModel = propertyToSetValue as IDataModelMappingHandler;
 
+            // Set the batch request id property
+            SetBatchRequestId(propertyToSetValue as TransientObject, (pnpObject as TransientObject).BatchRequestId);
+
+
             // Get class info
             var complexModelEntity = EntityManager.Instance.GetStaticClassInfo(propertyToSetValue.GetType());
 
@@ -745,6 +774,11 @@ namespace PnP.Core.Model
             }
 
             return element;
+        }
+
+        private static void SetBatchRequestId(TransientObject pnpObject, Guid batchRequestId)
+        {
+            (pnpObject as TransientObject).BatchRequestId = batchRequestId;
         }
 
         private static EntityFieldInfo LookupEntityField(EntityInfo entity, ApiResponse apiResponse, JsonProperty property)

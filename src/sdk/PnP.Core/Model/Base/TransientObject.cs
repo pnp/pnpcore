@@ -23,6 +23,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// Validate update handler
         /// </summary>
+        [SystemProperty]
         internal ValidateUpdate ValidateUpdateHandler { get; set; } = null;
 
         /// <summary>
@@ -59,6 +60,12 @@ namespace PnP.Core.Model
         [Browsable(false)]
         [SystemProperty]
         internal bool Deleted { get; set; }
+
+        /// <summary>
+        /// Id if the batch request that loaded this mode instance
+        /// </summary>
+        [SystemProperty]
+        internal Guid BatchRequestId { get; set; }
 
         public virtual void Commit()
         {

@@ -14,7 +14,6 @@ namespace PnP.Core.Services
     {
         private static readonly HttpClient httpClient = new HttpClient();
         private const string tokenEndpoint = "https://login.microsoftonline.com/common/oauth2/token";
-        private const string graphBaseUri = "https://graph.microsoft.com";
 
         // Microsoft SharePoint Online Management Shell client id
         //private static readonly string aadAppId = "9bc3ab49-b65d-410a-85ad-de819febfddc";
@@ -26,10 +25,10 @@ namespace PnP.Core.Services
 
         // SharePoint token cache handling
         private static readonly SemaphoreSlim semaphoreSlimSharePoint = new SemaphoreSlim(1);
-        private ConcurrentDictionary<string, string> sharePointTokenCache = new ConcurrentDictionary<string, string>();
+        private readonly ConcurrentDictionary<string, string> sharePointTokenCache = new ConcurrentDictionary<string, string>();
 
         private static readonly SemaphoreSlim semaphoreSlimMicrosoftGraph = new SemaphoreSlim(1);
-        private ConcurrentDictionary<string, string> microsoftGraphTokenCache = new ConcurrentDictionary<string, string>();
+        private readonly ConcurrentDictionary<string, string> microsoftGraphTokenCache = new ConcurrentDictionary<string, string>();
 
         public OAuthAuthenticationProvider(
             ILogger<OAuthAuthenticationProvider> logger)
@@ -77,7 +76,7 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(resource));
             }
 
-            if (resource.AbsoluteUri.ToLower() == graphBaseUri)
+            if (resource.AbsoluteUri.Equals(PnPConstants.MicrosoftGraphBaseUrl, StringComparison.InvariantCultureIgnoreCase))
             {
                 return await GetMicrosoftGraphAccessTokenAsync().ConfigureAwait(false);
             }
@@ -163,7 +162,7 @@ namespace PnP.Core.Services
 
         private async Task<string> EnsureMicrosoftGraphAccessTokenAsync(string userPrincipalName, string userPassword)
         {
-            Uri resourceUri = new Uri(graphBaseUri);
+            Uri resourceUri = PnPConstants.MicrosoftGraphBaseUri;
             string accessTokenFromCache = TokenFromCache(resourceUri, microsoftGraphTokenCache);
             if (accessTokenFromCache == null)
             {

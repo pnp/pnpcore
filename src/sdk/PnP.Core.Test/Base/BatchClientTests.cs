@@ -4,6 +4,7 @@ using PnP.Core.Model;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model.SharePoint;
 
 namespace PnP.Core.Test.Base
 {
@@ -217,6 +218,28 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.Items));
                 // Site Assets should have items
                 Assert.IsTrue(list1.Items.Count() > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestBatchRequestIdPopulation()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Get web title : this can be done using rest and graph and since we're graphfirst this will go via Graph
+                await context.Web.GetAsync(p => p.Title);
+
+                // The batch request id should be populated
+                Guid batchRequestId = (context.Web as Web).BatchRequestId;
+                Assert.IsTrue(batchRequestId != Guid.Empty);
+
+                // Get the web searchscope: this will require a rest call and update the loaded web object
+                await context.Web.GetAsync(p => p.SearchScope);
+
+                // Since the web object was reloaded, the batch request must have changed
+                Assert.IsTrue((context.Web as Web).BatchRequestId != Guid.Empty);
+                Assert.IsTrue((context.Web as Web).BatchRequestId != batchRequestId);
             }
         }
 

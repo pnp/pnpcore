@@ -56,6 +56,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// Dictionary to access the domain model object Metadata
         /// </summary>
+        [SystemProperty]
         public Dictionary<string, string> Metadata { get; } = new Dictionary<string, string>();
 
         /// <summary>
@@ -301,16 +302,19 @@ namespace PnP.Core.Model
         /// <summary>
         /// API call override handler for get requests
         /// </summary>
+        [SystemProperty]
         internal GetApiCallOverride GetApiCallOverrideHandler { get; set; } = null;
 
         /// <summary>
         /// Handler that will fire when a property mapping does cannot be done automatically
         /// </summary>
+        [SystemProperty]
         public Func<FromJson, object> MappingHandler { get; set; } = null;
 
         /// <summary>
         /// Handler that will fire after the full json to model operation was done
         /// </summary>
+        [SystemProperty]
         public Action<string> PostMappingHandler { get; set; } = null;
 
         internal virtual async Task BaseGet(ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<TModel, object>>[] expressions)
@@ -868,6 +872,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// API call override handler for update requests
         /// </summary>
+        [SystemProperty]
         internal UpdateApiCallOverride UpdateApiCallOverrideHandler { get; set; } = null;
 
         /// <summary>
@@ -1150,6 +1155,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// API call override handler for delete requests
         /// </summary>
+        [SystemProperty]
         internal DeleteApiCallOverride DeleteApiCallOverrideHandler { get; set; } = null;
 
         /// <summary>
