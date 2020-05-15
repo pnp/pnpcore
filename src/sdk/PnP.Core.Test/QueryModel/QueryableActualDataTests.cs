@@ -12,6 +12,22 @@ namespace PnP.Core.Test.QueryModel
     public class QueryableActualDataTests
     {
         [TestMethod]
+        public void TestQueryWebs()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var query = context.Site.AllWebs
+                            .Load(w => w.Id, w => w.Title, w => w.Description);
+
+                var queryResult = query.ToList();
+
+                Assert.IsNotNull(queryResult);
+                Assert.IsTrue(queryResult.Count > 0);
+            }
+        }
+
+        [TestMethod]
         public void TestQueryLists()
         {
             // TestCommon.Instance.Mocking = false;

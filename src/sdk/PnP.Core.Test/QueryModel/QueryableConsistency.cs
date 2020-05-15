@@ -451,5 +451,31 @@ namespace PnP.Core.Test.QueryModel
                 Assert.AreEqual(1, list.Items.Length);
             }
         }
+
+        [TestMethod]
+        public async Task TestMultipleQueriesInSingleContext()
+        {
+            var listTitle = "Site Pages";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Get all the lists first
+                var listsQuery = context.Web.Lists.Load(l => l.Id, l => l.Title);
+                var listsQueryResult = listsQuery.ToList();
+
+                // Then try to get a specific list by title
+                var list = context.Web.Lists.GetByTitle(listTitle, l => l.Id, l => l.Title, l => l.Description);
+
+                // Then get the list items
+                await list.GetAsync(l => l.Items);
+
+                Assert.IsNotNull(listsQueryResult);
+                Assert.IsTrue(listsQueryResult.Count > 5);
+                Assert.IsNotNull(list);
+                Assert.AreEqual(listTitle, list.Title);
+                Assert.AreEqual(1, list.Items.Length);
+            }
+        }
     }
 }

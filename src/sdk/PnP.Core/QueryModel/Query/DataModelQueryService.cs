@@ -49,7 +49,8 @@ namespace PnP.Core.QueryModel.Query
             // At this point in time we support querying collections of 
             // IList and IListItem or single elements of those collections
             if (typeof(TModel).IsAssignableFrom(typeof(IList)) ||
-                typeof(TModel).IsAssignableFrom(typeof(IListItem)))
+                typeof(TModel).IsAssignableFrom(typeof(IListItem)) ||
+                typeof(TModel).IsAssignableFrom(typeof(IWeb)))
             {
                 // Get the entity info
                 var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));

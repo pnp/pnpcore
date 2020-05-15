@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Web class, write your custom code here
     /// </summary>
-    [SharePointType("SP.Web", Uri = "_api/web")]
+    [SharePointType("SP.Web", Uri = "_api/web", LinqGet = "_api/site/rootWeb/webinfos")]
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
     internal partial class Web
     {
