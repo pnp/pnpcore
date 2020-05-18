@@ -7,23 +7,19 @@ When decorating model classes and properties via attributes one often needs to d
 
 ```csharp
 // Site.GroupId token to grab the id of the Office 365 group connected to the current site
-[ClassMapping(GraphId = "id",  GraphUri = "teams/{Site.GroupId}")]
-[GraphFieldMapping(FieldName = "installedApps", GraphGet = "teams/{Site.GroupId}/installedapps?expand=TeamsApp")]
+[GraphType(Uri = "teams/{Site.GroupId}")]
+[GraphProperty("installedApps", Get = "teams/{Site.GroupId}/installedapps?expand=TeamsApp")]
 
 // Parent.GraphId to get Microsoft Graph Id value of the parent class instance of the model
 // GraphId to get the If value of the model class instance
-[ClassMapping(GraphId = "id", GraphUri = "teams/{Parent.GraphId}/channels/{GraphId}")]
+[GraphType(Uri = "teams/{Parent.GraphId}/channels/{GraphId}")]
 
 // Id property to get the SharePoint REST Id value of the model class instance
-[ClassMapping(SharePointType = "SP.List",
-              SharePointUri = "_api/Web/Lists(guid'{Id}')",
-              SharePointGet = "_api/web/lists",
-              SharePointUpdate = "_api/web/lists/getbyid(guid'{Id}')",
-              GraphId = "id",
-              GraphGet = "sites/{Parent.GraphId}/lists/{GraphId}")]
+[SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
+[GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}")]
 
 // Web.GraphId to get the Microsoft Graph Id value of the SharePoint Web model instance of the current PnPContext instance
-[GraphFieldMapping(FieldName = "items", GraphGet = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
+[GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
 ```
 
 ## Model tokens that can be used

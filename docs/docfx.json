@@ -5,7 +5,7 @@
         {
           "files": [ "**.csproj" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
-          "src": "../../Microsoft.O365.Prototype/PnP.Core"
+          "src": "../src/sdk/PnP.Core"
         }
       ],
       "dest": "api",

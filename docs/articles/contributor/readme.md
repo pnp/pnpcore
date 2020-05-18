@@ -14,6 +14,8 @@ In the model there are 3 types of classes:
 - Model classes typically use simple .Net types or enumerations as type for their properties, but sometimes a complex type is needed which is represented via a **complex type class**
 - Model classes often live in a collection, so we do have **model collection classes**
 
+A special case is **complex type** collections, they can be used in collections and the collection will then be a `List` of **model collection classes**.
+
 Each of these classes has a public model implemented via interfaces and an internal model implemented via internal partial classes.
 
 ### Model classes
@@ -28,6 +30,7 @@ The public model is build via public interfaces. Below sample shows the public m
 /// <summary>
 /// Public interface to define a List object of SharePoint Online
 /// </summary>
+[ConcreteType(typeof(List))]
 public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
 {
     /// <summary>
@@ -45,7 +48,7 @@ public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
     /// </summary>
     public string Description { get; set; }
 
-    // Other fields left for brevity
+    // Other properties left for brevity
 }
 ```
 
@@ -85,18 +88,17 @@ Here's a snippet of the `List.gen.cs` class:
 ```csharp
 internal partial class List : BaseDataModel<IList>, IList
 {
-    [SharePointFieldMapping(IsKey = true)]
-    [GraphFieldMapping(FieldName = "id", IsKey = true)]
     public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
-    [GraphFieldMapping(FieldName = "displayName")]
+    [GraphProperty("displayName")]
     public string Title { get => GetValue<string>(); set => SetValue(value); }
 
-    [GraphFieldMapping(FieldName = "description")]
+    [GraphProperty("description")]
     public string Description { get => GetValue<string>(); set => SetValue(value); }
-    
-    // Other fields left for brevity
 
+    // Other properties left for brevity
+
+    [KeyProperty("Id")]
     public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
 }
 ```
@@ -112,12 +114,8 @@ Each generated model class:
 Here's a snippet of the `List.cs` class:
 
 ```csharp
-[ClassMapping(SharePointType = "SP.List",
-              SharePointUri = "_api/Web/Lists(guid'{Id}')",
-              SharePointGet = "_api/web/lists",
-              SharePointUpdate = "_api/web/lists/getbyid(guid'{Id}')",
-              GraphId = "id",
-              GraphGet = "sites/{Parent.GraphId}/lists/{GraphId}")]
+[SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
+[GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}")]
 internal partial class List
 {
     internal List()
@@ -129,6 +127,7 @@ internal partial class List
             {
                 case "ListExperience": return ToEnum<ListExperience>(input.JsonElement);
                 case "ListReadingDirection": return ToEnum<ListReadingDirection>(input.JsonElement);
+                case "ListTemplateType": return JsonMappingHelper.ToEnum<ListTemplateType>(input.JsonElement);
             }
 
             input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");
@@ -171,7 +170,7 @@ Like with all our public models, the complex type classes also use interfaces.
 /// <summary>
 /// Public interface to define the fun settings for a Team
 /// </summary>
-public interface ITeamFunSettings: IComplexModel
+public interface ITeamFunSettings: IComplexType
 {
     /// <summary>
     /// Defines whether the Giphy are allowed in the Team
@@ -208,9 +207,9 @@ Each public model:
 
 - Uses a public interface (e.g. `ITeamFunSettings` in our example) with public properties
 - Has inline documentation on the class and properties
-- Always implements the `IComplexModel` interface
+- Always implements the `IComplexType` interface
 
-The properties in the model use either basic .Net data types or enumerations:
+The properties in the model use either basic .Net data types, other **complex types** or enumerations:
 
 ```csharp
 // Basic .Net type
@@ -229,8 +228,8 @@ For the internal complex type class implementation we've opted to use an interna
 Here's a snippet of the `TeamFunSettings.gen.cs` class:
 
 ```csharp
-[ClassMapping]
-internal partial class TeamFunSettings : BaseComplexTypeModel<ITeamFunSettings>, ITeamFunSettings
+[GraphType]
+internal partial class TeamFunSettings : BaseComplexType<ITeamFunSettings>, ITeamFunSettings
 {
 
     public TeamFunSettings()
@@ -257,9 +256,9 @@ internal partial class TeamFunSettings : BaseComplexTypeModel<ITeamFunSettings>,
 
 Each generated complex model class:
 
-- Inherits from the `BaseComplexTypeModel<TModel>` class and implements `TModel`
+- Inherits from the `BaseComplexType<TModel>` class and implements `TModel`
 - Is an **internal**, **partial** class
-- Has the `ClassMapping` class attribute
+- Has the `GraphType` and/or the `SharePointType` class attribute
 - Has public properties that use the `GetValue` and `SetValue` inherited methods to get and set property values
 - Possibly has property attributes that are used to define the requests to Microsoft 365 and serialization of the received data. These attributes are explained in more detail in their respective chapters later on
 - Can implement event handlers which are used to (see the [Event Handlers](event%20handlers.md) page for more details):
@@ -279,7 +278,7 @@ The public model is build via public interfaces. Below sample shows the public m
 /// <summary>
 /// Public interface to define a collection of List objects of SharePoint Online
 /// </summary>
-public interface IListCollection : IDataModelCollection<IList>
+public interface IListCollection : IDataModelCollection<IList>, IQueryable<IList>, ISupportPaging
 {
     /// <summary>
     /// Adds a new list
@@ -298,6 +297,8 @@ Each public model:
 - Uses a public interface (e.g. `IListCollection` in our example) with optionally public methods
 - Has inline documentation on the model class and methods
 - Always implements the `IDataModelCollection<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample)
+- Optionally implements the `IQueryable<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample) whenever the model can be queried using linq queries
+- Optionally implements the `ISupportPaging` interface whenever the data in the collection can be retrieved from the server via paging
 
 Optionally a collection interface defines methods which add behavior.
 
@@ -347,7 +348,7 @@ internal partial class ListCollection : QueryableDataModelCollection<IList>, ILi
 
 Each generated collection class:
 
-- Inherits from the `QueryableDataModelCollection<TModel>` class and implements the previously created collection interface (e.g. `IListCollection`)
+- Inherits from either the `BaseDataModelCollection<TModel>` for regular collections or from the `QueryableDataModelCollection<TModel>` class for linq queriable collections and implements the previously created collection interface (e.g. `IListCollection`)
 - Is an **internal**, **partial** class
 - Overrides the `CreateNew()` base class methods
 
@@ -387,6 +388,79 @@ Each coded collection class:
 - Is an **internal**, **partial** class
 - Does not inherit from another class (the inheriting is done in the `Collection.gen.cs` partial class)
 - Contains the implementation of the methods defined in the public interface
+
+### Complex type collections
+
+Complex type classes are used to represent types which are too complex for simple .Net type or enumeration, but on the other hand not complex enough to be queried independently via an API call. Sometimes you need a collection of complex type classes, which can be released via the `List` .Net collection class.
+
+#### Public model
+
+The complex type collection is `List` of complex types as shown in below example. Properties that are a complex type collection should only support a property `get`.
+
+```csharp
+public interface ITeamChatMessage : IDataModel<ITeamChatMessage>
+{
+    // Other properties left for brevity
+
+    /// <summary>
+    /// Reactions for this chat message (for example, Like).
+    /// </summary>
+    public List<ITeamChatMessageReaction> Reactions { get; }
+
+    /// <summary>
+    /// List of entities mentioned in the chat message. Currently supports user, bot, team, channel.
+    /// </summary>
+    public List<ITeamChatMessageMention> Mentions { get; }
+
+    // Other properties left for brevity
+}
+```
+
+#### Internal implementation
+
+For the internal complex type class collection implementation you need to update the generated partial class of the model class having the collection:
+
+- A `Model.gen.cs` class for semi-generated complex type class code
+
+Here's a snippet of the `TeamChatMessage.gen.cs` class:
+
+```csharp
+internal partial class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage
+{
+    // Other properties left for brevity
+
+    public List<ITeamChatMessageReaction> Reactions
+    {
+        get
+        {
+            if (!HasValue(nameof(Reactions)))
+            {
+                SetValue(new List<ITeamChatMessageReaction>());
+            }
+            return GetValue<List<ITeamChatMessageReaction>>();
+        }
+    }
+
+    public List<ITeamChatMessageMention> Mentions
+    {
+        get
+        {
+            if (!HasValue(nameof(Mentions)))
+            {
+                SetValue(new List<ITeamChatMessageMention>());
+            }
+            return GetValue<List<ITeamChatMessageMention>>();
+        }
+    }
+
+    // Other properties left for brevity
+}
+```
+
+Each generated complex model class that contains complex type collections:
+
+- Uses a `List<>` of the complex type class
+- Implements the getter as shown in the example. It's important that the `HasValue` and `SetValue` methods are used to ensure the change tracking can detect changed values
 
 ## Decorating the model
 

@@ -7,43 +7,46 @@ The PnP Core SDK model contains model, collection and complex type classes which
 
 ### Class decoration
 
-Each model class does need to have a `ClassMapping` attribute which is defined on the coded model class (e.g. Team.cs):
+Each model class does need to have a `GraphType` attribute which is defined on the coded model class (e.g. Team.cs):
 
 ```csharp
-[ClassMapping(GraphId = "id",
-              GraphUri = "teams/{Site.GroupId}")]
+[GraphType(Uri = "teams/{Site.GroupId}")]
 internal partial class Team
 {
     // Ommitted for brevity
 }
 ```
 
-When configuring the `ClassMapping` attribute for Microsoft Graph you need to set attribute properties:
+When configuring the `GraphType` attribute for Microsoft Graph you need to set attribute properties:
 
 Property | Required | Description
 ---------|----------|------------
-GraphId | Yes | Defines the Microsoft graph object field which serves as unique id for the object. Typically this field is called `id`
-GraphUri | Yes | Defines the URI that uniquely identifies this object. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use
-GraphGet | No | Overrides the GraphUri property for **get** operations
-GraphUpdate | No | Overrides the GraphUri property for **update** operations
-GraphDelete | No | Overrides the GraphUri property for **delete** operations
-GraphOverflowFieldName | No | Used when working with a dynamic property/value pair (e.g. fields in a SharePoint ListItem) whenever the Microsoft Graph field containing these dynamic properties is not named `Values`
+Uri | Yes | Defines the URI that uniquely identifies this object. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use.
+Id | No | Defines the Microsoft graph object field which serves as unique id for the object. Typically this field is called `id` and that's also the default value, but you can provide another value if needed.
+Get | No | Overrides the Uri property for **get** operations.
+LinqGet | No | Some model classes do support linq queries which are translated in corresponding server calls. If a class supports linq in this way, then it also needs to have the LinqGet attribute set.
+Update | No | Overrides the Uri property for **update** operations.
+Delete | No | Overrides the Uri property for **delete** operations.
+OverflowProperty | No | Used when working with a dynamic property/value pair (e.g. fields in a SharePoint ListItem) whenever the Microsoft Graph field containing these dynamic properties is not named `Values`.
+Beta | No | Defined that a model can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint then this model will not be populated.
 
 ### Property decoration
 
-The property level decoration is done using the `GraphFieldMapping` attribute. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. Teams.gen.cs) the decoration via attributes needs to happen in this class as well.
+The property level decoration is done using the `GraphProperty` and `KeyProperty` attributes. Each model instance does require to have a override of the `Key` property and that `Key` property **must** be decorated with the `KeyProperty` attribute which specifies which of the actual fields in the model must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.
+
+Whereas the `KeyProperty` attribute is always there once in each model class, the usage of the `GraphProperty` attribute is only required for special cases. Since the properties are defined in the generated model class (e.g. Web.gen.cs and Teams.gen.cs) the decoration via attributes needs to happen in this class as well.
 
 ```csharp
-// Configure the Microsoft Graph field used to populate this model property
-[GraphFieldMapping(FieldName = "displayName")]
+// In graph the fieldname is "name", whereas in the model the name is "Title"
+[GraphProperty("name")]
 public string Title { get => GetValue<string>(); set => SetValue(value); }
 
 // Mark the property that serves as Key field (used to ensure there are no duplicates in collections), use a JsonPath to get the specific value you need
-[GraphFieldMapping(FieldName = "sharepointIds", JsonPath = "webId", IsKey = true)]
+[GraphProperty("sharepointIds", JsonPath = "webId")]
 public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
 // Define a collection as expandable
-[GraphFieldMapping(FieldName = "lists", Expandable = true)]
+[GraphProperty("lists", Expandable = true)]
 public IListCollection Lists
 {
     get
@@ -62,7 +65,7 @@ public IListCollection Lists
 }
 
 // Configure an additional query to load this model class, this is a non expandable collection
-[GraphFieldMapping(FieldName = "channels", ExpandByDefault = true, GraphGet = "teams/{Site.GroupId}/channels")]
+[GraphProperty("channels", ExpandByDefault = true, Get = "teams/{Site.GroupId}/channels")]
 public ITeamChannelCollection Channels
 {
     get
@@ -79,45 +82,50 @@ public ITeamChannelCollection Channels
         return GetValue<ITeamChannelCollection>();
     }
 }
+
+// Set the keyfield for this model class
+[KeyProperty("Id")]
+public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
 ```
 
 You can set following properties on this attribute:
 
 Property | Required | Description
 ---------|----------|------------
-FieldName | No | Use this property when the Microsoft Graph fieldname differs from the model property name
-IsKey | No | Marks the model property as holding a unique value. This value is used to ensure no duplicate model class instances are loaded in collection classes, if the model class has a unique property then that property should be decorated
+FieldName | Yes | Use this property when the Microsoft Graph fieldname differs from the model property name. Since the field name is required by the default constructor you always need to provide this value when you add this property
 JsonPath | No | When the information returned from Microsoft Graph is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild)
 Expandable | No | Defines that a collection is expandable, meaning it can be loaded via the $expand query parameter and used in the lambda expression in `Get` and `GetAsync` operations
 ExpandByDefault | No | When the model contains a collection of other model objects then setting this attribute to true will automatically result in the population of that collection. This can negatively impact performance, so only set this when the collection is almost always needed
-GraphGet | No | Sometimes it's not possible to load the complete model via a single Microsoft Graph request, often this is the case with collections (so the collection is **not** expandable). In this case you need to explain how to load the collection via specifying the needed query. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use
+Get | No | Sometimes it's not possible to load the complete model via a single Microsoft Graph request, often this is the case with collections (so the collection is **not** expandable). In this case you need to explain how to load the collection via specifying the needed query. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use
 UseCustomMapping | No | Allows you to force a callout to the model's `MappingHandler` event handler whenever this property is populated. See the [Event Handlers](event%20handlers.md) article to learn more
+Beta | No | Defined that a model property can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint then this model property will not be populated.
 
 ## Configuring complex type classes
 
 ### Class decoration
 
-Each complex type class does require a `ClassMapping` attribute which is defined on the generated complex type class (e.g. TeamFunSettings.gen.cs):
+Each complex type class does require a `GraphProperty` attribute which is defined on the generated complex type class (e.g. TeamFunSettings.gen.cs):
 
 ```csharp
-[ClassMapping]
-internal partial class TeamFunSettings : BaseComplexTypeModel<ITeamFunSettings>, ITeamFunSettings
+[GraphProperty]
+internal partial class TeamFunSettings : BaseComplexType<ITeamFunSettings>, ITeamFunSettings
 {
     // Ommitted for brevity
 }
 ```
 
-Since the complex type class is not queried independently there's no need to further define properties on the `ClassMapping` attribute.
+Since the complex type class is not queried independently there's no need to further define properties on the `GraphProperty` attribute.
 
 ### Property decoration
 
-The property level decoration is done using the `GraphFieldMapping` attribute. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. TeamFunSettings.gen.cs) the decoration via attributes needs to happen in this class as well. Since complex types are not directly queried and are not used in collections only a few of the `GraphFieldMapping` properties make sense to be used.
+The property level decoration is done using the `GraphProperty` attribute. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. TeamFunSettings.gen.cs) the decoration via attributes needs to happen in this class as well. Since complex types are not directly queried and are not used in collections only a few of the `GraphProperty` properties make sense to be used.
 
 Property | Required | Description
 ---------|----------|------------
-FieldName | No | Use this property when the Microsoft Graph fieldname differs from the model property name
+FieldName | Yes | Use this property when the Microsoft Graph fieldname differs from the model property name. Since the field name is required by the default constructor you always need to provide this value when you add this property
 JsonPath | No | When the information returned from Microsoft Graph is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild)
 UseCustomMapping | No | Allows you to force a callout to the model's `MappingHandler` event handler whenever this property is populated. See the [Event Handlers](event%20handlers.md) article to learn more
+Beta | No | Defined that a model property can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint then this model property will not be populated.
 
 ## Configuring collection classes
 

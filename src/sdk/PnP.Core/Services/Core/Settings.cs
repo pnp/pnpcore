@@ -6,7 +6,7 @@ namespace PnP.Core.Services
 {
     public class Settings : ISettings
     {
-        private const string UserAgentPrefix = "NONISV|SharePointPnP|PnPdotNet";
+        private const string UserAgentPrefix = "NONISV|SharePointPnP|PnPCoreSDK";
         private readonly ILogger logger;
         private readonly IConfiguration config;
 
@@ -25,7 +25,7 @@ namespace PnP.Core.Services
 
         private string GetUserAgent()
         {
-            var userAgentFromConfig = config.GetValue<string>("PnPDotNet:UserAgent");
+            var userAgentFromConfig = config.GetValue<string>("PnPCore:UserAgent");
             if (!string.IsNullOrEmpty(userAgentFromConfig))
             {
                 logger.LogInformation($"Using user-agent value {userAgentFromConfig} provided by configuration");
@@ -43,7 +43,7 @@ namespace PnP.Core.Services
         private string GetVersionTag()
         {
             Assembly coreAssembly = Assembly.GetExecutingAssembly();
-            var versionTag = $"PnPNet:{((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version.Split('.')[2]}";
+            var versionTag = $"PnPSDK:{((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version.Split('.')[2]}";
             logger.LogInformation($"Using version tag value {versionTag}");
             return versionTag;
         }

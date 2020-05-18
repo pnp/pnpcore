@@ -4,7 +4,7 @@
     href: intro.md
 - name: User documentation
   items:
-  - name: Introcution
+  - name: Introduction
     href: consumer/readme.md
 - name: Contributor documentation
   items:
@@ -18,3 +18,5 @@
     href: contributor/event%20handlers.md 
   - name: Model tokens
     href: contributor/model%20tokens.md 
+  - name: Writing tests
+    href: contributor/writing%20tests.md 
