@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Services;
 using System;
@@ -46,7 +47,9 @@ namespace PnP.Core.Test.Services
             ILogger<PnPContext> logger,
             IAuthenticationProviderFactory authenticationProviderFactory,
             SharePointRestClient sharePointRestClient,
-            MicrosoftGraphClient microsoftGraphClient) : base(options, logger, authenticationProviderFactory, sharePointRestClient, microsoftGraphClient)
+            MicrosoftGraphClient microsoftGraphClient,
+            ISettings settingsClient,
+            TelemetryClient telemetryClient) : base(options, logger, authenticationProviderFactory, sharePointRestClient, microsoftGraphClient, settingsClient, telemetryClient)
         {
         }
 

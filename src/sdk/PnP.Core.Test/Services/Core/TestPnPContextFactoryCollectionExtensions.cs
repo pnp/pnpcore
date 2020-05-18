@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.Extensions.DependencyInjection;
 using PnP.Core.Services;
 using System;
 
@@ -19,7 +20,7 @@ namespace PnP.Core.Test.Services
             // Add a SharePoint Online Context Factory service instance
             return collection
                 .AddSettings()
-                //.AddTelemetryServices()
+                .AddTelemetryServices()
                 .AddHttpClients()
                 .AddPnPServices();
         }
@@ -40,7 +41,7 @@ namespace PnP.Core.Test.Services
             // Add a PnP Context Factory service instance
             return collection
                 .AddSettings()
-                //.AddTelemetryServices()
+                .AddTelemetryServices()
                 .AddHttpClients()
                 .AddPnPServices();
         }
@@ -61,13 +62,19 @@ namespace PnP.Core.Test.Services
 
         private static IServiceCollection AddTelemetryServices(this IServiceCollection collection)
         {
+            var settingsService = collection.BuildServiceProvider().GetRequiredService<ISettings>();
+
             // Setup Azure App Insights
             // See https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/WorkerServiceSampleWithApplicationInsights as example
             return collection.AddApplicationInsightsTelemetryWorkerService(options =>
             {
-                options.InstrumentationKey = "6d4ab985-60dd-4ecc-ad40-994b55350c1d";
+                if (!settingsService.DisableTelemetry)
+                {
+                        // Test AppInsights
+                        options.InstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
+                }
             });
-        }
 
+        }
     }
 }

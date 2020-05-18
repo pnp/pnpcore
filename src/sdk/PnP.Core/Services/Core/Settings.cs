@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Reflection;
 
 namespace PnP.Core.Services
@@ -17,11 +18,23 @@ namespace PnP.Core.Services
 
             VersionTag = GetVersionTag();
             UserAgent = GetUserAgent();
+            DisableTelemetry = GetDisableTelemetry();
         }
 
         public string VersionTag { get; }
 
         public string UserAgent { get; }
+
+        public bool DisableTelemetry { get; }
+        
+        public Guid AADTenantId { get; set; }
+
+        private bool GetDisableTelemetry()
+        {
+            var disableTelemetry = config.GetValue<bool>("PnPCore:DisableTelemetry");
+            logger.LogInformation($"Using telemetry setting from configuration. Telemetry disabled: {disableTelemetry}");
+            return disableTelemetry;
+        }
 
         private string GetUserAgent()
         {

@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Services
@@ -17,6 +18,7 @@ namespace PnP.Core.Services
         #region Private fields
 
         private bool graphCanUseBeta = true;
+        private static readonly HttpClient httpClient = new HttpClient();        
 
         #endregion
 
@@ -41,11 +43,7 @@ namespace PnP.Core.Services
 
         #region Private properties
 
-        private readonly ILogger log;
-        private readonly IAuthenticationProvider authProvider;
-        private readonly SharePointRestClient restClient;
-        private readonly MicrosoftGraphClient graphClient;
-        private readonly BatchClient batchClient;
+        private readonly ISettings settings;
         private Batch currentBatch;
 
         #endregion
@@ -56,11 +54,17 @@ namespace PnP.Core.Services
         /// Public constructor for an SPO context based on target site URL
         /// </summary>
         /// <param name="url">The URL of the site as a string</param>
+        /// <param name="logger">Logger instance</param>
         /// <param name="authenticationProvider">The authentication provider to authenticate against the target site url</param>
+        /// <param name="sharePointRestClient">SharePoint REST HTTP client</param>
+        /// <param name="microsoftGraphClient">Microsoft Graph HTTP client</param>
+        /// <param name="telemetryClient">AppInsights client for telemetry work</param>
         public PnPContext(string url, ILogger logger,
                                       IAuthenticationProvider authenticationProvider,
                                       SharePointRestClient sharePointRestClient,
-                                      MicrosoftGraphClient microsoftGraphClient) : this(new Uri(url), logger, authenticationProvider, sharePointRestClient, microsoftGraphClient)
+                                      MicrosoftGraphClient microsoftGraphClient,
+                                      ISettings settingsClient,
+                                      TelemetryClient telemetryClient) : this(new Uri(url), logger, authenticationProvider, sharePointRestClient, microsoftGraphClient, settingsClient, telemetryClient)
         {
         }
 
@@ -68,22 +72,33 @@ namespace PnP.Core.Services
         /// Public constructor for an SPO context based on target site URL
         /// </summary>
         /// <param name="uri">The URI of the site as a URI</param>
+        /// <param name="logger">Logger instance</param>
         /// <param name="authenticationProvider">The authentication provider to authenticate against the target site url</param>
+        /// <param name="sharePointRestClient">SharePoint REST HTTP client</param>
+        /// <param name="microsoftGraphClient">Microsoft Graph HTTP client</param>
+        /// <param name="telemetryClient">AppInsights client for telemetry work</param>
         public PnPContext(Uri uri, ILogger logger,
                                    IAuthenticationProvider authenticationProvider,
                                    SharePointRestClient sharePointRestClient,
-                                   MicrosoftGraphClient microsoftGraphClient)
+                                   MicrosoftGraphClient microsoftGraphClient,
+                                   ISettings settingsClient,
+                                   TelemetryClient telemetryClient)
         {
-            log = logger;
+            Id = Guid.NewGuid();
+            Logger = logger;
             Uri = uri;
 #if DEBUG
             Mode = PnPContextMode.Default;
 #endif
-            authProvider = authenticationProvider;
-            restClient = sharePointRestClient;
-            graphClient = microsoftGraphClient;
+            AuthenticationProvider = authenticationProvider;
+            RestClient = sharePointRestClient;
+            GraphClient = microsoftGraphClient;
+            settings = settingsClient;
 
-            batchClient = new BatchClient(this);
+            SetAADTenantId();
+
+            BatchClient = new BatchClient(this, settingsClient, telemetryClient);
+            
         }
 
         #endregion
@@ -98,61 +113,36 @@ namespace PnP.Core.Services
         /// <summary>
         /// Connected logger
         /// </summary>
-        public ILogger Logger
-        {
-            get
-            {
-                return log;
-            }
-        }
+        public ILogger Logger { get; }
 
         /// <summary>
         /// Connected authentication provider
         /// </summary>
-        public IAuthenticationProvider AuthenticationProvider
-        {
-            get
-            {
-                return authProvider;
-            }
-        }
+        public IAuthenticationProvider AuthenticationProvider { get; }
 
         /// <summary>
         /// Connected SharePoint REST client
         /// </summary>
-        public SharePointRestClient RestClient
-        {
-            get
-            {
-                return restClient;
-            }
-        }
+        public SharePointRestClient RestClient { get; }
 
         /// <summary>
         /// Connected Microsoft Graph client
         /// </summary>
-        public MicrosoftGraphClient GraphClient
-        {
-            get
-            {
-                return graphClient;
-            }
-        }
+        public MicrosoftGraphClient GraphClient { get; }
 
         /// <summary>
         /// Connected batch client
         /// </summary>
-        internal BatchClient BatchClient
-        {
-            get
-            {
-                return batchClient;
-            }
-        }
+        internal BatchClient BatchClient { get; }
+
+        /// <summary>
+        /// Unique id for this <see cref="PnPContext"/>
+        /// </summary>
+        internal Guid Id { get; private set; }
 
 #if DEBUG
 
-#region Test related properties
+        #region Test related properties
         /// <summary>
         /// Mode this context operates in
         /// </summary>
@@ -237,7 +227,7 @@ namespace PnP.Core.Services
             {
                 if (currentBatch == null || currentBatch.Executed)
                 {
-                    currentBatch = batchClient.EnsureBatch();
+                    currentBatch = BatchClient.EnsureBatch();
                 }
 
                 return currentBatch;
@@ -317,7 +307,7 @@ namespace PnP.Core.Services
         /// <returns>The asynchronous task that will be executed</returns>
         public async Task ExecuteAsync()
         {
-            await batchClient.ExecuteBatch(CurrentBatch).ConfigureAwait(false);
+            await BatchClient.ExecuteBatch(CurrentBatch).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -332,7 +322,7 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(batch));
             }
 
-            await batchClient.ExecuteBatch(batch).ConfigureAwait(false);
+            await BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
         #endregion
@@ -392,6 +382,43 @@ namespace PnP.Core.Services
 
         #region Helper methods
 
+        /// <summary>
+        /// Gets the Azure Active Directory tenant id. Using the client.svc endpoint approach as that one will also work with vanity SharePoint domains
+        /// </summary>
+        private void SetAADTenantId()
+        {
+            if (settings.AADTenantId == Guid.Empty)
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri}/_vti_bin/client.svc"))
+                {
+                    request.Headers.Add("Authorization", "Bearer");
+                    HttpResponseMessage response = httpClient.SendAsync(request).GetAwaiter().GetResult();
+
+                    // Grab the tenant id from the wwwauthenticate header. 
+                    var bearerResponseHeader = response.Headers.WwwAuthenticate.ToString();
+                    const string bearer = "Bearer realm=\"";
+                    var bearerIndex = bearerResponseHeader.IndexOf(bearer, StringComparison.Ordinal);
+
+                    var realmIndex = bearerIndex + bearer.Length;
+
+                    if (bearerResponseHeader.Length >= realmIndex + 36)
+                    {
+                        var targetRealm = bearerResponseHeader.Substring(realmIndex, 36);
+
+                        if (Guid.TryParse(targetRealm, out Guid realmGuid))
+                        {
+                            settings.AADTenantId = realmGuid;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Simple is sub site check based upon the url pattern
+        /// </summary>
+        /// <param name="site">Uri to check</param>
+        /// <returns>True if sub site, false otherwise</returns>
         private static bool IsSubSite(Uri site)
         {
             string cleanedPath = site.AbsolutePath.ToLower().Replace("/teams/", "").Replace("/sites/", "").TrimEnd(new char[] { '/' });

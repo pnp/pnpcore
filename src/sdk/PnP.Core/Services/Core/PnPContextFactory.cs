@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
@@ -16,13 +17,17 @@ namespace PnP.Core.Services
         private readonly IAuthenticationProviderFactory authProviderFactory;
         private readonly SharePointRestClient restClient;
         private readonly MicrosoftGraphClient graphClient;
+        private readonly TelemetryClient telemetry;
+        private readonly ISettings settings;
 
         public PnPContextFactory(
             IOptionsMonitor<PnPContextFactoryOptions> options,
             ILogger<PnPContext> logger,
             IAuthenticationProviderFactory authenticationProviderFactory,
             SharePointRestClient sharePointRestClient,
-            MicrosoftGraphClient microsoftGraphClient)
+            MicrosoftGraphClient microsoftGraphClient,
+            ISettings settingsClient,
+            TelemetryClient telemetryClient)
         {
             // We need the options
             if (options == null)
@@ -36,6 +41,8 @@ namespace PnP.Core.Services
             authProviderFactory = authenticationProviderFactory;
             restClient = sharePointRestClient;
             graphClient = microsoftGraphClient;
+            settings = settingsClient;
+            telemetry = telemetryClient;
         }
 
         /// <summary>
@@ -83,7 +90,7 @@ namespace PnP.Core.Services
             }
 
             // Use the provided settings to create a new instance of SPOContext
-            return new PnPContext(url, log, authProvider, restClient, graphClient);
+            return new PnPContext(url, log, authProvider, restClient, graphClient, settings, telemetry);
         }
 
         /// <summary>
@@ -96,7 +103,7 @@ namespace PnP.Core.Services
         {
             // Use the provided settings to create a new instance of SPOContext
             return new PnPContext(url, log, authenticationProvider,
-                restClient, graphClient);
+                restClient, graphClient, settings, telemetry);
         }
     }
 }
