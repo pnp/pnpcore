@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace PnP.Core.Services
 {
@@ -94,7 +95,7 @@ namespace PnP.Core.Services
         {
             string resource = $"{resourceUri.Scheme}://{resourceUri.DnsSafeHost}";
 
-            var body = $"resource={resource}&client_id={aadAppId}&grant_type=password&username={username}&password={password}";
+            var body = $"resource={resource}&client_id={aadAppId}&grant_type=password&username={HttpUtility.UrlEncode(username)}&password={HttpUtility.UrlEncode(password)}";
             using (var stringContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded"))
             {
 
