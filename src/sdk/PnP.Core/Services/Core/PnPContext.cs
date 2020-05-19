@@ -97,6 +97,13 @@ namespace PnP.Core.Services
             settings = settingsClient;
             telemetry = telemetryClient;
 
+            if (settingsClient != null)
+            {
+                GraphFirst = settingsClient.GraphFirst;
+                GraphAlwaysUseBeta = settingsClient.GraphAlwaysUseBeta;
+                GraphCanUseBeta = settingsClient.GraphCanUseBeta;
+            }
+            
             SetAADTenantId();
 
             BatchClient = new BatchClient(this, settingsClient, telemetryClient);

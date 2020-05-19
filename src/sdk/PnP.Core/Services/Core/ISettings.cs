@@ -11,5 +11,8 @@ namespace PnP.Core.Services
         string UserAgent { get; }
         bool DisableTelemetry { get; }
         Guid AADTenantId { get; set; }
+        bool GraphFirst { get; }
+        bool GraphAlwaysUseBeta { get; }
+        bool GraphCanUseBeta { get; }
     }
 }

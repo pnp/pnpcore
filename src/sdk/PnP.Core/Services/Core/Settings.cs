@@ -19,6 +19,9 @@ namespace PnP.Core.Services
             VersionTag = GetVersionTag();
             UserAgent = GetUserAgent();
             DisableTelemetry = GetDisableTelemetry();
+            GraphFirst = GetGraphFirst();
+            GraphAlwaysUseBeta = GetGraphAlwaysUseBeta();
+            GraphCanUseBeta = GetGraphCanUseBeta();
         }
 
         public string VersionTag { get; }
@@ -28,6 +31,33 @@ namespace PnP.Core.Services
         public bool DisableTelemetry { get; }
         
         public Guid AADTenantId { get; set; }
+
+        public bool GraphFirst { get; }
+
+        public bool GraphAlwaysUseBeta { get; }
+        
+        public bool GraphCanUseBeta { get; }
+
+        private bool GetGraphFirst()
+        {
+            var graphFirst = config.GetValue<bool>("PnPCore:PnPContext:GraphFirst");
+            logger.LogInformation($"Using telemetry setting from configuration. GraphFirst: {graphFirst}");
+            return graphFirst;
+        }
+
+        private bool GetGraphAlwaysUseBeta()
+        {
+            var graphAlwaysUsesBeta = config.GetValue<bool>("PnPCore:PnPContext:GraphAlwaysUseBeta");
+            logger.LogInformation($"Using telemetry setting from configuration. GraphAlwaysUseBeta: {graphAlwaysUsesBeta}");
+            return graphAlwaysUsesBeta;
+        }
+
+        private bool GetGraphCanUseBeta()
+        {
+            var graphCanUseBeta = config.GetValue<bool>("PnPCore:PnPContext:GraphCanUseBeta");
+            logger.LogInformation($"Using telemetry setting from configuration. GraphCanUseBeta: {graphCanUseBeta}");
+            return graphCanUseBeta;
+        }
 
         private bool GetDisableTelemetry()
         {
