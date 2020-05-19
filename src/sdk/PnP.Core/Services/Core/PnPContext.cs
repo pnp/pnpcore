@@ -44,6 +44,7 @@ namespace PnP.Core.Services
         #region Private properties
 
         private readonly ISettings settings;
+        private readonly TelemetryClient telemetry;
         private Batch currentBatch;
 
         #endregion
@@ -94,6 +95,7 @@ namespace PnP.Core.Services
             RestClient = sharePointRestClient;
             GraphClient = microsoftGraphClient;
             settings = settingsClient;
+            telemetry = telemetryClient;
 
             SetAADTenantId();
 
@@ -373,6 +375,8 @@ namespace PnP.Core.Services
 
             if (disposing)
             {
+                // Flush telemetry
+                telemetry.Flush();                
             }
 
             disposed = true;

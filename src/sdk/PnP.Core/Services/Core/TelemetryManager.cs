@@ -37,10 +37,6 @@ namespace PnP.Core.Services
 
         internal void LogServiceRequest(Batch batch, BatchRequest request, PnPContext context)
         {
-            if (TelemetryClient == null)
-            {
-                return;
-            }
 
             TelemetryClient.TrackEvent("PnPCoreRequest", PopulateProperties(request, batch, context));
         }
