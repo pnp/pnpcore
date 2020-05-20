@@ -1,5 +1,4 @@
 using PnP.Core.Model;
-using PnP.Core.QueryModel.OData;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -8,7 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace PnP.Core.QueryModel.Query
+namespace PnP.Core.QueryModel
 {
     internal class DataModelQueryTranslator<TModel> : ExpressionVisitor
     {
@@ -22,8 +21,8 @@ namespace PnP.Core.QueryModel.Query
 
         internal ODataQuery<TModel> Translate(Expression expression)
         {
-            this.Visit(expression);
-            return this.query;
+            Visit(expression);
+            return query;
         }
 
         protected override Expression VisitMethodCall(MethodCallExpression m)
@@ -69,7 +68,7 @@ namespace PnP.Core.QueryModel.Query
 
         private void VisitSelect(MethodCallExpression m)
         {
-            this.Visit(m.Arguments[0]);
+            Visit(m.Arguments[0]);
             var propertySelector = m.Arguments[1] as UnaryExpression;
             if (propertySelector != null)
             {
@@ -89,7 +88,7 @@ namespace PnP.Core.QueryModel.Query
 
         private void VisitLoad(MethodCallExpression m)
         {
-            this.Visit(m.Arguments[0]);
+            Visit(m.Arguments[0]);
             var propertySelector = m.Arguments[1] as UnaryExpression;
             if (propertySelector != null)
             {
@@ -102,11 +101,11 @@ namespace PnP.Core.QueryModel.Query
                             var unaryMember = unary.Operand as MemberExpression;
                             if (unaryMember != null)
                             {
-                                this.query.Select.Add(unaryMember.Member.Name);
+                                query.Select.Add(unaryMember.Member.Name);
                             }
                             break;
                         case MemberExpression member:
-                            this.query.Select.Add(member.Member.Name);
+                            query.Select.Add(member.Member.Name);
                             break;
                     }
                 }
@@ -115,7 +114,7 @@ namespace PnP.Core.QueryModel.Query
 
         private void VisitOrderBy(MethodCallExpression m, bool ascending = true)
         {
-            this.Visit(m.Arguments[0]);
+            Visit(m.Arguments[0]);
             var propertySelector = m.Arguments[1] as UnaryExpression;
             if (propertySelector != null)
             {
@@ -128,7 +127,7 @@ namespace PnP.Core.QueryModel.Query
                             var unaryMember = unary.Operand as MemberExpression;
                             if (unaryMember != null)
                             {
-                                this.query.OrderBy.Add(new OrderByItem
+                                query.OrderBy.Add(new OrderByItem
                                 {
                                     Field = unaryMember.Member.Name,
                                     Direction = ascending ? OrderByDirection.Asc : OrderByDirection.Desc
@@ -136,7 +135,7 @@ namespace PnP.Core.QueryModel.Query
                             }
                             break;
                         case MemberExpression member:
-                            this.query.OrderBy.Add(new OrderByItem
+                            query.OrderBy.Add(new OrderByItem
                             {
                                 Field = member.Member.Name,
                                 Direction = ascending ? OrderByDirection.Asc : OrderByDirection.Desc
@@ -149,13 +148,13 @@ namespace PnP.Core.QueryModel.Query
 
         private void VisitWhere(MethodCallExpression m)
         {
-            this.Visit(m.Arguments[0]);
+            Visit(m.Arguments[0]);
             LambdaExpression lambda = (LambdaExpression)m.Arguments[1].StripQuotes();
 
             switch (lambda.Body)
             {
                 case BinaryExpression binary:
-                    this.AddFilter(binary);
+                    AddFilter(binary);
                     break;
 
                 case MethodCallExpression methodCall:
@@ -171,7 +170,7 @@ namespace PnP.Core.QueryModel.Query
                         throw new NotSupportedException($"Expression {methodCall} is not valid");
                     }
 
-                    this.AddFilterToStack(new FilterItem
+                    AddFilterToStack(new FilterItem
                     {
                         Field = methodField,
                         Criteria = FilteringCriteria.Equal,
@@ -184,7 +183,7 @@ namespace PnP.Core.QueryModel.Query
 
         private void VisitFirstOrDefault(MethodCallExpression m)
         {
-            this.Visit(m.Arguments[0]);
+            Visit(m.Arguments[0]);
 
             // If the FirstOrDefault method includes a filtering expression
             if (m.Arguments.Count > 1)
@@ -194,7 +193,7 @@ namespace PnP.Core.QueryModel.Query
                 switch (lambda.Body)
                 {
                     case BinaryExpression binary:
-                        this.AddFilter(binary);
+                        AddFilter(binary);
                         break;
 
                     case MethodCallExpression methodCall:
@@ -210,7 +209,7 @@ namespace PnP.Core.QueryModel.Query
                             throw new NotSupportedException($"Expression {methodCall} is not valid");
                         }
 
-                        this.AddFilterToStack(new FilterItem
+                        AddFilterToStack(new FilterItem
                         {
                             Field = methodField,
                             Criteria = FilteringCriteria.Equal,
@@ -222,24 +221,24 @@ namespace PnP.Core.QueryModel.Query
             }
 
             // FirstOrDefault corresponds to $take=1
-            this.query.Top = 1;
+            query.Top = 1;
         }
 
         private void VisitTake(MethodCallExpression m)
         {
             Visit(m.Arguments[0]);
-            this.query.Top = GetConstantValue<int>(m.Arguments[1]);
+            query.Top = GetConstantValue<int>(m.Arguments[1]);
         }
 
         private void VisitSkip(MethodCallExpression m)
         {
             Visit(m.Arguments[0]);
-            this.query.Skip = GetConstantValue<int>(m.Arguments[1]);
+            query.Skip = GetConstantValue<int>(m.Arguments[1]);
         }
 
         private void VisitInclude(MethodCallExpression m)
         {
-            this.Visit(m.Arguments[0]);
+            Visit(m.Arguments[0]);
             var propertySelector = m.Arguments[1] as UnaryExpression;
             if (propertySelector != null)
             {
@@ -252,11 +251,11 @@ namespace PnP.Core.QueryModel.Query
                             var unaryMember = unary.Operand as MemberExpression;
                             if (unaryMember != null)
                             {
-                                this.query.Expand.Add(unaryMember.Member.Name);
+                                query.Expand.Add(unaryMember.Member.Name);
                             }
                             break;
                         case MemberExpression member:
-                            this.query.Expand.Add(member.Member.Name);
+                            query.Expand.Add(member.Member.Name);
                             break;
                     }
                 }
@@ -273,12 +272,12 @@ namespace PnP.Core.QueryModel.Query
             string filterField = GetFilterField(expression.Left);
             object filterValue = GetFilterValue(expression.Right);
 
-            this.RemoveFilterStack();
+            RemoveFilterStack();
 
             // If field and value are not null it means that they are primitive values
             if (filterField != null && filterValue != null)
             {
-                this.AddFilterToStack(new FilterItem
+                AddFilterToStack(new FilterItem
                 {
                     Field = filterField,
                     Criteria =
@@ -341,7 +340,7 @@ namespace PnP.Core.QueryModel.Query
 
                     // Raise an error
                     var validMembers = FunctionMapping.SupportedMembers.Where(m => !(m is MethodInfo)).Select(m => $"{m.DeclaringType.Name}.{m.Name}");
-                    var validMembersString = String.Join(", ", validMembers);
+                    var validMembersString = string.Join(", ", validMembers);
                     throw new NotSupportedException($"Expression {expression} is invalid. Only calls to members {validMembersString} are supported");
 
                 case MethodCallExpression methodCall:
@@ -365,7 +364,7 @@ namespace PnP.Core.QueryModel.Query
 
                     // Raise an error
                     var validMethods = FunctionMapping.SupportedMembers.OfType<MethodInfo>().Select(m => $"{m.DeclaringType.Name}.{m.Name}");
-                    var validMethodsString = String.Join(", ", validMethods);
+                    var validMethodsString = string.Join(", ", validMethods);
                     throw new NotSupportedException($"Expression {expression} is invalid. Only calls to methods {validMethodsString} are supported");
             }
 

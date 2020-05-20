@@ -1,9 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using PnP.Core.QueryModel.Query;
 using System;
 using PnP.Core.Test.Utilities;
-using PnP.Core.QueryModel.OData;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.QueryModel
 {

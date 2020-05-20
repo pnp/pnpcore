@@ -1,5 +1,5 @@
 ﻿using PnP.Core.Model;
-using PnP.Core.QueryModel.OData;
+using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace PnP.Core.QueryModel.Query
+namespace PnP.Core.QueryModel
 {
     public static class BaseDataModelExtensions
     {
@@ -71,7 +71,7 @@ namespace PnP.Core.QueryModel.Query
             return source.Provider.CreateQuery<TResult>(
                 Expression.Call(
                     null,
-                    GetMethodInfo(BaseDataModelExtensions.Include, source, selector),
+                    GetMethodInfo(Include, source, selector),
                     new Expression[] { source.Expression, Expression.Quote(selector) }
                     ));
         }
@@ -131,7 +131,7 @@ namespace PnP.Core.QueryModel.Query
             return source.Provider.CreateQuery<TResult>(
                 Expression.Call(
                     null,
-                    GetMethodInfo(BaseDataModelExtensions.Load, source, selector),
+                    GetMethodInfo(Load, source, selector),
                     new Expression[] { source.Expression, Expression.Quote(selector) }
                     ));
         }
@@ -175,11 +175,11 @@ namespace PnP.Core.QueryModel.Query
         /// <param name="source">The collection of lists to get the list by title from</param>
         /// <param name="title">The title to search for</param>
         /// <returns>The resulting list instance, if any</returns>
-        public static PnP.Core.Model.SharePoint.IList GetByTitle(
-            this IQueryable<PnP.Core.Model.SharePoint.IList> source, string title)
+        public static Core.Model.SharePoint.IList GetByTitle(
+            this IQueryable<Core.Model.SharePoint.IList> source, string title)
         {
             // Just rely on the below overload, without providing any selector
-            return GetByTitle(source, title, null);
+            return source.GetByTitle(title, null);
         }
 
         /// <summary>
@@ -189,10 +189,10 @@ namespace PnP.Core.QueryModel.Query
         /// <param name="title">The title to search for</param>
         /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list instance, if any</returns>
-        public static PnP.Core.Model.SharePoint.IList GetByTitle(
-            this IQueryable<PnP.Core.Model.SharePoint.IList> source, 
-            string title, 
-            params Expression<Func<PnP.Core.Model.SharePoint.IList, object>>[] selectors)
+        public static Core.Model.SharePoint.IList GetByTitle(
+            this IQueryable<Core.Model.SharePoint.IList> source,
+            string title,
+            params Expression<Func<Core.Model.SharePoint.IList, object>>[] selectors)
         {
             if (source is null)
             {
@@ -203,7 +203,7 @@ namespace PnP.Core.QueryModel.Query
                 throw new ArgumentNullException(nameof(title));
             }
 
-            IQueryable<PnP.Core.Model.SharePoint.IList> selectionTarget = source;
+            IQueryable<Core.Model.SharePoint.IList> selectionTarget = source;
 
             if (selectors != null)
             {
@@ -213,9 +213,9 @@ namespace PnP.Core.QueryModel.Query
                 }
             }
 
-            Expression<Func<PnP.Core.Model.SharePoint.IList, bool>> predicate = l => l.Title == title;
+            Expression<Func<Core.Model.SharePoint.IList, bool>> predicate = l => l.Title == title;
 
-            return source.Provider.Execute<PnP.Core.Model.SharePoint.IList>(
+            return source.Provider.Execute<Core.Model.SharePoint.IList>(
                 Expression.Call(
                     null,
                     GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
@@ -233,11 +233,11 @@ namespace PnP.Core.QueryModel.Query
         /// <param name="source">The collection of lists items to get the item by Id from</param>
         /// <param name="id">The Id to search for</param>
         /// <returns>The resulting list item instance, if any</returns>
-        public static PnP.Core.Model.SharePoint.IListItem GetById(
-            this IQueryable<PnP.Core.Model.SharePoint.IListItem> source, int id)
+        public static Core.Model.SharePoint.IListItem GetById(
+            this IQueryable<Core.Model.SharePoint.IListItem> source, int id)
         {
             // Just rely on the below overload, without providing any selector
-            return GetById(source, id, null);
+            return source.GetById(id, null);
         }
 
         /// <summary>
@@ -247,17 +247,17 @@ namespace PnP.Core.QueryModel.Query
         /// <param name="id">The Id to search for</param>
         /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list item instance, if any</returns>
-        public static PnP.Core.Model.SharePoint.IListItem GetById(
-            this IQueryable<PnP.Core.Model.SharePoint.IListItem> source,
+        public static Core.Model.SharePoint.IListItem GetById(
+            this IQueryable<Core.Model.SharePoint.IListItem> source,
             int id,
-            params Expression<Func<PnP.Core.Model.SharePoint.IListItem, object>>[] selectors)
+            params Expression<Func<Core.Model.SharePoint.IListItem, object>>[] selectors)
         {
             if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            IQueryable<PnP.Core.Model.SharePoint.IListItem> selectionTarget = source;
+            IQueryable<Core.Model.SharePoint.IListItem> selectionTarget = source;
 
             if (selectors != null)
             {
@@ -267,9 +267,9 @@ namespace PnP.Core.QueryModel.Query
                 }
             }
 
-            Expression<Func<PnP.Core.Model.SharePoint.IListItem, bool>> predicate = l => l.Id == id;
+            Expression<Func<Core.Model.SharePoint.IListItem, bool>> predicate = l => l.Id == id;
 
-            return source.Provider.Execute<PnP.Core.Model.SharePoint.IListItem>(
+            return source.Provider.Execute<Core.Model.SharePoint.IListItem>(
                 Expression.Call(
                     null,
                     GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),

@@ -5,9 +5,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using PnP.Core.QueryModel.OData;
 
-namespace PnP.Core.QueryModel.Query
+namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Contains the mapping from methods/members to OData functions
@@ -104,7 +103,7 @@ namespace PnP.Core.QueryModel.Query
                     .ToArray();
 
                 // Format using invariant culture, even if values are already formatted as string
-                return String.Format(CultureInfo.InvariantCulture, _format, stringArgs);
+                return string.Format(CultureInfo.InvariantCulture, _format, stringArgs);
             }
         }
     }

@@ -1,0 +1,9 @@
+--batchresponse_78a630d0-5d4b-4485-93f8-110d90450be3
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/SP.WebInformation4d88f063-9bce-4cfe-8c8f-8afdd8c7efcd","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/SP.WebInformation4d88f063-9bce-4cfe-8c8f-8afdd8c7efcd","type":"SP.WebInformation"},"Description":"","Id":"a27d1aa9-d045-4916-9b64-2fb250b2c876","Title":"testsub1"}]}}
+--batchresponse_78a630d0-5d4b-4485-93f8-110d90450be3--

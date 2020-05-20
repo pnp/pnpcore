@@ -1,12 +1,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using PnP.Core.QueryModel.Query;
 using System;
 using PnP.Core.Test.Utilities;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.SharePoint.Core;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -19,6 +19,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var query = (from l in context.Web.Lists
                              select l)
                             .Load(l => l.Id, l => l.Title, l => l.Description);
@@ -44,6 +46,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
@@ -92,6 +96,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
@@ -147,6 +153,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
@@ -212,6 +220,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var sitePages = context.Web.Lists.GetByTitle("Site Pages");
 
                 // Retrieve a single item via LINQ query
@@ -252,6 +262,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var myList = context.Web.Lists.GetByTitle(listTitle);
 
                 if (myList != null)
@@ -308,6 +320,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var myList = context.Web.Lists.GetByTitle(listTitle);
 
                 if (myList != null)
@@ -368,6 +382,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var myList = context.Web.Lists.GetByTitle(listTitle);
 
                 if (myList != null)
@@ -424,6 +440,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Load list via Linq query --> this should now ensure the GraphId property of the web model is populated
                 var list = context.Web.Lists.GetByTitle("Site Pages", l => l.Id, l => l.Title, l => l.Description);
 
@@ -441,6 +459,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Load list via Linq query --> this should now ensure the GraphId property of the web model is populated
                 var list = context.Web.Lists.Include(l => l.Items).GetByTitle("Site Pages", l => l.Id, l => l.Title, l => l.Description);
 
@@ -460,6 +480,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Get all the lists first
                 var listsQuery = context.Web.Lists.Load(l => l.Id, l => l.Title);
                 var listsQueryResult = listsQuery.ToList();

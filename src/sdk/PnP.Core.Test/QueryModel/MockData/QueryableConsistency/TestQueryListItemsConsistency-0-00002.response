@@ -1,9 +1,10 @@
---batchresponse_7172b083-832f-4efb-9d73-4df3f91c447b
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"results":[{"__metadata":{"id":"64adc120-76d3-4fca-8b26-7fb11a74ac5d","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'529b1d62-8f36-44b7-83da-75d1b4433ecb')/Items(1)","etag":"\"3\"","type":"SP.Data.SitePagesItem"},"Id":1,"Title":"Home","ID":1}]}}
---batchresponse_7172b083-832f-4efb-9d73-4df3f91c447b--
+{"responses": [{"id": "1","status":400,"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "Resource not found for the segment 'https:'.",
+    "innerError": {
+      "request-id": "1e8389ad-2076-411e-be48-2e18d4f5de64",
+      "date": "2020-05-19T08:10:18"
+    }
+  }
+}}]}

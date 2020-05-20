@@ -1,7 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel.OData;
 using PnP.Core.Services;
 using PnP.Core.Utilities;
 using System;
@@ -10,7 +9,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 
-namespace PnP.Core.QueryModel.Query
+namespace PnP.Core.QueryModel
 {
     internal class DataModelQueryService<TModel>
     {
@@ -41,9 +40,9 @@ namespace PnP.Core.QueryModel.Query
 
         public object ExecuteQuery(Type expressionType, ODataQuery<TModel> query)
         {
-            if (String.IsNullOrEmpty(this.memberName))
+            if (string.IsNullOrEmpty(memberName))
             {
-                throw new ClientException(ErrorType.LinqError, $"Missing value for {nameof(this.memberName)} in {this.GetType().Name}");
+                throw new ClientException(ErrorType.LinqError, $"Missing value for {nameof(memberName)} in {GetType().Name}");
             }
 
             // At this point in time we support querying collections of 
@@ -56,38 +55,67 @@ namespace PnP.Core.QueryModel.Query
                 var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
                 // and its concrete instance
                 var concreteEntity = EntityManager.Instance
-                    .GetEntityConcreteInstance<TModel>(typeof(TModel), this.parent);
+                    .GetEntityConcreteInstance<TModel>(typeof(TModel), parent);
 
                 // Get the parent (container) entity info
-                var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.parent.GetType());
+                var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(parent.GetType());
                 // and cast it to the IDataModelMappingHandler interface
-                var parentEntityWithMappingHandlers = (IDataModelMappingHandler)this.parent;
+                var parentEntityWithMappingHandlers = (IDataModelMappingHandler)parent;
 
-                // Build the request URL
-                var requestUrl = $"{this.context.Uri}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
-                requestUrl = Core.Model.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).GetAwaiter().GetResult();
+                // Prepare a variable to hold tha batch request ID
+                Guid batchRequestId = Guid.Empty;
 
-                // Add the request to the current batch
-                var batchRequestId = this.context.CurrentBatch.Add(
-                    this.parent as TransientObject,
-                    parentEntityInfo,
-                    HttpMethod.Get,
-                    new ApiCall // First option is Graph
-                    {
-                        Type = ApiType.SPORest,
-                        ReceivingProperty = this.memberName,
-                        Request = requestUrl
-                    },
-                    default(ApiCall),
-                    parentEntityWithMappingHandlers.MappingHandler,
-                    parentEntityWithMappingHandlers.PostMappingHandler
-                    );
+                // We try to use Graph First, if selected by the user and if the query is supported by Graph
+                if (context.GraphFirst && !string.IsNullOrEmpty(entityInfo.GraphLinqGet))
+                {
+                    // Build the Graph request URL
+                    var requestUrl = $"{entityInfo.GraphLinqGet}?{query.ToQueryString(ODataTargetPlatform.Graph)}";
+                    requestUrl = Core.Model.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context).GetAwaiter().GetResult();
+
+                    // Add the request to the current batch
+                    batchRequestId = context.CurrentBatch.Add(
+                        parent as TransientObject,
+                        parentEntityInfo,
+                        HttpMethod.Get,
+                        new ApiCall // First option is Graph
+                        {
+                            Type = ApiType.Graph,
+                            ReceivingProperty = memberName,
+                            Request = requestUrl
+                        },
+                        default,
+                        parentEntityWithMappingHandlers.MappingHandler,
+                        parentEntityWithMappingHandlers.PostMappingHandler
+                        );
+                }
+                else
+                {
+                    // Build the SPO REST request URL
+                    var requestUrl = $"{context.Uri}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
+                    requestUrl = Core.Model.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).GetAwaiter().GetResult();
+
+                    // Add the request to the current batch
+                    batchRequestId = context.CurrentBatch.Add(
+                        parent as TransientObject,
+                        parentEntityInfo,
+                        HttpMethod.Get,
+                        new ApiCall // Secondo option is SPO REST
+                        {
+                            Type = ApiType.SPORest,
+                            ReceivingProperty = memberName,
+                            Request = requestUrl
+                        },
+                        default,
+                        parentEntityWithMappingHandlers.MappingHandler,
+                        parentEntityWithMappingHandlers.PostMappingHandler
+                        );
+                }
 
                 // and execute the request
-                this.context.ExecuteAsync().GetAwaiter().GetResult();
+                context.ExecuteAsync().GetAwaiter().GetResult();
 
                 // Get the resulting property from the parent object
-                var resultValue = this.parent.GetPublicInstancePropertyValue(this.memberName) as IEnumerable<TModel>;
+                var resultValue = parent.GetPublicInstancePropertyValue(memberName) as IEnumerable<TModel>;
 
                 // If the expression type implements IQueryable, we need to return
                 // the whole collection of results
@@ -111,14 +139,11 @@ namespace PnP.Core.QueryModel.Query
                     }
                 }
             }
-            // We do not yet support querying collections of IWeb
-            else if (typeof(TModel).IsAssignableFrom(typeof(IWeb)))
+            // For what is not supported, we return an empty collection
+            else
             {
-                return Enumerable.Empty<IWeb>();
+                return Enumerable.Empty<TModel>();
             }
-
-            // So far we just provide a fake empty response
-            return Enumerable.Empty<TModel>();
         }
     }
 }

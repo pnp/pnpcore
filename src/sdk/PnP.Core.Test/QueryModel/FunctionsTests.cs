@@ -1,7 +1,5 @@
 using System;
-using PnP.Core.QueryModel.OData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.Linq;
 using PnP.Core.QueryModel.Model;
 using PnP.Core.Model.SharePoint;
