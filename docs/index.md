@@ -13,16 +13,20 @@ Using the PnP Core SDK is simple, check out out [getting started](articles/consu
 
 ## How can you help?
 
-The model implemented in the preview only covers a small part of what's possible and needed. We're looking for folks that want to help us expand the model by:
+The model implemented in the preview only covers a small part of what's possible and what's needed. We're asking the community to help us expand the model by:
 
 - **Extending the model** via the creation of new model, complex type and collection classes. Check out the [Extending the model](articles/contributor/readme.md) article to learn how to do this
 - **Adding "functionality"** to the model: after extending the model the typical CRUD functionality is there, but for some parts of the model it makes sense to add functionality by adding methods on top of the model classes. Check out the [Extending the model](articles/contributor/readme.md) article to learn how to do this
 - **Writing sample programs** that use this library: since this is .Net Standard library it can not only be used on Windows, but also on Macs and Linux machines as well as on mobile OS's like Android and iOS. With the rise of [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) this library can also be used to build .Net based apps running in the browser
+- **Working on documentation**: good documentation is critical to help developers work with this library, either by using it or by extending it. See the [Writing documentation](articles/contributor/writing%20documentation.md) article for more details
 
 ### Best practices when contributing
 
 - This is all new and we're there to help, don't hesitate to reach out with your questions and feedback
 - To avoid overlapping efforts in the startup phase please let us know if you plan to take on a particular chunk of work (e.g. let's say you want to extend the model to support Planner)
 - If you are extending the model and you need to update the model base logic then please reach out, we want to align on those changes first as these need to fit into our model approach
+
+> [!Note]
+> The best way to reach out is by creating an issue in the issue list: https://github.com/pnp/pnpcore/issues
 
 **This community rocks, sharing is caring!**

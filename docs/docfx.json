@@ -65,8 +65,8 @@
     "cleanupCacheHistory": false,
     "disableGitFeatures": false,
     "globalMetadata": {
-      "_appTitle": "PnP Microsoft 365 library",
-      "_appFooter": "PnP Microsoft 365 library",
+      "_appTitle": "PnP Core SDK",
+      "_appFooter": "PnP Core SDK",
       "_appFaviconPath": "https://c.s-microsoft.com/favicon.ico?v2",
       "_enableSearch": true,
       "_enableNewTab": true
