@@ -17,7 +17,7 @@ The model implemented in the preview only covers a small part of what's possible
 
 - **Extending the model** via the creation of new model, complex type and collection classes. Check out the [Extending the model](articles/contributor/readme.md) article to learn how to do this
 - **Adding "functionality"** to the model: after extending the model the typical CRUD functionality is there, but for some parts of the model it makes sense to add functionality by adding methods on top of the model classes. Check out the [Extending the model](articles/contributor/readme.md) article to learn how to do this
-- **Writing sample programs** that use this library: since this is .Net Standard library it can not only be used on Windows, but also on Macs and Linux machines as well as on mobile OS's like Android and iOS. With the rise of [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) this library can also be used to build .Net based apps running in the browser
+- **Writing sample programs** that use this library: since this is .Net Standard library it can not only be used on Windows, but also on Macs and Linux machines as well as on mobile OS's like Android and iOS. With the rise of [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) this library can also be used to build .Net based apps running in the browser. Samples can be added in the `src\samples` folder.
 - **Working on documentation**: good documentation is critical to help developers work with this library, either by using it or by extending it. See the [Writing documentation](articles/contributor/writing%20documentation.md) article for more details
 
 ### Best practices when contributing
