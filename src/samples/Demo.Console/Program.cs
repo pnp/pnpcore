@@ -219,13 +219,13 @@ namespace Consumer
                     Console.WriteLine("===ADD/UPDATE/DELETE: create/delete list and add 20 items in batch===");
                     Console.ResetColor();
                     // Check if lists exists and delete first if needed                    
-                    var listToAdd = context.Web.Lists.GetByTitle("AddTest", l => l.Id, l => l.Title, l => l.Description);
-                    if (listToAdd != null)
+                    var newList = context.Web.Lists.GetByTitle("AddTest", l => l.Id, l => l.Title, l => l.Description);
+                    if (newList != null)
                     {
-                        await listToAdd.DeleteAsync();
+                        await newList.DeleteAsync();
                     }
                     // Add the new list
-                    listToAdd = await context.Web.Lists.AddAsync("AddTest", ListTemplateType.GenericList);
+                    newList = await context.Web.Lists.AddAsync("AddTest", ListTemplateType.GenericList);
 
                     // In batch add 20 items
                     for (int i = 0; i < 20; i++)
@@ -235,18 +235,18 @@ namespace Consumer
                             { "Title", $"Item {i}" }
                         };
 
-                        listToAdd.Items.Add(listItem);
+                        newList.Items.Add(listItem);
                     }
-                    listToAdd.Get(p => p.Items, p => p.NoCrawl);
+                    newList.Get(p => p.Items, p => p.NoCrawl);
 
                     // Send 20 adds + reload as a single operation (=batch) to server
                     await context.ExecuteAsync();
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"List with title '{listToAdd.Title}' has {listToAdd.Items.Count()} items");
+                    Console.WriteLine($"List with title '{newList.Title}' has {newList.Items.Count()} items");
                     Console.ResetColor();
 
                     // Update item
-                    var itemToUpdate = listToAdd.Items.FirstOrDefault();
+                    var itemToUpdate = newList.Items.FirstOrDefault();
                     itemToUpdate.Values["Title"] = $"Updated at {DateTime.UtcNow}";
                     await itemToUpdate.UpdateAsync();
 
@@ -254,7 +254,7 @@ namespace Consumer
                     //dynamic itemToUpdateDynamic = itemToUpdate;
                     //itemToUpdateDynamic["Title"] = $"Updated again at {DateTime.UtcNow}";
                     //await itemToUpdateDynamic.UpdateAsync();
-                    
+
                     //dynamic itemToUpdate = listToAdd.Items.FirstOrDefault();
                     //itemToUpdate.Title = $"Updated at {DateTime.UtcNow}";
                     //await itemToUpdate.UpdateAsync();
