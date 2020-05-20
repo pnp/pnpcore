@@ -1,11 +1,13 @@
-- name: Getting Started
+- name: Overview
   items:
-  - name: Introduction
+  - name: Introduction to the PnP Core SDK
     href: intro.md
 - name: User documentation
   items:
-  - name: Introduction
+  - name: Getting started
     href: consumer/readme.md
+  - name: Configuring the PnP Core SDK
+    href: consumer/pnp%20core%20settings.md
 - name: Contributor documentation
   items:
   - name: The PnP Core SDK model
