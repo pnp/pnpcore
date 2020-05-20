@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
 namespace PnP.Core.Utilities
 {
-    public static class ObjectExtensions
+    internal static class ObjectExtensions
     {
         /// <summary>
         /// Retrieves the value of a public, instance property 
@@ -13,12 +11,12 @@ namespace PnP.Core.Utilities
         /// <param name="source">The source object</param>
         /// <param name="propertyName">The property name, case insensitive</param>
         /// <returns>The property value, if any</returns>
-        public static Object GetPublicInstancePropertyValue(this Object source, String propertyName)
+        internal static Object GetPublicInstancePropertyValue(this Object source, String propertyName)
         {
             return (source?.GetType()?.GetProperty(propertyName,
-                    System.Reflection.BindingFlags.Instance |
-                    System.Reflection.BindingFlags.Public |
-                    System.Reflection.BindingFlags.IgnoreCase)?
+                    BindingFlags.Instance |
+                    BindingFlags.Public |
+                    BindingFlags.IgnoreCase)?
                 .GetValue(source));
         }
 
@@ -28,12 +26,12 @@ namespace PnP.Core.Utilities
         /// <param name="source">The source object</param>
         /// <param name="propertyName">The property name, case insensitive</param>
         /// <returns>The property, if any</returns>
-        public static PropertyInfo GetPublicInstanceProperty(this Object source, String propertyName)
+        internal static PropertyInfo GetPublicInstanceProperty(this Object source, String propertyName)
         {
             return (source?.GetType()?.GetProperty(propertyName,
-                    System.Reflection.BindingFlags.Instance |
-                    System.Reflection.BindingFlags.Public |
-                    System.Reflection.BindingFlags.IgnoreCase));
+                    BindingFlags.Instance |
+                    BindingFlags.Public |
+                    BindingFlags.IgnoreCase));
         }
 
         /// <summary>
@@ -42,12 +40,12 @@ namespace PnP.Core.Utilities
         /// <param name="source">The source object</param>
         /// <param name="propertyName">The property name, case insensitive</param>
         /// <param name="value">The value to set</param>
-        public static void SetPublicInstancePropertyValue(this Object source, String propertyName, object value)
+        internal static void SetPublicInstancePropertyValue(this Object source, String propertyName, object value)
         {
             source?.GetType()?.GetProperty(propertyName,
-                System.Reflection.BindingFlags.Instance |
-                System.Reflection.BindingFlags.Public |
-                System.Reflection.BindingFlags.IgnoreCase)?
+                BindingFlags.Instance |
+                BindingFlags.Public |
+                BindingFlags.IgnoreCase)?
                 .SetValue(source, value);
         }
     }
