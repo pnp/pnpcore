@@ -5,6 +5,7 @@ namespace PnP.Core.Model.Teams
     /// <summary>
     /// Defines a Channel of Microsoft Teams
     /// </summary>
+    [ConcreteType(typeof(TeamChannel))]
     public interface ITeamChannel : IDataModel<ITeamChannel>, IDataModelUpdate, IDataModelDelete
     {
         /// <summary>

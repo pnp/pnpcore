@@ -68,11 +68,7 @@ namespace PnP.Core.Model.Teams
             {
                 if (!HasValue(nameof(Channels)))
                 {
-                    var channels = new TeamChannelCollection
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
+                    var channels = new TeamChannelCollection(this.PnPContext, this, "Channels");
                     SetValue(channels);
                 }
                 return GetValue<ITeamChannelCollection>();

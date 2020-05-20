@@ -4,14 +4,14 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.Teams
 {
-    [GraphType(Uri = V)]
+    [GraphType(Uri = V, LinqGet = baseUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TeamChannel
     {
         private const string baseUri = "teams/{Parent.GraphId}/channels";
         private const string V = baseUri + "/{GraphId}";
 
-        internal TeamChannel()
+        public TeamChannel()
         {
             MappingHandler = (FromJson input) =>
             {

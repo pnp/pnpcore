@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Model.Teams;
 using PnP.Core.Services;
 using PnP.Core.Utilities;
 using System;
@@ -49,7 +50,8 @@ namespace PnP.Core.QueryModel
             // IList and IListItem or single elements of those collections
             if (typeof(TModel).IsAssignableFrom(typeof(IList)) ||
                 typeof(TModel).IsAssignableFrom(typeof(IListItem)) ||
-                typeof(TModel).IsAssignableFrom(typeof(IWeb)))
+                typeof(TModel).IsAssignableFrom(typeof(IWeb)) ||
+                typeof(TModel).IsAssignableFrom(typeof(ITeamChannel)))
             {
                 // Get the entity info
                 var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
@@ -69,7 +71,7 @@ namespace PnP.Core.QueryModel
                 if (context.GraphFirst && !string.IsNullOrEmpty(entityInfo.GraphLinqGet))
                 {
                     // Build the Graph request URL
-                    var requestUrl = $"{entityInfo.GraphLinqGet}?{query.ToQueryString(ODataTargetPlatform.Graph)}";
+                    var requestUrl = $"{entityInfo.GraphLinqGet}?{query.ToQueryString(ODataTargetPlatform.Graph, urlEncode: false)}";
                     requestUrl = Core.Model.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context).GetAwaiter().GetResult();
 
                     // Add the request to the current batch
@@ -121,7 +123,7 @@ namespace PnP.Core.QueryModel
                 // the whole collection of results
                 if (expressionType.ImplementsInterface(typeof(IQueryable)))
                 {
-                    return resultValue;
+                    return resultValue.Where(p => (p as TransientObject).BatchRequestId == batchRequestId);
                 }
                 // Otherwise if the expression type is the type of TModel, we need
                 // to return a single item

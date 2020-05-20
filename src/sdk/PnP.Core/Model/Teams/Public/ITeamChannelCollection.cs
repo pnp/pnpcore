@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
     /// <summary>
     /// Public interface to define a collection of Team Channels
     /// </summary>
-    public interface ITeamChannelCollection : IDataModelCollection<ITeamChannel>, ISupportPaging
+    public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCollection<ITeamChannel>, ISupportPaging
     {
 
         /// <summary>
