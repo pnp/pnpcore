@@ -33,7 +33,7 @@ namespace PnP.Core.Model.SharePoint
                     case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
                 }
 
-                input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");
+                input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
 
                 return null;
             };

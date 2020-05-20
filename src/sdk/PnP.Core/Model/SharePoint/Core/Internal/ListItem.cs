@@ -50,7 +50,7 @@ namespace PnP.Core.Model.SharePoint
                 else
                 {
                     //Handle the mapping from json to the domain model for the cases which are not generically handled           
-                    input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");
+                    input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
                 }
 
                 return null;
