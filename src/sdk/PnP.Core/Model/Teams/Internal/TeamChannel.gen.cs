@@ -45,11 +45,7 @@ namespace PnP.Core.Model.Teams
             {
                 if (!HasValue(nameof(Messages)))
                 {
-                    var chatMessages = new TeamChatMessageCollection
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
+                    var chatMessages = new TeamChatMessageCollection(this.PnPContext, this, "Messages");
                     SetValue(chatMessages);
                 }
                 return GetValue<ITeamChatMessageCollection>();

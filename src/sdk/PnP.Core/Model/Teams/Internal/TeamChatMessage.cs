@@ -4,14 +4,14 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.Teams
 {
-    [GraphType(Uri = V, Beta = true)]
+    [GraphType(Uri = V, Beta = true, LinqGet = baseUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TeamChatMessage
     {
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/messages";
         private const string V = baseUri + "/{GraphId}";
 
-        internal TeamChatMessage()
+        public TeamChatMessage()
         {
             // Handler to construct the Add request for this channel
             AddApiCallHandler = (keyValuePairs) =>

@@ -29,5 +29,22 @@ namespace PnP.Core.Test.QueryModel
                 Assert.IsTrue(queryResult.Count == 1);
             }
         }
+
+        [TestMethod]
+        public void TestQueryTeamChannelMessages()
+        {
+            var expectedDisplayName = "General";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var query = context.Team.Channels.GetByDisplayName(expectedDisplayName).Messages;
+
+                var queryResult = query.ToList();
+
+                Assert.IsNotNull(queryResult);
+                Assert.IsTrue(queryResult.Count >= 1);
+            }
+        }
     }
 }

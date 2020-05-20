@@ -51,7 +51,8 @@ namespace PnP.Core.QueryModel
             if (typeof(TModel).IsAssignableFrom(typeof(IList)) ||
                 typeof(TModel).IsAssignableFrom(typeof(IListItem)) ||
                 typeof(TModel).IsAssignableFrom(typeof(IWeb)) ||
-                typeof(TModel).IsAssignableFrom(typeof(ITeamChannel)))
+                typeof(TModel).IsAssignableFrom(typeof(ITeamChannel))||
+                typeof(TModel).IsAssignableFrom(typeof(ITeamChatMessage)))
             {
                 // Get the entity info
                 var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
@@ -81,7 +82,7 @@ namespace PnP.Core.QueryModel
                         HttpMethod.Get,
                         new ApiCall // First option is Graph
                         {
-                            Type = ApiType.Graph,
+                            Type = entityInfo.GraphBeta ? ApiType.GraphBeta : ApiType.Graph,
                             ReceivingProperty = memberName,
                             Request = requestUrl
                         },

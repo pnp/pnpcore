@@ -279,6 +279,64 @@ namespace PnP.Core.QueryModel
 
         #endregion
 
+        #region GetByDisplayName for Channels implementation
+
+        /// <summary>
+        /// Extension method to select a channel (ITeamChannel) by displayName
+        /// </summary>
+        /// <param name="source">The collection of channels to get the channel by displayName from</param>
+        /// <param name="displayName">The displayName to search for</param>
+        /// <returns>The resulting channel instance, if any</returns>
+        public static Core.Model.Teams.ITeamChannel GetByDisplayName(
+            this IQueryable<Core.Model.Teams.ITeamChannel> source, string displayName)
+        {
+            // Just rely on the below overload, without providing any selector
+            return source.GetByDisplayName(displayName, null);
+        }
+
+        /// <summary>
+        /// Extension method to select a channel (ITeamChannel) by displayName
+        /// </summary>
+        /// <param name="source">The collection of channels to get the channel by displayName from</param>
+        /// <param name="displayName">The displayName to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting channel instance, if any</returns>
+        public static Core.Model.Teams.ITeamChannel GetByDisplayName(
+            this IQueryable<Core.Model.Teams.ITeamChannel> source,
+            string displayName,
+            params Expression<Func<Core.Model.Teams.ITeamChannel, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (displayName is null)
+            {
+                throw new ArgumentNullException(nameof(displayName));
+            }
+
+            IQueryable<Core.Model.Teams.ITeamChannel> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<Core.Model.Teams.ITeamChannel, bool>> predicate = c => c.DisplayName == displayName;
+
+            return source.Provider.CreateQuery<Core.Model.Teams.ITeamChannel>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Where, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    )).ToList().FirstOrDefault();
+        }
+
+        #endregion
+
         #endregion
     }
 }

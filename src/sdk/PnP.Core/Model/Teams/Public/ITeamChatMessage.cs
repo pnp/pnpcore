@@ -8,6 +8,7 @@ namespace PnP.Core.Model.Teams
     /// Represents an individual chat message within a channel or chat. The chat message can be a root chat message or 
     /// part of a reply thread that is defined by the replyToId property in the chat message.
     /// </summary>
+    [ConcreteType(typeof(TeamChatMessage))]
     public interface ITeamChatMessage : IDataModel<ITeamChatMessage>
     {
 

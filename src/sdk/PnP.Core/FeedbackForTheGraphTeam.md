@@ -19,3 +19,5 @@
 - When getting a Teams channel message there's no way to know if the message has replies besides querying each message independently for replies
 - One can update MemberSettings.AllowCreatePrivateChannels using v1.0 endpoint, but not read it
 - If you try to add a tab with a SharePoint Online document library (com.microsoft.teamspace.tab.files.sharepoint) and that library has a "non standard" URL (like /lists/MyLibrary instead of /MyLibrary) the Graph request fails with a BadGateway exception, which is misleading
+- It is not possible to query Channels with $orderby, $top, $skip
+- It is not possible to query Messages in Channels with $select, $filter, $orderby, $top, $skip
