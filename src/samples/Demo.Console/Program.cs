@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PnP.Core;
 using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel.Query;
 using PnP.Core.Services;
@@ -224,7 +225,7 @@ namespace Consumer
                         await listToAdd.DeleteAsync();
                     }
                     // Add the new list
-                    listToAdd = await context.Web.Lists.AddAsync("AddTest", PnP.Core.Model.SharePoint.Core.ListTemplateType.GenericList);
+                    listToAdd = await context.Web.Lists.AddAsync("AddTest", ListTemplateType.GenericList);
 
                     // In batch add 20 items
                     for (int i = 0; i < 20; i++)
