@@ -241,6 +241,11 @@ namespace PnP.Core.Model
                     }
                 }
             }
+
+            // Update the BatchRequestId, too in order to
+            // refresh the object in the collection with
+            // the latest requested one
+            this.BatchRequestId = input.BatchRequestId;
         }
 
         private void CheckDeleted()

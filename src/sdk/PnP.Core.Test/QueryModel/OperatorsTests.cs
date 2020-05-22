@@ -1,5 +1,4 @@
 using System;
-using PnP.Core.QueryModel.OData;
 using System.Collections.Generic;
 using System.Linq;
 using PnP.Core.QueryModel.Model;

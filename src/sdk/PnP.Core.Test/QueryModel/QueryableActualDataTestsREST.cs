@@ -1,21 +1,48 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel.Query;
-using PnP.Core.Test.Utilities;
-using System;
 using System.Linq;
+using System;
+using PnP.Core.Test.Utilities;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.QueryModel
 {
     [TestClass]
-    public class QueryableActualDataTests
+    public class QueryableActualDataTestsREST
     {
+        [ClassInitialize]
+        public static void TestFixtureSetup(TestContext context)
+        {
+            // Configure mocking default for all tests in this class, unless override by a specific test
+            //TestCommon.Instance.Mocking = false;
+        }
+
         [TestMethod]
-        public void TestQueryLists()
+        public void TestQueryWebs_REST()
         {
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
+                var query = context.Site.AllWebs
+                            .Load(w => w.Id, w => w.Title, w => w.Description);
+
+                var queryResult = query.ToList();
+
+                Assert.IsNotNull(queryResult);
+                Assert.IsTrue(queryResult.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public void TestQueryLists_REST()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
                 var query = (from l in context.Web.Lists
                              select l)
                             .Load(l => l.Id, l => l.Title, l => l.Description);
@@ -28,13 +55,15 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryItems()
+        public void TestQueryItems_REST()
         {
             var expectedListItemTitle = "Home";
 
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var query = (from i in context.Web.Lists.GetByTitle("Site Pages").Items
                              where i.Title == expectedListItemTitle
                              select i)
@@ -53,11 +82,13 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryFirstOrDefaultNoPredicateLINQ()
+        public void TestQueryFirstOrDefaultNoPredicateLINQ_REST()
         {
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var actual = context.Web.Lists.FirstOrDefault();
 
                 Assert.IsNotNull(actual);
@@ -65,13 +96,15 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryFirstOrDefaultWithPredicateLINQ()
+        public void TestQueryFirstOrDefaultWithPredicateLINQ_REST()
         {
             var expected = "Documents";
 
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var actual = (from l in context.Web.Lists
                               select l)
                              .Load(l => l.Id, l => l.Title)
@@ -83,13 +116,15 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryFirstOrDefaultNoPredicateOnQueryLINQ()
+        public void TestQueryFirstOrDefaultNoPredicateOnQueryLINQ_REST()
         {
             var expected = "Documents";
 
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var actual = (from l in context.Web.Lists
                               where l.Title == expected
                               select l).FirstOrDefault();
@@ -100,13 +135,15 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryGetByTitleLINQ()
+        public void TestQueryGetByTitleLINQ_REST()
         {
             var expected = "Documents";
 
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var actual = context.Web.Lists.GetByTitle(expected);
 
                 Assert.IsNotNull(actual);
@@ -115,13 +152,15 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryGetByTitleWithFieldsLINQ()
+        public void TestQueryGetByTitleWithFieldsLINQ_REST()
         {
             var expected = "Documents";
 
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var actual = context.Web.Lists.GetByTitle(expected,
                     l => l.Id,
                     l => l.Title,
@@ -136,7 +175,7 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryGetByIdLINQ()
+        public void TestQueryGetByIdLINQ_REST()
         {
             var targetListTitle = "Site Pages";
             var expectedTitle = "Home";
@@ -144,8 +183,10 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var sitePages = context.Web.Lists.GetByTitle(targetListTitle);
-                var firstItem = sitePages.Items.GetById(1, 
+                context.GraphFirst = false;
+
+                var library = context.Web.Lists.GetByTitle(targetListTitle);
+                var firstItem = library.Items.GetById(1, 
                     i => i.Id, 
                     i => i.Title);
 

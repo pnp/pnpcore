@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace PnP.Core.QueryModel.OData
+namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Internal class to define an OData query with an in-memory abstract model
@@ -54,7 +54,7 @@ namespace PnP.Core.QueryModel.OData
         public override string ToString()
         {
             // By default provide a Graph query without URL encoding
-            return (this.ToQueryString(ODataTargetPlatform.Graph, false));
+            return ToQueryString(ODataTargetPlatform.Graph, false);
         }
 
         /// <summary>
@@ -67,12 +67,14 @@ namespace PnP.Core.QueryModel.OData
         {
             var queryText = new StringBuilder();
             var spacer = urlEncode ? EncodedSpace : " ";
+            // var argumentTrailer = targetPlatform == ODataTargetPlatform.SPORest ? "$" : string.Empty;
+            var argumentTrailer = "$";
 
             // Process the $select items
-            if (this.Select.Count > 0)
+            if (Select.Count > 0)
             {
-                queryText.Append("$select=");
-                foreach (var s in this.Select)
+                queryText.Append($"{argumentTrailer}select=");
+                foreach (var s in Select)
                 {
                     queryText.AppendFormat(
                         FormatProvider,
@@ -85,39 +87,37 @@ namespace PnP.Core.QueryModel.OData
             }
 
             // Process the $filter items
-            if (this.Filters.Count > 0)
+            if (Filters.Count > 0)
             {
                 EnsureQueryStringConcat(queryText);
-                queryText.Append("$filter=");
-                ProcessFilters(this.Filters, queryText, targetPlatform, depth: 0, urlEncode);
+                queryText.Append($"{argumentTrailer}filter=");
+                ProcessFilters(Filters, queryText, targetPlatform, depth: 0, urlEncode);
             }
 
             // Process any $top restriction
-            if (this.Top.HasValue)
+            if (Top.HasValue)
             {
                 EnsureQueryStringConcat(queryText);
                 queryText.AppendFormat(
                         FormatProvider,
-                        "$top={0}",
-                        this.Top.Value);
+                        $"{argumentTrailer}top={Top.Value}");
             }
 
             // Process any $skip restriction
-            if (this.Skip.HasValue)
+            if (Skip.HasValue)
             {
                 EnsureQueryStringConcat(queryText);
                 queryText.AppendFormat(
                         FormatProvider,
-                        "$skip={0}",
-                        this.Skip.Value);
+                        $"{argumentTrailer}skip={Skip.Value}");
             }
 
             // Process the $orderby items
-            if (this.OrderBy.Count > 0)
+            if (OrderBy.Count > 0)
             {
                 EnsureQueryStringConcat(queryText);
-                queryText.Append("$orderby=");
-                foreach (var o in this.OrderBy)
+                queryText.Append($"{argumentTrailer}orderby=");
+                foreach (var o in OrderBy)
                 {
                     queryText.AppendFormat(
                         FormatProvider, "{0}{1},",
@@ -131,11 +131,11 @@ namespace PnP.Core.QueryModel.OData
             }
 
             // Process the $expand items
-            if (this.Expand.Count > 0)
+            if (Expand.Count > 0)
             {
                 EnsureQueryStringConcat(queryText);
-                queryText.Append("$expand=");
-                foreach (var e in this.Expand)
+                queryText.Append($"{argumentTrailer}expand=");
+                foreach (var e in Expand)
                 {
                     queryText.AppendFormat(
                         FormatProvider,
@@ -147,7 +147,7 @@ namespace PnP.Core.QueryModel.OData
                 queryText.Remove(queryText.Length - 1, 1);
             }
 
-            return (queryText.ToString());
+            return queryText.ToString();
         }
 
         private void ProcessFilters(List<ODataFilter> filters, StringBuilder queryText, ODataTargetPlatform targetPlatform, int depth = 0, bool urlEncode = true)
@@ -164,9 +164,9 @@ namespace PnP.Core.QueryModel.OData
                         {
                             // Add the concat operator and open the parentheses
                             queryText.AppendFormat(
-                                FormatProvider, 
-                                "{0}{1}{0}", 
-                                spacer, 
+                                FormatProvider,
+                                "{0}{1}{0}",
+                                spacer,
                                 group.ConcatOperator.ToString().ToLower(FormatProvider));
                         }
                         // Open the parentheses
@@ -182,15 +182,15 @@ namespace PnP.Core.QueryModel.OData
                         if (!isFirst)
                         {
                             queryText.AppendFormat(
-                                FormatProvider, 
-                                "{0}{1}{0}", 
-                                spacer, 
+                                FormatProvider,
+                                "{0}{1}{0}",
+                                spacer,
                                 filter.ConcatOperator.ToString().ToLower(FormatProvider));
                         }
 
                         // Process the filtering condition
                         queryText.AppendFormat(
-                                FormatProvider, 
+                                FormatProvider,
                                 "{0}{1}{2}{1}{3}",
                                 urlEncode ? HttpUtility.UrlEncode(TranslateFieldName(filter.Field, targetPlatform)) : TranslateFieldName(filter.Field, targetPlatform),
                                 spacer,
@@ -312,7 +312,7 @@ namespace PnP.Core.QueryModel.OData
 
         public FiltersGroup(List<ODataFilter> filters)
         {
-            this.Filters = filters;
+            Filters = filters;
         }
 
         public List<ODataFilter> Filters { get; private set; }

@@ -1,15 +1,21 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using PnP.Core.QueryModel.Query;
 using System;
 using PnP.Core.Test.Utilities;
-using PnP.Core.QueryModel.OData;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.QueryModel
 {
     [TestClass]
     public class QueryableTests
     {
+        [ClassInitialize]
+        public static void TestFixtureSetup(TestContext context)
+        {
+            // Configure mocking default for all tests in this class, unless override by a specific test
+            //TestCommon.Instance.Mocking = false;
+        }
+
         [TestMethod]
         public void TestQueryLoadExtensionMethod()
         {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace PnP.Core.QueryModel.Linq
+namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Base abstract class to implement the basic logic of an IQueryProvider
@@ -38,7 +38,7 @@ namespace PnP.Core.QueryModel.Linq
                 throw new ArgumentException("Argument expression is not valid");
             }
 
-            return (IQueryable<TResult>)this.CreateQuery(expression);
+            return (IQueryable<TResult>)CreateQuery(expression);
         }
 
         public TResult Execute<TResult>(Expression expression)
@@ -67,13 +67,13 @@ namespace PnP.Core.QueryModel.Linq
                 }
             }
             else
-            { 
+            {
                 throw new ArgumentException("Argument expression is not valid");
             }
 
             // If the query has not been already requested
             // just execute it using our query service
-            return (TResult)this.Execute(expression);
+            return (TResult)Execute(expression);
         }
 
         public abstract IQueryable CreateQuery(Expression expression);

@@ -29,6 +29,9 @@
     <None Update="appsettings.paolopia.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="appsettings.paolopia.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="appsettings.edogbert.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

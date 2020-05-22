@@ -667,10 +667,12 @@ namespace PnP.Core.Model
                     throw new ClientException(ErrorType.ModelMetadataIncorrect, $"Specify the GraphGet field of the ClassMapping property.");
                 }
 
+                // TODO: Consider replacing this code with a call to the TokenHandler
                 baseApiCall = entity.GraphGet.Replace("{hostname}", PnPContext.Uri.DnsSafeHost).Replace("{serverrelativepath}", PnPContext.Uri.PathAndQuery);
             }
             else
             {
+                // TODO: Consider replacing this code with a call to the TokenHandler
                 baseApiCall = apiOverride.Request.Replace("{hostname}", PnPContext.Uri.DnsSafeHost).Replace("{serverrelativepath}", PnPContext.Uri.PathAndQuery);
             }
 

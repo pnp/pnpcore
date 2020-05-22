@@ -1,14 +1,12 @@
 ﻿using PnP.Core.Model;
-using PnP.Core.QueryModel.Linq;
 using PnP.Core.QueryModel.Model;
-using PnP.Core.QueryModel.OData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace PnP.Core.QueryModel.Query
+namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Concrete implementation of an IQueryProvider for the Domain Model
@@ -42,7 +40,7 @@ namespace PnP.Core.QueryModel.Query
         public override object Execute(Expression expression)
         {
             // Translate the query expression into an actual query text for the target Query Service
-            var query = this.Translate(expression);
+            var query = Translate(expression);
 
             // Execute the query via the target Query Service
             return queryService.ExecuteQuery(expression.Type, query);

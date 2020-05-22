@@ -18,13 +18,20 @@ namespace PnP.Core.Model
         /// <param name="tokenizedValue">A string with tokens</param>
         /// <param name="pnpObject">The domain model object to use as the target reference</param>
         /// <returns>The string with tokens resolved</returns>
-        public static async Task<string> ResolveTokensAsync(IMetadataExtensible pnpObject, string tokenizedValue)
+        public static async Task<string> ResolveTokensAsync(IMetadataExtensible pnpObject, string tokenizedValue, PnPContext context = null)
         {
             // Define the result variable
             string result = tokenizedValue;
 
             // Get the context aware version of the target pnpObject
             var contextAwareObject = pnpObject as IDataModelWithContext;
+
+            // If we don't have an input context, let's try to use 
+            // the one associated with the input entity
+            if (context == null)
+            {
+                context = contextAwareObject.PnPContext;
+            }
 
             // Grab the tokens in this input (tokens are between curly braces)
             var regex = new Regex("{(.*?)}", RegexOptions.Compiled);
@@ -116,7 +123,7 @@ namespace PnP.Core.Model
                 }
 
                 // Replace tokens coming from the Site object connected to the current PnPContext
-                if (match.Value.StartsWith("{Site."))
+                if (match.Value.StartsWith("{Site.") && context != null)
                 {
                     var propertyToLoad = match.Value.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("}", "");
 
@@ -124,19 +131,19 @@ namespace PnP.Core.Model
                     {
                         case "GroupId":
                             {
-                                contextAwareObject.PnPContext.Site.EnsurePropertiesAsync(p => p.GroupId).Wait();
-                                if (contextAwareObject.PnPContext.Site.HasValue(propertyToLoad))
+                                context.Site.EnsurePropertiesAsync(p => p.GroupId).Wait();
+                                if (context.Site.HasValue(propertyToLoad))
                                 {
-                                    result = result.Replace(match.Value, contextAwareObject.PnPContext.Site.GroupId.ToString());
+                                    result = result.Replace(match.Value, context.Site.GroupId.ToString());
                                 }
                                 break;
                             }
                         case "Id":
                             {
-                                contextAwareObject.PnPContext.Site.EnsurePropertiesAsync(p => p.Id).Wait();
-                                if (contextAwareObject.PnPContext.Site.HasValue(propertyToLoad))
+                                context.Site.EnsurePropertiesAsync(p => p.Id).Wait();
+                                if (context.Site.HasValue(propertyToLoad))
                                 {
-                                    result = result.Replace(match.Value, contextAwareObject.PnPContext.Site.Id.ToString());
+                                    result = result.Replace(match.Value, context.Site.Id.ToString());
                                 }
                                 break;
                             }
@@ -144,7 +151,7 @@ namespace PnP.Core.Model
                 }
 
                 // Replace tokens coming from the Site object connected to the current PnPContext
-                if (match.Value.StartsWith("{Web."))
+                if (match.Value.StartsWith("{Web.") && context != null)
                 {
                     var propertyToLoad = match.Value.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("}", "");
 
@@ -152,16 +159,16 @@ namespace PnP.Core.Model
                     {
                         case "Id":
                             {
-                                contextAwareObject.PnPContext.Web.EnsurePropertiesAsync(p => p.Id).Wait();
-                                if (contextAwareObject.PnPContext.Web.HasValue(propertyToLoad))
+                                context.Web.EnsurePropertiesAsync(p => p.Id).Wait();
+                                if (context.Web.HasValue(propertyToLoad))
                                 {
-                                    result = result.Replace(match.Value, contextAwareObject.PnPContext.Web.Id.ToString());
+                                    result = result.Replace(match.Value, context.Web.Id.ToString());
                                 }
                                 break;
                             }
                         case "GraphId":
                             {
-                                var model = contextAwareObject.PnPContext.Web as IMetadataExtensible;
+                                var model = context.Web as IMetadataExtensible;
 
                                 if (model.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                                 {
@@ -170,6 +177,18 @@ namespace PnP.Core.Model
                                 break;
                             }
                     }
+                }
+
+                // Replace {hostname}
+                if (match.Value.Equals("{hostname}"))
+                {
+                    result = result.Replace("{hostname}", context.Uri.DnsSafeHost);
+                }
+
+                // Replace {serverrelativepath}
+                if (match.Value.Equals("{serverrelativepath}"))
+                {
+                    result = result.Replace("{serverrelativepath}", context.Uri.PathAndQuery);
                 }
             }
 

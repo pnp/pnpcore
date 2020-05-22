@@ -1,23 +1,34 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel.Query;
-using PnP.Core.Test.Utilities;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using PnP.Core.QueryModel;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.Test.Utilities;
 
 namespace PnP.Core.Test.QueryModel
 {
     [TestClass]
     public class QueryableConsistency
     {
+        [ClassInitialize]
+        public static void TestFixtureSetup(TestContext context)
+        {
+            // Configure mocking default for all tests in this class, unless override by a specific test
+            //TestCommon.Instance.Mocking = false;
+        }
+
         [TestMethod]
         public void TestQueryListsConsistency()
         {
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var query = (from l in context.Web.Lists
                              select l)
                             .Load(l => l.Id, l => l.Title, l => l.Description);
@@ -43,6 +54,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
@@ -91,6 +104,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
@@ -146,6 +161,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Get the whole set of lists via LINQ
                 var query = (from l in context.Web.Lists
                              select l)
@@ -211,6 +228,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var sitePages = context.Web.Lists.GetByTitle("Site Pages");
 
                 // Retrieve a single item via LINQ query
@@ -251,6 +270,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var myList = context.Web.Lists.GetByTitle(listTitle);
 
                 if (myList != null)
@@ -307,6 +328,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var myList = context.Web.Lists.GetByTitle(listTitle);
 
                 if (myList != null)
@@ -367,6 +390,8 @@ namespace PnP.Core.Test.QueryModel
             // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 var myList = context.Web.Lists.GetByTitle(listTitle);
 
                 if (myList != null)
@@ -420,14 +445,66 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryListFollowedByGraphQueryConsistency()
         {
-            //TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
+                context.GraphFirst = false;
+
                 // Load list via Linq query --> this should now ensure the GraphId property of the web model is populated
                 var list = context.Web.Lists.GetByTitle("Site Pages", l => l.Id, l => l.Title, l => l.Description);
 
                 // Get the list items -- will happen via Graph
                 await list.GetAsync(p => p.Items);
+
+                Assert.IsNotNull(list);
+                Assert.AreEqual(1, list.Items.Length);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryListWithItemsFollowedByGraphQueryConsistency()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Load list via Linq query --> this should now ensure the GraphId property of the web model is populated
+                var list = context.Web.Lists.Include(l => l.Items).GetByTitle("Site Pages", l => l.Id, l => l.Title, l => l.Description);
+
+                // Get the list items -- will happen via Graph
+                await list.GetAsync(p => p.Items);
+
+                Assert.IsNotNull(list);
+                Assert.AreEqual(1, list.Items.Length);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestMultipleQueriesInSingleContext()
+        {
+            var listTitle = "Site Pages";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Get all the lists first
+                var listsQuery = context.Web.Lists.Load(l => l.Id, l => l.Title);
+                var listsQueryResult = listsQuery.ToList();
+
+                // Then try to get a specific list by title
+                var list = context.Web.Lists.GetByTitle(listTitle, l => l.Id, l => l.Title, l => l.Description);
+
+                // Then get the list items
+                await list.GetAsync(l => l.Items);
+
+                Assert.IsNotNull(listsQueryResult);
+                Assert.IsTrue(listsQueryResult.Count > 5);
+                Assert.IsNotNull(list);
+                Assert.AreEqual(listTitle, list.Title);
+                Assert.AreEqual(1, list.Items.Length);
             }
         }
     }

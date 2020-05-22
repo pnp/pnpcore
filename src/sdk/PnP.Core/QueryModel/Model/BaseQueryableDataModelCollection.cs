@@ -1,5 +1,4 @@
 ﻿using PnP.Core.Model;
-using PnP.Core.QueryModel.Query;
 using System;
 using System.Collections;
 using System.Collections.Generic;

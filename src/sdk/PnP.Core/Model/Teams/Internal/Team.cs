@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model.Teams
 {
-    [GraphType(Uri = "teams/{Site.GroupId}")]
+    [GraphType(Uri = "teams/{Site.GroupId}", LinqGet = "teams")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class Team
     {

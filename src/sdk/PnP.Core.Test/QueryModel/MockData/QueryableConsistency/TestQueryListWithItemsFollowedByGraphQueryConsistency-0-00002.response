@@ -1,0 +1,10 @@
+{"responses": [{"id": "1","status":400,"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "Resource not found for the segment 'https:'.",
+    "innerError": {
+      "request-id": "af99df88-29f6-4e9e-9b85-e9119a359e01",
+      "date": "2020-05-19T08:10:19"
+    }
+  }
+}}]}

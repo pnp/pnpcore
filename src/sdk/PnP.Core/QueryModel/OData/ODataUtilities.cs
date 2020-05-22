@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace PnP.Core.QueryModel.OData
+namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Utility class
@@ -29,7 +29,7 @@ namespace PnP.Core.QueryModel.OData
                     return $"guid('{g.ToString()}')";
                 default:
                     // Convert to invariant string
-                    return String.Format(CultureInfo.InvariantCulture, "{0}", value);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}", value);
             }
         }
     }

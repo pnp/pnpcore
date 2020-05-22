@@ -700,8 +700,7 @@ namespace PnP.Core.Model
             var typedModel = propertyToSetValue as IDataModelMappingHandler;
 
             // Set the batch request id property
-            SetBatchRequestId(propertyToSetValue as TransientObject, (pnpObject as TransientObject).BatchRequestId);
-
+            SetBatchRequestId(propertyToSetValue as TransientObject, pnpObject.BatchRequestId);
 
             // Get class info
             var complexModelEntity = EntityManager.Instance.GetStaticClassInfo(propertyToSetValue.GetType());
@@ -778,7 +777,7 @@ namespace PnP.Core.Model
 
         private static void SetBatchRequestId(TransientObject pnpObject, Guid batchRequestId)
         {
-            (pnpObject as TransientObject).BatchRequestId = batchRequestId;
+            pnpObject.BatchRequestId = batchRequestId;
         }
 
         private static EntityFieldInfo LookupEntityField(EntityInfo entity, ApiResponse apiResponse, JsonProperty property)
