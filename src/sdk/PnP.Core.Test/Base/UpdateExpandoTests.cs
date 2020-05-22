@@ -28,7 +28,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task UpdateValuesPropertyViaRest()
         {
-            //TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Lists);
@@ -87,7 +87,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task UpdateValuesPropertyViaBatchRest()
         {
-            //TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var web = context.Web.Get(p => p.Lists);

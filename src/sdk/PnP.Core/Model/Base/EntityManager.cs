@@ -151,6 +151,10 @@ namespace PnP.Core.Model
                     // Find the property set as key field and mark it as such
                     if (!string.IsNullOrEmpty(keyPropertyName))
                     {
+                        // Store the actual key property name
+                        classInfo.ActualKeyFieldName = keyPropertyName;
+
+                        // Process the SharePoint and Graph ID fields
                         var keyProperty = classInfo.Fields.FirstOrDefault(p => p.Name == keyPropertyName);
                         if (keyProperty != null)
                         {
@@ -324,6 +328,29 @@ namespace PnP.Core.Model
             return entityInfo;
         }
 
+        internal Expression<Func<object, object>>[] GetEntityKeyExpressions(IDataModelParent entity)
+        {
+            var entityType = entity.GetType();
+            var entityInfo = this.GetStaticClassInfo(entityType);
+
+            if (string.IsNullOrEmpty(entityInfo.ActualKeyFieldName))
+            {
+                throw new ApplicationException($"Invalid domain model configuration for entity {entityType.FullName}");
+            }
+
+            var parameter = Expression.Parameter(entityType, "i");
+            var objectParameter = Expression.Parameter(typeof(object), "i");
+            var body = Expression.Convert(Expression.PropertyOrField(parameter, entityInfo.ActualKeyFieldName), typeof(object));
+            var expression = Expression.Lambda(body, parameter);
+            var objectExpression = Expression.Lambda<Func<object, object>>(expression.Body, objectParameter);
+
+            var result = new Expression<Func<object, object>>[] { objectExpression };
+
+            return (result);
+        }
+
+        #region Private implementation
+
         private static Type GetEntityConcreteType(Type type)
         {
             // Translate any provided interface type into the corresponding concrete type
@@ -377,5 +404,7 @@ namespace PnP.Core.Model
             }
             return str;
         }
+
+        #endregion
     }
 }

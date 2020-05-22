@@ -23,6 +23,7 @@ namespace PnP.Core.Model
         {
             entityInfo.Fields.ForEach(f => Fields.Add((EntityFieldInfo)f.Clone()));
 
+            ActualKeyFieldName = entityInfo.ActualKeyFieldName;
             SharePointType = entityInfo.SharePointType;
             SharePointUri = entityInfo.SharePointUri;
             GraphId = entityInfo.GraphId;
@@ -44,6 +45,11 @@ namespace PnP.Core.Model
         /// Field mapping information
         /// </summary>
         internal List<EntityFieldInfo> Fields { get; private set; } = new List<EntityFieldInfo>();
+
+        /// <summary>
+        /// Name of the actual key field
+        /// </summary>
+        internal string ActualKeyFieldName;
 
         /// <summary>
         /// Data store type when using REST
