@@ -34,6 +34,11 @@ namespace PnP.Core.Model.SharePoint
                                 {
                                     Id = id;
 
+                                    // Flag the parent collection as requested, most requests return a "full" json structure and then the standard json parsing 
+                                    // is used, which sets the collection as requested. Since in this case we get back a special structure we use custom
+                                    // parsing and hence we need to flag the collection as requested ourselves
+                                    (Parent as ListItemCollection).Requested = true;
+                                    
                                     // populate the uri and type metadata fields to enable actions upon 
                                     // this item without having to read it again from the server
                                     var parentList = Parent.Parent as List;

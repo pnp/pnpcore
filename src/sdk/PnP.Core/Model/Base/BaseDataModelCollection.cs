@@ -185,14 +185,24 @@ namespace PnP.Core.Model
 
         public void AddOrUpdateInternal(TModel newItem, Predicate<TModel> selector)
         {
-            var itemToUpdateIndex = items.FindIndex(selector);
-            if (itemToUpdateIndex >= 0)
+            // When the collection was never requested then just add the item, no point 
+            // in trying to check if the item exists as collections that were not requested
+            // typically do not have the key loaded. If the key property was not loaded the FindIndex will fail
+            if (!Requested)
             {
-                Replace(itemToUpdateIndex, newItem);
+                items.Add(newItem);
             }
             else
             {
-                items.Add(newItem);
+                var itemToUpdateIndex = items.FindIndex(selector);
+                if (itemToUpdateIndex >= 0)
+                {
+                    Replace(itemToUpdateIndex, newItem);
+                }
+                else
+                {
+                    items.Add(newItem);
+                }
             }
         }
 

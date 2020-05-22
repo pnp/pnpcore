@@ -131,7 +131,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task ThrowGraphServiceException()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 bool microsoftGraphServiceExceptionThrown = false;
@@ -160,7 +160,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task VerifyGraphServiceExceptionToString()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 bool microsoftGraphServiceExceptionThrown = false;
