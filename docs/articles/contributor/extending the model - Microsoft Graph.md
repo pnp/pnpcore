@@ -1,5 +1,5 @@
 
-# Extending the model via Microsoft Graph
+# Extending the model for Microsoft Graph
 
 The PnP Core SDK model contains model, collection and complex type classes which are populated via either Microsoft Graph or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the Microsoft Graph API.
 

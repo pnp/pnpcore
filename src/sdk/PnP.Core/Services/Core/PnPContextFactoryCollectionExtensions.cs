@@ -60,11 +60,17 @@ namespace PnP.Core.Services
 
         private static IServiceCollection AddTelemetryServices(this IServiceCollection collection)
         {
+            var settingsService = collection.BuildServiceProvider().GetRequiredService<ISettings>();
+
             // Setup Azure App Insights
             // See https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/WorkerServiceSampleWithApplicationInsights as example
             return collection.AddApplicationInsightsTelemetryWorkerService(options =>
             {
-                options.InstrumentationKey = "6d4ab985-60dd-4ecc-ad40-994b55350c1d";
+                if (!settingsService.DisableTelemetry)
+                {
+                    // Production AppInsights
+                    options.InstrumentationKey = "ffe6116a-bda0-4f0a-b0cf-d26f1b0d84eb";
+                }
             });
         }
 

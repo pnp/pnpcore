@@ -1,6 +1,8 @@
-# Extending the PnP Microsoft 365 model
+# The PnP Core SDK model
 
-The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and the their operations (e.g. Get). This model has a public part (interfaces) and an implementation (internal, partial, classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model.
+The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and the their operations (e.g. Get). This model has a public part (interfaces) and an implementation (internal, partial, classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. **As a contributor extending and enriching the model is how you provide functionality to the developers that will be using this SDK**.
+
+![SDK overview](../../images/sdk%20overview.png)
 
 ## General model principles
 
@@ -14,7 +16,7 @@ In the model there are 3 types of classes:
 - Model classes typically use simple .Net types or enumerations as type for their properties, but sometimes a complex type is needed which is represented via a **complex type class**
 - Model classes often live in a collection, so we do have **model collection classes**
 
-A special case is **complex type** collections, they can be used in collections and the collection will then be a `List` of **model collection classes**.
+A special case is **complex type** collections, they can be used in collections and the collection will then be a regular .Net `List` of **model collection classes**.
 
 Each of these classes has a public model implemented via interfaces and an internal model implemented via internal partial classes.
 
@@ -130,7 +132,7 @@ internal partial class List
                 case "ListTemplateType": return JsonMappingHelper.ToEnum<ListTemplateType>(input.JsonElement);
             }
 
-            input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");
+            input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
 
             return null;
         };
@@ -241,7 +243,7 @@ internal partial class TeamFunSettings : BaseComplexType<ITeamFunSettings>, ITea
                 case "TeamGiphyContentRating": return ToEnum<TeamGiphyContentRating>(input.JsonElement);
             }
 
-            input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");
+            input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
 
             return null;
         };

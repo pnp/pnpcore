@@ -122,7 +122,7 @@ internal partial class TeamChannel
                 case "TeamChannelMembershipType": return ToEnum<TeamChannelMembershipType>(input.JsonElement);
             }
 
-            input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");
+            input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
 
             return null;
         };

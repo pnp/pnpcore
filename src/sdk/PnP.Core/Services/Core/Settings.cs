@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Reflection;
 
 namespace PnP.Core.Services
@@ -17,11 +18,53 @@ namespace PnP.Core.Services
 
             VersionTag = GetVersionTag();
             UserAgent = GetUserAgent();
+            DisableTelemetry = GetDisableTelemetry();
+            GraphFirst = GetGraphFirst();
+            GraphAlwaysUseBeta = GetGraphAlwaysUseBeta();
+            GraphCanUseBeta = GetGraphCanUseBeta();
         }
 
         public string VersionTag { get; }
 
         public string UserAgent { get; }
+
+        public bool DisableTelemetry { get; }
+        
+        public Guid AADTenantId { get; set; }
+
+        public bool GraphFirst { get; }
+
+        public bool GraphAlwaysUseBeta { get; }
+        
+        public bool GraphCanUseBeta { get; }
+
+        private bool GetGraphFirst()
+        {
+            var graphFirst = config.GetValue<bool>("PnPCore:PnPContext:GraphFirst", true);
+            logger.LogInformation($"Using telemetry setting from configuration. GraphFirst: {graphFirst}");
+            return graphFirst;
+        }
+
+        private bool GetGraphAlwaysUseBeta()
+        {
+            var graphAlwaysUsesBeta = config.GetValue<bool>("PnPCore:PnPContext:GraphAlwaysUseBeta", false);
+            logger.LogInformation($"Using telemetry setting from configuration. GraphAlwaysUseBeta: {graphAlwaysUsesBeta}");
+            return graphAlwaysUsesBeta;
+        }
+
+        private bool GetGraphCanUseBeta()
+        {
+            var graphCanUseBeta = config.GetValue<bool>("PnPCore:PnPContext:GraphCanUseBeta", true);
+            logger.LogInformation($"Using telemetry setting from configuration. GraphCanUseBeta: {graphCanUseBeta}");
+            return graphCanUseBeta;
+        }
+
+        private bool GetDisableTelemetry()
+        {
+            var disableTelemetry = config.GetValue<bool>("PnPCore:DisableTelemetry", false);
+            logger.LogInformation($"Using telemetry setting from configuration. Telemetry disabled: {disableTelemetry}");
+            return disableTelemetry;
+        }
 
         private string GetUserAgent()
         {

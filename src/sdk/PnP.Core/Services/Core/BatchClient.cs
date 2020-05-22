@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging;
 using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,9 @@ namespace PnP.Core.Services
     {
         // Simple counter used to construct the batch key used for test mocking
         private int testUseCounter = 0;
+
+        // Handles sending telemetry events
+        private readonly TelemetryManager telemetryManager;
 
         // Collection of current batches
         private readonly Dictionary<Guid, Batch> batches = new Dictionary<Guid, Batch>();
@@ -98,9 +102,10 @@ namespace PnP.Core.Services
         /// Constructor
         /// </summary>
         /// <param name="context">PnP Context</param>
-        internal BatchClient(PnPContext context)
+        internal BatchClient(PnPContext context, ISettings settingsClient, TelemetryClient telemetryClient)
         {
             PnPContext = context;
+            telemetryManager = new TelemetryManager(telemetryClient, settingsClient);
         }
 
         /// <summary>
@@ -477,6 +482,8 @@ namespace PnP.Core.Services
                     batchKey.Append($"{request.Method}|{request.ApiCall.Request}@@");
                 }
 #endif
+
+                telemetryManager.LogServiceRequest(batch, request, PnPContext);
             }
 
             JsonSerializerOptions options = new JsonSerializerOptions()
@@ -702,6 +709,7 @@ namespace PnP.Core.Services
                 }
 #endif
 
+                telemetryManager.LogServiceRequest(batch, request, PnPContext);
             }
 
             // Batch closing

@@ -6,6 +6,7 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace PnP.Core.Test.Utilities
 {
@@ -13,6 +14,7 @@ namespace PnP.Core.Test.Utilities
     {
         private static readonly Lazy<TestCommon> _lazyInstance = new Lazy<TestCommon>(() => new TestCommon(), true);
         private IPnPContextFactory pnpContextFactoryCache;
+        private static readonly SemaphoreSlim semaphoreSlimFactory = new SemaphoreSlim(1);
 
         /// <summary>
         /// Get's the single TestCommon instance, singleton pattern
@@ -84,86 +86,96 @@ namespace PnP.Core.Test.Utilities
 
         public IPnPContextFactory BuildContextFactory()
         {
-            if (pnpContextFactoryCache != null)
+            try
             {
-                return pnpContextFactoryCache;
-            }
+                // If a test case is already initializing the factory then let's wait
+                semaphoreSlimFactory.Wait();
 
-            // Define the test environment by: 
-            // - Copying env.sample to env.txt  
-            // - Putting the test environment name in env.txt ==> this should be same name as used in your settings file:
-            //   When using appsettings.mine.json then you need to put mine as content in env.txt
-            var environmentName = LoadTestEnvironment();
-
-            if (string.IsNullOrEmpty(environmentName))
-            {
-                throw new Exception("Please ensure you've a env.txt file in the root of the test project. This file should contain the name of the test environment you want to use.");
-            }
-
-            var configuration = new ConfigurationBuilder()
-            .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
-            .AddEnvironmentVariables()
-            .Build();
-
-            var serviceProvider = new ServiceCollection()
-                // Configuration
-                .AddScoped<IConfiguration>(_ => configuration)
-                // Logging service, get config from appsettings + add debug output handler
-                .AddLogging(configure =>
+                if (pnpContextFactoryCache != null)
                 {
-                    configure.AddConfiguration(configuration.GetSection("Logging"));
-                    configure.AddDebug();
-                })
-                // Authentication provider factory
-                .AddAuthenticationProviderFactory(options =>
-                {
-                    options.Configurations.Add(new OAuthCredentialManagerConfiguration
-                    {
-                        Name = "CredentialManagerAuthentication",
-                        CredentialManagerName = configuration.GetValue<string>("CustomSettings:CredentialManager"),
-                    });
+                    return pnpContextFactoryCache;
+                }
 
-                    options.DefaultConfiguration = "CredentialManagerAuthentication";
-                })
-                // PnP Context factory
-                .AddTestPnPContextFactory(options =>
-                {
-                    options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                    {
-                        Name = TestSite,
-                        SiteUrl = new Uri(configuration.GetValue<string>("CustomSettings:TargetSiteUrl")),
-                        AuthenticationProviderName = "CredentialManagerAuthentication",
-                    });
-                    options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                    {
-                        Name = TestSubSite,
-                        SiteUrl = new Uri(configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl")),
-                        AuthenticationProviderName = "CredentialManagerAuthentication",
-                    });
-                    options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                    {
-                        Name = NoGroupTestSite,
-                        SiteUrl = new Uri(configuration.GetValue<string>("CustomSettings:NoGroupSiteUrl")),
-                        AuthenticationProviderName = "CredentialManagerAuthentication",
-                    });
-                })
-                .BuildServiceProvider();
+                // Define the test environment by: 
+                // - Copying env.sample to env.txt  
+                // - Putting the test environment name in env.txt ==> this should be same name as used in your settings file:
+                //   When using appsettings.mine.json then you need to put mine as content in env.txt
+                var environmentName = LoadTestEnvironment();
 
-            TestUris = new Dictionary<string, Uri>
+                if (string.IsNullOrEmpty(environmentName))
+                {
+                    throw new Exception("Please ensure you've a env.txt file in the root of the test project. This file should contain the name of the test environment you want to use.");
+                }
+
+                var configuration = new ConfigurationBuilder()
+                .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
+
+                var serviceProvider = new ServiceCollection()
+                    // Configuration
+                    .AddScoped<IConfiguration>(_ => configuration)
+                    // Logging service, get config from appsettings + add debug output handler
+                    .AddLogging(configure =>
+                    {
+                        configure.AddConfiguration(configuration.GetSection("Logging"));
+                        configure.AddDebug();
+                    })
+                    // Authentication provider factory
+                    .AddAuthenticationProviderFactory(options =>
+                    {
+                        options.Configurations.Add(new OAuthCredentialManagerConfiguration
+                        {
+                            Name = "CredentialManagerAuthentication",
+                            CredentialManagerName = configuration.GetValue<string>("CustomSettings:CredentialManager"),
+                        });
+
+                        options.DefaultConfiguration = "CredentialManagerAuthentication";
+                    })
+                    // PnP Context factory
+                    .AddTestPnPContextFactory(options =>
+                    {
+                        options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
+                        {
+                            Name = TestSite,
+                            SiteUrl = new Uri(configuration.GetValue<string>("CustomSettings:TargetSiteUrl")),
+                            AuthenticationProviderName = "CredentialManagerAuthentication",
+                        });
+                        options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
+                        {
+                            Name = TestSubSite,
+                            SiteUrl = new Uri(configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl")),
+                            AuthenticationProviderName = "CredentialManagerAuthentication",
+                        });
+                        options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
+                        {
+                            Name = NoGroupTestSite,
+                            SiteUrl = new Uri(configuration.GetValue<string>("CustomSettings:NoGroupSiteUrl")),
+                            AuthenticationProviderName = "CredentialManagerAuthentication",
+                        });
+                    })
+                    .BuildServiceProvider();
+
+                TestUris = new Dictionary<string, Uri>
             {
                 { TestSite, new Uri(configuration.GetValue<string>("CustomSettings:TargetSiteUrl")) },
                 { TestSubSite, new Uri(configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl")) },
                 { NoGroupTestSite, new Uri(configuration.GetValue<string>("CustomSettings:NoGroupSiteUrl")) }
             };
 
-            var pnpContextFactory = serviceProvider.GetRequiredService<IPnPContextFactory>();
+                var pnpContextFactory = serviceProvider.GetRequiredService<IPnPContextFactory>();
 
-            if (pnpContextFactoryCache == null)
-            {
-                pnpContextFactoryCache = pnpContextFactory;
+                if (pnpContextFactoryCache == null)
+                {
+                    pnpContextFactoryCache = pnpContextFactory;
+                }
+
+                return pnpContextFactory;
             }
-
-            return pnpContextFactory;
+            finally
+            {
+                semaphoreSlimFactory.Release();
+            }
         }
 
         private static string LoadTestEnvironment()

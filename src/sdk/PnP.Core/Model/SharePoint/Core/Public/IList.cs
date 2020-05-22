@@ -1,5 +1,4 @@
-﻿using PnP.Core.Model.SharePoint.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint

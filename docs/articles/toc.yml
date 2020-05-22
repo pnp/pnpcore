@@ -1,22 +1,26 @@
-- name: Getting Started
+- name: Overview
   items:
-  - name: Introduction
+  - name: Introduction to the PnP Core SDK
     href: intro.md
 - name: User documentation
   items:
-  - name: Introduction
+  - name: Getting started
     href: consumer/readme.md
+  - name: Configuring the PnP Core SDK
+    href: consumer/pnp%20core%20settings.md
 - name: Contributor documentation
   items:
-  - name: Introduction
+  - name: The PnP Core SDK model
     href: contributor/readme.md
-  - name: Microsoft Graph
+  - name: Extending the model for Microsoft Graph
     href: contributor/extending%20the%20model%20-%20Microsoft%20Graph.md 
-  - name: SharePoint REST
+  - name: Extending the model for SharePoint REST
     href: contributor/extending%20the%20model%20-%20SharePoint%20REST.md 
-  - name: Event handlers
+  - name: Using event handlers
     href: contributor/event%20handlers.md 
-  - name: Model tokens
+  - name: Using model tokens
     href: contributor/model%20tokens.md 
   - name: Writing tests
     href: contributor/writing%20tests.md 
+  - name: Authoring documentation
+    href: contributor/writing%20documentation.md 

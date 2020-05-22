@@ -1,6 +1,6 @@
 # PnP Core SDK documentation
 
-This folder contains the PnP Core SDK documentation. The documentation system is based upon [DocFX](https://dotnet.github.io/docfx/) and combines inline code comments (the so called triple slash comments) with articles written in MD format. The resulting generated documentation is hosted on **toupdate**
+This folder contains the PnP Core SDK documentation. The documentation system is based upon [DocFX](https://dotnet.github.io/docfx/) and combines inline code comments (the so called triple slash comments) with articles written in MD format. The resulting generated documentation is hosted on https://pnp.github.io/pnpcore.
 
 ## Documentation generation
 

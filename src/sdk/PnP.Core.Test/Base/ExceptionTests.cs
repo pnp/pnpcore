@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System.Threading.Tasks;
 
@@ -196,8 +197,8 @@ namespace PnP.Core.Test.Base
                 try
                 {
                     // try adding the same list twice, will always result in an error
-                    await context.Web.Lists.AddAsync("Fail list", Model.SharePoint.Core.ListTemplateType.GenericList);
-                    await context.Web.Lists.AddAsync("Fail list", Model.SharePoint.Core.ListTemplateType.GenericList);
+                    await context.Web.Lists.AddAsync("Fail list", ListTemplateType.GenericList);
+                    await context.Web.Lists.AddAsync("Fail list", ListTemplateType.GenericList);
                 }
                 catch (ServiceException ex)
                 {

@@ -15,7 +15,7 @@ namespace PnP.Core.Model.Teams
                     case "TeamGiphyContentRating": return ToEnum<TeamGiphyContentRating>(input.JsonElement);
                 }
 
-                input.Log.LogWarning($"Field {input.FieldName} could not be mapped when converting from JSON");
+                input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
 
                 return null;
             };

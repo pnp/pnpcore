@@ -3,7 +3,6 @@ using System.Linq;
 using System;
 using PnP.Core.Test.Utilities;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.Model.SharePoint.Core;
 using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.QueryModel
@@ -11,6 +10,13 @@ namespace PnP.Core.Test.QueryModel
     [TestClass]
     public class QueryableActualDataTestsGraph
     {
+        [ClassInitialize]
+        public static void TestFixtureSetup(TestContext context)
+        {
+            // Configure mocking default for all tests in this class, unless override by a specific test
+            //TestCommon.Instance.Mocking = false;
+        }
+
         [TestMethod]
         public void TestQueryWebs_Graph()
         {
