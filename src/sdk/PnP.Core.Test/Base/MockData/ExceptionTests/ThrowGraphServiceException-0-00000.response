@@ -1,10 +1,9 @@
-{"responses": [{"id": "1","status":400,"body":{
-  "error": {
-    "code": "BadRequest",
-    "message": "teamId needs to be a valid GUID.",
-    "innerError": {
-      "request-id": "20f77f91-ecc8-42cd-9d95-73de099e4292",
-      "date": "2020-05-08T13:02:52"
-    }
-  }
-}}]}
+--batchresponse_ab5bdf2b-9b97-4ab7-9250-79652c0f9e93
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Site","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"a7ea7e26-5a76-4b72-ad99-1465b74857c8","Id":"409403da-217e-4c1b-b400-6dd624fe15d4"}}
+--batchresponse_ab5bdf2b-9b97-4ab7-9250-79652c0f9e93--

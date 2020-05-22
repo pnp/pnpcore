@@ -31,6 +31,11 @@ namespace PnP.Core.Model
 
         internal static string ParseApiRequest(IMetadataExtensible pnpObject, string input)
         {
+            var result = TokenHandler.ResolveTokensAsync(pnpObject, input)
+                .GetAwaiter().GetResult();
+
+            return result;
+
             // Get the context aware version of the target pnpObject
             var contextAwareObject = pnpObject as IDataModelWithContext;
 

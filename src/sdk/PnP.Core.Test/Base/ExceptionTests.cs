@@ -131,7 +131,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task ThrowGraphServiceException()
         {
-            //TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 bool microsoftGraphServiceExceptionThrown = false;
@@ -141,7 +141,7 @@ namespace PnP.Core.Test.Base
                     // try adding a channel while the Team was not yet loaded, should result in not correctly formatted query sent to graph
                     await context.Team.Channels.AddAsync("Fail channel");
                 }
-                catch(ServiceException ex)
+                catch (ServiceException ex)
                 {
                     if (ex is MicrosoftGraphServiceException)
                     {
@@ -160,7 +160,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task VerifyGraphServiceExceptionToString()
         {
-            //TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 bool microsoftGraphServiceExceptionThrown = false;

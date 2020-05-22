@@ -27,8 +27,8 @@ namespace PnP.Core.Model
             var contextAwareObject = pnpObject as IDataModelWithContext;
 
             // If we don't have an input context, let's try to use 
-            // the one associated with the input entity
-            if (context == null)
+            // the one associated with the input entity, if any
+            if (context == null && contextAwareObject != null)
             {
                 context = contextAwareObject.PnPContext;
             }
