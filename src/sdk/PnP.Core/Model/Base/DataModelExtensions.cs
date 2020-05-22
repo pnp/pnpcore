@@ -129,9 +129,15 @@ namespace PnP.Core.Model
                     !requestableParent.Requested)
                 {
                     // If not, make an explicit request for its basic properties
-                    // PAOLO: Should we request the IDs only?
                     var ensureParentBatch = contextAwareParent.PnPContext.NewBatch();
-                    gettableParent.Get(ensureParentBatch);
+
+                    // Define the lambda to retrieve the ID only
+                    var expressions = EntityManager.Instance.GetEntityKeyExpressions(parent);
+
+                    // Enqueue the actual request in the dedicated batch
+                    gettableParent.Get(ensureParentBatch, expressions);
+
+                    // Make the actual request
                     await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(true);
                 }
             }
