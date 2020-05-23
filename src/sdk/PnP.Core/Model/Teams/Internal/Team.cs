@@ -1,4 +1,5 @@
 ﻿using System;
+using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams
 {

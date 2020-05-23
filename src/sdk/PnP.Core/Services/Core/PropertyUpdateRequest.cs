@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.Model
+﻿namespace PnP.Core.Services
 {
     /// <summary>
     /// Class used to provide information on a field update request

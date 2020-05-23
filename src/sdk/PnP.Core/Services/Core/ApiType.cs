@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.Model
+﻿namespace PnP.Core.Services
 {
     /// <summary>
     /// Possible API's used to talk to data stores

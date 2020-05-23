@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {

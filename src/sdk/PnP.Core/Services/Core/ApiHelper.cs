@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using PnP.Core.Model;
 
-namespace PnP.Core.Model
+namespace PnP.Core.Services
 {
     /// <summary>
     /// Helper class to manage API calls URLs

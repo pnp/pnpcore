@@ -1,13 +1,13 @@
-﻿using PnP.Core.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
-namespace PnP.Core.Model
+namespace PnP.Core.Services
 {
     /// <summary>
     /// Internal class to help with the JSON mapping for Domain Model objects

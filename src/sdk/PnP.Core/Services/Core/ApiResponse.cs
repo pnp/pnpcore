@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 
-namespace PnP.Core.Model
+namespace PnP.Core.Services
 {
     public struct ApiResponse
     {

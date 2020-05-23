@@ -3,6 +3,7 @@ using System;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using PnP.Core.Model;
 
-namespace PnP.Core.Model
+namespace PnP.Core.Services
 {
     /// <summary>
     /// Defines a request in a <see cref="Batch"/>

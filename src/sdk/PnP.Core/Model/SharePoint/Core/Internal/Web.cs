@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Text.Json;
+using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {

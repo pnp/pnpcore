@@ -1,11 +1,11 @@
-﻿using PnP.Core.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
-namespace PnP.Core.Model
+namespace PnP.Core.Services
 {
     /// <summary>
     /// Handler class to help managing tokens replacement

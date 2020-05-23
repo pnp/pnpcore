@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.Model
+﻿namespace PnP.Core.Services
 {
     /// <summary>
     /// Class that will be passed along during API overrides

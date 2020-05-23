@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using PnP.Core.Model;
 
-namespace PnP.Core.Model
+namespace PnP.Core.Services
 {
     /// <summary>
     /// Defines a <see cref="Batch"/> of requests to execute

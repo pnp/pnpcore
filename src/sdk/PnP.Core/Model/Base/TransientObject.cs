@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using PnP.Core.Services;
 
 namespace PnP.Core.Model
 {
