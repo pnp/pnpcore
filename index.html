@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PnP Core SDK - preview | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="PnP Core SDK - preview | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.52.0.0">
+    
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="pnp-core-sdk---preview">PnP Core SDK - preview</h1>
+
+<h2 id="intro">Intro</h2>
+<p>The PnP Core SDK is an SDK designed to work against Microsoft 365. It provides a unified object model for working with SharePoint Online and the broader Microsoft 365 environment. Currently the library is an <strong>early preview</strong> in which the focus was on coding the basics so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 components such as Mail, Planner, Yammer, etc.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The PnP Core SDK is in preview: it's targetting developers that want to either test or extend it. It's <strong>not</strong> yet ready to be used in production scenarios, mainly because it still lacks most of the model definitions.</p>
+</div>
+<h2 id="getting-started-using-this-library">Getting started using this library</h2>
+<p>Using the PnP Core SDK is simple, check out out <a href="articles/consumer/readme.html">getting started</a> guide.</p>
+<h2 id="how-can-you-help">How can you help?</h2>
+<p>The model implemented in the preview only covers a small part of what's possible and what's needed. We're asking the community to help us expand the model by:</p>
+<ul>
+<li><strong>Extending the model</strong> via the creation of new model, complex type and collection classes. Check out the <a href="articles/contributor/readme.html">Extending the model</a> article to learn how to do this</li>
+<li><strong>Adding &quot;functionality&quot;</strong> to the model: after extending the model the typical CRUD functionality is there, but for some parts of the model it makes sense to add functionality by adding methods on top of the model classes. Check out the <a href="articles/contributor/readme.html">Extending the model</a> article to learn how to do this</li>
+<li><strong>Writing sample programs</strong> that use this library: since this is .Net Standard library it can not only be used on Windows, but also on Macs and Linux machines as well as on mobile OS's like Android and iOS. With the rise of <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a> this library can also be used to build .Net based apps running in the browser. Samples can be added in the <code>src\samples</code> folder.</li>
+<li><strong>Working on documentation</strong>: good documentation is critical to help developers work with this library, either by using it or by extending it. See the <a href="articles/contributor/writing%20documentation.html">Writing documentation</a> article for more details</li>
+</ul>
+<h3 id="best-practices-when-contributing">Best practices when contributing</h3>
+<ul>
+<li>This is all new and we're there to help, don't hesitate to reach out with your questions and feedback</li>
+<li>To avoid overlapping efforts in the startup phase please let us know if you plan to take on a particular chunk of work (e.g. let's say you want to extend the model to support Planner)</li>
+<li>If you are extending the model and you need to update the model base logic then please reach out, we want to align on those changes first as these need to fit into our model approach</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The best way to reach out is by creating an issue in the issue list: <a href="https://github.com/pnp/pnpcore/issues">https://github.com/pnp/pnpcore/issues</a></p>
+</div>
+<p><strong>This community rocks, sharing is caring!</strong></p>
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/pnp/pnpcore/blob/dev/docs/index.md/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            PnP Core SDK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Writing test cases | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Writing test cases | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.52.0.0">
+    
+    <link rel="shortcut icon" href="../../https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="writing-test-cases">Writing test cases</h1>
+
+<p>Test cases are a crucial part of the pnp core sdk as they help ensuring code quality and provide feedback to contributors on how well their changes are working. All new contributions <strong>must</strong> be convered by test cases unless the added functionality somehow already is covered by existing test cases.</p>
+<h2 id="setting-up-your-environment-to-run-the-tests-cases">Setting up your environment to run the tests cases</h2>
+<p>If you want to use and extend these unit tests then you'll need to do a simple onetime setup:</p>
+<ol>
+<li><p>Go to the test project folder (src\sdk\PnP.Core.Test)</p>
+</li>
+<li><p>Copy env.sample to env.txt</p>
+</li>
+<li><p>Open env.txt and put as content the value <strong>mine</strong> (or another name in case you want to use other test environment names)</p>
+</li>
+<li><p>Open <code>appsettings.mine.json</code> and update the url's and accounts to match with what's available in your tenant. The test system requires that you have setup the following sites (optionally use <code>setuptestenv.ps1</code> to help create the needed sites):</p>
+<ol>
+<li>A modern, group connected, team site (recommended name is <strong>pnpcoresdktestgroup</strong>) which was <strong>teamified</strong> and which <strong>has a sub site</strong> (recommended name is <strong>subsite</strong>)</li>
+<li>A modern communication site (recommended name is <strong>pnpcoresdktest</strong>) which <strong>has a sub site</strong> (recommended name is <strong>subsite</strong>)</li>
+</ol>
+</li>
+<li><p>That should be it. Happy testing!</p>
+</li>
+</ol>
+<h2 id="running-the-existing-tests-in-offline-mode">Running the existing tests in offline mode</h2>
+<p>The test model runs tests by default in an offline modus, this means that tests run really quick and that they should always work. After you've setup your environment for testing you should open the Visual Studio Test Explorer and click on the <strong>Run all tests</strong> button to verify that all tests run successfully on your computer.</p>
+<p><img src="../../images/test%20explorer.png" alt="Test explorer"></p>
+<h2 id="authoring-new-test-cases">Authoring new test cases</h2>
+<h3 id="where-do-i-put-my-test-case">Where do I put my test case?</h3>
+<p>All test cases belong in the PnP.Core.Test project and generally speaking the test cases will either be linked to extending the model or linked to the &quot;core&quot; part that handles the interaction with SharePoint or Microsoft Graph. For model related test cases, please add them to either existing test classes in the respective model folders:</p>
+<ul>
+<li>SharePoint model tests go into the <strong>SharePoint</strong> folder. You either create a new file with test cases or add your test into an existing file.</li>
+<li>Teams model tests go into the <strong>Teams</strong> folder. You either create a new file with test cases or add your test into an existing file.</li>
+<li>Azure Active Directory model tests go into the <strong>AzureActiveDirectory</strong> folder. You either create a new file with test cases or add your test into an existing file</li>
+</ul>
+<p>If your test extends an already tested model then most likely you'll be able to add your test to one of the existing test classes.</p>
+<p>When you add &quot;core&quot; tests these will need to be added in the <strong>Base</strong> folder for core tests or in the <strong>QueryModel</strong> folder for linq tests.</p>
+<h3 id="anotomy-of-a-typical-test-file-and-test-case">Anotomy of a typical test file and test case</h3>
+<p>It's easiest to learn this by looking at a sample:</p>
+<pre><code class="lang-csharp">[TestClass]
+public class GetTests
+{
+    [ClassInitialize]
+    public static void TestFixtureSetup(TestContext context)
+    {
+        // Configure mocking default for all tests in this class, unless override by a specific test
+        //TestCommon.Instance.Mocking = false;
+    }
+
+    #region Tests that use REST to hit SharePoint
+
+    [TestMethod]
+    public async Task GetSinglePropertyViaRest()
+    {
+        //TestCommon.Instance.Mocking = false;
+        using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+        {
+            var web = await context.Web.GetAsync(p =&gt; p.WelcomePage);
+
+            // Is the property populated
+            Assert.IsTrue(web.IsPropertyAvailable(p =&gt; p.WelcomePage));
+            Assert.IsTrue(!string.IsNullOrEmpty(web.WelcomePage));
+
+            // Are other properties still not available
+            Assert.IsFalse(web.IsPropertyAvailable(p =&gt; p.Title));
+        }
+    }
+}
+</code></pre>
+<p>All test classes will have a <code>TestFixtureSetup</code> static method which is marked as class initializer. Using this method you can turn all tests in a given class from offline testing to online testing (so testing without using the mock data). Looking at the test method itself you'll notice that:</p>
+<ul>
+<li>To create a <code>PnPContext</code> the test cases uses the <code>TestCommon.Instance.GetContext</code> method: it's important to use this method as this one is hooked up to the configuration you specified plus it will deliver a context that understands how to work with mock data.</li>
+<li>Uncommenting the <code>TestCommon.Instance.Mocking = false;</code> line can be used to put this specific test in online mode: when you start developing your test you'll have do that (as you initially don't have mock data)</li>
+</ul>
+<h3 id="mocking-of-server-responses-in-tests">Mocking of server responses in tests</h3>
+<p>The PnP Core SDK tests use a custom built mocking system which essentially simply saves server responses when running in online mode and when running in offline mode (so when mocking data) the saved server responses are used to mock the server response. All of this works automatically and can be turned on/off by setting the <code>TestCommon.Instance.Mocking</code> property to <code>true</code> or <code>false</code> (see also the FAQ at the end of this page to learn more). When running in online mode each response for a server request will be stored as a file in a sub folder of the current test class. This folder is always named <code>MockData</code> and has a sub folder per test class which ensures that mocking files for a given test can be easily identified. The filename uses the following pattern <code>{testname}-{context order}-{sequence}.response</code>.</p>
+<h3 id="steps-to-create-a-test-case">Steps to create a test case</h3>
+<p>If you follow below steps you'll be creating test cases according to the PnP Core SDK guidelines:</p>
+<ol>
+<li>Find the right location to add your test, either use an existing file or create a new test file</li>
+<li>Add below test to get started</li>
+</ol>
+<pre><code class="lang-csharp">    [TestMethod]
+    public async Task GetSinglePropertyViaRest()
+    {
+        TestCommon.Instance.Mocking = false;
+        using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+        {
+            // here comes your actual test code
+        }
+    }
+</code></pre>
+<ol start="3">
+<li>Write your test with mocking turned off</li>
+<li>Once your test is ready delete the generated mock data files (see the <code>.response</code> files in the <code>MockData</code> folder) and run your test once more to regenerate them. This step ensures that no stale mocking files will be checked in.</li>
+<li>Turn mocking on (commenting the <code>TestCommon.Instance.Mocking = false;</code> line) and verify your test still works</li>
+<li>Check in your test case <strong>together with</strong> the offline files generated in the <strong>mockdata</strong> folder</li>
+<li><strong>Optionally</strong>: if your test is creating artifacts in Microsoft 365 it's best to code the cleanup in the test or in the default <code>cleantestenv.ps1</code> script</li>
+</ol>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Each checked in test must be checked in with mocking turned on and as such with the appropiate offline test files (the <code>.response</code> files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.</p>
+</div>
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<h3 id="do-i-need-to-recreate-the-sites-after-each-live-test-run">Do I need to recreate the sites after each live test run?</h3>
+<p>You can opt to recreate the sites each time, but that will be time consuming. It's better to clean the created artefacts before launching a new live test run. The artefacts to clean obviously depend on the written test cases and it's a best practice to keep the <code>cleantestenv.ps1</code> script up to date with the needed cleaning work. You can tailor this script and save it as <code>cleantestenv.mine.ps1</code> to add your specific cleanup instructions.</p>
+<h3 id="how-can-i-configure-tests-to-run-live-versus-the-default-offline-run">How can I configure tests to run live versus the default offline run?</h3>
+<p>By default all the tests run based upon offline data, this is done to enable fast test execution without being dependent on a Microsoft 365 backend to be available and configured for testing. If you however are adding new test cases or refactoring code you might want to run one or more tests in live mode. There are 3 options:</p>
+<h4 id="run-a-single-test-live">Run a single test live</h4>
+<p>To run a single test live you simply need to uncomment the <code>TestCommon.Instance.Mocking = false;</code> line to to configure the test to run without using the mocking data, so run live.</p>
+<pre><code class="lang-csharp">[TestMethod]
+public async Task GetSinglePropertyViaRest()
+{
+    TestCommon.Instance.Mocking = false;
+    using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+    {
+        var web = await context.Web.GetAsync(p =&gt; p.WelcomePage);
+
+        // Is the property populated
+        Assert.IsTrue(web.IsPropertyAvailable(p =&gt; p.WelcomePage));
+        Assert.IsTrue(!string.IsNullOrEmpty(web.WelcomePage));
+
+        // Are other properties still not available
+        Assert.IsFalse(web.IsPropertyAvailable(p =&gt; p.Title));
+    }
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Please only commit tests that can run offline: tests need to have offline data + mocking must be turned on</p>
+</div>
+<h4 id="run-all-the-tests-in-a-test-class-live">Run all the tests in a test class live</h4>
+<p>To run all tests in a given test class live you can turn off mocking via a test class initialized:</p>
+<pre><code class="lang-csharp">[ClassInitialize]
+public static void TestFixtureSetup(TestContext context)
+{
+    // Configure mocking default for all tests in this class, unless override by a specific test
+    TestCommon.Instance.Mocking = false;
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Please only commit tests that can run offline: tests need to have offline data + mocking must be turned on</p>
+</div>
+<h4 id="run-all-the-tests-live">Run all the tests live</h4>
+<p>In the rare case you want to run all the test cases live you need to change the default setting of the <code>Mocking</code> property from true to false in TestCommon.cs (in the Utilities folder):</p>
+<pre><code class="lang-csharp">public bool Mocking { get; set; } = false;
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Please only commit tests that can run offline: tests need to have offline data + mocking must be turned on</p>
+</div>
+<h3 id="can-i-rename-test-files-or-test-cases">Can I rename test files or test cases</h3>
+<p>Yes, if naming needs to change you can do that. Keep in mind that the offline files live in a folder named according to the test file and the offline files are depending on the test case name, so you'll have to do similar renames in offline files or folder.</p>
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/contributor/writing tests.md/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            PnP Core SDK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
