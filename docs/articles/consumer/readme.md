@@ -30,6 +30,8 @@ var host = Host.CreateDefaultBuilder()
         {
             Name = "CredentialManagerAuthentication",
             CredentialManagerName = customSettings.CredentialManager,
+            // You can optionally provide a custom ClientId, or the SDK will use a default one 
+            ClientId = customSettings.ClientId, 
         });
         // Username + Pwd provider
         options.Configurations.Add(new OAuthUsernamePasswordConfiguration
