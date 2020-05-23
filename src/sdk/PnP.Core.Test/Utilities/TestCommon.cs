@@ -128,6 +128,7 @@ namespace PnP.Core.Test.Utilities
                         {
                             Name = "CredentialManagerAuthentication",
                             CredentialManagerName = configuration.GetValue<string>("CustomSettings:CredentialManager"),
+                            ClientId = configuration.GetValue<string>("CustomSettings:ClientId"),
                         });
 
                         options.DefaultConfiguration = "CredentialManagerAuthentication";

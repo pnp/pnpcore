@@ -81,7 +81,7 @@ namespace PnP.Core.Services
                 else
                 {
                     // Graph API calls are delivered without the graph endpoint suffix
-                    queryStringToParse = new Uri($"{PnPConstants.MicrosoftGraphBaseUrl}/{apiCall.Request}").Query;
+                    queryStringToParse = new Uri($"{PnPConstants.MicrosoftGraphBaseUrl}{apiCall.Request}").Query;
                 }
 
                 NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(queryStringToParse);

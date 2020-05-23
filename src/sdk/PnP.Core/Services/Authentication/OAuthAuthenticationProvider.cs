@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Concurrent;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -17,19 +18,16 @@ namespace PnP.Core.Services
         private const string tokenEndpoint = "https://login.microsoftonline.com/common/oauth2/token";
 
         // Microsoft SharePoint Online Management Shell client id
-        //private static readonly string aadAppId = "9bc3ab49-b65d-410a-85ad-de819febfddc";
+        // private static readonly string aadAppId = "9bc3ab49-b65d-410a-85ad-de819febfddc";
         // PnP Office 365 Management Shell 
-        private const string aadAppId = "31359c7f-bd7e-475c-86db-fdb8c937548e";
+        private const string defaultAADAppId = "31359c7f-bd7e-475c-86db-fdb8c937548e";
 
         private readonly ILogger log;
         private IAuthenticationProviderConfiguration configuration;
 
-        // SharePoint token cache handling
-        private static readonly SemaphoreSlim semaphoreSlimSharePoint = new SemaphoreSlim(1);
-        private readonly ConcurrentDictionary<string, string> sharePointTokenCache = new ConcurrentDictionary<string, string>();
-
-        private static readonly SemaphoreSlim semaphoreSlimMicrosoftGraph = new SemaphoreSlim(1);
-        private readonly ConcurrentDictionary<string, string> microsoftGraphTokenCache = new ConcurrentDictionary<string, string>();
+        // Token cache handling
+        private static readonly SemaphoreSlim semaphoreSlimTokens = new SemaphoreSlim(1);
+        private readonly ConcurrentDictionary<string, string> tokenCache = new ConcurrentDictionary<string, string>();
 
         public OAuthAuthenticationProvider(
             ILogger<OAuthAuthenticationProvider> logger)
@@ -81,7 +79,7 @@ namespace PnP.Core.Services
             {
                 return await GetMicrosoftGraphAccessTokenAsync().ConfigureAwait(false);
             }
-            else if (resource.AbsoluteUri.ToLower().Contains("sharepoint.com"))
+            else if (resource.AbsoluteUri.ToLower(CultureInfo.InvariantCulture).Contains("sharepoint.com"))
             {
                 return await GetSharePointOnlineAccessTokenAsync(resource).ConfigureAwait(false);
             }
@@ -91,11 +89,12 @@ namespace PnP.Core.Services
             }
         }
 
-        private static async Task<string> AcquireTokenAsync(Uri resourceUri, string username, string password)
+        private async Task<string> AcquireTokenAsync(Uri resourceUri, string username, string password)
         {
             string resource = $"{resourceUri.Scheme}://{resourceUri.DnsSafeHost}";
 
-            var body = $"resource={resource}&client_id={aadAppId}&grant_type=password&username={HttpUtility.UrlEncode(username)}&password={HttpUtility.UrlEncode(password)}";
+            var clientId = this.configuration.ClientId ?? defaultAADAppId;
+            var body = $"resource={resource}&client_id={clientId}&grant_type=password&username={HttpUtility.UrlEncode(username)}&password={HttpUtility.UrlEncode(password)}";
             using (var stringContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded"))
             {
 
@@ -112,68 +111,27 @@ namespace PnP.Core.Services
 
         private async Task<string> EnsureSharePointAccessTokenAsync(Uri resourceUri, string userPrincipalName, string userPassword)
         {
-            string accessTokenFromCache = TokenFromCache(resourceUri, sharePointTokenCache);
-            if (accessTokenFromCache == null)
-            {
-                await semaphoreSlimSharePoint.WaitAsync().ConfigureAwait(false);
-                try
-                {
-                    // No async methods are allowed in a lock section
-                    string accessToken = await AcquireTokenAsync(resourceUri, userPrincipalName, userPassword).ConfigureAwait(false);
-                    log.LogInformation($"Successfully requested new access token resource {resourceUri.DnsSafeHost} and user {userPrincipalName}");
-                    AddTokenToCache(resourceUri, sharePointTokenCache, accessToken);
-
-                    // Spin up a thread to invalidate the access token once's it's expired
-                    ThreadPool.QueueUserWorkItem(async (obj) =>
-                    {
-                        try
-                        {
-                            // Wait until we're 5 minutes before the planned token expiration
-                            Thread.Sleep(CalculateThreadSleep(accessToken));
-                            // Take a lock to ensure no other threads are updating the SharePoint Access token at this time
-                            await semaphoreSlimSharePoint.WaitAsync().ConfigureAwait(false);
-                            RemoveTokenFromCache(resourceUri, sharePointTokenCache);
-                            log.LogInformation($"Cached token for resource {resourceUri.DnsSafeHost} and user {userPrincipalName} expired");
-                        }
-                        catch (Exception ex)
-                        {
-                            log.LogError(ex, $"Something went wrong during cache token invalidation: {ex.Message}");
-                            RemoveTokenFromCache(resourceUri, sharePointTokenCache);
-                        }
-                        finally
-                        {
-                            semaphoreSlimSharePoint.Release();
-                        }
-                    });
-
-                    return accessToken;
-
-                }
-                finally
-                {
-                    semaphoreSlimSharePoint.Release();
-                }
-            }
-            else
-            {
-                log.LogInformation($"Returning token from cache for resource {resourceUri.DnsSafeHost} and user {userPrincipalName}");
-                return accessTokenFromCache;
-            }
+            return await EnsureAccessTokenAsync(resourceUri, userPrincipalName, userPassword).ConfigureAwait(true);
         }
 
         private async Task<string> EnsureMicrosoftGraphAccessTokenAsync(string userPrincipalName, string userPassword)
         {
             Uri resourceUri = PnPConstants.MicrosoftGraphBaseUri;
-            string accessTokenFromCache = TokenFromCache(resourceUri, microsoftGraphTokenCache);
+            return await EnsureAccessTokenAsync(resourceUri, userPrincipalName, userPassword).ConfigureAwait(true);
+        }
+
+        private async Task<string> EnsureAccessTokenAsync(Uri resourceUri, string userPrincipalName, string userPassword)
+        {
+            string accessTokenFromCache = TokenFromCache(resourceUri, tokenCache);
             if (accessTokenFromCache == null)
             {
-                await semaphoreSlimMicrosoftGraph.WaitAsync().ConfigureAwait(false);
+                await semaphoreSlimTokens.WaitAsync().ConfigureAwait(false);
                 try
                 {
                     // No async methods are allowed in a lock section
                     string accessToken = await AcquireTokenAsync(resourceUri, userPrincipalName, userPassword).ConfigureAwait(false);
                     log.LogInformation($"Successfully requested new access token resource {resourceUri.DnsSafeHost} and user {userPrincipalName}");
-                    AddTokenToCache(resourceUri, microsoftGraphTokenCache, accessToken);
+                    AddTokenToCache(resourceUri, tokenCache, accessToken);
 
                     // Spin up a thread to invalidate the access token once's it's expired
                     ThreadPool.QueueUserWorkItem(async (obj) =>
@@ -183,18 +141,18 @@ namespace PnP.Core.Services
                             // Wait until we're 5 minutes before the planned token expiration
                             Thread.Sleep(CalculateThreadSleep(accessToken));
                             // Take a lock to ensure no other threads are updating the SharePoint Access token at this time
-                            await semaphoreSlimMicrosoftGraph.WaitAsync().ConfigureAwait(false);
-                            RemoveTokenFromCache(resourceUri, microsoftGraphTokenCache);
+                            await semaphoreSlimTokens.WaitAsync().ConfigureAwait(false);
+                            RemoveTokenFromCache(resourceUri, tokenCache);
                             log.LogInformation($"Cached token for resource {resourceUri.DnsSafeHost} and user {userPrincipalName} expired");
                         }
                         catch (Exception ex)
                         {
                             log.LogError(ex, $"Something went wrong during cache token invalidation: {ex.Message}");
-                            RemoveTokenFromCache(resourceUri, microsoftGraphTokenCache);
+                            RemoveTokenFromCache(resourceUri, tokenCache);
                         }
                         finally
                         {
-                            semaphoreSlimMicrosoftGraph.Release();
+                            semaphoreSlimTokens.Release();
                         }
                     });
 
@@ -203,7 +161,7 @@ namespace PnP.Core.Services
                 }
                 finally
                 {
-                    semaphoreSlimMicrosoftGraph.Release();
+                    semaphoreSlimTokens.Release();
                 }
             }
             else

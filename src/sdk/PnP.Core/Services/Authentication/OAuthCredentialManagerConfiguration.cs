@@ -13,6 +13,11 @@ namespace PnP.Core.Services
         public string Name { get; set; }
 
         /// <summary>
+        /// The ClientId of the application to use for authentication
+        /// </summary>
+        public string ClientId { get; set; }
+
+        /// <summary>
         /// Defines the type of the IAuthenticationProvider to create
         /// </summary>
         public Type AuthenticationProviderType => typeof(OAuthAuthenticationProvider);

@@ -10,7 +10,7 @@ namespace PnP.Core
         /// <summary>
         /// The string base URL of the Microsoft Graph
         /// </summary>
-        public const string MicrosoftGraphBaseUrl = "https://graph.microsoft.com";
+        public const string MicrosoftGraphBaseUrl = "https://graph.microsoft.com/";
 
         /// <summary>
         /// The base URI of the Microsoft Graph

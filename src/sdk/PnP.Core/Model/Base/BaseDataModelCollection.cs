@@ -255,12 +255,12 @@ namespace PnP.Core.Model
                 // important: the skiptoken is case sensitive, so ensure to keep it the way is was provided to you by Graph
                 if (Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphBetaEndpoint}/", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}/{PnPConstants.GraphBetaEndpoint}/", "");
+                    nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphBetaEndpoint}/", "");
                     nextLinkApiType = ApiType.GraphBeta;
                 }
                 else if (Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphV1Endpoint}/", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}/{PnPConstants.GraphV1Endpoint}/", "");
+                    nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphV1Endpoint}/", "");
                     nextLinkApiType = ApiType.Graph;
                 }
                 else
