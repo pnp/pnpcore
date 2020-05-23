@@ -90,6 +90,15 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable.elementtype#System_Linq_IQueryable_ElementType">IQueryable.ElementType</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable.expression#System_Linq_IQueryable_Expression">IQueryable.Expression</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable.provider#System_Linq_IQueryable_Provider">IQueryable.Provider</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator#System_Collections_Generic_IEnumerable_1_GetEnumerator">IEnumerable&lt;ITeamChannel&gt;.GetEnumerator()</a>
     </div>
     <div>
@@ -123,7 +132,7 @@
   
   <h5 id="PnP_Core_Model_Teams_ITeamChannelCollection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface ITeamChannelCollection : IDataModelCollection&lt;ITeamChannel&gt;, IEnumerable&lt;ITeamChannel&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, ISupportPaging</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ITeamChannelCollection : IQueryable&lt;ITeamChannel&gt;, IQueryable, IDataModelCollection&lt;ITeamChannel&gt;, IEnumerable&lt;ITeamChannel&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, ISupportPaging</code></pre>
   </div>
   
   
@@ -135,17 +144,17 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChannelCollection_Add_PnP_Core_Model_Batch_System_String_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChannelCollection.Add(PnP.Core.Model.Batch%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChannelCollection_Add_PnP_Core_Services_Batch_System_String_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChannelCollection.Add(PnP.Core.Services.Batch%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChannelCollection.cs/#L26" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChannelCollection.cs/#L28" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Teams_ITeamChannelCollection_Add_" data-uid="PnP.Core.Model.Teams.ITeamChannelCollection.Add*"></a>
   
-  <h4 id="PnP_Core_Model_Teams_ITeamChannelCollection_Add_PnP_Core_Model_Batch_System_String_System_String_" data-uid="PnP.Core.Model.Teams.ITeamChannelCollection.Add(PnP.Core.Model.Batch,System.String,System.String)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChannelCollection_Add_PnP_Core_Model_Batch_System_String_System_String_" class="expander" data-toggle="collapse">Add(Batch, String, String)</a></h4>
+  <h4 id="PnP_Core_Model_Teams_ITeamChannelCollection_Add_PnP_Core_Services_Batch_System_String_System_String_" data-uid="PnP.Core.Model.Teams.ITeamChannelCollection.Add(PnP.Core.Services.Batch,System.String,System.String)"><a href="#collapsible-PnP_Core_Model_Teams_ITeamChannelCollection_Add_PnP_Core_Services_Batch_System_String_System_String_" class="expander" data-toggle="collapse">Add(Batch, String, String)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_Teams_ITeamChannelCollection_Add_PnP_Core_Model_Batch_System_String_System_String_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_Teams_ITeamChannelCollection_Add_PnP_Core_Services_Batch_System_String_System_String_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new channel</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -159,7 +168,7 @@
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.Batch.html">Batch</a></span>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
         <span class="parametername">batch</span>
         <p><p>Batch to use</p>
 </p>
@@ -210,7 +219,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChannelCollection_Add_System_String_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChannelCollection.Add(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChannelCollection.cs/#L34" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChannelCollection.cs/#L36" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Teams_ITeamChannelCollection_Add_" data-uid="PnP.Core.Model.Teams.ITeamChannelCollection.Add*"></a>
@@ -274,7 +283,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChannelCollection_AddAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChannelCollection.AddAsync(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChannelCollection.cs/#L17" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChannelCollection.cs/#L19" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Teams_ITeamChannelCollection_AddAsync_" data-uid="PnP.Core.Model.Teams.ITeamChannelCollection.AddAsync*"></a>
@@ -340,12 +349,30 @@
   <div>
       <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsureParentObjectAsync_PnP_Core_Model_IDataModelParent_">DataModelExtensions.EnsureParentObjectAsync(IDataModelParent)</a>
   </div>
+  <div>
+      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___">BaseDataModelExtensions.Include&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____">BaseDataModelExtensions.Include&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___">BaseDataModelExtensions.Load&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____">BaseDataModelExtensions.Load&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayName_System_Linq_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_">BaseDataModelExtensions.GetByDisplayName(IQueryable&lt;ITeamChannel&gt;, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayName_System_Linq_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_Teams_ITeamChannel_System_Object_____">BaseDataModelExtensions.GetByDisplayName(IQueryable&lt;ITeamChannel&gt;, String, Expression&lt;Func&lt;ITeamChannel, Object&gt;&gt;[])</a>
+  </div>
   
 </article>
           </div>
           <div class="contribution-panel mobile-hide">
               <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChannelCollection.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChannelCollection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChannelCollection.cs/#L8" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChannelCollection.cs/#L10" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
