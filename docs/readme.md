@@ -13,6 +13,10 @@ The document generation consists out of 3 steps outlined below, currently these 
 > [!Note]
 > Install the latest [DocFX](https://dotnet.github.io/docfx/) release to get `docfx.exe`
 
+### References
+
+Setting up the gh-pages branch as an orphaned branch was done using the steps outlined in https://www.gep13.co.uk/blog/how-to-create-gh-pages-branch. To actually work with both "code" and "docs" branches it's easiest to `git clone` the repo twice, once for coding and once for publishing documents to the `gh-pages` branch.
+
 ## Contributing to the documentation
 
 We strongly encourage documentation contributions which can be done via improving API documentation (via the triple slash comments in the source code) or creating/updating articles in the `articles` folder.
