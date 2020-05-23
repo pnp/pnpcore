@@ -1,0 +1,1754 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IList
+   | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IList
+   | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.52.0.0">
+    
+    <link rel="shortcut icon" href="../https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IList">
+  <h1 id="PnP_Core_Model_SharePoint_IList" data-uid="PnP.Core.Model.SharePoint.IList">Interface IList
+  </h1>
+  <div class="markdown level0 summary"><p>Public interface to define a List object of SharePoint Online</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  
+  
+  
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_GetAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModel&lt;IList&gt;.GetAsync(Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Get_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModel&lt;IList&gt;.Get(Batch, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Get_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModel&lt;IList&gt;.Get(Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasValue_System_String_">IDataModel&lt;IList&gt;.HasValue(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasChanged_System_String_">IDataModel&lt;IList&gt;.HasChanged(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested">IDataModel&lt;IList&gt;.Requested</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelParent.html#PnP_Core_Model_IDataModelParent_Parent">IDataModelParent.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelWithContext.html#PnP_Core_Model_IDataModelWithContext_PnPContext">IDataModelWithContext.PnPContext</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IList&gt;.GetAsync(ApiResponse, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.Get(Batch, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.Get(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(ApiResponse, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_Update">IDataModelUpdate.Update()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_Update_PnP_Core_Services_Batch_">IDataModelUpdate.Update(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateAsync">IDataModelUpdate.UpdateAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete">IDataModelDelete.Delete()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete_PnP_Core_Services_Batch_">IDataModelDelete.Delete(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteAsync">IDataModelDelete.DeleteAsync()</a>
+    </div>
+  </div>
+  
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.SharePoint.html">PnP.Core.Model.SharePoint</a></h6>
+  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
+  
+  <h5 id="PnP_Core_Model_SharePoint_IList_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IList : IDataModel&lt;IList&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;IList&gt;, IDataModelGet, IDataModelUpdate, IDataModelDelete</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_ContentTypesEnabled.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.ContentTypesEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_ContentTypesEnabled_" data-uid="PnP.Core.Model.SharePoint.IList.ContentTypesEnabled*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_ContentTypesEnabled" data-uid="PnP.Core.Model.SharePoint.IList.ContentTypesEnabled"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_ContentTypesEnabled" class="expander" data-toggle="collapse">ContentTypesEnabled</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_ContentTypesEnabled" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets whether content types are enabled</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ContentTypesEnabled { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_DefaultDisplayFormUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.DefaultDisplayFormUrl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L126" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_DefaultDisplayFormUrl_" data-uid="PnP.Core.Model.SharePoint.IList.DefaultDisplayFormUrl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_DefaultDisplayFormUrl" data-uid="PnP.Core.Model.SharePoint.IList.DefaultDisplayFormUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_DefaultDisplayFormUrl" class="expander" data-toggle="collapse">DefaultDisplayFormUrl</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_DefaultDisplayFormUrl" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines a value that specifies the location of the default display form for the list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string DefaultDisplayFormUrl { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_DefaultEditFormUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.DefaultEditFormUrl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L131" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_DefaultEditFormUrl_" data-uid="PnP.Core.Model.SharePoint.IList.DefaultEditFormUrl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_DefaultEditFormUrl" data-uid="PnP.Core.Model.SharePoint.IList.DefaultEditFormUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_DefaultEditFormUrl" class="expander" data-toggle="collapse">DefaultEditFormUrl</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_DefaultEditFormUrl" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines a value that specifies the URL of the edit form to use for list items in the list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string DefaultEditFormUrl { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_DefaultNewFormUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.DefaultNewFormUrl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L136" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_DefaultNewFormUrl_" data-uid="PnP.Core.Model.SharePoint.IList.DefaultNewFormUrl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_DefaultNewFormUrl" data-uid="PnP.Core.Model.SharePoint.IList.DefaultNewFormUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_DefaultNewFormUrl" class="expander" data-toggle="collapse">DefaultNewFormUrl</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_DefaultNewFormUrl" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines a value that specifies the location of the default new form for the list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string DefaultNewFormUrl { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_Description.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.Description%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L25" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_Description_" data-uid="PnP.Core.Model.SharePoint.IList.Description*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_Description" data-uid="PnP.Core.Model.SharePoint.IList.Description"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_Description" class="expander" data-toggle="collapse">Description</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_Description" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets the description of the list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Description { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_Direction.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.Direction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L141" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_Direction_" data-uid="PnP.Core.Model.SharePoint.IList.Direction*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_Direction" data-uid="PnP.Core.Model.SharePoint.IList.Direction"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_Direction" class="expander" data-toggle="collapse">Direction</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_Direction" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines a value that specifies the reading order of the list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ListReadingDirection Direction { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.ListReadingDirection.html">ListReadingDirection</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_DocumentTemplate.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.DocumentTemplate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L30" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_DocumentTemplate_" data-uid="PnP.Core.Model.SharePoint.IList.DocumentTemplate*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_DocumentTemplate" data-uid="PnP.Core.Model.SharePoint.IList.DocumentTemplate"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_DocumentTemplate" class="expander" data-toggle="collapse">DocumentTemplate</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_DocumentTemplate" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets a value that specifies the identifier of the document template for the new list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string DocumentTemplate { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_DraftVersionVisibility.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.DraftVersionVisibility%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L61" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_DraftVersionVisibility_" data-uid="PnP.Core.Model.SharePoint.IList.DraftVersionVisibility*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_DraftVersionVisibility" data-uid="PnP.Core.Model.SharePoint.IList.DraftVersionVisibility"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_DraftVersionVisibility" class="expander" data-toggle="collapse">DraftVersionVisibility</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_DraftVersionVisibility" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets the DraftVersionVisibility for the list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int DraftVersionVisibility { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_EnableAttachments.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.EnableAttachments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L96" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_EnableAttachments_" data-uid="PnP.Core.Model.SharePoint.IList.EnableAttachments*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_EnableAttachments" data-uid="PnP.Core.Model.SharePoint.IList.EnableAttachments"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_EnableAttachments" class="expander" data-toggle="collapse">EnableAttachments</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_EnableAttachments" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets whether attachments are enabled. Defaults to true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool EnableAttachments { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_EnableFolderCreation.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.EnableFolderCreation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L101" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_EnableFolderCreation_" data-uid="PnP.Core.Model.SharePoint.IList.EnableFolderCreation*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_EnableFolderCreation" data-uid="PnP.Core.Model.SharePoint.IList.EnableFolderCreation"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_EnableFolderCreation" class="expander" data-toggle="collapse">EnableFolderCreation</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_EnableFolderCreation" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets whether folder is enabled. Defaults to true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool EnableFolderCreation { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_EnableMinorVersions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.EnableMinorVersions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L56" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_EnableMinorVersions_" data-uid="PnP.Core.Model.SharePoint.IList.EnableMinorVersions*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_EnableMinorVersions" data-uid="PnP.Core.Model.SharePoint.IList.EnableMinorVersions"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_EnableMinorVersions" class="expander" data-toggle="collapse">EnableMinorVersions</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_EnableMinorVersions" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets whether minor verisioning is enabled on the list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool EnableMinorVersions { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_EnableModeration.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.EnableModeration%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L66" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_EnableModeration_" data-uid="PnP.Core.Model.SharePoint.IList.EnableModeration*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_EnableModeration" data-uid="PnP.Core.Model.SharePoint.IList.EnableModeration"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_EnableModeration" class="expander" data-toggle="collapse">EnableModeration</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_EnableModeration" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets whether moderation/content approval is enabled on the list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool EnableModeration { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_EnableVersioning.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.EnableVersioning%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L51" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_EnableVersioning_" data-uid="PnP.Core.Model.SharePoint.IList.EnableVersioning*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_EnableVersioning" data-uid="PnP.Core.Model.SharePoint.IList.EnableVersioning"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_EnableVersioning" class="expander" data-toggle="collapse">EnableVersioning</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_EnableVersioning" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets whether verisioning is enabled on the list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool EnableVersioning { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_FieldDefaults.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.FieldDefaults%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L111" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_FieldDefaults_" data-uid="PnP.Core.Model.SharePoint.IList.FieldDefaults*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_FieldDefaults" data-uid="PnP.Core.Model.SharePoint.IList.FieldDefaults"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_FieldDefaults" class="expander" data-toggle="collapse">FieldDefaults</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_FieldDefaults" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines a list of default values for the Fields of the List Instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Dictionary&lt;string, string&gt; FieldDefaults { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_ForceCheckout.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.ForceCheckout%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_ForceCheckout_" data-uid="PnP.Core.Model.SharePoint.IList.ForceCheckout*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_ForceCheckout" data-uid="PnP.Core.Model.SharePoint.IList.ForceCheckout"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_ForceCheckout" class="expander" data-toggle="collapse">ForceCheckout</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_ForceCheckout" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets whether to force checkout of documents in the library</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ForceCheckout { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_Hidden.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.Hidden%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L86" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_Hidden_" data-uid="PnP.Core.Model.SharePoint.IList.Hidden*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_Hidden" data-uid="PnP.Core.Model.SharePoint.IList.Hidden"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_Hidden" class="expander" data-toggle="collapse">Hidden</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_Hidden" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets whether to hide the list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Hidden { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_Id.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L15" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_Id_" data-uid="PnP.Core.Model.SharePoint.IList.Id*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_Id" data-uid="PnP.Core.Model.SharePoint.IList.Id"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_Id" class="expander" data-toggle="collapse">Id</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_Id" class="collapse in">
+  <div class="markdown level1 summary"><p>The Unique ID of the List object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid Id { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_ImageUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.ImageUrl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L146" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_ImageUrl_" data-uid="PnP.Core.Model.SharePoint.IList.ImageUrl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_ImageUrl" data-uid="PnP.Core.Model.SharePoint.IList.ImageUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_ImageUrl" class="expander" data-toggle="collapse">ImageUrl</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_ImageUrl" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines a value that specifies the URI for the icon of the list, optional attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ImageUrl { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_IrmExpire.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.IrmExpire%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L151" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_IrmExpire_" data-uid="PnP.Core.Model.SharePoint.IList.IrmExpire*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_IrmExpire" data-uid="PnP.Core.Model.SharePoint.IList.IrmExpire"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_IrmExpire" class="expander" data-toggle="collapse">IrmExpire</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_IrmExpire" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines if IRM Expire property, optional attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IrmExpire { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_IrmReject.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.IrmReject%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L156" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_IrmReject_" data-uid="PnP.Core.Model.SharePoint.IList.IrmReject*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_IrmReject" data-uid="PnP.Core.Model.SharePoint.IList.IrmReject"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_IrmReject" class="expander" data-toggle="collapse">IrmReject</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_IrmReject" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines the IRM Reject property, optional attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IrmReject { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_IsApplicationList.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.IsApplicationList%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L161" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_IsApplicationList_" data-uid="PnP.Core.Model.SharePoint.IList.IsApplicationList*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_IsApplicationList" data-uid="PnP.Core.Model.SharePoint.IList.IsApplicationList"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_IsApplicationList" class="expander" data-toggle="collapse">IsApplicationList</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_IsApplicationList" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines a value that specifies a flag that a client application can use to determine whether to display the list, optional attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsApplicationList { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_Items.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.Items%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L186" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_Items_" data-uid="PnP.Core.Model.SharePoint.IList.Items*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_Items" data-uid="PnP.Core.Model.SharePoint.IList.Items"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_Items" class="expander" data-toggle="collapse">Items</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_Items" class="collapse in">
+  <div class="markdown level1 summary"><p>Collection of list items in the current List object</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IListItemCollection Items { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IListItemCollection.html">IListItemCollection</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_ListExperience.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.ListExperience%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L121" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_ListExperience_" data-uid="PnP.Core.Model.SharePoint.IList.ListExperience*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_ListExperience" data-uid="PnP.Core.Model.SharePoint.IList.ListExperience"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_ListExperience" class="expander" data-toggle="collapse">ListExperience</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_ListExperience" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines the current list UI/UX experience (valid for SPO only).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ListExperience ListExperience { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.ListExperience.html">ListExperience</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_MaxVersionLimit.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.MaxVersionLimit%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L76" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_MaxVersionLimit_" data-uid="PnP.Core.Model.SharePoint.IList.MaxVersionLimit*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_MaxVersionLimit" data-uid="PnP.Core.Model.SharePoint.IList.MaxVersionLimit"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_MaxVersionLimit" class="expander" data-toggle="collapse">MaxVersionLimit</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_MaxVersionLimit" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets the MinorVersionLimit  for verisioning, just in case it is enabled on the list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int MaxVersionLimit { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_MinorVersionLimit.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.MinorVersionLimit%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L71" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_MinorVersionLimit_" data-uid="PnP.Core.Model.SharePoint.IList.MinorVersionLimit*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_MinorVersionLimit" data-uid="PnP.Core.Model.SharePoint.IList.MinorVersionLimit"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_MinorVersionLimit" class="expander" data-toggle="collapse">MinorVersionLimit</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_MinorVersionLimit" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets the MinorVersionLimit  for versioning, just in case it is enabled on the list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int MinorVersionLimit { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_NoCrawl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.NoCrawl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L116" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_NoCrawl_" data-uid="PnP.Core.Model.SharePoint.IList.NoCrawl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_NoCrawl" data-uid="PnP.Core.Model.SharePoint.IList.NoCrawl"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_NoCrawl" class="expander" data-toggle="collapse">NoCrawl</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_NoCrawl" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines if the current list or library has to be included in crawling, optional attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool NoCrawl { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_OnQuickLaunch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.OnQuickLaunch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L35" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_OnQuickLaunch_" data-uid="PnP.Core.Model.SharePoint.IList.OnQuickLaunch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_OnQuickLaunch" data-uid="PnP.Core.Model.SharePoint.IList.OnQuickLaunch"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_OnQuickLaunch" class="expander" data-toggle="collapse">OnQuickLaunch</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_OnQuickLaunch" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets a value that specifies whether the new list is displayed on the Quick Launch of the site.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool OnQuickLaunch { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_ReadSecurity.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.ReadSecurity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L166" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_ReadSecurity_" data-uid="PnP.Core.Model.SharePoint.IList.ReadSecurity*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_ReadSecurity" data-uid="PnP.Core.Model.SharePoint.IList.ReadSecurity"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_ReadSecurity" class="expander" data-toggle="collapse">ReadSecurity</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_ReadSecurity" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines the Read Security property, optional attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int ReadSecurity { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_TemplateFeatureId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.TemplateFeatureId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L106" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_TemplateFeatureId_" data-uid="PnP.Core.Model.SharePoint.IList.TemplateFeatureId*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_TemplateFeatureId" data-uid="PnP.Core.Model.SharePoint.IList.TemplateFeatureId"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_TemplateFeatureId" class="expander" data-toggle="collapse">TemplateFeatureId</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_TemplateFeatureId" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets the Guid for TemplateFeature</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid TemplateFeatureId { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_TemplateType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.TemplateType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L41" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_TemplateType_" data-uid="PnP.Core.Model.SharePoint.IList.TemplateType*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_TemplateType" data-uid="PnP.Core.Model.SharePoint.IList.TemplateType"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_TemplateType" class="expander" data-toggle="collapse">TemplateType</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_TemplateType" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets a value that specifies the list server template of the new list.
+<a href="https://msdn.microsoft.com/en-us/library/office/microsoft.sharepoint.client.listtemplatetype.aspx">https://msdn.microsoft.com/en-us/library/office/microsoft.sharepoint.client.listtemplatetype.aspx</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ListTemplateType TemplateType { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.ListTemplateType.html">ListTemplateType</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_Title.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L20" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_Title_" data-uid="PnP.Core.Model.SharePoint.IList.Title*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_Title" data-uid="PnP.Core.Model.SharePoint.IList.Title"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_Title" class="expander" data-toggle="collapse">Title</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_Title" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets the list title</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Title { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_Url.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.Url%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L46" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_Url_" data-uid="PnP.Core.Model.SharePoint.IList.Url*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_Url" data-uid="PnP.Core.Model.SharePoint.IList.Url"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_Url" class="expander" data-toggle="collapse">Url</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_Url" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets a value that specifies whether the new list is displayed on the Quick Launch of the site.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Url { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_ValidationFormula.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.ValidationFormula%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L176" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_ValidationFormula_" data-uid="PnP.Core.Model.SharePoint.IList.ValidationFormula*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_ValidationFormula" data-uid="PnP.Core.Model.SharePoint.IList.ValidationFormula"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_ValidationFormula" class="expander" data-toggle="collapse">ValidationFormula</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_ValidationFormula" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines a value that specifies the data validation criteria for a list item, optional attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ValidationFormula { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_ValidationMessage.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.ValidationMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L181" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_ValidationMessage_" data-uid="PnP.Core.Model.SharePoint.IList.ValidationMessage*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_ValidationMessage" data-uid="PnP.Core.Model.SharePoint.IList.ValidationMessage"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_ValidationMessage" class="expander" data-toggle="collapse">ValidationMessage</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_ValidationMessage" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines a value that specifies the error message returned when data validation fails for a list item, optional attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ValidationMessage { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList_WriteSecurity.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList.WriteSecurity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L171" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IList_WriteSecurity_" data-uid="PnP.Core.Model.SharePoint.IList.WriteSecurity*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IList_WriteSecurity" data-uid="PnP.Core.Model.SharePoint.IList.WriteSecurity"><a href="#collapsible-PnP_Core_Model_SharePoint_IList_WriteSecurity" class="expander" data-toggle="collapse">WriteSecurity</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IList_WriteSecurity" class="collapse in">
+  <div class="markdown level1 summary"><p>Defines the Write Security property, optional attribute.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int WriteSecurity { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsurePropertiesAsync__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelExtensions.EnsurePropertiesAsync&lt;TModel&gt;(IDataModel&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___">DataModelExtensions.IsPropertyAvailable&lt;TModel&gt;(IDataModel&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Object___">DataModelExtensions.IsPropertyAvailable&lt;TModel&gt;(TModel, Expression&lt;Func&lt;TModel, Object&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsureParentObjectAsync_PnP_Core_Model_IDataModelParent_">DataModelExtensions.EnsureParentObjectAsync(IDataModelParent)</a>
+  </div>
+  
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IList.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IList%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IList.cs/#L9" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            PnP Core SDK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
