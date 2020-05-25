@@ -5,6 +5,32 @@ The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transpa
 
 ## I want to configure my own Azure AD application (recommended)
 
+### Configuring the application in Azure AD
+
+Follow below steps to configure an application in Azure AD:
+
+1. Navigate to https://aad.portal.azure.com/
+2. Click on **Azure Active Directory** from the left navigation
+3. Click on **App registrations** in the **Manage** left navigation group
+4. Click on **New registration**
+5. Give the application a name (e.g. PnP Core SDK) and click on **Register**
+6. Copy the **Application ID** from the **Overview** page, you'll need this GUID value later on
+7. Click on the **API Permissions** in the **Manage** left navigation group
+8. Click on **Add Permissions** and add the permissions you want to give to this application. Below list is a recommendation, you can grant less permissions but that might result in some PnP Core SDK calls to fail due getting access denied errors.
+
+   - SharePoint -> Delegated Permissions -> AllSites -> AllSites.FullControl
+   - SharePoint -> Delegated Permissions -> Sites -> Sites.SearchAll
+   - SharePoint -> Delegated Permissions -> TermStore -> TermStore.ReadWrite.All
+   - SharePoint -> Delegated Permissions -> User -> User.ReadWrite.All
+   - Microsoft Graph -> Delegated Permissions -> User -> User.Read
+   - Microsoft Graph -> Delegated Permissions -> Directory -> Directory.ReadWrite.All
+   - Microsoft Graph -> Delegated Permissions -> Directory -> Directory.AccessAsUser.All
+   - Microsoft Graph -> Delegated Permissions -> Group -> Group.ReadWrite.All
+
+9. Click on the **Grant admin consent for** button to consent to these permissions for the users in your organization
+
+### Configuring PnP Core SDK to use the configured application
+
 
 
 ## Using the multi-tenant PnP Azure AD application
