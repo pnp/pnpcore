@@ -4,7 +4,7 @@ This folder contains the PnP Core SDK documentation. The documentation system is
 
 ## Documentation generation
 
-The document generation consists out of 3 steps outlined below, currently these are manual steps but these should get automated via GitHub Actions:
+The document generation consists of 3 steps outlined below, currently these are manual steps, but we plan to automate them via GitHub Actions:
 
 - Extract the PnP Core SDK into YML based API documentation: use `docfx.exe metadata docfx.json`
 - Build the documentation: in this step the YML API documentation and the articles are merged into a documentation site. Use `docfx.exe build docfx.json` and then check the generated `_site` folder
