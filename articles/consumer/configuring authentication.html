@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuring authentication | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuring authentication | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.52.0.0">
+    
+    <link rel="shortcut icon" href="../../https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="configuring-authentication">Configuring authentication</h1>
+
+<p>The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 services like SharePoint, Teams,...<strong>Configuring your own application is the recommended approach</strong>, but you can also use an multi-tenant application that the PnP team created. Both options are detailed in the next chapters</p>
+<h2 id="i-want-to-configure-my-own-azure-ad-application-recommended">I want to configure my own Azure AD application (recommended)</h2>
+<h3 id="configuring-the-application-in-azure-ad">Configuring the application in Azure AD</h3>
+<p>Follow below steps to configure an application in Azure AD:</p>
+<ol>
+<li><p>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></p>
+</li>
+<li><p>Click on <strong>Azure Active Directory</strong> from the left navigation</p>
+</li>
+<li><p>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>Click on <strong>New registration</strong></p>
+</li>
+<li><p>Give the application a name (e.g. PnP Core SDK) and click on <strong>Register</strong></p>
+</li>
+<li><p>Copy the <strong>Application ID</strong> from the <strong>Overview</strong> page, you'll need this GUID value later on</p>
+</li>
+<li><p>Click on the <strong>API Permissions</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>Click on <strong>Add Permissions</strong> and add the permissions you want to give to this application. Below list is a recommendation, you can grant less permissions but that might result in some PnP Core SDK calls to fail due getting access denied errors.</p>
+<ul>
+<li>SharePoint -&gt; Delegated Permissions -&gt; AllSites -&gt; AllSites.FullControl</li>
+<li>SharePoint -&gt; Delegated Permissions -&gt; Sites -&gt; Sites.SearchAll</li>
+<li>SharePoint -&gt; Delegated Permissions -&gt; TermStore -&gt; TermStore.ReadWrite.All</li>
+<li>SharePoint -&gt; Delegated Permissions -&gt; User -&gt; User.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; User -&gt; User.Read</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; Directory -&gt; Directory.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; Directory -&gt; Directory.AccessAsUser.All</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; Group -&gt; Group.ReadWrite.All</li>
+</ul>
+</li>
+<li><p>Click on the <strong>Grant admin consent for</strong> button to consent to these permissions for the users in your organization</p>
+</li>
+<li><p>Click on <strong>Authentication</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>Change <strong>Default client type</strong> to <strong>Treat application as public client</strong> and hit <strong>Save</strong></p>
+</li>
+</ol>
+<h3 id="configuring-pnp-core-sdk-to-use-the-configured-application">Configuring PnP Core SDK to use the configured application</h3>
+<p>When you're configuring your application to use the PnP Core SDK you will have to configure the PnP Core SDK AuthenticationProviderFactory which allows you to specify one or more <code>IAuthenticationProviderConfiguration</code> implementations. The <code>IAuthenticationProviderConfiguration</code> implementations that support a custom Azure AD applications do have a <code>ClientId</code> property that can be used to configure the Azure AD application to be used. Below snippet shows the configuration of the <code>OAuthCredentialManagerConfiguration</code>: the configuration needs a name, needs the credential manager entry that contains username/password and the Azure AD application that you want to use.</p>
+<pre><code class="lang-csharp">.AddAuthenticationProviderFactory(options =&gt;
+{
+    options.Configurations.Add(new OAuthCredentialManagerConfiguration
+    {
+        Name = &quot;CredentialManagerAuthentication&quot;,
+        CredentialManagerName = configuration.GetValue&lt;string&gt;(&quot;CustomSettings:CredentialManager&quot;),
+        ClientId = configuration.GetValue&lt;string&gt;(&quot;CustomSettings:ClientId&quot;),
+    });
+
+    options.DefaultConfiguration = &quot;CredentialManagerAuthentication&quot;;
+})
+</code></pre>
+<h2 id="using-the-multi-tenant-pnp-azure-ad-application">Using the multi-tenant PnP Azure AD application</h2>
+<p>Azure AD has the concept of multi-tenant applications allowing you to re-use an application created in another Azure AD tenant. The PnP team did setup an general purpose Azure AD application (named &quot;PnP Office 365 Management Shell&quot;) configured with the needed permissions and you can reuse this application. This will mean you don't have to create you're own Azure AD application but instead you consent to the already created multi-tenant application.</p>
+<h3 id="step-1">Step 1</h3>
+<p>To consent to the PnP multi-tenant application first update below content URL: replace contoso.onmicrosoft.com with your Azure AD name which typically is company.onmicrosoft.com.</p>
+<pre><code>https://login.microsoftonline.com/contoso.onmicrosoft.com/adminconsent?client_id=31359c7f-bd7e-475c-86db-fdb8c937548e&amp;state=12345&amp;redirect_uri=https://aka.ms/sppnp
+</code></pre>
+<h3 id="step-2">Step 2</h3>
+<p>Login to your Microsoft 365 tenant (e.g. by going to SharePoint Online), open a new browser tab and paste the URL you've just created. Azure AD will ask you to login and then it will prompt you to consent to the permissions the app requests:</p>
+<p><img src="../../images/PnP%20admin%20consent.png" alt="PnP Multi-tenant app admin consent"></p>
+<p>Click on <strong>Accept</strong> to accept the requested permissions and that point you're being redirected to the PnP Site (<a href="https://aka.ms/sppnp">https://aka.ms/sppnp</a>). At this point you've registered the PnP multi-tenant application in your Azure AD environment and you can use it with the PnP Core SDK. The PnP Core SDK defaults to this application, so if you're not specifying any Azure AD application details when setting up authentication for the application then the PnP Core SDK automatically uses the PnP application (application id 31359c7f-bd7e-475c-86db-fdb8c937548e).</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you get errors during this consent process it's most likely because you are not an Azure AD tenant administrator. Please contact your admins and check with them for further steps.</p>
+</div>
+<h2 id="using-the-credential-manager">Using the credential manager</h2>
+<p>Currently the only supported option to authenticate to a created Azure AD application is via username and password. To configure this in a secure way it's recommended to setup a credential manager entry. Below steps walk you through the setup on Windows, but a similar credential manager concepts exists on other platforms as well.</p>
+<ol>
+<li>Click on the <strong>Windows Start</strong> button in the taskbar and type <strong>credential manager</strong></li>
+<li>Click on the <strong>Credential Manager</strong> link</li>
+<li>Go to <strong>Windows Credentials</strong> and click on <strong>Add a generic credential</strong></li>
+<li>Give the credential a name (e.g. Contoso), a user name (e.g. joe@contoso.onmicrosoft.com) and a password. Hit <strong>OK</strong> to save.</li>
+<li>Use the credential manager name (Contoso in this example) in your <code>OAuthCredentialManagerConfiguration</code> setup</li>
+</ol>
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring authentication.md/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            PnP Core SDK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

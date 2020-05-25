@@ -1610,6 +1610,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "articles/consumer/configuring authentication.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/consumer/configuring authentication.html",
+          "hash": "zG++gXwGaM7sxRHSu8/dzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "articles/consumer/pnp core settings.md",
       "output": {
         ".html": {
@@ -1626,7 +1638,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/readme.html",
-          "hash": "iUo5/YEqHAylS13uBVHt+Q=="
+          "hash": "iTwucjhBNnW2k30Ietazbw=="
         }
       },
       "is_incremental": false,
@@ -1734,7 +1746,18 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "LPvLlVJZXYE5KxjGu7Y+tw=="
+          "hash": "qPNabxe/Utl4KAkZZTKz5Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/PnP admin consent.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/PnP admin consent.png"
         }
       },
       "is_incremental": false,
@@ -1833,8 +1856,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 13,
-          "skipped_file_count": 13
+          "total_file_count": 14,
+          "skipped_file_count": 12
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
