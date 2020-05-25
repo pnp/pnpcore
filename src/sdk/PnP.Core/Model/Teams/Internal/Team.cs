@@ -7,7 +7,7 @@ namespace PnP.Core.Model.Teams
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class Team
     {
-        internal Team()
+        public Team()
         {
             GetApiCallOverrideHandler = (ApiCallRequest api) =>
             {
