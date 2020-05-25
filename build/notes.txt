@@ -6,3 +6,8 @@ dotnet test ..\src\sdk\PnP.Core.Test\PnP.Core.Test.csproj --verbosity n
 dotnet pack ..\src\sdk\PnP.Core\PnP.Core.csproj --include-symbols --verbosity n --version-suffix preview1
 
 
+
+
+dotnet nuget push --help
+
+

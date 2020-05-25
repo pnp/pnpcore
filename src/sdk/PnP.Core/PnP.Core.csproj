@@ -5,19 +5,17 @@
     <RootNamespace>PnP.Core</RootNamespace>
     <AssemblyName>PnP.Core</AssemblyName>
     <AssemblyVersion>0.1.2005.0</AssemblyVersion>
-    <FileVersion>0.1.2005.0</FileVersion>
     <Version>0.1.2005.0-preview1</Version>
+	<InformationalVersion>Preview 1 package</InformationalVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>PnP 2020</Copyright>
     <Company>PnP</Company>
     <Authors>PnP</Authors>
+    <Description>The PnP Core SDK provides a development model that unites SharePoint REST and Microsoft Graph in a high performance, lightweight library. The SDK uses a model which under the covers is automatically translated to the needed SharePoint REST or Microsoft Graph queries.</Description>
+    <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Model\AzureAD\**" />
-    <EmbeddedResource Remove="Model\AzureAD\**" />
-    <None Remove="Model\AzureAD\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Model\SharePoint\Navigation\" />
