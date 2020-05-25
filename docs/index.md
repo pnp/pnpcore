@@ -11,6 +11,10 @@ The PnP Core SDK is an SDK designed to work against Microsoft 365. It provides a
 
 Using the PnP Core SDK is simple, check out out [getting started](articles/consumer/readme.md) guide.
 
+## Where is the code?
+
+The PnP Core SDK is maintained in the PnP GitHub organization: https://github.com/pnp/pnpcore.
+
 ## How can you help?
 
 The model implemented in the preview only covers a small part of what's possible and what's needed. We're asking the community to help us expand the model by:

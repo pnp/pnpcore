@@ -4,6 +4,13 @@ The model in PnP Core SDK is what the SDK users use to interact with Microsoft 3
 
 ![SDK overview](../../images/sdk%20overview.png)
 
+## Where is the code?
+
+The PnP Core SDK is maintained in the PnP GitHub organization: https://github.com/pnp/pnpcore. You'll find:
+
+- The code of the PnP Core SDK in the `src\sdk` folder
+- Examples of how to use the PnP Core SDK in the `src\samples` folder
+
 ## General model principles
 
 The model design principles are agnostic to whether the model will be populated via a SharePoint REST or Microsoft Graph call and therefore starting here to understand the general model principles is advised. Once you understand the model design principles you can learn more about how to decorate the model to work with either SharePoint REST and/or Microsoft Graph. Below picture gives an overview of the used classes in the model based up on the Team model implementation:
