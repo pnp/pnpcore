@@ -14,3 +14,8 @@ dotnet pack ..\src\sdk\PnP.Core\PnP.Core.csproj --no-build /p:PackageVersion=$ve
 
 Write-Host "Writing $version to git"
 Set-Content -Path .\version.debug.increment -Value $versionIncrement
+
+#Push to the repo
+git add .\version.debug.increment
+git commit -m "Build increment - debug version $versionIncrement"
+git push
