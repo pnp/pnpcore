@@ -16,4 +16,15 @@ dotnet pack ..\src\sdk\PnP.Core\PnP.Core.csproj --include-symbols --verbosity n 
 
 dotnet nuget push --help
 
+references:
+https://www.reddit.com/r/dotnet/comments/dsltb7/how_i_automated_my_nuget_package_deployments/
+https://github.com/codeaphex/github_release_nuget_workflow
+https://github.com/marketplace/actions/publish-nuget
+https://github.com/marketplace/actions/nuget-build-number-generator
+
+https://andrewlock.net/version-vs-versionsuffix-vs-packageversion-what-do-they-all-mean/
+https://cezarypiatek.github.io/post/setting-assembly-and-package-metadata/
+
+https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+
 
