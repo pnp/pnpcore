@@ -11,7 +11,7 @@ namespace PnP.Core.Model.Teams
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/tabs";
         private const string V = baseUri + "/{GraphId}";
 
-        internal TeamChannelTab()
+        public TeamChannelTab()
         {
             // Handler to construct the Add request for this channel
             AddApiCallHandler = (keyValuePairs) =>
