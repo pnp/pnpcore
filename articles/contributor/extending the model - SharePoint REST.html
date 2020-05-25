@@ -79,10 +79,10 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="extending-the-model-for-sharepoint-rest">Extending the model for SharePoint REST</h1>
 
-<p>The PnP Core SDK model contains model, collection and complex type classes which are populated via either Microsoft Graph and/or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the SharePoint REST API.</p>
+<p>The PnP Core SDK model contains model, collection, and complex type classes which are populated via either Microsoft Graph and/or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the SharePoint REST API.</p>
 <h2 id="configuring-model-classes">Configuring model classes</h2>
 <h3 id="public-model-interface-decoration">Public model (interface) decoration</h3>
-<p>For model classes that <strong>are linq queriable</strong> one needs to to link the concrete (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
+<p>For model classes that <strong>are linq queriable</strong> one needs to link the concrete (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
 <pre><code class="lang-csharp">[ConcreteType(typeof(List))]
 public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDelete
 {
@@ -145,7 +145,7 @@ internal partial class List
 </tbody>
 </table>
 <h3 id="property-decoration">Property decoration</h3>
-<p>The property level decoration is done using the <code>SharePointProperty</code> and <code>KeyProperty</code> attributes. Each model instance does require to have a override of the <code>Key</code> property and that <code>Key</code> property <strong>must</strong> be decorated with the <code>KeyProperty</code> attribute which specifies which of the actual fields in the model must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.</p>
+<p>The property level decoration is done using the <code>SharePointProperty</code> and <code>KeyProperty</code> attributes. Each model instance does require to have a override of the <code>Key</code> property and that <code>Key</code> property <strong>must</strong> be decorated with the <code>KeyProperty</code> attribute, which specifies the actual fields in the model that must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.</p>
 <p>Whereas the <code>KeyProperty</code> attribute is always there once in each model class, the usage of the <code>SharePointProperty</code> attribute is only needed whenever it makes sense. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. List.gen.cs) the decoration via attributes needs to happen in this class as well.</p>
 <pre><code class="lang-csharp">// Configure the SharePoint REST field used to populate this model property
 [SharePointProperty(&quot;DocumentTemplateUrl&quot;)]
@@ -187,27 +187,27 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 <tr>
 <td>FieldName</td>
 <td>Yes</td>
-<td>Use this property when the SharePoint REST fieldname differs from the model property name, since the field name is required by the default constructor you always need to provide this value when you add this property</td>
+<td>Use this property when the SharePoint REST fieldname differs from the model property name, since the field name is required by the default constructor you always need to provide this value when you add this property.</td>
 </tr>
 <tr>
 <td>JsonPath</td>
 <td>No</td>
-<td>When the information returned from SharePoint REST is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild)</td>
+<td>When the information returned from SharePoint REST is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild).</td>
 </tr>
 <tr>
 <td>Expandable</td>
 <td>No</td>
-<td>Defines that a collection is expandable, meaning it can be loaded via the $expand query parameter and used in the lambda expression in <code>Get</code> and <code>GetAsync</code> operations</td>
+<td>Defines that a collection is expandable, meaning it can be loaded via the $expand query parameter and used in the lambda expression in <code>Get</code> and <code>GetAsync</code> operations.</td>
 </tr>
 <tr>
 <td>ExpandByDefault</td>
 <td>No</td>
-<td>When the model contains a collection of other model objects then setting this attribute to true will automatically result in the population of that collection. This can negatively impact performance, so only set this when the collection is almost always needed</td>
+<td>When the model contains a collection of other model objects then setting this attribute to true will automatically result in the population of that collection. This can negatively impact performance, so only set this when the collection is almost always needed.</td>
 </tr>
 <tr>
 <td>UseCustomMapping</td>
 <td>No</td>
-<td>Allows you to force a callout to the model's <code>MappingHandler</code> event handler whenever this property is populated. See the <a href="event%20handlers.html">Event Handlers</a> article to learn more</td>
+<td>Allows you to force a callout to the model's <code>MappingHandler</code> event handler whenever this property is populated. See the <a href="event%20handlers.html">Event Handlers</a> article to learn more.</td>
 </tr>
 </tbody>
 </table>
@@ -216,7 +216,7 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 <h2 id="configuring-collection-classes">Configuring collection classes</h2>
 <p>Collection classes <strong>do not</strong> have attribute based decoration.</p>
 <h2 id="implementing-add-functionality">Implementing &quot;Add&quot; functionality</h2>
-<p>In contradiction with get, update and delete which are fully handled by decorating classes and properties using attributes, you'll need to write actual code to implement add. Adding is implemented as follows:</p>
+<p>In contradiction with get, update, and delete which are fully handled by decorating classes and properties using attributes, you'll need to write actual code to implement add. Adding is implemented as follows:</p>
 <ul>
 <li><p>The public part (interface) is defined on the collection interface. Each functionality (like Add) is implemented via three methods:</p>
 <ul>
@@ -225,7 +225,7 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 <li>A regular method that allows to pass in a <code>Batch</code> as first method parameter</li>
 </ul>
 </li>
-<li><p>Add methods defined on the interface are implemented in the collection classes as a proxies that call into the respective add methods of the added model class</p>
+<li><p>Add methods defined on the interface are implemented in the collection classes as proxies that call into the respective add methods of the added model class.</p>
 </li>
 <li><p>The implementation that performs the actual add is implemented as an <code>AddApiCallHandler</code> event handler in the model class. See the <a href="event%20handlers.html">Event Handlers</a> page for more details.</p>
 </li>

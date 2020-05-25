@@ -74,7 +74,7 @@
 
 <p>This folder contains the PnP Core SDK documentation. The documentation system is based upon <a href="https://dotnet.github.io/docfx/">DocFX</a> and combines inline code comments (the so called triple slash comments) with articles written in MD format. The resulting generated documentation is hosted on <a href="https://pnp.github.io/pnpcore">https://pnp.github.io/pnpcore</a>.</p>
 <h2 id="documentation-generation">Documentation generation</h2>
-<p>The document generation consists out of 3 steps outlined below, currently these are manual steps but these should get automated via GitHub Actions:</p>
+<p>The document generation consists of 3 steps outlined below, currently these are manual steps, but we plan to automate them via GitHub Actions:</p>
 <ul>
 <li>Extract the PnP Core SDK into YML based API documentation: use <code>docfx.exe metadata docfx.json</code></li>
 <li>Build the documentation: in this step the YML API documentation and the articles are merged into a documentation site. Use <code>docfx.exe build docfx.json</code> and then check the generated <code>_site</code> folder</li>

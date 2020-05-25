@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="configuring-the-pnp-core-sdk-via-settings">Configuring the PnP Core SDK via settings</h1>
 
-<p>The PnP Core SDK uses a default configuration and as such you're not required to provide specific settings. If you however want to change the settings then providing the custom settings via a settings service (e.g. settings file) is the way to go.</p>
+<p>The PnP Core SDK uses a default configuration and as such you're not required to provide specific settings. However, if you want to change the settings, then providing the custom settings via a settings service (e.g. settings file) is the way to go.</p>
 <h2 id="sample-settings-file">Sample settings file</h2>
 <p>Below snippet shows the settings which are used by the PnP Core SDK, you can simply include this snippet in your application settings file next to your custom settings.</p>
 <pre><code class="lang-json">{
@@ -114,32 +114,32 @@
 <tr>
 <td>PnPCore:UserAgent</td>
 <td>NONISV|SharePointPnP|PnPCoreSDK</td>
-<td>Value set as user agent when the request is sent to Microsoft 365</td>
+<td>Value set as user agent when the request is sent to Microsoft 365.</td>
 </tr>
 <tr>
 <td>PnPCore:DisableTelemetry</td>
 <td>false</td>
-<td>Allows to turn off telemetry being sent. Telemetry is used to improve this open source library and it's recommended to keep it on, but you can disable it if required</td>
+<td>Allows to turn off telemetry being sent. Telemetry is used to improve this open source library and it's recommended to keep it on, but you can disable it, if required.</td>
 </tr>
 <tr>
 <td>PnPCore:PnPContext:GraphFirst</td>
 <td>true</td>
-<td>If for a given request the library can choose between a SharePoint REST or a Microsoft Graph call then it will favor the Microsoft Graph call. Settings this to false will prefer SharePoint REST for all SharePoint related API calls</td>
+<td>If for a given request the library can choose between a SharePoint REST or a Microsoft Graph call then it will favor the Microsoft Graph call. Settings this to false will prefer SharePoint REST for all SharePoint related API calls.</td>
 </tr>
 <tr>
 <td>PnPCore:PnPContext:GraphAlwaysUsesBeta</td>
 <td>false</td>
-<td>The library by default uses the production v1.0 Microsoft Graph API, use this setting to default it to the beta Microsoft Graph API</td>
+<td>The library by default uses the production v1.0 Microsoft Graph API. Use this setting to default it to the beta Microsoft Graph API.</td>
 </tr>
 <tr>
 <td>PnPCore:PnPContext:GraphCanUseBeta</td>
 <td>true</td>
-<td>When you ask for data that can only be delivered via the Microsoft Graph beta API the PnP Core SDK will use the beta endpoint for that specific request, all other request will still use the v1.0 endpoint. If you set this to false then any request that requires Microsoft Graph beta will not deliver results</td>
+<td>When you ask for data that can only be provided via the Microsoft Graph beta API the PnP Core SDK will use the beta endpoint for that specific request. All other requests will still use the v1.0 endpoint. If you set this to false, then any request that requires Microsoft Graph beta will not provide any result.</td>
 </tr>
 <tr>
 <td>Logging:LogLevel:Default</td>
 <td>Information</td>
-<td>Allows you to change log levels. See the <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1#log-level">.Net Logging article</a> for more details.</td>
+<td>Allows you to change log level. See the <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1#log-level">.Net Logging article</a> for more details.</td>
 </tr>
 </tbody>
 </table>

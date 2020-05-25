@@ -81,24 +81,20 @@
 
 <p>The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection (<a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1">generic host</a>) for it's core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a <code>PnPContext</code> from the <code>PnPContextFactory</code>and start using the library.</p>
 <h2 id="where-is-the-code">Where is the code?</h2>
-<p>The PnP Core SDK is maintained in the PnP GitHub organization: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>. You'll find:</p>
+<p>The PnP Core SDK is maintained in the PnP GitHub repository: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>. You'll find:</p>
 <ul>
 <li>The code of the PnP Core SDK in the <code>src\sdk</code> folder</li>
 <li>Examples of how to use the PnP Core SDK in the <code>src\samples</code> folder</li>
+<li>The source of the documentation you are reading right now in the <code>docs</code> folder</li>
 </ul>
 <h2 id="referencing-the-pnp-core-sdk-in-your-project">Referencing the PnP Core SDK in your project</h2>
 <p>At this point the PnP Core SDK has not yet been published as a nuget package, so you'll need to reference the SDK as DLL in your solution. You can build the <code>PnP.Core</code> solution and reference the DLL from the projects build output (e.g. <code>src\sdk\PnP.Core\bin\Debug\netstandard2.1\PnP.Core.dll</code>) or alternatively include the PnP Core project (<code>src\PnP.Core\PnP.Core.csproj</code>) in your project as a dependency. The latter approach does make it really easy for you to debug PnP Core when you're writing code.</p>
 <h2 id="configuring-the-needed-services">Configuring the needed services</h2>
-<p>Below snippet shows how to configure the needed services in a .Net Core console app: it's required to add and configure the <code>AuthenticationProviderFactory</code> and <code>PnPContextFactory</code> services. Typically you would also include configuration and logging as well.</p>
+<p>Below snippet shows how to configure the needed services in a .Net Core console app: it's required to add and configure the <code>AuthenticationProviderFactory</code> and the <code>PnPContextFactory</code> services. Typically you would also include configuration and logging as well.</p>
 <pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
 // Set environment to use
-.UseEnvironment(&quot;demo&quot;)
+.UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables
 // Configure logging
-.ConfigureLogging((hostingContext, logging) =&gt;
-{
-    logging.AddEventSourceLogger();
-    logging.AddConsole();
-})
 .ConfigureServices((hostingContext, services) =&gt;
 {
     var customSettings = new CustomSettings();
@@ -182,19 +178,20 @@ using (var scope = host.Services.CreateScope())
 host.Dispose();
 </code></pre>
 <h2 id="using-the-pnpcontext-for-operations-on-microsoft-365">Using the PnPContext for operations on Microsoft 365</h2>
-<p>All operations on Microsoft 365 start from the <code>PnPContext</code> instance you've obtained from the <code>PnPContextFactory</code>. Below sample shows a simple get operation requests data from Microsoft 365 and outputs it to the console:</p>
+<p>All operations on Microsoft 365 start from the <code>PnPContext</code> instance you've obtained from the <code>PnPContextFactory</code>. Below sample shows a simple get operation that requests data from Microsoft 365 and outputs it to the console:</p>
 <pre><code class="lang-csharp">using (var context = pnpContextFactory.Create(&quot;SiteToWorkWith&quot;))
 {
     var web = await context.Web.GetAsync();
     Console.WriteLine($&quot;Title: {web.Title}&quot;);
 }
 </code></pre>
-<p>An other example shows how to define which properties need to be loaded:</p>
+<p>Here follows another example that shows how to define which properties need to be loaded while executing the request:</p>
 <pre><code class="lang-csharp">var team = await context.Team.GetAsync(p =&gt; p.Description, p =&gt; p.FunSettings, p =&gt; p.DiscoverySettings, p =&gt; p.Members);
 </code></pre>
-<p>When you see an asynchronous call being used it means that the call is executed immediately, but you can just as easy group multiple requests in a batch and send them in one call to the server via the built in batching support:</p>
+<p>When you see an asynchronous call being used, it means that the call is executed immediately.
+However, you can easily group multiple requests in a batch and send them in one call to the server via the built in batching support:</p>
 <pre><code class="lang-csharp">var web = await context.Web.GetAsync();
-var myList = web.Lists.Where(p =&gt; p.Title.Equals(&quot;TestList&quot;)).FirstOrDefault();
+var myList = web.Lists.GetByTitle(&quot;TestList&quot;);
 if (myList != null)
 {
     // Create three list items and add them via single server request
@@ -206,13 +203,14 @@ if (myList != null)
     myList.Items.Add(values);
     myList.Items.Add(values);
     myList.Items.Add(values);
+
     // Send batch to the server
     await context.ExecuteAsync();
 }
 </code></pre>
 <p>To update Microsoft 365 you simply update the needed properties in your model and then call <code>UpdateAsync</code> or <code>Update</code> (used for batching):</p>
 <pre><code class="lang-csharp">var web = await context.Web.GetAsync(p =&gt; p.Lists);
-var myList = web.Lists.Where(p =&gt; p.Title.Equals(&quot;Documents&quot;)).FirstOrDefault();
+var myList = web.Lists.GetByTitle(&quot;Documents&quot;);
 
 if (myList != null)
 {
@@ -220,13 +218,24 @@ if (myList != null)
     await myList.UpdateAsync();
 }
 </code></pre>
-<p>Deleting follows a similar patters, but now you use <code>DeleteAsync</code> or <code>Delete</code>:</p>
+<p>Deleting follows a similar pattern, but now you use <code>DeleteAsync</code> or <code>Delete</code>:</p>
 <pre><code class="lang-csharp">var web = await context.Web.GetAsync(p =&gt; p.Lists);
-var myList = web.Lists.Where(p =&gt; p.Title.Equals(&quot;ListToDelete&quot;)).FirstOrDefault();
+var myList = web.Lists.GetByTitle(&quot;ListToDelete&quot;);
 
 if (myList != null)
 {
     await myList.DeleteAsync();
+}
+</code></pre>
+<p>If you like, you can also leverage a fluent syntax enriched with LINQ (Language Integrated Query). For example, in the following code excerpt you can see how to write a query for the items of a list.</p>
+<pre><code class="lang-csharp">var document = context.Web.Lists.GetByTitle(&quot;Documents&quot;).Items
+                            .Where(i =&gt; i.Title == &quot;Sample Document&quot;)
+                            .Load(i =&gt; i.Id, i =&gt; i.Title)
+                            .FirstOrDefault();
+
+if (document != null) 
+{
+    Console.WriteLine($&quot;Document Title: {document.Title}&quot;);
 }
 </code></pre>
 </article>

@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="writing-test-cases">Writing test cases</h1>
 
-<p>Test cases are a crucial part of the pnp core sdk as they help ensuring code quality and provide feedback to contributors on how well their changes are working. All new contributions <strong>must</strong> be convered by test cases unless the added functionality somehow already is covered by existing test cases.</p>
+<p>Test cases are a crucial part of the pnp core sdk as they help ensuring code quality and provide feedback to contributors on how well their changes are working. All new contributions <strong>must</strong> be convered by test cases unless the added functionality is already somehow covered by existing test cases.</p>
 <h2 id="setting-up-your-environment-to-run-the-tests-cases">Setting up your environment to run the tests cases</h2>
 <p>If you want to use and extend these unit tests then you'll need to do a simple onetime setup:</p>
 <ol>
@@ -89,7 +89,7 @@
 </li>
 <li><p>Open env.txt and put as content the value <strong>mine</strong> (or another name in case you want to use other test environment names)</p>
 </li>
-<li><p>Open <code>appsettings.mine.json</code> and update the url's and accounts to match with what's available in your tenant. The test system requires that you have setup the following sites (optionally use <code>setuptestenv.ps1</code> to help create the needed sites):</p>
+<li><p>Open <code>appsettings.mine.json</code> and update the url's and accounts to match with those available in your tenant. The test system requires that you setup the following sites (optionally use <code>setuptestenv.ps1</code> to help create the needed sites):</p>
 <ol>
 <li>A modern, group connected, team site (recommended name is <strong>pnpcoresdktestgroup</strong>) which was <strong>teamified</strong> and which <strong>has a sub site</strong> (recommended name is <strong>subsite</strong>)</li>
 <li>A modern communication site (recommended name is <strong>pnpcoresdktest</strong>) which <strong>has a sub site</strong> (recommended name is <strong>subsite</strong>)</li>
@@ -99,11 +99,11 @@
 </li>
 </ol>
 <h2 id="running-the-existing-tests-in-offline-mode">Running the existing tests in offline mode</h2>
-<p>The test model runs tests by default in an offline modus, this means that tests run really quick and that they should always work. After you've setup your environment for testing you should open the Visual Studio Test Explorer and click on the <strong>Run all tests</strong> button to verify that all tests run successfully on your computer.</p>
+<p>The test model runs tests by default in an offline modus. This means that tests run really quick and that they should always work, even if you are offline (not connected to the Internet network). There are just few tests that forcibly require to be executed online, and those will fail when you are offline. After you've setup your environment for testing you should open the Visual Studio Test Explorer and click on the <strong>Run all tests</strong> button to verify that all tests run successfully on your computer.</p>
 <p><img src="../../images/test%20explorer.png" alt="Test explorer"></p>
 <h2 id="authoring-new-test-cases">Authoring new test cases</h2>
 <h3 id="where-do-i-put-my-test-case">Where do I put my test case?</h3>
-<p>All test cases belong in the PnP.Core.Test project and generally speaking the test cases will either be linked to extending the model or linked to the &quot;core&quot; part that handles the interaction with SharePoint or Microsoft Graph. For model related test cases, please add them to either existing test classes in the respective model folders:</p>
+<p>All test cases belong to the PnP.Core.Test project and generally speaking the test cases will either be linked to extending the model or linked to the &quot;core&quot; part that handles the interaction with SharePoint or Microsoft Graph. For model related test cases, please add them to existing test classes in the respective model folders:</p>
 <ul>
 <li>SharePoint model tests go into the <strong>SharePoint</strong> folder. You either create a new file with test cases or add your test into an existing file.</li>
 <li>Teams model tests go into the <strong>Teams</strong> folder. You either create a new file with test cases or add your test into an existing file.</li>
@@ -112,7 +112,7 @@
 <p>If your test extends an already tested model then most likely you'll be able to add your test to one of the existing test classes.</p>
 <p>When you add &quot;core&quot; tests these will need to be added in the <strong>Base</strong> folder for core tests or in the <strong>QueryModel</strong> folder for linq tests.</p>
 <h3 id="anotomy-of-a-typical-test-file-and-test-case">Anotomy of a typical test file and test case</h3>
-<p>It's easiest to learn this by looking at a sample:</p>
+<p>It's easier to learn this by looking at a sample:</p>
 <pre><code class="lang-csharp">[TestClass]
 public class GetTests
 {
@@ -149,7 +149,7 @@ public class GetTests
 <li>Uncommenting the <code>TestCommon.Instance.Mocking = false;</code> line can be used to put this specific test in online mode: when you start developing your test you'll have do that (as you initially don't have mock data)</li>
 </ul>
 <h3 id="mocking-of-server-responses-in-tests">Mocking of server responses in tests</h3>
-<p>The PnP Core SDK tests use a custom built mocking system which essentially simply saves server responses when running in online mode and when running in offline mode (so when mocking data) the saved server responses are used to mock the server response. All of this works automatically and can be turned on/off by setting the <code>TestCommon.Instance.Mocking</code> property to <code>true</code> or <code>false</code> (see also the FAQ at the end of this page to learn more). When running in online mode each response for a server request will be stored as a file in a sub folder of the current test class. This folder is always named <code>MockData</code> and has a sub folder per test class which ensures that mocking files for a given test can be easily identified. The filename uses the following pattern <code>{testname}-{context order}-{sequence}.response</code>.</p>
+<p>The PnP Core SDK tests use a custom built mocking system which essentially simply saves server responses when running in online mode. When running in offline mode (so when mocking data) the saved server responses are used to mock the server response. All of this works automatically and can be turned on/off by setting the <code>TestCommon.Instance.Mocking</code> property to <code>true</code> or <code>false</code> (see also the FAQ at the end of this page to learn more). When running in online mode each response for a server request will be stored as a file in a sub folder of the current test class. This folder is always named <code>MockData</code> and has a sub folder per test class, which ensures that mocking files for a given test can be easily identified. The filename uses the following pattern <code>{testname}-{context order}-{sequence}.response</code>.</p>
 <h3 id="steps-to-create-a-test-case">Steps to create a test case</h3>
 <p>If you follow below steps you'll be creating test cases according to the PnP Core SDK guidelines:</p>
 <ol>
@@ -157,7 +157,7 @@ public class GetTests
 <li>Add below test to get started</li>
 </ol>
 <pre><code class="lang-csharp">    [TestMethod]
-    public async Task GetSinglePropertyViaRest()
+    public async Task NameOfYourTestMethod()
     {
         TestCommon.Instance.Mocking = false;
         using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
@@ -179,11 +179,11 @@ public class GetTests
 </div>
 <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <h3 id="do-i-need-to-recreate-the-sites-after-each-live-test-run">Do I need to recreate the sites after each live test run?</h3>
-<p>You can opt to recreate the sites each time, but that will be time consuming. It's better to clean the created artefacts before launching a new live test run. The artefacts to clean obviously depend on the written test cases and it's a best practice to keep the <code>cleantestenv.ps1</code> script up to date with the needed cleaning work. You can tailor this script and save it as <code>cleantestenv.mine.ps1</code> to add your specific cleanup instructions.</p>
+<p>You can opt to recreate the sites each time, but that will be time consuming. It's better to clean the created artifacts before launching a new live test run. The artifacts to clean obviously depend on the written test cases and it's a best practice to keep the <code>cleantestenv.ps1</code> script up to date with the needed cleaning work. You can tailor this script and save it as <code>cleantestenv.mine.ps1</code> to add your specific cleanup instructions.</p>
 <h3 id="how-can-i-configure-tests-to-run-live-versus-the-default-offline-run">How can I configure tests to run live versus the default offline run?</h3>
 <p>By default all the tests run based upon offline data, this is done to enable fast test execution without being dependent on a Microsoft 365 backend to be available and configured for testing. If you however are adding new test cases or refactoring code you might want to run one or more tests in live mode. There are 3 options:</p>
 <h4 id="run-a-single-test-live">Run a single test live</h4>
-<p>To run a single test live you simply need to uncomment the <code>TestCommon.Instance.Mocking = false;</code> line to to configure the test to run without using the mocking data, so run live.</p>
+<p>To run a single test live you simply need to uncomment the <code>TestCommon.Instance.Mocking = false;</code> line to configure the test to run without using the mocking data, so run live.</p>
 <pre><code class="lang-csharp">[TestMethod]
 public async Task GetSinglePropertyViaRest()
 {
@@ -203,7 +203,7 @@ public async Task GetSinglePropertyViaRest()
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
-<p>Please only commit tests that can run offline: tests need to have offline data + mocking must be turned on</p>
+<p>Please only commit tests that can run offline: tests need to have offline data + mocking must be turned on.</p>
 </div>
 <h4 id="run-all-the-tests-in-a-test-class-live">Run all the tests in a test class live</h4>
 <p>To run all tests in a given test class live you can turn off mocking via a test class initialized:</p>
@@ -216,7 +216,7 @@ public static void TestFixtureSetup(TestContext context)
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
-<p>Please only commit tests that can run offline: tests need to have offline data + mocking must be turned on</p>
+<p>Please only commit tests that can run offline: tests need to have offline data + mocking must be turned on.</p>
 </div>
 <h4 id="run-all-the-tests-live">Run all the tests live</h4>
 <p>In the rare case you want to run all the test cases live you need to change the default setting of the <code>Mocking</code> property from true to false in TestCommon.cs (in the Utilities folder):</p>
@@ -224,10 +224,10 @@ public static void TestFixtureSetup(TestContext context)
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
-<p>Please only commit tests that can run offline: tests need to have offline data + mocking must be turned on</p>
+<p>Please only commit tests that can run offline: tests need to have offline data + mocking must be turned on.</p>
 </div>
 <h3 id="can-i-rename-test-files-or-test-cases">Can I rename test files or test cases</h3>
-<p>Yes, if naming needs to change you can do that. Keep in mind that the offline files live in a folder named according to the test file and the offline files are depending on the test case name, so you'll have to do similar renames in offline files or folder.</p>
+<p>Yes, if naming needs to change you can do that. Keep in mind that the offline files live in a folder named accordingly to the test file and the offline files depend on the test case name, so you'll have to do similar renames in offline files or folder.</p>
 </article>
           </div>
           <div class="contribution-panel mobile-hide">

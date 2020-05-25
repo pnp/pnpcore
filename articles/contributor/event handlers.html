@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="event-handlers">Event handlers</h1>
 
-<p>When you add/extend the model you'll have an option to use event handlers to help. In this article the available event handlers will listed and each one will be explained via a sample.</p>
+<p>When you add/extend the model, you will have an option to use event handlers. This article lists and explains the available event handlers, providing short samples.</p>
 <h2 id="event-handler-overview">Event handler overview</h2>
 <table>
 <thead>
@@ -128,7 +128,7 @@
 </tbody>
 </table>
 <h2 id="event-handlers-in-the-model-lifecycle">Event handlers in the model lifecycle</h2>
-<p>Event handlers fire in a certain order when triggered by an action on the model. In below example the Team is loaded which requires a get request, as such the <code>GetApiCallOverrideHandler</code> fires. Unless the get request is cancelled in the event handler the server is queried and JSON results are returned. During mapping of the JSON results to the model the <code>MappingHandler</code> is fired for each property for which there's no default mapping. Finally the full JSON to model mapping is done and the <code>PostMappingHandler</code> fires allowing you to perform extra processing if needed.</p>
+<p>Event handlers fire in a certain order when triggered by an action on the model. In below example a Team is loaded requiring a get request, as such the <code>GetApiCallOverrideHandler</code> fires. Unless the get request is cancelled in the event handler, the server is queried and JSON results are returned. During mapping of the JSON results to the model the <code>MappingHandler</code> is fired for each property for which there's no default mapping. Finally the full JSON to model mapping is done and the <code>PostMappingHandler</code> fires allowing you to perform extra processing if needed.</p>
 <p><img src="../../images/eventhandler.png" alt="Event handler firing"></p>
 <h3 id="addapicallhandler">AddApiCallHandler</h3>
 <p>This handler is required when you want to implement <strong>Add</strong> functionality on a model class. In the handler you use the properties of the model class instance to be added (<code>DisplayName</code> and <code>Description</code>) to construct the JSON payload, which you then wrap into the respective Microsoft Graph or SharePoint REST API call.</p>
@@ -167,7 +167,7 @@
         {
             if (!PnPContext.Site.IsPropertyAvailable(p =&gt; p.GroupId) || PnPContext.Site.GroupId == Guid.Empty)
             {
-                api.CancelRequest(&quot;There is no Office 365 group attached to the current site&quot;);
+                api.CancelRequest(&quot;There is no Microsoft 365 group attached to the current site&quot;);
             }
 
             return api;
@@ -177,7 +177,7 @@
 }
 </code></pre>
 <h3 id="updateapicalloverridehandler-and-deleteapicalloverridehandler">UpdateApiCallOverrideHandler and DeleteApiCallOverrideHandler</h3>
-<p>Manipulating updates and deletes is a more common scenario, especially preventing updates/deletes from happening. In below example you see how sending and update or delete request to the server for the General channel of a Team is prevented.</p>
+<p>Manipulating updates and deletes is a more common scenario, especially preventing updates/deletes from happening. In below example, you see how sending an update or delete request to the server for the General channel of a Team is prevented.</p>
 <pre><code class="lang-csharp">internal partial class TeamChannel
 {
     internal TeamChannel()
@@ -205,7 +205,7 @@
 }
 </code></pre>
 <h3 id="mappinghandler">MappingHandler</h3>
-<p>The MappingHandler is the most commonly used event handler, you'll see a lot of the model and complex type classes implement this handler. The core purpose of this handler is to handle the JSON to model mapping in cases where this is not done automatically. Also note that when you set the <code>UseCustomMapping</code> property of the <code>GraphFieldMapping</code> or <code>SharePointFieldMapping</code> attributes to true, this handler will also be called for those properties. By default the handler will only be called when there's no automatic JSON to model mapping available, for example in the case of enumerations.</p>
+<p>The MappingHandler is the most commonly used event handler. You'll see a lot of the model and complex type classes implement this handler. The core purpose of this handler is to handle the JSON to model mapping in cases where this is not done automatically. Also note that when you set the <code>UseCustomMapping</code> property of the <code>GraphFieldMapping</code> or <code>SharePointFieldMapping</code> attributes to true, this handler will also be called for those properties. By default the handler will only be called when there's no automatic JSON to model mapping available, for example in the case of enumerations.</p>
 <pre><code class="lang-csharp">internal partial class TeamChannel
 {
     internal TeamChannel()
@@ -225,17 +225,17 @@
 }
 </code></pre>
 <h3 id="postmappinghandler">PostMappingHandler</h3>
-<p>This handler will fire after the received JSON has been fully processed...you get the processed JSON as a string for additional needs.</p>
+<p>This handler fires after the received JSON has been fully processed. You get the processed JSON as a string for additional needs.</p>
 <pre><code class="lang-csharp">internal Web()
 {
     PostMappingHandler = (string json) =&gt;
     {
-        // implement post mapping handler in case you want to do extra data loading/mapping work
+        // implement post mapping handler, in case you want to do extra data loading/mapping work
     };
 }
 </code></pre>
 <h3 id="validateupdatehandler">ValidateUpdateHandler</h3>
-<p>Validating properties being updated is common use case: sometimes you want to prevent certain model properties from being updated or you want to &quot;rewrite&quot; the updated value. In below example updating model properties for the General Team channel is prevented.</p>
+<p>Validating properties being updated is a common use case. Sometimes you want to prevent certain model properties from being updated, or you want to &quot;rewrite&quot; the updated value. In below example updating model properties for the General Team channel is prevented.</p>
 <pre><code class="lang-csharp">internal partial class TeamChannel
 {
     internal TeamChannel()

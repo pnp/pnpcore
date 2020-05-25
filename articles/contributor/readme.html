@@ -79,16 +79,17 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="the-pnp-core-sdk-model">The PnP Core SDK model</h1>
 
-<p>The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and the their operations (e.g. Get). This model has a public part (interfaces) and an implementation (internal, partial, classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. <strong>As a contributor extending and enriching the model is how you provide functionality to the developers that will be using this SDK</strong>.</p>
+<p>The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and the their operations (e.g. Get). This model has a public part (interfaces) and an implementation (internal, partial classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. <strong>As a contributor, extending and enriching the model is how you provide functionality to the developers that will be using this SDK</strong>.</p>
 <p><img src="../../images/sdk%20overview.png" alt="SDK overview"></p>
 <h2 id="where-is-the-code">Where is the code?</h2>
-<p>The PnP Core SDK is maintained in the PnP GitHub organization: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>. You'll find:</p>
+<p>The PnP Core SDK is maintained in the PnP GitHub repository: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>. You'll find:</p>
 <ul>
 <li>The code of the PnP Core SDK in the <code>src\sdk</code> folder</li>
 <li>Examples of how to use the PnP Core SDK in the <code>src\samples</code> folder</li>
+<li>The source of the documentation you are reading right now in the <code>docs</code> folder</li>
 </ul>
 <h2 id="general-model-principles">General model principles</h2>
-<p>The model design principles are agnostic to whether the model will be populated via a SharePoint REST or Microsoft Graph call and therefore starting here to understand the general model principles is advised. Once you understand the model design principles you can learn more about how to decorate the model to work with either SharePoint REST and/or Microsoft Graph. Below picture gives an overview of the used classes in the model based up on the Team model implementation:</p>
+<p>The model design principles are agnostic to whether the model will be populated via a SharePoint REST or Microsoft Graph call, and therefore starting here to understand the general model principles is advised. Once you understand the model design principles you can learn more about how to decorate the model to work with either SharePoint REST and/or Microsoft Graph. Below picture gives an overview of the used classes in the model based on the Team model implementation:</p>
 <p><img src="../../images/model%20overview.png" alt="Model overview"></p>
 <p>In the model there are 3 types of classes:</p>
 <ul>
@@ -101,7 +102,7 @@
 <h3 id="model-classes">Model classes</h3>
 <p>The model classes are the most commonly used classes in our domain model as they represent a Microsoft 365 object that can be queried via either the SharePoint REST or the Microsoft Graph interface. Samples of model classes are Web, Team, List,...</p>
 <h4 id="public-model">Public model</h4>
-<p>The public model is build via public interfaces. Below sample shows the public model for a SharePoint List</p>
+<p>The public model is built via public interfaces. Below sample shows the public model for a SharePoint List</p>
 <pre><code class="lang-csharp">/// &lt;summary&gt;
 /// Public interface to define a List object of SharePoint Online
 /// &lt;/summary&gt;
@@ -148,7 +149,7 @@ public IListItemCollection Items { get; }
 public ITeamFunSettings FunSettings { get; set; }
 </code></pre>
 <h4 id="internal-implementation">Internal implementation</h4>
-<p>The internal model implementation is what brings the public model to life: this split approach ensures that library consumers only work off the public model and as such the library implementation can be updated without breaking the public contract with library consumers. For the internal model class implementation we've opted to use internal partial classes:</p>
+<p>The internal model implementation is what brings the public model to life: this split approach ensures that library consumers only work with the public model, and as such the library implementation can be updated without breaking the public contract with library consumers. For the internal model class implementation we've opted to use internal partial classes:</p>
 <ul>
 <li>A <code>Model.gen.cs</code> class for semi-generated model class code</li>
 <li>A <code>Model.cs</code> class for coded model class code</li>
@@ -183,7 +184,7 @@ public ITeamFunSettings FunSettings { get; set; }
 [GraphType(Get = &quot;sites/{Parent.GraphId}/lists/{GraphId}&quot;)]
 internal partial class List
 {
-    internal List()
+    public List()
     {
         MappingHandler = (FromJson input) =&gt;
         {
@@ -212,9 +213,11 @@ internal partial class List
 <ul>
 <li><p>Is an <strong>internal</strong>, <strong>partial</strong> class</p>
 </li>
+<li><p>Does have a public default constructor</p>
+</li>
 <li><p>Does not inherit from another class (the inheriting is done in the <code>Model.gen.cs</code> partial class)</p>
 </li>
-<li><p>Contains class level attributes that are used to define the requests to Microsoft 365 and serialization of the received data. These attributes are explain in more detail in their respective chapters later on</p>
+<li><p>Contains class level attributes that are used to define the requests to Microsoft 365 and serialization of the received data. These attributes are explained in more detail in their respective chapters later on</p>
 </li>
 <li><p>Can implement event handlers which are used to (see the <a href="event%20handlers.html">Event Handlers</a> page for more details):</p>
 <ul>
@@ -266,7 +269,7 @@ public enum TeamGiphyContentRating
     Strict
 }
 </code></pre>
-<p>Each public model:</p>
+<p>Each public model for a Complex Type class:</p>
 <ul>
 <li>Uses a public interface (e.g. <code>ITeamFunSettings</code> in our example) with public properties</li>
 <li>Has inline documentation on the class and properties</li>
@@ -332,7 +335,7 @@ internal partial class TeamFunSettings : BaseComplexType&lt;ITeamFunSettings&gt;
 <h3 id="collection-classes">Collection classes</h3>
 <p>Collection classes contain zero or more model class instances, so for example the <code>ListCollection</code> will contain zero or more <code>List</code> model class instances.</p>
 <h4 id="public-model-2">Public model</h4>
-<p>The public model is build via public interfaces. Below sample shows the public model for a SharePoint ListCollection</p>
+<p>The public model is built via public interfaces. Below sample shows the public model for a SharePoint ListCollection</p>
 <pre><code class="lang-csharp">/// &lt;summary&gt;
 /// Public interface to define a collection of List objects of SharePoint Online
 /// &lt;/summary&gt;
@@ -349,7 +352,7 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
     // Other methods ommitted for brevity
 }
 </code></pre>
-<p>Each public model:</p>
+<p>Each public model interface for a Collection class:</p>
 <ul>
 <li>Uses a public interface (e.g. <code>IListCollection</code> in our example) with optionally public methods</li>
 <li>Has inline documentation on the model class and methods</li>
@@ -499,10 +502,10 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
 <p>Each generated complex model class that contains complex type collections:</p>
 <ul>
 <li>Uses a <code>List&lt;&gt;</code> of the complex type class</li>
-<li>Implements the getter as shown in the example. It's important that the <code>HasValue</code> and <code>SetValue</code> methods are used to ensure the change tracking can detect changed values</li>
+<li>Implements the getter as shown in the example. It's important that the <code>HasValue</code>, <code>SetValue</code>, and <code>GetValue</code> methods are used to ensure the change tracking can detect changed values</li>
 </ul>
 <h2 id="decorating-the-model">Decorating the model</h2>
-<p>The model, collections and complex type classes you create can be populated via either SharePoint REST queries, Microsoft Graph queries or both. Depending on the needed query approach you'll need to decorate the model class and/or fields with properties. <strong>It's these properties that drive the automatic query generation</strong>.</p>
+<p>The model, collections and complex type classes you create can be populated via either SharePoint REST queries, Microsoft Graph queries or both. Depending on the needed query approach you'll need to decorate the model classes and/or fields with properties. <strong>It's these properties that drive the automatic query generation</strong>.</p>
 <p>When you populate your model via SharePoint REST queries then continue <a href="extending%20the%20model%20-%20SharePoint%20REST.html">here</a>, in case the model is populated via Microsoft Graph continue <a href="extending%20the%20model%20-%20Microsoft%20Graph.html">here</a>.</p>
 </article>
           </div>

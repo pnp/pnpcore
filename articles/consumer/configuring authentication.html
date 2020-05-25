@@ -79,8 +79,12 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="configuring-authentication">Configuring authentication</h1>
 
-<p>The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 services like SharePoint, Teams,...<strong>Configuring your own application is the recommended approach</strong>, but you can also use an multi-tenant application that the PnP team created. Both options are detailed in the next chapters</p>
+<p>The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 workloads like SharePoint, Teams,...<strong>Configuring your own application is the recommended approach</strong>, but you can also use an multi-tenant application that the PnP team created. Both options are detailed in the next chapters</p>
 <h2 id="i-want-to-configure-my-own-azure-ad-application-recommended">I want to configure my own Azure AD application (recommended)</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The current preview supports delegated access tokens only. We are working on extending the SDK to support app-only access tokens.</p>
+</div>
 <h3 id="configuring-the-application-in-azure-ad">Configuring the application in Azure AD</h3>
 <p>Follow below steps to configure an application in Azure AD:</p>
 <ol>
@@ -118,7 +122,7 @@
 </li>
 </ol>
 <h3 id="configuring-pnp-core-sdk-to-use-the-configured-application">Configuring PnP Core SDK to use the configured application</h3>
-<p>When you're configuring your application to use the PnP Core SDK you will have to configure the PnP Core SDK AuthenticationProviderFactory which allows you to specify one or more <code>IAuthenticationProviderConfiguration</code> implementations. The <code>IAuthenticationProviderConfiguration</code> implementations that support a custom Azure AD applications do have a <code>ClientId</code> property that can be used to configure the Azure AD application to be used. Below snippet shows the configuration of the <code>OAuthCredentialManagerConfiguration</code>: the configuration needs a name, needs the credential manager entry that contains username/password and the Azure AD application that you want to use.</p>
+<p>When you're configuring your application to use the PnP Core SDK you will have to configure the PnP Core SDK <code>AuthenticationProviderFactory</code> which allows you to specify one or more <code>IAuthenticationProviderConfiguration</code> implementations. The <code>IAuthenticationProviderConfiguration</code> implementations that support a custom Azure AD applications do have a <code>ClientId</code> property that can be used to configure the Azure AD application to be used. Below snippet shows the configuration of the <code>OAuthCredentialManagerConfiguration</code>: the configuration needs a name, the credential manager entry that contains username/password and the Client ID (or Application ID) of the Azure AD application that you want to use.</p>
 <pre><code class="lang-csharp">.AddAuthenticationProviderFactory(options =&gt;
 {
     options.Configurations.Add(new OAuthCredentialManagerConfiguration
@@ -132,15 +136,15 @@
 })
 </code></pre>
 <h2 id="using-the-multi-tenant-pnp-azure-ad-application">Using the multi-tenant PnP Azure AD application</h2>
-<p>Azure AD has the concept of multi-tenant applications allowing you to re-use an application created in another Azure AD tenant. The PnP team did setup an general purpose Azure AD application (named &quot;PnP Office 365 Management Shell&quot;) configured with the needed permissions and you can reuse this application. This will mean you don't have to create you're own Azure AD application but instead you consent to the already created multi-tenant application.</p>
+<p>Azure AD has the concept of multi-tenant applications allowing you to re-use an application created in another Azure AD tenant. The PnP team did setup a general purpose Azure AD application (named &quot;PnP Office 365 Management Shell&quot;) configured with the needed permissions, and you can reuse this application. It means that you don't need to create your own Azure AD application, instead you simply need to consent permissions to the already created multi-tenant application.</p>
 <h3 id="step-1">Step 1</h3>
-<p>To consent to the PnP multi-tenant application first update below content URL: replace contoso.onmicrosoft.com with your Azure AD name which typically is company.onmicrosoft.com.</p>
+<p>To consent permissions to the PnP multi-tenant application first update below content URL: replace contoso.onmicrosoft.com with your Azure AD tenant name, which typically is company.onmicrosoft.com.</p>
 <pre><code>https://login.microsoftonline.com/contoso.onmicrosoft.com/adminconsent?client_id=31359c7f-bd7e-475c-86db-fdb8c937548e&amp;state=12345&amp;redirect_uri=https://aka.ms/sppnp
 </code></pre>
 <h3 id="step-2">Step 2</h3>
-<p>Login to your Microsoft 365 tenant (e.g. by going to SharePoint Online), open a new browser tab and paste the URL you've just created. Azure AD will ask you to login and then it will prompt you to consent to the permissions the app requests:</p>
+<p>Login to your Microsoft 365 tenant (e.g. by browsing to SharePoint Online), open a new browser tab and paste the URL you've just created. Azure AD will eventually ask you to login, and then it will prompt you to consent permissions to the app:</p>
 <p><img src="../../images/PnP%20admin%20consent.png" alt="PnP Multi-tenant app admin consent"></p>
-<p>Click on <strong>Accept</strong> to accept the requested permissions and that point you're being redirected to the PnP Site (<a href="https://aka.ms/sppnp">https://aka.ms/sppnp</a>). At this point you've registered the PnP multi-tenant application in your Azure AD environment and you can use it with the PnP Core SDK. The PnP Core SDK defaults to this application, so if you're not specifying any Azure AD application details when setting up authentication for the application then the PnP Core SDK automatically uses the PnP application (application id 31359c7f-bd7e-475c-86db-fdb8c937548e).</p>
+<p>Click on <strong>Accept</strong> to accept the requested permissions. At that point you will be redirected to the PnP Site (<a href="https://aka.ms/sppnp">https://aka.ms/sppnp</a>). You've now successfully registered the PnP multi-tenant application in your Azure AD environment and you can use it with the PnP Core SDK. The PnP Core SDK defaults to this application, so if you're not specifying any Azure AD application details when setting up authentication for the application, then the PnP Core SDK automatically uses the PnP application (application id 31359c7f-bd7e-475c-86db-fdb8c937548e).</p>
 <div class="NOTE">
 <h5>Note</h5>
 <p>If you get errors during this consent process it's most likely because you are not an Azure AD tenant administrator. Please contact your admins and check with them for further steps.</p>
@@ -148,11 +152,11 @@
 <h2 id="using-the-credential-manager">Using the credential manager</h2>
 <p>Currently the only supported option to authenticate to a created Azure AD application is via username and password. To configure this in a secure way it's recommended to setup a credential manager entry. Below steps walk you through the setup on Windows, but a similar credential manager concepts exists on other platforms as well.</p>
 <ol>
-<li>Click on the <strong>Windows Start</strong> button in the taskbar and type <strong>credential manager</strong></li>
-<li>Click on the <strong>Credential Manager</strong> link</li>
-<li>Go to <strong>Windows Credentials</strong> and click on <strong>Add a generic credential</strong></li>
+<li>Click on the <strong>Windows Start</strong> button in the taskbar and type <strong>credential manager</strong>.</li>
+<li>Click on the <strong>Credential Manager</strong> link.</li>
+<li>Go to <strong>Windows Credentials</strong> and click on <strong>Add a generic credential</strong>.</li>
 <li>Give the credential a name (e.g. Contoso), a user name (e.g. joe@contoso.onmicrosoft.com) and a password. Hit <strong>OK</strong> to save.</li>
-<li>Use the credential manager name (Contoso in this example) in your <code>OAuthCredentialManagerConfiguration</code> setup</li>
+<li>Use the credential manager name (Contoso in this example) in your <code>OAuthCredentialManagerConfiguration</code> setup.</li>
 </ol>
 </article>
           </div>

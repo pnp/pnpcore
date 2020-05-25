@@ -80,7 +80,7 @@
 <h1 id="model-tokens">Model tokens</h1>
 
 <h2 id="introduction">Introduction</h2>
-<p>When decorating model classes and properties via attributes one often needs to define an API request. To ensure these API requests do offer the needed flexibility you can use tokens in the request. Tokens can be used by embedding them between curly brackets. Below snippet shows some samples in which tokens are used:</p>
+<p>When decorating model classes and properties via attributes, often you need to define an API request. To ensure that these API requests offer the needed flexibility, you can use tokens in the URL request definition. Tokens are embedded between curly brackets. Below snippet shows some samples in which tokens are used:</p>
 <pre><code class="lang-csharp">// Site.GroupId token to grab the id of the Office 365 group connected to the current site
 [GraphType(Uri = &quot;teams/{Site.GroupId}&quot;)]
 [GraphProperty(&quot;installedApps&quot;, Get = &quot;teams/{Site.GroupId}/installedapps?expand=TeamsApp&quot;)]
@@ -107,35 +107,35 @@
 <tbody>
 <tr>
 <td><code>{Id}</code></td>
-<td>Value of the SharePoint Id property of the current model instance (e.g. List)</td>
+<td>Value of the SharePoint Id property of the current model instance (e.g. List).</td>
 </tr>
 <tr>
 <td><code>{Parent.Id}</code></td>
-<td>Value of the SharePoint Id property of the current model's parent instance (e.g. Web for a List --&gt; ListCollection is skipped in this approach)</td>
+<td>Value of the SharePoint Id property of the current model's parent instance (e.g. Web for a List --&gt; ListCollection is skipped in this approach).</td>
 </tr>
 <tr>
 <td><code>{GraphId}</code></td>
-<td>Value of the Microsoft Graph Id property of the current model instance (e.g. TeamChannel)</td>
+<td>Value of the Microsoft Graph Id property of the current model instance (e.g. TeamChannel).</td>
 </tr>
 <tr>
 <td><code>{Parent.GraphId}</code></td>
-<td>Value of the Microsoft Graph Id property of the current model's parent instance (e.g. Team for a TeamChannel --&gt; TeamChannelCollection is skipped in this approach)</td>
+<td>Value of the Microsoft Graph Id property of the current model's parent instance (e.g. Team for a TeamChannel --&gt; TeamChannelCollection is skipped in this approach).</td>
 </tr>
 <tr>
 <td><code>{Site.GroupId}</code></td>
-<td>Id value of the Office 365 Group connected to the Site loaded in the current PnPContext (Id is the same for SharePoint REST as Microsoft Graph usage)</td>
+<td>Id value of the Microsoft 365 Group connected to the Site loaded in the current PnPContext (Id is the same for SharePoint REST as Microsoft Graph usage).</td>
 </tr>
 <tr>
 <td><code>{Site.Id}</code></td>
-<td>SharePoint Id value of the Site loaded in the current PnPContext</td>
+<td>SharePoint Id value of the Site loaded in the current PnPContext.</td>
 </tr>
 <tr>
 <td><code>{Web.Id}</code></td>
-<td>SharePoint Id value of the Web loaded in the current PnPContext</td>
+<td>SharePoint Id value of the Web loaded in the current PnPContext.</td>
 </tr>
 <tr>
 <td><code>{Web.GraphId}</code></td>
-<td>Microsoft Graph Id value of the Web loaded in the current PnPContext</td>
+<td>Microsoft Graph Id value of the Web loaded in the current PnPContext.</td>
 </tr>
 </tbody>
 </table>

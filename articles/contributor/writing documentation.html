@@ -79,19 +79,19 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="writing-documentation">Writing documentation</h1>
 
-<p>The documentation system is based upon <a href="https://dotnet.github.io/docfx/">DocFX</a> and combines inline code comments (the so called triple slash comments) with articles written in MD format. The resulting generated documentation is hosted on <a href="https://pnp.github.io/pnpcore">https://pnp.github.io/pnpcore</a>. To extend documentation you can:</p>
+<p>The documentation system is based on <a href="https://dotnet.github.io/docfx/">DocFX</a>, and combines inline code comments (the so called triple slash comments) with articles written in MD format. The resulting generated documentation is hosted on <a href="https://pnp.github.io/pnpcore">https://pnp.github.io/pnpcore</a>. To extend documentation you can:</p>
 <ul>
 <li>Author articles</li>
 <li>Write inline code documentation via the tripple slash comments</li>
 </ul>
-<p>Once you've made changes to the documentation then these changes are not immediatly reflected in the published documentation, this requires that <a href="https://dotnet.github.io/docfx/">DocFX</a> build is ran again and the resulting content is published.</p>
+<p>Once you've made changes to the documentation, then these changes are not immediatly reflected in the published documentation. In fact, you need to run the <a href="https://dotnet.github.io/docfx/">DocFX</a> build and to publish the resulting content.</p>
 <div class="NOTE">
 <h5>Note</h5>
 <p>Currently documentation is refreshed manually but we're looking into automating this in the future.</p>
 </div>
 <h2 id="writing-articles">Writing articles</h2>
-<p>Articles are at the core of the PnP Core SDK documentation and they live in the <code>docs\articles</code> folder. Articles are written in <a href="https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html?tabs=tabid-1%2Ctabid-a">DocFX Flavored Markdown</a>, which is an extension on top of GitHub flavored markdown. Articles target either the library consumer or the library contributor, hence they should be added in either the <strong>consumer</strong> or <strong>contributor</strong> folder. When an article requires images then all images are added in the <code>docs\images</code> folder.</p>
-<p>If your article needs to show in the table of contents then you need to make the needed changes in <code>toc.yml</code>, which you find in the root of the <code>docs</code> folder.</p>
+<p>Articles are at the core of the PnP Core SDK documentation and they live in the <code>docs\articles</code> folder. Articles are written in <a href="https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html?tabs=tabid-1%2Ctabid-a">DocFX Flavored Markdown</a>, which is an extension on top of GitHub flavored markdown. Articles target either the library consumer or the library contributor, hence they should be added to the <strong>consumer</strong> or <strong>contributor</strong> folder respectively. When an article requires images, then all images are added in the <code>docs\images</code> folder. You can eventually organize images in sub-folders of the <code>docs\images</code> folder.</p>
+<p>If you want to show your article in the table of contents, then you need to make the needed changes in <code>toc.yml</code>, which you find in the root of the <code>docs</code> folder.</p>
 <h2 id="writing-inline-code-documentation">Writing inline code documentation</h2>
 <p>Documentation written in the code files themselves is used to generate the <strong>Api Documentation</strong> and depends on docfx parsing the tripple slash comments that you add to the code. Below resources help you get started:</p>
 <ul>

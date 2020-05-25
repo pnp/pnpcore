@@ -79,17 +79,25 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="extending-the-model-for-microsoft-graph">Extending the model for Microsoft Graph</h1>
 
-<p>The PnP Core SDK model contains model, collection and complex type classes which are populated via either Microsoft Graph or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the Microsoft Graph API.</p>
+<p>The PnP Core SDK model contains model, collection, and complex type classes which are populated via either Microsoft Graph or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the Microsoft Graph API.</p>
 <h2 id="configuring-model-classes">Configuring model classes</h2>
+<h3 id="public-model-interface-decoration">Public model (interface) decoration</h3>
+<p>For model classes that <strong>are linq queriable</strong> one needs to link the concrete (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
+<pre><code class="lang-csharp">[ConcreteType(typeof(TeamChannel))]
+public interface ITeamChannel : IDataModel&lt;ITeamChannel&gt;, IDataModelUpdate, IDataModelDelete
+{
+    // Ommitted for brevity
+}
+</code></pre>
 <h3 id="class-decoration">Class decoration</h3>
-<p>Each model class does need to have a <code>GraphType</code> attribute which is defined on the coded model class (e.g. Team.cs):</p>
+<p>Each model class needs to have a <code>GraphType</code> attribute which is defined on the coded model class (e.g. Team.cs):</p>
 <pre><code class="lang-csharp">[GraphType(Uri = &quot;teams/{Site.GroupId}&quot;)]
 internal partial class Team
 {
     // Ommitted for brevity
 }
 </code></pre>
-<p>When configuring the <code>GraphType</code> attribute for Microsoft Graph you need to set attribute properties:</p>
+<p>When configuring the <code>GraphType</code> attribute for Microsoft Graph you need to set the attribute properties:</p>
 <table>
 <thead>
 <tr>
@@ -137,18 +145,20 @@ internal partial class Team
 <tr>
 <td>Beta</td>
 <td>No</td>
-<td>Defined that a model can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint then this model will not be populated.</td>
+<td>Defines that a model can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint then this model will not be populated.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="property-decoration">Property decoration</h3>
-<p>The property level decoration is done using the <code>GraphProperty</code> and <code>KeyProperty</code> attributes. Each model instance does require to have a override of the <code>Key</code> property and that <code>Key</code> property <strong>must</strong> be decorated with the <code>KeyProperty</code> attribute which specifies which of the actual fields in the model must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.</p>
+<p>The property level decoration is done using the <code>GraphProperty</code> and <code>KeyProperty</code> attributes. Each model instance requires to have an override of the <code>Key</code> property and that <code>Key</code> property <strong>must</strong> be decorated with the <code>KeyProperty</code> attribute which specifies which of the actual fields in the model must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.</p>
 <p>Whereas the <code>KeyProperty</code> attribute is always there once in each model class, the usage of the <code>GraphProperty</code> attribute is only required for special cases. Since the properties are defined in the generated model class (e.g. Web.gen.cs and Teams.gen.cs) the decoration via attributes needs to happen in this class as well.</p>
 <pre><code class="lang-csharp">// In graph the fieldname is &quot;name&quot;, whereas in the model the name is &quot;Title&quot;
 [GraphProperty(&quot;name&quot;)]
 public string Title { get =&gt; GetValue&lt;string&gt;(); set =&gt; SetValue(value); }
 
-// Mark the property that serves as Key field (used to ensure there are no duplicates in collections), use a JsonPath to get the specific value you need
+// Mark the property that serves as Key field
+// (used to ensure there are no duplicates in collections),
+// use a JsonPath to get the specific value you need
 [GraphProperty(&quot;sharepointIds&quot;, JsonPath = &quot;webId&quot;)]
 public Guid Id { get =&gt; GetValue&lt;Guid&gt;(); set =&gt; SetValue(value); }
 
@@ -207,50 +217,50 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 <tr>
 <td>FieldName</td>
 <td>Yes</td>
-<td>Use this property when the Microsoft Graph fieldname differs from the model property name. Since the field name is required by the default constructor you always need to provide this value when you add this property</td>
+<td>Use this property when the Microsoft Graph fieldname differs from the model property name. Since the field name is required by the default constructor you always need to provide this value when you add this property.</td>
 </tr>
 <tr>
 <td>JsonPath</td>
 <td>No</td>
-<td>When the information returned from Microsoft Graph is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild)</td>
+<td>When the information returned from Microsoft Graph is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild).</td>
 </tr>
 <tr>
 <td>Expandable</td>
 <td>No</td>
-<td>Defines that a collection is expandable, meaning it can be loaded via the $expand query parameter and used in the lambda expression in <code>Get</code> and <code>GetAsync</code> operations</td>
+<td>Defines that a collection is expandable, meaning it can be loaded via the $expand query parameter and used in the lambda expression in <code>Get</code> and <code>GetAsync</code> operations.</td>
 </tr>
 <tr>
 <td>ExpandByDefault</td>
 <td>No</td>
-<td>When the model contains a collection of other model objects then setting this attribute to true will automatically result in the population of that collection. This can negatively impact performance, so only set this when the collection is almost always needed</td>
+<td>When the model contains a collection of other model objects then setting this attribute to true will automatically result in the population of that collection. This can negatively impact performance, so only set this when the collection is almost always needed.</td>
 </tr>
 <tr>
 <td>Get</td>
 <td>No</td>
-<td>Sometimes it's not possible to load the complete model via a single Microsoft Graph request, often this is the case with collections (so the collection is <strong>not</strong> expandable). In this case you need to explain how to load the collection via specifying the needed query. See <a href="model%20tokens.html">model tokens</a> to learn more about the possible tokens you can use</td>
+<td>Sometimes it is not possible to load the complete model via a single Microsoft Graph request, often this is the case with collections (so the collection is <strong>not</strong> expandable). In this case you need to explain how to load the collection via specifying the needed query. See <a href="model%20tokens.html">model tokens</a> to learn more about the possible tokens you can use.</td>
 </tr>
 <tr>
 <td>UseCustomMapping</td>
 <td>No</td>
-<td>Allows you to force a callout to the model's <code>MappingHandler</code> event handler whenever this property is populated. See the <a href="event%20handlers.html">Event Handlers</a> article to learn more</td>
+<td>Allows you to force a callout to the model's <code>MappingHandler</code> event handler whenever this property is populated. See the <a href="event%20handlers.html">Event Handlers</a> article to learn more.</td>
 </tr>
 <tr>
 <td>Beta</td>
 <td>No</td>
-<td>Defined that a model property can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint then this model property will not be populated.</td>
+<td>Defines that a model property can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint, then this model property will not be populated.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="configuring-complex-type-classes">Configuring complex type classes</h2>
 <h3 id="class-decoration-1">Class decoration</h3>
-<p>Each complex type class does require a <code>GraphProperty</code> attribute which is defined on the generated complex type class (e.g. TeamFunSettings.gen.cs):</p>
-<pre><code class="lang-csharp">[GraphProperty]
+<p>Each complex type class does require a <code>GraphType</code> attribute which is defined on the generated complex type class (e.g. TeamFunSettings.gen.cs):</p>
+<pre><code class="lang-csharp">[GraphType]
 internal partial class TeamFunSettings : BaseComplexType&lt;ITeamFunSettings&gt;, ITeamFunSettings
 {
     // Ommitted for brevity
 }
 </code></pre>
-<p>Since the complex type class is not queried independently there's no need to further define properties on the <code>GraphProperty</code> attribute.</p>
+<p>Since the complex type class is not queried independently, there is no need to further define properties on the <code>GraphType</code> attribute.</p>
 <h3 id="property-decoration-1">Property decoration</h3>
 <p>The property level decoration is done using the <code>GraphProperty</code> attribute. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. TeamFunSettings.gen.cs) the decoration via attributes needs to happen in this class as well. Since complex types are not directly queried and are not used in collections only a few of the <code>GraphProperty</code> properties make sense to be used.</p>
 <table>
@@ -265,29 +275,29 @@ internal partial class TeamFunSettings : BaseComplexType&lt;ITeamFunSettings&gt;
 <tr>
 <td>FieldName</td>
 <td>Yes</td>
-<td>Use this property when the Microsoft Graph fieldname differs from the model property name. Since the field name is required by the default constructor you always need to provide this value when you add this property</td>
+<td>Use this property when the Microsoft Graph fieldname differs from the model property name. Since the field name is required by the default constructor you always need to provide this value when you add this property.</td>
 </tr>
 <tr>
 <td>JsonPath</td>
 <td>No</td>
-<td>When the information returned from Microsoft Graph is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild)</td>
+<td>When the information returned from Microsoft Graph is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild).</td>
 </tr>
 <tr>
 <td>UseCustomMapping</td>
 <td>No</td>
-<td>Allows you to force a callout to the model's <code>MappingHandler</code> event handler whenever this property is populated. See the <a href="event%20handlers.html">Event Handlers</a> article to learn more</td>
+<td>Allows you to force a callout to the model's <code>MappingHandler</code> event handler whenever this property is populated. See the <a href="event%20handlers.html">Event Handlers</a> article to learn more.</td>
 </tr>
 <tr>
 <td>Beta</td>
 <td>No</td>
-<td>Defined that a model property can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint then this model property will not be populated.</td>
+<td>Defines that a model property can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint, then this model property will not be populated.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="configuring-collection-classes">Configuring collection classes</h2>
 <p>Collection classes <strong>do not</strong> have attribute based decoration.</p>
 <h2 id="implementing-add-functionality">Implementing &quot;Add&quot; functionality</h2>
-<p>In contradiction with get, update and delete which are fully handled by decorating classes and properties using attributes, you'll need to write actual code to implement add. Adding is implemented as follows:</p>
+<p>In contradiction with get, update, and delete which are fully handled by decorating classes and properties using attributes, you'll need to write actual code to implement add. Adding is implemented as follows:</p>
 <ul>
 <li><p>The public part (interface) is defined on the collection interface. Each functionality (like Add) is implemented via three methods:</p>
 <ul>
@@ -296,7 +306,7 @@ internal partial class TeamFunSettings : BaseComplexType&lt;ITeamFunSettings&gt;
 <li>A regular method that allows to pass in a <code>Batch</code> as first method parameter</li>
 </ul>
 </li>
-<li><p>Add methods defined on the interface are implemented in the collection classes as a proxies that call into the respective add methods of the added model class</p>
+<li><p>Add methods defined on the interface are implemented in the collection classes as proxies that call into the respective add methods of the added model class</p>
 </li>
 <li><p>The implementation that performs the actual add is implemented as an <code>AddApiCallHandler</code> event handler in the model class. See the <a href="event%20handlers.html">Event Handlers</a> page for more details.</p>
 </li>
