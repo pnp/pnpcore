@@ -3,7 +3,7 @@
 
 ## Introduction
 
-When decorating model classes and properties via attributes one often needs to define an API request. To ensure these API requests do offer the needed flexibility you can use tokens in the request. Tokens can be used by embedding them between curly brackets. Below snippet shows some samples in which tokens are used:
+When decorating model classes and properties via attributes, often you need to define an API request. To ensure that these API requests offer the needed flexibility, you can use tokens in the URL request definition. Tokens are embedded between curly brackets. Below snippet shows some samples in which tokens are used:
 
 ```csharp
 // Site.GroupId token to grab the id of the Office 365 group connected to the current site
@@ -26,11 +26,11 @@ When decorating model classes and properties via attributes one often needs to d
 
 Token | Description
 ------|------------
-`{Id}` | Value of the SharePoint Id property of the current model instance (e.g. List)
-`{Parent.Id}` | Value of the SharePoint Id property of the current model's parent instance (e.g. Web for a List --> ListCollection is skipped in this approach)
-`{GraphId}` | Value of the Microsoft Graph Id property of the current model instance (e.g. TeamChannel)
-`{Parent.GraphId}` | Value of the Microsoft Graph Id property of the current model's parent instance (e.g. Team for a TeamChannel --> TeamChannelCollection is skipped in this approach)
-`{Site.GroupId}` | Id value of the Office 365 Group connected to the Site loaded in the current PnPContext (Id is the same for SharePoint REST as Microsoft Graph usage)
-`{Site.Id}` | SharePoint Id value of the Site loaded in the current PnPContext
-`{Web.Id}` | SharePoint Id value of the Web loaded in the current PnPContext
-`{Web.GraphId}` | Microsoft Graph Id value of the Web loaded in the current PnPContext
+`{Id}` | Value of the SharePoint Id property of the current model instance (e.g. List).
+`{Parent.Id}` | Value of the SharePoint Id property of the current model's parent instance (e.g. Web for a List --> ListCollection is skipped in this approach).
+`{GraphId}` | Value of the Microsoft Graph Id property of the current model instance (e.g. TeamChannel).
+`{Parent.GraphId}` | Value of the Microsoft Graph Id property of the current model's parent instance (e.g. Team for a TeamChannel --> TeamChannelCollection is skipped in this approach).
+`{Site.GroupId}` | Id value of the Microsoft 365 Group connected to the Site loaded in the current PnPContext (Id is the same for SharePoint REST as Microsoft Graph usage).
+`{Site.Id}` | SharePoint Id value of the Site loaded in the current PnPContext.
+`{Web.Id}` | SharePoint Id value of the Web loaded in the current PnPContext.
+`{Web.GraphId}` | Microsoft Graph Id value of the Web loaded in the current PnPContext.

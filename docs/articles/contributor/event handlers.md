@@ -1,6 +1,6 @@
 # Event handlers
 
-When you add/extend the model you'll have an option to use event handlers to help. In this article the available event handlers will listed and each one will be explained via a sample.
+When you add/extend the model, you will have an option to use event handlers. This article lists and explains the available event handlers, providing short samples.
 
 ## Event handler overview
 
@@ -16,7 +16,7 @@ Event handler | Delegate | Description
 
 ## Event handlers in the model lifecycle
 
-Event handlers fire in a certain order when triggered by an action on the model. In below example the Team is loaded which requires a get request, as such the `GetApiCallOverrideHandler` fires. Unless the get request is cancelled in the event handler the server is queried and JSON results are returned. During mapping of the JSON results to the model the `MappingHandler` is fired for each property for which there's no default mapping. Finally the full JSON to model mapping is done and the `PostMappingHandler` fires allowing you to perform extra processing if needed.
+Event handlers fire in a certain order when triggered by an action on the model. In below example a Team is loaded requiring a get request, as such the `GetApiCallOverrideHandler` fires. Unless the get request is cancelled in the event handler, the server is queried and JSON results are returned. During mapping of the JSON results to the model the `MappingHandler` is fired for each property for which there's no default mapping. Finally the full JSON to model mapping is done and the `PostMappingHandler` fires allowing you to perform extra processing if needed.
 
 ![Event handler firing](../../images/eventhandler.png)
 
@@ -64,7 +64,7 @@ internal partial class Team
         {
             if (!PnPContext.Site.IsPropertyAvailable(p => p.GroupId) || PnPContext.Site.GroupId == Guid.Empty)
             {
-                api.CancelRequest("There is no Office 365 group attached to the current site");
+                api.CancelRequest("There is no Microsoft 365 group attached to the current site");
             }
 
             return api;
@@ -76,7 +76,7 @@ internal partial class Team
 
 ### UpdateApiCallOverrideHandler and DeleteApiCallOverrideHandler
 
-Manipulating updates and deletes is a more common scenario, especially preventing updates/deletes from happening. In below example you see how sending and update or delete request to the server for the General channel of a Team is prevented.
+Manipulating updates and deletes is a more common scenario, especially preventing updates/deletes from happening. In below example, you see how sending an update or delete request to the server for the General channel of a Team is prevented.
 
 ```csharp
 internal partial class TeamChannel
@@ -108,7 +108,7 @@ internal partial class TeamChannel
 
 ### MappingHandler
 
-The MappingHandler is the most commonly used event handler, you'll see a lot of the model and complex type classes implement this handler. The core purpose of this handler is to handle the JSON to model mapping in cases where this is not done automatically. Also note that when you set the `UseCustomMapping` property of the `GraphFieldMapping` or `SharePointFieldMapping` attributes to true, this handler will also be called for those properties. By default the handler will only be called when there's no automatic JSON to model mapping available, for example in the case of enumerations.
+The MappingHandler is the most commonly used event handler. You'll see a lot of the model and complex type classes implement this handler. The core purpose of this handler is to handle the JSON to model mapping in cases where this is not done automatically. Also note that when you set the `UseCustomMapping` property of the `GraphFieldMapping` or `SharePointFieldMapping` attributes to true, this handler will also be called for those properties. By default the handler will only be called when there's no automatic JSON to model mapping available, for example in the case of enumerations.
 
 ```csharp
 internal partial class TeamChannel
@@ -132,21 +132,21 @@ internal partial class TeamChannel
 
 ### PostMappingHandler
 
-This handler will fire after the received JSON has been fully processed...you get the processed JSON as a string for additional needs.
+This handler fires after the received JSON has been fully processed. You get the processed JSON as a string for additional needs.
 
 ```csharp
 internal Web()
 {
     PostMappingHandler = (string json) =>
     {
-        // implement post mapping handler in case you want to do extra data loading/mapping work
+        // implement post mapping handler, in case you want to do extra data loading/mapping work
     };
 }
 ```
 
 ### ValidateUpdateHandler
 
-Validating properties being updated is common use case: sometimes you want to prevent certain model properties from being updated or you want to "rewrite" the updated value. In below example updating model properties for the General Team channel is prevented.
+Validating properties being updated is a common use case. Sometimes you want to prevent certain model properties from being updated, or you want to "rewrite" the updated value. In below example updating model properties for the General Team channel is prevented.
 
 ```csharp
 internal partial class TeamChannel
