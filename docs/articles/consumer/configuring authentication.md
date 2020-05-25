@@ -1,9 +1,10 @@
 
 # Configuring authentication
 
-The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 services like SharePoint, Teams,...Configuring your own application is the recommended approach, but you can also use an multi-tenant application that the PnP team created. Both options are detailed in the next chapters
+The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 services like SharePoint, Teams,...**Configuring your own application is the recommended approach**, but you can also use an multi-tenant application that the PnP team created. Both options are detailed in the next chapters
 
-## I want to configure my own Azure AD application
+## I want to configure my own Azure AD application (recommended)
+
 
 
 ## Using the multi-tenant PnP Azure AD application
@@ -27,4 +28,4 @@ Login to your Microsoft 365 tenant (e.g. by going to SharePoint Online), open a 
 Click on **Accept** to accept the requested permissions and that point you're being redirected to the PnP Site (https://aka.ms/sppnp). At this point you've registered the PnP multi-tenant application in your Azure AD environment and you can use it with the PnP Core SDK. The PnP Core SDK defaults to this application, so if you're not specifying any Azure AD application details when setting up authentication for the application then the PnP Core SDK automatically uses the PnP application (application id 31359c7f-bd7e-475c-86db-fdb8c937548e).
 
 > [!Note]
-> If you get errors during this consent process it's most likely because your Azure AD tenant administrators have blocked you from registering multi-tenant applications. Please contact your admins and check with them.
+> If you get errors during this consent process it's most likely because you are not an Azure AD tenant administrator. Please contact your admins and check with them for further steps.
