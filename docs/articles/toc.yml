@@ -6,6 +6,8 @@
   items:
   - name: Getting started
     href: consumer/readme.md
+  - name: Configuring authentication
+    href: consumer/configuring%20authentication.md
   - name: Configuring the PnP Core SDK
     href: consumer/pnp%20core%20settings.md
 - name: Contributor documentation
