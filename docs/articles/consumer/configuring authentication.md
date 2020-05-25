@@ -28,10 +28,26 @@ Follow below steps to configure an application in Azure AD:
    - Microsoft Graph -> Delegated Permissions -> Group -> Group.ReadWrite.All
 
 9. Click on the **Grant admin consent for** button to consent to these permissions for the users in your organization
+10. Click on **Authentication** in the **Manage** left navigation group
+11. Change **Default client type** to **Treat application as public client** and hit **Save**
 
 ### Configuring PnP Core SDK to use the configured application
 
+When you're configuring your application to use the PnP Core SDK you will have to configure the PnP Core SDK AuthenticationProviderFactory which allows you to specify one or more `IAuthenticationProviderConfiguration` implementations. The `IAuthenticationProviderConfiguration` implementations that support a custom Azure AD applications do have a `ClientId` property that can be used to configure the Azure AD application to be used. Below snippet shows the configuration of the `OAuthCredentialManagerConfiguration`: the configuration needs a name, needs the credential manager entry that contains username/password and the Azure AD application that you want to use.
 
+```csharp
+.AddAuthenticationProviderFactory(options =>
+{
+    options.Configurations.Add(new OAuthCredentialManagerConfiguration
+    {
+        Name = "CredentialManagerAuthentication",
+        CredentialManagerName = configuration.GetValue<string>("CustomSettings:CredentialManager"),
+        ClientId = configuration.GetValue<string>("CustomSettings:ClientId"),
+    });
+
+    options.DefaultConfiguration = "CredentialManagerAuthentication";
+})
+```
 
 ## Using the multi-tenant PnP Azure AD application
 
@@ -55,3 +71,13 @@ Click on **Accept** to accept the requested permissions and that point you're be
 
 > [!Note]
 > If you get errors during this consent process it's most likely because you are not an Azure AD tenant administrator. Please contact your admins and check with them for further steps.
+
+## Using the credential manager
+
+Currently the only supported option to authenticate to a created Azure AD application is via username and password. To configure this in a secure way it's recommended to setup a credential manager entry. Below steps walk you through the setup on Windows, but a similar credential manager concepts exists on other platforms as well.
+
+1. Click on the **Windows Start** button in the taskbar and type **credential manager**
+2. Click on the **Credential Manager** link
+3. Go to **Windows Credentials** and click on **Add a generic credential**
+4. Give the credential a name (e.g. Contoso), a user name (e.g. joe@contoso.onmicrosoft.com) and a password. Hit **OK** to save.
+5. Use the credential manager name (Contoso in this example) in your `OAuthCredentialManagerConfiguration` setup

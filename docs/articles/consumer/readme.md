@@ -78,6 +78,9 @@ In above sample the following configuration file is used: `appsettings.demo.json
 }
 ```
 
+> [!Note]
+> To learn more about how to setup authentication check the [Configuring authentication](configuring%20authentication.md) article.
+
 ## Obtaining a PnPContext
 
 ```csharp
