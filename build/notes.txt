@@ -1,8 +1,14 @@
 
 
 Useful dotnet commands:
-dotnet build ..\src\sdk\PnP.Core\PnP.Core.csproj --verbosity n
-dotnet test ..\src\sdk\PnP.Core.Test\PnP.Core.Test.csproj --verbosity n
+dotnet build ..\src\sdk\PnP.Core\PnP.Core.csproj --verbosity n --version-suffix preview1
+
+dotnet build ..\src\sdk\PnP.Core\PnP.Core.csproj --verbosity n /p:Version=0.1.2005.1-preview1
+
+dotnet build ..\src\sdk\PnP.Core\PnP.Core.csproj --no-incremental /p:Version=0.1.2005.1-preview1
+
+dotnet test ..\src\sdk\PnP.Core.Test\PnP.Core.Test.csproj --verbosity n --version-suffix preview1
+dotnet pack ..\src\sdk\PnP.Core\PnP.Core.csproj --include-symbols --verbosity n --version-suffix preview1
 dotnet pack ..\src\sdk\PnP.Core\PnP.Core.csproj --include-symbols --verbosity n --version-suffix preview1
 
 

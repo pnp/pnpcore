@@ -4,8 +4,6 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>PnP.Core</RootNamespace>
     <AssemblyName>PnP.Core</AssemblyName>
-    <AssemblyVersion>0.1.2005.0</AssemblyVersion>
-    <Version>0.1.2005.0-preview1</Version>
 	<InformationalVersion>Preview 1 package</InformationalVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>PnP 2020</Copyright>
