@@ -80,6 +80,14 @@
 <h1 id="getting-started-with-the-pnp-core-sdk">Getting started with the PnP Core SDK</h1>
 
 <p>The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection (<a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1">generic host</a>) for it's core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a <code>PnPContext</code> from the <code>PnPContextFactory</code>and start using the library.</p>
+<h2 id="where-is-the-code">Where is the code?</h2>
+<p>The PnP Core SDK is maintained in the PnP GitHub organization: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>. You'll find:</p>
+<ul>
+<li>The code of the PnP Core SDK in the <code>src\sdk</code> folder</li>
+<li>Examples of how to use the PnP Core SDK in the <code>src\samples</code> folder</li>
+</ul>
+<h2 id="referencing-the-pnp-core-sdk-in-your-project">Referencing the PnP Core SDK in your project</h2>
+<p>At this point the PnP Core SDK has not yet been published as a nuget package, so you'll need to reference the SDK as DLL in your solution. You can build the <code>PnP.Core</code> solution and reference the DLL from the projects build output (e.g. <code>src\sdk\PnP.Core\bin\Debug\netstandard2.1\PnP.Core.dll</code>) or alternatively include the PnP Core project (<code>src\PnP.Core\PnP.Core.csproj</code>) in your project as a dependency. The latter approach does make it really easy for you to debug PnP Core when you're writing code.</p>
 <h2 id="configuring-the-needed-services">Configuring the needed services</h2>
 <p>Below snippet shows how to configure the needed services in a .Net Core console app: it's required to add and configure the <code>AuthenticationProviderFactory</code> and <code>PnPContextFactory</code> services. Typically you would also include configuration and logging as well.</p>
 <pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
@@ -105,8 +113,8 @@
         {
             Name = &quot;CredentialManagerAuthentication&quot;,
             CredentialManagerName = customSettings.CredentialManager,
-            // You can optionally provide a custom ClientId, or the SDK will use a default one 
-            ClientId = customSettings.ClientId, 
+            // You can optionally provide a custom ClientId, or the SDK will use a default one
+            ClientId = customSettings.ClientId,
         });
         // Username + Pwd provider
         options.Configurations.Add(new OAuthUsernamePasswordConfiguration
@@ -114,6 +122,8 @@
             Name = &quot;UsernameAndPasswordAuthentication&quot;,
             Username = customSettings.UserPrincipalName,
             Password = customSettings.Password.ToSecureString(),
+            // You can optionally provide a custom ClientId, or the SDK will use a default one
+            ClientId = customSettings.ClientId,
         });
         // Set default provider
         options.DefaultConfiguration = &quot;CredentialManagerAuthentication&quot;;
