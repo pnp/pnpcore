@@ -23,6 +23,10 @@ jobs:
     - name: Build
       run:  dotnet build --configuration debug --no-restore --verbosity normal
       working-directory: src/sdk
+    - uses: finnp/create-file-action@1.0.0
+      env:
+        FILE_NAME: "src/sdk/PnP.Core.Tests/env.txt"
+        FILE_DATA: "mine"      
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       working-directory: src/sdk
