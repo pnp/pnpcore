@@ -3,15 +3,15 @@ using System.Diagnostics;
 
 namespace PnP.Core
 {
-    public static class Shell
+    internal static class Shell
     {
-        public static List<string> Bash(string cmd)
+        internal static List<string> Bash(string cmd)
         {
             var result = Run("/bin/bash", $@"-c ""{cmd}""");
             return result;
         }
 
-        public static List<string> Bat(string cmd)
+        internal static List<string> Bat(string cmd)
         {
             var escapedArgs = cmd.Replace("\"", "\\\"");
             var result = Run("cmd.exe", $@"/c ""{escapedArgs}""");

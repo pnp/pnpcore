@@ -8,7 +8,7 @@ namespace PnP.Core
     /// <summary>
     /// Extensions class that support certificate based encryption/decryption and SecureString protection
     /// </summary>
-    public static class SecurityExtensions
+    internal static class SecurityExtensions
     {
 
         /// <summary>
@@ -17,10 +17,8 @@ namespace PnP.Core
         /// <param name="stringToEncrypt">Text to encrypt</param>
         /// <param name="thumbPrint">Thumbprint of the certificate to use</param>
         /// <returns>Encrypted text</returns>
-        public static string Encrypt(this string stringToEncrypt, string thumbPrint)
+        internal static string Encrypt(this string stringToEncrypt, string thumbPrint)
         {
-            string encryptedString = string.Empty;
-
             X509Certificate2 certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, thumbPrint);
 
             if (certificate == null)
@@ -40,8 +38,7 @@ namespace PnP.Core
                 return string.Empty;
             }
 
-            encryptedString = Convert.ToBase64String(encrypted);
-
+            string encryptedString = Convert.ToBase64String(encrypted);
             return encryptedString;
         }
 
@@ -51,10 +48,8 @@ namespace PnP.Core
         /// <param name="stringToDecrypt">Text to decrypt</param>
         /// <param name="thumbPrint">Thumbprint of the certificate to use</param>
         /// <returns>Decrypted text</returns>
-        public static string Decrypt(this string stringToDecrypt, string thumbPrint)
+        internal static string Decrypt(this string stringToDecrypt, string thumbPrint)
         {
-            string decryptedString = string.Empty;
-
             X509Certificate2 certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, thumbPrint);
 
             if (certificate == null)
@@ -75,8 +70,7 @@ namespace PnP.Core
                 return string.Empty;
             }
 
-            decryptedString = Encoding.UTF8.GetString(decrypted);
-
+            string decryptedString = Encoding.UTF8.GetString(decrypted);
             return decryptedString;
         }
 
@@ -85,7 +79,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="input">String to convert</param>
         /// <returns>SecureString representation of the passed in string</returns>
-        public static SecureString ToSecureString(this string input)
+        internal static SecureString ToSecureString(this string input)
         {
             if (string.IsNullOrEmpty(input))
                 throw new ArgumentException("Input string is empty and cannot be made into a SecureString", nameof(input));
@@ -104,7 +98,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="input">SecureString to convert</param>
         /// <returns>A "regular" string representation of the passed SecureString</returns>
-        public static string ToInsecureString(this SecureString input)
+        internal static string ToInsecureString(this SecureString input)
         {
             string returnValue = string.Empty;
             IntPtr ptr = System.Runtime.InteropServices.Marshal.SecureStringToBSTR(input);

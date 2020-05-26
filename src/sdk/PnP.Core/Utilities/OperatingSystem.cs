@@ -2,12 +2,12 @@ using System.Runtime.InteropServices;
 
 namespace PnP.Core
 {
-    public static class OperatingSystem
+    internal static class OperatingSystem
     {
-        public static bool IsWindows() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        internal static bool IsWindows() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-        public static bool IsMacOS() => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+        internal static bool IsMacOS() => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 
-        public static bool IsLinux() => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+        internal static bool IsLinux() => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
     }
 }

@@ -8,9 +8,9 @@ using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
 namespace PnP.Core
 {
-    public static class CredentialManager
+    internal static class CredentialManager
     {
-        public static bool AddCredential(string name, string username, SecureString password, bool overwrite)
+        internal static bool AddCredential(string name, string username, SecureString password, bool overwrite)
         {
             if (OperatingSystem.IsWindows())
             {
@@ -23,7 +23,7 @@ namespace PnP.Core
             return true;
         }
 
-        public static bool AddCredential(string name, string username, string password, bool overwrite)
+        internal static bool AddCredential(string name, string username, string password, bool overwrite)
         {
             var securePassword = StringToSecureString(password);
             if (OperatingSystem.IsWindows())
@@ -37,7 +37,7 @@ namespace PnP.Core
             return true;
         }
 
-        public static NetworkCredential GetCredential(string name)
+        internal static NetworkCredential GetCredential(string name)
         {
             if (OperatingSystem.IsWindows())
             {
@@ -199,7 +199,7 @@ namespace PnP.Core
 
         #region UNMANAGED
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-        public struct NativeCredential
+        internal struct NativeCredential
         {
             public UInt32 Flags;
             public CRED_TYPE Type;
@@ -232,7 +232,7 @@ namespace PnP.Core
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-        public struct Credential
+        internal struct Credential
         {
             public UInt32 Flags;
             public CRED_TYPE Type;
@@ -248,7 +248,7 @@ namespace PnP.Core
             public string UserName;
         }
 
-        public enum CRED_PERSIST : uint
+        internal enum CRED_PERSIST : uint
         {
 #pragma warning disable CA1712
             CRED_PERSIST_SESSION = 1,
@@ -257,7 +257,7 @@ namespace PnP.Core
             CRED_PERSIST_ENTERPRISE = 3
 #pragma warning restore
         }
-        public enum CRED_TYPE : uint
+        internal enum CRED_TYPE : uint
         {
             GENERIC = 1,
             DOMAIN_PASSWORD = 2,
@@ -269,7 +269,7 @@ namespace PnP.Core
             MAXIMUM_EX = (MAXIMUM + 1000),  // Allow new applications to run on old OSes
         }
 
-        public class CriticalCredentialHandle : CriticalHandleZeroOrMinusOneIsInvalid
+        internal class CriticalCredentialHandle : CriticalHandleZeroOrMinusOneIsInvalid
         {
             public CriticalCredentialHandle(IntPtr preexistingHandle)
             {

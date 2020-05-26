@@ -7,7 +7,7 @@ namespace PnP.Core
     /// <summary>
     /// Supporting class for certificate based operations
     /// </summary>
-    public static class X509CertificateUtility
+    internal static class X509CertificateUtility
     {
         /// <summary>
         /// Loads a certificate from a given certificate store
@@ -47,7 +47,7 @@ namespace PnP.Core
         /// <param name="fOAEP"> true to perform direct System.Security.Cryptography.RSA decryption using OAEP padding</param>
         /// <param name="certificate">Certificate to use</param>
         /// <returns>Encrypted bytes</returns>
-        public static byte[] Encrypt(byte[] plainData, bool fOAEP, X509Certificate2 certificate)
+        internal static byte[] Encrypt(byte[] plainData, bool fOAEP, X509Certificate2 certificate)
         {
             if (plainData == null)
             {
@@ -75,7 +75,7 @@ namespace PnP.Core
         /// <param name="fOAEP"> true to perform direct System.Security.Cryptography.RSA decryption using OAEP padding</param>
         /// <param name="certificate">Certificate to use</param>
         /// <returns>Decrypted bytes</returns>
-        public static byte[] Decrypt(byte[] encryptedData, bool fOAEP, X509Certificate2 certificate)
+        internal static byte[] Decrypt(byte[] encryptedData, bool fOAEP, X509Certificate2 certificate)
         {
             if (encryptedData == null)
             {
@@ -99,7 +99,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="certificate">Certificate to operate on</param>
         /// <returns>Public key of the certificate</returns>
-        public static string GetPublicKey(X509Certificate2 certificate)
+        internal static string GetPublicKey(X509Certificate2 certificate)
         {
             if (certificate == null)
             {
