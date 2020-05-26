@@ -1,4 +1,4 @@
-name: .NET Core
+name: Build and test
 
 on:
   push:
@@ -20,6 +20,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run:  dotnet build ..\..\src\sdk\PnP.Core.sln --configuration debug --no-restore --verbosity normal
+      run:  dotnet build ../../src/sdk/PnP.Core.sln --configuration debug --no-restore --verbosity normal
     - name: Test
-      run: dotnet test ..\..\src\sdk\PnP.Core.sln --no-restore --verbosity normal
+      run: dotnet test ../../src/sdk/PnP.Core.sln --no-restore --verbosity normal
