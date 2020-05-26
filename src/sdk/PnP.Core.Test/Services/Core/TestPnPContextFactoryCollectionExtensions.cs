@@ -1,6 +1,7 @@
 ﻿using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.DependencyInjection;
 using PnP.Core.Services;
+using PnP.Core.Test.Utilities;
 using System;
 
 namespace PnP.Core.Test.Services
@@ -68,7 +69,7 @@ namespace PnP.Core.Test.Services
             // See https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/WorkerServiceSampleWithApplicationInsights as example
             return collection.AddApplicationInsightsTelemetryWorkerService(options =>
             {
-                if (!settingsService.DisableTelemetry)
+                if (!settingsService.DisableTelemetry && !TestCommon.RunningInGitHubWorkflow())
                 {
                         // Test AppInsights
                         options.InstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";

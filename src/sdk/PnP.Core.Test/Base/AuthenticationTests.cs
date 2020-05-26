@@ -22,7 +22,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task TestGraphAccessToken()
         {
-            if (TestCommon.RunningInGithubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
@@ -38,7 +38,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task TestSPOAccessToken()
         {
-            if (TestCommon.RunningInGithubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))

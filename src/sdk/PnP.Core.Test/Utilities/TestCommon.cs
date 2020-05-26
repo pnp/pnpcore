@@ -117,7 +117,7 @@ namespace PnP.Core.Test.Utilities
                 string targetSubSiteUrl = configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl");
                 string noGroupSiteUrl = configuration.GetValue<string>("CustomSettings:NoGroupSiteUrl");
 
-                if (RunningInGithubWorkflow())
+                if (RunningInGitHubWorkflow())
                 {
                     targetSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1";
                     targetSubSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1/testsub1";
@@ -194,7 +194,7 @@ namespace PnP.Core.Test.Utilities
         private static string LoadTestEnvironment()
         {
             // Detect if we're running in a github workflow            
-            if (RunningInGithubWorkflow())
+            if (RunningInGitHubWorkflow())
             {
                 return "ci";
             }
@@ -215,7 +215,7 @@ namespace PnP.Core.Test.Utilities
         }
 
 
-        internal static bool RunningInGithubWorkflow()
+        internal static bool RunningInGitHubWorkflow()
         {
             var runningInCI = Environment.GetEnvironmentVariable("CI");
             if (!string.IsNullOrEmpty(runningInCI))
