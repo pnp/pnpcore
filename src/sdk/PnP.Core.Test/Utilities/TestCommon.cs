@@ -112,57 +112,69 @@ namespace PnP.Core.Test.Utilities
                 .AddEnvironmentVariables()
                 .Build();
 
-                var serviceProvider = new ServiceCollection()
-                    // Configuration
-                    .AddScoped<IConfiguration>(_ => configuration)
-                    // Logging service, get config from appsettings + add debug output handler
-                    .AddLogging(configure =>
-                    {
-                        configure.AddConfiguration(configuration.GetSection("Logging"));
-                        configure.AddDebug();
-                    })
-                    // Authentication provider factory
-                    .AddAuthenticationProviderFactory(options =>
-                    {
-                        options.Configurations.Add(new OAuthCredentialManagerConfiguration
-                        {
-                            Name = "CredentialManagerAuthentication",
-                            CredentialManagerName = configuration.GetValue<string>("CustomSettings:CredentialManager"),
-                            ClientId = configuration.GetValue<string>("CustomSettings:ClientId"),
-                        });
 
-                        options.DefaultConfiguration = "CredentialManagerAuthentication";
-                    })
-                    // PnP Context factory
-                    .AddTestPnPContextFactory(options =>
-                    {
-                        options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                        {
-                            Name = TestSite,
-                            SiteUrl = new Uri(configuration.GetValue<string>("CustomSettings:TargetSiteUrl")),
-                            AuthenticationProviderName = "CredentialManagerAuthentication",
-                        });
-                        options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                        {
-                            Name = TestSubSite,
-                            SiteUrl = new Uri(configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl")),
-                            AuthenticationProviderName = "CredentialManagerAuthentication",
-                        });
-                        options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                        {
-                            Name = NoGroupTestSite,
-                            SiteUrl = new Uri(configuration.GetValue<string>("CustomSettings:NoGroupSiteUrl")),
-                            AuthenticationProviderName = "CredentialManagerAuthentication",
-                        });
-                    })
-                    .BuildServiceProvider();
+                string targetSiteUrl = configuration.GetValue<string>("CustomSettings:TargetSiteUrl");
+                string targetSubSiteUrl = configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl");
+                string noGroupSiteUrl = configuration.GetValue<string>("CustomSettings:NoGroupSiteUrl");
+
+                if (RunningInGithubWorkflow())
+                {
+                    targetSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1";
+                    targetSubSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1/testsub1";
+                    noGroupSiteUrl = "https://bertonline.sharepoint.com/sites/modern";
+                }
+
+                var serviceProvider = new ServiceCollection()
+                   // Configuration
+                   .AddScoped<IConfiguration>(_ => configuration)
+                   // Logging service, get config from appsettings + add debug output handler
+                   .AddLogging(configure =>
+                   {
+                       configure.AddConfiguration(configuration.GetSection("Logging"));
+                       configure.AddDebug();
+                   })
+                   // Authentication provider factory
+                   .AddAuthenticationProviderFactory(options =>
+                   {
+                       options.Configurations.Add(new OAuthCredentialManagerConfiguration
+                       {
+                           Name = "CredentialManagerAuthentication",
+                           CredentialManagerName = configuration.GetValue<string>("CustomSettings:CredentialManager"),
+                           ClientId = configuration.GetValue<string>("CustomSettings:ClientId"),
+                       });
+
+                       options.DefaultConfiguration = "CredentialManagerAuthentication";
+                   })
+                   // PnP Context factory
+                   .AddTestPnPContextFactory(options =>
+                   {
+                       options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
+                       {
+                           Name = TestSite,
+                           SiteUrl = new Uri(targetSiteUrl),
+                           AuthenticationProviderName = "CredentialManagerAuthentication",
+                       });
+                       options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
+                       {
+                           Name = TestSubSite,
+                           SiteUrl = new Uri(targetSubSiteUrl),
+                           AuthenticationProviderName = "CredentialManagerAuthentication",
+                       });
+                       options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
+                       {
+                           Name = NoGroupTestSite,
+                           SiteUrl = new Uri(noGroupSiteUrl),
+                           AuthenticationProviderName = "CredentialManagerAuthentication",
+                       });
+                   })
+                   .BuildServiceProvider();
 
                 TestUris = new Dictionary<string, Uri>
-            {
-                { TestSite, new Uri(configuration.GetValue<string>("CustomSettings:TargetSiteUrl")) },
-                { TestSubSite, new Uri(configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl")) },
-                { NoGroupTestSite, new Uri(configuration.GetValue<string>("CustomSettings:NoGroupSiteUrl")) }
-            };
+                {
+                    { TestSite, new Uri(targetSiteUrl) },
+                    { TestSubSite, new Uri(targetSubSiteUrl) },
+                    { NoGroupTestSite, new Uri(noGroupSiteUrl) }
+                };
 
                 var pnpContextFactory = serviceProvider.GetRequiredService<IPnPContextFactory>();
 

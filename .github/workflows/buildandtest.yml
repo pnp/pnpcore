@@ -23,9 +23,6 @@ jobs:
     - name: Build
       run:  dotnet build --configuration debug --no-restore --verbosity normal
       working-directory: src/sdk   
-    - name: Create env file
-      run: cp env.sample env.txt
-      working-directory: src/sdk/PnP.Core.Test
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       working-directory: src/sdk
