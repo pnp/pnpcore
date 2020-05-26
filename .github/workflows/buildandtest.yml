@@ -20,6 +20,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Debug --no-restore
+      run:  dotnet build ..\..\src\sdk\PnP.Core.sln --configuration debug --no-restore --verbosity normal
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ..\..\src\sdk\PnP.Core.sln --no-restore --verbosity normal
