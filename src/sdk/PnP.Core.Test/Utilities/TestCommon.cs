@@ -184,7 +184,7 @@ namespace PnP.Core.Test.Utilities
             // Detect if we're running in a github workflow            
             if (RunningInGithubWorkflow())
             {
-                return "mine";
+                return "ci";
             }
             else
             {
