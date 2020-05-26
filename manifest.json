@@ -1561,6 +1561,21 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "articles/contributor/extending the model.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/contributor/extending the model.html",
+          "hash": "OWXG9crofCZMS6OQL+1hrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "articles/contributor/model tokens.md",
       "output": {
@@ -1629,7 +1644,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "qPNabxe/Utl4KAkZZTKz5Q=="
+          "hash": "hFubAZwIdxqbgGsZKgpuqg=="
         }
       },
       "is_incremental": false,
@@ -1739,14 +1754,14 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 14,
+          "total_file_count": 15,
           "skipped_file_count": 14
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 121,
-          "skipped_file_count": 119
+          "skipped_file_count": 64
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

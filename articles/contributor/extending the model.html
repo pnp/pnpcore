@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Extending the model - step by step guidance | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Extending the model - step by step guidance | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.52.0.0">
+    
+    <link rel="shortcut icon" href="../../https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="extending-the-model---step-by-step-guidance">Extending the model - step by step guidance</h1>
+
+<p>Extending the model is a very common type of work, especially in the early days of this SDK. This page will walk you through the needed steps, but before engaging it's recommended that you've read this article: <a href="contributor/readme.md">The PnP Core SDK model</a>.</p>
+<h2 id="step-1-define-the-public-model">Step 1: Define the public model</h2>
+<h3 id="step-11-create-the-interfaces">Step 1.1: Create the interface(s)</h3>
+<p>The public model is an interface and lives in the <strong>Public</strong> folder. So when extending the SharePoint model you would create the new interface in for example <code>Model\SharePoint\Core\Public</code> or in <code>Model\SharePoint\Navigation\Public</code>. If you feel there's a need to add a new sub level (e.g. Core, Navigation, etc) then you can do that. Key things to check are:</p>
+<ul>
+<li>Your interface(s) are in the <code>Public</code> folder</li>
+<li>Your interface(s) are public (e.g. <code>public interface IWeb</code>) and follow the standard interface naming convention (so starting with an I)</li>
+<li>Your interface(s) implement the needed base interfaces (see <a href="contributor/readme.md">The PnP Core SDK model</a> for more details). At a minimum a model class implements the <code>IDataModel&lt;&gt;</code> interface and a collection implements the <code>IDataModelCollection&lt;&gt;</code> interface</li>
+<li>Your interface(s) namespace is reflects the top level model folder (e.g. all SharePoint interfaces live in the <code>PnP.Core.Model.SharePoint</code> namespace)</li>
+<li>Your interface(s) have tripple slash comments explaining their purpose</li>
+</ul>
+<h3 id="step-12-add-the-properties">Step 1.2: Add the properties</h3>
+<p>Once the interface is created you need to add properties to it, the properties you want to add are quite often inspired by what the called API's return. So if the API you plan to call to populate this model returns a string field with name FieldA you would want to add a property for it: <code>public string FieldA { get; set; }</code>. Key things to check are:</p>
+<ul>
+<li>The added properties are public properties</li>
+<li>The added properties have a getter and a setter, unless the property is model collection (e.g. <code>public IListCollection Lists { get; }</code> in <code>IWeb.cs</code>)</li>
+<li>The properties are simple .Net types, enums (see below), complex types or collections of already defined model classes or complex types. See (see <a href="contributor/readme.md">The PnP Core SDK model</a>) for more details</li>
+<li>Properties have tripple slash comments explaining their purpose</li>
+</ul>
+<h2 id="step-2-define-the-internal-model">Step 2: Define the internal model</h2>
+<p>Once you've defined the public interface the next step is defining the internal classes that implement the created interface(s). These internal classes live at the same level as your interface classes but then in the <code>Internal</code> folder instead of the <code>Public</code> folder. So if the interface lives in the <code>Model\SharePoint\Core\Public</code> folder then the respective internal class lives in the <code>Model\SharePoint\Core\Internal</code> folder.</p>
+<p>At this moment the internal classes are split into 2 partial classes: there's a <code>model.cs</code> and a <code>model.gen.cs</code> class. Overtime we might opt to combine these classes into a single class, but for now it's recommended to implement 2 classes.</p>
+<h3 id="step-21-create-the-modelgencs-class">Step 2.1: Create the model.gen.cs class</h3>
+<p>The <code>model.gen.cs</code> class contains the code that in the future could be generated, which are the properties. Key things to check are:</p>
+<ul>
+<li>It's an internal partial class, e.g. <code>internal partial class Web</code></li>
+<li>The class name is aligned to the interface name (e.g. <code>IWeb</code> and <code>Web</code>)</li>
+<li>The namespace is the same as the one used for the interface</li>
+<li>The class implements the needed base classes and interfaces:
+<ul>
+<li>A model class typically implements <code>BaseDataModel&lt;Interface&gt;</code> and the public <code>Interface</code></li>
+<li>A collection class <code>BaseDataModelCollection&lt;Interface&gt;</code> and the public <code>Collection Interface</code></li>
+</ul>
+</li>
+<li>The used interface needs to be implemented, which means all the properties defined in the interface will be added:
+<ul>
+<li>Properties are public</li>
+<li>Properties use the <code>GetValue&lt;&gt;</code> base class method for getting</li>
+<li>Properties use the <code>SetValue</code> base class method for setting</li>
+<li>Collection properties have specific get implementations, check <a href="contributor/readme.md">The PnP Core SDK model</a>) for more details</li>
+</ul>
+</li>
+</ul>
+<h3 id="step-22-create-the-modelcs-class">Step 2.2: Create the model.cs class</h3>
+<p>The <code>model.cs</code> contains the <strong>custom</strong> code, so code that could not be generated. Key things to check are:</p>
+<ul>
+<li>It's an internal partial class, e.g. <code>internal partial class Web</code></li>
+<li>The class name is aligned to the interface name (e.g. <code>IWeb</code> and <code>Web</code>)</li>
+<li>The namespace is the same as the one used for the interface</li>
+</ul>
+<h2 id="step-3-decorate-the-model-to-enable-createreadupdatedelete-functionality">Step 3: Decorate the model to enable create/read/update/delete functionality</h2>
+<p>With step 1 and 2 done you've a model definition, but there's no behaviour yet. To bring the model to live you'll need to <strong>decorate</strong> it with class and property attributes. Depending on whether you're targeting SharePoint REST API's or Microsoft Graph API's you would use different attributes to decorate the model:</p>
+<ul>
+<li><a href="contributor/extending%20the%20model%20-%20SharePoint%20REST.md">Decorating the model for SharePoint REST API's</a></li>
+<li><a href="contributor/extending%20the%20model%20-%20Microsoft%20Graph.md">Decorating the model for Microsoft Graph API's</a></li>
+</ul>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>If you're extending the SharePoint model and there's both a Microsoft Graph and a SharePoint REST API available then start with implementing the model using SharePoint REST. Once that works you can add additional Microsoft Graph based decoration.</p>
+</div>
+<h2 id="step-4-add-additional-functionality">Step 4: Add additional functionality</h2>
+<p>At this point you should have a working model that can be used to read data and depending on the implementation also supports adding, updating and deleting. The power of the SDK however will not just be the model, but also the &quot;rich&quot; extensions on top of it. The extensions can be implemented as methods on the model, e.g. you could imagine a <code>UploadFile</code> method on the <code>ITeamChannel</code> model.</p>
+<h2 id="step-5-write-test-cases">Step 5: Write test cases</h2>
+<p>Quality is key aspect of this library and test cases do help to guarantee quality. See the <a href="contributor/writing%20tests.md">Writing test cases</a> article to learn more about how to do that.</p>
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/contributor/extending the model.md/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            PnP Core SDK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
