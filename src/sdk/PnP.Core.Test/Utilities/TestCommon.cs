@@ -181,18 +181,39 @@ namespace PnP.Core.Test.Utilities
 
         private static string LoadTestEnvironment()
         {
-            string testEnvironmentFile = "..\\..\\..\\env.txt";
-            if (File.Exists(testEnvironmentFile))
+            // Detect if we're running in a github workflow            
+            if (RunningInGithubWorkflow())
             {
-                string content = File.ReadAllText(testEnvironmentFile);
-                if (!string.IsNullOrEmpty(content))
-                {
-                    return content.Trim();
-                }
+                return "mine";
             }
+            else
+            {
+                string testEnvironmentFile = "..\\..\\..\\env.txt";
+                if (File.Exists(testEnvironmentFile))
+                {
+                    string content = File.ReadAllText(testEnvironmentFile);
+                    if (!string.IsNullOrEmpty(content))
+                    {
+                        return content.Trim();
+                    }
+                }
 
-            return null;
+                return null;
+            }
         }
 
+
+        internal static bool RunningInGithubWorkflow()
+        {
+            var runningInCI = Environment.GetEnvironmentVariable("CI");
+            if (!string.IsNullOrEmpty(runningInCI))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
