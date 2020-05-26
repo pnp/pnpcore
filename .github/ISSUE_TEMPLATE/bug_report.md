@@ -1,38 +1,47 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: Bug/Error report
+about: Submit a bug or error report.
 title: ''
 labels: Needs triage
 assignees: ''
 
 ---
+## Category
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+- [x] Bug
 
-**To Reproduce**
-Steps to reproduce the behavior:
+## Describe the bug
+
+> **DELETE THIS LINE BEFORE SUBMITTING** - Provide a clear & concise description of what the bug/error is. Use screenshots, code snippets, external links, etc to add clarity.
+
+## Steps to reproduce
+
+> **DELETE THIS LINE BEFORE SUBMITTING** - Provide steps to reproduce the behavior:
+
+1. See code `code...` 
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+1. Click on '....'
+1. Scroll down to '....'
+1. See error
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+## Expected behavior
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+> **DELETE THIS LINE BEFORE SUBMITTING** - Provide clear & concise description of what you expected to happen.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Environment details (*development & target environment*)
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+> **DELETE THIS LINE BEFORE SUBMITTING** - Complete the following (*if ignored you'll be prompted for it before we can address your issue... save the time and provide it in your initial submission*).
 
-**Additional context**
-Add any other context about the problem here.
+- **SDK version**: [e.g. 0.1.2005.0 ]
+- **OS**: [e.g. Windows 10 | MacOS 10.15.x]
+- **SDK used in**: [e.g. Console App | ASP.Net Web app | Blazor WebAssembly]
+- **Framework**: [e.g. .NET Framework v3.x | .NET Core v3.x ]
+- **Browser(s)**: [e.g. Chrome v79 | Safari v22 | FireFox v31 | Chromium Edge v79]
+- **Tooling**: [e.g. VS Code | Visual Studio 2019]
+- **Additional details**: *The more context you can provide, the easier it is (and therefore quicker) to help.*
+
+### Additional context
+
+> **DELETE THIS LINE BEFORE SUBMITTING** - Provide any other context about the problem.
+
+*Thanks for your contribution! Sharing is caring.*

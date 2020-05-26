@@ -6,15 +6,18 @@ labels: Needs triage
 assignees: ''
 
 ---
+## Category
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+- [x] Feature request
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## Describe the feature
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+> **DELETE THIS LINE BEFORE SUBMITTING** - Provide a clear & concise description of what the feauture should do. Use screenshots, code snippets, external links, etc to add clarity.
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## Describe the solution you'd like
+
+> **DELETE THIS LINE BEFORE SUBMITTING** - Provide a clear & concise description of what you want to happen. Use screenshots, code snippets, external links, etc to add clarity.
+
+## Additional context
+
+> **DELETE THIS LINE BEFORE SUBMITTING** - Add any other context or screenshots about the feature request here.
