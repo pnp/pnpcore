@@ -22,5 +22,7 @@ jobs:
       working-directory: src/sdk
     - name: Build
       run:  dotnet build --configuration debug --no-restore --verbosity normal
+      working-directory: src/sdk
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      working-directory: src/sdk
