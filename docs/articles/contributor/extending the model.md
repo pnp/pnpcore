@@ -1,6 +1,6 @@
 # Extending the model - step by step guidance
 
-Extending the model is a very common type of work, especially in the early days of this SDK. This page will walk you through the needed steps, but before engaging it's recommended that you've read this article: [The PnP Core SDK model](contributor/readme.md).
+Extending the model is a very common type of work, especially in the early days of this SDK. This page will walk you through the needed steps, but before engaging it's recommended that you've read this article: [The PnP Core SDK model](readme.md).
 
 ## Step 1: Define the public model
 
@@ -10,7 +10,7 @@ The public model is an interface and lives in the **Public** folder. So when ext
 
 - Your interface(s) are in the `Public` folder
 - Your interface(s) are public (e.g. `public interface IWeb`) and follow the standard interface naming convention (so starting with an I)
-- Your interface(s) implement the needed base interfaces (see [The PnP Core SDK model](contributor/readme.md) for more details). At a minimum a model class implements the `IDataModel<>` interface and a collection implements the `IDataModelCollection<>` interface
+- Your interface(s) implement the needed base interfaces (see [The PnP Core SDK model](readme.md) for more details). At a minimum a model class implements the `IDataModel<>` interface and a collection implements the `IDataModelCollection<>` interface
 - Your interface(s) namespace is reflects the top level model folder (e.g. all SharePoint interfaces live in the `PnP.Core.Model.SharePoint` namespace)
 - Your interface(s) have tripple slash comments explaining their purpose
 
@@ -20,7 +20,7 @@ Once the interface is created you need to add properties to it, the properties y
 
 - The added properties are public properties
 - The added properties have a getter and a setter, unless the property is model collection (e.g. `public IListCollection Lists { get; }` in `IWeb.cs`)
-- The properties are simple .Net types, enums (see below), complex types or collections of already defined model classes or complex types. See (see [The PnP Core SDK model](contributor/readme.md)) for more details
+- The properties are simple .Net types, enums (see below), complex types or collections of already defined model classes or complex types. See (see [The PnP Core SDK model](readme.md)) for more details
 - Properties have tripple slash comments explaining their purpose
 
 ## Step 2: Define the internal model
@@ -43,7 +43,7 @@ The `model.gen.cs` class contains the code that in the future could be generated
   - Properties are public
   - Properties use the `GetValue<>` base class method for getting
   - Properties use the `SetValue` base class method for setting
-  - Collection properties have specific get implementations, check [The PnP Core SDK model](contributor/readme.md)) for more details
+  - Collection properties have specific get implementations, check [The PnP Core SDK model](readme.md)) for more details
 
 ### Step 2.2: Create the model.cs class
 
@@ -57,8 +57,8 @@ The `model.cs` contains the **custom** code, so code that could not be generated
 
 With step 1 and 2 done you've a model definition, but there's no behaviour yet. To bring the model to live you'll need to **decorate** it with class and property attributes. Depending on whether you're targeting SharePoint REST API's or Microsoft Graph API's you would use different attributes to decorate the model:
 
-- [Decorating the model for SharePoint REST API's](contributor/extending%20the%20model%20-%20SharePoint%20REST.md)
-- [Decorating the model for Microsoft Graph API's](contributor/extending%20the%20model%20-%20Microsoft%20Graph.md)
+- [Decorating the model for SharePoint REST API's](extending%20the%20model%20-%20SharePoint%20REST.md)
+- [Decorating the model for Microsoft Graph API's](extending%20the%20model%20-%20Microsoft%20Graph.md)
 
 > [!Important]
 > If you're extending the SharePoint model and there's both a Microsoft Graph and a SharePoint REST API available then start with implementing the model using SharePoint REST. Once that works you can add additional Microsoft Graph based decoration.
@@ -69,4 +69,4 @@ At this point you should have a working model that can be used to read data and 
 
 ## Step 5: Write test cases
 
-Quality is key aspect of this library and test cases do help to guarantee quality. See the [Writing test cases](contributor/writing%20tests.md) article to learn more about how to do that.
+Quality is key aspect of this library and test cases do help to guarantee quality. See the [Writing test cases](writing%20tests.md) article to learn more about how to do that.
