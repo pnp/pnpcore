@@ -19,7 +19,8 @@ jobs:
         dotnet-version: 3.1.101
     - name: Install dependencies
       run: dotnet restore
+      working-directory: src/sdk
     - name: Build
-      run:  dotnet build ../../src/sdk/PnP.Core.sln --configuration debug --no-restore --verbosity normal
+      run:  dotnet build --configuration debug --no-restore --verbosity normal
     - name: Test
-      run: dotnet test ../../src/sdk/PnP.Core.sln --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal
