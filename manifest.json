@@ -50,78 +50,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.CredentialManager.CRED_PERSIST.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.CredentialManager.CRED_PERSIST.html",
-          "hash": "hciNVSYVLRYmyS7Kz5R8kw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.CredentialManager.CRED_TYPE.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.CredentialManager.CRED_TYPE.html",
-          "hash": "H4QCnz6/E4Vh2h9439wVfg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.CredentialManager.Credential.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.CredentialManager.Credential.html",
-          "hash": "tP1K631Gum19pddw3shwzQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.CredentialManager.CriticalCredentialHandle.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.CredentialManager.CriticalCredentialHandle.html",
-          "hash": "8pAu6bRCJPoN5utmTBKcYQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.CredentialManager.NativeCredential.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.CredentialManager.NativeCredential.html",
-          "hash": "2wdLJbNrj1H6CeBDukB1bA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.CredentialManager.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.CredentialManager.html",
-          "hash": "w4PcXHL1fPPVu+eJpPKikg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.ErrorType.yml",
       "output": {
         ".html": {
@@ -1010,18 +938,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.OperatingSystem.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.OperatingSystem.html",
-          "hash": "6yxItGyrSo1lcDLbnBZykQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.PnPConstants.yml",
       "output": {
         ".html": {
@@ -1171,18 +1087,6 @@
         ".html": {
           "relative_path": "api/PnP.Core.QueryModel.html",
           "hash": "SBUsl39XkqBSbQxLX1zesA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.SecurityExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.SecurityExtensions.html",
-          "hash": "puwt0xifTVhMLxhMjNbIgQ=="
         }
       },
       "is_incremental": false,
@@ -1422,7 +1326,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "nB6v69L9RH9Xm1W7wZ3d5A=="
+          "hash": "peZlgZ7923ZDS0FAUdz/qw=="
         }
       },
       "is_incremental": false,
@@ -1550,35 +1454,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Shell.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Shell.html",
-          "hash": "gvJ7FT6OV29Ti2qgddu/0Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.X509CertificateUtility.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.X509CertificateUtility.html",
-          "hash": "Hic8II7FB87tpqB/oF5NOw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.html",
-          "hash": "tnH9CrawYXixqkCGPI/qtQ=="
+          "hash": "hUa9yk/qmLPheIlxZABagg=="
         }
       },
       "is_incremental": false,
@@ -1602,7 +1482,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "B9QajImg1mF6XnSBLH7e6Q=="
+          "hash": "uCTPr7zLOS3cqRexB7RJ5Q=="
         }
       },
       "is_incremental": false,
@@ -1860,13 +1740,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 14,
-          "skipped_file_count": 0
+          "skipped_file_count": 14
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 131,
-          "skipped_file_count": 131
+          "total_file_count": 121,
+          "skipped_file_count": 119
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
