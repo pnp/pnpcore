@@ -22,11 +22,10 @@ jobs:
       working-directory: src/sdk
     - name: Build
       run:  dotnet build --configuration debug --no-restore --verbosity normal
-      working-directory: src/sdk
-    - uses: finnp/create-file-action@1.0.0
-      env:
-        FILE_NAME: "/home/runner/work/pnpcore/pnpcore/src/sdk/PnP.Core.Test/env.txt"
-        FILE_DATA: "mine"      
+      working-directory: src/sdk   
+    - name: Create env file
+      run: echo -n -e "mine" > env.txt
+      working-directory: src/sdk/PnP.Core.Test
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       working-directory: src/sdk
