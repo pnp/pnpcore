@@ -1561,15 +1561,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/contributor/extending the model.md",
       "output": {
         ".html": {
           "relative_path": "articles/contributor/extending the model.html",
-          "hash": "OWXG9crofCZMS6OQL+1hrA=="
+          "hash": "2RIASgMWd2dn4EUfhekmgA=="
         }
       },
       "is_incremental": false,
@@ -1624,15 +1621,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "articles/intro.md",
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "ohtciEbapvIw56fCM4BBxw=="
+          "hash": "IwBDQyQnW3KQDeK+4IjIiw=="
         }
       },
       "is_incremental": false,
@@ -1761,7 +1755,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 121,
-          "skipped_file_count": 64
+          "skipped_file_count": 121
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
