@@ -54,82 +54,8 @@ namespace PnP.Core.Services
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Public constructor for an SPO context based on target site URL
-        /// </summary>
-        /// <param name="url">The URL of the site as a string</param>
-        /// <param name="logger">Logger instance</param>
-        /// <param name="authenticationProvider">The authentication provider to authenticate against the target site url</param>
-        /// <param name="sharePointRestClient">SharePoint REST HTTP client</param>
-        /// <param name="microsoftGraphClient">Microsoft Graph HTTP client</param>
-        /// <param name="telemetryClient">AppInsights client for telemetry work</param>
-        public PnPContext(string url, ILogger logger,
-                                      IAuthenticationProvider authenticationProvider,
-                                      SharePointRestClient sharePointRestClient,
-                                      MicrosoftGraphClient microsoftGraphClient,
-                                      ISettings settingsClient,
-                                      TelemetryClient telemetryClient) : this(new Uri(url), logger, authenticationProvider, sharePointRestClient, microsoftGraphClient, settingsClient, telemetryClient)
-        {
-        }
-
-        /// <summary>
-        /// Public constructor for an SPO context based on target site URL
-        /// </summary>
-        /// <param name="uri">The URI of the site as a URI</param>
-        /// <param name="logger">Logger instance</param>
-        /// <param name="authenticationProvider">The authentication provider to authenticate against the target site url</param>
-        /// <param name="sharePointRestClient">SharePoint REST HTTP client</param>
-        /// <param name="microsoftGraphClient">Microsoft Graph HTTP client</param>
-        /// <param name="telemetryClient">AppInsights client for telemetry work</param>
-        public PnPContext(Uri uri, ILogger logger,
-                                   IAuthenticationProvider authenticationProvider,
-                                   SharePointRestClient sharePointRestClient,
-                                   MicrosoftGraphClient microsoftGraphClient,
-                                   ISettings settingsClient,
-                                   TelemetryClient telemetryClient): this(logger, authenticationProvider, sharePointRestClient, microsoftGraphClient, settingsClient, telemetryClient)
-        {
-            Uri = uri;
-
-            // Populate the Azure AD tenant id
-            if (settingsClient != null && !settingsClient.DisableTelemetry)
-            {
-                SetAADTenantId();
-            }
-        }
-
-        /// <summary>
-        /// Public constructor for an SPO context based on target site URL
-        /// </summary>
-        /// <param name="groupId">The id of the Office 365 group</param>
-        /// <param name="logger">Logger instance</param>
-        /// <param name="authenticationProvider">The authentication provider to authenticate against the target site url</param>
-        /// <param name="sharePointRestClient">SharePoint REST HTTP client</param>
-        /// <param name="microsoftGraphClient">Microsoft Graph HTTP client</param>
-        /// <param name="telemetryClient">AppInsights client for telemetry work</param>
-        public PnPContext(Guid groupId, ILogger logger,
-                                        IAuthenticationProvider authenticationProvider,
-                                        SharePointRestClient sharePointRestClient,
-                                        MicrosoftGraphClient microsoftGraphClient,
-                                        ISettings settingsClient,
-                                        TelemetryClient telemetryClient) : this(logger, authenticationProvider, sharePointRestClient, microsoftGraphClient, settingsClient, telemetryClient)
-        {
-            // Ensure the group is loaded, given we've received the group id we can populate the metadata of the group model upfront before loading it
-            (Group as Group).Metadata.Add(PnPConstants.MetaDataGraphId, groupId.ToString());
-            // Do the default group load, should load all properties
-            Group.GetAsync().GetAwaiter().GetResult();
-            // If the group has a linked SharePoint site then WebUrl is populated
-            Uri = Group.WebUrl;
-
-            // Populate the Azure AD tenant id
-            if (settingsClient != null && !settingsClient.DisableTelemetry)
-            {
-                SetAADTenantId();
-            }
-        }
-
-        private PnPContext(ILogger logger,
+        #region Constructor
+        internal PnPContext(ILogger logger,
                            IAuthenticationProvider authenticationProvider,
                            SharePointRestClient sharePointRestClient,
                            MicrosoftGraphClient microsoftGraphClient,
@@ -140,7 +66,7 @@ namespace PnP.Core.Services
             Logger = logger;
 
 #if DEBUG
-            Mode = PnPContextMode.Default;
+            Mode = TestMode.Default;
 #endif
             AuthenticationProvider = authenticationProvider;
             RestClient = sharePointRestClient;
@@ -164,7 +90,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Uri of the SharePoint site we're working against
         /// </summary>
-        public Uri Uri { get; private set; }
+        public Uri Uri { get; internal set; }
 
         /// <summary>
         /// Connected logger
@@ -202,7 +128,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Mode this context operates in
         /// </summary>
-        internal PnPContextMode Mode { get; private set; }
+        internal TestMode Mode { get; private set; }
 
         /// <summary>
         /// Id associated to this context in a test case
@@ -401,13 +327,13 @@ namespace PnP.Core.Services
         internal void SetRecordingMode(int id, string testName, string sourceFilePath, bool generateTestMockingDebugFiles, Dictionary<string, Uri> testUris)
         {
             SetTestConfiguration(id, testName, sourceFilePath, generateTestMockingDebugFiles, testUris);
-            Mode = PnPContextMode.Record;
+            Mode = TestMode.Record;
         }
 
         internal void SetMockMode(int id, string testName, string sourceFilePath, bool generateTestMockingDebugFiles, Dictionary<string, Uri> testUris)
         {
             SetTestConfiguration(id, testName, sourceFilePath, generateTestMockingDebugFiles, testUris);
-            Mode = PnPContextMode.Mock;
+            Mode = TestMode.Mock;
         }
 
         private void SetTestConfiguration(int id, string testName, string sourceFilePath, bool generateTestMockingDebugFiles, Dictionary<string, Uri> testUris)
@@ -454,7 +380,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Gets the Azure Active Directory tenant id. Using the client.svc endpoint approach as that one will also work with vanity SharePoint domains
         /// </summary>
-        private void SetAADTenantId()
+        internal void SetAADTenantId()
         {
             if (settings.AADTenantId == Guid.Empty && Uri != null)
             {

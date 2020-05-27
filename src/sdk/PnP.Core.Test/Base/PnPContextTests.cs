@@ -137,8 +137,6 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task CreateContextFromGroupId()
         {
-            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping this because loading a context via an GroupId does trigger a live request");
-
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {

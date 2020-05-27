@@ -298,14 +298,14 @@ namespace PnP.Core.Services
 
 #if DEBUG
                     // Test recording
-                    if (PnPContext.Mode == PnPContextMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                    if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
                     {
                         // Write request
                         TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
                     }
 
                     // If we are not mocking data, or if the mock data is not yet available
-                    if (PnPContext.Mode != PnPContextMode.Mock)
+                    if (PnPContext.Mode != TestMode.Mock)
                     {
 #endif
                         // Ensure the request contains authentication information
@@ -321,7 +321,7 @@ namespace PnP.Core.Services
                             string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 #if DEBUG
-                            if (PnPContext.Mode == PnPContextMode.Record)
+                            if (PnPContext.Mode == TestMode.Record)
                             {
                                 // Write response
                                 TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
@@ -443,7 +443,7 @@ namespace PnP.Core.Services
             StringBuilder batchKey = new StringBuilder();
 
 #if DEBUG
-            if (PnPContext.Mode != PnPContextMode.Default)
+            if (PnPContext.Mode != TestMode.Default)
             {
                 batchKey.Append($"{testUseCounter}@@");
                 testUseCounter++;
@@ -477,7 +477,7 @@ namespace PnP.Core.Services
                 counter++;
 
 #if DEBUG
-                if (PnPContext.Mode != PnPContextMode.Default)
+                if (PnPContext.Mode != TestMode.Default)
                 {
                     batchKey.Append($"{request.Method}|{request.ApiCall.Request}@@");
                 }
@@ -565,14 +565,14 @@ namespace PnP.Core.Services
 
 #if DEBUG
                         // Test recording
-                        if (PnPContext.Mode == PnPContextMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                        if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
                         {
                             // Write request
                             TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
                         }
 
                         // If we are not mocking or if there is no mock data
-                        if (PnPContext.Mode != PnPContextMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
+                        if (PnPContext.Mode != TestMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
                         {
 #endif
                             // Ensure the request contains authentication information
@@ -588,7 +588,7 @@ namespace PnP.Core.Services
                                 string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 #if DEBUG
-                                if (PnPContext.Mode == PnPContextMode.Record)
+                                if (PnPContext.Mode == TestMode.Record)
                                 {
                                     // Write response
                                     TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
@@ -633,7 +633,7 @@ namespace PnP.Core.Services
             StringBuilder batchKey = new StringBuilder();
 
 #if DEBUG
-            if (PnPContext.Mode != PnPContextMode.Default)
+            if (PnPContext.Mode != TestMode.Default)
             {
                 batchKey.Append($"{testUseCounter}@@");
                 testUseCounter++;
@@ -703,7 +703,7 @@ namespace PnP.Core.Services
                 }
 
 #if DEBUG
-                if (PnPContext.Mode != PnPContextMode.Default)
+                if (PnPContext.Mode != TestMode.Default)
                 {
                     batchKey.Append($"{request.Method}|{request.ApiCall.Request}@@");
                 }

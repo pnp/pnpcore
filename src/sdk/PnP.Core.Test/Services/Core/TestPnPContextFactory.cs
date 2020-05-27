@@ -83,22 +83,42 @@ namespace PnP.Core.Test.Services
 
         public override PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider)
         {
-            var context = base.Create(groupId, authenticationProvider);
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+
             ConfigurePnPContextForTesting(ref context);
+
+            ConfigureForGroup(context, groupId);
+
             return context;
         }
 
         public override PnPContext Create(Guid groupId)
         {
-            var context = base.Create(groupId);
+            var context = new PnPContext(Log, AuthenticationProviderFactory.CreateDefault(), SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+
             ConfigurePnPContextForTesting(ref context);
+
+            ConfigureForGroup(context, groupId);
+
             return context;
         }
 
         public override PnPContext Create(Guid groupId, string authenticationProviderName)
         {
-            var context = base.Create(groupId, authenticationProviderName);
+            // Create the Authentication Provider based on the provided configuration
+            var authProvider = AuthenticationProviderFactory.Create(authenticationProviderName);
+            if (authProvider == null)
+            {
+                throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for group '{groupId}' during PnPContext creation!");
+            }
+
+            // Use the provided settings to create a new instance of SPOContext
+            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+
             ConfigurePnPContextForTesting(ref context);
+
+            ConfigureForGroup(context, groupId);
+
             return context;
         }
 

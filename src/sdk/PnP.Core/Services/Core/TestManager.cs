@@ -28,7 +28,7 @@ namespace PnP.Core.Services
         internal static void RecordRequest(PnPContext context, string requestKey, string request)
         {
             // replace possible domain names with something static to ensure the stored test data can be retrieved by other test environments
-            requestKey = GeneralizeRequestKey(requestKey, context);
+            //requestKey = GeneralizeRequestKey(requestKey, context);
 
             string hash = SHA256(requestKey);
             string orderPrefix = GetOrderPrefix(requestKey);
@@ -54,7 +54,7 @@ namespace PnP.Core.Services
         /// <param name="response">Response that came back from the server</param>
         internal static void RecordResponse(PnPContext context, string requestKey, string response)
         {
-            requestKey = GeneralizeRequestKey(requestKey, context);
+            //requestKey = GeneralizeRequestKey(requestKey, context);
             
             string fileName = GetResponseFile(context, SHA256(requestKey), GetOrderPrefix(requestKey));
 
@@ -82,7 +82,7 @@ namespace PnP.Core.Services
         /// <returns>Server response from the mock response</returns>
         internal static string MockResponse(PnPContext context, string requestKey)
         {
-            requestKey = GeneralizeRequestKey(requestKey, context);
+            //requestKey = GeneralizeRequestKey(requestKey, context);
 
             string fileName = GetResponseFile(context, SHA256(requestKey), GetOrderPrefix(requestKey));
 

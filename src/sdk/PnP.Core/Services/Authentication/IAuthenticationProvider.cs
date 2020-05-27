@@ -22,6 +22,12 @@ namespace PnP.Core.Services
         /// <returns>The task to await.</returns>
         Task AuthenticateRequestAsync(Uri resource, HttpRequestMessage request);
 
+        /// <summary>
+        /// Get's an access token for the requested resource and scope
+        /// </summary>
+        /// <param name="resource">Resource to request an access token for</param>
+        /// <param name="scopes">Scopes to request</param>
+        /// <returns>An access token</returns>
         Task<string> GetAccessTokenAsync(Uri resource, String[] scopes);
     }
 }

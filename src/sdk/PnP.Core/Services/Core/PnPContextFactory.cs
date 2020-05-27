@@ -1,6 +1,7 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PnP.Core.Model.AzureActiveDirectory;
 using System;
 using System.Linq;
 
@@ -11,15 +12,6 @@ namespace PnP.Core.Services
     /// </summary>
     public class PnPContextFactory : IPnPContextFactory
     {
-        private readonly PnPContextFactoryOptions options;
-        private readonly ILogger log;
-
-        private readonly IAuthenticationProviderFactory authProviderFactory;
-        private readonly SharePointRestClient restClient;
-        private readonly MicrosoftGraphClient graphClient;
-        private readonly TelemetryClient telemetry;
-        private readonly ISettings settings;
-
         public PnPContextFactory(
             IOptionsMonitor<PnPContextFactoryOptions> options,
             ILogger<PnPContext> logger,
@@ -36,14 +28,22 @@ namespace PnP.Core.Services
             }
 
             // Store logger and options locally
-            this.log = logger;
-            this.options = options.CurrentValue;
-            authProviderFactory = authenticationProviderFactory;
-            restClient = sharePointRestClient;
-            graphClient = microsoftGraphClient;
-            settings = settingsClient;
-            telemetry = telemetryClient;
+            Log = logger;
+            Options = options.CurrentValue;
+            AuthenticationProviderFactory = authenticationProviderFactory;
+            SharePointRestClient = sharePointRestClient;
+            MicrosoftGraphClient = microsoftGraphClient;
+            SettingsClient = settingsClient;
+            TelemetryClient = telemetryClient;
         }
+
+        internal PnPContextFactoryOptions Options { get; private set; }
+        internal IAuthenticationProviderFactory AuthenticationProviderFactory { get; private set; }
+        internal ILogger Log { get; private set; }
+        internal SharePointRestClient SharePointRestClient { get; private set; }
+        internal MicrosoftGraphClient MicrosoftGraphClient { get; private set; }
+        internal TelemetryClient TelemetryClient { get; private set; }
+        internal ISettings SettingsClient { get; private set; }
 
         /// <summary>
         /// Creates a new instance of SPOContext based on a provided configuration name
@@ -53,7 +53,7 @@ namespace PnP.Core.Services
         public virtual PnPContext Create(string name)
         {
             // Search for the provided configuration
-            var configuration = this.options.Configurations.FirstOrDefault(c => c.Name == name);
+            var configuration = Options.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
             {
                 throw new ClientException(ErrorType.ConfigurationError, $"Invalid configuration name '{name}' for PnPContext creation!");
@@ -71,7 +71,7 @@ namespace PnP.Core.Services
         public virtual PnPContext Create(Uri url)
         {
             // Use the default settings to create a new instance of SPOContext
-            return Create(url, authProviderFactory.CreateDefault());
+            return Create(url, AuthenticationProviderFactory.CreateDefault());
         }
 
         /// <summary>
@@ -83,14 +83,21 @@ namespace PnP.Core.Services
         public virtual PnPContext Create(Uri url, string authenticationProviderName)
         {
             // Create the Authentication Provider based on the provided configuration
-            var authProvider = authProviderFactory.Create(authenticationProviderName);
+            var authProvider = AuthenticationProviderFactory.Create(authenticationProviderName);
             if (authProvider == null)
             {
                 throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for site '{url.AbsoluteUri}' during PnPContext creation!");
             }
 
             // Use the provided settings to create a new instance of SPOContext
-            return new PnPContext(url, log, authProvider, restClient, graphClient, settings, telemetry);
+            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient)
+            {
+                Uri = url
+            };
+
+            ConfigureTelemetry(context);
+
+            return context;
         }
 
         /// <summary>
@@ -102,8 +109,14 @@ namespace PnP.Core.Services
         public virtual PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider)
         {
             // Use the provided settings to create a new instance of SPOContext
-            return new PnPContext(url, log, authenticationProvider,
-                restClient, graphClient, settings, telemetry);
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient)
+            {
+                Uri = url
+            };
+
+            ConfigureTelemetry(context);
+
+            return context;
         }
 
         /// <summary>
@@ -115,14 +128,20 @@ namespace PnP.Core.Services
         public virtual PnPContext Create(Guid groupId, string authenticationProviderName)
         {
             // Create the Authentication Provider based on the provided configuration
-            var authProvider = authProviderFactory.Create(authenticationProviderName);
+            var authProvider = AuthenticationProviderFactory.Create(authenticationProviderName);
             if (authProvider == null)
             {
                 throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for group '{groupId}' during PnPContext creation!");
             }
 
             // Use the provided settings to create a new instance of SPOContext
-            return new PnPContext(groupId, log, authProvider, restClient, graphClient, settings, telemetry);
+            var context =  new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+
+            ConfigureForGroup(context, groupId);
+
+            ConfigureTelemetry(context);
+
+            return context;
         }
 
         /// <summary>
@@ -134,8 +153,13 @@ namespace PnP.Core.Services
         public virtual PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider)
         {
             // Use the provided settings to create a new instance of SPOContext
-            return new PnPContext(groupId, log, authenticationProvider,
-                restClient, graphClient, settings, telemetry);
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+
+            ConfigureForGroup(context, groupId);
+
+            ConfigureTelemetry(context);
+
+            return context;
         }
 
         /// <summary>
@@ -145,7 +169,26 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(Guid groupId)
         {
-            return Create(groupId, authProviderFactory.CreateDefault());
+            return Create(groupId, AuthenticationProviderFactory.CreateDefault());
+        }
+
+        internal static void ConfigureForGroup(PnPContext context, Guid groupId)
+        {
+            // Ensure the group is loaded, given we've received the group id we can populate the metadata of the group model upfront before loading it
+            (context.Group as Group).Metadata.Add(PnPConstants.MetaDataGraphId, groupId.ToString());
+            // Do the default group load, should load all properties
+            context.Group.GetAsync().GetAwaiter().GetResult();
+            // If the group has a linked SharePoint site then WebUrl is populated
+            context.Uri = context.Group.WebUrl;
+        }
+
+        internal void ConfigureTelemetry(PnPContext context)
+        {
+            // Populate the Azure AD tenant id
+            if (SettingsClient != null && !SettingsClient.DisableTelemetry)
+            {
+                context.SetAADTenantId();
+            }
         }
     }
 }
