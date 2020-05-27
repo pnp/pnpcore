@@ -288,6 +288,64 @@ references:
   commentId: N:PnP.Core.Model.AzureActiveDirectory
   fullName: PnP.Core.Model.AzureActiveDirectory
   nameWithType: PnP.Core.Model.AzureActiveDirectory
+- uid: PnP.Core.Model.AzureActiveDirectory.IGroup
+  name: IGroup
+  href: api/PnP.Core.Model.AzureActiveDirectory.IGroup.html
+  commentId: T:PnP.Core.Model.AzureActiveDirectory.IGroup
+  fullName: PnP.Core.Model.AzureActiveDirectory.IGroup
+  nameWithType: IGroup
+- uid: PnP.Core.Model.AzureActiveDirectory.IGroup.DisplayName
+  name: DisplayName
+  href: api/PnP.Core.Model.AzureActiveDirectory.IGroup.html#PnP_Core_Model_AzureActiveDirectory_IGroup_DisplayName
+  commentId: P:PnP.Core.Model.AzureActiveDirectory.IGroup.DisplayName
+  fullName: PnP.Core.Model.AzureActiveDirectory.IGroup.DisplayName
+  nameWithType: IGroup.DisplayName
+- uid: PnP.Core.Model.AzureActiveDirectory.IGroup.DisplayName*
+  name: DisplayName
+  href: api/PnP.Core.Model.AzureActiveDirectory.IGroup.html#PnP_Core_Model_AzureActiveDirectory_IGroup_DisplayName_
+  commentId: Overload:PnP.Core.Model.AzureActiveDirectory.IGroup.DisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Model.AzureActiveDirectory.IGroup.DisplayName
+  nameWithType: IGroup.DisplayName
+- uid: PnP.Core.Model.AzureActiveDirectory.IGroup.Id
+  name: Id
+  href: api/PnP.Core.Model.AzureActiveDirectory.IGroup.html#PnP_Core_Model_AzureActiveDirectory_IGroup_Id
+  commentId: P:PnP.Core.Model.AzureActiveDirectory.IGroup.Id
+  fullName: PnP.Core.Model.AzureActiveDirectory.IGroup.Id
+  nameWithType: IGroup.Id
+- uid: PnP.Core.Model.AzureActiveDirectory.IGroup.Id*
+  name: Id
+  href: api/PnP.Core.Model.AzureActiveDirectory.IGroup.html#PnP_Core_Model_AzureActiveDirectory_IGroup_Id_
+  commentId: Overload:PnP.Core.Model.AzureActiveDirectory.IGroup.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.AzureActiveDirectory.IGroup.Id
+  nameWithType: IGroup.Id
+- uid: PnP.Core.Model.AzureActiveDirectory.IGroup.Mail
+  name: Mail
+  href: api/PnP.Core.Model.AzureActiveDirectory.IGroup.html#PnP_Core_Model_AzureActiveDirectory_IGroup_Mail
+  commentId: P:PnP.Core.Model.AzureActiveDirectory.IGroup.Mail
+  fullName: PnP.Core.Model.AzureActiveDirectory.IGroup.Mail
+  nameWithType: IGroup.Mail
+- uid: PnP.Core.Model.AzureActiveDirectory.IGroup.Mail*
+  name: Mail
+  href: api/PnP.Core.Model.AzureActiveDirectory.IGroup.html#PnP_Core_Model_AzureActiveDirectory_IGroup_Mail_
+  commentId: Overload:PnP.Core.Model.AzureActiveDirectory.IGroup.Mail
+  isSpec: "True"
+  fullName: PnP.Core.Model.AzureActiveDirectory.IGroup.Mail
+  nameWithType: IGroup.Mail
+- uid: PnP.Core.Model.AzureActiveDirectory.IGroup.WebUrl
+  name: WebUrl
+  href: api/PnP.Core.Model.AzureActiveDirectory.IGroup.html#PnP_Core_Model_AzureActiveDirectory_IGroup_WebUrl
+  commentId: P:PnP.Core.Model.AzureActiveDirectory.IGroup.WebUrl
+  fullName: PnP.Core.Model.AzureActiveDirectory.IGroup.WebUrl
+  nameWithType: IGroup.WebUrl
+- uid: PnP.Core.Model.AzureActiveDirectory.IGroup.WebUrl*
+  name: WebUrl
+  href: api/PnP.Core.Model.AzureActiveDirectory.IGroup.html#PnP_Core_Model_AzureActiveDirectory_IGroup_WebUrl_
+  commentId: Overload:PnP.Core.Model.AzureActiveDirectory.IGroup.WebUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.AzureActiveDirectory.IGroup.WebUrl
+  nameWithType: IGroup.WebUrl
 - uid: PnP.Core.Model.AzureActiveDirectory.IIdentity
   name: IIdentity
   href: api/PnP.Core.Model.AzureActiveDirectory.IIdentity.html
@@ -5689,6 +5747,24 @@ references:
   commentId: T:PnP.Core.Services.IPnPContextFactory
   fullName: PnP.Core.Services.IPnPContextFactory
   nameWithType: IPnPContextFactory
+- uid: PnP.Core.Services.IPnPContextFactory.Create(System.Guid)
+  name: Create(Guid)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_System_Guid_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(System.Guid)
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(System.Guid)
+  nameWithType: IPnPContextFactory.Create(Guid)
+- uid: PnP.Core.Services.IPnPContextFactory.Create(System.Guid,PnP.Core.Services.IAuthenticationProvider)
+  name: Create(Guid, IAuthenticationProvider)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(System.Guid,PnP.Core.Services.IAuthenticationProvider)
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(System.Guid, PnP.Core.Services.IAuthenticationProvider)
+  nameWithType: IPnPContextFactory.Create(Guid, IAuthenticationProvider)
+- uid: PnP.Core.Services.IPnPContextFactory.Create(System.Guid,System.String)
+  name: Create(Guid, String)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_System_Guid_System_String_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(System.Guid,System.String)
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(System.Guid, System.String)
+  nameWithType: IPnPContextFactory.Create(Guid, String)
 - uid: PnP.Core.Services.IPnPContextFactory.Create(System.String)
   name: Create(String)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_System_String_
@@ -6160,25 +6236,6 @@ references:
   commentId: T:PnP.Core.Services.PnPContext
   fullName: PnP.Core.Services.PnPContext
   nameWithType: PnPContext
-- uid: PnP.Core.Services.PnPContext.#ctor(System.String,Microsoft.Extensions.Logging.ILogger,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,Microsoft.ApplicationInsights.TelemetryClient)
-  name: PnPContext(String, ILogger, IAuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
-  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext__ctor_System_String_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_PnP_Core_Services_ISettings_Microsoft_ApplicationInsights_TelemetryClient_
-  commentId: M:PnP.Core.Services.PnPContext.#ctor(System.String,Microsoft.Extensions.Logging.ILogger,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,Microsoft.ApplicationInsights.TelemetryClient)
-  fullName: PnP.Core.Services.PnPContext.PnPContext(System.String, Microsoft.Extensions.Logging.ILogger, PnP.Core.Services.IAuthenticationProvider, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, PnP.Core.Services.ISettings, Microsoft.ApplicationInsights.TelemetryClient)
-  nameWithType: PnPContext.PnPContext(String, ILogger, IAuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
-- uid: PnP.Core.Services.PnPContext.#ctor(System.Uri,Microsoft.Extensions.Logging.ILogger,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,Microsoft.ApplicationInsights.TelemetryClient)
-  name: PnPContext(Uri, ILogger, IAuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
-  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext__ctor_System_Uri_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_IAuthenticationProvider_PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_PnP_Core_Services_ISettings_Microsoft_ApplicationInsights_TelemetryClient_
-  commentId: M:PnP.Core.Services.PnPContext.#ctor(System.Uri,Microsoft.Extensions.Logging.ILogger,PnP.Core.Services.IAuthenticationProvider,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,Microsoft.ApplicationInsights.TelemetryClient)
-  fullName: PnP.Core.Services.PnPContext.PnPContext(System.Uri, Microsoft.Extensions.Logging.ILogger, PnP.Core.Services.IAuthenticationProvider, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, PnP.Core.Services.ISettings, Microsoft.ApplicationInsights.TelemetryClient)
-  nameWithType: PnPContext.PnPContext(Uri, ILogger, IAuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
-- uid: PnP.Core.Services.PnPContext.#ctor*
-  name: PnPContext
-  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext__ctor_
-  commentId: Overload:PnP.Core.Services.PnPContext.#ctor
-  isSpec: "True"
-  fullName: PnP.Core.Services.PnPContext.PnPContext
-  nameWithType: PnPContext.PnPContext
 - uid: PnP.Core.Services.PnPContext.AuthenticationProvider
   name: AuthenticationProvider
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_AuthenticationProvider
@@ -6295,6 +6352,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContext.GraphFirst
   nameWithType: PnPContext.GraphFirst
+- uid: PnP.Core.Services.PnPContext.Group
+  name: Group
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Group
+  commentId: P:PnP.Core.Services.PnPContext.Group
+  fullName: PnP.Core.Services.PnPContext.Group
+  nameWithType: PnPContext.Group
+- uid: PnP.Core.Services.PnPContext.Group*
+  name: Group
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Group_
+  commentId: Overload:PnP.Core.Services.PnPContext.Group
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContext.Group
+  nameWithType: PnPContext.Group
 - uid: PnP.Core.Services.PnPContext.HasPendingRequests
   name: HasPendingRequests
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_HasPendingRequests
@@ -6421,6 +6491,37 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.PnPContextFactory
   nameWithType: PnPContextFactory.PnPContextFactory
+- uid: PnP.Core.Services.PnPContextFactory.AuthenticationProviderFactory
+  name: AuthenticationProviderFactory
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_AuthenticationProviderFactory
+  commentId: P:PnP.Core.Services.PnPContextFactory.AuthenticationProviderFactory
+  fullName: PnP.Core.Services.PnPContextFactory.AuthenticationProviderFactory
+  nameWithType: PnPContextFactory.AuthenticationProviderFactory
+- uid: PnP.Core.Services.PnPContextFactory.AuthenticationProviderFactory*
+  name: AuthenticationProviderFactory
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_AuthenticationProviderFactory_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.AuthenticationProviderFactory
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.AuthenticationProviderFactory
+  nameWithType: PnPContextFactory.AuthenticationProviderFactory
+- uid: PnP.Core.Services.PnPContextFactory.Create(System.Guid)
+  name: Create(Guid)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_Guid_
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(System.Guid)
+  fullName: PnP.Core.Services.PnPContextFactory.Create(System.Guid)
+  nameWithType: PnPContextFactory.Create(Guid)
+- uid: PnP.Core.Services.PnPContextFactory.Create(System.Guid,PnP.Core.Services.IAuthenticationProvider)
+  name: Create(Guid, IAuthenticationProvider)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_Guid_PnP_Core_Services_IAuthenticationProvider_
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(System.Guid,PnP.Core.Services.IAuthenticationProvider)
+  fullName: PnP.Core.Services.PnPContextFactory.Create(System.Guid, PnP.Core.Services.IAuthenticationProvider)
+  nameWithType: PnPContextFactory.Create(Guid, IAuthenticationProvider)
+- uid: PnP.Core.Services.PnPContextFactory.Create(System.Guid,System.String)
+  name: Create(Guid, String)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_Guid_System_String_
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(System.Guid,System.String)
+  fullName: PnP.Core.Services.PnPContextFactory.Create(System.Guid, System.String)
+  nameWithType: PnPContextFactory.Create(Guid, String)
 - uid: PnP.Core.Services.PnPContextFactory.Create(System.String)
   name: Create(String)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_String_
@@ -6452,6 +6553,84 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.Create
   nameWithType: PnPContextFactory.Create
+- uid: PnP.Core.Services.PnPContextFactory.Log
+  name: Log
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Log
+  commentId: P:PnP.Core.Services.PnPContextFactory.Log
+  fullName: PnP.Core.Services.PnPContextFactory.Log
+  nameWithType: PnPContextFactory.Log
+- uid: PnP.Core.Services.PnPContextFactory.Log*
+  name: Log
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Log_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.Log
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.Log
+  nameWithType: PnPContextFactory.Log
+- uid: PnP.Core.Services.PnPContextFactory.MicrosoftGraphClient
+  name: MicrosoftGraphClient
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_MicrosoftGraphClient
+  commentId: P:PnP.Core.Services.PnPContextFactory.MicrosoftGraphClient
+  fullName: PnP.Core.Services.PnPContextFactory.MicrosoftGraphClient
+  nameWithType: PnPContextFactory.MicrosoftGraphClient
+- uid: PnP.Core.Services.PnPContextFactory.MicrosoftGraphClient*
+  name: MicrosoftGraphClient
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_MicrosoftGraphClient_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.MicrosoftGraphClient
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.MicrosoftGraphClient
+  nameWithType: PnPContextFactory.MicrosoftGraphClient
+- uid: PnP.Core.Services.PnPContextFactory.Options
+  name: Options
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Options
+  commentId: P:PnP.Core.Services.PnPContextFactory.Options
+  fullName: PnP.Core.Services.PnPContextFactory.Options
+  nameWithType: PnPContextFactory.Options
+- uid: PnP.Core.Services.PnPContextFactory.Options*
+  name: Options
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Options_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.Options
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.Options
+  nameWithType: PnPContextFactory.Options
+- uid: PnP.Core.Services.PnPContextFactory.SettingsClient
+  name: SettingsClient
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_SettingsClient
+  commentId: P:PnP.Core.Services.PnPContextFactory.SettingsClient
+  fullName: PnP.Core.Services.PnPContextFactory.SettingsClient
+  nameWithType: PnPContextFactory.SettingsClient
+- uid: PnP.Core.Services.PnPContextFactory.SettingsClient*
+  name: SettingsClient
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_SettingsClient_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.SettingsClient
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.SettingsClient
+  nameWithType: PnPContextFactory.SettingsClient
+- uid: PnP.Core.Services.PnPContextFactory.SharePointRestClient
+  name: SharePointRestClient
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_SharePointRestClient
+  commentId: P:PnP.Core.Services.PnPContextFactory.SharePointRestClient
+  fullName: PnP.Core.Services.PnPContextFactory.SharePointRestClient
+  nameWithType: PnPContextFactory.SharePointRestClient
+- uid: PnP.Core.Services.PnPContextFactory.SharePointRestClient*
+  name: SharePointRestClient
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_SharePointRestClient_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.SharePointRestClient
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.SharePointRestClient
+  nameWithType: PnPContextFactory.SharePointRestClient
+- uid: PnP.Core.Services.PnPContextFactory.TelemetryClient
+  name: TelemetryClient
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_TelemetryClient
+  commentId: P:PnP.Core.Services.PnPContextFactory.TelemetryClient
+  fullName: PnP.Core.Services.PnPContextFactory.TelemetryClient
+  nameWithType: PnPContextFactory.TelemetryClient
+- uid: PnP.Core.Services.PnPContextFactory.TelemetryClient*
+  name: TelemetryClient
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_TelemetryClient_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.TelemetryClient
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.TelemetryClient
+  nameWithType: PnPContextFactory.TelemetryClient
 - uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions
   name: PnPContextFactoryCollectionExtensions
   href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html
