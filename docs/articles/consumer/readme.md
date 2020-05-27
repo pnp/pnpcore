@@ -92,6 +92,8 @@ In above sample the following configuration file is used: `appsettings.demo.json
 
 ## Obtaining a PnPContext
 
+The `PnPContext` is the entry point for using the PnP Core SDK, you can create a `PnPContext` from either a SharePoint site url or the id of an Office 365 group.
+
 ```csharp
 // Start console host
 await host.StartAsync();
@@ -102,6 +104,11 @@ using (var scope = host.Services.CreateScope())
     var pnpContextFactory = scope.ServiceProvider.GetRequiredService<IPnPContextFactory>();
     // Use the PnP Context factory to get a PnPContext for the given configuration
     using (var context = pnpContextFactory.Create("SiteToWorkWith"))
+    {
+        // See next chapter on how to use the PnPContext
+    }
+
+    using (var context = pnpContextFactory.Create("Office 365 Group guid"))
     {
         // See next chapter on how to use the PnPContext
     }
