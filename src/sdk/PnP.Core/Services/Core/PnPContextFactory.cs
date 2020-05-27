@@ -37,13 +37,13 @@ namespace PnP.Core.Services
             TelemetryClient = telemetryClient;
         }
 
-        internal PnPContextFactoryOptions Options { get; private set; }
-        internal IAuthenticationProviderFactory AuthenticationProviderFactory { get; private set; }
-        internal ILogger Log { get; private set; }
-        internal SharePointRestClient SharePointRestClient { get; private set; }
-        internal MicrosoftGraphClient MicrosoftGraphClient { get; private set; }
-        internal TelemetryClient TelemetryClient { get; private set; }
-        internal ISettings SettingsClient { get; private set; }
+        protected PnPContextFactoryOptions Options { get; private set; }
+        protected IAuthenticationProviderFactory AuthenticationProviderFactory { get; private set; }
+        protected ILogger Log { get; private set; }
+        protected SharePointRestClient SharePointRestClient { get; private set; }
+        protected MicrosoftGraphClient MicrosoftGraphClient { get; private set; }
+        protected TelemetryClient TelemetryClient { get; private set; }
+        protected ISettings SettingsClient { get; private set; }
 
         /// <summary>
         /// Creates a new instance of SPOContext based on a provided configuration name
