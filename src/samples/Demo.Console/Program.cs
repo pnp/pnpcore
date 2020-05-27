@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security;
 using System.Threading.Tasks;
 
 namespace Consumer
@@ -48,7 +49,7 @@ namespace Consumer
                     {
                         Name = "UsernameAndPasswordAuthentication",
                         Username = customSettings.UserPrincipalName,
-                        Password = customSettings.Password.ToSecureString(),
+                        Password = StringToSecureString(customSettings.Password),
                     });
 
                     options.DefaultConfiguration = "CredentialManagerAuthentication";
@@ -338,6 +339,17 @@ namespace Consumer
             }
 
             host.Dispose();
+        }
+
+        private static SecureString StringToSecureString(string inputString)
+        {
+            var securityString = new SecureString();
+            char[] chars = inputString.ToCharArray();
+            foreach (var c in chars)
+            {
+                securityString.AppendChar(c);
+            }
+            return securityString;
         }
     }
 }
