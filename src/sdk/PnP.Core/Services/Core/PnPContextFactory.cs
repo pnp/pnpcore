@@ -56,7 +56,7 @@ namespace PnP.Core.Services
             var configuration = this.options.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
             {
-                throw new ClientException(ErrorType.ConfigurationError, $"Invalid configuration name '{name}' for SPOContext creation!");
+                throw new ClientException(ErrorType.ConfigurationError, $"Invalid configuration name '{name}' for PnPContext creation!");
             }
 
             return Create(configuration.SiteUrl, configuration.AuthenticationProviderName);
@@ -86,7 +86,7 @@ namespace PnP.Core.Services
             var authProvider = authProviderFactory.Create(authenticationProviderName);
             if (authProvider == null)
             {
-                throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for '{url.AbsoluteUri}' during SPOContext creation!");
+                throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for site '{url.AbsoluteUri}' during PnPContext creation!");
             }
 
             // Use the provided settings to create a new instance of SPOContext
@@ -104,6 +104,48 @@ namespace PnP.Core.Services
             // Use the provided settings to create a new instance of SPOContext
             return new PnPContext(url, log, authenticationProvider,
                 restClient, graphClient, settings, telemetry);
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided group and Authentication configuration name
+        /// </summary>
+        /// <param name="groupId">The id of an Office 365 group</param>
+        /// <param name="authenticationProviderName">The name of the Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(Guid groupId, string authenticationProviderName)
+        {
+            // Create the Authentication Provider based on the provided configuration
+            var authProvider = authProviderFactory.Create(authenticationProviderName);
+            if (authProvider == null)
+            {
+                throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for group '{groupId}' during PnPContext creation!");
+            }
+
+            // Use the provided settings to create a new instance of SPOContext
+            return new PnPContext(groupId, log, authProvider, restClient, graphClient, settings, telemetry);
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided group and Authentication Provider instance
+        /// </summary>
+        /// <param name="groupId">The id of an Office 365 group</param>
+        /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider)
+        {
+            // Use the provided settings to create a new instance of SPOContext
+            return new PnPContext(groupId, log, authenticationProvider,
+                restClient, graphClient, settings, telemetry);
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider
+        /// </summary>
+        /// <param name="groupId">The id of an Office 365 group</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(Guid groupId)
+        {
+            return Create(groupId, authProviderFactory.CreateDefault());
         }
     }
 }

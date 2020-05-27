@@ -2,6 +2,7 @@
 using PnP.Core.Test.Utilities;
 using PnP.Core.Model;
 using System.Threading.Tasks;
+using System;
 
 namespace PnP.Core.Test.Base
 {
@@ -130,6 +131,43 @@ namespace PnP.Core.Test.Base
                 
                 // Requested stays false as there's no group connected to this site, so also no team
                 Assert.IsFalse(context.Team.Requested);
+            }
+        }
+
+        [TestMethod]
+        public async Task CreateContextFromGroupId()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                await context.Site.EnsurePropertiesAsync(p => p.GroupId);
+                // Group id should be loaded
+                Assert.IsTrue(context.Site.GroupId != Guid.Empty);
+
+                // Create a new context using this group id
+                using (var context2 = TestCommon.Instance.GetContext(context.Site.GroupId, 1))
+                {
+                    Assert.IsTrue(context2.Group.Requested == true);
+                    Assert.IsTrue(context2.Group.IsPropertyAvailable(p => p.WebUrl) == true);
+                    Assert.IsTrue(context2.Uri != null);
+
+                    // Try to get SharePoint and Teams information from a context created via a group id
+                    var web = await context2.Web.GetAsync(p => p.Title);
+
+                    Assert.IsTrue(web.Requested);
+                    Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
+
+                    var site = await context2.Site.GetAsync(p => p.GroupId);
+
+                    Assert.IsTrue(site.Requested);
+                    Assert.IsTrue(site.IsPropertyAvailable(p => p.GroupId));
+                    Assert.IsTrue(site.GroupId == context.Site.GroupId);
+
+                    var team = await context2.Team.GetAsync(p=>p.DisplayName);
+
+                    Assert.IsTrue(team.Requested);
+                    Assert.IsTrue(team.IsPropertyAvailable(p => p.DisplayName));
+                }
             }
         }
     }

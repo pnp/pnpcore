@@ -1,6 +1,7 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PnP.Core.Model.AzureActiveDirectory;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,27 @@ namespace PnP.Core.Test.Services
         public override PnPContext Create(Uri url, string authenticationProviderName)
         {
             var context = base.Create(url, authenticationProviderName);
+            ConfigurePnPContextForTesting(ref context);
+            return context;
+        }
+
+        public override PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider)
+        {
+            var context = base.Create(groupId, authenticationProvider);
+            ConfigurePnPContextForTesting(ref context);
+            return context;
+        }
+
+        public override PnPContext Create(Guid groupId)
+        {
+            var context = base.Create(groupId);
+            ConfigurePnPContextForTesting(ref context);
+            return context;
+        }
+
+        public override PnPContext Create(Guid groupId, string authenticationProviderName)
+        {
+            var context = base.Create(groupId, authenticationProviderName);
             ConfigurePnPContextForTesting(ref context);
             return context;
         }

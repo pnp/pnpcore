@@ -50,9 +50,8 @@ namespace PnP.Core.Services
                         result = result.Replace("{Id}", model.Metadata[PnPConstants.MetaDataRestId]);
                     }
                 }
-
                 // Replace {Parent.Id}
-                if (match.Value.Equals("{Parent.Id}"))
+                else if (match.Value.Equals("{Parent.Id}"))
                 {
                     // there's either a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
                     // or
@@ -80,9 +79,8 @@ namespace PnP.Core.Services
                         }
                     }
                 }
-
                 // Replace {GraphId}
-                if (match.Value.Equals("{GraphId}"))
+                else if (match.Value.Equals("{GraphId}"))
                 {
                     var model = pnpObject;
 
@@ -91,9 +89,8 @@ namespace PnP.Core.Services
                         result = result.Replace("{GraphId}", model.Metadata[PnPConstants.MetaDataGraphId]);
                     }
                 }
-
                 // Replace {Parent.GraphId}
-                if (match.Value.Equals("{Parent.GraphId}"))
+                else if (match.Value.Equals("{Parent.GraphId}"))
                 {
                     // there's either a collection object inbetween (e.g. TeamChannel --> TeamChannelCollection --> Team), so take the parent of the parent
                     // or
@@ -121,9 +118,8 @@ namespace PnP.Core.Services
                         }
                     }
                 }
-
                 // Replace tokens coming from the Site object connected to the current PnPContext
-                if (match.Value.StartsWith("{Site.") && context != null)
+                else if (match.Value.StartsWith("{Site.") && context != null)
                 {
                     var propertyToLoad = match.Value.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("}", "");
 
@@ -149,9 +145,8 @@ namespace PnP.Core.Services
                             }
                     }
                 }
-
                 // Replace tokens coming from the Site object connected to the current PnPContext
-                if (match.Value.StartsWith("{Web.") && context != null)
+                else if (match.Value.StartsWith("{Web.") && context != null)
                 {
                     var propertyToLoad = match.Value.Split(new string[] { "." }, StringSplitOptions.RemoveEmptyEntries)[1].Replace("}", "");
 
@@ -178,15 +173,13 @@ namespace PnP.Core.Services
                             }
                     }
                 }
-
                 // Replace {hostname}
-                if (match.Value.Equals("{hostname}"))
+                else if (match.Value.Equals("{hostname}"))
                 {
                     result = result.Replace("{hostname}", context.Uri.DnsSafeHost);
                 }
-
                 // Replace {serverrelativepath}
-                if (match.Value.Equals("{serverrelativepath}"))
+                else if (match.Value.Equals("{serverrelativepath}"))
                 {
                     result = result.Replace("{serverrelativepath}", context.Uri.PathAndQuery);
                 }

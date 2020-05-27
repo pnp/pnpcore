@@ -1,6 +1,6 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
-using PnP.Core.Model;
+using PnP.Core.Model.AzureActiveDirectory;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using System;
@@ -18,7 +18,7 @@ namespace PnP.Core.Services
         #region Private fields
 
         private bool graphCanUseBeta = true;
-        private static readonly HttpClient httpClient = new HttpClient();        
+        private static readonly HttpClient httpClient = new HttpClient();
 
         #endregion
 
@@ -37,6 +37,11 @@ namespace PnP.Core.Services
         private readonly Lazy<ITeam> team = new Lazy<ITeam>(() =>
         {
             return new Team();
+        }, true);
+
+        private readonly Lazy<IGroup> group = new Lazy<IGroup>(() =>
+        {
+            return new Group();
         }, true);
 
         #endregion
@@ -83,11 +88,57 @@ namespace PnP.Core.Services
                                    SharePointRestClient sharePointRestClient,
                                    MicrosoftGraphClient microsoftGraphClient,
                                    ISettings settingsClient,
-                                   TelemetryClient telemetryClient)
+                                   TelemetryClient telemetryClient): this(logger, authenticationProvider, sharePointRestClient, microsoftGraphClient, settingsClient, telemetryClient)
+        {
+            Uri = uri;
+
+            // Populate the Azure AD tenant id
+            if (settingsClient != null && !settingsClient.DisableTelemetry)
+            {
+                SetAADTenantId();
+            }
+        }
+
+        /// <summary>
+        /// Public constructor for an SPO context based on target site URL
+        /// </summary>
+        /// <param name="groupId">The id of the Office 365 group</param>
+        /// <param name="logger">Logger instance</param>
+        /// <param name="authenticationProvider">The authentication provider to authenticate against the target site url</param>
+        /// <param name="sharePointRestClient">SharePoint REST HTTP client</param>
+        /// <param name="microsoftGraphClient">Microsoft Graph HTTP client</param>
+        /// <param name="telemetryClient">AppInsights client for telemetry work</param>
+        public PnPContext(Guid groupId, ILogger logger,
+                                        IAuthenticationProvider authenticationProvider,
+                                        SharePointRestClient sharePointRestClient,
+                                        MicrosoftGraphClient microsoftGraphClient,
+                                        ISettings settingsClient,
+                                        TelemetryClient telemetryClient) : this(logger, authenticationProvider, sharePointRestClient, microsoftGraphClient, settingsClient, telemetryClient)
+        {
+            // Ensure the group is loaded, given we've received the group id we can populate the metadata of the group model upfront before loading it
+            (Group as Group).Metadata.Add(PnPConstants.MetaDataGraphId, groupId.ToString());
+            // Do the default group load, should load all properties
+            Group.GetAsync().GetAwaiter().GetResult();
+            // If the group has a linked SharePoint site then WebUrl is populated
+            Uri = Group.WebUrl;
+
+            // Populate the Azure AD tenant id
+            if (settingsClient != null && !settingsClient.DisableTelemetry)
+            {
+                SetAADTenantId();
+            }
+        }
+
+        private PnPContext(ILogger logger,
+                           IAuthenticationProvider authenticationProvider,
+                           SharePointRestClient sharePointRestClient,
+                           MicrosoftGraphClient microsoftGraphClient,
+                           ISettings settingsClient,
+                           TelemetryClient telemetryClient)
         {
             Id = Guid.NewGuid();
             Logger = logger;
-            Uri = uri;
+
 #if DEBUG
             Mode = PnPContextMode.Default;
 #endif
@@ -104,15 +155,8 @@ namespace PnP.Core.Services
                 GraphCanUseBeta = settingsClient.GraphCanUseBeta;
             }
 
-            if (telemetry != null)
-            {
-                SetAADTenantId();
-            }
-
             BatchClient = new BatchClient(this, settingsClient, telemetryClient);
-            
         }
-
         #endregion
 
         #region Properties
@@ -300,6 +344,17 @@ namespace PnP.Core.Services
             }
         }
 
+        /// <summary>
+        /// Entry point for the Office 365 Group Object
+        /// </summary>
+        public IGroup Group
+        {
+            get
+            {
+                (group.Value as Group).PnPContext = this;
+                return group.Value;
+            }
+        }
         #endregion
 
         #region Public Methods   
@@ -401,7 +456,7 @@ namespace PnP.Core.Services
         /// </summary>
         private void SetAADTenantId()
         {
-            if (settings.AADTenantId == Guid.Empty)
+            if (settings.AADTenantId == Guid.Empty && Uri != null)
             {
                 using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri}/_vti_bin/client.svc"))
                 {

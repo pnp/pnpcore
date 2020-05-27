@@ -84,6 +84,25 @@ namespace PnP.Core.Test.Utilities
             return BuildContextFactory().Create(configurationName);
         }
 
+        public PnPContext GetContext(Guid groupId, int id = 0,
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+        {
+            // Obtain factory (cached)
+            var factory = BuildContextFactory();
+
+            // Configure the factory for our testing mode
+            (factory as TestPnPContextFactory).Mocking = Mocking;
+            (factory as TestPnPContextFactory).Id = id;
+            (factory as TestPnPContextFactory).TestName = testName;
+            (factory as TestPnPContextFactory).SourceFilePath = sourceFilePath;
+            (factory as TestPnPContextFactory).GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
+            (factory as TestPnPContextFactory).TestUris = TestUris;
+
+            return BuildContextFactory().Create(groupId);
+        }
+
+
         public IPnPContextFactory BuildContextFactory()
         {
             try
