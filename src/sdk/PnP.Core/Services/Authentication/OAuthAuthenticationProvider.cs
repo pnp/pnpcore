@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
+using PnP.Core.Model.AzureActiveDirectory;
 using System;
 using System.Collections.Concurrent;
 using System.Globalization;
@@ -53,7 +54,11 @@ namespace PnP.Core.Services
             }
 
             var (Username, Password) = GetCredential();
-            request.Headers.Authorization = new AuthenticationHeaderValue("bearer", await EnsureSharePointAccessTokenAsync(resource, Username, Password).ConfigureAwait(false));
+
+            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+            {
+                request.Headers.Authorization = new AuthenticationHeaderValue("bearer", await EnsureSharePointAccessTokenAsync(resource, Username, Password).ConfigureAwait(false));
+            }
         }
 
         private async Task<string> GetMicrosoftGraphAccessTokenAsync()
