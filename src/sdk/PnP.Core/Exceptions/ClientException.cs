@@ -32,5 +32,14 @@ namespace PnP.Core
             Error = new ClientError(type, message);
         }
         #endregion
+
+        /// <summary>
+        /// Outputs a <see cref="ClientException"/> to a string representation
+        /// </summary>
+        /// <returns>String representation</returns>
+        public override string ToString()
+        {
+            return $"{Error?.ToString()}{Environment.NewLine}{base.ToString()}";
+        }
     }
 }

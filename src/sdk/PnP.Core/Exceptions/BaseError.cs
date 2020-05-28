@@ -27,5 +27,14 @@ namespace PnP.Core
         /// Additional data linked to an error
         /// </summary>
         public IDictionary<string, object> AdditionalData { get; internal set; }
+
+        protected void AddAdditionalData(string propertyName, object propertyValue)
+        {
+            if (AdditionalData == null)
+            {
+                AdditionalData = new Dictionary<string, object>();
+            }
+            AdditionalData.Add(propertyName, propertyValue);
+        }
     }
 }

@@ -107,8 +107,19 @@ namespace PnP.Core.Services
                     return response.Result.Content.ReadAsStringAsync().Result;
                 }).ConfigureAwait(false);
 
-                var tokenResult = JsonSerializer.Deserialize<JsonElement>(result);
-                var token = tokenResult.GetProperty("access_token").GetString();
+                // Inspect the response, a valid response contains the access_token we need. Carriage returns in a string make parsing fail (regression?), remove them to be at the safe side
+                var tokenResult = JsonSerializer.Deserialize<JsonElement>(result.Replace("\r\n", " ").Trim());
+                string token = null;
+                if (tokenResult.TryGetProperty("access_token", out JsonElement accessToken))
+                {
+                    token = accessToken.GetString();
+                }
+                else
+                {
+                    // Oops, seems something went wrong
+                    throw new AuthenticationException(ErrorType.AzureADError, result);
+                }
+
                 return token;
             }
         }

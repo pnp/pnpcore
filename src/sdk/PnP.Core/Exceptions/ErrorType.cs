@@ -9,6 +9,9 @@
         GraphServiceError,
         SharePointRestServiceError,
 
+        // Authentication errors
+        AzureADError,
+
         // Configuration errors
         MissingAddApiHandler,
         ModelMetadataIncorrect,

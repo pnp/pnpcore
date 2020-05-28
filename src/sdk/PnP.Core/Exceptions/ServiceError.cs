@@ -33,15 +33,5 @@ namespace PnP.Core
         /// </summary>
         public string Code { get; internal set; }
 
-
-        protected void AddAdditionalData(string propertyName, object propertyValue)
-        {
-            if (AdditionalData == null)
-            {
-                AdditionalData = new Dictionary<string, object>();
-            }
-            AdditionalData.Add(propertyName, propertyValue);
-        }
-
     }
 }
