@@ -1,12 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
-using PnP.Core.Model.AzureActiveDirectory;
 using System;
 using System.Collections.Concurrent;
 using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -108,8 +107,8 @@ namespace PnP.Core.Services
                     return response.Result.Content.ReadAsStringAsync().Result;
                 }).ConfigureAwait(false);
 
-                JObject jobject = JObject.Parse(result);
-                var token = jobject["access_token"].Value<string>();
+                var tokenResult = JsonSerializer.Deserialize<JsonElement>(result);
+                var token = tokenResult.GetProperty("access_token").GetString();
                 return token;
             }
         }
