@@ -84,3 +84,33 @@ Currently the only supported option to authenticate to a created Azure AD applic
 3. Go to **Windows Credentials** and click on **Add a generic credential**.
 4. Give the credential a name (e.g. Contoso), a user name (e.g. joe@contoso.onmicrosoft.com) and a password. Hit **OK** to save.
 5. Use the credential manager name (Contoso in this example) in your `OAuthCredentialManagerConfiguration` setup.
+
+## Using an externally obtained access token
+
+Depending on where you're using the PnP Core SDK you might already have acquired an access token using different means. You can re-use this access token in the PnP Core SDK by using the `OAuthAccessTokenConfiguration`:
+
+```csharp
+.AddAuthenticationProviderFactory(options =>
+{
+    options.Configurations.Add(new OAuthAccessTokenConfiguration
+    {
+        Name = "AccessTokenAuthentication",
+        ClientId = null,
+    });
+})
+```
+
+After you've configured the `OAuthAccessTokenConfiguration` configuration you can create a context (tell the factory to use this configuration if it's not the default one) and use the `SetAccessToken` method on your `PnPContext` class instance to plug-in your access token:
+
+```csharp
+var pnpContextFactory = scope.ServiceProvider.GetRequiredService<IPnPContextFactory>();
+// Use the PnP Context factory to get a PnPContext for the given configuration
+using (var context = pnpContextFactory.Create("SiteToWorkWith", "AccessTokenAuthentication"))
+{
+    // Set the access token on the context
+    context.SetAccessToken(accessToken);
+
+    // use the context
+    var site = await context.Site.GetAsync();
+}
+```
