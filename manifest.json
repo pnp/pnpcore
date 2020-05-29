@@ -1662,7 +1662,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/writing tests.html",
-          "hash": "Wo79L9rhMBXOSKTo257Tdw=="
+          "hash": "3UjNuBSGbFIWfujnn8vpPg=="
         }
       },
       "is_incremental": false,
@@ -1803,7 +1803,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 125,
-          "skipped_file_count": 110
+          "skipped_file_count": 125
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
