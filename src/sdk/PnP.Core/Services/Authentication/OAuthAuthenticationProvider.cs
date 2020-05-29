@@ -12,6 +12,9 @@ using System.Web;
 
 namespace PnP.Core.Services
 {
+    /// <summary>
+    /// OAuth authentication provider, uses Azure AD to authenticate requests and provide access tokens
+    /// </summary>
     public class OAuthAuthenticationProvider : IAuthenticationProvider
     {
         private static readonly HttpClient httpClient = new HttpClient();
@@ -23,23 +26,40 @@ namespace PnP.Core.Services
         private const string defaultAADAppId = "31359c7f-bd7e-475c-86db-fdb8c937548e";
 
         private readonly ILogger log;
-        private IAuthenticationProviderConfiguration configuration;
 
         // Token cache handling
         private static readonly SemaphoreSlim semaphoreSlimTokens = new SemaphoreSlim(1);
         private readonly ConcurrentDictionary<string, string> tokenCache = new ConcurrentDictionary<string, string>();
 
-        public OAuthAuthenticationProvider(
-            ILogger<OAuthAuthenticationProvider> logger)
+        /// <summary>
+        /// Get's the in use <see cref="IAuthenticationProviderConfiguration"/>
+        /// </summary>
+        public IAuthenticationProviderConfiguration Configuration { get; private set; }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="logger">Logger</param>
+        public OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
         {
             log = logger;
         }
 
+        /// <summary>
+        /// Configure this authentication provider for the desired configuration
+        /// </summary>
+        /// <param name="configuration"><see cref="IAuthenticationProviderConfiguration"/> (e.g. <see cref="OAuthCredentialManagerConfiguration"/>) to use</param>
         public void Configure(IAuthenticationProviderConfiguration configuration)
         {
-            this.configuration = configuration;
+            Configuration = configuration;
         }
 
+        /// <summary>
+        /// Authenticate a given request by adding the needed authorization header
+        /// </summary>
+        /// <param name="resource">Resource to authenticate against</param>
+        /// <param name="request"><see cref="HttpRequestMessage"/> to update with authentication details</param>
+        /// <returns></returns>
         public async Task AuthenticateRequestAsync(Uri resource, HttpRequestMessage request)
         {
             if (request == null)
@@ -52,26 +72,113 @@ namespace PnP.Core.Services
                 throw new ArgumentNullException(nameof(resource));
             }
 
-            var (Username, Password) = GetCredential();
-
-            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+            switch (Configuration)
             {
-                request.Headers.Authorization = new AuthenticationHeaderValue("bearer", await EnsureSharePointAccessTokenAsync(resource, Username, Password).ConfigureAwait(false));
+                case OAuthCredentialManagerConfiguration _:
+                case OAuthUsernamePasswordConfiguration _:
+                    {
+                        var (Username, Password) = GetCredential();
+                        if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+                        {
+                            request.Headers.Authorization = new AuthenticationHeaderValue("bearer", await EnsureSharePointAccessTokenAsync(resource, Username, Password).ConfigureAwait(false));
+                        }
+                        break;
+                    }
+                case OAuthCertificateConfiguration _:
+                    // TODO: To implement ...
+                    break;
+                case OAuthAccessTokenConfiguration accessTokenConfig:
+                    {
+                        if (!string.IsNullOrEmpty(accessTokenConfig.AccessToken))
+                        {
+                            request.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessTokenConfig.AccessToken);
+                        }
+                        break;
+                    }
             }
         }
 
         private async Task<string> GetMicrosoftGraphAccessTokenAsync()
         {
-            var (Username, Password) = GetCredential();
-            return await EnsureMicrosoftGraphAccessTokenAsync(Username, Password).ConfigureAwait(false);
+            switch (Configuration)
+            {
+                case OAuthCredentialManagerConfiguration _:
+                case OAuthUsernamePasswordConfiguration _:
+                    {
+                        var (Username, Password) = GetCredential();
+                        if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+                        {
+                            return await EnsureMicrosoftGraphAccessTokenAsync(Username, Password).ConfigureAwait(false);
+                        }
+                        break;
+                    }
+                case OAuthCertificateConfiguration _:
+                    // TODO: To implement ...
+                    break;
+                case OAuthAccessTokenConfiguration accessTokenConfig:
+                    {
+                        if (!string.IsNullOrEmpty(accessTokenConfig.AccessToken))
+                        {
+                            return accessTokenConfig.AccessToken;
+                        }
+                        break;
+                    }
+            }
+
+            return null;
         }
 
         private async Task<string> GetSharePointOnlineAccessTokenAsync(Uri resource)
         {
-            var (Username, Password) = GetCredential();
-            return await EnsureSharePointAccessTokenAsync(resource, Username, Password).ConfigureAwait(false);
+            switch (Configuration)
+            {
+                case OAuthCredentialManagerConfiguration _:
+                case OAuthUsernamePasswordConfiguration _:
+                    {
+                        var (Username, Password) = GetCredential();
+                        if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+                        {
+                            return await EnsureSharePointAccessTokenAsync(resource, Username, Password).ConfigureAwait(false);
+                        }
+                        break;
+                    }
+                case OAuthCertificateConfiguration _:
+                    // TODO: To implement ...
+                    break;
+                case OAuthAccessTokenConfiguration accessTokenConfig:
+                    {
+                        if (!string.IsNullOrEmpty(accessTokenConfig.AccessToken))
+                        {
+                            return accessTokenConfig.AccessToken;
+                        }
+                        break;
+                    }
+            }
+
+            return null;
         }
 
+        /// <summary>
+        /// Get an access token for the requested resource 
+        /// </summary>
+        /// <param name="resource">Resource to request an access token for</param>
+        /// <returns></returns>
+        public async Task<string> GetAccessTokenAsync(Uri resource)
+        {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
+            return await GetAccessTokenAsync(resource, null).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get an access token for the requested resource and scope(s)
+        /// </summary>
+        /// <param name="resource">Resource to request an access token for</param>
+        /// <param name="scopes">Scope(s) to be used for the access token request</param>
+        /// <returns></returns>
         public async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
             if (resource == null)
@@ -97,7 +204,7 @@ namespace PnP.Core.Services
         {
             string resource = $"{resourceUri.Scheme}://{resourceUri.DnsSafeHost}";
 
-            var clientId = this.configuration.ClientId ?? defaultAADAppId;
+            var clientId = this.Configuration.ClientId ?? defaultAADAppId;
             var body = $"resource={resource}&client_id={clientId}&grant_type=password&username={HttpUtility.UrlEncode(username)}&password={HttpUtility.UrlEncode(password)}";
             using (var stringContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded"))
             {
@@ -191,7 +298,7 @@ namespace PnP.Core.Services
             var username = string.Empty;
             var password = string.Empty;
 
-            switch (configuration)
+            switch (Configuration)
             {
                 case OAuthCredentialManagerConfiguration credentialsManager:
                     // We're using a credential manager entry instead of a username/password set in the options
@@ -203,7 +310,7 @@ namespace PnP.Core.Services
                     username = usernamePassword.Username;
                     password = usernamePassword.Password.ToInsecureString();
                     break;
-                case OAuthCertificateConfiguration certificate:
+                case OAuthCertificateConfiguration _:
                     // TODO: To implement ...
                     break;
             }

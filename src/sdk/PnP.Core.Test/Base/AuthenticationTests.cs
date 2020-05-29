@@ -3,6 +3,8 @@ using PnP.Core.Test.Utilities;
 using PnP.Core.Model;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using PnP.Core.Services;
+using System.Collections.Generic;
 
 namespace PnP.Core.Test.Base
 {
@@ -47,6 +49,45 @@ namespace PnP.Core.Test.Base
                     context.Uri, null).ConfigureAwait(true);
 
                 Assert.IsNotNull(accessToken);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestAccessTokenAuthenticationProvider()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                string accessToken;
+                // Persist the fetched token to be used in the offline test
+                if (!TestCommon.Instance.Mocking)
+                {
+                    // First obtain a valid access token
+                    accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(PnPConstants.MicrosoftGraphBaseUri).ConfigureAwait(true);
+                    Assert.IsNotNull(accessToken);
+
+                    Dictionary<string, string> properties = new Dictionary<string, string>
+                    {
+                        { "AccessToken", accessToken }
+                    };
+                    TestManager.SaveProperties(context, properties);
+                }
+                else
+                {
+                    var properties = TestManager.GetProperties(context);
+                    accessToken = properties["AccessToken"];
+                }
+
+                // Use this access token in a new context
+                using (var context1 = TestCommon.Instance.GetContext(TestCommon.TestSiteAccessToken, 1))
+                {
+                    // Set the access token on the context
+                    context1.SetAccessToken(accessToken);
+
+                    var site = await context1.Site.GetAsync();
+
+                    Assert.IsTrue(site.IsPropertyAvailable(p => p.Id));
+                }
             }
         }
     }

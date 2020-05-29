@@ -43,6 +43,11 @@ namespace PnP.Core.Test.Utilities
         internal static string NoGroupTestSite { get { return "NoGroupTestSite"; } }
 
         /// <summary>
+        /// Name of the default test site confguration when using an access token to authenticate
+        /// </summary>
+        internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
+
+        /// <summary>
         /// Set Mocking to false to switch the test system in recording mode for all contexts being created
         /// </summary>
         public bool Mocking { get; set; } = true;
@@ -161,6 +166,11 @@ namespace PnP.Core.Test.Utilities
                            CredentialManagerName = configuration.GetValue<string>("CustomSettings:CredentialManager"),
                            ClientId = configuration.GetValue<string>("CustomSettings:ClientId"),
                        });
+                       options.Configurations.Add(new OAuthAccessTokenConfiguration
+                       {
+                           Name = "AccessTokenAuthentication",
+                           ClientId = null,
+                       });
 
                        options.DefaultConfiguration = "CredentialManagerAuthentication";
                    })
@@ -184,6 +194,13 @@ namespace PnP.Core.Test.Utilities
                            Name = NoGroupTestSite,
                            SiteUrl = new Uri(noGroupSiteUrl),
                            AuthenticationProviderName = "CredentialManagerAuthentication",
+                       });                       
+                       // Configure the main test site also to use access token based auth
+                       options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
+                       {
+                           Name = TestSiteAccessToken,
+                           SiteUrl = new Uri(targetSiteUrl),
+                           AuthenticationProviderName = "AccessTokenAuthentication",
                        });
                    })
                    .BuildServiceProvider();

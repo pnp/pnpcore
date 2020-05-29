@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Enable PnPContext creation from an Office 365 Group id (#39) [jansenbe - Bert Jansen]
 - Added the Group model, represents an Office 365 group (#48) [jansenbe - Bert Jansen]
 - Added custom exception handling for authentication errors (#45) [jansenbe - Bert Jansen]
+- Support to use an externally obtained access token (#44) [jansenbe - Bert Jansen]
 
 ### Changed
 

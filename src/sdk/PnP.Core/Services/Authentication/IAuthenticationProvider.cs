@@ -10,6 +10,11 @@ namespace PnP.Core.Services
     public interface IAuthenticationProvider
     {
         /// <summary>
+        /// Get's the in use <see cref="IAuthenticationProviderConfiguration"/>
+        /// </summary>
+        IAuthenticationProviderConfiguration Configuration { get; }
+
+        /// <summary>
         /// Configures the Authentication Provider
         /// </summary>
         /// <param name="configuration">The configuration to use</param>
@@ -29,5 +34,12 @@ namespace PnP.Core.Services
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
         Task<string> GetAccessTokenAsync(Uri resource, String[] scopes);
+
+        /// <summary>
+        /// Get's an access token for the requested resource 
+        /// </summary>
+        /// <param name="resource">Resource to request an access token for</param>
+        /// <returns>An access token</returns>
+        Task<string> GetAccessTokenAsync(Uri resource);
     }
 }
