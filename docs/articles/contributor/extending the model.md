@@ -44,6 +44,16 @@ The `model.gen.cs` class contains the code that in the future could be generated
   - Properties use the `GetValue<>` base class method for getting
   - Properties use the `SetValue` base class method for setting
   - Collection properties have specific get implementations, check [The PnP Core SDK model](readme.md)) for more details
+- You've added the `Key` property and it points to the property that uniquely identifies your model instance. Ensure you've also updated the `KeyProperty` value to match how you've implemented the `Key` property:
+
+```csharp
+// Property that uniquely identifies this model instance is a guid named Id
+public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
+
+// Implement they Key property to use the guid ID:
+[KeyProperty("Id")]
+public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+```
 
 ### Step 2.2: Create the model.cs class
 
