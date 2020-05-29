@@ -121,7 +121,15 @@
 <li>Collection properties have specific get implementations, check <a href="readme.html">The PnP Core SDK model</a>) for more details</li>
 </ul>
 </li>
+<li>You've added the <code>Key</code> property and it points to the property that uniquely identifies your model instance. Ensure you've also updated the <code>KeyProperty</code> value to match how you've implemented the <code>Key</code> property:</li>
 </ul>
+<pre><code class="lang-csharp">// Property that uniquely identifies this model instance is a guid named Id
+public Guid Id { get =&gt; GetValue&lt;Guid&gt;(); set =&gt; SetValue(value); }
+
+// Implement they Key property to use the guid ID:
+[KeyProperty(&quot;Id&quot;)]
+public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(value.ToString()); }
+</code></pre>
 <h3 id="step-22-create-the-modelcs-class">Step 2.2: Create the model.cs class</h3>
 <p>The <code>model.cs</code> contains the <strong>custom</strong> code, so code that could not be generated. Key things to check are:</p>
 <ul>

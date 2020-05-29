@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class PnPException
+    <title>Class AuthenticationException
    | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class PnPException
+    <meta name="title" content="Class AuthenticationException
    | PnP Core SDK ">
     <meta name="generator" content="docfx 2.52.0.0">
     
@@ -78,10 +78,10 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.PnPException">
-  <h1 id="PnP_Core_PnPException" data-uid="PnP.Core.PnPException">Class PnPException
+            <article class="content wrap" id="_content" data-uid="PnP.Core.AuthenticationException">
+  <h1 id="PnP_Core_AuthenticationException" data-uid="PnP.Core.AuthenticationException">Class AuthenticationException
   </h1>
-  <div class="markdown level0 summary"><p>Base class for the pnp core sdk exceptions</p>
+  <div class="markdown level0 summary"><p>Authentication exception</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   
@@ -89,15 +89,16 @@
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception">Exception</a></div>
-    <div class="level2"><span class="xref">PnPException</span></div>
+    <div class="level2"><a class="xref" href="PnP.Core.PnPException.html">PnPException</a></div>
+    <div class="level3"><span class="xref">AuthenticationException</span></div>
   </div>
   
-      <div class="level3"><a class="xref" href="PnP.Core.AuthenticationException.html">AuthenticationException</a></div>
-      <div class="level3"><a class="xref" href="PnP.Core.ClientException.html">ClientException</a></div>
-      <div class="level3"><a class="xref" href="PnP.Core.ServiceException.html">ServiceException</a></div>
   
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PnP.Core.PnPException.html#PnP_Core_PnPException_Error">PnPException.Error</a>
+    </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception.getbaseexception#System_Exception_GetBaseException">Exception.GetBaseException()</a>
     </div>
@@ -106,9 +107,6 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception.gettype#System_Exception_GetType">Exception.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception.tostring#System_Exception_ToString">Exception.ToString()</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception.data#System_Exception_Data">Exception.Data</a>
@@ -157,9 +155,9 @@
   <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.html">PnP.Core</a></h6>
   <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
   
-  <h5 id="PnP_Core_PnPException_syntax">Syntax</h5>
+  <h5 id="PnP_Core_AuthenticationException_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class PnPException : Exception, ISerializable</code></pre>
+    <pre><code class="lang-csharp hljs">public class AuthenticationException : PnPException, ISerializable</code></pre>
   </div>
   
   
@@ -171,66 +169,42 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_PnPException__ctor.md&amp;value=---%0Auid%3A%20PnP.Core.PnPException.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_AuthenticationException__ctor_PnP_Core_ErrorType_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.AuthenticationException.%23ctor(PnP.Core.ErrorType%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/PnPException.cs/#L19" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/AuthenticationException.cs/#L30" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_PnPException__ctor_" data-uid="PnP.Core.PnPException.#ctor*"></a>
+  <a id="PnP_Core_AuthenticationException__ctor_" data-uid="PnP.Core.AuthenticationException.#ctor*"></a>
   
-  <h4 id="PnP_Core_PnPException__ctor" data-uid="PnP.Core.PnPException.#ctor"><a href="#collapsible-PnP_Core_PnPException__ctor" class="expander" data-toggle="collapse">PnPException()</a></h4>
+  <h4 id="PnP_Core_AuthenticationException__ctor_PnP_Core_ErrorType_System_String_" data-uid="PnP.Core.AuthenticationException.#ctor(PnP.Core.ErrorType,System.String)"><a href="#collapsible-PnP_Core_AuthenticationException__ctor_PnP_Core_ErrorType_System_String_" class="expander" data-toggle="collapse">AuthenticationException(ErrorType, String)</a></h4>
   
-  <div id="collapsible-PnP_Core_PnPException__ctor" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div id="collapsible-PnP_Core_AuthenticationException__ctor_PnP_Core_ErrorType_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p><a class="xref" href="PnP.Core.AuthenticationException.html">AuthenticationException</a> constructor</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public PnPException()</code></pre>
-  </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_PnPException__ctor_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.PnPException.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/PnPException.cs/#L11" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_PnPException__ctor_" data-uid="PnP.Core.PnPException.#ctor*"></a>
-  
-  <h4 id="PnP_Core_PnPException__ctor_System_String_" data-uid="PnP.Core.PnPException.#ctor(System.String)"><a href="#collapsible-PnP_Core_PnPException__ctor_System_String_" class="expander" data-toggle="collapse">PnPException(String)</a></h4>
-  
-  <div id="collapsible-PnP_Core_PnPException__ctor_System_String_" class="collapse in">
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public PnPException(string message)</code></pre>
+    <pre><code class="lang-csharp hljs">public AuthenticationException(ErrorType type, string message)</code></pre>
   </div>
   
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.ErrorType.html">ErrorType</a></span>
+        <span class="parametername">type</span>
+        <p><p>Type of error</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">message</span>
-        <p>
+        <p><p>Error message</p>
+</p>
       </td>
     </tr>
   </table>
@@ -249,39 +223,50 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_PnPException__ctor_System_String_System_Exception_.md&amp;value=---%0Auid%3A%20PnP.Core.PnPException.%23ctor(System.String%2CSystem.Exception)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_AuthenticationException__ctor_PnP_Core_ErrorType_System_String_System_Exception_.md&amp;value=---%0Auid%3A%20PnP.Core.AuthenticationException.%23ctor(PnP.Core.ErrorType%2CSystem.String%2CSystem.Exception)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/PnPException.cs/#L15" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/AuthenticationException.cs/#L41" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_PnPException__ctor_" data-uid="PnP.Core.PnPException.#ctor*"></a>
+  <a id="PnP_Core_AuthenticationException__ctor_" data-uid="PnP.Core.AuthenticationException.#ctor*"></a>
   
-  <h4 id="PnP_Core_PnPException__ctor_System_String_System_Exception_" data-uid="PnP.Core.PnPException.#ctor(System.String,System.Exception)"><a href="#collapsible-PnP_Core_PnPException__ctor_System_String_System_Exception_" class="expander" data-toggle="collapse">PnPException(String, Exception)</a></h4>
+  <h4 id="PnP_Core_AuthenticationException__ctor_PnP_Core_ErrorType_System_String_System_Exception_" data-uid="PnP.Core.AuthenticationException.#ctor(PnP.Core.ErrorType,System.String,System.Exception)"><a href="#collapsible-PnP_Core_AuthenticationException__ctor_PnP_Core_ErrorType_System_String_System_Exception_" class="expander" data-toggle="collapse">AuthenticationException(ErrorType, String, Exception)</a></h4>
   
-  <div id="collapsible-PnP_Core_PnPException__ctor_System_String_System_Exception_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div id="collapsible-PnP_Core_AuthenticationException__ctor_PnP_Core_ErrorType_System_String_System_Exception_" class="collapse in">
+  <div class="markdown level1 summary"><p><a class="xref" href="PnP.Core.AuthenticationException.html">AuthenticationException</a> constructor</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public PnPException(string message, Exception innerException)</code></pre>
+    <pre><code class="lang-csharp hljs">public AuthenticationException(ErrorType type, string message, Exception innerException)</code></pre>
   </div>
   
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
       <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.ErrorType.html">ErrorType</a></span>
+        <span class="parametername">type</span>
+        <p><p>Type of error</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">message</span>
-        <p>
+        <p><p>Error message</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception">Exception</a></span>
         <span class="parametername">innerException</span>
-        <p>
+        <p><p>Inner exception (if any)</p>
+</p>
       </td>
     </tr>
   </table>
@@ -297,46 +282,49 @@
   
   
   </div>
-  <h3 id="properties">Properties
+  <h3 id="methods">Methods
   </h3>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_PnPException_Error.md&amp;value=---%0Auid%3A%20PnP.Core.PnPException.Error%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_AuthenticationException_ToString.md&amp;value=---%0Auid%3A%20PnP.Core.AuthenticationException.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/PnPException.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/AuthenticationException.cs/#L51" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_PnPException_Error_" data-uid="PnP.Core.PnPException.Error*"></a>
+  <a id="PnP_Core_AuthenticationException_ToString_" data-uid="PnP.Core.AuthenticationException.ToString*"></a>
   
-  <h4 id="PnP_Core_PnPException_Error" data-uid="PnP.Core.PnPException.Error"><a href="#collapsible-PnP_Core_PnPException_Error" class="expander" data-toggle="collapse">Error</a></h4>
+  <h4 id="PnP_Core_AuthenticationException_ToString" data-uid="PnP.Core.AuthenticationException.ToString"><a href="#collapsible-PnP_Core_AuthenticationException_ToString" class="expander" data-toggle="collapse">ToString()</a></h4>
   
-  <div id="collapsible-PnP_Core_PnPException_Error" class="collapse in">
-  <div class="markdown level1 summary"><p>Additional error information</p>
+  <div id="collapsible-PnP_Core_AuthenticationException_ToString" class="collapse in">
+  <div class="markdown level1 summary"><p>Outputs a <a class="xref" href="PnP.Core.AuthenticationException.html">AuthenticationException</a> to a string representation</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public BaseError Error { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
   </div>
   
   
-  
-  
-  
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <a class="xref" href="PnP.Core.BaseError.html">BaseError</a>
-        <p>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p><p>String representation</p>
+</p>
       </td>
     </tr>
   </table>
   
   
+  
+  
+  
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception.tostring#System_Exception_ToString">Exception.ToString()</a></div>
   
   
   
@@ -352,8 +340,8 @@
 </article>
           </div>
           <div class="contribution-panel mobile-hide">
-              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_PnPException.md&amp;value=---%0Auid%3A%20PnP.Core.PnPException%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/PnPException.cs/#L8" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_AuthenticationException.md&amp;value=---%0Auid%3A%20PnP.Core.AuthenticationException%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/AuthenticationException.cs/#L8" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
