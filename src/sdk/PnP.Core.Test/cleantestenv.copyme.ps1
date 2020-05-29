@@ -44,7 +44,6 @@ $targetSiteUrl = "https://$tenantName.sharepoint.com/sites/pnpcoresdktestgroup"
 $targetSubSiteUrl = "https://$tenantName.sharepoint.com/sites/pnpcoresdktestgroup/subsite"
 $noGroupSiteUrl = "https://$tenantName.sharepoint.com/sites/pnpcoresdktest"
 
-
 $tenantContext = Connect-PnPOnline -Url $tenantUrl -Credentials $credentials -Verbose -ReturnConnection
 
 Connect-PnPOnline -Url $targetSiteUrl -Credentials $credentials
@@ -64,3 +63,4 @@ Remove-PnPList -Identity GetListAndListItemViaRest -Force
 Remove-PnPList -Identity GetListPropertiesAndListItemViaGraph -Force
 Remove-PnPList -Identity GetListPropertiesAndListItemViaRest -Force
 
+Disconnect-PnPOnline

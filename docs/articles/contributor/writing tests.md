@@ -7,13 +7,13 @@ Test cases are a crucial part of the pnp core sdk as they help ensuring code qua
 If you want to use and extend these unit tests then you'll need to do a simple onetime setup:
 
 1. Go to the test project folder (src\sdk\PnP.Core.Test)
-2. Copy env.sample to env.txt
-3. Open env.txt and put as content the value **mine** (or another name in case you want to use other test environment names)
-4. Open `appsettings.mine.json` and update the url's and accounts to match with those available in your tenant. The test system requires that you setup the following sites (optionally use `setuptestenv.ps1` to help create the needed sites):
+2. Copy `appsettings.copyme.json` to `appsettings.xxx.json` (xxx identifies your test environment) and update the url's and accounts to match with what's available in your tenant. The test system requires that you have setup the following sites (optionally use `setuptestenv.ps1` to help create the needed sites):
 
    1. A modern, group connected, team site (recommended name is **pnpcoresdktestgroup**) which was **teamified** and which **has a sub site** (recommended name is **subsite**)
    2. A modern communication site (recommended name is **pnpcoresdktest**) which **has a sub site** (recommended name is **subsite**)
 
+3. Copy env.sample to env.txt
+4. Open env.txt and put as content the value **xxx** (xxx identifies your test environment)
 5. That should be it. Happy testing!
 
 ## Running the existing tests in offline mode
@@ -104,7 +104,7 @@ If you follow below steps you'll be creating test cases according to the PnP Cor
 4. Once your test is ready delete the generated mock data files (see the `.response` files in the `MockData` folder) and run your test once more to regenerate them. This step ensures that no stale mocking files will be checked in.
 5. Turn mocking on (commenting the `TestCommon.Instance.Mocking = false;` line) and verify your test still works
 6. Check in your test case **together with** the offline files generated in the **mockdata** folder
-7. **Optionally**: if your test is creating artifacts in Microsoft 365 it's best to code the cleanup in the test or in the default `cleantestenv.ps1` script
+7. **Optionally**: if your test is creating artifacts in Microsoft 365 it's best to code the cleanup in the test or in the default `cleantestenv.copyme.ps1` script
 
 > [!Important]
 > Each checked in test must be checked in with mocking turned on and as such with the appropiate offline test files (the `.response` files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.
@@ -113,7 +113,7 @@ If you follow below steps you'll be creating test cases according to the PnP Cor
 
 ### Do I need to recreate the sites after each live test run?
 
-You can opt to recreate the sites each time, but that will be time consuming. It's better to clean the created artifacts before launching a new live test run. The artifacts to clean obviously depend on the written test cases and it's a best practice to keep the `cleantestenv.ps1` script up to date with the needed cleaning work. You can tailor this script and save it as `cleantestenv.mine.ps1` to add your specific cleanup instructions.
+You can opt to recreate the sites each time, but that will be time consuming. It's better to clean the created artifacts before launching a new live test run. The artifacts to clean obviously depend on the written test cases and it's a best practice to keep the `cleantestenv.copyme.ps1` script up to date with the needed cleaning work. You can tailor this script for your environment and save it as `cleantestenv.xxx.ps1` (xxx identifies your test environment) to add your specific cleanup instructions.
 
 ### How can I configure tests to run live versus the default offline run?
 
@@ -175,3 +175,11 @@ public bool Mocking { get; set; } = false;
 ### Can I rename test files or test cases
 
 Yes, if naming needs to change you can do that. Keep in mind that the offline files live in a folder named accordingly to the test file and the offline files depend on the test case name, so you'll have to do similar renames in offline files or folder.
+
+### My test cannot in offline mode and as such it breaks the GitHub "Build and Test" workflow
+
+If you really can't make your test work offline then you'll need to exclude the test from being executed in the GitHub **Build and Test** workflow. This can be done by adding the following check to your test case:
+
+```csharp
+if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+```

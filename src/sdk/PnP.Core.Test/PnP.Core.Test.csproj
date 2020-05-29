@@ -35,7 +35,7 @@
     <None Update="appsettings.edogbert.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="appsettings.mine.json">
+    <None Update="appsettings.copyme.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="appsettings.paolopia.json">
