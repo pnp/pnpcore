@@ -1230,7 +1230,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.IAuthenticationProvider.html",
-          "hash": "Elud6rz9hgTkvdJ+WrHAoA=="
+          "hash": "0JK0E+CdadDtOFGRZs6NgQ=="
         }
       },
       "is_incremental": false,
@@ -1298,11 +1298,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.OAuthAccessTokenConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.OAuthAccessTokenConfiguration.html",
+          "hash": "/T4HsRP/arP5+ODddKdMKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Services.OAuthAuthenticationProvider.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.OAuthAuthenticationProvider.html",
-          "hash": "Wyi/3UPmdUuwE25Cf8D56A=="
+          "hash": "7qZYf/C58yM47rNKhwXxwA=="
         }
       },
       "is_incremental": false,
@@ -1374,7 +1386,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "fM1CAoRLYs4gJSnxJGyUIA=="
+          "hash": "OuDFowHqOO/Vr5vSAmncxw=="
         }
       },
       "is_incremental": false,
@@ -1470,7 +1482,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.html",
-          "hash": "5Cr77FK+owm+hkOh44yR7A=="
+          "hash": "/mvrdM1SEYaOH/Pjoi8mNg=="
         }
       },
       "is_incremental": false,
@@ -1530,7 +1542,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "23bHo+wmxfNG65rMB84yag=="
+          "hash": "pbQfkw/Dvv5i1OHILzKMgg=="
         }
       },
       "is_incremental": false,
@@ -1542,7 +1554,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/configuring authentication.html",
-          "hash": "WxqFxBtmSkwDsGZhir/djA=="
+          "hash": "mdMWcNhns8ut+e8AlVY7zw=="
         }
       },
       "is_incremental": false,
@@ -1802,8 +1814,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 125,
-          "skipped_file_count": 125
+          "total_file_count": 126,
+          "skipped_file_count": 121
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

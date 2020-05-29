@@ -158,6 +158,29 @@
 <li>Give the credential a name (e.g. Contoso), a user name (e.g. joe@contoso.onmicrosoft.com) and a password. Hit <strong>OK</strong> to save.</li>
 <li>Use the credential manager name (Contoso in this example) in your <code>OAuthCredentialManagerConfiguration</code> setup.</li>
 </ol>
+<h2 id="using-an-externally-obtained-access-token">Using an externally obtained access token</h2>
+<p>Depending on where you're using the PnP Core SDK you might already have acquired an access token using different means. You can re-use this access token in the PnP Core SDK by using the <code>OAuthAccessTokenConfiguration</code>:</p>
+<pre><code class="lang-csharp">.AddAuthenticationProviderFactory(options =&gt;
+{
+    options.Configurations.Add(new OAuthAccessTokenConfiguration
+    {
+        Name = &quot;AccessTokenAuthentication&quot;,
+        ClientId = null,
+    });
+})
+</code></pre>
+<p>After you've configured the <code>OAuthAccessTokenConfiguration</code> configuration you can create a context (tell the factory to use this configuration if it's not the default one) and use the <code>SetAccessToken</code> method on your <code>PnPContext</code> class instance to plug-in your access token:</p>
+<pre><code class="lang-csharp">var pnpContextFactory = scope.ServiceProvider.GetRequiredService&lt;IPnPContextFactory&gt;();
+// Use the PnP Context factory to get a PnPContext for the given configuration
+using (var context = pnpContextFactory.Create(&quot;SiteToWorkWith&quot;, &quot;AccessTokenAuthentication&quot;))
+{
+    // Set the access token on the context
+    context.SetAccessToken(accessToken);
+
+    // use the context
+    var site = await context.Site.GetAsync();
+}
+</code></pre>
 </article>
           </div>
           <div class="contribution-panel mobile-hide">

@@ -81,7 +81,8 @@
             <article class="content wrap" id="_content" data-uid="PnP.Core.Services.OAuthAuthenticationProvider">
   <h1 id="PnP_Core_Services_OAuthAuthenticationProvider" data-uid="PnP.Core.Services.OAuthAuthenticationProvider">Class OAuthAuthenticationProvider
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>OAuth authentication provider, uses Azure AD to authenticate requests and provide access tokens</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   
   <div class="inheritance">
@@ -136,7 +137,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_OAuthAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_OAuthAuthenticationProvider__.md&amp;value=---%0Auid%3A%20PnP.Core.Services.OAuthAuthenticationProvider.%23ctor(Microsoft.Extensions.Logging.ILogger%7BPnP.Core.Services.OAuthAuthenticationProvider%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_OAuthAuthenticationProvider__ctor_" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.#ctor*"></a>
@@ -144,7 +145,8 @@
   <h4 id="PnP_Core_Services_OAuthAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_OAuthAuthenticationProvider__" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.OAuthAuthenticationProvider})"><a href="#collapsible-PnP_Core_Services_OAuthAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_OAuthAuthenticationProvider__" class="expander" data-toggle="collapse">OAuthAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt;)</a></h4>
   
   <div id="collapsible-PnP_Core_Services_OAuthAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_OAuthAuthenticationProvider__" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Default constructor</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
@@ -158,7 +160,8 @@
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="PnP.Core.Services.OAuthAuthenticationProvider.html">OAuthAuthenticationProvider</a>&gt;</span>
         <span class="parametername">logger</span>
-        <p>
+        <p><p>Logger</p>
+</p>
       </td>
     </tr>
   </table>
@@ -174,6 +177,54 @@
   
   
   </div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_OAuthAuthenticationProvider_Configuration.md&amp;value=---%0Auid%3A%20PnP.Core.Services.OAuthAuthenticationProvider.Configuration%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Services_OAuthAuthenticationProvider_Configuration_" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.Configuration*"></a>
+  
+  <h4 id="PnP_Core_Services_OAuthAuthenticationProvider_Configuration" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.Configuration"><a href="#collapsible-PnP_Core_Services_OAuthAuthenticationProvider_Configuration" class="expander" data-toggle="collapse">Configuration</a></h4>
+  
+  <div id="collapsible-PnP_Core_Services_OAuthAuthenticationProvider_Configuration" class="collapse in">
+  <div class="markdown level1 summary"><p>Get's the in use <a class="xref" href="PnP.Core.Services.IAuthenticationProviderConfiguration.html">IAuthenticationProviderConfiguration</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IAuthenticationProviderConfiguration Configuration { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Services.IAuthenticationProviderConfiguration.html">IAuthenticationProviderConfiguration</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html#PnP_Core_Services_IAuthenticationProvider_Configuration">IAuthenticationProvider.Configuration</a></div>
+  
+  
+  
+  
+  </div>
   <h3 id="methods">Methods
   </h3>
   
@@ -182,7 +233,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_OAuthAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.OAuthAuthenticationProvider.AuthenticateRequestAsync(System.Uri%2CSystem.Net.Http.HttpRequestMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L63" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_OAuthAuthenticationProvider_AuthenticateRequestAsync_" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.AuthenticateRequestAsync*"></a>
@@ -190,7 +241,8 @@
   <h4 id="PnP_Core_Services_OAuthAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.AuthenticateRequestAsync(System.Uri,System.Net.Http.HttpRequestMessage)"><a href="#collapsible-PnP_Core_Services_OAuthAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_" class="expander" data-toggle="collapse">AuthenticateRequestAsync(Uri, HttpRequestMessage)</a></h4>
   
   <div id="collapsible-PnP_Core_Services_OAuthAuthenticationProvider_AuthenticateRequestAsync_System_Uri_System_Net_Http_HttpRequestMessage_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Authenticate a given request by adding the needed authorization header</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
@@ -204,14 +256,16 @@
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a></span>
         <span class="parametername">resource</span>
-        <p>
+        <p><p>Resource to authenticate against</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a></span>
         <span class="parametername">request</span>
-        <p>
+        <p><p><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.net.http.httprequestmessage">HttpRequestMessage</a> to update with authentication details</p>
+</p>
       </td>
     </tr>
   </table>
@@ -244,7 +298,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_OAuthAuthenticationProvider_Configure_PnP_Core_Services_IAuthenticationProviderConfiguration_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.OAuthAuthenticationProvider.Configure(PnP.Core.Services.IAuthenticationProviderConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L38" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L52" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_OAuthAuthenticationProvider_Configure_" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.Configure*"></a>
@@ -252,7 +306,8 @@
   <h4 id="PnP_Core_Services_OAuthAuthenticationProvider_Configure_PnP_Core_Services_IAuthenticationProviderConfiguration_" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.Configure(PnP.Core.Services.IAuthenticationProviderConfiguration)"><a href="#collapsible-PnP_Core_Services_OAuthAuthenticationProvider_Configure_PnP_Core_Services_IAuthenticationProviderConfiguration_" class="expander" data-toggle="collapse">Configure(IAuthenticationProviderConfiguration)</a></h4>
   
   <div id="collapsible-PnP_Core_Services_OAuthAuthenticationProvider_Configure_PnP_Core_Services_IAuthenticationProviderConfiguration_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Configure this authentication provider for the desired configuration</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
@@ -266,7 +321,8 @@
       <td>
         <span class="pull-right"><a class="xref" href="PnP.Core.Services.IAuthenticationProviderConfiguration.html">IAuthenticationProviderConfiguration</a></span>
         <span class="parametername">configuration</span>
-        <p>
+        <p><p><a class="xref" href="PnP.Core.Services.IAuthenticationProviderConfiguration.html">IAuthenticationProviderConfiguration</a> (e.g. <a class="xref" href="PnP.Core.Services.OAuthCredentialManagerConfiguration.html">OAuthCredentialManagerConfiguration</a>) to use</p>
+</p>
       </td>
     </tr>
   </table>
@@ -287,10 +343,67 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.OAuthAuthenticationProvider.GetAccessTokenAsync(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L166" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.GetAccessTokenAsync*"></a>
+  
+  <h4 id="PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.GetAccessTokenAsync(System.Uri)"><a href="#collapsible-PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_" class="expander" data-toggle="collapse">GetAccessTokenAsync(Uri)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_" class="collapse in">
+  <div class="markdown level1 summary"><p>Get an access token for the requested resource</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; GetAccessTokenAsync(Uri resource)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a></span>
+        <span class="parametername">resource</span>
+        <p><p>Resource to request an access token for</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html#PnP_Core_Services_IAuthenticationProvider_GetAccessTokenAsync_System_Uri_">IAuthenticationProvider.GetAccessTokenAsync(Uri)</a></div>
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Services.OAuthAuthenticationProvider.GetAccessTokenAsync(System.Uri%2CSystem.String%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L75" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L182" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.GetAccessTokenAsync*"></a>
@@ -298,7 +411,8 @@
   <h4 id="PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___" data-uid="PnP.Core.Services.OAuthAuthenticationProvider.GetAccessTokenAsync(System.Uri,System.String[])"><a href="#collapsible-PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___" class="expander" data-toggle="collapse">GetAccessTokenAsync(Uri, String[])</a></h4>
   
   <div id="collapsible-PnP_Core_Services_OAuthAuthenticationProvider_GetAccessTokenAsync_System_Uri_System_String___" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Get an access token for the requested resource and scope(s)</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
@@ -312,14 +426,16 @@
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a></span>
         <span class="parametername">resource</span>
-        <p>
+        <p><p>Resource to request an access token for</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>[]</span>
         <span class="parametername">scopes</span>
-        <p>
+        <p><p>Scope(s) to be used for the access token request</p>
+</p>
       </td>
     </tr>
   </table>
@@ -356,7 +472,7 @@
           </div>
           <div class="contribution-panel mobile-hide">
               <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_OAuthAuthenticationProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Services.OAuthAuthenticationProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L15" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Authentication/OAuthAuthenticationProvider.cs/#L18" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
