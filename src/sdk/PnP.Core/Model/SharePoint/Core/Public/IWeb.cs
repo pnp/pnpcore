@@ -134,9 +134,15 @@ namespace PnP.Core.Model.SharePoint
         public IListCollection Lists { get; }
 
         /// <summary>
+        /// Collection of content types in the current Web object
+        /// </summary>
+        public IContentTypeCollection ContentTypes { get; }
+
+        /// <summary>
         /// Collection of webs in this current web
         /// </summary>
         public IWebCollection Webs { get; }
+
 
     }
 }

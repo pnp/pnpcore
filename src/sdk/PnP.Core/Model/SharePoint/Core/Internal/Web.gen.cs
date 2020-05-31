@@ -85,6 +85,20 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        [SharePointProperty("ContentTypes", Expandable = true)]
+        public IContentTypeCollection ContentTypes
+        {
+            get
+            {
+                if (!HasValue(nameof(ContentTypes)))
+                {
+                    var webs = new ContentTypeCollection(this.PnPContext, this, nameof(ContentTypes));
+                    SetValue(webs);
+                }
+                return GetValue<IContentTypeCollection>();
+            }
+        }
+
         [SharePointProperty("Webs", Expandable = true)]
         public IWebCollection Webs
         {

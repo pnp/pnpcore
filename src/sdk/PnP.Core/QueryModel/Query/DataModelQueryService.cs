@@ -50,6 +50,7 @@ namespace PnP.Core.QueryModel
             // IList and IListItem or single elements of those collections
             if (typeof(TModel).IsAssignableFrom(typeof(IList)) ||
                 typeof(TModel).IsAssignableFrom(typeof(IListItem)) ||
+                typeof(TModel).IsAssignableFrom(typeof(IContentType)) ||
                 typeof(TModel).IsAssignableFrom(typeof(IWeb)) ||
                 typeof(TModel).IsAssignableFrom(typeof(ITeamChannel))||
                 typeof(TModel).IsAssignableFrom(typeof(ITeamChatMessage)))
