@@ -13,14 +13,24 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         internal class ContentTypeAdd : RestBaseAdd<IContentType>
         {
-            public IContentTypeId Id { get; set; }
+            internal class ContentTypeIdAdd : RestBaseAdd<IContentTypeId>
+            {
+                public string StringValue { get; set; }
+
+                internal ContentTypeIdAdd(ContentTypeId id) : base(id)
+                {
+                    StringValue = id.StringValue;
+                }
+            }
+
+            public ContentTypeIdAdd Id { get; set; }
             public string Description { get; set; }
             public string Group { get; set; }
             public string Name { get; set; }
 
             internal ContentTypeAdd(BaseDataModel<IContentType> model, string id, string name, string description, string group) : base(model)
             {
-                Id = new ContentTypeId() { StringValue = id };
+                Id = new ContentTypeIdAdd(new ContentTypeId() { StringValue = id });
                 Name = name;
                 Description = description;
                 Group = group;
