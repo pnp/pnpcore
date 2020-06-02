@@ -1,12 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.Services;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -19,21 +16,6 @@ namespace PnP.Core.Test.SharePoint
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
         }
-
-        // Cleanup is not working due to matching mock data not existing
-        //[ClassCleanup]
-        //public static void TestCleanup()
-        //{
-        //    using (var ctx = TestCommon.Instance.GetContext(TestCommon.TestSite))
-        //    {
-        //        // Remove the content type created in the Add test
-        //        IContentType addedContentType = (from ct in ctx.Web.ContentTypes
-        //                                         where ct.Name == "ADD TEST"
-        //                                         select ct).FirstOrDefault();
-        //        if (addedContentType != null)
-        //            addedContentType.DeleteAsync().ConfigureAwait(false);
-        //    }
-        //}
 
         [TestMethod]
         public async Task ContentTypesGetTest()
@@ -65,8 +47,8 @@ namespace PnP.Core.Test.SharePoint
                             .FirstOrDefault();
 
                 Assert.IsNotNull(contentType);
-                // Test complex-type Id property
-                Assert.AreEqual(contentType.Id.StringValue, "0x01");
+                // Test Id property
+                Assert.AreEqual(contentType.Id, "0x01");
             }
         }
 
@@ -80,14 +62,13 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(newContentType);
-                // NOTE : The Id of the created content type is not identical to the specified one using the SP Rest API
-                // The test on Id is commented out for now
+                // NOTE : The Id of the created content type is not identical to the specified one using the SP Rest API. See ContentType.cs for more details
                 //Assert.AreEqual(newContentTypeId, newContentType.StringId);
                 Assert.AreEqual("TEST ADD", newContentType.Name);
                 Assert.AreEqual("TESTING", newContentType.Description);
                 Assert.AreEqual("TESTING", newContentType.Group);
 
-                // NOTE : The created test content type is NOT cleaned up
+                await newContentType.DeleteAsync();
             }
         }
 
@@ -102,15 +83,18 @@ namespace PnP.Core.Test.SharePoint
                 // Test if the content type is created
                 Assert.IsNotNull(contentType);
 
+                // Update the content type
                 contentType.Name = "UPDATED";
                 await contentType.UpdateAsync();
 
-                // Test if the content type is still found
+                // Test if the updated content type is still found
                 IContentType contentTypeToFind = (from ct in context.Web.ContentTypes
                                                   where ct.Name == "UPDATED"
                                                   select ct).FirstOrDefault();
 
                 Assert.IsNotNull(contentTypeToFind);
+
+                await contentType.DeleteAsync();
             }
         }
 
@@ -125,6 +109,7 @@ namespace PnP.Core.Test.SharePoint
                 // Test if the content type is created
                 Assert.IsNotNull(contentType);
 
+                // Delete the content type again
                 await contentType.DeleteAsync();
 
                 // Test if the content type is still found

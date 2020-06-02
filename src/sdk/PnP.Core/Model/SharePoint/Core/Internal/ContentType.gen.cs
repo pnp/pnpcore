@@ -4,7 +4,8 @@
     {
         public string StringId { get => GetValue<string>(); set => SetValue(value); }
 
-        public IContentTypeId Id { get => GetValue<IContentTypeId>(); set => SetValue(value); }
+        [SharePointProperty("Id", JsonPath = "StringValue")]
+        public string Id { get => GetValue<string>(); set => SetValue(value); }
 
         public string ClientFormCustomFormatter { get => GetValue<string>(); set => SetValue(value); }
 

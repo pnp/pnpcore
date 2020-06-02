@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added custom exception handling for authentication errors (#45) [jansenbe - Bert Jansen]
 - Support to use an externally obtained access token (#44) [jansenbe - Bert Jansen]
 - Add step-by-step guide on how to extend the model (#46) [ypcode - Yannick Plennevaux] / [jansenbe - Bert Jansen]
+- First iteration of content type support (within the limitations of SharePoint REST) (#47) [ypcode - Yannick Plennevaux]
 
 ### Changed
 

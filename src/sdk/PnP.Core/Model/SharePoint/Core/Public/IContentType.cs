@@ -12,10 +12,9 @@
         public string StringId { get; set; }
 
         /// <summary>
-        /// TODO : To implement with Complex Type
         /// The unique ID of the Content Type as object
         /// </summary>
-        public IContentTypeId Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets the Client Form Custom Formatter of the Content Type
