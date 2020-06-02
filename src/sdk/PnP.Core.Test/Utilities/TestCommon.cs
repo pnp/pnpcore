@@ -131,11 +131,13 @@ namespace PnP.Core.Test.Utilities
                     throw new Exception("Please ensure you've a env.txt file in the root of the test project. This file should contain the name of the test environment you want to use.");
                 }
 
+                // The settings file is stored in the root of the test project, no need to configure the file to be copied over the bin folder
+                var jsonSettingsFile = Path.GetFullPath($"..\\..\\..\\appsettings.{environmentName}.json");
+
                 var configuration = new ConfigurationBuilder()
-                .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
+                .AddJsonFile(jsonSettingsFile, optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
-
 
                 string targetSiteUrl = configuration.GetValue<string>("CustomSettings:TargetSiteUrl");
                 string targetSubSiteUrl = configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl");
