@@ -232,6 +232,10 @@ internal partial class List
 </ul>
 <h3 id="complex-type-classes">Complex type classes</h3>
 <p>Complex type classes are used to represent types which are too complex for simple .Net type or enumeration, but on the other hand not complex enough to be queried independently via an API call. A good example of this are the <code>TeamFunSettings</code>: when querying for a <code>Team</code> you'll get the <code>TeamFunSettings</code> in the response, but there's no API to directly query <code>TeamFunSettings</code> as such.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Depending on your needs you can skip the overhead of creating complex types but rather use the JsonPath option of the property attributes. See the <strong>Decorating the model</strong> chapter to learn more.</p>
+</div>
 <h4 id="public-model-1">Public model</h4>
 <p>Like with all our public models, the complex type classes also use interfaces.</p>
 <pre><code class="lang-csharp">/// &lt;summary&gt;

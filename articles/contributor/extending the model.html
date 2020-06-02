@@ -100,6 +100,7 @@
     public interface IModel : IDataModel&lt;IModel&gt;
     {
     }
+}
 </code></pre>
 <h4 id="sample-of-a-collection-of-model-items-interface">Sample of a collection of Model items interface</h4>
 <pre><code class="lang-csharp">namespace PnP.Core.Model.SharePoint
@@ -110,6 +111,7 @@
     public interface IModelCollection : IDataModelCollection&lt;IModel&gt;
     {
     }
+}
 </code></pre>
 <h3 id="step-12-add-the-properties">Step 1.2: Add the properties</h3>
 <p>Once the interface is created you need to add properties to it, the properties you want to add are quite often inspired by what the called API's return. So if the API you plan to call to populate this model returns a string field with name FieldA you would want to add a property for it: <code>public string FieldA { get; set; }</code>. Key things to check are:</p>
@@ -142,6 +144,7 @@
         /// &lt;/summary&gt;
         public bool FieldB { get; set; }
     }
+}    
 </code></pre>
 <h4 id="sample-of-a-modelcollection-interface-and-a-model2-interface-that-uses-it">Sample of a ModelCollection interface and a Model2 interface that uses it</h4>
 <pre><code class="lang-csharp">namespace PnP.Core.Model.SharePoint
@@ -151,9 +154,9 @@
     /// &lt;/summary&gt;
     public interface IModelCollection : IDataModelCollection&lt;IModel&gt;
     {
-        
-    }
 
+    }
+}
 </code></pre>
 <pre><code class="lang-csharp">namespace PnP.Core.Model.SharePoint
 {
@@ -167,7 +170,7 @@
         /// &lt;/summary&gt;
         public IModelCollection Items { get; }
     }
-
+}
 </code></pre>
 <h2 id="step-2-define-the-internal-model">Step 2: Define the internal model</h2>
 <p>Once you've defined the public interface the next step is defining the internal classes that implement the created interface(s). These internal classes live at the same level as your interface classes but then in the <code>Internal</code> folder instead of the <code>Public</code> folder. So if the interface lives in the <code>Model\SharePoint\Core\Public</code> folder then the respective internal class lives in the <code>Model\SharePoint\Core\Internal</code> folder.</p>

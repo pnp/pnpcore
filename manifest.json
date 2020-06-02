@@ -434,6 +434,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IContentType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IContentType.html",
+          "hash": "Gg7zGTv0Je8MT6v0gbdB2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IContentTypeCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IContentTypeCollection.html",
+          "hash": "lIeeTmLfuQBir6f3X8owUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IList.yml",
       "output": {
         ".html": {
@@ -498,7 +522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "bE346KIOj3+Vln801RqCBw=="
+          "hash": "uDJJEjALl3fBVV6mw5Klpw=="
         }
       },
       "is_incremental": false,
@@ -582,7 +606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "6KAbLWh7IFv4w/s27iR8rw=="
+          "hash": "xe84Rvn9s5To5XqMw70DMA=="
         }
       },
       "is_incremental": false,
@@ -1542,7 +1566,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "pbQfkw/Dvv5i1OHILzKMgg=="
+          "hash": "deLWxEd7sLKXM7ynojc4cg=="
         }
       },
       "is_incremental": false,
@@ -1602,7 +1626,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/extending the model - Microsoft Graph.html",
-          "hash": "K/BOULxKewDko8fWM9+mfg=="
+          "hash": "XO7JelgTaWsZUdBN2g0VCw=="
         }
       },
       "is_incremental": false,
@@ -1626,7 +1650,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/extending the model.html",
-          "hash": "FfWC7+EszIKxT/a1CrFAoA=="
+          "hash": "lvBSV8G1XLjRXqlIya/EjA=="
         }
       },
       "is_incremental": false,
@@ -1650,7 +1674,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/readme.html",
-          "hash": "99YVdquDSAaXDyhvZKD8hQ=="
+          "hash": "oHJN8OE5xGDug8VCBPAvbw=="
         }
       },
       "is_incremental": false,
@@ -1809,13 +1833,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 15,
-          "skipped_file_count": 14
+          "skipped_file_count": 12
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 126,
-          "skipped_file_count": 126
+          "total_file_count": 128,
+          "skipped_file_count": 124
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
