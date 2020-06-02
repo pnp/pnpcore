@@ -232,6 +232,11 @@ namespace PnP.Core.Services
 
                         await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
                     }
+                    // Are we loading a complex type
+                    else if (IsComplexType(entityField.PropertyInfo.PropertyType))
+                    {
+                        ProcessComplexType(pnpObject, contextAwareObject, property, entityField);
+                    }
                     else
                     {
                         if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name))
@@ -394,7 +399,7 @@ namespace PnP.Core.Services
                         // copy over collected metadata to collection
                         if (metadata.Count > 0)
                         {
-                            foreach(var data in metadata)
+                            foreach (var data in metadata)
                             {
                                 if (typedMetaDataCollection.Metadata.ContainsKey(data.Key))
                                 {
@@ -692,7 +697,17 @@ namespace PnP.Core.Services
             {
                 // entityField.PropertyInfo.PropertyType.Namespace = PnP.Core.Model.Teams
                 // entityField.PropertyInfo.PropertyType.Name = ITeamDiscoverySettings
-                entityField.PropertyInfo.SetValue(pnpObject, Activator.CreateInstance(Type.GetType($"{entityField.PropertyInfo.PropertyType.Namespace}.{entityField.PropertyInfo.PropertyType.Name.Substring(1)}")));
+                try
+                {
+                    var complexType = Type.GetType($"{entityField.PropertyInfo.PropertyType.Namespace}.{entityField.PropertyInfo.PropertyType.Name.Substring(1)}");
+                    var complexTypeInstance = Activator.CreateInstance(complexType);
+                    entityField.PropertyInfo.SetValue(pnpObject, complexTypeInstance);
+                }
+                catch (Exception ex)
+                {
+                    // TODO Log this
+                }
+
             }
 
             // Get instance of the model property
@@ -708,7 +723,10 @@ namespace PnP.Core.Services
             // Map returned fields
             foreach (var childProperty in property.Value.EnumerateObject())
             {
-                EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>)
+                    .Where(p => (!string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase))
+                             || (!string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)))
+                    .FirstOrDefault();
                 if (entityChildField != null)
                 {
                     // if the complex type contains another complex type and there's a value provided then let's recursively call this method again
@@ -1116,7 +1134,7 @@ namespace PnP.Core.Services
             return (propertyType.IsGenericType && (propertyType.GetGenericTypeDefinition() == typeof(List<>)));
         }
 
-        internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property, ref Dictionary<string,string> metadata)
+        internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property, ref Dictionary<string, string> metadata)
         {
             if (!target.Metadata.ContainsKey(property.Name))
             {

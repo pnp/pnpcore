@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="appsettings.pvxdev.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="appsettings.paolopia.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -49,6 +52,7 @@
   <ItemGroup>
     <Folder Include="Base\MockData\" />
     <Folder Include="QueryModel\MockData\" />
+    <Folder Include="SharePoint\MockData\ContentTypeTests\" />
   </ItemGroup>
 
 </Project>
