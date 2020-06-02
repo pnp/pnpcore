@@ -8,7 +8,7 @@ Extending the model is a very common type of work, especially in the early days 
 
 The public model is an interface and lives in the **Public** folder. So when extending the SharePoint model you would create the new interface in for example `Model\SharePoint\Core\Public` or in `Model\SharePoint\Navigation\Public`. If you feel there's a need to add a new sub level (e.g. Core, Navigation, etc) then you can do that. Key things to check are:
 
-Let's consider a model called `Model` in SharePoint 
+Let's consider a model called `Model` in SharePoint
 
 - Your interface(s) are in the `Public` folder
 - Your interface(s) are public (e.g. `public interface IWeb`) and follow the standard interface naming convention (so starting with an I e.g. `IModel`)
@@ -17,6 +17,7 @@ Let's consider a model called `Model` in SharePoint
 - Your interface(s) have triple slash comments explaining their purpose
 
 #### Sample of a Model interface
+
 ```csharp
 namespace PnP.Core.Model.SharePoint
 {
@@ -26,9 +27,11 @@ namespace PnP.Core.Model.SharePoint
     public interface IModel : IDataModel<IModel>
     {
     }
+}
 ```
 
 #### Sample of a collection of Model items interface
+
 ```csharp
 namespace PnP.Core.Model.SharePoint
 {
@@ -38,6 +41,7 @@ namespace PnP.Core.Model.SharePoint
     public interface IModelCollection : IDataModelCollection<IModel>
     {
     }
+}
 ```
 
 ### Step 1.2: Add the properties
@@ -50,6 +54,7 @@ Once the interface is created you need to add properties to it, the properties y
 - Properties have triple slash comments explaining their purpose
 
 #### Sample of a Model interface with properties
+
 ```csharp
 namespace PnP.Core.Model.SharePoint
 {
@@ -73,9 +78,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool FieldB { get; set; }
     }
+}    
 ```
 
 #### Sample of a ModelCollection interface and a Model2 interface that uses it
+
 ```csharp
 namespace PnP.Core.Model.SharePoint
 {
@@ -84,9 +91,9 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     public interface IModelCollection : IDataModelCollection<IModel>
     {
-        
-    }
 
+    }
+}
 ```
 
 ```csharp
@@ -102,9 +109,8 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IModelCollection Items { get; }
     }
-
+}
 ```
-
 
 ## Step 2: Define the internal model
 

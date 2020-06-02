@@ -173,6 +173,9 @@ Each coded model class:
 
 Complex type classes are used to represent types which are too complex for simple .Net type or enumeration, but on the other hand not complex enough to be queried independently via an API call. A good example of this are the `TeamFunSettings`: when querying for a `Team` you'll get the `TeamFunSettings` in the response, but there's no API to directly query `TeamFunSettings` as such.
 
+> [!Note]
+> Depending on your needs you can skip the overhead of creating complex types but rather use the JsonPath option of the property attributes. See the **Decorating the model** chapter to learn more.
+
 #### Public model
 
 Like with all our public models, the complex type classes also use interfaces.
