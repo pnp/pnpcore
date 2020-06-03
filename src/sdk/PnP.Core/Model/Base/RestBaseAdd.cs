@@ -26,7 +26,7 @@ namespace PnP.Core.Model
         internal RestBaseAdd(BaseDataModel<TModel> model)
         {
             // Get entity information for the entity to load
-            var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(model.GetType());
+            var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(model.GetType(), model);
 
             // Each model that can be handled via SharePoint rest does need to have it's type defined, so populate that by default
             Metadata = new RestBaseAddType(entityInfo.SharePointType);

@@ -28,7 +28,6 @@
   <ItemGroup>
     <Folder Include="Base\MockData\" />
     <Folder Include="QueryModel\MockData\" />
-    <Folder Include="SharePoint\MockData\ContentTypeTests\" />
   </ItemGroup>
 
 </Project>

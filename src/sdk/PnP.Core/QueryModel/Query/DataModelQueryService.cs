@@ -56,7 +56,15 @@ namespace PnP.Core.QueryModel
                 typeof(TModel).IsAssignableFrom(typeof(ITeamChatMessage)))
             {
                 // Get the entity info
-                var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel));
+                var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel), null);
+
+                // In case a model can be used from different contexts (e.g. ContentType can be used from Web, but also from List)
+                // it's required to let the entity know this context so that it can provide the correct information when requested
+                if (parent != null)
+                {
+                    entityInfo.Target = parent.GetType();
+                }
+
                 // and its concrete instance
                 var concreteEntity = EntityManager.Instance
                     .GetEntityConcreteInstance<TModel>(typeof(TModel), parent);

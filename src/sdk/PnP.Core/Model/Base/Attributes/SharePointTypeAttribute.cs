@@ -5,7 +5,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Attribute used to decorate model classes that can be loaded via SharePoint REST
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     internal class SharePointTypeAttribute: Attribute
     {
         /// <summary>
@@ -21,6 +21,11 @@ namespace PnP.Core.Model
         /// Defines the OData name of this SharePoint REST type (e.g. SP.Web)
         /// </summary>
         public string Type { get; set; }
+
+        /// <summary>
+        /// The actual target type for which this attribute is valid
+        /// </summary>
+        public Type Target { get; set; }
 
         /// <summary>
         /// URI that identifies an object in SharePoint REST, used for get, update and delete requests

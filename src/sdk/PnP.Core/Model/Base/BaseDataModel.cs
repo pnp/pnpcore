@@ -1287,6 +1287,105 @@ namespace PnP.Core.Model
         }
         #endregion
 
+        #region Generic
+        /// <summary>
+        /// Adds a request to the given batch
+        /// </summary>
+        /// <param name="apiCall">Api call to execute</param>
+        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
+        /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
+        /// <param name="postMappingJson">Delegate for post mapping</param>
+        internal virtual void BaseBatchRequest(ApiCall apiCall, HttpMethod method, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            BaseBatchRequest(PnPContext.CurrentBatch, apiCall, method, fromJsonCasting, postMappingJson);
+        }
+
+        /// <summary>
+        /// Adds a request to the given batch
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="apiCall">Api call to execute</param>
+        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
+        /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
+        /// <param name="postMappingJson">Delegate for post mapping</param>
+        internal virtual void BaseBatchRequest(Batch batch, ApiCall apiCall, HttpMethod method, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            // Get entity information for the entity to update
+            var entityInfo = GetClassInfo();
+
+            // Prefix API request with context url if needed
+            apiCall = PrefixApiCall(apiCall, entityInfo);
+
+            // Ensure there's no Graph beta endpoint being used when that was not allowed
+            if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
+            {
+                return;
+            }
+
+            // Ensure token replacement is done
+            apiCall.Request = TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).GetAwaiter().GetResult();
+
+            // Add the request to the batch
+            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting, postMappingJson);
+        }
+
+        /// <summary>
+        /// Executes a given request
+        /// </summary>
+        /// <param name="apiCall">Api call to execute</param>
+        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
+        /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
+        /// <param name="postMappingJson">Delegate for post mapping</param>
+        internal virtual async Task BaseRequest(ApiCall apiCall, HttpMethod method, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            // Get entity information for the entity to update
+            var entityInfo = GetClassInfo();
+
+            // Prefix API request with context url if needed
+            apiCall = PrefixApiCall(apiCall, entityInfo);
+
+            // Ensure there's no Graph beta endpoint being used when that was not allowed
+            if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
+            {
+                throw new ClientException(ErrorType.GraphBetaNotAllowed, "Adding this entity requires the use of the Graph beta endpoint");
+            }
+
+            // Ensure token replacement is done
+            apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
+
+            // Add the request to the batch
+            var batch = PnPContext.BatchClient.EnsureBatch();
+            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting, postMappingJson);
+            await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
+        }
+
+        private ApiCall PrefixApiCall(ApiCall apiCall, EntityInfo entityInfo)
+        {
+            if (!string.IsNullOrEmpty(entityInfo.SharePointType))
+            {
+                // Prefix API request with context url
+                apiCall.Request = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiCall.Request}";
+            }
+
+            return apiCall;
+        }
+
+        private bool CanUseGraphBetaForRequest(ApiCall apiCall, EntityInfo entityInfo)
+        {
+            if (apiCall.Type == ApiType.GraphBeta && !PnPContext.GraphCanUseBeta)
+            {
+                ApiCallRequest request = new ApiCallRequest(apiCall);
+                request.CancelRequest($"Request for {entityInfo.GraphGet} requires the Graph Beta endpoint which was not configured to be allowed");
+                ApiCancellationMessage(request);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        #endregion
+
         #region Graph vs GraphBeta handling
 
         private bool CanUseGraphBeta(EntityFieldInfo field)
@@ -1359,7 +1458,7 @@ namespace PnP.Core.Model
         /// <returns>Entity model class describing this model instance</returns>
         private EntityInfo GetClassInfo(params Expression<Func<TModel, object>>[] expressions)
         {
-            return EntityManager.Instance.GetClassInfo<TModel>(this.GetType(), expressions);
+            return EntityManager.Instance.GetClassInfo<TModel>(GetType(), this, expressions);
         }
 
         #endregion

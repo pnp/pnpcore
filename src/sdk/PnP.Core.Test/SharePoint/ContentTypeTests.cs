@@ -2,6 +2,7 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,6 +32,50 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(contentType.Name, "Item");
                 // Test a boolean property
                 Assert.IsFalse(contentType.Hidden);
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesOnListGetTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                //var sitePages = context.Web.Lists.GetByTitle("Site Pages", p => p.ContentTypes);
+                await context.Web.GetAsync(p => p.Lists);
+                var sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
+                if (sitePages != null)
+                {
+                    Assert.IsTrue(sitePages.Requested);
+
+                    await sitePages.GetAsync(p => p.ContentTypes);
+                    Assert.IsTrue(sitePages.ContentTypes.Requested);
+
+                    Assert.IsTrue(sitePages.ContentTypes.Count() > 0);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesOnListGetByIdTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                await context.Web.GetAsync(p => p.Lists);
+                var sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
+                if (sitePages != null)
+                {
+                    IContentType contentType = sitePages.ContentTypes.FirstOrDefault(p => p.StringId.StartsWith("0x0101009D1CB255DA76424F860D91F20E6C4118"));
+
+                    Assert.IsNotNull(contentType);
+                    // Test Id property
+                    Assert.IsTrue(contentType.Id.StartsWith("0x0101009D1CB255DA76424F860D91F20E6C4118"));
+                }
             }
         }
 
@@ -69,6 +114,91 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("TESTING", newContentType.Group);
 
                 await newContentType.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesOnListAddAvailableTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ContentTypesOnListAddAvailableTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Ensure content type are enabled for the list
+                myList.ContentTypesEnabled = true;
+                myList.Update();
+
+                // Add existing content type (contact)
+                var addedContentType = myList.ContentTypes.AddAvailableContentType("0x0106");
+
+                // send batch to server
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(addedContentType != null);
+                Assert.IsTrue(addedContentType.Requested);
+                Assert.IsTrue(addedContentType.Id.StartsWith("0x0106"));
+
+                // Delete list again
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesOnListAddTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ContentTypesOnListAddTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Ensure content type are enabled for the list
+                myList.ContentTypesEnabled = true;
+                await myList.UpdateAsync();
+
+                bool clientExceptionThrown = false;
+                try
+                {
+                    // Add new content type as list content type
+                    IContentType newContentType = await myList.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
+                }
+                catch(ClientException ex)
+                {
+                    clientExceptionThrown = true;
+                }
+
+                Assert.IsTrue(clientExceptionThrown);
+
+                // Delete list again
+                await myList.DeleteAsync();
             }
         }
 
@@ -120,5 +250,55 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNull(contentTypeToFind);
             }
         }
+
+        [TestMethod]
+        public async Task ContentTypesOnListDeleteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ContentTypesOnListDeleteTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Ensure content type are enabled for the list
+                myList.ContentTypesEnabled = true;
+                myList.Update();
+
+                // Add existing content type (contact)
+                var addedContentType = myList.ContentTypes.AddAvailableContentType("0x0106");
+
+                // send batch to server
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(addedContentType != null);
+                Assert.IsTrue(addedContentType.Requested);
+                Assert.IsTrue(addedContentType.Id.StartsWith("0x0106"));
+
+                // Remove the content type again from the list
+                await addedContentType.DeleteAsync();
+
+                // Try to load the content type again, ensure it was removed
+                IContentType contentType = myList.ContentTypes.FirstOrDefault(p => p.StringId.StartsWith("0x0106"));
+
+                Assert.IsTrue(contentType == null);
+
+                // Delete list again
+                await myList.DeleteAsync();
+            }
+        }
+
     }
 }

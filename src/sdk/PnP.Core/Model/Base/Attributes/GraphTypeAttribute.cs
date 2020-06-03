@@ -14,6 +14,11 @@ namespace PnP.Core.Model
         public string Id { get; set; }
 
         /// <summary>
+        /// The actual target type for which this attribute is valid
+        /// </summary>
+        public Type Target { get; set; }
+
+        /// <summary>
         /// URI that identifies an object in Microsoft Graph, used for get, update and delete requests
         /// </summary>
         public string Uri { get; set; }

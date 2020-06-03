@@ -102,6 +102,20 @@ namespace PnP.Core.Model.SharePoint
                 return GetValue<IListItemCollection>();
             }
         }
+        
+        [SharePointProperty("ContentTypes", Expandable = true)]
+        public IContentTypeCollection ContentTypes
+        {
+            get
+            {
+                if (!HasValue(nameof(ContentTypes)))
+                {
+                    var webs = new ContentTypeCollection(this.PnPContext, this, nameof(ContentTypes));
+                    SetValue(webs);
+                }
+                return GetValue<IContentTypeCollection>();
+            }
+        }
 
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }

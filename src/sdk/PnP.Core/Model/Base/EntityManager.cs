@@ -52,35 +52,54 @@ namespace PnP.Core.Model
             else
             {
                 // Load and process type attributes
-                var sharePointTypeAttribute = type.GetCustomAttribute<SharePointTypeAttribute>(false);
-                var graphTypeAttribute = type.GetCustomAttribute<GraphTypeAttribute>(false);
-                if (sharePointTypeAttribute != null || graphTypeAttribute != null)
+                var sharePointTypeAttributes = type.GetCustomAttributes<SharePointTypeAttribute>(false);
+                var graphTypeAttributes = type.GetCustomAttributes<GraphTypeAttribute>(false);
+
+                if (sharePointTypeAttributes.Any() || graphTypeAttributes.Any())
                 {
                     EntityInfo classInfo = new EntityInfo
                     {
                         UseOverflowField = type.ImplementsInterface(typeof(IExpandoDataModel))
                     };
 
-                    if (sharePointTypeAttribute != null)
+                    if (sharePointTypeAttributes.Any())
                     {
-                        classInfo.SharePointType = sharePointTypeAttribute.Type;
-                        classInfo.SharePointUri = sharePointTypeAttribute.Uri;
-                        classInfo.SharePointGet = !string.IsNullOrEmpty(sharePointTypeAttribute.Get) ? sharePointTypeAttribute.Get : sharePointTypeAttribute.Uri;
-                        classInfo.SharePointLinqGet = !string.IsNullOrEmpty(sharePointTypeAttribute.LinqGet) ? sharePointTypeAttribute.LinqGet : sharePointTypeAttribute.Uri;
-                        classInfo.SharePointOverflowProperty = sharePointTypeAttribute.OverflowProperty;
-                        classInfo.SharePointUpdate = !string.IsNullOrEmpty(sharePointTypeAttribute.Update) ? sharePointTypeAttribute.Update : sharePointTypeAttribute.Update;
-                        classInfo.SharePointDelete = !string.IsNullOrEmpty(sharePointTypeAttribute.Delete) ? sharePointTypeAttribute.Delete : sharePointTypeAttribute.Delete;
+                        foreach(var sharePointTypeAttribute in sharePointTypeAttributes)
+                        {
+                            var sharePointTargetToAdd = new EntitySharePointTypeInfo
+                            {
+                                Type = sharePointTypeAttribute.Type,
+                                Target = sharePointTypeAttribute.Target ?? type,
+                                Uri = sharePointTypeAttribute.Uri,
+                                Get = !string.IsNullOrEmpty(sharePointTypeAttribute.Get) ? sharePointTypeAttribute.Get : sharePointTypeAttribute.Uri,
+                                LinqGet = !string.IsNullOrEmpty(sharePointTypeAttribute.LinqGet) ? sharePointTypeAttribute.LinqGet : sharePointTypeAttribute.Uri,
+                                OverflowProperty = sharePointTypeAttribute.OverflowProperty,
+                                Update = !string.IsNullOrEmpty(sharePointTypeAttribute.Update) ? sharePointTypeAttribute.Update : sharePointTypeAttribute.Update,
+                                Delete = !string.IsNullOrEmpty(sharePointTypeAttribute.Delete) ? sharePointTypeAttribute.Delete : sharePointTypeAttribute.Delete
+                            };
+
+                            classInfo.SharePointTargets.Add(sharePointTargetToAdd);
+                        }
                     }
 
-                    if (graphTypeAttribute != null)
+                    if (graphTypeAttributes.Any())
                     {
-                        classInfo.GraphId = !string.IsNullOrEmpty(graphTypeAttribute.Id) ? graphTypeAttribute.Id : "id";
-                        classInfo.GraphGet = !string.IsNullOrEmpty(graphTypeAttribute.Get) ? graphTypeAttribute.Get : graphTypeAttribute.Uri;
-                        classInfo.GraphLinqGet = !string.IsNullOrEmpty(graphTypeAttribute.LinqGet) ? graphTypeAttribute.LinqGet : graphTypeAttribute.Uri;
-                        classInfo.GraphOverflowProperty = graphTypeAttribute.OverflowProperty;
-                        classInfo.GraphUpdate = !string.IsNullOrEmpty(graphTypeAttribute.Update) ? graphTypeAttribute.Update : graphTypeAttribute.Uri;
-                        classInfo.GraphDelete = !string.IsNullOrEmpty(graphTypeAttribute.Delete) ? graphTypeAttribute.Delete : graphTypeAttribute.Uri;
-                        classInfo.GraphBeta = graphTypeAttribute.Beta;
+                        foreach (var graphTypeAttribute in graphTypeAttributes)
+                        {
+                            var graphTargetToAdd = new EntityGraphTypeInfo
+                            {
+                                Target = graphTypeAttribute.Target ?? type,
+                                Id = !string.IsNullOrEmpty(graphTypeAttribute.Id) ? graphTypeAttribute.Id : "id",
+                                Get = !string.IsNullOrEmpty(graphTypeAttribute.Get) ? graphTypeAttribute.Get : graphTypeAttribute.Uri,
+                                LinqGet = !string.IsNullOrEmpty(graphTypeAttribute.LinqGet) ? graphTypeAttribute.LinqGet : graphTypeAttribute.Uri,
+                                OverflowProperty = graphTypeAttribute.OverflowProperty,
+                                Update = !string.IsNullOrEmpty(graphTypeAttribute.Update) ? graphTypeAttribute.Update : graphTypeAttribute.Uri,
+                                Delete = !string.IsNullOrEmpty(graphTypeAttribute.Delete) ? graphTypeAttribute.Delete : graphTypeAttribute.Uri,
+                                Beta = graphTypeAttribute.Beta,
+                            };
+
+                            classInfo.GraphTargets.Add(graphTargetToAdd);
+                        }
                     }
 
                     string keyPropertyName = null;
@@ -135,7 +154,7 @@ namespace PnP.Core.Model
                         {
                             classField = EnsureClassField(type, property, classInfo);
                             // Property was not decorated with attributes
-                            if (string.IsNullOrEmpty(classInfo.SharePointType))
+                            if (!classInfo.SharePointTargets.Any())
                             {
                                 // This is a Graph only property
                                 classField.GraphName = ToCamelCase(property.Name);
@@ -158,7 +177,7 @@ namespace PnP.Core.Model
                         var keyProperty = classInfo.Fields.FirstOrDefault(p => p.Name == keyPropertyName);
                         if (keyProperty != null)
                         {
-                            if (!string.IsNullOrEmpty(classInfo.SharePointType))
+                            if (classInfo.SharePointTargets.Any())
                             {
                                 keyProperty.IsSharePointKey = true;
                             }
@@ -178,16 +197,16 @@ namespace PnP.Core.Model
                     {
                         var overflowField = classInfo.Fields.FirstOrDefault(p => p.Name == ExpandoBaseDataModel<IExpandoDataModel>.OverflowFieldName);
 
-                        if (string.IsNullOrEmpty(classInfo.SharePointType))
+                        if (!classInfo.SharePointTargets.Any())
                         {
                             // This is a Graph only property
-                            overflowField.GraphName = classInfo.GraphOverflowProperty;
+                            overflowField.GraphName = classInfo.GraphTargets.First().OverflowProperty;
                         }
                         else
                         {
                             // This is SharePoint/Graph property
-                            overflowField.SharePointName = classInfo.SharePointOverflowProperty;
-                            overflowField.GraphName = classInfo.GraphOverflowProperty;
+                            overflowField.SharePointName = classInfo.SharePointTargets.First().OverflowProperty;
+                            overflowField.GraphName = classInfo.GraphTargets.First().OverflowProperty;
                         }
                     }
 
@@ -250,7 +269,7 @@ namespace PnP.Core.Model
         /// <param name="modelType">The Type of the model object to process</param>
         /// <param name="expressions">Data load expressions</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal EntityInfo GetClassInfo<TModel>(Type modelType, params Expression<Func<TModel, object>>[] expressions)
+        internal EntityInfo GetClassInfo<TModel>(Type modelType, BaseDataModel<TModel> target, params Expression<Func<TModel, object>>[] expressions)
         {
             // Get static information about the fields to work with and how to handle CRUD operations
             var staticClassInfo = EntityManager.Instance.GetStaticClassInfo(modelType);
@@ -325,6 +344,23 @@ namespace PnP.Core.Model
                 field.Load = true;
             }
 
+            if (target != null)
+            {
+                // In case a model can be used from different contexts (e.g. ContentType can be used from Web, but also from List)
+                // it's required to let the entity know this context so that it can provide the correct information when requested
+                var parent = (target as IDataModelParent).Parent;
+                if (parent is IManageableCollection)
+                {
+                    // Parent is a collection, so jump one level up
+                    parent = (target as IDataModelParent).Parent.Parent;
+                }
+
+                if (parent != null)
+                {
+                    entityInfo.Target = parent.GetType();
+                }
+            }
+
             return entityInfo;
         }
 
@@ -387,7 +423,7 @@ namespace PnP.Core.Model
                 }
             }
 
-            if (!string.IsNullOrEmpty(classInfo.SharePointType))
+            if (classInfo.SharePointTargets.Any())
             {
                 // This type can be loaded via SharePoint REST, so ensure the SharePoint field is populated
                 classField.SharePointName = property.Name;

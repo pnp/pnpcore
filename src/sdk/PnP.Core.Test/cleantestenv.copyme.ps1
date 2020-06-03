@@ -62,5 +62,8 @@ Remove-PnPList -Identity GetListAndListItemViaGraph -Force
 Remove-PnPList -Identity GetListAndListItemViaRest -Force
 Remove-PnPList -Identity GetListPropertiesAndListItemViaGraph -Force
 Remove-PnPList -Identity GetListPropertiesAndListItemViaRest -Force
+Remove-PnPList -Identity ContentTypesOnListAddTest -Force
+Remove-PnPList -Identity ContentTypesOnListAddAvailableTest -Force
+Remove-PnPList -Identity ContentTypesOnListDeleteTest -Force
 
 Disconnect-PnPOnline

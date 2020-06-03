@@ -185,5 +185,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IListItemCollection Items { get; }
 
+        /// <summary>
+        /// Collection of content types for this list
+        /// </summary>
+        public IContentTypeCollection ContentTypes { get; }
     }
 }

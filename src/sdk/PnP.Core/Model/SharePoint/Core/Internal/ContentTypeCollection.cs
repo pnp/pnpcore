@@ -1,5 +1,4 @@
-﻿using PnP.Core.QueryModel.Model;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -54,6 +53,37 @@ namespace PnP.Core.Model.SharePoint
             newContentType.Group = group;
 
             return await newContentType.AddAsync().ConfigureAwait(false) as ContentType;
+        }
+
+        public IContentType AddAvailableContentType(string id)
+        {
+            return AddAvailableContentType(PnPContext.CurrentBatch, id);
+        }
+
+        public IContentType AddAvailableContentType(Batch batch, string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            var newContentType = AddNewContentType();
+            newContentType.StringId = id;
+
+            return newContentType.AddAvailableContentType(batch, id) as ContentType;
+        }
+
+        public async Task<IContentType> AddAvailableContentTypeAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            var newContentType = AddNewContentType();
+            newContentType.StringId = id;
+
+            return await newContentType.AddAvailableContentTypeAsync(id).ConfigureAwait(false) as ContentType;
         }
     }
 }
