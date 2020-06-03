@@ -1962,12 +1962,57 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAsync
   nameWithType: IContentTypeCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(PnP.Core.Services.Batch,System.String)
+  name: AddAvailableContentType(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentType_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(PnP.Core.Services.Batch, System.String)
+  nameWithType: IContentTypeCollection.AddAvailableContentType(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(System.String)
+  name: AddAvailableContentType(String)
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentType_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(System.String)
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(System.String)
+  nameWithType: IContentTypeCollection.AddAvailableContentType(String)
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType*
+  name: AddAvailableContentType
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentType_
+  commentId: Overload:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType
+  nameWithType: IContentTypeCollection.AddAvailableContentType
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeAsync(System.String)
+  name: AddAvailableContentTypeAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentTypeAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeAsync(System.String)
+  nameWithType: IContentTypeCollection.AddAvailableContentTypeAsync(String)
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeAsync*
+  name: AddAvailableContentTypeAsync
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentTypeAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeAsync
+  nameWithType: IContentTypeCollection.AddAvailableContentTypeAsync
 - uid: PnP.Core.Model.SharePoint.IList
   name: IList
   href: api/PnP.Core.Model.SharePoint.IList.html
   commentId: T:PnP.Core.Model.SharePoint.IList
   fullName: PnP.Core.Model.SharePoint.IList
   nameWithType: IList
+- uid: PnP.Core.Model.SharePoint.IList.ContentTypes
+  name: ContentTypes
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ContentTypes
+  commentId: P:PnP.Core.Model.SharePoint.IList.ContentTypes
+  fullName: PnP.Core.Model.SharePoint.IList.ContentTypes
+  nameWithType: IList.ContentTypes
+- uid: PnP.Core.Model.SharePoint.IList.ContentTypes*
+  name: ContentTypes
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ContentTypes_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.ContentTypes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.ContentTypes
+  nameWithType: IList.ContentTypes
 - uid: PnP.Core.Model.SharePoint.IList.ContentTypesEnabled
   name: ContentTypesEnabled
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ContentTypesEnabled

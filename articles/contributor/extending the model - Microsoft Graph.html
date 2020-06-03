@@ -90,7 +90,7 @@ public interface ITeamChannel : IDataModel&lt;ITeamChannel&gt;, IDataModelUpdate
 }
 </code></pre>
 <h3 id="class-decoration">Class decoration</h3>
-<p>Each model class needs to have a <code>GraphType</code> attribute which is defined on the coded model class (e.g. Team.cs):</p>
+<p>Each model class needs to have at least one <code>GraphType</code> attribute which is defined on the coded model class (e.g. Team.cs):</p>
 <pre><code class="lang-csharp">[GraphType(Uri = &quot;teams/{Site.GroupId}&quot;)]
 internal partial class Team
 {
@@ -111,6 +111,11 @@ internal partial class Team
 <td>Uri</td>
 <td>Yes</td>
 <td>Defines the URI that uniquely identifies this object. See <a href="model%20tokens.html">model tokens</a> to learn more about the possible tokens you can use.</td>
+</tr>
+<tr>
+<td>Target</td>
+<td>No</td>
+<td>A model can be used from multiple scope and if so the <code>Target</code> property defines the scope of the <code>GraphType</code> attribute.</td>
 </tr>
 <tr>
 <td>Id</td>

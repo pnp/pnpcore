@@ -90,7 +90,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDe
 }
 </code></pre>
 <h3 id="class-decoration">Class decoration</h3>
-<p>Each model class that uses SharePoint REST does need to have a <code>SharePointType</code> attribute which is defined on the coded model class (e.g. List.cs):</p>
+<p>Each model class that uses SharePoint REST does need to have at least one <code>SharePointType</code> attribute which is defined on the coded model class (e.g. List.cs):</p>
 <pre><code class="lang-csharp">[SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Get = &quot;_api/web/lists&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
 internal partial class List
 {
@@ -116,6 +116,11 @@ internal partial class List
 <td>Uri</td>
 <td>Yes</td>
 <td>Defines the URI that uniquely identifies this object. See <a href="model%20tokens.html">model tokens</a> to learn more about the possible tokens you can use.</td>
+</tr>
+<tr>
+<td>Target</td>
+<td>No</td>
+<td>A model can be used from multiple scope (e.g. the ContentTypeCollection is available for both Web and List model classes) and if so the <code>Target</code> property defines the scope of the <code>SharePointType</code> attribute.</td>
 </tr>
 <tr>
 <td>Get</td>
@@ -144,6 +149,15 @@ internal partial class List
 </tr>
 </tbody>
 </table>
+<h4 id="sample-of-using-multiple-sharepointtype-decorations">Sample of using multiple SharePointType decorations</h4>
+<p>Below sample shows how a model can be decorated for multiple scopes:</p>
+<pre><code class="lang-csharp">[SharePointType(&quot;SP.ContentType&quot;, Target = typeof(Web), Uri = &quot;_api/Web/ContentTypes('{Id}')&quot;, Get = &quot;_api/web/contenttypes&quot;, LinqGet = &quot;_api/web/contenttypes&quot;)]
+[SharePointType(&quot;SP.ContentType&quot;, Target = typeof(List), Uri = &quot;_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')&quot;, Get = &quot;_api/Web/Lists(guid'{Parent.Id}')/contenttypes&quot;, LinqGet = &quot;_api/Web/Lists(guid'{Parent.Id}')/contenttypes&quot;)]
+internal partial class ContentType
+{
+    // Ommitted for brevity
+}
+</code></pre>
 <h3 id="property-decoration">Property decoration</h3>
 <p>The property level decoration is done using the <code>SharePointProperty</code> and <code>KeyProperty</code> attributes. Each model instance does require to have a override of the <code>Key</code> property and that <code>Key</code> property <strong>must</strong> be decorated with the <code>KeyProperty</code> attribute, which specifies the actual fields in the model that must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.</p>
 <p>Whereas the <code>KeyProperty</code> attribute is always there once in each model class, the usage of the <code>SharePointProperty</code> attribute is only needed whenever it makes sense. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. List.gen.cs) the decoration via attributes needs to happen in this class as well.</p>
