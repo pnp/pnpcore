@@ -3,6 +3,9 @@ using System.Text.Json;
 
 namespace PnP.Core.Services
 {
+    /// <summary>
+    /// Defines the response of an executed API call
+    /// </summary>
     public struct ApiResponse
     {
         internal ApiResponse(ApiCall apiCall, JsonElement jsonElement, Guid batchRequestId)

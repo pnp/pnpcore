@@ -4,6 +4,9 @@ using System.Text.Json;
 
 namespace PnP.Core.Services
 {
+    /// <summary>
+    /// Class that represents the JSON context that's being used during call outs when parsing JSON responses
+    /// </summary>
     public class FromJson
     {
         internal FromJson(string fieldName, JsonElement jsonElement, Type targetType, ILogger logger)

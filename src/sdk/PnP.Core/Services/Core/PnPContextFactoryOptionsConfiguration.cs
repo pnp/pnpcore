@@ -2,6 +2,9 @@
 
 namespace PnP.Core.Services
 {
+    /// <summary>
+    /// PnPContext configuration options
+    /// </summary>
     public class PnPContextFactoryOptionsConfiguration
     {
         /// <summary>

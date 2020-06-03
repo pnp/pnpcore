@@ -4,6 +4,9 @@ using System.Net.Http;
 
 namespace PnP.Core.Services
 {
+    /// <summary>
+    /// Client that handles all Microsoft Graph requests
+    /// </summary>
     public class MicrosoftGraphClient
     {
         private readonly ILogger logger;

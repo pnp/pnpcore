@@ -5,12 +5,20 @@ using System.Reflection;
 
 namespace PnP.Core.Services
 {
+    /// <summary>
+    /// PnP Core SDK settings class
+    /// </summary>
     public class Settings : ISettings
     {
         private const string UserAgentPrefix = "NONISV|SharePointPnP|PnPCoreSDK";
         private readonly ILogger logger;
         private readonly IConfiguration config;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="log">Connected logger</param>
+        /// <param name="configuration">Configuration that was loaded</param>
         public Settings(ILogger<Settings> log, IConfiguration configuration)
         {
             logger = log;
@@ -24,18 +32,39 @@ namespace PnP.Core.Services
             GraphCanUseBeta = GetGraphCanUseBeta();
         }
 
+        /// <summary>
+        /// Version tag used in telemetry
+        /// </summary>
         public string VersionTag { get; }
 
+        /// <summary>
+        /// User agent value, can be customized via configuration 
+        /// </summary>
         public string UserAgent { get; }
 
+        /// <summary>
+        /// Turns on/off telemetry, can be customized via configuration. Defaults to false.
+        /// </summary>
         public bool DisableTelemetry { get; }
-        
+
+        /// <summary>
+        /// AAD tenant id, used for telemetry purposes. Can be customized via configuration
+        /// </summary>
         public Guid AADTenantId { get; set; }
 
+        /// <summary>
+        /// Turns on/off the Microsoft Graph first behavior, can be customized via configuration. Defaults to true.
+        /// </summary>
         public bool GraphFirst { get; }
 
+        /// <summary>
+        /// Always uses the Microsoft Graph Beta api's, can be customized via configuration. Defaults to false.
+        /// </summary>
         public bool GraphAlwaysUseBeta { get; }
-        
+
+        /// <summary>
+        /// Turns on/off the option to use Microsoft Graph Beta api's, can be customized via configuration 
+        /// </summary>
         public bool GraphCanUseBeta { get; }
 
         private bool GetGraphFirst()
