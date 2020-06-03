@@ -19,7 +19,7 @@ public interface ITeamChannel : IDataModel<ITeamChannel>, IDataModelUpdate, IDat
 
 ### Class decoration
 
-Each model class needs to have a `GraphType` attribute which is defined on the coded model class (e.g. Team.cs):
+Each model class needs to have at least one `GraphType` attribute which is defined on the coded model class (e.g. Team.cs):
 
 ```csharp
 [GraphType(Uri = "teams/{Site.GroupId}")]
@@ -34,6 +34,7 @@ When configuring the `GraphType` attribute for Microsoft Graph you need to set t
 Property | Required | Description
 ---------|----------|------------
 Uri | Yes | Defines the URI that uniquely identifies this object. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use.
+Target | No | A model can be used from multiple scope and if so the `Target` property defines the scope of the `GraphType` attribute.
 Id | No | Defines the Microsoft graph object field which serves as unique id for the object. Typically this field is called `id` and that's also the default value, but you can provide another value if needed.
 Get | No | Overrides the Uri property for **get** operations.
 LinqGet | No | Some model classes do support linq queries which are translated in corresponding server calls. If a class supports linq in this way, then it also needs to have the LinqGet attribute set.

@@ -19,7 +19,7 @@ public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
 
 ### Class decoration
 
-Each model class that uses SharePoint REST does need to have a `SharePointType` attribute which is defined on the coded model class (e.g. List.cs):
+Each model class that uses SharePoint REST does need to have at least one `SharePointType` attribute which is defined on the coded model class (e.g. List.cs):
 
 ```csharp
 [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
@@ -35,11 +35,25 @@ Property | Required | Description
 ---------|----------|------------
 Type | Yes | Defines the SharePoint REST type that maps with the model class. Each model that requires SharePoint REST requires this attribute, hence the type is requested via the attribute constructor.
 Uri | Yes | Defines the URI that uniquely identifies this object. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use.
+Target | No | A model can be used from multiple scope (e.g. the ContentTypeCollection is available for both Web and List model classes) and if so the `Target` property defines the scope of the `SharePointType` attribute.
 Get | No | Overrides the Uri property for **get** operations.
 LinqGet | No | Some model classes do support linq queries which are translated in corresponding server calls. If a class supports linq in this way, then it also needs to have the LinqGet attribute set.
 Update | No | Overrides the Uri property for **update** operations.
 Delete | No | Overrides the Uri property for **delete** operations.
 OverflowProperty | No | Used when working with a dynamic property/value pair (e.g. fields in a SharePoint ListItem) whenever the SharePoint REST field containing these dynamic properties is not named `Values`.
+
+#### Sample of using multiple SharePointType decorations
+
+Below sample shows how a model can be decorated for multiple scopes:
+
+```csharp
+[SharePointType("SP.ContentType", Target = typeof(Web), Uri = "_api/Web/ContentTypes('{Id}')", Get = "_api/web/contenttypes", LinqGet = "_api/web/contenttypes")]
+[SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", Get = "_api/Web/Lists(guid'{Parent.Id}')/contenttypes", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/contenttypes")]
+internal partial class ContentType
+{
+    // Ommitted for brevity
+}
+```
 
 ### Property decoration
 
