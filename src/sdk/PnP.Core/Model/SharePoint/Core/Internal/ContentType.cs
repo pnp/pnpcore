@@ -44,7 +44,7 @@ namespace PnP.Core.Model.SharePoint
                 // automatically provide the correct 'parent'
                 var entity = EntityManager.Instance.GetClassInfo<IContentType>(GetType(), this);
 
-                // Adding new content types on a list is not something we should promote
+                // Adding new content types on a list is not something we should allow
                 if (entity.Target == typeof(List))
                 {
                     throw new ClientException(ErrorType.Unsupported, "Adding new content types on a list is not possible, use the AddAvailableContentType method to add an existing site content type");
@@ -73,14 +73,14 @@ namespace PnP.Core.Model.SharePoint
         public IContentType AddAvailableContentType(Batch batch, string id)
         {
             var apiCall = AddAvailableContentTypeApiCall(id);
-            BaseBatchRequest(batch, apiCall, HttpMethod.Post, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
+            BatchRequest(batch, apiCall, HttpMethod.Post);
             return this;
         }
 
         public async Task<IContentType> AddAvailableContentTypeAsync(string id)
         {
             var apiCall = AddAvailableContentTypeApiCall(id);
-            await BaseRequest(apiCall, HttpMethod.Post, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+            await Request(apiCall, HttpMethod.Post).ConfigureAwait(false);
             return this;
         }
         #endregion

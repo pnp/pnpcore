@@ -1293,11 +1293,9 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
-        /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual void BaseBatchRequest(ApiCall apiCall, HttpMethod method, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal virtual void BatchRequest(ApiCall apiCall, HttpMethod method)
         {
-            BaseBatchRequest(PnPContext.CurrentBatch, apiCall, method, fromJsonCasting, postMappingJson);
+            BatchRequest(PnPContext.CurrentBatch, apiCall, method);
         }
 
         /// <summary>
@@ -1306,9 +1304,7 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
-        /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual void BaseBatchRequest(Batch batch, ApiCall apiCall, HttpMethod method, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal virtual void BatchRequest(Batch batch, ApiCall apiCall, HttpMethod method)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -1326,7 +1322,7 @@ namespace PnP.Core.Model
             apiCall.Request = TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).GetAwaiter().GetResult();
 
             // Add the request to the batch
-            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
         }
 
         /// <summary>
@@ -1334,9 +1330,7 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
-        /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual async Task BaseRequest(ApiCall apiCall, HttpMethod method, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal virtual async Task Request(ApiCall apiCall, HttpMethod method)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -1355,7 +1349,7 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
-            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
