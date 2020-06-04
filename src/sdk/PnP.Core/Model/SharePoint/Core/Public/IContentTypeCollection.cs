@@ -10,6 +10,8 @@ namespace PnP.Core.Model.SharePoint
     public interface IContentTypeCollection : IQueryable<IContentType>, IDataModelCollection<IContentType>
     {
         #region Extension Methods
+
+        #region Add
         /// <summary>
         /// Add a content type
         /// Check the documentation for a well formed Content Type Id:
@@ -46,7 +48,9 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="group">Group of the content type</param>
         /// <returns>The newly added content type</returns>
         Task<IContentType> AddAsync(string id, string name, string description = null, string group = null);
+        #endregion
 
+        #region AddAvailableContentType
         /// <summary>
         /// Add an existing content type
         /// </summary>
@@ -68,6 +72,8 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="id">Id of the content type</param>
         /// <returns>The newly added content type</returns>
         Task<IContentType> AddAvailableContentTypeAsync(string id);
+        #endregion
+
         #endregion
     }
 }

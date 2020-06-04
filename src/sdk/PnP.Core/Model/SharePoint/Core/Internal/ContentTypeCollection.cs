@@ -6,6 +6,7 @@ namespace PnP.Core.Model.SharePoint
 {
     internal partial class ContentTypeCollection
     {
+        #region Add
         public IContentType Add(string id, string name, string description = null, string group = null)
         {
             return Add(PnPContext.CurrentBatch, id, name, description, group);
@@ -54,7 +55,9 @@ namespace PnP.Core.Model.SharePoint
 
             return await newContentType.AddAsync().ConfigureAwait(false) as ContentType;
         }
+        #endregion
 
+        #region AddAvailableContentType
         public IContentType AddAvailableContentType(string id)
         {
             return AddAvailableContentType(PnPContext.CurrentBatch, id);
@@ -85,5 +88,6 @@ namespace PnP.Core.Model.SharePoint
 
             return await newContentType.AddAvailableContentTypeAsync(id).ConfigureAwait(false) as ContentType;
         }
+        #endregion
     }
 }

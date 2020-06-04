@@ -70,14 +70,14 @@ namespace PnP.Core.Model.SharePoint
             return new ApiCall($"{entity.SharePointGet}/AddAvailableContentType", ApiType.SPORest, bodyContent);
         }
 
-        public IContentType AddAvailableContentType(Batch batch, string id)
+        internal IContentType AddAvailableContentType(Batch batch, string id)
         {
             var apiCall = AddAvailableContentTypeApiCall(id);
             BatchRequest(batch, apiCall, HttpMethod.Post);
             return this;
         }
 
-        public async Task<IContentType> AddAvailableContentTypeAsync(string id)
+        internal async Task<IContentType> AddAvailableContentTypeAsync(string id)
         {
             var apiCall = AddAvailableContentTypeApiCall(id);
             await Request(apiCall, HttpMethod.Post).ConfigureAwait(false);
