@@ -17,7 +17,7 @@ namespace PnP.Core.Test.SharePoint
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
