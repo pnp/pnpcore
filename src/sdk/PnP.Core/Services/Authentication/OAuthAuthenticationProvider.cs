@@ -15,8 +15,10 @@ namespace PnP.Core.Services
     /// <summary>
     /// OAuth authentication provider, uses Azure AD to authenticate requests and provide access tokens
     /// </summary>
-    public class OAuthAuthenticationProvider : IAuthenticationProvider
+    public class OAuthAuthenticationProvider : IAuthenticationProvider, IDisposable
     {
+        private bool disposedValue;
+
         private static readonly HttpClient httpClient = new HttpClient();
         private const string tokenEndpoint = "https://login.microsoftonline.com/common/oauth2/token";
 
@@ -29,7 +31,13 @@ namespace PnP.Core.Services
 
         // Token cache handling
         private static readonly SemaphoreSlim semaphoreSlimTokens = new SemaphoreSlim(1);
+        private AutoResetEvent tokenResetEvent = null;
         private readonly ConcurrentDictionary<string, string> tokenCache = new ConcurrentDictionary<string, string>();
+
+        internal class TokenWaitInfo
+        {
+            public RegisteredWaitHandle Handle = null;
+        }
 
         /// <summary>
         /// Get's the in use <see cref="IAuthenticationProviderConfiguration"/>
@@ -254,32 +262,48 @@ namespace PnP.Core.Services
                     string accessToken = await AcquireTokenAsync(resourceUri, userPrincipalName, userPassword).ConfigureAwait(false);
                     log.LogInformation($"Successfully requested new access token resource {resourceUri.DnsSafeHost} and user {userPrincipalName}");
                     AddTokenToCache(resourceUri, tokenCache, accessToken);
-
-                    // Spin up a thread to invalidate the access token once's it's expired
-                    ThreadPool.QueueUserWorkItem(async (obj) =>
-                    {
-                        try
+                    
+                    // Register a thread to invalidate the access token once's it's expired
+                    tokenResetEvent = new AutoResetEvent(false);
+                    TokenWaitInfo wi = new TokenWaitInfo();
+                    wi.Handle = ThreadPool.RegisterWaitForSingleObject(
+                        tokenResetEvent,
+                        async (state, timedOut) =>
                         {
-                            // Wait until we're 5 minutes before the planned token expiration
-                            Thread.Sleep(CalculateThreadSleep(accessToken));
-                            // Take a lock to ensure no other threads are updating the SharePoint Access token at this time
-                            await semaphoreSlimTokens.WaitAsync().ConfigureAwait(false);
-                            RemoveTokenFromCache(resourceUri, tokenCache);
-                            log.LogInformation($"Cached token for resource {resourceUri.DnsSafeHost} and user {userPrincipalName} expired");
-                        }
-                        catch (Exception ex)
-                        {
-                            log.LogError(ex, $"Something went wrong during cache token invalidation: {ex.Message}");
-                            RemoveTokenFromCache(resourceUri, tokenCache);
-                        }
-                        finally
-                        {
-                            semaphoreSlimTokens.Release();
-                        }
-                    });
+                            if (!timedOut)
+                            {
+                                TokenWaitInfo wi = (TokenWaitInfo)state;
+                                if (wi.Handle != null)
+                                {
+                                    wi.Handle.Unregister(null);
+                                }
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    // Take a lock to ensure no other threads are updating the SharePoint Access token at this time
+                                    await semaphoreSlimTokens.WaitAsync().ConfigureAwait(false);
+                                    RemoveTokenFromCache(resourceUri, tokenCache);
+                                    log.LogInformation($"Cached token for resource {resourceUri.DnsSafeHost} and user {userPrincipalName} expired");
+                                }
+                                catch (Exception ex)
+                                {
+                                    log.LogError(ex, $"Something went wrong during cache token invalidation: {ex.Message}");
+                                    RemoveTokenFromCache(resourceUri, tokenCache);
+                                }
+                                finally
+                                {
+                                    semaphoreSlimTokens.Release();
+                                }
+                            }
+                        },
+                        wi,
+                        (uint)CalculateThreadSleep(accessToken).TotalMilliseconds,
+                        true
+                    );
 
                     return accessToken;
-
                 }
                 finally
                 {
@@ -359,6 +383,30 @@ namespace PnP.Core.Services
             DateTime expires = expiresOn.Kind == DateTimeKind.Utc ? expiresOn : TimeZoneInfo.ConvertTimeToUtc(expiresOn);
             TimeSpan lease = expires - now;
             return lease;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    if (tokenResetEvent != null)
+                    {
+                        tokenResetEvent.Set();
+                        tokenResetEvent.Dispose();
+                    }
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }
