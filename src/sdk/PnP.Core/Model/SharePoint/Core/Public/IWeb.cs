@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -128,6 +128,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Uri Url { get; set; }
 
+
         /// <summary>
         /// Collection of lists in the current Web object
         /// </summary>
@@ -139,10 +140,13 @@ namespace PnP.Core.Model.SharePoint
         public IContentTypeCollection ContentTypes { get; }
 
         /// <summary>
+        /// Collection of fields in the current Web object
+        /// </summary>
+        public IFieldCollection Fields { get; }
+
+        /// <summary>
         /// Collection of webs in this current web
         /// </summary>
         public IWebCollection Webs { get; }
-
-
     }
 }

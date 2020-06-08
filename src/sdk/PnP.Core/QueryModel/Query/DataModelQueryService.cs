@@ -2,6 +2,7 @@
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
+using PnP.Core.QueryModel.Model;
 using PnP.Core.Services;
 using PnP.Core.Utilities;
 using System;
@@ -48,12 +49,7 @@ namespace PnP.Core.QueryModel
 
             // At this point in time we support querying collections of 
             // IList and IListItem or single elements of those collections
-            if (typeof(TModel).IsAssignableFrom(typeof(IList)) ||
-                typeof(TModel).IsAssignableFrom(typeof(IListItem)) ||
-                typeof(TModel).IsAssignableFrom(typeof(IContentType)) ||
-                typeof(TModel).IsAssignableFrom(typeof(IWeb)) ||
-                typeof(TModel).IsAssignableFrom(typeof(ITeamChannel))||
-                typeof(TModel).IsAssignableFrom(typeof(ITeamChatMessage)))
+            if (QueryableDataModels.IsSupportedQueryableModel<TModel>())
             {
                 // Get the entity info
                 var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel), null);

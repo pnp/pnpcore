@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
 using System.Collections;
@@ -10,6 +11,29 @@ using System.Threading;
 
 namespace PnP.Core.QueryModel.Model
 {
+
+    internal static class QueryableDataModels
+    {
+        public static Type[] Supported
+        {
+            get => new Type[]
+            {
+                typeof(Core.Model.SharePoint.IList),
+                typeof(Core.Model.SharePoint.IListItem),
+                typeof(Core.Model.SharePoint.IContentType),
+                typeof(Core.Model.SharePoint.IField),
+                typeof(Core.Model.SharePoint.IWeb),
+                typeof(Core.Model.Teams.ITeamChannel),
+                typeof(Core.Model.Teams.ITeamChatMessage)
+            };
+        }
+
+        public static bool IsSupportedQueryableModel<TModel>()
+        {
+            return Supported.Any(s => typeof(TModel).IsAssignableFrom(s));
+        }
+    }
+
     /// <summary>
     /// Base type for any LINQ IQueryable collection of the Domain Model
     /// In the real model, could inherit from  BaseDataModelCollection<TModel>

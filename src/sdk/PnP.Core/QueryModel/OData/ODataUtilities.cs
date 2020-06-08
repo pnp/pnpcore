@@ -26,7 +26,8 @@ namespace PnP.Core.QueryModel
                 case bool b:
                     return b ? "true" : "false";
                 case Guid g:
-                    return $"guid('{g.ToString()}')";
+                    //return $"guid('{g.ToString()}')";
+                    return $"(guid'{g.ToString()}')";
                 default:
                     // Convert to invariant string
                     return string.Format(CultureInfo.InvariantCulture, "{0}", value);

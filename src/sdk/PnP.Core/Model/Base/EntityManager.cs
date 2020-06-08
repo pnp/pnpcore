@@ -74,8 +74,9 @@ namespace PnP.Core.Model
                                 Get = !string.IsNullOrEmpty(sharePointTypeAttribute.Get) ? sharePointTypeAttribute.Get : sharePointTypeAttribute.Uri,
                                 LinqGet = !string.IsNullOrEmpty(sharePointTypeAttribute.LinqGet) ? sharePointTypeAttribute.LinqGet : sharePointTypeAttribute.Uri,
                                 OverflowProperty = sharePointTypeAttribute.OverflowProperty,
-                                Update = !string.IsNullOrEmpty(sharePointTypeAttribute.Update) ? sharePointTypeAttribute.Update : sharePointTypeAttribute.Update,
-                                Delete = !string.IsNullOrEmpty(sharePointTypeAttribute.Delete) ? sharePointTypeAttribute.Delete : sharePointTypeAttribute.Delete
+                                Update = !string.IsNullOrEmpty(sharePointTypeAttribute.Update) ? sharePointTypeAttribute.Update : sharePointTypeAttribute.Uri,
+                                Delete = !string.IsNullOrEmpty(sharePointTypeAttribute.Delete) ? sharePointTypeAttribute.Delete : sharePointTypeAttribute.Uri,
+                                ResolveUriFromMetadataFor = sharePointTypeAttribute.ResolveUriFromMetadataFor
                             };
 
                             classInfo.SharePointTargets.Add(sharePointTargetToAdd);
