@@ -32,5 +32,10 @@ namespace PnP.Core.Model
             Metadata = new RestBaseAddType(entityInfo.SharePointType);
         }
 
+
+        internal RestBaseAdd(BaseDataModel<TModel> model, string spType) : this(model)
+        {
+            Metadata.SpType = spType;
+        }
     }
 }

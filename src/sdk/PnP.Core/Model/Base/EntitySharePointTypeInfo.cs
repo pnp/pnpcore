@@ -44,6 +44,12 @@ namespace PnP.Core.Model
         /// </summary>
         internal string Delete { get; set; }
 
+        /// <summary>
+        /// Indicates for what operation the identifier URI of the resource can be resolved from metadata when possible
+        /// Default is All
+        /// </summary>
+        public ResolveUriFromMetadataFor ResolveUriFromMetadataFor { get; set; } = ResolveUriFromMetadataFor.All;
+
         public object Clone()
         {
             return this.MemberwiseClone();

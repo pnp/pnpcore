@@ -69,6 +69,20 @@ namespace PnP.Core.Model.SharePoint
         // Not in Web object, requires extra work to load
         public string SearchCenterUrl { get => GetValue<string>(); set => SetValue(value); }
 
+        [SharePointProperty("Fields", Expandable = true)]
+        public IFieldCollection Fields
+        {
+            get
+            {
+                if (!HasValue(nameof(Fields)))
+                {
+                    var fields = new FieldCollection(this.PnPContext, this, nameof(Fields));
+                    SetValue(fields);
+                }
+                return GetValue<IFieldCollection>();
+            }
+        }
+
         [SharePointProperty("Lists", Expandable = true)]        
         // Graph currently is not returning all lists, this option can only be used once that's fixed
         [GraphProperty("lists", Expandable = true)]

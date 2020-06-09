@@ -621,7 +621,7 @@ namespace PnP.Core.Model
                                 // Expand will be skipped since we're bound to v1 graph
                                 addExpand = false;
                             }
-                        }                        
+                        }
 
                         if (addExpand)
                         {
@@ -1127,7 +1127,8 @@ namespace PnP.Core.Model
                 new JsonSerializerOptions { WriteIndented = true });
 
             // Prepare the variable to contain the target URL for the update operation
-            var updateUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}", false);
+            bool skipMetadataLookup = !entity.ResolveSharePointUriFromMetadataFor.HasFlag(ResolveUriFromMetadataFor.Update);
+            var updateUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}", false, skipMetadataLookup);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage));
@@ -1274,7 +1275,8 @@ namespace PnP.Core.Model
         internal ApiCallRequest BuildDeleteAPICallRest(EntityInfo entity)
         {
             // Prepare the variable to contain the target URL for the delete operation
-            var deleteUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}", false);
+            bool skipMetadataLookup = !entity.ResolveSharePointUriFromMetadataFor.HasFlag(ResolveUriFromMetadataFor.Delete);
+            var deleteUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}", false, skipMetadataLookup);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.SPORest));
@@ -1384,7 +1386,7 @@ namespace PnP.Core.Model
 
         private bool CanUseGraphBeta(EntityFieldInfo field)
         {
-            return PnPContext.GraphCanUseBeta && field.GraphBeta;            
+            return PnPContext.GraphCanUseBeta && field.GraphBeta;
         }
 
         private bool CanUseGraphBeta(EntityInfo entity)

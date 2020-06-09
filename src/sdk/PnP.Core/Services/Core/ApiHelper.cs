@@ -9,11 +9,11 @@ namespace PnP.Core.Services
     /// </summary>
     internal static class ApiHelper
     {
-        internal static string ParseApiCall(TransientObject pnpObject, string apiCall, bool useGraph)
+        internal static string ParseApiCall(TransientObject pnpObject, string apiCall, bool useGraph, bool skipMetadataLookup = false)
         {
             var metadataBasedObject = pnpObject as IMetadataExtensible;
 
-            if (!useGraph && metadataBasedObject.Metadata.ContainsKey("uri"))
+            if (!skipMetadataLookup && !useGraph && metadataBasedObject.Metadata.ContainsKey("uri"))
             {
                 return metadataBasedObject.Metadata["uri"];
             }
