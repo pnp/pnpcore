@@ -43,6 +43,7 @@ namespace PnP.Core.Model.SharePoint
                                     // populate the uri and type metadata fields to enable actions upon 
                                     // this item without having to read it again from the server
                                     var parentList = Parent.Parent as List;
+                                    AddMetadata(PnPConstants.MetaDataRestId, $"{id}");
                                     AddMetadata(PnPConstants.MetaDataUri, $"{parentList.GetMetadata(PnPConstants.MetaDataUri)}/Items({id})");
                                     AddMetadata(PnPConstants.MetaDataType, $"SP.Data.{parentList.GetMetadata("EntityTypeName")}Item");
 

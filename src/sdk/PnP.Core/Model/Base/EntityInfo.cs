@@ -231,18 +231,6 @@ namespace PnP.Core.Model
         /// </summary>
         internal Type Target { get; set; }
 
-        /// <summary>
-        /// Indicates for what operation the identifier URI of the REST resource can be resolved from metadata when possible
-        /// Default is All
-        /// </summary>
-        internal ResolveUriFromMetadataFor ResolveSharePointUriFromMetadataFor
-        {
-            get
-            {
-                return SharePoint.ResolveUriFromMetadataFor;
-            }
-        }
-
         private EntitySharePointTypeInfo SharePoint
         {
             get

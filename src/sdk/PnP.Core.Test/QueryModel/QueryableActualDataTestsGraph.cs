@@ -59,7 +59,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var expectedListItemTitle = "Sample Document 01";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 context.GraphFirst = true;

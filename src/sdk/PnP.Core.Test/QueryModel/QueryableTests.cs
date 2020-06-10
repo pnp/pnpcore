@@ -167,7 +167,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestQueryWhereLINQWithMultipleFilters()
         {
-            var expected = "$filter=(name eq 'Test' and sharepointIds eq guid('69e8b219-d7af-4ac9-bc23-d382b7de985e'))";
+            var expected = "$filter=(name eq 'Test' and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))";
             var filteredId = new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e");
 
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
@@ -206,7 +206,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestQueryComplexMultiWhere()
         {
-            var expected = "$select=sharepointIds,name,description&$filter=((name eq 'Test' and description eq 'Description') and sharepointIds eq guid('69e8b219-d7af-4ac9-bc23-d382b7de985e'))&$top=10&$skip=5&$expand=lists";
+            var expected = "$select=sharepointIds,name,description&$filter=((name eq 'Test' and description eq 'Description') and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))&$top=10&$skip=5&$expand=lists";
             var filteredId = new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e");
 
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))

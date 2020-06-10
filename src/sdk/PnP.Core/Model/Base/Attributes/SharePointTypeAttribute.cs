@@ -2,20 +2,12 @@
 
 namespace PnP.Core.Model
 {
-    [Flags]
-    internal enum ResolveUriFromMetadataFor
-    {
-        None = 0,
-        Update = 1,
-        Delete = 2,
-        All = Update | Delete
-    }
 
     /// <summary>
     /// Attribute used to decorate model classes that can be loaded via SharePoint REST
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    internal class SharePointTypeAttribute: Attribute
+    internal class SharePointTypeAttribute : Attribute
     {
         /// <summary>
         /// Default constructor
@@ -66,10 +58,5 @@ namespace PnP.Core.Model
         /// </summary>
         public string OverflowProperty { get; set; }
 
-        /// <summary>
-        /// Indicates for what operation the identifier URI of the resource can be resolved from metadata when possible
-        /// Default is All
-        /// </summary>
-        public ResolveUriFromMetadataFor ResolveUriFromMetadataFor { get; set; } = ResolveUriFromMetadataFor.All;
     }
 }

@@ -51,7 +51,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryListsAddConsistency()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -267,7 +267,7 @@ namespace PnP.Core.Test.QueryModel
             var listTitle = "TestQueryListItemsAddConsistency";
             var expectedNewListItemTitle = "New Item";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -325,7 +325,7 @@ namespace PnP.Core.Test.QueryModel
             var listTitle = "TestQueryListItemsDeleteConsistency";
             var expectedNewListItemTitle = "New Item";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -387,7 +387,7 @@ namespace PnP.Core.Test.QueryModel
             var expectedNewListItemTitle = "New Item";
             var expectedUpdatedTitle = "Updated";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -445,7 +445,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryListFollowedByGraphQueryConsistency()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -464,7 +464,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryListWithItemsFollowedByGraphQueryConsistency()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -485,7 +485,7 @@ namespace PnP.Core.Test.QueryModel
         {
             var listTitle = "Site Pages";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 context.GraphFirst = false;

@@ -65,5 +65,11 @@ Remove-PnPList -Identity GetListPropertiesAndListItemViaRest -Force
 Remove-PnPList -Identity ContentTypesOnListAddTest -Force
 Remove-PnPList -Identity ContentTypesOnListAddAvailableTest -Force
 Remove-PnPList -Identity ContentTypesOnListDeleteTest -Force
+Remove-PnPList -Identity TestQueryListItemsAddConsistency -Force
+Remove-PnPList -Identity TestQueryListItemsDeleteConsistency -Force
+Remove-PnPList -Identity TestQueryListItemsUpdateConsistency -Force
+Remove-PnPList -Identity TestQueryListsConsistency -Force
+Remove-PnPList -Identity TestQueryListsDeleteConsistency -Force
+Remove-PnPList -Identity TestQueryListsUpdateConsistency -Force
 
 Disconnect-PnPOnline

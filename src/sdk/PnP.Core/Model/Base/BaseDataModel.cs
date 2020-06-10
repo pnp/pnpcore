@@ -493,7 +493,7 @@ namespace PnP.Core.Model
             }
 
             // Parse tokens in the base api call
-            baseApiCall = ApiHelper.ParseApiCall(this, baseApiCall, false);
+            baseApiCall = ApiHelper.ParseApiCall(this, baseApiCall);
 
             sb.Append(baseApiCall);
 
@@ -677,7 +677,7 @@ namespace PnP.Core.Model
             }
 
             // Parse tokens in the base api call
-            baseApiCall = ApiHelper.ParseApiCall(this, baseApiCall, true);
+            baseApiCall = ApiHelper.ParseApiCall(this, baseApiCall);
 
             sb.Append(baseApiCall);
 
@@ -1054,7 +1054,7 @@ namespace PnP.Core.Model
                 });
 
             // Prepare the variable to contain the target URL for the update operation
-            var updateUrl = ApiHelper.ParseApiCall(this, entity.GraphUpdate, true);
+            var updateUrl = ApiHelper.ParseApiCall(this, entity.GraphUpdate);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(updateUrl, apiType, jsonUpdateMessage));
@@ -1127,8 +1127,7 @@ namespace PnP.Core.Model
                 new JsonSerializerOptions { WriteIndented = true });
 
             // Prepare the variable to contain the target URL for the update operation
-            bool skipMetadataLookup = !entity.ResolveSharePointUriFromMetadataFor.HasFlag(ResolveUriFromMetadataFor.Update);
-            var updateUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}", false, skipMetadataLookup);
+            var updateUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}");
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage));
@@ -1260,7 +1259,7 @@ namespace PnP.Core.Model
             }
 
             // Prepare the variable to contain the target URL for the delete operation
-            var deleteUrl = ApiHelper.ParseApiCall(this, entity.GraphDelete, true);
+            var deleteUrl = ApiHelper.ParseApiCall(this, entity.GraphDelete);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(deleteUrl, apiType));
@@ -1275,8 +1274,7 @@ namespace PnP.Core.Model
         internal ApiCallRequest BuildDeleteAPICallRest(EntityInfo entity)
         {
             // Prepare the variable to contain the target URL for the delete operation
-            bool skipMetadataLookup = !entity.ResolveSharePointUriFromMetadataFor.HasFlag(ResolveUriFromMetadataFor.Delete);
-            var deleteUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}", false, skipMetadataLookup);
+            var deleteUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}");
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.SPORest));

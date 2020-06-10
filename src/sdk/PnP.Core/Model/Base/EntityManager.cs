@@ -76,7 +76,6 @@ namespace PnP.Core.Model
                                 OverflowProperty = sharePointTypeAttribute.OverflowProperty,
                                 Update = !string.IsNullOrEmpty(sharePointTypeAttribute.Update) ? sharePointTypeAttribute.Update : sharePointTypeAttribute.Uri,
                                 Delete = !string.IsNullOrEmpty(sharePointTypeAttribute.Delete) ? sharePointTypeAttribute.Delete : sharePointTypeAttribute.Uri,
-                                ResolveUriFromMetadataFor = sharePointTypeAttribute.ResolveUriFromMetadataFor
                             };
 
                             classInfo.SharePointTargets.Add(sharePointTargetToAdd);
