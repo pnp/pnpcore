@@ -112,7 +112,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDe
     /// &lt;summary&gt;
     /// The Unique ID of the List object
     /// &lt;/summary&gt;
-    public Guid Id { get; set; }
+    public Guid Id { get; }
 
     /// &lt;summary&gt;
     /// Gets or sets the list title
@@ -135,7 +135,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDe
 <li>Optionally implements the <code>IDataModelUpdate</code> interface whenever <strong>update</strong> functionality in needed on this model class</li>
 <li>Optionally implements the <code>IDataModelDelete</code> interface whenever <strong>delete</strong> functionality is needed on this model class</li>
 </ul>
-<p>The fields in the model use either basic .Net data types, enumerations, other model/collection types or so called complex types:</p>
+<p>The properties in the model use either basic .Net data types, enumerations, other model/collection types or so called complex types:</p>
 <pre><code class="lang-csharp">// Simple .Net type
 public string Title { get; set; }
 
@@ -148,6 +148,10 @@ public IListItemCollection Items { get; }
 // Complex types (sample comes from the Team model class)
 public ITeamFunSettings FunSettings { get; set; }
 </code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When a property is read-only you only need to provide a ´get´ in the public model.</p>
+</div>
 <h4 id="internal-implementation">Internal implementation</h4>
 <p>The internal model implementation is what brings the public model to life: this split approach ensures that library consumers only work with the public model, and as such the library implementation can be updated without breaking the public contract with library consumers. For the internal model class implementation we've opted to use internal partial classes:</p>
 <ul>

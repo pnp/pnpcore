@@ -1,0 +1,2712 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IField
+   | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IField
+   | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.52.0.0">
+    
+    <link rel="shortcut icon" href="../https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IField">
+  <h1 id="PnP_Core_Model_SharePoint_IField" data-uid="PnP.Core.Model.SharePoint.IField">Interface IField
+  </h1>
+  <div class="markdown level0 summary"><p>Public interface to define a Field object of SharePoint Online</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  
+  
+  
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_GetAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModel&lt;IField&gt;.GetAsync(Expression&lt;Func&lt;IField, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Get_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModel&lt;IField&gt;.Get(Batch, Expression&lt;Func&lt;IField, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Get_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModel&lt;IField&gt;.Get(Expression&lt;Func&lt;IField, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasValue_System_String_">IDataModel&lt;IField&gt;.HasValue(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasChanged_System_String_">IDataModel&lt;IField&gt;.HasChanged(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested">IDataModel&lt;IField&gt;.Requested</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelParent.html#PnP_Core_Model_IDataModelParent_Parent">IDataModelParent.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelWithContext.html#PnP_Core_Model_IDataModelWithContext_PnPContext">IDataModelWithContext.PnPContext</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IField&gt;.GetAsync(ApiResponse, Expression&lt;Func&lt;IField, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.Get(Batch, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.Get(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(ApiResponse, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_Update">IDataModelUpdate.Update()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_Update_PnP_Core_Services_Batch_">IDataModelUpdate.Update(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateAsync">IDataModelUpdate.UpdateAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete">IDataModelDelete.Delete()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete_PnP_Core_Services_Batch_">IDataModelDelete.Delete(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteAsync">IDataModelDelete.DeleteAsync()</a>
+    </div>
+  </div>
+  
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.SharePoint.html">PnP.Core.Model.SharePoint</a></h6>
+  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
+  
+  <h5 id="PnP_Core_Model_SharePoint_IField_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IField : IDataModel&lt;IField&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;IField&gt;, IDataModelGet, IDataModelUpdate, IDataModelDelete</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_AllowDisplay.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.AllowDisplay%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L258" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_AllowDisplay_" data-uid="PnP.Core.Model.SharePoint.IField.AllowDisplay*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_AllowDisplay" data-uid="PnP.Core.Model.SharePoint.IField.AllowDisplay"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_AllowDisplay" class="expander" data-toggle="collapse">AllowDisplay</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_AllowDisplay" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool AllowDisplay { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_AutoIndexed.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.AutoIndexed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L14" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_AutoIndexed_" data-uid="PnP.Core.Model.SharePoint.IField.AutoIndexed*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_AutoIndexed" data-uid="PnP.Core.Model.SharePoint.IField.AutoIndexed"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_AutoIndexed" class="expander" data-toggle="collapse">AutoIndexed</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_AutoIndexed" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field is auto indexed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool AutoIndexed { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_CanBeDeleted.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.CanBeDeleted%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L19" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_CanBeDeleted_" data-uid="PnP.Core.Model.SharePoint.IField.CanBeDeleted*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_CanBeDeleted" data-uid="PnP.Core.Model.SharePoint.IField.CanBeDeleted"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_CanBeDeleted" class="expander" data-toggle="collapse">CanBeDeleted</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_CanBeDeleted" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field can be deleted</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool CanBeDeleted { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Choices.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Choices%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L250" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Choices_" data-uid="PnP.Core.Model.SharePoint.IField.Choices*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Choices" data-uid="PnP.Core.Model.SharePoint.IField.Choices"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Choices" class="expander" data-toggle="collapse">Choices</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Choices" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string[] Choices { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>[]
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_ClientSideComponentId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.ClientSideComponentId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L24" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_ClientSideComponentId_" data-uid="PnP.Core.Model.SharePoint.IField.ClientSideComponentId*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_ClientSideComponentId" data-uid="PnP.Core.Model.SharePoint.IField.ClientSideComponentId"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_ClientSideComponentId" class="expander" data-toggle="collapse">ClientSideComponentId</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_ClientSideComponentId" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the client side component Id associated with the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid ClientSideComponentId { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_ClientSideComponentProperties.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.ClientSideComponentProperties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L29" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_ClientSideComponentProperties_" data-uid="PnP.Core.Model.SharePoint.IField.ClientSideComponentProperties*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_ClientSideComponentProperties" data-uid="PnP.Core.Model.SharePoint.IField.ClientSideComponentProperties"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_ClientSideComponentProperties" class="expander" data-toggle="collapse">ClientSideComponentProperties</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_ClientSideComponentProperties" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the properties of the client side component associated with the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ClientSideComponentProperties { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_ClientValidationFormula.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.ClientValidationFormula%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L34" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_ClientValidationFormula_" data-uid="PnP.Core.Model.SharePoint.IField.ClientValidationFormula*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_ClientValidationFormula" data-uid="PnP.Core.Model.SharePoint.IField.ClientValidationFormula"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_ClientValidationFormula" class="expander" data-toggle="collapse">ClientValidationFormula</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_ClientValidationFormula" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the client validation formula of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ClientValidationFormula { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_ClientValidationMessage.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.ClientValidationMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L39" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_ClientValidationMessage_" data-uid="PnP.Core.Model.SharePoint.IField.ClientValidationMessage*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_ClientValidationMessage" data-uid="PnP.Core.Model.SharePoint.IField.ClientValidationMessage"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_ClientValidationMessage" class="expander" data-toggle="collapse">ClientValidationMessage</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_ClientValidationMessage" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the client validation message of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ClientValidationMessage { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_CurrencyLocaleId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.CurrencyLocaleId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L219" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_CurrencyLocaleId_" data-uid="PnP.Core.Model.SharePoint.IField.CurrencyLocaleId*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_CurrencyLocaleId" data-uid="PnP.Core.Model.SharePoint.IField.CurrencyLocaleId"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_CurrencyLocaleId" class="expander" data-toggle="collapse">CurrencyLocaleId</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_CurrencyLocaleId" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the Locale Id of the currency</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int CurrencyLocaleId { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_CustomFormatter.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.CustomFormatter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L44" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_CustomFormatter_" data-uid="PnP.Core.Model.SharePoint.IField.CustomFormatter*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_CustomFormatter" data-uid="PnP.Core.Model.SharePoint.IField.CustomFormatter"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_CustomFormatter" class="expander" data-toggle="collapse">CustomFormatter</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_CustomFormatter" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets custom formatter of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string CustomFormatter { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_DateFormat.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.DateFormat%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L225" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_DateFormat_" data-uid="PnP.Core.Model.SharePoint.IField.DateFormat*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_DateFormat" data-uid="PnP.Core.Model.SharePoint.IField.DateFormat"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_DateFormat" class="expander" data-toggle="collapse">DateFormat</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_DateFormat" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the Date Format
+Valid for DateTime field, Calculated field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int DateFormat { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_DateTimeCalendarType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.DateTimeCalendarType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L254" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_DateTimeCalendarType_" data-uid="PnP.Core.Model.SharePoint.IField.DateTimeCalendarType*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_DateTimeCalendarType" data-uid="PnP.Core.Model.SharePoint.IField.DateTimeCalendarType"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_DateTimeCalendarType" class="expander" data-toggle="collapse">DateTimeCalendarType</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_DateTimeCalendarType" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int DateTimeCalendarType { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_DefaultFormula.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.DefaultFormula%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L49" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_DefaultFormula_" data-uid="PnP.Core.Model.SharePoint.IField.DefaultFormula*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_DefaultFormula" data-uid="PnP.Core.Model.SharePoint.IField.DefaultFormula"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_DefaultFormula" class="expander" data-toggle="collapse">DefaultFormula</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_DefaultFormula" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the default formula of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string DefaultFormula { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_DefaultValue.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.DefaultValue%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L54" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_DefaultValue_" data-uid="PnP.Core.Model.SharePoint.IField.DefaultValue*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_DefaultValue" data-uid="PnP.Core.Model.SharePoint.IField.DefaultValue"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_DefaultValue" class="expander" data-toggle="collapse">DefaultValue</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_DefaultValue" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the default value of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">object DefaultValue { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Description.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Description%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L59" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Description_" data-uid="PnP.Core.Model.SharePoint.IField.Description*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Description" data-uid="PnP.Core.Model.SharePoint.IField.Description"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Description" class="expander" data-toggle="collapse">Description</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Description" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the description of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Description { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Direction.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Direction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L65" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Direction_" data-uid="PnP.Core.Model.SharePoint.IField.Direction*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Direction" data-uid="PnP.Core.Model.SharePoint.IField.Direction"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Direction" class="expander" data-toggle="collapse">Direction</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Direction" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the direction of the field
+TODO use enum for this field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Direction { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_DisplayFormat.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.DisplayFormat%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L227" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_DisplayFormat_" data-uid="PnP.Core.Model.SharePoint.IField.DisplayFormat*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_DisplayFormat" data-uid="PnP.Core.Model.SharePoint.IField.DisplayFormat"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_DisplayFormat" class="expander" data-toggle="collapse">DisplayFormat</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_DisplayFormat" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int DisplayFormat { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_EditFormat.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.EditFormat%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L228" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_EditFormat_" data-uid="PnP.Core.Model.SharePoint.IField.EditFormat*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_EditFormat" data-uid="PnP.Core.Model.SharePoint.IField.EditFormat"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_EditFormat" class="expander" data-toggle="collapse">EditFormat</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_EditFormat" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int EditFormat { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_EnforceUniqueValues.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.EnforceUniqueValues%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L70" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_EnforceUniqueValues_" data-uid="PnP.Core.Model.SharePoint.IField.EnforceUniqueValues*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_EnforceUniqueValues" data-uid="PnP.Core.Model.SharePoint.IField.EnforceUniqueValues"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_EnforceUniqueValues" class="expander" data-toggle="collapse">EnforceUniqueValues</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_EnforceUniqueValues" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field enforces unique values</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool EnforceUniqueValues { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_EntityPropertyName.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.EntityPropertyName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L75" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_EntityPropertyName_" data-uid="PnP.Core.Model.SharePoint.IField.EntityPropertyName*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_EntityPropertyName" data-uid="PnP.Core.Model.SharePoint.IField.EntityPropertyName"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_EntityPropertyName" class="expander" data-toggle="collapse">EntityPropertyName</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_EntityPropertyName" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the entity property name of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string EntityPropertyName { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_FieldTypeKind.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.FieldTypeKind%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L178" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_FieldTypeKind_" data-uid="PnP.Core.Model.SharePoint.IField.FieldTypeKind*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_FieldTypeKind" data-uid="PnP.Core.Model.SharePoint.IField.FieldTypeKind"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_FieldTypeKind" class="expander" data-toggle="collapse">FieldTypeKind</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_FieldTypeKind" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the field type kind of the field
+<a href="https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee540543%28v%3doffice.15%29">https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee540543%28v%3doffice.15%29</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FieldType FieldTypeKind { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.FieldType.html">FieldType</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_FillInChoice.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.FillInChoice%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L248" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_FillInChoice_" data-uid="PnP.Core.Model.SharePoint.IField.FillInChoice*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_FillInChoice" data-uid="PnP.Core.Model.SharePoint.IField.FillInChoice"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_FillInChoice" class="expander" data-toggle="collapse">FillInChoice</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_FillInChoice" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool FillInChoice { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Filterable.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Filterable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L80" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Filterable_" data-uid="PnP.Core.Model.SharePoint.IField.Filterable*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Filterable" data-uid="PnP.Core.Model.SharePoint.IField.Filterable"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Filterable" class="expander" data-toggle="collapse">Filterable</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Filterable" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field can be used as filter</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Filterable { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Formula.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Formula%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L243" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Formula_" data-uid="PnP.Core.Model.SharePoint.IField.Formula*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Formula" data-uid="PnP.Core.Model.SharePoint.IField.Formula"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Formula" class="expander" data-toggle="collapse">Formula</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Formula" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Formula { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_FriendlyDisplayFormat.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.FriendlyDisplayFormat%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L255" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_FriendlyDisplayFormat_" data-uid="PnP.Core.Model.SharePoint.IField.FriendlyDisplayFormat*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_FriendlyDisplayFormat" data-uid="PnP.Core.Model.SharePoint.IField.FriendlyDisplayFormat"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_FriendlyDisplayFormat" class="expander" data-toggle="collapse">FriendlyDisplayFormat</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_FriendlyDisplayFormat" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int FriendlyDisplayFormat { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_FromBaseType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.FromBaseType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L86" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_FromBaseType_" data-uid="PnP.Core.Model.SharePoint.IField.FromBaseType*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_FromBaseType" data-uid="PnP.Core.Model.SharePoint.IField.FromBaseType"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_FromBaseType" class="expander" data-toggle="collapse">FromBaseType</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_FromBaseType" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field is from base type
+TODO : Review comment</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool FromBaseType { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Group.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Group%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Group_" data-uid="PnP.Core.Model.SharePoint.IField.Group*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Group" data-uid="PnP.Core.Model.SharePoint.IField.Group"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Group" class="expander" data-toggle="collapse">Group</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Group" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the group of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Group { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Hidden.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Hidden%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L96" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Hidden_" data-uid="PnP.Core.Model.SharePoint.IField.Hidden*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Hidden" data-uid="PnP.Core.Model.SharePoint.IField.Hidden"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Hidden" class="expander" data-toggle="collapse">Hidden</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Hidden" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field is hidden</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Hidden { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Id.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L101" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Id_" data-uid="PnP.Core.Model.SharePoint.IField.Id*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Id" data-uid="PnP.Core.Model.SharePoint.IField.Id"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Id" class="expander" data-toggle="collapse">Id</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Id" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the id of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid Id { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Indexed.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Indexed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L106" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Indexed_" data-uid="PnP.Core.Model.SharePoint.IField.Indexed*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Indexed" data-uid="PnP.Core.Model.SharePoint.IField.Indexed"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Indexed" class="expander" data-toggle="collapse">Indexed</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Indexed" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field is indexed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Indexed { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_IndexStatus.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.IndexStatus%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L112" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_IndexStatus_" data-uid="PnP.Core.Model.SharePoint.IField.IndexStatus*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_IndexStatus" data-uid="PnP.Core.Model.SharePoint.IField.IndexStatus"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_IndexStatus" class="expander" data-toggle="collapse">IndexStatus</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_IndexStatus" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the index status of the field
+TODO: What should be done for read-only fields ?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int IndexStatus { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_InternalName.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.InternalName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L117" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_InternalName_" data-uid="PnP.Core.Model.SharePoint.IField.InternalName*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_InternalName" data-uid="PnP.Core.Model.SharePoint.IField.InternalName"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_InternalName" class="expander" data-toggle="collapse">InternalName</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_InternalName" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the internal name of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string InternalName { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_JSLink.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.JSLink%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L122" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_JSLink_" data-uid="PnP.Core.Model.SharePoint.IField.JSLink*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_JSLink" data-uid="PnP.Core.Model.SharePoint.IField.JSLink"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_JSLink" class="expander" data-toggle="collapse">JSLink</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_JSLink" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the JS link of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string JSLink { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Mappings.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Mappings%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L249" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Mappings_" data-uid="PnP.Core.Model.SharePoint.IField.Mappings*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Mappings" data-uid="PnP.Core.Model.SharePoint.IField.Mappings"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Mappings" class="expander" data-toggle="collapse">Mappings</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Mappings" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Mappings { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_MaximumValue.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.MaximumValue%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L237" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_MaximumValue_" data-uid="PnP.Core.Model.SharePoint.IField.MaximumValue*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_MaximumValue" data-uid="PnP.Core.Model.SharePoint.IField.MaximumValue"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_MaximumValue" class="expander" data-toggle="collapse">MaximumValue</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_MaximumValue" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">double MaximumValue { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_MaxLength.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.MaxLength%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L208" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_MaxLength_" data-uid="PnP.Core.Model.SharePoint.IField.MaxLength*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_MaxLength" data-uid="PnP.Core.Model.SharePoint.IField.MaxLength"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_MaxLength" class="expander" data-toggle="collapse">MaxLength</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_MaxLength" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the maximum length of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int MaxLength { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_MinimumValue.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.MinimumValue%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L238" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_MinimumValue_" data-uid="PnP.Core.Model.SharePoint.IField.MinimumValue*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_MinimumValue" data-uid="PnP.Core.Model.SharePoint.IField.MinimumValue"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_MinimumValue" class="expander" data-toggle="collapse">MinimumValue</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_MinimumValue" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">double MinimumValue { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_OutputType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.OutputType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L244" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_OutputType_" data-uid="PnP.Core.Model.SharePoint.IField.OutputType*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_OutputType" data-uid="PnP.Core.Model.SharePoint.IField.OutputType"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_OutputType" class="expander" data-toggle="collapse">OutputType</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_OutputType" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int OutputType { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_PinnedToFiltersPane.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.PinnedToFiltersPane%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L127" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_PinnedToFiltersPane_" data-uid="PnP.Core.Model.SharePoint.IField.PinnedToFiltersPane*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_PinnedToFiltersPane" data-uid="PnP.Core.Model.SharePoint.IField.PinnedToFiltersPane"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_PinnedToFiltersPane" class="expander" data-toggle="collapse">PinnedToFiltersPane</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_PinnedToFiltersPane" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field is pinned to filters pane</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool PinnedToFiltersPane { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Presence.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Presence%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L259" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Presence_" data-uid="PnP.Core.Model.SharePoint.IField.Presence*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Presence" data-uid="PnP.Core.Model.SharePoint.IField.Presence"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Presence" class="expander" data-toggle="collapse">Presence</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Presence" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Presence { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_ReadOnlyField.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.ReadOnlyField%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L132" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_ReadOnlyField_" data-uid="PnP.Core.Model.SharePoint.IField.ReadOnlyField*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_ReadOnlyField" data-uid="PnP.Core.Model.SharePoint.IField.ReadOnlyField"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_ReadOnlyField" class="expander" data-toggle="collapse">ReadOnlyField</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_ReadOnlyField" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field is read only</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ReadOnlyField { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Required.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Required%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L137" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Required_" data-uid="PnP.Core.Model.SharePoint.IField.Required*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Required" data-uid="PnP.Core.Model.SharePoint.IField.Required"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Required" class="expander" data-toggle="collapse">Required</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Required" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field is required</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Required { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_SchemaXml.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.SchemaXml%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L142" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_SchemaXml_" data-uid="PnP.Core.Model.SharePoint.IField.SchemaXml*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_SchemaXml" data-uid="PnP.Core.Model.SharePoint.IField.SchemaXml"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_SchemaXml" class="expander" data-toggle="collapse">SchemaXml</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_SchemaXml" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the schema XML of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string SchemaXml { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Scope.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Scope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L147" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Scope_" data-uid="PnP.Core.Model.SharePoint.IField.Scope*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Scope" data-uid="PnP.Core.Model.SharePoint.IField.Scope"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Scope" class="expander" data-toggle="collapse">Scope</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Scope" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the scope of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Scope { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Sealed.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Sealed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L152" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Sealed_" data-uid="PnP.Core.Model.SharePoint.IField.Sealed*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Sealed" data-uid="PnP.Core.Model.SharePoint.IField.Sealed"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Sealed" class="expander" data-toggle="collapse">Sealed</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Sealed" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field is sealed</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Sealed { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_SelectionGroup.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.SelectionGroup%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L260" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_SelectionGroup_" data-uid="PnP.Core.Model.SharePoint.IField.SelectionGroup*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_SelectionGroup" data-uid="PnP.Core.Model.SharePoint.IField.SelectionGroup"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_SelectionGroup" class="expander" data-toggle="collapse">SelectionGroup</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_SelectionGroup" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int SelectionGroup { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_SelectionMode.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.SelectionMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L261" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_SelectionMode_" data-uid="PnP.Core.Model.SharePoint.IField.SelectionMode*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_SelectionMode" data-uid="PnP.Core.Model.SharePoint.IField.SelectionMode"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_SelectionMode" class="expander" data-toggle="collapse">SelectionMode</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_SelectionMode" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int SelectionMode { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_ShowAsPercentage.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.ShowAsPercentage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L234" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_ShowAsPercentage_" data-uid="PnP.Core.Model.SharePoint.IField.ShowAsPercentage*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_ShowAsPercentage" data-uid="PnP.Core.Model.SharePoint.IField.ShowAsPercentage"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_ShowAsPercentage" class="expander" data-toggle="collapse">ShowAsPercentage</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_ShowAsPercentage" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field should be shown as percentage
+Valid for Number field, Calculated field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ShowAsPercentage { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_ShowInFiltersPane.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.ShowInFiltersPane%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L157" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_ShowInFiltersPane_" data-uid="PnP.Core.Model.SharePoint.IField.ShowInFiltersPane*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_ShowInFiltersPane" data-uid="PnP.Core.Model.SharePoint.IField.ShowInFiltersPane"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_ShowInFiltersPane" class="expander" data-toggle="collapse">ShowInFiltersPane</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_ShowInFiltersPane" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field is shown in filters pane</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int ShowInFiltersPane { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Sortable.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Sortable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L162" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Sortable_" data-uid="PnP.Core.Model.SharePoint.IField.Sortable*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Sortable" data-uid="PnP.Core.Model.SharePoint.IField.Sortable"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Sortable" class="expander" data-toggle="collapse">Sortable</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Sortable" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets whether the field can be sorted</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Sortable { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_StaticName.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.StaticName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L167" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_StaticName_" data-uid="PnP.Core.Model.SharePoint.IField.StaticName*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_StaticName" data-uid="PnP.Core.Model.SharePoint.IField.StaticName"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_StaticName" class="expander" data-toggle="collapse">StaticName</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_StaticName" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the static name of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string StaticName { get; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_Title.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L172" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_Title_" data-uid="PnP.Core.Model.SharePoint.IField.Title*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_Title" data-uid="PnP.Core.Model.SharePoint.IField.Title"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_Title" class="expander" data-toggle="collapse">Title</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_Title" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the title of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Title { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_TypeAsString.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.TypeAsString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L183" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_TypeAsString_" data-uid="PnP.Core.Model.SharePoint.IField.TypeAsString*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_TypeAsString" data-uid="PnP.Core.Model.SharePoint.IField.TypeAsString"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_TypeAsString" class="expander" data-toggle="collapse">TypeAsString</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_TypeAsString" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the type of the field as string value</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string TypeAsString { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_TypeDisplayName.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.TypeDisplayName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L188" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_TypeDisplayName_" data-uid="PnP.Core.Model.SharePoint.IField.TypeDisplayName*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_TypeDisplayName" data-uid="PnP.Core.Model.SharePoint.IField.TypeDisplayName"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_TypeDisplayName" class="expander" data-toggle="collapse">TypeDisplayName</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_TypeDisplayName" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the display name of the type of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string TypeDisplayName { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_TypeShortDescription.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.TypeShortDescription%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L193" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_TypeShortDescription_" data-uid="PnP.Core.Model.SharePoint.IField.TypeShortDescription*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_TypeShortDescription" data-uid="PnP.Core.Model.SharePoint.IField.TypeShortDescription"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_TypeShortDescription" class="expander" data-toggle="collapse">TypeShortDescription</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_TypeShortDescription" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets a short description of the type of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string TypeShortDescription { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_ValidationFormula.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.ValidationFormula%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L198" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_ValidationFormula_" data-uid="PnP.Core.Model.SharePoint.IField.ValidationFormula*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_ValidationFormula" data-uid="PnP.Core.Model.SharePoint.IField.ValidationFormula"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_ValidationFormula" class="expander" data-toggle="collapse">ValidationFormula</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_ValidationFormula" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the validation formula of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ValidationFormula { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField_ValidationMessage.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField.ValidationMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L203" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IField_ValidationMessage_" data-uid="PnP.Core.Model.SharePoint.IField.ValidationMessage*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IField_ValidationMessage" data-uid="PnP.Core.Model.SharePoint.IField.ValidationMessage"><a href="#collapsible-PnP_Core_Model_SharePoint_IField_ValidationMessage" class="expander" data-toggle="collapse">ValidationMessage</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IField_ValidationMessage" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or Sets the validation message of the field</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ValidationMessage { get; set; }</code></pre>
+  </div>
+  
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsurePropertiesAsync__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelExtensions.EnsurePropertiesAsync&lt;TModel&gt;(IDataModel&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___">DataModelExtensions.IsPropertyAvailable&lt;TModel&gt;(IDataModel&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Object___">DataModelExtensions.IsPropertyAvailable&lt;TModel&gt;(TModel, Expression&lt;Func&lt;TModel, Object&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsureParentObjectAsync_PnP_Core_Model_IDataModelParent_">DataModelExtensions.EnsureParentObjectAsync(IDataModelParent)</a>
+  </div>
+  
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IField.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IField%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IField.cs/#L8" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            PnP Core SDK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
