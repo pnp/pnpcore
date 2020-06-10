@@ -1043,7 +1043,7 @@ namespace PnP.Core.Model
             }
 
             // Get the corresponding JSON text content
-            var jsonUpdateMessage = System.Text.Json.JsonSerializer.Serialize(updateMessage,
+            var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
                 typeof(ExpandoObject),
                 new JsonSerializerOptions
                 {
@@ -1122,7 +1122,7 @@ namespace PnP.Core.Model
             }
 
             // Get the corresponding JSON text content
-            var jsonUpdateMessage = System.Text.Json.JsonSerializer.Serialize(updateMessage,
+            var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
                 typeof(ExpandoObject),
                 new JsonSerializerOptions { WriteIndented = true });
 

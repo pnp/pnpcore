@@ -57,6 +57,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestQueryItems_Graph()
         {
+            //TODO: when we have document upload funcionality then the test should ensure a document with the requested title is uploaded
             var expectedListItemTitle = "Sample Document 01";
 
             //TestCommon.Instance.Mocking = false;
