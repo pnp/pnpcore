@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The Unique ID of the Web object
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// Defines whether the site has to be crawled or not
@@ -126,7 +126,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The URL of the Web object
         /// </summary>
-        public Uri Url { get; set; }
+        public Uri Url { get; }
 
 
         /// <summary>

@@ -8,7 +8,7 @@
         /// <summary>
         /// Identifier for the entity hosted by the tab provider.
         /// </summary>
-        public string EntityId { get; set; }
+        public string EntityId { get; }
 
         /// <summary>
         /// Url used for rendering tab contents in Teams. Required.

@@ -9,12 +9,12 @@
         /// <summary>
         /// The unique ID of the Content Type as string
         /// </summary>
-        public string StringId { get; set; }
+        public string StringId { get; }
 
         /// <summary>
         /// The unique ID of the Content Type as object
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; }
 
         /// <summary>
         /// Gets or Sets the Client Form Custom Formatter of the Content Type

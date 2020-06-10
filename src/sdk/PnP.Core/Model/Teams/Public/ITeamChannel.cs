@@ -11,7 +11,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// The Unique ID of the Team Channel
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; }
 
         /// <summary>
         /// The display name of the Team Channel
@@ -31,7 +31,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// The email address of the Team Channel
         /// </summary>
-        public string Email { get; set; }
+        public string Email { get; }
 
         /// <summary>
         /// Defines the Membership type for the Team Channel
@@ -41,7 +41,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// The Web URL of the Team Channel
         /// </summary>
-        public Uri WebUrl { get; set; }
+        public Uri WebUrl { get; }
 
         /// <summary>
         /// Tabs in this Channel

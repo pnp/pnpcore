@@ -8,7 +8,7 @@
         /// <summary>
         /// Unique identifier for the identity.
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; }
 
         /// <summary>
         /// The identity's display name. Note that this may not always be available or up to date. 

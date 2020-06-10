@@ -1,5 +1,4 @@
-﻿using PnP.Core.Model.SharePoint;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace PnP.Core.Model.Teams
@@ -15,22 +14,22 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Read-only. Unique Id of the message.
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; }
 
         /// <summary>
         /// Read-only. Id of the parent chat message or root chat message of the thread. (Only applies to chat messages in channels not chats)
         /// </summary>
-        public string ReplyToId { get; set; }
+        public string ReplyToId { get; }
 
         /// <summary>
         /// Read only. Details of the sender of the chat message.
         /// </summary>
-        public ITeamIdentitySet From { get; set; }
+        public ITeamIdentitySet From { get; }
 
         /// <summary>
         /// Read-only. Version number of the chat message.
         /// </summary>
-        public string Etag { get; set; }
+        public string Etag { get; }
 
         /// <summary>
         /// The type of chat message. The possible values are: message.
@@ -40,17 +39,17 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Read only. Timestamp of when the chat message was created.
         /// </summary>
-        public DateTimeOffset CreatedDateTime { get; set; }
+        public DateTimeOffset CreatedDateTime { get; }
 
         /// <summary>
         /// Read only. Timestamp of when the chat message is created or edited, including when a reply is made (if it's a root chat message in a channel) or a reaction is added or removed.
         /// </summary>
-        public DateTimeOffset LastModifiedDateTime { get; set; }
+        public DateTimeOffset LastModifiedDateTime { get; }
 
         /// <summary>
         /// Read only. Timestamp at which the chat message was deleted, or null if not deleted.
         /// </summary>
-        public DateTimeOffset DeletedDateTime { get; set; }
+        public DateTimeOffset DeletedDateTime { get; }
 
         /// <summary>
         /// The subject of the chat message, in plaintext.
@@ -61,7 +60,7 @@ namespace PnP.Core.Model.Teams
         /// Plaintext/HTML representation of the content of the chat message. Representation is specified by the contentType inside the body. 
         /// The content is always in HTML if the chat message contains a chatMessageMention.
         /// </summary>
-        public ITeamChatMessageContent Body { get; set; }
+        public ITeamChatMessageContent Body { get; }
 
         /// <summary>
         /// Summary text of the chat message that could be used for push notifications and summary views or fall back views. 
@@ -77,7 +76,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// The Web URL of the team chat message
         /// </summary>
-        public Uri WebUrl { get; set; }
+        public Uri WebUrl { get; }
 
         /// <summary>
         /// Locale of the team chat message

@@ -8,7 +8,7 @@
         /// <summary>
         /// The unique Id of the Team App in the current app catalog
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; }
 
         /// <summary>
         /// The external ID of the Team App as defined by the developer

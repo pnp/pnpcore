@@ -3,7 +3,7 @@
     [ConcreteType(typeof(ListItem))]
     public interface IListItem : IDataModel<IListItem>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel
     {
-        public int Id { get; set; }
+        public int Id { get; }
 
         public bool CommentsDisabled { get; set; }
 

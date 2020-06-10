@@ -98,7 +98,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or Sets the id of the field
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// Gets or Sets whether the field is indexed
@@ -114,7 +114,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or Sets the internal name of the field
         /// </summary>
-        public string InternalName { get; set; }
+        public string InternalName { get; }
 
         /// <summary>
         /// Gets or Sets the JS link of the field
@@ -164,7 +164,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or Sets the static name of the field
         /// </summary>
-        public string StaticName { get; set; }
+        public string StaticName { get; }
 
         /// <summary>
         /// Gets or Sets the title of the field
@@ -175,7 +175,7 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or Sets the field type kind of the field
         /// https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee540543%28v%3doffice.15%29
         /// </summary>
-        public FieldType FieldTypeKind { get; set; }
+        public FieldType FieldTypeKind { get; }
 
         /// <summary>
         /// Gets or Sets the type of the field as string value
@@ -249,7 +249,6 @@ namespace PnP.Core.Model.SharePoint
         public string Mappings { get; set; }
         public string[] Choices { get; set; }
         #endregion
-
 
         #region DateTime Fields
         public int DateTimeCalendarType { get; set; }

@@ -10,7 +10,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Identifier that uniquely identifies a specific instance of a channel tab. Read only.
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// Name of the tab.
@@ -25,17 +25,17 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Deep link url of the tab instance. Read only.
         /// </summary>
-        public Uri WebUrl { get; set; }
+        public Uri WebUrl { get; }
 
         /// <summary>
         /// Container for custom settings applied to a tab. The tab is considered configured only once this property is set.
         /// </summary>
-        public ITeamChannelTabConfiguration Configuration { get; set; }
+        public ITeamChannelTabConfiguration Configuration { get; }
 
         /// <summary>
         /// The application that is linked to the tab. This cannot be changed after tab creation.
         /// </summary>
-        public ITeamApp TeamsApp { get; set; }
+        public ITeamApp TeamsApp { get; }
 
     }
 }

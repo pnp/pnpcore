@@ -11,7 +11,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// The Unique ID of the Team/Group
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// The display name of the Team
@@ -26,7 +26,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// The Internal ID of the Team
         /// </summary>
-        public string InternalId { get; set; }
+        public string InternalId { get; }
 
         /// <summary>
         /// The classification of the Team
@@ -46,7 +46,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// The Web URL of the Team
         /// </summary>
-        public Uri WebUrl { get; set; }
+        public Uri WebUrl { get; }
 
         /// <summary>
         /// Defines whether the Team is archived or not
@@ -56,37 +56,37 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Defines the Members Settings for the Team
         /// </summary>
-        public ITeamMembersSettings MemberSettings { get; set; }
+        public ITeamMembersSettings MemberSettings { get; }
 
         /// <summary>
         /// Defines the Guest Settings for the Team
         /// </summary>
-        public ITeamGuestSettings GuestSettings { get; set; }
+        public ITeamGuestSettings GuestSettings { get; }
 
         /// <summary>
         /// Defines the Members Settings for the Team
         /// </summary>
-        public ITeamMessagingSettings MessagingSettings { get; set; }
+        public ITeamMessagingSettings MessagingSettings { get; }
 
         /// <summary>
         /// Defines the Members Settings for the Team
         /// </summary>
-        public ITeamFunSettings FunSettings { get; set; }
+        public ITeamFunSettings FunSettings { get; }
 
         /// <summary>
         /// Defines the Members Settings for the Team
         /// </summary>
-        public ITeamDiscoverySettings DiscoverySettings { get; set; }
+        public ITeamDiscoverySettings DiscoverySettings { get; }
 
         /// <summary>
         /// Defines the Class Settings for the Team
         /// </summary>
-        public ITeamClassSettings ClassSettings { get; set; }
+        public ITeamClassSettings ClassSettings { get; }
 
         /// <summary>
         /// Reference to the Primary Channel for the Team
         /// </summary>
-        public ITeamChannel PrimaryChannel { get; set; }
+        public ITeamChannel PrimaryChannel { get; }
 
         /// <summary>
         /// Collection of channels in this current Team

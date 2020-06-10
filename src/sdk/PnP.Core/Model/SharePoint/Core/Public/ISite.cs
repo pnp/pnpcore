@@ -10,17 +10,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The Unique ID of the Site object
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// The unique ID of the connected Office 365 Group (if any)
         /// </summary>
-        public Guid GroupId { get; set; }
+        public Guid GroupId { get; }
 
         /// <summary>
         /// The URL of the Site object
         /// </summary>
-        public Uri Url { get; set; }
+        public Uri Url { get; }
 
         /// <summary>
         /// The Classification of the Site object
@@ -44,11 +44,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The RootWeb of the Site object
         /// </summary>
-        public IWeb RootWeb { get; set; }
+        public IWeb RootWeb { get; }
 
         /// <summary>
         /// Collection of sub-webs in the current Site object
         /// </summary>
-        public IWebCollection AllWebs { get; set; }
+        public IWebCollection AllWebs { get; }
     }
 }

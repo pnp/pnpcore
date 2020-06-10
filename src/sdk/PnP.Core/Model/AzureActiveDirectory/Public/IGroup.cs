@@ -10,7 +10,7 @@ namespace PnP.Core.Model.AzureActiveDirectory
         /// <summary>
         /// Id of the Office 365 Group
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; }
 
         /// <summary>
         /// Name of the Office 365 Group
@@ -25,7 +25,7 @@ namespace PnP.Core.Model.AzureActiveDirectory
         /// <summary>
         /// Url of the SharePoint site connected to this Office 365 group
         /// </summary>
-        public Uri WebUrl { get; set; }
+        public Uri WebUrl { get; }
 
         /// <summary>
         /// Is this group mail enabled
@@ -35,12 +35,12 @@ namespace PnP.Core.Model.AzureActiveDirectory
         /// <summary>
         /// Email address of this Office 365 group
         /// </summary>
-        public string Mail { get; set; }
+        public string Mail { get; }
 
         /// <summary>
         /// Mail nickname of this Office 365 group
         /// </summary>
-        public string MailNickname { get; set; }
+        public string MailNickname { get; }
 
         /// <summary>
         /// Classification of this group
@@ -50,7 +50,7 @@ namespace PnP.Core.Model.AzureActiveDirectory
         /// <summary>
         /// When was this group created
         /// </summary>
-        public DateTimeOffset CreatedDateTime { get; set; }
+        public DateTimeOffset CreatedDateTime { get; }
 
         /// <summary>
         /// Visibility of this group

@@ -7,7 +7,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Read-only. Unique id of the attachment.
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; }
 
         /// <summary>
         /// The media type of the content attachment.

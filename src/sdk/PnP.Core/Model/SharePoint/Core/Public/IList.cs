@@ -12,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The Unique ID of the List object
         /// </summary>
-        public Guid Id { get; set; }
+        Guid Id { get; }
 
         /// <summary>
         /// Gets or sets the list title
@@ -38,12 +38,12 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets a value that specifies the list server template of the new list.
         /// https://msdn.microsoft.com/en-us/library/office/microsoft.sharepoint.client.listtemplatetype.aspx
         /// </summary>
-        public ListTemplateType TemplateType { get; set; }
+        public ListTemplateType TemplateType { get; }
 
         /// <summary>
         /// Gets or sets a value that specifies whether the new list is displayed on the Quick Launch of the site.
         /// </summary>
-        public string Url { get; set; }
+        public string Url { get; }
 
         /// <summary>
         /// Gets or sets whether verisioning is enabled on the list
@@ -103,7 +103,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the Guid for TemplateFeature
         /// </summary>
-        public Guid TemplateFeatureId { get; set; }
+        public Guid TemplateFeatureId { get; }
 
         /// <summary>
         /// Defines a list of default values for the Fields of the List Instance
