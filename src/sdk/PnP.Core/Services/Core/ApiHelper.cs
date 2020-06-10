@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using PnP.Core.Model;
+﻿using PnP.Core.Model;
 
 namespace PnP.Core.Services
 {
@@ -11,8 +9,6 @@ namespace PnP.Core.Services
     {
         internal static string ParseApiCall(TransientObject pnpObject, string apiCall)
         {
-            var metadataBasedObject = pnpObject as IMetadataExtensible;
-
             // No tokens, so nothing to do parse
             if (!apiCall.Contains("{"))
             {
@@ -20,7 +16,7 @@ namespace PnP.Core.Services
             }
 
             // Parse api call to replace tokens
-            apiCall = ParseApiRequest(metadataBasedObject, apiCall);
+            apiCall = ParseApiRequest(pnpObject as IMetadataExtensible, apiCall);
 
             return apiCall;
         }
