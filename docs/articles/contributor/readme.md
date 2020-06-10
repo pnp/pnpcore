@@ -46,7 +46,7 @@ public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
     /// <summary>
     /// The Unique ID of the List object
     /// </summary>
-    public Guid Id { get; set; }
+    public Guid Id { get; }
 
     /// <summary>
     /// Gets or sets the list title
@@ -70,7 +70,7 @@ Each public model:
 - Optionally implements the `IDataModelUpdate` interface whenever **update** functionality in needed on this model class
 - Optionally implements the `IDataModelDelete` interface whenever **delete** functionality is needed on this model class
 
-The fields in the model use either basic .Net data types, enumerations, other model/collection types or so called complex types:
+The properties in the model use either basic .Net data types, enumerations, other model/collection types or so called complex types:
 
 ```csharp
 // Simple .Net type
@@ -85,6 +85,9 @@ public IListItemCollection Items { get; }
 // Complex types (sample comes from the Team model class)
 public ITeamFunSettings FunSettings { get; set; }
 ```
+
+> [!Note]
+> When a property is read-only you only need to provide a ´get´ in the public model.
 
 #### Internal implementation
 
