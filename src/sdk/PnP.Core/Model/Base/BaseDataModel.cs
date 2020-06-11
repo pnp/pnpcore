@@ -1293,9 +1293,9 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal virtual void BatchRequest(ApiCall apiCall, HttpMethod method)
+        internal void Request(ApiCall apiCall, HttpMethod method)
         {
-            BatchRequest(PnPContext.CurrentBatch, apiCall, method);
+            Request(PnPContext.CurrentBatch, apiCall, method);
         }
 
         /// <summary>
@@ -1304,7 +1304,7 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal virtual void BatchRequest(Batch batch, ApiCall apiCall, HttpMethod method)
+        internal void Request(Batch batch, ApiCall apiCall, HttpMethod method)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -1330,7 +1330,7 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal virtual async Task Request(ApiCall apiCall, HttpMethod method)
+        internal async Task RequestAsync(ApiCall apiCall, HttpMethod method)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();

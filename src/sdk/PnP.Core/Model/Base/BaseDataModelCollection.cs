@@ -37,20 +37,25 @@ namespace PnP.Core.Model
         /// </summary>
         public IDataModelParent Parent { get; set; }
 
+        /// <summary>
+        /// Number of items in the collection
+        /// </summary>
         public int Count => this.items.Count;
 
-        public bool IsReadOnly => false;
+        /// <summary>
+        /// Was this collectioned loaded with data from a server request
+        /// </summary>
+        public bool Requested { get; set; } = false;
 
         /// <summary>
-        /// Indicates whether this collection was fetched from the server
+        /// Number of items in the collection
         /// </summary>
-        private bool requested = false;
-
-        public bool Requested { get { return requested; } set { requested = value; } }
-
         public int Length => this.items.Count;
 
-        public System.Collections.IEnumerable RequestedItems { get => this.items; }
+        /// <summary>
+        /// Items in the collection
+        /// </summary>
+        public IEnumerable RequestedItems { get => this.items; }
 
         #endregion
 

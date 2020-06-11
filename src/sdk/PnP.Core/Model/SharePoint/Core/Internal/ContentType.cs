@@ -73,14 +73,14 @@ namespace PnP.Core.Model.SharePoint
         internal IContentType AddAvailableContentType(Batch batch, string id)
         {
             var apiCall = AddAvailableContentTypeApiCall(id);
-            BatchRequest(batch, apiCall, HttpMethod.Post);
+            Request(batch, apiCall, HttpMethod.Post);
             return this;
         }
 
         internal async Task<IContentType> AddAvailableContentTypeAsync(string id)
         {
             var apiCall = AddAvailableContentTypeApiCall(id);
-            await Request(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             return this;
         }
         #endregion
