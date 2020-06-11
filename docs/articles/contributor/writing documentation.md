@@ -20,5 +20,5 @@ If you want to show your article in the table of contents, then you need to make
 
 Documentation written in the code files themselves is used to generate the **Api Documentation** and depends on docfx parsing the tripple slash comments that you add to the code. Below resources help you get started:
 
-- [Tripple slash (also called XML documents) commenting in .Net code files](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/)
+- [Triple slash (also called XML documents) commenting in .Net code files](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/)
 - [DocFX support for tripple slash comments](https://dotnet.github.io/docfx/spec/triple_slash_comments_spec.html)
