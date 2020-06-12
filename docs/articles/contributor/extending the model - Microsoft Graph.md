@@ -309,7 +309,7 @@ When you know that the API call you're making will return json data that has to 
 Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the `RawRequestAsync` method. This method accepts an `ApiCall` instance as input together with the `HttpMethod`. Below sample shows how you can archive a Team. The sample shows how the `ApiCall` is built and executed via the `RawRequestAsync` method. This method returns an `ApiCallResponse` object that contains the http response code, the json response and additional response headers from the server, which is processed and as a result the recycle bin item id is returned and the list is removed from the model.
 
 ```csharp
-public async Task<string> ArchiveAsync(bool setSPOSiteReadOnlyForMembers)
+public async Task<ITeamAsyncOperation> ArchiveAsync(bool setSPOSiteReadOnlyForMembers)
 {
     if (Requested)
     {
@@ -329,7 +329,7 @@ public async Task<string> ArchiveAsync(bool setSPOSiteReadOnlyForMembers)
             (this as ITeam).SetSystemProperty(p => p.IsArchived, true);
 
             // we get back a url to request a teamsAsyncOperation (https://docs.microsoft.com/en-us/graph/api/resources/teamsasyncoperation?view=graph-rest-beta)
-            return response.Headers["Location"];
+            return new TeamAsyncOperation(response.Headers["Location"], PnPContext);
         }
     }
 
