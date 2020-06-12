@@ -222,7 +222,11 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 <p>If you're extending the SharePoint model and there's both a Microsoft Graph and a SharePoint REST API available then start with implementing the model using SharePoint REST. Once that works you can add additional Microsoft Graph based decoration.</p>
 </div>
 <h2 id="step-4-add-additional-functionality">Step 4: Add additional functionality</h2>
-<p>At this point you should have a working model that can be used to read data and depending on the implementation also supports adding, updating and deleting. The power of the SDK however will not just be the model, but also the &quot;rich&quot; extensions on top of it. The extensions can be implemented as methods on the model, e.g. you could imagine a <code>UploadFile</code> method on the <code>ITeamChannel</code> model.</p>
+<p>At this point you should have a working model that can be used to read data and depending on the implementation also supports adding, updating and deleting. The power of the SDK however will not just be the model, but also the &quot;rich&quot; extensions on top of it. The extensions can be implemented as methods on the model, e.g. you could imagine an <code>UploadFile</code> method on the <code>ITeamChannel</code> model. For implementing this additional functions you quite often will need to execute API calls and optionally have the resulting json response loaded into the model. For doing that there are the <code>RequestAsync</code> and <code>Request</code> base class methods in case you want the resulting json be processed or the <code>RawRequestAsync</code> method in case you want to process the resulting json as part of your implementation. You'll find more details on this on the pages that explain the model decoration for Graph/REST:</p>
+<ul>
+<li><a href="extending%20the%20model%20-%20SharePoint%20REST.html">Decorating the model for SharePoint REST API's</a></li>
+<li><a href="extending%20the%20model%20-%20Microsoft%20Graph.html">Decorating the model for Microsoft Graph API's</a></li>
+</ul>
 <h2 id="step-5-write-test-cases">Step 5: Write test cases</h2>
 <p>Quality is key aspect of this library and test cases do help to guarantee quality. See the <a href="writing%20tests.html">Writing test cases</a> article to learn more about how to do that.</p>
 </article>

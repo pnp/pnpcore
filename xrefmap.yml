@@ -3513,6 +3513,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.ReadSecurity
   nameWithType: IList.ReadSecurity
+- uid: PnP.Core.Model.SharePoint.IList.RecycleAsync
+  name: RecycleAsync()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RecycleAsync
+  commentId: M:PnP.Core.Model.SharePoint.IList.RecycleAsync
+  fullName: PnP.Core.Model.SharePoint.IList.RecycleAsync()
+  nameWithType: IList.RecycleAsync()
+- uid: PnP.Core.Model.SharePoint.IList.RecycleAsync*
+  name: RecycleAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RecycleAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.RecycleAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.RecycleAsync
+  nameWithType: IList.RecycleAsync
 - uid: PnP.Core.Model.SharePoint.IList.TemplateFeatureId
   name: TemplateFeatureId
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_TemplateFeatureId
