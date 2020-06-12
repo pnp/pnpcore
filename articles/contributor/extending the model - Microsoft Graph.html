@@ -448,7 +448,7 @@ public interface ITeamChannelCollection : IDataModelCollection&lt;ITeamChannel&g
 </code></pre>
 <h3 id="running-an-api-call-and-processing-the-resulting-json-as-part-of-your-code">Running an API call and processing the resulting json as part of your code</h3>
 <p>Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the <code>RawRequestAsync</code> method. This method accepts an <code>ApiCall</code> instance as input together with the <code>HttpMethod</code>. Below sample shows how you can archive a Team. The sample shows how the <code>ApiCall</code> is built and executed via the <code>RawRequestAsync</code> method. This method returns an <code>ApiCallResponse</code> object that contains the http response code, the json response and additional response headers from the server, which is processed and as a result the recycle bin item id is returned and the list is removed from the model.</p>
-<pre><code class="lang-csharp">public async Task&lt;string&gt; ArchiveAsync(bool setSPOSiteReadOnlyForMembers)
+<pre><code class="lang-csharp">public async Task&lt;ITeamAsyncOperation&gt; ArchiveAsync(bool setSPOSiteReadOnlyForMembers)
 {
     if (Requested)
     {
@@ -468,7 +468,7 @@ public interface ITeamChannelCollection : IDataModelCollection&lt;ITeamChannel&g
             (this as ITeam).SetSystemProperty(p =&gt; p.IsArchived, true);
 
             // we get back a url to request a teamsAsyncOperation (https://docs.microsoft.com/en-us/graph/api/resources/teamsasyncoperation?view=graph-rest-beta)
-            return response.Headers[&quot;Location&quot;];
+            return new TeamAsyncOperation(response.Headers[&quot;Location&quot;], PnPContext);
         }
     }
 

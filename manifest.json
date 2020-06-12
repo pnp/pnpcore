@@ -1686,7 +1686,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/extending the model - Microsoft Graph.html",
-          "hash": "syI2rXu2EWAPGnDgAD68kw=="
+          "hash": "qEhMFvk358peShEjIHgwjg=="
         }
       },
       "is_incremental": false,
@@ -1893,13 +1893,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 15,
-          "skipped_file_count": 13
+          "skipped_file_count": 14
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 133,
-          "skipped_file_count": 129
+          "skipped_file_count": 133
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
