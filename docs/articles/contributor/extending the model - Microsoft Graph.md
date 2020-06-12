@@ -306,8 +306,33 @@ When you know that the API call you're making will return json data that has to 
 
 ### Running an API call and processing the resulting json as part of your code
 
-Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the `RawRequestAsync` method. This method accepts an `ApiCall` instance as input together with the `HttpMethod`. 
+Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the `RawRequestAsync` method. This method accepts an `ApiCall` instance as input together with the `HttpMethod`. Below sample shows how you can archive a Team. The sample shows how the `ApiCall` is built and executed via the `RawRequestAsync` method. This method returns an `ApiCallResponse` object that contains the http response code, the json response and additional response headers from the server, which is processed and as a result the recycle bin item id is returned and the list is removed from the model.
 
 ```csharp
-// to update
+public async Task<string> ArchiveAsync(bool setSPOSiteReadOnlyForMembers)
+{
+    if (Requested)
+    {
+
+        dynamic body = new ExpandoObject();
+        body.shouldSetSpoSiteReadOnlyForMembers = setSPOSiteReadOnlyForMembers;
+
+        var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+
+        var apiCall = new ApiCall($"teams/{Id}/archive", ApiType.Graph, bodyContent);
+
+        var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.Accepted && response.Headers != null && response.Headers.ContainsKey("Location"))
+        {
+            // The archiving operation is in progress, already set the Team IsArchived flag to true
+            (this as ITeam).SetSystemProperty(p => p.IsArchived, true);
+
+            // we get back a url to request a teamsAsyncOperation (https://docs.microsoft.com/en-us/graph/api/resources/teamsasyncoperation?view=graph-rest-beta)
+            return response.Headers["Location"];
+        }
+    }
+
+    return null;
+}
 ```

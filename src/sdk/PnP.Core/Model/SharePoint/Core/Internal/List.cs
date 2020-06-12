@@ -109,9 +109,9 @@ namespace PnP.Core.Model.SharePoint
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
-            if (!string.IsNullOrEmpty(response))
+            if (!string.IsNullOrEmpty(response.Json))
             {
-                var document = JsonSerializer.Deserialize<JsonElement>(response);
+                var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
                 if (document.TryGetProperty("d", out JsonElement root))
                 {
                     if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))

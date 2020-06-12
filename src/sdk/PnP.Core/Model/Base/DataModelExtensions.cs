@@ -142,5 +142,30 @@ namespace PnP.Core.Model
                 }
             }
         }
+
+        /// <summary>
+        /// Checks if a property is loaded or not on a complex type
+        /// </summary>
+        /// <typeparam name="TModel">Model type (e.g. ITeamFunSettings)</typeparam>
+        /// <param name="model">Implementation of the model (e.g. TeamFunSettings)</param>
+        /// <param name="expression">Expression listing the property to load</param>
+        /// <returns>True if property was loaded, false otherwise</returns>
+        internal static void SetSystemProperty<TModel, T>(this TModel model, Expression<Func<TModel, object>> expression, T value)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
+
+            (model as TransientObject).SetSystemValue<T>(value, body.Member.Name);
+        }
+
     }
 }

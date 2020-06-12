@@ -177,6 +177,27 @@ namespace PnP.Core.Model
             return true;
         }
 
+        /// <summary>
+        /// Sets a property value without marking it as "changed"
+        /// </summary>
+        /// <typeparam name="T">Type of the property to set</typeparam>
+        /// <param name="value">Value to set</param>
+        /// <param name="propertyName">Name of the property</param>
+        internal void SetSystemValue<T>(T value, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
+        {
+            CheckDeleted();
+
+            if (current.TryGetValue(propertyName, out object oldValue))
+            {
+                if (object.Equals(oldValue, value))
+                {
+                    return;
+                }
+            }
+
+            current[propertyName] = value;
+        }
+
         public bool HasValue(string propertyName = "")
         {
             if (current.TryGetValue(propertyName, out _))

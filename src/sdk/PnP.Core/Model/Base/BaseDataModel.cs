@@ -1371,10 +1371,10 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal async Task<string> RawRequestAsync(ApiCall apiCall, HttpMethod method)
+        internal async Task<ApiCallResponse> RawRequestAsync(ApiCall apiCall, HttpMethod method)
         {
             var batch = await RequestAsync(apiCall, method, true).ConfigureAwait(false);
-            return batch.Requests.First().Value.ResponseJson;
+            return new ApiCallResponse(batch.Requests.First().Value.ResponseJson, batch.Requests.First().Value.ResponseHttpStatusCode, batch.Requests.First().Value.ResponseHeaders);
         }
 
         private ApiCall PrefixApiCall(ApiCall apiCall, EntityInfo entityInfo)

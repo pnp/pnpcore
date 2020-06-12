@@ -21,3 +21,4 @@
 - If you try to add a tab with a SharePoint Online document library (com.microsoft.teamspace.tab.files.sharepoint) and that library has a "non standard" URL (like /lists/MyLibrary instead of /MyLibrary) the Graph request fails with a BadGateway exception, which is misleading
 - It is not possible to query Channels with $orderby, $top, $skip
 - It is not possible to query Messages in Channels with $select, $filter, $orderby, $top, $skip
+- One can archive a team in a batch, but unarchive in a batch does not work unless we send along a fake body

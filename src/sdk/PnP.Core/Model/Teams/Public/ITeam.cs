@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model.AzureActiveDirectory;
 using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
@@ -51,7 +52,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Defines whether the Team is archived or not
         /// </summary>
-        public bool IsArchived { get; set; }
+        public bool IsArchived { get; }
 
         /// <summary>
         /// Defines the Members Settings for the Team
@@ -112,5 +113,25 @@ namespace PnP.Core.Model.Teams
         // - operations
         // - schedule
         // - template
+
+        /// <summary>
+        /// Archives the team
+        /// </summary>
+        /// <returns></returns>
+        public Task<ITeamAsyncOperation> ArchiveAsync();
+
+        /// <summary>
+        /// Archives the team
+        /// </summary>
+        /// <param name="setSPOSiteReadOnlyForMembers">This optional parameter defines whether to set permissions for team members to read-only on the Sharepoint Online site associated with the team</param>
+        /// <returns></returns>
+        public Task<ITeamAsyncOperation> ArchiveAsync(bool setSPOSiteReadOnlyForMembers);
+
+        /// <summary>
+        /// Unarchives the team
+        /// </summary>
+        /// <returns></returns>
+        public Task<ITeamAsyncOperation> UnarchiveAsync();
+
     }
 }

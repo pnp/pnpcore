@@ -24,6 +24,9 @@
         ConfigurationError,
 
         // Testing
-        OfflineDataError
+        OfflineDataError,
+
+        // Teams
+        TeamsAsyncOperationError
     }
 }

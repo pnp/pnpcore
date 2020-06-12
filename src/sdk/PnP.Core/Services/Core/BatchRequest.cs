@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using PnP.Core.Model;
@@ -90,14 +91,34 @@ namespace PnP.Core.Services
         internal HttpStatusCode ResponseHttpStatusCode { get; private set; }
 
         /// <summary>
+        /// Headers returned for this request (e.g. Content header to follow-up on async server side operations)
+        /// </summary>
+        internal Dictionary<string, string> ResponseHeaders { get; private set; } = new Dictionary<string, string>();
+
+        /// <summary>
         /// Records the response of a request (fired as part of the execution of a <see cref="Batch"/>)
         /// </summary>
         /// <param name="json">Json response for this request</param>
         /// <param name="responseHttpStatusCode">Http response status code for this request</param>
         internal void AddResponse(string json, HttpStatusCode responseHttpStatusCode)
         {
+            AddResponse(json, responseHttpStatusCode, null);
+        }
+
+        /// <summary>
+        /// Records the response of a request (fired as part of the execution of a <see cref="Batch"/>)
+        /// </summary>
+        /// <param name="json">Json response for this request</param>
+        /// <param name="responseHttpStatusCode">Http response status code for this request</param>
+        /// <param name="responseHeaders">Http response headers</param>
+        internal void AddResponse(string json, HttpStatusCode responseHttpStatusCode, Dictionary<string, string> responseHeaders)
+        {
             ResponseJson = json;
             ResponseHttpStatusCode = responseHttpStatusCode;
+            if (responseHeaders != null)
+            {
+                ResponseHeaders = responseHeaders;
+            }
         }
     }
 }

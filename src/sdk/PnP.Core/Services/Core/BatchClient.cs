@@ -426,7 +426,7 @@ namespace PnP.Core.Services
                             throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)graphBatchResponse.Status, bodyContent);
                         }
                         // All was good, connect response to the original request
-                        batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status);
+                        batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status, graphBatchResponse.Headers);
 
                         // Commit succesful updates in our model
                         if (batchRequest.Method == HttpMethod.Patch)

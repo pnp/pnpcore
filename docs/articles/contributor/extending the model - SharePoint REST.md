@@ -285,7 +285,7 @@ internal async Task<IContentType> AddAvailableContentTypeAsync(string id)
 
 ### Running an API call and processing the resulting json as part of your code
 
-Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the `RawRequestAsync` method. This method accepts an `ApiCall` instance as input together with the `HttpMethod`. Below sample shows how this can be used to recycle a list (= move list to the site's recycle bin). The sample shows how the `ApiCall` is built and executed via the `RawRequestAsync` method. This method returns the json response from the server, which is processed and as a result the recycle bin item id is returned and the list is removed from the model.
+Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the `RawRequestAsync` method. This method accepts an `ApiCall` instance as input together with the `HttpMethod`. Below sample shows how this can be used to recycle a list (= move list to the site's recycle bin). The sample shows how the `ApiCall` is built and executed via the `RawRequestAsync` method. This method returns an `ApiCallResponse` object that contains the json response from the server, which is processed and as a result the recycle bin item id is returned and the list is removed from the model.
 
 ```csharp
 public async Task<Guid> RecycleAsync()
@@ -294,9 +294,9 @@ public async Task<Guid> RecycleAsync()
 
     var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
-    if (!string.IsNullOrEmpty(response))
+    if (!string.IsNullOrEmpty(response.Json))
     {
-        var document = JsonSerializer.Deserialize<JsonElement>(response);
+        var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
         if (document.TryGetProperty("d", out JsonElement root))
         {
             if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
