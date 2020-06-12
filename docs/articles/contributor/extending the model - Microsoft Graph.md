@@ -286,3 +286,28 @@ internal partial class TeamChannel
     }
 }
 ```
+
+## Doing additional API calls
+
+Above example showed the `AddApiCallHandler` which provides an framework for doing add requests, but you often also need to do other types of requests and for that you need to be able to execute API calls. There are 2 ways to do this:
+
+- Run an API call and automatically load the resulting API call response in the model
+- Run an API call and process the resulting json as part of your code
+
+Above methods are described in the next chapters.
+
+### Running an API call and loading the result in the model
+
+When you know that the API call you're making will return json data that has to be loaded into the model then you should use the `RequestAsync` method for immediate async processing or `Request` method for batch processing. These methods accept an `ApiCall` instance as input together with the `HttpMethod`.
+
+```csharp
+// to update
+```
+
+### Running an API call and processing the resulting json as part of your code
+
+Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the `RawRequestAsync` method. This method accepts an `ApiCall` instance as input together with the `HttpMethod`. 
+
+```csharp
+// to update
+```

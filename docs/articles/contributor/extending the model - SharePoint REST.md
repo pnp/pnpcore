@@ -239,3 +239,77 @@ internal partial class List
     }
 }
 ```
+
+## Doing additional API calls
+
+Above example showed the `AddApiCallHandler` which provides an framework for doing add requests, but you often also need to do other types of requests (e.g. adding an available content type to a list, recycling a list, ...) and for that you need to be able to execute API calls. There are 2 ways to do this:
+
+- Run an API call and automatically load the resulting API call response in the model
+- Run an API call and process the resulting json as part of your code
+
+Above methods are described in the next chapters.
+
+### Running an API call and loading the result in the model
+
+When you know that the API call you're making will return json data that has to be loaded into the model then you should use the `RequestAsync` method for immediate async processing or `Request` method for batch processing. These methods accept an `ApiCall` instance as input together with the `HttpMethod`. Below sample shows how this can be used to add an existing content type to a list. The `AddAvailableContentTypeApiCall` method defines the API call to be executed and in the `AddAvailableContentType` and `AddAvailableContentTypeAsync` methods this API call is executed via the respective `Request` and `RequestAsync` methods. When executing the API calls the resulting json is automatically processed and loaded into the model, so in the below case the content type will show up in the list content type collection.
+
+```csharp
+private ApiCall AddAvailableContentTypeApiCall(string id)
+{
+    dynamic body = new ExpandoObject();
+    body.contentTypeId = id;
+
+    var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+
+    // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will
+    // automatically provide the correct 'parent'
+    var entity = EntityManager.Instance.GetClassInfo<IContentType>(GetType(), this);
+
+    return new ApiCall($"{entity.SharePointGet}/AddAvailableContentType", ApiType.SPORest, bodyContent);
+}
+
+internal IContentType AddAvailableContentType(Batch batch, string id)
+{
+    var apiCall = AddAvailableContentTypeApiCall(id);
+    Request(batch, apiCall, HttpMethod.Post);
+    return this;
+}
+
+internal async Task<IContentType> AddAvailableContentTypeAsync(string id)
+{
+    var apiCall = AddAvailableContentTypeApiCall(id);
+    await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+    return this;
+}
+```
+
+### Running an API call and processing the resulting json as part of your code
+
+Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the `RawRequestAsync` method. This method accepts an `ApiCall` instance as input together with the `HttpMethod`. Below sample shows how this can be used to recycle a list (= move list to the site's recycle bin). The sample shows how the `ApiCall` is built and executed via the `RawRequestAsync` method. This method returns the json response from the server, which is processed and as a result the recycle bin item id is returned and the list is removed from the model.
+
+```csharp
+public async Task<Guid> RecycleAsync()
+{
+    var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/recycle", ApiType.SPORest);
+
+    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+    if (!string.IsNullOrEmpty(response))
+    {
+        var document = JsonSerializer.Deserialize<JsonElement>(response);
+        if (document.TryGetProperty("d", out JsonElement root))
+        {
+            if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
+            {
+                // Remove this item from the lists collection
+                RemoveFromParentCollection();
+
+                // return the recyclebin item id
+                return recycleBinItemId.GetGuid();
+            }
+        }
+    }
+
+    return Guid.Empty;
+}
+```
