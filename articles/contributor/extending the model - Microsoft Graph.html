@@ -447,8 +447,33 @@ public interface ITeamChannelCollection : IDataModelCollection&lt;ITeamChannel&g
 <pre><code class="lang-csharp">// to update
 </code></pre>
 <h3 id="running-an-api-call-and-processing-the-resulting-json-as-part-of-your-code">Running an API call and processing the resulting json as part of your code</h3>
-<p>Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the <code>RawRequestAsync</code> method. This method accepts an <code>ApiCall</code> instance as input together with the <code>HttpMethod</code>.</p>
-<pre><code class="lang-csharp">// to update
+<p>Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the <code>RawRequestAsync</code> method. This method accepts an <code>ApiCall</code> instance as input together with the <code>HttpMethod</code>. Below sample shows how you can archive a Team. The sample shows how the <code>ApiCall</code> is built and executed via the <code>RawRequestAsync</code> method. This method returns an <code>ApiCallResponse</code> object that contains the http response code, the json response and additional response headers from the server, which is processed and as a result the recycle bin item id is returned and the list is removed from the model.</p>
+<pre><code class="lang-csharp">public async Task&lt;string&gt; ArchiveAsync(bool setSPOSiteReadOnlyForMembers)
+{
+    if (Requested)
+    {
+
+        dynamic body = new ExpandoObject();
+        body.shouldSetSpoSiteReadOnlyForMembers = setSPOSiteReadOnlyForMembers;
+
+        var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+
+        var apiCall = new ApiCall($&quot;teams/{Id}/archive&quot;, ApiType.Graph, bodyContent);
+
+        var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.Accepted &amp;&amp; response.Headers != null &amp;&amp; response.Headers.ContainsKey(&quot;Location&quot;))
+        {
+            // The archiving operation is in progress, already set the Team IsArchived flag to true
+            (this as ITeam).SetSystemProperty(p =&gt; p.IsArchived, true);
+
+            // we get back a url to request a teamsAsyncOperation (https://docs.microsoft.com/en-us/graph/api/resources/teamsasyncoperation?view=graph-rest-beta)
+            return response.Headers[&quot;Location&quot;];
+        }
+    }
+
+    return null;
+}
 </code></pre>
 </article>
           </div>

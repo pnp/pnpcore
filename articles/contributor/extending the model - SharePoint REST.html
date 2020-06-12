@@ -392,16 +392,16 @@ internal async Task&lt;IContentType&gt; AddAvailableContentTypeAsync(string id)
 }
 </code></pre>
 <h3 id="running-an-api-call-and-processing-the-resulting-json-as-part-of-your-code">Running an API call and processing the resulting json as part of your code</h3>
-<p>Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the <code>RawRequestAsync</code> method. This method accepts an <code>ApiCall</code> instance as input together with the <code>HttpMethod</code>. Below sample shows how this can be used to recycle a list (= move list to the site's recycle bin). The sample shows how the <code>ApiCall</code> is built and executed via the <code>RawRequestAsync</code> method. This method returns the json response from the server, which is processed and as a result the recycle bin item id is returned and the list is removed from the model.</p>
+<p>Some API calls do return data, but the returned data cannot be loaded into the current model. In those cases you should use the <code>RawRequestAsync</code> method. This method accepts an <code>ApiCall</code> instance as input together with the <code>HttpMethod</code>. Below sample shows how this can be used to recycle a list (= move list to the site's recycle bin). The sample shows how the <code>ApiCall</code> is built and executed via the <code>RawRequestAsync</code> method. This method returns an <code>ApiCallResponse</code> object that contains the json response from the server, which is processed and as a result the recycle bin item id is returned and the list is removed from the model.</p>
 <pre><code class="lang-csharp">public async Task&lt;Guid&gt; RecycleAsync()
 {
     var apiCall = new ApiCall($&quot;_api/Web/Lists(guid'{Id}')/recycle&quot;, ApiType.SPORest);
 
     var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
-    if (!string.IsNullOrEmpty(response))
+    if (!string.IsNullOrEmpty(response.Json))
     {
-        var document = JsonSerializer.Deserialize&lt;JsonElement&gt;(response);
+        var document = JsonSerializer.Deserialize&lt;JsonElement&gt;(response.Json);
         if (document.TryGetProperty(&quot;d&quot;, out JsonElement root))
         {
             if (root.TryGetProperty(&quot;Recycle&quot;, out JsonElement recycleBinItemId))

@@ -380,6 +380,12 @@ references:
   commentId: F:PnP.Core.ErrorType.SharePointRestServiceError
   fullName: PnP.Core.ErrorType.SharePointRestServiceError
   nameWithType: ErrorType.SharePointRestServiceError
+- uid: PnP.Core.ErrorType.TeamsAsyncOperationError
+  name: TeamsAsyncOperationError
+  href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_TeamsAsyncOperationError
+  commentId: F:PnP.Core.ErrorType.TeamsAsyncOperationError
+  fullName: PnP.Core.ErrorType.TeamsAsyncOperationError
+  nameWithType: ErrorType.TeamsAsyncOperationError
 - uid: PnP.Core.ErrorType.Unsupported
   name: Unsupported
   href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_Unsupported
@@ -4921,6 +4927,25 @@ references:
   commentId: T:PnP.Core.Model.Teams.ITeam
   fullName: PnP.Core.Model.Teams.ITeam
   nameWithType: ITeam
+- uid: PnP.Core.Model.Teams.ITeam.ArchiveAsync
+  name: ArchiveAsync()
+  href: api/PnP.Core.Model.Teams.ITeam.html#PnP_Core_Model_Teams_ITeam_ArchiveAsync
+  commentId: M:PnP.Core.Model.Teams.ITeam.ArchiveAsync
+  fullName: PnP.Core.Model.Teams.ITeam.ArchiveAsync()
+  nameWithType: ITeam.ArchiveAsync()
+- uid: PnP.Core.Model.Teams.ITeam.ArchiveAsync(System.Boolean)
+  name: ArchiveAsync(Boolean)
+  href: api/PnP.Core.Model.Teams.ITeam.html#PnP_Core_Model_Teams_ITeam_ArchiveAsync_System_Boolean_
+  commentId: M:PnP.Core.Model.Teams.ITeam.ArchiveAsync(System.Boolean)
+  fullName: PnP.Core.Model.Teams.ITeam.ArchiveAsync(System.Boolean)
+  nameWithType: ITeam.ArchiveAsync(Boolean)
+- uid: PnP.Core.Model.Teams.ITeam.ArchiveAsync*
+  name: ArchiveAsync
+  href: api/PnP.Core.Model.Teams.ITeam.html#PnP_Core_Model_Teams_ITeam_ArchiveAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeam.ArchiveAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeam.ArchiveAsync
+  nameWithType: ITeam.ArchiveAsync
 - uid: PnP.Core.Model.Teams.ITeam.Channels
   name: Channels
   href: api/PnP.Core.Model.Teams.ITeam.html#PnP_Core_Model_Teams_ITeam_Channels
@@ -5155,6 +5180,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeam.Specialization
   nameWithType: ITeam.Specialization
+- uid: PnP.Core.Model.Teams.ITeam.UnarchiveAsync
+  name: UnarchiveAsync()
+  href: api/PnP.Core.Model.Teams.ITeam.html#PnP_Core_Model_Teams_ITeam_UnarchiveAsync
+  commentId: M:PnP.Core.Model.Teams.ITeam.UnarchiveAsync
+  fullName: PnP.Core.Model.Teams.ITeam.UnarchiveAsync()
+  nameWithType: ITeam.UnarchiveAsync()
+- uid: PnP.Core.Model.Teams.ITeam.UnarchiveAsync*
+  name: UnarchiveAsync
+  href: api/PnP.Core.Model.Teams.ITeam.html#PnP_Core_Model_Teams_ITeam_UnarchiveAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeam.UnarchiveAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeam.UnarchiveAsync
+  nameWithType: ITeam.UnarchiveAsync
 - uid: PnP.Core.Model.Teams.ITeam.Visibility
   name: Visibility
   href: api/PnP.Core.Model.Teams.ITeam.html#PnP_Core_Model_Teams_ITeam_Visibility
@@ -5245,6 +5283,38 @@ references:
   commentId: T:PnP.Core.Model.Teams.ITeamAppCollection
   fullName: PnP.Core.Model.Teams.ITeamAppCollection
   nameWithType: ITeamAppCollection
+- uid: PnP.Core.Model.Teams.ITeamAsyncOperation
+  name: ITeamAsyncOperation
+  href: api/PnP.Core.Model.Teams.ITeamAsyncOperation.html
+  commentId: T:PnP.Core.Model.Teams.ITeamAsyncOperation
+  fullName: PnP.Core.Model.Teams.ITeamAsyncOperation
+  nameWithType: ITeamAsyncOperation
+- uid: PnP.Core.Model.Teams.ITeamAsyncOperation.Location
+  name: Location
+  href: api/PnP.Core.Model.Teams.ITeamAsyncOperation.html#PnP_Core_Model_Teams_ITeamAsyncOperation_Location
+  commentId: P:PnP.Core.Model.Teams.ITeamAsyncOperation.Location
+  fullName: PnP.Core.Model.Teams.ITeamAsyncOperation.Location
+  nameWithType: ITeamAsyncOperation.Location
+- uid: PnP.Core.Model.Teams.ITeamAsyncOperation.Location*
+  name: Location
+  href: api/PnP.Core.Model.Teams.ITeamAsyncOperation.html#PnP_Core_Model_Teams_ITeamAsyncOperation_Location_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamAsyncOperation.Location
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamAsyncOperation.Location
+  nameWithType: ITeamAsyncOperation.Location
+- uid: PnP.Core.Model.Teams.ITeamAsyncOperation.WaitForCompletionAsync
+  name: WaitForCompletionAsync()
+  href: api/PnP.Core.Model.Teams.ITeamAsyncOperation.html#PnP_Core_Model_Teams_ITeamAsyncOperation_WaitForCompletionAsync
+  commentId: M:PnP.Core.Model.Teams.ITeamAsyncOperation.WaitForCompletionAsync
+  fullName: PnP.Core.Model.Teams.ITeamAsyncOperation.WaitForCompletionAsync()
+  nameWithType: ITeamAsyncOperation.WaitForCompletionAsync()
+- uid: PnP.Core.Model.Teams.ITeamAsyncOperation.WaitForCompletionAsync*
+  name: WaitForCompletionAsync
+  href: api/PnP.Core.Model.Teams.ITeamAsyncOperation.html#PnP_Core_Model_Teams_ITeamAsyncOperation_WaitForCompletionAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamAsyncOperation.WaitForCompletionAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamAsyncOperation.WaitForCompletionAsync
+  nameWithType: ITeamAsyncOperation.WaitForCompletionAsync
 - uid: PnP.Core.Model.Teams.ITeamChannel
   name: ITeamChannel
   href: api/PnP.Core.Model.Teams.ITeamChannel.html

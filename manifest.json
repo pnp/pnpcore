@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ErrorType.html",
-          "hash": "BtQAzs0bwvxA6b8APVxAvw=="
+          "hash": "URst4wL931pXCtXf6Mpcaw=="
         }
       },
       "is_incremental": false,
@@ -702,7 +702,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeam.html",
-          "hash": "977f8nnsyQg7ACzHzPuj8Q=="
+          "hash": "GlB3qalVk+uQi84Ucz5s7A=="
         }
       },
       "is_incremental": false,
@@ -727,6 +727,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamAppCollection.html",
           "hash": "nPibK4yk0QrcwovcioczLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ITeamAsyncOperation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ITeamAsyncOperation.html",
+          "hash": "tTbtUFpRu/xyJRRgMOF/3g=="
         }
       },
       "is_incremental": false,
@@ -1014,7 +1026,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.html",
-          "hash": "Sm2ITkTVEuSRGB0Rsyn0mg=="
+          "hash": "pg3BX+RDp9kqaffqHjD7EA=="
         }
       },
       "is_incremental": false,
@@ -1614,7 +1626,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "AsscXapKnYpcmubEge8fkw=="
+          "hash": "qkskz78sQQiDlsXn+fS38g=="
         }
       },
       "is_incremental": false,
@@ -1674,7 +1686,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/extending the model - Microsoft Graph.html",
-          "hash": "iQK00ns30JAVHsXRYhJ/ZA=="
+          "hash": "syI2rXu2EWAPGnDgAD68kw=="
         }
       },
       "is_incremental": false,
@@ -1686,7 +1698,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/extending the model - SharePoint REST.html",
-          "hash": "R29kNQimRVknZDWpVEohSA=="
+          "hash": "SpumqiB7Q4hYi1tgztmj3A=="
         }
       },
       "is_incremental": false,
@@ -1881,13 +1893,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 15,
-          "skipped_file_count": 11
+          "skipped_file_count": 13
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 132,
-          "skipped_file_count": 131
+          "total_file_count": 133,
+          "skipped_file_count": 129
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
