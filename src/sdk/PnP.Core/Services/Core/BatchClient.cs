@@ -383,6 +383,12 @@ namespace PnP.Core.Services
                 // Process the batch response, assign each response to it's request
                 ProcessMicrosoftGraphBatchResponseContent(batch, batchResponse);
 
+                // A raw request does not require loading of the response into the model
+                if (batch.Raw)
+                {
+                    return;
+                }
+
                 // Map the retrieved JSON to our domain model
                 foreach (var batchRequest in batch.Requests.Values)
                 {
@@ -522,6 +528,9 @@ namespace PnP.Core.Services
                     restBatch = new SPORestBatch(site)
                     {
                         Batch = new Batch()
+                        {
+                            Raw = batch.Raw
+                        }
                     };
 
                     batches.Add(restBatch);
@@ -660,7 +669,7 @@ namespace PnP.Core.Services
                 }
                 else if (request.Method == HttpMethod.Patch || request.Method == HttpMethod.Post)
                 {
-                    var changesetId = Guid.NewGuid().ToString("d", System.Globalization.CultureInfo.InvariantCulture);
+                    var changesetId = Guid.NewGuid().ToString("d", CultureInfo.InvariantCulture);
 
                     sb.AppendLine($"--batch_{batch.Id}");
                     sb.AppendLine($"Content-Type: multipart/mixed; boundary=\"changeset_{changesetId}\"");
@@ -672,7 +681,14 @@ namespace PnP.Core.Services
                     sb.AppendLine($"{request.Method.Method} {request.ApiCall.Request} HTTP/1.1");
                     sb.AppendLine("Accept: application/json;odata=verbose");
                     sb.AppendLine("Content-Type: application/json;odata=verbose");
-                    sb.AppendLine($"Content-Length: {request.ApiCall.JsonBody.Length}");
+                    if (!string.IsNullOrEmpty(request.ApiCall.JsonBody))
+                    {
+                        sb.AppendLine($"Content-Length: {request.ApiCall.JsonBody.Length}");
+                    }
+                    else
+                    {
+                        sb.AppendLine($"Content-Length: 0");
+                    }
                     sb.AppendLine($"If-Match: *"); // TODO: Here we need the E-Tag or something to specify to use *
                     sb.AppendLine();
                     sb.AppendLine(request.ApiCall.JsonBody);
@@ -729,6 +745,12 @@ namespace PnP.Core.Services
             {
                 // Process the batch response, assign each response to it's request 
                 ProcessSharePointRestBatchResponseContent(restBatch.Batch, batchResponse);
+
+                // A raw request does not require loading of the response into the model
+                if (restBatch.Batch.Raw)
+                {
+                    return;
+                }
 
                 // Map the retrieved JSON to our domain model
                 foreach (var batchRequest in restBatch.Batch.Requests.Values)
@@ -918,7 +940,7 @@ namespace PnP.Core.Services
                         (firstRequest.Model as TransientObject).Merge(request.Model as TransientObject);
 
                         // Mark deleted objects as deleted and remove from their respective parent collection
-                        RemoveFromParentCollection(request);
+                        (request.Model as TransientObject).RemoveFromParentCollection();
                     }
                     else
                     {
@@ -930,19 +952,8 @@ namespace PnP.Core.Services
             // Mark deleted objects as deleted and remove from their respective parent collection
             foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Delete))
             {
-                RemoveFromParentCollection(request);
+                (request.Model as TransientObject).RemoveFromParentCollection();
             }
-        }
-
-        private static void RemoveFromParentCollection(BatchRequest request)
-        {
-            // Mark object as to be removed,
-            // needed for variables that point to this model object
-            request.Model.Deleted = true;
-
-            // Remove model object from collection
-            var parent = (IManageableCollection)((IDataModelParent)request.Model).Parent;
-            parent.Remove(request.Model);
         }
 
         private static bool HttpRequestSucceeded(HttpStatusCode httpStatusCode)

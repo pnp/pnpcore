@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -189,5 +190,11 @@ namespace PnP.Core.Model.SharePoint
         /// Collection of content types for this list
         /// </summary>
         public IContentTypeCollection ContentTypes { get; }
+
+        /// <summary>
+        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
+        /// </summary>
+        public Task<Guid> RecycleAsync();
+
     }
 }

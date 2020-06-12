@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PnP.Core.Services;
+using System.Net.Http;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -101,6 +102,32 @@ namespace PnP.Core.Model.SharePoint
             await BaseGet(apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return this;
         }
+
+        public async Task<Guid> RecycleAsync()
+        {
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/recycle", ApiType.SPORest);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response))
+            {
+                var document = JsonSerializer.Deserialize<JsonElement>(response);
+                if (document.TryGetProperty("d", out JsonElement root))
+                {
+                    if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
+                    {
+                        // Remove this item from the lists collection
+                        RemoveFromParentCollection();
+                        
+                        // return the recyclebin item id
+                        return recycleBinItemId.GetGuid();
+                    }
+                }
+            }
+
+            return Guid.Empty;
+        }
+
 
         #endregion
     }

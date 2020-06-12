@@ -47,6 +47,8 @@ namespace PnP.Core.Test.Base
 
                 // Delete the list
                 await myList.DeleteAsync();
+                // Verify that the list was removed from the model collection as well
+                Assert.IsTrue(web.Lists.Count() == listCount - 1);
 
                 // Was the list added
                 bool exceptionThrown = false;

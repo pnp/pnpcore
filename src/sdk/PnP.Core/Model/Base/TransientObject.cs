@@ -249,6 +249,20 @@ namespace PnP.Core.Model
             this.BatchRequestId = input.BatchRequestId;
         }
 
+        /// <summary>
+        /// Marks a model as removed and removes it from it's parent collection
+        /// </summary>
+        internal void RemoveFromParentCollection()
+        {
+            // Mark object as to be removed,
+            // needed for variables that point to this model object
+            Deleted = true;
+
+            // Remove model object from collection
+            var parent = (IManageableCollection)((IDataModelParent)this).Parent;
+            parent.Remove(this);
+        }
+
         private void CheckDeleted()
         {
             if (Deleted)
