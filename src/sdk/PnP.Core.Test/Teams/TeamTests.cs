@@ -38,11 +38,11 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(team.IsArchived);
 
                 // unarchive again
-                var UnarchiveOperation = await team.UnarchiveAsync();
+                var unarchiveOperation = await team.UnarchiveAsync();
                 // We already updated the model
                 Assert.IsFalse(team.IsArchived);
 
-                await UnarchiveOperation.WaitForCompletionAsync();
+                await unarchiveOperation.WaitForCompletionAsync();
 
                 // reload from the server
                 await context.Team.GetAsync();
