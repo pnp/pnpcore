@@ -354,6 +354,106 @@ public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection
     }
 }
 </code></pre>
+<h3 id="providing-additional-parameters-for-add-requests">Providing additional parameters for add requests</h3>
+<p>The <code>AddApiCall</code> handler accepts an optional key value pair parameter: <code>ApiCall AddApiCall(Dictionary&lt;string, object&gt; keyValuePairs = null)</code>. You can use this to provide additional input when you call the <code>Add</code> from your code in the collection class. Below sample shows how this feature is used to offer different SDK consumer methods for creating Team channel tabs (on the <code>TeamChannelTabCollection</code> class) while there's only one generic creation method implementation in the <code>TeamChannelTab</code> class. Let's start with the code in the <code>TeamChannelTabCollection</code> class:</p>
+<pre><code class="lang-csharp">public async Task&lt;ITeamChannelTab&gt; AddWikiTabAsync(string name)
+{
+    if (string.IsNullOrEmpty(name))
+    {
+        throw new ArgumentNullException(nameof(name));
+    }
+
+    (TeamChannelTab newTab, Dictionary&lt;string, object&gt; keyValuePairs) = CreateTeamChannelWikiTab(name);
+
+    return await newTab.AddAsync(keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
+}
+
+public async Task&lt;ITeamChannelTab&gt; AddDocumentLibraryTabAsync(string name, Uri documentLibraryUri)
+{
+    if (string.IsNullOrEmpty(name))
+    {
+        throw new ArgumentNullException(nameof(name));
+    }
+
+    (TeamChannelTab newTab, Dictionary&lt;string, object&gt; keyValuePairs) = CreateTeamChannelDocumentLibraryTab(name, documentLibraryUri);
+
+    return await newTab.AddAsync(keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
+}
+
+private Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt; CreateTeamChannelDocumentLibraryTab(string displayName, Uri documentLibraryUri)
+{
+    var newTab = CreateTeamChannelTab(displayName);
+
+    Dictionary&lt;string, object&gt; keyValuePairs = new Dictionary&lt;string, object&gt;
+    {
+        { &quot;teamsAppId&quot;, &quot;com.microsoft.teamspace.tab.files.sharepoint&quot; },
+    };
+
+    newTab.Configuration = new TeamChannelTabConfiguration
+    {
+        EntityId = &quot;&quot;,
+        ContentUrl = documentLibraryUri.ToString()
+    };
+
+    return new Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt;(newTab, keyValuePairs);
+}
+
+private Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt; CreateTeamChannelWikiTab(string displayName)
+{
+    var newTab = CreateTeamChannelTab(displayName);
+
+    Dictionary&lt;string, object&gt; keyValuePairs = new Dictionary&lt;string, object&gt;
+    {
+        { &quot;teamsAppId&quot;, &quot;com.microsoft.teamspace.tab.wiki&quot; }
+    };
+
+    return new Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt;(newTab, keyValuePairs);
+}
+</code></pre>
+<p>The code in the <code>TeamChannelTab</code> class then uses the additional parameter values to drive the creation behavior:</p>
+<pre><code class="lang-csharp">AddApiCallHandler = (keyValuePairs) =&gt;
+{
+    // Define the JSON body of the update request based on the actual changes
+    dynamic tab = new ExpandoObject();
+    tab.displayName = DisplayName;
+
+    string teamsAppId = keyValuePairs[&quot;teamsAppId&quot;].ToString();
+    tab.teamsAppId = teamsAppId;
+
+    switch (teamsAppId)
+    {
+        case &quot;com.microsoft.teamspace.tab.wiki&quot;: // Wiki, no configuration possible
+            break;
+        default:
+            {
+                tab.Configuration = new ExpandoObject();
+
+                if (Configuration.IsPropertyAvailable&lt;ITeamChannelTabConfiguration&gt;(p=&gt;p.EntityId))
+                {
+                    tab.Configuration.EntityId = Configuration.EntityId;
+                }
+                if (Configuration.IsPropertyAvailable&lt;ITeamChannelTabConfiguration&gt;(p =&gt; p.ContentUrl))
+                {
+                    tab.Configuration.ContentUrl = Configuration.ContentUrl;
+                }
+                if (Configuration.IsPropertyAvailable&lt;ITeamChannelTabConfiguration&gt;(p =&gt; p.RemoveUrl))
+                {
+                    tab.Configuration.RemoveUrl = Configuration.RemoveUrl;
+                }
+                if (Configuration.IsPropertyAvailable&lt;ITeamChannelTabConfiguration&gt;(p =&gt; p.WebsiteUrl))
+                {
+                    tab.Configuration.WebsiteUrl = Configuration.WebsiteUrl;
+                }
+                break;
+            }
+    }
+
+    // Serialize object to json
+    var bodyContent = JsonSerializer.Serialize(tab, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
+
+    return new ApiCall(ApiHelper.ParseApiRequest(this, baseUri), ApiType.GraphBeta, bodyContent);
+};
+</code></pre>
 <h2 id="doing-additional-api-calls">Doing additional API calls</h2>
 <p>Above example showed the <code>AddApiCallHandler</code> which provides an framework for doing add requests, but you often also need to do other types of requests (e.g. adding an available content type to a list, recycling a list, ...) and for that you need to be able to execute API calls. There are 2 ways to do this:</p>
 <ul>
