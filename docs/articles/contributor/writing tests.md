@@ -1,6 +1,6 @@
 # Writing test cases
 
-Test cases are a crucial part of the pnp core sdk as they help ensuring code quality and provide feedback to contributors on how well their changes are working. All new contributions **must** be convered by test cases unless the added functionality is already somehow covered by existing test cases.
+Test cases are a crucial part of the pnp core sdk as they help ensuring code quality and provide feedback to contributors on how well their changes are working. All new contributions **must** be covered by test cases unless the added functionality is already somehow covered by existing test cases.
 
 ## Setting up your environment to run the tests cases
 
@@ -14,7 +14,10 @@ If you want to use and extend these unit tests then you'll need to do a simple o
 
 3. Copy env.sample to env.txt
 4. Open env.txt and put as content the value **xxx** (xxx identifies your test environment)
-5. That should be it. Happy testing!
+5. Ensure that you have the **PnP O365 Management Shell** multi-tenant app registered in Azure AD and Consented - this is used for the Graph and SharePoint tests. Quickest way to set this up, is to either:
+    * Use PnP PowerShell to connect to a site using the '-PnPO365ManagementShell' parameter see reference: [https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/connect-pnponline?view=sharepoint-ps](https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/connect-pnponline?view=sharepoint-ps)
+    * Refer to the User documentation article [Using the multi-tenant PnP Azure AD application](../consumer/configuring%20authentication.md)
+6. That should be it. Happy testing!
 
 ## Running the existing tests in offline mode
 
@@ -36,7 +39,7 @@ If your test extends an already tested model then most likely you'll be able to 
 
 When you add "core" tests these will need to be added in the **Base** folder for core tests or in the **QueryModel** folder for linq tests.
 
-### Anotomy of a typical test file and test case
+### Anatomy of a typical test file and test case
 
 It's easier to learn this by looking at a sample:
 
@@ -107,7 +110,7 @@ If you follow below steps you'll be creating test cases according to the PnP Cor
 7. **Optionally**: if your test is creating artifacts in Microsoft 365 it's best to code the cleanup in the test or in the default `cleantestenv.copyme.ps1` script
 
 > [!Important]
-> Each checked in test must be checked in with mocking turned on and as such with the appropiate offline test files (the `.response` files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.
+> Each checked in test must be checked in with mocking turned on and as such with the appropriate offline test files (the `.response` files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.
 
 ## Frequently Asked Questions
 
