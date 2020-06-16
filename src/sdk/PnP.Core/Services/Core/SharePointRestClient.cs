@@ -40,9 +40,9 @@ namespace PnP.Core.Services
 
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
 
-            if (!string.IsNullOrEmpty(settings.UserAgent))
+            if (!string.IsNullOrEmpty(settings.HttpUserAgent))
             {
-                client.DefaultRequestHeaders.Add("User-Agent", settings.UserAgent);
+                client.DefaultRequestHeaders.Add("User-Agent", settings.HttpUserAgent);
             }
 
             if (!string.IsNullOrEmpty(settings.VersionTag))

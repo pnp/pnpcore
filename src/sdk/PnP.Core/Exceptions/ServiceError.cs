@@ -5,7 +5,7 @@ namespace PnP.Core
     /// <summary>
     /// Error information for a service error
     /// </summary>
-    public abstract class ServiceError : BaseError
+    public class ServiceError : BaseError
     {
 
         public ServiceError(ErrorType type, int httpResponseCode) : base(type)

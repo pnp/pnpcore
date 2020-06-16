@@ -40,14 +40,25 @@ namespace PnP.Core.Services
             return collection
                 .AddSettings()
                 .AddTelemetryServices()
+                .AddHttpHandlers()
                 .AddHttpClients()
                 .AddPnPServices();
         }
 
+        private static IServiceCollection AddHttpHandlers(this IServiceCollection collection)
+        {
+            collection.AddScoped<SharePointRestRetryHandler, SharePointRestRetryHandler>();
+            collection.AddScoped<MicrosoftGraphRetryHandler, MicrosoftGraphRetryHandler>();
+
+            return collection;
+        }
+
         private static IServiceCollection AddHttpClients(this IServiceCollection collection)
         {
-            collection.AddHttpClient<SharePointRestClient>();
-            collection.AddHttpClient<MicrosoftGraphClient>();
+            collection.AddHttpClient<SharePointRestClient>()
+                .AddHttpMessageHandler<SharePointRestRetryHandler>();
+            collection.AddHttpClient<MicrosoftGraphClient>()
+                .AddHttpMessageHandler<MicrosoftGraphRetryHandler>();
 
             return collection;
         }

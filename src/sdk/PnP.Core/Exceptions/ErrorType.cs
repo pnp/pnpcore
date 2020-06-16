@@ -27,6 +27,9 @@
         OfflineDataError,
 
         // Teams
-        TeamsAsyncOperationError
+        TeamsAsyncOperationError,
+
+        // Http
+        TooManyRetries
     }
 }

@@ -32,9 +32,9 @@ namespace PnP.Core.Services
             client.BaseAddress = PnPConstants.MicrosoftGraphBaseUri;
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true");
 
-            if (!string.IsNullOrEmpty(settings.UserAgent))
+            if (!string.IsNullOrEmpty(settings.HttpUserAgent))
             {
-                client.DefaultRequestHeaders.Add("User-Agent", settings.UserAgent);
+                client.DefaultRequestHeaders.Add("User-Agent", settings.HttpUserAgent);
             }
 
             Client = client;

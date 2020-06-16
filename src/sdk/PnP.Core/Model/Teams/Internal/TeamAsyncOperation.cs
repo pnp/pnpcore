@@ -31,7 +31,7 @@ namespace PnP.Core.Model.Teams
             {
                 if (retries >= maxRetries)
                 {
-                    throw new ClientException(ErrorType.TeamsAsyncOperationError, $"Max retries of {maxRetries} reached while waiting for Teams operation {Location}");
+                    throw new ServiceException(ErrorType.TeamsAsyncOperationError, 0, $"Max retries of {maxRetries} reached while waiting for Teams operation {Location}");
                 }
 
                 var apiCall = new ApiCall(Location.ToString(), ApiType.Graph);
@@ -53,7 +53,7 @@ namespace PnP.Core.Model.Teams
                         {
                             if (document.TryGetProperty("error", out JsonElement error))
                             {
-                                throw new ClientException(ErrorType.TeamsAsyncOperationError, error.ToString());
+                                throw new ServiceException(ErrorType.TeamsAsyncOperationError, 0, error.ToString());
                             }
                         }
                         else
