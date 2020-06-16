@@ -20,7 +20,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Update test code so that custom settings file do not have to be marked as "copy always" #53 [jansenbe - Bert Jansen]
 - Use RegisterWaitForSingleObject for the token invalidation thread in combination with IDisposable to prevent threads to leak #56 [jansenbe - Bert Jansen]
 - Mark read-only properties as Get only in the interfaces to ensure SDK consumers are not trying to update them #59 [jansenbe - Bert Jansen]
-- Request retry mechanism, will handle core http requests (so not yet requests inside a batch that need to be retried) #21 [jansenbe - Bert Jansen]
+- Request retry mechanism, will handle core http and Graph batch requests #21 [jansenbe - Bert Jansen]
 
 ### Changed
 

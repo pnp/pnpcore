@@ -149,6 +149,21 @@ namespace PnP.Core.Services
             }
         }
 
+        /// <summary>
+        /// Checks if the presented mock data is Microsoft Graph mock data
+        /// </summary>
+        /// <param name="mockData">Mock data to inspect</param>
+        /// <returns>True if Microsoft Graph, false otherwise</returns>
+        internal static bool IsMicrosoftGraphMockData(string mockData)
+        {
+            if (mockData.StartsWith("{"))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private static string GetResponseFile(PnPContext context, string hash, string orderPrefix)
         {
             //return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}-{hash}.response");

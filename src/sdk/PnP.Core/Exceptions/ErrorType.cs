@@ -30,6 +30,7 @@
         TeamsAsyncOperationError,
 
         // Http
-        TooManyRetries
+        TooManyRetries,
+        TooManyBatchRetries
     }
 }

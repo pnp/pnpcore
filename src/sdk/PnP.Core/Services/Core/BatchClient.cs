@@ -106,6 +106,10 @@ namespace PnP.Core.Services
         {
             PnPContext = context;
             telemetryManager = new TelemetryManager(telemetryClient, settingsClient);
+
+            HttpMicrosoftGraphMaxRetries = settingsClient.HttpMicrosoftGraphMaxRetries;
+            HttpMicrosoftGraphDelayInSeconds = settingsClient.HttpMicrosoftGraphDelayInSeconds;
+            HttpMicrosoftGraphUseIncrementalDelay = settingsClient.HttpMicrosoftGraphUseIncrementalDelay;
         }
 
         /// <summary>
@@ -117,6 +121,28 @@ namespace PnP.Core.Services
         /// Max requests in a single Microsoft Graph batch
         /// </summary>
         internal static int MaxRequestsInGraphBatch => 20;
+
+        /// <summary>
+        /// When not using retry-after, how many times can a retry be made. Defaults to 10
+        /// </summary>
+        internal int HttpMicrosoftGraphMaxRetries { get; set; }
+
+        /// <summary>
+        /// How many seconds to wait for the next retry attempt. Defaults to 3
+        /// </summary>
+        internal int HttpMicrosoftGraphDelayInSeconds { get; set; }
+
+        /// <summary>
+        /// Use an incremental strategy for the delay: each retry doubles the previous delay time. Defaults to true
+        /// </summary>
+        internal bool HttpMicrosoftGraphUseIncrementalDelay { get; set; }
+
+#if DEBUG
+        /// <summary>
+        /// Handler that can be used to rewrite mocking files before they're used
+        /// </summary>
+        internal Func<string, string> MockingFileRewriteHandler { get; set; } = null;
+#endif
 
         /// <summary>
         /// Creates a new batch
@@ -274,84 +300,158 @@ namespace PnP.Core.Services
 
             foreach (var graphBatch in graphBatches)
             {
-                string graphEndpoint = DetermineGraphEndpoint(graphBatch);
-
-                (string requestBody, string requestKey) = BuildMicrosoftGraphBatchRequestContent(graphBatch);
-
-                PnPContext.Logger.LogDebug($"{graphEndpoint} : {requestBody}");
-
-                // Make the batch call
-                using StringContent content = new StringContent(requestBody);
-
-                using (var request = new HttpRequestMessage(HttpMethod.Post, $"{graphEndpoint}/$batch"))
+                if (!await ExecuteMicrosoftGraphBatchRequestAsync(graphBatch).ConfigureAwait(false))
                 {
-                    // Remove the default Content-Type content header
-                    if (content.Headers.Contains("Content-Type"))
+                    // If a request did not succeed and the returned error indicated a retry then try again
+                    int retryCount = 0;
+                    bool success = false;
+
+                    while (retryCount < HttpMicrosoftGraphMaxRetries)
                     {
-                        content.Headers.Remove("Content-Type");
-                    }
-                    // Add the batch Content-Type header
-                    content.Headers.Add($"Content-Type", "application/json");
+                        // Call Delay method to get delay time 
+                        Task delay = Delay(retryCount, HttpMicrosoftGraphDelayInSeconds, HttpMicrosoftGraphUseIncrementalDelay);
 
-                    // Connect content to request
-                    request.Content = content;
+                        await delay.ConfigureAwait(false);
 
-#if DEBUG
-                    // Test recording
-                    if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
-                    {
-                        // Write request
-                        TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
-                    }
+                        // Increase retryCount 
+                        retryCount++;
 
-                    // If we are not mocking data, or if the mock data is not yet available
-                    if (PnPContext.Mode != TestMode.Mock)
-                    {
-#endif
-                        // Ensure the request contains authentication information
-                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(PnPConstants.MicrosoftGraphBaseUri, request).ConfigureAwait(false);
-
-                        // Send the request
-                        HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request).ConfigureAwait(false);
-
-                        // Process the request response
-                        if (response.IsSuccessStatusCode)
+                        success = await ExecuteMicrosoftGraphBatchRequestAsync(graphBatch).ConfigureAwait(false);
+                        if (success)
                         {
-                            // Get the response string
-                            string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-#if DEBUG
-                            if (PnPContext.Mode == TestMode.Record)
-                            {
-                                // Write response
-                                TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
-                            }
-#endif
-
-                            await ProcessGraphRestBatchResponse(graphBatch, batchResponse).ConfigureAwait(false);
+                            break;
                         }
-                        else
-                        {
-                            // Something went wrong...
-                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-                        }
-#if DEBUG
                     }
-                    else
+
+                    if (!success)
                     {
-                        string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
-
-                        await ProcessGraphRestBatchResponse(graphBatch, batchResponse).ConfigureAwait(false);
+                        // We passed the max retries...time to throw an error
+                        throw new ServiceException(ErrorType.TooManyBatchRetries, 0, $"Requests inside a batch reached their max retry count of {retryCount}");
                     }
-#endif
-
-                    // Mark batch as executed
-                    graphBatch.Executed = true;
                 }
             }
 
-            // Mark the original (non split) batch as complete
+            // set the original batch to executed
             batch.Executed = true;
+        }
+
+        private static Task Delay(int retryCount, int delay, bool incrementalDelay)
+        {
+            double delayInSeconds;
+
+            // Custom delay
+            if (incrementalDelay)
+            {
+                // Incremental delay, the wait time between each delay exponentially gets bigger
+                double power = Math.Pow(2, retryCount);
+                delayInSeconds = power * delay;
+            }
+            else
+            {
+                // Linear delay
+                delayInSeconds = delay;
+            }
+
+            // If the delay goes beyond our max wait time for a delay then cap it
+            TimeSpan delayTimeSpan = TimeSpan.FromSeconds(Math.Min(delayInSeconds, RetryHandlerBase.MAXDELAY));
+
+            return Task.Delay(delayTimeSpan);
+        }
+
+        private async Task<bool> ExecuteMicrosoftGraphBatchRequestAsync(Batch batch)
+        {
+            string graphEndpoint = DetermineGraphEndpoint(batch);
+
+            (string requestBody, string requestKey) = BuildMicrosoftGraphBatchRequestContent(batch);
+
+            PnPContext.Logger.LogDebug($"{graphEndpoint} : {requestBody}");
+
+            // Make the batch call
+            using StringContent content = new StringContent(requestBody);
+
+            using (var request = new HttpRequestMessage(HttpMethod.Post, $"{graphEndpoint}/$batch"))
+            {
+                // Remove the default Content-Type content header
+                if (content.Headers.Contains("Content-Type"))
+                {
+                    content.Headers.Remove("Content-Type");
+                }
+                // Add the batch Content-Type header
+                content.Headers.Add($"Content-Type", "application/json");
+
+                // Connect content to request
+                request.Content = content;
+
+#if DEBUG
+                // Test recording
+                if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                {
+                    // Write request
+                    TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
+                }
+
+                // If we are not mocking data, or if the mock data is not yet available
+                if (PnPContext.Mode != TestMode.Mock)
+                {
+#endif
+                    // Ensure the request contains authentication information
+                    await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(PnPConstants.MicrosoftGraphBaseUri, request).ConfigureAwait(false);
+
+                    // Send the request
+                    HttpResponseMessage response = await PnPContext.GraphClient.Client.SendAsync(request).ConfigureAwait(false);
+
+                    // Process the request response
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Get the response string
+                        string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+#if DEBUG
+                        if (PnPContext.Mode == TestMode.Record)
+                        {
+                            // Call out to the rewrite handler if that one is connected
+                            if (MockingFileRewriteHandler != null)
+                            {
+                                batchResponse = MockingFileRewriteHandler(batchResponse);
+                            }
+                            
+                            // Write response
+                            TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                        }
+
+#endif
+
+                        var ready = await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
+                        if (!ready)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        // Something went wrong...
+                        throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                    }
+#if DEBUG
+                }
+                else
+                {
+                    string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+
+                    var ready = await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
+                    if (!ready)
+                    {
+                        return false;
+                    }
+                }
+#endif
+            }
+
+            // Mark batch as executed
+            batch.Executed = true;
+
+            // All good so it seams
+            return true;
         }
 
         private string DetermineGraphEndpoint(Batch graphBatch)
@@ -376,17 +476,66 @@ namespace PnP.Core.Services
             }
         }
 
-        private async Task ProcessGraphRestBatchResponse(Batch batch, string batchResponse)
+        private async Task<bool> ProcessGraphRestBatchResponse(Batch batch, string batchResponse)
         {
+            // Deserialize the graph batch response json
+            JsonSerializerOptions options = new JsonSerializerOptions()
+            {
+                IgnoreNullValues = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+            var graphBatchResponses = JsonSerializer.Deserialize<GraphBatchResponses>(batchResponse, options);
+
+            // Was there any request that's eligible for a retry?
+            bool retryNeeded = false;
+            foreach (var graphBatchResponse in graphBatchResponses.Responses)
+            {
+                if (int.TryParse(graphBatchResponse.Id, out int id))
+                {
+                    // Get the original request, requests use 0 based ordering
+                    var batchRequest = batch.GetRequest(id - 1);
+
+                    if (RetryHandlerBase.ShouldRetry(graphBatchResponse.Status))
+                    {
+                        retryNeeded = true;
+                        batchRequest.FlagForRetry(graphBatchResponse.Status, graphBatchResponse.Headers);
+                    }
+                    else
+                    {
+                        if (graphBatchResponse.Body.TryGetValue("body", out JsonElement bodyContent))
+                        {
+                            // If one of the requests in the batch failed then throw an exception
+                            if (!HttpRequestSucceeded(graphBatchResponse.Status))
+                            {
+                                throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)graphBatchResponse.Status, bodyContent);
+                            }
+                            // All was good, connect response to the original request
+                            batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status, graphBatchResponse.Headers);
+
+                            // Commit succesful updates in our model
+                            if (batchRequest.Method == HttpMethod.Patch)
+                            {
+                                if (batchRequest.Model is TransientObject)
+                                {
+                                    (batchRequest.Model as TransientObject).Commit();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (retryNeeded)
+            {
+                return false;
+            }
+
             using (var tracer = Tracer.Track(PnPContext.Logger, "ExecuteSharePointGraphBatchAsync-JSONToModel"))
             {
-                // Process the batch response, assign each response to it's request
-                ProcessMicrosoftGraphBatchResponseContent(batch, batchResponse);
-
                 // A raw request does not require loading of the response into the model
                 if (batch.Raw)
                 {
-                    return;
+                    return true;
                 }
 
                 // Map the retrieved JSON to our domain model
@@ -395,6 +544,8 @@ namespace PnP.Core.Services
                     await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
                 }
             }
+
+            return true;
         }
 
         /// <summary>
@@ -402,15 +553,8 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="batch">Batch that we're processing</param>
         /// <param name="batchResponse">Batch response received from the server</param>
-        private static void ProcessMicrosoftGraphBatchResponseContent(Batch batch, string batchResponse)
+        private static void ProcessMicrosoftGraphBatchResponseContent(Batch batch, GraphBatchResponses graphBatchResponses)
         {
-            JsonSerializerOptions options = new JsonSerializerOptions()
-            {
-                IgnoreNullValues = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-            var graphBatchResponses = JsonSerializer.Deserialize<GraphBatchResponses>(batchResponse, options);
-
             foreach (var graphBatchResponse in graphBatchResponses.Responses)
             {
                 if (int.TryParse(graphBatchResponse.Id, out int id))
@@ -461,33 +605,36 @@ namespace PnP.Core.Services
             int counter = 1;
             foreach (var request in batch.Requests.Values)
             {
-                var graphRequest = new GraphBatchRequest()
+                if (request.ExecutionNeeded)
                 {
-                    Id = counter.ToString(CultureInfo.InvariantCulture),
-                    Method = request.Method.ToString(),
-                    Url = request.ApiCall.Request,                    
-                };
+                    var graphRequest = new GraphBatchRequest()
+                    {
+                        Id = counter.ToString(CultureInfo.InvariantCulture),
+                        Method = request.Method.ToString(),
+                        Url = request.ApiCall.Request,
+                    };
 
-                if (!string.IsNullOrEmpty(request.ApiCall.JsonBody))
-                {
-                    bodiesToReplace.Add(counter, request.ApiCall.JsonBody);
-                    graphRequest.Body = $"@#|Body{counter}|#@";
-                    graphRequest.Headers = new Dictionary<string, string>
+                    if (!string.IsNullOrEmpty(request.ApiCall.JsonBody))
+                    {
+                        bodiesToReplace.Add(counter, request.ApiCall.JsonBody);
+                        graphRequest.Body = $"@#|Body{counter}|#@";
+                        graphRequest.Headers = new Dictionary<string, string>
                     {
                         { "Content-Type", "application/json" }
                     };
-                };
+                    };
 
-                graphRequests.Requests.Add(graphRequest);
-
-                counter++;
+                    graphRequests.Requests.Add(graphRequest);
 
 #if DEBUG
-                if (PnPContext.Mode != TestMode.Default)
-                {
-                    batchKey.Append($"{request.Method}|{request.ApiCall.Request}@@");
-                }
+                    if (PnPContext.Mode != TestMode.Default)
+                    {
+                        batchKey.Append($"{request.Method}|{request.ApiCall.Request}@@");
+                    }
 #endif
+                }
+
+                counter++;
 
                 telemetryManager.LogServiceRequest(batch, request, PnPContext);
             }
@@ -599,6 +746,12 @@ namespace PnP.Core.Services
 #if DEBUG
                                 if (PnPContext.Mode == TestMode.Record)
                                 {
+                                    // Call out to the rewrite handler if that one is connected
+                                    if (MockingFileRewriteHandler != null)
+                                    {
+                                        batchResponse = MockingFileRewriteHandler(batchResponse);
+                                    }
+
                                     // Write response
                                     TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
                                 }

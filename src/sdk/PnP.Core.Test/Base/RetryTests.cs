@@ -1,11 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Services;
 using PnP.Core.Test.Services;
+using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,6 +22,14 @@ namespace PnP.Core.Test.Base
     {
         private const string RETRY_AFTER = "Retry-After";
         private const string RETRY_ATTEMPT = "Retry-Attempt";
+        private static readonly string graphRetryError = "{\"error\":{\"code\":\"activityLimitReached\",\"message\":\"Application has been throttled.\"}}";
+
+        [ClassInitialize]
+        public static void TestFixtureSetup(TestContext context)
+        {
+            // Configure mocking default for all tests in this class, unless override by a specific test
+            //TestCommon.Instance.Mocking = false;
+        }
 
         [TestMethod]
         [DataRow((HttpStatusCode)429)]
@@ -139,6 +149,228 @@ namespace PnP.Core.Test.Base
                 Assert.AreEqual(values.First(), "1");
             }
         }
+
+        [TestMethod]
+        public async Task MicrosoftGraphBatchRetryFirstTest()
+        {
+            bool firstAttempt = true;
+
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Set delay to 0 to speed up tests
+                context.BatchClient.HttpMicrosoftGraphDelayInSeconds = 0;
+
+                context.BatchClient.MockingFileRewriteHandler = (string input) =>
+                {
+                    if (!firstAttempt)
+                    {
+                        return input;
+                    }
+
+                    if (TestManager.IsMicrosoftGraphMockData(input))
+                    {
+                        firstAttempt = false;
+
+                        // deserialize the mock data
+                        JsonSerializerOptions options = new JsonSerializerOptions()
+                        {
+                            IgnoreNullValues = true,
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                        };
+                        var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
+
+                        // Update response to contain a 429 for the first request
+                        var firstResponse = graphBatchResponses.Responses.FirstOrDefault();
+                        if (firstResponse != null)
+                        {
+                            // Update response to be an error: status, header and body are updated
+                            firstResponse.Status = (HttpStatusCode)429;
+                            firstResponse.Headers.Add(RETRY_AFTER, "5");
+                            firstResponse.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+
+                            string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
+                            return rewrittenMockData;
+                        }
+                    }
+
+                    return input;
+                };
+
+                var team = await context.Team.GetAsync();
+
+                Assert.IsTrue(team.Requested);
+                Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
+                Assert.IsTrue(team.Channels.Any());
+            }
+        }
+
+        [TestMethod]
+        public async Task MicrosoftGraphBatchRetryLastTest()
+        {
+            bool firstAttempt = true;
+
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Set delay to 0 to speed up tests
+                context.BatchClient.HttpMicrosoftGraphDelayInSeconds = 0;
+
+                context.BatchClient.MockingFileRewriteHandler = (string input) =>
+                {
+                    if (!firstAttempt)
+                    {
+                        return input;
+                    }
+
+                    if (TestManager.IsMicrosoftGraphMockData(input))
+                    {
+                        firstAttempt = false;
+
+                        // deserialize the mock data
+                        JsonSerializerOptions options = new JsonSerializerOptions()
+                        {
+                            IgnoreNullValues = true,
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                        };
+                        var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
+
+                        // Update response to contain a 429 for the first request
+                        var lastResponse = graphBatchResponses.Responses.LastOrDefault();
+                        if (lastResponse != null)
+                        {
+                            // Update response to be an error: status, header and body are updated
+                            lastResponse.Status = (HttpStatusCode)429;
+                            lastResponse.Headers.Add(RETRY_AFTER, "5");
+                            lastResponse.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+
+                            string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
+                            return rewrittenMockData;
+                        }
+                    }
+
+                    return input;
+                };
+
+                var team = await context.Team.GetAsync();
+
+                Assert.IsTrue(team.Requested);
+                Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
+                Assert.IsTrue(team.Channels.Any());
+            }
+        }
+
+        [TestMethod]
+        public async Task MicrosoftGraphBatchRetryAllTest()
+        {
+            bool firstAttempt = true;
+
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Set delay to 0 to speed up tests
+                context.BatchClient.HttpMicrosoftGraphDelayInSeconds = 0;
+
+                context.BatchClient.MockingFileRewriteHandler = (string input) =>
+                {
+                    if (!firstAttempt)
+                    {
+                        return input;
+                    }
+
+                    if (TestManager.IsMicrosoftGraphMockData(input))
+                    {
+                        firstAttempt = false;
+
+                        // deserialize the mock data
+                        JsonSerializerOptions options = new JsonSerializerOptions()
+                        {
+                            IgnoreNullValues = true,
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                        };
+                        var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
+
+                        // Update response to contain a 429 for the first request
+                        foreach (var response in graphBatchResponses.Responses)
+                        {
+                            // Update response to be an error: status, header and body are updated
+                            response.Status = (HttpStatusCode)429;
+                            response.Headers.Add(RETRY_AFTER, "5");
+                            response.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+                        }
+                        string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
+                        return rewrittenMockData;
+                    }
+
+                    return input;
+                };
+
+                var team = await context.Team.GetAsync();
+
+                Assert.IsTrue(team.Requested);
+                Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
+                Assert.IsTrue(team.Channels.Any());
+            }
+        }
+
+        [TestMethod]
+        public async Task MicrosoftGraphBatchRetryMaxRetriesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Set delay to 0 to speed up tests
+                context.BatchClient.HttpMicrosoftGraphDelayInSeconds = 0;
+
+                context.BatchClient.MockingFileRewriteHandler = (string input) =>
+                {
+                    // Keep on returning 429 for the first request in the batch...
+                    if (TestManager.IsMicrosoftGraphMockData(input))
+                    {
+                        // deserialize the mock data
+                        JsonSerializerOptions options = new JsonSerializerOptions()
+                        {
+                            IgnoreNullValues = true,
+                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                        };
+                        var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
+
+                        // Update response to contain a 429 for the first request
+                        var firstResponse = graphBatchResponses.Responses.FirstOrDefault();
+                        if (firstResponse != null)
+                        {
+                            // Update response to be an error: status, header and body are updated
+                            firstResponse.Status = (HttpStatusCode)429;
+                            firstResponse.Headers.Add(RETRY_AFTER, "5");
+                            firstResponse.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+
+                            string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
+                            return rewrittenMockData;
+                        }
+                    }
+
+                    return input;
+                };
+
+                bool serviceExceptionThrown = false;
+                try
+                {
+                    var team = await context.Team.GetAsync();
+                }
+                catch(Exception ex)
+                {
+                    if (ex is ServiceException)
+                    {
+                        serviceExceptionThrown = true;
+                    }
+                }
+
+                Assert.IsTrue(serviceExceptionThrown);
+                Assert.IsFalse(context.Team.Requested);
+                Assert.IsFalse(context.Team.Channels.Requested);
+            }
+        }
+
 
     }
 }

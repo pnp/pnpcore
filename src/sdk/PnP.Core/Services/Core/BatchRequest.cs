@@ -33,6 +33,7 @@ namespace PnP.Core.Services
             FromJsonCasting = fromJsonCasting;
             PostMappingJson = postMappingJson;
             Order = order;
+            ExecutionNeeded = true;
         }
 
         /// <summary>
@@ -96,6 +97,11 @@ namespace PnP.Core.Services
         internal Dictionary<string, string> ResponseHeaders { get; private set; } = new Dictionary<string, string>();
 
         /// <summary>
+        /// This batch request was not executed yet or a retry is needed
+        /// </summary>
+        internal bool ExecutionNeeded { get; private set; }
+
+        /// <summary>
         /// Records the response of a request (fired as part of the execution of a <see cref="Batch"/>)
         /// </summary>
         /// <param name="json">Json response for this request</param>
@@ -114,7 +120,23 @@ namespace PnP.Core.Services
         internal void AddResponse(string json, HttpStatusCode responseHttpStatusCode, Dictionary<string, string> responseHeaders)
         {
             ResponseJson = json;
+            ExecutionNeeded = false;
             ResponseHttpStatusCode = responseHttpStatusCode;
+            if (responseHeaders != null)
+            {
+                ResponseHeaders = responseHeaders;
+            }
+        }
+
+        /// <summary>
+        /// This batch request needs to be retried
+        /// </summary>
+        /// <param name="responseHttpStatusCode">Http response status code for this request</param>
+        /// <param name="responseHeaders">Http response headers</param>
+        internal void FlagForRetry(HttpStatusCode responseHttpStatusCode, Dictionary<string, string> responseHeaders)
+        {
+            ResponseHttpStatusCode = responseHttpStatusCode;
+            ExecutionNeeded = true;
             if (responseHeaders != null)
             {
                 ResponseHeaders = responseHeaders;

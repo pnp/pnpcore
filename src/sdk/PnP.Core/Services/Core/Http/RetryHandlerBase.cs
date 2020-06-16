@@ -17,7 +17,7 @@ namespace PnP.Core.Services
     {
         private const string RETRY_AFTER = "Retry-After";
         private const string RETRY_ATTEMPT = "Retry-Attempt";
-        private const int MAXDELAY = 300;
+        internal const int MAXDELAY = 300;
 
         #region Construction
         public RetryHandlerBase(ISettings settingsClient)
@@ -41,7 +41,7 @@ namespace PnP.Core.Services
         {
             var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-            if (ShouldRetry(response))
+            if (ShouldRetry(response.StatusCode))
             {
                 // Handle retry handling
                 response = await SendRetryAsync(response, cancellationToken).ConfigureAwait(false);
@@ -84,7 +84,7 @@ namespace PnP.Core.Services
                     // Call base.SendAsync to send the request
                     response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-                    if (!ShouldRetry(response))
+                    if (!ShouldRetry(response.StatusCode))
                     {
                         return response;
                     }
@@ -147,11 +147,11 @@ namespace PnP.Core.Services
             return Task.Delay(delayTimeSpan, cancellationToken);
         }
 
-        private static bool ShouldRetry(HttpResponseMessage response)
+        internal static bool ShouldRetry(HttpStatusCode statusCode)
         {
-            return (response.StatusCode == HttpStatusCode.ServiceUnavailable ||
-                    response.StatusCode == HttpStatusCode.GatewayTimeout ||
-                    response.StatusCode == (HttpStatusCode)429);
+            return (statusCode == HttpStatusCode.ServiceUnavailable ||
+                    statusCode == HttpStatusCode.GatewayTimeout ||
+                    statusCode == (HttpStatusCode)429);
         }
     }
 }
