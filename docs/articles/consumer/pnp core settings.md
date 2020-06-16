@@ -50,12 +50,12 @@ PnPCore:PnPContext:GraphFirst | true | If for a given request the library can ch
 PnPCore:PnPContext:GraphAlwaysUsesBeta | false | The library by default uses the production v1.0 Microsoft Graph API. Use this setting to default it to the beta Microsoft Graph API.
 PnPCore:PnPContext:GraphCanUseBeta | true | When you ask for data that can only be provided via the Microsoft Graph beta API the PnP Core SDK will use the beta endpoint for that specific request. All other requests will still use the v1.0 endpoint. If you set this to false, then any request that requires Microsoft Graph beta will not provide any result.
 PnPCore:HttpRequests:UserAgent | NONISV&#124;SharePointPnP&#124;PnPCoreSDK | Value set as user agent when the request is sent to Microsoft 365.
-PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader | Use retry-after http header when calculating the wait time in seconds for SharePoint Rest request retry. Defaults to false.
-PnPCore:HttpRequests:SharePointRest:MaxRetries | Maximum number of retries before retrying a SharePoint Rest request throws an exception. Defaults to 10.
-PnPCore:HttpRequests:SharePointRest:DelayInSeconds | Delay in seconds between SharePoint Rest request retries. Defaults to 3.
-PnPCore:HttpRequests:SharePointRest:IncrementalDelay | Delays get incrementally longer with each retry. Defaults to true.
-PnPCore:HttpRequests:MicrosoftGraph:UseRetryAfterHeader | Use retry-after http header when calculating the wait time in seconds for Microsoft Graph request retry. Defaults to true.
-PnPCore:HttpRequests:MicrosoftGraph:MaxRetries | Maximum number of retries before retrying a Microsoft Graph request throws an exception. Defaults to 10.
-PnPCore:HttpRequests:MicrosoftGraph:DelayInSeconds | Delay in seconds between Microsoft Graph request retries. Defaults to 3.
-PnPCore:HttpRequests:MicrosoftGraph:IncrementalDelay | Delays get incrementally longer with each retry. Defaults to true.
+PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader | false | Use retry-after http header when calculating the wait time in seconds for SharePoint Rest request retry.
+PnPCore:HttpRequests:SharePointRest:MaxRetries | 10 | Maximum number of retries before retrying a SharePoint Rest request throws an exception.
+PnPCore:HttpRequests:SharePointRest:DelayInSeconds | 3 | Delay in seconds between SharePoint Rest request retries.
+PnPCore:HttpRequests:SharePointRest:IncrementalDelay | true | Delays get incrementally longer with each retry.
+PnPCore:HttpRequests:MicrosoftGraph:UseRetryAfterHeader | true | Use retry-after http header when calculating the wait time in seconds for Microsoft Graph request retry.
+PnPCore:HttpRequests:MicrosoftGraph:MaxRetries | 10 | Maximum number of retries before retrying a Microsoft Graph request throws an exception.
+PnPCore:HttpRequests:MicrosoftGraph:DelayInSeconds | 3 | Delay in seconds between Microsoft Graph request retries.
+PnPCore:HttpRequests:MicrosoftGraph:IncrementalDelay | true | Delays get incrementally longer with each retry.
 PnPCore:DisableTelemetry | false | Allows to turn off telemetry being sent. Telemetry is used to improve this open source library and it's recommended to keep it on, but you can disable it, if required.
