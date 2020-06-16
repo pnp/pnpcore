@@ -36,12 +36,12 @@ namespace PnP.Core.Services
             HttpSharePointRestUseRetryAfterHeader = GetHttpSharePointRestUseRetryAfterHeader();
             HttpSharePointRestMaxRetries = GetHttpSharePointRestMaxRetries();
             HttpSharePointRestDelayInSeconds = GetHttpSharePointRestDelayInSeconds();
-            HttpSharePointRestUseIncrementalDelay = GetHttpSharePointRestExponentialDelay();
+            HttpSharePointRestUseIncrementalDelay = GetHttpSharePointRestIncrementalDelay();
 
             HttpMicrosoftGraphUseRetryAfterHeader = GetHttpMicrosoftGraphUseRetryAfterHeader();
             HttpMicrosoftGraphMaxRetries = GetHttpMicrosoftGraphMaxRetries();
             HttpMicrosoftGraphDelayInSeconds = GetHttpMicrosoftGraphDelayInSeconds();
-            HttpMicrosoftGraphUseIncrementalDelay = GetHttpMicrosoftGraphExponentialDelay();
+            HttpMicrosoftGraphUseIncrementalDelay = GetHttpMicrosoftGraphIncrementalDelay();
         }
 
         /// <summary>
@@ -174,18 +174,18 @@ namespace PnP.Core.Services
             return delayInSeconds;
         }
 
-        private bool GetHttpSharePointRestExponentialDelay()
+        private bool GetHttpSharePointRestIncrementalDelay()
         {
-            var exponentialDelay = config.GetValue<bool>("PnPCore:HttpRequests:SharePointRest:ExponentialDelay", true);
-            logger.LogInformation($"Using telemetry setting from configuration. SharePointRest:ExponentialDelay: {exponentialDelay}");
-            return exponentialDelay;
+            var incrementalDelay = config.GetValue<bool>("PnPCore:HttpRequests:SharePointRest:IncrementalDelay", true);
+            logger.LogInformation($"Using telemetry setting from configuration. SharePointRest:IncrementalDelay: {incrementalDelay}");
+            return incrementalDelay;
         }
 
-        private bool GetHttpMicrosoftGraphExponentialDelay()
+        private bool GetHttpMicrosoftGraphIncrementalDelay()
         {
-            var exponentialDelay = config.GetValue<bool>("PnPCore:HttpRequests:MicrosoftGraph:ExponentialDelay", true);
-            logger.LogInformation($"Using telemetry setting from configuration. MicrosoftGraph:ExponentialDelay: {exponentialDelay}");
-            return exponentialDelay;
+            var incrementalDelay = config.GetValue<bool>("PnPCore:HttpRequests:MicrosoftGraph:IncrementalDelay", true);
+            logger.LogInformation($"Using telemetry setting from configuration. MicrosoftGraph:IncrementalDelay: {incrementalDelay}");
+            return incrementalDelay;
         }
 
         private bool GetGraphFirst()
