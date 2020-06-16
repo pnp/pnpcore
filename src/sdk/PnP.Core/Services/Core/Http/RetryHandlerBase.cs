@@ -50,12 +50,14 @@ namespace PnP.Core.Services
             return response;
         }
 
+
         /// <summary>
         /// Retry sending the HTTP request 
         /// </summary>
         /// <param name="response">The <see cref="HttpResponseMessage"/> which is returned and includes the HTTP request needs to be retried.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> for the retry.</param>
         /// <returns></returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Disposing will prevent cloning of the request needed for the retry")]
         private async Task<HttpResponseMessage> SendRetryAsync(HttpResponseMessage response, CancellationToken cancellationToken)
         {
             int retryCount = 0;
@@ -72,23 +74,24 @@ namespace PnP.Core.Services
                 Task delay = Delay(response, retryCount, DelayInSeconds, cancellationToken);
 
                 // general clone request with internal CloneAsync (see CloneAsync for details) extension method 
-                using (var request = await response.RequestMessage.CloneAsync().ConfigureAwait(false))
+                // do not dispose this request as that breaks the request cloning
+                var request = await response.RequestMessage.CloneAsync().ConfigureAwait(false);
+
+                // Increase retryCount and then update Retry-Attempt in request header if needed
+                retryCount++;
+                AddOrUpdateRetryAttempt(request, retryCount);
+
+                // Delay time
+                await delay.ConfigureAwait(false);
+
+                // Call base.SendAsync to send the request
+                response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+
+                if (!ShouldRetry(response.StatusCode))
                 {
-                    // Increase retryCount and then update Retry-Attempt in request header if needed
-                    retryCount++;
-                    AddOrUpdateRetryAttempt(request, retryCount);
-
-                    // Delay time
-                    await delay.ConfigureAwait(false);
-
-                    // Call base.SendAsync to send the request
-                    response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
-
-                    if (!ShouldRetry(response.StatusCode))
-                    {
-                        return response;
-                    }
+                    return response;
                 }
+
             }
 
             throw new ServiceException(ErrorType.TooManyRetries, (int)response.StatusCode, $"Request reached it's max retry count of {retryCount}");
