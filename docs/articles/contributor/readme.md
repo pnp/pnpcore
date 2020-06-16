@@ -396,7 +396,7 @@ internal partial class ListCollection
         return await newList.AddAsync().ConfigureAwait(false) as List;
     }
 
-    // Other methods ommitted for brevity
+    // Other methods omitted for brevity
 }
 ```
 
