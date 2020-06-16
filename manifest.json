@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ErrorType.html",
-          "hash": "URst4wL931pXCtXf6Mpcaw=="
+          "hash": "3EJVSXSjIDrLOcURlA/olw=="
         }
       },
       "is_incremental": false,
@@ -1230,7 +1230,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ServiceError.html",
-          "hash": "sVaAURdAOaiHjO+8KTdgAA=="
+          "hash": "nsRtWhC+Lo+P7LeQKpJf+Q=="
         }
       },
       "is_incremental": false,
@@ -1242,7 +1242,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ServiceException.html",
-          "hash": "tvCrcU5E4m07vxdx9AtLRg=="
+          "hash": "KmVLfdim9ExC+34ttQ45Cw=="
         }
       },
       "is_incremental": false,
@@ -1362,7 +1362,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.ISettings.html",
-          "hash": "177t7RKBTLuEHZJclo1T9g=="
+          "hash": "4YzeZBu6Jw4gbYJzmuc0Hw=="
         }
       },
       "is_incremental": false,
@@ -1530,7 +1530,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Settings.html",
-          "hash": "GlDwR0x1FceKGE5OXrqBGg=="
+          "hash": "JZp2xUfVmSY3QMa6qALKQQ=="
         }
       },
       "is_incremental": false,
@@ -1650,7 +1650,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/pnp core settings.html",
-          "hash": "hXANxhFwhF+V9mxQVtSA2w=="
+          "hash": "R0FIosY5g68gWVjPs0jXpQ=="
         }
       },
       "is_incremental": false,
@@ -1893,13 +1893,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 15,
-          "skipped_file_count": 13
+          "skipped_file_count": 14
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 133,
-          "skipped_file_count": 133
+          "skipped_file_count": 128
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

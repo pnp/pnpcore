@@ -83,13 +83,27 @@
 <h2 id="sample-settings-file">Sample settings file</h2>
 <p>Below snippet shows the settings which are used by the PnP Core SDK, you can simply include this snippet in your application settings file next to your custom settings.</p>
 <pre><code class="lang-json">{
-    &quot;PnPCore&quot;: {
-    &quot;UserAgent&quot;: &quot;ISV|Contoso|ProductX&quot;,
+  &quot;PnPCore&quot;: {
     &quot;DisableTelemetry&quot;: false,
     &quot;PnPContext&quot;: {
       &quot;GraphFirst&quot;: true,
       &quot;GraphAlwaysUseBeta&quot;: false,
-      &quot;GraphCanUseBeta&quot; :  true
+      &quot;GraphCanUseBeta&quot;: true
+    },
+    &quot;HttpRequests&quot;: {
+      &quot;UserAgent&quot;: &quot;ISV|Contoso|ProductX&quot;,
+      &quot;SharePointRest&quot;: {
+        &quot;UseRetryAfterHeader&quot;: false,
+        &quot;MaxRetries&quot;: 10,
+        &quot;DelayInSeconds&quot;: 3,
+        &quot;IncrementalDelay&quot;: true
+      },
+      &quot;MicrosoftGraph&quot;: {
+        &quot;UseRetryAfterHeader&quot;: true,
+        &quot;MaxRetries&quot;: 10,
+        &quot;DelayInSeconds&quot;: 3,
+        &quot;IncrementalDelay&quot;: true
+      }
     }
   },
 
@@ -112,14 +126,9 @@
 </thead>
 <tbody>
 <tr>
-<td>PnPCore:UserAgent</td>
-<td>NONISV|SharePointPnP|PnPCoreSDK</td>
-<td>Value set as user agent when the request is sent to Microsoft 365.</td>
-</tr>
-<tr>
-<td>PnPCore:DisableTelemetry</td>
-<td>false</td>
-<td>Allows to turn off telemetry being sent. Telemetry is used to improve this open source library and it's recommended to keep it on, but you can disable it, if required.</td>
+<td>Logging:LogLevel:Default</td>
+<td>Information</td>
+<td>Allows you to change log level. See the <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1#log-level">.Net Logging article</a> for more details. Common levels are Debug and Information.</td>
 </tr>
 <tr>
 <td>PnPCore:PnPContext:GraphFirst</td>
@@ -137,9 +146,54 @@
 <td>When you ask for data that can only be provided via the Microsoft Graph beta API the PnP Core SDK will use the beta endpoint for that specific request. All other requests will still use the v1.0 endpoint. If you set this to false, then any request that requires Microsoft Graph beta will not provide any result.</td>
 </tr>
 <tr>
-<td>Logging:LogLevel:Default</td>
-<td>Information</td>
-<td>Allows you to change log level. See the <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1#log-level">.Net Logging article</a> for more details.</td>
+<td>PnPCore:HttpRequests:UserAgent</td>
+<td>NONISV|SharePointPnP|PnPCoreSDK</td>
+<td>Value set as user agent when the request is sent to Microsoft 365.</td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader</td>
+<td>Use retry-after http header when calculating the wait time in seconds for SharePoint Rest request retry. Defaults to false.</td>
+<td></td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:SharePointRest:MaxRetries</td>
+<td>Maximum number of retries before retrying a SharePoint Rest request throws an exception. Defaults to 10.</td>
+<td></td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:SharePointRest:DelayInSeconds</td>
+<td>Delay in seconds between SharePoint Rest request retries. Defaults to 3.</td>
+<td></td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:SharePointRest:IncrementalDelay</td>
+<td>Delays get incrementally longer with each retry. Defaults to true.</td>
+<td></td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:MicrosoftGraph:UseRetryAfterHeader</td>
+<td>Use retry-after http header when calculating the wait time in seconds for Microsoft Graph request retry. Defaults to true.</td>
+<td></td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:MicrosoftGraph:MaxRetries</td>
+<td>Maximum number of retries before retrying a Microsoft Graph request throws an exception. Defaults to 10.</td>
+<td></td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:MicrosoftGraph:DelayInSeconds</td>
+<td>Delay in seconds between Microsoft Graph request retries. Defaults to 3.</td>
+<td></td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:MicrosoftGraph:IncrementalDelay</td>
+<td>Delays get incrementally longer with each retry. Defaults to true.</td>
+<td></td>
+</tr>
+<tr>
+<td>PnPCore:DisableTelemetry</td>
+<td>false</td>
+<td>Allows to turn off telemetry being sent. Telemetry is used to improve this open source library and it's recommended to keep it on, but you can disable it, if required.</td>
 </tr>
 </tbody>
 </table>
