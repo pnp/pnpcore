@@ -25,7 +25,7 @@ Each model class that uses SharePoint REST does need to have at least one `Share
 [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
 internal partial class List
 {
-    // Ommitted for brevity
+    // Omitted for brevity
 }
 ```
 

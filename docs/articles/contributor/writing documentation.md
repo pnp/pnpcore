@@ -2,10 +2,10 @@
 
 The documentation system is based on [DocFX](https://dotnet.github.io/docfx/), and combines inline code comments (the so called triple slash comments) with articles written in MD format. The resulting generated documentation is hosted on https://pnp.github.io/pnpcore. To extend documentation you can:
 
-- Author articles 
-- Write inline code documentation via the tripple slash comments
+- Author articles
+- Write inline code documentation via the triple slash comments
 
-Once you've made changes to the documentation, then these changes are not immediatly reflected in the published documentation. In fact, you need to run the [DocFX](https://dotnet.github.io/docfx/) build and to publish the resulting content.
+Once you've made changes to the documentation, then these changes are not immediately reflected in the published documentation. In fact, you need to run the [DocFX](https://dotnet.github.io/docfx/) build and to publish the resulting content.
 
 > [!Note]
 > Currently documentation is refreshed manually but we're looking into automating this in the future.
@@ -18,7 +18,7 @@ If you want to show your article in the table of contents, then you need to make
 
 ## Writing inline code documentation
 
-Documentation written in the code files themselves is used to generate the **Api Documentation** and depends on docfx parsing the tripple slash comments that you add to the code. Below resources help you get started:
+Documentation written in the code files themselves is used to generate the **Api Documentation** and depends on docfx parsing the triple slash comments that you add to the code. Below resources help you get started:
 
 - [Triple slash (also called XML documents) commenting in .Net code files](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/)
-- [DocFX support for tripple slash comments](https://dotnet.github.io/docfx/spec/triple_slash_comments_spec.html)
+- [DocFX support for triple slash comments](https://dotnet.github.io/docfx/spec/triple_slash_comments_spec.html)
