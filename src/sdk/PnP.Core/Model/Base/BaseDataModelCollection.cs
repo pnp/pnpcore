@@ -14,6 +14,7 @@ namespace PnP.Core.Model
     internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging, IMetadataExtensible
     {
         private const string GraphNextLink = "@odata.nextLink";
+        private const string SharePointRestListItemNextLink = "__next";
 
         #region Core properties
 
@@ -233,7 +234,7 @@ namespace PnP.Core.Model
         {
             get
             {
-                return Metadata.ContainsKey(GraphNextLink);
+                return Metadata.ContainsKey(GraphNextLink) || Metadata.ContainsKey(SharePointRestListItemNextLink);
             }
         }
 
@@ -258,19 +259,24 @@ namespace PnP.Core.Model
                 string nextLink;
                 ApiType nextLinkApiType;
                 // important: the skiptoken is case sensitive, so ensure to keep it the way is was provided to you by Graph
-                if (Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphBetaEndpoint}/", StringComparison.InvariantCultureIgnoreCase))
+                if (Metadata.ContainsKey(GraphNextLink) && Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphBetaEndpoint}/", StringComparison.InvariantCultureIgnoreCase))
                 {
                     nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphBetaEndpoint}/", "");
                     nextLinkApiType = ApiType.GraphBeta;
                 }
-                else if (Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphV1Endpoint}/", StringComparison.InvariantCultureIgnoreCase))
+                else if (Metadata.ContainsKey(GraphNextLink) && Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphV1Endpoint}/", StringComparison.InvariantCultureIgnoreCase))
                 {
                     nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphV1Endpoint}/", "");
                     nextLinkApiType = ApiType.Graph;
                 }
+                else if (!string.IsNullOrEmpty(Metadata[SharePointRestListItemNextLink]))
+                {
+                    nextLink = Metadata[SharePointRestListItemNextLink];
+                    nextLinkApiType = ApiType.SPORest;
+                }
                 else
                 {
-                    // SPO Rest
+                    // SPO Rest 
                     throw new ClientException(ErrorType.Unsupported, "Not yet supported");
                 }
 
@@ -310,6 +316,16 @@ namespace PnP.Core.Model
                 if (items.Count == currentItemCount)
                 {
                     loadNextPage = false;
+
+                    // Clear the MetaData paging links to avoid loading the collection again via paging
+                    if (Metadata.ContainsKey(GraphNextLink))
+                    {
+                        Metadata.Remove(GraphNextLink);
+                    }
+                    else if (Metadata.ContainsKey(SharePointRestListItemNextLink))
+                    {
+                        Metadata.Remove(SharePointRestListItemNextLink);
+                    }
                 }
                 else
                 {

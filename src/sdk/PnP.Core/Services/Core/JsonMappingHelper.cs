@@ -250,10 +250,24 @@ namespace PnP.Core.Services
                     {
                         TrackSharePointMetaData(metadataBasedObject, property);
                     }
-                    // Let's also store the EntityTypeName value as metadata as it's usefull for constructing future rest calls
+                    // Let's also store: 
+                    // - the EntityTypeName value as metadata as it's usefull for constructing future rest calls
+                    // - the __next link, used in (list item) paging
                     else if (property.Name == "EntityTypeName")
                     {
                         TrackMetaData(metadataBasedObject, property, ref metadata);
+                    }
+                    else if (property.Name == "__next")
+                    {
+                        // Only applies to paging on listitems
+                        if (metadataBasedObject is Model.SharePoint.List)
+                        {
+                            var listItemCollection = (metadataBasedObject as Model.SharePoint.List).Items;
+                            if (listItemCollection != null && listItemCollection.Requested)
+                            {
+                                TrackAndUpdateMetaData(listItemCollection as IMetadataExtensible, property);
+                            }
+                        }
                     }
                     else if (useOverflowField)
                     {
@@ -1114,6 +1128,18 @@ namespace PnP.Core.Services
         internal static bool IsGenericList(Type propertyType)
         {
             return (propertyType.IsGenericType && (propertyType.GetGenericTypeDefinition() == typeof(List<>)));
+        }
+
+        internal static void TrackAndUpdateMetaData(IMetadataExtensible target, JsonProperty property)
+        {
+            if (!target.Metadata.ContainsKey(property.Name))
+            {
+                target.Metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
+            }
+            else
+            {
+                target.Metadata[property.Name] = JsonMappingHelper.GetJsonPropertyValue(property).ToString();
+            }
         }
 
         internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property, ref Dictionary<string, string> metadata)

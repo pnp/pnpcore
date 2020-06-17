@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
@@ -24,7 +25,7 @@ namespace PnP.Core.Test.Base
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
-            {               
+            {
                 // This rest requires beta api's, so bail out if that's not enabled
                 if (!context.GraphCanUseBeta)
                 {
@@ -107,6 +108,106 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public async Task GraphLinqTakeToPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Issue a linq query, will be executed by Graph at this point
+                var lists = context.Web.Lists.Take(2);
+                var queryResult = lists.ToList();
+
+                // We should have loaded 2 lists
+                Assert.IsTrue(queryResult.Count == 2);
+
+                // Since we only asked 2 lists Graph will return a nextLink odata property 
+                if (context.Web.Lists.CanPage)
+                {
+                    await context.Web.Lists.GetNextPageAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+                }
+                else
+                {
+                    Assert.Fail("No @odata.nextLink property returned and paging is not possible");
+                }
+
+            }  
+        }
+
         #endregion
+
+        #region REST paging
+
+        [TestMethod]
+        public async Task RESTListItemPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemPaging";
+                var list = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    // Add items
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        list.Items.Add(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    // Since we've already populated the model due to the add let's create a second context to perform a clean load again
+                    using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                    {
+                        // Force rest
+                        context2.GraphFirst = false;
+
+                        var list2 = context2.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+
+                        var items = list2.Items.Take(2);
+                        var queryResult = items.ToList();
+
+                        // We should have loaded 1 list item
+                        Assert.IsTrue(queryResult.Count == 2);
+
+                        if (list2.Items.CanPage)
+                        {
+                            await list2.Items.GetAllPagesAsync();
+                            // Once we've loaded all items we can't page anymore
+                            Assert.IsFalse(list2.Items.CanPage);
+                            // Do we have all items?
+                            Assert.IsTrue(list2.Items.Count() == 10);
+                        }
+                        else
+                        {
+                            Assert.Fail("No __next property returned and paging is not possible");
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+
     }
 }

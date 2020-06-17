@@ -22,6 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Mark read-only properties as Get only in the interfaces to ensure SDK consumers are not trying to update them #59 [jansenbe - Bert Jansen]
 - Request retry mechanism, will handle core http and Graph batch requests #21 [jansenbe - Bert Jansen]
 - Tweaking and updating of the writing tests documentation #65 [pkbullock - Paul Bullock]
+- REST based list item paging support #3 [jansenbe - Bert Jansen]
 
 ### Changed
 
