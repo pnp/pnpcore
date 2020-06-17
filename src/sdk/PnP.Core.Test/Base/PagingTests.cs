@@ -140,6 +140,41 @@ namespace PnP.Core.Test.Base
         #region REST paging
 
         [TestMethod]
+        public async Task RESTListPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                // Issue a linq query, will be executed by Graph at this point
+                var lists = context.Web.Lists.Take(2);
+                var queryResult = lists.ToList();
+
+                // We should have loaded 2 lists
+                Assert.IsTrue(queryResult.Count == 2);
+
+                // Since we only asked 2 lists Graph will return a nextLink odata property 
+                if (context.Web.Lists.CanPage)
+                {
+                    await context.Web.Lists.GetNextPageAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+
+                    await context.Web.Lists.GetAllPagesAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+
+                    // Once we've loaded all lists we can't page anymore
+                    Assert.IsFalse(context.Web.Lists.CanPage);
+                }
+                else
+                {
+                    Assert.Fail("No __next property returned and paging is not possible");
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task RESTListItemPaging()
         {
             //TestCommon.Instance.Mocking = false;
@@ -177,6 +212,7 @@ namespace PnP.Core.Test.Base
                     await context.ExecuteAsync();
 
                     // Since we've already populated the model due to the add let's create a second context to perform a clean load again
+                    // Check paging when starting from the beginning
                     using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
                     {
                         // Force rest
@@ -203,6 +239,37 @@ namespace PnP.Core.Test.Base
                             Assert.Fail("No __next property returned and paging is not possible");
                         }
                     }
+
+                    // Since we've already populated the model due to the add let's create a second context to perform a clean load again
+                    // Check paging when starting from the middle, the skip + take combination results in a __next url that 
+                    // has both the skiptoken and skip parameters, an invalid combination. Paging logic will handle this
+                    using (var context3 = TestCommon.Instance.GetContext(TestCommon.TestSite, 2))
+                    {
+                        // Force rest
+                        context3.GraphFirst = false;
+
+                        var list3 = context3.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+
+                        var items = list3.Items.Skip(4).Take(2);
+                        var queryResult = items.ToList();
+
+                        // We should have loaded 1 list item
+                        Assert.IsTrue(queryResult.Count == 2);
+
+                        if (list3.Items.CanPage)
+                        {
+                            await list3.Items.GetAllPagesAsync();
+                            // Once we've loaded all items we can't page anymore
+                            Assert.IsFalse(list3.Items.CanPage);
+                            // Do we have all items?
+                            Assert.IsTrue(list3.Items.Count() == 10);
+                        }
+                        else
+                        {
+                            Assert.Fail("No __next property returned and paging is not possible");
+                        }
+                    }
+
                 }
             }
         }

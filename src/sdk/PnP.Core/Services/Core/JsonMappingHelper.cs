@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -342,7 +343,15 @@ namespace PnP.Core.Services
                     }
                 }
             }
-
+            // Store __next link for paging in case we detected a $top in the issued query
+            if (apiResponse.ApiCall.Request.Contains("$top", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var parent = (pnpObject as IDataModelParent).Parent;
+                if (parent != null && parent is IManageableCollection && parent is IMetadataExtensible && parent is ISupportPaging)
+                {
+                    TrackAndUpdateMetaData(parent as IMetadataExtensible, "__next", BuildNextPageRestUrl(apiResponse.ApiCall.Request));
+                }
+            }
         }
 
 
@@ -1142,6 +1151,18 @@ namespace PnP.Core.Services
             }
         }
 
+        internal static void TrackAndUpdateMetaData(IMetadataExtensible target, string propertyName, string propertyValue)
+        {
+            if (!target.Metadata.ContainsKey(propertyName))
+            {
+                target.Metadata.Add(propertyName, propertyValue);
+            }
+            else
+            {
+                target.Metadata[propertyName] = propertyValue;
+            }
+        }
+
         internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property, ref Dictionary<string, string> metadata)
         {
             if (!target.Metadata.ContainsKey(property.Name))
@@ -1172,6 +1193,37 @@ namespace PnP.Core.Services
                     target.Metadata.Add(propertyName, foundProperty.GetString());
                 }
             }
+        }
+
+        internal static string BuildNextPageRestUrl(string url)
+        {
+            if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri))
+            {
+                NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(uri.Query);
+                if (queryString["$top"] != null && queryString["$skip"] != null)
+                {
+                    // Build a url for a second, third, fourth etc page
+                    if (int.TryParse(queryString["$top"], out int top) && 
+                        int.TryParse(queryString["$skip"], out int skip))
+                    {
+                        int nextPage = (skip / top) + 1;
+                        queryString["$skip"] = (nextPage * top).ToString(CultureInfo.CurrentCulture);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else if (queryString["$top"] != null)
+                {
+                    // Build the url for the first page after the initial load
+                    queryString.Add("$skip", queryString["$top"]);
+                }
+
+                return $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
+            }
+
+            return null;
         }
     }
 }

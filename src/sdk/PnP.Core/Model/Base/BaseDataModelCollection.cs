@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -271,7 +272,7 @@ namespace PnP.Core.Model
                 }
                 else if (!string.IsNullOrEmpty(Metadata[SharePointRestListItemNextLink]))
                 {
-                    nextLink = Metadata[SharePointRestListItemNextLink];
+                    nextLink = CleanUpUrlParameters(Metadata[SharePointRestListItemNextLink]);
                     nextLinkApiType = ApiType.SPORest;
                 }
                 else
@@ -344,6 +345,21 @@ namespace PnP.Core.Model
             return propertyInParent?.Name;
         }
 
+        private static string CleanUpUrlParameters(string url)
+        {
+            if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri))
+            {
+                NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(uri.Query);
+                if (queryString["$skiptoken"] != null && queryString["$skip"] != null)
+                {
+                    // $skiptoken and $skip cannot be combined, removing $skip in this case
+                    queryString.Remove("$skip");
+                    return $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
+                }
+            }
+
+            return url;
+        }
         #endregion
     }
 }
