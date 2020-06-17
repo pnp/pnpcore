@@ -386,6 +386,12 @@ references:
   commentId: F:PnP.Core.ErrorType.TeamsAsyncOperationError
   fullName: PnP.Core.ErrorType.TeamsAsyncOperationError
   nameWithType: ErrorType.TeamsAsyncOperationError
+- uid: PnP.Core.ErrorType.TooManyBatchRetries
+  name: TooManyBatchRetries
+  href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_TooManyBatchRetries
+  commentId: F:PnP.Core.ErrorType.TooManyBatchRetries
+  fullName: PnP.Core.ErrorType.TooManyBatchRetries
+  nameWithType: ErrorType.TooManyBatchRetries
 - uid: PnP.Core.ErrorType.TooManyRetries
   name: TooManyRetries
   href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_TooManyRetries

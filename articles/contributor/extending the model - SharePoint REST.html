@@ -94,7 +94,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDe
 <pre><code class="lang-csharp">[SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Get = &quot;_api/web/lists&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
 internal partial class List
 {
-    // Ommitted for brevity
+    // Omitted for brevity
 }
 </code></pre>
 <p>When configuring the <code>SharePointType</code> attribute for SharePoint REST you need to set attribute properties:</p>

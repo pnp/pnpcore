@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="writing-test-cases">Writing test cases</h1>
 
-<p>Test cases are a crucial part of the pnp core sdk as they help ensuring code quality and provide feedback to contributors on how well their changes are working. All new contributions <strong>must</strong> be convered by test cases unless the added functionality is already somehow covered by existing test cases.</p>
+<p>Test cases are a crucial part of the pnp core sdk as they help ensuring code quality and provide feedback to contributors on how well their changes are working. All new contributions <strong>must</strong> be covered by test cases unless the added functionality is already somehow covered by existing test cases.</p>
 <h2 id="setting-up-your-environment-to-run-the-tests-cases">Setting up your environment to run the tests cases</h2>
 <p>If you want to use and extend these unit tests then you'll need to do a simple onetime setup:</p>
 <ol>
@@ -94,6 +94,12 @@
 <li><p>Copy env.sample to env.txt</p>
 </li>
 <li><p>Open env.txt and put as content the value <strong>xxx</strong> (xxx identifies your test environment)</p>
+</li>
+<li><p>Ensure that you have the <strong>PnP O365 Management Shell</strong> multi-tenant app registered in Azure AD and Consented - this is used for the Graph and SharePoint tests. Quickest way to set this up, is to either:</p>
+<ul>
+<li>Use PnP PowerShell to connect to a site using the '-PnPO365ManagementShell' parameter see reference: <a href="https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/connect-pnponline?view=sharepoint-ps">https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/connect-pnponline?view=sharepoint-ps</a></li>
+<li>Refer to the User documentation article <a href="../consumer/configuring%20authentication.html">Using the multi-tenant PnP Azure AD application</a></li>
+</ul>
 </li>
 <li><p>That should be it. Happy testing!</p>
 </li>
@@ -111,7 +117,7 @@
 </ul>
 <p>If your test extends an already tested model then most likely you'll be able to add your test to one of the existing test classes.</p>
 <p>When you add &quot;core&quot; tests these will need to be added in the <strong>Base</strong> folder for core tests or in the <strong>QueryModel</strong> folder for linq tests.</p>
-<h3 id="anotomy-of-a-typical-test-file-and-test-case">Anotomy of a typical test file and test case</h3>
+<h3 id="anatomy-of-a-typical-test-file-and-test-case">Anatomy of a typical test file and test case</h3>
 <p>It's easier to learn this by looking at a sample:</p>
 <pre><code class="lang-csharp">[TestClass]
 public class GetTests
@@ -175,7 +181,7 @@ public class GetTests
 </ol>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>Each checked in test must be checked in with mocking turned on and as such with the appropiate offline test files (the <code>.response</code> files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.</p>
+<p>Each checked in test must be checked in with mocking turned on and as such with the appropriate offline test files (the <code>.response</code> files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.</p>
 </div>
 <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <h3 id="do-i-need-to-recreate-the-sites-after-each-live-test-run">Do I need to recreate the sites after each live test run?</h3>
