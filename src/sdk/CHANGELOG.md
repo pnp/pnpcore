@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Use RegisterWaitForSingleObject for the token invalidation thread in combination with IDisposable to prevent threads to leak #56 [jansenbe - Bert Jansen]
 - Mark read-only properties as Get only in the interfaces to ensure SDK consumers are not trying to update them #59 [jansenbe - Bert Jansen]
 - Request retry mechanism, will handle core http and Graph batch requests #21 [jansenbe - Bert Jansen]
+- Tweaking and updating of the writing tests documentation #65 [pkbullock - Paul Bullock]
 
 ### Changed
 
