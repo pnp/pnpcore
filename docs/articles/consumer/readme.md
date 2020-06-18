@@ -118,6 +118,22 @@ using (var scope = host.Services.CreateScope())
 host.Dispose();
 ```
 
+Next to creating a new `PnPContext` you can also clone an existing one, cloning is very convenient if you for example created a a context for the root web of your site collection but now want to work with a sub site. Below snippet shows how to use cloning:
+
+```csharp
+using (var context = pnpContextFactory.Create("SiteToWorkWith"))
+{
+    var web = await context.Web.GetAsync();
+    Console.WriteLine($"Title: {web.Title}");
+
+    using (var subSiteContext = context.Clone(new Uri("https://contoso.sharepoint.com/sites/siteA/subsite")))
+    {
+        var subWeb = await subSiteContext.Web.GetAsync();
+        Console.WriteLine($"Sub site title: {subWeb.Title}");
+    }
+}
+```
+
 ## Using the PnPContext for operations on Microsoft 365
 
 All operations on Microsoft 365 start from the `PnPContext` instance you've obtained from the `PnPContextFactory`. Below sample shows a simple get operation that requests data from Microsoft 365 and outputs it to the console:
