@@ -336,6 +336,46 @@ namespace PnP.Core.Services
 
             (AuthenticationProvider.Configuration as OAuthAccessTokenConfiguration).AccessToken = accessToken;
         }
+
+        /// <summary>
+        /// Clones this context into a new context for the same SharePoint site
+        /// </summary>
+        /// <returns>New <see cref="PnPContext"/></returns>
+        public PnPContext Clone()
+        {
+            return Clone(null);
+        }
+
+        /// <summary>
+        /// Clones this context for another SharePoint site
+        /// </summary>
+        /// <param name="uri">Uri of the other SharePoint site</param>
+        /// <returns>New <see cref="PnPContext"/></returns>
+        public PnPContext Clone(Uri uri)
+        {
+            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, settings, telemetry)
+            {
+                // Take over graph settings
+                GraphCanUseBeta = graphCanUseBeta,
+                GraphAlwaysUseBeta = GraphAlwaysUseBeta,
+                GraphFirst = GraphFirst
+            };
+
+            if (uri != null)
+            {
+                clonedContext.Uri = uri;
+            }
+            else
+            {
+                if (Uri != null)
+                {
+                    clonedContext.Uri = Uri;
+                }
+            }
+
+            return clonedContext;
+        }
+
         #endregion
 
 #if DEBUG
