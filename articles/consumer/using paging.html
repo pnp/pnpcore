@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Model tokens | PnP Core SDK </title>
+    <title>Using paging | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Model tokens | PnP Core SDK ">
+    <meta name="title" content="Using paging | PnP Core SDK ">
     <meta name="generator" content="docfx 2.52.0.0">
     
     <link rel="shortcut icon" href="../../https://c.s-microsoft.com/favicon.ico?v2">
@@ -77,72 +77,78 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="model-tokens">Model tokens</h1>
+<h1 id="using-paging">Using paging</h1>
 
-<h2 id="introduction">Introduction</h2>
-<p>When decorating model classes and properties via attributes, often you need to define an API request. To ensure that these API requests offer the needed flexibility, you can use tokens in the URL request definition. Tokens are embedded between curly brackets. Below snippet shows some samples in which tokens are used:</p>
-<pre><code class="lang-csharp">// Site.GroupId token to grab the id of the Microsoft 365 group connected to the current site
-[GraphType(Uri = &quot;teams/{Site.GroupId}&quot;)]
-[GraphProperty(&quot;installedApps&quot;, Get = &quot;teams/{Site.GroupId}/installedapps?expand=TeamsApp&quot;)]
-
-// Parent.GraphId to get Microsoft Graph Id value of the parent class instance of the model
-// GraphId to get the If value of the model class instance
-[GraphType(Uri = &quot;teams/{Parent.GraphId}/channels/{GraphId}&quot;)]
-
-// Id property to get the SharePoint REST Id value of the model class instance
-[SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Get = &quot;_api/web/lists&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
-[GraphType(Get = &quot;sites/{Parent.GraphId}/lists/{GraphId}&quot;)]
-
-// Web.GraphId to get the Microsoft Graph Id value of the SharePoint Web model instance of the current PnPContext instance
-[GraphProperty(&quot;items&quot;, Get = &quot;/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields&quot;)]
-</code></pre>
-<h2 id="model-tokens-that-can-be-used">Model tokens that can be used</h2>
+<p>Being able to retrieve data in a paged manner is important when you want to use the first data rows while you're loading still additional data, but also when you're loading large data sets. When you page data you can start from either a <code>GetPagedAsync()</code> method call or from a linq query that uses the <code>Take()</code> method. Once you've done one of these calls to Microsoft 365 can use the paging methods to get additional pages.</p>
+<h2 id="supported-paging-attributes-and-methods">Supported paging attributes and methods</h2>
 <table>
 <thead>
 <tr>
-<th>Token</th>
+<th>Method/Attribute</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>{Id}</code></td>
-<td>Value of the SharePoint Id property of the current model instance (e.g. List).</td>
+<td><code>GetPagedAsync(pageSize, expression)</code></td>
+<td>Loads the first page of a given size. Optionally an expression can be specified to only return the properties you need</td>
 </tr>
 <tr>
-<td><code>{Parent.Id}</code></td>
-<td>Value of the SharePoint Id property of the current model's parent instance (e.g. Web for a List --&gt; ListCollection is skipped in this approach).</td>
+<td><code>CanPage</code></td>
+<td>This attribute indicates whether you can use the paging API's to request a next page or to request all remaining pages</td>
 </tr>
 <tr>
-<td><code>{GraphId}</code></td>
-<td>Value of the Microsoft Graph Id property of the current model instance (e.g. TeamChannel).</td>
+<td><code>GetNextPageAsync()</code></td>
+<td>Get's the next page, this method assumes you've already loaded a first page using either the <code>GetPagedAsync()</code> method or via a linq query that included the <code>Take()</code> method</td>
 </tr>
 <tr>
-<td><code>{Parent.GraphId}</code></td>
-<td>Value of the Microsoft Graph Id property of the current model's parent instance (e.g. Team for a TeamChannel --&gt; TeamChannelCollection is skipped in this approach).</td>
-</tr>
-<tr>
-<td><code>{Site.GroupId}</code></td>
-<td>Id value of the Microsoft 365 Group connected to the Site loaded in the current PnPContext (Id is the same for SharePoint REST as Microsoft Graph usage).</td>
-</tr>
-<tr>
-<td><code>{Site.Id}</code></td>
-<td>SharePoint Id value of the Site loaded in the current PnPContext.</td>
-</tr>
-<tr>
-<td><code>{Web.Id}</code></td>
-<td>SharePoint Id value of the Web loaded in the current PnPContext.</td>
-</tr>
-<tr>
-<td><code>{Web.GraphId}</code></td>
-<td>Microsoft Graph Id value of the Web loaded in the current PnPContext.</td>
+<td><code>GetAllPagesAsync()</code></td>
+<td>Loads all the pages in a collection until there's no new data returned anymore. This method assumes you've already loaded a first page using either the <code>GetPagedAsync()</code> method or via a linq query that included the <code>Take()</code> method</td>
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<h3 id="starting-via-the-getpagedasync-method">Starting via the GetPagedAsync() method</h3>
+<p>This example shows how to use paging to load lists, in the sample only the <code>Title</code> property of the list is requested, if you do not provide the expression then list default properties are loaded.</p>
+<pre><code class="lang-csharp">using (var context = pnpContextFactory.Create(&quot;SiteToWorkWith&quot;))
+{
+    // Get a first page of lists of size 2
+    await context.Web.Lists.GetPagedAsync(2, p =&gt; p.Title);
+
+    // Do we have a pointer to a next page?
+    if (context.Web.Lists.CanPage)
+    {
+        // Load the next page
+        await context.Web.Lists.GetNextPageAsync();
+
+        // Load all pages
+        await context.Web.Lists.GetAllPagesAsync();
+    }
+}
+</code></pre>
+<h3 id="starting-via-a-linq-query-with-take">Starting via a linq query with Take()</h3>
+<p>In this example a linq query is executed first using the <code>Take()</code> method. Once the linq query was execution was triggered (in this case by calling <code>ToList()</code>), you can using the paging methods to get additional pages of data.</p>
+<pre><code class="lang-csharp">using (var context = pnpContextFactory.Create(&quot;SiteToWorkWith&quot;))
+{
+    // Issue a linq query
+    var lists = context.Web.Lists.Take(2);
+    var queryResult = lists.ToList();
+
+    // Do we have a pointer to a next page?
+    if (context.Web.Lists.CanPage)
+    {
+        // Load the next page
+        await context.Web.Lists.GetNextPageAsync();
+
+        // Load all pages
+        await context.Web.Lists.GetAllPagesAsync();
+    }
+}
+</code></pre>
 </article>
           </div>
           <div class="contribution-panel mobile-hide">
-              <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/contributor/model tokens.md/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/using paging.md/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

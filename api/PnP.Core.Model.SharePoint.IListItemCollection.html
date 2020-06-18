@@ -116,6 +116,18 @@
     <div>
       <a class="xref" href="PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_RequestedItems">IRequestableCollection.RequestedItems</a>
     </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_CanPage">ISupportPaging&lt;IListItem&gt;.CanPage</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPagedAsync_System_Int32_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">ISupportPaging&lt;IListItem&gt;.GetPagedAsync(Int32, Expression&lt;Func&lt;IListItem, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetNextPageAsync">ISupportPaging&lt;IListItem&gt;.GetNextPageAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetAllPagesAsync">ISupportPaging&lt;IListItem&gt;.GetAllPagesAsync()</a>
+    </div>
   </div>
   
   <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.SharePoint.html">PnP.Core.Model.SharePoint</a></h6>
@@ -123,7 +135,7 @@
   
   <h5 id="PnP_Core_Model_SharePoint_IListItemCollection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IListItemCollection : IQueryable&lt;IListItem&gt;, IQueryable, IDataModelCollection&lt;IListItem&gt;, IEnumerable&lt;IListItem&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IListItemCollection : IQueryable&lt;IListItem&gt;, IQueryable, IDataModelCollection&lt;IListItem&gt;, IEnumerable&lt;IListItem&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, ISupportPaging&lt;IListItem&gt;</code></pre>
   </div>
   
   

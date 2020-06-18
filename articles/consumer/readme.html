@@ -160,7 +160,7 @@
 <p>To learn more about how to setup authentication check the <a href="configuring%20authentication.html">Configuring authentication</a> article.</p>
 </div>
 <h2 id="obtaining-a-pnpcontext">Obtaining a PnPContext</h2>
-<p>The <code>PnPContext</code> is the entry point for using the PnP Core SDK, you can create a <code>PnPContext</code> from either a SharePoint site url or the id of an Office 365 group.</p>
+<p>The <code>PnPContext</code> is the entry point for using the PnP Core SDK, you can create a <code>PnPContext</code> from either a SharePoint site url or the id of an Microsoft 365 group.</p>
 <pre><code class="lang-csharp">// Start console host
 await host.StartAsync();
 
@@ -174,7 +174,7 @@ using (var scope = host.Services.CreateScope())
         // See next chapter on how to use the PnPContext
     }
 
-    using (var context = pnpContextFactory.Create(&quot;Office 365 Group guid&quot;))
+    using (var context = pnpContextFactory.Create(&quot;Microsoft 365 Group guid&quot;))
     {
         // See next chapter on how to use the PnPContext
     }

@@ -1548,51 +1548,84 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IRequestableCollection.RequestedItems
   nameWithType: IRequestableCollection.RequestedItems
-- uid: PnP.Core.Model.ISupportPaging
-  name: ISupportPaging
-  href: api/PnP.Core.Model.ISupportPaging.html
-  commentId: T:PnP.Core.Model.ISupportPaging
-  fullName: PnP.Core.Model.ISupportPaging
-  nameWithType: ISupportPaging
-- uid: PnP.Core.Model.ISupportPaging.CanPage
+- uid: PnP.Core.Model.ISupportPaging`1
+  name: ISupportPaging<TModel>
+  href: api/PnP.Core.Model.ISupportPaging-1.html
+  commentId: T:PnP.Core.Model.ISupportPaging`1
+  name.vb: ISupportPaging(Of TModel)
+  fullName: PnP.Core.Model.ISupportPaging<TModel>
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel)
+  nameWithType: ISupportPaging<TModel>
+  nameWithType.vb: ISupportPaging(Of TModel)
+- uid: PnP.Core.Model.ISupportPaging`1.CanPage
   name: CanPage
-  href: api/PnP.Core.Model.ISupportPaging.html#PnP_Core_Model_ISupportPaging_CanPage
-  commentId: P:PnP.Core.Model.ISupportPaging.CanPage
-  fullName: PnP.Core.Model.ISupportPaging.CanPage
-  nameWithType: ISupportPaging.CanPage
-- uid: PnP.Core.Model.ISupportPaging.CanPage*
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_CanPage
+  commentId: P:PnP.Core.Model.ISupportPaging`1.CanPage
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.CanPage
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).CanPage
+  nameWithType: ISupportPaging<TModel>.CanPage
+  nameWithType.vb: ISupportPaging(Of TModel).CanPage
+- uid: PnP.Core.Model.ISupportPaging`1.CanPage*
   name: CanPage
-  href: api/PnP.Core.Model.ISupportPaging.html#PnP_Core_Model_ISupportPaging_CanPage_
-  commentId: Overload:PnP.Core.Model.ISupportPaging.CanPage
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_CanPage_
+  commentId: Overload:PnP.Core.Model.ISupportPaging`1.CanPage
   isSpec: "True"
-  fullName: PnP.Core.Model.ISupportPaging.CanPage
-  nameWithType: ISupportPaging.CanPage
-- uid: PnP.Core.Model.ISupportPaging.GetAllPagesAsync
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.CanPage
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).CanPage
+  nameWithType: ISupportPaging<TModel>.CanPage
+  nameWithType.vb: ISupportPaging(Of TModel).CanPage
+- uid: PnP.Core.Model.ISupportPaging`1.GetAllPagesAsync
   name: GetAllPagesAsync()
-  href: api/PnP.Core.Model.ISupportPaging.html#PnP_Core_Model_ISupportPaging_GetAllPagesAsync
-  commentId: M:PnP.Core.Model.ISupportPaging.GetAllPagesAsync
-  fullName: PnP.Core.Model.ISupportPaging.GetAllPagesAsync()
-  nameWithType: ISupportPaging.GetAllPagesAsync()
-- uid: PnP.Core.Model.ISupportPaging.GetAllPagesAsync*
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetAllPagesAsync
+  commentId: M:PnP.Core.Model.ISupportPaging`1.GetAllPagesAsync
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetAllPagesAsync()
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetAllPagesAsync()
+  nameWithType: ISupportPaging<TModel>.GetAllPagesAsync()
+  nameWithType.vb: ISupportPaging(Of TModel).GetAllPagesAsync()
+- uid: PnP.Core.Model.ISupportPaging`1.GetAllPagesAsync*
   name: GetAllPagesAsync
-  href: api/PnP.Core.Model.ISupportPaging.html#PnP_Core_Model_ISupportPaging_GetAllPagesAsync_
-  commentId: Overload:PnP.Core.Model.ISupportPaging.GetAllPagesAsync
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetAllPagesAsync_
+  commentId: Overload:PnP.Core.Model.ISupportPaging`1.GetAllPagesAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.ISupportPaging.GetAllPagesAsync
-  nameWithType: ISupportPaging.GetAllPagesAsync
-- uid: PnP.Core.Model.ISupportPaging.GetNextPageAsync
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetAllPagesAsync
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetAllPagesAsync
+  nameWithType: ISupportPaging<TModel>.GetAllPagesAsync
+  nameWithType.vb: ISupportPaging(Of TModel).GetAllPagesAsync
+- uid: PnP.Core.Model.ISupportPaging`1.GetNextPageAsync
   name: GetNextPageAsync()
-  href: api/PnP.Core.Model.ISupportPaging.html#PnP_Core_Model_ISupportPaging_GetNextPageAsync
-  commentId: M:PnP.Core.Model.ISupportPaging.GetNextPageAsync
-  fullName: PnP.Core.Model.ISupportPaging.GetNextPageAsync()
-  nameWithType: ISupportPaging.GetNextPageAsync()
-- uid: PnP.Core.Model.ISupportPaging.GetNextPageAsync*
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetNextPageAsync
+  commentId: M:PnP.Core.Model.ISupportPaging`1.GetNextPageAsync
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetNextPageAsync()
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetNextPageAsync()
+  nameWithType: ISupportPaging<TModel>.GetNextPageAsync()
+  nameWithType.vb: ISupportPaging(Of TModel).GetNextPageAsync()
+- uid: PnP.Core.Model.ISupportPaging`1.GetNextPageAsync*
   name: GetNextPageAsync
-  href: api/PnP.Core.Model.ISupportPaging.html#PnP_Core_Model_ISupportPaging_GetNextPageAsync_
-  commentId: Overload:PnP.Core.Model.ISupportPaging.GetNextPageAsync
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetNextPageAsync_
+  commentId: Overload:PnP.Core.Model.ISupportPaging`1.GetNextPageAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.ISupportPaging.GetNextPageAsync
-  nameWithType: ISupportPaging.GetNextPageAsync
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetNextPageAsync
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetNextPageAsync
+  nameWithType: ISupportPaging<TModel>.GetNextPageAsync
+  nameWithType.vb: ISupportPaging(Of TModel).GetNextPageAsync
+- uid: PnP.Core.Model.ISupportPaging`1.GetPagedAsync(System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name: GetPagedAsync(Int32, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPagedAsync_System_Int32_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.ISupportPaging`1.GetPagedAsync(System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name.vb: GetPagedAsync(Int32, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetPagedAsync(System.Int32, System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetPagedAsync(System.Int32, System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
+  nameWithType: ISupportPaging<TModel>.GetPagedAsync(Int32, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: ISupportPaging(Of TModel).GetPagedAsync(Int32, Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.ISupportPaging`1.GetPagedAsync*
+  name: GetPagedAsync
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPagedAsync_
+  commentId: Overload:PnP.Core.Model.ISupportPaging`1.GetPagedAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetPagedAsync
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetPagedAsync
+  nameWithType: ISupportPaging<TModel>.GetPagedAsync
+  nameWithType.vb: ISupportPaging(Of TModel).GetPagedAsync
 - uid: PnP.Core.Model.SharePoint
   name: PnP.Core.Model.SharePoint
   href: api/PnP.Core.Model.SharePoint.html

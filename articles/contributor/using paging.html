@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Model tokens | PnP Core SDK </title>
+    <title>Implementing paging | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Model tokens | PnP Core SDK ">
+    <meta name="title" content="Implementing paging | PnP Core SDK ">
     <meta name="generator" content="docfx 2.52.0.0">
     
     <link rel="shortcut icon" href="../../https://c.s-microsoft.com/favicon.ico?v2">
@@ -77,72 +77,46 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="model-tokens">Model tokens</h1>
+<h1 id="implementing-paging">Implementing paging</h1>
 
-<h2 id="introduction">Introduction</h2>
-<p>When decorating model classes and properties via attributes, often you need to define an API request. To ensure that these API requests offer the needed flexibility, you can use tokens in the URL request definition. Tokens are embedded between curly brackets. Below snippet shows some samples in which tokens are used:</p>
-<pre><code class="lang-csharp">// Site.GroupId token to grab the id of the Microsoft 365 group connected to the current site
-[GraphType(Uri = &quot;teams/{Site.GroupId}&quot;)]
-[GraphProperty(&quot;installedApps&quot;, Get = &quot;teams/{Site.GroupId}/installedapps?expand=TeamsApp&quot;)]
-
-// Parent.GraphId to get Microsoft Graph Id value of the parent class instance of the model
-// GraphId to get the If value of the model class instance
-[GraphType(Uri = &quot;teams/{Parent.GraphId}/channels/{GraphId}&quot;)]
-
-// Id property to get the SharePoint REST Id value of the model class instance
-[SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Get = &quot;_api/web/lists&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
-[GraphType(Get = &quot;sites/{Parent.GraphId}/lists/{GraphId}&quot;)]
-
-// Web.GraphId to get the Microsoft Graph Id value of the SharePoint Web model instance of the current PnPContext instance
-[GraphProperty(&quot;items&quot;, Get = &quot;/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields&quot;)]
+<p>If you want a model (e.g. <code>List</code>) to retrieved using paging then you'll need to explicitely enable paging and this article will explain how.</p>
+<h2 id="using-isupportpaging">Using ISupportPaging</h2>
+<p>To enable paging support you need to add the <code>ISupportPaging&lt;&gt;</code> interface on the public collection class interface of the model for which you want to use paging. If you for example want to enabled paged retrieval of <code>Lists</code> then you need to add the interface to the <code>ListCollection</code> class.</p>
+<pre><code class="lang-csharp">public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection&lt;IList&gt;, ISupportPaging&lt;IList&gt;
+{
+}
 </code></pre>
-<h2 id="model-tokens-that-can-be-used">Model tokens that can be used</h2>
-<table>
-<thead>
-<tr>
-<th>Token</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>{Id}</code></td>
-<td>Value of the SharePoint Id property of the current model instance (e.g. List).</td>
-</tr>
-<tr>
-<td><code>{Parent.Id}</code></td>
-<td>Value of the SharePoint Id property of the current model's parent instance (e.g. Web for a List --&gt; ListCollection is skipped in this approach).</td>
-</tr>
-<tr>
-<td><code>{GraphId}</code></td>
-<td>Value of the Microsoft Graph Id property of the current model instance (e.g. TeamChannel).</td>
-</tr>
-<tr>
-<td><code>{Parent.GraphId}</code></td>
-<td>Value of the Microsoft Graph Id property of the current model's parent instance (e.g. Team for a TeamChannel --&gt; TeamChannelCollection is skipped in this approach).</td>
-</tr>
-<tr>
-<td><code>{Site.GroupId}</code></td>
-<td>Id value of the Microsoft 365 Group connected to the Site loaded in the current PnPContext (Id is the same for SharePoint REST as Microsoft Graph usage).</td>
-</tr>
-<tr>
-<td><code>{Site.Id}</code></td>
-<td>SharePoint Id value of the Site loaded in the current PnPContext.</td>
-</tr>
-<tr>
-<td><code>{Web.Id}</code></td>
-<td>SharePoint Id value of the Web loaded in the current PnPContext.</td>
-</tr>
-<tr>
-<td><code>{Web.GraphId}</code></td>
-<td>Microsoft Graph Id value of the Web loaded in the current PnPContext.</td>
-</tr>
-</tbody>
-</table>
+<p>Once you've done that the paging methods/attribute can be used as shown in this example:</p>
+<pre><code class="lang-csharp">using (var context = pnpContextFactory.Create(&quot;SiteToWorkWith&quot;))
+{
+    // Get a first page of lists of size 2
+    await context.Web.Lists.GetPagedAsync(2, p =&gt; p.Title);
+
+    // Do we have a pointer to a next page?
+    if (context.Web.Lists.CanPage)
+    {
+        // Load the next page
+        await context.Web.Lists.GetNextPageAsync();
+
+        // Load all pages
+        await context.Web.Lists.GetAllPagesAsync();
+    }
+}
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Since paging depends on the ODATA $top operator you also need to make your class linq queriable (by implementing <code>IQueryable&lt;&gt;</code>, next to the default <code>IDataModelCollection&lt;&gt;</code>). If for some reason you cannnot make your collection class linq quariable then ensure that you've decorated your model class (<code>List</code> in this case) with <code>LinqGet</code> as shown below</p>
+<pre><code class="lang-csharp">   [SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
+   [GraphType(Get = &quot;sites/{Parent.GraphId}/lists/{GraphId}&quot;, LinqGet = &quot;sites/{Parent.GraphId}/lists&quot;)]
+   internal partial class List
+   {
+   }
+</code></pre>
+</div>
 </article>
           </div>
           <div class="contribution-panel mobile-hide">
-              <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/contributor/model tokens.md/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/contributor/using paging.md/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
