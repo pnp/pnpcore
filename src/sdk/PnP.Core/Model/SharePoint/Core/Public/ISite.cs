@@ -13,7 +13,7 @@ namespace PnP.Core.Model.SharePoint
         public Guid Id { get; }
 
         /// <summary>
-        /// The unique ID of the connected Office 365 Group (if any)
+        /// The unique ID of the connected Microsoft 365 Group (if any)
         /// </summary>
         public Guid GroupId { get; }
 

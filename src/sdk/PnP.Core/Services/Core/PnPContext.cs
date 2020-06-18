@@ -271,7 +271,7 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Entry point for the Office 365 Group Object
+        /// Entry point for the Microsoft 365 Group Object
         /// </summary>
         public IGroup Group
         {

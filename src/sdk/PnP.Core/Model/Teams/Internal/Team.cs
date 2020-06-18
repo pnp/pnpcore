@@ -17,7 +17,7 @@ namespace PnP.Core.Model.Teams
             {
                 if (!PnPContext.Site.IsPropertyAvailable(p => p.GroupId) || PnPContext.Site.GroupId == Guid.Empty)
                 {
-                    api.CancelRequest("There is no Office 365 group attached to the current site");
+                    api.CancelRequest("There is no Microsoft 365 group attached to the current site");
                 }
 
                 return api;
