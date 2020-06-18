@@ -193,7 +193,12 @@ namespace PnP.Core.Test.Base
                     Assert.AreEqual(context.Logger, clonedContext.Logger);
 
                     Assert.AreNotEqual(context.Id, clonedContext.Id);
+                }
 
+                // Since test cases work with mocking data we need to use a custom Clone method, this one will use
+                // the PnPContext.Clone method and additionally will copy of the "test" settings
+                using (var clonedContext = TestCommon.Instance.Clone(context, null, 1))
+                {
                     await clonedContext.Web.GetAsync(p => p.Title);
 
                     Assert.AreEqual(context.Web.Title, clonedContext.Web.Title);
@@ -226,6 +231,12 @@ namespace PnP.Core.Test.Base
 
                     Assert.AreNotEqual(context.Id, clonedContext.Id);
 
+                }
+
+                // Since test cases work with mocking data we need to use a custom Clone method, this one will use
+                // the PnPContext.Clone method and additionally will copy of the "test" settings
+                using (var clonedContext = TestCommon.Instance.Clone(context, otherSite, 1))
+                {
                     await clonedContext.Web.GetAsync(p => p.Title);
 
                     Assert.AreNotEqual(context.Web.Title, clonedContext.Web.Title);
