@@ -8440,6 +8440,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContext.AuthenticationProvider
   nameWithType: PnPContext.AuthenticationProvider
+- uid: PnP.Core.Services.PnPContext.Clone
+  name: Clone()
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Clone
+  commentId: M:PnP.Core.Services.PnPContext.Clone
+  fullName: PnP.Core.Services.PnPContext.Clone()
+  nameWithType: PnPContext.Clone()
+- uid: PnP.Core.Services.PnPContext.Clone(System.Uri)
+  name: Clone(Uri)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Clone_System_Uri_
+  commentId: M:PnP.Core.Services.PnPContext.Clone(System.Uri)
+  fullName: PnP.Core.Services.PnPContext.Clone(System.Uri)
+  nameWithType: PnPContext.Clone(Uri)
+- uid: PnP.Core.Services.PnPContext.Clone*
+  name: Clone
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Clone_
+  commentId: Overload:PnP.Core.Services.PnPContext.Clone
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContext.Clone
+  nameWithType: PnPContext.Clone
 - uid: PnP.Core.Services.PnPContext.CurrentBatch
   name: CurrentBatch
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_CurrentBatch
