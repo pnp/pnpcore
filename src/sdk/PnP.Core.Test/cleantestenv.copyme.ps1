@@ -72,5 +72,6 @@ Remove-PnPList -Identity TestQueryListsConsistency -Force
 Remove-PnPList -Identity TestQueryListsDeleteConsistency -Force
 Remove-PnPList -Identity TestQueryListsUpdateConsistency -Force
 Remove-PnPList -Identity RESTListItemPaging -Force
+Remove-PnPList -Identity RESTListItemGetPagedAsyncPaging -Force
 
 Disconnect-PnPOnline

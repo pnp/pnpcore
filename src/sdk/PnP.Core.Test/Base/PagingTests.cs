@@ -434,6 +434,73 @@ namespace PnP.Core.Test.Base
                 }
             }
         }
+
+        [TestMethod]
+        public async Task RESTListItemGetPagedAsyncPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "RESTListItemGetPagedAsyncPaging";
+                var list = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (list != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    list = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                if (list != null)
+                {
+                    // Add items
+                    for (int i = 0; i < 10; i++)
+                    {
+                        Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                        list.Items.Add(values);
+                    }
+                    await context.ExecuteAsync();
+
+                    // Since we've already populated the model due to the add let's create a second context to perform a clean load again
+                    using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                    {
+                        // Force rest
+                        context2.GraphFirst = false;
+
+                        var list2 = context2.Web.Lists.Where(p => p.Id == list.Id).FirstOrDefault();
+
+                        await list2.Items.GetPagedAsync(2);
+
+                        // We should have loaded 2 list items
+                        Assert.IsTrue(list2.Items.Count() == 2);
+
+                        if (list2.Items.CanPage)
+                        {
+                            await list2.Items.GetAllPagesAsync();
+                            // Once we've loaded all items we can't page anymore
+                            Assert.IsFalse(list2.Items.CanPage);
+                            // Do we have all items?
+                            Assert.IsTrue(list2.Items.Count() == 10);
+                        }
+                        else
+                        {
+                            Assert.Fail("No __next property returned and paging is not possible");
+                        }
+                    }
+                }
+            }
+        }
         #endregion
 
 
