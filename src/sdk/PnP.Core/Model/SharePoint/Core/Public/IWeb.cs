@@ -148,5 +148,7 @@ namespace PnP.Core.Model.SharePoint
         /// Collection of webs in this current web
         /// </summary>
         public IWebCollection Webs { get; }
+
+        public IFeatureCollection Features { get; }
     }
 }
