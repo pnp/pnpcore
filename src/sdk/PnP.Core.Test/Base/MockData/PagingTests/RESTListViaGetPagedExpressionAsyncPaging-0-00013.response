@@ -1,0 +1,9 @@
+--batchresponse_a000ca8d-373c-4766-9d9d-b06b8f9b0100
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'225e202d-5d0b-4652-b614-84dea31e0943')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'225e202d-5d0b-4652-b614-84dea31e0943')","etag":"\"0\"","type":"SP.List"},"Id":"225e202d-5d0b-4652-b614-84dea31e0943","Title":"Solution Gallery"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'dd110dcb-c3c1-4825-bed1-577cc9d10052')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'dd110dcb-c3c1-4825-bed1-577cc9d10052')","etag":"\"0\"","type":"SP.List"},"Id":"dd110dcb-c3c1-4825-bed1-577cc9d10052","Title":"Style Library"}]}}
+--batchresponse_a000ca8d-373c-4766-9d9d-b06b8f9b0100--

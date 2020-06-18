@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
@@ -135,9 +136,169 @@ namespace PnP.Core.Test.Base
             }  
         }
 
+        [TestMethod]
+        public async Task GraphListViaGetPagedAsyncPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+
+                await context.Web.Lists.GetPagedAsync(2);
+
+                // We should have loaded 2 lists
+                Assert.IsTrue(context.Web.Lists.Count() == 2);
+
+                // Since we only asked 2 lists Graph will return a nextLink odata property 
+                if (context.Web.Lists.CanPage)
+                {
+                    await context.Web.Lists.GetNextPageAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+
+                    await context.Web.Lists.GetAllPagesAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+
+                    // Once we've loaded all lists we can't page anymore
+                    Assert.IsFalse(context.Web.Lists.CanPage);
+                }
+                else
+                {
+                    Assert.Fail("No __next property returned and paging is not possible");
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task GraphListViaGetPagedExpressionAsyncPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+
+                await context.Web.Lists.GetPagedAsync(2, p => p.Title);
+
+                // We should have loaded 2 lists
+                Assert.IsTrue(context.Web.Lists.Count() == 2);
+                
+                // We only request the Title property, verify its loaded while others are not loaded
+                foreach (var list in context.Web.Lists)
+                {
+                    Assert.IsTrue(list.IsPropertyAvailable(p => p.Title));
+                    Assert.IsTrue(!string.IsNullOrEmpty(list.Title));
+                    Assert.IsFalse(list.IsPropertyAvailable(p => p.Description));
+                }
+
+                // Since we only asked 2 lists Graph will return a nextLink odata property 
+                if (context.Web.Lists.CanPage)
+                {
+                    await context.Web.Lists.GetNextPageAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+
+                    // We only request the Title property, verify its loaded while others are not loaded
+                    foreach (var list in context.Web.Lists)
+                    {
+                        Assert.IsTrue(list.IsPropertyAvailable(p => p.Title));
+                        Assert.IsTrue(!string.IsNullOrEmpty(list.Title));
+                        Assert.IsFalse(list.IsPropertyAvailable(p => p.Description));
+                    }
+
+                    await context.Web.Lists.GetAllPagesAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+
+                    // Once we've loaded all lists we can't page anymore
+                    Assert.IsFalse(context.Web.Lists.CanPage);
+                }
+                else
+                {
+                    Assert.Fail("No __next property returned and paging is not possible");
+                }
+            }
+        }
         #endregion
 
         #region REST paging
+
+        [TestMethod]
+        public async Task RESTListViaGetPagedAsyncPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                await context.Web.Lists.GetPagedAsync(2);
+
+                // We should have loaded 2 lists
+                Assert.IsTrue(context.Web.Lists.Count() == 2);
+
+                // Since we only asked 2 lists Graph will return a nextLink odata property 
+                if (context.Web.Lists.CanPage)
+                {
+                    await context.Web.Lists.GetNextPageAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+
+                    await context.Web.Lists.GetAllPagesAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+
+                    // Once we've loaded all lists we can't page anymore
+                    Assert.IsFalse(context.Web.Lists.CanPage);
+                }
+                else
+                {
+                    Assert.Fail("No __next property returned and paging is not possible");
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task RESTListViaGetPagedExpressionAsyncPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                await context.Web.Lists.GetPagedAsync(2, p => p.Title);
+
+                // We should have loaded 2 lists
+                Assert.IsTrue(context.Web.Lists.Count() == 2);
+
+                // We only request the Title property, verify its loaded while others are not loaded
+                foreach(var list in context.Web.Lists)
+                {
+                    Assert.IsTrue(list.IsPropertyAvailable(p => p.Title));
+                    Assert.IsTrue(!string.IsNullOrEmpty(list.Title));
+                    Assert.IsFalse(list.IsPropertyAvailable(p => p.Description));
+                }
+
+                // Since we only asked 2 lists Graph will return a nextLink odata property 
+                if (context.Web.Lists.CanPage)
+                {
+                    await context.Web.Lists.GetNextPageAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+
+                    // We only request the Title property, verify its loaded while others are not loaded
+                    foreach (var list in context.Web.Lists)
+                    {
+                        Assert.IsTrue(list.IsPropertyAvailable(p => p.Title));
+                        Assert.IsTrue(!string.IsNullOrEmpty(list.Title));
+                        Assert.IsFalse(list.IsPropertyAvailable(p => p.Description));
+                    }
+
+                    await context.Web.Lists.GetAllPagesAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+
+                    // Once we've loaded all lists we can't page anymore
+                    Assert.IsFalse(context.Web.Lists.CanPage);
+                }
+                else
+                {
+                    Assert.Fail("No __next property returned and paging is not possible");
+                }
+            }
+        }
+
 
         [TestMethod]
         public async Task RESTListPaging()

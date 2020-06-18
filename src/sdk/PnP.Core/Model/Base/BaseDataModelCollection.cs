@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -12,7 +14,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Base abstract class for every Domain Model objects collection
     /// </summary>
-    internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging, IMetadataExtensible
+    internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging<TModel>, IMetadataExtensible
     {
         private const string GraphNextLink = "@odata.nextLink";
         private const string SharePointRestListItemNextLink = "__next";
@@ -229,7 +231,7 @@ namespace PnP.Core.Model
 
         #endregion
 
-        #region Paging
+        #region Paging (ISupportPaging implementation)
 
         public bool CanPage
         {
@@ -237,6 +239,66 @@ namespace PnP.Core.Model
             {
                 return Metadata.ContainsKey(GraphNextLink) || Metadata.ContainsKey(SharePointRestListItemNextLink);
             }
+        }
+
+        public async Task GetPagedAsync(int pageSize, params Expression<Func<TModel, object>>[] expressions)
+        {
+            if (pageSize < 1)
+            {
+                throw new ArgumentException("Page size has to be equal or greater than 1");
+            }
+
+            // Get the parent (container) entity info (e.g. for Lists this is Web)
+            var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.Parent.GetType());
+
+            // and cast it to the IDataModelMappingHandler interface
+            var parentEntityWithMappingHandlers = (IDataModelMappingHandler)this.Parent;
+
+            // Create a concrete entity of what we expect to get back (e.g. for Lists this is List)
+            var concreteEntity = EntityManager.Instance.GetEntityConcreteInstance<TModel>(typeof(TModel), this.Parent);
+            (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
+            
+            // Get class info for the given concrete entity and the passed expressions
+            var concreteEntityClassInfo = EntityManager.Instance.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, expressions);
+
+            // Determine the receiving property
+            var receivingProperty = GetReceivingProperty(parentEntityInfo);
+            if (string.IsNullOrEmpty(receivingProperty))
+            {
+                throw new ClientException(ErrorType.ModelMetadataIncorrect, "Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming");
+            }
+
+            // Build the API Get request, we'll require the LinqGet decoration to be set
+            var apiCallRequest = (concreteEntity as BaseDataModel<TModel>).BuildGetAPICall(concreteEntityClassInfo, default, useLinqGet: true);
+
+            string nextLink = apiCallRequest.ApiCall.Request;
+            ApiType nextLinkApiType = apiCallRequest.ApiCall.Type;
+
+            if (string.IsNullOrEmpty(nextLink))
+            {
+                throw new ClientException(ErrorType.ModelMetadataIncorrect, "This model entity does not have a SharePointLinqGet or GraphLinqGet value set");
+            }
+
+            // Ensure $top is added/updated to reflect the page size
+            nextLink = AddTopUrlParameter(nextLink, nextLinkApiType, pageSize);
+
+            // Make the server request
+            PnPContext.CurrentBatch.Add(
+                this.Parent as TransientObject,
+                parentEntityInfo,
+                HttpMethod.Get,
+                new ApiCall 
+                {
+                    Type = nextLinkApiType,
+                    ReceivingProperty = receivingProperty,
+                    Request = nextLink
+                },
+                default,
+                parentEntityWithMappingHandlers.MappingHandler,
+                parentEntityWithMappingHandlers.PostMappingHandler
+                );
+
+            await PnPContext.ExecuteAsync().ConfigureAwait(false);
         }
 
         public async Task GetNextPageAsync()
@@ -259,7 +321,7 @@ namespace PnP.Core.Model
                 // Prepare api call
                 string nextLink;
                 ApiType nextLinkApiType;
-                // important: the skiptoken is case sensitive, so ensure to keep it the way is was provided to you by Graph
+                // important: the skiptoken is case sensitive, so ensure to keep it the way is was provided to you by Graph/SharePoint (for listitem paging)
                 if (Metadata.ContainsKey(GraphNextLink) && Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphBetaEndpoint}/", StringComparison.InvariantCultureIgnoreCase))
                 {
                     nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphBetaEndpoint}/", "");
@@ -277,15 +339,14 @@ namespace PnP.Core.Model
                 }
                 else
                 {
-                    // SPO Rest 
-                    throw new ClientException(ErrorType.Unsupported, "Not yet supported");
+                    throw new ClientException(ErrorType.Unsupported, "There's no valid next page metadata available");
                 }
 
                 PnPContext.CurrentBatch.Add(
                     this.Parent as TransientObject,
                     parentEntityInfo,
                     HttpMethod.Get,
-                    new ApiCall // First option is Graph
+                    new ApiCall 
                     {
                         Type = nextLinkApiType,
                         ReceivingProperty = receivingProperty,
@@ -359,6 +420,39 @@ namespace PnP.Core.Model
             }
 
             return url;
+        }
+
+        private static string AddTopUrlParameter(string url, ApiType nextLinkApiType, int pageSize)
+        {
+            // prefix the relative url with a host so it can be properly processed
+            if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)
+            {
+                url = $"https://removeme.com/{url}";
+            }
+
+            if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
+            {
+                NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(uri.Query);
+                if (queryString["$top"] != null)
+                {
+                    queryString["$top"] = pageSize.ToString(CultureInfo.CurrentCulture);
+                }
+                else
+                {
+                    queryString.Add("$top", pageSize.ToString(CultureInfo.CurrentCulture));
+                }
+
+                var updatedUrl = $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
+
+                if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)
+                {
+                    updatedUrl = updatedUrl.Replace("https://removeme.com/", "");
+                }
+
+                return updatedUrl;
+            }
+
+            return null;
         }
         #endregion
     }

@@ -1,0 +1,9 @@
+--batchresponse_0a6e1330-29a4-457e-b018-0b081764fc56
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'e28219ed-f7de-40be-86c0-e70afdfec424')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'e28219ed-f7de-40be-86c0-e70afdfec424')","etag":"\"1\"","type":"SP.List"},"Id":"e28219ed-f7de-40be-86c0-e70afdfec424","Title":"GetListPropertiesAndListItemViaGraph"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'76b9e5ab-bb1e-45f6-993d-f01910abf752')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'76b9e5ab-bb1e-45f6-993d-f01910abf752')","etag":"\"1\"","type":"SP.List"},"Id":"76b9e5ab-bb1e-45f6-993d-f01910abf752","Title":"GetListPropertiesAndListItemViaRest"}]}}
+--batchresponse_0a6e1330-29a4-457e-b018-0b081764fc56--
