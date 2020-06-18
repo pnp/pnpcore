@@ -1,18 +1,37 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// 
     /// </summary>
-    [ConcreteType(typeof(FeatureCollection))]
-    public interface IFeatureCollection : IQueryable<IFeatureCollection>, IDataModelCollection<IFeatureCollection>
+    
+    public interface IFeatureCollection : IQueryable<IFeature>, IDataModelCollection<IFeature>
     {
-        IFeature Add(string id, bool force, int featureDefScope);
 
-        IFeature Remove(string id, bool force);
+        public Task<IFeature> GetByIdAsync(Guid Id, params Expression<Func<IFeature, object>>[] expressions);
+
+        public IFeature GetById(Guid Id, params Expression<Func<IFeature, object>>[] expressions);
+
+
+        public IFeature Add(string id);
+
+        public Task<IFeature> AddAsync(string id);
+
+        public IFeature Add(Batch batch, string id, bool force, int featureDefScope);
+
+        public Task<IFeature> AddAsync(string id, bool force, int featureDefScope);
+                
+
+        public void Remove(string id, bool force);
+
+        public Task RemoveAsync(string id, bool force);
+
     }
 }

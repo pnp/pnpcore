@@ -8,14 +8,12 @@ namespace PnP.Core.Model.SharePoint
     /// 
     /// </summary>
     [ConcreteType(typeof(Feature))]
-    public interface IFeature : IDataModel<IFeature>,
-        IDataModelGet,
-        IDataModelDelete
+    public interface IFeature : IDataModel<IFeature>, IDataModelGet, IDataModelDelete
     {
         /// <summary>
         /// The ID of the Feature
         /// </summary>
-        public Guid Id { get; }
-    
+        public Guid DefinitionId { get; }
+            
     }
 }

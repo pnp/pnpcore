@@ -133,14 +133,14 @@ namespace PnP.Core.Model.SharePoint
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
 
-        [SharePointProperty("Features")]
+        [SharePointProperty("Features", Expandable = true)]
         public IFeatureCollection Features
         {
             get
             {
                 if (!HasValue(nameof(Features)))
                 {
-                    var features = new FeatureCollection(this.PnPContext, this);
+                    var features = new FeatureCollection(this.PnPContext, this, nameof(Features));
                     SetValue(features);
                 }
                 return GetValue<IFeatureCollection>();

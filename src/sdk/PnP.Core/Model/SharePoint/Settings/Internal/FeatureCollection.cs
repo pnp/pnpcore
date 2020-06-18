@@ -1,7 +1,9 @@
 ﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -10,11 +12,54 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     internal partial class FeatureCollection
     {
-        public FeatureCollection(PnPContext context, IDataModelParent parent, string memberName = null)
-            : base(context, parent, memberName)
+        public IFeature Add(string featureId)
         {
-            this.PnPContext = context;
-            this.Parent = parent;
+            return Add(featureId, false, 2);
+        }
+
+        public IFeature Add(string featureId, bool force, int featdefScope)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IFeature Add(Batch batch, string id, bool force, int featureDefScope)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IFeature> AddAsync(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IFeature> AddAsync(string id, bool force, int featureDefScope)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IFeature GetById(Guid Id, params Expression<Func<IFeature, object>>[] expressions)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IFeature> GetByIdAsync(Guid Id, params Expression<Func<IFeature, object>>[] expressions)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IFeature Remove(string id, bool force)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveAsync(string id, bool force)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IFeatureCollection.Remove(string id, bool force)
+        {
+            throw new NotImplementedException();
         }
     }
 }

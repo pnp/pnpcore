@@ -1,10 +1,12 @@
 ﻿using PnP.Core.QueryModel.Model;
+using PnP.Core.Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -13,26 +15,13 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     internal partial class FeatureCollection : QueryableDataModelCollection<IFeature>, IFeatureCollection
     {
+        public FeatureCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+           : base(context, parent, memberName)
+        {
+            this.PnPContext = context;
+            this.Parent = parent;
+        }
+
        
-        public IFeature Add(string id, bool force, int featureDefScope)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IFeature Get(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        
-        public IFeature Remove(string id, bool force)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator<IFeatureCollection> IEnumerable<IFeatureCollection>.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

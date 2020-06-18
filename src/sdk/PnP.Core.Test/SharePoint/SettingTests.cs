@@ -17,17 +17,40 @@ namespace PnP.Core.Test.SharePoint
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
-        public async Task GetFeatures()
+        public void GetFeatures()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                IWeb web = context.Web.Get(p => p.Features);
+                Assert.IsTrue(web.Features.Length > 0);
+                
+                //IFeatureCollection features = context.Web.Features;
+                //Assert.IsTrue(features.Length > 0);
+
+                //IContentType contentType = web.Features.FirstOrDefault(p => p.Name == "Item");
+                //// Test a string property
+                //Assert.AreEqual(contentType.Name, "Item");
+                //// Test a boolean property
+                //Assert.IsFalse(contentType.Hidden);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFeaturesAsync()
+        {
+            TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 IWeb web = await context.Web.GetAsync(p => p.Features);
-                Assert.IsTrue(web.Features.Count() > 0);
+                Assert.IsTrue(web.Features.Length > 0);
+
+                //IFeatureCollection features = context.Web.Features;
+                //Assert.IsTrue(features.Length > 0);
 
                 //IContentType contentType = web.Features.FirstOrDefault(p => p.Name == "Item");
                 //// Test a string property
