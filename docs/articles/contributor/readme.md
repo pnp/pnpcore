@@ -65,6 +65,7 @@ public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
 Each public model:
 
 - Uses a public interface (e.g. `IList` in our example) with public fields
+- Uses the `ConcreteType` attribute to defined the implementation type that belongs to this interface
 - Has inline documentation on the model class and fields
 - Always implements the `IDataModel<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample)
 - Optionally implements the `IDataModelUpdate` interface whenever **update** functionality in needed on this model class
@@ -295,7 +296,7 @@ The public model is built via public interfaces. Below sample shows the public m
 /// <summary>
 /// Public interface to define a collection of List objects of SharePoint Online
 /// </summary>
-public interface IListCollection : IDataModelCollection<IList>, IQueryable<IList>, ISupportPaging
+public interface IListCollection : IDataModelCollection<IList>, IQueryable<IList>, ISupportPaging<IList>
 {
     /// <summary>
     /// Adds a new list
@@ -315,7 +316,7 @@ Each public model interface for a Collection class:
 - Has inline documentation on the model class and methods
 - Always implements the `IDataModelCollection<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample)
 - Optionally implements the `IQueryable<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample) whenever the model can be queried using linq queries
-- Optionally implements the `ISupportPaging` interface whenever the data in the collection can be retrieved from the server via paging
+- Optionally implements the `ISupportPaging<TModel>` interface whenever the data in the collection can be retrieved from the server via paging
 
 Optionally a collection interface defines methods which add behavior.
 
@@ -326,48 +327,31 @@ For the internal collection class implementation we've opted to use internal par
 - A `Collection.gen.cs` class for semi-generated collection class code
 - A `Collection.cs` class for coded collection class code
 
-Here's a snippet of the `ListCollection.gen.cs` class:
+Here's a snippet of the `ListCollection.gen.cs` class, which is linq queriable:
 
 ```csharp
 internal partial class ListCollection : QueryableDataModelCollection<IList>, IListCollection
 {
-
-    [Browsable(false)]
-    public override IList Add()
+    public ListCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+        : base(context, parent, memberName)
     {
-        return AddNewList();
-    }
-
-    [Browsable(false)]
-    internal override IList New()
-    {
-        return NewList();
-    }
-
-    private List AddNewList()
-    {
-        var newList = NewList();
-        this.items.Add(newList);
-        return newList;
-    }
-
-    private List NewList()
-    {
-        var newList = new List
-        {
-            PnPContext = this.PnPContext,
-            Parent = this,
-        };
-        return newList;
+        this.PnPContext = context;
+        this.Parent = parent;
     }
 }
+```
+
+If the collection is not linq queriable the generated collection class is very simple:
+
+```csharp
+internal partial class TeamAppCollection : BaseDataModelCollection<ITeamApp>, ITeamAppCollection
+{ }
 ```
 
 Each generated collection class:
 
 - Inherits from either the `BaseDataModelCollection<TModel>` for regular collections or from the `QueryableDataModelCollection<TModel>` class for linq queriable collections and implements the previously created collection interface (e.g. `IListCollection`)
 - Is an **internal**, **partial** class
-- Overrides the `CreateNew()` base class methods
 
 Here's a snippet of the `ListCollection.cs` class:
 
@@ -388,7 +372,7 @@ internal partial class ListCollection
             throw new ArgumentException($"{nameof(templateType)} cannot be 0");
         }
 
-        var newList = AddNewList();
+        var newList = CreateNewAndAdd() as List;
 
         newList.Title = title;
         newList.TemplateType = templateType;
@@ -405,6 +389,7 @@ Each coded collection class:
 - Is an **internal**, **partial** class
 - Does not inherit from another class (the inheriting is done in the `Collection.gen.cs` partial class)
 - Contains the implementation of the methods defined in the public interface
+- Can use the `CreateNewAndAdd` collection base class method to create a new instance and add it to the collection
 
 ### Complex type collections
 

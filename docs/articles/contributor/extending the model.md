@@ -24,6 +24,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Public interface to define a {Model} object of SharePoint Online
     /// </summary>
+    [ConcreteType(typeof(Model))]
     public interface IModel : IDataModel<IModel>
     {
     }
