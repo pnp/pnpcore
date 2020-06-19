@@ -126,10 +126,7 @@ namespace PnP.Core.Model.SharePoint
                 return GetValue<IWebCollection>();
             }
         }
-
-        // Not in Web object, requires extra work to load
-        public IAlternateUICultureCollection AlternateUICultures { get; set; } = new AlternateUICultureCollection();
-
+        
         [SharePointProperty("Features", Expandable = true)]
         public IFeatureCollection Features
         {
