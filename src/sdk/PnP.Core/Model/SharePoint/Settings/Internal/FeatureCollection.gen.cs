@@ -21,13 +21,7 @@ namespace PnP.Core.Model.SharePoint
             this.PnPContext = context;
             this.Parent = parent;
         }
-
-        //Need to add Add - MUST ADD THESE
-        public override IFeature CreateNew()
-        {
-            return NewFeature();
-        }
-
+        
         private Feature AddNewFeature()
         {
             var newFeature = NewFeature();

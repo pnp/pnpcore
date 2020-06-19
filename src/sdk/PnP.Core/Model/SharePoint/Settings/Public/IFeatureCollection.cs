@@ -17,17 +17,16 @@ namespace PnP.Core.Model.SharePoint
 
         public Task<IFeature> GetByIdAsync(Guid Id, params Expression<Func<IFeature, object>>[] expressions);
 
-        public IFeature GetById(Guid Id, params Expression<Func<IFeature, object>>[] expressions);
+        public Task<IFeature> EnableAsync(Guid id);
 
-
-        //public IFeature Add(string id);
+        public Task<IFeature> DisableAsync(Guid id);
 
         //public Task<IFeature> AddAsync(string id);
 
         //public IFeature Add(Batch batch, string id, bool force, int featureDefScope);
 
         //public Task<IFeature> AddAsync(string id, bool force, int featureDefScope);
-                
+
 
         //public void Remove(string id, bool force);
 
