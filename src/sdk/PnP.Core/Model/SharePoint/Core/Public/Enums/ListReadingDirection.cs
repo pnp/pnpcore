@@ -1,5 +1,8 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
+    /// <summary>
+    /// Reading direction of the list
+    /// </summary>
     public enum ListReadingDirection
     {
         /// <summary>

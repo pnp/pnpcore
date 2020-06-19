@@ -1,5 +1,8 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
+    /// <summary>
+    /// Search scopes of the site
+    /// </summary>
     public enum SearchScopes
     {
         /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace PnP.Core.Model.Teams
 {
+    /// <summary>
+    /// Public interface to define the content of a chat message
+    /// </summary>
     public interface ITeamChatMessageContent : IComplexType
     {
         /// <summary>

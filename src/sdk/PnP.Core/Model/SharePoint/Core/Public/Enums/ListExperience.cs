@@ -1,5 +1,8 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
+    /// <summary>
+    /// List experience, determines how a list is presented (modern or classic)
+    /// </summary>
     public enum ListExperience
     {
         /// <summary>

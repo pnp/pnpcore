@@ -1,5 +1,8 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
+    /// <summary>
+    /// Field types supported on SharePoint Online
+    /// </summary>
     public enum FieldType
     {
         Invalid = 0,
