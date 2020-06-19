@@ -12,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
     /// 
     /// </summary>
     
-    public interface IFeatureCollection : IQueryable<IFeature>, IDataModelCollection<IFeature>
+    public interface IFeatureCollection : IQueryable<IFeature>,IDataModelCollection<IFeature>
     {
 
         public Task<IFeature> GetByIdAsync(Guid Id, params Expression<Func<IFeature, object>>[] expressions);
@@ -20,18 +20,18 @@ namespace PnP.Core.Model.SharePoint
         public IFeature GetById(Guid Id, params Expression<Func<IFeature, object>>[] expressions);
 
 
-        public IFeature Add(string id);
+        //public IFeature Add(string id);
 
-        public Task<IFeature> AddAsync(string id);
+        //public Task<IFeature> AddAsync(string id);
 
-        public IFeature Add(Batch batch, string id, bool force, int featureDefScope);
+        //public IFeature Add(Batch batch, string id, bool force, int featureDefScope);
 
-        public Task<IFeature> AddAsync(string id, bool force, int featureDefScope);
+        //public Task<IFeature> AddAsync(string id, bool force, int featureDefScope);
                 
 
-        public void Remove(string id, bool force);
+        //public void Remove(string id, bool force);
 
-        public Task RemoveAsync(string id, bool force);
+        //public Task RemoveAsync(string id, bool force);
 
     }
 }
