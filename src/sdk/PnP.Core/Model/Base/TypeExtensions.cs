@@ -6,7 +6,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Extensions to the Type class
     /// </summary>
-    public static class TypeExtensions
+    internal static class TypeExtensions
     {
 
         /// <summary>
@@ -15,7 +15,7 @@ namespace PnP.Core.Model
         /// <param name="propertyType">Property to check on </param>
         /// <param name="interfaceType">Interface to check for</param>
         /// <returns>True if implemented, false otherwise</returns>
-        public static bool ImplementsInterface(this Type propertyType, Type interfaceType)
+        internal static bool ImplementsInterface(this Type propertyType, Type interfaceType)
         {
             if (propertyType == null)
             {
