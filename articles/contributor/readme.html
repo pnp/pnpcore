@@ -130,6 +130,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDe
 <p>Each public model:</p>
 <ul>
 <li>Uses a public interface (e.g. <code>IList</code> in our example) with public fields</li>
+<li>Uses the <code>ConcreteType</code> attribute to defined the implementation type that belongs to this interface</li>
 <li>Has inline documentation on the model class and fields</li>
 <li>Always implements the <code>IDataModel&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample)</li>
 <li>Optionally implements the <code>IDataModelUpdate</code> interface whenever <strong>update</strong> functionality in needed on this model class</li>
@@ -347,7 +348,7 @@ internal partial class TeamFunSettings : BaseComplexType&lt;ITeamFunSettings&gt;
 <pre><code class="lang-csharp">/// &lt;summary&gt;
 /// Public interface to define a collection of List objects of SharePoint Online
 /// &lt;/summary&gt;
-public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable&lt;IList&gt;, ISupportPaging
+public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable&lt;IList&gt;, ISupportPaging&lt;IList&gt;
 {
     /// &lt;summary&gt;
     /// Adds a new list
@@ -366,7 +367,7 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
 <li>Has inline documentation on the model class and methods</li>
 <li>Always implements the <code>IDataModelCollection&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample)</li>
 <li>Optionally implements the <code>IQueryable&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample) whenever the model can be queried using linq queries</li>
-<li>Optionally implements the <code>ISupportPaging</code> interface whenever the data in the collection can be retrieved from the server via paging</li>
+<li>Optionally implements the <code>ISupportPaging&lt;TModel&gt;</code> interface whenever the data in the collection can be retrieved from the server via paging</li>
 </ul>
 <p>Optionally a collection interface defines methods which add behavior.</p>
 <h4 id="internal-implementation-2">Internal implementation</h4>
@@ -375,45 +376,25 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
 <li>A <code>Collection.gen.cs</code> class for semi-generated collection class code</li>
 <li>A <code>Collection.cs</code> class for coded collection class code</li>
 </ul>
-<p>Here's a snippet of the <code>ListCollection.gen.cs</code> class:</p>
+<p>Here's a snippet of the <code>ListCollection.gen.cs</code> class, which is linq queriable:</p>
 <pre><code class="lang-csharp">internal partial class ListCollection : QueryableDataModelCollection&lt;IList&gt;, IListCollection
 {
-
-    [Browsable(false)]
-    public override IList Add()
+    public ListCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+        : base(context, parent, memberName)
     {
-        return AddNewList();
-    }
-
-    [Browsable(false)]
-    internal override IList New()
-    {
-        return NewList();
-    }
-
-    private List AddNewList()
-    {
-        var newList = NewList();
-        this.items.Add(newList);
-        return newList;
-    }
-
-    private List NewList()
-    {
-        var newList = new List
-        {
-            PnPContext = this.PnPContext,
-            Parent = this,
-        };
-        return newList;
+        this.PnPContext = context;
+        this.Parent = parent;
     }
 }
+</code></pre>
+<p>If the collection is not linq queriable the generated collection class is very simple:</p>
+<pre><code class="lang-csharp">internal partial class TeamAppCollection : BaseDataModelCollection&lt;ITeamApp&gt;, ITeamAppCollection
+{ }
 </code></pre>
 <p>Each generated collection class:</p>
 <ul>
 <li>Inherits from either the <code>BaseDataModelCollection&lt;TModel&gt;</code> for regular collections or from the <code>QueryableDataModelCollection&lt;TModel&gt;</code> class for linq queriable collections and implements the previously created collection interface (e.g. <code>IListCollection</code>)</li>
 <li>Is an <strong>internal</strong>, <strong>partial</strong> class</li>
-<li>Overrides the <code>CreateNew()</code> base class methods</li>
 </ul>
 <p>Here's a snippet of the <code>ListCollection.cs</code> class:</p>
 <pre><code class="lang-csharp">internal partial class ListCollection
@@ -432,7 +413,7 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
             throw new ArgumentException($&quot;{nameof(templateType)} cannot be 0&quot;);
         }
 
-        var newList = AddNewList();
+        var newList = CreateNewAndAdd() as List;
 
         newList.Title = title;
         newList.TemplateType = templateType;
@@ -448,6 +429,7 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
 <li>Is an <strong>internal</strong>, <strong>partial</strong> class</li>
 <li>Does not inherit from another class (the inheriting is done in the <code>Collection.gen.cs</code> partial class)</li>
 <li>Contains the implementation of the methods defined in the public interface</li>
+<li>Can use the <code>CreateNewAndAdd</code> collection base class method to create a new instance and add it to the collection</li>
 </ul>
 <h3 id="complex-type-collections">Complex type collections</h3>
 <p>Complex type classes are used to represent types which are too complex for simple .Net type or enumeration, but on the other hand not complex enough to be queried independently via an API call. Sometimes you need a collection of complex type classes, which can be released via the <code>List</code> .Net collection class.</p>

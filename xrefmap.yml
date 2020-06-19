@@ -1357,6 +1357,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IManageableCollection.CreateNew
   nameWithType: IManageableCollection.CreateNew
+- uid: PnP.Core.Model.IManageableCollection.CreateNewAndAdd
+  name: CreateNewAndAdd()
+  href: api/PnP.Core.Model.IManageableCollection.html#PnP_Core_Model_IManageableCollection_CreateNewAndAdd
+  commentId: M:PnP.Core.Model.IManageableCollection.CreateNewAndAdd
+  fullName: PnP.Core.Model.IManageableCollection.CreateNewAndAdd()
+  nameWithType: IManageableCollection.CreateNewAndAdd()
+- uid: PnP.Core.Model.IManageableCollection.CreateNewAndAdd*
+  name: CreateNewAndAdd
+  href: api/PnP.Core.Model.IManageableCollection.html#PnP_Core_Model_IManageableCollection_CreateNewAndAdd_
+  commentId: Overload:PnP.Core.Model.IManageableCollection.CreateNewAndAdd
+  isSpec: "True"
+  fullName: PnP.Core.Model.IManageableCollection.CreateNewAndAdd
+  nameWithType: IManageableCollection.CreateNewAndAdd
 - uid: PnP.Core.Model.IManageableCollection.Remove(System.Object)
   name: Remove(Object)
   href: api/PnP.Core.Model.IManageableCollection.html#PnP_Core_Model_IManageableCollection_Remove_System_Object_
@@ -1431,6 +1444,23 @@ references:
   fullName.vb: PnP.Core.Model.IManageableCollection(Of TModel).CreateNew
   nameWithType: IManageableCollection<TModel>.CreateNew
   nameWithType.vb: IManageableCollection(Of TModel).CreateNew
+- uid: PnP.Core.Model.IManageableCollection`1.CreateNewAndAdd
+  name: CreateNewAndAdd()
+  href: api/PnP.Core.Model.IManageableCollection-1.html#PnP_Core_Model_IManageableCollection_1_CreateNewAndAdd
+  commentId: M:PnP.Core.Model.IManageableCollection`1.CreateNewAndAdd
+  fullName: PnP.Core.Model.IManageableCollection<TModel>.CreateNewAndAdd()
+  fullName.vb: PnP.Core.Model.IManageableCollection(Of TModel).CreateNewAndAdd()
+  nameWithType: IManageableCollection<TModel>.CreateNewAndAdd()
+  nameWithType.vb: IManageableCollection(Of TModel).CreateNewAndAdd()
+- uid: PnP.Core.Model.IManageableCollection`1.CreateNewAndAdd*
+  name: CreateNewAndAdd
+  href: api/PnP.Core.Model.IManageableCollection-1.html#PnP_Core_Model_IManageableCollection_1_CreateNewAndAdd_
+  commentId: Overload:PnP.Core.Model.IManageableCollection`1.CreateNewAndAdd
+  isSpec: "True"
+  fullName: PnP.Core.Model.IManageableCollection<TModel>.CreateNewAndAdd
+  fullName.vb: PnP.Core.Model.IManageableCollection(Of TModel).CreateNewAndAdd
+  nameWithType: IManageableCollection<TModel>.CreateNewAndAdd
+  nameWithType.vb: IManageableCollection(Of TModel).CreateNewAndAdd
 - uid: PnP.Core.Model.IManageableCollection`1.Remove(`0)
   name: Remove(TModel)
   href: api/PnP.Core.Model.IManageableCollection-1.html#PnP_Core_Model_IManageableCollection_1_Remove__0_
@@ -1977,31 +2007,6 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.FieldType.WorkflowStatus
   fullName: PnP.Core.Model.SharePoint.FieldType.WorkflowStatus
   nameWithType: FieldType.WorkflowStatus
-- uid: PnP.Core.Model.SharePoint.IAlternateUICulture
-  name: IAlternateUICulture
-  href: api/PnP.Core.Model.SharePoint.IAlternateUICulture.html
-  commentId: T:PnP.Core.Model.SharePoint.IAlternateUICulture
-  fullName: PnP.Core.Model.SharePoint.IAlternateUICulture
-  nameWithType: IAlternateUICulture
-- uid: PnP.Core.Model.SharePoint.IAlternateUICulture.LCID
-  name: LCID
-  href: api/PnP.Core.Model.SharePoint.IAlternateUICulture.html#PnP_Core_Model_SharePoint_IAlternateUICulture_LCID
-  commentId: P:PnP.Core.Model.SharePoint.IAlternateUICulture.LCID
-  fullName: PnP.Core.Model.SharePoint.IAlternateUICulture.LCID
-  nameWithType: IAlternateUICulture.LCID
-- uid: PnP.Core.Model.SharePoint.IAlternateUICulture.LCID*
-  name: LCID
-  href: api/PnP.Core.Model.SharePoint.IAlternateUICulture.html#PnP_Core_Model_SharePoint_IAlternateUICulture_LCID_
-  commentId: Overload:PnP.Core.Model.SharePoint.IAlternateUICulture.LCID
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IAlternateUICulture.LCID
-  nameWithType: IAlternateUICulture.LCID
-- uid: PnP.Core.Model.SharePoint.IAlternateUICultureCollection
-  name: IAlternateUICultureCollection
-  href: api/PnP.Core.Model.SharePoint.IAlternateUICultureCollection.html
-  commentId: T:PnP.Core.Model.SharePoint.IAlternateUICultureCollection
-  fullName: PnP.Core.Model.SharePoint.IAlternateUICultureCollection
-  nameWithType: IAlternateUICultureCollection
 - uid: PnP.Core.Model.SharePoint.IContentType
   name: IContentType
   href: api/PnP.Core.Model.SharePoint.IContentType.html
@@ -3985,19 +3990,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.AlternateCSS
   nameWithType: IWeb.AlternateCSS
-- uid: PnP.Core.Model.SharePoint.IWeb.AlternateUICultures
-  name: AlternateUICultures
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AlternateUICultures
-  commentId: P:PnP.Core.Model.SharePoint.IWeb.AlternateUICultures
-  fullName: PnP.Core.Model.SharePoint.IWeb.AlternateUICultures
-  nameWithType: IWeb.AlternateUICultures
-- uid: PnP.Core.Model.SharePoint.IWeb.AlternateUICultures*
-  name: AlternateUICultures
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AlternateUICultures_
-  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AlternateUICultures
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IWeb.AlternateUICultures
-  nameWithType: IWeb.AlternateUICultures
 - uid: PnP.Core.Model.SharePoint.IWeb.CommentsOnSitePagesDisabled
   name: CommentsOnSitePagesDisabled
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CommentsOnSitePagesDisabled
