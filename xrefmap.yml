@@ -819,19 +819,6 @@ references:
   commentId: T:PnP.Core.Model.DataModelExtensions
   fullName: PnP.Core.Model.DataModelExtensions
   nameWithType: DataModelExtensions
-- uid: PnP.Core.Model.DataModelExtensions.EnsureParentObjectAsync(PnP.Core.Model.IDataModelParent)
-  name: EnsureParentObjectAsync(IDataModelParent)
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsureParentObjectAsync_PnP_Core_Model_IDataModelParent_
-  commentId: M:PnP.Core.Model.DataModelExtensions.EnsureParentObjectAsync(PnP.Core.Model.IDataModelParent)
-  fullName: PnP.Core.Model.DataModelExtensions.EnsureParentObjectAsync(PnP.Core.Model.IDataModelParent)
-  nameWithType: DataModelExtensions.EnsureParentObjectAsync(IDataModelParent)
-- uid: PnP.Core.Model.DataModelExtensions.EnsureParentObjectAsync*
-  name: EnsureParentObjectAsync
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsureParentObjectAsync_
-  commentId: Overload:PnP.Core.Model.DataModelExtensions.EnsureParentObjectAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.DataModelExtensions.EnsureParentObjectAsync
-  nameWithType: DataModelExtensions.EnsureParentObjectAsync
 - uid: PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync*
   name: EnsurePropertiesAsync
   href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsurePropertiesAsync_
@@ -6798,25 +6785,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.TransientDictionary.Item
   nameWithType: TransientDictionary.Item
-- uid: PnP.Core.Model.TypeExtensions
-  name: TypeExtensions
-  href: api/PnP.Core.Model.TypeExtensions.html
-  commentId: T:PnP.Core.Model.TypeExtensions
-  fullName: PnP.Core.Model.TypeExtensions
-  nameWithType: TypeExtensions
-- uid: PnP.Core.Model.TypeExtensions.ImplementsInterface(System.Type,System.Type)
-  name: ImplementsInterface(Type, Type)
-  href: api/PnP.Core.Model.TypeExtensions.html#PnP_Core_Model_TypeExtensions_ImplementsInterface_System_Type_System_Type_
-  commentId: M:PnP.Core.Model.TypeExtensions.ImplementsInterface(System.Type,System.Type)
-  fullName: PnP.Core.Model.TypeExtensions.ImplementsInterface(System.Type, System.Type)
-  nameWithType: TypeExtensions.ImplementsInterface(Type, Type)
-- uid: PnP.Core.Model.TypeExtensions.ImplementsInterface*
-  name: ImplementsInterface
-  href: api/PnP.Core.Model.TypeExtensions.html#PnP_Core_Model_TypeExtensions_ImplementsInterface_
-  commentId: Overload:PnP.Core.Model.TypeExtensions.ImplementsInterface
-  isSpec: "True"
-  fullName: PnP.Core.Model.TypeExtensions.ImplementsInterface
-  nameWithType: TypeExtensions.ImplementsInterface
 - uid: PnP.Core.PnPConstants
   name: PnPConstants
   href: api/PnP.Core.PnPConstants.html
