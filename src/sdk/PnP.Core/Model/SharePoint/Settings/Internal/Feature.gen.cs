@@ -12,7 +12,8 @@ namespace PnP.Core.Model.SharePoint
         // Property that uniquely identifies this model instance is a guid named Id
         public Guid DefinitionId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        //public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
+        //TODO: To get the displayname, needs to explicitly use this in select clase
+        public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
 
         // Implement they Key property to use the guid ID:
         [KeyProperty("DefinitionId")]

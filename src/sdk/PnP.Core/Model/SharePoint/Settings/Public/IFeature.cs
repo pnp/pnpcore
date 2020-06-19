@@ -15,6 +15,6 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Guid DefinitionId { get; }
 
-        //public Guid Id { get; }
+        public string DisplayName { get; }
     }
 }
