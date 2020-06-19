@@ -127,9 +127,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        // Not in Web object, requires extra work to load
-        public IAlternateUICultureCollection AlternateUICultures { get; set; } = new AlternateUICultureCollection();
-
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }

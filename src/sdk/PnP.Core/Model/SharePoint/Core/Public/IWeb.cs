@@ -69,11 +69,6 @@ namespace PnP.Core.Model.SharePoint
         public bool QuickLaunchEnabled { get; set; }
 
         /// <summary>
-        /// Defines the list of Alternate UI Cultures for the current web
-        /// </summary>
-        public IAlternateUICultureCollection AlternateUICultures { get; set; }
-
-        /// <summary>
         /// Defines whether to enable Multilingual capabilities for the current web
         /// </summary>
         public bool IsMultilingual { get; set; }
