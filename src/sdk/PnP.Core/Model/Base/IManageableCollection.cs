@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Model
 {
@@ -16,6 +14,12 @@ namespace PnP.Core.Model
         /// </summary>
         /// <returns>The new item, ready to be added to the current collection</returns>
         object CreateNew();
+
+        /// <summary>
+        /// Method to create a new typed item of the collection and immediately add it the collection
+        /// </summary>
+        /// <returns>The new item, added to the collection</returns>
+        object CreateNewAndAdd();
 
         /// <summary>
         /// Method to add a new item to the collection
@@ -51,6 +55,12 @@ namespace PnP.Core.Model
         /// </summary>
         /// <returns>The new item, ready to be added to the current collection</returns>
         new TModel CreateNew();
+
+        /// <summary>
+        /// Method to create a new typed item of the collection and immediately add it the collection
+        /// </summary>
+        /// <returns>The new item, added to the collection</returns>
+        new TModel CreateNewAndAdd();
 
         /// <summary>
         /// Method to add a new item to the collection

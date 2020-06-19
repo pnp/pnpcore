@@ -22,7 +22,7 @@ namespace PnP.Core.Model.Teams
 
             // TODO: validate name restrictions
 
-            var newChannel = AddNewTeamChannel();
+            var newChannel = CreateNewAndAdd() as TeamChannel;
 
             // Assign field values
             newChannel.DisplayName = name;
@@ -45,7 +45,7 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var newChannel = AddNewTeamChannel();
+            var newChannel = CreateNewAndAdd() as TeamChannel;
 
             // Assign field values
             newChannel.DisplayName = name;

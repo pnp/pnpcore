@@ -3,6 +3,7 @@
     /// <summary>
     /// Defines a Microsoft Teams App installation
     /// </summary>
+    [ConcreteType(typeof(TeamApp))]
     public interface ITeamApp : IDataModel<ITeamApp>
     {
         /// <summary>
@@ -28,10 +29,22 @@
         // Note: we intentionally left out the collection of TeamsAppDefinition from this prototype
     }
 
+    /// <summary>
+    /// Distribution method of the team app
+    /// </summary>
     public enum TeamsAppDistributionMethod
     {
+        /// <summary>
+        /// From store
+        /// </summary>
         Store,
+        /// <summary>
+        /// From your organization
+        /// </summary>
         Organization,
+        /// <summary>
+        /// Side loaded (developer scenario)
+        /// </summary>
         Sideloaded
     }
 }

@@ -401,7 +401,7 @@ namespace PnP.Core.Model
             }
         }
 
-        internal ApiCallRequest BuildGetAPICall(EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false)
+        internal ApiCallRequest BuildGetAPICall(EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false)
         {
             // Usefull links:
             // - https://www.odata.org/documentation/odata-version-3-0/
@@ -430,11 +430,11 @@ namespace PnP.Core.Model
 
             if (useGraph)
             {
-                return BuildGetAPICallGraph(entity, apiOverride);
+                return BuildGetAPICallGraph(entity, apiOverride, useLinqGet);
             }
             else
             {
-                return BuildGetAPICallRest(entity, apiOverride);
+                return BuildGetAPICallRest(entity, apiOverride, useLinqGet);
             }
         }
 
@@ -443,8 +443,10 @@ namespace PnP.Core.Model
             Log.LogInformation($"API call {api.ApiCall.Request} cancelled: {api.CancellationReason}");
         }
 
-        private ApiCallRequest BuildGetAPICallRest(EntityInfo entity, ApiCall apiOverride)
+        private ApiCallRequest BuildGetAPICallRest(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
         {
+            string getApi = useLinqGet ? entity.SharePointLinqGet : entity.SharePointGet;
+
             IEnumerable<EntityFieldInfo> fields = entity.Fields.Where(p => p.Load);
 
             Dictionary<string, string> urlParameters = new Dictionary<string, string>(2);
@@ -487,7 +489,7 @@ namespace PnP.Core.Model
             string baseApiCall = "";
             if (apiOverride.Equals(default(ApiCall)))
             {
-                baseApiCall = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointGet}";
+                baseApiCall = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{getApi}";
             }
             else
             {
@@ -523,8 +525,10 @@ namespace PnP.Core.Model
             return call;
         }
 
-        private ApiCallRequest BuildGetAPICallGraph(EntityInfo entity, ApiCall apiOverride)
+        private ApiCallRequest BuildGetAPICallGraph(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
         {
+            string getApi = useLinqGet ? entity.GraphLinqGet : entity.GraphGet;
+
             ApiType apiType = ApiType.Graph;
 
             if (entity.GraphBeta)
@@ -537,7 +541,7 @@ namespace PnP.Core.Model
                 {
                     // we can't make this request
                     var cancelledApiCallRequest = new ApiCallRequest(default);
-                    cancelledApiCallRequest.CancelRequest($"Getting {entity.GraphGet} requires the Graph Beta endpoint which was not configured to be allowed");
+                    cancelledApiCallRequest.CancelRequest($"Getting {getApi} requires the Graph Beta endpoint which was not configured to be allowed");
                     return cancelledApiCallRequest;
                 }
             }
@@ -664,13 +668,13 @@ namespace PnP.Core.Model
             string baseApiCall = "";
             if (apiOverride.Equals(default(ApiCall)))
             {
-                if (string.IsNullOrEmpty(entity.GraphGet))
+                if (string.IsNullOrEmpty(getApi))
                 {
-                    throw new ClientException(ErrorType.ModelMetadataIncorrect, $"Specify the GraphGet field of the ClassMapping property.");
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect, $"Specify the GraphGet/GraphGetLinq field of the ClassMapping property.");
                 }
 
                 // Ensure tokens in the base url are replaced
-                baseApiCall = TokenHandler.ResolveTokensAsync(this, entity.GraphGet, PnPContext).GetAwaiter().GetResult();
+                baseApiCall = TokenHandler.ResolveTokensAsync(this, getApi, PnPContext).GetAwaiter().GetResult();
             }
             else
             {

@@ -107,6 +107,19 @@ namespace PnP.Core.Test.Utilities
             return BuildContextFactory().Create(groupId);
         }
 
+        public PnPContext Clone(PnPContext source, Uri uri, int id)
+        {
+            var clonedContext = source.Clone(uri);
+            if (source.Mode == TestMode.Mock)
+            {
+                clonedContext.SetMockMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
+            }
+            else
+            {
+                clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
+            }
+            return clonedContext;
+        }
 
         public IPnPContextFactory BuildContextFactory()
         {

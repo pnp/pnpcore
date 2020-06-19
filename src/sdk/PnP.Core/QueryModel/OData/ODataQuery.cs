@@ -303,6 +303,9 @@ namespace PnP.Core.QueryModel
         public object Value { get; set; }
     }
 
+    /// <summary>
+    /// Defines a group of filters
+    /// </summary>
     public class FiltersGroup : ODataFilter
     {
         public FiltersGroup()

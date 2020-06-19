@@ -1,6 +1,5 @@
 ﻿using PnP.Core.QueryModel.Model;
 using PnP.Core.Services;
-using System.ComponentModel;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -14,28 +13,6 @@ namespace PnP.Core.Model.SharePoint
         {
             this.PnPContext = context;
             this.Parent = parent;
-        }
-
-        public override IList CreateNew()
-        {
-            return NewList();
-        }
-
-        private List AddNewList()
-        {
-            var newList = NewList();
-            this.items.Add(newList);
-            return newList;
-        }
-
-        private List NewList()
-        {
-            var newList = new List
-            {
-                PnPContext = this.PnPContext,
-                Parent = this,
-            };
-            return newList;
         }
     }
 }

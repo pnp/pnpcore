@@ -122,7 +122,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided group and Authentication configuration name
         /// </summary>
-        /// <param name="groupId">The id of an Office 365 group</param>
+        /// <param name="groupId">The id of an Microsoft 365 group</param>
         /// <param name="authenticationProviderName">The name of the Authentication Provider to use to authenticate within the PnPContext</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(Guid groupId, string authenticationProviderName)
@@ -147,7 +147,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided group and Authentication Provider instance
         /// </summary>
-        /// <param name="groupId">The id of an Office 365 group</param>
+        /// <param name="groupId">The id of an Microsoft 365 group</param>
         /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider)
@@ -165,7 +165,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided group and using the default Authentication Provider
         /// </summary>
-        /// <param name="groupId">The id of an Office 365 group</param>
+        /// <param name="groupId">The id of an Microsoft 365 group</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(Guid groupId)
         {

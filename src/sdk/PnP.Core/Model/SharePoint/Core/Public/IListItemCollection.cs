@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Public interface to define a collection of ListItem objects of SharePoint Online
     /// </summary>
-    public interface IListItemCollection : IQueryable<IListItem>, IDataModelCollection<IListItem>, ISupportPaging
+    public interface IListItemCollection : IQueryable<IListItem>, IDataModelCollection<IListItem>, ISupportPaging<IListItem>
     {
         /// <summary>
         /// Adds a new list item

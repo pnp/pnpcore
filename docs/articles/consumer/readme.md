@@ -92,7 +92,7 @@ In above sample the following configuration file is used: `appsettings.demo.json
 
 ## Obtaining a PnPContext
 
-The `PnPContext` is the entry point for using the PnP Core SDK, you can create a `PnPContext` from either a SharePoint site url or the id of an Office 365 group.
+The `PnPContext` is the entry point for using the PnP Core SDK, you can create a `PnPContext` from either a SharePoint site url or the id of an Microsoft 365 group.
 
 ```csharp
 // Start console host
@@ -108,7 +108,7 @@ using (var scope = host.Services.CreateScope())
         // See next chapter on how to use the PnPContext
     }
 
-    using (var context = pnpContextFactory.Create("Office 365 Group guid"))
+    using (var context = pnpContextFactory.Create("Microsoft 365 Group guid"))
     {
         // See next chapter on how to use the PnPContext
     }
@@ -116,6 +116,22 @@ using (var scope = host.Services.CreateScope())
 
 // Cleanup console host
 host.Dispose();
+```
+
+Next to creating a new `PnPContext` you can also clone an existing one, cloning is very convenient if you for example created a a context for the root web of your site collection but now want to work with a sub site. Below snippet shows how to use cloning:
+
+```csharp
+using (var context = pnpContextFactory.Create("SiteToWorkWith"))
+{
+    var web = await context.Web.GetAsync();
+    Console.WriteLine($"Title: {web.Title}");
+
+    using (var subSiteContext = context.Clone(new Uri("https://contoso.sharepoint.com/sites/siteA/subsite")))
+    {
+        var subWeb = await subSiteContext.Web.GetAsync();
+        Console.WriteLine($"Sub site title: {subWeb.Title}");
+    }
+}
 ```
 
 ## Using the PnPContext for operations on Microsoft 365

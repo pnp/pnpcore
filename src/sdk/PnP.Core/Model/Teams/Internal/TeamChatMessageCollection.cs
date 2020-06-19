@@ -18,7 +18,7 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(body));
             }
 
-            var newChannelChatMessage = AddNewTeamChatMessage();
+            var newChannelChatMessage = CreateNewAndAdd() as TeamChatMessage;
 
             // Assign field values
             newChannelChatMessage.Body = new TeamChatMessageContent
@@ -44,7 +44,7 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(body));
             }
 
-            var newChannelChatMessage = AddNewTeamChatMessage();
+            var newChannelChatMessage = CreateNewAndAdd() as TeamChatMessage;
 
             // Assign field values
             newChannelChatMessage.Body = new TeamChatMessageContent

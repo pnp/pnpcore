@@ -7,6 +7,7 @@ namespace PnP.Core.Model.Teams
     /// <summary>
     /// Public interface to define a Team object of Microsoft Teams
     /// </summary>
+    [ConcreteType(typeof(Team))]
     public interface ITeam : IDataModel<ITeam>, IDataModelUpdate
     {
         /// <summary>

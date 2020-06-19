@@ -99,7 +99,7 @@ namespace PnP.Core.Model
         /// Ensures the basic properties (mainly IDs) of the parent of the current domain model object
         /// </summary>
         /// <param name="model">The domain model to which we have to ensure the parent</param>
-        public static async Task EnsureParentObjectAsync(this IDataModelParent model)
+        internal static async Task EnsureParentObjectAsync(this IDataModelParent model)
         {
             if (model is null)
             {

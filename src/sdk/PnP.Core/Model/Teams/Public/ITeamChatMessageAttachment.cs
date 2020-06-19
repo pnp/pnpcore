@@ -2,6 +2,9 @@
 
 namespace PnP.Core.Model.Teams
 {
+    /// <summary>
+    /// Attachments connected to a chat message
+    /// </summary>
     public interface ITeamChatMessageAttachment: IComplexType
     {
         /// <summary>

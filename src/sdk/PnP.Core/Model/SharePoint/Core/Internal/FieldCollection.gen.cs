@@ -13,26 +13,5 @@ namespace PnP.Core.Model.SharePoint
             this.Parent = parent;
         }
 
-        public override IField CreateNew()
-        {
-            return NewField();
-        }
-
-        private Field AddNewField()
-        {
-            var newField = NewField();
-            this.items.Add(newField);
-            return newField;
-        }
-
-        private Field NewField()
-        {
-            var newField = new Field
-            {
-                PnPContext = this.PnPContext,
-                Parent = this,
-            };
-            return newField;
-        }
     }
 }

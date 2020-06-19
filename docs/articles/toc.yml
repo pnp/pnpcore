@@ -8,6 +8,8 @@
     href: consumer/readme.md
   - name: Configuring authentication
     href: consumer/configuring%20authentication.md
+  - name: Get data using paging
+    href: consumer/using%20paging.md
   - name: Configuring the PnP Core SDK
     href: consumer/pnp%20core%20settings.md
 - name: Contributor documentation
@@ -20,6 +22,8 @@
     href: contributor/extending%20the%20model%20-%20Microsoft%20Graph.md 
   - name: Extending the model for SharePoint REST
     href: contributor/extending%20the%20model%20-%20SharePoint%20REST.md 
+  - name: Implement paging
+    href: contributor/using%20paging.md
   - name: Using event handlers
     href: contributor/event%20handlers.md 
   - name: Using model tokens

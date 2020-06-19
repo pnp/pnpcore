@@ -1,0 +1,9 @@
+--batchresponse_77439984-cc29-48ff-819b-a76350af12dc
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'61a46fec-235b-4118-a9ec-565a095737a1')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'61a46fec-235b-4118-a9ec-565a095737a1')","etag":"\"1\"","type":"SP.List"},"Id":"61a46fec-235b-4118-a9ec-565a095737a1","Title":"AddListViaExplicitBatchRest"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'23664c71-2810-4ff1-b479-028251673793')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'23664c71-2810-4ff1-b479-028251673793')","etag":"\"1\"","type":"SP.List"},"Id":"23664c71-2810-4ff1-b479-028251673793","Title":"AddListViaRest"}]}}
+--batchresponse_77439984-cc29-48ff-819b-a76350af12dc--

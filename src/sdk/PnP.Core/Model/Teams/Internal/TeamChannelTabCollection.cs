@@ -152,7 +152,7 @@ namespace PnP.Core.Model.Teams
         /// <returns>Initial <see cref="TeamChannelTab"/> instance</returns>
         private TeamChannelTab CreateTeamChannelTab(string displayName)
         {
-            var newChannelTab = AddNewTeamChannelTab();
+            var newChannelTab = CreateNewAndAdd() as TeamChannelTab;
 
             // Assign field values
             newChannelTab.DisplayName = displayName;

@@ -347,7 +347,7 @@ namespace PnP.Core.Services
             if (apiResponse.ApiCall.Request.Contains("$top", StringComparison.InvariantCultureIgnoreCase))
             {
                 var parent = (pnpObject as IDataModelParent).Parent;
-                if (parent != null && parent is IManageableCollection && parent is IMetadataExtensible && parent is ISupportPaging)
+                if (parent != null && parent is IManageableCollection && parent is IMetadataExtensible && parent.GetType().ImplementsInterface(typeof(ISupportPaging<>)))
                 {
                     TrackAndUpdateMetaData(parent as IMetadataExtensible, "__next", BuildNextPageRestUrl(apiResponse.ApiCall.Request));
                 }

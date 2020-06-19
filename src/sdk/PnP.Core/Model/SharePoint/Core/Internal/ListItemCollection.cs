@@ -27,7 +27,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(values));
             }
 
-            var newListItem = AddNewListItem();
+            var newListItem = CreateNewAndAdd() as ListItem;
 
             // Assign field values
             newListItem.Values.SystemAddRange(values);
@@ -42,7 +42,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(values));
             }
 
-            var newListItem = AddNewListItem();
+            var newListItem = CreateNewAndAdd() as ListItem;
 
             // Assign field values
             newListItem.Values.SystemAddRange(values);

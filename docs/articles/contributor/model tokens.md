@@ -6,7 +6,7 @@
 When decorating model classes and properties via attributes, often you need to define an API request. To ensure that these API requests offer the needed flexibility, you can use tokens in the URL request definition. Tokens are embedded between curly brackets. Below snippet shows some samples in which tokens are used:
 
 ```csharp
-// Site.GroupId token to grab the id of the Office 365 group connected to the current site
+// Site.GroupId token to grab the id of the Microsoft 365 group connected to the current site
 [GraphType(Uri = "teams/{Site.GroupId}")]
 [GraphProperty("installedApps", Get = "teams/{Site.GroupId}/installedapps?expand=TeamsApp")]
 

@@ -2,6 +2,9 @@
 
 namespace PnP.Core.Model.Teams
 {
+    /// <summary>
+    /// Identity information about a Teams element
+    /// </summary>
     public interface ITeamIdentitySet : IComplexType
     {
         /// <summary>
