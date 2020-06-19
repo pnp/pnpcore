@@ -15,26 +15,5 @@ namespace PnP.Core.Model.SharePoint
             this.Parent = parent;
         }
 
-        public override IWeb CreateNew()
-        {
-            return NewWeb();
-        }
-
-        private Web AddNewWeb()
-        {
-            var newWeb = NewWeb();
-            this.items.Add(newWeb);
-            return newWeb;
-        }
-
-        private Web NewWeb()
-        {
-            var newWeb = new Web
-            {
-                PnPContext = this.PnPContext,
-                Parent = this,
-            };
-            return newWeb;
-        }
     }
 }

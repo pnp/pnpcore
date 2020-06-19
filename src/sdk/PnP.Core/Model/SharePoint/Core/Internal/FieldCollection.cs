@@ -24,7 +24,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException($"{nameof(fieldType)} is invalid");
             }
 
-            var newField = AddNewField();
+            var newField = CreateNewAndAdd() as Field;
 
             newField.Title = title;
             newField.FieldTypeKind = fieldType;
@@ -61,7 +61,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException($"{nameof(fieldType)} is invalid");
             }
 
-            var newField = AddNewField();
+            var newField = CreateNewAndAdd() as Field;
 
             newField.Title = title;
             

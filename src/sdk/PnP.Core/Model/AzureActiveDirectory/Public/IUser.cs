@@ -3,6 +3,7 @@
     /// <summary>
     /// Public interface to define a User of Azure Active Directory
     /// </summary>
+    [ConcreteType(typeof(User))]
     public interface IUser : IDataModel<IUser>
     {
         public string Id { get; }

@@ -12,26 +12,5 @@ namespace PnP.Core.Model.SharePoint
             this.Parent = parent;
         }
 
-        public override IContentType CreateNew()
-        {
-            return NewContentType();
-        }
-
-        private ContentType AddNewContentType()
-        {
-            var newContentType = NewContentType();
-            this.items.Add(newContentType);
-            return newContentType;
-        }
-
-        private ContentType NewContentType()
-        {
-            var newContentType = new ContentType
-            {
-                PnPContext = this.PnPContext,
-                Parent = this,
-            };
-            return newContentType;
-        }
     }
 }

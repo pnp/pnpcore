@@ -3,6 +3,7 @@
     /// <summary>
     /// Defines a Microsoft Teams App installation
     /// </summary>
+    [ConcreteType(typeof(TeamApp))]
     public interface ITeamApp : IDataModel<ITeamApp>
     {
         /// <summary>

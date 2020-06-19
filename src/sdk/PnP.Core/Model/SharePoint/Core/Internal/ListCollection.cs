@@ -14,7 +14,7 @@ namespace PnP.Core.Model.SharePoint
             if (!(items.FirstOrDefault(p => p.IsPropertyAvailable(p => p.Title) && p.Title.Equals(title, StringComparison.InvariantCultureIgnoreCase)) is List listToLoad))
             {
                 // List was not loaded before, so add it the current set of loaded lists
-                listToLoad = AddNewList();
+                listToLoad = CreateNewAndAdd() as List;
             }
 
             return listToLoad.GetByTitle(batch, title, expressions);
@@ -31,7 +31,7 @@ namespace PnP.Core.Model.SharePoint
             if (!(items.FirstOrDefault(p => p.Title.Equals(title, StringComparison.InvariantCultureIgnoreCase)) is List listToLoad))
             {
                 // List was not loaded before, so add it the current set of loaded lists
-                listToLoad = AddNewList();
+                listToLoad = CreateNewAndAdd() as List;
             }
 
             return await listToLoad.GetByTitleAsync(title, expressions).ConfigureAwait(false);
@@ -54,7 +54,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException($"{nameof(templateType)} cannot be 0");
             }
 
-            var newList = AddNewList();
+            var newList = CreateNewAndAdd() as List;
 
             newList.Title = title;
             newList.TemplateType = templateType;
@@ -74,7 +74,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException($"{nameof(templateType)} cannot be 0");
             }
 
-            var newList = AddNewList();
+            var newList = CreateNewAndAdd() as List;
 
             newList.Title = title;
             newList.TemplateType = templateType;

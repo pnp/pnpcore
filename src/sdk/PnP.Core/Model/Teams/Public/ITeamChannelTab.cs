@@ -5,6 +5,7 @@ namespace PnP.Core.Model.Teams
     /// <summary>
     /// Defines the tab in a Team channel
     /// </summary>
+    [ConcreteType(typeof(TeamChannelTab))]
     public interface ITeamChannelTab : IDataModel<ITeamChannelTab>, IDataModelDelete, IDataModelUpdate
     {
         /// <summary>

@@ -147,12 +147,26 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Parameter less new, needs to be overriden by the collections using this base class
+        /// Creates a new instance of the model handled by this collection. The instance will not be added to the collection
         /// </summary>
         /// <returns>Model entity</returns>
-        public virtual TModel CreateNew()
+        public TModel CreateNew()
         {
-            return default;
+            TModel newModel = (TModel)EntityManager.Instance.GetEntityConcreteInstance<TModel>(typeof(TModel), this);
+            (newModel as BaseDataModel<TModel>).PnPContext = this.PnPContext;
+            return newModel;
+        }
+
+        /// <summary>
+        /// Creates a new instance of the model handled by this collection and adds it to the collection. This 
+        /// add will not mark the collection as requested
+        /// </summary>
+        /// <returns>Model entity</returns>
+        public TModel CreateNewAndAdd()
+        {
+            var newModel = CreateNew();
+            items.Add(newModel);
+            return newModel;
         }
 
         /// <summary>
@@ -162,6 +176,16 @@ namespace PnP.Core.Model
         object IManageableCollection.CreateNew()
         {
             return this.CreateNew();
+        }
+
+        /// <summary>
+        /// Creates a new instance of the model handled by this collection and adds it to the collection. This 
+        /// add will not mark the collection as requested
+        /// </summary>
+        /// <returns>Model entity</returns>
+        object IManageableCollection.CreateNewAndAdd()
+        {
+            return this.CreateNewAndAdd();
         }
 
         public void Add(object item)

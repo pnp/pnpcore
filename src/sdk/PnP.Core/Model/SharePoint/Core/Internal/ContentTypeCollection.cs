@@ -24,7 +24,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var newContentType = AddNewContentType();
+            var newContentType = CreateNewAndAdd() as ContentType;
 
             newContentType.StringId = id;
             newContentType.Name = name;
@@ -46,7 +46,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(name));
             }
 
-            var newContentType = AddNewContentType();
+            var newContentType = CreateNewAndAdd() as ContentType;
 
             newContentType.StringId = id;
             newContentType.Name = name;
@@ -70,7 +70,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            var newContentType = AddNewContentType();
+            var newContentType = CreateNewAndAdd() as ContentType;
             newContentType.StringId = id;
 
             return newContentType.AddAvailableContentType(batch, id) as ContentType;
@@ -83,7 +83,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            var newContentType = AddNewContentType();
+            var newContentType = CreateNewAndAdd() as ContentType;
             newContentType.StringId = id;
 
             return await newContentType.AddAvailableContentTypeAsync(id).ConfigureAwait(false) as ContentType;

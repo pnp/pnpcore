@@ -5,6 +5,7 @@ namespace PnP.Core.Model.AzureActiveDirectory
     /// <summary>
     /// A Microsoft 365 Group
     /// </summary>
+    [ConcreteType(typeof(Group))]
     public interface IGroup : IDataModel<IGroup>
     {
         /// <summary>
