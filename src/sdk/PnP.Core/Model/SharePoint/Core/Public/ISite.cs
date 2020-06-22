@@ -51,5 +51,7 @@ namespace PnP.Core.Model.SharePoint
         /// Collection of sub-webs in the current Site object
         /// </summary>
         public IWebCollection AllWebs { get; }
+
+        public IFeatureCollection Features { get; }
     }
 }

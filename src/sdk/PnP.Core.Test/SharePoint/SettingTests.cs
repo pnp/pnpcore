@@ -27,13 +27,24 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task GetFeaturesAsync()
+        public async Task GetFeaturesWebAsync()
         {
             TestCommon.Instance.Mocking = true;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 IWeb web = await context.Web.GetAsync(p => p.Features);
                 Assert.IsTrue(web.Features.Length > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFeaturesSiteAsync()
+        {
+            TestCommon.Instance.Mocking = true;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                ISite site = await context.Site.GetAsync(p => p.Features);
+                Assert.IsTrue(site.Features.Length > 0);
             }
         }
 
@@ -74,40 +85,32 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task EnableSiteFeatureAsync()
         {
-            TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = true;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                //ISite site = await context.Site.GetAsync(p => p.Features);
+                ISite site = await context.Site.GetAsync(p => p.Features);
 
-                //var id = new Guid("3bae86a2-776d-499d-9db8-fa4cdc7884f8"); // Document Sets - Site Scoped
-                //IFeature feature = await site.Features.EnableAsync(id);
+                var id = new Guid("3bae86a2-776d-499d-9db8-fa4cdc7884f8"); // Document Sets - Site Scoped
+                IFeature feature = await site.Features.EnableAsync(id);
 
-                //Assert.IsNotNull(feature);
-                //Assert.IsNotNull(feature.DefinitionId);
-                //Assert.IsTrue(feature.DefinitionId != Guid.Empty);
-
-                throw new NotImplementedException();
-
+                Assert.IsNotNull(feature);
+                Assert.IsNotNull(feature.DefinitionId);
+                Assert.IsTrue(feature.DefinitionId != Guid.Empty);
             }
         }
 
         [TestMethod]
         public async Task DisableSiteFeatureAsync()
         {
-            TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = true;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                //ISite site = await context.Site.GetAsync(p => p.Features);
+                ISite site = await context.Site.GetAsync(p => p.Features);
 
-                //var id = new Guid("3bae86a2-776d-499d-9db8-fa4cdc7884f8"); // Document Sets - Site Scoped
-                //IFeature feature = await site.Features.DisableAsync(id);
+                var id = new Guid("3bae86a2-776d-499d-9db8-fa4cdc7884f8"); // Document Sets - Site Scoped
+                await site.Features.DisableAsync(id);
 
-                //Assert.IsNotNull(feature);
-                //Assert.IsNotNull(feature.DefinitionId);
-                //Assert.IsTrue(feature.DefinitionId != Guid.Empty);
-
-                throw new NotImplementedException();
-
+                Assert.IsTrue(!site.Features.Any(o => o.DefinitionId == id));
             }
         }
 
