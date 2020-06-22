@@ -29,6 +29,11 @@ namespace PnP.Core.Model.SharePoint
             return newFeature;
         }
 
+        private void RemoveFeature(IFeature feature)
+        {
+            this.items.Remove(feature);
+        }
+
         private Feature NewFeature()
         {
             var newFeature = new Feature

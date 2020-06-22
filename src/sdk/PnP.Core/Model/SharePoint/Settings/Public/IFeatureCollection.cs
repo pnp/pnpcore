@@ -19,7 +19,7 @@ namespace PnP.Core.Model.SharePoint
 
         public Task<IFeature> EnableAsync(Guid id);
 
-        public Task<IFeature> DisableAsync(Guid id);
+        public Task DisableAsync(Guid id);
 
         //public Task<IFeature> AddAsync(string id);
 
