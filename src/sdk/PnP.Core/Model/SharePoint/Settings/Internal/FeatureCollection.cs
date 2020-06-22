@@ -22,9 +22,20 @@ namespace PnP.Core.Model.SharePoint
             throw new NotImplementedException();
         }
 
-        public Task<IFeature> EnableAsync(Guid id)
+        public async Task<IFeature> EnableAsync(Guid id)
         {
-            throw new NotImplementedException();
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            var feature = CreateNewAndAdd() as Feature;
+
+            feature.DefinitionId = id;
+
+            return await feature.AddAsync().ConfigureAwait(false) as Feature;
         }
+
+
     }
 }

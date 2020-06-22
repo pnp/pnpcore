@@ -1,6 +1,8 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -19,7 +21,33 @@ namespace PnP.Core.Model.SharePoint
 
         public Feature()
         {
+            AddApiCallHandler = (keyValuePairs) =>
+            {
 
+                var entity = EntityManager.Instance.GetClassInfo<IFeature>(GetType(), this);
+
+                //var addParameters = new FeatureAdd(this, DefinitionId);
+                return new ApiCall($"{entity.SharePointGet}/add(guid'{DefinitionId}')", ApiType.SPORest, null);
+            };
+        }
+
+        /// <summary>
+        /// Class to model the rest feature
+        /// </summary>
+        internal class FeatureAdd : RestBaseAdd<IFeature>
+        {
+            public Guid DefinitionId { get; set; }
+            //public bool Force { get; set; }
+
+            //public int FeatDefScope { get; set; }
+
+            internal FeatureAdd(BaseDataModel<IFeature> model, Guid definitionId) : base(model)
+            {
+                // bool force = false, int featureDefScope = 0
+                DefinitionId = definitionId;
+                //Force = force;
+                //FeatDefScope = featureDefScope;
+            }
         }
     }
 }
