@@ -15,22 +15,17 @@ namespace PnP.Core.Model.SharePoint
     public interface IFeatureCollection : IQueryable<IFeature>,IDataModelCollection<IFeature>
     {
 
-        public Task<IFeature> GetByIdAsync(Guid Id, params Expression<Func<IFeature, object>>[] expressions);
-
         public Task<IFeature> EnableAsync(Guid id);
+
+        public IFeature Enable(Guid id);
+
+        public IFeature Enable(Batch batch, Guid id);
 
         public Task DisableAsync(Guid id);
 
-        //public Task<IFeature> AddAsync(string id);
+        public void Disable(Guid id);
 
-        //public IFeature Add(Batch batch, string id, bool force, int featureDefScope);
-
-        //public Task<IFeature> AddAsync(string id, bool force, int featureDefScope);
-
-
-        //public void Remove(string id, bool force);
-
-        //public Task RemoveAsync(string id, bool force);
+        public void Disable(Batch batch, Guid id);
 
     }
 }
