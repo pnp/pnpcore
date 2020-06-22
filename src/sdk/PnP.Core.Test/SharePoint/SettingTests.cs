@@ -18,7 +18,7 @@ namespace PnP.Core.Test.SharePoint
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
 
             //Reference
             // b6917cb1-93a0-4b97-a84d-7cf49975d4ec - SitePages - Read this only - modern sites already have this activated
@@ -29,18 +29,18 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetFeaturesAsync()
         {
-            TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = true;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 IWeb web = await context.Web.GetAsync(p => p.Features);
                 Assert.IsTrue(web.Features.Length > 0);
             }
         }
-        
+
         [TestMethod]
         public async Task EnableWebFeatureAsync()
         {
-            TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = true;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 
@@ -58,7 +58,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task DisableWebFeatureAsync()
         {
-            TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = true;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
 
