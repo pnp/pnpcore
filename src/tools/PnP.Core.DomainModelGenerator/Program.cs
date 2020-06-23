@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
+using PnP.M365.DomainModelGenerator.CodeAnalyzer;
 using System.Threading.Tasks;
 
 
@@ -13,8 +14,9 @@ namespace PnP.M365.DomainModelGenerator
         public static async Task Main(string[] args)
         {
             var host = Host.CreateDefaultBuilder()
+            .UseEnvironment("bertonline")
             .ConfigureAppConfiguration((hostingContext, config) =>
-            {
+            {                
                 config.AddEnvironmentVariables();
                 config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
                 config.AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", optional: true);
@@ -52,6 +54,8 @@ namespace PnP.M365.DomainModelGenerator
                 .AddEdmxProcessor(options =>
                 {
                     options.MappingFilePath = metadataSettings.MappingFilePath;
+                    options.SPMappingFilePath = metadataSettings.SPMappingFilePath;
+                    options.GraphMappingFilePath = metadataSettings.GraphMappingFilePath;
 
                     options.EdmxProviders.Add(new EdmxProviderOptions
                     {
@@ -65,6 +69,7 @@ namespace PnP.M365.DomainModelGenerator
                         MetadataUri = metadataSettings.GraphMetadataUri,
                     });
                 })
+                .AddCodeAnalyzer(options => { })
                 .AddCodeGenerator(options =>
                 {
                     options.OutputFilesRootPath = generatorSettings.OutputFilesRootPath;

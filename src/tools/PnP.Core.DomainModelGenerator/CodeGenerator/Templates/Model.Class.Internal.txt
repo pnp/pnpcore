@@ -1,0 +1,16 @@
+﻿using System;
+
+namespace %%Namespace%%
+{
+    /// <summary>
+    /// Internal class representing a %%Type%% object
+    /// 
+    /// Note: this class is generated, please don't modify this code by hand!
+    /// 
+    /// </summary>
+    internal partial class %%Type%% : BaseDataModel<I%%Type%%>, I%%Type%%
+    {
+
+%%Properties%%
+    }
+}

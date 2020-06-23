@@ -1,0 +1,2 @@
+﻿%%PropertyAttributes%%
+        public %%PropertyType%% %%PropertyName%% { get => GetValue<%%PropertyType%%>(); set => SetValue(value); }

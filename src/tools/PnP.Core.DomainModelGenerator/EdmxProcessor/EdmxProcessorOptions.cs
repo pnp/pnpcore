@@ -13,6 +13,16 @@ namespace PnP.M365.DomainModelGenerator
         public string MappingFilePath { get; set; }
 
         /// <summary>
+        /// Defines the path to the SPO exclusions JSON file
+        /// </summary>
+        public string SPMappingFilePath { get; set; }
+
+        /// <summary>
+        /// Defines the path to the Graph exclusions JSON file
+        /// </summary>
+        public string GraphMappingFilePath { get; set; }
+
+        /// <summary>
         /// Defines the settings for the EDMX metadata providers
         /// </summary>
         public List<EdmxProviderOptions> EdmxProviders { get; set; } = new List<EdmxProviderOptions>();

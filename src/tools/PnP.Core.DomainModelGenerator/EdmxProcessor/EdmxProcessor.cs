@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Services;
+using PnP.M365.DomainModelGenerator.CodeAnalyzer;
 using PnP.M365.DomainModelGenerator.Mappings;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace PnP.M365.DomainModelGenerator
         private readonly EdmxProcessorOptions options;
         private readonly IAuthenticationProviderFactory authProviderFactory;
         private readonly ILogger log;
+        private readonly ICodeAnalyzer codeAnalyzer;
 
         // Define a global HttpClient object to download metadata files
         private readonly HttpClient httpClient = new HttpClient();
@@ -29,7 +31,8 @@ namespace PnP.M365.DomainModelGenerator
             IOptionsMonitor<EdmxProcessorOptions> options,
             IAuthenticationProviderFactory authenticationProviderFactory,
             ILogger<EdmxProcessor> logger,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider,
+            ICodeAnalyzer codeAnalyzer)
         {
             if (options == null)
             {
@@ -44,14 +47,16 @@ namespace PnP.M365.DomainModelGenerator
             this.options = options.CurrentValue;
             this.authProviderFactory = authenticationProviderFactory;
             this.log = logger;
+            this.codeAnalyzer = codeAnalyzer;
         }
 
         public async Task<Model> ProcessAsync()
         {
-            Model result = null;
-
             // Load into memory the EDMX -> Domain Model mapping file
             var entityMappings = await LoadMappingFileAsync();
+
+            var spExclusions = await LoadUnifiedMappingFileAsync(true);
+            var graphExclusions = await LoadUnifiedMappingFileAsync(false);
 
             // Process the EDMX metadata providers
             this.log.LogInformation($"Started processing of metadata providers.");
@@ -73,9 +78,34 @@ namespace PnP.M365.DomainModelGenerator
             // Process the actual mapping
             this.log.LogInformation($"Started mapping entities.");
 
-            result = ProcessMetadataFile(entityMappings, edmxDocuments);
+            //result = ProcessMetadataFile(entityMappings, edmxDocuments);
+
+            var preparedModelData = await ProcessUnifiedModelFiles(spExclusions, graphExclusions, edmxDocuments);
+            Model result = new Model
+            {
+                SharePoint = preparedModelData.Item1,
+                Graph = preparedModelData.Item2
+            };
 
             this.log.LogInformation($"Finished mapping entities.");
+
+            return result;
+        }
+
+        private async Task<UnifiedModelMapping> LoadUnifiedMappingFileAsync(bool loadSharePointExclusions)
+        {
+            string pathToLoad = loadSharePointExclusions ? this.options.SPMappingFilePath : this.options.GraphMappingFilePath;
+
+            this.log.LogInformation($"Started loading SPO exclusion file from {pathToLoad}.");
+
+            var jsonExclusionsString = await File.ReadAllTextAsync(pathToLoad);
+
+            UnifiedModelMapping result = JsonSerializer.Deserialize<UnifiedModelMapping>(jsonExclusionsString,
+                                                                        new JsonSerializerOptions
+                                                                        {
+                                                                            PropertyNameCaseInsensitive = true
+                                                                        });
+            this.log.LogInformation($"Finished loading exclusions file from {pathToLoad}.");
 
             return result;
         }
@@ -128,6 +158,195 @@ namespace PnP.M365.DomainModelGenerator
             return result;
         }
 
+        private async Task<Tuple<UnifiedModel, UnifiedModel>> ProcessUnifiedModelFiles(UnifiedModelMapping spExclusions, UnifiedModelMapping graphExclusions, Dictionary<string, XDocument> edmxDocuments)
+        { 
+            // Combine settings+data from exclusion files with data coming from code analysis to build the model used for code generation
+            if (codeAnalyzer == null)
+            {
+                throw new Exception("There was no code analyzer available");
+            }
+
+            // Process SPO
+            var spoModel = await ProcessProvider(spExclusions, edmxDocuments.Where(p => p.Key == "SPO").First());
+
+            // Process Graph
+            //var graphModel = await ProcessProvider(graphExclusions, edmxDocuments.Where(p => p.Key == "MSGraph").First());
+
+            return new Tuple<UnifiedModel, UnifiedModel>(spoModel, null);
+        }
+
+        private async Task<UnifiedModel> ProcessProvider(UnifiedModelMapping mapping, KeyValuePair<string, XDocument> edmxDocumentInfo)
+        {
+            UnifiedModel model = new UnifiedModel
+            {
+                Provider = edmxDocumentInfo.Key
+            };
+
+            Dictionary<string, AnalyzedModelType> analyzedModelTypes = new Dictionary<string, AnalyzedModelType>();
+            var edmxDocument = edmxDocumentInfo.Value;
+
+            // Get information about the current code implementation
+            foreach (var location in mapping.Locations)
+            {
+                var analyzedTypes = await codeAnalyzer.ProcessNamespace(location);
+                analyzedTypes.ToList().ForEach(x => analyzedModelTypes.Add(x.Key, x.Value));
+
+                // Combine code information with information from the metadata into a model that will be used to drive code generation
+                var edmxNamespace = (XNamespace)mapping.EdmxNamespace;
+                var schemaNamespace = (XNamespace)mapping.SchemaNamespace;
+
+                // Now process the properties from the EDMX providers
+                var providerSchemaElements = edmxDocument.Descendants(schemaNamespace + "Schema").Where(e => e.Attribute("Namespace")?.Value == location.SchemaNamespace);
+                foreach (var providerSchemaElement in providerSchemaElements)
+                {
+                    var providerEntities = providerSchemaElement.Elements(schemaNamespace + "EntityType").Where(e => e.Attribute("Name")?.Value == "Web");
+                    //var providerEntities = providerSchemaElement.Elements(schemaNamespace + "EntityType");
+                    foreach (var providerEntity in providerEntities)
+                    {
+
+                        UnifiedModelEntity entity = new UnifiedModelEntity
+                        {
+                            TypeName = providerEntity.Attribute("Name").Value,
+                            Namespace = location.Namespace,
+                            SchemaNamespace = location.SchemaNamespace,
+                            Folder = location.Folder,
+                            SPRestType = $"{providerSchemaElement.Attribute("Namespace").Value}.{providerEntity.Attribute("Name").Value}",
+                            BaseType = providerEntity.Attribute("BaseType")?.Value
+                        };
+
+                        // Process simple properties
+                        foreach (var property in providerEntity.Elements(schemaNamespace + "Property"))
+                        {
+                            var propertyNameAttribute = property.Attribute("Name");
+                            var propertyTypeAttribute = property.Attribute("Type");
+                            if (propertyNameAttribute != null && propertyTypeAttribute != null)
+                            {
+                                var propertyName = NormalizePropertyName(propertyNameAttribute.Value);
+                                var propertyType = ResolvePropertyType(propertyTypeAttribute.Value);
+                                if (propertyType != null)
+                                {
+                                    UnifiedModelProperty modelProp = new UnifiedModelProperty()
+                                    {
+                                        Name = propertyName,
+                                        Type = propertyType,
+                                        NavigationProperty = false
+                                    };
+                                    entity.Properties.Add(modelProp);
+                                }
+                            }
+                        }
+
+                        // Process navigation properties
+                        foreach (var property in providerEntity.Elements(schemaNamespace + "NavigationProperty"))
+                        {
+                            //<NavigationProperty Name="Alerts" Relationship="SP.SP_Web_Alerts_SP_Alert_AlertsPartner" ToRole="Alerts" FromRole="AlertsPartner" />
+
+                            var propertyNameAttribute = property.Attribute("Name");
+                            var propertyRelationshipAttribute = property.Attribute("Relationship");
+                            var propertyToRoleAttribute = property.Attribute("ToRole");
+
+                            if (propertyNameAttribute != null && propertyRelationshipAttribute != null && propertyToRoleAttribute != null)
+                            {
+                                var propertyName = NormalizePropertyName(propertyNameAttribute.Value);
+                                if (propertyName != null)
+                                {
+                                    // Find associationset:
+
+                                    //<AssociationSet Name="SP_Web_Alerts_SP_Alert_AlertsPartnerSet" Association="SP.SP_Web_Alerts_SP_Alert_AlertsPartner">
+                                    //    <End Role="AlertsPartner" EntitySet="Webs" />
+                                    //    <End Role="Alerts" EntitySet="Alerts" />
+                                    //</AssociationSet>
+
+                                    var associatedSet = edmxDocument.Descendants(schemaNamespace + "AssociationSet").FirstOrDefault(e => e.Attribute("Association")?.Value == propertyRelationshipAttribute.Value);
+                                    if (associatedSet != null)
+                                    {
+                                        // Find related association
+
+                                        //<Association Name="SP_Web_Alerts_SP_Alert_AlertsPartner">
+                                        //    <End Type="SP.Alert" Role="Alerts" Multiplicity="*" />
+                                        //    <End Type="SP.Web" Role="AlertsPartner" Multiplicity="0..1" />
+                                        //</Association>
+
+                                        //Remove namespace from association : SP.SP_Web_Alerts_SP_Alert_AlertsPartner can be found as SP_Web_Alerts_SP_Alert_AlertsPartner
+                                        var associationNameToFind = associatedSet.Attribute("Association").Value.Substring(associatedSet.Attribute("Association").Value.LastIndexOf(".") + 1);
+
+                                        var association = edmxDocument.Descendants(schemaNamespace + "Association").FirstOrDefault(e => e.Attribute("Name")?.Value == associationNameToFind);
+
+                                        if (association != null)
+                                        {
+                                            // Find the needed "End"
+                                            var associatedEnd = association.Elements(schemaNamespace + "End").FirstOrDefault(e => e.Attribute("Role")?.Value == propertyToRoleAttribute.Value);
+                                            if (associatedEnd != null)
+                                            {
+                                                UnifiedModelProperty modelProp = new UnifiedModelProperty()
+                                                {
+                                                    Name = propertyName,
+                                                    Type = associatedEnd.Attribute("Type").Value,
+                                                    // Multiplicity = * (collection) or 0..1 
+                                                    NavigationPropertyIsCollection = associatedEnd.Attribute("Multiplicity").Value.Equals("*"),
+                                                    NavigationProperty = true
+                                                };
+                                                entity.Properties.Add(modelProp);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        model.Entities.Add(entity);
+                    }
+                }
+
+                // Combine with mapping file data
+                if (mapping != null)
+                {
+                    foreach (var entityFromMapping in mapping.ExcludedTypes)
+                    {
+                        var typeToExclude = model.Entities.FirstOrDefault(p => p.SPRestType == entityFromMapping.Type);
+                        if (typeToExclude != null)
+                        {
+                            if (entityFromMapping.Properties.Any())
+                            {
+                                foreach (var property in entityFromMapping.Properties)
+                                {
+                                    var propertyToExclude = typeToExclude.Properties.FirstOrDefault(p => p.Name.Equals(property, StringComparison.InvariantCultureIgnoreCase));
+                                    if (propertyToExclude != null)
+                                    {
+                                        propertyToExclude.Skip = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Exclude the complete type
+                                typeToExclude.Skip = true;
+                            }
+                        }
+                    }
+                }
+
+                // Hookup with the possibly available types in the PnP Core SDK
+                foreach (var analyzedModelType in analyzedModelTypes)
+                {
+                    if (analyzedModelType.Value.SPRestTypes.Any())
+                    {
+                        foreach (var spRestType in analyzedModelType.Value.SPRestTypes)
+                        {
+                            var typeToUpdate = model.Entities.FirstOrDefault(p => p.SPRestType == spRestType);
+                            if (typeToUpdate != null)
+                            {
+                                typeToUpdate.AnalyzedModelType = analyzedModelType.Value;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return model;
+        }
+
+        /*
         private Model ProcessMetadataFile(ModelMappings entityMappings, Dictionary<string, XDocument> edmxDocuments)
         {
             Model result = new Model();
@@ -251,6 +470,7 @@ namespace PnP.M365.DomainModelGenerator
 
             return result;
         }
+        */
 
         private string ResolvePropertyType(string propertyTypeName)
         {

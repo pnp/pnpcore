@@ -1,0 +1,27 @@
+{
+  "provider": "MSGraph",
+  "edmxNamespace": "http://docs.oasis-open.org/odata/ns/edmx",
+  "schemaNamespace": "http://docs.oasis-open.org/odata/ns/edm",
+  "locations": [
+    {
+      "namespace": "PnP.Core.Model.AzureActiveDirectory",
+      "folder": "/Model/AzureActiveDirectory"
+    },
+    {
+      "namespace": "PnP.Core.Model.Teams",
+      "folder": "/Model/Teams"
+    }
+  ],
+  "excludedTypes": [
+    {
+      "type": "T555",
+      "properties": [
+        "bla",
+        "bla2"
+      ]
+    },
+    {
+      "type": "T989"
+    }
+  ]
+}

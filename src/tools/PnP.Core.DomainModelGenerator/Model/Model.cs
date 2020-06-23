@@ -5,11 +5,13 @@ namespace PnP.M365.DomainModelGenerator
     /// <summary>
     /// Defines the whole Model of entities
     /// </summary>
-    public class Model
+    internal class Model
     {
         /// <summary>
         /// Defines the collection of entities to generate
         /// </summary>
-        public List<ModelEntity> Entities { get; set; } = new List<ModelEntity>();
+        //public List<ModelEntity> Entities { get; set; } = new List<ModelEntity>();
+        public UnifiedModel SharePoint { get; set; }
+        public UnifiedModel Graph { get; set; }
     }
 }

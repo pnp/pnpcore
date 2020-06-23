@@ -7,11 +7,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CodeGenerator\Templates\Model.Class.Internal.txt" />
+    <None Remove="CodeGenerator\Templates\Model.NavigationCollectionProperty.Internal.txt" />
+    <None Remove="CodeGenerator\Templates\Model.NavigationProperty.Internal.txt" />
+    <None Remove="CodeGenerator\Templates\Model.Property.Attribute.txt" />
+    <None Remove="CodeGenerator\Templates\Model.Property.Internal.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CodeGenerator\Templates\Model.Class.Internal.txt" />
+	<EmbeddedResource Include="CodeGenerator\Templates\Model.NavigationCollectionProperty.Internal.txt" />
+	<EmbeddedResource Include="CodeGenerator\Templates\Model.NavigationProperty.Internal.txt" />
+	<EmbeddedResource Include="CodeGenerator\Templates\Model.Property.Attribute.txt" />
+    <EmbeddedResource Include="CodeGenerator\Templates\Model.Property.Internal.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.4.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.4.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.4.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.2" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.4" />
+    <PackageReference Include="Mono.Cecil" Version="0.11.2" />
+    <PackageReference Include="System.Collections" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
