@@ -106,8 +106,8 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (!HasValue(nameof(ContentTypes)))
                 {
-                    var webs = new ContentTypeCollection(this.PnPContext, this, nameof(ContentTypes));
-                    SetValue(webs);
+                    var contentTypes = new ContentTypeCollection(this.PnPContext, this, nameof(ContentTypes));
+                    SetValue(contentTypes);
                 }
                 return GetValue<IContentTypeCollection>();
             }

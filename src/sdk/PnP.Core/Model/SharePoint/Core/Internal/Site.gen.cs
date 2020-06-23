@@ -10,8 +10,6 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     internal partial class Site : BaseDataModel<ISite>, ISite
     {
-        private bool rootWebInstantiated = false;
-
         [GraphProperty("sharepointIds", JsonPath = "siteId")]
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
@@ -26,7 +24,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                if (!rootWebInstantiated)
+                if (!NavigationPropertyInstantiated())
                 {
                     var rootWeb = new Web
                     {
@@ -34,13 +32,13 @@ namespace PnP.Core.Model.SharePoint
                         Parent = this,
                     };
                     SetValue(rootWeb);
-                    rootWebInstantiated = true;
+                    InstantiateNavigationProperty();
                 }
                 return GetValue<IWeb>();
             }
             set
             {
-                rootWebInstantiated = true;
+                InstantiateNavigationProperty();
                 SetValue(value);                
             }
         }

@@ -1505,5 +1505,31 @@ namespace PnP.Core.Model
         }
 
         #endregion
+
+        #region Implementation of Navigation property instantiation check
+        private Dictionary<string, bool> navigationPropertyInstantiated = new Dictionary<string, bool>();
+
+        internal protected bool NavigationPropertyInstantiated([CallerMemberName] string propertyName = "")
+        {
+            if (navigationPropertyInstantiated.ContainsKey(propertyName))
+            {
+                return navigationPropertyInstantiated[propertyName];
+            }
+
+            return false;
+        }
+
+        internal protected void InstantiateNavigationProperty([CallerMemberName] string propertyName = "")
+        {
+            if (navigationPropertyInstantiated.ContainsKey(propertyName))
+            {
+                navigationPropertyInstantiated[propertyName] = true;
+            }
+            else
+            {
+                navigationPropertyInstantiated.Add(propertyName, true);
+            }
+        }
+        #endregion
     }
 }

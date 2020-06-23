@@ -5,8 +5,6 @@ namespace PnP.Core.Model.Teams
 {
     internal partial class Team : BaseDataModel<ITeam>, ITeam
     {
-        private bool primaryChannelInstantiated = false;
-
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
         
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
@@ -42,7 +40,7 @@ namespace PnP.Core.Model.Teams
         {
             get
             {
-                if (!primaryChannelInstantiated)
+                if (!NavigationPropertyInstantiated())
                 {
                     var teamChannel = new TeamChannel
                     {
@@ -50,13 +48,13 @@ namespace PnP.Core.Model.Teams
                         Parent = this,
                     };
                     SetValue(teamChannel);
-                    primaryChannelInstantiated = true;
+                    InstantiateNavigationProperty();
                 }
                 return GetValue<ITeamChannel>();
             }
             set
             {
-                primaryChannelInstantiated = true;
+                InstantiateNavigationProperty();
                 SetValue(value);
             }
         }

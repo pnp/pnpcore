@@ -4,8 +4,6 @@ namespace PnP.Core.Model.Teams
 {
     internal partial class TeamChannelTab : BaseDataModel<ITeamChannelTab>, ITeamChannelTab
     {
-        private bool appInstantiated = false;
-
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
@@ -20,7 +18,7 @@ namespace PnP.Core.Model.Teams
         {
             get
             {
-                if (!appInstantiated)
+                if (!NavigationPropertyInstantiated())
                 {
                     var teamApp = new TeamApp
                     {
@@ -28,13 +26,13 @@ namespace PnP.Core.Model.Teams
                         Parent = this,
                     };
                     SetValue(teamApp);
-                    appInstantiated = true;
+                    InstantiateNavigationProperty();
                 }
                 return GetValue<ITeamApp>();
             }
             set
             {
-                appInstantiated = true;
+                InstantiateNavigationProperty();
                 SetValue(value);
             }
         }
