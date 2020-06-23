@@ -1,17 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PnP.Core.Model.SharePoint.Core.Internal
 {
-    internal static class SharePointFieldTypeMapping
+    internal static class SharePointFieldType
     {
+        internal const string FieldCreationInformation = "SP.FieldCreationInformation";
+
         private readonly static Dictionary<FieldType, string> _mapping = new Dictionary<FieldType, string>()
         {
             { FieldType.Text, "SP.FieldText" },
+            { FieldType.Note, "SP.FieldMultiLineText" },
             { FieldType.Currency, "SP.FieldCurrency" },
-            { FieldType.Computed, "SP.FieldComputed" },
+            { FieldType.MultiChoice, "SP.FieldMultiChoice"},
+            { FieldType.Choice, "SP.FieldChoice" },
+            { FieldType.Number, "SP.FieldNumber" },
+            { FieldType.DateTime , "SP.FieldDateTime" },
+            { FieldType.Calculated, "SP.FieldCalculated" },
+            { FieldType.Guid, "SP.FieldGuid" },
+            { FieldType.URL, "SP.FieldUrl" },
+            { FieldType.User, "SP.FieldUser" },
+            { FieldType.Lookup, "SP.FieldLookup" },
+            // TODO Double-check mapping
+            //{ FieldType.Computed, "SP.FieldComputed" },
+            //{ FieldType.Geolocation, "SP.FieldGeolocation" },
+            //{ FieldType.Location, "SP.FieldLocation" },
+            //{ FieldType.Thumbnail, "SP.FieldThumbnail" },
+            //{ FieldType.Boolean, "SP.FieldNumber" }
             // TODO Continue here...
         };
 
