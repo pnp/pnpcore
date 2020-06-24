@@ -46,7 +46,7 @@ namespace PnP.Core.Model.SharePoint
                 // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
                 // automatically provide the correct 'parent'
                 // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
-                var entity = EntityManager.Instance.GetClassInfo<IField>(GetType(), this);
+                var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
 
                 string endpointUrl = entity.SharePointGet;
                 dynamic addParameters = null;

@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Paging support for Graph/Rest #3 [jansenbe - Bert Jansen]
 - Added Clone method on PnPContext #49 [jansenbe - Bert Jansen]
 - Extend the domain model for Web/Site Feature support #62 [pkbullock - Paul Bullock]
+- Extend SP Field model (add operation for each field type) #71 [ypcode - Yannick Plennevaux]
 
 ### Changed
 

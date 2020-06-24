@@ -1,6 +1,4 @@
-﻿using PnP.Core.QueryModel.Model;
-using PnP.Core.Services;
-using PnP.Core.Utilities;
+﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

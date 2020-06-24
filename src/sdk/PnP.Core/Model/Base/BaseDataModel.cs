@@ -25,7 +25,7 @@ namespace PnP.Core.Model
     /// Delegate for requesting the Api call for doing an ADD operation
     /// </summary>
     /// <returns>API call for adding a model entity</returns>
-    internal delegate ApiCall AddApiCall(Dictionary<string, object> keyValuePairs = null);
+    internal delegate ApiCall AddApiCall(Dictionary<string, object> additionalInformation = null);
 
     /// <summary>
     /// Delegate for overriding the default API call in case of a GET request
