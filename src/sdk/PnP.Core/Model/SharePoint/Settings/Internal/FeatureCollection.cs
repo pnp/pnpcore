@@ -1,16 +1,10 @@
 ﻿using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    /// <summary>
-    /// 
-    /// </summary>
     internal partial class FeatureCollection
     {
         public async Task DisableAsync(Guid id)
@@ -22,17 +16,17 @@ namespace PnP.Core.Model.SharePoint
 
             if (!this.items.Any(o => o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "Feature not activated");
+                throw new ArgumentOutOfRangeException(nameof(id), "Feature was not activated, nothing to deactive");
             }
 
             var feature = this.items.FirstOrDefault(o => o.DefinitionId == id);
 
-            if(feature != default)
+            if (feature != default)
             {
                 var ftr = feature as Feature;
                 await ftr.RemoveAsync().ConfigureAwait(false);
                 this.items.Remove(feature);
-            }            
+            }
         }
 
         public void Disable(Guid id)
@@ -49,7 +43,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (!this.items.Any(o => o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "Feature not activated");
+                throw new ArgumentOutOfRangeException(nameof(id), "Feature was not activated, nothing to deactive");
             }
 
             var feature = this.items.FirstOrDefault(o => o.DefinitionId == id);
@@ -62,11 +56,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        /// <summary>
-        /// Enabled a feature within the site or web
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<IFeature> EnableAsync(Guid id)
         {
             if (id == null)
@@ -76,7 +65,7 @@ namespace PnP.Core.Model.SharePoint
 
             if(this.items.Any(o=>o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "Feature already activated");
+                throw new ArgumentOutOfRangeException(nameof(id), "Feature was already activated");
             }
 
             var feature = CreateNewAndAdd() as Feature;
@@ -100,7 +89,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (this.items.Any(o => o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "Feature already activated");
+                throw new ArgumentOutOfRangeException(nameof(id), "Feature was already activated");
             }
 
             var feature = CreateNewAndAdd() as Feature;

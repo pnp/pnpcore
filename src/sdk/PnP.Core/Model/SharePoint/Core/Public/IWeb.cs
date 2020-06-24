@@ -144,6 +144,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IWebCollection Webs { get; }
 
+        /// <summary>
+        /// Collection of features enabled for the web
+        /// </summary>
         public IFeatureCollection Features { get; }
     }
 }

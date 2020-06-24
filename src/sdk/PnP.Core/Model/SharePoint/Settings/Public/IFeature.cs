@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
-    /// 
+    /// Represents a Feature in SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Feature))]
     public interface IFeature : IDataModel<IFeature>
@@ -15,6 +13,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Guid DefinitionId { get; }
 
+        /// <summary>
+        /// The name of the feature
+        /// </summary>
         public string DisplayName { get; }
     }
 }

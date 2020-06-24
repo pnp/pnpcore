@@ -24,6 +24,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Tweaking and updating of the writing tests documentation #65 [pkbullock - Paul Bullock]
 - Paging support for Graph/Rest #3 [jansenbe - Bert Jansen]
 - Added Clone method on PnPContext #49 [jansenbe - Bert Jansen]
+- Extend the domain model for Web/Site Feature support #62 [pkbullock - Paul Bullock]
 
 ### Changed
 

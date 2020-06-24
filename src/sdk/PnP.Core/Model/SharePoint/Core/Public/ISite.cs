@@ -52,6 +52,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IWebCollection AllWebs { get; }
 
+        /// <summary>
+        /// Collection of features enabled for the site
+        /// </summary>
         public IFeatureCollection Features { get; }
     }
 }

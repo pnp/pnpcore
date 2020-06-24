@@ -1,9 +1,5 @@
 ﻿using PnP.Core.Services;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -15,24 +11,18 @@ namespace PnP.Core.Model.SharePoint
     internal partial class Feature
     {
 
-        // Add Feature
-
-        // Get Feature
-
-        // Remove Feature
-
         public Feature()
         {
             AddApiCallHandler = (keyValuePairs) =>
             {
-                var entity = EntityManager.Instance.GetClassInfo<IFeature>(GetType(), this);
+                var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
                 return new ApiCall($"{entity.SharePointGet}/add(guid'{DefinitionId}')", ApiType.SPORest, null);
             };
         }
 
         public async Task RemoveAsync()
         {
-            var entity = EntityManager.Instance.GetClassInfo<IFeature>(GetType(), this);
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
             var apiCall = new ApiCall($"{entity.SharePointGet}/remove(guid'{DefinitionId}')", ApiType.SPORest);
 
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
