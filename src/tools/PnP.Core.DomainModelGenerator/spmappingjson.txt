@@ -1,0 +1,29 @@
+﻿{
+  "provider": "SPO",
+  "edmxNamespace": "http://schemas.microsoft.com/ado/2007/06/edmx",
+  "schemaNamespace": "http://schemas.microsoft.com/ado/2009/11/edm",
+  "locations": [
+    {
+      "schemaNamespace": "SP",
+      "namespace": "PnP.Core.Model.SharePoint",
+      "folder": "/SP"
+    },
+    {
+      "schemaNamespace": "Microsoft.SharePoint.Portal",
+      "namespace": "PnP.Core.Model.SharePoint",
+      "folder": "/Microsoft.SharePoint.Portal"
+    }
+  ]
+  //"excludedTypes": [
+  //  {
+  //    "type": "SP.Web",
+  //    "properties": [
+  //      "AllowAutomaticASPXPageIndexing",
+  //      "ClassicWelcomePage"
+  //    ]
+  //  },
+  //  {
+  //    "type": "T2"
+  //  }
+  //]
+}

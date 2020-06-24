@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PnP.M365.DomainModelGenerator
@@ -16,19 +15,31 @@ namespace PnP.M365.DomainModelGenerator
     /// </summary>
     internal class CodeGenerator : ICodeGenerator
     {
+        static readonly string ModelClassGenInternal = "Model.Class.Gen.Internal.txt";
         static readonly string ModelClassInternal = "Model.Class.Internal.txt";
+        static readonly string ModelClassPublic = "Model.Class.Public.txt";
+        static readonly string ModelCollectionGenInternal = "Model.Collection.Gen.Internal.txt";
+        static readonly string ModelCollectionInternal = "Model.Collection.Internal.txt";
+        static readonly string ModelCollectionPublic = "Model.Collection.Public.txt";
         static readonly string TypeKey = "%%Type%%";
+        static readonly string RestTypeKey = "%%RestType%%";
         static readonly string NamespaceKey = "%%Namespace%%";
         static readonly string PropertiesKey = "%%Properties%%";
 
         static readonly string ModelPropertyInternal = "Model.Property.Internal.txt";
+        static readonly string ModelKeyPropertyInternal = "Model.KeyProperty.Internal.txt";
+        static readonly string ModelPropertyPublic = "Model.Property.Public.txt";
         static readonly string ModelNavigationCollectionPropertyInternal = "Model.NavigationCollectionProperty.Internal.txt";
         static readonly string ModelNavigationPropertyInternal = "Model.NavigationProperty.Internal.txt";
         static readonly string PropertyAttributesKey = "%%PropertyAttributes%%";
         static readonly string PropertyTypeKey = "%%PropertyType%%";
         static readonly string PropertyNameKey = "%%PropertyName%%";
         static readonly string CollectionNameKey = "%%CollectionName%%";
+        static readonly string CollectionTypeNameKey = "%%CollectionTypeName%%";
         static readonly string NavigationTypeKey = "%%NavigationType%%";
+        static readonly string PropertyGetSetKey = "%%PropertyGetSet%%";
+        static readonly string KeyPropertyNameKey = "%%KeyPropertyName%%";
+        static readonly string KeyPropertyValueKey = "%%KeyPropertyValue%%";
 
         static readonly string ModelPropertyAttribute = "Model.Property.Attribute.txt";
         static readonly string AttributeNameKey = "%%AttributeName%%";
@@ -37,6 +48,16 @@ namespace PnP.M365.DomainModelGenerator
 
         private readonly CodeGeneratorOptions options;
         private readonly ILogger log;
+        private Dictionary<string, CollectionInformation> neededCollections = new Dictionary<string, CollectionInformation>();
+
+        internal class CollectionInformation
+        {
+            public string Name { get; set; }
+            public string Namespace { get; set; }
+            public string Folder { get; set; }
+            public string ModelType { get; set; }
+        }
+
 
         public CodeGenerator(
             IOptionsMonitor<CodeGeneratorOptions> options,
@@ -61,8 +82,7 @@ namespace PnP.M365.DomainModelGenerator
             {
                 if (!e.Skip)
                 {
-                    GenerateClassFile(e);
-                    //GenerateInterfaceFile(e);
+                    GenerateModelFiles(e);
                 }
                 else
                 {
@@ -70,48 +90,102 @@ namespace PnP.M365.DomainModelGenerator
                 }
             }
 
+            // Creating collection files
+            if (neededCollections.Any())
+            {
+                foreach(var collection in neededCollections)
+                {
+                    GenerateModelCollectionFiles(collection.Value);
+                }
+            }
+
             log.LogInformation("Processed model.");
         }
 
-        private void GenerateClassFile(UnifiedModelEntity entity)
+        private void GenerateModelCollectionFiles(CollectionInformation collectionInformation)
         {
-            var impl = entity.AnalyzedModelType.Implementation;
+            var classFileGen = LoadFile(ModelCollectionGenInternal);
+            var classFile = LoadFile(ModelCollectionInternal);
+            var interfaceFile = LoadFile(ModelCollectionPublic);
+
+            Replace(ref classFileGen, NamespaceKey, collectionInformation.Namespace);
+            Replace(ref classFile, NamespaceKey, collectionInformation.Namespace);
+            Replace(ref interfaceFile, NamespaceKey, collectionInformation.Namespace);
+
+            Replace(ref classFileGen, CollectionNameKey, collectionInformation.Name);
+            Replace(ref classFile, CollectionNameKey, collectionInformation.Name);
+            Replace(ref interfaceFile, CollectionNameKey, collectionInformation.Name);
+
+            Replace(ref classFileGen, CollectionTypeNameKey, collectionInformation.ModelType);
+            Replace(ref interfaceFile, CollectionTypeNameKey, collectionInformation.ModelType);
+
+            SaveFile(classFileGen, $"{collectionInformation.Name}.gen.cs", collectionInformation.Folder, false);
+            SaveFile(classFile, $"{collectionInformation.Name}.cs", collectionInformation.Folder, false);
+            SaveFile(interfaceFile, $"I{collectionInformation.Name}.cs", collectionInformation.Folder, true);
+        }
+
+
+        private void GenerateModelFiles(UnifiedModelEntity entity)
+        {
+            var classFileGen = LoadFile(ModelClassGenInternal);
             var classFile = LoadFile(ModelClassInternal);
+            var interfaceFile = LoadFile(ModelClassPublic);
+
+            Replace(ref classFileGen, TypeKey, entity.TypeName);
+            Replace(ref classFileGen, NamespaceKey, entity.Namespace);
             Replace(ref classFile, TypeKey, entity.TypeName);
             Replace(ref classFile, NamespaceKey, entity.Namespace);
+            Replace(ref classFile, RestTypeKey, entity.SPRestType);
+            Replace(ref interfaceFile, TypeKey, entity.TypeName);
+            Replace(ref interfaceFile, NamespaceKey, entity.Namespace);
 
-            var splitExistingProperties = SplitExistingPropertiesBasedUponAttribute(impl);
+            Tuple<List<PropertyDefinition>, List<PropertyDefinition>> splitExistingPropertiesImplementation = null;
+            if (entity.AnalyzedModelType != null && entity.AnalyzedModelType.Implementation != null)
+            {
+                splitExistingPropertiesImplementation = SplitExistingPropertiesBasedUponAttribute(entity.AnalyzedModelType.Implementation);
+            }
 
-            Tuple<List<UnifiedModelProperty>, List<UnifiedModelProperty>> orderedProperties = OrderProperties(entity, splitExistingProperties.Item1, splitExistingProperties.Item2);
+            Tuple<List<PropertyDefinition>, List<PropertyDefinition>> splitExistingPropertiesInterface = null;
+            if (entity.AnalyzedModelType != null && entity.AnalyzedModelType.Public != null)
+            {
+                splitExistingPropertiesInterface = SplitExistingPropertiesBasedUponAttribute(entity.AnalyzedModelType.Public);
+            }
 
-            StringBuilder propertiesString = new StringBuilder();
+            Tuple<List<UnifiedModelProperty>, List<UnifiedModelProperty>> orderedPropertiesImplementation = OrderProperties(entity, splitExistingPropertiesImplementation?.Item1, splitExistingPropertiesImplementation?.Item2);
+            Tuple<List<UnifiedModelProperty>, List<UnifiedModelProperty>> orderedPropertiesInterface = OrderProperties(entity, splitExistingPropertiesInterface?.Item1, splitExistingPropertiesInterface?.Item2);
 
-            propertiesString.AppendLine("        #region Existing properties");
-            propertiesString.AppendLine();
+            StringBuilder classPropertiesString = new StringBuilder();
+            StringBuilder interfacePropertiesString = new StringBuilder();
 
-            foreach (var property in orderedProperties.Item1)
+            if (orderedPropertiesImplementation.Item1.Any())
+            {
+                classPropertiesString.AppendLine("        #region Existing properties");
+                classPropertiesString.AppendLine();
+            }
+
+            if (orderedPropertiesInterface.Item1.Any())
+            {
+                interfacePropertiesString.AppendLine("        #region Existing properties");
+                interfacePropertiesString.AppendLine();
+            }
+
+            foreach (var property in orderedPropertiesImplementation.Item1)
             {
                 if (!property.Skip)
                 {
-                    AddPropertyToClassFile(entity, splitExistingProperties.Item1, splitExistingProperties.Item2, propertiesString, property);
-
+                    AddPropertyToClassFile(entity, splitExistingPropertiesImplementation?.Item1, splitExistingPropertiesImplementation?.Item2, classPropertiesString, property);
                 }
                 else
                 {
                     log.LogInformation($"Property {property.Name} was skipped");
                 }
             }
-            propertiesString.AppendLine("        #endregion");
-            propertiesString.AppendLine();
-            propertiesString.AppendLine("        #region New properties");
-            propertiesString.AppendLine();
 
-            foreach (var property in orderedProperties.Item2)
+            foreach (var property in orderedPropertiesInterface.Item1)
             {
                 if (!property.Skip)
                 {
-                    AddPropertyToClassFile(entity, splitExistingProperties.Item1, splitExistingProperties.Item2, propertiesString, property);
-
+                    AddPropertyToInterfaceFile(entity, splitExistingPropertiesInterface?.Item1, splitExistingPropertiesInterface?.Item2, interfacePropertiesString, property);
                 }
                 else
                 {
@@ -119,13 +193,178 @@ namespace PnP.M365.DomainModelGenerator
                 }
             }
 
-            propertiesString.AppendLine("        #endregion");
+            if (orderedPropertiesImplementation.Item1.Any())
+            {
+                classPropertiesString.AppendLine("        #endregion");
+                classPropertiesString.AppendLine();
+            }
 
-            // Handle the Key property
+            classPropertiesString.AppendLine("        #region New properties");
+            classPropertiesString.AppendLine();
 
-            Replace(ref classFile, PropertiesKey, propertiesString.ToString());
+            if (orderedPropertiesInterface.Item1.Any())
+            {
+                interfacePropertiesString.AppendLine("        #endregion");
+                interfacePropertiesString.AppendLine();
+            }
 
-            SaveFile(classFile, $"{entity.TypeName}.gen.cs", entity.Folder, false);
+            interfacePropertiesString.AppendLine("        #region New properties");
+            interfacePropertiesString.AppendLine();
+
+            foreach (var property in orderedPropertiesImplementation.Item2)
+            {
+                if (!property.Skip)
+                {
+                    AddPropertyToClassFile(entity, splitExistingPropertiesImplementation?.Item1, splitExistingPropertiesImplementation?.Item2, classPropertiesString, property);
+                }
+                else
+                {
+                    log.LogInformation($"Property {property.Name} was skipped");
+                }
+            }
+
+            foreach (var property in orderedPropertiesInterface.Item2)
+            {
+                if (!property.Skip)
+                {
+                    AddPropertyToInterfaceFile(entity, splitExistingPropertiesInterface?.Item1, splitExistingPropertiesInterface?.Item2, interfacePropertiesString, property);
+                }
+                else
+                {
+                    log.LogInformation($"Property {property.Name} was skipped");
+                }
+            }
+
+            classPropertiesString.AppendLine("        #endregion");
+            interfacePropertiesString.AppendLine("        #endregion");
+
+            AddKeyPropertyToClassFile(entity, splitExistingPropertiesImplementation?.Item1, classPropertiesString);
+
+            Replace(ref classFileGen, PropertiesKey, classPropertiesString.ToString());
+            Replace(ref interfaceFile, PropertiesKey, interfacePropertiesString.ToString());
+
+            SaveFile(classFileGen, $"{entity.TypeName}.gen.cs", entity.Folder, false);
+            SaveFile(classFile, $"{entity.TypeName}.cs", entity.Folder, false);
+            SaveFile(interfaceFile, $"I{entity.TypeName}.cs", entity.Folder, true);
+        }
+
+        private void AddKeyPropertyToClassFile(UnifiedModelEntity entity, List<PropertyDefinition> withAttributes, StringBuilder propertiesString)
+        {
+            string keyPropertyField = "";
+            string keyPropertyType = "";
+            //if (withAttributes != null)
+            //{
+            //    bool found = false;
+            //    foreach (var existingProperty in withAttributes)
+            //    {
+            //        if (found)
+            //        {
+            //            break;
+            //        }
+
+            //        var attributesToCheck = existingProperty.CustomAttributes.Where(p => p.AttributeType.Name == "KeyPropertyAttribute");
+            //        foreach (var attributeToCheck in attributesToCheck)
+            //        {
+            //            if (attributeToCheck.HasConstructorArguments)
+            //            {
+            //                keyPropertyField = attributeToCheck.ConstructorArguments[0].Value.ToString();
+            //                keyPropertyType = ShortenType(attributeToCheck.ConstructorArguments[0].Type.Name);
+            //                found = true;
+            //            }
+            //        }
+            //    }
+            //}
+
+            if (string.IsNullOrEmpty(keyPropertyField))
+            {
+                var property = entity.Properties.FirstOrDefault(p => p.Name == "Id");
+                if (property == null)
+                {
+                    property = entity.Properties.FirstOrDefault(p => p.Name == "StringId");
+                }
+
+                if (property != null)
+                {
+                    keyPropertyField = property.Name;
+                    keyPropertyType = ShortenType(property.Type);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(keyPropertyField))
+            {
+                var keyProperty = LoadFile(ModelKeyPropertyInternal);
+                Replace(ref keyProperty, KeyPropertyNameKey, keyPropertyField);
+
+                if (keyPropertyType == "Guid")
+                {
+                    Replace(ref keyProperty, KeyPropertyValueKey, "Guid.Parse(value.ToString())");
+                }
+                else if (keyPropertyType == "string")
+                {
+                    Replace(ref keyProperty, KeyPropertyValueKey, "value.ToString()");
+                }
+                else if (keyPropertyType == "int" || keyPropertyType == "Int32" || keyPropertyType == "Int64")
+                {
+                    Replace(ref keyProperty, KeyPropertyValueKey, "(int)value");
+                }
+
+                propertiesString.AppendLine(keyProperty);
+            }
+        }
+
+        private void AddPropertyToInterfaceFile(UnifiedModelEntity entity, List<PropertyDefinition> withAttributes, List<PropertyDefinition> withoutAttributes, StringBuilder propertiesString, UnifiedModelProperty property)
+        {
+            this.log.LogInformation($"Processing property '{property.Name}' of type '{entity.TypeName}'");
+
+            string propertyToAdd = LoadFile(ModelPropertyPublic);
+
+            if (property.NavigationPropertyIsCollection)
+            {
+                Replace(ref propertyToAdd, PropertyTypeKey, $"I{RestTypeToCollectionName(property.Type)}");
+            }
+            else if (property.NavigationProperty)
+            {
+                Replace(ref propertyToAdd, PropertyTypeKey, $"I{RestTypeToNavigationTypeName(property.Type)}");
+            }
+            else
+            {
+                Replace(ref propertyToAdd, PropertyTypeKey, ShortenType(property.Type));
+            }
+
+            if (withAttributes != null || withoutAttributes != null)
+            {
+                // Add attributes which where already defined previously
+                var matchingProperty = withAttributes != null ? FindMatchingPropertyBasedUponAttributes(withAttributes, "SharePointPropertyAttribute", property) : null;
+                if (matchingProperty == null)
+                {
+                    // Do we have match on the attribute usage properties based upon name (not all properties have the SharePointPropertyAttribute)
+                    matchingProperty = withAttributes != null ? withAttributes.FirstOrDefault(p => p.Name == property.Name) : null;
+                }
+
+                if (matchingProperty == null)
+                {
+                    matchingProperty = withoutAttributes != null ? withoutAttributes.FirstOrDefault(p => p.Name == property.Name) : null;
+                }
+
+                if (matchingProperty != null)
+                {
+                    Replace(ref propertyToAdd, PropertyNameKey, matchingProperty.Name);
+                    Replace(ref propertyToAdd, PropertyGetSetKey, property.NavigationProperty ? "get;" : PropertyDefinitionToGetSet(matchingProperty));
+                }
+                else
+                {
+                    Replace(ref propertyToAdd, PropertyNameKey, property.Name);
+                    Replace(ref propertyToAdd, PropertyGetSetKey, property.NavigationProperty ? "get;" : "get; set;");
+                }
+            }
+            else
+            {
+                Replace(ref propertyToAdd, PropertyNameKey, property.Name);
+                Replace(ref propertyToAdd, PropertyGetSetKey, property.NavigationProperty ? "get;" : "get; set;");
+            }
+
+            propertiesString.AppendLine(propertyToAdd);
+            propertiesString.AppendLine();
         }
 
         private void AddPropertyToClassFile(UnifiedModelEntity entity, List<PropertyDefinition> withAttributes, List<PropertyDefinition> withoutAttributes, StringBuilder propertiesString, UnifiedModelProperty property)
@@ -155,7 +394,8 @@ namespace PnP.M365.DomainModelGenerator
 
             if (property.NavigationPropertyIsCollection)
             {
-                Replace(ref propertyToAdd, CollectionNameKey, RestTypeToCollectionName(property.Type));
+                var collectionName = RestTypeToCollectionName(property.Type);
+                Replace(ref propertyToAdd, CollectionNameKey, collectionName);
             }
             else if (property.NavigationProperty)
             {
@@ -164,14 +404,14 @@ namespace PnP.M365.DomainModelGenerator
 
             string propertyAttributesString = "";
             bool navigationPropertyAttributesAdded = false;
-            if (withAttributes.Any() || withoutAttributes.Any())
+            if (withAttributes != null || withoutAttributes != null)
             {
                 // Add attributes which where already defined previously
-                var matchingProperty = FindMatchingPropertyBasedUponAttributes(withAttributes, "SharePointPropertyAttribute", property);
+                var matchingProperty = withAttributes != null ? FindMatchingPropertyBasedUponAttributes(withAttributes, "SharePointPropertyAttribute", property) : null;
                 if (matchingProperty == null)
                 {
                     // Do we have match on the attribute usage properties based upon name (not all properties have the SharePointPropertyAttribute)
-                    matchingProperty = withAttributes.FirstOrDefault(p => p.Name == property.Name);
+                    matchingProperty = withAttributes != null ? withAttributes.FirstOrDefault(p => p.Name == property.Name) : null;
                 }    
 
                 if (matchingProperty != null)
@@ -188,15 +428,18 @@ namespace PnP.M365.DomainModelGenerator
                     }
 
                     Replace(ref propertyToAdd, PropertyNameKey, matchingProperty.Name);
+                    AddCollectionToGenerate(entity, property);
                 }
                 else
                 {
                     Replace(ref propertyToAdd, PropertyNameKey, property.Name);
+                    AddCollectionToGenerate(entity, property);
                 }
             }
             else
             {
                 Replace(ref propertyToAdd, PropertyNameKey, property.Name);
+                AddCollectionToGenerate(entity, property);
             }
 
             if (!navigationPropertyAttributesAdded)
@@ -221,6 +464,31 @@ namespace PnP.M365.DomainModelGenerator
             propertiesString.AppendLine();
         }
 
+        private void AddCollectionToGenerate(UnifiedModelEntity entity, UnifiedModelProperty property)
+        {
+            if (property.NavigationPropertyIsCollection)
+            {
+                var collectionName = RestTypeToCollectionName(property.Type);
+                var collectionKey = $"{entity.Namespace}.{collectionName}";
+                if (!neededCollections.ContainsKey(collectionKey))
+                {
+                    neededCollections.Add(collectionKey, new CollectionInformation() { Name = collectionName, ModelType = RestTypeToNavigationTypeName(property.Type), Namespace = entity.Namespace, Folder = entity.Folder });
+                }
+            }
+        }
+
+        private string PropertyDefinitionToGetSet(PropertyDefinition propertyDefinition)
+        {
+            if (propertyDefinition.SetMethod != null)
+            {
+                return "get; set;";
+            }
+            else
+            {
+                return "get;";
+            }
+        }
+
         private Tuple<List<UnifiedModelProperty>, List<UnifiedModelProperty>> OrderProperties(UnifiedModelEntity entity, List<PropertyDefinition> withAttributes, List<PropertyDefinition> withoutAttributes)
         {
             List<UnifiedModelProperty> existingProperties = new List<UnifiedModelProperty>();
@@ -228,25 +496,32 @@ namespace PnP.M365.DomainModelGenerator
 
             foreach (var property in entity.Properties)
             {
-                // Try to match based upon attribute usage
-                // e.g. Id edmx you have property Description
-                //      In code you have property DisplayName decorated with [SharePointType("Description")] 
-                var matchingProperty = FindMatchingPropertyBasedUponAttributes(withAttributes, "SharePointPropertyAttribute", property);
-                if (matchingProperty == null)
+                if (withAttributes != null || withoutAttributes != null)
                 {
-                    // Do we have match on the attribute usage properties based upon name (not all properties have the SharePointPropertyAttribute)
-                    matchingProperty = withAttributes.FirstOrDefault(p => p.Name == property.Name);
-
+                    // Try to match based upon attribute usage
+                    // e.g. Id edmx you have property Description
+                    //      In code you have property DisplayName decorated with [SharePointType("Description")]                     
+                    var matchingProperty = withAttributes != null ? FindMatchingPropertyBasedUponAttributes(withAttributes, "SharePointPropertyAttribute", property) : null;
                     if (matchingProperty == null)
                     {
-                        // Do we have a regular property?
-                        matchingProperty = withoutAttributes.FirstOrDefault(p => p.Name == property.Name);
-                    }
-                }
+                        // Do we have match on the attribute usage properties based upon name (not all properties have the SharePointPropertyAttribute)
+                        matchingProperty = withAttributes != null ? withAttributes.FirstOrDefault(p => p.Name == property.Name) : null;
 
-                if (matchingProperty != null)
-                {
-                    existingProperties.Add(property);
+                        if (matchingProperty == null)
+                        {
+                            // Do we have a regular property?
+                            matchingProperty = withoutAttributes != null ? withoutAttributes.FirstOrDefault(p => p.Name == property.Name) : null;
+                        }
+                    }
+
+                    if (matchingProperty != null)
+                    {
+                        existingProperties.Add(property);
+                    }
+                    else
+                    {
+                        newProperties.Add(property);
+                    }
                 }
                 else
                 {

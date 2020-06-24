@@ -1,16 +1,30 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
+using PnP.Core.Services;
 
 namespace %%Namespace%%
 {
     /// <summary>
-    /// Internal class representing a %%Type%% object
-    /// 
-    /// Note: this class is generated, please don't modify this code by hand!
-    /// 
+    /// %%Type%% class, write your custom code here
     /// </summary>
-    internal partial class %%Type%% : BaseDataModel<I%%Type%%>, I%%Type%%
+    [SharePointType("%%RestType%%", Uri = "_api/xxx", LinqGet = "_api/xxx")]
+    internal partial class %%Type%%
     {
-
-%%Properties%%
+        public %%Type%%()
+        {
+            //MappingHandler = (FromJson input) =>
+            //{
+                //// implement custom mapping logic
+                //switch (input.TargetType.Name)
+                //{
+                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
+                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
+                //}
+                //
+                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
+                //
+                //return null;
+            //};
+        }
     }
 }

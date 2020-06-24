@@ -1,0 +1,17 @@
+﻿using PnP.Core.QueryModel.Model;
+using PnP.Core.Services;
+
+namespace %%Namespace%%
+{
+    /// <summary>
+    /// Collection of %%CollectionTypeName%% Domain Model objects
+    /// </summary>
+    internal partial class %%CollectionName%% : QueryableDataModelCollection<I%%CollectionTypeName%%>, I%%CollectionName%%
+    {
+        public %%CollectionName%%(PnPContext context, IDataModelParent parent) : base(context, parent)
+        {
+            this.PnPContext = context;
+            this.Parent = parent;
+        }
+    }
+}

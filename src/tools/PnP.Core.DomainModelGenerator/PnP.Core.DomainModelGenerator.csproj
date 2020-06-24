@@ -7,19 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CodeGenerator\Templates\Model.Class.Gen.Internal.txt" />
     <None Remove="CodeGenerator\Templates\Model.Class.Internal.txt" />
+    <None Remove="CodeGenerator\Templates\Model.Class.Public.txt" />
+    <None Remove="CodeGenerator\Templates\Model.Collection.Gen.Internal.txt" />
+    <None Remove="CodeGenerator\Templates\Model.Collection.Internal.txt" />
+    <None Remove="CodeGenerator\Templates\Model.Collection.Public.txt" />
+    <None Remove="CodeGenerator\Templates\Model.KeyProperty.Internal.txt" />
     <None Remove="CodeGenerator\Templates\Model.NavigationCollectionProperty.Internal.txt" />
     <None Remove="CodeGenerator\Templates\Model.NavigationProperty.Internal.txt" />
     <None Remove="CodeGenerator\Templates\Model.Property.Attribute.txt" />
     <None Remove="CodeGenerator\Templates\Model.Property.Internal.txt" />
+    <None Remove="CodeGenerator\Templates\Model.Property.Public.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="CodeGenerator\Templates\Model.Class.Gen.Internal.txt" />
     <EmbeddedResource Include="CodeGenerator\Templates\Model.Class.Internal.txt" />
+    <EmbeddedResource Include="CodeGenerator\Templates\Model.Class.Public.txt" />
+    <EmbeddedResource Include="CodeGenerator\Templates\Model.Collection.Gen.Internal.txt" />
+    <EmbeddedResource Include="CodeGenerator\Templates\Model.Collection.Internal.txt" />
+    <EmbeddedResource Include="CodeGenerator\Templates\Model.Collection.Public.txt" />
+    <EmbeddedResource Include="CodeGenerator\Templates\Model.KeyProperty.Internal.txt" />
 	<EmbeddedResource Include="CodeGenerator\Templates\Model.NavigationCollectionProperty.Internal.txt" />
 	<EmbeddedResource Include="CodeGenerator\Templates\Model.NavigationProperty.Internal.txt" />
 	<EmbeddedResource Include="CodeGenerator\Templates\Model.Property.Attribute.txt" />
     <EmbeddedResource Include="CodeGenerator\Templates\Model.Property.Internal.txt" />
+    <EmbeddedResource Include="CodeGenerator\Templates\Model.Property.Public.txt" />
   </ItemGroup>
 
   <ItemGroup>

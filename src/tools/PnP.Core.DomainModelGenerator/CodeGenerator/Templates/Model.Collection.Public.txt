@@ -1,0 +1,11 @@
+﻿using System.Linq;
+
+namespace %%Namespace%%
+{
+    /// <summary>
+    /// Public interface to define a collection of %%CollectionTypeName%% objects
+    /// </summary>
+    public interface I%%CollectionName%% : IQueryable<I%%CollectionTypeName%%>, IDataModelCollection<I%%CollectionTypeName%%>
+    {
+    }
+}

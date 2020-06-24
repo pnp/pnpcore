@@ -6,19 +6,12 @@
     {
       "schemaNamespace": "SP",
       "namespace": "PnP.Core.Model.SharePoint",
-      "folder": "/SharePoint"
-    }
-  ],
-  "excludedTypes": [
-    {
-      "type": "SP.Web",
-      "properties": [
-        "AllowAutomaticASPXPageIndexing",
-        "ClassicWelcomePage"
-      ]
+      "folder": "/SP"
     },
     {
-      "type": "T2"
+      "schemaNamespace": "Microsoft.SharePoint.Portal",
+      "namespace": "PnP.Core.Model.SharePoint",
+      "folder": "/Microsoft.SharePoint.Portal"
     }
   ]
 }

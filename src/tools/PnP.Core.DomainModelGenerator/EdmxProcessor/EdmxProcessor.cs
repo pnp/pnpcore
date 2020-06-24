@@ -185,22 +185,28 @@ namespace PnP.M365.DomainModelGenerator
             Dictionary<string, AnalyzedModelType> analyzedModelTypes = new Dictionary<string, AnalyzedModelType>();
             var edmxDocument = edmxDocumentInfo.Value;
 
-            // Get information about the current code implementation
             foreach (var location in mapping.Locations)
             {
-                var analyzedTypes = await codeAnalyzer.ProcessNamespace(location);
-                analyzedTypes.ToList().ForEach(x => analyzedModelTypes.Add(x.Key, x.Value));
-
                 // Combine code information with information from the metadata into a model that will be used to drive code generation
                 var edmxNamespace = (XNamespace)mapping.EdmxNamespace;
                 var schemaNamespace = (XNamespace)mapping.SchemaNamespace;
+
+                // Get information about the current code implementation
+                var analyzedTypes = await codeAnalyzer.ProcessNamespace(location);
+                analyzedTypes.ToList().ForEach(x => 
+                {
+                    if (!analyzedModelTypes.ContainsKey(x.Key))
+                    {
+                        analyzedModelTypes.Add(x.Key, x.Value);
+                    }
+                });
 
                 // Now process the properties from the EDMX providers
                 var providerSchemaElements = edmxDocument.Descendants(schemaNamespace + "Schema").Where(e => e.Attribute("Namespace")?.Value == location.SchemaNamespace);
                 foreach (var providerSchemaElement in providerSchemaElements)
                 {
-                    var providerEntities = providerSchemaElement.Elements(schemaNamespace + "EntityType").Where(e => e.Attribute("Name")?.Value == "Web");
-                    //var providerEntities = providerSchemaElement.Elements(schemaNamespace + "EntityType");
+                    //var providerEntities = providerSchemaElement.Elements(schemaNamespace + "EntityType").Where(e => e.Attribute("Name")?.Value == "Web");
+                    var providerEntities = providerSchemaElement.Elements(schemaNamespace + "EntityType");
                     foreach (var providerEntity in providerEntities)
                     {
 
@@ -299,7 +305,7 @@ namespace PnP.M365.DomainModelGenerator
                 }
 
                 // Combine with mapping file data
-                if (mapping != null)
+                if (mapping != null && mapping.ExcludedTypes != null)
                 {
                     foreach (var entityFromMapping in mapping.ExcludedTypes)
                     {
@@ -333,7 +339,7 @@ namespace PnP.M365.DomainModelGenerator
                     {
                         foreach (var spRestType in analyzedModelType.Value.SPRestTypes)
                         {
-                            var typeToUpdate = model.Entities.FirstOrDefault(p => p.SPRestType == spRestType);
+                            var typeToUpdate = model.Entities.FirstOrDefault(p => p.SPRestType == spRestType); 
                             if (typeToUpdate != null)
                             {
                                 typeToUpdate.AnalyzedModelType = analyzedModelType.Value;

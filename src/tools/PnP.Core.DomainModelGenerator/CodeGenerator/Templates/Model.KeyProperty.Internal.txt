@@ -1,0 +1,3 @@
+﻿
+        [KeyProperty("%%KeyPropertyName%%")]
+        public override object Key { get => this.%%KeyPropertyName%%; set => this.%%KeyPropertyName%% = %%KeyPropertyValue%%; }

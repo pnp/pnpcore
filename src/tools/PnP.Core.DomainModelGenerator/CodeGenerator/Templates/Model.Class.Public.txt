@@ -1,0 +1,14 @@
+﻿using System;
+
+namespace %%Namespace%%
+{
+    /// <summary>
+    /// Public interface to define a %%Type%% object
+    /// </summary>
+    [ConcreteType(typeof(%%Type%%))]
+    public interface I%%Type%% : IDataModel<I%%Type%%>, IDataModelUpdate, IDataModelDelete
+    {
+
+%%Properties%%
+    }
+}
