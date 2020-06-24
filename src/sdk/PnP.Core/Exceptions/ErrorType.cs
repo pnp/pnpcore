@@ -22,6 +22,7 @@
         InstanceWasDeleted,
         LinqError,
         ConfigurationError,
+        InvalidParameters,
 
         // Testing
         OfflineDataError,

@@ -33,9 +33,9 @@ namespace PnP.Core.Model
         }
 
 
-        internal RestBaseAdd(BaseDataModel<TModel> model, string spType) : this(model)
+        internal RestBaseAdd(string spType)
         {
-            Metadata.SpType = spType;
+            Metadata = new RestBaseAddType(spType);
         }
     }
 }

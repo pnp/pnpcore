@@ -222,9 +222,17 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or Sets the Date Format 
         /// Valid for DateTime field, Calculated field
         /// </summary>
-        public int DateFormat { get; set; }
+        public DateTimeFieldFormatType DateFormat { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the display format of the field
+        /// CAUTION: Is an integer value since according to field type, the display format enum may change
+        /// </summary>
         public int DisplayFormat { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the edit format of the field
+        /// </summary>
         public int EditFormat { get; set; }
 
         /// <summary>
@@ -233,32 +241,170 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool ShowAsPercentage { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value that specifies whether a hyperlink is allowed as a value of the field.
+        /// </summary>
+        public bool AllowHyperlink { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether all changes to the value of the field are displayed in list forms.
+        /// </summary>
+        public bool AppendOnly { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies the number of lines of text to display for the field.
+        /// </summary>
+        public int NumberOfLines { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the field supports a subset of rich formatting.
+        /// </summary>
+        public bool RestrictedMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the field supports rich formatting.
+        /// </summary>
+        public bool RichText { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the field supports unlimited length in document libraries.
+        /// </summary>
+        public bool UnlimitedLengthInDocumentLibrary { get; set; }
+
         #region Number Field
+        /// <summary>
+        /// Gets or sets the maximum value of a number field
+        /// </summary>
         public double MaximumValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets the minimum value of a number field
+        /// </summary>
         public double MinimumValue { get; set; }
         #endregion
 
         #region Calculated Field
 
+        /// <summary>
+        /// Gets or sets the formula of a calculated field
+        /// </summary>
         public string Formula { get; set; }
-        public int OutputType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of a calculated field output
+        /// </summary>
+        public FieldType OutputType { get; set; }
+        #endregion
+
+        #region Computed Field
+
+        /// <summary>
+        /// Gets or sets whether the lookup should be enabled for computed field
+        /// </summary>
+        public bool EnableLookup { get; set; }
         #endregion
 
         #region Choice Field
+
+        /// <summary>
+        /// Gets or sets whether choice field can be filled in by user
+        /// </summary>
         public bool FillInChoice { get; set; }
-        public string Mappings { get; set; }
+
+        /// <summary>
+        /// Gets the mappings of a choice field
+        /// </summary>
+        public string Mappings { get; }
+
+        /// <summary>
+        /// Gets or sets the choices of choice field
+        /// </summary>
         public string[] Choices { get; set; }
         #endregion
 
-        #region DateTime Fields
-        public int DateTimeCalendarType { get; set; }
-        public int FriendlyDisplayFormat { get; set; }
+        #region DateTime Field
+
+        /// <summary>
+        /// Gets or sets the type of calendar to use of a DateTime field
+        /// </summary>
+        public CalendarType DateTimeCalendarType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the friendly format type of a DateTime field
+        /// </summary>
+        public DateTimeFieldFriendlyFormatType FriendlyDisplayFormat { get; set; }
         #endregion
 
+        #region Lookup Field
+
+        /// <summary>
+        /// Gets or sets whether the lookup fields allows multiple values
+        /// </summary>
+        public bool AllowMultipleValues { get; set; }
+
+        /// <summary>
+        /// Gets or sets the dependent lookup internal names of a lookup field
+        /// </summary>
+        public string[] DependentLookupInternalNames { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether a lookup field is dependent lookup
+        /// </summary>
+        public bool IsDependentLookup { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether a lookup field is a relationship
+        /// </summary>
+        public bool IsRelationship { get; set; }
+
+        /// <summary>
+        /// Gets or sets the internal name of the related field
+        /// </summary>
+        public string LookupField { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Id of the related list
+        /// </summary>
+        public string LookupList { get; set; }
+
+        /// <summary>
+        /// Gets or sets the lookup web Id
+        /// </summary>
+        public Guid LookupWebId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the primary field Id of the lookup field
+        /// </summary>
+        public string PrimaryFieldId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the deletion behavior with the relationship of the lookup field
+        /// </summary>
+        public RelationshipDeleteBehaviorType RelationshipDeleteBehavior { get; set; }
+        #endregion
+
+        #region User Field
+
+        /// <summary>
+        /// Gets or sets whether to allow display if the user name
+        /// </summary>
         public bool AllowDisplay { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether to display the presence indicator of the user
+        /// </summary>
         public bool Presence { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Id of the group to which the users to select belong to
+        /// </summary>
         public int SelectionGroup { get; set; }
-        public int SelectionMode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selection mode of the user field
+        /// </summary>
+        public FieldUserSelectionMode SelectionMode { get; set; }
+        #endregion
 
         // TODO Add the following properties
         // ======= SP.FieldRatingScale ==========
@@ -270,38 +416,8 @@ namespace PnP.Core.Model.SharePoint
         //GridTextRangeHigh String
         //GridTextRangeLow String
         //RangeCount Int32
-        // ======= SP.FieldMultiLineText ==========
-        // https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.FieldMultiLineText
-        //AllowHyperlink Boolean
-        //AppendOnly Boolean
-        //NumberOfLines Int32
-        //RestrictedMode Boolean
-        //RichText Boolean
-        //UnlimitedLengthInDocumentLibrary Boolean
-        //WikiLinking Boolean
-        // ======= SP.FieldLink ==========
-        // https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.FieldLink
-        //DisplayName String
-        //FieldInternalName String
-        //Hidden Boolean
-        //Id Guid
-        //Name String
-        //ReadOnly Boolean
-        //Required Boolean
-        //ShowInDisplayForm Boolean
-        // ======= SP.FieldLookup ==========
-        // https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.FieldLookup
-        //AllowMultipleValues Boolean
-        //DependentLookupInternalNames Collection(String)
-        //IsDependentLookup Boolean
-        //IsRelationship Boolean
-        //LookupField String
-        //LookupList String
-        //LookupWebId Guid
-        //PrimaryFieldId String
-        //RelationshipDeleteBehavior Int32
-        //UnlimitedLengthInDocumentLibrary Boolean
-        // ======= SP.FieldLookup ==========
+
+        // ======= SP.Taxonomy.TaxonomyField ==========
         // https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.Taxonomy.TaxonomyField
         //AnchorId Guid
         //CreateValuesInEditForm Boolean

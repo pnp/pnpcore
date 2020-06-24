@@ -918,6 +918,17 @@ namespace PnP.Core.Services
                     {
                         return jsonElement.GetString();
                     }
+                case "System.String[]":
+                    {
+                        if (jsonElement.ValueKind != JsonValueKind.Array)
+                        {
+                            return new string[0];
+                        }
+                        else
+                        {
+                            return jsonElement.EnumerateArray().Select(item => item.GetString()).ToArray();
+                        }
+                    }
                 case "System.Boolean":
                     {
                         if (jsonElement.ValueKind == JsonValueKind.True || jsonElement.ValueKind == JsonValueKind.False)
@@ -1066,6 +1077,24 @@ namespace PnP.Core.Services
                             return jsonElement.GetUInt64();
                         }
                     }
+                case "System.Double":
+                    {
+                        if (jsonElement.ValueKind != JsonValueKind.Number)
+                        {
+                            if (double.TryParse(jsonElement.GetString(), out double doubleValue))
+                            {
+                                return doubleValue;
+                            }
+                            else
+                            {
+                                return 0.0d;
+                            }
+                        }
+                        else
+                        {
+                            return jsonElement.GetDouble();
+                        }
+                    }
                 case "System.Uri":
                     {
                         var s = jsonElement.GetString();
@@ -1203,7 +1232,7 @@ namespace PnP.Core.Services
                 if (queryString["$top"] != null && queryString["$skip"] != null)
                 {
                     // Build a url for a second, third, fourth etc page
-                    if (int.TryParse(queryString["$top"], out int top) && 
+                    if (int.TryParse(queryString["$top"], out int top) &&
                         int.TryParse(queryString["$skip"], out int skip))
                     {
                         int nextPage = (skip / top) + 1;

@@ -13,18 +13,315 @@ namespace PnP.Core.Model.SharePoint
         /// https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee540543%28v%3doffice.15%29
 
         #region Extension Methods
-        IField Add(string title, FieldType fieldType, BaseFieldAddOptions options = null);
+        /// <summary>
+        /// Adds a new field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="fieldType">The type of the field to add</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField Add(string title, FieldType fieldType, FieldOptions options = null);
 
-        // TODO Add /// Summary
+        /// <summary>
+        /// Adds a new Text field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddText(string title, FieldTextOptions options = null);
 
-        IField Add(Batch batch, string title, FieldType fieldType, BaseFieldAddOptions options = null);
+        /// <summary>
+        /// Adds a new multiline Text field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddMultilineText(string title, FieldMultilineTextOptions options = null);
 
-       // TODO Add /// Summary
-        Task<IField> AddAsync(string title, FieldType fieldType, BaseFieldAddOptions options = null);
+        /// <summary>
+        /// Adds a new URL field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddUrl(string title, FieldUrlOptions options = null);
 
-        // TODO Add /// Summary
+        /// <summary>
+        /// Adds a new Number field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddNumber(string title, FieldNumberOptions options = null);
 
-        Task<IField> AddAsync(string title, string internalName, FieldType fieldType, BaseFieldAddOptions options = null);
+        /// <summary>
+        /// Adds a new DateTime field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddDateTime(string title, FieldDateTimeOptions options = null);
+
+        /// <summary>
+        /// Adds a new Calculated field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddCalculated(string title, FieldCalculatedOptions options = null);
+
+        /// <summary>
+        /// Adds a new Currency field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddCurrency(string title, FieldCurrencyOptions options = null);
+
+        /// <summary>
+        /// Adds a new MultiChoice field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddMultiChoice(string title, FieldMultiChoiceOptions options = null);
+
+        /// <summary>
+        /// Adds a new Choice field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddChoice(string title, FieldChoiceOptions options = null);
+
+        /// <summary>
+        /// Adds a new Lookup field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddLookup(string title, FieldLookupOptions options = null);
+
+        /// <summary>
+        /// Adds a new User field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddUser(string title, FieldUserOptions options = null);
+
+
+        /// <summary>
+        /// Adds a new field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="fieldType">The type of the field to add</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField Add(Batch batch, string title, FieldType fieldType, FieldOptions options = null);
+
+        /// <summary>
+        /// Adds a new Text field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddText(Batch batch, string title, FieldTextOptions options = null);
+
+        /// <summary>
+        /// Adds a new multiline Text field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddMultilineText(Batch batch, string title, FieldMultilineTextOptions options = null);
+
+        /// <summary>
+        /// Adds a new URL field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddUrl(Batch batch, string title, FieldUrlOptions options = null);
+
+        /// <summary>
+        /// Adds a new Number field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddNumber(Batch batch, string title, FieldNumberOptions options = null);
+
+        /// <summary>
+        /// Adds a new DateTime field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddDateTime(Batch batch, string title, FieldDateTimeOptions options = null);
+
+        /// <summary>
+        /// Adds a new Calculated field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddCalculated(Batch batch, string title, FieldCalculatedOptions options = null);
+
+        /// <summary>
+        /// Adds a new Currency field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddCurrency(Batch batch, string title, FieldCurrencyOptions options = null);
+
+        /// <summary>
+        /// Adds a new MultiChoice field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddMultiChoice(Batch batch, string title, FieldMultiChoiceOptions options = null);
+
+        /// <summary>
+        /// Adds a new Choice field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddChoice(Batch batch, string title, FieldChoiceOptions options = null);
+
+        /// <summary>
+        /// Adds a new Lookup field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddLookup(Batch batch, string title, FieldLookupOptions options = null);
+
+        /// <summary>
+        /// Adds a new User field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddUser(Batch batch, string title, FieldUserOptions options = null);
+
+        /// <summary>
+        /// Adds a new field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="fieldType">The type of the field to add</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddAsync(string title, FieldType fieldType, FieldOptions options = null);
+
+        /// <summary>
+        /// Adds a new Text field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddTextAsync(string title, FieldTextOptions options = null);
+
+        /// <summary>
+        /// Adds a new multiline Text field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddMultilineTextAsync(string title, FieldMultilineTextOptions options = null);
+
+        /// <summary>
+        /// Adds a new URL field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddUrlAsync(string title, FieldUrlOptions options = null);
+
+        /// <summary>
+        /// Adds a new Number field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddNumberAsync(string title, FieldNumberOptions options = null);
+
+        /// <summary>
+        /// Adds a new DateTime field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddDateTimeAsync(string title, FieldDateTimeOptions options = null);
+
+        /// <summary>
+        /// Adds a new Calculated field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddCalculatedAsync(string title, FieldCalculatedOptions options = null);
+
+        /// <summary>
+        /// Adds a new Currency field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddCurrencyAsync(string title, FieldCurrencyOptions options = null);
+
+        /// <summary>
+        /// Adds a new MultiChoice field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddMultiChoiceAsync(string title, FieldMultiChoiceOptions options = null);
+
+        /// <summary>
+        /// Adds a new Choice field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddChoiceAsync(string title, FieldChoiceOptions options = null);
+
+        /// <summary>
+        /// Adds a new Lookup field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddLookupAsync(string title, FieldLookupOptions options = null);
+
+        /// <summary>
+        /// Adds a new User field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddUserAsync(string title, FieldUserOptions options = null);
         #endregion
     }
 }

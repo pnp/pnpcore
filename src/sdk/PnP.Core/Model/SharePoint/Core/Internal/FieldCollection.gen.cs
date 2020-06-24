@@ -12,6 +12,5 @@ namespace PnP.Core.Model.SharePoint
             this.PnPContext = context;
             this.Parent = parent;
         }
-
     }
 }
