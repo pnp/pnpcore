@@ -80,6 +80,10 @@
 <h1 id="extending-the-model---step-by-step-guidance">Extending the model - step by step guidance</h1>
 
 <p>Extending the model is a very common type of work, especially in the early days of this SDK. This page will walk you through the needed steps, but before engaging it's recommended that you've read this article: <a href="readme.html">The PnP Core SDK model</a>.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>In order to speed up the model development the needed SharePoint REST model classes are for the most part pre created, these classes can be copied over and modified to suit your needs. You can find the pre-generated classes in <a href="https://github.com/pnp/pnpcore/tree/dev/src/generated">https://github.com/pnp/pnpcore/tree/dev/src/generated</a>. If you're not able to find your model classes then please create an issue in the issue list so we can update the generation logic to include those.</p>
+</div>
 <h2 id="step-1-define-the-public-model">Step 1: Define the public model</h2>
 <h3 id="step-11-create-the-interfaces">Step 1.1: Create the interface(s)</h3>
 <p>The public model is an interface and lives in the <strong>Public</strong> folder. So when extending the SharePoint model you would create the new interface in for example <code>Model\SharePoint\Core\Public</code> or in <code>Model\SharePoint\Navigation\Public</code>. If you feel there's a need to add a new sub level (e.g. Core, Navigation, etc) then you can do that. Key things to check are:</p>

@@ -1938,7 +1938,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/extending the model.html",
-          "hash": "4f62IEMsdnpYBx5GFDCCew=="
+          "hash": "dJiJbweRZF6yOinNW6sQxg=="
         }
       },
       "is_incremental": false,
@@ -2133,13 +2133,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 17,
-          "skipped_file_count": 17
+          "skipped_file_count": 16
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 151,
-          "skipped_file_count": 122
+          "skipped_file_count": 151
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
