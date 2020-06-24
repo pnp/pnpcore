@@ -2,10 +2,10 @@
 
 Extending the model is a very common type of work, especially in the early days of this SDK. This page will walk you through the needed steps, but before engaging it's recommended that you've read this article: [The PnP Core SDK model](readme.md).
 
-## Step 1: Define the public model
-
 > [!Important]
 > In order to speed up the model development the needed SharePoint REST model classes are for the most part pre created, these classes can be copied over and modified to suit your needs. You can find the pre-generated classes in https://github.com/pnp/pnpcore/tree/dev/src/generated. If you're not able to find your model classes then please create an issue in the issue list so we can update the generation logic to include those.
+
+## Step 1: Define the public model
 
 ### Step 1.1: Create the interface(s)
 
