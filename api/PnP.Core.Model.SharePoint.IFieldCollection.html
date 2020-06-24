@@ -135,23 +135,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.Add(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldType%2CPnP.Core.Model.SharePoint.BaseFieldAddOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.Add(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldType%2CPnP.Core.Model.SharePoint.FieldOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L20" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L128" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFieldCollection_Add_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.Add*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.Add(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.BaseFieldAddOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" class="expander" data-toggle="collapse">Add(Batch, String, FieldType, BaseFieldAddOptions)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.Add(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_" class="expander" data-toggle="collapse">Add(Batch, String, FieldType, FieldOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new field to the collection</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IField Add(Batch batch, string title, FieldType fieldType, BaseFieldAddOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">IField Add(Batch batch, string title, FieldType fieldType, FieldOptions options = null)</code></pre>
   </div>
   
   <h5 class="parameters">Parameters</h5>
@@ -160,28 +161,32 @@
       <td>
         <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
         <span class="parametername">batch</span>
-        <p>
+        <p><p>Batch to use</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">title</span>
-        <p>
+        <p><p>The title of the field</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldType.html">FieldType</a></span>
         <span class="parametername">fieldType</span>
-        <p>
+        <p><p>The type of the field to add</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.BaseFieldAddOptions.html">BaseFieldAddOptions</a></span>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldOptions.html">FieldOptions</a></span>
         <span class="parametername">options</span>
-        <p>
+        <p><p>The specific options for field creation</p>
+</p>
       </td>
     </tr>
   </table>
@@ -191,7 +196,8 @@
     <tr>
       <td>
         <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
-        <p>
+        <p><p>The added field</p>
+</p>
       </td>
     </tr>
   </table>
@@ -209,90 +215,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String%2CPnP.Core.Model.SharePoint.FieldType%2CPnP.Core.Model.SharePoint.BaseFieldAddOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L16" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IFieldCollection_Add_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.Add*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.BaseFieldAddOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" class="expander" data-toggle="collapse">Add(String, FieldType, BaseFieldAddOptions)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" class="collapse in">
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IField Add(string title, FieldType fieldType, BaseFieldAddOptions options = null)</code></pre>
-  </div>
-  
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">title</span>
-        <p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldType.html">FieldType</a></span>
-        <span class="parametername">fieldType</span>
-        <p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.BaseFieldAddOptions.html">BaseFieldAddOptions</a></span>
-        <span class="parametername">options</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String%2CPnP.Core.Model.SharePoint.FieldType%2CPnP.Core.Model.SharePoint.BaseFieldAddOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String%2CPnP.Core.Model.SharePoint.FieldType%2CPnP.Core.Model.SharePoint.FieldOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L23" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddAsync*"></a>
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_Add_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.Add*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.BaseFieldAddOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" class="expander" data-toggle="collapse">AddAsync(String, FieldType, BaseFieldAddOptions)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_" class="expander" data-toggle="collapse">Add(String, FieldType, FieldOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new field to the collection</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddAsync(string title, FieldType fieldType, BaseFieldAddOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">IField Add(string title, FieldType fieldType, FieldOptions options = null)</code></pre>
   </div>
   
   <h5 class="parameters">Parameters</h5>
@@ -301,21 +241,24 @@
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">title</span>
-        <p>
+        <p><p>The title of the field</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldType.html">FieldType</a></span>
         <span class="parametername">fieldType</span>
-        <p>
+        <p><p>The type of the field to add</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.BaseFieldAddOptions.html">BaseFieldAddOptions</a></span>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldOptions.html">FieldOptions</a></span>
         <span class="parametername">options</span>
-        <p>
+        <p><p>The specific options for field creation</p>
+</p>
       </td>
     </tr>
   </table>
@@ -324,8 +267,9 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
-        <p>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
       </td>
     </tr>
   </table>
@@ -343,23 +287,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldType%2CPnP.Core.Model.SharePoint.BaseFieldAddOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String%2CPnP.Core.Model.SharePoint.FieldType%2CPnP.Core.Model.SharePoint.FieldOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L236" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.BaseFieldAddOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" class="expander" data-toggle="collapse">AddAsync(String, String, FieldType, BaseFieldAddOptions)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_" class="expander" data-toggle="collapse">AddAsync(String, FieldType, FieldOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_BaseFieldAddOptions_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new field to the collection</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddAsync(string title, string internalName, FieldType fieldType, BaseFieldAddOptions options = null)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddAsync(string title, FieldType fieldType, FieldOptions options = null)</code></pre>
   </div>
   
   <h5 class="parameters">Parameters</h5>
@@ -368,28 +313,24 @@
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">title</span>
-        <p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">internalName</span>
-        <p>
+        <p><p>The title of the field</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldType.html">FieldType</a></span>
         <span class="parametername">fieldType</span>
-        <p>
+        <p><p>The type of the field to add</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.BaseFieldAddOptions.html">BaseFieldAddOptions</a></span>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldOptions.html">FieldOptions</a></span>
         <span class="parametername">options</span>
-        <p>
+        <p><p>The specific options for field creation</p>
+</p>
       </td>
     </tr>
   </table>
@@ -399,7 +340,2208 @@
     <tr>
       <td>
         <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
-        <p>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldCalculatedOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L182" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_" class="expander" data-toggle="collapse">AddCalculated(Batch, String, FieldCalculatedOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Calculated field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddCalculated(Batch batch, string title, FieldCalculatedOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldCalculatedOptions.html">FieldCalculatedOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(System.String%2CPnP.Core.Model.SharePoint.FieldCalculatedOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L77" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_" class="expander" data-toggle="collapse">AddCalculated(String, FieldCalculatedOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Calculated field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddCalculated(string title, FieldCalculatedOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldCalculatedOptions.html">FieldCalculatedOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedAsync_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedAsync(System.String%2CPnP.Core.Model.SharePoint.FieldCalculatedOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L284" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedAsync_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedAsync(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedAsync_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_" class="expander" data-toggle="collapse">AddCalculatedAsync(String, FieldCalculatedOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedAsync_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Calculated field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddCalculatedAsync(string title, FieldCalculatedOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldCalculatedOptions.html">FieldCalculatedOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldChoiceOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L209" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddChoice*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_" class="expander" data-toggle="collapse">AddChoice(Batch, String, FieldChoiceOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Choice field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddChoice(Batch batch, string title, FieldChoiceOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldChoiceOptions.html">FieldChoiceOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(System.String%2CPnP.Core.Model.SharePoint.FieldChoiceOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L101" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddChoice*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_" class="expander" data-toggle="collapse">AddChoice(String, FieldChoiceOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Choice field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddChoice(string title, FieldChoiceOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldChoiceOptions.html">FieldChoiceOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceAsync(System.String%2CPnP.Core.Model.SharePoint.FieldChoiceOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L308" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceAsync(System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_" class="expander" data-toggle="collapse">AddChoiceAsync(String, FieldChoiceOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Choice field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddChoiceAsync(string title, FieldChoiceOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldChoiceOptions.html">FieldChoiceOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldCurrencyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L191" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_" class="expander" data-toggle="collapse">AddCurrency(Batch, String, FieldCurrencyOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Currency field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddCurrency(Batch batch, string title, FieldCurrencyOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldCurrencyOptions.html">FieldCurrencyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(System.String%2CPnP.Core.Model.SharePoint.FieldCurrencyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L85" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_" class="expander" data-toggle="collapse">AddCurrency(String, FieldCurrencyOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Currency field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddCurrency(string title, FieldCurrencyOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldCurrencyOptions.html">FieldCurrencyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddCurrencyAsync_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyAsync(System.String%2CPnP.Core.Model.SharePoint.FieldCurrencyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L292" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddCurrencyAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddCurrencyAsync_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyAsync(System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCurrencyAsync_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_" class="expander" data-toggle="collapse">AddCurrencyAsync(String, FieldCurrencyOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddCurrencyAsync_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Currency field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddCurrencyAsync(string title, FieldCurrencyOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldCurrencyOptions.html">FieldCurrencyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldDateTimeOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L173" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_" class="expander" data-toggle="collapse">AddDateTime(Batch, String, FieldDateTimeOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new DateTime field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddDateTime(Batch batch, string title, FieldDateTimeOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldDateTimeOptions.html">FieldDateTimeOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(System.String%2CPnP.Core.Model.SharePoint.FieldDateTimeOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L68" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_" class="expander" data-toggle="collapse">AddDateTime(String, FieldDateTimeOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new DateTime field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddDateTime(string title, FieldDateTimeOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldDateTimeOptions.html">FieldDateTimeOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddDateTimeAsync_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeAsync(System.String%2CPnP.Core.Model.SharePoint.FieldDateTimeOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L276" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddDateTimeAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddDateTimeAsync_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeAsync(System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddDateTimeAsync_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_" class="expander" data-toggle="collapse">AddDateTimeAsync(String, FieldDateTimeOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddDateTimeAsync_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new DateTime field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddDateTimeAsync(string title, FieldDateTimeOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldDateTimeOptions.html">FieldDateTimeOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldLookupOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L218" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddLookup*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_" class="expander" data-toggle="collapse">AddLookup(Batch, String, FieldLookupOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Lookup field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddLookup(Batch batch, string title, FieldLookupOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldLookupOptions.html">FieldLookupOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(System.String%2CPnP.Core.Model.SharePoint.FieldLookupOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L109" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddLookup*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_" class="expander" data-toggle="collapse">AddLookup(String, FieldLookupOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Lookup field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddLookup(string title, FieldLookupOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldLookupOptions.html">FieldLookupOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddLookupAsync_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddLookupAsync(System.String%2CPnP.Core.Model.SharePoint.FieldLookupOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L316" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddLookupAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddLookupAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddLookupAsync_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddLookupAsync(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddLookupAsync_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_" class="expander" data-toggle="collapse">AddLookupAsync(String, FieldLookupOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddLookupAsync_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Lookup field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddLookupAsync(string title, FieldLookupOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldLookupOptions.html">FieldLookupOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldMultiChoiceOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L200" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_" class="expander" data-toggle="collapse">AddMultiChoice(Batch, String, FieldMultiChoiceOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new MultiChoice field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddMultiChoice(Batch batch, string title, FieldMultiChoiceOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html">FieldMultiChoiceOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(System.String%2CPnP.Core.Model.SharePoint.FieldMultiChoiceOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L93" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_" class="expander" data-toggle="collapse">AddMultiChoice(String, FieldMultiChoiceOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new MultiChoice field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddMultiChoice(string title, FieldMultiChoiceOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html">FieldMultiChoiceOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync(System.String%2CPnP.Core.Model.SharePoint.FieldMultiChoiceOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L300" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_" class="expander" data-toggle="collapse">AddMultiChoiceAsync(String, FieldMultiChoiceOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new MultiChoice field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddMultiChoiceAsync(string title, FieldMultiChoiceOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html">FieldMultiChoiceOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldMultilineTextOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L146" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_" class="expander" data-toggle="collapse">AddMultilineText(Batch, String, FieldMultilineTextOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new multiline Text field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddMultilineText(Batch batch, string title, FieldMultilineTextOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldMultilineTextOptions.html">FieldMultilineTextOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(System.String%2CPnP.Core.Model.SharePoint.FieldMultilineTextOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L41" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_" class="expander" data-toggle="collapse">AddMultilineText(String, FieldMultilineTextOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new multiline Text field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddMultilineText(string title, FieldMultilineTextOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldMultilineTextOptions.html">FieldMultilineTextOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineTextAsync_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextAsync(System.String%2CPnP.Core.Model.SharePoint.FieldMultilineTextOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L252" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineTextAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineTextAsync_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextAsync(System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineTextAsync_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_" class="expander" data-toggle="collapse">AddMultilineTextAsync(String, FieldMultilineTextOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineTextAsync_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new multiline Text field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddMultilineTextAsync(string title, FieldMultilineTextOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldMultilineTextOptions.html">FieldMultilineTextOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldNumberOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L164" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddNumber*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_" class="expander" data-toggle="collapse">AddNumber(Batch, String, FieldNumberOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Number field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddNumber(Batch batch, string title, FieldNumberOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldNumberOptions.html">FieldNumberOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(System.String%2CPnP.Core.Model.SharePoint.FieldNumberOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L59" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddNumber*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_" class="expander" data-toggle="collapse">AddNumber(String, FieldNumberOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Number field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddNumber(string title, FieldNumberOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldNumberOptions.html">FieldNumberOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddNumberAsync_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddNumberAsync(System.String%2CPnP.Core.Model.SharePoint.FieldNumberOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L268" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddNumberAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddNumberAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddNumberAsync_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddNumberAsync(System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddNumberAsync_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_" class="expander" data-toggle="collapse">AddNumberAsync(String, FieldNumberOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddNumberAsync_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Number field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddNumberAsync(string title, FieldNumberOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldNumberOptions.html">FieldNumberOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddText(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldTextOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L137" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddText_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddText*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddText(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldTextOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_" class="expander" data-toggle="collapse">AddText(Batch, String, FieldTextOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Text field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddText(Batch batch, string title, FieldTextOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldTextOptions.html">FieldTextOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddText_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddText(System.String%2CPnP.Core.Model.SharePoint.FieldTextOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddText_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddText*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddText_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddText(System.String,PnP.Core.Model.SharePoint.FieldTextOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddText_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_" class="expander" data-toggle="collapse">AddText(String, FieldTextOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddText_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Text field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddText(string title, FieldTextOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldTextOptions.html">FieldTextOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddTextAsync_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddTextAsync(System.String%2CPnP.Core.Model.SharePoint.FieldTextOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L244" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddTextAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddTextAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddTextAsync_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddTextAsync(System.String,PnP.Core.Model.SharePoint.FieldTextOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddTextAsync_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_" class="expander" data-toggle="collapse">AddTextAsync(String, FieldTextOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddTextAsync_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new Text field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddTextAsync(string title, FieldTextOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldTextOptions.html">FieldTextOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L155" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUrl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_" class="expander" data-toggle="collapse">AddUrl(Batch, String, FieldUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new URL field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddUrl(Batch batch, string title, FieldUrlOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldUrlOptions.html">FieldUrlOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(System.String%2CPnP.Core.Model.SharePoint.FieldUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L50" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUrl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_" class="expander" data-toggle="collapse">AddUrl(String, FieldUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new URL field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddUrl(string title, FieldUrlOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldUrlOptions.html">FieldUrlOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddUrlAsync_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddUrlAsync(System.String%2CPnP.Core.Model.SharePoint.FieldUrlOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L260" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddUrlAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUrlAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddUrlAsync_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUrlAsync(System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUrlAsync_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_" class="expander" data-toggle="collapse">AddUrlAsync(String, FieldUrlOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUrlAsync_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new URL field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddUrlAsync(string title, FieldUrlOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldUrlOptions.html">FieldUrlOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddUser_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddUser(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.FieldUserOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L227" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddUser_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUser*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddUser_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUser(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUserOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUser_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_" class="expander" data-toggle="collapse">AddUser(Batch, String, FieldUserOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUser_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new User field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddUser(Batch batch, string title, FieldUserOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to use</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldUserOptions.html">FieldUserOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddUser_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddUser(System.String%2CPnP.Core.Model.SharePoint.FieldUserOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L117" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddUser_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUser*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddUser_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUser(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUser_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_" class="expander" data-toggle="collapse">AddUser(String, FieldUserOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUser_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new User field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IField AddUser(string title, FieldUserOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldUserOptions.html">FieldUserOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>
+        <p><p>The added field</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldCollection_AddUserAsync_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldCollection.AddUserAsync(System.String%2CPnP.Core.Model.SharePoint.FieldUserOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldCollection.cs/#L324" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldCollection_AddUserAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUserAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldCollection_AddUserAsync_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_" data-uid="PnP.Core.Model.SharePoint.IFieldCollection.AddUserAsync(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUserAsync_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_" class="expander" data-toggle="collapse">AddUserAsync(String, FieldUserOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldCollection_AddUserAsync_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a new User field to the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IField&gt; AddUserAsync(string title, FieldUserOptions options = null)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">title</span>
+        <p><p>The title of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FieldUserOptions.html">FieldUserOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>The specific options for field creation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IField.html">IField</a>&gt;
+        <p><p>The added field</p>
+</p>
       </td>
     </tr>
   </table>
