@@ -64,6 +64,20 @@ namespace PnP.Core.Model.SharePoint
 
         public bool SocialBarOnSitePagesDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
+        [SharePointProperty("Features", Expandable = true)]
+        public IFeatureCollection Features
+        {
+            get
+            {
+                if (!HasValue(nameof(Features)))
+                {
+                    var features = new FeatureCollection(this.PnPContext, this, nameof(Features));
+                    SetValue(features);
+                }
+                return GetValue<IFeatureCollection>();
+            }
+        }
+
         public SearchBoxInNavBar SearchBoxInNavBar { get => GetValue<SearchBoxInNavBar>(); set => SetValue(value); }
 
         /* Not directly a field in the Site object*/
