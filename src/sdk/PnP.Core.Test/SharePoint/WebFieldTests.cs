@@ -106,6 +106,25 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddWebFieldAsXmlTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                IField addedField = await context.Web.Fields.AddFieldAsXmlAsync(@"<Field Type=""Text"" Name=""ADDEDFIELD"" DisplayName=""ADDED FIELD""/>");
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDEDFIELD", addedField.InternalName);
+                Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
         public async Task AddNewWebGenericFieldTextTest()
         {
             //TestCommon.Instance.Mocking = false;

@@ -111,6 +111,26 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddListFieldAsXmlTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddFieldAsXmlAsync(@"<Field Type=""Text"" Name=""ADDEDFIELD"" DisplayName=""ADDED FIELD""/>");
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
+                // Internal name is not set with AddFieldAsXml on list fields
+                //Assert.AreEqual("ADDEDFIELD", addedField.InternalName);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task AddNewWebGenericFieldTextTest()
         {
             //TestCommon.Instance.Mocking = false;
