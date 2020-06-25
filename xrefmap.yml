@@ -4674,6 +4674,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.FieldDefaults
   nameWithType: IList.FieldDefaults
+- uid: PnP.Core.Model.SharePoint.IList.Fields
+  name: Fields
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Fields
+  commentId: P:PnP.Core.Model.SharePoint.IList.Fields
+  fullName: PnP.Core.Model.SharePoint.IList.Fields
+  nameWithType: IList.Fields
+- uid: PnP.Core.Model.SharePoint.IList.Fields*
+  name: Fields
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Fields_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.Fields
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.Fields
+  nameWithType: IList.Fields
 - uid: PnP.Core.Model.SharePoint.IList.ForceCheckout
   name: ForceCheckout
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ForceCheckout
