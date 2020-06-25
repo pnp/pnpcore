@@ -7,6 +7,6 @@ The PnP Core SDK is an SDK designed to work against Microsoft 365. It provides a
 > **Important**
 > The PnP Core SDK is in preview: it's targetting developers that want to either test or extend it. It's **not yet** ready to be used in production scenarios, mainly because it still lacks most of the model definitions.
 
-More details on how to use this library and how to contribute checkout https://aka.ms/pnp/coresdk/docs.
+For more details on how to use this SDK and how to contribute checkout https://aka.ms/pnp/coresdk/docs.
 
 **Community rocks, sharing is caring!**
