@@ -117,6 +117,20 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        [SharePointProperty("Fields", Expandable = true)]
+        public IFieldCollection Fields
+        {
+            get
+            {
+                if (!HasValue(nameof(Fields)))
+                {
+                    var fields = new FieldCollection(this.PnPContext, this, nameof(Fields));
+                    SetValue(fields);
+                }
+                return GetValue<IFieldCollection>();
+            }
+        }
+
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
