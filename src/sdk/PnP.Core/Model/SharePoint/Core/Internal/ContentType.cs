@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using PnP.Core.Utilities;
 using System.Dynamic;
 using System.Net.Http;
 using System.Text.Json;
@@ -10,26 +11,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", Get = "_api/Web/Lists(guid'{Parent.Id}')/contenttypes", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/contenttypes")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class ContentType
-    {        
-        /// <summary>
-        /// Class to model the Rest Content Type Add request
-        /// </summary>
-        internal class ContentTypeAdd : RestBaseAdd<IContentType>
-        {
-            //public string Id { get; set; }
-            public string Description { get; set; }
-            public string Group { get; set; }
-            public string Name { get; set; }
-
-            internal ContentTypeAdd(BaseDataModel<IContentType> model, string id, string name, string description, string group) : base(model)
-            {
-                //Id = id;
-                Name = name;
-                Description = description;
-                Group = group;
-            }
-        }
-        
+    {
         public ContentType()
         {
             // Handler to construct the Add request for this content type
@@ -50,8 +32,15 @@ namespace PnP.Core.Model.SharePoint
                     throw new ClientException(ErrorType.Unsupported, "Adding new content types on a list is not possible, use the AddAvailableContentType method to add an existing site content type");
                 }
 
-                var addParameters = new ContentTypeAdd(this, StringId, Name, Description, Group);
-                return new ApiCall(entity.SharePointGet, ApiType.SPORest, JsonSerializer.Serialize(addParameters));
+                //var addParameters = new ContentTypeAdd(this, StringId, Name, Description, Group);
+                var addParameters = new
+                {
+                    __metadata = new { type = entity.SharePointType },
+                    Name,
+                    Description,
+                    Group,
+                }.AsExpando();
+                return new ApiCall(entity.SharePointGet, ApiType.SPORest, JsonSerializer.Serialize(addParameters, typeof(ExpandoObject)));
             };
         }
 

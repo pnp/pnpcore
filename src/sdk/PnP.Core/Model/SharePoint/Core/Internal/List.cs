@@ -5,6 +5,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using PnP.Core.Services;
 using System.Net.Http;
+using PnP.Core.Utilities;
+using System.Dynamic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -16,22 +18,6 @@ namespace PnP.Core.Model.SharePoint
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class List
     {
-        /// <summary>
-        /// Class to model the Rest List Add request
-        /// </summary>
-        internal class ListAdd: RestBaseAdd<IList>
-        {
-            public ListTemplateType BaseTemplate { get; set; }
-            
-            public string Title { get; set; }
-
-            internal ListAdd(BaseDataModel<IList> model, ListTemplateType templateType, string title) : base(model) 
-            {
-                BaseTemplate = templateType;
-                Title = title;
-            }            
-        }
-
         public List()
         {
             MappingHandler = (FromJson input) =>
@@ -50,9 +36,18 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Handler to construct the Add request for this list
-            AddApiCallHandler = (keyValuePairs) =>
+            AddApiCallHandler = (additionalInformation) =>
             {
-                return new ApiCall($"_api/web/lists", ApiType.SPORest, JsonSerializer.Serialize(new ListAdd(this, TemplateType, Title)));
+                var entity = EntityManager.Instance.GetClassInfo<IList>(GetType(), this);
+
+                var addParameters = new
+                {
+                    __metadata = new { type = entity.SharePointType },
+                    BaseTemplate = TemplateType,
+                    Title
+                }.AsExpando();
+                string body = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject));
+                return new ApiCall($"_api/web/lists", ApiType.SPORest, body);
             };
 
             /** 
@@ -83,7 +78,7 @@ namespace PnP.Core.Model.SharePoint
 
         private static ApiCall GetByTitleApiCall(string title)
         {
-            return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest); 
+            return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest);
         }
 
         public IList GetByTitle(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
@@ -118,7 +113,7 @@ namespace PnP.Core.Model.SharePoint
                     {
                         // Remove this item from the lists collection
                         RemoveFromParentCollection();
-                        
+
                         // return the recyclebin item id
                         return recycleBinItemId.GetGuid();
                     }
