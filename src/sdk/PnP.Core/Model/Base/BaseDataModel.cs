@@ -811,6 +811,9 @@ namespace PnP.Core.Model
             // Prefix API request with context url if needed
             postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
 
+            // Ensure token replacement is done
+            postApiCall.Request = TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext).GetAwaiter().GetResult();
+
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
             {
@@ -835,6 +838,9 @@ namespace PnP.Core.Model
 
             // Prefix API request with context url if needed
             postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
+
+            // Ensure token replacement is done
+            postApiCall.Request = await TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext);
 
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))

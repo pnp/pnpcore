@@ -192,6 +192,11 @@ namespace PnP.Core.Model.SharePoint
         public IContentTypeCollection ContentTypes { get; }
 
         /// <summary>
+        /// Collection of fields for this list
+        /// </summary>
+        public IFieldCollection Fields { get; }
+
+        /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
         public Task<Guid> RecycleAsync();

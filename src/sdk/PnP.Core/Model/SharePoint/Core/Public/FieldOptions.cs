@@ -271,7 +271,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets a value that specifies the GUID that identifies the site containing the list which contains the field used as the lookup values.
         /// </summary>
-        public Guid? LookupWebId { get; set; }
+        public Guid LookupWebId { get; set; }
     }
 
     /// <summary>
