@@ -38,7 +38,7 @@ namespace PnP.Core.Model.SharePoint
             // Handler to construct the Add request for this list
             AddApiCallHandler = (additionalInformation) =>
             {
-                var entity = EntityManager.Instance.GetClassInfo<IList>(GetType(), this);
+                var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
 
                 var addParameters = new
                 {

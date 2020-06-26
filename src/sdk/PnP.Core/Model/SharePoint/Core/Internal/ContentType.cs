@@ -24,7 +24,7 @@ namespace PnP.Core.Model.SharePoint
 
                 // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
                 // automatically provide the correct 'parent'
-                var entity = EntityManager.Instance.GetClassInfo<IContentType>(GetType(), this);
+                var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
 
                 // Adding new content types on a list is not something we should allow
                 if (entity.Target == typeof(List))
@@ -32,7 +32,6 @@ namespace PnP.Core.Model.SharePoint
                     throw new ClientException(ErrorType.Unsupported, "Adding new content types on a list is not possible, use the AddAvailableContentType method to add an existing site content type");
                 }
 
-                //var addParameters = new ContentTypeAdd(this, StringId, Name, Description, Group);
                 var addParameters = new
                 {
                     __metadata = new { type = entity.SharePointType },
@@ -54,7 +53,7 @@ namespace PnP.Core.Model.SharePoint
 
             // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
             // automatically provide the correct 'parent'
-            var entity = EntityManager.Instance.GetClassInfo<IContentType>(GetType(), this);
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
 
             return new ApiCall($"{entity.SharePointGet}/AddAvailableContentType", ApiType.SPORest, bodyContent);
         }
