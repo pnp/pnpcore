@@ -13,18 +13,12 @@ namespace PnP.Core.Model.SharePoint
     {
         #region Extension Methods
         /// <summary>
-        /// Gets a list by title
+        /// Gets a list by title via a batch request
         /// </summary>
         /// <param name="title">Title of the list to get</param>
         /// <returns>Loaded list, null is not found</returns>
-        public Task<IList> GetByTitleAsync(string title, params Expression<Func<IList, object>>[] expressions);
+        public IList BatchGetByTitle(string title, params Expression<Func<IList, object>>[] expressions);
 
-        /// <summary>
-        /// Gets a list by title
-        /// </summary>
-        /// <param name="title">Title of the list to get</param>
-        /// <returns>Loaded list, null is not found</returns>
-        public IList GetByTitleLegacy(string title, params Expression<Func<IList, object>>[] expressions);
 
         /// <summary>
         /// Adds a new list

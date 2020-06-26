@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
 {
     internal partial class ListCollection
     {
-        public IList GetByTitleLegacy(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
+        public IList BatchGetByTitle(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
             // Was this list previously loaded?
             if (!(items.FirstOrDefault(p => p.IsPropertyAvailable(p => p.Title) && p.Title.Equals(title, StringComparison.InvariantCultureIgnoreCase)) is List listToLoad))
@@ -20,21 +20,9 @@ namespace PnP.Core.Model.SharePoint
             return listToLoad.GetByTitle(batch, title, expressions);
         }
 
-        public IList GetByTitleLegacy(string title, params Expression<Func<IList, object>>[] expressions)
+        public IList BatchGetByTitle(string title, params Expression<Func<IList, object>>[] expressions)
         {
-            return GetByTitleLegacy(PnPContext.CurrentBatch, title, expressions);
-        }
-
-        public async Task<IList> GetByTitleAsync(string title, params Expression<Func<IList, object>>[] expressions)
-        {
-            // Was this list previously loaded?
-            if (!(items.FirstOrDefault(p => p.Title.Equals(title, StringComparison.InvariantCultureIgnoreCase)) is List listToLoad))
-            {
-                // List was not loaded before, so add it the current set of loaded lists
-                listToLoad = CreateNewAndAdd() as List;
-            }
-
-            return await listToLoad.GetByTitleAsync(title, expressions).ConfigureAwait(false);
+            return BatchGetByTitle(PnPContext.CurrentBatch, title, expressions);
         }
 
         public IList Add(string title, ListTemplateType templateType)
