@@ -1655,6 +1655,54 @@ references:
   commentId: N:PnP.Core.Model.SharePoint
   fullName: PnP.Core.Model.SharePoint
   nameWithType: PnP.Core.Model.SharePoint
+- uid: PnP.Core.Model.SharePoint.AddFieldOptionsFlags
+  name: AddFieldOptionsFlags
+  href: api/PnP.Core.Model.SharePoint.AddFieldOptionsFlags.html
+  commentId: T:PnP.Core.Model.SharePoint.AddFieldOptionsFlags
+  fullName: PnP.Core.Model.SharePoint.AddFieldOptionsFlags
+  nameWithType: AddFieldOptionsFlags
+- uid: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddFieldCheckDisplayName
+  name: AddFieldCheckDisplayName
+  href: api/PnP.Core.Model.SharePoint.AddFieldOptionsFlags.html#PnP_Core_Model_SharePoint_AddFieldOptionsFlags_AddFieldCheckDisplayName
+  commentId: F:PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddFieldCheckDisplayName
+  fullName: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddFieldCheckDisplayName
+  nameWithType: AddFieldOptionsFlags.AddFieldCheckDisplayName
+- uid: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddFieldInternalNameHint
+  name: AddFieldInternalNameHint
+  href: api/PnP.Core.Model.SharePoint.AddFieldOptionsFlags.html#PnP_Core_Model_SharePoint_AddFieldOptionsFlags_AddFieldInternalNameHint
+  commentId: F:PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddFieldInternalNameHint
+  fullName: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddFieldInternalNameHint
+  nameWithType: AddFieldOptionsFlags.AddFieldInternalNameHint
+- uid: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddFieldToDefaultView
+  name: AddFieldToDefaultView
+  href: api/PnP.Core.Model.SharePoint.AddFieldOptionsFlags.html#PnP_Core_Model_SharePoint_AddFieldOptionsFlags_AddFieldToDefaultView
+  commentId: F:PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddFieldToDefaultView
+  fullName: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddFieldToDefaultView
+  nameWithType: AddFieldOptionsFlags.AddFieldToDefaultView
+- uid: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddToAllContentTypes
+  name: AddToAllContentTypes
+  href: api/PnP.Core.Model.SharePoint.AddFieldOptionsFlags.html#PnP_Core_Model_SharePoint_AddFieldOptionsFlags_AddToAllContentTypes
+  commentId: F:PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddToAllContentTypes
+  fullName: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddToAllContentTypes
+  nameWithType: AddFieldOptionsFlags.AddToAllContentTypes
+- uid: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddToDefaultContentType
+  name: AddToDefaultContentType
+  href: api/PnP.Core.Model.SharePoint.AddFieldOptionsFlags.html#PnP_Core_Model_SharePoint_AddFieldOptionsFlags_AddToDefaultContentType
+  commentId: F:PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddToDefaultContentType
+  fullName: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddToDefaultContentType
+  nameWithType: AddFieldOptionsFlags.AddToDefaultContentType
+- uid: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddToNoContentType
+  name: AddToNoContentType
+  href: api/PnP.Core.Model.SharePoint.AddFieldOptionsFlags.html#PnP_Core_Model_SharePoint_AddFieldOptionsFlags_AddToNoContentType
+  commentId: F:PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddToNoContentType
+  fullName: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.AddToNoContentType
+  nameWithType: AddFieldOptionsFlags.AddToNoContentType
+- uid: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.DefaultValue
+  name: DefaultValue
+  href: api/PnP.Core.Model.SharePoint.AddFieldOptionsFlags.html#PnP_Core_Model_SharePoint_AddFieldOptionsFlags_DefaultValue
+  commentId: F:PnP.Core.Model.SharePoint.AddFieldOptionsFlags.DefaultValue
+  fullName: PnP.Core.Model.SharePoint.AddFieldOptionsFlags.DefaultValue
+  nameWithType: AddFieldOptionsFlags.DefaultValue
 - uid: PnP.Core.Model.SharePoint.CalendarType
   name: CalendarType
   href: api/PnP.Core.Model.SharePoint.CalendarType.html
@@ -4249,6 +4297,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeAsync
   nameWithType: IFieldCollection.AddDateTimeAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  name: AddFieldAsXml(Batch, String, Boolean, AddFieldOptionsFlags)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXml_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(PnP.Core.Services.Batch, System.String, System.Boolean, PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  nameWithType: IFieldCollection.AddFieldAsXml(Batch, String, Boolean, AddFieldOptionsFlags)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  name: AddFieldAsXml(String, Boolean, AddFieldOptionsFlags)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXml_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(System.String, System.Boolean, PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  nameWithType: IFieldCollection.AddFieldAsXml(String, Boolean, AddFieldOptionsFlags)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml*
+  name: AddFieldAsXml
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXml_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml
+  nameWithType: IFieldCollection.AddFieldAsXml
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  name: AddFieldAsXmlAsync(String, Boolean, AddFieldOptionsFlags)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXmlAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlAsync(System.String, System.Boolean, PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  nameWithType: IFieldCollection.AddFieldAsXmlAsync(String, Boolean, AddFieldOptionsFlags)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlAsync*
+  name: AddFieldAsXmlAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXmlAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlAsync
+  nameWithType: IFieldCollection.AddFieldAsXmlAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
   name: AddLookup(Batch, String, FieldLookupOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
@@ -5011,38 +5091,22 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.AddAsync
   nameWithType: IListCollection.AddAsync
-- uid: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: GetByTitleAsync(String, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitleAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: GetByTitleAsync(String, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: IListCollection.GetByTitleAsync(String, Expression<Func<IList, Object>>[])
-  nameWithType.vb: IListCollection.GetByTitleAsync(String, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync*
-  name: GetByTitleAsync
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitleAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync
+- uid: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: BatchGetByTitle(String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_BatchGetByTitle_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: BatchGetByTitle(String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.BatchGetByTitle(String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.BatchGetByTitle(String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle*
+  name: BatchGetByTitle
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_BatchGetByTitle_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync
-  nameWithType: IListCollection.GetByTitleAsync
-- uid: PnP.Core.Model.SharePoint.IListCollection.GetByTitleLegacy(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: GetByTitleLegacy(String, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitleLegacy_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByTitleLegacy(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: GetByTitleLegacy(String, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByTitleLegacy(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByTitleLegacy(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: IListCollection.GetByTitleLegacy(String, Expression<Func<IList, Object>>[])
-  nameWithType.vb: IListCollection.GetByTitleLegacy(String, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.IListCollection.GetByTitleLegacy*
-  name: GetByTitleLegacy
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitleLegacy_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByTitleLegacy
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByTitleLegacy
-  nameWithType: IListCollection.GetByTitleLegacy
+  fullName: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle
+  nameWithType: IListCollection.BatchGetByTitle
 - uid: PnP.Core.Model.SharePoint.IListItem
   name: IListItem
   href: api/PnP.Core.Model.SharePoint.IListItem.html

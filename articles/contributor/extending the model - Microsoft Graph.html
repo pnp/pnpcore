@@ -436,7 +436,7 @@ public interface ITeamChannelCollection : IDataModelCollection&lt;ITeamChannel&g
 }
 </code></pre>
 <h3 id="providing-additional-parameters-for-add-requests">Providing additional parameters for add requests</h3>
-<p>The <code>AddApiCall</code> handler accepts an optional key value pair parameter: <code>ApiCall AddApiCall(Dictionary&lt;string, object&gt; keyValuePairs = null)</code>. You can use this to provide additional input when you call the <code>Add</code> from your code in the collection class. Below sample shows how this feature is used to offer different SDK consumer methods for creating Team channel tabs (on the <code>TeamChannelTabCollection</code> class) while there's only one generic creation method implementation in the <code>TeamChannelTab</code> class. Let's start with the code in the <code>TeamChannelTabCollection</code> class:</p>
+<p>The <code>AddApiCall</code> handler accepts an optional key value pair parameter: <code>ApiCall AddApiCall(Dictionary&lt;string, object&gt; additionalInformation = null)</code>. You can use this to provide additional input when you call the <code>Add</code> from your code in the collection class. Below sample shows how this feature is used to offer different SDK consumer methods for creating Team channel tabs (on the <code>TeamChannelTabCollection</code> class) while there's only one generic creation method implementation in the <code>TeamChannelTab</code> class. Let's start with the code in the <code>TeamChannelTabCollection</code> class:</p>
 <pre><code class="lang-csharp">public async Task&lt;ITeamChannelTab&gt; AddWikiTabAsync(string name)
 {
     if (string.IsNullOrEmpty(name))
@@ -444,9 +444,9 @@ public interface ITeamChannelCollection : IDataModelCollection&lt;ITeamChannel&g
         throw new ArgumentNullException(nameof(name));
     }
 
-    (TeamChannelTab newTab, Dictionary&lt;string, object&gt; keyValuePairs) = CreateTeamChannelWikiTab(name);
+    (TeamChannelTab newTab, Dictionary&lt;string, object&gt; additionalInformation) = CreateTeamChannelWikiTab(name);
 
-    return await newTab.AddAsync(keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
+    return await newTab.AddAsync(additionalInformation).ConfigureAwait(false) as TeamChannelTab;
 }
 
 public async Task&lt;ITeamChannelTab&gt; AddDocumentLibraryTabAsync(string name, Uri documentLibraryUri)
@@ -456,16 +456,16 @@ public async Task&lt;ITeamChannelTab&gt; AddDocumentLibraryTabAsync(string name,
         throw new ArgumentNullException(nameof(name));
     }
 
-    (TeamChannelTab newTab, Dictionary&lt;string, object&gt; keyValuePairs) = CreateTeamChannelDocumentLibraryTab(name, documentLibraryUri);
+    (TeamChannelTab newTab, Dictionary&lt;string, object&gt; additionalInformation) = CreateTeamChannelDocumentLibraryTab(name, documentLibraryUri);
 
-    return await newTab.AddAsync(keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
+    return await newTab.AddAsync(additionalInformation).ConfigureAwait(false) as TeamChannelTab;
 }
 
 private Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt; CreateTeamChannelDocumentLibraryTab(string displayName, Uri documentLibraryUri)
 {
     var newTab = CreateTeamChannelTab(displayName);
 
-    Dictionary&lt;string, object&gt; keyValuePairs = new Dictionary&lt;string, object&gt;
+    Dictionary&lt;string, object&gt; additionalInformation = new Dictionary&lt;string, object&gt;
     {
         { &quot;teamsAppId&quot;, &quot;com.microsoft.teamspace.tab.files.sharepoint&quot; },
     };
@@ -476,29 +476,29 @@ private Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt; CreateTeam
         ContentUrl = documentLibraryUri.ToString()
     };
 
-    return new Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt;(newTab, keyValuePairs);
+    return new Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt;(newTab, additionalInformation);
 }
 
 private Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt; CreateTeamChannelWikiTab(string displayName)
 {
     var newTab = CreateTeamChannelTab(displayName);
 
-    Dictionary&lt;string, object&gt; keyValuePairs = new Dictionary&lt;string, object&gt;
+    Dictionary&lt;string, object&gt; additionalInformation = new Dictionary&lt;string, object&gt;
     {
         { &quot;teamsAppId&quot;, &quot;com.microsoft.teamspace.tab.wiki&quot; }
     };
 
-    return new Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt;(newTab, keyValuePairs);
+    return new Tuple&lt;TeamChannelTab, Dictionary&lt;string, object&gt;&gt;(newTab, additionalInformation);
 }
 </code></pre>
 <p>The code in the <code>TeamChannelTab</code> class then uses the additional parameter values to drive the creation behavior:</p>
-<pre><code class="lang-csharp">AddApiCallHandler = (keyValuePairs) =&gt;
+<pre><code class="lang-csharp">AddApiCallHandler = (additionalInformation) =&gt;
 {
     // Define the JSON body of the update request based on the actual changes
     dynamic tab = new ExpandoObject();
     tab.displayName = DisplayName;
 
-    string teamsAppId = keyValuePairs[&quot;teamsAppId&quot;].ToString();
+    string teamsAppId = additionalInformation[&quot;teamsAppId&quot;].ToString();
     tab.teamsAppId = teamsAppId;
 
     switch (teamsAppId)
