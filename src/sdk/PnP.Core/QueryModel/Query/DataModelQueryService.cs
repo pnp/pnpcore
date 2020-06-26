@@ -73,9 +73,37 @@ namespace PnP.Core.QueryModel
                 // Prepare a variable to hold tha batch request ID
                 Guid batchRequestId = Guid.Empty;
 
-                // We try to use Graph First, if selected by the user and if the query is supported by Graph
-                if (context.GraphFirst && !string.IsNullOrEmpty(entityInfo.GraphLinqGet))
+                // Ensure the model's keyfield was requested, this is needed to ensure the loaded model can be added/merged into an existing collection
+                if (!query.Select.Contains(entityInfo.ActualKeyFieldName))
                 {
+                    query.Select.Add(entityInfo.ActualKeyFieldName);
+                }
+
+                // Verify if we're not asking fields which anyhow cannot (yet) be served via Graph
+                bool canUseGraph = true;
+                foreach (var selectProperty in query.Select)
+                {
+                    var field = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
+                    if (string.IsNullOrEmpty(field.GraphName))
+                    {
+                        canUseGraph = false;
+                        break;
+                    }
+                }
+
+                // We try to use Graph First, if selected by the user and if the query is supported by Graph
+                if (canUseGraph && context.GraphFirst && !string.IsNullOrEmpty(entityInfo.GraphLinqGet))
+                {
+                    // Ensure that selected properties which are marked as expandable are also used in that manner
+                    foreach (var selectProperty in query.Select)
+                    {
+                        var prop = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
+                        if (prop != null && !string.IsNullOrEmpty(prop.GraphName) && prop.GraphExpandable && !query.Expand.Contains(prop.GraphName))
+                        {
+                            query.Expand.Add(prop.GraphName);
+                        }
+                    }
+
                     // Build the Graph request URL
                     var requestUrl = $"{entityInfo.GraphLinqGet}?{query.ToQueryString(ODataTargetPlatform.Graph, urlEncode: false)}";
                     requestUrl = Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context).GetAwaiter().GetResult();
@@ -98,6 +126,16 @@ namespace PnP.Core.QueryModel
                 }
                 else
                 {
+                    // Ensure that selected properties which are marked as expandable are also used in that manner
+                    foreach (var selectProperty in query.Select)
+                    {
+                        var prop = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
+                        if (prop != null && !string.IsNullOrEmpty(prop.SharePointName) && prop.SharePointExpandable && !query.Expand.Contains(prop.SharePointName))
+                        {
+                            query.Expand.Add(prop.SharePointName);
+                        }
+                    }
+
                     // Build the SPO REST request URL
                     var requestUrl = $"{context.Uri}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
                     requestUrl = Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).GetAwaiter().GetResult();
