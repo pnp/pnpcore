@@ -4,7 +4,9 @@ using PnP.Core.Services;
 using PnP.Core.Utilities;
 using System;
 using System.Dynamic;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -108,6 +110,54 @@ namespace PnP.Core.Model.SharePoint
             return new { parameters }.AsExpando();
         }
 
-        // TODO Implement extension methods here
+        internal IField AddAsXml(Batch batch, string schemaXml, AddFieldOptionsFlags options)
+        {
+            // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
+            // automatically provide the correct 'parent'
+            // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
+            EntityInfo entity = EntityManager.Instance.GetClassInfo(typeof(Field), this);
+            string endpointUrl = $"{entity.SharePointGet}/CreateFieldAsXml";
+
+            var body = new
+            {
+                parameters = new
+                {
+                    SchemaXml = schemaXml,
+                    Options = (int)options
+                }
+            }.AsExpando();
+
+            string json = JsonSerializer.Serialize(body, typeof(ExpandoObject));
+            var apiCall = new ApiCall(endpointUrl, ApiType.SPORest, json);
+
+            Request(batch, apiCall, HttpMethod.Post);
+
+            return this;
+        }
+
+        internal async Task<IField> AddAsXmlAsync(string schemaXml, AddFieldOptionsFlags options)
+        {
+            // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
+            // automatically provide the correct 'parent'
+            // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
+            EntityInfo entity = EntityManager.Instance.GetClassInfo(typeof(Field), this);
+            string endpointUrl = $"{entity.SharePointGet}/CreateFieldAsXml";
+
+            var body = new
+            {
+                parameters = new
+                {
+                    SchemaXml = schemaXml,
+                    Options = (int)options
+                }
+            }.AsExpando();
+
+            string json = JsonSerializer.Serialize(body, typeof(ExpandoObject));
+            var apiCall = new ApiCall(endpointUrl, ApiType.SPORest, json);
+
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return this;
+        }
     }
 }

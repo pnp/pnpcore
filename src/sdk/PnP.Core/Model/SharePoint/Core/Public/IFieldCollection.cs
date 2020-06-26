@@ -322,6 +322,49 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
         Task<IField> AddUserAsync(string title, FieldUserOptions options = null);
+
+        /// <summary>
+        /// Adds a new field from its XML schema
+        /// </summary>
+        /// <param name="schemaXml">
+        /// A Collaborative Application Markup Language (CAML) string that contains the schema.
+        /// It must not be a null reference(Nothing in Visual Basic). 
+        /// It must not be empty.It must be a valid Collaborative Application Markup Language(CAML) string according to the schema specified in [MS-WSSFO2], section 2.2.9.3.3.1.
+        /// </param>
+        /// <param name="addToDefaultView">Specifies to add the field to the default list view.
+        /// <c>true</c> if the field is added to the default list view; otherwise, <c>false</c>.</param>
+        /// <param name="options">An AddFieldOptionsFlags value that specifies the field options.</param>
+        /// <returns>The added field</returns>
+        IField AddFieldAsXml(string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue);
+
+        /// <summary>
+        /// Adds a new field from its XML schema
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="schemaXml">
+        /// A Collaborative Application Markup Language (CAML) string that contains the schema.
+        /// It must not be a null reference(Nothing in Visual Basic). 
+        /// It must not be empty.It must be a valid Collaborative Application Markup Language(CAML) string according to the schema specified in [MS-WSSFO2], section 2.2.9.3.3.1.
+        /// </param>
+        /// <param name="addToDefaultView">Specifies to add the field to the default list view.
+        /// <c>true</c> if the field is added to the default list view; otherwise, <c>false</c>.</param>
+        /// <param name="options">An AddFieldOptionsFlags value that specifies the field options.</param>
+        /// <returns>The added field</returns>
+        IField AddFieldAsXml(Batch batch, string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue);
+
+        /// <summary>
+        /// Adds a new field from its XML schema
+        /// </summary>
+        /// <param name="schemaXml">
+        /// A Collaborative Application Markup Language (CAML) string that contains the schema.
+        /// It must not be a null reference(Nothing in Visual Basic). 
+        /// It must not be empty.It must be a valid Collaborative Application Markup Language(CAML) string according to the schema specified in [MS-WSSFO2], section 2.2.9.3.3.1.
+        /// </param>
+        /// <param name="addToDefaultView">Specifies to add the field to the default list view.
+        /// <c>true</c> if the field is added to the default list view; otherwise, <c>false</c>.</param>
+        /// <param name="options">An AddFieldOptionsFlags value that specifies the field options.</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddFieldAsXmlAsync(string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue);
         #endregion
     }
 }

@@ -263,5 +263,36 @@ namespace PnP.Core.Model.SharePoint
         {
             return await AddAsync(title, FieldType.URL, options).ConfigureAwait(false) as Field;
         }
+
+
+
+        public IField AddFieldAsXml(string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue)
+        {
+            return AddFieldAsXml(PnPContext.CurrentBatch, schemaXml, addToDefaultView, options);
+        }
+
+        public IField AddFieldAsXml(Batch batch, string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue)
+        {
+            if (addToDefaultView)
+            {
+                options |= AddFieldOptionsFlags.AddFieldToDefaultView;
+            }
+
+            var newField = CreateNewAndAdd() as Field;
+            newField.AddAsXml(batch, schemaXml, options);
+            return newField;
+        }
+
+        public async Task<IField> AddFieldAsXmlAsync(string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue)
+        {
+            if (addToDefaultView)
+            {
+                options |= AddFieldOptionsFlags.AddFieldToDefaultView;
+            }
+
+            var newField = CreateNewAndAdd() as Field;
+            await newField.AddAsXmlAsync(schemaXml, options);
+            return newField;
+        }
     }
 }
