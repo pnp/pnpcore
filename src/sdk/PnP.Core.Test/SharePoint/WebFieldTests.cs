@@ -4,6 +4,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -462,7 +463,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 IWeb currentWeb = await context.Web.GetAsync();
-                IList documents = await currentWeb.Lists.GetByTitleAsync("Documents", l => l.Id);
+                IList documents = currentWeb.Lists.GetByTitle("Documents", l => l.Id);
                 IField addedField = await context.Web.Fields.AddLookupAsync("ADDED FIELD", new FieldLookupOptions()
                 {
                     Required = true,

@@ -4,6 +4,7 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -23,7 +24,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var documents = await context.Web.Lists.GetByTitleAsync("Documents", l => l.Fields);
+                var documents = context.Web.Lists.GetByTitle("Documents", l => l.Fields);
                 Assert.IsTrue(documents.Fields.Count() > 0);
 
                 IField field = documents.Fields.FirstOrDefault(p => p.InternalName == "Title");

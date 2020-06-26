@@ -548,43 +548,6 @@ namespace PnP.Core.Services
             return true;
         }
 
-        /// <summary>
-        /// Process the received batch response and connect the responses to the original requests in this batch
-        /// </summary>
-        /// <param name="batch">Batch that we're processing</param>
-        /// <param name="batchResponse">Batch response received from the server</param>
-        private static void ProcessMicrosoftGraphBatchResponseContent(Batch batch, GraphBatchResponses graphBatchResponses)
-        {
-            foreach (var graphBatchResponse in graphBatchResponses.Responses)
-            {
-                if (int.TryParse(graphBatchResponse.Id, out int id))
-                {
-                    // Get the original request, requests use 0 based ordering
-                    var batchRequest = batch.GetRequest(id - 1);
-
-                    if (graphBatchResponse.Body.TryGetValue("body", out JsonElement bodyContent))
-                    {
-                        // If one of the requests in the batch failed then throw an exception
-                        if (!HttpRequestSucceeded(graphBatchResponse.Status))
-                        {
-                            throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)graphBatchResponse.Status, bodyContent);
-                        }
-                        // All was good, connect response to the original request
-                        batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status, graphBatchResponse.Headers);
-
-                        // Commit succesful updates in our model
-                        if (batchRequest.Method == HttpMethod.Patch)
-                        {
-                            if (batchRequest.Model is TransientObject)
-                            {
-                                (batchRequest.Model as TransientObject).Commit();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         private Tuple<string, string> BuildMicrosoftGraphBatchRequestContent(Batch batch)
         {
             // See
