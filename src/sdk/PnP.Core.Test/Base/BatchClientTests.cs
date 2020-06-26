@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
+using PnP.Core.QueryModel;
 
 namespace PnP.Core.Test.Base
 {
@@ -204,8 +205,10 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var list1 = context.Web.Lists.GetByTitleLegacy("Site Assets", p => p.Title, p => p.NoCrawl);
-                var list1Again = context.Web.Lists.GetByTitleLegacy("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
+                context.GraphFirst = false;
+
+                var list1 = context.Web.Lists.BatchGetByTitle("Site Assets", p => p.Title, p => p.NoCrawl);
+                var list1Again = context.Web.Lists.BatchGetByTitle("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
                 await context.ExecuteAsync();
 
                 var siteAssetsCount = context.Web.Lists.Where(p => p.Title == "Site Assets");
@@ -215,6 +218,7 @@ namespace PnP.Core.Test.Base
                 // The properties from both loads should available on the first loaded model
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.NoCrawl));
+                
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.EnableVersioning));
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.Items));
                 // Site Assets should have items

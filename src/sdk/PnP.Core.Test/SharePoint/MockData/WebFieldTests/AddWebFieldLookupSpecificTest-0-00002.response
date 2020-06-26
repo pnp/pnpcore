@@ -1,10 +1,1 @@
---batchresponse_7dd81e38-43f3-445b-955d-e558af57d5cc
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-ETAG: "460"
-
-{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'6705bed4-63c5-4a09-b311-42b3e8da5a39')","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'6705bed4-63c5-4a09-b311-42b3e8da5a39')","etag":"\"460\"","type":"SP.List"},"Id":"6705bed4-63c5-4a09-b311-42b3e8da5a39"}}
---batchresponse_7dd81e38-43f3-445b-955d-e558af57d5cc--
+{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('bertonline.sharepoint.com%2Cb56adf79-ff6a-4964-a63a-ff1fa23be9f8%2C8c8e101c-1b0d-4253-85e7-c30039bf46e2')/lists(id)","value":[{"@odata.etag":"\"f90d07e0-bbea-4464-9611-f695d0b7b3e4,76\"","id":"f90d07e0-bbea-4464-9611-f695d0b7b3e4"}]}}]}
