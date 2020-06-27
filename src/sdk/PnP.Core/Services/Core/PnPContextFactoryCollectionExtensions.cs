@@ -18,7 +18,9 @@ namespace PnP.Core.Services
             // Add a SharePoint Online Context Factory service instance
             return collection
                 .AddSettings()
+#if !BLAZOR
                 .AddTelemetryServices()
+#endif
                 .AddHttpClients()
                 .AddPnPServices();
         }
@@ -39,7 +41,9 @@ namespace PnP.Core.Services
             // Add a PnP Context Factory service instance
             return collection
                 .AddSettings()
+#if !BLAZOR
                 .AddTelemetryServices()
+#endif
                 .AddHttpHandlers()
                 .AddHttpClients()
                 .AddPnPServices();
@@ -69,6 +73,7 @@ namespace PnP.Core.Services
                    .AddScoped<IPnPContextFactory, PnPContextFactory>();
         }
 
+#if !BLAZOR
         private static IServiceCollection AddTelemetryServices(this IServiceCollection collection)
         {
             var settingsService = collection.BuildServiceProvider().GetRequiredService<ISettings>();
@@ -84,6 +89,6 @@ namespace PnP.Core.Services
                 }
             });
         }
-
+#endif
     }
 }

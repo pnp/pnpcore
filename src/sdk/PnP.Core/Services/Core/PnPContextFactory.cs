@@ -18,8 +18,11 @@ namespace PnP.Core.Services
             IAuthenticationProviderFactory authenticationProviderFactory,
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
-            ISettings settingsClient,
-            TelemetryClient telemetryClient)
+            ISettings settingsClient
+#if !BLAZOR
+            ,TelemetryClient telemetryClient
+#endif
+            )
         {
             // We need the options
             if (options == null)
@@ -34,7 +37,11 @@ namespace PnP.Core.Services
             SharePointRestClient = sharePointRestClient;
             MicrosoftGraphClient = microsoftGraphClient;
             SettingsClient = settingsClient;
+#if !BLAZOR
             TelemetryClient = telemetryClient;
+#else
+            TelemetryClient = null;
+#endif
         }
 
         protected PnPContextFactoryOptions Options { get; private set; }
@@ -185,7 +192,7 @@ namespace PnP.Core.Services
         internal void ConfigureTelemetry(PnPContext context)
         {
             // Populate the Azure AD tenant id
-            if (SettingsClient != null && !SettingsClient.DisableTelemetry)
+            if (TelemetryClient != null && SettingsClient != null && !SettingsClient.DisableTelemetry)
             {
                 context.SetAADTenantId();
             }

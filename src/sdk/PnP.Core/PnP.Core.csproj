@@ -13,6 +13,7 @@
     <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Configurations>Debug;Release;Blazor</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

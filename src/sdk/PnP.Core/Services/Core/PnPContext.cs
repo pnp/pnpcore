@@ -425,7 +425,10 @@ namespace PnP.Core.Services
             if (disposing)
             {
                 // Flush telemetry
-                telemetry.Flush();                
+                if (telemetry != null)
+                {
+                    telemetry.Flush();
+                }
             }
 
             disposed = true;

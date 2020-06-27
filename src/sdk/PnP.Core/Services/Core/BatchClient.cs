@@ -105,7 +105,14 @@ namespace PnP.Core.Services
         internal BatchClient(PnPContext context, ISettings settingsClient, TelemetryClient telemetryClient)
         {
             PnPContext = context;
-            telemetryManager = new TelemetryManager(telemetryClient, settingsClient);
+            if (telemetryClient != null)
+            {
+                telemetryManager = new TelemetryManager(telemetryClient, settingsClient);
+            }
+            else
+            {
+                telemetryManager = null;
+            }
 
             HttpMicrosoftGraphMaxRetries = settingsClient.HttpMicrosoftGraphMaxRetries;
             HttpMicrosoftGraphDelayInSeconds = settingsClient.HttpMicrosoftGraphDelayInSeconds;
@@ -599,7 +606,7 @@ namespace PnP.Core.Services
 
                 counter++;
 
-                telemetryManager.LogServiceRequest(batch, request, PnPContext);
+                telemetryManager?.LogServiceRequest(batch, request, PnPContext);
             }
 
             JsonSerializerOptions options = new JsonSerializerOptions()
@@ -841,7 +848,7 @@ namespace PnP.Core.Services
                 }
 #endif
 
-                telemetryManager.LogServiceRequest(batch, request, PnPContext);
+                telemetryManager?.LogServiceRequest(batch, request, PnPContext);
             }
 
             // Batch closing
