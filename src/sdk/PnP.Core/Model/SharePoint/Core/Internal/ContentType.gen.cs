@@ -51,7 +51,22 @@
 
         public bool Sealed { get => GetValue<bool>(); set => SetValue(value); }
 
+        [SharePointProperty("FieldLinks", Expandable = true)]
+        public IFieldLinkCollection FieldLinks
+        {
+            get
+            {
+                if (!HasValue(nameof(FieldLinks)))
+                {
+                    var fields = new FieldLinkCollection(this.PnPContext, this, nameof(FieldLinks));
+                    SetValue(fields);
+                }
+                return GetValue<IFieldLinkCollection>();
+            }
+        }
+
         [KeyProperty("StringId")]
         public override object Key { get => this.StringId; set => this.StringId = value.ToString(); }
+
     }
 }

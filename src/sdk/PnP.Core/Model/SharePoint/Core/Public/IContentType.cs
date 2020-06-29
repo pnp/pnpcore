@@ -125,5 +125,42 @@
         /// Gets or Sets whether the Content Type is sealed
         /// </summary>
         public bool Sealed { get; set; }
+
+        // TODO To implement
+        ///// <summary>
+        ///// To update...
+        ///// </summary>
+        //public IUserResource DescriptionResource { get; }
+
+        /// <summary>
+        /// Gets the collection of field links of the Content Type.
+        /// </summary>
+        public IFieldLinkCollection FieldLinks { get; }
+
+        // TODO To implement
+        ///// <summary>
+        ///// To update...
+        ///// </summary>
+        //public IFieldCollection Fields { get; }
+
+        // TODO To implement
+        ///// <summary>
+        ///// To update...
+        ///// </summary>
+        //public IUserResource NameResource { get; }
+
+        // TODO To implement
+        // TODO How to handle this ? (Parent already exists in DataModelBase)
+        ///// <summary>
+        ///// To update...
+        ///// </summary>
+        //public IContentType Parent { get; }
+
+        // TODO To implement
+        ///// <summary>
+        ///// To update...
+        ///// </summary>
+        //public IWorkflowAssociationCollection WorkflowAssociations { get; }
+
     }
 }
