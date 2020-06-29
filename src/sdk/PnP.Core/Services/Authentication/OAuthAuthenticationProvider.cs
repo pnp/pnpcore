@@ -28,6 +28,7 @@ namespace PnP.Core.Services
         private const string defaultAADAppId = "31359c7f-bd7e-475c-86db-fdb8c937548e";
 
         private readonly ILogger log;
+        private readonly IOAuthAccessTokenProvider accessTokenProvider;
 
         // Token cache handling
         private static readonly SemaphoreSlim semaphoreSlimTokens = new SemaphoreSlim(1);
@@ -48,9 +49,10 @@ namespace PnP.Core.Services
         /// Default constructor
         /// </summary>
         /// <param name="logger">Logger</param>
-        public OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
+        public OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger, IOAuthAccessTokenProvider accessTokenProvider = null)
         {
             log = logger;
+            this.accessTokenProvider = accessTokenProvider;
         }
 
         /// <summary>
@@ -97,10 +99,17 @@ namespace PnP.Core.Services
                     break;
                 case OAuthAccessTokenConfiguration accessTokenConfig:
                     {
+                        string accessToken = "";
                         if (!string.IsNullOrEmpty(accessTokenConfig.AccessToken))
                         {
-                            request.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessTokenConfig.AccessToken);
+                            accessToken = accessTokenConfig.AccessToken;
                         }
+                        if (accessTokenProvider != null)
+                        {
+                            accessToken = await accessTokenProvider.GetAccessTokenAsync(resource);
+                        }
+                        request.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessToken);
+
                         break;
                     }
             }
@@ -128,6 +137,14 @@ namespace PnP.Core.Services
                         if (!string.IsNullOrEmpty(accessTokenConfig.AccessToken))
                         {
                             return accessTokenConfig.AccessToken;
+                        }
+                        if (accessTokenProvider != null)
+                        {
+                            string accessToken = await accessTokenProvider.GetAccessTokenAsync(PnPConstants.MicrosoftGraphBaseUri);
+                            if (!string.IsNullOrEmpty(accessToken))
+                            {
+                                return accessToken;
+                            }
                         }
                         break;
                     }
@@ -158,6 +175,14 @@ namespace PnP.Core.Services
                         if (!string.IsNullOrEmpty(accessTokenConfig.AccessToken))
                         {
                             return accessTokenConfig.AccessToken;
+                        }
+                        if (accessTokenProvider != null)
+                        {
+                            string accessToken = await accessTokenProvider.GetAccessTokenAsync(resource);
+                            if (!string.IsNullOrEmpty(accessToken))
+                            {
+                                return accessToken;
+                            }
                         }
                         break;
                     }
@@ -262,7 +287,7 @@ namespace PnP.Core.Services
                     string accessToken = await AcquireTokenAsync(resourceUri, userPrincipalName, userPassword).ConfigureAwait(false);
                     log.LogInformation($"Successfully requested new access token resource {resourceUri.DnsSafeHost} and user {userPrincipalName}");
                     AddTokenToCache(resourceUri, tokenCache, accessToken);
-                    
+
                     // Register a thread to invalidate the access token once's it's expired
                     tokenResetEvent = new AutoResetEvent(false);
                     TokenWaitInfo wi = new TokenWaitInfo();
