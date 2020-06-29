@@ -1,0 +1,47 @@
+@page "/listInfo"
+@attribute [Authorize]
+@using PnP.Core.Model.SharePoint;
+@using PnP.Core.Services;
+@inject IMyPnPContextFactory pnpContextFactory
+
+<h1>SharePoint Lists info</h1>
+
+@if (isLoading || lists == null)
+{
+    <p><em>Loading lists...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var list in lists)
+            {
+                <tr>
+                    <td>@list.Title</td>
+                    <td>@list.Id</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<IList> lists;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using (var ctx = pnpContextFactory.GetContext())
+        {
+            var web = await ctx.Web.GetAsync(w => w.Lists);
+            lists = web.Lists.ToList();
+            isLoading = false;
+        }
+    }
+}
