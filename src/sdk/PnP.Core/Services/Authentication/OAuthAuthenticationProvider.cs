@@ -100,15 +100,21 @@ namespace PnP.Core.Services
                 case OAuthAccessTokenConfiguration accessTokenConfig:
                     {
                         string accessToken = "";
+                        // Did we set an access token on the config?
                         if (!string.IsNullOrEmpty(accessTokenConfig.AccessToken))
                         {
                             accessToken = accessTokenConfig.AccessToken;
                         }
-                        if (accessTokenProvider != null)
+                        // Do we have an external access token provider?
+                        else if (accessTokenProvider != null)
                         {
-                            accessToken = await accessTokenProvider.GetAccessTokenAsync(resource);
+                            accessToken = await accessTokenProvider.GetAccessTokenAsync(resource).ConfigureAwait(false);
                         }
-                        request.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessToken);
+
+                        if (!string.IsNullOrEmpty(accessToken))
+                        {
+                            request.Headers.Authorization = new AuthenticationHeaderValue("bearer", accessToken);
+                        }
 
                         break;
                     }
@@ -140,7 +146,7 @@ namespace PnP.Core.Services
                         }
                         if (accessTokenProvider != null)
                         {
-                            string accessToken = await accessTokenProvider.GetAccessTokenAsync(PnPConstants.MicrosoftGraphBaseUri);
+                            string accessToken = await accessTokenProvider.GetAccessTokenAsync(PnPConstants.MicrosoftGraphBaseUri).ConfigureAwait(false);
                             if (!string.IsNullOrEmpty(accessToken))
                             {
                                 return accessToken;
@@ -178,7 +184,7 @@ namespace PnP.Core.Services
                         }
                         if (accessTokenProvider != null)
                         {
-                            string accessToken = await accessTokenProvider.GetAccessTokenAsync(resource);
+                            string accessToken = await accessTokenProvider.GetAccessTokenAsync(resource).ConfigureAwait(false);
                             if (!string.IsNullOrEmpty(accessToken))
                             {
                                 return accessToken;
