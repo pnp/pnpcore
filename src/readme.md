@@ -7,3 +7,4 @@ Folder | Description
 sdk | The code of the PnP Core SDK
 tools | Source code of additional tools and utilities that are used to maintain the PnP Core SDK
 samples | Simple sample solutions
+generated | Contains model classes that are generated, speeding up the model development
