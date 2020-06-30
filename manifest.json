@@ -654,7 +654,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IContentType.html",
-          "hash": "d0/UeirQuT8NnA1iQkNUEA=="
+          "hash": "hHHUX2YNnG15oAVcnKK4Yg=="
         }
       },
       "is_incremental": false,
@@ -715,6 +715,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFieldCollection.html",
           "hash": "nvZE1Od/ANWvxjMM0n02xA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IFieldLink.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IFieldLink.html",
+          "hash": "UFH7UBIVTGwDHIgbjiK2Mg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IFieldLinkCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html",
+          "hash": "8CxlObOWH8A37ENFOkegew=="
         }
       },
       "is_incremental": false,
@@ -894,7 +918,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "Ql+FiDziv8OVoIGzDO/CUA=="
+          "hash": "nKeUIQmTDcPT/3Az07XmAQ=="
         }
       },
       "is_incremental": false,
@@ -1574,6 +1598,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.IOAuthAccessTokenProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.IOAuthAccessTokenProvider.html",
+          "hash": "Zm7SaeSVNP93pyGysXLXsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Services.IPnPContextFactory.yml",
       "output": {
         ".html": {
@@ -1626,7 +1662,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.OAuthAuthenticationProvider.html",
-          "hash": "39kqHoZtqMO6njUb+C9CNA=="
+          "hash": "hL9oB0Wb6mXPfY3wV6CIlw=="
         }
       },
       "is_incremental": false,
@@ -1710,7 +1746,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactory.html",
-          "hash": "H/3IOdPtUzN7QRVWRKel9A=="
+          "hash": "J+AwDWPUUDx3YW20e4pHDQ=="
         }
       },
       "is_incremental": false,
@@ -1722,7 +1758,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html",
-          "hash": "AlWDgEp+EOpjg6xCKG3TZw=="
+          "hash": "iy860q7kjlQnBVk7ctFY7g=="
         }
       },
       "is_incremental": false,
@@ -1794,7 +1830,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.html",
-          "hash": "QbdfqcCOTT3LC2R+Ac3pmw=="
+          "hash": "DM9o0hiswf4AiUNy1T6ZCA=="
         }
       },
       "is_incremental": false,
@@ -1854,7 +1890,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "pJdHPEsVKe0FhGlMSYmhIw=="
+          "hash": "2HpdxP39s1lcMDUXuds91w=="
         }
       },
       "is_incremental": false,
@@ -2145,13 +2181,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 17,
-          "skipped_file_count": 15
+          "skipped_file_count": 17
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 152,
-          "skipped_file_count": 148
+          "total_file_count": 155,
+          "skipped_file_count": 146
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

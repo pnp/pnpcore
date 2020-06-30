@@ -2796,6 +2796,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IContentType.EditFormUrl
   nameWithType: IContentType.EditFormUrl
+- uid: PnP.Core.Model.SharePoint.IContentType.FieldLinks
+  name: FieldLinks
+  href: api/PnP.Core.Model.SharePoint.IContentType.html#PnP_Core_Model_SharePoint_IContentType_FieldLinks
+  commentId: P:PnP.Core.Model.SharePoint.IContentType.FieldLinks
+  fullName: PnP.Core.Model.SharePoint.IContentType.FieldLinks
+  nameWithType: IContentType.FieldLinks
+- uid: PnP.Core.Model.SharePoint.IContentType.FieldLinks*
+  name: FieldLinks
+  href: api/PnP.Core.Model.SharePoint.IContentType.html#PnP_Core_Model_SharePoint_IContentType_FieldLinks_
+  commentId: Overload:PnP.Core.Model.SharePoint.IContentType.FieldLinks
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IContentType.FieldLinks
+  nameWithType: IContentType.FieldLinks
 - uid: PnP.Core.Model.SharePoint.IContentType.Group
   name: Group
   href: api/PnP.Core.Model.SharePoint.IContentType.html#PnP_Core_Model_SharePoint_IContentType_Group
@@ -4553,6 +4566,154 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserAsync
   nameWithType: IFieldCollection.AddUserAsync
+- uid: PnP.Core.Model.SharePoint.IFieldLink
+  name: IFieldLink
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html
+  commentId: T:PnP.Core.Model.SharePoint.IFieldLink
+  fullName: PnP.Core.Model.SharePoint.IFieldLink
+  nameWithType: IFieldLink
+- uid: PnP.Core.Model.SharePoint.IFieldLink.DisplayName
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_DisplayName
+  commentId: P:PnP.Core.Model.SharePoint.IFieldLink.DisplayName
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.DisplayName
+  nameWithType: IFieldLink.DisplayName
+- uid: PnP.Core.Model.SharePoint.IFieldLink.DisplayName*
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_DisplayName_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLink.DisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.DisplayName
+  nameWithType: IFieldLink.DisplayName
+- uid: PnP.Core.Model.SharePoint.IFieldLink.FieldInternalName
+  name: FieldInternalName
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_FieldInternalName
+  commentId: P:PnP.Core.Model.SharePoint.IFieldLink.FieldInternalName
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.FieldInternalName
+  nameWithType: IFieldLink.FieldInternalName
+- uid: PnP.Core.Model.SharePoint.IFieldLink.FieldInternalName*
+  name: FieldInternalName
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_FieldInternalName_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLink.FieldInternalName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.FieldInternalName
+  nameWithType: IFieldLink.FieldInternalName
+- uid: PnP.Core.Model.SharePoint.IFieldLink.Hidden
+  name: Hidden
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_Hidden
+  commentId: P:PnP.Core.Model.SharePoint.IFieldLink.Hidden
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.Hidden
+  nameWithType: IFieldLink.Hidden
+- uid: PnP.Core.Model.SharePoint.IFieldLink.Hidden*
+  name: Hidden
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_Hidden_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLink.Hidden
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.Hidden
+  nameWithType: IFieldLink.Hidden
+- uid: PnP.Core.Model.SharePoint.IFieldLink.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_Id
+  commentId: P:PnP.Core.Model.SharePoint.IFieldLink.Id
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.Id
+  nameWithType: IFieldLink.Id
+- uid: PnP.Core.Model.SharePoint.IFieldLink.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLink.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.Id
+  nameWithType: IFieldLink.Id
+- uid: PnP.Core.Model.SharePoint.IFieldLink.Name
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_Name
+  commentId: P:PnP.Core.Model.SharePoint.IFieldLink.Name
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.Name
+  nameWithType: IFieldLink.Name
+- uid: PnP.Core.Model.SharePoint.IFieldLink.Name*
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_Name_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLink.Name
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.Name
+  nameWithType: IFieldLink.Name
+- uid: PnP.Core.Model.SharePoint.IFieldLink.ReadOnly
+  name: ReadOnly
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_ReadOnly
+  commentId: P:PnP.Core.Model.SharePoint.IFieldLink.ReadOnly
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.ReadOnly
+  nameWithType: IFieldLink.ReadOnly
+- uid: PnP.Core.Model.SharePoint.IFieldLink.ReadOnly*
+  name: ReadOnly
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_ReadOnly_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLink.ReadOnly
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.ReadOnly
+  nameWithType: IFieldLink.ReadOnly
+- uid: PnP.Core.Model.SharePoint.IFieldLink.Required
+  name: Required
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_Required
+  commentId: P:PnP.Core.Model.SharePoint.IFieldLink.Required
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.Required
+  nameWithType: IFieldLink.Required
+- uid: PnP.Core.Model.SharePoint.IFieldLink.Required*
+  name: Required
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_Required_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLink.Required
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.Required
+  nameWithType: IFieldLink.Required
+- uid: PnP.Core.Model.SharePoint.IFieldLink.ShowInDisplayForm
+  name: ShowInDisplayForm
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_ShowInDisplayForm
+  commentId: P:PnP.Core.Model.SharePoint.IFieldLink.ShowInDisplayForm
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.ShowInDisplayForm
+  nameWithType: IFieldLink.ShowInDisplayForm
+- uid: PnP.Core.Model.SharePoint.IFieldLink.ShowInDisplayForm*
+  name: ShowInDisplayForm
+  href: api/PnP.Core.Model.SharePoint.IFieldLink.html#PnP_Core_Model_SharePoint_IFieldLink_ShowInDisplayForm_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLink.ShowInDisplayForm
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLink.ShowInDisplayForm
+  nameWithType: IFieldLink.ShowInDisplayForm
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection
+  name: IFieldLinkCollection
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.IFieldLinkCollection
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection
+  nameWithType: IFieldLinkCollection
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: Add(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(PnP.Core.Services.Batch, System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IFieldLinkCollection.Add(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: Add(String, String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IFieldLinkCollection.Add(String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add*
+  name: Add
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLinkCollection.Add
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add
+  nameWithType: IFieldLinkCollection.Add
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: AddAsync(String, String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IFieldLinkCollection.AddAsync(String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync*
+  name: AddAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync
+  nameWithType: IFieldLinkCollection.AddAsync
 - uid: PnP.Core.Model.SharePoint.IList
   name: IList
   href: api/PnP.Core.Model.SharePoint.IList.html
@@ -9137,6 +9298,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.IAuthenticationProviderFactory.CreateDefault
   nameWithType: IAuthenticationProviderFactory.CreateDefault
+- uid: PnP.Core.Services.IOAuthAccessTokenProvider
+  name: IOAuthAccessTokenProvider
+  href: api/PnP.Core.Services.IOAuthAccessTokenProvider.html
+  commentId: T:PnP.Core.Services.IOAuthAccessTokenProvider
+  fullName: PnP.Core.Services.IOAuthAccessTokenProvider
+  nameWithType: IOAuthAccessTokenProvider
+- uid: PnP.Core.Services.IOAuthAccessTokenProvider.GetAccessTokenAsync(System.Uri)
+  name: GetAccessTokenAsync(Uri)
+  href: api/PnP.Core.Services.IOAuthAccessTokenProvider.html#PnP_Core_Services_IOAuthAccessTokenProvider_GetAccessTokenAsync_System_Uri_
+  commentId: M:PnP.Core.Services.IOAuthAccessTokenProvider.GetAccessTokenAsync(System.Uri)
+  fullName: PnP.Core.Services.IOAuthAccessTokenProvider.GetAccessTokenAsync(System.Uri)
+  nameWithType: IOAuthAccessTokenProvider.GetAccessTokenAsync(Uri)
+- uid: PnP.Core.Services.IOAuthAccessTokenProvider.GetAccessTokenAsync*
+  name: GetAccessTokenAsync
+  href: api/PnP.Core.Services.IOAuthAccessTokenProvider.html#PnP_Core_Services_IOAuthAccessTokenProvider_GetAccessTokenAsync_
+  commentId: Overload:PnP.Core.Services.IOAuthAccessTokenProvider.GetAccessTokenAsync
+  isSpec: "True"
+  fullName: PnP.Core.Services.IOAuthAccessTokenProvider.GetAccessTokenAsync
+  nameWithType: IOAuthAccessTokenProvider.GetAccessTokenAsync
 - uid: PnP.Core.Services.IPnPContextFactory
   name: IPnPContextFactory
   href: api/PnP.Core.Services.IPnPContextFactory.html
@@ -9492,15 +9672,15 @@ references:
   commentId: T:PnP.Core.Services.OAuthAuthenticationProvider
   fullName: PnP.Core.Services.OAuthAuthenticationProvider
   nameWithType: OAuthAuthenticationProvider
-- uid: PnP.Core.Services.OAuthAuthenticationProvider.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.OAuthAuthenticationProvider})
-  name: OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  href: api/PnP.Core.Services.OAuthAuthenticationProvider.html#PnP_Core_Services_OAuthAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_OAuthAuthenticationProvider__
-  commentId: M:PnP.Core.Services.OAuthAuthenticationProvider.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.OAuthAuthenticationProvider})
-  name.vb: OAuthAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-  fullName: PnP.Core.Services.OAuthAuthenticationProvider.OAuthAuthenticationProvider(Microsoft.Extensions.Logging.ILogger<PnP.Core.Services.OAuthAuthenticationProvider>)
-  fullName.vb: PnP.Core.Services.OAuthAuthenticationProvider.OAuthAuthenticationProvider(Microsoft.Extensions.Logging.ILogger(Of PnP.Core.Services.OAuthAuthenticationProvider))
-  nameWithType: OAuthAuthenticationProvider.OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  nameWithType.vb: OAuthAuthenticationProvider.OAuthAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Services.OAuthAuthenticationProvider.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.OAuthAuthenticationProvider},PnP.Core.Services.IOAuthAccessTokenProvider)
+  name: OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IOAuthAccessTokenProvider)
+  href: api/PnP.Core.Services.OAuthAuthenticationProvider.html#PnP_Core_Services_OAuthAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_OAuthAuthenticationProvider__PnP_Core_Services_IOAuthAccessTokenProvider_
+  commentId: M:PnP.Core.Services.OAuthAuthenticationProvider.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.OAuthAuthenticationProvider},PnP.Core.Services.IOAuthAccessTokenProvider)
+  name.vb: OAuthAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IOAuthAccessTokenProvider)
+  fullName: PnP.Core.Services.OAuthAuthenticationProvider.OAuthAuthenticationProvider(Microsoft.Extensions.Logging.ILogger<PnP.Core.Services.OAuthAuthenticationProvider>, PnP.Core.Services.IOAuthAccessTokenProvider)
+  fullName.vb: PnP.Core.Services.OAuthAuthenticationProvider.OAuthAuthenticationProvider(Microsoft.Extensions.Logging.ILogger(Of PnP.Core.Services.OAuthAuthenticationProvider), PnP.Core.Services.IOAuthAccessTokenProvider)
+  nameWithType: OAuthAuthenticationProvider.OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IOAuthAccessTokenProvider)
+  nameWithType.vb: OAuthAuthenticationProvider.OAuthAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IOAuthAccessTokenProvider)
 - uid: PnP.Core.Services.OAuthAuthenticationProvider.#ctor*
   name: OAuthAuthenticationProvider
   href: api/PnP.Core.Services.OAuthAuthenticationProvider.html#PnP_Core_Services_OAuthAuthenticationProvider__ctor_
