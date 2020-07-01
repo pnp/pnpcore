@@ -213,3 +213,14 @@ if (document != null)
     Console.WriteLine($"Document Title: {document.Title}");
 }
 ```
+
+Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the `Include()` lambda expression, below example shows using `Include()` in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection the Name and FieldLinks properties are loaded and for FieldLinks the Name property is loaded.
+
+```csharp
+await context.Web.GetAsync(p => p.Title,
+                           p => p.ContentTypes.Include(p => p.Name),
+                           p => p.Lists.Include(p => p.Id, p => p.Title, p => p.DocumentTemplate,
+                               p => p.ContentTypes.Include(p => p.Name,
+                                    p => p.FieldLinks.Include(p => p.Name)))
+                          );
+```
