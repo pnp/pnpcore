@@ -214,6 +214,124 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(site.Id != Guid.Empty);
             }
         }
+
+        [TestMethod]
+        public async Task ExpandWithIncludeViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+                var web = await context.Web.GetAsync(p => p.Title, 
+                                                     p => p.ContentTypes.Include(p => p.Name), 
+                                                     p => p.Lists.Include(p => p.Id, p => p.Title, p => p.DocumentTemplate));
+                Assert.IsTrue(web.Lists.Requested);
+                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.DocumentTemplate));
+                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(web.ContentTypes.Requested);
+                Assert.IsTrue(web.ContentTypes.Count() > 0);
+                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.StringId));
+                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.Name));
+                Assert.IsFalse(web.ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+            }
+        }
+
+        [TestMethod]
+        public async Task ExpandWithCollectionIncludeViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+                var web = await context.Web.GetAsync(p => p.Title, 
+                                                     p => p.ContentTypes.Include(p => p.Name), 
+                                                     p => p.Lists.Include(p => p.Id, p => p.Title, p => p.DocumentTemplate, p=>p.ContentTypes));
+                Assert.IsTrue(web.Lists.Requested);
+                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.DocumentTemplate));
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.StringId));
+                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(web.ContentTypes.Requested);
+                Assert.IsTrue(web.ContentTypes.Count() > 0);
+                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.StringId));
+                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.Name));
+                Assert.IsFalse(web.ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+            }
+        }
+
+        [TestMethod]
+        public async Task ExpandRecursivelyWithCollectionIncludeViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+                var web = await context.Web.GetAsync(p => p.Title, 
+                                                     p => p.ContentTypes.Include(p => p.Name),
+                                                     p => p.Lists.Include(p => p.Id, p => p.Title, p => p.DocumentTemplate,
+                                                          p => p.ContentTypes.Include(p => p.Name,
+                                                               p => p.FieldLinks.Include(p => p.Name)))
+                                                    );
+                Assert.IsTrue(web.Lists.Requested);
+                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.DocumentTemplate));
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(web.Lists.First().ContentTypes.Requested);
+                Assert.IsTrue(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.StringId));
+                Assert.IsFalse(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.Requested);
+                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsFalse(web.Lists.First().ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Hidden));
+                Assert.IsTrue(web.ContentTypes.Requested);
+                Assert.IsTrue(web.ContentTypes.Count() > 0);
+                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.StringId));
+                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.Name));
+                Assert.IsFalse(web.ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+            }
+        }
+
+        [TestMethod]
+        public async Task ExpandRecursivelyUnorderedWithCollectionIncludeViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+                var web = await context.Web.GetAsync(p => p.ContentTypes.Include(p => p.Name),
+                                                     p => p.Title,
+                                                     p => p.Lists.Include(p => p.DocumentTemplate,
+                                                                          p => p.ContentTypes.Include(p => p.Name, p => p.FieldLinks, p=>p.NewFormUrl),
+                                                                          p => p.Id, p => p.Title),
+                                                     p => p.AlternateCSS
+                                                    );
+                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCSS));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterPageUrl));
+                Assert.IsTrue(web.Lists.Requested);
+                Assert.IsTrue(web.Lists.Count() > 0);
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.DocumentTemplate));
+                Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(web.Lists.First().ContentTypes.Requested);
+                Assert.IsTrue(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.StringId));
+                Assert.IsFalse(web.Lists.First().ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.Requested);
+                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(web.Lists.First().ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Hidden));
+                Assert.IsTrue(web.ContentTypes.Requested);
+                Assert.IsTrue(web.ContentTypes.Count() > 0);
+                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.StringId));
+                Assert.IsTrue(web.ContentTypes.First().IsPropertyAvailable(p => p.Name));
+                Assert.IsFalse(web.ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
+            }
+        }
         #endregion
 
         #region Tests that use Graph to hit SharePoint

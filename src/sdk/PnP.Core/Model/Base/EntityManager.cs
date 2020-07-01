@@ -300,21 +300,31 @@ namespace PnP.Core.Model
                             fieldToLoad = (a as MemberExpression).Member.Name;
                         }
                     }
-
-                    // Non expandable collections do not count as regular field as they're loaded via an additional query
-                    if (nonExpandableGraphCollections.Any())
+                    else if (expression.Body is MethodCallExpression)
                     {
-                        if (nonExpandableGraphCollections.FirstOrDefault(p => p.Name.Equals(fieldToLoad, StringComparison.InvariantCultureIgnoreCase)) == null)
+                        if ((expression.Body as MethodCallExpression).Method.Name == "Include")
+                        {
+                            fieldToLoad = ParseInclude(entityInfo, expression as LambdaExpression, null);
+                        }
+                    }
+
+                    if (fieldToLoad != null)
+                    {
+                        // Non expandable collections do not count as regular field as they're loaded via an additional query
+                        if (nonExpandableGraphCollections.Any())
+                        {
+                            if (nonExpandableGraphCollections.FirstOrDefault(p => p.Name.Equals(fieldToLoad, StringComparison.InvariantCultureIgnoreCase)) == null)
+                            {
+                                graphFieldsToLoad.Add(fieldToLoad);
+                            }
+                        }
+                        else
                         {
                             graphFieldsToLoad.Add(fieldToLoad);
                         }
-                    }
-                    else
-                    {
-                        graphFieldsToLoad.Add(fieldToLoad);
-                    }
 
-                    sharePointFieldsToLoad.Add(fieldToLoad);
+                        sharePointFieldsToLoad.Add(fieldToLoad);
+                    }
                 }
 
                 if (graphFieldsToLoad.Count > 0)
@@ -335,7 +345,6 @@ namespace PnP.Core.Model
                 {
                     entityInfo.SharePointFieldsLoadedViaExpression = true;
                 }
-
             }
 
             // If fields are marked as key field we always include them in the load 
@@ -364,6 +373,92 @@ namespace PnP.Core.Model
             return entityInfo;
         }
 
+        private static string ParseInclude(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)
+        {
+            string fieldToLoad = ((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Member.Name;
+            var collectionPublicType = GetCollectionPublicType(((expression.Body as MethodCallExpression).Arguments[0] as MemberExpression).Type);
+            var collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(collectionPublicType);
+
+            bool first = false;
+            if (entityFieldExpandInfo == null)
+            {
+                first = true;
+                entityFieldExpandInfo = new EntityFieldExpandInfo()
+                {
+                    Name = fieldToLoad,
+                    Type = collectionPublicType
+                };
+            }
+
+            List<string> expandFieldsToLoad = new List<string>();
+
+            foreach (var includeFieldExpression in ((expression.Body as MethodCallExpression).Arguments[1] as NewArrayExpression).Expressions)
+            {
+                string expandFieldToLoad = null;
+                if (includeFieldExpression is UnaryExpression)
+                {
+                    var fieldExpressionBody = ((includeFieldExpression as UnaryExpression).Operand as LambdaExpression).Body;
+                    if (fieldExpressionBody is MemberExpression)
+                    {
+                        expandFieldToLoad = (fieldExpressionBody as MemberExpression).Member.Name;
+
+                        var expandField = collectionEntityInfo.Fields.First(p => p.Name == expandFieldToLoad);
+
+                        entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = expandFieldToLoad, Expandable = expandField.SharePointExpandable || expandField.GraphExpandable });
+                    }
+                    else if (fieldExpressionBody is UnaryExpression)
+                    {
+                        expandFieldToLoad = ((fieldExpressionBody as UnaryExpression).Operand as MemberExpression).Member.Name;
+
+                        var expandField = collectionEntityInfo.Fields.First(p => p.Name == expandFieldToLoad);
+
+                        entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = expandFieldToLoad, Expandable = expandField.SharePointExpandable || expandField.GraphExpandable });
+                    }
+                    else if (fieldExpressionBody is MethodCallExpression)
+                    {
+                        if ((fieldExpressionBody as MethodCallExpression).Method.Name == "Include")
+                        {
+                            var expr = (((includeFieldExpression as UnaryExpression).Operand as LambdaExpression).Body as MethodCallExpression).Arguments[0] as MemberExpression;
+                            var fld = expr.Member.Name;
+                            var publicTypeRecursive = GetCollectionPublicType(expr.Type);
+                            var entityInfoRecursive = EntityManager.Instance.GetStaticClassInfo(publicTypeRecursive);
+                            
+                            var expandedEntityField = new EntityFieldExpandInfo() { Name = fld, Type = publicTypeRecursive, Expandable = true };
+                            ParseInclude(entityInfo, (includeFieldExpression as UnaryExpression).Operand as LambdaExpression, expandedEntityField);
+
+                            // Add key field if needed
+                            var keyFieldRecursive = expandedEntityField.Fields.FirstOrDefault(p => p.Name == entityInfoRecursive.ActualKeyFieldName);
+                            if (keyFieldRecursive == null)
+                            {
+                                expandedEntityField.Fields.Add(new EntityFieldExpandInfo() { Name = entityInfoRecursive.ActualKeyFieldName });
+                            }
+
+                            entityFieldExpandInfo.Fields.Add(expandedEntityField);
+                        }
+                    }                    
+                }
+            }
+
+            if (first)
+            {
+                // Add key field if needed
+                var keyFieldNonRecursive = entityFieldExpandInfo.Fields.FirstOrDefault(p => p.Name == collectionEntityInfo.ActualKeyFieldName);
+                if (keyFieldNonRecursive == null)
+                {
+                    entityFieldExpandInfo.Fields.Add(new EntityFieldExpandInfo() { Name = collectionEntityInfo.ActualKeyFieldName });
+                }
+
+                var fieldToUpdate = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
+
+                if (fieldToUpdate != null)
+                {
+                    fieldToUpdate.ExpandFieldInfo = entityFieldExpandInfo;
+                }
+            }
+
+            return fieldToLoad;
+        }
+
         internal Expression<Func<object, object>>[] GetEntityKeyExpressions(IDataModelParent entity)
         {
             var entityType = entity.GetType();
@@ -386,6 +481,17 @@ namespace PnP.Core.Model
         }
 
         #region Private implementation
+
+        private static Type GetCollectionPublicType(Type type)
+        {
+            var dataModelCollectionInterface = (type as TypeInfo).ImplementedInterfaces.FirstOrDefault(p => p.Name == "IDataModelCollection`1");
+            if (dataModelCollectionInterface != null)
+            {
+                return dataModelCollectionInterface.GenericTypeArguments[0];
+            }
+
+            return null;
+        }
 
         private static Type GetEntityConcreteType(Type type)
         {

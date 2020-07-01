@@ -1,4 +1,12 @@
 ﻿
+SharePoint REST OData info: 
+https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/use-odata-query-operations-in-sharepoint-rest-requests#odata-query-operators-supported-in-the-sharepoint-rest-service
+https://stackoverflow.com/a/33218540
+
+Graph ODATA info:
+https://docs.microsoft.com/en-us/graph/query-parameters
+
+
 Getting lists for a given site:
 /v1.0/sites/{webid}/lists
 /v1.0/sites/bertonline.sharepoint.com,4e261fdf-9a82-49b5-8ada-9dd327444594,c4d2dff7-0bec-43a3-b173-ca2121804b8c/lists

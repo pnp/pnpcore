@@ -29,6 +29,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added support for AddFieldAsXml #71 [ypcode - Yannick Plennevaux]
 - Add basic support for FieldLinks #75 [ypcode - Yannick Plennevaux]
 - Add support for external access token provider (IOAuthAccessTokenProvider) #76 [ypcode - Yannick Plennevaux]
+- Added recursive support for .Include() to define which fields of a collection are loaded [jansenbe - Bert Jansen]
 
 ### Changed
 

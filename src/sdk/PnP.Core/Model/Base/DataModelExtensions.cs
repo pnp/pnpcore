@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -165,6 +166,18 @@ namespace PnP.Core.Model
             var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
 
             (model as TransientObject).SetSystemValue<T>(value, body.Member.Name);
+        }
+
+        /// <summary>
+        /// Enables using the .Include lambda expression syntax on a collection
+        /// </summary>
+        /// <typeparam name="TModel">Collection model</typeparam>
+        /// <param name="collection">Collection to apply the .Include on </param>
+        /// <param name="expressions">Expression</param>
+        /// <returns>Null...return value is not needed</returns>
+        internal static IQueryable<TModel> Include<TModel>(this IDataModelCollection<TModel> collection, params Expression<Func<TModel, object>>[] expressions)
+        {
+            return null;
         }
 
     }

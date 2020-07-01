@@ -460,8 +460,15 @@ namespace PnP.Core.Model
                 // $select
                 foreach (var field in fields)
                 {
-                    sb.Append(JsonMappingHelper.GetRestField(field));
-                    sb.Append(",");
+                    // If there was a selection on which fields to include in an expand (via the Include() option) then add those fields
+                    if (field.SharePointExpandable && field.ExpandFieldInfo != null)
+                    {
+                        AddExpandableSelectRest(sb, field, null, "");
+                    }
+                    else
+                    {
+                        sb.Append($"{JsonMappingHelper.GetRestField(field)},");
+                    }
                 }
 
                 urlParameters.Add("$select", sb.ToString().TrimEnd(new char[] { ',' }));
@@ -474,6 +481,13 @@ namespace PnP.Core.Model
                 if (entity.SharePointFieldsLoadedViaExpression)
                 {
                     sb.Append($"{JsonMappingHelper.GetRestField(field)},");
+
+                    // If there was a selection on which fields to include in an expand (via the Include() option) and the included field was expandable itself then add it 
+                    if (field.ExpandFieldInfo != null)
+                    {
+                        string path = "";
+                        AddExpandableExpandRest(sb, field, null, path);
+                    }
                 }
                 else
                 {
@@ -524,6 +538,70 @@ namespace PnP.Core.Model
             }
 
             return call;
+        }
+
+        private static void AddExpandableExpandRest(StringBuilder sb, EntityFieldInfo field, EntityFieldExpandInfo expandFields, string path)
+        {
+            EntityInfo collectionEntityInfo = null;
+            if (expandFields == null)
+            {
+                collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(field.ExpandFieldInfo.Type);
+                expandFields = field.ExpandFieldInfo;
+            }
+            else
+            {
+                collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(expandFields.Type);
+            }
+
+            foreach (var expandableField in expandFields.Fields.OrderBy(p => p.Expandable))
+            {
+                var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == expandableField.Name);
+
+                if (expandableFieldInfo.SharePointExpandable)
+                {
+                    path = path + "/" + JsonMappingHelper.GetRestField(expandableFieldInfo);
+                    sb.Append($"{JsonMappingHelper.GetRestField(field)}{path},");
+                    if (expandableField.Fields.Any())
+                    {
+                        AddExpandableExpandRest(sb, field, expandableField, path);
+                    }
+                }
+            }
+        }
+
+        private static void AddExpandableSelectRest(StringBuilder sb, EntityFieldInfo field, EntityFieldExpandInfo expandFields, string path)
+        {
+            EntityInfo collectionEntityInfo = null;
+
+            if (expandFields == null)
+            {
+                collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(field.ExpandFieldInfo.Type);
+                expandFields = field.ExpandFieldInfo;
+            }
+            else
+            {
+                if (expandFields.Type != null)
+                {
+                    collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(expandFields.Type);
+                }
+            }
+
+            if (collectionEntityInfo != null)
+            {
+                foreach (var expandableField in expandFields.Fields.OrderBy(p => p.Expandable))
+                {
+                    var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == expandableField.Name);
+                    if (!expandableFieldInfo.SharePointExpandable)
+                    {
+                        sb.Append($"{JsonMappingHelper.GetRestField(field)}{path}/{JsonMappingHelper.GetRestField(expandableFieldInfo)},");
+                    }
+                    else
+                    {
+                        path = path + "/" + JsonMappingHelper.GetRestField(expandableFieldInfo);
+                        AddExpandableSelectRest(sb, field, expandableField, path);
+                    }
+                }
+            }
         }
 
         private ApiCallRequest BuildGetAPICallGraph(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)

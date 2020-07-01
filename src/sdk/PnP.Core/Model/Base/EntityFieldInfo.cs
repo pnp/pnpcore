@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint;
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace PnP.Core.Model
@@ -94,6 +96,11 @@ namespace PnP.Core.Model
         /// Force a call out to the custom mapping handler for this field / the default mapping logic will not be applied
         /// </summary>
         public bool GraphUseCustomMapping { get; set; }
+
+        /// <summary>
+        /// Scope the expand to a set of fields
+        /// </summary>
+        public EntityFieldExpandInfo ExpandFieldInfo { get; set; } 
 
         public object Clone()
         {
