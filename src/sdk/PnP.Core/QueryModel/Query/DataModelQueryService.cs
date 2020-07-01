@@ -73,21 +73,25 @@ namespace PnP.Core.QueryModel
                 // Prepare a variable to hold tha batch request ID
                 Guid batchRequestId = Guid.Empty;
 
-                // Ensure the model's keyfield was requested, this is needed to ensure the loaded model can be added/merged into an existing collection
-                if (!query.Select.Contains(entityInfo.ActualKeyFieldName))
-                {
-                    query.Select.Add(entityInfo.ActualKeyFieldName);
-                }
-
                 // Verify if we're not asking fields which anyhow cannot (yet) be served via Graph
                 bool canUseGraph = true;
-                foreach (var selectProperty in query.Select)
+                // Ensure the model's keyfield was requested, this is needed to ensure the loaded model can be added/merged into an existing collection
+                // Only do this when there was no field filtering, without filtering all default fields are anyhow returned
+                if (query.Select.Any())
                 {
-                    var field = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
-                    if (string.IsNullOrEmpty(field.GraphName))
+                    if (!query.Select.Contains(entityInfo.ActualKeyFieldName))
                     {
-                        canUseGraph = false;
-                        break;
+                        query.Select.Add(entityInfo.ActualKeyFieldName);
+                    }
+                    
+                    foreach (var selectProperty in query.Select)
+                    {
+                        var field = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
+                        if (string.IsNullOrEmpty(field.GraphName))
+                        {
+                            canUseGraph = false;
+                            break;
+                        }
                     }
                 }
 

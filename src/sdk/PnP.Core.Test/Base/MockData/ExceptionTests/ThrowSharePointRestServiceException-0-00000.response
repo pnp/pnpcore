@@ -1,4 +1,4 @@
---batchresponse_9dea3531-3895-4420-9f59-7def76ead12b
+--batchresponse_46cdc1f3-fd8b-435a-adc0-8c2decacc4dc
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 500 Internal Server Error
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575342, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"A list, survey, discussion board, or document library with the specified title already exists in this Web site.  Please choose another title."}}}
---batchresponse_9dea3531-3895-4420-9f59-7def76ead12b--
+--batchresponse_46cdc1f3-fd8b-435a-adc0-8c2decacc4dc--

@@ -1,4 +1,4 @@
---batchresponse_4160477d-47d7-452f-8848-d9b31c62c5e7
+--batchresponse_e27f2282-d3c9-47b1-8a10-db5a947c6fd8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'df7a0960-c93e-4752-a13a-5b245b02a944')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'df7a0960-c93e-4752-a13a-5b245b02a944')","etag":"\"1\"","type":"SP.List"},"Id":"df7a0960-c93e-4752-a13a-5b245b02a944","Title":"Fail list"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'af6f0bee-6133-432a-8f49-b1a7b317eef5')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'af6f0bee-6133-432a-8f49-b1a7b317eef5')","etag":"\"15\"","type":"SP.List"},"Id":"af6f0bee-6133-432a-8f49-b1a7b317eef5","Title":"Form Templates"}]}}
---batchresponse_4160477d-47d7-452f-8848-d9b31c62c5e7--
+--batchresponse_e27f2282-d3c9-47b1-8a10-db5a947c6fd8--

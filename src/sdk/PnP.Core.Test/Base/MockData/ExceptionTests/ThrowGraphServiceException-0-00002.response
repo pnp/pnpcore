@@ -3,8 +3,8 @@
     "code": "BadRequest",
     "message": "Channel name already existed, please use other name",
     "innerError": {
-      "request-id": "d7a23abc-9bd0-4fbd-aa91-725494587797",
-      "date": "2020-06-10T00:04:37"
+      "date": "2020-07-01T17:06:00",
+      "request-id": "a381bafa-b4ba-4680-9b33-64b795054c63"
     }
   }
 }}]}

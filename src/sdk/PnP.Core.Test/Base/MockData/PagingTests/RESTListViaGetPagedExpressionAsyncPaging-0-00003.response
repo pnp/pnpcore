@@ -1,4 +1,4 @@
---batchresponse_0f9e43c4-3e5f-4bad-bb0c-ca92c57a9898
+--batchresponse_441632a3-62d1-4280-8517-6bd8847f5e5d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'9cc9d341-22fe-44ae-8be1-a4ab21307ae3')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'9cc9d341-22fe-44ae-8be1-a4ab21307ae3')","etag":"\"0\"","type":"SP.List"},"Id":"9cc9d341-22fe-44ae-8be1-a4ab21307ae3","Title":"appdata"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'ba6b3621-4f61-450c-86c8-4c5b82b47980')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'ba6b3621-4f61-450c-86c8-4c5b82b47980')","etag":"\"0\"","type":"SP.List"},"Id":"ba6b3621-4f61-450c-86c8-4c5b82b47980","Title":"appfiles"}]}}
---batchresponse_0f9e43c4-3e5f-4bad-bb0c-ca92c57a9898--
+--batchresponse_441632a3-62d1-4280-8517-6bd8847f5e5d--
