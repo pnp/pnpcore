@@ -24,7 +24,7 @@ else
     {
         using (var ctx = pnpContextFactory.GetContext())
         {
-            web = await ctx.Web.GetAsync();
+            web = await ctx.Web.GetAsync(p=>p.Title,p=>p.Description);
             isLoading = false;
         }
     }

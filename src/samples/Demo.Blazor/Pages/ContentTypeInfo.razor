@@ -1,6 +1,7 @@
 @page "/contentTypeInfo"
 @attribute [Authorize]
 @using PnP.Core.Model.SharePoint;
+@using PnP.Core.QueryModel;
 @inject IMyPnPContextFactory pnpContextFactory
 
 <h1>SharePoint Content Types info</h1>
@@ -38,8 +39,14 @@ else
     {
         using (var ctx = pnpContextFactory.GetContext())
         {
-            var web = await ctx.Web.GetAsync(w => w.ContentTypes);
+            var web = await ctx.Web.GetAsync(w => w.ContentTypes.Include(p=>p.Id, p=>p.Name));
             contentTypes = web.ContentTypes.ToList();
+
+            // Linq support seems to still fail, requires debug
+            //var cts = ctx.Web.ContentTypes.Load(p => p.Id, p => p.Name);
+            //contentTypes = cts.ToList();
+
+
             isLoading = false;
         }
     }
