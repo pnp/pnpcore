@@ -74,6 +74,7 @@ Remove-PnPList -Identity TestQueryListsUpdateConsistency -Force
 Remove-PnPList -Identity RESTListItemPaging -Force
 Remove-PnPList -Identity RESTListItemGetPagedAsyncPaging -Force
 Remove-PnPList -Identity GetItemsByCAMLQuery -Force
+Remove-PnPList -Identity ListLinqGetMethods -Force
 
 Disable-PnPFeature -Identity 3bae86a2-776d-499d-9db8-fa4cdc7884f8 -Scope Site
 Disable-PnPFeature -Identity fa6a1bcc-fb4b-446b-8460-f4de5f7411d5 -Scope Web

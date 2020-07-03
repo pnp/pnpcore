@@ -225,6 +225,65 @@ namespace PnP.Core.QueryModel
 
         #endregion
 
+        #region GetById for Lists implementation
+
+        /// <summary>
+        /// Extension method to select a list (IList) by id
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="id">The id to search for</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static Core.Model.SharePoint.IList GetById(
+            this IQueryable<Core.Model.SharePoint.IList> source, Guid id)
+        {
+            // Just rely on the below overload, without providing any selector
+            return source.GetById(id, null);
+        }
+
+        /// <summary>
+        /// Extension method to select a list (IList) by id
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static Core.Model.SharePoint.IList GetById(
+            this IQueryable<Core.Model.SharePoint.IList> source,
+            Guid id,
+            params Expression<Func<Core.Model.SharePoint.IList, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            IQueryable<Core.Model.SharePoint.IList> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<Core.Model.SharePoint.IList, bool>> predicate = l => l.Id == id;
+
+            return source.Provider.Execute<Core.Model.SharePoint.IList>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    ));
+        }
+
+        #endregion
+
+
         #region GetById for List Items implementation
 
         /// <summary>

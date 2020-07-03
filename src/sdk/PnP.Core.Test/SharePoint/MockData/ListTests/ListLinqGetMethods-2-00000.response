@@ -1,0 +1,9 @@
+--batchresponse_82ff9ea0-064f-4a58-9ffe-5b80495e2444
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'a75c4980-e407-4f9d-9521-cd0e0643a739')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'a75c4980-e407-4f9d-9521-cd0e0643a739')","etag":"\"1\"","type":"SP.List"},"BaseTemplate":100,"Id":"a75c4980-e407-4f9d-9521-cd0e0643a739","Title":"ListLinqGetMethods"}]}}
+--batchresponse_82ff9ea0-064f-4a58-9ffe-5b80495e2444--

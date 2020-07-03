@@ -21,6 +21,54 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ListLinqGetMethods()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "ListLinqGetMethods";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                var listGuid = myList.Id;
+
+                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        Assert.IsTrue(list2.Title == listTitle);
+                        Assert.IsTrue(list2.Id == listGuid);
+                    }
+                }
+
+                using (var context3 = TestCommon.Instance.GetContext(TestCommon.TestSite, 2))
+                {
+                    
+                    var list3 = context3.Web.Lists.GetById(listGuid, p=>p.TemplateType, p=>p.Title);
+                    if (list3 != null)
+                    {
+                        Assert.IsTrue(list3.Title == listTitle);
+                        Assert.IsTrue(list3.Id == listGuid);
+                    }
+                }
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            } 
+        }
+
+        [TestMethod]
         public async Task GetItemsByCAMLQuery()
         {
             //TestCommon.Instance.Mocking = false;

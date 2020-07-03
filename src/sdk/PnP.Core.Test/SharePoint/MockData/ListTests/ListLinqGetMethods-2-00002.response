@@ -1,0 +1,10 @@
+{"responses": [{"id": "1","status":400,"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "Invalid filter clause",
+    "innerError": {
+      "date": "2020-07-03T12:24:58",
+      "request-id": "e2a2d466-04c5-4899-ac16-15972fb80125"
+    }
+  }
+}}]}
