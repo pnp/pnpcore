@@ -7,6 +7,8 @@ using PnP.Core.Services;
 using System.Net.Http;
 using PnP.Core.Utilities;
 using System.Dynamic;
+using System.Security.Cryptography;
+using PnP.Core.Model.SharePoint.Core.Public;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -76,6 +78,7 @@ namespace PnP.Core.Model.SharePoint
 
         #region Extension methods
 
+        #region BatchGetByTitle
         private static ApiCall GetByTitleApiCall(string title)
         {
             return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest);
@@ -86,7 +89,9 @@ namespace PnP.Core.Model.SharePoint
             BaseBatchGet(batch, apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions);
             return this;
         }
+        #endregion
 
+        #region RecycleAsync
         public async Task<Guid> RecycleAsync()
         {
             var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/recycle", ApiType.SPORest);
@@ -111,7 +116,72 @@ namespace PnP.Core.Model.SharePoint
 
             return Guid.Empty;
         }
+        #endregion
 
+        #region GetItemsByCamlQuery
+        public async Task<IListItemCollection> GetItemsByCamlQueryAsync(string query)
+        {
+            return await GetItemsByCamlQueryAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+        }
+
+        public async Task<IListItemCollection> GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions)
+        {
+            ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
+
+            await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return Items;
+        }
+
+        public IListItemCollection GetItemsByCamlQuery(string query)
+        {
+            return GetItemsByCamlQuery(new CamlQueryOptions() { ViewXml = query });
+        }
+
+        public IListItemCollection GetItemsByCamlQuery(CamlQueryOptions queryOptions)
+        {
+            ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
+
+            Request(apiCall, HttpMethod.Post);
+
+            return Items;
+        }
+
+        public IListItemCollection GetItemsByCamlQuery(Batch batch, string query)
+        {
+            return GetItemsByCamlQuery(batch, new CamlQueryOptions() { ViewXml = query });
+        }
+
+        public IListItemCollection GetItemsByCamlQuery(Batch batch, CamlQueryOptions queryOptions)
+        {
+            ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
+
+            Request(batch, apiCall, HttpMethod.Post);
+
+            return Items;
+        }
+
+        private ApiCall BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions)
+        {
+            // Build body
+            var camlQuery = new
+            {
+                query = new
+                {
+                    __metadata = new { type = "SP.CamlQuery" },
+                    queryOptions.ViewXml,
+                    queryOptions.AllowIncrementalResults,
+                    queryOptions.DatesInUtc,
+                    queryOptions.FolderServerRelativeUrl,
+                    queryOptions.ListItemCollectionPosition
+                }
+            }.AsExpando();
+            string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/GetItems", ApiType.SPORest, body, "Items");
+            return apiCall;
+        }
+        #endregion
 
         #endregion
     }

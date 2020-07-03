@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint.Core.Public;
+using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -201,5 +203,48 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Task<Guid> RecycleAsync();
 
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="query">query to execute</param>
+        /// <returns></returns>
+        public Task<IListItemCollection> GetItemsByCamlQueryAsync(string query);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public Task<IListItemCollection> GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="query">query to execute</param>
+        /// <returns></returns>
+        public IListItemCollection GetItemsByCamlQuery(string query);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public IListItemCollection GetItemsByCamlQuery(CamlQueryOptions queryOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <param name="query">query to execute</param>
+        /// <returns></returns>
+        public IListItemCollection GetItemsByCamlQuery(Batch batch, string query);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public IListItemCollection GetItemsByCamlQuery(Batch batch, CamlQueryOptions queryOptions);
     }
 }
