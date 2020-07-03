@@ -17,7 +17,7 @@ namespace PnP.Core.Model.SharePoint
                 listToLoad = CreateNewAndAdd() as List;
             }
 
-            return listToLoad.GetByTitle(batch, title, expressions);
+            return listToLoad.BatchGetByTitle(batch, title, expressions);
         }
 
         public IList BatchGetByTitle(string title, params Expression<Func<IList, object>>[] expressions)

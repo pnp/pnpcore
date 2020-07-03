@@ -81,20 +81,9 @@ namespace PnP.Core.Model.SharePoint
             return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest);
         }
 
-        public IList GetByTitle(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
+        internal IList BatchGetByTitle(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
             BaseBatchGet(batch, apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions);
-            return this;
-        }
-
-        public IList GetByTitle(string title, params Expression<Func<IList, object>>[] expressions)
-        {
-            return GetByTitle(PnPContext.CurrentBatch, title, expressions);
-        }
-
-        public async Task<IList> GetByTitleAsync(string title, params Expression<Func<IList, object>>[] expressions)
-        {
-            await BaseGet(apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return this;
         }
 
