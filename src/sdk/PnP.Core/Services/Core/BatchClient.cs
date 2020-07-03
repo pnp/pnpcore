@@ -958,7 +958,8 @@ namespace PnP.Core.Services
                 // First real content returned, lines before are ignored
                 else if ((line.StartsWith("{") || httpStatusCode == HttpStatusCode.NoContent) && !responseContentOpen)
                 {
-                    responseContent.AppendLine(line);
+                    // content can be seperated via \r\n and we split on \n. Since we're using AppendLine remove the carriage return to avoid duplication
+                    responseContent.AppendLine(line.TrimEnd('\r'));
                     responseContentOpen = true;
                 }
                 // More content is being returned, so let's append it
