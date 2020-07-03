@@ -1799,6 +1799,77 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.CalendarType.Thai
   fullName: PnP.Core.Model.SharePoint.CalendarType.Thai
   nameWithType: CalendarType.Thai
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions
+  name: CamlQueryOptions
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.CamlQueryOptions
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions
+  nameWithType: CamlQueryOptions
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.AllowIncrementalResults
+  name: AllowIncrementalResults
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_AllowIncrementalResults
+  commentId: P:PnP.Core.Model.SharePoint.CamlQueryOptions.AllowIncrementalResults
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.AllowIncrementalResults
+  nameWithType: CamlQueryOptions.AllowIncrementalResults
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.AllowIncrementalResults*
+  name: AllowIncrementalResults
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_AllowIncrementalResults_
+  commentId: Overload:PnP.Core.Model.SharePoint.CamlQueryOptions.AllowIncrementalResults
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.AllowIncrementalResults
+  nameWithType: CamlQueryOptions.AllowIncrementalResults
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.DatesInUtc
+  name: DatesInUtc
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_DatesInUtc
+  commentId: P:PnP.Core.Model.SharePoint.CamlQueryOptions.DatesInUtc
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.DatesInUtc
+  nameWithType: CamlQueryOptions.DatesInUtc
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.DatesInUtc*
+  name: DatesInUtc
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_DatesInUtc_
+  commentId: Overload:PnP.Core.Model.SharePoint.CamlQueryOptions.DatesInUtc
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.DatesInUtc
+  nameWithType: CamlQueryOptions.DatesInUtc
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.FolderServerRelativeUrl
+  name: FolderServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_FolderServerRelativeUrl
+  commentId: P:PnP.Core.Model.SharePoint.CamlQueryOptions.FolderServerRelativeUrl
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.FolderServerRelativeUrl
+  nameWithType: CamlQueryOptions.FolderServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.FolderServerRelativeUrl*
+  name: FolderServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_FolderServerRelativeUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.CamlQueryOptions.FolderServerRelativeUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.FolderServerRelativeUrl
+  nameWithType: CamlQueryOptions.FolderServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
+  name: ListItemCollectionPosition
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_ListItemCollectionPosition
+  commentId: P:PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
+  nameWithType: CamlQueryOptions.ListItemCollectionPosition
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition*
+  name: ListItemCollectionPosition
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_ListItemCollectionPosition_
+  commentId: Overload:PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.ListItemCollectionPosition
+  nameWithType: CamlQueryOptions.ListItemCollectionPosition
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.ViewXml
+  name: ViewXml
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_ViewXml
+  commentId: P:PnP.Core.Model.SharePoint.CamlQueryOptions.ViewXml
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.ViewXml
+  nameWithType: CamlQueryOptions.ViewXml
+- uid: PnP.Core.Model.SharePoint.CamlQueryOptions.ViewXml*
+  name: ViewXml
+  href: api/PnP.Core.Model.SharePoint.CamlQueryOptions.html#PnP_Core_Model_SharePoint_CamlQueryOptions_ViewXml_
+  commentId: Overload:PnP.Core.Model.SharePoint.CamlQueryOptions.ViewXml
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CamlQueryOptions.ViewXml
+  nameWithType: CamlQueryOptions.ViewXml
 - uid: PnP.Core.Model.SharePoint.ChoiceFormatType
   name: ChoiceFormatType
   href: api/PnP.Core.Model.SharePoint.ChoiceFormatType.html
@@ -1940,83 +2011,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ValidationMessage
   nameWithType: CommonFieldOptions.ValidationMessage
-- uid: PnP.Core.Model.SharePoint.Core.Public
-  name: PnP.Core.Model.SharePoint.Core.Public
-  href: api/PnP.Core.Model.SharePoint.Core.Public.html
-  commentId: N:PnP.Core.Model.SharePoint.Core.Public
-  fullName: PnP.Core.Model.SharePoint.Core.Public
-  nameWithType: PnP.Core.Model.SharePoint.Core.Public
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions
-  name: CamlQueryOptions
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html
-  commentId: T:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions
-  nameWithType: CamlQueryOptions
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.AllowIncrementalResults
-  name: AllowIncrementalResults
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_AllowIncrementalResults
-  commentId: P:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.AllowIncrementalResults
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.AllowIncrementalResults
-  nameWithType: CamlQueryOptions.AllowIncrementalResults
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.AllowIncrementalResults*
-  name: AllowIncrementalResults
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_AllowIncrementalResults_
-  commentId: Overload:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.AllowIncrementalResults
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.AllowIncrementalResults
-  nameWithType: CamlQueryOptions.AllowIncrementalResults
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.DatesInUtc
-  name: DatesInUtc
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_DatesInUtc
-  commentId: P:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.DatesInUtc
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.DatesInUtc
-  nameWithType: CamlQueryOptions.DatesInUtc
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.DatesInUtc*
-  name: DatesInUtc
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_DatesInUtc_
-  commentId: Overload:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.DatesInUtc
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.DatesInUtc
-  nameWithType: CamlQueryOptions.DatesInUtc
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.FolderServerRelativeUrl
-  name: FolderServerRelativeUrl
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_FolderServerRelativeUrl
-  commentId: P:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.FolderServerRelativeUrl
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.FolderServerRelativeUrl
-  nameWithType: CamlQueryOptions.FolderServerRelativeUrl
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.FolderServerRelativeUrl*
-  name: FolderServerRelativeUrl
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_FolderServerRelativeUrl_
-  commentId: Overload:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.FolderServerRelativeUrl
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.FolderServerRelativeUrl
-  nameWithType: CamlQueryOptions.FolderServerRelativeUrl
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ListItemCollectionPosition
-  name: ListItemCollectionPosition
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_ListItemCollectionPosition
-  commentId: P:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ListItemCollectionPosition
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ListItemCollectionPosition
-  nameWithType: CamlQueryOptions.ListItemCollectionPosition
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ListItemCollectionPosition*
-  name: ListItemCollectionPosition
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_ListItemCollectionPosition_
-  commentId: Overload:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ListItemCollectionPosition
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ListItemCollectionPosition
-  nameWithType: CamlQueryOptions.ListItemCollectionPosition
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ViewXml
-  name: ViewXml
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_ViewXml
-  commentId: P:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ViewXml
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ViewXml
-  nameWithType: CamlQueryOptions.ViewXml
-- uid: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ViewXml*
-  name: ViewXml
-  href: api/PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.html#PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_ViewXml_
-  commentId: Overload:PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ViewXml
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions.ViewXml
-  nameWithType: CamlQueryOptions.ViewXml
 - uid: PnP.Core.Model.SharePoint.DateTimeFieldFormatType
   name: DateTimeFieldFormatType
   href: api/PnP.Core.Model.SharePoint.DateTimeFieldFormatType.html
@@ -5018,17 +5012,17 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.ForceCheckout
   nameWithType: IList.ForceCheckout
-- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions)
+- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)
   name: GetItemsByCamlQuery(CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)
   nameWithType: IList.GetItemsByCamlQuery(CamlQueryOptions)
-- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions)
+- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
   name: GetItemsByCamlQuery(Batch, CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.CamlQueryOptions)
   nameWithType: IList.GetItemsByCamlQuery(Batch, CamlQueryOptions)
 - uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch,System.String)
   name: GetItemsByCamlQuery(Batch, String)
@@ -5049,11 +5043,11 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery
   nameWithType: IList.GetItemsByCamlQuery
-- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions)
+- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
   name: GetItemsByCamlQueryAsync(CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_Core_Public_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.Core.Public.CamlQueryOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
   nameWithType: IList.GetItemsByCamlQueryAsync(CamlQueryOptions)
 - uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(System.String)
   name: GetItemsByCamlQueryAsync(String)
@@ -8671,6 +8665,24 @@ references:
   isSpec: "True"
   fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayName
   nameWithType: BaseDataModelExtensions.GetByDisplayName
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.Guid)
+  name: GetById(IQueryable<IList>, Guid)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.Guid)
+  name.vb: GetById(IQueryable(Of IList), Guid)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable<PnP.Core.Model.SharePoint.IList>, System.Guid)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IList), System.Guid)
+  nameWithType: BaseDataModelExtensions.GetById(IQueryable<IList>, Guid)
+  nameWithType.vb: BaseDataModelExtensions.GetById(IQueryable(Of IList), Guid)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.Guid,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetById(IQueryable<IList>, Guid, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.Guid,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetById(IQueryable(Of IList), Guid, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable<PnP.Core.Model.SharePoint.IList>, System.Guid, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IList), System.Guid, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetById(IQueryable<IList>, Guid, Expression<Func<IList, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetById(IQueryable(Of IList), Guid, Expression(Of Func(Of IList, Object))())
 - uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32)
   name: GetById(IQueryable<IListItem>, Int32)
   href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_
