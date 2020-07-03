@@ -898,10 +898,54 @@ namespace PnP.Core.Services
             int counter = 0;
             var httpStatusCode = HttpStatusCode.Continue;
 
+            bool responseContentOpen = false;
+            StringBuilder responseContent = new StringBuilder();
             foreach (var line in responseLines)
             {
-                if (line.StartsWith("HTTP/1.1 "))
+                // Signals the start/end of a response
+                // --batchresponse_6ed85e4b-869f-428e-90c9-19038f964718
+                if (line.StartsWith("--batchresponse_"))
                 {
+                    // Reponse was closed, let's store the result 
+                    if (responseContentOpen)
+                    {
+                        // responses are in the same order as the request, so use a counter based system
+                        BatchRequest currentBatchRequest = batch.GetRequest(counter);
+
+                        if (!HttpRequestSucceeded(httpStatusCode))
+                        {
+                            // Todo: parsing json in line to provide a more structured error message + add to logging
+                            throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)httpStatusCode, responseContent.ToString());
+                        }
+
+                        if (httpStatusCode == HttpStatusCode.NoContent)
+                        {
+                            currentBatchRequest.AddResponse("", httpStatusCode);
+                        }
+                        else
+                        {
+                            currentBatchRequest.AddResponse(responseContent.ToString(), httpStatusCode);
+                        }
+
+                        // Commit succesful updates in our model
+                        if (currentBatchRequest.Method == HttpMethod.Patch)
+                        {
+                            if (currentBatchRequest.Model is TransientObject)
+                            {
+                                (currentBatchRequest.Model as TransientObject).Commit();
+                            }
+                        }
+
+                        counter++;
+                        httpStatusCode = 0;
+                        responseContentOpen = false; 
+                        responseContent = new StringBuilder();
+                    }
+                }
+                // Response status code
+                else if (line.StartsWith("HTTP/1.1 "))
+                {
+                    // HTTP/1.1 200 OK
                     if (int.TryParse(line.Substring(9, 3), out int parsedHttpStatusCode))
                     {
                         httpStatusCode = (HttpStatusCode)parsedHttpStatusCode;
@@ -911,37 +955,17 @@ namespace PnP.Core.Services
                         throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 0, "Unexpected HTTP result value in returned batch response");
                     }
                 }
-
-                if (line.StartsWith("{") || httpStatusCode == HttpStatusCode.NoContent)
+                // First real content returned, lines before are ignored
+                else if ((line.StartsWith("{") || httpStatusCode == HttpStatusCode.NoContent) && !responseContentOpen)
                 {
-                    var batchRequest = batch.GetRequest(counter);
-
-                    if (!HttpRequestSucceeded(httpStatusCode))
-                    {
-                        // Todo: parsing json in line to provide a more structured error message + add to logging
-                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)httpStatusCode, line);
-                    }
-
-                    if (httpStatusCode == HttpStatusCode.NoContent)
-                    {
-                        batchRequest.AddResponse("", httpStatusCode);
-                    }
-                    else
-                    {
-                        batchRequest.AddResponse(line, httpStatusCode);
-                    }
-
-                    // Commit succesful updates in our model
-                    if (batchRequest.Method == HttpMethod.Patch)
-                    {
-                        if (batchRequest.Model is TransientObject)
-                        {
-                            (batchRequest.Model as TransientObject).Commit();
-                        }
-                    }
-
-                    counter++;
-                    httpStatusCode = 0;
+                    responseContent.AppendLine(line);
+                    responseContentOpen = true;
+                }
+                // More content is being returned, so let's append it
+                else if (responseContentOpen)
+                {
+                    // content can be seperated via \r\n and we split on \n. Since we're using AppendLine remove the carriage return to avoid duplication
+                    responseContent.AppendLine(line.TrimEnd('\r'));
                 }
             }
         }
