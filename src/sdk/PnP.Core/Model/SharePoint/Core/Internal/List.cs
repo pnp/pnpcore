@@ -1,14 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Services;
+using PnP.Core.Utilities;
 using System;
+using System.Dynamic;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PnP.Core.Services;
-using System.Net.Http;
-using PnP.Core.Utilities;
-using System.Dynamic;
-using System.Security.Cryptography;
-using PnP.Core.Model.SharePoint.Core.Public;
 
 namespace PnP.Core.Model.SharePoint
 {

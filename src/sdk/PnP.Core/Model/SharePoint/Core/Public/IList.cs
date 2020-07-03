@@ -1,5 +1,4 @@
-﻿using PnP.Core.Model.SharePoint.Core.Public;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

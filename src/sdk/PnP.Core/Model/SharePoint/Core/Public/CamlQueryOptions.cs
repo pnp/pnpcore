@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.Model.SharePoint.Core.Public
+﻿namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Options for making a CAML query to SharePoint Online
