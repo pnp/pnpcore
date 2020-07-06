@@ -1,6 +1,6 @@
 # Getting started with the PnP Core SDK
 
-The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection ([generic host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1)) for it's core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a `PnPContext` from the `PnPContextFactory`and start using the library.
+The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection ([generic host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1)) for it's core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a `PnPContext` from the `PnPContextFactory` and start using the library.
 
 ## Where is the code?
 
@@ -118,7 +118,7 @@ using (var scope = host.Services.CreateScope())
 host.Dispose();
 ```
 
-Next to creating a new `PnPContext` you can also clone an existing one, cloning is very convenient if you for example created a a context for the root web of your site collection but now want to work with a sub site. Below snippet shows how to use cloning:
+Next to creating a new `PnPContext` you can also clone an existing one, cloning is very convenient if you for example created a context for the root web of your site collection but now want to work with a sub site. Below snippet shows how to use cloning:
 
 ```csharp
 using (var context = pnpContextFactory.Create("SiteToWorkWith"))
