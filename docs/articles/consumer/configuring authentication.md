@@ -22,7 +22,7 @@ Follow below steps to configure an application in Azure AD:
 8. Click on **Add Permissions** and add the permissions you want to give to this application. Below list is a recommendation, you can grant less permissions but that might result in some PnP Core SDK calls to fail due getting access denied errors.
 
    - SharePoint -> Delegated Permissions -> AllSites -> AllSites.FullControl
-   - SharePoint -> Delegated Permissions -> Sites -> Sites.SearchAll
+   - SharePoint -> Delegated Permissions -> Sites -> Sites.Search.All
    - SharePoint -> Delegated Permissions -> TermStore -> TermStore.ReadWrite.All
    - SharePoint -> Delegated Permissions -> User -> User.ReadWrite.All
    - Microsoft Graph -> Delegated Permissions -> User -> User.Read
