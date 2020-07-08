@@ -92,7 +92,7 @@ In above sample the following configuration file is used: `appsettings.demo.json
 
 ## Obtaining a PnPContext
 
-The `PnPContext` is the entry point for using the PnP Core SDK, you can create a `PnPContext` from either a SharePoint site url or the id of an Microsoft 365 group.
+The `PnPContext` is the entry point for using the PnP Core SDK, you can create a `PnPContext` from either a SharePoint site url or the id of a Microsoft 365 group.
 
 ```csharp
 // Start console host
