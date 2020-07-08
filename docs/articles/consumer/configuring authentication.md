@@ -1,7 +1,7 @@
 
 # Configuring authentication
 
-The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 workloads like SharePoint, Teams,...**Configuring your own application is the recommended approach**, but you can also use an multi-tenant application that the PnP team created. Both options are detailed in the next chapters
+The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 workloads like SharePoint, Teams,...**Configuring your own application is the recommended approach**, but you can also use a multi-tenant application that the PnP team created. Both options are detailed in the next chapters
 
 ## I want to configure my own Azure AD application (recommended)
 
