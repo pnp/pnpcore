@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -32,6 +33,60 @@ namespace PnP.Core.Model
                 if (expression.Body.NodeType == ExpressionType.Call && expression.Body is MethodCallExpression)
                 {
                     // Future use? (includes)
+                    var body = (MethodCallExpression)expression.Body;
+                    if (body.Method.IsGenericMethod && body.Method.Name == "Include")
+                    {
+                        if (body.Arguments.Count != 2)
+                        {
+                            throw new Exception("Invalid arguments number");
+                        }
+
+                        // Parse the expressions and get the relevant entity information
+                        var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(model.GetType(), (model as BaseDataModel<TModel>), expressions);
+
+                        string fieldToLoad = (body.Arguments[0] as MemberExpression).Member.Name;
+
+                        var collectionToCheck = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
+                        if (collectionToCheck != null)
+                        {
+                            var collection = model.GetPublicInstancePropertyValue(fieldToLoad);
+                            if (collection is IRequestableCollection)
+                            {
+                                if (!(collection as IRequestableCollection).Requested)
+                                {
+                                    // Collection was not requested at all, so let's load it again
+                                    expressionsToLoad.Add(expression);
+                                    dirty = true;
+                                }
+                                else
+                                {
+                                    if (collectionToCheck.ExpandFieldInfo != null && (collection as IRequestableCollection).Length > 0)
+                                    {
+                                        // Collection was requested and there's at least one item to check, let's see if we can figure out if all needed properties were loaded as well
+                                        if (!WereFieldsRequested(collectionToCheck, collectionToCheck.ExpandFieldInfo, collection as IRequestableCollection))
+                                        {
+                                            expressionsToLoad.Add(expression);
+                                            dirty = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        expressionsToLoad.Add(expression);
+                                        dirty = true;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            expressionsToLoad.Add(expression);
+                            dirty = true;
+                        }
+                    }
+                    else
+                    {
+                        throw new ClientException(ErrorType.PropertyNotLoaded, "Only the 'Include' method is supported");
+                    }
                 }
                 else if (!model.IsPropertyAvailable(expression))
                 {
@@ -45,6 +100,44 @@ namespace PnP.Core.Model
             {
                 await (model as BaseDataModel<TModel>).GetAsync(default, expressionsToLoad.ToArray()).ConfigureAwait(false);
             }            
+        }
+
+        private static bool WereFieldsRequested(EntityFieldInfo collectionToCheck, EntityFieldExpandInfo expandFields, IRequestableCollection collection)
+        {
+            var enumerator = collection.RequestedItems.GetEnumerator();
+
+            enumerator.Reset();
+            enumerator.MoveNext();
+
+            // If no item available or collection was not requested then we need to reload
+            if (!collection.Requested || enumerator.Current == null)
+            {
+                return false;
+            }
+
+            TransientObject itemToCheck = enumerator.Current as TransientObject;
+
+            foreach (var fieldInExpression in expandFields.Fields)
+            {
+                if (!fieldInExpression.Fields.Any())
+                {
+                    if (!itemToCheck.HasValue(fieldInExpression.Name))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    // this is another collection, so perform a recursive check
+                    var collectionRecursive = itemToCheck.GetPublicInstancePropertyValue(fieldInExpression.Name) as IRequestableCollection;
+                    if (!WereFieldsRequested(collectionToCheck, fieldInExpression, collectionRecursive))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -145,11 +238,12 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Checks if a property is loaded or not on a complex type
+        /// Sets a property value without marking it as "changed"
         /// </summary>
         /// <typeparam name="TModel">Model type (e.g. ITeamFunSettings)</typeparam>
         /// <param name="model">Implementation of the model (e.g. TeamFunSettings)</param>
         /// <param name="expression">Expression listing the property to load</param>
+        /// <param name="value">Value to set</param>
         /// <returns>True if property was loaded, false otherwise</returns>
         internal static void SetSystemProperty<TModel, T>(this TModel model, Expression<Func<TModel, object>> expression, T value)
         {

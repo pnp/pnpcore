@@ -349,9 +349,17 @@ namespace PnP.Core.Model
                 }
 
                 // get collection of fields that need to be loaded
-                return Fields
-                    .Where(f => f.Load)
-                    .All(f => !string.IsNullOrEmpty(f.GraphName));
+                if (!Fields.Any(p => p.ExpandFieldInfo != null))
+                {
+                    return Fields
+                        .Where(f => f.Load)
+                        .All(f => !string.IsNullOrEmpty(f.GraphName));
+                }
+                else
+                {
+                    // Using .Include only works for REST
+                    return false;
+                }
             }
         }        
     }
