@@ -13,6 +13,7 @@ namespace PnP.Core.Services
             Request = request;
             JsonBody = jsonBody;
             ReceivingProperty = receivingProperty;
+            RawRequest = false;
         }
 
         /// <summary>
@@ -38,5 +39,10 @@ namespace PnP.Core.Services
         /// Current this property is set automatically, no need to manually fiddle with it in API call overrides!
         /// </summary>
         internal string ReceivingProperty { get; set; }
+
+        /// <summary>
+        /// Is this a raw request that does not require automatic parsing of the returned json?
+        /// </summary>
+        internal bool RawRequest { get; set; }
     }
 }

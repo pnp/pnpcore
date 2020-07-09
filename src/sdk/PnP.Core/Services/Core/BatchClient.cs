@@ -539,16 +539,14 @@ namespace PnP.Core.Services
 
             using (var tracer = Tracer.Track(PnPContext.Logger, "ExecuteSharePointGraphBatchAsync-JSONToModel"))
             {
-                // A raw request does not require loading of the response into the model
-                if (batch.Raw)
-                {
-                    return true;
-                }
-
                 // Map the retrieved JSON to our domain model
                 foreach (var batchRequest in batch.Requests.Values)
                 {
-                    await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
+                    // A raw request does not require loading of the response into the model
+                    if (!batchRequest.ApiCall.RawRequest)
+                    {
+                        await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
+                    }
                 }
             }
 
@@ -646,7 +644,6 @@ namespace PnP.Core.Services
                     {
                         Batch = new Batch()
                         {
-                            Raw = batch.Raw
                         }
                     };
 
@@ -869,19 +866,16 @@ namespace PnP.Core.Services
                 // Process the batch response, assign each response to it's request 
                 ProcessSharePointRestBatchResponseContent(restBatch.Batch, batchResponse);
 
-                // A raw request does not require loading of the response into the model
-                if (restBatch.Batch.Raw)
-                {
-                    return;
-                }
-
                 // Map the retrieved JSON to our domain model
                 foreach (var batchRequest in restBatch.Batch.Requests.Values)
                 {
                     if (!string.IsNullOrEmpty(batchRequest.ResponseJson))
                     {
-                        await JsonMappingHelper
-                            .MapJsonToModel(batchRequest).ConfigureAwait(false);
+                        // A raw request does not require loading of the response into the model
+                        if (!batchRequest.ApiCall.RawRequest)
+                        {
+                            await JsonMappingHelper.MapJsonToModel(batchRequest).ConfigureAwait(false);
+                        }
                     }
                 }
             }

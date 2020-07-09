@@ -83,11 +83,6 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// A raw batch will return the raw json results to the caller, results will not be parsed and loaded into the model
-        /// </summary>
-        internal bool Raw { get; set; } = false;
-
-        /// <summary>
         /// Add a new request to this <see cref="Batch"/>
         /// </summary>
         /// <param name="model">Entity object on for which this request was meant</param>

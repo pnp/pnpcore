@@ -1421,18 +1421,7 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal async Task RequestAsync(ApiCall apiCall, HttpMethod method)
-        {
-            await RequestAsync(apiCall, method, false).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Executes a given request
-        /// </summary>
-        /// <param name="apiCall">Api call to execute</param>
-        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        /// <param name="rawRequest">Handle this request as a raw request</param>
-        private async Task<Batch> RequestAsync(ApiCall apiCall, HttpMethod method, bool rawRequest)
+        internal async Task<Batch> RequestAsync(ApiCall apiCall, HttpMethod method)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -1451,7 +1440,6 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
-            batch.Raw = rawRequest;
             batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
             return batch;
@@ -1464,7 +1452,10 @@ namespace PnP.Core.Model
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
         internal async Task<ApiCallResponse> RawRequestAsync(ApiCall apiCall, HttpMethod method)
         {
-            var batch = await RequestAsync(apiCall, method, true).ConfigureAwait(false);
+            // Mark request as raw
+            apiCall.RawRequest = true;
+
+            var batch = await RequestAsync(apiCall, method).ConfigureAwait(false);
             return new ApiCallResponse(batch.Requests.First().Value.ResponseJson, batch.Requests.First().Value.ResponseHttpStatusCode, batch.Requests.First().Value.ResponseHeaders);
         }
 
