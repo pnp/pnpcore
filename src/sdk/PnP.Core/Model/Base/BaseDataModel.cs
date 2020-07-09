@@ -1446,6 +1446,46 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
+        /// Adds a request to the given batch
+        /// </summary>
+        /// <param name="apiCall">Api call to execute</param>
+        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
+        internal void RawRequest(ApiCall apiCall, HttpMethod method)
+        {
+            Request(PnPContext.CurrentBatch, apiCall, method);
+        }
+
+        /// <summary>
+        /// Adds a request to the given batch
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="apiCall">Api call to execute</param>
+        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
+        internal void RawRequest(Batch batch, ApiCall apiCall, HttpMethod method)
+        {
+            // Mark request as raw
+            apiCall.RawRequest = true;
+
+            // Get entity information for the entity to update
+            var entityInfo = GetClassInfo();
+
+            // Prefix API request with context url if needed
+            apiCall = PrefixApiCall(apiCall, entityInfo);
+
+            // Ensure there's no Graph beta endpoint being used when that was not allowed
+            if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
+            {
+                return;
+            }
+
+            // Ensure token replacement is done
+            apiCall.Request = TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).GetAwaiter().GetResult();
+
+            // Add the request to the batch
+            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
+        }
+
+        /// <summary>
         /// Executes a given request, not loading the response json in the model but simply returning it
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
