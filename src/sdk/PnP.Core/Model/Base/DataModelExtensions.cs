@@ -27,6 +27,16 @@ namespace PnP.Core.Model
             }
 
             var dirty = false;
+            List<Expression<Func<TModel, object>>> expressionsToLoad = VerifyProperties(model, expressions, ref dirty);
+
+            if (dirty)
+            {
+                await (model as BaseDataModel<TModel>).GetAsync(default, expressionsToLoad.ToArray()).ConfigureAwait(false);
+            }
+        }
+
+        private static List<Expression<Func<TModel, object>>> VerifyProperties<TModel>(IDataModel<TModel> model, Expression<Func<TModel, object>>[] expressions, ref bool dirty)
+        {
             List<Expression<Func<TModel, object>>> expressionsToLoad = new List<Expression<Func<TModel, object>>>();
             foreach (Expression<Func<TModel, object>> expression in expressions)
             {
@@ -96,10 +106,7 @@ namespace PnP.Core.Model
                 }
             }
 
-            if (dirty)
-            {
-                await (model as BaseDataModel<TModel>).GetAsync(default, expressionsToLoad.ToArray()).ConfigureAwait(false);
-            }            
+            return expressionsToLoad;
         }
 
         private static bool WereFieldsRequested(EntityFieldInfo collectionToCheck, EntityFieldExpandInfo expandFields, IRequestableCollection collection)
@@ -138,6 +145,26 @@ namespace PnP.Core.Model
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Checks if the needed properties were loaded or not
+        /// </summary>
+        /// <typeparam name="TModel">Model type (e.g. IWeb)</typeparam>
+        /// <param name="model">Implementation of the model (e.g. Web)</param>
+        /// <param name="expression">Expression listing the properties to check</param>
+        /// <returns>True if properties were loaded, false otherwise</returns>
+        public static bool ArePropertiesAvailable<TModel>(this IDataModel<TModel> model, params Expression<Func<TModel, object>>[] expressions)
+        {
+            if (model == null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
+            var dirty = false;
+            VerifyProperties(model, expressions, ref dirty);
+
+            return !dirty;
         }
 
         /// <summary>
