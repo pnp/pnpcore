@@ -70,7 +70,7 @@ namespace PnP.Core.Services
             {
                 await FromJsonRest(pnpObject, entity, apiResponse, fromJsonCasting).ConfigureAwait(false);
             }
-            else
+            else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
             {
                 await FromJsonGraph(pnpObject, entity, apiResponse, fromJsonCasting).ConfigureAwait(false);
             }
@@ -810,7 +810,7 @@ namespace PnP.Core.Services
             {
                 entityField = entity.Fields.FirstOrDefault(p => p.SharePointName == property.Name);
             }
-            else
+            else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
             {
                 // Use case insentive match for Graph as we get json in camel case while we use pascal case for the model
                 entityField = entity.Fields.FirstOrDefault(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase));

@@ -985,7 +985,7 @@ namespace PnP.Core.Services
                     // PAOLO: Why not using a method with the BatchRequest object as the input?
                     restBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson);
                 }
-                else
+                else if (br.ApiCall.Type == ApiType.Graph || br.ApiCall.Type == ApiType.GraphBeta)
                 {
                     // PAOLO: Why not using a method with the BatchRequest object as the input?
                     graphBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson);
