@@ -2,6 +2,7 @@
 using PnP.Core.Services;
 using PnP.Core.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq.Expressions;
 using System.Net.Http;
@@ -18,6 +19,8 @@ namespace PnP.Core.Model.SharePoint
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class List
     {
+        internal static Expression<Func<IList, object>>[] GetListDataAsStreamExpression = new Expression<Func<IList, object>>[] { p => p.Fields.Include(p => p.InternalName, p => p.FieldTypeKind) };
+
         public List()
         {
             MappingHandler = (FromJson input) =>
@@ -117,46 +120,40 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region GetItemsByCamlQuery
-        public async Task<IListItemCollection> GetItemsByCamlQueryAsync(string query)
+        public async Task GetItemsByCamlQueryAsync(string query)
         {
-            return await GetItemsByCamlQueryAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
+            await GetItemsByCamlQueryAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
         }
 
-        public async Task<IListItemCollection> GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions)
+        public async Task GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-
-            return Items;
         }
 
-        public IListItemCollection GetItemsByCamlQuery(string query)
+        public void GetItemsByCamlQuery(string query)
         {
-            return GetItemsByCamlQuery(new CamlQueryOptions() { ViewXml = query });
+            GetItemsByCamlQuery(new CamlQueryOptions() { ViewXml = query });
         }
 
-        public IListItemCollection GetItemsByCamlQuery(CamlQueryOptions queryOptions)
+        public void GetItemsByCamlQuery(CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
             Request(apiCall, HttpMethod.Post);
-
-            return Items;
         }
 
-        public IListItemCollection GetItemsByCamlQuery(Batch batch, string query)
+        public void GetItemsByCamlQuery(Batch batch, string query)
         {
-            return GetItemsByCamlQuery(batch, new CamlQueryOptions() { ViewXml = query });
+            GetItemsByCamlQuery(batch, new CamlQueryOptions() { ViewXml = query });
         }
 
-        public IListItemCollection GetItemsByCamlQuery(Batch batch, CamlQueryOptions queryOptions)
+        public void GetItemsByCamlQuery(Batch batch, CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
             Request(batch, apiCall, HttpMethod.Post);
-
-            return Items;
         }
 
         private ApiCall BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions)
@@ -177,6 +174,73 @@ namespace PnP.Core.Model.SharePoint
             string body = JsonSerializer.Serialize(camlQuery, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
 
             var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/GetItems", ApiType.SPORest, body, "Items");
+            return apiCall;
+        }
+        #endregion
+
+        #region GetListDataAsStream
+        public async Task<Dictionary<string, object>> GetListDataAsStreamAsync(RenderListDataOptions renderOptions)
+        {
+            ApiCall apiCall = BuildGetListDataAsStreamApiCall(renderOptions);
+
+            // Since we need information about the fields in the list we're checking if the needed field data was loaded,
+            // if not then the request for the fields is included in the batch, this ensures we only do a single roundtrip 
+            int requestToUse = 0;
+            var batch = PnPContext.BatchClient.EnsureBatch();
+
+            if (!this.ArePropertiesAvailable(GetListDataAsStreamExpression))
+            {
+                // Get field information via batch
+                Get(batch, GetListDataAsStreamExpression);
+                requestToUse++;
+            }
+            // GetListDataAsStream request via batch
+            RawRequest(batch, apiCall, HttpMethod.Post);
+
+            // Execute the batch
+            await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);
+
+            // The field information request was regular request and as such the returned json was automatically handled
+            // The GetListDataAsStream request is a raw request, so we'll need to process the returned json manually
+            string responseJson = batch.Requests[requestToUse].ResponseJson;
+
+            if (!string.IsNullOrEmpty(responseJson))
+            {
+                return await ListDataAsStreamHandler.Deserialize(responseJson, this).ConfigureAwait(false);
+            }
+
+            return null;
+        }
+
+        private ApiCall BuildGetListDataAsStreamApiCall(RenderListDataOptions renderOptions)
+        {
+            // Build body
+            var renderListDataParameters = new
+            {
+                parameters = new
+                {
+                    __metadata = new { type = "SP.RenderListDataParameters" },
+                    renderOptions.AddRequiredFields,
+                    renderOptions.AllowMultipleValueFilterForTaxonomyFields,
+                    renderOptions.AudienceTarget,
+                    renderOptions.DatesInUtc,
+                    renderOptions.DeferredRender,
+                    renderOptions.ExpandGroups,
+                    renderOptions.FirstGroupOnly,
+                    renderOptions.FolderServerRelativeUrl,
+                    renderOptions.ImageFieldsToTryRewriteToCdnUrls,
+                    renderOptions.MergeDefaultView,
+                    renderOptions.OriginalDate,
+                    renderOptions.OverrideViewXml,
+                    renderOptions.Paging,
+                    renderOptions.RenderOptions,
+                    renderOptions.ReplaceGroup,
+                    renderOptions.ViewXml
+                }
+            }.AsExpando();
+            string body = JsonSerializer.Serialize(renderListDataParameters, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/RenderListDataAsStream", ApiType.SPORest, body);
             return apiCall;
         }
         #endregion

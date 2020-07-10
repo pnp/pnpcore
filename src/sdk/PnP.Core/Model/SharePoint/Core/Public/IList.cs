@@ -207,28 +207,28 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public Task<IListItemCollection> GetItemsByCamlQueryAsync(string query);
+        public Task GetItemsByCamlQueryAsync(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public Task<IListItemCollection> GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions);
+        public Task GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public IListItemCollection GetItemsByCamlQuery(string query);
+        public void GetItemsByCamlQuery(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public IListItemCollection GetItemsByCamlQuery(CamlQueryOptions queryOptions);
+        public void GetItemsByCamlQuery(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -236,7 +236,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public IListItemCollection GetItemsByCamlQuery(Batch batch, string query);
+        public void GetItemsByCamlQuery(Batch batch, string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -244,6 +244,13 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public IListItemCollection GetItemsByCamlQuery(Batch batch, CamlQueryOptions queryOptions);
+        public void GetItemsByCamlQuery(Batch batch, CamlQueryOptions queryOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query and the RenderListDataAsStream API
+        /// </summary>
+        /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public Task<Dictionary<string, object>> GetListDataAsStreamAsync(RenderListDataOptions renderOptions);
     }
 }
