@@ -396,7 +396,7 @@ AddApiCallHandler = (additionalInformation) =>
 
 ## Doing additional API calls
 
-Above example showed the `AddApiCallHandler` which provides an framework for doing add requests, but you often also need to do other types of requests and for that you need to be able to execute API calls. There are 2 ways to do this:
+Above example showed the `AddApiCallHandler` which provides a framework for doing add requests, but you often also need to do other types of requests and for that you need to be able to execute API calls. There are 2 ways to do this:
 
 - Run an API call and automatically load the resulting API call response in the model
 - Run an API call and process the resulting json as part of your code
