@@ -9,7 +9,7 @@ The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to
 
 ## Getting started using this library
 
-Using the PnP Core SDK is simple, check out out [getting started](articles/consumer/readme.md) guide.
+Using the PnP Core SDK is simple, check out the [getting started](articles/consumer/readme.md) guide.
 
 ## Where is the code?
 
