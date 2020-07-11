@@ -18,7 +18,12 @@
         /// <summary>
         /// Using the beta Microsoft Graph REST API
         /// </summary>
-        GraphBeta = 2
+        GraphBeta = 2,
+
+        /// <summary>
+        /// Using the SharePoint CSOM API
+        /// </summary>
+        CSOM = 3
 
     }
 }

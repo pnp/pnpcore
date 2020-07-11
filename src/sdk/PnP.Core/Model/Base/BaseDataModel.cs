@@ -1496,7 +1496,10 @@ namespace PnP.Core.Model
             apiCall.RawRequest = true;
 
             var batch = await RequestAsync(apiCall, method).ConfigureAwait(false);
-            return new ApiCallResponse(batch.Requests.First().Value.ResponseJson, batch.Requests.First().Value.ResponseHttpStatusCode, batch.Requests.First().Value.ResponseHeaders);
+            return new ApiCallResponse(batch.Requests.First().Value.ResponseJson, 
+                                       batch.Requests.First().Value.ResponseHttpStatusCode, 
+                                       batch.Requests.First().Value.ResponseHeaders, 
+                                       batch.Requests.First().Value.CsomResponseJson);
         }
 
         private ApiCall PrefixApiCall(ApiCall apiCall, EntityInfo entityInfo)

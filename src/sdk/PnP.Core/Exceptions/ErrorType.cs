@@ -8,6 +8,7 @@
         // Service errors
         GraphServiceError,
         SharePointRestServiceError,
+        CsomServiceError,
 
         // Authentication errors
         AzureADError,

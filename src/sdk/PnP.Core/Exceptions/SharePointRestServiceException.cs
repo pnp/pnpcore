@@ -29,11 +29,6 @@ namespace PnP.Core
         #endregion
 
         /// <summary>
-        /// SharePoint server error code
-        /// </summary>
-        public long ServerErrorCode { get; private set; }
-
-        /// <summary>
         /// Outputs a <see cref="SharePointRestServiceException"/> to a string representation
         /// </summary>
         /// <returns>String representation</returns>

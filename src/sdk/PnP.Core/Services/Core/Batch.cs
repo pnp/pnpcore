@@ -47,8 +47,18 @@ namespace PnP.Core.Services
         {
             get
             {
-                return !Requests
-                    .Any(r => r.Value.ApiCall.Type == ApiType.SPORest);
+                return Requests.Any(r => r.Value.ApiCall.Type == ApiType.Graph || r.Value.ApiCall.Type == ApiType.GraphBeta);
+            }
+        }
+
+        /// <summary>
+        /// Only use Csom batching when all requests in the batch are targeting csom
+        /// </summary>
+        internal bool UseCsomBatch
+        {
+            get
+            {
+                return Requests.Any(r => r.Value.ApiCall.Type == ApiType.CSOM);
             }
         }
 
@@ -59,12 +69,15 @@ namespace PnP.Core.Services
         {
             get
             {
-                bool foundRest = Requests
-                    .Any(r => r.Value.ApiCall.Type == ApiType.SPORest);
-                bool foundGraph = Requests
-                    .Any(r => r.Value.ApiCall.Type == ApiType.Graph);
+                int apiTypeCount = 0;
 
-                return foundRest && foundGraph;
+
+                if (Requests.Any(r => r.Value.ApiCall.Type == ApiType.SPORest)) { apiTypeCount++; }
+                // Graph v1 and beta are handled "together"
+                if (Requests.Any(r => r.Value.ApiCall.Type == ApiType.Graph || r.Value.ApiCall.Type == ApiType.GraphBeta)) { apiTypeCount++; }
+                if (Requests.Any(r => r.Value.ApiCall.Type == ApiType.CSOM)) { apiTypeCount++; }
+
+                return apiTypeCount > 1;
             }
         }
 
@@ -76,9 +89,9 @@ namespace PnP.Core.Services
             get
             {
                 return !Requests.Any(r => 
-                    r.Value.ApiCall.Type == ApiType.Graph &&
+                    (r.Value.ApiCall.Type != ApiType.SPORest) &&
                     (r.Value.BackupApiCall.Equals(default(ApiCall)) ||
-                    r.Value.BackupApiCall.Type == ApiType.Graph));
+                    r.Value.BackupApiCall.Type != ApiType.SPORest));
             }
         }
 

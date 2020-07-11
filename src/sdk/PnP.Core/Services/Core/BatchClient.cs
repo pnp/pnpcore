@@ -85,6 +85,23 @@ namespace PnP.Core.Services
 
         #endregion
 
+        #region Classes used to support CSOM batch handling
+
+        internal class CsomBatch
+        {
+            public CsomBatch(Uri site)
+            {
+                Site = site;
+            }
+
+            public Batch Batch { get; set; }
+
+            public Uri Site { get; set; }
+        }
+
+        #endregion
+
+
         internal class BatchResultMerge
         {
             internal object Model { get; set; }
@@ -235,10 +252,11 @@ namespace PnP.Core.Services
                 else
                 {
                     // implement logic to split batch in a rest batch and a graph batch
-                    (Batch spoRestBatch, Batch graphBatch) = SplitIntoGraphAndRestBatch(batch);
+                    (Batch spoRestBatch, Batch graphBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch);
                     // execute the 2 batches
                     await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
                     await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
+                    await ExecuteCsomBatchAsync(csomBatch).ConfigureAwait(false);
                 }
             }
             else
@@ -246,6 +264,10 @@ namespace PnP.Core.Services
                 if (batch.UseGraphBatch)
                 {
                     await ExecuteMicrosoftGraphBatchAsync(batch).ConfigureAwait(false);
+                }
+                else if (batch.UseCsomBatch)
+                {
+                    await ExecuteCsomBatchAsync(batch).ConfigureAwait(false);
                 }
                 else
                 {
@@ -625,7 +647,7 @@ namespace PnP.Core.Services
 
 #endregion
 
-#region SharePoint REST batching
+        #region SharePoint REST batching
 
         private static List<SPORestBatch> SharePointRestBatchSplitting(Batch batch)
         {
@@ -967,32 +989,206 @@ namespace PnP.Core.Services
 
         #endregion
 
+        #region CSOM batching
+        /// <summary>
+        /// Execute a batch with CSOM requests.
+        /// See https://docs.microsoft.com/en-us/openspecs/sharepoint_protocols/ms-csom/fd645da2-fa28-4daa-b3cd-8f4e506df117 for the CSOM protocol specs
+        /// </summary>
+        /// <param name="batch">Batch to execute</param>
+        /// <returns></returns>
+        private async Task ExecuteCsomBatchAsync(Batch batch)
+        {
+            // A batch can only combine requests for the same web, if needed we need to split the incoming batch in batches per web
+            var csomBatches = CsomBatchSplitting(batch);
+
+            // Execute the batches
+            foreach (var csomBatch in csomBatches)
+            {
+                // Each csom batch only contains one request
+                string requestBody = csomBatch.Batch.Requests.First().Value.ApiCall.XmlBody;
+                string requestKey = "";
+#if DEBUG
+                if (PnPContext.Mode != TestMode.Default)
+                {
+                    requestKey = $"{testUseCounter}@@GET|dummy";
+                    testUseCounter++;
+                }
+#endif
+
+                PnPContext.Logger.LogDebug(requestBody);
+
+                // Make the batch call
+                using (StringContent content = new StringContent(requestBody))
+                {
+                    using (var request = new HttpRequestMessage(HttpMethod.Post, $"{csomBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_vti_bin/client.svc/ProcessQuery"))
+                    {
+                        // Remove the default Content-Type content header
+                        if (content.Headers.Contains("Content-Type"))
+                        {
+                            content.Headers.Remove("Content-Type");
+                        }
+                        // Add the batch Content-Type header
+                        content.Headers.Add($"Content-Type", $"text/xml");
+
+                        // Connect content to request
+                        request.Content = content;
+
+#if DEBUG
+                        // Test recording
+                        if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                        {
+                            // Write request
+                            TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
+                        }
+
+                        // If we are not mocking or if there is no mock data
+                        if (PnPContext.Mode != TestMode.Mock) 
+                        {
+#endif
+                            // Ensure the request contains authentication information
+                            await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(csomBatch.Site, request).ConfigureAwait(false);
+
+                            // Send the request
+                            HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
+
+                            // Process the request response
+                            if (response.IsSuccessStatusCode)
+                            {
+                                // Get the response string
+                                string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+#if DEBUG
+                                if (PnPContext.Mode == TestMode.Record)
+                                {
+                                    // Call out to the rewrite handler if that one is connected
+                                    if (MockingFileRewriteHandler != null)
+                                    {
+                                        batchResponse = MockingFileRewriteHandler(batchResponse);
+                                    }
+
+                                    // Write response
+                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                }
+#endif
+
+                                ProcessCsomBatchResponse(csomBatch, batchResponse, response.StatusCode);
+                            }
+                            else
+                            {
+                                // Something went wrong...
+                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                            }
+#if DEBUG
+                        }
+                        else
+                        {
+                            string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+
+                            ProcessCsomBatchResponse(csomBatch, batchResponse, HttpStatusCode.OK);
+                        }
+
+                        // Mark batch as executed
+                        csomBatch.Batch.Executed = true;
+#endif
+                    }
+                }
+            }
+
+            // Mark the original (non split) batch as complete
+            batch.Executed = true;
+        }
+
+        /// <summary>
+        /// Provides initial processing of a response for a Csom batch request
+        /// </summary>
+        /// <param name="csomBatch">The batch request to process</param>
+        /// <param name="batchResponse">The raw content of the response</param>
+        /// <param name="statusCode">The Http status code of the request</param>
+        /// <returns></returns>
+        private void ProcessCsomBatchResponse(CsomBatch csomBatch, string batchResponse, HttpStatusCode statusCode)
+        {
+            using (var tracer = Tracer.Track(PnPContext.Logger, "ExecuteCsomBatchAsync-JSONToModel"))
+            {
+                if (!string.IsNullOrEmpty(batchResponse))
+                {
+                    var responses = CsomHelper.ParseResponse(batchResponse);
+
+                    // The first response contains possible error status info
+                    var firstElement = responses[0];
+                    if (!firstElement.Equals(default))
+                    {
+                        var errorInfo = firstElement.GetProperty("ErrorInfo");
+                        if (errorInfo.ValueKind != JsonValueKind.Null)
+                        {
+                            // Oops, something went wrong
+                            throw new CsomServiceException(ErrorType.CsomServiceError, (int)statusCode, firstElement);
+                        }
+                    }
+                    
+                    // No error, so let's return the results
+                    csomBatch.Batch.Requests.First().Value.AddResponse(responses, statusCode);
+                }
+            }
+        }
+
+        private static List<CsomBatch> CsomBatchSplitting(Batch batch)
+        {
+            List<CsomBatch> batches = new List<CsomBatch>();
+
+            foreach (var request in batch.Requests.OrderBy(p => p.Value.Order))
+            {
+                // Each request is a single batch
+                Uri site = new Uri(request.Value.ApiCall.Request);
+
+                // Create a new batch
+                var csomBatch = new CsomBatch(site)
+                {
+                    Batch = new Batch()
+                    {
+                    }
+                };
+
+                batches.Add(csomBatch);
+
+                // Add request to existing batch, we're adding the original request which ensures that once 
+                // we update the new batch with results these results are also part of the original batch
+                csomBatch.Batch.Requests.Add(request.Value.Order, request.Value);
+            }
+
+            return batches;
+        }
+
+        #endregion
+
         /// <summary>
         /// Splits a batch that contains rest and graph calls in two batches, one containing the rest calls, one containing the graph calls
         /// </summary>
         /// <param name="input">Batch to split</param>
         /// <returns>A rest batch and graph batch</returns>
-        private static Tuple<Batch, Batch> SplitIntoGraphAndRestBatch(Batch input)
+        private static Tuple<Batch, Batch, Batch> SplitIntoBatchesPerApiType(Batch input)
         {
             Batch restBatch = new Batch();
             Batch graphBatch = new Batch();
+            Batch csomBatch = new Batch();
 
             foreach(var request in input.Requests)
             {
                 var br = request.Value;
                 if (br.ApiCall.Type == ApiType.SPORest)
                 {
-                    // PAOLO: Why not using a method with the BatchRequest object as the input?
                     restBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson);
                 }
                 else if (br.ApiCall.Type == ApiType.Graph || br.ApiCall.Type == ApiType.GraphBeta)
                 {
-                    // PAOLO: Why not using a method with the BatchRequest object as the input?
                     graphBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson);
+                }
+                else if (br.ApiCall.Type == ApiType.CSOM)
+                {
+                    csomBatch.Add(br.Model, br.EntityInfo, br.Method, br.ApiCall, br.BackupApiCall, br.FromJsonCasting, br.PostMappingJson);
                 }
             }
 
-            return new Tuple<Batch, Batch>(restBatch, graphBatch);
+            return new Tuple<Batch, Batch, Batch>(restBatch, graphBatch, csomBatch);
         }
 
         /// <summary>
@@ -1004,7 +1200,7 @@ namespace PnP.Core.Services
             List<Tuple<TransientObject, ApiCall>> queries = new List<Tuple<TransientObject, ApiCall>>();
 
             // Only dedup get requests, a batch can contain multiple identical add requests
-            var requestsToDedup = batch.Requests.Where(p => p.Value.Method == HttpMethod.Get);
+            var requestsToDedup = batch.Requests.Where(p => p.Value.Method == HttpMethod.Get && p.Value.ApiCall.Type != ApiType.CSOM);
 
             if (requestsToDedup.Any())
             {

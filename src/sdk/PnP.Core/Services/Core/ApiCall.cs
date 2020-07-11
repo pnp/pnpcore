@@ -12,6 +12,17 @@ namespace PnP.Core.Services
             Type = apiType;
             Request = request;
             JsonBody = jsonBody;
+            XmlBody = null;
+            ReceivingProperty = receivingProperty;
+            RawRequest = false;
+        }
+
+        internal ApiCall(string xmlBody, string receivingProperty = null)
+        {
+            Request = null;
+            Type = ApiType.CSOM;
+            JsonBody = null;
+            XmlBody = xmlBody;
             ReceivingProperty = receivingProperty;
             RawRequest = false;
         }
@@ -30,6 +41,11 @@ namespace PnP.Core.Services
         /// Defines the JSON body of the request, if any
         /// </summary>
         internal string JsonBody { get; set; }
+
+        /// <summary>
+        /// Defines the XML body of the request, if any
+        /// </summary>
+        internal string XmlBody { get; set; }
 
         /// <summary>
         /// Typically the JSON response will be mapped to the current model object, but sometimes a call 
