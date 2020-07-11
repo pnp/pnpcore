@@ -74,11 +74,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.CsomError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.CsomError.html",
+          "hash": "hRBF7rRmtq1UNy7d2lQPlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.CsomServiceException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.CsomServiceException.html",
+          "hash": "932c2Ags9cJEdJV+QiD4nQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.ErrorType.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ErrorType.html",
-          "hash": "VWFKyEbhmPJkxwAG+CFQgQ=="
+          "hash": "yqbZzWaAmJy94CkVu98Wmw=="
         }
       },
       "is_incremental": false,
@@ -126,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IGroup.html",
-          "hash": "fmFpSVhMCyn0kudVGyWyVg=="
+          "hash": "MxZMd/NHknQDmSZ9jYn3QA=="
         }
       },
       "is_incremental": false,
@@ -150,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IUser.html",
-          "hash": "2Z9+Z40TCRfA9Co97Bb+ZA=="
+          "hash": "idcHG6jAF8KcuyinYx5NJQ=="
         }
       },
       "is_incremental": false,
@@ -186,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.DataModelExtensions.html",
-          "hash": "uMGmcsw6uailtETyB8JLSA=="
+          "hash": "O2M3+ttE/PohC1MvzacKsg=="
         }
       },
       "is_incremental": false,
@@ -210,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IDataModel-1.html",
-          "hash": "TLMCrTLv5351/dyX2z1JAg=="
+          "hash": "xfBOVnx8WrVU6oXF6nL4nQ=="
         }
       },
       "is_incremental": false,
@@ -666,7 +690,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IContentType.html",
-          "hash": "hHHUX2YNnG15oAVcnKK4Yg=="
+          "hash": "S5ZBuJv4Y5RKrbYjRhJ/Wg=="
         }
       },
       "is_incremental": false,
@@ -690,7 +714,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFeature.html",
-          "hash": "BPMAmBtGDm4rBhx3doqg7g=="
+          "hash": "kwP2D1xsKdSqvUnabE1DAQ=="
         }
       },
       "is_incremental": false,
@@ -714,7 +738,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IField.html",
-          "hash": "Evc/ypPlcFMjR2N5UfYWRg=="
+          "hash": "6jk2mMkV3YF437q66Yy4qQ=="
         }
       },
       "is_incremental": false,
@@ -738,7 +762,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFieldLink.html",
-          "hash": "UFH7UBIVTGwDHIgbjiK2Mg=="
+          "hash": "XgpwOaKPl6sJUwSMYEOPUQ=="
         }
       },
       "is_incremental": false,
@@ -762,7 +786,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "/akxDZ2hPTCJHFGlws8bLg=="
+          "hash": "X4D7xUnmHn6BOUrNm/mqUw=="
         }
       },
       "is_incremental": false,
@@ -786,7 +810,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "DduZZ/wBsgg9koltM9vtgA=="
+          "hash": "AFgleel5rnlNh7Zuk8TA7Q=="
         }
       },
       "is_incremental": false,
@@ -810,7 +834,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ISite.html",
-          "hash": "nsAYxaHnN+oCuH5KOMWFZQ=="
+          "hash": "CH0LBv+cyaTP5cbioWabKA=="
         }
       },
       "is_incremental": false,
@@ -822,7 +846,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "+OTJ1v180/DoV9nhPcy+2g=="
+          "hash": "lBwsiCELjn/PDzRGHIRPoQ=="
         }
       },
       "is_incremental": false,
@@ -890,6 +914,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.RenderListDataOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.RenderListDataOptions.html",
+          "hash": "C+NTwkSc9ahPEmxl5IDR9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.html",
+          "hash": "SdUmh2T/PoeCOEekbrk0ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.SearchBoxInNavBar.yml",
       "output": {
         ".html": {
@@ -930,7 +978,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "v6bYtjj08w5LeQTnek4QtA=="
+          "hash": "wdBAE6b9TLy3DU0ezGluPQ=="
         }
       },
       "is_incremental": false,
@@ -978,7 +1026,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeam.html",
-          "hash": "6/Vg0IWmmK7xSOyP4NUnVw=="
+          "hash": "5X2UOjNNCUsEWDiRs1nnPA=="
         }
       },
       "is_incremental": false,
@@ -990,7 +1038,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamApp.html",
-          "hash": "f630RvYQsBurqz/RClAX3w=="
+          "hash": "w7VGf6nuhAaywGnBBZHVmA=="
         }
       },
       "is_incremental": false,
@@ -1026,7 +1074,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChannel.html",
-          "hash": "3V0cbgXD11sVadLsBs7+XQ=="
+          "hash": "//30QUxhpnvseFeHmSBNdw=="
         }
       },
       "is_incremental": false,
@@ -1050,7 +1098,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChannelTab.html",
-          "hash": "atZ0GGFV/63uuYydnCOv3A=="
+          "hash": "Unk93wBAeX2hgbibBm0Zyg=="
         }
       },
       "is_incremental": false,
@@ -1086,7 +1134,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessage.html",
-          "hash": "Tbpv1z7wX+gUkSSZmyfu2w=="
+          "hash": "6bMTR6YG8c6EKckdh4s5Aw=="
         }
       },
       "is_incremental": false,
@@ -1494,7 +1542,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ServiceError.html",
-          "hash": "nsRtWhC+Lo+P7LeQKpJf+Q=="
+          "hash": "yYOUApTBCTiWhN2VvOkpZA=="
         }
       },
       "is_incremental": false,
@@ -1506,7 +1554,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ServiceException.html",
-          "hash": "KmVLfdim9ExC+34ttQ45Cw=="
+          "hash": "kyruZVS2YV5BDUlnqQzBsg=="
         }
       },
       "is_incremental": false,
@@ -1866,7 +1914,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.SharePointRestServiceException.html",
-          "hash": "taya12mW+iahhuq5X/cPBA=="
+          "hash": "sMOgt5eKzWzlxp/RdC3bZw=="
         }
       },
       "is_incremental": false,
@@ -1878,7 +1926,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.html",
-          "hash": "TtOuVHiC+6/V6i2W40Hatw=="
+          "hash": "rWqeKGK4nJ3007jLJAXB2A=="
         }
       },
       "is_incremental": false,
@@ -1902,7 +1950,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "FEsB3EjsYAfa1ulZ7xQ+Aw=="
+          "hash": "bE8PGjnd+e1lZIek/oMjbw=="
         }
       },
       "is_incremental": false,
@@ -1914,7 +1962,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/configuring authentication.html",
-          "hash": "mdMWcNhns8ut+e8AlVY7zw=="
+          "hash": "uT871aXwKBTDOzdYLDieAg=="
         }
       },
       "is_incremental": false,
@@ -1938,7 +1986,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/readme.html",
-          "hash": "7+FbU8KTIaUbXdk6TEbFlw=="
+          "hash": "PUcMkiSs16TNUv06syLEbw=="
         }
       },
       "is_incremental": false,
@@ -1974,7 +2022,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/extending the model - Microsoft Graph.html",
-          "hash": "/3jhes8dMODYZXmZRzkXsw=="
+          "hash": "9hqpK1UjA/3AenoXuu+Ceg=="
         }
       },
       "is_incremental": false,
@@ -2149,7 +2197,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "ll8PW7Yd2eAxCjwZ2iRqNQ=="
+          "hash": "XOPXIPB/qKl7NVd+9uCVaw=="
         }
       },
       "is_incremental": false,
@@ -2193,13 +2241,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 17,
-          "skipped_file_count": 17
+          "skipped_file_count": 13
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 156,
-          "skipped_file_count": 151
+          "total_file_count": 160,
+          "skipped_file_count": 133
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class ServiceException
+    <title>Class CsomServiceException
    | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class ServiceException
+    <meta name="title" content="Class CsomServiceException
    | PnP Core SDK ">
     <meta name="generator" content="docfx 2.52.0.0">
     
@@ -78,10 +78,10 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.ServiceException">
-  <h1 id="PnP_Core_ServiceException" data-uid="PnP.Core.ServiceException">Class ServiceException
+            <article class="content wrap" id="_content" data-uid="PnP.Core.CsomServiceException">
+  <h1 id="PnP_Core_CsomServiceException" data-uid="PnP.Core.CsomServiceException">Class CsomServiceException
   </h1>
-  <div class="markdown level0 summary"><p>Abstract class representing service errors</p>
+  <div class="markdown level0 summary"><p>CSOM Service exception</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   
@@ -90,12 +90,10 @@
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception">Exception</a></div>
     <div class="level2"><a class="xref" href="PnP.Core.PnPException.html">PnPException</a></div>
-    <div class="level3"><span class="xref">ServiceException</span></div>
+    <div class="level3"><a class="xref" href="PnP.Core.ServiceException.html">ServiceException</a></div>
+    <div class="level4"><span class="xref">CsomServiceException</span></div>
   </div>
   
-      <div class="level4"><a class="xref" href="PnP.Core.CsomServiceException.html">CsomServiceException</a></div>
-      <div class="level4"><a class="xref" href="PnP.Core.MicrosoftGraphServiceException.html">MicrosoftGraphServiceException</a></div>
-      <div class="level4"><a class="xref" href="PnP.Core.SharePointRestServiceException.html">SharePointRestServiceException</a></div>
   
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -110,9 +108,6 @@
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception.gettype#System_Exception_GetType">Exception.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception.tostring#System_Exception_ToString">Exception.ToString()</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception.data#System_Exception_Data">Exception.Data</a>
@@ -161,9 +156,9 @@
   <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.html">PnP.Core</a></h6>
   <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
   
-  <h5 id="PnP_Core_ServiceException_syntax">Syntax</h5>
+  <h5 id="PnP_Core_CsomServiceException_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ServiceException : PnPException, ISerializable</code></pre>
+    <pre><code class="lang-csharp hljs">public class CsomServiceException : ServiceException, ISerializable</code></pre>
   </div>
   
   
@@ -175,57 +170,23 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_ServiceException__ctor.md&amp;value=---%0Auid%3A%20PnP.Core.ServiceException.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_CsomServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_.md&amp;value=---%0Auid%3A%20PnP.Core.CsomServiceException.%23ctor(PnP.Core.ErrorType%2CSystem.Int32%2CSystem.Text.Json.JsonElement)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/ServiceException.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/CsomServiceException.cs/#L26" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_ServiceException__ctor_" data-uid="PnP.Core.ServiceException.#ctor*"></a>
+  <a id="PnP_Core_CsomServiceException__ctor_" data-uid="PnP.Core.CsomServiceException.#ctor*"></a>
   
-  <h4 id="PnP_Core_ServiceException__ctor" data-uid="PnP.Core.ServiceException.#ctor"><a href="#collapsible-PnP_Core_ServiceException__ctor" class="expander" data-toggle="collapse">ServiceException()</a></h4>
+  <h4 id="PnP_Core_CsomServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_" data-uid="PnP.Core.CsomServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)"><a href="#collapsible-PnP_Core_CsomServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_" class="expander" data-toggle="collapse">CsomServiceException(ErrorType, Int32, JsonElement)</a></h4>
   
-  <div id="collapsible-PnP_Core_ServiceException__ctor" class="collapse in">
+  <div id="collapsible-PnP_Core_CsomServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_" class="collapse in">
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ServiceException()</code></pre>
-  </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_ServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.ServiceException.%23ctor(PnP.Core.ErrorType%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/ServiceException.cs/#L23" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_ServiceException__ctor_" data-uid="PnP.Core.ServiceException.#ctor*"></a>
-  
-  <h4 id="PnP_Core_ServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_String_" data-uid="PnP.Core.ServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.String)"><a href="#collapsible-PnP_Core_ServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_String_" class="expander" data-toggle="collapse">ServiceException(ErrorType, Int32, String)</a></h4>
-  
-  <div id="collapsible-PnP_Core_ServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_String_" class="collapse in">
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ServiceException(ErrorType type, int httpResponseCode, string message)</code></pre>
+    <pre><code class="lang-csharp hljs">public CsomServiceException(ErrorType type, int httpResponseCode, JsonElement response)</code></pre>
   </div>
   
   <h5 class="parameters">Parameters</h5>
@@ -246,8 +207,8 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">message</span>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a></span>
+        <span class="parametername">response</span>
         <p>
       </td>
     </tr>
@@ -264,35 +225,39 @@
   
   
   </div>
+  <h3 id="methods">Methods
+  </h3>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_ServiceException__ctor_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.ServiceException.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_CsomServiceException_ToString.md&amp;value=---%0Auid%3A%20PnP.Core.CsomServiceException.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/ServiceException.cs/#L10" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/CsomServiceException.cs/#L36" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_ServiceException__ctor_" data-uid="PnP.Core.ServiceException.#ctor*"></a>
+  <a id="PnP_Core_CsomServiceException_ToString_" data-uid="PnP.Core.CsomServiceException.ToString*"></a>
   
-  <h4 id="PnP_Core_ServiceException__ctor_System_String_" data-uid="PnP.Core.ServiceException.#ctor(System.String)"><a href="#collapsible-PnP_Core_ServiceException__ctor_System_String_" class="expander" data-toggle="collapse">ServiceException(String)</a></h4>
+  <h4 id="PnP_Core_CsomServiceException_ToString" data-uid="PnP.Core.CsomServiceException.ToString"><a href="#collapsible-PnP_Core_CsomServiceException_ToString" class="expander" data-toggle="collapse">ToString()</a></h4>
   
-  <div id="collapsible-PnP_Core_ServiceException__ctor_System_String_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div id="collapsible-PnP_Core_CsomServiceException_ToString" class="collapse in">
+  <div class="markdown level1 summary"><p>Outputs a <a class="xref" href="PnP.Core.CsomServiceException.html">CsomServiceException</a> to a string representation</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ServiceException(string message)</code></pre>
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
   </div>
   
-  <h5 class="parameters">Parameters</h5>
+  
+  <h5 class="returns">Returns</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">message</span>
-        <p>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p><p>String representation</p>
+</p>
       </td>
     </tr>
   </table>
@@ -301,58 +266,8 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_ServiceException__ctor_System_String_System_Exception_.md&amp;value=---%0Auid%3A%20PnP.Core.ServiceException.%23ctor(System.String%2CSystem.Exception)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/ServiceException.cs/#L14" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_ServiceException__ctor_" data-uid="PnP.Core.ServiceException.#ctor*"></a>
-  
-  <h4 id="PnP_Core_ServiceException__ctor_System_String_System_Exception_" data-uid="PnP.Core.ServiceException.#ctor(System.String,System.Exception)"><a href="#collapsible-PnP_Core_ServiceException__ctor_System_String_System_Exception_" class="expander" data-toggle="collapse">ServiceException(String, Exception)</a></h4>
-  
-  <div id="collapsible-PnP_Core_ServiceException__ctor_System_String_System_Exception_" class="collapse in">
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ServiceException(string message, Exception innerException)</code></pre>
-  </div>
-  
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">message</span>
-        <p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception">Exception</a></span>
-        <span class="parametername">innerException</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception.tostring#System_Exception_ToString">Exception.ToString()</a></div>
   
   
   
@@ -368,8 +283,8 @@
 </article>
           </div>
           <div class="contribution-panel mobile-hide">
-              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_ServiceException.md&amp;value=---%0Auid%3A%20PnP.Core.ServiceException%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/ServiceException.cs/#L8" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_CsomServiceException.md&amp;value=---%0Auid%3A%20PnP.Core.CsomServiceException%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/CsomServiceException.cs/#L9" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

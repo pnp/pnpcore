@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="configuring-authentication">Configuring authentication</h1>
 
-<p>The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 workloads like SharePoint, Teams,...<strong>Configuring your own application is the recommended approach</strong>, but you can also use an multi-tenant application that the PnP team created. Both options are detailed in the next chapters</p>
+<p>The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 workloads like SharePoint, Teams,...<strong>Configuring your own application is the recommended approach</strong>, but you can also use a multi-tenant application that the PnP team created. Both options are detailed in the next chapters</p>
 <h2 id="i-want-to-configure-my-own-azure-ad-application-recommended">I want to configure my own Azure AD application (recommended)</h2>
 <div class="NOTE">
 <h5>Note</h5>
@@ -105,7 +105,7 @@
 <li><p>Click on <strong>Add Permissions</strong> and add the permissions you want to give to this application. Below list is a recommendation, you can grant less permissions but that might result in some PnP Core SDK calls to fail due getting access denied errors.</p>
 <ul>
 <li>SharePoint -&gt; Delegated Permissions -&gt; AllSites -&gt; AllSites.FullControl</li>
-<li>SharePoint -&gt; Delegated Permissions -&gt; Sites -&gt; Sites.SearchAll</li>
+<li>SharePoint -&gt; Delegated Permissions -&gt; Sites -&gt; Sites.Search.All</li>
 <li>SharePoint -&gt; Delegated Permissions -&gt; TermStore -&gt; TermStore.ReadWrite.All</li>
 <li>SharePoint -&gt; Delegated Permissions -&gt; User -&gt; User.ReadWrite.All</li>
 <li>Microsoft Graph -&gt; Delegated Permissions -&gt; User -&gt; User.Read</li>

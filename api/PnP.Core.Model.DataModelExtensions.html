@@ -134,10 +134,83 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_DataModelExtensions_ArePropertiesAvailable__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable%60%601(PnP.Core.Model.IDataModel%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/DataModelExtensions.cs/#L157" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_DataModelExtensions_ArePropertiesAvailable_" data-uid="PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable*"></a>
+  
+  <h4 id="PnP_Core_Model_DataModelExtensions_ArePropertiesAvailable__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable``1(PnP.Core.Model.IDataModel{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_DataModelExtensions_ArePropertiesAvailable__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____" class="expander" data-toggle="collapse">ArePropertiesAvailable&lt;TModel&gt;(IDataModel&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_DataModelExtensions_ArePropertiesAvailable__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks if the needed properties were loaded or not</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ArePropertiesAvailable&lt;TModel&gt;(this IDataModel&lt;TModel&gt; model, params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+  </div>
+  
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.IDataModel-1.html">IDataModel</a>&lt;TModel&gt;</span>
+        <span class="parametername">model</span>
+        <p><p>Implementation of the model (e.g. Web)</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
+        <span class="parametername">expressions</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p><p>True if properties were loaded, false otherwise</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TModel</span>
+        <p><p>Model type (e.g. IWeb)</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_DataModelExtensions_EnsurePropertiesAsync__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync%60%601(PnP.Core.Model.IDataModel%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/DataModelExtensions.cs/#L21" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/DataModelExtensions.cs/#L22" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_DataModelExtensions_EnsurePropertiesAsync_" data-uid="PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync*"></a>
@@ -210,7 +283,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Object___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.DataModelExtensions.IsPropertyAvailable%60%601(%60%600%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/DataModelExtensions.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/DataModelExtensions.cs/#L201" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_DataModelExtensions_IsPropertyAvailable_" data-uid="PnP.Core.Model.DataModelExtensions.IsPropertyAvailable*"></a>
@@ -284,7 +357,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___.md&amp;value=---%0Auid%3A%20PnP.Core.Model.DataModelExtensions.IsPropertyAvailable%60%601(PnP.Core.Model.IDataModel%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/DataModelExtensions.cs/#L57" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/DataModelExtensions.cs/#L177" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_DataModelExtensions_IsPropertyAvailable_" data-uid="PnP.Core.Model.DataModelExtensions.IsPropertyAvailable*"></a>
@@ -358,7 +431,7 @@
           </div>
           <div class="contribution-panel mobile-hide">
               <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_DataModelExtensions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.DataModelExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/DataModelExtensions.cs/#L12" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/DataModelExtensions.cs/#L13" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
