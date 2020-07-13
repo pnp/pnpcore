@@ -11,7 +11,7 @@ PS C:\> .\setuptestenv.ps1
 #>
 
 # Tenant name 
-$tenantName = "piasysdev" #e.g. contoso
+$tenantName = "" #e.g. contoso
 # If you use credential manager then specify the used credential manager entry, if left blank you'll be asked for a user/pwd
 $credentialManagerCredentialToUse = ""
 
@@ -65,4 +65,3 @@ New-PnPWeb -Title "Sub site" -Url "subsite" -Locale 1033 -Template "STS#3"
 Write-Host "All sites are created, next step is updating your test configuration file with the created urls"
 
 Disconnect-PnPOnline
-

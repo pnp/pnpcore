@@ -101,6 +101,34 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        public async Task TestQueryItems_REST_Async()
+        {
+            var expectedListItemTitle = "Home";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                IList list = await context.Web.Lists.GetByTitleAsync("Site Pages");
+                var query = (from i in list.Items
+                        where i.Title == expectedListItemTitle
+                        select i)
+                    .Load(l => l.Id, l => l.Title);
+
+                var queryResult = await query.ToListAsync();
+
+                // Ensure that we have 1 list in the collection of lists
+                Assert.AreEqual(1, context.Web.Lists.Length);
+
+                // Ensure that we have 1 item in the result and that its title is the expected one
+                Assert.IsNotNull(queryResult);
+                Assert.AreEqual(1, queryResult.Count);
+                Assert.AreEqual(expectedListItemTitle, queryResult[0].Title);
+            }
+        }
+
+        [TestMethod]
         public void TestQueryFirstOrDefaultNoPredicateLINQ_REST()
         {
             // TestCommon.Instance.Mocking = false;
@@ -109,6 +137,20 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var actual = context.Web.Lists.FirstOrDefault();
+
+                Assert.IsNotNull(actual);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryFirstOrDefaultNoPredicateLINQ_REST_Async()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var actual = await context.Web.Lists.FirstOrDefaultAsync();
 
                 Assert.IsNotNull(actual);
             }
@@ -207,6 +249,28 @@ namespace PnP.Core.Test.QueryModel
                 var library = context.Web.Lists.GetByTitle(targetListTitle);
                 var firstItem = library.Items.GetById(1, 
                     i => i.Id, 
+                    i => i.Title);
+
+                Assert.IsNotNull(firstItem);
+                Assert.AreEqual(1, firstItem.Id);
+                Assert.AreEqual(firstItem.Title, expectedTitle);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryGetByIdLINQ_REST_Async()
+        {
+            var targetListTitle = "Site Pages";
+            var expectedTitle = "Home";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var library = context.Web.Lists.GetByTitle(targetListTitle);
+                var firstItem = await library.Items.GetByIdAsync(1,
+                    i => i.Id,
                     i => i.Title);
 
                 Assert.IsNotNull(firstItem);

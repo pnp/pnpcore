@@ -11,10 +11,215 @@ using System.Threading.Tasks;
 namespace PnP.Core.QueryModel
 {
     /// <summary>
-    ///     Entity Framework LINQ related extension methods.
+    ///     Asynchronous LINQ related extension methods.
     /// </summary>
-    public static class EntityFrameworkQueryableExtensions
+    public static class QueryableExtensions
     {
+        private static readonly MethodInfo FirstWithoutPredicate;
+        private static readonly MethodInfo FirstWithPredicate;
+        private static readonly MethodInfo FirstOrDefaultWithoutPredicate;
+        private static readonly MethodInfo FirstOrDefaultWithPredicate;
+
+        static QueryableExtensions()
+        {
+            var queryableMethods = typeof(Queryable)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly).ToList();
+
+            FirstWithoutPredicate = queryableMethods.Single(
+                mi => mi.Name == nameof(Queryable.First) && mi.GetParameters().Length == 1);
+            FirstWithPredicate = queryableMethods.Single(
+                mi => mi.Name == nameof(Queryable.First)
+                      && mi.GetParameters().Length == 2
+                      && IsExpressionOfFunc(mi.GetParameters()[1].ParameterType));
+            FirstOrDefaultWithoutPredicate = queryableMethods.Single(
+                mi => mi.Name == nameof(Queryable.FirstOrDefault) && mi.GetParameters().Length == 1);
+            FirstOrDefaultWithPredicate = queryableMethods.Single(
+                mi => mi.Name == nameof(Queryable.FirstOrDefault)
+                      && mi.GetParameters().Length == 2
+                      && IsExpressionOfFunc(mi.GetParameters()[1].ParameterType));
+        }
+
+        static bool IsExpressionOfFunc(Type type, int funcGenericArgs = 2)
+            => type.IsGenericType
+               && type.GetGenericTypeDefinition() == typeof(Expression<>)
+               && type.GetGenericArguments()[0].IsGenericType
+               && type.GetGenericArguments()[0].GetGenericArguments().Length == funcGenericArgs;
+
+        #region First/FirstOrDefault
+
+        /// <summary>
+        ///     Asynchronously returns the first element of a sequence.
+        /// </summary>
+        /// <remarks>
+        ///     Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// </remarks>
+        /// <typeparam name="TSource">
+        ///     The type of the elements of <paramref name="source" />.
+        /// </typeparam>
+        /// <param name="source">
+        ///     An <see cref="IQueryable{T}" /> to return the first element of.
+        /// </param>
+        /// <param name="cancellationToken">
+        ///     A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
+        /// </param>
+        /// <returns>
+        ///     A task that represents the asynchronous operation.
+        ///     The task result contains the first element in <paramref name="source" />.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name = "source"/> is <see langword="null" />.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     <paramref name = "source"/> contains no elements.
+        /// </exception>
+        public static Task<TSource> FirstAsync<TSource>(
+            [NotNull] this IQueryable<TSource> source,
+            CancellationToken cancellationToken = default)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return ExecuteAsync<TSource, Task<TSource>>(FirstWithoutPredicate, source, cancellationToken);
+        }
+
+        /// <summary>
+        ///     Asynchronously returns the first element of a sequence that satisfies a specified condition.
+        /// </summary>
+        /// <remarks>
+        ///     Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// </remarks>
+        /// <typeparam name="TSource">
+        ///     The type of the elements of <paramref name="source" />.
+        /// </typeparam>
+        /// <param name="source">
+        ///     An <see cref="IQueryable{T}" /> to return the first element of.
+        /// </param>
+        /// <param name="predicate"> A function to test each element for a condition. </param>
+        /// <param name="cancellationToken">
+        ///     A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
+        /// </param>
+        /// <returns>
+        ///     A task that represents the asynchronous operation.
+        ///     The task result contains the first element in <paramref name="source" /> that passes the test in
+        ///     <paramref name="predicate" />.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="source"/> or <paramref name="predicate"/> is <see langword="null" />.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     <para>
+        ///         No element satisfies the condition in <paramref name = "predicate" />
+        ///     </para>
+        ///     <para>
+        ///         -or -
+        ///     </para>
+        ///     <para>
+        ///         <paramref name="source"/> contains no elements.
+        ///     </para>
+        /// </exception>
+        public static Task<TSource> FirstAsync<TSource>(
+            [NotNull] this IQueryable<TSource> source,
+            [NotNull] Expression<Func<TSource, bool>> predicate,
+            CancellationToken cancellationToken = default)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
+            return ExecuteAsync<TSource, Task<TSource>>(FirstWithPredicate, source, predicate, cancellationToken);
+        }
+
+        /// <summary>
+        ///     Asynchronously returns the first element of a sequence, or a default value if the sequence contains no elements.
+        /// </summary>
+        /// <remarks>
+        ///     Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// </remarks>
+        /// <typeparam name="TSource">
+        ///     The type of the elements of <paramref name="source" />.
+        /// </typeparam>
+        /// <param name="source">
+        ///     An <see cref="IQueryable{T}" /> to return the first element of.
+        /// </param>
+        /// <param name="cancellationToken">
+        ///     A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
+        /// </param>
+        /// <returns>
+        ///     A task that represents the asynchronous operation.
+        ///     The task result contains <see langword="default" /> ( <typeparamref name="TSource" /> ) if
+        ///     <paramref name="source" /> is empty; otherwise, the first element in <paramref name="source" />.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="source"/> is <see langword="null" />.
+        /// </exception>
+        public static Task<TSource> FirstOrDefaultAsync<TSource>(
+            [NotNull] this IQueryable<TSource> source,
+            CancellationToken cancellationToken = default)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return ExecuteAsync<TSource, Task<TSource>>(FirstOrDefaultWithoutPredicate, source, cancellationToken);
+        }
+
+        /// <summary>
+        ///     Asynchronously returns the first element of a sequence that satisfies a specified condition
+        ///     or a default value if no such element is found.
+        /// </summary>
+        /// <remarks>
+        ///     Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+        ///     that any asynchronous operations have completed before calling another method on this context.
+        /// </remarks>
+        /// <typeparam name="TSource">
+        ///     The type of the elements of <paramref name="source" />.
+        /// </typeparam>
+        /// <param name="source">
+        ///     An <see cref="IQueryable{T}" /> to return the first element of.
+        /// </param>
+        /// <param name="predicate"> A function to test each element for a condition. </param>
+        /// <param name="cancellationToken">
+        ///     A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
+        /// </param>
+        /// <returns>
+        ///     A task that represents the asynchronous operation.
+        ///     The task result contains <see langword="default" /> ( <typeparamref name="TSource" /> ) if <paramref name="source" />
+        ///     is empty or if no element passes the test specified by <paramref name="predicate" /> ; otherwise, the first
+        ///     element in <paramref name="source" /> that passes the test specified by <paramref name="predicate" />.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name = "source"/> or <paramref name="predicate"/> is <see langword="null" />.
+        /// </exception>
+        public static Task<TSource> FirstOrDefaultAsync<TSource>(
+            [NotNull] this IQueryable<TSource> source,
+            [NotNull] Expression<Func<TSource, bool>> predicate,
+            CancellationToken cancellationToken = default)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
+            return ExecuteAsync<TSource, Task<TSource>>(FirstOrDefaultWithPredicate, source, predicate, cancellationToken);
+        }
+
+        #endregion
+
         #region ToList/Array
 
         /// <summary>
@@ -81,11 +286,11 @@ namespace PnP.Core.QueryModel
         #region Query Filters
 
         internal static readonly MethodInfo IgnoreQueryFiltersMethodInfo
-            = typeof(EntityFrameworkQueryableExtensions)
+            = typeof(QueryableExtensions)
                 .GetTypeInfo().GetDeclaredMethod(nameof(IgnoreQueryFilters));
 
         /// <summary>
-        ///     Specifies that the current Entity Framework LINQ query should not have any
+        ///     Specifies that the current LINQ query should not have any
         ///     model-level entity query filters applied.
         /// </summary>
         /// <typeparam name="TEntity"> The type of entity being queried. </typeparam>

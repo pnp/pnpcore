@@ -38,7 +38,7 @@ namespace PnP.Core.QueryModel
 
         #region BaseQueryProvider abstract methods implementation
 
-        public override Task<object> ExecuteAsync(Expression expression)
+        public override Task<object> ExecuteObjectAsync(Expression expression)
         {
             // Translate the query expression into an actual query text for the target Query Service
             var query = Translate(expression);

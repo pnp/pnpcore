@@ -19,6 +19,8 @@ namespace PnP.Core.QueryModel
             typeof(BaseQueryProvider).GetRuntimeMethods().FirstOrDefault(n => n.Name == nameof(TryGetFromAlreadyRequestedQueryable));
         private static readonly MethodInfo GetAsyncEnumerableMethod =
             typeof(BaseQueryProvider).GetRuntimeMethods().FirstOrDefault(n => n.Name == nameof(GetAsyncEnumerable));
+        private static readonly MethodInfo CastTaskMethod =
+            typeof(BaseQueryProvider).GetRuntimeMethods().FirstOrDefault(n => n.Name == nameof(CastTask));
 
         #region IQueryProvider implementation
 
@@ -58,18 +60,33 @@ namespace PnP.Core.QueryModel
 
             Type resultType = typeof(TResult);
             Type innerResultType = null;
+            bool isEnumerable = false;
+            // Since we expect types IAsyncEnumerable<> or Task<>
+            // we get the inner generic type (real type)
             if (resultType.IsGenericType)
             {
                 Type genericType = resultType.GetGenericTypeDefinition();
-                if (genericType == typeof(IAsyncEnumerable<>) || genericType == typeof(Task<>))
+                if (genericType == typeof(IAsyncEnumerable<>))
                 {
+                    isEnumerable = true;
+                    innerResultType = resultType.GetGenericArguments()[0];
+                }
+                else if (genericType == typeof(Task<>))
+                {
+                    isEnumerable = false;
                     innerResultType = resultType.GetGenericArguments()[0];
                 }
             }
-
+            // Other TResult types are not supported
             if (innerResultType == null)
             {
                 throw new ArgumentException($"Expected TResult of type {typeof(IAsyncEnumerable<>)} or {typeof(Task<>)}");
+            }
+
+            if (!isEnumerable)
+            {
+                Task<object> task = ExecuteObjectAsync(expression);
+                return (TResult)CastTaskMethod.MakeGenericMethod(innerResultType).Invoke(this, new[] { task });
             }
 
             // Check if the resultset has already been requested from the back-end service
@@ -80,12 +97,12 @@ namespace PnP.Core.QueryModel
                 .Invoke(this, parameters);
             if (found)
             {
-                // TODO: check what to do in this case
+                // TODO: what to do in this case?
             }
 
             // If the query has not been already requested
-            // just execute it using our query service
-            return (TResult)GetAsyncEnumerableMethod.MakeGenericMethod(innerResultType).Invoke(this, new[] {expression});
+            // just execute it using our query service using IAsyncEnumerable implementation
+            return (TResult)GetAsyncEnumerableMethod.MakeGenericMethod(innerResultType).Invoke(this, new[] { expression });
         }
 
         public TResult Execute<TResult>(Expression expression)
@@ -103,23 +120,29 @@ namespace PnP.Core.QueryModel
 
             // If the query has not been already requested
             // just execute it using our query service
-            return (TResult)ExecuteAsync(expression).GetAwaiter().GetResult();
+            return (TResult)ExecuteObjectAsync(expression).GetAwaiter().GetResult();
         }
 
         public object Execute(Expression expression)
         {
-            return ExecuteAsync(expression).GetAwaiter().GetResult();
+            return ExecuteObjectAsync(expression).GetAwaiter().GetResult();
         }
 
         public abstract IQueryable CreateQuery(Expression expression);
 
-        public abstract Task<object> ExecuteAsync(Expression expression);
+        public abstract Task<object> ExecuteObjectAsync(Expression expression);
 
         #endregion
 
+        private async Task<TResult> CastTask<TResult>(Task<object> task)
+        {
+            object result = await task;
+            return (TResult)result;
+        }
+
         private async IAsyncEnumerable<TResult> GetAsyncEnumerable<TResult>(Expression expression)
         {
-            IEnumerable<TResult> results = (IEnumerable<TResult>)await ExecuteAsync(expression);
+            IEnumerable<TResult> results = (IEnumerable<TResult>)await ExecuteObjectAsync(expression);
             foreach (TResult result in results)
             {
                 yield return result;
