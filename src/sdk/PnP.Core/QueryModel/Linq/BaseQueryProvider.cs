@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -86,7 +87,8 @@ namespace PnP.Core.QueryModel
             if (!isEnumerable)
             {
                 Task<object> task = ExecuteObjectAsync(expression);
-                return (TResult)CastTaskMethod.MakeGenericMethod(innerResultType).Invoke(this, new[] { task });
+                // Cast Task<object> to Task<TResult>
+                return (TResult)CastTaskMethod.MakeGenericMethod(innerResultType).Invoke(this, new object[] { task });
             }
 
             // Check if the resultset has already been requested from the back-end service
@@ -98,11 +100,12 @@ namespace PnP.Core.QueryModel
             if (found)
             {
                 // TODO: what to do in this case?
+                // parameters[1] contains the result
             }
 
             // If the query has not been already requested
-            // just execute it using our query service using IAsyncEnumerable implementation
-            return (TResult)GetAsyncEnumerableMethod.MakeGenericMethod(innerResultType).Invoke(this, new[] { expression });
+            // just execute it using our query service and wrapping it with a IAsyncEnumerable implementation
+            return (TResult)GetAsyncEnumerableMethod.MakeGenericMethod(innerResultType).Invoke(this, new object[] { expression });
         }
 
         public TResult Execute<TResult>(Expression expression)
