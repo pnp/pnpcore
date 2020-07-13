@@ -1436,7 +1436,14 @@ namespace PnP.Core.Model
             }
 
             // Ensure token replacement is done
-            apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
+            if (apiCall.Type == ApiType.CSOM)
+            {
+                apiCall.XmlBody = await TokenHandler.ResolveTokensAsync(this, apiCall.XmlBody, PnPContext).ConfigureAwait(false);
+            }
+            else
+            {
+                apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
+            }
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
