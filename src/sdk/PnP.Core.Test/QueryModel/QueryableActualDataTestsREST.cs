@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 using PnP.Core.Test.Utilities;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -29,6 +30,24 @@ namespace PnP.Core.Test.QueryModel
                             .Load(w => w.Id, w => w.Title, w => w.Description);
 
                 var queryResult = query.ToList();
+
+                Assert.IsNotNull(queryResult);
+                Assert.IsTrue(queryResult.Count > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryWebs_REST_Async()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var query = context.Site.AllWebs
+                    .Load(w => w.Id, w => w.Title, w => w.Description);
+
+                var queryResult = await query.ToListAsync();
 
                 Assert.IsNotNull(queryResult);
                 Assert.IsTrue(queryResult.Count > 0);

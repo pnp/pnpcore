@@ -3,15 +3,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Base abstract class to implement the basic logic of an IQueryProvider
     /// </summary>
-    public abstract class BaseQueryProvider : IQueryProvider
+    public abstract class BaseQueryProvider : IAsyncQueryProvider
     {
+        private static readonly MethodInfo TryGetFromAlreadyRequestedQueryableMethod =
+            typeof(BaseQueryProvider).GetRuntimeMethods().FirstOrDefault(n => n.Name == nameof(TryGetFromAlreadyRequestedQueryable));
+        private static readonly MethodInfo GetAsyncEnumerableMethod =
+            typeof(BaseQueryProvider).GetRuntimeMethods().FirstOrDefault(n => n.Name == nameof(GetAsyncEnumerable));
+
         #region IQueryProvider implementation
 
         public IQueryable<TResult> CreateQuery<TResult>(Expression expression)
@@ -41,12 +49,86 @@ namespace PnP.Core.QueryModel
             return (IQueryable<TResult>)CreateQuery(expression);
         }
 
+        public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            Type resultType = typeof(TResult);
+            Type innerResultType = null;
+            if (resultType.IsGenericType)
+            {
+                Type genericType = resultType.GetGenericTypeDefinition();
+                if (genericType == typeof(IAsyncEnumerable<>) || genericType == typeof(Task<>))
+                {
+                    innerResultType = resultType.GetGenericArguments()[0];
+                }
+            }
+
+            if (innerResultType == null)
+            {
+                throw new ArgumentException($"Expected TResult of type {typeof(IAsyncEnumerable<>)} or {typeof(Task<>)}");
+            }
+
+            // Check if the resultset has already been requested from the back-end service
+            // Invoke the function using the generic type
+            object[] parameters = { expression, null };
+            bool found = (bool)TryGetFromAlreadyRequestedQueryableMethod
+                .MakeGenericMethod(innerResultType)
+                .Invoke(this, parameters);
+            if (found)
+            {
+                // TODO: check what to do in this case
+            }
+
+            // If the query has not been already requested
+            // just execute it using our query service
+            return (TResult)GetAsyncEnumerableMethod.MakeGenericMethod(innerResultType).Invoke(this, new[] {expression});
+        }
+
         public TResult Execute<TResult>(Expression expression)
         {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
             }
+
+            // Check if the resultset has already been requested from the back-end service
+            if (TryGetFromAlreadyRequestedQueryable<TResult>(expression, out object result))
+            {
+                return (TResult)result;
+            }
+
+            // If the query has not been already requested
+            // just execute it using our query service
+            return (TResult)ExecuteAsync(expression).GetAwaiter().GetResult();
+        }
+
+        public object Execute(Expression expression)
+        {
+            return ExecuteAsync(expression).GetAwaiter().GetResult();
+        }
+
+        public abstract IQueryable CreateQuery(Expression expression);
+
+        public abstract Task<object> ExecuteAsync(Expression expression);
+
+        #endregion
+
+        private async IAsyncEnumerable<TResult> GetAsyncEnumerable<TResult>(Expression expression)
+        {
+            IEnumerable<TResult> results = (IEnumerable<TResult>)await ExecuteAsync(expression);
+            foreach (TResult result in results)
+            {
+                yield return result;
+            }
+        }
+
+        private bool TryGetFromAlreadyRequestedQueryable<TResult>(Expression expression, out object result)
+        {
+            result = default;
 
             // If the result of the Execute is of type IQueryable<T> or if it
             // is a single data type (like TModel, int, bool, etc.) we need 
@@ -63,7 +145,8 @@ namespace PnP.Core.QueryModel
                 if (alreadyRequestedQueryable != null && newExpression != null)
                 {
                     // We execute the new expression on the requested queryable collection
-                    return alreadyRequestedQueryable.Provider.Execute<TResult>(newExpression);
+                    result = alreadyRequestedQueryable.Provider.Execute<TResult>(newExpression);
+                    return true;
                 }
             }
             else
@@ -71,16 +154,8 @@ namespace PnP.Core.QueryModel
                 throw new ArgumentException("Argument expression is not valid");
             }
 
-            // If the query has not been already requested
-            // just execute it using our query service
-            return (TResult)Execute(expression);
+            return false;
         }
-
-        public abstract IQueryable CreateQuery(Expression expression);
-
-        public abstract object Execute(Expression expression);
-
-        #endregion
 
         private (IQueryable, Expression) GetExpressionForAlreadyRequestedQueryable(Expression expression)
         {
@@ -130,5 +205,6 @@ namespace PnP.Core.QueryModel
 
             return (null, null);
         }
+
     }
 }

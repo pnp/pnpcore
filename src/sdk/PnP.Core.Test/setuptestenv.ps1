@@ -11,7 +11,7 @@ PS C:\> .\setuptestenv.ps1
 #>
 
 # Tenant name 
-$tenantName = "" #e.g. contoso
+$tenantName = "piasysdev" #e.g. contoso
 # If you use credential manager then specify the used credential manager entry, if left blank you'll be asked for a user/pwd
 $credentialManagerCredentialToUse = ""
 

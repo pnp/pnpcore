@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
 {
@@ -40,7 +41,7 @@ namespace PnP.Core.QueryModel
             this.memberName = memberName;
         }
 
-        public object ExecuteQuery(Type expressionType, ODataQuery<TModel> query)
+        public async Task<object> ExecuteQueryAsync(Type expressionType, ODataQuery<TModel> query)
         {
             if (string.IsNullOrEmpty(memberName))
             {
@@ -162,7 +163,7 @@ namespace PnP.Core.QueryModel
                 }
 
                 // and execute the request
-                context.ExecuteAsync().GetAwaiter().GetResult();
+                await context.ExecuteAsync();
 
                 // Get the resulting property from the parent object
                 var resultValue = parent.GetPublicInstancePropertyValue(memberName) as IEnumerable<TModel>;

@@ -75,9 +75,22 @@ namespace PnP.Core.QueryModel.Model
 
         public IAsyncEnumerator<TModel> GetAsyncEnumerator(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException("Method not yet implemented!");
-            // ((IEnumerable)this.provider.Execute(this.Expression)).GetEnumerator();
-            // return null; 
+            if (this.provider != null & this.Expression != null && !this.Requested)
+            {
+                return this.provider.ExecuteAsync<IAsyncEnumerable<TModel>>(this.Expression, cancellationToken).GetAsyncEnumerator(cancellationToken);
+            }
+            else
+            {
+                return GetAsyncEnumerator();
+            }
+
+            async IAsyncEnumerator<TModel> GetAsyncEnumerator()
+            {
+                foreach (TModel model in this.items)
+                {
+                    yield return model;
+                }
+            }
         }
 
         #endregion
