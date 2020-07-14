@@ -1148,7 +1148,10 @@ namespace PnP.Core.Model
             var updateUrl = ApiHelper.ParseApiCall(this, entity.GraphUpdate);
 
             // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(updateUrl, apiType, jsonUpdateMessage));
+            var call = new ApiCallRequest(new ApiCall(updateUrl, apiType, jsonUpdateMessage)
+            {
+                Commit = true
+            });
             if (UpdateApiCallOverrideHandler != null)
             {
                 call = UpdateApiCallOverrideHandler.Invoke(call);
@@ -1221,7 +1224,11 @@ namespace PnP.Core.Model
             var updateUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}");
 
             // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage));
+            var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage)
+            {
+                Commit = true
+            });
+
             if (UpdateApiCallOverrideHandler != null)
             {
                 call = UpdateApiCallOverrideHandler.Invoke(call);
@@ -1486,7 +1493,14 @@ namespace PnP.Core.Model
             }
 
             // Ensure token replacement is done
-            apiCall.Request = TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).GetAwaiter().GetResult();
+            if (apiCall.Type == ApiType.CSOM)
+            {
+                apiCall.XmlBody = TokenHandler.ResolveTokensAsync(this, apiCall.XmlBody, PnPContext).GetAwaiter().GetResult();
+            }
+            else
+            {
+                apiCall.Request = TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).GetAwaiter().GetResult();
+            }
 
             // Add the request to the batch
             batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);

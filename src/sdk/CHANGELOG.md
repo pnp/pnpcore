@@ -33,6 +33,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Add support for getting list items via a CAML query #80 [jansenbe - Bert Jansen]
 - Support RenderListDataAsStream method on lists - basic implementation #81 [jansenbe - Bert Jansen]
 - Add support for calling client.svc (CSOM) endpoint #86 [jansenbe - Bert Jansen]
+- Added SystemUpdate() and UpdateOverwriteVersion() methods on the ListItem model (uses CSOM) [jansenbe - Bert Jansen]
 
 ### Changed
 

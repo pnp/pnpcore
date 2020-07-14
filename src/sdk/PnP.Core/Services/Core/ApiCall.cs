@@ -15,6 +15,7 @@ namespace PnP.Core.Services
             XmlBody = null;
             ReceivingProperty = receivingProperty;
             RawRequest = false;
+            Commit = false;
         }
 
         internal ApiCall(string xmlBody, string receivingProperty = null)
@@ -25,6 +26,7 @@ namespace PnP.Core.Services
             XmlBody = xmlBody;
             ReceivingProperty = receivingProperty;
             RawRequest = false;
+            Commit = false;
         }
 
         /// <summary>
@@ -60,5 +62,10 @@ namespace PnP.Core.Services
         /// Is this a raw request that does not require automatic parsing of the returned json?
         /// </summary>
         internal bool RawRequest { get; set; }
+
+        /// <summary>
+        /// When set to true the current model item will be committed as changes are synced with the server
+        /// </summary>
+        internal bool Commit { get; set; }
     }
 }
