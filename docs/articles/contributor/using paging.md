@@ -1,6 +1,6 @@
 # Implementing paging
 
-If you want a model (e.g. `List`) to retrieved using paging then you'll need to explicitely enable paging and this article will explain how.
+If you want a model (e.g. `List`) to retrieved using paging then you'll need to explicitly enable paging and this article will explain how.
 
 
 ## Using ISupportPaging
@@ -21,7 +21,7 @@ using (var context = pnpContextFactory.Create("SiteToWorkWith"))
     // Get a first page of lists of size 2
     await context.Web.Lists.GetPagedAsync(2, p => p.Title);
 
-    // Do we have a pointer to a next page?
+    // Do we have a pointer to the next page?
     if (context.Web.Lists.CanPage)
     {
         // Load the next page
