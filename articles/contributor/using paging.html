@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="implementing-paging">Implementing paging</h1>
 
-<p>If you want a model (e.g. <code>List</code>) to retrieved using paging then you'll need to explicitely enable paging and this article will explain how.</p>
+<p>If you want a model (e.g. <code>List</code>) to retrieved using paging then you'll need to explicitly enable paging and this article will explain how.</p>
 <h2 id="using-isupportpaging">Using ISupportPaging</h2>
 <p>To enable paging support you need to add the <code>ISupportPaging&lt;&gt;</code> interface on the public collection class interface of the model for which you want to use paging. If you for example want to enabled paged retrieval of <code>Lists</code> then you need to add the interface to the <code>ListCollection</code> class.</p>
 <pre><code class="lang-csharp">public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection&lt;IList&gt;, ISupportPaging&lt;IList&gt;
@@ -92,7 +92,7 @@
     // Get a first page of lists of size 2
     await context.Web.Lists.GetPagedAsync(2, p =&gt; p.Title);
 
-    // Do we have a pointer to a next page?
+    // Do we have a pointer to the next page?
     if (context.Web.Lists.CanPage)
     {
         // Load the next page

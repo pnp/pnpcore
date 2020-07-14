@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="the-pnp-core-sdk-model">The PnP Core SDK model</h1>
 
-<p>The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and the their operations (e.g. Get). This model has a public part (interfaces) and an implementation (internal, partial classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. <strong>As a contributor, extending and enriching the model is how you provide functionality to the developers that will be using this SDK</strong>.</p>
+<p>The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and their operations (e.g. Get). This model has a public part (interfaces) and an implementation (internal, partial classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. <strong>As a contributor, extending and enriching the model is how you provide functionality to the developers that will be using this SDK</strong>.</p>
 <p><img src="../../images/sdk%20overview.png" alt="SDK overview"></p>
 <h2 id="where-is-the-code">Where is the code?</h2>
 <p>The PnP Core SDK is maintained in the PnP GitHub repository: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>. You'll find:</p>
@@ -130,7 +130,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDe
 <p>Each public model:</p>
 <ul>
 <li>Uses a public interface (e.g. <code>IList</code> in our example) with public fields</li>
-<li>Uses the <code>ConcreteType</code> attribute to defined the implementation type that belongs to this interface</li>
+<li>Uses the <code>ConcreteType</code> attribute to define the implementation type that belongs to this interface</li>
 <li>Has inline documentation on the model class and fields</li>
 <li>Always implements the <code>IDataModel&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample)</li>
 <li>Optionally implements the <code>IDataModelUpdate</code> interface whenever <strong>update</strong> functionality in needed on this model class</li>
@@ -358,7 +358,7 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
     /// &lt;returns&gt;Newly added list&lt;/returns&gt;
     public Task&lt;IList&gt; AddAsync(string title, int templateType);
 
-    // Other methods ommitted for brevity
+    // Other methods omitted for brevity
 }
 </code></pre>
 <p>Each public model interface for a Collection class:</p>
@@ -399,7 +399,7 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
 <p>Here's a snippet of the <code>ListCollection.cs</code> class:</p>
 <pre><code class="lang-csharp">internal partial class ListCollection
 {
-    // Other methods ommitted for brevity
+    // Other methods omitted for brevity
 
     public async Task&lt;IList&gt; AddAsync(string title, int templateType)
     {

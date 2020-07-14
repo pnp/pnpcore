@@ -5533,6 +5533,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.Id
   nameWithType: IListItem.Id
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdate
+  name: SystemUpdate()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdate
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdate
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdate()
+  nameWithType: IListItem.SystemUpdate()
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdate(PnP.Core.Services.Batch)
+  name: SystemUpdate(Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdate_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdate(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdate(PnP.Core.Services.Batch)
+  nameWithType: IListItem.SystemUpdate(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdate*
+  name: SystemUpdate
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SystemUpdate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdate
+  nameWithType: IListItem.SystemUpdate
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
+  name: SystemUpdateAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync()
+  nameWithType: IListItem.SystemUpdateAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync*
+  name: SystemUpdateAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
+  nameWithType: IListItem.SystemUpdateAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.Title
   name: Title
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Title
@@ -5546,6 +5578,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.Title
   nameWithType: IListItem.Title
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
+  name: UpdateOverwriteVersion()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion()
+  nameWithType: IListItem.UpdateOverwriteVersion()
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion(PnP.Core.Services.Batch)
+  name: UpdateOverwriteVersion(Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion(PnP.Core.Services.Batch)
+  nameWithType: IListItem.UpdateOverwriteVersion(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion*
+  name: UpdateOverwriteVersion
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
+  nameWithType: IListItem.UpdateOverwriteVersion
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
+  name: UpdateOverwriteVersionAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync()
+  nameWithType: IListItem.UpdateOverwriteVersionAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync*
+  name: UpdateOverwriteVersionAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
+  nameWithType: IListItem.UpdateOverwriteVersionAsync
 - uid: PnP.Core.Model.SharePoint.IListItemCollection
   name: IListItemCollection
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html
