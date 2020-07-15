@@ -1,6 +1,6 @@
 # Writing test cases
 
-Test cases are a crucial part of the pnp core sdk as they help ensuring code quality and provide feedback to contributors on how well their changes are working. All new contributions **must** be covered by test cases unless the added functionality is already somehow covered by existing test cases.
+Test cases are a crucial part of the PnP Core SDK as they help ensuring code quality and provide feedback to contributors on how well their changes are working. All new contributions **must** be covered by test cases unless the added functionality is already somehow covered by existing test cases.
 
 ## Setting up your environment to run the tests cases
 
