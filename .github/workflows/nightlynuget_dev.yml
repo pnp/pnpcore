@@ -17,6 +17,8 @@ jobs:
         ref: dev
     - name: Create and publish nuget 
       shell: pwsh
+      env:
+        NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}
       run: |
         ./build/build.ps1
     # Add and commit changes
