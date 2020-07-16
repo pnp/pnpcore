@@ -18,6 +18,11 @@ jobs:
       with: 
         ref: gh-pages
         path: gh-pages
+    # Ensure .Net is available
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101    
     # Install docfx
     - name: Install dependencies
       run: |
