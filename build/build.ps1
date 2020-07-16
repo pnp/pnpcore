@@ -15,10 +15,11 @@ Write-Host "Building version $version"
 dotnet build ./src/sdk/PnP.Core/PnP.Core.csproj --no-incremental /p:Version=$version
 
 Write-Host "Packinging $version"
-dotnet pack ./src/sdk/PnP.Core/PnP.Core.csproj --no-build -- /p:PackageVersion=$version
+dotnet pack ./src/sdk/PnP.Core/PnP.Core.csproj --no-build /p:PackageVersion=$version
 
 Write-Host "Publishing to nuget"
-dotnet nuget push $(./src/sdk/PnP.Core/bin/Debug/PnP.Core.$version.nupkg) --api-key $env:NUGET_API_KEY
+$nupkg = $("./src/sdk/PnP.Core/bin/Debug/PnP.Core.$version.nupkg")
+dotnet nuget push $nupkg --api-key $env:NUGET_API_KEY
 
 Write-Host "Writing $version to git"
 Set-Content -Path ./build/version.debug.increment -Value $versionIncrement
