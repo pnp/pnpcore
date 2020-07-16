@@ -84,11 +84,7 @@
 <li>Author articles</li>
 <li>Write inline code documentation via the triple slash comments</li>
 </ul>
-<p>Once you've made changes to the documentation, then these changes are not immediately reflected in the published documentation. In fact, you need to run the <a href="https://dotnet.github.io/docfx/">DocFX</a> build and to publish the resulting content.</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Currently documentation is refreshed manually but we're looking into automating this in the future.</p>
-</div>
+<p>Once you've made changes to the documentation and your changes are merged into the <code>dev</code> branch then a GitHub workflow will be triggered and this workflow will refresh documentation automatically.</p>
 <h2 id="writing-articles">Writing articles</h2>
 <p>Articles are at the core of the PnP Core SDK documentation and they live in the <code>docs\articles</code> folder. Articles are written in <a href="https://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html?tabs=tabid-1%2Ctabid-a">DocFX Flavored Markdown</a>, which is an extension on top of GitHub flavored markdown. Articles target either the library consumer or the library contributor, hence they should be added to the <strong>consumer</strong> or <strong>contributor</strong> folder respectively. When an article requires images, then all images are added in the <code>docs\images</code> folder. You can eventually organize images in sub-folders of the <code>docs\images</code> folder.</p>
 <p>If you want to show your article in the table of contents, then you need to make the needed changes in <code>toc.yml</code>, which you find in the root of the <code>docs</code> folder.</p>
