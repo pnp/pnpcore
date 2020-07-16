@@ -5,10 +5,7 @@ The documentation system is based on [DocFX](https://dotnet.github.io/docfx/), a
 - Author articles
 - Write inline code documentation via the triple slash comments
 
-Once you've made changes to the documentation, then these changes are not immediately reflected in the published documentation. In fact, you need to run the [DocFX](https://dotnet.github.io/docfx/) build and to publish the resulting content.
-
-> [!Note]
-> Currently documentation is refreshed manually but we're looking into automating this in the future.
+Once you've made changes to the documentation and your changes are merged into the `dev` branch then a GitHub workflow will be triggered and this workflow will refresh documentation automatically.
 
 ## Writing articles
 
