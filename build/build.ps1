@@ -19,7 +19,11 @@ dotnet pack ./src/sdk/PnP.Core/PnP.Core.csproj --no-build /p:PackageVersion=$ver
 
 Write-Host "Publishing to nuget"
 $nupkg = $("./src/sdk/PnP.Core/bin/Debug/PnP.Core.$version.nupkg")
-dotnet nuget push $nupkg --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+$apiKey = $("$env:NUGET_API_KEY")
+
+Write-Host "API Key starts with:" $apiKey.Substring(0,10)
+
+dotnet nuget push $nupkg --api-key $apiKey --source https://api.nuget.org/v3/index.json
 
 Write-Host "Writing $version to git"
 Set-Content -Path ./build/version.debug.increment -Value $versionIncrement
