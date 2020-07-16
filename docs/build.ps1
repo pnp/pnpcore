@@ -3,7 +3,6 @@
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version 2.0
 
-cd ./dev/docs
 docfx metadata ./dev/docs/docfx.json --warningsAsErrors $args
 docfx build ./dev/docs/docfx.json --warningsAsErrors $args
 
