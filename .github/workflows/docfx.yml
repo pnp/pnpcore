@@ -38,18 +38,19 @@ jobs:
       shell: pwsh
       run: |
         ./dev/docs/build.ps1
-    # Push changes back
+  # Add and commit changes
   - name: Add & Commit
     uses: EndBug/add-and-commit@v4.2.1
     with:
       # Arguments for the git add command
       # The directory where your repository is located. You should use actions/checkout first to set it up
       cwd: ./gh-pages
+  # Push changes to github
   - name: GitHub Push
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        # Destination branch to push changes
-        branch: gh-pages
-        directory: ./gh-pages
+    uses: ad-m/github-push-action@v0.6.0
+    with:
+      # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+      github_token: ${{ secrets.GITHUB_TOKEN }}
+      # Destination branch to push changes
+      branch: gh-pages
+      directory: ./gh-pages
