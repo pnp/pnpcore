@@ -18,10 +18,15 @@ jobs:
       with: 
         ref: gh-pages
         path: gh-pages
-    # Install docfx
+    # Ensure .Net is available
+    #- name: Setup .NET Core
+    #  uses: actions/setup-dotnet@v1
+    #  with:
+    #    dotnet-version: 3.1.101    
+    # Install docfx, stick with version 2.51 as higher versions result in https://github.com/dotnet/docfx/issues/5785
     - name: Install dependencies
       run: |
-        wget https://github.com/dotnet/docfx/releases/latest/download/docfx.zip
+        wget https://github.com/dotnet/docfx/releases/download/v2.51/docfx.zip
         sudo unzip docfx.zip -d /usr/local/lib/docfx
         rm docfx.zip
         echo '#!/bin/sh' | sudo tee -a /usr/local/bin/docfx > /dev/null
@@ -32,3 +37,19 @@ jobs:
       shell: pwsh
       run: |
         ./dev/docs/build.ps1
+    # Add and commit changes
+    - name: Add & Commit
+      uses: EndBug/add-and-commit@v4.2.1
+      with:
+        # Arguments for the git add command
+        # The directory where your repository is located. You should use actions/checkout first to set it up
+        cwd: ./gh-pages
+    # Push changes to github
+    - name: GitHub Push
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        # Destination branch to push changes
+        branch: gh-pages
+        directory: ./gh-pages
