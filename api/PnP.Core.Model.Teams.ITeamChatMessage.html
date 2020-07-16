@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface ITeamChatMessage
    | PnP Core SDK ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -85,7 +85,7 @@
 part of a reply thread that is defined by the replyToId property in the chat message.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  
+
   
   
   <div class="inheritedMembers">
@@ -138,7 +138,7 @@ part of a reply thread that is defined by the replyToId property in the chat mes
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface ITeamChatMessage : IDataModel&lt;ITeamChatMessage&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;ITeamChatMessage&gt;, IDataModelGet</code></pre>
   </div>
-  
+
   
   
   
@@ -163,11 +163,11 @@ part of a reply thread that is defined by the replyToId property in the chat mes
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">List&lt;ITeamChatMessageAttachment&gt; Attachments { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -208,11 +208,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">ITeamChatMessageContent Body { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -252,11 +252,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">DateTimeOffset CreatedDateTime { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -296,11 +296,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">DateTimeOffset DeletedDateTime { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -340,11 +340,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">string Etag { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -384,11 +384,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">ITeamIdentitySet From { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -428,11 +428,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">string Id { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -472,11 +472,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">ChatMessageImportance Importance { get; set; }</code></pre>
   </div>
-  
+
   
   
   
@@ -516,11 +516,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">DateTimeOffset LastModifiedDateTime { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -560,11 +560,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">string Locale { get; set; }</code></pre>
   </div>
-  
+
   
   
   
@@ -604,11 +604,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">List&lt;ITeamChatMessageMention&gt; Mentions { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -648,11 +648,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">ChatMessageType MessageType { get; set; }</code></pre>
   </div>
-  
+
   
   
   
@@ -692,11 +692,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">List&lt;ITeamChatMessageReaction&gt; Reactions { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -736,11 +736,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">string ReplyToId { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -780,11 +780,11 @@ The content is always in HTML if the chat message contains a chatMessageMention.
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">string Subject { get; set; }</code></pre>
   </div>
-  
+
   
   
   
@@ -825,11 +825,11 @@ Only applies to channel chat messages, not chat messages in a chat.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">string Summary { get; set; }</code></pre>
   </div>
-  
+
   
   
   
@@ -869,11 +869,11 @@ Only applies to channel chat messages, not chat messages in a chat.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Uri WebUrl { get; }</code></pre>
   </div>
-  
+
   
   
   

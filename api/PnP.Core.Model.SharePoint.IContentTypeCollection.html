@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IContentTypeCollection
    | PnP Core SDK ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -84,7 +84,7 @@
   <div class="markdown level0 summary"><p>Public interface to define a collection of ContentType objects of SharePoint Online</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  
+
   
   
   <div class="inheritedMembers">
@@ -125,7 +125,7 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface IContentTypeCollection : IQueryable&lt;IContentType&gt;, IQueryable, IDataModelCollection&lt;IContentType&gt;, IEnumerable&lt;IContentType&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection</code></pre>
   </div>
-  
+
   
   
   
@@ -152,11 +152,11 @@ Check the documentation for a well formed Content Type Id:
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IContentType Add(Batch batch, string id, string name, string description = null, string group = null)</code></pre>
   </div>
-  
+
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
@@ -242,11 +242,11 @@ Check the documentation for a well formed Content Type Id:
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IContentType Add(string id, string name, string description = null, string group = null)</code></pre>
   </div>
-  
+
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
@@ -324,11 +324,11 @@ Check the documentation for a well formed Content Type Id:
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IContentType&gt; AddAsync(string id, string name, string description = null, string group = null)</code></pre>
   </div>
-  
+
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
@@ -404,11 +404,11 @@ Check the documentation for a well formed Content Type Id:
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IContentType AddAvailableContentType(Batch batch, string id)</code></pre>
   </div>
-  
+
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
@@ -468,11 +468,11 @@ Check the documentation for a well formed Content Type Id:
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">IContentType AddAvailableContentType(string id)</code></pre>
   </div>
-  
+
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
@@ -524,11 +524,11 @@ Check the documentation for a well formed Content Type Id:
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task&lt;IContentType&gt; AddAvailableContentTypeAsync(string id)</code></pre>
   </div>
-  
+
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>

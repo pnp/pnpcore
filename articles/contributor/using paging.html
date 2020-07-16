@@ -8,7 +8,7 @@
     <title>Implementing paging | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Implementing paging | PnP Core SDK ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../../https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="implementing-paging">Implementing paging</h1>
 
-<p>If you want a model (e.g. <code>List</code>) to retrieved using paging then you'll need to explicitly enable paging and this article will explain how.</p>
+<p>If you want a model (e.g. <code>List</code>) to retrieved using paging, then you'll need to explicitly enable paging and this article will explain how.</p>
 <h2 id="using-isupportpaging">Using ISupportPaging</h2>
 <p>To enable paging support you need to add the <code>ISupportPaging&lt;&gt;</code> interface on the public collection class interface of the model for which you want to use paging. If you for example want to enabled paged retrieval of <code>Lists</code> then you need to add the interface to the <code>ListCollection</code> class.</p>
 <pre><code class="lang-csharp">public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection&lt;IList&gt;, ISupportPaging&lt;IList&gt;
@@ -105,7 +105,7 @@
 </code></pre>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>Since paging depends on the ODATA $top operator you also need to make your class linq queriable (by implementing <code>IQueryable&lt;&gt;</code>, next to the default <code>IDataModelCollection&lt;&gt;</code>). If for some reason you cannnot make your collection class linq quariable then ensure that you've decorated your model class (<code>List</code> in this case) with <code>LinqGet</code> as shown below</p>
+<p>Since paging depends on the ODATA $top operator you also need to make your class linq queriable (by implementing <code>IQueryable&lt;&gt;</code>, next to the default <code>IDataModelCollection&lt;&gt;</code>). If for some reason you cannot make your collection class linq quariable, then ensure that you've decorated your model class (<code>List</code> in this case) with <code>LinqGet</code> as shown below</p>
 <pre><code class="lang-csharp">   [SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
    [GraphType(Get = &quot;sites/{Parent.GraphId}/lists/{GraphId}&quot;, LinqGet = &quot;sites/{Parent.GraphId}/lists&quot;)]
    internal partial class List

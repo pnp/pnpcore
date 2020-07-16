@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MicrosoftGraphServiceException
    | PnP Core SDK ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -84,7 +84,7 @@
   <div class="markdown level0 summary"><p>Microsoft Graph Service exception</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  
+
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
@@ -160,13 +160,71 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class MicrosoftGraphServiceException : ServiceException, ISerializable</code></pre>
   </div>
-  
+
   
   
   
   
   <h3 id="constructors">Constructors
   </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_JsonElement_.md&amp;value=---%0Auid%3A%20PnP.Core.MicrosoftGraphServiceException.%23ctor(PnP.Core.ErrorType%2CSystem.Int32%2CJsonElement)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/MicrosoftGraphServiceException.cs/#L31" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_MicrosoftGraphServiceException__ctor_" data-uid="PnP.Core.MicrosoftGraphServiceException.#ctor*"></a>
+  
+  <h4 id="PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_JsonElement_" data-uid="PnP.Core.MicrosoftGraphServiceException.#ctor(PnP.Core.ErrorType,System.Int32,JsonElement)"><a href="#collapsible-PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_JsonElement_" class="expander" data-toggle="collapse">MicrosoftGraphServiceException(ErrorType, Int32, JsonElement)</a></h4>
+  
+  <div id="collapsible-PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_JsonElement_" class="collapse in">
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MicrosoftGraphServiceException(ErrorType type, int httpResponseCode, JsonElement error)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.ErrorType.html">ErrorType</a></span>
+        <span class="parametername">type</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
+        <span class="parametername">httpResponseCode</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">JsonElement</span></span>
+        <span class="parametername">error</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
@@ -184,11 +242,11 @@
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public MicrosoftGraphServiceException(ErrorType type, int httpResponseCode, string response)</code></pre>
   </div>
-  
+
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>
@@ -225,64 +283,6 @@
   
   
   </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_.md&amp;value=---%0Auid%3A%20PnP.Core.MicrosoftGraphServiceException.%23ctor(PnP.Core.ErrorType%2CSystem.Int32%2CSystem.Text.Json.JsonElement)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Exceptions/MicrosoftGraphServiceException.cs/#L31" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_MicrosoftGraphServiceException__ctor_" data-uid="PnP.Core.MicrosoftGraphServiceException.#ctor*"></a>
-  
-  <h4 id="PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_" data-uid="PnP.Core.MicrosoftGraphServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)"><a href="#collapsible-PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_" class="expander" data-toggle="collapse">MicrosoftGraphServiceException(ErrorType, Int32, JsonElement)</a></h4>
-  
-  <div id="collapsible-PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_" class="collapse in">
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MicrosoftGraphServiceException(ErrorType type, int httpResponseCode, JsonElement error)</code></pre>
-  </div>
-  
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.ErrorType.html">ErrorType</a></span>
-        <span class="parametername">type</span>
-        <p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></span>
-        <span class="parametername">httpResponseCode</span>
-        <p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.text.json.jsonelement">JsonElement</a></span>
-        <span class="parametername">error</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
   <h3 id="methods">Methods
   </h3>
   
@@ -303,11 +303,11 @@
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
   </div>
-  
+
   
   <h5 class="returns">Returns</h5>
   <table>

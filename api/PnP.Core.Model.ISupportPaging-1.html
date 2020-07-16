@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface ISupportPaging&lt;TModel&gt;
    | PnP Core SDK ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -84,7 +84,7 @@
   <div class="markdown level0 summary"><p>Paged data retrieval can be done using the methods provided via this interface</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  
+
   
   
   
@@ -95,7 +95,7 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface ISupportPaging&lt;TModel&gt;</code></pre>
   </div>
-  
+
   
   
   <h5 class="typeParameters">Type Parameters</h5>
@@ -129,11 +129,11 @@
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">bool CanPage { get; }</code></pre>
   </div>
-  
+
   
   
   
@@ -175,11 +175,11 @@
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task GetAllPagesAsync()</code></pre>
   </div>
-  
+
   
   <h5 class="returns">Returns</h5>
   <table>
@@ -219,11 +219,11 @@
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task GetNextPageAsync()</code></pre>
   </div>
-  
+
   
   <h5 class="returns">Returns</h5>
   <table>
@@ -263,11 +263,11 @@
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
-  
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">Task GetPagedAsync(int pageSize, params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
   </div>
-  
+
   <h5 class="parameters">Parameters</h5>
   <table>
     <tr>

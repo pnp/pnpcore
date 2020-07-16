@@ -13,18 +13,18 @@ references:
   commentId: T:PnP.Core.AuthenticationError
   fullName: PnP.Core.AuthenticationError
   nameWithType: AuthenticationError
+- uid: PnP.Core.AuthenticationError.#ctor(PnP.Core.ErrorType,JsonElement)
+  name: AuthenticationError(ErrorType, JsonElement)
+  href: api/PnP.Core.AuthenticationError.html#PnP_Core_AuthenticationError__ctor_PnP_Core_ErrorType_JsonElement_
+  commentId: M:PnP.Core.AuthenticationError.#ctor(PnP.Core.ErrorType,JsonElement)
+  fullName: PnP.Core.AuthenticationError.AuthenticationError(PnP.Core.ErrorType, JsonElement)
+  nameWithType: AuthenticationError.AuthenticationError(ErrorType, JsonElement)
 - uid: PnP.Core.AuthenticationError.#ctor(PnP.Core.ErrorType,System.String)
   name: AuthenticationError(ErrorType, String)
   href: api/PnP.Core.AuthenticationError.html#PnP_Core_AuthenticationError__ctor_PnP_Core_ErrorType_System_String_
   commentId: M:PnP.Core.AuthenticationError.#ctor(PnP.Core.ErrorType,System.String)
   fullName: PnP.Core.AuthenticationError.AuthenticationError(PnP.Core.ErrorType, System.String)
   nameWithType: AuthenticationError.AuthenticationError(ErrorType, String)
-- uid: PnP.Core.AuthenticationError.#ctor(PnP.Core.ErrorType,System.Text.Json.JsonElement)
-  name: AuthenticationError(ErrorType, JsonElement)
-  href: api/PnP.Core.AuthenticationError.html#PnP_Core_AuthenticationError__ctor_PnP_Core_ErrorType_System_Text_Json_JsonElement_
-  commentId: M:PnP.Core.AuthenticationError.#ctor(PnP.Core.ErrorType,System.Text.Json.JsonElement)
-  fullName: PnP.Core.AuthenticationError.AuthenticationError(PnP.Core.ErrorType, System.Text.Json.JsonElement)
-  nameWithType: AuthenticationError.AuthenticationError(ErrorType, JsonElement)
 - uid: PnP.Core.AuthenticationError.#ctor*
   name: AuthenticationError
   href: api/PnP.Core.AuthenticationError.html#PnP_Core_AuthenticationError__ctor_
@@ -308,11 +308,11 @@ references:
   commentId: T:PnP.Core.CsomError
   fullName: PnP.Core.CsomError
   nameWithType: CsomError
-- uid: PnP.Core.CsomError.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)
+- uid: PnP.Core.CsomError.#ctor(PnP.Core.ErrorType,System.Int32,JsonElement)
   name: CsomError(ErrorType, Int32, JsonElement)
-  href: api/PnP.Core.CsomError.html#PnP_Core_CsomError__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_
-  commentId: M:PnP.Core.CsomError.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)
-  fullName: PnP.Core.CsomError.CsomError(PnP.Core.ErrorType, System.Int32, System.Text.Json.JsonElement)
+  href: api/PnP.Core.CsomError.html#PnP_Core_CsomError__ctor_PnP_Core_ErrorType_System_Int32_JsonElement_
+  commentId: M:PnP.Core.CsomError.#ctor(PnP.Core.ErrorType,System.Int32,JsonElement)
+  fullName: PnP.Core.CsomError.CsomError(PnP.Core.ErrorType, System.Int32, JsonElement)
   nameWithType: CsomError.CsomError(ErrorType, Int32, JsonElement)
 - uid: PnP.Core.CsomError.#ctor*
   name: CsomError
@@ -353,11 +353,11 @@ references:
   commentId: T:PnP.Core.CsomServiceException
   fullName: PnP.Core.CsomServiceException
   nameWithType: CsomServiceException
-- uid: PnP.Core.CsomServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)
+- uid: PnP.Core.CsomServiceException.#ctor(PnP.Core.ErrorType,System.Int32,JsonElement)
   name: CsomServiceException(ErrorType, Int32, JsonElement)
-  href: api/PnP.Core.CsomServiceException.html#PnP_Core_CsomServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_
-  commentId: M:PnP.Core.CsomServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)
-  fullName: PnP.Core.CsomServiceException.CsomServiceException(PnP.Core.ErrorType, System.Int32, System.Text.Json.JsonElement)
+  href: api/PnP.Core.CsomServiceException.html#PnP_Core_CsomServiceException__ctor_PnP_Core_ErrorType_System_Int32_JsonElement_
+  commentId: M:PnP.Core.CsomServiceException.#ctor(PnP.Core.ErrorType,System.Int32,JsonElement)
+  fullName: PnP.Core.CsomServiceException.CsomServiceException(PnP.Core.ErrorType, System.Int32, JsonElement)
   nameWithType: CsomServiceException.CsomServiceException(ErrorType, Int32, JsonElement)
 - uid: PnP.Core.CsomServiceException.#ctor*
   name: CsomServiceException
@@ -499,18 +499,18 @@ references:
   commentId: T:PnP.Core.MicrosoftGraphError
   fullName: PnP.Core.MicrosoftGraphError
   nameWithType: MicrosoftGraphError
+- uid: PnP.Core.MicrosoftGraphError.#ctor(PnP.Core.ErrorType,System.Int32,JsonElement)
+  name: MicrosoftGraphError(ErrorType, Int32, JsonElement)
+  href: api/PnP.Core.MicrosoftGraphError.html#PnP_Core_MicrosoftGraphError__ctor_PnP_Core_ErrorType_System_Int32_JsonElement_
+  commentId: M:PnP.Core.MicrosoftGraphError.#ctor(PnP.Core.ErrorType,System.Int32,JsonElement)
+  fullName: PnP.Core.MicrosoftGraphError.MicrosoftGraphError(PnP.Core.ErrorType, System.Int32, JsonElement)
+  nameWithType: MicrosoftGraphError.MicrosoftGraphError(ErrorType, Int32, JsonElement)
 - uid: PnP.Core.MicrosoftGraphError.#ctor(PnP.Core.ErrorType,System.Int32,System.String)
   name: MicrosoftGraphError(ErrorType, Int32, String)
   href: api/PnP.Core.MicrosoftGraphError.html#PnP_Core_MicrosoftGraphError__ctor_PnP_Core_ErrorType_System_Int32_System_String_
   commentId: M:PnP.Core.MicrosoftGraphError.#ctor(PnP.Core.ErrorType,System.Int32,System.String)
   fullName: PnP.Core.MicrosoftGraphError.MicrosoftGraphError(PnP.Core.ErrorType, System.Int32, System.String)
   nameWithType: MicrosoftGraphError.MicrosoftGraphError(ErrorType, Int32, String)
-- uid: PnP.Core.MicrosoftGraphError.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)
-  name: MicrosoftGraphError(ErrorType, Int32, JsonElement)
-  href: api/PnP.Core.MicrosoftGraphError.html#PnP_Core_MicrosoftGraphError__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_
-  commentId: M:PnP.Core.MicrosoftGraphError.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)
-  fullName: PnP.Core.MicrosoftGraphError.MicrosoftGraphError(PnP.Core.ErrorType, System.Int32, System.Text.Json.JsonElement)
-  nameWithType: MicrosoftGraphError.MicrosoftGraphError(ErrorType, Int32, JsonElement)
 - uid: PnP.Core.MicrosoftGraphError.#ctor*
   name: MicrosoftGraphError
   href: api/PnP.Core.MicrosoftGraphError.html#PnP_Core_MicrosoftGraphError__ctor_
@@ -537,18 +537,18 @@ references:
   commentId: T:PnP.Core.MicrosoftGraphServiceException
   fullName: PnP.Core.MicrosoftGraphServiceException
   nameWithType: MicrosoftGraphServiceException
+- uid: PnP.Core.MicrosoftGraphServiceException.#ctor(PnP.Core.ErrorType,System.Int32,JsonElement)
+  name: MicrosoftGraphServiceException(ErrorType, Int32, JsonElement)
+  href: api/PnP.Core.MicrosoftGraphServiceException.html#PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_JsonElement_
+  commentId: M:PnP.Core.MicrosoftGraphServiceException.#ctor(PnP.Core.ErrorType,System.Int32,JsonElement)
+  fullName: PnP.Core.MicrosoftGraphServiceException.MicrosoftGraphServiceException(PnP.Core.ErrorType, System.Int32, JsonElement)
+  nameWithType: MicrosoftGraphServiceException.MicrosoftGraphServiceException(ErrorType, Int32, JsonElement)
 - uid: PnP.Core.MicrosoftGraphServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.String)
   name: MicrosoftGraphServiceException(ErrorType, Int32, String)
   href: api/PnP.Core.MicrosoftGraphServiceException.html#PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_String_
   commentId: M:PnP.Core.MicrosoftGraphServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.String)
   fullName: PnP.Core.MicrosoftGraphServiceException.MicrosoftGraphServiceException(PnP.Core.ErrorType, System.Int32, System.String)
   nameWithType: MicrosoftGraphServiceException.MicrosoftGraphServiceException(ErrorType, Int32, String)
-- uid: PnP.Core.MicrosoftGraphServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)
-  name: MicrosoftGraphServiceException(ErrorType, Int32, JsonElement)
-  href: api/PnP.Core.MicrosoftGraphServiceException.html#PnP_Core_MicrosoftGraphServiceException__ctor_PnP_Core_ErrorType_System_Int32_System_Text_Json_JsonElement_
-  commentId: M:PnP.Core.MicrosoftGraphServiceException.#ctor(PnP.Core.ErrorType,System.Int32,System.Text.Json.JsonElement)
-  fullName: PnP.Core.MicrosoftGraphServiceException.MicrosoftGraphServiceException(PnP.Core.ErrorType, System.Int32, System.Text.Json.JsonElement)
-  nameWithType: MicrosoftGraphServiceException.MicrosoftGraphServiceException(ErrorType, Int32, JsonElement)
 - uid: PnP.Core.MicrosoftGraphServiceException.#ctor*
   name: MicrosoftGraphServiceException
   href: api/PnP.Core.MicrosoftGraphServiceException.html#PnP_Core_MicrosoftGraphServiceException__ctor_
@@ -9696,13 +9696,13 @@ references:
   commentId: T:PnP.Core.Services.AuthenticationProviderFactory
   fullName: PnP.Core.Services.AuthenticationProviderFactory
   nameWithType: AuthenticationProviderFactory
-- uid: PnP.Core.Services.AuthenticationProviderFactory.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{PnP.Core.Services.OAuthAuthenticationProviderOptions},Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.PnPContext},System.IServiceProvider)
+- uid: PnP.Core.Services.AuthenticationProviderFactory.#ctor(IOptionsMonitor{PnP.Core.Services.OAuthAuthenticationProviderOptions},ILogger{PnP.Core.Services.PnPContext},System.IServiceProvider)
   name: AuthenticationProviderFactory(IOptionsMonitor<OAuthAuthenticationProviderOptions>, ILogger<PnPContext>, IServiceProvider)
-  href: api/PnP.Core.Services.AuthenticationProviderFactory.html#PnP_Core_Services_AuthenticationProviderFactory__ctor_Microsoft_Extensions_Options_IOptionsMonitor_PnP_Core_Services_OAuthAuthenticationProviderOptions__Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_PnPContext__System_IServiceProvider_
-  commentId: M:PnP.Core.Services.AuthenticationProviderFactory.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{PnP.Core.Services.OAuthAuthenticationProviderOptions},Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.PnPContext},System.IServiceProvider)
+  href: api/PnP.Core.Services.AuthenticationProviderFactory.html#PnP_Core_Services_AuthenticationProviderFactory__ctor_IOptionsMonitor_PnP_Core_Services_OAuthAuthenticationProviderOptions__ILogger_PnP_Core_Services_PnPContext__System_IServiceProvider_
+  commentId: M:PnP.Core.Services.AuthenticationProviderFactory.#ctor(IOptionsMonitor{PnP.Core.Services.OAuthAuthenticationProviderOptions},ILogger{PnP.Core.Services.PnPContext},System.IServiceProvider)
   name.vb: AuthenticationProviderFactory(IOptionsMonitor(Of OAuthAuthenticationProviderOptions), ILogger(Of PnPContext), IServiceProvider)
-  fullName: PnP.Core.Services.AuthenticationProviderFactory.AuthenticationProviderFactory(Microsoft.Extensions.Options.IOptionsMonitor<PnP.Core.Services.OAuthAuthenticationProviderOptions>, Microsoft.Extensions.Logging.ILogger<PnP.Core.Services.PnPContext>, System.IServiceProvider)
-  fullName.vb: PnP.Core.Services.AuthenticationProviderFactory.AuthenticationProviderFactory(Microsoft.Extensions.Options.IOptionsMonitor(Of PnP.Core.Services.OAuthAuthenticationProviderOptions), Microsoft.Extensions.Logging.ILogger(Of PnP.Core.Services.PnPContext), System.IServiceProvider)
+  fullName: PnP.Core.Services.AuthenticationProviderFactory.AuthenticationProviderFactory(IOptionsMonitor<PnP.Core.Services.OAuthAuthenticationProviderOptions>, ILogger<PnP.Core.Services.PnPContext>, System.IServiceProvider)
+  fullName.vb: PnP.Core.Services.AuthenticationProviderFactory.AuthenticationProviderFactory(IOptionsMonitor(Of PnP.Core.Services.OAuthAuthenticationProviderOptions), ILogger(Of PnP.Core.Services.PnPContext), System.IServiceProvider)
   nameWithType: AuthenticationProviderFactory.AuthenticationProviderFactory(IOptionsMonitor<OAuthAuthenticationProviderOptions>, ILogger<PnPContext>, IServiceProvider)
   nameWithType.vb: AuthenticationProviderFactory.AuthenticationProviderFactory(IOptionsMonitor(Of OAuthAuthenticationProviderOptions), ILogger(Of PnPContext), IServiceProvider)
 - uid: PnP.Core.Services.AuthenticationProviderFactory.#ctor*
@@ -9744,19 +9744,19 @@ references:
   commentId: T:PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions
   fullName: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions
   nameWithType: AuthenticationProviderFactoryCollectionExtensions
-- uid: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+- uid: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection)
   name: AddAuthenticationProviderFactory(IServiceCollection)
-  href: api/PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.html#PnP_Core_Services_AuthenticationProviderFactoryCollectionExtensions_AddAuthenticationProviderFactory_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  href: api/PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.html#PnP_Core_Services_AuthenticationProviderFactoryCollectionExtensions_AddAuthenticationProviderFactory_IServiceCollection_
+  commentId: M:PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection)
+  fullName: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection)
   nameWithType: AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection)
-- uid: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{PnP.Core.Services.OAuthAuthenticationProviderOptions})
+- uid: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection,System.Action{PnP.Core.Services.OAuthAuthenticationProviderOptions})
   name: AddAuthenticationProviderFactory(IServiceCollection, Action<OAuthAuthenticationProviderOptions>)
-  href: api/PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.html#PnP_Core_Services_AuthenticationProviderFactoryCollectionExtensions_AddAuthenticationProviderFactory_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_PnP_Core_Services_OAuthAuthenticationProviderOptions__
-  commentId: M:PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{PnP.Core.Services.OAuthAuthenticationProviderOptions})
+  href: api/PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.html#PnP_Core_Services_AuthenticationProviderFactoryCollectionExtensions_AddAuthenticationProviderFactory_IServiceCollection_System_Action_PnP_Core_Services_OAuthAuthenticationProviderOptions__
+  commentId: M:PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection,System.Action{PnP.Core.Services.OAuthAuthenticationProviderOptions})
   name.vb: AddAuthenticationProviderFactory(IServiceCollection, Action(Of OAuthAuthenticationProviderOptions))
-  fullName: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<PnP.Core.Services.OAuthAuthenticationProviderOptions>)
-  fullName.vb: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of PnP.Core.Services.OAuthAuthenticationProviderOptions))
+  fullName: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection, System.Action<PnP.Core.Services.OAuthAuthenticationProviderOptions>)
+  fullName.vb: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection, System.Action(Of PnP.Core.Services.OAuthAuthenticationProviderOptions))
   nameWithType: AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection, Action<OAuthAuthenticationProviderOptions>)
   nameWithType.vb: AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory(IServiceCollection, Action(Of OAuthAuthenticationProviderOptions))
 - uid: PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.AddAuthenticationProviderFactory*
@@ -10216,13 +10216,13 @@ references:
   commentId: T:PnP.Core.Services.MicrosoftGraphClient
   fullName: PnP.Core.Services.MicrosoftGraphClient
   nameWithType: MicrosoftGraphClient
-- uid: PnP.Core.Services.MicrosoftGraphClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.MicrosoftGraphClient},PnP.Core.Services.ISettings)
+- uid: PnP.Core.Services.MicrosoftGraphClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.MicrosoftGraphClient},PnP.Core.Services.ISettings)
   name: MicrosoftGraphClient(HttpClient, ILogger<MicrosoftGraphClient>, ISettings)
-  href: api/PnP.Core.Services.MicrosoftGraphClient.html#PnP_Core_Services_MicrosoftGraphClient__ctor_System_Net_Http_HttpClient_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_MicrosoftGraphClient__PnP_Core_Services_ISettings_
-  commentId: M:PnP.Core.Services.MicrosoftGraphClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.MicrosoftGraphClient},PnP.Core.Services.ISettings)
+  href: api/PnP.Core.Services.MicrosoftGraphClient.html#PnP_Core_Services_MicrosoftGraphClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_MicrosoftGraphClient__PnP_Core_Services_ISettings_
+  commentId: M:PnP.Core.Services.MicrosoftGraphClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.MicrosoftGraphClient},PnP.Core.Services.ISettings)
   name.vb: MicrosoftGraphClient(HttpClient, ILogger(Of MicrosoftGraphClient), ISettings)
-  fullName: PnP.Core.Services.MicrosoftGraphClient.MicrosoftGraphClient(System.Net.Http.HttpClient, Microsoft.Extensions.Logging.ILogger<PnP.Core.Services.MicrosoftGraphClient>, PnP.Core.Services.ISettings)
-  fullName.vb: PnP.Core.Services.MicrosoftGraphClient.MicrosoftGraphClient(System.Net.Http.HttpClient, Microsoft.Extensions.Logging.ILogger(Of PnP.Core.Services.MicrosoftGraphClient), PnP.Core.Services.ISettings)
+  fullName: PnP.Core.Services.MicrosoftGraphClient.MicrosoftGraphClient(System.Net.Http.HttpClient, ILogger<PnP.Core.Services.MicrosoftGraphClient>, PnP.Core.Services.ISettings)
+  fullName.vb: PnP.Core.Services.MicrosoftGraphClient.MicrosoftGraphClient(System.Net.Http.HttpClient, ILogger(Of PnP.Core.Services.MicrosoftGraphClient), PnP.Core.Services.ISettings)
   nameWithType: MicrosoftGraphClient.MicrosoftGraphClient(HttpClient, ILogger<MicrosoftGraphClient>, ISettings)
   nameWithType.vb: MicrosoftGraphClient.MicrosoftGraphClient(HttpClient, ILogger(Of MicrosoftGraphClient), ISettings)
 - uid: PnP.Core.Services.MicrosoftGraphClient.#ctor*
@@ -10309,13 +10309,13 @@ references:
   commentId: T:PnP.Core.Services.OAuthAuthenticationProvider
   fullName: PnP.Core.Services.OAuthAuthenticationProvider
   nameWithType: OAuthAuthenticationProvider
-- uid: PnP.Core.Services.OAuthAuthenticationProvider.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.OAuthAuthenticationProvider},PnP.Core.Services.IOAuthAccessTokenProvider)
+- uid: PnP.Core.Services.OAuthAuthenticationProvider.#ctor(ILogger{PnP.Core.Services.OAuthAuthenticationProvider},PnP.Core.Services.IOAuthAccessTokenProvider)
   name: OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IOAuthAccessTokenProvider)
-  href: api/PnP.Core.Services.OAuthAuthenticationProvider.html#PnP_Core_Services_OAuthAuthenticationProvider__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_OAuthAuthenticationProvider__PnP_Core_Services_IOAuthAccessTokenProvider_
-  commentId: M:PnP.Core.Services.OAuthAuthenticationProvider.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.OAuthAuthenticationProvider},PnP.Core.Services.IOAuthAccessTokenProvider)
+  href: api/PnP.Core.Services.OAuthAuthenticationProvider.html#PnP_Core_Services_OAuthAuthenticationProvider__ctor_ILogger_PnP_Core_Services_OAuthAuthenticationProvider__PnP_Core_Services_IOAuthAccessTokenProvider_
+  commentId: M:PnP.Core.Services.OAuthAuthenticationProvider.#ctor(ILogger{PnP.Core.Services.OAuthAuthenticationProvider},PnP.Core.Services.IOAuthAccessTokenProvider)
   name.vb: OAuthAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IOAuthAccessTokenProvider)
-  fullName: PnP.Core.Services.OAuthAuthenticationProvider.OAuthAuthenticationProvider(Microsoft.Extensions.Logging.ILogger<PnP.Core.Services.OAuthAuthenticationProvider>, PnP.Core.Services.IOAuthAccessTokenProvider)
-  fullName.vb: PnP.Core.Services.OAuthAuthenticationProvider.OAuthAuthenticationProvider(Microsoft.Extensions.Logging.ILogger(Of PnP.Core.Services.OAuthAuthenticationProvider), PnP.Core.Services.IOAuthAccessTokenProvider)
+  fullName: PnP.Core.Services.OAuthAuthenticationProvider.OAuthAuthenticationProvider(ILogger<PnP.Core.Services.OAuthAuthenticationProvider>, PnP.Core.Services.IOAuthAccessTokenProvider)
+  fullName.vb: PnP.Core.Services.OAuthAuthenticationProvider.OAuthAuthenticationProvider(ILogger(Of PnP.Core.Services.OAuthAuthenticationProvider), PnP.Core.Services.IOAuthAccessTokenProvider)
   nameWithType: OAuthAuthenticationProvider.OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider>, IOAuthAccessTokenProvider)
   nameWithType.vb: OAuthAuthenticationProvider.OAuthAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider), IOAuthAccessTokenProvider)
 - uid: PnP.Core.Services.OAuthAuthenticationProvider.#ctor*
@@ -10411,11 +10411,11 @@ references:
   commentId: T:PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions
   fullName: PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions
   nameWithType: OAuthAuthenticationProviderCollectionExtensions
-- uid: PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.AddOAuthAuthenticationProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+- uid: PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.AddOAuthAuthenticationProvider(IServiceCollection)
   name: AddOAuthAuthenticationProvider(IServiceCollection)
-  href: api/PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.html#PnP_Core_Services_OAuthAuthenticationProviderCollectionExtensions_AddOAuthAuthenticationProvider_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.AddOAuthAuthenticationProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.AddOAuthAuthenticationProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  href: api/PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.html#PnP_Core_Services_OAuthAuthenticationProviderCollectionExtensions_AddOAuthAuthenticationProvider_IServiceCollection_
+  commentId: M:PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.AddOAuthAuthenticationProvider(IServiceCollection)
+  fullName: PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.AddOAuthAuthenticationProvider(IServiceCollection)
   nameWithType: OAuthAuthenticationProviderCollectionExtensions.AddOAuthAuthenticationProvider(IServiceCollection)
 - uid: PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.AddOAuthAuthenticationProvider*
   name: AddOAuthAuthenticationProvider
@@ -10920,13 +10920,13 @@ references:
   commentId: T:PnP.Core.Services.PnPContextFactory
   fullName: PnP.Core.Services.PnPContextFactory
   nameWithType: PnPContextFactory
-- uid: PnP.Core.Services.PnPContextFactory.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{PnP.Core.Services.PnPContextFactoryOptions},Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.IAuthenticationProviderFactory,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,Microsoft.ApplicationInsights.TelemetryClient)
+- uid: PnP.Core.Services.PnPContextFactory.#ctor(IOptionsMonitor{PnP.Core.Services.PnPContextFactoryOptions},ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.IAuthenticationProviderFactory,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,TelemetryClient)
   name: PnPContextFactory(IOptionsMonitor<PnPContextFactoryOptions>, ILogger<PnPContext>, IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
-  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_Microsoft_Extensions_Options_IOptionsMonitor_PnP_Core_Services_PnPContextFactoryOptions__Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_PnPContext__PnP_Core_Services_IAuthenticationProviderFactory_PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_PnP_Core_Services_ISettings_Microsoft_ApplicationInsights_TelemetryClient_
-  commentId: M:PnP.Core.Services.PnPContextFactory.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{PnP.Core.Services.PnPContextFactoryOptions},Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.IAuthenticationProviderFactory,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,Microsoft.ApplicationInsights.TelemetryClient)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_IOptionsMonitor_PnP_Core_Services_PnPContextFactoryOptions__ILogger_PnP_Core_Services_PnPContext__PnP_Core_Services_IAuthenticationProviderFactory_PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_PnP_Core_Services_ISettings_TelemetryClient_
+  commentId: M:PnP.Core.Services.PnPContextFactory.#ctor(IOptionsMonitor{PnP.Core.Services.PnPContextFactoryOptions},ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.IAuthenticationProviderFactory,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,TelemetryClient)
   name.vb: PnPContextFactory(IOptionsMonitor(Of PnPContextFactoryOptions), ILogger(Of PnPContext), IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
-  fullName: PnP.Core.Services.PnPContextFactory.PnPContextFactory(Microsoft.Extensions.Options.IOptionsMonitor<PnP.Core.Services.PnPContextFactoryOptions>, Microsoft.Extensions.Logging.ILogger<PnP.Core.Services.PnPContext>, PnP.Core.Services.IAuthenticationProviderFactory, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, PnP.Core.Services.ISettings, Microsoft.ApplicationInsights.TelemetryClient)
-  fullName.vb: PnP.Core.Services.PnPContextFactory.PnPContextFactory(Microsoft.Extensions.Options.IOptionsMonitor(Of PnP.Core.Services.PnPContextFactoryOptions), Microsoft.Extensions.Logging.ILogger(Of PnP.Core.Services.PnPContext), PnP.Core.Services.IAuthenticationProviderFactory, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, PnP.Core.Services.ISettings, Microsoft.ApplicationInsights.TelemetryClient)
+  fullName: PnP.Core.Services.PnPContextFactory.PnPContextFactory(IOptionsMonitor<PnP.Core.Services.PnPContextFactoryOptions>, ILogger<PnP.Core.Services.PnPContext>, PnP.Core.Services.IAuthenticationProviderFactory, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, PnP.Core.Services.ISettings, TelemetryClient)
+  fullName.vb: PnP.Core.Services.PnPContextFactory.PnPContextFactory(IOptionsMonitor(Of PnP.Core.Services.PnPContextFactoryOptions), ILogger(Of PnP.Core.Services.PnPContext), PnP.Core.Services.IAuthenticationProviderFactory, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, PnP.Core.Services.ISettings, TelemetryClient)
   nameWithType: PnPContextFactory.PnPContextFactory(IOptionsMonitor<PnPContextFactoryOptions>, ILogger<PnPContext>, IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
   nameWithType.vb: PnPContextFactory.PnPContextFactory(IOptionsMonitor(Of PnPContextFactoryOptions), ILogger(Of PnPContext), IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
 - uid: PnP.Core.Services.PnPContextFactory.#ctor*
@@ -11082,19 +11082,19 @@ references:
   commentId: T:PnP.Core.Services.PnPContextFactoryCollectionExtensions
   fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions
   nameWithType: PnPContextFactoryCollectionExtensions
-- uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+- uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection)
   name: AddPnPContextFactory(IServiceCollection)
-  href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html#PnP_Core_Services_PnPContextFactoryCollectionExtensions_AddPnPContextFactory_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html#PnP_Core_Services_PnPContextFactoryCollectionExtensions_AddPnPContextFactory_IServiceCollection_
+  commentId: M:PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection)
+  fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection)
   nameWithType: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection)
-- uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{PnP.Core.Services.PnPContextFactoryOptions})
+- uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection,System.Action{PnP.Core.Services.PnPContextFactoryOptions})
   name: AddPnPContextFactory(IServiceCollection, Action<PnPContextFactoryOptions>)
-  href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html#PnP_Core_Services_PnPContextFactoryCollectionExtensions_AddPnPContextFactory_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_PnP_Core_Services_PnPContextFactoryOptions__
-  commentId: M:PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{PnP.Core.Services.PnPContextFactoryOptions})
+  href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html#PnP_Core_Services_PnPContextFactoryCollectionExtensions_AddPnPContextFactory_IServiceCollection_System_Action_PnP_Core_Services_PnPContextFactoryOptions__
+  commentId: M:PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection,System.Action{PnP.Core.Services.PnPContextFactoryOptions})
   name.vb: AddPnPContextFactory(IServiceCollection, Action(Of PnPContextFactoryOptions))
-  fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<PnP.Core.Services.PnPContextFactoryOptions>)
-  fullName.vb: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of PnP.Core.Services.PnPContextFactoryOptions))
+  fullName: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, System.Action<PnP.Core.Services.PnPContextFactoryOptions>)
+  fullName.vb: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, System.Action(Of PnP.Core.Services.PnPContextFactoryOptions))
   nameWithType: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action<PnPContextFactoryOptions>)
   nameWithType.vb: PnPContextFactoryCollectionExtensions.AddPnPContextFactory(IServiceCollection, Action(Of PnPContextFactoryOptions))
 - uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions.AddPnPContextFactory*
@@ -11174,13 +11174,13 @@ references:
   commentId: T:PnP.Core.Services.Settings
   fullName: PnP.Core.Services.Settings
   nameWithType: Settings
-- uid: PnP.Core.Services.Settings.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.Settings},Microsoft.Extensions.Configuration.IConfiguration)
+- uid: PnP.Core.Services.Settings.#ctor(ILogger{PnP.Core.Services.Settings},IConfiguration)
   name: Settings(ILogger<Settings>, IConfiguration)
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings__ctor_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_Settings__Microsoft_Extensions_Configuration_IConfiguration_
-  commentId: M:PnP.Core.Services.Settings.#ctor(Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.Settings},Microsoft.Extensions.Configuration.IConfiguration)
+  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings__ctor_ILogger_PnP_Core_Services_Settings__IConfiguration_
+  commentId: M:PnP.Core.Services.Settings.#ctor(ILogger{PnP.Core.Services.Settings},IConfiguration)
   name.vb: Settings(ILogger(Of Settings), IConfiguration)
-  fullName: PnP.Core.Services.Settings.Settings(Microsoft.Extensions.Logging.ILogger<PnP.Core.Services.Settings>, Microsoft.Extensions.Configuration.IConfiguration)
-  fullName.vb: PnP.Core.Services.Settings.Settings(Microsoft.Extensions.Logging.ILogger(Of PnP.Core.Services.Settings), Microsoft.Extensions.Configuration.IConfiguration)
+  fullName: PnP.Core.Services.Settings.Settings(ILogger<PnP.Core.Services.Settings>, IConfiguration)
+  fullName.vb: PnP.Core.Services.Settings.Settings(ILogger(Of PnP.Core.Services.Settings), IConfiguration)
   nameWithType: Settings.Settings(ILogger<Settings>, IConfiguration)
   nameWithType.vb: Settings.Settings(ILogger(Of Settings), IConfiguration)
 - uid: PnP.Core.Services.Settings.#ctor*
@@ -11391,11 +11391,11 @@ references:
   commentId: T:PnP.Core.Services.SettingsCollectionExtensions
   fullName: PnP.Core.Services.SettingsCollectionExtensions
   nameWithType: SettingsCollectionExtensions
-- uid: PnP.Core.Services.SettingsCollectionExtensions.AddSettings(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+- uid: PnP.Core.Services.SettingsCollectionExtensions.AddSettings(IServiceCollection)
   name: AddSettings(IServiceCollection)
-  href: api/PnP.Core.Services.SettingsCollectionExtensions.html#PnP_Core_Services_SettingsCollectionExtensions_AddSettings_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:PnP.Core.Services.SettingsCollectionExtensions.AddSettings(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: PnP.Core.Services.SettingsCollectionExtensions.AddSettings(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  href: api/PnP.Core.Services.SettingsCollectionExtensions.html#PnP_Core_Services_SettingsCollectionExtensions_AddSettings_IServiceCollection_
+  commentId: M:PnP.Core.Services.SettingsCollectionExtensions.AddSettings(IServiceCollection)
+  fullName: PnP.Core.Services.SettingsCollectionExtensions.AddSettings(IServiceCollection)
   nameWithType: SettingsCollectionExtensions.AddSettings(IServiceCollection)
 - uid: PnP.Core.Services.SettingsCollectionExtensions.AddSettings*
   name: AddSettings
@@ -11410,13 +11410,13 @@ references:
   commentId: T:PnP.Core.Services.SharePointRestClient
   fullName: PnP.Core.Services.SharePointRestClient
   nameWithType: SharePointRestClient
-- uid: PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.SharePointRestClient},PnP.Core.Services.ISettings)
+- uid: PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.SharePointRestClient},PnP.Core.Services.ISettings)
   name: SharePointRestClient(HttpClient, ILogger<SharePointRestClient>, ISettings)
-  href: api/PnP.Core.Services.SharePointRestClient.html#PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_Microsoft_Extensions_Logging_ILogger_PnP_Core_Services_SharePointRestClient__PnP_Core_Services_ISettings_
-  commentId: M:PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILogger{PnP.Core.Services.SharePointRestClient},PnP.Core.Services.ISettings)
+  href: api/PnP.Core.Services.SharePointRestClient.html#PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__PnP_Core_Services_ISettings_
+  commentId: M:PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.SharePointRestClient},PnP.Core.Services.ISettings)
   name.vb: SharePointRestClient(HttpClient, ILogger(Of SharePointRestClient), ISettings)
-  fullName: PnP.Core.Services.SharePointRestClient.SharePointRestClient(System.Net.Http.HttpClient, Microsoft.Extensions.Logging.ILogger<PnP.Core.Services.SharePointRestClient>, PnP.Core.Services.ISettings)
-  fullName.vb: PnP.Core.Services.SharePointRestClient.SharePointRestClient(System.Net.Http.HttpClient, Microsoft.Extensions.Logging.ILogger(Of PnP.Core.Services.SharePointRestClient), PnP.Core.Services.ISettings)
+  fullName: PnP.Core.Services.SharePointRestClient.SharePointRestClient(System.Net.Http.HttpClient, ILogger<PnP.Core.Services.SharePointRestClient>, PnP.Core.Services.ISettings)
+  fullName.vb: PnP.Core.Services.SharePointRestClient.SharePointRestClient(System.Net.Http.HttpClient, ILogger(Of PnP.Core.Services.SharePointRestClient), PnP.Core.Services.ISettings)
   nameWithType: SharePointRestClient.SharePointRestClient(HttpClient, ILogger<SharePointRestClient>, ISettings)
   nameWithType.vb: SharePointRestClient.SharePointRestClient(HttpClient, ILogger(Of SharePointRestClient), ISettings)
 - uid: PnP.Core.Services.SharePointRestClient.#ctor*
