@@ -26,7 +26,7 @@ jobs:
     # Install docfx
     - name: Install dependencies
       run: |
-        wget https://github.com/dotnet/docfx/releases/latest/download/docfx.zip
+        wget https://github.com/dotnet/docfx/releases/download/v2.51/docfx.zip
         sudo unzip docfx.zip -d /usr/local/lib/docfx
         rm docfx.zip
         echo '#!/bin/sh' | sudo tee -a /usr/local/bin/docfx > /dev/null
