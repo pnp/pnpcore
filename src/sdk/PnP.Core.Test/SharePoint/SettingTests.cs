@@ -27,7 +27,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFeaturesWebAsync()
         {
             TestCommon.Instance.Mocking = true;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IWeb web = await context.Web.GetAsync(p => p.Features);
                 Assert.IsTrue(web.Features.Length > 0);
@@ -38,7 +38,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFeaturesSiteAsync()
         {
             TestCommon.Instance.Mocking = true;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 ISite site = await context.Site.GetAsync(p => p.Features);
                 Assert.IsTrue(site.Features.Length > 0);
@@ -49,7 +49,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task EnableWebFeatureAsync()
         {
             TestCommon.Instance.Mocking = true;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 
                 IWeb web = await context.Web.GetAsync(p => p.Features);
@@ -67,7 +67,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DisableWebFeatureAsync()
         {
             TestCommon.Instance.Mocking = true;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
 
                 IWeb web = await context.Web.GetAsync(p => p.Features);
@@ -83,7 +83,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task EnableSiteFeatureAsync()
         {
             TestCommon.Instance.Mocking = true;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 ISite site = await context.Site.GetAsync(p => p.Features);
 
@@ -100,7 +100,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DisableSiteFeatureAsync()
         {
             TestCommon.Instance.Mocking = true;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 ISite site = await context.Site.GetAsync(p => p.Features);
 

@@ -4,6 +4,7 @@ using System;
 using PnP.Core.Test.Utilities;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -18,10 +19,10 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryWebs_Graph()
+        public async Task TestQueryWebs_Graph()
         {
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
 
@@ -36,10 +37,10 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryLists_Graph()
+        public async Task TestQueryLists_Graph()
         {
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
 
@@ -55,13 +56,13 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryItems_Graph()
+        public async Task TestQueryItems_Graph()
         {
             //TODO: when we have document upload funcionality then the test should ensure a document with the requested title is uploaded
             var expectedListItemTitle = "Sample Document 01";
 
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
 
@@ -83,10 +84,10 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryFirstOrDefaultNoPredicateLINQ_Graph()
+        public async Task TestQueryFirstOrDefaultNoPredicateLINQ_Graph()
         {
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
 
@@ -97,12 +98,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryFirstOrDefaultWithPredicateLINQ_Graph()
+        public async Task TestQueryFirstOrDefaultWithPredicateLINQ_Graph()
         {
             var expected = "Documents";
 
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
 
@@ -117,12 +118,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryFirstOrDefaultNoPredicateOnQueryLINQ_Graph()
+        public async Task TestQueryFirstOrDefaultNoPredicateOnQueryLINQ_Graph()
         {
             var expected = "Documents";
 
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
 
@@ -136,12 +137,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryGetByTitleLINQ_Graph()
+        public async Task TestQueryGetByTitleLINQ_Graph()
         {
             var expected = "Documents";
 
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
 
@@ -153,12 +154,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryGetByTitleWithFieldsLINQ_Graph()
+        public async Task TestQueryGetByTitleWithFieldsLINQ_Graph()
         {
             var expected = "Documents";
 
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
 
@@ -174,13 +175,13 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryGetByIdLINQ_Graph()
+        public async Task TestQueryGetByIdLINQ_Graph()
         {
             var targetListTitle = "Documents";
             var expectedTitle = "General";
 
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = true;
 

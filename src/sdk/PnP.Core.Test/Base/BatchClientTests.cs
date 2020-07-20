@@ -25,10 +25,10 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public void PropertiesInitialization()
+        public async Task PropertiesInitialization()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Assert.IsNotNull(context.BatchClient.PnPContext == context);
                 Assert.IsNotNull(context.BatchClient.EnsureBatch());
@@ -39,7 +39,7 @@ namespace PnP.Core.Test.Base
         public async Task RemoveProcessedExplicitBatch()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
 
@@ -63,7 +63,7 @@ namespace PnP.Core.Test.Base
         public async Task RemoveProcessedBatch()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.GetBatchAsync();
 
@@ -88,7 +88,7 @@ namespace PnP.Core.Test.Base
         public async Task DedupBatchRequests()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // first get
                 var web = await context.Web.GetBatchAsync(p => p.Title);
@@ -128,7 +128,7 @@ namespace PnP.Core.Test.Base
         public async Task MixedGraphSharePointBatchRunsAsSharePointBatch()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 if (context.GraphFirst)
                 {
@@ -169,7 +169,7 @@ namespace PnP.Core.Test.Base
         public async Task SplitSharePointAndGraphRequestsInTwoBatches()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Graph only request (there's no option to fallback to a SharePoint REST call)
                 await context.Team.GetBatchAsync();
@@ -203,7 +203,7 @@ namespace PnP.Core.Test.Base
         public async Task MergeGetBatchResults()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
 
@@ -230,7 +230,7 @@ namespace PnP.Core.Test.Base
         public async Task TestBatchRequestIdPopulation()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get web title : this can be done using rest and graph and since we're graphfirst this will go via Graph
                 await context.Web.GetAsync(p => p.Title);
@@ -254,7 +254,7 @@ namespace PnP.Core.Test.Base
         public async Task HandleMaxRequestsInGraphBatch2()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get the primary channel without expression...should default to v1.0 graph
                 var team = await context.Team.GetAsync(p => p.PrimaryChannel);
@@ -290,7 +290,7 @@ namespace PnP.Core.Test.Base
         public async Task HandleMaxRequestsInGraphBatch1()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(p => p.Channels);
 

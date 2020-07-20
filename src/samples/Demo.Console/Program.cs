@@ -82,7 +82,7 @@ namespace Consumer
                 var pnpContextFactory = scope.ServiceProvider.GetRequiredService<IPnPContextFactory>();
                 
                 #region Interactive GET's
-                using (var context = pnpContextFactory.Create("DemoSite"))
+                using (var context = await pnpContextFactory.CreateAsync("DemoSite"))
                 {
                     // ================================================================
                     // Getting data - everything is async!
@@ -236,9 +236,9 @@ namespace Consumer
                             { "Title", $"Item {i}" }
                         };
 
-                        newList.Items.Add(listItem);
+                        await newList.Items.AddBatchAsync(listItem);
                     }
-                    newList.Get(p => p.Items, p => p.NoCrawl);
+                    await newList.GetBatchAsync(p => p.Items, p => p.NoCrawl);
 
                     // Send 20 adds + reload as a single operation (=batch) to server
                     await context.ExecuteAsync();

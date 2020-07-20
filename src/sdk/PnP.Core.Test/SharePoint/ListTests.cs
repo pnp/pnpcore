@@ -23,7 +23,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetListDataByRenderListDataAsStream()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
                 string listTitle = "GetListDataByRenderListDataAsStream";
@@ -51,7 +51,7 @@ namespace PnP.Core.Test.SharePoint
                 }
                 await context.ExecuteAsync();
 
-                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
@@ -75,7 +75,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ListLinqGetMethods()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
                 string listTitle = "ListLinqGetMethods";
@@ -93,7 +93,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var listGuid = myList.Id;
 
-                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
@@ -103,7 +103,7 @@ namespace PnP.Core.Test.SharePoint
                     }
                 }
 
-                using (var context3 = TestCommon.Instance.GetContext(TestCommon.TestSite, 2))
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
                     
                     var list3 = context3.Web.Lists.GetById(listGuid, p=>p.TemplateType, p=>p.Title);
@@ -123,7 +123,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetItemsByCAMLQuery()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
                 string listTitle = "GetItemsByCAMLQuery";
@@ -151,7 +151,7 @@ namespace PnP.Core.Test.SharePoint
                 }
                 await context.ExecuteAsync();
 
-                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
@@ -161,7 +161,7 @@ namespace PnP.Core.Test.SharePoint
                     }
                 }
 
-                using (var context3 = TestCommon.Instance.GetContext(TestCommon.TestSite, 2))
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
                     var list3 = context3.Web.Lists.GetByTitle(listTitle);
                     if (list3 != null)
@@ -176,7 +176,7 @@ namespace PnP.Core.Test.SharePoint
                 }
 
                 // Batch testing
-                using (var context4 = TestCommon.Instance.GetContext(TestCommon.TestSite, 3))
+                using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
                 {
                     var list4 = context4.Web.Lists.GetByTitle(listTitle);
                     if (list4 != null)
@@ -205,7 +205,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task RecycleList()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
                 var web = await context.Web.GetAsync(p => p.Lists);

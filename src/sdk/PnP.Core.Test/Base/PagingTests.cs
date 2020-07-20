@@ -25,7 +25,7 @@ namespace PnP.Core.Test.Base
         public async Task GraphCollectionPaging()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // This rest requires beta api's, so bail out if that's not enabled
                 if (!context.GraphCanUseBeta)
@@ -74,7 +74,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(channelForPaging.Messages.CanPage);
 
                 // Since we've already populated the model due to the add let's create a second context to perform a clean load again
-                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     // Retrieve the already created channel
                     await context2.Team.GetAsync(p => p.Channels);
@@ -113,7 +113,7 @@ namespace PnP.Core.Test.Base
         public async Task GraphLinqTakeToPaging()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Issue a linq query, will be executed by Graph at this point
                 var lists = context.Web.Lists.Take(2);
@@ -140,7 +140,7 @@ namespace PnP.Core.Test.Base
         public async Task GraphListViaGetPagedAsyncPaging()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
 
                 await context.Web.Lists.GetPagedAsync(2);
@@ -171,7 +171,7 @@ namespace PnP.Core.Test.Base
         public async Task GraphListViaGetPagedExpressionAsyncPaging()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
 
                 await context.Web.Lists.GetPagedAsync(2, p => p.Title);
@@ -221,7 +221,7 @@ namespace PnP.Core.Test.Base
         public async Task RESTListViaGetPagedAsyncPaging()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Force rest
                 context.GraphFirst = false;
@@ -254,7 +254,7 @@ namespace PnP.Core.Test.Base
         public async Task RESTListViaGetPagedExpressionAsyncPaging()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Force rest
                 context.GraphFirst = false;
@@ -304,7 +304,7 @@ namespace PnP.Core.Test.Base
         public async Task RESTListPaging()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Force rest
                 context.GraphFirst = false;
@@ -339,7 +339,7 @@ namespace PnP.Core.Test.Base
         public async Task RESTListItemPaging()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Force rest
                 context.GraphFirst = false;
@@ -374,7 +374,7 @@ namespace PnP.Core.Test.Base
 
                     // Since we've already populated the model due to the add let's create a second context to perform a clean load again
                     // Check paging when starting from the beginning
-                    using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                     {
                         // Force rest
                         context2.GraphFirst = false;
@@ -404,7 +404,7 @@ namespace PnP.Core.Test.Base
                     // Since we've already populated the model due to the add let's create a second context to perform a clean load again
                     // Check paging when starting from the middle, the skip + take combination results in a __next url that 
                     // has both the skiptoken and skip parameters, an invalid combination. Paging logic will handle this
-                    using (var context3 = TestCommon.Instance.GetContext(TestCommon.TestSite, 2))
+                    using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                     {
                         // Force rest
                         context3.GraphFirst = false;
@@ -439,7 +439,7 @@ namespace PnP.Core.Test.Base
         public async Task RESTListItemGetPagedAsyncPaging()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Force rest
                 context.GraphFirst = false;
@@ -473,7 +473,7 @@ namespace PnP.Core.Test.Base
                     await context.ExecuteAsync();
 
                     // Since we've already populated the model due to the add let's create a second context to perform a clean load again
-                    using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                     {
                         // Force rest
                         context2.GraphFirst = false;

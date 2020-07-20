@@ -22,7 +22,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetListFieldsTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.GetByTitle("Documents", l => l.Fields);
                 Assert.IsTrue(documents.Fields.Count() > 0);
@@ -38,10 +38,10 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public void GetListFieldByIdTest()
+        public async Task GetListFieldByIdTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 //await context.Web.GetAsync(p => p.Lists);
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
@@ -59,7 +59,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldNoOptionTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions());
@@ -77,7 +77,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldWithOptionsDefaultFormulaTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
@@ -115,7 +115,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldAsXmlTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddFieldAsXmlAsync(@"<Field Type=""Text"" Name=""ADDEDFIELD"" DisplayName=""ADDED FIELD""/>");
@@ -135,7 +135,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddNewWebGenericFieldTextTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
@@ -160,7 +160,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddNewListFieldTextSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddTextAsync("ADDED FIELD", new FieldTextOptions()
@@ -184,7 +184,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldMultilineTextSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddMultilineTextAsync("ADDED FIELD", new FieldMultilineTextOptions()
@@ -218,7 +218,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldDateTimeSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddDateTimeAsync("ADDED FIELD", new FieldDateTimeOptions()
@@ -246,7 +246,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldMultiChoiceSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddMultiChoiceAsync("ADDED FIELD", new FieldMultiChoiceOptions()
@@ -276,7 +276,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldChoiceSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddChoiceAsync("ADDED FIELD", new FieldChoiceOptions()
@@ -308,7 +308,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldNumberSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddNumberAsync("ADDED FIELD", new FieldNumberOptions()
@@ -341,7 +341,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldCurrencySpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddCurrencyAsync("ADDED FIELD", new FieldCurrencyOptions()
@@ -365,7 +365,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldUrlSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddUrlAsync("ADDED FIELD", new FieldUrlOptions()
@@ -389,7 +389,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldCalculatedAsDateTimeSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
@@ -419,7 +419,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldCalculatedSpecificAsNumberTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
@@ -451,7 +451,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldCalculatedSpecificAsTextTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
@@ -478,7 +478,7 @@ namespace PnP.Core.Test.SharePoint
         {
             // CAUTION : Add Lookup field DOES NOT SUPPORT specifying some options at creation (e.g. Group, Hidden, ...)
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
                 IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
@@ -508,7 +508,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFieldUserSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddUserAsync("ADDED FIELD", new FieldUserOptions()
@@ -542,7 +542,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task UpdateListFieldTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField field = await documents.Fields.AddAsync("TO UPDATE FIELD", FieldType.Text, new FieldTextOptions());
@@ -569,7 +569,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DeleteListFieldTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField field = await documents.Fields.AddAsync("TO DELETE FIELD", FieldType.Text);

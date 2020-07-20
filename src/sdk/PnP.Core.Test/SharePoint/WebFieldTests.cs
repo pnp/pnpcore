@@ -22,7 +22,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetWebFieldsTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IWeb web = await context.Web.GetAsync(p => p.Fields);
                 Assert.IsTrue(web.Fields.Count() > 0);
@@ -38,10 +38,10 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public void GetWebFieldByIdTest()
+        public async Task GetWebFieldByIdTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Guid titleFieldId = new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247");
                 IField field = (from f in context.Web.Fields
@@ -57,7 +57,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldNoOptionTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions());
 
@@ -74,7 +74,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldWithOptionsDefaultFormulaTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
                 {
@@ -110,7 +110,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldAsXmlTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddFieldAsXmlAsync(@"<Field Type=""Text"" Name=""ADDEDFIELD"" DisplayName=""ADDED FIELD""/>");
 
@@ -129,7 +129,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddNewWebGenericFieldTextTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
                 {
@@ -153,7 +153,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddNewWebFieldTextSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD", new FieldTextOptions()
                 {
@@ -176,7 +176,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldMultilineTextSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddMultilineTextAsync("ADDED FIELD", new FieldMultilineTextOptions()
                 {
@@ -209,7 +209,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldDateTimeSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddDateTimeAsync("ADDED FIELD", new FieldDateTimeOptions()
                 {
@@ -236,7 +236,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldMultiChoiceSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddMultiChoiceAsync("ADDED FIELD", new FieldMultiChoiceOptions()
                 {
@@ -265,7 +265,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldChoiceSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddChoiceAsync("ADDED FIELD", new FieldChoiceOptions()
                 {
@@ -296,7 +296,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldNumberSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddNumberAsync("ADDED FIELD", new FieldNumberOptions()
                 {
@@ -328,7 +328,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldCurrencySpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddCurrencyAsync("ADDED FIELD", new FieldCurrencyOptions()
                 {
@@ -351,7 +351,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldUrlSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddUrlAsync("ADDED FIELD", new FieldUrlOptions()
                 {
@@ -374,7 +374,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldCalculatedAsDateTimeSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
                 {
@@ -403,7 +403,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldCalculatedSpecificAsNumberTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
                 {
@@ -434,7 +434,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldCalculatedSpecificAsTextTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
                 {
@@ -460,7 +460,7 @@ namespace PnP.Core.Test.SharePoint
         {
             // CAUTION : Add Lookup field DOES NOT SUPPORT specifying some options at creation (e.g. Group, Hidden, ...)
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IWeb currentWeb = await context.Web.GetAsync();
                 IList documents = currentWeb.Lists.GetByTitle("Documents", l => l.Id);
@@ -488,7 +488,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddWebFieldUserSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField addedField = await context.Web.Fields.AddUserAsync("ADDED FIELD", new FieldUserOptions()
                 {
@@ -521,7 +521,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task UpdateWebFieldTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField field = await context.Web.Fields.AddAsync("TO UPDATE FIELD", FieldType.Text, new FieldTextOptions());
 
@@ -547,7 +547,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DeleteWebFieldTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IField field = await context.Web.Fields.AddAsync("TO DELETE FIELD", FieldType.Text);
 

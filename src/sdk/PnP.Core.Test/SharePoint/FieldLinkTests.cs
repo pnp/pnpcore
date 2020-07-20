@@ -22,7 +22,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetSiteContentTypeFieldLinksTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get existing content type
                 IContentType contentType = (from ct in context.Web.ContentTypes
@@ -46,7 +46,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetListContentTypeFieldLinksTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get existing content type
                 IContentType contentType = (from ct in context.Web.Lists.GetByTitle("Documents").ContentTypes
@@ -75,7 +75,7 @@ namespace PnP.Core.Test.SharePoint
             // TODO: Probably worthy to recommend not using this endpoint for adding fieldlinks... What alternative ?
 
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new test content type
                 IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
@@ -103,7 +103,7 @@ namespace PnP.Core.Test.SharePoint
         //    // TODO: Probably worthy to recommend not using this endpoint for adding fieldlinks... What alternative ?
 
         //    //TestCommon.Instance.Mocking = false;
-        //    using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
         //    {
         //        // Create a new test content type
         //        IContentType newSiteContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");

@@ -156,7 +156,7 @@ namespace PnP.Core.Test.Base
             bool firstAttempt = true;
 
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Set delay to 0 to speed up tests
                 context.BatchClient.HttpMicrosoftGraphDelayInSeconds = 0;
@@ -211,7 +211,7 @@ namespace PnP.Core.Test.Base
             bool firstAttempt = true;
 
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Set delay to 0 to speed up tests
                 context.BatchClient.HttpMicrosoftGraphDelayInSeconds = 0;
@@ -266,7 +266,7 @@ namespace PnP.Core.Test.Base
             bool firstAttempt = true;
 
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Set delay to 0 to speed up tests
                 context.BatchClient.HttpMicrosoftGraphDelayInSeconds = 0;
@@ -317,7 +317,7 @@ namespace PnP.Core.Test.Base
         public async Task MicrosoftGraphBatchRetryMaxRetriesTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Set delay to 0 to speed up tests
                 context.BatchClient.HttpMicrosoftGraphDelayInSeconds = 0;

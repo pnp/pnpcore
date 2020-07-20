@@ -23,7 +23,7 @@ namespace PnP.Core.Test.Base
         public async Task PropertiesInitialization()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Assert.IsNotNull(context.Web);
                 Assert.IsNotNull(context.Site);
@@ -41,7 +41,7 @@ namespace PnP.Core.Test.Base
         public async Task PendingRequests()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Assert.IsFalse(context.HasPendingRequests);
 
@@ -59,7 +59,7 @@ namespace PnP.Core.Test.Base
         public async Task RootWebPopulatedForRootContextViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
 
@@ -74,7 +74,7 @@ namespace PnP.Core.Test.Base
         public async Task RootWebPopulatedForRootContextViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.GetAsync();
 
@@ -87,7 +87,7 @@ namespace PnP.Core.Test.Base
         public async Task RootWebPopulatedForSubSiteContextViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSubSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
                 context.GraphFirst = false;
 
@@ -107,7 +107,7 @@ namespace PnP.Core.Test.Base
         public async Task RootWebPopulatedForSubSiteContextViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSubSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
             {
                 await context.Web.GetAsync();
 
@@ -125,7 +125,7 @@ namespace PnP.Core.Test.Base
         public async Task SkipLoadingTeamForNoGroupSitesViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.NoGroupTestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
             {
                 var team = await context.Team.GetAsync();
                 
@@ -138,14 +138,14 @@ namespace PnP.Core.Test.Base
         public async Task CreateContextFromGroupId()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Site.EnsurePropertiesAsync(p => p.GroupId);
                 // Group id should be loaded
                 Assert.IsTrue(context.Site.GroupId != Guid.Empty);
 
                 // Create a new context using this group id
-                using (var context2 = TestCommon.Instance.GetContext(context.Site.GroupId, 1))
+                using (var context2 = await TestCommon.Instance.GetContextAsync(context.Site.GroupId, 1))
                 {
                     Assert.IsTrue(context2.Group.Requested == true);
                     Assert.IsTrue(context2.Group.IsPropertyAvailable(p => p.WebUrl) == true);
@@ -175,7 +175,7 @@ namespace PnP.Core.Test.Base
         public async Task ContextCloningForSameSite()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.GetAsync(p => p.Title);
 
@@ -210,7 +210,7 @@ namespace PnP.Core.Test.Base
         public async Task ContextCloningForOtherSite()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.GetAsync(p => p.Title);
 

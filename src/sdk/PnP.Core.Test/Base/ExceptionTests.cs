@@ -140,7 +140,7 @@ namespace PnP.Core.Test.Base
         public async Task ThrowGraphServiceException()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 bool microsoftGraphServiceExceptionThrown = false;
                 MicrosoftGraphError error = null;
@@ -169,7 +169,7 @@ namespace PnP.Core.Test.Base
         public async Task VerifyGraphServiceExceptionToString()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 bool microsoftGraphServiceExceptionThrown = false;
                 string stringRepresentation = null;
@@ -198,7 +198,7 @@ namespace PnP.Core.Test.Base
         public async Task ThrowSharePointRestServiceException()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 bool SharePointRestServiceExceptionThrown = false;
                 SharePointRestError error = null;
@@ -318,7 +318,7 @@ namespace PnP.Core.Test.Base
         public async Task ThrowCSOMServiceException()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = context.Web as Web;
 
@@ -342,7 +342,7 @@ namespace PnP.Core.Test.Base
         public async Task VerifyCSOMErrorToString()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = context.Web as Web;
 

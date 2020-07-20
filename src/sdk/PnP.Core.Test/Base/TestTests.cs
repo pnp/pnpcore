@@ -3,6 +3,7 @@ using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
 {
@@ -11,9 +12,9 @@ namespace PnP.Core.Test.Base
     {
 
         [TestMethod]
-        public void PropertySavingTest()
+        public async Task PropertySavingTest()
         {
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string property2Value = @"This is value 2 /\ ><:!";
                 Dictionary<string, string> myTestProperties = new Dictionary<string, string>

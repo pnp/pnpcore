@@ -17,10 +17,10 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public void GetV1vsBetaControllingProperties()
+        public async Task GetV1vsBetaControllingProperties()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Default configuration
                 Assert.IsFalse(context.GraphAlwaysUseBeta);
@@ -56,7 +56,7 @@ namespace PnP.Core.Test.Base
         public async Task GetV1vsBetaPropertyViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Default config must be to use v1.0 endpoint
                 Assert.IsFalse(context.GraphAlwaysUseBeta);
@@ -84,7 +84,7 @@ namespace PnP.Core.Test.Base
         public async Task GetV1vsBetaPropertyViaGraphForceBeta()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Force beta
                 context.GraphAlwaysUseBeta = true;
@@ -104,7 +104,7 @@ namespace PnP.Core.Test.Base
         public async Task GetV1vsBetaPropertyViaGraphNoBeta()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Prevent beta
                 context.GraphCanUseBeta = false;
@@ -135,7 +135,7 @@ namespace PnP.Core.Test.Base
         public async Task GetV1vsBetaEntityViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Default config must be to use v1.0 endpoint
                 Assert.IsFalse(context.GraphAlwaysUseBeta);
@@ -167,7 +167,7 @@ namespace PnP.Core.Test.Base
         public async Task GetV1vsBetaEntityViaGraphNoBeta()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Prevent beta
                 context.GraphCanUseBeta = false;
@@ -207,7 +207,7 @@ namespace PnP.Core.Test.Base
         public async Task UpdateV1vsBetaEntityViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Default config must be to use v1.0 endpoint
                 Assert.IsFalse(context.GraphAlwaysUseBeta);
@@ -241,7 +241,7 @@ namespace PnP.Core.Test.Base
         public async Task UpdateV1vsBetaEntityViaGraphNoBeta()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Prevent beta usage
                 context.GraphCanUseBeta = false;

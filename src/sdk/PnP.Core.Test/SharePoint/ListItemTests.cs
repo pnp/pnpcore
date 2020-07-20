@@ -24,7 +24,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task SystemUpdate()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
                 var web = await context.Web.GetAsync(p => p.Lists);
@@ -66,7 +66,7 @@ namespace PnP.Core.Test.SharePoint
 
                 await first.SystemUpdateAsync();
 
-                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     await context2.Web.GetAsync(p => p.Lists);
                     var myList2 = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
@@ -83,7 +83,7 @@ namespace PnP.Core.Test.SharePoint
                     await first2.UpdateAsync();
                 }
 
-                using (var context3 = TestCommon.Instance.GetContext(TestCommon.TestSite, 2))
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
                     await context3.Web.GetAsync(p => p.Lists);
                     var myList3 = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
@@ -100,7 +100,7 @@ namespace PnP.Core.Test.SharePoint
                     await first3.SystemUpdateAsync();
                 }
 
-                using (var context4 = TestCommon.Instance.GetContext(TestCommon.TestSite, 3))
+                using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
                 {
                     await context4.Web.GetAsync(p => p.Lists);
                     var myList4 = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
@@ -123,7 +123,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task UpdateOverwriteVersion()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
                 var web = await context.Web.GetAsync(p => p.Lists.Include(p => p.Title, p=>p.Items));
@@ -168,7 +168,7 @@ namespace PnP.Core.Test.SharePoint
                 await first.UpdateOverwriteVersionBatchAsync(batch).ConfigureAwait(false);
                 await context.ExecuteAsync(batch);
 
-                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     await context2.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Items));
                     var myList2 = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));

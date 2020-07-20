@@ -27,7 +27,7 @@ namespace PnP.Core.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
                     PnPConstants.MicrosoftGraphBaseUri, 
@@ -43,7 +43,7 @@ namespace PnP.Core.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
                     context.Uri, null).ConfigureAwait(true);
@@ -56,7 +56,7 @@ namespace PnP.Core.Test.Base
         public async Task TestAccessTokenAuthenticationProvider()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string accessToken;
                 // Persist the fetched token to be used in the offline test
@@ -79,7 +79,7 @@ namespace PnP.Core.Test.Base
                 }
 
                 // Use this access token in a new context
-                using (var context1 = TestCommon.Instance.GetContext(TestCommon.TestSiteAccessToken, 1))
+                using (var context1 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteAccessToken, 1))
                 {
                     // Set the access token on the context
                     context1.SetAccessToken(accessToken);

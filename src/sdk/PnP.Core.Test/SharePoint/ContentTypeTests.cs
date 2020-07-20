@@ -22,7 +22,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ContentTypesGetTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IWeb web = await context.Web.GetAsync(p => p.ContentTypes);
                 Assert.IsTrue(web.ContentTypes.Count() > 0);
@@ -39,7 +39,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ContentTypesOnListGetTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
 
@@ -62,7 +62,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ContentTypesOnListGetByIdTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
 
@@ -80,10 +80,10 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public void ContentTypesGetByIdTest()
+        public async Task ContentTypesGetByIdTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IContentType contentType = (from ct in context.Web.ContentTypes
                                             where ct.StringId == "0x01"
@@ -101,7 +101,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ContentTypesAddTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
 
@@ -121,7 +121,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ContentTypesOnListAddAvailableTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
                 var web = await context.Web.GetAsync(p => p.Lists);
@@ -162,7 +162,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ContentTypesOnListAddTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
                 var web = await context.Web.GetAsync(p => p.Lists);
@@ -206,7 +206,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ContentTypesUpdateTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IContentType contentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST UPDATE", "TESTING", "TESTING");
 
@@ -232,7 +232,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ContentTypesDeleteTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IContentType contentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST DELETE", "TESTING", "TESTING");
 
@@ -255,7 +255,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task ContentTypesOnListDeleteTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
                 var web = await context.Web.GetAsync(p => p.Lists);

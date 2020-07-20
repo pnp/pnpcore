@@ -30,7 +30,7 @@ namespace PnP.Core.Test.Base
         public async Task DeleteListItemViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Lists);
 
@@ -102,7 +102,7 @@ namespace PnP.Core.Test.Base
         public async Task DeleteListItemViaBatchRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();

@@ -21,7 +21,7 @@ namespace PnP.Core.Test.Teams
         public async Task ArchiveUnarchiveTeam()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync();
 

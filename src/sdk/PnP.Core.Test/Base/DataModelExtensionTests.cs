@@ -20,7 +20,7 @@ namespace PnP.Core.Test.Base
         public async Task IsPropertyAvailable()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
@@ -39,7 +39,7 @@ namespace PnP.Core.Test.Base
         public async Task IsPropertyAvailableCollection()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Is the property populated
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.Lists));
@@ -54,7 +54,7 @@ namespace PnP.Core.Test.Base
         public async Task EnsureProperties()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
@@ -74,7 +74,7 @@ namespace PnP.Core.Test.Base
         public async Task EnsurePropertiesMultiple()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
@@ -96,7 +96,7 @@ namespace PnP.Core.Test.Base
         public async Task EnsurePropertiesCollection()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
@@ -119,7 +119,7 @@ namespace PnP.Core.Test.Base
         public async Task EnsurePropertiesCollectionWithInclude()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
@@ -145,7 +145,7 @@ namespace PnP.Core.Test.Base
         public async Task EnsurePropertiesCollectionWithIncludePartiallyLoaded()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.GetAsync(p => p.Lists.Include(p => p.Title));
 
@@ -173,7 +173,7 @@ namespace PnP.Core.Test.Base
         public async Task EnsurePropertiesCollectionWithIncludePartiallyLoadedRecursive()
         {
             //TestCommon.Instance.Mocking = false;            
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 await context.Web.GetAsync(p => p.WelcomePage, p => p.Lists.Include(p => p.Title, p => p.Description, p => p.Fields.Include(p => p.Title)));
 
@@ -197,7 +197,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
             }
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite, 2))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 await context.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Description, p => p.Fields.Include(p => p.StaticName)), p => p.WelcomePage);
 
@@ -221,7 +221,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
             }        
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite, 3))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
                 await context.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Description), p => p.WelcomePage);
 

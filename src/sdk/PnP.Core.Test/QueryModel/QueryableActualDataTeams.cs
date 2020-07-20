@@ -4,6 +4,7 @@ using System;
 using PnP.Core.Test.Utilities;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -18,12 +19,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryTeamChannels()
+        public async Task TestQueryTeamChannels()
         {
             var expectedDisplayName = "General";
 
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = from c in context.Team.Channels
                             where c.DisplayName == expectedDisplayName
@@ -37,12 +38,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryTeamChannelMessages()
+        public async Task TestQueryTeamChannelMessages()
         {
             var expectedDisplayName = "General";
 
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = context.Team.Channels.GetByDisplayName(expectedDisplayName).Messages;
 

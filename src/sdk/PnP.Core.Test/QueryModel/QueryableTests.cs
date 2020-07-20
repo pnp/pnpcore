@@ -3,6 +3,7 @@ using System.Linq;
 using System;
 using PnP.Core.Test.Utilities;
 using PnP.Core.QueryModel;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -17,11 +18,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryLoadExtensionMethod()
+        public async Task TestQueryLoadExtensionMethod()
         {
             var expected = "$select=sharepointIds,name,description";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = context.Site.AllWebs
                     .Load(w => w.Id, w => w.Title, w => w.Description);
@@ -33,11 +34,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryIncludeExtensionMethod()
+        public async Task TestQueryIncludeExtensionMethod()
         {
             var expected = "$expand=lists,lists";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = context.Site.AllWebs
                     .Include(w => w.Lists, w => w.Lists);
@@ -49,11 +50,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryTake()
+        public async Task TestQueryTake()
         {
             var expected = "$top=10";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = context.Site.AllWebs
                     .Take(10);
@@ -65,11 +66,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQuerySkip()
+        public async Task TestQuerySkip()
         {
             var expected = "$skip=10";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = context.Site.AllWebs
                     .Skip(10);
@@ -81,11 +82,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryOrderBy()
+        public async Task TestQueryOrderBy()
         {
             var expected = "$orderby=name";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = context.Site.AllWebs
                     .OrderBy(w => w.Title);
@@ -97,11 +98,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryOrderByMultiple()
+        public async Task TestQueryOrderByMultiple()
         {
             var expected = "$orderby=name,sharepointIds";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = context.Site.AllWebs
                     .OrderBy(w => w.Title)
@@ -114,11 +115,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryOrderByMultipleDirections()
+        public async Task TestQueryOrderByMultipleDirections()
         {
             var expected = "$orderby=name,sharepointIds desc";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = context.Site.AllWebs
                     .OrderBy(w => w.Title)
@@ -131,11 +132,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryOrderByMultipleDirectionsLINQ()
+        public async Task TestQueryOrderByMultipleDirectionsLINQ()
         {
             var expected = "$orderby=name,sharepointIds desc";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = from w in context.Site.AllWebs
                             orderby w.Title, w.Id descending
@@ -148,11 +149,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryWhereLINQ()
+        public async Task TestQueryWhereLINQ()
         {
             var expected = "$filter=name eq 'Test'";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = (from w in context.Site.AllWebs
                              where w.Title == "Test"
@@ -165,12 +166,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryWhereLINQWithMultipleFilters()
+        public async Task TestQueryWhereLINQWithMultipleFilters()
         {
             var expected = "$filter=(name eq 'Test' and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))";
             var filteredId = new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e");
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = (from w in context.Site.AllWebs
                              where w.Title == "Test" && w.Id == filteredId
@@ -183,11 +184,11 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryComplex()
+        public async Task TestQueryComplex()
         {
             var expected = "$select=sharepointIds,name,description&$filter=name eq 'Test'&$top=10&$skip=5&$expand=lists";
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = (from w in context.Site.AllWebs
                              where w.Title == "Test"
@@ -204,12 +205,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
-        public void TestQueryComplexMultiWhere()
+        public async Task TestQueryComplexMultiWhere()
         {
             var expected = "$select=sharepointIds,name,description&$filter=((name eq 'Test' and description eq 'Description') and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))&$top=10&$skip=5&$expand=lists";
             var filteredId = new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e");
 
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = (from w in context.Site.AllWebs
                              where w.Title == "Test" &&

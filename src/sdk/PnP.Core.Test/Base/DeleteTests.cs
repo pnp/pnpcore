@@ -27,7 +27,7 @@ namespace PnP.Core.Test.Base
         public async Task DeleteListViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Lists);
 
@@ -73,7 +73,7 @@ namespace PnP.Core.Test.Base
         public async Task DeleteListViaBatchRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
@@ -121,7 +121,7 @@ namespace PnP.Core.Test.Base
         public async Task DeleteListViaExplicitBatchRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
                 var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
@@ -176,7 +176,7 @@ namespace PnP.Core.Test.Base
         public async Task DeleteChannelViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(p => p.Channels);
 
@@ -223,7 +223,7 @@ namespace PnP.Core.Test.Base
         public async Task DeleteChannelViaBatchGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
@@ -274,7 +274,7 @@ namespace PnP.Core.Test.Base
         public async Task DeleteChannelViaExplicitBatchGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
                 var team = await context.Team.GetBatchAsync(batch, p => p.Channels);

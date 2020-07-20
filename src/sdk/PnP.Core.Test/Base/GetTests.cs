@@ -29,7 +29,7 @@ namespace PnP.Core.Test.Base
         public async Task GetSinglePropertyViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.WelcomePage);
                 
@@ -46,7 +46,7 @@ namespace PnP.Core.Test.Base
         public async Task GetMultiplePropertiesViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.WelcomePage, p => p.Title, p => p.QuickLaunchEnabled);
 
@@ -66,7 +66,7 @@ namespace PnP.Core.Test.Base
         public async Task IsTheKeyfieldLoadedWhenLoadingAPropertyViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.WelcomePage);
 
@@ -80,7 +80,7 @@ namespace PnP.Core.Test.Base
         public async Task GetSingleExpandableCollectionViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Turn off graphfirst behaviour so that we force this one to use REST
                 context.GraphFirst = false;
@@ -104,7 +104,7 @@ namespace PnP.Core.Test.Base
         public async Task GetSingleExpandableCollectionTwiceViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Turn off graphfirst behaviour so that we force this one to use REST
                 context.GraphFirst = false;
@@ -127,7 +127,7 @@ namespace PnP.Core.Test.Base
         public async Task GetMultipleExpandableCollectionViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Turn off graphfirst behaviour so that we force this one to use REST
                 context.GraphFirst = false;
@@ -149,7 +149,7 @@ namespace PnP.Core.Test.Base
         public async Task GetMultiplePropertiesAndExpandableCollectionViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.WelcomePage, p => p.Title, p => p.QuickLaunchEnabled, p => p.Lists, p => p.Webs);
 
@@ -173,7 +173,7 @@ namespace PnP.Core.Test.Base
         public async Task CheckMetadataWhenPropertyViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.WelcomePage);
 
@@ -203,7 +203,7 @@ namespace PnP.Core.Test.Base
         public async Task GetSingleModelPropertyViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var site = await context.Site.GetAsync(p => p.RootWeb);
 
@@ -219,7 +219,7 @@ namespace PnP.Core.Test.Base
         public async Task ExpandWithIncludeViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.Title, 
@@ -242,7 +242,7 @@ namespace PnP.Core.Test.Base
         public async Task ExpandWithCollectionIncludeViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.Title, 
@@ -267,7 +267,7 @@ namespace PnP.Core.Test.Base
         public async Task ExpandRecursivelyWithCollectionIncludeViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.Title, 
@@ -300,7 +300,7 @@ namespace PnP.Core.Test.Base
         public async Task ExpandRecursivelyUnorderedWithCollectionIncludeViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.ContentTypes.Include(p => p.Name),
@@ -339,7 +339,7 @@ namespace PnP.Core.Test.Base
         public async Task GetSinglePropertyViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Description);
 
@@ -356,7 +356,7 @@ namespace PnP.Core.Test.Base
         public async Task GetMultiplePropertiesViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Description, p => p.Title);
 
@@ -375,7 +375,7 @@ namespace PnP.Core.Test.Base
         public async Task IsTheKeyfieldLoadedWhenLoadingAPropertyViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Title);
 
@@ -389,7 +389,7 @@ namespace PnP.Core.Test.Base
         public async Task GetSingleExpandableCollectionViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Lists);
 
@@ -410,7 +410,7 @@ namespace PnP.Core.Test.Base
         public async Task GetSingleExpandableCollectionTwiceViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // First load
                 var web = await context.Web.GetAsync(p => p.Lists);
@@ -430,7 +430,7 @@ namespace PnP.Core.Test.Base
         public async Task GetSinglePropertyViaGraphOnly()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(p => p.Description);
 
@@ -450,7 +450,7 @@ namespace PnP.Core.Test.Base
         public async Task GetMultiplePropertiesViaGraphOnly()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(p => p.Description, p => p.InternalId);
 
@@ -471,7 +471,7 @@ namespace PnP.Core.Test.Base
         public async Task GetMultiplePropertiesAndComplexModelsViaGraphOnly()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(p => p.Description, p => p.InternalId, p => p.FunSettings, p => p.DiscoverySettings);
 
@@ -498,7 +498,7 @@ namespace PnP.Core.Test.Base
         public async Task GetMultiplePropertiesComplexModelsAndCollectionsViaGraphOnly()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(p => p.Description, p => p.InternalId, p => p.FunSettings, p => p.DiscoverySettings, p => p.InstalledApps, p => p.Members);
 
@@ -527,7 +527,7 @@ namespace PnP.Core.Test.Base
         public async Task GetExpandedByDefaultCollectionViaGraphOnly()
         {
             // TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync();
 

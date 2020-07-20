@@ -29,7 +29,7 @@ namespace PnP.Core.Test.Base
         public async Task AddListViaRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Lists);
 
@@ -61,7 +61,7 @@ namespace PnP.Core.Test.Base
         public async Task AddListViaBatchRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
@@ -97,7 +97,7 @@ namespace PnP.Core.Test.Base
         public async Task AddListViaExplicitBatchRest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
                 var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
@@ -140,7 +140,7 @@ namespace PnP.Core.Test.Base
         public async Task AddTeamChannelViaGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(p => p.Channels);
 
@@ -171,7 +171,7 @@ namespace PnP.Core.Test.Base
         public async Task AddTeamChannelViaBatchGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
                 var team = await context.Team.GetBatchAsync(batch, p => p.Channels);
@@ -206,7 +206,7 @@ namespace PnP.Core.Test.Base
         public async Task AddTeamChannelViaExplicitBatchGraph()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
