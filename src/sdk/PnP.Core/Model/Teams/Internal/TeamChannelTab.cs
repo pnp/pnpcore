@@ -14,7 +14,7 @@ namespace PnP.Core.Model.Teams
         public TeamChannelTab()
         {
             // Handler to construct the Add request for this channel
-            AddApiCallHandler = (keyValuePairs) =>
+            AddApiCallHandlerAsync = (keyValuePairs) =>
             {
                 // Define the JSON body of the update request based on the actual changes
                 dynamic tab = new ExpandoObject();
@@ -54,7 +54,7 @@ namespace PnP.Core.Model.Teams
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(tab, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
 
-                return new ApiCall(ApiHelper.ParseApiRequest(this, baseUri), ApiType.GraphBeta, bodyContent);
+                return new ApiCall(ApiHelper.ParseApiRequestAsync(this, baseUri), ApiType.GraphBeta, bodyContent);
             };
         }
     }

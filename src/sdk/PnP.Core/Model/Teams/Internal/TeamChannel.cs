@@ -40,7 +40,9 @@ namespace PnP.Core.Model.Teams
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
 
-                return new ApiCall(ApiHelper.ParseApiRequest(this, baseUri), ApiType.Graph, bodyContent);
+                var apiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
+
+                return new ApiCall(apiCall, ApiType.Graph, bodyContent);
             };
 
             // Validation handler to prevent updating the general channel

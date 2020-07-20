@@ -6,12 +6,12 @@ namespace PnP.Core.Model.SharePoint
 {
     internal partial class FieldLinkCollection
     {
-        public IFieldLink Add(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        public async Task<IFieldLink> AddBatchAsync(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
         {
-            return Add(PnPContext.CurrentBatch, fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm);
+            return await AddBatchAsync(PnPContext.CurrentBatch, fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).ConfigureAwait(false);
         }
 
-        public IFieldLink Add(Batch batch, string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        public async Task<IFieldLink> AddBatchAsync(Batch batch, string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
         {
             if (string.IsNullOrEmpty(fieldInternalName))
             {
@@ -27,7 +27,7 @@ namespace PnP.Core.Model.SharePoint
             newFieldLink.ReadOnly = readOnly;
             newFieldLink.ShowInDisplayForm = showInDisplayForm;
 
-            return newFieldLink.Add(batch) as FieldLink;
+            return await newFieldLink.AddBatchAsync(batch).ConfigureAwait(false) as FieldLink;
         }
 
         public async Task<IFieldLink> AddAsync(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)

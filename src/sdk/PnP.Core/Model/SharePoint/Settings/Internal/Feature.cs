@@ -13,7 +13,7 @@ namespace PnP.Core.Model.SharePoint
 
         public Feature()
         {
-            AddApiCallHandler = (keyValuePairs) =>
+            AddApiCallHandlerAsync = (keyValuePairs) =>
             {
                 var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
                 return new ApiCall($"{entity.SharePointGet}/add(guid'{DefinitionId}')", ApiType.SPORest, null);

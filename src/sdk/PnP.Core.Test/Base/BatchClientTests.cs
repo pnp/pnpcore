@@ -65,7 +65,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                context.Web.Get();
+                context.Web.GetBatchAsync();
 
                 Assert.IsFalse(context.CurrentBatch.Executed);
                 var implicitBatchId = context.CurrentBatch.Id;
@@ -91,11 +91,11 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 // first get
-                var web = context.Web.Get(p => p.Title);
+                var web = context.Web.GetBatchAsync(p => p.Title);
                 // second get
-                var web2 = context.Web.Get(p => p.Title);
+                var web2 = context.Web.GetBatchAsync(p => p.Title);
                 // third get
-                var web3 = context.Web.Get(p => p.Title);
+                var web3 = context.Web.GetBatchAsync(p => p.Title);
 
                 // Grab the id of the current batch so we can later on find it back
                 Guid currentBatchId = context.CurrentBatch.Id;
@@ -133,9 +133,9 @@ namespace PnP.Core.Test.Base
                 if (context.GraphFirst)
                 {
                     // Get web title : this can be done using rest and graph and since we're graphfirst this 
-                    context.Web.Get(p => p.Title);
+                    context.Web.GetBatchAsync(p => p.Title);
                     // Get the web searchscope: this will require a rest call
-                    context.Web.Get(p => p.SearchScope);
+                    context.Web.GetBatchAsync(p => p.SearchScope);
 
                     // Grab the id of the current batch so we can later on find it back
                     Guid currentBatchId = context.CurrentBatch.Id;
@@ -172,9 +172,9 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 // Graph only request (there's no option to fallback to a SharePoint REST call)
-                context.Team.Get();
+                context.Team.GetBatchAsync();
                 // SharePoint REST request
-                context.Web.Get(p => p.SearchScope, p => p.Title);
+                context.Web.GetBatchAsync(p => p.SearchScope, p => p.Title);
 
                 // Grab the id of the current batch so we can later on find it back
                 Guid currentBatchId = context.CurrentBatch.Id;
@@ -323,7 +323,7 @@ namespace PnP.Core.Test.Base
                         if (tab.DisplayName.StartsWith("Tab"))
                         {
                             // Batch up delete
-                            tab.Delete();
+                            tab.DeleteBatchAsync();
                         }
                     }
 

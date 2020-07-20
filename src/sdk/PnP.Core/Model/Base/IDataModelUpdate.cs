@@ -11,13 +11,13 @@ namespace PnP.Core.Model
         /// <summary>
         /// Collects the request to update a Domain Model object into the remote data source 
         /// </summary>
-        void Update();
+        Task UpdateBatchAsync();
 
         /// <summary>
         /// Collects the request to update a Domain Model object into the remote data source using a batch
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
-        void Update(Batch batch);
+        Task UpdateBatchAsync(Batch batch);
 
         /// <summary>
         /// Updates a Domain Model object into the remote data source 

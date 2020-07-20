@@ -316,11 +316,11 @@ namespace PnP.Core.Services
                             var idBatch = contextAwareObject.PnPContext.NewBatch();
                             if (!contextAwareObject.PnPContext.Site.IsPropertyAvailable(p => p.Id))
                             {
-                                contextAwareObject.PnPContext.Site.Get(idBatch, p => p.Id);
+                                await contextAwareObject.PnPContext.Site.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
                             }
                             if (!contextAwareObject.PnPContext.Web.IsPropertyAvailable(p => p.Id))
                             {
-                                contextAwareObject.PnPContext.Web.Get(idBatch, p => p.Id);
+                                await contextAwareObject.PnPContext.Web.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
                             }
                             await contextAwareObject.PnPContext.ExecuteAsync(idBatch).ConfigureAwait(false);
                         }
@@ -693,7 +693,8 @@ namespace PnP.Core.Services
                 }
                 if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataUri))
                 {
-                    metadataBasedObject.Metadata.Add(PnPConstants.MetaDataUri, ApiHelper.ParseApiRequest(metadataBasedObject, $"{contextAwareObject.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUri}"));
+                    var parsedApiCall = await ApiHelper.ParseApiRequestAsync(metadataBasedObject, $"{contextAwareObject.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUri}").ConfigureAwait(false);
+                    metadataBasedObject.Metadata.Add(PnPConstants.MetaDataUri, parsedApiCall);
                 }
                 if (entity.SharePointType.Equals("SP.List") && pnpObject.HasValue("Title") && !metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
                 {

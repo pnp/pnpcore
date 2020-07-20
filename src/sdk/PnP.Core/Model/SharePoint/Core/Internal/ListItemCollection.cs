@@ -15,12 +15,12 @@ namespace PnP.Core.Model.SharePoint
             this.Parent = parent;
         }
 
-        public IListItem Add(Dictionary<string, object> values)
+        public async Task<IListItem> AddBatchAsync(Dictionary<string, object> values)
         {
-            return Add(PnPContext.CurrentBatch, values);
+            return await AddBatchAsync(PnPContext.CurrentBatch, values).ConfigureAwait(false);
         }
 
-        public IListItem Add(Batch batch, Dictionary<string, object> values)
+        public async Task<IListItem> AddBatchAsync(Batch batch, Dictionary<string, object> values)
         {
             if (values == null)
             {
@@ -32,7 +32,7 @@ namespace PnP.Core.Model.SharePoint
             // Assign field values
             newListItem.Values.SystemAddRange(values);
 
-            return newListItem.Add(batch) as ListItem;
+            return await newListItem.AddBatchAsync(batch).ConfigureAwait(false) as ListItem;
         }
 
         public async Task<IListItem> AddAsync(Dictionary<string, object> values)

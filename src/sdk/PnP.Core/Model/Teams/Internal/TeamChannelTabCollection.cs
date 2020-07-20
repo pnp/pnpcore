@@ -41,7 +41,7 @@ namespace PnP.Core.Model.Teams
 
             (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelWikiTab(name);
 
-            return newTab.Add(batch, keyValuePairs) as TeamChannelTab;
+            return newTab.AddBatchAsync(batch, keyValuePairs) as TeamChannelTab;
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace PnP.Core.Model.Teams
 
             (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelDocumentLibraryTab(name, documentLibraryUri);
 
-            return newTab.Add(batch, keyValuePairs) as TeamChannelTab;
+            return newTab.AddBatchAsync(batch, keyValuePairs) as TeamChannelTab;
         }
 
         /// <summary>

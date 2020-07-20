@@ -62,8 +62,8 @@ namespace PnP.Core.Test.Base
                 var apiCall2 = new ApiCall(WebDescriptionCsom);
 
                 var batch = context.BatchClient.EnsureBatch();
-                (web as Web).RawRequest(batch, apiCall1, HttpMethod.Post);
-                (web as Web).RawRequest(batch, apiCall2, HttpMethod.Post);
+                (web as Web).RawRequestBatchAsync(batch, apiCall1, HttpMethod.Post);
+                (web as Web).RawRequestBatchAsync(batch, apiCall2, HttpMethod.Post);
                 await context.ExecuteAsync(batch);
 
                 var response1 = batch.Requests.First().Value;

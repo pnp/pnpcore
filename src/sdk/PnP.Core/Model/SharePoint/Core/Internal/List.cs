@@ -39,7 +39,7 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Handler to construct the Add request for this list
-            AddApiCallHandler = (additionalInformation) =>
+            AddApiCallHandlerAsync = (additionalInformation) =>
             {
                 var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
 
@@ -87,7 +87,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal IList BatchGetByTitle(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
-            BaseBatchGet(batch, apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions);
+            BaseBatchGetAsync(batch, apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions);
             return this;
         }
         #endregion
@@ -141,7 +141,7 @@ namespace PnP.Core.Model.SharePoint
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
-            Request(apiCall, HttpMethod.Post);
+            RequestBatchAsync(apiCall, HttpMethod.Post);
         }
 
         public void GetItemsByCamlQuery(Batch batch, string query)
@@ -153,7 +153,7 @@ namespace PnP.Core.Model.SharePoint
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
-            Request(batch, apiCall, HttpMethod.Post);
+            RequestBatchAsync(batch, apiCall, HttpMethod.Post);
         }
 
         private ApiCall BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions)
@@ -191,11 +191,11 @@ namespace PnP.Core.Model.SharePoint
             if (!this.ArePropertiesAvailable(GetListDataAsStreamExpression))
             {
                 // Get field information via batch
-                Get(batch, GetListDataAsStreamExpression);
+                await GetBatchAsync(batch, GetListDataAsStreamExpression).ConfigureAwait(false);
                 requestToUse++;
             }
             // GetListDataAsStream request via batch
-            RawRequest(batch, apiCall, HttpMethod.Post);
+            RawRequestBatchAsync(batch, apiCall, HttpMethod.Post);
 
             // Execute the batch
             await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);

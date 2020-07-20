@@ -47,7 +47,7 @@ namespace PnP.Core.Test.SharePoint
                             { "Title", $"Item {i}" }
                         };
 
-                    myList.Items.Add(values);
+                    myList.Items.AddBatchAsync(values);
                 }
                 await context.ExecuteAsync();
 
@@ -147,7 +147,7 @@ namespace PnP.Core.Test.SharePoint
                             { "Title", $"Item {i}" }
                         };
 
-                    myList.Items.Add(values);
+                    myList.Items.AddBatchAsync(values);
                 }
                 await context.ExecuteAsync();
 

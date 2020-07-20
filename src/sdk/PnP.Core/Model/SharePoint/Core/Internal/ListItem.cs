@@ -72,7 +72,7 @@ namespace PnP.Core.Model.SharePoint
                 // Extra processing of returned json
             };
 
-            AddApiCallHandler = (keyValuePairs) =>
+            AddApiCallHandlerAsync = (keyValuePairs) =>
             {
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
@@ -158,7 +158,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     Commit = true
                 };
-                RawRequest(batch, apiCall, HttpMethod.Post);
+                RawRequestBatchAsync(batch, apiCall, HttpMethod.Post);
             }
             else
             {
@@ -201,7 +201,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     Commit = true
                 };
-                RawRequest(batch, apiCall, HttpMethod.Post);
+                RawRequestBatchAsync(batch, apiCall, HttpMethod.Post);
             }
             else
             {

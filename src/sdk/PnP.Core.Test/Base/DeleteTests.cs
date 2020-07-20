@@ -75,7 +75,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists);
+                var web = context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "DeleteListViaBatchRest";
@@ -110,7 +110,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(exceptionThrown);
 
                 // Get the lists again
-                context.Web.Get(p => p.Lists);
+                context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 Assert.IsTrue(web.Lists.Count() == listCount - 1);
@@ -225,7 +225,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var team = context.Team.Get(p => p.Channels);
+                var team = context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 string channelName = $"Channel test {new Random().Next()}";
@@ -262,7 +262,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(exceptionThrown);
 
                 // Get the channel again
-                context.Team.Get(p => p.Channels);
+                context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 // We should have one channel less

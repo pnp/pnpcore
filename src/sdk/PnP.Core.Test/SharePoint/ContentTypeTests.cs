@@ -141,10 +141,10 @@ namespace PnP.Core.Test.SharePoint
 
                 // Ensure content type are enabled for the list
                 myList.ContentTypesEnabled = true;
-                myList.Update();
+                myList.UpdateBatchAsync();
 
                 // Add existing content type (contact)
-                var addedContentType = myList.ContentTypes.AddAvailableContentType("0x0106");
+                var addedContentType = myList.ContentTypes.AddAvailableContentTypeBatchAsync("0x0106");
 
                 // send batch to server
                 await context.ExecuteAsync();
@@ -275,10 +275,10 @@ namespace PnP.Core.Test.SharePoint
 
                 // Ensure content type are enabled for the list
                 myList.ContentTypesEnabled = true;
-                myList.Update();
+                myList.UpdateBatchAsync();
 
                 // Add existing content type (contact)
-                var addedContentType = myList.ContentTypes.AddAvailableContentType("0x0106");
+                var addedContentType = myList.ContentTypes.AddAvailableContentTypeBatchAsync("0x0106");
 
                 // send batch to server
                 await context.ExecuteAsync();

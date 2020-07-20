@@ -110,7 +110,7 @@ namespace PnP.Core.Model.SharePoint
             return new { parameters }.AsExpando();
         }
 
-        internal IField AddAsXml(Batch batch, string schemaXml, AddFieldOptionsFlags options)
+        internal async Task<IField> AddAsXmlBatchAsync(Batch batch, string schemaXml, AddFieldOptionsFlags options)
         {
             // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
             // automatically provide the correct 'parent'
@@ -130,7 +130,7 @@ namespace PnP.Core.Model.SharePoint
             string json = JsonSerializer.Serialize(body, typeof(ExpandoObject));
             var apiCall = new ApiCall(endpointUrl, ApiType.SPORest, json);
 
-            Request(batch, apiCall, HttpMethod.Post);
+            await RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
 
             return this;
         }

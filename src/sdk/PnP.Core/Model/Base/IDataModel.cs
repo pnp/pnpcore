@@ -28,7 +28,7 @@ namespace PnP.Core.Model
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        TModel Get(Batch batch, params Expression<Func<TModel, object>>[] expressions);
+        Task<TModel> GetBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions);
 
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace PnP.Core.Model
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        TModel Get(params Expression<Func<TModel, object>>[] expressions);
+        Task<TModel> GetBatchAsync(params Expression<Func<TModel, object>>[] expressions);
 
         #endregion
 

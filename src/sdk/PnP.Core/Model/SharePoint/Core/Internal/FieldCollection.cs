@@ -7,12 +7,12 @@ namespace PnP.Core.Model.SharePoint
 {
     internal partial class FieldCollection
     {
-        public IField Add(string title, FieldType fieldType, FieldOptions options)
+        public async Task<IField> AddBatchAsync(string title, FieldType fieldType, FieldOptions options)
         {
-            return Add(PnPContext.CurrentBatch, title, fieldType, options);
+            return await AddBatchAsync(PnPContext.CurrentBatch, title, fieldType, options).ConfigureAwait(false);
         }
 
-        public IField Add(Batch batch, string title, FieldType fieldType, FieldOptions options)
+        public async Task<IField> AddBatchAsync(Batch batch, string title, FieldType fieldType, FieldOptions options)
         {
             if (string.IsNullOrEmpty(title))
                 throw new ArgumentNullException(nameof(title));
@@ -34,117 +34,117 @@ namespace PnP.Core.Model.SharePoint
                 { Field.FieldOptionsAdditionalInformationKey, options }
             };
 
-            return newField.Add(batch, additionalInfo) as Field;
+            return await newField.AddBatchAsync(batch, additionalInfo).ConfigureAwait(false) as Field;
         }
 
-        public IField AddCalculated(string title, FieldCalculatedOptions options = null)
+        public async Task<IField> AddCalculatedBatchAsync(string title, FieldCalculatedOptions options = null)
         {
-            return AddCalculated(PnPContext.CurrentBatch, title, options);
+            return await AddCalculatedBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddCalculated(Batch batch, string title, FieldCalculatedOptions options = null)
+        public async Task<IField> AddCalculatedBatchAsync(Batch batch, string title, FieldCalculatedOptions options = null)
         {
-            return Add(batch, title, FieldType.Calculated, options);
+            return await AddBatchAsync(batch, title, FieldType.Calculated, options).ConfigureAwait(false);
         }
 
-        public IField AddChoice(string title, FieldChoiceOptions options = null)
+        public async Task<IField> AddChoiceBatchAsync(string title, FieldChoiceOptions options = null)
         {
-            return AddChoice(PnPContext.CurrentBatch, title, options);
+            return await AddChoiceBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddChoice(Batch batch, string title, FieldChoiceOptions options = null)
+        public async Task<IField> AddChoiceBatchAsync(Batch batch, string title, FieldChoiceOptions options = null)
         {
-            return Add(batch, title, FieldType.Choice, options);
+            return await AddBatchAsync(batch, title, FieldType.Choice, options).ConfigureAwait(false);
         }
 
-        public IField AddCurrency(string title, FieldCurrencyOptions options = null)
+        public async Task<IField> AddCurrencyBatchAsync(string title, FieldCurrencyOptions options = null)
         {
-            return AddCurrency(PnPContext.CurrentBatch, title, options);
+            return await AddCurrencyBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddCurrency(Batch batch, string title, FieldCurrencyOptions options = null)
+        public async Task<IField> AddCurrencyBatchAsync(Batch batch, string title, FieldCurrencyOptions options = null)
         {
-            return Add(batch, title, FieldType.Currency, options);
+            return await AddBatchAsync(batch, title, FieldType.Currency, options).ConfigureAwait(false);
         }
 
-        public IField AddDateTime(string title, FieldDateTimeOptions options = null)
+        public async Task<IField> AddDateTimeBatchAsync(string title, FieldDateTimeOptions options = null)
         {
-            return AddDateTime(PnPContext.CurrentBatch, title, options);
+            return await AddDateTimeBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddDateTime(Batch batch, string title, FieldDateTimeOptions options = null)
+        public async Task<IField> AddDateTimeBatchAsync(Batch batch, string title, FieldDateTimeOptions options = null)
         {
-            return Add(batch, title, FieldType.DateTime, options);
+            return await AddBatchAsync(batch, title, FieldType.DateTime, options).ConfigureAwait(false);
         }
 
-        public IField AddLookup(string title, FieldLookupOptions options = null)
+        public async Task<IField> AddLookupBatchAsync(string title, FieldLookupOptions options = null)
         {
-            return AddLookup(PnPContext.CurrentBatch, title, options);
+            return await AddLookupBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddLookup(Batch batch, string title, FieldLookupOptions options = null)
+        public async Task<IField> AddLookupBatchAsync(Batch batch, string title, FieldLookupOptions options = null)
         {
-            return Add(batch, title, FieldType.Lookup, options);
+            return await AddBatchAsync(batch, title, FieldType.Lookup, options).ConfigureAwait(false);
         }
 
-        public IField AddMultiChoice(string title, FieldMultiChoiceOptions options = null)
+        public async Task<IField> AddMultiChoiceBatchAsync(string title, FieldMultiChoiceOptions options = null)
         {
-            return AddMultiChoice(PnPContext.CurrentBatch, title, options);
+            return await AddMultiChoiceBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddMultiChoice(Batch batch, string title, FieldMultiChoiceOptions options = null)
+        public async Task<IField> AddMultiChoiceBatchAsync(Batch batch, string title, FieldMultiChoiceOptions options = null)
         {
-            return Add(batch, title, FieldType.MultiChoice, options);
+            return await AddBatchAsync(batch, title, FieldType.MultiChoice, options).ConfigureAwait(false);
         }
 
-        public IField AddMultilineText(string title, FieldMultilineTextOptions options = null)
+        public async Task<IField> AddMultilineTextBatchAsync(string title, FieldMultilineTextOptions options = null)
         {
-            return AddMultilineText(PnPContext.CurrentBatch, title, options);
+            return await AddMultilineTextBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddMultilineText(Batch batch, string title, FieldMultilineTextOptions options = null)
+        public async Task<IField> AddMultilineTextBatchAsync(Batch batch, string title, FieldMultilineTextOptions options = null)
         {
-            return Add(batch, title, FieldType.Note, options);
+            return await AddBatchAsync(batch, title, FieldType.Note, options).ConfigureAwait(false);
         }
 
-        public IField AddNumber(string title, FieldNumberOptions options = null)
+        public async Task<IField> AddNumberBatchAsync(string title, FieldNumberOptions options = null)
         {
-            return AddNumber(PnPContext.CurrentBatch, title, options);
+            return await AddNumberBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddNumber(Batch batch, string title, FieldNumberOptions options = null)
+        public async Task<IField> AddNumberBatchAsync(Batch batch, string title, FieldNumberOptions options = null)
         {
-            return Add(batch, title, FieldType.Number, options);
+            return await AddBatchAsync(batch, title, FieldType.Number, options).ConfigureAwait(false);
         }
 
-        public IField AddText(string title, FieldTextOptions options = null)
+        public async Task<IField> AddTextBatchAsync(string title, FieldTextOptions options = null)
         {
-            return AddText(PnPContext.CurrentBatch, title, options);
+            return await AddTextBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddText(Batch batch, string title, FieldTextOptions options = null)
+        public async Task<IField> AddTextBatchAsync(Batch batch, string title, FieldTextOptions options = null)
         {
-            return Add(batch, title, FieldType.Number, options);
+            return await AddBatchAsync(batch, title, FieldType.Number, options).ConfigureAwait(false);
         }
 
-        public IField AddUrl(string title, FieldUrlOptions options = null)
+        public async Task<IField> AddUrlBatchAsync(string title, FieldUrlOptions options = null)
         {
-            return AddUrl(PnPContext.CurrentBatch, title, options);
+            return await AddUrlBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddUrl(Batch batch, string title, FieldUrlOptions options = null)
+        public async Task<IField> AddUrlBatchAsync(Batch batch, string title, FieldUrlOptions options = null)
         {
-            return Add(batch, title, FieldType.URL, options);
+            return await AddBatchAsync(batch, title, FieldType.URL, options).ConfigureAwait(false);
         }
 
-        public IField AddUser(string title, FieldUserOptions options = null)
+        public async Task<IField> AddUserBatchAsync(string title, FieldUserOptions options = null)
         {
-            return AddUser(PnPContext.CurrentBatch, title, options);
+            return await AddUserBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
         }
 
-        public IField AddUser(Batch batch, string title, FieldUserOptions options = null)
+        public async Task<IField> AddUserBatchAsync(Batch batch, string title, FieldUserOptions options = null)
         {
-            return Add(batch, title, FieldType.User, options);
+            return await AddBatchAsync(batch, title, FieldType.User, options).ConfigureAwait(false);
         }
 
 
@@ -266,12 +266,12 @@ namespace PnP.Core.Model.SharePoint
 
 
 
-        public IField AddFieldAsXml(string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue)
+        public async Task<IField> AddFieldAsXmlBatchAsync(string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue)
         {
-            return AddFieldAsXml(PnPContext.CurrentBatch, schemaXml, addToDefaultView, options);
+            return await AddFieldAsXmlBatchAsync(PnPContext.CurrentBatch, schemaXml, addToDefaultView, options).ConfigureAwait(false);
         }
 
-        public IField AddFieldAsXml(Batch batch, string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue)
+        public async Task<IField> AddFieldAsXmlBatchAsync(Batch batch, string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue)
         {
             if (addToDefaultView)
             {
@@ -279,7 +279,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             var newField = CreateNewAndAdd() as Field;
-            newField.AddAsXml(batch, schemaXml, options);
+            await newField.AddAsXmlBatchAsync(batch, schemaXml, options).ConfigureAwait(false);
             return newField;
         }
 
@@ -291,7 +291,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             var newField = CreateNewAndAdd() as Field;
-            await newField.AddAsXmlAsync(schemaXml, options);
+            await newField.AddAsXmlAsync(schemaXml, options).ConfigureAwait(false);
             return newField;
         }
     }

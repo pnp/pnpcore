@@ -16,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
         public FieldLink()
         {
             // Handler to construct the Add request for this content type
-            AddApiCallHandler = (keyValuePairs) =>
+            AddApiCallHandlerAsync = (keyValuePairs) =>
             {
                 // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
                 // automatically provide the correct 'parent'

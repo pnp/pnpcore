@@ -20,7 +20,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="fieldType">The type of the field to add</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField Add(string title, FieldType fieldType, FieldOptions options = null);
+        Task<IField> AddBatchAsync(string title, FieldType fieldType, FieldOptions options = null);
 
         /// <summary>
         /// Adds a new Text field to the collection
@@ -29,7 +29,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddText(string title, FieldTextOptions options = null);
+        Task<IField> AddTextBatchAsync(string title, FieldTextOptions options = null);
 
         /// <summary>
         /// Adds a new multiline Text field to the collection
@@ -38,7 +38,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddMultilineText(string title, FieldMultilineTextOptions options = null);
+        Task<IField> AddMultilineTextBatchAsync(string title, FieldMultilineTextOptions options = null);
 
         /// <summary>
         /// Adds a new URL field to the collection
@@ -47,7 +47,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddUrl(string title, FieldUrlOptions options = null);
+        Task<IField> AddUrlBatchAsync(string title, FieldUrlOptions options = null);
 
         /// <summary>
         /// Adds a new Number field to the collection
@@ -56,7 +56,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddNumber(string title, FieldNumberOptions options = null);
+        Task<IField> AddNumberBatchAsync(string title, FieldNumberOptions options = null);
 
         /// <summary>
         /// Adds a new DateTime field to the collection
@@ -65,7 +65,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddDateTime(string title, FieldDateTimeOptions options = null);
+        Task<IField> AddDateTimeBatchAsync(string title, FieldDateTimeOptions options = null);
 
         /// <summary>
         /// Adds a new Calculated field to the collection
@@ -74,7 +74,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddCalculated(string title, FieldCalculatedOptions options = null);
+        Task<IField> AddCalculatedBatchAsync(string title, FieldCalculatedOptions options = null);
 
         /// <summary>
         /// Adds a new Currency field to the collection
@@ -82,7 +82,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddCurrency(string title, FieldCurrencyOptions options = null);
+        Task<IField> AddCurrencyBatchAsync(string title, FieldCurrencyOptions options = null);
 
         /// <summary>
         /// Adds a new MultiChoice field to the collection
@@ -90,7 +90,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddMultiChoice(string title, FieldMultiChoiceOptions options = null);
+        Task<IField> AddMultiChoiceBatchAsync(string title, FieldMultiChoiceOptions options = null);
 
         /// <summary>
         /// Adds a new Choice field to the collection
@@ -98,7 +98,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddChoice(string title, FieldChoiceOptions options = null);
+        Task<IField> AddChoiceBatchAsync(string title, FieldChoiceOptions options = null);
 
         /// <summary>
         /// Adds a new Lookup field to the collection
@@ -106,7 +106,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddLookup(string title, FieldLookupOptions options = null);
+        Task<IField> AddLookupBatchAsync(string title, FieldLookupOptions options = null);
 
         /// <summary>
         /// Adds a new User field to the collection
@@ -114,7 +114,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddUser(string title, FieldUserOptions options = null);
+        Task<IField> AddUserBatchAsync(string title, FieldUserOptions options = null);
 
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="fieldType">The type of the field to add</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField Add(Batch batch, string title, FieldType fieldType, FieldOptions options = null);
+        Task<IField> AddBatchAsync(Batch batch, string title, FieldType fieldType, FieldOptions options = null);
 
         /// <summary>
         /// Adds a new Text field to the collection
@@ -134,7 +134,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddText(Batch batch, string title, FieldTextOptions options = null);
+        Task<IField> AddTextBatchAsync(Batch batch, string title, FieldTextOptions options = null);
 
         /// <summary>
         /// Adds a new multiline Text field to the collection
@@ -143,7 +143,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddMultilineText(Batch batch, string title, FieldMultilineTextOptions options = null);
+        Task<IField> AddMultilineTextBatchAsync(Batch batch, string title, FieldMultilineTextOptions options = null);
 
         /// <summary>
         /// Adds a new URL field to the collection
@@ -152,7 +152,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddUrl(Batch batch, string title, FieldUrlOptions options = null);
+        Task<IField> AddUrlBatchAsync(Batch batch, string title, FieldUrlOptions options = null);
 
         /// <summary>
         /// Adds a new Number field to the collection
@@ -161,7 +161,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddNumber(Batch batch, string title, FieldNumberOptions options = null);
+        Task<IField> AddNumberBatchAsync(Batch batch, string title, FieldNumberOptions options = null);
 
         /// <summary>
         /// Adds a new DateTime field to the collection
@@ -170,7 +170,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddDateTime(Batch batch, string title, FieldDateTimeOptions options = null);
+        Task<IField> AddDateTimeBatchAsync(Batch batch, string title, FieldDateTimeOptions options = null);
 
         /// <summary>
         /// Adds a new Calculated field to the collection
@@ -179,7 +179,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddCalculated(Batch batch, string title, FieldCalculatedOptions options = null);
+        Task<IField> AddCalculatedBatchAsync(Batch batch, string title, FieldCalculatedOptions options = null);
 
         /// <summary>
         /// Adds a new Currency field to the collection
@@ -188,7 +188,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddCurrency(Batch batch, string title, FieldCurrencyOptions options = null);
+        Task<IField> AddCurrencyBatchAsync(Batch batch, string title, FieldCurrencyOptions options = null);
 
         /// <summary>
         /// Adds a new MultiChoice field to the collection
@@ -197,7 +197,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddMultiChoice(Batch batch, string title, FieldMultiChoiceOptions options = null);
+        Task<IField> AddMultiChoiceBatchAsync(Batch batch, string title, FieldMultiChoiceOptions options = null);
 
         /// <summary>
         /// Adds a new Choice field to the collection
@@ -206,7 +206,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddChoice(Batch batch, string title, FieldChoiceOptions options = null);
+        Task<IField> AddChoiceBatchAsync(Batch batch, string title, FieldChoiceOptions options = null);
 
         /// <summary>
         /// Adds a new Lookup field to the collection
@@ -215,7 +215,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddLookup(Batch batch, string title, FieldLookupOptions options = null);
+        Task<IField> AddLookupBatchAsync(Batch batch, string title, FieldLookupOptions options = null);
 
         /// <summary>
         /// Adds a new User field to the collection
@@ -224,7 +224,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddUser(Batch batch, string title, FieldUserOptions options = null);
+        Task<IField> AddUserBatchAsync(Batch batch, string title, FieldUserOptions options = null);
 
         /// <summary>
         /// Adds a new field to the collection
@@ -335,7 +335,7 @@ namespace PnP.Core.Model.SharePoint
         /// <c>true</c> if the field is added to the default list view; otherwise, <c>false</c>.</param>
         /// <param name="options">An AddFieldOptionsFlags value that specifies the field options.</param>
         /// <returns>The added field</returns>
-        IField AddFieldAsXml(string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue);
+        Task<IField> AddFieldAsXmlBatchAsync(string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue);
 
         /// <summary>
         /// Adds a new field from its XML schema
@@ -350,7 +350,7 @@ namespace PnP.Core.Model.SharePoint
         /// <c>true</c> if the field is added to the default list view; otherwise, <c>false</c>.</param>
         /// <param name="options">An AddFieldOptionsFlags value that specifies the field options.</param>
         /// <returns>The added field</returns>
-        IField AddFieldAsXml(Batch batch, string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue);
+        Task<IField> AddFieldAsXmlBatchAsync(Batch batch, string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue);
 
         /// <summary>
         /// Adds a new field from its XML schema

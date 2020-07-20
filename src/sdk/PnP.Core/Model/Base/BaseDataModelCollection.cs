@@ -293,7 +293,7 @@ namespace PnP.Core.Model
             }
 
             // Build the API Get request, we'll require the LinqGet decoration to be set
-            var apiCallRequest = (concreteEntity as BaseDataModel<TModel>).BuildGetAPICall(concreteEntityClassInfo, default, useLinqGet: true);
+            var apiCallRequest = await (concreteEntity as BaseDataModel<TModel>).BuildGetAPICallAsync(concreteEntityClassInfo, default, useLinqGet: true).ConfigureAwait(false);
 
             string nextLink = apiCallRequest.ApiCall.Request;
             ApiType nextLinkApiType = apiCallRequest.ApiCall.Type;

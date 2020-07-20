@@ -35,7 +35,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">Title of the list</param>
         /// <param name="templateType">Template type</param>
         /// <returns>Newly added list</returns>
-        public IList Add(Batch batch, string title, ListTemplateType templateType);
+        public Task<IList> AddBatchAsync(Batch batch, string title, ListTemplateType templateType);
 
         /// <summary>
         /// Adds a new list
@@ -43,7 +43,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="title">Title of the list</param>
         /// <param name="templateType">Template type</param>
         /// <returns>Newly added list</returns>
-        public IList Add(string title, ListTemplateType templateType);
+        public Task<IList> AddBatchAsync(string title, ListTemplateType templateType);
         #endregion
     }
 }

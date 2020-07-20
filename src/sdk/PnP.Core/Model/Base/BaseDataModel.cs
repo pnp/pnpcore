@@ -98,16 +98,16 @@ namespace PnP.Core.Model
 
         #region Get
 
-        public object Get(Batch batch, params Expression<Func<object, object>>[] expressions)
+        public async Task<object> GetBatchAsync(Batch batch, params Expression<Func<object, object>>[] expressions)
         {
             var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
-            return GetInternal(batch, newExpressions);
+            return await GetInternalBatchAsync(batch, newExpressions).ConfigureAwait(false);
         }
 
-        public object Get(params Expression<Func<object, object>>[] expressions)
+        public async Task<object> GetBatchAsync(params Expression<Func<object, object>>[] expressions)
         {
             var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
-            return GetInternal(PnPContext.CurrentBatch, newExpressions);
+            return await GetInternalBatchAsync(PnPContext.CurrentBatch, newExpressions).ConfigureAwait(false);
         }
 
         public async Task<object> GetAsync(params Expression<Func<object, object>>[] expressions)
@@ -128,9 +128,9 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch add this request to</param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public virtual TModel Get(Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        public async virtual Task<TModel> GetBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
-            return GetInternal(batch, expressions);
+            return await GetInternalBatchAsync(batch, expressions).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -138,14 +138,14 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        public virtual TModel Get(params Expression<Func<TModel, object>>[] expressions)
+        public async virtual Task<TModel> GetBatchAsync(params Expression<Func<TModel, object>>[] expressions)
         {
-            return GetInternal(PnPContext.CurrentBatch, expressions);
+            return await GetInternalBatchAsync(PnPContext.CurrentBatch, expressions).ConfigureAwait(false);
         }
 
-        private TModel GetInternal(Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        private async Task<TModel> GetInternalBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
-            BaseBatchGet(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions);
+            await BaseBatchGetAsync(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return ToDynamic(this);
         }
 
@@ -185,12 +185,12 @@ namespace PnP.Core.Model
         /// Adds a domain model instance
         /// </summary>
         /// <returns>The added domain model</returns>
-        internal virtual BaseDataModel<TModel> Add(Dictionary<string, object> keyValuePairs = null)
+        internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Dictionary<string, object> keyValuePairs = null)
         {
             var call = AddApiCallHandler?.Invoke(keyValuePairs);
             if (call.HasValue)
             {
-                BaseBatchAdd(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
+                await BaseBatchAddAsync(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
             }
             else
             {
@@ -204,12 +204,12 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
         /// <returns>The added domain model</returns>
-        internal virtual BaseDataModel<TModel> Add(Batch batch, Dictionary<string, object> keyValuePairs = null)
+        internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Batch batch, Dictionary<string, object> keyValuePairs = null)
         {
             var call = AddApiCallHandler?.Invoke(keyValuePairs);
             if (call.HasValue)
             {
-                BaseBatchAdd(batch, call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
+                await BaseBatchAddAsync(batch, call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
             }
             else
             {
@@ -243,18 +243,18 @@ namespace PnP.Core.Model
         /// <summary>
         /// Updates a domain model
         /// </summary>
-        public virtual void Update()
+        public async virtual Task UpdateBatchAsync()
         {
-            Update(PnPContext.CurrentBatch);
+            await UpdateBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Updates a domain model
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
-        public virtual void Update(Batch batch)
+        public async virtual Task UpdateBatchAsync(Batch batch)
         {
-            BaseBatchUpdate(batch, MappingHandler, PostMappingHandler);
+            await BaseBatchUpdateAsync(batch, MappingHandler, PostMappingHandler).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -272,18 +272,18 @@ namespace PnP.Core.Model
         /// <summary>
         /// Deletes a domain model
         /// </summary>
-        public virtual void Delete()
+        public async virtual Task DeleteBatchAsync()
         {
-            Delete(PnPContext.CurrentBatch);
+            await DeleteBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Deletes a domain model
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
-        public virtual void Delete(Batch batch)
+        public async virtual Task DeleteBatchAsync(Batch batch)
         {
-            BaseBatchDelete(batch);
+            await BaseBatchDeleteAsync(batch).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -341,7 +341,7 @@ namespace PnP.Core.Model
             else
             {
                 // Construct the API call to make
-                var api = BuildGetAPICall(entityInfo, apiOverride);
+                var api = await BuildGetAPICallAsync(entityInfo, apiOverride).ConfigureAwait(false);
 
                 if (api.Cancelled)
                 {
@@ -356,7 +356,7 @@ namespace PnP.Core.Model
                 // Let's ensure these additional API calls's are included in a single batch
                 if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
                 {
-                    AddBatchRequestsForNonExpandableCollections(batch, entityInfo, expressions, fromJsonCasting, postMappingJson);
+                    AddBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson);
                 }
 
                 await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
@@ -370,12 +370,12 @@ namespace PnP.Core.Model
         /// <param name="expressions">Expressions needed to create the request</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual void BaseBatchGet(Batch batch, ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<TModel, object>>[] expressions)
+        internal async virtual Task BaseBatchGetAsync(Batch batch, ApiCall apiOverride = default, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null, params Expression<Func<TModel, object>>[] expressions)
         {
             // Get entity information for the entity to load
             var entityInfo = GetClassInfo(expressions);
             // Construct the API call to make
-            var api = BuildGetAPICall(entityInfo, apiOverride);
+            var api = await BuildGetAPICallAsync(entityInfo, apiOverride).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -389,7 +389,7 @@ namespace PnP.Core.Model
             if ((api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta) && !string.IsNullOrEmpty(entityInfo.SharePointType))
             {
                 // Try to get the API call, but this time using rest
-                apiRestBackup = BuildGetAPICall(entityInfo, apiOverride, true);
+                apiRestBackup = await BuildGetAPICallAsync(entityInfo, apiOverride, true).ConfigureAwait(false);
             }
 
             batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson);
@@ -398,11 +398,11 @@ namespace PnP.Core.Model
             // Let's ensure these additional API calls's are included in a single batch
             if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
-                AddBatchRequestsForNonExpandableCollections(batch, entityInfo, expressions, fromJsonCasting, postMappingJson);
+                AddBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson);
             }
         }
 
-        internal ApiCallRequest BuildGetAPICall(EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false)
+        internal async Task<ApiCallRequest> BuildGetAPICallAsync(EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false)
         {
             // Usefull links:
             // - https://www.odata.org/documentation/odata-version-3-0/
@@ -431,11 +431,11 @@ namespace PnP.Core.Model
 
             if (useGraph)
             {
-                return BuildGetAPICallGraph(entity, apiOverride, useLinqGet);
+                return await BuildGetAPICallGraphAsync(entity, apiOverride, useLinqGet).ConfigureAwait(false);
             }
             else
             {
-                return BuildGetAPICallRest(entity, apiOverride, useLinqGet);
+                return await BuildGetAPICallRestAsync(entity, apiOverride, useLinqGet).ConfigureAwait(false);
             }
         }
 
@@ -444,7 +444,7 @@ namespace PnP.Core.Model
             Log.LogInformation($"API call {api.ApiCall.Request} cancelled: {api.CancellationReason}");
         }
 
-        private ApiCallRequest BuildGetAPICallRest(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
+        private async Task<ApiCallRequest> BuildGetAPICallRestAsync(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
         {
             string getApi = useLinqGet ? entity.SharePointLinqGet : entity.SharePointGet;
 
@@ -512,7 +512,7 @@ namespace PnP.Core.Model
             }
 
             // Parse tokens in the base api call
-            baseApiCall = ApiHelper.ParseApiCall(this, baseApiCall);
+            baseApiCall = await ApiHelper.ParseApiCallAsync(this, baseApiCall).ConfigureAwait(false);
 
             sb.Append(baseApiCall);
 
@@ -604,7 +604,7 @@ namespace PnP.Core.Model
             }
         }
 
-        private ApiCallRequest BuildGetAPICallGraph(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
+        private async Task<ApiCallRequest> BuildGetAPICallGraphAsync(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
         {
             string getApi = useLinqGet ? entity.GraphLinqGet : entity.GraphGet;
 
@@ -753,16 +753,16 @@ namespace PnP.Core.Model
                 }
 
                 // Ensure tokens in the base url are replaced
-                baseApiCall = TokenHandler.ResolveTokensAsync(this, getApi, PnPContext).GetAwaiter().GetResult();
+                baseApiCall = await TokenHandler.ResolveTokensAsync(this, getApi, PnPContext).ConfigureAwait(false);
             }
             else
             {
                 // Ensure tokens in the base url are replaced
-                baseApiCall = TokenHandler.ResolveTokensAsync(this, apiOverride.Request, PnPContext).GetAwaiter().GetResult();
+                baseApiCall = await TokenHandler.ResolveTokensAsync(this, apiOverride.Request, PnPContext).ConfigureAwait(false);
             }
 
             // Parse tokens in the base api call
-            baseApiCall = ApiHelper.ParseApiCall(this, baseApiCall);
+            baseApiCall = await ApiHelper.ParseApiCallAsync(this, baseApiCall).ConfigureAwait(false);
 
             sb.Append(baseApiCall);
 
@@ -790,7 +790,7 @@ namespace PnP.Core.Model
             return call;
         }
 
-        private void AddBatchRequestsForNonExpandableCollections(Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
+        private async Task AddBatchRequestsForNonExpandableCollectionsAsync(Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
         {
             ApiType apiType = ApiType.Graph;
 
@@ -826,7 +826,9 @@ namespace PnP.Core.Model
 
                         if (addExpandableCollection)
                         {
-                            ApiCall extraApiCall = new ApiCall(ApiHelper.ParseApiRequest(this, nonExpandableField.GraphGet), apiType, receivingProperty: nonExpandableField.Name);
+                            var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(this, nonExpandableField.GraphGet).ConfigureAwait(false);
+
+                            ApiCall extraApiCall = new ApiCall(parsedApiRequest, apiType, receivingProperty: nonExpandableField.Name);
                             batch.Add(this, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson);
                         }
                     }
@@ -869,9 +871,9 @@ namespace PnP.Core.Model
         /// <param name="postApiCall">Api call to execute</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual void BaseBatchAdd(ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal async virtual Task BaseBatchAddAsync(ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
-            BaseBatchAdd(PnPContext.CurrentBatch, postApiCall, fromJsonCasting, postMappingJson);
+            await BaseBatchAddAsync(PnPContext.CurrentBatch, postApiCall, fromJsonCasting, postMappingJson).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -881,7 +883,7 @@ namespace PnP.Core.Model
         /// <param name="postApiCall">Api call to execute</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual void BaseBatchAdd(Batch batch, ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal async virtual Task BaseBatchAddAsync(Batch batch, ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -890,7 +892,7 @@ namespace PnP.Core.Model
             postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
 
             // Ensure token replacement is done
-            postApiCall.Request = TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext).GetAwaiter().GetResult();
+            postApiCall.Request = await TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext).ConfigureAwait(false);
 
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
@@ -918,7 +920,7 @@ namespace PnP.Core.Model
             postApiCall = PrefixAddApiCall(postApiCall, entityInfo);
 
             // Ensure token replacement is done
-            postApiCall.Request = await TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext);
+            postApiCall.Request = await TokenHandler.ResolveTokensAsync(this, postApiCall.Request, PnPContext).ConfigureAwait(false);
 
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
@@ -973,9 +975,9 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual void BaseBatchUpdate(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal async virtual Task BaseBatchUpdateAsync(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
-            BaseBatchUpdate(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson);
+            await BaseBatchUpdateAsync(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -984,12 +986,12 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual void BaseBatchUpdate(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal async virtual Task BaseBatchUpdateAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = BuildUpdateAPICall(entityInfo);
+            var api = await BuildUpdateAPICallAsync(entityInfo).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -1011,7 +1013,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = BuildUpdateAPICall(entityInfo);
+            var api = await BuildUpdateAPICallAsync(entityInfo).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -1025,7 +1027,7 @@ namespace PnP.Core.Model
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
-        internal ApiCallRequest BuildUpdateAPICall(EntityInfo entity)
+        internal async Task<ApiCallRequest> BuildUpdateAPICallAsync(EntityInfo entity)
         {
             bool useGraph = false;
 
@@ -1037,15 +1039,15 @@ namespace PnP.Core.Model
 
             if (useGraph)
             {
-                return BuildUpdateAPICallGraph(entity);
+                return await BuildUpdateAPICallGraphAsync(entity).ConfigureAwait(false);
             }
             else
             {
-                return BuildUpdateAPICallRest(entity);
+                return await BuildUpdateAPICallRestAsync(entity).ConfigureAwait(false);
             }
         }
 
-        internal ApiCallRequest BuildUpdateAPICallGraph(EntityInfo entity)
+        internal async Task<ApiCallRequest> BuildUpdateAPICallGraphAsync(EntityInfo entity)
         {
             ApiType apiType = ApiType.Graph;
 
@@ -1145,7 +1147,7 @@ namespace PnP.Core.Model
                 });
 
             // Prepare the variable to contain the target URL for the update operation
-            var updateUrl = ApiHelper.ParseApiCall(this, entity.GraphUpdate);
+            var updateUrl = await ApiHelper.ParseApiCallAsync(this, entity.GraphUpdate).ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(updateUrl, apiType, jsonUpdateMessage)
@@ -1172,7 +1174,7 @@ namespace PnP.Core.Model
         }
 
 
-        internal ApiCallRequest BuildUpdateAPICallRest(EntityInfo entity)
+        internal async Task<ApiCallRequest> BuildUpdateAPICallRestAsync(EntityInfo entity)
         {
             IEnumerable<EntityFieldInfo> fields = entity.Fields;
 
@@ -1221,7 +1223,7 @@ namespace PnP.Core.Model
                 new JsonSerializerOptions { WriteIndented = true });
 
             // Prepare the variable to contain the target URL for the update operation
-            var updateUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}");
+            var updateUrl = await ApiHelper.ParseApiCallAsync(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}").ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage)
@@ -1263,9 +1265,9 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual void BaseBatchDelete(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal async virtual void BaseBatchDeleteAsync(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
-            BaseBatchDelete(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson);
+            await BaseBatchDeleteAsync(PnPContext.CurrentBatch, fromJsonCasting, postMappingJson).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1274,12 +1276,12 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
-        internal virtual void BaseBatchDelete(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        internal async virtual Task BaseBatchDeleteAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = BuildDeleteAPICall(entityInfo);
+            var api = await BuildDeleteAPICallAsync(entityInfo).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -1302,7 +1304,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = BuildDeleteAPICall(entityInfo);
+            var api = await BuildDeleteAPICallAsync(entityInfo).ConfigureAwait(false);
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
@@ -1317,7 +1319,7 @@ namespace PnP.Core.Model
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
-        internal ApiCallRequest BuildDeleteAPICall(EntityInfo entity)
+        internal async Task<ApiCallRequest> BuildDeleteAPICallAsync(EntityInfo entity)
         {
             bool useGraph = false;
 
@@ -1329,15 +1331,15 @@ namespace PnP.Core.Model
 
             if (useGraph)
             {
-                return BuildDeleteAPICallGraph(entity);
+                return await BuildDeleteAPICallGraphAsync(entity).ConfigureAwait(false);
             }
             else
             {
-                return BuildDeleteAPICallRest(entity);
+                return await BuildDeleteAPICallRestAsync(entity).ConfigureAwait(false);
             }
         }
 
-        internal ApiCallRequest BuildDeleteAPICallGraph(EntityInfo entity)
+        internal async Task<ApiCallRequest> BuildDeleteAPICallGraphAsync(EntityInfo entity)
         {
             ApiType apiType = ApiType.Graph;
 
@@ -1357,7 +1359,7 @@ namespace PnP.Core.Model
             }
 
             // Prepare the variable to contain the target URL for the delete operation
-            var deleteUrl = ApiHelper.ParseApiCall(this, entity.GraphDelete);
+            var deleteUrl = await ApiHelper.ParseApiCallAsync(this, entity.GraphDelete).ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(deleteUrl, apiType));
@@ -1369,10 +1371,10 @@ namespace PnP.Core.Model
             return call;
         }
 
-        internal ApiCallRequest BuildDeleteAPICallRest(EntityInfo entity)
+        internal async Task<ApiCallRequest> BuildDeleteAPICallRestAsync(EntityInfo entity)
         {
             // Prepare the variable to contain the target URL for the delete operation
-            var deleteUrl = ApiHelper.ParseApiCall(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}");
+            var deleteUrl = await ApiHelper.ParseApiCallAsync(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}").ConfigureAwait(false);
 
             // Create ApiCall instance and call the override option if needed
             var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.SPORest));
@@ -1391,9 +1393,9 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal void Request(ApiCall apiCall, HttpMethod method)
+        internal async Task RequestBatchAsync(ApiCall apiCall, HttpMethod method)
         {
-            Request(PnPContext.CurrentBatch, apiCall, method);
+            await RequestBatchAsync(PnPContext.CurrentBatch, apiCall, method).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1402,7 +1404,7 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal void Request(Batch batch, ApiCall apiCall, HttpMethod method)
+        internal async Task RequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -1417,7 +1419,7 @@ namespace PnP.Core.Model
             }
 
             // Ensure token replacement is done
-            apiCall.Request = TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).GetAwaiter().GetResult();
+            apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
 
             // Add the request to the batch
             batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
@@ -1464,9 +1466,9 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal void RawRequest(ApiCall apiCall, HttpMethod method)
+        internal async Task RawRequestBatchAsync(ApiCall apiCall, HttpMethod method)
         {
-            Request(PnPContext.CurrentBatch, apiCall, method);
+            await RawRequestBatchAsync(PnPContext.CurrentBatch, apiCall, method).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1475,7 +1477,7 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal void RawRequest(Batch batch, ApiCall apiCall, HttpMethod method)
+        internal async Task RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method)
         {
             // Mark request as raw
             apiCall.RawRequest = true;
@@ -1495,11 +1497,11 @@ namespace PnP.Core.Model
             // Ensure token replacement is done
             if (apiCall.Type == ApiType.CSOM)
             {
-                apiCall.XmlBody = TokenHandler.ResolveTokensAsync(this, apiCall.XmlBody, PnPContext).GetAwaiter().GetResult();
+                apiCall.XmlBody = await TokenHandler.ResolveTokensAsync(this, apiCall.XmlBody, PnPContext).ConfigureAwait(false);
             }
             else
             {
-                apiCall.Request = TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).GetAwaiter().GetResult();
+                apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
             }
 
             // Add the request to the batch

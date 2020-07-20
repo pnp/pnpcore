@@ -95,7 +95,7 @@ namespace PnP.Core.Model.SharePoint
             var feature = CreateNewAndAdd() as Feature;
             feature.DefinitionId = id;
 
-            return feature.Add(batch) as Feature;
+            return feature.AddBatchAsync(batch) as Feature;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace PnP.Core.Model.Teams
                 ContentType = ChatMessageContentType.Text
             };
 
-            return newChannelChatMessage.Add(batch) as TeamChatMessage;
+            return newChannelChatMessage.AddBatchAsync(batch) as TeamChatMessage;
         }
 
         /// <summary>

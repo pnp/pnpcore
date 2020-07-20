@@ -51,7 +51,7 @@ namespace PnP.Core.Model.Teams
             newChannel.DisplayName = name;
             newChannel.Description = description;
 
-            return newChannel.Add(batch) as TeamChannel;
+            return newChannel.AddBatchAsync(batch) as TeamChannel;
         }
 
         /// <summary>

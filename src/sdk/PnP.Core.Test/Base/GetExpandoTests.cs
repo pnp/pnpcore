@@ -37,7 +37,7 @@ namespace PnP.Core.Test.Base
                 // Disable graph first as we're testing the REST path here
                 context.GraphFirst = false;
 
-                var web = context.Web.Get(p => p.Lists);
+                var web = context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "GetListAndListItemViaRest";
@@ -77,7 +77,7 @@ namespace PnP.Core.Test.Base
                 // Disable graph first as we're testing the REST path here
                 context.GraphFirst = false;
 
-                var web = context.Web.Get(p => p.Lists);
+                var web = context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "GetListPropertiesAndListItemViaRest";
@@ -122,7 +122,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists);
+                var web = context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "GetListAndListItemViaGraph";
@@ -159,7 +159,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists);
+                var web = context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "GetListPropertiesAndListItemViaGraph";
@@ -199,7 +199,7 @@ namespace PnP.Core.Test.Base
             // Disable graph first as we're testing the REST path here
             context.GraphFirst = false;
 
-            var web = context.Web.Get(p => p.Lists);
+            var web = context.Web.GetBatchAsync(p => p.Lists);
             context.ExecuteAsync().Wait();
 
             var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));

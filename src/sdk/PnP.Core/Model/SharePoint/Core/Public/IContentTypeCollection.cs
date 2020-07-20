@@ -22,7 +22,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="description">Description of the content type</param>
         /// <param name="group">Group of the content type</param>
         /// <returns>The newly added content type</returns>
-        IContentType Add(string id, string name, string description = null, string group = null);
+        Task<IContentType> AddBatchAsync(string id, string name, string description = null, string group = null);
 
         /// <summary>
         /// Add a content type
@@ -35,7 +35,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="description">Description of the content type</param>
         /// <param name="group">Group of the content type</param>
         /// <returns>The newly added content type</returns>
-        IContentType Add(Batch batch, string id, string name, string description = null, string group = null);
+        Task<IContentType> AddBatchAsync(Batch batch, string id, string name, string description = null, string group = null);
 
         /// <summary>
         /// Add a content type
@@ -56,7 +56,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="id">Id of the content type</param>
         /// <returns>The newly added content type</returns>
-        IContentType AddAvailableContentType(string id);
+        Task<IContentType> AddAvailableContentTypeBatchAsync(string id);
 
         /// <summary>
         /// Add an existing content type
@@ -64,7 +64,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch"><see cref="Batch"/> to use</param>
         /// <param name="id">Id of the content type</param>
         /// <returns>The newly added content type</returns>
-        IContentType AddAvailableContentType(Batch batch, string id);
+        Task<IContentType> AddAvailableContentTypeBatchAsync(Batch batch, string id);
 
         /// <summary>
         /// Add an existing content type

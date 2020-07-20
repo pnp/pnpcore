@@ -73,7 +73,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists);
+                var web = context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "Documents";
@@ -95,7 +95,7 @@ namespace PnP.Core.Test.Base
                     Assert.IsFalse(myList.HasChanged("Description"));
 
                     // load again from server
-                    context.Web.Get(p => p.Lists);
+                    context.Web.GetBatchAsync(p => p.Lists);
                     await context.ExecuteAsync();
 
                     // and verify again
@@ -211,7 +211,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var team = context.Team.Get(p => p.Channels);
+                var team = context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 // Find first updatable channel
@@ -236,7 +236,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(channelToUpdate.HasChanged("Description"));
 
                 // load again from server
-                context.Team.Get(p => p.Channels);
+                context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 // and verify again

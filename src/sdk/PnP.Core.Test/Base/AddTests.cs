@@ -63,7 +63,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists);
+                var web = context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "AddListViaBatchRest";
@@ -85,7 +85,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.Count() == listCount + 1);
 
                 // Load the list again
-                context.Web.Get(p => p.Lists);
+                context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 // Check if we still have the same amount of lists
@@ -208,7 +208,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var team = context.Team.Get(p => p.Channels);
+                var team = context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 // Channel names have to be unique

@@ -256,7 +256,7 @@ namespace PnP.Core.Model
                     var expressions = EntityManager.Instance.GetEntityKeyExpressions(parent);
 
                     // Enqueue the actual request in the dedicated batch
-                    gettableParent.Get(ensureParentBatch, expressions);
+                    await gettableParent.GetBatchAsync(ensureParentBatch, expressions).ConfigureAwait(false);
 
                     // Make the actual request
                     await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(true);

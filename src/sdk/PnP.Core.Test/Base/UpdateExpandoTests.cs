@@ -90,7 +90,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists);
+                var web = context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "UpdateValuesPropertyViaBatchRest";
@@ -116,7 +116,7 @@ namespace PnP.Core.Test.Base
                 }
 
                 // get items from the list
-                myList.Get(p => p.Items);
+                myList.GetBatchAsync(p => p.Items);
                 await context.ExecuteAsync();
 
                 // grab first item
@@ -133,7 +133,7 @@ namespace PnP.Core.Test.Base
                     await context.ExecuteAsync();
 
                     // get items again from the list
-                    myList.Get(p => p.Items);
+                    myList.GetBatchAsync(p => p.Items);
                     await context.ExecuteAsync();
                     firstItem = myList.Items.FirstOrDefault();
 

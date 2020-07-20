@@ -104,7 +104,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.Get(p => p.Lists);
+                var web = context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "DeleteListItemViaBatchRest";
@@ -130,7 +130,7 @@ namespace PnP.Core.Test.Base
                 }
 
                 // get items from the list
-                myList.Get(p => p.Items);
+                myList.GetBatchAsync(p => p.Items);
                 await context.ExecuteAsync();
 
                 // grab first item
@@ -168,7 +168,7 @@ namespace PnP.Core.Test.Base
                     Assert.IsTrue(exceptionThrown);
 
                     // get items from the list
-                    myList.Get(p => p.Items);
+                    myList.GetBatchAsync(p => p.Items);
                     await context.ExecuteAsync();
 
                     Assert.IsTrue(myList.Items.Count() == itemCount - 1);

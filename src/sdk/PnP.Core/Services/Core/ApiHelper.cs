@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Model;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Services
 {
@@ -7,7 +8,7 @@ namespace PnP.Core.Services
     /// </summary>
     internal static class ApiHelper
     {
-        internal static string ParseApiCall(TransientObject pnpObject, string apiCall)
+        internal async static Task<string> ParseApiCallAsync(TransientObject pnpObject, string apiCall)
         {
             // No tokens, so nothing to do parse
             if (!apiCall.Contains("{"))
@@ -16,17 +17,12 @@ namespace PnP.Core.Services
             }
 
             // Parse api call to replace tokens
-            apiCall = ParseApiRequest(pnpObject as IMetadataExtensible, apiCall);
-
-            return apiCall;
+            return await ParseApiRequestAsync(pnpObject as IMetadataExtensible, apiCall).ConfigureAwait(false);
         }
 
-        internal static string ParseApiRequest(IMetadataExtensible pnpObject, string input)
+        internal async static Task<string> ParseApiRequestAsync(IMetadataExtensible pnpObject, string input)
         {
-            var result = TokenHandler.ResolveTokensAsync(pnpObject, input)
-                .GetAwaiter().GetResult();
-
-            return result;
+            return await TokenHandler.ResolveTokensAsync(pnpObject, input).ConfigureAwait(false);
         }
     }
 }

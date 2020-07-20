@@ -25,12 +25,12 @@ namespace PnP.Core.Model.SharePoint
             return BatchGetByTitle(PnPContext.CurrentBatch, title, expressions);
         }
 
-        public IList Add(string title, ListTemplateType templateType)
+        public async Task<IList> AddBatchAsync(string title, ListTemplateType templateType)
         {
-            return Add(PnPContext.CurrentBatch, title, templateType);
+            return await AddBatchAsync(PnPContext.CurrentBatch, title, templateType).ConfigureAwait(false);
         }
 
-        public IList Add(Batch batch, string title, ListTemplateType templateType)
+        public async Task<IList> AddBatchAsync(Batch batch, string title, ListTemplateType templateType)
         {
             if (title == null)
             {
@@ -47,7 +47,7 @@ namespace PnP.Core.Model.SharePoint
             newList.Title = title;
             newList.TemplateType = templateType;
 
-            return newList.Add(batch) as List;
+            return await newList.AddBatchAsync(batch).ConfigureAwait(false) as List;
         }
 
         public async Task<IList> AddAsync(string title, ListTemplateType templateType)
