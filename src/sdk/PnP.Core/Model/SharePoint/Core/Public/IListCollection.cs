@@ -17,7 +17,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="title">Title of the list to get</param>
         /// <returns>Loaded list, null is not found</returns>
-        public IList BatchGetByTitle(string title, params Expression<Func<IList, object>>[] expressions);
+        public Task<IList> BatchGetByTitleAsync(string title, params Expression<Func<IList, object>>[] expressions);
 
 
         /// <summary>

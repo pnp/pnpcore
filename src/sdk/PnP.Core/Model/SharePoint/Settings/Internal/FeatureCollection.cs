@@ -29,12 +29,12 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public void Disable(Guid id)
+        public async Task DisableBatchAsync(Guid id)
         {
-            Disable(PnPContext.CurrentBatch, id);
+            await DisableBatchAsync(PnPContext.CurrentBatch, id).ConfigureAwait(false);
         }
 
-        public void Disable(Batch batch, Guid id)
+        public async Task DisableBatchAsync(Batch batch, Guid id)
         {
             if (id == null)
             {
@@ -51,7 +51,7 @@ namespace PnP.Core.Model.SharePoint
             if (feature != default)
             {
                 var ftr = feature as Feature;
-                ftr.RemoveAsync().ConfigureAwait(false);
+                await ftr.RemoveBatchAsync(batch).ConfigureAwait(false);
                 this.items.Remove(feature);
             }
         }
@@ -75,12 +75,12 @@ namespace PnP.Core.Model.SharePoint
             return await feature.AddAsync().ConfigureAwait(false) as Feature;
         }
 
-        public IFeature Enable(Guid id)
+        public async Task<IFeature> EnableBatchAsync(Guid id)
         {
-            return Enable(PnPContext.CurrentBatch, id);
+            return await EnableBatchAsync(PnPContext.CurrentBatch, id).ConfigureAwait(false);
         }
 
-        public IFeature Enable(Batch batch, Guid id)
+        public async Task<IFeature> EnableBatchAsync(Batch batch, Guid id)
         {
             if (id == null)
             {
@@ -95,7 +95,7 @@ namespace PnP.Core.Model.SharePoint
             var feature = CreateNewAndAdd() as Feature;
             feature.DefinitionId = id;
 
-            return feature.AddBatchAsync(batch) as Feature;
+            return await feature.AddBatchAsync(batch).ConfigureAwait(false) as Feature;
         }
     }
 }

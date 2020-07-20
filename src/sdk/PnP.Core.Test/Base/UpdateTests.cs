@@ -73,7 +73,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.GetBatchAsync(p => p.Lists);
+                var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "Documents";
@@ -87,7 +87,7 @@ namespace PnP.Core.Test.Base
                     myList.Description = newDescription;
                     Assert.IsTrue(myList.HasChanged("Description"));
 
-                    myList.Update();
+                    await myList.UpdateBatchAsync();
                     await context.ExecuteAsync();
 
                     // Verify model status after update
@@ -95,7 +95,7 @@ namespace PnP.Core.Test.Base
                     Assert.IsFalse(myList.HasChanged("Description"));
 
                     // load again from server
-                    context.Web.GetBatchAsync(p => p.Lists);
+                    await context.Web.GetBatchAsync(p => p.Lists);
                     await context.ExecuteAsync();
 
                     // and verify again
@@ -104,7 +104,7 @@ namespace PnP.Core.Test.Base
 
                     // reset description back to original value
                     myList.Description = currentDescription;
-                    myList.Update();
+                    await myList.UpdateBatchAsync();
                     await context.ExecuteAsync();
                 }
                 else
@@ -121,7 +121,7 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
-                var web = context.Web.Get(batch, p => p.Lists);
+                var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "Documents";
@@ -136,7 +136,7 @@ namespace PnP.Core.Test.Base
                     Assert.IsTrue(myList.HasChanged("Description"));
 
                     batch = context.BatchClient.EnsureBatch();
-                    myList.Update(batch);
+                    await myList.UpdateBatchAsync(batch);
                     await context.ExecuteAsync(batch);
 
                     // Verify model status after update
@@ -145,7 +145,7 @@ namespace PnP.Core.Test.Base
 
                     // load again from server
                     batch = context.BatchClient.EnsureBatch();
-                    context.Web.Get(batch, p => p.Lists);
+                    await context.Web.GetBatchAsync(batch, p => p.Lists);
                     await context.ExecuteAsync(batch);
 
                     // and verify again
@@ -155,7 +155,7 @@ namespace PnP.Core.Test.Base
                     // reset description back to original value
                     myList.Description = currentDescription;
                     batch = context.BatchClient.EnsureBatch();
-                    myList.Update(batch);
+                    await myList.UpdateBatchAsync(batch);
                     await context.ExecuteAsync(batch);
                 }
                 else
@@ -211,7 +211,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var team = context.Team.GetBatchAsync(p => p.Channels);
+                var team = await context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 // Find first updatable channel
@@ -219,7 +219,7 @@ namespace PnP.Core.Test.Base
 
                 if (channelToUpdate == null)
                 {
-                    channelToUpdate = team.Channels.Add($"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
+                    channelToUpdate = await team.Channels.AddBatchAsync($"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync();
                 }
 
@@ -228,7 +228,7 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(channelToUpdate.HasChanged("Description"));
 
-                channelToUpdate.Update();
+                await channelToUpdate.UpdateBatchAsync();
                 await context.ExecuteAsync();
 
                 // Verify model status after update
@@ -236,7 +236,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(channelToUpdate.HasChanged("Description"));
 
                 // load again from server
-                context.Team.GetBatchAsync(p => p.Channels);
+                await context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 // and verify again
@@ -253,7 +253,7 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
-                var team = context.Team.Get(batch, p => p.Channels);
+                var team = await context.Team.GetBatchAsync(batch, p => p.Channels);
                 await context.ExecuteAsync(batch);
 
                 // Find first updatable channel
@@ -262,7 +262,7 @@ namespace PnP.Core.Test.Base
                 if (channelToUpdate == null)
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    channelToUpdate = team.Channels.Add(batch, $"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
+                    channelToUpdate = await team.Channels.AddBatchAsync(batch, $"Channel test {new Random().Next()}", "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync(batch);
                 }
 
@@ -272,7 +272,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(channelToUpdate.HasChanged("Description"));
 
                 batch = context.BatchClient.EnsureBatch();
-                channelToUpdate.Update(batch);
+                await channelToUpdate.UpdateBatchAsync(batch);
                 await context.ExecuteAsync(batch);
 
                 // Verify model status after update
@@ -281,7 +281,7 @@ namespace PnP.Core.Test.Base
 
                 // load again from server
                 batch = context.BatchClient.EnsureBatch();
-                context.Team.Get(batch, p => p.Channels);
+                await context.Team.GetBatchAsync(batch, p => p.Channels);
                 await context.ExecuteAsync(batch);
 
                 // and verify again

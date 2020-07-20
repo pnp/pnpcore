@@ -22,13 +22,13 @@ namespace PnP.Core.Model.Teams
         /// <param name="batch">Batch to use</param>
         /// <param name="name">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage Add(Batch batch, string body);
+        public Task<ITeamChatMessage> AddBatchAsync(Batch batch, string body);
 
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
         /// <param name="name">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage Add(string body);
+        public Task<ITeamChatMessage> AddBatchAsync(string body);
     }
 }

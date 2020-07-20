@@ -34,9 +34,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support RenderListDataAsStream method on lists - basic implementation #81 [jansenbe - Bert Jansen]
 - Add support for calling client.svc (CSOM) endpoint #86 [jansenbe - Bert Jansen]
 - Added SystemUpdate() and UpdateOverwriteVersion() methods on the ListItem model (uses CSOM) [jansenbe - Bert Jansen]
+- Async LINQ support [PaoloPia - Paolo Pialorsi]
 
 ### Changed
 
 - Documentation updates [JarbasHorst - Jarbas Horst]
 - EnsurePropertiesAsync takes in account .Include (recursive) usage [jansenbe - Bert Jansen]
 - Documentation updates [Ashikpaul - Ashik Paul]
+- Moved to complete async internal implementation [jansenbe - Bert Jansen]

@@ -111,7 +111,7 @@ namespace PnP.Core.QueryModel
 
                     // Build the Graph request URL
                     var requestUrl = $"{entityInfo.GraphLinqGet}?{query.ToQueryString(ODataTargetPlatform.Graph, urlEncode: false)}";
-                    requestUrl = await Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context);
+                    requestUrl = await Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context).ConfigureAwait(false);
 
                     // Add the request to the current batch
                     batchRequestId = context.CurrentBatch.Add(
@@ -143,7 +143,7 @@ namespace PnP.Core.QueryModel
 
                     // Build the SPO REST request URL
                     var requestUrl = $"{context.Uri.ToString().TrimEnd('/')}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
-                    requestUrl = await Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl);
+                    requestUrl = await Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).ConfigureAwait(false);
 
                     // Add the request to the current batch
                     batchRequestId = context.CurrentBatch.Add(
@@ -163,7 +163,7 @@ namespace PnP.Core.QueryModel
                 }
 
                 // and execute the request
-                await context.ExecuteAsync();
+                await context.ExecuteAsync().ConfigureAwait(false);
 
                 // Get the resulting property from the parent object
                 var resultValue = parent.GetPublicInstancePropertyValue(memberName) as IEnumerable<TModel>;

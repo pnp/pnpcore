@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
 {
     internal partial class ListCollection
     {
-        public IList BatchGetByTitle(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
+        public async Task<IList> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
             // Was this list previously loaded?
             if (!(items.FirstOrDefault(p => p.IsPropertyAvailable(p => p.Title) && p.Title.Equals(title, StringComparison.InvariantCultureIgnoreCase)) is List listToLoad))
@@ -17,12 +17,12 @@ namespace PnP.Core.Model.SharePoint
                 listToLoad = CreateNewAndAdd() as List;
             }
 
-            return listToLoad.BatchGetByTitle(batch, title, expressions);
+            return await listToLoad.BatchGetByTitleAsync(batch, title, expressions).ConfigureAwait(false);
         }
 
-        public IList BatchGetByTitle(string title, params Expression<Func<IList, object>>[] expressions)
+        public async Task<IList> BatchGetByTitleAsync(string title, params Expression<Func<IList, object>>[] expressions)
         {
-            return BatchGetByTitle(PnPContext.CurrentBatch, title, expressions);
+            return await BatchGetByTitleAsync(PnPContext.CurrentBatch, title, expressions).ConfigureAwait(false);
         }
 
         public async Task<IList> AddBatchAsync(string title, ListTemplateType templateType)

@@ -38,7 +38,7 @@ namespace PnP.Core.Model.Teams
         /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
-        public ITeamChannel Add(Batch batch, string name, string description = null)
+        public async Task<ITeamChannel> AddBatchAsync(Batch batch, string name, string description = null)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -51,7 +51,7 @@ namespace PnP.Core.Model.Teams
             newChannel.DisplayName = name;
             newChannel.Description = description;
 
-            return newChannel.AddBatchAsync(batch) as TeamChannel;
+            return await newChannel.AddBatchAsync(batch).ConfigureAwait(false) as TeamChannel;
         }
 
         /// <summary>
@@ -60,9 +60,9 @@ namespace PnP.Core.Model.Teams
         /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
-        public ITeamChannel Add(string name, string description = null)
+        public async Task<ITeamChannel> AddBatchAsync(string name, string description = null)
         {
-            return Add(PnPContext.CurrentBatch, name, description);
+            return await AddBatchAsync(PnPContext.CurrentBatch, name, description).ConfigureAwait(false);
         }
 
     }

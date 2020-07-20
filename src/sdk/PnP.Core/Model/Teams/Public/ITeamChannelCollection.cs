@@ -25,7 +25,7 @@ namespace PnP.Core.Model.Teams
         /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
-        public ITeamChannel Add(Batch batch, string name, string description = null);
+        public Task<ITeamChannel> AddBatchAsync(Batch batch, string name, string description = null);
 
         /// <summary>
         /// Adds a new channel
@@ -33,7 +33,7 @@ namespace PnP.Core.Model.Teams
         /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
-        public ITeamChannel Add(string name, string description = null);
+        public Task<ITeamChannel> AddBatchAsync(string name, string description = null);
 
     }
 }

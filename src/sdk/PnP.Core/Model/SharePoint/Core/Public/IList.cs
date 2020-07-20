@@ -110,7 +110,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Defines a list of default values for the Fields of the List Instance
         /// </summary>
-        public Dictionary<string, string> FieldDefaults { get; set; }
+        public Dictionary<string, string> FieldDefaults { get; }
 
         /// <summary>
         /// Defines if the current list or library has to be included in crawling, optional attribute.
@@ -221,14 +221,14 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQuery(string query);
+        public Task GetItemsByCamlQueryBatchAsync(string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQuery(CamlQueryOptions queryOptions);
+        public Task GetItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -236,7 +236,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="query">query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQuery(Batch batch, string query);
+        public Task GetItemsByCamlQueryBatchAsync(Batch batch, string query);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -244,7 +244,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to </param>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
-        public void GetItemsByCamlQuery(Batch batch, CamlQueryOptions queryOptions);
+        public Task GetItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query and the RenderListDataAsStream API

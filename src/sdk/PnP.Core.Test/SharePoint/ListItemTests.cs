@@ -55,7 +55,7 @@ namespace PnP.Core.Test.SharePoint
                             { "Title", $"Item {i}" }
                         };
 
-                    myList.Items.AddBatchAsync(values);
+                    await myList.Items.AddBatchAsync(values);
                 }
                 await context.ExecuteAsync();
 
@@ -154,7 +154,7 @@ namespace PnP.Core.Test.SharePoint
                             { "Title", $"Item {i}" }
                         };
 
-                    myList.Items.AddBatchAsync(values);
+                    await myList.Items.AddBatchAsync(values);
                 }
                 await context.ExecuteAsync();
 
@@ -165,7 +165,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Use the batch update flow here
                 var batch = context.NewBatch();
-                first.UpdateOverwriteVersion(batch);
+                await first.UpdateOverwriteVersionBatchAsync(batch).ConfigureAwait(false);
                 await context.ExecuteAsync(batch);
 
                 using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))

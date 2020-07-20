@@ -15,7 +15,7 @@ namespace PnP.Core.Model.SharePoint
         public ContentType()
         {
             // Handler to construct the Add request for this content type
-            AddApiCallHandler = (keyValuePairs) =>
+            AddApiCallHandler = async (keyValuePairs) =>
             {
                 // Content type creation by specifying the parent id is not possible using SharePoint REST
                 //https://github.com/pnp/pnpjs/issues/457
@@ -61,7 +61,7 @@ namespace PnP.Core.Model.SharePoint
         internal async Task<IContentType> AddAvailableContentTypeBatchAsync(Batch batch, string id)
         {
             var apiCall = AddAvailableContentTypeApiCall(id);
-            RequestBatchAsync(batch, apiCall, HttpMethod.Post);
+            await RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
             return this;
         }
 

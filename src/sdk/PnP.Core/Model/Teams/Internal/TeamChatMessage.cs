@@ -15,7 +15,7 @@ namespace PnP.Core.Model.Teams
         public TeamChatMessage()
         {
             // Handler to construct the Add request for this channel
-            AddApiCallHandlerAsync = (keyValuePairs) =>
+            AddApiCallHandler = async (keyValuePairs) =>
             {
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();
@@ -26,7 +26,9 @@ namespace PnP.Core.Model.Teams
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
 
-                return new ApiCall(ApiHelper.ParseApiRequestAsync(this, baseUri), ApiType.GraphBeta, bodyContent);
+                var parsedApiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
+
+                return new ApiCall(parsedApiCall, ApiType.GraphBeta, bodyContent);
             };
 
             MappingHandler = (FromJson input) =>

@@ -36,13 +36,13 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Performs a system update of the list item
         /// </summary>
-        public void SystemUpdate();
+        public Task SystemUpdateBatchAsync();
 
         /// <summary>
         /// Performs a system update of the list item
         /// </summary>
         /// <param name="batch">Batch to add the systemupdate request to</param>
-        public void SystemUpdate(Batch batch);
+        public Task SystemUpdateBatchAsync(Batch batch);
 
         #endregion
 
@@ -56,13 +56,13 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Performs a UpdateOverwriteVersion of the list item
         /// </summary>
-        public void UpdateOverwriteVersion();
+        public Task UpdateOverwriteVersionBatchAsync();
 
         /// <summary>
         /// Performs a UpdateOverwriteVersion of the list item
         /// </summary>
         /// <param name="batch">Batch to add the UpdateOverwriteVersion request to</param>
-        public void UpdateOverwriteVersion(Batch batch);
+        public Task UpdateOverwriteVersionBatchAsync(Batch batch);
 
         #endregion
 

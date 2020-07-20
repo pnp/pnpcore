@@ -90,7 +90,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.GetBatchAsync(p => p.Lists);
+                var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "UpdateValuesPropertyViaBatchRest";
@@ -99,7 +99,7 @@ namespace PnP.Core.Test.Base
                 if (myList == null)
                 {
                     // Create the list
-                    myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
+                    myList = await web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync();
                     // Add a list item to this list
                     // Add a list item
@@ -107,7 +107,7 @@ namespace PnP.Core.Test.Base
                     {
                         { "Title", "Yes" }
                     };
-                    myList.Items.Add(values);
+                    await myList.Items.AddBatchAsync(values);
                     await context.ExecuteAsync();
                 }
                 else
@@ -116,7 +116,7 @@ namespace PnP.Core.Test.Base
                 }
 
                 // get items from the list
-                myList.GetBatchAsync(p => p.Items);
+                await myList.GetBatchAsync(p => p.Items);
                 await context.ExecuteAsync();
 
                 // grab first item
@@ -129,11 +129,11 @@ namespace PnP.Core.Test.Base
                     // Did the transientdictionary list changes
                     Assert.IsTrue(firstItem.Values.HasChanges);
 
-                    firstItem.Update();
+                    await firstItem.UpdateBatchAsync();
                     await context.ExecuteAsync();
 
                     // get items again from the list
-                    myList.GetBatchAsync(p => p.Items);
+                    await myList.GetBatchAsync(p => p.Items);
                     await context.ExecuteAsync();
                     firstItem = myList.Items.FirstOrDefault();
 

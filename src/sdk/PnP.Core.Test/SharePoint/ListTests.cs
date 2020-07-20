@@ -47,7 +47,7 @@ namespace PnP.Core.Test.SharePoint
                             { "Title", $"Item {i}" }
                         };
 
-                    myList.Items.AddBatchAsync(values);
+                    await myList.Items.AddBatchAsync(values);
                 }
                 await context.ExecuteAsync();
 
@@ -147,7 +147,7 @@ namespace PnP.Core.Test.SharePoint
                             { "Title", $"Item {i}" }
                         };
 
-                    myList.Items.AddBatchAsync(values);
+                    await myList.Items.AddBatchAsync(values);
                 }
                 await context.ExecuteAsync();
 
@@ -182,11 +182,11 @@ namespace PnP.Core.Test.SharePoint
                     if (list4 != null)
                     {
                         // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
-                        list4.GetItemsByCamlQuery(new CamlQueryOptions()
+                        await list4.GetItemsByCamlQueryBatchAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
                         });
-                        list4.GetItemsByCamlQuery(new CamlQueryOptions()
+                        await list4.GetItemsByCamlQueryBatchAsync(new CamlQueryOptions()
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                         });

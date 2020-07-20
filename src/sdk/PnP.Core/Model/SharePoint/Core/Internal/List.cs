@@ -39,7 +39,7 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Handler to construct the Add request for this list
-            AddApiCallHandlerAsync = (additionalInformation) =>
+            AddApiCallHandler = async (additionalInformation) =>
             {
                 var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
 
@@ -85,9 +85,9 @@ namespace PnP.Core.Model.SharePoint
             return new ApiCall($"_api/web/lists/getbytitle('{title}')", ApiType.SPORest);
         }
 
-        internal IList BatchGetByTitle(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
+        internal async Task<IList> BatchGetByTitleAsync(Batch batch, string title, params Expression<Func<IList, object>>[] expressions)
         {
-            BaseBatchGetAsync(batch, apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions);
+            await BaseBatchGetAsync(batch, apiOverride: GetByTitleApiCall(title), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return this;
         }
         #endregion
@@ -132,28 +132,28 @@ namespace PnP.Core.Model.SharePoint
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQuery(string query)
+        public async Task GetItemsByCamlQueryBatchAsync(string query)
         {
-            GetItemsByCamlQuery(new CamlQueryOptions() { ViewXml = query });
+            await GetItemsByCamlQueryBatchAsync(new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQuery(CamlQueryOptions queryOptions)
+        public async Task GetItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
-            RequestBatchAsync(apiCall, HttpMethod.Post);
+            await RequestBatchAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQuery(Batch batch, string query)
+        public async Task GetItemsByCamlQueryBatchAsync(Batch batch, string query)
         {
-            GetItemsByCamlQuery(batch, new CamlQueryOptions() { ViewXml = query });
+            await GetItemsByCamlQueryBatchAsync(batch, new CamlQueryOptions() { ViewXml = query }).ConfigureAwait(false);
         }
 
-        public void GetItemsByCamlQuery(Batch batch, CamlQueryOptions queryOptions)
+        public async Task GetItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions)
         {
             ApiCall apiCall = BuildGetItemsByCamlQueryApiCall(queryOptions);
 
-            RequestBatchAsync(batch, apiCall, HttpMethod.Post);
+            await RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
         private ApiCall BuildGetItemsByCamlQueryApiCall(CamlQueryOptions queryOptions)
@@ -195,7 +195,7 @@ namespace PnP.Core.Model.SharePoint
                 requestToUse++;
             }
             // GetListDataAsStream request via batch
-            RawRequestBatchAsync(batch, apiCall, HttpMethod.Post);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
 
             // Execute the batch
             await PnPContext.ExecuteAsync(batch).ConfigureAwait(false);

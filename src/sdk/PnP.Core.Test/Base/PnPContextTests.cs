@@ -45,7 +45,7 @@ namespace PnP.Core.Test.Base
             {
                 Assert.IsFalse(context.HasPendingRequests);
 
-                context.Web.GetBatchAsync(p => p.Title);
+                await context.Web.GetBatchAsync(p => p.Title);
 
                 Assert.IsTrue(context.HasPendingRequests);
 

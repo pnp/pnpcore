@@ -22,7 +22,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="id">Id of the feature to enable</param>
         /// <returns>Enabled feature</returns>
-        public IFeature Enable(Guid id);
+        public Task<IFeature> EnableBatchAsync(Guid id);
 
         /// <summary>
         /// Enable a feature in batch
@@ -30,7 +30,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="id">Id of the feature to enable</param>
         /// <param name="batch"><see cref="Batch"/> to add this feature enable request to</param>
         /// <returns>Enabled feature</returns>
-        public IFeature Enable(Batch batch, Guid id);
+        public Task<IFeature> EnableBatchAsync(Batch batch, Guid id);
 
         /// <summary>
         /// Disable a feature
@@ -44,7 +44,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="id">Id of the feature to disable</param>
         /// <returns></returns>
-        public void Disable(Guid id);
+        public Task DisableBatchAsync(Guid id);
 
         /// <summary>
         /// Disable a feature in batch
@@ -52,7 +52,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="id">Id of the feature to disable</param>
         /// <param name="batch"><see cref="Batch"/> to add this feature disable request to</param>
         /// <returns></returns>
-        public void Disable(Batch batch, Guid id);
+        public Task DisableBatchAsync(Batch batch, Guid id);
 
     }
 }

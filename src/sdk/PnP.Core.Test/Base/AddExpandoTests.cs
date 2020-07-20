@@ -85,7 +85,7 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
-                var web = context.Web.Get(batch, p => p.Lists);
+                var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "AddListItemViaBatchRest";
@@ -98,13 +98,13 @@ namespace PnP.Core.Test.Base
                 else
                 {
                     batch = context.BatchClient.EnsureBatch();
-                    myList = web.Lists.Add(batch, listTitle, ListTemplateType.GenericList);
+                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                     await context.ExecuteAsync(batch);
                 }
 
                 // get items from the list
                 batch = context.BatchClient.EnsureBatch();
-                myList.Get(batch, p => p.Items);
+                await myList.GetBatchAsync(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
                 int listItemCount = myList.Items.Count();
@@ -115,7 +115,7 @@ namespace PnP.Core.Test.Base
                     { "Title", ItemTitleValue }
                 };
                 batch = context.BatchClient.EnsureBatch();
-                var item = myList.Items.Add(batch, values);
+                var item = await myList.Items.AddBatchAsync(batch, values);
                 await context.ExecuteAsync(batch);
 
                 Assert.IsTrue(item.Requested);
@@ -126,7 +126,7 @@ namespace PnP.Core.Test.Base
 
                 // Load the list again, include extra list property
                 batch = context.BatchClient.EnsureBatch();
-                myList.Get(batch, p => p.Items);
+                await myList.GetBatchAsync(batch, p => p.Items);
                 await context.ExecuteAsync(batch);
 
                 // Should still have the same amount of items

@@ -37,11 +37,11 @@ namespace PnP.Core.Test.Base
                 // Disable graph first as we're testing the REST path here
                 context.GraphFirst = false;
 
-                var web = context.Web.GetBatchAsync(p => p.Lists);
+                var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "GetListAndListItemViaRest";
-                if (!SetupList(context, listTitle))
+                if (!await SetupList(context, listTitle))
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
@@ -77,11 +77,11 @@ namespace PnP.Core.Test.Base
                 // Disable graph first as we're testing the REST path here
                 context.GraphFirst = false;
 
-                var web = context.Web.GetBatchAsync(p => p.Lists);
+                var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "GetListPropertiesAndListItemViaRest";
-                if (!SetupList(context, listTitle))
+                if (!await SetupList(context, listTitle))
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
@@ -122,11 +122,11 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.GetBatchAsync(p => p.Lists);
+                var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "GetListAndListItemViaGraph";
-                if (!SetupList(context, listTitle))
+                if (!await SetupList(context, listTitle))
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
@@ -159,11 +159,11 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.GetBatchAsync(p => p.Lists);
+                var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "GetListPropertiesAndListItemViaGraph";
-                if (!SetupList(context, listTitle))
+                if (!await SetupList(context, listTitle))
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
@@ -194,12 +194,12 @@ namespace PnP.Core.Test.Base
         }
         #endregion
 
-        private bool SetupList(PnPContext context, string listTitle)
+        private async Task<bool> SetupList(PnPContext context, string listTitle)
         {
             // Disable graph first as we're testing the REST path here
             context.GraphFirst = false;
 
-            var web = context.Web.GetBatchAsync(p => p.Lists);
+            var web = await context.Web.GetBatchAsync(p => p.Lists);
             context.ExecuteAsync().Wait();
 
             var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
@@ -207,7 +207,7 @@ namespace PnP.Core.Test.Base
             if (myList == null)
             {
                 // Add a new list
-                myList = web.Lists.AddAsync(listTitle, ListTemplateType.GenericList).GetAwaiter().GetResult();
+                myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
 
                 // Add a number of list items and fetch them again in a single server call
                 Dictionary<string, object> values = new Dictionary<string, object>
@@ -215,9 +215,9 @@ namespace PnP.Core.Test.Base
                         { "Title", ItemTitleValue }
                     };
 
-                myList.Items.Add(values);
-                myList.Items.Add(values);
-                myList.Items.Add(values);
+                await myList.Items.AddBatchAsync(values);
+                await myList.Items.AddBatchAsync(values);
+                await myList.Items.AddBatchAsync(values);
                 context.ExecuteAsync().Wait();
                 return true;
             }

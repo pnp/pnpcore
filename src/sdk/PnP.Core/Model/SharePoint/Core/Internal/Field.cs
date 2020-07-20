@@ -41,7 +41,7 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Handler to construct the Add request for this list
-            AddApiCallHandler = (additionalInformation) =>
+            AddApiCallHandler = async (additionalInformation) =>
             {
                 var fieldOptions = (FieldOptions)additionalInformation[FieldOptionsAdditionalInformationKey];
 

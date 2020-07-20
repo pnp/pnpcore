@@ -32,7 +32,7 @@ namespace PnP.Core.Model.Teams
         /// <param name="batch">Batch to use</param>
         /// <param name="name">Display name of the channel tab</param>
         /// <returns>Newly added channel tab</returns>
-        public ITeamChannelTab AddWikiTab(Batch batch, string name)
+        public async Task<ITeamChannelTab> AddWikiTabBatchAsync(Batch batch, string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -41,7 +41,7 @@ namespace PnP.Core.Model.Teams
 
             (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelWikiTab(name);
 
-            return newTab.AddBatchAsync(batch, keyValuePairs) as TeamChannelTab;
+            return await newTab.AddBatchAsync(batch, keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
         }
 
         /// <summary>
@@ -49,9 +49,9 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="name">Display name of the channel tab</param>
         /// <returns>Newly added channel tab</returns>
-        public ITeamChannelTab AddWikiTab(string name)
+        public async Task<ITeamChannelTab> AddWikiTabBatchAsync(string name)
         {
-            return AddWikiTab(PnPContext.CurrentBatch, name);
+            return await AddWikiTabBatchAsync(PnPContext.CurrentBatch, name).ConfigureAwait(false);
         }
         #endregion
 
@@ -81,7 +81,7 @@ namespace PnP.Core.Model.Teams
         /// <param name="name">Display name of the DocumentLibrary tab</param>
         /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
         /// <returns>Newly added DocumentLibrary tab</returns>
-        public ITeamChannelTab AddDocumentLibraryTab(Batch batch, string name, Uri documentLibraryUri)
+        public async Task<ITeamChannelTab> AddDocumentLibraryTabBatchAsync(Batch batch, string name, Uri documentLibraryUri)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -90,7 +90,7 @@ namespace PnP.Core.Model.Teams
 
             (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelDocumentLibraryTab(name, documentLibraryUri);
 
-            return newTab.AddBatchAsync(batch, keyValuePairs) as TeamChannelTab;
+            return await newTab.AddBatchAsync(batch, keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
         }
 
         /// <summary>
@@ -99,9 +99,9 @@ namespace PnP.Core.Model.Teams
         /// <param name="name">Display name of the DocumentLibrary tab</param>
         /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
         /// <returns>Newly added DocumentLibrary tab</returns>
-        public ITeamChannelTab AddDocumentLibraryTab(string name, Uri documentLibraryUri)
+        public async Task<ITeamChannelTab> AddDocumentLibraryTabBatchAsync(string name, Uri documentLibraryUri)
         {
-            return AddDocumentLibraryTab(PnPContext.CurrentBatch, name, documentLibraryUri);
+            return await AddDocumentLibraryTabBatchAsync(PnPContext.CurrentBatch, name, documentLibraryUri).ConfigureAwait(false);
         }
         #endregion
 

@@ -37,7 +37,7 @@ namespace PnP.Core.Model.Teams
         /// <param name="batch">Batch to use</param>
         /// <param name="name">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage Add(Batch batch, string body)
+        public async Task<ITeamChatMessage> AddBatchAsync(Batch batch, string body)
         {
             if (string.IsNullOrEmpty(body))
             {
@@ -53,7 +53,7 @@ namespace PnP.Core.Model.Teams
                 ContentType = ChatMessageContentType.Text
             };
 
-            return newChannelChatMessage.AddBatchAsync(batch) as TeamChatMessage;
+            return await newChannelChatMessage.AddBatchAsync(batch).ConfigureAwait(false) as TeamChatMessage;
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="name">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
-        public ITeamChatMessage Add(string body)
+        public async Task<ITeamChatMessage> AddBatchAsync(string body)
         {
-            return Add(PnPContext.CurrentBatch, body);
+            return await AddBatchAsync(PnPContext.CurrentBatch, body).ConfigureAwait(false);
         }
     }
 }

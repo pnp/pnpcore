@@ -368,7 +368,7 @@ namespace PnP.Core.Test.Base
                             { "Title", $"Item {i}" }
                         };
 
-                        list.Items.AddBatchAsync(values);
+                        await list.Items.AddBatchAsync(values);
                     }
                     await context.ExecuteAsync();
 
@@ -468,7 +468,7 @@ namespace PnP.Core.Test.Base
                             { "Title", $"Item {i}" }
                         };
 
-                        list.Items.AddBatchAsync(values);
+                        await list.Items.AddBatchAsync(values);
                     }
                     await context.ExecuteAsync();
 

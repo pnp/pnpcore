@@ -43,7 +43,7 @@ namespace PnP.Core.Test.Base
             {
                 var batch = context.BatchClient.EnsureBatch();
 
-                context.Web.Get(batch);
+                await context.Web.GetBatchAsync(batch);
 
                 Assert.IsFalse(batch.Executed);
                 Assert.IsTrue(context.BatchClient.ContainsBatch(batch.Id));
@@ -65,7 +65,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                context.Web.GetBatchAsync();
+                await context.Web.GetBatchAsync();
 
                 Assert.IsFalse(context.CurrentBatch.Executed);
                 var implicitBatchId = context.CurrentBatch.Id;
@@ -91,11 +91,11 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 // first get
-                var web = context.Web.GetBatchAsync(p => p.Title);
+                var web = await context.Web.GetBatchAsync(p => p.Title);
                 // second get
-                var web2 = context.Web.GetBatchAsync(p => p.Title);
+                var web2 = await context.Web.GetBatchAsync(p => p.Title);
                 // third get
-                var web3 = context.Web.GetBatchAsync(p => p.Title);
+                var web3 = await context.Web.GetBatchAsync(p => p.Title);
 
                 // Grab the id of the current batch so we can later on find it back
                 Guid currentBatchId = context.CurrentBatch.Id;
@@ -133,9 +133,9 @@ namespace PnP.Core.Test.Base
                 if (context.GraphFirst)
                 {
                     // Get web title : this can be done using rest and graph and since we're graphfirst this 
-                    context.Web.GetBatchAsync(p => p.Title);
+                    await context.Web.GetBatchAsync(p => p.Title);
                     // Get the web searchscope: this will require a rest call
-                    context.Web.GetBatchAsync(p => p.SearchScope);
+                    await context.Web.GetBatchAsync(p => p.SearchScope);
 
                     // Grab the id of the current batch so we can later on find it back
                     Guid currentBatchId = context.CurrentBatch.Id;
@@ -172,9 +172,9 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 // Graph only request (there's no option to fallback to a SharePoint REST call)
-                context.Team.GetBatchAsync();
+                await context.Team.GetBatchAsync();
                 // SharePoint REST request
-                context.Web.GetBatchAsync(p => p.SearchScope, p => p.Title);
+                await context.Web.GetBatchAsync(p => p.SearchScope, p => p.Title);
 
                 // Grab the id of the current batch so we can later on find it back
                 Guid currentBatchId = context.CurrentBatch.Id;
@@ -207,8 +207,8 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
 
-                var list1 = context.Web.Lists.BatchGetByTitle("Site Assets", p => p.Title, p => p.NoCrawl);
-                var list1Again = context.Web.Lists.BatchGetByTitle("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
+                var list1 = await context.Web.Lists.BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.NoCrawl);
+                var list1Again = await context.Web.Lists.BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
                 await context.ExecuteAsync();
 
                 var siteAssetsCount = context.Web.Lists.Where(p => p.Title == "Site Assets");
@@ -266,7 +266,7 @@ namespace PnP.Core.Test.Base
                 // Add 21 messages to the Channel..this triggers the batch splitting
                 for (int i = 1; i <= 21; i++)
                 {
-                    team.PrimaryChannel.Messages.Add($"Message{i}");
+                    await team.PrimaryChannel.Messages.AddBatchAsync($"Message{i}");
                 }
                 await context.ExecuteAsync();
 
@@ -308,7 +308,7 @@ namespace PnP.Core.Test.Base
                     // Batch up 21 tab creations...this triggers the batch splitting
                     for (int i = 1; i <= 21; i++)
                     {
-                        generalChannel.Tabs.AddWikiTab($"Tab{i}");
+                        await generalChannel.Tabs.AddWikiTabBatchAsync($"Tab{i}");
                     }
 
                     // Send batch to the server
@@ -323,7 +323,7 @@ namespace PnP.Core.Test.Base
                         if (tab.DisplayName.StartsWith("Tab"))
                         {
                             // Batch up delete
-                            tab.DeleteBatchAsync();
+                            await tab.DeleteBatchAsync();
                         }
                     }
 

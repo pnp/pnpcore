@@ -63,7 +63,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var web = context.Web.GetBatchAsync(p => p.Lists);
+                var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 string listTitle = "AddListViaBatchRest";
@@ -76,7 +76,7 @@ namespace PnP.Core.Test.Base
 
                 var listCount = web.Lists.Count();
                 // Add a new list
-                myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
+                myList = await web.Lists.AddBatchAsync(listTitle, ListTemplateType.GenericList);
                 await context.ExecuteAsync();
 
                 // Was the list added
@@ -85,7 +85,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.Count() == listCount + 1);
 
                 // Load the list again
-                context.Web.GetBatchAsync(p => p.Lists);
+                await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
                 // Check if we still have the same amount of lists
@@ -100,7 +100,7 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
-                var web = context.Web.Get(batch, p => p.Lists);
+                var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
                 string listTitle = "AddListViaExplicitBatchRest";
@@ -114,7 +114,7 @@ namespace PnP.Core.Test.Base
                 var listCount = web.Lists.Count();
                 // Add a new list
                 batch = context.BatchClient.EnsureBatch();
-                myList = web.Lists.Add(batch, listTitle, ListTemplateType.GenericList);
+                myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
                 await context.ExecuteAsync(batch);
 
                 // Was the list added
@@ -124,7 +124,7 @@ namespace PnP.Core.Test.Base
 
                 // Load the list again
                 batch = context.BatchClient.EnsureBatch();
-                context.Web.Get(batch, p => p.Lists);
+                await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
                 // Check if we still have the same amount of lists
@@ -174,7 +174,7 @@ namespace PnP.Core.Test.Base
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var batch = context.BatchClient.EnsureBatch();
-                var team = context.Team.Get(batch, p => p.Channels);
+                var team = await context.Team.GetBatchAsync(batch, p => p.Channels);
                 await context.ExecuteAsync(batch);
 
                 // Channel names have to be unique
@@ -186,7 +186,7 @@ namespace PnP.Core.Test.Base
                     int channelCount = team.Channels.Count();
                     // Add a new channel
                     batch = context.BatchClient.EnsureBatch();
-                    channelFound = team.Channels.Add(batch, channelName, "Test channel, will be deleted in 21 days");
+                    channelFound = await team.Channels.AddBatchAsync(batch, channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync(batch);
 
                     Assert.IsNotNull(channelFound);
@@ -208,7 +208,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
-                var team = context.Team.GetBatchAsync(p => p.Channels);
+                var team = await context.Team.GetBatchAsync(p => p.Channels);
                 await context.ExecuteAsync();
 
                 // Channel names have to be unique
@@ -219,7 +219,7 @@ namespace PnP.Core.Test.Base
                 {
                     int channelCount = team.Channels.Count();
                     // Add a new channel
-                    channelFound = team.Channels.Add(channelName, "Test channel, will be deleted in 21 days");
+                    channelFound = await team.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync();
 
                     Assert.IsNotNull(channelFound);

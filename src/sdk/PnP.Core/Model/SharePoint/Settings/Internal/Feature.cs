@@ -13,7 +13,7 @@ namespace PnP.Core.Model.SharePoint
 
         public Feature()
         {
-            AddApiCallHandlerAsync = (keyValuePairs) =>
+            AddApiCallHandler = async (keyValuePairs) =>
             {
                 var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
                 return new ApiCall($"{entity.SharePointGet}/add(guid'{DefinitionId}')", ApiType.SPORest, null);
@@ -28,5 +28,17 @@ namespace PnP.Core.Model.SharePoint
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
+        public async Task RemoveBatchAsync()
+        {
+            await RemoveBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public async Task RemoveBatchAsync(Batch batch)
+        {
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var apiCall = new ApiCall($"{entity.SharePointGet}/remove(guid'{DefinitionId}')", ApiType.SPORest);
+
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
     }
 }

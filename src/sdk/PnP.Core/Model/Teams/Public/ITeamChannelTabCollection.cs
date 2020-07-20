@@ -22,14 +22,14 @@ namespace PnP.Core.Model.Teams
         /// <param name="batch">Batch to use</param>
         /// <param name="name">Display name of the wiki channel tab</param>
         /// <returns>Newly added wiki channel tab</returns>
-        public ITeamChannelTab AddWikiTab(Batch batch, string name);
+        public Task<ITeamChannelTab> AddWikiTabBatchAsync(Batch batch, string name);
 
         /// <summary>
         /// Adds a new wiki channel tab
         /// </summary>
         /// <param name="name">Display name of the wiki channel tab</param>
         /// <returns>Newly added wiki channel tab</returns>
-        public ITeamChannelTab AddWikiTab(string name);
+        public Task<ITeamChannelTab> AddWikiTabBatchAsync(string name);
 
         /// <summary>
         /// Adds a new DocumentLibrary channel tab
@@ -46,7 +46,7 @@ namespace PnP.Core.Model.Teams
         /// <param name="name">Display name of the DocumentLibrary channel tab</param>
         /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
         /// <returns>Newly added DocumentLibrary channel tab</returns>
-        public ITeamChannelTab AddDocumentLibraryTab(Batch batch, string name, Uri documentLibraryUri);
+        public Task<ITeamChannelTab> AddDocumentLibraryTabBatchAsync(Batch batch, string name, Uri documentLibraryUri);
 
         /// <summary>
         /// Adds a new DocumentLibrary channel tab
@@ -54,7 +54,7 @@ namespace PnP.Core.Model.Teams
         /// <param name="name">Display name of the DocumentLibrary channel tab</param>
         /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
         /// <returns>Newly added DocumentLibrary channel tab</returns>
-        public ITeamChannelTab AddDocumentLibraryTab(string name, Uri documentLibraryUri);
+        public Task<ITeamChannelTab> AddDocumentLibraryTabBatchAsync(string name, Uri documentLibraryUri);
 
     }
 }

@@ -25,7 +25,7 @@ namespace PnP.Core.Model
     /// Delegate for requesting the Api call for doing an ADD operation
     /// </summary>
     /// <returns>API call for adding a model entity</returns>
-    internal delegate ApiCall AddApiCall(Dictionary<string, object> additionalInformation = null);
+    internal delegate Task<ApiCall> AddApiCall(Dictionary<string, object> additionalInformation = null);
 
     /// <summary>
     /// Delegate for overriding the default API call in case of a GET request
@@ -187,16 +187,28 @@ namespace PnP.Core.Model
         /// <returns>The added domain model</returns>
         internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Dictionary<string, object> keyValuePairs = null)
         {
-            var call = AddApiCallHandler?.Invoke(keyValuePairs);
-            if (call.HasValue)
+            //var call = AddApiCallHandler?.Invoke(keyValuePairs);
+            //if (call.HasValue)
+            //{
+            //    await BaseBatchAddAsync(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+            //}
+            //else
+            //{
+            //    throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+            //}
+            //return this;
+
+
+            if (AddApiCallHandler != null)
             {
-                await BaseBatchAddAsync(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+                var call = await AddApiCallHandler.Invoke(keyValuePairs).ConfigureAwait(false);
+                await BaseBatchAddAsync(call, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+                return this;
             }
             else
             {
                 throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
             }
-            return this;
         }
 
         /// <summary>
@@ -206,16 +218,27 @@ namespace PnP.Core.Model
         /// <returns>The added domain model</returns>
         internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Batch batch, Dictionary<string, object> keyValuePairs = null)
         {
-            var call = AddApiCallHandler?.Invoke(keyValuePairs);
-            if (call.HasValue)
+            //var call = AddApiCallHandler?.Invoke(keyValuePairs);
+            //if (call.HasValue)
+            //{
+            //    await BaseBatchAddAsync(batch, call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+            //}
+            //else
+            //{
+            //    throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+            //}
+            //return this;
+
+            if (AddApiCallHandler != null)
             {
-                await BaseBatchAddAsync(batch, call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+                var call = await AddApiCallHandler.Invoke(keyValuePairs).ConfigureAwait(false);
+                await BaseBatchAddAsync(batch, call, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+                return this;
             }
             else
             {
                 throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
             }
-            return this;
         }
 
         /// <summary>
@@ -224,16 +247,27 @@ namespace PnP.Core.Model
         /// <returns>The added domain model</returns>
         internal virtual async Task<BaseDataModel<TModel>> AddAsync(Dictionary<string, object> keyValuePairs = null)
         {
-            var call = AddApiCallHandler?.Invoke(keyValuePairs);
-            if (call.HasValue)
+            //var call = AddApiCallHandler?.Invoke(keyValuePairs);
+            //if (call.HasValue)
+            //{
+            //    await BaseAdd(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+            //}
+            //else
+            //{
+            //    throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+            //}
+            //return this;
+
+            if (AddApiCallHandler != null)
             {
-                await BaseAdd(call.Value, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+                var call = await AddApiCallHandler.Invoke(keyValuePairs).ConfigureAwait(false);
+                await BaseAdd(call, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler).ConfigureAwait(false);
+                return this;
             }
             else
             {
                 throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
             }
-            return this;
         }
 
         #endregion
@@ -356,7 +390,7 @@ namespace PnP.Core.Model
                 // Let's ensure these additional API calls's are included in a single batch
                 if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
                 {
-                    AddBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson);
+                    await AddBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
                 }
 
                 await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
@@ -398,7 +432,7 @@ namespace PnP.Core.Model
             // Let's ensure these additional API calls's are included in a single batch
             if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
-                AddBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson);
+                await AddBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
         }
 

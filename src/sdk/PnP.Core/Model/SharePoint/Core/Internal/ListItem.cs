@@ -72,7 +72,7 @@ namespace PnP.Core.Model.SharePoint
                 // Extra processing of returned json
             };
 
-            AddApiCallHandlerAsync = (keyValuePairs) =>
+            AddApiCallHandler = async (keyValuePairs) =>
             {
                 var parentList = Parent.Parent as List;
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
@@ -144,12 +144,12 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public void UpdateOverwriteVersion()
+        public async Task UpdateOverwriteVersionBatchAsync()
         {
-            SystemUpdate(PnPContext.CurrentBatch);
+            await UpdateOverwriteVersionBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
-        public void UpdateOverwriteVersion(Batch batch)
+        public async Task UpdateOverwriteVersionBatchAsync(Batch batch)
         {
             var xmlPayload = BuildXmlPayload(true);
             if (!string.IsNullOrEmpty(xmlPayload))
@@ -158,7 +158,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     Commit = true
                 };
-                RawRequestBatchAsync(batch, apiCall, HttpMethod.Post);
+                await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else
             {
@@ -187,12 +187,12 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public void SystemUpdate()
+        public async Task SystemUpdateBatchAsync()
         {
-            SystemUpdate(PnPContext.CurrentBatch);
+            await SystemUpdateBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
-        public void SystemUpdate(Batch batch)
+        public async Task SystemUpdateBatchAsync(Batch batch)
         {
             var xmlPayload = BuildXmlPayload(false);
             if (!string.IsNullOrEmpty(xmlPayload))
@@ -201,7 +201,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     Commit = true
                 };
-                RawRequestBatchAsync(batch, apiCall, HttpMethod.Post);
+                await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
             }
             else
             {
