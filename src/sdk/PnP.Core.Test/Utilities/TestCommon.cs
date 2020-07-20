@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Utilities
 {
@@ -76,6 +77,13 @@ namespace PnP.Core.Test.Utilities
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
             [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
         {
+            return GetContextAsync(configurationName, id, testName, sourceFilePath).GetAwaiter().GetResult();
+        }
+
+        public async Task<PnPContext> GetContextAsync(string configurationName, int id = 0,
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+        {
             // Obtain factory (cached)
             var factory = BuildContextFactory();
 
@@ -94,10 +102,17 @@ namespace PnP.Core.Test.Utilities
             testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             testPnPContextFactory.TestUris = TestUris;
 
-            return BuildContextFactory().Create(configurationName);
+            return await BuildContextFactory().CreateAsync(configurationName).ConfigureAwait(false);
         }
 
         public PnPContext GetContext(Guid groupId, int id = 0,
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+        {
+            return GetContextAsync(groupId, id, testName, sourceFilePath).GetAwaiter().GetResult();
+        }
+
+        public async Task<PnPContext> GetContextAsync(Guid groupId, int id = 0,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
             [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
         {
@@ -112,7 +127,7 @@ namespace PnP.Core.Test.Utilities
             (factory as TestPnPContextFactory).GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             (factory as TestPnPContextFactory).TestUris = TestUris;
 
-            return BuildContextFactory().Create(groupId);
+            return await BuildContextFactory().CreateAsync(groupId).ConfigureAwait(false);
         }
 
         public PnPContext Clone(PnPContext source, Uri uri, int id)

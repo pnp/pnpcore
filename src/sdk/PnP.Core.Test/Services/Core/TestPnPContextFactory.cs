@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Services
 {
@@ -55,55 +56,90 @@ namespace PnP.Core.Test.Services
 
         public override PnPContext Create(string name)
         {
-            var context = base.Create(name);
+            return CreateAsync(name).GetAwaiter().GetResult();
+        }
+
+        public async override Task<PnPContext> CreateAsync(string name)
+        {
+            var context = await base.CreateAsync(name).ConfigureAwait(false);
             ConfigurePnPContextForTesting(ref context);
             return context;
         }
 
         public override PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider)
         {
-            var context = base.Create(url, authenticationProvider);
+            return CreateAsync(url, authenticationProvider).GetAwaiter().GetResult();
+        }
+
+        public async override Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider)
+        {
+            var context = await base.CreateAsync(url, authenticationProvider).ConfigureAwait(false);
             ConfigurePnPContextForTesting(ref context);
             return context;
         }
 
         public override PnPContext Create(Uri url)
         {
-            var context = base.Create(url);
+            return CreateAsync(url).GetAwaiter().GetResult();
+        }
+
+        public async override Task<PnPContext> CreateAsync(Uri url)
+        {
+            var context = await base.CreateAsync(url).ConfigureAwait(false);
             ConfigurePnPContextForTesting(ref context);
             return context;
         }
 
         public override PnPContext Create(Uri url, string authenticationProviderName)
         {
-            var context = base.Create(url, authenticationProviderName);
+            return CreateAsync(url, authenticationProviderName).GetAwaiter().GetResult();
+        }
+
+        public async override Task<PnPContext> CreateAsync(Uri url, string authenticationProviderName)
+        {
+            var context = await base.CreateAsync(url, authenticationProviderName).ConfigureAwait(false);
             ConfigurePnPContextForTesting(ref context);
             return context;
         }
 
         public override PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider)
         {
+            return CreateAsync(groupId, authenticationProvider).GetAwaiter().GetResult();
+        }
+
+        public async override Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider)
+        {
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
 
             ConfigurePnPContextForTesting(ref context);
 
-            ConfigureForGroup(context, groupId);
+            await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
             return context;
         }
 
         public override PnPContext Create(Guid groupId)
         {
+            return CreateAsync(groupId).GetAwaiter().GetResult();
+        }
+
+        public async override Task<PnPContext> CreateAsync(Guid groupId)
+        {
             var context = new PnPContext(Log, AuthenticationProviderFactory.CreateDefault(), SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
 
             ConfigurePnPContextForTesting(ref context);
 
-            ConfigureForGroup(context, groupId);
+            await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
             return context;
         }
-
+        
         public override PnPContext Create(Guid groupId, string authenticationProviderName)
+        {
+            return CreateAsync(groupId, authenticationProviderName).GetAwaiter().GetResult();
+        }
+
+        public async override Task<PnPContext> CreateAsync(Guid groupId, string authenticationProviderName)
         {
             // Create the Authentication Provider based on the provided configuration
             var authProvider = AuthenticationProviderFactory.Create(authenticationProviderName);
@@ -117,7 +153,7 @@ namespace PnP.Core.Test.Services
 
             ConfigurePnPContextForTesting(ref context);
 
-            ConfigureForGroup(context, groupId);
+            await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
             return context;
         }

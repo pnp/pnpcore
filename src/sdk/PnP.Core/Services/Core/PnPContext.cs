@@ -441,14 +441,14 @@ namespace PnP.Core.Services
         /// <summary>
         /// Gets the Azure Active Directory tenant id. Using the client.svc endpoint approach as that one will also work with vanity SharePoint domains
         /// </summary>
-        internal void SetAADTenantId()
+        internal async Task SetAADTenantId()
         {
             if (settings.AADTenantId == Guid.Empty && Uri != null)
             {
                 using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri}/_vti_bin/client.svc"))
                 {
                     request.Headers.Add("Authorization", "Bearer");
-                    HttpResponseMessage response = httpClient.SendAsync(request).GetAwaiter().GetResult();
+                    HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
 
                     // Grab the tenant id from the wwwauthenticate header. 
                     var bearerResponseHeader = response.Headers.WwwAuthenticate.ToString();
