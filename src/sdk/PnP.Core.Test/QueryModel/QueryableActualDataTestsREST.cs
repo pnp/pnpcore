@@ -74,6 +74,25 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        public async Task TestQueryLists_REST_Async()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var query = (from l in context.Web.Lists
+                             select l)
+                            .Load(l => l.Id, l => l.Title, l => l.Description);
+
+                var queryResult = await query.ToListAsync();
+
+                Assert.IsNotNull(queryResult);
+                Assert.IsTrue(queryResult.Count >= 5);
+            }
+        }
+
+        [TestMethod]
         public void TestQueryItems_REST()
         {
             var expectedListItemTitle = "Home";
@@ -177,6 +196,26 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        public async Task TestQueryFirstOrDefaultWithPredicateLINQ_REST_Async()
+        {
+            var expected = "Documents";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var actual = await (from l in context.Web.Lists
+                              select l)
+                             .Load(l => l.Id, l => l.Title)
+                             .FirstOrDefaultAsync(l => l.Title == expected);
+
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual.Title);
+            }
+        }
+
+        [TestMethod]
         public void TestQueryFirstOrDefaultNoPredicateOnQueryLINQ_REST()
         {
             var expected = "Documents";
@@ -189,6 +228,25 @@ namespace PnP.Core.Test.QueryModel
                 var actual = (from l in context.Web.Lists
                               where l.Title == expected
                               select l).FirstOrDefault();
+
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual.Title);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryFirstOrDefaultNoPredicateOnQueryLINQ_REST_Async()
+        {
+            var expected = "Documents";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var actual = await (from l in context.Web.Lists
+                              where l.Title == expected
+                              select l).FirstOrDefaultAsync();
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);
@@ -213,6 +271,23 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        public async Task TestQueryGetByTitleLINQ_REST_Async()
+        {
+            var expected = "Documents";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var actual = await context.Web.Lists.GetByTitleAsync(expected);
+
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual.Title);
+            }
+        }
+
+        [TestMethod]
         public void TestQueryGetByTitleWithFieldsLINQ_REST()
         {
             var expected = "Documents";
@@ -223,6 +298,29 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var actual = context.Web.Lists.GetByTitle(expected,
+                    l => l.Id,
+                    l => l.Title,
+                    l => l.TemplateType
+                    );
+
+                Assert.IsNotNull(actual);
+                Assert.AreEqual(expected, actual.Title);
+                Assert.AreNotEqual(Guid.Empty, actual.Id);
+                Assert.AreEqual(ListTemplateType.DocumentLibrary, actual.TemplateType);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryGetByTitleWithFieldsLINQ_REST_Async()
+        {
+            var expected = "Documents";
+
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var actual = await context.Web.Lists.GetByTitleAsync(expected,
                     l => l.Id,
                     l => l.Title,
                     l => l.TemplateType
@@ -268,7 +366,7 @@ namespace PnP.Core.Test.QueryModel
             {
                 context.GraphFirst = false;
 
-                var library = context.Web.Lists.GetByTitle(targetListTitle);
+                var library = await context.Web.Lists.GetByTitleAsync(targetListTitle);
                 var firstItem = await library.Items.GetByIdAsync(1,
                     i => i.Id,
                     i => i.Title);
@@ -276,6 +374,44 @@ namespace PnP.Core.Test.QueryModel
                 Assert.IsNotNull(firstItem);
                 Assert.AreEqual(1, firstItem.Id);
                 Assert.AreEqual(firstItem.Title, expectedTitle);
+            }
+        }
+
+        [TestMethod]
+        public void TestQueryContentTypes_REST()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var cts = context.Web.ContentTypes.Load(p => p.Id, p => p.Name);
+                var contentTypes = cts.ToList();
+
+                // Ensure that we a result
+                Assert.IsNotNull(contentTypes);
+
+                // Ensure that we have 1 content type in the lists of content types
+                Assert.IsTrue(contentTypes.Count > 1);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryContentTypes_REST_Async()
+        {
+            // TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var cts = context.Web.ContentTypes.Load(p => p.Id, p => p.Name);
+                var contentTypes = await cts.ToListAsync();
+
+                // Ensure that we a result
+                Assert.IsNotNull(contentTypes);
+
+                // Ensure that we have 1 content type in the lists of content types
+                Assert.IsTrue(contentTypes.Count > 1);
             }
         }
     }

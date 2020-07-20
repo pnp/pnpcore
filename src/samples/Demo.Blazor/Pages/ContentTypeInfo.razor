@@ -39,12 +39,9 @@ else
     {
         using (var ctx = pnpContextFactory.GetContext())
         {
-            var web = await ctx.Web.GetAsync(w => w.ContentTypes.Include(p=>p.Id, p=>p.Name));
-            contentTypes = web.ContentTypes.ToList();
-
             // Linq support seems to still fail, requires debug
-            //var cts = ctx.Web.ContentTypes.Load(p => p.Id, p => p.Name);
-            //contentTypes = cts.ToList();
+            var cts = ctx.Web.ContentTypes.Load(p => p.Id, p => p.Name);
+            contentTypes = await cts.ToListAsync();
 
 
             isLoading = false;

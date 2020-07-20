@@ -86,7 +86,7 @@ namespace PnP.Core.QueryModel
 
             if (!isEnumerable)
             {
-                // Normal execution which prepare the result asynchronously
+                // Normal execution which prepares the result asynchronously
                 Task<object> task = ExecuteObjectAsync(expression);
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -102,8 +102,16 @@ namespace PnP.Core.QueryModel
                 .Invoke(this, parameters);
             if (found)
             {
-                // TODO: what to do in this case?
-                // parameters[1] contains the result
+                //// TODO: what to do in this case?
+                //// parameters[1] contains the result
+                //async IAsyncEnumerator<TResult> GetAsyncEnumerator()
+                //{
+                //    foreach (TResult model in (IAsyncEnumerable)parameters[1])
+                //    {
+                //        yield return model;
+                //    }
+                //}
+
             }
 
             // If the query has not been already requested

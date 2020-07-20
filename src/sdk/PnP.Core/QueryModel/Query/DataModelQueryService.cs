@@ -111,7 +111,7 @@ namespace PnP.Core.QueryModel
 
                     // Build the Graph request URL
                     var requestUrl = $"{entityInfo.GraphLinqGet}?{query.ToQueryString(ODataTargetPlatform.Graph, urlEncode: false)}";
-                    requestUrl = Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context).GetAwaiter().GetResult();
+                    requestUrl = await Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context);
 
                     // Add the request to the current batch
                     batchRequestId = context.CurrentBatch.Add(
@@ -142,8 +142,8 @@ namespace PnP.Core.QueryModel
                     }
 
                     // Build the SPO REST request URL
-                    var requestUrl = $"{context.Uri}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
-                    requestUrl = Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).GetAwaiter().GetResult();
+                    var requestUrl = $"{context.Uri.ToString().TrimEnd('/')}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
+                    requestUrl = await Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl);
 
                     // Add the request to the current batch
                     batchRequestId = context.CurrentBatch.Add(

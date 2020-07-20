@@ -554,7 +554,21 @@ namespace PnP.Core.QueryModel
                 return asyncEnumerable;
             }
 
+            if (source is IEnumerable<TSource> enumerable)
+            {
+                return GetAsyncEnumerator(enumerable);
+            }
+
             throw new InvalidOperationException("Queryable source does not support async");
+
+            async IAsyncEnumerable<TSource> GetAsyncEnumerator(IEnumerable<TSource> enumerable)
+            {
+                foreach (TSource model in enumerable)
+                {
+                    yield return model;
+                }
+            }
+
         }
 
         #endregion
