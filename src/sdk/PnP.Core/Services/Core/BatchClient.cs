@@ -542,7 +542,7 @@ namespace PnP.Core.Services
                             batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status, graphBatchResponse.Headers);
 
                             // Commit succesful updates in our model
-                            if (batchRequest.Method == HttpMethod.Patch)
+                            if (batchRequest.Method == HttpMethod.Patch || batchRequest.ApiCall.Commit)
                             {
                                 if (batchRequest.Model is TransientObject)
                                 {
@@ -944,7 +944,7 @@ namespace PnP.Core.Services
                         }
 
                         // Commit succesful updates in our model
-                        if (currentBatchRequest.Method == HttpMethod.Patch)
+                        if (currentBatchRequest.Method == HttpMethod.Patch || currentBatchRequest.ApiCall.Commit)
                         {
                             if (currentBatchRequest.Model is TransientObject)
                             {

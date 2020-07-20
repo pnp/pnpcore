@@ -1,9 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text.Json;
 using PnP.Core.Services;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Dynamic;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -11,7 +15,7 @@ namespace PnP.Core.Model.SharePoint
     /// ListItem class, write your custom code here
     /// </summary>
     [SharePointType("SP.ListItem", Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})", LinqGet = "_api/web/lists(guid'{Parent.Id}')/items")]
-    [GraphType(OverflowProperty = "fields")] // , LinqGet = "sites/{Web.GraphId}/lists/{Parent.GraphId}/items")]
+    [GraphType(OverflowProperty = "fields")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class ListItem
     {
@@ -117,9 +121,174 @@ namespace PnP.Core.Model.SharePoint
                 // Return created api call
                 return new ApiCall($"{baseApiCall}/AddValidateUpdateItemUsingPath", ApiType.SPORest, bodyContent);
             };
-
-            
         }
+
+        #region Extension methods
+
+        #region UpdateOverwriteVersion
+
+        public async Task UpdateOverwriteVersionAsync()
+        {
+            var xmlPayload = BuildXmlPayload(true);
+            if (!string.IsNullOrEmpty(xmlPayload))
+            {
+                var apiCall = new ApiCall(xmlPayload)
+                {
+                    Commit = true
+                };
+                await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+            else
+            {
+                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+            }
+        }
+
+        public void UpdateOverwriteVersion()
+        {
+            SystemUpdate(PnPContext.CurrentBatch);
+        }
+
+        public void UpdateOverwriteVersion(Batch batch)
+        {
+            var xmlPayload = BuildXmlPayload(true);
+            if (!string.IsNullOrEmpty(xmlPayload))
+            {
+                var apiCall = new ApiCall(xmlPayload)
+                {
+                    Commit = true
+                };
+                RawRequest(batch, apiCall, HttpMethod.Post);
+            }
+            else
+            {
+                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+            }
+        }
+
+        #endregion
+
+        #region SystemUpdate
+
+        public async Task SystemUpdateAsync()
+        {
+            var xmlPayload = BuildXmlPayload(false);
+            if (!string.IsNullOrEmpty(xmlPayload))
+            {
+                var apiCall = new ApiCall(xmlPayload)
+                {
+                    Commit = true
+                };
+                await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+            else
+            {
+                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+            }
+        }
+
+        public void SystemUpdate()
+        {
+            SystemUpdate(PnPContext.CurrentBatch);
+        }
+
+        public void SystemUpdate(Batch batch)
+        {
+            var xmlPayload = BuildXmlPayload(false);
+            if (!string.IsNullOrEmpty(xmlPayload))
+            {
+                var apiCall = new ApiCall(xmlPayload)
+                {
+                    Commit = true
+                };
+                RawRequest(batch, apiCall, HttpMethod.Post);
+            }
+            else
+            {
+                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+            }
+        }
+
+        private string BuildXmlPayload(bool updateOverwriteVersion)
+        {
+            string xml;
+
+            if (updateOverwriteVersion)
+            {
+                xml = CsomHelper.ListItemUpdateOverwriteVersion;
+            }
+            else
+            {
+                xml = CsomHelper.ListItemSystemUpdate;
+            }
+
+            int counter = 1;
+            StringBuilder fieldValues = new StringBuilder();
+
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            IEnumerable<EntityFieldInfo> fields = entity.Fields;
+
+            var changedProperties = this.GetChangedProperties();
+
+            bool changeFound = false;
+            foreach (PropertyDescriptor cp in changedProperties)
+            {
+                changeFound = true;
+                // Look for the corresponding property in the type
+                var changedField = fields.FirstOrDefault(f => f.Name == cp.Name);
+
+                // If we found a field 
+                if (changedField != null)
+                {
+                    if (changedField.DataType.FullName == typeof(TransientDictionary).FullName)
+                    {
+                        // Get the changed properties in the dictionary
+                        var dictionaryObject = (TransientDictionary)cp.GetValue(this);
+                        foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
+                        {
+                            // Let's set its value into the update message
+                            fieldValues.AppendLine(SetFieldValueXml(changedProp.Key, changedProp.Value, changedProp.Value.GetType().Name, ref counter));
+                        }
+                    }
+                    else
+                    {
+                        // Let's set its value into the update message
+                        fieldValues.AppendLine(SetFieldValueXml(changedField.SharePointName, this.GetValue(changedField.Name), changedField.DataType.Name, ref counter));
+                    }
+                }
+            }
+
+            // No changes, so bail out
+            if (!changeFound)
+            {
+                return null;
+            }
+
+            // update field values
+            xml = xml.Replace("{FieldValues}", fieldValues.ToString());
+
+            // update counter
+            xml = xml.Replace("{Counter}", counter.ToString());
+
+            return xml;
+        }
+
+        private static string SetFieldValueXml(string fieldName, object fieldValue, string fieldType, ref int counter)
+        {
+            string xml = CsomHelper.ListItemSystemUpdateSetFieldValue;
+
+            xml = xml.Replace("{Counter}", counter.ToString());
+            xml = xml.Replace("{FieldName}", fieldName);
+            // TODO: verify complex fieldtypes
+            xml = xml.Replace("{FieldValue}", CsomHelper.XmlString(fieldValue.ToString(), false));
+            xml = xml.Replace("{FieldType}", fieldType);
+
+            counter++;
+            return xml;
+        }
+        #endregion
+
+        #endregion
 
     }
 }

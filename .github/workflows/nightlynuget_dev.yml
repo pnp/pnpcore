@@ -1,0 +1,36 @@
+name: Nightly nuget release
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * *'
+    
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+      with: 
+        ref: dev
+    - name: Create and publish nuget 
+      env:
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      shell: pwsh
+      run: |
+        ./build/build.ps1
+    # Add and commit changes
+    - name: Add & Commit
+      uses: EndBug/add-and-commit@v4.2.1
+    # Push changes to github
+    - name: GitHub Push
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        # Destination branch to push changes
+        branch: dev

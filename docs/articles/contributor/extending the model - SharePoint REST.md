@@ -13,7 +13,7 @@ For model classes that **are linq queriable** one needs to link the concrete (so
 [ConcreteType(typeof(List))]
 public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
 {
-    // Ommitted for brevity
+    // Omitted for brevity
 }
 ```
 
@@ -51,7 +51,7 @@ Below sample shows how a model can be decorated for multiple scopes:
 [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", Get = "_api/Web/Lists(guid'{Parent.Id}')/contenttypes", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/contenttypes")]
 internal partial class ContentType
 {
-    // Ommitted for brevity
+    // Omitted for brevity
 }
 ```
 
@@ -342,7 +342,7 @@ AddApiCallHandler = (additionalInformation) =>
 
 ## Doing additional API calls
 
-Above example showed the `AddApiCallHandler` which provides an framework for doing add requests, but you often also need to do other types of requests (e.g. adding an available content type to a list, recycling a list, ...) and for that you need to be able to execute API calls. There are 2 ways to do this:
+Above example showed the `AddApiCallHandler` which provides a framework for doing add requests, but you often also need to do other types of requests (e.g. adding an available content type to a list, recycling a list, ...) and for that you need to be able to execute API calls. There are 2 ways to do this:
 
 - Run an API call and automatically load the resulting API call response in the model
 - Run an API call and process the resulting json as part of your code

@@ -1,6 +1,6 @@
 # The PnP Core SDK model
 
-The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and the their operations (e.g. Get). This model has a public part (interfaces) and an implementation (internal, partial classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. **As a contributor, extending and enriching the model is how you provide functionality to the developers that will be using this SDK**.
+The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and their operations (e.g. Get). This model has a public part (interfaces) and an implementation (internal, partial classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. **As a contributor, extending and enriching the model is how you provide functionality to the developers that will be using this SDK**.
 
 ![SDK overview](../../images/sdk%20overview.png)
 
@@ -65,7 +65,7 @@ public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
 Each public model:
 
 - Uses a public interface (e.g. `IList` in our example) with public fields
-- Uses the `ConcreteType` attribute to defined the implementation type that belongs to this interface
+- Uses the `ConcreteType` attribute to define the implementation type that belongs to this interface
 - Has inline documentation on the model class and fields
 - Always implements the `IDataModel<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample)
 - Optionally implements the `IDataModelUpdate` interface whenever **update** functionality in needed on this model class
@@ -306,7 +306,7 @@ public interface IListCollection : IDataModelCollection<IList>, IQueryable<IList
     /// <returns>Newly added list</returns>
     public Task<IList> AddAsync(string title, int templateType);
 
-    // Other methods ommitted for brevity
+    // Other methods omitted for brevity
 }
 ```
 
@@ -358,7 +358,7 @@ Here's a snippet of the `ListCollection.cs` class:
 ```csharp
 internal partial class ListCollection
 {
-    // Other methods ommitted for brevity
+    // Other methods omitted for brevity
 
     public async Task<IList> AddAsync(string title, int templateType)
     {
