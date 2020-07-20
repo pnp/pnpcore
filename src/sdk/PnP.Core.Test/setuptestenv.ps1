@@ -65,4 +65,3 @@ New-PnPWeb -Title "Sub site" -Url "subsite" -Locale 1033 -Template "STS#3"
 Write-Host "All sites are created, next step is updating your test configuration file with the created urls"
 
 Disconnect-PnPOnline
-

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
 {
@@ -223,6 +224,65 @@ namespace PnP.Core.QueryModel
                     ));
         }
 
+        /// <summary>
+        /// Extension method to select a list (IList) by title asynchronously
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="title">The title to search for</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static Task<Core.Model.SharePoint.IList> GetByTitleAsync(
+            this IQueryable<Core.Model.SharePoint.IList> source, string title)
+        {
+            // Just rely on the below overload, without providing any selector
+            return source.GetByTitleAsync(title, null);
+        }
+
+        /// <summary>
+        /// Extension method to select a list (IList) by title asynchronously
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static Task<Core.Model.SharePoint.IList> GetByTitleAsync(
+            this IQueryable<Core.Model.SharePoint.IList> source,
+            string title,
+            params Expression<Func<Core.Model.SharePoint.IList, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (title is null)
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            IQueryable<Core.Model.SharePoint.IList> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<Core.Model.SharePoint.IList, bool>> predicate = l => l.Title == title;
+
+            if (!(source.Provider is IAsyncQueryProvider asyncQueryProvider))
+            {
+                throw new InvalidOperationException("Queryable source does not support async");
+            }
+
+            return asyncQueryProvider.ExecuteAsync<Task<Core.Model.SharePoint.IList>>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    ));
+        }
+
         #endregion
 
         #region GetById for Lists implementation
@@ -281,8 +341,66 @@ namespace PnP.Core.QueryModel
                     ));
         }
 
-        #endregion
+        /// <summary>
+        /// Extension method to select a list (IList) by id
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="id">The id to search for</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static Task<Core.Model.SharePoint.IList> GetByIdAsync(
+            this IQueryable<Core.Model.SharePoint.IList> source, Guid id)
+        {
+            // Just rely on the below overload, without providing any selector
+            return source.GetByIdAsync(id, null);
+        }
 
+        /// <summary>
+        /// Extension method to select a list (IList) by id
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static Task<Core.Model.SharePoint.IList> GetByIdAsync(
+            this IQueryable<Core.Model.SharePoint.IList> source,
+            Guid id,
+            params Expression<Func<Core.Model.SharePoint.IList, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            IQueryable<Core.Model.SharePoint.IList> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<Core.Model.SharePoint.IList, bool>> predicate = l => l.Id == id;
+
+            if (!(source.Provider is IAsyncQueryProvider asyncQueryProvider))
+            {
+                throw new InvalidOperationException("Queryable source does not support async");
+            }
+
+            return asyncQueryProvider.ExecuteAsync<Task<Core.Model.SharePoint.IList>>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    ));
+        }
+
+        #endregion
 
         #region GetById for List Items implementation
 
@@ -329,6 +447,61 @@ namespace PnP.Core.QueryModel
             Expression<Func<Core.Model.SharePoint.IListItem, bool>> predicate = l => l.Id == id;
 
             return source.Provider.Execute<Core.Model.SharePoint.IListItem>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    ));
+        }
+
+        /// <summary>
+        /// Extension method to select a list item (IListItem) by Id asynchronously
+        /// </summary>
+        /// <param name="source">The collection of lists items to get the item by Id from</param>
+        /// <param name="id">The Id to search for</param>
+        /// <returns>The resulting list item instance, if any</returns>
+        public static Task<Core.Model.SharePoint.IListItem> GetByIdAsync(
+            this IQueryable<Core.Model.SharePoint.IListItem> source, int id)
+        {
+            // Just rely on the below overload, without providing any selector
+            return source.GetByIdAsync(id, null);
+        }
+
+        /// <summary>
+        /// Extension method to select a list item (IListItem) by Id asynchronously
+        /// </summary>
+        /// <param name="source">The collection of lists items to get the item by Id from</param>
+        /// <param name="id">The Id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list item instance, if any</returns>
+        public static Task<Core.Model.SharePoint.IListItem> GetByIdAsync(
+            this IQueryable<Core.Model.SharePoint.IListItem> source,
+            int id,
+            params Expression<Func<Core.Model.SharePoint.IListItem, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            IQueryable<Core.Model.SharePoint.IListItem> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<Core.Model.SharePoint.IListItem, bool>> predicate = l => l.Id == id;
+
+            if (!(source.Provider is IAsyncQueryProvider asyncQueryProvider))
+            {
+                throw new InvalidOperationException("Queryable source does not support async");
+            }
+
+            return asyncQueryProvider.ExecuteAsync<Task<Core.Model.SharePoint.IListItem>>(
                 Expression.Call(
                     null,
                     GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
@@ -392,6 +565,60 @@ namespace PnP.Core.QueryModel
                     GetMethodInfo(Queryable.Where, selectionTarget, predicate),
                     new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
                     )).ToList().FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Extension method to select a channel (ITeamChannel) by displayName asynchronously
+        /// </summary>
+        /// <param name="source">The collection of channels to get the channel by displayName from</param>
+        /// <param name="displayName">The displayName to search for</param>
+        /// <returns>The resulting channel instance, if any</returns>
+        public static Task<Core.Model.Teams.ITeamChannel> GetByDisplayNameAsync(
+            this IQueryable<Core.Model.Teams.ITeamChannel> source, string displayName)
+        {
+            // Just rely on the below overload, without providing any selector
+            return source.GetByDisplayNameAsync(displayName, null);
+        }
+
+        /// <summary>
+        /// Extension method to select a channel (ITeamChannel) by displayName asynchronously
+        /// </summary>
+        /// <param name="source">The collection of channels to get the channel by displayName from</param>
+        /// <param name="displayName">The displayName to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting channel instance, if any</returns>
+        public static Task<Core.Model.Teams.ITeamChannel> GetByDisplayNameAsync(
+            this IQueryable<Core.Model.Teams.ITeamChannel> source,
+            string displayName,
+            params Expression<Func<Core.Model.Teams.ITeamChannel, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (displayName is null)
+            {
+                throw new ArgumentNullException(nameof(displayName));
+            }
+
+            IQueryable<Core.Model.Teams.ITeamChannel> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<Core.Model.Teams.ITeamChannel, bool>> predicate = c => c.DisplayName == displayName;
+
+            return source.Provider.CreateQuery<Core.Model.Teams.ITeamChannel>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Where, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    )).FirstOrDefaultAsync();
         }
 
         #endregion

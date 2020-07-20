@@ -12,6 +12,7 @@ namespace PnP.Core.Test.Utilities
 {
     public sealed class TestCommon
     {
+        private const string AsyncSuffix = "_Async";
         private static readonly Lazy<TestCommon> _lazyInstance = new Lazy<TestCommon>(() => new TestCommon(), true);
         private IPnPContextFactory pnpContextFactoryCache;
         private static readonly SemaphoreSlim semaphoreSlimFactory = new SemaphoreSlim(1);
@@ -68,7 +69,7 @@ namespace PnP.Core.Test.Utilities
         /// </summary>
         private TestCommon()
         {
-            
+
         }
 
         public PnPContext GetContext(string configurationName, int id = 0,
@@ -78,13 +79,20 @@ namespace PnP.Core.Test.Utilities
             // Obtain factory (cached)
             var factory = BuildContextFactory();
 
+            // Remove Async suffix
+            if (testName.EndsWith(AsyncSuffix))
+            {
+                testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
+            }
+
             // Configure the factory for our testing mode
-            (factory as TestPnPContextFactory).Mocking = Mocking;
-            (factory as TestPnPContextFactory).Id = id;
-            (factory as TestPnPContextFactory).TestName = testName;
-            (factory as TestPnPContextFactory).SourceFilePath = sourceFilePath;
-            (factory as TestPnPContextFactory).GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
-            (factory as TestPnPContextFactory).TestUris = TestUris;
+            var testPnPContextFactory = factory as TestPnPContextFactory;
+            testPnPContextFactory.Mocking = Mocking;
+            testPnPContextFactory.Id = id;
+            testPnPContextFactory.TestName = testName;
+            testPnPContextFactory.SourceFilePath = sourceFilePath;
+            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
+            testPnPContextFactory.TestUris = TestUris;
 
             return BuildContextFactory().Create(configurationName);
         }
@@ -209,7 +217,7 @@ namespace PnP.Core.Test.Utilities
                            Name = NoGroupTestSite,
                            SiteUrl = new Uri(noGroupSiteUrl),
                            AuthenticationProviderName = "CredentialManagerAuthentication",
-                       });                       
+                       });
                        // Configure the main test site also to use access token based auth
                        options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
                        {

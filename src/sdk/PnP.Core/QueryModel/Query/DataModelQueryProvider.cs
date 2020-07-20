@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
 {
@@ -37,13 +38,13 @@ namespace PnP.Core.QueryModel
 
         #region BaseQueryProvider abstract methods implementation
 
-        public override object Execute(Expression expression)
+        public override Task<object> ExecuteObjectAsync(Expression expression)
         {
             // Translate the query expression into an actual query text for the target Query Service
             var query = Translate(expression);
 
             // Execute the query via the target Query Service
-            return queryService.ExecuteQuery(expression.Type, query);
+            return queryService.ExecuteQueryAsync(expression.Type, query);
         }
 
         public override IQueryable CreateQuery(Expression expression)
