@@ -980,33 +980,6 @@ references:
   fullName.vb: PnP.Core.Model.IDataModel(Of TModel)
   nameWithType: IDataModel<TModel>
   nameWithType.vb: IDataModel(Of TModel)
-- uid: PnP.Core.Model.IDataModel`1.Get(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
-  name: Get(Batch, Expression<Func<TModel, Object>>[])
-  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Get_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModel`1.Get(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
-  name.vb: Get(Batch, Expression(Of Func(Of TModel, Object))())
-  fullName: PnP.Core.Model.IDataModel<TModel>.Get(PnP.Core.Services.Batch, System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).Get(PnP.Core.Services.Batch, System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
-  nameWithType: IDataModel<TModel>.Get(Batch, Expression<Func<TModel, Object>>[])
-  nameWithType.vb: IDataModel(Of TModel).Get(Batch, Expression(Of Func(Of TModel, Object))())
-- uid: PnP.Core.Model.IDataModel`1.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
-  name: Get(Expression<Func<TModel, Object>>[])
-  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Get_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModel`1.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
-  name.vb: Get(Expression(Of Func(Of TModel, Object))())
-  fullName: PnP.Core.Model.IDataModel<TModel>.Get(System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).Get(System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
-  nameWithType: IDataModel<TModel>.Get(Expression<Func<TModel, Object>>[])
-  nameWithType.vb: IDataModel(Of TModel).Get(Expression(Of Func(Of TModel, Object))())
-- uid: PnP.Core.Model.IDataModel`1.Get*
-  name: Get
-  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Get_
-  commentId: Overload:PnP.Core.Model.IDataModel`1.Get
-  isSpec: "True"
-  fullName: PnP.Core.Model.IDataModel<TModel>.Get
-  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).Get
-  nameWithType: IDataModel<TModel>.Get
-  nameWithType.vb: IDataModel(Of TModel).Get
 - uid: PnP.Core.Model.IDataModel`1.GetAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
   name: GetAsync(Expression<Func<TModel, Object>>[])
   href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_GetAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
@@ -1025,6 +998,33 @@ references:
   fullName.vb: PnP.Core.Model.IDataModel(Of TModel).GetAsync
   nameWithType: IDataModel<TModel>.GetAsync
   nameWithType.vb: IDataModel(Of TModel).GetAsync
+- uid: PnP.Core.Model.IDataModel`1.GetBatchAsync(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name: GetBatchAsync(Batch, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_GetBatchAsync_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModel`1.GetBatchAsync(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name.vb: GetBatchAsync(Batch, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModel<TModel>.GetBatchAsync(PnP.Core.Services.Batch, System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).GetBatchAsync(PnP.Core.Services.Batch, System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
+  nameWithType: IDataModel<TModel>.GetBatchAsync(Batch, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModel(Of TModel).GetBatchAsync(Batch, Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModel`1.GetBatchAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name: GetBatchAsync(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_GetBatchAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModel`1.GetBatchAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name.vb: GetBatchAsync(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModel<TModel>.GetBatchAsync(System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).GetBatchAsync(System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
+  nameWithType: IDataModel<TModel>.GetBatchAsync(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModel(Of TModel).GetBatchAsync(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModel`1.GetBatchAsync*
+  name: GetBatchAsync
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_GetBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModel`1.GetBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModel<TModel>.GetBatchAsync
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).GetBatchAsync
+  nameWithType: IDataModel<TModel>.GetBatchAsync
+  nameWithType.vb: IDataModel(Of TModel).GetBatchAsync
 - uid: PnP.Core.Model.IDataModel`1.HasChanged(System.String)
   name: HasChanged(String)
   href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasChanged_System_String_
@@ -1091,25 +1091,6 @@ references:
   commentId: T:PnP.Core.Model.IDataModelDelete
   fullName: PnP.Core.Model.IDataModelDelete
   nameWithType: IDataModelDelete
-- uid: PnP.Core.Model.IDataModelDelete.Delete
-  name: Delete()
-  href: api/PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete
-  commentId: M:PnP.Core.Model.IDataModelDelete.Delete
-  fullName: PnP.Core.Model.IDataModelDelete.Delete()
-  nameWithType: IDataModelDelete.Delete()
-- uid: PnP.Core.Model.IDataModelDelete.Delete(PnP.Core.Services.Batch)
-  name: Delete(Batch)
-  href: api/PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Model.IDataModelDelete.Delete(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Model.IDataModelDelete.Delete(PnP.Core.Services.Batch)
-  nameWithType: IDataModelDelete.Delete(Batch)
-- uid: PnP.Core.Model.IDataModelDelete.Delete*
-  name: Delete
-  href: api/PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete_
-  commentId: Overload:PnP.Core.Model.IDataModelDelete.Delete
-  isSpec: "True"
-  fullName: PnP.Core.Model.IDataModelDelete.Delete
-  nameWithType: IDataModelDelete.Delete
 - uid: PnP.Core.Model.IDataModelDelete.DeleteAsync
   name: DeleteAsync()
   href: api/PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteAsync
@@ -1123,37 +1104,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IDataModelDelete.DeleteAsync
   nameWithType: IDataModelDelete.DeleteAsync
+- uid: PnP.Core.Model.IDataModelDelete.DeleteBatchAsync
+  name: DeleteBatchAsync()
+  href: api/PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteBatchAsync
+  commentId: M:PnP.Core.Model.IDataModelDelete.DeleteBatchAsync
+  fullName: PnP.Core.Model.IDataModelDelete.DeleteBatchAsync()
+  nameWithType: IDataModelDelete.DeleteBatchAsync()
+- uid: PnP.Core.Model.IDataModelDelete.DeleteBatchAsync(PnP.Core.Services.Batch)
+  name: DeleteBatchAsync(Batch)
+  href: api/PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.IDataModelDelete.DeleteBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.IDataModelDelete.DeleteBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IDataModelDelete.DeleteBatchAsync(Batch)
+- uid: PnP.Core.Model.IDataModelDelete.DeleteBatchAsync*
+  name: DeleteBatchAsync
+  href: api/PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelDelete.DeleteBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelDelete.DeleteBatchAsync
+  nameWithType: IDataModelDelete.DeleteBatchAsync
 - uid: PnP.Core.Model.IDataModelGet
   name: IDataModelGet
   href: api/PnP.Core.Model.IDataModelGet.html
   commentId: T:PnP.Core.Model.IDataModelGet
   fullName: PnP.Core.Model.IDataModelGet
   nameWithType: IDataModelGet
-- uid: PnP.Core.Model.IDataModelGet.Get(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{System.Object,System.Object}}[])
-  name: Get(Batch, Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.Get(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{System.Object,System.Object}}[])
-  name.vb: Get(Batch, Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.Get(PnP.Core.Services.Batch, System.Linq.Expressions.Expression<System.Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.Get(PnP.Core.Services.Batch, System.Linq.Expressions.Expression(Of System.Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.Get(Batch, Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.Get(Batch, Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.Get(System.Linq.Expressions.Expression{System.Func{System.Object,System.Object}}[])
-  name: Get(Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.Get(System.Linq.Expressions.Expression{System.Func{System.Object,System.Object}}[])
-  name.vb: Get(Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.Get(System.Linq.Expressions.Expression<System.Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.Get(System.Linq.Expressions.Expression(Of System.Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.Get(Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.Get(Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.Get*
-  name: Get
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_
-  commentId: Overload:PnP.Core.Model.IDataModelGet.Get
-  isSpec: "True"
-  fullName: PnP.Core.Model.IDataModelGet.Get
-  nameWithType: IDataModelGet.Get
 - uid: PnP.Core.Model.IDataModelGet.GetAsync(PnP.Core.Services.ApiResponse,System.Linq.Expressions.Expression{System.Func{System.Object,System.Object}}[])
   name: GetAsync(ApiResponse, Expression<Func<Object, Object>>[])
   href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____
@@ -1179,6 +1154,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IDataModelGet.GetAsync
   nameWithType: IDataModelGet.GetAsync
+- uid: PnP.Core.Model.IDataModelGet.GetBatchAsync(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{System.Object,System.Object}}[])
+  name: GetBatchAsync(Batch, Expression<Func<Object, Object>>[])
+  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelGet.GetBatchAsync(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{System.Object,System.Object}}[])
+  name.vb: GetBatchAsync(Batch, Expression(Of Func(Of Object, Object))())
+  fullName: PnP.Core.Model.IDataModelGet.GetBatchAsync(PnP.Core.Services.Batch, System.Linq.Expressions.Expression<System.Func<System.Object, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelGet.GetBatchAsync(PnP.Core.Services.Batch, System.Linq.Expressions.Expression(Of System.Func(Of System.Object, System.Object))())
+  nameWithType: IDataModelGet.GetBatchAsync(Batch, Expression<Func<Object, Object>>[])
+  nameWithType.vb: IDataModelGet.GetBatchAsync(Batch, Expression(Of Func(Of Object, Object))())
+- uid: PnP.Core.Model.IDataModelGet.GetBatchAsync(System.Linq.Expressions.Expression{System.Func{System.Object,System.Object}}[])
+  name: GetBatchAsync(Expression<Func<Object, Object>>[])
+  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelGet.GetBatchAsync(System.Linq.Expressions.Expression{System.Func{System.Object,System.Object}}[])
+  name.vb: GetBatchAsync(Expression(Of Func(Of Object, Object))())
+  fullName: PnP.Core.Model.IDataModelGet.GetBatchAsync(System.Linq.Expressions.Expression<System.Func<System.Object, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelGet.GetBatchAsync(System.Linq.Expressions.Expression(Of System.Func(Of System.Object, System.Object))())
+  nameWithType: IDataModelGet.GetBatchAsync(Expression<Func<Object, Object>>[])
+  nameWithType.vb: IDataModelGet.GetBatchAsync(Expression(Of Func(Of Object, Object))())
+- uid: PnP.Core.Model.IDataModelGet.GetBatchAsync*
+  name: GetBatchAsync
+  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelGet.GetBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelGet.GetBatchAsync
+  nameWithType: IDataModelGet.GetBatchAsync
 - uid: PnP.Core.Model.IDataModelGet`1
   name: IDataModelGet<TModel>
   href: api/PnP.Core.Model.IDataModelGet-1.html
@@ -1188,33 +1188,6 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel)
   nameWithType: IDataModelGet<TModel>
   nameWithType.vb: IDataModelGet(Of TModel)
-- uid: PnP.Core.Model.IDataModelGet`1.Get(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
-  name: Get(Batch, Expression<Func<TModel, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet`1.Get(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
-  name.vb: Get(Batch, Expression(Of Func(Of TModel, Object))())
-  fullName: PnP.Core.Model.IDataModelGet<TModel>.Get(PnP.Core.Services.Batch, System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).Get(PnP.Core.Services.Batch, System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
-  nameWithType: IDataModelGet<TModel>.Get(Batch, Expression<Func<TModel, Object>>[])
-  nameWithType.vb: IDataModelGet(Of TModel).Get(Batch, Expression(Of Func(Of TModel, Object))())
-- uid: PnP.Core.Model.IDataModelGet`1.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
-  name: Get(Expression<Func<TModel, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet`1.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
-  name.vb: Get(Expression(Of Func(Of TModel, Object))())
-  fullName: PnP.Core.Model.IDataModelGet<TModel>.Get(System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).Get(System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
-  nameWithType: IDataModelGet<TModel>.Get(Expression<Func<TModel, Object>>[])
-  nameWithType.vb: IDataModelGet(Of TModel).Get(Expression(Of Func(Of TModel, Object))())
-- uid: PnP.Core.Model.IDataModelGet`1.Get*
-  name: Get
-  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_
-  commentId: Overload:PnP.Core.Model.IDataModelGet`1.Get
-  isSpec: "True"
-  fullName: PnP.Core.Model.IDataModelGet<TModel>.Get
-  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).Get
-  nameWithType: IDataModelGet<TModel>.Get
-  nameWithType.vb: IDataModelGet(Of TModel).Get
 - uid: PnP.Core.Model.IDataModelGet`1.GetAsync(PnP.Core.Services.ApiResponse,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
   name: GetAsync(ApiResponse, Expression<Func<TModel, Object>>[])
   href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
@@ -1242,6 +1215,33 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetAsync
   nameWithType: IDataModelGet<TModel>.GetAsync
   nameWithType.vb: IDataModelGet(Of TModel).GetAsync
+- uid: PnP.Core.Model.IDataModelGet`1.GetBatchAsync(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name: GetBatchAsync(Batch, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelGet`1.GetBatchAsync(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name.vb: GetBatchAsync(Batch, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.GetBatchAsync(PnP.Core.Services.Batch, System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetBatchAsync(PnP.Core.Services.Batch, System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
+  nameWithType: IDataModelGet<TModel>.GetBatchAsync(Batch, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelGet(Of TModel).GetBatchAsync(Batch, Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelGet`1.GetBatchAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name: GetBatchAsync(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelGet`1.GetBatchAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])
+  name.vb: GetBatchAsync(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.GetBatchAsync(System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetBatchAsync(System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
+  nameWithType: IDataModelGet<TModel>.GetBatchAsync(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelGet(Of TModel).GetBatchAsync(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelGet`1.GetBatchAsync*
+  name: GetBatchAsync
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelGet`1.GetBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.GetBatchAsync
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetBatchAsync
+  nameWithType: IDataModelGet<TModel>.GetBatchAsync
+  nameWithType.vb: IDataModelGet(Of TModel).GetBatchAsync
 - uid: PnP.Core.Model.IDataModelMappingHandler
   name: IDataModelMappingHandler
   href: api/PnP.Core.Model.IDataModelMappingHandler.html
@@ -1299,25 +1299,6 @@ references:
   commentId: T:PnP.Core.Model.IDataModelUpdate
   fullName: PnP.Core.Model.IDataModelUpdate
   nameWithType: IDataModelUpdate
-- uid: PnP.Core.Model.IDataModelUpdate.Update
-  name: Update()
-  href: api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_Update
-  commentId: M:PnP.Core.Model.IDataModelUpdate.Update
-  fullName: PnP.Core.Model.IDataModelUpdate.Update()
-  nameWithType: IDataModelUpdate.Update()
-- uid: PnP.Core.Model.IDataModelUpdate.Update(PnP.Core.Services.Batch)
-  name: Update(Batch)
-  href: api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_Update_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Model.IDataModelUpdate.Update(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Model.IDataModelUpdate.Update(PnP.Core.Services.Batch)
-  nameWithType: IDataModelUpdate.Update(Batch)
-- uid: PnP.Core.Model.IDataModelUpdate.Update*
-  name: Update
-  href: api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_Update_
-  commentId: Overload:PnP.Core.Model.IDataModelUpdate.Update
-  isSpec: "True"
-  fullName: PnP.Core.Model.IDataModelUpdate.Update
-  nameWithType: IDataModelUpdate.Update
 - uid: PnP.Core.Model.IDataModelUpdate.UpdateAsync
   name: UpdateAsync()
   href: api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateAsync
@@ -1331,6 +1312,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IDataModelUpdate.UpdateAsync
   nameWithType: IDataModelUpdate.UpdateAsync
+- uid: PnP.Core.Model.IDataModelUpdate.UpdateBatchAsync
+  name: UpdateBatchAsync()
+  href: api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatchAsync
+  commentId: M:PnP.Core.Model.IDataModelUpdate.UpdateBatchAsync
+  fullName: PnP.Core.Model.IDataModelUpdate.UpdateBatchAsync()
+  nameWithType: IDataModelUpdate.UpdateBatchAsync()
+- uid: PnP.Core.Model.IDataModelUpdate.UpdateBatchAsync(PnP.Core.Services.Batch)
+  name: UpdateBatchAsync(Batch)
+  href: api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.IDataModelUpdate.UpdateBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.IDataModelUpdate.UpdateBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IDataModelUpdate.UpdateBatchAsync(Batch)
+- uid: PnP.Core.Model.IDataModelUpdate.UpdateBatchAsync*
+  name: UpdateBatchAsync
+  href: api/PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelUpdate.UpdateBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelUpdate.UpdateBatchAsync
+  nameWithType: IDataModelUpdate.UpdateBatchAsync
 - uid: PnP.Core.Model.IDataModelWithContext
   name: IDataModelWithContext
   href: api/PnP.Core.Model.IDataModelWithContext.html
@@ -3193,25 +3193,6 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IContentTypeCollection
   fullName: PnP.Core.Model.SharePoint.IContentTypeCollection
   nameWithType: IContentTypeCollection
-- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.Add(PnP.Core.Services.Batch,System.String,System.String,System.String,System.String)
-  name: Add(Batch, String, String, String, String)
-  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_Add_PnP_Core_Services_Batch_System_String_System_String_System_String_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.Add(PnP.Core.Services.Batch,System.String,System.String,System.String,System.String)
-  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.Add(PnP.Core.Services.Batch, System.String, System.String, System.String, System.String)
-  nameWithType: IContentTypeCollection.Add(Batch, String, String, String, String)
-- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.Add(System.String,System.String,System.String,System.String)
-  name: Add(String, String, String, String)
-  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_Add_System_String_System_String_System_String_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.Add(System.String,System.String,System.String,System.String)
-  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.Add(System.String, System.String, System.String, System.String)
-  nameWithType: IContentTypeCollection.Add(String, String, String, String)
-- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.Add*
-  name: Add
-  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_Add_
-  commentId: Overload:PnP.Core.Model.SharePoint.IContentTypeCollection.Add
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.Add
-  nameWithType: IContentTypeCollection.Add
 - uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAsync(System.String,System.String,System.String,System.String)
   name: AddAsync(String, String, String, String)
   href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAsync_System_String_System_String_System_String_System_String_
@@ -3225,25 +3206,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAsync
   nameWithType: IContentTypeCollection.AddAsync
-- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(PnP.Core.Services.Batch,System.String)
-  name: AddAvailableContentType(Batch, String)
-  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentType_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(PnP.Core.Services.Batch, System.String)
-  nameWithType: IContentTypeCollection.AddAvailableContentType(Batch, String)
-- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(System.String)
-  name: AddAvailableContentType(String)
-  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentType_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(System.String)
-  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType(System.String)
-  nameWithType: IContentTypeCollection.AddAvailableContentType(String)
-- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType*
-  name: AddAvailableContentType
-  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentType_
-  commentId: Overload:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentType
-  nameWithType: IContentTypeCollection.AddAvailableContentType
 - uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeAsync(System.String)
   name: AddAvailableContentTypeAsync(String)
   href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentTypeAsync_System_String_
@@ -3257,6 +3219,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeAsync
   nameWithType: IContentTypeCollection.AddAvailableContentTypeAsync
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddAvailableContentTypeBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentTypeBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: IContentTypeCollection.AddAvailableContentTypeBatchAsync(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeBatchAsync(System.String)
+  name: AddAvailableContentTypeBatchAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentTypeBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeBatchAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeBatchAsync(System.String)
+  nameWithType: IContentTypeCollection.AddAvailableContentTypeBatchAsync(String)
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeBatchAsync*
+  name: AddAvailableContentTypeBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddAvailableContentTypeBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddAvailableContentTypeBatchAsync
+  nameWithType: IContentTypeCollection.AddAvailableContentTypeBatchAsync
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.String,System.String)
+  name: AddBatchAsync(Batch, String, String, String, String)
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, System.String, System.String, System.String)
+  nameWithType: IContentTypeCollection.AddBatchAsync(Batch, String, String, String, String)
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync(System.String,System.String,System.String,System.String)
+  name: AddBatchAsync(String, String, String, String)
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddBatchAsync_System_String_System_String_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync(System.String,System.String,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync(System.String, System.String, System.String, System.String)
+  nameWithType: IContentTypeCollection.AddBatchAsync(String, String, String, String)
+- uid: PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IContentTypeCollection.html#PnP_Core_Model_SharePoint_IContentTypeCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync
+  nameWithType: IContentTypeCollection.AddBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFeature
   name: IFeature
   href: api/PnP.Core.Model.SharePoint.IFeature.html
@@ -3295,25 +3295,6 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFeatureCollection
   fullName: PnP.Core.Model.SharePoint.IFeatureCollection
   nameWithType: IFeatureCollection
-- uid: PnP.Core.Model.SharePoint.IFeatureCollection.Disable(PnP.Core.Services.Batch,System.Guid)
-  name: Disable(Batch, Guid)
-  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_Disable_PnP_Core_Services_Batch_System_Guid_
-  commentId: M:PnP.Core.Model.SharePoint.IFeatureCollection.Disable(PnP.Core.Services.Batch,System.Guid)
-  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.Disable(PnP.Core.Services.Batch, System.Guid)
-  nameWithType: IFeatureCollection.Disable(Batch, Guid)
-- uid: PnP.Core.Model.SharePoint.IFeatureCollection.Disable(System.Guid)
-  name: Disable(Guid)
-  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_Disable_System_Guid_
-  commentId: M:PnP.Core.Model.SharePoint.IFeatureCollection.Disable(System.Guid)
-  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.Disable(System.Guid)
-  nameWithType: IFeatureCollection.Disable(Guid)
-- uid: PnP.Core.Model.SharePoint.IFeatureCollection.Disable*
-  name: Disable
-  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_Disable_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFeatureCollection.Disable
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.Disable
-  nameWithType: IFeatureCollection.Disable
 - uid: PnP.Core.Model.SharePoint.IFeatureCollection.DisableAsync(System.Guid)
   name: DisableAsync(Guid)
   href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_DisableAsync_System_Guid_
@@ -3327,25 +3308,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFeatureCollection.DisableAsync
   nameWithType: IFeatureCollection.DisableAsync
-- uid: PnP.Core.Model.SharePoint.IFeatureCollection.Enable(PnP.Core.Services.Batch,System.Guid)
-  name: Enable(Batch, Guid)
-  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_Enable_PnP_Core_Services_Batch_System_Guid_
-  commentId: M:PnP.Core.Model.SharePoint.IFeatureCollection.Enable(PnP.Core.Services.Batch,System.Guid)
-  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.Enable(PnP.Core.Services.Batch, System.Guid)
-  nameWithType: IFeatureCollection.Enable(Batch, Guid)
-- uid: PnP.Core.Model.SharePoint.IFeatureCollection.Enable(System.Guid)
-  name: Enable(Guid)
-  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_Enable_System_Guid_
-  commentId: M:PnP.Core.Model.SharePoint.IFeatureCollection.Enable(System.Guid)
-  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.Enable(System.Guid)
-  nameWithType: IFeatureCollection.Enable(Guid)
-- uid: PnP.Core.Model.SharePoint.IFeatureCollection.Enable*
-  name: Enable
-  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_Enable_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFeatureCollection.Enable
+- uid: PnP.Core.Model.SharePoint.IFeatureCollection.DisableBatchAsync(PnP.Core.Services.Batch,System.Guid)
+  name: DisableBatchAsync(Batch, Guid)
+  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_DisableBatchAsync_PnP_Core_Services_Batch_System_Guid_
+  commentId: M:PnP.Core.Model.SharePoint.IFeatureCollection.DisableBatchAsync(PnP.Core.Services.Batch,System.Guid)
+  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.DisableBatchAsync(PnP.Core.Services.Batch, System.Guid)
+  nameWithType: IFeatureCollection.DisableBatchAsync(Batch, Guid)
+- uid: PnP.Core.Model.SharePoint.IFeatureCollection.DisableBatchAsync(System.Guid)
+  name: DisableBatchAsync(Guid)
+  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_DisableBatchAsync_System_Guid_
+  commentId: M:PnP.Core.Model.SharePoint.IFeatureCollection.DisableBatchAsync(System.Guid)
+  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.DisableBatchAsync(System.Guid)
+  nameWithType: IFeatureCollection.DisableBatchAsync(Guid)
+- uid: PnP.Core.Model.SharePoint.IFeatureCollection.DisableBatchAsync*
+  name: DisableBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_DisableBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFeatureCollection.DisableBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.Enable
-  nameWithType: IFeatureCollection.Enable
+  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.DisableBatchAsync
+  nameWithType: IFeatureCollection.DisableBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFeatureCollection.EnableAsync(System.Guid)
   name: EnableAsync(Guid)
   href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_EnableAsync_System_Guid_
@@ -3359,6 +3340,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFeatureCollection.EnableAsync
   nameWithType: IFeatureCollection.EnableAsync
+- uid: PnP.Core.Model.SharePoint.IFeatureCollection.EnableBatchAsync(PnP.Core.Services.Batch,System.Guid)
+  name: EnableBatchAsync(Batch, Guid)
+  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_EnableBatchAsync_PnP_Core_Services_Batch_System_Guid_
+  commentId: M:PnP.Core.Model.SharePoint.IFeatureCollection.EnableBatchAsync(PnP.Core.Services.Batch,System.Guid)
+  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.EnableBatchAsync(PnP.Core.Services.Batch, System.Guid)
+  nameWithType: IFeatureCollection.EnableBatchAsync(Batch, Guid)
+- uid: PnP.Core.Model.SharePoint.IFeatureCollection.EnableBatchAsync(System.Guid)
+  name: EnableBatchAsync(Guid)
+  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_EnableBatchAsync_System_Guid_
+  commentId: M:PnP.Core.Model.SharePoint.IFeatureCollection.EnableBatchAsync(System.Guid)
+  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.EnableBatchAsync(System.Guid)
+  nameWithType: IFeatureCollection.EnableBatchAsync(Guid)
+- uid: PnP.Core.Model.SharePoint.IFeatureCollection.EnableBatchAsync*
+  name: EnableBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFeatureCollection.html#PnP_Core_Model_SharePoint_IFeatureCollection_EnableBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFeatureCollection.EnableBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFeatureCollection.EnableBatchAsync
+  nameWithType: IFeatureCollection.EnableBatchAsync
 - uid: PnP.Core.Model.SharePoint.IField
   name: IField
   href: api/PnP.Core.Model.SharePoint.IField.html
@@ -4320,25 +4320,6 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFieldCollection
   fullName: PnP.Core.Model.SharePoint.IFieldCollection
   nameWithType: IFieldCollection
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.Add(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  name: Add(Batch, String, FieldType, FieldOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.Add(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.Add(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
-  nameWithType: IFieldCollection.Add(Batch, String, FieldType, FieldOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  name: Add(String, FieldType, FieldOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
-  nameWithType: IFieldCollection.Add(String, FieldType, FieldOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.Add*
-  name: Add
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_Add_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.Add
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.Add
-  nameWithType: IFieldCollection.Add
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
   name: AddAsync(String, FieldType, FieldOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
@@ -4352,25 +4333,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddAsync
   nameWithType: IFieldCollection.AddAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
-  name: AddCalculated(Batch, String, FieldCalculatedOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldCalculatedOptions)
-  nameWithType: IFieldCollection.AddCalculated(Batch, String, FieldCalculatedOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
-  name: AddCalculated(String, FieldCalculatedOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(System.String, PnP.Core.Model.SharePoint.FieldCalculatedOptions)
-  nameWithType: IFieldCollection.AddCalculated(String, FieldCalculatedOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated*
-  name: AddCalculated
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
+  name: AddBatchAsync(Batch, String, FieldType, FieldOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
+  nameWithType: IFieldCollection.AddBatchAsync(Batch, String, FieldType, FieldOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
+  name: AddBatchAsync(String, FieldType, FieldOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
+  nameWithType: IFieldCollection.AddBatchAsync(String, FieldType, FieldOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated
-  nameWithType: IFieldCollection.AddCalculated
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync
+  nameWithType: IFieldCollection.AddBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedAsync(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
   name: AddCalculatedAsync(String, FieldCalculatedOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedAsync_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_
@@ -4384,25 +4365,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedAsync
   nameWithType: IFieldCollection.AddCalculatedAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)
-  name: AddChoice(Batch, String, FieldChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldChoiceOptions)
-  nameWithType: IFieldCollection.AddChoice(Batch, String, FieldChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)
-  name: AddChoice(String, FieldChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoice(System.String, PnP.Core.Model.SharePoint.FieldChoiceOptions)
-  nameWithType: IFieldCollection.AddChoice(String, FieldChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoice*
-  name: AddChoice
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoice_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddChoice
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
+  name: AddCalculatedBatchAsync(Batch, String, FieldCalculatedOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldCalculatedOptions)
+  nameWithType: IFieldCollection.AddCalculatedBatchAsync(Batch, String, FieldCalculatedOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
+  name: AddCalculatedBatchAsync(String, FieldCalculatedOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldCalculatedOptions)
+  nameWithType: IFieldCollection.AddCalculatedBatchAsync(String, FieldCalculatedOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedBatchAsync*
+  name: AddCalculatedBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoice
-  nameWithType: IFieldCollection.AddChoice
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedBatchAsync
+  nameWithType: IFieldCollection.AddCalculatedBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceAsync(System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)
   name: AddChoiceAsync(String, FieldChoiceOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_
@@ -4416,25 +4397,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceAsync
   nameWithType: IFieldCollection.AddChoiceAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
-  name: AddCurrency(Batch, String, FieldCurrencyOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldCurrencyOptions)
-  nameWithType: IFieldCollection.AddCurrency(Batch, String, FieldCurrencyOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
-  name: AddCurrency(String, FieldCurrencyOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(System.String, PnP.Core.Model.SharePoint.FieldCurrencyOptions)
-  nameWithType: IFieldCollection.AddCurrency(String, FieldCurrencyOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency*
-  name: AddCurrency
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)
+  name: AddChoiceBatchAsync(Batch, String, FieldChoiceOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldChoiceOptions)
+  nameWithType: IFieldCollection.AddChoiceBatchAsync(Batch, String, FieldChoiceOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)
+  name: AddChoiceBatchAsync(String, FieldChoiceOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldChoiceOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldChoiceOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldChoiceOptions)
+  nameWithType: IFieldCollection.AddChoiceBatchAsync(String, FieldChoiceOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync*
+  name: AddChoiceBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency
-  nameWithType: IFieldCollection.AddCurrency
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync
+  nameWithType: IFieldCollection.AddChoiceBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyAsync(System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
   name: AddCurrencyAsync(String, FieldCurrencyOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCurrencyAsync_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_
@@ -4448,25 +4429,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyAsync
   nameWithType: IFieldCollection.AddCurrencyAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)
-  name: AddDateTime(Batch, String, FieldDateTimeOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldDateTimeOptions)
-  nameWithType: IFieldCollection.AddDateTime(Batch, String, FieldDateTimeOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)
-  name: AddDateTime(String, FieldDateTimeOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime(System.String, PnP.Core.Model.SharePoint.FieldDateTimeOptions)
-  nameWithType: IFieldCollection.AddDateTime(String, FieldDateTimeOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime*
-  name: AddDateTime
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddDateTime_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
+  name: AddCurrencyBatchAsync(Batch, String, FieldCurrencyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCurrencyBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldCurrencyOptions)
+  nameWithType: IFieldCollection.AddCurrencyBatchAsync(Batch, String, FieldCurrencyOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
+  name: AddCurrencyBatchAsync(String, FieldCurrencyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCurrencyBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldCurrencyOptions)
+  nameWithType: IFieldCollection.AddCurrencyBatchAsync(String, FieldCurrencyOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyBatchAsync*
+  name: AddCurrencyBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCurrencyBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTime
-  nameWithType: IFieldCollection.AddDateTime
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrencyBatchAsync
+  nameWithType: IFieldCollection.AddCurrencyBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeAsync(System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)
   name: AddDateTimeAsync(String, FieldDateTimeOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddDateTimeAsync_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_
@@ -4480,25 +4461,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeAsync
   nameWithType: IFieldCollection.AddDateTimeAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
-  name: AddFieldAsXml(Batch, String, Boolean, AddFieldOptionsFlags)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXml_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(PnP.Core.Services.Batch, System.String, System.Boolean, PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
-  nameWithType: IFieldCollection.AddFieldAsXml(Batch, String, Boolean, AddFieldOptionsFlags)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
-  name: AddFieldAsXml(String, Boolean, AddFieldOptionsFlags)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXml_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(System.String, System.Boolean, PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
-  nameWithType: IFieldCollection.AddFieldAsXml(String, Boolean, AddFieldOptionsFlags)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml*
-  name: AddFieldAsXml
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXml_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)
+  name: AddDateTimeBatchAsync(Batch, String, FieldDateTimeOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddDateTimeBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldDateTimeOptions)
+  nameWithType: IFieldCollection.AddDateTimeBatchAsync(Batch, String, FieldDateTimeOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)
+  name: AddDateTimeBatchAsync(String, FieldDateTimeOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddDateTimeBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldDateTimeOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldDateTimeOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldDateTimeOptions)
+  nameWithType: IFieldCollection.AddDateTimeBatchAsync(String, FieldDateTimeOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync*
+  name: AddDateTimeBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddDateTimeBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml
-  nameWithType: IFieldCollection.AddFieldAsXml
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync
+  nameWithType: IFieldCollection.AddDateTimeBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
   name: AddFieldAsXmlAsync(String, Boolean, AddFieldOptionsFlags)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXmlAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
@@ -4512,25 +4493,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlAsync
   nameWithType: IFieldCollection.AddFieldAsXmlAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
-  name: AddLookup(Batch, String, FieldLookupOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
-  nameWithType: IFieldCollection.AddLookup(Batch, String, FieldLookupOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
-  name: AddLookup(String, FieldLookupOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
-  nameWithType: IFieldCollection.AddLookup(String, FieldLookupOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookup*
-  name: AddLookup
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddLookup
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  name: AddFieldAsXmlBatchAsync(Batch, String, Boolean, AddFieldOptionsFlags)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXmlBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync(PnP.Core.Services.Batch, System.String, System.Boolean, PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  nameWithType: IFieldCollection.AddFieldAsXmlBatchAsync(Batch, String, Boolean, AddFieldOptionsFlags)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  name: AddFieldAsXmlBatchAsync(String, Boolean, AddFieldOptionsFlags)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXmlBatchAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync(System.String, System.Boolean, PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
+  nameWithType: IFieldCollection.AddFieldAsXmlBatchAsync(String, Boolean, AddFieldOptionsFlags)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync*
+  name: AddFieldAsXmlBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXmlBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookup
-  nameWithType: IFieldCollection.AddLookup
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync
+  nameWithType: IFieldCollection.AddFieldAsXmlBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupAsync(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
   name: AddLookupAsync(String, FieldLookupOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupAsync_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
@@ -4544,25 +4525,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupAsync
   nameWithType: IFieldCollection.AddLookupAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  name: AddMultiChoice(Batch, String, FieldMultiChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  nameWithType: IFieldCollection.AddMultiChoice(Batch, String, FieldMultiChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  name: AddMultiChoice(String, FieldMultiChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  nameWithType: IFieldCollection.AddMultiChoice(String, FieldMultiChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice*
-  name: AddMultiChoice
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  name: AddLookupBatchAsync(Batch, String, FieldLookupOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
+  nameWithType: IFieldCollection.AddLookupBatchAsync(Batch, String, FieldLookupOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  name: AddLookupBatchAsync(String, FieldLookupOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
+  nameWithType: IFieldCollection.AddLookupBatchAsync(String, FieldLookupOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync*
+  name: AddLookupBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice
-  nameWithType: IFieldCollection.AddMultiChoice
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync
+  nameWithType: IFieldCollection.AddLookupBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
   name: AddMultiChoiceAsync(String, FieldMultiChoiceOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
@@ -4576,25 +4557,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync
   nameWithType: IFieldCollection.AddMultiChoiceAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
-  name: AddMultilineText(Batch, String, FieldMultilineTextOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
-  nameWithType: IFieldCollection.AddMultilineText(Batch, String, FieldMultilineTextOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
-  name: AddMultilineText(String, FieldMultilineTextOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(System.String, PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
-  nameWithType: IFieldCollection.AddMultilineText(String, FieldMultilineTextOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText*
-  name: AddMultilineText
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
+  name: AddMultiChoiceBatchAsync(Batch, String, FieldMultiChoiceOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
+  nameWithType: IFieldCollection.AddMultiChoiceBatchAsync(Batch, String, FieldMultiChoiceOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
+  name: AddMultiChoiceBatchAsync(String, FieldMultiChoiceOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
+  nameWithType: IFieldCollection.AddMultiChoiceBatchAsync(String, FieldMultiChoiceOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync*
+  name: AddMultiChoiceBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText
-  nameWithType: IFieldCollection.AddMultilineText
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync
+  nameWithType: IFieldCollection.AddMultiChoiceBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextAsync(System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
   name: AddMultilineTextAsync(String, FieldMultilineTextOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineTextAsync_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_
@@ -4608,25 +4589,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextAsync
   nameWithType: IFieldCollection.AddMultilineTextAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)
-  name: AddNumber(Batch, String, FieldNumberOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldNumberOptions)
-  nameWithType: IFieldCollection.AddNumber(Batch, String, FieldNumberOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)
-  name: AddNumber(String, FieldNumberOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddNumber(System.String, PnP.Core.Model.SharePoint.FieldNumberOptions)
-  nameWithType: IFieldCollection.AddNumber(String, FieldNumberOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddNumber*
-  name: AddNumber
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddNumber_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddNumber
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
+  name: AddMultilineTextBatchAsync(Batch, String, FieldMultilineTextOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineTextBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
+  nameWithType: IFieldCollection.AddMultilineTextBatchAsync(Batch, String, FieldMultilineTextOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
+  name: AddMultilineTextBatchAsync(String, FieldMultilineTextOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineTextBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
+  nameWithType: IFieldCollection.AddMultilineTextBatchAsync(String, FieldMultilineTextOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextBatchAsync*
+  name: AddMultilineTextBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineTextBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddNumber
-  nameWithType: IFieldCollection.AddNumber
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineTextBatchAsync
+  nameWithType: IFieldCollection.AddMultilineTextBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddNumberAsync(System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)
   name: AddNumberAsync(String, FieldNumberOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddNumberAsync_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_
@@ -4640,25 +4621,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddNumberAsync
   nameWithType: IFieldCollection.AddNumberAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddText(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
-  name: AddText(Batch, String, FieldTextOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddText_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddText(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddText(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldTextOptions)
-  nameWithType: IFieldCollection.AddText(Batch, String, FieldTextOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddText(System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
-  name: AddText(String, FieldTextOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddText_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddText(System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddText(System.String, PnP.Core.Model.SharePoint.FieldTextOptions)
-  nameWithType: IFieldCollection.AddText(String, FieldTextOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddText*
-  name: AddText
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddText_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddText
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)
+  name: AddNumberBatchAsync(Batch, String, FieldNumberOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddNumberBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldNumberOptions)
+  nameWithType: IFieldCollection.AddNumberBatchAsync(Batch, String, FieldNumberOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)
+  name: AddNumberBatchAsync(String, FieldNumberOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddNumberBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldNumberOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldNumberOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldNumberOptions)
+  nameWithType: IFieldCollection.AddNumberBatchAsync(String, FieldNumberOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync*
+  name: AddNumberBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddNumberBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddText
-  nameWithType: IFieldCollection.AddText
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync
+  nameWithType: IFieldCollection.AddNumberBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTextAsync(System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
   name: AddTextAsync(String, FieldTextOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTextAsync_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_
@@ -4672,25 +4653,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTextAsync
   nameWithType: IFieldCollection.AddTextAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)
-  name: AddUrl(Batch, String, FieldUrlOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldUrlOptions)
-  nameWithType: IFieldCollection.AddUrl(Batch, String, FieldUrlOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)
-  name: AddUrl(String, FieldUrlOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUrl(System.String, PnP.Core.Model.SharePoint.FieldUrlOptions)
-  nameWithType: IFieldCollection.AddUrl(String, FieldUrlOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUrl*
-  name: AddUrl
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUrl_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddUrl
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTextBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
+  name: AddTextBatchAsync(Batch, String, FieldTextOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTextBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddTextBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTextBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldTextOptions)
+  nameWithType: IFieldCollection.AddTextBatchAsync(Batch, String, FieldTextOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTextBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
+  name: AddTextBatchAsync(String, FieldTextOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTextBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddTextBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTextBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldTextOptions)
+  nameWithType: IFieldCollection.AddTextBatchAsync(String, FieldTextOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTextBatchAsync*
+  name: AddTextBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTextBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddTextBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUrl
-  nameWithType: IFieldCollection.AddUrl
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTextBatchAsync
+  nameWithType: IFieldCollection.AddTextBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUrlAsync(System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)
   name: AddUrlAsync(String, FieldUrlOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUrlAsync_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_
@@ -4704,25 +4685,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUrlAsync
   nameWithType: IFieldCollection.AddUrlAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUser(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
-  name: AddUser(Batch, String, FieldUserOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUser_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUser(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUser(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
-  nameWithType: IFieldCollection.AddUser(Batch, String, FieldUserOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUser(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
-  name: AddUser(String, FieldUserOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUser_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUser(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUser(System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
-  nameWithType: IFieldCollection.AddUser(String, FieldUserOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUser*
-  name: AddUser
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUser_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddUser
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUrlBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)
+  name: AddUrlBatchAsync(Batch, String, FieldUrlOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUrlBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUrlBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUrlBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldUrlOptions)
+  nameWithType: IFieldCollection.AddUrlBatchAsync(Batch, String, FieldUrlOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUrlBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)
+  name: AddUrlBatchAsync(String, FieldUrlOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUrlBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldUrlOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUrlBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldUrlOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUrlBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldUrlOptions)
+  nameWithType: IFieldCollection.AddUrlBatchAsync(String, FieldUrlOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUrlBatchAsync*
+  name: AddUrlBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUrlBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddUrlBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUser
-  nameWithType: IFieldCollection.AddUser
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUrlBatchAsync
+  nameWithType: IFieldCollection.AddUrlBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserAsync(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
   name: AddUserAsync(String, FieldUserOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserAsync_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
@@ -4736,6 +4717,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserAsync
   nameWithType: IFieldCollection.AddUserAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  name: AddUserBatchAsync(Batch, String, FieldUserOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
+  nameWithType: IFieldCollection.AddUserBatchAsync(Batch, String, FieldUserOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  name: AddUserBatchAsync(String, FieldUserOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
+  nameWithType: IFieldCollection.AddUserBatchAsync(String, FieldUserOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync*
+  name: AddUserBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync
+  nameWithType: IFieldCollection.AddUserBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldLink
   name: IFieldLink
   href: api/PnP.Core.Model.SharePoint.IFieldLink.html
@@ -4852,25 +4852,6 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFieldLinkCollection
   fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection
   nameWithType: IFieldLinkCollection
-- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  name: Add(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(PnP.Core.Services.Batch, System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IFieldLinkCollection.Add(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  name: Add(String, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IFieldLinkCollection.Add(String, String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add*
-  name: Add
-  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLinkCollection.Add
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.Add
-  nameWithType: IFieldLinkCollection.Add
 - uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
   name: AddAsync(String, String, Boolean, Boolean, Boolean, Boolean)
   href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
@@ -4884,6 +4865,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync
   nameWithType: IFieldLinkCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: AddBatchAsync(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IFieldLinkCollection.AddBatchAsync(Batch, String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: AddBatchAsync(String, String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(System.String, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IFieldLinkCollection.AddBatchAsync(String, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldLinkCollection.html#PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync
+  nameWithType: IFieldLinkCollection.AddBatchAsync
 - uid: PnP.Core.Model.SharePoint.IList
   name: IList
   href: api/PnP.Core.Model.SharePoint.IList.html
@@ -5111,37 +5111,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.ForceCheckout
   nameWithType: IList.ForceCheckout
-- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  name: GetItemsByCamlQuery(CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Model_SharePoint_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Model.SharePoint.CamlQueryOptions)
-  nameWithType: IList.GetItemsByCamlQuery(CamlQueryOptions)
-- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
-  name: GetItemsByCamlQuery(Batch, CamlQueryOptions)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
-  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.CamlQueryOptions)
-  nameWithType: IList.GetItemsByCamlQuery(Batch, CamlQueryOptions)
-- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch,System.String)
-  name: GetItemsByCamlQuery(Batch, String)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(PnP.Core.Services.Batch, System.String)
-  nameWithType: IList.GetItemsByCamlQuery(Batch, String)
-- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(System.String)
-  name: GetItemsByCamlQuery(String)
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(System.String)
-  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery(System.String)
-  nameWithType: IList.GetItemsByCamlQuery(String)
-- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery*
-  name: GetItemsByCamlQuery
-  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQuery_
-  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQuery
-  nameWithType: IList.GetItemsByCamlQuery
 - uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
   name: GetItemsByCamlQueryAsync(CamlQueryOptions)
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_
@@ -5161,6 +5130,37 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryAsync
   nameWithType: IList.GetItemsByCamlQueryAsync
+- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  name: GetItemsByCamlQueryBatchAsync(CamlQueryOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Model_SharePoint_CamlQueryOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Model.SharePoint.CamlQueryOptions)
+  nameWithType: IList.GetItemsByCamlQueryBatchAsync(CamlQueryOptions)
+- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
+  name: GetItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_CamlQueryOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.CamlQueryOptions)
+  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.CamlQueryOptions)
+  nameWithType: IList.GetItemsByCamlQueryBatchAsync(Batch, CamlQueryOptions)
+- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: GetItemsByCamlQueryBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: IList.GetItemsByCamlQueryBatchAsync(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(System.String)
+  name: GetItemsByCamlQueryBatchAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync(System.String)
+  nameWithType: IList.GetItemsByCamlQueryBatchAsync(String)
+- uid: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync*
+  name: GetItemsByCamlQueryBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetItemsByCamlQueryBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.GetItemsByCamlQueryBatchAsync
+  nameWithType: IList.GetItemsByCamlQueryBatchAsync
 - uid: PnP.Core.Model.SharePoint.IList.GetListDataAsStreamAsync(PnP.Core.Model.SharePoint.RenderListDataOptions)
   name: GetListDataAsStreamAsync(RenderListDataOptions)
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_GetListDataAsStreamAsync_PnP_Core_Model_SharePoint_RenderListDataOptions_
@@ -5453,25 +5453,6 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IListCollection
   fullName: PnP.Core.Model.SharePoint.IListCollection
   nameWithType: IListCollection
-- uid: PnP.Core.Model.SharePoint.IListCollection.Add(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.ListTemplateType)
-  name: Add(Batch, String, ListTemplateType)
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_Add_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_ListTemplateType_
-  commentId: M:PnP.Core.Model.SharePoint.IListCollection.Add(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.ListTemplateType)
-  fullName: PnP.Core.Model.SharePoint.IListCollection.Add(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.ListTemplateType)
-  nameWithType: IListCollection.Add(Batch, String, ListTemplateType)
-- uid: PnP.Core.Model.SharePoint.IListCollection.Add(System.String,PnP.Core.Model.SharePoint.ListTemplateType)
-  name: Add(String, ListTemplateType)
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_Add_System_String_PnP_Core_Model_SharePoint_ListTemplateType_
-  commentId: M:PnP.Core.Model.SharePoint.IListCollection.Add(System.String,PnP.Core.Model.SharePoint.ListTemplateType)
-  fullName: PnP.Core.Model.SharePoint.IListCollection.Add(System.String, PnP.Core.Model.SharePoint.ListTemplateType)
-  nameWithType: IListCollection.Add(String, ListTemplateType)
-- uid: PnP.Core.Model.SharePoint.IListCollection.Add*
-  name: Add
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_Add_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.Add
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListCollection.Add
-  nameWithType: IListCollection.Add
 - uid: PnP.Core.Model.SharePoint.IListCollection.AddAsync(System.String,PnP.Core.Model.SharePoint.ListTemplateType)
   name: AddAsync(String, ListTemplateType)
   href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_ListTemplateType_
@@ -5485,22 +5466,41 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.AddAsync
   nameWithType: IListCollection.AddAsync
-- uid: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: BatchGetByTitle(String, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_BatchGetByTitle_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: BatchGetByTitle(String, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: IListCollection.BatchGetByTitle(String, Expression<Func<IList, Object>>[])
-  nameWithType.vb: IListCollection.BatchGetByTitle(String, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle*
-  name: BatchGetByTitle
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_BatchGetByTitle_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle
+- uid: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.ListTemplateType)
+  name: AddBatchAsync(Batch, String, ListTemplateType)
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_ListTemplateType_
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.ListTemplateType)
+  fullName: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.ListTemplateType)
+  nameWithType: IListCollection.AddBatchAsync(Batch, String, ListTemplateType)
+- uid: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync(System.String,PnP.Core.Model.SharePoint.ListTemplateType)
+  name: AddBatchAsync(String, ListTemplateType)
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_AddBatchAsync_System_String_PnP_Core_Model_SharePoint_ListTemplateType_
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync(System.String,PnP.Core.Model.SharePoint.ListTemplateType)
+  fullName: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync(System.String, PnP.Core.Model.SharePoint.ListTemplateType)
+  nameWithType: IListCollection.AddBatchAsync(String, ListTemplateType)
+- uid: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitle
-  nameWithType: IListCollection.BatchGetByTitle
+  fullName: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync
+  nameWithType: IListCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: BatchGetByTitleAsync(String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_BatchGetByTitleAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: BatchGetByTitleAsync(String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.BatchGetByTitleAsync(String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.BatchGetByTitleAsync(String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync*
+  name: BatchGetByTitleAsync
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_BatchGetByTitleAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync
+  nameWithType: IListCollection.BatchGetByTitleAsync
 - uid: PnP.Core.Model.SharePoint.IListItem
   name: IListItem
   href: api/PnP.Core.Model.SharePoint.IListItem.html
@@ -5533,25 +5533,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.Id
   nameWithType: IListItem.Id
-- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdate
-  name: SystemUpdate()
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdate
-  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdate
-  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdate()
-  nameWithType: IListItem.SystemUpdate()
-- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdate(PnP.Core.Services.Batch)
-  name: SystemUpdate(Batch)
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdate_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdate(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdate(PnP.Core.Services.Batch)
-  nameWithType: IListItem.SystemUpdate(Batch)
-- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdate*
-  name: SystemUpdate
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdate_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SystemUpdate
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdate
-  nameWithType: IListItem.SystemUpdate
 - uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
   name: SystemUpdateAsync()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync
@@ -5565,6 +5546,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
   nameWithType: IListItem.SystemUpdateAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync
+  name: SystemUpdateBatchAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync()
+  nameWithType: IListItem.SystemUpdateBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync(PnP.Core.Services.Batch)
+  name: SystemUpdateBatchAsync(Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IListItem.SystemUpdateBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync*
+  name: SystemUpdateBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync
+  nameWithType: IListItem.SystemUpdateBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListItem.Title
   name: Title
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Title
@@ -5578,25 +5578,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.Title
   nameWithType: IListItem.Title
-- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
-  name: UpdateOverwriteVersion()
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion
-  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
-  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion()
-  nameWithType: IListItem.UpdateOverwriteVersion()
-- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion(PnP.Core.Services.Batch)
-  name: UpdateOverwriteVersion(Batch)
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion(PnP.Core.Services.Batch)
-  nameWithType: IListItem.UpdateOverwriteVersion(Batch)
-- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion*
-  name: UpdateOverwriteVersion
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
-  nameWithType: IListItem.UpdateOverwriteVersion
 - uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
   name: UpdateOverwriteVersionAsync()
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync
@@ -5610,37 +5591,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
   nameWithType: IListItem.UpdateOverwriteVersionAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync
+  name: UpdateOverwriteVersionBatchAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync()
+  nameWithType: IListItem.UpdateOverwriteVersionBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)
+  name: UpdateOverwriteVersionBatchAsync(Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IListItem.UpdateOverwriteVersionBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync*
+  name: UpdateOverwriteVersionBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync
+  nameWithType: IListItem.UpdateOverwriteVersionBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListItemCollection
   name: IListItemCollection
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html
   commentId: T:PnP.Core.Model.SharePoint.IListItemCollection
   fullName: PnP.Core.Model.SharePoint.IListItemCollection
   nameWithType: IListItemCollection
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.Add(PnP.Core.Services.Batch,System.Collections.Generic.Dictionary{System.String,System.Object})
-  name: Add(Batch, Dictionary<String, Object>)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_Add_PnP_Core_Services_Batch_System_Collections_Generic_Dictionary_System_String_System_Object__
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.Add(PnP.Core.Services.Batch,System.Collections.Generic.Dictionary{System.String,System.Object})
-  name.vb: Add(Batch, Dictionary(Of String, Object))
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.Add(PnP.Core.Services.Batch, System.Collections.Generic.Dictionary<System.String, System.Object>)
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.Add(PnP.Core.Services.Batch, System.Collections.Generic.Dictionary(Of System.String, System.Object))
-  nameWithType: IListItemCollection.Add(Batch, Dictionary<String, Object>)
-  nameWithType.vb: IListItemCollection.Add(Batch, Dictionary(Of String, Object))
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.Add(System.Collections.Generic.Dictionary{System.String,System.Object})
-  name: Add(Dictionary<String, Object>)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_Add_System_Collections_Generic_Dictionary_System_String_System_Object__
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.Add(System.Collections.Generic.Dictionary{System.String,System.Object})
-  name.vb: Add(Dictionary(Of String, Object))
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.Add(System.Collections.Generic.Dictionary<System.String, System.Object>)
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.Add(System.Collections.Generic.Dictionary(Of System.String, System.Object))
-  nameWithType: IListItemCollection.Add(Dictionary<String, Object>)
-  nameWithType.vb: IListItemCollection.Add(Dictionary(Of String, Object))
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.Add*
-  name: Add
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_Add_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemCollection.Add
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.Add
-  nameWithType: IListItemCollection.Add
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(System.Collections.Generic.Dictionary{System.String,System.Object})
   name: AddAsync(Dictionary<String, Object>)
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_System_Collections_Generic_Dictionary_System_String_System_Object__
@@ -5657,6 +5632,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync
   nameWithType: IListItemCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch,System.Collections.Generic.Dictionary{System.String,System.Object})
+  name: AddBatchAsync(Batch, Dictionary<String, Object>)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_System_Collections_Generic_Dictionary_System_String_System_Object__
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch,System.Collections.Generic.Dictionary{System.String,System.Object})
+  name.vb: AddBatchAsync(Batch, Dictionary(Of String, Object))
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch, System.Collections.Generic.Dictionary<System.String, System.Object>)
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch, System.Collections.Generic.Dictionary(Of System.String, System.Object))
+  nameWithType: IListItemCollection.AddBatchAsync(Batch, Dictionary<String, Object>)
+  nameWithType.vb: IListItemCollection.AddBatchAsync(Batch, Dictionary(Of String, Object))
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(System.Collections.Generic.Dictionary{System.String,System.Object})
+  name: AddBatchAsync(Dictionary<String, Object>)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_System_Collections_Generic_Dictionary_System_String_System_Object__
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(System.Collections.Generic.Dictionary{System.String,System.Object})
+  name.vb: AddBatchAsync(Dictionary(Of String, Object))
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(System.Collections.Generic.Dictionary<System.String, System.Object>)
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(System.Collections.Generic.Dictionary(Of System.String, System.Object))
+  nameWithType: IListItemCollection.AddBatchAsync(Dictionary<String, Object>)
+  nameWithType.vb: IListItemCollection.AddBatchAsync(Dictionary(Of String, Object))
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync
+  nameWithType: IListItemCollection.AddBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.Contains(System.Int32)
   name: Contains(Int32)
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_Contains_System_Int32_
@@ -7693,25 +7693,6 @@ references:
   commentId: T:PnP.Core.Model.Teams.ITeamChannelCollection
   fullName: PnP.Core.Model.Teams.ITeamChannelCollection
   nameWithType: ITeamChannelCollection
-- uid: PnP.Core.Model.Teams.ITeamChannelCollection.Add(PnP.Core.Services.Batch,System.String,System.String)
-  name: Add(Batch, String, String)
-  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_Add_PnP_Core_Services_Batch_System_String_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChannelCollection.Add(PnP.Core.Services.Batch,System.String,System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.Add(PnP.Core.Services.Batch, System.String, System.String)
-  nameWithType: ITeamChannelCollection.Add(Batch, String, String)
-- uid: PnP.Core.Model.Teams.ITeamChannelCollection.Add(System.String,System.String)
-  name: Add(String, String)
-  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_Add_System_String_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChannelCollection.Add(System.String,System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.Add(System.String, System.String)
-  nameWithType: ITeamChannelCollection.Add(String, String)
-- uid: PnP.Core.Model.Teams.ITeamChannelCollection.Add*
-  name: Add
-  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_Add_
-  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelCollection.Add
-  isSpec: "True"
-  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.Add
-  nameWithType: ITeamChannelCollection.Add
 - uid: PnP.Core.Model.Teams.ITeamChannelCollection.AddAsync(System.String,System.String)
   name: AddAsync(String, String)
   href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_AddAsync_System_String_System_String_
@@ -7725,6 +7706,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChannelCollection.AddAsync
   nameWithType: ITeamChannelCollection.AddAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String)
+  name: AddBatchAsync(Batch, String, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, System.String)
+  nameWithType: ITeamChannelCollection.AddBatchAsync(Batch, String, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync(System.String,System.String)
+  name: AddBatchAsync(String, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_AddBatchAsync_System_String_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync(System.String,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync(System.String, System.String)
+  nameWithType: ITeamChannelCollection.AddBatchAsync(String, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync
+  nameWithType: ITeamChannelCollection.AddBatchAsync
 - uid: PnP.Core.Model.Teams.ITeamChannelTab
   name: ITeamChannelTab
   href: api/PnP.Core.Model.Teams.ITeamChannelTab.html
@@ -7815,25 +7815,6 @@ references:
   commentId: T:PnP.Core.Model.Teams.ITeamChannelTabCollection
   fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection
   nameWithType: ITeamChannelTabCollection
-- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTab(PnP.Core.Services.Batch,System.String,System.Uri)
-  name: AddDocumentLibraryTab(Batch, String, Uri)
-  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddDocumentLibraryTab_PnP_Core_Services_Batch_System_String_System_Uri_
-  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTab(PnP.Core.Services.Batch,System.String,System.Uri)
-  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTab(PnP.Core.Services.Batch, System.String, System.Uri)
-  nameWithType: ITeamChannelTabCollection.AddDocumentLibraryTab(Batch, String, Uri)
-- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTab(System.String,System.Uri)
-  name: AddDocumentLibraryTab(String, Uri)
-  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddDocumentLibraryTab_System_String_System_Uri_
-  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTab(System.String,System.Uri)
-  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTab(System.String, System.Uri)
-  nameWithType: ITeamChannelTabCollection.AddDocumentLibraryTab(String, Uri)
-- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTab*
-  name: AddDocumentLibraryTab
-  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddDocumentLibraryTab_
-  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTab
-  isSpec: "True"
-  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTab
-  nameWithType: ITeamChannelTabCollection.AddDocumentLibraryTab
 - uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabAsync(System.String,System.Uri)
   name: AddDocumentLibraryTabAsync(String, Uri)
   href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddDocumentLibraryTabAsync_System_String_System_Uri_
@@ -7847,25 +7828,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabAsync
   nameWithType: ITeamChannelTabCollection.AddDocumentLibraryTabAsync
-- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTab(PnP.Core.Services.Batch,System.String)
-  name: AddWikiTab(Batch, String)
-  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWikiTab_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTab(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTab(PnP.Core.Services.Batch, System.String)
-  nameWithType: ITeamChannelTabCollection.AddWikiTab(Batch, String)
-- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTab(System.String)
-  name: AddWikiTab(String)
-  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWikiTab_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTab(System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTab(System.String)
-  nameWithType: ITeamChannelTabCollection.AddWikiTab(String)
-- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTab*
-  name: AddWikiTab
-  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWikiTab_
-  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTab
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync(PnP.Core.Services.Batch,System.String,System.Uri)
+  name: AddDocumentLibraryTabBatchAsync(Batch, String, Uri)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddDocumentLibraryTabBatchAsync_PnP_Core_Services_Batch_System_String_System_Uri_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync(PnP.Core.Services.Batch,System.String,System.Uri)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync(PnP.Core.Services.Batch, System.String, System.Uri)
+  nameWithType: ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync(Batch, String, Uri)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync(System.String,System.Uri)
+  name: AddDocumentLibraryTabBatchAsync(String, Uri)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddDocumentLibraryTabBatchAsync_System_String_System_Uri_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync(System.String,System.Uri)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync(System.String, System.Uri)
+  nameWithType: ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync(String, Uri)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync*
+  name: AddDocumentLibraryTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddDocumentLibraryTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTab
-  nameWithType: ITeamChannelTabCollection.AddWikiTab
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddDocumentLibraryTabBatchAsync
 - uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabAsync(System.String)
   name: AddWikiTabAsync(String)
   href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWikiTabAsync_System_String_
@@ -7879,6 +7860,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabAsync
   nameWithType: ITeamChannelTabCollection.AddWikiTabAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddWikiTabBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWikiTabBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChannelTabCollection.AddWikiTabBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync(System.String)
+  name: AddWikiTabBatchAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWikiTabBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync(System.String)
+  nameWithType: ITeamChannelTabCollection.AddWikiTabBatchAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync*
+  name: AddWikiTabBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelTabCollection.html#PnP_Core_Model_Teams_ITeamChannelTabCollection_AddWikiTabBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelTabCollection.AddWikiTabBatchAsync
+  nameWithType: ITeamChannelTabCollection.AddWikiTabBatchAsync
 - uid: PnP.Core.Model.Teams.ITeamChannelTabConfiguration
   name: ITeamChannelTabConfiguration
   href: api/PnP.Core.Model.Teams.ITeamChannelTabConfiguration.html
@@ -8293,25 +8293,6 @@ references:
   commentId: T:PnP.Core.Model.Teams.ITeamChatMessageCollection
   fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection
   nameWithType: ITeamChatMessageCollection
-- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(PnP.Core.Services.Batch,System.String)
-  name: Add(Batch, String)
-  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(PnP.Core.Services.Batch, System.String)
-  nameWithType: ITeamChatMessageCollection.Add(Batch, String)
-- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String)
-  name: Add(String)
-  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_System_String_
-  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String)
-  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add(System.String)
-  nameWithType: ITeamChatMessageCollection.Add(String)
-- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add*
-  name: Add
-  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_Add_
-  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageCollection.Add
-  isSpec: "True"
-  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.Add
-  nameWithType: ITeamChatMessageCollection.Add
 - uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync(System.String)
   name: AddAsync(String)
   href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddAsync_System_String_
@@ -8325,6 +8306,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddAsync
   nameWithType: ITeamChatMessageCollection.AddAsync
+- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ITeamChatMessageCollection.AddBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String)
+  name: AddBatchAsync(String)
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String)
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync(System.String)
+  nameWithType: ITeamChatMessageCollection.AddBatchAsync(String)
+- uid: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html#PnP_Core_Model_Teams_ITeamChatMessageCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageCollection.AddBatchAsync
+  nameWithType: ITeamChatMessageCollection.AddBatchAsync
 - uid: PnP.Core.Model.Teams.ITeamChatMessageContent
   name: ITeamChatMessageContent
   href: api/PnP.Core.Model.Teams.ITeamChatMessageContent.html
@@ -10332,6 +10332,55 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.IPnPContextFactory.Create
   nameWithType: IPnPContextFactory.Create
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid)
+  name: CreateAsync(Guid)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid)
+  nameWithType: IPnPContextFactory.CreateAsync(Guid)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.IAuthenticationProvider)
+  name: CreateAsync(Guid, IAuthenticationProvider)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.IAuthenticationProvider)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid, PnP.Core.Services.IAuthenticationProvider)
+  nameWithType: IPnPContextFactory.CreateAsync(Guid, IAuthenticationProvider)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,System.String)
+  name: CreateAsync(Guid, String)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Guid_System_String_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid,System.String)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Guid, System.String)
+  nameWithType: IPnPContextFactory.CreateAsync(Guid, String)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String)
+  name: CreateAsync(String)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String)
+  nameWithType: IPnPContextFactory.CreateAsync(String)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri)
+  name: CreateAsync(Uri)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri)
+  nameWithType: IPnPContextFactory.CreateAsync(Uri)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.IAuthenticationProvider)
+  name: CreateAsync(Uri, IAuthenticationProvider)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.IAuthenticationProvider)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri, PnP.Core.Services.IAuthenticationProvider)
+  nameWithType: IPnPContextFactory.CreateAsync(Uri, IAuthenticationProvider)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,System.String)
+  name: CreateAsync(Uri, String)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_Uri_System_String_
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri,System.String)
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.Uri, System.String)
+  nameWithType: IPnPContextFactory.CreateAsync(Uri, String)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync*
+  name: CreateAsync
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_
+  commentId: Overload:PnP.Core.Services.IPnPContextFactory.CreateAsync
+  isSpec: "True"
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync
+  nameWithType: IPnPContextFactory.CreateAsync
 - uid: PnP.Core.Services.ISettings
   name: ISettings
   href: api/PnP.Core.Services.ISettings.html
@@ -11321,6 +11370,55 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.Create
   nameWithType: PnPContextFactory.Create
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Guid)
+  name: CreateAsync(Guid)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_Guid_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.Guid)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Guid)
+  nameWithType: PnPContextFactory.CreateAsync(Guid)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.IAuthenticationProvider)
+  name: CreateAsync(Guid, IAuthenticationProvider)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_Guid_PnP_Core_Services_IAuthenticationProvider_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.Guid,PnP.Core.Services.IAuthenticationProvider)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Guid, PnP.Core.Services.IAuthenticationProvider)
+  nameWithType: PnPContextFactory.CreateAsync(Guid, IAuthenticationProvider)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Guid,System.String)
+  name: CreateAsync(Guid, String)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_Guid_System_String_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.Guid,System.String)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Guid, System.String)
+  nameWithType: PnPContextFactory.CreateAsync(Guid, String)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String)
+  name: CreateAsync(String)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_String_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.String)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String)
+  nameWithType: PnPContextFactory.CreateAsync(String)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Uri)
+  name: CreateAsync(Uri)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_Uri_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.Uri)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Uri)
+  nameWithType: PnPContextFactory.CreateAsync(Uri)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.IAuthenticationProvider)
+  name: CreateAsync(Uri, IAuthenticationProvider)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_Uri_PnP_Core_Services_IAuthenticationProvider_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.Uri,PnP.Core.Services.IAuthenticationProvider)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Uri, PnP.Core.Services.IAuthenticationProvider)
+  nameWithType: PnPContextFactory.CreateAsync(Uri, IAuthenticationProvider)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Uri,System.String)
+  name: CreateAsync(Uri, String)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_Uri_System_String_
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.Uri,System.String)
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.Uri, System.String)
+  nameWithType: PnPContextFactory.CreateAsync(Uri, String)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync*
+  name: CreateAsync
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.CreateAsync
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync
+  nameWithType: PnPContextFactory.CreateAsync
 - uid: PnP.Core.Services.PnPContextFactory.Log
   name: Log
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Log
