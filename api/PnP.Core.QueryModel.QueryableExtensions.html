@@ -1,0 +1,1383 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class QueryableExtensions
+   | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class QueryableExtensions
+   | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.QueryModel.QueryableExtensions">
+  <h1 id="PnP_Core_QueryModel_QueryableExtensions" data-uid="PnP.Core.QueryModel.QueryableExtensions">Class QueryableExtensions
+  </h1>
+  <div class="markdown level0 summary"><p>Asynchronous LINQ related extension methods.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">QueryableExtensions</span></div>
+  </div>
+  
+  
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.QueryModel.html">PnP.Core.QueryModel</a></h6>
+  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class QueryableExtensions</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable__1_System_Linq_IQueryable___0__.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable%60%601(System.Linq.IQueryable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L544" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable_" data-uid="PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable__1_System_Linq_IQueryable___0__" data-uid="PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable``1(System.Linq.IQueryable{``0})"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable__1_System_Linq_IQueryable___0__" class="expander" data-toggle="collapse">AsAsyncEnumerable&lt;TSource&gt;(IQueryable&lt;TSource&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable__1_System_Linq_IQueryable___0__" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1">IAsyncEnumerable&lt;T&gt;</a> which can be enumerated asynchronously.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IAsyncEnumerable&lt;TSource&gt; AsAsyncEnumerable&lt;TSource&gt;(this IQueryable&lt;TSource&gt; source)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to enumerate.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1">IAsyncEnumerable</a>&lt;TSource&gt;
+        <p><p>The query results.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable__1_System_Linq_IQueryable___0___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.FirstAsync%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L124" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_FirstAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_" class="expander" data-toggle="collapse">FirstAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, Expression&lt;Func&lt;TSource, Boolean&gt;&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Asynchronously returns the first element of a sequence that satisfies a specified condition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TSource&gt; FirstAsync&lt;TSource&gt;(this IQueryable&lt;TSource&gt; source, Expression&lt;Func&lt;TSource, bool&gt;&gt; predicate, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to return the first element of.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSource, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;&gt;</span>
+        <span class="parametername">predicate</span>
+        <p><p>A function to test each element for a condition.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TSource&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains the first element in <code data-dev-comment-type="paramref" class="paramref">source</code> that passes the test in
+<code data-dev-comment-type="paramref" class="paramref">predicate</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  <h5 class="exceptions">Exceptions</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a>
+        <p><p><code data-dev-comment-type="paramref" class="paramref">source</code> or <code data-dev-comment-type="paramref" class="paramref">predicate</code> is <span class="xref">null</span>.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a>
+        <p><p>
+    No element satisfies the condition in <code data-dev-comment-type="paramref" class="paramref">predicate</code>
+</p>
+<p>
+    -or -
+</p>
+<p>
+<code data-dev-comment-type="paramref" class="paramref">source</code> contains no elements.
+</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.FirstAsync%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L76" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_FirstAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" class="expander" data-toggle="collapse">FirstAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Asynchronously returns the first element of a sequence.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TSource&gt; FirstAsync&lt;TSource&gt;(this IQueryable&lt;TSource&gt; source, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to return the first element of.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TSource&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains the first element in <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  <h5 class="exceptions">Exceptions</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a>
+        <p><p><code data-dev-comment-type="paramref" class="paramref">source</code> is <span class="xref">null</span>.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a>
+        <p><p><code data-dev-comment-type="paramref" class="paramref">source</code> contains no elements.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L204" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_" class="expander" data-toggle="collapse">FirstOrDefaultAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, Expression&lt;Func&lt;TSource, Boolean&gt;&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Asynchronously returns the first element of a sequence that satisfies a specified condition
+or a default value if no such element is found.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TSource&gt; FirstOrDefaultAsync&lt;TSource&gt;(this IQueryable&lt;TSource&gt; source, Expression&lt;Func&lt;TSource, bool&gt;&gt; predicate, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to return the first element of.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSource, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;&gt;</span>
+        <span class="parametername">predicate</span>
+        <p><p>A function to test each element for a condition.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TSource&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains <span class="xref">langword_csharp_default</span> ( <code data-dev-comment-type="typeparamref" class="typeparamref">TSource</code> ) if <code data-dev-comment-type="paramref" class="paramref">source</code>
+is empty or if no element passes the test specified by <code data-dev-comment-type="paramref" class="paramref">predicate</code> ; otherwise, the first
+element in <code data-dev-comment-type="paramref" class="paramref">source</code> that passes the test specified by <code data-dev-comment-type="paramref" class="paramref">predicate</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  <h5 class="exceptions">Exceptions</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a>
+        <p><p><code data-dev-comment-type="paramref" class="paramref">source</code> or <code data-dev-comment-type="paramref" class="paramref">predicate</code> is <span class="xref">null</span>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L165" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" class="expander" data-toggle="collapse">FirstOrDefaultAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Asynchronously returns the first element of a sequence, or a default value if the sequence contains no elements.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TSource&gt; FirstOrDefaultAsync&lt;TSource&gt;(this IQueryable&lt;TSource&gt; source, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to return the first element of.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TSource&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains <span class="xref">langword_csharp_default</span> ( <code data-dev-comment-type="typeparamref" class="typeparamref">TSource</code> ) if
+<code data-dev-comment-type="paramref" class="paramref">source</code> is empty; otherwise, the first element in <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  <h5 class="exceptions">Exceptions</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a>
+        <p><p><code data-dev-comment-type="paramref" class="paramref">source</code> is <span class="xref">null</span>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ForEachAsync__1_System_Linq_IQueryable___0__System_Action___0__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ForEachAsync%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Action%7B%60%600%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L510" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_ForEachAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ForEachAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_ForEachAsync__1_System_Linq_IQueryable___0__System_Action___0__System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ForEachAsync``1(System.Linq.IQueryable{``0},System.Action{``0},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_ForEachAsync__1_System_Linq_IQueryable___0__System_Action___0__System_Threading_CancellationToken_" class="expander" data-toggle="collapse">ForEachAsync&lt;T&gt;(IQueryable&lt;T&gt;, Action&lt;T&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_ForEachAsync__1_System_Linq_IQueryable___0__System_Action___0__System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Asynchronously enumerates the query results and performs the specified action on each element.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task ForEachAsync&lt;T&gt;(this IQueryable&lt;T&gt; source, Action&lt;T&gt; action, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;T&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to enumerate.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T&gt;</span>
+        <span class="parametername">action</span>
+        <p><p>The action to perform on each element.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p><p>A task that represents the asynchronous operation.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">T</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_ForEachAsync__1_System_Linq_IQueryable___0__System_Action___0__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_IgnoreQueryFilters__1_System_Linq_IQueryable___0__.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters%60%601(System.Linq.IQueryable%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L301" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_IgnoreQueryFilters_" data-uid="PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_IgnoreQueryFilters__1_System_Linq_IQueryable___0__" data-uid="PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters``1(System.Linq.IQueryable{``0})"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_IgnoreQueryFilters__1_System_Linq_IQueryable___0__" class="expander" data-toggle="collapse">IgnoreQueryFilters&lt;TEntity&gt;(IQueryable&lt;TEntity&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_IgnoreQueryFilters__1_System_Linq_IQueryable___0__" class="collapse in">
+  <div class="markdown level1 summary"><p>Specifies that the current LINQ query should not have any
+model-level entity query filters applied.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IQueryable&lt;TEntity&gt; IgnoreQueryFilters&lt;TEntity&gt;(this IQueryable&lt;TEntity&gt; source)
+    where TEntity : class</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TEntity&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>The source query.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TEntity&gt;
+        <p><p>A new query that will not apply any model-level entity query filters.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TEntity</span>
+        <p><p>The type of entity being queried.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L279" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" class="expander" data-toggle="collapse">ToArrayAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Asynchronously creates an array from an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> by enumerating it asynchronously.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TSource[]&gt; ToArrayAsync&lt;TSource&gt;(this IQueryable&lt;TSource&gt; source, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to create an array from.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TSource[]&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains an array that contains elements from the input sequence.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync%60%602(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Collections.Generic.IEqualityComparer%7B%60%601%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L380" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``2(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_" class="expander" data-toggle="collapse">ToDictionaryAsync&lt;TSource, TKey&gt;(IQueryable&lt;TSource&gt;, Func&lt;TSource, TKey&gt;, IEqualityComparer&lt;TKey&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> from an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> by enumerating it
+asynchronously
+according to a specified key selector function and a comparer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;Dictionary&lt;TKey, TSource&gt;&gt; ToDictionaryAsync&lt;TSource, TKey&gt;(this IQueryable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector, IEqualityComparer&lt;TKey&gt; comparer, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to create a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> from.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSource, TKey&gt;</span>
+        <span class="parametername">keySelector</span>
+        <p><p>A function to extract a key from each element.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1">IEqualityComparer</a>&lt;TKey&gt;</span>
+        <span class="parametername">comparer</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1">IEqualityComparer&lt;T&gt;</a> to compare keys.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TKey, TSource&gt;&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> that contains selected keys and values.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="parametername">TKey</span>
+        <p><p>The type of the key returned by <code data-dev-comment-type="paramref" class="paramref">keySelector</code> .</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync%60%602(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L345" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``2(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Threading_CancellationToken_" class="expander" data-toggle="collapse">ToDictionaryAsync&lt;TSource, TKey&gt;(IQueryable&lt;TSource&gt;, Func&lt;TSource, TKey&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> from an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> by enumerating it
+asynchronously
+according to a specified key selector function.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;Dictionary&lt;TKey, TSource&gt;&gt; ToDictionaryAsync&lt;TSource, TKey&gt;(this IQueryable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to create a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> from.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSource, TKey&gt;</span>
+        <span class="parametername">keySelector</span>
+        <p><p>A function to extract a key from each element.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TKey, TSource&gt;&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> that contains selected keys and values.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="parametername">TKey</span>
+        <p><p>The type of the key returned by <code data-dev-comment-type="paramref" class="paramref">keySelector</code> .</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync%60%603(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Func%7B%60%600%2C%60%602%7D%2CSystem.Collections.Generic.IEqualityComparer%7B%60%601%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L459" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``3(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Func{``0,``2},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_" class="expander" data-toggle="collapse">ToDictionaryAsync&lt;TSource, TKey, TElement&gt;(IQueryable&lt;TSource&gt;, Func&lt;TSource, TKey&gt;, Func&lt;TSource, TElement&gt;, IEqualityComparer&lt;TKey&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> from an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> by enumerating it
+asynchronously
+according to a specified key selector function, a comparer, and an element selector function.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;Dictionary&lt;TKey, TElement&gt;&gt; ToDictionaryAsync&lt;TSource, TKey, TElement&gt;(this IQueryable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector, Func&lt;TSource, TElement&gt; elementSelector, IEqualityComparer&lt;TKey&gt; comparer, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to create a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> from.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSource, TKey&gt;</span>
+        <span class="parametername">keySelector</span>
+        <p><p>A function to extract a key from each element.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSource, TElement&gt;</span>
+        <span class="parametername">elementSelector</span>
+        <p><p>A transform function to produce a result element value from each element.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1">IEqualityComparer</a>&lt;TKey&gt;</span>
+        <span class="parametername">comparer</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.iequalitycomparer-1">IEqualityComparer&lt;T&gt;</a> to compare keys.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TKey, TElement&gt;&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> that contains values of type
+<code data-dev-comment-type="typeparamref" class="typeparamref">TElement</code> selected from the input sequence.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="parametername">TKey</span>
+        <p><p>The type of the key returned by <code data-dev-comment-type="paramref" class="paramref">keySelector</code> .</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="parametername">TElement</span>
+        <p><p>The type of the value returned by <code data-dev-comment-type="paramref" class="paramref">elementSelector</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync%60%603(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Func%7B%60%600%2C%60%601%7D%2CSystem.Func%7B%60%600%2C%60%602%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L418" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``3(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Func{``0,``2},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Threading_CancellationToken_" class="expander" data-toggle="collapse">ToDictionaryAsync&lt;TSource, TKey, TElement&gt;(IQueryable&lt;TSource&gt;, Func&lt;TSource, TKey&gt;, Func&lt;TSource, TElement&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> from an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> by enumerating it
+asynchronously
+according to a specified key selector and an element selector function.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;Dictionary&lt;TKey, TElement&gt;&gt; ToDictionaryAsync&lt;TSource, TKey, TElement&gt;(this IQueryable&lt;TSource&gt; source, Func&lt;TSource, TKey&gt; keySelector, Func&lt;TSource, TElement&gt; elementSelector, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to create a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> from.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSource, TKey&gt;</span>
+        <span class="parametername">keySelector</span>
+        <p><p>A function to extract a key from each element.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TSource, TElement&gt;</span>
+        <span class="parametername">elementSelector</span>
+        <p><p>A transform function to produce a result element value from each element.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;TKey, TElement&gt;&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary&lt;TKey,TValue&gt;</a> that contains values of type
+<code data-dev-comment-type="typeparamref" class="typeparamref">TElement</code> selected from the input sequence.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="parametername">TKey</span>
+        <p><p>The type of the key returned by <code data-dev-comment-type="paramref" class="paramref">keySelector</code> .</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="parametername">TElement</span>
+        <p><p>The type of the value returned by <code data-dev-comment-type="paramref" class="paramref">elementSelector</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions.ToListAsync%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L246" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_QueryableExtensions_ToListAsync_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToListAsync*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" data-uid="PnP.Core.QueryModel.QueryableExtensions.ToListAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)"><a href="#collapsible-PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" class="expander" data-toggle="collapse">ToListAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_" class="collapse in">
+  <div class="markdown level1 summary"><p>Asynchronously creates a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a> from an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> by enumerating it
+asynchronously.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;List&lt;TSource&gt;&gt; ToListAsync&lt;TSource&gt;(this IQueryable&lt;TSource&gt; source, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TSource&gt;</span>
+        <span class="parametername">source</span>
+        <p><p>An <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable&lt;T&gt;</a> to create a list from.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></span>
+        <span class="parametername">cancellationToken</span>
+        <p><p>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> to observe while waiting for the task to complete.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;TSource&gt;&gt;
+        <p><p>A task that represents the asynchronous operation.
+The task result contains a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a> that contains elements from the input sequence.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TSource</span>
+        <p><p>The type of the elements of <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  <h5 id="PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+that any asynchronous operations have completed before calling another method on this context.</p>
+</div>
+  
+  
+  
+  </div>
+  
+  
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_QueryableExtensions.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.QueryableExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Linq/QueryableExtensions.cs/#L16" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            PnP Core SDK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -9163,6 +9163,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayName
   nameWithType: BaseDataModelExtensions.GetByDisplayName
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String)
+  name: GetByDisplayNameAsync(IQueryable<ITeamChannel>, String)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayNameAsync_System_Linq_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String)
+  name.vb: GetByDisplayNameAsync(IQueryable(Of ITeamChannel), String)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable<PnP.Core.Model.Teams.ITeamChannel>, System.String)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable(Of PnP.Core.Model.Teams.ITeamChannel), System.String)
+  nameWithType: BaseDataModelExtensions.GetByDisplayNameAsync(IQueryable<ITeamChannel>, String)
+  nameWithType.vb: BaseDataModelExtensions.GetByDisplayNameAsync(IQueryable(Of ITeamChannel), String)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
+  name: GetByDisplayNameAsync(IQueryable<ITeamChannel>, String, Expression<Func<ITeamChannel, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayNameAsync_System_Linq_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_Teams_ITeamChannel_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
+  name.vb: GetByDisplayNameAsync(IQueryable(Of ITeamChannel), String, Expression(Of Func(Of ITeamChannel, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable<PnP.Core.Model.Teams.ITeamChannel>, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.Teams.ITeamChannel, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable(Of PnP.Core.Model.Teams.ITeamChannel), System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.Teams.ITeamChannel, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetByDisplayNameAsync(IQueryable<ITeamChannel>, String, Expression<Func<ITeamChannel, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetByDisplayNameAsync(IQueryable(Of ITeamChannel), String, Expression(Of Func(Of ITeamChannel, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync*
+  name: GetByDisplayNameAsync
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayNameAsync_
+  commentId: Overload:PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync
+  nameWithType: BaseDataModelExtensions.GetByDisplayNameAsync
 - uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.Guid)
   name: GetById(IQueryable<IList>, Guid)
   href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_
@@ -9206,6 +9231,49 @@ references:
   isSpec: "True"
   fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetById
   nameWithType: BaseDataModelExtensions.GetById
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.Guid)
+  name: GetByIdAsync(IQueryable<IList>, Guid)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.Guid)
+  name.vb: GetByIdAsync(IQueryable(Of IList), Guid)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.IList>, System.Guid)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IList), System.Guid)
+  nameWithType: BaseDataModelExtensions.GetByIdAsync(IQueryable<IList>, Guid)
+  nameWithType.vb: BaseDataModelExtensions.GetByIdAsync(IQueryable(Of IList), Guid)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.Guid,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByIdAsync(IQueryable<IList>, Guid, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.Guid,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByIdAsync(IQueryable(Of IList), Guid, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.IList>, System.Guid, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IList), System.Guid, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetByIdAsync(IQueryable<IList>, Guid, Expression<Func<IList, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetByIdAsync(IQueryable(Of IList), Guid, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32)
+  name: GetByIdAsync(IQueryable<IListItem>, Int32)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32)
+  name.vb: GetByIdAsync(IQueryable(Of IListItem), Int32)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.IListItem>, System.Int32)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IListItem), System.Int32)
+  nameWithType: BaseDataModelExtensions.GetByIdAsync(IQueryable<IListItem>, Int32)
+  nameWithType.vb: BaseDataModelExtensions.GetByIdAsync(IQueryable(Of IListItem), Int32)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: GetByIdAsync(IQueryable<IListItem>, Int32, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: GetByIdAsync(IQueryable(Of IListItem), Int32, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.IListItem>, System.Int32, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IListItem), System.Int32, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetByIdAsync(IQueryable<IListItem>, Int32, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetByIdAsync(IQueryable(Of IListItem), Int32, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_
+  commentId: Overload:PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync
+  nameWithType: BaseDataModelExtensions.GetByIdAsync
 - uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitle(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.String)
   name: GetByTitle(IQueryable<IList>, String)
   href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitle_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_
@@ -9231,6 +9299,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitle
   nameWithType: BaseDataModelExtensions.GetByTitle
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.String)
+  name: GetByTitleAsync(IQueryable<IList>, String)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitleAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.String)
+  name.vb: GetByTitleAsync(IQueryable(Of IList), String)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.IList>, System.String)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String)
+  nameWithType: BaseDataModelExtensions.GetByTitleAsync(IQueryable<IList>, String)
+  nameWithType.vb: BaseDataModelExtensions.GetByTitleAsync(IQueryable(Of IList), String)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByTitleAsync(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitleAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByTitleAsync(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.IList>, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetByTitleAsync(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetByTitleAsync(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync*
+  name: GetByTitleAsync
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitleAsync_
+  commentId: Overload:PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync
+  nameWithType: BaseDataModelExtensions.GetByTitleAsync
 - uid: PnP.Core.QueryModel.BaseDataModelExtensions.Include*
   name: Include
   href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_Include_
@@ -9331,6 +9424,35 @@ references:
   fullName.vb: PnP.Core.QueryModel.BaseQueryProvider.Execute(Of TResult)(System.Linq.Expressions.Expression)
   nameWithType: BaseQueryProvider.Execute<TResult>(Expression)
   nameWithType.vb: BaseQueryProvider.Execute(Of TResult)(Expression)
+- uid: PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync*
+  name: ExecuteAsync
+  href: api/PnP.Core.QueryModel.BaseQueryProvider.html#PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync_
+  commentId: Overload:PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync
+  nameWithType: BaseQueryProvider.ExecuteAsync
+- uid: PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync``1(System.Linq.Expressions.Expression,System.Threading.CancellationToken)
+  name: ExecuteAsync<TResult>(Expression, CancellationToken)
+  href: api/PnP.Core.QueryModel.BaseQueryProvider.html#PnP_Core_QueryModel_BaseQueryProvider_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync``1(System.Linq.Expressions.Expression,System.Threading.CancellationToken)
+  name.vb: ExecuteAsync(Of TResult)(Expression, CancellationToken)
+  fullName: PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync<TResult>(System.Linq.Expressions.Expression, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.BaseQueryProvider.ExecuteAsync(Of TResult)(System.Linq.Expressions.Expression, System.Threading.CancellationToken)
+  nameWithType: BaseQueryProvider.ExecuteAsync<TResult>(Expression, CancellationToken)
+  nameWithType.vb: BaseQueryProvider.ExecuteAsync(Of TResult)(Expression, CancellationToken)
+- uid: PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync(System.Linq.Expressions.Expression)
+  name: ExecuteObjectAsync(Expression)
+  href: api/PnP.Core.QueryModel.BaseQueryProvider.html#PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_System_Linq_Expressions_Expression_
+  commentId: M:PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync(System.Linq.Expressions.Expression)
+  fullName: PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync(System.Linq.Expressions.Expression)
+  nameWithType: BaseQueryProvider.ExecuteObjectAsync(Expression)
+- uid: PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync*
+  name: ExecuteObjectAsync
+  href: api/PnP.Core.QueryModel.BaseQueryProvider.html#PnP_Core_QueryModel_BaseQueryProvider_ExecuteObjectAsync_
+  commentId: Overload:PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync
+  nameWithType: BaseQueryProvider.ExecuteObjectAsync
 - uid: PnP.Core.QueryModel.FilteringConcatOperator
   name: FilteringConcatOperator
   href: api/PnP.Core.QueryModel.FilteringConcatOperator.html
@@ -9483,6 +9605,28 @@ references:
   isSpec: "True"
   fullName: PnP.Core.QueryModel.FiltersGroup.Filters
   nameWithType: FiltersGroup.Filters
+- uid: PnP.Core.QueryModel.IAsyncQueryProvider
+  name: IAsyncQueryProvider
+  href: api/PnP.Core.QueryModel.IAsyncQueryProvider.html
+  commentId: T:PnP.Core.QueryModel.IAsyncQueryProvider
+  fullName: PnP.Core.QueryModel.IAsyncQueryProvider
+  nameWithType: IAsyncQueryProvider
+- uid: PnP.Core.QueryModel.IAsyncQueryProvider.ExecuteAsync*
+  name: ExecuteAsync
+  href: api/PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_ExecuteAsync_
+  commentId: Overload:PnP.Core.QueryModel.IAsyncQueryProvider.ExecuteAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.IAsyncQueryProvider.ExecuteAsync
+  nameWithType: IAsyncQueryProvider.ExecuteAsync
+- uid: PnP.Core.QueryModel.IAsyncQueryProvider.ExecuteAsync``1(System.Linq.Expressions.Expression,System.Threading.CancellationToken)
+  name: ExecuteAsync<TResult>(Expression, CancellationToken)
+  href: api/PnP.Core.QueryModel.IAsyncQueryProvider.html#PnP_Core_QueryModel_IAsyncQueryProvider_ExecuteAsync__1_System_Linq_Expressions_Expression_System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.IAsyncQueryProvider.ExecuteAsync``1(System.Linq.Expressions.Expression,System.Threading.CancellationToken)
+  name.vb: ExecuteAsync(Of TResult)(Expression, CancellationToken)
+  fullName: PnP.Core.QueryModel.IAsyncQueryProvider.ExecuteAsync<TResult>(System.Linq.Expressions.Expression, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.IAsyncQueryProvider.ExecuteAsync(Of TResult)(System.Linq.Expressions.Expression, System.Threading.CancellationToken)
+  nameWithType: IAsyncQueryProvider.ExecuteAsync<TResult>(Expression, CancellationToken)
+  nameWithType.vb: IAsyncQueryProvider.ExecuteAsync(Of TResult)(Expression, CancellationToken)
 - uid: PnP.Core.QueryModel.ODataFilter
   name: ODataFilter
   href: api/PnP.Core.QueryModel.ODataFilter.html
@@ -9570,6 +9714,185 @@ references:
   isSpec: "True"
   fullName: PnP.Core.QueryModel.OrderByItem.Field
   nameWithType: OrderByItem.Field
+- uid: PnP.Core.QueryModel.QueryableExtensions
+  name: QueryableExtensions
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html
+  commentId: T:PnP.Core.QueryModel.QueryableExtensions
+  fullName: PnP.Core.QueryModel.QueryableExtensions
+  nameWithType: QueryableExtensions
+- uid: PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable*
+  name: AsAsyncEnumerable
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable_
+  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable
+  nameWithType: QueryableExtensions.AsAsyncEnumerable
+- uid: PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable``1(System.Linq.IQueryable{``0})
+  name: AsAsyncEnumerable<TSource>(IQueryable<TSource>)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable__1_System_Linq_IQueryable___0__
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable``1(System.Linq.IQueryable{``0})
+  name.vb: AsAsyncEnumerable(Of TSource)(IQueryable(Of TSource))
+  fullName: PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable<TSource>(System.Linq.IQueryable<TSource>)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable(Of TSource)(System.Linq.IQueryable(Of TSource))
+  nameWithType: QueryableExtensions.AsAsyncEnumerable<TSource>(IQueryable<TSource>)
+  nameWithType.vb: QueryableExtensions.AsAsyncEnumerable(Of TSource)(IQueryable(Of TSource))
+- uid: PnP.Core.QueryModel.QueryableExtensions.FirstAsync*
+  name: FirstAsync
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstAsync_
+  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.FirstAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstAsync
+  nameWithType: QueryableExtensions.FirstAsync
+- uid: PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)
+  name: FirstAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)
+  name.vb: FirstAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstAsync<TSource>(System.Linq.IQueryable<TSource>, System.Linq.Expressions.Expression<System.Func<TSource, System.Boolean>>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.FirstAsync(Of TSource)(System.Linq.IQueryable(Of TSource), System.Linq.Expressions.Expression(Of System.Func(Of TSource, System.Boolean)), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.FirstAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.FirstAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)
+  name: FirstAsync<TSource>(IQueryable<TSource>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)
+  name.vb: FirstAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstAsync<TSource>(System.Linq.IQueryable<TSource>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.FirstAsync(Of TSource)(System.Linq.IQueryable(Of TSource), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.FirstAsync<TSource>(IQueryable<TSource>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.FirstAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync*
+  name: FirstOrDefaultAsync
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync_
+  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync
+  nameWithType: QueryableExtensions.FirstOrDefaultAsync
+- uid: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)
+  name: FirstOrDefaultAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)
+  name.vb: FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync<TSource>(System.Linq.IQueryable<TSource>, System.Linq.Expressions.Expression<System.Func<TSource, System.Boolean>>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(Of TSource)(System.Linq.IQueryable(Of TSource), System.Linq.Expressions.Expression(Of System.Func(Of TSource, System.Boolean)), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.FirstOrDefaultAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)
+  name: FirstOrDefaultAsync<TSource>(IQueryable<TSource>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)
+  name.vb: FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync<TSource>(System.Linq.IQueryable<TSource>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(Of TSource)(System.Linq.IQueryable(Of TSource), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.FirstOrDefaultAsync<TSource>(IQueryable<TSource>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.ForEachAsync*
+  name: ForEachAsync
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ForEachAsync_
+  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.ForEachAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ForEachAsync
+  nameWithType: QueryableExtensions.ForEachAsync
+- uid: PnP.Core.QueryModel.QueryableExtensions.ForEachAsync``1(System.Linq.IQueryable{``0},System.Action{``0},System.Threading.CancellationToken)
+  name: ForEachAsync<T>(IQueryable<T>, Action<T>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ForEachAsync__1_System_Linq_IQueryable___0__System_Action___0__System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.ForEachAsync``1(System.Linq.IQueryable{``0},System.Action{``0},System.Threading.CancellationToken)
+  name.vb: ForEachAsync(Of T)(IQueryable(Of T), Action(Of T), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ForEachAsync<T>(System.Linq.IQueryable<T>, System.Action<T>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.ForEachAsync(Of T)(System.Linq.IQueryable(Of T), System.Action(Of T), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.ForEachAsync<T>(IQueryable<T>, Action<T>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.ForEachAsync(Of T)(IQueryable(Of T), Action(Of T), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters*
+  name: IgnoreQueryFilters
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_IgnoreQueryFilters_
+  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters
+  nameWithType: QueryableExtensions.IgnoreQueryFilters
+- uid: PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters``1(System.Linq.IQueryable{``0})
+  name: IgnoreQueryFilters<TEntity>(IQueryable<TEntity>)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_IgnoreQueryFilters__1_System_Linq_IQueryable___0__
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters``1(System.Linq.IQueryable{``0})
+  name.vb: IgnoreQueryFilters(Of TEntity)(IQueryable(Of TEntity))
+  fullName: PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters<TEntity>(System.Linq.IQueryable<TEntity>)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.IgnoreQueryFilters(Of TEntity)(System.Linq.IQueryable(Of TEntity))
+  nameWithType: QueryableExtensions.IgnoreQueryFilters<TEntity>(IQueryable<TEntity>)
+  nameWithType.vb: QueryableExtensions.IgnoreQueryFilters(Of TEntity)(IQueryable(Of TEntity))
+- uid: PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync*
+  name: ToArrayAsync
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync_
+  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync
+  nameWithType: QueryableExtensions.ToArrayAsync
+- uid: PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)
+  name: ToArrayAsync<TSource>(IQueryable<TSource>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)
+  name.vb: ToArrayAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync<TSource>(System.Linq.IQueryable<TSource>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.ToArrayAsync(Of TSource)(System.Linq.IQueryable(Of TSource), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.ToArrayAsync<TSource>(IQueryable<TSource>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.ToArrayAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync*
+  name: ToDictionaryAsync
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync_
+  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync
+  nameWithType: QueryableExtensions.ToDictionaryAsync
+- uid: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``2(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)
+  name: ToDictionaryAsync<TSource, TKey>(IQueryable<TSource>, Func<TSource, TKey>, IEqualityComparer<TKey>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``2(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)
+  name.vb: ToDictionaryAsync(Of TSource, TKey)(IQueryable(Of TSource), Func(Of TSource, TKey), IEqualityComparer(Of TKey), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync<TSource, TKey>(System.Linq.IQueryable<TSource>, System.Func<TSource, TKey>, System.Collections.Generic.IEqualityComparer<TKey>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync(Of TSource, TKey)(System.Linq.IQueryable(Of TSource), System.Func(Of TSource, TKey), System.Collections.Generic.IEqualityComparer(Of TKey), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.ToDictionaryAsync<TSource, TKey>(IQueryable<TSource>, Func<TSource, TKey>, IEqualityComparer<TKey>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.ToDictionaryAsync(Of TSource, TKey)(IQueryable(Of TSource), Func(Of TSource, TKey), IEqualityComparer(Of TKey), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``2(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Threading.CancellationToken)
+  name: ToDictionaryAsync<TSource, TKey>(IQueryable<TSource>, Func<TSource, TKey>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``2(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Threading.CancellationToken)
+  name.vb: ToDictionaryAsync(Of TSource, TKey)(IQueryable(Of TSource), Func(Of TSource, TKey), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync<TSource, TKey>(System.Linq.IQueryable<TSource>, System.Func<TSource, TKey>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync(Of TSource, TKey)(System.Linq.IQueryable(Of TSource), System.Func(Of TSource, TKey), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.ToDictionaryAsync<TSource, TKey>(IQueryable<TSource>, Func<TSource, TKey>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.ToDictionaryAsync(Of TSource, TKey)(IQueryable(Of TSource), Func(Of TSource, TKey), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``3(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Func{``0,``2},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)
+  name: ToDictionaryAsync<TSource, TKey, TElement>(IQueryable<TSource>, Func<TSource, TKey>, Func<TSource, TElement>, IEqualityComparer<TKey>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``3(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Func{``0,``2},System.Collections.Generic.IEqualityComparer{``1},System.Threading.CancellationToken)
+  name.vb: ToDictionaryAsync(Of TSource, TKey, TElement)(IQueryable(Of TSource), Func(Of TSource, TKey), Func(Of TSource, TElement), IEqualityComparer(Of TKey), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync<TSource, TKey, TElement>(System.Linq.IQueryable<TSource>, System.Func<TSource, TKey>, System.Func<TSource, TElement>, System.Collections.Generic.IEqualityComparer<TKey>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync(Of TSource, TKey, TElement)(System.Linq.IQueryable(Of TSource), System.Func(Of TSource, TKey), System.Func(Of TSource, TElement), System.Collections.Generic.IEqualityComparer(Of TKey), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.ToDictionaryAsync<TSource, TKey, TElement>(IQueryable<TSource>, Func<TSource, TKey>, Func<TSource, TElement>, IEqualityComparer<TKey>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.ToDictionaryAsync(Of TSource, TKey, TElement)(IQueryable(Of TSource), Func(Of TSource, TKey), Func(Of TSource, TElement), IEqualityComparer(Of TKey), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``3(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Func{``0,``2},System.Threading.CancellationToken)
+  name: ToDictionaryAsync<TSource, TKey, TElement>(IQueryable<TSource>, Func<TSource, TKey>, Func<TSource, TElement>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync``3(System.Linq.IQueryable{``0},System.Func{``0,``1},System.Func{``0,``2},System.Threading.CancellationToken)
+  name.vb: ToDictionaryAsync(Of TSource, TKey, TElement)(IQueryable(Of TSource), Func(Of TSource, TKey), Func(Of TSource, TElement), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync<TSource, TKey, TElement>(System.Linq.IQueryable<TSource>, System.Func<TSource, TKey>, System.Func<TSource, TElement>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.ToDictionaryAsync(Of TSource, TKey, TElement)(System.Linq.IQueryable(Of TSource), System.Func(Of TSource, TKey), System.Func(Of TSource, TElement), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.ToDictionaryAsync<TSource, TKey, TElement>(IQueryable<TSource>, Func<TSource, TKey>, Func<TSource, TElement>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.ToDictionaryAsync(Of TSource, TKey, TElement)(IQueryable(Of TSource), Func(Of TSource, TKey), Func(Of TSource, TElement), CancellationToken)
+- uid: PnP.Core.QueryModel.QueryableExtensions.ToListAsync*
+  name: ToListAsync
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToListAsync_
+  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.ToListAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ToListAsync
+  nameWithType: QueryableExtensions.ToListAsync
+- uid: PnP.Core.QueryModel.QueryableExtensions.ToListAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)
+  name: ToListAsync<TSource>(IQueryable<TSource>, CancellationToken)
+  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_
+  commentId: M:PnP.Core.QueryModel.QueryableExtensions.ToListAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)
+  name.vb: ToListAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
+  fullName: PnP.Core.QueryModel.QueryableExtensions.ToListAsync<TSource>(System.Linq.IQueryable<TSource>, System.Threading.CancellationToken)
+  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.ToListAsync(Of TSource)(System.Linq.IQueryable(Of TSource), System.Threading.CancellationToken)
+  nameWithType: QueryableExtensions.ToListAsync<TSource>(IQueryable<TSource>, CancellationToken)
+  nameWithType.vb: QueryableExtensions.ToListAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
 - uid: PnP.Core.ServiceError
   name: ServiceError
   href: api/PnP.Core.ServiceError.html
