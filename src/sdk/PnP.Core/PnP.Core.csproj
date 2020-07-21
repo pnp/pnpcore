@@ -14,6 +14,11 @@
     <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Configurations>Debug;Release;Blazor</Configurations>
+    <PackageIcon>nugeticon.png</PackageIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\github\pnpcore\src\sdk\PnP.Core\PnP.Core.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +42,13 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="nugeticon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
