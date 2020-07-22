@@ -15,10 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <Configurations>Debug;Release;Blazor</Configurations>
     <PackageIcon>nugeticon.png</PackageIcon>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\github\pnpcore\src\sdk\PnP.Core\PnP.Core.xml</DocumentationFile>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
