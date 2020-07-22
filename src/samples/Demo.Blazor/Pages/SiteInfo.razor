@@ -22,7 +22,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        using (var ctx = pnpContextFactory.GetContext())
+        using (var ctx = await pnpContextFactory.GetContextAsync())
         {
             web = await ctx.Web.GetAsync(p=>p.Title,p=>p.Description);
             isLoading = false;

@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 using PnP.Core.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace Demo.Blazor.Services
 {
     public interface IMyPnPContextFactory
     {
-        public PnPContext GetContext();
+        public Task<PnPContext> GetContextAsync();
     }
 
     public class MyContextFactory : IMyPnPContextFactory
@@ -20,10 +21,10 @@ namespace Demo.Blazor.Services
             _contextFactory = contextFactory;
         }
 
-        public PnPContext GetContext()
+        public async Task<PnPContext> GetContextAsync()
         {
             string siteUrl = _configuration.GetValue<string>("SharePoint:SiteUrl");
-            return _contextFactory.Create(new Uri(siteUrl), Program.AuthProviderName);
+            return await _contextFactory.CreateAsync(new Uri(siteUrl), Program.AuthProviderName);
         }
     }
 }

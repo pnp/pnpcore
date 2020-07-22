@@ -37,7 +37,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        using (var ctx = pnpContextFactory.GetContext())
+        using (var ctx = await pnpContextFactory.GetContextAsync())
         {
             // Linq support seems to still fail, requires debug
             var cts = ctx.Web.ContentTypes.Load(p => p.Id, p => p.Name);

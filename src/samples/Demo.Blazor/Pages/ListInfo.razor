@@ -37,7 +37,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        using (var ctx = pnpContextFactory.GetContext())
+        using (var ctx = await pnpContextFactory.GetContextAsync())
         {
             var web = await ctx.Web.GetAsync(w => w.Lists.Include(p => p.Title, p => p.Id));
             lists = web.Lists.ToList();

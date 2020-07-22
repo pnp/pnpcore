@@ -1,15 +1,9 @@
-using System;
-using System.Net.Http;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Text;
+using Demo.Blazor.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
-using System.Security;
-using Demo.Blazor.Services;
+using System.Threading.Tasks;
 
 namespace Demo.Blazor
 {
@@ -23,7 +17,6 @@ namespace Demo.Blazor
             builder.RootComponents.Add<App>("app");
 
             var config = new ConfigurationBuilder().Build();
-
 
             builder.Services.AddMsalAuthentication(options =>
             {
@@ -43,5 +36,6 @@ namespace Demo.Blazor
 
             await builder.Build().RunAsync();
         }
+
     }
 }
