@@ -8,7 +8,7 @@ $versionIncrement = $versionIncrement -as [int]
 $versionIncrement = $versionIncrement + 1
 
 $version = Get-Content ./build/version.debug -Raw
-$blazorVersion = Get-Content .\version.blazor -Raw
+$blazorVersion = Get-Content ./build/version.blazor -Raw
 
 $version = $version.Replace("{incremental}", $versionIncrement).Replace("{yearmonth}", $(get-date -format yy) + $(get-date -format MM))
 $blazorVersion = $blazorVersion.Replace("{incremental}", $versionIncrement).Replace("{yearmonth}", $(get-date -format yy) + $(get-date -format MM))
