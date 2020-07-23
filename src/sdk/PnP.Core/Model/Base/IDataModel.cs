@@ -12,37 +12,6 @@ namespace PnP.Core.Model
     /// <typeparam name="TModel">The actual type of the Domain Model object</typeparam>
     public interface IDataModel<TModel> : IDataModelParent, IDataModelWithContext, IDataModelGet<TModel>
     {
-        #region Get
-
-        /// <summary>
-        /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        Task<TModel> GetAsync(params Expression<Func<TModel, object>>[] expressions);
-
-        /// <summary>
-        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="batch">Batch add this request to</param>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        Task<TModel> GetBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions);
-
-
-        /// <summary>
-        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
-        /// </summary>
-        /// <param name="expressions">The properties to select</param>
-        /// <returns>The Domain Model object</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
-        Task<TModel> GetBatchAsync(params Expression<Func<TModel, object>>[] expressions);
-
-        #endregion
-
-        #region Other
-
         /// <summary>
         /// Checks if a property on this model object has a value set
         /// </summary>
@@ -61,6 +30,5 @@ namespace PnP.Core.Model
         /// Was this model requested from the back-end
         /// </summary>
         bool Requested { get; set; }
-        #endregion
     }
 }

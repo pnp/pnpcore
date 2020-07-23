@@ -23,5 +23,21 @@ namespace PnP.Core.Model
         /// Deletes a Domain Model object into the remote data source 
         /// </summary>
         Task DeleteAsync();
+
+        /// <summary>
+        /// Collects the request to delete a Domain Model object into the remote data source 
+        /// </summary>
+        void DeleteBatch();
+
+        /// <summary>
+        /// Collects the request to delete a Domain Model object into the remote data source using a batch
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        void DeleteBatch(Batch batch);
+
+        /// <summary>
+        /// Deletes a Domain Model object into the remote data source 
+        /// </summary>
+        void Delete();
     }
 }

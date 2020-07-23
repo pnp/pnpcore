@@ -16,7 +16,6 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch add this request to</param>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "I prefer Get over Read :-)")]
         Task<object> GetBatchAsync(Batch batch, params Expression<Func<object, object>>[] expressions);
 
         /// <summary>
@@ -24,8 +23,22 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "I prefer Get over Read :-)")]
         Task<object> GetBatchAsync(params Expression<Func<object, object>>[] expressions);
+
+        /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        object GetBatch(Batch batch, params Expression<Func<object, object>>[] expressions);
+
+        /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        object GetBatch(params Expression<Func<object, object>>[] expressions);
 
         /// <summary>
         /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
@@ -42,6 +55,24 @@ namespace PnP.Core.Model
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
         Task<object> GetAsync(ApiResponse apiResponse, params Expression<Func<object, object>>[] expressions);
+
+        /// <summary>
+        /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "I prefer Get over Read :-)")]
+        object Get(params Expression<Func<object, object>>[] expressions);
+
+        /// <summary>
+        /// Special override the load child model classes ==> if apiResponse != default then 
+        /// no get will be done but the system will handle the mapping from json to model
+        /// </summary>
+        /// <param name="apiResponse">Json response (when in recursive mapping of json to model), default otherwise</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "I prefer Get over Read :-)")]
+        object Get(ApiResponse apiResponse, params Expression<Func<object, object>>[] expressions);
     }
 
     /// <summary>
@@ -65,6 +96,21 @@ namespace PnP.Core.Model
         Task<TModel> GetBatchAsync(params Expression<Func<TModel, object>>[] expressions);
 
         /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        TModel GetBatch(Batch batch, params Expression<Func<TModel, object>>[] expressions);
+
+        /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        TModel GetBatch(params Expression<Func<TModel, object>>[] expressions);
+
+        /// <summary>
         /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
         /// <param name="expressions">The properties to select</param>
@@ -79,5 +125,24 @@ namespace PnP.Core.Model
         /// <param name="expressions">The properties to select</param>
         /// <returns>The Domain Model object</returns>
         Task<TModel> GetAsync(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions);
+
+
+        /// <summary>
+        /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "I prefer Get over Read :-)")]
+        TModel Get(params Expression<Func<TModel, object>>[] expressions);
+
+        /// <summary>
+        /// Special override the load child model classes ==> if apiResponse != default then 
+        /// no get will be done but the system will handle the mapping from json to model
+        /// </summary>
+        /// <param name="apiResponse">Json response (when in recursive mapping of json to model), default otherwise</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "I prefer Get over Read :-)")]
+        TModel Get(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions);
     }
 }

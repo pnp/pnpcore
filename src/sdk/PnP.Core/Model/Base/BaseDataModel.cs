@@ -110,6 +110,16 @@ namespace PnP.Core.Model
             return await GetInternalBatchAsync(PnPContext.CurrentBatch, newExpressions).ConfigureAwait(false);
         }
 
+        public object GetBatch(Batch batch, params Expression<Func<object, object>>[] expressions)
+        {
+            return GetBatchAsync(batch, expressions).GetAwaiter().GetResult();
+        }
+
+        public object GetBatch(params Expression<Func<object, object>>[] expressions)
+        {
+            return GetBatchAsync(expressions).GetAwaiter().GetResult();
+        }
+
         public async Task<object> GetAsync(params Expression<Func<object, object>>[] expressions)
         {
             var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
@@ -120,6 +130,16 @@ namespace PnP.Core.Model
         {
             var newExpressions = expressions.Select(e => Expression.Lambda<Func<TModel, object>>(e.Body, e.Parameters)).ToArray();
             return await GetAsyncInternal(apiResponse, newExpressions).ConfigureAwait(true);
+        }
+
+        public object Get(params Expression<Func<object, object>>[] expressions)
+        {
+            return GetAsync(expressions).GetAwaiter().GetResult();
+        }
+
+        public object Get(ApiResponse apiResponse, params Expression<Func<object, object>>[] expressions)
+        {
+            return GetAsync(apiResponse, expressions).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -141,6 +161,27 @@ namespace PnP.Core.Model
         public async virtual Task<TModel> GetBatchAsync(params Expression<Func<TModel, object>>[] expressions)
         {
             return await GetInternalBatchAsync(PnPContext.CurrentBatch, expressions).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual TModel GetBatch(Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetBatchAsync(batch, expressions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual TModel GetBatch(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetBatchAsync(expressions).GetAwaiter().GetResult();
         }
 
         private async Task<TModel> GetInternalBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
@@ -169,6 +210,28 @@ namespace PnP.Core.Model
         public virtual async Task<TModel> GetAsync(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions)
         {
             return await GetAsyncInternal(apiResponse, expressions).ConfigureAwait(true);
+        }
+
+        /// <summary>
+        /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
+        /// </summary>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual TModel Get(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetAsync(expressions).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Special override the load child model classes ==> if apiResponse != default then 
+        /// no get will be done but the system will handle the mapping from json to model
+        /// </summary>
+        /// <param name="apiResponse">Json response (when in recursive mapping of json to model), default otherwise</param>
+        /// <param name="expressions">The properties to select</param>
+        /// <returns>The Domain Model object</returns>
+        public virtual TModel Get(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetAsync(apiResponse, expressions).GetAwaiter().GetResult();
         }
 
         private async Task<TModel> GetAsyncInternal(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions)
@@ -215,6 +278,7 @@ namespace PnP.Core.Model
         /// Adds a domain model instance
         /// </summary>
         /// <param name="batch">Batch add this request to</param>
+        /// <param name="keyValuePairs">Properties to control add</param>
         /// <returns>The added domain model</returns>
         internal async virtual Task<BaseDataModel<TModel>> AddBatchAsync(Batch batch, Dictionary<string, object> keyValuePairs = null)
         {
@@ -299,6 +363,31 @@ namespace PnP.Core.Model
             await BaseUpdate(MappingHandler, PostMappingHandler).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Updates a domain model
+        /// </summary>
+        public virtual void UpdateBatch()
+        {
+            UpdateBatchAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Updates a domain model
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        public virtual void UpdateBatch(Batch batch)
+        {
+            UpdateBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Updates a domain model
+        /// </summary>
+        public virtual void Update()
+        {
+            UpdateAsync().GetAwaiter().GetResult();
+        }
+
         #endregion
 
         #region Delete
@@ -326,6 +415,31 @@ namespace PnP.Core.Model
         public virtual async Task DeleteAsync()
         {
             await BaseDelete().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Deletes a domain model
+        /// </summary>
+        public virtual void DeleteBatch()
+        {
+            DeleteBatchAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Deletes a domain model
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        public virtual void DeleteBatch(Batch batch)
+        {
+            DeleteBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Deletes a domain model
+        /// </summary>
+        public virtual void Delete()
+        {
+            DeleteAsync().GetAwaiter().GetResult();
         }
 
         #endregion
@@ -401,6 +515,7 @@ namespace PnP.Core.Model
         /// Creates and adds a Get request to the given batch
         /// </summary>
         /// <param name="batch">Batch to add the request to</param>
+        /// <param name="apiOverride">Override for the API call</param>
         /// <param name="expressions">Expressions needed to create the request</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
@@ -941,7 +1056,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Creates and adds a Post request to the given batch
         /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
         /// <param name="postApiCall">Api call to execute</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
@@ -1039,7 +1153,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Creates and adds an Update request to the given batch
         /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
         internal virtual async Task BaseUpdate(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
@@ -1330,7 +1443,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Creates and adds an Delete request to the given batch
         /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
         /// <param name="fromJsonCasting">Delegate for type mapping when the request is executed</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
         internal virtual async Task BaseDelete(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
