@@ -212,9 +212,23 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
+        /// <param name="query">query to execute</param>
+        /// <returns></returns>
+        public void GetItemsByCamlQuery(string query);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
         public Task GetItemsByCamlQueryAsync(CamlQueryOptions queryOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public void GetItemsByCamlQuery(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -226,9 +240,23 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
+        /// <param name="query">query to execute</param>
+        /// <returns></returns>
+        public void GetItemsByCamlQueryBatch(string query);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
         public Task GetItemsByCamlQueryBatchAsync(CamlQueryOptions queryOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public void GetItemsByCamlQueryBatch(CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query
@@ -242,9 +270,25 @@ namespace PnP.Core.Model.SharePoint
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="batch">Batch to add this request to </param>
+        /// <param name="query">query to execute</param>
+        /// <returns></returns>
+        public void GetItemsByCamlQueryBatch(Batch batch, string query);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
         /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
         /// <returns></returns>
         public Task GetItemsByCamlQueryBatchAsync(Batch batch, CamlQueryOptions queryOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <param name="queryOptions"><see cref="CamlQueryOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public void GetItemsByCamlQueryBatch(Batch batch, CamlQueryOptions queryOptions);
 
         /// <summary>
         /// Loads list items based up on a CAML query and the RenderListDataAsStream API
@@ -252,5 +296,12 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
         /// <returns></returns>
         public Task<Dictionary<string, object>> GetListDataAsStreamAsync(RenderListDataOptions renderOptions);
+
+        /// <summary>
+        /// Loads list items based up on a CAML query and the RenderListDataAsStream API
+        /// </summary>
+        /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
+        /// <returns></returns>
+        public Dictionary<string, object> GetListDataAsStream(RenderListDataOptions renderOptions);
     }
 }

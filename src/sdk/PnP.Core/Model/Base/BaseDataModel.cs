@@ -300,6 +300,34 @@ namespace PnP.Core.Model
             }
         }
 
+        /// <summary>
+        /// Adds a domain model instance
+        /// </summary>
+        /// <returns>The added domain model</returns>
+        internal virtual BaseDataModel<TModel> AddBatch(Dictionary<string, object> keyValuePairs = null)
+        {
+            return AddBatchAsync(keyValuePairs).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a domain model instance
+        /// </summary>
+        /// <param name="batch">Batch add this request to</param>
+        /// <param name="keyValuePairs">Properties to control add</param>
+        /// <returns>The added domain model</returns>
+        internal virtual BaseDataModel<TModel> AddBatch(Batch batch, Dictionary<string, object> keyValuePairs = null)
+        {
+            return AddBatchAsync(batch, keyValuePairs).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a domain model instance
+        /// </summary>
+        /// <returns>The added domain model</returns>
+        internal virtual BaseDataModel<TModel> Add(Dictionary<string, object> keyValuePairs = null)
+        {
+            return AddAsync(keyValuePairs).GetAwaiter().GetResult();
+        }
         #endregion
 
         #region Update
