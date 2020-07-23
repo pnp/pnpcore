@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams
 {
@@ -29,6 +29,16 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel tab
         /// </summary>
+        /// <param name="name">Display name of the channel tab</param>
+        /// <returns>Newly added channel tab</returns>
+        public ITeamChannelTab AddWikiTab(string name)
+        {
+            return AddWikiTabAsync(name).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new channel tab
+        /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="name">Display name of the channel tab</param>
         /// <returns>Newly added channel tab</returns>
@@ -47,11 +57,32 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel tab
         /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the channel tab</param>
+        /// <returns>Newly added channel tab</returns>
+        public ITeamChannelTab AddWikiTabBatch(Batch batch, string name)
+        {
+            return AddWikiTabBatchAsync(batch, name).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new channel tab
+        /// </summary>
         /// <param name="name">Display name of the channel tab</param>
         /// <returns>Newly added channel tab</returns>
         public async Task<ITeamChannelTab> AddWikiTabBatchAsync(string name)
         {
             return await AddWikiTabBatchAsync(PnPContext.CurrentBatch, name).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Adds a new channel tab
+        /// </summary>
+        /// <param name="name">Display name of the channel tab</param>
+        /// <returns>Newly added channel tab</returns>
+        public ITeamChannelTab AddWikiTabBatch(string name)
+        {
+            return AddWikiTabBatchAsync(name).GetAwaiter().GetResult();
         }
         #endregion
 
@@ -77,6 +108,17 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new DocumentLibrary tab
         /// </summary>
+        /// <param name="name">Display name of the  DocumentLibrary tab</param>
+        /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
+        /// <returns>Newly added DocumentLibrary tab</returns>
+        public ITeamChannelTab AddDocumentLibraryTab(string name, Uri documentLibraryUri)
+        {
+            return AddDocumentLibraryTabAsync(name, documentLibraryUri).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new DocumentLibrary tab
+        /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="name">Display name of the DocumentLibrary tab</param>
         /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
@@ -96,12 +138,35 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new DocumentLibrary tab
         /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the DocumentLibrary tab</param>
+        /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
+        /// <returns>Newly added DocumentLibrary tab</returns>
+        public ITeamChannelTab AddDocumentLibraryTabBatch(Batch batch, string name, Uri documentLibraryUri)
+        {
+            return AddDocumentLibraryTabBatchAsync(batch, name, documentLibraryUri).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new DocumentLibrary tab
+        /// </summary>
         /// <param name="name">Display name of the DocumentLibrary tab</param>
         /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
         /// <returns>Newly added DocumentLibrary tab</returns>
         public async Task<ITeamChannelTab> AddDocumentLibraryTabBatchAsync(string name, Uri documentLibraryUri)
         {
             return await AddDocumentLibraryTabBatchAsync(PnPContext.CurrentBatch, name, documentLibraryUri).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Adds a new DocumentLibrary tab
+        /// </summary>
+        /// <param name="name">Display name of the DocumentLibrary tab</param>
+        /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
+        /// <returns>Newly added DocumentLibrary tab</returns>
+        public ITeamChannelTab AddDocumentLibraryTabBatch(string name, Uri documentLibraryUri)
+        {
+            return AddDocumentLibraryTabBatchAsync(name, documentLibraryUri).GetAwaiter().GetResult();
         }
         #endregion
 
