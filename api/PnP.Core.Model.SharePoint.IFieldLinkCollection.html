@@ -81,7 +81,7 @@
             <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection">
   <h1 id="PnP_Core_Model_SharePoint_IFieldLinkCollection" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection">Interface IFieldLinkCollection
   </h1>
-  <div class="markdown level0 summary"><p>Public interface to define a collection of Field objects of SharePoint Online</p>
+  <div class="markdown level0 summary"><p>Public interface to define a collection of FieldLink objects of SharePoint Online</p>
 </div>
   <div class="markdown level0 conceptual"></div>
 
@@ -135,10 +135,106 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldLinkCollection.cs/#L90" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.Add*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.Add(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">Add(String, String, Boolean, Boolean, Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_Add_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a field link</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IFieldLink Add(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">fieldInternalName</span>
+        <p><p>Internal name of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">displayName</span>
+        <p><p>Display name of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">hidden</span>
+        <p><p>Field is hidden</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">required</span>
+        <p><p>Field is required</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">readOnly</span>
+        <p><p>Field is read only</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">showInDisplayForm</span>
+        <p><p>Show the field in the display form</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IFieldLink.html">IFieldLink</a>
+        <p><p>Added field link</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(System.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldLinkCollection.cs/#L16" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldLinkCollection.cs/#L76" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync*"></a>
@@ -146,7 +242,8 @@
   <h4 id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">AddAsync(String, String, Boolean, Boolean, Boolean, Boolean)</a></h4>
   
   <div id="collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a field link</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
@@ -160,42 +257,48 @@
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">fieldInternalName</span>
-        <p>
+        <p><p>Internal name of the field</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">displayName</span>
-        <p>
+        <p><p>Display name of the field</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">hidden</span>
-        <p>
+        <p><p>Field is hidden</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">required</span>
-        <p>
+        <p><p>Field is required</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">readOnly</span>
-        <p>
+        <p><p>Field is read only</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">showInDisplayForm</span>
-        <p>
+        <p><p>Show the field in the display form</p>
+</p>
       </td>
     </tr>
   </table>
@@ -205,7 +308,208 @@
     <tr>
       <td>
         <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFieldLink.html">IFieldLink</a>&gt;
-        <p>
+        <p><p>Added field link</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Services.Batch%2CSystem.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldLinkCollection.cs/#L63" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">AddBatch(Batch, String, String, Boolean, Boolean, Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a field link via a batch</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IFieldLink AddBatch(Batch batch, string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batcht to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">fieldInternalName</span>
+        <p><p>Internal name of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">displayName</span>
+        <p><p>Display name of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">hidden</span>
+        <p><p>Field is hidden</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">required</span>
+        <p><p>Field is required</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">readOnly</span>
+        <p><p>Field is read only</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">showInDisplayForm</span>
+        <p><p>Show the field in the display form</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IFieldLink.html">IFieldLink</a>
+        <p><p>Added field link</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(System.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldLinkCollection.cs/#L35" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatch(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">AddBatch(String, String, Boolean, Boolean, Boolean, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Adds a field link via a batch</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IFieldLink AddBatch(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">fieldInternalName</span>
+        <p><p>Internal name of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">displayName</span>
+        <p><p>Display name of the field</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">hidden</span>
+        <p><p>Field is hidden</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">required</span>
+        <p><p>Field is required</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">readOnly</span>
+        <p><p>Field is read only</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">showInDisplayForm</span>
+        <p><p>Show the field in the display form</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IFieldLink.html">IFieldLink</a>
+        <p><p>Added field link</p>
+</p>
       </td>
     </tr>
   </table>
@@ -226,7 +530,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldLinkCollection.cs/#L14" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldLinkCollection.cs/#L49" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync*"></a>
@@ -234,7 +538,8 @@
   <h4 id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">AddBatchAsync(Batch, String, String, Boolean, Boolean, Boolean, Boolean)</a></h4>
   
   <div id="collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a field link via a batch</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
@@ -248,49 +553,56 @@
       <td>
         <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
         <span class="parametername">batch</span>
-        <p>
+        <p><p>Batcht to add this request to</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">fieldInternalName</span>
-        <p>
+        <p><p>Internal name of the field</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">displayName</span>
-        <p>
+        <p><p>Display name of the field</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">hidden</span>
-        <p>
+        <p><p>Field is hidden</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">required</span>
-        <p>
+        <p><p>Field is required</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">readOnly</span>
-        <p>
+        <p><p>Field is read only</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">showInDisplayForm</span>
-        <p>
+        <p><p>Show the field in the display form</p>
+</p>
       </td>
     </tr>
   </table>
@@ -300,7 +612,8 @@
     <tr>
       <td>
         <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFieldLink.html">IFieldLink</a>&gt;
-        <p>
+        <p><p>Added field link</p>
+</p>
       </td>
     </tr>
   </table>
@@ -321,7 +634,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(System.String%2CSystem.String%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldLinkCollection.cs/#L12" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFieldLinkCollection.cs/#L22" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync*"></a>
@@ -329,7 +642,8 @@
   <h4 id="PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFieldLinkCollection.AddBatchAsync(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="expander" data-toggle="collapse">AddBatchAsync(String, String, Boolean, Boolean, Boolean, Boolean)</a></h4>
   
   <div id="collapsible-PnP_Core_Model_SharePoint_IFieldLinkCollection_AddBatchAsync_System_String_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" class="collapse in">
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a field link via a batch</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
@@ -343,42 +657,48 @@
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">fieldInternalName</span>
-        <p>
+        <p><p>Internal name of the field</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
         <span class="parametername">displayName</span>
-        <p>
+        <p><p>Display name of the field</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">hidden</span>
-        <p>
+        <p><p>Field is hidden</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">required</span>
-        <p>
+        <p><p>Field is required</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">readOnly</span>
-        <p>
+        <p><p>Field is read only</p>
+</p>
       </td>
     </tr>
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">showInDisplayForm</span>
-        <p>
+        <p><p>Show the field in the display form</p>
+</p>
       </td>
     </tr>
   </table>
@@ -388,7 +708,8 @@
     <tr>
       <td>
         <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFieldLink.html">IFieldLink</a>&gt;
-        <p>
+        <p><p>Added field link</p>
+</p>
       </td>
     </tr>
   </table>

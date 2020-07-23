@@ -96,10 +96,22 @@
       <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetBatchAsync(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
     </div>
     <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatch_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetBatch(Batch, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatch_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetBatch(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
       <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
     </div>
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(ApiResponse, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.Get(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.Get(ApiResponse, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
     </div>
   </div>
   
@@ -129,10 +141,131 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModelGet%601.Get(PnP.Core.Services.ApiResponse%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L145" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_IDataModelGet_1_Get_" data-uid="PnP.Core.Model.IDataModelGet`1.Get*"></a>
+  
+  <h4 id="PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModelGet`1.Get(PnP.Core.Services.ApiResponse,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="expander" data-toggle="collapse">Get(ApiResponse, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="collapse in">
+  <div class="markdown level1 summary"><p>Special override the load child model classes ==&gt; if apiResponse != default then
+no get will be done but the system will handle the mapping from json to model</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TModel Get(ApiResponse apiResponse, params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.ApiResponse.html">ApiResponse</a></span>
+        <span class="parametername">apiResponse</span>
+        <p><p>Json response (when in recursive mapping of json to model), default otherwise</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
+        <span class="parametername">expressions</span>
+        <p><p>The properties to select</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">TModel</span>
+        <p><p>The Domain Model object</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModelGet_1_Get_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModelGet%601.Get(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L135" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_IDataModelGet_1_Get_" data-uid="PnP.Core.Model.IDataModelGet`1.Get*"></a>
+  
+  <h4 id="PnP_Core_Model_IDataModelGet_1_Get_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModelGet`1.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_IDataModelGet_1_Get_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="expander" data-toggle="collapse">Get(Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_IDataModelGet_1_Get_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="collapse in">
+  <div class="markdown level1 summary"><p>Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TModel Get(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
+        <span class="parametername">expressions</span>
+        <p><p>The properties to select</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">TModel</span>
+        <p><p>The Domain Model object</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModelGet_1_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModelGet%601.GetAsync(PnP.Core.Services.ApiResponse%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L81" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L127" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_IDataModelGet_1_GetAsync_" data-uid="PnP.Core.Model.IDataModelGet`1.GetAsync*"></a>
@@ -197,7 +330,7 @@ no get will be done but the system will handle the mapping from json to model</p
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModelGet_1_GetAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModelGet%601.GetAsync(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L72" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L118" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_IDataModelGet_1_GetAsync_" data-uid="PnP.Core.Model.IDataModelGet`1.GetAsync*"></a>
@@ -250,10 +383,130 @@ no get will be done but the system will handle the mapping from json to model</p
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModelGet_1_GetBatch_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModelGet%601.GetBatch(PnP.Core.Services.Batch%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L104" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_IDataModelGet_1_GetBatch_" data-uid="PnP.Core.Model.IDataModelGet`1.GetBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_IDataModelGet_1_GetBatch_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModelGet`1.GetBatch(PnP.Core.Services.Batch,System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_IDataModelGet_1_GetBatch_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="expander" data-toggle="collapse">GetBatch(Batch, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_IDataModelGet_1_GetBatch_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="collapse in">
+  <div class="markdown level1 summary"><p>Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TModel GetBatch(Batch batch, params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
+        <span class="parametername">expressions</span>
+        <p><p>The properties to select</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">TModel</span>
+        <p><p>The Domain Model object</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModelGet_1_GetBatch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModelGet%601.GetBatch(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L111" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_IDataModelGet_1_GetBatch_" data-uid="PnP.Core.Model.IDataModelGet`1.GetBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_IDataModelGet_1_GetBatch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="PnP.Core.Model.IDataModelGet`1.GetBatch(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])"><a href="#collapsible-PnP_Core_Model_IDataModelGet_1_GetBatch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="expander" data-toggle="collapse">GetBatch(Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_IDataModelGet_1_GetBatch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" class="collapse in">
+  <div class="markdown level1 summary"><p>Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TModel GetBatch(params Expression&lt;Func&lt;TModel, object&gt;&gt;[] expressions)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TModel, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
+        <span class="parametername">expressions</span>
+        <p><p>The properties to select</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">TModel</span>
+        <p><p>The Domain Model object</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModelGet_1_GetBatchAsync_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModelGet%601.GetBatchAsync(PnP.Core.Services.Batch%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L58" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L89" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_IDataModelGet_1_GetBatchAsync_" data-uid="PnP.Core.Model.IDataModelGet`1.GetBatchAsync*"></a>
@@ -317,7 +570,7 @@ no get will be done but the system will handle the mapping from json to model</p
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModelGet_1_GetBatchAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModelGet%601.GetBatchAsync(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L65" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L96" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_IDataModelGet_1_GetBatchAsync_" data-uid="PnP.Core.Model.IDataModelGet`1.GetBatchAsync*"></a>
@@ -377,7 +630,7 @@ no get will be done but the system will handle the mapping from json to model</p
           </div>
           <div class="contribution-panel mobile-hide">
               <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_IDataModelGet_1.md&amp;value=---%0Auid%3A%20PnP.Core.Model.IDataModelGet%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L50" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Base/IDataModelGet.cs/#L81" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
