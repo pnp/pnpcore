@@ -31,6 +31,14 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new list
         /// </summary>
+        /// <param name="title">Title of the list</param>
+        /// <param name="templateType">Template type</param>
+        /// <returns>Newly added list</returns>
+        public IList Add(string title, ListTemplateType templateType);
+
+        /// <summary>
+        /// Adds a new list
+        /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="title">Title of the list</param>
         /// <param name="templateType">Template type</param>
@@ -40,10 +48,27 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new list
         /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">Title of the list</param>
+        /// <param name="templateType">Template type</param>
+        /// <returns>Newly added list</returns>
+        public IList AddBatch(Batch batch, string title, ListTemplateType templateType);
+
+        /// <summary>
+        /// Adds a new list
+        /// </summary>
         /// <param name="title">Title of the list</param>
         /// <param name="templateType">Template type</param>
         /// <returns>Newly added list</returns>
         public Task<IList> AddBatchAsync(string title, ListTemplateType templateType);
+
+        /// <summary>
+        /// Adds a new list
+        /// </summary>
+        /// <param name="title">Title of the list</param>
+        /// <param name="templateType">Template type</param>
+        /// <returns>Newly added list</returns>
+        public IList AddBatch(string title, ListTemplateType templateType);
         #endregion
     }
 }
