@@ -1541,16 +1541,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Adds a request to the given batch
         /// </summary>
-        /// <param name="apiCall">Api call to execute</param>
-        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal void RequestBatch(ApiCall apiCall, HttpMethod method)
-        {
-            RequestBatchAsync(apiCall, method).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Adds a request to the given batch
-        /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
@@ -1573,17 +1563,6 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
-        }
-
-        /// <summary>
-        /// Adds a request to the given batch
-        /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
-        /// <param name="apiCall">Api call to execute</param>
-        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal void RequestBatch(Batch batch, ApiCall apiCall, HttpMethod method)
-        {
-            RequestBatchAsync(batch, apiCall, method).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1623,16 +1602,6 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Executes a given request
-        /// </summary>
-        /// <param name="apiCall">Api call to execute</param>
-        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal Batch Request(ApiCall apiCall, HttpMethod method)
-        {
-            return RequestAsync(apiCall, method).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
         /// Adds a request to the given batch
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
@@ -1640,16 +1609,6 @@ namespace PnP.Core.Model
         internal async Task RawRequestBatchAsync(ApiCall apiCall, HttpMethod method)
         {
             await RawRequestBatchAsync(PnPContext.CurrentBatch, apiCall, method).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Adds a request to the given batch
-        /// </summary>
-        /// <param name="apiCall">Api call to execute</param>
-        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal void RawRequestBatch(ApiCall apiCall, HttpMethod method)
-        {
-            RawRequestBatchAsync(apiCall, method).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -1690,17 +1649,6 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Adds a request to the given batch
-        /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
-        /// <param name="apiCall">Api call to execute</param>
-        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal void RawRequestBatch(Batch batch, ApiCall apiCall, HttpMethod method)
-        {
-            RawRequestBatchAsync(batch, apiCall, method).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
         /// Executes a given request, not loading the response json in the model but simply returning it
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
@@ -1715,16 +1663,6 @@ namespace PnP.Core.Model
                                        batch.Requests.First().Value.ResponseHttpStatusCode,
                                        batch.Requests.First().Value.ResponseHeaders,
                                        batch.Requests.First().Value.CsomResponseJson);
-        }
-
-        /// <summary>
-        /// Executes a given request, not loading the response json in the model but simply returning it
-        /// </summary>
-        /// <param name="apiCall">Api call to execute</param>
-        /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal ApiCallResponse RawRequest(ApiCall apiCall, HttpMethod method)
-        {
-            return RawRequestAsync(apiCall, method).GetAwaiter().GetResult();
         }
 
         private ApiCall PrefixApiCall(ApiCall apiCall, EntityInfo entityInfo)
