@@ -55,7 +55,7 @@ namespace PnP.Core.Model.Teams
                 }
             };
 
-            UpdateApiCallOverrideHandler = (ApiCallRequest apiCallRequest) =>
+            UpdateApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
             {
                 if (DisplayName == "General")
                 {
@@ -66,7 +66,7 @@ namespace PnP.Core.Model.Teams
             };
 
             // Check delete, block when needed 
-            DeleteApiCallOverrideHandler = (ApiCallRequest apiCallRequest) =>
+            DeleteApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
             {
                 if (DisplayName == "General")
                 {

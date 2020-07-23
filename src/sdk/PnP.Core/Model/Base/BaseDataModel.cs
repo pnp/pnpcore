@@ -32,21 +32,21 @@ namespace PnP.Core.Model
     /// </summary>
     /// <param name="input">Generated API call</param>
     /// <returns>Changed API call</returns>
-    internal delegate ApiCallRequest GetApiCallOverride(ApiCallRequest input);
+    internal delegate Task<ApiCallRequest> GetApiCallOverride(ApiCallRequest input);
 
     /// <summary>
     /// Delegate for overriding the default API call in case of a UPDATE request
     /// </summary>
     /// <param name="input">Generated API call</param>
     /// <returns>Changed API call</returns>
-    internal delegate ApiCallRequest UpdateApiCallOverride(ApiCallRequest input);
+    internal delegate Task<ApiCallRequest> UpdateApiCallOverride(ApiCallRequest input);
 
     /// <summary>
     /// Delegate for overriding the default API call in case of a DELETE request
     /// </summary>
     /// <param name="input">Generated API call</param>
     /// <returns>Changed API call</returns>
-    internal delegate ApiCallRequest DeleteApiCallOverride(ApiCallRequest input);
+    internal delegate Task<ApiCallRequest> DeleteApiCallOverride(ApiCallRequest input);
 
     /// <summary>
     /// Base class for all model classes
@@ -677,7 +677,7 @@ namespace PnP.Core.Model
             var call = new ApiCallRequest(new ApiCall(sb.ToString(), ApiType.SPORest));
             if (GetApiCallOverrideHandler != null)
             {
-                call = GetApiCallOverrideHandler.Invoke(call);
+                call = await GetApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
             }
 
             return call;
@@ -927,7 +927,7 @@ namespace PnP.Core.Model
             var call = new ApiCallRequest(new ApiCall(sb.ToString(), apiType));
             if (GetApiCallOverrideHandler != null)
             {
-                call = GetApiCallOverrideHandler.Invoke(call);
+                call = await GetApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
             }
 
             return call;
@@ -1297,7 +1297,7 @@ namespace PnP.Core.Model
             });
             if (UpdateApiCallOverrideHandler != null)
             {
-                call = UpdateApiCallOverrideHandler.Invoke(call);
+                call = await UpdateApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
             }
             // If the call was cancelled by the override then bail out
             if (call.Cancelled)
@@ -1374,7 +1374,7 @@ namespace PnP.Core.Model
 
             if (UpdateApiCallOverrideHandler != null)
             {
-                call = UpdateApiCallOverrideHandler.Invoke(call);
+                call = await UpdateApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
             }
 
             // If the call was cancelled by the override then bail out
@@ -1505,7 +1505,7 @@ namespace PnP.Core.Model
             var call = new ApiCallRequest(new ApiCall(deleteUrl, apiType));
             if (DeleteApiCallOverrideHandler != null)
             {
-                call = DeleteApiCallOverrideHandler.Invoke(call);
+                call = await DeleteApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
             }
 
             return call;
@@ -1520,7 +1520,7 @@ namespace PnP.Core.Model
             var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.SPORest));
             if (DeleteApiCallOverrideHandler != null)
             {
-                call = DeleteApiCallOverrideHandler.Invoke(call);
+                call = await DeleteApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
             }
 
             return call;

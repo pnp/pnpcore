@@ -13,7 +13,7 @@ namespace PnP.Core.Model.Teams
     {
         public Team()
         {
-            GetApiCallOverrideHandler = (ApiCallRequest api) =>
+            GetApiCallOverrideHandler = async (ApiCallRequest api) =>
             {
                 if (!PnPContext.Site.IsPropertyAvailable(p => p.GroupId) || PnPContext.Site.GroupId == Guid.Empty)
                 {

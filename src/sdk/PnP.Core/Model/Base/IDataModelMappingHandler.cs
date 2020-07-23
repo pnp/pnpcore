@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
+using System;
 
 namespace PnP.Core.Model
 {
