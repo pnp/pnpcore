@@ -11,6 +11,11 @@ namespace PnP.Core.Model.SharePoint
             return await AddBatchAsync(PnPContext.CurrentBatch, fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).ConfigureAwait(false);
         }
 
+        public IFieldLink AddBatch(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        {
+            return AddBatchAsync(fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).GetAwaiter().GetResult();
+        }
+
         public async Task<IFieldLink> AddBatchAsync(Batch batch, string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
         {
             if (string.IsNullOrEmpty(fieldInternalName))
@@ -28,6 +33,11 @@ namespace PnP.Core.Model.SharePoint
             newFieldLink.ShowInDisplayForm = showInDisplayForm;
 
             return await newFieldLink.AddBatchAsync(batch).ConfigureAwait(false) as FieldLink;
+        }
+
+        public IFieldLink AddBatch(Batch batch, string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        {
+            return AddBatchAsync(batch, fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).GetAwaiter().GetResult();
         }
 
         public async Task<IFieldLink> AddAsync(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
@@ -48,5 +58,11 @@ namespace PnP.Core.Model.SharePoint
 
             return await newFieldLink.AddAsync().ConfigureAwait(false) as FieldLink;
         }
+
+        public IFieldLink Add(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
+        { 
+            return AddAsync(fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).GetAwaiter().GetResult();
+        }
+
     }
 }
