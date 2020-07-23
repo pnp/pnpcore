@@ -20,6 +20,13 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new list item
         /// </summary>
+        /// <param name="values">Values to add to list item</param>
+        /// <returns>Newly added list item</returns>
+        public IListItem Add(Dictionary<string, object> values);
+
+        /// <summary>
+        /// Adds a new list item
+        /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="values">Values to add to list item</param>
         /// <returns>Newly added list item</returns>
@@ -28,9 +35,24 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new list item
         /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="values">Values to add to list item</param>
+        /// <returns>Newly added list item</returns>
+        public IListItem AddBatch(Batch batch, Dictionary<string, object> values);
+
+        /// <summary>
+        /// Adds a new list item
+        /// </summary>
         /// <param name="values">Values to add to list item</param>
         /// <returns>Newly added list item</returns>
         public Task<IListItem> AddBatchAsync(Dictionary<string, object> values);
+
+        /// <summary>
+        /// Adds a new list item
+        /// </summary>
+        /// <param name="values">Values to add to list item</param>
+        /// <returns>Newly added list item</returns>
+        public IListItem AddBatch(Dictionary<string, object> values);
 
         /// <summary>
         /// Checks if the collection contains a listitem with a given id

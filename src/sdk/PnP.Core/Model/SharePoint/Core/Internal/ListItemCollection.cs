@@ -20,6 +20,11 @@ namespace PnP.Core.Model.SharePoint
             return await AddBatchAsync(PnPContext.CurrentBatch, values).ConfigureAwait(false);
         }
 
+        public IListItem AddBatch(Dictionary<string, object> values)
+        {
+            return AddBatchAsync(values).GetAwaiter().GetResult();
+        }
+
         public async Task<IListItem> AddBatchAsync(Batch batch, Dictionary<string, object> values)
         {
             if (values == null)
@@ -35,6 +40,11 @@ namespace PnP.Core.Model.SharePoint
             return await newListItem.AddBatchAsync(batch).ConfigureAwait(false) as ListItem;
         }
 
+        public IListItem AddBatch(Batch batch, Dictionary<string, object> values)
+        {
+            return AddBatchAsync(batch, values).GetAwaiter().GetResult();
+        }
+
         public async Task<IListItem> AddAsync(Dictionary<string, object> values)
         {
             if (values == null)
@@ -48,6 +58,11 @@ namespace PnP.Core.Model.SharePoint
             newListItem.Values.SystemAddRange(values);
 
             return await newListItem.AddAsync().ConfigureAwait(false) as ListItem;
+        }
+
+        public IListItem Add(Dictionary<string, object> values)
+        {
+            return AddAsync(values).GetAwaiter().GetResult();
         }
 
         public bool Contains(int id)
