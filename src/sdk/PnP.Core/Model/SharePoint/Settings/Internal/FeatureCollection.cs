@@ -29,9 +29,19 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        public void Disable(Guid id)
+        {
+            DisableAsync(id).GetAwaiter().GetResult();
+        }
+
         public async Task DisableBatchAsync(Guid id)
         {
             await DisableBatchAsync(PnPContext.CurrentBatch, id).ConfigureAwait(false);
+        }
+
+        public void DisableBatch(Guid id)
+        {
+            DisableBatchAsync(id).GetAwaiter().GetResult();
         }
 
         public async Task DisableBatchAsync(Batch batch, Guid id)
@@ -56,6 +66,11 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        public void DisableBatch(Batch batch, Guid id)
+        {
+            DisableBatchAsync(batch, id).GetAwaiter().GetResult();
+        }
+
         public async Task<IFeature> EnableAsync(Guid id)
         {
             if (id == null)
@@ -63,7 +78,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            if(this.items.Any(o=>o.DefinitionId == id))
+            if (this.items.Any(o => o.DefinitionId == id))
             {
                 throw new ArgumentOutOfRangeException(nameof(id), "Feature was already activated");
             }
@@ -75,9 +90,19 @@ namespace PnP.Core.Model.SharePoint
             return await feature.AddAsync().ConfigureAwait(false) as Feature;
         }
 
+        public IFeature Enable(Guid id)
+        {
+            return EnableAsync(id).GetAwaiter().GetResult();
+        }
+
         public async Task<IFeature> EnableBatchAsync(Guid id)
         {
             return await EnableBatchAsync(PnPContext.CurrentBatch, id).ConfigureAwait(false);
+        }
+
+        public IFeature EnableBatch(Guid id)
+        {
+            return EnableBatchAsync(id).GetAwaiter().GetResult();
         }
 
         public async Task<IFeature> EnableBatchAsync(Batch batch, Guid id)
@@ -97,5 +122,11 @@ namespace PnP.Core.Model.SharePoint
 
             return await feature.AddBatchAsync(batch).ConfigureAwait(false) as Feature;
         }
+
+        public IFeature EnableBatch(Batch batch, Guid id)
+        {
+            return EnableBatchAsync(batch, id).GetAwaiter().GetResult();
+        }
+
     }
 }
