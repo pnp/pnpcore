@@ -35,6 +35,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Add support for calling client.svc (CSOM) endpoint #86 [jansenbe - Bert Jansen]
 - Added SystemUpdate() and UpdateOverwriteVersion() methods on the ListItem model (uses CSOM) [jansenbe - Bert Jansen]
 - Async LINQ support [PaoloPia - Paolo Pialorsi]
+- Added sync equivalents for all async methods [jansenbe - Bert Jansen]
 
 ### Changed
 
