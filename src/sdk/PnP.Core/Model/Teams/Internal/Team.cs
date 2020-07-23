@@ -30,6 +30,12 @@ namespace PnP.Core.Model.Teams
             return await ArchiveAsync(false).ConfigureAwait(false);
         }
 
+
+        public ITeamAsyncOperation Archive()
+        {
+            return ArchiveAsync().GetAwaiter().GetResult();
+        }
+
         public async Task<ITeamAsyncOperation> ArchiveAsync(bool setSPOSiteReadOnlyForMembers)
         {
             if (Requested)
@@ -58,6 +64,11 @@ namespace PnP.Core.Model.Teams
             return null;
         }
 
+        public ITeamAsyncOperation Archive(bool setSPOSiteReadOnlyForMembers)
+        {
+            return ArchiveAsync(setSPOSiteReadOnlyForMembers).GetAwaiter().GetResult();
+        }
+
         public async Task<ITeamAsyncOperation> UnarchiveAsync()
         {
             if (Requested)
@@ -80,6 +91,11 @@ namespace PnP.Core.Model.Teams
             }
 
             return null;
+        }
+
+        public ITeamAsyncOperation Unarchive()
+        {
+            return UnarchiveAsync().GetAwaiter().GetResult();
         }
 
     }

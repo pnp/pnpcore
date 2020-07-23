@@ -17,7 +17,13 @@ namespace PnP.Core.Model.Teams
         /// Waits for the async operation to finish
         /// </summary>
         /// <returns></returns>
-        public Task WaitForCompletionAsync(); 
+        public Task WaitForCompletionAsync();
+
+        /// <summary>
+        /// Waits for the async operation to finish
+        /// </summary>
+        /// <returns></returns>
+        public void WaitForCompletion();
 
     }
 }

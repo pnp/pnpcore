@@ -66,5 +66,11 @@ namespace PnP.Core.Model.Teams
                 }
             }
         }
+
+        public void WaitForCompletion()
+        {
+            WaitForCompletionAsync().GetAwaiter().GetResult();
+        }
+
     }
 }

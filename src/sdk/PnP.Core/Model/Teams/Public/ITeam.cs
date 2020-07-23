@@ -124,9 +124,22 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Archives the team
         /// </summary>
+        /// <returns></returns>
+        public ITeamAsyncOperation Archive();
+
+        /// <summary>
+        /// Archives the team
+        /// </summary>
         /// <param name="setSPOSiteReadOnlyForMembers">This optional parameter defines whether to set permissions for team members to read-only on the Sharepoint Online site associated with the team</param>
         /// <returns></returns>
         public Task<ITeamAsyncOperation> ArchiveAsync(bool setSPOSiteReadOnlyForMembers);
+
+        /// <summary>
+        /// Archives the team
+        /// </summary>
+        /// <param name="setSPOSiteReadOnlyForMembers">This optional parameter defines whether to set permissions for team members to read-only on the Sharepoint Online site associated with the team</param>
+        /// <returns></returns>
+        public ITeamAsyncOperation Archive(bool setSPOSiteReadOnlyForMembers);
 
         /// <summary>
         /// Unarchives the team
@@ -134,5 +147,10 @@ namespace PnP.Core.Model.Teams
         /// <returns></returns>
         public Task<ITeamAsyncOperation> UnarchiveAsync();
 
+        /// <summary>
+        /// Unarchives the team
+        /// </summary>
+        /// <returns></returns>
+        public ITeamAsyncOperation Unarchive();
     }
 }

@@ -34,6 +34,17 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel
         /// </summary>
+        /// <param name="name">Display name of the channel</param>
+        /// <param name="description">Optional description of the channel</param>
+        /// <returns>Newly added channel</returns>
+        public ITeamChannel Add(string name, string description = null)
+        {
+            return AddAsync(name, description).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new channel
+        /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
@@ -57,12 +68,35 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel
         /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Display name of the channel</param>
+        /// <param name="description">Optional description of the channel</param>
+        /// <returns>Newly added channel</returns>
+        public ITeamChannel AddBatch(Batch batch, string name, string description = null)
+        {
+            return AddBatchAsync(batch, name, description).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new channel
+        /// </summary>
         /// <param name="name">Display name of the channel</param>
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
         public async Task<ITeamChannel> AddBatchAsync(string name, string description = null)
         {
             return await AddBatchAsync(PnPContext.CurrentBatch, name, description).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Adds a new channel
+        /// </summary>
+        /// <param name="name">Display name of the channel</param>
+        /// <param name="description">Optional description of the channel</param>
+        /// <returns>Newly added channel</returns>
+        public ITeamChannel AddBatch(string name, string description = null)
+        {
+            return AddBatchAsync(name, description).GetAwaiter().GetResult();
         }
 
     }
