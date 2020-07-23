@@ -43,7 +43,7 @@ namespace PnP.Core.Model.SharePoint
                                     // is used, which sets the collection as requested. Since in this case we get back a special structure we use custom
                                     // parsing and hence we need to flag the collection as requested ourselves
                                     (Parent as ListItemCollection).Requested = true;
-                                    
+
                                     // populate the uri and type metadata fields to enable actions upon 
                                     // this item without having to read it again from the server
                                     var parentList = Parent.Parent as List;
@@ -106,7 +106,7 @@ namespace PnP.Core.Model.SharePoint
 
                 // Add fields to the payload
                 dynamic itemValues = new List<dynamic>();
-                foreach(var item in Values)
+                foreach (var item in Values)
                 {
                     dynamic field = new ExpandoObject();
                     field.FieldName = item.Key;
@@ -144,9 +144,19 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        public void UpdateOverwriteVersion()
+        {
+            UpdateOverwriteVersionAsync().GetAwaiter().GetResult();
+        }
+
         public async Task UpdateOverwriteVersionBatchAsync()
         {
             await UpdateOverwriteVersionBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public void UpdateOverwriteVersionBatch()
+        {
+            UpdateOverwriteVersionBatchAsync().GetAwaiter().GetResult();
         }
 
         public async Task UpdateOverwriteVersionBatchAsync(Batch batch)
@@ -164,6 +174,11 @@ namespace PnP.Core.Model.SharePoint
             {
                 PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
             }
+        }
+
+        public void UpdateOverwriteVersionBatch(Batch batch)
+        {
+            UpdateOverwriteVersionBatchAsync(batch).GetAwaiter().GetResult();
         }
 
         #endregion
@@ -187,9 +202,19 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        public void SystemUpdate()
+        {
+            SystemUpdateAsync().GetAwaiter().GetResult();
+        }
+
         public async Task SystemUpdateBatchAsync()
         {
             await SystemUpdateBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public void SystemUpdateBatch()
+        {
+            SystemUpdateBatchAsync().GetAwaiter().GetResult();
         }
 
         public async Task SystemUpdateBatchAsync(Batch batch)
@@ -207,6 +232,11 @@ namespace PnP.Core.Model.SharePoint
             {
                 PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
             }
+        }
+
+        public void SystemUpdateBatch(Batch batch)
+        {
+            SystemUpdateBatchAsync(batch).GetAwaiter().GetResult();
         }
 
         private string BuildXmlPayload(bool updateOverwriteVersion)

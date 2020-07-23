@@ -36,13 +36,29 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Performs a system update of the list item
         /// </summary>
+        public void SystemUpdate();
+
+        /// <summary>
+        /// Performs a system update of the list item
+        /// </summary>
         public Task SystemUpdateBatchAsync();
+
+        /// <summary>
+        /// Performs a system update of the list item
+        /// </summary>
+        public void SystemUpdateBatch();
 
         /// <summary>
         /// Performs a system update of the list item
         /// </summary>
         /// <param name="batch">Batch to add the systemupdate request to</param>
         public Task SystemUpdateBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Performs a system update of the list item
+        /// </summary>
+        /// <param name="batch">Batch to add the systemupdate request to</param>
+        public void SystemUpdateBatch(Batch batch);
 
         #endregion
 
@@ -56,13 +72,29 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Performs a UpdateOverwriteVersion of the list item
         /// </summary>
+        public void UpdateOverwriteVersion();
+
+        /// <summary>
+        /// Performs a UpdateOverwriteVersion of the list item
+        /// </summary>
         public Task UpdateOverwriteVersionBatchAsync();
+
+        /// <summary>
+        /// Performs a UpdateOverwriteVersion of the list item
+        /// </summary>
+        public void UpdateOverwriteVersionBatch();
 
         /// <summary>
         /// Performs a UpdateOverwriteVersion of the list item
         /// </summary>
         /// <param name="batch">Batch to add the UpdateOverwriteVersion request to</param>
         public Task UpdateOverwriteVersionBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Performs a UpdateOverwriteVersion of the list item
+        /// </summary>
+        /// <param name="batch">Batch to add the UpdateOverwriteVersion request to</param>
+        public void UpdateOverwriteVersionBatch(Batch batch);
 
         #endregion
 
