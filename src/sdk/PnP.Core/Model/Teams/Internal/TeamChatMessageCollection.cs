@@ -9,7 +9,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="name">Body of the chat message</param>
+        /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public async Task<ITeamChatMessage> AddAsync(string body)
         {
@@ -34,8 +34,18 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
+        /// <param name="body">Body of the chat message</param>
+        /// <returns>Newly added channel chat message</returns>
+        public ITeamChatMessage Add(string body)
+        {
+            return AddAsync(body).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new channel chat message
+        /// </summary>
         /// <param name="batch">Batch to use</param>
-        /// <param name="name">Body of the chat message</param>
+        /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public async Task<ITeamChatMessage> AddBatchAsync(Batch batch, string body)
         {
@@ -59,11 +69,33 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="name">Body of the chat message</param>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="body">Body of the chat message</param>
+        /// <returns>Newly added channel chat message</returns>
+        public ITeamChatMessage AddBatch(Batch batch, string body)
+        {
+            return AddBatchAsync(batch, body).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Adds a new channel chat message
+        /// </summary>
+        /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public async Task<ITeamChatMessage> AddBatchAsync(string body)
         {
             return await AddBatchAsync(PnPContext.CurrentBatch, body).ConfigureAwait(false);
         }
+
+        /// <summary>
+        /// Adds a new channel chat message
+        /// </summary>
+        /// <param name="body">Body of the chat message</param>
+        /// <returns>Newly added channel chat message</returns>
+        public ITeamChatMessage AddBatch(string body)
+        {
+            return AddBatchAsync(body).GetAwaiter().GetResult();
+        }
+
     }
 }

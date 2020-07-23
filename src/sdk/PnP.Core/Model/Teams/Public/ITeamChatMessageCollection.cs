@@ -19,6 +19,13 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
+        /// <param name="name">Body of the chat message</param>
+        /// <returns>Newly added channel chat message</returns>
+        public ITeamChatMessage Add(string body);
+
+        /// <summary>
+        /// Adds a new channel chat message
+        /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="name">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
@@ -27,8 +34,23 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="name">Body of the chat message</param>
+        /// <returns>Newly added channel chat message</returns>
+        public ITeamChatMessage AddBatch(Batch batch, string body);
+
+        /// <summary>
+        /// Adds a new channel chat message
+        /// </summary>
         /// <param name="name">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public Task<ITeamChatMessage> AddBatchAsync(string body);
+
+        /// <summary>
+        /// Adds a new channel chat message
+        /// </summary>
+        /// <param name="name">Body of the chat message</param>
+        /// <returns>Newly added channel chat message</returns>
+        public ITeamChatMessage AddBatch(string body);
     }
 }
