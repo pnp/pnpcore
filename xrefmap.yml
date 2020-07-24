@@ -7189,6 +7189,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlAsync
   nameWithType: IWeb.GetFolderByServerRelativeUrlAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatch(PnP.Core.Services.Batch,System.String)
+  name: GetFolderByServerRelativeUrlBatch(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: IWeb.GetFolderByServerRelativeUrlBatch(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatch(System.String)
+  name: GetFolderByServerRelativeUrlBatch(String)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlBatch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatch(System.String)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatch(System.String)
+  nameWithType: IWeb.GetFolderByServerRelativeUrlBatch(String)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatch*
+  name: GetFolderByServerRelativeUrlBatch
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatch
+  nameWithType: IWeb.GetFolderByServerRelativeUrlBatch
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: GetFolderByServerRelativeUrlBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: IWeb.GetFolderByServerRelativeUrlBatchAsync(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync(System.String)
+  name: GetFolderByServerRelativeUrlBatchAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync(System.String)
+  nameWithType: IWeb.GetFolderByServerRelativeUrlBatchAsync(String)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync*
+  name: GetFolderByServerRelativeUrlBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync
+  nameWithType: IWeb.GetFolderByServerRelativeUrlBatchAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.HorizontalQuickLaunch
   name: HorizontalQuickLaunch
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HorizontalQuickLaunch

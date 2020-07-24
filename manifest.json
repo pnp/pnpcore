@@ -786,7 +786,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "1uViODIkiwOP14goHznwQA=="
+          "hash": "LnXS0v2ju7pw0jHa0kIAgQ=="
         }
       },
       "is_incremental": false,
@@ -870,7 +870,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "muYkeSbuUawPepNU2z1OXw=="
+          "hash": "qGlCAcnKdQrNry3oYj1dfQ=="
         }
       },
       "is_incremental": false,
@@ -1146,7 +1146,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChannelTabConfiguration.html",
-          "hash": "YMxtwKrkMio6sUW8bMU+eQ=="
+          "hash": "wvxA4182te0Ms1Co+3RWMw=="
         }
       },
       "is_incremental": false,
