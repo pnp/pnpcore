@@ -50,65 +50,65 @@ namespace PnP.Core.Model.SharePoint
         #region Add sub folder
 
         /// <summary>
-        /// Add a sub folder to the current folder.
+        /// Add a folder to the current folder.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
-        /// <returns>The added sub folder.</returns>
-        public async Task<IFolder> AddSubFolderAsync(string name)
+        /// <param name="name">The name of the folder to add.</param>
+        /// <returns>The added folder.</returns>
+        public async Task<IFolder> AddFolderAsync(string name)
         {
             return await Folders.AddAsync(name).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Add a sub folder to the current folder.
+        /// Add a folder to the current folder.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
-        /// <returns>The added sub folder.</returns>
-        public IFolder AddSubFolder(string name)
+        /// <param name="name">The name of the folder to add.</param>
+        /// <returns>The added folder.</returns>
+        public IFolder AddFolder(string name)
         {
-            return AddSubFolderAsync(name).GetAwaiter().GetResult();
+            return AddFolderAsync(name).GetAwaiter().GetResult();
         }
 
         /// <summary>
-        /// Add a sub folder to the current folder via batch.
+        /// Add a folder to the current folder via batch.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
+        /// <param name="name">The name of the folder to add.</param>
         /// <param name="batch">Batch to add the reques to</param>
-        /// <returns>The added sub folder.</returns>
-        public async Task<IFolder> AddSubFolderBatchAsync(Batch batch, string name)
+        /// <returns>The added folder.</returns>
+        public async Task<IFolder> AddFolderBatchAsync(Batch batch, string name)
         {
             return await Folders.AddBatchAsync(batch, name).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Add a sub folder to the current folder via batch.
+        /// Add a folder to the current folder via batch.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
+        /// <param name="name">The name of the folder to add.</param>
         /// <param name="batch">Batch to add the reques to</param>
-        /// <returns>The added sub folder.</returns>
-        public IFolder AddSubFolderBatch(Batch batch, string name)
+        /// <returns>The added folder.</returns>
+        public IFolder AddFolderBatch(Batch batch, string name)
         {
-            return AddSubFolderBatchAsync(batch, name).GetAwaiter().GetResult();
+            return AddFolderBatchAsync(batch, name).GetAwaiter().GetResult();
         }
 
         /// <summary>
-        /// Add a sub folder to the current folder via batch.
+        /// Add a folder to the current folder via batch.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
-        /// <returns>The added sub folder.</returns>
-        public async Task<IFolder> AddSubFolderBatchAsync(string name)
+        /// <param name="name">The name of the folder to add.</param>
+        /// <returns>The added folder.</returns>
+        public async Task<IFolder> AddFolderBatchAsync(string name)
         {
             return await Folders.AddBatchAsync(PnPContext.CurrentBatch, name).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Add a sub folder to the current folder via batch.
+        /// Add a folder to the current folder via batch.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
-        /// <returns>The added sub folder.</returns>
-        public IFolder AddSubFolderBatch(string name)
+        /// <param name="name">The name of the folder to add.</param>
+        /// <returns>The added folder.</returns>
+        public IFolder AddFolderBatch(string name)
         {
-            return AddSubFolderBatchAsync(name).GetAwaiter().GetResult();
+            return AddFolderBatchAsync(name).GetAwaiter().GetResult();
         }
         #endregion
 

@@ -169,7 +169,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // This works
                 IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFolder newFolder = await parentFolder.AddSubFolderAsync("TEST");
+                IFolder newFolder = await parentFolder.AddFolderAsync("TEST");
 
                 // Test the created object
                 Assert.IsNotNull(newFolder);

@@ -95,47 +95,47 @@ namespace PnP.Core.Model.SharePoint
         public IFolderCollection Folders { get; }
 
         /// <summary>
-        /// Add a sub folder to the current folder.
+        /// Add a folder to the current folder.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
-        /// <returns>The added sub folder.</returns>
-        public Task<IFolder> AddSubFolderAsync(string name);
+        /// <param name="name">The name of the folder to add.</param>
+        /// <returns>The added folder.</returns>
+        public Task<IFolder> AddFolderAsync(string name);
 
         /// <summary>
-        /// Add a sub folder to the current folder.
+        /// Add a folder to the current folder.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
-        /// <returns>The added sub folder.</returns>
-        public IFolder AddSubFolder(string name);
+        /// <param name="name">The name of the folder to add.</param>
+        /// <returns>The added folder.</returns>
+        public IFolder AddFolder(string name);
 
         /// <summary>
-        /// Add a sub folder to the current folder via batch.
+        /// Add a folder to the current folder via batch.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
-        /// <returns>The added sub folder.</returns>
-        public Task<IFolder> AddSubFolderBatchAsync(string name);
+        /// <param name="name">The name of the folder to add.</param>
+        /// <returns>The added folder.</returns>
+        public Task<IFolder> AddFolderBatchAsync(string name);
 
         /// <summary>
-        /// Add a sub folder to the current folder via batch.
+        /// Add a folder to the current folder via batch.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
-        /// <returns>The added sub folder.</returns>
-        public IFolder AddSubFolderBatch(string name);
+        /// <param name="name">The name of the folder to add.</param>
+        /// <returns>The added folder.</returns>
+        public IFolder AddFolderBatch(string name);
 
         /// <summary>
-        /// Add a sub folder to the current folder via batch.
+        /// Add a folder to the current folder via batch.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
+        /// <param name="name">The name of the folder to add.</param>
         /// <param name="batch">Batch to add the reques to</param>
-        /// <returns>The added sub folder.</returns>
-        public Task<IFolder> AddSubFolderBatchAsync(Batch batch, string name);
+        /// <returns>The added folder.</returns>
+        public Task<IFolder> AddFolderBatchAsync(Batch batch, string name);
 
         /// <summary>
-        /// Add a sub folder to the current folder via batch.
+        /// Add a folder to the current folder via batch.
         /// </summary>
-        /// <param name="name">The name of the sub folder to add.</param>
+        /// <param name="name">The name of the folder to add.</param>
         /// <param name="batch">Batch to add the reques to </param>
-        /// <returns>The added sub folder.</returns>
-        public IFolder AddSubFolderBatch(Batch batch, string name);
+        /// <returns>The added folder.</returns>
+        public IFolder AddFolderBatch(Batch batch, string name);
     }
 }

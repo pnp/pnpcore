@@ -1,10 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
