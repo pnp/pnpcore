@@ -14,7 +14,7 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core). Each night this preview package is refreshed so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version. 
 
-> **Note**
+> [!Note]
 > There are 2 package flavors: a `-preview` version and a `-blazor-preview` version. The latter one is meant to be used in Blazor Web Assembly projects and will exist until one of the SDK's references gets supported on Blazor.
 
 If you want to debug the SDK code you can include the PnP Core project (`src\PnP.Core\PnP.Core.csproj`) in your project as a dependency.
