@@ -782,11 +782,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IFolder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
+          "hash": "+sOk8b2co718pixf8NQvCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IFolderCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IFolderCollection.html",
+          "hash": "MHgXsG/MbngAFLLBZnQpiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IList.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "+yIlyw9wAbnfhPhPu34ujQ=="
+          "hash": "+syZ/yoT77ZRHxkKIKEfKA=="
         }
       },
       "is_incremental": false,
@@ -846,7 +870,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "afhLIXWbrvp/o90CKnJl1g=="
+          "hash": "muYkeSbuUawPepNU2z1OXw=="
         }
       },
       "is_incremental": false,
@@ -978,7 +1002,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "JX47mc1itZk/SJWibyMz/g=="
+          "hash": "8EgzqJGRma01/81tBsJZug=="
         }
       },
       "is_incremental": false,
@@ -1974,7 +1998,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "qWUVqtDGEYi3VO+SyaQpbw=="
+          "hash": "e9eNoIYrO36qeRW9Vol2rg=="
         }
       },
       "is_incremental": false,
@@ -2272,7 +2296,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 162,
+          "total_file_count": 164,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
