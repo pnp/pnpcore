@@ -68,6 +68,11 @@ namespace PnP.Core.Model.SharePoint
         public bool EnableModeration { get; set; }
 
         /// <summary>
+        /// Gets the root folder of the list.
+        /// </summary>
+        public IFolder RootFolder { get; set; }
+
+        /// <summary>
         /// Gets or sets the MinorVersionLimit  for versioning, just in case it is enabled on the list
         /// </summary>
         public int MinorVersionLimit { get; set; }

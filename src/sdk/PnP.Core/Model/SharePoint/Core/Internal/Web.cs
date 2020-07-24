@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
 using PnP.Core.Services;
+using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -45,5 +47,30 @@ namespace PnP.Core.Model.SharePoint
             //};
 
         }
+
+        #region Extension methods
+
+        #region Folders
+        private IFolder LastRetrievedFolder { get; set; }
+        public async Task<IFolder> GetFolderByServerRelativeUrlAsync(string serverRelativeUrl)
+        {
+            // NOTE WebUtility encode spaces to "+" instead of %20
+            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl).Replace("+","%20");
+            var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativeUrl('{encodedServerRelativeUrl}')", ApiType.SPORest, receivingProperty: nameof(LastRetrievedFolder));
+
+            await RequestAsync(apiCall, HttpMethod.Get ).ConfigureAwait(false);
+
+            var foundFolder = LastRetrievedFolder;
+            LastRetrievedFolder = null;
+            return foundFolder;
+        }
+
+        public IFolder GetFolderByServerRelativeUrl(string serverRelativeUrl)
+        {
+            return GetFolderByServerRelativeUrlAsync(serverRelativeUrl).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #endregion
     }
 }

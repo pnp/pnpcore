@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -148,5 +149,24 @@ namespace PnP.Core.Model.SharePoint
         /// Collection of features enabled for the web
         /// </summary>
         public IFeatureCollection Features { get; }
+
+        /// <summary>
+        /// Collection of folders in the current Web object
+        /// </summary>
+        public IFolderCollection Folders { get; }
+
+        /// <summary>
+        /// Get a folder in the current web from its server relative URL.
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <returns>The folder to get</returns>
+        public Task<IFolder> GetFolderByServerRelativeUrlAsync(string serverRelativeUrl);
+
+        /// <summary>
+        /// Get a folder in the current web from its server relative URL.
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <returns>The folder to get</returns>
+        public IFolder GetFolderByServerRelativeUrl(string serverRelativeUrl);
     }
 }
