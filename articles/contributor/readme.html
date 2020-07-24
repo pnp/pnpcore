@@ -86,6 +86,7 @@
 <ul>
 <li>The code of the PnP Core SDK in the <code>src\sdk</code> folder</li>
 <li>Examples of how to use the PnP Core SDK in the <code>src\samples</code> folder</li>
+<li>Generated code to speed up contribution of new model logic in the <code>src\generated</code> folder</li>
 <li>The source of the documentation you are reading right now in the <code>docs</code> folder</li>
 </ul>
 <h2 id="general-model-principles">General model principles</h2>
@@ -227,8 +228,8 @@ internal partial class List
 <li><p>Can implement event handlers which are used to (see the <a href="event%20handlers.html">Event Handlers</a> page for more details):</p>
 <ul>
 <li>Optionally customize the JSON to Model mapping via the <code>MappingHandler = (FromJson input)</code> handler</li>
-<li>Implement the API call for doing an Add operation via the <code>AddApiCallHandler = ()</code> handler</li>
-<li>Optionally implement API call overrides that allow you to update the generated API call before it's send off to the server. There are these handlers: <code>GetApiCallOverrideHandler = (ApiCall apiCall)</code>, <code>UpdateApiCallOverrideHandler = (ApiCall apiCall)</code> and <code>DeleteApiCallOverrideHandler = (ApiCall apiCall)</code></li>
+<li>Implement the API call for doing an Add operation via the <code>AddApiCallHandler = async ()</code> handler</li>
+<li>Optionally implement API call overrides that allow you to update the generated API call before it's send off to the server. There are these handlers: <code>GetApiCallOverrideHandler = async (ApiCall apiCall)</code>, <code>UpdateApiCallOverrideHandler = async (ApiCall apiCall)</code> and <code>DeleteApiCallOverrideHandler = async (ApiCall apiCall)</code></li>
 <li>Optionally implement property validation (prevent property updates, alter values) via the <code>ValidateUpdateHandler = (ref FieldUpdateRequest fieldUpdateRequest)</code> handler</li>
 </ul>
 </li>

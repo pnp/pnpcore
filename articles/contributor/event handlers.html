@@ -92,22 +92,22 @@
 <tbody>
 <tr>
 <td><code>AddApiCallHandler</code></td>
-<td><code>ApiCall AddApiCall();</code></td>
+<td><code>Task&lt;ApiCall&gt; AddApiCall();</code></td>
 <td>When you want to implement <strong>Add</strong> on a model class you need to use this event handler</td>
 </tr>
 <tr>
 <td><code>GetApiCallOverrideHandler</code></td>
-<td><code>ApiCallRequest GetApiCallOverride(ApiCallRequest input);</code></td>
+<td><code>Task&lt;ApiCallRequest&gt; GetApiCallOverride(ApiCallRequest input);</code></td>
 <td>You can use this handler to override or cancel the <strong>get</strong> API call that was created based upon the model decoration</td>
 </tr>
 <tr>
 <td><code>UpdateApiCallOverrideHandler</code></td>
-<td><code>ApiCallRequest UpdateApiCallOverride(ApiCallRequest input);</code></td>
+<td><code>Task&lt;ApiCallRequest&gt; UpdateApiCallOverride(ApiCallRequest input);</code></td>
 <td>You can use this handler to override or cancel the <strong>update</strong> API call that was created based upon the model decoration</td>
 </tr>
 <tr>
 <td><code>DeleteApiCallOverrideHandler</code></td>
-<td><code>ApiCallRequest DeleteApiCallOverride(ApiCallRequest input);</code></td>
+<td><code>Task&lt;ApiCallRequest&gt; DeleteApiCallOverride(ApiCallRequest input);</code></td>
 <td>You can use this handler to override or cancel the <strong>delete</strong> API call that was created based upon the model decoration</td>
 </tr>
 <tr>
@@ -139,7 +139,7 @@
     internal TeamChannel()
     {
         // Handler to construct the Add request for this channel
-        AddApiCallHandler = () =&gt;
+        AddApiCallHandler = async () =&gt;
         {
             // Define the JSON body of the update request based on the actual changes
             dynamic body = new ExpandoObject();
@@ -163,7 +163,7 @@
 {
     internal Team()
     {
-        GetApiCallOverrideHandler = (ApiCallRequest api) =&gt;
+        GetApiCallOverrideHandler = async (ApiCallRequest api) =&gt;
         {
             if (!PnPContext.Site.IsPropertyAvailable(p =&gt; p.GroupId) || PnPContext.Site.GroupId == Guid.Empty)
             {
@@ -182,7 +182,7 @@
 {
     internal TeamChannel()
     {
-        UpdateApiCallOverrideHandler = (ApiCallRequest apiCallRequest) =&gt;
+        UpdateApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =&gt;
         {
             if (DisplayName == &quot;General&quot;)
             {
@@ -192,7 +192,7 @@
             return apiCallRequest;
         };
 
-        DeleteApiCallOverrideHandler = (ApiCallRequest apiCallRequest) =&gt;
+        DeleteApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =&gt;
         {
             if (DisplayName == &quot;General&quot;)
             {

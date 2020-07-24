@@ -172,7 +172,7 @@
 <p>After you've configured the <code>OAuthAccessTokenConfiguration</code> configuration you can create a context (tell the factory to use this configuration if it's not the default one) and use the <code>SetAccessToken</code> method on your <code>PnPContext</code> class instance to plug-in your access token:</p>
 <pre><code class="lang-csharp">var pnpContextFactory = scope.ServiceProvider.GetRequiredService&lt;IPnPContextFactory&gt;();
 // Use the PnP Context factory to get a PnPContext for the given configuration
-using (var context = pnpContextFactory.Create(&quot;SiteToWorkWith&quot;, &quot;AccessTokenAuthentication&quot;))
+using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, &quot;AccessTokenAuthentication&quot;))
 {
     // Set the access token on the context
     context.SetAccessToken(accessToken);

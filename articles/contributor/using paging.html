@@ -87,7 +87,7 @@
 }
 </code></pre>
 <p>Once you've done that the paging methods/attribute can be used as shown in this example:</p>
-<pre><code class="lang-csharp">using (var context = pnpContextFactory.Create(&quot;SiteToWorkWith&quot;))
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Get a first page of lists of size 2
     await context.Web.Lists.GetPagedAsync(2, p =&gt; p.Title);
