@@ -88,6 +88,29 @@ namespace PnP.Core.Model.SharePoint
 
         public string ValidationMessage { get => GetValue<string>(); set => SetValue(value); }
 
+        public IFolder RootFolder
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var rootFolder = new Folder
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(rootFolder);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IFolder>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
         [SharePointProperty("Items", Expandable = true)]
         [GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
         public IListItemCollection Items
@@ -102,7 +125,7 @@ namespace PnP.Core.Model.SharePoint
                 return GetValue<IListItemCollection>();
             }
         }
-        
+
         [SharePointProperty("ContentTypes", Expandable = true)]
         public IContentTypeCollection ContentTypes
         {

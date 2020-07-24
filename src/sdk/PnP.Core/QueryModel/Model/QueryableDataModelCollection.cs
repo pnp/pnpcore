@@ -1,13 +1,8 @@
 ﻿using PnP.Core.Model;
-using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading;
 
 namespace PnP.Core.QueryModel.Model
 {
@@ -22,6 +17,7 @@ namespace PnP.Core.QueryModel.Model
                 typeof(Core.Model.SharePoint.IListItem),
                 typeof(Core.Model.SharePoint.IContentType),
                 typeof(Core.Model.SharePoint.IField),
+                typeof(Core.Model.SharePoint.IFolder),
                 typeof(Core.Model.SharePoint.IWeb),
                 typeof(Core.Model.Teams.ITeamChannel),
                 typeof(Core.Model.Teams.ITeamChatMessage)

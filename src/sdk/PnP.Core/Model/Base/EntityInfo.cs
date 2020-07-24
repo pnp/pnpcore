@@ -106,7 +106,7 @@ namespace PnP.Core.Model
         {
             get
             {
-                return Graph.Beta;
+                return Graph?.Beta ?? false;
             }
         }
 

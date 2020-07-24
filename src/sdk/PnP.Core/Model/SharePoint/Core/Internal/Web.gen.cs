@@ -141,6 +141,20 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        [SharePointProperty("Folders", Expandable = true)]
+        public IFolderCollection Folders
+        {
+            get
+            {
+                if (!HasValue(nameof(Folders)))
+                {
+                    var folders = new FolderCollection(this.PnPContext, this, nameof(Folders));
+                    SetValue(folders);
+                }
+                return GetValue<IFolderCollection>();
+            }
+        }
+
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
 
