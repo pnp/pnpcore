@@ -22,7 +22,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetWebFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
                 Assert.IsNotNull(folder);
@@ -33,7 +33,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFolderByServerRelativeUrlTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string sharedDocumentsFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 string sitePagesFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/SitePages";
@@ -52,7 +52,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFolderByServerRelativeUrlBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string sharedDocumentsFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 string sitePagesFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/SitePages";
@@ -74,7 +74,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddFolderFromWebFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
                 
@@ -93,7 +93,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetListRootFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
 
@@ -107,7 +107,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetListSubFoldersTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
                 IFolder mockFolder = await parentFolder.Folders.AddAsync("TEST");
@@ -124,7 +124,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task QueryListSubFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
                 IFolder mockFolder = await parentFolder.Folders.AddAsync("TEST");
@@ -142,7 +142,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
                 //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
@@ -162,7 +162,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task AddListSubFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
                 //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.AddSubFolderAsync("TEST");
@@ -183,7 +183,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task UpdateFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
                 IFolder folderToUpdate = await parentFolder.Folders.AddAsync("TEST");
@@ -203,7 +203,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DeleteFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
                 IFolder folderToDelete = await parentFolder.Folders.AddAsync("TO DELETE FOLDER");
