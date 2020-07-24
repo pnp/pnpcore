@@ -1,3 +1,4 @@
+using PnP.Core.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -34,9 +35,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string ProgID { get; }
 
+
         /// <summary>
         /// Gets the server-relative URL of the list folder.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings", Justification = "<Pending>")]
         public string ServerRelativeUrl { get; }
 
         /// <summary>
@@ -105,5 +108,35 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="name">The name of the sub folder to add.</param>
         /// <returns>The added sub folder.</returns>
         public IFolder AddSubFolder(string name);
+
+        /// <summary>
+        /// Add a sub folder to the current folder via batch.
+        /// </summary>
+        /// <param name="name">The name of the sub folder to add.</param>
+        /// <returns>The added sub folder.</returns>
+        public Task<IFolder> AddSubFolderBatchAsync(string name);
+
+        /// <summary>
+        /// Add a sub folder to the current folder via batch.
+        /// </summary>
+        /// <param name="name">The name of the sub folder to add.</param>
+        /// <returns>The added sub folder.</returns>
+        public IFolder AddSubFolderBatch(string name);
+
+        /// <summary>
+        /// Add a sub folder to the current folder via batch.
+        /// </summary>
+        /// <param name="name">The name of the sub folder to add.</param>
+        /// <param name="batch">Batch to add the reques to</param>
+        /// <returns>The added sub folder.</returns>
+        public Task<IFolder> AddSubFolderBatchAsync(Batch batch, string name);
+
+        /// <summary>
+        /// Add a sub folder to the current folder via batch.
+        /// </summary>
+        /// <param name="name">The name of the sub folder to add.</param>
+        /// <param name="batch">Batch to add the reques to </param>
+        /// <returns>The added sub folder.</returns>
+        public IFolder AddSubFolderBatch(Batch batch, string name);
     }
 }
