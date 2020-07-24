@@ -29,21 +29,46 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        // TODO Uncomment this when GetFolderByServerRelativeUrl works
-        //[TestMethod]
-        //public async Task GetFolderByServerRelativeUrlTest()
-        //{
-        //    //TestCommon.Instance.Mocking = false;
-        //    using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
-        //    {
-        //        string folderServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+        [TestMethod]
+        public async Task GetFolderByServerRelativeUrlTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                string sitePagesFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/SitePages";
 
-        //        IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(folderServerRelativeUrl);
-                
-        //        Assert.IsNotNull(folder);
-        //        Assert.AreEqual("Shared Documents", folder.Name);
-        //    }
-        //}
+                IFolder sharedDocumentsfolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderServerRelativeUrl);
+                IFolder sitePagesfolder = await context.Web.GetFolderByServerRelativeUrlAsync(sitePagesFolderServerRelativeUrl);
+
+                Assert.IsNotNull(sharedDocumentsfolder);
+                Assert.AreEqual("Shared Documents", sharedDocumentsfolder.Name);
+                Assert.IsNotNull(sitePagesfolder);
+                Assert.AreEqual("SitePages", sitePagesfolder.Name);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFolderByServerRelativeUrlBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                string sitePagesFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/SitePages";
+
+                IFolder sharedDocumentsfolder = await context.Web.GetFolderByServerRelativeUrlBatchAsync(sharedDocumentsFolderServerRelativeUrl);
+                IFolder sitePagesfolder = await context.Web.GetFolderByServerRelativeUrlBatchAsync(sitePagesFolderServerRelativeUrl);
+
+                // Execute the requests in the batch
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(sharedDocumentsfolder);
+                Assert.AreEqual("Shared Documents", sharedDocumentsfolder.Name);
+                Assert.IsNotNull(sitePagesfolder);
+                Assert.AreEqual("SitePages", sitePagesfolder.Name);
+            }
+        }
 
         [TestMethod]
         public async Task AddFolderFromWebFolderTest()

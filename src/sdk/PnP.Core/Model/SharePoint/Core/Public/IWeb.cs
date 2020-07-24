@@ -1,3 +1,4 @@
+using PnP.Core.Services;
 using System;
 using System.Threading.Tasks;
 
@@ -155,6 +156,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IFolderCollection Folders { get; }
 
+        #region Methods
+
+        #region GetFolderByServerRelativeUrl
+
         /// <summary>
         /// Get a folder in the current web from its server relative URL.
         /// </summary>
@@ -162,11 +167,46 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The folder to get</returns>
         public Task<IFolder> GetFolderByServerRelativeUrlAsync(string serverRelativeUrl);
 
+
         /// <summary>
         /// Get a folder in the current web from its server relative URL.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
         /// <returns>The folder to get</returns>
         public IFolder GetFolderByServerRelativeUrl(string serverRelativeUrl);
+
+        /// <summary>
+        /// Get a folder in the current web from its server relative URL via batch.
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The folder to get</returns>
+        public Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl);
+
+        /// <summary>
+        /// Get a folder in the current web from its server relative URL via batch.
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The folder to get</returns>
+        public IFolder GetFolderByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl);
+
+        /// <summary>
+        /// Get a folder in the current web from its server relative URL via batch.
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <returns>The folder to get</returns>
+        public Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(string serverRelativeUrl);
+
+        /// <summary>
+        /// Get a folder in the current web from its server relative URL via batch.
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <returns>The folder to get</returns>
+        public IFolder GetFolderByServerRelativeUrlBatch(string serverRelativeUrl);
+
+        #endregion
+
+        #endregion
     }
 }

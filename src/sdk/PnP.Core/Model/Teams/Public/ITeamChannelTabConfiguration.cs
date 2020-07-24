@@ -13,19 +13,16 @@
         /// <summary>
         /// Url used for rendering tab contents in Teams. Required.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings", Justification = "<Pending>")]
         public string ContentUrl { get; set; }
 
         /// <summary>
         /// Url called by Teams client when a Tab is removed using the Teams Client.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings", Justification = "<Pending>")]
         public string RemoveUrl { get; set; }
 
         /// <summary>
         /// Url for showing tab contents outside of Teams.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1056:Uri properties should not be strings", Justification = "<Pending>")]
         public string WebsiteUrl { get; set; }
 
         /// <summary>
