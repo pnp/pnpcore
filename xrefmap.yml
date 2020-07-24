@@ -5576,70 +5576,70 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFolder
   fullName: PnP.Core.Model.SharePoint.IFolder
   nameWithType: IFolder
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolder(System.String)
-  name: AddSubFolder(String)
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolder_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddSubFolder(System.String)
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolder(System.String)
-  nameWithType: IFolder.AddSubFolder(String)
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolder*
-  name: AddSubFolder
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolder_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.AddSubFolder
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolder(System.String)
+  name: AddFolder(String)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolder_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddFolder(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolder(System.String)
+  nameWithType: IFolder.AddFolder(String)
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolder*
+  name: AddFolder
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.AddFolder
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolder
-  nameWithType: IFolder.AddSubFolder
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolderAsync(System.String)
-  name: AddSubFolderAsync(String)
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolderAsync_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddSubFolderAsync(System.String)
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolderAsync(System.String)
-  nameWithType: IFolder.AddSubFolderAsync(String)
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolderAsync*
-  name: AddSubFolderAsync
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolderAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.AddSubFolderAsync
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolder
+  nameWithType: IFolder.AddFolder
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolderAsync(System.String)
+  name: AddFolderAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolderAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddFolderAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderAsync(System.String)
+  nameWithType: IFolder.AddFolderAsync(String)
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolderAsync*
+  name: AddFolderAsync
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolderAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.AddFolderAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolderAsync
-  nameWithType: IFolder.AddSubFolderAsync
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatch(PnP.Core.Services.Batch,System.String)
-  name: AddSubFolderBatch(Batch, String)
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolderBatch_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatch(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatch(PnP.Core.Services.Batch, System.String)
-  nameWithType: IFolder.AddSubFolderBatch(Batch, String)
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatch(System.String)
-  name: AddSubFolderBatch(String)
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolderBatch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatch(System.String)
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatch(System.String)
-  nameWithType: IFolder.AddSubFolderBatch(String)
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatch*
-  name: AddSubFolderBatch
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolderBatch_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatch
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderAsync
+  nameWithType: IFolder.AddFolderAsync
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolderBatch(PnP.Core.Services.Batch,System.String)
+  name: AddFolderBatch(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolderBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddFolderBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: IFolder.AddFolderBatch(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolderBatch(System.String)
+  name: AddFolderBatch(String)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolderBatch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddFolderBatch(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderBatch(System.String)
+  nameWithType: IFolder.AddFolderBatch(String)
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolderBatch*
+  name: AddFolderBatch
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolderBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.AddFolderBatch
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatch
-  nameWithType: IFolder.AddSubFolderBatch
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatchAsync(PnP.Core.Services.Batch,System.String)
-  name: AddSubFolderBatchAsync(Batch, String)
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolderBatchAsync_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatchAsync(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatchAsync(PnP.Core.Services.Batch, System.String)
-  nameWithType: IFolder.AddSubFolderBatchAsync(Batch, String)
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatchAsync(System.String)
-  name: AddSubFolderBatchAsync(String)
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolderBatchAsync_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatchAsync(System.String)
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatchAsync(System.String)
-  nameWithType: IFolder.AddSubFolderBatchAsync(String)
-- uid: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatchAsync*
-  name: AddSubFolderBatchAsync
-  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddSubFolderBatchAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderBatch
+  nameWithType: IFolder.AddFolderBatch
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddFolderBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolderBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: IFolder.AddFolderBatchAsync(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync(System.String)
+  name: AddFolderBatchAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolderBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync(System.String)
+  nameWithType: IFolder.AddFolderBatchAsync(String)
+- uid: PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync*
+  name: AddFolderBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_AddFolderBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFolder.AddSubFolderBatchAsync
-  nameWithType: IFolder.AddSubFolderBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync
+  nameWithType: IFolder.AddFolderBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFolder.Exists
   name: Exists
   href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_Exists
