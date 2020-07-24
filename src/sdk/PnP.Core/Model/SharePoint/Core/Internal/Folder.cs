@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Logging;
-using System;
 using PnP.Core.Services;
 using System.Threading.Tasks;
 
@@ -8,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Folder class, write your custom code here
     /// </summary>
-    [SharePointType("SP.Folder", Target = typeof(Web), Uri = "_api/Web/Folders('{Id}')", LinqGet = "_api/Web/Folders")]
+    [SharePointType("SP.Folder", Target = typeof(Web), Uri = "_api/Web/getFolderById('{Id}')", LinqGet = "_api/Web/Folders")]
     [SharePointType("SP.Folder", Target = typeof(Folder), Uri = "_api/Web/getFolderById('{Id}')", Get = "_api/Web/getFolderById('{Parent.Id}')/Folders", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Folders")]
     [SharePointType("SP.Folder", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/rootFolder", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/Folders")]
     internal partial class Folder
