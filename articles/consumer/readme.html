@@ -89,10 +89,10 @@
 </ul>
 <h2 id="referencing-the-pnp-core-sdk-in-your-project">Referencing the PnP Core SDK in your project</h2>
 <p>The recommended approach is to use the preview <a href="https://www.nuget.org/packages/PnP.Core">PnP.Core nuget package</a>. Each night this preview package is refreshed so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.</p>
-<blockquote>
-<p><strong>Note</strong>
-There are 2 package flavors: a <code>-preview</code> version and a <code>-blazor-preview</code> version. The latter one is meant to be used in Blazor Web Assembly projects and will exist until one of the SDK's references gets supported on Blazor.</p>
-</blockquote>
+<div class="NOTE">
+<h5>Note</h5>
+<p>There are 2 package flavors: a <code>-preview</code> version and a <code>-blazor-preview</code> version. The latter one is meant to be used in Blazor Web Assembly projects and will exist until one of the SDK's references gets supported on Blazor.</p>
+</div>
 <p>If you want to debug the SDK code you can include the PnP Core project (<code>src\PnP.Core\PnP.Core.csproj</code>) in your project as a dependency.</p>
 <h2 id="configuring-the-needed-services">Configuring the needed services</h2>
 <p>Below snippet shows how to configure the needed services in a .Net Core console app: it's required to add and configure the <code>AuthenticationProviderFactory</code> and the <code>PnPContextFactory</code> services. Typically you would also include configuration and logging as well.</p>
