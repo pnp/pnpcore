@@ -6,10 +6,10 @@ When you add/extend the model, you will have an option to use event handlers. Th
 
 Event handler | Delegate | Description
 --------------|----------|------------
-`AddApiCallHandler` | `ApiCall AddApiCall();` | When you want to implement **Add** on a model class you need to use this event handler
-`GetApiCallOverrideHandler` | `ApiCallRequest GetApiCallOverride(ApiCallRequest input);` | You can use this handler to override or cancel the **get** API call that was created based upon the model decoration
-`UpdateApiCallOverrideHandler` | `ApiCallRequest UpdateApiCallOverride(ApiCallRequest input);` | You can use this handler to override or cancel the **update** API call that was created based upon the model decoration
-`DeleteApiCallOverrideHandler` | `ApiCallRequest DeleteApiCallOverride(ApiCallRequest input);` | You can use this handler to override or cancel the **delete** API call that was created based upon the model decoration
+`AddApiCallHandler` | `Task<ApiCall> AddApiCall();` | When you want to implement **Add** on a model class you need to use this event handler
+`GetApiCallOverrideHandler` | `Task<ApiCallRequest> GetApiCallOverride(ApiCallRequest input);` | You can use this handler to override or cancel the **get** API call that was created based upon the model decoration
+`UpdateApiCallOverrideHandler` | `Task<ApiCallRequest> UpdateApiCallOverride(ApiCallRequest input);` | You can use this handler to override or cancel the **update** API call that was created based upon the model decoration
+`DeleteApiCallOverrideHandler` | `Task<ApiCallRequest> DeleteApiCallOverride(ApiCallRequest input);` | You can use this handler to override or cancel the **delete** API call that was created based upon the model decoration
 `MappingHandler` | `TResult Func<in T, out TResult>(T arg);` | Use this handler to customize how the JSON received from the server is mapped to the model. Typically used to handle enumerations and special fields
 `PostMappingHandler` | `void Action<in T>(T obj);` | This handler is fired after the complete JSON to model mapping was done and allows you to perform extra logic using the JSON snippet received from the server
 `ValidateUpdateHandler` | `void ValidateUpdate(ref FieldUpdateRequest fieldUpdateRequest);` | If you want to perform checks before you allow a property in the model to be updated, then use this event handler
@@ -32,7 +32,7 @@ internal partial class TeamChannel
     internal TeamChannel()
     {
         // Handler to construct the Add request for this channel
-        AddApiCallHandler = () =>
+        AddApiCallHandler = async () =>
         {
             // Define the JSON body of the update request based on the actual changes
             dynamic body = new ExpandoObject();
@@ -60,7 +60,7 @@ internal partial class Team
 {
     internal Team()
     {
-        GetApiCallOverrideHandler = (ApiCallRequest api) =>
+        GetApiCallOverrideHandler = async (ApiCallRequest api) =>
         {
             if (!PnPContext.Site.IsPropertyAvailable(p => p.GroupId) || PnPContext.Site.GroupId == Guid.Empty)
             {
@@ -83,7 +83,7 @@ internal partial class TeamChannel
 {
     internal TeamChannel()
     {
-        UpdateApiCallOverrideHandler = (ApiCallRequest apiCallRequest) =>
+        UpdateApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
         {
             if (DisplayName == "General")
             {
@@ -93,7 +93,7 @@ internal partial class TeamChannel
             return apiCallRequest;
         };
 
-        DeleteApiCallOverrideHandler = (ApiCallRequest apiCallRequest) =>
+        DeleteApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
         {
             if (DisplayName == "General")
             {

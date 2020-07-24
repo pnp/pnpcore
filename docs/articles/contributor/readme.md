@@ -10,6 +10,7 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 - The code of the PnP Core SDK in the `src\sdk` folder
 - Examples of how to use the PnP Core SDK in the `src\samples` folder
+- Generated code to speed up contribution of new model logic in the `src\generated` folder
 - The source of the documentation you are reading right now in the `docs` folder
 
 ## General model principles
@@ -167,8 +168,8 @@ Each coded model class:
 - Can implement event handlers which are used to (see the [Event Handlers](event%20handlers.md) page for more details):
 
   - Optionally customize the JSON to Model mapping via the `MappingHandler = (FromJson input)` handler
-  - Implement the API call for doing an Add operation via the `AddApiCallHandler = ()` handler
-  - Optionally implement API call overrides that allow you to update the generated API call before it's send off to the server. There are these handlers: `GetApiCallOverrideHandler = (ApiCall apiCall)`, `UpdateApiCallOverrideHandler = (ApiCall apiCall)` and `DeleteApiCallOverrideHandler = (ApiCall apiCall)`
+  - Implement the API call for doing an Add operation via the `AddApiCallHandler = async ()` handler
+  - Optionally implement API call overrides that allow you to update the generated API call before it's send off to the server. There are these handlers: `GetApiCallOverrideHandler = async (ApiCall apiCall)`, `UpdateApiCallOverrideHandler = async (ApiCall apiCall)` and `DeleteApiCallOverrideHandler = async (ApiCall apiCall)`
   - Optionally implement property validation (prevent property updates, alter values) via the `ValidateUpdateHandler = (ref FieldUpdateRequest fieldUpdateRequest)` handler
 
 - Model specific methods can be foreseen. These methods provide additional operations on the model class

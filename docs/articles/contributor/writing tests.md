@@ -60,7 +60,7 @@ public class GetTests
     public async Task GetSinglePropertyViaRest()
     {
         //TestCommon.Instance.Mocking = false;
-        using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+        using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
         {
             var web = await context.Web.GetAsync(p => p.WelcomePage);
 
@@ -96,7 +96,7 @@ If you follow below steps you'll be creating test cases according to the PnP Cor
     public async Task NameOfYourTestMethod()
     {
         TestCommon.Instance.Mocking = false;
-        using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+        using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
         {
             // here comes your actual test code
         }
@@ -131,7 +131,7 @@ To run a single test live you simply need to uncomment the `TestCommon.Instance.
 public async Task GetSinglePropertyViaRest()
 {
     TestCommon.Instance.Mocking = false;
-    using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
     {
         var web = await context.Web.GetAsync(p => p.WelcomePage);
 

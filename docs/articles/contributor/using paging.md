@@ -16,7 +16,7 @@ public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList
 Once you've done that the paging methods/attribute can be used as shown in this example:
 
 ```csharp
-using (var context = pnpContextFactory.Create("SiteToWorkWith"))
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
     // Get a first page of lists of size 2
     await context.Web.Lists.GetPagedAsync(2, p => p.Title);

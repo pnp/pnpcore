@@ -153,8 +153,11 @@ In contradiction with get, update, and delete which are fully handled by decorat
 - The public part (interface) is defined on the collection interface. Each functionality (like Add) is implemented via three methods:
 
   - An async method
-  - A regular method
-  - A regular method that allows to pass in a `Batch` as first method parameter
+  - An async batch method
+  - An async batch method that allows to pass in a `Batch` as first method parameter
+  - A sync method that calls the async method with a `GetAwaiter().GetResult()`
+  - A sync batch method that calls the async method with a `GetAwaiter().GetResult()`
+  - A sync batch method that calls the async method with a `GetAwaiter().GetResult()` and allows to pass in a `Batch` as first method parameter
 
 - Add methods defined on the interface are implemented in the collection classes as proxies that call into the respective add methods of the added model class
 - The implementation that performs the actual add is implemented as an `AddApiCallHandler` event handler in the model class. See the [Event Handlers](event%20handlers.md) page for more details.
@@ -167,7 +170,6 @@ Below code snippets show the above three concepts. First one shows the collectio
 /// </summary>
 public interface ITeamChannelCollection : IDataModelCollection<ITeamChannel>
 {
-
     /// <summary>
     /// Adds a new channel
     /// </summary>
@@ -179,11 +181,28 @@ public interface ITeamChannelCollection : IDataModelCollection<ITeamChannel>
     /// <summary>
     /// Adds a new channel
     /// </summary>
+    /// <param name="name">Display name of the channel</param>
+    /// <param name="description">Optional description of the channel</param>
+    /// <returns>Newly added channel</returns>
+    public ITeamChannel Add(string name, string description = null);
+
+    /// <summary>
+    /// Adds a new channel
+    /// </summary>
     /// <param name="batch">Batch to use</param>
     /// <param name="name">Display name of the channel</param>
     /// <param name="description">Optional description of the channel</param>
     /// <returns>Newly added channel</returns>
-    public ITeamChannel Add(Batch batch, string name, string description = null);
+    public Task<ITeamChannel> AddBatchAsync(Batch batch, string name, string description = null);
+
+    /// <summary>
+    /// Adds a new channel
+    /// </summary>
+    /// <param name="batch">Batch to use</param>
+    /// <param name="name">Display name of the channel</param>
+    /// <param name="description">Optional description of the channel</param>
+    /// <returns>Newly added channel</returns>
+    public ITeamChannel AddBatch(Batch batch, string name, string description = null);
 
     /// <summary>
     /// Adds a new channel
@@ -191,7 +210,15 @@ public interface ITeamChannelCollection : IDataModelCollection<ITeamChannel>
     /// <param name="name">Display name of the channel</param>
     /// <param name="description">Optional description of the channel</param>
     /// <returns>Newly added channel</returns>
-    public ITeamChannel Add(string name, string description = null);
+    public Task<ITeamChannel> AddBatchAsync(string name, string description = null);
+
+    /// <summary>
+    /// Adds a new channel
+    /// </summary>
+    /// <param name="name">Display name of the channel</param>
+    /// <param name="description">Optional description of the channel</param>
+    /// <returns>Newly added channel</returns>
+    public ITeamChannel AddBatch(string name, string description = null);
 }
 ```
 
@@ -213,7 +240,9 @@ internal partial class TeamChannelCollection
             throw new ArgumentNullException(nameof(name));
         }
 
-        var newChannel = AddNewTeamChannel();
+        // TODO: validate name restrictions
+
+        var newChannel = CreateNewAndAdd() as TeamChannel;
 
         // Assign field values
         newChannel.DisplayName = name;
@@ -225,24 +254,47 @@ internal partial class TeamChannelCollection
     /// <summary>
     /// Adds a new channel
     /// </summary>
+    /// <param name="name">Display name of the channel</param>
+    /// <param name="description">Optional description of the channel</param>
+    /// <returns>Newly added channel</returns>
+    public ITeamChannel Add(string name, string description = null)
+    {
+        return AddAsync(name, description).GetAwaiter().GetResult();
+    }
+
+    /// <summary>
+    /// Adds a new channel
+    /// </summary>
     /// <param name="batch">Batch to use</param>
     /// <param name="name">Display name of the channel</param>
     /// <param name="description">Optional description of the channel</param>
     /// <returns>Newly added channel</returns>
-    public ITeamChannel Add(Batch batch, string name, string description = null)
+    public async Task<ITeamChannel> AddBatchAsync(Batch batch, string name, string description = null)
     {
         if (string.IsNullOrEmpty(name))
         {
             throw new ArgumentNullException(nameof(name));
         }
 
-        var newChannel = AddNewTeamChannel();
+        var newChannel = CreateNewAndAdd() as TeamChannel;
 
         // Assign field values
         newChannel.DisplayName = name;
         newChannel.Description = description;
 
-        return newChannel.Add(batch) as TeamChannel;
+        return await newChannel.AddBatchAsync(batch).ConfigureAwait(false) as TeamChannel;
+    }
+
+    /// <summary>
+    /// Adds a new channel
+    /// </summary>
+    /// <param name="batch">Batch to use</param>
+    /// <param name="name">Display name of the channel</param>
+    /// <param name="description">Optional description of the channel</param>
+    /// <returns>Newly added channel</returns>
+    public ITeamChannel AddBatch(Batch batch, string name, string description = null)
+    {
+        return AddBatchAsync(batch, name, description).GetAwaiter().GetResult();
     }
 
     /// <summary>
@@ -251,9 +303,20 @@ internal partial class TeamChannelCollection
     /// <param name="name">Display name of the channel</param>
     /// <param name="description">Optional description of the channel</param>
     /// <returns>Newly added channel</returns>
-    public ITeamChannel Add(string name, string description = null)
+    public async Task<ITeamChannel> AddBatchAsync(string name, string description = null)
     {
-        return Add(PnPContext.CurrentBatch, name, description);
+        return await AddBatchAsync(PnPContext.CurrentBatch, name, description).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Adds a new channel
+    /// </summary>
+    /// <param name="name">Display name of the channel</param>
+    /// <param name="description">Optional description of the channel</param>
+    /// <returns>Newly added channel</returns>
+    public ITeamChannel AddBatch(string name, string description = null)
+    {
+        return AddBatchAsync(name, description).GetAwaiter().GetResult();
     }
 }
 ```
@@ -268,7 +331,7 @@ internal partial class TeamChannel
     internal TeamChannel()
     {
         // Handler to construct the Add request for this channel
-        AddApiCallHandler = () =>
+        AddApiCallHandler = async () =>
         {
             // Define the JSON body of the update request based on the actual changes
             dynamic body = new ExpandoObject();
@@ -281,7 +344,8 @@ internal partial class TeamChannel
             // Serialize object to json
             var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
 
-            return new ApiCall(ParseApiRequest(baseUri), ApiType.Graph, bodyContent);
+            var apiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
+            return new ApiCall(apiCall, ApiType.Graph, bodyContent);
         };
     }
 }
@@ -289,7 +353,7 @@ internal partial class TeamChannel
 
 ### Providing additional parameters for add requests
 
-The `AddApiCall` handler accepts an optional key value pair parameter: `ApiCall AddApiCall(Dictionary<string, object> additionalInformation = null)`. You can use this to provide additional input when you call the `Add` from your code in the collection class. Below sample shows how this feature is used to offer different SDK consumer methods for creating Team channel tabs (on the `TeamChannelTabCollection` class) while there's only one generic creation method implementation in the `TeamChannelTab` class. Let's start with the code in the `TeamChannelTabCollection` class:
+The `AddApiCall` handler accepts an optional key value pair parameter: `Task<ApiCall> AddApiCall(Dictionary<string, object> additionalInformation = null)`. You can use this to provide additional input when you call the `Add` from your code in the collection class. Below sample shows how this feature is used to offer different SDK consumer methods for creating Team channel tabs (on the `TeamChannelTabCollection` class) while there's only one generic creation method implementation in the `TeamChannelTab` class. Let's start with the code in the `TeamChannelTabCollection` class:
 
 ```csharp
 public async Task<ITeamChannelTab> AddWikiTabAsync(string name)
@@ -350,7 +414,7 @@ private Tuple<TeamChannelTab, Dictionary<string, object>> CreateTeamChannelWikiT
 The code in the `TeamChannelTab` class then uses the additional parameter values to drive the creation behavior:
 
 ```csharp
-AddApiCallHandler = (additionalInformation) =>
+AddApiCallHandler = async (additionalInformation) =>
 {
     // Define the JSON body of the update request based on the actual changes
     dynamic tab = new ExpandoObject();
@@ -390,7 +454,8 @@ AddApiCallHandler = (additionalInformation) =>
     // Serialize object to json
     var bodyContent = JsonSerializer.Serialize(tab, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
 
-    return new ApiCall(ApiHelper.ParseApiRequest(this, baseUri), ApiType.GraphBeta, bodyContent);
+    var parsedApiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
+    return new ApiCall(parsedApiCall, ApiType.GraphBeta, bodyContent);
 };
 ```
 

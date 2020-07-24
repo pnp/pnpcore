@@ -12,7 +12,12 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 ## Referencing the PnP Core SDK in your project
 
-At this point the PnP Core SDK has not yet been published as a nuget package, so you'll need to reference the SDK as DLL in your solution. You can build the `PnP.Core` solution and reference the DLL from the projects build output (e.g. `src\sdk\PnP.Core\bin\Debug\netstandard2.1\PnP.Core.dll`) or alternatively include the PnP Core project (`src\PnP.Core\PnP.Core.csproj`) in your project as a dependency. The latter approach does make it really easy for you to debug PnP Core when you're writing code.
+The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core). Each night this preview package is refreshed so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version. 
+
+> **Note**
+> There are 2 package flavors: a `-preview` version and a `-blazor-preview` version. The latter one is meant to be used in Blazor Web Assembly projects and will exist until one of the SDK's references gets supported on Blazor.
+
+If you want to debug the SDK code you can include the PnP Core project (`src\PnP.Core\PnP.Core.csproj`) in your project as a dependency.
 
 ## Configuring the needed services
 
@@ -103,12 +108,12 @@ using (var scope = host.Services.CreateScope())
     // Obtain a PnP Context factory
     var pnpContextFactory = scope.ServiceProvider.GetRequiredService<IPnPContextFactory>();
     // Use the PnP Context factory to get a PnPContext for the given configuration
-    using (var context = pnpContextFactory.Create("SiteToWorkWith"))
+    using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     {
         // See next chapter on how to use the PnPContext
     }
 
-    using (var context = pnpContextFactory.Create("Microsoft 365 Group guid"))
+    using (var context = await pnpContextFactory.CreateAsync("Microsoft 365 Group guid"))
     {
         // See next chapter on how to use the PnPContext
     }
@@ -121,7 +126,7 @@ host.Dispose();
 Next to creating a new `PnPContext` you can also clone an existing one, cloning is very convenient if you for example created a context for the root web of your site collection but now want to work with a sub site. Below snippet shows how to use cloning:
 
 ```csharp
-using (var context = pnpContextFactory.Create("SiteToWorkWith"))
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
     var web = await context.Web.GetAsync();
     Console.WriteLine($"Title: {web.Title}");
@@ -139,7 +144,7 @@ using (var context = pnpContextFactory.Create("SiteToWorkWith"))
 All operations on Microsoft 365 start from the `PnPContext` instance you've obtained from the `PnPContextFactory`. Below sample shows a simple get operation that requests data from Microsoft 365 and outputs it to the console:
 
 ```csharp
-using (var context = pnpContextFactory.Create("SiteToWorkWith"))
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
     var web = await context.Web.GetAsync();
     Console.WriteLine($"Title: {web.Title}");
@@ -157,7 +162,7 @@ However, you can easily group multiple requests in a batch and send them in one 
 
 ```csharp
 var web = await context.Web.GetAsync();
-var myList = web.Lists.GetByTitle("TestList");
+var myList = await web.Lists.GetByTitleAsync("TestList");
 if (myList != null)
 {
     // Create three list items and add them via single server request
@@ -166,20 +171,20 @@ if (myList != null)
         { "Title", "PnP Rocks!" }
     };
 
-    myList.Items.Add(values);
-    myList.Items.Add(values);
-    myList.Items.Add(values);
+    await myList.Items.AddBatchAsync(values);
+    await myList.Items.AddBatchAsync(values);
+    await myList.Items.AddBatchAsync(values);
 
     // Send batch to the server
     await context.ExecuteAsync();
 }
 ```
 
-To update Microsoft 365 you simply update the needed properties in your model and then call `UpdateAsync` or `Update` (used for batching):
+To update Microsoft 365 you simply update the needed properties in your model and then call `UpdateAsync` or `UpdateBatchAsync` (used for batching):
 
 ```csharp
 var web = await context.Web.GetAsync(p => p.Lists);
-var myList = web.Lists.GetByTitle("Documents");
+var myList = await web.Lists.GetByTitleAsync("Documents");
 
 if (myList != null)
 {
@@ -192,7 +197,7 @@ Deleting follows a similar pattern, but now you use `DeleteAsync` or `Delete`:
 
 ```csharp
 var web = await context.Web.GetAsync(p => p.Lists);
-var myList = web.Lists.GetByTitle("ListToDelete");
+var myList = await web.Lists.GetByTitleAsync("ListToDelete");
 
 if (myList != null)
 {
@@ -203,12 +208,12 @@ if (myList != null)
 If you like, you can also leverage a fluent syntax enriched with LINQ (Language Integrated Query). For example, in the following code excerpt you can see how to write a query for the items of a list.
 
 ```csharp
-var document = context.Web.Lists.GetByTitle("Documents").Items
+var document = (await context.Web.Lists.GetByTitleAsync("Documents")).Items
                             .Where(i => i.Title == "Sample Document")
                             .Load(i => i.Id, i => i.Title)
                             .FirstOrDefault();
 
-if (document != null) 
+if (document != null)
 {
     Console.WriteLine($"Document Title: {document.Title}");
 }

@@ -18,7 +18,7 @@ Method/Attribute | Description
 This example shows how to use paging to load lists, in the sample only the `Title` property of the list is requested, if you do not provide the expression then list default properties are loaded.
 
 ```csharp
-using (var context = pnpContextFactory.Create("SiteToWorkWith"))
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
     // Get a first page of lists of size 2
     await context.Web.Lists.GetPagedAsync(2, p => p.Title);
@@ -37,14 +37,14 @@ using (var context = pnpContextFactory.Create("SiteToWorkWith"))
 
 ### Starting via a linq query with Take()
 
-In this example a linq query is executed first using the `Take()` method. Once the linq query was execution was triggered (in this case by calling `ToList()`), you can using the paging methods to get additional pages of data.
+In this example a linq query is executed first using the `Take()` method. Once the linq query was execution was triggered (in this case by calling `ToListAsync()`), you can using the paging methods to get additional pages of data.
 
 ```csharp
-using (var context = pnpContextFactory.Create("SiteToWorkWith"))
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
     // Issue a linq query
     var lists = context.Web.Lists.Take(2);
-    var queryResult = lists.ToList();
+    var queryResult = await lists.ToListAsync();
 
     // Do we have a pointer to a next page?
     if (context.Web.Lists.CanPage)

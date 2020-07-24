@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PnP.Core.Model;
+using System;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using PnP.Core.Model;
 
 namespace PnP.Core.Services
 {
@@ -17,6 +15,7 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="tokenizedValue">A string with tokens</param>
         /// <param name="pnpObject">The domain model object to use as the target reference</param>
+        /// <param name="context"><see cref="PnPContext"/> to get information from needed for token resolving</param>
         /// <returns>The string with tokens resolved</returns>
         public static async Task<string> ResolveTokensAsync(IMetadataExtensible pnpObject, string tokenizedValue, PnPContext context = null)
         {

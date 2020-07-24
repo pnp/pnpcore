@@ -34,3 +34,5 @@ Token | Description
 `{Site.Id}` | SharePoint Id value of the Site loaded in the current PnPContext.
 `{Web.Id}` | SharePoint Id value of the Web loaded in the current PnPContext.
 `{Web.GraphId}` | Microsoft Graph Id value of the Web loaded in the current PnPContext.
+`{hostname}` | Host name of the current site (so for https://contoso.sharepoint.com/sites/team1 this is contoso.sharepoint.com)
+`{serverrelativepath}` | Server relative path of the current site (so for https://contoso.sharepoint.com/sites/team1 this is /sites/team1)

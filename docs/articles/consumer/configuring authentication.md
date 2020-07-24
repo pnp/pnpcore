@@ -105,7 +105,7 @@ After you've configured the `OAuthAccessTokenConfiguration` configuration you ca
 ```csharp
 var pnpContextFactory = scope.ServiceProvider.GetRequiredService<IPnPContextFactory>();
 // Use the PnP Context factory to get a PnPContext for the given configuration
-using (var context = pnpContextFactory.Create("SiteToWorkWith", "AccessTokenAuthentication"))
+using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith", "AccessTokenAuthentication"))
 {
     // Set the access token on the context
     context.SetAccessToken(accessToken);

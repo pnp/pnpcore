@@ -112,11 +112,14 @@ Collection classes **do not** have attribute based decoration.
 
 In contradiction with get, update, and delete which are fully handled by decorating classes and properties using attributes, you'll need to write actual code to implement add. Adding is implemented as follows:
 
-- The public part (interface) is defined on the collection interface. Each functionality (like Add) is implemented via three methods:
+- The public part (interface) is defined on the collection interface. Each functionality (like Add) is implemented via 6 methods:
 
   - An async method
-  - A regular method
-  - A regular method that allows to pass in a `Batch` as first method parameter
+  - An async batch method
+  - An async batch method that allows to pass in a `Batch` as first method parameter
+  - A sync method that calls the async method with a `GetAwaiter().GetResult()`
+  - A sync batch method that calls the async method with a `GetAwaiter().GetResult()`
+  - A sync batch method that calls the async method with a `GetAwaiter().GetResult()` and allows to pass in a `Batch` as first method parameter
 
 - Add methods defined on the interface are implemented in the collection classes as proxies that call into the respective add methods of the added model class.
 - The implementation that performs the actual add is implemented as an `AddApiCallHandler` event handler in the model class. See the [Event Handlers](event%20handlers.md) page for more details.
@@ -135,7 +138,15 @@ public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList
     /// <param name="title">Title of the list</param>
     /// <param name="templateType">Template type</param>
     /// <returns>Newly added list</returns>
-    public Task<IList> AddAsync(string title, int templateType);
+    public Task<IList> AddAsync(string title, ListTemplateType templateType);
+
+    /// <summary>
+    /// Adds a new list
+    /// </summary>
+    /// <param name="title">Title of the list</param>
+    /// <param name="templateType">Template type</param>
+    /// <returns>Newly added list</returns>
+    public IList Add(string title, ListTemplateType templateType);
 
     /// <summary>
     /// Adds a new list
@@ -144,7 +155,16 @@ public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList
     /// <param name="title">Title of the list</param>
     /// <param name="templateType">Template type</param>
     /// <returns>Newly added list</returns>
-    public IList Add(Batch batch, string title, int templateType);
+    public Task<IList> AddBatchAsync(Batch batch, string title, ListTemplateType templateType);
+
+    /// <summary>
+    /// Adds a new list
+    /// </summary>
+    /// <param name="batch">Batch to use</param>
+    /// <param name="title">Title of the list</param>
+    /// <param name="templateType">Template type</param>
+    /// <returns>Newly added list</returns>
+    public IList AddBatch(Batch batch, string title, ListTemplateType templateType);
 
     /// <summary>
     /// Adds a new list
@@ -152,7 +172,15 @@ public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList
     /// <param name="title">Title of the list</param>
     /// <param name="templateType">Template type</param>
     /// <returns>Newly added list</returns>
-    public IList Add(string title, int templateType);
+    public Task<IList> AddBatchAsync(string title, ListTemplateType templateType);
+
+    /// <summary>
+    /// Adds a new list
+    /// </summary>
+    /// <param name="title">Title of the list</param>
+    /// <param name="templateType">Template type</param>
+    /// <returns>Newly added list</returns>
+    public IList AddBatch(string title, ListTemplateType templateType);
 }
 ```
 
@@ -161,12 +189,17 @@ Implementation of the interface in the coded collection class (e.g. ListCollecti
 ```csharp
 internal partial class ListCollection
 {
-    public IList Add(string title, int templateType)
+    public async Task<IList> AddBatchAsync(string title, ListTemplateType templateType)
     {
-        return Add(PnPContext.CurrentBatch, title, templateType);
+        return await AddBatchAsync(PnPContext.CurrentBatch, title, templateType).ConfigureAwait(false);
     }
 
-    public IList Add(Batch batch, string title, int templateType)
+    public IList AddBatch(string title, ListTemplateType templateType)
+    {
+        return AddBatchAsync(title, templateType).GetAwaiter().GetResult();
+    }
+
+    public async Task<IList> AddBatchAsync(Batch batch, string title, ListTemplateType templateType)
     {
         if (title == null)
         {
@@ -178,15 +211,20 @@ internal partial class ListCollection
             throw new ArgumentException($"{nameof(templateType)} cannot be 0");
         }
 
-        var newList = AddNewList();
+        var newList = CreateNewAndAdd() as List;
 
         newList.Title = title;
         newList.TemplateType = templateType;
 
-        return newList.Add(batch) as List;
+        return await newList.AddBatchAsync(batch).ConfigureAwait(false) as List;
     }
 
-    public async Task<IList> AddAsync(string title, int templateType)
+    public IList AddBatch(Batch batch, string title, ListTemplateType templateType)
+    {
+        return AddBatchAsync(batch, title, templateType).GetAwaiter().GetResult();
+    }
+
+    public async Task<IList> AddAsync(string title, ListTemplateType templateType)
     {
         if (title == null)
         {
@@ -198,12 +236,17 @@ internal partial class ListCollection
             throw new ArgumentException($"{nameof(templateType)} cannot be 0");
         }
 
-        var newList = AddNewList();
+        var newList = CreateNewAndAdd() as List;
 
         newList.Title = title;
         newList.TemplateType = templateType;
 
         return await newList.AddAsync().ConfigureAwait(false) as List;
+    }
+
+    public IList Add(string title, ListTemplateType templateType)
+    {
+        return AddAsync(title, templateType).GetAwaiter().GetResult();
     }
 }
 ```
@@ -216,7 +259,7 @@ internal partial class List
     internal List()
     {
         // Handler to construct the Add request for this list
-        AddApiCallHandler = () =>
+        AddApiCallHandler = async () =>
         {
             var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
 
@@ -235,7 +278,7 @@ internal partial class List
 
 ### Providing additional parameters for add requests
 
-The `AddApiCall` handler accepts an optional key value pair parameter: `ApiCall AddApiCall(Dictionary<string, object> additionalInformation = null)`. You can use this to provide additional input when you call the `Add` from your code in the collection class. Below sample shows how this feature is used to offer different SDK consumer methods for creating Team channel tabs (on the `TeamChannelTabCollection` class) while there's only one generic creation method implementation in the `TeamChannelTab` class. Let's start with the code in the `TeamChannelTabCollection` class:
+The `AddApiCall` handler accepts an optional key value pair parameter: `Task<ApiCall> AddApiCall(Dictionary<string, object> additionalInformation = null)`. You can use this to provide additional input when you call the `Add` from your code in the collection class. Below sample shows how this feature is used to offer different SDK consumer methods for creating Team channel tabs (on the `TeamChannelTabCollection` class) while there's only one generic creation method implementation in the `TeamChannelTab` class. Let's start with the code in the `TeamChannelTabCollection` class:
 
 ```csharp
 public async Task<ITeamChannelTab> AddWikiTabAsync(string name)
@@ -296,7 +339,7 @@ private Tuple<TeamChannelTab, Dictionary<string, object>> CreateTeamChannelWikiT
 The code in the `TeamChannelTab` class then uses the additional parameter values to drive the creation behavior:
 
 ```csharp
-AddApiCallHandler = (additionalInformation) =>
+AddApiCallHandler = async (additionalInformation) =>
 {
     // Define the JSON body of the update request based on the actual changes
     dynamic tab = new ExpandoObject();
@@ -336,7 +379,7 @@ AddApiCallHandler = (additionalInformation) =>
     // Serialize object to json
     var bodyContent = JsonSerializer.Serialize(tab, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
 
-    return new ApiCall(ApiHelper.ParseApiRequest(this, baseUri), ApiType.GraphBeta, bodyContent);
+    return new ApiCall((await ApiHelper.ParseApiRequestAsync(this, baseUri)), ApiType.GraphBeta, bodyContent);
 };
 ```
 
@@ -351,7 +394,7 @@ Above methods are described in the next chapters.
 
 ### Running an API call and loading the result in the model
 
-When you know that the API call you're making will return json data that has to be loaded into the model then you should use the `RequestAsync` method for immediate async processing or `Request` method for batch processing. These methods accept an `ApiCall` instance as input together with the `HttpMethod`. Below sample shows how this can be used to add an existing content type to a list. The `AddAvailableContentTypeApiCall` method defines the API call to be executed and in the `AddAvailableContentType` and `AddAvailableContentTypeAsync` methods this API call is executed via the respective `Request` and `RequestAsync` methods. When executing the API calls the resulting json is automatically processed and loaded into the model, so in the below case the content type will show up in the list content type collection.
+When you know that the API call you're making will return json data that has to be loaded into the model then you should use the `RequestAsync` method for immediate async processing or `Request` method for batch processing. These methods accept an `ApiCall` instance as input together with the `HttpMethod`. Below sample shows how this can be used to add an existing content type to a list. The `AddAvailableContentTypeApiCall` method defines the API call to be executed and in the `AddAvailableContentTypeBatchAsync` and `AddAvailableContentTypeAsync` methods this API call is executed via the respective `Request` and `RequestAsync` methods. When executing the API calls the resulting json is automatically processed and loaded into the model, so in the below case the content type will show up in the list content type collection.
 
 ```csharp
 private ApiCall AddAvailableContentTypeApiCall(string id)
@@ -368,10 +411,10 @@ private ApiCall AddAvailableContentTypeApiCall(string id)
     return new ApiCall($"{entity.SharePointGet}/AddAvailableContentType", ApiType.SPORest, bodyContent);
 }
 
-internal IContentType AddAvailableContentType(Batch batch, string id)
+internal IContentType AddAvailableContentTypeBatchAsync(Batch batch, string id)
 {
     var apiCall = AddAvailableContentTypeApiCall(id);
-    Request(batch, apiCall, HttpMethod.Post);
+    await RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
     return this;
 }
 
