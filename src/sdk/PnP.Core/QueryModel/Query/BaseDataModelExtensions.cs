@@ -12,6 +12,31 @@ namespace PnP.Core.QueryModel
 {
     public static class BaseDataModelExtensions
     {
+        #region Utility extension to make it easier to chain multiple async calls
+        /// <summary>
+        /// Chains async calls. See https://stackoverflow.com/a/52739551 for more information
+        /// </summary>
+        /// <typeparam name="TIn">Input task</typeparam>
+        /// <typeparam name="TOut">Output task</typeparam>
+        /// <param name="inputTask">Async operatation to start from</param>
+        /// <param name="mapping">Async operation to run next</param>
+        /// <returns>Task outcome from the ran async operation</returns>
+        public static async Task<TOut> AndThen<TIn, TOut>(this Task<TIn> inputTask, Func<TIn, Task<TOut>> mapping)
+        {
+            if (inputTask == null)
+            {
+                throw new ArgumentNullException(nameof(inputTask));
+            }
+            if (mapping == null)
+            {
+                throw new ArgumentNullException(nameof(mapping));
+            }
+
+            var input = await inputTask.ConfigureAwait(false);
+            return (await mapping(input).ConfigureAwait(false));
+        }
+        #endregion
+
         #region Helper methods to obtain MethodInfo in a safe way
 
         private static MethodInfo GetMethodInfo<T1, T2>(Func<T1, T2> f, T1 unused1)

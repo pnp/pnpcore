@@ -507,5 +507,24 @@ namespace PnP.Core.Test.QueryModel
                 Assert.AreEqual(1, list.Items.Length);
             }
         }
+
+        [TestMethod]
+        public async Task AsyncCallChaining()
+        {
+
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var addedFolder = await context.Web.Lists.GetByTitleAsync("Documents", p => p.DocumentTemplate)
+                                  .AndThen(p => p.RootFolder.GetAsync(p => p.Name, p => p.Folders))
+                                  .AndThen(p => p.Folders.AddAsync("bla"));
+
+                Assert.IsNotNull(addedFolder);
+                Assert.IsTrue(addedFolder.Name == "bla");
+
+                await addedFolder.DeleteAsync();
+
+            }
+        }
     }
 }
