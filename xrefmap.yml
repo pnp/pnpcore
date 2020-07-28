@@ -10596,6 +10596,22 @@ references:
   commentId: T:PnP.Core.QueryModel.BaseDataModelExtensions
   fullName: PnP.Core.QueryModel.BaseDataModelExtensions
   nameWithType: BaseDataModelExtensions
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.AndThen*
+  name: AndThen
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_AndThen_
+  commentId: Overload:PnP.Core.QueryModel.BaseDataModelExtensions.AndThen
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.AndThen
+  nameWithType: BaseDataModelExtensions.AndThen
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.AndThen``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})
+  name: AndThen<TIn, TOut>(Task<TIn>, Func<TIn, Task<TOut>>)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.AndThen``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})
+  name.vb: AndThen(Of TIn, TOut)(Task(Of TIn), Func(Of TIn, Task(Of TOut)))
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.AndThen<TIn, TOut>(System.Threading.Tasks.Task<TIn>, System.Func<TIn, System.Threading.Tasks.Task<TOut>>)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.AndThen(Of TIn, TOut)(System.Threading.Tasks.Task(Of TIn), System.Func(Of TIn, System.Threading.Tasks.Task(Of TOut)))
+  nameWithType: BaseDataModelExtensions.AndThen<TIn, TOut>(Task<TIn>, Func<TIn, Task<TOut>>)
+  nameWithType.vb: BaseDataModelExtensions.AndThen(Of TIn, TOut)(Task(Of TIn), Func(Of TIn, Task(Of TOut)))
 - uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayName(System.Linq.IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String)
   name: GetByDisplayName(IQueryable<ITeamChannel>, String)
   href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayName_System_Linq_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_

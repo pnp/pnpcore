@@ -133,10 +133,91 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.AndThen%60%602(System.Threading.Tasks.Task%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Threading.Tasks.Task%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L24" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_BaseDataModelExtensions_AndThen_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.AndThen*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.AndThen``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___" class="expander" data-toggle="collapse">AndThen&lt;TIn, TOut&gt;(Task&lt;TIn&gt;, Func&lt;TIn, Task&lt;TOut&gt;&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___" class="collapse in">
+  <div class="markdown level1 summary"><p>Chains async calls. See <a href="https://stackoverflow.com/a/52739551">https://stackoverflow.com/a/52739551</a> for more information</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;TOut&gt; AndThen&lt;TIn, TOut&gt;(this Task&lt;TIn&gt; inputTask, Func&lt;TIn, Task&lt;TOut&gt;&gt; mapping)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TIn&gt;</span>
+        <span class="parametername">inputTask</span>
+        <p><p>Async operatation to start from</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TIn, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TOut&gt;&gt;</span>
+        <span class="parametername">mapping</span>
+        <p><p>Async operation to run next</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TOut&gt;
+        <p><p>Task outcome from the ran async operation</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="parametername">TIn</span>
+        <p><p>Input task</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="parametername">TOut</span>
+        <p><p>Output task</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayName_System_Linq_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayName(System.Linq.IQueryable%7BPnP.Core.Model.Teams.ITeamChannel%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L522" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L547" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayName_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayName*"></a>
@@ -200,7 +281,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayName_System_Linq_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_Teams_ITeamChannel_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayName(System.Linq.IQueryable%7BPnP.Core.Model.Teams.ITeamChannel%7D%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.Teams.ITeamChannel%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L536" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L561" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayName_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayName*"></a>
@@ -272,7 +353,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayNameAsync_System_Linq_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable%7BPnP.Core.Model.Teams.ITeamChannel%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L576" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L601" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayNameAsync_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync*"></a>
@@ -336,7 +417,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayNameAsync_System_Linq_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_Teams_ITeamChannel_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync(System.Linq.IQueryable%7BPnP.Core.Model.Teams.ITeamChannel%7D%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.Teams.ITeamChannel%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L590" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L615" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByDisplayNameAsync_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByDisplayNameAsync*"></a>
@@ -408,7 +489,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IList%7D%2CSystem.Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L296" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L321" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetById_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetById*"></a>
@@ -472,7 +553,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IList%7D%2CSystem.Guid%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IList%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L310" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L335" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetById_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetById*"></a>
@@ -544,7 +625,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IListItem%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L413" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L438" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetById_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetById*"></a>
@@ -608,7 +689,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IListItem%7D%2CSystem.Int32%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IListItem%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L427" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L452" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetById_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetById*"></a>
@@ -680,7 +761,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IList%7D%2CSystem.Guid)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L350" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L375" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync*"></a>
@@ -744,7 +825,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IList%7D%2CSystem.Guid%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IList%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L364" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L389" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync*"></a>
@@ -816,7 +897,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IListItem%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L463" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L488" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync*"></a>
@@ -880,7 +961,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IListItem%7D%2CSystem.Int32%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IListItem%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L477" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L502" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync*"></a>
@@ -952,7 +1033,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitle_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitle(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IList%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L179" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L204" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitle_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitle*"></a>
@@ -1016,7 +1097,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitle_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitle(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IList%7D%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IList%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L193" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L218" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitle_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitle*"></a>
@@ -1088,7 +1169,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitleAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IList%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L233" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L258" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitleAsync_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync*"></a>
@@ -1152,7 +1233,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitleAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync(System.Linq.IQueryable%7BPnP.Core.Model.SharePoint.IList%7D%2CSystem.String%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7BPnP.Core.Model.SharePoint.IList%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L247" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L272" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitleAsync_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitleAsync*"></a>
@@ -1224,7 +1305,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Include%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L60" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L85" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_Include_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Include*"></a>
@@ -1298,7 +1379,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Include%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L87" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L112" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_Include_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Include*"></a>
@@ -1372,7 +1453,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Load%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L120" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L145" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_Load_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Load*"></a>
@@ -1446,7 +1527,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Load%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L147" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L172" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_Load_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Load*"></a>
