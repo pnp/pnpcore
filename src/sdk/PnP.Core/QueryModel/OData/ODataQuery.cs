@@ -5,8 +5,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
-using PnP.Core.QueryModel.OData.Enums;
-using PnP.Core.QueryModel.OData.Model;
 
 namespace PnP.Core.QueryModel
 {
@@ -271,5 +269,151 @@ namespace PnP.Core.QueryModel
 
             return result;
         }
+    }
+
+    /// <summary>
+    /// Interface to define the basic functionalities of a filtering item (either a single item or a group of items)
+    /// </summary>
+    public abstract class ODataFilter
+    {
+        /// <summary>
+        /// The concatenation operator between the current filter item and the next one in the chain, within the current filtering group. Default: AND.
+        /// </summary>
+        public FilteringConcatOperator ConcatOperator { get; set; } = FilteringConcatOperator.AND;
+    }
+
+    /// <summary>
+    /// Defines a filtering criteria item
+    /// </summary>
+    public class FilterItem : ODataFilter
+    {
+        /// <summary>
+        /// The name of the field for the filtering criteria
+        /// </summary>
+        public string Field { get; set; }
+
+        /// <summary>
+        /// The filtering criteria. Default: Equal.
+        /// </summary>
+        public FilteringCriteria Criteria { get; set; } = FilteringCriteria.Equal;
+
+        /// <summary>
+        /// The actual value for the filtering criteria
+        /// </summary>
+        public object Value { get; set; }
+    }
+
+    /// <summary>
+    /// Defines a group of filters
+    /// </summary>
+    public class FiltersGroup : ODataFilter
+    {
+        public FiltersGroup()
+            : this(new List<ODataFilter>())
+        {
+        }
+
+        public FiltersGroup(List<ODataFilter> filters)
+        {
+            Filters = filters;
+        }
+
+        public List<ODataFilter> Filters { get; private set; }
+    }
+
+    /// <summary>
+    /// Defines a single sorting item
+    /// </summary>
+    public class OrderByItem
+    {
+        /// <summary>
+        /// The name of the field to sort by
+        /// </summary>
+        public string Field { get; set; }
+
+        /// <summary>
+        /// The direction (Ascending/Descending) for the sorting criteria. Default: Ascending.
+        /// </summary>
+        public OrderByDirection Direction { get; set; } = OrderByDirection.Asc;
+    }
+
+    /// <summary>
+    /// Enumeration of filtering criteria for queries
+    /// </summary>
+    public enum FilteringCriteria
+    {
+        /// <summary>
+        /// Correspondes to the = operator
+        /// </summary>
+        Equal,
+        /// <summary>
+        /// Correspondes to the != operator
+        /// </summary>
+        NotEqual,
+        /// <summary>
+        /// Correspondes to the > operator
+        /// </summary>
+        GreaterThan,
+        /// <summary>
+        /// Correspondes to the >= operator
+        /// </summary>
+        GreaterThanOrEqual,
+        /// <summary>
+        /// Correspondes to the < operator
+        /// </summary>
+        LessThan,
+        /// <summary>
+        /// Correspondes to the <= operator
+        /// </summary>
+        LessThanOrEqual,
+        /// <summary>
+        /// Correspondes to the ! operator
+        /// </summary>
+        Not,
+    }
+
+    /// <summary>
+    /// Enumeration of logical concat operators for queries
+    /// </summary>
+    public enum FilteringConcatOperator
+    {
+        /// <summary>
+        /// Logical AND for query items in query groups
+        /// </summary>
+        AND,
+        /// <summary>
+        /// Logical OR for query items in query groups
+        /// </summary>
+        OR,
+    }
+
+    /// <summary>
+    /// Enumeration of the ordering criteria for sorting results
+    /// </summary>
+    public enum OrderByDirection
+    {
+        /// <summary>
+        /// Ascending sorting
+        /// </summary>
+        Asc,
+        /// <summary>
+        /// Descending sorting
+        /// </summary>
+        Desc,
+    }
+
+    /// <summary>
+    /// Defines the target platform for the query
+    /// </summary>
+    public enum ODataTargetPlatform
+    {
+        /// <summary>
+        /// Microsoft Graph (primary choice)
+        /// </summary>
+        Graph,
+        /// <summary>
+        /// Microsoft SharePoint Online REST API (fallback)
+        /// </summary>
+        SPORest
     }
 }
