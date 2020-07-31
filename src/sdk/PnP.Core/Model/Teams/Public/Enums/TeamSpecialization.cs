@@ -5,11 +5,11 @@
     /// </summary>
     public enum TeamSpecialization
     {
-        None,
-        EducationStandard,
-        EducationClass,
-        EducationProfessionalLearningCommunity,
-        EducationStaff,
-        UnknownFutureValue
+        None = 0,
+        EducationStandard = 1,
+        EducationClass = 2,
+        EducationProfessionalLearningCommunity = 3,
+        EducationStaff = 4,
+        UnknownFutureValue = 7
     }
 }

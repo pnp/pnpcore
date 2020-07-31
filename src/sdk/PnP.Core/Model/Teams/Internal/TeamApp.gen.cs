@@ -1,4 +1,6 @@
-﻿namespace PnP.Core.Model.Teams
+﻿using PnP.Core.Model.Teams.Public.Enums;
+
+namespace PnP.Core.Model.Teams
 {
     internal partial class TeamApp : BaseDataModel<ITeamApp>, ITeamApp
     {

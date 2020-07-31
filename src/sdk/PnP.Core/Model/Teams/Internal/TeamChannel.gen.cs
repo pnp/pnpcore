@@ -1,4 +1,5 @@
 ﻿using System;
+using PnP.Core.Model.Teams.Public.Enums;
 
 namespace PnP.Core.Model.Teams
 {

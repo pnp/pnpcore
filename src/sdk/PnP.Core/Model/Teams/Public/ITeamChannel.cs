@@ -1,4 +1,5 @@
 ﻿using System;
+using PnP.Core.Model.Teams.Public.Enums;
 
 namespace PnP.Core.Model.Teams
 {
@@ -52,15 +53,5 @@ namespace PnP.Core.Model.Teams
         /// Messages in this Team Channel
         /// </summary>
         public ITeamChatMessageCollection Messages { get; }
-    }
-
-    /// <summary>
-    /// Defines the Membership Type for a Team Channel
-    /// </summary>
-    public enum TeamChannelMembershipType
-    {
-        Standard,
-        Private,
-        UnknownFutureValue,
     }
 }

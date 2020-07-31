@@ -1,4 +1,5 @@
 ﻿using System;
+using PnP.Core.Model.Teams.Public.Enums;
 
 namespace PnP.Core.Model.Teams
 {
@@ -16,7 +17,7 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Type of reaction
         /// </summary>
-        public string ReactionType { get; set; }
+        public ChatMessageReactionType ReactionType { get; set; }
 
         /// <summary>
         /// The user who reacted to the message.
