@@ -6,6 +6,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using PnP.Core.QueryModel.OData.Enums;
+using PnP.Core.QueryModel.OData.Model;
 
 namespace PnP.Core.QueryModel
 {
