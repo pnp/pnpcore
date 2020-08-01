@@ -1,4 +1,6 @@
-﻿namespace PnP.Core.Model.Teams
+﻿using PnP.Core.Model.Teams.Public.Enums;
+
+namespace PnP.Core.Model.Teams
 {
     /// <summary>
     /// Public interface to define the fun settings for a Team
@@ -24,14 +26,5 @@
         /// Defines whether the custom memes are allowed in the Team
         /// </summary>
         public bool AllowCustomMemes { get; set; }
-    }
-
-    /// <summary>
-    /// Giphy content rating for giphies being used in a team
-    /// </summary>
-    public enum TeamGiphyContentRating
-    {
-        Moderate,
-        Strict
     }
 }
