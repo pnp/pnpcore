@@ -10272,71 +10272,119 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamMessagingSettings.AllowUserEditMessages
   nameWithType: ITeamMessagingSettings.AllowUserEditMessages
-- uid: PnP.Core.Model.Teams.TeamChannelMembershipType
+- uid: PnP.Core.Model.Teams.Public.Enums
+  name: PnP.Core.Model.Teams.Public.Enums
+  href: api/PnP.Core.Model.Teams.Public.Enums.html
+  commentId: N:PnP.Core.Model.Teams.Public.Enums
+  fullName: PnP.Core.Model.Teams.Public.Enums
+  nameWithType: PnP.Core.Model.Teams.Public.Enums
+- uid: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType
+  name: ChatMessageReactionType
+  href: api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.html
+  commentId: T:PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType
+  fullName: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType
+  nameWithType: ChatMessageReactionType
+- uid: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Angry
+  name: Angry
+  href: api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.html#PnP_Core_Model_Teams_Public_Enums_ChatMessageReactionType_Angry
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Angry
+  fullName: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Angry
+  nameWithType: ChatMessageReactionType.Angry
+- uid: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Heart
+  name: Heart
+  href: api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.html#PnP_Core_Model_Teams_Public_Enums_ChatMessageReactionType_Heart
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Heart
+  fullName: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Heart
+  nameWithType: ChatMessageReactionType.Heart
+- uid: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Laugh
+  name: Laugh
+  href: api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.html#PnP_Core_Model_Teams_Public_Enums_ChatMessageReactionType_Laugh
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Laugh
+  fullName: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Laugh
+  nameWithType: ChatMessageReactionType.Laugh
+- uid: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Like
+  name: Like
+  href: api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.html#PnP_Core_Model_Teams_Public_Enums_ChatMessageReactionType_Like
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Like
+  fullName: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Like
+  nameWithType: ChatMessageReactionType.Like
+- uid: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Sad
+  name: Sad
+  href: api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.html#PnP_Core_Model_Teams_Public_Enums_ChatMessageReactionType_Sad
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Sad
+  fullName: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Sad
+  nameWithType: ChatMessageReactionType.Sad
+- uid: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Surprised
+  name: Surprised
+  href: api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.html#PnP_Core_Model_Teams_Public_Enums_ChatMessageReactionType_Surprised
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Surprised
+  fullName: PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.Surprised
+  nameWithType: ChatMessageReactionType.Surprised
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType
   name: TeamChannelMembershipType
-  href: api/PnP.Core.Model.Teams.TeamChannelMembershipType.html
-  commentId: T:PnP.Core.Model.Teams.TeamChannelMembershipType
-  fullName: PnP.Core.Model.Teams.TeamChannelMembershipType
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.html
+  commentId: T:PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType
   nameWithType: TeamChannelMembershipType
-- uid: PnP.Core.Model.Teams.TeamChannelMembershipType.Private
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.Private
   name: Private
-  href: api/PnP.Core.Model.Teams.TeamChannelMembershipType.html#PnP_Core_Model_Teams_TeamChannelMembershipType_Private
-  commentId: F:PnP.Core.Model.Teams.TeamChannelMembershipType.Private
-  fullName: PnP.Core.Model.Teams.TeamChannelMembershipType.Private
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.html#PnP_Core_Model_Teams_Public_Enums_TeamChannelMembershipType_Private
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.Private
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.Private
   nameWithType: TeamChannelMembershipType.Private
-- uid: PnP.Core.Model.Teams.TeamChannelMembershipType.Standard
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.Standard
   name: Standard
-  href: api/PnP.Core.Model.Teams.TeamChannelMembershipType.html#PnP_Core_Model_Teams_TeamChannelMembershipType_Standard
-  commentId: F:PnP.Core.Model.Teams.TeamChannelMembershipType.Standard
-  fullName: PnP.Core.Model.Teams.TeamChannelMembershipType.Standard
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.html#PnP_Core_Model_Teams_Public_Enums_TeamChannelMembershipType_Standard
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.Standard
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.Standard
   nameWithType: TeamChannelMembershipType.Standard
-- uid: PnP.Core.Model.Teams.TeamChannelMembershipType.UnknownFutureValue
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.UnknownFutureValue
   name: UnknownFutureValue
-  href: api/PnP.Core.Model.Teams.TeamChannelMembershipType.html#PnP_Core_Model_Teams_TeamChannelMembershipType_UnknownFutureValue
-  commentId: F:PnP.Core.Model.Teams.TeamChannelMembershipType.UnknownFutureValue
-  fullName: PnP.Core.Model.Teams.TeamChannelMembershipType.UnknownFutureValue
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.html#PnP_Core_Model_Teams_Public_Enums_TeamChannelMembershipType_UnknownFutureValue
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.UnknownFutureValue
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.UnknownFutureValue
   nameWithType: TeamChannelMembershipType.UnknownFutureValue
-- uid: PnP.Core.Model.Teams.TeamGiphyContentRating
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating
   name: TeamGiphyContentRating
-  href: api/PnP.Core.Model.Teams.TeamGiphyContentRating.html
-  commentId: T:PnP.Core.Model.Teams.TeamGiphyContentRating
-  fullName: PnP.Core.Model.Teams.TeamGiphyContentRating
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.html
+  commentId: T:PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating
   nameWithType: TeamGiphyContentRating
-- uid: PnP.Core.Model.Teams.TeamGiphyContentRating.Moderate
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.Moderate
   name: Moderate
-  href: api/PnP.Core.Model.Teams.TeamGiphyContentRating.html#PnP_Core_Model_Teams_TeamGiphyContentRating_Moderate
-  commentId: F:PnP.Core.Model.Teams.TeamGiphyContentRating.Moderate
-  fullName: PnP.Core.Model.Teams.TeamGiphyContentRating.Moderate
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.html#PnP_Core_Model_Teams_Public_Enums_TeamGiphyContentRating_Moderate
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.Moderate
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.Moderate
   nameWithType: TeamGiphyContentRating.Moderate
-- uid: PnP.Core.Model.Teams.TeamGiphyContentRating.Strict
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.Strict
   name: Strict
-  href: api/PnP.Core.Model.Teams.TeamGiphyContentRating.html#PnP_Core_Model_Teams_TeamGiphyContentRating_Strict
-  commentId: F:PnP.Core.Model.Teams.TeamGiphyContentRating.Strict
-  fullName: PnP.Core.Model.Teams.TeamGiphyContentRating.Strict
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.html#PnP_Core_Model_Teams_Public_Enums_TeamGiphyContentRating_Strict
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.Strict
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.Strict
   nameWithType: TeamGiphyContentRating.Strict
-- uid: PnP.Core.Model.Teams.TeamsAppDistributionMethod
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod
   name: TeamsAppDistributionMethod
-  href: api/PnP.Core.Model.Teams.TeamsAppDistributionMethod.html
-  commentId: T:PnP.Core.Model.Teams.TeamsAppDistributionMethod
-  fullName: PnP.Core.Model.Teams.TeamsAppDistributionMethod
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.html
+  commentId: T:PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod
   nameWithType: TeamsAppDistributionMethod
-- uid: PnP.Core.Model.Teams.TeamsAppDistributionMethod.Organization
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.Organization
   name: Organization
-  href: api/PnP.Core.Model.Teams.TeamsAppDistributionMethod.html#PnP_Core_Model_Teams_TeamsAppDistributionMethod_Organization
-  commentId: F:PnP.Core.Model.Teams.TeamsAppDistributionMethod.Organization
-  fullName: PnP.Core.Model.Teams.TeamsAppDistributionMethod.Organization
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.html#PnP_Core_Model_Teams_Public_Enums_TeamsAppDistributionMethod_Organization
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.Organization
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.Organization
   nameWithType: TeamsAppDistributionMethod.Organization
-- uid: PnP.Core.Model.Teams.TeamsAppDistributionMethod.Sideloaded
-  name: Sideloaded
-  href: api/PnP.Core.Model.Teams.TeamsAppDistributionMethod.html#PnP_Core_Model_Teams_TeamsAppDistributionMethod_Sideloaded
-  commentId: F:PnP.Core.Model.Teams.TeamsAppDistributionMethod.Sideloaded
-  fullName: PnP.Core.Model.Teams.TeamsAppDistributionMethod.Sideloaded
-  nameWithType: TeamsAppDistributionMethod.Sideloaded
-- uid: PnP.Core.Model.Teams.TeamsAppDistributionMethod.Store
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.SideLoaded
+  name: SideLoaded
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.html#PnP_Core_Model_Teams_Public_Enums_TeamsAppDistributionMethod_SideLoaded
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.SideLoaded
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.SideLoaded
+  nameWithType: TeamsAppDistributionMethod.SideLoaded
+- uid: PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.Store
   name: Store
-  href: api/PnP.Core.Model.Teams.TeamsAppDistributionMethod.html#PnP_Core_Model_Teams_TeamsAppDistributionMethod_Store
-  commentId: F:PnP.Core.Model.Teams.TeamsAppDistributionMethod.Store
-  fullName: PnP.Core.Model.Teams.TeamsAppDistributionMethod.Store
+  href: api/PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.html#PnP_Core_Model_Teams_Public_Enums_TeamsAppDistributionMethod_Store
+  commentId: F:PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.Store
+  fullName: PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.Store
   nameWithType: TeamsAppDistributionMethod.Store
 - uid: PnP.Core.Model.Teams.TeamSpecialization
   name: TeamSpecialization

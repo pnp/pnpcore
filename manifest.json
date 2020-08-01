@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.AuthenticationException.html",
-          "hash": "S87aT2E/k79XJwopLG3TRA=="
+          "hash": "5dYLY1sC6vbySvGdHml4Ag=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ClientException.html",
-          "hash": "nPqkXNWusrFS4djuNW0PbA=="
+          "hash": "V+5R0NQCWEGfFvM19mLC2w=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.CsomServiceException.html",
-          "hash": "rPI5dk+nEPtaFt+Ow6kJmg=="
+          "hash": "CGgCZ9F4kQvqb3VpaiID+A=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.MicrosoftGraphServiceException.html",
-          "hash": "H7C179Cs6NK3MBZt38PyYg=="
+          "hash": "e1jx2DCEUy4lGnfpf62eVw=="
         }
       },
       "is_incremental": false,
@@ -1038,7 +1038,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ChatMessageType.html",
-          "hash": "ZIK/SwCVOzNHhOuTSYz92A=="
+          "hash": "1pyz76wlbe4qHd7SEH9zyw=="
         }
       },
       "is_incremental": false,
@@ -1062,7 +1062,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamApp.html",
-          "hash": "3skPAQSPQdC0vFdiyUANCA=="
+          "hash": "8trR/iRq8Mj3NWZ43XzJoQ=="
         }
       },
       "is_incremental": false,
@@ -1086,7 +1086,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamAsyncOperation.html",
-          "hash": "GAbncvN00BCmrHvhiluiHg=="
+          "hash": "A+2D27cp/yrUtDdi3/rl8w=="
         }
       },
       "is_incremental": false,
@@ -1098,7 +1098,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChannel.html",
-          "hash": "mtQBx83/Q63EXOKOAIDe5Q=="
+          "hash": "XUPLeF1WAwHHACtJSz9fwg=="
         }
       },
       "is_incremental": false,
@@ -1218,7 +1218,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageReaction.html",
-          "hash": "HVmnHxre9pn8l7e60jGymg=="
+          "hash": "G2Ya8VJHlgWdek9jp7IZUw=="
         }
       },
       "is_incremental": false,
@@ -1254,7 +1254,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamFunSettings.html",
-          "hash": "0aLHcmgUA7lUXsahJHPbjQ=="
+          "hash": "+v4hBfrf4GbNq0sCcjFNEA=="
         }
       },
       "is_incremental": false,
@@ -1310,11 +1310,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.Teams.TeamChannelMembershipType.yml",
+      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Model.Teams.TeamChannelMembershipType.html",
-          "hash": "SKWrya8dvAMgMjV4tQIUjQ=="
+          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.html",
+          "hash": "S+9RUzuRFNpKWPKF0I0tyg=="
         }
       },
       "is_incremental": false,
@@ -1322,11 +1322,47 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.Teams.TeamGiphyContentRating.yml",
+      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Model.Teams.TeamGiphyContentRating.html",
-          "hash": "ILCiyytR59QRb1pYeoaUXw=="
+          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.html",
+          "hash": "dX8EwYtwIV+vUrBVvVZWDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.html",
+          "hash": "QT4sf8kzW315xi6VSqsuQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.html",
+          "hash": "PCyDZOXqNOs0svFO42UCYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.html",
+          "hash": "tzS3BXPCVdX8BYxgDei4cQ=="
         }
       },
       "is_incremental": false,
@@ -1358,23 +1394,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.Teams.TeamsAppDistributionMethod.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.Teams.TeamsAppDistributionMethod.html",
-          "hash": "p+tyWHUQew6suLpHABGELQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.html",
-          "hash": "v0w65J8TzOa5DX6pHJ0XkQ=="
+          "hash": "0Kuq43IAaCPQPrKnUCTsvA=="
         }
       },
       "is_incremental": false,
@@ -1422,7 +1446,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.PnPException.html",
-          "hash": "/MHrEzaEqmx2abp4fbHIzQ=="
+          "hash": "AcVUnwAv5k7Ua23cWQpQXw=="
         }
       },
       "is_incremental": false,
@@ -1602,7 +1626,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ServiceException.html",
-          "hash": "smZvhobYkkpIIJeDM75ikA=="
+          "hash": "PHHi/wBtf769mEbQNnR1uw=="
         }
       },
       "is_incremental": false,
@@ -1962,7 +1986,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.SharePointRestServiceException.html",
-          "hash": "lv9/gU7+1qdM8LbpHarjvQ=="
+          "hash": "MZ00znsDckSecZg2NryYDA=="
         }
       },
       "is_incremental": false,
@@ -1998,7 +2022,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "e9eNoIYrO36qeRW9Vol2rg=="
+          "hash": "FEJOy5yCtKQMUi+tG6Ilcg=="
         }
       },
       "is_incremental": false,
@@ -2296,7 +2320,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 164,
+          "total_file_count": 166,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
