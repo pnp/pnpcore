@@ -1,14 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Teams
 {
     [TestClass]
-    public class TeamTests
+    public class TeamLifecycleTests
     {
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
