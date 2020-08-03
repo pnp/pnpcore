@@ -44,3 +44,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - EnsurePropertiesAsync takes in account .Include (recursive) usage [jansenbe - Bert Jansen]
 - Documentation updates [Ashikpaul - Ashik Paul]
 - Moved to complete async internal implementation [jansenbe - Bert Jansen]
+- Code cleanup (Teams implementation / ODataQuery) [JarbasHorst - Jarbas Horst]
