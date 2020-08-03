@@ -10975,158 +10975,114 @@ references:
   isSpec: "True"
   fullName: PnP.Core.QueryModel.BaseQueryProvider.ExecuteObjectAsync
   nameWithType: BaseQueryProvider.ExecuteObjectAsync
-- uid: PnP.Core.QueryModel.FilteringConcatOperator
+- uid: PnP.Core.QueryModel.Enums
+  name: PnP.Core.QueryModel.Enums
+  href: api/PnP.Core.QueryModel.Enums.html
+  commentId: N:PnP.Core.QueryModel.Enums
+  fullName: PnP.Core.QueryModel.Enums
+  nameWithType: PnP.Core.QueryModel.Enums
+- uid: PnP.Core.QueryModel.Enums.FilteringConcatOperator
   name: FilteringConcatOperator
-  href: api/PnP.Core.QueryModel.FilteringConcatOperator.html
-  commentId: T:PnP.Core.QueryModel.FilteringConcatOperator
-  fullName: PnP.Core.QueryModel.FilteringConcatOperator
+  href: api/PnP.Core.QueryModel.Enums.FilteringConcatOperator.html
+  commentId: T:PnP.Core.QueryModel.Enums.FilteringConcatOperator
+  fullName: PnP.Core.QueryModel.Enums.FilteringConcatOperator
   nameWithType: FilteringConcatOperator
-- uid: PnP.Core.QueryModel.FilteringConcatOperator.AND
+- uid: PnP.Core.QueryModel.Enums.FilteringConcatOperator.AND
   name: AND
-  href: api/PnP.Core.QueryModel.FilteringConcatOperator.html#PnP_Core_QueryModel_FilteringConcatOperator_AND
-  commentId: F:PnP.Core.QueryModel.FilteringConcatOperator.AND
-  fullName: PnP.Core.QueryModel.FilteringConcatOperator.AND
+  href: api/PnP.Core.QueryModel.Enums.FilteringConcatOperator.html#PnP_Core_QueryModel_Enums_FilteringConcatOperator_AND
+  commentId: F:PnP.Core.QueryModel.Enums.FilteringConcatOperator.AND
+  fullName: PnP.Core.QueryModel.Enums.FilteringConcatOperator.AND
   nameWithType: FilteringConcatOperator.AND
-- uid: PnP.Core.QueryModel.FilteringConcatOperator.OR
+- uid: PnP.Core.QueryModel.Enums.FilteringConcatOperator.OR
   name: OR
-  href: api/PnP.Core.QueryModel.FilteringConcatOperator.html#PnP_Core_QueryModel_FilteringConcatOperator_OR
-  commentId: F:PnP.Core.QueryModel.FilteringConcatOperator.OR
-  fullName: PnP.Core.QueryModel.FilteringConcatOperator.OR
+  href: api/PnP.Core.QueryModel.Enums.FilteringConcatOperator.html#PnP_Core_QueryModel_Enums_FilteringConcatOperator_OR
+  commentId: F:PnP.Core.QueryModel.Enums.FilteringConcatOperator.OR
+  fullName: PnP.Core.QueryModel.Enums.FilteringConcatOperator.OR
   nameWithType: FilteringConcatOperator.OR
-- uid: PnP.Core.QueryModel.FilteringCriteria
+- uid: PnP.Core.QueryModel.Enums.FilteringCriteria
   name: FilteringCriteria
-  href: api/PnP.Core.QueryModel.FilteringCriteria.html
-  commentId: T:PnP.Core.QueryModel.FilteringCriteria
-  fullName: PnP.Core.QueryModel.FilteringCriteria
+  href: api/PnP.Core.QueryModel.Enums.FilteringCriteria.html
+  commentId: T:PnP.Core.QueryModel.Enums.FilteringCriteria
+  fullName: PnP.Core.QueryModel.Enums.FilteringCriteria
   nameWithType: FilteringCriteria
-- uid: PnP.Core.QueryModel.FilteringCriteria.Equal
+- uid: PnP.Core.QueryModel.Enums.FilteringCriteria.Equal
   name: Equal
-  href: api/PnP.Core.QueryModel.FilteringCriteria.html#PnP_Core_QueryModel_FilteringCriteria_Equal
-  commentId: F:PnP.Core.QueryModel.FilteringCriteria.Equal
-  fullName: PnP.Core.QueryModel.FilteringCriteria.Equal
+  href: api/PnP.Core.QueryModel.Enums.FilteringCriteria.html#PnP_Core_QueryModel_Enums_FilteringCriteria_Equal
+  commentId: F:PnP.Core.QueryModel.Enums.FilteringCriteria.Equal
+  fullName: PnP.Core.QueryModel.Enums.FilteringCriteria.Equal
   nameWithType: FilteringCriteria.Equal
-- uid: PnP.Core.QueryModel.FilteringCriteria.GreaterThan
+- uid: PnP.Core.QueryModel.Enums.FilteringCriteria.GreaterThan
   name: GreaterThan
-  href: api/PnP.Core.QueryModel.FilteringCriteria.html#PnP_Core_QueryModel_FilteringCriteria_GreaterThan
-  commentId: F:PnP.Core.QueryModel.FilteringCriteria.GreaterThan
-  fullName: PnP.Core.QueryModel.FilteringCriteria.GreaterThan
+  href: api/PnP.Core.QueryModel.Enums.FilteringCriteria.html#PnP_Core_QueryModel_Enums_FilteringCriteria_GreaterThan
+  commentId: F:PnP.Core.QueryModel.Enums.FilteringCriteria.GreaterThan
+  fullName: PnP.Core.QueryModel.Enums.FilteringCriteria.GreaterThan
   nameWithType: FilteringCriteria.GreaterThan
-- uid: PnP.Core.QueryModel.FilteringCriteria.GreaterThanOrEqual
+- uid: PnP.Core.QueryModel.Enums.FilteringCriteria.GreaterThanOrEqual
   name: GreaterThanOrEqual
-  href: api/PnP.Core.QueryModel.FilteringCriteria.html#PnP_Core_QueryModel_FilteringCriteria_GreaterThanOrEqual
-  commentId: F:PnP.Core.QueryModel.FilteringCriteria.GreaterThanOrEqual
-  fullName: PnP.Core.QueryModel.FilteringCriteria.GreaterThanOrEqual
+  href: api/PnP.Core.QueryModel.Enums.FilteringCriteria.html#PnP_Core_QueryModel_Enums_FilteringCriteria_GreaterThanOrEqual
+  commentId: F:PnP.Core.QueryModel.Enums.FilteringCriteria.GreaterThanOrEqual
+  fullName: PnP.Core.QueryModel.Enums.FilteringCriteria.GreaterThanOrEqual
   nameWithType: FilteringCriteria.GreaterThanOrEqual
-- uid: PnP.Core.QueryModel.FilteringCriteria.LessThan
+- uid: PnP.Core.QueryModel.Enums.FilteringCriteria.LessThan
   name: LessThan
-  href: api/PnP.Core.QueryModel.FilteringCriteria.html#PnP_Core_QueryModel_FilteringCriteria_LessThan
-  commentId: F:PnP.Core.QueryModel.FilteringCriteria.LessThan
-  fullName: PnP.Core.QueryModel.FilteringCriteria.LessThan
+  href: api/PnP.Core.QueryModel.Enums.FilteringCriteria.html#PnP_Core_QueryModel_Enums_FilteringCriteria_LessThan
+  commentId: F:PnP.Core.QueryModel.Enums.FilteringCriteria.LessThan
+  fullName: PnP.Core.QueryModel.Enums.FilteringCriteria.LessThan
   nameWithType: FilteringCriteria.LessThan
-- uid: PnP.Core.QueryModel.FilteringCriteria.LessThanOrEqual
+- uid: PnP.Core.QueryModel.Enums.FilteringCriteria.LessThanOrEqual
   name: LessThanOrEqual
-  href: api/PnP.Core.QueryModel.FilteringCriteria.html#PnP_Core_QueryModel_FilteringCriteria_LessThanOrEqual
-  commentId: F:PnP.Core.QueryModel.FilteringCriteria.LessThanOrEqual
-  fullName: PnP.Core.QueryModel.FilteringCriteria.LessThanOrEqual
+  href: api/PnP.Core.QueryModel.Enums.FilteringCriteria.html#PnP_Core_QueryModel_Enums_FilteringCriteria_LessThanOrEqual
+  commentId: F:PnP.Core.QueryModel.Enums.FilteringCriteria.LessThanOrEqual
+  fullName: PnP.Core.QueryModel.Enums.FilteringCriteria.LessThanOrEqual
   nameWithType: FilteringCriteria.LessThanOrEqual
-- uid: PnP.Core.QueryModel.FilteringCriteria.Not
+- uid: PnP.Core.QueryModel.Enums.FilteringCriteria.Not
   name: Not
-  href: api/PnP.Core.QueryModel.FilteringCriteria.html#PnP_Core_QueryModel_FilteringCriteria_Not
-  commentId: F:PnP.Core.QueryModel.FilteringCriteria.Not
-  fullName: PnP.Core.QueryModel.FilteringCriteria.Not
+  href: api/PnP.Core.QueryModel.Enums.FilteringCriteria.html#PnP_Core_QueryModel_Enums_FilteringCriteria_Not
+  commentId: F:PnP.Core.QueryModel.Enums.FilteringCriteria.Not
+  fullName: PnP.Core.QueryModel.Enums.FilteringCriteria.Not
   nameWithType: FilteringCriteria.Not
-- uid: PnP.Core.QueryModel.FilteringCriteria.NotEqual
+- uid: PnP.Core.QueryModel.Enums.FilteringCriteria.NotEqual
   name: NotEqual
-  href: api/PnP.Core.QueryModel.FilteringCriteria.html#PnP_Core_QueryModel_FilteringCriteria_NotEqual
-  commentId: F:PnP.Core.QueryModel.FilteringCriteria.NotEqual
-  fullName: PnP.Core.QueryModel.FilteringCriteria.NotEqual
+  href: api/PnP.Core.QueryModel.Enums.FilteringCriteria.html#PnP_Core_QueryModel_Enums_FilteringCriteria_NotEqual
+  commentId: F:PnP.Core.QueryModel.Enums.FilteringCriteria.NotEqual
+  fullName: PnP.Core.QueryModel.Enums.FilteringCriteria.NotEqual
   nameWithType: FilteringCriteria.NotEqual
-- uid: PnP.Core.QueryModel.FilterItem
-  name: FilterItem
-  href: api/PnP.Core.QueryModel.FilterItem.html
-  commentId: T:PnP.Core.QueryModel.FilterItem
-  fullName: PnP.Core.QueryModel.FilterItem
-  nameWithType: FilterItem
-- uid: PnP.Core.QueryModel.FilterItem.Criteria
-  name: Criteria
-  href: api/PnP.Core.QueryModel.FilterItem.html#PnP_Core_QueryModel_FilterItem_Criteria
-  commentId: P:PnP.Core.QueryModel.FilterItem.Criteria
-  fullName: PnP.Core.QueryModel.FilterItem.Criteria
-  nameWithType: FilterItem.Criteria
-- uid: PnP.Core.QueryModel.FilterItem.Criteria*
-  name: Criteria
-  href: api/PnP.Core.QueryModel.FilterItem.html#PnP_Core_QueryModel_FilterItem_Criteria_
-  commentId: Overload:PnP.Core.QueryModel.FilterItem.Criteria
-  isSpec: "True"
-  fullName: PnP.Core.QueryModel.FilterItem.Criteria
-  nameWithType: FilterItem.Criteria
-- uid: PnP.Core.QueryModel.FilterItem.Field
-  name: Field
-  href: api/PnP.Core.QueryModel.FilterItem.html#PnP_Core_QueryModel_FilterItem_Field
-  commentId: P:PnP.Core.QueryModel.FilterItem.Field
-  fullName: PnP.Core.QueryModel.FilterItem.Field
-  nameWithType: FilterItem.Field
-- uid: PnP.Core.QueryModel.FilterItem.Field*
-  name: Field
-  href: api/PnP.Core.QueryModel.FilterItem.html#PnP_Core_QueryModel_FilterItem_Field_
-  commentId: Overload:PnP.Core.QueryModel.FilterItem.Field
-  isSpec: "True"
-  fullName: PnP.Core.QueryModel.FilterItem.Field
-  nameWithType: FilterItem.Field
-- uid: PnP.Core.QueryModel.FilterItem.Value
-  name: Value
-  href: api/PnP.Core.QueryModel.FilterItem.html#PnP_Core_QueryModel_FilterItem_Value
-  commentId: P:PnP.Core.QueryModel.FilterItem.Value
-  fullName: PnP.Core.QueryModel.FilterItem.Value
-  nameWithType: FilterItem.Value
-- uid: PnP.Core.QueryModel.FilterItem.Value*
-  name: Value
-  href: api/PnP.Core.QueryModel.FilterItem.html#PnP_Core_QueryModel_FilterItem_Value_
-  commentId: Overload:PnP.Core.QueryModel.FilterItem.Value
-  isSpec: "True"
-  fullName: PnP.Core.QueryModel.FilterItem.Value
-  nameWithType: FilterItem.Value
-- uid: PnP.Core.QueryModel.FiltersGroup
-  name: FiltersGroup
-  href: api/PnP.Core.QueryModel.FiltersGroup.html
-  commentId: T:PnP.Core.QueryModel.FiltersGroup
-  fullName: PnP.Core.QueryModel.FiltersGroup
-  nameWithType: FiltersGroup
-- uid: PnP.Core.QueryModel.FiltersGroup.#ctor
-  name: FiltersGroup()
-  href: api/PnP.Core.QueryModel.FiltersGroup.html#PnP_Core_QueryModel_FiltersGroup__ctor
-  commentId: M:PnP.Core.QueryModel.FiltersGroup.#ctor
-  fullName: PnP.Core.QueryModel.FiltersGroup.FiltersGroup()
-  nameWithType: FiltersGroup.FiltersGroup()
-- uid: PnP.Core.QueryModel.FiltersGroup.#ctor(System.Collections.Generic.List{PnP.Core.QueryModel.ODataFilter})
-  name: FiltersGroup(List<ODataFilter>)
-  href: api/PnP.Core.QueryModel.FiltersGroup.html#PnP_Core_QueryModel_FiltersGroup__ctor_System_Collections_Generic_List_PnP_Core_QueryModel_ODataFilter__
-  commentId: M:PnP.Core.QueryModel.FiltersGroup.#ctor(System.Collections.Generic.List{PnP.Core.QueryModel.ODataFilter})
-  name.vb: FiltersGroup(List(Of ODataFilter))
-  fullName: PnP.Core.QueryModel.FiltersGroup.FiltersGroup(System.Collections.Generic.List<PnP.Core.QueryModel.ODataFilter>)
-  fullName.vb: PnP.Core.QueryModel.FiltersGroup.FiltersGroup(System.Collections.Generic.List(Of PnP.Core.QueryModel.ODataFilter))
-  nameWithType: FiltersGroup.FiltersGroup(List<ODataFilter>)
-  nameWithType.vb: FiltersGroup.FiltersGroup(List(Of ODataFilter))
-- uid: PnP.Core.QueryModel.FiltersGroup.#ctor*
-  name: FiltersGroup
-  href: api/PnP.Core.QueryModel.FiltersGroup.html#PnP_Core_QueryModel_FiltersGroup__ctor_
-  commentId: Overload:PnP.Core.QueryModel.FiltersGroup.#ctor
-  isSpec: "True"
-  fullName: PnP.Core.QueryModel.FiltersGroup.FiltersGroup
-  nameWithType: FiltersGroup.FiltersGroup
-- uid: PnP.Core.QueryModel.FiltersGroup.Filters
-  name: Filters
-  href: api/PnP.Core.QueryModel.FiltersGroup.html#PnP_Core_QueryModel_FiltersGroup_Filters
-  commentId: P:PnP.Core.QueryModel.FiltersGroup.Filters
-  fullName: PnP.Core.QueryModel.FiltersGroup.Filters
-  nameWithType: FiltersGroup.Filters
-- uid: PnP.Core.QueryModel.FiltersGroup.Filters*
-  name: Filters
-  href: api/PnP.Core.QueryModel.FiltersGroup.html#PnP_Core_QueryModel_FiltersGroup_Filters_
-  commentId: Overload:PnP.Core.QueryModel.FiltersGroup.Filters
-  isSpec: "True"
-  fullName: PnP.Core.QueryModel.FiltersGroup.Filters
-  nameWithType: FiltersGroup.Filters
+- uid: PnP.Core.QueryModel.Enums.ODataTargetPlatform
+  name: ODataTargetPlatform
+  href: api/PnP.Core.QueryModel.Enums.ODataTargetPlatform.html
+  commentId: T:PnP.Core.QueryModel.Enums.ODataTargetPlatform
+  fullName: PnP.Core.QueryModel.Enums.ODataTargetPlatform
+  nameWithType: ODataTargetPlatform
+- uid: PnP.Core.QueryModel.Enums.ODataTargetPlatform.Graph
+  name: Graph
+  href: api/PnP.Core.QueryModel.Enums.ODataTargetPlatform.html#PnP_Core_QueryModel_Enums_ODataTargetPlatform_Graph
+  commentId: F:PnP.Core.QueryModel.Enums.ODataTargetPlatform.Graph
+  fullName: PnP.Core.QueryModel.Enums.ODataTargetPlatform.Graph
+  nameWithType: ODataTargetPlatform.Graph
+- uid: PnP.Core.QueryModel.Enums.ODataTargetPlatform.SPORest
+  name: SPORest
+  href: api/PnP.Core.QueryModel.Enums.ODataTargetPlatform.html#PnP_Core_QueryModel_Enums_ODataTargetPlatform_SPORest
+  commentId: F:PnP.Core.QueryModel.Enums.ODataTargetPlatform.SPORest
+  fullName: PnP.Core.QueryModel.Enums.ODataTargetPlatform.SPORest
+  nameWithType: ODataTargetPlatform.SPORest
+- uid: PnP.Core.QueryModel.Enums.OrderByDirection
+  name: OrderByDirection
+  href: api/PnP.Core.QueryModel.Enums.OrderByDirection.html
+  commentId: T:PnP.Core.QueryModel.Enums.OrderByDirection
+  fullName: PnP.Core.QueryModel.Enums.OrderByDirection
+  nameWithType: OrderByDirection
+- uid: PnP.Core.QueryModel.Enums.OrderByDirection.Asc
+  name: Asc
+  href: api/PnP.Core.QueryModel.Enums.OrderByDirection.html#PnP_Core_QueryModel_Enums_OrderByDirection_Asc
+  commentId: F:PnP.Core.QueryModel.Enums.OrderByDirection.Asc
+  fullName: PnP.Core.QueryModel.Enums.OrderByDirection.Asc
+  nameWithType: OrderByDirection.Asc
+- uid: PnP.Core.QueryModel.Enums.OrderByDirection.Desc
+  name: Desc
+  href: api/PnP.Core.QueryModel.Enums.OrderByDirection.html#PnP_Core_QueryModel_Enums_OrderByDirection_Desc
+  commentId: F:PnP.Core.QueryModel.Enums.OrderByDirection.Desc
+  fullName: PnP.Core.QueryModel.Enums.OrderByDirection.Desc
+  nameWithType: OrderByDirection.Desc
 - uid: PnP.Core.QueryModel.IAsyncQueryProvider
   name: IAsyncQueryProvider
   href: api/PnP.Core.QueryModel.IAsyncQueryProvider.html
@@ -11149,92 +11105,148 @@ references:
   fullName.vb: PnP.Core.QueryModel.IAsyncQueryProvider.ExecuteAsync(Of TResult)(System.Linq.Expressions.Expression, System.Threading.CancellationToken)
   nameWithType: IAsyncQueryProvider.ExecuteAsync<TResult>(Expression, CancellationToken)
   nameWithType.vb: IAsyncQueryProvider.ExecuteAsync(Of TResult)(Expression, CancellationToken)
-- uid: PnP.Core.QueryModel.ODataFilter
+- uid: PnP.Core.QueryModel.Model
+  name: PnP.Core.QueryModel.Model
+  href: api/PnP.Core.QueryModel.Model.html
+  commentId: N:PnP.Core.QueryModel.Model
+  fullName: PnP.Core.QueryModel.Model
+  nameWithType: PnP.Core.QueryModel.Model
+- uid: PnP.Core.QueryModel.Model.FilterItem
+  name: FilterItem
+  href: api/PnP.Core.QueryModel.Model.FilterItem.html
+  commentId: T:PnP.Core.QueryModel.Model.FilterItem
+  fullName: PnP.Core.QueryModel.Model.FilterItem
+  nameWithType: FilterItem
+- uid: PnP.Core.QueryModel.Model.FilterItem.Criteria
+  name: Criteria
+  href: api/PnP.Core.QueryModel.Model.FilterItem.html#PnP_Core_QueryModel_Model_FilterItem_Criteria
+  commentId: P:PnP.Core.QueryModel.Model.FilterItem.Criteria
+  fullName: PnP.Core.QueryModel.Model.FilterItem.Criteria
+  nameWithType: FilterItem.Criteria
+- uid: PnP.Core.QueryModel.Model.FilterItem.Criteria*
+  name: Criteria
+  href: api/PnP.Core.QueryModel.Model.FilterItem.html#PnP_Core_QueryModel_Model_FilterItem_Criteria_
+  commentId: Overload:PnP.Core.QueryModel.Model.FilterItem.Criteria
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.Model.FilterItem.Criteria
+  nameWithType: FilterItem.Criteria
+- uid: PnP.Core.QueryModel.Model.FilterItem.Field
+  name: Field
+  href: api/PnP.Core.QueryModel.Model.FilterItem.html#PnP_Core_QueryModel_Model_FilterItem_Field
+  commentId: P:PnP.Core.QueryModel.Model.FilterItem.Field
+  fullName: PnP.Core.QueryModel.Model.FilterItem.Field
+  nameWithType: FilterItem.Field
+- uid: PnP.Core.QueryModel.Model.FilterItem.Field*
+  name: Field
+  href: api/PnP.Core.QueryModel.Model.FilterItem.html#PnP_Core_QueryModel_Model_FilterItem_Field_
+  commentId: Overload:PnP.Core.QueryModel.Model.FilterItem.Field
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.Model.FilterItem.Field
+  nameWithType: FilterItem.Field
+- uid: PnP.Core.QueryModel.Model.FilterItem.Value
+  name: Value
+  href: api/PnP.Core.QueryModel.Model.FilterItem.html#PnP_Core_QueryModel_Model_FilterItem_Value
+  commentId: P:PnP.Core.QueryModel.Model.FilterItem.Value
+  fullName: PnP.Core.QueryModel.Model.FilterItem.Value
+  nameWithType: FilterItem.Value
+- uid: PnP.Core.QueryModel.Model.FilterItem.Value*
+  name: Value
+  href: api/PnP.Core.QueryModel.Model.FilterItem.html#PnP_Core_QueryModel_Model_FilterItem_Value_
+  commentId: Overload:PnP.Core.QueryModel.Model.FilterItem.Value
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.Model.FilterItem.Value
+  nameWithType: FilterItem.Value
+- uid: PnP.Core.QueryModel.Model.FiltersGroup
+  name: FiltersGroup
+  href: api/PnP.Core.QueryModel.Model.FiltersGroup.html
+  commentId: T:PnP.Core.QueryModel.Model.FiltersGroup
+  fullName: PnP.Core.QueryModel.Model.FiltersGroup
+  nameWithType: FiltersGroup
+- uid: PnP.Core.QueryModel.Model.FiltersGroup.#ctor
+  name: FiltersGroup()
+  href: api/PnP.Core.QueryModel.Model.FiltersGroup.html#PnP_Core_QueryModel_Model_FiltersGroup__ctor
+  commentId: M:PnP.Core.QueryModel.Model.FiltersGroup.#ctor
+  fullName: PnP.Core.QueryModel.Model.FiltersGroup.FiltersGroup()
+  nameWithType: FiltersGroup.FiltersGroup()
+- uid: PnP.Core.QueryModel.Model.FiltersGroup.#ctor(System.Collections.Generic.List{PnP.Core.QueryModel.Model.ODataFilter})
+  name: FiltersGroup(List<ODataFilter>)
+  href: api/PnP.Core.QueryModel.Model.FiltersGroup.html#PnP_Core_QueryModel_Model_FiltersGroup__ctor_System_Collections_Generic_List_PnP_Core_QueryModel_Model_ODataFilter__
+  commentId: M:PnP.Core.QueryModel.Model.FiltersGroup.#ctor(System.Collections.Generic.List{PnP.Core.QueryModel.Model.ODataFilter})
+  name.vb: FiltersGroup(List(Of ODataFilter))
+  fullName: PnP.Core.QueryModel.Model.FiltersGroup.FiltersGroup(System.Collections.Generic.List<PnP.Core.QueryModel.Model.ODataFilter>)
+  fullName.vb: PnP.Core.QueryModel.Model.FiltersGroup.FiltersGroup(System.Collections.Generic.List(Of PnP.Core.QueryModel.Model.ODataFilter))
+  nameWithType: FiltersGroup.FiltersGroup(List<ODataFilter>)
+  nameWithType.vb: FiltersGroup.FiltersGroup(List(Of ODataFilter))
+- uid: PnP.Core.QueryModel.Model.FiltersGroup.#ctor*
+  name: FiltersGroup
+  href: api/PnP.Core.QueryModel.Model.FiltersGroup.html#PnP_Core_QueryModel_Model_FiltersGroup__ctor_
+  commentId: Overload:PnP.Core.QueryModel.Model.FiltersGroup.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.Model.FiltersGroup.FiltersGroup
+  nameWithType: FiltersGroup.FiltersGroup
+- uid: PnP.Core.QueryModel.Model.FiltersGroup.Filters
+  name: Filters
+  href: api/PnP.Core.QueryModel.Model.FiltersGroup.html#PnP_Core_QueryModel_Model_FiltersGroup_Filters
+  commentId: P:PnP.Core.QueryModel.Model.FiltersGroup.Filters
+  fullName: PnP.Core.QueryModel.Model.FiltersGroup.Filters
+  nameWithType: FiltersGroup.Filters
+- uid: PnP.Core.QueryModel.Model.FiltersGroup.Filters*
+  name: Filters
+  href: api/PnP.Core.QueryModel.Model.FiltersGroup.html#PnP_Core_QueryModel_Model_FiltersGroup_Filters_
+  commentId: Overload:PnP.Core.QueryModel.Model.FiltersGroup.Filters
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.Model.FiltersGroup.Filters
+  nameWithType: FiltersGroup.Filters
+- uid: PnP.Core.QueryModel.Model.ODataFilter
   name: ODataFilter
-  href: api/PnP.Core.QueryModel.ODataFilter.html
-  commentId: T:PnP.Core.QueryModel.ODataFilter
-  fullName: PnP.Core.QueryModel.ODataFilter
+  href: api/PnP.Core.QueryModel.Model.ODataFilter.html
+  commentId: T:PnP.Core.QueryModel.Model.ODataFilter
+  fullName: PnP.Core.QueryModel.Model.ODataFilter
   nameWithType: ODataFilter
-- uid: PnP.Core.QueryModel.ODataFilter.ConcatOperator
+- uid: PnP.Core.QueryModel.Model.ODataFilter.ConcatOperator
   name: ConcatOperator
-  href: api/PnP.Core.QueryModel.ODataFilter.html#PnP_Core_QueryModel_ODataFilter_ConcatOperator
-  commentId: P:PnP.Core.QueryModel.ODataFilter.ConcatOperator
-  fullName: PnP.Core.QueryModel.ODataFilter.ConcatOperator
+  href: api/PnP.Core.QueryModel.Model.ODataFilter.html#PnP_Core_QueryModel_Model_ODataFilter_ConcatOperator
+  commentId: P:PnP.Core.QueryModel.Model.ODataFilter.ConcatOperator
+  fullName: PnP.Core.QueryModel.Model.ODataFilter.ConcatOperator
   nameWithType: ODataFilter.ConcatOperator
-- uid: PnP.Core.QueryModel.ODataFilter.ConcatOperator*
+- uid: PnP.Core.QueryModel.Model.ODataFilter.ConcatOperator*
   name: ConcatOperator
-  href: api/PnP.Core.QueryModel.ODataFilter.html#PnP_Core_QueryModel_ODataFilter_ConcatOperator_
-  commentId: Overload:PnP.Core.QueryModel.ODataFilter.ConcatOperator
+  href: api/PnP.Core.QueryModel.Model.ODataFilter.html#PnP_Core_QueryModel_Model_ODataFilter_ConcatOperator_
+  commentId: Overload:PnP.Core.QueryModel.Model.ODataFilter.ConcatOperator
   isSpec: "True"
-  fullName: PnP.Core.QueryModel.ODataFilter.ConcatOperator
+  fullName: PnP.Core.QueryModel.Model.ODataFilter.ConcatOperator
   nameWithType: ODataFilter.ConcatOperator
-- uid: PnP.Core.QueryModel.ODataTargetPlatform
-  name: ODataTargetPlatform
-  href: api/PnP.Core.QueryModel.ODataTargetPlatform.html
-  commentId: T:PnP.Core.QueryModel.ODataTargetPlatform
-  fullName: PnP.Core.QueryModel.ODataTargetPlatform
-  nameWithType: ODataTargetPlatform
-- uid: PnP.Core.QueryModel.ODataTargetPlatform.Graph
-  name: Graph
-  href: api/PnP.Core.QueryModel.ODataTargetPlatform.html#PnP_Core_QueryModel_ODataTargetPlatform_Graph
-  commentId: F:PnP.Core.QueryModel.ODataTargetPlatform.Graph
-  fullName: PnP.Core.QueryModel.ODataTargetPlatform.Graph
-  nameWithType: ODataTargetPlatform.Graph
-- uid: PnP.Core.QueryModel.ODataTargetPlatform.SPORest
-  name: SPORest
-  href: api/PnP.Core.QueryModel.ODataTargetPlatform.html#PnP_Core_QueryModel_ODataTargetPlatform_SPORest
-  commentId: F:PnP.Core.QueryModel.ODataTargetPlatform.SPORest
-  fullName: PnP.Core.QueryModel.ODataTargetPlatform.SPORest
-  nameWithType: ODataTargetPlatform.SPORest
-- uid: PnP.Core.QueryModel.OrderByDirection
-  name: OrderByDirection
-  href: api/PnP.Core.QueryModel.OrderByDirection.html
-  commentId: T:PnP.Core.QueryModel.OrderByDirection
-  fullName: PnP.Core.QueryModel.OrderByDirection
-  nameWithType: OrderByDirection
-- uid: PnP.Core.QueryModel.OrderByDirection.Asc
-  name: Asc
-  href: api/PnP.Core.QueryModel.OrderByDirection.html#PnP_Core_QueryModel_OrderByDirection_Asc
-  commentId: F:PnP.Core.QueryModel.OrderByDirection.Asc
-  fullName: PnP.Core.QueryModel.OrderByDirection.Asc
-  nameWithType: OrderByDirection.Asc
-- uid: PnP.Core.QueryModel.OrderByDirection.Desc
-  name: Desc
-  href: api/PnP.Core.QueryModel.OrderByDirection.html#PnP_Core_QueryModel_OrderByDirection_Desc
-  commentId: F:PnP.Core.QueryModel.OrderByDirection.Desc
-  fullName: PnP.Core.QueryModel.OrderByDirection.Desc
-  nameWithType: OrderByDirection.Desc
-- uid: PnP.Core.QueryModel.OrderByItem
+- uid: PnP.Core.QueryModel.Model.OrderByItem
   name: OrderByItem
-  href: api/PnP.Core.QueryModel.OrderByItem.html
-  commentId: T:PnP.Core.QueryModel.OrderByItem
-  fullName: PnP.Core.QueryModel.OrderByItem
+  href: api/PnP.Core.QueryModel.Model.OrderByItem.html
+  commentId: T:PnP.Core.QueryModel.Model.OrderByItem
+  fullName: PnP.Core.QueryModel.Model.OrderByItem
   nameWithType: OrderByItem
-- uid: PnP.Core.QueryModel.OrderByItem.Direction
+- uid: PnP.Core.QueryModel.Model.OrderByItem.Direction
   name: Direction
-  href: api/PnP.Core.QueryModel.OrderByItem.html#PnP_Core_QueryModel_OrderByItem_Direction
-  commentId: P:PnP.Core.QueryModel.OrderByItem.Direction
-  fullName: PnP.Core.QueryModel.OrderByItem.Direction
+  href: api/PnP.Core.QueryModel.Model.OrderByItem.html#PnP_Core_QueryModel_Model_OrderByItem_Direction
+  commentId: P:PnP.Core.QueryModel.Model.OrderByItem.Direction
+  fullName: PnP.Core.QueryModel.Model.OrderByItem.Direction
   nameWithType: OrderByItem.Direction
-- uid: PnP.Core.QueryModel.OrderByItem.Direction*
+- uid: PnP.Core.QueryModel.Model.OrderByItem.Direction*
   name: Direction
-  href: api/PnP.Core.QueryModel.OrderByItem.html#PnP_Core_QueryModel_OrderByItem_Direction_
-  commentId: Overload:PnP.Core.QueryModel.OrderByItem.Direction
+  href: api/PnP.Core.QueryModel.Model.OrderByItem.html#PnP_Core_QueryModel_Model_OrderByItem_Direction_
+  commentId: Overload:PnP.Core.QueryModel.Model.OrderByItem.Direction
   isSpec: "True"
-  fullName: PnP.Core.QueryModel.OrderByItem.Direction
+  fullName: PnP.Core.QueryModel.Model.OrderByItem.Direction
   nameWithType: OrderByItem.Direction
-- uid: PnP.Core.QueryModel.OrderByItem.Field
+- uid: PnP.Core.QueryModel.Model.OrderByItem.Field
   name: Field
-  href: api/PnP.Core.QueryModel.OrderByItem.html#PnP_Core_QueryModel_OrderByItem_Field
-  commentId: P:PnP.Core.QueryModel.OrderByItem.Field
-  fullName: PnP.Core.QueryModel.OrderByItem.Field
+  href: api/PnP.Core.QueryModel.Model.OrderByItem.html#PnP_Core_QueryModel_Model_OrderByItem_Field
+  commentId: P:PnP.Core.QueryModel.Model.OrderByItem.Field
+  fullName: PnP.Core.QueryModel.Model.OrderByItem.Field
   nameWithType: OrderByItem.Field
-- uid: PnP.Core.QueryModel.OrderByItem.Field*
+- uid: PnP.Core.QueryModel.Model.OrderByItem.Field*
   name: Field
-  href: api/PnP.Core.QueryModel.OrderByItem.html#PnP_Core_QueryModel_OrderByItem_Field_
-  commentId: Overload:PnP.Core.QueryModel.OrderByItem.Field
+  href: api/PnP.Core.QueryModel.Model.OrderByItem.html#PnP_Core_QueryModel_Model_OrderByItem_Field_
+  commentId: Overload:PnP.Core.QueryModel.Model.OrderByItem.Field
   isSpec: "True"
-  fullName: PnP.Core.QueryModel.OrderByItem.Field
+  fullName: PnP.Core.QueryModel.Model.OrderByItem.Field
   nameWithType: OrderByItem.Field
 - uid: PnP.Core.QueryModel.QueryableExtensions
   name: QueryableExtensions

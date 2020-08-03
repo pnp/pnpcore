@@ -1410,7 +1410,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.TransientDictionary.html",
-          "hash": "NnRdG+NASy0zHaKAlqqX8Q=="
+          "hash": "6ssGDiN5NEkyTBD5Yh43DA=="
         }
       },
       "is_incremental": false,
@@ -1478,11 +1478,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.FilterItem.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.Enums.FilteringConcatOperator.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.FilterItem.html",
-          "hash": "62GNfj8uffKT8R3ApIzAbQ=="
+          "relative_path": "api/PnP.Core.QueryModel.Enums.FilteringConcatOperator.html",
+          "hash": "1isetIzbDclag/mL0dbbcQ=="
         }
       },
       "is_incremental": false,
@@ -1490,11 +1490,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.FilteringConcatOperator.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.Enums.FilteringCriteria.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.FilteringConcatOperator.html",
-          "hash": "DgvCBIS77Vcgno2YpB4nKg=="
+          "relative_path": "api/PnP.Core.QueryModel.Enums.FilteringCriteria.html",
+          "hash": "CEZeBNxZIcCO758ukI8Vtw=="
         }
       },
       "is_incremental": false,
@@ -1502,11 +1502,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.FilteringCriteria.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.Enums.ODataTargetPlatform.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.FilteringCriteria.html",
-          "hash": "KrWqOJ9NJjGnHmIQ6nj6zg=="
+          "relative_path": "api/PnP.Core.QueryModel.Enums.ODataTargetPlatform.html",
+          "hash": "J6q+lEmDci7s/3dnHpS40A=="
         }
       },
       "is_incremental": false,
@@ -1514,11 +1514,23 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.FiltersGroup.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.Enums.OrderByDirection.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.FiltersGroup.html",
-          "hash": "J7kJl9DrgV5iXMuXqWajuQ=="
+          "relative_path": "api/PnP.Core.QueryModel.Enums.OrderByDirection.html",
+          "hash": "79mtbj6HLRRXrKp6EU/RGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.QueryModel.Enums.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.QueryModel.Enums.html",
+          "hash": "/BWnuUPIpPzjvZJh/GjytA=="
         }
       },
       "is_incremental": false,
@@ -1538,11 +1550,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.ODataFilter.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.Model.FilterItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.ODataFilter.html",
-          "hash": "FyrQkUDHz4IhEvGUHFgDvQ=="
+          "relative_path": "api/PnP.Core.QueryModel.Model.FilterItem.html",
+          "hash": "L5Dt2iV6sC5LBQPXeP1Vgw=="
         }
       },
       "is_incremental": false,
@@ -1550,11 +1562,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.ODataTargetPlatform.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.Model.FiltersGroup.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.ODataTargetPlatform.html",
-          "hash": "BDTUm9si3kwUz5ERAVv/ZQ=="
+          "relative_path": "api/PnP.Core.QueryModel.Model.FiltersGroup.html",
+          "hash": "fMs8Yj5s6jGeuoDBXsICeg=="
         }
       },
       "is_incremental": false,
@@ -1562,11 +1574,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.OrderByDirection.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.Model.ODataFilter.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.OrderByDirection.html",
-          "hash": "Btn3BV7AYkFn3fNq2pDWag=="
+          "relative_path": "api/PnP.Core.QueryModel.Model.ODataFilter.html",
+          "hash": "1+A1x1+rMIdy3xgNUsdyoQ=="
         }
       },
       "is_incremental": false,
@@ -1574,11 +1586,23 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.OrderByItem.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.Model.OrderByItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.OrderByItem.html",
-          "hash": "j9clyVeaFstF0neaOevvHA=="
+          "relative_path": "api/PnP.Core.QueryModel.Model.OrderByItem.html",
+          "hash": "qp95InMkE2j5vpShFfvFrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.QueryModel.Model.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.QueryModel.Model.html",
+          "hash": "uPMH1l4fWnmRiSKuk1/vXg=="
         }
       },
       "is_incremental": false,
@@ -1602,7 +1626,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.QueryModel.html",
-          "hash": "05Z+VO0i9OXMNuHJUkB/xA=="
+          "hash": "xayXNo3gkgTFhwVAi0hY9A=="
         }
       },
       "is_incremental": false,
@@ -2022,7 +2046,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "FEJOy5yCtKQMUi+tG6Ilcg=="
+          "hash": "7keF2hP4hbB1+/2pr70gkA=="
         }
       },
       "is_incremental": false,
@@ -2320,7 +2344,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 166,
+          "total_file_count": 168,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
