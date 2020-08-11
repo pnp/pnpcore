@@ -37,6 +37,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Async LINQ support [PaoloPia - Paolo Pialorsi]
 - Added sync equivalents for all async methods [jansenbe - Bert Jansen]
 - Support for list and web folders #78 [ypcode - Yannick Plennevaux]
+- Test cases for the Teams model #95 [JarbasHorst - Jarbas Horst]
 
 ### Changed
 
