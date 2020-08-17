@@ -1,0 +1,13 @@
+﻿namespace PnP.Core.Model.SharePoint.Core.Public
+{
+    /// <summary>
+    /// Available options for SharePoint Choice fields
+    /// </summary>
+    public class FieldChoiceOptions : FieldMultiChoiceOptions
+    {
+        /// <summary>
+        /// Determines whether to display the choice field as option buttons (also known as “radio buttons”) or as a drop-down list.
+        /// </summary>
+        public ChoiceFormatType EditFormat { get; set; }
+    }
+}

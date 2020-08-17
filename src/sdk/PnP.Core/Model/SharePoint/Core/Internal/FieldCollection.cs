@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PnP.Core.Model.SharePoint.Core.Public;
 
 namespace PnP.Core.Model.SharePoint
 {
