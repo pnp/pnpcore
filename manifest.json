@@ -482,11 +482,155 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.CommonFieldOptions.yml",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.CommonFieldOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.CommonFieldOptions.html",
-          "hash": "DcPapzkIRkukHxP/KSqi1w=="
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.CommonFieldOptions.html",
+          "hash": "zBxHOQtJw8ZaqaqyEYzyFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldCalculatedOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldCalculatedOptions.html",
+          "hash": "uZxEbJyeBc3O9B6a5zcn8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldChoiceOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldChoiceOptions.html",
+          "hash": "kC0CGyClw8ZLM+DRS5Tr6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldCurrencyOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldCurrencyOptions.html",
+          "hash": "hJ/c/E16R6BYf2pJ/YCkUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldDateTimeOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldDateTimeOptions.html",
+          "hash": "NPskCio2csO+whUSlAT+2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.html",
+          "hash": "z7K2CRvhHl7Kz4HYGUvsbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldMultiChoiceOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldMultiChoiceOptions.html",
+          "hash": "hfDdTnyCR4AGfAnLSM56Kw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldMultilineTextOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldMultilineTextOptions.html",
+          "hash": "cF+R7ovGxlDl9/wGYcZtqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldNumberOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldNumberOptions.html",
+          "hash": "2L1kADllHbFFDQtjvYOSCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldTextOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldTextOptions.html",
+          "hash": "gwgnBU4l4BzmHtgBCRgQBQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldUrlOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldUrlOptions.html",
+          "hash": "FhFTvuMu5gEQ7mpuqm2/6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldUserOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldUserOptions.html",
+          "hash": "gKljQA2On7wvnKoIc0QSxQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.html",
+          "hash": "y2jCU2jsGOK2VVlYuFOHQQ=="
         }
       },
       "is_incremental": false,
@@ -518,119 +662,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldCalculatedOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldCalculatedOptions.html",
-          "hash": "3Q1H0QfzfcR+cFHjl/rr4g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldChoiceOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldChoiceOptions.html",
-          "hash": "YmU8zkdHVJVKgaq1rQ6Uyg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldCurrencyOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldCurrencyOptions.html",
-          "hash": "RK0p3gwD/Y98nVSo5sCBEg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldDateTimeOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldDateTimeOptions.html",
-          "hash": "wpwFbxyEKijhJHaGuaQWSg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldLookupOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldLookupOptions.html",
-          "hash": "5gNZpMnUZzSCR+5TYnvbcA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html",
-          "hash": "UIfX431CHfXQ2X/JoLi4tg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldMultilineTextOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldMultilineTextOptions.html",
-          "hash": "wmJcoUdAGCSqXMHTVOYFQw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldNumberOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldNumberOptions.html",
-          "hash": "sB6WLJAmggA9HiYdZJlgXg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldOptions.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldOptions.html",
-          "hash": "De4m13PysJ6KiPHtYUn9mA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldTextOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldTextOptions.html",
-          "hash": "qFnEO2pvXK1Hf8Qs3CjPNw=="
+          "hash": "/BP2ESAkm4yLn19dogYPmw=="
         }
       },
       "is_incremental": false,
@@ -643,30 +679,6 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldType.html",
           "hash": "7dmqmpoqdHGt3r8qouhSTw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldUrlOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldUrlOptions.html",
-          "hash": "JRc4HhKXOCcOzKi6Kw1cXw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldUserOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.FieldUserOptions.html",
-          "hash": "tYQkzwnNgRY5WOU4hr33mw=="
         }
       },
       "is_incremental": false,
@@ -750,7 +762,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFieldCollection.html",
-          "hash": "W7ktE3lzvU98Usf8xdEznQ=="
+          "hash": "oTNTPXXDJhXGMRynLKTVng=="
         }
       },
       "is_incremental": false,
@@ -1002,7 +1014,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "8EgzqJGRma01/81tBsJZug=="
+          "hash": "w4OvCvJNR8L9reOcQVn68Q=="
         }
       },
       "is_incremental": false,
@@ -2046,7 +2058,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "7keF2hP4hbB1+/2pr70gkA=="
+          "hash": "TzbEEAStpYvFJIkFeF/ejw=="
         }
       },
       "is_incremental": false,
@@ -2344,7 +2356,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 168,
+          "total_file_count": 169,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
