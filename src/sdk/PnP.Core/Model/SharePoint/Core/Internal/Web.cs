@@ -113,6 +113,68 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Files
+        public IFile GetFileByServerRelativeUrl(string serverRelativeUrl)
+        {
+            return GetFileByServerRelativeUrlAsync(serverRelativeUrl).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFile> GetFileByServerRelativeUrlAsync(string serverRelativeUrl)
+        {
+            // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
+            File file = new File()
+            {
+                PnPContext = this.PnPContext,
+                Parent = this
+            };
+
+            ApiCall apiCall = BuildGetFileByRelativeUrlApiCall(serverRelativeUrl);
+
+            await file.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return file;
+        }
+
+        public IFile GetFileByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl)
+        {
+            return GetFileByServerRelativeUrlBatchAsync(batch, serverRelativeUrl).GetAwaiter().GetResult();
+        }
+
+        public IFile GetFileByServerRelativeUrlBatch(string serverRelativeUrl)
+        {
+            return GetFileByServerRelativeUrlBatchAsync(serverRelativeUrl).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFile> GetFileByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl)
+        {
+            // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
+            File file = new File()
+            {
+                PnPContext = this.PnPContext,
+                Parent = this
+            };
+
+            ApiCall apiCall = BuildGetFileByRelativeUrlApiCall(serverRelativeUrl);
+
+            await file.RequestBatchAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return file;
+        }
+
+        public async Task<IFile> GetFileByServerRelativeUrlBatchAsync(string serverRelativeUrl)
+        {
+            return await GetFileByServerRelativeUrlBatchAsync(PnPContext.CurrentBatch, serverRelativeUrl).ConfigureAwait(false);
+        }
+
+        private static ApiCall BuildGetFileByRelativeUrlApiCall(string serverRelativeUrl)
+        {
+            // NOTE WebUtility encode spaces to "+" instead of %20
+            string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl).Replace("+", "%20");
+            var apiCall = new ApiCall($"_api/Web/getFileByServerRelativeUrl('{encodedServerRelativeUrl}')", ApiType.SPORest);
+            return apiCall;
+        }
+        #endregion
+
         #endregion
     }
 }

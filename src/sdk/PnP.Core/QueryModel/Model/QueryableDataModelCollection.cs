@@ -18,6 +18,7 @@ namespace PnP.Core.QueryModel.Model
                 typeof(Core.Model.SharePoint.IContentType),
                 typeof(Core.Model.SharePoint.IField),
                 typeof(Core.Model.SharePoint.IFolder),
+                typeof(Core.Model.SharePoint.IFile),
                 typeof(Core.Model.SharePoint.IWeb),
                 typeof(Core.Model.Teams.ITeamChannel),
                 typeof(Core.Model.Teams.ITeamChatMessage)

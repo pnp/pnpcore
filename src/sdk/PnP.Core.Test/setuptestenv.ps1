@@ -5,6 +5,7 @@ Creates the needed sites (communitation site with sub site + group connected tea
 This script creates:
 - A communication site named pnpcoresdktest with a sub site named subsite
 - A modern team site which uses the group name pnpcoresdktestgroup and has a sub site anmed subsite. The group connected to this site also does have a Team connected (teamified site)
+    - a test document named test.docx
 
 .EXAMPLE
 PS C:\> .\setuptestenv.ps1
@@ -49,9 +50,11 @@ $tenantContext = Connect-PnPOnline -Url $tenantUrl -Credentials $credentials -Ve
 
 # Create test site without a group 
 $pnpTestSite = New-PnPSite -Type CommunicationSite -Title "PnP Microsoft 365 library test" -Url  "https://$tenantName.sharepoint.com/sites/pnpcoresdktest"  -Wait -Connection $tenantContext
-# Add sub site 
+# Connect to created site
 Connect-PnPOnline -Url $pnpTestSite -Credentials $credentials
+# Add sub site 
 New-PnPWeb -Title "Sub site" -Url "subsite" -Locale 1033 -Template "STS#3"
+
 
 # Create test site with group
 $pnpTestSiteWithGroup = New-PnPSite -Type TeamSite -Title "PnP Microsoft 365 library test with group" -Alias pnpcoresdktestgroup -IsPublic -Wait -Connection $tenantContext
@@ -59,6 +62,8 @@ $pnpTestSiteWithGroup = New-PnPSite -Type TeamSite -Title "PnP Microsoft 365 lib
 Connect-PnPOnline -Url $pnpTestSiteWithGroup -Credentials $credentials
 # Teamify the site
 Add-PnPTeamsTeam
+# Create test document in default documents Library
+Add-PnPFile -Path .\TestAssets\test.docx -Folder "Shared Documents"  
 # Add sub site 
 New-PnPWeb -Title "Sub site" -Url "subsite" -Locale 1033 -Template "STS#3"
 
