@@ -354,7 +354,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task CheckinFileWithBatchTest()
         {
             // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
