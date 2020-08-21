@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
 using System;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -322,6 +323,74 @@ namespace PnP.Core.Model.SharePoint
             var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest);
 
             await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+        #endregion
+
+        #region CopyTo
+        public async Task CopyToAsync(string destinationServerRelativeUrl, bool overwrite = false)
+        {
+            var apiCall = CopyMoveHelper.GetCopyToApiCall(this, destinationServerRelativeUrl, overwrite);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void CopyTo(string destinationServerRelativeUrl, bool overwrite = false)
+        {
+            CopyToAsync(destinationServerRelativeUrl, overwrite).GetAwaiter().GetResult();
+        }
+
+        public async Task CopyToBatchAsync(Batch batch, string destinationServerRelativeUrl, bool overwrite = false)
+        {
+            var apiCall = CopyMoveHelper.GetCopyToApiCall(this, destinationServerRelativeUrl, overwrite);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void CopyToBatch(Batch batch, string destinationServerRelativeUrl, bool overwrite = false)
+        {
+            CopyToBatchAsync(batch, destinationServerRelativeUrl, overwrite).GetAwaiter().GetResult();
+        }
+
+        public async Task CopyToBatchAsync(string destinationServerRelativeUrl, bool overwrite = false)
+        {
+            await CopyToBatchAsync(PnPContext.CurrentBatch, destinationServerRelativeUrl, overwrite).ConfigureAwait(false);
+        }
+
+        public void CopyToBatch(string destinationServerRelativeUrl, bool overwrite = false)
+        {
+            CopyToBatchAsync(destinationServerRelativeUrl, overwrite).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region MoveTo
+        public async Task MoveToAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        {
+            var apiCall = CopyMoveHelper.GetMoveToApiCall(this, destinationServerRelativeUrl, moveOperations);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void MoveTo(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        {
+            MoveToAsync(destinationServerRelativeUrl, moveOperations).GetAwaiter().GetResult();
+        }
+
+        public async Task MoveToBatchAsync(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        {
+            var apiCall = CopyMoveHelper.GetMoveToApiCall(this, destinationServerRelativeUrl, moveOperations);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void MoveToBatch(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        {
+            MoveToBatchAsync(batch, destinationServerRelativeUrl, moveOperations).GetAwaiter().GetResult();
+        }
+
+        public async Task MoveToBatchAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        {
+            await MoveToBatchAsync(PnPContext.CurrentBatch, destinationServerRelativeUrl, moveOperations).ConfigureAwait(false);
+        }
+
+        public void MoveToBatch(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        {
+            MoveToBatchAsync(destinationServerRelativeUrl, moveOperations).GetAwaiter().GetResult();
         }
         #endregion
 

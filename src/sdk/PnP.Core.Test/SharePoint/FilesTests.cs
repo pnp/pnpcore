@@ -425,7 +425,101 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task CopyFileTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_copied.docx";
+                await testDocument.CopyToAsync(destinationServerRelativeUrl, true);
+
+                IFile foundCopiedDocument = await context.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundCopiedDocument);
+                Assert.AreEqual("test_copied.docx", foundCopiedDocument.Name);
+
+                // Delete the copied file
+                await foundCopiedDocument.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task CopyFileWithBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_copied_with_batch.docx";
+                await testDocument.CopyToBatchAsync(destinationServerRelativeUrl, true);
+                await context.ExecuteAsync();
+
+                IFile foundCopiedDocument = await context.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundCopiedDocument);
+                Assert.AreEqual("test_copied_with_batch.docx", foundCopiedDocument.Name);
+
+                // Delete the copied file
+                await foundCopiedDocument.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task MoveFileTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile originalDoc = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                string filetoMoveServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_to_move.docx";
+                await originalDoc.CopyToAsync(filetoMoveServerRelativeUrl, true);
+                IFile fileToMove = await context.Web.GetFileByServerRelativeUrlAsync(filetoMoveServerRelativeUrl);
+
+                string movedFileServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/moved_test.docx";
+                await fileToMove.MoveToAsync(movedFileServerRelativeUrl, MoveOperations.Overwrite);
+
+                IFile movedFile = await context.Web.GetFileByServerRelativeUrlAsync(movedFileServerRelativeUrl);
+
+                Assert.IsNotNull(movedFile);
+                Assert.AreEqual("moved_test.docx", movedFile.Name);
+
+                // Delete the moved file
+                await movedFile.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task MoveFileBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile originalDoc = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                string filetoMoveServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_to_move.docx";
+                await originalDoc.CopyToAsync(filetoMoveServerRelativeUrl, true);
+                IFile fileToMove = await context.Web.GetFileByServerRelativeUrlAsync(filetoMoveServerRelativeUrl);
+
+                string movedFileServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/moved_test_with_batch.docx";
+                await fileToMove.MoveToBatchAsync(movedFileServerRelativeUrl, MoveOperations.Overwrite);
+                await context.ExecuteAsync();
+
+                IFile movedFile = await context.Web.GetFileByServerRelativeUrlAsync(movedFileServerRelativeUrl);
+
+                Assert.IsNotNull(movedFile);
+                Assert.AreEqual("moved_test_with_batch.docx", movedFile.Name);
+
+                // Delete the moved file
+                await movedFile.DeleteAsync();
+            }
+        }
 
         // TODO Uncomment when the AddAsync is properly implemented without batch call
         //[TestMethod]

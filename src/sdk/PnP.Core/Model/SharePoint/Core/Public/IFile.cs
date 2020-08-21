@@ -189,40 +189,40 @@ namespace PnP.Core.Model.SharePoint
         #region Publish
         /// <summary>
         /// Publish a major version of the current file.
-        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// <param name="comment">The comments to add on file publishing.</param>
         /// </summary>
         Task PublishAsync(string comment = null);
 
         /// <summary>
         /// Publish a major version of the current file.
-        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// <param name="comment">The comments to add on file publishing.</param>
         /// </summary>
         void Publish(string comment = null);
 
         /// <summary>
         /// Publish a major version of the current file.
-        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// <param name="comment">The comments to add on file publishing.</param>
         /// </summary>
         Task PublishBatchAsync(string comment = null);
 
         /// <summary>
         /// Publish a major version of the current file.
-        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// <param name="comment">The comments to add on file publishing.</param>
         /// </summary>
         void PublishBatch(string comment = null);
 
 
         /// <summary>
         /// Publish a major version of the current file.
-        /// <paramref name="batch">The batch instance to use.</paramref>
-        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="comment">The comments to add on file publishing.</param>
         /// </summary>
         Task PublishBatchAsync(Batch batch, string comment = null);
 
         /// <summary>
         /// Publish a major version of the current file.
-        /// <paramref name="batch">The batch instance to use.</paramref>
-        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="comment">The comments to add on file publishing.</param>
         /// </summary>
         void PublishBatch(Batch batch, string comment = null);
         #endregion
@@ -230,40 +230,40 @@ namespace PnP.Core.Model.SharePoint
         #region Unpublish
         /// <summary>
         /// Unpublish the latest major version of the current file.
-        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// <param name="comment">The comments to add on file unpublishing.</param>
         /// </summary>
         Task UnpublishAsync(string comment = null);
 
         /// <summary>
         /// Unpublish the latest major version of the current file.
-        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// <param name="comment">The comments to add on file unpublishing.</param>
         /// </summary>
         void Unpublish(string comment = null);
 
         /// <summary>
         /// Unpublish the latest major version of the current file.
-        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// <param name="comment">The comments to add on file unpublishing.</param>
         /// </summary>
         Task UnpublishBatchAsync(string comment = null);
 
         /// <summary>
         /// Unpublish the latest major version of the current file.
-        /// <paramref name="comments">The comments to add on file unpublishing.</paramref>
+        /// <param name="comments">The comments to add on file unpublishing.</param>
         /// </summary>
         void UnpublishBatch(string comments = null);
 
 
         /// <summary>
         /// Unpublish the latest major version of the current file.
-        /// <paramref name="batch">The batch instance to use.</paramref>
-        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="comment">The comments to add on file unpublishing.</param>
         /// </summary>
         Task UnpublishBatchAsync(Batch batch, string comment = null);
 
         /// <summary>
         /// Unpublish the latest major version of the current file.
-        /// <paramref name="batch">The batch instance to use.</paramref>
-        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="comment">The comments to add on file unpublishing.</param>
         /// </summary>
         void UnpublishBatch(Batch batch, string comment = null);
         #endregion
@@ -291,13 +291,13 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Checks out the file.
-        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
         /// </summary>
         Task CheckoutBatchAsync(Batch batch);
 
         /// <summary>
         /// Checks out the file.
-        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
         /// </summary>
         void CheckoutBatch(Batch batch);
         #endregion
@@ -325,13 +325,13 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Release the checked out file without saving the changes.
-        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
         /// </summary>
         Task UndoCheckoutBatchAsync(Batch batch);
 
         /// <summary>
         /// Release the checked out file without saving the changes.
-        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
         /// </summary>
         void UndoCheckoutBatch(Batch batch);
         #endregion
@@ -339,56 +339,142 @@ namespace PnP.Core.Model.SharePoint
         #region Checkin
         /// <summary>
         /// Checks in the file.
-        /// <paramref name="comment">The check in comment.</paramref>
-        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// <param name="comment">The check in comment.</param>
+        /// <param name="checkinType">The type of check in to use.</param>
         /// </summary>
         Task CheckinAsync(string comment=null, CheckinType checkinType = CheckinType.MinorCheckIn);
 
         /// <summary>
         /// Checks in the file.
-        /// <paramref name="comment">The check in comment.</paramref>
-        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// <param name="comment">The check in comment.</param>
+        /// <param name="checkinType">The type of check in to use.</param>
         /// </summary>
         void Checkin(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
 
         /// <summary>
         /// Checks in the file.
-        /// <paramref name="comment">The check in comment.</paramref>
-        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// <param name="comment">The check in comment.</param>
+        /// <param name="checkinType">The type of check in to use.</param>
         /// </summary>
         Task CheckinBatchAsync(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
 
         /// <summary>
         /// Checks in the file.
-        /// <paramref name="comment">The check in comment.</paramref>
-        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// <param name="comment">The check in comment.</param>
+        /// <param name="checkinType">The type of check in to use.</param>
         /// </summary>
         void CheckinBatch(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
 
         /// <summary>
         /// Checks in the file.
-        /// <paramref name="comment">The check in comment.</paramref>
-        /// <paramref name="checkinType">The type of check in to use.</paramref>
-        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <param name="comment">The check in comment.</param>
+        /// <param name="checkinType">The type of check in to use.</param>
+        /// <param name="batch">The batch instance to use.</param>
         /// </summary>
         Task CheckinBatchAsync(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
 
         /// <summary>
         /// Checks in the file.
-        /// <paramref name="comment">The check in comment.</paramref>
-        /// <paramref name="checkinType">The type of check in to use.</paramref>
-        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <param name="comment">The check in comment.</param>
+        /// <param name="checkinType">The type of check in to use.</param>
+        /// <param name="batch">The batch instance to use.</param>
         /// </summary>
         void CheckinBatch(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
         #endregion
 
-        #region MoveTo
-        // TODO To add
+        #region CopyTo
+        /// <summary>
+        /// Copies a file to the destination URL.
+        /// </summary>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
+        Task CopyToAsync(string destinationServerRelativeUrl, bool overwrite=false);
+
+        /// <summary>
+        /// Copies a file to the destination URL.
+        /// </summary>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
+        void CopyTo(string destinationServerRelativeUrl, bool overwrite=false);
+
+        /// <summary>
+        /// Copies a file to the destination URL.
+        /// </summary>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
+        Task CopyToBatchAsync(string destinationServerRelativeUrl, bool overwrite=false);
+
+        /// <summary>
+        /// Copies a file to the destination URL.
+        /// </summary>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
+        void CopyToBatch(string destinationServerRelativeUrl, bool overwrite=false);
+
+        /// <summary>
+        /// Copies a file to the destination URL.
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
+        Task CopyToBatchAsync(Batch batch, string destinationServerRelativeUrl, bool overwrite = false);
+
+        /// <summary>
+        /// Copies a file to the destination URL.
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
+        void CopyToBatch(Batch batch, string destinationServerRelativeUrl, bool overwrite = false);
         #endregion
 
-        #region CopyTo
-        // TODO To add
+        #region MoveTo
+        /// <summary>
+        /// Move a file to the destination URL.
+        /// </summary>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
+        Task MoveToAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+
+        /// <summary>
+        /// Move a file to the destination URL.
+        /// </summary>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
+        void MoveTo(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+
+        /// <summary>
+        /// Move a file to the destination URL.
+        /// </summary>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
+        Task MoveToBatchAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+
+        /// <summary>
+        /// Move a file to the destination URL.
+        /// </summary>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
+        void MoveToBatch(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+
+        /// <summary>
+        /// Move a file to the destination URL.
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
+        Task MoveToBatchAsync(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+
+        /// <summary>
+        /// Move a file to the destination URL.
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
+        void MoveToBatch(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
         #endregion
+
+
 
         #region Recycle
         /// <summary>
@@ -416,13 +502,13 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Send the file to recycle bin.
         /// </summary>
-        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
         Task RecycleBatchAsync(Batch batch);
 
         /// <summary>
         /// Send the file to recycle bin
         /// </summary>
-        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <param name="batch">The batch instance to use.</param>
         void RecycleBatch(Batch batch);
         #endregion
     }
