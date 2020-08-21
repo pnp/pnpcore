@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
-using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.QueryModel;
-using System.Collections.Generic;
+using System;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -223,7 +222,53 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task RecycleFileTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // TODO : When the capability is added, add a mock document to recycle
 
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                Guid recycleBinId = await testDocument.RecycleAsync();
+
+                Assert.AreNotEqual(Guid.Empty, recycleBinId);
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleFileWithBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // TODO : When the capability is added, add a mock document to recycle
+
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                await testDocument.RecycleBatchAsync();
+                await context.ExecuteAsync();
+            }
+
+            // Use a second context to make sure the file is reloaded from SharePoint
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                try
+                {
+                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                    Assert.Fail("The document was found and should not");
+                }
+                catch (SharePointRestServiceException serviceException)
+                {
+                    Assert.AreEqual(404, ((SharePointRestError)serviceException.Error).HttpResponseCode);
+                }
+            }
+        }
 
         // TODO Uncomment when the AddAsync is properly implemented without batch call
         //[TestMethod]

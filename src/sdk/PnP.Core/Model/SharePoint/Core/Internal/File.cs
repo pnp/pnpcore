@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
+using System;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -68,12 +70,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task PublishBatchAsync(string comment = null)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
-            string publishEndpointUrl = $"{entity.SharePointUri}/publish(comment='{comment ?? string.Empty}')";
-
-            var apiCall = new ApiCall(publishEndpointUrl, ApiType.SPORest);
-
-            await RawRequestBatchAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await PublishBatchAsync(PnPContext.CurrentBatch, comment).ConfigureAwait(false);
         }
 
         public void PublishBatch(string comment = null)
@@ -120,12 +117,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task UnpublishBatchAsync(string comment = null)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
-            string publishEndpointUrl = $"{entity.SharePointUri}/unpublish(comment='{comment ?? string.Empty}')";
-
-            var apiCall = new ApiCall(publishEndpointUrl, ApiType.SPORest);
-
-            await RawRequestBatchAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await UnpublishBatchAsync(PnPContext.CurrentBatch, comment).ConfigureAwait(false);
         }
 
         public async Task UnpublishBatchAsync(Batch batch, string comment = null)
@@ -143,6 +135,68 @@ namespace PnP.Core.Model.SharePoint
             UnpublishBatchAsync(comment).GetAwaiter().GetResult();
         }
         #endregion
+
+        #region Recycle
+
+        public Guid Recycle()
+        {
+            return RecycleAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<Guid> RecycleAsync()
+        {
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            string recycleEndpointUrl = $"{entity.SharePointUri}/recycle";
+
+            var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
+                if (document.TryGetProperty("d", out JsonElement root))
+                {
+                    if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
+                    {
+                        // Remove this item from the lists collection
+                        RemoveFromParentCollection();
+
+                        // return the recyclebin item id
+                        return recycleBinItemId.GetGuid();
+                    }
+                }
+            }
+
+            return Guid.Empty;
+        }
+
+        public void RecycleBatch()
+        {
+            RecycleBatchAsync().GetAwaiter().GetResult();
+        }
+
+        public void RecycleBatch(Batch batch)
+        {
+            RecycleBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task RecycleBatchAsync()
+        {
+            await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public async Task RecycleBatchAsync(Batch batch)
+        {
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            string recycleEndpointUrl = $"{entity.SharePointUri}/recycle";
+
+            var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest);
+
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+        #endregion
+
         #endregion
     }
 }

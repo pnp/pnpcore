@@ -267,5 +267,41 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         void UnpublishBatch(Batch batch, string comment = null);
         #endregion
+
+        #region Recycle
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        /// <returns>The Id of the created recycle bin item</returns>
+        Task<Guid> RecycleAsync();
+
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        /// <returns>The Id of the created recycle bin item</returns>
+        Guid Recycle();
+
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        Task RecycleBatchAsync();
+
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        void RecycleBatch();
+
+        /// <summary>
+        /// Send the file to recycle bin.
+        /// </summary>
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        Task RecycleBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Send the file to recycle bin
+        /// </summary>
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        void RecycleBatch(Batch batch);
+        #endregion
     }
 }

@@ -280,8 +280,10 @@ namespace PnP.Core.Model
             Deleted = true;
 
             // Remove model object from collection
-            var parent = (IManageableCollection)((IDataModelParent)this).Parent;
-            parent.Remove(this);
+            if (((IDataModelParent)this).Parent is IManageableCollection parent)
+            {
+                parent.Remove(this);
+            }
         }
 
         private void CheckDeleted()

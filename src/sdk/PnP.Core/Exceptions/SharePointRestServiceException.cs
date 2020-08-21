@@ -3,7 +3,7 @@
 namespace PnP.Core
 {
     /// <summary>
-    /// Microsoft Graph Service exception
+    /// Microsoft SharePoint REST Service exception
     /// </summary>
     public class SharePointRestServiceException : ServiceException
     {
