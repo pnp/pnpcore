@@ -12,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
     {
         public string CheckInComment { get => GetValue<string>(); set => SetValue(value); }
 
-        public int CheckOutType { get => GetValue<int>(); set => SetValue(value); }
+        public CheckOutType CheckOutType { get => GetValue<CheckOutType>(); set => SetValue(value); }
 
         public string ContentTag { get => GetValue<string>(); set => SetValue(value); }
 

@@ -19,7 +19,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets a value that specifies the type of check out associated with the file.
         /// </summary>
-        public int CheckOutType { get; }
+        public CheckOutType CheckOutType { get; }
 
         /// <summary>
         /// Returns internal version of content, used to validate document equality for read purposes.
@@ -266,6 +266,54 @@ namespace PnP.Core.Model.SharePoint
         /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
         /// </summary>
         void UnpublishBatch(Batch batch, string comment = null);
+        #endregion
+
+        #region Checkout
+        /// <summary>
+        /// Checks out the file.
+        /// </summary>
+        Task CheckoutAsync();
+
+        /// <summary>
+        /// Checks out the file.
+        /// </summary>
+        void Checkout();
+
+        /// <summary>
+        /// Checks out the file.
+        /// </summary>
+        Task CheckoutBatchAsync();
+
+        /// <summary>
+        /// Checks out the file.
+        /// </summary>
+        void CheckoutBatch();
+
+        /// <summary>
+        /// Checks out the file.
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// </summary>
+        Task CheckoutBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Checks out the file.
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// </summary>
+        void CheckoutBatch(Batch batch);
+        #endregion
+
+        #region UndoCheckout
+        #endregion
+
+        #region Checkin
+        #endregion
+
+        #region MoveTo
+        // TODO To add
+        #endregion
+
+        #region CopyTo
+        // TODO To add
         #endregion
 
         #region Recycle

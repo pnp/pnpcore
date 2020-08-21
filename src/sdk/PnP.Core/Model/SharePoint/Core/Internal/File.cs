@@ -27,6 +27,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     case nameof(CustomizedPageStatus): return JsonMappingHelper.ToEnum<CustomizedPageStatus>(input.JsonElement);
                     case nameof(PageRenderType): return JsonMappingHelper.ToEnum<ListPageRenderType>(input.JsonElement);
+                    case nameof(CheckOutType): return JsonMappingHelper.ToEnum<CheckOutType>(input.JsonElement);
                 }
 
                 input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
@@ -133,6 +134,48 @@ namespace PnP.Core.Model.SharePoint
         public void UnpublishBatch(string comment = null)
         {
             UnpublishBatchAsync(comment).GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Checkout
+        public async Task CheckoutAsync()
+        {
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            string checkoutEndpointUrl = $"{entity.SharePointUri}/checkout";
+
+            var apiCall = new ApiCall(checkoutEndpointUrl, ApiType.SPORest);
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void Checkout()
+        {
+            CheckoutAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task CheckoutBatchAsync()
+        {
+            await CheckoutBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public void CheckoutBatch()
+        {
+            CheckoutBatchAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task CheckoutBatchAsync(Batch batch)
+        {
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            string checkoutEndpointUrl = $"{entity.SharePointUri}/checkout";
+
+            var apiCall = new ApiCall(checkoutEndpointUrl, ApiType.SPORest);
+
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void CheckoutBatch(Batch batch)
+        {
+            CheckoutBatchAsync(batch).GetAwaiter().GetResult();
         }
         #endregion
 
