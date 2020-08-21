@@ -303,6 +303,37 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region UndoCheckout
+        /// <summary>
+        /// Release the checked out file without saving the changes.
+        /// </summary>
+        Task UndoCheckoutAsync();
+
+        /// <summary>
+        /// Release the checked out file without saving the changes.
+        /// </summary>
+        void UndoCheckout();
+
+        /// <summary>
+        /// Release the checked out file without saving the changes.
+        /// </summary>
+        Task UndoCheckoutBatchAsync();
+
+        /// <summary>
+        /// Release the checked out file without saving the changes.
+        /// </summary>
+        void UndoCheckoutBatch();
+
+        /// <summary>
+        /// Release the checked out file without saving the changes.
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// </summary>
+        Task UndoCheckoutBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Release the checked out file without saving the changes.
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// </summary>
+        void UndoCheckoutBatch(Batch batch);
         #endregion
 
         #region Checkin

@@ -179,6 +179,48 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region UndoCheckout
+        public void UndoCheckout()
+        {
+            UndoCheckoutAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task UndoCheckoutAsync()
+        {
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            string undoCheckoutEndpointUrl = $"{entity.SharePointUri}/undoCheckout";
+
+            var apiCall = new ApiCall(undoCheckoutEndpointUrl, ApiType.SPORest);
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void UndoCheckoutBatch()
+        {
+            UndoCheckoutBatchAsync().GetAwaiter().GetResult();
+        }
+
+        public void UndoCheckoutBatch(Batch batch)
+        {
+            UndoCheckoutBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task UndoCheckoutBatchAsync()
+        {
+            await UndoCheckoutBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public async Task UndoCheckoutBatchAsync(Batch batch)
+        {
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            string undoCheckoutEndpointUrl = $"{entity.SharePointUri}/undoCheckout";
+
+            var apiCall = new ApiCall(undoCheckoutEndpointUrl, ApiType.SPORest);
+
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+        #endregion
+
         #region Recycle
 
         public Guid Recycle()

@@ -1,0 +1,9 @@
+--batchresponse_c4338b00-3ed3-4452-98e9-69c3cf4468c8
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"CheckOut":null}}
+--batchresponse_c4338b00-3ed3-4452-98e9-69c3cf4468c8--

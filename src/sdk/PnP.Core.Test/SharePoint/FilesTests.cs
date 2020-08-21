@@ -244,7 +244,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
 
                 // Undo checkout of the file
-                //testDocument.UndoCheckout();
+                await testDocument.UndoCheckoutAsync();
             }
         }
 
@@ -252,7 +252,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task CheckoutFileWithBatchTest()
         {
             // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
@@ -271,7 +271,56 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
 
                 // Undo checkout of the file
-                //testDocument.UndoCheckout();
+                await testDocument.UndoCheckoutAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task UndoCheckoutFileTest()
+        {
+            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                await testDocument.CheckoutAsync();
+                await testDocument.UndoCheckoutAsync();
+            }
+
+            // Use a different context to make sure the file is reloaded
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+            }
+        }
+
+        [TestMethod]
+        public async Task UndoCheckoutFileWithBatchTest()
+        {
+            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                await testDocument.CheckoutAsync();
+                await testDocument.UndoCheckoutBatchAsync();
+                await context.ExecuteAsync();
+            }
+
+            // Use a different context to make sure the file is reloaded
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
             }
         }
 
@@ -322,6 +371,8 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
         }
+
+
 
         // TODO Uncomment when the AddAsync is properly implemented without batch call
         //[TestMethod]
