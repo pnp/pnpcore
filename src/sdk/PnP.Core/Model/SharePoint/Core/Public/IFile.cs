@@ -1,4 +1,7 @@
+using PnP.Core.Services;
 using System;
+using System.Security.Policy;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -182,5 +185,87 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IFileVersionCollection Versions { get; }
+
+        #region Publish
+        /// <summary>
+        /// Publish a major version of the current file.
+        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// </summary>
+        Task PublishAsync(string comment = null);
+
+        /// <summary>
+        /// Publish a major version of the current file.
+        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// </summary>
+        void Publish(string comment = null);
+
+        /// <summary>
+        /// Publish a major version of the current file.
+        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// </summary>
+        Task PublishBatchAsync(string comment = null);
+
+        /// <summary>
+        /// Publish a major version of the current file.
+        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// </summary>
+        void PublishBatch(string comment = null);
+
+
+        /// <summary>
+        /// Publish a major version of the current file.
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// </summary>
+        Task PublishBatchAsync(Batch batch, string comment = null);
+
+        /// <summary>
+        /// Publish a major version of the current file.
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <paramref name="comment">The comments to add on file publishing.</paramref>
+        /// </summary>
+        void PublishBatch(Batch batch, string comment = null);
+        #endregion
+
+        #region Unpublish
+        /// <summary>
+        /// Unpublish the latest major version of the current file.
+        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// </summary>
+        Task UnpublishAsync(string comment = null);
+
+        /// <summary>
+        /// Unpublish the latest major version of the current file.
+        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// </summary>
+        void Unpublish(string comment = null);
+
+        /// <summary>
+        /// Unpublish the latest major version of the current file.
+        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// </summary>
+        Task UnpublishBatchAsync(string comment = null);
+
+        /// <summary>
+        /// Unpublish the latest major version of the current file.
+        /// <paramref name="comments">The comments to add on file unpublishing.</paramref>
+        /// </summary>
+        void UnpublishBatch(string comments = null);
+
+
+        /// <summary>
+        /// Unpublish the latest major version of the current file.
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// </summary>
+        Task UnpublishBatchAsync(Batch batch, string comment = null);
+
+        /// <summary>
+        /// Unpublish the latest major version of the current file.
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// <paramref name="comment">The comments to add on file unpublishing.</paramref>
+        /// </summary>
+        void UnpublishBatch(Batch batch, string comment = null);
+        #endregion
     }
 }
