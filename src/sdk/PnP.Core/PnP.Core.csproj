@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Model\SharePoint\Navigation\" />
-    <Folder Include="Model\SharePoint\Taxonomy\" />
     <Folder Include="Model\SharePoint\UI\" />
   </ItemGroup>
 

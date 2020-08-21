@@ -230,6 +230,14 @@ namespace PnP.Core.Model
                 {
                     return true;
                 }
+
+                // Always assume generic lists have changed
+                // TODO: built custom list that handles change tracking
+                if (value.GetType().Name == "List`1")
+                {
+                    return true;
+                }
+
             }
 
             return false;

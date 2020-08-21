@@ -506,7 +506,7 @@ namespace PnP.Core.Services
                         ProcessComplexType(pnpObject, contextAwareObject, property, entityField);
                     }
                     // Are we loading a list of complex types
-                    else if (IsGenericList(entityField.PropertyInfo.PropertyType))
+                    else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
                     {
                         // Get the actual current value of the property we're setting...as that allows to detect it's type
                         var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
@@ -913,24 +913,86 @@ namespace PnP.Core.Services
                 return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger));
             }
 
-            switch (propertyType.FullName)
+            switch (propertyType.Name)
             {
-                case "System.String":
+                case "String":
                     {
                         return jsonElement.GetString();
                     }
-                case "System.String[]":
+                case "String[]":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Array)
                         {
-                            return new string[0];
+                            return Array.Empty<string>();
                         }
                         else
                         {
                             return jsonElement.EnumerateArray().Select(item => item.GetString()).ToArray();
                         }
                     }
-                case "System.Boolean":
+                case "List`1":
+                    {
+                        if (jsonElement.ValueKind != JsonValueKind.Array)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            // Generic list does have a type, we support the types that can be delivered by the parser
+                            switch (propertyType.GenericTypeArguments[0].Name)
+                            {
+                                case "String":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetString()).ToList();
+                                    }
+                                case "Int32":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetInt32()).ToList();
+                                    }
+                                case "Int16":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetInt16()).ToList();
+                                    }
+                                case "Int64":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetInt64()).ToList();
+                                    }
+                                case "UInt32":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetUInt32()).ToList();
+                                    }
+                                case "UInt16":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetUInt16()).ToList();
+                                    }
+                                case "UInt64":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetUInt64()).ToList();
+                                    }
+                                case "Double":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetDouble()).ToList();
+                                    }
+                                case "Guid":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetGuid()).ToList();
+                                    }
+                                case "Boolean":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetBoolean()).ToList();
+                                    }
+                                case "DateTimeOffset":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetDateTimeOffset()).ToList();
+                                    }
+                                default:
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetString()).ToList();
+                                    }
+                            }                            
+                        }
+                    }
+                case "Boolean":
                     {
                         if (jsonElement.ValueKind == JsonValueKind.True || jsonElement.ValueKind == JsonValueKind.False)
                         {
@@ -960,11 +1022,11 @@ namespace PnP.Core.Services
                         // last result, return default bool value
                         return false;
                     }
-                case "System.Guid":
+                case "Guid":
                     {
                         return jsonElement.GetGuid();
                     }
-                case "System.Int16":
+                case "Int16":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Number)
                         {
@@ -983,7 +1045,7 @@ namespace PnP.Core.Services
                             return jsonElement.GetInt16();
                         }
                     }
-                case "System.Int32":
+                case "Int32":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Number)
                         {
@@ -1002,7 +1064,7 @@ namespace PnP.Core.Services
                             return jsonElement.GetInt32();
                         }
                     }
-                case "System.Int64":
+                case "Int64":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Number)
                         {
@@ -1021,7 +1083,7 @@ namespace PnP.Core.Services
                             return jsonElement.GetInt64();
                         }
                     }
-                case "System.UInt16":
+                case "UInt16":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Number)
                         {
@@ -1040,7 +1102,7 @@ namespace PnP.Core.Services
                             return jsonElement.GetUInt16();
                         }
                     }
-                case "System.UInt32":
+                case "UInt32":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Number)
                         {
@@ -1059,7 +1121,7 @@ namespace PnP.Core.Services
                             return jsonElement.GetUInt32();
                         }
                     }
-                case "System.UInt64":
+                case "UInt64":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Number)
                         {
@@ -1078,7 +1140,7 @@ namespace PnP.Core.Services
                             return jsonElement.GetUInt64();
                         }
                     }
-                case "System.Double":
+                case "Double":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Number)
                         {
@@ -1096,7 +1158,7 @@ namespace PnP.Core.Services
                             return jsonElement.GetDouble();
                         }
                     }
-                case "System.Uri":
+                case "Uri":
                     {
                         var s = jsonElement.GetString();
                         if (!string.IsNullOrEmpty(s))
@@ -1108,7 +1170,7 @@ namespace PnP.Core.Services
                         }
                         return null;
                     }
-                case "System.DateTimeOffset":
+                case "DateTimeOffset":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Null)
                         {
@@ -1164,9 +1226,9 @@ namespace PnP.Core.Services
             return propertyType.ImplementsInterface(typeof(IDataModelCollection<>));
         }
 
-        internal static bool IsGenericList(Type propertyType)
+        internal static bool IsComplexTypeList(Type propertyType)
         {
-            return (propertyType.IsGenericType && (propertyType.GetGenericTypeDefinition() == typeof(List<>)));
+            return (propertyType.IsGenericType && (propertyType.GetGenericTypeDefinition() == typeof(List<>)) && propertyType.GetGenericArguments()[0].ImplementsInterface(typeof(IComplexType)));
         }
 
         internal static void TrackAndUpdateMetaData(IMetadataExtensible target, JsonProperty property)
