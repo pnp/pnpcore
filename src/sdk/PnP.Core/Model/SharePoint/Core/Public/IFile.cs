@@ -337,6 +337,49 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Checkin
+        /// <summary>
+        /// Checks in the file.
+        /// <paramref name="comment">The check in comment.</paramref>
+        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// </summary>
+        Task CheckinAsync(string comment=null, CheckinType checkinType = CheckinType.MinorCheckIn);
+
+        /// <summary>
+        /// Checks in the file.
+        /// <paramref name="comment">The check in comment.</paramref>
+        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// </summary>
+        void Checkin(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
+
+        /// <summary>
+        /// Checks in the file.
+        /// <paramref name="comment">The check in comment.</paramref>
+        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// </summary>
+        Task CheckinBatchAsync(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
+
+        /// <summary>
+        /// Checks in the file.
+        /// <paramref name="comment">The check in comment.</paramref>
+        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// </summary>
+        void CheckinBatch(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
+
+        /// <summary>
+        /// Checks in the file.
+        /// <paramref name="comment">The check in comment.</paramref>
+        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// </summary>
+        Task CheckinBatchAsync(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
+
+        /// <summary>
+        /// Checks in the file.
+        /// <paramref name="comment">The check in comment.</paramref>
+        /// <paramref name="checkinType">The type of check in to use.</paramref>
+        /// <paramref name="batch">The batch instance to use.</paramref>
+        /// </summary>
+        void CheckinBatch(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
         #endregion
 
         #region MoveTo

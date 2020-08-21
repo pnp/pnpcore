@@ -221,6 +221,49 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Checkin
+
+        public async Task CheckinAsync(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)
+        {
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            string checkinEndpointUrl = $"{entity.SharePointUri}/checkin(comment='{comment ?? string.Empty}',checkintype={(int)checkinType})";
+
+            var apiCall = new ApiCall(checkinEndpointUrl, ApiType.SPORest);
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void Checkin(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)
+        {
+            CheckinAsync(comment, checkinType).GetAwaiter().GetResult();
+        }
+
+        public void CheckinBatch(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)
+        {
+            CheckinBatchAsync(comment, checkinType).GetAwaiter().GetResult();
+        }
+
+        public void CheckinBatch(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)
+        {
+            CheckinBatchAsync(batch, comment, checkinType).GetAwaiter().GetResult();
+        }
+
+        public async Task CheckinBatchAsync(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)
+        {
+            await CheckinBatchAsync(PnPContext.CurrentBatch, comment, checkinType).ConfigureAwait(false);
+        }
+
+        public async Task CheckinBatchAsync(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)
+        {
+            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            string checkinEndpointUrl = $"{entity.SharePointUri}/checkin(comment='{comment ?? string.Empty}',checkintype={(int)checkinType})";
+
+            var apiCall = new ApiCall(checkinEndpointUrl, ApiType.SPORest);
+
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+        #endregion
+
         #region Recycle
 
         public Guid Recycle()
