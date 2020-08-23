@@ -20,6 +20,7 @@ namespace PnP.Core.Model.SharePoint
                 // this content type without having to read it again from the server
                 // TODO This might be replaced by a more generic approach ensuring the metadata on object created with CSOM API
                 AddMetadata(PnPConstants.MetaDataRestId, StringId);
+                AddMetadata(PnPConstants.MetaDataType, "SP.ContentType");
             };
 
             // Handler to construct the Add request for this content type
