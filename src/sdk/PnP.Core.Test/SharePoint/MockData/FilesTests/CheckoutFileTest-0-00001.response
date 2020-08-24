@@ -1,0 +1,9 @@
+--batchresponse_4cfe5700-fec7-456b-a7e2-db712c500c57
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"CheckOut":null}}
+--batchresponse_4cfe5700-fec7-456b-a7e2-db712c500c57--

@@ -61,12 +61,6 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string WelcomePage { get; set; }
 
-        //TODO: To implement...
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IFileCollection Files { get; }
-
         /// <summary>
         /// Gets the list item field values for the list item corresponding to the file.
         /// </summary>
@@ -93,6 +87,11 @@ namespace PnP.Core.Model.SharePoint
         /// Gets the collection of list folders contained in the list folder.
         /// </summary>
         public IFolderCollection Folders { get; }
+
+        /// <summary>
+        /// Gets the collection of files contained in the folder
+        /// </summary>
+        public IFileCollection Files { get; }
 
         /// <summary>
         /// Add a folder to the current folder.
