@@ -274,6 +274,43 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetTermSetByLinq()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var newGroup = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                // Add term set
+                var termSet = await newGroup.Sets.AddAsync("PnPSet1", "Set description");
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    var groupLoadedViaLinq2 = await context2.TermStore.Groups.GetByNameAsync(newGroupName);
+                    Assert.IsTrue(groupLoadedViaLinq2.Requested);
+
+                    var termsetLoadedViaLinq2 = await groupLoadedViaLinq2.Sets.GetByIdAsync(termSet.Id);
+                    Assert.IsTrue(termsetLoadedViaLinq2.Requested);
+                    Assert.IsTrue(termsetLoadedViaLinq2.Id == termSet.Id);
+                }
+
+                // Delete the termset
+                await termSet.DeleteAsync();
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(4000);
+                }
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task AddAndUpdateTermSets()
         {
             //TestCommon.Instance.Mocking = false;

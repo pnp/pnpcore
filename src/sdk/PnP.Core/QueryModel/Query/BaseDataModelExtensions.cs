@@ -878,6 +878,121 @@ namespace PnP.Core.QueryModel
         }
         #endregion
 
+        #region GetById for TermSets implementation
+        /// <summary>
+        /// Extension method to select a term group by id
+        /// </summary>
+        /// <param name="source">The collection of groups to get the group by id from</param>
+        /// <param name="id">The id to search for</param>
+        /// <returns>The resulting term group instance, if any</returns>
+        public static Core.Model.SharePoint.ITermSet GetById(
+            this IQueryable<Core.Model.SharePoint.ITermSet> source, string id)
+        {
+            // Just rely on the below overload, without providing any selector
+            return source.GetById(id, null);
+        }
+
+        /// <summary>
+        /// Extension method to select a term group by id
+        /// </summary>
+        /// <param name="source">The collection of groups to get the group by id from</param>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting term group instance, if any</returns>
+        public static Core.Model.SharePoint.ITermSet GetById(
+            this IQueryable<Core.Model.SharePoint.ITermSet> source,
+            string id,
+            params Expression<Func<Core.Model.SharePoint.ITermSet, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (id is null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            IQueryable<Core.Model.SharePoint.ITermSet> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<Core.Model.SharePoint.ITermSet, bool>> predicate = c => c.Id == id;
+
+            return source.Provider.CreateQuery<Core.Model.SharePoint.ITermSet>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.Where, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    )).ToList().FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Extension method to select a term group by id
+        /// </summary>
+        /// <param name="source">The collection of groups to get the group by id from</param>
+        /// <param name="id">The id to search for</param>
+        /// <returns>The resulting term group instance, if any</returns>
+        public static Task<Core.Model.SharePoint.ITermSet> GetByIdAsync(
+            this IQueryable<Core.Model.SharePoint.ITermSet> source, string id)
+        {
+            // Just rely on the below overload, without providing any selector
+            return source.GetByIdAsync(id, null);
+        }
+
+        /// <summary>
+        /// Extension method to select a term group by id
+        /// </summary>
+        /// <param name="source">The collection of groups to get the group by id from</param>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting term group instance, if any</returns>
+        public static Task<Core.Model.SharePoint.ITermSet> GetByIdAsync(
+            this IQueryable<Core.Model.SharePoint.ITermSet> source,
+            string id,
+            params Expression<Func<Core.Model.SharePoint.ITermSet, object>>[] selectors)
+        {
+            if (source is null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            IQueryable<Core.Model.SharePoint.ITermSet> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                foreach (var s in selectors)
+                {
+                    selectionTarget = selectionTarget.Load(s);
+                }
+            }
+
+            Expression<Func<Core.Model.SharePoint.ITermSet, bool>> predicate = l => l.Id == id;
+
+            if (!(source.Provider is IAsyncQueryProvider asyncQueryProvider))
+            {
+                throw new InvalidOperationException("Queryable source does not support async");
+            }
+
+            return asyncQueryProvider.ExecuteAsync<Task<Core.Model.SharePoint.ITermSet>>(
+                Expression.Call(
+                    null,
+                    GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
+                    ));
+        }
+        #endregion
+
         #endregion
     }
 }

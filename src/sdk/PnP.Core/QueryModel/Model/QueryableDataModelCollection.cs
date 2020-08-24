@@ -20,6 +20,7 @@ namespace PnP.Core.QueryModel.Model
                 typeof(Core.Model.SharePoint.IFolder),
                 typeof(Core.Model.SharePoint.IWeb),
                 typeof(Core.Model.SharePoint.ITermGroup),
+                typeof(Core.Model.SharePoint.ITermSet),
                 typeof(Core.Model.Teams.ITeamChannel),
                 typeof(Core.Model.Teams.ITeamChatMessage)
             };
