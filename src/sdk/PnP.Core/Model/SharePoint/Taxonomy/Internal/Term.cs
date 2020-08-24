@@ -1,6 +1,8 @@
 ﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -81,6 +83,54 @@ namespace PnP.Core.Model.SharePoint
             var request = await ApiHelper.ParseApiRequestAsync(this, $"termstore/sets/{Set.Id}/terms/{{GraphId}}").ConfigureAwait(false);
             var apiCall = new ApiCall(request, ApiType.GraphBeta, apiCallRequest.ApiCall.JsonBody);
             return new ApiCallRequest(apiCall);
+        }
+
+        public void AddLabelAndDescription(string label, string languageTag, bool isDefault = false, string description = null)
+        {
+            if (string.IsNullOrEmpty(label))
+            {
+                throw new ArgumentNullException(nameof(label));
+            }
+
+            if (string.IsNullOrEmpty(languageTag))
+            {
+                throw new ArgumentNullException(nameof(languageTag));
+            }
+
+            // Is there already a value for the provided language
+            var labelSet = Labels.FirstOrDefault(p => p.LanguageTag == languageTag);
+            if (labelSet != null)
+            {
+                // Update
+                labelSet.Name = label;
+                labelSet.IsDefault = isDefault;
+                if (description != null)
+                {
+                    AddDescription(languageTag, description);
+                }
+            }
+            else
+            {
+                // Add
+                Labels.Add(new TermLocalizedLabel() { Name = label, LanguageTag = languageTag, IsDefault = isDefault });
+                if (description != null)
+                {
+                    AddDescription(languageTag, description);
+                }
+            }
+        }
+
+        private void AddDescription(string languageTag, string description)
+        {
+            var descriptionSet = Descriptions.FirstOrDefault(p => p.LanguageTag == languageTag);
+            if (descriptionSet != null)
+            {
+                descriptionSet.Description = description;
+            }
+            else
+            {
+                Descriptions.Add(new TermLocalizedDescription() { Description = description, LanguageTag = languageTag });
+            }
         }
     }
 }

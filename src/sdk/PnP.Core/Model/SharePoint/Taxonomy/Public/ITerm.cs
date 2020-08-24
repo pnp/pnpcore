@@ -44,5 +44,14 @@ namespace PnP.Core.Model.SharePoint
         /// Collection of child terms of this term
         /// </summary>
         public ITermCollection Children { get; }
+
+        /// <summary>
+        /// Adds a term label and optional description for a given language
+        /// </summary>
+        /// <param name="label">Label for the term</param>
+        /// <param name="languageTag">Language tag for the label and description</param>
+        /// <param name="isDefault">Will this be the default label?</param>
+        /// <param name="description">Optional description to set</param>
+        public void AddLabelAndDescription(string label, string languageTag, bool isDefault = false, string description = null);
     }
 }
