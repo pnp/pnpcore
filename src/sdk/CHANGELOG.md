@@ -39,6 +39,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support for list and web folders #78 [ypcode - Yannick Plennevaux]
 - Test cases for the Teams model #95 [JarbasHorst - Jarbas Horst]
 - Basic Taxonomy support using the Graph API (pending work: relations, properties) [jansenbe - Bert Jansen]
+- Support working with files [ypcode - Yannick Plennevaux]
 
 ### Changed
 

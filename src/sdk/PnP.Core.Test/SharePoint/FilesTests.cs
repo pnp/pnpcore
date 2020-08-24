@@ -3,6 +3,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System.Threading.Tasks;
 using PnP.Core.QueryModel;
+using PnP.Core.Model;
 using System;
 
 namespace PnP.Core.Test.SharePoint
@@ -30,7 +31,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual("test.docx", documentToFind.Name);
-                Assert.AreEqual($"{sharedDocumentsFolderUrl}/test.docx", documentToFind.ServerRelativeUrl);
+                Assert.IsTrue(documentToFind.ServerRelativeUrl.EndsWith("/test.docx"));
             }
         }
 
@@ -46,7 +47,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(testDocument);
                 Assert.AreEqual("test.docx", testDocument.Name);
-                Assert.AreEqual(testDocumentServerRelativeUrl, testDocument.ServerRelativeUrl);
+                Assert.IsTrue(testDocument.ServerRelativeUrl.EndsWith("/test.docx"));
             }
         }
 
@@ -64,7 +65,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(testDocument);
                 Assert.AreEqual("test.docx", testDocument.Name);
-                Assert.AreEqual(testDocumentServerRelativeUrl, testDocument.ServerRelativeUrl);
+                Assert.IsTrue(testDocument.ServerRelativeUrl.EndsWith("/test.docx"));
             }
         }
 
@@ -73,7 +74,6 @@ namespace PnP.Core.Test.SharePoint
         {
             // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
             // TODO Enable/Disable the versioning capabilities makes the versions value not reliable
-            //int currentVersion;
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -90,7 +90,7 @@ namespace PnP.Core.Test.SharePoint
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
@@ -129,7 +129,7 @@ namespace PnP.Core.Test.SharePoint
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
@@ -149,7 +149,6 @@ namespace PnP.Core.Test.SharePoint
         {
             // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
             // TODO Enable/Disable the versioning capabilities makes the versions value not reliable
-            //int currentVersion;
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -167,7 +166,7 @@ namespace PnP.Core.Test.SharePoint
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
@@ -187,7 +186,6 @@ namespace PnP.Core.Test.SharePoint
         {
             // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
             // TODO Enable/Disable the versioning capabilities makes the versions value not reliable
-            //int currentVersion;
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -207,7 +205,7 @@ namespace PnP.Core.Test.SharePoint
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
@@ -410,7 +408,7 @@ namespace PnP.Core.Test.SharePoint
             }
 
             // Use a second context to make sure the file is reloaded from SharePoint
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 try
                 {
