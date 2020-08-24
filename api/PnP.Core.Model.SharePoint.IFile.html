@@ -1,0 +1,3840 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IFile
+   | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IFile
+   | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    
+    <link rel="shortcut icon" href="../https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IFile">
+  <h1 id="PnP_Core_Model_SharePoint_IFile" data-uid="PnP.Core.Model.SharePoint.IFile">Interface IFile
+  </h1>
+  <div class="markdown level0 summary"><p>Public interface to define a File object</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+
+  
+  
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasValue_System_String_">IDataModel&lt;IFile&gt;.HasValue(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasChanged_System_String_">IDataModel&lt;IFile&gt;.HasChanged(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested">IDataModel&lt;IFile&gt;.Requested</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelParent.html#PnP_Core_Model_IDataModelParent_Parent">IDataModelParent.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelWithContext.html#PnP_Core_Model_IDataModelWithContext_PnPContext">IDataModelWithContext.PnPContext</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IFile&gt;.GetBatchAsync(Batch, Expression&lt;Func&lt;IFile, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IFile&gt;.GetBatchAsync(Expression&lt;Func&lt;IFile, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatch_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IFile&gt;.GetBatch(Batch, Expression&lt;Func&lt;IFile, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatch_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IFile&gt;.GetBatch(Expression&lt;Func&lt;IFile, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IFile&gt;.GetAsync(Expression&lt;Func&lt;IFile, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IFile&gt;.GetAsync(ApiResponse, Expression&lt;Func&lt;IFile, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IFile&gt;.Get(Expression&lt;Func&lt;IFile, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">IDataModelGet&lt;IFile&gt;.Get(ApiResponse, Expression&lt;Func&lt;IFile, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetBatchAsync(Batch, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetBatchAsync(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatch_PnP_Core_Services_Batch_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetBatch(Batch, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatch_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetBatch(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(ApiResponse, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.Get(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_PnP_Core_Services_ApiResponse_System_Linq_Expressions_Expression_System_Func_System_Object_System_Object_____">IDataModelGet.Get(ApiResponse, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatchAsync">IDataModelUpdate.UpdateBatchAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatchAsync_PnP_Core_Services_Batch_">IDataModelUpdate.UpdateBatchAsync(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateAsync">IDataModelUpdate.UpdateAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatch">IDataModelUpdate.UpdateBatch()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatch_PnP_Core_Services_Batch_">IDataModelUpdate.UpdateBatch(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_Update">IDataModelUpdate.Update()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteBatchAsync">IDataModelDelete.DeleteBatchAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteBatchAsync_PnP_Core_Services_Batch_">IDataModelDelete.DeleteBatchAsync(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteAsync">IDataModelDelete.DeleteAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteBatch">IDataModelDelete.DeleteBatch()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_DeleteBatch_PnP_Core_Services_Batch_">IDataModelDelete.DeleteBatch(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelDelete.html#PnP_Core_Model_IDataModelDelete_Delete">IDataModelDelete.Delete()</a>
+    </div>
+  </div>
+  
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.SharePoint.html">PnP.Core.Model.SharePoint</a></h6>
+  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
+  
+  <h5 id="PnP_Core_Model_SharePoint_IFile_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IFile : IDataModel&lt;IFile&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;IFile&gt;, IDataModelGet, IDataModelUpdate, IDataModelDelete</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckInComment.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckInComment%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L17" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckInComment_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckInComment*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckInComment" data-uid="PnP.Core.Model.SharePoint.IFile.CheckInComment"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckInComment" class="expander" data-toggle="collapse">CheckInComment</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckInComment" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that returns the comment used when a document is checked into a document library.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string CheckInComment { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckOutType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckOutType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L22" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckOutType_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckOutType*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckOutType" data-uid="PnP.Core.Model.SharePoint.IFile.CheckOutType"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckOutType" class="expander" data-toggle="collapse">CheckOutType</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckOutType" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies the type of check out associated with the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">CheckOutType CheckOutType { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.CheckOutType.html">CheckOutType</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_ContentTag.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.ContentTag%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_ContentTag_" data-uid="PnP.Core.Model.SharePoint.IFile.ContentTag*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_ContentTag" data-uid="PnP.Core.Model.SharePoint.IFile.ContentTag"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_ContentTag" class="expander" data-toggle="collapse">ContentTag</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_ContentTag" class="collapse in">
+  <div class="markdown level1 summary"><p>Returns internal version of content, used to validate document equality for read purposes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ContentTag { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CustomizedPageStatus.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CustomizedPageStatus%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L32" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CustomizedPageStatus_" data-uid="PnP.Core.Model.SharePoint.IFile.CustomizedPageStatus*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CustomizedPageStatus" data-uid="PnP.Core.Model.SharePoint.IFile.CustomizedPageStatus"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CustomizedPageStatus" class="expander" data-toggle="collapse">CustomizedPageStatus</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CustomizedPageStatus" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies the customization status of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">CustomizedPageStatus CustomizedPageStatus { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.CustomizedPageStatus.html">CustomizedPageStatus</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_ETag.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.ETag%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L42" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_ETag_" data-uid="PnP.Core.Model.SharePoint.IFile.ETag*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_ETag" data-uid="PnP.Core.Model.SharePoint.IFile.ETag"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_ETag" class="expander" data-toggle="collapse">ETag</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_ETag" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies the ETag value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ETag { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_Exists.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.Exists%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L47" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_Exists_" data-uid="PnP.Core.Model.SharePoint.IFile.Exists*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_Exists" data-uid="PnP.Core.Model.SharePoint.IFile.Exists"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_Exists" class="expander" data-toggle="collapse">Exists</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_Exists" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies whether the file exists.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Exists { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_IrmEnabled.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.IrmEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L52" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_IrmEnabled_" data-uid="PnP.Core.Model.SharePoint.IFile.IrmEnabled*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_IrmEnabled" data-uid="PnP.Core.Model.SharePoint.IFile.IrmEnabled"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_IrmEnabled" class="expander" data-toggle="collapse">IrmEnabled</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_IrmEnabled" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets or sets whether Irm is enabled on the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IrmEnabled { get; set; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_LinkingUri.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.LinkingUri%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L57" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_LinkingUri_" data-uid="PnP.Core.Model.SharePoint.IFile.LinkingUri*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_LinkingUri" data-uid="PnP.Core.Model.SharePoint.IFile.LinkingUri"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_LinkingUri" class="expander" data-toggle="collapse">LinkingUri</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_LinkingUri" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets the linking URI of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string LinkingUri { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_LinkingUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.LinkingUrl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L62" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_LinkingUrl_" data-uid="PnP.Core.Model.SharePoint.IFile.LinkingUrl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_LinkingUrl" data-uid="PnP.Core.Model.SharePoint.IFile.LinkingUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_LinkingUrl" class="expander" data-toggle="collapse">LinkingUrl</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_LinkingUrl" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets the linking URL of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string LinkingUrl { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_ListId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.ListId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_ListId_" data-uid="PnP.Core.Model.SharePoint.IFile.ListId*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_ListId" data-uid="PnP.Core.Model.SharePoint.IFile.ListId"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_ListId" class="expander" data-toggle="collapse">ListId</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_ListId" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets the id of the list containing the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid ListId { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_ListItemAllFields.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.ListItemAllFields%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L132" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_ListItemAllFields_" data-uid="PnP.Core.Model.SharePoint.IFile.ListItemAllFields*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_ListItemAllFields" data-uid="PnP.Core.Model.SharePoint.IFile.ListItemAllFields"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_ListItemAllFields" class="expander" data-toggle="collapse">ListItemAllFields</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_ListItemAllFields" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies the list item field values for the list item corresponding to the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IListItem ListItemAllFields { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IListItem.html">IListItem</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MajorVersion.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MajorVersion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_MajorVersion_" data-uid="PnP.Core.Model.SharePoint.IFile.MajorVersion*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MajorVersion" data-uid="PnP.Core.Model.SharePoint.IFile.MajorVersion"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MajorVersion" class="expander" data-toggle="collapse">MajorVersion</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MajorVersion" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies the major version of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int MajorVersion { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MinorVersion.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MinorVersion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L72" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_MinorVersion_" data-uid="PnP.Core.Model.SharePoint.IFile.MinorVersion*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MinorVersion" data-uid="PnP.Core.Model.SharePoint.IFile.MinorVersion"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MinorVersion" class="expander" data-toggle="collapse">MinorVersion</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MinorVersion" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies the minor version of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int MinorVersion { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_Name.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L77" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_Name_" data-uid="PnP.Core.Model.SharePoint.IFile.Name*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_Name" data-uid="PnP.Core.Model.SharePoint.IFile.Name"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_Name" class="expander" data-toggle="collapse">Name</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_Name" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets the name of the file including the extension.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Name { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_PageRenderType.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.PageRenderType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L82" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_PageRenderType_" data-uid="PnP.Core.Model.SharePoint.IFile.PageRenderType*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_PageRenderType" data-uid="PnP.Core.Model.SharePoint.IFile.PageRenderType"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_PageRenderType" class="expander" data-toggle="collapse">PageRenderType</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_PageRenderType" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets the list page render type of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ListPageRenderType PageRenderType { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.ListPageRenderType.html">ListPageRenderType</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_ServerRelativeUrl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.ServerRelativeUrl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L87" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_ServerRelativeUrl_" data-uid="PnP.Core.Model.SharePoint.IFile.ServerRelativeUrl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_ServerRelativeUrl" data-uid="PnP.Core.Model.SharePoint.IFile.ServerRelativeUrl"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_ServerRelativeUrl" class="expander" data-toggle="collapse">ServerRelativeUrl</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_ServerRelativeUrl" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets the relative URL of the file based on the URL for the server.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ServerRelativeUrl { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_SiteId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.SiteId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L92" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_SiteId_" data-uid="PnP.Core.Model.SharePoint.IFile.SiteId*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_SiteId" data-uid="PnP.Core.Model.SharePoint.IFile.SiteId"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_SiteId" class="expander" data-toggle="collapse">SiteId</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_SiteId" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets the Id of the Site collection in which the file is stored.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid SiteId { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_TimeCreated.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.TimeCreated%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L97" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_TimeCreated_" data-uid="PnP.Core.Model.SharePoint.IFile.TimeCreated*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_TimeCreated" data-uid="PnP.Core.Model.SharePoint.IFile.TimeCreated"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_TimeCreated" class="expander" data-toggle="collapse">TimeCreated</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_TimeCreated" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies when the file was created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">DateTime TimeCreated { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.datetime">DateTime</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_TimeLastModified.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.TimeLastModified%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L102" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_TimeLastModified_" data-uid="PnP.Core.Model.SharePoint.IFile.TimeLastModified*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_TimeLastModified" data-uid="PnP.Core.Model.SharePoint.IFile.TimeLastModified"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_TimeLastModified" class="expander" data-toggle="collapse">TimeLastModified</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_TimeLastModified" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies when the file was last modified.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">DateTime TimeLastModified { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.datetime">DateTime</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_Title.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L107" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_Title_" data-uid="PnP.Core.Model.SharePoint.IFile.Title*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_Title" data-uid="PnP.Core.Model.SharePoint.IFile.Title"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_Title" class="expander" data-toggle="collapse">Title</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_Title" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies the display name of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Title { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UIVersion.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UIVersion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L112" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UIVersion_" data-uid="PnP.Core.Model.SharePoint.IFile.UIVersion*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UIVersion" data-uid="PnP.Core.Model.SharePoint.IFile.UIVersion"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UIVersion" class="expander" data-toggle="collapse">UIVersion</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UIVersion" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies the implementation-specific version identifier of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int UIVersion { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UIVersionLabel.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UIVersionLabel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L117" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UIVersionLabel_" data-uid="PnP.Core.Model.SharePoint.IFile.UIVersionLabel*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UIVersionLabel" data-uid="PnP.Core.Model.SharePoint.IFile.UIVersionLabel"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UIVersionLabel" class="expander" data-toggle="collapse">UIVersionLabel</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UIVersionLabel" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets a value that specifies the implementation-specific version identifier of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string UIVersionLabel { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UniqueId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UniqueId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L122" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UniqueId_" data-uid="PnP.Core.Model.SharePoint.IFile.UniqueId*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UniqueId" data-uid="PnP.Core.Model.SharePoint.IFile.UniqueId"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UniqueId" class="expander" data-toggle="collapse">UniqueId</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UniqueId" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets the unique Id of the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid UniqueId { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_WebId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.WebId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L127" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_WebId_" data-uid="PnP.Core.Model.SharePoint.IFile.WebId*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_WebId" data-uid="PnP.Core.Model.SharePoint.IFile.WebId"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_WebId" class="expander" data-toggle="collapse">WebId</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_WebId" class="collapse in">
+  <div class="markdown level1 summary"><p>Gets the Id of the site in which the file is stored.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid WebId { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_Checkin_System_String_PnP_Core_Model_SharePoint_CheckinType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.Checkin(System.String%2CPnP.Core.Model.SharePoint.CheckinType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L352" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_Checkin_" data-uid="PnP.Core.Model.SharePoint.IFile.Checkin*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_Checkin_System_String_PnP_Core_Model_SharePoint_CheckinType_" data-uid="PnP.Core.Model.SharePoint.IFile.Checkin(System.String,PnP.Core.Model.SharePoint.CheckinType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_Checkin_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="expander" data-toggle="collapse">Checkin(String, CheckinType)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_Checkin_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks in the file.</p>
+<param name="comment">The check in comment.
+<param name="checkinType">The type of check in to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Checkin(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CheckinType.html">CheckinType</a></span>
+        <span class="parametername">checkinType</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckinAsync_System_String_PnP_Core_Model_SharePoint_CheckinType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckinAsync(System.String%2CPnP.Core.Model.SharePoint.CheckinType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L345" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckinAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckinAsync_System_String_PnP_Core_Model_SharePoint_CheckinType_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinAsync(System.String,PnP.Core.Model.SharePoint.CheckinType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckinAsync_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="expander" data-toggle="collapse">CheckinAsync(String, CheckinType)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckinAsync_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks in the file.</p>
+<param name="comment">The check in comment.
+<param name="checkinType">The type of check in to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task CheckinAsync(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CheckinType.html">CheckinType</a></span>
+        <span class="parametername">checkinType</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckinBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_CheckinType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckinBatch(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.CheckinType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L382" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckinBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckinBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_CheckinType_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.CheckinType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckinBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="expander" data-toggle="collapse">CheckinBatch(Batch, String, CheckinType)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckinBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks in the file.</p>
+<param name="comment">The check in comment.
+<param name="checkinType">The type of check in to use.
+<param name="batch">The batch instance to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void CheckinBatch(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CheckinType.html">CheckinType</a></span>
+        <span class="parametername">checkinType</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckinBatch_System_String_PnP_Core_Model_SharePoint_CheckinType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckinBatch(System.String%2CPnP.Core.Model.SharePoint.CheckinType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L366" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckinBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckinBatch_System_String_PnP_Core_Model_SharePoint_CheckinType_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinBatch(System.String,PnP.Core.Model.SharePoint.CheckinType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckinBatch_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="expander" data-toggle="collapse">CheckinBatch(String, CheckinType)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckinBatch_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks in the file.</p>
+<param name="comment">The check in comment.
+<param name="checkinType">The type of check in to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void CheckinBatch(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CheckinType.html">CheckinType</a></span>
+        <span class="parametername">checkinType</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_CheckinType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckinBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.CheckinType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L374" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_CheckinType_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.CheckinType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="expander" data-toggle="collapse">CheckinBatchAsync(Batch, String, CheckinType)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks in the file.</p>
+<param name="comment">The check in comment.
+<param name="checkinType">The type of check in to use.
+<param name="batch">The batch instance to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task CheckinBatchAsync(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CheckinType.html">CheckinType</a></span>
+        <span class="parametername">checkinType</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_System_String_PnP_Core_Model_SharePoint_CheckinType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckinBatchAsync(System.String%2CPnP.Core.Model.SharePoint.CheckinType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L359" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_System_String_PnP_Core_Model_SharePoint_CheckinType_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckinBatchAsync(System.String,PnP.Core.Model.SharePoint.CheckinType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="expander" data-toggle="collapse">CheckinBatchAsync(String, CheckinType)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckinBatchAsync_System_String_PnP_Core_Model_SharePoint_CheckinType_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks in the file.</p>
+<param name="comment">The check in comment.
+<param name="checkinType">The type of check in to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task CheckinBatchAsync(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.CheckinType.html">CheckinType</a></span>
+        <span class="parametername">checkinType</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_Checkout.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.Checkout%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L280" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_Checkout_" data-uid="PnP.Core.Model.SharePoint.IFile.Checkout*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_Checkout" data-uid="PnP.Core.Model.SharePoint.IFile.Checkout"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_Checkout" class="expander" data-toggle="collapse">Checkout()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_Checkout" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks out the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Checkout()</code></pre>
+  </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckoutAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckoutAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L275" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckoutAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckoutAsync" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutAsync" class="expander" data-toggle="collapse">CheckoutAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks out the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task CheckoutAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckoutBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckoutBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L290" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckoutBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckoutBatch" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutBatch" class="expander" data-toggle="collapse">CheckoutBatch()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutBatch" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks out the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void CheckoutBatch()</code></pre>
+  </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckoutBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckoutBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L302" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckoutBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckoutBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">CheckoutBatch(Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutBatch_PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks out the file.</p>
+<param name="batch">The batch instance to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void CheckoutBatch(Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckoutBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L285" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync" class="expander" data-toggle="collapse">CheckoutBatchAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks out the file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task CheckoutBatchAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CheckoutBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L296" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFile.CheckoutBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">CheckoutBatchAsync(Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CheckoutBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Checks out the file.</p>
+<param name="batch">The batch instance to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task CheckoutBatchAsync(Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyTo(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L398" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CopyTo_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyTo*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyTo(System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyTo(String, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void CopyTo(string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">overwrite</span>
+        <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L391" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CopyToAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToAsync(String, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task CopyToAsync(string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">overwrite</span>
+        <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L428" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch,System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToBatch(Batch, String, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void CopyToBatch(Batch batch, string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>The batch instance to use.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">overwrite</span>
+        <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L412" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToBatch(String, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void CopyToBatch(string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">overwrite</span>
+        <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L420" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToBatchAsync(Batch, String, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task CopyToBatchAsync(Batch batch, string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>The batch instance to use.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">overwrite</span>
+        <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L405" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToBatchAsync(String, Boolean)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_" class="collapse in">
+  <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task CopyToBatchAsync(string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
+        <span class="parametername">overwrite</span>
+        <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveTo(System.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L444" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_MoveTo_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveTo*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveTo(System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveTo(String, MoveOperations)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void MoveTo(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
+        <span class="parametername">moveOperations</span>
+        <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L437" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_MoveToAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToAsync(String, MoveOperations)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task MoveToAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
+        <span class="parametername">moveOperations</span>
+        <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L474" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToBatch(Batch, String, MoveOperations)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void MoveToBatch(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>The batch instance to use.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
+        <span class="parametername">moveOperations</span>
+        <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L458" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToBatch(String, MoveOperations)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void MoveToBatch(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
+        <span class="parametername">moveOperations</span>
+        <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L466" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToBatchAsync(Batch, String, MoveOperations)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task MoveToBatchAsync(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>The batch instance to use.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
+        <span class="parametername">moveOperations</span>
+        <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L451" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToBatchAsync(String, MoveOperations)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task MoveToBatchAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationServerRelativeUrl</span>
+        <p><p>The destination server relative URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
+        <span class="parametername">moveOperations</span>
+        <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_Publish_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.Publish(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L200" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_Publish_" data-uid="PnP.Core.Model.SharePoint.IFile.Publish*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_Publish_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.Publish(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_Publish_System_String_" class="expander" data-toggle="collapse">Publish(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_Publish_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Publish a major version of the current file.</p>
+<param name="comment">The comments to add on file publishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Publish(string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_PublishAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.PublishAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L194" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_PublishAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_PublishAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_PublishAsync_System_String_" class="expander" data-toggle="collapse">PublishAsync(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_PublishAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Publish a major version of the current file.</p>
+<param name="comment">The comments to add on file publishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task PublishAsync(string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_PublishBatch_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.PublishBatch(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L227" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_PublishBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_PublishBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishBatch(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_PublishBatch_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">PublishBatch(Batch, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_PublishBatch_PnP_Core_Services_Batch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Publish a major version of the current file.</p>
+<param name="batch">The batch instance to use.
+<param name="comment">The comments to add on file publishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void PublishBatch(Batch batch, string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_PublishBatch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.PublishBatch(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L212" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_PublishBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_PublishBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishBatch(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_PublishBatch_System_String_" class="expander" data-toggle="collapse">PublishBatch(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_PublishBatch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Publish a major version of the current file.</p>
+<param name="comment">The comments to add on file publishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void PublishBatch(string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.PublishBatchAsync(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L220" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishBatchAsync(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">PublishBatchAsync(Batch, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_PnP_Core_Services_Batch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Publish a major version of the current file.</p>
+<param name="batch">The batch instance to use.
+<param name="comment">The comments to add on file publishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task PublishBatchAsync(Batch batch, string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.PublishBatchAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L206" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.PublishBatchAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_System_String_" class="expander" data-toggle="collapse">PublishBatchAsync(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_PublishBatchAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Publish a major version of the current file.</p>
+<param name="comment">The comments to add on file publishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task PublishBatchAsync(string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_Recycle.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.Recycle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L490" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_Recycle_" data-uid="PnP.Core.Model.SharePoint.IFile.Recycle*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_Recycle" data-uid="PnP.Core.Model.SharePoint.IFile.Recycle"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_Recycle" class="expander" data-toggle="collapse">Recycle()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_Recycle" class="collapse in">
+  <div class="markdown level1 summary"><p>Send the file to recycle bin.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid Recycle()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <p><p>The Id of the created recycle bin item</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L484" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_RecycleAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_RecycleAsync" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_RecycleAsync" class="expander" data-toggle="collapse">RecycleAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_RecycleAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Send the file to recycle bin.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;Guid&gt; RecycleAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>&gt;
+        <p><p>The Id of the created recycle bin item</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L500" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_RecycleBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_RecycleBatch" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_RecycleBatch" class="expander" data-toggle="collapse">RecycleBatch()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_RecycleBatch" class="collapse in">
+  <div class="markdown level1 summary"><p>Send the file to recycle bin.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RecycleBatch()</code></pre>
+  </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L512" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_RecycleBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_RecycleBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_RecycleBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">RecycleBatch(Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_RecycleBatch_PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Send the file to recycle bin</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RecycleBatch(Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>The batch instance to use.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L495" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync" class="expander" data-toggle="collapse">RecycleBatchAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Send the file to recycle bin.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RecycleBatchAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L506" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">RecycleBatchAsync(Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Send the file to recycle bin.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RecycleBatchAsync(Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>The batch instance to use.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UndoCheckout.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UndoCheckout%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L314" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UndoCheckout_" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckout*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UndoCheckout" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckout"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckout" class="expander" data-toggle="collapse">UndoCheckout()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckout" class="collapse in">
+  <div class="markdown level1 summary"><p>Release the checked out file without saving the changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void UndoCheckout()</code></pre>
+  </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UndoCheckoutAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UndoCheckoutAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L309" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutAsync" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutAsync" class="expander" data-toggle="collapse">UndoCheckoutAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Release the checked out file without saving the changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task UndoCheckoutAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L324" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch" class="expander" data-toggle="collapse">UndoCheckoutBatch()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch" class="collapse in">
+  <div class="markdown level1 summary"><p>Release the checked out file without saving the changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void UndoCheckoutBatch()</code></pre>
+  </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L336" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">UndoCheckoutBatch(Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatch_PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Release the checked out file without saving the changes.</p>
+<param name="batch">The batch instance to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void UndoCheckoutBatch(Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L319" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync" class="expander" data-toggle="collapse">UndoCheckoutBatchAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Release the checked out file without saving the changes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task UndoCheckoutBatchAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L330" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IFile.UndoCheckoutBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">UndoCheckoutBatchAsync(Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UndoCheckoutBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Release the checked out file without saving the changes.</p>
+<param name="batch">The batch instance to use.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task UndoCheckoutBatchAsync(Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_Unpublish_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.Unpublish(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L241" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_Unpublish_" data-uid="PnP.Core.Model.SharePoint.IFile.Unpublish*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_Unpublish_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.Unpublish(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_Unpublish_System_String_" class="expander" data-toggle="collapse">Unpublish(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_Unpublish_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Unpublish the latest major version of the current file.</p>
+<param name="comment">The comments to add on file unpublishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Unpublish(string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UnpublishAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UnpublishAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L235" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UnpublishAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UnpublishAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishAsync_System_String_" class="expander" data-toggle="collapse">UnpublishAsync(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Unpublish the latest major version of the current file.</p>
+<param name="comment">The comments to add on file unpublishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task UnpublishAsync(string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UnpublishBatch_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UnpublishBatch(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L268" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UnpublishBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UnpublishBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishBatch(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishBatch_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">UnpublishBatch(Batch, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishBatch_PnP_Core_Services_Batch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Unpublish the latest major version of the current file.</p>
+<param name="batch">The batch instance to use.
+<param name="comment">The comments to add on file unpublishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void UnpublishBatch(Batch batch, string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UnpublishBatch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UnpublishBatch(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L253" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UnpublishBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UnpublishBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishBatch(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishBatch_System_String_" class="expander" data-toggle="collapse">UnpublishBatch(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishBatch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Unpublish the latest major version of the current file.</p>
+<param name="comments">The comments to add on file unpublishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void UnpublishBatch(string comments = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comments</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UnpublishBatchAsync(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L261" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishBatchAsync(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">UnpublishBatchAsync(Batch, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_PnP_Core_Services_Batch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Unpublish the latest major version of the current file.</p>
+<param name="batch">The batch instance to use.
+<param name="comment">The comments to add on file unpublishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task UnpublishBatchAsync(Batch batch, string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.UnpublishBatchAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L247" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFile.UnpublishBatchAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_System_String_" class="expander" data-toggle="collapse">UnpublishBatchAsync(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_UnpublishBatchAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Unpublish the latest major version of the current file.</p>
+<param name="comment">The comments to add on file unpublishing.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task UnpublishBatchAsync(string comment = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">comment</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsurePropertiesAsync__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelExtensions.EnsurePropertiesAsync&lt;TModel&gt;(IDataModel&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_ArePropertiesAvailable__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelExtensions.ArePropertiesAvailable&lt;TModel&gt;(IDataModel&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1_PnP_Core_Model_IDataModel___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___">DataModelExtensions.IsPropertyAvailable&lt;TModel&gt;(IDataModel&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Object___">DataModelExtensions.IsPropertyAvailable&lt;TModel&gt;(TModel, Expression&lt;Func&lt;TModel, Object&gt;&gt;)</a>
+  </div>
+  
+</article>
+          </div>
+          <div class="contribution-panel mobile-hide">
+              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L11" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            PnP Core SDK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
