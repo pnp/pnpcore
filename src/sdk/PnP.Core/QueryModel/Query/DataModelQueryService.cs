@@ -1,7 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using PnP.Core.Model;
-using PnP.Core.Model.SharePoint;
-using PnP.Core.Model.Teams;
+﻿using PnP.Core.Model;
+using PnP.Core.QueryModel.Enums;
 using PnP.Core.QueryModel.Model;
 using PnP.Core.Services;
 using PnP.Core.Utilities;
@@ -9,9 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel.Enums;
 
 namespace PnP.Core.QueryModel
 {

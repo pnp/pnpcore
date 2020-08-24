@@ -215,7 +215,7 @@ namespace PnP.Core.Model
                 return true;
             }
 
-            if (current.TryGetValue(propertyName, out object value))
+            if (current.TryGetValue(propertyName, out object value) && value != null)
             {
                 // If the property is a TransientDictionary then check for changes in the dictionary
                 if (value is TransientDictionary transientDictionary && 
@@ -230,6 +230,14 @@ namespace PnP.Core.Model
                 {
                     return true;
                 }
+
+                // Always assume generic lists have changed
+                // TODO: built custom list that handles change tracking
+                if (value.GetType().Name == "List`1")
+                {
+                    return true;
+                }
+
             }
 
             return false;
