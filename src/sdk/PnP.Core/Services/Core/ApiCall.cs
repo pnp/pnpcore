@@ -16,6 +16,8 @@ namespace PnP.Core.Services
             ReceivingProperty = receivingProperty;
             RawRequest = false;
             Commit = false;
+            Interactive = false;
+            BinaryBody = null;
         }
 
         internal ApiCall(string xmlBody, string receivingProperty = null)
@@ -27,6 +29,8 @@ namespace PnP.Core.Services
             ReceivingProperty = receivingProperty;
             RawRequest = false;
             Commit = false;
+            Interactive = false;
+            BinaryBody = null;
         }
 
         /// <summary>
@@ -67,5 +71,15 @@ namespace PnP.Core.Services
         /// When set to true the current model item will be committed as changes are synced with the server
         /// </summary>
         internal bool Commit { get; set; }
+
+        /// <summary>
+        /// When set to true this request will be executed interactively, so without being wrapped in a batch request
+        /// </summary>
+        internal bool Interactive { get; set; }
+
+        /// <summary>
+        /// Binary content for this API call
+        /// </summary>
+        internal byte[] BinaryBody { get; set; }
     }
 }

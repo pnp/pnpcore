@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -35,23 +36,7 @@ namespace PnP.Core.Model.SharePoint
 
                 return null;
             };
-
-            // TODO Continue implementation when no batch call will be supported
-            //AddApiCallHandler = (additionalInformation) =>
-            //{
-            //    Stream content = (Stream)(additionalInformation.ContainsKey(AddFileContentAdditionalInformationKey)
-            //        ? additionalInformation[AddFileContentAdditionalInformationKey]
-            //        : null);
-            //    if (content == null)
-            //        throw new ClientException(ErrorType.InvalidParameters, "Adding new file without content is not possible, please provide valid content for the file");
-
-            //    bool overwrite = (bool)(additionalInformation.ContainsKey(AddFileOverwriteAdditionalInformationKey)
-            //        ? additionalInformation[AddFileOverwriteAdditionalInformationKey]
-            //        : false);
-
-            //};
         }
-
 
         #region Extensions
         #region Publish

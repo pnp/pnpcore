@@ -519,44 +519,60 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        // TODO Uncomment when the AddAsync is properly implemented without batch call
-        //[TestMethod]
-        //public async Task AddFileToFolderTest()
-        //{
-        //    //TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
-        //        IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+        [TestMethod]
+        public async Task AddFileToFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
-        //        IFile addedFile = await parentFolder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead(".\\TestAssets\\test.docx"));
+                IFile addedFile = await parentFolder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead(".\\TestAssets\\test.docx"));
 
+                // Test the created object
+                Assert.IsNotNull(addedFile);
+                Assert.AreEqual("test_added.docx", addedFile.Name);
+                Assert.AreNotEqual(default, addedFile.UniqueId);
 
-        //        // Test the created object
-        //        Assert.IsNotNull(addedFile);
-        //        Assert.AreEqual("test_added.docx", addedFile.Name);
-        //        Assert.AreNotEqual(default, addedFile.UniqueId);
+                await addedFile.DeleteAsync();
+            }
+        }
 
-        //        await addedFile.DeleteAsync();
-        //    }
-        //}
+        [TestMethod]
+        public async Task AddChunkedFileToFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
-        // TODO Uncomment when the AddAsync is properly implemented without batch call
-        //[TestMethod]
-        //public async Task AddFileToLibraryFolderTest()
-        //{
-        //    //TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
-        //        IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-        //        IFile addedFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead(".\\TestAssets\\test.docx"));
+                IFile addedFile = await parentFolder.Files.AddAsync("testchunked_added.docx", System.IO.File.OpenRead(".\\TestAssets\\testchunked.docx"));
 
-        //        Assert.IsNotNull(addedFile);
-        //        Assert.AreEqual("test_added.docx", addedFile.Name);
-        //        Assert.AreNotEqual(default, addedFile.UniqueId);
+                // Test the created object
+                Assert.IsNotNull(addedFile);
+                Assert.AreEqual("testchunked_added.docx", addedFile.Name);
+                Assert.AreNotEqual(default, addedFile.UniqueId);
 
-        //        await addedFile.DeleteAsync();
-        //    }
-        //}
+                await addedFile.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddFileToLibraryFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFile addedFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead(".\\TestAssets\\test.docx"));
+
+                Assert.IsNotNull(addedFile);
+                Assert.AreEqual("test_added.docx", addedFile.Name);
+                Assert.AreNotEqual(default, addedFile.UniqueId);
+
+                await addedFile.DeleteAsync();
+            }
+        }
 
         // TODO Implement the update metadata test when the list item Graph identifier can be resolved from the file object
         //[TestMethod]
@@ -572,7 +588,7 @@ namespace PnP.Core.Test.SharePoint
         //        await testDocument.ListItemAllFields.UpdateAsync();
         //    }
 
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
         //    {
         //        string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
         //        IFile testDocument = await context.Web.GetFileByServerRelativeUrlBatchAsync(testDocumentServerRelativeUrl);
