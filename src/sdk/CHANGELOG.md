@@ -38,8 +38,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Added sync equivalents for all async methods [jansenbe - Bert Jansen]
 - Support for list and web folders #78 [ypcode - Yannick Plennevaux]
 - Test cases for the Teams model #95 [JarbasHorst - Jarbas Horst]
-- Basic Taxonomy support using the Graph API (pending work: relations, properties) [jansenbe - Bert Jansen]
-- Support working with files [ypcode - Yannick Plennevaux]
+- Basic Taxonomy support using the Graph API (pending work: relations, properties) #104 [jansenbe - Bert Jansen]
+- Support working with files #78 [ypcode - Yannick Plennevaux]
+- Use CSOM to create content types with a specified id #108 [ypcode - Yannick Plennevaux]
 
 ### Changed
 

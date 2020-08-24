@@ -21,6 +21,7 @@ namespace PnP.Core.Model.SharePoint
                 // TODO This might be replaced by a more generic approach ensuring the metadata on object created with CSOM API
                 AddMetadata(PnPConstants.MetaDataRestId, StringId);
                 AddMetadata(PnPConstants.MetaDataType, "SP.ContentType");
+                Requested = true;
             };
 
             // Handler to construct the Add request for this content type
