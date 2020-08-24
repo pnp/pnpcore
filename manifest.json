@@ -234,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IDataModel-1.html",
-          "hash": "hXp4yRWRyCjsmalmY8wRVQ=="
+          "hash": "YzE/c1yNBwHO3Bi16DwKXg=="
         }
       },
       "is_incremental": false,
@@ -878,6 +878,126 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITerm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITerm.html",
+          "hash": "WKW0bOLHVYqekQQfO8AEGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITermCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITermCollection.html",
+          "hash": "m7qCHUvlgiZ1C+goFNCi9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITermGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITermGroup.html",
+          "hash": "vVgIbBH0W4q4OFTNlfOTrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITermGroupCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITermGroupCollection.html",
+          "hash": "fEp5Jw7e8g/tzm0SeVjILw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITermLocalizedDescription.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITermLocalizedDescription.html",
+          "hash": "MC7FVgjt/UI0zznLOIxQkg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html",
+          "hash": "dW9KVAFB5eg9Zw2KSM4nhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITermSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITermSet.html",
+          "hash": "8W9FhrUwnnV+ElX/M1Fotg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITermSetCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITermSetCollection.html",
+          "hash": "1BwTWa31IfUg83FfplJGdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITermSetLocalizedName.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITermSetLocalizedName.html",
+          "hash": "oimrSUAcdu5ekgSgdIiMCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.ITermStore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.ITermStore.html",
+          "hash": "m4C0kcmGcY3QIlswXi2JzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.IWeb.yml",
       "output": {
         ".html": {
@@ -998,6 +1118,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.TermGroupScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.TermGroupScope.html",
+          "hash": "m+eNvQPlE3irYGnxgzLAhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.UrlFieldFormatType.yml",
       "output": {
         ".html": {
@@ -1014,7 +1146,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "w4OvCvJNR8L9reOcQVn68Q=="
+          "hash": "E1xst93B96rJ20Eb3YCSlw=="
         }
       },
       "is_incremental": false,
@@ -1470,7 +1602,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.QueryModel.BaseDataModelExtensions.html",
-          "hash": "MOLxP46AnnAYzTzRDICnrA=="
+          "hash": "W2tSDnynFlLn4jU8xljuuA=="
         }
       },
       "is_incremental": false,
@@ -1902,7 +2034,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "yeL6j8EGFg98eCvpCAuTzg=="
+          "hash": "AS+UnoHsBPgbsyk+BNubdA=="
         }
       },
       "is_incremental": false,
@@ -2058,7 +2190,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "TzbEEAStpYvFJIkFeF/ejw=="
+          "hash": "eciumXrQMAuL6MI0GEVJiA=="
         }
       },
       "is_incremental": false,
@@ -2356,7 +2488,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 169,
+          "total_file_count": 180,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

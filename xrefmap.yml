@@ -7007,6 +7007,661 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.Url
   nameWithType: ISite.Url
+- uid: PnP.Core.Model.SharePoint.ITerm
+  name: ITerm
+  href: api/PnP.Core.Model.SharePoint.ITerm.html
+  commentId: T:PnP.Core.Model.SharePoint.ITerm
+  fullName: PnP.Core.Model.SharePoint.ITerm
+  nameWithType: ITerm
+- uid: PnP.Core.Model.SharePoint.ITerm.AddLabelAndDescription(System.String,System.String,System.Boolean,System.String)
+  name: AddLabelAndDescription(String, String, Boolean, String)
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_AddLabelAndDescription_System_String_System_String_System_Boolean_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITerm.AddLabelAndDescription(System.String,System.String,System.Boolean,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITerm.AddLabelAndDescription(System.String, System.String, System.Boolean, System.String)
+  nameWithType: ITerm.AddLabelAndDescription(String, String, Boolean, String)
+- uid: PnP.Core.Model.SharePoint.ITerm.AddLabelAndDescription*
+  name: AddLabelAndDescription
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_AddLabelAndDescription_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.AddLabelAndDescription
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.AddLabelAndDescription
+  nameWithType: ITerm.AddLabelAndDescription
+- uid: PnP.Core.Model.SharePoint.ITerm.Children
+  name: Children
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Children
+  commentId: P:PnP.Core.Model.SharePoint.ITerm.Children
+  fullName: PnP.Core.Model.SharePoint.ITerm.Children
+  nameWithType: ITerm.Children
+- uid: PnP.Core.Model.SharePoint.ITerm.Children*
+  name: Children
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Children_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.Children
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.Children
+  nameWithType: ITerm.Children
+- uid: PnP.Core.Model.SharePoint.ITerm.CreatedDateTime
+  name: CreatedDateTime
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_CreatedDateTime
+  commentId: P:PnP.Core.Model.SharePoint.ITerm.CreatedDateTime
+  fullName: PnP.Core.Model.SharePoint.ITerm.CreatedDateTime
+  nameWithType: ITerm.CreatedDateTime
+- uid: PnP.Core.Model.SharePoint.ITerm.CreatedDateTime*
+  name: CreatedDateTime
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_CreatedDateTime_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.CreatedDateTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.CreatedDateTime
+  nameWithType: ITerm.CreatedDateTime
+- uid: PnP.Core.Model.SharePoint.ITerm.Descriptions
+  name: Descriptions
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Descriptions
+  commentId: P:PnP.Core.Model.SharePoint.ITerm.Descriptions
+  fullName: PnP.Core.Model.SharePoint.ITerm.Descriptions
+  nameWithType: ITerm.Descriptions
+- uid: PnP.Core.Model.SharePoint.ITerm.Descriptions*
+  name: Descriptions
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Descriptions_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.Descriptions
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.Descriptions
+  nameWithType: ITerm.Descriptions
+- uid: PnP.Core.Model.SharePoint.ITerm.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Id
+  commentId: P:PnP.Core.Model.SharePoint.ITerm.Id
+  fullName: PnP.Core.Model.SharePoint.ITerm.Id
+  nameWithType: ITerm.Id
+- uid: PnP.Core.Model.SharePoint.ITerm.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.Id
+  nameWithType: ITerm.Id
+- uid: PnP.Core.Model.SharePoint.ITerm.Labels
+  name: Labels
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Labels
+  commentId: P:PnP.Core.Model.SharePoint.ITerm.Labels
+  fullName: PnP.Core.Model.SharePoint.ITerm.Labels
+  nameWithType: ITerm.Labels
+- uid: PnP.Core.Model.SharePoint.ITerm.Labels*
+  name: Labels
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Labels_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.Labels
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.Labels
+  nameWithType: ITerm.Labels
+- uid: PnP.Core.Model.SharePoint.ITerm.LastModifiedDateTime
+  name: LastModifiedDateTime
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_LastModifiedDateTime
+  commentId: P:PnP.Core.Model.SharePoint.ITerm.LastModifiedDateTime
+  fullName: PnP.Core.Model.SharePoint.ITerm.LastModifiedDateTime
+  nameWithType: ITerm.LastModifiedDateTime
+- uid: PnP.Core.Model.SharePoint.ITerm.LastModifiedDateTime*
+  name: LastModifiedDateTime
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_LastModifiedDateTime_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.LastModifiedDateTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.LastModifiedDateTime
+  nameWithType: ITerm.LastModifiedDateTime
+- uid: PnP.Core.Model.SharePoint.ITerm.Set
+  name: Set
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Set
+  commentId: P:PnP.Core.Model.SharePoint.ITerm.Set
+  fullName: PnP.Core.Model.SharePoint.ITerm.Set
+  nameWithType: ITerm.Set
+- uid: PnP.Core.Model.SharePoint.ITerm.Set*
+  name: Set
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Set_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.Set
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.Set
+  nameWithType: ITerm.Set
+- uid: PnP.Core.Model.SharePoint.ITermCollection
+  name: ITermCollection
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermCollection
+  fullName: PnP.Core.Model.SharePoint.ITermCollection
+  nameWithType: ITermCollection
+- uid: PnP.Core.Model.SharePoint.ITermCollection.Add(System.String,System.String)
+  name: Add(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_Add_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermCollection.Add(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.Add(System.String, System.String)
+  nameWithType: ITermCollection.Add(String, String)
+- uid: PnP.Core.Model.SharePoint.ITermCollection.Add*
+  name: Add
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_Add_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermCollection.Add
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.Add
+  nameWithType: ITermCollection.Add
+- uid: PnP.Core.Model.SharePoint.ITermCollection.AddAsync(System.String,System.String)
+  name: AddAsync(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_AddAsync_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermCollection.AddAsync(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.AddAsync(System.String, System.String)
+  nameWithType: ITermCollection.AddAsync(String, String)
+- uid: PnP.Core.Model.SharePoint.ITermCollection.AddAsync*
+  name: AddAsync
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_AddAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermCollection.AddAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.AddAsync
+  nameWithType: ITermCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.ITermCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.String)
+  name: AddBatch(Batch, String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_AddBatch_PnP_Core_Services_Batch_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.AddBatch(PnP.Core.Services.Batch, System.String, System.String)
+  nameWithType: ITermCollection.AddBatch(Batch, String, String)
+- uid: PnP.Core.Model.SharePoint.ITermCollection.AddBatch(System.String,System.String)
+  name: AddBatch(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_AddBatch_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermCollection.AddBatch(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.AddBatch(System.String, System.String)
+  nameWithType: ITermCollection.AddBatch(String, String)
+- uid: PnP.Core.Model.SharePoint.ITermCollection.AddBatch*
+  name: AddBatch
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_AddBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermCollection.AddBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.AddBatch
+  nameWithType: ITermCollection.AddBatch
+- uid: PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String)
+  name: AddBatchAsync(Batch, String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, System.String)
+  nameWithType: ITermCollection.AddBatchAsync(Batch, String, String)
+- uid: PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync(System.String,System.String)
+  name: AddBatchAsync(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_AddBatchAsync_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync(System.String, System.String)
+  nameWithType: ITermCollection.AddBatchAsync(String, String)
+- uid: PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync
+  nameWithType: ITermCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.ITermGroup
+  name: ITermGroup
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermGroup
+  fullName: PnP.Core.Model.SharePoint.ITermGroup
+  nameWithType: ITermGroup
+- uid: PnP.Core.Model.SharePoint.ITermGroup.CreatedDateTime
+  name: CreatedDateTime
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_CreatedDateTime
+  commentId: P:PnP.Core.Model.SharePoint.ITermGroup.CreatedDateTime
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.CreatedDateTime
+  nameWithType: ITermGroup.CreatedDateTime
+- uid: PnP.Core.Model.SharePoint.ITermGroup.CreatedDateTime*
+  name: CreatedDateTime
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_CreatedDateTime_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroup.CreatedDateTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.CreatedDateTime
+  nameWithType: ITermGroup.CreatedDateTime
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Description
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Description
+  commentId: P:PnP.Core.Model.SharePoint.ITermGroup.Description
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Description
+  nameWithType: ITermGroup.Description
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Description*
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Description_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroup.Description
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Description
+  nameWithType: ITermGroup.Description
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Id
+  commentId: P:PnP.Core.Model.SharePoint.ITermGroup.Id
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Id
+  nameWithType: ITermGroup.Id
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroup.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Id
+  nameWithType: ITermGroup.Id
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Name
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Name
+  commentId: P:PnP.Core.Model.SharePoint.ITermGroup.Name
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Name
+  nameWithType: ITermGroup.Name
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Name*
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Name_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroup.Name
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Name
+  nameWithType: ITermGroup.Name
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Scope
+  name: Scope
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Scope
+  commentId: P:PnP.Core.Model.SharePoint.ITermGroup.Scope
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Scope
+  nameWithType: ITermGroup.Scope
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Scope*
+  name: Scope
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Scope_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroup.Scope
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Scope
+  nameWithType: ITermGroup.Scope
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Sets
+  name: Sets
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Sets
+  commentId: P:PnP.Core.Model.SharePoint.ITermGroup.Sets
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Sets
+  nameWithType: ITermGroup.Sets
+- uid: PnP.Core.Model.SharePoint.ITermGroup.Sets*
+  name: Sets
+  href: api/PnP.Core.Model.SharePoint.ITermGroup.html#PnP_Core_Model_SharePoint_ITermGroup_Sets_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroup.Sets
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroup.Sets
+  nameWithType: ITermGroup.Sets
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection
+  name: ITermGroupCollection
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermGroupCollection
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection
+  nameWithType: ITermGroupCollection
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.Add(System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  name: Add(String, String, TermGroupScope)
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_Add_System_String_System_String_PnP_Core_Model_SharePoint_TermGroupScope_
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.Add(System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.Add(System.String, System.String, PnP.Core.Model.SharePoint.TermGroupScope)
+  nameWithType: ITermGroupCollection.Add(String, String, TermGroupScope)
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.Add*
+  name: Add
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_Add_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroupCollection.Add
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.Add
+  nameWithType: ITermGroupCollection.Add
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.AddAsync(System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  name: AddAsync(String, String, TermGroupScope)
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_AddAsync_System_String_System_String_PnP_Core_Model_SharePoint_TermGroupScope_
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.AddAsync(System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.AddAsync(System.String, System.String, PnP.Core.Model.SharePoint.TermGroupScope)
+  nameWithType: ITermGroupCollection.AddAsync(String, String, TermGroupScope)
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.AddAsync*
+  name: AddAsync
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_AddAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroupCollection.AddAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.AddAsync
+  nameWithType: ITermGroupCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  name: AddBatch(Batch, String, String, TermGroupScope)
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_AddBatch_PnP_Core_Services_Batch_System_String_System_String_PnP_Core_Model_SharePoint_TermGroupScope_
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatch(PnP.Core.Services.Batch, System.String, System.String, PnP.Core.Model.SharePoint.TermGroupScope)
+  nameWithType: ITermGroupCollection.AddBatch(Batch, String, String, TermGroupScope)
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatch(System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  name: AddBatch(String, String, TermGroupScope)
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_AddBatch_System_String_System_String_PnP_Core_Model_SharePoint_TermGroupScope_
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatch(System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatch(System.String, System.String, PnP.Core.Model.SharePoint.TermGroupScope)
+  nameWithType: ITermGroupCollection.AddBatch(String, String, TermGroupScope)
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatch*
+  name: AddBatch
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_AddBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatch
+  nameWithType: ITermGroupCollection.AddBatch
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  name: AddBatchAsync(Batch, String, String, TermGroupScope)
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_PnP_Core_Model_SharePoint_TermGroupScope_
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, System.String, PnP.Core.Model.SharePoint.TermGroupScope)
+  nameWithType: ITermGroupCollection.AddBatchAsync(Batch, String, String, TermGroupScope)
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync(System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  name: AddBatchAsync(String, String, TermGroupScope)
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_AddBatchAsync_System_String_System_String_PnP_Core_Model_SharePoint_TermGroupScope_
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync(System.String,System.String,PnP.Core.Model.SharePoint.TermGroupScope)
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync(System.String, System.String, PnP.Core.Model.SharePoint.TermGroupScope)
+  nameWithType: ITermGroupCollection.AddBatchAsync(String, String, TermGroupScope)
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync
+  nameWithType: ITermGroupCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedDescription
+  name: ITermLocalizedDescription
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedDescription.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermLocalizedDescription
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedDescription
+  nameWithType: ITermLocalizedDescription
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedDescription.Description
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedDescription.html#PnP_Core_Model_SharePoint_ITermLocalizedDescription_Description
+  commentId: P:PnP.Core.Model.SharePoint.ITermLocalizedDescription.Description
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedDescription.Description
+  nameWithType: ITermLocalizedDescription.Description
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedDescription.Description*
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedDescription.html#PnP_Core_Model_SharePoint_ITermLocalizedDescription_Description_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermLocalizedDescription.Description
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedDescription.Description
+  nameWithType: ITermLocalizedDescription.Description
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedDescription.LanguageTag
+  name: LanguageTag
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedDescription.html#PnP_Core_Model_SharePoint_ITermLocalizedDescription_LanguageTag
+  commentId: P:PnP.Core.Model.SharePoint.ITermLocalizedDescription.LanguageTag
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedDescription.LanguageTag
+  nameWithType: ITermLocalizedDescription.LanguageTag
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedDescription.LanguageTag*
+  name: LanguageTag
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedDescription.html#PnP_Core_Model_SharePoint_ITermLocalizedDescription_LanguageTag_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermLocalizedDescription.LanguageTag
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedDescription.LanguageTag
+  nameWithType: ITermLocalizedDescription.LanguageTag
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedLabel
+  name: ITermLocalizedLabel
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermLocalizedLabel
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabel
+  nameWithType: ITermLocalizedLabel
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedLabel.IsDefault
+  name: IsDefault
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html#PnP_Core_Model_SharePoint_ITermLocalizedLabel_IsDefault
+  commentId: P:PnP.Core.Model.SharePoint.ITermLocalizedLabel.IsDefault
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabel.IsDefault
+  nameWithType: ITermLocalizedLabel.IsDefault
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedLabel.IsDefault*
+  name: IsDefault
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html#PnP_Core_Model_SharePoint_ITermLocalizedLabel_IsDefault_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermLocalizedLabel.IsDefault
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabel.IsDefault
+  nameWithType: ITermLocalizedLabel.IsDefault
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedLabel.LanguageTag
+  name: LanguageTag
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html#PnP_Core_Model_SharePoint_ITermLocalizedLabel_LanguageTag
+  commentId: P:PnP.Core.Model.SharePoint.ITermLocalizedLabel.LanguageTag
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabel.LanguageTag
+  nameWithType: ITermLocalizedLabel.LanguageTag
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedLabel.LanguageTag*
+  name: LanguageTag
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html#PnP_Core_Model_SharePoint_ITermLocalizedLabel_LanguageTag_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermLocalizedLabel.LanguageTag
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabel.LanguageTag
+  nameWithType: ITermLocalizedLabel.LanguageTag
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedLabel.Name
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html#PnP_Core_Model_SharePoint_ITermLocalizedLabel_Name
+  commentId: P:PnP.Core.Model.SharePoint.ITermLocalizedLabel.Name
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabel.Name
+  nameWithType: ITermLocalizedLabel.Name
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedLabel.Name*
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html#PnP_Core_Model_SharePoint_ITermLocalizedLabel_Name_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermLocalizedLabel.Name
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabel.Name
+  nameWithType: ITermLocalizedLabel.Name
+- uid: PnP.Core.Model.SharePoint.ITermSet
+  name: ITermSet
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermSet
+  fullName: PnP.Core.Model.SharePoint.ITermSet
+  nameWithType: ITermSet
+- uid: PnP.Core.Model.SharePoint.ITermSet.Children
+  name: Children
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Children
+  commentId: P:PnP.Core.Model.SharePoint.ITermSet.Children
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Children
+  nameWithType: ITermSet.Children
+- uid: PnP.Core.Model.SharePoint.ITermSet.Children*
+  name: Children
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Children_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSet.Children
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Children
+  nameWithType: ITermSet.Children
+- uid: PnP.Core.Model.SharePoint.ITermSet.CreatedDateTime
+  name: CreatedDateTime
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_CreatedDateTime
+  commentId: P:PnP.Core.Model.SharePoint.ITermSet.CreatedDateTime
+  fullName: PnP.Core.Model.SharePoint.ITermSet.CreatedDateTime
+  nameWithType: ITermSet.CreatedDateTime
+- uid: PnP.Core.Model.SharePoint.ITermSet.CreatedDateTime*
+  name: CreatedDateTime
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_CreatedDateTime_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSet.CreatedDateTime
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSet.CreatedDateTime
+  nameWithType: ITermSet.CreatedDateTime
+- uid: PnP.Core.Model.SharePoint.ITermSet.Description
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Description
+  commentId: P:PnP.Core.Model.SharePoint.ITermSet.Description
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Description
+  nameWithType: ITermSet.Description
+- uid: PnP.Core.Model.SharePoint.ITermSet.Description*
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Description_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSet.Description
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Description
+  nameWithType: ITermSet.Description
+- uid: PnP.Core.Model.SharePoint.ITermSet.Group
+  name: Group
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Group
+  commentId: P:PnP.Core.Model.SharePoint.ITermSet.Group
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Group
+  nameWithType: ITermSet.Group
+- uid: PnP.Core.Model.SharePoint.ITermSet.Group*
+  name: Group
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Group_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSet.Group
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Group
+  nameWithType: ITermSet.Group
+- uid: PnP.Core.Model.SharePoint.ITermSet.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Id
+  commentId: P:PnP.Core.Model.SharePoint.ITermSet.Id
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Id
+  nameWithType: ITermSet.Id
+- uid: PnP.Core.Model.SharePoint.ITermSet.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSet.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Id
+  nameWithType: ITermSet.Id
+- uid: PnP.Core.Model.SharePoint.ITermSet.LocalizedNames
+  name: LocalizedNames
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_LocalizedNames
+  commentId: P:PnP.Core.Model.SharePoint.ITermSet.LocalizedNames
+  fullName: PnP.Core.Model.SharePoint.ITermSet.LocalizedNames
+  nameWithType: ITermSet.LocalizedNames
+- uid: PnP.Core.Model.SharePoint.ITermSet.LocalizedNames*
+  name: LocalizedNames
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_LocalizedNames_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSet.LocalizedNames
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSet.LocalizedNames
+  nameWithType: ITermSet.LocalizedNames
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection
+  name: ITermSetCollection
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermSetCollection
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection
+  nameWithType: ITermSetCollection
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.Add(System.String,System.String)
+  name: Add(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_Add_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermSetCollection.Add(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.Add(System.String, System.String)
+  nameWithType: ITermSetCollection.Add(String, String)
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.Add*
+  name: Add
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_Add_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetCollection.Add
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.Add
+  nameWithType: ITermSetCollection.Add
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.AddAsync(System.String,System.String)
+  name: AddAsync(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_AddAsync_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermSetCollection.AddAsync(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.AddAsync(System.String, System.String)
+  nameWithType: ITermSetCollection.AddAsync(String, String)
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.AddAsync*
+  name: AddAsync
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_AddAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetCollection.AddAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.AddAsync
+  nameWithType: ITermSetCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.String)
+  name: AddBatch(Batch, String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_AddBatch_PnP_Core_Services_Batch_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermSetCollection.AddBatch(PnP.Core.Services.Batch,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatch(PnP.Core.Services.Batch, System.String, System.String)
+  nameWithType: ITermSetCollection.AddBatch(Batch, String, String)
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatch(System.String,System.String)
+  name: AddBatch(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_AddBatch_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermSetCollection.AddBatch(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatch(System.String, System.String)
+  nameWithType: ITermSetCollection.AddBatch(String, String)
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatch*
+  name: AddBatch
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_AddBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetCollection.AddBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatch
+  nameWithType: ITermSetCollection.AddBatch
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String)
+  name: AddBatchAsync(Batch, String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, System.String)
+  nameWithType: ITermSetCollection.AddBatchAsync(Batch, String, String)
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync(System.String,System.String)
+  name: AddBatchAsync(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_AddBatchAsync_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync(System.String, System.String)
+  nameWithType: ITermSetCollection.AddBatchAsync(String, String)
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync
+  nameWithType: ITermSetCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.ITermSetLocalizedName
+  name: ITermSetLocalizedName
+  href: api/PnP.Core.Model.SharePoint.ITermSetLocalizedName.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermSetLocalizedName
+  fullName: PnP.Core.Model.SharePoint.ITermSetLocalizedName
+  nameWithType: ITermSetLocalizedName
+- uid: PnP.Core.Model.SharePoint.ITermSetLocalizedName.LanguageTag
+  name: LanguageTag
+  href: api/PnP.Core.Model.SharePoint.ITermSetLocalizedName.html#PnP_Core_Model_SharePoint_ITermSetLocalizedName_LanguageTag
+  commentId: P:PnP.Core.Model.SharePoint.ITermSetLocalizedName.LanguageTag
+  fullName: PnP.Core.Model.SharePoint.ITermSetLocalizedName.LanguageTag
+  nameWithType: ITermSetLocalizedName.LanguageTag
+- uid: PnP.Core.Model.SharePoint.ITermSetLocalizedName.LanguageTag*
+  name: LanguageTag
+  href: api/PnP.Core.Model.SharePoint.ITermSetLocalizedName.html#PnP_Core_Model_SharePoint_ITermSetLocalizedName_LanguageTag_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetLocalizedName.LanguageTag
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetLocalizedName.LanguageTag
+  nameWithType: ITermSetLocalizedName.LanguageTag
+- uid: PnP.Core.Model.SharePoint.ITermSetLocalizedName.Name
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ITermSetLocalizedName.html#PnP_Core_Model_SharePoint_ITermSetLocalizedName_Name
+  commentId: P:PnP.Core.Model.SharePoint.ITermSetLocalizedName.Name
+  fullName: PnP.Core.Model.SharePoint.ITermSetLocalizedName.Name
+  nameWithType: ITermSetLocalizedName.Name
+- uid: PnP.Core.Model.SharePoint.ITermSetLocalizedName.Name*
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.ITermSetLocalizedName.html#PnP_Core_Model_SharePoint_ITermSetLocalizedName_Name_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetLocalizedName.Name
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetLocalizedName.Name
+  nameWithType: ITermSetLocalizedName.Name
+- uid: PnP.Core.Model.SharePoint.ITermStore
+  name: ITermStore
+  href: api/PnP.Core.Model.SharePoint.ITermStore.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermStore
+  fullName: PnP.Core.Model.SharePoint.ITermStore
+  nameWithType: ITermStore
+- uid: PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage
+  name: DefaultLanguage
+  href: api/PnP.Core.Model.SharePoint.ITermStore.html#PnP_Core_Model_SharePoint_ITermStore_DefaultLanguage
+  commentId: P:PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage
+  fullName: PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage
+  nameWithType: ITermStore.DefaultLanguage
+- uid: PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage*
+  name: DefaultLanguage
+  href: api/PnP.Core.Model.SharePoint.ITermStore.html#PnP_Core_Model_SharePoint_ITermStore_DefaultLanguage_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermStore.DefaultLanguage
+  nameWithType: ITermStore.DefaultLanguage
+- uid: PnP.Core.Model.SharePoint.ITermStore.Groups
+  name: Groups
+  href: api/PnP.Core.Model.SharePoint.ITermStore.html#PnP_Core_Model_SharePoint_ITermStore_Groups
+  commentId: P:PnP.Core.Model.SharePoint.ITermStore.Groups
+  fullName: PnP.Core.Model.SharePoint.ITermStore.Groups
+  nameWithType: ITermStore.Groups
+- uid: PnP.Core.Model.SharePoint.ITermStore.Groups*
+  name: Groups
+  href: api/PnP.Core.Model.SharePoint.ITermStore.html#PnP_Core_Model_SharePoint_ITermStore_Groups_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermStore.Groups
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermStore.Groups
+  nameWithType: ITermStore.Groups
+- uid: PnP.Core.Model.SharePoint.ITermStore.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITermStore.html#PnP_Core_Model_SharePoint_ITermStore_Id
+  commentId: P:PnP.Core.Model.SharePoint.ITermStore.Id
+  fullName: PnP.Core.Model.SharePoint.ITermStore.Id
+  nameWithType: ITermStore.Id
+- uid: PnP.Core.Model.SharePoint.ITermStore.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITermStore.html#PnP_Core_Model_SharePoint_ITermStore_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermStore.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermStore.Id
+  nameWithType: ITermStore.Id
+- uid: PnP.Core.Model.SharePoint.ITermStore.Languages
+  name: Languages
+  href: api/PnP.Core.Model.SharePoint.ITermStore.html#PnP_Core_Model_SharePoint_ITermStore_Languages
+  commentId: P:PnP.Core.Model.SharePoint.ITermStore.Languages
+  fullName: PnP.Core.Model.SharePoint.ITermStore.Languages
+  nameWithType: ITermStore.Languages
+- uid: PnP.Core.Model.SharePoint.ITermStore.Languages*
+  name: Languages
+  href: api/PnP.Core.Model.SharePoint.ITermStore.html#PnP_Core_Model_SharePoint_ITermStore_Languages_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermStore.Languages
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermStore.Languages
+  nameWithType: ITermStore.Languages
 - uid: PnP.Core.Model.SharePoint.IWeb
   name: IWeb
   href: api/PnP.Core.Model.SharePoint.IWeb.html
@@ -8370,6 +9025,30 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SearchScopes.Tenant
   fullName: PnP.Core.Model.SharePoint.SearchScopes.Tenant
   nameWithType: SearchScopes.Tenant
+- uid: PnP.Core.Model.SharePoint.TermGroupScope
+  name: TermGroupScope
+  href: api/PnP.Core.Model.SharePoint.TermGroupScope.html
+  commentId: T:PnP.Core.Model.SharePoint.TermGroupScope
+  fullName: PnP.Core.Model.SharePoint.TermGroupScope
+  nameWithType: TermGroupScope
+- uid: PnP.Core.Model.SharePoint.TermGroupScope.Global
+  name: Global
+  href: api/PnP.Core.Model.SharePoint.TermGroupScope.html#PnP_Core_Model_SharePoint_TermGroupScope_Global
+  commentId: F:PnP.Core.Model.SharePoint.TermGroupScope.Global
+  fullName: PnP.Core.Model.SharePoint.TermGroupScope.Global
+  nameWithType: TermGroupScope.Global
+- uid: PnP.Core.Model.SharePoint.TermGroupScope.SiteCollection
+  name: SiteCollection
+  href: api/PnP.Core.Model.SharePoint.TermGroupScope.html#PnP_Core_Model_SharePoint_TermGroupScope_SiteCollection
+  commentId: F:PnP.Core.Model.SharePoint.TermGroupScope.SiteCollection
+  fullName: PnP.Core.Model.SharePoint.TermGroupScope.SiteCollection
+  nameWithType: TermGroupScope.SiteCollection
+- uid: PnP.Core.Model.SharePoint.TermGroupScope.System
+  name: System
+  href: api/PnP.Core.Model.SharePoint.TermGroupScope.html#PnP_Core_Model_SharePoint_TermGroupScope_System
+  commentId: F:PnP.Core.Model.SharePoint.TermGroupScope.System
+  fullName: PnP.Core.Model.SharePoint.TermGroupScope.System
+  nameWithType: TermGroupScope.System
 - uid: PnP.Core.Model.SharePoint.UrlFieldFormatType
   name: UrlFieldFormatType
   href: api/PnP.Core.Model.SharePoint.UrlFieldFormatType.html
@@ -10739,6 +11418,42 @@ references:
   fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IListItem), System.Int32, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
   nameWithType: BaseDataModelExtensions.GetById(IQueryable<IListItem>, Int32, Expression<Func<IListItem, Object>>[])
   nameWithType.vb: BaseDataModelExtensions.GetById(IQueryable(Of IListItem), Int32, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
+  name: GetById(IQueryable<ITermGroup>, String)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
+  name.vb: GetById(IQueryable(Of ITermGroup), String)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String)
+  nameWithType: BaseDataModelExtensions.GetById(IQueryable<ITermGroup>, String)
+  nameWithType.vb: BaseDataModelExtensions.GetById(IQueryable(Of ITermGroup), String)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name: GetById(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name.vb: GetById(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetById(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetById(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String)
+  name: GetById(IQueryable<ITermSet>, String)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermSet__System_String_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String)
+  name.vb: GetById(IQueryable(Of ITermSet), String)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermSet>, System.String)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermSet), System.String)
+  nameWithType: BaseDataModelExtensions.GetById(IQueryable<ITermSet>, String)
+  nameWithType.vb: BaseDataModelExtensions.GetById(IQueryable(Of ITermSet), String)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
+  name: GetById(IQueryable<ITermSet>, String, Expression<Func<ITermSet, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermSet__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
+  name.vb: GetById(IQueryable(Of ITermSet), String, Expression(Of Func(Of ITermSet, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermSet>, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.ITermSet, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetById(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermSet), System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.ITermSet, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetById(IQueryable<ITermSet>, String, Expression<Func<ITermSet, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetById(IQueryable(Of ITermSet), String, Expression(Of Func(Of ITermSet, Object))())
 - uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetById*
   name: GetById
   href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetById_
@@ -10782,6 +11497,42 @@ references:
   fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.IListItem), System.Int32, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
   nameWithType: BaseDataModelExtensions.GetByIdAsync(IQueryable<IListItem>, Int32, Expression<Func<IListItem, Object>>[])
   nameWithType.vb: BaseDataModelExtensions.GetByIdAsync(IQueryable(Of IListItem), Int32, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
+  name: GetByIdAsync(IQueryable<ITermGroup>, String)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
+  name.vb: GetByIdAsync(IQueryable(Of ITermGroup), String)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String)
+  nameWithType: BaseDataModelExtensions.GetByIdAsync(IQueryable<ITermGroup>, String)
+  nameWithType.vb: BaseDataModelExtensions.GetByIdAsync(IQueryable(Of ITermGroup), String)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name: GetByIdAsync(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name.vb: GetByIdAsync(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetByIdAsync(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetByIdAsync(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String)
+  name: GetByIdAsync(IQueryable<ITermSet>, String)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermSet__System_String_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String)
+  name.vb: GetByIdAsync(IQueryable(Of ITermSet), String)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermSet>, System.String)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermSet), System.String)
+  nameWithType: BaseDataModelExtensions.GetByIdAsync(IQueryable<ITermSet>, String)
+  nameWithType.vb: BaseDataModelExtensions.GetByIdAsync(IQueryable(Of ITermSet), String)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
+  name: GetByIdAsync(IQueryable<ITermSet>, String, Expression<Func<ITermSet, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermSet__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
+  name.vb: GetByIdAsync(IQueryable(Of ITermSet), String, Expression(Of Func(Of ITermSet, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermSet>, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.ITermSet, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermSet), System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.ITermSet, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetByIdAsync(IQueryable<ITermSet>, String, Expression<Func<ITermSet, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetByIdAsync(IQueryable(Of ITermSet), String, Expression(Of Func(Of ITermSet, Object))())
 - uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync*
   name: GetByIdAsync
   href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByIdAsync_
@@ -10789,6 +11540,56 @@ references:
   isSpec: "True"
   fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByIdAsync
   nameWithType: BaseDataModelExtensions.GetByIdAsync
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByName(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
+  name: GetByName(IQueryable<ITermGroup>, String)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByName_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByName(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
+  name.vb: GetByName(IQueryable(Of ITermGroup), String)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByName(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByName(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String)
+  nameWithType: BaseDataModelExtensions.GetByName(IQueryable<ITermGroup>, String)
+  nameWithType.vb: BaseDataModelExtensions.GetByName(IQueryable(Of ITermGroup), String)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByName(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name: GetByName(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByName_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByName(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name.vb: GetByName(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByName(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByName(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetByName(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetByName(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByName*
+  name: GetByName
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByName_
+  commentId: Overload:PnP.Core.QueryModel.BaseDataModelExtensions.GetByName
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByName
+  nameWithType: BaseDataModelExtensions.GetByName
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
+  name: GetByNameAsync(IQueryable<ITermGroup>, String)
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByNameAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
+  name.vb: GetByNameAsync(IQueryable(Of ITermGroup), String)
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String)
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String)
+  nameWithType: BaseDataModelExtensions.GetByNameAsync(IQueryable<ITermGroup>, String)
+  nameWithType.vb: BaseDataModelExtensions.GetByNameAsync(IQueryable(Of ITermGroup), String)
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name: GetByNameAsync(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByNameAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
+  commentId: M:PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync(System.Linq.IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name.vb: GetByNameAsync(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync(System.Linq.IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
+  fullName.vb: PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync(System.Linq.IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
+  nameWithType: BaseDataModelExtensions.GetByNameAsync(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
+  nameWithType.vb: BaseDataModelExtensions.GetByNameAsync(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
+- uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync*
+  name: GetByNameAsync
+  href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByNameAsync_
+  commentId: Overload:PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync
+  isSpec: "True"
+  fullName: PnP.Core.QueryModel.BaseDataModelExtensions.GetByNameAsync
+  nameWithType: BaseDataModelExtensions.GetByNameAsync
 - uid: PnP.Core.QueryModel.BaseDataModelExtensions.GetByTitle(System.Linq.IQueryable{PnP.Core.Model.SharePoint.IList},System.String)
   name: GetByTitle(IQueryable<IList>, String)
   href: api/PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_GetByTitle_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_
@@ -12787,6 +13588,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContext.Team
   nameWithType: PnPContext.Team
+- uid: PnP.Core.Services.PnPContext.TermStore
+  name: TermStore
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_TermStore
+  commentId: P:PnP.Core.Services.PnPContext.TermStore
+  fullName: PnP.Core.Services.PnPContext.TermStore
+  nameWithType: PnPContext.TermStore
+- uid: PnP.Core.Services.PnPContext.TermStore*
+  name: TermStore
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_TermStore_
+  commentId: Overload:PnP.Core.Services.PnPContext.TermStore
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContext.TermStore
+  nameWithType: PnPContext.TermStore
 - uid: PnP.Core.Services.PnPContext.Uri
   name: Uri
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Uri
