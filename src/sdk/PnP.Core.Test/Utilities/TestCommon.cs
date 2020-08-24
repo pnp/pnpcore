@@ -49,6 +49,13 @@ namespace PnP.Core.Test.Utilities
         /// </summary>
         internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
 
+        internal static string GetX509CertificateThumbprint()
+        {
+        
+           var configuration = GetConfigurationSettings();
+           return configuration.GetValue<string>("CustomSettings:X509CertificateThumbprint");
+        }
+
         /// <summary>
         /// Set Mocking to false to switch the test system in recording mode for all contexts being created
         /// </summary>
@@ -105,6 +112,8 @@ namespace PnP.Core.Test.Utilities
             return await BuildContextFactory().CreateAsync(configurationName).ConfigureAwait(false);
         }
 
+        
+
         public PnPContext GetContext(Guid groupId, int id = 0,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
             [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
@@ -144,6 +153,30 @@ namespace PnP.Core.Test.Utilities
             return clonedContext;
         }
 
+        public static IConfigurationRoot GetConfigurationSettings()
+        {
+            // Define the test environment by: 
+            // - Copying env.sample to env.txt  
+            // - Putting the test environment name in env.txt ==> this should be same name as used in your settings file:
+            //   When using appsettings.mine.json then you need to put mine as content in env.txt
+            var environmentName = LoadTestEnvironment();
+
+            if (string.IsNullOrEmpty(environmentName))
+            {
+                throw new Exception("Please ensure you've a env.txt file in the root of the test project. This file should contain the name of the test environment you want to use.");
+            }
+
+            // The settings file is stored in the root of the test project, no need to configure the file to be copied over the bin folder
+            var jsonSettingsFile = Path.GetFullPath($"..\\..\\..\\appsettings.{environmentName}.json");
+
+            var configuration = new ConfigurationBuilder()
+            .AddJsonFile(jsonSettingsFile, optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .Build();
+
+            return configuration;
+        }
+
         public IPnPContextFactory BuildContextFactory()
         {
             try
@@ -156,24 +189,7 @@ namespace PnP.Core.Test.Utilities
                     return pnpContextFactoryCache;
                 }
 
-                // Define the test environment by: 
-                // - Copying env.sample to env.txt  
-                // - Putting the test environment name in env.txt ==> this should be same name as used in your settings file:
-                //   When using appsettings.mine.json then you need to put mine as content in env.txt
-                var environmentName = LoadTestEnvironment();
-
-                if (string.IsNullOrEmpty(environmentName))
-                {
-                    throw new Exception("Please ensure you've a env.txt file in the root of the test project. This file should contain the name of the test environment you want to use.");
-                }
-
-                // The settings file is stored in the root of the test project, no need to configure the file to be copied over the bin folder
-                var jsonSettingsFile = Path.GetFullPath($"..\\..\\..\\appsettings.{environmentName}.json");
-
-                var configuration = new ConfigurationBuilder()
-                .AddJsonFile(jsonSettingsFile, optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables()
-                .Build();
+                var configuration = GetConfigurationSettings();
 
                 string targetSiteUrl = configuration.GetValue<string>("CustomSettings:TargetSiteUrl");
                 string targetSubSiteUrl = configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl");
