@@ -1,5 +1,4 @@
 ﻿using PnP.Core.Services;
-using PnP.Core.Utilities;
 using System.Dynamic;
 using System.Net.Http;
 using System.Text.Json;
@@ -14,6 +13,16 @@ namespace PnP.Core.Model.SharePoint
     {
         public ContentType()
         {
+            PostMappingHandler = (json) =>
+            {
+                // In the case of Add operation, the CSOM api is used and JSON mapping to model is not possible
+                // So here, populate the Rest Id metadata field to enable actions upon 
+                // this content type without having to read it again from the server
+                // TODO This might be replaced by a more generic approach ensuring the metadata on object created with CSOM API
+                AddMetadata(PnPConstants.MetaDataRestId, StringId);
+                AddMetadata(PnPConstants.MetaDataType, "SP.ContentType");
+            };
+
             // Handler to construct the Add request for this content type
             AddApiCallHandler = async (keyValuePairs) =>
             {
@@ -32,14 +41,19 @@ namespace PnP.Core.Model.SharePoint
                     throw new ClientException(ErrorType.Unsupported, "Adding new content types on a list is not possible, use the AddAvailableContentType method to add an existing site content type");
                 }
 
-                var addParameters = new
-                {
-                    __metadata = new { type = entity.SharePointType },
-                    Name,
-                    Description,
-                    Group,
-                }.AsExpando();
-                return new ApiCall(entity.SharePointGet, ApiType.SPORest, JsonSerializer.Serialize(addParameters, typeof(ExpandoObject)));
+                // Fallback to CSOM call
+                string actualeDescription = !string.IsNullOrEmpty(Description)
+                    ? $@"<Property Name=""Description"" Type=""String"">{Description}</Property>"
+                    : $@"<Property Name=""Description"" Type=""Null"" />";
+                string actualGroup = !string.IsNullOrEmpty(Group)
+                    ? $@"<Property Name=""Group"" Type=""String"">{Group}</Property>"
+                    : @"<Property Name=""Group"" Type=""Null"" />";
+
+                string appName = "PnP SDK"; // TODO Replace by appropriate value
+                string xml =
+$@"<Request xmlns=""http://schemas.microsoft.com/sharepoint/clientquery/2009"" AddExpandoFieldTypeSuffix=""true"" SchemaVersion=""15.0.0.0"" LibraryVersion=""16.0.0.0"" ApplicationName=""{appName}""><Actions><ObjectPath Id=""40"" ObjectPathId=""39"" /><ObjectIdentityQuery Id=""41"" ObjectPathId=""39"" /></Actions><ObjectPaths><Method Id=""39"" ParentId=""5"" Name=""Add""><Parameters><Parameter TypeId=""{{168f3091-4554-4f14-8866-b20d48e45b54}}"">{actualeDescription}{actualGroup}<Property Name=""Id"" Type=""String"">{StringId}</Property><Property Name=""Name"" Type=""String"">{Name}</Property><Property Name=""ParentContentType"" Type=""Null"" /></Parameter></Parameters></Method><Property Id=""5"" ParentId=""3"" Name=""ContentTypes"" /><Property Id=""3"" ParentId=""1"" Name=""Web"" /><StaticProperty Id=""1"" TypeId=""{{3747adcd-a3c3-41b9-bfab-4a64dd2f1e0a}}"" Name=""Current"" /></ObjectPaths></Request>";
+
+                return new ApiCall(xml);
             };
         }
 

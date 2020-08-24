@@ -1124,9 +1124,13 @@ namespace PnP.Core.Services
                             throw new CsomServiceException(ErrorType.CsomServiceError, (int)statusCode, firstElement);
                         }
                     }
-                    
+
                     // No error, so let's return the results
-                    csomBatch.Batch.Requests.First().Value.AddResponse(responses, statusCode);
+                    var firstRequest = csomBatch.Batch.Requests.First().Value;
+                    firstRequest.AddResponse(responses, statusCode);
+
+                    // Execute post mapping handler (even though, there is no actual mapping in this case)
+                    firstRequest.PostMappingJson?.Invoke(batchResponse);
                 }
             }
         }
