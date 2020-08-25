@@ -1,10 +1,6 @@
-﻿using PnP.Core.Model;
-using PnP.Core.QueryModel.Model;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel

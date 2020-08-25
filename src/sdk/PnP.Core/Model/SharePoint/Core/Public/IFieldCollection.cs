@@ -1,7 +1,6 @@
 ﻿using PnP.Core.Services;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.Model.SharePoint.Core.Public;
 
 namespace PnP.Core.Model.SharePoint
 {

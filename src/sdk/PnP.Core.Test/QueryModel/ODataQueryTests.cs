@@ -2,8 +2,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
-using PnP.Core.QueryModel.Enums;
-using PnP.Core.QueryModel.Model;
 
 namespace PnP.Core.Test.QueryModel
 {

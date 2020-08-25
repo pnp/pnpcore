@@ -1,6 +1,4 @@
-﻿using PnP.Core.QueryModel.Enums;
-
-namespace PnP.Core.QueryModel.Model
+﻿namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Interface to define the basic functionalities of a filtering item (either a single item or a group of items)

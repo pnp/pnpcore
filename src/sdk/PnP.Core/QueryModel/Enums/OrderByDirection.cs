@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.QueryModel.Enums
+﻿namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Enumeration of the ordering criteria for sorting results

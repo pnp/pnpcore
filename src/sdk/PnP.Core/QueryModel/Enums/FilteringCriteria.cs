@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.QueryModel.Enums
+﻿namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Enumeration of filtering criteria for queries

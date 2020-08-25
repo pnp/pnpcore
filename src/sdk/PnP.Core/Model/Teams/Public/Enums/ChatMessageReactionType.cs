@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.Model.Teams.Public.Enums
+﻿namespace PnP.Core.Model.Teams
 {
     /// <summary>
     /// Types of reactions to a chat message

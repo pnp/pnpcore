@@ -1,6 +1,4 @@
-﻿using PnP.Core.QueryModel.Enums;
-
-namespace PnP.Core.QueryModel.Model
+﻿namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Defines a single sorting item

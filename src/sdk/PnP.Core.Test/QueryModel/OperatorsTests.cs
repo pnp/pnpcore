@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using PnP.Core.QueryModel.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using System.Linq;
 
 namespace PnP.Core.Test.QueryModel
 {

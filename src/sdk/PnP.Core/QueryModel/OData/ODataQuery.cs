@@ -5,8 +5,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
-using PnP.Core.QueryModel.Enums;
-using PnP.Core.QueryModel.Model;
 
 namespace PnP.Core.QueryModel
 {

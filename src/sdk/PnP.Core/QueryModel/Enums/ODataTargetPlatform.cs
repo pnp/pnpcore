@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.QueryModel.Enums
+﻿namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Defines the target platform for the query
