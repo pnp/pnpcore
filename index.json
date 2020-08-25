@@ -42,7 +42,7 @@
   "api/PnP.Core.ErrorType.html": {
     "href": "api/PnP.Core.ErrorType.html",
     "title": "Enum ErrorType | PnP Core SDK",
-    "keywords": "Enum ErrorType List of possible errors that can be thrown Namespace : PnP.Core Assembly : PnP.Core.dll Syntax public enum ErrorType AzureADError CollectionNotLoaded ConfigurationError CsomServiceError GraphBetaNotAllowed GraphServiceError InstanceWasDeleted InvalidParameters LinqError MissingAddApiHandler ModelMetadataIncorrect OfflineDataError PropertyNotLoaded SharePointRestServiceError TeamsAsyncOperationError TooManyBatchRetries TooManyRetries Unsupported Extension Methods DataModelExtensions.IsPropertyAvailable<ErrorType>(Expression<Func<ErrorType, Object>>)"
+    "keywords": "Enum ErrorType List of possible errors that can be thrown Namespace : PnP.Core Assembly : PnP.Core.dll Syntax public enum ErrorType AzureADError CollectionNotLoaded ConfigurationError CsomServiceError GraphBetaNotAllowed GraphServiceError InstanceWasDeleted InvalidParameters LinqError MissingAddApiHandler ModelMetadataIncorrect OfflineDataError PropertyNotLoaded SharePointRestServiceError TeamsAsyncOperationError TooManyBatchRetries TooManyRetries UnresolvedTokens Unsupported Extension Methods DataModelExtensions.IsPropertyAvailable<ErrorType>(Expression<Func<ErrorType, Object>>)"
   },
   "api/PnP.Core.html": {
     "href": "api/PnP.Core.html",

@@ -487,6 +487,12 @@ references:
   commentId: F:PnP.Core.ErrorType.TooManyRetries
   fullName: PnP.Core.ErrorType.TooManyRetries
   nameWithType: ErrorType.TooManyRetries
+- uid: PnP.Core.ErrorType.UnresolvedTokens
+  name: UnresolvedTokens
+  href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_UnresolvedTokens
+  commentId: F:PnP.Core.ErrorType.UnresolvedTokens
+  fullName: PnP.Core.ErrorType.UnresolvedTokens
+  nameWithType: ErrorType.UnresolvedTokens
 - uid: PnP.Core.ErrorType.Unsupported
   name: Unsupported
   href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_Unsupported
