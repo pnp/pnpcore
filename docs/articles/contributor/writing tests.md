@@ -99,6 +99,12 @@ If you follow below steps you'll be creating test cases according to the PnP Cor
         using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
         {
             // here comes your actual test code
+
+            using (var context1 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                // here comes your actual test code, eg code that validates what was created in the first part
+            }
+
         }
     }
 ```
@@ -110,7 +116,8 @@ If you follow below steps you'll be creating test cases according to the PnP Cor
 7. **Optionally**: if your test is creating artifacts in Microsoft 365 it's best to code the cleanup in the test or in the default `cleantestenv.copyme.ps1` script
 
 > [!Important]
-> Each checked in test must be checked in with mocking turned on and as such with the appropriate offline test files (the `.response` files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.
+> - Each checked in test must be checked in with mocking turned on and as such with the appropriate offline test files (the `.response` files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.
+> - When you use `GetContextAsync` multiple times in a single test case then use a sequence number for all but the first usage. The second usage would be like this: `await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1)`, the third usage `await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2)`.
 
 ## Frequently Asked Questions
 
