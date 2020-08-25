@@ -45,5 +45,15 @@ namespace PnP.Core.Test.Base
 
         }
 
+        [TestMethod]
+        public void ShellBatTest()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                // Simple test
+                var result = Shell.Bat("whoami");
+                Assert.IsTrue(result.Any());
+            }   
+        }
     }
 }
