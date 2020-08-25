@@ -3,10 +3,9 @@ using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class TermCollection : QueryableDataModelCollection<ITerm>, ITermCollection
+    internal partial class TermCollection : BaseDataModelCollection<ITerm>, ITermCollection
     {
-        public TermCollection(PnPContext context, IDataModelParent parent, string memberName = null)
-            : base(context, parent, memberName)
+        public TermCollection(PnPContext context, IDataModelParent parent)
         {
             this.PnPContext = context;
             this.Parent = parent;

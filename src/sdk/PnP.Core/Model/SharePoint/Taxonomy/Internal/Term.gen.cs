@@ -80,10 +80,22 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (!HasValue(nameof(Children)))
                 {
-                    var children = new TermCollection(this.PnPContext, this, "Children");
+                    var children = new TermCollection(this.PnPContext, this);
                     SetValue(children);
                 }
                 return GetValue<ITermCollection>();
+            }
+        }
+
+        public List<ITermProperty> Properties
+        {
+            get
+            {
+                if (!HasValue(nameof(Properties)))
+                {
+                    SetValue(new List<ITermProperty>());
+                }
+                return GetValue<List<ITermProperty>>();
             }
         }
 

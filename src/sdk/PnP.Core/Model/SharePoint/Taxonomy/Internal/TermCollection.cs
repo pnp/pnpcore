@@ -67,5 +67,18 @@ namespace PnP.Core.Model.SharePoint
         {
             return AddBatchAsync(name, description).GetAwaiter().GetResult();
         }
+
+        public async Task<ITerm> GetByIdAsync(string id)
+        {
+            // Create new term, but not yet add it to collection
+            var term = CreateNew();
+            // Request term from server and load it to the model
+            await (term as Term).GetByIdAsync(id, p => p.CreatedDateTime, p => p.Descriptions, p => p.Id, 
+                                                  p => p.Labels, p => p.LastModifiedDateTime, p => p.Properties).ConfigureAwait(false);
+            // Add to collection or update collection if needed
+            AddOrUpdate(term, i => ((IDataModelWithKey)i).Key.Equals(term.Id));
+
+            return term;
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
@@ -48,5 +50,31 @@ namespace PnP.Core.Model.SharePoint
                 return new ApiCall(apiCall, ApiType.GraphBeta, bodyContent);
             };
         }
+
+        public void AddProperty(string key, string value)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            var property = Properties.FirstOrDefault(p => p.Key == key);
+            if (property != null)
+            {
+                // update
+                property.Value = value;
+            }
+            else
+            {
+                // add
+                Properties.Add(new TermSetProperty() { Key = key, Value = value });
+            }
+        }
+
     }
 }

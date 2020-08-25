@@ -880,11 +880,11 @@ namespace PnP.Core.QueryModel
 
         #region GetById for TermSets implementation
         /// <summary>
-        /// Extension method to select a term group by id
+        /// Extension method to select a term set by id
         /// </summary>
-        /// <param name="source">The collection of groups to get the group by id from</param>
+        /// <param name="source">The collection of sets to get term set by id from</param>
         /// <param name="id">The id to search for</param>
-        /// <returns>The resulting term group instance, if any</returns>
+        /// <returns>The resulting term set instance, if any</returns>
         public static Core.Model.SharePoint.ITermSet GetById(
             this IQueryable<Core.Model.SharePoint.ITermSet> source, string id)
         {
@@ -893,12 +893,12 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        /// Extension method to select a term group by id
+        /// Extension method to select a term set by id
         /// </summary>
-        /// <param name="source">The collection of groups to get the group by id from</param>
+        /// <param name="source">The collection of sets to get term set by id from</param>
         /// <param name="id">The id to search for</param>
         /// <param name="selectors">The expressions declaring the fields to select</param>
-        /// <returns>The resulting term group instance, if any</returns>
+        /// <returns>The resulting term set instance, if any</returns>
         public static Core.Model.SharePoint.ITermSet GetById(
             this IQueryable<Core.Model.SharePoint.ITermSet> source,
             string id,
@@ -934,11 +934,11 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        /// Extension method to select a term group by id
+        /// Extension method to select a term set by id
         /// </summary>
-        /// <param name="source">The collection of groups to get the group by id from</param>
+        /// <param name="source">The collection of sets to get term set by id from</param>
         /// <param name="id">The id to search for</param>
-        /// <returns>The resulting term group instance, if any</returns>
+        /// <returns>The resulting term set instance, if any</returns>
         public static Task<Core.Model.SharePoint.ITermSet> GetByIdAsync(
             this IQueryable<Core.Model.SharePoint.ITermSet> source, string id)
         {
@@ -947,12 +947,12 @@ namespace PnP.Core.QueryModel
         }
 
         /// <summary>
-        /// Extension method to select a term group by id
+        /// Extension method to select a term set by id
         /// </summary>
-        /// <param name="source">The collection of groups to get the group by id from</param>
+        /// <param name="source">The collection of sets to get term set by id from</param>
         /// <param name="id">The id to search for</param>
         /// <param name="selectors">The expressions declaring the fields to select</param>
-        /// <returns>The resulting term group instance, if any</returns>
+        /// <returns>The resulting term set instance, if any</returns>
         public static Task<Core.Model.SharePoint.ITermSet> GetByIdAsync(
             this IQueryable<Core.Model.SharePoint.ITermSet> source,
             string id,
@@ -992,7 +992,7 @@ namespace PnP.Core.QueryModel
                     ));
         }
         #endregion
-
+        
         #endregion
     }
 }

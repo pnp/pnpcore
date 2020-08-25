@@ -3,15 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [GraphType(Uri = "termstore/sets/{Parent.GraphId}/terms/{GraphId}", LinqGet = "termstore/sets/{Parent.GraphId}/terms/{GraphId}/children",  Beta = true)]
+    [GraphType(Uri = V, Beta = true)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class Term
     {
+        private const string baseUri = "termstore/sets/{Parent.GraphId}/terms";
+        private const string V = baseUri + "/{GraphId}";
+
         public Term()
         {
             // Handler to construct the Add request for this group
@@ -85,6 +89,31 @@ namespace PnP.Core.Model.SharePoint
             return new ApiCallRequest(apiCall);
         }
 
+        public void AddProperty(string key, string value)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            var property = Properties.FirstOrDefault(p => p.Key == key);
+            if (property != null)
+            {
+                // update
+                property.Value = value;
+            }
+            else
+            {
+                // add
+                Properties.Add(new TermProperty() { Key = key, Value = value });
+            }
+        }
+
         public void AddLabelAndDescription(string label, string languageTag, bool isDefault = false, string description = null)
         {
             if (string.IsNullOrEmpty(label))
@@ -132,5 +161,18 @@ namespace PnP.Core.Model.SharePoint
                 Descriptions.Add(new TermLocalizedDescription() { Description = description, LanguageTag = languageTag });
             }
         }
+
+        private ApiCall GetByIdApiCall(string id)
+        {
+            return new ApiCall($"termstore/sets/{Set.Id}/terms/{id}", ApiType.GraphBeta);
+        }
+
+        internal async Task<ITerm> GetByIdAsync(string id, params Expression<Func<ITerm, object>>[] expressions)
+        {
+            await BaseGet(apiOverride: GetByIdApiCall(id), fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+
+            return this;
+        }
+
     }
 }

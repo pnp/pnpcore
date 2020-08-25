@@ -38,5 +38,18 @@ namespace PnP.Core.Model.SharePoint
         /// The parent group for this termset
         /// </summary>
         public ITermGroup Group { get; }
+
+        /// <summary>
+        /// Properties on this term set
+        /// </summary>
+        public List<ITermSetProperty> Properties { get; }
+
+        /// <summary>
+        /// Adds a property to the term set's property collection. Call update to persist this change.
+        /// </summary>
+        /// <param name="key">Property key</param>
+        /// <param name="value">Property value</param>
+        public void AddProperty(string key, string value);
+
     }
 }
