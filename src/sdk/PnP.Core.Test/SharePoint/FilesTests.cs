@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using PnP.Core.QueryModel;
 using PnP.Core.Model;
 using System;
+using System.IO;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -527,7 +528,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
-                IFile addedFile = await parentFolder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead(".\\TestAssets\\test.docx"));
+                IFile addedFile = await parentFolder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
 
                 // Test the created object
                 Assert.IsNotNull(addedFile);
@@ -546,7 +547,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
-                IFile addedFile = await parentFolder.Files.AddAsync("testchunked_added.docx", System.IO.File.OpenRead(".\\TestAssets\\testchunked.docx"));
+                IFile addedFile = await parentFolder.Files.AddAsync("testchunked_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}testchunked.docx"));
 
                 // Test the created object
                 Assert.IsNotNull(addedFile);
@@ -564,7 +565,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile addedFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead(".\\TestAssets\\test.docx"));
+                IFile addedFile = await folder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
 
                 Assert.IsNotNull(addedFile);
                 Assert.AreEqual("test_added.docx", addedFile.Name);
