@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class FieldLookupOptions
+    <title>Class FilterItem
    | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class FieldLookupOptions
+    <meta name="title" content="Class FilterItem
    | PnP Core SDK ">
     <meta name="generator" content="docfx 2.51.0.0">
     
@@ -78,25 +78,25 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions">
-  <h1 id="PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions" data-uid="PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions">Class FieldLookupOptions
+            <article class="content wrap" id="_content" data-uid="PnP.Core.QueryModel.FilterItem">
+  <h1 id="PnP_Core_QueryModel_FilterItem" data-uid="PnP.Core.QueryModel.FilterItem">Class FilterItem
   </h1>
-  <div class="markdown level0 summary"><p>Available options for SharePoint lookup fields</p>
+  <div class="markdown level0 summary"><p>Defines a filtering criteria item</p>
 </div>
   <div class="markdown level0 conceptual"></div>
 
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="PnP.Core.Model.SharePoint.FieldOptions.html">FieldOptions</a></div>
-    <div class="level2"><span class="xref">FieldLookupOptions</span></div>
+    <div class="level1"><a class="xref" href="PnP.Core.QueryModel.ODataFilter.html">ODataFilter</a></div>
+    <div class="level2"><span class="xref">FilterItem</span></div>
   </div>
   
   
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="PnP.Core.Model.SharePoint.FieldOptions.html#PnP_Core_Model_SharePoint_FieldOptions_Required">FieldOptions.Required</a>
+      <a class="xref" href="PnP.Core.QueryModel.ODataFilter.html#PnP_Core_QueryModel_ODataFilter_ConcatOperator">ODataFilter.ConcatOperator</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
@@ -121,12 +121,12 @@
     </div>
   </div>
   
-  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.SharePoint.Core.Public.html">PnP.Core.Model.SharePoint.Core.Public</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.QueryModel.html">PnP.Core.QueryModel</a></h6>
   <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
   
-  <h5 id="PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_syntax">Syntax</h5>
+  <h5 id="PnP_Core_QueryModel_FilterItem_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class FieldLookupOptions : FieldOptions</code></pre>
+    <pre><code class="lang-csharp hljs">public class FilterItem : ODataFilter</code></pre>
   </div>
 
   
@@ -138,24 +138,68 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupFieldName.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.LookupFieldName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_FilterItem_Criteria.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.FilterItem.Criteria%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/FieldLookupOptions.cs/#L13" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Model/FilterItem.cs/#L16" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupFieldName_" data-uid="PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.LookupFieldName*"></a>
+  <a id="PnP_Core_QueryModel_FilterItem_Criteria_" data-uid="PnP.Core.QueryModel.FilterItem.Criteria*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupFieldName" data-uid="PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.LookupFieldName"><a href="#collapsible-PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupFieldName" class="expander" data-toggle="collapse">LookupFieldName</a></h4>
+  <h4 id="PnP_Core_QueryModel_FilterItem_Criteria" data-uid="PnP.Core.QueryModel.FilterItem.Criteria"><a href="#collapsible-PnP_Core_QueryModel_FilterItem_Criteria" class="expander" data-toggle="collapse">Criteria</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupFieldName" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets a value that specifies the internal field name of the field used as the lookup values.</p>
+  <div id="collapsible-PnP_Core_QueryModel_FilterItem_Criteria" class="collapse in">
+  <div class="markdown level1 summary"><p>The filtering criteria. Default: Equal.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string LookupFieldName { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public FilteringCriteria Criteria { get; set; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.QueryModel.FilteringCriteria.html">FilteringCriteria</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_FilterItem_Field.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.FilterItem.Field%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Model/FilterItem.cs/#L11" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_QueryModel_FilterItem_Field_" data-uid="PnP.Core.QueryModel.FilterItem.Field*"></a>
+  
+  <h4 id="PnP_Core_QueryModel_FilterItem_Field" data-uid="PnP.Core.QueryModel.FilterItem.Field"><a href="#collapsible-PnP_Core_QueryModel_FilterItem_Field" class="expander" data-toggle="collapse">Field</a></h4>
+  
+  <div id="collapsible-PnP_Core_QueryModel_FilterItem_Field" class="collapse in">
+  <div class="markdown level1 summary"><p>The name of the field for the filtering criteria</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Field { get; set; }</code></pre>
   </div>
 
   
@@ -182,24 +226,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupListId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.LookupListId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_FilterItem_Value.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.FilterItem.Value%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/FieldLookupOptions.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Model/FilterItem.cs/#L21" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupListId_" data-uid="PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.LookupListId*"></a>
+  <a id="PnP_Core_QueryModel_FilterItem_Value_" data-uid="PnP.Core.QueryModel.FilterItem.Value*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupListId" data-uid="PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.LookupListId"><a href="#collapsible-PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupListId" class="expander" data-toggle="collapse">LookupListId</a></h4>
+  <h4 id="PnP_Core_QueryModel_FilterItem_Value" data-uid="PnP.Core.QueryModel.FilterItem.Value"><a href="#collapsible-PnP_Core_QueryModel_FilterItem_Value" class="expander" data-toggle="collapse">Value</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupListId" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets a value that specifies the list identifier of the list that contains the field to use as the lookup values.</p>
+  <div id="collapsible-PnP_Core_QueryModel_FilterItem_Value" class="collapse in">
+  <div class="markdown level1 summary"><p>The actual value for the filtering criteria</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Guid LookupListId { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public object Value { get; set; }</code></pre>
   </div>
 
   
@@ -210,51 +254,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupWebId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.LookupWebId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/FieldLookupOptions.cs/#L23" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupWebId_" data-uid="PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.LookupWebId*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupWebId" data-uid="PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.LookupWebId"><a href="#collapsible-PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupWebId" class="expander" data-toggle="collapse">LookupWebId</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions_LookupWebId" class="collapse in">
-  <div class="markdown level1 summary"><p>Gets or sets a value that specifies the GUID that identifies the site containing the list which contains the field used as the lookup values.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Guid LookupWebId { get; set; }</code></pre>
-  </div>
-
-  
-  
-  
-  
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>
         <p>
       </td>
     </tr>
@@ -276,8 +276,8 @@
 </article>
           </div>
           <div class="contribution-panel mobile-hide">
-              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_Core_Public_FieldLookupOptions.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/FieldLookupOptions.cs/#L8" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+              <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_FilterItem.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.FilterItem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Model/FilterItem.cs/#L6" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

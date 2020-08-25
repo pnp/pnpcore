@@ -506,155 +506,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.CommonFieldOptions.yml",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.CommonFieldOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.CommonFieldOptions.html",
-          "hash": "zBxHOQtJw8ZaqaqyEYzyFQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldCalculatedOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldCalculatedOptions.html",
-          "hash": "uZxEbJyeBc3O9B6a5zcn8g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldChoiceOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldChoiceOptions.html",
-          "hash": "kC0CGyClw8ZLM+DRS5Tr6Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldCurrencyOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldCurrencyOptions.html",
-          "hash": "hJ/c/E16R6BYf2pJ/YCkUA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldDateTimeOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldDateTimeOptions.html",
-          "hash": "NPskCio2csO+whUSlAT+2Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldLookupOptions.html",
-          "hash": "z7K2CRvhHl7Kz4HYGUvsbQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldMultiChoiceOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldMultiChoiceOptions.html",
-          "hash": "hfDdTnyCR4AGfAnLSM56Kw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldMultilineTextOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldMultilineTextOptions.html",
-          "hash": "cF+R7ovGxlDl9/wGYcZtqw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldNumberOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldNumberOptions.html",
-          "hash": "2L1kADllHbFFDQtjvYOSCw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldTextOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldTextOptions.html",
-          "hash": "gwgnBU4l4BzmHtgBCRgQBQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldUrlOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldUrlOptions.html",
-          "hash": "FhFTvuMu5gEQ7mpuqm2/6Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldUserOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.FieldUserOptions.html",
-          "hash": "gKljQA2On7wvnKoIc0QSxQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.Core.Public.html",
-          "hash": "y2jCU2jsGOK2VVlYuFOHQQ=="
+          "relative_path": "api/PnP.Core.Model.SharePoint.CommonFieldOptions.html",
+          "hash": "Gluc+zu7VlWZTPDSKuLRSg=="
         }
       },
       "is_incremental": false,
@@ -698,11 +554,119 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldCalculatedOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldCalculatedOptions.html",
+          "hash": "ApjCbslp2niUAkYPnfnHJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldChoiceOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldChoiceOptions.html",
+          "hash": "RkseQRqPmc3osBjPWRdOdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldCurrencyOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldCurrencyOptions.html",
+          "hash": "z45qDglRsXawZItEe1269A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldDateTimeOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldDateTimeOptions.html",
+          "hash": "8APVjjkmZU+cLSJzgAphJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldLookupOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldLookupOptions.html",
+          "hash": "xd9Fqd4cAyGXGLvfp3Kx+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html",
+          "hash": "HCUAk1Cvsa3cIKx3pHHB/w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldMultilineTextOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldMultilineTextOptions.html",
+          "hash": "z5RuEXtKeEh3qgMCHS/H8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldNumberOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldNumberOptions.html",
+          "hash": "Uxg2tEVJGaRIVJzy4o77Pw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldOptions.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldOptions.html",
-          "hash": "/BP2ESAkm4yLn19dogYPmw=="
+          "hash": "ZJOA6tlKFPLfPP4PTzutOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldTextOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldTextOptions.html",
+          "hash": "pEPzDc0y3I8oa2FOpbPesQ=="
         }
       },
       "is_incremental": false,
@@ -715,6 +679,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.FieldType.html",
           "hash": "7dmqmpoqdHGt3r8qouhSTw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldUrlOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldUrlOptions.html",
+          "hash": "CLmpYdeOMQJCOdgHysxiHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.FieldUserOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.FieldUserOptions.html",
+          "hash": "R3LjE90GATZysbvcttYavg=="
         }
       },
       "is_incremental": false,
@@ -798,7 +786,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFieldCollection.html",
-          "hash": "oTNTPXXDJhXGMRynLKTVng=="
+          "hash": "W7ktE3lzvU98Usf8xdEznQ=="
         }
       },
       "is_incremental": false,
@@ -834,7 +822,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFile.html",
-          "hash": "d+WfE84ko8NNwsTpkJN/YA=="
+          "hash": "L0OHsWxuXCQF6k7qRq2ztA=="
         }
       },
       "is_incremental": false,
@@ -1230,7 +1218,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "DODxliDUW9Ky05unzLiTvg=="
+          "hash": "RAgKtJkSgb3m7cp70pNhhQ=="
         }
       },
       "is_incremental": false,
@@ -1255,6 +1243,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ChatMessageImportance.html",
           "hash": "uzQdrTepnVBmyEOyCmg8MA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.ChatMessageReactionType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.ChatMessageReactionType.html",
+          "hash": "4YDg29fgQ8gBMXlzuy+bJQ=="
         }
       },
       "is_incremental": false,
@@ -1290,7 +1290,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamApp.html",
-          "hash": "8trR/iRq8Mj3NWZ43XzJoQ=="
+          "hash": "3skPAQSPQdC0vFdiyUANCA=="
         }
       },
       "is_incremental": false,
@@ -1326,7 +1326,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChannel.html",
-          "hash": "XUPLeF1WAwHHACtJSz9fwg=="
+          "hash": "mtQBx83/Q63EXOKOAIDe5Q=="
         }
       },
       "is_incremental": false,
@@ -1446,7 +1446,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessageReaction.html",
-          "hash": "G2Ya8VJHlgWdek9jp7IZUw=="
+          "hash": "SHqErXGmyldClwArOU7sUA=="
         }
       },
       "is_incremental": false,
@@ -1482,7 +1482,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamFunSettings.html",
-          "hash": "+v4hBfrf4GbNq0sCcjFNEA=="
+          "hash": "0aLHcmgUA7lUXsahJHPbjQ=="
         }
       },
       "is_incremental": false,
@@ -1538,11 +1538,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.yml",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamChannelMembershipType.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.ChatMessageReactionType.html",
-          "hash": "S+9RUzuRFNpKWPKF0I0tyg=="
+          "relative_path": "api/PnP.Core.Model.Teams.TeamChannelMembershipType.html",
+          "hash": "/aRlVFtorKWsRvz8nJkrbw=="
         }
       },
       "is_incremental": false,
@@ -1550,47 +1550,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.yml",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamGiphyContentRating.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamChannelMembershipType.html",
-          "hash": "dX8EwYtwIV+vUrBVvVZWDQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamGiphyContentRating.html",
-          "hash": "QT4sf8kzW315xi6VSqsuQw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.TeamsAppDistributionMethod.html",
-          "hash": "PCyDZOXqNOs0svFO42UCYQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.Teams.Public.Enums.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.Teams.Public.Enums.html",
-          "hash": "tzS3BXPCVdX8BYxgDei4cQ=="
+          "relative_path": "api/PnP.Core.Model.Teams.TeamGiphyContentRating.html",
+          "hash": "zp6/WxKoewtPqkI1SCfGyg=="
         }
       },
       "is_incremental": false,
@@ -1622,11 +1586,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Teams.TeamsAppDistributionMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Teams.TeamsAppDistributionMethod.html",
+          "hash": "ENcHxnim4NnBj3d/Ybt3rA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.Teams.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.html",
-          "hash": "0Kuq43IAaCPQPrKnUCTsvA=="
+          "hash": "VJs6SSbs16lcmL5IRKuLVg=="
         }
       },
       "is_incremental": false,
@@ -1706,11 +1682,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Enums.FilteringConcatOperator.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.FilterItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Enums.FilteringConcatOperator.html",
-          "hash": "1isetIzbDclag/mL0dbbcQ=="
+          "relative_path": "api/PnP.Core.QueryModel.FilterItem.html",
+          "hash": "yb6eWaIOuJKqfiBJRkKQEA=="
         }
       },
       "is_incremental": false,
@@ -1718,11 +1694,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Enums.FilteringCriteria.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.FilteringConcatOperator.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Enums.FilteringCriteria.html",
-          "hash": "CEZeBNxZIcCO758ukI8Vtw=="
+          "relative_path": "api/PnP.Core.QueryModel.FilteringConcatOperator.html",
+          "hash": "N1gej+bk3qliapcxtZESOg=="
         }
       },
       "is_incremental": false,
@@ -1730,11 +1706,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Enums.ODataTargetPlatform.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.FilteringCriteria.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Enums.ODataTargetPlatform.html",
-          "hash": "J6q+lEmDci7s/3dnHpS40A=="
+          "relative_path": "api/PnP.Core.QueryModel.FilteringCriteria.html",
+          "hash": "LMWsVEKijt4y/RWZhUa1KQ=="
         }
       },
       "is_incremental": false,
@@ -1742,23 +1718,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Enums.OrderByDirection.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.FiltersGroup.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Enums.OrderByDirection.html",
-          "hash": "79mtbj6HLRRXrKp6EU/RGg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Enums.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Enums.html",
-          "hash": "/BWnuUPIpPzjvZJh/GjytA=="
+          "relative_path": "api/PnP.Core.QueryModel.FiltersGroup.html",
+          "hash": "/ipm5zhGdd4p9po0rS2Wjw=="
         }
       },
       "is_incremental": false,
@@ -1778,11 +1742,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Model.FilterItem.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.ODataFilter.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Model.FilterItem.html",
-          "hash": "L5Dt2iV6sC5LBQPXeP1Vgw=="
+          "relative_path": "api/PnP.Core.QueryModel.ODataFilter.html",
+          "hash": "Mepb8sXBMoUCOYj6i2vD6A=="
         }
       },
       "is_incremental": false,
@@ -1790,11 +1754,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Model.FiltersGroup.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.ODataTargetPlatform.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Model.FiltersGroup.html",
-          "hash": "fMs8Yj5s6jGeuoDBXsICeg=="
+          "relative_path": "api/PnP.Core.QueryModel.ODataTargetPlatform.html",
+          "hash": "C4kPj2e4j/IjUOfR0lvftg=="
         }
       },
       "is_incremental": false,
@@ -1802,11 +1766,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Model.ODataFilter.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.OrderByDirection.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Model.ODataFilter.html",
-          "hash": "1+A1x1+rMIdy3xgNUsdyoQ=="
+          "relative_path": "api/PnP.Core.QueryModel.OrderByDirection.html",
+          "hash": "TejNxSyoqFS+HJd/AjOdKA=="
         }
       },
       "is_incremental": false,
@@ -1814,23 +1778,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Model.OrderByItem.yml",
+      "source_relative_path": "api/PnP.Core.QueryModel.OrderByItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Model.OrderByItem.html",
-          "hash": "qp95InMkE2j5vpShFfvFrg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.QueryModel.Model.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.QueryModel.Model.html",
-          "hash": "uPMH1l4fWnmRiSKuk1/vXg=="
+          "relative_path": "api/PnP.Core.QueryModel.OrderByItem.html",
+          "hash": "35e3SREc1iJEOsMICdqssw=="
         }
       },
       "is_incremental": false,
@@ -1854,7 +1806,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.QueryModel.html",
-          "hash": "xayXNo3gkgTFhwVAi0hY9A=="
+          "hash": "05Z+VO0i9OXMNuHJUkB/xA=="
         }
       },
       "is_incremental": false,
@@ -2274,7 +2226,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "aoSTIkcAx+2PYpCJOIffsA=="
+          "hash": "nQJnm32992uvPeLCoVMxCg=="
         }
       },
       "is_incremental": false,
@@ -2572,7 +2524,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 187,
+          "total_file_count": 183,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
