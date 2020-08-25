@@ -169,6 +169,12 @@ public class GetTests
         using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
         {
             // here comes your actual test code
+
+            using (var context1 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                // here comes your actual test code, eg code that validates what was created in the first part
+            }
+
         }
     }
 </code></pre>
@@ -181,7 +187,10 @@ public class GetTests
 </ol>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>Each checked in test must be checked in with mocking turned on and as such with the appropriate offline test files (the <code>.response</code> files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.</p>
+<ul>
+<li>Each checked in test must be checked in with mocking turned on and as such with the appropriate offline test files (the <code>.response</code> files). This is important as it ensures that test cases execute really fast and that tests can be used in build/deploy pipelines.</li>
+<li>When you use <code>GetContextAsync</code> multiple times in a single test case then use a sequence number for all but the first usage. The second usage would be like this: <code>await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1)</code>, the third usage <code>await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2)</code>.</li>
+</ul>
 </div>
 <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <h3 id="do-i-need-to-recreate-the-sites-after-each-live-test-run">Do I need to recreate the sites after each live test run?</h3>
