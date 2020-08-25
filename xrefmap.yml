@@ -7973,6 +7973,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITerm.AddLabelAndDescription
   nameWithType: ITerm.AddLabelAndDescription
+- uid: PnP.Core.Model.SharePoint.ITerm.AddProperty(System.String,System.String)
+  name: AddProperty(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_AddProperty_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITerm.AddProperty(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITerm.AddProperty(System.String, System.String)
+  nameWithType: ITerm.AddProperty(String, String)
+- uid: PnP.Core.Model.SharePoint.ITerm.AddProperty*
+  name: AddProperty
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_AddProperty_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.AddProperty
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.AddProperty
+  nameWithType: ITerm.AddProperty
 - uid: PnP.Core.Model.SharePoint.ITerm.Children
   name: Children
   href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Children
@@ -8051,6 +8064,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITerm.LastModifiedDateTime
   nameWithType: ITerm.LastModifiedDateTime
+- uid: PnP.Core.Model.SharePoint.ITerm.Properties
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Properties
+  commentId: P:PnP.Core.Model.SharePoint.ITerm.Properties
+  fullName: PnP.Core.Model.SharePoint.ITerm.Properties
+  nameWithType: ITerm.Properties
+- uid: PnP.Core.Model.SharePoint.ITerm.Properties*
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Properties_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.Properties
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.Properties
+  nameWithType: ITerm.Properties
 - uid: PnP.Core.Model.SharePoint.ITerm.Set
   name: Set
   href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Set
@@ -8134,6 +8160,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermCollection.AddBatchAsync
   nameWithType: ITermCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.ITermCollection.GetByIdAsync(System.String)
+  name: GetByIdAsync(String)
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_GetByIdAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermCollection.GetByIdAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.GetByIdAsync(System.String)
+  nameWithType: ITermCollection.GetByIdAsync(String)
+- uid: PnP.Core.Model.SharePoint.ITermCollection.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.Model.SharePoint.ITermCollection.html#PnP_Core_Model_SharePoint_ITermCollection_GetByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermCollection.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermCollection.GetByIdAsync
+  nameWithType: ITermCollection.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.ITermGroup
   name: ITermGroup
   href: api/PnP.Core.Model.SharePoint.ITermGroup.html
@@ -8365,12 +8404,57 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabel.Name
   nameWithType: ITermLocalizedLabel.Name
+- uid: PnP.Core.Model.SharePoint.ITermProperty
+  name: ITermProperty
+  href: api/PnP.Core.Model.SharePoint.ITermProperty.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermProperty
+  fullName: PnP.Core.Model.SharePoint.ITermProperty
+  nameWithType: ITermProperty
+- uid: PnP.Core.Model.SharePoint.ITermProperty.Key
+  name: Key
+  href: api/PnP.Core.Model.SharePoint.ITermProperty.html#PnP_Core_Model_SharePoint_ITermProperty_Key
+  commentId: P:PnP.Core.Model.SharePoint.ITermProperty.Key
+  fullName: PnP.Core.Model.SharePoint.ITermProperty.Key
+  nameWithType: ITermProperty.Key
+- uid: PnP.Core.Model.SharePoint.ITermProperty.Key*
+  name: Key
+  href: api/PnP.Core.Model.SharePoint.ITermProperty.html#PnP_Core_Model_SharePoint_ITermProperty_Key_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermProperty.Key
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermProperty.Key
+  nameWithType: ITermProperty.Key
+- uid: PnP.Core.Model.SharePoint.ITermProperty.Value
+  name: Value
+  href: api/PnP.Core.Model.SharePoint.ITermProperty.html#PnP_Core_Model_SharePoint_ITermProperty_Value
+  commentId: P:PnP.Core.Model.SharePoint.ITermProperty.Value
+  fullName: PnP.Core.Model.SharePoint.ITermProperty.Value
+  nameWithType: ITermProperty.Value
+- uid: PnP.Core.Model.SharePoint.ITermProperty.Value*
+  name: Value
+  href: api/PnP.Core.Model.SharePoint.ITermProperty.html#PnP_Core_Model_SharePoint_ITermProperty_Value_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermProperty.Value
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermProperty.Value
+  nameWithType: ITermProperty.Value
 - uid: PnP.Core.Model.SharePoint.ITermSet
   name: ITermSet
   href: api/PnP.Core.Model.SharePoint.ITermSet.html
   commentId: T:PnP.Core.Model.SharePoint.ITermSet
   fullName: PnP.Core.Model.SharePoint.ITermSet
   nameWithType: ITermSet
+- uid: PnP.Core.Model.SharePoint.ITermSet.AddProperty(System.String,System.String)
+  name: AddProperty(String, String)
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_AddProperty_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.ITermSet.AddProperty(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.ITermSet.AddProperty(System.String, System.String)
+  nameWithType: ITermSet.AddProperty(String, String)
+- uid: PnP.Core.Model.SharePoint.ITermSet.AddProperty*
+  name: AddProperty
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_AddProperty_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSet.AddProperty
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSet.AddProperty
+  nameWithType: ITermSet.AddProperty
 - uid: PnP.Core.Model.SharePoint.ITermSet.Children
   name: Children
   href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Children
@@ -8449,6 +8533,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermSet.LocalizedNames
   nameWithType: ITermSet.LocalizedNames
+- uid: PnP.Core.Model.SharePoint.ITermSet.Properties
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Properties
+  commentId: P:PnP.Core.Model.SharePoint.ITermSet.Properties
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Properties
+  nameWithType: ITermSet.Properties
+- uid: PnP.Core.Model.SharePoint.ITermSet.Properties*
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Properties_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSet.Properties
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Properties
+  nameWithType: ITermSet.Properties
 - uid: PnP.Core.Model.SharePoint.ITermSetCollection
   name: ITermSetCollection
   href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html
@@ -8551,6 +8648,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermSetLocalizedName.Name
   nameWithType: ITermSetLocalizedName.Name
+- uid: PnP.Core.Model.SharePoint.ITermSetProperty
+  name: ITermSetProperty
+  href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermSetProperty
+  fullName: PnP.Core.Model.SharePoint.ITermSetProperty
+  nameWithType: ITermSetProperty
+- uid: PnP.Core.Model.SharePoint.ITermSetProperty.Key
+  name: Key
+  href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html#PnP_Core_Model_SharePoint_ITermSetProperty_Key
+  commentId: P:PnP.Core.Model.SharePoint.ITermSetProperty.Key
+  fullName: PnP.Core.Model.SharePoint.ITermSetProperty.Key
+  nameWithType: ITermSetProperty.Key
+- uid: PnP.Core.Model.SharePoint.ITermSetProperty.Key*
+  name: Key
+  href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html#PnP_Core_Model_SharePoint_ITermSetProperty_Key_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetProperty.Key
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetProperty.Key
+  nameWithType: ITermSetProperty.Key
+- uid: PnP.Core.Model.SharePoint.ITermSetProperty.Value
+  name: Value
+  href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html#PnP_Core_Model_SharePoint_ITermSetProperty_Value
+  commentId: P:PnP.Core.Model.SharePoint.ITermSetProperty.Value
+  fullName: PnP.Core.Model.SharePoint.ITermSetProperty.Value
+  nameWithType: ITermSetProperty.Value
+- uid: PnP.Core.Model.SharePoint.ITermSetProperty.Value*
+  name: Value
+  href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html#PnP_Core_Model_SharePoint_ITermSetProperty_Value_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetProperty.Value
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetProperty.Value
+  nameWithType: ITermSetProperty.Value
 - uid: PnP.Core.Model.SharePoint.ITermStore
   name: ITermStore
   href: api/PnP.Core.Model.SharePoint.ITermStore.html
