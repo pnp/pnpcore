@@ -250,6 +250,83 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public void AuthenticationErrorDeserializationSingleParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new AuthenticationException(input);
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void AuthenticationErrorDeserializationTypeParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new AuthenticationException(ErrorType.AzureADError, sampleGraphAuthError, new Exception(input));
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(sampleGraphAuthError, ex.Message);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(Exception));
+            }
+        }
+
+        [TestMethod]
+        public void AuthenticationErrorDeserializationExceptionParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new AuthenticationException(sampleGraphAuthError, new Exception(input));
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(sampleGraphAuthError, ex.Message);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(Exception));
+            }
+        }
+
+        [TestMethod]
+        public void AuthenticationErrorDeserializationToString()
+        {
+            var input = "test";
+            try
+            {
+                throw new AuthenticationException(input);
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.ToString()));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void AuthenticationErrorDeserializationNoParam()
+        {
+            var input = "Exception of type 'PnP.Core.AuthenticationException' was thrown.";
+            try
+            {
+                throw new AuthenticationException();
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
         public void VerifyAuthenticationErrorToString()
         {
             bool AuthenticationExceptionThrown;
