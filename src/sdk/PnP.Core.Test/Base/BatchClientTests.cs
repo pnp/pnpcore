@@ -334,6 +334,34 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public async Task UnresolvedToken()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var api = new ApiCall($"_api/web?$select={{GraphId}}%2cWelcomePage", ApiType.SPORest)
+                {
+                    Interactive = true
+                };
+
+                bool exceptionThrown = false;
+                try
+                {
+                    var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Get);
+                }
+                catch(Exception ex)
+                {
+                    if (ex is ClientException && (ex as ClientException).Error.Type == ErrorType.UnresolvedTokens)
+                    {
+                        exceptionThrown = true;
+                    }
+                }
+
+                Assert.IsTrue(exceptionThrown);
+            }
+        }
+
         #region Interactive request tests
 
         [TestMethod]

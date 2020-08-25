@@ -24,6 +24,7 @@
         LinqError,
         ConfigurationError,
         InvalidParameters,
+        UnresolvedTokens,
 
         // Testing
         OfflineDataError,

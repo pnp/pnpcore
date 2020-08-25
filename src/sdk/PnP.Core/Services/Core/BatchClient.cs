@@ -241,6 +241,9 @@ namespace PnP.Core.Services
             // Remove duplicate batch requests
             DedupBatchRequests(ref batch);
 
+            // Verify batch requests do not contain unresolved tokens
+            CheckForUnresolvedTokens(batch);
+
             if (batch.HasInteractiveRequest)
             {
                 if (batch.Requests.Count > 1)
@@ -1324,6 +1327,22 @@ namespace PnP.Core.Services
         }
 
         #endregion
+
+        /// <summary>
+        /// Checks if a batch contains an API call that still has unresolved tokens...no point in sending the request at that point
+        /// </summary>
+        /// <param name="batch"></param>
+        private static void CheckForUnresolvedTokens(Batch batch)
+        {
+            foreach(var request in batch.Requests)
+            {
+                var unresolvedTokens = TokenHandler.UnresolvedTokens(request.Value.ApiCall.Request);
+                if (unresolvedTokens.Count > 0)
+                {
+                    throw new ClientException(ErrorType.UnresolvedTokens, $"Unresolved tokens found in API call {request.Value.ApiCall.Request}");
+                }
+            }
+        }
 
         /// <summary>
         /// Splits a batch that contains rest and graph calls in two batches, one containing the rest calls, one containing the graph calls
