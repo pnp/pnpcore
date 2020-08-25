@@ -15,11 +15,11 @@ namespace PnP.Core.Test.Base
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
-            // Configure mocking default for all tests in this class, unless override by a specific test
-            //TestCommon.Instance.Mocking = false;
+            // No mocking required, however a certificate thumbprint is required
         }
 
 
+        #region Security Exceptions Class Tests
 
         [TestMethod]
         public void SecurityExtEncryptFailTest()
@@ -65,6 +65,17 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public void SecurityExtDecryptFailTest()
+        {
+            var result = "decryptthisstring".Decrypt("3e69491285a9a26efea5c3aeddc75b0148040000"); //Fake
+            Assert.IsTrue(string.IsNullOrEmpty(result));
+        }
+
+        #endregion
+
+        #region X509 Certificate Utility Tests
+
+        [TestMethod]
         public void X509CertUtilityEncryptNothingTest()
         {
             var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, TestCommon.GetX509CertificateThumbprint());
@@ -97,5 +108,7 @@ namespace PnP.Core.Test.Base
             byte[] encoded = Encoding.UTF8.GetBytes("doesntmatterwhatthisis");
             Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Decrypt(encoded, true, null));
         }
+
+        #endregion
     }
 }
