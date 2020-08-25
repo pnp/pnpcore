@@ -3,6 +3,8 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
@@ -37,6 +39,7 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(encryptResult.Contains("=="));
 
             //TODO: Problems decrypting - investigate
+            // Reference: https://www.pkisolutions.com/accessing-and-using-certificate-private-keys-in-net-framework-net-core/ slighty different approach
             //var decryptResult = encryptResult.Decrypt(TestCommon.GetX509CertificateThumbprint());
             //Assert.AreEqual(decryptResult, encryptSampleText);
         }
@@ -59,6 +62,40 @@ namespace PnP.Core.Test.Base
         {
             var sampleText = "";
             Assert.ThrowsException<ArgumentException>(() => sampleText.ToSecureString());          
+        }
+
+        [TestMethod]
+        public void X509CertUtilityEncryptNothingTest()
+        {
+            var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, TestCommon.GetX509CertificateThumbprint());
+            Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Encrypt(null, true, certificate));
+        }
+
+        [TestMethod]
+        public void X509CertUtilityEncryptNoCertTest()
+        {
+            byte[] encoded = Encoding.UTF8.GetBytes("test");
+            Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Encrypt(encoded, true, null));
+        }
+
+        [TestMethod]
+        public void X509CertUtilityGetPublicKeyNoCertTest()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.GetPublicKey(null));
+        }
+
+        [TestMethod]
+        public void X509CertUtilityDecryptNothingTest()
+        {
+            var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, TestCommon.GetX509CertificateThumbprint());
+            Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Decrypt(null, true, certificate));
+        }
+
+        [TestMethod]
+        public void X509CertUtilityDecryptNoCertTest()
+        {
+            byte[] encoded = Encoding.UTF8.GetBytes("doesntmatterwhatthisis");
+            Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Decrypt(encoded, true, null));
         }
     }
 }
