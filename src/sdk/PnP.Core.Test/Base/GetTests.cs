@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Test.Utilities;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Test.Utilities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -345,7 +344,7 @@ namespace PnP.Core.Test.Base
 
                 // Is the property populated
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(!string.IsNullOrEmpty(web.Description));
+                Assert.IsTrue(web.Description != null);
 
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.Title));
@@ -362,7 +361,7 @@ namespace PnP.Core.Test.Base
 
                 // Is the property populated
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Description));
-                Assert.IsTrue(!string.IsNullOrEmpty(web.Description));
+                Assert.IsTrue(web.Description != null);
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(!string.IsNullOrEmpty(web.Title));
 

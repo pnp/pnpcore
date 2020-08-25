@@ -50,3 +50,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Documentation updates [Ashikpaul - Ashik Paul]
 - Moved to complete async internal implementation [jansenbe - Bert Jansen]
 - Code cleanup (Teams implementation / ODataQuery) [JarbasHorst - Jarbas Horst]
+- When a non loaded model properties is assigned it now is considered as a change and send back to the server on update #106 [jansenbe - Bert Jansen]

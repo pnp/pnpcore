@@ -18,7 +18,6 @@ namespace PnP.Core.Services
         /// <summary>
         /// Maps a json string to the provided domain model object instance
         /// </summary>
-        /// <param name="model">The Domain Model object to map json to</param>
         /// <param name="batchRequest">The batch request to map json from</param>
         /// <returns></returns>
         internal static async Task MapJsonToModel(BatchRequest batchRequest)
@@ -60,10 +59,10 @@ namespace PnP.Core.Services
         /// <returns></returns>
         internal static async Task FromJson(TransientObject pnpObject, EntityInfo entity, ApiResponse apiResponse, Func<FromJson, object> fromJsonCasting = null)
         {
-            // Mark object as requested, as long as it is an IRequestable object
+            // Mark object as not requested during load time
             if (pnpObject.GetType().ImplementsInterface(typeof(IRequestable)))
             {
-                ((IRequestable)pnpObject).Requested = true;
+                ((IRequestable)pnpObject).Requested = false;
             }
 
             if (apiResponse.ApiCall.Type == ApiType.SPORest)
@@ -73,6 +72,12 @@ namespace PnP.Core.Services
             else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
             {
                 await FromJsonGraph(pnpObject, entity, apiResponse, fromJsonCasting).ConfigureAwait(false);
+            }
+
+            // Mark object as requested, as long as it is an IRequestable object
+            if (pnpObject.GetType().ImplementsInterface(typeof(IRequestable)))
+            {
+                ((IRequestable)pnpObject).Requested = true;
             }
         }
 

@@ -131,9 +131,11 @@ namespace PnP.Core.Model
                 }
             }
 
-            // Here we can eventually add some validation logic ...
-
-            if (current.ContainsKey(propertyName))
+            if (// Property was populated previously, this is a change 
+                (current.ContainsKey(propertyName)) 
+                // Property was never loaded, but since the model was requested we consider this as a changed property
+                || (this is IRequestable && (this as IRequestable).Requested && !(typeof(T).ImplementsInterface(typeof(IManageableCollection))))                
+                )
             {
                 // Call ValidateHandler in case of an update
                 bool updateField = true;
@@ -237,7 +239,6 @@ namespace PnP.Core.Model
                 {
                     return true;
                 }
-
             }
 
             return false;

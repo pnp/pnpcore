@@ -1,4 +1,4 @@
---batchresponse_3c18018f-4fec-4468-b905-b70dcb2d5e37
+--batchresponse_662e787e-d495-4c5b-8b25-73360f0079d6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'484cd94d-76b9-4851-8efc-4352402601e2')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'484cd94d-76b9-4851-8efc-4352402601e2')","etag":"\"0\"","type":"SP.List"},"Id":"484cd94d-76b9-4851-8efc-4352402601e2","Title":"Composed Looks"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'60116bac-f5f0-4ca6-b133-ed93670d638f')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'60116bac-f5f0-4ca6-b133-ed93670d638f')","etag":"\"6\"","type":"SP.List"},"Id":"60116bac-f5f0-4ca6-b133-ed93670d638f","Title":"Content type publishing error log"}]}}
---batchresponse_3c18018f-4fec-4468-b905-b70dcb2d5e37--
+--batchresponse_662e787e-d495-4c5b-8b25-73360f0079d6--
