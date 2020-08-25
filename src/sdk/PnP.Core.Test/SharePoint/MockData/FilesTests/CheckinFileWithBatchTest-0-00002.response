@@ -1,9 +1,9 @@
---batchresponse_5961374f-f877-4c55-96fe-d77ade1f5e70
+--batchresponse_7886dd36-8f4d-4e32-9e33-0176b64751ee
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"CheckIn":null}}
---batchresponse_5961374f-f877-4c55-96fe-d77ade1f5e70--
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_checkin_with_batch')","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_checkin_with_batch')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_checkin_with_batch')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_checkin_with_batch')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_checkin_with_batch')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_checkin_with_batch')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_checkin_with_batch')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_checkin_with_batch')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"test_checkin_with_batch","ProgID":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup/test_checkin_with_batch","TimeCreated":"2020-08-25T15:05:36Z","TimeLastModified":"2020-08-25T15:05:36Z","UniqueId":"0a4f0088-8b18-4bd4-bc02-6b483f2f6c06","WelcomePage":""}}
+--batchresponse_7886dd36-8f4d-4e32-9e33-0176b64751ee--

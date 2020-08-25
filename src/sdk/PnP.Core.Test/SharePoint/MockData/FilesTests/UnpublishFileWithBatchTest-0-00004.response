@@ -1,9 +1,0 @@
---batchresponse_d3334d39-97a0-4e27-a684-70642931c5d1
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"Publish":null}}
---batchresponse_d3334d39-97a0-4e27-a684-70642931c5d1--

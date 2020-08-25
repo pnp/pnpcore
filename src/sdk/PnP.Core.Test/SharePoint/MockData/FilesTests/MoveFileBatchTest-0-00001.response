@@ -1,9 +1,1 @@
---batchresponse_36ef25de-ab1b-46eb-9b5b-1e2e61258d4c
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"CopyTo":null}}
---batchresponse_36ef25de-ab1b-46eb-9b5b-1e2e61258d4c--
+{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites(sharepointIds,id)/$entity","id":"pvxdev.sharepoint.com,e52f882f-72c5-4d16-b0ee-0401cdbd2601,debb4230-758e-4649-aca8-d1cf0796684b","sharepointIds":{"siteId":"e52f882f-72c5-4d16-b0ee-0401cdbd2601","siteUrl":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup","tenantId":"4d295f88-ce1f-4142-981a-d2b78ebc54c3","webId":"debb4230-758e-4649-aca8-d1cf0796684b"}}}]}

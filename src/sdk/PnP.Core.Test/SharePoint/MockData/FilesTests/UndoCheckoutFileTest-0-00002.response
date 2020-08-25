@@ -1,9 +1,9 @@
---batchresponse_1f09f6e4-199d-4f2c-960d-a8e186536ab7
+--batchresponse_02601e64-0b31-4617-af29-294f1532f2c6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"UndoCheckOut":null}}
---batchresponse_1f09f6e4-199d-4f2c-960d-a8e186536ab7--
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_undo_checkout')","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_undo_checkout')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_undo_checkout')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_undo_checkout')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_undo_checkout')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_undo_checkout')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_undo_checkout')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/test_undo_checkout')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"test_undo_checkout","ProgID":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup/test_undo_checkout","TimeCreated":"2020-08-25T15:06:07Z","TimeLastModified":"2020-08-25T15:06:07Z","UniqueId":"b50d8e74-f5e7-4dc5-be83-a0b474c55019","WelcomePage":""}}
+--batchresponse_02601e64-0b31-4617-af29-294f1532f2c6--
