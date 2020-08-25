@@ -23,221 +23,230 @@ namespace PnP.Core.Test.SharePoint
         public async Task QueryFileInFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            await AddMockDocumentToSharedDocuments(0, "test_query.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // Get the default document library root folder
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == "test.docx");
+                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == "test_query.docx");
 
                 Assert.IsNotNull(documentToFind);
-                Assert.AreEqual("test.docx", documentToFind.Name);
-                Assert.IsTrue(documentToFind.ServerRelativeUrl.EndsWith("/test.docx"));
+                Assert.AreEqual("test_query.docx", documentToFind.Name);
+                Assert.IsTrue(documentToFind.ServerRelativeUrl.EndsWith("/test_query.docx"));
             }
+
+            await CleanupMockDocumentFromSharedDocuments(2, "test_query.docx");
         }
 
         [TestMethod]
         public async Task GetFileByServerRelativeUrlTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
 
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+            await AddMockDocumentToSharedDocuments(0, "test_get.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync($"{context.Uri.PathAndQuery}/Shared Documents/test_get.docx");
 
                 Assert.IsNotNull(testDocument);
-                Assert.AreEqual("test.docx", testDocument.Name);
-                Assert.IsTrue(testDocument.ServerRelativeUrl.EndsWith("/test.docx"));
+                Assert.AreEqual("test_get.docx", testDocument.Name);
+                Assert.IsTrue(testDocument.ServerRelativeUrl.EndsWith("/test_get.docx"));
             }
+
+            await CleanupMockDocumentFromSharedDocuments(2, "test_get.docx");
         }
 
         [TestMethod]
         public async Task GetFileByServerRelativeUrlBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+            await AddMockDocumentToSharedDocuments(0, "test_get_with_batch.docx");
+
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_get_with_batch.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlBatchAsync(testDocumentServerRelativeUrl);
 
                 // Execute the requests in the batch
                 await context.ExecuteAsync();
 
                 Assert.IsNotNull(testDocument);
-                Assert.AreEqual("test.docx", testDocument.Name);
-                Assert.IsTrue(testDocument.ServerRelativeUrl.EndsWith("/test.docx"));
+                Assert.AreEqual("test_get_with_batch.docx", testDocument.Name);
+                Assert.IsTrue(testDocument.ServerRelativeUrl.EndsWith("/test_get_with_batch.docx"));
             }
+
+            await CleanupMockDocumentFromSharedDocuments(2, "test_get_with_batch.docx");
         }
 
         [TestMethod]
         public async Task PublishFileTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
-            // TODO Enable/Disable the versioning capabilities makes the versions value not reliable
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_publish", "test_publish.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Enable minor versioning
-                IList sharedDocs = await context.Web.Lists.GetByTitleAsync("Documents", l => l.EnableMinorVersions);
-                sharedDocs.EnableMinorVersions = true;
-                await sharedDocs.UpdateAsync();
-
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_publish/test_publish.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
-                //currentVersion = testDocument.MajorVersion;
-
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishAsync("TEST PUBLISH");
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_publish/test_publish.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
 
                 //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
 
-                // disbale minor versioning
-                IList sharedDocs = await context.Web.Lists.GetByTitleAsync("Documents", l => l.EnableMinorVersions);
-                sharedDocs.EnableMinorVersions = false;
-                await sharedDocs.UpdateAsync();
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion+1);
+                Assert.AreEqual(0, testDocument.MinorVersion);
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_publish");
         }
 
         [TestMethod]
         public async Task PublishFileWithBatchTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
-            // TODO Enable/Disable the versioning capabilities makes the versions value not reliable
-            //int currentVersion;
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_publish_with_batch", "test_publish_with_batch.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Enable minor versioning
-                IList sharedDocs = await context.Web.Lists.GetByTitleAsync("Documents", l => l.EnableMinorVersions);
-                sharedDocs.EnableMinorVersions = true;
-                await sharedDocs.UpdateAsync();
-
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
-                // The test document should be loaded (and its Id should be known) before continuing with Batch request
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_publish_with_batch/test_publish_with_batch.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
-                //currentVersion = testDocument.MajorVersion;
-
-                await testDocument.PublishBatchAsync("TEST PUBLISH WITH BATCH");
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
+                await testDocument.PublishBatchAsync("TEST PUBLISH");
                 await context.ExecuteAsync();
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_publish_with_batch/test_publish_with_batch.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
-                //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
-                Assert.AreEqual("TEST PUBLISH WITH BATCH", testDocument.CheckInComment);
 
-                // disbale minor versioning
-                IList sharedDocs = await context.Web.Lists.GetByTitleAsync("Documents", l => l.EnableMinorVersions);
-                sharedDocs.EnableMinorVersions = false;
-                await sharedDocs.UpdateAsync();
+                //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
+                Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
+
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
+                Assert.AreEqual(0, testDocument.MinorVersion);
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_publish_with_batch");
         }
 
         [TestMethod]
         public async Task UnpublishFileTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
-            // TODO Enable/Disable the versioning capabilities makes the versions value not reliable
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_publish", "test_publish.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Enable minor versioning
-                IList sharedDocs = await context.Web.Lists.GetByTitleAsync("Documents", l => l.EnableMinorVersions);
-                sharedDocs.EnableMinorVersions = true;
-                await sharedDocs.UpdateAsync();
-
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_publish/test_publish.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
-                //currentVersion = testDocument.MajorVersion;
-
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishAsync("TEST PUBLISH");
                 await testDocument.UnpublishAsync("TEST UNPUBLISHED");
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_publish/test_publish.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
-                //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
                 Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
-
-                // disbale minor versioning
-                IList sharedDocs = await context.Web.Lists.GetByTitleAsync("Documents", l => l.EnableMinorVersions);
-                sharedDocs.EnableMinorVersions = false;
-                await sharedDocs.UpdateAsync();
+                Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
+                Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_publish");
         }
 
         [TestMethod]
         public async Task UnpublishFileWithBatchTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
-            // TODO Enable/Disable the versioning capabilities makes the versions value not reliable
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_publish", "test_publish.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                // Enable minor versioning
-                IList sharedDocs = await context.Web.Lists.GetByTitleAsync("Documents", l => l.EnableMinorVersions);
-                sharedDocs.EnableMinorVersions = true;
-                await sharedDocs.UpdateAsync();
-
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_publish/test_publish.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
-                //currentVersion = testDocument.MajorVersion;
-
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.PublishAsync("TEST PUBLISH");
-
-                await testDocument.UnpublishBatchAsync("TEST UNPUBLISHED WITH BATCH");
+                await testDocument.UnpublishBatchAsync("TEST UNPUBLISHED");
                 await context.ExecuteAsync();
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_publish/test_publish.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
-                //Assert.AreEqual(currentVersion + 1, testDocument.MajorVersion);
-                Assert.AreEqual("TEST UNPUBLISHED WITH BATCH", testDocument.CheckInComment);
-
-                // disbale minor versioning
-                IList sharedDocs = await context.Web.Lists.GetByTitleAsync("Documents", l => l.EnableMinorVersions);
-                sharedDocs.EnableMinorVersions = false;
-                await sharedDocs.UpdateAsync();
+                Assert.AreEqual("TEST UNPUBLISHED", testDocument.CheckInComment);
+                Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
+                Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_publish");
         }
 
         [TestMethod]
         public async Task CheckoutFileTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_checkout", "test_checkout.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkout/test_checkout.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
                 await testDocument.CheckoutAsync();
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkout/test_checkout.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
@@ -245,26 +254,29 @@ namespace PnP.Core.Test.SharePoint
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_checkout");
         }
 
         [TestMethod]
         public async Task CheckoutFileWithBatchTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_checkout_with_batch", "test_checkout_with_batch.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkout_with_batch/test_checkout_with_batch.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
                 await testDocument.CheckoutBatchAsync();
                 await context.ExecuteAsync();
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkout_with_batch/test_checkout_with_batch.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
@@ -272,124 +284,251 @@ namespace PnP.Core.Test.SharePoint
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_checkout_with_batch");
         }
 
         [TestMethod]
         public async Task UndoCheckoutFileTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_undo_checkout", "test_undo_checkout.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_undo_checkout/test_undo_checkout.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.UndoCheckoutAsync();
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_undo_checkout/test_undo_checkout.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
+                Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_undo_checkout");
         }
 
         [TestMethod]
         public async Task UndoCheckoutFileWithBatchTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_undo_checkout_with_batch", "test_undo_checkout_with_batch.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_undo_checkout_with_batch/test_undo_checkout_with_batch.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.UndoCheckoutBatchAsync();
                 await context.ExecuteAsync();
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_undo_checkout_with_batch/test_undo_checkout_with_batch.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
+                Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_undo_checkout_with_batch");
         }
 
         [TestMethod]
-        public async Task CheckinFileTest()
+        public async Task CheckinFileMajorVersionTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_checkin_major", "test_checkin_major.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkin_major/test_checkin_major.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.MajorCheckIn);
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkin_major/test_checkin_major.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
-                // TODO Test version of checked in file
+                Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
+                Assert.AreEqual(0, testDocument.MinorVersion);
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_checkin_major");
+        }
+
+        [TestMethod]
+        public async Task CheckinFileMinorVersionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_checkin_minor", "test_checkin_minor.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkin_minor/test_checkin_minor.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
+                await testDocument.CheckoutAsync();
+                await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.MinorCheckIn);
+            }
+
+            // Use a different context to make sure the file is reloaded
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkin_minor/test_checkin_minor.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
+                Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
+                Assert.IsTrue(testDocument.MinorVersion == initialMinorVersion + 1);
+
+            }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_checkin_minor");
+        }
+
+        [TestMethod]
+        public async Task CheckinFileOverwriteVersionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_checkin_overwrite", "test_checkin_overwrite.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkin_overwrite/test_checkin_overwrite.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
+                await testDocument.CheckoutAsync();
+                await testDocument.CheckinAsync("TEST CHECK IN", CheckinType.OverwriteCheckIn);
+            }
+
+            // Use a different context to make sure the file is reloaded
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkin_overwrite/test_checkin_overwrite.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
+                Assert.AreEqual(initialMajorVersion, testDocument.MajorVersion);
+                Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
+            }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_checkin_overwrite");
         }
 
         [TestMethod]
         public async Task CheckinFileWithBatchTest()
         {
-            // TODO Test the major version value when capable of dealing with a dedicated library and create a dedicated file
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
+            await AddMockDocumentToMinorVersioningEnabledLibrary(0, "test_checkin_with_batch", "test_checkin_with_batch.docx");
+
+            int initialMajorVersion;
+            int initialMinorVersion;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkin_with_batch/test_checkin_with_batch.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                initialMajorVersion = testDocument.MajorVersion;
+                initialMinorVersion = testDocument.MinorVersion;
                 await testDocument.CheckoutAsync();
-                await testDocument.CheckinBatchAsync("TEST CHECK IN WITH BATCH", CheckinType.MajorCheckIn);
+                await testDocument.CheckinBatchAsync("TEST CHECK IN", CheckinType.MajorCheckIn);
                 await context.ExecuteAsync();
             }
 
             // Use a different context to make sure the file is reloaded
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/test_checkin_with_batch/test_checkin_with_batch.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
-                Assert.AreEqual("TEST CHECK IN WITH BATCH", testDocument.CheckInComment);
-                // TODO Test version of checked in file
+                Assert.AreEqual("TEST CHECK IN", testDocument.CheckInComment);
+                Assert.IsTrue(testDocument.MajorVersion > initialMajorVersion);
+                Assert.AreEqual(0, testDocument.MinorVersion);
             }
+
+            await CleanupMockMinorVersioningEnabledLibrary(3, "test_checkin_with_batch");
         }
 
         [TestMethod]
         public async Task RecycleFileTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // TODO : When the capability is added, add a mock document to recycle
+            
+            await AddMockDocumentToSharedDocuments(0, "test_recycle.docx");
 
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_recycle.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 Guid recycleBinId = await testDocument.RecycleAsync();
 
                 Assert.AreNotEqual(Guid.Empty, recycleBinId);
+            }
+
+            // Use a second context to make sure the file is reloaded from SharePoint
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+            {
+                try
+                {
+                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_recycle_with_batch.docx";
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                    Assert.Fail("The document was found and should not");
+                }
+                catch (SharePointRestServiceException serviceException)
+                {
+                    Assert.AreEqual(404, ((SharePointRestError)serviceException.Error).HttpResponseCode);
+                }
             }
         }
 
@@ -397,11 +536,12 @@ namespace PnP.Core.Test.SharePoint
         public async Task RecycleFileWithBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // TODO : When the capability is added, add a mock document to recycle
+            
+            await AddMockDocumentToSharedDocuments(0, "test_recycle_with_batch.docx");
 
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_recycle_with_batch.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 await testDocument.RecycleBatchAsync();
@@ -409,11 +549,11 @@ namespace PnP.Core.Test.SharePoint
             }
 
             // Use a second context to make sure the file is reloaded from SharePoint
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 try
                 {
-                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_recycle_with_batch.docx";
                     IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
                     Assert.Fail("The document was found and should not");
                 }
@@ -428,9 +568,12 @@ namespace PnP.Core.Test.SharePoint
         public async Task CopyFileTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+            await AddMockDocumentToSharedDocuments(0, "test_copy.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_copy.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_copied.docx";
@@ -439,85 +582,81 @@ namespace PnP.Core.Test.SharePoint
                 IFile foundCopiedDocument = await context.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
                 Assert.IsNotNull(foundCopiedDocument);
                 Assert.AreEqual("test_copied.docx", foundCopiedDocument.Name);
-
-                // Delete the copied file
-                await foundCopiedDocument.DeleteAsync();
             }
+
+            await CleanupMockDocumentFromSharedDocuments(2, "test_copy.docx");
+            await CleanupMockDocumentFromSharedDocuments(2, "test_copied.docx");
         }
 
         [TestMethod]
         public async Task CopyFileWithBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+            await AddMockDocumentToSharedDocuments(0, "test_copy_with_batch.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_copy_with_batch.docx";
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
                 string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_copied_with_batch.docx";
-                await testDocument.CopyToBatchAsync(destinationServerRelativeUrl, true);
-                await context.ExecuteAsync();
+                await testDocument.CopyToAsync(destinationServerRelativeUrl, true);
 
                 IFile foundCopiedDocument = await context.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
                 Assert.IsNotNull(foundCopiedDocument);
                 Assert.AreEqual("test_copied_with_batch.docx", foundCopiedDocument.Name);
-
-                // Delete the copied file
-                await foundCopiedDocument.DeleteAsync();
             }
+
+            await CleanupMockDocumentFromSharedDocuments(2, "test_copy_with_batch.docx");
+            await CleanupMockDocumentFromSharedDocuments(2, "test_copied_with_batch.docx");
         }
 
         [TestMethod]
         public async Task MoveFileTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+            await AddMockDocumentToSharedDocuments(0, "test_move.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
-                IFile originalDoc = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_move.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
-                string filetoMoveServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_to_move.docx";
-                await originalDoc.CopyToAsync(filetoMoveServerRelativeUrl, true);
-                IFile fileToMove = await context.Web.GetFileByServerRelativeUrlAsync(filetoMoveServerRelativeUrl);
+                string movedServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/moved_test_move.docx";
+                await testDocument.MoveToAsync(movedServerRelativeUrl, MoveOperations.Overwrite);
 
-                string movedFileServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/moved_test.docx";
-                await fileToMove.MoveToAsync(movedFileServerRelativeUrl, MoveOperations.Overwrite);
-
-                IFile movedFile = await context.Web.GetFileByServerRelativeUrlAsync(movedFileServerRelativeUrl);
-
-                Assert.IsNotNull(movedFile);
-                Assert.AreEqual("moved_test.docx", movedFile.Name);
-
-                // Delete the moved file
-                await movedFile.DeleteAsync();
+                IFile foundMovedFile = await context.Web.GetFileByServerRelativeUrlAsync(movedServerRelativeUrl);
+                Assert.IsNotNull(foundMovedFile);
+                Assert.AreEqual("moved_test_move.docx", foundMovedFile.Name);
             }
+
+            await CleanupMockDocumentFromSharedDocuments(2, "moved_test_move.docx");
         }
 
         [TestMethod]
         public async Task MoveFileBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+            await AddMockDocumentToSharedDocuments(0, "test_move_with_batch.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
-                IFile originalDoc = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_move_with_batch.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
 
-                string filetoMoveServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_to_move.docx";
-                await originalDoc.CopyToAsync(filetoMoveServerRelativeUrl, true);
-                IFile fileToMove = await context.Web.GetFileByServerRelativeUrlAsync(filetoMoveServerRelativeUrl);
-
-                string movedFileServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/moved_test_with_batch.docx";
-                await fileToMove.MoveToBatchAsync(movedFileServerRelativeUrl, MoveOperations.Overwrite);
+                string movedServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/moved_test_move_with_batch.docx";
+                await testDocument.MoveToBatchAsync(movedServerRelativeUrl, MoveOperations.Overwrite);
                 await context.ExecuteAsync();
 
-                IFile movedFile = await context.Web.GetFileByServerRelativeUrlAsync(movedFileServerRelativeUrl);
-
-                Assert.IsNotNull(movedFile);
-                Assert.AreEqual("moved_test_with_batch.docx", movedFile.Name);
-
-                // Delete the moved file
-                await movedFile.DeleteAsync();
+                IFile foundMovedFile = await context.Web.GetFileByServerRelativeUrlAsync(movedServerRelativeUrl);
+                Assert.IsNotNull(foundMovedFile);
+                Assert.AreEqual("moved_test_move_with_batch.docx", foundMovedFile.Name);
             }
+
+            await CleanupMockDocumentFromSharedDocuments(2, "moved_test_move_with_batch.docx");
         }
 
         [TestMethod]
@@ -580,16 +719,19 @@ namespace PnP.Core.Test.SharePoint
         //public async Task UpdateFileMetadataTest()
         //{
         //    //TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+
+        //    await AddMockDocumentToSharedDocuments(0, "test_update.docx");
+
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
         //    {
-        //        string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
+        //        string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_update.docx";
         //        IFile testDocument = await context.Web.GetFileByServerRelativeUrlBatchAsync(testDocumentServerRelativeUrl);
 
-        //        testDocument.ListItemAllFields.Values["Title"]= "test_updated.docx";
+        //        testDocument.ListItemAllFields.Values["Title"] = "test_updated.docx";
         //        await testDocument.ListItemAllFields.UpdateAsync();
         //    }
 
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
         //    {
         //        string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test.docx";
         //        IFile testDocument = await context.Web.GetFileByServerRelativeUrlBatchAsync(testDocumentServerRelativeUrl);
@@ -599,17 +741,105 @@ namespace PnP.Core.Test.SharePoint
         //        testDocument.ListItemAllFields.Title = "test.docx";
         //        await testDocument.ListItemAllFields.UpdateAsync();
         //    }
+
+        //    await CleanupMockDocumentFromSharedDocuments(2, "test_update.docx");
         //}
 
-        // TODO Implement the Delete file test when
-        //[TestMethod]
-        //public async Task DeleteFileTest()
-        //{
-        //    //TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
 
-        //    }
-        //}
+        [TestMethod]
+        public async Task DeleteFileTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            await AddMockDocumentToSharedDocuments(0, "test_delete.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_delete.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                await testDocument.DeleteAsync();
+
+                try
+                {
+                    IFile foundDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                    Assert.Fail("The document was found and should not");
+                }
+                catch (SharePointRestServiceException serviceException)
+                {
+                    Assert.AreEqual(404, ((SharePointRestError)serviceException.Error).HttpResponseCode);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteFileWithBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            await AddMockDocumentToSharedDocuments(0, "test_delete_with_batch.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_delete_with_batch.docx";
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                await testDocument.DeleteBatchAsync();
+                await context.ExecuteAsync();
+
+                try
+                {
+                    IFile foundDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                    Assert.Fail("The document was found and should not");
+                }
+                catch (SharePointRestServiceException serviceException)
+                {
+                    Assert.AreEqual(404, ((SharePointRestError)serviceException.Error).HttpResponseCode);
+                }
+            }
+        }
+
+        #region Test asset documents/libraries
+        private async Task<string> AddMockDocumentToMinorVersioningEnabledLibrary(int contextId, string libraryName, string fileName, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
+            {
+                IList documentLibrary = await context.Web.Lists.AddAsync(libraryName, ListTemplateType.DocumentLibrary);
+                documentLibrary.EnableVersioning = true;
+                documentLibrary.EnableMinorVersions = true;
+                await documentLibrary.UpdateAsync();
+                IFolder folder = await documentLibrary.RootFolder.GetAsync();
+                IFile mockDocument = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                return mockDocument.ServerRelativeUrl;
+            }
+        }
+
+        private async Task CleanupMockMinorVersioningEnabledLibrary(int contextId, string libraryName, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
+            {
+                IList documentLibrary = await context.Web.Lists.GetByTitleAsync(libraryName);
+                await documentLibrary.DeleteAsync();
+            }
+        }
+
+        private async Task<string> AddMockDocumentToSharedDocuments(int contextId, string fileName, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
+            {
+                IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFile mockDocument = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                return mockDocument.ServerRelativeUrl;
+            }
+        }
+
+        private async Task CleanupMockDocumentFromSharedDocuments(int contextId, string fileName, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
+            {
+                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{fileName}";
+                IFile mockDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+                await mockDocument.DeleteAsync();
+            }
+        }
+        #endregion
     }
 }

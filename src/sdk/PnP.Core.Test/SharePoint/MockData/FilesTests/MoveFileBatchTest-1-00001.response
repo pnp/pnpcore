@@ -1,0 +1,9 @@
+--batchresponse_cd64d271-acfc-44c7-9756-2d7da4c8c258
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"MoveTo":null}}
+--batchresponse_cd64d271-acfc-44c7-9756-2d7da4c8c258--
