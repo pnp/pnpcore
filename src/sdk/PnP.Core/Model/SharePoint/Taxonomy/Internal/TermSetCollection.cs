@@ -1,0 +1,71 @@
+﻿using PnP.Core.Services;
+using System;
+using System.Threading.Tasks;
+
+namespace PnP.Core.Model.SharePoint
+{
+    internal partial class TermSetCollection
+    {
+        public async Task<ITermSet> AddAsync(string name, string description = null)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            TermSet newSet = await PrepNewTermSet(name, description).ConfigureAwait(false);
+
+            return await newSet.AddAsync().ConfigureAwait(false) as TermSet;
+        }
+
+        private async Task<TermSet> PrepNewTermSet(string name, string description)
+        {
+            // Ensure the default termstore language is loaded
+            await PnPContext.TermStore.EnsurePropertiesAsync(p => p.DefaultLanguage).ConfigureAwait(false);
+
+            var newSet = CreateNewAndAdd() as TermSet;
+
+            // Assign field values
+            newSet.LocalizedNames.Add(new TermSetLocalizedName() { Name = name, LanguageTag = PnPContext.TermStore.DefaultLanguage });
+
+            if (description != null)
+            {
+                newSet.Description = description;
+            }
+
+            return newSet;
+        }
+
+        public ITermSet Add(string name, string description = null)
+        {
+            return AddAsync(name, description).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITermSet> AddBatchAsync(Batch batch, string name, string description = null)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            TermSet newSet = await PrepNewTermSet(name, description).ConfigureAwait(false);
+
+            return await newSet.AddBatchAsync(batch).ConfigureAwait(false) as TermSet;
+        }
+
+        public ITermSet AddBatch(Batch batch, string name, string description = null)
+        {
+            return AddBatchAsync(batch, name, description).GetAwaiter().GetResult();
+        }
+
+        public async Task<ITermSet> AddBatchAsync(string name, string description = null)
+        {
+            return await AddBatchAsync(PnPContext.CurrentBatch, name, description).ConfigureAwait(false);
+        }
+
+        public ITermSet AddBatch(string name, string description = null)
+        {
+            return AddBatchAsync(name, description).GetAwaiter().GetResult();
+        }
+    }
+}

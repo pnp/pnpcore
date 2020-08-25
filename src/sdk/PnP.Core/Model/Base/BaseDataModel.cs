@@ -1259,6 +1259,7 @@ namespace PnP.Core.Model
                             // Build a new dynamic object that will hold the changed properties of the complex type
                             dynamic updateMessageComplexType = new ExpandoObject();
                             var complexObject = this.GetValue(changedField.Name) as TransientObject;
+
                             // Get the properties that have changed in the complex type
                             foreach (string changedProp in complexObject.ChangedProperties)
                             {
@@ -1789,7 +1790,7 @@ namespace PnP.Core.Model
         #endregion
 
         #region Implementation of Navigation property instantiation check
-        private Dictionary<string, bool> navigationPropertyInstantiated = new Dictionary<string, bool>();
+        private readonly Dictionary<string, bool> navigationPropertyInstantiated = new Dictionary<string, bool>();
 
         internal protected bool NavigationPropertyInstantiated([CallerMemberName] string propertyName = "")
         {
@@ -1812,6 +1813,41 @@ namespace PnP.Core.Model
                 navigationPropertyInstantiated.Add(propertyName, true);
             }
         }
+        #endregion
+
+        #region Parent traversal logic
+
+        internal IDataModelParent GetParentByType(Type parentType, IDataModelParent parent = null)
+        {
+
+            if (Parent == null)
+            {
+                return null;
+            }
+
+            if (parent == null)
+            {
+                parent = Parent;
+            }
+
+            // Bingo, we're good
+            if (parent.GetType() == parentType)
+            {
+                return parent;
+            }
+            // Let's check the parent
+            else if (parent.Parent != null)
+            {
+                return GetParentByType(parentType, parent.Parent);
+            }
+            // We're at the top of the tree...nothing found afterall
+            else
+            {
+                return null;
+            }
+        }
+
+
         #endregion
     }
 }

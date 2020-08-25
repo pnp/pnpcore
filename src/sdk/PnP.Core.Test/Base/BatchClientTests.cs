@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.QueryModel;
+using System.Net.Http;
 
 namespace PnP.Core.Test.Base
 {
@@ -332,6 +333,70 @@ namespace PnP.Core.Test.Base
                 }
             }
         }
-        
+
+        #region Interactive request tests
+
+        [TestMethod]
+        public async Task InteractiveGetRequest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var api = new ApiCall($"_api/web?$select=Id%2cWelcomePage", ApiType.SPORest)
+                {
+                    Interactive = true
+                };
+
+                var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Get);
+
+                Assert.IsTrue(apiResponse.Executed);
+                Assert.IsTrue(!string.IsNullOrEmpty(apiResponse.Requests.First().Value.ResponseJson));
+                Assert.IsTrue(apiResponse.Requests.First().Value.ResponseHttpStatusCode == System.Net.HttpStatusCode.OK);
+                Assert.IsTrue(!string.IsNullOrEmpty(context.Web.WelcomePage));
+            }
+        }
+
+        [TestMethod]
+        public async Task InteractivePostRequest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "InteractivePostRequest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                var listCount = web.Lists.Count();
+
+                // Add a new list via interactive request
+                string body = $"{{\"__metadata\":{{\"type\":\"SP.List\"}},\"BaseTemplate\":100,\"Title\":\"{listTitle}\"}}";
+
+                var api = new ApiCall($"_api/web/lists", ApiType.SPORest, body)
+                {
+                    Interactive = true
+                };
+
+                var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Post);
+
+                Assert.IsTrue(apiResponse.Executed);
+                Assert.IsTrue((int)apiResponse.Requests.First().Value.ResponseHttpStatusCode < 400);
+
+                // Load the list again
+                await context.Web.GetAsync(p => p.Lists);
+
+                // Check if we still have the same amount of lists
+                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+
+            }
+        }
+
+        #endregion
+
     }
 }

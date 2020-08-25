@@ -82,6 +82,17 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
+        /// Returns true if this batch contains an interactive request
+        /// </summary>
+        internal bool HasInteractiveRequest
+        {
+            get
+            {
+                return (Requests.Any(r => r.Value.ApiCall.Interactive));
+            }
+        }
+
+        /// <summary>
         /// Returns true if this <see cref="Batch"/> can be completely executed via SPO REST
         /// </summary>
         internal bool CanFallBackToSPORest

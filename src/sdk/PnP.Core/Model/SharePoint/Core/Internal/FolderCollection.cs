@@ -7,7 +7,6 @@ namespace PnP.Core.Model.SharePoint
 {
     internal partial class FolderCollection
     {
-
         #region Add
         public async Task<IFolder> AddBatchAsync(string name)
         {
@@ -57,7 +56,6 @@ namespace PnP.Core.Model.SharePoint
         {
             return AddAsync(name).GetAwaiter().GetResult();
         }
-
         #endregion
     }
 }

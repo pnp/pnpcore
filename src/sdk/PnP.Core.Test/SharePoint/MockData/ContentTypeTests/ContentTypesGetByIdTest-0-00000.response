@@ -1,9 +1,9 @@
---batchresponse_c7a5cd9b-b66b-4f1c-ba9c-60a5ce4402ca
+--batchresponse_ff2fc915-224c-46a3-8bc2-41c0bcf4d648
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x01')","uri":"https://piasysdev.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x01')","type":"SP.ContentType"},"Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x01"},"StringId":"0x01"}]}}
---batchresponse_c7a5cd9b-b66b-4f1c-ba9c-60a5ce4402ca--
+{"d":{"results":[{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/ContentTypes('0x01')","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/ContentTypes('0x01')","type":"SP.ContentType"},"Id":{"__metadata":{"type":"SP.ContentTypeId"},"StringValue":"0x01"},"StringId":"0x01"}]}}
+--batchresponse_ff2fc915-224c-46a3-8bc2-41c0bcf4d648--

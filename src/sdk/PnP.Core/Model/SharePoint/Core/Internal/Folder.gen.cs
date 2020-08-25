@@ -32,20 +32,19 @@ namespace PnP.Core.Model.SharePoint
 
         public string WelcomePage { get => GetValue<string>(); set => SetValue(value); }
 
-        //TODO: To implement...
-        //[SharePointProperty("Files", Expandable = true)]
-        //public IFileCollection Files
-        //{
-        //    get
-        //    {
-        //        if (!HasValue(nameof(Files)))
-        //        {
-        //            var collection = new FileCollection(this.PnPContext, this, nameof(Files));
-        //            SetValue(collection);
-        //        }
-        //        return GetValue<IFileCollection>();
-        //    }
-        //}
+        [SharePointProperty("Files", Expandable = true)]
+        public IFileCollection Files
+        {
+            get
+            {
+                if (!HasValue(nameof(Files)))
+                {
+                    var collection = new FileCollection(this.PnPContext, this, nameof(Files));
+                    SetValue(collection);
+                }
+                return GetValue<IFileCollection>();
+            }
+        }
 
         public IListItem ListItemAllFields
         {

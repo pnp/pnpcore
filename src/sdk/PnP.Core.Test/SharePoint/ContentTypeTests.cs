@@ -107,8 +107,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(newContentType);
-                // NOTE : The Id of the created content type is not identical to the specified one using the SP Rest API. See ContentType.cs for more details
-                //Assert.AreEqual(newContentTypeId, newContentType.StringId);
+                Assert.AreEqual("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", newContentType.StringId);
                 Assert.AreEqual("TEST ADD", newContentType.Name);
                 Assert.AreEqual("TESTING", newContentType.Description);
                 Assert.AreEqual("TESTING", newContentType.Group);

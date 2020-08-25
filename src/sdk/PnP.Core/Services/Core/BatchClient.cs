@@ -241,45 +241,61 @@ namespace PnP.Core.Services
             // Remove duplicate batch requests
             DedupBatchRequests(ref batch);
 
-            if (batch.HasMixedApiTypes)
+            if (batch.HasInteractiveRequest)
             {
-                if (batch.CanFallBackToSPORest)
+                if (batch.Requests.Count > 1)
                 {
-                    // set the backup api call to be the actual api call for the api calls marked as graph
-                    batch.MakeSPORestOnlyBatch();
-                    await ExecuteSharePointRestBatchAsync(batch).ConfigureAwait(false);
+                    throw new ClientException(ErrorType.Unsupported, "Interactive requests cannot be grouped together, execute them one by one");
                 }
-                else
+
+                // TODO: Add similar approach for Graph calls (whenever that will be needed)
+                if (batch.Requests.First().Value.ApiCall.Type == ApiType.SPORest)
                 {
-                    // implement logic to split batch in a rest batch and a graph batch
-                    (Batch spoRestBatch, Batch graphBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch);
-                    // execute the 2 batches
-                    await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
-                    await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
-                    await ExecuteCsomBatchAsync(csomBatch).ConfigureAwait(false);
+                    await ExecuteSharePointRestInteractiveAsync(batch).ConfigureAwait(false);
                 }
             }
             else
             {
-                if (batch.UseGraphBatch)
+                if (batch.HasMixedApiTypes)
                 {
-                    await ExecuteMicrosoftGraphBatchAsync(batch).ConfigureAwait(false);
-                }
-                else if (batch.UseCsomBatch)
-                {
-                    await ExecuteCsomBatchAsync(batch).ConfigureAwait(false);
+                    if (batch.CanFallBackToSPORest)
+                    {
+                        // set the backup api call to be the actual api call for the api calls marked as graph
+                        batch.MakeSPORestOnlyBatch();
+                        await ExecuteSharePointRestBatchAsync(batch).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        // implement logic to split batch in a rest batch and a graph batch
+                        (Batch spoRestBatch, Batch graphBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch);
+                        // execute the 2 batches
+                        await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
+                        await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
+                        await ExecuteCsomBatchAsync(csomBatch).ConfigureAwait(false);
+                    }
                 }
                 else
                 {
-                    await ExecuteSharePointRestBatchAsync(batch).ConfigureAwait(false);
+                    if (batch.UseGraphBatch)
+                    {
+                        await ExecuteMicrosoftGraphBatchAsync(batch).ConfigureAwait(false);
+                    }
+                    else if (batch.UseCsomBatch)
+                    {
+                        await ExecuteCsomBatchAsync(batch).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        await ExecuteSharePointRestBatchAsync(batch).ConfigureAwait(false);
+                    }
                 }
-            }
 
-            // Executing a batch might have resulted in a mismatch between the model and the data in SharePoint:
-            // Getting entities can result in duplicate entities (e.g. 2 lists when getting the same list twice in a single batch)
-            // Adding entities can result in an entity in the model that does not have the proper key value set (as that value is only retrievable after the add in SharePoint)
-            // Deleting entities can result in an entity in the model that also should have been deleted
-            MergeBatchResultsWithModel(batch);
+                // Executing a batch might have resulted in a mismatch between the model and the data in SharePoint:
+                // Getting entities can result in duplicate entities (e.g. 2 lists when getting the same list twice in a single batch)
+                // Adding entities can result in an entity in the model that does not have the proper key value set (as that value is only retrievable after the add in SharePoint)
+                // Deleting entities can result in an entity in the model that also should have been deleted
+                MergeBatchResultsWithModel(batch);
+            }
         }
 
         #region Graph batching
@@ -761,10 +777,10 @@ namespace PnP.Core.Services
 
                             await ProcessSharePointRestBatchResponse(restBatch, batchResponse).ConfigureAwait(false);
                         }
+#endif
 
                         // Mark batch as executed
                         restBatch.Batch.Executed = true;
-#endif
                     }
                 }
         }
@@ -989,6 +1005,151 @@ namespace PnP.Core.Services
 
         #endregion
 
+        #region SharePoint REST interactive calls
+        private async Task ExecuteSharePointRestInteractiveAsync(Batch batch)
+        {
+            var restRequest = batch.Requests.First().Value;
+            StringContent content = null;
+            ByteArrayContent binaryContent = null;
+
+            try
+            {
+                using (var request = new HttpRequestMessage(restRequest.Method, restRequest.ApiCall.Request))
+                {
+                    if (!string.IsNullOrEmpty(restRequest.ApiCall.JsonBody))
+                    {
+                        content = new StringContent(restRequest.ApiCall.JsonBody, Encoding.UTF8, "application/json");
+                        request.Content = content;
+
+                        // Remove the default Content-Type content header
+                        if (content.Headers.Contains("Content-Type"))
+                        {
+                            content.Headers.Remove("Content-Type");
+                        }
+                        // Add the batch Content-Type header
+                        content.Headers.Add($"Content-Type", $"application/json;odata=verbose");
+                    }
+                    else if (restRequest.ApiCall.BinaryBody != null)
+                    {
+                        binaryContent = new ByteArrayContent(restRequest.ApiCall.BinaryBody);
+                        request.Content = binaryContent;
+                    }
+
+                    telemetryManager?.LogServiceRequest(batch, restRequest, PnPContext);
+
+#if DEBUG
+                    string batchKey = null;
+                    if (PnPContext.Mode != TestMode.Default)
+                    {
+                        batchKey = $"{testUseCounter}@@{request.Method}|{restRequest.ApiCall.Request}@@";
+                        testUseCounter++;
+                    }
+
+                    // Test recording
+                    if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                    {
+                        // Write request
+                        TestManager.RecordRequest(PnPContext, batchKey, $"{restRequest.Method}-{restRequest.ApiCall.Request}-{(restRequest.ApiCall.JsonBody ?? "")}");
+                    }
+
+                    // If we are not mocking or if there is no mock data
+                    if (PnPContext.Mode != TestMode.Mock)
+                    {
+#endif
+                        // Ensure the request contains authentication information
+                        Uri site = new Uri(restRequest.ApiCall.Request.Substring(0, restRequest.ApiCall.Request.IndexOf("/_api/", 0)));
+                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(site, request).ConfigureAwait(false);
+
+                        // Send the request
+                        HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
+
+                        // Process the request response
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Get the response string
+                            string requestResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+#if DEBUG
+                            if (PnPContext.Mode == TestMode.Record)
+                            {
+                                // Call out to the rewrite handler if that one is connected
+                                if (MockingFileRewriteHandler != null)
+                                {
+                                    requestResponse = MockingFileRewriteHandler(requestResponse);
+                                }
+
+                                // Write response
+                                TestManager.RecordResponse(PnPContext, batchKey, requestResponse);
+                            }
+#endif
+                            await ProcessSharePointRestInteractiveResponse(restRequest, response.StatusCode, requestResponse).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            // Something went wrong...
+                            throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        }
+
+#if DEBUG
+                    }
+                    else
+                    {
+                        string requestResponse = TestManager.MockResponse(PnPContext, batchKey);
+
+                        // TODO: get status code from recorded response file
+                        await ProcessSharePointRestInteractiveResponse(restRequest, HttpStatusCode.OK, requestResponse).ConfigureAwait(false);
+                    }
+#endif
+
+                    // Mark batch as executed
+                    batch.Executed = true;
+                }
+            }
+            finally
+            {
+                if (content != null)
+                {
+                    content.Dispose();
+                }
+                if (binaryContent != null)
+                {
+                    binaryContent.Dispose();
+                }
+            }
+        }
+
+        private static async Task ProcessSharePointRestInteractiveResponse(BatchRequest restRequest, HttpStatusCode responseCode, string requestResponse)
+        {
+            if (responseCode == HttpStatusCode.NoContent)
+            {
+                restRequest.AddResponse("", responseCode);
+            }
+            else
+            {
+                restRequest.AddResponse(requestResponse, responseCode);
+            }
+
+            // Commit succesful updates in our model
+            if (restRequest.Method == HttpMethod.Patch || restRequest.ApiCall.Commit)
+            {
+                if (restRequest.Model is TransientObject)
+                {
+                    (restRequest.Model as TransientObject).Commit();
+                }
+            }
+
+            if (!string.IsNullOrEmpty(restRequest.ResponseJson))
+            {
+                // A raw request does not require loading of the response into the model
+                if (!restRequest.ApiCall.RawRequest)
+                {
+                    await JsonMappingHelper.MapJsonToModel(restRequest).ConfigureAwait(false);
+                }
+            }
+        }
+
+        #endregion
+
         #region CSOM batching
         /// <summary>
         /// Execute a batch with CSOM requests.
@@ -1124,9 +1285,13 @@ namespace PnP.Core.Services
                             throw new CsomServiceException(ErrorType.CsomServiceError, (int)statusCode, firstElement);
                         }
                     }
-                    
+
                     // No error, so let's return the results
-                    csomBatch.Batch.Requests.First().Value.AddResponse(responses, statusCode);
+                    var firstRequest = csomBatch.Batch.Requests.First().Value;
+                    firstRequest.AddResponse(responses, statusCode);
+
+                    // Execute post mapping handler (even though, there is no actual mapping in this case)
+                    firstRequest.PostMappingJson?.Invoke(batchResponse);
                 }
             }
         }

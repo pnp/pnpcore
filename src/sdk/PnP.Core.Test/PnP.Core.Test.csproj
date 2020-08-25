@@ -34,4 +34,13 @@
     <Folder Include="Teams\MockData\TeamSettingsTests\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestAssets\test.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestAssets\testchunked.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

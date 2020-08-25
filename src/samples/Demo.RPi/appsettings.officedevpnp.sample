@@ -1,0 +1,12 @@
+﻿{
+  "CustomSettings": {
+    "DemoSiteUrl": "https://tenant.sharepoint.com/sites/pnpcoresdkdemo",
+    "UserPrincipalName": "transform@tenant.onmicrosoft.com",
+    "Password": "password"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug"
+    }
+  }
+}

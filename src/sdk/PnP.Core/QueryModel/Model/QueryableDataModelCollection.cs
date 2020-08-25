@@ -18,7 +18,10 @@ namespace PnP.Core.QueryModel.Model
                 typeof(Core.Model.SharePoint.IContentType),
                 typeof(Core.Model.SharePoint.IField),
                 typeof(Core.Model.SharePoint.IFolder),
+                typeof(Core.Model.SharePoint.IFile),
                 typeof(Core.Model.SharePoint.IWeb),
+                typeof(Core.Model.SharePoint.ITermGroup),
+                typeof(Core.Model.SharePoint.ITermSet),
                 typeof(Core.Model.Teams.ITeamChannel),
                 typeof(Core.Model.Teams.ITeamChatMessage)
             };
@@ -32,8 +35,8 @@ namespace PnP.Core.QueryModel.Model
 
     /// <summary>
     /// Base type for any LINQ IQueryable collection of the Domain Model
-    /// In the real model, could inherit from  BaseDataModelCollection<TModel>
-    /// and implement IQueryable<TModel>
+    /// In the real model, could inherit from  BaseDataModelCollection&lt;TModel&gt;
+    /// and implement IQueryable&lt;TModel&gt; 
     /// </summary>
     /// <typeparam name="TModel">The Type of the collection</typeparam>
     internal class QueryableDataModelCollection<TModel> : BaseQueryableDataModelCollection<TModel>

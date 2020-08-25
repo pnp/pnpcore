@@ -22,3 +22,9 @@
 - It is not possible to query Channels with $orderby, $top, $skip
 - It is not possible to query Messages in Channels with $select, $filter, $orderby, $top, $skip
 - One can archive a team in a batch, but unarchive in a batch does not work unless we send along a fake body
+
+# Taxonomy
+
+- Deleting a termset using DELETE ~termstore/sets/id does not work (known issue, will be fixed)
+- Using the Terms part of the API (e.g. GET ~ termstore/sets/id/terms) throws an error : "Access Denied: End point cannot be called by the current user" ==> seems to be documentation issue as using terms in only usable to retrieve a single term. Will be fixed.
+- Deleting a term grou^p (DELETE ~termstore/groups/id) immediately after deleting the termsets inside throws an error "cannot delete non empty term groups". Issue is listed with the graph team and being investigated
