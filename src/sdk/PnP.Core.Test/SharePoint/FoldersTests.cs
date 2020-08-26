@@ -34,7 +34,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetFolderByServerRelativeUrlTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string sharedDocumentsFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
@@ -75,7 +75,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetFolderStorageMetricsTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
