@@ -33,6 +33,9 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public void SecurityExtEncryptTest()
         {
+            // Disable test in GitHub, Reason availability of certificate in Linux environments
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             var encryptSampleText = "EncryptThisString";
             var encryptResult = encryptSampleText.Encrypt(TestCommon.GetX509CertificateThumbprint()); //Fake
             Assert.IsTrue(!string.IsNullOrEmpty(encryptResult));
@@ -42,6 +45,7 @@ namespace PnP.Core.Test.Base
             // Reference: https://www.pkisolutions.com/accessing-and-using-certificate-private-keys-in-net-framework-net-core/ slighty different approach
             //var decryptResult = encryptResult.Decrypt(TestCommon.GetX509CertificateThumbprint());
             //Assert.AreEqual(decryptResult, encryptSampleText);
+            
         }
 
         [TestMethod]
@@ -78,6 +82,9 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public void X509CertUtilityEncryptNothingTest()
         {
+            // Disable test in GitHub, Reason availability of certificate in Linux environments
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, TestCommon.GetX509CertificateThumbprint());
             Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Encrypt(null, true, certificate));
         }
@@ -85,6 +92,9 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public void X509CertUtilityEncryptNoCertTest()
         {
+            // Disable test in GitHub, Reason availability of certificate in Linux environments
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             byte[] encoded = Encoding.UTF8.GetBytes("test");
             Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Encrypt(encoded, true, null));
         }
@@ -92,19 +102,30 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public void X509CertUtilityGetPublicKeyNoCertTest()
         {
+            // Disable test in GitHub, Reason availability of certificate in Linux environments
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+            
             Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.GetPublicKey(null));
+            
         }
 
         [TestMethod]
         public void X509CertUtilityDecryptNothingTest()
         {
+            // Disable test in GitHub, Reason availability of certificate in Linux environments
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, TestCommon.GetX509CertificateThumbprint());
-            Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Decrypt(null, true, certificate));
+                Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Decrypt(null, true, certificate));
+            
         }
 
         [TestMethod]
         public void X509CertUtilityDecryptNoCertTest()
         {
+            // Disable test in GitHub, Reason availability of certificate in Linux environments
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             byte[] encoded = Encoding.UTF8.GetBytes("doesntmatterwhatthisis");
             Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Decrypt(encoded, true, null));
         }
