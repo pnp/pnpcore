@@ -1,5 +1,6 @@
 using PnP.Core.Services;
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -164,46 +165,52 @@ namespace PnP.Core.Model.SharePoint
         /// Get a folder in the current web from its server relative URL.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The folder to get</returns>
-        public Task<IFolder> GetFolderByServerRelativeUrlAsync(string serverRelativeUrl);
+        public Task<IFolder> GetFolderByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions);
 
 
         /// <summary>
         /// Get a folder in the current web from its server relative URL.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The folder to get</returns>
-        public IFolder GetFolderByServerRelativeUrl(string serverRelativeUrl);
+        public IFolder GetFolderByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions);
 
         /// <summary>
         /// Get a folder in the current web from its server relative URL via batch.
         /// </summary>
-        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
         /// <param name="batch">Batch to add this request to</param>
+        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The folder to get</returns>
-        public Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl);
+        public Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions);
 
         /// <summary>
         /// Get a folder in the current web from its server relative URL via batch.
         /// </summary>
-        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
         /// <param name="batch">Batch to add this request to</param>
+        /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The folder to get</returns>
-        public IFolder GetFolderByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl);
+        public IFolder GetFolderByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions);
 
         /// <summary>
         /// Get a folder in the current web from its server relative URL via batch.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The folder to get</returns>
-        public Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(string serverRelativeUrl);
+        public Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions);
 
         /// <summary>
         /// Get a folder in the current web from its server relative URL via batch.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The folder to get</returns>
-        public IFolder GetFolderByServerRelativeUrlBatch(string serverRelativeUrl);
+        public IFolder GetFolderByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions);
 
         #endregion
 

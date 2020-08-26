@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using PnP.Core.QueryModel;
 using System.Collections.Generic;
+using System;
+using System.IO;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -32,7 +34,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetFolderByServerRelativeUrlTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string sharedDocumentsFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
@@ -67,6 +69,28 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Shared Documents", sharedDocumentsfolder.Name);
                 Assert.IsNotNull(sitePagesfolder);
                 Assert.AreEqual("SitePages", sitePagesfolder.Name);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFolderStorageMetricsTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder mockFolder = await parentFolder.Folders.AddAsync("TEST_STORAGE_METRICS");
+                string testStorageMetricsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_STORAGE_METRICS";
+
+                IFolder folderWithStorageMetrics = await context.Web.GetFolderByServerRelativeUrlAsync(testStorageMetricsFolderUrl, f => f.StorageMetrics);
+
+                Assert.IsNotNull(folderWithStorageMetrics.StorageMetrics);
+                Assert.AreNotEqual(default, folderWithStorageMetrics.StorageMetrics.LastModified);
+                Assert.AreEqual(0, folderWithStorageMetrics.StorageMetrics.TotalFileCount);
+                Assert.AreEqual(152, folderWithStorageMetrics.StorageMetrics.TotalSize);
+                Assert.AreEqual(0, folderWithStorageMetrics.StorageMetrics.TotalFileStreamSize);
+
+                await mockFolder.DeleteAsync();
             }
         }
 

@@ -77,11 +77,10 @@ namespace PnP.Core.Model.SharePoint
         ///// </summary>
         //public IPropertyValues Properties { get; }
 
-        //TODO: To implement...
         /// <summary>
         /// Get the storage metrics of the folder.
         /// </summary>
-        //public IStorageMetrics StorageMetrics { get; }
+        public IStorageMetrics StorageMetrics { get; }
 
         /// <summary>
         /// Gets the collection of list folders contained in the list folder.

@@ -238,13 +238,24 @@ namespace PnP.Core.Services
 
                         await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
                     }
-                    else
+                    else if (IsComplexType(entityField.PropertyInfo.PropertyType))
                     {
+                        MapJsonToComplexTypePropertyRecursive(pnpObject, contextAwareObject, property, entityField);
+                    }
+                    // TODO: To implement with REST when some domain model require it
+                    //else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
+                    //{
+                    //    MapJsonToComplexTypeItemListRecursive(pnpObject, contextAwareObject, apiResponse, property, entityField);
+                    //}
+                    else // Simple property mapping
+                    {
+                        // Keep the id value aside when seeing it for later usage
                         if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.SharePointKeyField.Name))
                         {
                             idFieldValue = GetJsonPropertyValue(property).ToString();
                         }
 
+                        // Set the object property value taken from the JSON payload
                         entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name,
                             GetJsonElementFromPath(property.Value, entityField.SharePointJsonPath), entityField.DataType, entityField.SharePointUseCustomMapping, fromJsonCasting));
                     }
@@ -302,52 +313,9 @@ namespace PnP.Core.Services
                 }
             }
 
-            // Store the rest ID field for follow-up rest requests
-            if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataRestId) && !string.IsNullOrEmpty(idFieldValue))
-            {
-                metadataBasedObject.Metadata.Add(PnPConstants.MetaDataRestId, idFieldValue);
-            }
-            // Store graph ID for transition to graph when needed
-            if (contextAwareObject.PnPContext.GraphFirst && !metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
-            {
-                // SP.Web requires a special id value
-                if (entity.SharePointType.Equals("SP.Web"))
-                {
-                    if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
-                    {
-                        // Ensure site and web id's are loaded, use batching to load them both in one go in case that would be needed
-                        if (!contextAwareObject.PnPContext.Site.IsPropertyAvailable(p => p.Id) || !contextAwareObject.PnPContext.Web.IsPropertyAvailable(p => p.Id))
-                        {
-                            var idBatch = contextAwareObject.PnPContext.NewBatch();
-                            if (!contextAwareObject.PnPContext.Site.IsPropertyAvailable(p => p.Id))
-                            {
-                                await contextAwareObject.PnPContext.Site.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
-                            }
-                            if (!contextAwareObject.PnPContext.Web.IsPropertyAvailable(p => p.Id))
-                            {
-                                await contextAwareObject.PnPContext.Web.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
-                            }
-                            await contextAwareObject.PnPContext.ExecuteAsync(idBatch).ConfigureAwait(false);
-                        }
+            // Try populate the PnP Object metadata from the mapped info
+            await TryPopuplatePnPObjectMetadataFromRest(contextAwareObject, metadataBasedObject, entity, idFieldValue).ConfigureAwait(false);
 
-                        if (contextAwareObject.PnPContext.Site.IsPropertyAvailable(p => p.Id) && contextAwareObject.PnPContext.Web.IsPropertyAvailable(p => p.Id))
-                        {
-                            // Check again here due to the recursive nature of this code
-                            if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
-                            {
-                                metadataBasedObject.Metadata.Add(PnPConstants.MetaDataGraphId, $"{contextAwareObject.PnPContext.Uri.DnsSafeHost},{contextAwareObject.PnPContext.Site.Id},{contextAwareObject.PnPContext.Web.Id}");
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(idFieldValue) && !metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
-                    {
-                        metadataBasedObject.Metadata.Add(PnPConstants.MetaDataGraphId, idFieldValue);
-                    }
-                }
-            }
             // Store __next link for paging in case we detected a $top in the issued query
             if (apiResponse.ApiCall.Request.Contains("$top", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -359,6 +327,60 @@ namespace PnP.Core.Services
             }
         }
 
+
+        internal static async Task TryPopuplatePnPObjectMetadataFromRest(IDataModelWithContext contextAwareObject, IMetadataExtensible targetMetadataObject, EntityInfo entity, string idFieldValue)
+        {
+            // Store the rest ID field for follow-up rest requests
+            Dictionary<string, string> Metadata = targetMetadataObject.Metadata;
+            PnPContext pnpContext = contextAwareObject.PnPContext;
+
+            if (!Metadata.ContainsKey(PnPConstants.MetaDataRestId) && !string.IsNullOrEmpty(idFieldValue))
+            {
+                Metadata.Add(PnPConstants.MetaDataRestId, idFieldValue);
+            }
+            // Store graph ID for transition to graph when needed
+            if (pnpContext.GraphFirst && !Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+            {
+                // SP.Web requires a special id value
+                if (entity.SharePointType.Equals("SP.Web"))
+                {
+                    if (!Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                    {
+                        // Ensure site and web id's are loaded, use batching to load them both in one go in case that would be needed
+                        if (!pnpContext.Site.IsPropertyAvailable(p => p.Id) || !pnpContext.Web.IsPropertyAvailable(p => p.Id))
+                        {
+                            var idBatch = pnpContext.NewBatch();
+                            if (!pnpContext.Site.IsPropertyAvailable(p => p.Id))
+                            {
+                                await pnpContext.Site.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
+                            }
+                            if (!pnpContext.Web.IsPropertyAvailable(p => p.Id))
+                            {
+                                await pnpContext.Web.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
+                            }
+                            await pnpContext.ExecuteAsync(idBatch).ConfigureAwait(false);
+                        }
+
+                        if (pnpContext.Site.IsPropertyAvailable(p => p.Id) && pnpContext.Web.IsPropertyAvailable(p => p.Id))
+                        {
+                            // Check again here due to the recursive nature of this code
+                            if (!Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                            {
+                                Metadata.Add(PnPConstants.MetaDataGraphId, $"{pnpContext.Uri.DnsSafeHost},{pnpContext.Site.Id},{pnpContext.Web.Id}");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(idFieldValue) && !targetMetadataObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                    {
+                        targetMetadataObject.Metadata.Add(PnPConstants.MetaDataGraphId, idFieldValue);
+                    }
+                }
+            }
+
+        }
 
         /// <summary>
         /// Maps JSON to model classes
@@ -505,78 +527,21 @@ namespace PnP.Core.Services
                             // Set the batch request id property
                             SetBatchRequestId(propertyToSetValue as TransientObject, apiResponse.BatchRequestId);
 
-                            await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
-                        }
-                        // Are we loading a complex type
-                        else if (IsComplexType(entityField.PropertyInfo.PropertyType))
-                        {
-                            ProcessComplexType(pnpObject, contextAwareObject, property, entityField);
-                        }
-                        // Are we loading a list of complex types
-                        else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
-                        {
-                            // Get the actual current value of the property we're setting...as that allows to detect it's type
-                            var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
-
-                            // Always clear the list on load
-                            (propertyToSetValue as System.Collections.IList).Clear();
-
-                            // Load each child as a complex type class in the list
-                            foreach (var childJson in property.Value.EnumerateArray())
-                            {
-                                // create the list item 
-                                var typeToCreate = Type.GetType($"{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Namespace}.{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Name.Substring(1)}");
-                                var complexTypeInstance = Activator.CreateInstance(typeToCreate);
-
-                                // Set the batch request id property
-                                SetBatchRequestId(complexTypeInstance as TransientObject, apiResponse.BatchRequestId);
-
-                                (propertyToSetValue as System.Collections.IList).Add(complexTypeInstance);
-
-                                // Get the complex model metadata
-                                var complexModelEntity = EntityManager.Instance.GetStaticClassInfo(typeToCreate);
-
-                                // Map returned fields
-                                foreach (var childProperty in childJson.EnumerateObject())
-                                {
-                                    EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
-                                    if (entityChildField != null)
-                                    {
-                                        // if the complex type contains another complex type and there's a value provided then let's recursively call this method again
-                                        if (IsComplexType(entityChildField.PropertyInfo.PropertyType) && childProperty.Value.ValueKind != JsonValueKind.Null)
-                                        {
-                                            ProcessComplexType(complexTypeInstance as TransientObject, complexTypeInstance as IDataModelWithContext, childProperty, entityChildField);
-                                        }
-                                        else
-                                        {
-                                            var typedModel = complexTypeInstance as IDataModelMappingHandler;
-
-                                            if (!string.IsNullOrEmpty(entityChildField.GraphJsonPath))
-                                            {
-                                                var jsonPathFields = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(entityChildField.GraphName));
-                                                if (jsonPathFields.Any())
-                                                {
-                                                    foreach (var jsonPathField in jsonPathFields)
-                                                    {
-                                                        jsonPathField.PropertyInfo?.SetValue(complexTypeInstance,
-                                                            GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
-                                                            GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath), jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
-                                                    }
-                                                }
-                                            }
-                                            else
-                                            {
-                                                // We only map fields that exist
-                                                entityChildField.PropertyInfo?.SetValue(complexTypeInstance, GetJsonFieldValue(contextAwareObject, entityChildField.Name, childProperty.Value, entityChildField.DataType, entityChildField.GraphUseCustomMapping, typedModel?.MappingHandler));
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // Regular field loaded
+                        await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                    }
+                    // Are we loading a complex type
+                    else if (IsComplexType(entityField.PropertyInfo.PropertyType))
+                    {
+                        MapJsonToComplexTypePropertyRecursive(pnpObject, contextAwareObject, property, entityField);
+                    }
+                    // Are we loading a list of complex types
+                    else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
+                    {
+                        MapJsonToComplexTypeItemListRecursive(pnpObject, contextAwareObject, apiResponse, property, entityField);
+                    }
+                    else
+                    {
+                        // Regular field loaded
 
                             // Grab id field, should be present in all graph objects
                             if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.GraphId))
@@ -654,65 +619,7 @@ namespace PnP.Core.Services
             }
 
             // Store metadata to enable transition to REST for follow-up requests
-            if (!string.IsNullOrEmpty(entity.SharePointType))
-            {
-                if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataType))
-                {
-                    metadataBasedObject.Metadata.Add(PnPConstants.MetaDataType, entity.SharePointType);
-                }
-                if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataRestId))
-                {
-                    // SP.Web and SP.Site are special cases
-                    if (entity.SharePointType.Equals("SP.Web"))
-                    {
-                        // Special case for web handling, grab web id from id string
-                        // sample input: bertonline.sharepoint.com,cf1ed1cb-4a3c-43ed-bb3f-4ced4ce69ecf,1de385e4-e441-4448-8443-77680dfd845e
-                        if (!string.IsNullOrEmpty(idFieldValue))
-                        {
-                            string id = idFieldValue.Split(",")[2];
-                            metadataBasedObject.Metadata.Add(PnPConstants.MetaDataRestId, id);
-                            ((IDataModelWithKey)pnpObject).Key = Guid.Parse(id);
-                        }
-
-                        // Call EnsurePropertiesAsync to ensure Site.Id is loaded if it was not yet the case
-                        await contextAwareObject.PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
-                    }
-                    else if (entity.SharePointType.Equals("SP.Site"))
-                    {
-                        // Special case for web handling, grab web id from id string
-                        // sample input: bertonline.sharepoint.com,cf1ed1cb-4a3c-43ed-bb3f-4ced4ce69ecf,1de385e4-e441-4448-8443-77680dfd845e
-                        if (!string.IsNullOrEmpty(idFieldValue))
-                        {
-                            string id = idFieldValue.Split(",")[1];
-                            metadataBasedObject.Metadata.Add(PnPConstants.MetaDataRestId, id);
-                            ((IDataModelWithKey)pnpObject).Key = Guid.Parse(id);
-                        }
-                    }
-                    else
-                    {
-                        EntityFieldInfo id = null;
-                        PropertyInfo idField = null;
-                        id = entity.Fields.FirstOrDefault(p => p.IsSharePointKey);
-                        if (id != null)
-                        {
-                            idField = pnpObject.GetType().GetProperty(id.Name);
-
-                            // Get key property value
-                            var keyFieldValue = idField.GetValue(pnpObject);
-                            metadataBasedObject.Metadata.Add(PnPConstants.MetaDataRestId, keyFieldValue.ToString());
-                        }
-                    }
-                }
-                if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataUri))
-                {
-                    var parsedApiCall = await ApiHelper.ParseApiRequestAsync(metadataBasedObject, $"{contextAwareObject.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUri}").ConfigureAwait(false);
-                    metadataBasedObject.Metadata.Add(PnPConstants.MetaDataUri, parsedApiCall);
-                }
-                if (entity.SharePointType.Equals("SP.List") && pnpObject.HasValue("Title") && !metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
-                {
-                    metadataBasedObject.Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, $"{pnpObject.GetValue("Title").ToString().Replace(" ", "")}List");
-                }
-            }
+            await TryPopulatePnPObjectMetadataFromGraph(pnpObject, contextAwareObject, metadataBasedObject, entity, idFieldValue).ConfigureAwait(false);
 
             // Store the graph ID field for follow-up graph requests
             if (!metadataBasedObject.Metadata.ContainsKey(PnPConstants.MetaDataGraphId) && !string.IsNullOrEmpty(idFieldValue))
@@ -721,7 +628,72 @@ namespace PnP.Core.Services
             }
         }
 
-        private static void ProcessComplexType(TransientObject pnpObject, IDataModelWithContext contextAwareObject, JsonProperty property, EntityFieldInfo entityField)
+        private static async Task TryPopulatePnPObjectMetadataFromGraph(TransientObject pnpObject, IDataModelWithContext contextAwareObject, IMetadataExtensible targetMetadataObject, EntityInfo entity, string idFieldValue)
+        {
+            // If the SharePoint type of the entity is not known, metadata cannot be populated
+            if (string.IsNullOrEmpty(entity.SharePointType))
+                return;
+
+            Dictionary<string, string> metadata = targetMetadataObject.Metadata;
+            if (!metadata.ContainsKey(PnPConstants.MetaDataType))
+            {
+                metadata.Add(PnPConstants.MetaDataType, entity.SharePointType);
+            }
+            if (!metadata.ContainsKey(PnPConstants.MetaDataRestId))
+            {
+                // SP.Web and SP.Site are special cases
+                if (entity.SharePointType.Equals("SP.Web"))
+                {
+                    // Special case for web handling, grab web id from id string
+                    // sample input: bertonline.sharepoint.com,cf1ed1cb-4a3c-43ed-bb3f-4ced4ce69ecf,1de385e4-e441-4448-8443-77680dfd845e
+                    if (!string.IsNullOrEmpty(idFieldValue))
+                    {
+                        string id = idFieldValue.Split(",")[2];
+                        metadata.Add(PnPConstants.MetaDataRestId, id);
+                        ((IDataModelWithKey)pnpObject).Key = Guid.Parse(id);
+                    }
+
+                    // Call EnsurePropertiesAsync to ensure Site.Id is loaded if it was not yet the case
+                    await contextAwareObject.PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                }
+                else if (entity.SharePointType.Equals("SP.Site"))
+                {
+                    // Special case for web handling, grab web id from id string
+                    // sample input: bertonline.sharepoint.com,cf1ed1cb-4a3c-43ed-bb3f-4ced4ce69ecf,1de385e4-e441-4448-8443-77680dfd845e
+                    if (!string.IsNullOrEmpty(idFieldValue))
+                    {
+                        string id = idFieldValue.Split(",")[1];
+                        metadata.Add(PnPConstants.MetaDataRestId, id);
+                        ((IDataModelWithKey)pnpObject).Key = Guid.Parse(id);
+                    }
+                }
+                else
+                {
+                    EntityFieldInfo id = null;
+                    PropertyInfo idField = null;
+                    id = entity.Fields.FirstOrDefault(p => p.IsSharePointKey);
+                    if (id != null)
+                    {
+                        idField = pnpObject.GetType().GetProperty(id.Name);
+
+                        // Get key property value
+                        var keyFieldValue = idField.GetValue(pnpObject);
+                        metadata.Add(PnPConstants.MetaDataRestId, keyFieldValue.ToString());
+                    }
+                }
+            }
+            if (!metadata.ContainsKey(PnPConstants.MetaDataUri))
+            {
+                var parsedApiCall = await ApiHelper.ParseApiRequestAsync(targetMetadataObject, $"{contextAwareObject.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUri}").ConfigureAwait(false);
+                metadata.Add(PnPConstants.MetaDataUri, parsedApiCall);
+            }
+            if (entity.SharePointType.Equals("SP.List") && pnpObject.HasValue("Title") && !metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
+            {
+                metadata.Add(PnPConstants.MetaDataRestEntityTypeName, $"{pnpObject.GetValue("Title").ToString().Replace(" ", "")}List");
+            }
+        }
+
+        private static void MapJsonToComplexTypePropertyRecursive(TransientObject pnpObject, IDataModelWithContext contextAwareObject, JsonProperty property, EntityFieldInfo entityField)
         {
             // Do we still need to instantiate this object
             if (!pnpObject.HasValue(entityField.Name))
@@ -744,13 +716,16 @@ namespace PnP.Core.Services
             // Map returned fields
             foreach (var childProperty in property.Value.EnumerateObject())
             {
-                EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>)
+                                            .FirstOrDefault(p => p.Name.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)
+                                            || (!string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase))
+                                            || (!string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)));
                 if (entityChildField != null)
                 {
                     // if the complex type contains another complex type and there's a value provided then let's recursively call this method again
                     if (IsComplexType(entityChildField.PropertyInfo.PropertyType) && childProperty.Value.ValueKind != JsonValueKind.Null)
                     {
-                        ProcessComplexType(propertyToSetValue as TransientObject, propertyToSetValue as IDataModelWithContext, childProperty, entityChildField);
+                        MapJsonToComplexTypePropertyRecursive(propertyToSetValue as TransientObject, propertyToSetValue as IDataModelWithContext, childProperty, entityChildField);
                     }
                     else
                     {
@@ -767,10 +742,86 @@ namespace PnP.Core.Services
                                 }
                             }
                         }
+                        // TODO: Test this case when some domain models require it
+                        //else if (!string.IsNullOrEmpty(entityChildField.SharePointJsonPath))
+                        //{
+                        //    var jsonPathFields = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(entityChildField.SharePointName));
+                        //    if (jsonPathFields.Any())
+                        //    {
+                        //        foreach (var jsonPathField in jsonPathFields)
+                        //        {
+                        //            jsonPathField.PropertyInfo?.SetValue(propertyToSetValue,
+                        //                GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                        //                GetJsonElementFromPath(childProperty.Value, jsonPathField.SharePointJsonPath), jsonPathField.DataType, jsonPathField.SharePointUseCustomMapping, typedModel?.MappingHandler));
+                        //        }
+                        //    }
+                        //}
                         else
                         {
                             // We only map fields that exist
                             entityChildField.PropertyInfo?.SetValue(propertyToSetValue, GetJsonFieldValue(contextAwareObject, entityChildField.Name, childProperty.Value, entityChildField.DataType, entityChildField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void MapJsonToComplexTypeItemListRecursive(TransientObject pnpObject, IDataModelWithContext contextAwareObject, ApiResponse apiResponse, JsonProperty property, EntityFieldInfo entityField)
+        {
+            // Get the actual current value of the property we're setting...as that allows to detect it's type
+            var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
+
+            // Always clear the list on load
+            (propertyToSetValue as System.Collections.IList).Clear();
+
+            // Load each child as a complex type class in the list
+            foreach (var childJson in property.Value.EnumerateArray())
+            {
+                // create the list item 
+                var typeToCreate = Type.GetType($"{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Namespace}.{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Name.Substring(1)}");
+                var complexTypeInstance = Activator.CreateInstance(typeToCreate);
+
+                // Set the batch request id property
+                SetBatchRequestId(complexTypeInstance as TransientObject, apiResponse.BatchRequestId);
+
+                (propertyToSetValue as System.Collections.IList).Add(complexTypeInstance);
+
+                // Get the complex model metadata
+                var complexModelEntity = EntityManager.Instance.GetStaticClassInfo(typeToCreate);
+
+                // Map returned fields
+                foreach (var childProperty in childJson.EnumerateObject())
+                {
+                    EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                    if (entityChildField != null)
+                    {
+                        // if the complex type contains another complex type and there's a value provided then let's recursively call this method again
+                        if (IsComplexType(entityChildField.PropertyInfo.PropertyType) && childProperty.Value.ValueKind != JsonValueKind.Null)
+                        {
+                            MapJsonToComplexTypePropertyRecursive(complexTypeInstance as TransientObject, complexTypeInstance as IDataModelWithContext, childProperty, entityChildField);
+                        }
+                        else
+                        {
+                            var typedModel = complexTypeInstance as IDataModelMappingHandler;
+
+                            if (!string.IsNullOrEmpty(entityChildField.GraphJsonPath))
+                            {
+                                var jsonPathFields = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(entityChildField.GraphName));
+                                if (jsonPathFields.Any())
+                                {
+                                    foreach (var jsonPathField in jsonPathFields)
+                                    {
+                                        jsonPathField.PropertyInfo?.SetValue(complexTypeInstance,
+                                            GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                            GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath), jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // We only map fields that exist
+                                entityChildField.PropertyInfo?.SetValue(complexTypeInstance, GetJsonFieldValue(contextAwareObject, entityChildField.Name, childProperty.Value, entityChildField.DataType, entityChildField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                            }
                         }
                     }
                 }
@@ -993,6 +1044,10 @@ namespace PnP.Core.Services
                                     {
                                         return jsonElement.EnumerateArray().Select(item => item.GetBoolean()).ToList();
                                     }
+                                case "DateTime":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetDateTime()).ToList();
+                                    }
                                 case "DateTimeOffset":
                                     {
                                         return jsonElement.EnumerateArray().Select(item => item.GetDateTimeOffset()).ToList();
@@ -1001,7 +1056,7 @@ namespace PnP.Core.Services
                                     {
                                         return jsonElement.EnumerateArray().Select(item => item.GetString()).ToList();
                                     }
-                            }                            
+                            }
                         }
                     }
                 case "Boolean":
@@ -1182,6 +1237,17 @@ namespace PnP.Core.Services
                         }
                         return null;
                     }
+                case "DateTime":
+                    {
+                        if (jsonElement.ValueKind != JsonValueKind.Null)
+                        {
+                            return jsonElement.GetDateTime();
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
                 case "DateTimeOffset":
                     {
                         if (jsonElement.ValueKind != JsonValueKind.Null)
@@ -1245,39 +1311,34 @@ namespace PnP.Core.Services
 
         internal static void TrackAndUpdateMetaData(IMetadataExtensible target, JsonProperty property)
         {
-            if (!target.Metadata.ContainsKey(property.Name))
-            {
-                target.Metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
-            }
-            else
-            {
-                target.Metadata[property.Name] = JsonMappingHelper.GetJsonPropertyValue(property).ToString();
-            }
+            string jsonPropertyValue = JsonMappingHelper.GetJsonPropertyValue(property).ToString();
+            TrackAndUpdateMetaData(target, property.Name, jsonPropertyValue);
         }
 
         internal static void TrackAndUpdateMetaData(IMetadataExtensible target, string propertyName, string propertyValue)
         {
-            if (!target.Metadata.ContainsKey(propertyName))
+            var metadata = target.Metadata;
+            TrackAndUpdateMetaData(ref metadata, propertyName, propertyValue);
+        }
+
+        internal static void TrackAndUpdateMetaData(ref Dictionary<string, string> targetMetadata, string propertyName, string propertyValue)
+        {
+            if (!targetMetadata.ContainsKey(propertyName))
             {
-                target.Metadata.Add(propertyName, propertyValue);
+                targetMetadata.Add(propertyName, propertyValue);
             }
             else
             {
-                target.Metadata[propertyName] = propertyValue;
+                targetMetadata[propertyName] = propertyValue;
             }
         }
 
+        // NOTE : Is this one really needed ??
         internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property, ref Dictionary<string, string> metadata)
         {
-            if (!target.Metadata.ContainsKey(property.Name))
-            {
-                target.Metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
-            }
-
-            if (!metadata.ContainsKey(property.Name))
-            {
-                metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
-            }
+            string jsonPropertyValue = JsonMappingHelper.GetJsonPropertyValue(property).ToString();
+            TrackAndUpdateMetaData(target, property.Name, jsonPropertyValue);
+            TrackAndUpdateMetaData(ref metadata, property.Name, jsonPropertyValue);
         }
 
         internal static void TrackSharePointMetaData(IMetadataExtensible target, JsonProperty property)

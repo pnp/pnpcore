@@ -46,6 +46,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        [SharePointProperty("ListItemAllFields", Expandable = true)]
         public IListItem ListItemAllFields
         {
             get
@@ -69,7 +70,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-
+        [SharePointProperty("ParentFolder", Expandable = true)]
         public IFolder ParentFolder
         {
             get
@@ -117,30 +118,25 @@ namespace PnP.Core.Model.SharePoint
         //    }
         //}
 
-
-        //TODO: To implement...
-        //public IStorageMetrics StorageMetrics
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new StorageMetrics
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IStorageMetrics>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
+        [SharePointProperty("StorageMetrics", Expandable = true)]
+        public IStorageMetrics StorageMetrics
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new StorageMetrics();
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IStorageMetrics>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
 
 
         [SharePointProperty("Folders", Expandable = true)]
