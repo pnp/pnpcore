@@ -63,7 +63,7 @@ namespace PnP.Core.Model.SharePoint
 
             /**
             // Sample update validation handler, can be used to prevent updates to a field (e.g. field validation, make readonly field, ...)
-            ValidateUpdateHandler = (ref FieldUpdateRequest fieldUpdateRequest) => 
+            ValidateUpdateHandler = (FieldUpdateRequest fieldUpdateRequest) => 
             {
                 if (fieldUpdateRequest.FieldName == "Description")
                 {

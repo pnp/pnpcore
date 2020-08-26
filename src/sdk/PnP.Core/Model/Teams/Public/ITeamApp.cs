@@ -1,6 +1,4 @@
-﻿using PnP.Core.Model.Teams.Public.Enums;
-
-namespace PnP.Core.Model.Teams
+﻿namespace PnP.Core.Model.Teams
 {
     /// <summary>
     /// Defines a Microsoft Teams App installation

@@ -7,7 +7,6 @@ using System.Dynamic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PnP.Core.Model.SharePoint.Core.Public;
 
 namespace PnP.Core.Model.SharePoint
 {

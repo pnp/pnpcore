@@ -239,7 +239,10 @@ namespace PnP.Core.Services
             }
 
             // Remove duplicate batch requests
-            DedupBatchRequests(ref batch);
+            DedupBatchRequests(batch);
+
+            // Verify batch requests do not contain unresolved tokens
+            CheckForUnresolvedTokens(batch);
 
             if (batch.HasInteractiveRequest)
             {
@@ -1326,6 +1329,22 @@ namespace PnP.Core.Services
         #endregion
 
         /// <summary>
+        /// Checks if a batch contains an API call that still has unresolved tokens...no point in sending the request at that point
+        /// </summary>
+        /// <param name="batch"></param>
+        private static void CheckForUnresolvedTokens(Batch batch)
+        {
+            foreach(var request in batch.Requests)
+            {
+                var unresolvedTokens = TokenHandler.UnresolvedTokens(request.Value.ApiCall.Request);
+                if (unresolvedTokens.Count > 0)
+                {
+                    throw new ClientException(ErrorType.UnresolvedTokens, $"Unresolved tokens found in API call {request.Value.ApiCall.Request}");
+                }
+            }
+        }
+
+        /// <summary>
         /// Splits a batch that contains rest and graph calls in two batches, one containing the rest calls, one containing the graph calls
         /// </summary>
         /// <param name="input">Batch to split</param>
@@ -1360,7 +1379,7 @@ namespace PnP.Core.Services
         /// Deduplicates GET requests in a batch...if for some reason the same request for the same model instance is there twice then it will be removed
         /// </summary>
         /// <param name="batch">Batch to deduplicate</param>
-        private static void DedupBatchRequests(ref Batch batch)
+        private static void DedupBatchRequests(Batch batch)
         {
             List<Tuple<TransientObject, ApiCall>> queries = new List<Tuple<TransientObject, ApiCall>>();
 

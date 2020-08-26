@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace PnP.Core.QueryModel.Model
+namespace PnP.Core.QueryModel
 {
 
     internal static class QueryableDataModels
@@ -13,17 +13,17 @@ namespace PnP.Core.QueryModel.Model
         {
             get => new Type[]
             {
-                typeof(Core.Model.SharePoint.IList),
-                typeof(Core.Model.SharePoint.IListItem),
-                typeof(Core.Model.SharePoint.IContentType),
-                typeof(Core.Model.SharePoint.IField),
-                typeof(Core.Model.SharePoint.IFolder),
-                typeof(Core.Model.SharePoint.IFile),
-                typeof(Core.Model.SharePoint.IWeb),
-                typeof(Core.Model.SharePoint.ITermGroup),
-                typeof(Core.Model.SharePoint.ITermSet),
-                typeof(Core.Model.Teams.ITeamChannel),
-                typeof(Core.Model.Teams.ITeamChatMessage)
+                typeof(Model.SharePoint.IList),
+                typeof(Model.SharePoint.IListItem),
+                typeof(Model.SharePoint.IContentType),
+                typeof(Model.SharePoint.IField),
+                typeof(Model.SharePoint.IFolder),
+                typeof(Model.SharePoint.IFile),
+                typeof(Model.SharePoint.IWeb),
+                typeof(Model.SharePoint.ITermGroup),
+                typeof(Model.SharePoint.ITermSet),
+                typeof(Model.Teams.ITeamChannel),
+                typeof(Model.Teams.ITeamChatMessage)
             };
         }
 

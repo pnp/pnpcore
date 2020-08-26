@@ -46,7 +46,24 @@ namespace PnP.Core.Model.SharePoint
         public ITermCollection Children { get; }
 
         /// <summary>
-        /// Adds a term label and optional description for a given language
+        /// Properties on this term set
+        /// </summary>
+        public List<ITermProperty> Properties { get; }
+
+        /// <summary>
+        /// Collection of terms relations
+        /// </summary>
+        public ITermRelationCollection Relations { get; }
+
+        /// <summary>
+        /// Adds a property to the term's property collection. Call update to persist this change.
+        /// </summary>
+        /// <param name="key">Property key</param>
+        /// <param name="value">Property value</param>
+        public void AddProperty(string key, string value);
+
+        /// <summary>
+        /// Adds a term label and optional description for a given language. Call update to persist this change.
         /// </summary>
         /// <param name="label">Label for the term</param>
         /// <param name="languageTag">Language tag for the label and description</param>

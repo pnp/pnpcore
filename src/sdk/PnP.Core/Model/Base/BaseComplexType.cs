@@ -23,7 +23,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Translates model into a set of classes that are used to drive CRUD operations
         /// </summary>
-        /// <param name="modelInstance">Model instance to process</param>
         /// <returns>Entity model class describing this model instance</returns>
         internal EntityInfo GetClassInfo()
         {

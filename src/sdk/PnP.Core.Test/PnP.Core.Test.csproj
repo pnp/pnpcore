@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="QueryModel\MockData\" />
+    <Folder Include="SharePoint\MockData\FilesTests\" />
     <Folder Include="SharePoint\MockData\SettingTests\" />
     <Folder Include="Teams\MockData\TeamLifecycleTests\" />
     <Folder Include="Teams\MockData\TeamSettingsTests\" />

@@ -1,9 +1,10 @@
---batchresponse_db1fdb20-37e3-4c33-8fb5-af5760a94bad
+--batchresponse_81c494ec-ac2a-445f-a9ad-dacfe71444d5
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
 
-{"d":{"CheckOut":null}}
---batchresponse_db1fdb20-37e3-4c33-8fb5-af5760a94bad--
+
+--batchresponse_81c494ec-ac2a-445f-a9ad-dacfe71444d5--

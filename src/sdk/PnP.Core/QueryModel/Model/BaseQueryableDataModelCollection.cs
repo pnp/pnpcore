@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 
-namespace PnP.Core.QueryModel.Model
+namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Base abstract type for any LINQ IQueryable collection of the Domain Model

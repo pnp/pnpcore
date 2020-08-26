@@ -1,11 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Test.Utilities;
-using PnP.Core.Model;
-using PnP.Core.Model.Teams;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.Model.Teams.Public.Enums;
+using PnP.Core.Model;
+using PnP.Core.Model.Teams;
 
 namespace PnP.Core.Test.Base
 {
@@ -165,9 +164,53 @@ namespace PnP.Core.Test.Base
                 }
             }
         }
+
+        [TestMethod]
+        public async Task UpdateNonLoadedProperty()
+        {
+            string updatedDescription = "UpdateNonLoadedProperty test";
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force REST for this test
+                context.GraphFirst = false;
+
+                var web = await context.Web.GetAsync(p => p.Title);
+
+                // description was not loaded
+                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.Description));
+
+                // Although description was not loaded we still want to be able to set a value to it and update
+                web.Description = "temp";
+                web.Description = updatedDescription;
+
+                // Description should now be available after setting a value
+                Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(web.IsPropertyAvailable(p => p.Description));
+
+                await web.UpdateAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    context2.GraphFirst = false;
+
+                    // load the web again with both properties
+                    var web2 = await context.Web.GetAsync(p => p.Title, p => p.Description);
+
+                    // description update should have happened
+                    Assert.IsTrue(web2.Title == web.Title);
+                    Assert.IsTrue(web2.Description == updatedDescription);
+                }
+
+                // set description back as empty
+                web.Description = "";
+                await web.UpdateAsync();
+            }
+        }
         #endregion
 
-        #region Tests that use REST to hit SharePoint
+        #region Tests that use Microsoft Graph
 
         [TestMethod]
         public async Task UpdatePropertyViaGraph()
@@ -331,6 +374,35 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(team.HasChanged("FunSettings"));
                 Assert.IsFalse(team.HasChanged("GuestSettings"));
 
+            }
+        }
+
+        [TestMethod]
+        public async Task UpdatePropertyViaGraphTriggeringValidateUpdateHandler()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(p => p.Channels);
+
+                // Find first updatable channel
+                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName == "General");
+
+                string newChannelDescription = $"Updated on {DateTime.UtcNow}";
+                channelToUpdate.Description = newChannelDescription;
+
+                await channelToUpdate.UpdateAsync();
+
+                // Verify model status after update
+                Assert.IsTrue(channelToUpdate.Description != newChannelDescription);
+                Assert.IsFalse(channelToUpdate.HasChanged("Description"));
+
+                // load again from server
+                await context.Team.GetAsync(p => p.Channels);
+
+                // and verify again
+                Assert.IsTrue(channelToUpdate.Description != newChannelDescription);
+                Assert.IsFalse(channelToUpdate.HasChanged("Description"));
             }
         }
 

@@ -77,6 +77,13 @@ Remove-PnPList -Identity GetItemsByCAMLQuery -Force
 Remove-PnPList -Identity ListLinqGetMethods -Force
 Remove-PnPList -Identity SystemUpdate -Force
 Remove-PnPList -Identity InteractivePostRequest -Force
+Remove-PnPList -Identity "Fail list" -Force
+Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
+Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
+Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
+Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
+Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
+
 
 Disable-PnPFeature -Identity 3bae86a2-776d-499d-9db8-fa4cdc7884f8 -Scope Site
 Disable-PnPFeature -Identity fa6a1bcc-fb4b-446b-8460-f4de5f7411d5 -Scope Web

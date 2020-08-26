@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
+using System;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -51,7 +53,7 @@ namespace PnP.Core.Model.SharePoint
         #region Extension methods
 
         #region Folders
-        public async Task<IFolder> GetFolderByServerRelativeUrlAsync(string serverRelativeUrl)
+        public async Task<IFolder> GetFolderByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
             // Instantiate a folder, link it the Web as parent and provide it a context. This folder will not be included in the current model
             Folder folder = new Folder()
@@ -60,19 +62,19 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            ApiCall apiCall = BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl);
-
-            await folder.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+            await folder.BaseGet(apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
 
-        public IFolder GetFolderByServerRelativeUrl(string serverRelativeUrl)
+
+
+        public IFolder GetFolderByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
-            return GetFolderByServerRelativeUrlAsync(serverRelativeUrl).GetAwaiter().GetResult();
+            return GetFolderByServerRelativeUrlAsync(serverRelativeUrl, expressions).GetAwaiter().GetResult();
         }
 
-        public async Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl)
+        public async Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
             // Instantiate a folder, link it the Web as parent and provide it a context. This folder will not be included in the current model
             Folder folder = new Folder()
@@ -81,29 +83,27 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            ApiCall apiCall = BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl);
-
-            await folder.RequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+            await folder.BaseBatchGetAsync(batch, apiOverride: BuildGetFolderByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
 
             return folder;
         }
 
-        public IFolder GetFolderByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl)
+        public IFolder GetFolderByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
             return GetFolderByServerRelativeUrlBatchAsync(batch, serverRelativeUrl).GetAwaiter().GetResult();
         }
 
-        public async Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(string serverRelativeUrl)
+        public async Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
             return await GetFolderByServerRelativeUrlBatchAsync(PnPContext.CurrentBatch, serverRelativeUrl).ConfigureAwait(false);
         }
 
-        public IFolder GetFolderByServerRelativeUrlBatch(string serverRelativeUrl)
+        public IFolder GetFolderByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
             return GetFolderByServerRelativeUrlBatchAsync(serverRelativeUrl).GetAwaiter().GetResult();
         }
 
-        private static ApiCall BuildGetFolderByRelativeUrlApiCall(string serverRelativeUrl)
+        private static ApiCall BuildGetFolderByRelativeUrlApiCall(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
             // NOTE WebUtility encode spaces to "+" instead of %20
             string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl).Replace("+", "%20");

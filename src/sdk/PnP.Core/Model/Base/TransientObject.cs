@@ -10,7 +10,7 @@ namespace PnP.Core.Model
     /// Delegate used to connect model validation for one or more fields
     /// </summary>
     /// <param name="propertyUpdateRequest">Information about the property being updated</param>
-    internal delegate void ValidateUpdate(ref PropertyUpdateRequest propertyUpdateRequest);
+    internal delegate void ValidateUpdate(PropertyUpdateRequest propertyUpdateRequest);
 
     /// <summary>
     /// Public abstract class to handle the internal state of properties for domain model object
@@ -131,9 +131,11 @@ namespace PnP.Core.Model
                 }
             }
 
-            // Here we can eventually add some validation logic ...
-
-            if (current.ContainsKey(propertyName))
+            if (// Property was populated previously, this is a change 
+                (current.ContainsKey(propertyName)) 
+                // Property was never loaded, but since the model was requested we consider this as a changed property
+                || (this is IRequestable && (this as IRequestable).Requested && !(typeof(T).ImplementsInterface(typeof(IManageableCollection))))                
+                )
             {
                 // Call ValidateHandler in case of an update
                 bool updateField = true;
@@ -141,7 +143,7 @@ namespace PnP.Core.Model
                 {
                     var fieldUpdateRequest = new PropertyUpdateRequest(propertyName, value);
 
-                    ValidateUpdateHandler.Invoke(ref fieldUpdateRequest);
+                    ValidateUpdateHandler.Invoke(fieldUpdateRequest);
 
                     if (!fieldUpdateRequest.Cancelled)
                     {
@@ -237,7 +239,6 @@ namespace PnP.Core.Model
                 {
                     return true;
                 }
-
             }
 
             return false;

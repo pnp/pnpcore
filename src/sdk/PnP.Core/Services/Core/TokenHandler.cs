@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model;
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace PnP.Core.Services
     /// </summary>
     internal static class TokenHandler
     {
+        internal static readonly Regex regex = new Regex("{(.*?)}", RegexOptions.Compiled);
+
         /// <summary>
         /// Method to resolve a set of tokens in a provided tokenized string
         /// </summary>
@@ -33,7 +36,6 @@ namespace PnP.Core.Services
             }
 
             // Grab the tokens in this input (tokens are between curly braces)
-            var regex = new Regex("{(.*?)}", RegexOptions.Compiled);
             var matches = regex.Matches(tokenizedValue);
 
             // Iterate over the tokens and replace them
@@ -186,5 +188,34 @@ namespace PnP.Core.Services
 
             return result;
         }
+
+        internal static List<string> UnresolvedTokens(string tokenizedValue)
+        {
+            // Grab the tokens in this input (tokens are between curly braces)
+            var matches = regex.Matches(tokenizedValue);
+
+            List<string> unresolvedTokens = new List<string>();
+
+            // Iterate over the tokens and replace them
+            foreach (Match match in matches)
+            { 
+                if (match.Value.Equals("{Id}") ||
+                    match.Value.Equals("{Parent.Id}") ||
+                    match.Value.Equals("{GraphId}") ||
+                    match.Value.Equals("{Parent.GraphId}") ||
+                    match.Value.Equals("{Site.GroupId}") ||
+                    match.Value.Equals("{Site.Id}") ||
+                    match.Value.Equals("{Web.Id}") ||
+                    match.Value.Equals("{Web.GraphId}") ||
+                    match.Value.Equals("{hostname") ||
+                    match.Value.Equals("{serverrelativepath}"))
+                {
+                    unresolvedTokens.Add(match.Value);
+                }
+            }
+
+            return unresolvedTokens;
+        }
+
     }
 }

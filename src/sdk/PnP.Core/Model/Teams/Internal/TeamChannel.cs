@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Dynamic;
 using System.Text.Json;
-using PnP.Core.Model.Teams.Public.Enums;
 using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams
@@ -47,7 +46,7 @@ namespace PnP.Core.Model.Teams
             };
 
             // Validation handler to prevent updating the general channel
-            ValidateUpdateHandler = (ref PropertyUpdateRequest propertyUpdateRequest) =>
+            ValidateUpdateHandler = (PropertyUpdateRequest propertyUpdateRequest) =>
             {
                 // Prevent setting all values on the general channel
                 if (DisplayName == "General")

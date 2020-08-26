@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using PnP.Core.Model.Teams.Public.Enums;
 using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams

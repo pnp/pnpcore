@@ -1,4 +1,4 @@
-﻿using PnP.Core.QueryModel.Model;
+﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams

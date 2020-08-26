@@ -80,10 +80,36 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (!HasValue(nameof(Children)))
                 {
-                    var children = new TermCollection(this.PnPContext, this, "Children");
+                    var children = new TermCollection(this.PnPContext, this);
                     SetValue(children);
                 }
                 return GetValue<ITermCollection>();
+            }
+        }
+
+        public List<ITermProperty> Properties
+        {
+            get
+            {
+                if (!HasValue(nameof(Properties)))
+                {
+                    SetValue(new List<ITermProperty>());
+                }
+                return GetValue<List<ITermProperty>>();
+            }
+        }
+
+        [GraphProperty("relations", Get = "termstore/sets/{Parent.GraphId}/terms/{GraphId}/relations?$expand=fromTerm,set,toTerm")]
+        public ITermRelationCollection Relations
+        {
+            get
+            {
+                if (!HasValue(nameof(Relations)))
+                {
+                    var relations = new TermRelationCollection(this.PnPContext, this);
+                    SetValue(relations);
+                }
+                return GetValue<ITermRelationCollection>();
             }
         }
 

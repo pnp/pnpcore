@@ -1,6 +1,5 @@
 using PnP.Core.Services;
 using System;
-using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint

@@ -1,6 +1,4 @@
 ﻿using PnP.Core.Model;
-using PnP.Core.QueryModel.Enums;
-using PnP.Core.QueryModel.Model;
 using PnP.Core.Services;
 using PnP.Core.Utilities;
 using System;

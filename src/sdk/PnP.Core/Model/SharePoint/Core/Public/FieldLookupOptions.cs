@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PnP.Core.Model.SharePoint.Core.Public
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Available options for SharePoint lookup fields

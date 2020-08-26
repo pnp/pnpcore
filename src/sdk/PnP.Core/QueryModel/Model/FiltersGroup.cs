@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PnP.Core.QueryModel.Model
+namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Defines a group of filters
