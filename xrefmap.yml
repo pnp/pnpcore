@@ -8077,6 +8077,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITerm.Properties
   nameWithType: ITerm.Properties
+- uid: PnP.Core.Model.SharePoint.ITerm.Relations
+  name: Relations
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Relations
+  commentId: P:PnP.Core.Model.SharePoint.ITerm.Relations
+  fullName: PnP.Core.Model.SharePoint.ITerm.Relations
+  nameWithType: ITerm.Relations
+- uid: PnP.Core.Model.SharePoint.ITerm.Relations*
+  name: Relations
+  href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Relations_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITerm.Relations
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITerm.Relations
+  nameWithType: ITerm.Relations
 - uid: PnP.Core.Model.SharePoint.ITerm.Set
   name: Set
   href: api/PnP.Core.Model.SharePoint.ITerm.html#PnP_Core_Model_SharePoint_ITerm_Set
@@ -8436,6 +8449,147 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermProperty.Value
   nameWithType: ITermProperty.Value
+- uid: PnP.Core.Model.SharePoint.ITermRelation
+  name: ITermRelation
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermRelation
+  fullName: PnP.Core.Model.SharePoint.ITermRelation
+  nameWithType: ITermRelation
+- uid: PnP.Core.Model.SharePoint.ITermRelation.FromTerm
+  name: FromTerm
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_FromTerm
+  commentId: P:PnP.Core.Model.SharePoint.ITermRelation.FromTerm
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.FromTerm
+  nameWithType: ITermRelation.FromTerm
+- uid: PnP.Core.Model.SharePoint.ITermRelation.FromTerm*
+  name: FromTerm
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_FromTerm_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermRelation.FromTerm
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.FromTerm
+  nameWithType: ITermRelation.FromTerm
+- uid: PnP.Core.Model.SharePoint.ITermRelation.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_Id
+  commentId: P:PnP.Core.Model.SharePoint.ITermRelation.Id
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.Id
+  nameWithType: ITermRelation.Id
+- uid: PnP.Core.Model.SharePoint.ITermRelation.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermRelation.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.Id
+  nameWithType: ITermRelation.Id
+- uid: PnP.Core.Model.SharePoint.ITermRelation.Relationship
+  name: Relationship
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_Relationship
+  commentId: P:PnP.Core.Model.SharePoint.ITermRelation.Relationship
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.Relationship
+  nameWithType: ITermRelation.Relationship
+- uid: PnP.Core.Model.SharePoint.ITermRelation.Relationship*
+  name: Relationship
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_Relationship_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermRelation.Relationship
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.Relationship
+  nameWithType: ITermRelation.Relationship
+- uid: PnP.Core.Model.SharePoint.ITermRelation.Set
+  name: Set
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_Set
+  commentId: P:PnP.Core.Model.SharePoint.ITermRelation.Set
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.Set
+  nameWithType: ITermRelation.Set
+- uid: PnP.Core.Model.SharePoint.ITermRelation.Set*
+  name: Set
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_Set_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermRelation.Set
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.Set
+  nameWithType: ITermRelation.Set
+- uid: PnP.Core.Model.SharePoint.ITermRelation.ToTerm
+  name: ToTerm
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_ToTerm
+  commentId: P:PnP.Core.Model.SharePoint.ITermRelation.ToTerm
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.ToTerm
+  nameWithType: ITermRelation.ToTerm
+- uid: PnP.Core.Model.SharePoint.ITermRelation.ToTerm*
+  name: ToTerm
+  href: api/PnP.Core.Model.SharePoint.ITermRelation.html#PnP_Core_Model_SharePoint_ITermRelation_ToTerm_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermRelation.ToTerm
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermRelation.ToTerm
+  nameWithType: ITermRelation.ToTerm
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection
+  name: ITermRelationCollection
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermRelationCollection
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection
+  nameWithType: ITermRelationCollection
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.Add(PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  name: Add(TermRelationType, ITermSet, ITerm)
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_Add_PnP_Core_Model_SharePoint_TermRelationType_PnP_Core_Model_SharePoint_ITermSet_PnP_Core_Model_SharePoint_ITerm_
+  commentId: M:PnP.Core.Model.SharePoint.ITermRelationCollection.Add(PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.Add(PnP.Core.Model.SharePoint.TermRelationType, PnP.Core.Model.SharePoint.ITermSet, PnP.Core.Model.SharePoint.ITerm)
+  nameWithType: ITermRelationCollection.Add(TermRelationType, ITermSet, ITerm)
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.Add*
+  name: Add
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_Add_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermRelationCollection.Add
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.Add
+  nameWithType: ITermRelationCollection.Add
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.AddAsync(PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  name: AddAsync(TermRelationType, ITermSet, ITerm)
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_AddAsync_PnP_Core_Model_SharePoint_TermRelationType_PnP_Core_Model_SharePoint_ITermSet_PnP_Core_Model_SharePoint_ITerm_
+  commentId: M:PnP.Core.Model.SharePoint.ITermRelationCollection.AddAsync(PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.AddAsync(PnP.Core.Model.SharePoint.TermRelationType, PnP.Core.Model.SharePoint.ITermSet, PnP.Core.Model.SharePoint.ITerm)
+  nameWithType: ITermRelationCollection.AddAsync(TermRelationType, ITermSet, ITerm)
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.AddAsync*
+  name: AddAsync
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_AddAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermRelationCollection.AddAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.AddAsync
+  nameWithType: ITermRelationCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatch(PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  name: AddBatch(TermRelationType, ITermSet, ITerm)
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_AddBatch_PnP_Core_Model_SharePoint_TermRelationType_PnP_Core_Model_SharePoint_ITermSet_PnP_Core_Model_SharePoint_ITerm_
+  commentId: M:PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatch(PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatch(PnP.Core.Model.SharePoint.TermRelationType, PnP.Core.Model.SharePoint.ITermSet, PnP.Core.Model.SharePoint.ITerm)
+  nameWithType: ITermRelationCollection.AddBatch(TermRelationType, ITermSet, ITerm)
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  name: AddBatch(Batch, TermRelationType, ITermSet, ITerm)
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_AddBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_TermRelationType_PnP_Core_Model_SharePoint_ITermSet_PnP_Core_Model_SharePoint_ITerm_
+  commentId: M:PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.TermRelationType, PnP.Core.Model.SharePoint.ITermSet, PnP.Core.Model.SharePoint.ITerm)
+  nameWithType: ITermRelationCollection.AddBatch(Batch, TermRelationType, ITermSet, ITerm)
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatch*
+  name: AddBatch
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_AddBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatch
+  nameWithType: ITermRelationCollection.AddBatch
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatchAsync(PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  name: AddBatchAsync(TermRelationType, ITermSet, ITerm)
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_AddBatchAsync_PnP_Core_Model_SharePoint_TermRelationType_PnP_Core_Model_SharePoint_ITermSet_PnP_Core_Model_SharePoint_ITerm_
+  commentId: M:PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatchAsync(PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatchAsync(PnP.Core.Model.SharePoint.TermRelationType, PnP.Core.Model.SharePoint.ITermSet, PnP.Core.Model.SharePoint.ITerm)
+  nameWithType: ITermRelationCollection.AddBatchAsync(TermRelationType, ITermSet, ITerm)
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  name: AddBatchAsync(Batch, TermRelationType, ITermSet, ITerm)
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_AddBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_TermRelationType_PnP_Core_Model_SharePoint_ITermSet_PnP_Core_Model_SharePoint_ITerm_
+  commentId: M:PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.TermRelationType,PnP.Core.Model.SharePoint.ITermSet,PnP.Core.Model.SharePoint.ITerm)
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.TermRelationType, PnP.Core.Model.SharePoint.ITermSet, PnP.Core.Model.SharePoint.ITerm)
+  nameWithType: ITermRelationCollection.AddBatchAsync(Batch, TermRelationType, ITermSet, ITerm)
+- uid: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.ITermRelationCollection.html#PnP_Core_Model_SharePoint_ITermRelationCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermRelationCollection.AddBatchAsync
+  nameWithType: ITermRelationCollection.AddBatchAsync
 - uid: PnP.Core.Model.SharePoint.ITermSet
   name: ITermSet
   href: api/PnP.Core.Model.SharePoint.ITermSet.html
@@ -8546,6 +8700,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermSet.Properties
   nameWithType: ITermSet.Properties
+- uid: PnP.Core.Model.SharePoint.ITermSet.Relations
+  name: Relations
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Relations
+  commentId: P:PnP.Core.Model.SharePoint.ITermSet.Relations
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Relations
+  nameWithType: ITermSet.Relations
+- uid: PnP.Core.Model.SharePoint.ITermSet.Relations*
+  name: Relations
+  href: api/PnP.Core.Model.SharePoint.ITermSet.html#PnP_Core_Model_SharePoint_ITermSet_Relations_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSet.Relations
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSet.Relations
+  nameWithType: ITermSet.Relations
 - uid: PnP.Core.Model.SharePoint.ITermSetCollection
   name: ITermSetCollection
   href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html
@@ -10393,6 +10560,24 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.TermGroupScope.System
   fullName: PnP.Core.Model.SharePoint.TermGroupScope.System
   nameWithType: TermGroupScope.System
+- uid: PnP.Core.Model.SharePoint.TermRelationType
+  name: TermRelationType
+  href: api/PnP.Core.Model.SharePoint.TermRelationType.html
+  commentId: T:PnP.Core.Model.SharePoint.TermRelationType
+  fullName: PnP.Core.Model.SharePoint.TermRelationType
+  nameWithType: TermRelationType
+- uid: PnP.Core.Model.SharePoint.TermRelationType.Pin
+  name: Pin
+  href: api/PnP.Core.Model.SharePoint.TermRelationType.html#PnP_Core_Model_SharePoint_TermRelationType_Pin
+  commentId: F:PnP.Core.Model.SharePoint.TermRelationType.Pin
+  fullName: PnP.Core.Model.SharePoint.TermRelationType.Pin
+  nameWithType: TermRelationType.Pin
+- uid: PnP.Core.Model.SharePoint.TermRelationType.Reuse
+  name: Reuse
+  href: api/PnP.Core.Model.SharePoint.TermRelationType.html#PnP_Core_Model_SharePoint_TermRelationType_Reuse
+  commentId: F:PnP.Core.Model.SharePoint.TermRelationType.Reuse
+  fullName: PnP.Core.Model.SharePoint.TermRelationType.Reuse
+  nameWithType: TermRelationType.Reuse
 - uid: PnP.Core.Model.SharePoint.UrlFieldFormatType
   name: UrlFieldFormatType
   href: api/PnP.Core.Model.SharePoint.UrlFieldFormatType.html
