@@ -272,7 +272,7 @@ namespace PnP.Core.Services
                     // - the __next link, used in (list item) paging
                     else if (property.Name == "EntityTypeName")
                     {
-                        TrackMetaData(metadataBasedObject, property, ref metadata);
+                        TrackMetaData(metadataBasedObject, property, metadata);
                     }
                     else if (property.Name == "__next")
                     {
@@ -557,7 +557,7 @@ namespace PnP.Core.Services
                                     // Let's keep track of the object metadata, useful when creating new requests
                                     if (overflowField.Name.StartsWith("@odata.", StringComparison.InvariantCultureIgnoreCase))
                                     {
-                                        TrackMetaData(metadataBasedObject, overflowField, ref metadata);
+                                        TrackMetaData(metadataBasedObject, overflowField, metadata);
                                     }
                                     else
                                     {
@@ -604,7 +604,7 @@ namespace PnP.Core.Services
                         // Let's keep track of the object metadata, useful when creating new requests
                         if (property.Name.StartsWith("@odata.", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            TrackMetaData(metadataBasedObject, property, ref metadata);
+                            TrackMetaData(metadataBasedObject, property, metadata);
                         }
                         else if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.GraphId))
                         {
@@ -1311,34 +1311,32 @@ namespace PnP.Core.Services
 
         internal static void TrackAndUpdateMetaData(IMetadataExtensible target, JsonProperty property)
         {
-            string jsonPropertyValue = JsonMappingHelper.GetJsonPropertyValue(property).ToString();
-            TrackAndUpdateMetaData(target, property.Name, jsonPropertyValue);
+            TrackAndUpdateMetaData(target, property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
         }
 
         internal static void TrackAndUpdateMetaData(IMetadataExtensible target, string propertyName, string propertyValue)
         {
-            var metadata = target.Metadata;
-            TrackAndUpdateMetaData(ref metadata, propertyName, propertyValue);
-        }
-
-        internal static void TrackAndUpdateMetaData(ref Dictionary<string, string> targetMetadata, string propertyName, string propertyValue)
-        {
-            if (!targetMetadata.ContainsKey(propertyName))
+            if (!target.Metadata.ContainsKey(propertyName))
             {
-                targetMetadata.Add(propertyName, propertyValue);
+                target.Metadata.Add(propertyName, propertyValue);
             }
             else
             {
-                targetMetadata[propertyName] = propertyValue;
+                target.Metadata[propertyName] = propertyValue;
             }
         }
 
-        // NOTE : Is this one really needed ??
-        internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property, ref Dictionary<string, string> metadata)
+        internal static void TrackMetaData(IMetadataExtensible target, JsonProperty property, Dictionary<string, string> metadata)
         {
-            string jsonPropertyValue = JsonMappingHelper.GetJsonPropertyValue(property).ToString();
-            TrackAndUpdateMetaData(target, property.Name, jsonPropertyValue);
-            TrackAndUpdateMetaData(ref metadata, property.Name, jsonPropertyValue);
+            if (!target.Metadata.ContainsKey(property.Name))
+            {
+                target.Metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
+            }
+
+            if (!metadata.ContainsKey(property.Name))
+            {
+                metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
+            }
         }
 
         internal static void TrackSharePointMetaData(IMetadataExtensible target, JsonProperty property)

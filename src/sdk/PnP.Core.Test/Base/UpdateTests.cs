@@ -377,6 +377,35 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public async Task UpdatePropertyViaGraphTriggeringValidateUpdateHandler()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(p => p.Channels);
+
+                // Find first updatable channel
+                var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName == "General");
+
+                string newChannelDescription = $"Updated on {DateTime.UtcNow}";
+                channelToUpdate.Description = newChannelDescription;
+
+                await channelToUpdate.UpdateAsync();
+
+                // Verify model status after update
+                Assert.IsTrue(channelToUpdate.Description != newChannelDescription);
+                Assert.IsFalse(channelToUpdate.HasChanged("Description"));
+
+                // load again from server
+                await context.Team.GetAsync(p => p.Channels);
+
+                // and verify again
+                Assert.IsTrue(channelToUpdate.Description != newChannelDescription);
+                Assert.IsFalse(channelToUpdate.HasChanged("Description"));
+            }
+        }
+
         #endregion
     }
 }

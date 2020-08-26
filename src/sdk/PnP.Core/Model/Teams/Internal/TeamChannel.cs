@@ -46,7 +46,7 @@ namespace PnP.Core.Model.Teams
             };
 
             // Validation handler to prevent updating the general channel
-            ValidateUpdateHandler = (ref PropertyUpdateRequest propertyUpdateRequest) =>
+            ValidateUpdateHandler = (PropertyUpdateRequest propertyUpdateRequest) =>
             {
                 // Prevent setting all values on the general channel
                 if (DisplayName == "General")

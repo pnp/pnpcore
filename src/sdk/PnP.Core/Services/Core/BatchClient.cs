@@ -239,7 +239,7 @@ namespace PnP.Core.Services
             }
 
             // Remove duplicate batch requests
-            DedupBatchRequests(ref batch);
+            DedupBatchRequests(batch);
 
             // Verify batch requests do not contain unresolved tokens
             CheckForUnresolvedTokens(batch);
@@ -1379,7 +1379,7 @@ namespace PnP.Core.Services
         /// Deduplicates GET requests in a batch...if for some reason the same request for the same model instance is there twice then it will be removed
         /// </summary>
         /// <param name="batch">Batch to deduplicate</param>
-        private static void DedupBatchRequests(ref Batch batch)
+        private static void DedupBatchRequests(Batch batch)
         {
             List<Tuple<TransientObject, ApiCall>> queries = new List<Tuple<TransientObject, ApiCall>>();
 
