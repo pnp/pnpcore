@@ -48,11 +48,14 @@ namespace PnP.Core
             errorString.AppendLine($"Message: {Message}");
             errorString.AppendLine($"ClientRequestId: {ClientRequestId}");
 
-            foreach (var property in AdditionalData)
+            if(AdditionalData != null)
             {
-                errorString.AppendLine($"{property.Key}: {property.Value}");
+                foreach (var property in AdditionalData)
+                {
+                    errorString.AppendLine($"{property.Key}: {property.Value}");
+                }
             }
-
+            
             return errorString.ToString();
         }
 
