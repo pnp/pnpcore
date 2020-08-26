@@ -99,6 +99,20 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        [GraphProperty("relations", Get = "termstore/sets/{Parent.GraphId}/terms/{GraphId}/relations?$expand=fromTerm,set,toTerm")]
+        public ITermRelationCollection Relations
+        {
+            get
+            {
+                if (!HasValue(nameof(Relations)))
+                {
+                    var relations = new TermRelationCollection(this.PnPContext, this);
+                    SetValue(relations);
+                }
+                return GetValue<ITermRelationCollection>();
+            }
+        }
+
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = value.ToString(); }
     }

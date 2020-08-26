@@ -695,5 +695,122 @@ namespace PnP.Core.Test.SharePoint
         }
 
 
+        [TestMethod]
+        public async Task CreateAndGetTermRelations()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
+
+                // Add term sets
+                var termSet1 = await group.Sets.AddBatchAsync("TermSet1", "");
+                var termSet2 = await group.Sets.AddBatchAsync("TermSet2", "");
+                await context.ExecuteAsync();
+
+                // Add terms
+                var termA = await termSet1.Children.AddBatchAsync("TermA", "");
+                var termAA = await termSet1.Children.AddBatchAsync("TermAA", "");
+                var termB = await termSet2.Children.AddBatchAsync("TermB", "");
+                await context.ExecuteAsync();
+
+                // Pin TermA under TermB in TermSet2
+                await termA.Relations.AddBatchAsync(TermRelationType.Pin, termSet2, termB);
+                // Reuse TermAA under TermSet2
+                await termAA.Relations.AddBatchAsync(TermRelationType.Reuse, termSet2);
+                await context.ExecuteAsync();
+
+                // Retrieve the created term relations
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var groupLoadedViaLinq2 = await context2.TermStore.Groups.GetByNameAsync(newGroupName);
+                    Assert.IsTrue(groupLoadedViaLinq2.Requested);
+
+                    await groupLoadedViaLinq2.GetAsync(p => p.Sets);
+
+                    var termSet1Loaded = groupLoadedViaLinq2.Sets.FirstOrDefault(p => p.Id == termSet1.Id);
+                    var termSet2Loaded = groupLoadedViaLinq2.Sets.FirstOrDefault(p => p.Id == termSet2.Id);
+
+                    // Load relations via termset
+                    await termSet1Loaded.GetBatchAsync(p => p.Relations, p => p.Children);
+                    await termSet2Loaded.GetBatchAsync(p => p.Relations, p => p.Children);
+                    await context2.ExecuteAsync();
+
+                    // termset1 does not have any relations
+                    Assert.IsTrue(termSet1Loaded.Requested);
+                    Assert.IsTrue(termSet1Loaded.Relations.Requested);
+                    Assert.IsTrue(termSet1Loaded.Relations.Length == 0);
+
+                    // Since we reused termAA under termset2 there must be a relation
+                    Assert.IsTrue(termSet2Loaded.Requested);
+                    Assert.IsTrue(termSet2Loaded.Relations.Requested);
+                    Assert.IsTrue(termSet2Loaded.Relations.Length > 0);
+                    Assert.IsTrue(termSet2Loaded.Relations.First().Relationship == TermRelationType.Reuse);
+                    Assert.IsTrue(termSet2Loaded.Relations.First().ToTerm.Id == termAA.Id);
+                    Assert.IsTrue(termSet2Loaded.Relations.First().Set.Id == termSet2.Id);
+
+                    var termALoaded = termSet1Loaded.Children.FirstOrDefault(p => p.Id == termA.Id);
+                    var termAALoaded = termSet1Loaded.Children.FirstOrDefault(p => p.Id == termAA.Id);
+                    var termBLoaded = termSet2Loaded.Children.FirstOrDefault(p => p.Id == termB.Id);
+
+                    // Load relations via term
+                    await termALoaded.GetBatchAsync(p => p.Relations);
+                    await termAALoaded.GetBatchAsync(p => p.Relations);
+                    await termBLoaded.GetBatchAsync(p => p.Relations);
+                    await context2.ExecuteAsync();
+
+                    // termA was pinned to termB
+                    Assert.IsTrue(termALoaded.Requested);
+                    Assert.IsTrue(termALoaded.Relations.Requested);
+                    Assert.IsTrue(termALoaded.Relations.Length > 0);
+                    Assert.IsTrue(termALoaded.Relations.First().Relationship == TermRelationType.Pin);
+                    Assert.IsTrue(termALoaded.Relations.First().ToTerm.Id == termA.Id);
+                    Assert.IsTrue(termALoaded.Relations.First().Set.Id == termSet2.Id);
+                    Assert.IsTrue(termALoaded.Relations.First().FromTerm.Id == termB.Id);
+
+                    // TermAA was reused to termset2
+                    Assert.IsTrue(termAALoaded.Requested);
+                    Assert.IsTrue(termAALoaded.Relations.Requested);
+                    Assert.IsTrue(termAALoaded.Relations.Length > 0);
+                    Assert.IsTrue(termAALoaded.Relations.First().Relationship == TermRelationType.Reuse);
+                    Assert.IsTrue(termAALoaded.Relations.First().ToTerm.Id == termAA.Id);
+                    Assert.IsTrue(termAALoaded.Relations.First().Set.Id == termSet2.Id);
+
+                    // termB received termA as a pinned term
+                    Assert.IsTrue(termBLoaded.Requested);
+                    Assert.IsTrue(termBLoaded.Relations.Requested);
+                    Assert.IsTrue(termBLoaded.Relations.Length > 0);
+                    Assert.IsTrue(termBLoaded.Relations.First().Relationship == TermRelationType.Pin);
+                    Assert.IsTrue(termBLoaded.Relations.First().ToTerm.Id == termA.Id);
+                    Assert.IsTrue(termBLoaded.Relations.First().Set.Id == termSet2.Id);
+                    Assert.IsTrue(termBLoaded.Relations.First().FromTerm.Id == termB.Id);
+                }
+
+                // Delete term sets, delete the term set reusing terms first to prevent deletion errors 
+                await termSet2.DeleteAsync();
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(5000);
+                }
+
+                await termSet1.DeleteAsync();
+
+                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
+                // not always work (getting error about deleting non empty term group)
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(10000);
+                }
+
+                // Delete the group again
+                await group.DeleteAsync();
+
+            }
+        }
+
     }
 }

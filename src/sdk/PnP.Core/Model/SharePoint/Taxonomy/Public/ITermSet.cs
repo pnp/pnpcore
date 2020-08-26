@@ -45,6 +45,11 @@ namespace PnP.Core.Model.SharePoint
         public List<ITermSetProperty> Properties { get; }
 
         /// <summary>
+        /// Collection of terms relations
+        /// </summary>
+        public ITermRelationCollection Relations { get; }
+
+        /// <summary>
         /// Adds a property to the term set's property collection. Call update to persist this change.
         /// </summary>
         /// <param name="key">Property key</param>
