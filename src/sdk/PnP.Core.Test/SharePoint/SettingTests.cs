@@ -15,7 +15,7 @@ namespace PnP.Core.Test.SharePoint
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
 
             //Reference
             // b6917cb1-93a0-4b97-a84d-7cf49975d4ec - SitePages - Read this only - modern sites already have this activated
@@ -33,7 +33,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(web.Features.Length > 0);
             }
         }
-
+        
         [TestMethod]
         public async Task GetFeaturesSiteAsync()
         {
@@ -60,6 +60,36 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(feature);
                 Assert.IsNotNull(feature.DefinitionId);
                 Assert.IsTrue(feature.DefinitionId != Guid.Empty);
+            }
+        }
+
+        [TestMethod]
+        public async Task EnableWebFeatureAlreadyActivatedAsync()
+        {
+            TestCommon.Instance.Mocking = true;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.Features);
+
+                var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
+                
+                if(web.Features.Any(o=>o.DefinitionId == id))
+                {
+                    // Already Activated
+                }
+                else
+                {
+                    // Not Activated lets activate 
+                    IFeature feature = await web.Features.EnableAsync(id);
+
+                    Assert.IsNotNull(feature);
+                    Assert.IsNotNull(feature.DefinitionId);
+                    Assert.IsTrue(feature.DefinitionId != Guid.Empty);
+                }
+                
+                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () => {
+                     await web.Features.EnableAsync(id);
+                });
             }
         }
 
@@ -106,7 +136,7 @@ namespace PnP.Core.Test.SharePoint
 
                 var id = new Guid("3bae86a2-776d-499d-9db8-fa4cdc7884f8"); // Document Sets - Site Scoped
                 await site.Features.DisableAsync(id);
-
+                
                 Assert.IsTrue(!site.Features.Any(o => o.DefinitionId == id));
             }
         }
