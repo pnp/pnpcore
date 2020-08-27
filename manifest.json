@@ -942,7 +942,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITerm.html",
-          "hash": "BGzDko7UGwL0d1j2NpZVFg=="
+          "hash": "zazHWntUyIL8jFdN5tYgdQ=="
         }
       },
       "is_incremental": false,
@@ -954,7 +954,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermCollection.html",
-          "hash": "9oO7XaGKP2zoX9UIjCA0RQ=="
+          "hash": "s5eXH9peU9IccbMouY91oQ=="
         }
       },
       "is_incremental": false,
@@ -1050,7 +1050,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermSet.html",
-          "hash": "6zyJEl2YfgioYPT3ZhkwGg=="
+          "hash": "SNQsF0oA5DBveIaO5lXd+g=="
         }
       },
       "is_incremental": false,
