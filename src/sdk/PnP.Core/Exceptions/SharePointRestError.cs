@@ -14,6 +14,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="type"><see cref="ErrorType"/> type of the error</param>
         /// <param name="httpResponseCode">Http response code of the service request that failed</param>
+        /// <param name="response">Service request response content</param>
         public SharePointRestError(ErrorType type, int httpResponseCode, string response) : base(type, httpResponseCode)
         {
             if (!string.IsNullOrEmpty(response))

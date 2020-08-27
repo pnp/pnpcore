@@ -25,6 +25,12 @@ namespace PnP.Core.QueryModel
 
         #region IQueryProvider implementation
 
+        /// <summary>
+        /// Creates a query for the provided expression
+        /// </summary>
+        /// <typeparam name="TResult">Result type of the query</typeparam>
+        /// <param name="expression">Expression that will be translated into a query</param>
+        /// <returns>Created query</returns>
         public IQueryable<TResult> CreateQuery<TResult>(Expression expression)
         {
             if (expression is null)
@@ -52,6 +58,13 @@ namespace PnP.Core.QueryModel
             return (IQueryable<TResult>)CreateQuery(expression);
         }
 
+        /// <summary>
+        /// Executes the provided expression
+        /// </summary>
+        /// <typeparam name="TResult">Resulting type of the linq expression execution</typeparam>
+        /// <param name="expression">Expression to execute</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Loaded model instace of type <typeparamref name="TResult"/></returns>
         public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {
             if (expression == null)
@@ -119,6 +132,12 @@ namespace PnP.Core.QueryModel
             return (TResult)GetAsyncEnumerableMethod.MakeGenericMethod(innerResultType).Invoke(this, new object[] { expression, cancellationToken });
         }
 
+        /// <summary>
+        /// Executes the provided expression
+        /// </summary>
+        /// <typeparam name="TResult">Resulting type of the linq expression execution</typeparam>
+        /// <param name="expression">Expression to execute</param>
+        /// <returns>Loaded model instace of type <typeparamref name="TResult"/></returns>
         public TResult Execute<TResult>(Expression expression)
         {
             if (expression == null)
@@ -137,13 +156,25 @@ namespace PnP.Core.QueryModel
             return (TResult)ExecuteObjectAsync(expression).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Executes the provided expression
+        /// </summary>
+        /// <param name="expression">Expression to execute</param>
         public object Execute(Expression expression)
         {
             return ExecuteObjectAsync(expression).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Creates a query for the provided expression
+        /// </summary>
+        /// <param name="expression">Expression to create a query for</param>        
         public abstract IQueryable CreateQuery(Expression expression);
 
+        /// <summary>
+        /// Executes the provided expression
+        /// </summary>
+        /// <param name="expression">Expression to execute</param>
         public abstract Task<object> ExecuteObjectAsync(Expression expression);
 
         #endregion

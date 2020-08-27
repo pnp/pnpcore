@@ -25,6 +25,9 @@ namespace PnP.Core.Model
             }
         }
 
+        /// <summary>
+        /// Does this model instance have changes?
+        /// </summary>
         public bool HasChanges => changes.Count > 0;
 
         /// <summary>
@@ -119,8 +122,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// System add, does not mark the added property as changed
         /// </summary>
-        /// <param name="key">Key of the item to add</param>
-        /// <param name="value">Value of the item to add</param>
+        /// <param name="values">Collection of key/value pairs to add</param>
         internal void SystemAddRange(Dictionary<string, object> values)
         {
             foreach (var v in values)

@@ -267,6 +267,7 @@ namespace PnP.Core.Model
         /// Translates model into a set of classes that are used to drive CRUD operations, this takes into account the passed expressions
         /// </summary>
         /// <param name="modelType">The Type of the model object to process</param>
+        /// <param name="target">Model instance we're working on</param>
         /// <param name="expressions">Data load expressions</param>
         /// <returns>Entity model class describing this model instance</returns>
         internal EntityInfo GetClassInfo<TModel>(Type modelType, BaseDataModel<TModel> target, params Expression<Func<TModel, object>>[] expressions)

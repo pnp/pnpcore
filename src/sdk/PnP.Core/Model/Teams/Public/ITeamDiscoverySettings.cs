@@ -5,6 +5,9 @@
     /// </summary>
     public interface ITeamDiscoverySettings: IComplexType
     {
+        /// <summary>
+        /// Show team in Teams search and suggestions?
+        /// </summary>
         public bool ShowInTeamsSearchAndSuggestions { get; set; }
     }
 }

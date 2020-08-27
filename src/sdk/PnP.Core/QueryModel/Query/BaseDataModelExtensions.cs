@@ -1,15 +1,14 @@
-﻿using PnP.Core.Model;
-using PnP.Core.QueryModel;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.QueryModel
 {
+    /// <summary>
+    /// Class holding data model extension methods
+    /// </summary>
     public static class BaseDataModelExtensions
     {
         #region Utility extension to make it easier to chain multiple async calls

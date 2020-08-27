@@ -22,11 +22,11 @@
         /// </summary>
         GreaterThanOrEqual,
         /// <summary>
-        /// Corresponds to the < operator
+        /// Corresponds to the &lt; operator
         /// </summary>
         LessThan,
         /// <summary>
-        /// Corresponds to the <= operator
+        /// Corresponds to the &lt;= operator
         /// </summary>
         LessThanOrEqual,
         /// <summary>

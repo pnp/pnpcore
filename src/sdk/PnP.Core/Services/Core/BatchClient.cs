@@ -119,6 +119,8 @@ namespace PnP.Core.Services
         /// Constructor
         /// </summary>
         /// <param name="context">PnP Context</param>
+        /// <param name="settingsClient">Settings to use</param>
+        /// <param name="telemetryClient">Azure AppInsihgts telemetry client to use</param>
         internal BatchClient(PnPContext context, ISettings settingsClient, TelemetryClient telemetryClient)
         {
             PnPContext = context;

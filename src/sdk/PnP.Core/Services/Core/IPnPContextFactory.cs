@@ -103,14 +103,14 @@ namespace PnP.Core.Services
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
-        /// <param name="url">The name of the configuration to use</param>
+        /// <param name="name">The name of the configuration to use</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public PnPContext Create(string name);
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
-        /// <param name="url">The name of the configuration to use</param>
+        /// <param name="name">The name of the configuration to use</param>
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public Task<PnPContext> CreateAsync(string name);
     }

@@ -387,7 +387,7 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="pnpObject">Model to populate from JSON</param>
         /// <param name="entity">Information about the current model</param>
-        /// <param name="root">JsonElement to process</param>
+        /// <param name="apiResponse">Response of the API call</param>
         /// <param name="fromJsonCasting">Delegate to be called for type conversion</param>
         /// <returns></returns>
         internal static async Task FromJsonGraph(TransientObject pnpObject, EntityInfo entity, ApiResponse apiResponse, Func<FromJson, object> fromJsonCasting = null)

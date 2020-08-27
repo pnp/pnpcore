@@ -6,9 +6,13 @@ namespace PnP.Core.Services
     /// <summary>
     /// Extension class for the IServiceCollection type to provide supporting methods for the AuthenticationProviderFactory service
     /// </summary>
-
     public static class AuthenticationProviderFactoryCollectionExtensions
     {
+        /// <summary>
+        /// Adds the <see cref="AuthenticationProviderFactory"/> service to the DI container
+        /// </summary>
+        /// <param name="collection">Collection of loaded services</param>
+        /// <returns>Collection of loaded services</returns>
         public static IServiceCollection AddAuthenticationProviderFactory(this IServiceCollection collection)
         {
             if (collection == null)
@@ -22,6 +26,12 @@ namespace PnP.Core.Services
                 .AddAuthenticationServices();
         }
 
+        /// <summary>
+        /// Adds the <see cref="AuthenticationProviderFactory"/> service to the DI container
+        /// </summary>
+        /// <param name="collection">Collection of loaded services</param>
+        /// <param name="options"><see cref="AuthenticationProviderFactory"/> options</param>
+        /// <returns>Collection of loaded services</returns>
         public static IServiceCollection AddAuthenticationProviderFactory(this IServiceCollection collection, Action<OAuthAuthenticationProviderOptions> options)
         {
             if (collection == null)

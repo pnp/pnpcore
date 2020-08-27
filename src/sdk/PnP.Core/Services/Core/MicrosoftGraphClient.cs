@@ -12,8 +12,17 @@ namespace PnP.Core.Services
         private readonly ILogger logger;
         private readonly ISettings settings;
 
+        /// <summary>
+        /// Returns the configured Microsoft Graph http client
+        /// </summary>
         public HttpClient Client { get; }
 
+        /// <summary>
+        /// Constructs the Microsoft Graph http client
+        /// </summary>
+        /// <param name="client">Http client instance</param>
+        /// <param name="log">Logger</param>
+        /// <param name="settingsClient">Settings to configure the http client</param>
         public MicrosoftGraphClient(HttpClient client, ILogger<MicrosoftGraphClient> log, ISettings settingsClient)
         {
             logger = log;

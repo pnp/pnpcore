@@ -137,7 +137,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Records the response of a CSOM request (fired as part of the execution of a <see cref="Batch"/>)
         /// </summary>
-        /// <param name="csomJsonResponse"><see cref="Dictionary{int, JsonElement}" holding the json response of each action in the CSOM XML/></param>
+        /// <param name="csomJsonResponse">Dictionary holding the json response of each action in the CSOM XML/></param>
         /// <param name="responseHttpStatusCode">Http response status code for this request</param>
         internal void AddResponse(Dictionary<int, JsonElement> csomJsonResponse, HttpStatusCode responseHttpStatusCode)
         {

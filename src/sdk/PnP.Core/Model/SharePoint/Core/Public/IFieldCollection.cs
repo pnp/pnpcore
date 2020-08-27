@@ -35,7 +35,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new Text field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -44,7 +43,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new Text field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -53,7 +51,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new multiline Text field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -62,7 +59,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new multiline Text field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -71,7 +67,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new URL field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -80,7 +75,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new URL field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -89,7 +83,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new Number field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -98,7 +91,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new Number field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -107,7 +99,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new DateTime field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -116,7 +107,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new DateTime field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -125,7 +115,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new Calculated field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
@@ -134,7 +123,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Adds a new Calculated field to the collection
         /// </summary>
-        /// <param name="batch">Batch to use</param>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>

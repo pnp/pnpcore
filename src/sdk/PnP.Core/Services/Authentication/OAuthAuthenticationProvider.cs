@@ -49,6 +49,7 @@ namespace PnP.Core.Services
         /// Default constructor
         /// </summary>
         /// <param name="logger">Logger</param>
+        /// <param name="accessTokenProvider">Provder for delivering an access token</param>
         public OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger, IOAuthAccessTokenProvider accessTokenProvider = null)
         {
             log = logger;
@@ -416,6 +417,10 @@ namespace PnP.Core.Services
             return lease;
         }
 
+        /// <summary>
+        /// Disposes this <see cref="OAuthAuthenticationProvider"/>
+        /// <param name="disposing">Do we need to dispose resources</param>
+        /// </summary>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -433,6 +438,9 @@ namespace PnP.Core.Services
             }
         }
 
+        /// <summary>
+        /// Disposes this <see cref="OAuthAuthenticationProvider"/>
+        /// </summary>
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method

@@ -427,12 +427,19 @@ namespace PnP.Core.Services
 
         private bool disposed = false;
 
+        /// <summary>
+        /// Disposes this <see cref="PnPContext"/>
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Disposes this <see cref="PnPContext"/>
+        /// </summary>
+        /// <param name="disposing">Do we need to dispose resources</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposed)

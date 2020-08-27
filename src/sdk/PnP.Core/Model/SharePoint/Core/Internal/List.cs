@@ -53,7 +53,7 @@ namespace PnP.Core.Model.SharePoint
                 return new ApiCall($"_api/web/lists", ApiType.SPORest, body);
             };
 
-            /** 
+            /*
             // Sample handler that shows how to override the API call used for the delete of this entity
             DeleteApiCallOverrideHandler = (ApiCall apiCall) =>
             {
@@ -61,7 +61,7 @@ namespace PnP.Core.Model.SharePoint
             };
             */
 
-            /**
+            /*
             // Sample update validation handler, can be used to prevent updates to a field (e.g. field validation, make readonly field, ...)
             ValidateUpdateHandler = (FieldUpdateRequest fieldUpdateRequest) => 
             {

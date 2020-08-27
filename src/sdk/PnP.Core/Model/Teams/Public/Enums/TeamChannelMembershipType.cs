@@ -5,8 +5,19 @@
     /// </summary>
     public enum TeamChannelMembershipType
     {
+        /// <summary>
+        /// Standard channel membership
+        /// </summary>
         Standard,
+
+        /// <summary>
+        /// Private channel membership
+        /// </summary>
         Private,
+
+        /// <summary>
+        /// Reserved for future use
+        /// </summary>
         UnknownFutureValue,
     }
 }

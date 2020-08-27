@@ -5,7 +5,14 @@
     /// </summary>
     public enum TeamVisibility
     {
+        /// <summary>
+        /// Private team
+        /// </summary>
         Private,
+
+        /// <summary>
+        /// Public team
+        /// </summary>
         Public
     }
 }

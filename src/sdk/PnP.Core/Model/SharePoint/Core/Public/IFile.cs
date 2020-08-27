@@ -130,60 +130,62 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IListItem ListItemAllFields { get; }
 
+        /*
         //TODO: To implement...
         /// <summary>
         /// Gets a value that specifies the user who added the file.
         /// </summary>
-        //public IUser Author { get; }
+        public IUser Author { get; }
 
         //TODO: To implement...
         /// <summary>
         /// Gets a value that returns the user who has checked out the file.
         /// </summary>
-        //public IUser CheckedOutByUser { get; }
+        public IUser CheckedOutByUser { get; }
 
         //TODO: To implement...
         /// <summary>
         /// To update...
         /// </summary>
-        //public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings { get; }
+        public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings { get; }
 
         //TODO: To implement...
         /// <summary>
         /// To update...
         /// </summary>
-        //public IInformationRightsManagementFileSettings InformationRightsManagementSettings { get; }
+        public IInformationRightsManagementFileSettings InformationRightsManagementSettings { get; }
 
 
         //TODO: To implement...
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUser LockedByUser { get; }
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUser LockedByUser { get; }
 
         //TODO: To implement...
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUser ModifiedBy { get; }
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUser ModifiedBy { get; }
 
         //TODO: To implement...
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IPropertyValues Properties { get; }
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IPropertyValues Properties { get; }
 
         //TODO: To implement...
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IFileVersionEventCollection VersionEvents { get; }
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IFileVersionEventCollection VersionEvents { get; }
 
         //TODO: To implement...
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IFileVersionCollection Versions { get; }
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IFileVersionCollection Versions { get; }
+        */
 
         #region Publish
         /// <summary>

@@ -7,7 +7,11 @@ namespace PnP.Core
     /// </summary>
     public class ServiceError : BaseError
     {
-
+        /// <summary>
+        /// <see cref="ServiceError"/> constructor using error type and http response code to create a backend service request error
+        /// </summary>
+        /// <param name="type">Type of the error</param>
+        /// <param name="httpResponseCode">Http response code of the error</param>
         public ServiceError(ErrorType type, int httpResponseCode) : base(type)
         {
             HttpResponseCode = httpResponseCode;

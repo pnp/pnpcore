@@ -159,7 +159,7 @@ namespace PnP.Core.Model
         /// Reflection helper method to set a property value
         /// </summary>
         /// <param name="name">The name of the property to set a value to</param>
-        /// <param name="result">The value to set on the property</param>
+        /// <param name="value">The value to set on the property</param>
         /// <returns>Defines whether the set property value was successful or not</returns>
         protected bool SetProperty(string name, object value)
         {

@@ -174,6 +174,7 @@ namespace PnP.Core.Model.Teams
         /// Creates a wiki <see cref="TeamChannelTab"/>
         /// </summary>
         /// <param name="displayName">Name of the tab</param>
+        /// <param name="documentLibraryUri">Uri to the document library that needs to be added as tab</param>
         /// <returns>Wiki <see cref="TeamChannelTab"/></returns>
         private Tuple<TeamChannelTab, Dictionary<string, object>> CreateTeamChannelDocumentLibraryTab(string displayName, Uri documentLibraryUri)
         {

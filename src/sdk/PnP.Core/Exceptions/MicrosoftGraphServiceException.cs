@@ -23,11 +23,23 @@ namespace PnP.Core
         #endregion
 
         #region Custom constructors
+        /// <summary>
+        /// Creates a <see cref="MicrosoftGraphServiceException"/> using the provided error type, http response code and request response
+        /// </summary>
+        /// <param name="type">Type of the error</param>
+        /// <param name="httpResponseCode">Http response code of the executed Graph request</param>
+        /// <param name="response">Response of the executed Graph request</param>
         public MicrosoftGraphServiceException(ErrorType type, int httpResponseCode, string response): base("Microsoft Graph service exception")
         {            
             Error = new MicrosoftGraphError(type, httpResponseCode, response);            
         }
 
+        /// <summary>
+        /// Creates a <see cref="MicrosoftGraphServiceException"/> using the provided error type, http response code and request response
+        /// </summary>
+        /// <param name="type">Type of the error</param>
+        /// <param name="httpResponseCode">Http response code of the executed Graph request</param>
+        /// <param name="error">Json error coming from the executed Graph request</param>
         public MicrosoftGraphServiceException(ErrorType type, int httpResponseCode, JsonElement error): base("Microsoft Graph service exception")
         {
             Error = new MicrosoftGraphError(type, httpResponseCode, error);

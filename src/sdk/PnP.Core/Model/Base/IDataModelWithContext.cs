@@ -7,6 +7,9 @@ namespace PnP.Core.Model
     /// </summary>
     public interface IDataModelWithContext
     {
+        /// <summary>
+        /// <see cref="PnPContext"/> linked to this model instance
+        /// </summary>
         PnPContext PnPContext { get; set; }
     }
 }

@@ -8,6 +8,11 @@ namespace PnP.Core.Services
     /// </summary>
     public static class PnPContextFactoryCollectionExtensions
     {
+        /// <summary>
+        /// Adds the <see cref="PnPContextFactory"/> to the collection of services
+        /// </summary>
+        /// <param name="collection">Collection of loaded services</param>
+        /// <returns>Collection of loaded services</returns>
         public static IServiceCollection AddPnPContextFactory(this IServiceCollection collection)
         {
             if (collection == null)
@@ -25,6 +30,12 @@ namespace PnP.Core.Services
                 .AddPnPServices();
         }
 
+        /// <summary>
+        /// Adds the <see cref="PnPContextFactory"/> to the collection of services with options
+        /// </summary>
+        /// <param name="collection">Collection of loaded services</param>
+        /// <param name="options"><see cref="PnPContextFactory"/> configuration options</param>
+        /// <returns>Collection of loaded services</returns>
         public static IServiceCollection AddPnPContextFactory(this IServiceCollection collection, Action<PnPContextFactoryOptions> options)
         {
             if (collection == null)

@@ -8,6 +8,10 @@ namespace PnP.Core
     /// </summary>
     public abstract class BaseError
     {
+        /// <summary>
+        /// Default base constructor/>
+        /// </summary>
+        /// <param name="type">Type of the error</param>
         public BaseError(ErrorType type)
         {
             Type = type;
@@ -28,6 +32,11 @@ namespace PnP.Core
         /// </summary>
         public IDictionary<string, object> AdditionalData { get; internal set; }
 
+        /// <summary>
+        /// Adds additional error data to this error as property/value pairs
+        /// </summary>
+        /// <param name="propertyName">Property to add</param>
+        /// <param name="propertyValue">Value to add</param>
         protected void AddAdditionalData(string propertyName, object propertyValue)
         {
             if (AdditionalData == null)

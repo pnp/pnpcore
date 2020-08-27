@@ -152,7 +152,7 @@ namespace PnP.Core.Model
         /// </summary>
         /// <typeparam name="TModel">Model type (e.g. IWeb)</typeparam>
         /// <param name="model">Implementation of the model (e.g. Web)</param>
-        /// <param name="expression">Expression listing the properties to check</param>
+        /// <param name="expressions">Expression listing the properties to check</param>
         /// <returns>True if properties were loaded, false otherwise</returns>
         public static bool ArePropertiesAvailable<TModel>(this IDataModel<TModel> model, params Expression<Func<TModel, object>>[] expressions)
         {
@@ -268,6 +268,7 @@ namespace PnP.Core.Model
         /// Sets a property value without marking it as "changed"
         /// </summary>
         /// <typeparam name="TModel">Model type (e.g. ITeamFunSettings)</typeparam>
+        /// <typeparam name="T">Value to set</typeparam>
         /// <param name="model">Implementation of the model (e.g. TeamFunSettings)</param>
         /// <param name="expression">Expression listing the property to load</param>
         /// <param name="value">Value to set</param>

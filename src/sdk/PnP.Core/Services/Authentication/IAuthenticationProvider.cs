@@ -23,6 +23,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Authenticates the specified request message.
         /// </summary>
+        /// <param name="resource">Request uri</param>
         /// <param name="request">The <see cref="HttpRequestMessage"/> to authenticate.</param>
         /// <returns>The task to await.</returns>
         Task AuthenticateRequestAsync(Uri resource, HttpRequestMessage request);

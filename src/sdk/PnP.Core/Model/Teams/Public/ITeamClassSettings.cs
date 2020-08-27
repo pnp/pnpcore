@@ -5,7 +5,9 @@
     /// </summary>
     public interface ITeamClassSettings
     {
-
+        /// <summary>
+        /// Do guardians need to be notified about assignments?
+        /// </summary>
         public bool NotifyGuardiansAboutAssignments { get; set; }
     }
 }

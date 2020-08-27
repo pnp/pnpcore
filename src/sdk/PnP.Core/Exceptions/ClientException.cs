@@ -22,11 +22,22 @@ namespace PnP.Core
         #endregion
 
         #region Custom constructors
+        /// <summary>
+        /// <see cref="ClientException"/> constructor 
+        /// </summary>
+        /// <param name="type">Type of the error</param>
+        /// <param name="message">Error message</param>
         public ClientException(ErrorType type, string message) : base(message)
         {
             Error = new ClientError(type, message);
         }
 
+        /// <summary>
+        /// <see cref="ClientException"/> constructor 
+        /// </summary>
+        /// <param name="type">Type of the error</param>
+        /// <param name="message">Error message</param>
+        /// <param name="innerException">Inner exception to link to this exception</param>
         public ClientException(ErrorType type, string message, Exception innerException) : base(message, innerException)
         {
             Error = new ClientError(type, message);

@@ -16,6 +16,9 @@
         /// </summary>
         public bool? AllowMultipleValueFilterForTaxonomyFields { get; set; }
         
+        /// <summary>
+        /// Audience to use while processing this request
+        /// </summary>
         public bool? AudienceTarget { get; set; }
         
         /// <summary>
@@ -23,6 +26,9 @@
         /// </summary>
         public bool? DatesInUtc { get; set; }
         
+        /// <summary>
+        /// Use a deferred render?
+        /// </summary>
         public bool? DeferredRender { get; set; }
         
         /// <summary>
@@ -45,8 +51,14 @@
         /// </summary>
         public string ImageFieldsToTryRewriteToCdnUrls { get; set; }
         
+        /// <summary>
+        /// Merge with the default view?
+        /// </summary>
         public bool? MergeDefaultView { get; set; }
         
+        /// <summary>
+        /// Return the original date?
+        /// </summary>
         public bool? OriginalDate { get; set; }
         
         /// <summary>

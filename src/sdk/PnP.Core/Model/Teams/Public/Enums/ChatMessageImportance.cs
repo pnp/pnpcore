@@ -5,8 +5,19 @@
     /// </summary>
     public enum ChatMessageImportance
     {
+        /// <summary>
+        /// Normal importance
+        /// </summary>
         Normal,
+
+        /// <summary>
+        /// High importance
+        /// </summary>
         High,
+
+        /// <summary>
+        /// Urgent importance
+        /// </summary>
         Urgent
     }
 }

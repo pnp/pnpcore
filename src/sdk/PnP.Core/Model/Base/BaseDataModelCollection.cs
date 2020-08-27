@@ -68,7 +68,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// Standard add method to add a model to the collection
         /// </summary>
-        /// <param name="model">Model to add</param>
+        /// <param name="item">Model instance to add</param>
         public virtual void Add(TModel item)
         {
             // Check that the item is not null

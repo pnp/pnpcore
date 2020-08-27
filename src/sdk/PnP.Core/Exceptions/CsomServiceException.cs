@@ -23,6 +23,12 @@ namespace PnP.Core
         #endregion
 
         #region Custom constructors
+        /// <summary>
+        /// Creates a <see cref="CsomServiceException"/> using the provided error type, http response code and CSOM request response
+        /// </summary>
+        /// <param name="type">Type of the error</param>
+        /// <param name="httpResponseCode">Http response code of the executed CSOM request</param>
+        /// <param name="response">JSON response of the executed CSOM request</param>
         public CsomServiceException(ErrorType type, int httpResponseCode, JsonElement response) : base("CSOM service exception")
         {
             Error = new CsomError(type, httpResponseCode, response);            

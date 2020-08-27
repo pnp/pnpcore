@@ -1,5 +1,8 @@
 ﻿namespace PnP.Core.Model.SharePoint
 {
+    /// <summary>
+    /// Format of the Url field
+    /// </summary>
     public enum UrlFieldFormatType
     {
         /// <summary>

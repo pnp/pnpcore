@@ -16,6 +16,12 @@ namespace PnP.Core.Services
         private readonly ILogger log;
         private readonly IServiceProvider serviceProvider;
 
+        /// <summary>
+        /// <see cref="AuthenticationProviderFactory"/> constructor
+        /// </summary>
+        /// <param name="options">Options to configure the <see cref="AuthenticationProviderFactory"/></param>
+        /// <param name="logger">Logger for log output</param>
+        /// <param name="serviceProvider">DI container service</param>
         public AuthenticationProviderFactory(
             IOptionsMonitor<OAuthAuthenticationProviderOptions> options,
             ILogger<PnPContext> logger,

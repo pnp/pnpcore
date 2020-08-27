@@ -13,6 +13,16 @@ namespace PnP.Core.Services
     /// </summary>
     public class PnPContextFactory : IPnPContextFactory
     {
+        /// <summary>
+        /// Default constructor for <see cref="PnPContextFactory"/>
+        /// </summary>
+        /// <param name="options"><see cref="PnPContextFactory"/> options</param>
+        /// <param name="logger">Connected logger</param>
+        /// <param name="authenticationProviderFactory"><see cref="AuthenticationProviderFactory"/> to use</param>
+        /// <param name="sharePointRestClient">SharePoint REST http client to use</param>
+        /// <param name="microsoftGraphClient">Microsoft Graph http client to use</param>
+        /// <param name="settingsClient">Settings to use</param>
+        /// <param name="telemetryClient">Connected Azure AppInsights telemetry client</param>
         public PnPContextFactory(
             IOptionsMonitor<PnPContextFactoryOptions> options,
             ILogger<PnPContext> logger,
@@ -45,12 +55,39 @@ namespace PnP.Core.Services
 #endif
         }
 
+        /// <summary>
+        /// Options for the <see cref="PnPContextFactory"/>
+        /// </summary>
         protected PnPContextFactoryOptions Options { get; private set; }
+
+        /// <summary>
+        /// Connected <see cref="AuthenticationProviderFactory"/>
+        /// </summary>
         protected IAuthenticationProviderFactory AuthenticationProviderFactory { get; private set; }
+
+        /// <summary>
+        /// Connected logger
+        /// </summary>
         protected ILogger Log { get; private set; }
+
+        /// <summary>
+        /// Connected SharePoint REST http client
+        /// </summary>
         protected SharePointRestClient SharePointRestClient { get; private set; }
+
+        /// <summary>
+        /// Connected Microsoft Graph http client
+        /// </summary>
         protected MicrosoftGraphClient MicrosoftGraphClient { get; private set; }
+
+        /// <summary>
+        /// Connected Azure AppInsights telemetry client
+        /// </summary>
         protected TelemetryClient TelemetryClient { get; private set; }
+
+        /// <summary>
+        /// Settings used to configure this <see cref="PnPContext"/>
+        /// </summary>
         protected ISettings SettingsClient { get; private set; }
 
         /// <summary>
@@ -84,7 +121,6 @@ namespace PnP.Core.Services
         /// Creates a new instance of SPOContext based on a provided configuration name
         /// </summary>
         /// <param name="url">The URL of the SPOContext as a URI</param>
-        /// <param name="authenticationProviderName">The name of the Authentication Provider to use to authenticate within the SPOContext</param>
         /// <returns>A SPOContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(Uri url)
         {
@@ -95,7 +131,6 @@ namespace PnP.Core.Services
         /// Creates a new instance of SPOContext based on a provided configuration name
         /// </summary>
         /// <param name="url">The URL of the SPOContext as a URI</param>
-        /// <param name="authenticationProviderName">The name of the Authentication Provider to use to authenticate within the SPOContext</param>
         /// <returns>A SPOContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Uri url)
         {

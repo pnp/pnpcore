@@ -5,7 +5,14 @@
     /// </summary>
     public enum ChatMessageContentType
     {
+        /// <summary>
+        /// Chat message uses text only
+        /// </summary>
         Text,
+
+        /// <summary>
+        /// Chat message uses html
+        /// </summary>
         Html
     }
 }

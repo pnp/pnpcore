@@ -12,14 +12,14 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="name">Body of the chat message</param>
+        /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public Task<ITeamChatMessage> AddAsync(string body);
 
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="name">Body of the chat message</param>
+        /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public ITeamChatMessage Add(string body);
 
@@ -27,7 +27,7 @@ namespace PnP.Core.Model.Teams
         /// Adds a new channel chat message
         /// </summary>
         /// <param name="batch">Batch to use</param>
-        /// <param name="name">Body of the chat message</param>
+        /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public Task<ITeamChatMessage> AddBatchAsync(Batch batch, string body);
 
@@ -35,21 +35,21 @@ namespace PnP.Core.Model.Teams
         /// Adds a new channel chat message
         /// </summary>
         /// <param name="batch">Batch to use</param>
-        /// <param name="name">Body of the chat message</param>
+        /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public ITeamChatMessage AddBatch(Batch batch, string body);
 
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="name">Body of the chat message</param>
+        /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public Task<ITeamChatMessage> AddBatchAsync(string body);
 
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
-        /// <param name="name">Body of the chat message</param>
+        /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public ITeamChatMessage AddBatch(string body);
     }

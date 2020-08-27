@@ -71,11 +71,13 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IFolder ParentFolder { get; }
 
+        /*
         //TODO: To implement...
-        ///// <summary>
-        ///// Gets the collection of all files contained in the folder.
-        ///// </summary>
+        /// <summary>
+        // Gets the collection of all files contained in the folder.
+        /// </summary>
         //public IPropertyValues Properties { get; }
+        */
 
         /// <summary>
         /// Get the storage metrics of the folder.

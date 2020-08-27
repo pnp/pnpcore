@@ -5,7 +5,14 @@
     /// </summary>
     public enum TeamGiphyContentRating
     {
+        /// <summary>
+        /// Moderate content rating
+        /// </summary>
         Moderate,
+
+        /// <summary>
+        /// Strict content rating
+        /// </summary>
         Strict
     }
 }

@@ -5,6 +5,9 @@
     /// </summary>
     public enum ChatMessageType
     {
+        /// <summary>
+        /// Message type
+        /// </summary>
         Message
     }
 }

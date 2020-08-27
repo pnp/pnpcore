@@ -22,6 +22,12 @@ namespace PnP.Core
         #endregion
 
         #region Custom constructors
+        /// <summary>
+        /// Creates a <see cref="SharePointRestServiceException"/> using the provided error type, http response code and request response
+        /// </summary>
+        /// <param name="type">Type of the error</param>
+        /// <param name="httpResponseCode">Http response code of the service request</param>
+        /// <param name="response">Response of the service request that errored out</param>
         public SharePointRestServiceException(ErrorType type, int httpResponseCode, string response): base("SharePoint Rest service exception")
         {
             Error = new SharePointRestError(type, httpResponseCode, response);

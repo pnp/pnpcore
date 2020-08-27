@@ -101,9 +101,11 @@
         /// </summary>
         public string NewFormUrl { get; set; }
 
+
         /// <summary>
         /// Gets or Sets whether the Content Type is read only
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
         public bool ReadOnly { get; set; }
 
         /// <summary>

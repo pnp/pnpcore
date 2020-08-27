@@ -11,8 +11,8 @@ namespace PnP.Core.QueryModel
 {
     /// <summary>
     /// Base abstract type for any LINQ IQueryable collection of the Domain Model
-    /// In the real model, could inherit from BaseDataModelCollection<TModel>
-    /// and implement IQueryable<TModel>
+    /// In the real model, could inherit from BaseDataModelCollection&lt;TModel&gt;
+    /// and implement IQueryable&lt;TModel&gt;
     /// </summary>
     /// <typeparam name="TModel">The Type of the collection</typeparam>
     internal abstract class BaseQueryableDataModelCollection<TModel> : BaseDataModelCollection<TModel>, IOrderedQueryable<TModel>, IAsyncEnumerable<TModel>
