@@ -498,7 +498,7 @@ namespace PnP.Core.Model
                 // Let's ensure these additional API calls's are included in a single batch
                 if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
                 {
-                    await AddBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+                    await AddGraphBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
                 }
 
                 await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
@@ -541,7 +541,7 @@ namespace PnP.Core.Model
             // Let's ensure these additional API calls's are included in a single batch
             if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
-                await AddBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+                await AddGraphBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
         }
 
@@ -933,7 +933,7 @@ namespace PnP.Core.Model
             return call;
         }
 
-        private async Task AddBatchRequestsForNonExpandableCollectionsAsync(Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
+        private async Task AddGraphBatchRequestsForNonExpandableCollectionsAsync(Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
         {
             ApiType apiType = ApiType.Graph;
 
@@ -971,7 +971,7 @@ namespace PnP.Core.Model
                         {
                             var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(this, nonExpandableField.GraphGet).ConfigureAwait(false);
 
-                            ApiCall extraApiCall = new ApiCall(parsedApiRequest, apiType, receivingProperty: nonExpandableField.Name);
+                            ApiCall extraApiCall = new ApiCall(parsedApiRequest, apiType, receivingProperty: nonExpandableField.GraphName);
                             batch.Add(this, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson);
                         }
                     }

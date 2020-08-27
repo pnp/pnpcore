@@ -463,14 +463,14 @@ namespace PnP.Core.Test.SharePoint
                 var termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
 
                 // Add term
-                var newTerm = await termSet.Children.AddAsync("T1", "Description in English");
+                var newTerm = await termSet.Terms.AddAsync("T1", "Description in English");
 
                 // test term update
                 newTerm.AddLabelAndDescription("T1 Dutch", "nl-NL", false, "Dutch label");
                 await newTerm.UpdateAsync();
 
                 // add child term
-                var newChildTerm = await newTerm.Children.AddAsync("T1.1", "English T1.1");
+                var newChildTerm = await newTerm.Terms.AddAsync("T1.1", "English T1.1");
 
                 // update child term
                 newChildTerm.AddLabelAndDescription("T1.1 Dutch", "nl-NL", false, "Dutch label");
@@ -489,21 +489,21 @@ namespace PnP.Core.Test.SharePoint
                         if (termSet2 != null)
                         {
                             // Load terms and parent group
-                            await termSet2.GetAsync(p => p.Children);
-                            Assert.IsTrue(termSet2.Children.Length > 0);
+                            await termSet2.GetAsync(p => p.Terms);
+                            Assert.IsTrue(termSet2.Terms.Length > 0);
 
                             // Group is automatically assigned if the group was loaded before
                             Assert.IsTrue(termSet2.Group != null);
 
-                            foreach (var term in termSet2.Children)
+                            foreach (var term in termSet2.Terms)
                             {
                                 // Term set is automatically assigned if the termset was loaded before
                                 Assert.IsTrue(term.Set != null);
 
                                 // Load the children of this term and set
-                                await term.GetAsync(p => p.Children);
+                                await term.GetAsync(p => p.Terms);
 
-                                foreach (var child in term.Children)
+                                foreach (var child in term.Terms)
                                 {
                                     Assert.IsTrue(child.Requested);
                                     Assert.IsTrue(child.Labels.Count > 0);
@@ -553,14 +553,14 @@ namespace PnP.Core.Test.SharePoint
                 var termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
 
                 // Add term
-                var newTerm = await termSet.Children.AddAsync("T1", "Description in English");
+                var newTerm = await termSet.Terms.AddAsync("T1", "Description in English");
 
                 // test term update
                 newTerm.AddLabelAndDescription("T1 Dutch", "nl-NL", false, "Dutch label");
                 await newTerm.UpdateAsync();
 
                 // add child term
-                var newChildTerm = await newTerm.Children.AddAsync("T1.1", "English T1.1");
+                var newChildTerm = await newTerm.Terms.AddAsync("T1.1", "English T1.1");
 
                 // update child term
                 newChildTerm.AddLabelAndDescription("T1.1 Dutch", "nl-NL", false, "Dutch label");
@@ -591,7 +591,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddUpdateDeleteTermProperties()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string newGroupName = GetGroupName(context);
@@ -603,14 +603,14 @@ namespace PnP.Core.Test.SharePoint
                 var termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
 
                 // Add term
-                var newTerm = await termSet.Children.AddAsync("T1", "Description in English");
+                var newTerm = await termSet.Terms.AddAsync("T1", "Description in English");
 
                 // test term update
                 newTerm.AddProperty("property1", "value1");
                 await newTerm.UpdateAsync();
 
                 // add child term
-                var newChildTerm = await newTerm.Children.AddAsync("T1.1", "English T1.1");
+                var newChildTerm = await newTerm.Terms.AddAsync("T1.1", "English T1.1");
 
                 // update child term
                 newChildTerm.AddProperty("property2", "value2");
@@ -632,11 +632,11 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(termsetLoadedViaLinq2.Id == termSet.Id);
 
                     // load the term 
-                    var termLoadedViaLinq2 = await termsetLoadedViaLinq2.Children.GetByIdAsync(newTerm.Id);
+                    var termLoadedViaLinq2 = await termsetLoadedViaLinq2.Terms.GetByIdAsync(newTerm.Id);
                     Assert.IsTrue(termLoadedViaLinq2.Requested);
                     Assert.IsTrue(termLoadedViaLinq2.Id == newTerm.Id);
 
-                    var childTermLoadedViaLinq2 = await termLoadedViaLinq2.Children.GetByIdAsync(newChildTerm.Id);
+                    var childTermLoadedViaLinq2 = await termLoadedViaLinq2.Terms.GetByIdAsync(newChildTerm.Id);
                     Assert.IsTrue(childTermLoadedViaLinq2.Requested);
                     Assert.IsTrue(childTermLoadedViaLinq2.Id == newChildTerm.Id);
 
@@ -712,9 +712,9 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 // Add terms
-                var termA = await termSet1.Children.AddBatchAsync("TermA", "");
-                var termAA = await termSet1.Children.AddBatchAsync("TermAA", "");
-                var termB = await termSet2.Children.AddBatchAsync("TermB", "");
+                var termA = await termSet1.Terms.AddBatchAsync("TermA", "");
+                var termAA = await termSet1.Terms.AddBatchAsync("TermAA", "");
+                var termB = await termSet2.Terms.AddBatchAsync("TermB", "");
                 await context.ExecuteAsync();
 
                 // Pin TermA under TermB in TermSet2
@@ -735,8 +735,8 @@ namespace PnP.Core.Test.SharePoint
                     var termSet2Loaded = groupLoadedViaLinq2.Sets.FirstOrDefault(p => p.Id == termSet2.Id);
 
                     // Load relations via termset
-                    await termSet1Loaded.GetBatchAsync(p => p.Relations, p => p.Children);
-                    await termSet2Loaded.GetBatchAsync(p => p.Relations, p => p.Children);
+                    await termSet1Loaded.GetBatchAsync(p => p.Relations, p => p.Terms);
+                    await termSet2Loaded.GetBatchAsync(p => p.Relations, p => p.Terms);
                     await context2.ExecuteAsync();
 
                     // termset1 does not have any relations
@@ -752,9 +752,9 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsTrue(termSet2Loaded.Relations.First().ToTerm.Id == termAA.Id);
                     Assert.IsTrue(termSet2Loaded.Relations.First().Set.Id == termSet2.Id);
 
-                    var termALoaded = termSet1Loaded.Children.FirstOrDefault(p => p.Id == termA.Id);
-                    var termAALoaded = termSet1Loaded.Children.FirstOrDefault(p => p.Id == termAA.Id);
-                    var termBLoaded = termSet2Loaded.Children.FirstOrDefault(p => p.Id == termB.Id);
+                    var termALoaded = termSet1Loaded.Terms.FirstOrDefault(p => p.Id == termA.Id);
+                    var termAALoaded = termSet1Loaded.Terms.FirstOrDefault(p => p.Id == termAA.Id);
+                    var termBLoaded = termSet2Loaded.Terms.FirstOrDefault(p => p.Id == termB.Id);
 
                     // Load relations via term
                     await termALoaded.GetBatchAsync(p => p.Relations);

@@ -32,7 +32,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Collection of term in this term set
         /// </summary>
-        public ITermCollection Children { get; }
+        public ITermCollection Terms { get; }
 
         /// <summary>
         /// The parent group for this termset

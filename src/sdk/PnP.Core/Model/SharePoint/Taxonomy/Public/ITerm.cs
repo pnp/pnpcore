@@ -43,7 +43,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Collection of child terms of this term
         /// </summary>
-        public ITermCollection Children { get; }
+        public ITermCollection Terms { get; }
 
         /// <summary>
         /// Properties on this term set

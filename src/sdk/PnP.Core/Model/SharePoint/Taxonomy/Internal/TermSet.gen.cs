@@ -24,12 +24,12 @@ namespace PnP.Core.Model.SharePoint
 
         public DateTimeOffset CreatedDateTime { get => GetValue<DateTimeOffset>(); set => SetValue(value); }
 
-        [GraphProperty("children", Get = "termstore/sets/{GraphId}/children")]
-        public ITermCollection Children
+        [GraphProperty("children", Get = "termstore/sets/{GraphId}/children", Beta = true)]
+        public ITermCollection Terms
         {
             get
             {
-                if (!HasValue(nameof(Children)))
+                if (!HasValue(nameof(Terms)))
                 {
                     var children = new TermCollection(this.PnPContext, this);
                     SetValue(children);
@@ -87,7 +87,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [GraphProperty("relations", Get = "termstore/sets/{GraphId}/relations?$expand=fromTerm,set,toTerm")]
+        [GraphProperty("relations", Get = "termstore/sets/{GraphId}/relations?$expand=fromTerm,set,toTerm", Beta = true)]
         public ITermRelationCollection Relations
         {
             get

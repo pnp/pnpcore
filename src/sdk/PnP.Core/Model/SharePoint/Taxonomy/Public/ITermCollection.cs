@@ -66,9 +66,14 @@ namespace PnP.Core.Model.SharePoint
         /// Loads a term by id
         /// </summary>
         /// <param name="id">Id of the term to load</param>
-        /// <param name="expressions">Properties to load</param>
         /// <returns>Found term if any, null otherwise</returns>
         public Task<ITerm> GetByIdAsync(string id);
 
+        /// <summary>
+        /// Loads a term by id
+        /// </summary>
+        /// <param name="id">Id of the term to load</param>
+        /// <returns>Found term if any, null otherwise</returns>
+        public ITerm GetById(string id);
     }
 }
