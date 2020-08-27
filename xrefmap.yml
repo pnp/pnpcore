@@ -10608,36 +10608,36 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SearchBoxInNavBar.ModernOnly
   fullName: PnP.Core.Model.SharePoint.SearchBoxInNavBar.ModernOnly
   nameWithType: SearchBoxInNavBar.ModernOnly
-- uid: PnP.Core.Model.SharePoint.SearchScopes
-  name: SearchScopes
-  href: api/PnP.Core.Model.SharePoint.SearchScopes.html
-  commentId: T:PnP.Core.Model.SharePoint.SearchScopes
-  fullName: PnP.Core.Model.SharePoint.SearchScopes
-  nameWithType: SearchScopes
-- uid: PnP.Core.Model.SharePoint.SearchScopes.DefaultScope
+- uid: PnP.Core.Model.SharePoint.SearchScope
+  name: SearchScope
+  href: api/PnP.Core.Model.SharePoint.SearchScope.html
+  commentId: T:PnP.Core.Model.SharePoint.SearchScope
+  fullName: PnP.Core.Model.SharePoint.SearchScope
+  nameWithType: SearchScope
+- uid: PnP.Core.Model.SharePoint.SearchScope.DefaultScope
   name: DefaultScope
-  href: api/PnP.Core.Model.SharePoint.SearchScopes.html#PnP_Core_Model_SharePoint_SearchScopes_DefaultScope
-  commentId: F:PnP.Core.Model.SharePoint.SearchScopes.DefaultScope
-  fullName: PnP.Core.Model.SharePoint.SearchScopes.DefaultScope
-  nameWithType: SearchScopes.DefaultScope
-- uid: PnP.Core.Model.SharePoint.SearchScopes.Hub
+  href: api/PnP.Core.Model.SharePoint.SearchScope.html#PnP_Core_Model_SharePoint_SearchScope_DefaultScope
+  commentId: F:PnP.Core.Model.SharePoint.SearchScope.DefaultScope
+  fullName: PnP.Core.Model.SharePoint.SearchScope.DefaultScope
+  nameWithType: SearchScope.DefaultScope
+- uid: PnP.Core.Model.SharePoint.SearchScope.Hub
   name: Hub
-  href: api/PnP.Core.Model.SharePoint.SearchScopes.html#PnP_Core_Model_SharePoint_SearchScopes_Hub
-  commentId: F:PnP.Core.Model.SharePoint.SearchScopes.Hub
-  fullName: PnP.Core.Model.SharePoint.SearchScopes.Hub
-  nameWithType: SearchScopes.Hub
-- uid: PnP.Core.Model.SharePoint.SearchScopes.Site
+  href: api/PnP.Core.Model.SharePoint.SearchScope.html#PnP_Core_Model_SharePoint_SearchScope_Hub
+  commentId: F:PnP.Core.Model.SharePoint.SearchScope.Hub
+  fullName: PnP.Core.Model.SharePoint.SearchScope.Hub
+  nameWithType: SearchScope.Hub
+- uid: PnP.Core.Model.SharePoint.SearchScope.Site
   name: Site
-  href: api/PnP.Core.Model.SharePoint.SearchScopes.html#PnP_Core_Model_SharePoint_SearchScopes_Site
-  commentId: F:PnP.Core.Model.SharePoint.SearchScopes.Site
-  fullName: PnP.Core.Model.SharePoint.SearchScopes.Site
-  nameWithType: SearchScopes.Site
-- uid: PnP.Core.Model.SharePoint.SearchScopes.Tenant
+  href: api/PnP.Core.Model.SharePoint.SearchScope.html#PnP_Core_Model_SharePoint_SearchScope_Site
+  commentId: F:PnP.Core.Model.SharePoint.SearchScope.Site
+  fullName: PnP.Core.Model.SharePoint.SearchScope.Site
+  nameWithType: SearchScope.Site
+- uid: PnP.Core.Model.SharePoint.SearchScope.Tenant
   name: Tenant
-  href: api/PnP.Core.Model.SharePoint.SearchScopes.html#PnP_Core_Model_SharePoint_SearchScopes_Tenant
-  commentId: F:PnP.Core.Model.SharePoint.SearchScopes.Tenant
-  fullName: PnP.Core.Model.SharePoint.SearchScopes.Tenant
-  nameWithType: SearchScopes.Tenant
+  href: api/PnP.Core.Model.SharePoint.SearchScope.html#PnP_Core_Model_SharePoint_SearchScope_Tenant
+  commentId: F:PnP.Core.Model.SharePoint.SearchScope.Tenant
+  fullName: PnP.Core.Model.SharePoint.SearchScope.Tenant
+  nameWithType: SearchScope.Tenant
 - uid: PnP.Core.Model.SharePoint.TermGroupScope
   name: TermGroupScope
   href: api/PnP.Core.Model.SharePoint.TermGroupScope.html
