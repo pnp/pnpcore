@@ -84,7 +84,9 @@ namespace PnP.Core.QueryModel
                 return GetAsyncEnumerator();
             }
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             async IAsyncEnumerator<TModel> GetAsyncEnumerator()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 foreach (TModel model in this.items)
                 {

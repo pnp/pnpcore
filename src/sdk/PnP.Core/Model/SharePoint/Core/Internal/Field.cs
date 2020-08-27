@@ -41,7 +41,9 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Handler to construct the Add request for this list
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (additionalInformation) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 var fieldOptions = (FieldOptions)additionalInformation[FieldOptionsAdditionalInformationKey];
 

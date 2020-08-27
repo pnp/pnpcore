@@ -25,7 +25,9 @@ namespace PnP.Core.Model.SharePoint
             };
 
             // Handler to construct the Add request for this content type
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (keyValuePairs) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 // Content type creation by specifying the parent id is not possible using SharePoint REST
                 //https://github.com/pnp/pnpjs/issues/457

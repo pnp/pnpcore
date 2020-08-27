@@ -3,6 +3,7 @@
     /// <summary>
     /// Enumeration of filtering criteria for queries
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1717:Only FlagsAttribute enums should have plural names", Justification = "<Pending>")]
     public enum FilteringCriteria
     {
         /// <summary>

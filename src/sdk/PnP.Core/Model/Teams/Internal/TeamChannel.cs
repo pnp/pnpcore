@@ -55,7 +55,9 @@ namespace PnP.Core.Model.Teams
                 }
             };
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             UpdateApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 if (DisplayName == "General")
                 {
@@ -66,7 +68,9 @@ namespace PnP.Core.Model.Teams
             };
 
             // Check delete, block when needed 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             DeleteApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 if (DisplayName == "General")
                 {

@@ -189,7 +189,7 @@ namespace PnP.Core.Test.SharePoint
                     // Add new content type as list content type
                     IContentType newContentType = await myList.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
                 }
-                catch(ClientException ex)
+                catch(ClientException)
                 {
                     clientExceptionThrown = true;
                 }

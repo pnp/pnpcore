@@ -714,81 +714,82 @@ namespace PnP.Core.Services
                 PnPContext.Logger.LogDebug(requestBody);
 
                 // Make the batch call
-                using (StringContent content = new StringContent(requestBody))
+                using StringContent content = new StringContent(requestBody);
+
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                using (var request = new HttpRequestMessage(HttpMethod.Post, $"{restBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_api/$batch"))
+#pragma warning restore CA2000 // Dispose objects before losing scope
                 {
-                    using (var request = new HttpRequestMessage(HttpMethod.Post, $"{restBatch.Site.ToString().TrimEnd(new char[] { '/' })}/_api/$batch"))
+                    // Remove the default Content-Type content header
+                    if (content.Headers.Contains("Content-Type"))
                     {
-                        // Remove the default Content-Type content header
-                        if (content.Headers.Contains("Content-Type"))
-                        {
-                            content.Headers.Remove("Content-Type");
-                        }
-                        // Add the batch Content-Type header
-                        content.Headers.Add($"Content-Type", $"multipart/mixed; boundary=batch_{restBatch.Batch.Id}");
+                        content.Headers.Remove("Content-Type");
+                    }
+                    // Add the batch Content-Type header
+                    content.Headers.Add($"Content-Type", $"multipart/mixed; boundary=batch_{restBatch.Batch.Id}");
 
-                        // Connect content to request
-                        request.Content = content;
+                    // Connect content to request
+                    request.Content = content;
 
 #if DEBUG
-                        // Test recording
-                        if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
-                        {
-                            // Write request
-                            TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
-                        }
+                    // Test recording
+                    if (PnPContext.Mode == TestMode.Record && PnPContext.GenerateTestMockingDebugFiles)
+                    {
+                        // Write request
+                        TestManager.RecordRequest(PnPContext, requestKey, content.ReadAsStringAsync().Result);
+                    }
 
-                        // If we are not mocking or if there is no mock data
-                        if (PnPContext.Mode != TestMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
-                        {
+                    // If we are not mocking or if there is no mock data
+                    if (PnPContext.Mode != TestMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
+                    {
 #endif
-                            // Ensure the request contains authentication information
-                            await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(restBatch.Site, request).ConfigureAwait(false);
+                        // Ensure the request contains authentication information
+                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(restBatch.Site, request).ConfigureAwait(false);
 
-                            // Send the request
-                            HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
+                        // Send the request
+                        HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
 
-                            // Process the request response
-                            if (response.IsSuccessStatusCode)
-                            {
-                                // Get the response string
-                                string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        // Process the request response
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // Get the response string
+                            string batchResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 #if DEBUG
-                                if (PnPContext.Mode == TestMode.Record)
+                            if (PnPContext.Mode == TestMode.Record)
+                            {
+                                // Call out to the rewrite handler if that one is connected
+                                if (MockingFileRewriteHandler != null)
                                 {
-                                    // Call out to the rewrite handler if that one is connected
-                                    if (MockingFileRewriteHandler != null)
-                                    {
-                                        batchResponse = MockingFileRewriteHandler(batchResponse);
-                                    }
-
-                                    // Write response
-                                    TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
+                                    batchResponse = MockingFileRewriteHandler(batchResponse);
                                 }
-#endif
 
-                                await ProcessSharePointRestBatchResponse(restBatch, batchResponse).ConfigureAwait(false);
+                                // Write response
+                                TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
                             }
-                            else
-                            {
-                                // Something went wrong...
-                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-                            }
-#if DEBUG
-                        }
-                        else
-                        {
-                            string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+#endif
 
                             await ProcessSharePointRestBatchResponse(restBatch, batchResponse).ConfigureAwait(false);
                         }
+                        else
+                        {
+                            // Something went wrong...
+                            throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)response.StatusCode, await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+                        }
+#if DEBUG
+                    }
+                    else
+                    {
+                        string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+
+                        await ProcessSharePointRestBatchResponse(restBatch, batchResponse).ConfigureAwait(false);
+                    }
 #endif
 
-                        // Mark batch as executed
-                        restBatch.Batch.Executed = true;
-                    }
+                    // Mark batch as executed
+                    restBatch.Batch.Executed = true;
                 }
-        }
+            }
 
             // Mark the original (non split) batch as complete
             batch.Executed = true;

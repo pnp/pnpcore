@@ -34,7 +34,7 @@ namespace PnP.Core.Model.SharePoint
 
                 switch (input.TargetType.Name)
                 {
-                    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
+                    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScope>(input.JsonElement);
                     case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);
                 }
 
@@ -103,7 +103,7 @@ namespace PnP.Core.Model.SharePoint
             return GetFolderByServerRelativeUrlBatchAsync(serverRelativeUrl).GetAwaiter().GetResult();
         }
 
-        private static ApiCall BuildGetFolderByRelativeUrlApiCall(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
+        private static ApiCall BuildGetFolderByRelativeUrlApiCall(string serverRelativeUrl)
         {
             // NOTE WebUtility encode spaces to "+" instead of %20
             string encodedServerRelativeUrl = WebUtility.UrlEncode(serverRelativeUrl).Replace("+", "%20");

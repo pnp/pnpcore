@@ -33,9 +33,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string Name { get; }
 
+
         /// <summary>
         /// Gets or sets whether the field is read-only.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>")]
         public bool ReadOnly { get; set; }
 
         /// <summary>

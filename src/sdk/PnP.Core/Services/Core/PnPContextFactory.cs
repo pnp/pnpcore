@@ -157,6 +157,11 @@ namespace PnP.Core.Services
         /// <returns>A SPOContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Uri url, string authenticationProviderName)
         {
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
             // Create the Authentication Provider based on the provided configuration
             var authProvider = AuthenticationProviderFactory.Create(authenticationProviderName);
             if (authProvider == null)

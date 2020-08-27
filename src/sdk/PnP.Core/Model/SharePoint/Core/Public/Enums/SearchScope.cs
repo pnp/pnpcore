@@ -3,7 +3,7 @@
     /// <summary>
     /// Search scopes of the site
     /// </summary>
-    public enum SearchScopes
+    public enum SearchScope
     {
         /// <summary>
         /// Defines the DefaultScope for the SearchScope of the site

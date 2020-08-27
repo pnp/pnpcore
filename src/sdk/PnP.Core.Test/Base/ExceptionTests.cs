@@ -306,7 +306,7 @@ namespace PnP.Core.Test.Base
                     throw new AuthenticationException(ErrorType.AzureADError, sampleGraphAuthError);
                 }
             }
-            catch (AuthenticationException ex)
+            catch (AuthenticationException)
             {
                 AuthenticationExceptionThrown = true;
             }

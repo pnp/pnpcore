@@ -25,16 +25,18 @@ namespace PnP.Core
 
         internal static bool AddCredential(string name, string username, string password, bool overwrite)
         {
-            var securePassword = StringToSecureString(password);
-            if (OperatingSystem.IsWindows())
+            using (var securePassword = StringToSecureString(password))
             {
-                WriteWindowsCredentialManagerEntry(name, username, securePassword, overwrite);
+                if (OperatingSystem.IsWindows())
+                {
+                    WriteWindowsCredentialManagerEntry(name, username, securePassword, overwrite);
+                }
+                else if (OperatingSystem.IsMacOS())
+                {
+                    WriteMacOSKeyChainEntry(name, username, securePassword, overwrite);
+                }
+                return true;
             }
-            else if (OperatingSystem.IsMacOS())
-            {
-                WriteMacOSKeyChainEntry(name, username, securePassword, overwrite);
-            }
-            return true;
         }
 
         internal static NetworkCredential GetCredential(string name)

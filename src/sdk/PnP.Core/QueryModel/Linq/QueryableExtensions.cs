@@ -20,7 +20,9 @@ namespace PnP.Core.QueryModel
         private static readonly MethodInfo FirstOrDefaultWithoutPredicate;
         private static readonly MethodInfo FirstOrDefaultWithPredicate;
 
+#pragma warning disable CA1810 // Initialize reference type static fields inline
         static QueryableExtensions()
+#pragma warning restore CA1810 // Initialize reference type static fields inline
         {
             var queryableMethods = typeof(Queryable)
                 .GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly).ToList();
@@ -289,6 +291,7 @@ namespace PnP.Core.QueryModel
             = typeof(QueryableExtensions)
                 .GetTypeInfo().GetDeclaredMethod(nameof(IgnoreQueryFilters));
 
+
         /// <summary>
         ///     Specifies that the current LINQ query should not have any
         ///     model-level entity query filters applied.
@@ -298,6 +301,7 @@ namespace PnP.Core.QueryModel
         /// <returns>
         ///     A new query that will not apply any model-level entity query filters.
         /// </returns>
+        [SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Checked via the [NotNull] attribute")]
         public static IQueryable<TEntity> IgnoreQueryFilters<TEntity>(
             [NotNull] this IQueryable<TEntity> source)
             where TEntity : class
@@ -561,7 +565,9 @@ namespace PnP.Core.QueryModel
 
             throw new InvalidOperationException("Queryable source does not support async");
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             async IAsyncEnumerable<TSource> GetAsyncEnumerator(IEnumerable<TSource> enumerable)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 foreach (TSource model in enumerable)
                 {

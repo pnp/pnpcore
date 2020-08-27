@@ -109,7 +109,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Defines the SearchScope for the site
         /// </summary>
-        public SearchScopes SearchScope { get; set; }
+        public SearchScope SearchScope { get; set; }
 
         /// <summary>
         /// Define if the suitebar search box should show or not 

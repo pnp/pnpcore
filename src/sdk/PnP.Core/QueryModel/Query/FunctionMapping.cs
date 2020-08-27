@@ -28,13 +28,7 @@ namespace PnP.Core.QueryModel
                 Create<DateTime>(s => s.Second, "second({0})")
            };
 
-        private static readonly Dictionary<MemberInfo, FunctionDefinition> Mappings;
-
-        static FunctionMapping()
-        {
-            // Create a dictionary for a faster lookup
-            Mappings = DefinedFunctions.ToDictionary(f => f.Member);
-        }
+        private static readonly Dictionary<MemberInfo, FunctionDefinition> Mappings = DefinedFunctions.ToDictionary(f => f.Member);
 
         private static FunctionDefinition Create<T>(Expression<Func<T, object>> expression, string format)
         {

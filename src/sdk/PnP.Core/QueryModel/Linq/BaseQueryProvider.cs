@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -186,7 +187,7 @@ namespace PnP.Core.QueryModel
             return (TResult)result;
         }
 
-        private async IAsyncEnumerable<TResult> GetAsyncEnumerable<TResult>(Expression expression, CancellationToken token)
+        private async IAsyncEnumerable<TResult> GetAsyncEnumerable<TResult>(Expression expression, [EnumeratorCancellation] CancellationToken token)
         {
             IEnumerable<TResult> results = (IEnumerable<TResult>)await ExecuteObjectAsync(expression).ConfigureAwait(false);
             foreach (TResult result in results)
@@ -264,7 +265,7 @@ namespace PnP.Core.QueryModel
                             return (requestedQueryableSource, newExpression);
                         }
                     }
-                    catch (NotSupportedException ns)
+                    catch (NotSupportedException)
                     {
                         // In this scenario we skip the NotSupportedException
                         // and we simply return the default (null, null),

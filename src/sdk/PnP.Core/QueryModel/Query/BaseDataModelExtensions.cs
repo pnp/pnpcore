@@ -38,6 +38,9 @@ namespace PnP.Core.QueryModel
 
         #region Helper methods to obtain MethodInfo in a safe way
 
+#pragma warning disable IDE0051 // Remove unused private members
+#pragma warning disable CA1801 // Review unused parameters
+#pragma warning disable IDE0060 // Remove unused parameter
         private static MethodInfo GetMethodInfo<T1, T2>(Func<T1, T2> f, T1 unused1)
         {
             return f.Method;
@@ -67,7 +70,9 @@ namespace PnP.Core.QueryModel
         {
             return f.Method;
         }
-
+#pragma warning restore CA1801 // Review unused parameters
+#pragma warning restore IDE0051 // Remove unused private members
+#pragma warning restore IDE0060 // Remove unused parameter
         #endregion
 
         #region Public extension methods for IQueryable<TResult>
@@ -219,11 +224,11 @@ namespace PnP.Core.QueryModel
             string title,
             params Expression<Func<Core.Model.SharePoint.IList, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            if (title is null)
+            if (title == null)
             {
                 throw new ArgumentNullException(nameof(title));
             }
@@ -273,11 +278,11 @@ namespace PnP.Core.QueryModel
             string title,
             params Expression<Func<Core.Model.SharePoint.IList, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            if (title is null)
+            if (title == null)
             {
                 throw new ArgumentNullException(nameof(title));
             }
@@ -336,7 +341,7 @@ namespace PnP.Core.QueryModel
             Guid id,
             params Expression<Func<Core.Model.SharePoint.IList, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -390,7 +395,7 @@ namespace PnP.Core.QueryModel
             Guid id,
             params Expression<Func<Core.Model.SharePoint.IList, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -453,7 +458,7 @@ namespace PnP.Core.QueryModel
             int id,
             params Expression<Func<Core.Model.SharePoint.IListItem, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -503,7 +508,7 @@ namespace PnP.Core.QueryModel
             int id,
             params Expression<Func<Core.Model.SharePoint.IListItem, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -562,11 +567,11 @@ namespace PnP.Core.QueryModel
             string displayName,
             params Expression<Func<Core.Model.Teams.ITeamChannel, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            if (displayName is null)
+            if (displayName == null)
             {
                 throw new ArgumentNullException(nameof(displayName));
             }
@@ -616,11 +621,11 @@ namespace PnP.Core.QueryModel
             string displayName,
             params Expression<Func<Core.Model.Teams.ITeamChannel, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            if (displayName is null)
+            if (displayName == null)
             {
                 throw new ArgumentNullException(nameof(displayName));
             }
@@ -673,11 +678,11 @@ namespace PnP.Core.QueryModel
             string id,
             params Expression<Func<Core.Model.SharePoint.ITermGroup, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            if (id is null)
+            if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
             }
@@ -727,7 +732,7 @@ namespace PnP.Core.QueryModel
             string id,
             params Expression<Func<Core.Model.SharePoint.ITermGroup, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -788,11 +793,11 @@ namespace PnP.Core.QueryModel
             string name,
             params Expression<Func<Core.Model.SharePoint.ITermGroup, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            if (name is null)
+            if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
@@ -842,7 +847,7 @@ namespace PnP.Core.QueryModel
             string name,
             params Expression<Func<Core.Model.SharePoint.ITermGroup, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -903,7 +908,7 @@ namespace PnP.Core.QueryModel
             string id,
             params Expression<Func<Core.Model.SharePoint.ITermSet, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -957,7 +962,7 @@ namespace PnP.Core.QueryModel
             string id,
             params Expression<Func<Core.Model.SharePoint.ITermSet, object>>[] selectors)
         {
-            if (source is null)
+            if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }

@@ -30,17 +30,17 @@ namespace PnP.Core.Services
             // replace possible domain names with something static to ensure the stored test data can be retrieved by other test environments
             //requestKey = GeneralizeRequestKey(requestKey, context);
 
-            string hash = SHA256(requestKey);
+            //string hash = SHA256(requestKey);
             string orderPrefix = GetOrderPrefix(requestKey);
 
             // Construct filename for storing this request
-            string fileName = GetRequestFile(context, hash, orderPrefix);
+            string fileName = GetRequestFile(context, /*hash,*/ orderPrefix);
             
             // Write request to a file, overwrites the existing file
             File.WriteAllText(fileName, request);
             
             // Construct filename for storing this request
-            string debugFileName = GetDebugFile(context, hash, orderPrefix);
+            string debugFileName = GetDebugFile(context, /*hash,*/ orderPrefix);
 
             // Write request key to a file, can be used for debugging
             File.WriteAllText(debugFileName, requestKey);
@@ -56,7 +56,7 @@ namespace PnP.Core.Services
         {
             //requestKey = GeneralizeRequestKey(requestKey, context);
             
-            string fileName = GetResponseFile(context, SHA256(requestKey), GetOrderPrefix(requestKey));
+            string fileName = GetResponseFile(context, /*SHA256(requestKey),*/ GetOrderPrefix(requestKey));
 
             // Write request to a file, overwrites the existing file
             File.WriteAllText(fileName, response);
@@ -70,7 +70,7 @@ namespace PnP.Core.Services
         /// <returns>Returns true if the response from the mock is available</returns>
         internal static bool IsMockAvailable(PnPContext context, string requestKey)
         {
-            string fileName = GetResponseFile(context, SHA256(requestKey), GetOrderPrefix(requestKey));
+            string fileName = GetResponseFile(context, /*SHA256(requestKey),*/ GetOrderPrefix(requestKey));
             return File.Exists(fileName);
         }
 
@@ -84,7 +84,7 @@ namespace PnP.Core.Services
         {
             //requestKey = GeneralizeRequestKey(requestKey, context);
 
-            string fileName = GetResponseFile(context, SHA256(requestKey), GetOrderPrefix(requestKey));
+            string fileName = GetResponseFile(context, /*SHA256(requestKey),*/ GetOrderPrefix(requestKey));
 
             if (File.Exists(fileName))
             {
@@ -164,19 +164,19 @@ namespace PnP.Core.Services
             return false;
         }
 
-        private static string GetResponseFile(PnPContext context, string hash, string orderPrefix)
+        private static string GetResponseFile(PnPContext context, /*string hash,*/ string orderPrefix)
         {
             //return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}-{hash}.response");
             return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}.response");
         }
 
-        private static string GetRequestFile(PnPContext context, string hash, string orderPrefix)
+        private static string GetRequestFile(PnPContext context, /*string hash,*/ string orderPrefix)
         {
             //return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}-{hash}.request");
             return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}.request");
         }
 
-        private static string GetDebugFile(PnPContext context, string hash, string orderPrefix)
+        private static string GetDebugFile(PnPContext context, /*string hash,*/ string orderPrefix)
         {
             //return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}-{hash}.debug");
             return Path.Combine(GetPath(context), $"{context.TestName}-{context.TestId}-{orderPrefix}.debug");
@@ -201,31 +201,31 @@ namespace PnP.Core.Services
             return string.Format("{0,5:00000}", int.Parse(requestKey.Split(new string[] { "@@" }, StringSplitOptions.RemoveEmptyEntries)[0]));
         }
 
-        private static string SHA256(string text)
-        {
-            var result = default(string);
+        //private static string SHA256(string text)
+        //{
+        //    var result = default(string);
 
-            using (var algo = new SHA256Managed())
-            {
-                result = GenerateHashString(algo, text);
-            }
+        //    using (var algo = new SHA256Managed())
+        //    {
+        //        result = GenerateHashString(algo, text);
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        private static string GenerateHashString(HashAlgorithm algo, string text)
-        {
-            // Compute hash from text parameter
-            algo.ComputeHash(Encoding.UTF8.GetBytes(text));
+        //private static string GenerateHashString(HashAlgorithm algo, string text)
+        //{
+        //    // Compute hash from text parameter
+        //    algo.ComputeHash(Encoding.UTF8.GetBytes(text));
 
-            // Get has value in array of bytes
-            var result = algo.Hash;
+        //    // Get has value in array of bytes
+        //    var result = algo.Hash;
 
-            // Return as hexadecimal string
-            return string.Join(
-                string.Empty,
-                result.Select(x => x.ToString("x2")));
-        }
+        //    // Return as hexadecimal string
+        //    return string.Join(
+        //        string.Empty,
+        //        result.Select(x => x.ToString("x2")));
+        //}
 
         private static string GeneralizeRequestKey(string requestKey, PnPContext context)
         {

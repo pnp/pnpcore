@@ -16,7 +16,9 @@ namespace PnP.Core.Model.SharePoint
         public FieldLink()
         {
             // Handler to construct the Add request for this content type
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (keyValuePairs) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
                 // automatically provide the correct 'parent'

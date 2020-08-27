@@ -61,7 +61,7 @@ namespace PnP.Core.Model.SharePoint
         public bool HorizontalQuickLaunch { get => GetValue<bool>(); set => SetValue(value); }
 
         // Type mapping needed
-        public SearchScopes SearchScope { get => GetValue<SearchScopes>(); set => SetValue(value); }
+        public SearchScope SearchScope { get => GetValue<SearchScope>(); set => SetValue(value); }
 
         // Type mapping needed
         public SearchBoxInNavBar SearchBoxInNavBar { get => GetValue<SearchBoxInNavBar>(); set => SetValue(value); }

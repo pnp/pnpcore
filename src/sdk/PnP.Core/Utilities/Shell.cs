@@ -21,7 +21,7 @@ namespace PnP.Core
 
         private static List<string> Run(string filename, string arguments)
         {
-            var process = new Process()
+            using (var process = new Process()
             {
                 StartInfo = new ProcessStartInfo
                 {
@@ -32,15 +32,17 @@ namespace PnP.Core
                     CreateNoWindow = false,
                     RedirectStandardError = true
                 }
-            };
-            var lines = new List<string>();
-            process.Start();
-            while (!process.StandardOutput.EndOfStream)
+            })
             {
-                lines.Add(process.StandardOutput.ReadLine());
+                var lines = new List<string>();
+                process.Start();
+                while (!process.StandardOutput.EndOfStream)
+                {
+                    lines.Add(process.StandardOutput.ReadLine());
+                }
+                process.WaitForExit();
+                return lines;
             }
-            process.WaitForExit();
-            return lines;
         }
     }
 }

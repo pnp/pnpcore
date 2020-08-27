@@ -514,20 +514,13 @@ namespace PnP.Core.Model
             var classField = classInfo.Fields.FirstOrDefault(p => p.Name.Equals(property.Name, StringComparison.InvariantCultureIgnoreCase));
             if (classField == null)
             {
-                try
+                classField = new EntityFieldInfo()
                 {
-                    classField = new EntityFieldInfo()
-                    {
-                        Name = property.Name,
-                        DataType = property.PropertyType,
-                        PropertyInfo = type.GetProperty(property.Name),
-                    };
-                    classInfo.Fields.Add(classField);
-                }
-                catch (Exception ex)
-                {
-                    var t = ex.Message;
-                }
+                    Name = property.Name,
+                    DataType = property.PropertyType,
+                    PropertyInfo = type.GetProperty(property.Name),
+                };
+                classInfo.Fields.Add(classField);
             }
 
             if (classInfo.SharePointTargets.Any())

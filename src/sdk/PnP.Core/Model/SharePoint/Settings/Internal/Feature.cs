@@ -13,7 +13,9 @@ namespace PnP.Core.Model.SharePoint
 
         public Feature()
         {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (keyValuePairs) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
                 return new ApiCall($"{entity.SharePointGet}/add(guid'{DefinitionId}')", ApiType.SPORest, null);

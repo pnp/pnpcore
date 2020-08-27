@@ -13,6 +13,8 @@
         /// <summary>
         /// Gets or sets a value that specifies values that are available for selection in the field.
         /// </summary>
+#pragma warning disable CA1819 // Properties should not return arrays
         public string[] Choices { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
     }
 }

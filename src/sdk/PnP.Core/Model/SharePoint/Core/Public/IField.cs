@@ -319,7 +319,9 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the choices of choice field
         /// </summary>
+#pragma warning disable CA1819 // Properties should not return arrays
         public string[] Choices { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
         #endregion
 
         #region DateTime Field
@@ -345,7 +347,9 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets the dependent lookup internal names of a lookup field
         /// </summary>
+#pragma warning disable CA1819 // Properties should not return arrays
         public string[] DependentLookupInternalNames { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
         /// <summary>
         /// Gets or sets whether a lookup field is dependent lookup

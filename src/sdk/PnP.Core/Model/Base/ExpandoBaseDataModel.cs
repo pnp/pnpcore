@@ -71,6 +71,7 @@ namespace PnP.Core.Model
                 BindingFlags.DeclaredOnly);
         }
 
+
         /// <summary>
         /// Try to retrieve a member by name
         /// </summary>
@@ -78,6 +79,7 @@ namespace PnP.Core.Model
         /// <param name="binder">The requested property</param>
         /// <param name="result">The value of the requested property, if any</param>
         /// <returns>Boolean indicating whether the member value was retrieved, or not</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
             // First check the Properties collection for member
@@ -103,6 +105,7 @@ namespace PnP.Core.Model
             return false;
         }
 
+
         /// <summary>
         /// Try to set a member by name
         /// </summary>
@@ -110,6 +113,7 @@ namespace PnP.Core.Model
         /// <param name="binder">The requested property</param>
         /// <param name="value">The value to set to the member</param>
         /// <returns>Boolean indicating whether the member set was successful, or not</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public override bool TrySetMember(SetMemberBinder binder, object value)
         {
             // First check to see if there's a native property to set

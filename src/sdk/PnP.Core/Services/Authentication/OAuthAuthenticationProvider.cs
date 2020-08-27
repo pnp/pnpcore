@@ -248,11 +248,8 @@ namespace PnP.Core.Services
             var body = $"resource={resource}&client_id={clientId}&grant_type=password&username={HttpUtility.UrlEncode(username)}&password={HttpUtility.UrlEncode(password)}";
             using (var stringContent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded"))
             {
-
-                var result = await httpClient.PostAsync(tokenEndpoint, stringContent).ContinueWith((response) =>
-                {
-                    return response.Result.Content.ReadAsStringAsync().Result;
-                }).ConfigureAwait(false);
+                var response = await httpClient.PostAsync(tokenEndpoint, stringContent).ConfigureAwait(false);
+                var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
                 // Inspect the response, a valid response contains the access_token we need. Carriage returns in a string make parsing fail (regression?), remove them to be at the safe side
                 var tokenResult = JsonSerializer.Deserialize<JsonElement>(result.Replace("\r\n", " ").Trim());
@@ -282,6 +279,7 @@ namespace PnP.Core.Services
             return await EnsureAccessTokenAsync(resourceUri, userPrincipalName, userPassword).ConfigureAwait(true);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         private async Task<string> EnsureAccessTokenAsync(Uri resourceUri, string userPrincipalName, string userPassword)
         {
             string accessTokenFromCache = TokenFromCache(resourceUri, tokenCache);

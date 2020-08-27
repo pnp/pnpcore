@@ -13,7 +13,9 @@ namespace PnP.Core.Model.Teams
     {
         public Team()
         {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             GetApiCallOverrideHandler = async (ApiCallRequest api) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
                 if (!PnPContext.Site.IsPropertyAvailable(p => p.GroupId) || PnPContext.Site.GroupId == Guid.Empty)
                 {

@@ -4,6 +4,7 @@
     /// Specifies the type of the field.
     /// https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee540543(v=office.15)
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>")]
     public enum FieldType
     {
         /// <summary>

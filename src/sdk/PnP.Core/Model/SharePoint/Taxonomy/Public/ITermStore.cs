@@ -22,7 +22,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// List of languages for the term store.
         /// </summary>
-        public List<string> Languages { get; set; }
+        public List<string> Languages { get; }
 
         /// <summary>
         /// Collection of term groups in this term store
