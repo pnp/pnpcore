@@ -1,11 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
 {
@@ -24,7 +21,8 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public void SecurityExtEncryptFailTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            // Disable test in GitHub, Reason availability of certificate in Linux environments
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var result = "encryptthisstring".Encrypt("3e69491285a9a26efea5c3aeddc75b0148040000"); //Fake
             Assert.IsTrue(string.IsNullOrEmpty(result));
@@ -36,16 +34,23 @@ namespace PnP.Core.Test.Base
             // Disable test in GitHub, Reason availability of certificate in Linux environments
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
+            var thumbPrint = TestCommon.GetX509CertificateThumbprint();
+
+            if (string.IsNullOrEmpty(thumbPrint) || thumbPrint.Length != 40)
+            {
+                Assert.Inconclusive("No valid certificate thumbprint was set in the X509CertificateThumbprint element of the json settings file");
+            }
+
             var encryptSampleText = "EncryptThisString";
-            var encryptResult = encryptSampleText.Encrypt(TestCommon.GetX509CertificateThumbprint()); //Fake
+            var encryptResult = encryptSampleText.Encrypt(thumbPrint); //Fake
             Assert.IsTrue(!string.IsNullOrEmpty(encryptResult));
             Assert.IsTrue(encryptResult.Contains("=="));
 
             //TODO: Problems decrypting - investigate
             // Reference: https://www.pkisolutions.com/accessing-and-using-certificate-private-keys-in-net-framework-net-core/ slighty different approach
-            //var decryptResult = encryptResult.Decrypt(TestCommon.GetX509CertificateThumbprint());
+            //var decryptResult = encryptResult.Decrypt(thumbPrint);
             //Assert.AreEqual(decryptResult, encryptSampleText);
-            
+
         }
 
         [TestMethod]
@@ -71,6 +76,9 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public void SecurityExtDecryptFailTest()
         {
+            // Disable test in GitHub, Reason availability of certificate in Linux environments
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+            
             var result = "decryptthisstring".Decrypt("3e69491285a9a26efea5c3aeddc75b0148040000"); //Fake
             Assert.IsTrue(string.IsNullOrEmpty(result));
         }

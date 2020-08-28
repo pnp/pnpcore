@@ -42,6 +42,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Support working with files #78 [ypcode - Yannick Plennevaux]
 - Use CSOM to create content types with a specified id #108 [ypcode - Yannick Plennevaux]
 - Support for making interactive SharePoint REST requests + upload of files #112 [jansenbe - Bert Jansen]
+- Additional test cases - working getting >80% test coverage [pkbullock - Paul Bullock]
 
 ### Changed
 
