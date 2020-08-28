@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace PnP.Core.Model.SharePoint.Core.Internal
+namespace PnP.Core.Model.SharePoint
 {
     internal static class SharePointFieldType
     {
