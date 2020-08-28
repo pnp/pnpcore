@@ -94,6 +94,52 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task DisableWebFeatureDoesNotExistAsync()
+        {
+            TestCommon.Instance.Mocking = true;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.Features);
+
+                var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f700000"); // fake
+
+                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () => {
+                    await web.Features.DisableAsync(id);
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task EnableDisableWebFeature()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.Features);
+
+                var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
+
+                if (web.Features.Any(o => o.DefinitionId == id))
+                {
+                    // Already Activated - Enviroment Check
+                    web.Features.Disable(id);
+                }
+                
+                // Not Activated lets activate 
+                IFeature feature = web.Features.Enable(id);
+
+                Assert.IsNotNull(feature);
+                Assert.IsNotNull(feature.DefinitionId);
+                Assert.IsTrue(feature.DefinitionId != Guid.Empty);
+                
+
+                web.Features.Disable(id);
+
+                Assert.IsTrue(!web.Features.Any(o => o.DefinitionId == id));
+            }
+        }
+
+        [TestMethod]
         public async Task DisableWebFeatureAsync()
         {
             TestCommon.Instance.Mocking = true;
