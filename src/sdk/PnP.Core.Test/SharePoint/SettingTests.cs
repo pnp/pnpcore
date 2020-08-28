@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
@@ -117,6 +118,38 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(feature.DefinitionId != Guid.Empty);
 
                 web.Features.DisableBatch(id);
+                await context.ExecuteAsync(); //Trigger Batch
+
+                Assert.IsTrue(!web.Features.Any(o => o.DefinitionId == id));
+            }
+        }
+
+        [TestMethod]
+        public async Task EnableDisableWebFeatureActivateSpecifiedBatch()
+        {
+            TestCommon.Instance.Mocking = true;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.Features);
+
+                var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
+
+                if (web.Features.Any(o => o.DefinitionId == id))
+                {
+                    // Ensure disabled
+                    web.Features.Disable(id);
+                }
+
+                Batch newBatch = context.NewBatch();
+
+                IFeature feature = web.Features.EnableBatch(newBatch, id);
+                await context.ExecuteAsync(); //Trigger Batch
+
+                Assert.IsNotNull(feature);
+                Assert.IsNotNull(feature.DefinitionId);
+                Assert.IsTrue(feature.DefinitionId != Guid.Empty);
+
+                web.Features.DisableBatch(newBatch, id);
                 await context.ExecuteAsync(); //Trigger Batch
 
                 Assert.IsTrue(!web.Features.Any(o => o.DefinitionId == id));
