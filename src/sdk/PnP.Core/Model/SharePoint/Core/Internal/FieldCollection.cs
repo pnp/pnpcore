@@ -219,7 +219,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IField> AddTextBatchAsync(Batch batch, string title, FieldTextOptions options = null)
         {
-            return await AddBatchAsync(batch, title, FieldType.Number, options).ConfigureAwait(false);
+            return await AddBatchAsync(batch, title, FieldType.Text, options).ConfigureAwait(false);
         }
 
         public IField AddTextBatch(Batch batch, string title, FieldTextOptions options = null)

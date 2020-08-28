@@ -43,29 +43,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
         }
 
-        [TestMethod]
-        public void GraphErrorDeserialization()
-        {
-            bool microsoftGraphServiceExceptionThrown = false;
-            MicrosoftGraphError error = null;
-            try
-            {
-                throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, 400, sampleGraphError);
-            }
-            catch (ServiceException ex)
-            {
-                if (ex is MicrosoftGraphServiceException)
-                {
-                    error = ex.Error as MicrosoftGraphError;
-                    microsoftGraphServiceExceptionThrown = true;
-                }
-            }
-
-            Assert.IsTrue(microsoftGraphServiceExceptionThrown);
-            Assert.IsTrue(!string.IsNullOrEmpty(error.Code));
-            Assert.IsTrue(!string.IsNullOrEmpty(error.Message));
-            Assert.IsTrue(error.Type == ErrorType.GraphServiceError);
-        }
+        #region SharePointRestServiceException Tests
 
         [TestMethod]
         public void SharePointRestErrorDeserialization()
@@ -117,7 +95,134 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public void ClientErrorDeserialization()
+        public void SharePointRestErrorToStringDeserialization()
+        {
+            bool sharePointRestServiceExceptionThrown = false;
+            SharePointRestError error = null;
+            try
+            {
+                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 400, sampleRestSimpleError);
+            }
+            catch (ServiceException ex)
+            {
+                if (ex is SharePointRestServiceException)
+                {
+                    error = ex.Error as SharePointRestError;
+                    sharePointRestServiceExceptionThrown = true;
+                }
+            }
+
+            var restErrorString = error.ToString();
+
+            Assert.IsTrue(restErrorString.Contains("HttpResponseCode:"));
+            Assert.IsTrue(restErrorString.Contains("Code:"));
+            Assert.IsTrue(restErrorString.Contains("Message:"));
+            Assert.IsTrue(restErrorString.Contains("ClientRequestId:"));
+
+            Assert.IsTrue(sharePointRestServiceExceptionThrown);
+            Assert.IsTrue(string.IsNullOrEmpty(error.Code));
+            Assert.IsTrue(!string.IsNullOrEmpty(error.Message));
+            Assert.IsTrue(error.Type == ErrorType.SharePointRestServiceError);
+        }
+
+        [TestMethod]
+        public async Task ThrowSharePointRestServiceException()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                bool SharePointRestServiceExceptionThrown = false;
+                SharePointRestError error = null;
+                try
+                {
+                    // try adding the same list twice, will always result in an error
+                    await context.Web.Lists.AddAsync("Fail list", ListTemplateType.GenericList);
+                    await context.Web.Lists.AddAsync("Fail list", ListTemplateType.GenericList);
+                }
+                catch (ServiceException ex)
+                {
+                    if (ex is SharePointRestServiceException)
+                    {
+                        error = ex.Error as SharePointRestError;
+                        SharePointRestServiceExceptionThrown = true;
+                    }
+                }
+
+                Assert.IsTrue(SharePointRestServiceExceptionThrown);
+                Assert.IsTrue(!string.IsNullOrEmpty(error.Code));
+                Assert.IsTrue(!string.IsNullOrEmpty(error.Message));
+                Assert.IsTrue(error.Type == ErrorType.SharePointRestServiceError);
+            }
+        }
+
+        [TestMethod]
+        public void SharePointRestServiceExceptionDeserializationSingleParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new SharePointRestServiceException(input);
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void SharePointRestServiceExceptionDeserializationExceptionParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new SharePointRestServiceException(sampleRestError, new Exception(input));
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(sampleRestError, ex.Message);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(Exception));
+            }
+        }
+
+        [TestMethod]
+        public void SharePointRestServiceExceptionDeserializationToString()
+        {
+            var input = "test";
+            try
+            {
+                throw new SharePointRestServiceException(input);
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.ToString()));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void SharePointRestServiceExceptionDeserializationNoParam()
+        {
+            var input = "Exception of type 'PnP.Core.SharePointRestServiceException' was thrown.";
+            try
+            {
+                throw new SharePointRestServiceException();
+            }
+            catch (SharePointRestServiceException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+
+        #endregion
+
+        #region ClientException Tests
+
+        [TestMethod]
+        public void ClientExceptionDeserialization()
         {
             ClientError error;
             bool clientExceptionThrown;
@@ -135,6 +240,87 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(!string.IsNullOrEmpty(error.Message));
             Assert.IsTrue(error.Type == ErrorType.MissingAddApiHandler);
         }
+
+        [TestMethod]
+        public void ClientExceptionDeserializationExceptionParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new ClientException(sampleGraphAuthError, new Exception(input));
+            }
+            catch (ClientException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(sampleGraphAuthError, ex.Message);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(Exception));
+            }
+        }
+
+        [TestMethod]
+        public void ClientExceptionDeserializationSingleParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new ClientException(input);
+            }
+            catch (ClientException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void ClientExceptionDeserializationTypeParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new ClientException(ErrorType.AzureADError, sampleGraphAuthError, new Exception(input));
+            }
+            catch (ClientException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(sampleGraphAuthError, ex.Message);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(Exception));
+            }
+        }
+
+        [TestMethod]
+        public void ClientExceptionDeserializationToString()
+        {
+            var input = "test";
+            try
+            {
+                throw new ClientException(input);
+            }
+            catch (ClientException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.ToString()));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void ClientExceptionDeserializationNoParam()
+        {
+            var input = "Exception of type 'PnP.Core.ClientException' was thrown.";
+            try
+            {
+                throw new ClientException();
+            }
+            catch (ClientException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region MicrosoftGraphServiceException Tests
 
         [TestMethod]
         public async Task ThrowGraphServiceException()
@@ -195,34 +381,98 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task ThrowSharePointRestServiceException()
+        public void GraphErrorDeserialization()
         {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            bool microsoftGraphServiceExceptionThrown = false;
+            MicrosoftGraphError error = null;
+            try
             {
-                bool SharePointRestServiceExceptionThrown = false;
-                SharePointRestError error = null;
-                try
+                throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, 400, sampleGraphError);
+            }
+            catch (ServiceException ex)
+            {
+                if (ex is MicrosoftGraphServiceException)
                 {
-                    // try adding the same list twice, will always result in an error
-                    await context.Web.Lists.AddAsync("Fail list", ListTemplateType.GenericList);
-                    await context.Web.Lists.AddAsync("Fail list", ListTemplateType.GenericList);
+                    error = ex.Error as MicrosoftGraphError;
+                    microsoftGraphServiceExceptionThrown = true;
                 }
-                catch (ServiceException ex)
+            }
+
+            Assert.IsTrue(microsoftGraphServiceExceptionThrown);
+            Assert.IsTrue(!string.IsNullOrEmpty(error.Code));
+            Assert.IsTrue(!string.IsNullOrEmpty(error.Message));
+            Assert.IsTrue(error.Type == ErrorType.GraphServiceError);
+        }
+
+        [TestMethod]
+        public void GraphServiceExceptionTestNoParam()
+        {
+            bool microsoftGraphServiceExceptionThrown = false;
+            try
+            {
+                throw new MicrosoftGraphServiceException();
+            }
+            catch (ServiceException ex)
+            {
+                if (ex is MicrosoftGraphServiceException)
                 {
-                    if (ex is SharePointRestServiceException)
-                    {
-                        error = ex.Error as SharePointRestError;
-                        SharePointRestServiceExceptionThrown = true;
-                    }
+                    microsoftGraphServiceExceptionThrown = true;
+                    Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                }
+            }
+
+            Assert.IsTrue(microsoftGraphServiceExceptionThrown);
+        }
+
+        [TestMethod]
+        public void GraphServiceExceptionTestStringParam()
+        {
+            bool microsoftGraphServiceExceptionThrown = false;
+            
+            try
+            {
+                throw new MicrosoftGraphServiceException(sampleGraphError);
+            }
+            catch (ServiceException ex)
+            {
+                if (ex is MicrosoftGraphServiceException)
+                {
+                    
+                    microsoftGraphServiceExceptionThrown = true;
+                    Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                }
+            }
+
+            Assert.IsTrue(microsoftGraphServiceExceptionThrown);
+        }
+
+        [TestMethod]
+        public void GraphServiceExceptionTestWithExceptionParam()
+        {
+            bool microsoftGraphServiceExceptionThrown = false;
+            
+            try
+            {
+                throw new MicrosoftGraphServiceException(sampleGraphError, new Exception("test"));
+            }
+            catch (ServiceException ex)
+            {
+                if (ex is MicrosoftGraphServiceException)
+                {
+                    
+                    microsoftGraphServiceExceptionThrown = true;
                 }
 
-                Assert.IsTrue(SharePointRestServiceExceptionThrown);
-                Assert.IsTrue(!string.IsNullOrEmpty(error.Code));
-                Assert.IsTrue(!string.IsNullOrEmpty(error.Message));
-                Assert.IsTrue(error.Type == ErrorType.SharePointRestServiceError);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(Exception));
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
             }
+
+            Assert.IsTrue(microsoftGraphServiceExceptionThrown);
         }
+
+        #endregion
+
+        #region AuthenticationException Tests
 
         [TestMethod]
         public void AuthenticationErrorDeserialization()
@@ -247,6 +497,83 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(error.CorrelationId != Guid.Empty);
             Assert.IsTrue(error.Type == ErrorType.AzureADError);
             Assert.IsTrue(error.ErrorCodes.Count == 1);
+        }
+
+        [TestMethod]
+        public void AuthenticationErrorDeserializationSingleParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new AuthenticationException(input);
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void AuthenticationErrorDeserializationTypeParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new AuthenticationException(ErrorType.AzureADError, sampleGraphAuthError, new Exception(input));
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(sampleGraphAuthError, ex.Message);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(Exception));
+            }
+        }
+
+        [TestMethod]
+        public void AuthenticationErrorDeserializationExceptionParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new AuthenticationException(sampleGraphAuthError, new Exception(input));
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(sampleGraphAuthError, ex.Message);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(Exception));
+            }
+        }
+
+        [TestMethod]
+        public void AuthenticationErrorDeserializationToString()
+        {
+            var input = "test";
+            try
+            {
+                throw new AuthenticationException(input);
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.ToString()));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void AuthenticationErrorDeserializationNoParam()
+        {
+            var input = "Exception of type 'PnP.Core.AuthenticationException' was thrown.";
+            try
+            {
+                throw new AuthenticationException();
+            }
+            catch (AuthenticationException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
         }
 
         [TestMethod]
@@ -314,6 +641,10 @@ namespace PnP.Core.Test.Base
             Assert.IsTrue(AuthenticationExceptionThrown);
         }
 
+        #endregion
+
+        #region CSOMServiceException Tests
+
         [TestMethod]
         public async Task ThrowCSOMServiceException()
         {
@@ -368,5 +699,53 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public void CsomServiceExceptionDeserializationNoParam()
+        {
+            var input = "Exception of type 'PnP.Core.CsomServiceException' was thrown.";
+            try
+            {
+                throw new CsomServiceException();
+            }
+            catch (CsomServiceException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void CsomServiceExceptionExceptionParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new CsomServiceException(sampleGraphAuthError, new Exception(input));
+            }
+            catch (CsomServiceException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(sampleGraphAuthError, ex.Message);
+                Assert.IsInstanceOfType(ex.InnerException, typeof(Exception));
+            }
+        }
+
+        [TestMethod]
+        public void CsomServiceExceptionSingleParam()
+        {
+            var input = "test";
+            try
+            {
+                throw new CsomServiceException(input);
+            }
+            catch (CsomServiceException ex)
+            {
+                Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
+                Assert.AreEqual(input, ex.Message);
+            }
+        }
+
+
+        #endregion
     }
 }
