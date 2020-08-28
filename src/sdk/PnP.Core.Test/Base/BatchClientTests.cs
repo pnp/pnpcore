@@ -8,6 +8,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.QueryModel;
 using System.Net.Http;
+using System.Threading;
 
 namespace PnP.Core.Test.Base
 {
@@ -249,88 +250,53 @@ namespace PnP.Core.Test.Base
             }
         }
 
-        // Since graph batching with Teams is not reliable whenever the batch size grows these tests are commented out
-        // TODO: rewrite using other Graph entities
-        //[TestMethod]
-        public async Task HandleMaxRequestsInGraphBatch2()
+        [TestMethod]
+        public async Task HandleMaxRequestsInGraphBatch()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Get the primary channel without expression...should default to v1.0 graph
-                var team = await context.Team.GetAsync(p => p.PrimaryChannel);
+                string newGroupName = SharePoint.TaxonomyTests.GetGroupName(context);
 
-                // Are the expected properties populated
-                Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
-                Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.Id));
+                // Add new group
+                var group = await context.TermStore.Groups.AddAsync(newGroupName);
 
-                // Add 21 messages to the Channel..this triggers the batch splitting
-                for (int i = 1; i <= 21; i++)
+                Assert.IsNotNull(group);
+                Assert.IsTrue(group.Requested);
+                Assert.IsTrue(group.Name == newGroupName);
+
+                var termSet = await group.Sets.AddAsync("PnPSet1", "Set description");
+
+                for (int i = 1; i <= 30; i++)
                 {
-                    await team.PrimaryChannel.Messages.AddBatchAsync($"Message{i}");
+                    await termSet.Terms.AddBatchAsync($"T{i}");
                 }
+                // This batch of 30 requests in split into 2 batches when being sent to Microsoft 365
                 await context.ExecuteAsync();
 
-                // Try to get the beta property messages, this is a collection
-                await team.PrimaryChannel.GetAsync(p => p.Messages);
-
-                for (int i = 1; i <= 21; i++)
+                // Load the terms again and verify that the batch splitting resulted in all terms being created
+                await termSet.GetAsync(p => p.Terms);
+                for (int i = 1; i <= 30; i++)
                 {
-                    var message = team.PrimaryChannel.Messages.FirstOrDefault(p => p.Body.Content == $"Message{i}");
-                    if (message == null)
+                    var term = termSet.Terms.FirstOrDefault(p => p.Labels.FirstOrDefault(p => p.Name == $"T{i}") != null);
+                    if (term == null)
                     {
-                        Assert.Fail("Message was not found");
+                        Assert.Fail($"Term T{i} was not found");
                     }
                 }
 
-            }
-        }
+                // Delete term set 
+                await termSet.DeleteAsync();
 
-
-        //[TestMethod]
-        public async Task HandleMaxRequestsInGraphBatch1()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var team = await context.Team.GetAsync(p => p.Channels);
-
-                // Find first updatable channel
-                var generalChannel = team.Channels.Where(p => p.DisplayName == "General").FirstOrDefault();
-
-                if (generalChannel != null)
+                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
+                // not always work (getting error about deleting non empty term group)
+                if (!TestCommon.Instance.Mocking)
                 {
-                    // Load tabs
-                    await generalChannel.GetAsync(p => p.Tabs);
-
-                    //await generalChannel.Tabs.AddDocumentLibraryTabAsync("Tab1", new Uri($"{context.Uri}/Shared Documents"));
-                    //await generalChannel.Tabs.AddWikiTabAsync("Tab1");
-
-                    // Batch up 21 tab creations...this triggers the batch splitting
-                    for (int i = 1; i <= 21; i++)
-                    {
-                        await generalChannel.Tabs.AddWikiTabBatchAsync($"Tab{i}");
-                    }
-
-                    // Send batch to the server
-                    await context.ExecuteAsync();
-
-
-                    // Cleanup created tabs
-                    await generalChannel.GetAsync(p => p.Tabs);
-
-                    foreach (var tab in generalChannel.Tabs)
-                    {
-                        if (tab.DisplayName.StartsWith("Tab"))
-                        {
-                            // Batch up delete
-                            await tab.DeleteBatchAsync();
-                        }
-                    }
-
-                    // Send batch to the server
-                    await context.ExecuteAsync();
+                    Thread.Sleep(4000);
                 }
+
+                // Delete the group again
+                await group.DeleteAsync();
             }
         }
 

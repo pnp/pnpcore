@@ -16,7 +16,7 @@ namespace PnP.Core.Test.SharePoint
     public class TaxonomyTests
     {
 
-        private static string GetGroupName(PnPContext context)
+        internal static string GetGroupName(PnPContext context)
         {
             string newGroupName;
             if (!TestCommon.Instance.Mocking)
