@@ -96,7 +96,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task EnableDisableWebFeatureActivateBatch()
         {
-            TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = true;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IWeb web = await context.Web.GetAsync(p => p.Features);
