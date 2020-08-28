@@ -567,8 +567,10 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region AddListFieldMultilineText Tests
+
         [TestMethod]
-        public async Task AddListFieldMultilineTextSpecificTest()
+        public async Task AddListFieldMultilineTextAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -600,6 +602,113 @@ namespace PnP.Core.Test.SharePoint
                 await addedField.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task AddListFieldMultilineTextTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddMultilineText("ADDED FIELD", new FieldMultilineTextOptions()
+                {
+                    Group = "TEST GROUP",
+                    AllowHyperlink = true,
+                    AppendOnly = true,
+                    NumberOfLines = 6,
+                    RestrictedMode = true,
+                    RichText = true,
+                    UnlimitedLengthInDocumentLibrary = true
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Note, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.AllowHyperlink);
+                Assert.IsTrue(addedField.AppendOnly);
+                Assert.AreEqual(6, addedField.NumberOfLines);
+                Assert.IsTrue(addedField.RestrictedMode);
+                Assert.IsTrue(addedField.RichText);
+                Assert.IsTrue(addedField.UnlimitedLengthInDocumentLibrary);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldMultilineTextBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddMultilineTextBatchAsync("ADDED FIELD", new FieldMultilineTextOptions()
+                {
+                    Group = "TEST GROUP",
+                    AllowHyperlink = true,
+                    AppendOnly = true,
+                    NumberOfLines = 6,
+                    RestrictedMode = true,
+                    RichText = true,
+                    UnlimitedLengthInDocumentLibrary = true
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Note, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.AllowHyperlink);
+                Assert.IsTrue(addedField.AppendOnly);
+                Assert.AreEqual(6, addedField.NumberOfLines);
+                Assert.IsTrue(addedField.RestrictedMode);
+                Assert.IsTrue(addedField.RichText);
+                Assert.IsTrue(addedField.UnlimitedLengthInDocumentLibrary);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldMultilineTextSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddMultilineTextBatchAsync(newBatch,"ADDED FIELD", new FieldMultilineTextOptions()
+                {
+                    Group = "TEST GROUP",
+                    AllowHyperlink = true,
+                    AppendOnly = true,
+                    NumberOfLines = 6,
+                    RestrictedMode = true,
+                    RichText = true,
+                    UnlimitedLengthInDocumentLibrary = true
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Note, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.AllowHyperlink);
+                Assert.IsTrue(addedField.AppendOnly);
+                Assert.AreEqual(6, addedField.NumberOfLines);
+                Assert.IsTrue(addedField.RestrictedMode);
+                Assert.IsTrue(addedField.RichText);
+                Assert.IsTrue(addedField.UnlimitedLengthInDocumentLibrary);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        #endregion
 
         [TestMethod]
         public async Task AddListFieldDateTimeSpecificTest()
