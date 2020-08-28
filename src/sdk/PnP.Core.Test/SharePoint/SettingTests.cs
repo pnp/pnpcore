@@ -64,6 +64,56 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task EnableDisableWebFeatureActivateBatchAsync()
+        {
+            TestCommon.Instance.Mocking = true;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.Features);
+
+                var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
+
+                if (web.Features.Any(o => o.DefinitionId == id))
+                {
+                    // Ensure disabled
+                    web.Features.Disable(id);
+                }
+
+                IFeature feature = await web.Features.EnableBatchAsync(id);
+                await context.ExecuteAsync(); //Trigger Batch
+
+                Assert.IsNotNull(feature);
+                Assert.IsNotNull(feature.DefinitionId);
+                Assert.IsTrue(feature.DefinitionId != Guid.Empty);
+
+                await web.Features.DisableBatchAsync(id);
+                await context.ExecuteAsync(); //Trigger Batch
+
+                Assert.IsTrue(!web.Features.Any(o => o.DefinitionId == id));
+            }
+        }
+
+        [TestMethod]
+        public async Task EnableDisableWebFeatureActivateExceptionsBatchAsync()
+        {
+            TestCommon.Instance.Mocking = true;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.Features);
+
+                var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f740000"); // Fake
+               
+                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () => {
+                    await web.Features.EnableBatchAsync(id);
+                    await web.Features.EnableBatchAsync(id);
+                    await context.ExecuteAsync(); //Trigger Batch
+
+                });
+
+            }
+        }
+
+        [TestMethod]
         public async Task EnableWebFeatureAlreadyActivatedAsync()
         {
             TestCommon.Instance.Mocking = true;
