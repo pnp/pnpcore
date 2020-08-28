@@ -95,6 +95,24 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetFolderPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/";
+
+                IFolder folderWithProperties = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsServerRelativeUrl, f => f.Properties);
+
+                Assert.IsNotNull(folderWithProperties.Properties);
+                Assert.AreEqual("true", folderWithProperties.Properties["vti_x005f_isbrowsable"]);
+                Assert.AreEqual("true", (object)folderWithProperties.Properties.AsDynamic().vti_x005f_isbrowsable);
+                Assert.AreEqual(1, folderWithProperties.Properties["vti_x005f_level"]);
+                Assert.AreEqual(1, (object)folderWithProperties.Properties.AsDynamic().vti_x005f_level);
+            }
+        }
+
+        [TestMethod]
         public async Task AddFolderFromWebFolderTest()
         {
             //TestCommon.Instance.Mocking = false;

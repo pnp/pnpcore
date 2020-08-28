@@ -303,7 +303,7 @@ namespace PnP.Core.Model
             }
         }
 
-        public static dynamic ToDynamic(dynamic source)
+        public static dynamic AsDynamic(dynamic source)
         {
             return source;
         }

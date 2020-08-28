@@ -187,7 +187,7 @@ namespace PnP.Core.Model
         private async Task<TModel> GetInternalBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
         {
             await BaseBatchGetAsync(batch, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
-            return ToDynamic(this);
+            return AsDynamic(this);
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace PnP.Core.Model
         private async Task<TModel> GetAsyncInternal(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions)
         {
             await BaseGet(apiResponse, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, expressions: expressions).ConfigureAwait(false);
-            return ToDynamic(this);
+            return AsDynamic(this);
         }
 
         #endregion

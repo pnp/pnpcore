@@ -3,12 +3,14 @@
     /// <summary>
     /// Public interface to define an object extensible through a dictionary of metadata properties
     /// </summary>
-    public interface IExpandoDataModel
+    public interface IExpandoComplexType : IComplexType
     {
         /// <summary>
-        /// The dictionary of metadata properties
+        /// Gets or sets dynamic properties
         /// </summary>
-        TransientDictionary Values { get; }
+        /// <param name="key">The key of the property to get or set</param>
+        /// <returns>The value of the property</returns>
+        object this[string key] { get; set;  }
 
         /// <summary>
         /// Transforms the current model instance into a dynamic type

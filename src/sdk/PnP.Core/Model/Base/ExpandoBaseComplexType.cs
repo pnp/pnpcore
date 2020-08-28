@@ -7,7 +7,7 @@ using System.Reflection;
 namespace PnP.Core.Model
 {
     /// <summary>
-    /// Internal type to represent an object that is a BaseDataModel<typeparamref name="TModel"/>
+    /// Internal type to represent an object that is a BaseComplexType<typeparamref name="TModel"/>
     /// and that also includes a set of dynamic properties, which can be accessed
     /// as named and typed properties, or which can be accessed through an indexer
     /// </summary>
@@ -16,7 +16,7 @@ namespace PnP.Core.Model
     /// https://weblog.west-wind.com/posts/2012/feb/08/creating-a-dynamic-extensible-c-expando-object
     /// </remarks>
     /// <typeparam name="TModel">The actual type of the entity of the Domain Model</typeparam>
-    internal class ExpandoBaseDataModel<TModel> : BaseDataModel<TModel>, IExpandoDataModel
+    internal class ExpandoBaseComplexType<TModel> : TransientObject, IExpandoComplexType
     {
         /// <summary>
         /// Type of the instance object
@@ -34,14 +34,9 @@ namespace PnP.Core.Model
         private bool valuesInstantiated;
 
         /// <summary>
-        /// Returns the overflow field name
-        /// </summary>
-        internal static string OverflowFieldName { get { return nameof(Values); } }
-
-        /// <summary>
-        /// String Dictionary that contains the custom properties with their dynamic values
+        /// Private String Dictionary that contains the custom properties with their dynamic values
         /// </summary>        
-        public TransientDictionary Values
+        private TransientDictionary Values
         {
             get
             {
@@ -59,7 +54,7 @@ namespace PnP.Core.Model
         /// Creates an instance of the Expando object based on the
         /// actual inheriting type
         /// </summary>
-        public ExpandoBaseDataModel()
+        public ExpandoBaseComplexType()
         {
             // Get the reference type for the current instance
             instanceType = this.GetType();
@@ -71,7 +66,6 @@ namespace PnP.Core.Model
                 BindingFlags.DeclaredOnly);
         }
 
-
         /// <summary>
         /// Try to retrieve a member by name
         /// </summary>
@@ -79,7 +73,6 @@ namespace PnP.Core.Model
         /// <param name="binder">The requested property</param>
         /// <param name="result">The value of the requested property, if any</param>
         /// <returns>Boolean indicating whether the member value was retrieved, or not</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
             // First check the Properties collection for member
@@ -105,7 +98,6 @@ namespace PnP.Core.Model
             return false;
         }
 
-
         /// <summary>
         /// Try to set a member by name
         /// </summary>
@@ -113,7 +105,6 @@ namespace PnP.Core.Model
         /// <param name="binder">The requested property</param>
         /// <param name="value">The value to set to the member</param>
         /// <returns>Boolean indicating whether the member set was successful, or not</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         public override bool TrySetMember(SetMemberBinder binder, object value)
         {
             // First check to see if there's a native property to set

@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PnP.Core.Model;
+using PnP.Core.Utilities;
 
 namespace PnP.Core.Services
 {
@@ -527,21 +528,21 @@ namespace PnP.Core.Services
                             // Set the batch request id property
                             SetBatchRequestId(propertyToSetValue as TransientObject, apiResponse.BatchRequestId);
 
-                        await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
-                    }
-                    // Are we loading a complex type
-                    else if (IsComplexType(entityField.PropertyInfo.PropertyType))
-                    {
-                        MapJsonToComplexTypePropertyRecursive(pnpObject, contextAwareObject, property, entityField);
-                    }
-                    // Are we loading a list of complex types
-                    else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
-                    {
-                        MapJsonToComplexTypeItemListRecursive(pnpObject, contextAwareObject, apiResponse, property, entityField);
-                    }
-                    else
-                    {
-                        // Regular field loaded
+                            await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
+                        }
+                        // Are we loading a complex type
+                        else if (IsComplexType(entityField.PropertyInfo.PropertyType))
+                        {
+                            MapJsonToComplexTypePropertyRecursive(pnpObject, contextAwareObject, property, entityField);
+                        }
+                        // Are we loading a list of complex types
+                        else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
+                        {
+                            MapJsonToComplexTypeItemListRecursive(pnpObject, contextAwareObject, apiResponse, property, entityField);
+                        }
+                        else
+                        {
+                            // Regular field loaded
 
                             // Grab id field, should be present in all graph objects
                             if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.GraphId))
@@ -706,6 +707,8 @@ namespace PnP.Core.Services
             // Get instance of the model property
             var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
             var typedModel = propertyToSetValue as IDataModelMappingHandler;
+            var metadataExtensible = propertyToSetValue as IMetadataExtensible;
+            var expandoComplexType = propertyToSetValue as IExpandoComplexType;
 
             // Set the batch request id property
             SetBatchRequestId(propertyToSetValue as TransientObject, pnpObject.BatchRequestId);
@@ -761,6 +764,22 @@ namespace PnP.Core.Services
                             // We only map fields that exist
                             entityChildField.PropertyInfo?.SetValue(propertyToSetValue, GetJsonFieldValue(contextAwareObject, entityChildField.Name, childProperty.Value, entityChildField.DataType, entityChildField.GraphUseCustomMapping, typedModel?.MappingHandler));
                         }
+                    }
+                }
+                else if (expandoComplexType != null)
+                {
+                    if (childProperty.Name == "__metadata")
+                    {
+                        // If the current property is metadata extensible
+                        if (metadataExtensible != null)
+                        {
+                            TrackSharePointMetaData(metadataExtensible, childProperty);
+                        }
+                    }
+                    else
+                    {
+                        // If a strongly typed property is not found in the current object, and the current object support extensible properties (is expando complex type)
+                        expandoComplexType[childProperty.Name] = GetJsonPropertyValue(childProperty);
                     }
                 }
             }
@@ -830,10 +849,25 @@ namespace PnP.Core.Services
 
         internal static object GetJsonPropertyValue(JsonProperty property)
         {
+            if (property.Value.ValueKind == JsonValueKind.Number)
+            {
+                if (property.Value.TryGetInt32(out int int32Value))
+                {
+                    return int32Value;
+                }
+                else if (property.Value.TryGetInt64(out long int64Value))
+                {
+                    return int64Value;
+                }
+                else
+                {
+                    return property.Value.GetDouble();
+                }
+            }
+
             return property.Value.ValueKind switch
             {
                 JsonValueKind.String => property.Value.GetString(),
-                JsonValueKind.Number => property.Value.GetInt64(),
                 JsonValueKind.True => true,
                 JsonValueKind.False => false,
                 JsonValueKind.Null => null,
@@ -1311,7 +1345,7 @@ namespace PnP.Core.Services
 
         internal static void TrackAndUpdateMetaData(IMetadataExtensible target, JsonProperty property)
         {
-            TrackAndUpdateMetaData(target, property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
+            TrackAndUpdateMetaData(target, property.Name, GetJsonPropertyValue(property).ToString());
         }
 
         internal static void TrackAndUpdateMetaData(IMetadataExtensible target, string propertyName, string propertyValue)
@@ -1330,12 +1364,12 @@ namespace PnP.Core.Services
         {
             if (!target.Metadata.ContainsKey(property.Name))
             {
-                target.Metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
+                target.Metadata.Add(property.Name, GetJsonPropertyValue(property).ToString());
             }
 
             if (!metadata.ContainsKey(property.Name))
             {
-                metadata.Add(property.Name, JsonMappingHelper.GetJsonPropertyValue(property).ToString());
+                metadata.Add(property.Name, GetJsonPropertyValue(property).ToString());
             }
         }
 
