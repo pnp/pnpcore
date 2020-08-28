@@ -271,8 +271,11 @@ namespace PnP.Core.Test.SharePoint
         }
 
         // NOTE Specific methods MUST ALWAYS CALL the generic AddAsync with appropriate arguments, only the specific methods are test covered for each type of field
+
+        #region AddNewListFieldText Tests
+
         [TestMethod]
-        public async Task AddNewListFieldTextSpecificTest()
+        public async Task AddNewListFieldTextSpecificAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -295,6 +298,83 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task AddNewListFieldTextSpecificTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddText("ADDED FIELD", new FieldTextOptions()
+                {
+                    Group = "TEST GROUP",
+                    MaxLength = 100
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
+                Assert.AreEqual(100, addedField.MaxLength);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddNewListFieldTextSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddTextBatch("ADDED FIELD", new FieldTextOptions()
+                {
+                    Group = "TEST GROUP",
+                    MaxLength = 100
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
+                Assert.AreEqual(100, addedField.MaxLength);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddNewListFieldTextSpecificSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddTextBatch(newBatch, "ADDED FIELD", new FieldTextOptions()
+                {
+                    Group = "TEST GROUP",
+                    MaxLength = 100
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
+                Assert.AreEqual(100, addedField.MaxLength);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        #endregion 
+
         #region Add Method Testings Combinations
 
         [TestMethod]
@@ -309,6 +389,32 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     MaxLength = 100
                 });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
+                Assert.AreEqual(100, addedField.MaxLength);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddNewListFieldAddSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddBatch(newBatch, "ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                {
+                    Group = "TEST GROUP",
+                    MaxLength = 100
+                });
+                await context.ExecuteAsync(newBatch);
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
