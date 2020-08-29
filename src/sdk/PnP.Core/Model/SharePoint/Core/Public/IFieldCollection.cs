@@ -533,6 +533,14 @@ namespace PnP.Core.Model.SharePoint
         Task<IField> AddCalculatedAsync(string title, FieldCalculatedOptions options = null);
 
         /// <summary>
+        /// Adds a new Calculated field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddCalculated(string title, FieldCalculatedOptions options = null);
+
+        /// <summary>
         /// Adds a new Currency field to the collection
         /// </summary>
         /// <param name="title">The title of the field</param>
