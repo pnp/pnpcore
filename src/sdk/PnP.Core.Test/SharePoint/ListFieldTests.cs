@@ -710,8 +710,10 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region AddListFieldDateTime Tests
+
         [TestMethod]
-        public async Task AddListFieldDateTimeSpecificTest()
+        public async Task AddListFieldDateTimeAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -737,6 +739,154 @@ namespace PnP.Core.Test.SharePoint
                 await addedField.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task AddListFieldDateTimeTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddDateTime("ADDED FIELD", new FieldDateTimeOptions()
+                {
+                    Group = "TEST GROUP",
+                    DateTimeCalendarType = CalendarType.GregorianXLITFrench,
+                    DisplayFormat = DateTimeFieldFormatType.DateTime,
+                    FriendlyDisplayFormat = DateTimeFieldFriendlyFormatType.Relative
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.DateTime, addedField.FieldTypeKind);
+                Assert.AreEqual(CalendarType.GregorianXLITFrench, addedField.DateTimeCalendarType);
+                Assert.AreEqual((int)DateTimeFieldFormatType.DateTime, addedField.DisplayFormat);
+                Assert.AreEqual(DateTimeFieldFriendlyFormatType.Relative, addedField.FriendlyDisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldDateTimeBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddDateTimeBatchAsync("ADDED FIELD", new FieldDateTimeOptions()
+                {
+                    Group = "TEST GROUP",
+                    DateTimeCalendarType = CalendarType.GregorianXLITFrench,
+                    DisplayFormat = DateTimeFieldFormatType.DateTime,
+                    FriendlyDisplayFormat = DateTimeFieldFriendlyFormatType.Relative
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.DateTime, addedField.FieldTypeKind);
+                Assert.AreEqual(CalendarType.GregorianXLITFrench, addedField.DateTimeCalendarType);
+                Assert.AreEqual((int)DateTimeFieldFormatType.DateTime, addedField.DisplayFormat);
+                Assert.AreEqual(DateTimeFieldFriendlyFormatType.Relative, addedField.FriendlyDisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldDateTimeBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddDateTimeBatch("ADDED FIELD", new FieldDateTimeOptions()
+                {
+                    Group = "TEST GROUP",
+                    DateTimeCalendarType = CalendarType.GregorianXLITFrench,
+                    DisplayFormat = DateTimeFieldFormatType.DateTime,
+                    FriendlyDisplayFormat = DateTimeFieldFriendlyFormatType.Relative
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.DateTime, addedField.FieldTypeKind);
+                Assert.AreEqual(CalendarType.GregorianXLITFrench, addedField.DateTimeCalendarType);
+                Assert.AreEqual((int)DateTimeFieldFormatType.DateTime, addedField.DisplayFormat);
+                Assert.AreEqual(DateTimeFieldFriendlyFormatType.Relative, addedField.FriendlyDisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldDateTimeSpecificBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddDateTimeBatchAsync(newBatch,"ADDED FIELD", new FieldDateTimeOptions()
+                {
+                    Group = "TEST GROUP",
+                    DateTimeCalendarType = CalendarType.GregorianXLITFrench,
+                    DisplayFormat = DateTimeFieldFormatType.DateTime,
+                    FriendlyDisplayFormat = DateTimeFieldFriendlyFormatType.Relative
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.DateTime, addedField.FieldTypeKind);
+                Assert.AreEqual(CalendarType.GregorianXLITFrench, addedField.DateTimeCalendarType);
+                Assert.AreEqual((int)DateTimeFieldFormatType.DateTime, addedField.DisplayFormat);
+                Assert.AreEqual(DateTimeFieldFriendlyFormatType.Relative, addedField.FriendlyDisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldDateTimeSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddDateTimeBatch(newBatch, "ADDED FIELD", new FieldDateTimeOptions()
+                {
+                    Group = "TEST GROUP",
+                    DateTimeCalendarType = CalendarType.GregorianXLITFrench,
+                    DisplayFormat = DateTimeFieldFormatType.DateTime,
+                    FriendlyDisplayFormat = DateTimeFieldFriendlyFormatType.Relative
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.DateTime, addedField.FieldTypeKind);
+                Assert.AreEqual(CalendarType.GregorianXLITFrench, addedField.DateTimeCalendarType);
+                Assert.AreEqual((int)DateTimeFieldFormatType.DateTime, addedField.DisplayFormat);
+                Assert.AreEqual(DateTimeFieldFriendlyFormatType.Relative, addedField.FriendlyDisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        #endregion
 
         [TestMethod]
         public async Task AddListFieldMultiChoiceSpecificTest()
@@ -948,7 +1098,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListFieldCalculatedSpecificAsTextAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
@@ -974,7 +1124,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListFieldCalculatedAsTextTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
@@ -1000,7 +1150,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListFieldCalculatedSpecificAsTextBatchAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
@@ -1027,7 +1177,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListFieldCalculatedSpecificAsTextBatchTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
@@ -1054,7 +1204,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListFieldCalculatedSpecificAsTextSpecifiedBatchAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var newBatch = context.NewBatch();
@@ -1082,7 +1232,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListFieldCalculatedSpecificAsTextSpecifiedBatchTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var newBatch = context.NewBatch();
