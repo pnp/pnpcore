@@ -140,7 +140,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                
+
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddFieldAsXmlBatchAsync(@"<Field Type=""Text"" Name=""ADDEDFIELD"" DisplayName=""ADDED FIELD""/>", true);
                 await context.ExecuteAsync();
@@ -680,7 +680,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddMultilineTextBatchAsync(newBatch,"ADDED FIELD", new FieldMultilineTextOptions()
+                IField addedField = await documents.Fields.AddMultilineTextBatchAsync(newBatch, "ADDED FIELD", new FieldMultilineTextOptions()
                 {
                     Group = "TEST GROUP",
                     AllowHyperlink = true,
@@ -881,6 +881,8 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        #region AddListFieldCalculated
+
         [TestMethod]
         public async Task AddListFieldCalculatedAsDateTimeSpecificTest()
         {
@@ -944,9 +946,9 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task AddListFieldCalculatedSpecificAsTextTest()
+        public async Task AddListFieldCalculatedSpecificAsTextAsyncTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
@@ -968,6 +970,144 @@ namespace PnP.Core.Test.SharePoint
                 await addedField.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task AddListFieldCalculatedAsTextTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddCalculated("ADDED FIELD", new FieldCalculatedOptions()
+                {
+                    Group = "TEST GROUP",
+                    Formula = @"=""HELLO""",
+                    OutputType = FieldType.Text
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
+                Assert.AreEqual(@"=""HELLO""", addedField.Formula);
+                Assert.AreEqual(FieldType.Text, addedField.OutputType);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldCalculatedSpecificAsTextBatchAsyncTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddCalculatedBatchAsync("ADDED FIELD", new FieldCalculatedOptions()
+                {
+                    Group = "TEST GROUP",
+                    Formula = @"=""HELLO""",
+                    OutputType = FieldType.Text
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
+                Assert.AreEqual(@"=""HELLO""", addedField.Formula);
+                Assert.AreEqual(FieldType.Text, addedField.OutputType);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldCalculatedSpecificAsTextBatchTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddCalculatedBatch("ADDED FIELD", new FieldCalculatedOptions()
+                {
+                    Group = "TEST GROUP",
+                    Formula = @"=""HELLO""",
+                    OutputType = FieldType.Text
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
+                Assert.AreEqual(@"=""HELLO""", addedField.Formula);
+                Assert.AreEqual(FieldType.Text, addedField.OutputType);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldCalculatedSpecificAsTextSpecifiedBatchAsyncTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddCalculatedBatchAsync(newBatch, "ADDED FIELD", new FieldCalculatedOptions()
+                {
+                    Group = "TEST GROUP",
+                    Formula = @"=""HELLO""",
+                    OutputType = FieldType.Text
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
+                Assert.AreEqual(@"=""HELLO""", addedField.Formula);
+                Assert.AreEqual(FieldType.Text, addedField.OutputType);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldCalculatedSpecificAsTextSpecifiedBatchTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddCalculatedBatch(newBatch, "ADDED FIELD", new FieldCalculatedOptions()
+                {
+                    Group = "TEST GROUP",
+                    Formula = @"=""HELLO""",
+                    OutputType = FieldType.Text
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
+                Assert.AreEqual(@"=""HELLO""", addedField.Formula);
+                Assert.AreEqual(FieldType.Text, addedField.OutputType);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        #endregion
 
         [TestMethod]
         public async Task AddListFieldLookupSpecificTest()
