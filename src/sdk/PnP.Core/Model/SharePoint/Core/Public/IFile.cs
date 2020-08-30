@@ -475,8 +475,6 @@ namespace PnP.Core.Model.SharePoint
         void MoveToBatch(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
         #endregion
 
-
-
         #region Recycle
         /// <summary>
         /// Send the file to recycle bin.

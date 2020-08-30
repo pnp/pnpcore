@@ -1,6 +1,4 @@
-﻿using PnP.Core.Model;
-
-namespace PnP.Core.Services
+﻿namespace PnP.Core.Services
 {
     /// <summary>
     /// Struct that defines the API call to make

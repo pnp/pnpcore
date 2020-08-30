@@ -1034,6 +1034,7 @@ namespace PnP.Core.Services
                         }
                         // Add the batch Content-Type header
                         content.Headers.Add($"Content-Type", $"application/json;odata=verbose");
+                        PnPContext.Logger.LogDebug(restRequest.ApiCall.JsonBody);
                     }
                     else if (restRequest.ApiCall.BinaryBody != null)
                     {
