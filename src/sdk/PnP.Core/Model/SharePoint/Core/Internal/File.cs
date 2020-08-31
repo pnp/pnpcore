@@ -1,9 +1,10 @@
 using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
+using PnP.Core.Utilities;
 using System;
-using System.IO;
+using System.Dynamic;
+using System.Net;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -312,70 +313,189 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region CopyTo
-        public async Task CopyToAsync(string destinationServerRelativeUrl, bool overwrite = false)
+        private ApiCall GetCopyToSameSiteApiCall(string destinationUrl, bool overwrite)
         {
-            var apiCall = CopyMoveHelper.GetCopyToApiCall(this, destinationServerRelativeUrl, overwrite);
+            var entityInfo = EntityManager.Instance.GetClassInfo(GetType(), this);
+            // NOTE WebUtility encode spaces to "+" instead of %20
+            string encodedDestinationUrl = WebUtility.UrlEncode(destinationUrl).Replace("+", "%20").Replace("/", "%2F");
+            string copyToEndpointUrl = $"{entityInfo.SharePointUri}/copyTo(strnewurl='{encodedDestinationUrl}', boverwrite={overwrite.ToString().ToLower()})";
+
+            return new ApiCall(copyToEndpointUrl, ApiType.SPORest);
+        }
+
+        private ApiCall GetCopyToCrossSiteApiCall(string destinationUrl, bool overwrite, MoveCopyOptions options)
+        {
+            string destUrl = UrlUtility.EnsureAbsoluteUrl(PnPContext.Uri, destinationUrl).ToString();
+            string srcUrl = UrlUtility.EnsureAbsoluteUrl(PnPContext.Uri, ServerRelativeUrl).ToString();
+
+            // Default is "overwrite=false" => "KeepBoth=true"
+            options ??= new MoveCopyOptions() { KeepBoth = true};
+
+            // If options are specified, use the CopyByPath API endpoint
+            var parameters = new
+            {
+                destPath = new
+                {
+                    __metadata = new { type = "SP.ResourcePath" },
+                    DecodedUrl = destUrl
+                },
+                srcPath = new
+                {
+                    __metadata = new { type = "SP.ResourcePath" },
+                    DecodedUrl = srcUrl
+                },
+                options = new
+                {
+                    __metadata = new { type = "SP.MoveCopyOptions" },
+                    options.KeepBoth,
+                    options.ResetAuthorAndCreatedOnCopy,
+                    options.ShouldBypassSharedLocks
+                }
+            }.AsExpando();
+            string body = JsonSerializer.Serialize(parameters, typeof(ExpandoObject));
+            string copyToEndpointUrl = $"_api/SP.MoveCopyUtil.CopyFileByPath(overwrite=@a1)?@a1={overwrite.ToString().ToLower()}";
+
+            return new ApiCall(copyToEndpointUrl, ApiType.SPORest, body);
+        }
+
+        private ApiCall GetCopyToApiCall(string destinationUrl, bool overwrite, MoveCopyOptions options)
+        {
+            // If same site
+            if (UrlUtility.IsSameSite(PnPContext.Uri, destinationUrl))
+            {
+                return GetCopyToSameSiteApiCall(destinationUrl, overwrite);
+            }
+            else
+            {
+                options ??= new MoveCopyOptions() { KeepBoth = !overwrite };
+                return GetCopyToCrossSiteApiCall(destinationUrl, overwrite, options);
+            }
+        }
+
+        public async Task CopyToAsync(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)
+        {
+            var apiCall = GetCopyToApiCall(destinationUrl, overwrite, options);
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void CopyTo(string destinationServerRelativeUrl, bool overwrite = false)
+        public void CopyTo(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)
         {
-            CopyToAsync(destinationServerRelativeUrl, overwrite).GetAwaiter().GetResult();
+            CopyToAsync(destinationUrl, overwrite).GetAwaiter().GetResult();
         }
 
-        public async Task CopyToBatchAsync(Batch batch, string destinationServerRelativeUrl, bool overwrite = false)
+        public async Task CopyToBatchAsync(Batch batch, string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)
         {
-            var apiCall = CopyMoveHelper.GetCopyToApiCall(this, destinationServerRelativeUrl, overwrite);
+            var apiCall = GetCopyToApiCall(destinationUrl, overwrite, options);
             await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void CopyToBatch(Batch batch, string destinationServerRelativeUrl, bool overwrite = false)
+        public void CopyToBatch(Batch batch, string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)
         {
-            CopyToBatchAsync(batch, destinationServerRelativeUrl, overwrite).GetAwaiter().GetResult();
+            CopyToBatchAsync(batch, destinationUrl, overwrite, options).GetAwaiter().GetResult();
         }
 
-        public async Task CopyToBatchAsync(string destinationServerRelativeUrl, bool overwrite = false)
+        public async Task CopyToBatchAsync(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)
         {
-            await CopyToBatchAsync(PnPContext.CurrentBatch, destinationServerRelativeUrl, overwrite).ConfigureAwait(false);
+            await CopyToBatchAsync(PnPContext.CurrentBatch, destinationUrl, overwrite, options).ConfigureAwait(false);
         }
 
-        public void CopyToBatch(string destinationServerRelativeUrl, bool overwrite = false)
+        public void CopyToBatch(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)
         {
-            CopyToBatchAsync(destinationServerRelativeUrl, overwrite).GetAwaiter().GetResult();
+            CopyToBatchAsync(destinationUrl, overwrite, options).GetAwaiter().GetResult();
         }
         #endregion
 
         #region MoveTo
-        public async Task MoveToAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        private ApiCall GetMoveToSameSiteApiCall(string destinationUrl, MoveOperations moveOperations)
         {
-            var apiCall = CopyMoveHelper.GetMoveToApiCall(this, destinationServerRelativeUrl, moveOperations);
+            var entityInfo = EntityManager.Instance.GetClassInfo(GetType(), this);
+            // NOTE WebUtility encode spaces to "+" instead of %20
+            string encodedDestinationUrl = WebUtility.UrlEncode(destinationUrl).Replace("+", "%20").Replace("/", "%2F");
+            string moveToEndpointUrl = $"{entityInfo.SharePointUri}/moveTo(newurl='{encodedDestinationUrl}', flags={(int)moveOperations})";
+
+            return new ApiCall(moveToEndpointUrl, ApiType.SPORest);
+        }
+
+        private ApiCall GetMoveToCrossSiteApiCall(string destinationUrl, bool overwrite, MoveCopyOptions options)
+        {
+            string destUrl = UrlUtility.EnsureAbsoluteUrl(PnPContext.Uri, destinationUrl).ToString();
+            string srcUrl = UrlUtility.EnsureAbsoluteUrl(PnPContext.Uri, ServerRelativeUrl).ToString();
+
+            // Default is "overwrite=false" => "KeepBoth=true"
+            options ??= new MoveCopyOptions() { KeepBoth = true };
+
+            // If options are specified, use the CopyByPath API endpoint
+            var parameters = new
+            {
+                destPath = new
+                {
+                    __metadata = new { type = "SP.ResourcePath" },
+                    DecodedUrl = destUrl
+                },
+                srcPath = new
+                {
+                    __metadata = new { type = "SP.ResourcePath" },
+                    DecodedUrl = srcUrl
+                },
+                options = new
+                {
+                    __metadata = new { type = "SP.MoveCopyOptions" },
+                    options.KeepBoth,
+                    options.ResetAuthorAndCreatedOnCopy,
+                    options.ShouldBypassSharedLocks
+                }
+            }.AsExpando();
+            string body = JsonSerializer.Serialize(parameters, typeof(ExpandoObject));
+            string moveToEndpointUrl = $"_api/SP.MoveCopyUtil.MoveFileByPath(overwrite=@a1)?@a1={overwrite.ToString().ToLower()}";
+
+            return new ApiCall(moveToEndpointUrl, ApiType.SPORest, body);
+        }
+
+        private ApiCall GetMoveToApiCall(string destinationUrl, MoveOperations moveOperations, MoveCopyOptions options)
+        {
+            // If same site
+            if (UrlUtility.IsSameSite(PnPContext.Uri, destinationUrl))
+            {
+                return GetMoveToSameSiteApiCall(destinationUrl, moveOperations);
+            }
+            else
+            {
+                bool overwrite = moveOperations.HasFlag(MoveOperations.Overwrite);
+                options ??= new MoveCopyOptions() { KeepBoth = !overwrite };
+                return GetMoveToCrossSiteApiCall(destinationUrl, overwrite, options);
+            }
+        }
+
+        public async Task MoveToAsync(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)
+        {
+            var apiCall = GetMoveToApiCall(destinationUrl, moveOperations, options);
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void MoveTo(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        public void MoveTo(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)
         {
-            MoveToAsync(destinationServerRelativeUrl, moveOperations).GetAwaiter().GetResult();
+            MoveToAsync(destinationUrl, moveOperations, options).GetAwaiter().GetResult();
         }
 
-        public async Task MoveToBatchAsync(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        public async Task MoveToBatchAsync(Batch batch, string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)
         {
-            var apiCall = CopyMoveHelper.GetMoveToApiCall(this, destinationServerRelativeUrl, moveOperations);
+            var apiCall = GetMoveToApiCall(destinationUrl, moveOperations, options);
             await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
-        public void MoveToBatch(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        public void MoveToBatch(Batch batch, string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)
         {
-            MoveToBatchAsync(batch, destinationServerRelativeUrl, moveOperations).GetAwaiter().GetResult();
+            MoveToBatchAsync(batch, destinationUrl, moveOperations, options).GetAwaiter().GetResult();
         }
 
-        public async Task MoveToBatchAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        public async Task MoveToBatchAsync(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)
         {
-            await MoveToBatchAsync(PnPContext.CurrentBatch, destinationServerRelativeUrl, moveOperations).ConfigureAwait(false);
+            await MoveToBatchAsync(PnPContext.CurrentBatch, destinationUrl, moveOperations, options).ConfigureAwait(false);
         }
 
-        public void MoveToBatch(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)
+        public void MoveToBatch(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)
         {
-            MoveToBatchAsync(destinationServerRelativeUrl, moveOperations).GetAwaiter().GetResult();
+            MoveToBatchAsync(destinationUrl, moveOperations, options).GetAwaiter().GetResult();
         }
         #endregion
 

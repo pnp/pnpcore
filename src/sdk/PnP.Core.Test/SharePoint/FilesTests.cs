@@ -113,7 +113,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
 
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
-                Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion+1);
+                Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
 
@@ -503,7 +503,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task RecycleFileTest()
         {
             //TestCommon.Instance.Mocking = false;
-            
+
             await AddMockDocumentToSharedDocuments(0, "test_recycle.docx");
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
@@ -536,7 +536,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task RecycleFileWithBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            
+
             await AddMockDocumentToSharedDocuments(0, "test_recycle_with_batch.docx");
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
@@ -589,6 +589,61 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task CopyFileCrossSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            await AddMockDocumentToSharedDocuments(0, "test_copy_crosssite.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var otherSiteContext = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_copy_crosssite.docx";
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                    string destinationServerRelativeUrl = $"{otherSiteContext.Uri.PathAndQuery}/Shared Documents/test_copy_crosssite.docx";
+                    await testDocument.CopyToAsync(destinationServerRelativeUrl, true);
+
+                    IFile foundCopiedDocument = await otherSiteContext.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                    Assert.IsNotNull(foundCopiedDocument);
+                    Assert.AreEqual("test_copy_crosssite.docx", foundCopiedDocument.Name);
+                }
+            }
+
+            await CleanupMockDocumentFromSharedDocuments(3, "test_copy_crosssite.docx");
+            await CleanupMockDocumentFromSharedDocuments(3, "test_copy_crosssite.docx", TestCommon.NoGroupTestSite);
+        }
+
+        [TestMethod]
+        public async Task CopyFileCrossSiteAbsoluteURLsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            await AddMockDocumentToSharedDocuments(0, "test_copy_crosssite_absurl.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var otherSiteContext = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_copy_crosssite_absurl.docx";
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                    string destinationServerRelativeUrl = $"{otherSiteContext.Uri.PathAndQuery}/Shared Documents/test_copy_crosssite_absurl.docx";
+                    string destinationAbsoluteUrl = $"{otherSiteContext.Uri}/Shared Documents/test_copy_crosssite_absurl.docx";
+                    await testDocument.CopyToAsync(destinationAbsoluteUrl, true);
+
+                    IFile foundCopiedDocument = await otherSiteContext.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                    Assert.IsNotNull(foundCopiedDocument);
+                    Assert.AreEqual("test_copy_crosssite_absurl.docx", foundCopiedDocument.Name);
+                }
+            }
+
+            await CleanupMockDocumentFromSharedDocuments(3, "test_copy_crosssite_absurl.docx");
+            await CleanupMockDocumentFromSharedDocuments(3, "test_copy_crosssite_absurl.docx", TestCommon.NoGroupTestSite);
+        }
+
+        [TestMethod]
         public async Task CopyFileWithBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -610,6 +665,34 @@ namespace PnP.Core.Test.SharePoint
 
             await CleanupMockDocumentFromSharedDocuments(2, "test_copy_with_batch.docx");
             await CleanupMockDocumentFromSharedDocuments(2, "test_copied_with_batch.docx");
+        }
+
+        [TestMethod]
+        public async Task CopyFileBatchCrossSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            await AddMockDocumentToSharedDocuments(0, "test_copy_crosssite_batch.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var otherSiteContext = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_copy_crosssite_batch.docx";
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                    string destinationServerRelativeUrl = $"{otherSiteContext.Uri.PathAndQuery}/Shared Documents/test_copy_crosssite_batch.docx";
+                    await testDocument.CopyToBatchAsync(destinationServerRelativeUrl, true);
+                    await context.ExecuteAsync();
+
+                    IFile foundCopiedDocument = await otherSiteContext.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                    Assert.IsNotNull(foundCopiedDocument);
+                    Assert.AreEqual("test_copy_crosssite_batch.docx", foundCopiedDocument.Name);
+                }
+            }
+
+            await CleanupMockDocumentFromSharedDocuments(3, "test_copy_crosssite_batch.docx");
+            await CleanupMockDocumentFromSharedDocuments(3, "test_copy_crosssite_batch.docx", TestCommon.NoGroupTestSite);
         }
 
         [TestMethod]
@@ -636,6 +719,59 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task MoveFileCrossSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            await AddMockDocumentToSharedDocuments(0, "test_move_crosssite.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var otherSiteContext = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_move_crosssite.docx";
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                    string destinationServerRelativeUrl = $"{otherSiteContext.Uri.PathAndQuery}/Shared Documents/test_move_crosssite.docx";
+                    await testDocument.MoveToAsync(destinationServerRelativeUrl, MoveOperations.Overwrite);
+
+                    IFile foundCopiedDocument = await otherSiteContext.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                    Assert.IsNotNull(foundCopiedDocument);
+                    Assert.AreEqual("test_move_crosssite.docx", foundCopiedDocument.Name);
+                }
+            }
+
+            await CleanupMockDocumentFromSharedDocuments(3, "test_move_crosssite.docx", TestCommon.NoGroupTestSite);
+        }
+
+        [TestMethod]
+        public async Task MoveFileCrossSiteAbsoluteURLsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            await AddMockDocumentToSharedDocuments(0, "test_move_crosssite_absurl.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var otherSiteContext = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_move_crosssite_absurl.docx";
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                    string destinationServerRelativeUrl = $"{otherSiteContext.Uri.PathAndQuery}/Shared Documents/test_move_crosssite_absurl.docx";
+                    string destinationAbsoluteUrl = $"{otherSiteContext.Uri}/Shared Documents/test_move_crosssite_absurl.docx";
+                    await testDocument.MoveToAsync(destinationAbsoluteUrl, MoveOperations.Overwrite);
+
+                    IFile foundCopiedDocument = await otherSiteContext.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                    Assert.IsNotNull(foundCopiedDocument);
+                    Assert.AreEqual("test_move_crosssite_absurl.docx", foundCopiedDocument.Name);
+                }
+            }
+
+            await CleanupMockDocumentFromSharedDocuments(3, "test_move_crosssite_absurl.docx", TestCommon.NoGroupTestSite);
+        }
+
+        [TestMethod]
         public async Task MoveFileBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -657,6 +793,33 @@ namespace PnP.Core.Test.SharePoint
             }
 
             await CleanupMockDocumentFromSharedDocuments(2, "moved_test_move_with_batch.docx");
+        }
+
+        [TestMethod]
+        public async Task MoveFileBatchCrossSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            await AddMockDocumentToSharedDocuments(0, "test_move_crosssite.docx");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                using (var otherSiteContext = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_move_crosssite.docx";
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
+
+                    string destinationServerRelativeUrl = $"{otherSiteContext.Uri.PathAndQuery}/Shared Documents/test_move_crosssite.docx";
+                    await testDocument.MoveToBatchAsync(destinationServerRelativeUrl, MoveOperations.Overwrite);
+                    await context.ExecuteAsync();
+
+                    IFile foundCopiedDocument = await otherSiteContext.Web.GetFileByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                    Assert.IsNotNull(foundCopiedDocument);
+                    Assert.AreEqual("test_move_crosssite.docx", foundCopiedDocument.Name);
+                }
+            }
+
+            await CleanupMockDocumentFromSharedDocuments(3, "test_move_crosssite.docx", TestCommon.NoGroupTestSite);
         }
 
         [TestMethod]
@@ -826,14 +989,15 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile mockDocument = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                IFile mockDocument = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
                 return mockDocument.ServerRelativeUrl;
             }
         }
 
-        private async Task CleanupMockDocumentFromSharedDocuments(int contextId, string fileName, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        private async Task CleanupMockDocumentFromSharedDocuments(int contextId, string fileName, string contextConfig = null, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
         {
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
+            contextConfig ??= TestCommon.TestSite;
+            using (var context = await TestCommon.Instance.GetContextAsync(contextConfig, contextId, testName))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{fileName}";
                 IFile mockDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);

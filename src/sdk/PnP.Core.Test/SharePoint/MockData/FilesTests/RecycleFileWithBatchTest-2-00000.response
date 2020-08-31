@@ -1,4 +1,4 @@
---batchresponse_d03c9180-7c97-4955-af94-4e1728c7f7de
+--batchresponse_10be1591-987b-410d-9061-c6ceb3f851e8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/Shared Documents/test_recycle_with_batch.docx does not exist."}}}
---batchresponse_d03c9180-7c97-4955-af94-4e1728c7f7de--
+--batchresponse_10be1591-987b-410d-9061-c6ceb3f851e8--
