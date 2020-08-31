@@ -350,11 +350,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.IExpandoComplexType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.IExpandoComplexType.html",
+          "hash": "l5W85sJ6ZAYV77+SkdiYtA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.IExpandoDataModel.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.IExpandoDataModel.html",
-          "hash": "fpKPr5PuoYtiTmQRJhjmow=="
+          "hash": "v6q/zUV+bcpl3g9iDDrV2g=="
         }
       },
       "is_incremental": false,
@@ -822,7 +834,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFile.html",
-          "hash": "HFev0JjQUCk88sOzEsXfuw=="
+          "hash": "/skuoE9z4UsgX1hF7vHhpw=="
         }
       },
       "is_incremental": false,
@@ -846,7 +858,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "JNGPxmxkizq5ru+pfcfVpw=="
+          "hash": "pYPJTHOuNV8dmVgMGglJ0g=="
         }
       },
       "is_incremental": false,
@@ -894,7 +906,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "67sKl/2QdP1qqHV8QM68ng=="
+          "hash": "3vgOAAplhooJ0ZwoQdkC/Q=="
         }
       },
       "is_incremental": false,
@@ -907,6 +919,18 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItemCollection.html",
           "hash": "8n8PwOjpSG8WUZP2w2dfZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IPropertyValues.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IPropertyValues.html",
+          "hash": "cXFflPn9G+5n13UUxU4FOA=="
         }
       },
       "is_incremental": false,
@@ -1178,6 +1202,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.MoveCopyOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.MoveCopyOptions.html",
+          "hash": "fPZh4mH5WvGldeSVQf365Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.MoveOperations.yml",
       "output": {
         ".html": {
@@ -1290,7 +1326,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "CCaHjIW16vUHn6dDBt2qLg=="
+          "hash": "3SQ5opEd2QN/nxVg13xNEA=="
         }
       },
       "is_incremental": false,
@@ -1698,7 +1734,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.html",
-          "hash": "oQzWy/dxvsgv++Wq59xi3g=="
+          "hash": "8+GaoaaeampB39mdvzqfTw=="
         }
       },
       "is_incremental": false,
@@ -2270,6 +2306,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Utilities.UrlUtility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Utilities.UrlUtility.html",
+          "hash": "7pDZ8jnd30+eNfIC2XmsXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Utilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Utilities.html",
+          "hash": "hNZEZDf4yLut8DM2ThvasQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.yml",
       "output": {
         ".html": {
@@ -2298,7 +2358,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "kxUgO5iiDMl3Ght4Pds81w=="
+          "hash": "d+MBysXY8eQwjvLXSXcopg=="
         }
       },
       "is_incremental": false,
@@ -2596,7 +2656,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 189,
+          "total_file_count": 194,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

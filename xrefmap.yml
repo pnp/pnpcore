@@ -1498,25 +1498,60 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IDataModelWithKey.Key
   nameWithType: IDataModelWithKey.Key
+- uid: PnP.Core.Model.IExpandoComplexType
+  name: IExpandoComplexType
+  href: api/PnP.Core.Model.IExpandoComplexType.html
+  commentId: T:PnP.Core.Model.IExpandoComplexType
+  fullName: PnP.Core.Model.IExpandoComplexType
+  nameWithType: IExpandoComplexType
+- uid: PnP.Core.Model.IExpandoComplexType.AsDynamic
+  name: AsDynamic()
+  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_AsDynamic
+  commentId: M:PnP.Core.Model.IExpandoComplexType.AsDynamic
+  fullName: PnP.Core.Model.IExpandoComplexType.AsDynamic()
+  nameWithType: IExpandoComplexType.AsDynamic()
+- uid: PnP.Core.Model.IExpandoComplexType.AsDynamic*
+  name: AsDynamic
+  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_AsDynamic_
+  commentId: Overload:PnP.Core.Model.IExpandoComplexType.AsDynamic
+  isSpec: "True"
+  fullName: PnP.Core.Model.IExpandoComplexType.AsDynamic
+  nameWithType: IExpandoComplexType.AsDynamic
+- uid: PnP.Core.Model.IExpandoComplexType.Item(System.String)
+  name: Item[String]
+  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Item_System_String_
+  commentId: P:PnP.Core.Model.IExpandoComplexType.Item(System.String)
+  name.vb: Item(String)
+  fullName: PnP.Core.Model.IExpandoComplexType.Item[System.String]
+  fullName.vb: PnP.Core.Model.IExpandoComplexType.Item(System.String)
+  nameWithType: IExpandoComplexType.Item[String]
+  nameWithType.vb: IExpandoComplexType.Item(String)
+- uid: PnP.Core.Model.IExpandoComplexType.Item*
+  name: Item
+  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Item_
+  commentId: Overload:PnP.Core.Model.IExpandoComplexType.Item
+  isSpec: "True"
+  fullName: PnP.Core.Model.IExpandoComplexType.Item
+  nameWithType: IExpandoComplexType.Item
 - uid: PnP.Core.Model.IExpandoDataModel
   name: IExpandoDataModel
   href: api/PnP.Core.Model.IExpandoDataModel.html
   commentId: T:PnP.Core.Model.IExpandoDataModel
   fullName: PnP.Core.Model.IExpandoDataModel
   nameWithType: IExpandoDataModel
-- uid: PnP.Core.Model.IExpandoDataModel.ToDynamic
-  name: ToDynamic()
-  href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_ToDynamic
-  commentId: M:PnP.Core.Model.IExpandoDataModel.ToDynamic
-  fullName: PnP.Core.Model.IExpandoDataModel.ToDynamic()
-  nameWithType: IExpandoDataModel.ToDynamic()
-- uid: PnP.Core.Model.IExpandoDataModel.ToDynamic*
-  name: ToDynamic
-  href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_ToDynamic_
-  commentId: Overload:PnP.Core.Model.IExpandoDataModel.ToDynamic
+- uid: PnP.Core.Model.IExpandoDataModel.AsDynamic
+  name: AsDynamic()
+  href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_AsDynamic
+  commentId: M:PnP.Core.Model.IExpandoDataModel.AsDynamic
+  fullName: PnP.Core.Model.IExpandoDataModel.AsDynamic()
+  nameWithType: IExpandoDataModel.AsDynamic()
+- uid: PnP.Core.Model.IExpandoDataModel.AsDynamic*
+  name: AsDynamic
+  href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_AsDynamic_
+  commentId: Overload:PnP.Core.Model.IExpandoDataModel.AsDynamic
   isSpec: "True"
-  fullName: PnP.Core.Model.IExpandoDataModel.ToDynamic
-  nameWithType: IExpandoDataModel.ToDynamic
+  fullName: PnP.Core.Model.IExpandoDataModel.AsDynamic
+  nameWithType: IExpandoDataModel.AsDynamic
 - uid: PnP.Core.Model.IExpandoDataModel.Values
   name: Values
   href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_Values
@@ -6567,6 +6602,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFolder.AddFolderBatchAsync
   nameWithType: IFolder.AddFolderBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyTo(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyTo(String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyTo_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.CopyTo(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyTo(System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.CopyTo(String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyTo*
+  name: CopyTo
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyTo_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.CopyTo
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyTo
+  nameWithType: IFolder.CopyTo
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyToAsync(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToAsync(String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyToAsync_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.CopyToAsync(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyToAsync(System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.CopyToAsync(String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyToAsync*
+  name: CopyToAsync
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyToAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.CopyToAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyToAsync
+  nameWithType: IFolder.CopyToAsync
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToBatch(Batch, String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.CopyToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyToBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.CopyToBatch(Batch, String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyToBatch(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToBatch(String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyToBatch_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.CopyToBatch(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyToBatch(System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.CopyToBatch(String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyToBatch*
+  name: CopyToBatch
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyToBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.CopyToBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyToBatch
+  nameWithType: IFolder.CopyToBatch
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToBatchAsync(Batch, String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.CopyToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyToBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.CopyToBatchAsync(Batch, String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToBatchAsync(String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.CopyToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyToBatchAsync(System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.CopyToBatchAsync(String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.CopyToBatchAsync*
+  name: CopyToBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_CopyToBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.CopyToBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.CopyToBatchAsync
+  nameWithType: IFolder.CopyToBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFolder.Exists
   name: Exists
   href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_Exists
@@ -6645,6 +6744,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFolder.ListItemAllFields
   nameWithType: IFolder.ListItemAllFields
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveTo(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveTo(String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.MoveTo(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveTo(System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.MoveTo(String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveTo*
+  name: MoveTo
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveTo_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.MoveTo
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveTo
+  nameWithType: IFolder.MoveTo
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveToAsync(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToAsync(String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.MoveToAsync(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveToAsync(System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.MoveToAsync(String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveToAsync*
+  name: MoveToAsync
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveToAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.MoveToAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveToAsync
+  nameWithType: IFolder.MoveToAsync
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToBatch(Batch, String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.MoveToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveToBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.MoveToBatch(Batch, String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveToBatch(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToBatch(String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.MoveToBatch(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveToBatch(System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.MoveToBatch(String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveToBatch*
+  name: MoveToBatch
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveToBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.MoveToBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveToBatch
+  nameWithType: IFolder.MoveToBatch
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToBatchAsync(Batch, String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.MoveToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveToBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.MoveToBatchAsync(Batch, String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToBatchAsync(String, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFolder.MoveToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveToBatchAsync(System.String, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFolder.MoveToBatchAsync(String, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFolder.MoveToBatchAsync*
+  name: MoveToBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_MoveToBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.MoveToBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.MoveToBatchAsync
+  nameWithType: IFolder.MoveToBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFolder.Name
   name: Name
   href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_Name
@@ -6684,6 +6847,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFolder.ProgID
   nameWithType: IFolder.ProgID
+- uid: PnP.Core.Model.SharePoint.IFolder.Properties
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_Properties
+  commentId: P:PnP.Core.Model.SharePoint.IFolder.Properties
+  fullName: PnP.Core.Model.SharePoint.IFolder.Properties
+  nameWithType: IFolder.Properties
+- uid: PnP.Core.Model.SharePoint.IFolder.Properties*
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_Properties_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFolder.Properties
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFolder.Properties
+  nameWithType: IFolder.Properties
 - uid: PnP.Core.Model.SharePoint.IFolder.ServerRelativeUrl
   name: ServerRelativeUrl
   href: api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_ServerRelativeUrl
@@ -7831,6 +8007,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.Contains
   nameWithType: IListItemCollection.Contains
+- uid: PnP.Core.Model.SharePoint.IPropertyValues
+  name: IPropertyValues
+  href: api/PnP.Core.Model.SharePoint.IPropertyValues.html
+  commentId: T:PnP.Core.Model.SharePoint.IPropertyValues
+  fullName: PnP.Core.Model.SharePoint.IPropertyValues
+  nameWithType: IPropertyValues
 - uid: PnP.Core.Model.SharePoint.ISite
   name: ISite
   href: api/PnP.Core.Model.SharePoint.ISite.html
@@ -10202,6 +10384,51 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.ListTemplateType.XMLForm
   fullName: PnP.Core.Model.SharePoint.ListTemplateType.XMLForm
   nameWithType: ListTemplateType.XMLForm
+- uid: PnP.Core.Model.SharePoint.MoveCopyOptions
+  name: MoveCopyOptions
+  href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.MoveCopyOptions
+  fullName: PnP.Core.Model.SharePoint.MoveCopyOptions
+  nameWithType: MoveCopyOptions
+- uid: PnP.Core.Model.SharePoint.MoveCopyOptions.KeepBoth
+  name: KeepBoth
+  href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html#PnP_Core_Model_SharePoint_MoveCopyOptions_KeepBoth
+  commentId: P:PnP.Core.Model.SharePoint.MoveCopyOptions.KeepBoth
+  fullName: PnP.Core.Model.SharePoint.MoveCopyOptions.KeepBoth
+  nameWithType: MoveCopyOptions.KeepBoth
+- uid: PnP.Core.Model.SharePoint.MoveCopyOptions.KeepBoth*
+  name: KeepBoth
+  href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html#PnP_Core_Model_SharePoint_MoveCopyOptions_KeepBoth_
+  commentId: Overload:PnP.Core.Model.SharePoint.MoveCopyOptions.KeepBoth
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.MoveCopyOptions.KeepBoth
+  nameWithType: MoveCopyOptions.KeepBoth
+- uid: PnP.Core.Model.SharePoint.MoveCopyOptions.ResetAuthorAndCreatedOnCopy
+  name: ResetAuthorAndCreatedOnCopy
+  href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html#PnP_Core_Model_SharePoint_MoveCopyOptions_ResetAuthorAndCreatedOnCopy
+  commentId: P:PnP.Core.Model.SharePoint.MoveCopyOptions.ResetAuthorAndCreatedOnCopy
+  fullName: PnP.Core.Model.SharePoint.MoveCopyOptions.ResetAuthorAndCreatedOnCopy
+  nameWithType: MoveCopyOptions.ResetAuthorAndCreatedOnCopy
+- uid: PnP.Core.Model.SharePoint.MoveCopyOptions.ResetAuthorAndCreatedOnCopy*
+  name: ResetAuthorAndCreatedOnCopy
+  href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html#PnP_Core_Model_SharePoint_MoveCopyOptions_ResetAuthorAndCreatedOnCopy_
+  commentId: Overload:PnP.Core.Model.SharePoint.MoveCopyOptions.ResetAuthorAndCreatedOnCopy
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.MoveCopyOptions.ResetAuthorAndCreatedOnCopy
+  nameWithType: MoveCopyOptions.ResetAuthorAndCreatedOnCopy
+- uid: PnP.Core.Model.SharePoint.MoveCopyOptions.ShouldBypassSharedLocks
+  name: ShouldBypassSharedLocks
+  href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html#PnP_Core_Model_SharePoint_MoveCopyOptions_ShouldBypassSharedLocks
+  commentId: P:PnP.Core.Model.SharePoint.MoveCopyOptions.ShouldBypassSharedLocks
+  fullName: PnP.Core.Model.SharePoint.MoveCopyOptions.ShouldBypassSharedLocks
+  nameWithType: MoveCopyOptions.ShouldBypassSharedLocks
+- uid: PnP.Core.Model.SharePoint.MoveCopyOptions.ShouldBypassSharedLocks*
+  name: ShouldBypassSharedLocks
+  href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html#PnP_Core_Model_SharePoint_MoveCopyOptions_ShouldBypassSharedLocks_
+  commentId: Overload:PnP.Core.Model.SharePoint.MoveCopyOptions.ShouldBypassSharedLocks
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.MoveCopyOptions.ShouldBypassSharedLocks
+  nameWithType: MoveCopyOptions.ShouldBypassSharedLocks
 - uid: PnP.Core.Model.SharePoint.MoveOperations
   name: MoveOperations
   href: api/PnP.Core.Model.SharePoint.MoveOperations.html
@@ -15891,3 +16118,72 @@ references:
   isSpec: "True"
   fullName: PnP.Core.SharePointRestServiceException.ToString
   nameWithType: SharePointRestServiceException.ToString
+- uid: PnP.Core.Utilities
+  name: PnP.Core.Utilities
+  href: api/PnP.Core.Utilities.html
+  commentId: N:PnP.Core.Utilities
+  fullName: PnP.Core.Utilities
+  nameWithType: PnP.Core.Utilities
+- uid: PnP.Core.Utilities.UrlUtility
+  name: UrlUtility
+  href: api/PnP.Core.Utilities.UrlUtility.html
+  commentId: T:PnP.Core.Utilities.UrlUtility
+  fullName: PnP.Core.Utilities.UrlUtility
+  nameWithType: UrlUtility
+- uid: PnP.Core.Utilities.UrlUtility.Combine(System.String,System.String)
+  name: Combine(String, String)
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_Combine_System_String_System_String_
+  commentId: M:PnP.Core.Utilities.UrlUtility.Combine(System.String,System.String)
+  fullName: PnP.Core.Utilities.UrlUtility.Combine(System.String, System.String)
+  nameWithType: UrlUtility.Combine(String, String)
+- uid: PnP.Core.Utilities.UrlUtility.Combine(System.String,System.String[])
+  name: Combine(String, String[])
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_Combine_System_String_System_String___
+  commentId: M:PnP.Core.Utilities.UrlUtility.Combine(System.String,System.String[])
+  name.vb: Combine(String, String())
+  fullName: PnP.Core.Utilities.UrlUtility.Combine(System.String, System.String[])
+  fullName.vb: PnP.Core.Utilities.UrlUtility.Combine(System.String, System.String())
+  nameWithType: UrlUtility.Combine(String, String[])
+  nameWithType.vb: UrlUtility.Combine(String, String())
+- uid: PnP.Core.Utilities.UrlUtility.Combine(System.Uri,System.String[])
+  name: Combine(Uri, String[])
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_Combine_System_Uri_System_String___
+  commentId: M:PnP.Core.Utilities.UrlUtility.Combine(System.Uri,System.String[])
+  name.vb: Combine(Uri, String())
+  fullName: PnP.Core.Utilities.UrlUtility.Combine(System.Uri, System.String[])
+  fullName.vb: PnP.Core.Utilities.UrlUtility.Combine(System.Uri, System.String())
+  nameWithType: UrlUtility.Combine(Uri, String[])
+  nameWithType.vb: UrlUtility.Combine(Uri, String())
+- uid: PnP.Core.Utilities.UrlUtility.Combine*
+  name: Combine
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_Combine_
+  commentId: Overload:PnP.Core.Utilities.UrlUtility.Combine
+  isSpec: "True"
+  fullName: PnP.Core.Utilities.UrlUtility.Combine
+  nameWithType: UrlUtility.Combine
+- uid: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl(System.Uri,System.String)
+  name: EnsureAbsoluteUrl(Uri, String)
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_EnsureAbsoluteUrl_System_Uri_System_String_
+  commentId: M:PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl(System.Uri,System.String)
+  fullName: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl(System.Uri, System.String)
+  nameWithType: UrlUtility.EnsureAbsoluteUrl(Uri, String)
+- uid: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl*
+  name: EnsureAbsoluteUrl
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_EnsureAbsoluteUrl_
+  commentId: Overload:PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl
+  isSpec: "True"
+  fullName: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl
+  nameWithType: UrlUtility.EnsureAbsoluteUrl
+- uid: PnP.Core.Utilities.UrlUtility.MakeAbsoluteUrl(System.Uri,System.String)
+  name: MakeAbsoluteUrl(Uri, String)
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_MakeAbsoluteUrl_System_Uri_System_String_
+  commentId: M:PnP.Core.Utilities.UrlUtility.MakeAbsoluteUrl(System.Uri,System.String)
+  fullName: PnP.Core.Utilities.UrlUtility.MakeAbsoluteUrl(System.Uri, System.String)
+  nameWithType: UrlUtility.MakeAbsoluteUrl(Uri, String)
+- uid: PnP.Core.Utilities.UrlUtility.MakeAbsoluteUrl*
+  name: MakeAbsoluteUrl
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_MakeAbsoluteUrl_
+  commentId: Overload:PnP.Core.Utilities.UrlUtility.MakeAbsoluteUrl
+  isSpec: "True"
+  fullName: PnP.Core.Utilities.UrlUtility.MakeAbsoluteUrl
+  nameWithType: UrlUtility.MakeAbsoluteUrl
