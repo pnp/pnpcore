@@ -94,29 +94,25 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        //TODO: To implement...
-        //public IPropertyValues Properties
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new PropertyValues
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IPropertyValues>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
+        [SharePointProperty("Properties", Expandable = true)]
+        public IPropertyValues Properties
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new PropertyValues();
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IPropertyValues>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
 
         [SharePointProperty("StorageMetrics", Expandable = true)]
         public IStorageMetrics StorageMetrics

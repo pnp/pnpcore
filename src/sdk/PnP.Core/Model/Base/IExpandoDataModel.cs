@@ -14,6 +14,6 @@
         /// Transforms the current model instance into a dynamic type
         /// </summary>
         /// <returns>Dynamic version of current model instance</returns>
-        dynamic ToDynamic();
+        dynamic AsDynamic();
     }
 }

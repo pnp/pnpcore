@@ -303,7 +303,12 @@ namespace PnP.Core.Model
             }
         }
 
-        public static dynamic ToDynamic(dynamic source)
+        /// <summary>
+        /// Return instance as a dynamic object
+        /// </summary>
+        /// <param name="source">Object to return as dynamic</param>
+        /// <returns>Dynamic object</returns>
+        public static dynamic AsDynamic(dynamic source)
         {
             return source;
         }
