@@ -1889,8 +1889,10 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        #region AddListFieldUser Tests
+
         [TestMethod]
-        public async Task AddListFieldUserSpecificTest()
+        public async Task AddListFieldUserAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -1922,6 +1924,165 @@ namespace PnP.Core.Test.SharePoint
                 await addedField.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task AddListFieldUserTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddUser("ADDED FIELD", new FieldUserOptions()
+                {
+                    Group = "TEST GROUP",
+                    Required = true,
+                    AllowDisplay = true,
+                    AllowMultipleValues = true,
+                    Presence = true,
+                    SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.Required);
+                Assert.IsTrue(addedField.AllowDisplay);
+                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldUserBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddUserBatchAsync("ADDED FIELD", new FieldUserOptions()
+                {
+                    Group = "TEST GROUP",
+                    Required = true,
+                    AllowDisplay = true,
+                    AllowMultipleValues = true,
+                    Presence = true,
+                    SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.Required);
+                Assert.IsTrue(addedField.AllowDisplay);
+                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldUserBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddUserBatch("ADDED FIELD", new FieldUserOptions()
+                {
+                    Group = "TEST GROUP",
+                    Required = true,
+                    AllowDisplay = true,
+                    AllowMultipleValues = true,
+                    Presence = true,
+                    SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.Required);
+                Assert.IsTrue(addedField.AllowDisplay);
+                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldUserSpecifiedBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddUserBatchAsync(newBatch,"ADDED FIELD", new FieldUserOptions()
+                {
+                    Group = "TEST GROUP",
+                    Required = true,
+                    AllowDisplay = true,
+                    AllowMultipleValues = true,
+                    Presence = true,
+                    SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.Required);
+                Assert.IsTrue(addedField.AllowDisplay);
+                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldUserSpecifiedBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddUserBatch(newBatch,"ADDED FIELD", new FieldUserOptions()
+                {
+                    Group = "TEST GROUP",
+                    Required = true,
+                    AllowDisplay = true,
+                    AllowMultipleValues = true,
+                    Presence = true,
+                    SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.Required);
+                Assert.IsTrue(addedField.AllowDisplay);
+                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+
+        #endregion
 
         [TestMethod]
         public async Task UpdateListFieldTest()
