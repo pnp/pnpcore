@@ -1858,8 +1858,10 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region AddListFieldLookup Tests
+
         [TestMethod]
-        public async Task AddListFieldLookupSpecificTest()
+        public async Task AddListFieldLookupAsyncTest()
         {
             // CAUTION : Add Lookup field DOES NOT SUPPORT specifying some options at creation (e.g. Group, Hidden, ...)
             //TestCommon.Instance.Mocking = false;
@@ -1888,6 +1890,169 @@ namespace PnP.Core.Test.SharePoint
                 await addedField.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task AddListFieldLookupTest()
+        {
+            // CAUTION : Add Lookup field DOES NOT SUPPORT specifying some options at creation (e.g. Group, Hidden, ...)
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+                IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
+                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddLookup("ADDED FIELD", new FieldLookupOptions()
+                {
+                    Required = true,
+                    LookupFieldName = "Title",
+                    LookupListId = sitePages.Id,
+                    LookupWebId = currentWeb.Id
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.Lookup, addedField.FieldTypeKind);
+                Assert.AreEqual("Title", addedField.LookupField);
+                Assert.AreEqual(sitePages.Id, Guid.Parse(addedField.LookupList));
+                Assert.AreEqual(currentWeb.Id, addedField.LookupWebId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldLookupBatchAsyncTest()
+        {
+            // CAUTION : Add Lookup field DOES NOT SUPPORT specifying some options at creation (e.g. Group, Hidden, ...)
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+                IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
+                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddLookupBatchAsync("ADDED FIELD", new FieldLookupOptions()
+                {
+                    Required = true,
+                    LookupFieldName = "Title",
+                    LookupListId = sitePages.Id,
+                    LookupWebId = currentWeb.Id
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.Lookup, addedField.FieldTypeKind);
+                Assert.AreEqual("Title", addedField.LookupField);
+                Assert.AreEqual(sitePages.Id, Guid.Parse(addedField.LookupList));
+                Assert.AreEqual(currentWeb.Id, addedField.LookupWebId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldLookupBatchTest()
+        {
+            // CAUTION : Add Lookup field DOES NOT SUPPORT specifying some options at creation (e.g. Group, Hidden, ...)
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+                IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
+                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddLookupBatch("ADDED FIELD", new FieldLookupOptions()
+                {
+                    Required = true,
+                    LookupFieldName = "Title",
+                    LookupListId = sitePages.Id,
+                    LookupWebId = currentWeb.Id
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.Lookup, addedField.FieldTypeKind);
+                Assert.AreEqual("Title", addedField.LookupField);
+                Assert.AreEqual(sitePages.Id, Guid.Parse(addedField.LookupList));
+                Assert.AreEqual(currentWeb.Id, addedField.LookupWebId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldLookupSpecificBatchAsyncTest()
+        {
+            // CAUTION : Add Lookup field DOES NOT SUPPORT specifying some options at creation (e.g. Group, Hidden, ...)
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+                var newBatch = context.NewBatch();
+                IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
+                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddLookupBatchAsync(newBatch,"ADDED FIELD", new FieldLookupOptions()
+                {
+                    Required = true,
+                    LookupFieldName = "Title",
+                    LookupListId = sitePages.Id,
+                    LookupWebId = currentWeb.Id
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.Lookup, addedField.FieldTypeKind);
+                Assert.AreEqual("Title", addedField.LookupField);
+                Assert.AreEqual(sitePages.Id, Guid.Parse(addedField.LookupList));
+                Assert.AreEqual(currentWeb.Id, addedField.LookupWebId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldLookupSpecificBatchTest()
+        {
+            // CAUTION : Add Lookup field DOES NOT SUPPORT specifying some options at creation (e.g. Group, Hidden, ...)
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+                var newBatch = context.NewBatch();
+                IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
+                IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
+                IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddLookupBatch(newBatch, "ADDED FIELD", new FieldLookupOptions()
+                {
+                    Required = true,
+                    LookupFieldName = "Title",
+                    LookupListId = sitePages.Id,
+                    LookupWebId = currentWeb.Id
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual(FieldType.Lookup, addedField.FieldTypeKind);
+                Assert.AreEqual("Title", addedField.LookupField);
+                Assert.AreEqual(sitePages.Id, Guid.Parse(addedField.LookupList));
+                Assert.AreEqual(currentWeb.Id, addedField.LookupWebId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        #endregion
 
         #region AddListFieldUser Tests
 
