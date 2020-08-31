@@ -1120,8 +1120,10 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region AddListFieldNumber Tests
+
         [TestMethod]
-        public async Task AddListFieldNumberSpecificTest()
+        public async Task AddListFieldNumberAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -1152,6 +1154,169 @@ namespace PnP.Core.Test.SharePoint
                 await addedField.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task AddListFieldNumberTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddNumber("ADDED FIELD", new FieldNumberOptions()
+                {
+                    Group = "TEST GROUP",
+                    MaximumValue = 100,
+                    MinimumValue = 0,
+                    ShowAsPercentage = true
+                    // Althought in the docs as usable parameters, DisplayFormat is always -1 in response for number fields
+                    //DisplayFormat = 0,
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Number, addedField.FieldTypeKind);
+                Assert.AreEqual(0, addedField.MinimumValue);
+                Assert.IsTrue(addedField.ShowAsPercentage);
+                Assert.AreEqual(100, addedField.MaximumValue);
+                Assert.AreEqual(-1, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldNumberBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddNumberBatchAsync("ADDED FIELD", new FieldNumberOptions()
+                {
+                    Group = "TEST GROUP",
+                    MaximumValue = 100,
+                    MinimumValue = 0,
+                    ShowAsPercentage = true
+                    // Althought in the docs as usable parameters, DisplayFormat is always -1 in response for number fields
+                    //DisplayFormat = 0,
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Number, addedField.FieldTypeKind);
+                Assert.AreEqual(0, addedField.MinimumValue);
+                Assert.IsTrue(addedField.ShowAsPercentage);
+                Assert.AreEqual(100, addedField.MaximumValue);
+                Assert.AreEqual(-1, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldNumberBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddNumberBatch("ADDED FIELD", new FieldNumberOptions()
+                {
+                    Group = "TEST GROUP",
+                    MaximumValue = 100,
+                    MinimumValue = 0,
+                    ShowAsPercentage = true
+                    // Althought in the docs as usable parameters, DisplayFormat is always -1 in response for number fields
+                    //DisplayFormat = 0,
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Number, addedField.FieldTypeKind);
+                Assert.AreEqual(0, addedField.MinimumValue);
+                Assert.IsTrue(addedField.ShowAsPercentage);
+                Assert.AreEqual(100, addedField.MaximumValue);
+                Assert.AreEqual(-1, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldNumberSpecificBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddNumberBatchAsync(newBatch, "ADDED FIELD", new FieldNumberOptions()
+                {
+                    Group = "TEST GROUP",
+                    MaximumValue = 100,
+                    MinimumValue = 0,
+                    ShowAsPercentage = true
+                    // Althought in the docs as usable parameters, DisplayFormat is always -1 in response for number fields
+                    //DisplayFormat = 0,
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Number, addedField.FieldTypeKind);
+                Assert.AreEqual(0, addedField.MinimumValue);
+                Assert.IsTrue(addedField.ShowAsPercentage);
+                Assert.AreEqual(100, addedField.MaximumValue);
+                Assert.AreEqual(-1, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldNumberSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddNumberBatch(newBatch,"ADDED FIELD", new FieldNumberOptions()
+                {
+                    Group = "TEST GROUP",
+                    MaximumValue = 100,
+                    MinimumValue = 0,
+                    ShowAsPercentage = true
+                    // Althought in the docs as usable parameters, DisplayFormat is always -1 in response for number fields
+                    //DisplayFormat = 0,
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Number, addedField.FieldTypeKind);
+                Assert.AreEqual(0, addedField.MinimumValue);
+                Assert.IsTrue(addedField.ShowAsPercentage);
+                Assert.AreEqual(100, addedField.MaximumValue);
+                Assert.AreEqual(-1, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        #endregion
 
         [TestMethod]
         public async Task AddListFieldCurrencySpecificTest()
