@@ -88,7 +88,9 @@ namespace PnP.Core.Model
             {
                 return GetProperty(binder.Name, out result);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 // We just skip any exception here and we fallback to the next statement
             }
@@ -116,7 +118,9 @@ namespace PnP.Core.Model
                     return true;
                 }
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 // We just skip any exception here and we fallback to the next statement
             }
