@@ -58,7 +58,7 @@ namespace PnP.Core.Test.Base
                     Assert.IsNotNull(firstItem.Title);
                     Assert.AreEqual(ItemTitleValue, firstItem.Title);
                     // Test the dynamic list item data reading
-                    var dynamicFirstItem = firstItem.ToDynamic();
+                    var dynamicFirstItem = firstItem.AsDynamic();
                     Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
                     Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
                     // handling of standard field in the list item
@@ -98,7 +98,7 @@ namespace PnP.Core.Test.Base
                     Assert.IsNotNull(firstItem.Title);
                     Assert.AreEqual(ItemTitleValue, firstItem.Title);
                     // Test the dynamic list item data reading
-                    var dynamicFirstItem = firstItem.ToDynamic();
+                    var dynamicFirstItem = firstItem.AsDynamic();
                     Assert.AreEqual(ItemTitleValue, dynamicFirstItem.Title);
                     Assert.AreEqual(ItemTitleValue, dynamicFirstItem["Title"]);
                     // handling of standard field in the list item

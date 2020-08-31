@@ -95,13 +95,31 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetFolderPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/";
+
+                IFolder folderWithProperties = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsServerRelativeUrl, f => f.Properties);
+
+                Assert.IsNotNull(folderWithProperties.Properties);
+                Assert.AreEqual("true", folderWithProperties.Properties["vti_x005f_isbrowsable"]);
+                Assert.AreEqual("true", (object)folderWithProperties.Properties.AsDynamic().vti_x005f_isbrowsable);
+                Assert.AreEqual(1, folderWithProperties.Properties["vti_x005f_level"]);
+                Assert.AreEqual(1, (object)folderWithProperties.Properties.AsDynamic().vti_x005f_level);
+            }
+        }
+
+        [TestMethod]
         public async Task AddFolderFromWebFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
-                
+
                 IFolder newFolder = await parentFolder.Folders.AddAsync("TEST");
 
                 // Test the created object
@@ -139,7 +157,7 @@ namespace PnP.Core.Test.SharePoint
                 List<IFolder> folders = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.ToListAsync();
 
                 Assert.AreNotEqual(0, folders.Count);
-                
+
                 await mockFolder.DeleteAsync();
             }
         }
@@ -148,18 +166,21 @@ namespace PnP.Core.Test.SharePoint
         public async Task QueryListSubFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFolder mockFolder = await parentFolder.Folders.AddAsync("TEST");
 
-                IFolder foundFolder= await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.FirstOrDefaultAsync(f => f.Name == "TEST");
+            await AddMockFolderToSharedDocuments(0, "TEST_QUERY");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                // NOTE: 
+                // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
+                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder foundFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == "TEST_QUERY");
 
                 Assert.IsNotNull(foundFolder);
                 Assert.AreNotEqual(default, foundFolder.UniqueId);
-
-                await mockFolder.DeleteAsync();
             }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_QUERY");
         }
 
         [TestMethod]
@@ -239,11 +260,256 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test if the folder is still found
                 IFolder folderToFind = await (from ct in context.Web.Lists.GetByTitle("Documents").RootFolder.Folders
-                                       where ct.Name == "TO DELETE FOLDER"
-                                       select ct).FirstOrDefaultAsync();
+                                              where ct.Name == "TO DELETE FOLDER"
+                                              select ct).FirstOrDefaultAsync();
 
                 Assert.IsNull(folderToFind);
             }
         }
+
+
+        [TestMethod]
+        public async Task CopyFolderWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_COPY_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToCopy = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_COPIED_NO_OPTIONS";
+                await folderToCopy.CopyToAsync(destinationServerRelativeUrl);
+
+                IFolder foundCopiedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundCopiedFolder);
+                Assert.AreEqual("TEST_COPIED_NO_OPTIONS", foundCopiedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPY_NO_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPIED_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task CopyFolderBatchWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_COPY_BATCH_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToCopy = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_COPIED_BATCH_NO_OPTIONS";
+                await folderToCopy.CopyToBatchAsync(destinationServerRelativeUrl);
+                await context.ExecuteAsync();
+
+                IFolder foundCopiedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundCopiedFolder);
+                Assert.AreEqual("TEST_COPIED_BATCH_NO_OPTIONS", foundCopiedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPY_BATCH_NO_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPIED_BATCH_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task CopyFolderWithOptionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_COPY_OPTIONS");
+            string copyDestUrl = await AddMockFolderToSharedDocuments(0, "TEST_COPY2_OPTIONS");
+
+            string folderToFindName = "TEST_COPY2_OPTIONS1"; // With KeepBoth option, a numeric suffix is added to the copied folder's name
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToCopy = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                await folderToCopy.CopyToAsync(copyDestUrl, new MoveCopyOptions()
+                {
+                    KeepBoth = true,
+                    ResetAuthorAndCreatedOnCopy = true,
+                    ShouldBypassSharedLocks = false, // NOTE no easy way to test this
+                });
+
+                // NOTE: 
+                // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
+                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                Assert.IsNotNull(foundCopiedFolder);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPY_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, folderToFindName);
+        }
+
+        [TestMethod]
+        public async Task CopyFolderBatchWithOptionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_COPY_BATCH_OPTIONS");
+            string copyDestUrl = await AddMockFolderToSharedDocuments(0, "TEST_COPY2_BATCH_OPTIONS");
+
+            string folderToFindName = "TEST_COPY2_BATCH_OPTIONS1"; // With KeepBoth option, a numeric suffix is added to the copied folder's name
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToCopy = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+                await folderToCopy.CopyToBatchAsync(copyDestUrl, new MoveCopyOptions()
+                {
+                    KeepBoth = true,
+                    ResetAuthorAndCreatedOnCopy = true,
+                    ShouldBypassSharedLocks = false, // NOTE no easy way to test this
+                });
+                await context.ExecuteAsync();
+
+                // NOTE: 
+                // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
+                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                Assert.IsNotNull(foundCopiedFolder);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPY_BATCH_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPY2_BATCH_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, folderToFindName);
+        }
+
+        [TestMethod]
+        public async Task MoveFolderWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToMove = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVED_FOLDER_NO_OPTIONS";
+                await folderToMove.MoveToAsync(destinationServerRelativeUrl);
+
+                IFolder foundMovedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundMovedFolder);
+                Assert.AreEqual("TEST_MOVED_FOLDER_NO_OPTIONS", foundMovedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_MOVED_FOLDER_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task MoveFolderBatchWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_BATCH_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToMove = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVED_FOLDER_BATCH_NO_OPTIONS";
+                await folderToMove.MoveToBatchAsync(destinationServerRelativeUrl);
+                await context.ExecuteAsync();
+
+                IFolder foundMovedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundMovedFolder);
+                Assert.AreEqual("TEST_MOVED_FOLDER_BATCH_NO_OPTIONS", foundMovedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_MOVED_FOLDER_BATCH_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task MoveFolderWithOptionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_OPTIONS");
+            string existingFolderUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_EXISTING_OPTIONS");
+            string folderToFindName = "TEST_MOVE_EXISTING_OPTIONS1"; // With KeepBoth option, a numeric suffix is added to the copied folder's name
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToMove = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVE_EXISTING_OPTIONS";
+                await folderToMove.MoveToAsync(destinationServerRelativeUrl, new MoveCopyOptions()
+                {
+                    KeepBoth = true,
+                    ResetAuthorAndCreatedOnCopy = true,
+                    //ShouldBypassSharedLocks = false
+                });
+
+                // NOTE: 
+                // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
+                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                Assert.IsNotNull(foundMovedFolder);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_MOVE_EXISTING_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, folderToFindName);
+        }
+
+        [TestMethod]
+        public async Task MoveFolderBatchWithOptionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_BATCH_OPTIONS");
+            string existingFolderUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_EXISTING_BATCH_OPTIONS");
+            string folderToFindName = "TEST_MOVE_EXISTING_BATCH_OPTIONS1"; // With KeepBoth option, a numeric suffix is added to the copied folder's name
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToMove = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVE_EXISTING_BATCH_OPTIONS";
+                await folderToMove.MoveToBatchAsync(destinationServerRelativeUrl, new MoveCopyOptions()
+                {
+                    KeepBoth = true,
+                    ResetAuthorAndCreatedOnCopy = true,
+                    //ShouldBypassSharedLocks = false
+                });
+                await context.ExecuteAsync();
+
+                // NOTE: 
+                // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
+                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                Assert.IsNotNull(foundMovedFolder);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_MOVE_EXISTING_BATCH_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, folderToFindName);
+        }
+
+        #region Mock folder
+        private async Task<string> AddMockFolderToSharedDocuments(int contextId, string folderName, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
+            {
+                IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder subFolder = await folder.AddFolderAsync(folderName);
+                return subFolder.ServerRelativeUrl;
+            }
+        }
+
+        private async Task CleanupMockFolderFromSharedDocuments(int contextId, string folderName, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
+            {
+                string mockFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{folderName}";
+                IFolder mockFolder = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderUrl);
+                await mockFolder.DeleteAsync();
+            }
+        }
+        #endregion
     }
 }

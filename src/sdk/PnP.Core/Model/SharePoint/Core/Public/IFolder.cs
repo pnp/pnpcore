@@ -71,13 +71,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IFolder ParentFolder { get; }
 
-        /*
-        //TODO: To implement...
         /// <summary>
-        // Gets the collection of all files contained in the folder.
+        /// Gets the collection of all files contained in the folder.
         /// </summary>
-        //public IPropertyValues Properties { get; }
-        */
+        public IPropertyValues Properties { get; }
 
         /// <summary>
         /// Get the storage metrics of the folder.
@@ -94,6 +91,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IFileCollection Files { get; }
 
+        #region Add Folder
         /// <summary>
         /// Add a folder to the current folder.
         /// </summary>
@@ -137,5 +135,99 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add the reques to </param>
         /// <returns>The added folder.</returns>
         public IFolder AddFolderBatch(Batch batch, string name);
+        #endregion
+
+        #region CopyTo
+        /// <summary>
+        /// Copies a folder to the destination URL.
+        /// </summary>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the copy operation.</param>
+        Task CopyToAsync(string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Copies a folder to the destination URL.
+        /// </summary>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the copy operation.</param>
+        void CopyTo(string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Copies a folder to the destination URL.
+        /// </summary>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the copy operation.</param>
+        Task CopyToBatchAsync(string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Copies a folder to the destination URL.
+        /// </summary>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the copy operation.</param>
+        void CopyToBatch(string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Copies a folder to the destination URL.
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the copy operation.</param>
+        Task CopyToBatchAsync(Batch batch, string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Copies a folder to the destination URL.
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the copy operation.</param>
+        void CopyToBatch(Batch batch, string destinationUrl, MoveCopyOptions options = null);
+        #endregion
+
+        #region MoveTo
+        /// <summary>
+        /// Moves a folder to the destination URL.
+        /// </summary>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the move operation.</param>
+        Task MoveToAsync(string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Moves a folder to the destination URL.
+        /// </summary>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the move operation.</param>
+        void MoveTo(string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Moves a folder to the destination URL.
+        /// </summary>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the move operation.</param>
+        Task MoveToBatchAsync(string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Moves a folder to the destination URL.
+        /// </summary>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the move operation.</param>
+        void MoveToBatch(string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Moves a folder to the destination URL.
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the move operation.</param>
+        Task MoveToBatchAsync(Batch batch, string destinationUrl, MoveCopyOptions options = null);
+
+        /// <summary>
+        /// Moves a folder to the destination URL.
+        /// </summary>
+        /// <param name="batch">The batch instance to use.</param>
+        /// <param name="destinationUrl">The destination URL.</param>
+        /// <param name="options">options of the move operation.</param>
+        void MoveToBatch(Batch batch, string destinationUrl, MoveCopyOptions options = null);
+        #endregion
+
     }
 }

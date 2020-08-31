@@ -206,7 +206,7 @@ namespace PnP.Core.Model
                         {
                             // This is SharePoint/Graph property
                             overflowField.SharePointName = classInfo.SharePointTargets.First().OverflowProperty;
-                            overflowField.GraphName = classInfo.GraphTargets.First().OverflowProperty;
+                            overflowField.GraphName = classInfo.GraphTargets.FirstOrDefault()?.OverflowProperty;
                         }
                     }
 

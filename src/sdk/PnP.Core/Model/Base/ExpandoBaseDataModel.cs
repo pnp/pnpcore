@@ -277,9 +277,13 @@ namespace PnP.Core.Model
                 (includeInstanceProperties && instanceProperties.Any(p => p.Name == key));
         }
 
-        public dynamic ToDynamic()
+        /// <summary>
+        /// Converts the current strongly typed object to a dynamic object
+        /// </summary>
+        /// <returns>The dynamic object from current strongly typed object</returns>
+        public dynamic AsDynamic()
         {
-            return TransientObject.ToDynamic(this);
+            return TransientObject.AsDynamic(this);
         }
     }
 }
