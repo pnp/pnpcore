@@ -1472,16 +1472,64 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
-
+        #region AddListFieldUrl Tests
 
         [TestMethod]
-        public async Task AddListFieldUrlSpecificTest()
+        public async Task AddListFieldUrlAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
                 IField addedField = await documents.Fields.AddUrlAsync("ADDED FIELD", new FieldUrlOptions()
+                {
+                    Group = "TEST GROUP",
+                    DisplayFormat = UrlFieldFormatType.Image
+                });
+                
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.URL, addedField.FieldTypeKind);
+                Assert.AreEqual((int)UrlFieldFormatType.Image, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldUrlTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddUrl("ADDED FIELD", new FieldUrlOptions()
+                {
+                    Group = "TEST GROUP",
+                    DisplayFormat = UrlFieldFormatType.Image
+                });
+                
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.URL, addedField.FieldTypeKind);
+                Assert.AreEqual((int)UrlFieldFormatType.Image, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldUrlBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddUrlBatchAsync("ADDED FIELD", new FieldUrlOptions()
                 {
                     Group = "TEST GROUP",
                     DisplayFormat = UrlFieldFormatType.Image
@@ -1498,6 +1546,89 @@ namespace PnP.Core.Test.SharePoint
                 await addedField.DeleteAsync();
             }
         }
+
+
+        [TestMethod]
+        public async Task AddListFieldUrlBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddUrlBatch("ADDED FIELD", new FieldUrlOptions()
+                {
+                    Group = "TEST GROUP",
+                    DisplayFormat = UrlFieldFormatType.Image
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.URL, addedField.FieldTypeKind);
+                Assert.AreEqual((int)UrlFieldFormatType.Image, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
+        public async Task AddListFieldUrlSpecifiedBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddUrlBatchAsync(newBatch, "ADDED FIELD", new FieldUrlOptions()
+                {
+                    Group = "TEST GROUP",
+                    DisplayFormat = UrlFieldFormatType.Image
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.URL, addedField.FieldTypeKind);
+                Assert.AreEqual((int)UrlFieldFormatType.Image, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
+        public async Task AddListFieldUrlSpecifiedBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddUrlBatch(newBatch,"ADDED FIELD", new FieldUrlOptions()
+                {
+                    Group = "TEST GROUP",
+                    DisplayFormat = UrlFieldFormatType.Image
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.URL, addedField.FieldTypeKind);
+                Assert.AreEqual((int)UrlFieldFormatType.Image, addedField.DisplayFormat);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+
+        #endregion
 
         #region AddListFieldCalculated
 
