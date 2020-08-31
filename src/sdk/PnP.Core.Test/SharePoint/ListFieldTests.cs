@@ -1318,8 +1318,10 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region AddListFieldCurrency Tests
+
         [TestMethod]
-        public async Task AddListFieldCurrencySpecificTest()
+        public async Task AddListFieldCurrencyAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -1343,6 +1345,136 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddListFieldCurrencyTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddCurrency("ADDED FIELD", new FieldCurrencyOptions()
+                {
+                    Group = "TEST GROUP",
+                    CurrencyLocaleId = 1033
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Currency, addedField.FieldTypeKind);
+                Assert.AreEqual(1033, addedField.CurrencyLocaleId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldCurrencyBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddCurrencyBatchAsync("ADDED FIELD", new FieldCurrencyOptions()
+                {
+                    Group = "TEST GROUP",
+                    CurrencyLocaleId = 1033
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Currency, addedField.FieldTypeKind);
+                Assert.AreEqual(1033, addedField.CurrencyLocaleId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldCurrencyBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddCurrencyBatch("ADDED FIELD", new FieldCurrencyOptions()
+                {
+                    Group = "TEST GROUP",
+                    CurrencyLocaleId = 1033
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Currency, addedField.FieldTypeKind);
+                Assert.AreEqual(1033, addedField.CurrencyLocaleId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldCurrencySpecifiedBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddCurrencyBatchAsync(newBatch, "ADDED FIELD", new FieldCurrencyOptions()
+                {
+                    Group = "TEST GROUP",
+                    CurrencyLocaleId = 1033
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Currency, addedField.FieldTypeKind);
+                Assert.AreEqual(1033, addedField.CurrencyLocaleId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldCurrencySpecifiedBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddCurrencyBatch(newBatch, "ADDED FIELD", new FieldCurrencyOptions()
+                {
+                    Group = "TEST GROUP",
+                    CurrencyLocaleId = 1033
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.Currency, addedField.FieldTypeKind);
+                Assert.AreEqual(1033, addedField.CurrencyLocaleId);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        #endregion
+
+
+
+        [TestMethod]
         public async Task AddListFieldUrlSpecificTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1354,6 +1486,7 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     DisplayFormat = UrlFieldFormatType.Image
                 });
+                await context.ExecuteAsync();
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
