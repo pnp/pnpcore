@@ -4735,6 +4735,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync
   nameWithType: IFieldCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
+  name: AddCalculated(String, FieldCalculatedOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(System.String, PnP.Core.Model.SharePoint.FieldCalculatedOptions)
+  nameWithType: IFieldCollection.AddCalculated(String, FieldCalculatedOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated*
+  name: AddCalculated
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated
+  nameWithType: IFieldCollection.AddCalculated
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculatedAsync(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
   name: AddCalculatedAsync(String, FieldCalculatedOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculatedAsync_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_
