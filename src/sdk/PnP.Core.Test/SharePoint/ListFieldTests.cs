@@ -888,10 +888,10 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
-        #region AddListFieldChoice/MultiChoice Tests
+        #region AddListFieldMultiChoice Tests
 
         [TestMethod]
-        public async Task AddListFieldMultiChoiceSpecificTest()
+        public async Task AddListFieldMultiChoiceAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -919,6 +919,166 @@ namespace PnP.Core.Test.SharePoint
                 await addedField.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task AddListFieldMultiChoiceTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddMultiChoice("ADDED FIELD", new FieldMultiChoiceOptions()
+                {
+                    Group = "TEST GROUP",
+                    FillInChoice = true,
+                    Choices = new string[] { "CHOICE 1", "CHOICE 2" }
+                });
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.MultiChoice, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.FillInChoice);
+                // Currently supports collections only for model types (JsonMappingHelper Ln 120)
+                Assert.IsNotNull(addedField.Choices);
+                Assert.AreEqual(2, addedField.Choices.Length);
+                Assert.AreEqual("CHOICE 1", addedField.Choices[0]);
+                Assert.AreEqual("CHOICE 2", addedField.Choices[1]);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldMultiChoiceBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddMultiChoiceBatchAsync("ADDED FIELD", new FieldMultiChoiceOptions()
+                {
+                    Group = "TEST GROUP",
+                    FillInChoice = true,
+                    Choices = new string[] { "CHOICE 1", "CHOICE 2" }
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.MultiChoice, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.FillInChoice);
+                // Currently supports collections only for model types (JsonMappingHelper Ln 120)
+                Assert.IsNotNull(addedField.Choices);
+                Assert.AreEqual(2, addedField.Choices.Length);
+                Assert.AreEqual("CHOICE 1", addedField.Choices[0]);
+                Assert.AreEqual("CHOICE 2", addedField.Choices[1]);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldMultiChoiceBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddMultiChoiceBatch("ADDED FIELD", new FieldMultiChoiceOptions()
+                {
+                    Group = "TEST GROUP",
+                    FillInChoice = true,
+                    Choices = new string[] { "CHOICE 1", "CHOICE 2" }
+                });
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.MultiChoice, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.FillInChoice);
+                // Currently supports collections only for model types (JsonMappingHelper Ln 120)
+                Assert.IsNotNull(addedField.Choices);
+                Assert.AreEqual(2, addedField.Choices.Length);
+                Assert.AreEqual("CHOICE 1", addedField.Choices[0]);
+                Assert.AreEqual("CHOICE 2", addedField.Choices[1]);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldMultiChoiceSpecifiedBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = await documents.Fields.AddMultiChoiceBatchAsync(newBatch, "ADDED FIELD", new FieldMultiChoiceOptions()
+                {
+                    Group = "TEST GROUP",
+                    FillInChoice = true,
+                    Choices = new string[] { "CHOICE 1", "CHOICE 2" }
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.MultiChoice, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.FillInChoice);
+                // Currently supports collections only for model types (JsonMappingHelper Ln 120)
+                Assert.IsNotNull(addedField.Choices);
+                Assert.AreEqual(2, addedField.Choices.Length);
+                Assert.AreEqual("CHOICE 1", addedField.Choices[0]);
+                Assert.AreEqual("CHOICE 2", addedField.Choices[1]);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFieldMultiChoiceSpecifiedBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+                var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
+                IField addedField = documents.Fields.AddMultiChoiceBatch(newBatch,"ADDED FIELD", new FieldMultiChoiceOptions()
+                {
+                    Group = "TEST GROUP",
+                    FillInChoice = true,
+                    Choices = new string[] { "CHOICE 1", "CHOICE 2" }
+                });
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(addedField);
+                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("TEST GROUP", addedField.Group);
+                Assert.AreEqual(FieldType.MultiChoice, addedField.FieldTypeKind);
+                Assert.IsTrue(addedField.FillInChoice);
+                // Currently supports collections only for model types (JsonMappingHelper Ln 120)
+                Assert.IsNotNull(addedField.Choices);
+                Assert.AreEqual(2, addedField.Choices.Length);
+                Assert.AreEqual("CHOICE 1", addedField.Choices[0]);
+                Assert.AreEqual("CHOICE 2", addedField.Choices[1]);
+
+                await addedField.DeleteAsync();
+            }
+        }
+
+        #endregion
+
+        #region AddListFieldChoice Tests
 
         [TestMethod]
         public async Task AddListFieldChoiceAsyncTest()
