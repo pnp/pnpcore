@@ -5856,12 +5856,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.ContentTag
   nameWithType: IFile.ContentTag
-- uid: PnP.Core.Model.SharePoint.IFile.CopyTo(System.String,System.Boolean)
-  name: CopyTo(String, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyTo(System.String,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFile.CopyTo(System.String, System.Boolean)
-  nameWithType: IFile.CopyTo(String, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFile.CopyTo(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyTo(String, Boolean, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyTo(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.CopyTo(System.String, System.Boolean, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.CopyTo(String, Boolean, MoveCopyOptions)
 - uid: PnP.Core.Model.SharePoint.IFile.CopyTo*
   name: CopyTo
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyTo_
@@ -5869,12 +5869,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.CopyTo
   nameWithType: IFile.CopyTo
-- uid: PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String,System.Boolean)
-  name: CopyToAsync(String, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String, System.Boolean)
-  nameWithType: IFile.CopyToAsync(String, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToAsync(String, Boolean, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String, System.Boolean, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.CopyToAsync(String, Boolean, MoveCopyOptions)
 - uid: PnP.Core.Model.SharePoint.IFile.CopyToAsync*
   name: CopyToAsync
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToAsync_
@@ -5882,18 +5882,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.CopyToAsync
   nameWithType: IFile.CopyToAsync
-- uid: PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch,System.String,System.Boolean)
-  name: CopyToBatch(Batch, String, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch,System.String,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch, System.String, System.Boolean)
-  nameWithType: IFile.CopyToBatch(Batch, String, Boolean)
-- uid: PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String,System.Boolean)
-  name: CopyToBatch(String, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String, System.Boolean)
-  nameWithType: IFile.CopyToBatch(String, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToBatch(Batch, String, Boolean, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch, System.String, System.Boolean, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.CopyToBatch(Batch, String, Boolean, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToBatch(String, Boolean, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String, System.Boolean, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.CopyToBatch(String, Boolean, MoveCopyOptions)
 - uid: PnP.Core.Model.SharePoint.IFile.CopyToBatch*
   name: CopyToBatch
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatch_
@@ -5901,18 +5901,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.CopyToBatch
   nameWithType: IFile.CopyToBatch
-- uid: PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean)
-  name: CopyToBatchAsync(Batch, String, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch, System.String, System.Boolean)
-  nameWithType: IFile.CopyToBatchAsync(Batch, String, Boolean)
-- uid: PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String,System.Boolean)
-  name: CopyToBatchAsync(String, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String, System.Boolean)
-  nameWithType: IFile.CopyToBatchAsync(String, Boolean)
+- uid: PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToBatchAsync(Batch, String, Boolean, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch, System.String, System.Boolean, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.CopyToBatchAsync(Batch, String, Boolean, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: CopyToBatchAsync(String, Boolean, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String, System.Boolean, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.CopyToBatchAsync(String, Boolean, MoveCopyOptions)
 - uid: PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync*
   name: CopyToBatchAsync
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_
@@ -6050,12 +6050,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.MinorVersion
   nameWithType: IFile.MinorVersion
-- uid: PnP.Core.Model.SharePoint.IFile.MoveTo(System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  name: MoveTo(String, MoveOperations)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveTo(System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  fullName: PnP.Core.Model.SharePoint.IFile.MoveTo(System.String, PnP.Core.Model.SharePoint.MoveOperations)
-  nameWithType: IFile.MoveTo(String, MoveOperations)
+- uid: PnP.Core.Model.SharePoint.IFile.MoveTo(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveTo(String, MoveOperations, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveTo(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.MoveTo(System.String, PnP.Core.Model.SharePoint.MoveOperations, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.MoveTo(String, MoveOperations, MoveCopyOptions)
 - uid: PnP.Core.Model.SharePoint.IFile.MoveTo*
   name: MoveTo
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveTo_
@@ -6063,12 +6063,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.MoveTo
   nameWithType: IFile.MoveTo
-- uid: PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  name: MoveToAsync(String, MoveOperations)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  fullName: PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String, PnP.Core.Model.SharePoint.MoveOperations)
-  nameWithType: IFile.MoveToAsync(String, MoveOperations)
+- uid: PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToAsync(String, MoveOperations, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String, PnP.Core.Model.SharePoint.MoveOperations, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.MoveToAsync(String, MoveOperations, MoveCopyOptions)
 - uid: PnP.Core.Model.SharePoint.IFile.MoveToAsync*
   name: MoveToAsync
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToAsync_
@@ -6076,18 +6076,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.MoveToAsync
   nameWithType: IFile.MoveToAsync
-- uid: PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  name: MoveToBatch(Batch, String, MoveOperations)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  fullName: PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.MoveOperations)
-  nameWithType: IFile.MoveToBatch(Batch, String, MoveOperations)
-- uid: PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  name: MoveToBatch(String, MoveOperations)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  fullName: PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String, PnP.Core.Model.SharePoint.MoveOperations)
-  nameWithType: IFile.MoveToBatch(String, MoveOperations)
+- uid: PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToBatch(Batch, String, MoveOperations, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.MoveOperations, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.MoveToBatch(Batch, String, MoveOperations, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToBatch(String, MoveOperations, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String, PnP.Core.Model.SharePoint.MoveOperations, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.MoveToBatch(String, MoveOperations, MoveCopyOptions)
 - uid: PnP.Core.Model.SharePoint.IFile.MoveToBatch*
   name: MoveToBatch
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatch_
@@ -6095,18 +6095,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.MoveToBatch
   nameWithType: IFile.MoveToBatch
-- uid: PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  name: MoveToBatchAsync(Batch, String, MoveOperations)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  fullName: PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.MoveOperations)
-  nameWithType: IFile.MoveToBatchAsync(Batch, String, MoveOperations)
-- uid: PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  name: MoveToBatchAsync(String, MoveOperations)
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_
-  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations)
-  fullName: PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String, PnP.Core.Model.SharePoint.MoveOperations)
-  nameWithType: IFile.MoveToBatchAsync(String, MoveOperations)
+- uid: PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToBatchAsync(Batch, String, MoveOperations, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.MoveOperations, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.MoveToBatchAsync(Batch, String, MoveOperations, MoveCopyOptions)
+- uid: PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  name: MoveToBatchAsync(String, MoveOperations, MoveCopyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String, PnP.Core.Model.SharePoint.MoveOperations, PnP.Core.Model.SharePoint.MoveCopyOptions)
+  nameWithType: IFile.MoveToBatchAsync(String, MoveOperations, MoveCopyOptions)
 - uid: PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync*
   name: MoveToBatchAsync
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_
@@ -16174,12 +16174,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Utilities.UrlUtility.Combine
   nameWithType: UrlUtility.Combine
-- uid: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl(System.Uri,System.String)
-  name: EnsureAbsoluteUrl(Uri, String)
-  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_EnsureAbsoluteUrl_System_Uri_System_String_
-  commentId: M:PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl(System.Uri,System.String)
-  fullName: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl(System.Uri, System.String)
-  nameWithType: UrlUtility.EnsureAbsoluteUrl(Uri, String)
+- uid: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl(System.Uri,System.String,System.Boolean)
+  name: EnsureAbsoluteUrl(Uri, String, Boolean)
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_EnsureAbsoluteUrl_System_Uri_System_String_System_Boolean_
+  commentId: M:PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl(System.Uri,System.String,System.Boolean)
+  fullName: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl(System.Uri, System.String, System.Boolean)
+  nameWithType: UrlUtility.EnsureAbsoluteUrl(Uri, String, Boolean)
 - uid: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl*
   name: EnsureAbsoluteUrl
   href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_EnsureAbsoluteUrl_
@@ -16187,6 +16187,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl
   nameWithType: UrlUtility.EnsureAbsoluteUrl
+- uid: PnP.Core.Utilities.UrlUtility.IsSameSite(System.Uri,System.String)
+  name: IsSameSite(Uri, String)
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_IsSameSite_System_Uri_System_String_
+  commentId: M:PnP.Core.Utilities.UrlUtility.IsSameSite(System.Uri,System.String)
+  fullName: PnP.Core.Utilities.UrlUtility.IsSameSite(System.Uri, System.String)
+  nameWithType: UrlUtility.IsSameSite(Uri, String)
+- uid: PnP.Core.Utilities.UrlUtility.IsSameSite*
+  name: IsSameSite
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_IsSameSite_
+  commentId: Overload:PnP.Core.Utilities.UrlUtility.IsSameSite
+  isSpec: "True"
+  fullName: PnP.Core.Utilities.UrlUtility.IsSameSite
+  nameWithType: UrlUtility.IsSameSite
 - uid: PnP.Core.Utilities.UrlUtility.MakeAbsoluteUrl(System.Uri,System.String)
   name: MakeAbsoluteUrl(Uri, String)
   href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_MakeAbsoluteUrl_System_Uri_System_String_

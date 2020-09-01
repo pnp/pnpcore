@@ -1891,24 +1891,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyTo(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyTo(System.String%2CSystem.Boolean%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L399" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L401" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_CopyTo_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyTo*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyTo(System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyTo(String, Boolean)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyTo(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">CopyTo(String, Boolean, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyTo_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void CopyTo(string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+    <pre><code class="lang-csharp hljs">void CopyTo(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -1916,8 +1916,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -1926,6 +1926,14 @@
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">overwrite</span>
         <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the copy operation.</p>
 </p>
       </td>
     </tr>
@@ -1945,24 +1953,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String%2CSystem.Boolean%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L392" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L393" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_CopyToAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToAsync(String, Boolean)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">CopyToAsync(String, Boolean, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task CopyToAsync(string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+    <pre><code class="lang-csharp hljs">Task CopyToAsync(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -1970,8 +1978,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -1980,6 +1988,14 @@
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">overwrite</span>
         <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the copy operation.</p>
 </p>
       </td>
     </tr>
@@ -2008,24 +2024,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Boolean%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L429" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L434" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch,System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToBatch(Batch, String, Boolean)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">CopyToBatch(Batch, String, Boolean, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void CopyToBatch(Batch batch, string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+    <pre><code class="lang-csharp hljs">void CopyToBatch(Batch batch, string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2041,8 +2057,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -2051,6 +2067,14 @@
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">overwrite</span>
         <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the copy operation.</p>
 </p>
       </td>
     </tr>
@@ -2070,24 +2094,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String%2CSystem.Boolean%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L413" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L417" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToBatch(String, Boolean)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatch(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">CopyToBatch(String, Boolean, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void CopyToBatch(string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+    <pre><code class="lang-csharp hljs">void CopyToBatch(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2095,8 +2119,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -2105,6 +2129,14 @@
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">overwrite</span>
         <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the copy operation.</p>
 </p>
       </td>
     </tr>
@@ -2124,24 +2156,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CSystem.Boolean%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L421" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L425" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToBatchAsync(Batch, String, Boolean)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">CopyToBatchAsync(Batch, String, Boolean, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task CopyToBatchAsync(Batch batch, string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+    <pre><code class="lang-csharp hljs">Task CopyToBatchAsync(Batch batch, string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2157,8 +2189,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -2168,6 +2200,13 @@
         <span class="parametername">overwrite</span>
         <p><p>Indicates whether the file should be overwritten if already existing.</p>
 </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p>
       </td>
     </tr>
   </table>
@@ -2195,24 +2234,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String%2CSystem.Boolean%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L406" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L409" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String,System.Boolean)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_" class="expander" data-toggle="collapse">CopyToBatchAsync(String, Boolean)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.CopyToBatchAsync(System.String,System.Boolean,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">CopyToBatchAsync(String, Boolean, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_CopyToBatchAsync_System_String_System_Boolean_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Copies a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task CopyToBatchAsync(string destinationServerRelativeUrl, bool overwrite = false)</code></pre>
+    <pre><code class="lang-csharp hljs">Task CopyToBatchAsync(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2220,8 +2259,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination  URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -2230,6 +2269,14 @@
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></span>
         <span class="parametername">overwrite</span>
         <p><p>Indicates whether the file should be overwritten if already existing.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the copy operation.</p>
 </p>
       </td>
     </tr>
@@ -2258,78 +2305,86 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveTo(System.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveTo(System.String%2CPnP.Core.Model.SharePoint.MoveOperations%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L453" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFile_MoveTo_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveTo*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveTo(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">MoveTo(String, MoveOperations, MoveCopyOptions)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
+  <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void MoveTo(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
+        <span class="parametername">moveOperations</span>
+        <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the move operation.</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String%2CPnP.Core.Model.SharePoint.MoveOperations%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L445" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Model_SharePoint_IFile_MoveTo_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveTo*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveTo(System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveTo(String, MoveOperations)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
-  <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void MoveTo(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
-        <span class="parametername">moveOperations</span>
-        <p><p>combinable flags to indicate the type of move operations.</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L438" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
   <a id="PnP_Core_Model_SharePoint_IFile_MoveToAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToAsync(String, MoveOperations)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">MoveToAsync(String, MoveOperations, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task MoveToAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+    <pre><code class="lang-csharp hljs">Task MoveToAsync(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2337,8 +2392,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -2347,6 +2402,14 @@
         <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
         <span class="parametername">moveOperations</span>
         <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the move operation.</p>
 </p>
       </td>
     </tr>
@@ -2375,24 +2438,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.MoveOperations%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L475" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L487" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToBatch(Batch, String, MoveOperations)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">MoveToBatch(Batch, String, MoveOperations, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void MoveToBatch(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+    <pre><code class="lang-csharp hljs">void MoveToBatch(Batch batch, string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2408,8 +2471,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -2418,6 +2481,14 @@
         <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
         <span class="parametername">moveOperations</span>
         <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the move operation.</p>
 </p>
       </td>
     </tr>
@@ -2437,24 +2508,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String%2CPnP.Core.Model.SharePoint.MoveOperations%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L459" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L469" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToBatch(String, MoveOperations)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatch(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">MoveToBatch(String, MoveOperations, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void MoveToBatch(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+    <pre><code class="lang-csharp hljs">void MoveToBatch(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2462,8 +2533,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -2472,6 +2543,14 @@
         <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
         <span class="parametername">moveOperations</span>
         <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the move operation.</p>
 </p>
       </td>
     </tr>
@@ -2491,24 +2570,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch%2CSystem.String%2CPnP.Core.Model.SharePoint.MoveOperations%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L467" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L478" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToBatchAsync(Batch, String, MoveOperations)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">MoveToBatchAsync(Batch, String, MoveOperations, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task MoveToBatchAsync(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+    <pre><code class="lang-csharp hljs">Task MoveToBatchAsync(Batch batch, string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2524,8 +2603,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -2534,6 +2613,14 @@
         <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
         <span class="parametername">moveOperations</span>
         <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the move operation.</p>
 </p>
       </td>
     </tr>
@@ -2562,24 +2649,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String%2CPnP.Core.Model.SharePoint.MoveOperations)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String%2CPnP.Core.Model.SharePoint.MoveOperations%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L452" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L461" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="expander" data-toggle="collapse">MoveToBatchAsync(String, MoveOperations)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" data-uid="PnP.Core.Model.SharePoint.IFile.MoveToBatchAsync(System.String,PnP.Core.Model.SharePoint.MoveOperations,PnP.Core.Model.SharePoint.MoveCopyOptions)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="expander" data-toggle="collapse">MoveToBatchAsync(String, MoveOperations, MoveCopyOptions)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFile_MoveToBatchAsync_System_String_PnP_Core_Model_SharePoint_MoveOperations_PnP_Core_Model_SharePoint_MoveCopyOptions_" class="collapse in">
   <div class="markdown level1 summary"><p>Move a file to the destination URL.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task MoveToBatchAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None)</code></pre>
+    <pre><code class="lang-csharp hljs">Task MoveToBatchAsync(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -2587,8 +2674,8 @@
     <tr>
       <td>
         <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">destinationServerRelativeUrl</span>
-        <p><p>The destination server relative URL including file name.</p>
+        <span class="parametername">destinationUrl</span>
+        <p><p>The destination URL including file name.</p>
 </p>
       </td>
     </tr>
@@ -2597,6 +2684,14 @@
         <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveOperations.html">MoveOperations</a></span>
         <span class="parametername">moveOperations</span>
         <p><p>combinable flags to indicate the type of move operations.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.MoveCopyOptions.html">MoveCopyOptions</a></span>
+        <span class="parametername">options</span>
+        <p><p>Options of the move operation.</p>
 </p>
       </td>
     </tr>
@@ -2947,7 +3042,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_Recycle.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.Recycle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L489" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L501" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_Recycle_" data-uid="PnP.Core.Model.SharePoint.IFile.Recycle*"></a>
@@ -2992,7 +3087,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L483" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L495" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_RecycleAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleAsync*"></a>
@@ -3037,7 +3132,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L499" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L511" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_RecycleBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatch*"></a>
@@ -3072,7 +3167,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L511" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L523" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_RecycleBatch_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatch*"></a>
@@ -3118,7 +3213,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L494" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L506" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync*"></a>
@@ -3162,7 +3257,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L505" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFile.cs/#L517" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IFile_RecycleBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IFile.RecycleBatchAsync*"></a>
