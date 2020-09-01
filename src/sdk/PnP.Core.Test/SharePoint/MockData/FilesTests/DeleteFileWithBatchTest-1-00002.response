@@ -1,4 +1,4 @@
---batchresponse_dcc6455a-29a3-41ef-be4b-133499f7b705
+--batchresponse_76e2ba73-7562-4dad-a7bc-dae80892c354
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/Shared Documents/test_delete_with_batch.docx does not exist."}}}
---batchresponse_dcc6455a-29a3-41ef-be4b-133499f7b705--
+--batchresponse_76e2ba73-7562-4dad-a7bc-dae80892c354--

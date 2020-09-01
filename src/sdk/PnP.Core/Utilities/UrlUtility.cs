@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 namespace PnP.Core.Utilities
 {
     // Taken and slightly adapted from https://raw.githubusercontent.com/pnp/PnP-Sites-Core/master/Core/OfficeDevPnP.Core/Utilities/UrlUtility.cs
@@ -9,7 +8,7 @@ namespace PnP.Core.Utilities
     public static class UrlUtility
     {
         const char PATH_DELIMITER = '/';
-   
+
         /// <summary>
         /// Combines a path and a relative path.
         /// </summary>
@@ -74,7 +73,7 @@ namespace PnP.Core.Utilities
 
             return path.TrimEnd(PATH_DELIMITER) + PATH_DELIMITER + relative.TrimStart(PATH_DELIMITER);
         }
-        
+
         /// <summary>
         /// Returns absolute URL of a resource located in a SharePoint site.
         /// </summary>
@@ -94,21 +93,37 @@ namespace PnP.Core.Utilities
         /// </summary>
         /// <param name="webUrl">The URL of a SharePoint site (Web).</param>
         /// <param name="resourceUrl">The absolute or server relative URL of a resource.</param>
+        /// <param name="checkIfWebContainedResource">Indicates if the resource URL must belong to the specified web (default = false)</param>
         /// <returns>The absolute URL of the specified resource.</returns>
-        public static Uri EnsureAbsoluteUrl(Uri webUrl, string resourceUrl)
+        public static Uri EnsureAbsoluteUrl(Uri webUrl, string resourceUrl, bool checkIfWebContainedResource = false)
         {
-            if (null == resourceUrl) return null;
-            if (null == webUrl) return null;
+            if (null == resourceUrl) throw new ArgumentNullException(nameof(resourceUrl));
+            if (null == webUrl) throw new ArgumentNullException(nameof(webUrl));
 
             if (resourceUrl.StartsWith("https://"))
             {
-                if (!resourceUrl.StartsWith(webUrl.ToString()))
+                if (checkIfWebContainedResource && !resourceUrl.StartsWith(webUrl.ToString()))
                     throw new ArgumentException($"The {nameof(resourceUrl)} is not a resource from the SharePoint site {webUrl}");
 
                 return new Uri(resourceUrl);
             }
 
             return MakeAbsoluteUrl(webUrl, resourceUrl);
+        }
+
+        /// <summary>
+        /// Checks wether the resource absolute or relative URL is located in specified site (Web).
+        /// </summary>
+        /// <param name="webUrl">The URL of the SharePoint site (Web).</param>
+        /// <param name="resourceUrl">The absolute or relative URL of a resource.</param>
+        /// <returns><c>true</c> if the resource is in the same site, <c>false</c> otherwise</returns>
+        public static bool IsSameSite(Uri webUrl, string resourceUrl)
+        {
+            if (null == webUrl) throw new ArgumentNullException(nameof(webUrl));
+            if (string.IsNullOrEmpty(resourceUrl)) throw new ArgumentNullException(nameof(resourceUrl));
+
+            string resourceAbsoluteUrl = EnsureAbsoluteUrl(webUrl, resourceUrl).ToString();
+            return resourceAbsoluteUrl.ToLower().StartsWith(webUrl.ToString().ToLower());
         }
 
         #region NOT USED NOW
