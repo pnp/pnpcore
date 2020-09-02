@@ -499,6 +499,12 @@ references:
   commentId: F:PnP.Core.ErrorType.Unsupported
   fullName: PnP.Core.ErrorType.Unsupported
   nameWithType: ErrorType.Unsupported
+- uid: PnP.Core.ErrorType.UnsupportedViaBatch
+  name: UnsupportedViaBatch
+  href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_UnsupportedViaBatch
+  commentId: F:PnP.Core.ErrorType.UnsupportedViaBatch
+  fullName: PnP.Core.ErrorType.UnsupportedViaBatch
+  nameWithType: ErrorType.UnsupportedViaBatch
 - uid: PnP.Core.MicrosoftGraphError
   name: MicrosoftGraphError
   href: api/PnP.Core.MicrosoftGraphError.html
