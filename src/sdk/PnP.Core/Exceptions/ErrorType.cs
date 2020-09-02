@@ -86,6 +86,11 @@
         /// </summary>
         UnresolvedTokens,
 
+        /// <summary>
+        /// The requests in this batch are not vald
+        /// </summary>
+        UnsupportedViaBatch,
+
         // Testing
 
         /// <summary>
