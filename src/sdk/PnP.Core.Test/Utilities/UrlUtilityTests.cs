@@ -138,5 +138,20 @@ namespace PnP.Core.Utilities.Tests
             actual = UrlUtility.IsSameSite(webUrl, resourceUrl);
             Assert.IsFalse(actual);
         }
+
+        [TestMethod()]
+        public void EnsureTrailingSlashUrlTest()
+        {
+            string url = "https://foo";
+            string actual = UrlUtility.EnsureTrailingSlash(url);
+            Assert.IsTrue(actual.EndsWith("/"));
+        }
+
+        [TestMethod()]
+        public void EnsureTrailingSlashUriTest()
+        {
+            Uri actual = new Uri("https://foo").EnsureTrailingSlash();
+            Assert.IsTrue(actual.ToString().EndsWith("/"));
+        }
     }
 }

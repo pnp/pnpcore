@@ -83,7 +83,21 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Lists", Expandable = true)]        
+        //[SharePointProperty("AvailableFields", Expandable = true)]
+        //public IFieldCollection AvailableFields
+        //{
+        //    get
+        //    {
+        //        if (!HasValue(nameof(Fields)))
+        //        {
+        //            var fields = new FieldCollection(this.PnPContext, this, nameof(AvailableFields));
+        //            SetValue(fields);
+        //        }
+        //        return GetValue<IFieldCollection>();
+        //    }
+        //}
+
+        [SharePointProperty("Lists", Expandable = true)]
         // Graph currently is not returning all lists, this option can only be used once that's fixed
         [GraphProperty("lists", Expandable = true)]
         public IListCollection Lists
@@ -113,6 +127,20 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        //[SharePointProperty("AvailableContentTypes", Expandable = true)]
+        //public IContentTypeCollection AvailableContentTypes
+        //{
+        //    get
+        //    {
+        //        if (!HasValue(nameof(ContentTypes)))
+        //        {
+        //            var contentTypes = new ContentTypeCollection(this.PnPContext, this, nameof(AvailableContentTypes));
+        //            SetValue(contentTypes);
+        //        }
+        //        return GetValue<IContentTypeCollection>();
+        //    }
+        //}
+
         [SharePointProperty("Webs", Expandable = true)]
         public IWebCollection Webs
         {
@@ -126,7 +154,31 @@ namespace PnP.Core.Model.SharePoint
                 return GetValue<IWebCollection>();
             }
         }
-        
+
+        [SharePointProperty("SiteUserInfoList", Expandable = true)]
+        public IList SiteUserInfoList
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new List
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IList>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
         [SharePointProperty("Features", Expandable = true)]
         public IFeatureCollection Features
         {
@@ -141,6 +193,31 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+
+        [SharePointProperty("RootFolder", Expandable = true)]
+        public IFolder RootFolder
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new Folder
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IFolder>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
         [SharePointProperty("Folders", Expandable = true)]
         public IFolderCollection Folders
         {
@@ -152,6 +229,26 @@ namespace PnP.Core.Model.SharePoint
                     SetValue(folders);
                 }
                 return GetValue<IFolderCollection>();
+            }
+        }
+
+        [SharePointProperty("AllProperties", Expandable = true)]
+        public IPropertyValues AllProperties
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new PropertyValues();
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IPropertyValues>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
             }
         }
 
