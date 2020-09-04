@@ -487,6 +487,12 @@ references:
   commentId: F:PnP.Core.ErrorType.TooManyRetries
   fullName: PnP.Core.ErrorType.TooManyRetries
   nameWithType: ErrorType.TooManyRetries
+- uid: PnP.Core.ErrorType.UnexpectedMappingType
+  name: UnexpectedMappingType
+  href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_UnexpectedMappingType
+  commentId: F:PnP.Core.ErrorType.UnexpectedMappingType
+  fullName: PnP.Core.ErrorType.UnexpectedMappingType
+  nameWithType: ErrorType.UnexpectedMappingType
 - uid: PnP.Core.ErrorType.UnresolvedTokens
   name: UnresolvedTokens
   href: api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_UnresolvedTokens
@@ -3550,6 +3556,233 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IContentTypeCollection.AddBatchAsync
   nameWithType: IContentTypeCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings
+  name: IEffectiveInformationRightsManagementSettings
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html
+  commentId: T:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings
+  nameWithType: IEffectiveInformationRightsManagementSettings
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowPrint
+  name: AllowPrint
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_AllowPrint
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowPrint
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowPrint
+  nameWithType: IEffectiveInformationRightsManagementSettings.AllowPrint
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowPrint*
+  name: AllowPrint
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_AllowPrint_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowPrint
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowPrint
+  nameWithType: IEffectiveInformationRightsManagementSettings.AllowPrint
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowScript
+  name: AllowScript
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_AllowScript
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowScript
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowScript
+  nameWithType: IEffectiveInformationRightsManagementSettings.AllowScript
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowScript*
+  name: AllowScript
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_AllowScript_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowScript
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowScript
+  nameWithType: IEffectiveInformationRightsManagementSettings.AllowScript
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowWriteCopy
+  name: AllowWriteCopy
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_AllowWriteCopy
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowWriteCopy
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowWriteCopy
+  nameWithType: IEffectiveInformationRightsManagementSettings.AllowWriteCopy
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowWriteCopy*
+  name: AllowWriteCopy
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_AllowWriteCopy_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowWriteCopy
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.AllowWriteCopy
+  nameWithType: IEffectiveInformationRightsManagementSettings.AllowWriteCopy
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DisableDocumentBrowserView
+  name: DisableDocumentBrowserView
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_DisableDocumentBrowserView
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DisableDocumentBrowserView
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DisableDocumentBrowserView
+  nameWithType: IEffectiveInformationRightsManagementSettings.DisableDocumentBrowserView
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DisableDocumentBrowserView*
+  name: DisableDocumentBrowserView
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_DisableDocumentBrowserView_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DisableDocumentBrowserView
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DisableDocumentBrowserView
+  nameWithType: IEffectiveInformationRightsManagementSettings.DisableDocumentBrowserView
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentAccessExpireDays
+  name: DocumentAccessExpireDays
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_DocumentAccessExpireDays
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentAccessExpireDays
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentAccessExpireDays
+  nameWithType: IEffectiveInformationRightsManagementSettings.DocumentAccessExpireDays
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentAccessExpireDays*
+  name: DocumentAccessExpireDays
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_DocumentAccessExpireDays_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentAccessExpireDays
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentAccessExpireDays
+  nameWithType: IEffectiveInformationRightsManagementSettings.DocumentAccessExpireDays
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentLibraryProtectionExpireDate
+  name: DocumentLibraryProtectionExpireDate
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_DocumentLibraryProtectionExpireDate
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentLibraryProtectionExpireDate
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentLibraryProtectionExpireDate
+  nameWithType: IEffectiveInformationRightsManagementSettings.DocumentLibraryProtectionExpireDate
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentLibraryProtectionExpireDate*
+  name: DocumentLibraryProtectionExpireDate
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_DocumentLibraryProtectionExpireDate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentLibraryProtectionExpireDate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.DocumentLibraryProtectionExpireDate
+  nameWithType: IEffectiveInformationRightsManagementSettings.DocumentLibraryProtectionExpireDate
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentAccessExpire
+  name: EnableDocumentAccessExpire
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_EnableDocumentAccessExpire
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentAccessExpire
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentAccessExpire
+  nameWithType: IEffectiveInformationRightsManagementSettings.EnableDocumentAccessExpire
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentAccessExpire*
+  name: EnableDocumentAccessExpire
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_EnableDocumentAccessExpire_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentAccessExpire
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentAccessExpire
+  nameWithType: IEffectiveInformationRightsManagementSettings.EnableDocumentAccessExpire
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentBrowserPublishingView
+  name: EnableDocumentBrowserPublishingView
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_EnableDocumentBrowserPublishingView
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentBrowserPublishingView
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentBrowserPublishingView
+  nameWithType: IEffectiveInformationRightsManagementSettings.EnableDocumentBrowserPublishingView
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentBrowserPublishingView*
+  name: EnableDocumentBrowserPublishingView
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_EnableDocumentBrowserPublishingView_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentBrowserPublishingView
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableDocumentBrowserPublishingView
+  nameWithType: IEffectiveInformationRightsManagementSettings.EnableDocumentBrowserPublishingView
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableGroupProtection
+  name: EnableGroupProtection
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_EnableGroupProtection
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableGroupProtection
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableGroupProtection
+  nameWithType: IEffectiveInformationRightsManagementSettings.EnableGroupProtection
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableGroupProtection*
+  name: EnableGroupProtection
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_EnableGroupProtection_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableGroupProtection
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableGroupProtection
+  nameWithType: IEffectiveInformationRightsManagementSettings.EnableGroupProtection
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableLicenseCacheExpire
+  name: EnableLicenseCacheExpire
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_EnableLicenseCacheExpire
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableLicenseCacheExpire
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableLicenseCacheExpire
+  nameWithType: IEffectiveInformationRightsManagementSettings.EnableLicenseCacheExpire
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableLicenseCacheExpire*
+  name: EnableLicenseCacheExpire
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_EnableLicenseCacheExpire_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableLicenseCacheExpire
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.EnableLicenseCacheExpire
+  nameWithType: IEffectiveInformationRightsManagementSettings.EnableLicenseCacheExpire
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.GroupName
+  name: GroupName
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_GroupName
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.GroupName
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.GroupName
+  nameWithType: IEffectiveInformationRightsManagementSettings.GroupName
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.GroupName*
+  name: GroupName
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_GroupName_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.GroupName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.GroupName
+  nameWithType: IEffectiveInformationRightsManagementSettings.GroupName
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.IrmEnabled
+  name: IrmEnabled
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_IrmEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.IrmEnabled
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.IrmEnabled
+  nameWithType: IEffectiveInformationRightsManagementSettings.IrmEnabled
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.IrmEnabled*
+  name: IrmEnabled
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_IrmEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.IrmEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.IrmEnabled
+  nameWithType: IEffectiveInformationRightsManagementSettings.IrmEnabled
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.LicenseCacheExpireDays
+  name: LicenseCacheExpireDays
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_LicenseCacheExpireDays
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.LicenseCacheExpireDays
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.LicenseCacheExpireDays
+  nameWithType: IEffectiveInformationRightsManagementSettings.LicenseCacheExpireDays
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.LicenseCacheExpireDays*
+  name: LicenseCacheExpireDays
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_LicenseCacheExpireDays_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.LicenseCacheExpireDays
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.LicenseCacheExpireDays
+  nameWithType: IEffectiveInformationRightsManagementSettings.LicenseCacheExpireDays
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyDescription
+  name: PolicyDescription
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_PolicyDescription
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyDescription
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyDescription
+  nameWithType: IEffectiveInformationRightsManagementSettings.PolicyDescription
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyDescription*
+  name: PolicyDescription
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_PolicyDescription_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyDescription
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyDescription
+  nameWithType: IEffectiveInformationRightsManagementSettings.PolicyDescription
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyTitle
+  name: PolicyTitle
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_PolicyTitle
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyTitle
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyTitle
+  nameWithType: IEffectiveInformationRightsManagementSettings.PolicyTitle
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyTitle*
+  name: PolicyTitle
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_PolicyTitle_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyTitle
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.PolicyTitle
+  nameWithType: IEffectiveInformationRightsManagementSettings.PolicyTitle
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.SettingSource
+  name: SettingSource
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_SettingSource
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.SettingSource
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.SettingSource
+  nameWithType: IEffectiveInformationRightsManagementSettings.SettingSource
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.SettingSource*
+  name: SettingSource
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_SettingSource_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.SettingSource
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.SettingSource
+  nameWithType: IEffectiveInformationRightsManagementSettings.SettingSource
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.TemplateId
+  name: TemplateId
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_TemplateId
+  commentId: P:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.TemplateId
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.TemplateId
+  nameWithType: IEffectiveInformationRightsManagementSettings.TemplateId
+- uid: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.TemplateId*
+  name: TemplateId
+  href: api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html#PnP_Core_Model_SharePoint_IEffectiveInformationRightsManagementSettings_TemplateId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.TemplateId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.TemplateId
+  nameWithType: IEffectiveInformationRightsManagementSettings.TemplateId
 - uid: PnP.Core.Model.SharePoint.IFeature
   name: IFeature
   href: api/PnP.Core.Model.SharePoint.IFeature.html
@@ -5939,6 +6172,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.CustomizedPageStatus
   nameWithType: IFile.CustomizedPageStatus
+- uid: PnP.Core.Model.SharePoint.IFile.EffectiveInformationRightsManagementSettings
+  name: EffectiveInformationRightsManagementSettings
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_EffectiveInformationRightsManagementSettings
+  commentId: P:PnP.Core.Model.SharePoint.IFile.EffectiveInformationRightsManagementSettings
+  fullName: PnP.Core.Model.SharePoint.IFile.EffectiveInformationRightsManagementSettings
+  nameWithType: IFile.EffectiveInformationRightsManagementSettings
+- uid: PnP.Core.Model.SharePoint.IFile.EffectiveInformationRightsManagementSettings*
+  name: EffectiveInformationRightsManagementSettings
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_EffectiveInformationRightsManagementSettings_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.EffectiveInformationRightsManagementSettings
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.EffectiveInformationRightsManagementSettings
+  nameWithType: IFile.EffectiveInformationRightsManagementSettings
 - uid: PnP.Core.Model.SharePoint.IFile.ETag
   name: ETag
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_ETag
@@ -5965,6 +6211,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.Exists
   nameWithType: IFile.Exists
+- uid: PnP.Core.Model.SharePoint.IFile.InformationRightsManagementSettings
+  name: InformationRightsManagementSettings
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_InformationRightsManagementSettings
+  commentId: P:PnP.Core.Model.SharePoint.IFile.InformationRightsManagementSettings
+  fullName: PnP.Core.Model.SharePoint.IFile.InformationRightsManagementSettings
+  nameWithType: IFile.InformationRightsManagementSettings
+- uid: PnP.Core.Model.SharePoint.IFile.InformationRightsManagementSettings*
+  name: InformationRightsManagementSettings
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_InformationRightsManagementSettings_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.InformationRightsManagementSettings
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.InformationRightsManagementSettings
+  nameWithType: IFile.InformationRightsManagementSettings
 - uid: PnP.Core.Model.SharePoint.IFile.IrmEnabled
   name: IrmEnabled
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_IrmEnabled
@@ -6146,6 +6405,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.PageRenderType
   nameWithType: IFile.PageRenderType
+- uid: PnP.Core.Model.SharePoint.IFile.Properties
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Properties
+  commentId: P:PnP.Core.Model.SharePoint.IFile.Properties
+  fullName: PnP.Core.Model.SharePoint.IFile.Properties
+  nameWithType: IFile.Properties
+- uid: PnP.Core.Model.SharePoint.IFile.Properties*
+  name: Properties
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Properties_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.Properties
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.Properties
+  nameWithType: IFile.Properties
 - uid: PnP.Core.Model.SharePoint.IFile.Publish(System.String)
   name: Publish(String)
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Publish_System_String_
@@ -6506,6 +6778,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.UnpublishBatchAsync
   nameWithType: IFile.UnpublishBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFile.VersionEvents
+  name: VersionEvents
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_VersionEvents
+  commentId: P:PnP.Core.Model.SharePoint.IFile.VersionEvents
+  fullName: PnP.Core.Model.SharePoint.IFile.VersionEvents
+  nameWithType: IFile.VersionEvents
+- uid: PnP.Core.Model.SharePoint.IFile.VersionEvents*
+  name: VersionEvents
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_VersionEvents_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.VersionEvents
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.VersionEvents
+  nameWithType: IFile.VersionEvents
+- uid: PnP.Core.Model.SharePoint.IFile.Versions
+  name: Versions
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Versions
+  commentId: P:PnP.Core.Model.SharePoint.IFile.Versions
+  fullName: PnP.Core.Model.SharePoint.IFile.Versions
+  nameWithType: IFile.Versions
+- uid: PnP.Core.Model.SharePoint.IFile.Versions*
+  name: Versions
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Versions_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.Versions
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.Versions
+  nameWithType: IFile.Versions
 - uid: PnP.Core.Model.SharePoint.IFile.WebId
   name: WebId
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_WebId
@@ -6551,6 +6849,148 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFileCollection.AddAsync
   nameWithType: IFileCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.IFileVersion
+  name: IFileVersion
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html
+  commentId: T:PnP.Core.Model.SharePoint.IFileVersion
+  fullName: PnP.Core.Model.SharePoint.IFileVersion
+  nameWithType: IFileVersion
+- uid: PnP.Core.Model.SharePoint.IFileVersion.CheckInComment
+  name: CheckInComment
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_CheckInComment
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.CheckInComment
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.CheckInComment
+  nameWithType: IFileVersion.CheckInComment
+- uid: PnP.Core.Model.SharePoint.IFileVersion.CheckInComment*
+  name: CheckInComment
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_CheckInComment_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.CheckInComment
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.CheckInComment
+  nameWithType: IFileVersion.CheckInComment
+- uid: PnP.Core.Model.SharePoint.IFileVersion.Created
+  name: Created
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_Created
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.Created
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.Created
+  nameWithType: IFileVersion.Created
+- uid: PnP.Core.Model.SharePoint.IFileVersion.Created*
+  name: Created
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_Created_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.Created
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.Created
+  nameWithType: IFileVersion.Created
+- uid: PnP.Core.Model.SharePoint.IFileVersion.ID
+  name: ID
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_ID
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.ID
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.ID
+  nameWithType: IFileVersion.ID
+- uid: PnP.Core.Model.SharePoint.IFileVersion.ID*
+  name: ID
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_ID_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.ID
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.ID
+  nameWithType: IFileVersion.ID
+- uid: PnP.Core.Model.SharePoint.IFileVersion.IsCurrentVersion
+  name: IsCurrentVersion
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_IsCurrentVersion
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.IsCurrentVersion
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.IsCurrentVersion
+  nameWithType: IFileVersion.IsCurrentVersion
+- uid: PnP.Core.Model.SharePoint.IFileVersion.IsCurrentVersion*
+  name: IsCurrentVersion
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_IsCurrentVersion_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.IsCurrentVersion
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.IsCurrentVersion
+  nameWithType: IFileVersion.IsCurrentVersion
+- uid: PnP.Core.Model.SharePoint.IFileVersion.Size
+  name: Size
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_Size
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.Size
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.Size
+  nameWithType: IFileVersion.Size
+- uid: PnP.Core.Model.SharePoint.IFileVersion.Size*
+  name: Size
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_Size_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.Size
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.Size
+  nameWithType: IFileVersion.Size
+- uid: PnP.Core.Model.SharePoint.IFileVersion.Url
+  name: Url
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_Url
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.Url
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.Url
+  nameWithType: IFileVersion.Url
+- uid: PnP.Core.Model.SharePoint.IFileVersion.Url*
+  name: Url
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_Url_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.Url
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.Url
+  nameWithType: IFileVersion.Url
+- uid: PnP.Core.Model.SharePoint.IFileVersion.VersionLabel
+  name: VersionLabel
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_VersionLabel
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.VersionLabel
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.VersionLabel
+  nameWithType: IFileVersion.VersionLabel
+- uid: PnP.Core.Model.SharePoint.IFileVersion.VersionLabel*
+  name: VersionLabel
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_VersionLabel_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.VersionLabel
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.VersionLabel
+  nameWithType: IFileVersion.VersionLabel
+- uid: PnP.Core.Model.SharePoint.IFileVersionEvent
+  name: IFileVersionEvent
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html
+  commentId: T:PnP.Core.Model.SharePoint.IFileVersionEvent
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEvent
+  nameWithType: IFileVersionEvent
+- uid: PnP.Core.Model.SharePoint.IFileVersionEvent.Editor
+  name: Editor
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html#PnP_Core_Model_SharePoint_IFileVersionEvent_Editor
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersionEvent.Editor
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.Editor
+  nameWithType: IFileVersionEvent.Editor
+- uid: PnP.Core.Model.SharePoint.IFileVersionEvent.Editor*
+  name: Editor
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html#PnP_Core_Model_SharePoint_IFileVersionEvent_Editor_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersionEvent.Editor
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.Editor
+  nameWithType: IFileVersionEvent.Editor
+- uid: PnP.Core.Model.SharePoint.IFileVersionEvent.EditorEmail
+  name: EditorEmail
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html#PnP_Core_Model_SharePoint_IFileVersionEvent_EditorEmail
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersionEvent.EditorEmail
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.EditorEmail
+  nameWithType: IFileVersionEvent.EditorEmail
+- uid: PnP.Core.Model.SharePoint.IFileVersionEvent.EditorEmail*
+  name: EditorEmail
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html#PnP_Core_Model_SharePoint_IFileVersionEvent_EditorEmail_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersionEvent.EditorEmail
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.EditorEmail
+  nameWithType: IFileVersionEvent.EditorEmail
+- uid: PnP.Core.Model.SharePoint.IFileVersionEvent.Time
+  name: Time
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html#PnP_Core_Model_SharePoint_IFileVersionEvent_Time
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersionEvent.Time
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.Time
+  nameWithType: IFileVersionEvent.Time
+- uid: PnP.Core.Model.SharePoint.IFileVersionEvent.Time*
+  name: Time
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html#PnP_Core_Model_SharePoint_IFileVersionEvent_Time_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersionEvent.Time
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.Time
+  nameWithType: IFileVersionEvent.Time
 - uid: PnP.Core.Model.SharePoint.IFolder
   name: IFolder
   href: api/PnP.Core.Model.SharePoint.IFolder.html
@@ -7027,6 +7467,207 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFolderCollection.AddBatchAsync
   nameWithType: IFolderCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings
+  name: IInformationRightsManagementFileSettings
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html
+  commentId: T:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings
+  nameWithType: IInformationRightsManagementFileSettings
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowPrint
+  name: AllowPrint
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_AllowPrint
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowPrint
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowPrint
+  nameWithType: IInformationRightsManagementFileSettings.AllowPrint
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowPrint*
+  name: AllowPrint
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_AllowPrint_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowPrint
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowPrint
+  nameWithType: IInformationRightsManagementFileSettings.AllowPrint
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowScript
+  name: AllowScript
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_AllowScript
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowScript
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowScript
+  nameWithType: IInformationRightsManagementFileSettings.AllowScript
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowScript*
+  name: AllowScript
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_AllowScript_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowScript
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowScript
+  nameWithType: IInformationRightsManagementFileSettings.AllowScript
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowWriteCopy
+  name: AllowWriteCopy
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_AllowWriteCopy
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowWriteCopy
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowWriteCopy
+  nameWithType: IInformationRightsManagementFileSettings.AllowWriteCopy
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowWriteCopy*
+  name: AllowWriteCopy
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_AllowWriteCopy_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowWriteCopy
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.AllowWriteCopy
+  nameWithType: IInformationRightsManagementFileSettings.AllowWriteCopy
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DisableDocumentBrowserView
+  name: DisableDocumentBrowserView
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_DisableDocumentBrowserView
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DisableDocumentBrowserView
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DisableDocumentBrowserView
+  nameWithType: IInformationRightsManagementFileSettings.DisableDocumentBrowserView
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DisableDocumentBrowserView*
+  name: DisableDocumentBrowserView
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_DisableDocumentBrowserView_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DisableDocumentBrowserView
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DisableDocumentBrowserView
+  nameWithType: IInformationRightsManagementFileSettings.DisableDocumentBrowserView
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DocumentAccessExpireDays
+  name: DocumentAccessExpireDays
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_DocumentAccessExpireDays
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DocumentAccessExpireDays
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DocumentAccessExpireDays
+  nameWithType: IInformationRightsManagementFileSettings.DocumentAccessExpireDays
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DocumentAccessExpireDays*
+  name: DocumentAccessExpireDays
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_DocumentAccessExpireDays_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DocumentAccessExpireDays
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.DocumentAccessExpireDays
+  nameWithType: IInformationRightsManagementFileSettings.DocumentAccessExpireDays
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentAccessExpire
+  name: EnableDocumentAccessExpire
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_EnableDocumentAccessExpire
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentAccessExpire
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentAccessExpire
+  nameWithType: IInformationRightsManagementFileSettings.EnableDocumentAccessExpire
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentAccessExpire*
+  name: EnableDocumentAccessExpire
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_EnableDocumentAccessExpire_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentAccessExpire
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentAccessExpire
+  nameWithType: IInformationRightsManagementFileSettings.EnableDocumentAccessExpire
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentBrowserPublishingView
+  name: EnableDocumentBrowserPublishingView
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_EnableDocumentBrowserPublishingView
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentBrowserPublishingView
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentBrowserPublishingView
+  nameWithType: IInformationRightsManagementFileSettings.EnableDocumentBrowserPublishingView
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentBrowserPublishingView*
+  name: EnableDocumentBrowserPublishingView
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_EnableDocumentBrowserPublishingView_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentBrowserPublishingView
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableDocumentBrowserPublishingView
+  nameWithType: IInformationRightsManagementFileSettings.EnableDocumentBrowserPublishingView
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableGroupProtection
+  name: EnableGroupProtection
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_EnableGroupProtection
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableGroupProtection
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableGroupProtection
+  nameWithType: IInformationRightsManagementFileSettings.EnableGroupProtection
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableGroupProtection*
+  name: EnableGroupProtection
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_EnableGroupProtection_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableGroupProtection
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableGroupProtection
+  nameWithType: IInformationRightsManagementFileSettings.EnableGroupProtection
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableLicenseCacheExpire
+  name: EnableLicenseCacheExpire
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_EnableLicenseCacheExpire
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableLicenseCacheExpire
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableLicenseCacheExpire
+  nameWithType: IInformationRightsManagementFileSettings.EnableLicenseCacheExpire
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableLicenseCacheExpire*
+  name: EnableLicenseCacheExpire
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_EnableLicenseCacheExpire_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableLicenseCacheExpire
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.EnableLicenseCacheExpire
+  nameWithType: IInformationRightsManagementFileSettings.EnableLicenseCacheExpire
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.GroupName
+  name: GroupName
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_GroupName
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.GroupName
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.GroupName
+  nameWithType: IInformationRightsManagementFileSettings.GroupName
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.GroupName*
+  name: GroupName
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_GroupName_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.GroupName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.GroupName
+  nameWithType: IInformationRightsManagementFileSettings.GroupName
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.IrmEnabled
+  name: IrmEnabled
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_IrmEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.IrmEnabled
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.IrmEnabled
+  nameWithType: IInformationRightsManagementFileSettings.IrmEnabled
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.IrmEnabled*
+  name: IrmEnabled
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_IrmEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.IrmEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.IrmEnabled
+  nameWithType: IInformationRightsManagementFileSettings.IrmEnabled
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.LicenseCacheExpireDays
+  name: LicenseCacheExpireDays
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_LicenseCacheExpireDays
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.LicenseCacheExpireDays
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.LicenseCacheExpireDays
+  nameWithType: IInformationRightsManagementFileSettings.LicenseCacheExpireDays
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.LicenseCacheExpireDays*
+  name: LicenseCacheExpireDays
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_LicenseCacheExpireDays_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.LicenseCacheExpireDays
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.LicenseCacheExpireDays
+  nameWithType: IInformationRightsManagementFileSettings.LicenseCacheExpireDays
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyDescription
+  name: PolicyDescription
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_PolicyDescription
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyDescription
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyDescription
+  nameWithType: IInformationRightsManagementFileSettings.PolicyDescription
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyDescription*
+  name: PolicyDescription
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_PolicyDescription_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyDescription
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyDescription
+  nameWithType: IInformationRightsManagementFileSettings.PolicyDescription
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyTitle
+  name: PolicyTitle
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_PolicyTitle
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyTitle
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyTitle
+  nameWithType: IInformationRightsManagementFileSettings.PolicyTitle
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyTitle*
+  name: PolicyTitle
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_PolicyTitle_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyTitle
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.PolicyTitle
+  nameWithType: IInformationRightsManagementFileSettings.PolicyTitle
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.TemplateId
+  name: TemplateId
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_TemplateId
+  commentId: P:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.TemplateId
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.TemplateId
+  nameWithType: IInformationRightsManagementFileSettings.TemplateId
+- uid: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.TemplateId*
+  name: TemplateId
+  href: api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html#PnP_Core_Model_SharePoint_IInformationRightsManagementFileSettings_TemplateId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.TemplateId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.TemplateId
+  nameWithType: IInformationRightsManagementFileSettings.TemplateId
 - uid: PnP.Core.Model.SharePoint.IList
   name: IList
   href: api/PnP.Core.Model.SharePoint.IList.html
@@ -9339,12 +9980,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.Folders
   nameWithType: IWeb.Folders
-- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String)
-  name: GetFileByServerRelativeUrl(String)
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrl_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String)
-  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String)
-  nameWithType: IWeb.GetFileByServerRelativeUrl(String)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetFileByServerRelativeUrl(String, Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrl_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetFileByServerRelativeUrl(String, Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IWeb.GetFileByServerRelativeUrl(String, Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IWeb.GetFileByServerRelativeUrl(String, Expression(Of Func(Of IFile, Object))())
 - uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl*
   name: GetFileByServerRelativeUrl
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrl_
@@ -9352,12 +9996,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl
   nameWithType: IWeb.GetFileByServerRelativeUrl
-- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlAsync(System.String)
-  name: GetFileByServerRelativeUrlAsync(String)
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlAsync_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlAsync(System.String)
-  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlAsync(System.String)
-  nameWithType: IWeb.GetFileByServerRelativeUrlAsync(String)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetFileByServerRelativeUrlAsync(String, Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetFileByServerRelativeUrlAsync(String, Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlAsync(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlAsync(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IWeb.GetFileByServerRelativeUrlAsync(String, Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IWeb.GetFileByServerRelativeUrlAsync(String, Expression(Of Func(Of IFile, Object))())
 - uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlAsync*
   name: GetFileByServerRelativeUrlAsync
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlAsync_
@@ -9365,18 +10012,24 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlAsync
   nameWithType: IWeb.GetFileByServerRelativeUrlAsync
-- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(PnP.Core.Services.Batch,System.String)
-  name: GetFileByServerRelativeUrlBatch(Batch, String)
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatch_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(PnP.Core.Services.Batch, System.String)
-  nameWithType: IWeb.GetFileByServerRelativeUrlBatch(Batch, String)
-- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(System.String)
-  name: GetFileByServerRelativeUrlBatch(String)
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(System.String)
-  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(System.String)
-  nameWithType: IWeb.GetFileByServerRelativeUrlBatch(String)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(PnP.Core.Services.Batch,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetFileByServerRelativeUrlBatch(Batch, String, Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatch_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(PnP.Core.Services.Batch,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetFileByServerRelativeUrlBatch(Batch, String, Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(PnP.Core.Services.Batch, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(PnP.Core.Services.Batch, System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IWeb.GetFileByServerRelativeUrlBatch(Batch, String, Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IWeb.GetFileByServerRelativeUrlBatch(Batch, String, Expression(Of Func(Of IFile, Object))())
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetFileByServerRelativeUrlBatch(String, Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetFileByServerRelativeUrlBatch(String, Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IWeb.GetFileByServerRelativeUrlBatch(String, Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IWeb.GetFileByServerRelativeUrlBatch(String, Expression(Of Func(Of IFile, Object))())
 - uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch*
   name: GetFileByServerRelativeUrlBatch
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatch_
@@ -9384,18 +10037,24 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatch
   nameWithType: IWeb.GetFileByServerRelativeUrlBatch
-- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch,System.String)
-  name: GetFileByServerRelativeUrlBatchAsync(Batch, String)
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatchAsync_PnP_Core_Services_Batch_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch,System.String)
-  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch, System.String)
-  nameWithType: IWeb.GetFileByServerRelativeUrlBatchAsync(Batch, String)
-- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(System.String)
-  name: GetFileByServerRelativeUrlBatchAsync(String)
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatchAsync_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(System.String)
-  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(System.String)
-  nameWithType: IWeb.GetFileByServerRelativeUrlBatchAsync(String)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetFileByServerRelativeUrlBatchAsync(Batch, String, Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatchAsync_PnP_Core_Services_Batch_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch,System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetFileByServerRelativeUrlBatchAsync(Batch, String, Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch, System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(PnP.Core.Services.Batch, System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IWeb.GetFileByServerRelativeUrlBatchAsync(Batch, String, Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IWeb.GetFileByServerRelativeUrlBatchAsync(Batch, String, Expression(Of Func(Of IFile, Object))())
+- uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetFileByServerRelativeUrlBatchAsync(String, Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatchAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetFileByServerRelativeUrlBatchAsync(String, Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IWeb.GetFileByServerRelativeUrlBatchAsync(String, Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IWeb.GetFileByServerRelativeUrlBatchAsync(String, Expression(Of Func(Of IFile, Object))())
 - uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrlBatchAsync*
   name: GetFileByServerRelativeUrlBatchAsync
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrlBatchAsync_
@@ -10884,6 +11543,36 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SearchScope.Tenant
   fullName: PnP.Core.Model.SharePoint.SearchScope.Tenant
   nameWithType: SearchScope.Tenant
+- uid: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource
+  name: SPEffectiveInformationRightsManagementSettingsSource
+  href: api/PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.html
+  commentId: T:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource
+  fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource
+  nameWithType: SPEffectiveInformationRightsManagementSettingsSource
+- uid: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.File
+  name: File
+  href: api/PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.html#PnP_Core_Model_SharePoint_SPEffectiveInformationRightsManagementSettingsSource_File
+  commentId: F:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.File
+  fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.File
+  nameWithType: SPEffectiveInformationRightsManagementSettingsSource.File
+- uid: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.List
+  name: List
+  href: api/PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.html#PnP_Core_Model_SharePoint_SPEffectiveInformationRightsManagementSettingsSource_List
+  commentId: F:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.List
+  fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.List
+  nameWithType: SPEffectiveInformationRightsManagementSettingsSource.List
+- uid: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.None
+  name: None
+  href: api/PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.html#PnP_Core_Model_SharePoint_SPEffectiveInformationRightsManagementSettingsSource_None
+  commentId: F:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.None
+  fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.None
+  nameWithType: SPEffectiveInformationRightsManagementSettingsSource.None
+- uid: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
+  name: Rule
+  href: api/PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.html#PnP_Core_Model_SharePoint_SPEffectiveInformationRightsManagementSettingsSource_Rule
+  commentId: F:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
+  fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
+  nameWithType: SPEffectiveInformationRightsManagementSettingsSource.Rule
 - uid: PnP.Core.Model.SharePoint.TermGroupScope
   name: TermGroupScope
   href: api/PnP.Core.Model.SharePoint.TermGroupScope.html
