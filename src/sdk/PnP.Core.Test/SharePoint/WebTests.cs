@@ -1,11 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using PnP.Core.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -54,7 +50,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetWebSiteUserInfoListTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 IWeb webWithSiteInfoUserList = await context.Web.GetAsync(p => p.SiteUserInfoList);
