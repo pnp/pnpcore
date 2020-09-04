@@ -220,46 +220,52 @@ namespace PnP.Core.Model.SharePoint
         /// Get a file in the current web from its server relative URL.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The file to get</returns>
-        public Task<IFile> GetFileByServerRelativeUrlAsync(string serverRelativeUrl);
+        public Task<IFile> GetFileByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
 
         /// <summary>
         /// Get a file in the current web from its server relative URL.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The file to get</returns>
-        public IFile GetFileByServerRelativeUrl(string serverRelativeUrl);
+        public IFile GetFileByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
         /// <summary>
         /// Get a file in the current web from its server relative URL via batch.
         /// </summary>
-        /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
         /// <param name="batch">Batch to add this request to</param>
+        /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The file to get</returns>
-        public Task<IFile> GetFileByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl);
+        public Task<IFile> GetFileByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
         /// <summary>
         /// Get a file in the current web from its server relative URL via batch.
         /// </summary>
-        /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
         /// <param name="batch">Batch to add this request to</param>
+        /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The file to get</returns>
-        public IFile GetFileByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl);
+        public IFile GetFileByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
         /// <summary>
         /// Get a file in the current web from its server relative URL via batch.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The file to get</returns>
-        public Task<IFile> GetFileByServerRelativeUrlBatchAsync(string serverRelativeUrl);
+        public Task<IFile> GetFileByServerRelativeUrlBatchAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
         /// <summary>
         /// Get a file in the current web from its server relative URL via batch.
         /// </summary>
         /// <param name="serverRelativeUrl">The server relative URL of the file to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
         /// <returns>The file to get</returns>
-        public IFile GetFileByServerRelativeUrlBatch(string serverRelativeUrl);
+        public IFile GetFileByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
         #endregion
 
