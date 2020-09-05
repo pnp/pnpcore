@@ -9876,6 +9876,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.AlternateCSS
   nameWithType: IWeb.AlternateCSS
+- uid: PnP.Core.Model.SharePoint.IWeb.AvailableContentTypes
+  name: AvailableContentTypes
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AvailableContentTypes
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AvailableContentTypes
+  fullName: PnP.Core.Model.SharePoint.IWeb.AvailableContentTypes
+  nameWithType: IWeb.AvailableContentTypes
+- uid: PnP.Core.Model.SharePoint.IWeb.AvailableContentTypes*
+  name: AvailableContentTypes
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AvailableContentTypes_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AvailableContentTypes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AvailableContentTypes
+  nameWithType: IWeb.AvailableContentTypes
+- uid: PnP.Core.Model.SharePoint.IWeb.AvailableFields
+  name: AvailableFields
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AvailableFields
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AvailableFields
+  fullName: PnP.Core.Model.SharePoint.IWeb.AvailableFields
+  nameWithType: IWeb.AvailableFields
+- uid: PnP.Core.Model.SharePoint.IWeb.AvailableFields*
+  name: AvailableFields
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AvailableFields_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AvailableFields
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AvailableFields
+  nameWithType: IWeb.AvailableFields
 - uid: PnP.Core.Model.SharePoint.IWeb.CommentsOnSitePagesDisabled
   name: CommentsOnSitePagesDisabled
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CommentsOnSitePagesDisabled
