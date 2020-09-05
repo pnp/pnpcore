@@ -43,7 +43,9 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(webWithRootFolder);
                 Assert.IsNotNull(webWithRootFolder.RootFolder);
                 Assert.AreEqual("", webWithRootFolder.RootFolder.Name);
-                Assert.IsTrue(context.Uri.EnsureTrailingSlash().ToString().ToLower().EndsWith(webWithRootFolder.RootFolder.ServerRelativeUrl));
+                // Don't do this check as context.Uri maps to the site configured in the developers setup while webWithRootFolder.RootFolder.ServerRelativeUrl maps to the site name used
+                // while generating the off line file
+                //Assert.IsTrue(context.Uri.EnsureTrailingSlash().ToString().ToLower().EndsWith(webWithRootFolder.RootFolder.ServerRelativeUrl));
                 Assert.AreEqual("SitePages/Home.aspx", webWithRootFolder.RootFolder.WelcomePage);
             }
         }
