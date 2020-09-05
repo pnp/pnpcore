@@ -1529,6 +1529,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IExpandoComplexType.AsDynamic
   nameWithType: IExpandoComplexType.AsDynamic
+- uid: PnP.Core.Model.IExpandoComplexType.Count
+  name: Count
+  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Count
+  commentId: P:PnP.Core.Model.IExpandoComplexType.Count
+  fullName: PnP.Core.Model.IExpandoComplexType.Count
+  nameWithType: IExpandoComplexType.Count
+- uid: PnP.Core.Model.IExpandoComplexType.Count*
+  name: Count
+  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Count_
+  commentId: Overload:PnP.Core.Model.IExpandoComplexType.Count
+  isSpec: "True"
+  fullName: PnP.Core.Model.IExpandoComplexType.Count
+  nameWithType: IExpandoComplexType.Count
 - uid: PnP.Core.Model.IExpandoComplexType.Item(System.String)
   name: Item[String]
   href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Item_System_String_
@@ -9837,6 +9850,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IWeb
   fullName: PnP.Core.Model.SharePoint.IWeb
   nameWithType: IWeb
+- uid: PnP.Core.Model.SharePoint.IWeb.AllProperties
+  name: AllProperties
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllProperties
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AllProperties
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllProperties
+  nameWithType: IWeb.AllProperties
+- uid: PnP.Core.Model.SharePoint.IWeb.AllProperties*
+  name: AllProperties
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllProperties_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AllProperties
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllProperties
+  nameWithType: IWeb.AllProperties
 - uid: PnP.Core.Model.SharePoint.IWeb.AlternateCSS
   name: AlternateCSS
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AlternateCSS
@@ -10274,6 +10300,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.RequestAccessEmail
   nameWithType: IWeb.RequestAccessEmail
+- uid: PnP.Core.Model.SharePoint.IWeb.RootFolder
+  name: RootFolder
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RootFolder
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.RootFolder
+  fullName: PnP.Core.Model.SharePoint.IWeb.RootFolder
+  nameWithType: IWeb.RootFolder
+- uid: PnP.Core.Model.SharePoint.IWeb.RootFolder*
+  name: RootFolder
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RootFolder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.RootFolder
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.RootFolder
+  nameWithType: IWeb.RootFolder
 - uid: PnP.Core.Model.SharePoint.IWeb.SearchBoxInNavBar
   name: SearchBoxInNavBar
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBoxInNavBar
@@ -10326,6 +10365,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.SiteLogo
   nameWithType: IWeb.SiteLogo
+- uid: PnP.Core.Model.SharePoint.IWeb.SiteUserInfoList
+  name: SiteUserInfoList
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteUserInfoList
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.SiteUserInfoList
+  fullName: PnP.Core.Model.SharePoint.IWeb.SiteUserInfoList
+  nameWithType: IWeb.SiteUserInfoList
+- uid: PnP.Core.Model.SharePoint.IWeb.SiteUserInfoList*
+  name: SiteUserInfoList
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteUserInfoList_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SiteUserInfoList
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SiteUserInfoList
+  nameWithType: IWeb.SiteUserInfoList
 - uid: PnP.Core.Model.SharePoint.IWeb.Title
   name: Title
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Title
@@ -16882,6 +16934,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Utilities.UrlUtility.EnsureAbsoluteUrl
   nameWithType: UrlUtility.EnsureAbsoluteUrl
+- uid: PnP.Core.Utilities.UrlUtility.EnsureTrailingSlash(System.String)
+  name: EnsureTrailingSlash(String)
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_EnsureTrailingSlash_System_String_
+  commentId: M:PnP.Core.Utilities.UrlUtility.EnsureTrailingSlash(System.String)
+  fullName: PnP.Core.Utilities.UrlUtility.EnsureTrailingSlash(System.String)
+  nameWithType: UrlUtility.EnsureTrailingSlash(String)
+- uid: PnP.Core.Utilities.UrlUtility.EnsureTrailingSlash(System.Uri)
+  name: EnsureTrailingSlash(Uri)
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_EnsureTrailingSlash_System_Uri_
+  commentId: M:PnP.Core.Utilities.UrlUtility.EnsureTrailingSlash(System.Uri)
+  fullName: PnP.Core.Utilities.UrlUtility.EnsureTrailingSlash(System.Uri)
+  nameWithType: UrlUtility.EnsureTrailingSlash(Uri)
+- uid: PnP.Core.Utilities.UrlUtility.EnsureTrailingSlash*
+  name: EnsureTrailingSlash
+  href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_EnsureTrailingSlash_
+  commentId: Overload:PnP.Core.Utilities.UrlUtility.EnsureTrailingSlash
+  isSpec: "True"
+  fullName: PnP.Core.Utilities.UrlUtility.EnsureTrailingSlash
+  nameWithType: UrlUtility.EnsureTrailingSlash
 - uid: PnP.Core.Utilities.UrlUtility.IsSameSite(System.Uri,System.String)
   name: IsSameSite(Uri, String)
   href: api/PnP.Core.Utilities.UrlUtility.html#PnP_Core_Utilities_UrlUtility_IsSameSite_System_Uri_System_String_
