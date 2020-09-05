@@ -361,6 +361,6 @@ namespace PnP.Core.Model
                     return false;
                 }
             }
-        }        
+        }
     }
 }

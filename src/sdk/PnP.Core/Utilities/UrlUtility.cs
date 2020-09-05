@@ -126,6 +126,32 @@ namespace PnP.Core.Utilities
             return resourceAbsoluteUrl.ToLower().StartsWith(webUrl.ToString().ToLower());
         }
 
+
+        /// <summary>
+        /// Ensures that there is a trailing slash at the end of the URL.
+        /// </summary>
+        /// <param name="urlToProcess">The URL to ensure to have a trailing slash.</param>
+        /// <returns>The ensured trailing slash URL.</returns>
+        public static string EnsureTrailingSlash(string urlToProcess)
+        {
+            if (null != urlToProcess && !urlToProcess.EndsWith("/"))
+            {
+                return urlToProcess + "/";
+            }
+
+            return urlToProcess;
+        }
+
+        /// <summary>
+        /// Ensures that there is a trailing slash at the end of the URL.
+        /// </summary>
+        /// <param name="uri">The URL to ensure to have a trailing slash.</param>
+        /// <returns>The ensured trailing slash URI.</returns>
+        public static Uri EnsureTrailingSlash(this Uri uri)
+        {
+            return new Uri(EnsureTrailingSlash(uri?.ToString()));
+        }
+
         #region NOT USED NOW
         // NOT Used for now, not covered by unit tests
         //const string INVALID_CHARS_REGEX = @"[\\#%*/:<>?+|\""]";
@@ -158,22 +184,6 @@ namespace PnP.Core.Utilities
         //        url = string.Concat(path, startChar, queryString.TrimStart('?'));
         //    }
         //    return url;
-        //}
-
-
-        ///// <summary>
-        ///// Ensures that there is a trailing slash at the end of the URL
-        ///// </summary>
-        ///// <param name="urlToProcess"></param>
-        ///// <returns></returns>
-        //public static string EnsureTrailingSlash(string urlToProcess)
-        //{
-        //    if (null != urlToProcess && !urlToProcess.EndsWith("/"))
-        //    {
-        //        return urlToProcess + "/";
-        //    }
-
-        //    return urlToProcess;
         //}
 
         ///// <summary>
