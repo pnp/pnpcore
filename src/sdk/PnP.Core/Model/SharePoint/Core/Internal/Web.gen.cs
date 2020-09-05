@@ -83,19 +83,19 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        //[SharePointProperty("AvailableFields", Expandable = true)]
-        //public IFieldCollection AvailableFields
-        //{
-        //    get
-        //    {
-        //        if (!HasValue(nameof(Fields)))
-        //        {
-        //            var fields = new FieldCollection(this.PnPContext, this, nameof(AvailableFields));
-        //            SetValue(fields);
-        //        }
-        //        return GetValue<IFieldCollection>();
-        //    }
-        //}
+        [SharePointProperty("AvailableFields", Expandable = true)]
+        public IFieldCollection AvailableFields
+        {
+            get
+            {
+                if (!HasValue(nameof(AvailableFields)))
+                {
+                    var fields = new FieldCollection(this.PnPContext, this, nameof(AvailableFields));
+                    SetValue(fields);
+                }
+                return GetValue<IFieldCollection>();
+            }
+        }
 
         [SharePointProperty("Lists", Expandable = true)]
         // Graph currently is not returning all lists, this option can only be used once that's fixed
@@ -127,19 +127,19 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        //[SharePointProperty("AvailableContentTypes", Expandable = true)]
-        //public IContentTypeCollection AvailableContentTypes
-        //{
-        //    get
-        //    {
-        //        if (!HasValue(nameof(ContentTypes)))
-        //        {
-        //            var contentTypes = new ContentTypeCollection(this.PnPContext, this, nameof(AvailableContentTypes));
-        //            SetValue(contentTypes);
-        //        }
-        //        return GetValue<IContentTypeCollection>();
-        //    }
-        //}
+        [SharePointProperty("AvailableContentTypes", Expandable = true)]
+        public IContentTypeCollection AvailableContentTypes
+        {
+            get
+            {
+                if (!HasValue(nameof(AvailableContentTypes)))
+                {
+                    var contentTypes = new ContentTypeCollection(this.PnPContext, this, nameof(AvailableContentTypes));
+                    SetValue(contentTypes);
+                }
+                return GetValue<IContentTypeCollection>();
+            }
+        }
 
         [SharePointProperty("Webs", Expandable = true)]
         public IWebCollection Webs

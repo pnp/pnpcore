@@ -162,15 +162,15 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IPropertyValues AllProperties { get; }
 
-        ///// <summary>
-        ///// Gets the collection of all content types that apply to the current scope, including those of the current Web site, as well as any parent Web sites.
-        ///// </summary>
-        //public IContentTypeCollection AvailableContentTypes { get; }
+        /// <summary>
+        /// Gets the collection of all content types that apply to the current scope, including those of the current Web site, as well as any parent Web sites.
+        /// </summary>
+        public IContentTypeCollection AvailableContentTypes { get; }
 
-        ///// <summary>
-        ///// Gets a value that specifies the collection of all fields available for the current scope, including those of the current site, as well as any parent sites.
-        ///// </summary>
-        //public IFieldCollection AvailableFields { get; }
+        /// <summary>
+        /// Gets a value that specifies the collection of all fields available for the current scope, including those of the current site, as well as any parent sites.
+        /// </summary>
+        public IFieldCollection AvailableFields { get; }
 
         /// <summary>
         /// Gets the root folder for the website.

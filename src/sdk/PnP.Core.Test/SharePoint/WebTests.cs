@@ -2,6 +2,7 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using PnP.Core.Utilities;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -60,5 +61,34 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("User Information List", webWithSiteInfoUserList.SiteUserInfoList.Title);
             }
         }
+
+        [TestMethod]
+        public async Task GetWebAvailableContentTypesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.AvailableContentTypes);
+
+                Assert.IsNotNull(web);
+                Assert.IsTrue(web.AvailableContentTypes.Requested);
+                Assert.IsTrue(web.AvailableContentTypes.Length > 0);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebAvailableFieldsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.AvailableFields);
+
+                Assert.IsNotNull(web);
+                Assert.IsTrue(web.AvailableFields.Requested);
+                Assert.IsTrue(web.AvailableFields.Length > 0);
+            }
+        }
+
     }
 }
