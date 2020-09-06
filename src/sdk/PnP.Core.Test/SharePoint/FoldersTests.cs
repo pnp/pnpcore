@@ -32,6 +32,22 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetWebFolderDetailsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                Assert.IsNotNull(folder);
+                Assert.IsTrue(folder.Exists);
+                Assert.IsFalse(folder.IsWOPIEnabled);
+                Assert.IsNull(folder.ProgID); //Ok this is a bit of a bad test
+                Assert.AreNotEqual(DateTime.MinValue, folder.TimeCreated);
+                Assert.AreNotEqual(DateTime.MinValue, folder.TimeLastModified);
+            }
+        }
+
+        [TestMethod]
         public async Task GetFolderByServerRelativeUrlTest()
         {
             //TestCommon.Instance.Mocking = false;
