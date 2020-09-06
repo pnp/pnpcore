@@ -183,10 +183,12 @@ namespace PnP.Core.Test.SharePoint
             await CleanupMockFolderFromSharedDocuments(2, "TEST_QUERY");
         }
 
+        #region Folder Tests
+
         [TestMethod]
-        public async Task AddListFolderTest()
+        public async Task AddListFolderAsyncTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
@@ -202,6 +204,116 @@ namespace PnP.Core.Test.SharePoint
                 await newFolder.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task AddListFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
+                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
+
+                // This works
+                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder newFolder = parentFolder.Folders.Add("TEST");
+
+                // Test the created object
+                Assert.IsNotNull(newFolder);
+
+                await newFolder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFolderBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
+                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
+
+                // This works
+                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder newFolder = await parentFolder.Folders.AddBatchAsync("TEST");
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(newFolder);
+
+                await newFolder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFolderBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
+                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
+
+                // This works
+                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder newFolder = parentFolder.Folders.AddBatch("TEST");
+                await context.ExecuteAsync();
+
+                // Test the created object
+                Assert.IsNotNull(newFolder);
+
+                await newFolder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFolderSpecificBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
+                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
+
+                var newBatch = context.NewBatch();
+
+                // This works
+                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder newFolder = await parentFolder.Folders.AddBatchAsync(newBatch, "TEST");
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(newFolder);
+
+                await newFolder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFolderSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
+                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
+
+                var newBatch = context.NewBatch();
+
+                // This works
+                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder newFolder = parentFolder.Folders.AddBatch(newBatch, "TEST");
+                await context.ExecuteAsync(newBatch);
+
+                // Test the created object
+                Assert.IsNotNull(newFolder);
+
+                await newFolder.DeleteAsync();
+            }
+        }
+
+        #endregion
 
         [TestMethod]
         public async Task AddListSubFolderTest()
