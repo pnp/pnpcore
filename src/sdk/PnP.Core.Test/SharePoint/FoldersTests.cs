@@ -676,7 +676,7 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task MoveFolderWithoutOptionTest()
+        public async Task MoveFolderWithoutOptionAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
 
@@ -698,7 +698,29 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task MoveFolderBatchWithoutOptionTest()
+        public async Task MoveFolderWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToMove = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVED_FOLDER_NO_OPTIONS";
+                folderToMove.MoveTo(destinationServerRelativeUrl);
+
+                IFolder foundMovedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundMovedFolder);
+                Assert.AreEqual("TEST_MOVED_FOLDER_NO_OPTIONS", foundMovedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_MOVED_FOLDER_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task MoveFolderBatchAsyncWithoutOptionTest()
         {
             //TestCommon.Instance.Mocking = false;
 
@@ -711,6 +733,77 @@ namespace PnP.Core.Test.SharePoint
                 string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVED_FOLDER_BATCH_NO_OPTIONS";
                 await folderToMove.MoveToBatchAsync(destinationServerRelativeUrl);
                 await context.ExecuteAsync();
+
+                IFolder foundMovedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundMovedFolder);
+                Assert.AreEqual("TEST_MOVED_FOLDER_BATCH_NO_OPTIONS", foundMovedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_MOVED_FOLDER_BATCH_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task MoveFolderBatchWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_BATCH_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToMove = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVED_FOLDER_BATCH_NO_OPTIONS";
+                folderToMove.MoveToBatch(destinationServerRelativeUrl);
+                await context.ExecuteAsync();
+
+                IFolder foundMovedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundMovedFolder);
+                Assert.AreEqual("TEST_MOVED_FOLDER_BATCH_NO_OPTIONS", foundMovedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_MOVED_FOLDER_BATCH_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task MoveFolderSpecificBatchAsyncWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_BATCH_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToMove = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+                var newBatch = context.NewBatch();
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVED_FOLDER_BATCH_NO_OPTIONS";
+                await folderToMove.MoveToBatchAsync(newBatch,destinationServerRelativeUrl);
+                await context.ExecuteAsync(newBatch);
+
+                IFolder foundMovedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundMovedFolder);
+                Assert.AreEqual("TEST_MOVED_FOLDER_BATCH_NO_OPTIONS", foundMovedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_MOVED_FOLDER_BATCH_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task MoveFolderSpecificBatchAWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_MOVE_BATCH_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToMove = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+                var newBatch = context.NewBatch();
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVED_FOLDER_BATCH_NO_OPTIONS";
+                folderToMove.MoveToBatch(newBatch, destinationServerRelativeUrl);
+                await context.ExecuteAsync(newBatch);
 
                 IFolder foundMovedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
                 Assert.IsNotNull(foundMovedFolder);
