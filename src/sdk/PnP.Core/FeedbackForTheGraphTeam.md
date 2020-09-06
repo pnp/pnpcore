@@ -1,14 +1,49 @@
 ﻿
 # SharePoint
 
-- Loading lists of a web is returning a subset of the lists being returned when using REST ==> this makes it hard to use Graph as our users are agnostic of what API is being called, but they expect the same results in all cases
+- Loading lists of a web is returning a subset of the lists being returned when using REST:
+	- You cannot retrieve the "system" libraries (like "Site Pages", "Form Templates", "Site Assets", and "Style Library") via /lists GET query
+	- This makes it hard to use Graph as our users are agnostic of what API is being called, but they expect the same results in all cases
 - GroupID property is not returned when loading a SharePoint Site ==> we need GroupId to be able to load the Team linked to this site (if there's one)
 - It looks like it is not possible to filter items in lists and libraries by ContentType
 - It is not possible to load subwebs of a site via Graph
-- You cannot retrieve the "system" libraries (like "Site Pages", "Form Templates", "Site Assets", and "Style Library") via /lists GET query
 - The OData querystring parameters (accordingly to https://docs.microsoft.com/en-us/graph/query-parameters) should be with $ on v1. However, if we apply $select, $filter, $expand to SPO resources, they work if and only if we remove $
 - When you query for list items with filters against non-indexed fields you need to provide a custom HTTP header (Prefer: HonorNonIndexedQueriesWarningMayFailRandomly)
 - The fields/* construct is a bit weird from a developer point of view
+
+## SharePoint Graph details
+
+### Number of lists being returned
+
+Graph call: https://graph.microsoft.com/v1.0/sites/{webid}/lists returns 3 lists:
+- Documents (template documentLibrary)
+- Content type publishing error log (template genericList, hidden)
+- 19:9f4c089b2a87472ebd357031a7c11be9@thread.tacv2_wiki (template genericList, hidden) ==> due to Teams backend
+
+REST call: _api/web/Lists returns 19 lists:
+- Documents (Shared%20Documents)
+- Site Assets (SiteAssets)
+- Site Pages (SitePages)
+- Style Library (Style%20Library)
+- Form Templates (FormServerTemplates)
+- TaxonomyHiddenList (Lists/TaxonomyHiddenList, hidden)
+- Converted Forms (IWConvertedForms, hidden)
+- Content type publishing error log (Lists/ContentTypeSyncLog, hidden)
+- 19:9f4c089b2a87472ebd357031a7c11be9@thread.tacv2_wiki (Lists/199f4c089b2a87472ebd357031a7c11be9threadtacv2_wiki, hidden) ==> due to Teams backend
+- Master Page Gallery (_catalogs/masterpage, hidden)
+- Maintenance Log Library (_catalogs/MaintenanceLogs, hidden)
+- List Template Gallery (_catalogs/lt, hidden)
+- Solutions (_catalogs/solutions, hidden)
+- Theme Gallery (_catalogs/theme, hidden)
+- Composed Looks (_catalogs/design, hidden)
+- Web Part Gallery (_catalogs/wp, hidden)
+- AppFiles (_catalogs/appfiles, hidden)
+- AppData (_catalogs/appdata, hidden)
+- User Information List (_catalogs/users, hidden)
+
+
+FIX: request the system facet to retrieve all lists: https://graph.microsoft.com/v1.0/sites/{webid}/lists?$select=system,field1,field2,...
+
 
 # Teams
 

@@ -57,14 +57,7 @@ namespace PnP.Core.Services
                     // there's either a collection object inbetween (e.g. ListItem --> ListItemCollection --> List), so take the parent of the parent
                     // or
                     // the parent is model class itself (e.g. Web --> Site.RootWeb)
-
-                    var parent = (pnpObject as IDataModelParent).Parent;
-
-                    if (parent is IManageableCollection)
-                    {
-                        // Parent is a collection, so jump one level up
-                        parent = (pnpObject as IDataModelParent).Parent.Parent;
-                    }
+                    IDataModelParent parent = GetParentDataModel(pnpObject);
 
                     // Ensure the parent object
                     if (parent != null)
@@ -96,14 +89,7 @@ namespace PnP.Core.Services
                     // there's either a collection object inbetween (e.g. TeamChannel --> TeamChannelCollection --> Team), so take the parent of the parent
                     // or
                     // the parent is model class itself (e.g. TeamChannel --> Team.PrimaryChannel)
-
-                    var parent = (pnpObject as IDataModelParent).Parent;
-
-                    if (parent is IManageableCollection)
-                    {
-                        // Parent is a collection, so jump one level up
-                        parent = (pnpObject as IDataModelParent).Parent.Parent;
-                    }
+                    IDataModelParent parent = GetParentDataModel(pnpObject);
 
                     // Ensure the parent object
                     if (parent != null)
@@ -187,6 +173,19 @@ namespace PnP.Core.Services
             }
 
             return result;
+        }
+
+        internal static IDataModelParent GetParentDataModel(IMetadataExtensible pnpObject)
+        {
+            var parent = (pnpObject as IDataModelParent).Parent;
+
+            if (parent is IManageableCollection)
+            {
+                // Parent is a collection, so jump one level up
+                parent = (pnpObject as IDataModelParent).Parent.Parent;
+            }
+
+            return parent;
         }
 
         internal static List<string> UnresolvedTokens(string tokenizedValue)

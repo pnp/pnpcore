@@ -1,5 +1,6 @@
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -130,62 +131,54 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IListItem ListItemAllFields { get; }
 
-        /*
-        //TODO: To implement...
         /// <summary>
-        /// Gets a value that specifies the user who added the file.
-        /// </summary>
-        public IUser Author { get; }
-
-        //TODO: To implement...
-        /// <summary>
-        /// Gets a value that returns the user who has checked out the file.
-        /// </summary>
-        public IUser CheckedOutByUser { get; }
-
-        //TODO: To implement...
-        /// <summary>
-        /// To update...
+        /// Gets the Information Rights Management settings of the file.
         /// </summary>
         public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings { get; }
 
-        //TODO: To implement...
         /// <summary>
-        /// To update...
+        /// Gets the Information Rights Management settings of the file.
         /// </summary>
         public IInformationRightsManagementFileSettings InformationRightsManagementSettings { get; }
 
-
-        //TODO: To implement...
         /// <summary>
-        /// To update...
-        /// </summary>
-        public IUser LockedByUser { get; }
-
-        //TODO: To implement...
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IUser ModifiedBy { get; }
-
-        //TODO: To implement...
-        /// <summary>
-        /// To update...
+        /// Gets the properties of the file.
         /// </summary>
         public IPropertyValues Properties { get; }
 
-        //TODO: To implement...
         /// <summary>
-        /// To update...
+        /// Gets a value that returns a collection of file version event objects that represent the version events of the file.
         /// </summary>
-        public IFileVersionEventCollection VersionEvents { get; }
+        public List<IFileVersionEvent> VersionEvents { get; }
 
-        //TODO: To implement...
         /// <summary>
-        /// To update...
+        /// Gets a value that returns a collection of file version objects that represent the versions of the file.
         /// </summary>
-        public IFileVersionCollection Versions { get; }
-        */
+        public List<IFileVersion> Versions { get; }
+
+        ////TODO: To implement...
+        ///// <summary>
+        ///// Gets a value that specifies the user who added the file.
+        ///// </summary>
+        //public IUser Author { get; }
+
+        ////TODO: To implement...
+        ///// <summary>
+        ///// Gets a value that returns the user who has checked out the file.
+        ///// </summary>
+        //public IUser CheckedOutByUser { get; }
+
+        ////TODO: To implement...
+        ///// <summary>
+        ///// To update...
+        ///// </summary>
+        //public IUser LockedByUser { get; }
+
+        ////TODO: To implement...
+        ///// <summary>
+        ///// To update...
+        ///// </summary>
+        //public IUser ModifiedBy { get; }
 
         #region Publish
         /// <summary>
@@ -343,7 +336,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="comment">The check in comment.</param>
         /// <param name="checkinType">The type of check in to use.</param>
         /// </summary>
-        Task CheckinAsync(string comment=null, CheckinType checkinType = CheckinType.MinorCheckIn);
+        Task CheckinAsync(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn);
 
         /// <summary>
         /// Checks in the file.
@@ -387,92 +380,104 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Copies a file to the destination URL.
         /// </summary>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
-        Task CopyToAsync(string destinationServerRelativeUrl, bool overwrite=false);
+        /// <param name="options">Options of the copy operation.</param>
+        Task CopyToAsync(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null);
 
         /// <summary>
         /// Copies a file to the destination URL.
         /// </summary>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
-        void CopyTo(string destinationServerRelativeUrl, bool overwrite=false);
+        /// <param name="options">Options of the copy operation.</param>
+        void CopyTo(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null);
 
         /// <summary>
         /// Copies a file to the destination URL.
         /// </summary>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination  URL including file name.</param>
         /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
-        Task CopyToBatchAsync(string destinationServerRelativeUrl, bool overwrite=false);
+        /// <param name="options">Options of the copy operation.</param>
+        Task CopyToBatchAsync(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null);
 
         /// <summary>
         /// Copies a file to the destination URL.
         /// </summary>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
-        void CopyToBatch(string destinationServerRelativeUrl, bool overwrite=false);
+        /// <param name="options">Options of the copy operation.</param>
+        void CopyToBatch(string destinationUrl, bool overwrite = false, MoveCopyOptions options = null);
 
         /// <summary>
         /// Copies a file to the destination URL.
         /// </summary>
         /// <param name="batch">The batch instance to use.</param>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
-        Task CopyToBatchAsync(Batch batch, string destinationServerRelativeUrl, bool overwrite = false);
+        Task CopyToBatchAsync(Batch batch, string destinationUrl, bool overwrite = false, MoveCopyOptions options = null);
 
         /// <summary>
         /// Copies a file to the destination URL.
         /// </summary>
         /// <param name="batch">The batch instance to use.</param>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
-        void CopyToBatch(Batch batch, string destinationServerRelativeUrl, bool overwrite = false);
+        /// <param name="options">Options of the copy operation.</param>
+        void CopyToBatch(Batch batch, string destinationUrl, bool overwrite = false, MoveCopyOptions options = null);
+
         #endregion
 
         #region MoveTo
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
-        Task MoveToAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+        /// <param name="options">Options of the move operation.</param>
+        Task MoveToAsync(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null);
 
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
-        void MoveTo(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+        /// <param name="options">Options of the move operation.</param>
+        void MoveTo(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null);
 
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
-        Task MoveToBatchAsync(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+        /// <param name="options">Options of the move operation.</param>
+        Task MoveToBatchAsync(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null);
 
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
-        void MoveToBatch(string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+        /// <param name="options">Options of the move operation.</param>
+        void MoveToBatch(string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null);
 
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
         /// <param name="batch">The batch instance to use.</param>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
-        Task MoveToBatchAsync(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+        /// <param name="options">Options of the move operation.</param>
+        Task MoveToBatchAsync(Batch batch, string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null);
 
         /// <summary>
         /// Move a file to the destination URL.
         /// </summary>
         /// <param name="batch">The batch instance to use.</param>
-        /// <param name="destinationServerRelativeUrl">The destination server relative URL including file name.</param>
+        /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="moveOperations">combinable flags to indicate the type of move operations.</param>
-        void MoveToBatch(Batch batch, string destinationServerRelativeUrl, MoveOperations moveOperations = MoveOperations.None);
+        /// <param name="options">Options of the move operation.</param>
+        void MoveToBatch(Batch batch, string destinationUrl, MoveOperations moveOperations = MoveOperations.None, MoveCopyOptions options = null);
         #endregion
 
         #region Recycle

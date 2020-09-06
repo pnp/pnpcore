@@ -1,0 +1,9 @@
+--batchresponse_ea156586-cfda-4cfd-92b0-6896972c8c1f
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"MoveTo":null}}
+--batchresponse_ea156586-cfda-4cfd-92b0-6896972c8c1f--

@@ -1028,6 +1028,13 @@ namespace PnP.Core.Model
         /// <param name="postMappingJson">Delegate for post mapping</param>
         internal async virtual Task BaseBatchAddAsync(Batch batch, ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
+            var parent = TokenHandler.GetParentDataModel(this);
+            
+            if (parent is IRequestable && !(parent as IRequestable).Requested && batch.Requests.Count > 0)
+            {
+                throw new ClientException(ErrorType.UnsupportedViaBatch, "You cannot do a batch add of a model to a modelcollection that was not yet requested. Common reasons are adding an item and using that same item in a single batch");
+            }
+
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
 

@@ -1,4 +1,4 @@
---batchresponse_4590bb9b-7adf-4ffc-9e45-65fce27c1030
+--batchresponse_06ebd66c-e223-4c1f-84f6-ab81bd275bb7
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"CheckOut":null}}
---batchresponse_4590bb9b-7adf-4ffc-9e45-65fce27c1030--
+--batchresponse_06ebd66c-e223-4c1f-84f6-ab81bd275bb7--
