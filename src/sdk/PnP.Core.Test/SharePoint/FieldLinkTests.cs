@@ -74,7 +74,7 @@ namespace PnP.Core.Test.SharePoint
             // It ONLY works with Site Columns already present in the parent content content type or  with list columns if they are already added to the list
             // TODO: Probably worthy to recommend not using this endpoint for adding fieldlinks... What alternative ?
 
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new test content type
@@ -90,6 +90,48 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247"), newFieldLink.Id);
 
                 await newContentType.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddSiteContentTypeFieldLinkAsyncExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new test content type
+                IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968A", "TEST ADD ASYNC", "TESTING", "TESTING");
+                Assert.IsNotNull(newContentType);
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    // Add a new field link between newContentType and Title
+                    IFieldLink newFieldLink = await newContentType.FieldLinks.AddAsync(null, "My Title");
+
+                });
+                
+                await newContentType.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddSiteContentTypeFieldLinkBatchAsyncExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new test content type
+                IContentType newContentType = await context.Web.ContentTypes.AddBatchAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968A", "TEST ADD ASYNC", "TESTING", "TESTING");
+                Assert.IsNotNull(newContentType);
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    // Add a new field link between newContentType and Title
+                    IFieldLink newFieldLink = await newContentType.FieldLinks.AddBatchAsync(string.Empty, "My Title");
+
+                    await context.ExecuteAsync();
+
+                });
             }
         }
 
@@ -118,7 +160,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddSiteContentTypeFieldLinkBatchAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new test content type
