@@ -36,6 +36,48 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ContentTypesGetPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.ContentTypes);
+                Assert.IsTrue(web.ContentTypes.Count() > 0);
+
+                IContentType contentType = web.ContentTypes.FirstOrDefault(p => p.Name == "Item");
+                // Test a string property
+                Assert.AreEqual(contentType.Name, "Item");
+
+                //ClientFormCustomFormatter
+                Assert.IsTrue(string.IsNullOrEmpty(contentType.ClientFormCustomFormatter));
+                Assert.AreEqual(contentType.Description, "Create a new list item.");
+                Assert.AreEqual(contentType.DisplayFormTemplateName, "ListForm");
+                Assert.AreEqual(contentType.DisplayFormUrl, "");
+                Assert.AreEqual(contentType.DocumentTemplate, "");
+                Assert.AreEqual(contentType.DocumentTemplateUrl, "");
+                Assert.AreEqual(contentType.EditFormTemplateName, "ListForm");
+                Assert.IsTrue(string.IsNullOrEmpty(contentType.EditFormUrl));
+                Assert.AreEqual(contentType.Group, "List Content Types");
+                Assert.AreEqual(contentType.Hidden, false);
+                Assert.AreEqual(contentType.JSLink, "");
+                Assert.AreEqual(contentType.MobileDisplayFormUrl, "");
+                Assert.AreEqual(contentType.MobileEditFormUrl, "");
+                Assert.AreEqual(contentType.MobileNewFormUrl, "");
+                Assert.AreEqual(contentType.Name, "Item");
+                Assert.AreEqual(contentType.NewFormTemplateName, "ListForm");
+                Assert.AreEqual(contentType.NewFormUrl, "");
+                Assert.AreEqual(contentType.ReadOnly,false);
+                Assert.IsTrue(!string.IsNullOrEmpty(contentType.SchemaXml));
+                Assert.AreEqual(contentType.Scope, "/sites/pnpcoresdktestgroup");
+                Assert.AreEqual(contentType.Sealed, false);
+                Assert.AreEqual(contentType.StringId, "0x01");
+                
+                // Test a boolean property
+                Assert.IsFalse(contentType.Hidden);
+            }
+        }
+
+        [TestMethod]
         public async Task ContentTypesOnListGetTest()
         {
             //TestCommon.Instance.Mocking = false;
