@@ -381,7 +381,7 @@ namespace PnP.Core.Test.SharePoint
 
 
         [TestMethod]
-        public async Task CopyFolderWithoutOptionTest()
+        public async Task CopyFolderWithoutOptionAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
 
@@ -404,7 +404,30 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task CopyFolderBatchWithoutOptionTest()
+        public async Task CopyFolderWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_COPY_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToCopy = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_COPIED_NO_OPTIONS";
+                folderToCopy.CopyTo(destinationServerRelativeUrl);
+
+                IFolder foundCopiedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundCopiedFolder);
+                Assert.AreEqual("TEST_COPIED_NO_OPTIONS", foundCopiedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPY_NO_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPIED_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task CopyFolderBatchWithoutOptionAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
 
@@ -417,6 +440,55 @@ namespace PnP.Core.Test.SharePoint
                 string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_COPIED_BATCH_NO_OPTIONS";
                 await folderToCopy.CopyToBatchAsync(destinationServerRelativeUrl);
                 await context.ExecuteAsync();
+
+                IFolder foundCopiedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundCopiedFolder);
+                Assert.AreEqual("TEST_COPIED_BATCH_NO_OPTIONS", foundCopiedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPY_BATCH_NO_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPIED_BATCH_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task CopyFolderBatchWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_COPY_BATCH_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFolder folderToCopy = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_COPIED_BATCH_NO_OPTIONS";
+                folderToCopy.CopyToBatch(destinationServerRelativeUrl);
+                await context.ExecuteAsync();
+
+                IFolder foundCopiedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
+                Assert.IsNotNull(foundCopiedFolder);
+                Assert.AreEqual("TEST_COPIED_BATCH_NO_OPTIONS", foundCopiedFolder.Name);
+            }
+
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPY_BATCH_NO_OPTIONS");
+            await CleanupMockFolderFromSharedDocuments(2, "TEST_COPIED_BATCH_NO_OPTIONS");
+        }
+
+        [TestMethod]
+        public async Task CopyFolderSpecificBatchWithoutOptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            string mockFolderServerRelativeUrl = await AddMockFolderToSharedDocuments(0, "TEST_COPY_BATCH_NO_OPTIONS");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                var newBatch = context.NewBatch();
+                IFolder folderToCopy = await context.Web.GetFolderByServerRelativeUrlAsync(mockFolderServerRelativeUrl);
+
+                string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_COPIED_BATCH_NO_OPTIONS";
+                folderToCopy.CopyToBatch(newBatch, destinationServerRelativeUrl);
+                await context.ExecuteAsync(newBatch);
 
                 IFolder foundCopiedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);
                 Assert.IsNotNull(foundCopiedFolder);
