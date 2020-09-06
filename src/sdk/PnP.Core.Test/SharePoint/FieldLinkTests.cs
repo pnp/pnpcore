@@ -118,7 +118,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddSiteContentTypeFieldLinkBatchAsyncTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new test content type
@@ -168,6 +168,30 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddSiteContentTypeFieldLinkSpecificBatchExeceptionAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await Assert.ThrowsExceptionAsync<ClientException>(async () => {
+
+                    var newBatch = context.NewBatch();
+
+                    // Create a new test content type
+                    IContentType newContentType = await context.Web.ContentTypes.AddBatchAsync(newBatch, "0x0100302EF0D1F1DB4C4EBF58251BCCF5968E", "TEST ADD SPEC BATCH ASYNC", "TESTING", "TESTING");
+                    Assert.IsNotNull(newContentType);
+
+                    // Add a new field link between newContentType and Title
+                    IFieldLink newFieldLink = await newContentType.FieldLinks.AddBatchAsync(newBatch, "Title", "My Title");
+                    await context.ExecuteAsync(newBatch);
+
+                    newBatch.Requests.Clear();
+
+                }, "You cannot do a batch add of a model to a modelcollection that was not yet requested. Common reasons are adding an item and using that same item in a single batch");
+            }
+        }
+
+        [TestMethod]
         public async Task AddSiteContentTypeFieldLinkSpecificBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -185,7 +209,6 @@ namespace PnP.Core.Test.SharePoint
 
                 // Add a new field link between newContentType and Title
                 IFieldLink newFieldLink = await newContentType.FieldLinks.AddBatchAsync(newBatch2, "Title", "My Title");
-
                 await context.ExecuteAsync(newBatch2);
 
                 Assert.IsNotNull(newFieldLink);
