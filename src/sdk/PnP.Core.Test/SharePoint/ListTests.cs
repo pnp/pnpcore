@@ -268,10 +268,7 @@ namespace PnP.Core.Test.SharePoint
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
                         });
-                        list4.GetItemsByCamlQueryBatch(new CamlQueryOptions()
-                        {
-                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
-                        });
+                        list4.GetItemsByCamlQueryBatch("<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>");
                         await context4.ExecuteAsync();
 
                         Assert.IsTrue(list4.Items.Count() == 10);
@@ -297,6 +294,20 @@ namespace PnP.Core.Test.SharePoint
                         context5.ExecuteAsync(newBatch).GetAwaiter().GetResult(); 
 
                         Assert.IsTrue(list5.Items.Count() == 10);
+                    }
+                }
+
+                using (var context6 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 5))
+                {
+                    var list6 = context6.Web.Lists.GetByTitle(listTitle);
+                    if (list6 != null)
+                    {
+                        var newBatch = context6.NewBatch();
+                        // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
+                        list6.GetItemsByCamlQueryBatch(newBatch, "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
+                        context6.ExecuteAsync(newBatch).GetAwaiter().GetResult();
+
+                        Assert.IsTrue(list6.Items.Count() == 5);
                     }
                 }
 
