@@ -282,6 +282,7 @@ namespace PnP.Core.Model
             if (expressions != null && expressions.Any())
             {
                 var nonExpandableGraphCollections = entityInfo.GraphNonExpandableCollections;
+                bool nonExpandableGraphCollectionSkipped = false;
 
                 List<string> graphFieldsToLoad = new List<string>();
                 List<string> sharePointFieldsToLoad = new List<string>();
@@ -318,6 +319,13 @@ namespace PnP.Core.Model
                             {
                                 graphFieldsToLoad.Add(fieldToLoad);
                             }
+                            else
+                            {
+                                // We're not loading this collection as we're using a separate query, but in case 
+                                // this collection was the only requested one (e.g. web.GetAsync(p=>p.Lists)) we still need 
+                                // process our field load settings later on
+                                nonExpandableGraphCollectionSkipped = true;
+                            }
                         }
                         else
                         {
@@ -332,7 +340,10 @@ namespace PnP.Core.Model
                 {
                     // Indicate that this entity information used an expression, will be used when building get queries
                     entityInfo.GraphFieldsLoadedViaExpression = true;
+                }
 
+                if (graphFieldsToLoad.Count > 0 || nonExpandableGraphCollectionSkipped)
+                {
                     foreach (var field in entityInfo.Fields)
                     {
                         if (!sharePointFieldsToLoad.Contains(field.Name))

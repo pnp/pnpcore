@@ -19,6 +19,9 @@ namespace PnP.Core.Model.SharePoint
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class List
     {
+        // List of fields that loaded when the Lists collection is requested. This approach is needed as 
+        // Graph requires the "system" field to be loaded as trigger to return all lists 
+        internal const string DefaultGraphFieldsToLoad = "system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list";
         internal static Expression<Func<IList, object>>[] GetListDataAsStreamExpression = new Expression<Func<IList, object>>[] { p => p.Fields.Include(p => p.InternalName, p => p.FieldTypeKind) };
 
         public List()
@@ -78,6 +81,59 @@ namespace PnP.Core.Model.SharePoint
             };
             */
         }
+
+        #region Graph/Rest interoperability overrides
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        internal async override Task GraphToRestMetadataAsync()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            // Logic to set the EntityType metadata property
+            if (this.IsPropertyAvailable(p => p.NameToConstructEntityType) && this.IsPropertyAvailable(p => p.TemplateType) && !Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
+            {
+                string entityName = NameToConstructEntityType.Replace("_", "_x005f_").Replace(" ", "_x0020_");
+
+                bool isList = true;
+                if (TemplateType == ListTemplateType.DocumentLibrary ||
+                    TemplateType == ListTemplateType.WebPageLibrary ||
+                    TemplateType == ListTemplateType.XMLForm ||
+                    TemplateType == ListTemplateType.PictureLibrary ||
+                    TemplateType == ListTemplateType.WebPageLibrary ||
+                    TemplateType == ListTemplateType.DataConnectionLibrary ||
+                    TemplateType == ListTemplateType.HelpLibrary ||
+                    TemplateType == ListTemplateType.HomePageLibrary ||
+                    TemplateType == ListTemplateType.MySiteDocumentLibrary ||
+                    // IWConvertedForms
+                    TemplateType == (ListTemplateType)10102)
+                {
+                    isList = false;
+                }
+
+                if (TemplateType.ToString().EndsWith("Catalog") ||
+                    TemplateType == ListTemplateType.MaintenanceLogs)
+                {
+                    entityName = $"OData__x005f_catalogs_x002f_{entityName}";
+                    isList = false;
+                }
+
+                if (TemplateType == ListTemplateType.UserInformation)
+                {
+                    Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, $"UserInfo");
+                }
+                else
+                {
+                    Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, $"{entityName.ToString().Replace(" ", "")}{(isList ? "List" : "")}");
+                }
+            }
+        }
+
+        // Sample override
+        //internal override Task RestToGraphMetadataAsync()
+        //{
+        //    return base.RestToGraphMetadataAsync();
+        //}
+
+        #endregion
+
 
         #region Extension methods
 

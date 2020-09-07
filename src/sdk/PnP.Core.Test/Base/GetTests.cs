@@ -91,11 +91,15 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.Length > 0);
                 // Is the collection requested flag set
                 Assert.IsTrue(web.Lists.Requested);
-
+               
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.Title));
                 // Are other expandable collections still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.Webs));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.Fields));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.AvailableFields));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.AvailableContentTypes));
             }
         }
 

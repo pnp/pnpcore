@@ -98,8 +98,8 @@ namespace PnP.Core.Model.SharePoint
         }
 
         [SharePointProperty("Lists", Expandable = true)]
-        // Graph currently is not returning all lists, this option can only be used once that's fixed
-        [GraphProperty("lists", Expandable = true)]
+        // A special approach is needed to load all lists, comes down to adding the "system" facet to the select
+        [GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
         public IListCollection Lists
         {
             get

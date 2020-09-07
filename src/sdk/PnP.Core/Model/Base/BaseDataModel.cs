@@ -999,6 +999,30 @@ namespace PnP.Core.Model
 
             return false;
         }
+
+        async Task IMetadataExtensible.SetGraphToRestMetadataAsync()
+        {
+            await GraphToRestMetadataAsync().ConfigureAwait(false);
+        }
+
+        async Task IMetadataExtensible.SetRestToGraphMetadataAsync()
+        {
+            await RestToGraphMetadataAsync().ConfigureAwait(false);
+        }
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        internal virtual async Task GraphToRestMetadataAsync()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            // No default logic, needs to be implemented in the actual model class by overriding this method
+        }
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        internal virtual async Task RestToGraphMetadataAsync()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            // No default logic, needs to be implemented in the actual model class by overriding this method
+        }
         #endregion
 
         #region Add
@@ -1853,8 +1877,6 @@ namespace PnP.Core.Model
                 return null;
             }
         }
-
-
         #endregion
     }
 }

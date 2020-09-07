@@ -25,6 +25,7 @@ namespace PnP.Core.Model.SharePoint
         public bool OnQuickLaunch { get => GetValue<bool>(); set => SetValue(value); }
 
         [SharePointProperty("BaseTemplate")]
+        [GraphProperty("list", JsonPath = "template", UseCustomMapping = true)]
         public ListTemplateType TemplateType { get => GetValue<ListTemplateType>(); set => SetValue(value); }
 
         public string Url { get => GetValue<string>(); set => SetValue(value); }
@@ -87,6 +88,10 @@ namespace PnP.Core.Model.SharePoint
         public string ValidationFormula { get => GetValue<string>(); set => SetValue(value); }
 
         public string ValidationMessage { get => GetValue<string>(); set => SetValue(value); }
+
+        // Internal property, not visible to the library users
+        [GraphProperty("name", UseCustomMapping = false)]
+        public string NameToConstructEntityType { get => GetValue<string>(); set => SetValue(value); }
 
         public IFolder RootFolder
         {
