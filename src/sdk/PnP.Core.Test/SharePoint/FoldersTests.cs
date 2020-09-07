@@ -307,6 +307,31 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddListFolderExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
+                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
+
+                var newBatch = context.NewBatch();
+
+                // This works
+                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    IFolder newFolder = await parentFolder.Folders.AddBatchAsync(newBatch, string.Empty);
+                    await context.ExecuteAsync(newBatch);
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    IFolder newFolder = await parentFolder.Folders.AddAsync(string.Empty);
+                });
+            }
+        }
+
+        [TestMethod]
         public async Task AddListFolderSpecificBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
