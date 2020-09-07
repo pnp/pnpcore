@@ -65,6 +65,20 @@ namespace PnP.Core.Test.SharePoint
                     }
                 }
 
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    var list3 = context3.Web.Lists.GetByTitle(listTitle);
+                    if (list3 != null)
+                    {
+                        var result = list3.GetListDataAsStream(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        Assert.IsTrue(list3.Items.Count() == 5);
+                        Assert.IsTrue(result.ContainsKey("FirstRow"));
+                        Assert.IsTrue(result.ContainsKey("LastRow"));
+                        Assert.IsTrue(result.ContainsKey("RowLimit"));
+                        Assert.IsTrue((int)result["RowLimit"] == 5);
+                    }
+                }
+
                 // Cleanup the created list
                 await myList.DeleteAsync();
             }
