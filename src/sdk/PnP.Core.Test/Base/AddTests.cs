@@ -28,7 +28,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task AddListViaRestAsync()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Lists);
@@ -60,7 +60,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task AddListViaRest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = context.Web.Get(p => p.Lists);
@@ -120,7 +120,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task AddListViaRestBatchException()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = context.Web.Get(p => p.Lists);

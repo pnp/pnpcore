@@ -2222,7 +2222,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetFileVersionsAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             (string libraryName, string documentName, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
