@@ -193,6 +193,19 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("TEST PUBLISH", testDocument.CheckInComment);
 
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.IsTrue(!string.IsNullOrEmpty(testDocument.ContentTag));
+                Assert.AreEqual(CustomizedPageStatus.None, testDocument.CustomizedPageStatus);
+                Assert.IsTrue(!string.IsNullOrEmpty(testDocument.ETag));
+                Assert.IsTrue(testDocument.Exists);
+                Assert.IsFalse(testDocument.IrmEnabled);
+                Assert.IsTrue(testDocument.TimeCreated != DateTime.MinValue);
+                Assert.IsTrue(testDocument.TimeLastModified != DateTime.MinValue);
+                Assert.IsTrue(testDocument.LinkingUri.Contains(".sharepoint.com"));
+                Assert.IsTrue(testDocument.LinkingUrl.Contains(".sharepoint.com"));
+                Assert.AreEqual("1.0", testDocument.UIVersionLabel);
+                Assert.AreEqual(512, testDocument.UIVersion);
+                Assert.AreEqual("", testDocument.Title);
+
                 Assert.IsTrue(testDocument.MajorVersion == initialMajorVersion + 1);
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
@@ -2284,10 +2297,11 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 // Create 2 minor versions
-                await testDocument.CheckoutAsync();
-                await testDocument.CheckinAsync();
-                await testDocument.CheckoutAsync();
-                await testDocument.CheckinAsync();
+                await testDocument.CheckoutBatchAsync();
+                await testDocument.CheckinBatchAsync();
+                await testDocument.CheckoutBatchAsync();
+                await testDocument.CheckinBatchAsync();
+                await context.ExecuteAsync();
             }
 
             // New context to ensure reload the file
@@ -2319,10 +2333,11 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 // Create 2 minor versions
-                await testDocument.CheckoutAsync();
-                await testDocument.CheckinAsync();
-                await testDocument.CheckoutAsync();
-                await testDocument.CheckinAsync();
+                testDocument.CheckoutBatch();
+                testDocument.CheckinBatch();
+                testDocument.CheckoutBatch();
+                testDocument.CheckinBatch();
+                await context.ExecuteAsync();
             }
 
             // New context to ensure reload the file
@@ -2352,12 +2367,16 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
+                var newBatch = context.NewBatch();
+
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 // Create 2 minor versions
-                await testDocument.CheckoutAsync();
-                await testDocument.CheckinAsync();
-                await testDocument.CheckoutAsync();
-                await testDocument.CheckinAsync();
+                await testDocument.CheckoutBatchAsync(newBatch);
+                await testDocument.CheckinBatchAsync(newBatch);
+                await testDocument.CheckoutBatchAsync(newBatch);
+                await testDocument.CheckinBatchAsync(newBatch);
+
+                await context.ExecuteAsync(newBatch);
             }
 
             // New context to ensure reload the file
@@ -2388,12 +2407,15 @@ namespace PnP.Core.Test.SharePoint
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
+                var newBatch = context.NewBatch();
+
                 IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
                 // Create 2 minor versions
-                await testDocument.CheckoutAsync();
-                await testDocument.CheckinAsync();
-                await testDocument.CheckoutAsync();
-                await testDocument.CheckinAsync();
+                testDocument.CheckoutBatch(newBatch);
+                testDocument.CheckinBatch(newBatch);
+                testDocument.CheckoutBatch(newBatch);
+                testDocument.CheckinBatch(newBatch);
+                await context.ExecuteAsync(newBatch);
             }
 
             // New context to ensure reload the file

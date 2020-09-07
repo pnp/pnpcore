@@ -36,6 +36,48 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ContentTypesGetPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.ContentTypes);
+                Assert.IsTrue(web.ContentTypes.Count() > 0);
+
+                IContentType contentType = web.ContentTypes.FirstOrDefault(p => p.Name == "Item");
+                // Test a string property
+                Assert.AreEqual(contentType.Name, "Item");
+
+                //ClientFormCustomFormatter
+                Assert.IsTrue(string.IsNullOrEmpty(contentType.ClientFormCustomFormatter));
+                Assert.AreEqual(contentType.Description, "Create a new list item.");
+                Assert.AreEqual(contentType.DisplayFormTemplateName, "ListForm");
+                Assert.AreEqual(contentType.DisplayFormUrl, "");
+                Assert.AreEqual(contentType.DocumentTemplate, "");
+                Assert.AreEqual(contentType.DocumentTemplateUrl, "");
+                Assert.AreEqual(contentType.EditFormTemplateName, "ListForm");
+                Assert.IsTrue(string.IsNullOrEmpty(contentType.EditFormUrl));
+                Assert.AreEqual(contentType.Group, "List Content Types");
+                Assert.AreEqual(contentType.Hidden, false);
+                Assert.AreEqual(contentType.JSLink, "");
+                Assert.AreEqual(contentType.MobileDisplayFormUrl, "");
+                Assert.AreEqual(contentType.MobileEditFormUrl, "");
+                Assert.AreEqual(contentType.MobileNewFormUrl, "");
+                Assert.AreEqual(contentType.Name, "Item");
+                Assert.AreEqual(contentType.NewFormTemplateName, "ListForm");
+                Assert.AreEqual(contentType.NewFormUrl, "");
+                Assert.AreEqual(contentType.ReadOnly,false);
+                Assert.IsTrue(!string.IsNullOrEmpty(contentType.SchemaXml));
+                Assert.AreEqual(contentType.Scope, "/sites/pnpcoresdktestgroup");
+                Assert.AreEqual(contentType.Sealed, false);
+                Assert.AreEqual(contentType.StringId, "0x01");
+                
+                // Test a boolean property
+                Assert.IsFalse(contentType.Hidden);
+            }
+        }
+
+        [TestMethod]
         public async Task ContentTypesOnListGetTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -117,7 +159,43 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task ContentTypesOnListAddAvailableTest()
+        public async Task ContentTypesAddExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    IContentType newContentType = await context.Web.ContentTypes.AddAsync(string.Empty, "TEST ADD", "TESTING", "TESTING");
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    IContentType newContentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", string.Empty, "TESTING", "TESTING");
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    IContentType newContentType = await context.Web.ContentTypes.AddAsync(string.Empty, string.Empty, "TESTING", "TESTING");
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    IContentType newContentType = await context.Web.ContentTypes.AddBatchAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", string.Empty, "TESTING", "TESTING");
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    IContentType newContentType = await context.Web.ContentTypes.AddBatchAsync(string.Empty, "TEST ADD", "TESTING", "TESTING");
+                });
+            }
+        }
+
+        #region ContentTypesOnListAddAvailable Tests
+
+        [TestMethod]
+        public async Task ContentTypesOnListAddAvailableBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -156,6 +234,254 @@ namespace PnP.Core.Test.SharePoint
                 await myList.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task ContentTypesOnListAddAvailableSpecificBatchAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ContentTypesOnListAddAvailableTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Ensure content type are enabled for the list
+                myList.ContentTypesEnabled = true;
+                await myList.UpdateBatchAsync(newBatch);
+                await context.ExecuteAsync(newBatch);
+
+                // Add existing content type (contact)
+                var addedContentType = await myList.ContentTypes.AddAvailableContentTypeBatchAsync(newBatch,"0x0106");
+
+                // send batch to server
+                await context.ExecuteAsync(newBatch);
+
+                Assert.IsTrue(addedContentType != null);
+                Assert.IsTrue(addedContentType.Requested);
+                Assert.IsTrue(addedContentType.Id.StartsWith("0x0106"));
+
+                // Delete list again
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesOnListAddAvailableBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ContentTypesOnListAddAvailableTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Ensure content type are enabled for the list
+                myList.ContentTypesEnabled = true;
+                await myList.UpdateBatchAsync();
+                await context.ExecuteAsync();
+
+                // Add existing content type (contact)
+                var addedContentType = myList.ContentTypes.AddAvailableContentTypeBatch( "0x0106");
+
+                // send batch to server
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(addedContentType != null);
+                Assert.IsTrue(addedContentType.Requested);
+                Assert.IsTrue(addedContentType.Id.StartsWith("0x0106"));
+
+                // Delete list again
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesOnListAddAvailableSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newBatch = context.NewBatch();
+
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ContentTypesOnListAddAvailableTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Ensure content type are enabled for the list
+                myList.ContentTypesEnabled = true;
+                await myList.UpdateBatchAsync(newBatch);
+                await context.ExecuteAsync(newBatch);
+
+                // Add existing content type (contact)
+                var addedContentType = myList.ContentTypes.AddAvailableContentTypeBatch(newBatch, "0x0106");
+
+                // send batch to server
+                await context.ExecuteAsync(newBatch);
+
+                Assert.IsTrue(addedContentType != null);
+                Assert.IsTrue(addedContentType.Requested);
+                Assert.IsTrue(addedContentType.Id.StartsWith("0x0106"));
+
+                // Delete list again
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesOnListAddAvailableAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ContentTypesOnListAddAvailableTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Ensure content type are enabled for the list
+                myList.ContentTypesEnabled = true;
+                await myList.UpdateAsync();
+
+                // Add existing content type (contact)
+                var addedContentType = await myList.ContentTypes.AddAvailableContentTypeAsync("0x0106");
+
+                Assert.IsTrue(addedContentType != null);
+                Assert.IsTrue(addedContentType.Requested);
+                Assert.IsTrue(addedContentType.Id.StartsWith("0x0106"));
+
+                // Delete list again
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesOnListAddAvailableTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ContentTypesOnListAddAvailableTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Ensure content type are enabled for the list
+                myList.ContentTypesEnabled = true;
+                await myList.UpdateAsync();
+
+                // Add existing content type (contact)
+                var addedContentType = myList.ContentTypes.AddAvailableContentType("0x0106");
+
+                Assert.IsTrue(addedContentType != null);
+                Assert.IsTrue(addedContentType.Requested);
+                Assert.IsTrue(addedContentType.Id.StartsWith("0x0106"));
+
+                // Delete list again
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ContentTypesOnListAddAvailableExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "ContentTypesOnListAddAvailableTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Ensure content type are enabled for the list
+                myList.ContentTypesEnabled = true;
+                await myList.UpdateAsync();
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    var addedContentType = await myList.ContentTypes.AddAvailableContentTypeAsync(null);
+                });
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
+                    var addedContentType = await myList.ContentTypes.AddAvailableContentTypeBatchAsync(null);
+                });
+
+                // Delete list again
+                await myList.DeleteAsync();
+            }
+        }
+
+        #endregion
 
         [TestMethod]
         public async Task ContentTypesOnListAddTest()
