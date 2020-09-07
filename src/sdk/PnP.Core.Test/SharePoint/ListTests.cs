@@ -202,6 +202,110 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetItemsByCAMLQuerySimpleNonAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "GetItemsByCAMLQuerySimpleAsyncTest";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = context.Web.Lists.Add(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add items to the list
+                for (int i = 0; i < 10; i++)
+                {
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                    myList.Items.AddBatch(values);
+                }
+                await context.ExecuteAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        list2.GetItemsByCamlQuery("<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>");
+                        Assert.IsTrue(list2.Items.Count() == 5);
+                    }
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    var list3 = context3.Web.Lists.GetByTitle(listTitle);
+                    if (list3 != null)
+                    {
+                        list3.GetItemsByCamlQuery(new CamlQueryOptions()
+                        {
+                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
+                            DatesInUtc = true
+                        });
+                        Assert.IsTrue(list3.Items.Count() == 10);
+                    }
+                }
+
+                // Batch testing
+                using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    var list4 = context4.Web.Lists.GetByTitle(listTitle);
+                    if (list4 != null)
+                    {
+                        // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
+                        list4.GetItemsByCamlQueryBatch(new CamlQueryOptions()
+                        {
+                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
+                        });
+                        list4.GetItemsByCamlQueryBatch(new CamlQueryOptions()
+                        {
+                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
+                        });
+                        await context4.ExecuteAsync();
+
+                        Assert.IsTrue(list4.Items.Count() == 10);
+                    }
+                }
+
+                // Batch testing
+                using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
+                {
+                    var list5 = context5.Web.Lists.GetByTitle(listTitle);
+                    if (list5 != null)
+                    {
+                        var newBatch = context5.NewBatch();
+                        // Perform 2 queries, the first one limited to 5 items, the second one without limits. Total should be 10 items
+                        list5.GetItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
+                        {
+                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields><RowLimit>5</RowLimit></View>",
+                        });
+                        list5.GetItemsByCamlQueryBatch(newBatch, new CamlQueryOptions()
+                        {
+                            ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
+                        });
+                        context5.ExecuteAsync(newBatch).GetAwaiter().GetResult(); 
+
+                        Assert.IsTrue(list5.Items.Count() == 10);
+                    }
+                }
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task RecycleList()
         {
             //TestCommon.Instance.Mocking = false;
