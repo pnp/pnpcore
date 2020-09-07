@@ -63,7 +63,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(default, web.AppInstanceId);
                 Assert.IsNull(web.ClassicWelcomePage);
                 Assert.IsFalse(web.ContainsConfidentialInfo);
-                Assert.AreEqual($"{context.Uri.PathAndQuery}/_catalogs/masterpage/seattle.master", web.CustomMasterUrl);
+                Assert.IsTrue(web.CustomMasterUrl.EndsWith("/_catalogs/masterpage/seattle.master"));
                 Assert.IsFalse(web.CustomSiteActionsDisabled);
                 // TODO: Test this on targeted release tenant
                 //Assert.AreNotEqual(default, web.DefaultNewPageTemplateId);
