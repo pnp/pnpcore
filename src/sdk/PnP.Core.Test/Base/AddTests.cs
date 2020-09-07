@@ -26,9 +26,9 @@ namespace PnP.Core.Test.Base
         #region Tests that use REST to hit SharePoint
 
         [TestMethod]
-        public async Task AddListViaRest()
+        public async Task AddListViaRestAsync()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.Lists);
@@ -58,7 +58,95 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task AddListViaBatchRest()
+        public async Task AddListViaRest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = context.Web.Get(p => p.Lists);
+
+                string listTitle = "AddListViaRest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                var listCount = web.Lists.Count();
+                // Add a new list
+                myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
+                // Was the list added
+                Assert.IsTrue(myList.Requested);
+                Assert.IsTrue(myList.Id != Guid.Empty);
+                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+
+                // Load the list again
+                context.Web.Get(p => p.Lists);
+
+                // Check if we still have the same amount of lists
+                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListViaRestException()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = context.Web.Get(p => p.Lists);
+
+                string listTitle = "AddListViaRestException";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                var listCount = web.Lists.Count();
+                // Add a new list
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    myList = web.Lists.Add(null, ListTemplateType.GenericList);
+                });
+
+                Assert.ThrowsException<ArgumentException>(() => {
+                    myList = web.Lists.Add(listTitle, ListTemplateType.NoListTemplate);
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListViaRestBatchException()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = context.Web.Get(p => p.Lists);
+
+                string listTitle = "AddListViaRestException";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                var listCount = web.Lists.Count();
+                // Add a new list
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    myList = web.Lists.AddBatch(null, ListTemplateType.GenericList);
+                });
+
+                Assert.ThrowsException<ArgumentException>(() => {
+                    myList = web.Lists.AddBatch(listTitle, ListTemplateType.NoListTemplate);
+                });
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListViaBatchAsyncRest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -66,7 +154,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetBatchAsync(p => p.Lists);
                 await context.ExecuteAsync();
 
-                string listTitle = "AddListViaBatchRest";
+                string listTitle = "AddListViaBatchAsyncRest";
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
@@ -94,7 +182,43 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task AddListViaExplicitBatchRest()
+        public async Task AddListViaBatchRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = context.Web.GetBatch(p => p.Lists);
+                await context.ExecuteAsync();
+
+                string listTitle = "AddListViaBatchRest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                var listCount = web.Lists.Count();
+                // Add a new list
+                myList = web.Lists.AddBatch(listTitle, ListTemplateType.GenericList);
+                await context.ExecuteAsync();
+
+                // Was the list added
+                Assert.IsTrue(myList.Requested);
+                Assert.IsTrue(myList.Id != Guid.Empty);
+                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+
+                // Load the list again
+                context.Web.GetBatch(p => p.Lists);
+                await context.ExecuteAsync();
+
+                // Check if we still have the same amount of lists
+                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListViaExplicitBatchAsyncRest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -103,7 +227,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetBatchAsync(batch, p => p.Lists);
                 await context.ExecuteAsync(batch);
 
-                string listTitle = "AddListViaExplicitBatchRest";
+                string listTitle = "AddListViaExplicitBatchAsyncRest";
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
@@ -132,10 +256,49 @@ namespace PnP.Core.Test.Base
             }
         }
 
+        [TestMethod]
+        public async Task AddListViaExplicitBatchRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var batch = context.BatchClient.EnsureBatch();
+                var web = context.Web.GetBatch(batch, p => p.Lists);
+                await context.ExecuteAsync(batch);
+
+                string listTitle = "AddListViaExplicitBatchRest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                var listCount = web.Lists.Count();
+                // Add a new list
+                batch = context.BatchClient.EnsureBatch();
+                myList = web.Lists.AddBatch(batch, listTitle, ListTemplateType.GenericList);
+                await context.ExecuteAsync(batch);
+
+                // Was the list added
+                Assert.IsTrue(myList.Requested);
+                Assert.IsTrue(myList.Id != Guid.Empty);
+                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+
+                // Load the list again
+                batch = context.BatchClient.EnsureBatch();
+                context.Web.GetBatch(batch, p => p.Lists);
+                await context.ExecuteAsync(batch);
+
+                // Check if we still have the same amount of lists
+                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+            }
+        }
+
         #endregion
 
         #region Tests that use Graph to hit SharePoint
-        
+
         [TestMethod]
         public async Task AddTeamChannelViaGraph()
         {
