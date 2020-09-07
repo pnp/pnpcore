@@ -336,14 +336,12 @@ namespace PnP.Core.Model
                     }
                 }
 
-                if (graphFieldsToLoad.Count > 0)
-                {
-                    // Indicate that this entity information used an expression, will be used when building get queries
-                    entityInfo.GraphFieldsLoadedViaExpression = true;
-                }
 
                 if (graphFieldsToLoad.Count > 0 || nonExpandableGraphCollectionSkipped)
                 {
+                    // Indicate that this entity information used an expression, will be used when building get queries
+                    entityInfo.GraphFieldsLoadedViaExpression = true;
+
                     foreach (var field in entityInfo.Fields)
                     {
                         if (!sharePointFieldsToLoad.Contains(field.Name))
@@ -534,7 +532,7 @@ namespace PnP.Core.Model
                 classInfo.Fields.Add(classField);
             }
 
-            if (classInfo.SharePointTargets.Any())
+            if (classInfo.SharePointTargets.Any() && string.IsNullOrEmpty(classField.SharePointName))
             {
                 // This type can be loaded via SharePoint REST, so ensure the SharePoint field is populated
                 classField.SharePointName = property.Name;
