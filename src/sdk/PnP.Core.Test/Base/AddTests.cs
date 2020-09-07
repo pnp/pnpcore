@@ -58,6 +58,77 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task AddListViaRestAsyncPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = "AddListViaRestAsyncPropertiesTest";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    await myList.DeleteAsync();
+                }
+
+                var listCount = web.Lists.Count();
+                // Add a new list with opposite to defaults.
+                myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                myList.Description = "TEST DESCRIPTION";
+                myList.EnableAttachments = false;
+                myList.EnableFolderCreation = true;
+                myList.EnableMinorVersions = false;
+                myList.EnableModeration = true;
+                myList.EnableVersioning = true;
+                myList.ForceCheckout = false;
+                myList.Hidden = true;
+                myList.MaxVersionLimit = 400;
+                myList.MinorVersionLimit = 20;
+                myList.ListExperience = ListExperience.ClassicExperience; //Eek
+                await myList.UpdateAsync();
+
+
+                var myListToCheck = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                // Was the list added
+                Assert.IsTrue(myListToCheck.Requested);
+                Assert.IsTrue(myListToCheck.Id != Guid.Empty);
+                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+                Assert.IsFalse(myListToCheck.ContentTypesEnabled);
+                Assert.AreEqual(myListToCheck.Direction, ListReadingDirection.None);
+                Assert.IsNull(myListToCheck.DocumentTemplate);
+                Assert.AreEqual(0, myListToCheck.DraftVersionVisibility);
+                Assert.AreEqual("TEST DESCRIPTION", myListToCheck.Description);
+                Assert.IsFalse(myListToCheck.EnableAttachments);
+                Assert.IsTrue(myListToCheck.EnableFolderCreation);
+                Assert.IsFalse(myListToCheck.EnableMinorVersions);
+                Assert.IsTrue(myListToCheck.EnableModeration);
+                Assert.IsTrue(myListToCheck.EnableVersioning);
+                Assert.IsFalse(myListToCheck.ForceCheckout);
+                Assert.IsTrue(myListToCheck.Hidden);
+                Assert.IsTrue(myListToCheck.ImageUrl.Contains("itgen.png"));
+                Assert.IsFalse(myListToCheck.IrmExpire);
+                Assert.IsFalse(myListToCheck.IrmReject);
+                Assert.IsFalse(myListToCheck.IsApplicationList);
+                Assert.AreEqual(myListToCheck.ListExperience, ListExperience.ClassicExperience);
+                Assert.AreEqual(20, myListToCheck.MinorVersionLimit);
+                Assert.AreEqual(400, myListToCheck.MaxVersionLimit);
+                Assert.AreEqual(new Guid("00bfea71-de22-43b2-a848-c05709900100"), myListToCheck.TemplateFeatureId);
+                
+                // Load the list again
+                await context.Web.GetAsync(p => p.Lists);
+
+                // Check if we still have the same amount of lists
+                Assert.IsTrue(web.Lists.Count() == listCount + 1);
+
+                // Clean up
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task AddListViaRest()
         {
             //TestCommon.Instance.Mocking = false;
