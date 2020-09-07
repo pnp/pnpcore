@@ -18,6 +18,63 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetWebSimplePropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(
+                    p => p.AccessRequestListUrl,
+                    p => p.AccessRequestSiteDescription,
+                    p => p.AllowCreateDeclarativeWorkflowForCurrentUser,
+                    p => p.AllowDesignerForCurrentUser,
+                    p => p.AllowMasterPageEditingForCurrentUser,
+                    p => p.AllowRevertFromTemplateForCurrentUser,
+                    p => p.AllowRssFeeds,
+                    p => p.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser,
+                    p => p.AllowSavePublishDeclarativeWorkflowForCurrentUser,
+                    p => p.AlternateCssUrl,
+                    p => p.AppInstanceId,
+                    p => p.ClassicWelcomePage,
+                    p => p.ContainsConfidentialInfo,
+                    p => p.Created,
+                    p => p.CustomMasterUrl,
+                    p => p.CustomSiteActionsDisabled,
+                    // TODO: Test this on targeted release tenant
+                    //p => p.DefaultNewPageTemplateId,
+                    p => p.DesignerDownloadUrlForCurrentUser,
+                    p => p.DesignPackageId,
+                    p => p.DisableRecommendedItems,
+                    p => p.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+                    );
+
+                Assert.IsNotNull(web);
+                Assert.IsNull(web.AccessRequestListUrl);
+                Assert.AreEqual("", web.AccessRequestSiteDescription);
+                Assert.IsTrue(web.AllowCreateDeclarativeWorkflowForCurrentUser);
+                Assert.IsTrue(web.AllowDesignerForCurrentUser);
+                Assert.IsFalse(web.AllowMasterPageEditingForCurrentUser);
+                Assert.IsTrue(web.AllowRevertFromTemplateForCurrentUser);
+                Assert.IsTrue(web.AllowRssFeeds);
+                Assert.IsTrue(web.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser);
+                Assert.IsTrue(web.AllowSavePublishDeclarativeWorkflowForCurrentUser);
+                Assert.AreEqual("", web.AlternateCssUrl);
+                // TODO: This one should be tested with an addin web to be relevant
+                Assert.AreEqual(default, web.AppInstanceId);
+                Assert.IsNull(web.ClassicWelcomePage);
+                Assert.IsFalse(web.ContainsConfidentialInfo);
+                Assert.AreEqual($"{context.Uri.PathAndQuery}/_catalogs/masterpage/seattle.master", web.CustomMasterUrl);
+                Assert.IsFalse(web.CustomSiteActionsDisabled);
+                // TODO: Test this on targeted release tenant
+                //Assert.AreNotEqual(default, web.DefaultNewPageTemplateId);
+                Assert.AreEqual("https://go.microsoft.com/fwlink/?LinkId=328584&clcid=0x409", web.DesignerDownloadUrlForCurrentUser);
+                Assert.AreEqual(default, web.DesignPackageId);
+                Assert.IsFalse(web.DisableRecommendedItems);
+                Assert.IsFalse(web.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled);
+            }
+        }
+
+        [TestMethod]
         public async Task GetWebAllPropertiesTest()
         {
             //TestCommon.Instance.Mocking = false;
