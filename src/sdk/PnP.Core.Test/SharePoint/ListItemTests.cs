@@ -122,7 +122,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task SystemUpdateBatchTests()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Create a new list
@@ -329,6 +329,110 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task UpdateOverwriteVersionBatchTests()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Items));
 
+                int listCount = web.Lists.Count();
+
+                string listTitle = "UpdateOverwriteVersionBatchTests";
+
+                #region Test Setup
+
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (!TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                    // Enable versioning
+                    myList.EnableVersioning = true;
+                    await myList.UpdateAsync();
+                }
+
+                // Add items to the list
+                for (int i = 0; i < 10; i++)
+                {
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                    await myList.Items.AddBatchAsync(values);
+                }
+                await context.ExecuteAsync();
+
+                #endregion
+
+                // get first item and do a system update
+                var first = myList.Items.First();
+
+                first.Title = "blabla";
+
+                // Use the batch update flow here
+                var batch = context.NewBatch();
+                first.UpdateOverwriteVersionBatch(batch);
+                await context.ExecuteAsync(batch);
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var web2 = await context2.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Items));
+                    var myList2 = web2.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                    await myList2.GetAsync(p => p.Items);
+
+                    var first2 = myList2.Items.First();
+
+                    // verify the list item was updated and that we're still at version 1.0
+                    Assert.IsTrue(first2.Title == "blabla");
+                    Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
+
+                    first2.Title = "blabla2";
+                    first2.UpdateOverwriteVersion();
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    var web3 = await context3.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Items));
+                    var myList3 = web3.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                    await myList3.GetAsync(p => p.Items);
+
+                    var first3 = myList3.Items.First();
+
+                    // verify the list item was updated and that we're still at version 1.0
+                    Assert.IsTrue(first3.Title == "blabla2");
+                    Assert.IsTrue(first3.Values["_UIVersionString"].ToString() == "1.0");
+
+                    var batch3 = context3.NewBatch();
+                    first3.Title = "blabla3";
+                    first3.UpdateOverwriteVersionBatch(batch3);
+                    await context3.ExecuteAsync(batch3);
+                }
+
+                using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    var web4 = await context4.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Items));
+                    var myList4 = web4.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                    await myList4.GetAsync(p => p.Items);
+
+                    var first4 = myList4.Items.First();
+
+                    // verify the list item was updated and that we're still at version 1.0
+                    Assert.IsTrue(first4.Title == "blabla3");
+                    Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "1.0");
+                }
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
     }
 }
