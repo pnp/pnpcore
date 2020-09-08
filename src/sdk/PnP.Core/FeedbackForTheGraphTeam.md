@@ -1,9 +1,9 @@
 ﻿
 # SharePoint
 
-- Loading lists of a web is returning a subset of the lists being returned when using REST:
-	- You cannot retrieve the "system" libraries (like "Site Pages", "Form Templates", "Site Assets", and "Style Library") via /lists GET query
-	- This makes it hard to use Graph as our users are agnostic of what API is being called, but they expect the same results in all cases
+- ~~Loading lists of a web is returning a subset of the lists being returned when using REST:~~
+	~~- You cannot retrieve the "system" libraries (like "Site Pages", "Form Templates", "Site Assets", and "Style Library") via /lists GET query~~
+	~~- This makes it hard to use Graph as our users are agnostic of what API is being called, but they expect the same results in all cases~~
 - GroupID property is not returned when loading a SharePoint Site ==> we need GroupId to be able to load the Team linked to this site (if there's one)
 - It looks like it is not possible to filter items in lists and libraries by ContentType
 - It is not possible to load subwebs of a site via Graph
@@ -52,7 +52,7 @@ FIX: request the system facet to retrieve all lists: https://graph.microsoft.com
 	- Lowering the batch size to less than the max 20 seems to make it more reliable but failing most of the time
 	- Trying the same with adding messages to a channel gives HTTP 412	Precondition Failed (https://docs.microsoft.com/en-us/graph/errors), even with lowered batch count ==> it seems to work with 5 messages in a batch
 - When getting a Teams channel message there's no way to know if the message has replies besides querying each message independently for replies
-- One can update MemberSettings.AllowCreatePrivateChannels using v1.0 endpoint, but not read it
+- ~~One can update MemberSettings.AllowCreatePrivateChannels using v1.0 endpoint, but not read it~~
 - If you try to add a tab with a SharePoint Online document library (com.microsoft.teamspace.tab.files.sharepoint) and that library has a "non standard" URL (like /lists/MyLibrary instead of /MyLibrary) the Graph request fails with a BadGateway exception, which is misleading
 - It is not possible to query Channels with $orderby, $top, $skip
 - It is not possible to query Messages in Channels with $select, $filter, $orderby, $top, $skip
@@ -60,6 +60,6 @@ FIX: request the system facet to retrieve all lists: https://graph.microsoft.com
 
 # Taxonomy
 
-- Deleting a termset using DELETE ~termstore/sets/id does not work (known issue, will be fixed)
-- Using the Terms part of the API (e.g. GET ~ termstore/sets/id/terms) throws an error : "Access Denied: End point cannot be called by the current user" ==> seems to be documentation issue as using terms in only usable to retrieve a single term. Will be fixed.
-- Deleting a term grou^p (DELETE ~termstore/groups/id) immediately after deleting the termsets inside throws an error "cannot delete non empty term groups". Issue is listed with the graph team and being investigated
+- ~~Deleting a termset using DELETE ~termstore/sets/id does not work (known issue, will be fixed)~~
+- ~~Using the Terms part of the API (e.g. GET ~ termstore/sets/id/terms) throws an error : "Access Denied: End point cannot be called by the current user" ==> seems to be documentation issue as using terms in only usable to retrieve a single term. Will be fixed.~~
+- Deleting a term group (DELETE ~termstore/groups/id) immediately after deleting the termsets inside throws an error "cannot delete non empty term groups". Issue is listed with the graph team and being investigated
