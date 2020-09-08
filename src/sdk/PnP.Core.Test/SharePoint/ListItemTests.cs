@@ -428,6 +428,23 @@ namespace PnP.Core.Test.SharePoint
                     // verify the list item was updated and that we're still at version 1.0
                     Assert.IsTrue(first4.Title == "blabla3");
                     Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "1.0");
+
+                    first4.Title = "blabla4";
+                    first4.UpdateOverwriteVersionBatch();
+                    await context4.ExecuteAsync();
+                }
+
+                using (var context5 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
+                {
+                    var web5 = await context5.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Items));
+                    var myList5 = web5.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+                    await myList5.GetAsync(p => p.Items);
+
+                    var first5 = myList5.Items.First();
+
+                    // verify the list item was updated and that we're still at version 1.0
+                    Assert.IsTrue(first5.Title == "blabla4");
+                    Assert.IsTrue(first5.Values["_UIVersionString"].ToString() == "1.0");
                 }
 
                 // Cleanup the created list
