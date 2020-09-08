@@ -68,7 +68,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(contentType.NewFormUrl, "");
                 Assert.AreEqual(contentType.ReadOnly,false);
                 Assert.IsTrue(!string.IsNullOrEmpty(contentType.SchemaXml));
-                Assert.AreEqual(contentType.Scope, "/sites/pnpcoresdktestgroup");
+                // Testing on site names is not possible as this will fail when the tests are running live again 
+                //Assert.AreEqual(contentType.Scope, "/sites/pnpcoresdktestgroup");
                 Assert.AreEqual(contentType.Sealed, false);
                 Assert.AreEqual(contentType.StringId, "0x01");
                 

@@ -805,11 +805,9 @@ namespace PnP.Core.Model
 
                         if (addExpand)
                         {
-                            sb.Append(JsonMappingHelper.GetGraphField(field));
+                            sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
                         }
                     }
-
-                    sb.Append(",");
 
                     if (!graphIdFieldAdded && !string.IsNullOrEmpty(entity.GraphId))
                     {

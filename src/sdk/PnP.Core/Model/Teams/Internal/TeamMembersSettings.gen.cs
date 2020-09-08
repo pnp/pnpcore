@@ -5,7 +5,6 @@
     {
         public bool AllowCreateUpdateChannels { get => GetValue<bool>(); set => SetValue(value); }
 
-        [GraphProperty("allowCreatePrivateChannels", Beta = true)]
         public bool AllowCreatePrivateChannels { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool AllowDeleteChannels { get => GetValue<bool>(); set => SetValue(value); }
