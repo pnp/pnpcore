@@ -9850,6 +9850,136 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IWeb
   fullName: PnP.Core.Model.SharePoint.IWeb
   nameWithType: IWeb
+- uid: PnP.Core.Model.SharePoint.IWeb.AccessRequestListUrl
+  name: AccessRequestListUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AccessRequestListUrl
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AccessRequestListUrl
+  fullName: PnP.Core.Model.SharePoint.IWeb.AccessRequestListUrl
+  nameWithType: IWeb.AccessRequestListUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.AccessRequestListUrl*
+  name: AccessRequestListUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AccessRequestListUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AccessRequestListUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AccessRequestListUrl
+  nameWithType: IWeb.AccessRequestListUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.AccessRequestSiteDescription
+  name: AccessRequestSiteDescription
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AccessRequestSiteDescription
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AccessRequestSiteDescription
+  fullName: PnP.Core.Model.SharePoint.IWeb.AccessRequestSiteDescription
+  nameWithType: IWeb.AccessRequestSiteDescription
+- uid: PnP.Core.Model.SharePoint.IWeb.AccessRequestSiteDescription*
+  name: AccessRequestSiteDescription
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AccessRequestSiteDescription_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AccessRequestSiteDescription
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AccessRequestSiteDescription
+  nameWithType: IWeb.AccessRequestSiteDescription
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowAutomaticASPXPageIndexing
+  name: AllowAutomaticASPXPageIndexing
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowAutomaticASPXPageIndexing
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AllowAutomaticASPXPageIndexing
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowAutomaticASPXPageIndexing
+  nameWithType: IWeb.AllowAutomaticASPXPageIndexing
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowAutomaticASPXPageIndexing*
+  name: AllowAutomaticASPXPageIndexing
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowAutomaticASPXPageIndexing_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AllowAutomaticASPXPageIndexing
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowAutomaticASPXPageIndexing
+  nameWithType: IWeb.AllowAutomaticASPXPageIndexing
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowCreateDeclarativeWorkflowForCurrentUser
+  name: AllowCreateDeclarativeWorkflowForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowCreateDeclarativeWorkflowForCurrentUser
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AllowCreateDeclarativeWorkflowForCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowCreateDeclarativeWorkflowForCurrentUser
+  nameWithType: IWeb.AllowCreateDeclarativeWorkflowForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowCreateDeclarativeWorkflowForCurrentUser*
+  name: AllowCreateDeclarativeWorkflowForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowCreateDeclarativeWorkflowForCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AllowCreateDeclarativeWorkflowForCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowCreateDeclarativeWorkflowForCurrentUser
+  nameWithType: IWeb.AllowCreateDeclarativeWorkflowForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowDesignerForCurrentUser
+  name: AllowDesignerForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowDesignerForCurrentUser
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AllowDesignerForCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowDesignerForCurrentUser
+  nameWithType: IWeb.AllowDesignerForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowDesignerForCurrentUser*
+  name: AllowDesignerForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowDesignerForCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AllowDesignerForCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowDesignerForCurrentUser
+  nameWithType: IWeb.AllowDesignerForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowMasterPageEditingForCurrentUser
+  name: AllowMasterPageEditingForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowMasterPageEditingForCurrentUser
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AllowMasterPageEditingForCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowMasterPageEditingForCurrentUser
+  nameWithType: IWeb.AllowMasterPageEditingForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowMasterPageEditingForCurrentUser*
+  name: AllowMasterPageEditingForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowMasterPageEditingForCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AllowMasterPageEditingForCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowMasterPageEditingForCurrentUser
+  nameWithType: IWeb.AllowMasterPageEditingForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowRevertFromTemplateForCurrentUser
+  name: AllowRevertFromTemplateForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowRevertFromTemplateForCurrentUser
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AllowRevertFromTemplateForCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowRevertFromTemplateForCurrentUser
+  nameWithType: IWeb.AllowRevertFromTemplateForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowRevertFromTemplateForCurrentUser*
+  name: AllowRevertFromTemplateForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowRevertFromTemplateForCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AllowRevertFromTemplateForCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowRevertFromTemplateForCurrentUser
+  nameWithType: IWeb.AllowRevertFromTemplateForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowRssFeeds
+  name: AllowRssFeeds
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowRssFeeds
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AllowRssFeeds
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowRssFeeds
+  nameWithType: IWeb.AllowRssFeeds
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowRssFeeds*
+  name: AllowRssFeeds
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowRssFeeds_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AllowRssFeeds
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowRssFeeds
+  nameWithType: IWeb.AllowRssFeeds
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+  name: AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+  nameWithType: IWeb.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser*
+  name: AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+  nameWithType: IWeb.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowSavePublishDeclarativeWorkflowForCurrentUser
+  name: AllowSavePublishDeclarativeWorkflowForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowSavePublishDeclarativeWorkflowForCurrentUser
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AllowSavePublishDeclarativeWorkflowForCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowSavePublishDeclarativeWorkflowForCurrentUser
+  nameWithType: IWeb.AllowSavePublishDeclarativeWorkflowForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.AllowSavePublishDeclarativeWorkflowForCurrentUser*
+  name: AllowSavePublishDeclarativeWorkflowForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllowSavePublishDeclarativeWorkflowForCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AllowSavePublishDeclarativeWorkflowForCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AllowSavePublishDeclarativeWorkflowForCurrentUser
+  nameWithType: IWeb.AllowSavePublishDeclarativeWorkflowForCurrentUser
 - uid: PnP.Core.Model.SharePoint.IWeb.AllProperties
   name: AllProperties
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AllProperties
@@ -9876,6 +10006,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.AlternateCSS
   nameWithType: IWeb.AlternateCSS
+- uid: PnP.Core.Model.SharePoint.IWeb.AppInstanceId
+  name: AppInstanceId
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AppInstanceId
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AppInstanceId
+  fullName: PnP.Core.Model.SharePoint.IWeb.AppInstanceId
+  nameWithType: IWeb.AppInstanceId
+- uid: PnP.Core.Model.SharePoint.IWeb.AppInstanceId*
+  name: AppInstanceId
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AppInstanceId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AppInstanceId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AppInstanceId
+  nameWithType: IWeb.AppInstanceId
 - uid: PnP.Core.Model.SharePoint.IWeb.AvailableContentTypes
   name: AvailableContentTypes
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AvailableContentTypes
@@ -9902,6 +10045,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.AvailableFields
   nameWithType: IWeb.AvailableFields
+- uid: PnP.Core.Model.SharePoint.IWeb.ClassicWelcomePage
+  name: ClassicWelcomePage
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ClassicWelcomePage
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.ClassicWelcomePage
+  fullName: PnP.Core.Model.SharePoint.IWeb.ClassicWelcomePage
+  nameWithType: IWeb.ClassicWelcomePage
+- uid: PnP.Core.Model.SharePoint.IWeb.ClassicWelcomePage*
+  name: ClassicWelcomePage
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ClassicWelcomePage_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.ClassicWelcomePage
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.ClassicWelcomePage
+  nameWithType: IWeb.ClassicWelcomePage
 - uid: PnP.Core.Model.SharePoint.IWeb.CommentsOnSitePagesDisabled
   name: CommentsOnSitePagesDisabled
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CommentsOnSitePagesDisabled
@@ -9915,6 +10071,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.CommentsOnSitePagesDisabled
   nameWithType: IWeb.CommentsOnSitePagesDisabled
+- uid: PnP.Core.Model.SharePoint.IWeb.ContainsConfidentialInfo
+  name: ContainsConfidentialInfo
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ContainsConfidentialInfo
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.ContainsConfidentialInfo
+  fullName: PnP.Core.Model.SharePoint.IWeb.ContainsConfidentialInfo
+  nameWithType: IWeb.ContainsConfidentialInfo
+- uid: PnP.Core.Model.SharePoint.IWeb.ContainsConfidentialInfo*
+  name: ContainsConfidentialInfo
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ContainsConfidentialInfo_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.ContainsConfidentialInfo
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.ContainsConfidentialInfo
+  nameWithType: IWeb.ContainsConfidentialInfo
 - uid: PnP.Core.Model.SharePoint.IWeb.ContentTypes
   name: ContentTypes
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ContentTypes
@@ -9928,6 +10097,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.ContentTypes
   nameWithType: IWeb.ContentTypes
+- uid: PnP.Core.Model.SharePoint.IWeb.Created
+  name: Created
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Created
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.Created
+  fullName: PnP.Core.Model.SharePoint.IWeb.Created
+  nameWithType: IWeb.Created
+- uid: PnP.Core.Model.SharePoint.IWeb.Created*
+  name: Created
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Created_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.Created
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.Created
+  nameWithType: IWeb.Created
 - uid: PnP.Core.Model.SharePoint.IWeb.CustomMasterPageUrl
   name: CustomMasterPageUrl
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CustomMasterPageUrl
@@ -9941,6 +10123,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.CustomMasterPageUrl
   nameWithType: IWeb.CustomMasterPageUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.CustomSiteActionsDisabled
+  name: CustomSiteActionsDisabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CustomSiteActionsDisabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.CustomSiteActionsDisabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.CustomSiteActionsDisabled
+  nameWithType: IWeb.CustomSiteActionsDisabled
+- uid: PnP.Core.Model.SharePoint.IWeb.CustomSiteActionsDisabled*
+  name: CustomSiteActionsDisabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CustomSiteActionsDisabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.CustomSiteActionsDisabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.CustomSiteActionsDisabled
+  nameWithType: IWeb.CustomSiteActionsDisabled
+- uid: PnP.Core.Model.SharePoint.IWeb.DefaultNewPageTemplateId
+  name: DefaultNewPageTemplateId
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DefaultNewPageTemplateId
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.DefaultNewPageTemplateId
+  fullName: PnP.Core.Model.SharePoint.IWeb.DefaultNewPageTemplateId
+  nameWithType: IWeb.DefaultNewPageTemplateId
+- uid: PnP.Core.Model.SharePoint.IWeb.DefaultNewPageTemplateId*
+  name: DefaultNewPageTemplateId
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DefaultNewPageTemplateId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.DefaultNewPageTemplateId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.DefaultNewPageTemplateId
+  nameWithType: IWeb.DefaultNewPageTemplateId
 - uid: PnP.Core.Model.SharePoint.IWeb.Description
   name: Description
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Description
@@ -9954,6 +10162,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.Description
   nameWithType: IWeb.Description
+- uid: PnP.Core.Model.SharePoint.IWeb.DesignerDownloadUrlForCurrentUser
+  name: DesignerDownloadUrlForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DesignerDownloadUrlForCurrentUser
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.DesignerDownloadUrlForCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.DesignerDownloadUrlForCurrentUser
+  nameWithType: IWeb.DesignerDownloadUrlForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.DesignerDownloadUrlForCurrentUser*
+  name: DesignerDownloadUrlForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DesignerDownloadUrlForCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.DesignerDownloadUrlForCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.DesignerDownloadUrlForCurrentUser
+  nameWithType: IWeb.DesignerDownloadUrlForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.DesignPackageId
+  name: DesignPackageId
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DesignPackageId
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.DesignPackageId
+  fullName: PnP.Core.Model.SharePoint.IWeb.DesignPackageId
+  nameWithType: IWeb.DesignPackageId
+- uid: PnP.Core.Model.SharePoint.IWeb.DesignPackageId*
+  name: DesignPackageId
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DesignPackageId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.DesignPackageId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.DesignPackageId
+  nameWithType: IWeb.DesignPackageId
 - uid: PnP.Core.Model.SharePoint.IWeb.DisableAppViews
   name: DisableAppViews
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DisableAppViews
@@ -9980,6 +10214,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.DisableFlows
   nameWithType: IWeb.DisableFlows
+- uid: PnP.Core.Model.SharePoint.IWeb.DisableRecommendedItems
+  name: DisableRecommendedItems
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DisableRecommendedItems
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.DisableRecommendedItems
+  fullName: PnP.Core.Model.SharePoint.IWeb.DisableRecommendedItems
+  nameWithType: IWeb.DisableRecommendedItems
+- uid: PnP.Core.Model.SharePoint.IWeb.DisableRecommendedItems*
+  name: DisableRecommendedItems
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DisableRecommendedItems_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.DisableRecommendedItems
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.DisableRecommendedItems
+  nameWithType: IWeb.DisableRecommendedItems
+- uid: PnP.Core.Model.SharePoint.IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+  name: DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+  nameWithType: IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+- uid: PnP.Core.Model.SharePoint.IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled*
+  name: DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_DocumentLibraryCalloutOfficeWebAppPreviewersDisabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+  nameWithType: IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
 - uid: PnP.Core.Model.SharePoint.IWeb.ExcludeFromOfflineClient
   name: ExcludeFromOfflineClient
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ExcludeFromOfflineClient
