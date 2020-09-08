@@ -68,11 +68,6 @@ namespace PnP.Core.Model.SharePoint
         public bool AllowSavePublishDeclarativeWorkflowForCurrentUser { get; }
 
         /// <summary>
-        /// Gets or sets the URL of an alternate CSS file.
-        /// </summary>
-        public string AlternateCssUrl { get; set; }
-
-        /// <summary>
         /// The instance Id of the App Instance that this website represents.
         /// </summary>
         public Guid AppInstanceId { get; }
@@ -92,11 +87,6 @@ namespace PnP.Core.Model.SharePoint
         /// Gets a value that specifies when the site was created.
         /// </summary>
         public DateTime Created { get; }
-
-        /// <summary>
-        /// Gets or sets the URL for a custom master page file to apply to the website.
-        /// </summary>
-        public string CustomMasterUrl { get; set; }
 
         // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
         /// <summary>

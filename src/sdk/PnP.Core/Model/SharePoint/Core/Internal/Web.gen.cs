@@ -34,8 +34,6 @@ namespace PnP.Core.Model.SharePoint
 
         public bool AllowSavePublishDeclarativeWorkflowForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
 
-        public string AlternateCssUrl { get => GetValue<string>(); set => SetValue(value); }
-
         public Guid AppInstanceId { get => GetValue<Guid>(); set => SetValue(value); }
 
         public string ClassicWelcomePage { get => GetValue<string>(); set => SetValue(value); }
@@ -43,8 +41,6 @@ namespace PnP.Core.Model.SharePoint
         public bool ContainsConfidentialInfo { get => GetValue<bool>(); set => SetValue(value); }
 
         public DateTime Created { get => GetValue<DateTime>(); set => SetValue(value); }
-
-        public string CustomMasterUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public bool CustomSiteActionsDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
