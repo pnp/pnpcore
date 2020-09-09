@@ -43,6 +43,6 @@ Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit in
 
 The SDK provides an object model that's API agnostic, when you as a developer for example load a SharePoint List the SDK by default will use [Microsoft Graph](https://docs.microsoft.com/en-us/graph/). If however you're loading List properties that cannot be provided via [Microsoft Graph](https://docs.microsoft.com/en-us/graph/) the SDK wil issue a SharePoint REST call. Depending on the needs the SDK will use Microsoft Graph Beta calls (e.g. for Taxonomy support) and in some rare cases the CSOM endpoint (client.svc) is called. But the good thing is that all of this is transparent for you as developer! You'll have a consistent development experience regardless of the underlying API's being called.
 
-As [Microsoft Graph](https://docs.microsoft.com/en-us/graph/) is our recommended API to work with Microsoft 365 the SDK will always Microsoft Graph whenever possible, the "fall back" to SharePoint REST only happens when Microsoft Graph can't provide the needed data.
+As [Microsoft Graph](https://docs.microsoft.com/en-us/graph/) is our recommended API to work with Microsoft 365, the SDK will always use Microsoft Graph whenever possible, the "fall back" to SharePoint REST only happens when Microsoft Graph can't provide the needed data.
 
 **Community rocks, sharing is caring!**
