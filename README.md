@@ -1,8 +1,8 @@
-# PnP Core SDK - preview
+# PnP Core SDK
 
 ![Build and Test](https://github.com/pnp/pnpcore/workflows/Build%20and%20Test/badge.svg?branch=dev) ![Refresh documentation](https://github.com/pnp/pnpcore/workflows/Refresh%20documentation/badge.svg?branch=dev) ![Nightly nuget release](https://github.com/pnp/pnpcore/workflows/Nightly%20nuget%20release/badge.svg?branch=dev) [![Nuget](https://img.shields.io/nuget/vpre/PnP.Core.svg)](https://www.nuget.org/packages/PnP.Core/)
 
-The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams. Currently the library is an **early preview** in which the focus was on coding the basics so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
+The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called. Currently the library is an **early preview** in which the focus was on coding the basics so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
 
 > **Important**
 > The PnP Core SDK is in preview: it's targetting developers that want to either test or extend it. It's **not yet** ready to be used in production scenarios, mainly because it still lacks some of the model definitions.
@@ -41,8 +41,8 @@ Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit in
 
 ### What underlying API's are used?
 
-The SDK provides an object model that's API agnostic, when you as a developer for example load a SharePoint List the SDK by default will use Microsoft Graph. If however you're loading List properties that cannot be provided via Microsoft Graph the SDK wil issue a SharePoint REST call. Depending on the needs the SDK will use Microsoft Graph Beta calls (e.g. for Taxonomy support) and in some rare cases the CSOM endpoint (client.svc) is called. But the good thing is that all of this is transparent for you as developer! You'll have a consistent development experience regardless of the underlying API's being called.
+The SDK provides an object model that's API agnostic, when you as a developer for example load a SharePoint List the SDK by default will use [Microsoft Graph](https://docs.microsoft.com/en-us/graph/). If however you're loading List properties that cannot be provided via [Microsoft Graph](https://docs.microsoft.com/en-us/graph/) the SDK wil issue a SharePoint REST call. Depending on the needs the SDK will use Microsoft Graph Beta calls (e.g. for Taxonomy support) and in some rare cases the CSOM endpoint (client.svc) is called. But the good thing is that all of this is transparent for you as developer! You'll have a consistent development experience regardless of the underlying API's being called.
 
-As Microsoft Graph is our recommended API to work with Microsoft 365 the SDK will always Microsoft Graph whenever possible, the "fall back" to SharePoint REST only happens when Microsoft Graph can't provide the needed data.
+As [Microsoft Graph](https://docs.microsoft.com/en-us/graph/) is our recommended API to work with Microsoft 365 the SDK will always Microsoft Graph whenever possible, the "fall back" to SharePoint REST only happens when Microsoft Graph can't provide the needed data.
 
 **Community rocks, sharing is caring!**
