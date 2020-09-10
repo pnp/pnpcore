@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Folder object
     /// </summary>
     [ConcreteType(typeof(Folder))]
-    public interface IFolder : IDataModel<IFolder>, IDataModelUpdate, IDataModelDelete
+    public interface IFolder : IDataModel<IFolder>, IDataModelUpdate, IDataModelDelete, IQueryableModel
     {
         /// <summary>
         /// Gets whether the folder exists,

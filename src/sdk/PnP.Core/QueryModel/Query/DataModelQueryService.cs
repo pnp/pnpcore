@@ -43,9 +43,8 @@ namespace PnP.Core.QueryModel
                 throw new ClientException(ErrorType.LinqError, $"Missing value for {nameof(memberName)} in {GetType().Name}");
             }
 
-            // At this point in time we support querying collections of 
-            // IList and IListItem or single elements of those collections
-            if (QueryableDataModels.IsSupportedQueryableModel<TModel>())
+            // At this point in time we support querying collections for which the model implements IQueryableModel
+            if (typeof(TModel).ImplementsInterface(typeof(IQueryableModel)))
             {
                 // Get the entity info
                 var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel), null);
@@ -106,7 +105,7 @@ namespace PnP.Core.QueryModel
 
                     // Build the Graph request URL
                     var requestUrl = $"{entityInfo.GraphLinqGet}?{query.ToQueryString(ODataTargetPlatform.Graph, urlEncode: false)}";
-                    requestUrl = await Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context).ConfigureAwait(false);
+                    requestUrl = await TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context).ConfigureAwait(false);
 
                     // Add the request to the current batch
                     batchRequestId = context.CurrentBatch.Add(
@@ -138,7 +137,7 @@ namespace PnP.Core.QueryModel
 
                     // Build the SPO REST request URL
                     var requestUrl = $"{context.Uri.ToString().TrimEnd('/')}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
-                    requestUrl = await Core.Services.TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).ConfigureAwait(false);
+                    requestUrl = await TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).ConfigureAwait(false);
 
                     // Add the request to the current batch
                     batchRequestId = context.CurrentBatch.Add(

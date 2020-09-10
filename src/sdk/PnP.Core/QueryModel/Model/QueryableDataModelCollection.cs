@@ -1,38 +1,10 @@
 ﻿using PnP.Core.Model;
 using PnP.Core.Services;
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace PnP.Core.QueryModel
 {
-
-    internal static class QueryableDataModels
-    {
-        public static Type[] Supported
-        {
-            get => new Type[]
-            {
-                typeof(Model.SharePoint.IList),
-                typeof(Model.SharePoint.IListItem),
-                typeof(Model.SharePoint.IContentType),
-                typeof(Model.SharePoint.IField),
-                typeof(Model.SharePoint.IFolder),
-                typeof(Model.SharePoint.IFile),
-                typeof(Model.SharePoint.IWeb),
-                typeof(Model.SharePoint.ITermGroup),
-                typeof(Model.SharePoint.ITermSet),
-                typeof(Model.Teams.ITeamChannel),
-                typeof(Model.Teams.ITeamChatMessage)
-            };
-        }
-
-        public static bool IsSupportedQueryableModel<TModel>()
-        {
-            return Supported.Any(s => typeof(TModel).IsAssignableFrom(s));
-        }
-    }
-
     /// <summary>
     /// Base type for any LINQ IQueryable collection of the Domain Model
     /// In the real model, could inherit from  BaseDataModelCollection&lt;TModel&gt;

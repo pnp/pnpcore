@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharePoint Online list item
     /// </summary>
     [ConcreteType(typeof(ListItem))]
-    public interface IListItem : IDataModel<IListItem>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel
+    public interface IListItem : IDataModel<IListItem>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableModel
     {
         /// <summary>
         /// Id of the list item

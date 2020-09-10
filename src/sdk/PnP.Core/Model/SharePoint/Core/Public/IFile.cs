@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a File object
     /// </summary>
     [ConcreteType(typeof(File))]
-    public interface IFile : IDataModel<IFile>, IDataModelUpdate, IDataModelDelete
+    public interface IFile : IDataModel<IFile>, IDataModelUpdate, IDataModelDelete, IQueryableModel
     {
         /// <summary>
         /// Gets a value that returns the comment used when a document is checked into a document library.
