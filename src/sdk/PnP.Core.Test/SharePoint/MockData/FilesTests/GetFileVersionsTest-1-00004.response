@@ -1,0 +1,9 @@
+--batchresponse_e7203b8d-84cf-4b13-874f-c1f4130cd788
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"CheckIn":null}}
+--batchresponse_e7203b8d-84cf-4b13-874f-c1f4130cd788--

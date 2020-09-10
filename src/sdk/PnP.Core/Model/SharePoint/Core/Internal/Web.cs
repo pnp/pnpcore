@@ -3,7 +3,6 @@ using PnP.Core.Services;
 using System;
 using System.Linq.Expressions;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -90,17 +89,17 @@ namespace PnP.Core.Model.SharePoint
 
         public IFolder GetFolderByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
-            return GetFolderByServerRelativeUrlBatchAsync(batch, serverRelativeUrl).GetAwaiter().GetResult();
+            return GetFolderByServerRelativeUrlBatchAsync(batch, serverRelativeUrl, expressions).GetAwaiter().GetResult();
         }
 
         public async Task<IFolder> GetFolderByServerRelativeUrlBatchAsync(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
-            return await GetFolderByServerRelativeUrlBatchAsync(PnPContext.CurrentBatch, serverRelativeUrl).ConfigureAwait(false);
+            return await GetFolderByServerRelativeUrlBatchAsync(PnPContext.CurrentBatch, serverRelativeUrl, expressions).ConfigureAwait(false);
         }
 
         public IFolder GetFolderByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
-            return GetFolderByServerRelativeUrlBatchAsync(serverRelativeUrl).GetAwaiter().GetResult();
+            return GetFolderByServerRelativeUrlBatchAsync(serverRelativeUrl, expressions).GetAwaiter().GetResult();
         }
 
         private static ApiCall BuildGetFolderByRelativeUrlApiCall(string serverRelativeUrl)
@@ -114,12 +113,12 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Files
-        public IFile GetFileByServerRelativeUrl(string serverRelativeUrl)
+        public IFile GetFileByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
         {
-            return GetFileByServerRelativeUrlAsync(serverRelativeUrl).GetAwaiter().GetResult();
+            return GetFileByServerRelativeUrlAsync(serverRelativeUrl, expressions).GetAwaiter().GetResult();
         }
 
-        public async Task<IFile> GetFileByServerRelativeUrlAsync(string serverRelativeUrl)
+        public async Task<IFile> GetFileByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
         {
             // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
             File file = new File()
@@ -128,24 +127,21 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            ApiCall apiCall = BuildGetFileByRelativeUrlApiCall(serverRelativeUrl);
-
-            await file.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
-
+            await file.BaseGet(apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return file;
         }
 
-        public IFile GetFileByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl)
+        public IFile GetFileByServerRelativeUrlBatch(Batch batch, string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
         {
-            return GetFileByServerRelativeUrlBatchAsync(batch, serverRelativeUrl).GetAwaiter().GetResult();
+            return GetFileByServerRelativeUrlBatchAsync(batch, serverRelativeUrl, expressions).GetAwaiter().GetResult();
         }
 
-        public IFile GetFileByServerRelativeUrlBatch(string serverRelativeUrl)
+        public IFile GetFileByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
         {
-            return GetFileByServerRelativeUrlBatchAsync(serverRelativeUrl).GetAwaiter().GetResult();
+            return GetFileByServerRelativeUrlBatchAsync(serverRelativeUrl, expressions).GetAwaiter().GetResult();
         }
 
-        public async Task<IFile> GetFileByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl)
+        public async Task<IFile> GetFileByServerRelativeUrlBatchAsync(Batch batch, string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
         {
             // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
             File file = new File()
@@ -154,16 +150,13 @@ namespace PnP.Core.Model.SharePoint
                 Parent = this
             };
 
-            ApiCall apiCall = BuildGetFileByRelativeUrlApiCall(serverRelativeUrl);
-
-            await file.RequestBatchAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
-
+            await file.BaseBatchGetAsync(batch, apiOverride: BuildGetFileByRelativeUrlApiCall(serverRelativeUrl), fromJsonCasting: file.MappingHandler, postMappingJson: file.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
             return file;
         }
 
-        public async Task<IFile> GetFileByServerRelativeUrlBatchAsync(string serverRelativeUrl)
+        public async Task<IFile> GetFileByServerRelativeUrlBatchAsync(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions)
         {
-            return await GetFileByServerRelativeUrlBatchAsync(PnPContext.CurrentBatch, serverRelativeUrl).ConfigureAwait(false);
+            return await GetFileByServerRelativeUrlBatchAsync(PnPContext.CurrentBatch, serverRelativeUrl, expressions).ConfigureAwait(false);
         }
 
         private static ApiCall BuildGetFileByRelativeUrlApiCall(string serverRelativeUrl)

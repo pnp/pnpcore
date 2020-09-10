@@ -479,5 +479,19 @@ namespace PnP.Core.Model
             return null;
         }
         #endregion
+
+        #region Metadata Management
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        async Task IMetadataExtensible.SetGraphToRestMetadataAsync()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {            
+        }
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        async Task IMetadataExtensible.SetRestToGraphMetadataAsync()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+        }
+        #endregion
     }
 }

@@ -13,6 +13,11 @@
         object this[string key] { get; set;  }
 
         /// <summary>
+        /// Gets the count of properties of the current expando complex type object
+        /// </summary>
+        public int Count { get; }
+
+        /// <summary>
         /// Transforms the current model instance into a dynamic type
         /// </summary>
         /// <returns>Dynamic version of current model instance</returns>

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Note: this class is generated, please don't modify this code by hand!
     /// 
     /// </summary>
-    [SharePointType("SP.PropertyValues", Target = typeof(IFolder), Uri = "_api/web/getFolderById('{Parent.Id}')/Properties", LinqGet = "_api/web/getFolderById('{Parent.Id}')/Properties")]
+    [SharePointType("SP.PropertyValues")]
     internal partial class PropertyValues : ExpandoBaseComplexType<IPropertyValues>, IPropertyValues
     {
     }

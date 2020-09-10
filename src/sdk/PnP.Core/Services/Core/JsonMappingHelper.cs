@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
@@ -6,8 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PnP.Core.Model;
-using PnP.Core.Utilities;
 
 namespace PnP.Core.Services
 {
@@ -243,11 +242,10 @@ namespace PnP.Core.Services
                     {
                         MapJsonToComplexTypePropertyRecursive(pnpObject, contextAwareObject, property, entityField);
                     }
-                    // TODO: To implement with REST when some domain model require it
-                    //else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
-                    //{
-                    //    MapJsonToComplexTypeItemListRecursive(pnpObject, contextAwareObject, apiResponse, property, entityField);
-                    //}
+                    else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
+                    {
+                        MapJsonToComplexTypeItemListRecursive(pnpObject, contextAwareObject, apiResponse, property, entityField);
+                    }
                     else // Simple property mapping
                     {
                         // Keep the id value aside when seeing it for later usage
@@ -339,8 +337,8 @@ namespace PnP.Core.Services
             {
                 Metadata.Add(PnPConstants.MetaDataRestId, idFieldValue);
             }
-            // Store graph ID for transition to graph when needed
-            if (pnpContext.GraphFirst && !Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+            // Store graph ID for transition to graph when needed. No point in doing this when we've disabled graph first behaviour or when the entity does not support rest + graph
+            if (pnpContext.GraphFirst && entity.SupportsGraphAndRest && !Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
             {
                 // SP.Web requires a special id value
                 if (entity.SharePointType.Equals("SP.Web"))
@@ -381,6 +379,8 @@ namespace PnP.Core.Services
                 }
             }
 
+            // Additional metadata population to enable the transition from Rest to Graph
+            await targetMetadataObject.SetRestToGraphMetadataAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -633,14 +633,18 @@ namespace PnP.Core.Services
         {
             // If the SharePoint type of the entity is not known, metadata cannot be populated
             if (string.IsNullOrEmpty(entity.SharePointType))
+            {
                 return;
+            }
 
             Dictionary<string, string> metadata = targetMetadataObject.Metadata;
             if (!metadata.ContainsKey(PnPConstants.MetaDataType))
             {
                 metadata.Add(PnPConstants.MetaDataType, entity.SharePointType);
             }
-            if (!metadata.ContainsKey(PnPConstants.MetaDataRestId))
+
+            // Set the rest key metadata, the web and site model instances follow a specific path
+            if (entity.SupportsGraphAndRest && !metadata.ContainsKey(PnPConstants.MetaDataRestId))
             {
                 // SP.Web and SP.Site are special cases
                 if (entity.SharePointType.Equals("SP.Web"))
@@ -688,10 +692,9 @@ namespace PnP.Core.Services
                 var parsedApiCall = await ApiHelper.ParseApiRequestAsync(targetMetadataObject, $"{contextAwareObject.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUri}").ConfigureAwait(false);
                 metadata.Add(PnPConstants.MetaDataUri, parsedApiCall);
             }
-            if (entity.SharePointType.Equals("SP.List") && pnpObject.HasValue("Title") && !metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
-            {
-                metadata.Add(PnPConstants.MetaDataRestEntityTypeName, $"{pnpObject.GetValue("Title").ToString().Replace(" ", "")}List");
-            }
+
+            // Additional metadata population to enable the transition from Graph to Rest
+            await targetMetadataObject.SetGraphToRestMetadataAsync().ConfigureAwait(false);
         }
 
         private static void MapJsonToComplexTypePropertyRecursive(TransientObject pnpObject, IDataModelWithContext contextAwareObject, JsonProperty property, EntityFieldInfo entityField)
@@ -787,6 +790,14 @@ namespace PnP.Core.Services
 
         private static void MapJsonToComplexTypeItemListRecursive(TransientObject pnpObject, IDataModelWithContext contextAwareObject, ApiResponse apiResponse, JsonProperty property, EntityFieldInfo entityField)
         {
+            JsonElement jsonArray = apiResponse.ApiCall.Type == ApiType.SPORest
+                    ? TryGetRestComplexTypeArray(property)
+                    : property.Value;
+
+            // If property is not a valid array, skip the mapping process
+            if (jsonArray.ValueKind != JsonValueKind.Array)
+                return;
+
             // Get the actual current value of the property we're setting...as that allows to detect it's type
             var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
 
@@ -794,7 +805,7 @@ namespace PnP.Core.Services
             (propertyToSetValue as System.Collections.IList).Clear();
 
             // Load each child as a complex type class in the list
-            foreach (var childJson in property.Value.EnumerateArray())
+            foreach (var childJson in jsonArray.EnumerateArray())
             {
                 // create the list item 
                 var typeToCreate = Type.GetType($"{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Namespace}.{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Name.Substring(1)}");
@@ -811,7 +822,10 @@ namespace PnP.Core.Services
                 // Map returned fields
                 foreach (var childProperty in childJson.EnumerateObject())
                 {
-                    EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                    EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>)
+                                            .FirstOrDefault(p => p.Name.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)
+                                            || (!string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase))
+                                            || (!string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)));
                     if (entityChildField != null)
                     {
                         // if the complex type contains another complex type and there's a value provided then let's recursively call this method again
@@ -844,6 +858,35 @@ namespace PnP.Core.Services
                         }
                     }
                 }
+            }
+        }
+
+        private static JsonElement TryGetRestComplexTypeArray(JsonProperty property)
+        {
+            if (property.Value.ValueKind == JsonValueKind.Array)
+            {
+                return property.Value;
+            }
+            else
+            {
+                if (property.Value.ValueKind == JsonValueKind.Object)
+                {
+                    if (property.Value.TryGetProperty("results", out JsonElement resultsProperty))
+                    {
+                        // If found "results" property
+                        if (resultsProperty.ValueKind == JsonValueKind.Array)
+                        {
+                            // And is an array, it is the array to iterate through
+                            return resultsProperty;
+                        }
+                    }
+
+                    // Otherwise, the mapped property should have default value
+                    return default;
+                }
+
+                // The JSON property type is not expected
+                throw new ClientException(ErrorType.UnexpectedMappingType, $"The property {property.Name} is expected to be an array but is of type {property.Value.ValueKind} instead.");
             }
         }
 

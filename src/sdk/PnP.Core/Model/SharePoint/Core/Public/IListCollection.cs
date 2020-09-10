@@ -1,8 +1,6 @@
-﻿using System;
+﻿using PnP.Core.Services;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -12,15 +10,6 @@ namespace PnP.Core.Model.SharePoint
     public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, ISupportPaging<IList>
     {
         #region Extension Methods
-        /// <summary>
-        /// Gets a list by title via a batch request
-        /// </summary>
-        /// <param name="title">Title of the list to get</param>
-        /// <param name="expressions">Defines the <see cref="List"/>properties to load</param>
-        /// <returns>Loaded list, null is not found</returns>
-        public Task<IList> BatchGetByTitleAsync(string title, params Expression<Func<IList, object>>[] expressions);
-
-
         /// <summary>
         /// Adds a new list
         /// </summary>

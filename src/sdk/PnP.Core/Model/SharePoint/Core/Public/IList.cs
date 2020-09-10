@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a List object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(List))]
-    public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
+    public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// The Unique ID of the List object

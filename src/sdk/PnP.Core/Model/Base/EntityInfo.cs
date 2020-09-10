@@ -361,6 +361,18 @@ namespace PnP.Core.Model
                     return false;
                 }
             }
-        }        
+        }
+
+        /// <summary>
+        /// Indicates if this entity supports both REST as Graph operations
+        /// </summary>
+        internal bool SupportsGraphAndRest
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(SharePointGet) && !string.IsNullOrEmpty(GraphGet);
+            }
+        }
+
     }
 }

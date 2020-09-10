@@ -1,0 +1,33 @@
+--batchresponse_0ca53d8b-4646-40a8-ba63-53b10c82f6f8
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"CheckOut":null}}
+--batchresponse_0ca53d8b-4646-40a8-ba63-53b10c82f6f8
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"CheckIn":null}}
+--batchresponse_0ca53d8b-4646-40a8-ba63-53b10c82f6f8
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"CheckOut":null}}
+--batchresponse_0ca53d8b-4646-40a8-ba63-53b10c82f6f8
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"CheckIn":null}}
+--batchresponse_0ca53d8b-4646-40a8-ba63-53b10c82f6f8--

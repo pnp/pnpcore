@@ -1,5 +1,6 @@
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a File object
     /// </summary>
     [ConcreteType(typeof(File))]
-    public interface IFile : IDataModel<IFile>, IDataModelUpdate, IDataModelDelete
+    public interface IFile : IDataModel<IFile>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// Gets a value that returns the comment used when a document is checked into a document library.
@@ -130,62 +131,54 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IListItem ListItemAllFields { get; }
 
-        /*
-        //TODO: To implement...
         /// <summary>
-        /// Gets a value that specifies the user who added the file.
-        /// </summary>
-        public IUser Author { get; }
-
-        //TODO: To implement...
-        /// <summary>
-        /// Gets a value that returns the user who has checked out the file.
-        /// </summary>
-        public IUser CheckedOutByUser { get; }
-
-        //TODO: To implement...
-        /// <summary>
-        /// To update...
+        /// Gets the Information Rights Management settings of the file.
         /// </summary>
         public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings { get; }
 
-        //TODO: To implement...
         /// <summary>
-        /// To update...
+        /// Gets the Information Rights Management settings of the file.
         /// </summary>
         public IInformationRightsManagementFileSettings InformationRightsManagementSettings { get; }
 
-
-        //TODO: To implement...
         /// <summary>
-        /// To update...
-        /// </summary>
-        public IUser LockedByUser { get; }
-
-        //TODO: To implement...
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IUser ModifiedBy { get; }
-
-        //TODO: To implement...
-        /// <summary>
-        /// To update...
+        /// Gets the properties of the file.
         /// </summary>
         public IPropertyValues Properties { get; }
 
-        //TODO: To implement...
         /// <summary>
-        /// To update...
+        /// Gets a value that returns a collection of file version event objects that represent the version events of the file.
         /// </summary>
-        public IFileVersionEventCollection VersionEvents { get; }
+        public List<IFileVersionEvent> VersionEvents { get; }
 
-        //TODO: To implement...
         /// <summary>
-        /// To update...
+        /// Gets a value that returns a collection of file version objects that represent the versions of the file.
         /// </summary>
-        public IFileVersionCollection Versions { get; }
-        */
+        public List<IFileVersion> Versions { get; }
+
+        ////TODO: To implement...
+        ///// <summary>
+        ///// Gets a value that specifies the user who added the file.
+        ///// </summary>
+        //public IUser Author { get; }
+
+        ////TODO: To implement...
+        ///// <summary>
+        ///// Gets a value that returns the user who has checked out the file.
+        ///// </summary>
+        //public IUser CheckedOutByUser { get; }
+
+        ////TODO: To implement...
+        ///// <summary>
+        ///// To update...
+        ///// </summary>
+        //public IUser LockedByUser { get; }
+
+        ////TODO: To implement...
+        ///// <summary>
+        ///// To update...
+        ///// </summary>
+        //public IUser ModifiedBy { get; }
 
         #region Publish
         /// <summary>

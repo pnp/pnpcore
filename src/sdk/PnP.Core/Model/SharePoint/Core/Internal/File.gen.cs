@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -79,6 +80,96 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        // TODO: Shouldn't ComplexType enforce expand without the need to mark it here?
+        [SharePointProperty("EffectiveInformationRightsManagementSettings", Expandable = true)]
+        public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new EffectiveInformationRightsManagementSettings();
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IEffectiveInformationRightsManagementSettings>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        [SharePointProperty("InformationRightsManagementSettings", Expandable = true)]
+        public IInformationRightsManagementFileSettings InformationRightsManagementSettings
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new InformationRightsManagementFileSettings();
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IInformationRightsManagementFileSettings>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        // TODO: Shouldn't ComplexType enforce expand without the need to mark it here?
+        [SharePointProperty("Properties", Expandable = true)]
+        public IPropertyValues Properties
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new PropertyValues();
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IPropertyValues>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        [SharePointProperty("VersionEvents", Expandable = true)]
+        public List<IFileVersionEvent> VersionEvents
+        {
+            get
+            {
+                if (!HasValue(nameof(VersionEvents)))
+                {
+                    var collection = new List<IFileVersionEvent>();
+                    SetValue(collection);
+                }
+                return GetValue<List<IFileVersionEvent>>();
+            }
+        }
+
+        [SharePointProperty("Versions", Expandable = true)]
+        public List<IFileVersion> Versions
+        {
+            get
+            {
+                if (!HasValue(nameof(Versions)))
+                {
+                    var collection = new List<IFileVersion>();
+                    SetValue(collection);
+                }
+                return GetValue<List<IFileVersion>>();
+            }
+        }
+
 
         #region Not Implemented yet
         //public IUser Author
@@ -127,51 +218,7 @@ namespace PnP.Core.Model.SharePoint
         //    }
         //}
 
-        //public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new EffectiveInformationRightsManagementSettings
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IEffectiveInformationRightsManagementSettings>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
 
-        //public IInformationRightsManagementFileSettings InformationRightsManagementSettings
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new InformationRightsManagementFileSettings
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IInformationRightsManagementFileSettings>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
 
         //public IUser LockedByUser
         //{
@@ -216,57 +263,6 @@ namespace PnP.Core.Model.SharePoint
         //    {
         //        InstantiateNavigationProperty();
         //        SetValue(value);                
-        //    }
-        //}
-
-        //public IPropertyValues Properties
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new PropertyValues
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IPropertyValues>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
-
-        //[SharePointProperty("VersionEvents", Expandable = true)]
-        //public IFileVersionEventCollection VersionEvents
-        //{
-        //    get
-        //    {
-        //        if (!HasValue(nameof(VersionEvents)))
-        //        {
-        //            var collection = new FileVersionEventCollection(this.PnPContext, this, nameof(VersionEvents));
-        //            SetValue(collection);
-        //        }
-        //        return GetValue<IFileVersionEventCollection>();
-        //    }
-        //}
-
-        //[SharePointProperty("Versions", Expandable = true)]
-        //public IFileVersionCollection Versions
-        //{
-        //    get
-        //    {
-        //        if (!HasValue(nameof(Versions)))
-        //        {
-        //            var collection = new FileVersionCollection(this.PnPContext, this, nameof(Versions));
-        //            SetValue(collection);
-        //        }
-        //        return GetValue<IFileVersionCollection>();
         //    }
         //}
         #endregion

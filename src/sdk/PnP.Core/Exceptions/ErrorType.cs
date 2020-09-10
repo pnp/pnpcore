@@ -91,6 +91,11 @@
         /// </summary>
         UnsupportedViaBatch,
 
+        /// <summary>
+        /// The payload to map to object has an unexpected type
+        /// </summary>
+        UnexpectedMappingType,
+
         // Testing
 
         /// <summary>

@@ -2,10 +2,19 @@
 
 ## Intro
 
-The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. At the moment the supported workloads are SharePoint Online and Microsoft Teams. Currently the library is an **early preview** in which the focus is on coding the basics, so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 workloads such as Mail, Planner, Yammer, etc.
+The PnP Core SDK is an SDK designed to work for Microsoft 365. It's aim is to provide a unified object model to work with the Microsoft 365 ecosystem. At the moment the supported workloads are SharePoint Online and Microsoft Teams. Currently the library is a **preview** in which the focus is on coding the basics, so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
 
 > [!Important]
-> The PnP Core SDK is in preview: it's targeting developers that want to either test or extend it. It's **not** yet ready to be used in production scenarios, mainly because it still lacks most of the model definitions, and some functional requirements are still under development.
+> The PnP Core SDK is in preview: it's targeting developers that want to either test or extend it. It's **not** yet ready to be used in production scenarios, mainly because it still lacks some of the model definitions.
+
+## Roadmap
+
+This is a community effort, hence we cannot guarantee below roadmap but rest assure, we're working hard to stick to plan :-) If you want to join our team and help realize this, then checkout the [How can I help](https://pnp.github.io/pnpcore/#how-can-you-help) section in our docs.
+
+- Preview 3: September 2020
+- Beta 1: October 2020
+- Beta 2: November 2020
+- V1: December 2020
 
 ## Getting started using this library
 
@@ -26,7 +35,7 @@ The model implemented in the preview only covers a small part of what's possible
 
 ### Best practices when contributing
 
-- This is all new and we're here to help, don't hesitate to reach out with your questions and feedback
+- This is all new and we're here to help, don't hesitate to reach out with your questions and feedback via [our issue list](https://github.com/pnp/pnpcore/issues)
 - To avoid overlapping efforts in the startup phase please let us know if you plan to take on a particular chunk of work (e.g. let's say you want to extend the model to support Planner)
 - If you are extending the model and you need to update the model base logic then please reach out, we want to align and agree on those changes first as these need to fit into our model approach
 
