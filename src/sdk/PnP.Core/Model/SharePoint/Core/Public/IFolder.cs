@@ -35,7 +35,6 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string ProgID { get; }
 
-
         /// <summary>
         /// Gets the server-relative URL of the list folder.
         /// </summary>

@@ -1,3 +1,4 @@
+using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Linq.Expressions;
@@ -233,6 +234,16 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Uri Url { get; }
 
+        /// <summary>
+        /// Gets the current user in the current context
+        /// </summary>
+        public IUser CurrentUser { get; }
+
+        // See discussion https://github.com/pnp/pnpcore/discussions/111#discussioncomment-76156
+        ///// <summary>
+        ///// Gets the author of the current Web object
+        ///// </summary>
+        //public IUser Author { get; }
 
         /// <summary>
         /// Collection of lists in the current Web object
@@ -288,6 +299,11 @@ namespace PnP.Core.Model.SharePoint
         /// Gets the UserInfo list of the site collection that contains the website.
         /// </summary>
         public IList SiteUserInfoList { get; }
+
+        /// <summary>
+        /// Gets the collection of all users that belong to the site collection.
+        /// </summary>
+        public IUserCollection SiteUsers { get; }
 
         #region Methods
 
@@ -662,22 +678,12 @@ namespace PnP.Core.Model.SharePoint
         ///// <summary>
         ///// To update...
         ///// </summary>
-        //public IUser Author { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
         //public IModernizeHomepageResult CanModernizeHomepage { get; }
 
         ///// <summary>
         ///// To update...
         ///// </summary>
         //public IClientWebPartCollection ClientWebParts { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUser CurrentUser { get; }
 
         ///// <summary>
         ///// To update...
@@ -753,13 +759,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IGroupCollection SiteGroups { get; }
-
-
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUserCollection SiteUsers { get; }
 
         ///// <summary>
         ///// To update...

@@ -1,4 +1,4 @@
-﻿using PnP.Core.Model.AzureActiveDirectory;
+﻿using PnP.Core.Model.Security;
 using System;
 using System.Threading.Tasks;
 

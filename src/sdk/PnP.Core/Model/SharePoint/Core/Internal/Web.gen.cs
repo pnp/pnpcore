@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model.Security;
+using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -290,6 +291,69 @@ namespace PnP.Core.Model.SharePoint
             {
                 InstantiateNavigationProperty();
                 SetValue(value);
+            }
+        }
+
+        [SharePointProperty("CurrentUser", Expandable = true)]
+        public IUser CurrentUser
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new User
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IUser>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        // See discussion https://github.com/pnp/pnpcore/discussions/111#discussioncomment-76156
+        //[SharePointProperty("Author", Expandable = true)]
+        //public IUser Author
+        //{
+        //    get
+        //    {
+        //        if (!NavigationPropertyInstantiated())
+        //        {
+        //            var propertyValue = new User
+        //            {
+        //                PnPContext = this.PnPContext,
+        //                Parent = this,
+        //            };
+        //            SetValue(propertyValue);
+        //            InstantiateNavigationProperty();
+        //        }
+        //        return GetValue<IUser>();
+        //    }
+        //    set
+        //    {
+        //        InstantiateNavigationProperty();
+        //        SetValue(value);
+        //    }
+        //}
+
+        [SharePointProperty("SiteUsers", Expandable = true)]
+        public IUserCollection SiteUsers
+        {
+            get
+            {
+                if (!HasValue(nameof(SiteUsers)))
+                {
+                    var folders = new UserCollection(this.PnPContext, this, nameof(SiteUsers));
+                    SetValue(folders);
+                }
+                return GetValue<IUserCollection>();
             }
         }
 

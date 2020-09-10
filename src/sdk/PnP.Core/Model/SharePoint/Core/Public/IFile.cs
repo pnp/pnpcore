@@ -1,3 +1,4 @@
+using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -156,29 +157,25 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public List<IFileVersion> Versions { get; }
 
-        ////TODO: To implement...
-        ///// <summary>
-        ///// Gets a value that specifies the user who added the file.
-        ///// </summary>
-        //public IUser Author { get; }
+        /// <summary>
+        /// Gets a value that specifies the user who added the file.
+        /// </summary>
+        public IUser Author { get; }
 
-        ////TODO: To implement...
-        ///// <summary>
-        ///// Gets a value that returns the user who has checked out the file.
-        ///// </summary>
-        //public IUser CheckedOutByUser { get; }
+        /// <summary>
+        /// Gets a value that returns the user who has checked out the file.
+        /// </summary>
+        public IUser CheckedOutByUser { get; }
 
-        ////TODO: To implement...
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUser LockedByUser { get; }
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUser LockedByUser { get; }
 
-        ////TODO: To implement...
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUser ModifiedBy { get; }
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUser ModifiedBy { get; }
 
         #region Publish
         /// <summary>

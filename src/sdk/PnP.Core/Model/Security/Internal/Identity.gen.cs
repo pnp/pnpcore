@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.Model.AzureActiveDirectory
+﻿namespace PnP.Core.Model.Security
 {
     [GraphType]
     internal partial class Identity : BaseComplexType<IIdentity>, IIdentity

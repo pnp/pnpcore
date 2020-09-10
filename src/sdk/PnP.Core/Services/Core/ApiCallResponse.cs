@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
 
@@ -6,13 +7,25 @@ namespace PnP.Core.Services
 {
     internal struct ApiCallResponse
     {
-        internal ApiCallResponse(string json, HttpStatusCode statusCode, Dictionary<string, string> headers, Dictionary<int, JsonElement> csomResponseJson)
+        internal ApiCallResponse(ApiCall apiCall, string json, HttpStatusCode statusCode, Guid batchRequestId, Dictionary<string, string> headers, Dictionary<int, JsonElement> csomResponseJson)
         {
+            ApiCall = apiCall;
             Json = json;
             StatusCode = statusCode;
+            BatchRequestId = batchRequestId;
             Headers = headers;
             CsomResponseJson = csomResponseJson;
         }
+
+        /// <summary>
+        /// The API call that issued the current response
+        /// </summary>
+        internal ApiCall ApiCall { get; private set; }
+
+        /// <summary>
+        /// The Id of the batch used to get the current response
+        /// </summary>
+        internal Guid BatchRequestId { get; private set; }
 
         /// <summary>
         /// Contains the json response of the request (if any)

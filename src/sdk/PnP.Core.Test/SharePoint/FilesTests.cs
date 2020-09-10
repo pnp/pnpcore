@@ -42,6 +42,27 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Get File User Properties
+        [TestMethod]
+        public async Task GetFileUserPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, w => w.Author, w => w.ModifiedBy);
+
+                Assert.IsNotNull(testDocument);
+                Assert.IsNotNull(testDocument.Author);
+                Assert.AreNotEqual(0, testDocument.Author.SharePointId);
+            }
+
+            await CleanupMockDocumentFromSharedDocuments(2);
+        }
+        #endregion
+
         #region GetFileByServerRelativeUrl()
         [TestMethod]
         public async Task GetFileByServerRelativeUrlAsyncTest()
@@ -612,9 +633,11 @@ namespace PnP.Core.Test.SharePoint
             // Use a different context to make sure the file is reloaded
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.IsNotNull(testDocument.CheckedOutByUser);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -639,9 +662,11 @@ namespace PnP.Core.Test.SharePoint
             // Use a different context to make sure the file is reloaded
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.IsNotNull(testDocument.CheckedOutByUser);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -667,9 +692,11 @@ namespace PnP.Core.Test.SharePoint
             // Use a different context to make sure the file is reloaded
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.IsNotNull(testDocument.CheckedOutByUser);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -695,9 +722,11 @@ namespace PnP.Core.Test.SharePoint
             // Use a different context to make sure the file is reloaded
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.IsNotNull(testDocument.CheckedOutByUser);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -724,9 +753,11 @@ namespace PnP.Core.Test.SharePoint
             // Use a different context to make sure the file is reloaded
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.IsNotNull(testDocument.CheckedOutByUser);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -753,9 +784,11 @@ namespace PnP.Core.Test.SharePoint
             // Use a different context to make sure the file is reloaded
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.CheckOutType, f => f.CheckedOutByUser);
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
+                Assert.IsNotNull(testDocument.CheckedOutByUser);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();

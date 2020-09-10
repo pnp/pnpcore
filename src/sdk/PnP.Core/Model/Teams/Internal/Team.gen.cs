@@ -1,4 +1,4 @@
-﻿using PnP.Core.Model.AzureActiveDirectory;
+﻿using PnP.Core.Model.Security;
 using System;
 
 namespace PnP.Core.Model.Teams
@@ -98,11 +98,7 @@ namespace PnP.Core.Model.Teams
             {
                 if (!HasValue(nameof(Owners)))
                 {
-                    var owners = new UserCollection
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this
-                    };
+                    var owners = new UserCollection(this.PnPContext, this);
                     SetValue(owners);
                 }
                 return GetValue<IUserCollection>();
@@ -116,11 +112,8 @@ namespace PnP.Core.Model.Teams
             {
                 if (!HasValue(nameof(Members)))
                 {
-                    var members = new UserCollection
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this
-                    };
+                    var members = new UserCollection(this.PnPContext, this);
+
                     SetValue(members);
                 }
                 return GetValue<IUserCollection>();

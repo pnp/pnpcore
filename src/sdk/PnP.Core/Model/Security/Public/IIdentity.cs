@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.Model.AzureActiveDirectory
+﻿namespace PnP.Core.Model.Security
 {
     /// <summary>
     /// The Identity resource represents an identity of an actor. For example, an actor can be a user, device, or application.
