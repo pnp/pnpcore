@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.html",
-          "hash": "Q3vtePh2nRL2AhHeu0r8vw=="
+          "hash": "OgPNON8N+tfjlavLATcahA=="
         }
       },
       "is_incremental": false,
@@ -2154,7 +2154,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialOptions.html",
-          "hash": "IN38BXzJJH2xsS7M9d93gg=="
+          "hash": "DDAvbS95k/dDTJoxfzzC3w=="
         }
       },
       "is_incremental": false,
@@ -2166,7 +2166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialsOptions.html",
-          "hash": "37n502a1Rg5HA7tNvsDd+A=="
+          "hash": "o0lPOJ1X3g2CSh53sRw5BQ=="
         }
       },
       "is_incremental": false,
@@ -2178,7 +2178,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html",
-          "hash": "R0umayyBoc5BqKauSYdKZg=="
+          "hash": "1IxQqIa6n8Rlki05eDp97g=="
         }
       },
       "is_incremental": false,
@@ -2190,7 +2190,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.html",
-          "hash": "3r59EAqio7GNpc+bp97bcw=="
+          "hash": "Tq5jKsn250O0EOeP++NJNw=="
         }
       },
       "is_incremental": false,
@@ -2202,7 +2202,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSitesOptions.html",
-          "hash": "Cug4KafDiqyESlTX2gaMVg=="
+          "hash": "tTTMN3l/DWo4M0t6nRZNzg=="
         }
       },
       "is_incremental": false,
@@ -2226,7 +2226,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.IPnPCoreBuilder.html",
-          "hash": "cceMw6vUsxynN63JtiH+iA=="
+          "hash": "x1uL4s32D2QT8OOyHWZ29w=="
         }
       },
       "is_incremental": false,
@@ -2238,7 +2238,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.PnPCoreBuilder.html",
-          "hash": "BYy5TfXfq9hoAUv8QjrrNA=="
+          "hash": "hZ1AfwUweNGf70UTAyTVYg=="
         }
       },
       "is_incremental": false,
