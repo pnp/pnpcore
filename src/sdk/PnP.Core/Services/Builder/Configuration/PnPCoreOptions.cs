@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace PnP.Core.Services.Builder.Configuration
 {
@@ -23,7 +21,7 @@ namespace PnP.Core.Services.Builder.Configuration
     /// <summary>
     /// Options for configuring PnP Core SDK
     /// </summary>
-    public class PnPCoreCredentialsOptions : Dictionary<String, PnPCoreCredentialOptions>
+    public class PnPCoreCredentialsOptions : Dictionary<string, PnPCoreCredentialOptions>
     {
     }
 
@@ -51,7 +49,7 @@ namespace PnP.Core.Services.Builder.Configuration
     /// <summary>
     /// Options for configuring PnP Core SDK
     /// </summary>
-    public class PnPCoreSitesOptions : Dictionary<String, PnPCoreSiteOptions>
+    public class PnPCoreSitesOptions : Dictionary<string, PnPCoreSiteOptions>
     {
     }
 

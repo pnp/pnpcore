@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 
 namespace PnP.Core.Services.Builder.Configuration
 {
@@ -10,16 +7,16 @@ namespace PnP.Core.Services.Builder.Configuration
         IConfigureOptions<PnPContextFactoryOptions>, 
         IConfigureOptions<OAuthAuthenticationProviderOptions>
     {
-        private IOptions<PnPCoreOptions> _pnpCoreOptions = null;
+        private IOptions<PnPCoreOptions> pnpCoreOptions;
 
         public PnPContextFactoryOptionsConfigurator(IOptions<PnPCoreOptions> pnpCoreOptions)
         {
-            _pnpCoreOptions = pnpCoreOptions;
+            this.pnpCoreOptions = pnpCoreOptions;
         }
 
         public void Configure(PnPContextFactoryOptions options)
         {
-            foreach (var (optionKey, optionValue) in _pnpCoreOptions.Value.Sites)
+            foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Sites)
             {
                 options.Configurations.Add(new PnPContextFactoryOptionsConfiguration { 
                     Name = optionKey,
@@ -31,7 +28,7 @@ namespace PnP.Core.Services.Builder.Configuration
 
         public void Configure(OAuthAuthenticationProviderOptions options)
         {
-            foreach (var (optionKey, optionValue) in _pnpCoreOptions.Value.Credentials)
+            foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Credentials)
             {
                 if (!String.IsNullOrEmpty(optionValue.CredentialManagerName))
                 {

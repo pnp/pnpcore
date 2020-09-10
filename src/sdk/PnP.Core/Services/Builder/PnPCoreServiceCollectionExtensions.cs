@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PnP.Core.Services;
 using PnP.Core.Services.Builder;
-using PnP.Core.Services;
 using PnP.Core.Services.Builder.Configuration;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
