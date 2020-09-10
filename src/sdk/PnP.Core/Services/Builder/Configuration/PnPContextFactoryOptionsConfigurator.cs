@@ -7,7 +7,7 @@ namespace PnP.Core.Services.Builder.Configuration
         IConfigureOptions<PnPContextFactoryOptions>, 
         IConfigureOptions<OAuthAuthenticationProviderOptions>
     {
-        private IOptions<PnPCoreOptions> pnpCoreOptions;
+        private readonly IOptions<PnPCoreOptions> pnpCoreOptions;
 
         public PnPContextFactoryOptionsConfigurator(IOptions<PnPCoreOptions> pnpCoreOptions)
         {
