@@ -9,6 +9,7 @@
 - The OData querystring parameters (accordingly to https://docs.microsoft.com/en-us/graph/query-parameters) should be with $ on v1. However, if we apply $select, $filter, $expand to SPO resources, they work if and only if we remove $
 - When you query for list items with filters against non-indexed fields you need to provide a custom HTTP header (Prefer: HonorNonIndexedQueriesWarningMayFailRandomly)
 - The fields/* construct is a bit weird from a developer point of view
+- There is no support in the Taxonomy API for local custom properties on terms in the store
 
 # Teams
 

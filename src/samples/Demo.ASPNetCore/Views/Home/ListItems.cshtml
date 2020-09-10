@@ -1,0 +1,28 @@
+﻿@model Demo.ASPNetCore.Models.ListItemsViewModel
+@{
+    ViewData["Title"] = "List Items";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Items of List "@Model.ListTitle"</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ListInfo">List Info</a>
+

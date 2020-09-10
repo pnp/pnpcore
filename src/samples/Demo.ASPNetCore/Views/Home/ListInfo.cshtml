@@ -1,0 +1,30 @@
+﻿@model Demo.ASPNetCore.Models.ListInfoViewModel
+@{
+    ViewData["Title"] = "List Info";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Lists of Site "@Model.SiteTitle"</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var list in Model.Lists)
+            {
+                <tr>
+                    <td>
+                        <a class="nav-link text-dark" 
+                           asp-area="" asp-controller="Home" asp-action="ListItems" asp-route-listTitle="@list.Title">@list.Title</a>                        
+                    </td>
+                    <td>@list.Id</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SiteInfo">Site Info</a>
