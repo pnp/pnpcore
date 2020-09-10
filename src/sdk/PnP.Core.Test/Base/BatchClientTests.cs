@@ -209,8 +209,8 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
 
-                var list1 = await context.Web.Lists.BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.NoCrawl);
-                var list1Again = await context.Web.Lists.BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
+                var list1 = await (context.Web.Lists as ListCollection).BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.NoCrawl);
+                var list1Again = await (context.Web.Lists as ListCollection).BatchGetByTitleAsync("Site Assets", p => p.Title, p => p.EnableVersioning, p => p.Items);
                 await context.ExecuteAsync();
 
                 var siteAssetsCount = context.Web.Lists.Where(p => p.Title == "Site Assets");
