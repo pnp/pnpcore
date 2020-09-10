@@ -8396,22 +8396,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync
   nameWithType: IListCollection.AddBatchAsync
-- uid: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: BatchGetByTitleAsync(String, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_BatchGetByTitleAsync_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: BatchGetByTitleAsync(String, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync(System.String, System.Linq.Expressions.Expression<System.Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync(System.String, System.Linq.Expressions.Expression(Of System.Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: IListCollection.BatchGetByTitleAsync(String, Expression<Func<IList, Object>>[])
-  nameWithType.vb: IListCollection.BatchGetByTitleAsync(String, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync*
-  name: BatchGetByTitleAsync
-  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_BatchGetByTitleAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListCollection.BatchGetByTitleAsync
-  nameWithType: IListCollection.BatchGetByTitleAsync
 - uid: PnP.Core.Model.SharePoint.IListItem
   name: IListItem
   href: api/PnP.Core.Model.SharePoint.IListItem.html
