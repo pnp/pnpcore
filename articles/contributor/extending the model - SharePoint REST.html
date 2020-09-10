@@ -251,7 +251,7 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 <pre><code class="lang-csharp">/// &lt;summary&gt;
 /// Public interface to define a collection of List objects of SharePoint Online
 /// &lt;/summary&gt;
-public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection&lt;IList&gt;, ISupportPaging
+public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection&lt;IList&gt;, ISupportPaging&lt;IList&gt;
 {
     /// &lt;summary&gt;
     /// Adds a new list

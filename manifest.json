@@ -410,11 +410,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.IQueryableModel.yml",
+      "source_relative_path": "api/PnP.Core.Model.IQueryableDataModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Model.IQueryableModel.html",
-          "hash": "TzNuZOikAU4ZFOdAvTsqjw=="
+          "relative_path": "api/PnP.Core.Model.IQueryableDataModel.html",
+          "hash": "dKRRorN/Nj6ha8eyPYmvrQ=="
         }
       },
       "is_incremental": false,
@@ -750,7 +750,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IContentType.html",
-          "hash": "c7PGZBR1U0Xn/4eLFdYOWw=="
+          "hash": "DddBVKRMXfSmN9oNh2KDDw=="
         }
       },
       "is_incremental": false,
@@ -810,7 +810,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IField.html",
-          "hash": "IEfeysMXkBgFl71g4PHRXg=="
+          "hash": "fFl74v0kZt4b1SOEQkwFWw=="
         }
       },
       "is_incremental": false,
@@ -858,7 +858,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFile.html",
-          "hash": "mN+gz2xjlk/gD/kTciLRfg=="
+          "hash": "Ih3AwVVjieM5+zZ7EWYsoQ=="
         }
       },
       "is_incremental": false,
@@ -906,7 +906,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "IhR025k1tirBuSZYkLNBzw=="
+          "hash": "Aj+ckRXPzbHwaZ/9PWpk5A=="
         }
       },
       "is_incremental": false,
@@ -942,7 +942,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "xR4nfhGPbYrJ2OKeTkjYGw=="
+          "hash": "blg8fj79y71QzHeQOomW1w=="
         }
       },
       "is_incremental": false,
@@ -966,7 +966,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "lohCrhQxmBRyI3d/oEuaCg=="
+          "hash": "zQbDWzF0yuxCkFTVYr+26Q=="
         }
       },
       "is_incremental": false,
@@ -1050,7 +1050,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermGroup.html",
-          "hash": "Sxy6ENIVKFrj6Gx/z0IMhQ=="
+          "hash": "yhB8NVsBpMIyS992oomdhw=="
         }
       },
       "is_incremental": false,
@@ -1134,7 +1134,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ITermSet.html",
-          "hash": "FqRuRotrSbJE0kcVFq5qzA=="
+          "hash": "REjmV6rboRhQgn+e04+XvQ=="
         }
       },
       "is_incremental": false,
@@ -1194,7 +1194,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "yQ0KgVnwhcQRZG0h0smwJQ=="
+          "hash": "LBVTm1pk14JHeOpRQLRgUQ=="
         }
       },
       "is_incremental": false,
@@ -1554,7 +1554,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChannel.html",
-          "hash": "0Pfhu3v92+f4eV6z64cNhg=="
+          "hash": "XuUN8daWNKNvOuXw0kxAWA=="
         }
       },
       "is_incremental": false,
@@ -1614,7 +1614,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamChatMessage.html",
-          "hash": "sYU8cKmb1IsVqLoFws7PHg=="
+          "hash": "Is3XY7K/dDKrF/v8cRJE8A=="
         }
       },
       "is_incremental": false,
@@ -1866,7 +1866,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.html",
-          "hash": "2YdJPzQYMq4Yp4m9lmXBJA=="
+          "hash": "zGf03ZU9edrUN4L/syQ0RA=="
         }
       },
       "is_incremental": false,
@@ -2490,7 +2490,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "HSL+ybDhxZ0BOrZEr/Dlbw=="
+          "hash": "gCoSL53OxRcXRbwy6yE/gA=="
         }
       },
       "is_incremental": false,
@@ -2574,7 +2574,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/extending the model - SharePoint REST.html",
-          "hash": "O0jQWg4KS+7REREhQ31HZQ=="
+          "hash": "XZzP8Cu1PSL1PNejkCoduA=="
         }
       },
       "is_incremental": false,

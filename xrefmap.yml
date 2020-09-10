@@ -1795,12 +1795,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IMetadataExtensible.Metadata
   nameWithType: IMetadataExtensible.Metadata
-- uid: PnP.Core.Model.IQueryableModel
-  name: IQueryableModel
-  href: api/PnP.Core.Model.IQueryableModel.html
-  commentId: T:PnP.Core.Model.IQueryableModel
-  fullName: PnP.Core.Model.IQueryableModel
-  nameWithType: IQueryableModel
+- uid: PnP.Core.Model.IQueryableDataModel
+  name: IQueryableDataModel
+  href: api/PnP.Core.Model.IQueryableDataModel.html
+  commentId: T:PnP.Core.Model.IQueryableDataModel
+  fullName: PnP.Core.Model.IQueryableDataModel
+  nameWithType: IQueryableDataModel
 - uid: PnP.Core.Model.IRequestable
   name: IRequestable
   href: api/PnP.Core.Model.IRequestable.html
