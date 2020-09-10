@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
@@ -6,8 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PnP.Core.Model;
-using PnP.Core.Utilities;
 
 namespace PnP.Core.Services
 {
@@ -338,8 +337,8 @@ namespace PnP.Core.Services
             {
                 Metadata.Add(PnPConstants.MetaDataRestId, idFieldValue);
             }
-            // Store graph ID for transition to graph when needed
-            if (pnpContext.GraphFirst && !Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+            // Store graph ID for transition to graph when needed. No point in doing this when we've disabled graph first behaviour or when the entity does not support rest + graph
+            if (pnpContext.GraphFirst && entity.SupportsGraphAndRest && !Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
             {
                 // SP.Web requires a special id value
                 if (entity.SharePointType.Equals("SP.Web"))
@@ -380,6 +379,8 @@ namespace PnP.Core.Services
                 }
             }
 
+            // Additional metadata population to enable the transition from Rest to Graph
+            await targetMetadataObject.SetRestToGraphMetadataAsync().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -632,14 +633,18 @@ namespace PnP.Core.Services
         {
             // If the SharePoint type of the entity is not known, metadata cannot be populated
             if (string.IsNullOrEmpty(entity.SharePointType))
+            {
                 return;
+            }
 
             Dictionary<string, string> metadata = targetMetadataObject.Metadata;
             if (!metadata.ContainsKey(PnPConstants.MetaDataType))
             {
                 metadata.Add(PnPConstants.MetaDataType, entity.SharePointType);
             }
-            if (!metadata.ContainsKey(PnPConstants.MetaDataRestId))
+
+            // Set the rest key metadata, the web and site model instances follow a specific path
+            if (entity.SupportsGraphAndRest && !metadata.ContainsKey(PnPConstants.MetaDataRestId))
             {
                 // SP.Web and SP.Site are special cases
                 if (entity.SharePointType.Equals("SP.Web"))
@@ -687,10 +692,9 @@ namespace PnP.Core.Services
                 var parsedApiCall = await ApiHelper.ParseApiRequestAsync(targetMetadataObject, $"{contextAwareObject.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUri}").ConfigureAwait(false);
                 metadata.Add(PnPConstants.MetaDataUri, parsedApiCall);
             }
-            if (entity.SharePointType.Equals("SP.List") && pnpObject.HasValue("Title") && !metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
-            {
-                metadata.Add(PnPConstants.MetaDataRestEntityTypeName, $"{pnpObject.GetValue("Title").ToString().Replace(" ", "")}List");
-            }
+
+            // Additional metadata population to enable the transition from Graph to Rest
+            await targetMetadataObject.SetGraphToRestMetadataAsync().ConfigureAwait(false);
         }
 
         private static void MapJsonToComplexTypePropertyRecursive(TransientObject pnpObject, IDataModelWithContext contextAwareObject, JsonProperty property, EntityFieldInfo entityField)

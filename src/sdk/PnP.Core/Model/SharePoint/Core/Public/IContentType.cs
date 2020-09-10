@@ -4,7 +4,7 @@
     /// Public interface to define a Content Type object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(ContentType))]
-    public interface IContentType : IDataModel<IContentType>, IDataModelUpdate, IDataModelDelete
+    public interface IContentType : IDataModel<IContentType>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// The unique ID of the Content Type as string

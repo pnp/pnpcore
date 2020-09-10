@@ -80,7 +80,7 @@ namespace Consumer
             using (var scope = host.Services.CreateScope())
             {
                 var pnpContextFactory = scope.ServiceProvider.GetRequiredService<IPnPContextFactory>();
-                
+
                 #region Interactive GET's
                 using (var context = await pnpContextFactory.CreateAsync("DemoSite"))
                 {
@@ -91,8 +91,8 @@ namespace Consumer
                     // Interactive GET samples
 
                     // Retrieving web with lists and masterpageurl loaded ==> SharePoint REST query
-                    var web = await context.Web.GetAsync(p=>p.Title, p => p.Lists, p=>p.MasterPageUrl);
-                    
+                    var web = await context.Web.GetAsync(p => p.Title, p => p.Lists, p => p.MasterPageUrl);
+
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Web (REST)===");
                     Console.WriteLine($"Title: {web.Title}");
@@ -102,7 +102,7 @@ namespace Consumer
 
                     // Getting the team connected to this Modern Team site ==> Microsoft Graph query
                     var team = await context.Team.GetAsync();
-                    
+
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Team (Graph v1)===");
                     Console.WriteLine($"Name: {team.DisplayName}");
@@ -116,7 +116,7 @@ namespace Consumer
                     {
                         // Load list items
                         await demo1List.GetAsync(p => p.Items);
-                    
+
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("===List (Graph v1)===");
                         Console.WriteLine($"Title: {demo1List.Title}");
@@ -127,7 +127,7 @@ namespace Consumer
                     // Getting the messages in the default team channel, first ensure 
                     await team.EnsurePropertiesAsync(p => p.PrimaryChannel);
                     await team.PrimaryChannel.GetAsync(p => p.Messages);
-                    
+
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Team channel messages (Graph beta)===");
                     Console.WriteLine($"Title: {team.PrimaryChannel.DisplayName}");
@@ -160,7 +160,7 @@ namespace Consumer
                 {
                     // Or we can easily get a specific list
                     var demo1List = context.Web.Lists.GetByTitle("Demo1", l => l.Id, l => l.Title, l => l.Description);
-                    
+
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===LINQ: Retrieve specific list===");
                     Console.WriteLine($"Just got list '{demo1List.Title}' with ID '{demo1List.Id}'");
@@ -212,10 +212,10 @@ namespace Consumer
                     }
                 }
                 #endregion
-                
+
                 #region Add/Update/Delete/Batching
                 using (var context = pnpContextFactory.Create("DemoSite"))
-                {                    
+                {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===ADD/UPDATE/DELETE: create/delete list and add 20 items in batch===");
                     Console.ResetColor();
@@ -262,12 +262,12 @@ namespace Consumer
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===ADD/UPDATE/DELETE: Add and configure a team channel===");
-                    Console.ResetColor();                    
+                    Console.ResetColor();
 
                     // Get team channels and primary channel
-                    var team = await context.Team.GetAsync(p=>p.Channels, p=>p.PrimaryChannel, p=>p.FunSettings);
+                    var team = await context.Team.GetAsync(p => p.Channels, p => p.PrimaryChannel, p => p.FunSettings);
                     // Ensure the needed properties were loaded
-                    await team.PrimaryChannel.EnsurePropertiesAsync(p=>p.DisplayName, p => p.Tabs, p => p.Messages);
+                    await team.PrimaryChannel.EnsurePropertiesAsync(p => p.DisplayName, p => p.Tabs, p => p.Messages);
 
                     // Add/Delete a new tab in the primary channel
                     var pnpTab = team.PrimaryChannel.Tabs.FirstOrDefault(p => p.DisplayName == "PnPTab");
@@ -298,25 +298,25 @@ namespace Consumer
                     await team.PrimaryChannel.Messages.AddAsync($"PnP rocks - {DateTime.UtcNow}");
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Added a message to the primary channel");
-                    Console.ResetColor();                    
+                    Console.ResetColor();
                 }
                 #endregion
-                
+
                 #region Paging
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Paging support===");
-                    Console.ResetColor();                    
+                    Console.ResetColor();
 
                     // Get team channels and primary channel
-                    var team = await context.Team.GetAsync(p=>p.PrimaryChannel);
+                    var team = await context.Team.GetAsync(p => p.PrimaryChannel);
                     // Load the first set of messages
                     await team.PrimaryChannel.GetAsync(p => p.Messages);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Count()}");                    
+                    Console.WriteLine($"Current number of messages: {team.PrimaryChannel.Messages.Count()}");
                     Console.ResetColor();
 
                     if (team.PrimaryChannel.Messages.CanPage)
@@ -335,7 +335,7 @@ namespace Consumer
                     }
                 }
                 #endregion
-                
+
             }
 
             host.Dispose();

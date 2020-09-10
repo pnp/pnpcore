@@ -119,7 +119,8 @@ namespace PnP.Core.Test.SharePoint
 
                 using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
                 {
-                    
+                    context3.GraphFirst = false;
+
                     var list3 = context3.Web.Lists.GetById(listGuid, p=>p.TemplateType, p=>p.Title);
                     if (list3 != null)
                     {

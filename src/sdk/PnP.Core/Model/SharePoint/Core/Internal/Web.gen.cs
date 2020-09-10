@@ -13,6 +13,47 @@ namespace PnP.Core.Model.SharePoint
         [GraphProperty("sharepointIds", JsonPath = "webId")]
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
+        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
+        public string AccessRequestListUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public string AccessRequestSiteDescription { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool AllowAutomaticASPXPageIndexing { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool AllowCreateDeclarativeWorkflowForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool AllowDesignerForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool AllowMasterPageEditingForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool AllowRevertFromTemplateForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool AllowRssFeeds { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool AllowSavePublishDeclarativeWorkflowForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Guid AppInstanceId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string ClassicWelcomePage { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool ContainsConfidentialInfo { get => GetValue<bool>(); set => SetValue(value); }
+
+        public DateTime Created { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        public bool CustomSiteActionsDisabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Guid DefaultNewPageTemplateId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string DesignerDownloadUrlForCurrentUser { get => GetValue<string>(); set => SetValue(value); }
+
+        public Guid DesignPackageId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public bool DisableRecommendedItems { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool DocumentLibraryCalloutOfficeWebAppPreviewersDisabled { get => GetValue<bool>(); set => SetValue(value); }
+
         [GraphProperty("name")]
         public string Title { get => GetValue<string>(); set => SetValue(value); }
 
@@ -98,8 +139,8 @@ namespace PnP.Core.Model.SharePoint
         }
 
         [SharePointProperty("Lists", Expandable = true)]
-        // Graph currently is not returning all lists, this option can only be used once that's fixed
-        [GraphProperty("lists", Expandable = true)]
+        // A special approach is needed to load all lists, comes down to adding the "system" facet to the select
+        [GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
         public IListCollection Lists
         {
             get

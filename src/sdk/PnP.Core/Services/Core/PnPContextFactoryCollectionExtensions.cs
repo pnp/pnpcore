@@ -24,8 +24,10 @@ namespace PnP.Core.Services
             return collection
                 .AddSettings()
 #if !BLAZOR
+                // TODO: Maybe we should review this part and move it into a method specific for Blazor, in the dedicated project/package
                 .AddTelemetryServices()
 #endif
+                .AddHttpHandlers()
                 .AddHttpClients()
                 .AddPnPServices();
         }

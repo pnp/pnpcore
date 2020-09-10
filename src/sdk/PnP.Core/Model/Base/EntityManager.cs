@@ -282,6 +282,7 @@ namespace PnP.Core.Model
             if (expressions != null && expressions.Any())
             {
                 var nonExpandableGraphCollections = entityInfo.GraphNonExpandableCollections;
+                bool nonExpandableGraphCollectionSkipped = false;
 
                 List<string> graphFieldsToLoad = new List<string>();
                 List<string> sharePointFieldsToLoad = new List<string>();
@@ -318,6 +319,13 @@ namespace PnP.Core.Model
                             {
                                 graphFieldsToLoad.Add(fieldToLoad);
                             }
+                            else
+                            {
+                                // We're not loading this collection as we're using a separate query, but in case 
+                                // this collection was the only requested one (e.g. web.GetAsync(p=>p.Lists)) we still need 
+                                // process our field load settings later on
+                                nonExpandableGraphCollectionSkipped = true;
+                            }
                         }
                         else
                         {
@@ -328,7 +336,8 @@ namespace PnP.Core.Model
                     }
                 }
 
-                if (graphFieldsToLoad.Count > 0)
+
+                if (graphFieldsToLoad.Count > 0 || nonExpandableGraphCollectionSkipped)
                 {
                     // Indicate that this entity information used an expression, will be used when building get queries
                     entityInfo.GraphFieldsLoadedViaExpression = true;
@@ -523,7 +532,7 @@ namespace PnP.Core.Model
                 classInfo.Fields.Add(classField);
             }
 
-            if (classInfo.SharePointTargets.Any())
+            if (classInfo.SharePointTargets.Any() && string.IsNullOrEmpty(classField.SharePointName))
             {
                 // This type can be loaded via SharePoint REST, so ensure the SharePoint field is populated
                 classField.SharePointName = property.Name;

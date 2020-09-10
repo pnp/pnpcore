@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model
 {
@@ -12,5 +13,17 @@ namespace PnP.Core.Model
         /// Dictionary to access the domain model object Metadata
         /// </summary>
         Dictionary<string, string> Metadata { get; }
+
+        /// <summary>
+        /// Method that's being called by the serializer to complete the model for Graph to Rest transitions
+        /// </summary>
+        /// <returns></returns>
+        internal Task SetGraphToRestMetadataAsync();
+
+        /// <summary>
+        /// Method that's being called by the serializer to complete the model for Rest to Graph transitions
+        /// </summary>
+        /// <returns></returns>
+        internal Task SetRestToGraphMetadataAsync();
     }
 }

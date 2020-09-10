@@ -9,12 +9,119 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Web object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Web))]
-    public interface IWeb : IDataModel<IWeb>, IDataModelUpdate, IDataModelDelete
+    public interface IWeb : IDataModel<IWeb>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// The Unique ID of the Web object
         /// </summary>
         public Guid Id { get; }
+
+        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
+        /// <summary>
+        /// Gets the URL of the access request list to the current site.
+        /// </summary>
+        public string AccessRequestListUrl { get; }
+
+        /// <summary>
+        /// Gets or sets the description of the access request to this site.
+        /// </summary>
+        public string AccessRequestSiteDescription { get; set; }
+
+        /// <summary>
+        /// Gets a value that specifies whether the automatic ASPX page indexed is allowed.
+        /// </summary>
+        public bool AllowAutomaticASPXPageIndexing { get; }
+
+        /// <summary>
+        /// Gets a value that specifies whether the current user is allowed to create declarative workflow on this site.
+        /// </summary>
+        public bool AllowCreateDeclarativeWorkflowForCurrentUser { get; set; }
+
+        /// <summary>
+        /// Gets a value that specifies whether the current user is allowed to use a designer application to customize this site.
+        /// </summary>
+        public bool AllowDesignerForCurrentUser { get; set; }
+
+        /// <summary>
+        /// Gets a value that specifies whether the current user is allowed to edit the master page.
+        /// </summary>
+        public bool AllowMasterPageEditingForCurrentUser { get; }
+
+        /// <summary>
+        /// Gets a value that specifies whether the current user is allowed to revert the site to a default site template.
+        /// </summary>
+        public bool AllowRevertFromTemplateForCurrentUser { get; }
+
+        /// <summary>
+        /// Gets a value that specifies whether the site allows RSS feeds.
+        /// </summary>
+        public bool AllowRssFeeds { get; }
+
+        /// <summary>
+        /// Gets a value that specifies whether the current user is allowed to save declarative workflows as template.
+        /// </summary>
+        public bool AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser { get; }
+
+        /// <summary>
+        /// Gets a value that specifies whether the current user is allowed to publish a declarative workflow.
+        /// </summary>
+        public bool AllowSavePublishDeclarativeWorkflowForCurrentUser { get; }
+
+        /// <summary>
+        /// The instance Id of the App Instance that this website represents.
+        /// </summary>
+        public Guid AppInstanceId { get; }
+
+        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
+        /// <summary>
+        /// Gets or sets the welcome page of the site in Classic UI mode.
+        /// </summary>
+        public string ClassicWelcomePage { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether this site contains confidential information.
+        /// </summary>
+        public bool ContainsConfidentialInfo { get; set; }
+
+        /// <summary>
+        /// Gets a value that specifies when the site was created.
+        /// </summary>
+        public DateTime Created { get; }
+
+        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
+        /// <summary>
+        /// Gets a value that specifies whether custom site actions are disabled on this site.
+        /// </summary>
+        public bool CustomSiteActionsDisabled { get; set; }
+
+        #region ON GOING
+        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
+        /// <summary>
+        /// Gets or sets the default new page template Id of the site.
+        /// </summary>
+        public Guid DefaultNewPageTemplateId { get; set; }
+
+        /// <summary>
+        /// Gets the designer download URL for current user.
+        /// </summary>
+        public string DesignerDownloadUrlForCurrentUser { get; }
+
+        /// <summary>
+        /// Gets or sets the design package Id of this site.
+        /// </summary>
+        public Guid DesignPackageId { get; set; }
+
+        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
+        /// <summary>
+        /// Gets or sets whether the recommended items are disabled on this site.
+        /// </summary>
+        public bool DisableRecommendedItems { get; set; }
+
+        /// <summary>
+        /// Determines if the Document Library Callout's WAC previewers are enabled or not.
+        /// </summary>
+        public bool DocumentLibraryCalloutOfficeWebAppPreviewersDisabled { get; }
+        #endregion
 
         /// <summary>
         /// Defines whether the site has to be crawled or not
@@ -299,116 +406,6 @@ namespace PnP.Core.Model.SharePoint
         #region TO IMPLEMENT
         // TODO: Take information from here to update documentation of this class member
         // TODO: https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee546309(v=office.15)
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string AccessRequestListUrl { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string AccessRequestSiteDescription { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool AllowAutomaticASPXPageIndexing { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool AllowCreateDeclarativeWorkflowForCurrentUser { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool AllowDesignerForCurrentUser { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool AllowMasterPageEditingForCurrentUser { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool AllowRevertFromTemplateForCurrentUser { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool AllowRssFeeds { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool AllowSavePublishDeclarativeWorkflowForCurrentUser { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string AlternateCssUrl { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public Guid AppInstanceId { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string ClassicWelcomePage { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool ContainsConfidentialInfo { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public DateTime Created { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string CustomMasterUrl { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool CustomSiteActionsDisabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public Guid DefaultNewPageTemplateId { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string DesignerDownloadUrlForCurrentUser { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public Guid DesignPackageId { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool DisableRecommendedItems { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool DocumentLibraryCalloutOfficeWebAppPreviewersDisabled { get; set; }
 
         ///// <summary>
         ///// To update...

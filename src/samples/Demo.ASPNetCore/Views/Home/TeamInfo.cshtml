@@ -1,0 +1,27 @@
+﻿@model Demo.ASPNetCore.Models.TeamInfoViewModel
+@{
+    ViewData["Title"] = "Team Info";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Team: @Model.DisplayName</h1>
+    <h2>@Model.Description</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Display Name</th>
+                <th>Id</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var channel in Model.Channels)
+            {
+                <tr>
+                    <td>@channel.DisplayName</td>
+                    <td>@channel.Id</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
