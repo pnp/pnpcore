@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// Represents the set used in a term store. The set represents a unit which contains a collection of hierarchical terms. A group can contain multiple sets.
     /// </summary>
     [ConcreteType(typeof(TermSet))]
-    public interface ITermSet : IDataModel<ITermSet>, IDataModelUpdate, IDataModelDelete, IQueryableModel
+    public interface ITermSet : IDataModel<ITermSet>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// The Unique ID of the term set.

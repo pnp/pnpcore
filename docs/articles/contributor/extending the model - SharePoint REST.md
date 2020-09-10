@@ -130,7 +130,7 @@ Below code snippets show the above three concepts. First one shows the collectio
 /// <summary>
 /// Public interface to define a collection of List objects of SharePoint Online
 /// </summary>
-public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, ISupportPaging
+public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, ISupportPaging<IList>
 {
     /// <summary>
     /// Adds a new list

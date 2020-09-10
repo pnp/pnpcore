@@ -8,7 +8,7 @@ namespace PnP.Core.Model.Teams
     /// part of a reply thread that is defined by the replyToId property in the chat message.
     /// </summary>
     [ConcreteType(typeof(TeamChatMessage))]
-    public interface ITeamChatMessage : IDataModel<ITeamChatMessage>, IQueryableModel
+    public interface ITeamChatMessage : IDataModel<ITeamChatMessage>, IQueryableDataModel
     {
 
         /// <summary>

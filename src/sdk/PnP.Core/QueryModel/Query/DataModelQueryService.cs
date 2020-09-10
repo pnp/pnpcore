@@ -44,7 +44,7 @@ namespace PnP.Core.QueryModel
             }
 
             // At this point in time we support querying collections for which the model implements IQueryableModel
-            if (typeof(TModel).ImplementsInterface(typeof(IQueryableModel)))
+            if (typeof(TModel).ImplementsInterface(typeof(IQueryableDataModel)))
             {
                 // Get the entity info
                 var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel), null);
