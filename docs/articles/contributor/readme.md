@@ -42,7 +42,7 @@ The public model is built via public interfaces. Below sample shows the public m
 /// Public interface to define a List object of SharePoint Online
 /// </summary>
 [ConcreteType(typeof(List))]
-public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
+public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
 {
     /// <summary>
     /// The Unique ID of the List object
@@ -71,6 +71,7 @@ Each public model:
 - Always implements the `IDataModel<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample)
 - Optionally implements the `IDataModelUpdate` interface whenever **update** functionality in needed on this model class
 - Optionally implements the `IDataModelDelete` interface whenever **delete** functionality is needed on this model class
+- Optionally implements the `IQueryableDataModel` interface whenerver the model supports LINQ querying. This goes hand in hand with using the `QueryableDataModelCollection` base class for the model's collection class
 
 The properties in the model use either basic .Net data types, enumerations, other model/collection types or so called complex types:
 
