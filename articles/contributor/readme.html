@@ -108,7 +108,7 @@
 /// Public interface to define a List object of SharePoint Online
 /// &lt;/summary&gt;
 [ConcreteType(typeof(List))]
-public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDelete
+public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
 {
     /// &lt;summary&gt;
     /// The Unique ID of the List object
@@ -136,6 +136,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDe
 <li>Always implements the <code>IDataModel&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample)</li>
 <li>Optionally implements the <code>IDataModelUpdate</code> interface whenever <strong>update</strong> functionality in needed on this model class</li>
 <li>Optionally implements the <code>IDataModelDelete</code> interface whenever <strong>delete</strong> functionality is needed on this model class</li>
+<li>Optionally implements the <code>IQueryableDataModel</code> interface whenerver the model supports LINQ querying. This goes hand in hand with using the <code>QueryableDataModelCollection</code> base class for the model's collection class</li>
 </ul>
 <p>The properties in the model use either basic .Net data types, enumerations, other model/collection types or so called complex types:</p>
 <pre><code class="lang-csharp">// Simple .Net type
