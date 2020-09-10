@@ -14,6 +14,30 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.html",
+          "hash": "Q3vtePh2nRL2AhHeu0r8vw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.Extensions.DependencyInjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.Extensions.DependencyInjection.html",
+          "hash": "GGdqa+HUP7qCXk1IT0KfeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.AuthenticationError.yml",
       "output": {
         ".html": {
@@ -2126,6 +2150,114 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialOptions.html",
+          "hash": "IN38BXzJJH2xsS7M9d93gg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialsOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialsOptions.html",
+          "hash": "37n502a1Rg5HA7tNvsDd+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html",
+          "hash": "R0umayyBoc5BqKauSYdKZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.html",
+          "hash": "3r59EAqio7GNpc+bp97bcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSitesOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSitesOptions.html",
+          "hash": "Cug4KafDiqyESlTX2gaMVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.html",
+          "hash": "BJftdWk+EireRuQdv9KgtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.IPnPCoreBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.IPnPCoreBuilder.html",
+          "hash": "cceMw6vUsxynN63JtiH+iA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.PnPCoreBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.PnPCoreBuilder.html",
+          "hash": "BYy5TfXfq9hoAUv8QjrrNA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.html",
+          "hash": "rbaBgsIWWYJHI0UEALfuWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Services.FromJson.yml",
       "output": {
         ".html": {
@@ -2334,7 +2466,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html",
-          "hash": "wzSFVWwN57jpl9LDUTa1hA=="
+          "hash": "rh8k1zqM9/88Ep3ffVRxQA=="
         }
       },
       "is_incremental": false,
@@ -2490,7 +2622,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "gCoSL53OxRcXRbwy6yE/gA=="
+          "hash": "1VE6CW1ZXe7aE/pmii4rBw=="
         }
       },
       "is_incremental": false,
@@ -2788,7 +2920,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 205,
+          "total_file_count": 216,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
