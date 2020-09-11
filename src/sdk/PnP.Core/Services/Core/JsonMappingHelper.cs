@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Services
@@ -46,6 +47,54 @@ namespace PnP.Core.Services
                 // Map the returned JSON to the respective entities
                 await FromJson(batchRequest.Model, batchRequest.EntityInfo, new ApiResponse(batchRequest.ApiCall, root, batchRequest.Id), batchRequest.FromJsonCasting).ConfigureAwait(false);
                 batchRequest.PostMappingJson?.Invoke(batchRequest.ResponseJson);
+            }
+        }
+
+        /// <summary>
+        /// Maps JSON to model classes
+        /// </summary>
+        /// <param name="pnpObject">Model to populate from JSON</param>
+        /// <param name="entity">Information about the current model</param>
+        /// <param name="apiCallResponse">The REST response to process</param>
+        /// <param name="fromJsonCasting">Delegate to be called for type conversion</param>
+        /// <returns></returns>
+        internal static async Task MapJsonToModel(TransientObject pnpObject, EntityInfo entity, ApiCallResponse apiCallResponse, Func<FromJson, object> fromJsonCasting = null, string dataRootElementPath = null)
+        {
+            if (string.IsNullOrEmpty(apiCallResponse.Json))
+            {
+                // We have nothing to process, so return
+                return;
+            }
+
+            // Json parsing options
+            var options = new JsonDocumentOptions
+            {
+                AllowTrailingCommas = true
+            };
+
+            // Parse the received json content
+            using (JsonDocument document = JsonDocument.Parse(apiCallResponse.Json, options))
+            {
+                // for SharePoint REST calls the root property is d, for recursive calls this is not the case
+                if (!document.RootElement.TryGetProperty("d", out JsonElement root))
+                {
+                    root = document.RootElement;
+                }
+
+                if (!string.IsNullOrEmpty(dataRootElementPath))
+                {
+                    try
+                    {
+                        root = GetJsonElementFromPath(root, dataRootElementPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ClientException(ErrorType.UnexpectedMappingType, $"The JSON property from path {dataRootElementPath} could not be parsed.", ex);
+                    }
+                }
+
+                // Map the returned JSON to the respective entities
+                await FromJson(pnpObject, entity, new ApiResponse(apiCallResponse.ApiCall, root, apiCallResponse.BatchRequestId), fromJsonCasting).ConfigureAwait(false);
             }
         }
 
@@ -930,7 +979,46 @@ namespace PnP.Core.Services
             JsonElement element = root;
             foreach (var part in jsonPathTree)
             {
-                if (element.TryGetProperty(part, out JsonElement nextElement))
+                // Won't support multi-dimensions arrays
+                Match indexMatch = new Regex(@"\[(?<index>[0-9]+)\]").Match(part);
+                if (indexMatch.Success)
+                {
+                    if (int.TryParse(indexMatch.Groups["index"].Value, out int index))
+                    {
+                        string[] subParts = part.Split(new char[] { '[' });
+                        string currentPropertyName = subParts[0];
+                        if (element.TryGetProperty(currentPropertyName, out JsonElement nextElement))
+                        {
+                            element = nextElement;
+                        }
+
+                        if (element.ValueKind == JsonValueKind.Array)
+                        {
+                            int arrayLength = element.GetArrayLength();
+                            if (arrayLength == 0)
+                            {
+                                throw new IndexOutOfRangeException("The expected JSON array is empty.");
+                            }
+
+                            if (index > arrayLength-1)
+                            {
+                                throw new IndexOutOfRangeException("The requested index is out of the JSON array boundaries.");
+                            }
+
+                            int currentIndex = 0;
+                            foreach (var arrayItem in element.EnumerateArray())
+                            {
+                                if (currentIndex == index)
+                                {
+                                    element = arrayItem;
+                                    break;
+                                }
+                                currentIndex++;
+                            }
+                        }
+                    }
+                }
+                else if (element.TryGetProperty(part, out JsonElement nextElement))
                 {
                     element = nextElement;
                 }

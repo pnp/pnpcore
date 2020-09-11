@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PnP.Core.Model.AzureActiveDirectory
+namespace PnP.Core.Model.Security
 {
     internal partial class Group : BaseDataModel<IGroup>, IGroup
     {

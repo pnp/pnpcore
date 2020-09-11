@@ -1,6 +1,6 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
-using PnP.Core.Model.AzureActiveDirectory;
+using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using System;

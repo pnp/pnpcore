@@ -74,6 +74,22 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        // See discussion https://github.com/pnp/pnpcore/discussions/111#discussioncomment-76156
+        //[TestMethod]
+        //public async Task GetWebAuthorTest()
+        //{
+        //    TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        IWeb webWithAuthor = await context.Web.GetAsync(p => p.Author);
+
+        //        Assert.IsNotNull(webWithAuthor);
+        //        Assert.IsNotNull(webWithAuthor.Author);
+        //        Assert.AreNotEqual(0, webWithAuthor.Author.SharePointId);
+        //    }
+        //}
+
+
         [TestMethod]
         public async Task GetWebAllPropertiesTest()
         {

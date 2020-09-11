@@ -1,7 +1,7 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using PnP.Core.Model.AzureActiveDirectory;
+using PnP.Core.Model.Security;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

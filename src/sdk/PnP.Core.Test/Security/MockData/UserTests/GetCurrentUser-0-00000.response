@@ -1,0 +1,9 @@
+--batchresponse_21b3d3b7-1cf6-4a0e-8d10-f6865f471114
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"CurrentUser":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/CurrentUser","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/CurrentUser","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/CurrentUser/Alerts"}},"Groups":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/CurrentUser/Groups"}},"Id":10,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|yannick@pvxdev.onmicrosoft.com","Title":"Yannick Plenevaux","PrincipalType":1,"Email":"yannick@pvxdev.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":true,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"1003200046563af5","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"yannick@pvxdev.onmicrosoft.com"},"Id":"debb4230-758e-4649-aca8-d1cf0796684b"}}
+--batchresponse_21b3d3b7-1cf6-4a0e-8d10-f6865f471114--

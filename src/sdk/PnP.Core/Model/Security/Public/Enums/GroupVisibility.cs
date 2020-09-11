@@ -1,4 +1,4 @@
-﻿namespace PnP.Core.Model.AzureActiveDirectory
+﻿namespace PnP.Core.Model.Security
 {
     /// <summary>
     /// Group visibility

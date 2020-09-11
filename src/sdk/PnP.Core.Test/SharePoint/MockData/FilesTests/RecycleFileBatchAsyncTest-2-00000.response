@@ -1,4 +1,4 @@
---batchresponse_1d8c2a55-4232-40b6-b6b6-365069a17f6d
+--batchresponse_75f9be80-4d31-43d2-b17f-066fa12850e0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 404 Not Found
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2130575338, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"The file /sites/pnpcoresdktestgroup/Shared Documents/PNP_SDK_TEST_RecycleFileBatchAsyncTest.docx does not exist."}}}
---batchresponse_1d8c2a55-4232-40b6-b6b6-365069a17f6d--
+--batchresponse_75f9be80-4d31-43d2-b17f-066fa12850e0--

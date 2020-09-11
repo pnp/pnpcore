@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PnP.Core.Model.AzureActiveDirectory
+namespace PnP.Core.Model.Security
 {
     /// <summary>
     /// A Microsoft 365 Group

@@ -1,3 +1,4 @@
+using PnP.Core.Model.Security;
 using System;
 using System.Collections.Generic;
 
@@ -170,102 +171,101 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        [SharePointProperty("Author", Expandable = true)]
+        public IUser Author
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new User
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IUser>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
 
-        #region Not Implemented yet
-        //public IUser Author
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new User
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IUser>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
+        [SharePointProperty("CheckedOutByUser", Expandable = true)]
+        public IUser CheckedOutByUser
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new User
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IUser>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
 
-        //public IUser CheckedOutByUser
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new User
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IUser>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
+        [SharePointProperty("LockedByUser", Expandable = true)]
+        public IUser LockedByUser
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new User
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IUser>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
 
-
-
-        //public IUser LockedByUser
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new User
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IUser>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
-
-        //public IUser ModifiedBy
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new User
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IUser>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
-        #endregion
+        [SharePointProperty("ModifiedBy", Expandable = true)]
+        public IUser ModifiedBy
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new User
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IUser>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
 
         [KeyProperty("UniqueId")]
         public override object Key { get => this.UniqueId; set => this.UniqueId = Guid.Parse(value.ToString()); }

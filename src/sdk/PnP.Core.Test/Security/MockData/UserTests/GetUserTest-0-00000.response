@@ -1,0 +1,9 @@
+--batchresponse_d4caafcc-77ae-4f42-809c-6ec07d2a38f0
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(12)","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(12)","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(12)/Alerts"}},"Groups":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetUserById(12)/Groups"}},"Id":12,"IsHiddenInUI":false,"LoginName":"i:0#.f|membership|dev01@pvxdev.onmicrosoft.com","Title":"Dev 01 User","PrincipalType":1,"Email":"dev01@pvxdev.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":false,"UserId":{"__metadata":{"type":"SP.UserIdInfo"},"NameId":"10032000470aea91","NameIdIssuer":"urn:federation:microsoftonline"},"UserPrincipalName":"dev01@pvxdev.onmicrosoft.com"}}
+--batchresponse_d4caafcc-77ae-4f42-809c-6ec07d2a38f0--
