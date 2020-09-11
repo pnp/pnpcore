@@ -125,6 +125,27 @@ namespace PnP.Core.Model.SharePoint
             };
         }
 
+        #region Graph/Rest interoperability overrides
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        internal async override Task GraphToRestMetadataAsync()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            if (this.IsPropertyAvailable(p => p.Id) && Id > 0)
+            {
+                if (!Metadata.ContainsKey(PnPConstants.MetaDataRestId))
+                {
+                    Metadata.Add(PnPConstants.MetaDataRestId, Id.ToString());
+                }
+
+                if (!Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+                {
+                    Metadata.Add(PnPConstants.MetaDataGraphId, Id.ToString());
+                }
+            }
+        }
+
+        #endregion
+
         #region Extension methods
 
         #region UpdateOverwriteVersion

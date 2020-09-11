@@ -137,7 +137,6 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
-
         #region Extension methods
 
         #region BatchGetByTitle

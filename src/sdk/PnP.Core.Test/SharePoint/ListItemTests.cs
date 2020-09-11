@@ -24,8 +24,6 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task SystemUpdate()
         {
-            Assert.Inconclusive("Possible Issue in underlying batch update");
-
             //TestCommon.Instance.Mocking = false;
             string listTitle = "SystemUpdate";
 
@@ -132,8 +130,6 @@ namespace PnP.Core.Test.SharePoint
         public async Task SystemUpdateBatchTests()
         {
             //TestCommon.Instance.Mocking = false;
-            Assert.Inconclusive("Possible Issue in underlying batch update");
-
             string listTitle = "SystemUpdateBatchTests";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -286,8 +282,6 @@ namespace PnP.Core.Test.SharePoint
         public async Task SystemUpdateAsyncNoDataChangeTests()
         {
             //TestCommon.Instance.Mocking = false;
-            Assert.Inconclusive("Possible Issue in underlying batch update");
-
             string listTitle = "SystemUpdateAsyncNoDataChangeTests";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -619,9 +613,6 @@ namespace PnP.Core.Test.SharePoint
         public async Task UpdateOverwriteVersionNoDataTests()
         {
             //TestCommon.Instance.Mocking = false;
-
-            Assert.Inconclusive("Disabled - Mocking generates an error");
-
             string listTitle = "UpdateOverwriteVersionNoDataTests";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -717,7 +708,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "1.0");
             }
                         
-            using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
                 // Create a new list
                 var web = await contextFinal.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Items));
