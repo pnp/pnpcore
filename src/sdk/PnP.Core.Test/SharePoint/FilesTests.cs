@@ -2233,6 +2233,9 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.CheckinAsync();
                 await testDocument.CheckoutAsync();
                 await testDocument.CheckinAsync();
+
+                await testDocument.CheckoutAsync();
+                await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
             }
 
             // New context to ensure reload the file
@@ -2244,10 +2247,13 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
-                Assert.AreEqual(2, documentWithVersions.Versions.Count());
+                Assert.AreEqual(3, documentWithVersions.Versions.Count());
                 Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions[0].Url);
                 Assert.AreEqual("0.1", documentWithVersions.Versions[0].VersionLabel);
                 Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
+
+                Assert.AreEqual(3, documentWithVersions.Versions[2].ID);
+                Assert.IsTrue(documentWithVersions.Versions[2].Created != DateTime.MinValue);
             }
 
             await CleanupMockMinorVersioningEnabledLibrary(3);
