@@ -1,9 +1,0 @@
---batchresponse_a35d8818-4aff-44dd-9aa2-97927cb31ba6
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"AccessRequestListUrl":null,"AccessRequestSiteDescription":"","AllowCreateDeclarativeWorkflowForCurrentUser":true,"AllowDesignerForCurrentUser":true,"AllowMasterPageEditingForCurrentUser":false,"AllowRevertFromTemplateForCurrentUser":true,"AllowRssFeeds":true,"AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser":true,"AllowSavePublishDeclarativeWorkflowForCurrentUser":true,"AlternateCssUrl":"","AppInstanceId":"00000000-0000-0000-0000-000000000000","ClassicWelcomePage":null,"ContainsConfidentialInfo":false,"Created":"2020-05-25T16:39:30.403","CustomMasterUrl":"/sites/pnpcoresdktestgroup/_catalogs/masterpage/seattle.master","CustomSiteActionsDisabled":false,"DesignerDownloadUrlForCurrentUser":"https://go.microsoft.com/fwlink/?LinkId=328584&clcid=0x409","DesignPackageId":"00000000-0000-0000-0000-000000000000","DisableRecommendedItems":false,"DocumentLibraryCalloutOfficeWebAppPreviewersDisabled":false,"Id":"debb4230-758e-4649-aca8-d1cf0796684b"}}
---batchresponse_a35d8818-4aff-44dd-9aa2-97927cb31ba6--

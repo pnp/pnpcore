@@ -94,7 +94,6 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool CustomSiteActionsDisabled { get; set; }
 
-        #region ON GOING
         // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
         /// <summary>
         /// Gets or sets the default new page template Id of the site.
@@ -121,6 +120,233 @@ namespace PnP.Core.Model.SharePoint
         /// Determines if the Document Library Callout's WAC previewers are enabled or not.
         /// </summary>
         public bool DocumentLibraryCalloutOfficeWebAppPreviewersDisabled { get; }
+
+        /// <summary>
+        /// Gets or sets a Boolean value that specifies whether the Web site should use Minimal Download Strategy.
+        /// </summary>
+        public bool EnableMinimalDownload { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of the footer emphasis.
+        /// </summary>
+        public FooterVariantThemeType FooterEmphasis { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the footer is enabled on the site.
+        /// </summary>
+        public bool FooterEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of the footer layout.
+        /// </summary>
+        public FooterLayoutType FooterLayout { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of the header emphasis.
+        /// </summary>
+        public VariantThemeType HeaderEmphasis { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value of the header layout.
+        /// </summary>
+        public HeaderLayoutType HeaderLayout { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the title in header is hidden on the site.
+        /// </summary>
+        public bool HideTitleInHeader { get; set; }
+
+        /// <summary>
+        /// Gets a value that indicates whether the homepage is modernized.
+        /// </summary>
+        public bool IsHomepageModernized { get; }
+
+        /// <summary>
+        /// Gets a value that indicates whether the provisioning is complete.
+        /// </summary>
+        public bool IsProvisioningComplete { get; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the link to revert homepage is hidden.
+        /// </summary>
+        public bool IsRevertHomepageLinkHidden { get; set; }
+
+        /// <summary>
+        /// Gets a value that specifies the LCID for the language that is used on the site.
+        /// </summary>
+        public int Language { get; }
+
+        /// <summary>
+        /// Gets a value that specifies when an item was last modified in the site.
+        /// </summary>
+        public DateTime LastItemModifiedDate { get; }
+
+        /// <summary>
+        /// Gets a value that specifies when an item was last modified by user in the site.
+        /// </summary>
+        public DateTime LastItemUserModifiedDate { get; }
+
+        /// <summary>
+        /// Gets or sets the logo alignment of the site.
+        /// </summary>
+        public LogoAlignment LogoAlignment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the URL of the master page that is used for the website.
+        /// </summary>
+        public string MasterUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the megamenu is enabled on the site.
+        /// </summary>
+        public bool MegaMenuEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the audience targeting is enabled on the navigation of the site.
+        /// </summary>
+        public bool NavAudienceTargetingEnabled { get; set; }
+
+        // TODO: Check if read-only
+        /// <summary>
+        /// Gets or sets a value that specifies whether the next steps first run is enabled on the site.
+        /// </summary>
+        public bool NextStepsFirstRunEnabled { get; set; }
+
+        /// <summary>
+        /// Gets a value that indicates whether the notifications in OneDrive for Business is enabled on the site.
+        /// </summary>
+        public bool NotificationsInOneDriveForBusinessEnabled { get; }
+
+        /// <summary>
+        /// Gets a value that indicates whether the notifications in SharePoint is enabled on the site.
+        /// </summary>
+        public bool NotificationsInSharePointEnabled { get; }
+
+        // TODO: Check if read-only
+        /// <summary>
+        /// Gets or sets a value that specifies whether the object cache is enabled on the site.
+        /// </summary>
+        public bool ObjectCacheEnabled { get; set; }
+
+        /// <summary>
+        /// Gets a value that indicates whether the preview features are enabled on the site.
+        /// </summary>
+        public bool PreviewFeaturesEnabled { get; }
+
+        // TODO: Check if read-only
+        /// <summary>
+        /// Gets or sets the primary color of the site.
+        /// </summary>
+        public string PrimaryColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the Recycle Bin is enabled.
+        /// </summary>
+        public bool RecycleBinEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets a Boolean value that specifies whether the Web site can be saved as a site template.
+        /// </summary>
+        public bool SaveSiteAsTemplateEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the placeholder text in the search box of the current site.
+        /// </summary>
+        public string SearchBoxPlaceholderText { get; set; }
+
+        /// <summary>
+        /// Gets the server relative URL of the current site.
+        /// </summary>
+        public string ServerRelativeUrl { get; }
+
+        /// <summary>
+        /// Gets a value that specifies whether the current user is able to view the file system structure of this site.
+        /// </summary>
+        public bool ShowUrlStructureForCurrentUser { get; }
+
+        /// <summary>
+        /// Gets or sets the description of the site logo.
+        /// </summary>
+        public string SiteLogoDescription { get; set; }
+
+        /// <summary>
+        /// Gets or sets the URL of the site logo.
+        /// </summary>
+        public string SiteLogoUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value that specifies whether the RSS feeds are enabled on the site.
+        /// </summary>
+        public bool SyndicationEnabled { get; set; }
+
+        // TODO Probably an enum type
+        // TODO: Check if read-only
+        // TODO: Review property doc
+        /// <summary>
+        /// Gets or sets a value that specifies how the tenant admin members can share.
+        /// </summary>
+        public int TenantAdminMembersCanShare { get; set; }
+
+        /// <summary>
+        /// Gets a value that indicates whether the tenant tag policy is enabled.
+        /// </summary>
+        public bool TenantTagPolicyEnabled { get; }
+
+        // TODO: Check if read-only
+        /// <summary>
+        /// Gets or sets the theme data of the site.
+        /// </summary>
+        public string ThemeData { get; }
+
+        // TODO: Check if read-only
+        /// <summary>
+        /// Gets the theme CSS folder URL.
+        /// </summary>
+        public string ThemedCssFolderUrl { get; }
+
+        // TODO: Check what is MDM ?
+        /// <summary>
+        /// Gets a value that indicates whether third party MDM is enabled on the site.
+        /// </summary>
+        public bool ThirdPartyMdmEnabled { get; }
+
+        /// <summary>
+        /// Gets or sets value that specifies whether the tree view is enabled on the site.
+        /// </summary>
+        public bool TreeViewEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user interface (UI) version of the Web site.
+        /// A 32-bit integer between 0 and 127 that specifies the UI version.
+        /// </summary>
+        public int UIVersion { get; set; }
+
+        /// <summary>
+        ///	Gets or sets a value that specifies whether the settings UI for visual upgrade is shown or hidden.
+        /// </summary>
+        public bool UIVersionConfigurationEnabled { get; set; }
+
+        // TODO: Check if read-only
+        /// <summary>
+        /// Gets or sets a value that specifies whether the default access request is used on the site.
+        /// </summary>
+        public bool UseAccessRequestDefault { get; set; }
+
+        #region ON GOING
+        /// <summary>
+        /// Gets the name of the site definition or site template that was used to create the site.
+        /// </summary>
+        public string WebTemplate { get; }
+
+        /// <summary>
+        /// Gets the web template configuration of the site.
+        /// </summary>
+        public string WebTemplateConfiguration { get; }
+
+        /// <summary>
+        /// Gets a value that indicates whether the web templates gallery first run is enabled.
+        /// </summary>
+        public bool WebTemplatesGalleryFirstRunEnabled { get; }
         #endregion
 
         /// <summary>
@@ -232,7 +458,6 @@ namespace PnP.Core.Model.SharePoint
         /// The URL of the Web object
         /// </summary>
         public Uri Url { get; }
-
 
         /// <summary>
         /// Collection of lists in the current Web object
@@ -406,221 +631,6 @@ namespace PnP.Core.Model.SharePoint
         #region TO IMPLEMENT
         // TODO: Take information from here to update documentation of this class member
         // TODO: https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee546309(v=office.15)
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool EnableMinimalDownload { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public int FooterEmphasis { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool FooterEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public int FooterLayout { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public int HeaderEmphasis { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public int HeaderLayout { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool HideTitleInHeader { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool IsHomepageModernized { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool IsProvisioningComplete { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool IsRevertHomepageLinkHidden { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public int Language { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public DateTime LastItemModifiedDate { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public DateTime LastItemUserModifiedDate { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public int LogoAlignment { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string MasterUrl { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool MegaMenuEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool NavAudienceTargetingEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool NextStepsFirstRunEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool NotificationsInOneDriveForBusinessEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool NotificationsInSharePointEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool ObjectCacheEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool PreviewFeaturesEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string PrimaryColor { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool RecycleBinEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool SaveSiteAsTemplateEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string SearchBoxPlaceholderText { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string ServerRelativeUrl { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool ShowUrlStructureForCurrentUser { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string SiteLogoDescription { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string SiteLogoUrl { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool SyndicationEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public int TenantAdminMembersCanShare { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool TenantTagPolicyEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string ThemeData { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string ThemedCssFolderUrl { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool ThirdPartyMdmEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool TreeViewEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public int UIVersion { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool UIVersionConfigurationEnabled { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool UseAccessRequestDefault { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string WebTemplate { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public string WebTemplateConfiguration { get; set; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public bool WebTemplatesGalleryFirstRunEnabled { get; set; }
 
         ///// <summary>
         ///// To update...

@@ -54,6 +54,92 @@ namespace PnP.Core.Model.SharePoint
 
         public bool DocumentLibraryCalloutOfficeWebAppPreviewersDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool EnableMinimalDownload { get => GetValue<bool>(); set => SetValue(value); }
+
+        public FooterVariantThemeType FooterEmphasis { get => GetValue<FooterVariantThemeType>(); set => SetValue(value); }
+
+        public bool FooterEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public FooterLayoutType FooterLayout { get => GetValue<FooterLayoutType>(); set => SetValue(value); }
+
+        public VariantThemeType HeaderEmphasis { get => GetValue<VariantThemeType>(); set => SetValue(value); }
+
+        public HeaderLayoutType HeaderLayout { get => GetValue<HeaderLayoutType>(); set => SetValue(value); }
+
+        public bool HideTitleInHeader { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsHomepageModernized { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsProvisioningComplete { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsRevertHomepageLinkHidden { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int Language { get => GetValue<int>(); set => SetValue(value); }
+
+        public DateTime LastItemModifiedDate { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        public DateTime LastItemUserModifiedDate { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        public LogoAlignment LogoAlignment { get => GetValue<LogoAlignment>(); set => SetValue(value); }
+
+        public string MasterUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool MegaMenuEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool NavAudienceTargetingEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool NextStepsFirstRunEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool NotificationsInOneDriveForBusinessEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool NotificationsInSharePointEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool ObjectCacheEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool PreviewFeaturesEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string PrimaryColor { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool RecycleBinEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool SaveSiteAsTemplateEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string SearchBoxPlaceholderText { get => GetValue<string>(); set => SetValue(value); }
+
+        public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool ShowUrlStructureForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string SiteLogoDescription { get => GetValue<string>(); set => SetValue(value); }
+
+        public string SiteLogoUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool SyndicationEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int TenantAdminMembersCanShare { get => GetValue<int>(); set => SetValue(value); }
+
+        public bool TenantTagPolicyEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string ThemeData { get => GetValue<string>(); set => SetValue(value); }
+
+        public string ThemedCssFolderUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool ThirdPartyMdmEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool TreeViewEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int UIVersion { get => GetValue<int>(); set => SetValue(value); }
+
+        public bool UIVersionConfigurationEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool UseAccessRequestDefault { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string WebTemplate { get => GetValue<string>(); set => SetValue(value); }
+
+        public string WebTemplateConfiguration { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool WebTemplatesGalleryFirstRunEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
         [GraphProperty("name")]
         public string Title { get => GetValue<string>(); set => SetValue(value); }
 
@@ -101,10 +187,8 @@ namespace PnP.Core.Model.SharePoint
 
         public bool HorizontalQuickLaunch { get => GetValue<bool>(); set => SetValue(value); }
 
-        // Type mapping needed
         public SearchScope SearchScope { get => GetValue<SearchScope>(); set => SetValue(value); }
 
-        // Type mapping needed
         public SearchBoxInNavBar SearchBoxInNavBar { get => GetValue<SearchBoxInNavBar>(); set => SetValue(value); }
 
         // Not in Web object, requires extra work to load
