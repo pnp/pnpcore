@@ -1,0 +1,9 @@
+--batchresponse_47ff4920-45a0-434c-a68f-dd0debbfc2e2
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"HubSiteId":"00000000-0000-0000-0000-000000000000","Id":"e52f882f-72c5-4d16-b0ee-0401cdbd2601","IsHubSite":false,"LockIssue":null,"MaxItemsPerThrottledOperation":5000,"NeedsB2BUpgrade":false,"PrimaryUri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup","ReadOnly":false,"RelatedGroupId":"d40f31cc-3876-40f4-bb39-fad5407d9ad4","RequiredDesignerVersion":"15.0.0.0"}}
+--batchresponse_47ff4920-45a0-434c-a68f-dd0debbfc2e2--

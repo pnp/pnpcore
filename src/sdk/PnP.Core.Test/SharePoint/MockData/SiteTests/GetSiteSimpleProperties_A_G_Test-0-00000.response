@@ -1,0 +1,9 @@
+--batchresponse_91111b2a-743f-4e03-8684-fe39038e49eb
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"AllowCreateDeclarativeWorkflow":true,"AllowDesigner":true,"AllowExternalEmbeddingWrapper":1,"AllowMasterPageEditing":false,"AllowRevertFromTemplate":false,"AllowSaveDeclarativeWorkflowAsTemplate":true,"AllowSavePublishDeclarativeWorkflow":true,"AllowSelfServiceUpgrade":true,"AllowSelfServiceUpgradeEvaluation":true,"AuditLogTrimmingRetention":90,"CanSyncHubSitePermissions":false,"CanUpgrade":true,"ChannelGroupId":"00000000-0000-0000-0000-000000000000","Classification":"","CommentsOnSitePagesDisabled":false,"CompatibilityLevel":15,"ComplianceAttribute":"","DisableAppViews":false,"DisableCompanyWideSharingLinks":false,"DisableFlows":false,"ExternalSharingTipsEnabled":false,"ExternalUserExpirationInDays":0,"GeoLocation":"EUR","GroupId":"d40f31cc-3876-40f4-bb39-fad5407d9ad4","Id":"e52f882f-72c5-4d16-b0ee-0401cdbd2601"}}
+--batchresponse_91111b2a-743f-4e03-8684-fe39038e49eb--
