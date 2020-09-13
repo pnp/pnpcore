@@ -250,6 +250,16 @@ namespace PnP.Core.Test.SharePoint
                             context2.Web.Lists.GetByTitle(null);
                         });
 
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                            IListCollection list = null;
+                            await list.GetByTitleAsync(listTitle);
+                        });
+
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                            IListCollection list = null;
+                            await list.GetByTitleAsync(null);
+                        });
+
                     }
                 }
                  
