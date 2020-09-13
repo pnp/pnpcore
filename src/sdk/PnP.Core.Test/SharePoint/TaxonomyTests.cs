@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NuGet.Frameworks;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -116,6 +117,108 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(newGroup.Requested);
                 Assert.IsTrue(newGroup.Name == newGroupName);
                 Assert.IsTrue(newGroup.Description == "pnp group description");
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermGroupsExtensionTests()
+        {
+            TestCommon.Instance.Mocking = false;            
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+                var newGroup = await termStore.Groups.AddAsync(newGroupName, "pnp group description");
+
+                Assert.IsNotNull(newGroup);
+                Assert.IsTrue(newGroup.Requested);
+                Assert.IsTrue(newGroup.Name == newGroupName);
+                Assert.IsTrue(newGroup.Description == "pnp group description");
+
+                var termStoreUpdated = await context.TermStore.GetAsync(p => p.Groups, o => o.Id);
+                // Extensions
+
+                var group = termStoreUpdated.Groups.GetByName(newGroupName);
+                Assert.AreEqual(group.Id, newGroup.Id);
+
+                var group2 = termStoreUpdated.Groups.GetByName(newGroupName);
+                Assert.AreEqual(group2.Id, newGroup.Id);
+
+                var group3 = termStoreUpdated.Groups.GetById(group2.Id);
+                Assert.AreEqual(group3.Id, newGroup.Id);
+                Assert.AreEqual(group3.Name, newGroup.Name);
+
+                var group4 = termStoreUpdated.Groups.GetById(group2.Id);
+                Assert.AreEqual(group4.Name, newGroup.Name);
+                Assert.AreEqual(group3.Id, newGroup.Id);
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermGroupsExtensionExceptionsTests()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+                var newGroup = await termStore.Groups.AddAsync(newGroupName, "pnp group description");
+
+                Assert.IsNotNull(newGroup);
+                Assert.IsTrue(newGroup.Requested);
+                Assert.IsTrue(newGroup.Name == newGroupName);
+                Assert.IsTrue(newGroup.Description == "pnp group description");
+
+                var termStoreUpdated = await context.TermStore.GetAsync(p => p.Groups, o => o.Id);
+                // Extensions
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                   termStoreUpdated.Groups.GetByName(string.Empty);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    termStoreUpdated.Groups.GetByName(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    termStoreUpdated.Groups.GetById(string.Empty);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    ITermGroupCollection groups = null;
+                    groups.GetByName(string.Empty);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    ITermGroupCollection groups = null;
+                    groups.GetByName(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    ITermGroupCollection groups = null;
+                    groups.GetById(string.Empty);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    ITermGroupCollection groups = null;
+                    groups.GetById(null);
+                });
 
                 // Delete the group again
                 await newGroup.DeleteAsync();
