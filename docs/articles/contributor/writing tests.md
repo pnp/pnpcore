@@ -186,10 +186,15 @@ public bool Mocking { get; set; } = false;
 
 Yes, if naming needs to change you can do that. Keep in mind that the offline files live in a folder named accordingly to the test file and the offline files depend on the test case name, so you'll have to do similar renames in offline files or folder.
 
-### My test cannot in offline mode and as such it breaks the GitHub "Build and Test" workflow
+### My test cannot run in offline mode and as such it breaks the GitHub "Build and Test" workflow
 
 If you really can't make your test work offline then you'll need to exclude the test from being executed in the GitHub **Build and Test** workflow. This can be done by adding the following check to your test case:
 
 ```csharp
 if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 ```
+
+### My tests for Terms fail when running in Live Mode
+
+Please add "Dutch" to language support for terms, this is only required for live running for term set tests only, this will take a few minutes before it is effective in the Microsoft Graph.
+If this persists, the test uses a Sleep (of 10 seconds) method to "wait" for the removal of test artefacts, sometimes the artefacts are not removed within this time, this will show the test to fail.
