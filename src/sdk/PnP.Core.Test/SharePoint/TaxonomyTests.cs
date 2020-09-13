@@ -631,7 +631,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetTermsBatchTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 string newGroupName = GetGroupName(context);
