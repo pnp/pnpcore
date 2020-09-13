@@ -716,6 +716,47 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetTermsExceptionsTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var newBatch = context.NewBatch();
+
+                // Add new group
+                var group = context.TermStore.Groups.Add(newGroupName);
+
+                // Add term set
+                var termSet = group.Sets.Add("PnPSet1", "Set description");
+                               
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    await termSet.Terms.AddAsync(string.Empty);
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    await termSet.Terms.AddBatchAsync(string.Empty);
+                    await context.ExecuteAsync();
+                });
+                
+                // Delete term set 
+                termSet.Delete();
+
+                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
+                // not always work (getting error about deleting non empty term group)
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(10000);
+                }
+
+                // Delete the group again
+                group.Delete();
+
+            }
+        }
+
+        [TestMethod]
         public async Task AddUpdateDeleteTerms()
         {
             //TestCommon.Instance.Mocking = false;
