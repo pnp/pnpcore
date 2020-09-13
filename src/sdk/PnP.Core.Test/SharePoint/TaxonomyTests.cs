@@ -363,6 +363,114 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddAndUpdateTermSetsBatchTests()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+                var newGroup = await termStore.Groups.AddAsync(newGroupName);
+
+                Assert.IsNotNull(newGroup);
+                Assert.IsTrue(newGroup.Requested);
+                Assert.IsTrue(newGroup.Name == newGroupName);
+
+                // Add term set
+                var termSet = await newGroup.Sets.AddBatchAsync("PnPSet1", "Set description");
+                await context.ExecuteAsync();
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                var newBatch = context.NewBatch();
+                var termSet2 = await newGroup.Sets.AddBatchAsync(newBatch, "PnPSet2", "Set description");
+                await context.ExecuteAsync(newBatch);
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                var termSet3 = newGroup.Sets.AddBatch("PnPSet3", "Set description");
+                await context.ExecuteAsync();
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                var newBatch2 = context.NewBatch();
+                var termSet4 = await newGroup.Sets.AddBatchAsync(newBatch2, "PnPSet4", "Set description");
+                await context.ExecuteAsync(newBatch2);
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                // Delete term set 
+                await termSet.DeleteAsync();
+                await termSet2.DeleteAsync();
+                await termSet3.DeleteAsync();
+                await termSet4.DeleteAsync();
+
+                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
+                // not always work (getting error about deleting non empty term group)
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(10000);
+                }
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddAndUpdateTermSetsExceptionsTests()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+                var newGroup = await termStore.Groups.AddAsync(newGroupName);
+
+                Assert.IsNotNull(newGroup);
+                Assert.IsTrue(newGroup.Requested);
+                Assert.IsTrue(newGroup.Name == newGroupName);
+
+                // Add term set
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    var termSet = await newGroup.Sets.AddBatchAsync(string.Empty);
+                    await context.ExecuteAsync();
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    var termSet = await newGroup.Sets.AddAsync(string.Empty);
+                    await context.ExecuteAsync();
+                });
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
         public async Task AddAndUpdateTermSetProperties()
         {
             //TestCommon.Instance.Mocking = false;
