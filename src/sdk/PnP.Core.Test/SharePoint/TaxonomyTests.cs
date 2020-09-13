@@ -110,11 +110,12 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(termStore.Groups.Length > 0);
 
                 // Add new group
-                var newGroup = await termStore.Groups.AddAsync(newGroupName);
+                var newGroup = await termStore.Groups.AddAsync(newGroupName, "pnp group description");
 
                 Assert.IsNotNull(newGroup);
                 Assert.IsTrue(newGroup.Requested);
                 Assert.IsTrue(newGroup.Name == newGroupName);
+                Assert.IsTrue(newGroup.Description == "pnp group description");
 
                 // Delete the group again
                 await newGroup.DeleteAsync();
@@ -136,16 +137,57 @@ namespace PnP.Core.Test.SharePoint
                 // Add new group                
                 var newGroup = await termStore.Groups.AddBatchAsync(newGroupName, "pnp group description");
                 await context.ExecuteAsync();
-
-
                 Assert.IsNotNull(newGroup);
                 Assert.IsTrue(newGroup.Requested);
                 Assert.IsTrue(newGroup.Name == newGroupName);
                 Assert.IsTrue(newGroup.Description == "pnp group description");
 
+                var newGroup2 = termStore.Groups.AddBatch($"{newGroupName}-2", "pnp group description");
+                await context.ExecuteAsync();
+                Assert.IsNotNull(newGroup2);
+                Assert.IsTrue(newGroup2.Requested);
+                Assert.IsTrue(newGroup2.Name == $"{newGroupName}-2");
+                Assert.IsTrue(newGroup2.Description == "pnp group description");
+
+                var newBatch = context.NewBatch();
+                var newGroup3 = termStore.Groups.AddBatch(newBatch, $"{newGroupName}-3", "pnp group description");
+                await context.ExecuteAsync(newBatch);
+                Assert.IsNotNull(newGroup3);
+                Assert.IsTrue(newGroup3.Requested);
+                Assert.IsTrue(newGroup3.Name == $"{newGroupName}-3");
+                Assert.IsTrue(newGroup3.Description == "pnp group description");
+
                 // Delete the group again
                 await newGroup.DeleteBatchAsync();
+                await newGroup2.DeleteBatchAsync();
+                await newGroup3.DeleteBatchAsync();
                 await context.ExecuteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddTermGroupsExceptionTests()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    await termStore.Groups.AddAsync(string.Empty);
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    await termStore.Groups.AddBatchAsync(string.Empty);
+                    await context.ExecuteAsync();
+                });
+
             }
         }
 
