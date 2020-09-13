@@ -135,6 +135,102 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task ListLinqGetAsyncMethods()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "ListLinqGetAsyncMethods";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                var listGuid = myList.Id;
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        Assert.IsTrue(list2.Title == listTitle);
+                        Assert.IsTrue(list2.Id == listGuid);
+                    }
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    context3.GraphFirst = false;
+
+                    var list3 = await context3.Web.Lists.GetByIdAsync(listGuid, p => p.TemplateType, p => p.Title);
+                    if (list3 != null)
+                    {
+                        Assert.IsTrue(list3.Title == listTitle);
+                        Assert.IsTrue(list3.Id == listGuid);
+                    }
+                }
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ListLinqGetExceptionMethods()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "ListLinqGetExceptionMethods";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                var listGuid = myList.Id;
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                            IListCollection list = null;
+                            await list.GetByIdAsync(listGuid);
+                        });
+
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                            IListCollection list = null;
+                            await context2.Web.Lists.GetByIdAsync(Guid.Empty, p => p.TemplateType, p => p.Title);
+                        });
+
+
+                    }
+                }
+                                
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task GetItemsByCAMLQuery()
         {
             //TestCommon.Instance.Mocking = false;
