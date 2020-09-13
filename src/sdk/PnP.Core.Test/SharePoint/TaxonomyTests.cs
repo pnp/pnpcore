@@ -449,7 +449,7 @@ namespace PnP.Core.Test.SharePoint
 
 
         [TestMethod]
-        public async Task GetTerms()
+        public async Task GetTermsAsync()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -529,7 +529,7 @@ namespace PnP.Core.Test.SharePoint
                 // not always work (getting error about deleting non empty term group)
                 if (!TestCommon.Instance.Mocking)
                 {
-                    Thread.Sleep(4000);
+                    Thread.Sleep(10000);
                 }
 
                 // Delete the group again
@@ -537,6 +537,97 @@ namespace PnP.Core.Test.SharePoint
 
             }
         }
+
+        [TestMethod]
+        public void GetTerms()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = context.TermStore.Groups.Add(newGroupName);
+
+                // Add term set
+                var termSet = group.Sets.Add("PnPSet1", "Set description");
+
+                // Add term
+                var newTerm = termSet.Terms.Add("T1", "Description in English");
+
+                // test term update
+                newTerm.AddLabelAndDescription("T1 Dutch", "nl-NL", false, "Dutch label");
+                newTerm.Update();
+
+                // add child term
+                var newChildTerm = newTerm.Terms.Add("T1.1", "English T1.1");
+
+                // update child term
+                newChildTerm.AddLabelAndDescription("T1.1 Dutch", "nl-NL", false, "Dutch label");
+                newChildTerm.Update();
+
+                // Retrieve the created terms
+                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                {
+                    // Use linq provider to get a group by name
+                    var group2 = context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefault();
+                    if (group2 != null)
+                    {
+                        var groupWithSets = group2.Get(p => p.Sets);
+
+                        var termSet2 = groupWithSets.Sets.FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
+                        if (termSet2 != null)
+                        {
+                            // Load terms and parent group
+                            termSet2.Get(p => p.Terms);
+                            Assert.IsTrue(termSet2.Terms.Length > 0);
+
+                            // Group is automatically assigned if the group was loaded before
+                            Assert.IsTrue(termSet2.Group != null);
+
+                            foreach (var term in termSet2.Terms)
+                            {
+                                // Term set is automatically assigned if the termset was loaded before
+                                Assert.IsTrue(term.Set != null);
+
+                                // Load the children of this term and set
+                                term.Get(p => p.Terms);
+
+                                foreach (var child in term.Terms)
+                                {
+                                    Assert.IsTrue(child.Requested);
+                                    Assert.IsTrue(child.Labels.Count > 0);
+
+                                    Assert.IsTrue(child.Set != null);
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // delete term
+                newChildTerm.Delete();
+
+                // delete term 
+                newTerm.Delete();
+
+                // Delete term set 
+                termSet.Delete();
+
+                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
+                // not always work (getting error about deleting non empty term group)
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(4000);
+                }
+
+                // Delete the group again
+                group.Delete();
+
+            }
+        }
+
 
         [TestMethod]
         public async Task AddUpdateDeleteTerms()
