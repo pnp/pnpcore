@@ -112,6 +112,10 @@ namespace PnP.Core.Test.Base
 
                 Assert.IsTrue(item.Requested);
                 Assert.IsTrue(item.Id >= 0);
+
+                Assert.IsTrue(myList.Items.Contains(item.Id));
+                Assert.IsFalse(myList.Items.Contains(item.Id + 1));
+
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
                 // Besides the Id and the initially populated fields there are no other fields available
                 Assert.IsFalse(item.IsPropertyAvailable(p => p.CommentsDisabled));
@@ -248,6 +252,56 @@ namespace PnP.Core.Test.Base
                 dynamic dynamicItem = item;
                 Assert.IsTrue(dynamicItem.ContentType == "Item");
                 Assert.IsTrue(dynamicItem["ContentType"] == "Item");
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListItemViaRestExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var batch = context.BatchClient.EnsureBatch();
+                var web = context.Web.GetBatch(batch, p => p.Lists);
+                await context.ExecuteAsync(batch);
+
+                string listTitle = "AddListItemViaRestExceptionTest";
+                var myList = web.Lists.FirstOrDefault(l => l.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+                else
+                {
+                    batch = context.BatchClient.EnsureBatch();
+                    myList = await web.Lists.AddBatchAsync(batch, listTitle, ListTemplateType.GenericList);
+                    await context.ExecuteAsync(batch);
+                }
+
+                // get items from the list
+                batch = context.BatchClient.EnsureBatch();
+                myList.GetBatch(batch, p => p.Items);
+                await context.ExecuteAsync(batch);
+
+                int listItemCount = myList.Items.Count();
+
+                // Add a list item
+                Dictionary<string, object> values = new Dictionary<string, object>
+                {
+                    { "Title", ItemTitleValue }
+                };
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    batch = context.BatchClient.EnsureBatch();
+                    var item = myList.Items.AddBatch(batch, null);
+                    await context.ExecuteAsync(batch);
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    var item = await myList.Items.AddAsync(null);
+                });
+
             }
         }
         #endregion
