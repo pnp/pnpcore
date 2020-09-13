@@ -129,6 +129,19 @@ namespace PnP.Core.Test.SharePoint
                     }
                 }
 
+                using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    var list4 = context4.Web.Lists.GetByTitle(listTitle);
+                    if (list4 != null)
+                    {
+                        var listCheck = context4.Web.Lists.GetById(list4.Id);
+
+                        Assert.IsTrue(listCheck.Title == listTitle);
+                        Assert.IsTrue(listCheck.Id == listGuid);
+                    }
+                }
+
+
                 // Cleanup the created list
                 await myList.DeleteAsync();
             } 
@@ -216,15 +229,30 @@ namespace PnP.Core.Test.SharePoint
                         });
 
                         await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
-                            IListCollection list = null;
                             await context2.Web.Lists.GetByIdAsync(Guid.Empty, p => p.TemplateType, p => p.Title);
                         });
 
+                        Assert.ThrowsException<ArgumentNullException>(() => {
+                            IListCollection list = null;
+                            list.GetById(listGuid);
+                        });
+
+                        Assert.ThrowsException<ArgumentNullException>(() => {
+                            context2.Web.Lists.GetById(Guid.Empty, p => p.TemplateType, p => p.Title);
+                        });
+
+                        Assert.ThrowsException<ArgumentNullException>(() => {
+                            IListCollection list = null;
+                            list.GetByTitle(listTitle);
+                        });
+
+                        Assert.ThrowsException<ArgumentNullException>(() => {
+                            context2.Web.Lists.GetByTitle(null);
+                        });
 
                     }
                 }
-                                
-
+                 
                 // Cleanup the created list
                 await myList.DeleteAsync();
             }
