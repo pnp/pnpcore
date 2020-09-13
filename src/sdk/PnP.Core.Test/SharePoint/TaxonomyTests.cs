@@ -126,7 +126,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetTermGroupsExtensionTests()
         {
-            TestCommon.Instance.Mocking = false;            
+            //TestCommon.Instance.Mocking = false;            
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string newGroupName = GetGroupName(context);
@@ -168,7 +168,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetTermGroupsExtensionExceptionsTests()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 string newGroupName = GetGroupName(context);
