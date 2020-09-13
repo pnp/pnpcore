@@ -718,7 +718,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetTermsExceptionsTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 string newGroupName = GetGroupName(context);
