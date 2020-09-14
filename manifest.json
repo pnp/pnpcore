@@ -158,78 +158,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.AzureActiveDirectory.GroupVisibility.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.AzureActiveDirectory.GroupVisibility.html",
-          "hash": "HJtC3uw3HFlAMZXpY2OFGA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IGroup.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IGroup.html",
-          "hash": "DsUNH8FZmFxfwS9WAsbvlg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IIdentity.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IIdentity.html",
-          "hash": "4vwVxkJwVZArSLvYQcOFzA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IUser.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IUser.html",
-          "hash": "7B5DL/m0KypiBv6jeo6qHg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IUserCollection.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.AzureActiveDirectory.IUserCollection.html",
-          "hash": "lsbwWkLH9gfO+aI6wvzmwQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.AzureActiveDirectory.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.AzureActiveDirectory.html",
-          "hash": "i+VRzLdy6mjCIPKLPpnKKQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.DataModelExtensions.yml",
       "output": {
         ".html": {
@@ -475,6 +403,174 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.ISupportPaging-1.html",
           "hash": "aNrO/e7F8pwY46pV7lrh6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.GroupVisibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.GroupVisibility.html",
+          "hash": "3BLX++CYLfmY1QaZvchn7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IGraphGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IGraphGroup.html",
+          "hash": "KXBh+jnbw0CTAJTLhC04iw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IGraphGroupCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IGraphGroupCollection.html",
+          "hash": "G6O6wKkFBOyk+jxPtzf+Nw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IGraphPrincipal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IGraphPrincipal.html",
+          "hash": "st8+2merYGWq5AJXI2fOuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IGraphUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IGraphUser.html",
+          "hash": "4+PaFXx8/Iv4bwvhkzvXRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IGraphUserCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IGraphUserCollection.html",
+          "hash": "CBZTJ7JHyy8IDWhQW5EUUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.IIdentity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.IIdentity.html",
+          "hash": "Q7YuM3vIpK5x4dhi7eiBjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharePointGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharePointGroup.html",
+          "hash": "CRQsc+9Jh2z8qvt9vOsODw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharePointGroupCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharePointGroupCollection.html",
+          "hash": "fUZOEPv18g5a5pCwfveW4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharePointPrincipal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharePointPrincipal.html",
+          "hash": "VmcW3WCmrEeHQrSZt5rsZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharePointUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharePointUser.html",
+          "hash": "TopeFDb/PmCmF6RXs9Fqdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.ISharePointUserCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.ISharePointUserCollection.html",
+          "hash": "Qwlf6eDKQvHhza6S97on8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.PrincipalType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.PrincipalType.html",
+          "hash": "Lj15igf1wD8Jrv/kipY5KA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.Security.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.Security.html",
+          "hash": "0S8glY464mKwWC4921/iCg=="
         }
       },
       "is_incremental": false,
@@ -882,7 +978,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFile.html",
-          "hash": "Ih3AwVVjieM5+zZ7EWYsoQ=="
+          "hash": "/UZMThirxVbm9Z89T8+BOg=="
         }
       },
       "is_incremental": false,
@@ -930,7 +1026,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFolder.html",
-          "hash": "Aj+ckRXPzbHwaZ/9PWpk5A=="
+          "hash": "LUmmhI4KggPNXmjIvc5PCg=="
         }
       },
       "is_incremental": false,
@@ -1218,7 +1314,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "LBVTm1pk14JHeOpRQLRgUQ=="
+          "hash": "gjakob5ZMu0kBtu3CzxfmA=="
         }
       },
       "is_incremental": false,
@@ -1530,7 +1626,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeam.html",
-          "hash": "QgZg/MUL+6h9ya3ffSsV5w=="
+          "hash": "alLi6EV5dyHFk3CO3Nzj3A=="
         }
       },
       "is_incremental": false,
@@ -1758,7 +1854,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Teams.ITeamIdentitySet.html",
-          "hash": "wZmB5IFLcP3PMZNTAo2vcQ=="
+          "hash": "gS5R7L939AGhiwFe0nUzZw=="
         }
       },
       "is_incremental": false,
@@ -1902,7 +1998,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.PnPConstants.html",
-          "hash": "F+vzbZZj58Dd8sO7LlLvoQ=="
+          "hash": "93AMsHK6VhhRzJ9t0UFCEQ=="
         }
       },
       "is_incremental": false,
@@ -2442,7 +2538,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "gPrUFs+S4+ru6IzUEnRavQ=="
+          "hash": "t9HAj9gNasYf0UfTChHNpg=="
         }
       },
       "is_incremental": false,
@@ -2622,7 +2718,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "1VE6CW1ZXe7aE/pmii4rBw=="
+          "hash": "zEqhDP16U8950UN7uOj3NQ=="
         }
       },
       "is_incremental": false,
@@ -2920,7 +3016,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 216,
+          "total_file_count": 224,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
