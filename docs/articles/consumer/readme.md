@@ -1,6 +1,6 @@
 # Getting started with the PnP Core SDK
 
-The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection ([generic host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1)) for it's core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a `PnPContext` from the `PnPContextFactory` and start using the library.
+The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection ([generic host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1)) for its core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a `PnPContext` from the `PnPContextFactory` and start using the library.
 
 ## Where is the code?
 
@@ -219,7 +219,7 @@ if (document != null)
 }
 ```
 
-Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the `Include()` lambda expression, below example shows using `Include()` in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection the Name and FieldLinks properties are loaded and for FieldLinks the Name property is loaded.
+Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the `Include()` method on the properties specified in the lambda expression(s), below example shows using `Include()` in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection, the Name and FieldLinks properties of each content type are loaded and, in turn, for ContentType FieldLinks, the Name property is loaded.
 
 ```csharp
 await context.Web.GetAsync(p => p.Title,
