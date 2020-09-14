@@ -1,3 +1,4 @@
+using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RecycleBinItem object
     /// </summary>
     [ConcreteType(typeof(RecycleBinItem))]
-    public interface IRecycleBinItem : IDataModel<IRecycleBinItem>, IDataModelUpdate, IDataModelDelete
+    public interface IRecycleBinItem : IDataModel<IRecycleBinItem>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// Gets the e-mail address of the user who created the recycle bin item.
@@ -75,17 +76,15 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public long Size { get; }
 
-        // TODO: Uncomment when IUser is implemented
-        ///// <summary>
-        ///// Gets a value that specifies the user who created the Recycle Bin item.
-        ///// </summary>
-        //public IUser Author { get; }
+        /// <summary>
+        /// Gets a value that specifies the user who created the Recycle Bin item.
+        /// </summary>
+        public ISharePointUser Author { get; }
 
-        // TODO: Uncomment when IUser is implemented
-        ///// <summary>
-        ///// Gets a value that specifies the user who deleted the Recycle Bin item.
-        ///// </summary>
-        //public IUser DeletedBy { get; }
+        /// <summary>
+        /// Gets a value that specifies the user who deleted the Recycle Bin item.
+        /// </summary>
+        public ISharePointUser DeletedBy { get; }
 
         #region Restore
         /// <summary>

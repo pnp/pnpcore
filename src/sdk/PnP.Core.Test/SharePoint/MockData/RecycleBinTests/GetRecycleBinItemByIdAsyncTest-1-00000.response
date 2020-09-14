@@ -1,0 +1,9 @@
+--batchresponse_6377ba4d-5bbc-4b5c-a5d9-ad96f7cf452c
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RecycleBin(guid'85386c58-aa9f-44ab-bed8-abca075812bc')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RecycleBin(guid'85386c58-aa9f-44ab-bed8-abca075812bc')","type":"SP.RecycleBinItem"},"Id":"85386c58-aa9f-44ab-bed8-abca075812bc","LeafName":"PNP_SDK_TEST_GetRecycleBinItemByIdAsyncTest.docx"}]}}
+--batchresponse_6377ba4d-5bbc-4b5c-a5d9-ad96f7cf452c--

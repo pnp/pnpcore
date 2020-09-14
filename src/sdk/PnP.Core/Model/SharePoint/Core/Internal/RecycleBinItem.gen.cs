@@ -1,6 +1,5 @@
-using PnP.Core.Services;
+using PnP.Core.Model.Security;
 using System;
-using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -38,54 +37,53 @@ namespace PnP.Core.Model.SharePoint
 
         public long Size { get => GetValue<long>(); set => SetValue(value); }
 
-        // TODO: Uncomment (and eventually adapt) when IUser is implemented
-        //public IUser Author
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new User
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IUser>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
+        [SharePointProperty("Author", Expandable = true)]
+        public ISharePointUser Author
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new SharePointUser
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<ISharePointUser>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
 
-
-        // TODO: Uncomment (and eventually adapt) when IUser is implemented
-        //public IUser DeletedBy
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new User
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IUser>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);                
-        //    }
-        //}
+        [SharePointProperty("DeletedBy", Expandable = true)]
+        public ISharePointUser DeletedBy
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new SharePointUser
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<ISharePointUser>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
 
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }

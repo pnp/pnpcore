@@ -53,23 +53,48 @@ namespace PnP.Core.Test.SharePoint
             await CleanupWebRecycleBinItem(2, recycleBinItemId);
         }
 
-        // TODO Linq Query still broken, need to figure out what's missing since the latest changes in Query
-        //[TestMethod]
-        //public async Task GetRecycleBinItemByIdAsyncTest()
-        //{
-        //    TestCommon.Instance.Mocking = false;
+        [TestMethod]
+        public async Task GetWebRecycleBinItemWithAuthorTest()
+        {
+            //TestCommon.Instance.Mocking = false;
 
-        //    (Guid recycleBinItemId, string fileName) = await AddMockRecycledDocument(0);
+            (Guid recycleBinItemId, string fileName) = await AddMockRecycledDocument(0);
 
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-        //    {
-        //        IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.GetByIdAsync(recycleBinItemId, r => r.LeafName);
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                // Load the recycle bin
+                await context.Web.GetAsync(w => w.RecycleBin.Include(p => p.Author, p =>p.Id, p=>p.Title));
 
-        //        Assert.AreEqual(fileName, recycleBinItem.LeafName);
-        //    }
+                // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
+                IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
 
-        //    await CleanupSiteRecycleBinItem(2, recycleBinItemId);
-        //}
+                Assert.IsNotNull(recycleBinItem);
+                Assert.AreEqual(recycleBinItemId, recycleBinItem.Id);
+                Assert.AreEqual(fileName, recycleBinItem.Title);
+                Assert.IsTrue(recycleBinItem.Author.Requested);
+                Assert.IsTrue(recycleBinItem.Author.Id > 0);
+            }
+
+            await CleanupWebRecycleBinItem(2, recycleBinItemId);
+        }
+
+
+        [TestMethod]
+        public async Task GetRecycleBinItemByIdAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (Guid recycleBinItemId, string fileName) = await AddMockRecycledDocument(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IRecycleBinItem recycleBinItem = await context.Web.RecycleBin.GetByIdAsync(recycleBinItemId, r => r.LeafName);
+
+                Assert.AreEqual(fileName, recycleBinItem.LeafName);
+            }
+
+            await CleanupSiteRecycleBinItem(2, recycleBinItemId);
+        }
 
         #region Restore()
         [TestMethod]
@@ -272,10 +297,12 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // Load the site collection recycle bin
-                await context.Site.GetAsync(w => w.RecycleBin);
+                await context.Site.GetAsync(w => w.RecycleBin.Include(p => p.Id, p => p.DeletedBy, p => p.ItemState));
                 IRecycleBinItem recycleBinItem = context.Site.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
+                Assert.IsTrue(recycleBinItem.DeletedBy.Requested);
+                Assert.IsTrue(recycleBinItem.DeletedBy.Id > 0);
             }
 
             await CleanupSiteRecycleBinItem(3, recycleBinItemId);
