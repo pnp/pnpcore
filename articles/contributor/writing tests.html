@@ -243,10 +243,13 @@ public static void TestFixtureSetup(TestContext context)
 </div>
 <h3 id="can-i-rename-test-files-or-test-cases">Can I rename test files or test cases</h3>
 <p>Yes, if naming needs to change you can do that. Keep in mind that the offline files live in a folder named accordingly to the test file and the offline files depend on the test case name, so you'll have to do similar renames in offline files or folder.</p>
-<h3 id="my-test-cannot-in-offline-mode-and-as-such-it-breaks-the-github-build-and-test-workflow">My test cannot in offline mode and as such it breaks the GitHub &quot;Build and Test&quot; workflow</h3>
+<h3 id="my-test-cannot-run-in-offline-mode-and-as-such-it-breaks-the-github-build-and-test-workflow">My test cannot run in offline mode and as such it breaks the GitHub &quot;Build and Test&quot; workflow</h3>
 <p>If you really can't make your test work offline then you'll need to exclude the test from being executed in the GitHub <strong>Build and Test</strong> workflow. This can be done by adding the following check to your test case:</p>
 <pre><code class="lang-csharp">if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive(&quot;Skipping live test because we're running inside a GitHub action&quot;);
 </code></pre>
+<h3 id="my-tests-for-terms-fail-when-running-in-live-mode">My tests for Terms fail when running in Live Mode</h3>
+<p>Please add &quot;Dutch&quot; to language support for terms, this is only required for live running for term set tests only, this will take a few minutes before it is effective in the Microsoft Graph.
+If this persists, the test uses a Sleep (of 10 seconds) method to &quot;wait&quot; for the removal of test artefacts, sometimes the artefacts are not removed within this time, this will show the test to fail.</p>
 </article>
           </div>
           <div class="contribution-panel mobile-hide">
