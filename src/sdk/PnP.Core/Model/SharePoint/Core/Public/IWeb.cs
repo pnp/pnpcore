@@ -241,6 +241,11 @@ namespace PnP.Core.Model.SharePoint
         public string PrimaryColor { get; set; }
 
         /// <summary>
+        /// Gets the recycle bin of the website.
+        /// </summary>
+        public IRecycleBinItemCollection RecycleBin { get; }
+
+        /// <summary>
         /// Gets or sets a value that specifies whether the Recycle Bin is enabled.
         /// </summary>
         public bool RecycleBinEnabled { get; set; }
@@ -744,11 +749,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IPushNotificationSubscriberCollection PushNotificationSubscribers { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IRecycleBinItemCollection RecycleBin { get; }
 
         ///// <summary>
         ///// To update...

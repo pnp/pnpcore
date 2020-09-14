@@ -101,6 +101,20 @@ namespace PnP.Core.Model.SharePoint
 
         public string PrimaryColor { get => GetValue<string>(); set => SetValue(value); }
 
+        [SharePointProperty("RecycleBin", Expandable = true)]
+        public IRecycleBinItemCollection RecycleBin
+        {
+            get
+            {
+                if (!HasValue(nameof(RecycleBin)))
+                {
+                    var folders = new RecycleBinItemCollection(this.PnPContext, this, nameof(RecycleBin));
+                    SetValue(folders);
+                }
+                return GetValue<IRecycleBinItemCollection>();
+            }
+        }
+
         public bool RecycleBinEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool SaveSiteAsTemplateEnabled { get => GetValue<bool>(); set => SetValue(value); }

@@ -1,0 +1,9 @@
+--batchresponse_41354323-7fb4-4acf-8bbd-a4182fa62daa
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Recycle":"326a009c-b6a1-47ba-b7a4-0bd983e3778f"}}
+--batchresponse_41354323-7fb4-4acf-8bbd-a4182fa62daa--

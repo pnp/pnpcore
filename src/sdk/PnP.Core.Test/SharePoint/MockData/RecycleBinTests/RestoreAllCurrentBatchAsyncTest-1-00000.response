@@ -1,0 +1,9 @@
+--batchresponse_7acdf0ec-4b53-484b-8ef2-3a53653eec37
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"RestoreAll":null}}
+--batchresponse_7acdf0ec-4b53-484b-8ef2-3a53653eec37--

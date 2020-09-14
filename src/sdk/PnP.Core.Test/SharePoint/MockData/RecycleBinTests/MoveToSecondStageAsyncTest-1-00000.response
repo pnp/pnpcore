@@ -1,0 +1,9 @@
+--batchresponse_5517c63a-5828-4369-b121-6598e3c93d1b
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"RecycleBin":{"results":[{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'531e9289-a7d2-4543-a71c-02625aeaef5b')","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'531e9289-a7d2-4543-a71c-02625aeaef5b')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'531e9289-a7d2-4543-a71c-02625aeaef5b')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/RecycleBin(guid'531e9289-a7d2-4543-a71c-02625aeaef5b')/DeletedBy"}},"AuthorEmail":"yannick@pvxdev.onmicrosoft.com","AuthorName":"Yannick Plenevaux","DeletedByEmail":"yannick@pvxdev.onmicrosoft.com","DeletedByName":"Yannick Plenevaux","DeletedDate":"2020-09-14T15:06:40Z","DeletedDateLocalFormatted":"9/14/2020 5:06 PM","DirName":"sites/pnpcoresdktestgroup/Shared Documents","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/pnpcoresdktestgroup/Shared Documents"},"Id":"531e9289-a7d2-4543-a71c-02625aeaef5b","ItemState":1,"ItemType":1,"LeafName":"PNP_SDK_TEST_MoveToSecondStageAsyncTest.docx","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"PNP_SDK_TEST_MoveToSecondStageAsyncTest.docx"},"Size":"18651","Title":"PNP_SDK_TEST_MoveToSecondStageAsyncTest.docx"}]},"Id":"debb4230-758e-4649-aca8-d1cf0796684b"}}
+--batchresponse_5517c63a-5828-4369-b121-6598e3c93d1b--

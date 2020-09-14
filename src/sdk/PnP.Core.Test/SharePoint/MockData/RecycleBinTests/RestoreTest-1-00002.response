@@ -1,0 +1,9 @@
+--batchresponse_aa91bd6c-0336-47ac-90cd-0031aff04169
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Restore":null}}
+--batchresponse_aa91bd6c-0336-47ac-90cd-0031aff04169--

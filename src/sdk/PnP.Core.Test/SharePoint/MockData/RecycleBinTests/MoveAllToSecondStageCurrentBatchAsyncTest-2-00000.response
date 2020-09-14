@@ -1,0 +1,9 @@
+--batchresponse_79d927cf-cd91-4743-9fe2-b5e3c2a8e262
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"RecycleBin":{"results":[]},"Id":"debb4230-758e-4649-aca8-d1cf0796684b"}}
+--batchresponse_79d927cf-cd91-4743-9fe2-b5e3c2a8e262--
