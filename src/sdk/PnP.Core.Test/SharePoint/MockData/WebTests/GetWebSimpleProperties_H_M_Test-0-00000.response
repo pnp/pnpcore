@@ -1,0 +1,9 @@
+--batchresponse_04c6e8b2-065c-4eb4-85f8-37cbb827989e
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"HeaderEmphasis":0,"HeaderLayout":0,"HideTitleInHeader":false,"Id":"debb4230-758e-4649-aca8-d1cf0796684b","IsHomepageModernized":false,"IsProvisioningComplete":true,"IsRevertHomepageLinkHidden":false,"Language":1033,"LastItemModifiedDate":"2020-09-11T07:42:26Z","LastItemUserModifiedDate":"2020-09-10T15:31:39Z","LogoAlignment":0,"MasterUrl":"/sites/pnpcoresdktestgroup/_catalogs/masterpage/seattle.master","MegaMenuEnabled":false}}
+--batchresponse_04c6e8b2-065c-4eb4-85f8-37cbb827989e--

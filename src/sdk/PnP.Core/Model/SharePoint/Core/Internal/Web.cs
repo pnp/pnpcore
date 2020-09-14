@@ -35,6 +35,11 @@ namespace PnP.Core.Model.SharePoint
                 {
                     case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScope>(input.JsonElement);
                     case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);
+                    case "LogoAlignment": return JsonMappingHelper.ToEnum<LogoAlignment>(input.JsonElement);
+                    case "HeaderLayout": return JsonMappingHelper.ToEnum<HeaderLayoutType>(input.JsonElement);
+                    case "HeaderEmphasis": return JsonMappingHelper.ToEnum<VariantThemeType>(input.JsonElement);
+                    case "FooterLayout": return JsonMappingHelper.ToEnum<FooterLayoutType>(input.JsonElement);
+                    case "FooterEmphasis": return JsonMappingHelper.ToEnum<FooterVariantThemeType>(input.JsonElement);
                 }
 
                 input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");

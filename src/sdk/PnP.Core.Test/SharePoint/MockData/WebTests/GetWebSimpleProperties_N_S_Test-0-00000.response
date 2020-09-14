@@ -1,0 +1,9 @@
+--batchresponse_4d7c2650-fd99-4bbf-bd49-840449b9f320
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"Id":"debb4230-758e-4649-aca8-d1cf0796684b","NavAudienceTargetingEnabled":false,"NextStepsFirstRunEnabled":true,"NotificationsInOneDriveForBusinessEnabled":true,"NotificationsInSharePointEnabled":true,"ObjectCacheEnabled":false,"PreviewFeaturesEnabled":true,"PrimaryColor":"#986f0b","RecycleBinEnabled":true,"SaveSiteAsTemplateEnabled":true,"SearchBoxPlaceholderText":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup","ShowUrlStructureForCurrentUser":true,"SiteLogoDescription":"","SiteLogoUrl":"/sites/pnpcoresdktestgroup/_api/GroupService/GetGroupImage?id='4f8c5337-b30f-4cbd-ad04-3815db4f8f0a'&hash=637354069459726805","SyndicationEnabled":true}}
+--batchresponse_4d7c2650-fd99-4bbf-bd49-840449b9f320--
