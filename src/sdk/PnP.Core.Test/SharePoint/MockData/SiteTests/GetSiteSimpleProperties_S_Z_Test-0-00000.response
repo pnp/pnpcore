@@ -1,0 +1,9 @@
+--batchresponse_ca906e43-e4cd-4c2f-aa9a-54e636caf208
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"Id":"e52f882f-72c5-4d16-b0ee-0401cdbd2601","SensitivityLabelId":null,"SensitivityLabel":"00000000-0000-0000-0000-000000000000","SearchBoxInNavBar":0,"SearchBoxPlaceholderText":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup","ShareByEmailEnabled":false,"ShareByLinkEnabled":false,"ShowPeoplePickerSuggestionsForGuestUsers":false,"ShowUrlStructure":false,"SocialBarOnSitePagesDisabled":false,"StatusBarLink":null,"StatusBarText":null,"ThicketSupportDisabled":true,"TrimAuditLog":true,"UIVersionConfigurationEnabled":false,"UpgradeReminderDate":"1899-12-30T00:00:00","UpgradeScheduled":false,"UpgradeScheduledDate":"1753-01-01T00:00:00","Upgrading":false}}
+--batchresponse_ca906e43-e4cd-4c2f-aa9a-54e636caf208--
