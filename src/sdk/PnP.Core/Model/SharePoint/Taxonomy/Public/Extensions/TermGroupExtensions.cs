@@ -38,7 +38,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 throw new ArgumentNullException(nameof(id));
             }
@@ -108,7 +108,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new ArgumentNullException(nameof(source));
             }
-            if (name == null)
+            if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
             }

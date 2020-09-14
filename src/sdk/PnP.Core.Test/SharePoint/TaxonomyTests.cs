@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NuGet.Frameworks;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -110,11 +111,114 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(termStore.Groups.Length > 0);
 
                 // Add new group
-                var newGroup = await termStore.Groups.AddAsync(newGroupName);
+                var newGroup = await termStore.Groups.AddAsync(newGroupName, "pnp group description");
 
                 Assert.IsNotNull(newGroup);
                 Assert.IsTrue(newGroup.Requested);
                 Assert.IsTrue(newGroup.Name == newGroupName);
+                Assert.IsTrue(newGroup.Description == "pnp group description");
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermGroupsExtensionTests()
+        {
+            //TestCommon.Instance.Mocking = false;            
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+                var newGroup = await termStore.Groups.AddAsync(newGroupName, "pnp group description");
+
+                Assert.IsNotNull(newGroup);
+                Assert.IsTrue(newGroup.Requested);
+                Assert.IsTrue(newGroup.Name == newGroupName);
+                Assert.IsTrue(newGroup.Description == "pnp group description");
+
+                var termStoreUpdated = await context.TermStore.GetAsync(p => p.Groups, o => o.Id);
+                // Extensions
+
+                var group = termStoreUpdated.Groups.GetByName(newGroupName);
+                Assert.AreEqual(group.Id, newGroup.Id);
+
+                var group2 = termStoreUpdated.Groups.GetByName(newGroupName);
+                Assert.AreEqual(group2.Id, newGroup.Id);
+
+                var group3 = termStoreUpdated.Groups.GetById(group2.Id);
+                Assert.AreEqual(group3.Id, newGroup.Id);
+                Assert.AreEqual(group3.Name, newGroup.Name);
+
+                var group4 = termStoreUpdated.Groups.GetById(group2.Id);
+                Assert.AreEqual(group4.Name, newGroup.Name);
+                Assert.AreEqual(group3.Id, newGroup.Id);
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermGroupsExtensionExceptionsTests()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+                var newGroup = await termStore.Groups.AddAsync(newGroupName, "pnp group description");
+
+                Assert.IsNotNull(newGroup);
+                Assert.IsTrue(newGroup.Requested);
+                Assert.IsTrue(newGroup.Name == newGroupName);
+                Assert.IsTrue(newGroup.Description == "pnp group description");
+
+                var termStoreUpdated = await context.TermStore.GetAsync(p => p.Groups, o => o.Id);
+                // Extensions
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                   termStoreUpdated.Groups.GetByName(string.Empty);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    termStoreUpdated.Groups.GetByName(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    termStoreUpdated.Groups.GetById(string.Empty);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    ITermGroupCollection groups = null;
+                    groups.GetByName(string.Empty);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    ITermGroupCollection groups = null;
+                    groups.GetByName(null);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    ITermGroupCollection groups = null;
+                    groups.GetById(string.Empty);
+                });
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    ITermGroupCollection groups = null;
+                    groups.GetById(null);
+                });
 
                 // Delete the group again
                 await newGroup.DeleteAsync();
@@ -136,16 +240,57 @@ namespace PnP.Core.Test.SharePoint
                 // Add new group                
                 var newGroup = await termStore.Groups.AddBatchAsync(newGroupName, "pnp group description");
                 await context.ExecuteAsync();
-
-
                 Assert.IsNotNull(newGroup);
                 Assert.IsTrue(newGroup.Requested);
                 Assert.IsTrue(newGroup.Name == newGroupName);
                 Assert.IsTrue(newGroup.Description == "pnp group description");
 
+                var newGroup2 = termStore.Groups.AddBatch($"{newGroupName}-2", "pnp group description");
+                await context.ExecuteAsync();
+                Assert.IsNotNull(newGroup2);
+                Assert.IsTrue(newGroup2.Requested);
+                Assert.IsTrue(newGroup2.Name == $"{newGroupName}-2");
+                Assert.IsTrue(newGroup2.Description == "pnp group description");
+
+                var newBatch = context.NewBatch();
+                var newGroup3 = termStore.Groups.AddBatch(newBatch, $"{newGroupName}-3", "pnp group description");
+                await context.ExecuteAsync(newBatch);
+                Assert.IsNotNull(newGroup3);
+                Assert.IsTrue(newGroup3.Requested);
+                Assert.IsTrue(newGroup3.Name == $"{newGroupName}-3");
+                Assert.IsTrue(newGroup3.Description == "pnp group description");
+
                 // Delete the group again
                 await newGroup.DeleteBatchAsync();
+                await newGroup2.DeleteBatchAsync();
+                await newGroup3.DeleteBatchAsync();
                 await context.ExecuteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddTermGroupsExceptionTests()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    await termStore.Groups.AddAsync(string.Empty);
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    await termStore.Groups.AddBatchAsync(string.Empty);
+                    await context.ExecuteAsync();
+                });
+
             }
         }
 
@@ -363,6 +508,114 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddAndUpdateTermSetsBatchTests()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+                var newGroup = await termStore.Groups.AddAsync(newGroupName);
+
+                Assert.IsNotNull(newGroup);
+                Assert.IsTrue(newGroup.Requested);
+                Assert.IsTrue(newGroup.Name == newGroupName);
+
+                // Add term set
+                var termSet = await newGroup.Sets.AddBatchAsync("PnPSet1", "Set description");
+                await context.ExecuteAsync();
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                var newBatch = context.NewBatch();
+                var termSet2 = await newGroup.Sets.AddBatchAsync(newBatch, "PnPSet2", "Set description");
+                await context.ExecuteAsync(newBatch);
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                var termSet3 = newGroup.Sets.AddBatch("PnPSet3", "Set description");
+                await context.ExecuteAsync();
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                var newBatch2 = context.NewBatch();
+                var termSet4 = await newGroup.Sets.AddBatchAsync(newBatch2, "PnPSet4", "Set description");
+                await context.ExecuteAsync(newBatch2);
+
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                // Delete term set 
+                await termSet.DeleteAsync();
+                await termSet2.DeleteAsync();
+                await termSet3.DeleteAsync();
+                await termSet4.DeleteAsync();
+
+                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
+                // not always work (getting error about deleting non empty term group)
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(10000);
+                }
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddAndUpdateTermSetsExceptionsTests()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var termStore = await context.TermStore.GetAsync(p => p.Groups);
+                Assert.IsTrue(termStore.Requested);
+                Assert.IsTrue(termStore.Groups.Length > 0);
+
+                // Add new group
+                var newGroup = await termStore.Groups.AddAsync(newGroupName);
+
+                Assert.IsNotNull(newGroup);
+                Assert.IsTrue(newGroup.Requested);
+                Assert.IsTrue(newGroup.Name == newGroupName);
+
+                // Add term set
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    var termSet = await newGroup.Sets.AddBatchAsync(string.Empty);
+                    await context.ExecuteAsync();
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    var termSet = await newGroup.Sets.AddAsync(string.Empty);
+                    await context.ExecuteAsync();
+                });
+
+                // Delete the group again
+                await newGroup.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
         public async Task AddAndUpdateTermSetProperties()
         {
             //TestCommon.Instance.Mocking = false;
@@ -449,7 +702,7 @@ namespace PnP.Core.Test.SharePoint
 
 
         [TestMethod]
-        public async Task GetTerms()
+        public async Task GetTermsAsync()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -529,11 +782,229 @@ namespace PnP.Core.Test.SharePoint
                 // not always work (getting error about deleting non empty term group)
                 if (!TestCommon.Instance.Mocking)
                 {
-                    Thread.Sleep(4000);
+                    Thread.Sleep(10000);
                 }
 
                 // Delete the group again
                 await group.DeleteAsync();
+
+            }
+        }
+
+        [TestMethod]
+        public void GetTerms()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                // Add new group
+                var group = context.TermStore.Groups.Add(newGroupName);
+
+                // Add term set
+                var termSet = group.Sets.Add("PnPSet1", "Set description");
+
+                // Add term
+                var newTerm = termSet.Terms.Add("T1", "Description in English");
+
+                // test term update
+                newTerm.AddLabelAndDescription("T1 Dutch", "nl-NL", false, "Dutch label");
+                newTerm.Update();
+
+                // add child term
+                var newChildTerm = newTerm.Terms.Add("T1.1", "English T1.1");
+
+                // update child term
+                newChildTerm.AddLabelAndDescription("T1.1 Dutch", "nl-NL", false, "Dutch label");
+                newChildTerm.Update();
+
+                // Retrieve the created terms
+                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                {
+                    // Use linq provider to get a group by name
+                    var group2 = context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefault();
+                    if (group2 != null)
+                    {
+                        var groupWithSets = group2.Get(p => p.Sets);
+
+                        var termSet2 = groupWithSets.Sets.FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
+                        if (termSet2 != null)
+                        {
+                            // Load terms and parent group
+                            termSet2.Get(p => p.Terms);
+                            Assert.IsTrue(termSet2.Terms.Length > 0);
+
+                            // Group is automatically assigned if the group was loaded before
+                            Assert.IsTrue(termSet2.Group != null);
+
+                            foreach (var term in termSet2.Terms)
+                            {
+                                // Term set is automatically assigned if the termset was loaded before
+                                Assert.IsTrue(term.Set != null);
+
+                                // Load the children of this term and set
+                                term.Get(p => p.Terms);
+
+                                foreach (var child in term.Terms)
+                                {
+                                    Assert.IsTrue(child.Requested);
+                                    Assert.IsTrue(child.Labels.Count > 0);
+
+                                    Assert.IsTrue(child.Set != null);
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // delete term
+                newChildTerm.Delete();
+
+                // delete term 
+                newTerm.Delete();
+
+                // Delete term set 
+                termSet.Delete();
+
+                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
+                // not always work (getting error about deleting non empty term group)
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(4000);
+                }
+
+                // Delete the group again
+                group.Delete();
+
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermsBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var newBatch = context.NewBatch();
+
+                // Add new group
+                var group = context.TermStore.Groups.Add(newGroupName);
+
+                // Add term set
+                var termSet = group.Sets.Add("PnPSet1", "Set description");
+
+                // Add term
+                var newTerm = termSet.Terms.AddBatch(newBatch, "T1", "Description in English");
+                await context.ExecuteAsync(newBatch); // Limited to terms only parents MUST exist
+
+                // test term update
+                newTerm.AddLabelAndDescription("T1 Dutch", "nl-NL", false, "Dutch label");
+                newTerm.Update();
+
+                var newTerm2 = termSet.Terms.AddBatch( "T2", "Description in English");
+
+                await context.ExecuteAsync();
+
+
+                // add child term
+                var newChildTerm = newTerm.Terms.Add("T1.1", "English T1.1");
+
+                // update child term
+                newChildTerm.AddLabelAndDescription("T1.1 Dutch", "nl-NL", false, "Dutch label");
+                newChildTerm.Update();
+
+                // Retrieve the created terms
+                using (var context2 = TestCommon.Instance.GetContext(TestCommon.TestSite, 1))
+                {
+                    // Use linq provider to get a group by name
+                    var group2 = context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefault();
+                    if (group2 != null)
+                    {
+                        var groupWithSets = group2.Get(p => p.Sets);
+
+                        var termSet2 = groupWithSets.Sets.FirstOrDefault(p => p.LocalizedNames.FirstOrDefault(p => p.Name == "PnPSet1") != null);
+                        if (termSet2 != null)
+                        {
+                            // Load terms and parent group
+                            termSet2.Get(p => p.Terms, o=>o.Id);
+                            Assert.IsTrue(termSet2.Terms.Length > 0);
+
+                            // Group is automatically assigned if the group was loaded before
+                            Assert.IsTrue(termSet2.Group != null);
+
+                            var termId = newChildTerm.Id;
+
+                            var resultTerm = termSet2.Terms.GetById(termId);
+
+                            Assert.IsNotNull(resultTerm);
+                            Assert.AreEqual(resultTerm.Id, termId);
+                        }
+                    }
+                }
+
+                // delete term
+                newChildTerm.Delete();
+
+                // delete term 
+                newTerm.Delete();
+
+                // Delete term set 
+                termSet.Delete();
+
+                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
+                // not always work (getting error about deleting non empty term group)
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(4000);
+                }
+
+                // Delete the group again
+                group.Delete();
+
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTermsExceptionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                string newGroupName = GetGroupName(context);
+
+                var newBatch = context.NewBatch();
+
+                // Add new group
+                var group = context.TermStore.Groups.Add(newGroupName);
+
+                // Add term set
+                var termSet = group.Sets.Add("PnPSet1", "Set description");
+                               
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    await termSet.Terms.AddAsync(string.Empty);
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    await termSet.Terms.AddBatchAsync(string.Empty);
+                    await context.ExecuteAsync();
+                });
+                
+                // Delete term set 
+                termSet.Delete();
+
+                // Add a delay for live testing...seems that immediately deleting the group after the termsets are deleted does 
+                // not always work (getting error about deleting non empty term group)
+                if (!TestCommon.Instance.Mocking)
+                {
+                    Thread.Sleep(10000);
+                }
+
+                // Delete the group again
+                group.Delete();
 
             }
         }

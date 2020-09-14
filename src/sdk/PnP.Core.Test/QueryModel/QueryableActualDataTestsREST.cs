@@ -361,7 +361,7 @@ namespace PnP.Core.Test.QueryModel
             var targetListTitle = "Site Pages";
             var expectedTitle = "Home";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
@@ -374,6 +374,40 @@ namespace PnP.Core.Test.QueryModel
                 Assert.IsNotNull(firstItem);
                 Assert.AreEqual(1, firstItem.Id);
                 Assert.AreEqual(firstItem.Title, expectedTitle);
+
+                var firstItemAgain = await library.Items.GetByIdAsync(1);
+
+                Assert.IsNotNull(firstItem);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQueryGetByIdLINQExceptionsAsync()
+        {
+            var targetListTitle = "Site Pages";
+            var expectedTitle = "Home";
+
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                var library = await context.Web.Lists.GetByTitleAsync(targetListTitle);
+                var firstItem = await library.Items.GetByIdAsync(1,
+                    i => i.Id,
+                    i => i.Title);
+
+                Assert.ThrowsException<ArgumentNullException>(() => {
+                    IListItemCollection fakeLibraryColl = null;
+                    fakeLibraryColl.GetById(1,
+                        i => i.Id,
+                        i => i.Title);
+                });
+
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                    IListItemCollection fakeLibraryColl = null;
+                    await fakeLibraryColl.GetByIdAsync(1);
+                });
             }
         }
 

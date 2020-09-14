@@ -129,9 +129,143 @@ namespace PnP.Core.Test.SharePoint
                     }
                 }
 
+                using (var context4 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    var list4 = context4.Web.Lists.GetByTitle(listTitle);
+                    if (list4 != null)
+                    {
+                        var listCheck = context4.Web.Lists.GetById(list4.Id);
+
+                        Assert.IsTrue(listCheck.Title == listTitle);
+                        Assert.IsTrue(listCheck.Id == listGuid);
+                    }
+                }
+
+
                 // Cleanup the created list
                 await myList.DeleteAsync();
             } 
+        }
+
+        [TestMethod]
+        public async Task ListLinqGetAsyncMethods()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "ListLinqGetAsyncMethods";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                var listGuid = myList.Id;
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        Assert.IsTrue(list2.Title == listTitle);
+                        Assert.IsTrue(list2.Id == listGuid);
+                    }
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    context3.GraphFirst = false;
+
+                    var list3 = await context3.Web.Lists.GetByIdAsync(listGuid, p => p.TemplateType, p => p.Title);
+                    if (list3 != null)
+                    {
+                        Assert.IsTrue(list3.Title == listTitle);
+                        Assert.IsTrue(list3.Id == listGuid);
+                    }
+                }
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ListLinqGetExceptionMethods()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "ListLinqGetExceptionMethods";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                var listGuid = myList.Id;
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                            IListCollection list = null;
+                            await list.GetByIdAsync(listGuid);
+                        });
+
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                            await context2.Web.Lists.GetByIdAsync(Guid.Empty, p => p.TemplateType, p => p.Title);
+                        });
+
+                        Assert.ThrowsException<ArgumentNullException>(() => {
+                            IListCollection list = null;
+                            list.GetById(listGuid);
+                        });
+
+                        Assert.ThrowsException<ArgumentNullException>(() => {
+                            context2.Web.Lists.GetById(Guid.Empty, p => p.TemplateType, p => p.Title);
+                        });
+
+                        Assert.ThrowsException<ArgumentNullException>(() => {
+                            IListCollection list = null;
+                            list.GetByTitle(listTitle);
+                        });
+
+                        Assert.ThrowsException<ArgumentNullException>(() => {
+                            context2.Web.Lists.GetByTitle(null);
+                        });
+
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                            IListCollection list = null;
+                            await list.GetByTitleAsync(listTitle);
+                        });
+
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                            IListCollection list = null;
+                            await list.GetByTitleAsync(null);
+                        });
+
+                    }
+                }
+                 
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
         }
 
         [TestMethod]

@@ -1,0 +1,9 @@
+--batchresponse_cf33f3a5-a09d-4605-acdc-d9dc69313eed
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"9f7c98de-3547-4856-8992-cd6cb8785c0a","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'f60177a5-70e6-4676-9327-38da0aab6aeb')/Items(1)","etag":"\"3\"","type":"SP.Data.SitePagesItem"},"Id":1,"Title":"Home","ID":1}]}}
+--batchresponse_cf33f3a5-a09d-4605-acdc-d9dc69313eed--
