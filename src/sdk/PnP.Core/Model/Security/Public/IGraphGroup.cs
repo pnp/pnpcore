@@ -5,14 +5,9 @@ namespace PnP.Core.Model.Security
     /// <summary>
     /// A Microsoft 365 Group
     /// </summary>
-    [ConcreteType(typeof(Group))]
-    public interface IGroup : IDataModel<IGroup>
+    [ConcreteType(typeof(GraphGroup))]
+    public interface IGraphGroup : IDataModel<IGraphGroup>, IGraphPrincipal, IQueryableDataModel
     {
-        /// <summary>
-        /// Id of the Microsoft 365 Group
-        /// </summary>
-        public string Id { get; }
-
         /// <summary>
         /// Name of the Microsoft 365 Group
         /// </summary>

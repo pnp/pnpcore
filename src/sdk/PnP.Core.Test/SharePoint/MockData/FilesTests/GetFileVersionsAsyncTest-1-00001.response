@@ -1,8 +1,4 @@
-<<<<<<< HEAD
---batchresponse_d9316401-0c52-4c73-a321-d5a4c4bd0cb1
-=======
---batchresponse_a737f68f-aaf0-4f0a-95a1-87e59e7acc94
->>>>>>> 7d0a903a842a7075038782f12f086c35d689102c
+--batchresponse_0da72bcb-b4e6-48bb-9532-82e3df25d4a6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -10,8 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"CheckOut":null}}
-<<<<<<< HEAD
---batchresponse_d9316401-0c52-4c73-a321-d5a4c4bd0cb1--
-=======
---batchresponse_a737f68f-aaf0-4f0a-95a1-87e59e7acc94--
->>>>>>> 7d0a903a842a7075038782f12f086c35d689102c
+--batchresponse_0da72bcb-b4e6-48bb-9532-82e3df25d4a6--

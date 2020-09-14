@@ -1,8 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Security;
 using PnP.Core.Test.Utilities;
-using PnP.Core.QueryModel;
+using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Test.Security
 {
@@ -17,17 +18,26 @@ namespace PnP.Core.Test.Security
         }
 
         [TestMethod]
-        public async Task QuerySiteUsers()
+        public async Task GetSharePointUsers()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Load the current user from current web
-                IUser foundUser = await context.Web.SiteUsers.FirstOrDefaultAsync(u => u.Title == "Yannick Plenevaux");
+                var web = await context.Web.GetAsync(p => p.SiteUsers);
+                
+                Assert.IsTrue(web.SiteUsers.Length > 0);
+            }
+        }
 
-                Assert.IsNotNull(foundUser);
-                Assert.AreEqual("Yannick Plenevaux", foundUser.Title);
-                Assert.AreNotEqual(0, foundUser.SharePointId);
+        [TestMethod]
+        public async Task GetSharePointGroups()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = await context.Web.GetAsync(p => p.SiteGroups);
+
+                Assert.IsTrue(web.SiteGroups.Length > 0);
             }
         }
 
@@ -38,94 +48,67 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Load the current user from current web
-                await context.Web.GetAsync(w => w.CurrentUser);
+                var web = await context.Web.GetAsync(w => w.CurrentUser);
 
-                // TODO Must be loaded from the web first to be able to call GetAsync() (to Graph)
-                // TODO Couldn't it be ensured automatically or at least checked ?
-
-                // Get the Graph properties
-                IUser user = await context.Web.CurrentUser.GetAsync();
-
-                Assert.IsNotNull(user);
-                Assert.AreNotEqual(default, user.GraphId);
-                Assert.AreNotEqual(0, user.SharePointId);
+                Assert.IsNotNull(web.CurrentUser);
+                Assert.IsTrue(web.CurrentUser.Requested);
+                Assert.IsTrue(!string.IsNullOrEmpty(web.CurrentUser.UserPrincipalName));
+                Assert.IsTrue(web.CurrentUser.Id > 0);
             }
         }
 
+
         [TestMethod]
-        public async Task GetUserByPrincipalNameAsyncTest()
+        public async Task GetSharePointUserAsGraphUser()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // TODO Do we need to handle the UPN in tests to be tenant-agnostic ?
-                IUser user = await context.Web.SiteUsers.GetByUserPrincipalNameAsync("dev01@pvxdev.onmicrosoft.com");
+                var web = await context.Web.GetAsync(p => p.SiteUsers);
 
-                Assert.IsNotNull(user);
-                Assert.AreNotEqual(default, user.GraphId);
-                Assert.IsNotNull(user.Title);
-                Assert.AreNotEqual("", user.Title);
+                Assert.IsTrue(web.SiteUsers.Length > 0);
+
+                // get the first real user
+                var testUser = web.SiteUsers.FirstOrDefault(p => p.PrincipalType == PrincipalType.User);
+                Assert.IsTrue(testUser != null);
+
+                // Get that user as a Graph user
+                var graphUser = await testUser.AsGraphUserAsync();
+
+                Assert.IsTrue(graphUser != null);
+                Assert.IsTrue(!string.IsNullOrEmpty(graphUser.Id));
+                Assert.IsTrue(!string.IsNullOrEmpty(graphUser.UserPrincipalName));
+                Assert.IsTrue((graphUser as GraphUser).Metadata.ContainsKey(PnPConstants.MetaDataGraphId));
+                Assert.IsTrue((graphUser as GraphUser).Metadata[PnPConstants.MetaDataGraphId] == testUser.AadObjectId);
             }
         }
 
         [TestMethod]
-        public async Task GetAlreadyEnsuredUserSharePointPropertiesWithEnsure()
+        public async Task GetGraphUsersViaGroupMembership()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // TODO Do we need to handle the UPN in tests to be tenant-agnostic ?
-                IUser user = await context.Web.SiteUsers.GetByUserPrincipalNameAsync("dev01@pvxdev.onmicrosoft.com");
-                await user.LoadSharePointPropertiesAsync();
+                var team = await context.Team.GetAsync(p => p.Description, p => p.Owners, p => p.Members);
 
-                Assert.IsNotNull(user);
-                Assert.AreNotEqual(default, user.GraphId);
-                Assert.AreNotEqual(0, user.SharePointId);
-            }
-        }
+                Assert.IsTrue(team.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(team.IsPropertyAvailable(p => p.Owners));
+                Assert.IsTrue(team.Owners.Length > 0);
+                Assert.IsTrue(team.IsPropertyAvailable(p => p.Members));
+                Assert.IsTrue(team.Members.Length > 0);
 
-        [TestMethod]
-        public async Task GetNotEnsuredUserSharePointPropertiesWithEnsure()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                // TODO Do we need to handle the UPN in tests to be tenant-agnostic ?
-                IUser user = await context.Web.SiteUsers.GetByUserPrincipalNameAsync("dev03@pvxdev.onmicrosoft.com");
-                await user.LoadSharePointPropertiesAsync();
+                // Get the first owner
+                var graphUser = team.Owners.FirstOrDefault();
 
-                Assert.IsNotNull(user);
-                Assert.AreNotEqual(default, user.GraphId);
-                Assert.AreNotEqual(0, user.SharePointId);
-            }
-        }
+                Assert.IsTrue(graphUser != null);
+                Assert.IsTrue(!string.IsNullOrEmpty(graphUser.UserPrincipalName));
 
-        [TestMethod]
-        public async Task GetAlreadyEnsuredUserWithoutEnsureTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                IUser user = await context.Web.SiteUsers.GetByUserPrincipalNameAsync("dev01@pvxdev.onmicrosoft.com");
-                await user.LoadSharePointPropertiesAsync(false);
+                // get sharepoint user for graph user
+                var sharePointUser = await graphUser.AsSharePointUserAsync();
+                Assert.IsTrue(sharePointUser != null);
+                Assert.IsTrue(sharePointUser.Id > 0);
+                Assert.IsTrue(sharePointUser.UserPrincipalName == graphUser.UserPrincipalName);
 
-                Assert.IsNotNull(user);
-                Assert.AreNotEqual(default, user.GraphId);
-                Assert.AreNotEqual(0, user.SharePointId);
-            }
-        }
-
-        [TestMethod]
-        public async Task GetNotEnsuredUserWithoutEnsureTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                IUser user = await context.Web.SiteUsers.GetByUserPrincipalNameAsync("dev02@pvxdev.onmicrosoft.com");
-                await Assert.ThrowsExceptionAsync<SharePointRestServiceException>(async () =>
-                {
-                    await user.LoadSharePointPropertiesAsync(false);
-                });
             }
         }
     }

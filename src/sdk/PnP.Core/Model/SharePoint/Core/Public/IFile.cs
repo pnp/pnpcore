@@ -160,22 +160,22 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets a value that specifies the user who added the file.
         /// </summary>
-        public IUser Author { get; }
+        public ISharePointUser Author { get; }
 
         /// <summary>
         /// Gets a value that returns the user who has checked out the file.
         /// </summary>
-        public IUser CheckedOutByUser { get; }
+        public ISharePointUser CheckedOutByUser { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public IUser LockedByUser { get; }
+        public ISharePointUser LockedByUser { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public IUser ModifiedBy { get; }
+        public ISharePointUser ModifiedBy { get; }
 
         #region Publish
         /// <summary>

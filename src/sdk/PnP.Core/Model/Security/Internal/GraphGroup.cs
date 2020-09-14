@@ -4,9 +4,9 @@ using PnP.Core.Services;
 namespace PnP.Core.Model.Security
 {
     [GraphType(Get = "groups/{GraphId}")]
-    internal partial class Group
+    internal partial class GraphGroup
     {
-        internal Group()
+        internal GraphGroup()
         {
             MappingHandler = (FromJson input) =>
             {

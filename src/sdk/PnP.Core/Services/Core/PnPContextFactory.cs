@@ -299,7 +299,7 @@ namespace PnP.Core.Services
         internal static async Task ConfigureForGroup(PnPContext context, Guid groupId)
         {
             // Ensure the group is loaded, given we've received the group id we can populate the metadata of the group model upfront before loading it
-            (context.Group as Group).Metadata.Add(PnPConstants.MetaDataGraphId, groupId.ToString());
+            (context.Group as GraphGroup).Metadata.Add(PnPConstants.MetaDataGraphId, groupId.ToString());
             // Do the default group load, should load all properties
             await context.Group.GetAsync().ConfigureAwait(false);
             // If the group has a linked SharePoint site then WebUrl is populated

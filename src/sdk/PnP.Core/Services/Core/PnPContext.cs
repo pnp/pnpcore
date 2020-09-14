@@ -39,9 +39,9 @@ namespace PnP.Core.Services
             return new Team();
         }, true);
 
-        private readonly Lazy<IGroup> group = new Lazy<IGroup>(() =>
+        private readonly Lazy<IGraphGroup> group = new Lazy<IGraphGroup>(() =>
         {
-            return new Group();
+            return new GraphGroup();
         }, true);
 
         private readonly Lazy<ITermStore> termStore = new Lazy<ITermStore>(() =>
@@ -277,11 +277,11 @@ namespace PnP.Core.Services
         /// <summary>
         /// Entry point for the Microsoft 365 Group Object
         /// </summary>
-        public IGroup Group
+        public IGraphGroup Group
         {
             get
             {
-                (group.Value as Group).PnPContext = this;
+                (group.Value as GraphGroup).PnPContext = this;
                 return group.Value;
             }
         }

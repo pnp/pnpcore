@@ -172,13 +172,13 @@ namespace PnP.Core.Model.SharePoint
         }
 
         [SharePointProperty("Author", Expandable = true)]
-        public IUser Author
+        public ISharePointUser Author
         {
             get
             {
                 if (!NavigationPropertyInstantiated())
                 {
-                    var propertyValue = new User
+                    var propertyValue = new SharePointUser
                     {
                         PnPContext = this.PnPContext,
                         Parent = this,
@@ -186,7 +186,7 @@ namespace PnP.Core.Model.SharePoint
                     SetValue(propertyValue);
                     InstantiateNavigationProperty();
                 }
-                return GetValue<IUser>();
+                return GetValue<ISharePointUser>();
             }
             set
             {
@@ -196,13 +196,13 @@ namespace PnP.Core.Model.SharePoint
         }
 
         [SharePointProperty("CheckedOutByUser", Expandable = true)]
-        public IUser CheckedOutByUser
+        public ISharePointUser CheckedOutByUser
         {
             get
             {
                 if (!NavigationPropertyInstantiated())
                 {
-                    var propertyValue = new User
+                    var propertyValue = new SharePointUser
                     {
                         PnPContext = this.PnPContext,
                         Parent = this,
@@ -210,7 +210,7 @@ namespace PnP.Core.Model.SharePoint
                     SetValue(propertyValue);
                     InstantiateNavigationProperty();
                 }
-                return GetValue<IUser>();
+                return GetValue<ISharePointUser>();
             }
             set
             {
@@ -220,13 +220,13 @@ namespace PnP.Core.Model.SharePoint
         }
 
         [SharePointProperty("LockedByUser", Expandable = true)]
-        public IUser LockedByUser
+        public ISharePointUser LockedByUser
         {
             get
             {
                 if (!NavigationPropertyInstantiated())
                 {
-                    var propertyValue = new User
+                    var propertyValue = new SharePointUser
                     {
                         PnPContext = this.PnPContext,
                         Parent = this,
@@ -234,7 +234,7 @@ namespace PnP.Core.Model.SharePoint
                     SetValue(propertyValue);
                     InstantiateNavigationProperty();
                 }
-                return GetValue<IUser>();
+                return GetValue<ISharePointUser>();
             }
             set
             {
@@ -244,13 +244,13 @@ namespace PnP.Core.Model.SharePoint
         }
 
         [SharePointProperty("ModifiedBy", Expandable = true)]
-        public IUser ModifiedBy
+        public ISharePointUser ModifiedBy
         {
             get
             {
                 if (!NavigationPropertyInstantiated())
                 {
-                    var propertyValue = new User
+                    var propertyValue = new SharePointUser
                     {
                         PnPContext = this.PnPContext,
                         Parent = this,
@@ -258,7 +258,7 @@ namespace PnP.Core.Model.SharePoint
                     SetValue(propertyValue);
                     InstantiateNavigationProperty();
                 }
-                return GetValue<IUser>();
+                return GetValue<ISharePointUser>();
             }
             set
             {

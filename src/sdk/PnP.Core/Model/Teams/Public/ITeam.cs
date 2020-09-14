@@ -103,12 +103,12 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Collection of Owners of the current Team
         /// </summary>
-        public IUserCollection Owners { get; }
+        public IGraphUserCollection Owners { get; }
 
         /// <summary>
         /// Collection of Members of the current Team
         /// </summary>
-        public IUserCollection Members { get; }
+        public IGraphUserCollection Members { get; }
 
         // Note: so far, we intentionally skipped the following properties
         // - operations

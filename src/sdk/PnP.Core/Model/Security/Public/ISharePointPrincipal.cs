@@ -1,14 +1,14 @@
 ﻿namespace PnP.Core.Model.Security
 {
     /// <summary>
-    /// Represents a user or group that can be assigned permissions to control security.
+    /// Represents a SharePoint user or group that can be assigned permissions to control security.
     /// </summary>
     public interface ISharePointPrincipal
     {
         /// <summary>
         /// Gets a value that specifies the member identifier for the user or group.
         /// </summary>
-        public int SharePointId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Gets a value that indicates whether this member should be hidden in the UI.

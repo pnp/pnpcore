@@ -92,31 +92,31 @@ namespace PnP.Core.Model.Teams
         }
 
         [GraphProperty("owners", Get = "groups/{Site.GroupId}/owners")]
-        public IUserCollection Owners
+        public IGraphUserCollection Owners
         {
             get
             {
                 if (!HasValue(nameof(Owners)))
                 {
-                    var owners = new UserCollection(this.PnPContext, this);
+                    var owners = new GraphUserCollection(this.PnPContext, this);
                     SetValue(owners);
                 }
-                return GetValue<IUserCollection>();
+                return GetValue<IGraphUserCollection>();
             }
         }
 
         [GraphProperty("members", Get = "groups/{Site.GroupId}/members")]
-        public IUserCollection Members
+        public IGraphUserCollection Members
         {
             get
             {
                 if (!HasValue(nameof(Members)))
                 {
-                    var members = new UserCollection(this.PnPContext, this);
+                    var members = new GraphUserCollection(this.PnPContext, this);
 
                     SetValue(members);
                 }
-                return GetValue<IUserCollection>();
+                return GetValue<IGraphUserCollection>();
             }
         }
 

@@ -295,13 +295,13 @@ namespace PnP.Core.Model.SharePoint
         }
 
         [SharePointProperty("CurrentUser", Expandable = true)]
-        public IUser CurrentUser
+        public ISharePointUser CurrentUser
         {
             get
             {
                 if (!NavigationPropertyInstantiated())
                 {
-                    var propertyValue = new User
+                    var propertyValue = new SharePointUser
                     {
                         PnPContext = this.PnPContext,
                         Parent = this,
@@ -309,7 +309,7 @@ namespace PnP.Core.Model.SharePoint
                     SetValue(propertyValue);
                     InstantiateNavigationProperty();
                 }
-                return GetValue<IUser>();
+                return GetValue<ISharePointUser>();
             }
             set
             {
@@ -318,42 +318,31 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        // See discussion https://github.com/pnp/pnpcore/discussions/111#discussioncomment-76156
-        //[SharePointProperty("Author", Expandable = true)]
-        //public IUser Author
-        //{
-        //    get
-        //    {
-        //        if (!NavigationPropertyInstantiated())
-        //        {
-        //            var propertyValue = new User
-        //            {
-        //                PnPContext = this.PnPContext,
-        //                Parent = this,
-        //            };
-        //            SetValue(propertyValue);
-        //            InstantiateNavigationProperty();
-        //        }
-        //        return GetValue<IUser>();
-        //    }
-        //    set
-        //    {
-        //        InstantiateNavigationProperty();
-        //        SetValue(value);
-        //    }
-        //}
-
         [SharePointProperty("SiteUsers", Expandable = true)]
-        public IUserCollection SiteUsers
+        public ISharePointUserCollection SiteUsers
         {
             get
             {
                 if (!HasValue(nameof(SiteUsers)))
                 {
-                    var folders = new UserCollection(this.PnPContext, this, nameof(SiteUsers));
-                    SetValue(folders);
+                    var users = new SharePointUserCollection(this.PnPContext, this, nameof(SiteUsers));
+                    SetValue(users);
                 }
-                return GetValue<IUserCollection>();
+                return GetValue<ISharePointUserCollection>();
+            }
+        }
+
+        [SharePointProperty("SiteGroups", Expandable = true)]
+        public ISharePointGroupCollection SiteGroups
+        {
+            get
+            {
+                if (!HasValue(nameof(SiteGroups)))
+                {
+                    var groups = new SharePointGroupCollection(this.PnPContext, this, nameof(SiteGroups));
+                    SetValue(groups);
+                }
+                return GetValue<ISharePointGroupCollection>();
             }
         }
 

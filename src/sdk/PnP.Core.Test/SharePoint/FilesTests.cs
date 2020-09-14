@@ -56,7 +56,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(testDocument);
                 Assert.IsNotNull(testDocument.Author);
-                Assert.AreNotEqual(0, testDocument.Author.SharePointId);
+                Assert.AreNotEqual(0, testDocument.Author.Id);
             }
 
             await CleanupMockDocumentFromSharedDocuments(2);
@@ -637,7 +637,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
-                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -666,7 +666,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
-                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -696,7 +696,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
-                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -726,7 +726,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
-                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -757,7 +757,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
-                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();
@@ -788,7 +788,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.AreNotEqual(CheckOutType.None, testDocument.CheckOutType);
                 Assert.IsNotNull(testDocument.CheckedOutByUser);
-                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.SharePointId);
+                Assert.AreNotEqual(0, testDocument.CheckedOutByUser.Id);
 
                 // Undo checkout of the file
                 await testDocument.UndoCheckoutAsync();

@@ -43,6 +43,11 @@ namespace PnP.Core
         public const string MetaDataType = "type";
 
         /// <summary>
+        /// The name of the Graph ODATA metadata attribute
+        /// </summary>
+        public const string MetaDataGraphType = "@odata.type";
+
+        /// <summary>
         /// The name of the ETag metadata attribute
         /// </summary>
         public const string MetaDataEtag = "etag";

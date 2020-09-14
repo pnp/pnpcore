@@ -237,13 +237,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the current user in the current context
         /// </summary>
-        public IUser CurrentUser { get; }
-
-        // See discussion https://github.com/pnp/pnpcore/discussions/111#discussioncomment-76156
-        ///// <summary>
-        ///// Gets the author of the current Web object
-        ///// </summary>
-        //public IUser Author { get; }
+        public ISharePointUser CurrentUser { get; }
 
         /// <summary>
         /// Collection of lists in the current Web object
@@ -303,7 +297,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the collection of all users that belong to the site collection.
         /// </summary>
-        public IUserCollection SiteUsers { get; }
+        public ISharePointUserCollection SiteUsers { get; }
+
+        /// <summary>
+        /// Gets the collection of all groups that belong to the site collection.
+        /// </summary>
+        public ISharePointGroupCollection SiteGroups { get; }
 
         #region Methods
 

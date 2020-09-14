@@ -2,7 +2,7 @@
 
 namespace PnP.Core.Model.Security
 {
-    internal partial class Group : BaseDataModel<IGroup>, IGroup
+    internal partial class GraphGroup : BaseDataModel<IGraphGroup>, IGraphGroup
     {
         public string Id { get => GetValue<string>(); set => SetValue(value); }
         
