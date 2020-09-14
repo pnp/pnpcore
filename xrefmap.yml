@@ -3527,6 +3527,96 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.FieldUserSelectionMode.PeopleOnly
   fullName: PnP.Core.Model.SharePoint.FieldUserSelectionMode.PeopleOnly
   nameWithType: FieldUserSelectionMode.PeopleOnly
+- uid: PnP.Core.Model.SharePoint.FooterLayoutType
+  name: FooterLayoutType
+  href: api/PnP.Core.Model.SharePoint.FooterLayoutType.html
+  commentId: T:PnP.Core.Model.SharePoint.FooterLayoutType
+  fullName: PnP.Core.Model.SharePoint.FooterLayoutType
+  nameWithType: FooterLayoutType
+- uid: PnP.Core.Model.SharePoint.FooterLayoutType.Extended
+  name: Extended
+  href: api/PnP.Core.Model.SharePoint.FooterLayoutType.html#PnP_Core_Model_SharePoint_FooterLayoutType_Extended
+  commentId: F:PnP.Core.Model.SharePoint.FooterLayoutType.Extended
+  fullName: PnP.Core.Model.SharePoint.FooterLayoutType.Extended
+  nameWithType: FooterLayoutType.Extended
+- uid: PnP.Core.Model.SharePoint.FooterLayoutType.Simple
+  name: Simple
+  href: api/PnP.Core.Model.SharePoint.FooterLayoutType.html#PnP_Core_Model_SharePoint_FooterLayoutType_Simple
+  commentId: F:PnP.Core.Model.SharePoint.FooterLayoutType.Simple
+  fullName: PnP.Core.Model.SharePoint.FooterLayoutType.Simple
+  nameWithType: FooterLayoutType.Simple
+- uid: PnP.Core.Model.SharePoint.FooterLayoutType.Stacked
+  name: Stacked
+  href: api/PnP.Core.Model.SharePoint.FooterLayoutType.html#PnP_Core_Model_SharePoint_FooterLayoutType_Stacked
+  commentId: F:PnP.Core.Model.SharePoint.FooterLayoutType.Stacked
+  fullName: PnP.Core.Model.SharePoint.FooterLayoutType.Stacked
+  nameWithType: FooterLayoutType.Stacked
+- uid: PnP.Core.Model.SharePoint.FooterVariantThemeType
+  name: FooterVariantThemeType
+  href: api/PnP.Core.Model.SharePoint.FooterVariantThemeType.html
+  commentId: T:PnP.Core.Model.SharePoint.FooterVariantThemeType
+  fullName: PnP.Core.Model.SharePoint.FooterVariantThemeType
+  nameWithType: FooterVariantThemeType
+- uid: PnP.Core.Model.SharePoint.FooterVariantThemeType.Neutral
+  name: Neutral
+  href: api/PnP.Core.Model.SharePoint.FooterVariantThemeType.html#PnP_Core_Model_SharePoint_FooterVariantThemeType_Neutral
+  commentId: F:PnP.Core.Model.SharePoint.FooterVariantThemeType.Neutral
+  fullName: PnP.Core.Model.SharePoint.FooterVariantThemeType.Neutral
+  nameWithType: FooterVariantThemeType.Neutral
+- uid: PnP.Core.Model.SharePoint.FooterVariantThemeType.None
+  name: None
+  href: api/PnP.Core.Model.SharePoint.FooterVariantThemeType.html#PnP_Core_Model_SharePoint_FooterVariantThemeType_None
+  commentId: F:PnP.Core.Model.SharePoint.FooterVariantThemeType.None
+  fullName: PnP.Core.Model.SharePoint.FooterVariantThemeType.None
+  nameWithType: FooterVariantThemeType.None
+- uid: PnP.Core.Model.SharePoint.FooterVariantThemeType.Soft
+  name: Soft
+  href: api/PnP.Core.Model.SharePoint.FooterVariantThemeType.html#PnP_Core_Model_SharePoint_FooterVariantThemeType_Soft
+  commentId: F:PnP.Core.Model.SharePoint.FooterVariantThemeType.Soft
+  fullName: PnP.Core.Model.SharePoint.FooterVariantThemeType.Soft
+  nameWithType: FooterVariantThemeType.Soft
+- uid: PnP.Core.Model.SharePoint.FooterVariantThemeType.Strong
+  name: Strong
+  href: api/PnP.Core.Model.SharePoint.FooterVariantThemeType.html#PnP_Core_Model_SharePoint_FooterVariantThemeType_Strong
+  commentId: F:PnP.Core.Model.SharePoint.FooterVariantThemeType.Strong
+  fullName: PnP.Core.Model.SharePoint.FooterVariantThemeType.Strong
+  nameWithType: FooterVariantThemeType.Strong
+- uid: PnP.Core.Model.SharePoint.HeaderLayoutType
+  name: HeaderLayoutType
+  href: api/PnP.Core.Model.SharePoint.HeaderLayoutType.html
+  commentId: T:PnP.Core.Model.SharePoint.HeaderLayoutType
+  fullName: PnP.Core.Model.SharePoint.HeaderLayoutType
+  nameWithType: HeaderLayoutType
+- uid: PnP.Core.Model.SharePoint.HeaderLayoutType.Compact
+  name: Compact
+  href: api/PnP.Core.Model.SharePoint.HeaderLayoutType.html#PnP_Core_Model_SharePoint_HeaderLayoutType_Compact
+  commentId: F:PnP.Core.Model.SharePoint.HeaderLayoutType.Compact
+  fullName: PnP.Core.Model.SharePoint.HeaderLayoutType.Compact
+  nameWithType: HeaderLayoutType.Compact
+- uid: PnP.Core.Model.SharePoint.HeaderLayoutType.Extended
+  name: Extended
+  href: api/PnP.Core.Model.SharePoint.HeaderLayoutType.html#PnP_Core_Model_SharePoint_HeaderLayoutType_Extended
+  commentId: F:PnP.Core.Model.SharePoint.HeaderLayoutType.Extended
+  fullName: PnP.Core.Model.SharePoint.HeaderLayoutType.Extended
+  nameWithType: HeaderLayoutType.Extended
+- uid: PnP.Core.Model.SharePoint.HeaderLayoutType.Minimal
+  name: Minimal
+  href: api/PnP.Core.Model.SharePoint.HeaderLayoutType.html#PnP_Core_Model_SharePoint_HeaderLayoutType_Minimal
+  commentId: F:PnP.Core.Model.SharePoint.HeaderLayoutType.Minimal
+  fullName: PnP.Core.Model.SharePoint.HeaderLayoutType.Minimal
+  nameWithType: HeaderLayoutType.Minimal
+- uid: PnP.Core.Model.SharePoint.HeaderLayoutType.None
+  name: None
+  href: api/PnP.Core.Model.SharePoint.HeaderLayoutType.html#PnP_Core_Model_SharePoint_HeaderLayoutType_None
+  commentId: F:PnP.Core.Model.SharePoint.HeaderLayoutType.None
+  fullName: PnP.Core.Model.SharePoint.HeaderLayoutType.None
+  nameWithType: HeaderLayoutType.None
+- uid: PnP.Core.Model.SharePoint.HeaderLayoutType.Standard
+  name: Standard
+  href: api/PnP.Core.Model.SharePoint.HeaderLayoutType.html#PnP_Core_Model_SharePoint_HeaderLayoutType_Standard
+  commentId: F:PnP.Core.Model.SharePoint.HeaderLayoutType.Standard
+  fullName: PnP.Core.Model.SharePoint.HeaderLayoutType.Standard
+  nameWithType: HeaderLayoutType.Standard
 - uid: PnP.Core.Model.SharePoint.IContentType
   name: IContentType
   href: api/PnP.Core.Model.SharePoint.IContentType.html
@@ -10712,6 +10802,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
   nameWithType: IWeb.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled
+- uid: PnP.Core.Model.SharePoint.IWeb.EnableMinimalDownload
+  name: EnableMinimalDownload
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnableMinimalDownload
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.EnableMinimalDownload
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnableMinimalDownload
+  nameWithType: IWeb.EnableMinimalDownload
+- uid: PnP.Core.Model.SharePoint.IWeb.EnableMinimalDownload*
+  name: EnableMinimalDownload
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnableMinimalDownload_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.EnableMinimalDownload
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnableMinimalDownload
+  nameWithType: IWeb.EnableMinimalDownload
 - uid: PnP.Core.Model.SharePoint.IWeb.ExcludeFromOfflineClient
   name: ExcludeFromOfflineClient
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ExcludeFromOfflineClient
@@ -10764,6 +10867,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.Folders
   nameWithType: IWeb.Folders
+- uid: PnP.Core.Model.SharePoint.IWeb.FooterEmphasis
+  name: FooterEmphasis
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_FooterEmphasis
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.FooterEmphasis
+  fullName: PnP.Core.Model.SharePoint.IWeb.FooterEmphasis
+  nameWithType: IWeb.FooterEmphasis
+- uid: PnP.Core.Model.SharePoint.IWeb.FooterEmphasis*
+  name: FooterEmphasis
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_FooterEmphasis_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.FooterEmphasis
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.FooterEmphasis
+  nameWithType: IWeb.FooterEmphasis
+- uid: PnP.Core.Model.SharePoint.IWeb.FooterEnabled
+  name: FooterEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_FooterEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.FooterEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.FooterEnabled
+  nameWithType: IWeb.FooterEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.FooterEnabled*
+  name: FooterEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_FooterEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.FooterEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.FooterEnabled
+  nameWithType: IWeb.FooterEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.FooterLayout
+  name: FooterLayout
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_FooterLayout
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.FooterLayout
+  fullName: PnP.Core.Model.SharePoint.IWeb.FooterLayout
+  nameWithType: IWeb.FooterLayout
+- uid: PnP.Core.Model.SharePoint.IWeb.FooterLayout*
+  name: FooterLayout
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_FooterLayout_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.FooterLayout
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.FooterLayout
+  nameWithType: IWeb.FooterLayout
 - uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String,System.Linq.Expressions.Expression{System.Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
   name: GetFileByServerRelativeUrl(String, Expression<Func<IFile, Object>>[])
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrl_System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
@@ -10928,6 +11070,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetFolderByServerRelativeUrlBatchAsync
   nameWithType: IWeb.GetFolderByServerRelativeUrlBatchAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.HeaderEmphasis
+  name: HeaderEmphasis
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HeaderEmphasis
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.HeaderEmphasis
+  fullName: PnP.Core.Model.SharePoint.IWeb.HeaderEmphasis
+  nameWithType: IWeb.HeaderEmphasis
+- uid: PnP.Core.Model.SharePoint.IWeb.HeaderEmphasis*
+  name: HeaderEmphasis
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HeaderEmphasis_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.HeaderEmphasis
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.HeaderEmphasis
+  nameWithType: IWeb.HeaderEmphasis
+- uid: PnP.Core.Model.SharePoint.IWeb.HeaderLayout
+  name: HeaderLayout
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HeaderLayout
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.HeaderLayout
+  fullName: PnP.Core.Model.SharePoint.IWeb.HeaderLayout
+  nameWithType: IWeb.HeaderLayout
+- uid: PnP.Core.Model.SharePoint.IWeb.HeaderLayout*
+  name: HeaderLayout
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HeaderLayout_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.HeaderLayout
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.HeaderLayout
+  nameWithType: IWeb.HeaderLayout
+- uid: PnP.Core.Model.SharePoint.IWeb.HideTitleInHeader
+  name: HideTitleInHeader
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HideTitleInHeader
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.HideTitleInHeader
+  fullName: PnP.Core.Model.SharePoint.IWeb.HideTitleInHeader
+  nameWithType: IWeb.HideTitleInHeader
+- uid: PnP.Core.Model.SharePoint.IWeb.HideTitleInHeader*
+  name: HideTitleInHeader
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HideTitleInHeader_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.HideTitleInHeader
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.HideTitleInHeader
+  nameWithType: IWeb.HideTitleInHeader
 - uid: PnP.Core.Model.SharePoint.IWeb.HorizontalQuickLaunch
   name: HorizontalQuickLaunch
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HorizontalQuickLaunch
@@ -10954,6 +11135,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.Id
   nameWithType: IWeb.Id
+- uid: PnP.Core.Model.SharePoint.IWeb.IsHomepageModernized
+  name: IsHomepageModernized
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsHomepageModernized
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.IsHomepageModernized
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsHomepageModernized
+  nameWithType: IWeb.IsHomepageModernized
+- uid: PnP.Core.Model.SharePoint.IWeb.IsHomepageModernized*
+  name: IsHomepageModernized
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsHomepageModernized_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsHomepageModernized
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsHomepageModernized
+  nameWithType: IWeb.IsHomepageModernized
 - uid: PnP.Core.Model.SharePoint.IWeb.IsMultilingual
   name: IsMultilingual
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsMultilingual
@@ -10967,6 +11161,71 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.IsMultilingual
   nameWithType: IWeb.IsMultilingual
+- uid: PnP.Core.Model.SharePoint.IWeb.IsProvisioningComplete
+  name: IsProvisioningComplete
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsProvisioningComplete
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.IsProvisioningComplete
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsProvisioningComplete
+  nameWithType: IWeb.IsProvisioningComplete
+- uid: PnP.Core.Model.SharePoint.IWeb.IsProvisioningComplete*
+  name: IsProvisioningComplete
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsProvisioningComplete_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsProvisioningComplete
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsProvisioningComplete
+  nameWithType: IWeb.IsProvisioningComplete
+- uid: PnP.Core.Model.SharePoint.IWeb.IsRevertHomepageLinkHidden
+  name: IsRevertHomepageLinkHidden
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsRevertHomepageLinkHidden
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.IsRevertHomepageLinkHidden
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsRevertHomepageLinkHidden
+  nameWithType: IWeb.IsRevertHomepageLinkHidden
+- uid: PnP.Core.Model.SharePoint.IWeb.IsRevertHomepageLinkHidden*
+  name: IsRevertHomepageLinkHidden
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsRevertHomepageLinkHidden_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsRevertHomepageLinkHidden
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsRevertHomepageLinkHidden
+  nameWithType: IWeb.IsRevertHomepageLinkHidden
+- uid: PnP.Core.Model.SharePoint.IWeb.Language
+  name: Language
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Language
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.Language
+  fullName: PnP.Core.Model.SharePoint.IWeb.Language
+  nameWithType: IWeb.Language
+- uid: PnP.Core.Model.SharePoint.IWeb.Language*
+  name: Language
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Language_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.Language
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.Language
+  nameWithType: IWeb.Language
+- uid: PnP.Core.Model.SharePoint.IWeb.LastItemModifiedDate
+  name: LastItemModifiedDate
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_LastItemModifiedDate
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.LastItemModifiedDate
+  fullName: PnP.Core.Model.SharePoint.IWeb.LastItemModifiedDate
+  nameWithType: IWeb.LastItemModifiedDate
+- uid: PnP.Core.Model.SharePoint.IWeb.LastItemModifiedDate*
+  name: LastItemModifiedDate
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_LastItemModifiedDate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.LastItemModifiedDate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.LastItemModifiedDate
+  nameWithType: IWeb.LastItemModifiedDate
+- uid: PnP.Core.Model.SharePoint.IWeb.LastItemUserModifiedDate
+  name: LastItemUserModifiedDate
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_LastItemUserModifiedDate
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.LastItemUserModifiedDate
+  fullName: PnP.Core.Model.SharePoint.IWeb.LastItemUserModifiedDate
+  nameWithType: IWeb.LastItemUserModifiedDate
+- uid: PnP.Core.Model.SharePoint.IWeb.LastItemUserModifiedDate*
+  name: LastItemUserModifiedDate
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_LastItemUserModifiedDate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.LastItemUserModifiedDate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.LastItemUserModifiedDate
+  nameWithType: IWeb.LastItemUserModifiedDate
 - uid: PnP.Core.Model.SharePoint.IWeb.Lists
   name: Lists
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Lists
@@ -10980,6 +11239,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.Lists
   nameWithType: IWeb.Lists
+- uid: PnP.Core.Model.SharePoint.IWeb.LogoAlignment
+  name: LogoAlignment
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_LogoAlignment
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.LogoAlignment
+  fullName: PnP.Core.Model.SharePoint.IWeb.LogoAlignment
+  nameWithType: IWeb.LogoAlignment
+- uid: PnP.Core.Model.SharePoint.IWeb.LogoAlignment*
+  name: LogoAlignment
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_LogoAlignment_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.LogoAlignment
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.LogoAlignment
+  nameWithType: IWeb.LogoAlignment
 - uid: PnP.Core.Model.SharePoint.IWeb.MasterPageUrl
   name: MasterPageUrl
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_MasterPageUrl
@@ -10993,6 +11265,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.MasterPageUrl
   nameWithType: IWeb.MasterPageUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.MasterUrl
+  name: MasterUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_MasterUrl
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.MasterUrl
+  fullName: PnP.Core.Model.SharePoint.IWeb.MasterUrl
+  nameWithType: IWeb.MasterUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.MasterUrl*
+  name: MasterUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_MasterUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.MasterUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.MasterUrl
+  nameWithType: IWeb.MasterUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.MegaMenuEnabled
+  name: MegaMenuEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_MegaMenuEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.MegaMenuEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.MegaMenuEnabled
+  nameWithType: IWeb.MegaMenuEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.MegaMenuEnabled*
+  name: MegaMenuEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_MegaMenuEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.MegaMenuEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.MegaMenuEnabled
+  nameWithType: IWeb.MegaMenuEnabled
 - uid: PnP.Core.Model.SharePoint.IWeb.MembersCanShare
   name: MembersCanShare
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_MembersCanShare
@@ -11006,6 +11304,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.MembersCanShare
   nameWithType: IWeb.MembersCanShare
+- uid: PnP.Core.Model.SharePoint.IWeb.NavAudienceTargetingEnabled
+  name: NavAudienceTargetingEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NavAudienceTargetingEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.NavAudienceTargetingEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.NavAudienceTargetingEnabled
+  nameWithType: IWeb.NavAudienceTargetingEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.NavAudienceTargetingEnabled*
+  name: NavAudienceTargetingEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NavAudienceTargetingEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.NavAudienceTargetingEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.NavAudienceTargetingEnabled
+  nameWithType: IWeb.NavAudienceTargetingEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.NextStepsFirstRunEnabled
+  name: NextStepsFirstRunEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NextStepsFirstRunEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.NextStepsFirstRunEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.NextStepsFirstRunEnabled
+  nameWithType: IWeb.NextStepsFirstRunEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.NextStepsFirstRunEnabled*
+  name: NextStepsFirstRunEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NextStepsFirstRunEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.NextStepsFirstRunEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.NextStepsFirstRunEnabled
+  nameWithType: IWeb.NextStepsFirstRunEnabled
 - uid: PnP.Core.Model.SharePoint.IWeb.NoCrawl
   name: NoCrawl
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NoCrawl
@@ -11019,6 +11343,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.NoCrawl
   nameWithType: IWeb.NoCrawl
+- uid: PnP.Core.Model.SharePoint.IWeb.NotificationsInOneDriveForBusinessEnabled
+  name: NotificationsInOneDriveForBusinessEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NotificationsInOneDriveForBusinessEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.NotificationsInOneDriveForBusinessEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.NotificationsInOneDriveForBusinessEnabled
+  nameWithType: IWeb.NotificationsInOneDriveForBusinessEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.NotificationsInOneDriveForBusinessEnabled*
+  name: NotificationsInOneDriveForBusinessEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NotificationsInOneDriveForBusinessEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.NotificationsInOneDriveForBusinessEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.NotificationsInOneDriveForBusinessEnabled
+  nameWithType: IWeb.NotificationsInOneDriveForBusinessEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.NotificationsInSharePointEnabled
+  name: NotificationsInSharePointEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NotificationsInSharePointEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.NotificationsInSharePointEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.NotificationsInSharePointEnabled
+  nameWithType: IWeb.NotificationsInSharePointEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.NotificationsInSharePointEnabled*
+  name: NotificationsInSharePointEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NotificationsInSharePointEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.NotificationsInSharePointEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.NotificationsInSharePointEnabled
+  nameWithType: IWeb.NotificationsInSharePointEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.ObjectCacheEnabled
+  name: ObjectCacheEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ObjectCacheEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.ObjectCacheEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.ObjectCacheEnabled
+  nameWithType: IWeb.ObjectCacheEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.ObjectCacheEnabled*
+  name: ObjectCacheEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ObjectCacheEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.ObjectCacheEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.ObjectCacheEnabled
+  nameWithType: IWeb.ObjectCacheEnabled
 - uid: PnP.Core.Model.SharePoint.IWeb.OverwriteTranslationsOnChange
   name: OverwriteTranslationsOnChange
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_OverwriteTranslationsOnChange
@@ -11032,6 +11395,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.OverwriteTranslationsOnChange
   nameWithType: IWeb.OverwriteTranslationsOnChange
+- uid: PnP.Core.Model.SharePoint.IWeb.PreviewFeaturesEnabled
+  name: PreviewFeaturesEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_PreviewFeaturesEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.PreviewFeaturesEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.PreviewFeaturesEnabled
+  nameWithType: IWeb.PreviewFeaturesEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.PreviewFeaturesEnabled*
+  name: PreviewFeaturesEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_PreviewFeaturesEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.PreviewFeaturesEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.PreviewFeaturesEnabled
+  nameWithType: IWeb.PreviewFeaturesEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.PrimaryColor
+  name: PrimaryColor
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_PrimaryColor
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.PrimaryColor
+  fullName: PnP.Core.Model.SharePoint.IWeb.PrimaryColor
+  nameWithType: IWeb.PrimaryColor
+- uid: PnP.Core.Model.SharePoint.IWeb.PrimaryColor*
+  name: PrimaryColor
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_PrimaryColor_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.PrimaryColor
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.PrimaryColor
+  nameWithType: IWeb.PrimaryColor
 - uid: PnP.Core.Model.SharePoint.IWeb.QuickLaunchEnabled
   name: QuickLaunchEnabled
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_QuickLaunchEnabled
@@ -11045,6 +11434,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.QuickLaunchEnabled
   nameWithType: IWeb.QuickLaunchEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.RecycleBinEnabled
+  name: RecycleBinEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RecycleBinEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.RecycleBinEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.RecycleBinEnabled
+  nameWithType: IWeb.RecycleBinEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.RecycleBinEnabled*
+  name: RecycleBinEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RecycleBinEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.RecycleBinEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.RecycleBinEnabled
+  nameWithType: IWeb.RecycleBinEnabled
 - uid: PnP.Core.Model.SharePoint.IWeb.RequestAccessEmail
   name: RequestAccessEmail
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RequestAccessEmail
@@ -11071,6 +11473,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.RootFolder
   nameWithType: IWeb.RootFolder
+- uid: PnP.Core.Model.SharePoint.IWeb.SaveSiteAsTemplateEnabled
+  name: SaveSiteAsTemplateEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SaveSiteAsTemplateEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.SaveSiteAsTemplateEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.SaveSiteAsTemplateEnabled
+  nameWithType: IWeb.SaveSiteAsTemplateEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.SaveSiteAsTemplateEnabled*
+  name: SaveSiteAsTemplateEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SaveSiteAsTemplateEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SaveSiteAsTemplateEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SaveSiteAsTemplateEnabled
+  nameWithType: IWeb.SaveSiteAsTemplateEnabled
 - uid: PnP.Core.Model.SharePoint.IWeb.SearchBoxInNavBar
   name: SearchBoxInNavBar
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBoxInNavBar
@@ -11084,6 +11499,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.SearchBoxInNavBar
   nameWithType: IWeb.SearchBoxInNavBar
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchBoxPlaceholderText
+  name: SearchBoxPlaceholderText
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBoxPlaceholderText
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.SearchBoxPlaceholderText
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchBoxPlaceholderText
+  nameWithType: IWeb.SearchBoxPlaceholderText
+- uid: PnP.Core.Model.SharePoint.IWeb.SearchBoxPlaceholderText*
+  name: SearchBoxPlaceholderText
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchBoxPlaceholderText_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SearchBoxPlaceholderText
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SearchBoxPlaceholderText
+  nameWithType: IWeb.SearchBoxPlaceholderText
 - uid: PnP.Core.Model.SharePoint.IWeb.SearchCenterUrl
   name: SearchCenterUrl
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchCenterUrl
@@ -11110,6 +11538,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.SearchScope
   nameWithType: IWeb.SearchScope
+- uid: PnP.Core.Model.SharePoint.IWeb.ServerRelativeUrl
+  name: ServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ServerRelativeUrl
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.ServerRelativeUrl
+  fullName: PnP.Core.Model.SharePoint.IWeb.ServerRelativeUrl
+  nameWithType: IWeb.ServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.ServerRelativeUrl*
+  name: ServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ServerRelativeUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.ServerRelativeUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.ServerRelativeUrl
+  nameWithType: IWeb.ServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.ShowUrlStructureForCurrentUser
+  name: ShowUrlStructureForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ShowUrlStructureForCurrentUser
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.ShowUrlStructureForCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.ShowUrlStructureForCurrentUser
+  nameWithType: IWeb.ShowUrlStructureForCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.ShowUrlStructureForCurrentUser*
+  name: ShowUrlStructureForCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ShowUrlStructureForCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.ShowUrlStructureForCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.ShowUrlStructureForCurrentUser
+  nameWithType: IWeb.ShowUrlStructureForCurrentUser
 - uid: PnP.Core.Model.SharePoint.IWeb.SiteGroups
   name: SiteGroups
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteGroups
@@ -11136,6 +11590,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.SiteLogo
   nameWithType: IWeb.SiteLogo
+- uid: PnP.Core.Model.SharePoint.IWeb.SiteLogoDescription
+  name: SiteLogoDescription
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteLogoDescription
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.SiteLogoDescription
+  fullName: PnP.Core.Model.SharePoint.IWeb.SiteLogoDescription
+  nameWithType: IWeb.SiteLogoDescription
+- uid: PnP.Core.Model.SharePoint.IWeb.SiteLogoDescription*
+  name: SiteLogoDescription
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteLogoDescription_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SiteLogoDescription
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SiteLogoDescription
+  nameWithType: IWeb.SiteLogoDescription
+- uid: PnP.Core.Model.SharePoint.IWeb.SiteLogoUrl
+  name: SiteLogoUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteLogoUrl
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.SiteLogoUrl
+  fullName: PnP.Core.Model.SharePoint.IWeb.SiteLogoUrl
+  nameWithType: IWeb.SiteLogoUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.SiteLogoUrl*
+  name: SiteLogoUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteLogoUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SiteLogoUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SiteLogoUrl
+  nameWithType: IWeb.SiteLogoUrl
 - uid: PnP.Core.Model.SharePoint.IWeb.SiteUserInfoList
   name: SiteUserInfoList
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteUserInfoList
@@ -11162,6 +11642,84 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.SiteUsers
   nameWithType: IWeb.SiteUsers
+- uid: PnP.Core.Model.SharePoint.IWeb.SyndicationEnabled
+  name: SyndicationEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SyndicationEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.SyndicationEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.SyndicationEnabled
+  nameWithType: IWeb.SyndicationEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.SyndicationEnabled*
+  name: SyndicationEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SyndicationEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SyndicationEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SyndicationEnabled
+  nameWithType: IWeb.SyndicationEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.TenantAdminMembersCanShare
+  name: TenantAdminMembersCanShare
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_TenantAdminMembersCanShare
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.TenantAdminMembersCanShare
+  fullName: PnP.Core.Model.SharePoint.IWeb.TenantAdminMembersCanShare
+  nameWithType: IWeb.TenantAdminMembersCanShare
+- uid: PnP.Core.Model.SharePoint.IWeb.TenantAdminMembersCanShare*
+  name: TenantAdminMembersCanShare
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_TenantAdminMembersCanShare_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.TenantAdminMembersCanShare
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.TenantAdminMembersCanShare
+  nameWithType: IWeb.TenantAdminMembersCanShare
+- uid: PnP.Core.Model.SharePoint.IWeb.TenantTagPolicyEnabled
+  name: TenantTagPolicyEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_TenantTagPolicyEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.TenantTagPolicyEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.TenantTagPolicyEnabled
+  nameWithType: IWeb.TenantTagPolicyEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.TenantTagPolicyEnabled*
+  name: TenantTagPolicyEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_TenantTagPolicyEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.TenantTagPolicyEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.TenantTagPolicyEnabled
+  nameWithType: IWeb.TenantTagPolicyEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.ThemeData
+  name: ThemeData
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ThemeData
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.ThemeData
+  fullName: PnP.Core.Model.SharePoint.IWeb.ThemeData
+  nameWithType: IWeb.ThemeData
+- uid: PnP.Core.Model.SharePoint.IWeb.ThemeData*
+  name: ThemeData
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ThemeData_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.ThemeData
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.ThemeData
+  nameWithType: IWeb.ThemeData
+- uid: PnP.Core.Model.SharePoint.IWeb.ThemedCssFolderUrl
+  name: ThemedCssFolderUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ThemedCssFolderUrl
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.ThemedCssFolderUrl
+  fullName: PnP.Core.Model.SharePoint.IWeb.ThemedCssFolderUrl
+  nameWithType: IWeb.ThemedCssFolderUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.ThemedCssFolderUrl*
+  name: ThemedCssFolderUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ThemedCssFolderUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.ThemedCssFolderUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.ThemedCssFolderUrl
+  nameWithType: IWeb.ThemedCssFolderUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.ThirdPartyMdmEnabled
+  name: ThirdPartyMdmEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ThirdPartyMdmEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.ThirdPartyMdmEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.ThirdPartyMdmEnabled
+  nameWithType: IWeb.ThirdPartyMdmEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.ThirdPartyMdmEnabled*
+  name: ThirdPartyMdmEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ThirdPartyMdmEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.ThirdPartyMdmEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.ThirdPartyMdmEnabled
+  nameWithType: IWeb.ThirdPartyMdmEnabled
 - uid: PnP.Core.Model.SharePoint.IWeb.Title
   name: Title
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Title
@@ -11175,6 +11733,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.Title
   nameWithType: IWeb.Title
+- uid: PnP.Core.Model.SharePoint.IWeb.TreeViewEnabled
+  name: TreeViewEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_TreeViewEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.TreeViewEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.TreeViewEnabled
+  nameWithType: IWeb.TreeViewEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.TreeViewEnabled*
+  name: TreeViewEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_TreeViewEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.TreeViewEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.TreeViewEnabled
+  nameWithType: IWeb.TreeViewEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.UIVersion
+  name: UIVersion
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_UIVersion
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.UIVersion
+  fullName: PnP.Core.Model.SharePoint.IWeb.UIVersion
+  nameWithType: IWeb.UIVersion
+- uid: PnP.Core.Model.SharePoint.IWeb.UIVersion*
+  name: UIVersion
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_UIVersion_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.UIVersion
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.UIVersion
+  nameWithType: IWeb.UIVersion
+- uid: PnP.Core.Model.SharePoint.IWeb.UIVersionConfigurationEnabled
+  name: UIVersionConfigurationEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_UIVersionConfigurationEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.UIVersionConfigurationEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.UIVersionConfigurationEnabled
+  nameWithType: IWeb.UIVersionConfigurationEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.UIVersionConfigurationEnabled*
+  name: UIVersionConfigurationEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_UIVersionConfigurationEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.UIVersionConfigurationEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.UIVersionConfigurationEnabled
+  nameWithType: IWeb.UIVersionConfigurationEnabled
 - uid: PnP.Core.Model.SharePoint.IWeb.Url
   name: Url
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Url
@@ -11188,6 +11785,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.Url
   nameWithType: IWeb.Url
+- uid: PnP.Core.Model.SharePoint.IWeb.UseAccessRequestDefault
+  name: UseAccessRequestDefault
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_UseAccessRequestDefault
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.UseAccessRequestDefault
+  fullName: PnP.Core.Model.SharePoint.IWeb.UseAccessRequestDefault
+  nameWithType: IWeb.UseAccessRequestDefault
+- uid: PnP.Core.Model.SharePoint.IWeb.UseAccessRequestDefault*
+  name: UseAccessRequestDefault
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_UseAccessRequestDefault_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.UseAccessRequestDefault
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.UseAccessRequestDefault
+  nameWithType: IWeb.UseAccessRequestDefault
 - uid: PnP.Core.Model.SharePoint.IWeb.Webs
   name: Webs
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Webs
@@ -11201,6 +11811,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.Webs
   nameWithType: IWeb.Webs
+- uid: PnP.Core.Model.SharePoint.IWeb.WebTemplate
+  name: WebTemplate
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_WebTemplate
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.WebTemplate
+  fullName: PnP.Core.Model.SharePoint.IWeb.WebTemplate
+  nameWithType: IWeb.WebTemplate
+- uid: PnP.Core.Model.SharePoint.IWeb.WebTemplate*
+  name: WebTemplate
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_WebTemplate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.WebTemplate
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.WebTemplate
+  nameWithType: IWeb.WebTemplate
+- uid: PnP.Core.Model.SharePoint.IWeb.WebTemplateConfiguration
+  name: WebTemplateConfiguration
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_WebTemplateConfiguration
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.WebTemplateConfiguration
+  fullName: PnP.Core.Model.SharePoint.IWeb.WebTemplateConfiguration
+  nameWithType: IWeb.WebTemplateConfiguration
+- uid: PnP.Core.Model.SharePoint.IWeb.WebTemplateConfiguration*
+  name: WebTemplateConfiguration
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_WebTemplateConfiguration_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.WebTemplateConfiguration
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.WebTemplateConfiguration
+  nameWithType: IWeb.WebTemplateConfiguration
+- uid: PnP.Core.Model.SharePoint.IWeb.WebTemplatesGalleryFirstRunEnabled
+  name: WebTemplatesGalleryFirstRunEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_WebTemplatesGalleryFirstRunEnabled
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.WebTemplatesGalleryFirstRunEnabled
+  fullName: PnP.Core.Model.SharePoint.IWeb.WebTemplatesGalleryFirstRunEnabled
+  nameWithType: IWeb.WebTemplatesGalleryFirstRunEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.WebTemplatesGalleryFirstRunEnabled*
+  name: WebTemplatesGalleryFirstRunEnabled
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_WebTemplatesGalleryFirstRunEnabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.WebTemplatesGalleryFirstRunEnabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.WebTemplatesGalleryFirstRunEnabled
+  nameWithType: IWeb.WebTemplatesGalleryFirstRunEnabled
 - uid: PnP.Core.Model.SharePoint.IWeb.WelcomePage
   name: WelcomePage
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_WelcomePage
@@ -12060,6 +12709,30 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.ListTemplateType.XMLForm
   fullName: PnP.Core.Model.SharePoint.ListTemplateType.XMLForm
   nameWithType: ListTemplateType.XMLForm
+- uid: PnP.Core.Model.SharePoint.LogoAlignment
+  name: LogoAlignment
+  href: api/PnP.Core.Model.SharePoint.LogoAlignment.html
+  commentId: T:PnP.Core.Model.SharePoint.LogoAlignment
+  fullName: PnP.Core.Model.SharePoint.LogoAlignment
+  nameWithType: LogoAlignment
+- uid: PnP.Core.Model.SharePoint.LogoAlignment.Left
+  name: Left
+  href: api/PnP.Core.Model.SharePoint.LogoAlignment.html#PnP_Core_Model_SharePoint_LogoAlignment_Left
+  commentId: F:PnP.Core.Model.SharePoint.LogoAlignment.Left
+  fullName: PnP.Core.Model.SharePoint.LogoAlignment.Left
+  nameWithType: LogoAlignment.Left
+- uid: PnP.Core.Model.SharePoint.LogoAlignment.Middle
+  name: Middle
+  href: api/PnP.Core.Model.SharePoint.LogoAlignment.html#PnP_Core_Model_SharePoint_LogoAlignment_Middle
+  commentId: F:PnP.Core.Model.SharePoint.LogoAlignment.Middle
+  fullName: PnP.Core.Model.SharePoint.LogoAlignment.Middle
+  nameWithType: LogoAlignment.Middle
+- uid: PnP.Core.Model.SharePoint.LogoAlignment.Right
+  name: Right
+  href: api/PnP.Core.Model.SharePoint.LogoAlignment.html#PnP_Core_Model_SharePoint_LogoAlignment_Right
+  commentId: F:PnP.Core.Model.SharePoint.LogoAlignment.Right
+  fullName: PnP.Core.Model.SharePoint.LogoAlignment.Right
+  nameWithType: LogoAlignment.Right
 - uid: PnP.Core.Model.SharePoint.MoveCopyOptions
   name: MoveCopyOptions
   href: api/PnP.Core.Model.SharePoint.MoveCopyOptions.html
@@ -12793,6 +13466,36 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.UrlFieldFormatType.Image
   fullName: PnP.Core.Model.SharePoint.UrlFieldFormatType.Image
   nameWithType: UrlFieldFormatType.Image
+- uid: PnP.Core.Model.SharePoint.VariantThemeType
+  name: VariantThemeType
+  href: api/PnP.Core.Model.SharePoint.VariantThemeType.html
+  commentId: T:PnP.Core.Model.SharePoint.VariantThemeType
+  fullName: PnP.Core.Model.SharePoint.VariantThemeType
+  nameWithType: VariantThemeType
+- uid: PnP.Core.Model.SharePoint.VariantThemeType.Neutral
+  name: Neutral
+  href: api/PnP.Core.Model.SharePoint.VariantThemeType.html#PnP_Core_Model_SharePoint_VariantThemeType_Neutral
+  commentId: F:PnP.Core.Model.SharePoint.VariantThemeType.Neutral
+  fullName: PnP.Core.Model.SharePoint.VariantThemeType.Neutral
+  nameWithType: VariantThemeType.Neutral
+- uid: PnP.Core.Model.SharePoint.VariantThemeType.None
+  name: None
+  href: api/PnP.Core.Model.SharePoint.VariantThemeType.html#PnP_Core_Model_SharePoint_VariantThemeType_None
+  commentId: F:PnP.Core.Model.SharePoint.VariantThemeType.None
+  fullName: PnP.Core.Model.SharePoint.VariantThemeType.None
+  nameWithType: VariantThemeType.None
+- uid: PnP.Core.Model.SharePoint.VariantThemeType.Soft
+  name: Soft
+  href: api/PnP.Core.Model.SharePoint.VariantThemeType.html#PnP_Core_Model_SharePoint_VariantThemeType_Soft
+  commentId: F:PnP.Core.Model.SharePoint.VariantThemeType.Soft
+  fullName: PnP.Core.Model.SharePoint.VariantThemeType.Soft
+  nameWithType: VariantThemeType.Soft
+- uid: PnP.Core.Model.SharePoint.VariantThemeType.Strong
+  name: Strong
+  href: api/PnP.Core.Model.SharePoint.VariantThemeType.html#PnP_Core_Model_SharePoint_VariantThemeType_Strong
+  commentId: F:PnP.Core.Model.SharePoint.VariantThemeType.Strong
+  fullName: PnP.Core.Model.SharePoint.VariantThemeType.Strong
+  nameWithType: VariantThemeType.Strong
 - uid: PnP.Core.Model.Teams
   name: PnP.Core.Model.Teams
   href: api/PnP.Core.Model.Teams.html
