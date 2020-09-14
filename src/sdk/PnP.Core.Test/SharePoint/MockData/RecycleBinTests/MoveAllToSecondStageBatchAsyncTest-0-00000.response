@@ -1,0 +1,9 @@
+--batchresponse_e0991782-cb19-419f-9b56-229db6666880
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"DeleteAll":null}}
+--batchresponse_e0991782-cb19-419f-9b56-229db6666880--

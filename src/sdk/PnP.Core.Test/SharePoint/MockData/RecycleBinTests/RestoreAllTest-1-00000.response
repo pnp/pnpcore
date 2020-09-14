@@ -1,0 +1,9 @@
+--batchresponse_ad1861ad-6881-4a29-ab3c-9cf4aa369f76
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"RestoreAll":null}}
+--batchresponse_ad1861ad-6881-4a29-ab3c-9cf4aa369f76--

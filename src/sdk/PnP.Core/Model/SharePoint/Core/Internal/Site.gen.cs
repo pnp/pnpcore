@@ -147,6 +147,20 @@ namespace PnP.Core.Model.SharePoint
 
         public Guid RelatedGroupId { get => GetValue<Guid>(); set => SetValue(value); }
 
+        [SharePointProperty("RecycleBin", Expandable = true)]
+        public IRecycleBinItemCollection RecycleBin
+        {
+            get
+            {
+                if (!HasValue(nameof(RecycleBin)))
+                {
+                    var folders = new RecycleBinItemCollection(this.PnPContext, this, nameof(RecycleBin));
+                    SetValue(folders);
+                }
+                return GetValue<IRecycleBinItemCollection>();
+            }
+        }
+
         public string RequiredDesignerVersion { get => GetValue<string>(); set => SetValue(value); }
 
         public string SearchBoxPlaceholderText { get => GetValue<string>(); set => SetValue(value); }

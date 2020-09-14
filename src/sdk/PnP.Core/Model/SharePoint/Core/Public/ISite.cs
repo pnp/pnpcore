@@ -229,6 +229,11 @@ namespace PnP.Core.Model.SharePoint
         public Guid RelatedGroupId { get; }
 
         /// <summary>
+        /// Gets a value that specifies the collection of Recycle Bin items for the site collection.
+        /// </summary>
+        public IRecycleBinItemCollection RecycleBin { get; }
+
+        /// <summary>
         /// Gets a value that indicates the required Designer version for this site collection.
         /// </summary>
         public string RequiredDesignerVersion { get; }
@@ -340,11 +345,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IUser Owner { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IRecycleBinItemCollection RecycleBin { get; }
 
         ///// <summary>
         ///// To update...
