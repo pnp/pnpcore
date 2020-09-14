@@ -351,3 +351,4 @@ MigrationBackup/
 
 # App.Config files
 [Aa]pp.[Cc]onfig
+/src/samples/Demo.ASPNetCore/appsettings.json.officedevpnp.config
