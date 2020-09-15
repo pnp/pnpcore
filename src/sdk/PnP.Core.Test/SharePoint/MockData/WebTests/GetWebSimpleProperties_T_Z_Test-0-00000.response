@@ -1,4 +1,4 @@
---batchresponse_412e3948-ec1a-499b-adeb-02bc078480af
+--batchresponse_f7046b66-6f28-4df8-854f-fccec3e7b247
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"Id":"debb4230-758e-4649-aca8-d1cf0796684b","TenantAdminMembersCanShare":0,"TenantTagPolicyEnabled":false,"ThemedCssFolderUrl":null,"ThirdPartyMdmEnabled":false,"TreeViewEnabled":false,"UIVersion":15,"UIVersionConfigurationEnabled":false,"UseAccessRequestDefault":true,"WebTemplate":"GROUP","WebTemplateConfiguration":"GROUP#0","WebTemplatesGalleryFirstRunEnabled":false}}
---batchresponse_412e3948-ec1a-499b-adeb-02bc078480af--
+--batchresponse_f7046b66-6f28-4df8-854f-fccec3e7b247--
