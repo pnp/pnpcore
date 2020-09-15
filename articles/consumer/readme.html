@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="getting-started-with-the-pnp-core-sdk">Getting started with the PnP Core SDK</h1>
 
-<p>The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection (<a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1">generic host</a>) for it's core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a <code>PnPContext</code> from the <code>PnPContextFactory</code> and start using the library.</p>
+<p>The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection (<a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1">generic host</a>) for its core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a <code>PnPContext</code> from the <code>PnPContextFactory</code> and start using the library.</p>
 <h2 id="where-is-the-code">Where is the code?</h2>
 <p>The PnP Core SDK is maintained in the PnP GitHub repository: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>. You'll find:</p>
 <ul>
@@ -262,7 +262,7 @@ if (document != null)
     Console.WriteLine($&quot;Document Title: {document.Title}&quot;);
 }
 </code></pre>
-<p>Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the <code>Include()</code> lambda expression, below example shows using <code>Include()</code> in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection the Name and FieldLinks properties are loaded and for FieldLinks the Name property is loaded.</p>
+<p>Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the <code>Include()</code> method on the properties specified in the lambda expression(s), below example shows using <code>Include()</code> in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection, the Name and FieldLinks properties of each content type are loaded and, in turn, for ContentType FieldLinks, the Name property is loaded.</p>
 <pre><code class="lang-csharp">await context.Web.GetAsync(p =&gt; p.Title,
                            p =&gt; p.ContentTypes.Include(p =&gt; p.Name),
                            p =&gt; p.Lists.Include(p =&gt; p.Id, p =&gt; p.Title, p =&gt; p.DocumentTemplate,
