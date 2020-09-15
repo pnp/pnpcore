@@ -64,7 +64,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin.Include(p => p.Author, p =>p.Id, p=>p.Title));
+                await context.Web.GetAsync(w => w.RecycleBin.LoadProperties(p => p.Author, p =>p.Id, p=>p.Title));
 
                 // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
                 IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
@@ -297,7 +297,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 // Load the site collection recycle bin
-                await context.Site.GetAsync(w => w.RecycleBin.Include(p => p.Id, p => p.DeletedBy, p => p.ItemState));
+                await context.Site.GetAsync(w => w.RecycleBin.LoadProperties(p => p.Id, p => p.DeletedBy, p => p.ItemState));
                 IRecycleBinItem recycleBinItem = context.Site.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);
 
                 Assert.AreEqual(RecycleBinItemState.SecondStageRecycleBin, recycleBinItem.ItemState);
