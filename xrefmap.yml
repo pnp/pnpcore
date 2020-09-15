@@ -11770,19 +11770,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.AllProperties
   nameWithType: IWeb.AllProperties
-- uid: PnP.Core.Model.SharePoint.IWeb.AlternateCSS
-  name: AlternateCSS
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AlternateCSS
-  commentId: P:PnP.Core.Model.SharePoint.IWeb.AlternateCSS
-  fullName: PnP.Core.Model.SharePoint.IWeb.AlternateCSS
-  nameWithType: IWeb.AlternateCSS
-- uid: PnP.Core.Model.SharePoint.IWeb.AlternateCSS*
-  name: AlternateCSS
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AlternateCSS_
-  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AlternateCSS
+- uid: PnP.Core.Model.SharePoint.IWeb.AlternateCssUrl
+  name: AlternateCssUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AlternateCssUrl
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AlternateCssUrl
+  fullName: PnP.Core.Model.SharePoint.IWeb.AlternateCssUrl
+  nameWithType: IWeb.AlternateCssUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.AlternateCssUrl*
+  name: AlternateCssUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AlternateCssUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AlternateCssUrl
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IWeb.AlternateCSS
-  nameWithType: IWeb.AlternateCSS
+  fullName: PnP.Core.Model.SharePoint.IWeb.AlternateCssUrl
+  nameWithType: IWeb.AlternateCssUrl
 - uid: PnP.Core.Model.SharePoint.IWeb.AppInstanceId
   name: AppInstanceId
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AppInstanceId
@@ -11900,19 +11900,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.CurrentUser
   nameWithType: IWeb.CurrentUser
-- uid: PnP.Core.Model.SharePoint.IWeb.CustomMasterPageUrl
-  name: CustomMasterPageUrl
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CustomMasterPageUrl
-  commentId: P:PnP.Core.Model.SharePoint.IWeb.CustomMasterPageUrl
-  fullName: PnP.Core.Model.SharePoint.IWeb.CustomMasterPageUrl
-  nameWithType: IWeb.CustomMasterPageUrl
-- uid: PnP.Core.Model.SharePoint.IWeb.CustomMasterPageUrl*
-  name: CustomMasterPageUrl
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CustomMasterPageUrl_
-  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.CustomMasterPageUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.CustomMasterUrl
+  name: CustomMasterUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CustomMasterUrl
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.CustomMasterUrl
+  fullName: PnP.Core.Model.SharePoint.IWeb.CustomMasterUrl
+  nameWithType: IWeb.CustomMasterUrl
+- uid: PnP.Core.Model.SharePoint.IWeb.CustomMasterUrl*
+  name: CustomMasterUrl
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CustomMasterUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.CustomMasterUrl
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IWeb.CustomMasterPageUrl
-  nameWithType: IWeb.CustomMasterPageUrl
+  fullName: PnP.Core.Model.SharePoint.IWeb.CustomMasterUrl
+  nameWithType: IWeb.CustomMasterUrl
 - uid: PnP.Core.Model.SharePoint.IWeb.CustomSiteActionsDisabled
   name: CustomSiteActionsDisabled
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_CustomSiteActionsDisabled
@@ -12480,19 +12480,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.LogoAlignment
   nameWithType: IWeb.LogoAlignment
-- uid: PnP.Core.Model.SharePoint.IWeb.MasterPageUrl
-  name: MasterPageUrl
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_MasterPageUrl
-  commentId: P:PnP.Core.Model.SharePoint.IWeb.MasterPageUrl
-  fullName: PnP.Core.Model.SharePoint.IWeb.MasterPageUrl
-  nameWithType: IWeb.MasterPageUrl
-- uid: PnP.Core.Model.SharePoint.IWeb.MasterPageUrl*
-  name: MasterPageUrl
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_MasterPageUrl_
-  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.MasterPageUrl
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IWeb.MasterPageUrl
-  nameWithType: IWeb.MasterPageUrl
 - uid: PnP.Core.Model.SharePoint.IWeb.MasterUrl
   name: MasterUrl
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_MasterUrl
@@ -12818,19 +12805,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.SiteGroups
   nameWithType: IWeb.SiteGroups
-- uid: PnP.Core.Model.SharePoint.IWeb.SiteLogo
-  name: SiteLogo
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteLogo
-  commentId: P:PnP.Core.Model.SharePoint.IWeb.SiteLogo
-  fullName: PnP.Core.Model.SharePoint.IWeb.SiteLogo
-  nameWithType: IWeb.SiteLogo
-- uid: PnP.Core.Model.SharePoint.IWeb.SiteLogo*
-  name: SiteLogo
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteLogo_
-  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SiteLogo
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IWeb.SiteLogo
-  nameWithType: IWeb.SiteLogo
 - uid: PnP.Core.Model.SharePoint.IWeb.SiteLogoDescription
   name: SiteLogoDescription
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SiteLogoDescription
