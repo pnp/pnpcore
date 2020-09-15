@@ -18056,6 +18056,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Credentials
   nameWithType: PnPCoreOptions.Credentials
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
+  name: GraphAlwaysUseBeta
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphAlwaysUseBeta
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
+  nameWithType: PnPCoreOptions.GraphAlwaysUseBeta
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta*
+  name: GraphAlwaysUseBeta
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphAlwaysUseBeta_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
+  nameWithType: PnPCoreOptions.GraphAlwaysUseBeta
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
+  name: GraphCanUseBeta
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphCanUseBeta
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
+  nameWithType: PnPCoreOptions.GraphCanUseBeta
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta*
+  name: GraphCanUseBeta
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphCanUseBeta_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
+  nameWithType: PnPCoreOptions.GraphCanUseBeta
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
+  name: GraphFirst
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphFirst
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
+  nameWithType: PnPCoreOptions.GraphFirst
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst*
+  name: GraphFirst
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphFirst_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
+  nameWithType: PnPCoreOptions.GraphFirst
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Sites
   name: Sites
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_Sites
@@ -19594,6 +19633,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactoryOptions.Configurations
   nameWithType: PnPContextFactoryOptions.Configurations
+- uid: PnP.Core.Services.PnPContextFactoryOptions.GraphAlwaysUseBeta
+  name: GraphAlwaysUseBeta
+  href: api/PnP.Core.Services.PnPContextFactoryOptions.html#PnP_Core_Services_PnPContextFactoryOptions_GraphAlwaysUseBeta
+  commentId: P:PnP.Core.Services.PnPContextFactoryOptions.GraphAlwaysUseBeta
+  fullName: PnP.Core.Services.PnPContextFactoryOptions.GraphAlwaysUseBeta
+  nameWithType: PnPContextFactoryOptions.GraphAlwaysUseBeta
+- uid: PnP.Core.Services.PnPContextFactoryOptions.GraphAlwaysUseBeta*
+  name: GraphAlwaysUseBeta
+  href: api/PnP.Core.Services.PnPContextFactoryOptions.html#PnP_Core_Services_PnPContextFactoryOptions_GraphAlwaysUseBeta_
+  commentId: Overload:PnP.Core.Services.PnPContextFactoryOptions.GraphAlwaysUseBeta
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactoryOptions.GraphAlwaysUseBeta
+  nameWithType: PnPContextFactoryOptions.GraphAlwaysUseBeta
+- uid: PnP.Core.Services.PnPContextFactoryOptions.GraphCanUseBeta
+  name: GraphCanUseBeta
+  href: api/PnP.Core.Services.PnPContextFactoryOptions.html#PnP_Core_Services_PnPContextFactoryOptions_GraphCanUseBeta
+  commentId: P:PnP.Core.Services.PnPContextFactoryOptions.GraphCanUseBeta
+  fullName: PnP.Core.Services.PnPContextFactoryOptions.GraphCanUseBeta
+  nameWithType: PnPContextFactoryOptions.GraphCanUseBeta
+- uid: PnP.Core.Services.PnPContextFactoryOptions.GraphCanUseBeta*
+  name: GraphCanUseBeta
+  href: api/PnP.Core.Services.PnPContextFactoryOptions.html#PnP_Core_Services_PnPContextFactoryOptions_GraphCanUseBeta_
+  commentId: Overload:PnP.Core.Services.PnPContextFactoryOptions.GraphCanUseBeta
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactoryOptions.GraphCanUseBeta
+  nameWithType: PnPContextFactoryOptions.GraphCanUseBeta
+- uid: PnP.Core.Services.PnPContextFactoryOptions.GraphFirst
+  name: GraphFirst
+  href: api/PnP.Core.Services.PnPContextFactoryOptions.html#PnP_Core_Services_PnPContextFactoryOptions_GraphFirst
+  commentId: P:PnP.Core.Services.PnPContextFactoryOptions.GraphFirst
+  fullName: PnP.Core.Services.PnPContextFactoryOptions.GraphFirst
+  nameWithType: PnPContextFactoryOptions.GraphFirst
+- uid: PnP.Core.Services.PnPContextFactoryOptions.GraphFirst*
+  name: GraphFirst
+  href: api/PnP.Core.Services.PnPContextFactoryOptions.html#PnP_Core_Services_PnPContextFactoryOptions_GraphFirst_
+  commentId: Overload:PnP.Core.Services.PnPContextFactoryOptions.GraphFirst
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactoryOptions.GraphFirst
+  nameWithType: PnPContextFactoryOptions.GraphFirst
 - uid: PnP.Core.Services.PnPContextFactoryOptionsConfiguration
   name: PnPContextFactoryOptionsConfiguration
   href: api/PnP.Core.Services.PnPContextFactoryOptionsConfiguration.html
