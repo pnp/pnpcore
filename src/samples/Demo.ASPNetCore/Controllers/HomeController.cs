@@ -38,11 +38,11 @@ namespace Demo.ASPNetCore.Controllers
             using (var context = await _pnpContextFactory.CreateAsync("DemoSite"))
             {
                 // Retrieving web with lists and masterpageurl loaded ==> SharePoint REST query
-                var web = await context.Web.GetAsync(w => w.Title, w => w.Description, w => w.MasterPageUrl);
+                var web = await context.Web.GetAsync(w => w.Title, w => w.Description, w => w.MasterUrl);
 
                 model.Title = web.Title;
                 model.Description = web.Description;
-                model.MasterPageUrl = web.MasterPageUrl;
+                model.MasterUrl = web.MasterUrl;
             }
 
             return View("SiteInfo", model);

@@ -11,6 +11,6 @@ namespace Demo.ASPNetCore.Models
 
         public string Description { get; set; }
 
-        public string MasterPageUrl { get; set; }
+        public string MasterUrl { get; set; }
     }
 }
