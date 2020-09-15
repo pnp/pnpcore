@@ -172,17 +172,11 @@ namespace PnP.Core.Model.SharePoint
 
         public string WelcomePage { get => GetValue<string>(); set => SetValue(value); }
 
-        [SharePointProperty("SiteLogoUrl")]
-        public string SiteLogo { get => GetValue<string>(); set => SetValue(value); }
+        public string AlternateCssUrl { get => GetValue<string>(); set => SetValue(value); }
 
-        [SharePointProperty("AlternateCssUrl")]
-        public string AlternateCSS { get => GetValue<string>(); set => SetValue(value); }
-
-        [SharePointProperty("MasterUrl")]
         public string MasterPageUrl { get => GetValue<string>(); set => SetValue(value); }
 
-        [SharePointProperty("CustomMasterUrl")]
-        public string CustomMasterPageUrl { get => GetValue<string>(); set => SetValue(value); }
+        public string CustomMasterUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public bool CommentsOnSitePagesDisabled { get => GetValue<bool>(); set => SetValue(value); }
 

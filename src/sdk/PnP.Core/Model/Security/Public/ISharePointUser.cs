@@ -50,13 +50,13 @@ namespace PnP.Core.Model.Security
         public bool IsSiteAdmin { get; }
 
         /// <summary>
-        /// Returns this Graph user as a SharePoint user for the connected site collection
+        /// Returns this SharePoint user as a Graph user
         /// </summary>
         /// <returns></returns>
         public Task<IGraphUser> AsGraphUserAsync();
 
         /// <summary>
-        /// Returns this Graph user as a SharePoint user for the connected site collection
+        /// Returns this SharePoint user as a Graph user
         /// </summary>
         /// <returns></returns>
         public IGraphUser AsGraphUser();

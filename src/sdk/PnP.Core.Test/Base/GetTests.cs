@@ -311,11 +311,11 @@ namespace PnP.Core.Test.Base
                                                      p => p.Lists.LoadProperties(p => p.DocumentTemplate,
                                                                           p => p.ContentTypes.LoadProperties(p => p.Name, p => p.FieldLinks, p=>p.NewFormUrl),
                                                                           p => p.Id, p => p.Title),
-                                                     p => p.AlternateCSS
+                                                     p => p.AlternateCssUrl
                                                     );
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
-                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCSS));
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterPageUrl));
+                Assert.IsTrue(web.IsPropertyAvailable(p => p.AlternateCssUrl));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.MasterUrl));
                 Assert.IsTrue(web.Lists.Requested);
                 Assert.IsTrue(web.Lists.Count() > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));

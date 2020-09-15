@@ -1,9 +1,9 @@
---batchresponse_04376201-14f7-44fa-8193-84c886330cdc
+--batchresponse_b0150e86-b4ae-485e-a1b5-88285e306ef3
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2","Title":"prov-1","WelcomePage":"SitePages/Home.aspx"}}
---batchresponse_04376201-14f7-44fa-8193-84c886330cdc--
+{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"Id":"debb4230-758e-4649-aca8-d1cf0796684b","Title":"PnP Microsoft 365 library test with group","WelcomePage":"SitePages/Home.aspx"}}
+--batchresponse_b0150e86-b4ae-485e-a1b5-88285e306ef3--
