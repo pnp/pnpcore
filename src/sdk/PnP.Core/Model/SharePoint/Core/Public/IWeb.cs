@@ -381,24 +381,14 @@ namespace PnP.Core.Model.SharePoint
         public string Description { get; set; }
 
         /// <summary>
-        /// The SiteLogo of the Site, optional attribute.
-        /// </summary>
-        public string SiteLogo { get; set; }
-
-        /// <summary>
         /// The AlternateCSS of the Site, optional attribute.
         /// </summary>
-        public string AlternateCSS { get; set; }
-
-        /// <summary>
-        /// The MasterPage Url of the Site, optional attribute.
-        /// </summary>
-        public string MasterPageUrl { get; set; }
+        public string AlternateCssUrl { get; set; }
 
         /// <summary>
         /// The Custom MasterPage Url of the Site, optional attribute.
         /// </summary>
-        public string CustomMasterPageUrl { get; set; }
+        public string CustomMasterUrl { get; set; }
 
         /// <summary>
         /// Defines whether the comments on site pages are disabled or not

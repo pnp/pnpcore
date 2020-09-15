@@ -33,12 +33,12 @@ namespace PnP.Core.Test.SharePoint
                     p => p.AllowRssFeeds,
                     p => p.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser,
                     p => p.AllowSavePublishDeclarativeWorkflowForCurrentUser,
-                    p => p.AlternateCSS,
+                    p => p.AlternateCssUrl,
                     p => p.AppInstanceId,
                     p => p.ClassicWelcomePage,
                     p => p.ContainsConfidentialInfo,
                     p => p.Created,
-                    p => p.CustomMasterPageUrl,
+                    p => p.CustomMasterUrl,
                     p => p.CustomSiteActionsDisabled,
                     // TODO Test this in Targeted Release
                     //p => p.DefaultNewPageTemplateId,
@@ -62,12 +62,12 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(web.AllowRssFeeds);
                 Assert.IsTrue(web.AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser);
                 Assert.IsTrue(web.AllowSavePublishDeclarativeWorkflowForCurrentUser);
-                Assert.AreEqual("", web.AlternateCSS);
+                Assert.AreEqual("", web.AlternateCssUrl);
                 // TODO: This one should be tested with an addin web to be relevant
                 Assert.AreEqual(default, web.AppInstanceId);
                 Assert.IsNull(web.ClassicWelcomePage);
                 Assert.IsFalse(web.ContainsConfidentialInfo);
-                Assert.IsTrue(web.CustomMasterPageUrl.EndsWith("/_catalogs/masterpage/seattle.master"));
+                Assert.IsTrue(web.CustomMasterUrl.EndsWith("/_catalogs/masterpage/seattle.master"));
                 Assert.IsFalse(web.CustomSiteActionsDisabled);
                 // TODO Test this in Targeted Release
                 //Assert.AreNotEqual(default, web.DefaultNewPageTemplateId);

@@ -88,7 +88,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(!string.IsNullOrEmpty(web.Title));
 
                 // Are other properties still not available
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCSS));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
             }
         }
 
@@ -111,7 +111,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.Count() > 0);
 
                 // Are other properties still not available
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCSS));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
             }
         }
 
@@ -136,7 +136,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
 
                 // Are other properties still not available
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCSS));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
                 Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
             }
         }
@@ -164,7 +164,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.TemplateType));
 
                 // Are other properties still not available
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCSS));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
                 Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
             }
         }
@@ -191,7 +191,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCSS));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
                 Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
@@ -215,7 +215,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCSS));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
                 Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
@@ -239,7 +239,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.StaticName));
 
                 // Are other properties still not available
-                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCSS));
+                Assert.IsFalse(web.IsPropertyAvailable(p => p.AlternateCssUrl));
                 Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
