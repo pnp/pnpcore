@@ -2,6 +2,7 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using PnP.Core.QueryModel;
+using PnP.Core.Model;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -77,7 +78,6 @@ namespace PnP.Core.Test.SharePoint
 
             await CleanupWebRecycleBinItem(2, recycleBinItemId);
         }
-
 
         [TestMethod]
         public async Task GetRecycleBinItemByIdAsyncTest()

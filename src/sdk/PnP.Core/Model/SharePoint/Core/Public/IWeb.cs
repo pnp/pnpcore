@@ -768,11 +768,6 @@ namespace PnP.Core.Model.SharePoint
         ///// <summary>
         ///// To update...
         ///// </summary>
-        //public IGroupCollection SiteGroups { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
         //public ITenantCorporateCatalogAccessor TenantAppCatalog { get; }
 
         ///// <summary>

@@ -108,8 +108,8 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (!HasValue(nameof(RecycleBin)))
                 {
-                    var folders = new RecycleBinItemCollection(this.PnPContext, this, nameof(RecycleBin));
-                    SetValue(folders);
+                    var recycleBin = new RecycleBinItemCollection(this.PnPContext, this, nameof(RecycleBin));
+                    SetValue(recycleBin);
                 }
                 return GetValue<IRecycleBinItemCollection>();
             }

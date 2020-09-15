@@ -219,13 +219,13 @@ if (document != null)
 }
 ```
 
-Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the `Include()` method on the properties specified in the lambda expression(s), below example shows using `Include()` in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection, the Name and FieldLinks properties of each content type are loaded and, in turn, for ContentType FieldLinks, the Name property is loaded.
+Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the `LoadProperties()` method on the properties specified in the lambda expression(s), below example shows using `LoadProperties()` in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection, the Name and FieldLinks properties of each content type are loaded and, in turn, for ContentType FieldLinks, the Name property is loaded.
 
 ```csharp
 await context.Web.GetAsync(p => p.Title,
-                           p => p.ContentTypes.Include(p => p.Name),
-                           p => p.Lists.Include(p => p.Id, p => p.Title, p => p.DocumentTemplate,
-                               p => p.ContentTypes.Include(p => p.Name,
-                                    p => p.FieldLinks.Include(p => p.Name)))
+                           p => p.ContentTypes.LoadProperties(p => p.Name),
+                           p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate,
+                               p => p.ContentTypes.LoadProperties(p => p.Name,
+                                    p => p.FieldLinks.LoadProperties(p => p.Name)))
                           );
 ```

@@ -292,15 +292,15 @@ namespace PnP.Core.Model
 
 
         /// <summary>
-        /// Enables using the .Include lambda expression syntax on a collection
+        /// Enables using the .LoadProperties lambda expression syntax on a collection
         /// </summary>
         /// <typeparam name="TModel">Collection model</typeparam>
-        /// <param name="collection">Collection to apply the .Include on </param>
+        /// <param name="collection">Collection to apply the .LoadProperties on </param>
         /// <param name="expressions">Expression</param>
         /// <returns>Null...return value is not needed</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA1801:Review unused parameters", Justification = "<Pending>")]
-        internal static IQueryable<TModel> Include<TModel>(this IDataModelCollection<TModel> collection, params Expression<Func<TModel, object>>[] expressions)
+        internal static IQueryable<TModel> LoadProperties<TModel>(this IDataModelCollection<TModel> collection, params Expression<Func<TModel, object>>[] expressions)
         {
             return null;
         }

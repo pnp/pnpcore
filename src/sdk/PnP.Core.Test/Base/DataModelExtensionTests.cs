@@ -44,7 +44,7 @@ namespace PnP.Core.Test.Base
                 // Is the property populated
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.Lists));
 
-                var web = await context.Web.GetAsync(p => p.Lists.Include(p => p.Title));
+                var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title));
 
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.Lists));
             }
@@ -124,7 +124,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.Include(p => p.Title, p => p.TemplateType), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.TemplateType), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated
@@ -147,12 +147,12 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                await context.Web.GetAsync(p => p.Lists.Include(p => p.Title));
+                await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title));
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsFalse(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.Include(p => p.Title, p => p.TemplateType), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.TemplateType), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated
@@ -175,13 +175,13 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;            
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                await context.Web.GetAsync(p => p.WelcomePage, p => p.Lists.Include(p => p.Title, p => p.Description, p => p.Fields.Include(p => p.Title)));
+                await context.Web.GetAsync(p => p.WelcomePage, p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.Title)));
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
                 // The StaticName field property was not loaded, the query will be executed again
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.Include(p => p.Title, p => p.Description, p => p.Fields.Include(p => p.StaticName)), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.StaticName)), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated
@@ -199,13 +199,13 @@ namespace PnP.Core.Test.Base
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
-                await context.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Description, p => p.Fields.Include(p => p.StaticName)), p => p.WelcomePage);
+                await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.StaticName)), p => p.WelcomePage);
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
                 // All properties were loaded, so we're not going back to server
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.Include(p => p.Title, p => p.Description, p => p.Fields.Include(p => p.StaticName)), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.StaticName)), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated
@@ -223,13 +223,13 @@ namespace PnP.Core.Test.Base
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {
-                await context.Web.GetAsync(p => p.Lists.Include(p => p.Title, p => p.Description), p => p.WelcomePage);
+                await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description), p => p.WelcomePage);
 
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.Lists));
                 Assert.IsTrue(context.Web.IsPropertyAvailable(p => p.WelcomePage));
 
                 // The fields collection was not previously requested, so we're going back to server
-                await context.Web.EnsurePropertiesAsync(p => p.Lists.Include(p => p.Title, p => p.Description, p => p.Fields.Include(p => p.StaticName)), p => p.WelcomePage);
+                await context.Web.EnsurePropertiesAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Description, p => p.Fields.LoadProperties(p => p.StaticName)), p => p.WelcomePage);
                 var web = context.Web;
 
                 // Are the property populated

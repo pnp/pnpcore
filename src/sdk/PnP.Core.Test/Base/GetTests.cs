@@ -226,8 +226,8 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.Title, 
-                                                     p => p.ContentTypes.Include(p => p.Name), 
-                                                     p => p.Lists.Include(p => p.Id, p => p.Title, p => p.DocumentTemplate));
+                                                     p => p.ContentTypes.LoadProperties(p => p.Name), 
+                                                     p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate));
                 Assert.IsTrue(web.Lists.Requested);
                 Assert.IsTrue(web.Lists.Count() > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
@@ -249,8 +249,8 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.Title, 
-                                                     p => p.ContentTypes.Include(p => p.Name), 
-                                                     p => p.Lists.Include(p => p.Id, p => p.Title, p => p.DocumentTemplate, p=>p.ContentTypes));
+                                                     p => p.ContentTypes.LoadProperties(p => p.Name), 
+                                                     p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate, p=>p.ContentTypes));
                 Assert.IsTrue(web.Lists.Requested);
                 Assert.IsTrue(web.Lists.Count() > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
@@ -274,10 +274,10 @@ namespace PnP.Core.Test.Base
             {
                 context.GraphFirst = false;
                 var web = await context.Web.GetAsync(p => p.Title, 
-                                                     p => p.ContentTypes.Include(p => p.Name),
-                                                     p => p.Lists.Include(p => p.Id, p => p.Title, p => p.DocumentTemplate,
-                                                          p => p.ContentTypes.Include(p => p.Name,
-                                                               p => p.FieldLinks.Include(p => p.Name)))
+                                                     p => p.ContentTypes.LoadProperties(p => p.Name),
+                                                     p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate,
+                                                          p => p.ContentTypes.LoadProperties(p => p.Name,
+                                                               p => p.FieldLinks.LoadProperties(p => p.Name)))
                                                     );
                 Assert.IsTrue(web.Lists.Requested);
                 Assert.IsTrue(web.Lists.Count() > 0);
@@ -306,10 +306,10 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
-                var web = await context.Web.GetAsync(p => p.ContentTypes.Include(p => p.Name),
+                var web = await context.Web.GetAsync(p => p.ContentTypes.LoadProperties(p => p.Name),
                                                      p => p.Title,
-                                                     p => p.Lists.Include(p => p.DocumentTemplate,
-                                                                          p => p.ContentTypes.Include(p => p.Name, p => p.FieldLinks, p=>p.NewFormUrl),
+                                                     p => p.Lists.LoadProperties(p => p.DocumentTemplate,
+                                                                          p => p.ContentTypes.LoadProperties(p => p.Name, p => p.FieldLinks, p=>p.NewFormUrl),
                                                                           p => p.Id, p => p.Title),
                                                      p => p.AlternateCSS
                                                     );
