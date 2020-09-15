@@ -5,7 +5,7 @@ namespace PnP.Core.Services.Builder.Configuration
 {
     internal class PnPContextFactoryOptionsConfigurator: 
         IConfigureOptions<PnPContextFactoryOptions>, 
-        IConfigureOptions<OAuthAuthenticationProviderOptions>
+        IConfigureOptions<AuthenticationProvidersOptions>
     {
         private readonly IOptions<PnPCoreOptions> pnpCoreOptions;
 
@@ -31,7 +31,7 @@ namespace PnP.Core.Services.Builder.Configuration
             options.GraphAlwaysUseBeta = pnpCoreOptions.Value.GraphAlwaysUseBeta;
         }
 
-        public void Configure(OAuthAuthenticationProviderOptions options)
+        public void Configure(AuthenticationProvidersOptions options)
         {
             foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Credentials)
             {

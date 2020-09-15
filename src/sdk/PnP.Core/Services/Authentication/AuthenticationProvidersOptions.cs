@@ -5,7 +5,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// Defines a collection of credential settings for secure connections to the target resources
     /// </summary>
-    public class OAuthAuthenticationProviderOptions
+    public class AuthenticationProvidersOptions
     {
         /// <summary>
         /// Defines the name of the default configuration

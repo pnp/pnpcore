@@ -12,7 +12,7 @@ namespace PnP.Core.Services
 
     public class AuthenticationProviderFactory : IAuthenticationProviderFactory
     {
-        private readonly OAuthAuthenticationProviderOptions options;
+        private readonly AuthenticationProvidersOptions options;
         private readonly ILogger log;
         private readonly IServiceProvider serviceProvider;
 
@@ -23,7 +23,7 @@ namespace PnP.Core.Services
         /// <param name="logger">Logger for log output</param>
         /// <param name="serviceProvider">DI container service</param>
         public AuthenticationProviderFactory(
-            IOptionsMonitor<OAuthAuthenticationProviderOptions> options,
+            IOptionsMonitor<AuthenticationProvidersOptions> options,
             ILogger<PnPContext> logger,
             IServiceProvider serviceProvider)
         {

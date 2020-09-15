@@ -32,7 +32,7 @@ namespace PnP.Core.Services
         /// <param name="collection">Collection of loaded services</param>
         /// <param name="options"><see cref="AuthenticationProviderFactory"/> options</param>
         /// <returns>Collection of loaded services</returns>
-        public static IServiceCollection AddAuthenticationProviderFactory(this IServiceCollection collection, Action<OAuthAuthenticationProviderOptions> options)
+        public static IServiceCollection AddAuthenticationProviderFactory(this IServiceCollection collection, Action<AuthenticationProvidersOptions> options)
         {
             if (collection == null)
             {
@@ -54,7 +54,7 @@ namespace PnP.Core.Services
         private static IServiceCollection AddAuthenticationServices(this IServiceCollection collection)
         {
             return collection
-                .AddOAuthAuthenticationProvider()
+                .AddOAuthAuthenticationProvider() // TODO: Remove this line and rely on PnP.Core.Auth external library
                 .AddScoped<IAuthenticationProviderFactory, AuthenticationProviderFactory>();
         }
     }
