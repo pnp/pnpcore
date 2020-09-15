@@ -44,7 +44,7 @@ namespace PnP.Core.Model
                 {
                     // Future use? (includes)
                     var body = (MethodCallExpression)expression.Body;
-                    if (body.Method.IsGenericMethod && body.Method.Name == "Include")
+                    if (body.Method.IsGenericMethod && body.Method.Name == "LoadProperties")
                     {
                         if (body.Arguments.Count != 2)
                         {

@@ -304,7 +304,7 @@ namespace PnP.Core.Model
                     }
                     else if (expression.Body is MethodCallExpression)
                     {
-                        if ((expression.Body as MethodCallExpression).Method.Name == "Include")
+                        if ((expression.Body as MethodCallExpression).Method.Name == "LoadProperties")
                         {
                             fieldToLoad = ParseInclude(entityInfo, expression as LambdaExpression, null);
                         }
@@ -426,7 +426,7 @@ namespace PnP.Core.Model
                     }
                     else if (fieldExpressionBody is MethodCallExpression)
                     {
-                        if ((fieldExpressionBody as MethodCallExpression).Method.Name == "Include")
+                        if ((fieldExpressionBody as MethodCallExpression).Method.Name == "LoadProperties")
                         {
                             var expr = (((includeFieldExpression as UnaryExpression).Operand as LambdaExpression).Body as MethodCallExpression).Arguments[0] as MemberExpression;
                             var fld = expr.Member.Name;
