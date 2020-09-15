@@ -175,6 +175,11 @@ namespace PnP.Core.Services
                 Uri = url
             };
 
+            // Configure the global Microsoft Graph settings
+            context.GraphFirst = Options.GraphFirst;
+            context.GraphCanUseBeta = Options.GraphCanUseBeta;
+            context.GraphAlwaysUseBeta = Options.GraphAlwaysUseBeta;
+
             await ConfigureTelemetry(context).ConfigureAwait(false);
 
             return context;
