@@ -84,26 +84,37 @@
 <p>Below snippet shows the settings which are used by the PnP Core SDK, you can simply include this snippet in your application settings file next to your custom settings.</p>
 <pre><code class="lang-json">{
   &quot;PnPCore&quot;: {
-    &quot;DisableTelemetry&quot;: false,
-    &quot;PnPContext&quot;: {
-      &quot;GraphFirst&quot;: true,
-      &quot;GraphAlwaysUseBeta&quot;: false,
-      &quot;GraphCanUseBeta&quot;: true
-    },
+    &quot;DisableTelemetry&quot;: &quot;false&quot;,
     &quot;HttpRequests&quot;: {
       &quot;UserAgent&quot;: &quot;ISV|Contoso|ProductX&quot;,
       &quot;SharePointRest&quot;: {
-        &quot;UseRetryAfterHeader&quot;: false,
-        &quot;MaxRetries&quot;: 10,
-        &quot;DelayInSeconds&quot;: 3,
-        &quot;IncrementalDelay&quot;: true
+        &quot;UseRetryAfterHeader&quot;: &quot;false&quot;,
+        &quot;MaxRetries&quot;: &quot;10&quot;,
+        &quot;DelayInSeconds&quot;: &quot;3&quot;,
+        &quot;UseIncrementalDelay&quot;: &quot;true&quot;
       },
       &quot;MicrosoftGraph&quot;: {
-        &quot;UseRetryAfterHeader&quot;: true,
-        &quot;MaxRetries&quot;: 10,
-        &quot;DelayInSeconds&quot;: 3,
-        &quot;IncrementalDelay&quot;: true
+        &quot;UseRetryAfterHeader&quot;: &quot;true&quot;,
+        &quot;MaxRetries&quot;: &quot;10&quot;,
+        &quot;DelayInSeconds&quot;: &quot;3&quot;,
+        &quot;UseIncrementalDelay&quot;: &quot;true&quot;
       }
+    },
+    &quot;PnPContext&quot;: {
+      &quot;GraphFirst&quot;: &quot;true&quot;,
+      &quot;GraphCanUseBeta&quot;: &quot;true&quot;,
+      &quot;GraphAlwaysUseBeta&quot;: &quot;false&quot;
+    },
+    &quot;Credentials&quot;: {
+      &quot;CredentialManagerAuthentication&quot;: {
+        &quot;CredentialManagerName&quot;: &quot;mycreds&quot;
+      }
+    },
+    &quot;Sites&quot;: {
+      &quot;SiteToWorkWith&quot;: {
+        &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnp&quot;,
+        &quot;AuthenticationProviderName&quot;: &quot;CredentialManagerAuthentication&quot;
+      },
     }
   },
 
@@ -136,14 +147,14 @@
 <td>If for a given request the library can choose between a SharePoint REST or a Microsoft Graph call then it will favor the Microsoft Graph call. Settings this to false will prefer SharePoint REST for all SharePoint related API calls.</td>
 </tr>
 <tr>
-<td>PnPCore:PnPContext:GraphAlwaysUsesBeta</td>
-<td>false</td>
-<td>The library by default uses the production v1.0 Microsoft Graph API. Use this setting to default it to the beta Microsoft Graph API.</td>
-</tr>
-<tr>
 <td>PnPCore:PnPContext:GraphCanUseBeta</td>
 <td>true</td>
 <td>When you ask for data that can only be provided via the Microsoft Graph beta API the PnP Core SDK will use the beta endpoint for that specific request. All other requests will still use the v1.0 endpoint. If you set this to false, then any request that requires Microsoft Graph beta will not provide any result.</td>
+</tr>
+<tr>
+<td>PnPCore:PnPContext:GraphAlwaysUsesBeta</td>
+<td>false</td>
+<td>The library by default uses the production v1.0 Microsoft Graph API. Use this setting to default it to the beta Microsoft Graph API.</td>
 </tr>
 <tr>
 <td>PnPCore:HttpRequests:UserAgent</td>
@@ -194,6 +205,16 @@
 <td>PnPCore:DisableTelemetry</td>
 <td>false</td>
 <td>Allows to turn off telemetry being sent. Telemetry is used to improve this open source library and it's recommended to keep it on, but you can disable it, if required.</td>
+</tr>
+<tr>
+<td>PnPCore:Credentials</td>
+<td></td>
+<td>This section defines the settings for the Authentication Providers and it will be updated in the near future.</td>
+</tr>
+<tr>
+<td>PnPCore:Sites</td>
+<td></td>
+<td>This section defines the site collections to consume using the PnP Core SDK. Every single item of the array has a name, which can then be used with the PnPContextFactory to retrieve an instance of PnPContext for that specific site, a <em>SiteUrl</em> and the <em>AuthenticationProviderName</em> that maps to the corresponding Authentication Provider to use for accessing the target site.</td>
 </tr>
 </tbody>
 </table>

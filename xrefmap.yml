@@ -18002,6 +18002,51 @@ references:
   commentId: N:PnP.Core.Services.Builder.Configuration
   fullName: PnP.Core.Services.Builder.Configuration
   nameWithType: PnP.Core.Services.Builder.Configuration
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions
+  name: PnPCoreContextOptions
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html
+  commentId: T:PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions
+  nameWithType: PnPCoreContextOptions
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphAlwaysUseBeta
+  name: GraphAlwaysUseBeta
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreContextOptions_GraphAlwaysUseBeta
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphAlwaysUseBeta
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphAlwaysUseBeta
+  nameWithType: PnPCoreContextOptions.GraphAlwaysUseBeta
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphAlwaysUseBeta*
+  name: GraphAlwaysUseBeta
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreContextOptions_GraphAlwaysUseBeta_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphAlwaysUseBeta
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphAlwaysUseBeta
+  nameWithType: PnPCoreContextOptions.GraphAlwaysUseBeta
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphCanUseBeta
+  name: GraphCanUseBeta
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreContextOptions_GraphCanUseBeta
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphCanUseBeta
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphCanUseBeta
+  nameWithType: PnPCoreContextOptions.GraphCanUseBeta
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphCanUseBeta*
+  name: GraphCanUseBeta
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreContextOptions_GraphCanUseBeta_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphCanUseBeta
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphCanUseBeta
+  nameWithType: PnPCoreContextOptions.GraphCanUseBeta
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphFirst
+  name: GraphFirst
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreContextOptions_GraphFirst
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphFirst
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphFirst
+  nameWithType: PnPCoreContextOptions.GraphFirst
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphFirst*
+  name: GraphFirst
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreContextOptions_GraphFirst_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphFirst
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.GraphFirst
+  nameWithType: PnPCoreContextOptions.GraphFirst
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreCredentialOptions
   name: PnPCoreCredentialOptions
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialOptions.html
@@ -18053,12 +18098,186 @@ references:
   commentId: T:PnP.Core.Services.Builder.Configuration.PnPCoreCredentialsOptions
   fullName: PnP.Core.Services.Builder.Configuration.PnPCoreCredentialsOptions
   nameWithType: PnPCoreCredentialsOptions
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions
+  name: PnPCoreHttpRequestsGraphOptions
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html
+  commentId: T:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions
+  nameWithType: PnPCoreHttpRequestsGraphOptions
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.DelayInSeconds
+  name: DelayInSeconds
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsGraphOptions_DelayInSeconds
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.DelayInSeconds
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.DelayInSeconds
+  nameWithType: PnPCoreHttpRequestsGraphOptions.DelayInSeconds
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.DelayInSeconds*
+  name: DelayInSeconds
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsGraphOptions_DelayInSeconds_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.DelayInSeconds
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.DelayInSeconds
+  nameWithType: PnPCoreHttpRequestsGraphOptions.DelayInSeconds
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.MaxRetries
+  name: MaxRetries
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsGraphOptions_MaxRetries
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.MaxRetries
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.MaxRetries
+  nameWithType: PnPCoreHttpRequestsGraphOptions.MaxRetries
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.MaxRetries*
+  name: MaxRetries
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsGraphOptions_MaxRetries_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.MaxRetries
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.MaxRetries
+  nameWithType: PnPCoreHttpRequestsGraphOptions.MaxRetries
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseIncrementalDelay
+  name: UseIncrementalDelay
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsGraphOptions_UseIncrementalDelay
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseIncrementalDelay
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseIncrementalDelay
+  nameWithType: PnPCoreHttpRequestsGraphOptions.UseIncrementalDelay
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseIncrementalDelay*
+  name: UseIncrementalDelay
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsGraphOptions_UseIncrementalDelay_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseIncrementalDelay
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseIncrementalDelay
+  nameWithType: PnPCoreHttpRequestsGraphOptions.UseIncrementalDelay
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseRetryAfterHeader
+  name: UseRetryAfterHeader
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsGraphOptions_UseRetryAfterHeader
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseRetryAfterHeader
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseRetryAfterHeader
+  nameWithType: PnPCoreHttpRequestsGraphOptions.UseRetryAfterHeader
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseRetryAfterHeader*
+  name: UseRetryAfterHeader
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsGraphOptions_UseRetryAfterHeader_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseRetryAfterHeader
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.UseRetryAfterHeader
+  nameWithType: PnPCoreHttpRequestsGraphOptions.UseRetryAfterHeader
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions
+  name: PnPCoreHttpRequestsOptions
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html
+  commentId: T:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions
+  nameWithType: PnPCoreHttpRequestsOptions
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.MicrosoftGraph
+  name: MicrosoftGraph
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_MicrosoftGraph
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.MicrosoftGraph
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.MicrosoftGraph
+  nameWithType: PnPCoreHttpRequestsOptions.MicrosoftGraph
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.MicrosoftGraph*
+  name: MicrosoftGraph
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_MicrosoftGraph_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.MicrosoftGraph
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.MicrosoftGraph
+  nameWithType: PnPCoreHttpRequestsOptions.MicrosoftGraph
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.SharePointRest
+  name: SharePointRest
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_SharePointRest
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.SharePointRest
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.SharePointRest
+  nameWithType: PnPCoreHttpRequestsOptions.SharePointRest
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.SharePointRest*
+  name: SharePointRest
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_SharePointRest_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.SharePointRest
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.SharePointRest
+  nameWithType: PnPCoreHttpRequestsOptions.SharePointRest
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.UserAgent
+  name: UserAgent
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_UserAgent
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.UserAgent
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.UserAgent
+  nameWithType: PnPCoreHttpRequestsOptions.UserAgent
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.UserAgent*
+  name: UserAgent
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_UserAgent_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.UserAgent
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.UserAgent
+  nameWithType: PnPCoreHttpRequestsOptions.UserAgent
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions
+  name: PnPCoreHttpRequestsSharePointRestOptions
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html
+  commentId: T:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DelayInSeconds
+  name: DelayInSeconds
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_DelayInSeconds
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DelayInSeconds
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DelayInSeconds
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.DelayInSeconds
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DelayInSeconds*
+  name: DelayInSeconds
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_DelayInSeconds_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DelayInSeconds
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.DelayInSeconds
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.DelayInSeconds
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.MaxRetries
+  name: MaxRetries
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_MaxRetries
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.MaxRetries
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.MaxRetries
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.MaxRetries
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.MaxRetries*
+  name: MaxRetries
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_MaxRetries_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.MaxRetries
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.MaxRetries
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.MaxRetries
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseIncrementalDelay
+  name: UseIncrementalDelay
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_UseIncrementalDelay
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseIncrementalDelay
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseIncrementalDelay
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.UseIncrementalDelay
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseIncrementalDelay*
+  name: UseIncrementalDelay
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_UseIncrementalDelay_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseIncrementalDelay
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseIncrementalDelay
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.UseIncrementalDelay
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseRetryAfterHeader
+  name: UseRetryAfterHeader
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_UseRetryAfterHeader
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseRetryAfterHeader
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseRetryAfterHeader
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.UseRetryAfterHeader
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseRetryAfterHeader*
+  name: UseRetryAfterHeader
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsSharePointRestOptions_UseRetryAfterHeader_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseRetryAfterHeader
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.UseRetryAfterHeader
+  nameWithType: PnPCoreHttpRequestsSharePointRestOptions.UseRetryAfterHeader
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions
   name: PnPCoreOptions
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html
   commentId: T:PnP.Core.Services.Builder.Configuration.PnPCoreOptions
   fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions
   nameWithType: PnPCoreOptions
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.AADTenantId
+  name: AADTenantId
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_AADTenantId
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.AADTenantId
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.AADTenantId
+  nameWithType: PnPCoreOptions.AADTenantId
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.AADTenantId*
+  name: AADTenantId
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_AADTenantId_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.AADTenantId
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.AADTenantId
+  nameWithType: PnPCoreOptions.AADTenantId
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Credentials
   name: Credentials
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_Credentials
@@ -18072,45 +18291,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Credentials
   nameWithType: PnPCoreOptions.Credentials
-- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
-  name: GraphAlwaysUseBeta
-  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphAlwaysUseBeta
-  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
-  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
-  nameWithType: PnPCoreOptions.GraphAlwaysUseBeta
-- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta*
-  name: GraphAlwaysUseBeta
-  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphAlwaysUseBeta_
-  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.DisableTelemetry
+  name: DisableTelemetry
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_DisableTelemetry
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.DisableTelemetry
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.DisableTelemetry
+  nameWithType: PnPCoreOptions.DisableTelemetry
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.DisableTelemetry*
+  name: DisableTelemetry
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_DisableTelemetry_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.DisableTelemetry
   isSpec: "True"
-  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphAlwaysUseBeta
-  nameWithType: PnPCoreOptions.GraphAlwaysUseBeta
-- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
-  name: GraphCanUseBeta
-  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphCanUseBeta
-  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
-  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
-  nameWithType: PnPCoreOptions.GraphCanUseBeta
-- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta*
-  name: GraphCanUseBeta
-  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphCanUseBeta_
-  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.DisableTelemetry
+  nameWithType: PnPCoreOptions.DisableTelemetry
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.HttpRequests
+  name: HttpRequests
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_HttpRequests
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.HttpRequests
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.HttpRequests
+  nameWithType: PnPCoreOptions.HttpRequests
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.HttpRequests*
+  name: HttpRequests
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_HttpRequests_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.HttpRequests
   isSpec: "True"
-  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphCanUseBeta
-  nameWithType: PnPCoreOptions.GraphCanUseBeta
-- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
-  name: GraphFirst
-  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphFirst
-  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
-  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
-  nameWithType: PnPCoreOptions.GraphFirst
-- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst*
-  name: GraphFirst
-  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_GraphFirst_
-  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.HttpRequests
+  nameWithType: PnPCoreOptions.HttpRequests
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.PnPContext
+  name: PnPContext
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_PnPContext
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.PnPContext
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.PnPContext
+  nameWithType: PnPCoreOptions.PnPContext
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.PnPContext*
+  name: PnPContext
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_PnPContext_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreOptions.PnPContext
   isSpec: "True"
-  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.GraphFirst
-  nameWithType: PnPCoreOptions.GraphFirst
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.PnPContext
+  nameWithType: PnPCoreOptions.PnPContext
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreOptions.Sites
   name: Sites
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreOptions_Sites
@@ -18473,222 +18692,21 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync
   nameWithType: IPnPContextFactory.CreateAsync
-- uid: PnP.Core.Services.ISettings
-  name: ISettings
-  href: api/PnP.Core.Services.ISettings.html
-  commentId: T:PnP.Core.Services.ISettings
-  fullName: PnP.Core.Services.ISettings
-  nameWithType: ISettings
-- uid: PnP.Core.Services.ISettings.AADTenantId
-  name: AADTenantId
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_AADTenantId
-  commentId: P:PnP.Core.Services.ISettings.AADTenantId
-  fullName: PnP.Core.Services.ISettings.AADTenantId
-  nameWithType: ISettings.AADTenantId
-- uid: PnP.Core.Services.ISettings.AADTenantId*
-  name: AADTenantId
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_AADTenantId_
-  commentId: Overload:PnP.Core.Services.ISettings.AADTenantId
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.AADTenantId
-  nameWithType: ISettings.AADTenantId
-- uid: PnP.Core.Services.ISettings.DisableTelemetry
-  name: DisableTelemetry
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_DisableTelemetry
-  commentId: P:PnP.Core.Services.ISettings.DisableTelemetry
-  fullName: PnP.Core.Services.ISettings.DisableTelemetry
-  nameWithType: ISettings.DisableTelemetry
-- uid: PnP.Core.Services.ISettings.DisableTelemetry*
-  name: DisableTelemetry
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_DisableTelemetry_
-  commentId: Overload:PnP.Core.Services.ISettings.DisableTelemetry
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.DisableTelemetry
-  nameWithType: ISettings.DisableTelemetry
-- uid: PnP.Core.Services.ISettings.GraphAlwaysUseBeta
-  name: GraphAlwaysUseBeta
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_GraphAlwaysUseBeta
-  commentId: P:PnP.Core.Services.ISettings.GraphAlwaysUseBeta
-  fullName: PnP.Core.Services.ISettings.GraphAlwaysUseBeta
-  nameWithType: ISettings.GraphAlwaysUseBeta
-- uid: PnP.Core.Services.ISettings.GraphAlwaysUseBeta*
-  name: GraphAlwaysUseBeta
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_GraphAlwaysUseBeta_
-  commentId: Overload:PnP.Core.Services.ISettings.GraphAlwaysUseBeta
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.GraphAlwaysUseBeta
-  nameWithType: ISettings.GraphAlwaysUseBeta
-- uid: PnP.Core.Services.ISettings.GraphCanUseBeta
-  name: GraphCanUseBeta
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_GraphCanUseBeta
-  commentId: P:PnP.Core.Services.ISettings.GraphCanUseBeta
-  fullName: PnP.Core.Services.ISettings.GraphCanUseBeta
-  nameWithType: ISettings.GraphCanUseBeta
-- uid: PnP.Core.Services.ISettings.GraphCanUseBeta*
-  name: GraphCanUseBeta
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_GraphCanUseBeta_
-  commentId: Overload:PnP.Core.Services.ISettings.GraphCanUseBeta
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.GraphCanUseBeta
-  nameWithType: ISettings.GraphCanUseBeta
-- uid: PnP.Core.Services.ISettings.GraphFirst
-  name: GraphFirst
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_GraphFirst
-  commentId: P:PnP.Core.Services.ISettings.GraphFirst
-  fullName: PnP.Core.Services.ISettings.GraphFirst
-  nameWithType: ISettings.GraphFirst
-- uid: PnP.Core.Services.ISettings.GraphFirst*
-  name: GraphFirst
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_GraphFirst_
-  commentId: Overload:PnP.Core.Services.ISettings.GraphFirst
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.GraphFirst
-  nameWithType: ISettings.GraphFirst
-- uid: PnP.Core.Services.ISettings.HttpMicrosoftGraphDelayInSeconds
-  name: HttpMicrosoftGraphDelayInSeconds
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpMicrosoftGraphDelayInSeconds
-  commentId: P:PnP.Core.Services.ISettings.HttpMicrosoftGraphDelayInSeconds
-  fullName: PnP.Core.Services.ISettings.HttpMicrosoftGraphDelayInSeconds
-  nameWithType: ISettings.HttpMicrosoftGraphDelayInSeconds
-- uid: PnP.Core.Services.ISettings.HttpMicrosoftGraphDelayInSeconds*
-  name: HttpMicrosoftGraphDelayInSeconds
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpMicrosoftGraphDelayInSeconds_
-  commentId: Overload:PnP.Core.Services.ISettings.HttpMicrosoftGraphDelayInSeconds
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.HttpMicrosoftGraphDelayInSeconds
-  nameWithType: ISettings.HttpMicrosoftGraphDelayInSeconds
-- uid: PnP.Core.Services.ISettings.HttpMicrosoftGraphMaxRetries
-  name: HttpMicrosoftGraphMaxRetries
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpMicrosoftGraphMaxRetries
-  commentId: P:PnP.Core.Services.ISettings.HttpMicrosoftGraphMaxRetries
-  fullName: PnP.Core.Services.ISettings.HttpMicrosoftGraphMaxRetries
-  nameWithType: ISettings.HttpMicrosoftGraphMaxRetries
-- uid: PnP.Core.Services.ISettings.HttpMicrosoftGraphMaxRetries*
-  name: HttpMicrosoftGraphMaxRetries
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpMicrosoftGraphMaxRetries_
-  commentId: Overload:PnP.Core.Services.ISettings.HttpMicrosoftGraphMaxRetries
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.HttpMicrosoftGraphMaxRetries
-  nameWithType: ISettings.HttpMicrosoftGraphMaxRetries
-- uid: PnP.Core.Services.ISettings.HttpMicrosoftGraphUseIncrementalDelay
-  name: HttpMicrosoftGraphUseIncrementalDelay
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpMicrosoftGraphUseIncrementalDelay
-  commentId: P:PnP.Core.Services.ISettings.HttpMicrosoftGraphUseIncrementalDelay
-  fullName: PnP.Core.Services.ISettings.HttpMicrosoftGraphUseIncrementalDelay
-  nameWithType: ISettings.HttpMicrosoftGraphUseIncrementalDelay
-- uid: PnP.Core.Services.ISettings.HttpMicrosoftGraphUseIncrementalDelay*
-  name: HttpMicrosoftGraphUseIncrementalDelay
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpMicrosoftGraphUseIncrementalDelay_
-  commentId: Overload:PnP.Core.Services.ISettings.HttpMicrosoftGraphUseIncrementalDelay
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.HttpMicrosoftGraphUseIncrementalDelay
-  nameWithType: ISettings.HttpMicrosoftGraphUseIncrementalDelay
-- uid: PnP.Core.Services.ISettings.HttpMicrosoftGraphUseRetryAfterHeader
-  name: HttpMicrosoftGraphUseRetryAfterHeader
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpMicrosoftGraphUseRetryAfterHeader
-  commentId: P:PnP.Core.Services.ISettings.HttpMicrosoftGraphUseRetryAfterHeader
-  fullName: PnP.Core.Services.ISettings.HttpMicrosoftGraphUseRetryAfterHeader
-  nameWithType: ISettings.HttpMicrosoftGraphUseRetryAfterHeader
-- uid: PnP.Core.Services.ISettings.HttpMicrosoftGraphUseRetryAfterHeader*
-  name: HttpMicrosoftGraphUseRetryAfterHeader
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpMicrosoftGraphUseRetryAfterHeader_
-  commentId: Overload:PnP.Core.Services.ISettings.HttpMicrosoftGraphUseRetryAfterHeader
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.HttpMicrosoftGraphUseRetryAfterHeader
-  nameWithType: ISettings.HttpMicrosoftGraphUseRetryAfterHeader
-- uid: PnP.Core.Services.ISettings.HttpSharePointRestDelayInSeconds
-  name: HttpSharePointRestDelayInSeconds
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpSharePointRestDelayInSeconds
-  commentId: P:PnP.Core.Services.ISettings.HttpSharePointRestDelayInSeconds
-  fullName: PnP.Core.Services.ISettings.HttpSharePointRestDelayInSeconds
-  nameWithType: ISettings.HttpSharePointRestDelayInSeconds
-- uid: PnP.Core.Services.ISettings.HttpSharePointRestDelayInSeconds*
-  name: HttpSharePointRestDelayInSeconds
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpSharePointRestDelayInSeconds_
-  commentId: Overload:PnP.Core.Services.ISettings.HttpSharePointRestDelayInSeconds
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.HttpSharePointRestDelayInSeconds
-  nameWithType: ISettings.HttpSharePointRestDelayInSeconds
-- uid: PnP.Core.Services.ISettings.HttpSharePointRestMaxRetries
-  name: HttpSharePointRestMaxRetries
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpSharePointRestMaxRetries
-  commentId: P:PnP.Core.Services.ISettings.HttpSharePointRestMaxRetries
-  fullName: PnP.Core.Services.ISettings.HttpSharePointRestMaxRetries
-  nameWithType: ISettings.HttpSharePointRestMaxRetries
-- uid: PnP.Core.Services.ISettings.HttpSharePointRestMaxRetries*
-  name: HttpSharePointRestMaxRetries
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpSharePointRestMaxRetries_
-  commentId: Overload:PnP.Core.Services.ISettings.HttpSharePointRestMaxRetries
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.HttpSharePointRestMaxRetries
-  nameWithType: ISettings.HttpSharePointRestMaxRetries
-- uid: PnP.Core.Services.ISettings.HttpSharePointRestUseIncrementalDelay
-  name: HttpSharePointRestUseIncrementalDelay
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpSharePointRestUseIncrementalDelay
-  commentId: P:PnP.Core.Services.ISettings.HttpSharePointRestUseIncrementalDelay
-  fullName: PnP.Core.Services.ISettings.HttpSharePointRestUseIncrementalDelay
-  nameWithType: ISettings.HttpSharePointRestUseIncrementalDelay
-- uid: PnP.Core.Services.ISettings.HttpSharePointRestUseIncrementalDelay*
-  name: HttpSharePointRestUseIncrementalDelay
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpSharePointRestUseIncrementalDelay_
-  commentId: Overload:PnP.Core.Services.ISettings.HttpSharePointRestUseIncrementalDelay
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.HttpSharePointRestUseIncrementalDelay
-  nameWithType: ISettings.HttpSharePointRestUseIncrementalDelay
-- uid: PnP.Core.Services.ISettings.HttpSharePointRestUseRetryAfterHeader
-  name: HttpSharePointRestUseRetryAfterHeader
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpSharePointRestUseRetryAfterHeader
-  commentId: P:PnP.Core.Services.ISettings.HttpSharePointRestUseRetryAfterHeader
-  fullName: PnP.Core.Services.ISettings.HttpSharePointRestUseRetryAfterHeader
-  nameWithType: ISettings.HttpSharePointRestUseRetryAfterHeader
-- uid: PnP.Core.Services.ISettings.HttpSharePointRestUseRetryAfterHeader*
-  name: HttpSharePointRestUseRetryAfterHeader
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpSharePointRestUseRetryAfterHeader_
-  commentId: Overload:PnP.Core.Services.ISettings.HttpSharePointRestUseRetryAfterHeader
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.HttpSharePointRestUseRetryAfterHeader
-  nameWithType: ISettings.HttpSharePointRestUseRetryAfterHeader
-- uid: PnP.Core.Services.ISettings.HttpUserAgent
-  name: HttpUserAgent
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpUserAgent
-  commentId: P:PnP.Core.Services.ISettings.HttpUserAgent
-  fullName: PnP.Core.Services.ISettings.HttpUserAgent
-  nameWithType: ISettings.HttpUserAgent
-- uid: PnP.Core.Services.ISettings.HttpUserAgent*
-  name: HttpUserAgent
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_HttpUserAgent_
-  commentId: Overload:PnP.Core.Services.ISettings.HttpUserAgent
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.HttpUserAgent
-  nameWithType: ISettings.HttpUserAgent
-- uid: PnP.Core.Services.ISettings.VersionTag
-  name: VersionTag
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_VersionTag
-  commentId: P:PnP.Core.Services.ISettings.VersionTag
-  fullName: PnP.Core.Services.ISettings.VersionTag
-  nameWithType: ISettings.VersionTag
-- uid: PnP.Core.Services.ISettings.VersionTag*
-  name: VersionTag
-  href: api/PnP.Core.Services.ISettings.html#PnP_Core_Services_ISettings_VersionTag_
-  commentId: Overload:PnP.Core.Services.ISettings.VersionTag
-  isSpec: "True"
-  fullName: PnP.Core.Services.ISettings.VersionTag
-  nameWithType: ISettings.VersionTag
 - uid: PnP.Core.Services.MicrosoftGraphClient
   name: MicrosoftGraphClient
   href: api/PnP.Core.Services.MicrosoftGraphClient.html
   commentId: T:PnP.Core.Services.MicrosoftGraphClient
   fullName: PnP.Core.Services.MicrosoftGraphClient
   nameWithType: MicrosoftGraphClient
-- uid: PnP.Core.Services.MicrosoftGraphClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.MicrosoftGraphClient},PnP.Core.Services.ISettings)
-  name: MicrosoftGraphClient(HttpClient, ILogger<MicrosoftGraphClient>, ISettings)
-  href: api/PnP.Core.Services.MicrosoftGraphClient.html#PnP_Core_Services_MicrosoftGraphClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_MicrosoftGraphClient__PnP_Core_Services_ISettings_
-  commentId: M:PnP.Core.Services.MicrosoftGraphClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.MicrosoftGraphClient},PnP.Core.Services.ISettings)
-  name.vb: MicrosoftGraphClient(HttpClient, ILogger(Of MicrosoftGraphClient), ISettings)
-  fullName: PnP.Core.Services.MicrosoftGraphClient.MicrosoftGraphClient(System.Net.Http.HttpClient, ILogger<PnP.Core.Services.MicrosoftGraphClient>, PnP.Core.Services.ISettings)
-  fullName.vb: PnP.Core.Services.MicrosoftGraphClient.MicrosoftGraphClient(System.Net.Http.HttpClient, ILogger(Of PnP.Core.Services.MicrosoftGraphClient), PnP.Core.Services.ISettings)
-  nameWithType: MicrosoftGraphClient.MicrosoftGraphClient(HttpClient, ILogger<MicrosoftGraphClient>, ISettings)
-  nameWithType.vb: MicrosoftGraphClient.MicrosoftGraphClient(HttpClient, ILogger(Of MicrosoftGraphClient), ISettings)
+- uid: PnP.Core.Services.MicrosoftGraphClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.MicrosoftGraphClient},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions})
+  name: MicrosoftGraphClient(HttpClient, ILogger<MicrosoftGraphClient>, IOptions<PnPGlobalSettingsOptions>)
+  href: api/PnP.Core.Services.MicrosoftGraphClient.html#PnP_Core_Services_MicrosoftGraphClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_MicrosoftGraphClient__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__
+  commentId: M:PnP.Core.Services.MicrosoftGraphClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.MicrosoftGraphClient},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions})
+  name.vb: MicrosoftGraphClient(HttpClient, ILogger(Of MicrosoftGraphClient), IOptions(Of PnPGlobalSettingsOptions))
+  fullName: PnP.Core.Services.MicrosoftGraphClient.MicrosoftGraphClient(System.Net.Http.HttpClient, ILogger<PnP.Core.Services.MicrosoftGraphClient>, IOptions<PnP.Core.Services.PnPGlobalSettingsOptions>)
+  fullName.vb: PnP.Core.Services.MicrosoftGraphClient.MicrosoftGraphClient(System.Net.Http.HttpClient, ILogger(Of PnP.Core.Services.MicrosoftGraphClient), IOptions(Of PnP.Core.Services.PnPGlobalSettingsOptions))
+  nameWithType: MicrosoftGraphClient.MicrosoftGraphClient(HttpClient, ILogger<MicrosoftGraphClient>, IOptions<PnPGlobalSettingsOptions>)
+  nameWithType.vb: MicrosoftGraphClient.MicrosoftGraphClient(HttpClient, ILogger(Of MicrosoftGraphClient), IOptions(Of PnPGlobalSettingsOptions))
 - uid: PnP.Core.Services.MicrosoftGraphClient.#ctor*
   name: MicrosoftGraphClient
   href: api/PnP.Core.Services.MicrosoftGraphClient.html#PnP_Core_Services_MicrosoftGraphClient__ctor_
@@ -19397,15 +19415,15 @@ references:
   commentId: T:PnP.Core.Services.PnPContextFactory
   fullName: PnP.Core.Services.PnPContextFactory
   nameWithType: PnPContextFactory
-- uid: PnP.Core.Services.PnPContextFactory.#ctor(IOptionsMonitor{PnP.Core.Services.PnPContextFactoryOptions},ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.IAuthenticationProviderFactory,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,TelemetryClient)
-  name: PnPContextFactory(IOptionsMonitor<PnPContextFactoryOptions>, ILogger<PnPContext>, IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
-  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_IOptionsMonitor_PnP_Core_Services_PnPContextFactoryOptions__ILogger_PnP_Core_Services_PnPContext__PnP_Core_Services_IAuthenticationProviderFactory_PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_PnP_Core_Services_ISettings_TelemetryClient_
-  commentId: M:PnP.Core.Services.PnPContextFactory.#ctor(IOptionsMonitor{PnP.Core.Services.PnPContextFactoryOptions},ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.IAuthenticationProviderFactory,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,PnP.Core.Services.ISettings,TelemetryClient)
-  name.vb: PnPContextFactory(IOptionsMonitor(Of PnPContextFactoryOptions), ILogger(Of PnPContext), IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
-  fullName: PnP.Core.Services.PnPContextFactory.PnPContextFactory(IOptionsMonitor<PnP.Core.Services.PnPContextFactoryOptions>, ILogger<PnP.Core.Services.PnPContext>, PnP.Core.Services.IAuthenticationProviderFactory, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, PnP.Core.Services.ISettings, TelemetryClient)
-  fullName.vb: PnP.Core.Services.PnPContextFactory.PnPContextFactory(IOptionsMonitor(Of PnP.Core.Services.PnPContextFactoryOptions), ILogger(Of PnP.Core.Services.PnPContext), PnP.Core.Services.IAuthenticationProviderFactory, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, PnP.Core.Services.ISettings, TelemetryClient)
-  nameWithType: PnPContextFactory.PnPContextFactory(IOptionsMonitor<PnPContextFactoryOptions>, ILogger<PnPContext>, IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
-  nameWithType.vb: PnPContextFactory.PnPContextFactory(IOptionsMonitor(Of PnPContextFactoryOptions), ILogger(Of PnPContext), IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, ISettings, TelemetryClient)
+- uid: PnP.Core.Services.PnPContextFactory.#ctor(IOptionsMonitor{PnP.Core.Services.PnPContextFactoryOptions},ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.IAuthenticationProviderFactory,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions},TelemetryClient)
+  name: PnPContextFactory(IOptionsMonitor<PnPContextFactoryOptions>, ILogger<PnPContext>, IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>, TelemetryClient)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_IOptionsMonitor_PnP_Core_Services_PnPContextFactoryOptions__ILogger_PnP_Core_Services_PnPContext__PnP_Core_Services_IAuthenticationProviderFactory_PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_IOptions_PnP_Core_Services_PnPContextFactoryOptions__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__TelemetryClient_
+  commentId: M:PnP.Core.Services.PnPContextFactory.#ctor(IOptionsMonitor{PnP.Core.Services.PnPContextFactoryOptions},ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.IAuthenticationProviderFactory,PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions},TelemetryClient)
+  name.vb: PnPContextFactory(IOptionsMonitor(Of PnPContextFactoryOptions), ILogger(Of PnPContext), IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions), TelemetryClient)
+  fullName: PnP.Core.Services.PnPContextFactory.PnPContextFactory(IOptionsMonitor<PnP.Core.Services.PnPContextFactoryOptions>, ILogger<PnP.Core.Services.PnPContext>, PnP.Core.Services.IAuthenticationProviderFactory, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions<PnP.Core.Services.PnPContextFactoryOptions>, IOptions<PnP.Core.Services.PnPGlobalSettingsOptions>, TelemetryClient)
+  fullName.vb: PnP.Core.Services.PnPContextFactory.PnPContextFactory(IOptionsMonitor(Of PnP.Core.Services.PnPContextFactoryOptions), ILogger(Of PnP.Core.Services.PnPContext), PnP.Core.Services.IAuthenticationProviderFactory, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions(Of PnP.Core.Services.PnPContextFactoryOptions), IOptions(Of PnP.Core.Services.PnPGlobalSettingsOptions), TelemetryClient)
+  nameWithType: PnPContextFactory.PnPContextFactory(IOptionsMonitor<PnPContextFactoryOptions>, ILogger<PnPContext>, IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>, TelemetryClient)
+  nameWithType.vb: PnPContextFactory.PnPContextFactory(IOptionsMonitor(Of PnPContextFactoryOptions), ILogger(Of PnPContext), IAuthenticationProviderFactory, SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions), TelemetryClient)
 - uid: PnP.Core.Services.PnPContextFactory.#ctor*
   name: PnPContextFactory
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_
@@ -19426,6 +19444,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.AuthenticationProviderFactory
   nameWithType: PnPContextFactory.AuthenticationProviderFactory
+- uid: PnP.Core.Services.PnPContextFactory.ContextOptions
+  name: ContextOptions
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_ContextOptions
+  commentId: P:PnP.Core.Services.PnPContextFactory.ContextOptions
+  fullName: PnP.Core.Services.PnPContextFactory.ContextOptions
+  nameWithType: PnPContextFactory.ContextOptions
+- uid: PnP.Core.Services.PnPContextFactory.ContextOptions*
+  name: ContextOptions
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_ContextOptions_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.ContextOptions
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.ContextOptions
+  nameWithType: PnPContextFactory.ContextOptions
 - uid: PnP.Core.Services.PnPContextFactory.Create(System.Guid)
   name: Create(Guid)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_Guid_
@@ -19524,6 +19555,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.CreateAsync
   nameWithType: PnPContextFactory.CreateAsync
+- uid: PnP.Core.Services.PnPContextFactory.GlobalOptions
+  name: GlobalOptions
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_GlobalOptions
+  commentId: P:PnP.Core.Services.PnPContextFactory.GlobalOptions
+  fullName: PnP.Core.Services.PnPContextFactory.GlobalOptions
+  nameWithType: PnPContextFactory.GlobalOptions
+- uid: PnP.Core.Services.PnPContextFactory.GlobalOptions*
+  name: GlobalOptions
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_GlobalOptions_
+  commentId: Overload:PnP.Core.Services.PnPContextFactory.GlobalOptions
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContextFactory.GlobalOptions
+  nameWithType: PnPContextFactory.GlobalOptions
 - uid: PnP.Core.Services.PnPContextFactory.Log
   name: Log
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Log
@@ -19563,19 +19607,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.Options
   nameWithType: PnPContextFactory.Options
-- uid: PnP.Core.Services.PnPContextFactory.SettingsClient
-  name: SettingsClient
-  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_SettingsClient
-  commentId: P:PnP.Core.Services.PnPContextFactory.SettingsClient
-  fullName: PnP.Core.Services.PnPContextFactory.SettingsClient
-  nameWithType: PnPContextFactory.SettingsClient
-- uid: PnP.Core.Services.PnPContextFactory.SettingsClient*
-  name: SettingsClient
-  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_SettingsClient_
-  commentId: Overload:PnP.Core.Services.PnPContextFactory.SettingsClient
-  isSpec: "True"
-  fullName: PnP.Core.Services.PnPContextFactory.SettingsClient
-  nameWithType: PnPContextFactory.SettingsClient
 - uid: PnP.Core.Services.PnPContextFactory.SharePointRestClient
   name: SharePointRestClient
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_SharePointRestClient
@@ -19733,257 +19764,205 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactoryOptionsConfiguration.SiteUrl
   nameWithType: PnPContextFactoryOptionsConfiguration.SiteUrl
-- uid: PnP.Core.Services.Settings
-  name: Settings
-  href: api/PnP.Core.Services.Settings.html
-  commentId: T:PnP.Core.Services.Settings
-  fullName: PnP.Core.Services.Settings
-  nameWithType: Settings
-- uid: PnP.Core.Services.Settings.#ctor(ILogger{PnP.Core.Services.Settings},IConfiguration)
-  name: Settings(ILogger<Settings>, IConfiguration)
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings__ctor_ILogger_PnP_Core_Services_Settings__IConfiguration_
-  commentId: M:PnP.Core.Services.Settings.#ctor(ILogger{PnP.Core.Services.Settings},IConfiguration)
-  name.vb: Settings(ILogger(Of Settings), IConfiguration)
-  fullName: PnP.Core.Services.Settings.Settings(ILogger<PnP.Core.Services.Settings>, IConfiguration)
-  fullName.vb: PnP.Core.Services.Settings.Settings(ILogger(Of PnP.Core.Services.Settings), IConfiguration)
-  nameWithType: Settings.Settings(ILogger<Settings>, IConfiguration)
-  nameWithType.vb: Settings.Settings(ILogger(Of Settings), IConfiguration)
-- uid: PnP.Core.Services.Settings.#ctor*
-  name: Settings
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings__ctor_
-  commentId: Overload:PnP.Core.Services.Settings.#ctor
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions
+  name: PnPGlobalSettingsOptions
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html
+  commentId: T:PnP.Core.Services.PnPGlobalSettingsOptions
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions
+  nameWithType: PnPGlobalSettingsOptions
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.#ctor
+  name: PnPGlobalSettingsOptions()
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions__ctor
+  commentId: M:PnP.Core.Services.PnPGlobalSettingsOptions.#ctor
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.PnPGlobalSettingsOptions()
+  nameWithType: PnPGlobalSettingsOptions.PnPGlobalSettingsOptions()
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.#ctor(ILogger{PnP.Core.Services.PnPGlobalSettingsOptions})
+  name: PnPGlobalSettingsOptions(ILogger<PnPGlobalSettingsOptions>)
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions__ctor_ILogger_PnP_Core_Services_PnPGlobalSettingsOptions__
+  commentId: M:PnP.Core.Services.PnPGlobalSettingsOptions.#ctor(ILogger{PnP.Core.Services.PnPGlobalSettingsOptions})
+  name.vb: PnPGlobalSettingsOptions(ILogger(Of PnPGlobalSettingsOptions))
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.PnPGlobalSettingsOptions(ILogger<PnP.Core.Services.PnPGlobalSettingsOptions>)
+  fullName.vb: PnP.Core.Services.PnPGlobalSettingsOptions.PnPGlobalSettingsOptions(ILogger(Of PnP.Core.Services.PnPGlobalSettingsOptions))
+  nameWithType: PnPGlobalSettingsOptions.PnPGlobalSettingsOptions(ILogger<PnPGlobalSettingsOptions>)
+  nameWithType.vb: PnPGlobalSettingsOptions.PnPGlobalSettingsOptions(ILogger(Of PnPGlobalSettingsOptions))
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.#ctor*
+  name: PnPGlobalSettingsOptions
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions__ctor_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.#ctor
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.Settings
-  nameWithType: Settings.Settings
-- uid: PnP.Core.Services.Settings.AADTenantId
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.PnPGlobalSettingsOptions
+  nameWithType: PnPGlobalSettingsOptions.PnPGlobalSettingsOptions
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId
   name: AADTenantId
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_AADTenantId
-  commentId: P:PnP.Core.Services.Settings.AADTenantId
-  fullName: PnP.Core.Services.Settings.AADTenantId
-  nameWithType: Settings.AADTenantId
-- uid: PnP.Core.Services.Settings.AADTenantId*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_AADTenantId
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId
+  nameWithType: PnPGlobalSettingsOptions.AADTenantId
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId*
   name: AADTenantId
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_AADTenantId_
-  commentId: Overload:PnP.Core.Services.Settings.AADTenantId
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_AADTenantId_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.AADTenantId
-  nameWithType: Settings.AADTenantId
-- uid: PnP.Core.Services.Settings.DisableTelemetry
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.AADTenantId
+  nameWithType: PnPGlobalSettingsOptions.AADTenantId
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry
   name: DisableTelemetry
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_DisableTelemetry
-  commentId: P:PnP.Core.Services.Settings.DisableTelemetry
-  fullName: PnP.Core.Services.Settings.DisableTelemetry
-  nameWithType: Settings.DisableTelemetry
-- uid: PnP.Core.Services.Settings.DisableTelemetry*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_DisableTelemetry
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry
+  nameWithType: PnPGlobalSettingsOptions.DisableTelemetry
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry*
   name: DisableTelemetry
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_DisableTelemetry_
-  commentId: Overload:PnP.Core.Services.Settings.DisableTelemetry
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_DisableTelemetry_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.DisableTelemetry
-  nameWithType: Settings.DisableTelemetry
-- uid: PnP.Core.Services.Settings.GraphAlwaysUseBeta
-  name: GraphAlwaysUseBeta
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_GraphAlwaysUseBeta
-  commentId: P:PnP.Core.Services.Settings.GraphAlwaysUseBeta
-  fullName: PnP.Core.Services.Settings.GraphAlwaysUseBeta
-  nameWithType: Settings.GraphAlwaysUseBeta
-- uid: PnP.Core.Services.Settings.GraphAlwaysUseBeta*
-  name: GraphAlwaysUseBeta
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_GraphAlwaysUseBeta_
-  commentId: Overload:PnP.Core.Services.Settings.GraphAlwaysUseBeta
-  isSpec: "True"
-  fullName: PnP.Core.Services.Settings.GraphAlwaysUseBeta
-  nameWithType: Settings.GraphAlwaysUseBeta
-- uid: PnP.Core.Services.Settings.GraphCanUseBeta
-  name: GraphCanUseBeta
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_GraphCanUseBeta
-  commentId: P:PnP.Core.Services.Settings.GraphCanUseBeta
-  fullName: PnP.Core.Services.Settings.GraphCanUseBeta
-  nameWithType: Settings.GraphCanUseBeta
-- uid: PnP.Core.Services.Settings.GraphCanUseBeta*
-  name: GraphCanUseBeta
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_GraphCanUseBeta_
-  commentId: Overload:PnP.Core.Services.Settings.GraphCanUseBeta
-  isSpec: "True"
-  fullName: PnP.Core.Services.Settings.GraphCanUseBeta
-  nameWithType: Settings.GraphCanUseBeta
-- uid: PnP.Core.Services.Settings.GraphFirst
-  name: GraphFirst
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_GraphFirst
-  commentId: P:PnP.Core.Services.Settings.GraphFirst
-  fullName: PnP.Core.Services.Settings.GraphFirst
-  nameWithType: Settings.GraphFirst
-- uid: PnP.Core.Services.Settings.GraphFirst*
-  name: GraphFirst
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_GraphFirst_
-  commentId: Overload:PnP.Core.Services.Settings.GraphFirst
-  isSpec: "True"
-  fullName: PnP.Core.Services.Settings.GraphFirst
-  nameWithType: Settings.GraphFirst
-- uid: PnP.Core.Services.Settings.HttpMicrosoftGraphDelayInSeconds
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.DisableTelemetry
+  nameWithType: PnPGlobalSettingsOptions.DisableTelemetry
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds
   name: HttpMicrosoftGraphDelayInSeconds
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpMicrosoftGraphDelayInSeconds
-  commentId: P:PnP.Core.Services.Settings.HttpMicrosoftGraphDelayInSeconds
-  fullName: PnP.Core.Services.Settings.HttpMicrosoftGraphDelayInSeconds
-  nameWithType: Settings.HttpMicrosoftGraphDelayInSeconds
-- uid: PnP.Core.Services.Settings.HttpMicrosoftGraphDelayInSeconds*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds
+  nameWithType: PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds*
   name: HttpMicrosoftGraphDelayInSeconds
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpMicrosoftGraphDelayInSeconds_
-  commentId: Overload:PnP.Core.Services.Settings.HttpMicrosoftGraphDelayInSeconds
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphDelayInSeconds_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.HttpMicrosoftGraphDelayInSeconds
-  nameWithType: Settings.HttpMicrosoftGraphDelayInSeconds
-- uid: PnP.Core.Services.Settings.HttpMicrosoftGraphMaxRetries
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds
+  nameWithType: PnPGlobalSettingsOptions.HttpMicrosoftGraphDelayInSeconds
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries
   name: HttpMicrosoftGraphMaxRetries
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpMicrosoftGraphMaxRetries
-  commentId: P:PnP.Core.Services.Settings.HttpMicrosoftGraphMaxRetries
-  fullName: PnP.Core.Services.Settings.HttpMicrosoftGraphMaxRetries
-  nameWithType: Settings.HttpMicrosoftGraphMaxRetries
-- uid: PnP.Core.Services.Settings.HttpMicrosoftGraphMaxRetries*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphMaxRetries
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries
+  nameWithType: PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries*
   name: HttpMicrosoftGraphMaxRetries
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpMicrosoftGraphMaxRetries_
-  commentId: Overload:PnP.Core.Services.Settings.HttpMicrosoftGraphMaxRetries
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphMaxRetries_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.HttpMicrosoftGraphMaxRetries
-  nameWithType: Settings.HttpMicrosoftGraphMaxRetries
-- uid: PnP.Core.Services.Settings.HttpMicrosoftGraphUseIncrementalDelay
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries
+  nameWithType: PnPGlobalSettingsOptions.HttpMicrosoftGraphMaxRetries
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay
   name: HttpMicrosoftGraphUseIncrementalDelay
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpMicrosoftGraphUseIncrementalDelay
-  commentId: P:PnP.Core.Services.Settings.HttpMicrosoftGraphUseIncrementalDelay
-  fullName: PnP.Core.Services.Settings.HttpMicrosoftGraphUseIncrementalDelay
-  nameWithType: Settings.HttpMicrosoftGraphUseIncrementalDelay
-- uid: PnP.Core.Services.Settings.HttpMicrosoftGraphUseIncrementalDelay*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseIncrementalDelay
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay
+  nameWithType: PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay*
   name: HttpMicrosoftGraphUseIncrementalDelay
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpMicrosoftGraphUseIncrementalDelay_
-  commentId: Overload:PnP.Core.Services.Settings.HttpMicrosoftGraphUseIncrementalDelay
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseIncrementalDelay_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.HttpMicrosoftGraphUseIncrementalDelay
-  nameWithType: Settings.HttpMicrosoftGraphUseIncrementalDelay
-- uid: PnP.Core.Services.Settings.HttpMicrosoftGraphUseRetryAfterHeader
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay
+  nameWithType: PnPGlobalSettingsOptions.HttpMicrosoftGraphUseIncrementalDelay
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader
   name: HttpMicrosoftGraphUseRetryAfterHeader
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpMicrosoftGraphUseRetryAfterHeader
-  commentId: P:PnP.Core.Services.Settings.HttpMicrosoftGraphUseRetryAfterHeader
-  fullName: PnP.Core.Services.Settings.HttpMicrosoftGraphUseRetryAfterHeader
-  nameWithType: Settings.HttpMicrosoftGraphUseRetryAfterHeader
-- uid: PnP.Core.Services.Settings.HttpMicrosoftGraphUseRetryAfterHeader*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseRetryAfterHeader
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader
+  nameWithType: PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader*
   name: HttpMicrosoftGraphUseRetryAfterHeader
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpMicrosoftGraphUseRetryAfterHeader_
-  commentId: Overload:PnP.Core.Services.Settings.HttpMicrosoftGraphUseRetryAfterHeader
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpMicrosoftGraphUseRetryAfterHeader_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.HttpMicrosoftGraphUseRetryAfterHeader
-  nameWithType: Settings.HttpMicrosoftGraphUseRetryAfterHeader
-- uid: PnP.Core.Services.Settings.HttpSharePointRestDelayInSeconds
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader
+  nameWithType: PnPGlobalSettingsOptions.HttpMicrosoftGraphUseRetryAfterHeader
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds
   name: HttpSharePointRestDelayInSeconds
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpSharePointRestDelayInSeconds
-  commentId: P:PnP.Core.Services.Settings.HttpSharePointRestDelayInSeconds
-  fullName: PnP.Core.Services.Settings.HttpSharePointRestDelayInSeconds
-  nameWithType: Settings.HttpSharePointRestDelayInSeconds
-- uid: PnP.Core.Services.Settings.HttpSharePointRestDelayInSeconds*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds*
   name: HttpSharePointRestDelayInSeconds
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpSharePointRestDelayInSeconds_
-  commentId: Overload:PnP.Core.Services.Settings.HttpSharePointRestDelayInSeconds
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestDelayInSeconds_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.HttpSharePointRestDelayInSeconds
-  nameWithType: Settings.HttpSharePointRestDelayInSeconds
-- uid: PnP.Core.Services.Settings.HttpSharePointRestMaxRetries
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestDelayInSeconds
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries
   name: HttpSharePointRestMaxRetries
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpSharePointRestMaxRetries
-  commentId: P:PnP.Core.Services.Settings.HttpSharePointRestMaxRetries
-  fullName: PnP.Core.Services.Settings.HttpSharePointRestMaxRetries
-  nameWithType: Settings.HttpSharePointRestMaxRetries
-- uid: PnP.Core.Services.Settings.HttpSharePointRestMaxRetries*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestMaxRetries
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries*
   name: HttpSharePointRestMaxRetries
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpSharePointRestMaxRetries_
-  commentId: Overload:PnP.Core.Services.Settings.HttpSharePointRestMaxRetries
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestMaxRetries_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.HttpSharePointRestMaxRetries
-  nameWithType: Settings.HttpSharePointRestMaxRetries
-- uid: PnP.Core.Services.Settings.HttpSharePointRestUseIncrementalDelay
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestMaxRetries
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay
   name: HttpSharePointRestUseIncrementalDelay
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpSharePointRestUseIncrementalDelay
-  commentId: P:PnP.Core.Services.Settings.HttpSharePointRestUseIncrementalDelay
-  fullName: PnP.Core.Services.Settings.HttpSharePointRestUseIncrementalDelay
-  nameWithType: Settings.HttpSharePointRestUseIncrementalDelay
-- uid: PnP.Core.Services.Settings.HttpSharePointRestUseIncrementalDelay*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseIncrementalDelay
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay*
   name: HttpSharePointRestUseIncrementalDelay
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpSharePointRestUseIncrementalDelay_
-  commentId: Overload:PnP.Core.Services.Settings.HttpSharePointRestUseIncrementalDelay
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseIncrementalDelay_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.HttpSharePointRestUseIncrementalDelay
-  nameWithType: Settings.HttpSharePointRestUseIncrementalDelay
-- uid: PnP.Core.Services.Settings.HttpSharePointRestUseRetryAfterHeader
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestUseIncrementalDelay
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader
   name: HttpSharePointRestUseRetryAfterHeader
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpSharePointRestUseRetryAfterHeader
-  commentId: P:PnP.Core.Services.Settings.HttpSharePointRestUseRetryAfterHeader
-  fullName: PnP.Core.Services.Settings.HttpSharePointRestUseRetryAfterHeader
-  nameWithType: Settings.HttpSharePointRestUseRetryAfterHeader
-- uid: PnP.Core.Services.Settings.HttpSharePointRestUseRetryAfterHeader*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseRetryAfterHeader
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader*
   name: HttpSharePointRestUseRetryAfterHeader
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpSharePointRestUseRetryAfterHeader_
-  commentId: Overload:PnP.Core.Services.Settings.HttpSharePointRestUseRetryAfterHeader
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpSharePointRestUseRetryAfterHeader_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.HttpSharePointRestUseRetryAfterHeader
-  nameWithType: Settings.HttpSharePointRestUseRetryAfterHeader
-- uid: PnP.Core.Services.Settings.HttpUserAgent
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader
+  nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent
   name: HttpUserAgent
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpUserAgent
-  commentId: P:PnP.Core.Services.Settings.HttpUserAgent
-  fullName: PnP.Core.Services.Settings.HttpUserAgent
-  nameWithType: Settings.HttpUserAgent
-- uid: PnP.Core.Services.Settings.HttpUserAgent*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent
+  nameWithType: PnPGlobalSettingsOptions.HttpUserAgent
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent*
   name: HttpUserAgent
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_HttpUserAgent_
-  commentId: Overload:PnP.Core.Services.Settings.HttpUserAgent
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.HttpUserAgent
-  nameWithType: Settings.HttpUserAgent
-- uid: PnP.Core.Services.Settings.VersionTag
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent
+  nameWithType: PnPGlobalSettingsOptions.HttpUserAgent
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag
   name: VersionTag
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_VersionTag
-  commentId: P:PnP.Core.Services.Settings.VersionTag
-  fullName: PnP.Core.Services.Settings.VersionTag
-  nameWithType: Settings.VersionTag
-- uid: PnP.Core.Services.Settings.VersionTag*
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_VersionTag
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag
+  nameWithType: PnPGlobalSettingsOptions.VersionTag
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag*
   name: VersionTag
-  href: api/PnP.Core.Services.Settings.html#PnP_Core_Services_Settings_VersionTag_
-  commentId: Overload:PnP.Core.Services.Settings.VersionTag
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_VersionTag_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag
   isSpec: "True"
-  fullName: PnP.Core.Services.Settings.VersionTag
-  nameWithType: Settings.VersionTag
-- uid: PnP.Core.Services.SettingsCollectionExtensions
-  name: SettingsCollectionExtensions
-  href: api/PnP.Core.Services.SettingsCollectionExtensions.html
-  commentId: T:PnP.Core.Services.SettingsCollectionExtensions
-  fullName: PnP.Core.Services.SettingsCollectionExtensions
-  nameWithType: SettingsCollectionExtensions
-- uid: PnP.Core.Services.SettingsCollectionExtensions.AddSettings(IServiceCollection)
-  name: AddSettings(IServiceCollection)
-  href: api/PnP.Core.Services.SettingsCollectionExtensions.html#PnP_Core_Services_SettingsCollectionExtensions_AddSettings_IServiceCollection_
-  commentId: M:PnP.Core.Services.SettingsCollectionExtensions.AddSettings(IServiceCollection)
-  fullName: PnP.Core.Services.SettingsCollectionExtensions.AddSettings(IServiceCollection)
-  nameWithType: SettingsCollectionExtensions.AddSettings(IServiceCollection)
-- uid: PnP.Core.Services.SettingsCollectionExtensions.AddSettings*
-  name: AddSettings
-  href: api/PnP.Core.Services.SettingsCollectionExtensions.html#PnP_Core_Services_SettingsCollectionExtensions_AddSettings_
-  commentId: Overload:PnP.Core.Services.SettingsCollectionExtensions.AddSettings
-  isSpec: "True"
-  fullName: PnP.Core.Services.SettingsCollectionExtensions.AddSettings
-  nameWithType: SettingsCollectionExtensions.AddSettings
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.VersionTag
+  nameWithType: PnPGlobalSettingsOptions.VersionTag
 - uid: PnP.Core.Services.SharePointRestClient
   name: SharePointRestClient
   href: api/PnP.Core.Services.SharePointRestClient.html
   commentId: T:PnP.Core.Services.SharePointRestClient
   fullName: PnP.Core.Services.SharePointRestClient
   nameWithType: SharePointRestClient
-- uid: PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.SharePointRestClient},PnP.Core.Services.ISettings)
-  name: SharePointRestClient(HttpClient, ILogger<SharePointRestClient>, ISettings)
-  href: api/PnP.Core.Services.SharePointRestClient.html#PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__PnP_Core_Services_ISettings_
-  commentId: M:PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.SharePointRestClient},PnP.Core.Services.ISettings)
-  name.vb: SharePointRestClient(HttpClient, ILogger(Of SharePointRestClient), ISettings)
-  fullName: PnP.Core.Services.SharePointRestClient.SharePointRestClient(System.Net.Http.HttpClient, ILogger<PnP.Core.Services.SharePointRestClient>, PnP.Core.Services.ISettings)
-  fullName.vb: PnP.Core.Services.SharePointRestClient.SharePointRestClient(System.Net.Http.HttpClient, ILogger(Of PnP.Core.Services.SharePointRestClient), PnP.Core.Services.ISettings)
-  nameWithType: SharePointRestClient.SharePointRestClient(HttpClient, ILogger<SharePointRestClient>, ISettings)
-  nameWithType.vb: SharePointRestClient.SharePointRestClient(HttpClient, ILogger(Of SharePointRestClient), ISettings)
+- uid: PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.SharePointRestClient},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions})
+  name: SharePointRestClient(HttpClient, ILogger<SharePointRestClient>, IOptions<PnPGlobalSettingsOptions>)
+  href: api/PnP.Core.Services.SharePointRestClient.html#PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__
+  commentId: M:PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.SharePointRestClient},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions})
+  name.vb: SharePointRestClient(HttpClient, ILogger(Of SharePointRestClient), IOptions(Of PnPGlobalSettingsOptions))
+  fullName: PnP.Core.Services.SharePointRestClient.SharePointRestClient(System.Net.Http.HttpClient, ILogger<PnP.Core.Services.SharePointRestClient>, IOptions<PnP.Core.Services.PnPGlobalSettingsOptions>)
+  fullName.vb: PnP.Core.Services.SharePointRestClient.SharePointRestClient(System.Net.Http.HttpClient, ILogger(Of PnP.Core.Services.SharePointRestClient), IOptions(Of PnP.Core.Services.PnPGlobalSettingsOptions))
+  nameWithType: SharePointRestClient.SharePointRestClient(HttpClient, ILogger<SharePointRestClient>, IOptions<PnPGlobalSettingsOptions>)
+  nameWithType.vb: SharePointRestClient.SharePointRestClient(HttpClient, ILogger(Of SharePointRestClient), IOptions(Of PnPGlobalSettingsOptions))
 - uid: PnP.Core.Services.SharePointRestClient.#ctor*
   name: SharePointRestClient
   href: api/PnP.Core.Services.SharePointRestClient.html#PnP_Core_Services_SharePointRestClient__ctor_

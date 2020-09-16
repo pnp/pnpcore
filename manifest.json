@@ -2346,7 +2346,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.html",
-          "hash": "aZNCARYKtHDEuIAPjzlcrA=="
+          "hash": "H/L0lp9zQSb8igQyLwhe+Q=="
         }
       },
       "is_incremental": false,
@@ -2366,11 +2366,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html",
+          "hash": "6orAdvnIKgX7ip1nRXD4cA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialOptions.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialOptions.html",
-          "hash": "rEw7BFmvnI0WEBF8I+5iTw=="
+          "hash": "p+1VpAJi+jKoRC8FQPQABw=="
         }
       },
       "is_incremental": false,
@@ -2382,7 +2394,43 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialsOptions.html",
-          "hash": "mphggwiHnK9/HRRGD4nYoQ=="
+          "hash": "F/t3FhHodtOmUn6rnf9nhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsGraphOptions.html",
+          "hash": "tfq+KOvIi7M/qw/t1VRhLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html",
+          "hash": "yxQqvQz9iTuHKyhldczipg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsSharePointRestOptions.html",
+          "hash": "ACnAWzs8Ad+X8NxuQK06OQ=="
         }
       },
       "is_incremental": false,
@@ -2394,7 +2442,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html",
-          "hash": "YborIPOIpoYeZmMe2XZ8hQ=="
+          "hash": "2M0aL8iR1uMGy+ZYrEMOMQ=="
         }
       },
       "is_incremental": false,
@@ -2406,7 +2454,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.html",
-          "hash": "1QV9ZfMxGYm5KOgTlz7szw=="
+          "hash": "tjducneEmjlnXPgeT/LN3g=="
         }
       },
       "is_incremental": false,
@@ -2418,7 +2466,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSitesOptions.html",
-          "hash": "vXqJC9VBr8KapJZbgBqAvQ=="
+          "hash": "n25TmoLEbKgC/kDHcoxRXg=="
         }
       },
       "is_incremental": false,
@@ -2430,7 +2478,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.html",
-          "hash": "BJftdWk+EireRuQdv9KgtQ=="
+          "hash": "8HyrpDrM0mwkq0YMV5683Q=="
         }
       },
       "is_incremental": false,
@@ -2546,23 +2594,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.ISettings.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.ISettings.html",
-          "hash": "TCMGJe8mEfx5zUcKSPsKcA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Services.MicrosoftGraphClient.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.MicrosoftGraphClient.html",
-          "hash": "OYxsV8zh438O7yNuD4M6ig=="
+          "hash": "uPtoiC4IR97gJT6YpWeuyg=="
         }
       },
       "is_incremental": false,
@@ -2658,7 +2694,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "t9HAj9gNasYf0UfTChHNpg=="
+          "hash": "erkUHVvsxNdq97E9zYw1+w=="
         }
       },
       "is_incremental": false,
@@ -2670,7 +2706,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactory.html",
-          "hash": "x6UWVgLZ/zK3TrFXHiDItg=="
+          "hash": "Psjg5B9x3kgOviduG3QKnw=="
         }
       },
       "is_incremental": false,
@@ -2682,7 +2718,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html",
-          "hash": "rh8k1zqM9/88Ep3ffVRxQA=="
+          "hash": "wddyjJmKGz1xZhqE/M8Xvw=="
         }
       },
       "is_incremental": false,
@@ -2714,23 +2750,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.Settings.yml",
+      "source_relative_path": "api/PnP.Core.Services.PnPGlobalSettingsOptions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/PnP.Core.Services.Settings.html",
-          "hash": "VkBEhUxglaZn4LcQiRpR4Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.SettingsCollectionExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.SettingsCollectionExtensions.html",
-          "hash": "GlBDkBirOhBqwiKuHuciyA=="
+          "relative_path": "api/PnP.Core.Services.PnPGlobalSettingsOptions.html",
+          "hash": "yprdV2NNUNkW7a5aL62LZA=="
         }
       },
       "is_incremental": false,
@@ -2742,7 +2766,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.SharePointRestClient.html",
-          "hash": "OpalA3N/DBv/j9sPFwOgWA=="
+          "hash": "tvyUDG4W5JwVJ+uNDuyuXQ=="
         }
       },
       "is_incremental": false,
@@ -2754,7 +2778,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.html",
-          "hash": "5M0KGZE2KVkXOrAebrAU5Q=="
+          "hash": "lH9qWDVA2w00X9+N7u5ncA=="
         }
       },
       "is_incremental": false,
@@ -2838,7 +2862,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Kqd3dRZTVDV7eQ4/+4o0tQ=="
+          "hash": "+03qkaeRRfE0GD8rnXWpyw=="
         }
       },
       "is_incremental": false,
@@ -2862,7 +2886,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/pnp core settings.html",
-          "hash": "+3T8M8rBB93PARgGeLSvIQ=="
+          "hash": "g8M09WrW7gKi+AUwI1hfQQ=="
         }
       },
       "is_incremental": false,
@@ -2874,7 +2898,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/readme.html",
-          "hash": "4T9UO2gmPtYs077z9Rl2rA=="
+          "hash": "Gm34HVd9tA7S27yFOR3i5g=="
         }
       },
       "is_incremental": false,
@@ -3136,7 +3160,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 234,
+          "total_file_count": 236,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

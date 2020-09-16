@@ -95,7 +95,93 @@
 </div>
 <p>If you want to debug the SDK code you can include the PnP Core project (<code>src\PnP.Core\PnP.Core.csproj</code>) in your project as a dependency.</p>
 <h2 id="configuring-the-needed-services">Configuring the needed services</h2>
-<p>Below snippet shows how to configure the needed services in a .Net Core console app: it's required to add and configure the <code>AuthenticationProviderFactory</code> and the <code>PnPContextFactory</code> services. Typically you would also include configuration and logging as well.</p>
+<p>In order to configure the needed services in a .Net Core console app, you can rely on the <code>AddPnPCore</code> extension method, like in the following code excerpt:</p>
+<pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
+// Set environment to use
+.UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables
+// Configure logging
+// Configure logging
+.ConfigureServices((hostingContext, services) =&gt;
+{
+    // Add the PnP Core SDK library services
+    services.AddPnPCore();
+    // Add the PnP Core SDK library services configuration from the appsettings.json file
+    services.Configure&lt;PnPCoreOptions&gt;(Configuration.GetSection(&quot;PnPCore&quot;));
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+</code></pre>
+<p>And you will also need to provide the configuration in the <code>appsettings.json</code> file, using a configuration section like the following one:</p>
+<pre><code class="lang-json">{
+  &quot;PnPCore&quot;: {
+    &quot;DisableTelemetry&quot;: &quot;false&quot;,
+    &quot;HttpRequests&quot;: {
+      &quot;UserAgent&quot;: &quot;ISV|Contoso|ProductX&quot;,
+      &quot;SharePointRest&quot;: {
+        &quot;UseRetryAfterHeader&quot;: &quot;false&quot;,
+        &quot;MaxRetries&quot;: &quot;10&quot;,
+        &quot;DelayInSeconds&quot;: &quot;3&quot;,
+        &quot;UseIncrementalDelay&quot;: &quot;true&quot;
+      },
+      &quot;MicrosoftGraph&quot;: {
+        &quot;UseRetryAfterHeader&quot;: &quot;true&quot;,
+        &quot;MaxRetries&quot;: &quot;10&quot;,
+        &quot;DelayInSeconds&quot;: &quot;3&quot;,
+        &quot;UseIncrementalDelay&quot;: &quot;true&quot;
+      }
+    },
+    &quot;PnPContext&quot;: {
+      &quot;GraphFirst&quot;: &quot;true&quot;,
+      &quot;GraphCanUseBeta&quot;: &quot;true&quot;,
+      &quot;GraphAlwaysUseBeta&quot;: &quot;false&quot;
+    },
+    &quot;Credentials&quot;: {
+      &quot;CredentialManagerAuthentication&quot;: {
+        &quot;CredentialManagerName&quot;: &quot;mycreds&quot;
+      }
+    },
+    &quot;Sites&quot;: {
+      &quot;SiteToWorkWith&quot;: {
+        &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnp&quot;,
+        &quot;AuthenticationProviderName&quot;: &quot;CredentialManagerAuthentication&quot;
+      },
+    }
+  }
+}
+</code></pre>
+<p>If you like to configure the .Net Core console app in code, without relying on the <code>appsettings.json</code> file, you can also use the following syntax:</p>
+<pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
+// Set environment to use
+.UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables
+// Configure logging
+// Configure logging
+.ConfigureServices((hostingContext, services) =&gt;
+{
+    // Add the PnP Core SDK library services with code based settings
+    services.AddPnPCore(options =&gt; {
+        options.PnPContext.GraphFirst = true;
+        options.HttpRequests.UserAgent = &quot;ISV|Contoso|ProductX&quot;;
+
+        options.Sites.Add(&quot;SiteToWorkWith&quot;, new PnPCoreSiteOptions
+        {
+            SiteUrl = &quot;https://contoso.sharepoint.com/sites/pnp&quot;,
+            AuthenticationProviderName = &quot;CredentialManagerAuthentication&quot;
+        });
+
+        options.Credentials.Add(&quot;CredentialManagerAuthentication&quot;, new PnPCoreCredentialOptions
+        {
+            CredentialManagerName = &quot;mycreds&quot;
+        });
+    });
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+</code></pre>
+<p>In advanced scenarios, you can consider using low level services registration, like in the following code excerpt. Typically you would also include configuration and logging as well.</p>
 <pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
 // Set environment to use
 .UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables

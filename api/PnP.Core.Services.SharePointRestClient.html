@@ -134,24 +134,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__PnP_Core_Services_ISettings_.md&amp;value=---%0Auid%3A%20PnP.Core.Services.SharePointRestClient.%23ctor(System.Net.Http.HttpClient%2CILogger%7BPnP.Core.Services.SharePointRestClient%7D%2CPnP.Core.Services.ISettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__.md&amp;value=---%0Auid%3A%20PnP.Core.Services.SharePointRestClient.%23ctor(System.Net.Http.HttpClient%2CILogger%7BPnP.Core.Services.SharePointRestClient%7D%2CIOptions%7BPnP.Core.Services.PnPGlobalSettingsOptions%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/SharePointRestClient.cs/#L26" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/SharePointRestClient.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_SharePointRestClient__ctor_" data-uid="PnP.Core.Services.SharePointRestClient.#ctor*"></a>
   
-  <h4 id="PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__PnP_Core_Services_ISettings_" data-uid="PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.SharePointRestClient},PnP.Core.Services.ISettings)"><a href="#collapsible-PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__PnP_Core_Services_ISettings_" class="expander" data-toggle="collapse">SharePointRestClient(HttpClient, ILogger&lt;SharePointRestClient&gt;, ISettings)</a></h4>
+  <h4 id="PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__" data-uid="PnP.Core.Services.SharePointRestClient.#ctor(System.Net.Http.HttpClient,ILogger{PnP.Core.Services.SharePointRestClient},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions})"><a href="#collapsible-PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__" class="expander" data-toggle="collapse">SharePointRestClient(HttpClient, ILogger&lt;SharePointRestClient&gt;, IOptions&lt;PnPGlobalSettingsOptions&gt;)</a></h4>
   
-  <div id="collapsible-PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__PnP_Core_Services_ISettings_" class="collapse in">
+  <div id="collapsible-PnP_Core_Services_SharePointRestClient__ctor_System_Net_Http_HttpClient_ILogger_PnP_Core_Services_SharePointRestClient__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__" class="collapse in">
   <div class="markdown level1 summary"><p>Default Constructor</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SharePointRestClient(HttpClient client, ILogger&lt;SharePointRestClient&gt; log, ISettings settingsClient)</code></pre>
+    <pre><code class="lang-csharp hljs">public SharePointRestClient(HttpClient client, ILogger&lt;SharePointRestClient&gt; log, IOptions&lt;PnPGlobalSettingsOptions&gt; options)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -174,10 +174,9 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.ISettings.html">ISettings</a></span>
-        <span class="parametername">settingsClient</span>
-        <p><p>Settings service</p>
-</p>
+        <span class="pull-right"><span class="xref">IOptions</span>&lt;<a class="xref" href="PnP.Core.Services.PnPGlobalSettingsOptions.html">PnPGlobalSettingsOptions</a>&gt;</span>
+        <span class="parametername">options</span>
+        <p>
       </td>
     </tr>
   </table>
@@ -201,7 +200,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_SharePointRestClient_Client.md&amp;value=---%0Auid%3A%20PnP.Core.Services.SharePointRestClient.Client%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/SharePointRestClient.cs/#L18" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/SharePointRestClient.cs/#L19" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Services_SharePointRestClient_Client_" data-uid="PnP.Core.Services.SharePointRestClient.Client*"></a>
@@ -249,7 +248,7 @@
           </div>
           <div class="contribution-panel mobile-hide">
               <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Services_SharePointRestClient.md&amp;value=---%0Auid%3A%20PnP.Core.Services.SharePointRestClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/SharePointRestClient.cs/#L10" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
+              <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Services/Core/SharePointRestClient.cs/#L11" title="View Source" class="fab btn-info pull-right"><i class="fa fa-code"></i></a>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
