@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using Microsoft.Extensions.Options;
+using System.Net.Http;
 
 namespace PnP.Core.Services
 {
@@ -8,12 +9,12 @@ namespace PnP.Core.Services
     internal class SharePointRestRetryHandler: RetryHandlerBase
     {
         #region Construction
-        public SharePointRestRetryHandler(ISettings settingsClient): base(settingsClient)
+        public SharePointRestRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings.Value)
         {
             Configure();
         }
 
-        public SharePointRestRetryHandler(HttpMessageHandler innerHandler, ISettings settingsClient) : base(innerHandler, settingsClient)
+        public SharePointRestRetryHandler(HttpMessageHandler innerHandler, IOptions<PnPGlobalSettingsOptions> globalSettings) : base(innerHandler, globalSettings?.Value)
         {
             Configure();
         }
@@ -21,12 +22,12 @@ namespace PnP.Core.Services
 
         private void Configure()
         {
-            if (SettingsClient != null)
+            if (GlobalSettings != null)
             {
-                UseRetryAfterHeader = SettingsClient.HttpSharePointRestUseRetryAfterHeader;
-                MaxRetries = SettingsClient.HttpSharePointRestMaxRetries;
-                DelayInSeconds = SettingsClient.HttpSharePointRestDelayInSeconds;
-                IncrementalDelay = SettingsClient.HttpSharePointRestUseIncrementalDelay;
+                UseRetryAfterHeader = GlobalSettings.HttpSharePointRestUseRetryAfterHeader;
+                MaxRetries = GlobalSettings.HttpSharePointRestMaxRetries;
+                DelayInSeconds = GlobalSettings.HttpSharePointRestDelayInSeconds;
+                IncrementalDelay = GlobalSettings.HttpSharePointRestUseIncrementalDelay;
             }
         }
     }

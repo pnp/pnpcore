@@ -21,7 +21,8 @@ namespace PnP.Core.Services
         /// <param name="authenticationProviderFactory"><see cref="AuthenticationProviderFactory"/> to use</param>
         /// <param name="sharePointRestClient">SharePoint REST http client to use</param>
         /// <param name="microsoftGraphClient">Microsoft Graph http client to use</param>
-        /// <param name="settingsClient">Settings to use</param>
+        /// <param name="contextOptions">Context options to use</param>
+        /// <param name="globalOptions">Global options to use</param>
         /// <param name="telemetryClient">Connected Azure AppInsights telemetry client</param>
         public PnPContextFactory(
             IOptionsMonitor<PnPContextFactoryOptions> options,
@@ -29,7 +30,8 @@ namespace PnP.Core.Services
             IAuthenticationProviderFactory authenticationProviderFactory,
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
-            ISettings settingsClient
+            IOptions<PnPContextFactoryOptions> contextOptions,
+            IOptions<PnPGlobalSettingsOptions> globalOptions
 #if !BLAZOR
             , TelemetryClient telemetryClient
 #endif
@@ -47,7 +49,8 @@ namespace PnP.Core.Services
             AuthenticationProviderFactory = authenticationProviderFactory;
             SharePointRestClient = sharePointRestClient;
             MicrosoftGraphClient = microsoftGraphClient;
-            SettingsClient = settingsClient;
+            ContextOptions = contextOptions?.Value;
+            GlobalOptions = globalOptions?.Value;
 #if !BLAZOR
             TelemetryClient = telemetryClient;
 #else
@@ -86,9 +89,14 @@ namespace PnP.Core.Services
         protected TelemetryClient TelemetryClient { get; private set; }
 
         /// <summary>
-        /// Settings used to configure this <see cref="PnPContext"/>
+        /// Options used to configure this <see cref="PnPContext"/>
         /// </summary>
-        protected ISettings SettingsClient { get; private set; }
+        protected PnPContextFactoryOptions ContextOptions { get; private set; }
+
+        /// <summary>
+        /// Options used to configure this <see cref="PnPContext"/>
+        /// </summary>
+        protected PnPGlobalSettingsOptions GlobalOptions { get; private set; }
 
         /// <summary>
         /// Creates a new instance of SPOContext based on a provided configuration name
@@ -170,7 +178,7 @@ namespace PnP.Core.Services
             }
 
             // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient)
+            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient)
             {
                 Uri = url
             };
@@ -205,7 +213,7 @@ namespace PnP.Core.Services
         public async virtual Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider)
         {
             // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient)
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient)
             {
                 Uri = url
             };
@@ -242,7 +250,7 @@ namespace PnP.Core.Services
             }
 
             // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
 
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
@@ -272,7 +280,7 @@ namespace PnP.Core.Services
         public async virtual Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider)
         {
             // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
 
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
@@ -314,7 +322,7 @@ namespace PnP.Core.Services
         internal async Task ConfigureTelemetry(PnPContext context)
         {
             // Populate the Azure AD tenant id
-            if (TelemetryClient != null && SettingsClient != null && !SettingsClient.DisableTelemetry)
+            if (TelemetryClient != null && GlobalOptions != null && !GlobalOptions.DisableTelemetry)
             {
                 await context.SetAADTenantId().ConfigureAwait(false);
             }

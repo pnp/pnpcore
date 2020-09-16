@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using Microsoft.Extensions.Options;
+using System.Net.Http;
 
 namespace PnP.Core.Services
 {
@@ -8,12 +9,12 @@ namespace PnP.Core.Services
     internal class MicrosoftGraphRetryHandler: RetryHandlerBase
     {
         #region Construction
-        public MicrosoftGraphRetryHandler(ISettings settingsClient) : base(settingsClient)
+        public MicrosoftGraphRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings.Value)
         {
             Configure();
         }
 
-        public MicrosoftGraphRetryHandler(HttpMessageHandler innerHandler, ISettings settingsClient) : base(innerHandler, settingsClient)
+        public MicrosoftGraphRetryHandler(HttpMessageHandler innerHandler, IOptions<PnPGlobalSettingsOptions> globalSettings) : base(innerHandler, globalSettings?.Value)
         {
             Configure();
         }
@@ -21,12 +22,12 @@ namespace PnP.Core.Services
 
         private void Configure()
         {
-            if (SettingsClient != null)
+            if (GlobalSettings != null)
             {
-                UseRetryAfterHeader = SettingsClient.HttpMicrosoftGraphUseRetryAfterHeader;
-                MaxRetries = SettingsClient.HttpMicrosoftGraphMaxRetries;
-                DelayInSeconds = SettingsClient.HttpMicrosoftGraphDelayInSeconds;
-                IncrementalDelay = SettingsClient.HttpMicrosoftGraphUseIncrementalDelay;
+                UseRetryAfterHeader = GlobalSettings.HttpMicrosoftGraphUseRetryAfterHeader;
+                MaxRetries = GlobalSettings.HttpMicrosoftGraphMaxRetries;
+                DelayInSeconds = GlobalSettings.HttpMicrosoftGraphDelayInSeconds;
+                IncrementalDelay = GlobalSettings.HttpMicrosoftGraphUseIncrementalDelay;
             }
         }
 

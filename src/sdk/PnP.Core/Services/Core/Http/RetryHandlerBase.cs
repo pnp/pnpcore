@@ -20,18 +20,18 @@ namespace PnP.Core.Services
         internal const int MAXDELAY = 300;
 
         #region Construction
-        public RetryHandlerBase(ISettings settingsClient)
+        public RetryHandlerBase(PnPGlobalSettingsOptions globalSettings)
         {
-            SettingsClient = settingsClient;
+            GlobalSettings = globalSettings;
         }
         
-        public RetryHandlerBase(HttpMessageHandler innerHandler, ISettings settingsClient) : base(innerHandler)
+        public RetryHandlerBase(HttpMessageHandler innerHandler, PnPGlobalSettingsOptions globalSettings) : base(innerHandler)
         {
-            SettingsClient = settingsClient;
+            GlobalSettings = globalSettings;
         }
         #endregion
 
-        internal ISettings SettingsClient { get; private set; }
+        internal PnPGlobalSettingsOptions GlobalSettings { get; private set; }
         internal bool UseRetryAfterHeader { get; set; } = false;
         internal int MaxRetries { get; set; } = 10;
         internal int DelayInSeconds { get; set; } = 3;

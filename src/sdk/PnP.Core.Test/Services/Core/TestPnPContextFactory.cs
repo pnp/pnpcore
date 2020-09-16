@@ -49,8 +49,9 @@ namespace PnP.Core.Test.Services
             IAuthenticationProviderFactory authenticationProviderFactory,
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
-            ISettings settingsClient,
-            TelemetryClient telemetryClient) : base(options, logger, authenticationProviderFactory, sharePointRestClient, microsoftGraphClient, settingsClient, telemetryClient)
+            IOptions<PnPContextFactoryOptions> contextOptions,
+            IOptions<PnPGlobalSettingsOptions> globalOptions,
+            TelemetryClient telemetryClient) : base(options, logger, authenticationProviderFactory, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions, telemetryClient)
         {
         }
 
@@ -109,7 +110,7 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider)
         {
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
 
             ConfigurePnPContextForTesting(ref context);
 
@@ -125,7 +126,7 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(Guid groupId)
         {
-            var context = new PnPContext(Log, AuthenticationProviderFactory.CreateDefault(), SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+            var context = new PnPContext(Log, AuthenticationProviderFactory.CreateDefault(), SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
 
             ConfigurePnPContextForTesting(ref context);
 
@@ -149,7 +150,7 @@ namespace PnP.Core.Test.Services
             }
 
             // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, SettingsClient, TelemetryClient);
+            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
 
             ConfigurePnPContextForTesting(ref context);
 

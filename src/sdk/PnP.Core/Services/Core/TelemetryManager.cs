@@ -11,10 +11,10 @@ namespace PnP.Core.Services
     internal class TelemetryManager
     {
 
-        internal TelemetryManager(TelemetryClient telemetryClient, ISettings settingsClient)
+        internal TelemetryManager(TelemetryClient telemetryClient, PnPGlobalSettingsOptions globalOptions)
         {
             TelemetryClient = telemetryClient;
-            SettingsClient = settingsClient;
+            GlobalOptions = globalOptions;
 
             Assembly coreAssembly = Assembly.GetExecutingAssembly();
             Version = ((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version;
@@ -28,7 +28,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Settings client
         /// </summary>
-        internal ISettings SettingsClient { get; private set; }
+        internal PnPGlobalSettingsOptions GlobalOptions { get; private set; }
 
         /// <summary>
         /// File version of the PnP Core SDK
@@ -46,7 +46,7 @@ namespace PnP.Core.Services
             Dictionary<string, string> properties = new Dictionary<string, string>(10)
             {
                 { "PnPCoreSDKVersion", Version },
-                { "AADTenantId", SettingsClient.AADTenantId.ToString() },
+                { "AADTenantId", GlobalOptions.AADTenantId.ToString() },
                 { "Model", request.Model.GetType().FullName },
                 { "ApiType", request.ApiCall.Type.ToString() },
                 { "ApiMethod", request.Method.ToString() },
