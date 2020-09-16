@@ -690,6 +690,22 @@ references:
   fullName.vb: PnP.Core.Model.DataModelExtensions.IsPropertyAvailable(Of TModel)(PnP.Core.Model.IDataModel(Of TModel), System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object)))
   nameWithType: DataModelExtensions.IsPropertyAvailable<TModel>(IDataModel<TModel>, Expression<Func<TModel, Object>>)
   nameWithType.vb: DataModelExtensions.IsPropertyAvailable(Of TModel)(IDataModel(Of TModel), Expression(Of Func(Of TModel, Object)))
+- uid: PnP.Core.Model.DataModelExtensions.LoadProperties*
+  name: LoadProperties
+  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_LoadProperties_
+  commentId: Overload:PnP.Core.Model.DataModelExtensions.LoadProperties
+  isSpec: "True"
+  fullName: PnP.Core.Model.DataModelExtensions.LoadProperties
+  nameWithType: DataModelExtensions.LoadProperties
+- uid: PnP.Core.Model.DataModelExtensions.LoadProperties``1(PnP.Core.Model.IDataModelCollection{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])
+  name: LoadProperties<TModel>(IDataModelCollection<TModel>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_LoadProperties__1_PnP_Core_Model_IDataModelCollection___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____
+  commentId: M:PnP.Core.Model.DataModelExtensions.LoadProperties``1(PnP.Core.Model.IDataModelCollection{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])
+  name.vb: LoadProperties(Of TModel)(IDataModelCollection(Of TModel), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.DataModelExtensions.LoadProperties<TModel>(PnP.Core.Model.IDataModelCollection<TModel>, System.Linq.Expressions.Expression<System.Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.DataModelExtensions.LoadProperties(Of TModel)(PnP.Core.Model.IDataModelCollection(Of TModel), System.Linq.Expressions.Expression(Of System.Func(Of TModel, System.Object))())
+  nameWithType: DataModelExtensions.LoadProperties<TModel>(IDataModelCollection<TModel>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: DataModelExtensions.LoadProperties(Of TModel)(IDataModelCollection(Of TModel), Expression(Of Func(Of TModel, Object))())
 - uid: PnP.Core.Model.IComplexType
   name: IComplexType
   href: api/PnP.Core.Model.IComplexType.html
