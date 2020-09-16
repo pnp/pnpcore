@@ -1,9 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Model.Teams;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
@@ -31,7 +34,7 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.WelcomePage);
-                
+
                 // Is the property populated
                 Assert.IsTrue(web.IsPropertyAvailable(p => p.WelcomePage));
                 Assert.IsTrue(!string.IsNullOrEmpty(web.WelcomePage));
@@ -91,7 +94,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.Length > 0);
                 // Is the collection requested flag set
                 Assert.IsTrue(web.Lists.Requested);
-               
+
                 // Are other properties still not available
                 Assert.IsFalse(web.IsPropertyAvailable(p => p.Title));
                 // Are other expandable collections still not available
@@ -119,7 +122,7 @@ namespace PnP.Core.Test.Base
                 var numberOfLists = web.Lists.Length;
                 // Load the expandable collection again
                 await context.Web.GetAsync(p => p.Lists);
-                
+
                 // Loading a collection again should not result in more rows in the collection, assuming 
                 // the collection has a key like is the case for lists
                 Assert.IsTrue(numberOfLists == context.Web.Lists.Length);
@@ -184,7 +187,7 @@ namespace PnP.Core.Test.Base
                 var webImplementation = web as Web;
                 Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("type")));
                 Assert.IsTrue(webImplementation.GetMetadata("type") == "SP.Web");
-                
+
                 Assert.IsTrue(!string.IsNullOrEmpty(webImplementation.GetMetadata("uri")));
                 //Assert.IsTrue(new Uri($"{context.Uri.ToString()}/_api/Web") == new Uri(webImplementation.GetMetadata("uri")));
 
@@ -225,8 +228,8 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
-                var web = await context.Web.GetAsync(p => p.Title, 
-                                                     p => p.ContentTypes.LoadProperties(p => p.Name), 
+                var web = await context.Web.GetAsync(p => p.Title,
+                                                     p => p.ContentTypes.LoadProperties(p => p.Name),
                                                      p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate));
                 Assert.IsTrue(web.Lists.Requested);
                 Assert.IsTrue(web.Lists.Count() > 0);
@@ -248,9 +251,9 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
-                var web = await context.Web.GetAsync(p => p.Title, 
-                                                     p => p.ContentTypes.LoadProperties(p => p.Name), 
-                                                     p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate, p=>p.ContentTypes));
+                var web = await context.Web.GetAsync(p => p.Title,
+                                                     p => p.ContentTypes.LoadProperties(p => p.Name),
+                                                     p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate, p => p.ContentTypes));
                 Assert.IsTrue(web.Lists.Requested);
                 Assert.IsTrue(web.Lists.Count() > 0);
                 Assert.IsTrue(web.Lists.First().IsPropertyAvailable(p => p.Title));
@@ -273,7 +276,7 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
-                var web = await context.Web.GetAsync(p => p.Title, 
+                var web = await context.Web.GetAsync(p => p.Title,
                                                      p => p.ContentTypes.LoadProperties(p => p.Name),
                                                      p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate,
                                                           p => p.ContentTypes.LoadProperties(p => p.Name,
@@ -309,7 +312,7 @@ namespace PnP.Core.Test.Base
                 var web = await context.Web.GetAsync(p => p.ContentTypes.LoadProperties(p => p.Name),
                                                      p => p.Title,
                                                      p => p.Lists.LoadProperties(p => p.DocumentTemplate,
-                                                                          p => p.ContentTypes.LoadProperties(p => p.Name, p => p.FieldLinks, p=>p.NewFormUrl),
+                                                                          p => p.ContentTypes.LoadProperties(p => p.Name, p => p.FieldLinks, p => p.NewFormUrl),
                                                                           p => p.Id, p => p.Title),
                                                      p => p.AlternateCssUrl
                                                     );
@@ -541,6 +544,99 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(team.IsPropertyAvailable(p => p.Owners));
             }
         }
+
+        [TestMethod]
+        public async Task LoadPropertiesViaGraph()
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                //var api = await teamChannel.BuildGetAPICallAsync(entityInfo, default);
+                //Assert.IsTrue(!string.IsNullOrEmpty(api.ApiCall.Request));
+
+                TeamChannel teamChannel = new TeamChannel()
+                {
+                    PnPContext = context
+                };
+
+                string newQuery = "";
+                string query = "";
+
+                // Selecting one regular property on expand
+                (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<ITeamChannel, object>>[] { p => p.Tabs.LoadProperties(p => p.DisplayName) },
+                                               new TeamChannel() { PnPContext = context });
+                Assert.IsTrue(query.Equals("($select%3DdisplayName,id)", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(newQuery.Equals("$select=displayName,id", StringComparison.InvariantCultureIgnoreCase));
+
+                // Selecting multiple regular properties on expand
+                (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<ITeamChannel, object>>[] { p => p.Tabs.LoadProperties(p => p.DisplayName, p => p.WebUrl) },
+                                               new TeamChannel() { PnPContext = context });
+                Assert.IsTrue(query.Equals("($select%3DdisplayName,weburl,id)", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(newQuery.Equals("$select=displayName,weburl,id", StringComparison.InvariantCultureIgnoreCase));
+
+                // Selecting multiple regular properties on expand including a complex type
+                (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<ITeamChannel, object>>[] { p => p.Tabs.LoadProperties(p => p.DisplayName, p => p.WebUrl, p => p.Configuration) },
+                                               new TeamChannel() { PnPContext = context });
+                Assert.IsTrue(query.Equals("($select%3DdisplayName,weburl,configuration,id)", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(newQuery.Equals("$select=displayName,weburl,configuration,id", StringComparison.InvariantCultureIgnoreCase));
+
+                // Selecting multiple regular properties on expand including a complex type and DataModel type (non expandable)
+                (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<ITeamChannel, object>>[] { p => p.Tabs.LoadProperties(p => p.DisplayName, p => p.WebUrl, p => p.Configuration, p => p.TeamsApp) },
+                                               new TeamChannel() { PnPContext = context });
+                Assert.IsTrue(query.Equals("($select%3DdisplayName,weburl,configuration,teamsapp,id)", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(newQuery.Equals("$select=displayName,weburl,configuration,teamsapp,id", StringComparison.InvariantCultureIgnoreCase));
+
+                /* commenting out as Lists are loaded via an additional query in the batch 
+                // Selecting expandable property on expand
+                (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<IWeb, object>>[] { p => p.Lists.LoadProperties(p => p.Title, p=>p.Items.LoadProperties(p=>p.Id)) },
+                                               new Web() { PnPContext = context });
+                Assert.IsTrue(query.Equals("($select%3DdisplayName,id;$expand%3Ditems($select%3Did))", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(newQuery.Equals("$select=displayName,id;$expand%3Ditems($select%3Did)", StringComparison.InvariantCultureIgnoreCase));
+
+                // Selecting expandable property on expand + more fields
+                (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<IWeb, object>>[] { p => p.Lists.LoadProperties(p => p.Title, p => p.Items.LoadProperties(p => p.Id) , p=>p.Description ) },
+                                               new Web() { PnPContext = context });
+                Assert.IsTrue(query.Equals("($select%3DdisplayName,description,id;$expand%3Ditems($select%3Did))", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(newQuery.Equals("$select=displayName,description,id;$expand%3Ditems($select%3Did)", StringComparison.InvariantCultureIgnoreCase));
+                */
+            }
+        }
+
+
+        //[TestMethod]
+        //public async Task LoadTeamPropertiesViaGraph()
+        //{
+        //    TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        // Expand for a property that is implemented using it's own graph query
+        //        //var team = await context.Team.GetAsync(p => p.Channels.LoadProperties(p=>p.DisplayName));
+        //        //foreach(var channel in team.Channels)
+        //        //{
+        //        //    Assert.IsTrue(!string.IsNullOrEmpty(channel.DisplayName));
+        //        //}
+
+        //        // Expand for a property that is implemented using it's own graph query which has url parameters defined
+        //        await context.Team.GetAsync(p => p.InstalledApps.LoadProperties(p => p.DisplayName));
+
+        //    }
+        //}
+
+        private Tuple<string, string> BuildGraphExpandSelect<TModel>(Expression<Func<TModel, object>>[] testExpression, BaseDataModel<TModel> instance)
+        {
+            var entityInfo = EntityManager.Instance.GetClassInfo(instance.GetType(), instance, testExpression);
+            var expandProperty = entityInfo.Fields.FirstOrDefault(p => p.ExpandFieldInfo != null);
+            StringBuilder sb = new StringBuilder();
+            instance.AddExpandableSelectGraph(true, sb, expandProperty, null, "");
+            var newQuery = sb.ToString();
+
+            sb = new StringBuilder();
+            instance.AddExpandableSelectGraph(false, sb, expandProperty, null, "");
+            var query = sb.ToString();
+
+            return new Tuple<string, string>(newQuery, query);
+        }
+
+
         #endregion
     }
 }

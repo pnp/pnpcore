@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using PnP.Core.Services;
 using PnP.Core.Utilities;
 using System;
@@ -603,7 +604,7 @@ namespace PnP.Core.Model
                 // $select
                 foreach (var field in fields)
                 {
-                    // If there was a selection on which fields to include in an expand (via the Include() option) then add those fields
+                    // If there was a selection on which fields to include in an expand (via the LoadProperties() option) then add those fields
                     if (field.SharePointExpandable && field.ExpandFieldInfo != null)
                     {
                         AddExpandableSelectRest(sb, field, null, "");
@@ -779,7 +780,7 @@ namespace PnP.Core.Model
             {
                 // $select
                 bool graphIdFieldAdded = false;
-                foreach (var field in fields)
+                foreach (var field in fields.Where(p => p.ExpandFieldInfo == null))
                 {
                     // Don't add the field in the select if it will be added as expandable field
                     if (!string.IsNullOrEmpty(field.GraphName))
@@ -850,8 +851,17 @@ namespace PnP.Core.Model
                         }
 
                         if (addExpand)
-                        {
-                            sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
+                        {                           
+                            if (field.ExpandFieldInfo != null)
+                            {
+                                StringBuilder sbExpand = new StringBuilder();
+                                AddExpandableSelectGraph(false, sbExpand, field, null, "");
+                                sb.Append($"{JsonMappingHelper.GetGraphField(field)}{sbExpand}");
+                            }
+                            else
+                            {
+                                sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
+                            }
                         }
                     }
                     else
@@ -931,6 +941,59 @@ namespace PnP.Core.Model
             return call;
         }
 
+        internal void AddExpandableSelectGraph(bool newQuery, StringBuilder sb, EntityFieldInfo field, EntityFieldExpandInfo expandFields, string path)
+        {
+            if (path == null)
+            {
+                path = "";
+            }
+
+            EntityInfo collectionEntityInfo = null;
+
+            if (expandFields == null)
+            {
+                collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(field.ExpandFieldInfo.Type);
+                expandFields = field.ExpandFieldInfo;
+            }
+            else
+            {
+                if (expandFields.Type != null)
+                {
+                    collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(expandFields.Type);
+                }
+            }
+
+            if (collectionEntityInfo != null)
+            {
+                bool first = true;
+                foreach (var expandableField in expandFields.Fields.OrderBy(p => p.Expandable))
+                {
+                    var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == expandableField.Name);
+                    if (!expandableFieldInfo.GraphExpandable)
+                    {
+                        if (first)
+                        {
+                            sb.Append($"{path}{(newQuery ? "" : "(")}$select{(newQuery ? "=" : "%3D")}");
+                        }
+
+                        sb.Append($"{(first ? "" : ",")}{JsonMappingHelper.GetGraphField(expandableFieldInfo)}");
+                        first = false;
+                        path = "";
+                    }
+                    else
+                    {
+                        path = $";$expand%3D{JsonMappingHelper.GetGraphField(expandableFieldInfo)}";
+                        AddExpandableSelectGraph(false, sb, field, expandableField, path);
+                    }
+                }
+
+                if (!newQuery)
+                {
+                    sb.Append(')');
+                }
+            }
+        }
+
         private async Task AddGraphBatchRequestsForNonExpandableCollectionsAsync(Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
         {
             ApiType apiType = ApiType.Graph;
@@ -946,7 +1009,7 @@ namespace PnP.Core.Model
                     if (!needed)
                     {
                         // Check passed in expressions
-                        needed = IsDefinedInExpression(expressions, nonExpandableField.Name);
+                        needed = IsDefinedInExpression(expressions, nonExpandableField.Name) || nonExpandableField.ExpandFieldInfo != null;
                     }
 
                     if (needed)
@@ -967,7 +1030,21 @@ namespace PnP.Core.Model
 
                         if (addExpandableCollection)
                         {
-                            var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(this, nonExpandableField.GraphGet).ConfigureAwait(false);
+                            string graphGet = nonExpandableField.GraphGet;
+                            if (nonExpandableField.ExpandFieldInfo != null)
+                            {
+                                bool graphGetHasExpand = new UriBuilder(graphGet).Query.Contains("$expand", StringComparison.OrdinalIgnoreCase);
+                                                                
+                                StringBuilder sb = new StringBuilder();
+
+
+
+                                AddExpandableSelectGraph(!graphGetHasExpand, sb, nonExpandableField, null, "");
+                                // Since the URL listed for a graph get can already have url parameters we need to "merge" them together
+                                graphGet = UrlUtility.CombineRelativeUrlWithUrlParameters(graphGet, sb.ToString());
+                            }
+
+                            var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(this, graphGet).ConfigureAwait(false);
 
                             ApiCall extraApiCall = new ApiCall(parsedApiRequest, apiType, receivingProperty: nonExpandableField.GraphName);
                             batch.Add(this, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson);
@@ -983,7 +1060,7 @@ namespace PnP.Core.Model
             {
                 if (expression.Body.NodeType == ExpressionType.Call && expression.Body is MethodCallExpression)
                 {
-                    // Future use? (includes)
+                    // Future use? (includes)                    
                 }
                 else
                 {

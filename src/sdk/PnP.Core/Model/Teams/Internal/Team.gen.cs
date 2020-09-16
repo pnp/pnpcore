@@ -73,7 +73,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
-        [GraphProperty("installedApps", Get = "teams/{Site.GroupId}/installedapps?expand=TeamsApp")]
+        [GraphProperty("installedApps", Get = "teams/{Site.GroupId}/installedapps?$expand=TeamsApp")]
         public ITeamAppCollection InstalledApps
         {
             get
