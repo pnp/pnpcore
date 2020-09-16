@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Web;
+
 namespace PnP.Core.Utilities
 {
     // Taken and slightly adapted from https://raw.githubusercontent.com/pnp/PnP-Sites-Core/master/Core/OfficeDevPnP.Core/Utilities/UrlUtility.cs
@@ -150,6 +155,70 @@ namespace PnP.Core.Utilities
         public static Uri EnsureTrailingSlash(this Uri uri)
         {
             return new Uri(EnsureTrailingSlash(uri?.ToString()));
+        }
+
+        /// <summary>
+        /// Combines provided url parameters with an url that has url parameters as wel
+        /// </summary>
+        /// <param name="baseRelativeUri">Base relative url (with url parameters)</param>
+        /// <param name="urlParameters">Url parameters to combine</param>
+        /// <returns>Relative url with combined url parameters</returns>
+        internal static string CombineRelativeUrlWithUrlParameters(string baseRelativeUri, string urlParameters)
+        {
+            var uriBuilder = new UriBuilder(baseRelativeUri);
+            // Input url parameters
+            NameValueCollection main = HttpUtility.ParseQueryString(uriBuilder.Query.ToLowerInvariant());
+            NameValueCollection parameters = HttpUtility.ParseQueryString(urlParameters.ToLowerInvariant());
+            // Collection of merged parameters
+            NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
+
+            List<string> processedParameters = new List<string>();
+
+            // Iterate the parameters on the base uri
+            foreach (string mainKey in main.Keys)
+            {
+                if (string.IsNullOrWhiteSpace(mainKey)) continue;
+
+                string[] originalValues = main.GetValues(mainKey);
+                string[] newValues = null;
+                if (originalValues == null) continue;
+
+                processedParameters.Add(mainKey);
+
+                // do we have the same url parameter in provided url params?
+                string value = parameters[mainKey];
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                   newValues = value.Split(new char[] { ',' });
+                }
+
+                string[] combinedValues;
+                if (newValues != null)
+                {
+                    combinedValues = originalValues.Union(newValues).ToArray();
+                }
+                else
+                {
+                    combinedValues = originalValues;
+                }
+
+                queryString.Add(mainKey, string.Join(',', combinedValues));
+            }
+
+            // Process the provided parameters which are not present in the base uri parameters
+            foreach (string parameterKey in parameters.Keys)
+            {
+                if (string.IsNullOrWhiteSpace(parameterKey)) continue;
+
+                string[] originalValues = parameters.GetValues(parameterKey);
+                if (originalValues == null) continue;
+
+                if (processedParameters.Contains(parameterKey)) continue;
+
+                queryString.Add(parameterKey, string.Join(',', originalValues));
+            }
+
+            return $"{uriBuilder.Host}{(uriBuilder.Path.Replace("%7B", "{").Replace("%7D", "}"))}{(queryString.Count > 0 ? "?" : "")}{queryString.ToString().Replace("%2c", ",")}";
         }
 
         #region NOT USED NOW

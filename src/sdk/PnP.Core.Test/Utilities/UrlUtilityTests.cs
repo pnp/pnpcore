@@ -153,5 +153,27 @@ namespace PnP.Core.Utilities.Tests
             Uri actual = new Uri("https://foo").EnsureTrailingSlash();
             Assert.IsTrue(actual.ToString().EndsWith("/"));
         }
+
+        [TestMethod()]
+        public void MergeUrlParametersTest()
+        {
+            var mergedUrl = UrlUtility.CombineRelativeUrlWithUrlParameters("teams/{Site.GroupId}/channels", "");
+            Assert.IsTrue(mergedUrl.Equals("teams/{Site.GroupId}/channels", StringComparison.InvariantCultureIgnoreCase));
+
+            mergedUrl = UrlUtility.CombineRelativeUrlWithUrlParameters("teams/{Site.GroupId}/channels", "$select=displayName,id");
+            Assert.IsTrue(mergedUrl.Equals("teams/{Site.GroupId}/channels?$select=displayName,id", StringComparison.InvariantCultureIgnoreCase));
+
+            mergedUrl = UrlUtility.CombineRelativeUrlWithUrlParameters("teams/{Site.GroupId}/channels?$select=displayName,id", "");
+            Assert.IsTrue(mergedUrl.Equals("teams/{Site.GroupId}/channels?$select=displayName,id", StringComparison.InvariantCultureIgnoreCase));
+
+            mergedUrl = UrlUtility.CombineRelativeUrlWithUrlParameters("teams/{Site.GroupId}/installedapps?$select=bert&$expand=TeamsApp", "$select=displayName,id");
+            Assert.IsTrue(mergedUrl.Equals("teams/{Site.GroupId}/installedapps?$select=bert,displayName,id&$expand=TeamsApp", StringComparison.InvariantCultureIgnoreCase));
+
+            mergedUrl = UrlUtility.CombineRelativeUrlWithUrlParameters("teams/{Site.GroupId}/installedapps?$expand=TeamsApp", "$select=displayName,id");
+            Assert.IsTrue(mergedUrl.Equals("teams/{Site.GroupId}/installedapps?$expand=TeamsApp&$select=displayname,id", StringComparison.InvariantCultureIgnoreCase));
+        }
+
+
+
     }
 }
