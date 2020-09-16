@@ -9,26 +9,37 @@ Below snippet shows the settings which are used by the PnP Core SDK, you can sim
 ```json
 {
   "PnPCore": {
-    "DisableTelemetry": false,
-    "PnPContext": {
-      "GraphFirst": true,
-      "GraphAlwaysUseBeta": false,
-      "GraphCanUseBeta": true
-    },
+    "DisableTelemetry": "false",
     "HttpRequests": {
       "UserAgent": "ISV|Contoso|ProductX",
       "SharePointRest": {
-        "UseRetryAfterHeader": false,
-        "MaxRetries": 10,
-        "DelayInSeconds": 3,
-        "IncrementalDelay": true
+        "UseRetryAfterHeader": "false",
+        "MaxRetries": "10",
+        "DelayInSeconds": "3",
+        "UseIncrementalDelay": "true"
       },
       "MicrosoftGraph": {
-        "UseRetryAfterHeader": true,
-        "MaxRetries": 10,
-        "DelayInSeconds": 3,
-        "IncrementalDelay": true
+        "UseRetryAfterHeader": "true",
+        "MaxRetries": "10",
+        "DelayInSeconds": "3",
+        "UseIncrementalDelay": "true"
       }
+    },
+    "PnPContext": {
+      "GraphFirst": "true",
+      "GraphCanUseBeta": "true",
+      "GraphAlwaysUseBeta": "false"
+    },
+    "Credentials": {
+      "CredentialManagerAuthentication": {
+        "CredentialManagerName": "mycreds"
+      }
+    },
+    "Sites": {
+      "SiteToWorkWith": {
+        "SiteUrl": "https://contoso.sharepoint.com/sites/pnp",
+        "AuthenticationProviderName": "CredentialManagerAuthentication"
+      },
     }
   },
 
@@ -47,8 +58,8 @@ Setting | Default value | Description
 --------|---------------|------------
 Logging:LogLevel:Default | Information | Allows you to change log level. See the [.Net Logging article](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-3.1#log-level) for more details. Common levels are Debug and Information.
 PnPCore:PnPContext:GraphFirst | true | If for a given request the library can choose between a SharePoint REST or a Microsoft Graph call then it will favor the Microsoft Graph call. Settings this to false will prefer SharePoint REST for all SharePoint related API calls.
-PnPCore:PnPContext:GraphAlwaysUsesBeta | false | The library by default uses the production v1.0 Microsoft Graph API. Use this setting to default it to the beta Microsoft Graph API.
 PnPCore:PnPContext:GraphCanUseBeta | true | When you ask for data that can only be provided via the Microsoft Graph beta API the PnP Core SDK will use the beta endpoint for that specific request. All other requests will still use the v1.0 endpoint. If you set this to false, then any request that requires Microsoft Graph beta will not provide any result.
+PnPCore:PnPContext:GraphAlwaysUsesBeta | false | The library by default uses the production v1.0 Microsoft Graph API. Use this setting to default it to the beta Microsoft Graph API.
 PnPCore:HttpRequests:UserAgent | NONISV&#124;SharePointPnP&#124;PnPCoreSDK | Value set as user agent when the request is sent to Microsoft 365.
 PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader | false | Use retry-after http header when calculating the wait time in seconds for SharePoint Rest request retry.
 PnPCore:HttpRequests:SharePointRest:MaxRetries | 10 | Maximum number of retries before retrying a SharePoint Rest request throws an exception.
@@ -59,3 +70,7 @@ PnPCore:HttpRequests:MicrosoftGraph:MaxRetries | 10 | Maximum number of retries 
 PnPCore:HttpRequests:MicrosoftGraph:DelayInSeconds | 3 | Delay in seconds between Microsoft Graph request retries.
 PnPCore:HttpRequests:MicrosoftGraph:IncrementalDelay | true | Delays get incrementally longer with each retry.
 PnPCore:DisableTelemetry | false | Allows to turn off telemetry being sent. Telemetry is used to improve this open source library and it's recommended to keep it on, but you can disable it, if required.
+PnPCore:Credentials | | This section defines the settings for the Authentication Providers and it will be updated in the near future.
+PnPCore:Sites | | This section defines the site collections to consume using the PnP Core SDK. Every single item of the array has a name, which can then be used with the PnPContextFactory to retrieve an instance of PnPContext for that specific site, a _SiteUrl_ and the _AuthenticationProviderName_ that maps to the corresponding Authentication Provider to use for accessing the target site.
+
+
