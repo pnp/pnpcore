@@ -24,6 +24,11 @@ namespace PnP.Core.Services.Builder.Configuration
                     AuthenticationProviderName = optionValue.AuthenticationProviderName
                 });
             }
+
+            // Configure the global Microsoft Graph settings
+            options.GraphFirst = pnpCoreOptions.Value.GraphFirst;
+            options.GraphCanUseBeta = pnpCoreOptions.Value.GraphCanUseBeta;
+            options.GraphAlwaysUseBeta = pnpCoreOptions.Value.GraphAlwaysUseBeta;
         }
 
         public void Configure(OAuthAuthenticationProviderOptions options)

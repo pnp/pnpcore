@@ -41,7 +41,7 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Get's the in use <see cref="IAuthenticationProviderConfiguration"/>
+        /// Gets the in use <see cref="IAuthenticationProviderConfiguration"/>
         /// </summary>
         public IAuthenticationProviderConfiguration Configuration { get; private set; }
 

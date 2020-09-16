@@ -134,7 +134,7 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Get's the request at a specific order
+        /// Gets the request at a specific order
         /// </summary>
         /// <param name="order">Order to get the request for</param>
         /// <returns>The request at the given order</returns>
@@ -155,7 +155,7 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Get's the last request in the list of requests
+        /// Gets the last request in the list of requests
         /// </summary>
         /// <returns>The last request, null if there were no requests</returns>
         private BatchRequest GetLastRequest()

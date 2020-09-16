@@ -13,8 +13,14 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.8" />
-    <PackageReference Include="PnP.Core" Version="0.1.2009.67-preview2" />
+    <PackageReference Include="PnP.Core" Version="0.1.2009.68-preview2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PnP.Core">
+      <HintPath>..\..\sdk\PnP.Core\bin\Debug\netstandard2.1\PnP.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

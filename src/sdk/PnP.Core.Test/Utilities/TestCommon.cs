@@ -19,7 +19,7 @@ namespace PnP.Core.Test.Utilities
         private static readonly SemaphoreSlim semaphoreSlimFactory = new SemaphoreSlim(1);
 
         /// <summary>
-        /// Get's the single TestCommon instance, singleton pattern
+        /// Gets the single TestCommon instance, singleton pattern
         /// </summary>
         internal static TestCommon Instance
         {
