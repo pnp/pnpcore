@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
+using System.Linq;
 
 namespace PnP.Core.Services.Builder.Configuration
 {
@@ -36,22 +37,28 @@ namespace PnP.Core.Services.Builder.Configuration
         {
             foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Credentials)
             {
-                if (!String.IsNullOrEmpty(optionValue.CredentialManagerName))
+                // Let's see if we have the configuration Type attribute for the current credential options
+                string configurationTypeName;
+                if (optionValue.TryGetValue("Type", out configurationTypeName))
                 {
-                    options.Configurations.Add(new OAuthCredentialManagerConfiguration {
-                        Name = optionKey,
-                        ClientId = optionValue.ClientId,
-                        CredentialManagerName = optionValue.CredentialManagerName
-                    });
-                }
-                else if (!String.IsNullOrEmpty(optionValue.CertificateThumbprint))
-                {
-                    options.Configurations.Add(new OAuthCertificateConfiguration
+                    // Get the corresponding .NET type
+                    var configurationType = Type.GetType(configurationTypeName, true);
+
+                    // And try to create a new instance
+                    IAuthenticationProviderConfiguration configuration = Activator.CreateInstance(configurationType) as IAuthenticationProviderConfiguration;
+                    configuration.Name = optionKey;
+
+                    // Configure the object with the remainder options
+                    foreach (var (key, value) in optionValue)
                     {
-                        Name = optionKey,
-                        ClientId = optionValue.ClientId,
-                        Certificate = null, // TODO: Load certificate from thumbprint
-                    });
+                        if (key != "Type")
+                        {
+                            configuration.GetType().GetProperty(key).SetValue(configuration, value);
+                        }
+                    }
+
+                    // Add the configuration to the Credentials options
+                    options.Configurations.Add(configuration);
                 }
             }
         }

@@ -144,22 +144,12 @@ namespace PnP.Core.Services.Builder.Configuration
     /// <summary>
     /// Options for one configured credentials
     /// </summary>
-    public class PnPCoreCredentialOptions
+    public class PnPCoreCredentialOptions : Dictionary<string, string>
     {
         /// <summary>
         /// The ClientId of the application to use for authentication
         /// </summary>
         public string ClientId { get; set; }
-
-        /// <summary>
-        /// The name of the Credential Manager item to use, in case of CredentialManager Authentication
-        /// </summary>
-        public string CredentialManagerName { get; set; }
-
-        /// <summary>
-        /// The thumbprint of the X.509 Certificate to use, in case of X.509 Certificate Authentication
-        /// </summary>
-        public string CertificateThumbprint { get; set; }
     }
 
     /// <summary>
