@@ -702,7 +702,7 @@ namespace PnP.Core.Services
                     // sample input: bertonline.sharepoint.com,cf1ed1cb-4a3c-43ed-bb3f-4ced4ce69ecf,1de385e4-e441-4448-8443-77680dfd845e
                     if (!string.IsNullOrEmpty(idFieldValue))
                     {
-                        string id = idFieldValue.Split(",")[2];
+                        string id = idFieldValue.Split(new char[] { ',' })[2];
                         metadata.Add(PnPConstants.MetaDataRestId, id);
                         ((IDataModelWithKey)pnpObject).Key = Guid.Parse(id);
                     }
@@ -716,7 +716,7 @@ namespace PnP.Core.Services
                     // sample input: bertonline.sharepoint.com,cf1ed1cb-4a3c-43ed-bb3f-4ced4ce69ecf,1de385e4-e441-4448-8443-77680dfd845e
                     if (!string.IsNullOrEmpty(idFieldValue))
                     {
-                        string id = idFieldValue.Split(",")[1];
+                        string id = idFieldValue.Split(new char[] { ',' })[1];
                         metadata.Add(PnPConstants.MetaDataRestId, id);
                         ((IDataModelWithKey)pnpObject).Key = Guid.Parse(id);
                     }
@@ -1056,20 +1056,20 @@ namespace PnP.Core.Services
             }
         }
 
-        internal static T ToEnum<T>(JsonElement jsonElement)
+        internal static T ToEnum<T>(JsonElement jsonElement) where T : struct
         {
             if (jsonElement.ValueKind == JsonValueKind.Number && jsonElement.TryGetInt64(out long enumNumericValue))
             {
-                if (Enum.TryParse(typeof(T), enumNumericValue.ToString(CultureInfo.InvariantCulture), out object enumValue))
+                if (Enum.TryParse(enumNumericValue.ToString(CultureInfo.InvariantCulture), out T enumValue))
                 {
-                    return (T)enumValue;
+                    return enumValue;
                 }
             }
             else if (jsonElement.ValueKind == JsonValueKind.String && !string.IsNullOrEmpty(jsonElement.GetString()))
             {
-                if (Enum.TryParse(typeof(T), jsonElement.GetString(), true, out object enumValue))
+                if (Enum.TryParse(jsonElement.GetString(), true, out T enumValue))
                 {
-                    return (T)enumValue;
+                    return enumValue;
                 }
             }
             return default;

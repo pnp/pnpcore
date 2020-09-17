@@ -564,7 +564,7 @@ namespace PnP.Core.Services
                             batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status, graphBatchResponse.Headers);
 
                             // Commit succesful updates in our model
-                            if (batchRequest.Method == HttpMethod.Patch || batchRequest.ApiCall.Commit)
+                            if (batchRequest.Method == new HttpMethod("PATCH") || batchRequest.ApiCall.Commit)
                             {
                                 if (batchRequest.Model is TransientObject)
                                 {
@@ -832,7 +832,7 @@ namespace PnP.Core.Services
                     sb.AppendLine("Accept: application/json;odata=verbose");
                     sb.AppendLine();
                 }
-                else if (request.Method == HttpMethod.Patch || request.Method == HttpMethod.Post)
+                else if (request.Method == new HttpMethod("PATCH") || request.Method == HttpMethod.Post)
                 {
                     var changesetId = Guid.NewGuid().ToString("d", CultureInfo.InvariantCulture);
 
@@ -967,7 +967,7 @@ namespace PnP.Core.Services
                         }
 
                         // Commit succesful updates in our model
-                        if (currentBatchRequest.Method == HttpMethod.Patch || currentBatchRequest.ApiCall.Commit)
+                        if (currentBatchRequest.Method == new HttpMethod("PATCH") || currentBatchRequest.ApiCall.Commit)
                         {
                             if (currentBatchRequest.Model is TransientObject)
                             {
@@ -1138,7 +1138,7 @@ namespace PnP.Core.Services
             }
 
             // Commit succesful updates in our model
-            if (restRequest.Method == HttpMethod.Patch || restRequest.ApiCall.Commit)
+            if (restRequest.Method == new HttpMethod("PATCH") || restRequest.ApiCall.Commit)
             {
                 if (restRequest.Model is TransientObject)
                 {

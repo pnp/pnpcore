@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
-using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -1170,7 +1169,7 @@ namespace PnP.Core.Model
                 return;
             }
 
-            batch.Add(this, entityInfo, HttpMethod.Patch, api.ApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson);
         }
 
         /// <summary>
@@ -1193,7 +1192,7 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
-            batch.Add(this, entityInfo, HttpMethod.Patch, api.ApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson);
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 

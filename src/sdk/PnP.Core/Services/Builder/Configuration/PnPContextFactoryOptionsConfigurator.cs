@@ -17,8 +17,12 @@ namespace PnP.Core.Services.Builder.Configuration
 
         public void Configure(PnPContextFactoryOptions options)
         {
-            foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Sites)
+            //foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Sites)
+            foreach(var siteOption in pnpCoreOptions.Value.Sites)
             {
+                var optionKey = siteOption.Key;
+                var optionValue = siteOption.Value;
+
                 options.Configurations.Add(new PnPContextFactoryOptionsConfiguration { 
                     Name = optionKey,
                     SiteUrl = new Uri(optionValue.SiteUrl),
@@ -34,8 +38,12 @@ namespace PnP.Core.Services.Builder.Configuration
 
         public void Configure(OAuthAuthenticationProviderOptions options)
         {
-            foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Credentials)
+            //foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Credentials)
+            foreach (var credentialOption in pnpCoreOptions.Value.Credentials)
             {
+                var optionKey = credentialOption.Key;
+                var optionValue = credentialOption.Value;
+
                 if (!String.IsNullOrEmpty(optionValue.CredentialManagerName))
                 {
                     options.Configurations.Add(new OAuthCredentialManagerConfiguration {

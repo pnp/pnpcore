@@ -76,7 +76,7 @@ namespace PnP.Core.QueryModel
         ///     <paramref name = "source"/> contains no elements.
         /// </exception>
         public static Task<TSource> FirstAsync<TSource>(
-            [NotNull] this IQueryable<TSource> source,
+            this IQueryable<TSource> source,
             CancellationToken cancellationToken = default)
         {
             if (source == null)
@@ -124,8 +124,8 @@ namespace PnP.Core.QueryModel
         ///     </para>
         /// </exception>
         public static Task<TSource> FirstAsync<TSource>(
-            [NotNull] this IQueryable<TSource> source,
-            [NotNull] Expression<Func<TSource, bool>> predicate,
+            this IQueryable<TSource> source,
+            Expression<Func<TSource, bool>> predicate,
             CancellationToken cancellationToken = default)
         {
             if (source == null)
@@ -165,7 +165,7 @@ namespace PnP.Core.QueryModel
         ///     <paramref name="source"/> is <see langword="null" />.
         /// </exception>
         public static Task<TSource> FirstOrDefaultAsync<TSource>(
-            [NotNull] this IQueryable<TSource> source,
+            this IQueryable<TSource> source,
             CancellationToken cancellationToken = default)
         {
             if (source == null)
@@ -204,8 +204,8 @@ namespace PnP.Core.QueryModel
         ///     <paramref name = "source"/> or <paramref name="predicate"/> is <see langword="null" />.
         /// </exception>
         public static Task<TSource> FirstOrDefaultAsync<TSource>(
-            [NotNull] this IQueryable<TSource> source,
-            [NotNull] Expression<Func<TSource, bool>> predicate,
+            this IQueryable<TSource> source,
+            Expression<Func<TSource, bool>> predicate,
             CancellationToken cancellationToken = default)
         {
             if (source == null)
@@ -246,7 +246,7 @@ namespace PnP.Core.QueryModel
         ///     The task result contains a <see cref="List{T}" /> that contains elements from the input sequence.
         /// </returns>
         public static async Task<List<TSource>> ToListAsync<TSource>(
-            [NotNull] this IQueryable<TSource> source,
+            this IQueryable<TSource> source,
             CancellationToken cancellationToken = default)
         {
             var list = new List<TSource>();
@@ -279,7 +279,7 @@ namespace PnP.Core.QueryModel
         ///     The task result contains an array that contains elements from the input sequence.
         /// </returns>
         public static async Task<TSource[]> ToArrayAsync<TSource>(
-            [NotNull] this IQueryable<TSource> source,
+            this IQueryable<TSource> source,
             CancellationToken cancellationToken = default)
             => (await source.ToListAsync(cancellationToken).ConfigureAwait(false)).ToArray();
 
@@ -303,7 +303,7 @@ namespace PnP.Core.QueryModel
         /// </returns>
         [SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Checked via the [NotNull] attribute")]
         public static IQueryable<TEntity> IgnoreQueryFilters<TEntity>(
-            [NotNull] this IQueryable<TEntity> source)
+            this IQueryable<TEntity> source)
             where TEntity : class
         {
             return
@@ -347,8 +347,8 @@ namespace PnP.Core.QueryModel
         ///     The task result contains a <see cref="Dictionary{TKey, TSource}" /> that contains selected keys and values.
         /// </returns>
         public static Task<Dictionary<TKey, TSource>> ToDictionaryAsync<TSource, TKey>(
-            [NotNull] this IQueryable<TSource> source,
-            [NotNull] Func<TSource, TKey> keySelector,
+            this IQueryable<TSource> source,
+            Func<TSource, TKey> keySelector,
             CancellationToken cancellationToken = default)
             => ToDictionaryAsync(source, keySelector, e => e, comparer: null, cancellationToken);
 
@@ -382,9 +382,9 @@ namespace PnP.Core.QueryModel
         ///     The task result contains a <see cref="Dictionary{TKey, TSource}" /> that contains selected keys and values.
         /// </returns>
         public static Task<Dictionary<TKey, TSource>> ToDictionaryAsync<TSource, TKey>(
-            [NotNull] this IQueryable<TSource> source,
-            [NotNull] Func<TSource, TKey> keySelector,
-            [NotNull] IEqualityComparer<TKey> comparer,
+            this IQueryable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey> comparer,
             CancellationToken cancellationToken = default)
             => ToDictionaryAsync(source, keySelector, e => e, comparer, cancellationToken);
 
@@ -420,9 +420,9 @@ namespace PnP.Core.QueryModel
         ///     <typeparamref name="TElement" /> selected from the input sequence.
         /// </returns>
         public static Task<Dictionary<TKey, TElement>> ToDictionaryAsync<TSource, TKey, TElement>(
-            [NotNull] this IQueryable<TSource> source,
-            [NotNull] Func<TSource, TKey> keySelector,
-            [NotNull] Func<TSource, TElement> elementSelector,
+            this IQueryable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
             CancellationToken cancellationToken = default)
             => ToDictionaryAsync(source, keySelector, elementSelector, comparer: null, cancellationToken);
 
@@ -461,10 +461,10 @@ namespace PnP.Core.QueryModel
         ///     <typeparamref name="TElement" /> selected from the input sequence.
         /// </returns>
         public static async Task<Dictionary<TKey, TElement>> ToDictionaryAsync<TSource, TKey, TElement>(
-            [NotNull] this IQueryable<TSource> source,
-            [NotNull] Func<TSource, TKey> keySelector,
-            [NotNull] Func<TSource, TElement> elementSelector,
-            [NotNull] IEqualityComparer<TKey> comparer,
+            this IQueryable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey> comparer,
             CancellationToken cancellationToken = default)
         {
             if (source == null)
@@ -512,8 +512,8 @@ namespace PnP.Core.QueryModel
         /// </param>
         /// <returns> A task that represents the asynchronous operation. </returns>
         public static async Task ForEachAsync<T>(
-            [NotNull] this IQueryable<T> source,
-            [NotNull] Action<T> action,
+            this IQueryable<T> source,
+            Action<T> action,
             CancellationToken cancellationToken = default)
         {
             if (source == null)
@@ -546,7 +546,7 @@ namespace PnP.Core.QueryModel
         /// </param>
         /// <returns> The query results. </returns>
         public static IAsyncEnumerable<TSource> AsAsyncEnumerable<TSource>(
-            [NotNull] this IQueryable<TSource> source)
+            this IQueryable<TSource> source)
         {
             if (source == null)
             {

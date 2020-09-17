@@ -1,7 +1,6 @@
 using PnP.Core.Services;
 using System.Dynamic;
 using System.Text.Json;
-using PnP.Core.Utilities;
 
 namespace PnP.Core.Model.SharePoint
 {
