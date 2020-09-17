@@ -16,12 +16,12 @@ namespace PnP.Core.Model
         /// <summary>
         /// Is this property an expandable property?
         /// </summary>
-        public bool Expandable { get; set; } = false;
+        public bool Expandable { get; set; }
 
         /// <summary>
         /// Expand this property when there's a default get (a get without specifying the fields to load)
         /// </summary>
-        public bool ExpandByDefault { get; set; } = false;
+        public bool ExpandByDefault { get; set; }
 
         /// <summary>
         /// Json path that contains the value we need, relative to the object loaded via FieldName
@@ -32,6 +32,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Force a call out to the custom mapping handler for this field / the default mapping logic will not be applied
         /// </summary>
-        public bool UseCustomMapping { get; set; } = false;
+        public bool UseCustomMapping { get; set; }
     }
 }

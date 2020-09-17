@@ -20,7 +20,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// If true than all requests to Microsoft Graph use the beta endpoint
         /// </summary>
-        public bool GraphAlwaysUseBeta { get; set; } = false;
+        public bool GraphAlwaysUseBeta { get; set; }
 
         /// <summary>
         /// Collection of configurations for PnPContextFactory

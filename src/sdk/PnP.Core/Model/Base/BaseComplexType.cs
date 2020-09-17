@@ -13,12 +13,12 @@ namespace PnP.Core.Model
         /// <summary>
         /// Handler that will fire when a property mapping does cannot be done automatically
         /// </summary>
-        public Func<FromJson, object> MappingHandler { get; set; } = null;
+        public Func<FromJson, object> MappingHandler { get; set; }
 
         /// <summary>
         /// Handler that will fire after the full json to model operation was done
         /// </summary>
-        public Action<string> PostMappingHandler { get; set; } = null;
+        public Action<string> PostMappingHandler { get; set; }
 
         /// <summary>
         /// Translates model into a set of classes that are used to drive CRUD operations

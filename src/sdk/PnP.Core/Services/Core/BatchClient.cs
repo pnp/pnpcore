@@ -21,7 +21,7 @@ namespace PnP.Core.Services
     internal class BatchClient
     {
         // Simple counter used to construct the batch key used for test mocking
-        private int testUseCounter = 0;
+        private int testUseCounter;
 
         // Handles sending telemetry events
         private readonly TelemetryManager telemetryManager;
@@ -168,7 +168,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Handler that can be used to rewrite mocking files before they're used
         /// </summary>
-        internal Func<string, string> MockingFileRewriteHandler { get; set; } = null;
+        internal Func<string, string> MockingFileRewriteHandler { get; set; }
 #endif
 
         /// <summary>

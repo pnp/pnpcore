@@ -49,7 +49,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// Was this collectioned loaded with data from a server request
         /// </summary>
-        public bool Requested { get; set; } = false;
+        public bool Requested { get; set; }
 
         /// <summary>
         /// Number of items in the collection

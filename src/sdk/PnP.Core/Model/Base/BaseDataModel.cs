@@ -1027,7 +1027,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// API call handler for add requests
         /// </summary>
-        internal AddApiCall AddApiCallHandler { get; set; } = null;
+        internal AddApiCall AddApiCallHandler { get; set; }
 
         /// <summary>
         /// Creates and adds a Post request to the given batch

@@ -55,54 +55,6 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="pnpObject">Model to populate from JSON</param>
         /// <param name="entity">Information about the current model</param>
-        /// <param name="apiCallResponse">The REST response to process</param>
-        /// <param name="fromJsonCasting">Delegate to be called for type conversion</param>
-        /// <returns></returns>
-        internal static async Task MapJsonToModel(TransientObject pnpObject, EntityInfo entity, ApiCallResponse apiCallResponse, Func<FromJson, object> fromJsonCasting = null, string dataRootElementPath = null)
-        {
-            if (string.IsNullOrEmpty(apiCallResponse.Json))
-            {
-                // We have nothing to process, so return
-                return;
-            }
-
-            // Json parsing options
-            var options = new JsonDocumentOptions
-            {
-                AllowTrailingCommas = true
-            };
-
-            // Parse the received json content
-            using (JsonDocument document = JsonDocument.Parse(apiCallResponse.Json, options))
-            {
-                // for SharePoint REST calls the root property is d, for recursive calls this is not the case
-                if (!document.RootElement.TryGetProperty("d", out JsonElement root))
-                {
-                    root = document.RootElement;
-                }
-
-                if (!string.IsNullOrEmpty(dataRootElementPath))
-                {
-                    try
-                    {
-                        root = GetJsonElementFromPath(root, dataRootElementPath);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ClientException(ErrorType.UnexpectedMappingType, $"The JSON property from path {dataRootElementPath} could not be parsed.", ex);
-                    }
-                }
-
-                // Map the returned JSON to the respective entities
-                await FromJson(pnpObject, entity, new ApiResponse(apiCallResponse.ApiCall, root, apiCallResponse.BatchRequestId), fromJsonCasting).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary>
-        /// Maps JSON to model classes
-        /// </summary>
-        /// <param name="pnpObject">Model to populate from JSON</param>
-        /// <param name="entity">Information about the current model</param>
         /// <param name="apiResponse">The REST response to process</param>
         /// <param name="fromJsonCasting">Delegate to be called for type conversion</param>
         /// <returns></returns>

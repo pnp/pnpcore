@@ -521,6 +521,11 @@ namespace PnP.Core.QueryModel
                 throw new ArgumentNullException(nameof(source));
             }
 
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
             await foreach (var element in source.AsAsyncEnumerable().WithCancellation(cancellationToken))
             {
                 action(element);

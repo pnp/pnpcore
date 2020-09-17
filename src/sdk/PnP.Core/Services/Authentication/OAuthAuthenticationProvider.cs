@@ -32,12 +32,12 @@ namespace PnP.Core.Services
 
         // Token cache handling
         private static readonly SemaphoreSlim semaphoreSlimTokens = new SemaphoreSlim(1);
-        private AutoResetEvent tokenResetEvent = null;
+        private AutoResetEvent tokenResetEvent;
         private readonly ConcurrentDictionary<string, string> tokenCache = new ConcurrentDictionary<string, string>();
 
         internal class TokenWaitInfo
         {
-            public RegisteredWaitHandle Handle = null;
+            public RegisteredWaitHandle Handle;
         }
 
         /// <summary>

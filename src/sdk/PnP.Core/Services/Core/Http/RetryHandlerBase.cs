@@ -32,7 +32,7 @@ namespace PnP.Core.Services
         #endregion
 
         internal PnPGlobalSettingsOptions GlobalSettings { get; private set; }
-        internal bool UseRetryAfterHeader { get; set; } = false;
+        internal bool UseRetryAfterHeader { get; set; }
         internal int MaxRetries { get; set; } = 10;
         internal int DelayInSeconds { get; set; } = 3;
         internal bool IncrementalDelay { get; set; } = true;
