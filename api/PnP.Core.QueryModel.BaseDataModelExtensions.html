@@ -92,37 +92,13 @@
   </div>
   
   
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
-    </div>
-  </div>
   
   <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.QueryModel.html">PnP.Core.QueryModel</a></h6>
   <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
   
   <h5 id="PnP_Core_QueryModel_BaseDataModelExtensions_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class BaseDataModelExtensions</code></pre>
+    <pre><code class="lang-csharp hljs">public static class BaseDataModelExtensions : object</code></pre>
   </div>
 
   
@@ -134,7 +110,7 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.AndThen%60%602(System.Threading.Tasks.Task%7B%60%600%7D%2CSystem.Func%7B%60%600%2CSystem.Threading.Tasks.Task%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_Task___0__Func___0_Task___1___.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.AndThen%60%602(Task%7B%60%600%7D%2CFunc%7B%60%600%2CTask%7B%60%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L23" title="View Source"><i class="fa fa-code"></i></a>
@@ -142,9 +118,9 @@
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_AndThen_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.AndThen*"></a>
   
-  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.AndThen``2(System.Threading.Tasks.Task{``0},System.Func{``0,System.Threading.Tasks.Task{``1}})"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___" class="expander" data-toggle="collapse">AndThen&lt;TIn, TOut&gt;(Task&lt;TIn&gt;, Func&lt;TIn, Task&lt;TOut&gt;&gt;)</a></h4>
+  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_Task___0__Func___0_Task___1___" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.AndThen``2(Task{``0},Func{``0,Task{``1}})"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_Task___0__Func___0_Task___1___" class="expander" data-toggle="collapse">AndThen&lt;TIn, TOut&gt;(Task&lt;TIn&gt;, Func&lt;TIn, Task&lt;TOut&gt;&gt;)</a></h4>
   
-  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_System_Threading_Tasks_Task___0__System_Func___0_System_Threading_Tasks_Task___1___" class="collapse in">
+  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_Task___0__Func___0_Task___1___" class="collapse in">
   <div class="markdown level1 summary"><p>Chains async calls. See <a href="https://stackoverflow.com/a/52739551">https://stackoverflow.com/a/52739551</a> for more information</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -158,7 +134,7 @@
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TIn&gt;</span>
+        <span class="pull-right"><span class="xref">Task</span>&lt;TIn&gt;</span>
         <span class="parametername">inputTask</span>
         <p><p>Async operatation to start from</p>
 </p>
@@ -166,7 +142,7 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TIn, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TOut&gt;&gt;</span>
+        <span class="pull-right"><span class="xref">Func</span>&lt;TIn, <span class="xref">Task</span>&lt;TOut&gt;&gt;</span>
         <span class="parametername">mapping</span>
         <p><p>Async operation to run next</p>
 </p>
@@ -178,7 +154,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TOut&gt;
+        <span class="xref">Task</span>&lt;TOut&gt;
         <p><p>Task outcome from the ran async operation</p>
 </p>
       </td>
@@ -215,7 +191,7 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Include%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_IQueryable___0__Expression_Func___0_System_Object___.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Include%60%601(IQueryable%7B%60%600%7D%2CExpression%7BFunc%7B%60%600%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L87" title="View Source"><i class="fa fa-code"></i></a>
@@ -223,9 +199,9 @@
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_Include_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Include*"></a>
   
-  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Include``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___" class="expander" data-toggle="collapse">Include&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;)</a></h4>
+  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_IQueryable___0__Expression_Func___0_System_Object___" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Include``1(IQueryable{``0},Expression{Func{``0,System.Object}})"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_IQueryable___0__Expression_Func___0_System_Object___" class="expander" data-toggle="collapse">Include&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;)</a></h4>
   
-  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___" class="collapse in">
+  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_IQueryable___0__Expression_Func___0_System_Object___" class="collapse in">
   <div class="markdown level1 summary"><p>Extension method to declare the collection properties to expand while querying the REST service</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -239,7 +215,7 @@
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TResult&gt;</span>
+        <span class="pull-right"><span class="xref">IQueryable</span>&lt;TResult&gt;</span>
         <span class="parametername">source</span>
         <p><p>The collection of items to expand properties from</p>
 </p>
@@ -247,7 +223,7 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TResult, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;</span>
+        <span class="pull-right"><span class="xref">Expression</span>&lt;<span class="xref">Func</span>&lt;TResult, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;</span>
         <span class="parametername">selector</span>
         <p><p>A selector for the expandable properties</p>
 </p>
@@ -259,7 +235,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TResult&gt;
+        <span class="xref">IQueryable</span>&lt;TResult&gt;
         <p><p>The resulting collection</p>
 </p>
       </td>
@@ -289,7 +265,7 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Include%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_IQueryable___0__Expression_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Include%60%601(IQueryable%7B%60%600%7D%2CExpression%7BFunc%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L114" title="View Source"><i class="fa fa-code"></i></a>
@@ -297,9 +273,9 @@
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_Include_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Include*"></a>
   
-  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Include``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____" class="expander" data-toggle="collapse">Include&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;[])</a></h4>
+  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_IQueryable___0__Expression_Func___0_System_Object_____" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Include``1(IQueryable{``0},Expression{Func{``0,System.Object}}[])"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_IQueryable___0__Expression_Func___0_System_Object_____" class="expander" data-toggle="collapse">Include&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;[])</a></h4>
   
-  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____" class="collapse in">
+  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_IQueryable___0__Expression_Func___0_System_Object_____" class="collapse in">
   <div class="markdown level1 summary"><p>Extension method to declare the collection properties to expand while querying the REST service</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -313,7 +289,7 @@
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TResult&gt;</span>
+        <span class="pull-right"><span class="xref">IQueryable</span>&lt;TResult&gt;</span>
         <span class="parametername">source</span>
         <p><p>The collection of items to expand properties from</p>
 </p>
@@ -321,7 +297,7 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TResult, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
+        <span class="pull-right"><span class="xref">Expression</span>&lt;<span class="xref">Func</span>&lt;TResult, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
         <span class="parametername">selectors</span>
         <p><p>An array of selectors for the expandable properties</p>
 </p>
@@ -333,7 +309,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TResult&gt;
+        <span class="xref">IQueryable</span>&lt;TResult&gt;
         <p><p>The resulting collection</p>
 </p>
       </td>
@@ -363,7 +339,7 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Load%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_IQueryable___0__Expression_Func___0_System_Object___.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Load%60%601(IQueryable%7B%60%600%7D%2CExpression%7BFunc%7B%60%600%2CSystem.Object%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L147" title="View Source"><i class="fa fa-code"></i></a>
@@ -371,9 +347,9 @@
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_Load_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Load*"></a>
   
-  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Load``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___" class="expander" data-toggle="collapse">Load&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;)</a></h4>
+  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_IQueryable___0__Expression_Func___0_System_Object___" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Load``1(IQueryable{``0},Expression{Func{``0,System.Object}})"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_IQueryable___0__Expression_Func___0_System_Object___" class="expander" data-toggle="collapse">Load&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;)</a></h4>
   
-  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___" class="collapse in">
+  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_IQueryable___0__Expression_Func___0_System_Object___" class="collapse in">
   <div class="markdown level1 summary"><p>Extension method to declare a field/metadata property to load while executing the REST query</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -387,7 +363,7 @@
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TResult&gt;</span>
+        <span class="pull-right"><span class="xref">IQueryable</span>&lt;TResult&gt;</span>
         <span class="parametername">source</span>
         <p><p>The collection of items to load the field/metadata from</p>
 </p>
@@ -395,7 +371,7 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TResult, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;</span>
+        <span class="pull-right"><span class="xref">Expression</span>&lt;<span class="xref">Func</span>&lt;TResult, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;</span>
         <span class="parametername">selector</span>
         <p><p>A selector for a field/metadata</p>
 </p>
@@ -407,7 +383,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TResult&gt;
+        <span class="xref">IQueryable</span>&lt;TResult&gt;
         <p><p>The resulting collection</p>
 </p>
       </td>
@@ -437,7 +413,7 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Load%60%601(System.Linq.IQueryable%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_IQueryable___0__Expression_Func___0_System_Object_____.md&amp;value=---%0Auid%3A%20PnP.Core.QueryModel.BaseDataModelExtensions.Load%60%601(IQueryable%7B%60%600%7D%2CExpression%7BFunc%7B%60%600%2CSystem.Object%7D%7D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/QueryModel/Query/BaseDataModelExtensions.cs/#L174" title="View Source"><i class="fa fa-code"></i></a>
@@ -445,9 +421,9 @@
   
   <a id="PnP_Core_QueryModel_BaseDataModelExtensions_Load_" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Load*"></a>
   
-  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Load``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}}[])"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____" class="expander" data-toggle="collapse">Load&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;[])</a></h4>
+  <h4 id="PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_IQueryable___0__Expression_Func___0_System_Object_____" data-uid="PnP.Core.QueryModel.BaseDataModelExtensions.Load``1(IQueryable{``0},Expression{Func{``0,System.Object}}[])"><a href="#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_IQueryable___0__Expression_Func___0_System_Object_____" class="expander" data-toggle="collapse">Load&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;[])</a></h4>
   
-  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____" class="collapse in">
+  <div id="collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_IQueryable___0__Expression_Func___0_System_Object_____" class="collapse in">
   <div class="markdown level1 summary"><p>Extension method to declare the fields/metadata properties to load while executing the REST query</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -461,7 +437,7 @@
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TResult&gt;</span>
+        <span class="pull-right"><span class="xref">IQueryable</span>&lt;TResult&gt;</span>
         <span class="parametername">source</span>
         <p><p>The collection of items to load fields/metadata from</p>
 </p>
@@ -469,7 +445,7 @@
     </tr>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TResult, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
+        <span class="pull-right"><span class="xref">Expression</span>&lt;<span class="xref">Func</span>&lt;TResult, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;&gt;[]</span>
         <span class="parametername">selectors</span>
         <p><p>An array of selectors for the fields/metadata</p>
 </p>
@@ -481,7 +457,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable-1">IQueryable</a>&lt;TResult&gt;
+        <span class="xref">IQueryable</span>&lt;TResult&gt;
         <p><p>The resulting collection</p>
 </p>
       </td>

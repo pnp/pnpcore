@@ -90,18 +90,6 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable.elementtype#System_Linq_IQueryable_ElementType">IQueryable.ElementType</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable.expression#System_Linq_IQueryable_Expression">IQueryable.Expression</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.iqueryable.provider#System_Linq_IQueryable_Provider">IQueryable.Provider</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator#System_Collections_Generic_IEnumerable_1_GetEnumerator">IEnumerable&lt;IList&gt;.GetEnumerator()</a>
-    </div>
-    <div>
       <a class="xref" href="PnP.Core.Model.IDataModelParent.html#PnP_Core_Model_IDataModelParent_Parent">IDataModelParent.Parent</a>
     </div>
     <div>
@@ -120,7 +108,7 @@
       <a class="xref" href="PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_CanPage">ISupportPaging&lt;IList&gt;.CanPage</a>
     </div>
     <div>
-      <a class="xref" href="PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPagedAsync_System_Int32_System_Linq_Expressions_Expression_System_Func__0_System_Object_____">ISupportPaging&lt;IList&gt;.GetPagedAsync(Int32, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
+      <a class="xref" href="PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPagedAsync_System_Int32_Expression_Func__0_System_Object_____">ISupportPaging&lt;IList&gt;.GetPagedAsync(Int32, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
     </div>
     <div>
       <a class="xref" href="PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetNextPageAsync">ISupportPaging&lt;IList&gt;.GetNextPageAsync()</a>
@@ -135,7 +123,7 @@
   
   <h5 id="PnP_Core_Model_SharePoint_IListCollection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IListCollection : IQueryable&lt;IList&gt;, IQueryable, IDataModelCollection&lt;IList&gt;, IEnumerable&lt;IList&gt;, IEnumerable, IDataModelParent, IDataModelWithContext, IRequestableCollection, ISupportPaging&lt;IList&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection&lt;IList&gt;, IEnumerable&lt;IList&gt;, IDataModelParent, IDataModelWithContext, IRequestableCollection, ISupportPaging&lt;IList&gt;</code></pre>
   </div>
 
   
@@ -255,7 +243,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IList.html">IList</a>&gt;
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IList.html">IList</a>&gt;
         <p><p>Newly added list</p>
 </p>
       </td>
@@ -463,7 +451,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IList.html">IList</a>&gt;
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IList.html">IList</a>&gt;
         <p><p>Newly added list</p>
 </p>
       </td>
@@ -527,7 +515,7 @@
   <table>
     <tr>
       <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IList.html">IList</a>&gt;
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IList.html">IList</a>&gt;
         <p><p>Newly added list</p>
 </p>
       </td>
@@ -547,85 +535,10 @@
   
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1___0_System_Linq_Expressions_Expression_System_Func___0_System_Object___">DataModelExtensions.IsPropertyAvailable&lt;TModel&gt;(TModel, Expression&lt;Func&lt;TModel, Object&gt;&gt;)</a>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1___0_Expression_Func___0_System_Object___">DataModelExtensions.IsPropertyAvailable&lt;TModel&gt;(TModel, Expression&lt;Func&lt;TModel, Object&gt;&gt;)</a>
   </div>
   <div>
-      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_LoadProperties__1_PnP_Core_Model_IDataModelCollection___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____">DataModelExtensions.LoadProperties&lt;TModel&gt;(IDataModelCollection&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_">QueryableExtensions.FirstAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_">QueryableExtensions.FirstAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, Expression&lt;Func&lt;TSource, Boolean&gt;&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_">QueryableExtensions.FirstOrDefaultAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_">QueryableExtensions.FirstOrDefaultAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, Expression&lt;Func&lt;TSource, Boolean&gt;&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToListAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_">QueryableExtensions.ToListAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToArrayAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_">QueryableExtensions.ToArrayAsync&lt;TSource&gt;(IQueryable&lt;TSource&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_IgnoreQueryFilters__1_System_Linq_IQueryable___0__">QueryableExtensions.IgnoreQueryFilters&lt;TEntity&gt;(IQueryable&lt;TEntity&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Threading_CancellationToken_">QueryableExtensions.ToDictionaryAsync&lt;TSource, TKey&gt;(IQueryable&lt;TSource&gt;, Func&lt;TSource, TKey&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__2_System_Linq_IQueryable___0__System_Func___0___1__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_">QueryableExtensions.ToDictionaryAsync&lt;TSource, TKey&gt;(IQueryable&lt;TSource&gt;, Func&lt;TSource, TKey&gt;, IEqualityComparer&lt;TKey&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Threading_CancellationToken_">QueryableExtensions.ToDictionaryAsync&lt;TSource, TKey, TElement&gt;(IQueryable&lt;TSource&gt;, Func&lt;TSource, TKey&gt;, Func&lt;TSource, TElement&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ToDictionaryAsync__3_System_Linq_IQueryable___0__System_Func___0___1__System_Func___0___2__System_Collections_Generic_IEqualityComparer___1__System_Threading_CancellationToken_">QueryableExtensions.ToDictionaryAsync&lt;TSource, TKey, TElement&gt;(IQueryable&lt;TSource&gt;, Func&lt;TSource, TKey&gt;, Func&lt;TSource, TElement&gt;, IEqualityComparer&lt;TKey&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ForEachAsync__1_System_Linq_IQueryable___0__System_Action___0__System_Threading_CancellationToken_">QueryableExtensions.ForEachAsync&lt;T&gt;(IQueryable&lt;T&gt;, Action&lt;T&gt;, CancellationToken)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_AsAsyncEnumerable__1_System_Linq_IQueryable___0__">QueryableExtensions.AsAsyncEnumerable&lt;TSource&gt;(IQueryable&lt;TSource&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___">BaseDataModelExtensions.Include&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_Include__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____">BaseDataModelExtensions.Include&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;[])</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object___">BaseDataModelExtensions.Load&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.QueryModel.BaseDataModelExtensions.html#PnP_Core_QueryModel_BaseDataModelExtensions_Load__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Object_____">BaseDataModelExtensions.Load&lt;TResult&gt;(IQueryable&lt;TResult&gt;, Expression&lt;Func&lt;TResult, Object&gt;&gt;[])</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitle_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_">ListExtensions.GetByTitle(IQueryable&lt;IList&gt;, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitle_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____">ListExtensions.GetByTitle(IQueryable&lt;IList&gt;, String, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitleAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_">ListExtensions.GetByTitleAsync(IQueryable&lt;IList&gt;, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitleAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____">ListExtensions.GetByTitleAsync(IQueryable&lt;IList&gt;, String, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_">ListExtensions.GetById(IQueryable&lt;IList&gt;, Guid)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetById_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____">ListExtensions.GetById(IQueryable&lt;IList&gt;, Guid, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_">ListExtensions.GetByIdAsync(IQueryable&lt;IList&gt;, Guid)</a>
-  </div>
-  <div>
-      <a class="xref" href="PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByIdAsync_System_Linq_IQueryable_PnP_Core_Model_SharePoint_IList__System_Guid_System_Linq_Expressions_Expression_System_Func_PnP_Core_Model_SharePoint_IList_System_Object_____">ListExtensions.GetByIdAsync(IQueryable&lt;IList&gt;, Guid, Expression&lt;Func&lt;IList, Object&gt;&gt;[])</a>
+      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_LoadProperties__1_PnP_Core_Model_IDataModelCollection___0__Expression_Func___0_System_Object_____">DataModelExtensions.LoadProperties&lt;TModel&gt;(IDataModelCollection&lt;TModel&gt;, Expression&lt;Func&lt;TModel, Object&gt;&gt;[])</a>
   </div>
   
 </article>
