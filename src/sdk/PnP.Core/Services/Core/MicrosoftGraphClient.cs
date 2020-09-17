@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 
@@ -10,7 +11,7 @@ namespace PnP.Core.Services
     public class MicrosoftGraphClient
     {
         private readonly ILogger logger;
-        private readonly ISettings settings;
+        private readonly PnPGlobalSettingsOptions globalSettings;
 
         /// <summary>
         /// Returns the configured Microsoft Graph http client
@@ -22,28 +23,28 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="client">Http client instance</param>
         /// <param name="log">Logger</param>
-        /// <param name="settingsClient">Settings to configure the http client</param>
-        public MicrosoftGraphClient(HttpClient client, ILogger<MicrosoftGraphClient> log, ISettings settingsClient)
+        /// <param name="options">Settings to configure the http client</param>
+        public MicrosoftGraphClient(HttpClient client, ILogger<MicrosoftGraphClient> log, IOptions<PnPGlobalSettingsOptions> options)
         {
             logger = log;
-            settings = settingsClient;
+            globalSettings = options?.Value;
 
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));
             }
 
-            if (settingsClient == null)
+            if (globalSettings == null)
             {
-                throw new ArgumentNullException(nameof(settingsClient));
+                throw new ArgumentNullException(nameof(options));
             }
 
             client.BaseAddress = PnPConstants.MicrosoftGraphBaseUri;
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true");
 
-            if (!string.IsNullOrEmpty(settings.HttpUserAgent))
+            if (!string.IsNullOrEmpty(globalSettings.HttpUserAgent))
             {
-                client.DefaultRequestHeaders.Add("User-Agent", settings.HttpUserAgent);
+                client.DefaultRequestHeaders.Add("User-Agent", globalSettings.HttpUserAgent);
             }
 
             Client = client;

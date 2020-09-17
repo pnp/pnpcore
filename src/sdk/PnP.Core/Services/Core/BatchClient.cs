@@ -1,5 +1,6 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
@@ -113,29 +114,29 @@ namespace PnP.Core.Services
             internal List<BatchRequest> Requests { get; set; } = new List<BatchRequest>();
         }
 
-    #endregion
+        #endregion
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="context">PnP Context</param>
-        /// <param name="settingsClient">Settings to use</param>
+        /// <param name="globalOptions">Global settings to use</param>
         /// <param name="telemetryClient">Azure AppInsihgts telemetry client to use</param>
-        internal BatchClient(PnPContext context, ISettings settingsClient, TelemetryClient telemetryClient)
+        internal BatchClient(PnPContext context, PnPGlobalSettingsOptions globalOptions, TelemetryClient telemetryClient)
         {
             PnPContext = context;
             if (telemetryClient != null)
             {
-                telemetryManager = new TelemetryManager(telemetryClient, settingsClient);
+                telemetryManager = new TelemetryManager(telemetryClient, globalOptions);
             }
             else
             {
                 telemetryManager = null;
             }
 
-            HttpMicrosoftGraphMaxRetries = settingsClient.HttpMicrosoftGraphMaxRetries;
-            HttpMicrosoftGraphDelayInSeconds = settingsClient.HttpMicrosoftGraphDelayInSeconds;
-            HttpMicrosoftGraphUseIncrementalDelay = settingsClient.HttpMicrosoftGraphUseIncrementalDelay;
+            HttpMicrosoftGraphMaxRetries = globalOptions.HttpMicrosoftGraphMaxRetries;
+            HttpMicrosoftGraphDelayInSeconds = globalOptions.HttpMicrosoftGraphDelayInSeconds;
+            HttpMicrosoftGraphUseIncrementalDelay = globalOptions.HttpMicrosoftGraphUseIncrementalDelay;
         }
 
         /// <summary>

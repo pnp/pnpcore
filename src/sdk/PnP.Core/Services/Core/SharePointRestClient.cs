@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 
@@ -10,7 +11,7 @@ namespace PnP.Core.Services
     public class SharePointRestClient
     {
         private readonly ILogger logger;
-        private readonly ISettings settings;
+        private readonly PnPGlobalSettingsOptions globalSettings;
 
         /// <summary>
         /// Http client which needs to be used for making a SharePoint REST call
@@ -23,31 +24,31 @@ namespace PnP.Core.Services
         /// <param name="client">Http Client coming from the .Net http client factory</param>
         /// <param name="log">Logger service</param>
         /// <param name="settingsClient">Settings service</param>
-        public SharePointRestClient(HttpClient client, ILogger<SharePointRestClient> log, ISettings settingsClient)
+        public SharePointRestClient(HttpClient client, ILogger<SharePointRestClient> log, IOptions<PnPGlobalSettingsOptions> options)
         {
             logger = log;
-            settings = settingsClient;
+            globalSettings = options?.Value;
 
             if (client == null)
             {
                 throw new ArgumentNullException(nameof(client));
             }
 
-            if (settingsClient == null)
+            if (globalSettings == null)
             {
-                throw new ArgumentNullException(nameof(settingsClient));
+                throw new ArgumentNullException(nameof(options));
             }
 
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
 
-            if (!string.IsNullOrEmpty(settings.HttpUserAgent))
+            if (!string.IsNullOrEmpty(globalSettings.HttpUserAgent))
             {
-                client.DefaultRequestHeaders.Add("User-Agent", settings.HttpUserAgent);
+                client.DefaultRequestHeaders.Add("User-Agent", globalSettings.HttpUserAgent);
             }
 
-            if (!string.IsNullOrEmpty(settings.VersionTag))
+            if (!string.IsNullOrEmpty(globalSettings.VersionTag))
             {
-                client.DefaultRequestHeaders.Add("X-ClientService-ClientTag", settings.VersionTag);
+                client.DefaultRequestHeaders.Add("X-ClientService-ClientTag", globalSettings.VersionTag);
             }
 
             Client = client;

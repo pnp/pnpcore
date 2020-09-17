@@ -22,7 +22,6 @@ namespace PnP.Core.Services
 
             // Add a SharePoint Online Context Factory service instance
             return collection
-                .AddSettings()
                 .AddAuthenticationServices();
         }
 
@@ -47,7 +46,6 @@ namespace PnP.Core.Services
 
             // Add an Authentication Provider Factory service instance
             return collection
-                .AddSettings()
                 .AddAuthenticationServices();
         }
 

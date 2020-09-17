@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace PnP.Core.Services
@@ -22,7 +23,6 @@ namespace PnP.Core.Services
 
             // Add a SharePoint Online Context Factory service instance
             return collection
-                .AddSettings()
 #if !BLAZOR
                 // TODO: Maybe we should review this part and move it into a method specific for Blazor, in the dedicated project/package
                 .AddTelemetryServices()
@@ -53,7 +53,6 @@ namespace PnP.Core.Services
 
             // Add a PnP Context Factory service instance
             return collection
-                .AddSettings()
 #if !BLAZOR
                 .AddTelemetryServices()
 #endif
@@ -89,13 +88,13 @@ namespace PnP.Core.Services
 #if !BLAZOR
         private static IServiceCollection AddTelemetryServices(this IServiceCollection collection)
         {
-            var settingsService = collection.BuildServiceProvider().GetRequiredService<ISettings>();
+            var globalOptionsService = collection.BuildServiceProvider().GetRequiredService<IOptions<PnPGlobalSettingsOptions>>();
 
             // Setup Azure App Insights
             // See https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/WorkerServiceSampleWithApplicationInsights as example
             return collection.AddApplicationInsightsTelemetryWorkerService(options =>
             {
-                if (!settingsService.DisableTelemetry)
+                if (!globalOptionsService.Value.DisableTelemetry)
                 {
                     // Production AppInsights
                     options.InstrumentationKey = "ffe6116a-bda0-4f0a-b0cf-d26f1b0d84eb";

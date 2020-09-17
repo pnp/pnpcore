@@ -21,7 +21,102 @@ If you want to debug the SDK code you can include the PnP Core project (`src\PnP
 
 ## Configuring the needed services
 
-Below snippet shows how to configure the needed services in a .Net Core console app: it's required to add and configure the `AuthenticationProviderFactory` and the `PnPContextFactory` services. Typically you would also include configuration and logging as well.
+In order to configure the needed services in a .Net Core console app, you can rely on the `AddPnPCore` extension method, like in the following code excerpt:
+
+```csharp
+var host = Host.CreateDefaultBuilder()
+// Set environment to use
+.UseEnvironment("demo") // you can eventually read it from environment variables
+// Configure logging
+// Configure logging
+.ConfigureServices((hostingContext, services) =>
+{
+    // Add the PnP Core SDK library services
+    services.AddPnPCore();
+    // Add the PnP Core SDK library services configuration from the appsettings.json file
+    services.Configure<PnPCoreOptions>(Configuration.GetSection("PnPCore"));
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+```
+
+And you will also need to provide the configuration in the `appsettings.json` file, using a configuration section like the following one:
+
+```json
+{
+  "PnPCore": {
+    "DisableTelemetry": "false",
+    "HttpRequests": {
+      "UserAgent": "ISV|Contoso|ProductX",
+      "SharePointRest": {
+        "UseRetryAfterHeader": "false",
+        "MaxRetries": "10",
+        "DelayInSeconds": "3",
+        "UseIncrementalDelay": "true"
+      },
+      "MicrosoftGraph": {
+        "UseRetryAfterHeader": "true",
+        "MaxRetries": "10",
+        "DelayInSeconds": "3",
+        "UseIncrementalDelay": "true"
+      }
+    },
+    "PnPContext": {
+      "GraphFirst": "true",
+      "GraphCanUseBeta": "true",
+      "GraphAlwaysUseBeta": "false"
+    },
+    "Credentials": {
+      "CredentialManagerAuthentication": {
+        "CredentialManagerName": "mycreds"
+      }
+    },
+    "Sites": {
+      "SiteToWorkWith": {
+        "SiteUrl": "https://contoso.sharepoint.com/sites/pnp",
+        "AuthenticationProviderName": "CredentialManagerAuthentication"
+      },
+    }
+  }
+}
+```
+
+If you like to configure the .Net Core console app in code, without relying on the `appsettings.json` file, you can also use the following syntax:
+
+```csharp
+var host = Host.CreateDefaultBuilder()
+// Set environment to use
+.UseEnvironment("demo") // you can eventually read it from environment variables
+// Configure logging
+// Configure logging
+.ConfigureServices((hostingContext, services) =>
+{
+    // Add the PnP Core SDK library services with code based settings
+    services.AddPnPCore(options => {
+        options.PnPContext.GraphFirst = true;
+        options.HttpRequests.UserAgent = "ISV|Contoso|ProductX";
+
+        options.Sites.Add("SiteToWorkWith", new PnPCoreSiteOptions
+        {
+            SiteUrl = "https://contoso.sharepoint.com/sites/pnp",
+            AuthenticationProviderName = "CredentialManagerAuthentication"
+        });
+
+        options.Credentials.Add("CredentialManagerAuthentication", new PnPCoreCredentialOptions
+        {
+            CredentialManagerName = "mycreds"
+        });
+    });
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+```
+
+In advanced scenarios, you can consider using low level services registration, like in the following code excerpt. Typically you would also include configuration and logging as well.
 
 ```csharp
 var host = Host.CreateDefaultBuilder()
