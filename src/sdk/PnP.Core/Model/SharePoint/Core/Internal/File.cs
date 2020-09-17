@@ -42,7 +42,7 @@ namespace PnP.Core.Model.SharePoint
         #region Publish
         public async Task PublishAsync(string comment = null)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string publishEndpointUrl = $"{entity.SharePointUri}/publish(comment='{comment ?? string.Empty}')";
 
             var apiCall = new ApiCall(publishEndpointUrl, ApiType.SPORest);
@@ -67,7 +67,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task PublishBatchAsync(Batch batch, string comment = null)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string publishEndpointUrl = $"{entity.SharePointUri}/publish(comment='{comment ?? string.Empty}')";
 
             var apiCall = new ApiCall(publishEndpointUrl, ApiType.SPORest);
@@ -89,7 +89,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task UnpublishAsync(string comment = null)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string publishEndpointUrl = $"{entity.SharePointUri}/unpublish(comment='{comment ?? string.Empty}')";
 
             var apiCall = new ApiCall(publishEndpointUrl, ApiType.SPORest);
@@ -109,7 +109,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task UnpublishBatchAsync(Batch batch, string comment = null)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string publishEndpointUrl = $"{entity.SharePointUri}/unpublish(comment='{comment ?? string.Empty}')";
 
             var apiCall = new ApiCall(publishEndpointUrl, ApiType.SPORest);
@@ -126,7 +126,7 @@ namespace PnP.Core.Model.SharePoint
         #region Checkout
         public async Task CheckoutAsync()
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string checkoutEndpointUrl = $"{entity.SharePointUri}/checkout";
 
             var apiCall = new ApiCall(checkoutEndpointUrl, ApiType.SPORest);
@@ -151,7 +151,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task CheckoutBatchAsync(Batch batch)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string checkoutEndpointUrl = $"{entity.SharePointUri}/checkout";
 
             var apiCall = new ApiCall(checkoutEndpointUrl, ApiType.SPORest);
@@ -173,7 +173,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task UndoCheckoutAsync()
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string undoCheckoutEndpointUrl = $"{entity.SharePointUri}/undoCheckout";
 
             var apiCall = new ApiCall(undoCheckoutEndpointUrl, ApiType.SPORest);
@@ -198,7 +198,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task UndoCheckoutBatchAsync(Batch batch)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string undoCheckoutEndpointUrl = $"{entity.SharePointUri}/undoCheckout";
 
             var apiCall = new ApiCall(undoCheckoutEndpointUrl, ApiType.SPORest);
@@ -211,7 +211,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task CheckinAsync(string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string checkinEndpointUrl = $"{entity.SharePointUri}/checkin(comment='{comment ?? string.Empty}',checkintype={(int)checkinType})";
 
             var apiCall = new ApiCall(checkinEndpointUrl, ApiType.SPORest);
@@ -241,7 +241,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task CheckinBatchAsync(Batch batch, string comment = null, CheckinType checkinType = CheckinType.MinorCheckIn)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string checkinEndpointUrl = $"{entity.SharePointUri}/checkin(comment='{comment ?? string.Empty}',checkintype={(int)checkinType})";
 
             var apiCall = new ApiCall(checkinEndpointUrl, ApiType.SPORest);
@@ -259,7 +259,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<Guid> RecycleAsync()
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string recycleEndpointUrl = $"{entity.SharePointUri}/recycle";
 
             var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest);
@@ -302,7 +302,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task RecycleBatchAsync(Batch batch)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string recycleEndpointUrl = $"{entity.SharePointUri}/recycle";
 
             var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest);
@@ -314,7 +314,7 @@ namespace PnP.Core.Model.SharePoint
         #region CopyTo
         private ApiCall GetCopyToSameSiteApiCall(string destinationUrl, bool overwrite)
         {
-            var entityInfo = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entityInfo = EntityManager.GetClassInfo(GetType(), this);
             // NOTE WebUtility encode spaces to "+" instead of %20
             string encodedDestinationUrl = WebUtility.UrlEncode(destinationUrl).Replace("+", "%20").Replace("/", "%2F");
             string copyToEndpointUrl = $"{entityInfo.SharePointUri}/copyTo(strnewurl='{encodedDestinationUrl}', boverwrite={overwrite.ToString().ToLower()})";
@@ -407,7 +407,7 @@ namespace PnP.Core.Model.SharePoint
         #region MoveTo
         private ApiCall GetMoveToSameSiteApiCall(string destinationUrl, MoveOperations moveOperations)
         {
-            var entityInfo = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entityInfo = EntityManager.GetClassInfo(GetType(), this);
             // NOTE WebUtility encode spaces to "+" instead of %20
             string encodedDestinationUrl = WebUtility.UrlEncode(destinationUrl).Replace("+", "%20").Replace("/", "%2F");
             string moveToEndpointUrl = $"{entityInfo.SharePointUri}/moveTo(newurl='{encodedDestinationUrl}', flags={(int)moveOperations})";

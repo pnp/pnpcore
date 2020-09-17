@@ -1796,7 +1796,7 @@ namespace PnP.Core.Model
         /// <returns>Entity model class describing this model instance</returns>
         private EntityInfo GetClassInfo(params Expression<Func<TModel, object>>[] expressions)
         {
-            return EntityManager.Instance.GetClassInfo<TModel>(GetType(), this, expressions);
+            return EntityManager.GetClassInfo(GetType(), this, expressions);
         }
 
         #endregion

@@ -46,7 +46,7 @@ namespace PnP.Core.QueryModel
             if (typeof(TModel).ImplementsInterface(typeof(IQueryableDataModel)))
             {
                 // Get the entity info
-                var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(typeof(TModel), null);
+                var entityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null);
 
                 // In case a model can be used from different contexts (e.g. ContentType can be used from Web, but also from List)
                 // it's required to let the entity know this context so that it can provide the correct information when requested
@@ -56,8 +56,7 @@ namespace PnP.Core.QueryModel
                 }
 
                 // and its concrete instance
-                var concreteEntity = EntityManager.Instance
-                    .GetEntityConcreteInstance<TModel>(typeof(TModel), parent);
+                var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), parent);
 
                 // Get the parent (container) entity info
                 var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(parent.GetType());

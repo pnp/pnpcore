@@ -21,7 +21,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
                 // automatically provide the correct 'parent'
-                var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+                var entity = EntityManager.GetClassInfo(GetType(), this);
 
                 // The FieldLinkCollection Add REST endpoint has many limitations
                 // https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-visio/jj245869%28v%3doffice.15%29#rest-resource-endpoint

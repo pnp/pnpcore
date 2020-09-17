@@ -401,7 +401,7 @@ namespace PnP.Core.QueryModel
             }
         }
 
-        private string GetMemberName(Expression expression, bool raiseError = true)
+        private static string GetMemberName(Expression expression, bool raiseError = true)
         {
             switch (expression)
             {

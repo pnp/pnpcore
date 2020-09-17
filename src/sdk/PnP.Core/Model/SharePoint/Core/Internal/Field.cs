@@ -47,7 +47,7 @@ namespace PnP.Core.Model.SharePoint
                 // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
                 // automatically provide the correct 'parent'
                 // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
-                var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+                var entity = EntityManager.GetClassInfo(GetType(), this);
 
                 string endpointUrl = entity.SharePointGet;
                 dynamic addParameters = null;
@@ -114,7 +114,7 @@ namespace PnP.Core.Model.SharePoint
             // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
             // automatically provide the correct 'parent'
             // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
-            EntityInfo entity = EntityManager.Instance.GetClassInfo(typeof(Field), this);
+            EntityInfo entity = EntityManager.GetClassInfo(typeof(Field), this);
             string endpointUrl = $"{entity.SharePointGet}/CreateFieldAsXml";
 
             var body = new
@@ -139,7 +139,7 @@ namespace PnP.Core.Model.SharePoint
             // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
             // automatically provide the correct 'parent'
             // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
-            EntityInfo entity = EntityManager.Instance.GetClassInfo(typeof(Field), this);
+            EntityInfo entity = EntityManager.GetClassInfo(typeof(Field), this);
             string endpointUrl = $"{entity.SharePointGet}/CreateFieldAsXml";
 
             var body = new

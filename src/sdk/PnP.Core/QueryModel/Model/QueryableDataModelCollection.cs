@@ -46,7 +46,7 @@ namespace PnP.Core.QueryModel
         /// </summary>
         public override string ToString()
         {
-            return provider.Translate(Expression).ToString();
+            return DataModelQueryProvider<TModel>.Translate(Expression).ToString();
         }
     }
 }

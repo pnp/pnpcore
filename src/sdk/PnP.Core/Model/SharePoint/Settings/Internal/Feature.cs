@@ -17,14 +17,14 @@ namespace PnP.Core.Model.SharePoint
             AddApiCallHandler = async (keyValuePairs) =>
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
-                var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+                var entity = EntityManager.GetClassInfo(GetType(), this);
                 return new ApiCall($"{entity.SharePointGet}/add(guid'{DefinitionId}')", ApiType.SPORest, null);
             };
         }
 
         public async Task RemoveAsync()
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             var apiCall = new ApiCall($"{entity.SharePointGet}/remove(guid'{DefinitionId}')", ApiType.SPORest);
 
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
@@ -37,7 +37,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task RemoveBatchAsync(Batch batch)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             var apiCall = new ApiCall($"{entity.SharePointGet}/remove(guid'{DefinitionId}')", ApiType.SPORest);
 
             await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);

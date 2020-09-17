@@ -152,7 +152,7 @@ namespace PnP.Core.Model
         /// <returns>Model entity</returns>
         public TModel CreateNew()
         {
-            TModel newModel = (TModel)EntityManager.Instance.GetEntityConcreteInstance<TModel>(typeof(TModel), this);
+            TModel newModel = (TModel)EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), this);
             (newModel as BaseDataModel<TModel>).PnPContext = this.PnPContext;
             return newModel;
         }
@@ -279,11 +279,11 @@ namespace PnP.Core.Model
             var parentEntityWithMappingHandlers = (IDataModelMappingHandler)this.Parent;
 
             // Create a concrete entity of what we expect to get back (e.g. for Lists this is List)
-            var concreteEntity = EntityManager.Instance.GetEntityConcreteInstance<TModel>(typeof(TModel), this.Parent);
+            var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), this.Parent);
             (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
             
             // Get class info for the given concrete entity and the passed expressions
-            var concreteEntityClassInfo = EntityManager.Instance.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, expressions);
+            var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, expressions);
 
             // Determine the receiving property
             var receivingProperty = GetReceivingProperty(parentEntityInfo);

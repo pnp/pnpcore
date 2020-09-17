@@ -279,7 +279,7 @@ namespace PnP.Core.Model.SharePoint
             int counter = 1;
             StringBuilder fieldValues = new StringBuilder();
 
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             IEnumerable<EntityFieldInfo> fields = entity.Fields;
 
             var changedProperties = this.GetChangedProperties();
