@@ -8,7 +8,7 @@ namespace PnP.Core
     /// <summary>
     /// Extensions class that support certificate based encryption/decryption and SecureString protection
     /// </summary>
-    internal static class SecurityExtensions
+    public static class SecurityExtensions
     {
 
         /// <summary>
@@ -17,7 +17,7 @@ namespace PnP.Core
         /// <param name="stringToEncrypt">Text to encrypt</param>
         /// <param name="thumbPrint">Thumbprint of the certificate to use</param>
         /// <returns>Encrypted text</returns>
-        internal static string Encrypt(this string stringToEncrypt, string thumbPrint)
+        public static string Encrypt(this string stringToEncrypt, string thumbPrint)
         {
             X509Certificate2 certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, thumbPrint);
 
@@ -48,7 +48,7 @@ namespace PnP.Core
         /// <param name="stringToDecrypt">Text to decrypt</param>
         /// <param name="thumbPrint">Thumbprint of the certificate to use</param>
         /// <returns>Decrypted text</returns>
-        internal static string Decrypt(this string stringToDecrypt, string thumbPrint)
+        public static string Decrypt(this string stringToDecrypt, string thumbPrint)
         {
             X509Certificate2 certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, thumbPrint);
 
@@ -79,7 +79,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="input">String to convert</param>
         /// <returns>SecureString representation of the passed in string</returns>
-        internal static SecureString ToSecureString(this string input)
+        public static SecureString ToSecureString(this string input)
         {
             if (string.IsNullOrEmpty(input))
                 throw new ArgumentException("Input string is empty and cannot be made into a SecureString", nameof(input));
