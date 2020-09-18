@@ -7,7 +7,7 @@ namespace PnP.Core
     /// <summary>
     /// Supporting class for certificate based operations
     /// </summary>
-    internal static class X509CertificateUtility
+    public static class X509CertificateUtility
     {
         /// <summary>
         /// Loads a certificate from a given certificate store
@@ -99,7 +99,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="certificate">Certificate to operate on</param>
         /// <returns>Public key of the certificate</returns>
-        internal static string GetPublicKey(X509Certificate2 certificate)
+        public static string GetPublicKey(X509Certificate2 certificate)
         {
             if (certificate == null)
             {
