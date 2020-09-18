@@ -28,12 +28,12 @@ namespace PnP.Core.Model
         /// <summary>
         /// Is this a key field for SharePoint - used to prevent duplicate loading in collections
         /// </summary>
-        internal bool IsSharePointKey { get; set; } = false;
+        internal bool IsSharePointKey { get; set; }
 
         /// <summary>
         /// Is this a key field for SharePoint - used to prevent duplicate loading in collections
         /// </summary>
-        internal bool IsGraphKey { get; set; } = false;
+        internal bool IsGraphKey { get; set; }
 
         /// <summary>
         /// Does this field need to be loaded
@@ -43,17 +43,17 @@ namespace PnP.Core.Model
         /// <summary>
         /// Is this an expandable field for REST
         /// </summary>
-        internal bool SharePointExpandable { get; set; } = false;
+        internal bool SharePointExpandable { get; set; }
 
         /// <summary>
         /// Is this an expandable field for Graph
         /// </summary>
-        internal bool GraphExpandable { get; set; } = false;
+        internal bool GraphExpandable { get; set; }
 
         /// <summary>
         /// Expand this property when there's a default get (a get without specifying the fields to load)
         /// </summary>
-        internal bool ExpandableByDefault { get; set; } = false;
+        internal bool ExpandableByDefault { get; set; }
 
         /// <summary>
         /// Name of this field when using SharePoint REST queries

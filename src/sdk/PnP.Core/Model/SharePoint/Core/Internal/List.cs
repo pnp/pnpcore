@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
-using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -46,7 +45,7 @@ namespace PnP.Core.Model.SharePoint
             AddApiCallHandler = async (additionalInformation) =>
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
-                var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+                var entity = EntityManager.GetClassInfo(GetType(), this);
 
                 var addParameters = new
                 {

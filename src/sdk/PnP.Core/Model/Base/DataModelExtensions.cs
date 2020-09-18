@@ -1,5 +1,4 @@
-﻿using PnP.Core.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -52,7 +51,7 @@ namespace PnP.Core.Model
                         }
 
                         // Parse the expressions and get the relevant entity information
-                        var entityInfo = EntityManager.Instance.GetClassInfo<TModel>(model.GetType(), (model as BaseDataModel<TModel>), expressions);
+                        var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModel>), expressions);
 
                         string fieldToLoad = (body.Arguments[0] as MemberExpression).Member.Name;
 

@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 
-namespace PnP.Core.Utilities
+namespace PnP.Core
 {
     // Taken and slightly adapted from https://raw.githubusercontent.com/pnp/PnP-Sites-Core/master/Core/OfficeDevPnP.Core/Utilities/UrlUtility.cs
     /// <summary>
@@ -202,7 +202,7 @@ namespace PnP.Core.Utilities
                     combinedValues = originalValues;
                 }
 
-                queryString.Add(mainKey, string.Join(',', combinedValues));
+                queryString.Add(mainKey, string.Join(",", combinedValues));
             }
 
             // Process the provided parameters which are not present in the base uri parameters
@@ -215,7 +215,7 @@ namespace PnP.Core.Utilities
 
                 if (processedParameters.Contains(parameterKey)) continue;
 
-                queryString.Add(parameterKey, string.Join(',', originalValues));
+                queryString.Add(parameterKey, string.Join(",", originalValues));
             }
 
             return $"{uriBuilder.Host}{(uriBuilder.Path.Replace("%7B", "{").Replace("%7D", "}"))}{(queryString.Count > 0 ? "?" : "")}{queryString.ToString().Replace("%2c", ",")}";

@@ -1,5 +1,6 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
@@ -52,7 +53,8 @@ namespace PnP.Core.Services
 
         #region Private properties
 
-        private readonly ISettings settings;
+        private readonly PnPGlobalSettingsOptions globalOptions;
+        private readonly PnPContextFactoryOptions contextOptions;
         private readonly TelemetryClient telemetry;
         private Batch currentBatch;
 
@@ -63,7 +65,25 @@ namespace PnP.Core.Services
                            IAuthenticationProvider authenticationProvider,
                            SharePointRestClient sharePointRestClient,
                            MicrosoftGraphClient microsoftGraphClient,
-                           ISettings settingsClient,
+                           IOptions<PnPContextFactoryOptions> contextOptions,
+                           IOptions<PnPGlobalSettingsOptions> globalOptions,
+                           TelemetryClient telemetryClient):
+            this(logger, 
+                authenticationProvider, 
+                sharePointRestClient, 
+                microsoftGraphClient, 
+                contextOptions?.Value, 
+                globalOptions?.Value, 
+                telemetryClient)
+        {
+        }
+
+        internal PnPContext(ILogger logger,
+                           IAuthenticationProvider authenticationProvider,
+                           SharePointRestClient sharePointRestClient,
+                           MicrosoftGraphClient microsoftGraphClient,
+                           PnPContextFactoryOptions contextOptions,
+                           PnPGlobalSettingsOptions globalOptions,
                            TelemetryClient telemetryClient)
         {
             Id = Guid.NewGuid();
@@ -75,17 +95,18 @@ namespace PnP.Core.Services
             AuthenticationProvider = authenticationProvider;
             RestClient = sharePointRestClient;
             GraphClient = microsoftGraphClient;
-            settings = settingsClient;
+            this.globalOptions = globalOptions;
+            this.contextOptions = contextOptions;
             telemetry = telemetryClient;
 
-            if (settingsClient != null)
+            if (this.contextOptions != null)
             {
-                GraphFirst = settingsClient.GraphFirst;
-                GraphAlwaysUseBeta = settingsClient.GraphAlwaysUseBeta;
-                GraphCanUseBeta = settingsClient.GraphCanUseBeta;
+                GraphFirst = this.contextOptions.GraphFirst;
+                GraphAlwaysUseBeta = this.contextOptions.GraphAlwaysUseBeta;
+                GraphCanUseBeta = this.contextOptions.GraphCanUseBeta;
             }
 
-            BatchClient = new BatchClient(this, settingsClient, telemetryClient);
+            BatchClient = new BatchClient(this, this.globalOptions, telemetryClient);
         }
         #endregion
 
@@ -164,16 +185,16 @@ namespace PnP.Core.Services
 #endif
 
         #region Graph related properties
-        
+
         /// <summary>
         /// Controls whether the library will try to use Microsoft Graph over REST whenever that's defined in the model
         /// </summary>
-        public bool GraphFirst { get; set;  } = true;
+        public bool GraphFirst { get; set; } = true;
 
         /// <summary>
         /// If true than all requests to Microsoft Graph use the beta endpoint
         /// </summary>
-        public bool GraphAlwaysUseBeta { get; set; } = false;
+        public bool GraphAlwaysUseBeta { get; set; }
 
         /// <summary>
         /// If true than the Graph beta endpoint is used when there's no other option, default approach stays using the v1 endpoint
@@ -369,7 +390,7 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone(Uri uri)
         {
-            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, settings, telemetry)
+            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, contextOptions, globalOptions, telemetry)
             {
                 // Take over graph settings
                 GraphCanUseBeta = graphCanUseBeta,
@@ -425,7 +446,7 @@ namespace PnP.Core.Services
 
         #region IDisposable implementation
 
-        private bool disposed = false;
+        private bool disposed;
 
         /// <summary>
         /// Disposes this <see cref="PnPContext"/>
@@ -466,7 +487,7 @@ namespace PnP.Core.Services
         /// </summary>
         internal async Task SetAADTenantId()
         {
-            if (settings.AADTenantId == Guid.Empty && Uri != null)
+            if (globalOptions.AADTenantId == Guid.Empty && Uri != null)
             {
                 using (var request = new HttpRequestMessage(HttpMethod.Get, $"{Uri}/_vti_bin/client.svc"))
                 {
@@ -486,7 +507,7 @@ namespace PnP.Core.Services
 
                         if (Guid.TryParse(targetRealm, out Guid realmGuid))
                         {
-                            settings.AADTenantId = realmGuid;
+                            globalOptions.AADTenantId = realmGuid;
                         }
                     }
                 }

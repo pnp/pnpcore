@@ -38,7 +38,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Was this <see cref="Batch"/> executed?
         /// </summary>
-        internal bool Executed { get; set; } = false;
+        internal bool Executed { get; set; }
 
         /// <summary>
         /// Only use Graph batching when all requests in the batch are targeting Graph

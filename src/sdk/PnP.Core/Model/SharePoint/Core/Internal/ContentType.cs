@@ -38,7 +38,7 @@ namespace PnP.Core.Model.SharePoint
 
                 // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
                 // automatically provide the correct 'parent'
-                var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+                var entity = EntityManager.GetClassInfo(GetType(), this);
 
                 // Adding new content types on a list is not something we should allow
                 if (entity.Target == typeof(List))
@@ -72,7 +72,7 @@ $@"<Request xmlns=""http://schemas.microsoft.com/sharepoint/clientquery/2009"" A
 
             // Given this method can apply on both Web.ContentTypes as List.ContentTypes we're getting the entity info which will 
             // automatically provide the correct 'parent'
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
 
             return new ApiCall($"{entity.SharePointGet}/AddAvailableContentType", ApiType.SPORest, bodyContent);
         }

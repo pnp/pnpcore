@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
 
-namespace PnP.Core.Utilities
+namespace PnP.Core
 {
     /// <summary>
     /// Extension type for the ExpandObject type

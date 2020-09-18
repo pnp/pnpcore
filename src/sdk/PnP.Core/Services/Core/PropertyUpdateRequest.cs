@@ -25,7 +25,7 @@
         /// <summary>
         /// Cancel this update, if for some reason the property update should not continue
         /// </summary>
-        internal bool Cancelled { get; private set; } = false;
+        internal bool Cancelled { get; private set; }
 
         /// <summary>
         /// Optional reason indicating why the update was cancelled

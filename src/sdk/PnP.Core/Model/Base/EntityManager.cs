@@ -228,7 +228,7 @@ namespace PnP.Core.Model
         /// <param name="type">The reference model type, can be an interface or a class</param>
         /// <param name="parent">Parent of the domain model object, optional</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal object GetEntityConcreteInstance<TModel>(Type type, IDataModelParent parent = null)
+        internal static object GetEntityConcreteInstance<TModel>(Type type, IDataModelParent parent = null)
         {
             if (type is null)
             {
@@ -251,7 +251,7 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="type">The reference model type, can be an interface or a class</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal TransientObject GetEntityConcreteInstance(Type type)
+        internal static TransientObject GetEntityConcreteInstance(Type type)
         {
             if (type is null)
             {
@@ -270,7 +270,7 @@ namespace PnP.Core.Model
         /// <param name="target">Model instance we're working on</param>
         /// <param name="expressions">Data load expressions</param>
         /// <returns>Entity model class describing this model instance</returns>
-        internal EntityInfo GetClassInfo<TModel>(Type modelType, BaseDataModel<TModel> target, params Expression<Func<TModel, object>>[] expressions)
+        internal static EntityInfo GetClassInfo<TModel>(Type modelType, BaseDataModel<TModel> target, params Expression<Func<TModel, object>>[] expressions)
         {
             // Get static information about the fields to work with and how to handle CRUD operations
             var staticClassInfo = EntityManager.Instance.GetStaticClassInfo(modelType);
@@ -545,7 +545,7 @@ namespace PnP.Core.Model
         {
             if (!string.IsNullOrEmpty(str) && str.Length > 1)
             {
-                return Char.ToLowerInvariant(str[0]) + str.Substring(1);
+                return char.ToLowerInvariant(str[0]) + str.Substring(1);
             }
             return str;
         }

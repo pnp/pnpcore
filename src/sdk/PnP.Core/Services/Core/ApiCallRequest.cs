@@ -18,7 +18,7 @@
         /// <summary>
         /// Cancel this request, if for some reason the underlying API call cannot be made or makes no sense
         /// </summary>
-        internal bool Cancelled { get; private set; } = false;
+        internal bool Cancelled { get; private set; }
 
         /// <summary>
         /// Optional reason indicating why the request was cancelled

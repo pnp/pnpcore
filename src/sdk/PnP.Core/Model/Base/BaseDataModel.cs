@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using PnP.Core.Services;
-using PnP.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -1105,7 +1104,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// API call handler for add requests
         /// </summary>
-        internal AddApiCall AddApiCallHandler { get; set; } = null;
+        internal AddApiCall AddApiCallHandler { get; set; }
 
         /// <summary>
         /// Creates and adds a Post request to the given batch
@@ -1247,7 +1246,7 @@ namespace PnP.Core.Model
                 return;
             }
 
-            batch.Add(this, entityInfo, HttpMethod.Patch, api.ApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson);
         }
 
         /// <summary>
@@ -1270,7 +1269,7 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
-            batch.Add(this, entityInfo, HttpMethod.Patch, api.ApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson);
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
@@ -1874,7 +1873,7 @@ namespace PnP.Core.Model
         /// <returns>Entity model class describing this model instance</returns>
         private EntityInfo GetClassInfo(params Expression<Func<TModel, object>>[] expressions)
         {
-            return EntityManager.Instance.GetClassInfo<TModel>(GetType(), this, expressions);
+            return EntityManager.GetClassInfo(GetType(), this, expressions);
         }
 
         #endregion

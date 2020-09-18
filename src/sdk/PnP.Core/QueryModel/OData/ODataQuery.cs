@@ -170,11 +170,11 @@ namespace PnP.Core.QueryModel
                                 group.ConcatOperator.ToString().ToLower(FormatProvider));
                         }
                         // Open the parentheses
-                        queryText.Append("(");
+                        queryText.Append('(');
                         // Process the group
                         ProcessFilters(group.Filters, queryText, targetPlatform, depth: depth + 1, urlEncode);
                         // Close the parentheses
-                        queryText.Append(")");
+                        queryText.Append(')');
                         break;
                     case FilterItem filter:
 
@@ -234,7 +234,7 @@ namespace PnP.Core.QueryModel
         {
             if (queryText.Length > 0)
             {
-                queryText.Append("&");
+                queryText.Append('&');
             }
         }
 

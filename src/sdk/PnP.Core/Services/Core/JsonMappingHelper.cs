@@ -55,54 +55,6 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="pnpObject">Model to populate from JSON</param>
         /// <param name="entity">Information about the current model</param>
-        /// <param name="apiCallResponse">The REST response to process</param>
-        /// <param name="fromJsonCasting">Delegate to be called for type conversion</param>
-        /// <returns></returns>
-        internal static async Task MapJsonToModel(TransientObject pnpObject, EntityInfo entity, ApiCallResponse apiCallResponse, Func<FromJson, object> fromJsonCasting = null, string dataRootElementPath = null)
-        {
-            if (string.IsNullOrEmpty(apiCallResponse.Json))
-            {
-                // We have nothing to process, so return
-                return;
-            }
-
-            // Json parsing options
-            var options = new JsonDocumentOptions
-            {
-                AllowTrailingCommas = true
-            };
-
-            // Parse the received json content
-            using (JsonDocument document = JsonDocument.Parse(apiCallResponse.Json, options))
-            {
-                // for SharePoint REST calls the root property is d, for recursive calls this is not the case
-                if (!document.RootElement.TryGetProperty("d", out JsonElement root))
-                {
-                    root = document.RootElement;
-                }
-
-                if (!string.IsNullOrEmpty(dataRootElementPath))
-                {
-                    try
-                    {
-                        root = GetJsonElementFromPath(root, dataRootElementPath);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new ClientException(ErrorType.UnexpectedMappingType, $"The JSON property from path {dataRootElementPath} could not be parsed.", ex);
-                    }
-                }
-
-                // Map the returned JSON to the respective entities
-                await FromJson(pnpObject, entity, new ApiResponse(apiCallResponse.ApiCall, root, apiCallResponse.BatchRequestId), fromJsonCasting).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary>
-        /// Maps JSON to model classes
-        /// </summary>
-        /// <param name="pnpObject">Model to populate from JSON</param>
-        /// <param name="entity">Information about the current model</param>
         /// <param name="apiResponse">The REST response to process</param>
         /// <param name="fromJsonCasting">Delegate to be called for type conversion</param>
         /// <returns></returns>
@@ -702,7 +654,7 @@ namespace PnP.Core.Services
                     // sample input: bertonline.sharepoint.com,cf1ed1cb-4a3c-43ed-bb3f-4ced4ce69ecf,1de385e4-e441-4448-8443-77680dfd845e
                     if (!string.IsNullOrEmpty(idFieldValue))
                     {
-                        string id = idFieldValue.Split(",")[2];
+                        string id = idFieldValue.Split(new char[] { ',' })[2];
                         metadata.Add(PnPConstants.MetaDataRestId, id);
                         ((IDataModelWithKey)pnpObject).Key = Guid.Parse(id);
                     }
@@ -716,7 +668,7 @@ namespace PnP.Core.Services
                     // sample input: bertonline.sharepoint.com,cf1ed1cb-4a3c-43ed-bb3f-4ced4ce69ecf,1de385e4-e441-4448-8443-77680dfd845e
                     if (!string.IsNullOrEmpty(idFieldValue))
                     {
-                        string id = idFieldValue.Split(",")[1];
+                        string id = idFieldValue.Split(new char[] { ',' })[1];
                         metadata.Add(PnPConstants.MetaDataRestId, id);
                         ((IDataModelWithKey)pnpObject).Key = Guid.Parse(id);
                     }
@@ -1056,20 +1008,20 @@ namespace PnP.Core.Services
             }
         }
 
-        internal static T ToEnum<T>(JsonElement jsonElement)
+        internal static T ToEnum<T>(JsonElement jsonElement) where T : struct
         {
             if (jsonElement.ValueKind == JsonValueKind.Number && jsonElement.TryGetInt64(out long enumNumericValue))
             {
-                if (Enum.TryParse(typeof(T), enumNumericValue.ToString(CultureInfo.InvariantCulture), out object enumValue))
+                if (Enum.TryParse(enumNumericValue.ToString(CultureInfo.InvariantCulture), out T enumValue))
                 {
-                    return (T)enumValue;
+                    return enumValue;
                 }
             }
             else if (jsonElement.ValueKind == JsonValueKind.String && !string.IsNullOrEmpty(jsonElement.GetString()))
             {
-                if (Enum.TryParse(typeof(T), jsonElement.GetString(), true, out object enumValue))
+                if (Enum.TryParse(jsonElement.GetString(), true, out T enumValue))
                 {
-                    return (T)enumValue;
+                    return enumValue;
                 }
             }
             return default;

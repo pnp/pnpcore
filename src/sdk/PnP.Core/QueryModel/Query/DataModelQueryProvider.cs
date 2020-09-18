@@ -57,7 +57,7 @@ namespace PnP.Core.QueryModel
         /// </summary>
         /// <param name="expression">The expression to translate</param>
         /// <returns>The expression translated into the actual query text for the target Query Service</returns>
-        internal ODataQuery<TModel> Translate(Expression expression)
+        internal static ODataQuery<TModel> Translate(Expression expression)
         {
             return new DataModelQueryTranslator<TModel>().Translate(expression);
         }
