@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
 namespace PnP.Core.Services
@@ -27,5 +28,10 @@ namespace PnP.Core.Services
         /// Defines the type of the IAuthenticationProvider to create
         /// </summary>
         public Type AuthenticationProviderType => typeof(OAuthAuthenticationProvider);
+
+        public void Init(Dictionary<string, string> options)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

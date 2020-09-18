@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security;
 
 namespace PnP.Core.Services
@@ -32,5 +33,10 @@ namespace PnP.Core.Services
         /// The password for authenticating
         /// </summary>
         public SecureString Password { get; set; }
+
+        public void Init(Dictionary<string, string> options)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

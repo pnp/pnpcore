@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PnP.Core.Services
 {
@@ -26,5 +27,10 @@ namespace PnP.Core.Services
         /// The externally obtained access token to use
         /// </summary>
         public string AccessToken { get; set; }
+
+        public void Init(Dictionary<string, string> options)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

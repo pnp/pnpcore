@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PnP.Core.Services
 {
@@ -7,6 +8,12 @@ namespace PnP.Core.Services
     /// </summary>
     public interface IAuthenticationProviderConfiguration
     {
+        /// <summary>
+        /// Method to initialize the configuration
+        /// </summary>
+        /// <param name="options">The options to initialize the configuration</param>
+        public void Init(Dictionary<string, string> options);
+
         /// <summary>
         /// The Name of the configuration
         /// </summary>

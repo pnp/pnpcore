@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PnP.Core.Services
 {
@@ -26,5 +27,10 @@ namespace PnP.Core.Services
         /// The name of the Windows Credential Manager settings to use
         /// </summary>
         public string CredentialManagerName { get; set; }
+
+        public void Init(Dictionary<string, string> options)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
