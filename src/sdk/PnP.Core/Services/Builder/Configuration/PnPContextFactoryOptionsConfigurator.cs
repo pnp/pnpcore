@@ -49,13 +49,7 @@ namespace PnP.Core.Services.Builder.Configuration
                     configuration.Name = optionKey;
 
                     // Configure the object with the remainder options
-                    foreach (var (key, value) in optionValue)
-                    {
-                        if (key != "Type")
-                        {
-                            configuration.GetType().GetProperty(key).SetValue(configuration, value);
-                        }
-                    }
+                    configuration.Init(optionValue);
 
                     // Add the configuration to the Credentials options
                     options.Configurations.Add(configuration);
