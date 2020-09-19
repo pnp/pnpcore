@@ -7,7 +7,7 @@ namespace PnP.Core
     /// <summary>
     /// Supporting class for certificate based operations
     /// </summary>
-    public static class X509CertificateUtility
+    internal static class X509CertificateUtility
     {
         /// <summary>
         /// Loads a certificate from a given certificate store
@@ -16,7 +16,7 @@ namespace PnP.Core
         /// <param name="storeLocation">Location of the certificate store</param>
         /// <param name="thumbprint">Thumbprint of the certificate to load</param>
         /// <returns>An <see cref="X509Certificate2"/> certificate</returns>
-        public static X509Certificate2 LoadCertificate(StoreName storeName, StoreLocation storeLocation, string thumbprint)
+        internal static X509Certificate2 LoadCertificate(StoreName storeName, StoreLocation storeLocation, string thumbprint)
         {
             // The following code gets the cert from the keystore
             using (X509Store store = new X509Store(storeName, storeLocation))
@@ -99,7 +99,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="certificate">Certificate to operate on</param>
         /// <returns>Public key of the certificate</returns>
-        public static string GetPublicKey(X509Certificate2 certificate)
+        internal static string GetPublicKey(X509Certificate2 certificate)
         {
             if (certificate == null)
             {
