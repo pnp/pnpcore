@@ -43,6 +43,7 @@ namespace Demo.ASPNetCore
             // Add the PnP Core SDK library
             services.AddPnPCore();
             services.Configure<PnPCoreOptions>(Configuration.GetSection("PnPCore"));
+            services.AddPnPCoreAuthenticationProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
