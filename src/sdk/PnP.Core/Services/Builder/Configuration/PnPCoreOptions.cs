@@ -147,6 +147,11 @@ namespace PnP.Core.Services.Builder.Configuration
     public class PnPCoreCredentialOptions : Dictionary<string, string>
     {
         /// <summary>
+        /// The Type of the application configuration
+        /// </summary>
+        public string Type { get; set; }
+
+        /// <summary>
         /// The ClientId of the application to use for authentication
         /// </summary>
         public string ClientId { get; set; }

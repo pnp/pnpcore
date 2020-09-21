@@ -18,6 +18,8 @@ namespace PnP.Core.Services
         /// </summary>
         public string ClientId { get; set; }
 
+        public string TenantId { get; set; }
+
         /// <summary>
         /// Defines the type of the IAuthenticationProvider to create
         /// </summary>
