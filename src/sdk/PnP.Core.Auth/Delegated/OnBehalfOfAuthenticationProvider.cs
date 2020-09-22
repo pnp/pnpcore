@@ -23,6 +23,29 @@ namespace PnP.Core.Auth
         public SecureString ClientSecret { get; set; }
 
         /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="clientSecret">The Client Secret of the app</param>
+        /// <param name="logger">The instance of the logger service provided by DI</param>
+        public OnBehalfOfAuthenticationProvider(string clientId, string tenantId,
+            SecureString clientSecret,
+            ILogger<OAuthAuthenticationProvider> logger)
+            : base(logger)
+        {
+            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = clientId,
+                TenantId = tenantId,
+                OnBehalfOf = new PnPCoreAuthenticationOnBehalfOfOptions
+                {
+                    ClientSecret = clientSecret.ToInsecureString()
+                }
+            }); ;
+        }
+
+        /// <summary>
         /// Public constructor leveraging DI to initialize the ILogger interfafce
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
@@ -35,7 +58,7 @@ namespace PnP.Core.Auth
         /// Initializes the Authentication Provider
         /// </summary>
         /// <param name="options">The options to use</param>
-        public override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
+        internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
             // We need the OnBehalfOf options
             if (options.OnBehalfOf == null)
@@ -55,6 +78,9 @@ namespace PnP.Core.Auth
             ClientSecret = options.OnBehalfOf.ClientSecret.ToSecureString();
 
             // TODO: Build the MSAL client
+
+            // Log the initialization information
+            this.Log?.LogInformation(PnPCoreAuthResources.OnBehalfOfAuthenticationProvider_LogInit);
         }
 
         /// <summary>
@@ -77,6 +103,10 @@ namespace PnP.Core.Auth
         public override Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
             throw new NotImplementedException();
+
+            //// Log the access token retrieval action
+            //this.Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+            //    this.GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
         }
 
         /// <summary>
