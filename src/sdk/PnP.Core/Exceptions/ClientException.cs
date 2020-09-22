@@ -12,7 +12,7 @@ namespace PnP.Core
         /// <summary>
         /// Default constructor for ClientException
         /// </summary>
-        public ClientException()
+        internal ClientException()
         {
         }
 
@@ -20,7 +20,7 @@ namespace PnP.Core
         /// Constructor for ClientException
         /// </summary>
         /// <param name="message">The message of the exception</param>
-        public ClientException(string message) : base(message)
+        internal ClientException(string message) : base(message)
         {
         }
 
@@ -29,7 +29,7 @@ namespace PnP.Core
         /// </summary>
         /// <param name="message">The message of the exception</param>
         /// <param name="innerException">The inner exception</param>
-        public ClientException(string message, Exception innerException) : base(message, innerException)
+        internal ClientException(string message, Exception innerException) : base(message, innerException)
         {
         }
         #endregion
