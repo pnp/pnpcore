@@ -44,13 +44,12 @@ namespace PnP.Core.Test.Services
         public Dictionary<string, Uri> TestUris { get; set; }
 
         public TestPnPContextFactory(
-            IOptionsMonitor<PnPContextFactoryOptions> options,
             ILogger<PnPContext> logger,
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
             IOptions<PnPContextFactoryOptions> contextOptions,
             IOptions<PnPGlobalSettingsOptions> globalOptions,
-            TelemetryClient telemetryClient) : base(options, logger, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions, telemetryClient)
+            TelemetryClient telemetryClient) : base(logger, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions, telemetryClient)
         {
         }
 
@@ -113,7 +112,7 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(Guid groupId)
         {
-            var context = new PnPContext(Log, Options.DefaultAuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
+            var context = new PnPContext(Log, ContextOptions.DefaultAuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
 
             ConfigurePnPContextForTesting(ref context);
 

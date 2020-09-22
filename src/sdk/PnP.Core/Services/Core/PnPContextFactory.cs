@@ -16,15 +16,13 @@ namespace PnP.Core.Services
         /// <summary>
         /// Default constructor for <see cref="PnPContextFactory"/>
         /// </summary>
-        /// <param name="options"><see cref="PnPContextFactory"/> options</param>
         /// <param name="logger">Connected logger</param>
         /// <param name="sharePointRestClient">SharePoint REST http client to use</param>
         /// <param name="microsoftGraphClient">Microsoft Graph http client to use</param>
-        /// <param name="contextOptions">Context options to use</param>
+        /// <param name="contextOptions"><see cref="PnPContextFactory"/> options</param>
         /// <param name="globalOptions">Global options to use</param>
         /// <param name="telemetryClient">Connected Azure AppInsights telemetry client</param>
         public PnPContextFactory(
-            IOptionsMonitor<PnPContextFactoryOptions> options,
             ILogger<PnPContext> logger,
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
@@ -35,15 +33,8 @@ namespace PnP.Core.Services
 #endif
             )
         {
-            // We need the options
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
             // Store logger and options locally
             Log = logger;
-            Options = options.CurrentValue;
             SharePointRestClient = sharePointRestClient;
             MicrosoftGraphClient = microsoftGraphClient;
             ContextOptions = contextOptions?.Value;
@@ -54,11 +45,6 @@ namespace PnP.Core.Services
             TelemetryClient = null;
 #endif
         }
-
-        /// <summary>
-        /// Options for the <see cref="PnPContextFactory"/>
-        /// </summary>
-        protected PnPContextFactoryOptions Options { get; private set; }
 
         /// <summary>
         /// Connected logger
@@ -108,7 +94,7 @@ namespace PnP.Core.Services
         public async virtual Task<PnPContext> CreateAsync(string name)
         {
             // Search for the provided configuration
-            var configuration = Options.Configurations.FirstOrDefault(c => c.Name == name);
+            var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
             {
                 throw new ClientException(ErrorType.ConfigurationError, $"Invalid configuration name '{name}' for PnPContext creation!");
@@ -135,7 +121,7 @@ namespace PnP.Core.Services
         public async virtual Task<PnPContext> CreateAsync(Uri url)
         {
             // Use the default settings to create a new instance of SPOContext
-            return await CreateAsync(url, this.Options.DefaultAuthenticationProvider).ConfigureAwait(false);
+            return await CreateAsync(url, this.ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -164,9 +150,9 @@ namespace PnP.Core.Services
             };
 
             // Configure the global Microsoft Graph settings
-            context.GraphFirst = Options.GraphFirst;
-            context.GraphCanUseBeta = Options.GraphCanUseBeta;
-            context.GraphAlwaysUseBeta = Options.GraphAlwaysUseBeta;
+            context.GraphFirst = ContextOptions.GraphFirst;
+            context.GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
+            context.GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
 
             await ConfigureTelemetry(context).ConfigureAwait(false);
 
@@ -219,7 +205,7 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Guid groupId)
         {
-            return await CreateAsync(groupId, this.Options.DefaultAuthenticationProvider).ConfigureAwait(false);
+            return await CreateAsync(groupId, this.ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
         }
 
         internal static async Task ConfigureForGroup(PnPContext context, Guid groupId)

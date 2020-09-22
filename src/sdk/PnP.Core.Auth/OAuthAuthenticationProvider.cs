@@ -34,6 +34,10 @@ namespace PnP.Core.Auth
         /// </summary>
         protected readonly ILogger Log;
 
+        /// <summary>
+        /// Public constructor for any OAuth Authentication privider
+        /// </summary>
+        /// <param name="logger"></param>
         public OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
         {
             // logger can be null ... we don't necessarily need it

@@ -26,11 +26,9 @@ namespace PnP.Core.Auth
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
         /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
         /// <param name="credentialManagerName">The Name of the Credential Manager item for authentication</param>
-        /// <param name="logger">The instance of the logger service provided by DI</param>
         public CredentialManagerAuthenticationProvider(string clientId, string tenantId,
-            string credentialManagerName,
-            ILogger<OAuthAuthenticationProvider> logger)
-            : base(logger)
+            string credentialManagerName)
+            : this(null)
         {
             this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {

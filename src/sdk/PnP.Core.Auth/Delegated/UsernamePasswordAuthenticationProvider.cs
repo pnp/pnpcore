@@ -33,11 +33,9 @@ namespace PnP.Core.Auth
         /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
         /// <param name="username">The Username for authentication</param>
         /// <param name="password">The Password for authentication</param>
-        /// <param name="logger">The instance of the logger service provided by DI</param>
         public UsernamePasswordAuthenticationProvider(string clientId, string tenantId,
-            string username, SecureString password,
-            ILogger<OAuthAuthenticationProvider> logger)
-            : base(logger)
+            string username, SecureString password)
+            : this(null)
         {
             this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {

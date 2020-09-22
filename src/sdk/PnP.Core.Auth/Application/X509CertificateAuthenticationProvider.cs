@@ -32,11 +32,9 @@ namespace PnP.Core.Auth
         /// <param name="storeName">The Store Name to get the X.509 certificate from</param>
         /// <param name="storeLocation">The Store Location to get the X.509 certificate from</param>
         /// <param name="thumbprint">The Thumbprint of the X.509 certificate</param>
-        /// <param name="logger">The instance of the logger service provided by DI</param>
         public X509CertificateAuthenticationProvider(string clientId, string tenantId,
-            StoreName storeName, StoreLocation storeLocation, string thumbprint,
-            ILogger<OAuthAuthenticationProvider> logger)
-            : base(logger)
+            StoreName storeName, StoreLocation storeLocation, string thumbprint)
+            : this(null)
         {
             this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
