@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PnP.Core.Auth\PnP.Core.Auth.csproj" />
     <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
   </ItemGroup>
 
@@ -36,12 +37,6 @@
     <Folder Include="SharePoint\MockData\SettingTests\" />
     <Folder Include="Teams\MockData\TeamLifecycleTests\" />
     <Folder Include="Teams\MockData\TeamSettingsTests\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="PnP.Core.Auth">
-      <HintPath>..\..\..\..\pnpcore-auth\src\sdk\PnP.Core.Auth\bin\Debug\netstandard2.1\PnP.Core.Auth.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

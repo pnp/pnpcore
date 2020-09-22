@@ -52,13 +52,6 @@ namespace PnP.Core.Test.Utilities
         /// </summary>
         internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
 
-        internal static string GetX509CertificateThumbprint()
-        {
-
-            var configuration = GetConfigurationSettings();
-            return configuration.GetValue<string>("PnPCore:Credentials:Configurations:X509Certificate:X509Certificate:Thumbprint");
-        }
-
         /// <summary>
         /// Set Mocking to false to switch the test system in recording mode for all contexts being created
         /// </summary>
