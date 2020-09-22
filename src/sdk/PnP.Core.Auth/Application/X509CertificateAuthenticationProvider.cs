@@ -3,6 +3,7 @@ using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using System;
 using System.Configuration;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
@@ -24,6 +25,27 @@ namespace PnP.Core.Auth
         private IConfidentialClientApplication confidentialClientApplication;
 
         /// <summary>
+        /// Public constructor for external users
+        /// </summary>
+        public X509CertificateAuthenticationProvider(string clientId, string tenantId,
+            StoreName storeName, StoreLocation storeLocation, string thumbprint,
+            ILogger<OAuthAuthenticationProvider> logger)
+            : base(logger)
+        {
+            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = clientId,
+                TenantId = tenantId,
+                X509Certificate = new PnPCoreAuthenticationX509CertificateOptions
+                {
+                    StoreName = storeName,
+                    StoreLocation = storeLocation,
+                    Thumbprint = thumbprint
+                }
+            });
+        }
+
+        /// <summary>
         /// Public constructor leveraging DI to initialize the ILogger interfafce
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
@@ -36,7 +58,7 @@ namespace PnP.Core.Auth
         /// Initializes the X509Certificate Authentication Provider
         /// </summary>
         /// <param name="options">The options to use</param>
-        public override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
+        internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
             // We need the X509Certificate options
             if (options.X509Certificate == null)
@@ -48,7 +70,7 @@ namespace PnP.Core.Auth
             // We need the certificate thumbprint
             if (string.IsNullOrEmpty(options.X509Certificate.Thumbprint))
             {
-                throw new ConfigurationErrorsException(PnPCoreAuthResources.X509CertificateAuthenticationProvider_InvalidThumbprint);
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit);
             }
 
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
@@ -57,6 +79,12 @@ namespace PnP.Core.Auth
                 options.X509Certificate.StoreName,
                 options.X509Certificate.StoreLocation,
                 options.X509Certificate.Thumbprint);
+
+            // Log the initialization information
+            this.Log?.LogInformation(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit,
+                options.X509Certificate.Thumbprint,
+                options.X509Certificate.StoreName,
+                options.X509Certificate.StoreLocation);
 
             // Build the MSAL client
             if (TenantId.Equals(AuthGlobals.OrganizationsTenantId, StringComparison.InvariantCultureIgnoreCase))
@@ -129,6 +157,10 @@ namespace PnP.Core.Auth
                 // Handle the various exceptions
                 throw;
             }
+
+            // Log the access token retrieval action
+            this.Log?.LogInformation(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogAccessTokenRetrieval,
+                resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it
             // In case of any exception while retrieving the access token, 
