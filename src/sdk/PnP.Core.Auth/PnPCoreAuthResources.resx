@@ -120,17 +120,29 @@
   <data name="AspNetCoreAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for AspNetCoreAuthenticationProvider</value>
   </data>
+  <data name="AspNetCoreAuthenticationProvider_LogInit" xml:space="preserve">
+    <value>Initialized AspNetCoreAuthenticationProvider</value>
+  </data>
+  <data name="AuthenticationProvider_LogAccessTokenRetrieval" xml:space="preserve">
+    <value>Retrieved access token for resource {1} with scopes '{2}' from {0}</value>
+  </data>
   <data name="CredentialManagerAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for CredentialManagerAuthenticationProvider</value>
   </data>
   <data name="CredentialManagerAuthenticationProvider_InvalidCredentialManagerName" xml:space="preserve">
     <value>Invalid or missing value for CredentialManagerName in CredentialManagerAuthenticationProvider configuration</value>
   </data>
+  <data name="CredentialManagerAuthenticationProvider_LogInit" xml:space="preserve">
+    <value>Initialized CredentialManagerAuthenticationProvider with credential manager item name {0}</value>
+  </data>
   <data name="OnBehalfOfAuthenticationProvider_InvalidClientSecret" xml:space="preserve">
     <value>Invalid or missing value for ClientSecret in ClientSecretAuthenticationProvider configuration</value>
   </data>
   <data name="OnBehalfOfAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for OnBehalfOfAuthenticationProvider</value>
+  </data>
+  <data name="OnBehalfOfAuthenticationProvider_LogInit" xml:space="preserve">
+    <value>Initialized OnBehalfOfAuthenticationProvider</value>
   </data>
   <data name="UsernamePasswordAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for UsernamePasswordAuthenticationProvider</value>
@@ -141,6 +153,9 @@
   <data name="UsernamePasswordAuthenticationProvider_InvalidUsername" xml:space="preserve">
     <value>Invalid or missing value for Username in UsernamePasswordAuthenticationProvider configuration</value>
   </data>
+  <data name="UsernamePasswordAuthenticationProvider_LogInit" xml:space="preserve">
+    <value>Initialized UsernamePasswordAuthenticationProvider with username {0}</value>
+  </data>
   <data name="X509CertificateAuthenticationProvider.InvalidThumbprint" xml:space="preserve">
     <value>Invalid or missing value for certificate Thumbprint in X509CertificateAuthenticationProvider configuration</value>
   </data>
@@ -149,5 +164,8 @@
   </data>
   <data name="X509CertificateAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for X509CertificateAuthenticationProvider</value>
+  </data>
+  <data name="X509CertificateAuthenticationProvider_LogInit" xml:space="preserve">
+    <value>Initialized X509CertificateAuthenticationProvider with certificate with thumbprint {0} from store {1} location {2}</value>
   </data>
 </root>

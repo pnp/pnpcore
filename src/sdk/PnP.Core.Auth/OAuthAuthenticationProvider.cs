@@ -34,31 +34,16 @@ namespace PnP.Core.Auth
         /// </summary>
         protected readonly ILogger Log;
 
-        ///// <summary>
-        ///// Local copy of the configuration options
-        ///// </summary>
-        //protected AuthenticationProvidersOptions Options { get; private set; }
-
         public OAuthAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
         {
-            if (logger == null)
-            {
-                throw new ArgumentNullException(nameof(logger));
-            }
-
-            //if (options == null)
-            //{
-            //    throw new ArgumentNullException(nameof(options));
-            //}
-
+            // logger can be null ... we don't necessarily need it
             Log = logger;
-            //Options = options.Value;
         }
 
         /// <summary>
         /// Initializes the Authentication Provider
         /// </summary>
-        public abstract void Init(PnPCoreAuthenticationCredentialConfigurationOptions options);
+        internal abstract void Init(PnPCoreAuthenticationCredentialConfigurationOptions options);
 
         /// <summary>
         /// Authenticates the specified request message.

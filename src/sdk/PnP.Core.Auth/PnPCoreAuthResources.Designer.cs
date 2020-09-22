@@ -70,6 +70,24 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initialized AspNetCoreAuthenticationProvider.
+        /// </summary>
+        internal static string AspNetCoreAuthenticationProvider_LogInit {
+            get {
+                return ResourceManager.GetString("AspNetCoreAuthenticationProvider_LogInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieved access token for resource {1} with scopes &apos;{2}&apos; from {0}.
+        /// </summary>
+        internal static string AuthenticationProvider_LogAccessTokenRetrieval {
+            get {
+                return ResourceManager.GetString("AuthenticationProvider_LogAccessTokenRetrieval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid configuration for CredentialManagerAuthenticationProvider.
         /// </summary>
         internal static string CredentialManagerAuthenticationProvider_InvalidConfiguration {
@@ -88,6 +106,15 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initialized CredentialManagerAuthenticationProvider with credential manager item name {0}.
+        /// </summary>
+        internal static string CredentialManagerAuthenticationProvider_LogInit {
+            get {
+                return ResourceManager.GetString("CredentialManagerAuthenticationProvider_LogInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid or missing value for ClientSecret in ClientSecretAuthenticationProvider configuration.
         /// </summary>
         internal static string OnBehalfOfAuthenticationProvider_InvalidClientSecret {
@@ -102,6 +129,15 @@ namespace PnP.Core.Auth {
         internal static string OnBehalfOfAuthenticationProvider_InvalidConfiguration {
             get {
                 return ResourceManager.GetString("OnBehalfOfAuthenticationProvider_InvalidConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initialized OnBehalfOfAuthenticationProvider.
+        /// </summary>
+        internal static string OnBehalfOfAuthenticationProvider_LogInit {
+            get {
+                return ResourceManager.GetString("OnBehalfOfAuthenticationProvider_LogInit", resourceCulture);
             }
         }
         
@@ -133,6 +169,15 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initialized UsernamePasswordAuthenticationProvider with username {0}.
+        /// </summary>
+        internal static string UsernamePasswordAuthenticationProvider_LogInit {
+            get {
+                return ResourceManager.GetString("UsernamePasswordAuthenticationProvider_LogInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot find the certificate with thumbprint &apos;{0}&apos; in store &apos;{1}&apos; with store location &apos;{2}&apos; while parsing X509CertificateAuthenticationProvider configuration.
         /// </summary>
         internal static string X509CertificateAuthenticationProvider_InvalidCertificate {
@@ -156,6 +201,15 @@ namespace PnP.Core.Auth {
         internal static string X509CertificateAuthenticationProvider_InvalidThumbprint {
             get {
                 return ResourceManager.GetString("X509CertificateAuthenticationProvider.InvalidThumbprint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initialized X509CertificateAuthenticationProvider with certificate with thumbprint {0} from store {1} location {2}.
+        /// </summary>
+        internal static string X509CertificateAuthenticationProvider_LogInit {
+            get {
+                return ResourceManager.GetString("X509CertificateAuthenticationProvider_LogInit", resourceCulture);
             }
         }
     }
