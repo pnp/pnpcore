@@ -25,8 +25,14 @@ namespace PnP.Core.Auth
         private IConfidentialClientApplication confidentialClientApplication;
 
         /// <summary>
-        /// Public constructor for external users
+        /// Public constructor for external consumers of the library
         /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="storeName">The Store Name to get the X.509 certificate from</param>
+        /// <param name="storeLocation">The Store Location to get the X.509 certificate from</param>
+        /// <param name="thumbprint">The Thumbprint of the X.509 certificate</param>
+        /// <param name="logger">The instance of the logger service provided by DI</param>
         public X509CertificateAuthenticationProvider(string clientId, string tenantId,
             StoreName storeName, StoreLocation storeLocation, string thumbprint,
             ILogger<OAuthAuthenticationProvider> logger)
@@ -80,12 +86,6 @@ namespace PnP.Core.Auth
                 options.X509Certificate.StoreLocation,
                 options.X509Certificate.Thumbprint);
 
-            // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit,
-                options.X509Certificate.Thumbprint,
-                options.X509Certificate.StoreName,
-                options.X509Certificate.StoreLocation);
-
             // Build the MSAL client
             if (TenantId.Equals(AuthGlobals.OrganizationsTenantId, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -103,6 +103,12 @@ namespace PnP.Core.Auth
                     .WithCertificate(Certificate)
                     .Build();
             }
+
+            // Log the initialization information
+            this.Log?.LogInformation(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit,
+                options.X509Certificate.Thumbprint,
+                options.X509Certificate.StoreName,
+                options.X509Certificate.StoreLocation);
         }
 
         /// <summary>
@@ -159,8 +165,8 @@ namespace PnP.Core.Auth
             }
 
             // Log the access token retrieval action
-            this.Log?.LogInformation(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogAccessTokenRetrieval,
-                resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
+            this.Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+                this.GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it
             // In case of any exception while retrieving the access token, 
