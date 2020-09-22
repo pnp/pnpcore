@@ -29,14 +29,14 @@ namespace PnP.Core.Services.Builder.Configuration
         public PnPCoreContextOptions PnPContext { get; set; }
 
         /// <summary>
-        /// The credentials options
-        /// </summary>
-        public PnPCoreCredentialsOptions Credentials { get; } = new PnPCoreCredentialsOptions();
-
-        /// <summary>
         /// The sites options
         /// </summary>
         public PnPCoreSitesOptions Sites { get; } = new PnPCoreSitesOptions();
+
+        /// <summary>
+        /// The default Authentication Provider for the sites
+        /// </summary>
+        public IAuthenticationProvider DefaultAuthenticationProvider { get; set; }
     }
 
     /// <summary>
@@ -137,29 +137,6 @@ namespace PnP.Core.Services.Builder.Configuration
     /// <summary>
     /// Options for configuring PnP Core SDK
     /// </summary>
-    public class PnPCoreCredentialsOptions : Dictionary<string, PnPCoreCredentialOptions>
-    {
-    }
-
-    /// <summary>
-    /// Options for one configured credentials
-    /// </summary>
-    public class PnPCoreCredentialOptions : Dictionary<string, string>
-    {
-        /// <summary>
-        /// The Type of the application configuration
-        /// </summary>
-        public string Type { get; set; }
-
-        /// <summary>
-        /// The ClientId of the application to use for authentication
-        /// </summary>
-        public string ClientId { get; set; }
-    }
-
-    /// <summary>
-    /// Options for configuring PnP Core SDK
-    /// </summary>
     public class PnPCoreSitesOptions : Dictionary<string, PnPCoreSiteOptions>
     {
     }
@@ -175,8 +152,8 @@ namespace PnP.Core.Services.Builder.Configuration
         public string SiteUrl { get; set; }
 
         /// <summary>
-        /// The name of the Authentication Provider
+        /// The Authentication Provider
         /// </summary>
-        public string AuthenticationProviderName { get; set; }
+        public IAuthenticationProvider AuthenticationProvider { get; set; }
     }
 }

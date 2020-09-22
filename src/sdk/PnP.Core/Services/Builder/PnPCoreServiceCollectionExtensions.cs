@@ -39,8 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 services.Configure(options);
             }
 
-            services.ConfigureOptions<PnPContextFactoryOptionsConfigurator>();
-            services.AddAuthenticationProviderFactory();
+            services.ConfigureOptions<PnPCoreOptionsConfigurator>();
             services.AddPnPContextFactory();
 
             return new PnPCoreBuilder(services);
