@@ -22,7 +22,7 @@
       <HintPath>..\..\sdk\PnP.Core\bin\Debug\netstandard2.1\PnP.Core.dll</HintPath>
     </Reference>
     <Reference Include="PnP.Core.Auth">
-      <HintPath>..\..\..\..\pnpcore-auth\src\sdk\PnP.Core.Auth\bin\Debug\netstandard2.1\PnP.Core.Auth.dll</HintPath>
+      <HintPath>..\..\sdk\PnP.Core.Auth\bin\Debug\netstandard2.1\PnP.Core.Auth.dll</HintPath>
     </Reference>
   </ItemGroup>
 
