@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
@@ -19,10 +20,10 @@
 
   <ItemGroup>
     <Reference Include="PnP.Core">
-      <HintPath>..\..\sdk\PnP.Core\bin\Debug\netstandard2.1\PnP.Core.dll</HintPath>
+      <HintPath>..\..\sdk\PnP.Core\bin\Debug\netstandard2.0\PnP.Core.dll</HintPath>
     </Reference>
     <Reference Include="PnP.Core.Auth">
-      <HintPath>..\..\sdk\PnP.Core.Auth\bin\Debug\netstandard2.1\PnP.Core.Auth.dll</HintPath>
+      <HintPath>..\..\sdk\PnP.Core.Auth\bin\Debug\netstandard2.0\PnP.Core.Auth.dll</HintPath>
     </Reference>
   </ItemGroup>
 
