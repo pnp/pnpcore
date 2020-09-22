@@ -21,6 +21,29 @@ namespace PnP.Core.Auth
         private UsernamePasswordAuthenticationProvider usernamePasswordProvider;
 
         /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="credentialManagerName">The Name of the Credential Manager item for authentication</param>
+        /// <param name="logger">The instance of the logger service provided by DI</param>
+        public CredentialManagerAuthenticationProvider(string clientId, string tenantId,
+            string credentialManagerName,
+            ILogger<OAuthAuthenticationProvider> logger)
+            : base(logger)
+        {
+            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = clientId,
+                TenantId = tenantId,
+                CredentialManager = new PnPCoreAuthenticationCredentialManagerOptions
+                {
+                    CredentialManagerName = credentialManagerName
+                }
+            });
+        }
+
+        /// <summary>
         /// Public constructor leveraging DI to initialize the ILogger interfafce
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
@@ -36,7 +59,7 @@ namespace PnP.Core.Auth
         /// Initializes the Authentication Provider
         /// </summary>
         /// <param name="options">The options to use</param>
-        public override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
+        internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
             // We need the CredentialManager options
             if (options.CredentialManager == null)
@@ -69,6 +92,10 @@ namespace PnP.Core.Auth
 
             // Configure the inner instance of UsernamePasswordAuthenticationProvider
             usernamePasswordProvider.Init(usernamePasswordOptions);
+
+            // Log the initialization information
+            this.Log?.LogInformation(PnPCoreAuthResources.CredentialManagerAuthenticationProvider_LogInit,
+                options.CredentialManager.CredentialManagerName);
         }
 
         /// <summary>
