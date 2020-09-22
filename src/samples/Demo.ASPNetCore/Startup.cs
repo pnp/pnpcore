@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services.Builder.Configuration;
 
 namespace Demo.ASPNetCore
@@ -43,7 +44,8 @@ namespace Demo.ASPNetCore
             // Add the PnP Core SDK library
             services.AddPnPCore();
             services.Configure<PnPCoreOptions>(Configuration.GetSection("PnPCore"));
-            services.AddPnPCoreAuthenticationProviders();
+            services.AddPnPCoreAuthentication();
+            services.Configure<PnPCoreAuthenticationOptions>(Configuration.GetSection("PnPCore"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
