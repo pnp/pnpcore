@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Test.Utilities;
+using PnP.Core.Auth.Test.Utilities;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace PnP.Core.Test.Base
+namespace PnP.Core.Auth.Test.Base
 {
     [TestClass]
     public class SecurityTests
