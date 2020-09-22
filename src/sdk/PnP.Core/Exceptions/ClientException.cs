@@ -8,15 +8,28 @@ namespace PnP.Core
     public class ClientException: PnPException
     {
         #region Default exception constructors
-        internal ClientException()
+
+        /// <summary>
+        /// Default constructor for ClientException
+        /// </summary>
+        public ClientException()
         {
         }
 
-        internal ClientException(string message) : base(message)
+        /// <summary>
+        /// Constructor for ClientException
+        /// </summary>
+        /// <param name="message">The message of the exception</param>
+        public ClientException(string message) : base(message)
         {
         }
 
-        internal ClientException(string message, Exception innerException) : base(message, innerException)
+        /// <summary>
+        /// Constructor for ClientException
+        /// </summary>
+        /// <param name="message">The message of the exception</param>
+        /// <param name="innerException">The inner exception</param>
+        public ClientException(string message, Exception innerException) : base(message, innerException)
         {
         }
         #endregion
