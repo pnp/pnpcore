@@ -11,7 +11,7 @@ namespace PnP.Core.Services.Builder.Configuration
         /// <summary>
         /// Turns on/off telemetry, can be customized via configuration. Defaults to false.
         /// </summary>
-        public bool DisableTelemetry { get; set; }
+        public bool DisableTelemetry { get; set; } = false;
 
         /// <summary>
         /// AAD tenant id, used for telemetry purposes. Can be customized via configuration
@@ -21,12 +21,12 @@ namespace PnP.Core.Services.Builder.Configuration
         /// <summary>
         /// The global HTTP requests settings
         /// </summary>
-        public PnPCoreHttpRequestsOptions HttpRequests { get; set; }
+        public PnPCoreHttpRequestsOptions HttpRequests { get; set; } = new PnPCoreHttpRequestsOptions();
 
         /// <summary>
         /// The global PnPContext options
         /// </summary>
-        public PnPCoreContextOptions PnPContext { get; set; }
+        public PnPCoreContextOptions PnPContext { get; set; } = new PnPCoreContextOptions();
 
         /// <summary>
         /// The sites options
@@ -52,12 +52,12 @@ namespace PnP.Core.Services.Builder.Configuration
         /// <summary>
         /// SharePoint Online REST options
         /// </summary>
-        public PnPCoreHttpRequestsSharePointRestOptions SharePointRest { get; set; }
+        public PnPCoreHttpRequestsSharePointRestOptions SharePointRest { get; set; } = new PnPCoreHttpRequestsSharePointRestOptions();
 
         /// <summary>
         /// Microsoft Graph REST options
         /// </summary>
-        public PnPCoreHttpRequestsGraphOptions MicrosoftGraph { get; set; }
+        public PnPCoreHttpRequestsGraphOptions MicrosoftGraph { get; set; } = new PnPCoreHttpRequestsGraphOptions();
     }
 
     /// <summary>
