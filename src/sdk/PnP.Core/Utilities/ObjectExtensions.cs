@@ -1,12 +1,10 @@
-﻿using PnP.Core.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
-namespace PnP.Core.Utilities
+namespace PnP.Core
 {
     internal static class ObjectExtensions
     {

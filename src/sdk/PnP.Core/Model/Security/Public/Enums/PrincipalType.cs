@@ -7,7 +7,9 @@ namespace PnP.Core.Model.Security
     /// This enumeration has a FlagsAttribute attribute that allows a bitwise combination of its member values.
     /// </summary>
     [Flags]
+#pragma warning disable CA1714 // Flags enums should have plural names
     public enum PrincipalType
+#pragma warning restore CA1714 // Flags enums should have plural names
     {
         /// <summary>
         /// Enumeration whose value specifies no principal type. Value = 0.

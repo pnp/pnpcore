@@ -23,7 +23,7 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="client">Http Client coming from the .Net http client factory</param>
         /// <param name="log">Logger service</param>
-        /// <param name="settingsClient">Settings service</param>
+        /// <param name="options">Options service</param>
         public SharePointRestClient(HttpClient client, ILogger<SharePointRestClient> log, IOptions<PnPGlobalSettingsOptions> options)
         {
             logger = log;

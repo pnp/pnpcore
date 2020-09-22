@@ -37,7 +37,7 @@ namespace PnP.Core.Model.SharePoint
         #region Restore
         public async Task RestoreAsync()
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string restoreEndpointUrl = $"{entity.SharePointUri}/Restore()";
 
             var apiCall = new ApiCall(restoreEndpointUrl, ApiType.SPORest);
@@ -52,7 +52,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task RestoreBatchAsync(Batch batch)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string restoreEndpointUrl = $"{entity.SharePointUri}/Restore()";
 
             var apiCall = new ApiCall(restoreEndpointUrl, ApiType.SPORest);
@@ -79,7 +79,7 @@ namespace PnP.Core.Model.SharePoint
         #region MoveToSecondStage
         public async Task MoveToSecondStageAsync()
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string restoreEndpointUrl = $"{entity.SharePointUri}/MoveToSecondStage()";
 
             var apiCall = new ApiCall(restoreEndpointUrl, ApiType.SPORest);
@@ -94,7 +94,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task MoveToSecondStageBatchAsync(Batch batch)
         {
-            var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
+            var entity = EntityManager.GetClassInfo(GetType(), this);
             string restoreEndpointUrl = $"{entity.SharePointUri}/MoveToSecondStage()";
 
             var apiCall = new ApiCall(restoreEndpointUrl, ApiType.SPORest);

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace PnP.Core.Utilities
+namespace PnP.Core
 {
     // Taken and slightly adapted from https://raw.githubusercontent.com/pnp/PnP-Sites-Core/master/Core/OfficeDevPnP.Core/Utilities/UrlUtility.cs
     /// <summary>

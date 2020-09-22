@@ -21,7 +21,7 @@ namespace PnP.Core.Services
     internal class BatchClient
     {
         // Simple counter used to construct the batch key used for test mocking
-        private int testUseCounter = 0;
+        private int testUseCounter;
 
         // Handles sending telemetry events
         private readonly TelemetryManager telemetryManager;
@@ -168,7 +168,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Handler that can be used to rewrite mocking files before they're used
         /// </summary>
-        internal Func<string, string> MockingFileRewriteHandler { get; set; } = null;
+        internal Func<string, string> MockingFileRewriteHandler { get; set; }
 #endif
 
         /// <summary>
@@ -564,7 +564,7 @@ namespace PnP.Core.Services
                             batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status, graphBatchResponse.Headers);
 
                             // Commit succesful updates in our model
-                            if (batchRequest.Method == HttpMethod.Patch || batchRequest.ApiCall.Commit)
+                            if (batchRequest.Method == new HttpMethod("PATCH") || batchRequest.ApiCall.Commit)
                             {
                                 if (batchRequest.Model is TransientObject)
                                 {
@@ -832,7 +832,7 @@ namespace PnP.Core.Services
                     sb.AppendLine("Accept: application/json;odata=verbose");
                     sb.AppendLine();
                 }
-                else if (request.Method == HttpMethod.Patch || request.Method == HttpMethod.Post)
+                else if (request.Method == new HttpMethod("PATCH") || request.Method == HttpMethod.Post)
                 {
                     var changesetId = Guid.NewGuid().ToString("d", CultureInfo.InvariantCulture);
 
@@ -967,7 +967,7 @@ namespace PnP.Core.Services
                         }
 
                         // Commit succesful updates in our model
-                        if (currentBatchRequest.Method == HttpMethod.Patch || currentBatchRequest.ApiCall.Commit)
+                        if (currentBatchRequest.Method == new HttpMethod("PATCH") || currentBatchRequest.ApiCall.Commit)
                         {
                             if (currentBatchRequest.Model is TransientObject)
                             {
@@ -1138,7 +1138,7 @@ namespace PnP.Core.Services
             }
 
             // Commit succesful updates in our model
-            if (restRequest.Method == HttpMethod.Patch || restRequest.ApiCall.Commit)
+            if (restRequest.Method == new HttpMethod("PATCH") || restRequest.ApiCall.Commit)
             {
                 if (restRequest.Model is TransientObject)
                 {

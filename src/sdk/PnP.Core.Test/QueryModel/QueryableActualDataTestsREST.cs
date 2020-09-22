@@ -385,7 +385,6 @@ namespace PnP.Core.Test.QueryModel
         public async Task TestQueryGetByIdLINQExceptionsAsync()
         {
             var targetListTitle = "Site Pages";
-            var expectedTitle = "Home";
 
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))

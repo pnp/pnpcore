@@ -328,12 +328,12 @@ namespace PnP.Core.Model
         /// <summary>
         /// Was there an expression provided to build up the fields lists of this entity
         /// </summary>
-        internal bool SharePointFieldsLoadedViaExpression { get; set; } = false;
+        internal bool SharePointFieldsLoadedViaExpression { get; set; }
 
         /// <summary>
         /// Was there an expression provided to build up the fields lists of this entity
         /// </summary>
-        internal bool GraphFieldsLoadedViaExpression { get; set; } = false;
+        internal bool GraphFieldsLoadedViaExpression { get; set; }
 
         /// <summary>
         /// Check if Microsoft Graph can be used based upon the requested fields to load

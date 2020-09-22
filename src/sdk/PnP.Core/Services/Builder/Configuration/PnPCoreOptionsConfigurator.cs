@@ -18,8 +18,12 @@ namespace PnP.Core.Services.Builder.Configuration
 
         public void Configure(PnPContextFactoryOptions options)
         {
-            foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Sites)
+            //foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Sites)
+            foreach (var siteOption in pnpCoreOptions.Value.Sites)
             {
+                var optionKey = siteOption.Key;
+                var optionValue = siteOption.Value;
+
                 options.Configurations.Add(new PnPContextFactoryOptionsConfiguration { 
                     Name = optionKey,
                     SiteUrl = new Uri(optionValue.SiteUrl),

@@ -133,7 +133,7 @@ namespace PnP.Core.Services
             logger = log;
         }
 
-        private string GetVersionTag()
+        private static string GetVersionTag()
         {
             Assembly coreAssembly = Assembly.GetExecutingAssembly();
             var versionTag = $"PnPSDK:{((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version.Split('.')[2]}";

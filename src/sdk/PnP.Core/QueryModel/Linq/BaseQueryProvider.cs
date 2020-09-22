@@ -180,7 +180,7 @@ namespace PnP.Core.QueryModel
 
         #endregion
 
-        private async Task<TResult> CastTask<TResult>(Task<object> task, CancellationToken token)
+        private static async Task<TResult> CastTask<TResult>(Task<object> task, CancellationToken token)
         {
             object result = await task.ConfigureAwait(false);
             token.ThrowIfCancellationRequested();
@@ -197,7 +197,7 @@ namespace PnP.Core.QueryModel
             }
         }
 
-        private bool TryGetFromAlreadyRequestedQueryable<TResult>(Expression expression, out object result)
+        private static bool TryGetFromAlreadyRequestedQueryable<TResult>(Expression expression, out object result)
         {
             result = default;
 
@@ -228,7 +228,7 @@ namespace PnP.Core.QueryModel
             return false;
         }
 
-        private (IQueryable, Expression) GetExpressionForAlreadyRequestedQueryable(Expression expression)
+        private static (IQueryable, Expression) GetExpressionForAlreadyRequestedQueryable(Expression expression)
         {
             // If the target of the query is a method call expression
             var methodCall = expression as MethodCallExpression;

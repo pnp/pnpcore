@@ -194,7 +194,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// If true than all requests to Microsoft Graph use the beta endpoint
         /// </summary>
-        public bool GraphAlwaysUseBeta { get; set; } = false;
+        public bool GraphAlwaysUseBeta { get; set; }
 
         /// <summary>
         /// If true than the Graph beta endpoint is used when there's no other option, default approach stays using the v1 endpoint
@@ -427,7 +427,7 @@ namespace PnP.Core.Services
 
         #region IDisposable implementation
 
-        private bool disposed = false;
+        private bool disposed;
 
         /// <summary>
         /// Disposes this <see cref="PnPContext"/>

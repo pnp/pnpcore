@@ -72,7 +72,7 @@ namespace PnP.Core
                     var errorString = errorField.Value.GetString();
                     if (errorString.Contains(","))
                     {
-                        var splitErrorMessage = errorString.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                        var splitErrorMessage = errorString.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
                         Code = splitErrorMessage[1].Trim();
                         if (long.TryParse(splitErrorMessage[0], out long errorCode))
                         {

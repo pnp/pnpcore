@@ -412,6 +412,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">The batch instance to use.</param>
         /// <param name="destinationUrl">The destination URL including file name.</param>
         /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
+        /// <param name="options">Options of the copy operation.</param>
         Task CopyToBatchAsync(Batch batch, string destinationUrl, bool overwrite = false, MoveCopyOptions options = null);
 
         /// <summary>

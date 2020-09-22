@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using PnP.Core.Services;
-using PnP.Core.Utilities;
+﻿using PnP.Core.Services;
 using System.Dynamic;
 using System.Net.Http;
 using System.Text.Json;

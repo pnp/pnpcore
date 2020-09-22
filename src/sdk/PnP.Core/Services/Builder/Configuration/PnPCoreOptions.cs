@@ -131,7 +131,7 @@ namespace PnP.Core.Services.Builder.Configuration
         /// <summary>
         /// If true than all requests to Microsoft Graph use the beta endpoint
         /// </summary>
-        public bool GraphAlwaysUseBeta { get; set; } = false;
+        public bool GraphAlwaysUseBeta { get; set; }
     }
 
     /// <summary>

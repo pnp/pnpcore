@@ -28,8 +28,12 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
             }
 
             // For each site configuration we create the configured Authentication Provider
-            foreach (var (siteKey, siteValue) in authenticationOptions.Sites)
+            //foreach (var (siteKey, siteValue) in authenticationOptions.Sites)
+            foreach (var siteOption in authenticationOptions.Sites)
             {
+                var siteKey = siteOption.Key;
+                var siteValue = siteOption.Value;
+
                 // We use the configuration provided by name, if any
                 if (!string.IsNullOrEmpty(siteValue.AuthenticationProviderName))
                 {

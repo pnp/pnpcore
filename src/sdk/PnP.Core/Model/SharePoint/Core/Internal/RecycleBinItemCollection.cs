@@ -16,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
                 PnPContext = PnPContext,
                 Parent = Parent
             };
-            var entity = EntityManager.Instance.GetClassInfo<IRecycleBinItem>(item.GetType(), item);
+            var entity = EntityManager.GetClassInfo(item.GetType(), item);
             string deleteAllEndpointUrl = $"{entity.SharePointGet}/DeleteAll()";
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
@@ -37,7 +37,7 @@ namespace PnP.Core.Model.SharePoint
                 PnPContext = PnPContext,
                 Parent = Parent
             };
-            var entity = EntityManager.Instance.GetClassInfo<IRecycleBinItem>(item.GetType(), item);
+            var entity = EntityManager.GetClassInfo(item.GetType(), item);
             string deleteAllEndpointUrl = $"{entity.SharePointGet}/DeleteAll()";
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
@@ -70,7 +70,7 @@ namespace PnP.Core.Model.SharePoint
                 PnPContext = PnPContext,
                 Parent = Parent
             };
-            var entity = EntityManager.Instance.GetClassInfo<IRecycleBinItem>(item.GetType(), item);
+            var entity = EntityManager.GetClassInfo(item.GetType(), item);
             string deleteAllEndpointUrl = $"{entity.SharePointGet}/DeleteAllSecondStageItems()";
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
@@ -91,7 +91,7 @@ namespace PnP.Core.Model.SharePoint
                 PnPContext = PnPContext,
                 Parent = Parent
             };
-            var entity = EntityManager.Instance.GetClassInfo<IRecycleBinItem>(item.GetType(), item);
+            var entity = EntityManager.GetClassInfo(item.GetType(), item);
             string deleteAllEndpointUrl = $"{entity.SharePointGet}/DeleteAllSecondStageItems()";
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
@@ -124,7 +124,7 @@ namespace PnP.Core.Model.SharePoint
                 PnPContext = PnPContext,
                 Parent = Parent
             };
-            var entity = EntityManager.Instance.GetClassInfo<IRecycleBinItem>(item.GetType(), item);
+            var entity = EntityManager.GetClassInfo(item.GetType(), item);
             string deleteAllEndpointUrl = $"{entity.SharePointGet}/MoveAllToSecondStage()";
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
@@ -145,7 +145,7 @@ namespace PnP.Core.Model.SharePoint
                 PnPContext = PnPContext,
                 Parent = Parent
             };
-            var entity = EntityManager.Instance.GetClassInfo<IRecycleBinItem>(item.GetType(), item);
+            var entity = EntityManager.GetClassInfo(item.GetType(), item);
             string deleteAllEndpointUrl = $"{entity.SharePointGet}/MoveAllToSecondStage()";
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
@@ -178,7 +178,7 @@ namespace PnP.Core.Model.SharePoint
                 PnPContext = PnPContext,
                 Parent = Parent
             };
-            var entity = EntityManager.Instance.GetClassInfo<IRecycleBinItem>(item.GetType(), item);
+            var entity = EntityManager.GetClassInfo(item.GetType(), item);
             string deleteAllEndpointUrl = $"{entity.SharePointGet}/RestoreAll()";
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
@@ -199,7 +199,7 @@ namespace PnP.Core.Model.SharePoint
                 PnPContext = PnPContext,
                 Parent = Parent
             };
-            var entity = EntityManager.Instance.GetClassInfo<IRecycleBinItem>(item.GetType(), item);
+            var entity = EntityManager.GetClassInfo(item.GetType(), item);
             string deleteAllEndpointUrl = $"{entity.SharePointGet}/RestoreAll()";
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
