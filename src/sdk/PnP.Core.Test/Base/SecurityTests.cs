@@ -93,7 +93,7 @@ namespace PnP.Core.Test.Base
             // Disable test in GitHub, Reason availability of certificate in Linux environments
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
-            var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, TestCommon.GetX509CertificateThumbprint());
+            var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.CurrentUser, TestCommon.GetX509CertificateThumbprint());
             Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Encrypt(null, true, certificate));
         }
 
@@ -123,7 +123,7 @@ namespace PnP.Core.Test.Base
             // Disable test in GitHub, Reason availability of certificate in Linux environments
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
-            var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, TestCommon.GetX509CertificateThumbprint());
+            var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.CurrentUser, TestCommon.GetX509CertificateThumbprint());
                 Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Decrypt(null, true, certificate));
             
         }
