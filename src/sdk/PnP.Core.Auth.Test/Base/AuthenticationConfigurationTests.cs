@@ -23,6 +23,8 @@ namespace PnP.Core.Auth.Test.Base
         [TestMethod]
         public async Task TestUsernamePasswordWithGraph()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteUsernamePassword))
             {
                 await CheckAccessToTargetResource(context);
@@ -32,6 +34,8 @@ namespace PnP.Core.Auth.Test.Base
         [TestMethod]
         public async Task TestUsernamePasswordWithSPO()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteUsernamePassword))
             {
                 await CheckAccessToTargetResource(context, false);
@@ -41,6 +45,8 @@ namespace PnP.Core.Auth.Test.Base
         [TestMethod]
         public async Task TestCredentialManagerWithGraph()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteCredentialManager))
             {
                 await CheckAccessToTargetResource(context);
@@ -50,6 +56,8 @@ namespace PnP.Core.Auth.Test.Base
         [TestMethod]
         public async Task TestCredentialManagerWithSPO()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteCredentialManager))
             {
                 await CheckAccessToTargetResource(context, false);
@@ -59,6 +67,8 @@ namespace PnP.Core.Auth.Test.Base
         //[TestMethod]
         //public async Task TestOnBehalfOfWithGraph()
         //{
+        //    if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+        //
         //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteOnBehalfOf))
         //    {
         //        await CheckAccessToTargetResource(context);
@@ -68,6 +78,8 @@ namespace PnP.Core.Auth.Test.Base
         //[TestMethod]
         //public async Task TestOnBehalfOfWithSPO()
         //{
+        //    if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+        //
         //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteOnBehalfOf))
         //    {
         //        await CheckAccessToTargetResource(context, false);
@@ -77,6 +89,8 @@ namespace PnP.Core.Auth.Test.Base
         //[TestMethod]
         //public async Task TestAspNetCoreWithGraph()
         //{
+        //    if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+        //
         //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteAspNetCore))
         //    {
         //        await CheckAccessToTargetResource(context);
@@ -86,6 +100,8 @@ namespace PnP.Core.Auth.Test.Base
         //[TestMethod]
         //public async Task TestAspNetCoreWithSPO()
         //{
+        //    if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+        //
         //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteAspNetCore))
         //    {
         //        await CheckAccessToTargetResource(context, false);
@@ -95,6 +111,8 @@ namespace PnP.Core.Auth.Test.Base
         [TestMethod]
         public async Task TestX509CertificateWithGraph()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteX509Certificate))
             {
                 await CheckAccessToTargetResource(context);
@@ -104,6 +122,8 @@ namespace PnP.Core.Auth.Test.Base
         [TestMethod]
         public async Task TestX509CertificateWithSPO()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteX509Certificate))
             {
                 await CheckAccessToTargetResource(context, false);
