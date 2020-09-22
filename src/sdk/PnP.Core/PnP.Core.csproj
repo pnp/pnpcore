@@ -19,6 +19,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\Authentication\ToRemove\**" />
+    <EmbeddedResource Remove="Services\Authentication\ToRemove\**" />
+    <None Remove="Services\Authentication\ToRemove\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Model\SharePoint\Navigation\" />
     <Folder Include="Model\SharePoint\UI\" />
   </ItemGroup>
