@@ -27,6 +27,31 @@ namespace PnP.Core.Auth
         private IPublicClientApplication publicClientApplication;
 
         /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="username">The Username for authentication</param>
+        /// <param name="password">The Password for authentication</param>
+        /// <param name="logger">The instance of the logger service provided by DI</param>
+        public UsernamePasswordAuthenticationProvider(string clientId, string tenantId,
+            string username, SecureString password,
+            ILogger<OAuthAuthenticationProvider> logger)
+            : base(logger)
+        {
+            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = clientId,
+                TenantId = tenantId,
+                UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
+                {
+                    Username = username,
+                    Password = password.ToInsecureString()
+                }
+            });
+        }
+
+        /// <summary>
         /// Public constructor leveraging DI to initialize the ILogger interfafce
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
@@ -40,7 +65,7 @@ namespace PnP.Core.Auth
         /// Initializes the Authentication Provider
         /// </summary>
         /// <param name="options">The options to use</param>
-        public override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
+        internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
             // We need the UsernamePassword options
             if (options.UsernamePassword == null)
@@ -76,6 +101,10 @@ namespace PnP.Core.Auth
                 .Create(ClientId)
                 .WithAuthority(authority)
                 .Build();
+
+            // Log the initialization information
+            this.Log?.LogInformation(PnPCoreAuthResources.UsernamePasswordAuthenticationProvider_LogInit,
+                options.UsernamePassword.Username);
         }
 
         /// <summary>
@@ -133,6 +162,10 @@ namespace PnP.Core.Auth
                 tokenResult = publicClientApplication.AcquireTokenByUsernamePassword(scopes, Username, Password)
                     .ExecuteAsync().GetAwaiter().GetResult();
             }
+
+            // Log the access token retrieval action
+            this.Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+                this.GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it
             // In case of any exception while retrieving the access token, 
