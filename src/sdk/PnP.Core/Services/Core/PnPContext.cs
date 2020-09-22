@@ -356,25 +356,6 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
-        /// Sets an access token to be used for this context. Only works when the current configuration is using the <see cref="OAuthAccessTokenConfiguration"/>
-        /// </summary>
-        /// <param name="accessToken">Access token to set</param>
-        public void SetAccessToken(string accessToken)
-        {
-            if (string.IsNullOrEmpty(accessToken))
-            {
-                throw new ArgumentNullException(nameof(accessToken));
-            }
-
-            if (!(AuthenticationProvider.Configuration is OAuthAccessTokenConfiguration))
-            {
-                throw new ClientException(ErrorType.ConfigurationError, "You can only set the access token when you've configured this context to use the OAuthAccessTokenConfiguration");
-            }
-
-            (AuthenticationProvider.Configuration as OAuthAccessTokenConfiguration).AccessToken = accessToken;
-        }
-
-        /// <summary>
         /// Clones this context into a new context for the same SharePoint site
         /// </summary>
         /// <returns>New <see cref="PnPContext"/></returns>

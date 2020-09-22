@@ -18,7 +18,6 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="options"><see cref="PnPContextFactory"/> options</param>
         /// <param name="logger">Connected logger</param>
-        /// <param name="authenticationProviderFactory"><see cref="AuthenticationProviderFactory"/> to use</param>
         /// <param name="sharePointRestClient">SharePoint REST http client to use</param>
         /// <param name="microsoftGraphClient">Microsoft Graph http client to use</param>
         /// <param name="contextOptions">Context options to use</param>
@@ -27,7 +26,6 @@ namespace PnP.Core.Services
         public PnPContextFactory(
             IOptionsMonitor<PnPContextFactoryOptions> options,
             ILogger<PnPContext> logger,
-            IAuthenticationProviderFactory authenticationProviderFactory,
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
             IOptions<PnPContextFactoryOptions> contextOptions,
@@ -46,7 +44,6 @@ namespace PnP.Core.Services
             // Store logger and options locally
             Log = logger;
             Options = options.CurrentValue;
-            AuthenticationProviderFactory = authenticationProviderFactory;
             SharePointRestClient = sharePointRestClient;
             MicrosoftGraphClient = microsoftGraphClient;
             ContextOptions = contextOptions?.Value;
@@ -62,11 +59,6 @@ namespace PnP.Core.Services
         /// Options for the <see cref="PnPContextFactory"/>
         /// </summary>
         protected PnPContextFactoryOptions Options { get; private set; }
-
-        /// <summary>
-        /// Connected <see cref="AuthenticationProviderFactory"/>
-        /// </summary>
-        protected IAuthenticationProviderFactory AuthenticationProviderFactory { get; private set; }
 
         /// <summary>
         /// Connected logger
@@ -122,7 +114,7 @@ namespace PnP.Core.Services
                 throw new ClientException(ErrorType.ConfigurationError, $"Invalid configuration name '{name}' for PnPContext creation!");
             }
 
-            return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProviderName).ConfigureAwait(false);
+            return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -143,54 +135,7 @@ namespace PnP.Core.Services
         public async virtual Task<PnPContext> CreateAsync(Uri url)
         {
             // Use the default settings to create a new instance of SPOContext
-            return await CreateAsync(url, AuthenticationProviderFactory.CreateDefault()).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Creates a new instance of SPOContext based on a provided configuration name
-        /// </summary>
-        /// <param name="url">The URL of the SPOContext as a URI</param>
-        /// <param name="authenticationProviderName">The name of the Authentication Provider to use to authenticate within the SPOContext</param>
-        /// <returns>A SPOContext object based on the provided configuration name</returns>
-        public virtual PnPContext Create(Uri url, string authenticationProviderName)
-        {
-            return CreateAsync(url, authenticationProviderName).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Creates a new instance of SPOContext based on a provided configuration name
-        /// </summary>
-        /// <param name="url">The URL of the SPOContext as a URI</param>
-        /// <param name="authenticationProviderName">The name of the Authentication Provider to use to authenticate within the SPOContext</param>
-        /// <returns>A SPOContext object based on the provided configuration name</returns>
-        public async virtual Task<PnPContext> CreateAsync(Uri url, string authenticationProviderName)
-        {
-            if (url == null)
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
-
-            // Create the Authentication Provider based on the provided configuration
-            var authProvider = AuthenticationProviderFactory.Create(authenticationProviderName);
-            if (authProvider == null)
-            {
-                throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for site '{url.AbsoluteUri}' during PnPContext creation!");
-            }
-
-            // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient)
-            {
-                Uri = url
-            };
-
-            // Configure the global Microsoft Graph settings
-            context.GraphFirst = Options.GraphFirst;
-            context.GraphCanUseBeta = Options.GraphCanUseBeta;
-            context.GraphAlwaysUseBeta = Options.GraphAlwaysUseBeta;
-
-            await ConfigureTelemetry(context).ConfigureAwait(false);
-
-            return context;
+            return await CreateAsync(url, this.Options.DefaultAuthenticationProvider).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -218,47 +163,15 @@ namespace PnP.Core.Services
                 Uri = url
             };
 
-            await ConfigureTelemetry(context).ConfigureAwait(false);
-
-            return context;
-        }
-
-        /// <summary>
-        /// Creates a new instance of PnPContext based on a provided group and Authentication configuration name
-        /// </summary>
-        /// <param name="groupId">The id of an Microsoft 365 group</param>
-        /// <param name="authenticationProviderName">The name of the Authentication Provider to use to authenticate within the PnPContext</param>
-        /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public virtual PnPContext Create(Guid groupId, string authenticationProviderName)
-        {
-            return CreateAsync(groupId, authenticationProviderName).GetAwaiter().GetResult();
-        }
-
-        /// <summary>
-        /// Creates a new instance of PnPContext based on a provided group and Authentication configuration name
-        /// </summary>
-        /// <param name="groupId">The id of an Microsoft 365 group</param>
-        /// <param name="authenticationProviderName">The name of the Authentication Provider to use to authenticate within the PnPContext</param>
-        /// <returns>A PnPContext object based on the provided configuration name</returns>
-        public async virtual Task<PnPContext> CreateAsync(Guid groupId, string authenticationProviderName)
-        {
-            // Create the Authentication Provider based on the provided configuration
-            var authProvider = AuthenticationProviderFactory.Create(authenticationProviderName);
-            if (authProvider == null)
-            {
-                throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for group '{groupId}' during PnPContext creation!");
-            }
-
-            // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
-
-            await ConfigureForGroup(context, groupId).ConfigureAwait(false);
+            // Configure the global Microsoft Graph settings
+            context.GraphFirst = Options.GraphFirst;
+            context.GraphCanUseBeta = Options.GraphCanUseBeta;
+            context.GraphAlwaysUseBeta = Options.GraphAlwaysUseBeta;
 
             await ConfigureTelemetry(context).ConfigureAwait(false);
 
             return context;
         }
-
 
         /// <summary>
         /// Creates a new instance of PnPContext based on a provided group and Authentication Provider instance
@@ -306,7 +219,7 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Guid groupId)
         {
-            return await CreateAsync(groupId, AuthenticationProviderFactory.CreateDefault()).ConfigureAwait(false);
+            return await CreateAsync(groupId, this.Options.DefaultAuthenticationProvider).ConfigureAwait(false);
         }
 
         internal static async Task ConfigureForGroup(PnPContext context, Guid groupId)

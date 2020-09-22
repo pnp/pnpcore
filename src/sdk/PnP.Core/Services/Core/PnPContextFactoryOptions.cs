@@ -23,6 +23,11 @@ namespace PnP.Core.Services
         public bool GraphAlwaysUseBeta { get; set; } = false;
 
         /// <summary>
+        /// The Default Authentication Provider configuration
+        /// </summary>
+        public IAuthenticationProvider DefaultAuthenticationProvider { get; set; }
+
+        /// <summary>
         /// Collection of configurations for PnPContextFactory
         /// </summary>
         public List<PnPContextFactoryOptionsConfiguration> Configurations { get; } = new List<PnPContextFactoryOptionsConfiguration>();

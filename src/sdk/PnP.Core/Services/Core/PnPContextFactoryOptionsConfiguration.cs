@@ -18,8 +18,8 @@ namespace PnP.Core.Services
         public Uri SiteUrl { get; set; }
 
         /// <summary>
-        /// The Name of the Authentication Provider configuration
+        /// The Authentication Provider configuration
         /// </summary>
-        public string AuthenticationProviderName { get; set; }
+        public IAuthenticationProvider AuthenticationProvider { get; set; }
     }
 }
