@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using PnP.Core.Auth;
+using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Services.Builder.Configuration;
 
 namespace PnP.Core.Test.Utilities
 {
@@ -51,9 +54,9 @@ namespace PnP.Core.Test.Utilities
 
         internal static string GetX509CertificateThumbprint()
         {
-        
-           var configuration = GetConfigurationSettings();
-           return configuration.GetValue<string>("CustomSettings:X509CertificateThumbprint");
+
+            var configuration = GetConfigurationSettings();
+            return configuration.GetValue<string>("PnPCore:Credentials:Configurations:X509Certificate:X509Certificate:Thumbprint");
         }
 
         /// <summary>
@@ -112,7 +115,7 @@ namespace PnP.Core.Test.Utilities
             return await BuildContextFactory().CreateAsync(configurationName).ConfigureAwait(false);
         }
 
-        
+
 
         public PnPContext GetContext(Guid groupId, int id = 0,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
@@ -191,9 +194,9 @@ namespace PnP.Core.Test.Utilities
 
                 var configuration = GetConfigurationSettings();
 
-                string targetSiteUrl = configuration.GetValue<string>("CustomSettings:TargetSiteUrl");
-                string targetSubSiteUrl = configuration.GetValue<string>("CustomSettings:TargetSubSiteUrl");
-                string noGroupSiteUrl = configuration.GetValue<string>("CustomSettings:NoGroupSiteUrl");
+                string targetSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSite:SiteUrl");
+                string targetSubSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSubSite:SiteUrl");
+                string noGroupSiteUrl = configuration.GetValue<string>("PnPCore:Sites:NoGroupTestSite:SiteUrl");
 
                 if (RunningInGitHubWorkflow())
                 {
@@ -203,61 +206,22 @@ namespace PnP.Core.Test.Utilities
                 }
 
                 var serviceProvider = new ServiceCollection()
-                   // Configuration
-                   .AddScoped<IConfiguration>(_ => configuration)
-                   // Logging service, get config from appsettings + add debug output handler
-                   .AddLogging(configure =>
-                   {
-                       configure.AddConfiguration(configuration.GetSection("Logging"));
-                       configure.AddDebug();
-                   })
-                   // Authentication provider factory
-                   .AddAuthenticationProviderFactory(options =>
-                   {
-                       options.Configurations.Add(new OAuthCredentialManagerConfiguration
-                       {
-                           Name = "CredentialManagerAuthentication",
-                           CredentialManagerName = configuration.GetValue<string>("CustomSettings:CredentialManager"),
-                           ClientId = configuration.GetValue<string>("CustomSettings:ClientId"),
-                       });
-                       options.Configurations.Add(new OAuthAccessTokenConfiguration
-                       {
-                           Name = "AccessTokenAuthentication",
-                           ClientId = null,
-                       });
-
-                       options.DefaultConfiguration = "CredentialManagerAuthentication";
-                   })
-                   // PnP Context factory
-                   .AddTestPnPContextFactory(options =>
-                   {
-                       options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                       {
-                           Name = TestSite,
-                           SiteUrl = new Uri(targetSiteUrl),
-                           AuthenticationProviderName = "CredentialManagerAuthentication",
-                       });
-                       options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                       {
-                           Name = TestSubSite,
-                           SiteUrl = new Uri(targetSubSiteUrl),
-                           AuthenticationProviderName = "CredentialManagerAuthentication",
-                       });
-                       options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                       {
-                           Name = NoGroupTestSite,
-                           SiteUrl = new Uri(noGroupSiteUrl),
-                           AuthenticationProviderName = "CredentialManagerAuthentication",
-                       });
-                       // Configure the main test site also to use access token based auth
-                       options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                       {
-                           Name = TestSiteAccessToken,
-                           SiteUrl = new Uri(targetSiteUrl),
-                           AuthenticationProviderName = "AccessTokenAuthentication",
-                       });
-                   })
-                   .BuildServiceProvider();
+                    // Configuration
+                    .AddScoped<IConfiguration>(_ => configuration)
+                    // Logging service, get config from appsettings + add debug output handler
+                    .AddLogging(configure =>
+                    {
+                        configure.AddConfiguration(configuration.GetSection("Logging"));
+                        configure.AddDebug();
+                    })
+                    // Add the PnP Core SDK library services for test
+                    .AddTestPnPContextFactory()
+                    // Add the PnP Core SDK library services configuration from the appsettings.json file
+                    .Configure<PnPCoreOptions>(configuration.GetSection("PnPCore"))
+                    // Add the PnP Core SDK Authentication Providers
+                    .AddPnPCoreAuthentication()
+                    .Configure<PnPCoreAuthenticationOptions>(configuration.GetSection("PnPCore"))
+                .BuildServiceProvider();
 
                 TestUris = new Dictionary<string, Uri>
                 {
