@@ -1,18 +1,16 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PnP.Core.Test.Services;
+using PnP.Core.Auth.Services;
+using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services;
+using PnP.Core.Services.Builder.Configuration;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using PnP.Core.Auth;
-using PnP.Core.Auth.Services.Builder.Configuration;
-using PnP.Core.Services.Builder.Configuration;
 
-namespace PnP.Core.Test.Utilities
+namespace PnP.Core.Auth.Test.Utilities
 {
     public sealed class TestCommon
     {
@@ -33,40 +31,29 @@ namespace PnP.Core.Test.Utilities
         }
 
         /// <summary>
-        /// Name of the default test site configuration
+        /// Name of the default test site configuration with Username and Password delegated authentication
         /// </summary>
-        internal static string TestSite { get { return "TestSite"; } }
+        internal static string TestSiteUsernamePassword { get { return "TestSiteUsernamePassword"; } }
 
         /// <summary>
-        /// Name of the default test sub site configuration
+        /// Name of the default test site configuration with Credential Manager delegated authentication
         /// </summary>
-        internal static string TestSubSite { get { return "TestSubSite"; } }
+        internal static string TestSiteCredentialManager { get { return "TestSiteCredentialManager"; } }
 
         /// <summary>
-        /// Name of the default no group test site configuration
+        /// Name of the default test site configuration with OnBehalfOf app-omly authentication
         /// </summary>
-        internal static string NoGroupTestSite { get { return "NoGroupTestSite"; } }
+        internal static string TestSiteOnBehalfOf { get { return "TestSiteOnBehalfOf"; } }
 
         /// <summary>
-        /// Name of the default test site confguration when using an access token to authenticate
+        /// Name of the default test site configuration with AspNetCore delegated authentication
         /// </summary>
-        internal static string TestSiteAccessToken { get { return "TestSiteAccessToken"; } }
+        internal static string TestSiteAspNetCore { get { return "TestSiteAspNetCore"; } }
 
         /// <summary>
-        /// Set Mocking to false to switch the test system in recording mode for all contexts being created
+        /// Name of the default test site configuration with X.509 Certificate app-only authentication
         /// </summary>
-        public bool Mocking { get; set; } = true;
-
-        /// <summary>
-        /// Generate the .request and .debug files that can be useful to debug the test mocking system, these files
-        /// are not needed to run the actual tests, hence the default = false
-        /// </summary>
-        public bool GenerateMockingDebugFiles { get; set; } = false;
-
-        /// <summary>
-        /// Urls's used by the test cases
-        /// </summary>
-        public Dictionary<string, Uri> TestUris { get; set; }
+        internal static string TestSiteX509Certificate { get { return "TestSiteX509Certificate"; } }
 
         /// <summary>
         /// Private constructor since this is a singleton
@@ -96,19 +83,8 @@ namespace PnP.Core.Test.Utilities
                 testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
             }
 
-            // Configure the factory for our testing mode
-            var testPnPContextFactory = factory as TestPnPContextFactory;
-            testPnPContextFactory.Mocking = Mocking;
-            testPnPContextFactory.Id = id;
-            testPnPContextFactory.TestName = testName;
-            testPnPContextFactory.SourceFilePath = sourceFilePath;
-            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
-            testPnPContextFactory.TestUris = TestUris;
-
             return await BuildContextFactory().CreateAsync(configurationName).ConfigureAwait(false);
         }
-
-
 
         public PnPContext GetContext(Guid groupId, int id = 0,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
@@ -124,29 +100,7 @@ namespace PnP.Core.Test.Utilities
             // Obtain factory (cached)
             var factory = BuildContextFactory();
 
-            // Configure the factory for our testing mode
-            (factory as TestPnPContextFactory).Mocking = Mocking;
-            (factory as TestPnPContextFactory).Id = id;
-            (factory as TestPnPContextFactory).TestName = testName;
-            (factory as TestPnPContextFactory).SourceFilePath = sourceFilePath;
-            (factory as TestPnPContextFactory).GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
-            (factory as TestPnPContextFactory).TestUris = TestUris;
-
             return await BuildContextFactory().CreateAsync(groupId).ConfigureAwait(false);
-        }
-
-        public PnPContext Clone(PnPContext source, Uri uri, int id)
-        {
-            var clonedContext = source.Clone(uri);
-            if (source.Mode == TestMode.Mock)
-            {
-                clonedContext.SetMockMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
-            }
-            else
-            {
-                clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
-            }
-            return clonedContext;
         }
 
         public static IConfigurationRoot GetConfigurationSettings()
@@ -163,8 +117,8 @@ namespace PnP.Core.Test.Utilities
             }
 
             // The settings file is stored in the root of the test project, no need to configure the file to be copied over the bin folder
-            var jsonSettingsFile = Path.GetFullPath($"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}appsettings.{environmentName}.json");
-            
+            var jsonSettingsFile = Path.GetFullPath($"..\\..\\..\\appsettings.{environmentName}.json");
+
             var configuration = new ConfigurationBuilder()
             .AddJsonFile(jsonSettingsFile, optional: true, reloadOnChange: true)
             .AddEnvironmentVariables()
@@ -187,15 +141,9 @@ namespace PnP.Core.Test.Utilities
 
                 var configuration = GetConfigurationSettings();
 
-                string targetSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSite:SiteUrl");
-                string targetSubSiteUrl = configuration.GetValue<string>("PnPCore:Sites:TestSubSite:SiteUrl");
-                string noGroupSiteUrl = configuration.GetValue<string>("PnPCore:Sites:NoGroupTestSite:SiteUrl");
-
                 if (RunningInGitHubWorkflow())
                 {
-                    targetSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1";
-                    targetSubSiteUrl = "https://bertonline.sharepoint.com/sites/prov-1/testsub1";
-                    noGroupSiteUrl = "https://bertonline.sharepoint.com/sites/modern";
+                    // NOOP so far
                 }
 
                 var serviceProvider = new ServiceCollection()
@@ -207,21 +155,14 @@ namespace PnP.Core.Test.Utilities
                         configure.AddConfiguration(configuration.GetSection("Logging"));
                         configure.AddDebug();
                     })
-                    // Add the PnP Core SDK library services for test
-                    .AddTestPnPContextFactory()
+                    // Add the PnP Core SDK library services
+                    .AddPnPCore().Services
                     // Add the PnP Core SDK library services configuration from the appsettings.json file
                     .Configure<PnPCoreOptions>(configuration.GetSection("PnPCore"))
                     // Add the PnP Core SDK Authentication Providers
                     .AddPnPCoreAuthentication()
                     .Configure<PnPCoreAuthenticationOptions>(configuration.GetSection("PnPCore"))
                 .BuildServiceProvider();
-
-                TestUris = new Dictionary<string, Uri>
-                {
-                    { TestSite, new Uri(targetSiteUrl) },
-                    { TestSubSite, new Uri(targetSubSiteUrl) },
-                    { NoGroupTestSite, new Uri(noGroupSiteUrl) }
-                };
 
                 var pnpContextFactory = serviceProvider.GetRequiredService<IPnPContextFactory>();
 
@@ -236,6 +177,12 @@ namespace PnP.Core.Test.Utilities
             {
                 semaphoreSlimFactory.Release();
             }
+        }
+
+        internal static string GetX509CertificateThumbprint()
+        {
+            var configuration = GetConfigurationSettings();
+            return configuration.GetValue<string>("PnPCore:Credentials:Configurations:X509Certificate:X509Certificate:Thumbprint");
         }
 
         private static string LoadTestEnvironment()
@@ -260,7 +207,6 @@ namespace PnP.Core.Test.Utilities
                 return null;
             }
         }
-
 
         internal static bool RunningInGitHubWorkflow()
         {

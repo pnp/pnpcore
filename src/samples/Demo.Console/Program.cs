@@ -3,11 +3,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PnP.Core;
+using PnP.Core.Auth;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using PnP.Core.Services.Builder.Configuration;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +21,6 @@ namespace Consumer
 {
     class Program
     {
-
         public static async Task Main(string[] args)
         {
             var host = Host.CreateDefaultBuilder()
@@ -34,40 +35,51 @@ namespace Consumer
             })
             .ConfigureServices((hostingContext, services) =>
             {
+                // Read the custom configuration from the appsettings.<environment>.json file
                 var customSettings = new CustomSettings();
                 hostingContext.Configuration.Bind("CustomSettings", customSettings);
 
-                services
-                .AddAuthenticationProviderFactory(options =>
-                {
-                    options.Configurations.Add(new OAuthCredentialManagerConfiguration
-                    {
-                        Name = "CredentialManagerAuthentication",
-                        CredentialManagerName = customSettings.CredentialManager,
-                    });
-                    options.Configurations.Add(new OAuthUsernamePasswordConfiguration
-                    {
-                        Name = "UsernameAndPasswordAuthentication",
-                        Username = customSettings.UserPrincipalName,
-                        Password = StringToSecureString(customSettings.Password),
-                    });
+                // Create an instance of the Authentication Provider that uses Credential Manager
+                var authenticationProvider = new CredentialManagerAuthenticationProvider(
+                                customSettings.ClientId,
+                                customSettings.TenantId,
+                                customSettings.CredentialManager);                
 
-                    options.DefaultConfiguration = "CredentialManagerAuthentication";
-                })
-                .AddPnPContextFactory(options =>
-                {
-                    options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                    {
-                        Name = "DemoSite",
-                        SiteUrl = new Uri(customSettings.DemoSiteUrl),
-                        AuthenticationProviderName = "CredentialManagerAuthentication",
-                    });
-                    options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                    {
-                        Name = "DemoSubSite",
-                        SiteUrl = new Uri(customSettings.DemoSubSiteUrl),
-                        AuthenticationProviderName = "CredentialManagerAuthentication",
-                    });
+                // Add the PnP Core SDK services
+                services
+                .AddPnPCore(options => {
+
+                    // You can explicitly configure all the settings, or you can
+                    // simply use the default values
+
+                    //options.PnPContext.GraphFirst = true;
+                    //options.PnPContext.GraphCanUseBeta = true;
+                    //options.PnPContext.GraphAlwaysUseBeta = false;
+
+                    //options.HttpRequests.UserAgent = "NONISV|SharePointPnP|PnPCoreSDK";
+                    //options.HttpRequests.MicrosoftGraph = new PnPCoreHttpRequestsGraphOptions
+                    //{
+                    //    UseRetryAfterHeader = true,
+                    //    MaxRetries = 10,
+                    //    DelayInSeconds = 3,
+                    //    UseIncrementalDelay = true,
+                    //};
+                    //options.HttpRequests.SharePointRest = new PnPCoreHttpRequestsSharePointRestOptions
+                    //{
+                    //    UseRetryAfterHeader = true,
+                    //    MaxRetries = 10,
+                    //    DelayInSeconds = 3,
+                    //    UseIncrementalDelay = true,
+                    //};
+
+                    options.DefaultAuthenticationProvider = authenticationProvider;
+
+                    options.Sites.Add("DemoSite",
+                        new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
+                        {
+                            SiteUrl = customSettings.DemoSiteUrl,
+                            AuthenticationProvider = authenticationProvider
+                        });
                 });
             })
             // Let the builder know we're running in a console
@@ -91,13 +103,13 @@ namespace Consumer
                     // Interactive GET samples
 
                     // Retrieving web with lists and masterpageurl loaded ==> SharePoint REST query
-                    var web = await context.Web.GetAsync(p => p.Title, p => p.Lists, p => p.MasterPageUrl);
+                    var web = await context.Web.GetAsync(p => p.Title, p => p.Lists, p => p.MasterUrl);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Web (REST)===");
                     Console.WriteLine($"Title: {web.Title}");
                     Console.WriteLine($"# Lists: {web.Lists.Count()}");
-                    Console.WriteLine($"Master page url: {web.MasterPageUrl}");
+                    Console.WriteLine($"Master page url: {web.MasterUrl}");
                     Console.ResetColor();
 
                     // Getting the team connected to this Modern Team site ==> Microsoft Graph query

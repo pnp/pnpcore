@@ -11,7 +11,7 @@ namespace PnP.Core.Services.Builder.Configuration
         /// <summary>
         /// Turns on/off telemetry, can be customized via configuration. Defaults to false.
         /// </summary>
-        public bool DisableTelemetry { get; set; }
+        public bool DisableTelemetry { get; set; } = false;
 
         /// <summary>
         /// AAD tenant id, used for telemetry purposes. Can be customized via configuration
@@ -21,22 +21,22 @@ namespace PnP.Core.Services.Builder.Configuration
         /// <summary>
         /// The global HTTP requests settings
         /// </summary>
-        public PnPCoreHttpRequestsOptions HttpRequests { get; set; }
+        public PnPCoreHttpRequestsOptions HttpRequests { get; set; } = new PnPCoreHttpRequestsOptions();
 
         /// <summary>
         /// The global PnPContext options
         /// </summary>
-        public PnPCoreContextOptions PnPContext { get; set; }
-
-        /// <summary>
-        /// The credentials options
-        /// </summary>
-        public PnPCoreCredentialsOptions Credentials { get; } = new PnPCoreCredentialsOptions();
+        public PnPCoreContextOptions PnPContext { get; set; } = new PnPCoreContextOptions();
 
         /// <summary>
         /// The sites options
         /// </summary>
         public PnPCoreSitesOptions Sites { get; } = new PnPCoreSitesOptions();
+
+        /// <summary>
+        /// The default Authentication Provider for the sites
+        /// </summary>
+        public IAuthenticationProvider DefaultAuthenticationProvider { get; set; }
     }
 
     /// <summary>
@@ -52,12 +52,12 @@ namespace PnP.Core.Services.Builder.Configuration
         /// <summary>
         /// SharePoint Online REST options
         /// </summary>
-        public PnPCoreHttpRequestsSharePointRestOptions SharePointRest { get; set; }
+        public PnPCoreHttpRequestsSharePointRestOptions SharePointRest { get; set; } = new PnPCoreHttpRequestsSharePointRestOptions();
 
         /// <summary>
         /// Microsoft Graph REST options
         /// </summary>
-        public PnPCoreHttpRequestsGraphOptions MicrosoftGraph { get; set; }
+        public PnPCoreHttpRequestsGraphOptions MicrosoftGraph { get; set; } = new PnPCoreHttpRequestsGraphOptions();
     }
 
     /// <summary>
@@ -137,34 +137,6 @@ namespace PnP.Core.Services.Builder.Configuration
     /// <summary>
     /// Options for configuring PnP Core SDK
     /// </summary>
-    public class PnPCoreCredentialsOptions : Dictionary<string, PnPCoreCredentialOptions>
-    {
-    }
-
-    /// <summary>
-    /// Options for one configured credentials
-    /// </summary>
-    public class PnPCoreCredentialOptions
-    {
-        /// <summary>
-        /// The ClientId of the application to use for authentication
-        /// </summary>
-        public string ClientId { get; set; }
-
-        /// <summary>
-        /// The name of the Credential Manager item to use, in case of CredentialManager Authentication
-        /// </summary>
-        public string CredentialManagerName { get; set; }
-
-        /// <summary>
-        /// The thumbprint of the X.509 Certificate to use, in case of X.509 Certificate Authentication
-        /// </summary>
-        public string CertificateThumbprint { get; set; }
-    }
-
-    /// <summary>
-    /// Options for configuring PnP Core SDK
-    /// </summary>
     public class PnPCoreSitesOptions : Dictionary<string, PnPCoreSiteOptions>
     {
     }
@@ -180,8 +152,8 @@ namespace PnP.Core.Services.Builder.Configuration
         public string SiteUrl { get; set; }
 
         /// <summary>
-        /// The name of the Authentication Provider
+        /// The Authentication Provider
         /// </summary>
-        public string AuthenticationProviderName { get; set; }
+        public IAuthenticationProvider AuthenticationProvider { get; set; }
     }
 }

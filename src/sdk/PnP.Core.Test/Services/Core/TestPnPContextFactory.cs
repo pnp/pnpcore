@@ -44,14 +44,12 @@ namespace PnP.Core.Test.Services
         public Dictionary<string, Uri> TestUris { get; set; }
 
         public TestPnPContextFactory(
-            IOptionsMonitor<PnPContextFactoryOptions> options,
             ILogger<PnPContext> logger,
-            IAuthenticationProviderFactory authenticationProviderFactory,
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
             IOptions<PnPContextFactoryOptions> contextOptions,
             IOptions<PnPGlobalSettingsOptions> globalOptions,
-            TelemetryClient telemetryClient) : base(options, logger, authenticationProviderFactory, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions, telemetryClient)
+            TelemetryClient telemetryClient) : base(logger, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions, telemetryClient)
         {
         }
 
@@ -91,18 +89,6 @@ namespace PnP.Core.Test.Services
             return context;
         }
 
-        public override PnPContext Create(Uri url, string authenticationProviderName)
-        {
-            return CreateAsync(url, authenticationProviderName).GetAwaiter().GetResult();
-        }
-
-        public async override Task<PnPContext> CreateAsync(Uri url, string authenticationProviderName)
-        {
-            var context = await base.CreateAsync(url, authenticationProviderName).ConfigureAwait(false);
-            ConfigurePnPContextForTesting(ref context);
-            return context;
-        }
-
         public override PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider)
         {
             return CreateAsync(groupId, authenticationProvider).GetAwaiter().GetResult();
@@ -126,31 +112,7 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(Guid groupId)
         {
-            var context = new PnPContext(Log, AuthenticationProviderFactory.CreateDefault(), SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
-
-            ConfigurePnPContextForTesting(ref context);
-
-            await ConfigureForGroup(context, groupId).ConfigureAwait(false);
-
-            return context;
-        }
-        
-        public override PnPContext Create(Guid groupId, string authenticationProviderName)
-        {
-            return CreateAsync(groupId, authenticationProviderName).GetAwaiter().GetResult();
-        }
-
-        public async override Task<PnPContext> CreateAsync(Guid groupId, string authenticationProviderName)
-        {
-            // Create the Authentication Provider based on the provided configuration
-            var authProvider = AuthenticationProviderFactory.Create(authenticationProviderName);
-            if (authProvider == null)
-            {
-                throw new ClientException(ErrorType.ConfigurationError, $"Invalid Authentication Provider name '{authenticationProviderName}' for group '{groupId}' during PnPContext creation!");
-            }
-
-            // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
+            var context = new PnPContext(Log, ContextOptions.DefaultAuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
 
             ConfigurePnPContextForTesting(ref context);
 

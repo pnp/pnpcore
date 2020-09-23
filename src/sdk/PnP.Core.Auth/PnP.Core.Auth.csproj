@@ -3,36 +3,28 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
-    <RootNamespace>PnP.Core</RootNamespace>
-    <AssemblyName>PnP.Core</AssemblyName>
+    <RootNamespace>PnP.Core.Auth</RootNamespace>
+    <AssemblyName>PnP.Core.Auth</AssemblyName>
     <InformationalVersion>Preview 1 package</InformationalVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>PnP 2020</Copyright>
     <Company>PnP</Company>
     <Authors>PnP</Authors>
-    <Description>The PnP Core SDK provides a development model that unites SharePoint REST and Microsoft Graph in a high performance, lightweight library. The SDK uses a model which under the covers is automatically translated to the needed SharePoint REST or Microsoft Graph queries.</Description>
+    <Description>The PnP Core Auth library supports the PnP Core SDK providing a set of OAuth Authentication Providers internally based on the Microsoft Authentication Library.</Description>
     <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Configurations>Debug;Release;Blazor</Configurations>
+    <Configurations>Debug;Release</Configurations>
     <PackageIcon>nugeticon.png</PackageIcon>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\Authentication\ToRemove\**" />
-    <EmbeddedResource Remove="Services\Authentication\ToRemove\**" />
-    <None Remove="Services\Authentication\ToRemove\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Model\SharePoint\Navigation\" />
-    <Folder Include="Model\SharePoint\UI\" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.18.0" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.15.0" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -53,6 +45,25 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="PnPCoreAuthResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PnPCoreAuthResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="PnPCoreAuthResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PnPCoreAuthResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

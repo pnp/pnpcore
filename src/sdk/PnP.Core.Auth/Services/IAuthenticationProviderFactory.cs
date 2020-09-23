@@ -1,4 +1,6 @@
-﻿namespace PnP.Core.Services
+﻿using PnP.Core.Services;
+
+namespace PnP.Core.Auth.Services
 {
     /// <summary>
     /// Public interface for the injectable service to create instances of the interface IAuthenticationProvider

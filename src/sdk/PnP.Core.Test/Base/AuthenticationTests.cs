@@ -52,43 +52,43 @@ namespace PnP.Core.Test.Base
             }
         }
 
-        [TestMethod]
-        public async Task TestAccessTokenAuthenticationProvider()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                string accessToken;
-                // Persist the fetched token to be used in the offline test
-                if (!TestCommon.Instance.Mocking)
-                {
-                    // First obtain a valid access token
-                    accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(PnPConstants.MicrosoftGraphBaseUri).ConfigureAwait(true);
-                    Assert.IsNotNull(accessToken);
+        //[TestMethod]
+        //public async Task TestAccessTokenAuthenticationProvider()
+        //{
+        //    //TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        string accessToken;
+        //        // Persist the fetched token to be used in the offline test
+        //        if (!TestCommon.Instance.Mocking)
+        //        {
+        //            // First obtain a valid access token
+        //            accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(PnPConstants.MicrosoftGraphBaseUri).ConfigureAwait(true);
+        //            Assert.IsNotNull(accessToken);
 
-                    Dictionary<string, string> properties = new Dictionary<string, string>
-                    {
-                        { "AccessToken", accessToken }
-                    };
-                    TestManager.SaveProperties(context, properties);
-                }
-                else
-                {
-                    var properties = TestManager.GetProperties(context);
-                    accessToken = properties["AccessToken"];
-                }
+        //            Dictionary<string, string> properties = new Dictionary<string, string>
+        //            {
+        //                { "AccessToken", accessToken }
+        //            };
+        //            TestManager.SaveProperties(context, properties);
+        //        }
+        //        else
+        //        {
+        //            var properties = TestManager.GetProperties(context);
+        //            accessToken = properties["AccessToken"];
+        //        }
 
-                // Use this access token in a new context
-                using (var context1 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteAccessToken, 1))
-                {
-                    // Set the access token on the context
-                    context1.SetAccessToken(accessToken);
+        //        // Use this access token in a new context
+        //        using (var context1 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteAccessToken, 1))
+        //        {
+        //            // Set the access token on the context
+        //            context1.SetAccessToken(accessToken);
 
-                    var site = await context1.Site.GetAsync();
+        //            var site = await context1.Site.GetAsync();
 
-                    Assert.IsTrue(site.IsPropertyAvailable(p => p.Id));
-                }
-            }
-        }
+        //            Assert.IsTrue(site.IsPropertyAvailable(p => p.Id));
+        //        }
+        //    }
+        //}
     }
 }

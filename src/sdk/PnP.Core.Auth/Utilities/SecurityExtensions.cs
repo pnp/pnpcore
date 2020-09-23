@@ -3,7 +3,7 @@ using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace PnP.Core
+namespace PnP.Core.Auth
 {
     /// <summary>
     /// Extensions class that support certificate based encryption/decryption and SecureString protection
@@ -19,7 +19,7 @@ namespace PnP.Core
         /// <returns>Encrypted text</returns>
         internal static string Encrypt(this string stringToEncrypt, string thumbPrint)
         {
-            X509Certificate2 certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, thumbPrint);
+            X509Certificate2 certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.CurrentUser, thumbPrint);
 
             if (certificate == null)
             {
@@ -50,7 +50,7 @@ namespace PnP.Core
         /// <returns>Decrypted text</returns>
         internal static string Decrypt(this string stringToDecrypt, string thumbPrint)
         {
-            X509Certificate2 certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.LocalMachine, thumbPrint);
+            X509Certificate2 certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.CurrentUser, thumbPrint);
 
             if (certificate == null)
             {
