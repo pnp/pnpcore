@@ -1,9 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Test.Utilities;
+using PnP.Core.Model;
 using PnP.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Auth.Test.Base
@@ -136,7 +134,10 @@ namespace PnP.Core.Auth.Test.Base
             var web = await context.Web.GetAsync(w => w.Title);
 
             Assert.IsNotNull(web.Title);
-            Assert.AreEqual("pnpcoresdkdemo", web.Title);
+            Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
+            
+            // Can't assume title values as not everyone will use the same sites in their live test environment
+            //Assert.AreEqual("pnpcoresdkdemo", web.Title);
         }
     }
 }

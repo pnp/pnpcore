@@ -117,7 +117,7 @@ namespace PnP.Core.Auth.Test.Utilities
             }
 
             // The settings file is stored in the root of the test project, no need to configure the file to be copied over the bin folder
-            var jsonSettingsFile = Path.GetFullPath($"..\\..\\..\\appsettings.{environmentName}.json");
+            var jsonSettingsFile = Path.GetFullPath($"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}appsettings.{environmentName}.json");
 
             var configuration = new ConfigurationBuilder()
             .AddJsonFile(jsonSettingsFile, optional: true, reloadOnChange: true)
@@ -182,7 +182,7 @@ namespace PnP.Core.Auth.Test.Utilities
         internal static string GetX509CertificateThumbprint()
         {
             var configuration = GetConfigurationSettings();
-            return configuration.GetValue<string>("PnPCore:Credentials:Configurations:X509Certificate:X509Certificate:Thumbprint");
+            return configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:X509Certificate:Thumbprint");
         }
 
         private static string LoadTestEnvironment()
@@ -194,7 +194,7 @@ namespace PnP.Core.Auth.Test.Utilities
             }
             else
             {
-                string testEnvironmentFile = "..\\..\\..\\env.txt";
+                string testEnvironmentFile = $"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}env.txt";
                 if (File.Exists(testEnvironmentFile))
                 {
                     string content = File.ReadAllText(testEnvironmentFile);
