@@ -12,7 +12,8 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 ## Referencing the PnP Core SDK in your project
 
-The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core). Each night this preview package is refreshed so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version. 
+The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the preview [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
+Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version. If you don't want to rely on the PnP.Core.Auth package, you can eventually [implement your own Authentication Provider](./custom-authentication-provider.md).
 
 > [!Note]
 > There are 2 package flavors: a `-preview` version and a `-blazor-preview` version. The latter one is meant to be used in Blazor Web Assembly projects and will exist until one of the SDK's references gets supported on Blazor.
@@ -21,7 +22,7 @@ If you want to debug the SDK code you can include the PnP Core project (`src\PnP
 
 ## Configuring the needed services
 
-In order to configure the needed services in a .Net Core console app, you can rely on the `AddPnPCore` extension method, like in the following code excerpt:
+In order to configure the needed services in a .Net Core console app, you can rely on the `AddPnPCore` extension method (defined in the PnP.Core nuget package) and on the `AddPnPCoreAuthentication` method (defined in the PnP.Core.Auth nuget package), like in the following code excerpt:
 
 ```csharp
 var host = Host.CreateDefaultBuilder()
@@ -35,6 +36,10 @@ var host = Host.CreateDefaultBuilder()
     services.AddPnPCore();
     // Add the PnP Core SDK library services configuration from the appsettings.json file
     services.Configure<PnPCoreOptions>(Configuration.GetSection("PnPCore"));
+    // Add the PnP Core SDK Authentication Providers
+    services.AddPnPCoreAuthentication();
+    // Add the PnP Core SDK Authentication Providers configuration from the appsettings.json file
+    services.Configure<PnPCoreAuthenticationOptions>(Configuration.GetSection("PnPCore"));
 })
 // Let the builder know we're running in a console
 .UseConsoleLifetime()
@@ -69,9 +74,15 @@ And you will also need to provide the configuration in the `appsettings.json` fi
       "GraphAlwaysUseBeta": "false"
     },
     "Credentials": {
-      "CredentialManagerAuthentication": {
-        "CredentialManagerName": "mycreds"
-      }
+      "DefaultConfiguration": "credentialmanager",
+      "Configurations": {
+        "credentialmanager": {
+          "ClientId": "{your_client_id}",
+          "TenantId": "{your_tenant_id}",
+          "CredentialManager": {
+            "CredentialManagerName": "mycreds"
+          }
+        }
     },
     "Sites": {
       "SiteToWorkWith": {
@@ -83,6 +94,17 @@ And you will also need to provide the configuration in the `appsettings.json` fi
 }
 ```
 
+You should provide the `ClientId` and `TenantId` for an application registered in Azure Active Directory and configured with proper permissions, accordingly to your needs. For example, you could register an app in Azure Active Directory with delegated permission for:
+- Microsoft Graph: `Group.ReadWrite.All`
+- Microsoft Graph: `User.ReadWrite.All`
+- SharePoint Online: `AllSites.FullControl`
+- SharePoint Online: `TermStore.ReadWrite.All`
+- SharePoint Online: `User.ReadWrite.All`
+
+If you don't want to register a custom app in your target Azure Active Directory, you can skip the `ClientId` and `TenantId` properties and the PnP Core SDK will rely on a multi-tenant application that will be registered on your tenant, upon admin consent.
+
+In the above example, you should also register in the Windows Credential Manager a set of valid credentials (under Windows Credentials -> Generic Credentials) to access the target environment you want to play with.
+
 If you like to configure the .Net Core console app in code, without relying on the `appsettings.json` file, you can also use the following syntax:
 
 ```csharp
@@ -93,22 +115,42 @@ var host = Host.CreateDefaultBuilder()
 // Configure logging
 .ConfigureServices((hostingContext, services) =>
 {
-    // Add the PnP Core SDK library services with code based settings
-    services.AddPnPCore(options => {
-        options.PnPContext.GraphFirst = true;
-        options.HttpRequests.UserAgent = "ISV|Contoso|ProductX";
+  // Add the PnP Core SDK library
+  services.AddPnPCore(options => {
+      options.PnPContext.GraphFirst = true;
+      options.HttpRequests.UserAgent = "ISV|Contoso|ProductX";
 
-        options.Sites.Add("SiteToWorkWith", new PnPCoreSiteOptions
-        {
-            SiteUrl = "https://contoso.sharepoint.com/sites/pnp",
-            AuthenticationProviderName = "CredentialManagerAuthentication"
-        });
+      options.Sites.Add("SiteToWorkWith", new PnPCoreSiteOptions
+      {
+          SiteUrl = "https://contoso.sharepoint.com/sites/pnp"
+      });
+  });
+  services.AddPnPCoreAuthentication(
+      options => {
+          // Configure an Authentication Provider relying on Windows Credential Manager
+          options.Credentials.Configurations.Add("credentialmanager",
+              new PnPCoreAuthenticationCredentialConfigurationOptions
+              {
+                  ClientId = "{your_client_id}",
+                  TenantId = "{your_tenant_id}",
+                  CredentialManager = new PnPCoreAuthenticationCredentialManagerOptions
+                  {
+                      CredentialManagerName = "mycreds"
+                  }
+              });
 
-        options.Credentials.Add("CredentialManagerAuthentication", new PnPCoreCredentialOptions
-        {
-            CredentialManagerName = "mycreds"
-        });
-    });
+          // Configure the default authentication provider
+          options.Credentials.DefaultConfiguration = "credentialmanager";
+
+          // Map the site defined in AddPnPCore with the 
+          // Authentication Provider configured in this action
+          options.Sites.Add("SiteToWorkWith",
+              new PnPCoreAuthenticationSiteOptions
+              {
+                  AuthenticationProviderName = "credentialmanager"
+              });
+    }
+  );
 })
 // Let the builder know we're running in a console
 .UseConsoleLifetime()
@@ -125,43 +167,51 @@ var host = Host.CreateDefaultBuilder()
 // Configure logging
 .ConfigureServices((hostingContext, services) =>
 {
-    var customSettings = new CustomSettings();
-    hostingContext.Configuration.Bind("CustomSettings", customSettings);
+  // Read the custom configuration from the appsettings.<environment>.json file
+  var customSettings = new CustomSettings();
+  hostingContext.Configuration.Bind("CustomSettings", customSettings);
 
-    services
-    // Setup PnP authentication providers
-    .AddAuthenticationProviderFactory(options =>
-    {
-        // CredentialManager provider
-        options.Configurations.Add(new OAuthCredentialManagerConfiguration
-        {
-            Name = "CredentialManagerAuthentication",
-            CredentialManagerName = customSettings.CredentialManager,
-            // You can optionally provide a custom ClientId, or the SDK will use a default one
-            ClientId = customSettings.ClientId,
-        });
-        // Username + Pwd provider
-        options.Configurations.Add(new OAuthUsernamePasswordConfiguration
-        {
-            Name = "UsernameAndPasswordAuthentication",
-            Username = customSettings.UserPrincipalName,
-            Password = customSettings.Password.ToSecureString(),
-            // You can optionally provide a custom ClientId, or the SDK will use a default one
-            ClientId = customSettings.ClientId,
-        });
-        // Set default provider
-        options.DefaultConfiguration = "CredentialManagerAuthentication";
-    })
-    // Setup the PnP context factory
-    .AddPnPContextFactory(options =>
-    {
-        options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-        {
-            Name = "SiteToWorkWith",
-            SiteUrl = new Uri(customSettings.TargetSiteUrl),
-            AuthenticationProviderName = "CredentialManagerAuthentication",
-        });
-    });
+  // Create an instance of the Authentication Provider that uses Credential Manager
+  var authenticationProvider = new CredentialManagerAuthenticationProvider(
+                  customSettings.ClientId,
+                  customSettings.TenantId,
+                  customSettings.CredentialManager);                
+
+  // Add the PnP Core SDK services
+  services
+  .AddPnPCore(options => {
+
+      // You can explicitly configure all the settings, or you can
+      // simply use the default values
+      options.PnPContext.GraphFirst = true;
+      options.PnPContext.GraphCanUseBeta = true;
+      options.PnPContext.GraphAlwaysUseBeta = false;
+
+      options.HttpRequests.UserAgent = "NONISV|SharePointPnP|PnPCoreSDK";
+      options.HttpRequests.MicrosoftGraph = new PnPCoreHttpRequestsGraphOptions
+      {
+         UseRetryAfterHeader = true,
+         MaxRetries = 10,
+         DelayInSeconds = 3,
+         UseIncrementalDelay = true,
+      };
+      options.HttpRequests.SharePointRest = new PnPCoreHttpRequestsSharePointRestOptions
+      {
+         UseRetryAfterHeader = true,
+         MaxRetries = 10,
+         DelayInSeconds = 3,
+         UseIncrementalDelay = true,
+      };
+
+      options.DefaultAuthenticationProvider = authenticationProvider;
+
+      options.Sites.Add("DemoSite",
+          new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
+          {
+              SiteUrl = customSettings.DemoSiteUrl,
+              AuthenticationProvider = authenticationProvider
+          });
+  });
 })
 // Let the builder know we're running in a console
 .UseConsoleLifetime()
@@ -174,10 +224,10 @@ In above sample the following configuration file is used: `appsettings.demo.json
 ```json
 {
   "CustomSettings": {
-    "TargetSiteUrl": "https://contoso.sharepoint.com/sites/pnp",
-    "CredentialManager": "mycreds",
-    "UserPrincipalName": "joe@contoso.onmicrosoft.com",
-    "Password": "password",
+    "ClientId": "{client_id}",
+    "TenantId": "{tenant_id}",
+    "DemoSiteUrl": "https://contoso.sharepoint.com/sites/pnp",
+    "CredentialManager": "{credential_manager_item_name}",
   },
   "Logging": {
     "LogLevel": {

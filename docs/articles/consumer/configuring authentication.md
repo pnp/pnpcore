@@ -36,20 +36,44 @@ Follow below steps to configure an application in Azure AD:
 
 ### Configuring PnP Core SDK to use the configured application
 
-When you're configuring your application to use the PnP Core SDK you will have to configure the PnP Core SDK `AuthenticationProviderFactory` which allows you to specify one or more `IAuthenticationProviderConfiguration` implementations. The `IAuthenticationProviderConfiguration` implementations that support a custom Azure AD applications do have a `ClientId` property that can be used to configure the Azure AD application to be used. Below snippet shows the configuration of the `OAuthCredentialManagerConfiguration`: the configuration needs a name, the credential manager entry that contains username/password and the Client ID (or Application ID) of the Azure AD application that you want to use.
+When you're configuring your application to use the PnP Core SDK you will have to configure the `PnP.Core` services and the `PnP.Core.Auth` services using the `AddPnPCore` and `AddPnPCoreAuthentication` methods, respectively. The `ClientId` and `TenantId` are those of the application that you just registered in Azure Active Directory. The value for the `CredentialManagerName` property is the name of the item stored in the Windows Credential Manager.
 
 ```csharp
-.AddAuthenticationProviderFactory(options =>
-{
-    options.Configurations.Add(new OAuthCredentialManagerConfiguration
-    {
-        Name = "CredentialManagerAuthentication",
-        CredentialManagerName = configuration.GetValue<string>("CustomSettings:CredentialManager"),
-        ClientId = configuration.GetValue<string>("CustomSettings:ClientId"),
-    });
+// Add the PnP Core SDK library
+services.AddPnPCore(options => {
+    options.PnPContext.GraphFirst = true;
+    options.HttpRequests.UserAgent = "ISV|Contoso|ProductX";
 
-    options.DefaultConfiguration = "CredentialManagerAuthentication";
-})
+    options.Sites.Add("SiteToWorkWith", new PnPCoreSiteOptions
+    {
+        SiteUrl = "https://contoso.sharepoint.com/sites/pnp"
+    });
+});
+services.AddPnPCoreAuthentication(
+    options => {
+        // Configure an Authentication Provider relying on Windows Credential Manager
+        options.Credentials.Configurations.Add("credentialmanager",
+            new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = "{your_client_id}",
+                TenantId = "{your_tenant_id}",
+                CredentialManager = new PnPCoreAuthenticationCredentialManagerOptions
+                {
+                    CredentialManagerName = "mycreds"
+                }
+            });
+
+        // Configure the default authentication provider
+        options.Credentials.DefaultConfiguration = "credentialmanager";
+
+        // Map the site defined in AddPnPCore with the 
+        // Authentication Provider configured in this action
+        options.Sites.Add("SiteToWorkWith",
+            new PnPCoreAuthenticationSiteOptions
+            {
+                AuthenticationProviderName = "credentialmanager"
+            });
+});
 ```
 
 ## Using the multi-tenant PnP Azure AD application
@@ -85,32 +109,3 @@ Currently the only supported option to authenticate to a created Azure AD applic
 4. Give the credential a name (e.g. Contoso), a user name (e.g. joe@contoso.onmicrosoft.com) and a password. Hit **OK** to save.
 5. Use the credential manager name (Contoso in this example) in your `OAuthCredentialManagerConfiguration` setup.
 
-## Using an externally obtained access token
-
-Depending on where you're using the PnP Core SDK you might already have acquired an access token using different means. You can re-use this access token in the PnP Core SDK by using the `OAuthAccessTokenConfiguration`:
-
-```csharp
-.AddAuthenticationProviderFactory(options =>
-{
-    options.Configurations.Add(new OAuthAccessTokenConfiguration
-    {
-        Name = "AccessTokenAuthentication",
-        ClientId = null,
-    });
-})
-```
-
-After you've configured the `OAuthAccessTokenConfiguration` configuration you can create a context (tell the factory to use this configuration if it's not the default one) and use the `SetAccessToken` method on your `PnPContext` class instance to plug-in your access token:
-
-```csharp
-var pnpContextFactory = scope.ServiceProvider.GetRequiredService<IPnPContextFactory>();
-// Use the PnP Context factory to get a PnPContext for the given configuration
-using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith", "AccessTokenAuthentication"))
-{
-    // Set the access token on the context
-    context.SetAccessToken(accessToken);
-
-    // use the context
-    var site = await context.Site.GetAsync();
-}
-```
