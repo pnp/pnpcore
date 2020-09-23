@@ -72,7 +72,9 @@ namespace PnP.Core.Auth.Services
             PnPCoreAuthenticationCredentialConfigurationOptions options;
             if (!this.options.Credentials.Configurations.TryGetValue(name, out options))
             {
-                throw new ClientException(ErrorType.ConfigurationError, $"Invalid configuration name '{name}' for IAuthenticationProvider creation!");
+                throw new ClientException(ErrorType.ConfigurationError, 
+                    string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                        PnPCoreAuthResources.InvalidConfigurationName, name));
             }
 
             Type providerType = ResolveAuthenticationProviderType(options);

@@ -115,6 +115,15 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid configuration name &apos;{0}&apos; for IAuthenticationProvider creation!.
+        /// </summary>
+        internal static string InvalidConfigurationName {
+            get {
+                return ResourceManager.GetString("InvalidConfigurationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid or missing value for ClientSecret in ClientSecretAuthenticationProvider configuration.
         /// </summary>
         internal static string OnBehalfOfAuthenticationProvider_InvalidClientSecret {

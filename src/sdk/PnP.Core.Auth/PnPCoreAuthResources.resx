@@ -135,6 +135,9 @@
   <data name="CredentialManagerAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized CredentialManagerAuthenticationProvider with credential manager item name {0}</value>
   </data>
+  <data name="InvalidConfigurationName" xml:space="preserve">
+    <value>Invalid configuration name '{0}' for IAuthenticationProvider creation!</value>
+  </data>
   <data name="OnBehalfOfAuthenticationProvider_InvalidClientSecret" xml:space="preserve">
     <value>Invalid or missing value for ClientSecret in ClientSecretAuthenticationProvider configuration</value>
   </data>

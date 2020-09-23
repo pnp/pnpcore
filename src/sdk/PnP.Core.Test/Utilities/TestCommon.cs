@@ -163,8 +163,8 @@ namespace PnP.Core.Test.Utilities
             }
 
             // The settings file is stored in the root of the test project, no need to configure the file to be copied over the bin folder
-            var jsonSettingsFile = Path.GetFullPath($"..\\..\\..\\appsettings.{environmentName}.json");
-
+            var jsonSettingsFile = Path.GetFullPath($"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}appsettings.{environmentName}.json");
+            
             var configuration = new ConfigurationBuilder()
             .AddJsonFile(jsonSettingsFile, optional: true, reloadOnChange: true)
             .AddEnvironmentVariables()
