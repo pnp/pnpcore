@@ -588,8 +588,15 @@ namespace PnP.Core.Services
                                     {
                                         foreach (var jsonPathField in jsonPathFields)
                                         {
-                                            jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
-                                                GetJsonElementFromPath(property.Value, jsonPathField.GraphJsonPath), jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, fromJsonCasting));
+                                            var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.GraphJsonPath);
+
+                                            // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                            // a json object returned that does have all properties loaded (e.g. a TeamsApp object with only id and distributionMethod loaded)
+                                            if (!jsonElement.Equals(property.Value))
+                                            {
+                                                jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                                    jsonElement, jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, fromJsonCasting));
+                                            }
                                         }
                                     }
                                 }
@@ -743,9 +750,15 @@ namespace PnP.Core.Services
                             {
                                 foreach (var jsonPathField in jsonPathFields)
                                 {
-                                    jsonPathField.PropertyInfo?.SetValue(propertyToSetValue,
-                                        GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
-                                        GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath), jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                                    var jsonElement = GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath);
+                                    
+                                    // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                    // a json object returned that does have all properties loaded (e.g. a TeamsApp object with only id and distributionMethod loaded)
+                                    if (!jsonElement.Equals(property.Value))
+                                    {
+                                        jsonPathField.PropertyInfo?.SetValue(propertyToSetValue, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                        jsonElement, jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                                    }
                                 }
                             }
                         }
@@ -845,9 +858,15 @@ namespace PnP.Core.Services
                                 {
                                     foreach (var jsonPathField in jsonPathFields)
                                     {
-                                        jsonPathField.PropertyInfo?.SetValue(complexTypeInstance,
-                                            GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
-                                            GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath), jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                                        var jsonElement = GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath);
+
+                                        // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                        // a json object returned that does have all properties loaded (e.g. a TeamsApp object with only id and distributionMethod loaded)
+                                        if (!jsonElement.Equals(property.Value))
+                                        {
+                                            jsonPathField.PropertyInfo?.SetValue(complexTypeInstance, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                            jsonElement, jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
+                                        }
                                     }
                                 }
                             }

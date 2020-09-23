@@ -550,9 +550,6 @@ namespace PnP.Core.Test.Base
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                //var api = await teamChannel.BuildGetAPICallAsync(entityInfo, default);
-                //Assert.IsTrue(!string.IsNullOrEmpty(api.ApiCall.Request));
-
                 TeamChannel teamChannel = new TeamChannel()
                 {
                     PnPContext = context
@@ -602,28 +599,80 @@ namespace PnP.Core.Test.Base
         }
 
 
-        //[TestMethod]
-        //public async Task LoadTeamPropertiesViaGraph()
-        //{
-        //    TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
-        //        // Expand for a property that is implemented using it's own graph query
-        //        //var team = await context.Team.GetAsync(p => p.Channels.LoadProperties(p=>p.DisplayName));
-        //        //foreach(var channel in team.Channels)
-        //        //{
-        //        //    Assert.IsTrue(!string.IsNullOrEmpty(channel.DisplayName));
-        //        //}
+        [TestMethod]
+        public async Task LoadTeamPropertiesViaGraph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Expand for a property that is implemented using it's own graph query
+                // Url for loading channels is teams/{Site.GroupId}/channels
+                var team = await context.Team.GetAsync(p => p.Channels.LoadProperties(p => p.DisplayName));
+                foreach (var channel in team.Channels)
+                {
+                    Assert.IsTrue(channel.IsPropertyAvailable(p => p.DisplayName));
+                    Assert.IsTrue(!string.IsNullOrEmpty(channel.DisplayName));
+                    Assert.IsFalse(channel.IsPropertyAvailable(p => p.Description));
+                }
 
-        //        // Expand for a property that is implemented using it's own graph query which has url parameters defined
-        //        await context.Team.GetAsync(p => p.InstalledApps.LoadProperties(p => p.DisplayName));
+                // Expand for a property that is implemented using it's own graph query which has url parameters defined and which uses a JsonPath
+                // Url for loading installed apps is teams/{Site.GroupId}/installedapps?$expand=TeamsApp
+                await context.Team.GetAsync(p => p.InstalledApps.LoadProperties(p => p.DistributionMethod));
+                foreach(var installedApp in context.Team.InstalledApps)
+                {
+                    Assert.IsTrue(installedApp.IsPropertyAvailable(p => p.DistributionMethod));
+                    Assert.IsFalse(installedApp.IsPropertyAvailable(p => p.DisplayName));
+                }
+            }
+        }
 
-        //    }
-        //}
+        [TestMethod]
+        public async Task LoadTeamPropertiesComplexViaGraph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Get primary channel
+                await context.Team.GetAsync(p => p.PrimaryChannel);
+                // Load tabs with only the WebUrl property 
+                // Special case since the listed url is teams/{Site.GroupId}/channels/{GraphId}/tabs?$expand=teamsApp
+                await context.Team.PrimaryChannel.GetAsync(p => p.Tabs.LoadProperties(p => p.WebUrl));
+
+                foreach(var tab in context.Team.PrimaryChannel.Tabs)
+                {
+                    Assert.IsTrue(tab.IsPropertyAvailable(p => p.WebUrl));
+                    Assert.IsFalse(tab.IsPropertyAvailable(p => p.DisplayName));
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task LoadTeamPropertiesRecursiveViaGraph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                bool exceptionThrown = false;
+                try
+                {
+                    await context.Team.GetAsync(p => p.Channels.LoadProperties(p => p.Messages.LoadProperties(p => p.Body)));
+                }
+                catch(Exception ex)
+                {
+                    if (ex is ClientException && (ex as ClientException).Error.Type == ErrorType.Unsupported)
+                    {
+                        exceptionThrown = true;
+                    }
+                }
+
+                Assert.IsTrue(exceptionThrown);
+            }
+        }
+
 
         private Tuple<string, string> BuildGraphExpandSelect<TModel>(Expression<Func<TModel, object>>[] testExpression, BaseDataModel<TModel> instance)
         {
-            var entityInfo = EntityManager.Instance.GetClassInfo(instance.GetType(), instance, testExpression);
+            var entityInfo = EntityManager.GetClassInfo(instance.GetType(), instance, testExpression);
             var expandProperty = entityInfo.Fields.FirstOrDefault(p => p.ExpandFieldInfo != null);
             StringBuilder sb = new StringBuilder();
             instance.AddExpandableSelectGraph(true, sb, expandProperty, null, "");

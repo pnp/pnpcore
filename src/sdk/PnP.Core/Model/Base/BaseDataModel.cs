@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -14,6 +13,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Web;
 
 #if DEBUG
 [assembly: InternalsVisibleTo("PnP.Core.Test")]
@@ -975,7 +975,7 @@ namespace PnP.Core.Model
                             sb.Append($"{path}{(newQuery ? "" : "(")}$select{(newQuery ? "=" : "%3D")}");
                         }
 
-                        sb.Append($"{(first ? "" : ",")}{JsonMappingHelper.GetGraphField(expandableFieldInfo)}");
+                        sb.Append($"{(first ? "" : ",")}{(!string.IsNullOrEmpty(expandableFieldInfo.GraphJsonPath) ? expandableFieldInfo.GraphJsonPath : JsonMappingHelper.GetGraphField(expandableFieldInfo))}");
                         first = false;
                         path = "";
                     }
@@ -1032,15 +1032,69 @@ namespace PnP.Core.Model
                             string graphGet = nonExpandableField.GraphGet;
                             if (nonExpandableField.ExpandFieldInfo != null)
                             {
-                                bool graphGetHasExpand = new UriBuilder(graphGet).Query.Contains("$expand", StringComparison.OrdinalIgnoreCase);
-                                                                
+                                bool graphGetHasExpand = false;
+                                var uriBuilder = new UriBuilder(graphGet);
+
+                                // Check if the model we're expanding uses JsonPath
+                                bool usesJsonPath = false;
+                                var collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(nonExpandableField.ExpandFieldInfo.Type);
+                                foreach (var fieldToExpand in nonExpandableField.ExpandFieldInfo.Fields)
+                                {
+                                    var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == fieldToExpand.Name);
+
+                                    if (!string.IsNullOrEmpty(expandableFieldInfo.GraphGet))
+                                    {
+                                        throw new ClientException(ErrorType.Unsupported, $"Loading the {expandableFieldInfo.Name} property requires an extra GET request ({expandableFieldInfo.GraphGet}) which is not supported when using nested LoadProperties methods");
+                                    }
+
+                                    if (!string.IsNullOrEmpty(expandableFieldInfo.GraphJsonPath))
+                                    {
+                                        usesJsonPath = true;
+                                    }
+                                }
+
+                                NameValueCollection queryParameters = HttpUtility.ParseQueryString(uriBuilder.Query.ToLowerInvariant());
+                                string value = queryParameters["$expand"];
+                                if (!string.IsNullOrWhiteSpace(value))
+                                {
+                                    // we've an $expand url parameter in the GET query
+                                    var currentExpandValues = value.Split(new char[] { ',' });
+
+                                    if (usesJsonPath)
+                                    {
+                                        // JsonPath usage will be handled as an existing expand, so we append the extra $select via ($select%3D...)
+                                        graphGetHasExpand = true;
+                                    }
+                                    else
+                                    {
+                                        // do we have an $expand for our property we're applying the expandable select on?
+                                        foreach (var expandValue in currentExpandValues)
+                                        {
+                                            if (expandValue.Equals(nonExpandableField.GraphName, StringComparison.InvariantCultureIgnoreCase))
+                                            {
+                                                graphGetHasExpand = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+
                                 StringBuilder sb = new StringBuilder();
 
-
-
                                 AddExpandableSelectGraph(!graphGetHasExpand, sb, nonExpandableField, null, "");
+                                
                                 // Since the URL listed for a graph get can already have url parameters we need to "merge" them together
-                                graphGet = UrlUtility.CombineRelativeUrlWithUrlParameters(graphGet, sb.ToString());
+                                var urlComplement = sb.ToString();
+                                if (graphGetHasExpand)
+                                {
+                                    // We append the extra $select via ($select%3D...)
+                                    graphGet += urlComplement;
+                                }
+                                else
+                                {
+                                    // We combine an $select=id,field,... with the existing url
+                                    graphGet = UrlUtility.CombineRelativeUrlWithUrlParameters(graphGet, urlComplement);
+                                }
                             }
 
                             var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(this, graphGet).ConfigureAwait(false);
