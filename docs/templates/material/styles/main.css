@@ -337,6 +337,13 @@ pre {
   position:fixed;
 }
 
+@media (min-width: 1400px){
+  .container {
+      width: 1370px;
+  }
+}
+
+
 /* Original */ 
 .collapse.in,
 .collapsing {
