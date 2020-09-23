@@ -122,18 +122,42 @@
 </li>
 </ol>
 <h3 id="configuring-pnp-core-sdk-to-use-the-configured-application">Configuring PnP Core SDK to use the configured application</h3>
-<p>When you're configuring your application to use the PnP Core SDK you will have to configure the PnP Core SDK <code>AuthenticationProviderFactory</code> which allows you to specify one or more <code>IAuthenticationProviderConfiguration</code> implementations. The <code>IAuthenticationProviderConfiguration</code> implementations that support a custom Azure AD applications do have a <code>ClientId</code> property that can be used to configure the Azure AD application to be used. Below snippet shows the configuration of the <code>OAuthCredentialManagerConfiguration</code>: the configuration needs a name, the credential manager entry that contains username/password and the Client ID (or Application ID) of the Azure AD application that you want to use.</p>
-<pre><code class="lang-csharp">.AddAuthenticationProviderFactory(options =&gt;
-{
-    options.Configurations.Add(new OAuthCredentialManagerConfiguration
-    {
-        Name = &quot;CredentialManagerAuthentication&quot;,
-        CredentialManagerName = configuration.GetValue&lt;string&gt;(&quot;CustomSettings:CredentialManager&quot;),
-        ClientId = configuration.GetValue&lt;string&gt;(&quot;CustomSettings:ClientId&quot;),
-    });
+<p>When you're configuring your application to use the PnP Core SDK you will have to configure the <code>PnP.Core</code> services and the <code>PnP.Core.Auth</code> services using the <code>AddPnPCore</code> and <code>AddPnPCoreAuthentication</code> methods, respectively. The <code>ClientId</code> and <code>TenantId</code> are those of the application that you just registered in Azure Active Directory. The value for the <code>CredentialManagerName</code> property is the name of the item stored in the Windows Credential Manager.</p>
+<pre><code class="lang-csharp">// Add the PnP Core SDK library
+services.AddPnPCore(options =&gt; {
+    options.PnPContext.GraphFirst = true;
+    options.HttpRequests.UserAgent = &quot;ISV|Contoso|ProductX&quot;;
 
-    options.DefaultConfiguration = &quot;CredentialManagerAuthentication&quot;;
-})
+    options.Sites.Add(&quot;SiteToWorkWith&quot;, new PnPCoreSiteOptions
+    {
+        SiteUrl = &quot;https://contoso.sharepoint.com/sites/pnp&quot;
+    });
+});
+services.AddPnPCoreAuthentication(
+    options =&gt; {
+        // Configure an Authentication Provider relying on Windows Credential Manager
+        options.Credentials.Configurations.Add(&quot;credentialmanager&quot;,
+            new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = &quot;{your_client_id}&quot;,
+                TenantId = &quot;{your_tenant_id}&quot;,
+                CredentialManager = new PnPCoreAuthenticationCredentialManagerOptions
+                {
+                    CredentialManagerName = &quot;mycreds&quot;
+                }
+            });
+
+        // Configure the default authentication provider
+        options.Credentials.DefaultConfiguration = &quot;credentialmanager&quot;;
+
+        // Map the site defined in AddPnPCore with the 
+        // Authentication Provider configured in this action
+        options.Sites.Add(&quot;SiteToWorkWith&quot;,
+            new PnPCoreAuthenticationSiteOptions
+            {
+                AuthenticationProviderName = &quot;credentialmanager&quot;
+            });
+});
 </code></pre>
 <h2 id="using-the-multi-tenant-pnp-azure-ad-application">Using the multi-tenant PnP Azure AD application</h2>
 <p>Azure AD has the concept of multi-tenant applications allowing you to re-use an application created in another Azure AD tenant. The PnP team did setup a general purpose Azure AD application (named &quot;PnP Office 365 Management Shell&quot;) configured with the needed permissions, and you can reuse this application. It means that you don't need to create your own Azure AD application, instead you simply need to consent permissions to the already created multi-tenant application.</p>
@@ -158,29 +182,6 @@
 <li>Give the credential a name (e.g. Contoso), a user name (e.g. joe@contoso.onmicrosoft.com) and a password. Hit <strong>OK</strong> to save.</li>
 <li>Use the credential manager name (Contoso in this example) in your <code>OAuthCredentialManagerConfiguration</code> setup.</li>
 </ol>
-<h2 id="using-an-externally-obtained-access-token">Using an externally obtained access token</h2>
-<p>Depending on where you're using the PnP Core SDK you might already have acquired an access token using different means. You can re-use this access token in the PnP Core SDK by using the <code>OAuthAccessTokenConfiguration</code>:</p>
-<pre><code class="lang-csharp">.AddAuthenticationProviderFactory(options =&gt;
-{
-    options.Configurations.Add(new OAuthAccessTokenConfiguration
-    {
-        Name = &quot;AccessTokenAuthentication&quot;,
-        ClientId = null,
-    });
-})
-</code></pre>
-<p>After you've configured the <code>OAuthAccessTokenConfiguration</code> configuration you can create a context (tell the factory to use this configuration if it's not the default one) and use the <code>SetAccessToken</code> method on your <code>PnPContext</code> class instance to plug-in your access token:</p>
-<pre><code class="lang-csharp">var pnpContextFactory = scope.ServiceProvider.GetRequiredService&lt;IPnPContextFactory&gt;();
-// Use the PnP Context factory to get a PnPContext for the given configuration
-using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;, &quot;AccessTokenAuthentication&quot;))
-{
-    // Set the access token on the context
-    context.SetAccessToken(accessToken);
-
-    // use the context
-    var site = await context.Site.GetAsync();
-}
-</code></pre>
 </article>
           </div>
           <div class="contribution-panel mobile-hide">

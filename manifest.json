@@ -2694,7 +2694,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/configuring authentication.html",
-          "hash": "e9Mur4V43rV5l0mJelfWtw=="
+          "hash": "iyG3rAquuRurexAnaHEMnQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/consumer/custom-authentication-provider.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/consumer/custom-authentication-provider.html",
+          "hash": "idFBWKPnbABS3KfKWZP0/w=="
         }
       },
       "is_incremental": false,
@@ -2718,7 +2730,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/readme.html",
-          "hash": "Gm34HVd9tA7S27yFOR3i5g=="
+          "hash": "bNJWIWokeVBX0AHdOmf8sQ=="
         }
       },
       "is_incremental": false,
@@ -2974,7 +2986,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 17,
+          "total_file_count": 18,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
