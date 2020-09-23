@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.ClientException.html",
-          "hash": "185SvYzhcRC8qnc+/Rz4ZQ=="
+          "hash": "QpaoQLRHUb97u46xFhJF5Q=="
         }
       },
       "is_incremental": false,
@@ -2330,30 +2330,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.AuthenticationProviderFactory.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.AuthenticationProviderFactory.html",
-          "hash": "VH0Lip7pGRFRCW4Vpetopg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.AuthenticationProviderFactoryCollectionExtensions.html",
-          "hash": "wQVlMTFgkbhWNcq2gAz2Ng=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Services.Batch.yml",
       "output": {
         ".html": {
@@ -2371,30 +2347,6 @@
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreContextOptions.html",
           "hash": "KL5ijahoBAfFdUMwEPdDlw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialOptions.html",
-          "hash": "Tir3tSmL7PQv6+QSyFDyFw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialsOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreCredentialsOptions.html",
-          "hash": "6fgbKQyMI8SI/l5TiAbe3Q=="
         }
       },
       "is_incremental": false,
@@ -2442,7 +2394,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreOptions.html",
-          "hash": "hCvp1kSVd5sjIaHRl++0oA=="
+          "hash": "FtqaYHZIdTnOrhnxdLem8g=="
         }
       },
       "is_incremental": false,
@@ -2454,7 +2406,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions.html",
-          "hash": "jz5gVSi9Iu0A0hGgI9gvrw=="
+          "hash": "ZEFlPUNtyaqALomDo3D48A=="
         }
       },
       "is_incremental": false,
@@ -2466,7 +2418,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.PnPCoreSitesOptions.html",
-          "hash": "ryuCN+oLZrnryBHRIAfgmw=="
+          "hash": "Q3wnqNjueq21c+/C85hqZQ=="
         }
       },
       "is_incremental": false,
@@ -2478,7 +2430,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.Configuration.html",
-          "hash": "8HyrpDrM0mwkq0YMV5683Q=="
+          "hash": "26RDcQ0m2DxXrWin4tLFZA=="
         }
       },
       "is_incremental": false,
@@ -2490,7 +2442,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.IPnPCoreBuilder.html",
-          "hash": "MAjT8Z/iopJ8GqtsxmsVdA=="
+          "hash": "A21BGTsO3JedIVfDsmlzpA=="
         }
       },
       "is_incremental": false,
@@ -2502,7 +2454,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Builder.PnPCoreBuilder.html",
-          "hash": "2Fv+tCANNTAwVRIg83rJUg=="
+          "hash": "9vfe/7Z/T4LAVC4fmcfNmw=="
         }
       },
       "is_incremental": false,
@@ -2538,43 +2490,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.IAuthenticationProvider.html",
-          "hash": "ZwlS0JuH8aEBXjxwGt8Ucw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.IAuthenticationProviderConfiguration.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.IAuthenticationProviderConfiguration.html",
-          "hash": "US04QiyTnpjCk/GAS1FNxA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.IAuthenticationProviderFactory.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.IAuthenticationProviderFactory.html",
-          "hash": "3Zjawfb7lTzjlfPYG8z+hQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.IOAuthAccessTokenProvider.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.IOAuthAccessTokenProvider.html",
-          "hash": "rF0qjOEaqZVJ3iQ6F7GB8g=="
+          "hash": "w7qRpbwgS+HlgDpdq2cQqg=="
         }
       },
       "is_incremental": false,
@@ -2586,7 +2502,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.IPnPContextFactory.html",
-          "hash": "nM+9CwmKHaYzQKzgziCepA=="
+          "hash": "LOUOeigVN/RhV+P7Q2Ghmg=="
         }
       },
       "is_incremental": false,
@@ -2606,95 +2522,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.OAuthAccessTokenConfiguration.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.OAuthAccessTokenConfiguration.html",
-          "hash": "ytG4vtH6ANSgXWQKZug2gA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.OAuthAuthenticationProvider.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.OAuthAuthenticationProvider.html",
-          "hash": "bzuroqI54aSnHapbgqEVbA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.OAuthAuthenticationProviderCollectionExtensions.html",
-          "hash": "w4foVaGNOOmX3Njz1xLJTw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.OAuthAuthenticationProviderOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.OAuthAuthenticationProviderOptions.html",
-          "hash": "8KPcxTNSEwqznku8X4ApFQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.OAuthCertificateConfiguration.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.OAuthCertificateConfiguration.html",
-          "hash": "B8wtk0kDf8DDQhhHXU0+7w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.OAuthCredentialManagerConfiguration.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.OAuthCredentialManagerConfiguration.html",
-          "hash": "ETGGIHfyuDfR7+Ao+gGQLQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Services.OAuthUsernamePasswordConfiguration.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Services.OAuthUsernamePasswordConfiguration.html",
-          "hash": "6nd9Qcf9+QI83mOBtKH+Cg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Services.PnPContext.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "s6h8hqVXt9qZzwE0TqoTnA=="
+          "hash": "0GClwKRnzRzKO1ck0ba5AA=="
         }
       },
       "is_incremental": false,
@@ -2706,7 +2538,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactory.html",
-          "hash": "ccXZE1I2etqKT7BbX1CFHw=="
+          "hash": "MTU4eqh6gutN6Sl0WW1qDw=="
         }
       },
       "is_incremental": false,
@@ -2730,7 +2562,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactoryOptions.html",
-          "hash": "lO+kXwer+ls9dPEMgfNUGA=="
+          "hash": "eg4RxnwKLTOTYUzSKtC4ig=="
         }
       },
       "is_incremental": false,
@@ -2742,7 +2574,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactoryOptionsConfiguration.html",
-          "hash": "gY8zclxfXYb71qApYP4Aog=="
+          "hash": "irxZ52YJkpUUL68rBm7yVA=="
         }
       },
       "is_incremental": false,
@@ -2778,7 +2610,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.html",
-          "hash": "lH9qWDVA2w00X9+N7u5ncA=="
+          "hash": "MAq8fkfkIcPhPmPpQoyCgg=="
         }
       },
       "is_incremental": false,
@@ -2850,7 +2682,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "ksLgA32TPH21UQFoLS7RlQ=="
+          "hash": "u5/6OlKjHKlJKaLwttY7OA=="
         }
       },
       "is_incremental": false,
@@ -3148,7 +2980,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 235,
+          "total_file_count": 221,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
