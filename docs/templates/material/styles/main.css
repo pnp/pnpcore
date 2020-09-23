@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css");
+
 /* COLOR VARIABLES*/
 :root {
   --header-bg-color: #0d47a1;
@@ -311,4 +313,36 @@ pre {
 #autocollapse .navbar-brand{
   margin-top: 7px;
   margin-right: 5px;
+}
+
+.improve-doc-lg{
+    font-size: 1.5em;
+}
+
+.view-source-lg{
+  font-size: 1.5em;
+  margin-right: 0.5em;
+  margin-left: 0.4em;
+}
+
+.decalaration, .fieldValue, .parameters, .returns {
+  color: unset;
+}
+
+.toc .level2{
+  margin-left: 0;
+}
+
+.contribution-panel{
+  position:fixed;
+}
+
+/* Original */ 
+.collapse.in,
+.collapsing {
+  text-align: unset;
+}
+
+.affix h5 {
+  display: none;
 }
