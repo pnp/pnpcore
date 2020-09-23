@@ -10,17 +10,6 @@ namespace PnP.Core.Services
     public interface IAuthenticationProvider
     {
         /// <summary>
-        /// Gets the in use <see cref="IAuthenticationProviderConfiguration"/>
-        /// </summary>
-        IAuthenticationProviderConfiguration Configuration { get; }
-
-        /// <summary>
-        /// Configures the Authentication Provider
-        /// </summary>
-        /// <param name="configuration">The configuration to use</param>
-        void Configure(IAuthenticationProviderConfiguration configuration);
-
-        /// <summary>
         /// Authenticates the specified request message.
         /// </summary>
         /// <param name="resource">Request uri</param>

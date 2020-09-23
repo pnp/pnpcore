@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-	<LangVersion>8.0</LangVersion>
-	<RootNamespace>PnP.Core</RootNamespace>
+    <LangVersion>8.0</LangVersion>
+    <RootNamespace>PnP.Core</RootNamespace>
     <AssemblyName>PnP.Core</AssemblyName>
-	<InformationalVersion>Preview 1 package</InformationalVersion>
+    <InformationalVersion>Preview 1 package</InformationalVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>PnP 2020</Copyright>
     <Company>PnP</Company>
@@ -16,8 +16,14 @@
     <RepositoryType>git</RepositoryType>
     <Configurations>Debug;Release;Blazor</Configurations>
     <PackageIcon>nugeticon.png</PackageIcon>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\Authentication\ToRemove\**" />
+    <EmbeddedResource Remove="Services\Authentication\ToRemove\**" />
+    <None Remove="Services\Authentication\ToRemove\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Model\SharePoint\Navigation\" />

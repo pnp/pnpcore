@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using PnP.Core.Services;
+using PnP.Core.Services.Builder.Configuration;
 using PnP.Core.Test.Utilities;
 using System;
 
@@ -19,10 +20,7 @@ namespace PnP.Core.Test.Services
             }
 
             // Add a SharePoint Online Context Factory service instance
-            return collection
-                .AddTelemetryServices()
-                .AddHttpClients()
-                .AddPnPServices();
+            return AddTestPnPContextFactory(collection, null);
         }
 
         public static IServiceCollection AddTestPnPContextFactory(this IServiceCollection collection, Action<PnPContextFactoryOptions> options)
@@ -31,12 +29,13 @@ namespace PnP.Core.Test.Services
             {
                 throw new ArgumentNullException(nameof(collection));
             }
-            if (options == null)
+
+            if (options != null)
             {
-                throw new ArgumentNullException(nameof(options));
+                collection.Configure(options);
             }
 
-            collection.Configure(options);
+            collection.ConfigureOptions<PnPCoreOptionsConfigurator>();
 
             // Add a PnP Context Factory service instance
             return collection

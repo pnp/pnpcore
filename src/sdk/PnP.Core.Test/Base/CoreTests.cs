@@ -55,21 +55,5 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(result.Any());
             }   
         }
-
-
-        [TestMethod]
-        public void CredentialTest()
-        {
-            var userName = "userName";
-            var passWord = "password";
-            var securePassWord = "securePassword";
-            var appName = "PnP.Core.Credential.Test.SecurePw";
-
-            var result = CredentialManager.AddCredential(appName, userName, securePassWord.ToSecureString(), false);
-            Assert.IsTrue(result);
-
-            var result2 = CredentialManager.AddCredential(appName, userName, passWord, true);
-            Assert.IsTrue(result2);
-        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
-namespace PnP.Core
+namespace PnP.Core.Auth
 {
     /// <summary>
     /// Supporting class for certificate based operations
@@ -16,7 +16,7 @@ namespace PnP.Core
         /// <param name="storeLocation">Location of the certificate store</param>
         /// <param name="thumbprint">Thumbprint of the certificate to load</param>
         /// <returns>An <see cref="X509Certificate2"/> certificate</returns>
-        public static X509Certificate2 LoadCertificate(StoreName storeName, StoreLocation storeLocation, string thumbprint)
+        internal static X509Certificate2 LoadCertificate(StoreName storeName, StoreLocation storeLocation, string thumbprint)
         {
             // The following code gets the cert from the keystore
             using (X509Store store = new X509Store(storeName, storeLocation))

@@ -2,14 +2,14 @@
 
 ## Intro
 
-The PnP Core SDK is an SDK designed to work for Microsoft 365. It's aim is to provide a unified object model to work with the Microsoft 365 ecosystem. At the moment the supported workloads are SharePoint Online and Microsoft Teams. Currently the library is a **preview** in which the focus is on coding the basics, so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
+The PnP Core SDK is an SDK designed to work for Microsoft 365. Its aim is to provide a unified object model to work with the Microsoft 365 ecosystem. At the moment the supported workloads are SharePoint Online and Microsoft Teams. Currently the library is a **preview** in which the focus is on coding the basics, so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
 
 > [!Important]
 > The PnP Core SDK is in preview: it's targeting developers that want to either test or extend it. It's **not** yet ready to be used in production scenarios, mainly because it still lacks some of the model definitions.
 
 ## Roadmap
 
-This is a community effort, hence we cannot guarantee below roadmap but rest assure, we're working hard to stick to plan :-) If you want to join our team and help realize this, then checkout the [How can I help](https://pnp.github.io/pnpcore/#how-can-you-help) section in our docs.
+This is a community effort, hence we cannot guarantee below roadmap but rest assure, we're working hard to stick to plan 😀 If you want to join our team and help realize this, then checkout the [How can I help](https://pnp.github.io/pnpcore/#how-can-you-help) section in our docs.
 
 - Preview 3: September 2020
 - Beta 1: October 2020

@@ -1,16 +1,17 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
+using System.Linq;
 
 namespace PnP.Core.Services.Builder.Configuration
 {
-    internal class PnPContextFactoryOptionsConfigurator: 
-        IConfigureOptions<PnPContextFactoryOptions>, 
-        IConfigureOptions<OAuthAuthenticationProviderOptions>,
+    internal class PnPCoreOptionsConfigurator: 
+        IConfigureOptions<PnPContextFactoryOptions>,
         IConfigureOptions<PnPGlobalSettingsOptions>
     {
         private readonly IOptions<PnPCoreOptions> pnpCoreOptions;
 
-        public PnPContextFactoryOptionsConfigurator(IOptions<PnPCoreOptions> pnpCoreOptions)
+        public PnPCoreOptionsConfigurator(IOptions<PnPCoreOptions> pnpCoreOptions)
         {
             this.pnpCoreOptions = pnpCoreOptions;
         }
@@ -18,7 +19,7 @@ namespace PnP.Core.Services.Builder.Configuration
         public void Configure(PnPContextFactoryOptions options)
         {
             //foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Sites)
-            foreach(var siteOption in pnpCoreOptions.Value.Sites)
+            foreach (var siteOption in pnpCoreOptions.Value.Sites)
             {
                 var optionKey = siteOption.Key;
                 var optionValue = siteOption.Value;
@@ -26,7 +27,7 @@ namespace PnP.Core.Services.Builder.Configuration
                 options.Configurations.Add(new PnPContextFactoryOptionsConfiguration { 
                     Name = optionKey,
                     SiteUrl = new Uri(optionValue.SiteUrl),
-                    AuthenticationProviderName = optionValue.AuthenticationProviderName
+                    AuthenticationProvider = optionValue.AuthenticationProvider
                 });
             }
 
@@ -34,34 +35,7 @@ namespace PnP.Core.Services.Builder.Configuration
             options.GraphFirst = pnpCoreOptions.Value.PnPContext.GraphFirst;
             options.GraphCanUseBeta = pnpCoreOptions.Value.PnPContext.GraphCanUseBeta;
             options.GraphAlwaysUseBeta = pnpCoreOptions.Value.PnPContext.GraphAlwaysUseBeta;
-        }
-
-        public void Configure(OAuthAuthenticationProviderOptions options)
-        {
-            //foreach (var (optionKey, optionValue) in pnpCoreOptions.Value.Credentials)
-            foreach (var credentialOption in pnpCoreOptions.Value.Credentials)
-            {
-                var optionKey = credentialOption.Key;
-                var optionValue = credentialOption.Value;
-
-                if (!String.IsNullOrEmpty(optionValue.CredentialManagerName))
-                {
-                    options.Configurations.Add(new OAuthCredentialManagerConfiguration {
-                        Name = optionKey,
-                        ClientId = optionValue.ClientId,
-                        CredentialManagerName = optionValue.CredentialManagerName
-                    });
-                }
-                else if (!String.IsNullOrEmpty(optionValue.CertificateThumbprint))
-                {
-                    options.Configurations.Add(new OAuthCertificateConfiguration
-                    {
-                        Name = optionKey,
-                        ClientId = optionValue.ClientId,
-                        Certificate = null, // TODO: Load certificate from thumbprint
-                    });
-                }
-            }
+            options.DefaultAuthenticationProvider = pnpCoreOptions.Value.DefaultAuthenticationProvider;
         }
 
         public void Configure(PnPGlobalSettingsOptions options)
