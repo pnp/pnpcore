@@ -304,3 +304,11 @@ pre {
   box-shadow: var(--card-box-shadow);
   max-width: 700px;
 }
+
+
+/* Customizations from material */
+
+#autocollapse .navbar-brand{
+  margin-top: 7px;
+  margin-right: 5px;
+}

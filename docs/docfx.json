@@ -66,8 +66,9 @@
     "disableGitFeatures": false,
     "globalMetadata": {
       "_appTitle": "PnP Core SDK",
-      "_appFooter": "PnP Core SDK",
+      "_appFooter": "PnP Core SDK created with DocFx with Material UI",
       "_appFaviconPath": "https://c.s-microsoft.com/favicon.ico?v2",
+      "_appLogoPath": "images/logo.svg",
       "_enableSearch": true,
       "_enableNewTab": true
     }

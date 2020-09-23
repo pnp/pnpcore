@@ -13,6 +13,8 @@ The document generation consists of 3 steps outlined below, currently these are 
 > [!Note]
 > Install the latest [DocFX](https://dotnet.github.io/docfx/) release to get `docfx.exe`
 
+To run anywhere add docfx directory to your environment variables in windows
+
 ### References
 
 Setting up the gh-pages branch as an orphaned branch was done using the steps outlined in https://www.gep13.co.uk/blog/how-to-create-gh-pages-branch. To actually work with both "code" and "docs" branches it's easiest to `git clone` the repo twice, once for coding and once for publishing documents to the `gh-pages` branch.
@@ -20,3 +22,7 @@ Setting up the gh-pages branch as an orphaned branch was done using the steps ou
 ## Contributing to the documentation
 
 We strongly encourage documentation contributions which can be done via improving API documentation (via the triple slash comments in the source code) or creating/updating articles in the `articles` folder.
+
+## Martial UI
+
+Credit to Oscar Vásquez [https://ovasquez.github.io/docfx-material/](https://ovasquez.github.io/docfx-material/) for awesome work on the skin.
