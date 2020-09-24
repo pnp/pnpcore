@@ -73,7 +73,8 @@ namespace PnP.Core.Auth
             }
 
             // Retrieve credentials from the Credential Manager
-            var credentials = CredentialManager.GetCredential(options.CredentialManager.CredentialManagerName);
+            CredentialManagerName = options.CredentialManager.CredentialManagerName;
+            var credentials = CredentialManager.GetCredential(CredentialManagerName);
 
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
