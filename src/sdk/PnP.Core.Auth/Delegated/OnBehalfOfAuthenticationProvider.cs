@@ -38,7 +38,7 @@ namespace PnP.Core.Auth
                 TenantId = tenantId,
                 OnBehalfOf = new PnPCoreAuthenticationOnBehalfOfOptions
                 {
-                    ClientSecret = clientSecret.ToInsecureString()
+                    ClientSecret = clientSecret?.ToInsecureString()
                 }
             }); ;
         }
