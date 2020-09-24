@@ -121,6 +121,7 @@
 <li><p>Change <strong>Default client type</strong> to <strong>Treat application as public client</strong> and hit <strong>Save</strong></p>
 </li>
 </ol>
+<p>If you want to configure support for interactive login you should also configure the <em>Platform</em> and the <em>redirect URI</em> in the <strong>Authentication</strong> panel. You can read <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-a-redirect-uri">further details here</a>.</p>
 <h3 id="configuring-pnp-core-sdk-to-use-the-configured-application">Configuring PnP Core SDK to use the configured application</h3>
 <p>When you're configuring your application to use the PnP Core SDK you will have to configure the <code>PnP.Core</code> services and the <code>PnP.Core.Auth</code> services using the <code>AddPnPCore</code> and <code>AddPnPCoreAuthentication</code> methods, respectively. The <code>ClientId</code> and <code>TenantId</code> are those of the application that you just registered in Azure Active Directory. The value for the <code>CredentialManagerName</code> property is the name of the item stored in the Windows Credential Manager.</p>
 <pre><code class="lang-csharp">// Add the PnP Core SDK library
