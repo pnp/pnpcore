@@ -10,7 +10,6 @@ namespace PnP.Core.Auth.Services
     /// <summary>
     /// Public factory service to create IAuthenticationProvider object instances
     /// </summary>
-
     public class AuthenticationProviderFactory : IAuthenticationProviderFactory
     {
         private readonly PnPCoreAuthenticationOptions options;

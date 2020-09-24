@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Auth
+﻿namespace PnP.Core.Auth
 {
     internal static class AuthGlobals
     {

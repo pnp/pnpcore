@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Auth
 {
+    /// <summary>
+    /// Base authentication provider class
+    /// </summary>
     public abstract class OAuthAuthenticationProvider : IAuthenticationProvider
     {
         /// <summary>
@@ -27,6 +30,10 @@ namespace PnP.Core.Auth
         // Microsoft SharePoint Online Management Shell client id
         // private static readonly string aadAppId = "9bc3ab49-b65d-410a-85ad-de819febfddc";
         // PnP Office 365 Management Shell 
+        
+        /// <summary>
+        /// Default Azure AD application id (PnP Management Shell)
+        /// </summary>
         protected const string DefaultAADAppId = "31359c7f-bd7e-475c-86db-fdb8c937548e";
 
         /// <summary>
