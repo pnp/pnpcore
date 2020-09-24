@@ -44,7 +44,7 @@ namespace PnP.Core.Auth
                 UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
                 {
                     Username = username,
-                    Password = password.ToInsecureString()
+                    Password = password?.ToInsecureString()
                 }
             });
         }
