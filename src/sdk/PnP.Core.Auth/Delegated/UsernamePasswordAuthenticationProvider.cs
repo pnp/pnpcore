@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Auth
 {
+    /// <summary>
+    /// Authentication Provider that uses a credential flow
+    /// </summary>
     public sealed class UsernamePasswordAuthenticationProvider : OAuthAuthenticationProvider
     {
         /// <summary>
@@ -53,7 +56,6 @@ namespace PnP.Core.Auth
         /// Public constructor leveraging DI to initialize the ILogger interfafce
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
-        /// <param name="options">Configuration options for the current Authentication Provider</param>
         public UsernamePasswordAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
             : base(logger)
         {

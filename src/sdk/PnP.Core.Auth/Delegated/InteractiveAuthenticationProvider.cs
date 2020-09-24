@@ -2,16 +2,17 @@
 using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Auth
 {
+    /// <summary>
+    /// Authentication Provider that uses an interactive flow prompting the user
+    /// </summary>
     public class InteractiveAuthenticationProvider : OAuthAuthenticationProvider
     {
         /// <summary>
@@ -46,7 +47,6 @@ namespace PnP.Core.Auth
         /// Public constructor leveraging DI to initialize the ILogger interfafce
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
-        /// <param name="options">Configuration options for the current Authentication Provider</param>
         public InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
             : base(logger)
         {
