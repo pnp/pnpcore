@@ -40,10 +40,15 @@ namespace Consumer
                 hostingContext.Configuration.Bind("CustomSettings", customSettings);
 
                 // Create an instance of the Authentication Provider that uses Credential Manager
-                var authenticationProvider = new CredentialManagerAuthenticationProvider(
+                //var authenticationProvider = new CredentialManagerAuthenticationProvider(
+                //                customSettings.ClientId,
+                //                customSettings.TenantId,
+                //                customSettings.CredentialManager);                
+
+                var authenticationProvider = new InteractiveAuthenticationProvider(
                                 customSettings.ClientId,
                                 customSettings.TenantId,
-                                customSettings.CredentialManager);                
+                                customSettings.RedirectUri);
 
                 // Add the PnP Core SDK services
                 services

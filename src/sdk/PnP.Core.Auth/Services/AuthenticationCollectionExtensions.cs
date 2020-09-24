@@ -66,6 +66,10 @@ namespace Microsoft.Extensions.DependencyInjection
             collection.AddTransient<IAuthenticationProvider, UsernamePasswordAuthenticationProvider>();
             collection.AddTransient<UsernamePasswordAuthenticationProvider, UsernamePasswordAuthenticationProvider>();
 
+            // Add the service for InteractiveAuthenticationProvider
+            collection.AddTransient<IAuthenticationProvider, InteractiveAuthenticationProvider>();
+            collection.AddTransient<InteractiveAuthenticationProvider, InteractiveAuthenticationProvider>();
+
             // Add the service for X509CertificateAuthenticationProvider
             collection.AddTransient<IAuthenticationProvider, X509CertificateAuthenticationProvider>();
             collection.AddTransient<X509CertificateAuthenticationProvider, X509CertificateAuthenticationProvider>();

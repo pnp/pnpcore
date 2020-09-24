@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Services;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services;
@@ -9,6 +10,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using PnP.Core.Model;
 
 namespace PnP.Core.Auth.Test.Utilities
 {
@@ -54,6 +56,11 @@ namespace PnP.Core.Auth.Test.Utilities
         /// Name of the default test site configuration with X.509 Certificate app-only authentication
         /// </summary>
         internal static string TestSiteX509Certificate { get { return "TestSiteX509Certificate"; } }
+
+        /// <summary>
+        /// Name of the default test site configuration with Interactive authentication
+        /// </summary>
+        internal static string TestSiteInteractive { get { return "TestSiteInteractive"; } }
 
         /// <summary>
         /// Private constructor since this is a singleton
@@ -177,6 +184,15 @@ namespace PnP.Core.Auth.Test.Utilities
             {
                 semaphoreSlimFactory.Release();
             }
+        }
+
+        internal static async Task CheckAccessToTargetResource(PnPContext context, bool graphFirst = true)
+        {
+            context.GraphFirst = graphFirst;
+            var web = await context.Web.GetAsync(w => w.Title);
+
+            Assert.IsNotNull(web.Title);
+            Assert.IsTrue(web.IsPropertyAvailable(p => p.Title));
         }
 
         internal static string GetX509CertificateThumbprint()

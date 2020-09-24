@@ -125,6 +125,10 @@ namespace PnP.Core.Auth.Services
             {
                 providerType = typeof(UsernamePasswordAuthenticationProvider);
             }
+            else if (option.Interactive != null)
+            {
+                providerType = typeof(InteractiveAuthenticationProvider);
+            }
 
             return providerType;
         }
@@ -165,6 +169,11 @@ namespace PnP.Core.Auth.Services
                     usernamePassword.TenantId = option.TenantId;
                     usernamePassword.Username = option.UsernamePassword.Username;
                     usernamePassword.Password = option.UsernamePassword.Password.ToSecureString();
+                    break;
+                case InteractiveAuthenticationProvider interactive:
+                    interactive.ClientId = option.ClientId;
+                    interactive.TenantId = option.TenantId;
+                    interactive.RedirectUri = option.Interactive.RedirectUri;
                     break;
             }
         }

@@ -115,6 +115,33 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid configuration for InteractiveAuthenticationProvider.
+        /// </summary>
+        internal static string InteractiveAuthenticationProvider_InvalidConfiguration {
+            get {
+                return ResourceManager.GetString("InteractiveAuthenticationProvider_InvalidConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid or missing value for RedirectUri in InteractiveAuthenticationProvider configuration.
+        /// </summary>
+        internal static string InteractiveAuthenticationProvider_InvalidRedirectUri {
+            get {
+                return ResourceManager.GetString("InteractiveAuthenticationProvider_InvalidRedirectUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initialized InteractiveAuthenticationProvider.
+        /// </summary>
+        internal static string InteractiveAuthenticationProvider_LogInit {
+            get {
+                return ResourceManager.GetString("InteractiveAuthenticationProvider_LogInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid configuration name &apos;{0}&apos; for IAuthenticationProvider creation!.
         /// </summary>
         internal static string InvalidConfigurationName {

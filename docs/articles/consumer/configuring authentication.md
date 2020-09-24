@@ -34,6 +34,8 @@ Follow below steps to configure an application in Azure AD:
 10. Click on **Authentication** in the **Manage** left navigation group
 11. Change **Default client type** to **Treat application as public client** and hit **Save**
 
+If you want to configure support for interactive login you should also configure the _Platform_ and the _redirect URI_ in the **Authentication** panel. You can read [further details here](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-a-redirect-uri).
+
 ### Configuring PnP Core SDK to use the configured application
 
 When you're configuring your application to use the PnP Core SDK you will have to configure the `PnP.Core` services and the `PnP.Core.Auth` services using the `AddPnPCore` and `AddPnPCoreAuthentication` methods, respectively. The `ClientId` and `TenantId` are those of the application that you just registered in Azure Active Directory. The value for the `CredentialManagerName` property is the name of the item stored in the Windows Credential Manager.
