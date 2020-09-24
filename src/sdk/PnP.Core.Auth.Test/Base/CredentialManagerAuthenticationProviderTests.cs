@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Test.Utilities;
-using PnP.Core.Model;
-using PnP.Core.Services;
 using System;
 using System.Configuration;
 using System.Net.Http;
@@ -50,6 +48,8 @@ namespace PnP.Core.Auth.Test.Base
         [TestMethod]
         public async Task TestCredentialManagerConstructorNoDI()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
             Assert.IsNotNull(provider);
@@ -61,6 +61,8 @@ namespace PnP.Core.Auth.Test.Base
         [TestMethod]
         public async Task TestCredentialManagerConstructorNoDI_NullClientId_NullTenantId()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             var configuration = TestCommon.GetConfigurationSettings();
             var credentialManagerName = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:CredentialManager:CredentialManagerName");
 
@@ -93,6 +95,8 @@ namespace PnP.Core.Auth.Test.Base
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task TestCredentialManagerAuthenticateRequestAsyncNoResource()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
             await provider.AuthenticateRequestAsync(null, null);
@@ -102,6 +106,8 @@ namespace PnP.Core.Auth.Test.Base
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task TestCredentialManagerAuthenticateRequestAsyncNoHttpRequest()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
             await provider.AuthenticateRequestAsync(graphResource, null);
@@ -125,6 +131,8 @@ namespace PnP.Core.Auth.Test.Base
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task TestCredentialManagerGetAccessTokenAsyncNullResource()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
             await provider.GetAccessTokenAsync(null);
@@ -134,6 +142,8 @@ namespace PnP.Core.Auth.Test.Base
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task TestCredentialManagerGetAccessTokenAsyncFullNullResource()
         {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
             await provider.GetAccessTokenAsync(null, new string[] { });

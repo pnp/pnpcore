@@ -88,6 +88,15 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The provided credential manager entry &apos;{0}&apos; does not exist in the system&apos;s credential manager.
+        /// </summary>
+        internal static string CredentialManagerAuthenticationProvider_CredentialManagerEntryDoesNotExist {
+            get {
+                return ResourceManager.GetString("CredentialManagerAuthenticationProvider_CredentialManagerEntryDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid configuration for CredentialManagerAuthenticationProvider.
         /// </summary>
         internal static string CredentialManagerAuthenticationProvider_InvalidConfiguration {

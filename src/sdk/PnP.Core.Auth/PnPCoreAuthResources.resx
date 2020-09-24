@@ -126,6 +126,9 @@
   <data name="AuthenticationProvider_LogAccessTokenRetrieval" xml:space="preserve">
     <value>Retrieved access token for resource {1} with scopes '{2}' from {0}</value>
   </data>
+  <data name="CredentialManagerAuthenticationProvider_CredentialManagerEntryDoesNotExist" xml:space="preserve">
+    <value>The provided credential manager entry '{0}' does not exist in the system's credential manager</value>
+  </data>
   <data name="CredentialManagerAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for CredentialManagerAuthenticationProvider</value>
   </data>

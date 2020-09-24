@@ -76,6 +76,13 @@ namespace PnP.Core.Auth
             CredentialManagerName = options.CredentialManager.CredentialManagerName;
             var credentials = CredentialManager.GetCredential(CredentialManagerName);
 
+            if (credentials == null)
+            {
+                throw new ConfigurationErrorsException(string.Format(System.Globalization.CultureInfo.InvariantCulture, 
+                                                                    PnPCoreAuthResources.CredentialManagerAuthenticationProvider_CredentialManagerEntryDoesNotExist, 
+                                                                    CredentialManagerName));
+            }
+
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
 
