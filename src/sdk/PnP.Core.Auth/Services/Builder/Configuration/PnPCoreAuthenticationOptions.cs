@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
 namespace PnP.Core.Auth.Services.Builder.Configuration
@@ -99,6 +100,11 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// The options for the Username and Password Authentication Provider
         /// </summary>
         public PnPCoreAuthenticationUsernamePasswordOptions UsernamePassword { get; set; }
+
+        /// <summary>
+        /// The options for the Interactive Authentication Provider
+        /// </summary>
+        public PnPCoreInteractiveOptions Interactive { get; set; }
     }
 
     /// <summary>
@@ -166,5 +172,16 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// The password for authentication
         /// </summary>
         public string Password { get; set; }
+    }
+
+    /// <summary>
+    /// Options for the UsernamePasswordAuthenticationProvider
+    /// </summary>
+    public class PnPCoreInteractiveOptions
+    {
+        /// <summary>
+        /// The Redirect URI for the authentication flow
+        /// </summary>
+        public Uri RedirectUri { get; set; }
     }
 }
