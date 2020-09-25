@@ -3,13 +3,15 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PnP.Core.Services;
+using PnP.Core.Services.Builder.Configuration;
+using System.Configuration;
 using System.Threading.Tasks;
 
 namespace Demo.Blazor
 {
     public class Program
     {
-        public const string AuthProviderName = "AccessTokenAuth";
+        //public const string AuthProviderName = "AccessTokenAuth";
 
         public static async Task Main(string[] args)
         {
@@ -23,15 +25,15 @@ namespace Demo.Blazor
                 builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
             });
 
+            // Add the PnP Core SDK library
+            builder.Services.AddPnPCore();
+            
             builder.Services
-                .AddScoped<IOAuthAccessTokenProvider, MsalWrappedTokenProvider>()
+                // Add our custom IAuthenticationProvider implementation
+                .AddScoped<IAuthenticationProvider, MsalWrappedTokenProvider>()
+                // Load our configuration
                 .AddSingleton<IConfiguration>(config)
-                .AddAuthenticationProviderFactory(options => options.Configurations.Add(new OAuthAccessTokenConfiguration() { Name = AuthProviderName }))
-                .AddPnPContextFactory(options => options.Configurations.Add(new PnPContextFactoryOptionsConfiguration()
-                {
-                    AuthenticationProviderName = AuthProviderName,
-                    //SiteUrl = new
-                }))
+                // Load our context factory
                 .AddScoped<IMyPnPContextFactory, MyContextFactory>();
 
             await builder.Build().RunAsync();

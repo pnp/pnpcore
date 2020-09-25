@@ -14,17 +14,19 @@ namespace Demo.Blazor.Services
     {
         private readonly IPnPContextFactory _contextFactory;
         private readonly IConfiguration _configuration;
+        private readonly IAuthenticationProvider _msalAuthProvider;
 
-        public MyContextFactory(IPnPContextFactory contextFactory, IConfiguration configuration)
+        public MyContextFactory(IPnPContextFactory contextFactory, IConfiguration configuration, IAuthenticationProvider msalAuthProvider)
         {
             _configuration = configuration;
             _contextFactory = contextFactory;
+            _msalAuthProvider = msalAuthProvider;
         }
 
         public async Task<PnPContext> GetContextAsync()
         {
             string siteUrl = _configuration.GetValue<string>("SharePoint:SiteUrl");
-            return await _contextFactory.CreateAsync(new Uri(siteUrl), Program.AuthProviderName);
+            return await _contextFactory.CreateAsync(new Uri(siteUrl), _msalAuthProvider);
         }
     }
 }
