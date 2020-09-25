@@ -104,7 +104,7 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// <summary>
         /// The options for the Interactive Authentication Provider
         /// </summary>
-        public PnPCoreInteractiveOptions Interactive { get; set; }
+        public PnPCoreAuthenticationInteractiveOptions Interactive { get; set; }
     }
 
     /// <summary>
@@ -177,7 +177,7 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
     /// <summary>
     /// Options for the UsernamePasswordAuthenticationProvider
     /// </summary>
-    public class PnPCoreInteractiveOptions
+    public class PnPCoreAuthenticationInteractiveOptions
     {
         /// <summary>
         /// The Redirect URI for the authentication flow
