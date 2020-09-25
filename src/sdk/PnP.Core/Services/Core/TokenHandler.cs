@@ -114,7 +114,7 @@ namespace PnP.Core.Services
                     {
                         case "GroupId":
                             {
-                                context.Site.EnsurePropertiesAsync(p => p.GroupId).Wait();
+                                await context.Site.EnsurePropertiesAsync(p => p.GroupId).ConfigureAwait(false);
                                 if (context.Site.HasValue(propertyToLoad))
                                 {
                                     result = result.Replace(match.Value, context.Site.GroupId.ToString());
@@ -123,7 +123,7 @@ namespace PnP.Core.Services
                             }
                         case "Id":
                             {
-                                context.Site.EnsurePropertiesAsync(p => p.Id).Wait();
+                                await context.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
                                 if (context.Site.HasValue(propertyToLoad))
                                 {
                                     result = result.Replace(match.Value, context.Site.Id.ToString());
@@ -141,7 +141,7 @@ namespace PnP.Core.Services
                     {
                         case "Id":
                             {
-                                context.Web.EnsurePropertiesAsync(p => p.Id).Wait();
+                                await context.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
                                 if (context.Web.HasValue(propertyToLoad))
                                 {
                                     result = result.Replace(match.Value, context.Web.Id.ToString());
