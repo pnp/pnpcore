@@ -81,12 +81,11 @@
 
 <p>The PnP Core SDK works with both SharePoint REST as Microsoft Graph in a transparent way, this also means that the authentication model used must work for both. The chosen authentication model is Azure Active Directory (a.k.a. Azure AD), using Azure Active Directory you can define an application and grant it permissions to access Microsoft 365 workloads like SharePoint, Teams,...<strong>Configuring your own application is the recommended approach</strong>, but you can also use a multi-tenant application that the PnP team created. Both options are detailed in the next chapters</p>
 <h2 id="i-want-to-configure-my-own-azure-ad-application-recommended">I want to configure my own Azure AD application (recommended)</h2>
-<div class="NOTE">
-<h5>Note</h5>
-<p>The current preview supports delegated access tokens only. We are working on extending the SDK to support app-only access tokens.</p>
-</div>
-<h3 id="configuring-the-application-in-azure-ad">Configuring the application in Azure AD</h3>
-<p>Follow below steps to configure an application in Azure AD:</p>
+<h3 id="delegated-permissions-acting-in-the-name-of-the-user">Delegated Permissions (acting in the name of the user)</h3>
+<p>In this section you can learn how to register an application in Azure Active Directory and how to use it in your .NET code, in order to use the PnP Core SDK with interactive login in a Console application, running your requests in the name of the authenticated user.</p>
+<h4 id="configuring-the-application-in-azure-ad">Configuring the application in Azure AD</h4>
+<p>In this step by step guide you will register an application in Azure Active Directory, in order to consume the PnP Core SDK in the name of the user connected to your app (i.e. with a delegated access token) from within a .NET Core Console application.
+Follow below steps to configure an application in Azure AD:</p>
 <ol>
 <li><p>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></p>
 </li>
@@ -98,7 +97,9 @@
 </li>
 <li><p>Give the application a name (e.g. PnP Core SDK) and click on <strong>Register</strong></p>
 </li>
-<li><p>Copy the <strong>Application ID</strong> from the <strong>Overview</strong> page, you'll need this GUID value later on</p>
+<li><p>Copy the <strong>Application ID</strong> (Client ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</p>
+</li>
+<li><p>Copy the <strong>Directory ID</strong> (Tenant ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</p>
 </li>
 <li><p>Click on the <strong>API Permissions</strong> in the <strong>Manage</strong> left navigation group</p>
 </li>
@@ -118,11 +119,14 @@
 </li>
 <li><p>Click on <strong>Authentication</strong> in the <strong>Manage</strong> left navigation group</p>
 </li>
-<li><p>Change <strong>Default client type</strong> to <strong>Treat application as public client</strong> and hit <strong>Save</strong></p>
+<li><p>Change <strong>Default client type</strong> to <strong>Treat application as public client</strong> and hit <strong>Save</strong> (this step is optional and you should do that if and only if you are planning to use the <code>UsernamePasswordAuthenticationProvider</code> or the <code>CredentialManagerAuthenticationProvider</code> for authentication)</p>
 </li>
 </ol>
 <p>If you want to configure support for interactive login you should also configure the <em>Platform</em> and the <em>redirect URI</em> in the <strong>Authentication</strong> panel. You can read <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-a-redirect-uri">further details here</a>.</p>
-<h3 id="configuring-pnp-core-sdk-to-use-the-configured-application">Configuring PnP Core SDK to use the configured application</h3>
+<ol start="13">
+<li>Click on <strong>Authentication</strong> and then click on <strong>Add a platform</strong>, choose <strong>Mobile and desktop applications</strong> and provide http://localhost as the <strong>Redirect URI</strong></li>
+</ol>
+<h4 id="configuring-pnp-core-sdk-to-use-the-configured-application">Configuring PnP Core SDK to use the configured application</h4>
 <p>When you're configuring your application to use the PnP Core SDK you will have to configure the <code>PnP.Core</code> services and the <code>PnP.Core.Auth</code> services using the <code>AddPnPCore</code> and <code>AddPnPCoreAuthentication</code> methods, respectively. The <code>ClientId</code> and <code>TenantId</code> are those of the application that you just registered in Azure Active Directory. The value for the <code>CredentialManagerName</code> property is the name of the item stored in the Windows Credential Manager.</p>
 <pre><code class="lang-csharp">// Add the PnP Core SDK library
 services.AddPnPCore(options =&gt; {
@@ -137,26 +141,91 @@ services.AddPnPCore(options =&gt; {
 services.AddPnPCoreAuthentication(
     options =&gt; {
         // Configure an Authentication Provider relying on Windows Credential Manager
-        options.Credentials.Configurations.Add(&quot;credentialmanager&quot;,
+        options.Credentials.Configurations.Add(&quot;interactive&quot;,
             new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = &quot;{your_client_id}&quot;,
                 TenantId = &quot;{your_tenant_id}&quot;,
-                CredentialManager = new PnPCoreAuthenticationCredentialManagerOptions
+                Interactive = new PnPCoreAuthenticationInteractiveOptions
                 {
-                    CredentialManagerName = &quot;mycreds&quot;
+                    RedirectUri = &quot;http://localhost&quot;
                 }
             });
 
         // Configure the default authentication provider
-        options.Credentials.DefaultConfiguration = &quot;credentialmanager&quot;;
+        options.Credentials.DefaultConfiguration = &quot;interactive&quot;;
 
         // Map the site defined in AddPnPCore with the 
         // Authentication Provider configured in this action
         options.Sites.Add(&quot;SiteToWorkWith&quot;,
             new PnPCoreAuthenticationSiteOptions
             {
-                AuthenticationProviderName = &quot;credentialmanager&quot;
+                AuthenticationProviderName = &quot;interactive&quot;
+            });
+});
+</code></pre>
+<h3 id="application-permissions-acting-as-an-app-account-with-app-only-permissions">Application Permissions (acting as an app account with app-only permissions)</h3>
+<p>In this section you can learn how to register an application in Azure Active Directory and how to use it in your .NET code, in order to use the PnP Core SDK within a background job/service/function, running your requests with an app account.</p>
+<h4 id="configuring-the-application-in-azure-ad-1">Configuring the application in Azure AD</h4>
+<p>The easiest way to register an application in Azure Active Directory for app-only is to use the <a href="https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets?view=sharepoint-ps">PnP PowerShell</a> command lets. Specifically you can use the <a href="https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/initialize-pnppowershellauthentication?view=sharepoint-ps"><code>Initialize-PnPPowerShellAuthentication</code> command</a> with the following syntax:</p>
+<pre><code class="lang-powershell">$app = Initialize-PnPPowerShellAuthentication -ApplicationName &quot;PnP.Core.SDK.Consumer&quot; -Tenant contoso.onmicrosoft.com -OutPath c:\temp -CertificatePassword (ConvertTo-SecureString -String &quot;password&quot; -AsPlainText -Force) -Scopes &quot;MSGraph.Group.ReadWrite.All&quot;,&quot;MSGraph.User.ReadWrite.All&quot;,&quot;SPO.Sites.FullControl.All&quot;,&quot;SPO.TermStore.ReadWrite.All&quot;,&quot;SPO.User.ReadWrite.All&quot; -Store CurrentUser
+</code></pre>
+<p>The above command will register for you in Azure Active Directory an app with name <code>PnP.Core.SDK.Consumer</code>, with a self-signed certificate that will be also saved on your filesystem under the <code>c:\temp</code> folder, with a certificate password value of <code>password</code> (you should provide your own strong password, indeed). Remember to replace <code>contoso.onmicrosoft.com</code> with your Azure AD tenant name, which typically is <code>company.onmicrosoft.com</code>. The permissions granted to the app will be:</p>
+<ul>
+<li>SharePoint -&gt; Application Permissions -&gt; Sites -&gt; Sites.FullControl.All</li>
+<li>SharePoint -&gt; Application Permissions -&gt; TermStore -&gt; TermStore.ReadWrite.All</li>
+<li>SharePoint -&gt; Application Permissions -&gt; User -&gt; User.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Application Permissions -&gt; User -&gt; User.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Application Permissions -&gt; Group -&gt; Group.ReadWrite.All</li>
+</ul>
+<p>Executing the command you will first have to authenticate against the target tenant. Then you will see a message like the following one:</p>
+<pre><code class="lang-text">Waiting 60 seconds to launch consent flow in a browser window. This wait is required to make sure that Azure AD is able to initialize all required artifacts.........
+</code></pre>
+<p>Almost 60 seconds later, the command will prompt you for authentication again and to grant the selected permissions to the app you are registering. Once you have done that, in the <code>$app</code> variable you will find information about the just registered app. You can copy in your clipboard the <strong>Application ID</strong> (Client ID) executing the following command:</p>
+<pre><code class="lang-powershell">$app.AzureAppId | clip
+</code></pre>
+<p>And you can copy in your clipboard the thumbprint of the generated X.509 certificate executing the following command:</p>
+<pre><code class="lang-powershell">$app.'Certificate Thumbprint' | clip
+</code></pre>
+<p>Paste this copied values in a safe place, because you will need them soon.
+In the <code>c:\temp</code> folder (or whatever else folder you will choose) there will also be a file named <code>PnP.Core.SDK.Consumer.pfx</code>, which includes the private key of the self-signed certificate generated for you, as well as a file named <code>PnP.Core.SDK.Consumer.cer</code>, which includes the public key of the self-signed certificate generated for you.</p>
+<h4 id="configuring-pnp-core-sdk-to-use-the-configured-application-1">Configuring PnP Core SDK to use the configured application</h4>
+<p>When you're configuring your application to use the PnP Core SDK you will have to configure the <code>PnP.Core</code> services and the <code>PnP.Core.Auth</code> services using the <code>AddPnPCore</code> and <code>AddPnPCoreAuthentication</code> methods, respectively. The <code>ClientId</code> and <code>TenantId</code> are those of the application that you just registered in Azure Active Directory..</p>
+<pre><code class="lang-csharp">// Add the PnP Core SDK library
+services.AddPnPCore(options =&gt; {
+    options.PnPContext.GraphFirst = true;
+    options.HttpRequests.UserAgent = &quot;ISV|Contoso|ProductX&quot;;
+
+    options.Sites.Add(&quot;SiteToWorkWith&quot;, new PnPCoreSiteOptions
+    {
+        SiteUrl = &quot;https://contoso.sharepoint.com/sites/pnp&quot;
+    });
+});
+services.AddPnPCoreAuthentication(
+    options =&gt; {
+        // Configure an Authentication Provider relying on Windows Credential Manager
+        options.Credentials.Configurations.Add(&quot;x509certificate&quot;,
+            new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
+                ClientId = &quot;{your_client_id}&quot;,
+                TenantId = &quot;{your_tenant_id}&quot;,
+                X509Certificate = new PnPCoreAuthenticationX509CertificateOptions
+                {
+                    StoreName = StoreName.My,
+                    StoreLocation = StoreLocation.CurrentUser,
+                    Thumbprint = &quot;{certificate_thumbprint}&quot;
+                }
+            });
+
+        // Configure the default authentication provider
+        options.Credentials.DefaultConfiguration = &quot;x509certificate&quot;;
+
+        // Map the site defined in AddPnPCore with the 
+        // Authentication Provider configured in this action
+        options.Sites.Add(&quot;SiteToWorkWith&quot;,
+            new PnPCoreAuthenticationSiteOptions
+            {
+                AuthenticationProviderName = &quot;x509certificate&quot;
             });
 });
 </code></pre>
@@ -175,13 +244,13 @@ services.AddPnPCoreAuthentication(
 <p>If you get errors during this consent process it's most likely because you are not an Azure AD tenant administrator. Please contact your admins and check with them for further steps.</p>
 </div>
 <h2 id="using-the-credential-manager">Using the credential manager</h2>
-<p>Currently the only supported option to authenticate to a created Azure AD application is via username and password. To configure this in a secure way it's recommended to setup a credential manager entry. Below steps walk you through the setup on Windows, but a similar credential manager concepts exists on other platforms as well.</p>
+<p>Another supported option to authenticate to a created Azure AD application, configured for delegated permissions, is via username and password, through the <code>UsernamePasswordAuthenticationProvider</code>. To configure this in a secure way it's recommended to setup a credential manager entry and to use the <code>CredentialManagerAuthenticationProvider</code>. Below steps walk you through the setup on Windows, but a similar credential manager concepts exists on other platforms as well.</p>
 <ol>
 <li>Click on the <strong>Windows Start</strong> button in the taskbar and type <strong>credential manager</strong>.</li>
 <li>Click on the <strong>Credential Manager</strong> link.</li>
 <li>Go to <strong>Windows Credentials</strong> and click on <strong>Add a generic credential</strong>.</li>
 <li>Give the credential a name (e.g. Contoso), a user name (e.g. joe@contoso.onmicrosoft.com) and a password. Hit <strong>OK</strong> to save.</li>
-<li>Use the credential manager name (Contoso in this example) in your <code>OAuthCredentialManagerConfiguration</code> setup.</li>
+<li>Use the credential manager name (Contoso in this example) in the settings of the <code>CredentialManagerAuthenticationProvider</code> provider.</li>
 </ol>
 </article>
           </div>
