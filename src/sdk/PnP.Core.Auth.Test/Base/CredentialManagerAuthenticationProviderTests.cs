@@ -64,7 +64,7 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var credentialManagerName = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:CredentialManager:CredentialManagerName");
+            var credentialManagerName = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:CredentialManager:CredentialManagerName");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 null,
@@ -82,8 +82,8 @@ namespace PnP.Core.Auth.Test.Base
         public async Task TestCredentialManagerConstructorNoDI_NullCredentialManagerName()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:TenantId");
+            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:ClientId");
+            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:TenantId");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,
@@ -96,8 +96,8 @@ namespace PnP.Core.Auth.Test.Base
         public async Task TestCredentialManagerConstructorNoDI_NotValidCredentialManagerName()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:TenantId");
+            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:ClientId");
+            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:TenantId");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,
@@ -192,9 +192,9 @@ namespace PnP.Core.Auth.Test.Base
         private static CredentialManagerAuthenticationProvider PrepareCredentialManagerAuthenticationProvider()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:TenantId");
-            var credentialManagerName = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:CredentialManager:CredentialManagerName");
+            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:ClientId");
+            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:TenantId");
+            var credentialManagerName = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:CredentialManager:CredentialManagerName");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,
