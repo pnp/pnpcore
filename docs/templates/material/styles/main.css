@@ -253,35 +253,22 @@ article h4 {
 }
 
 .alert-info > h5 {
-  color: #1976d2;
-  border-bottom: 4px solid #1976d2;
+  color: #01579b;
+  border-bottom: 4px solid #01579b;
   background-color: #e3f2fd;
 }
 
 .alert-warning > h5 {
-  color: #f57f17;
-  border-bottom: 4px solid #f57f17;
+  color: #ff6f00;
+  border-bottom: 4px solid #ff6f00;
   background-color: #fff3e0;
 }
 
 .alert-danger > h5 {
-  color: #d32f2f;
-  border-bottom: 4px solid #d32f2f;
+  color: #b71c1c;
+  border-bottom: 4px solid #b71c1c;
   background-color: #ffebee;
 }
-
-/* CODE HIGHLIGHT */
-/* pre {
-  padding: 9.5px;
-  margin: 0 0 10px;
-  font-size: 13px;
-  word-break: break-all;
-  word-wrap: break-word;
-  background-color: #fffaef;
-  border-radius: 4px;
-  border: none;
-  box-shadow: var(--card-box-shadow);
-} */
 
 /* STYLE FOR IMAGES */
 
@@ -302,7 +289,6 @@ article h4 {
   box-shadow: var(--card-box-shadow);
   max-width: 700px;
 }
-
 
 /* Customizations from material */
 
@@ -411,7 +397,6 @@ pre {
   color: #fff;
   padding-left: 40px;
 }
-
 
 #search .form-control::placeholder,
 #search .form-control::-webkit-input-placeholder,

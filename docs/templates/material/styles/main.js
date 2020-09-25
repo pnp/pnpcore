@@ -1,7 +1,7 @@
 // Use container fluid
-var containers = $(".container");
-containers.removeClass("container");
-containers.addClass("container-fluid");
+// var containers = $(".container");
+// containers.removeClass("container");
+// containers.addClass("container-fluid");
 
 WINDOW_CONTENTS = window.location.href.split('/')
 SELECTED_LANGUAGE = 'dotnet'
