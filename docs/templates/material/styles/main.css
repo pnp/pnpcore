@@ -405,6 +405,33 @@ pre {
   padding-top: 6px;
 }
 
+#search .form-control{
+  background-color:rgba(0,0,0,0.25);
+  border: 0;
+  color: #fff;
+  padding-left: 40px;
+}
+
+#search input::placeholder,
+#search input::-webkit-input-placeholder,
+#search input:-ms-input-placeholder,
+#search input:placeholder-shown { 
+  color: #fff;
+  opacity: 1; /* Firefox */
+} 
+
+#search .glyphicon-search{
+  position: absolute;
+  -webkit-transition: color .25s cubic-bezier(.1,.7,.1,1),opacity .25s;
+  transition: color .25s cubic-bezier(.1,.7,.1,1),opacity .25s;
+  font-size: 1.75rem;
+  cursor: pointer;
+  z-index: 2;
+  color: rgba(255,255,255,0.85);;
+  margin-top:15px;
+  margin-left:5px;
+}
+
 /* Original */ 
 .collapse.in,
 .collapsing {
