@@ -28,7 +28,7 @@ namespace Demo.WPF
             {
                 // Retrieving web with lists and masterpageurl loaded ==> SharePoint REST query
                 var web = await context.Web.GetAsync(w => w.Title, w => w.Description, w => w.MasterUrl);
-                this.TxtResults.Text = $"Title: {web.Title} Description: {web.Description} MasterPageUrl: {web.MasterUrl}";
+                this.txtResults.Text = $"Title: {web.Title} Description: {web.Description} MasterPageUrl: {web.MasterUrl}";
             }
         }
 
@@ -49,7 +49,7 @@ namespace Demo.WPF
                 {
                     sb.AppendLine($"Id: {list.Id} Title: {list.Title} Description: {list.Description}");
                 }
-                this.TxtResults.Text = sb.ToString();
+                this.txtResults.Text = sb.ToString();
             }
         }
 
@@ -68,7 +68,7 @@ namespace Demo.WPF
                 {
                     sb.AppendLine($"Id: {channel.Id} Name: {channel.DisplayName}");
                 }
-                this.TxtResults.Text = sb.ToString();
+                this.txtResults.Text = sb.ToString();
             }
         }
 

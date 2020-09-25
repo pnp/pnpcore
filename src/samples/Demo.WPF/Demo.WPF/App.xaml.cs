@@ -18,6 +18,10 @@ namespace Demo.WPF
 
         public IConfiguration Configuration { get; private set; }
 
+        /// <summary>
+        /// See https://marcominerva.wordpress.com/2019/03/06/using-net-core-3-0-dependency-injection-and-service-provider-with-wpf/ for the inspiration on this approach
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
         {
             var builder = new ConfigurationBuilder()

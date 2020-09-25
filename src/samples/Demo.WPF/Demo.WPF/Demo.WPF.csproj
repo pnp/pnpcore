@@ -10,11 +10,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.8" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj" />
-    <ProjectReference Include="..\..\..\sdk\PnP.Core\PnP.Core.csproj" />
+    <PackageReference Include="PnP.Core.Auth" Version="0.2.3-preview2" />
   </ItemGroup>
 
   <ItemGroup>

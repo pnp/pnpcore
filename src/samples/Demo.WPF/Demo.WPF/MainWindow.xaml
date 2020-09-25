@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Demo.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="PnP Core SDK demo" Height="450" Width="800" MinWidth="500" MinHeight="400">
     <Grid>
-        <Button x:Name="btnSite" Content="Site Information" HorizontalAlignment="Left" Height="34" Margin="50,25,0,0" VerticalAlignment="Top" Width="115" Click="btnSite_Click" />
-        <Button x:Name="btnList" Content="List Information" HorizontalAlignment="Left" Height="34" Margin="220,25,0,0" VerticalAlignment="Top" Width="114" Click="btnList_Click"/>
-        <Button x:Name="btnTeam" Content="Teams Information" HorizontalAlignment="Left" Height="34" Margin="382,25,0,0" VerticalAlignment="Top" Width="115" Click="btnTeam_Click"/>
-        <TextBlock x:Name="TxtResults" HorizontalAlignment="Left" Height="273" Margin="50,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="447" IsEnabled="False"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="btnSite" Content="Site Information" HorizontalAlignment="Left" Height="34" Margin="23,25,0,0" VerticalAlignment="Top" Width="115" Click="btnSite_Click" Grid.Column="1" Grid.Row="0"/>
+        <Button x:Name="btnList" Content="List Information" HorizontalAlignment="Left" Height="34" Margin="164,25,0,0" VerticalAlignment="Top" Width="114" Click="btnList_Click" Grid.Column="1" Grid.Row="0"/>
+        <Button x:Name="btnTeam" Content="Teams Information" HorizontalAlignment="Left" Height="34" Margin="304,25,0,0" VerticalAlignment="Top" Width="115" Click="btnTeam_Click" Grid.Column="1" Grid.Row="0"/>
+        <TextBox x:Name="txtResults" Margin="10,10,10,10" TextWrapping="Wrap" IsReadOnly="True" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Window>
