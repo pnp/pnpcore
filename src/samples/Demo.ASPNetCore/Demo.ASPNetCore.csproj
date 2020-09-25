@@ -15,16 +15,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.8" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.18.0" />
+    <PackageReference Include="PnP.Core.Auth" Version="0.2.2-preview2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="PnP.Core">
-      <HintPath>..\..\sdk\PnP.Core\bin\Debug\netstandard2.0\PnP.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="PnP.Core.Auth">
-      <HintPath>..\..\sdk\PnP.Core.Auth\bin\Debug\netstandard2.0\PnP.Core.Auth.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
