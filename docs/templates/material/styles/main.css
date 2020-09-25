@@ -426,6 +426,19 @@ code {
   background-color: #f1f2f3;
 }
 
+.hljs-comment, .hljs-meta {
+  color:unset;
+}
+.hljs-comment{
+  color: #2e7d32;
+}
+.hljs-meta {
+  color: #64ba69;
+}
+.hljs-meta-string{
+  color: #ff5131;
+}
+
 /* Original */ 
 .collapse.in,
 .collapsing {
