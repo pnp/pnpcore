@@ -36,7 +36,7 @@ namespace PnP.Core.Auth
             {
                 ClientId = clientId,
                 TenantId = tenantId,
-                Interactive = new PnPCoreInteractiveOptions
+                Interactive = new PnPCoreAuthenticationInteractiveOptions
                 {
                     RedirectUri = redirectUri
                 }

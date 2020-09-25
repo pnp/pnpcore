@@ -133,8 +133,8 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var username = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteUsernamePassword:UsernamePassword:Username");
-            var password = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteUsernamePassword:UsernamePassword:Password");
+            var username = configuration.GetValue<string>("PnPCore:Credentials:Configurations:usernamePassword:UsernamePassword:Username");
+            var password = configuration.GetValue<string>("PnPCore:Credentials:Configurations:usernamePassword:UsernamePassword:Password");
 
             var provider = new UsernamePasswordAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -194,8 +194,8 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var username = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteUsernamePassword:UsernamePassword:Username");
-            var password = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteUsernamePassword:UsernamePassword:Password");
+            var username = configuration.GetValue<string>("PnPCore:Credentials:Configurations:usernamePassword:UsernamePassword:Username");
+            var password = configuration.GetValue<string>("PnPCore:Credentials:Configurations:usernamePassword:UsernamePassword:Password");
 
             var provider = new UsernamePasswordAuthenticationProvider(
                 AuthGlobals.DefaultClientId,

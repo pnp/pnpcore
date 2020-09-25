@@ -65,9 +65,9 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:X509Certificate:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:X509Certificate:StoreLocation");
-            var thumbprint = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:X509Certificate:Thumbprint");
+            var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreLocation");
+            var thumbprint = configuration.GetValue<string>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:Thumbprint");
 
             var provider = new X509CertificateAuthenticationProvider(
                 null,
@@ -87,8 +87,8 @@ namespace PnP.Core.Auth.Test.Base
         public async Task TestX509CertificateConstructorNoDI_NullThumbprint()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:X509Certificate:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:X509Certificate:StoreLocation");
+            var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreLocation");
 
             var provider = new X509CertificateAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -171,11 +171,11 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:TenantId");
-            var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:X509Certificate:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:X509Certificate:StoreLocation");
-            var thumbprint = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteX509Certificate:X509Certificate:Thumbprint");
+            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:x509Certificate:ClientId");
+            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:x509Certificate:TenantId");
+            var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreLocation");
+            var thumbprint = configuration.GetValue<string>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:Thumbprint");
 
             var provider = new X509CertificateAuthenticationProvider(
                 clientId,

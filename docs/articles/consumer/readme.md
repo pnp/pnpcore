@@ -74,20 +74,21 @@ And you will also need to provide the configuration in the `appsettings.json` fi
       "GraphAlwaysUseBeta": "false"
     },
     "Credentials": {
-      "DefaultConfiguration": "credentialmanager",
+      "DefaultConfiguration": "interactive",
       "Configurations": {
-        "credentialmanager": {
+        "interactive": {
           "ClientId": "{your_client_id}",
           "TenantId": "{your_tenant_id}",
-          "CredentialManager": {
-            "CredentialManagerName": "mycreds"
+          "Interactive": {
+            "RedirectUri": "http://localhost"
           }
         }
+      }
     },
     "Sites": {
       "SiteToWorkWith": {
         "SiteUrl": "https://contoso.sharepoint.com/sites/pnp",
-        "AuthenticationProviderName": "CredentialManagerAuthentication"
+        "AuthenticationProviderName": "interactive"
       },
     }
   }
@@ -103,7 +104,7 @@ You should provide the `ClientId` and `TenantId` for an application registered i
 
 If you don't want to register a custom app in your target Azure Active Directory, you can skip the `ClientId` and `TenantId` properties and the PnP Core SDK will rely on a multi-tenant application that will be registered on your tenant, upon admin consent.
 
-In the above example, you should also register in the Windows Credential Manager a set of valid credentials (under Windows Credentials -> Generic Credentials) to access the target environment you want to play with.
+In the above example, the authentication will rely on the `InteractiveAuthenticationProvider` (defined in the PnP.Core.Auth nuget package) so that you will simply need to authenticate with a set of valid credentials for your target tenant.
 
 If you like to configure the .Net Core console app in code, without relying on the `appsettings.json` file, you can also use the following syntax:
 
@@ -127,27 +128,27 @@ var host = Host.CreateDefaultBuilder()
   });
   services.AddPnPCoreAuthentication(
       options => {
-          // Configure an Authentication Provider relying on Windows Credential Manager
-          options.Credentials.Configurations.Add("credentialmanager",
+          // Configure an Authentication Provider relying on the interactive authentication
+          options.Credentials.Configurations.Add("interactive",
               new PnPCoreAuthenticationCredentialConfigurationOptions
               {
                   ClientId = "{your_client_id}",
                   TenantId = "{your_tenant_id}",
-                  CredentialManager = new PnPCoreAuthenticationCredentialManagerOptions
+                  Interactive = new PnPCoreAuthenticationInteractiveOptions
                   {
-                      CredentialManagerName = "mycreds"
+                      RedirectUri = "http://localhost"
                   }
               });
 
           // Configure the default authentication provider
-          options.Credentials.DefaultConfiguration = "credentialmanager";
+          options.Credentials.DefaultConfiguration = "interactive";
 
           // Map the site defined in AddPnPCore with the 
           // Authentication Provider configured in this action
           options.Sites.Add("SiteToWorkWith",
               new PnPCoreAuthenticationSiteOptions
               {
-                  AuthenticationProviderName = "credentialmanager"
+                  AuthenticationProviderName = "interactive"
               });
     }
   );
@@ -158,7 +159,7 @@ var host = Host.CreateDefaultBuilder()
 .Build();
 ```
 
-In advanced scenarios, you can consider using low level services registration, like in the following code excerpt. Typically you would also include configuration and logging as well.
+In advanced scenarios, you can consider using code-based configuration of registered services, like in the following code excerpt. Typically you would also include logging as well.
 
 ```csharp
 var host = Host.CreateDefaultBuilder()
@@ -171,11 +172,11 @@ var host = Host.CreateDefaultBuilder()
   var customSettings = new CustomSettings();
   hostingContext.Configuration.Bind("CustomSettings", customSettings);
 
-  // Create an instance of the Authentication Provider that uses Credential Manager
-  var authenticationProvider = new CredentialManagerAuthenticationProvider(
+  // Create an instance of the Interactive Authentication Provider
+  var authenticationProvider = new InteractiveAuthenticationProvider(
                   customSettings.ClientId,
                   customSettings.TenantId,
-                  customSettings.CredentialManager);                
+                  customSettings.RedirectUri);
 
   // Add the PnP Core SDK services
   services
@@ -227,7 +228,7 @@ In above sample the following configuration file is used: `appsettings.demo.json
     "ClientId": "{client_id}",
     "TenantId": "{tenant_id}",
     "DemoSiteUrl": "https://contoso.sharepoint.com/sites/pnp",
-    "CredentialManager": "{credential_manager_item_name}",
+    "RedirectUri": "http://localhost"
   },
   "Logging": {
     "LogLevel": {

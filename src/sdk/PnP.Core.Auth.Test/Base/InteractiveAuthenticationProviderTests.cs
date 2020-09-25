@@ -62,9 +62,9 @@ namespace PnP.Core.Auth.Test.Base
         public async Task TestInteractiveConstructorNoDI_NullClientId_NullTenantId()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteInteractive:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteInteractive:TenantId");
-            var redirectUri = configuration.GetValue<Uri>("PnPCore:Credentials:Configurations:TestSiteInteractive:Interactive:RedirectUri");
+            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:ClientId");
+            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:TenantId");
+            var redirectUri = configuration.GetValue<Uri>("PnPCore:Credentials:Configurations:interactive:Interactive:RedirectUri");
 
             var provider = new InteractiveAuthenticationProvider(
                 clientId,
@@ -82,8 +82,8 @@ namespace PnP.Core.Auth.Test.Base
         public async Task TestInteractiveConstructorNoDI_NullRedirectUri()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteInteractive:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteInteractive:TenantId");
+            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:ClientId");
+            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:TenantId");
 
             var provider = new InteractiveAuthenticationProvider(
                 clientId,
@@ -166,9 +166,9 @@ namespace PnP.Core.Auth.Test.Base
         private static InteractiveAuthenticationProvider PrepareInteractiveAuthenticationProvider()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteInteractive:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteInteractive:TenantId");
-            var redirectUri = configuration.GetValue<Uri>("PnPCore:Credentials:Configurations:TestSiteInteractive:Interactive:RedirectUri");
+            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:ClientId");
+            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:TenantId");
+            var redirectUri = configuration.GetValue<Uri>("PnPCore:Credentials:Configurations:interactive:Interactive:RedirectUri");
 
             var provider = new InteractiveAuthenticationProvider(
                 clientId,
