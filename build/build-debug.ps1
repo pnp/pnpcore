@@ -26,8 +26,8 @@ dotnet pack ..\src\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj --no-build /p:PackageV
 Write-Host "Packinging PnP.Core Blazor .Net Standard 2.0 version $version"
 dotnet pack ..\src\sdk\PnP.Core\PnP.Core.csproj --no-build --configuration Blazor /p:PackageVersion=$blazorVersion
 
-Write-Host "Writing $version to git"
-Set-Content -Path .\version.debug.increment -Value $versionIncrement
+#Write-Host "Writing $version to git"
+#Set-Content -Path .\version.debug.increment -Value $versionIncrement
 
 #Push to the repo
 # git add .\version.debug.increment
