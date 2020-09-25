@@ -412,10 +412,14 @@ pre {
   padding-left: 40px;
 }
 
-#search input::placeholder,
-#search input::-webkit-input-placeholder,
-#search input:-ms-input-placeholder,
-#search input:placeholder-shown { 
+
+#search .form-control::placeholder,
+#search .form-control::-webkit-input-placeholder,
+#search .form-control::-ms-input-placeholder,
+#search .form-control::-moz-placeholder,
+#search .form-control:placeholder-shown { 
+  -webkit-transition:color .25s cubic-bezier(.1,.7,.1,1);
+  transition:color .25s cubic-bezier(.1,.7,.1,1);
   color: #fff;
   opacity: 1; /* Firefox */
 } 
@@ -430,6 +434,11 @@ pre {
   color: rgba(255,255,255,0.85);;
   margin-top:15px;
   margin-left:5px;
+}
+
+code {
+  color: #c7254e;
+  background-color: #f1f2f3;
 }
 
 /* Original */ 
