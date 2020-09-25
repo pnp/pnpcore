@@ -92,6 +92,20 @@ namespace PnP.Core.Auth.Test.Base
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public async Task TestCredentialManagerConstructorNoDI_NotValidCredentialManagerName()
+        {
+            var configuration = TestCommon.GetConfigurationSettings();
+            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:ClientId");
+            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:TestSiteCredentialManager:TenantId");
+
+            var provider = new CredentialManagerAuthenticationProvider(
+                clientId,
+                tenantId,
+                "invalid");
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task TestCredentialManagerAuthenticateRequestAsyncNoResource()
         {
