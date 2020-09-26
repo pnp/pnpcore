@@ -13,6 +13,11 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         private readonly PnPCoreAuthenticationOptions authenticationOptions;
         private readonly IAuthenticationProviderFactory authenticationProviderFactory;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="authenticationOptions"><see cref="PnPCoreAuthenticationOptions"/> authentication options</param>
+        /// <param name="authenticationProviderFactory">Authentication factory</param>
         public AuthenticationProvidersOptionsConfigurator(IOptions<PnPCoreAuthenticationOptions> authenticationOptions,
             IAuthenticationProviderFactory authenticationProviderFactory)
         {
@@ -20,6 +25,10 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
             this.authenticationProviderFactory = authenticationProviderFactory;
         }
 
+        /// <summary>
+        /// Process the <see cref="PnPCoreOptions"/> options
+        /// </summary>
+        /// <param name="options"></param>
         public void Configure(PnPCoreOptions options)
         {
             if (options == null)

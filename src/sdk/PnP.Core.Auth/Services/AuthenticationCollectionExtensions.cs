@@ -25,6 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Adds all the <see cref="IAuthenticationProvider"/> flavors to the collection of loaded services
         /// </summary>
         /// <param name="collection">Collection of loaded services</param>
+        /// <param name="options"><see cref="PnPCoreAuthenticationOptions"/> options to use for configuration</param>
         /// <returns>Collection of loaded services</returns>
         public static IServiceCollection AddPnPCoreAuthentication(this IServiceCollection collection, Action<PnPCoreAuthenticationOptions> options)
         {

@@ -33,7 +33,9 @@ namespace PnP.Core.Auth
             {
                 encrypted = X509CertificateUtility.Encrypt(encoded, true, certificate);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception)
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 return string.Empty;
             }
@@ -65,7 +67,9 @@ namespace PnP.Core.Auth
             {
                 decrypted = X509CertificateUtility.Decrypt(encrypted, true, certificate);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception)
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 return string.Empty;
             }

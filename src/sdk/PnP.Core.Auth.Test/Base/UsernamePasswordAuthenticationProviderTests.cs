@@ -48,7 +48,9 @@ namespace PnP.Core.Auth.Test.Base
         }
 
         [TestMethod]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestUsernamePasswordConstructorNoDI()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var provider = new UsernamePasswordAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -64,7 +66,9 @@ namespace PnP.Core.Auth.Test.Base
         }
 
         [TestMethod]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestUsernamePasswordConstructorNoDI_NullClientId_NullTenantId()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var provider = new UsernamePasswordAuthenticationProvider(
                 null,
@@ -81,7 +85,9 @@ namespace PnP.Core.Auth.Test.Base
 
         [TestMethod]
         [ExpectedException(typeof(ConfigurationErrorsException))]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestUsernamePasswordConstructorNoDI_NullUsername()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var provider = new UsernamePasswordAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -92,7 +98,9 @@ namespace PnP.Core.Auth.Test.Base
 
         [TestMethod]
         [ExpectedException(typeof(ConfigurationErrorsException))]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestUsernamePasswordConstructorNoDI_NullPassword()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var provider = new UsernamePasswordAuthenticationProvider(
                 AuthGlobals.DefaultClientId,

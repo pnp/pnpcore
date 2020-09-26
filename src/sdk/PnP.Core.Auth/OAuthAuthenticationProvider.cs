@@ -39,7 +39,7 @@ namespace PnP.Core.Auth
         /// <summary>
         /// Local copy of the logger class
         /// </summary>
-        protected readonly ILogger Log;
+        internal readonly ILogger Log;
 
         /// <summary>
         /// Public constructor for any OAuth Authentication privider

@@ -179,7 +179,7 @@ namespace PnP.Core.Auth
             string password = null;
             foreach (var line in output)
             {
-                if (line.Trim().StartsWith(@"""acct"""))
+                if (line.Trim().StartsWith(@"""acct""", StringComparison.InvariantCultureIgnoreCase))
                 {
                     var acctline = line.Trim().Split(new string[] { "<blob>=" }, StringSplitOptions.None);
                     username = acctline[1].Trim(new char[] { '"' });

@@ -49,7 +49,9 @@ namespace PnP.Core.Auth.Test.Base
         }
 
         [TestMethod]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestX509CertificateConstructorNoDI()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var provider = PrepareX509CertificateAuthenticationProvider();
 
@@ -60,7 +62,9 @@ namespace PnP.Core.Auth.Test.Base
         }
 
         [TestMethod]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestX509CertificateConstructorNoDI_NullClientId_NullTenantId()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
@@ -84,7 +88,9 @@ namespace PnP.Core.Auth.Test.Base
 
         [TestMethod]
         [ExpectedException(typeof(ConfigurationErrorsException))]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestX509CertificateConstructorNoDI_NullThumbprint()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
             var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreName");

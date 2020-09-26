@@ -46,7 +46,9 @@ namespace PnP.Core.Auth.Test.Base
         }
 
         [TestMethod]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestCredentialManagerConstructorNoDI()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
@@ -59,7 +61,9 @@ namespace PnP.Core.Auth.Test.Base
         }
 
         [TestMethod]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestCredentialManagerConstructorNoDI_NullClientId_NullTenantId()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
@@ -79,7 +83,9 @@ namespace PnP.Core.Auth.Test.Base
 
         [TestMethod]
         [ExpectedException(typeof(ConfigurationErrorsException))]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestCredentialManagerConstructorNoDI_NullCredentialManagerName()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
             var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:ClientId");
@@ -93,7 +99,9 @@ namespace PnP.Core.Auth.Test.Base
 
         [TestMethod]
         [ExpectedException(typeof(ConfigurationErrorsException))]
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TestCredentialManagerConstructorNoDI_NotValidCredentialManagerName()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
             var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:ClientId");
