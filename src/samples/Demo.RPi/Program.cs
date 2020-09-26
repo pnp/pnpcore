@@ -2,15 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PnP.Core;
-using PnP.Core.Model;
-using PnP.Core.Model.SharePoint;
-using PnP.Core.Model.Teams;
-using PnP.Core.QueryModel;
+using PnP.Core.Auth;
 using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Security;
 using System.Threading.Tasks;
@@ -25,7 +19,7 @@ namespace Demo.RPi
 
            // Ensure you do consent to the PnP App when using another tenant (update below url to match your aad domain): 
            // https://login.microsoftonline.com/a830edad9050849523e17050400.onmicrosoft.com/adminconsent?client_id=31359c7f-bd7e-475c-86db-fdb8c937548e&state=12345&redirect_uri=https://www.pnp.com
-           .UseEnvironment("officedevpnp")
+           //.UseEnvironment("officedevpnp")
            .ConfigureLogging((hostingContext, logging) =>
            {
                logging.AddConsole();
@@ -35,27 +29,24 @@ namespace Demo.RPi
                var customSettings = new CustomSettings();
                hostingContext.Configuration.Bind("CustomSettings", customSettings);
 
-               services
-               .AddAuthenticationProviderFactory(options =>
-               {
-                   options.Configurations.Add(new OAuthUsernamePasswordConfiguration
-                   {
-                       Name = "UsernameAndPasswordAuthentication",
-                       Username = customSettings.UserPrincipalName,
-                       Password = StringToSecureString(customSettings.Password),
-                   });
+              //Create an instance of the Authentication Provider that uses Credential Manager
+              var authenticationProvider = new UsernamePasswordAuthenticationProvider(
+                              customSettings.ClientId,
+                              customSettings.TenantId,
+                              customSettings.UserPrincipalName,
+                              StringToSecureString(customSettings.Password));
 
-                   options.DefaultConfiguration = "CredentialManagerAuthentication";
-               })
-               .AddPnPContextFactory(options =>
+               services.AddPnPCore(options =>
                {
-                   options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
-                   {
-                       Name = "DemoSite",
-                       SiteUrl = new Uri(customSettings.DemoSiteUrl),
-                       AuthenticationProviderName = "UsernameAndPasswordAuthentication",
-                   });
-               });
+                   options.DefaultAuthenticationProvider = authenticationProvider;
+
+                   options.Sites.Add("DemoSite",
+                       new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
+                       {
+                           SiteUrl = customSettings.DemoSiteUrl,
+                           AuthenticationProvider = authenticationProvider
+                       });
+               });               
            })
            // Let the builder know we're running in a console
            .UseConsoleLifetime()
@@ -78,15 +69,13 @@ namespace Demo.RPi
                     // Interactive GET samples
 
                     // Retrieving web with lists and masterpageurl loaded ==> SharePoint REST query
-                    var web = await context.Web.GetAsync(p => p.Title, p => p.Lists, p => p.MasterPageUrl);
+                    var web = await context.Web.GetAsync(p => p.Title, p => p.Lists, p => p.MasterUrl);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===Web (REST)===");
                     Console.WriteLine($"Title: {web.Title}");
                     Console.WriteLine($"# Lists: {web.Lists.Count()}");
-                    Console.ResetColor();
-
-                    
+                    Console.ResetColor();                    
                 }
                 #endregion
             }

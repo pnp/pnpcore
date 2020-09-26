@@ -26,14 +26,43 @@ specifically the ARM-32 bit edition.
 
 ## Running the app
 
-In this folder is a demo application that connects to SharePoint grabs,
-the site title and a count of the number of lists using the Username/Password authentication.
+### Register and configure an AAD app
+
+In order for the user to authenticate on the App, A new app registration should be created on Azure Portal
+
+- Go to [Azure Active Directory Portal](https://aad.portal.azure.com)
+
+- In App registrations, click __New registration__
+
+- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected
+
+- Under __Implicit grant__ section, check __ID tokens__
+
+- Go to __API permissions__ section , click __Add a permission__
+-- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __Directory.Read.All__
+-- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __User.Read__
+
+- Click __Grand admin consent for {tenant}__
+
+- Change __Default client type__ to __Treat application as public client__ and hit Save 
+
+- From __Overview__,
+-- copy the value of __Directory (tenant) ID__
+-- copy the value of __Application (client) ID__
+
+### Configure your application
+
+Update **appsettings.json** with the connection details to a demo SharePoint site:
+
+- Configure the Tenant ID of your app as the value of `CustomSettings:TenantId` in appsettings.json setting
+- Configure the Client ID of your app as the value of `CustomSettings:ClientId` in appsettings.json setting
+- Configure the user name to use as the value of `CustomSettings:UserPrincipalName` in appsettings.json setting
+- Configure the password to use as the value of `CustomSettings:Password` in appsettings.json setting
+- Configure the URL of a target Microsoft SharePoint Online modern team site collection as the value of `CustomSettings:DemoSiteUrl` in appsettings.json setting
 
 To get running:
 
 - Either download this to the Raspberry Pi device directly or FTP the files over from a desktop PC.
-- Rename the **appsettings.officedevpnp.sample** file to **appsettings.officedevpnp.json**
-- Update **appsettings.officedevpnp.json** with the connection details to a demo SharePoint site
 - Run in Terminal **dotnet build**
 - Run in Terminal **dotnet run**
 

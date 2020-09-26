@@ -47,8 +47,7 @@ namespace Consumer
                                 customSettings.RedirectUri);
 
                 // Add the PnP Core SDK services
-                services
-                .AddPnPCore(options => {
+                services.AddPnPCore(options => {
 
                     // You can explicitly configure all the settings, or you can
                     // simply use the default values
