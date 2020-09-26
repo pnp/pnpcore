@@ -83,11 +83,19 @@
                     <h1 id="pnp-core-sdk---preview">PnP Core SDK - preview</h1>
 
 <h2 id="intro">Intro</h2>
-<p>The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. At the moment the supported workloads are SharePoint Online and Microsoft Teams. Currently the library is an <strong>early preview</strong> in which the focus is on coding the basics, so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 workloads such as Mail, Planner, Yammer, etc.</p>
+<p>The PnP Core SDK is an SDK designed to work for Microsoft 365. Its aim is to provide a unified object model to work with the Microsoft 365 ecosystem. At the moment the supported workloads are SharePoint Online and Microsoft Teams. Currently the library is a <strong>preview</strong> in which the focus is on coding the basics, so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>The PnP Core SDK is in preview: it's targeting developers that want to either test or extend it. It's <strong>not</strong> yet ready to be used in production scenarios, mainly because it still lacks most of the model definitions, and some functional requirements are still under development.</p>
+<p>The PnP Core SDK is in preview: it's targeting developers that want to either test or extend it. It's <strong>not</strong> yet ready to be used in production scenarios, mainly because it still lacks some of the model definitions.</p>
 </div>
+<h2 id="roadmap">Roadmap</h2>
+<p>This is a community effort, hence we cannot guarantee below roadmap but rest assure, we're working hard to stick to plan 😀 If you want to join our team and help realize this, then checkout the <a href="https://pnp.github.io/pnpcore/#how-can-you-help">How can I help</a> section in our docs.</p>
+<ul>
+<li>Preview 3: September 2020</li>
+<li>Beta 1: October 2020</li>
+<li>Beta 2: November 2020</li>
+<li>V1: December 2020</li>
+</ul>
 <h2 id="getting-started-using-this-library">Getting started using this library</h2>
 <p>Using the PnP Core SDK is simple, check out the <a href="consumer/readme.html">getting started</a> guide.</p>
 <h2 id="where-is-the-code">Where is the code?</h2>
@@ -97,12 +105,12 @@
 <ul>
 <li><strong>Extending the model</strong> via the creation of new model, complex type and collection classes. Check out the <a href="contributor/readme.html">Extending the model</a> article to learn how to do this.</li>
 <li><strong>Adding &quot;functionalities&quot;</strong> to the model: after extending the model, the typical CRUD functionality is there, but for some parts of the model it makes sense to add functionalities by adding methods on top of the model classes. Check out the <a href="contributor/readme.html">Extending the model</a> article to learn how to do this.</li>
-<li><strong>Writing sample programs</strong> that use this library: since this is a .Net Standard library, it doesn't target Windows only, but also macOS and Linux, as well as  mobile OS's like Android and iOS. With the rise of <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a>, this library can also be used to build .Net based apps running in the browser. Samples can be added in the <code>src\samples</code> folder.</li>
+<li><strong>Writing sample programs</strong> that use this library: since this is a .Net Standard library, it doesn't target Windows only, but also macOS and Linux, as well as  mobile OS's like Android and iOS. With the rise of <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a>, this library can also be used to build .Net based apps running in the browser. Samples can be added in the <strong>src\samples</strong> folder.</li>
 <li><strong>Working on documentation</strong>: good documentation is critical to help developers work with this library, either by using it or by extending it. See the <a href="contributor/writing%20documentation.html">Writing documentation</a> article for more details.</li>
 </ul>
 <h3 id="best-practices-when-contributing">Best practices when contributing</h3>
 <ul>
-<li>This is all new and we're here to help, don't hesitate to reach out with your questions and feedback</li>
+<li>This is all new and we're here to help, don't hesitate to reach out with your questions and feedback via <a href="https://github.com/pnp/pnpcore/issues">our issue list</a></li>
 <li>To avoid overlapping efforts in the startup phase please let us know if you plan to take on a particular chunk of work (e.g. let's say you want to extend the model to support Planner)</li>
 <li>If you are extending the model and you need to update the model base logic then please reach out, we want to align and agree on those changes first as these need to fit into our model approach</li>
 </ul>
