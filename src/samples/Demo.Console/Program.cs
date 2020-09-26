@@ -2,17 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PnP.Core;
 using PnP.Core.Auth;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
-using PnP.Core.Services.Builder.Configuration;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Security;
 using System.Threading.Tasks;
@@ -27,7 +23,7 @@ namespace Consumer
 
             // Ensure you do consent to the PnP App when using another tenant (update below url to match your aad domain): 
             // https://login.microsoftonline.com/a830edad9050849523e17050400.onmicrosoft.com/adminconsent?client_id=31359c7f-bd7e-475c-86db-fdb8c937548e&state=12345&redirect_uri=https://www.pnp.com
-            .UseEnvironment("officedevpnp")
+            //.UseEnvironment("officedevpnp")
             .ConfigureLogging((hostingContext, logging) =>
             {
                 logging.AddEventSourceLogger();
@@ -156,6 +152,8 @@ namespace Consumer
                 #region Linq query support!
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
+                    context.GraphFirst = false;
+
                     // We can retrieve the whole list of lists 
                     // and their items in the context web
                     var listsQuery = (from l in context.Web.Lists
