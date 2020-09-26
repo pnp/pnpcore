@@ -8,7 +8,7 @@ namespace PnP.Core.Services
     internal class MicrosoftGraphRetryHandler: RetryHandlerBase
     {
         #region Construction
-        public MicrosoftGraphRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings.Value)
+        public MicrosoftGraphRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings?.Value)
         {
             Configure();
         }
