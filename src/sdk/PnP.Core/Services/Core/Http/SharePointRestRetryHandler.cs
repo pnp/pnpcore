@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using System.Net.Http;
 
 namespace PnP.Core.Services
 {
@@ -9,12 +8,7 @@ namespace PnP.Core.Services
     internal class SharePointRestRetryHandler: RetryHandlerBase
     {
         #region Construction
-        public SharePointRestRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings.Value)
-        {
-            Configure();
-        }
-
-        public SharePointRestRetryHandler(HttpMessageHandler innerHandler, IOptions<PnPGlobalSettingsOptions> globalSettings) : base(innerHandler, globalSettings?.Value)
+        public SharePointRestRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings?.Value)
         {
             Configure();
         }

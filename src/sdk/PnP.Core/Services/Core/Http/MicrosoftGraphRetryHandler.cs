@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using System.Net.Http;
 
 namespace PnP.Core.Services
 {
@@ -10,11 +9,6 @@ namespace PnP.Core.Services
     {
         #region Construction
         public MicrosoftGraphRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings.Value)
-        {
-            Configure();
-        }
-
-        public MicrosoftGraphRetryHandler(HttpMessageHandler innerHandler, IOptions<PnPGlobalSettingsOptions> globalSettings) : base(innerHandler, globalSettings?.Value)
         {
             Configure();
         }

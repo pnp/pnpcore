@@ -24,11 +24,6 @@ namespace PnP.Core.Services
         {
             GlobalSettings = globalSettings;
         }
-        
-        public RetryHandlerBase(HttpMessageHandler innerHandler, PnPGlobalSettingsOptions globalSettings) : base(innerHandler)
-        {
-            GlobalSettings = globalSettings;
-        }
         #endregion
 
         internal PnPGlobalSettingsOptions GlobalSettings { get; private set; }
