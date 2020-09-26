@@ -35,3 +35,5 @@ In order for the user to authenticate on the App, A new app registration should 
 
   Hit F5 in Visual studio to execute the Blazor app.
   When trying to access one of the sections, the applications prompts you for signing in
+
+  ![preview image of the running app](preview.png)
