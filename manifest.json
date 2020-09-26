@@ -14,6 +14,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Microsoft.Extensions.DependencyInjection.AuthenticationCollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Microsoft.Extensions.DependencyInjection.AuthenticationCollectionExtensions.html",
+          "hash": "u//euUb4MoMovT8x7PgrXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.yml",
       "output": {
         ".html": {
@@ -30,7 +42,319 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.Extensions.DependencyInjection.html",
-          "hash": "gLpAQnvPp2KSC7ac4OhB+g=="
+          "hash": "HavTbRJo6OwI+F4Ibhrw1A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html",
+          "hash": "ZtFBQ2rd0jlguB7ncZiURQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html",
+          "hash": "yc2CpzlW84KoPuq5Cn/T8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.InteractiveAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.InteractiveAuthenticationProvider.html",
+          "hash": "f1VNbpnw6F4mjis1W4paJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.OAuthAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.OAuthAuthenticationProvider.html",
+          "hash": "Y63tyes4FGmjOihiJ0b1Iw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html",
+          "hash": "5VLfZ/2RYwD6GWsTrCuqzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.AuthenticationProviderFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.AuthenticationProviderFactory.html",
+          "hash": "qCejUttNjrFSpIRv0G49Sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.AuthenticationProvidersOptionsConfigurator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.AuthenticationProvidersOptionsConfigurator.html",
+          "hash": "C8Iuq0u0EOQpP2T/ojt3QA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationAspNetCoreOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationAspNetCoreOptions.html",
+          "hash": "KCtGzIUMNM45ffgXXLSVhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html",
+          "hash": "DSXWvwHzjdWa7dMx3O/MzA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialManagerOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialManagerOptions.html",
+          "hash": "CUJ5mLH+v46D8HpvbUiq8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialsConfigurationsOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialsConfigurationsOptions.html",
+          "hash": "ZvxRNvCi9vyhLnKme7C5KQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialsOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialsOptions.html",
+          "hash": "pr/sPmVFfAli+WOEiS+Vjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.html",
+          "hash": "RRWL1NOxdpjzr0IqN1pHCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html",
+          "hash": "007z1xxbzHO8wHAQ3qiFfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.html",
+          "hash": "waQm1Hq6ozlvLceAxQ2dZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationSiteOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationSiteOptions.html",
+          "hash": "K4VjxTNYe5vKSw3DLywfCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationSitesOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationSitesOptions.html",
+          "hash": "qXzQXtvdOkmfQjtxNHpjRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationUsernamePasswordOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationUsernamePasswordOptions.html",
+          "hash": "DorcnqLdGlKBYtgOepVXQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationX509CertificateOptions.html",
+          "hash": "ctciiQ/g+pgLxUYGdzCjQg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.html",
+          "hash": "HtbMQ6t/Kf7uGlO3bhTRyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.IAuthenticationProviderFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.IAuthenticationProviderFactory.html",
+          "hash": "WoZ3xVZv//pPS2F4GODrew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.IAuthenticationProviderOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.IAuthenticationProviderOptions.html",
+          "hash": "6EjR0IKjdrPTb/OgTuCsmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.Services.html",
+          "hash": "c7OklWdL+wYk7PulrUt56w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html",
+          "hash": "5ElJyjs4Eso5z75XTNkhIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.X509CertificateAuthenticationProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html",
+          "hash": "AE7K5mEg3cz7KJB6aad23Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Auth.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Auth.html",
+          "hash": "X9lUAX9yOGUyQBGuTtADNQ=="
         }
       },
       "is_incremental": false,
@@ -2682,7 +3006,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "u5/6OlKjHKlJKaLwttY7OA=="
+          "hash": "4spEtjLlrOPL+C4Jnu6Cqg=="
         }
       },
       "is_incremental": false,
@@ -3014,7 +3338,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 221,
+          "total_file_count": 248,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

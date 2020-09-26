@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace Microsoft.Extensions.DependencyInjection
+    <title>Namespace PnP.Core.Auth
    | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace Microsoft.Extensions.DependencyInjection
+    <meta name="title" content="Namespace PnP.Core.Auth
    | PnP Core SDK ">
     <meta name="generator" content="docfx 2.51.0.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
@@ -78,10 +78,10 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Microsoft.Extensions.DependencyInjection">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Auth">
                   <div class="contribution-panel mobile-hide pull-right">
                   </div>
-                      <h1 id="Microsoft_Extensions_DependencyInjection" data-uid="Microsoft.Extensions.DependencyInjection">Namespace Microsoft.Extensions.DependencyInjection
+                      <h1 id="PnP_Core_Auth" data-uid="PnP.Core.Auth">Namespace PnP.Core.Auth
   </h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
@@ -91,15 +91,50 @@
     <table>
       <tr>
         <td>
-          <p><a class="xref" href="Microsoft.Extensions.DependencyInjection.AuthenticationCollectionExtensions.html">AuthenticationCollectionExtensions</a></p>
-          <p><p>Extension methods to assist with setting up the <a class="xref" href="PnP.Core.Services.IAuthenticationProvider.html">IAuthenticationProvider</a> infrastructure</p>
+          <p><a class="xref" href="PnP.Core.Auth.AspNetCoreAuthenticationProvider.html">AspNetCoreAuthenticationProvider</a></p>
+          <p><p>Authentication Provider that uses the context of an ASP.NET Core web application</p>
 </p>
         </td>
       </tr>
       <tr>
         <td>
-          <p><a class="xref" href="Microsoft.Extensions.DependencyInjection.PnPCoreServiceCollectionExtensions.html">PnPCoreServiceCollectionExtensions</a></p>
-          <p><p>Extension methods for setting up PnP Core SDK services in an <see cref="!:IServiceCollection"></see>.</p>
+          <p><a class="xref" href="PnP.Core.Auth.CredentialManagerAuthenticationProvider.html">CredentialManagerAuthenticationProvider</a></p>
+          <p><p>Authentication Provider that uses a set of credentials stored in the Credentials Manager of Windows</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Auth.InteractiveAuthenticationProvider.html">InteractiveAuthenticationProvider</a></p>
+          <p><p>Authentication Provider that uses an interactive flow prompting the user</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html">OAuthAuthenticationProvider</a></p>
+          <p><p>Base authentication provider class</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html">OnBehalfOfAuthenticationProvider</a></p>
+          <p><p>Authentication Provider based on the OnBehalfOf flow</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html">UsernamePasswordAuthenticationProvider</a></p>
+          <p><p>Authentication Provider that uses a credential flow</p>
+</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p><a class="xref" href="PnP.Core.Auth.X509CertificateAuthenticationProvider.html">X509CertificateAuthenticationProvider</a></p>
+          <p><p>Authentication Provider based on the X.509 Certificate</p>
 </p>
         </td>
       </tr>
