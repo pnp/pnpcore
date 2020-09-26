@@ -8,6 +8,9 @@
     href: consumer/readme.md
   - name: Configuring authentication
     href: consumer/configuring%20authentication.md
+    items:
+    - name: Custom Authentication Providers
+      href: consumer/custom-authentication-provider.md
   - name: Get data using paging
     href: consumer/using%20paging.md
   - name: Configuring the PnP Core SDK
