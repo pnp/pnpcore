@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!--[if IE]><![endif]-->
-<html>
+<html lang="en">
   
   <head>
     <meta charset="utf-8">
@@ -9,18 +9,18 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="PnP Core SDK documentation | PnP Core SDK ">
     <meta name="generator" content="docfx 2.51.0.0">
-    
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
     <link rel="stylesheet" href="styles/docfx.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
     <meta property="docfx:navrel" content="toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
     <meta property="docfx:rel" content="">
     <meta property="docfx:newtab" content="true">
-  </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -35,19 +35,19 @@
               </button>
               
               <a class="navbar-brand" href="index.html">
-                <img id="logo" class="svg" src="logo.svg" alt="">
+                <img id="logo" class="svg" src="images/logo.svg" alt="">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
               <form class="navbar-form navbar-right" role="search" id="search">
                 <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
                   <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
                 </div>
               </form>
             </div>
           </div>
-        </nav>
-        
+        </nav>        
         <div class="subnav navbar navbar-default">
           <div class="container hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
@@ -70,7 +70,10 @@
         <div class="article row grid">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="pnp-core-sdk-documentation">PnP Core SDK documentation</h1>
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/readme.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="pnp-core-sdk-documentation">PnP Core SDK documentation</h1>
 
 <p>This folder contains the PnP Core SDK documentation. The documentation system is based upon <a href="https://dotnet.github.io/docfx/">DocFX</a> and combines inline code comments (the so called triple slash comments) with articles written in MD format. The resulting generated documentation is hosted on <a href="https://pnp.github.io/pnpcore">https://pnp.github.io/pnpcore</a>.</p>
 <h2 id="documentation-generation">Documentation generation</h2>
@@ -84,16 +87,15 @@
 <h5>Note</h5>
 <p>Install the latest <a href="https://dotnet.github.io/docfx/">DocFX</a> release to get <code>docfx.exe</code></p>
 </div>
+<p>To run anywhere add docfx directory to your environment variables in windows</p>
 <h3 id="references">References</h3>
 <p>Setting up the gh-pages branch as an orphaned branch was done using the steps outlined in <a href="https://www.gep13.co.uk/blog/how-to-create-gh-pages-branch">https://www.gep13.co.uk/blog/how-to-create-gh-pages-branch</a>. To actually work with both &quot;code&quot; and &quot;docs&quot; branches it's easiest to <code>git clone</code> the repo twice, once for coding and once for publishing documents to the <code>gh-pages</code> branch.</p>
 <h2 id="contributing-to-the-documentation">Contributing to the documentation</h2>
 <p>We strongly encourage documentation contributions which can be done via improving API documentation (via the triple slash comments in the source code) or creating/updating articles in the <code>articles</code> folder.</p>
+<h2 id="martial-ui">Martial UI</h2>
+<p>Credit to Oscar Vásquez <a href="https://ovasquez.github.io/docfx-material/">https://ovasquez.github.io/docfx-material/</a> for awesome work on the skin.</p>
 </article>
           </div>
-          <div class="contribution-panel mobile-hide">
-              <a href="https://github.com/pnp/pnpcore/blob/dev/docs/readme.md/#L1" title="Improve this Doc" class="fab btn-warning pull-right"><i class="glyphicon glyphicon-pencil"></i></a>
-          </div>
-          
           <div class="hidden-sm col-md-2" role="complementary">
             <div class="sideaffix">
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
@@ -101,6 +103,7 @@
             </div>
           </div>        </div>
       </div>
+      <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
       
       <footer>
         <div class="grad-bottom"></div>
@@ -109,7 +112,7 @@
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            PnP Core SDK
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
             
           </div>
         </div>
