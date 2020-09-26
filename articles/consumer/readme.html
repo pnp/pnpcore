@@ -174,6 +174,7 @@ Each night these preview packages are refreshed, so you can always upgrade to th
 <li>SharePoint Online: <code>TermStore.ReadWrite.All</code></li>
 <li>SharePoint Online: <code>User.ReadWrite.All</code></li>
 </ul>
+<p>As the Redirect URI, in Web platform enter <strong>http://localhost</strong>.</p>
 <p>If you don't want to register a custom app in your target Azure Active Directory, you can skip the <code>ClientId</code> and <code>TenantId</code> properties and the PnP Core SDK will rely on a multi-tenant application that will be registered on your tenant, upon admin consent.</p>
 <p>In the above example, the authentication will rely on the <code>InteractiveAuthenticationProvider</code> (defined in the PnP.Core.Auth nuget package) so that you will simply need to authenticate with a set of valid credentials for your target tenant.</p>
 <p>If you like to configure the .Net Core console app in code, without relying on the <code>appsettings.json</code> file, you can also use the following syntax:</p>
