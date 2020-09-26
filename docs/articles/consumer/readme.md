@@ -96,11 +96,14 @@ And you will also need to provide the configuration in the `appsettings.json` fi
 ```
 
 You should provide the `ClientId` and `TenantId` for an application registered in Azure Active Directory and configured with proper permissions, accordingly to your needs. For example, you could register an app in Azure Active Directory with delegated permission for:
+
 - Microsoft Graph: `Group.ReadWrite.All`
 - Microsoft Graph: `User.ReadWrite.All`
 - SharePoint Online: `AllSites.FullControl`
 - SharePoint Online: `TermStore.ReadWrite.All`
 - SharePoint Online: `User.ReadWrite.All`
+
+As the Redirect URI, in Web platform enter __http://localhost__.
 
 If you don't want to register a custom app in your target Azure Active Directory, you can skip the `ClientId` and `TenantId` properties and the PnP Core SDK will rely on a multi-tenant application that will be registered on your tenant, upon admin consent.
 

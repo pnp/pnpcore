@@ -12,7 +12,7 @@ In order for the user to authenticate on the App, A new app registration should 
 
 - In App registrations, click __New registration__
 
-- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected As the Redirect URI, in Web platform enter __https://localhost:44349/authentication/login-callback__ (The port may vary according to your Visual Studio)
+- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected. As the Redirect URI, in Web platform enter __https://localhost:44349/authentication/login-callback__ (The port may vary according to your Visual Studio)
 
 - Under __Implicit grant__ section, check __Access tokens__ and __ID tokens__
 

@@ -12,7 +12,7 @@ In order for the user to authenticate on the App, A new app registration should 
 
 - In App registrations, click __New registration__
 
-- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected As the Redirect URI, in Web platform enter __https://localhost:44336/signin-oidc__ (The port may vary according to your Visual Studio)
+- Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected. As the Redirect URI, in Web platform enter __https://localhost:44336/signin-oidc__ (The port may vary according to your Visual Studio)
 
 - Under __Implicit grant__ section, check __ID tokens__
 
