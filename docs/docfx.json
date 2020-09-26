@@ -6,6 +6,11 @@
           "files": [ "**.csproj" ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
           "src": "../src/sdk/PnP.Core"
+        },
+        {
+          "files": [ "**.csproj" ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "../src/sdk/PnP.Core.Auth"
         }
       ],
       "dest": "api",
