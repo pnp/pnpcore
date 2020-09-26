@@ -15,9 +15,6 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
 
-#if DEBUG
-[assembly: InternalsVisibleTo("PnP.Core.Test")]
-#endif
 namespace PnP.Core.Model
 {
 

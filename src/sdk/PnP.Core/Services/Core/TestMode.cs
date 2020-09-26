@@ -1,8 +1,5 @@
 ﻿#if DEBUG
 
-using System.Runtime.CompilerServices;
-
-[assembly:InternalsVisibleTo("PnP.Core.Test")]
 namespace PnP.Core.Services
 {
     /// <summary>
