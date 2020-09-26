@@ -82,13 +82,13 @@
                   </div>
                     <h1 id="creating-a-custom-authentication-provider-for-pnpcore">Creating a custom Authentication Provider for PnP.Core</h1>
 
-<p>There might be implementations where the default provided authentication providers do offer the needed features (e.g. when authenticating Blazor WebAssembly applications). If that's the case you always have the option to write your own authentication provider and use that when working with the PnP Core SDK.</p>
+<p>There might be implementations where the default provided authentication providers do not offer the needed features (e.g. when authenticating Blazor WebAssembly applications). If that's the case, you always have the option to write your own authentication provider and use that when working with the PnP Core SDK.</p>
 <h2 id="creating-a-custom-authentication-provider">Creating a custom authentication provider</h2>
-<p>When using Blazor WebAssembly applications we want to ask the Blazor framework to deliver us an access token for the logged on user and then use that access token in the PnP Core SDK. There's no default authentication provider in PnP.Core.Auth, so let's roll our own. Writing an authentication provider comes down to implementing the <code>IAuthenticationProvider</code> interface in the <code>PnP.Core.Services</code> namespace (in the <code>PnP.Core</code> assembly). This interface requires 3 methods to be implemented:</p>
+<p>When using Blazor WebAssembly applications we want to ask the Blazor framework to deliver us an access token for the logged on user and then use that access token in the PnP Core SDK. There's no default authentication provider in PnP.Core.Auth for that, so let's roll our own. Writing an authentication provider comes down to implementing the <code>IAuthenticationProvider</code> interface defined in the <code>PnP.Core.Services</code> namespace (in the <code>PnP.Core</code> assembly). This interface requires 3 methods to be implemented:</p>
 <ul>
 <li><code>Task AuthenticateRequestAsync(Uri resource, HttpRequestMessage request)</code> : authenticates a web requests by adding an access token to it</li>
 <li><code>Task&lt;string&gt; GetAccessTokenAsync(Uri resource, String[] scopes)</code> : gets an access token for the requested resource and scope</li>
-<li><code>Task&lt;string&gt; GetAccessTokenAsync(Uri resource)</code> : gets an access token for the requested resource</li>
+<li><code>Task&lt;string&gt; GetAccessTokenAsync(Uri resource)</code> : gets an access token for the requested resource and its default scopes</li>
 </ul>
 <p>Below sample shows a custom authentication provider that can be used in Blazor WebAssembly applications:</p>
 <pre><code class="lang-csharp">using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -204,7 +204,7 @@ namespace Demo.Blazor
 }
 </code></pre>
 <h2 id="using-a-custom-authentication-provider">Using a custom authentication provider</h2>
-<p>Once you've added the custom authentication provider to your project you need to let the PnP Core SDK know. This is done by passing an authentication provider instance to the <code>CreateAsync</code> or <code>Create</code> <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContextFactory.html#methods">methods of the <code>IPnPContextFactory</code> you're using</a>.</p>
+<p>Once you've added the custom authentication provider to your project, you need to configure it in the pipeline of PnP Core SDK. This is done by passing an authentication provider instance to the <code>CreateAsync</code> or <code>Create</code> <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContextFactory.html#methods">methods of the <code>IPnPContextFactory</code> you're using</a>.</p>
 <pre><code class="lang-csharp">using(var context = await pnpContextFactory.CreateAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/siteA&quot;), myCustomAuthProvider))
 {
     // use context to read/update Microsoft 365 data
