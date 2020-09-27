@@ -160,11 +160,11 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid or missing value for ClientSecret in ClientSecretAuthenticationProvider configuration.
+        ///   Looks up a localized string similar to Invalid or missing value for ClientSecret or Certificate in OnBehalfOfAuthenticationProvider configuration.
         /// </summary>
-        internal static string OnBehalfOfAuthenticationProvider_InvalidClientSecret {
+        internal static string OnBehalfOfAuthenticationProvider_InvalidClientSecretOrCertificate {
             get {
-                return ResourceManager.GetString("OnBehalfOfAuthenticationProvider_InvalidClientSecret", resourceCulture);
+                return ResourceManager.GetString("OnBehalfOfAuthenticationProvider_InvalidClientSecretOrCertificate", resourceCulture);
             }
         }
         
@@ -183,6 +183,15 @@ namespace PnP.Core.Auth {
         internal static string OnBehalfOfAuthenticationProvider_LogInit {
             get {
                 return ResourceManager.GetString("OnBehalfOfAuthenticationProvider_LogInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing value for function UserTokenProvider in OnBehalfOfAuthenticationProvider.
+        /// </summary>
+        internal static string OnBehalfOfAuthenticationProvider_MissingUserTokenProvider {
+            get {
+                return ResourceManager.GetString("OnBehalfOfAuthenticationProvider_MissingUserTokenProvider", resourceCulture);
             }
         }
         
