@@ -17,7 +17,7 @@ namespace PnP.Core.Auth
     public sealed class X509CertificateAuthenticationProvider : OAuthAuthenticationProvider
     {
         /// <summary>
-        /// The X.509 Certificate to use for authentication
+        /// The X.509 Certificate to use for app authentication
         /// </summary>
         public X509Certificate2 Certificate { get; set; }
 
