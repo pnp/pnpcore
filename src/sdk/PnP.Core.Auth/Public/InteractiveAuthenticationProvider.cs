@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace PnP.Core.Auth
 {
     /// <summary>
-    /// Authentication Provider that uses an interactive flow prompting the user
+    /// Authentication Provider that uses an interactive flow prompting the user for credentials
     /// </summary>
     public class InteractiveAuthenticationProvider : OAuthAuthenticationProvider
     {

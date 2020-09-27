@@ -12,8 +12,11 @@ using System.Threading.Tasks;
 namespace PnP.Core.Auth
 {
     /// <summary>
-    /// Authentication Provider that uses a credential flow
+    /// Authentication Provider that uses a Resource Owner Password Credentials (ROCP) credential flow
     /// </summary>
+    /// <remarks>
+    /// You can find further details about ROPC here: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth-ropc
+    /// </remarks>
     public sealed class UsernamePasswordAuthenticationProvider : OAuthAuthenticationProvider
     {
         /// <summary>
