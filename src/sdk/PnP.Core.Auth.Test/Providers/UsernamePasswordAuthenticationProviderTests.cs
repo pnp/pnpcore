@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Auth.Test.Base
+namespace PnP.Core.Auth.Test.Providers
 {
     /// <summary>
     /// Tests that focus on validating the UsernamePasswordAuthenticationProvider
@@ -16,8 +16,7 @@ namespace PnP.Core.Auth.Test.Base
     [TestClass]
     public class UsernamePasswordAuthenticationProviderTests
     {
-        private static Uri graphResource = new Uri("https://graph.microsoft.com");
-        private static string graphMeRequest = "https://graph.microsoft.com/v1.0/me";
+        private static string usernamePasswordConfigurationPath = "usernamePassword";
 
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
@@ -132,7 +131,7 @@ namespace PnP.Core.Auth.Test.Base
                 "FakeUsername",
                 "FakePassword".ToSecureString());
 
-            await provider.AuthenticateRequestAsync(graphResource, null);
+            await provider.AuthenticateRequestAsync(TestGlobals.GraphResource, null);
         }
 
         [TestMethod]
@@ -141,8 +140,8 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var username = configuration.GetValue<string>("PnPCore:Credentials:Configurations:usernamePassword:UsernamePassword:Username");
-            var password = configuration.GetValue<string>("PnPCore:Credentials:Configurations:usernamePassword:UsernamePassword:Password");
+            var username = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Username");
+            var password = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Password");
 
             var provider = new UsernamePasswordAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -150,8 +149,8 @@ namespace PnP.Core.Auth.Test.Base
                 username,
                 password.ToSecureString());
 
-            var request = new HttpRequestMessage(HttpMethod.Get, graphMeRequest);
-            await provider.AuthenticateRequestAsync(graphResource, request);
+            var request = new HttpRequestMessage(HttpMethod.Get, TestGlobals.GraphMeRequest);
+            await provider.AuthenticateRequestAsync(TestGlobals.GraphResource, request);
 
             Assert.IsNotNull(request.Headers.Authorization);
             Assert.AreEqual(request.Headers.Authorization.Scheme.ToLower(), "bearer");
@@ -193,7 +192,7 @@ namespace PnP.Core.Auth.Test.Base
                 "FakeUsername",
                 "FakePassword".ToSecureString());
 
-            await provider.GetAccessTokenAsync(graphResource, null);
+            await provider.GetAccessTokenAsync(TestGlobals.GraphResource, null);
         }
 
         [TestMethod]
@@ -202,8 +201,8 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var username = configuration.GetValue<string>("PnPCore:Credentials:Configurations:usernamePassword:UsernamePassword:Username");
-            var password = configuration.GetValue<string>("PnPCore:Credentials:Configurations:usernamePassword:UsernamePassword:Password");
+            var username = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Username");
+            var password = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Password");
 
             var provider = new UsernamePasswordAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -211,7 +210,7 @@ namespace PnP.Core.Auth.Test.Base
                 username,
                 password.ToSecureString());
 
-            var accessToken = await provider.GetAccessTokenAsync(graphResource);
+            var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource);
 
             Assert.IsNotNull(accessToken);
             Assert.IsTrue(accessToken.Length > 0);

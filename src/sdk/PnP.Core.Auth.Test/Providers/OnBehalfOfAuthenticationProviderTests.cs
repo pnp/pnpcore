@@ -4,7 +4,7 @@ using PnP.Core.Model;
 using PnP.Core.Services;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Auth.Test.Base
+namespace PnP.Core.Auth.Test.Providers
 {
     /// <summary>
     /// Tests that focus on validating the OnBehalfOfAuthenticationProvider
@@ -12,6 +12,8 @@ namespace PnP.Core.Auth.Test.Base
     [TestClass]
     public class OnBehalfOfAuthenticationProviderTests
     {
+        private static string onBehalfOfConfigurationPath = "onBehalfOf";
+
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {

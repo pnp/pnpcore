@@ -6,7 +6,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Auth.Test.Base
+namespace PnP.Core.Auth.Test.Providers
 {
     /// <summary>
     /// Tests that focus on validating the CredentialManagerAuthenticationProvider
@@ -14,8 +14,7 @@ namespace PnP.Core.Auth.Test.Base
     [TestClass]
     public class CredentialManagerAuthenticationProviderTests
     {
-        private static Uri graphResource = new Uri("https://graph.microsoft.com");
-        private static string graphMeRequest = "https://graph.microsoft.com/v1.0/me";
+        private static string credentialManagerConfigurationPath = "credentialManager";
 
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
@@ -68,7 +67,7 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var credentialManagerName = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:CredentialManager:CredentialManagerName");
+            var credentialManagerName = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:CredentialManager:CredentialManagerName");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 null,
@@ -88,8 +87,8 @@ namespace PnP.Core.Auth.Test.Base
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:TenantId");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:TenantId");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,
@@ -104,8 +103,8 @@ namespace PnP.Core.Auth.Test.Base
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:TenantId");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:TenantId");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,
@@ -132,7 +131,7 @@ namespace PnP.Core.Auth.Test.Base
 
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
-            await provider.AuthenticateRequestAsync(graphResource, null);
+            await provider.AuthenticateRequestAsync(TestGlobals.GraphResource, null);
         }
 
         [TestMethod]
@@ -142,8 +141,8 @@ namespace PnP.Core.Auth.Test.Base
 
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, graphMeRequest);
-            await provider.AuthenticateRequestAsync(graphResource, request);
+            var request = new HttpRequestMessage(HttpMethod.Get, TestGlobals.GraphMeRequest);
+            await provider.AuthenticateRequestAsync(TestGlobals.GraphResource, request);
 
             Assert.IsNotNull(request.Headers.Authorization);
             Assert.AreEqual(request.Headers.Authorization.Scheme.ToLower(), "bearer");
@@ -178,7 +177,7 @@ namespace PnP.Core.Auth.Test.Base
 
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
-            var accessToken = await provider.GetAccessTokenAsync(graphResource, null);
+            var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource, null);
 
             Assert.IsNotNull(accessToken);
             Assert.IsTrue(accessToken.Length > 0);
@@ -191,7 +190,7 @@ namespace PnP.Core.Auth.Test.Base
 
             var provider = PrepareCredentialManagerAuthenticationProvider();
 
-            var accessToken = await provider.GetAccessTokenAsync(graphResource);
+            var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource);
 
             Assert.IsNotNull(accessToken);
             Assert.IsTrue(accessToken.Length > 0);
@@ -200,9 +199,9 @@ namespace PnP.Core.Auth.Test.Base
         private static CredentialManagerAuthenticationProvider PrepareCredentialManagerAuthenticationProvider()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:TenantId");
-            var credentialManagerName = configuration.GetValue<string>("PnPCore:Credentials:Configurations:credentialManager:CredentialManager:CredentialManagerName");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:TenantId");
+            var credentialManagerName = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:CredentialManager:CredentialManagerName");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,
