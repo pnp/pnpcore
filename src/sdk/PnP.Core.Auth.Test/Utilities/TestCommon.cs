@@ -90,7 +90,7 @@ namespace PnP.Core.Auth.Test.Utilities
                 testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
             }
 
-            return await BuildContextFactory().CreateAsync(configurationName).ConfigureAwait(false);
+            return await factory.CreateAsync(configurationName).ConfigureAwait(false);
         }
 
         public PnPContext GetContext(Guid groupId, int id = 0,
