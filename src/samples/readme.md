@@ -11,4 +11,4 @@ Demo.Blazor | Sample Blazor WASM application that prototypes how the PnP Core SD
 Demo.WPF | Sample WPF windows application showing how dependency injection and the PnP Core SDK can be used in WPF/XAML apps | Interactive login (`InteractiveAuthenticationProvider`) 
 Demo.RPi | Sample application running on [dotNet](https://dotnet.microsoft.com/download/dotnet-core/3.1) Core on the Raspberry Pi | Username password login (`UsernamePasswordAuthenticationProvider`)
 
-Checkout the **readme.md** file from each application to learn more.
+Checkout the **readme.md** file from each sample to learn more.
