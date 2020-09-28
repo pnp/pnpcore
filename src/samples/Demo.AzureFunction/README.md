@@ -4,7 +4,7 @@ This solution demonstrates how to build a simple backend API in the form of an H
  - A GetSiteDocuments() function that returns the list of documents in the Shared Documents library of the configured site.
   it uses an App-Only context authenticated with a self signed certificate
 
-> [!Note]
+> **Note**
 > this sample was created with Visual Studio 2019 (v16.7.3) and has been tested with a Windows Azure Function v3.
 >
 
@@ -12,7 +12,7 @@ This solution demonstrates how to build a simple backend API in the form of an H
 
 ### Setup
 
-> [!Note]
+> **Note**
 > For the quickstart setup, you will need to have a recent version (> 3.24) of PnP PowerShell installed on your machine.
 >
 
@@ -62,7 +62,7 @@ The settings above are mostly necessary for authentication.
 | CertificateThumbPrint     | The Thumbprint of the certificate. Used by the PnP Core authentication provider.
 | WEBSITE_LOAD_CERTIFICATES | The Thumbprint of the certificate. Indicates the Azure Function runtime to load the certificate from its registered certificates.
 
-> [!Note]
+> **Note**
 > For more information about configuring authentication, please visit https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions
 >
 
