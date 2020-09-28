@@ -95,7 +95,7 @@ The easiest way to register an application in Azure Active Directory for app-onl
 $app = Initialize-PnPPowerShellAuthentication -ApplicationName "PnP.Core.SDK.Consumer" -Tenant contoso.onmicrosoft.com -OutPath c:\temp -CertificatePassword (ConvertTo-SecureString -String "password" -AsPlainText -Force) -Scopes "MSGraph.Group.ReadWrite.All","MSGraph.User.ReadWrite.All","SPO.Sites.FullControl.All","SPO.TermStore.ReadWrite.All","SPO.User.ReadWrite.All" -Store CurrentUser
 ```
 
-The above command will register for you in Azure Active Directory an app with name `PnP.Core.SDK.Consumer`, with a self-signed certificate that will be also saved on your filesystem under the `c:\temp` folder, with a certificate password value of `password` (you should provide your own strong password, indeed). Remember to replace `contoso.onmicrosoft.com` with your Azure AD tenant name, which typically is `company.onmicrosoft.com`. The permissions granted to the app will be:
+The above command will register for you in Azure Active Directory an app with name `PnP.Core.SDK.Consumer`, with a self-signed certificate that will be also saved on your filesystem under the `c:\temp` folder (remember to create the folder or to provide the path of an already existing folder), with a certificate password value of `password` (you should provide your own strong password, indeed). Remember to replace `contoso.onmicrosoft.com` with your Azure AD tenant name, which typically is `company.onmicrosoft.com`. The permissions granted to the app will be:
 
    - SharePoint -> Application Permissions -> Sites -> Sites.FullControl.All
    - SharePoint -> Application Permissions -> TermStore -> TermStore.ReadWrite.All
@@ -103,7 +103,7 @@ The above command will register for you in Azure Active Directory an app with na
    - Microsoft Graph -> Application Permissions -> User -> User.ReadWrite.All
    - Microsoft Graph -> Application Permissions -> Group -> Group.ReadWrite.All
 
-Executing the command you will first have to authenticate against the target tenant. Then you will see a message like the following one:
+Executing the command you will first have to authenticate against the target tenant, providing the credentials of a Global Tenant Admin. Then you will see a message like the following one:
 
 ```text
 Waiting 60 seconds to launch consent flow in a browser window. This wait is required to make sure that Azure AD is able to initialize all required artifacts.........
