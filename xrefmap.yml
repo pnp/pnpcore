@@ -407,12 +407,24 @@ references:
   fullName.vb: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
   nameWithType: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
   nameWithType.vb: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,SecureString)
-  name: OnBehalfOfAuthenticationProvider(String, String, SecureString)
-  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_SecureString_
-  commentId: M:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,SecureString)
-  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(System.String, System.String, SecureString)
-  nameWithType: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(String, String, SecureString)
+- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,SecureString,Func{System.String})
+  name: OnBehalfOfAuthenticationProvider(String, String, SecureString, Func<String>)
+  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_SecureString_Func_System_String__
+  commentId: M:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,SecureString,Func{System.String})
+  name.vb: OnBehalfOfAuthenticationProvider(String, String, SecureString, Func(Of String))
+  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(System.String, System.String, SecureString, Func<System.String>)
+  fullName.vb: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(System.String, System.String, SecureString, Func(Of System.String))
+  nameWithType: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(String, String, SecureString, Func<String>)
+  nameWithType.vb: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(String, String, SecureString, Func(Of String))
+- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,StoreName,StoreLocation,System.String,Func{System.String})
+  name: OnBehalfOfAuthenticationProvider(String, String, StoreName, StoreLocation, String, Func<String>)
+  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_System_String_System_String_StoreName_StoreLocation_System_String_Func_System_String__
+  commentId: M:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor(System.String,System.String,StoreName,StoreLocation,System.String,Func{System.String})
+  name.vb: OnBehalfOfAuthenticationProvider(String, String, StoreName, StoreLocation, String, Func(Of String))
+  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(System.String, System.String, StoreName, StoreLocation, System.String, Func<System.String>)
+  fullName.vb: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(System.String, System.String, StoreName, StoreLocation, System.String, Func(Of System.String))
+  nameWithType: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(String, String, StoreName, StoreLocation, String, Func<String>)
+  nameWithType.vb: OnBehalfOfAuthenticationProvider.OnBehalfOfAuthenticationProvider(String, String, StoreName, StoreLocation, String, Func(Of String))
 - uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.#ctor*
   name: OnBehalfOfAuthenticationProvider
   href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider__ctor_
@@ -433,6 +445,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.AuthenticateRequestAsync
   nameWithType: OnBehalfOfAuthenticationProvider.AuthenticateRequestAsync
+- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate
+  name: Certificate
+  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider_Certificate
+  commentId: P:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate
+  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate
+  nameWithType: OnBehalfOfAuthenticationProvider.Certificate
+- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate*
+  name: Certificate
+  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider_Certificate_
+  commentId: Overload:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate
+  isSpec: "True"
+  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.Certificate
+  nameWithType: OnBehalfOfAuthenticationProvider.Certificate
 - uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.ClientSecret
   name: ClientSecret
   href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider_ClientSecret
@@ -468,6 +493,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.GetAccessTokenAsync
   nameWithType: OnBehalfOfAuthenticationProvider.GetAccessTokenAsync
+- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider
+  name: UserTokenProvider
+  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UserTokenProvider
+  commentId: P:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider
+  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider
+  nameWithType: OnBehalfOfAuthenticationProvider.UserTokenProvider
+- uid: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider*
+  name: UserTokenProvider
+  href: api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html#PnP_Core_Auth_OnBehalfOfAuthenticationProvider_UserTokenProvider_
+  commentId: Overload:PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider
+  isSpec: "True"
+  fullName: PnP.Core.Auth.OnBehalfOfAuthenticationProvider.UserTokenProvider
+  nameWithType: OnBehalfOfAuthenticationProvider.UserTokenProvider
 - uid: PnP.Core.Auth.Services
   name: PnP.Core.Auth.Services
   href: api/PnP.Core.Auth.Services.html
@@ -774,6 +812,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.ClientSecret
   nameWithType: PnPCoreAuthenticationOnBehalfOfOptions.ClientSecret
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreLocation
+  name: StoreLocation
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_StoreLocation
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreLocation
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreLocation
+  nameWithType: PnPCoreAuthenticationOnBehalfOfOptions.StoreLocation
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreLocation*
+  name: StoreLocation
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_StoreLocation_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreLocation
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreLocation
+  nameWithType: PnPCoreAuthenticationOnBehalfOfOptions.StoreLocation
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreName
+  name: StoreName
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_StoreName
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreName
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreName
+  nameWithType: PnPCoreAuthenticationOnBehalfOfOptions.StoreName
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreName*
+  name: StoreName
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_StoreName_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreName
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.StoreName
+  nameWithType: PnPCoreAuthenticationOnBehalfOfOptions.StoreName
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.Thumbprint
+  name: Thumbprint
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_Thumbprint
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.Thumbprint
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.Thumbprint
+  nameWithType: PnPCoreAuthenticationOnBehalfOfOptions.Thumbprint
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.Thumbprint*
+  name: Thumbprint
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationOnBehalfOfOptions_Thumbprint_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.Thumbprint
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.Thumbprint
+  nameWithType: PnPCoreAuthenticationOnBehalfOfOptions.Thumbprint
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions
   name: PnPCoreAuthenticationOptions
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOptions.html

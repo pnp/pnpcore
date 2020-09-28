@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html",
-          "hash": "ZtFBQ2rd0jlguB7ncZiURQ=="
+          "hash": "txynqbH8ShdgiQgLpehZVw=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html",
-          "hash": "yc2CpzlW84KoPuq5Cn/T8w=="
+          "hash": "vzHzYCmnhMGAHTKB5iMMgA=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.InteractiveAuthenticationProvider.html",
-          "hash": "f1VNbpnw6F4mjis1W4paJQ=="
+          "hash": "p1PSTQXcQwkd8tzzIDWFlA=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html",
-          "hash": "5VLfZ/2RYwD6GWsTrCuqzA=="
+          "hash": "u1IdCTcDJuL+KgtVQ2L5mw=="
         }
       },
       "is_incremental": false,
@@ -198,7 +198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.html",
-          "hash": "RRWL1NOxdpjzr0IqN1pHCQ=="
+          "hash": "RgaJI5SUpkjE4bsDpWR6TA=="
         }
       },
       "is_incremental": false,
@@ -210,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationOnBehalfOfOptions.html",
-          "hash": "007z1xxbzHO8wHAQ3qiFfQ=="
+          "hash": "LhRSsb1rH8EcIRfdqhysNg=="
         }
       },
       "is_incremental": false,
@@ -258,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationUsernamePasswordOptions.html",
-          "hash": "DorcnqLdGlKBYtgOepVXQg=="
+          "hash": "fu78hFd8olkrxiwM+wxKyw=="
         }
       },
       "is_incremental": false,
@@ -330,7 +330,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.UsernamePasswordAuthenticationProvider.html",
-          "hash": "5ElJyjs4Eso5z75XTNkhIQ=="
+          "hash": "l2+ObnIFW3XfzJ7beyCwQg=="
         }
       },
       "is_incremental": false,
@@ -342,7 +342,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.X509CertificateAuthenticationProvider.html",
-          "hash": "AE7K5mEg3cz7KJB6aad23Q=="
+          "hash": "Zu9HtofQw/Mu05WQqrZndw=="
         }
       },
       "is_incremental": false,
@@ -354,7 +354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Auth.html",
-          "hash": "X9lUAX9yOGUyQBGuTtADNQ=="
+          "hash": "LyO6cmmxSiH4gqOMxBFGaQ=="
         }
       },
       "is_incremental": false,
@@ -3018,7 +3018,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/configuring authentication.html",
-          "hash": "XhSaE51IObFHoB1nl0tSsg=="
+          "hash": "RzX0l0AHUpugg8+Gsha4mA=="
         }
       },
       "is_incremental": false,
@@ -3067,6 +3067,18 @@
         ".html": {
           "relative_path": "articles/consumer/using paging.html",
           "hash": "lmTmK3X01qPlgh/okNSjpg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/contributor/configuring-for-auth-tests.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/contributor/configuring-for-auth-tests.html",
+          "hash": "bARLFJaHt5h+n/1A3Q991A=="
         }
       },
       "is_incremental": false,
@@ -3332,7 +3344,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 18,
+          "total_file_count": 19,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

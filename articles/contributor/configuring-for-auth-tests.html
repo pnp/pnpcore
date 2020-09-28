@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuring the environment to run PnP.Core.Auth tests | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuring the environment to run PnP.Core.Auth tests | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/contributor/configuring-for-auth-tests.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="configuring-the-environment-to-run-pnpcoreauth-tests">Configuring the environment to run PnP.Core.Auth tests</h1>
+
+<p>The PnP.Core.Auth library has some requirements in order to properly execute its automated tests (PnP.Core.Auth.Test).
+Specifically, you need to:</p>
+<ul>
+<li>Register in Azure Active Directory a generic test application for authentication tests</li>
+<li>Register in Azure Active Directory a frontend application for the OnBehalfOf authentication tests</li>
+<li>Register in Azure Active Directory a backend application for the OnBehalfOf authentication tests</li>
+<li>Enable the frontend application to consume the backend application</li>
+<li>Configure a set of credentials in the Windows Credential Manager</li>
+<li>Configure the appsettings.json file of the PnP.Core.Auth.Test project</li>
+</ul>
+<h2 id="register-in-aad-a-generic-test-application-for-authentication-tests">Register in AAD a generic test application for authentication tests</h2>
+<p>In order to execute both tests with application and delegated access tokens, you will need to register an application in AAD both as app-only and delegated.
+The easiest way to register an application in Azure Active Directory for app-only is to use the <a href="https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets?view=sharepoint-ps">PnP PowerShell</a> command lets. Specifically you can use the <a href="https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/initialize-pnppowershellauthentication?view=sharepoint-ps"><code>Initialize-PnPPowerShellAuthentication</code> command</a> with the following syntax:</p>
+<pre><code class="lang-powershell">$app = Initialize-PnPPowerShellAuthentication -ApplicationName &quot;PnP.Core.Test&quot; -Tenant contoso.onmicrosoft.com -OutPath c:\temp  -CertificatePassword (ConvertTo-SecureString -String &quot;password&quot; -AsPlainText -Force) -Scopes &quot;MSGraph.Group.ReadWrite.All&quot;,&quot;MSGraph.Directory.ReadWrite.All&quot;,&quot;SPO.Sites.FullControl.All&quot;,&quot;SPO.TermStore.ReadWrite.All&quot;,&quot;SPO.User.ReadWrite.All&quot; -Store CurrentUser
+</code></pre>
+<p>The above command will register for you in Azure Active Directory an app with name <code>PnP.Core.Test</code>, with a self-signed certificate that will be also saved on your filesystem under the <code>c:\temp</code> folder (remember to create the folder or to provide the path of an already existing folder), with a certificate password value of <code>password</code> (you should provide your own strong password, indeed). Remember to replace <code>contoso.onmicrosoft.com</code> with your Azure AD tenant name, which typically is <code>company.onmicrosoft.com</code>. The permissions granted to the app will be:</p>
+<ul>
+<li>SharePoint -&gt; Application Permissions -&gt; Sites -&gt; Sites.FullControl.All</li>
+<li>SharePoint -&gt; Application Permissions -&gt; TermStore -&gt; TermStore.ReadWrite.All</li>
+<li>SharePoint -&gt; Application Permissions -&gt; User -&gt; User.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Application Permissions -&gt; Group -&gt; Group.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Application Permissions -&gt; Directory -&gt; Directory.ReadWrite.All</li>
+</ul>
+<p>Executing the command you will first have to authenticate against the target tenant, providing the credentials of a Global Tenant Admin. Then you will see a message like the following one:</p>
+<pre><code class="lang-text">Waiting 60 seconds to launch consent flow in a browser window. This wait is required to make sure that Azure AD is able to initialize all required artifacts.........
+</code></pre>
+<p>Almost 60 seconds later, the command will prompt you for authentication again and to grant the selected permissions to the app you are registering. Once you have done that, in the <code>$app</code> variable you will find information about the just registered app. You can copy in your clipboard the <strong>Application ID</strong> (Client ID) executing the following command:</p>
+<pre><code class="lang-powershell">$app.AzureAppId | clip
+</code></pre>
+<p>And you can copy in your clipboard the thumbprint of the generated X.509 certificate executing the following command:</p>
+<pre><code class="lang-powershell">$app.'Certificate Thumbprint' | clip
+</code></pre>
+<p>Paste this copied values in a safe place, because you will need them soon.
+Now, configure the same application also for delegated access tokens following the below steps:</p>
+<ol>
+<li><p>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></p>
+</li>
+<li><p>Click on <strong>Azure Active Directory</strong> from the left navigation</p>
+</li>
+<li><p>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>Write the Client ID of the just created application in the search box</p>
+</li>
+<li><p>Select the application with name <code>PnP.Core.Test</code> in the list of results</p>
+</li>
+<li><p>Click on the <strong>API Permissions</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>Click on <strong>Add Permissions</strong> and add the following permissions to this application:</p>
+<ul>
+<li>SharePoint -&gt; Delegated Permissions -&gt; AllSites -&gt; AllSites.FullControl</li>
+<li>SharePoint -&gt; Delegated Permissions -&gt; TermStore -&gt; TermStore.ReadWrite.All</li>
+<li>SharePoint -&gt; Delegated Permissions -&gt; User -&gt; User.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; Group -&gt; Group.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; User -&gt; User.Read</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; Directory -&gt; Directory.ReadWrite.All</li>
+</ul>
+</li>
+</ol>
+<p>At the end, the overall list of permissions for the application will be the following one:</p>
+<ul>
+<li>SharePoint -&gt; Delegated Permissions -&gt; AllSites -&gt; AllSites.FullControl</li>
+<li>SharePoint -&gt; Delegated Permissions -&gt; TermStore -&gt; TermStore.ReadWrite.All</li>
+<li>SharePoint -&gt; Delegated Permissions -&gt; User -&gt; User.ReadWrite.All</li>
+<li>SharePoint -&gt; Application Permissions -&gt; Sites -&gt; Sites.FullControl.All</li>
+<li>SharePoint -&gt; Application Permissions -&gt; TermStore -&gt; TermStore.ReadWrite.All</li>
+<li>SharePoint -&gt; Application Permissions -&gt; User -&gt; User.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; Group -&gt; Group.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; User -&gt; User.Read</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; Directory -&gt; Directory.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Application Permissions -&gt; Group -&gt; Group.ReadWrite.All</li>
+<li>Microsoft Graph -&gt; Application Permissions -&gt; Directory -&gt; Directory.ReadWrite.All</li>
+</ul>
+<ol start="10">
+<li>Click on the <strong>Grant admin consent for</strong> button to consent to these permissions for the users in your organization</li>
+<li>Click on <strong>Authentication</strong> in the <strong>Manage</strong> left navigation group</li>
+<li>Change <strong>Default client type</strong> to <strong>Treat application as public client</strong> and hit <strong>Save</strong></li>
+<li>Click on <strong>Authentication</strong> and then click on <strong>Add a platform</strong>, choose <strong>Mobile and desktop applications</strong> and provide http://localhost as the <strong>Redirect URI</strong></li>
+</ol>
+<h2 id="register-in-aad-a-frontend-application-for-the-onbehalfof-authentication-tests">Register in AAD a frontend application for the OnBehalfOf authentication tests</h2>
+<p>You need to register an application that will be the frontend for the OnBehalfOf flow.
+Follow the below steps:</p>
+<ol>
+<li>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></li>
+<li>Click on <strong>Azure Active Directory</strong> from the left navigation</li>
+<li>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</li>
+<li>Click on <strong>New registration</strong></li>
+<li>Give the application a name (e.g. <code>PnP.Core.Test.OnBehalfOf.Frontend</code>) and click on <strong>Register</strong></li>
+<li>Copy the <strong>Application ID</strong> (Client ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</li>
+<li>Copy the <strong>Directory ID</strong> (Tenant ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</li>
+<li>Click on <strong>Authentication</strong> and then click on <strong>Add a platform</strong>, choose <strong>Mobile and desktop applications</strong> and provide http://localhost as the <strong>Redirect URI</strong></li>
+</ol>
+<h2 id="register-in-aad-a-backend-application-for-the-onbehalfof-authentication-tests">Register in AAD a backend application for the OnBehalfOf authentication tests</h2>
+<p>You need to register an application that will be the backend for the OnBehalfOf flow.
+Follow the below steps:</p>
+<ol>
+<li><p>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></p>
+</li>
+<li><p>Click on <strong>Azure Active Directory</strong> from the left navigation</p>
+</li>
+<li><p>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>Click on <strong>New registration</strong></p>
+</li>
+<li><p>Give the application a name (e.g. <code>PnP.Core.Test.OnBehalfOf.Backend</code>) and click on <strong>Register</strong></p>
+</li>
+<li><p>Copy the <strong>Application ID</strong> (Client ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</p>
+</li>
+<li><p>Copy the <strong>Directory ID</strong> (Tenant ID) from the <strong>Overview</strong> page, you'll need this GUID value later on</p>
+</li>
+<li><p>Click on <strong>API Permissions</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>Click on <strong>Add Permissions</strong> and add the permissions you want to give to this application. Below list is a recommendation, you can grant less permissions but that might result in some PnP Core SDK calls to fail due getting access denied errors.</p>
+<ul>
+<li>SharePoint -&gt; Delegated Permissions -&gt; AllSites -&gt; AllSites.Read</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; Sites -&gt; Sites.Read.All</li>
+<li>Microsoft Graph -&gt; Delegated Permissions -&gt; User -&gt; User.Read</li>
+</ul>
+</li>
+<li><p>Click on the <strong>Grant admin consent for</strong> button to consent to these permissions for the users in your organization</p>
+</li>
+<li><p>Click on the <strong>Expose an API</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>Configure the <strong>Application ID URI</strong> with a value like <code>api://pnp.core.test.onbehalfof.backend</code></p>
+</li>
+<li><p>Click on <strong>Add a scope</strong> and configure a new scope with name <code>Backend.Consume</code> with <code>Admins Only</code> consent. Provide a display name and a description for admins and click <strong>Add scope</strong>.</p>
+</li>
+<li><p>Click on the <strong>Manifest</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>In the JSON file representing the manifest of the application search for the <strong>knownClientApplications</strong> value. It is an array of IDs and assign to it an array made of a single item, which is the Client ID of the application with name <code>PnP.Core.Test.OnBehalfOf.Frontend</code>. Save the updated manifest</p>
+</li>
+<li><p>Click on <strong>Certificates &amp; secrets</strong> in the <strong>Manage</strong> left navigation group</p>
+</li>
+<li><p>Click on <strong>New client secret</strong> to create a new client secret for the backend application. Choose a name (for example <code>ClientSecret</code>) and a lifetime (for example 2 years).</p>
+</li>
+<li><p>Click on <strong>Add</strong> and store the Client Secret value in a safe place</p>
+</li>
+<li><p>Click on <strong>Upload certificate</strong>, browse your file system for the .CER file that you created when you registered the application with PowerShell (the path should <code>c:\temp</code>, unless you changed it, and the file should be <code>PnP.Core.Test.CER</code>)</p>
+</li>
+</ol>
+<h2 id="enable-the-frontend-application-to-consume-the-backend-application">Enable the frontend application to consume the backend application</h2>
+<p>Now, you need to go back to the application registered with name <code>PnP.Core.Test.OnBehalfOf.Frontend</code> and update its setting accordingly to the following steps:</p>
+<ol>
+<li>Navigate to <a href="https://aad.portal.azure.com/">https://aad.portal.azure.com/</a></li>
+<li>Click on <strong>Azure Active Directory</strong> from the left navigation</li>
+<li>Click on <strong>App registrations</strong> in the <strong>Manage</strong> left navigation group</li>
+<li>Write <code>PnP.Core.Test.OnBehalfOf.Frontend</code> in the search box</li>
+<li>Select the application with name <code>PnP.Core.Test.OnBehalfOf.Frontend</code> in the list of results</li>
+<li>Click on the <strong>API Permissions</strong> in the <strong>Manage</strong> left navigation group</li>
+<li>Click on <strong>Add Permissions</strong>, select <strong>My APIs</strong> and choose <code>PnP.Core.Test.OnBehalfOf.Backend</code></li>
+<li>Select the permission with name <code>Backend.Consume</code></li>
+<li>Click on the <strong>Grant admin consent for</strong> button to consent to these permissions for the users in your organization</li>
+</ol>
+<p>Now the frontend application is enabled to consume the backend application.</p>
+<h2 id="configure-a-set-of-credentials-in-the-windows-credential-manager">Configure a set of credentials in the Windows Credential Manager</h2>
+<p>In order to test the CredentialManagerAuthenticationProvider you need to register a set of credentials in the Windows Credential Manager, by following the below steps.</p>
+<ol>
+<li>Click on the <strong>Windows Start</strong> button in the taskbar and type <strong>credential manager</strong>.</li>
+<li>Click on the <strong>Credential Manager</strong> link.</li>
+<li>Go to <strong>Windows Credentials</strong> and click on <strong>Add a generic credential</strong>.</li>
+<li>Give the credential a name (e.g. Contoso), a user name (e.g. joe@contoso.onmicrosoft.com) and a password. Hit <strong>OK</strong> to save.</li>
+</ol>
+<p>Copy in a safe place the name you provided to the Credential Manager item, because you will reuse it shortly.</p>
+<h2 id="configure-the-appsettingsjson-file-of-the-pnpcoreauthtest-project">Configure the appsettings.json file of the PnP.Core.Auth.Test project</h2>
+<p>Copy the file <code>appsettings.copyme.json</code> defined in the root folder of the <code>PnP.Core.Auth.Test</code> project and paste it to create a new copy. Rename the copied file with a name like <code>appsettings.yourname.json</code>, where yourname should be replaced with something the identifies you (like your name or your company name).
+Now copy the file <code>env.sample</code> defined in the root folder of the <code>PnP.Core.Auth.Test</code> project and paste it to create a new copy. Rename the copied file with name <code>env.txt</code>.
+Open the file <code>env.txt</code> and write in its content the value that you choose for the <code>yourname</code> token in the name of the appsettings.json file. For example, if you renamed the settings file as <code>appsettings.contoso.json</code> you will have to write <code>contoso</code> as the unique content of the <code>env.txt</code> file.
+Open the <code>appsettings.yourname.json</code> file, it will look like the following one.</p>
+<pre><code class="lang-json">{
+  &quot;PnPCore&quot;: {
+    &quot;DisableTelemetry&quot;: &quot;true&quot;,
+    &quot;PnPContext&quot;: {
+      &quot;GraphFirst&quot;: &quot;true&quot;,
+      &quot;GraphCanUseBeta&quot;: &quot;true&quot;,
+      &quot;GraphAlwaysUseBeta&quot;: &quot;false&quot;
+    },
+    &quot;Credentials&quot;: {
+      &quot;DefaultConfiguration&quot;: &quot;credentialManager&quot;,
+      &quot;Configurations&quot;: {
+        &quot;usernamePassword&quot;: {
+          &quot;ClientId&quot;: &quot;{PnP.Core.Test-ClientId}&quot;,
+          &quot;TenantId&quot;: &quot;{TenantId}&quot;,
+          &quot;UsernamePassword&quot;: {
+            &quot;Username&quot;: &quot;{Test-Username}&quot;,
+            &quot;Password&quot;: &quot;{Test-Password}&quot;
+          }
+        },
+        &quot;credentialManager&quot;: {
+          &quot;ClientId&quot;: &quot;{PnP.Core.Test-ClientId}&quot;,
+          &quot;TenantId&quot;: &quot;{TenantId}&quot;,
+          &quot;CredentialManager&quot;: {
+            &quot;CredentialManagerName&quot;: &quot;{Credential-Manager}&quot;
+          }
+        },
+        &quot;onBehalfOf&quot;: {
+          &quot;ClientId&quot;: &quot;{PnP.Core.Test.OnBehalfOf.Backend-ClientID}&quot;,
+          &quot;TenantId&quot;: &quot;{TenantId}&quot;,
+          &quot;OnBehalfOf&quot;: {
+            &quot;StoreName&quot;: &quot;My&quot;,
+            &quot;StoreLocation&quot;: &quot;CurrentUser&quot;,
+            &quot;Thumbprint&quot;: &quot;{Backend-Certificate-Thumbprint}&quot;,
+            &quot;ClientSecret&quot;: &quot;{Backend-Client-Secret}&quot;
+          }
+        },
+        &quot;interactive&quot;: {
+          &quot;ClientId&quot;: &quot;{PnP.Core.Test-ClientId}&quot;,
+          &quot;TenantId&quot;: &quot;{TenantId}&quot;,
+          &quot;Interactive&quot;: {
+            &quot;RedirectUri&quot;: &quot;http://localhost&quot;
+          }
+        },
+        &quot;x509Certificate&quot;: {
+          &quot;ClientId&quot;: &quot;{PnP.Core.Test-ClientId}&quot;,
+          &quot;TenantId&quot;: &quot;{TenantId}&quot;,
+          &quot;X509Certificate&quot;: {
+            &quot;StoreName&quot;: &quot;My&quot;,
+            &quot;StoreLocation&quot;: &quot;CurrentUser&quot;,
+            &quot;ThumbPrint&quot;: &quot;{Certificate-Thumbprint}&quot;
+          }
+        },
+        &quot;onBehalfFrontEnd&quot;: {
+          &quot;ClientId&quot;: &quot;{PnP.Core.Test.OnBehalfOf.Frontend-ClientID}&quot;,
+          &quot;TenantId&quot;: &quot;{TenantId}&quot;,
+          &quot;Interactive&quot;: {
+            &quot;RedirectUri&quot;: &quot;http://localhost&quot;
+          }
+        }
+      }
+    },
+    &quot;Sites&quot;: {
+      &quot;TestSiteCredentialManager&quot;: {
+        &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;,
+        &quot;AuthenticationProviderName&quot;: &quot;credentialManager&quot;
+      },
+      &quot;TestSiteUsernamePassword&quot;: {
+        &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;,
+        &quot;AuthenticationProviderName&quot;: &quot;usernamePassword&quot;
+      },
+      &quot;TestSiteInteractive&quot;: {
+        &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;,
+        &quot;AuthenticationProviderName&quot;: &quot;interactive&quot;
+      },
+      &quot;TestSiteOnBehalfOf&quot;: {
+        &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;,
+        &quot;AuthenticationProviderName&quot;: &quot;onBehalfOf&quot;
+      },
+      &quot;TestSiteX509Certificate&quot;: {
+        &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;,
+        &quot;AuthenticationProviderName&quot;: &quot;x509Certificate&quot;
+      }
+    }
+  },
+  &quot;Logging&quot;: {
+    &quot;LogLevel&quot;: {
+      &quot;Default&quot;: &quot;Debug&quot;
+    }
+  }
+}
+</code></pre>
+<p>In the file replace:</p>
+<ul>
+<li><code>{PnP.Core.Test-ClientId}</code> with the ClientId of the PnP.Core.Test application that you registered before</li>
+<li><code>{TenantId}</code> with the TenantId of your target tenant</li>
+<li><code>{Test-Username}</code> with the username (UPN) of a user that you want to use for tests and that must have access to the target test SharePoint sites and Teams. It might be a user account dedicated to tests.</li>
+<li><code>{Test-Password}</code> with the password of the username declared in the previous step</li>
+<li><code>{Credential-Manager}</code> with the name of the Credential Manager item that you created before</li>
+<li><code>{Certificate-Thumbprint}</code> with the thumbprint of the certificate created before</li>
+</ul>
+<p>Lastly, replace all the occurrences of the URL of the site <code>https://contoso.sharepoint.com/sites/pnpcoresdktestgroup</code> with the URL of a site that you want to use for testing purposes.</p>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
