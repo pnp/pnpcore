@@ -90,7 +90,7 @@ namespace PnP.Core.Auth.Test.Utilities
                 testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
             }
 
-            return await BuildContextFactory().CreateAsync(configurationName).ConfigureAwait(false);
+            return await factory.CreateAsync(configurationName).ConfigureAwait(false);
         }
 
         public PnPContext GetContext(Guid groupId, int id = 0,
@@ -198,7 +198,7 @@ namespace PnP.Core.Auth.Test.Utilities
         internal static string GetX509CertificateThumbprint()
         {
             var configuration = GetConfigurationSettings();
-            return configuration.GetValue<string>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:Thumbprint");
+            return configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:x509Certificate:X509Certificate:Thumbprint");
         }
 
         private static string LoadTestEnvironment()

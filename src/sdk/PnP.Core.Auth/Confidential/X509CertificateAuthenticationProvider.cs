@@ -6,39 +6,45 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Auth
 {
     /// <summary>
-    /// Authentication Provider that uses an interactive flow prompting the user
+    /// Authentication Provider based on the X.509 Certificate
     /// </summary>
-    public class InteractiveAuthenticationProvider : OAuthAuthenticationProvider
+    public sealed class X509CertificateAuthenticationProvider : OAuthAuthenticationProvider
     {
         /// <summary>
-        /// The Redirect URI for the authentication flow
+        /// The X.509 Certificate to use for app authentication
         /// </summary>
-        public Uri RedirectUri { get; set; }
+        public X509Certificate2 Certificate { get; set; }
 
         // Instance private member, to keep the token cache at service instance level
-        private IPublicClientApplication publicClientApplication;
+        private IConfidentialClientApplication confidentialClientApplication;
 
         /// <summary>
         /// Public constructor for external consumers of the library
         /// </summary>
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
         /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
-        /// <param name="redirectUri">The Redirect URI for the authentication flow</param>
-        public InteractiveAuthenticationProvider(string clientId, string tenantId, Uri redirectUri)
+        /// <param name="storeName">The Store Name to get the X.509 certificate from</param>
+        /// <param name="storeLocation">The Store Location to get the X.509 certificate from</param>
+        /// <param name="thumbprint">The Thumbprint of the X.509 certificate</param>
+        public X509CertificateAuthenticationProvider(string clientId, string tenantId,
+            StoreName storeName, StoreLocation storeLocation, string thumbprint)
             : this(null)
         {
             this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
-                Interactive = new PnPCoreAuthenticationInteractiveOptions
+                X509Certificate = new PnPCoreAuthenticationX509CertificateOptions
                 {
-                    RedirectUri = redirectUri
+                    StoreName = storeName,
+                    StoreLocation = storeLocation,
+                    Thumbprint = thumbprint
                 }
             });
         }
@@ -47,48 +53,60 @@ namespace PnP.Core.Auth
         /// Public constructor leveraging DI to initialize the ILogger interfafce
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
-        public InteractiveAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
+        public X509CertificateAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
             : base(logger)
         {
         }
 
         /// <summary>
-        /// Initializes the Authentication Provider
+        /// Initializes the X509Certificate Authentication Provider
         /// </summary>
         /// <param name="options">The options to use</param>
         internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
-            // We need the UsernamePassword options
-            if (options.Interactive == null)
+            // We need the X509Certificate options
+            if (options.X509Certificate == null)
             {
                 throw new ConfigurationErrorsException(
-                    PnPCoreAuthResources.InteractiveAuthenticationProvider_InvalidConfiguration);
+                    PnPCoreAuthResources.X509CertificateAuthenticationProvider_InvalidConfiguration);
             }
 
-            // We need the RedirectUri
-            if (options.Interactive.RedirectUri == null)
+            // We need the certificate thumbprint
+            if (string.IsNullOrEmpty(options.X509Certificate.Thumbprint))
             {
-                throw new ConfigurationErrorsException(PnPCoreAuthResources.InteractiveAuthenticationProvider_InvalidRedirectUri);
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit);
             }
 
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
-            RedirectUri = options.Interactive.RedirectUri;
-
-            // Define the authority for the current security context
-            var authority = new Uri(String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                AuthGlobals.AuthorityFormat,
-                TenantId));
+            Certificate = X509CertificateUtility.LoadCertificate(
+                options.X509Certificate.StoreName,
+                options.X509Certificate.StoreLocation,
+                options.X509Certificate.Thumbprint);
 
             // Build the MSAL client
-            publicClientApplication = PublicClientApplicationBuilder
-                .Create(ClientId)
-                .WithAuthority(authority)
-                .WithRedirectUri(RedirectUri.ToString())
-                .Build();
+            if (TenantId.Equals(AuthGlobals.OrganizationsTenantId, StringComparison.InvariantCultureIgnoreCase))
+            {
+                confidentialClientApplication = ConfidentialClientApplicationBuilder
+                    .Create(ClientId)
+                    .WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs)
+                    .WithCertificate(Certificate)
+                    .Build();
+            }
+            else
+            {
+                confidentialClientApplication = ConfidentialClientApplicationBuilder
+                    .Create(ClientId)
+                    .WithTenantId(TenantId)
+                    .WithCertificate(Certificate)
+                    .Build();
+            }
 
             // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.InteractiveAuthenticationProvider_LogInit);
+            this.Log?.LogInformation(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit,
+                options.X509Certificate.Thumbprint,
+                options.X509Certificate.StoreName,
+                options.X509Certificate.StoreLocation);
         }
 
         /// <summary>
@@ -133,20 +151,15 @@ namespace PnP.Core.Auth
 
             AuthenticationResult tokenResult = null;
 
-            var account = await publicClientApplication.GetAccountsAsync().ConfigureAwait(false);
             try
             {
                 // Try to get the token from the tokens cache
-                tokenResult = publicClientApplication.AcquireTokenSilent(scopes, account.First())
-                    .ExecuteAsync().GetAwaiter().GetResult();
+                tokenResult = await confidentialClientApplication.AcquireTokenForClient(scopes).ExecuteAsync().ConfigureAwait(false);
             }
-#pragma warning disable CA1031 // Do not catch general exception types
-            catch
-#pragma warning restore CA1031 // Do not catch general exception types
+            catch (MsalServiceException)
             {
-                // Try to get the token directly through AAD if it is not available in the tokens cache
-                tokenResult = publicClientApplication.AcquireTokenInteractive(scopes)
-                    .ExecuteAsync().GetAwaiter().GetResult();
+                // Handle the various exceptions
+                throw;
             }
 
             // Log the access token retrieval action

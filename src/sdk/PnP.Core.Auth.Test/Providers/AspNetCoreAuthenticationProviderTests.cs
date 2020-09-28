@@ -4,7 +4,7 @@ using PnP.Core.Model;
 using PnP.Core.Services;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Auth.Test.Base
+namespace PnP.Core.Auth.Test.Providers
 {
     /// <summary>
     /// Tests that focus on validating the AspNetCoreAuthenticationProvider

@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Auth.Test.Base
+namespace PnP.Core.Auth.Test.Providers
 {
     /// <summary>
     /// Tests that focus on validating the InteractiveAuthenticationProvider
@@ -16,9 +16,8 @@ namespace PnP.Core.Auth.Test.Base
     [TestClass]
     public class InteractiveAuthenticationProviderTests
     {
-        private static Uri graphResource = new Uri("https://graph.microsoft.com");
-        private static string graphMeRequest = "https://graph.microsoft.com/v1.0/me";
-        
+        private static string interactiveConfigurationPath = "interactive";
+
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
@@ -66,9 +65,9 @@ namespace PnP.Core.Auth.Test.Base
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:TenantId");
-            var redirectUri = configuration.GetValue<Uri>("PnPCore:Credentials:Configurations:interactive:Interactive:RedirectUri");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:TenantId");
+            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:Interactive:RedirectUri");
 
             var provider = new InteractiveAuthenticationProvider(
                 clientId,
@@ -88,8 +87,8 @@ namespace PnP.Core.Auth.Test.Base
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:TenantId");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:TenantId");
 
             var provider = new InteractiveAuthenticationProvider(
                 clientId,
@@ -112,7 +111,7 @@ namespace PnP.Core.Auth.Test.Base
         {
             var provider = PrepareInteractiveAuthenticationProvider();
 
-            await provider.AuthenticateRequestAsync(graphResource, null);
+            await provider.AuthenticateRequestAsync(TestGlobals.GraphResource, null);
         }
 
         [TestMethod]
@@ -122,8 +121,8 @@ namespace PnP.Core.Auth.Test.Base
 
             var provider = PrepareInteractiveAuthenticationProvider();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, graphMeRequest);
-            await provider.AuthenticateRequestAsync(graphResource, request);
+            var request = new HttpRequestMessage(HttpMethod.Get, TestGlobals.GraphMeRequest);
+            await provider.AuthenticateRequestAsync(TestGlobals.GraphResource, request);
 
             Assert.IsNotNull(request.Headers.Authorization);
             Assert.AreEqual(request.Headers.Authorization.Scheme.ToLower(), "bearer");
@@ -153,7 +152,7 @@ namespace PnP.Core.Auth.Test.Base
         {
             var provider = PrepareInteractiveAuthenticationProvider();
 
-            var accessToken = await provider.GetAccessTokenAsync(graphResource, null);
+            var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource, null);
         }
 
         [TestMethod]
@@ -163,7 +162,7 @@ namespace PnP.Core.Auth.Test.Base
 
             var provider = PrepareInteractiveAuthenticationProvider();
 
-            var accessToken = await provider.GetAccessTokenAsync(graphResource);
+            var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource);
 
             Assert.IsNotNull(accessToken);
             Assert.IsTrue(accessToken.Length > 0);
@@ -172,9 +171,9 @@ namespace PnP.Core.Auth.Test.Base
         private static InteractiveAuthenticationProvider PrepareInteractiveAuthenticationProvider()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:interactive:TenantId");
-            var redirectUri = configuration.GetValue<Uri>("PnPCore:Credentials:Configurations:interactive:Interactive:RedirectUri");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:TenantId");
+            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:Interactive:RedirectUri");
 
             var provider = new InteractiveAuthenticationProvider(
                 clientId,

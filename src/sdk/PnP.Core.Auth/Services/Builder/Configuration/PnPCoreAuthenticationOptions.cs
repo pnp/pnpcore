@@ -156,6 +156,21 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// The ClientSecret to authenticate the app with ClientId
         /// </summary>
         public string ClientSecret { get; set; }
+
+        /// <summary>
+        /// The name of the certificate store
+        /// </summary>
+        public StoreName StoreName { get; set; }
+
+        /// <summary>
+        /// The location in the certificate store
+        /// </summary>
+        public StoreLocation StoreLocation { get; set; }
+
+        /// <summary>
+        /// The thumbprint of the certificate
+        /// </summary>
+        public string Thumbprint { get; set; }
     }
 
     /// <summary>

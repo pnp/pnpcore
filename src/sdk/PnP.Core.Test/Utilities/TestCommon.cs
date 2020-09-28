@@ -105,7 +105,7 @@ namespace PnP.Core.Test.Utilities
             testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             testPnPContextFactory.TestUris = TestUris;
 
-            return await BuildContextFactory().CreateAsync(configurationName).ConfigureAwait(false);
+            return await factory.CreateAsync(configurationName).ConfigureAwait(false);
         }
 
 
