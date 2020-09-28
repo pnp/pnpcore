@@ -37,7 +37,7 @@ namespace PnP.Core.Auth
         /// <summary>
         /// A function providing the consumer user access token to use for the On-Behalf-Of flow
         /// </summary>
-        public Func<string> UserTokenProvider { get; private set; }
+        public Func<string> UserTokenProvider { get; set; }
 
         // Instance private member, to keep the token cache at service instance level
         private IConfidentialClientApplication confidentialClientApplication;

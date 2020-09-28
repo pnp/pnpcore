@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Test.Utilities;
-using PnP.Core.Model;
-using PnP.Core.Services;
 using System;
 using System.Configuration;
 using System.Net.Http;
@@ -20,6 +18,28 @@ namespace PnP.Core.Auth.Test.Providers
         private static string onBehalfOfConfigurationPath = "onBehalfOf";
         private static string onBehalfOfFrontEndConfigurationPath = "onBehalfFrontEnd";
 
+        private static Lazy<InteractiveAuthenticationProvider> frontendProvider =
+            new Lazy<InteractiveAuthenticationProvider>(() => {
+                var configuration = TestCommon.GetConfigurationSettings();
+                var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:ClientId");
+                var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:TenantId");
+                var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:Interactive:RedirectUri");
+
+                var provider = new InteractiveAuthenticationProvider(
+                    clientId,
+                    tenantId,
+                    redirectUri);
+                return provider;
+            }, true);
+
+        private static InteractiveAuthenticationProvider FrontEndProvider
+        {
+            get
+            {
+                return (frontendProvider.Value);
+            }
+        }
+
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
@@ -27,25 +47,67 @@ namespace PnP.Core.Auth.Test.Providers
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ConfigurationErrorsException))]
         public async Task TestOnBehalfOfWithGraph()
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteOnBehalfOf))
             {
+                ((OnBehalfOfAuthenticationProvider)context.AuthenticationProvider)
+                    .UserTokenProvider = () => GetUserAccessToken().GetAwaiter().GetResult();
+
                 await TestCommon.CheckAccessToTargetResource(context);
             }
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ConfigurationErrorsException))]
         public async Task TestOnBehalfOfWithSPO()
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteOnBehalfOf))
             {
+                ((OnBehalfOfAuthenticationProvider)context.AuthenticationProvider)
+                    .UserTokenProvider = () => GetUserAccessToken().GetAwaiter().GetResult();
+
+                await TestCommon.CheckAccessToTargetResource(context, false);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public async Task TestOnBehalfOfWithGraphNoUserTokenProvider()
+        {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteOnBehalfOf))
+            {
+                // Remove any already existing UserTokenProvider
+                var onBehalfTokenProvider = (OnBehalfOfAuthenticationProvider)context.AuthenticationProvider;
+                if (onBehalfTokenProvider.UserTokenProvider != null)
+                {
+                    onBehalfTokenProvider.UserTokenProvider = null;
+                }
+
+                await TestCommon.CheckAccessToTargetResource(context);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public async Task TestOnBehalfOfWithSPONoUserTokenProvider()
+        {
+            if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteOnBehalfOf))
+            {
+                // Remove any already existing UserTokenProvider
+                var onBehalfTokenProvider = (OnBehalfOfAuthenticationProvider)context.AuthenticationProvider;
+                if (onBehalfTokenProvider.UserTokenProvider != null)
+                {
+                    onBehalfTokenProvider.UserTokenProvider = null;
+                }
+
                 await TestCommon.CheckAccessToTargetResource(context, false);
             }
         }
@@ -344,23 +406,8 @@ namespace PnP.Core.Auth.Test.Providers
 
         private static async Task<string> GetUserAccessToken()
         {
-            var frontendProvider = PrepareFrontEndInteractiveAuthenticationProvider();
-            return await frontendProvider.GetAccessTokenAsync(TestGlobals.OnBehalfOfBackendResource);
+            return await FrontEndProvider.GetAccessTokenAsync(TestGlobals.OnBehalfOfBackendResource);
             //, new string[] { "api://pnp.core.test.onbehalfof.backend/Backend.Consume" });
-        }
-
-        private static InteractiveAuthenticationProvider PrepareFrontEndInteractiveAuthenticationProvider()
-        {
-            var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:TenantId");
-            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:Interactive:RedirectUri");
-
-            var provider = new InteractiveAuthenticationProvider(
-                clientId,
-                tenantId,
-                redirectUri);
-            return provider;
         }
     }
 }
