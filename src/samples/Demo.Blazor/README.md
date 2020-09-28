@@ -20,7 +20,7 @@ In order for the user to authenticate on the App, A new app registration should 
 -- Select __SharePoint__ > __Delegated permissions__ > select __AllSites.FullControl__
 -- Select __Microsoft Graph__ > __Delegated permissions__ > select __email__, __openid__ and __Sites.FullControl.All__
 
-- Click __Grand admin consent for {tenant}__
+- Click __Grant admin consent for {tenant}__
 
 - From __Overview__,
 -- copy the value of __Directory (tenant) ID__
