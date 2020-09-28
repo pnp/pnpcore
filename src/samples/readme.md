@@ -2,8 +2,8 @@
 
 Samples are best way to learn how to use, hence we've some simple PnP Core SDK sample applications for you to learn. Following samples are available:
 
-Sample | Description | Authention
--------|-------------|-----------
+Sample | Description | Authentication
+-------|-------------|----------------
 Demo.Console | Demo console app that shows how to sue the PnP Core SDK for working with Microsoft 365 data | Interactive login (`InteractiveAuthenticationProvider`)
 Demo.ASPNetCore | Demo application showing how use the PnP Core SDK from an ASP.Net Core application | Credential manager based auth (`CredentialManagerAuthenticationProvider`)
 Demo.AzureFunction | Azure Function that shows how to use the PnP Core SDK via dependency injection | Application permissions (`X509CertificateAuthenticationProvider`)
