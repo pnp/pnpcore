@@ -6,3 +6,5 @@
 [assembly: InternalsVisibleTo("PnP.Core.Test")]
 [assembly: InternalsVisibleTo("PnP.Core.Auth.Test")]
 #endif
+
+[assembly: NeutralResourcesLanguage("en")]
