@@ -25,7 +25,7 @@ namespace PnP.Core.Model.SharePoint
                     case nameof(RecycleBinItemState): return JsonMappingHelper.ToEnum<RecycleBinItemState>(input.JsonElement);
                 }
 
-                input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
+                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
 
                 return null;
             };

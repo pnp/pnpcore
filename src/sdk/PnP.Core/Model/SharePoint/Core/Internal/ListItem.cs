@@ -61,7 +61,7 @@ namespace PnP.Core.Model.SharePoint
                 else
                 {
                     //Handle the mapping from json to the domain model for the cases which are not generically handled           
-                    input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
+                    input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
                 }
 
                 return null;
@@ -165,7 +165,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
             }
         }
 
@@ -197,7 +197,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
             }
         }
 
@@ -223,7 +223,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
             }
         }
 
@@ -255,7 +255,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
             }
         }
 

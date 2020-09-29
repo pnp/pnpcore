@@ -644,5 +644,86 @@ namespace PnP.Core {
                 return ResourceManager.GetString("Exception_Xml_InvalidXmlCharacter", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field {0} could not be mapped when converting from JSON.
+        /// </summary>
+        internal static string Log_Debug_JsonCannotMapField {
+            get {
+                return ResourceManager.GetString("Log_Debug_JsonCannotMapField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method &apos;{0}&apos; | File &apos;{1}&apos; | Line Number: {2}  | Started: {3} | Ended {4} | Elapsed {5} ms.
+        /// </summary>
+        internal static string Log_Debug_LogMetrics {
+            get {
+                return ResourceManager.GetString("Log_Debug_LogMetrics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation {0} completed.
+        /// </summary>
+        internal static string Log_Debug_OperationCompleted {
+            get {
+                return ResourceManager.GetString("Log_Debug_OperationCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API call {0} cancelled: {1}.
+        /// </summary>
+        internal static string Log_Information_ApiCallCancelled {
+            get {
+                return ResourceManager.GetString("Log_Information_ApiCallCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No changes so skipping SystemUpdate.
+        /// </summary>
+        internal static string Log_Information_NoChangesSkipSystemUpdate {
+            get {
+                return ResourceManager.GetString("Log_Information_NoChangesSkipSystemUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation {0} not ready yet. Status = {1}. Waiting for {2} seconds, attempt number {3}.
+        /// </summary>
+        internal static string Log_Information_OperationNotReady {
+            get {
+                return ResourceManager.GetString("Log_Information_OperationNotReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using default user-agent value {0}.
+        /// </summary>
+        internal static string Log_Information_UsingDefaultUserAgent {
+            get {
+                return ResourceManager.GetString("Log_Information_UsingDefaultUserAgent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using user-agent value {0} provided by configuration.
+        /// </summary>
+        internal static string Log_Information_UsingUserAgent {
+            get {
+                return ResourceManager.GetString("Log_Information_UsingUserAgent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using version tag value {0}.
+        /// </summary>
+        internal static string Log_Information_VersionTag {
+            get {
+                return ResourceManager.GetString("Log_Information_VersionTag", resourceCulture);
+            }
+        }
     }
 }

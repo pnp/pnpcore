@@ -42,7 +42,7 @@ namespace PnP.Core.Model.SharePoint
                     case "FooterEmphasis": return JsonMappingHelper.ToEnum<FooterVariantThemeType>(input.JsonElement);
                 }
 
-                input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
+                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
 
                 return null;
             };

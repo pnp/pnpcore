@@ -47,7 +47,7 @@ namespace PnP.Core.Model.Teams
                         if (statusValue.Equals("succeeded", StringComparison.InvariantCultureIgnoreCase) ||
                             statusValue.Equals("invalid", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            Log.LogDebug($"Operation {Location} completed");
+                            Log.LogDebug(PnPCoreResources.Log_Debug_OperationCompleted, Location);
                             wereDone = true;
                         }
                         else if (statusValue.Equals("failed", StringComparison.InvariantCultureIgnoreCase))
@@ -60,7 +60,7 @@ namespace PnP.Core.Model.Teams
                         else
                         {
                             retries++;
-                            Log.LogInformation($"Operation {Location} not ready yet. Status = {statusValue}. Waiting for {waitTimeInSeconds} seconds, attempt number {retries}");
+                            Log.LogInformation(PnPCoreResources.Log_Information_OperationNotReady, Location, statusValue, waitTimeInSeconds, retries);
                             Thread.Sleep(waitTimeInSeconds * 1000);
                         }
                     }
