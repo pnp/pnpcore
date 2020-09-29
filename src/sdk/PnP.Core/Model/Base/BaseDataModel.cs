@@ -584,7 +584,7 @@ namespace PnP.Core.Model
 
         private void ApiCancellationMessage(ApiCallRequest api)
         {
-            Log.LogInformation($"API call {api.ApiCall.Request} cancelled: {api.CancellationReason}");
+            Log.LogInformation(PnPCoreResources.Log_Information_ApiCallCancelled, api.ApiCall.Request, api.CancellationReason);
         }
 
         private async Task<ApiCallRequest> BuildGetAPICallRestAsync(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)

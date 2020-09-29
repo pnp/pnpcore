@@ -34,7 +34,7 @@ namespace PnP.Core
 
         private void LogMetrics()
         {
-            logger.LogDebug("Method '{0}' | File '{1}' | Line Number: {2}  | Started: {3} | Ended {4} | Elapsed {5} ms",
+            logger.LogDebug(PnPCoreResources.Log_Debug_LogMetrics,
                 MethodName,
                 FilePath,
                 LineNumber,

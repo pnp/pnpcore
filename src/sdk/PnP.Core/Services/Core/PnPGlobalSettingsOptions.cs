@@ -34,7 +34,7 @@ namespace PnP.Core.Services
                 {
                     Assembly coreAssembly = Assembly.GetExecutingAssembly();
                     var userAgentDefault = $"{UserAgentPrefix}/{((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version}";
-                    // logger.LogInformation($"Using default user-agent value {userAgentDefault}");
+                    // logger.LogInformation(PnPCoreResources.Log_Information_UsingDefaultUserAgent, userAgentDefault);
                     httpUserAgent = userAgentDefault;
                 }
 
@@ -42,7 +42,7 @@ namespace PnP.Core.Services
             }
             internal set
             {
-                // logger.LogInformation($"Using user-agent value {httpUserAgent} provided by configuration");
+                // logger.LogInformation(PnPCoreResources.Log_Information_UsingUserAgent, httpUserAgent);
                 httpUserAgent = value;
             }
         }
@@ -137,7 +137,7 @@ namespace PnP.Core.Services
         {
             Assembly coreAssembly = Assembly.GetExecutingAssembly();
             var versionTag = $"PnPSDK:{((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version.Split('.')[2]}";
-            // logger.LogInformation($"Using version tag value {versionTag}");
+            // logger.LogInformation(PnPCoreResources.Log_Information_VersionTag, versionTag);
             return versionTag;
         }
     }

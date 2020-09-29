@@ -23,7 +23,7 @@ namespace PnP.Core.Model.SharePoint
                     case "TermGroupScope": return JsonMappingHelper.ToEnum<TermGroupScope>(input.JsonElement);
                 }
 
-                input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
+                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
 
                 return null;
             };

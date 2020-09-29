@@ -312,4 +312,31 @@
   <data name="Exception_Xml_InvalidXmlCharacter" xml:space="preserve">
     <value>Invalid character in Xml String. Chr {0} is illegal</value>
   </data>
+  <data name="Log_Debug_JsonCannotMapField" xml:space="preserve">
+    <value>Field {0} could not be mapped when converting from JSON</value>
+  </data>
+  <data name="Log_Debug_LogMetrics" xml:space="preserve">
+    <value>Method '{0}' | File '{1}' | Line Number: {2}  | Started: {3} | Ended {4} | Elapsed {5} ms</value>
+  </data>
+  <data name="Log_Debug_OperationCompleted" xml:space="preserve">
+    <value>Operation {0} completed</value>
+  </data>
+  <data name="Log_Information_ApiCallCancelled" xml:space="preserve">
+    <value>API call {0} cancelled: {1}</value>
+  </data>
+  <data name="Log_Information_NoChangesSkipSystemUpdate" xml:space="preserve">
+    <value>No changes so skipping SystemUpdate</value>
+  </data>
+  <data name="Log_Information_OperationNotReady" xml:space="preserve">
+    <value>Operation {0} not ready yet. Status = {1}. Waiting for {2} seconds, attempt number {3}</value>
+  </data>
+  <data name="Log_Information_UsingDefaultUserAgent" xml:space="preserve">
+    <value>Using default user-agent value {0}</value>
+  </data>
+  <data name="Log_Information_UsingUserAgent" xml:space="preserve">
+    <value>Using user-agent value {0} provided by configuration</value>
+  </data>
+  <data name="Log_Information_VersionTag" xml:space="preserve">
+    <value>Using version tag value {0}</value>
+  </data>
 </root>
