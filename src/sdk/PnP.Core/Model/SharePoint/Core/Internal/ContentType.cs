@@ -43,7 +43,8 @@ namespace PnP.Core.Model.SharePoint
                 // Adding new content types on a list is not something we should allow
                 if (entity.Target == typeof(List))
                 {
-                    throw new ClientException(ErrorType.Unsupported, "Adding new content types on a list is not possible, use the AddAvailableContentType method to add an existing site content type");
+                    throw new ClientException(ErrorType.Unsupported, 
+                        PnPCoreResources.Exception_Unsupported_AddingContentTypeToList);
                 }
 
                 // Fallback to CSOM call

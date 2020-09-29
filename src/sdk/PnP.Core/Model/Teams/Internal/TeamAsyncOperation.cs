@@ -31,7 +31,8 @@ namespace PnP.Core.Model.Teams
             {
                 if (retries >= maxRetries)
                 {
-                    throw new ServiceException(ErrorType.TeamsAsyncOperationError, 0, $"Max retries of {maxRetries} reached while waiting for Teams operation {Location}");
+                    throw new ServiceException(ErrorType.TeamsAsyncOperationError, 0, 
+                        string.Format(PnPCoreResources.Exception_TeamsAsyncOperationError_MaxRetries, maxRetries, Location));
                 }
 
                 var apiCall = new ApiCall(Location.ToString(), ApiType.Graph);

@@ -217,7 +217,8 @@ namespace PnP.Core.Model
                 }
                 else
                 {
-                    throw new ClientException(ErrorType.ModelMetadataIncorrect, "Each domain model object must be decorated with a ClassMapping attribute");
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                        PnPCoreResources.Exception_ModelMetadataIncorrect_MissingClassMapping);
                 }
             }
         }
@@ -476,7 +477,7 @@ namespace PnP.Core.Model
 
             if (string.IsNullOrEmpty(entityInfo.ActualKeyFieldName))
             {
-                throw new ApplicationException($"Invalid domain model configuration for entity {entityType.FullName}");
+                throw new ApplicationException(string.Format(PnPCoreResources.Exception_InvalidDomainModelConfiguration, entityType.FullName));
             }
 
             var parameter = Expression.Parameter(entityType, "i");

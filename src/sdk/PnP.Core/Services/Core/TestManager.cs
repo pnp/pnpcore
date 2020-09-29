@@ -92,7 +92,7 @@ namespace PnP.Core.Services
             }
             else
             {
-                throw new ClientException(ErrorType.OfflineDataError, $"Test [{context.TestName}] is missing response file {fileName}. Request key was {requestKey}");
+                throw new ClientException(ErrorType.OfflineDataError, string.Format(PnPCoreResources.Exception_Test_MissingResponseFile, context.TestName, fileName, requestKey));
             }
         }
 
@@ -127,7 +127,7 @@ namespace PnP.Core.Services
             }
             else
             {
-                throw new ClientException(ErrorType.OfflineDataError, $"Test [{context.TestName}] is missing properties file {fileName}.");
+                throw new ClientException(ErrorType.OfflineDataError, string.Format(PnPCoreResources.Exception_Test_MissingPropertiesFile, context.TestName, fileName));
             }
 
             var properties = JsonSerializer.Deserialize<Dictionary<string, string>>(body);

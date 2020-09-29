@@ -47,7 +47,7 @@ namespace PnP.Core.Model
                     {
                         if (body.Arguments.Count != 2)
                         {
-                            throw new Exception("Invalid arguments number");
+                            throw new Exception(PnPCoreResources.Exception_InvalidArgumentsNumber);
                         }
 
                         // Parse the expressions and get the relevant entity information
@@ -94,7 +94,8 @@ namespace PnP.Core.Model
                     }
                     else
                     {
-                        throw new ClientException(ErrorType.PropertyNotLoaded, "Only the 'Include' method is supported");
+                        throw new ClientException(ErrorType.PropertyNotLoaded, 
+                            PnPCoreResources.Exception_PropertyNotLoaded_OnlyIncludeSupported);
                     }
                 }
                 else if (!model.IsPropertyAvailable(expression))

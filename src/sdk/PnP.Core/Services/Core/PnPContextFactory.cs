@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Model.Security;
+using PnP.Core.Services.Builder.Configuration;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -97,7 +98,8 @@ namespace PnP.Core.Services
             var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
             {
-                throw new ClientException(ErrorType.ConfigurationError, $"Invalid configuration name '{name}' for PnPContext creation!");
+                throw new ClientException(ErrorType.ConfigurationError, 
+                    string.Format(PnPCoreResources.Exception_ConfigurationError_InvalidPnPContextConfigurationName, name));
             }
 
             return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider).ConfigureAwait(false);

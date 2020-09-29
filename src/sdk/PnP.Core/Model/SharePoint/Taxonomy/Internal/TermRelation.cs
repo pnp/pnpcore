@@ -57,7 +57,8 @@ namespace PnP.Core.Model.SharePoint
                 
                 if (parentTerm == null)
                 {
-                    throw new ClientException(ErrorType.ConfigurationError, "Added a relationship can only be done starting from a term");
+                    throw new ClientException(ErrorType.Unsupported, 
+                        PnPCoreResources.Exception_Unsupported_FailedAddingTermRelation);
                 }
 
                 string termApi = $"termstore/sets/{parentTerm.Set.Id}/terms/{parentTerm.Id}/relations";

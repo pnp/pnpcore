@@ -251,7 +251,8 @@ namespace PnP.Core.Services
             {
                 if (batch.Requests.Count > 1)
                 {
-                    throw new ClientException(ErrorType.Unsupported, "Interactive requests cannot be grouped together, execute them one by one");
+                    throw new ClientException(ErrorType.Unsupported, 
+                        PnPCoreResources.Exception_Unsupported_InteractiveRequestBatch);
                 }
 
                 // TODO: Add similar approach for Graph calls (whenever that will be needed)
@@ -377,7 +378,8 @@ namespace PnP.Core.Services
                     if (!success)
                     {
                         // We passed the max retries...time to throw an error
-                        throw new ServiceException(ErrorType.TooManyBatchRetries, 0, $"Requests inside a batch reached their max retry count of {retryCount}");
+                        throw new ServiceException(ErrorType.TooManyBatchRetries, 0, 
+                            string.Format(PnPCoreResources.Exception_ServiceException_BatchMaxRetries, retryCount));
                     }
                 }
             }
@@ -991,7 +993,7 @@ namespace PnP.Core.Services
                     }
                     else
                     {
-                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 0, "Unexpected HTTP result value in returned batch response");
+                        throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, 0, PnPCoreResources.Exception_SharePointRest_UnexpectedResult);
                     }
                 }
                 // First real content returned, lines before are ignored
@@ -1344,7 +1346,8 @@ namespace PnP.Core.Services
                 var unresolvedTokens = TokenHandler.UnresolvedTokens(request.Value.ApiCall.Request);
                 if (unresolvedTokens.Count > 0)
                 {
-                    throw new ClientException(ErrorType.UnresolvedTokens, $"Unresolved tokens found in API call {request.Value.ApiCall.Request}");
+                    throw new ClientException(ErrorType.UnresolvedTokens, 
+                        string.Format(PnPCoreResources.Exception_UnresolvedTokens, request.Value.ApiCall.Request));
                 }
             }
         }

@@ -108,7 +108,7 @@ namespace PnP.Core
             if (resourceUrl.StartsWith("https://"))
             {
                 if (checkIfWebContainedResource && !resourceUrl.StartsWith(webUrl.ToString()))
-                    throw new ArgumentException($"The {nameof(resourceUrl)} is not a resource from the SharePoint site {webUrl}");
+                    throw new ArgumentException(string.Format(PnPCoreResources.Exception_InvalidSPOResource, nameof(resourceUrl), webUrl));
 
                 return new Uri(resourceUrl);
             }

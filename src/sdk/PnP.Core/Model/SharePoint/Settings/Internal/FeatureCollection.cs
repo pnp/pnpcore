@@ -16,7 +16,8 @@ namespace PnP.Core.Model.SharePoint
 
             if (!this.items.Any(o => o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "Feature was not activated, nothing to deactive");
+                throw new ArgumentOutOfRangeException(nameof(id), 
+                    PnPCoreResources.Exception_Feature_CannotDeactivateNotActive);
             }
 
             var feature = this.items.FirstOrDefault(o => o.DefinitionId == id);
@@ -53,7 +54,8 @@ namespace PnP.Core.Model.SharePoint
 
             if (!this.items.Any(o => o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "Feature was not activated, nothing to deactive");
+                throw new ArgumentOutOfRangeException(nameof(id),
+                    PnPCoreResources.Exception_Feature_CannotDeactivateNotActive);
             }
 
             var feature = this.items.FirstOrDefault(o => o.DefinitionId == id);
@@ -80,7 +82,8 @@ namespace PnP.Core.Model.SharePoint
 
             if (this.items.Any(o => o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "Feature was already activated");
+                throw new ArgumentOutOfRangeException(nameof(id), 
+                    PnPCoreResources.Exception_Feature_AlreadyActivated);
             }
 
             var feature = CreateNewAndAdd() as Feature;
@@ -114,7 +117,8 @@ namespace PnP.Core.Model.SharePoint
 
             if (this.items.Any(o => o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), "Feature was already activated");
+                throw new ArgumentOutOfRangeException(nameof(id),
+                    PnPCoreResources.Exception_Feature_AlreadyActivated);
             }
 
             var feature = CreateNewAndAdd() as Feature;

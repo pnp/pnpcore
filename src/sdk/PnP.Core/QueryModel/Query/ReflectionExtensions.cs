@@ -1,4 +1,6 @@
-﻿namespace System.Reflection
+﻿using PnP.Core;
+
+namespace System.Reflection
 {
     internal static class ReflectionExtensions
     {
@@ -12,7 +14,7 @@
                     return fi.GetValue(source);
             }
 
-            throw new NotSupportedException($"Member of type {member.GetType()} is not supported");
+            throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_MemberType, member.GetType()));
         }
     }
 }

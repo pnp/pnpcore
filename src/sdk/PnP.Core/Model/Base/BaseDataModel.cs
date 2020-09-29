@@ -255,7 +255,8 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+                throw new ClientException(ErrorType.MissingAddApiHandler, 
+                    PnPCoreResources.Exception_MissingAddApiHandler);
             }
         }
 
@@ -275,7 +276,8 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+                throw new ClientException(ErrorType.MissingAddApiHandler, 
+                    PnPCoreResources.Exception_MissingAddApiHandler);
             }
         }
 
@@ -293,7 +295,8 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+                throw new ClientException(ErrorType.MissingAddApiHandler,
+                    PnPCoreResources.Exception_MissingAddApiHandler);
             }
         }
 
@@ -896,7 +899,8 @@ namespace PnP.Core.Model
             {
                 if (string.IsNullOrEmpty(getApi))
                 {
-                    throw new ClientException(ErrorType.ModelMetadataIncorrect, $"Specify the GraphGet/GraphGetLinq field of the ClassMapping property.");
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                        PnPCoreResources.Exception_ModelMetadataIncorrect_MissingGetMapping);
                 }
 
                 // Ensure tokens in the base url are replaced
@@ -1041,7 +1045,10 @@ namespace PnP.Core.Model
 
                                     if (!string.IsNullOrEmpty(expandableFieldInfo.GraphGet))
                                     {
-                                        throw new ClientException(ErrorType.Unsupported, $"Loading the {expandableFieldInfo.Name} property requires an extra GET request ({expandableFieldInfo.GraphGet}) which is not supported when using nested LoadProperties methods");
+                                        throw new ClientException(ErrorType.Unsupported, 
+                                            string.Format(PnPCoreResources.Exception_Unsupported_ExtraGet,
+                                            expandableFieldInfo.Name,
+                                            expandableFieldInfo.GraphGet));
                                     }
 
                                     if (!string.IsNullOrEmpty(expandableFieldInfo.GraphJsonPath))
@@ -1181,7 +1188,8 @@ namespace PnP.Core.Model
             
             if (parent is IRequestable && !(parent as IRequestable).Requested && batch.Requests.Count > 0)
             {
-                throw new ClientException(ErrorType.UnsupportedViaBatch, "You cannot do a batch add of a model to a modelcollection that was not yet requested. Common reasons are adding an item and using that same item in a single batch");
+                throw new ClientException(ErrorType.UnsupportedViaBatch, 
+                    PnPCoreResources.Exception_Unsupported_ViaBatch);
             }
 
             // Get entity information for the entity to update
@@ -1223,7 +1231,8 @@ namespace PnP.Core.Model
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
             {
-                throw new ClientException(ErrorType.GraphBetaNotAllowed, "Adding this entity requires the use of the Graph beta endpoint");
+                throw new ClientException(ErrorType.GraphBetaNotAllowed, 
+                    PnPCoreResources.Exception_GraphBetaNotAllowed);
             }
 
             // Add the request to the batch
@@ -1738,7 +1747,8 @@ namespace PnP.Core.Model
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
             {
-                throw new ClientException(ErrorType.GraphBetaNotAllowed, "Adding this entity requires the use of the Graph beta endpoint");
+                throw new ClientException(ErrorType.GraphBetaNotAllowed, 
+                    PnPCoreResources.Exception_GraphBetaNotAllowed);
             }
 
             // Ensure token replacement is done
