@@ -66,7 +66,7 @@ namespace PnP.Core.Test.Services
         private static IServiceCollection AddPnPServices(this IServiceCollection collection)
         {
             return collection
-                   .AddScoped<IPnPContextFactory, TestPnPContextFactory>();
+                   .AddTransient<IPnPContextFactory, TestPnPContextFactory>();
         }
 
         private static IServiceCollection AddTelemetryServices(this IServiceCollection collection)

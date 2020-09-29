@@ -84,7 +84,7 @@ namespace PnP.Core.Services
         private static IServiceCollection AddPnPServices(this IServiceCollection collection)
         {
             return collection
-                   .AddScoped<IPnPContextFactory, PnPContextFactory>();
+                   .AddTransient<IPnPContextFactory, PnPContextFactory>();
         }
 
 #if !BLAZOR
