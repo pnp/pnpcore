@@ -107,7 +107,7 @@ namespace PnP.Core.Auth.Test.Utilities
             // Obtain factory (cached)
             var factory = BuildContextFactory();
 
-            return await BuildContextFactory().CreateAsync(groupId).ConfigureAwait(false);
+            return await factory.CreateAsync(groupId).ConfigureAwait(false);
         }
 
         public static IConfigurationRoot GetConfigurationSettings()

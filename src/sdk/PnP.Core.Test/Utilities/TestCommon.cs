@@ -132,7 +132,7 @@ namespace PnP.Core.Test.Utilities
             (factory as TestPnPContextFactory).GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             (factory as TestPnPContextFactory).TestUris = TestUris;
 
-            return await BuildContextFactory().CreateAsync(groupId).ConfigureAwait(false);
+            return await factory.CreateAsync(groupId).ConfigureAwait(false);
         }
 
         public PnPContext Clone(PnPContext source, Uri uri, int id)
