@@ -47,8 +47,8 @@ namespace PnP.Core.Test.Services
 
         private static IServiceCollection AddHttpHandlers(this IServiceCollection collection)
         {
-            collection.AddScoped<SharePointRestRetryHandler, SharePointRestRetryHandler>();
-            collection.AddScoped<MicrosoftGraphRetryHandler, MicrosoftGraphRetryHandler>();
+            collection.AddTransient<SharePointRestRetryHandler, SharePointRestRetryHandler>();
+            collection.AddTransient<MicrosoftGraphRetryHandler, MicrosoftGraphRetryHandler>();
 
             return collection;
         }
