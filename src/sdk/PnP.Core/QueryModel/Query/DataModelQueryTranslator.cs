@@ -63,7 +63,7 @@ namespace PnP.Core.QueryModel
                         return m;
                 }
             }
-            throw new NotSupportedException(string.Format("The method '{0}' is not supported", m.Method.Name));
+            throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_Method, m.Method.Name));
         }
 
         private void VisitSelect(MethodCallExpression m)
@@ -80,7 +80,7 @@ namespace PnP.Core.QueryModel
                     if (parameterExpression == null || // is trying to project a new anonymous type
                         lambda.Parameters[0].Name != parameterExpression.Name) // or is not projecting the whole input
                     {
-                        throw new NotSupportedException("The projection is not supported");
+                        throw new NotSupportedException(PnPCoreResources.Exception_Unsupported_Projection);
                     }
                 }
             }
@@ -160,14 +160,14 @@ namespace PnP.Core.QueryModel
                 case MethodCallExpression methodCall:
                     if (methodCall.Type != typeof(bool))
                     {
-                        throw new NotSupportedException($"Expression {methodCall} is not valid because it must return a boolean result");
+                        throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionMustReturnBoolean, methodCall));
                     }
 
                     string methodField = GetFilterField(methodCall);
                     // Should never happen
                     if (methodField == null)
                     {
-                        throw new NotSupportedException($"Expression {methodCall} is not valid");
+                        throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_Expression, methodCall));
                     }
 
                     AddFilterToStack(new FilterItem
@@ -199,14 +199,14 @@ namespace PnP.Core.QueryModel
                     case MethodCallExpression methodCall:
                         if (methodCall.Type != typeof(bool))
                         {
-                            throw new NotSupportedException($"Expression {methodCall} is not valid because it must return a boolean result");
+                            throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionMustReturnBoolean, methodCall));
                         }
 
                         string methodField = GetFilterField(methodCall);
                         // Should never happen
                         if (methodField == null)
                         {
-                            throw new NotSupportedException($"Expression {methodCall} is not valid");
+                            throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_Expression, methodCall));
                         }
 
                         AddFilterToStack(new FilterItem
@@ -300,7 +300,7 @@ namespace PnP.Core.QueryModel
                         concat = FilteringConcatOperator.OR;
                         break;
                     default:
-                        throw new NotSupportedException($"Node of type {expression.NodeType} of expression {expression} is not supported");
+                        throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_NodeType, expression.NodeType, expression));
                 }
 
                 // Set the contact operators to the filters (should be two)
@@ -341,7 +341,9 @@ namespace PnP.Core.QueryModel
                     // Raise an error
                     var validMembers = FunctionMapping.SupportedMembers.Where(m => !(m is MethodInfo)).Select(m => $"{m.DeclaringType.Name}.{m.Name}");
                     var validMembersString = string.Join(", ", validMembers);
-                    throw new NotSupportedException($"Expression {expression} is invalid. Only calls to members {validMembersString} are supported");
+                    throw new NotSupportedException(
+                        string.Format(PnPCoreResources.Exception_Unsupported_ExpressionOnlyMembers, 
+                        expression, validMembersString));
 
                 case MethodCallExpression methodCall:
                     // Get the target member name, if any
@@ -365,7 +367,7 @@ namespace PnP.Core.QueryModel
                     // Raise an error
                     var validMethods = FunctionMapping.SupportedMembers.OfType<MethodInfo>().Select(m => $"{m.DeclaringType.Name}.{m.Name}");
                     var validMethodsString = string.Join(", ", validMethods);
-                    throw new NotSupportedException($"Expression {expression} is invalid. Only calls to methods {validMethodsString} are supported");
+                    throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionOnlyMethods, expression, validMethodsString));
             }
 
             // Try with default resolver
@@ -416,14 +418,14 @@ namespace PnP.Core.QueryModel
 
                     if (raiseError)
                     {
-                        throw new NotSupportedException($"Expression {expression} is not supported. Only calls to {typeof(Dictionary<string, object>)} indexer are supported");
+                        throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionOnlyIndexer, expression, typeof(Dictionary<string, object>)));
                     }
 
                     break;
             }
             if (raiseError)
             {
-                throw new NotSupportedException($"Expression {expression} is not supported. Only {typeof(MemberExpression)} and {typeof(MethodCallExpression)} are supported");
+                throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionOnlyTypes, expression, typeof(MemberExpression), typeof(MethodCallExpression)));
             }
 
             return null;
@@ -450,7 +452,7 @@ namespace PnP.Core.QueryModel
             }
             catch (FormatException fe)
             {
-                throw new NotSupportedException($"Constant {expression} is of a non supported type ({typeof(T)})", fe);
+                throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionConstantNotValid, expression, typeof(T)), fe);
             }
         }
 

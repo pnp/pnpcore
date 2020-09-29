@@ -55,7 +55,8 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (!(fieldOptions is FieldLookupOptions fieldLookupOptions))
                     {
-                        throw new ClientException(ErrorType.InvalidParameters, "Specified field parameters are not valid for lookup type fields");
+                        throw new ClientException(ErrorType.InvalidParameters, 
+                            PnPCoreResources.Exception_Invalid_LookupFields);
                     }
 
                     endpointUrl += "/AddField";

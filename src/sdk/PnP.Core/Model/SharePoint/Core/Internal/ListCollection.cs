@@ -28,7 +28,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (templateType == 0)
             {
-                throw new ArgumentException($"{nameof(templateType)} cannot be 0");
+                throw new ArgumentException(string.Format(PnPCoreResources.Exception_CannotBeZero, nameof(templateType)));
             }
 
             var newList = CreateNewAndAdd() as List;
@@ -53,7 +53,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (templateType == 0)
             {
-                throw new ArgumentException($"{nameof(templateType)} cannot be 0");
+                throw new ArgumentException(string.Format(PnPCoreResources.Exception_CannotBeZero, nameof(templateType)));
             }
 
             var newList = CreateNewAndAdd() as List;

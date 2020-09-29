@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -20,7 +21,7 @@ namespace System.Linq
                     return me.Member.GetValue(obj);
             }
 
-            throw new NotSupportedException($"Constant {expression} is invalid. Only {typeof(ConstantExpression)} and {typeof(MemberExpression)} are supported");
+            throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionConstantOnlyTypes, expression, typeof(ConstantExpression), typeof(MemberExpression)));
         }
 
         public static Expression StripQuotes(this Expression e)

@@ -30,7 +30,8 @@ namespace PnP.Core.Model.Security
         {
             if (!this.IsPropertyAvailable(p => p.PrincipalType) || (PrincipalType != PrincipalType.User && PrincipalType != PrincipalType.SecurityGroup))
             {
-                throw new ClientException(ErrorType.Unsupported, "You can't call AsGraphUserAsync on a SharePoint user with principal type different than User or SecurityGroup");
+                throw new ClientException(ErrorType.Unsupported, 
+                    PnPCoreResources.Exception_Unsupported_GraphUserOnSharePoint);
             }
 
             if (!this.IsPropertyAvailable(p => p.AadObjectId))
@@ -43,12 +44,14 @@ namespace PnP.Core.Model.Security
             // Check again for principal type
             if (PrincipalType != PrincipalType.User && PrincipalType != PrincipalType.SecurityGroup)
             {
-                throw new ClientException(ErrorType.Unsupported, "You can't call AsGraphUserAsync on a SharePoint user with principal type different than User or SecurityGroup");
+                throw new ClientException(ErrorType.Unsupported,
+                    PnPCoreResources.Exception_Unsupported_GraphUserOnSharePoint);
             }
 
             if (string.IsNullOrEmpty(AadObjectId))
             {
-                throw new ClientException(ErrorType.Unsupported, "You can't call AsGraphUserAsync on a SharePoint user without the GraphId property requested and populated");
+                throw new ClientException(ErrorType.Unsupported, 
+                    PnPCoreResources.Exception_Unsupported_GraphUserOnSharePointNoGraphId);
             }
 
             GraphUser graphUser = new GraphUser

@@ -214,7 +214,7 @@ namespace PnP.Core.QueryModel
 
             if (!(source.Provider is IAsyncQueryProvider asyncQueryProvider))
             {
-                throw new InvalidOperationException("Queryable source does not support async");
+                throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
             }
 
             return await asyncQueryProvider.ExecuteAsync<Task<T>>(

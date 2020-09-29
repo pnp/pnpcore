@@ -568,7 +568,7 @@ namespace PnP.Core.QueryModel
                 return GetAsyncEnumerator(enumerable);
             }
 
-            throw new InvalidOperationException("Queryable source does not support async");
+            throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             async IAsyncEnumerable<TSource> GetAsyncEnumerator(IEnumerable<TSource> enumerable)
@@ -612,7 +612,7 @@ namespace PnP.Core.QueryModel
                     cancellationToken);
             }
 
-            throw new InvalidOperationException("Queryable source does not support async");
+            throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
         }
 
         private static TResult ExecuteAsync<TSource, TResult>(

@@ -89,7 +89,8 @@ namespace PnP.Core.Services
 
             }
 
-            throw new ServiceException(ErrorType.TooManyRetries, (int)response.StatusCode, $"Request reached it's max retry count of {retryCount}");
+            throw new ServiceException(ErrorType.TooManyRetries, (int)response.StatusCode, 
+                string.Format(PnPCoreResources.Exception_ServiceException_MaxRetries, retryCount));
         }
 
         /// <summary>

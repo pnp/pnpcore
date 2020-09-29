@@ -199,7 +199,8 @@ namespace PnP.Core.Model
             // And that the item is of the correct type
             if (!(item is TModel))
             {
-                throw new InvalidCastException("Invalid type for object to add to the collection");
+                throw new InvalidCastException(
+                    PnPCoreResources.Exception_InvalidTypeForCollection);
             }
 
             // And if it is correct, add it through the typed method
@@ -269,7 +270,7 @@ namespace PnP.Core.Model
         {
             if (pageSize < 1)
             {
-                throw new ArgumentException("Page size has to be equal or greater than 1");
+                throw new ArgumentException(PnPCoreResources.Exception_InvalidPageSize);
             }
 
             // Get the parent (container) entity info (e.g. for Lists this is Web)
@@ -289,7 +290,8 @@ namespace PnP.Core.Model
             var receivingProperty = GetReceivingProperty(parentEntityInfo);
             if (string.IsNullOrEmpty(receivingProperty))
             {
-                throw new ClientException(ErrorType.ModelMetadataIncorrect, "Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming");
+                throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                    PnPCoreResources.Exception_ModelMetadataIncorrect_ModelOutOfSync);
             }
 
             // Build the API Get request, we'll require the LinqGet decoration to be set
@@ -300,7 +302,8 @@ namespace PnP.Core.Model
 
             if (string.IsNullOrEmpty(nextLink))
             {
-                throw new ClientException(ErrorType.ModelMetadataIncorrect, "This model entity does not have a SharePointLinqGet or GraphLinqGet value set");
+                throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                    PnPCoreResources.Exception_ModelMetadataIncorrect_MissingLinqGet);
             }
 
             // Ensure $top is added/updated to reflect the page size
@@ -339,7 +342,8 @@ namespace PnP.Core.Model
                 var receivingProperty = GetReceivingProperty(parentEntityInfo);
                 if (string.IsNullOrEmpty(receivingProperty))
                 {
-                    throw new ClientException(ErrorType.ModelMetadataIncorrect, "Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming");
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                        PnPCoreResources.Exception_ModelMetadataIncorrect_ModelOutOfSync);
                 }
 
                 // Prepare api call
@@ -363,7 +367,8 @@ namespace PnP.Core.Model
                 }
                 else
                 {
-                    throw new ClientException(ErrorType.Unsupported, "There's no valid next page metadata available");
+                    throw new ClientException(ErrorType.Unsupported, 
+                        PnPCoreResources.Exception_InvalidNextPage);
                 }
 
                 PnPContext.CurrentBatch.Add(
@@ -385,7 +390,8 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new ClientException(ErrorType.CollectionNotLoaded, "Please ensure you load this collection once before calling GetAllPages or GetNextPage");
+                throw new ClientException(ErrorType.CollectionNotLoaded, 
+                    PnPCoreResources.Exception_CollectionNotLoaded);
             }
 
         }
