@@ -707,6 +707,7 @@ namespace PnP.Core.Services
 
         private static void MapJsonToComplexTypePropertyRecursive(TransientObject pnpObject, IDataModelWithContext contextAwareObject, JsonProperty property, EntityFieldInfo entityField)
         {
+
             // Do we still need to instantiate this object
             if (!pnpObject.HasValue(entityField.Name))
             {
@@ -720,6 +721,12 @@ namespace PnP.Core.Services
             var typedModel = propertyToSetValue as IDataModelMappingHandler;
             var metadataExtensible = propertyToSetValue as IMetadataExtensible;
             var expandoComplexType = propertyToSetValue as IExpandoComplexType;
+
+            // Mark object as not requested before the load
+            if (propertyToSetValue.GetType().ImplementsInterface(typeof(IRequestable)))
+            {
+                ((IRequestable)propertyToSetValue).Requested = false;
+            }
 
             // Set the batch request id property
             SetBatchRequestId(propertyToSetValue as TransientObject, pnpObject.BatchRequestId);
@@ -799,6 +806,13 @@ namespace PnP.Core.Services
                         expandoComplexType[childProperty.Name] = GetJsonPropertyValue(childProperty);
                     }
                 }
+            }
+
+            // Mark object as requested, as long as it is an IRequestable object
+            // Mark object as not requested before the load
+            if (propertyToSetValue.GetType().ImplementsInterface(typeof(IRequestable)))
+            {
+                ((IRequestable)propertyToSetValue).Requested = true;
             }
         }
 
@@ -906,7 +920,8 @@ namespace PnP.Core.Services
                 }
 
                 // The JSON property type is not expected
-                throw new ClientException(ErrorType.UnexpectedMappingType, $"The property {property.Name} is expected to be an array but is of type {property.Value.ValueKind} instead.");
+                throw new ClientException(ErrorType.UnexpectedMappingType, 
+                    string.Format(PnPCoreResources.Exception_UnexpectedMappingType_NotArray, property.Name, property.Value.ValueKind));
             }
         }
 
@@ -968,12 +983,12 @@ namespace PnP.Core.Services
                             int arrayLength = element.GetArrayLength();
                             if (arrayLength == 0)
                             {
-                                throw new IndexOutOfRangeException("The expected JSON array is empty.");
+                                throw new IndexOutOfRangeException(PnPCoreResources.Exception_Json_EmptyArray);
                             }
 
                             if (index > arrayLength-1)
                             {
-                                throw new IndexOutOfRangeException("The requested index is out of the JSON array boundaries.");
+                                throw new IndexOutOfRangeException(PnPCoreResources.Exception_Json_ArrayOutOfBoundaries);
                             }
 
                             int currentIndex = 0;
@@ -1422,7 +1437,8 @@ namespace PnP.Core.Services
                 return field.GraphName;
             }
 
-            throw new ClientException(ErrorType.ModelMetadataIncorrect, "GraphName was not set");
+            throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                PnPCoreResources.Exception_ModelMetadataIncorrect_MissingGraphName);
         }
 
         internal static bool IsModelType(Type propertyType)

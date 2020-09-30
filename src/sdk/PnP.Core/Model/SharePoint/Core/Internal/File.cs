@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
 using System;
 using System.Dynamic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -32,13 +33,65 @@ namespace PnP.Core.Model.SharePoint
                     case nameof(CheckOutType): return JsonMappingHelper.ToEnum<CheckOutType>(input.JsonElement);
                 }
 
-                input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
+                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
 
                 return null;
             };
         }
 
-        #region Extensions
+        #region Methods
+
+        #region GetContent
+        public async Task<Stream> GetContentAsync()
+        {
+            var entity = EntityManager.GetClassInfo(GetType(), this);
+            string valueEndpoint = $"{entity.SharePointUri}/$value";
+
+            var apiCall = new ApiCall(valueEndpoint, ApiType.SPORest)
+            {
+                Interactive = true,
+                ExpectBinaryResponse = true,
+            };
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+            return response.BinaryContent;
+        }
+
+        public Stream GetContent()
+        {
+            return GetContentAsync().GetAwaiter().GetResult();
+        }
+
+
+        public async Task<byte[]> GetContentBytesAsync()
+        {
+            using (var contentStream = await GetContentAsync().ConfigureAwait(false))
+            {
+                // In case the response stream become something else than a memory stream
+                // Commented to prevent for now useless overhead
+                //if (contentStream is MemoryStream asMemoryStream)
+                //{
+                //    return asMemoryStream.ToArray();
+                //}
+                //else
+                //{
+                //    using (var memoryStream = new MemoryStream())
+                //    {
+                //        contentStream.Seek(0, SeekOrigin.Begin);
+                //        contentStream.CopyTo(memoryStream);
+                //        return memoryStream.ToArray();
+                //    }
+                //}
+                return ((MemoryStream)contentStream).ToArray();
+            }
+        }
+
+        public byte[] GetContentBytes()
+        {
+            return GetContentBytesAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
         #region Publish
         public async Task PublishAsync(string comment = null)
         {
@@ -328,7 +381,7 @@ namespace PnP.Core.Model.SharePoint
             string srcUrl = UrlUtility.EnsureAbsoluteUrl(PnPContext.Uri, ServerRelativeUrl).ToString();
 
             // Default is "overwrite=false" => "KeepBoth=true"
-            options ??= new MoveCopyOptions() { KeepBoth = true};
+            options ??= new MoveCopyOptions() { KeepBoth = true };
 
             // If options are specified, use the CopyByPath API endpoint
             var parameters = new

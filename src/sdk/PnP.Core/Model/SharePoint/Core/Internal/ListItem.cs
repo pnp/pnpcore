@@ -61,7 +61,7 @@ namespace PnP.Core.Model.SharePoint
                 else
                 {
                     //Handle the mapping from json to the domain model for the cases which are not generically handled           
-                    input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
+                    input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
                 }
 
                 return null;
@@ -86,7 +86,8 @@ namespace PnP.Core.Model.SharePoint
                 // If this list we're adding items to was not fetched from the server than throw an error
                 if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri))
                 {
-                    throw new ClientException(ErrorType.PropertyNotLoaded, $"Please first fetch this list from SharePoint before doing operations on it");
+                    throw new ClientException(ErrorType.PropertyNotLoaded,
+                        PnPCoreResources.Exception_PropertyNotLoaded_List);
                 }
 
                 // drop the everything in front of _api as the batching logic will add that automatically
@@ -164,7 +165,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
             }
         }
 
@@ -196,7 +197,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
             }
         }
 
@@ -222,7 +223,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
             }
         }
 
@@ -254,7 +255,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                PnPContext.Logger.LogInformation("No changes so skipping SystemUpdate");
+                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
             }
         }
 

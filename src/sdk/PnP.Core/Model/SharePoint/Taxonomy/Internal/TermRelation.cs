@@ -22,7 +22,7 @@ namespace PnP.Core.Model.SharePoint
                     case "TermRelationType": return JsonMappingHelper.ToEnum<TermRelationType>(input.JsonElement);
                 }
 
-                input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
+                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
 
                 return null;
             };
@@ -57,7 +57,8 @@ namespace PnP.Core.Model.SharePoint
                 
                 if (parentTerm == null)
                 {
-                    throw new ClientException(ErrorType.ConfigurationError, "Added a relationship can only be done starting from a term");
+                    throw new ClientException(ErrorType.Unsupported, 
+                        PnPCoreResources.Exception_Unsupported_FailedAddingTermRelation);
                 }
 
                 string termApi = $"termstore/sets/{parentTerm.Set.Id}/terms/{parentTerm.Id}/relations";

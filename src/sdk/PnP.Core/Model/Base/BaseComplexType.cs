@@ -8,7 +8,7 @@ namespace PnP.Core.Model
     /// Base class for all complex types for use complex properties of model classes
     /// </summary>
     /// <typeparam name="TModel">Model class</typeparam>
-    internal class BaseComplexType<TModel> : TransientObject, IDataModelMappingHandler
+    internal class BaseComplexType<TModel> : TransientObject, IDataModelMappingHandler, IRequestable
     {
         /// <summary>
         /// Handler that will fire when a property mapping does cannot be done automatically
@@ -19,6 +19,12 @@ namespace PnP.Core.Model
         /// Handler that will fire after the full json to model operation was done
         /// </summary>
         public Action<string> PostMappingHandler { get; set; }
+
+        /// <summary>
+        /// Indicates whether this model was fetched from the server
+        /// </summary>
+        [SystemProperty]
+        public bool Requested { get; set; } = false;
 
         /// <summary>
         /// Translates model into a set of classes that are used to drive CRUD operations

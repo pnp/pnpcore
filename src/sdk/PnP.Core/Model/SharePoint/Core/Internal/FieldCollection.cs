@@ -23,10 +23,11 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(title));
 
             if (fieldType == FieldType.Invalid)
-                throw new ArgumentException($"{nameof(fieldType)} is invalid");
+                throw new ArgumentException(string.Format(PnPCoreResources.Exception_Invalid_FieldType, nameof(fieldType)));
 
             if (!ValidateFieldOptions(fieldType, options))
-                throw new ClientException(ErrorType.InvalidParameters, $"{nameof(options)} is invalid for field type {fieldType}");
+                throw new ClientException(ErrorType.InvalidParameters, 
+                    string.Format(PnPCoreResources.Exception_Invalid_ForFieldType, nameof(options), fieldType));
 
             var newField = CreateNewAndAdd() as Field;
 
@@ -273,10 +274,11 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(title));
 
             if (fieldType == FieldType.Invalid)
-                throw new ArgumentException($"{nameof(fieldType)} is invalid");
+                throw new ArgumentException(string.Format(PnPCoreResources.Exception_Invalid_FieldType, nameof(fieldType)));
 
             if (!ValidateFieldOptions(fieldType, options))
-                throw new ClientException(ErrorType.InvalidParameters, $"{nameof(options)} is invalid for field type {fieldType}");
+                throw new ClientException(ErrorType.InvalidParameters,
+                    string.Format(PnPCoreResources.Exception_Invalid_ForFieldType, nameof(options), fieldType));
 
             var newField = CreateNewAndAdd() as Field;
 

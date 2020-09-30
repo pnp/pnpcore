@@ -16,7 +16,7 @@ namespace PnP.Core.Model.Teams
                     case "TeamsAppDistributionMethod": return JsonMappingHelper.ToEnum<TeamsAppDistributionMethod>(input.JsonElement);
                 }
 
-                input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
+                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
 
                 return null;
             };

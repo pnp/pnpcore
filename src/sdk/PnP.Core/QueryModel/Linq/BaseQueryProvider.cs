@@ -53,7 +53,7 @@ namespace PnP.Core.QueryModel
             // Support queries for the current type only, no projection
             if (!typeof(IQueryable<TResult>).IsAssignableFrom(expression.Type))
             {
-                throw new ArgumentException("Argument expression is not valid");
+                throw new ArgumentException(PnPCoreResources.Exception_ArgumentExpressionNotValid);
             }
 
             return (IQueryable<TResult>)CreateQuery(expression);
@@ -95,7 +95,8 @@ namespace PnP.Core.QueryModel
             // Other TResult types are not supported
             if (innerResultType == null)
             {
-                throw new ArgumentException($"Expected TResult of type {typeof(IAsyncEnumerable<>)} or {typeof(Task<>)}");
+                throw new ArgumentException(
+                    string.Format(PnPCoreResources.Exception_InvalidTResultType, typeof(IAsyncEnumerable<>), typeof(Task<>)));
             }
 
             if (!isEnumerable)
@@ -222,7 +223,7 @@ namespace PnP.Core.QueryModel
             }
             else
             {
-                throw new ArgumentException("Argument expression is not valid");
+                throw new ArgumentException(PnPCoreResources.Exception_ArgumentExpressionNotValid);
             }
 
             return false;

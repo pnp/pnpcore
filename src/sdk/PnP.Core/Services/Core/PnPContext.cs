@@ -217,7 +217,7 @@ namespace PnP.Core.Services
             {
                 if (GraphAlwaysUseBeta && value == false)
                 {
-                    throw new Exception("The GraphAlwaysUseBeta is set to true, you can't turn off the 'on-demand' beta support. First set GraphAlwaysUseBeta to false before turning of GraphCanUseBeta");
+                    throw new Exception(PnPCoreResources.Exception_ConfigurationError_CannotSetCanUseBeta);
                 }
 
                 graphCanUseBeta = value;

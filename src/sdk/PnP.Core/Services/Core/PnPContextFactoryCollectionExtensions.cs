@@ -63,8 +63,10 @@ namespace PnP.Core.Services
 
         private static IServiceCollection AddHttpHandlers(this IServiceCollection collection)
         {
-            collection.AddScoped<SharePointRestRetryHandler, SharePointRestRetryHandler>();
-            collection.AddScoped<MicrosoftGraphRetryHandler, MicrosoftGraphRetryHandler>();
+            // Use transient for the DelegatingHandlers
+            // https://stackoverflow.com/questions/53223411/httpclient-delegatinghandler-unexpected-life-cycle
+            collection.AddTransient<SharePointRestRetryHandler, SharePointRestRetryHandler>();
+            collection.AddTransient<MicrosoftGraphRetryHandler, MicrosoftGraphRetryHandler>();
 
             return collection;
         }
@@ -82,7 +84,7 @@ namespace PnP.Core.Services
         private static IServiceCollection AddPnPServices(this IServiceCollection collection)
         {
             return collection
-                   .AddScoped<IPnPContextFactory, PnPContextFactory>();
+                   .AddTransient<IPnPContextFactory, PnPContextFactory>();
         }
 
 #if !BLAZOR

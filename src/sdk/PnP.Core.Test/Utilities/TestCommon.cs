@@ -105,7 +105,7 @@ namespace PnP.Core.Test.Utilities
             testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             testPnPContextFactory.TestUris = TestUris;
 
-            return await BuildContextFactory().CreateAsync(configurationName).ConfigureAwait(false);
+            return await factory.CreateAsync(configurationName).ConfigureAwait(false);
         }
 
 
@@ -132,7 +132,7 @@ namespace PnP.Core.Test.Utilities
             (factory as TestPnPContextFactory).GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
             (factory as TestPnPContextFactory).TestUris = TestUris;
 
-            return await BuildContextFactory().CreateAsync(groupId).ConfigureAwait(false);
+            return await factory.CreateAsync(groupId).ConfigureAwait(false);
         }
 
         public PnPContext Clone(PnPContext source, Uri uri, int id)
@@ -273,6 +273,12 @@ namespace PnP.Core.Test.Utilities
             {
                 return false;
             }
+        }
+
+        internal const string PnPCoreSDKTestPrefix = "PNP_SDK_TEST_";
+        internal static string GetPnPSdkTestAssetName(string name)
+        {
+            return name.StartsWith(PnPCoreSDKTestPrefix) ? name : $"{PnPCoreSDKTestPrefix}{name}";
         }
     }
 }

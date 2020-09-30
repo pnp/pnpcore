@@ -44,7 +44,7 @@ namespace PnP.Core.QueryModel
                     member = me.Member;
                     break;
                 default:
-                    throw new NotSupportedException($"Expression {expression.Body} is not supported");
+                    throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionBody, expression.Body));
             }
 
             return new FunctionDefinition(member, format);

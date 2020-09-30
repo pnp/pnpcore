@@ -39,7 +39,8 @@ namespace PnP.Core.QueryModel
         {
             if (string.IsNullOrEmpty(memberName))
             {
-                throw new ClientException(ErrorType.LinqError, $"Missing value for {nameof(memberName)} in {GetType().Name}");
+                throw new ClientException(ErrorType.LinqError, 
+                    string.Format(PnPCoreResources.Exception_LinqError_MissingValue, nameof(memberName), GetType().Name));
             }
 
             // At this point in time we support querying collections for which the model implements IQueryableModel

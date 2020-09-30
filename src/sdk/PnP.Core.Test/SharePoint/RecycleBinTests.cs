@@ -1182,7 +1182,7 @@ namespace PnP.Core.Test.SharePoint
                     await context.Web.RecycleBin.DeleteAllAsync();
                 }
 
-                string fileName = $"PNP_SDK_TEST_{testName}.docx";
+                string fileName = $"{TestCommon.PnPCoreSDKTestPrefix}{testName}.docx";
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
                 IFile mockDocument = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
                 Guid id = await mockDocument.RecycleAsync();
@@ -1196,7 +1196,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
-                string fileName = $"PNP_SDK_TEST_{testName}.docx";
+                string fileName = $"{TestCommon.PnPCoreSDKTestPrefix}{testName}.docx";
                 IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
                 IFile mockDocument = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
                 Guid id = await mockDocument.RecycleAsync();
@@ -1245,7 +1245,7 @@ namespace PnP.Core.Test.SharePoint
                 fileName += ".docx";
             }
 
-            fileName = fileName.StartsWith("PNP_SDK_TEST_") ? fileName : $"PNP_SDK_TEST_{fileName}";
+            fileName = fileName.StartsWith($"{TestCommon.PnPCoreSDKTestPrefix}") ? fileName : $"{TestCommon.PnPCoreSDKTestPrefix}{fileName}";
             using (var context = await TestCommon.Instance.GetContextAsync(contextConfig, contextId, testName))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{fileName}";

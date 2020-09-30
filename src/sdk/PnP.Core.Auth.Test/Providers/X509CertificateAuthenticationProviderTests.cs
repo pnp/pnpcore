@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
-namespace PnP.Core.Auth.Test.Base
+namespace PnP.Core.Auth.Test.Providers
 {
     /// <summary>
     /// Tests that focus on validating the X509CertificateAuthenticationProvider
@@ -17,8 +17,7 @@ namespace PnP.Core.Auth.Test.Base
     [TestClass]
     public class X509CertificateAuthenticationProviderTests
     {
-        private static Uri graphResource = new Uri("https://graph.microsoft.com");
-        private static string graphMeRequest = "https://graph.microsoft.com/v1.0/me";
+        private static string x509CertificateConfigurationPath = "x509Certificate";
 
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
@@ -69,9 +68,9 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreLocation");
-            var thumbprint = configuration.GetValue<string>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:Thumbprint");
+            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreLocation");
+            var thumbprint = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:Thumbprint");
 
             var provider = new X509CertificateAuthenticationProvider(
                 null,
@@ -93,8 +92,8 @@ namespace PnP.Core.Auth.Test.Base
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreLocation");
+            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreLocation");
 
             var provider = new X509CertificateAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -119,7 +118,7 @@ namespace PnP.Core.Auth.Test.Base
         {
             var provider = PrepareX509CertificateAuthenticationProvider();
 
-            await provider.AuthenticateRequestAsync(graphResource, null);
+            await provider.AuthenticateRequestAsync(TestGlobals.GraphResource, null);
         }
 
         [TestMethod]
@@ -127,8 +126,8 @@ namespace PnP.Core.Auth.Test.Base
         {
             var provider = PrepareX509CertificateAuthenticationProvider();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, graphMeRequest);
-            await provider.AuthenticateRequestAsync(graphResource, request);
+            var request = new HttpRequestMessage(HttpMethod.Get, TestGlobals.GraphMeRequest);
+            await provider.AuthenticateRequestAsync(TestGlobals.GraphResource, request);
 
             Assert.IsNotNull(request.Headers.Authorization);
             Assert.AreEqual(request.Headers.Authorization.Scheme.ToLower(), "bearer");
@@ -158,7 +157,7 @@ namespace PnP.Core.Auth.Test.Base
         {
             var provider = PrepareX509CertificateAuthenticationProvider();
 
-            await provider.GetAccessTokenAsync(graphResource, null);
+            await provider.GetAccessTokenAsync(TestGlobals.GraphResource, null);
         }
 
         [TestMethod]
@@ -166,7 +165,7 @@ namespace PnP.Core.Auth.Test.Base
         {
             var provider = PrepareX509CertificateAuthenticationProvider();
 
-            var accessToken = await provider.GetAccessTokenAsync(graphResource);
+            var accessToken = await provider.GetAccessTokenAsync(TestGlobals.GraphResource);
 
             Assert.IsNotNull(accessToken);
             Assert.IsTrue(accessToken.Length > 0);
@@ -177,11 +176,11 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:x509Certificate:ClientId");
-            var tenantId = configuration.GetValue<string>("PnPCore:Credentials:Configurations:x509Certificate:TenantId");
-            var storeName = configuration.GetValue<StoreName>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:StoreLocation");
-            var thumbprint = configuration.GetValue<string>("PnPCore:Credentials:Configurations:x509Certificate:X509Certificate:Thumbprint");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:TenantId");
+            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:StoreLocation");
+            var thumbprint = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{x509CertificateConfigurationPath}:X509Certificate:Thumbprint");
 
             var provider = new X509CertificateAuthenticationProvider(
                 clientId,

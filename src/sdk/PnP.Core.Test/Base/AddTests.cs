@@ -33,7 +33,7 @@ namespace PnP.Core.Test.Base
             {
                 var web = await context.Web.GetAsync(p => p.Lists);
 
-                string listTitle = "AddListViaRest";
+                string listTitle = "AddListViaRestAsync";
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)

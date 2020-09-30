@@ -35,7 +35,7 @@ Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit in
 
 - We currenlty target .Net Standard 2.0, once [.Net 5.0](https://devblogs.microsoft.com/dotnet/introducing-net-5/) is available we'll also ship a [.Net 5.0](https://devblogs.microsoft.com/dotnet/introducing-net-5/) version
 - This library will work cross platform (Windows, Linux, MacOS)
-- This library will work in all places where .Net will work
+- This library will work in all places where .Net will work (see [our samples](src/samples) to learn more):
   - Backend: e.g. [Azure functions v3](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
   - Web: e.g. [ASP.Net core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
   - Browser (WebAssemby (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)

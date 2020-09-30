@@ -255,7 +255,8 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+                throw new ClientException(ErrorType.MissingAddApiHandler,
+                    PnPCoreResources.Exception_MissingAddApiHandler);
             }
         }
 
@@ -275,7 +276,8 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+                throw new ClientException(ErrorType.MissingAddApiHandler,
+                    PnPCoreResources.Exception_MissingAddApiHandler);
             }
         }
 
@@ -293,7 +295,8 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new ClientException(ErrorType.MissingAddApiHandler, "Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall");
+                throw new ClientException(ErrorType.MissingAddApiHandler,
+                    PnPCoreResources.Exception_MissingAddApiHandler);
             }
         }
 
@@ -581,7 +584,7 @@ namespace PnP.Core.Model
 
         private void ApiCancellationMessage(ApiCallRequest api)
         {
-            Log.LogInformation($"API call {api.ApiCall.Request} cancelled: {api.CancellationReason}");
+            Log.LogInformation(PnPCoreResources.Log_Information_ApiCallCancelled, api.ApiCall.Request, api.CancellationReason);
         }
 
         private async Task<ApiCallRequest> BuildGetAPICallRestAsync(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
@@ -847,7 +850,7 @@ namespace PnP.Core.Model
                         }
 
                         if (addExpand)
-                        {                           
+                        {
                             if (field.ExpandFieldInfo != null)
                             {
                                 StringBuilder sbExpand = new StringBuilder();
@@ -896,7 +899,8 @@ namespace PnP.Core.Model
             {
                 if (string.IsNullOrEmpty(getApi))
                 {
-                    throw new ClientException(ErrorType.ModelMetadataIncorrect, $"Specify the GraphGet/GraphGetLinq field of the ClassMapping property.");
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect,
+                        PnPCoreResources.Exception_ModelMetadataIncorrect_MissingGetMapping);
                 }
 
                 // Ensure tokens in the base url are replaced
@@ -1041,7 +1045,10 @@ namespace PnP.Core.Model
 
                                     if (!string.IsNullOrEmpty(expandableFieldInfo.GraphGet))
                                     {
-                                        throw new ClientException(ErrorType.Unsupported, $"Loading the {expandableFieldInfo.Name} property requires an extra GET request ({expandableFieldInfo.GraphGet}) which is not supported when using nested LoadProperties methods");
+                                        throw new ClientException(ErrorType.Unsupported,
+                                            string.Format(PnPCoreResources.Exception_Unsupported_ExtraGet,
+                                            expandableFieldInfo.Name,
+                                            expandableFieldInfo.GraphGet));
                                     }
 
                                     if (!string.IsNullOrEmpty(expandableFieldInfo.GraphJsonPath))
@@ -1079,7 +1086,7 @@ namespace PnP.Core.Model
                                 StringBuilder sb = new StringBuilder();
 
                                 AddExpandableSelectGraph(!graphGetHasExpand, sb, nonExpandableField, null, "");
-                                
+
                                 // Since the URL listed for a graph get can already have url parameters we need to "merge" them together
                                 var urlComplement = sb.ToString();
                                 if (graphGetHasExpand)
@@ -1178,10 +1185,11 @@ namespace PnP.Core.Model
         internal async virtual Task BaseBatchAddAsync(Batch batch, ApiCall postApiCall, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             var parent = TokenHandler.GetParentDataModel(this);
-            
+
             if (parent is IRequestable && !(parent as IRequestable).Requested && batch.Requests.Count > 0)
             {
-                throw new ClientException(ErrorType.UnsupportedViaBatch, "You cannot do a batch add of a model to a modelcollection that was not yet requested. Common reasons are adding an item and using that same item in a single batch");
+                throw new ClientException(ErrorType.UnsupportedViaBatch,
+                    PnPCoreResources.Exception_Unsupported_ViaBatch);
             }
 
             // Get entity information for the entity to update
@@ -1223,7 +1231,8 @@ namespace PnP.Core.Model
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForAdd(postApiCall, entityInfo))
             {
-                throw new ClientException(ErrorType.GraphBetaNotAllowed, "Adding this entity requires the use of the Graph beta endpoint");
+                throw new ClientException(ErrorType.GraphBetaNotAllowed,
+                    PnPCoreResources.Exception_GraphBetaNotAllowed);
             }
 
             // Add the request to the batch
@@ -1507,6 +1516,21 @@ namespace PnP.Core.Model
                             ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
                         }
                     }
+                    else if (JsonMappingHelper.IsComplexType(changedField.PropertyInfo.PropertyType))
+                    {
+                        // Build a new dynamic object that will hold the changed properties of the complex type
+                        dynamic updateMessageComplexType = new ExpandoObject();
+                        var complexObject = this.GetValue(changedField.Name) as TransientObject;
+
+                        // Get the properties that have changed in the complex type
+                        foreach (string changedProp in complexObject.ChangedProperties)
+                        {
+                            ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp, complexObject.GetValue(changedProp));
+                        }
+
+                        // Add this as value to the original changed property
+                        ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, updateMessageComplexType as object);
+                    }
                     else
                     {
                         // Let's set its value into the update message
@@ -1738,7 +1762,8 @@ namespace PnP.Core.Model
             // Ensure there's no Graph beta endpoint being used when that was not allowed
             if (!CanUseGraphBetaForRequest(apiCall, entityInfo))
             {
-                throw new ClientException(ErrorType.GraphBetaNotAllowed, "Adding this entity requires the use of the Graph beta endpoint");
+                throw new ClientException(ErrorType.GraphBetaNotAllowed,
+                    PnPCoreResources.Exception_GraphBetaNotAllowed);
             }
 
             // Ensure token replacement is done
@@ -1822,13 +1847,20 @@ namespace PnP.Core.Model
                                        batchFirstRequest.ResponseHttpStatusCode,
                                        batch.Id,
                                        batchFirstRequest.ResponseHeaders,
-                                       batchFirstRequest.CsomResponseJson);
+                                       csomResponseJson: apiCall.ExpectBinaryResponse ? null : batchFirstRequest.CsomResponseJson,
+                                       binaryContent: apiCall.ExpectBinaryResponse ? batchFirstRequest.ResponseBinaryContent : null);
         }
 
         private ApiCall PrefixApiCall(ApiCall apiCall, EntityInfo entityInfo)
         {
             if (!string.IsNullOrEmpty(entityInfo.SharePointType))
             {
+                // The request is populated and already has a fully qualified url
+                if (apiCall.Request != null && apiCall.Request.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return apiCall;
+                }
+
                 // Prefix API request with context url
                 apiCall.Request = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiCall.Request}";
             }

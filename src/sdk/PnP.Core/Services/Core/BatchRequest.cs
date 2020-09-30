@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
@@ -88,6 +89,11 @@ namespace PnP.Core.Services
         internal string ResponseJson { get; private set; }
 
         /// <summary>
+        /// Stream containing the response binary content
+        /// </summary>
+        internal Stream ResponseBinaryContent { get; private set; } 
+
+        /// <summary>
         /// Dictionary with the json responses for the requests defined in the CSOM XML
         /// </summary>
         internal Dictionary<int, JsonElement> CsomResponseJson { get; private set; }
@@ -126,6 +132,33 @@ namespace PnP.Core.Services
         internal void AddResponse(string json, HttpStatusCode responseHttpStatusCode, Dictionary<string, string> responseHeaders)
         {
             ResponseJson = json;
+            ExecutionNeeded = false;
+            ResponseHttpStatusCode = responseHttpStatusCode;
+            if (responseHeaders != null)
+            {
+                ResponseHeaders = responseHeaders;
+            }
+        }
+
+        /// <summary>
+        /// Records the response of a request (fired as part of the execution of a <see cref="Batch"/>)
+        /// </summary>
+        /// <param name="binaryContent">response binary content for this request</param>
+        /// <param name="responseHttpStatusCode">Http response status code for this request</param>
+        internal void AddResponse(Stream binaryContent, HttpStatusCode responseHttpStatusCode)
+        {
+            AddResponse(binaryContent, responseHttpStatusCode, null);
+        }
+
+        /// <summary>
+        /// Records the response of a request (fired as part of the execution of a <see cref="Batch"/>)
+        /// </summary>
+        /// <param name="binaryContent">response binary content for this request</param>
+        /// <param name="responseHttpStatusCode">Http response status code for this request</param>
+        /// <param name="responseHeaders">Http response headers</param>
+        internal void AddResponse(Stream binaryContent, HttpStatusCode responseHttpStatusCode, Dictionary<string, string> responseHeaders)
+        {
+            ResponseBinaryContent = binaryContent;
             ExecutionNeeded = false;
             ResponseHttpStatusCode = responseHttpStatusCode;
             if (responseHeaders != null)

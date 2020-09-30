@@ -73,7 +73,7 @@ namespace PnP.Core.Services
                 {
                     if (chr < 32)
                     {
-                        throw new InvalidOperationException($"Invalid character in Xml String. Chr {Convert.ToInt16(chr)} is illegal.");
+                        throw new InvalidOperationException(string.Format(PnPCoreResources.Exception_Xml_InvalidXmlCharacter, Convert.ToInt16(chr)));
                     }
                     sb.Append(chr);
                 }

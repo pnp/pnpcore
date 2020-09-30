@@ -150,14 +150,17 @@
   <data name="InvalidConfigurationName" xml:space="preserve">
     <value>Invalid configuration name '{0}' for IAuthenticationProvider creation!</value>
   </data>
-  <data name="OnBehalfOfAuthenticationProvider_InvalidClientSecret" xml:space="preserve">
-    <value>Invalid or missing value for ClientSecret in ClientSecretAuthenticationProvider configuration</value>
+  <data name="OnBehalfOfAuthenticationProvider_InvalidClientSecretOrCertificate" xml:space="preserve">
+    <value>Invalid or missing value for ClientSecret or Certificate in OnBehalfOfAuthenticationProvider configuration</value>
   </data>
   <data name="OnBehalfOfAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for OnBehalfOfAuthenticationProvider</value>
   </data>
   <data name="OnBehalfOfAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized OnBehalfOfAuthenticationProvider</value>
+  </data>
+  <data name="OnBehalfOfAuthenticationProvider_MissingUserTokenProvider" xml:space="preserve">
+    <value>Missing value for function UserTokenProvider in OnBehalfOfAuthenticationProvider</value>
   </data>
   <data name="UsernamePasswordAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for UsernamePasswordAuthenticationProvider</value>

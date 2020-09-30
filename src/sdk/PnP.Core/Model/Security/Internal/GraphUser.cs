@@ -27,7 +27,8 @@ namespace PnP.Core.Model.Security
         {
             if (!this.IsPropertyAvailable(p=>p.UserPrincipalName) || string.IsNullOrEmpty(UserPrincipalName))
             {
-                throw new ClientException(ErrorType.Unsupported, "You can't call AsSharePointUserAsync on a Graph user without the UserPrincipalProperty requested and populated");
+                throw new ClientException(ErrorType.Unsupported, 
+                    PnPCoreResources.Exception_Unsupported_SharePointUserOnGraph);
             }
 
             // Build the API call to ensure this graph user as a SharePoint User in this site collection

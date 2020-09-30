@@ -199,7 +199,7 @@ namespace PnP.Core.QueryModel
 
                         break;
                     default:
-                        throw new InvalidCastException("Invalid type for the filter object");
+                        throw new InvalidCastException(PnPCoreResources.Exception_InvalidTypeForFilter);
                 }
 
                 // Disable the isFirst flag, because for sure we already processed the first filter
@@ -226,7 +226,7 @@ namespace PnP.Core.QueryModel
                 case FilteringCriteria.Not:
                     return "not";
                 default:
-                    throw new NotSupportedException($"Criteria {criteria} is not supported");
+                    throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_Criteria, criteria));
             }
         }
 

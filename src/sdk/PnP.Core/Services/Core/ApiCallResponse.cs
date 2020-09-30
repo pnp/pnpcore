@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Text.Json;
 
@@ -7,7 +8,9 @@ namespace PnP.Core.Services
 {
     internal struct ApiCallResponse
     {
-        internal ApiCallResponse(ApiCall apiCall, string json, HttpStatusCode statusCode, Guid batchRequestId, Dictionary<string, string> headers, Dictionary<int, JsonElement> csomResponseJson)
+        internal ApiCallResponse(ApiCall apiCall, string json, HttpStatusCode statusCode,
+            Guid batchRequestId, Dictionary<string, string> headers, 
+            Dictionary<int, JsonElement> csomResponseJson = null, Stream binaryContent = null)
         {
             ApiCall = apiCall;
             Json = json;
@@ -15,6 +18,7 @@ namespace PnP.Core.Services
             BatchRequestId = batchRequestId;
             Headers = headers;
             CsomResponseJson = csomResponseJson;
+            BinaryContent = binaryContent;
         }
 
         /// <summary>
@@ -35,8 +39,8 @@ namespace PnP.Core.Services
         /// <summary>
         /// Contains the request http status code
         /// </summary>
-        internal HttpStatusCode StatusCode { get; private set; } 
-        
+        internal HttpStatusCode StatusCode { get; private set; }
+
         /// <summary>
         /// Contains additional response headers (if any)
         /// </summary>
@@ -46,5 +50,10 @@ namespace PnP.Core.Services
         /// Contains CSOM response values
         /// </summary>
         internal Dictionary<int, JsonElement> CsomResponseJson { get; private set; }
+
+        /// <summary>
+        /// Stream containing binary content of the response
+        /// </summary>
+        internal Stream BinaryContent { get; private set; }
     }
 }
