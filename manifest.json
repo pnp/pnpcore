@@ -1254,7 +1254,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IEffectiveInformationRightsManagementSettings.html",
-          "hash": "R7f21xRpMz2OYnBXkyrYTw=="
+          "hash": "gnKFv57+LHbvwbJUj25cDw=="
         }
       },
       "is_incremental": false,
@@ -1410,7 +1410,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IInformationRightsManagementFileSettings.html",
-          "hash": "Gr3QhlE0EnTeWvxLqpzMYg=="
+          "hash": "3PZL4co3iHD0bEzqe6zjlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IInformationRightsManagementSettings.html",
+          "hash": "QqKrA4/WL0gCaXPrBwq+oA=="
         }
       },
       "is_incremental": false,
@@ -1422,7 +1434,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "1cwQY4s8CdjezvW4cpG1RA=="
+          "hash": "t3qCJc/ejzFZkWtIiWk3fg=="
         }
       },
       "is_incremental": false,
@@ -2010,7 +2022,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "R+WvVDrZEYMfsWaASRoDXA=="
+          "hash": "IPEzRB1WVragzD1LDbVoxA=="
         }
       },
       "is_incremental": false,
@@ -3006,7 +3018,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "4spEtjLlrOPL+C4Jnu6Cqg=="
+          "hash": "2lAAgJLDeKO9/aG2gPmeVQ=="
         }
       },
       "is_incremental": false,
@@ -3350,7 +3362,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 248,
+          "total_file_count": 249,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
