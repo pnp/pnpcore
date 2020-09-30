@@ -2,7 +2,7 @@
 
 This sample demonstrates using the pnp core library running on a Raspberry Pi device.
 
-![Sample Screenshot](doc-images/screenshot_pi_example.png)
+![Sample Screenshot](docs-images/screenshot_pi_example.png)
 
 ## Setup
 
