@@ -106,18 +106,18 @@ To publish the Azure Function:
 - Click **Publish**
 - Click the **Manage Azure App Service settings** link
 
-![Publish profile in Visual Studio](./docs/images/vs-publishprofile01.png)
+![Publish profile in Visual Studio](./docs-images/vs-publishprofile01.png)
 
 - For each setting for which a Remote value is not yet specified, click the **Insert value from Local** link
 
-![Specify remote app settings from Visual Studio](./docs/images/vs-appsettings-remote.png)
+![Specify remote app settings from Visual Studio](./docs-images/vs-appsettings-remote.png)
 
 - Click the **Manage in Azure Portal** link
 - In the **TLS/SSL settings** tab, choose **Private Key Certificates (.pfx)** and click **Upload Certificate**
 
-![Azure Portal - Azure Functions TLS/SSL settings](./docs/images/azfunc-tlsssl-tab.png)
-![Azure Portal - Private Key Certificate settings](./docs/images/azfunc-cert.png)
-![Azure Portal - Upload certificate](./docs/images/azfunc-upload-cert.png)
+![Azure Portal - Azure Functions TLS/SSL settings](./docs-images/azfunc-tlsssl-tab.png)
+![Azure Portal - Private Key Certificate settings](./docs-images/azfunc-cert.png)
+![Azure Portal - Upload certificate](./docs-images/azfunc-upload-cert.png)
 
 - Browse your computer and select the .pfx certificate we created earlier, enter the password chosen earlier and click **Upload**
 
@@ -129,8 +129,8 @@ On the Azure Portal, on your Function App blade:
  - Make sure the chosen **Method** is **GET**
  - Click **Run**
 
-![Azure Portal - Azure Function Test Run](./docs/images/azfunc-testrun1.png)
-![Azure Portal - Azure Function Test Run - Output](./docs/images/azfunc-testrun2.png)
+![Azure Portal - Azure Function Test Run](./docs-images/azfunc-testrun1.png)
+![Azure Portal - Azure Function Test Run - Output](./docs-images/azfunc-testrun2.png)
 
  Alternatively, from **Code + Test** tab mentioned aboved you can click the **Get Function URL** button and copy the URL.
  Then paste it in your browser or using curl in a terminal (see example here below)
