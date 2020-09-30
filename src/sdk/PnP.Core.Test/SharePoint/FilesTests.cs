@@ -2381,7 +2381,7 @@ namespace PnP.Core.Test.SharePoint
                 list.IrmEnabled = true;
                 await list.UpdateAsync();
                 
-                string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/PnP_SDK_TEST_test_irm_effective_settings.docx";
+                string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{TestCommon.PnPCoreSDKTestPrefix}test_irm_effective_settings.docx";
                 IFile documentWithEffectiveIrm = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.EffectiveInformationRightsManagementSettings);
 
                 // TODO The asserts below checks the effective IRM settings object is instantiated. More relevant tests should be done on a IRM enabled and configured tenant
