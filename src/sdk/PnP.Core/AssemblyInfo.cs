@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Resources;
+using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("PnP.Core.Auth")]
 
@@ -6,3 +7,5 @@
 [assembly: InternalsVisibleTo("PnP.Core.Test")]
 [assembly: InternalsVisibleTo("PnP.Core.Auth.Test")]
 #endif
+
+[assembly: NeutralResourcesLanguage("en")]

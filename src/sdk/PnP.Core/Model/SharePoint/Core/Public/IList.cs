@@ -163,6 +163,11 @@ namespace PnP.Core.Model.SharePoint
         public bool IrmReject { get; set; }
 
         /// <summary>
+        /// Defines if IRM is enabled for this list.
+        /// </summary>
+        public bool IrmEnabled { get; set; }
+
+        /// <summary>
         /// Defines a value that specifies a flag that a client application can use to determine whether to display the list, optional attribute.
         /// </summary>
         public bool IsApplicationList { get; set; }
@@ -201,6 +206,11 @@ namespace PnP.Core.Model.SharePoint
         /// Collection of fields for this list
         /// </summary>
         public IFieldCollection Fields { get; }
+
+        /// <summary>
+        /// Load the IRM settings of this list
+        /// </summary>
+        public IInformationRightsManagementSettings InformationRightsManagementSettings { get; }
 
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id

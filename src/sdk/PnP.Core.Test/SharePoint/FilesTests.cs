@@ -2368,24 +2368,33 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
-        // TODO: Uncomment this test with live test on IRM enabled tenant
-        //[TestMethod]
-        //public async Task GetFileEffectiveIRMSettingsTest()
-        //{
-        //    //TestCommon.Instance.Mocking = false;
-        //    await AddMockDocumentToSharedDocuments(0, "test_irm_effective_settings.docx");
+        [TestMethod]
+        public async Task GetFileEffectiveIRMSettingsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            await AddMockDocumentToSharedDocuments(0, "test_irm_effective_settings.docx");
 
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-        //    {
-        //        string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_irm_effective_settings.docx";
-        //        IFile documentWithEffectiveIrm = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.EffectiveInformationRightsManagementSettings);
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                // Enable IRM on the library
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.IrmEnabled, p => p.InformationRightsManagementSettings);
+                list.IrmEnabled = true;
+                await list.UpdateAsync();
+                
+                string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/PnP_SDK_TEST_test_irm_effective_settings.docx";
+                IFile documentWithEffectiveIrm = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.EffectiveInformationRightsManagementSettings);
 
-        //        // TODO The asserts below checks the effective IRM settings object is instantiated. More relevant tests should be done on a IRM enabled and configured tenant
-        //        Assert.IsNotNull(documentWithEffectiveIrm.EffectiveInformationRightsManagementSettings);
-        //    }
+                // TODO The asserts below checks the effective IRM settings object is instantiated. More relevant tests should be done on a IRM enabled and configured tenant
+                Assert.IsNotNull(documentWithEffectiveIrm.EffectiveInformationRightsManagementSettings);
 
-        //    await CleanupMockDocumentFromSharedDocuments(2, "test_irm_effective_settings.docx");
-        //}
+                // turn off IRM again
+                list.IrmEnabled = false;
+                await list.UpdateAsync();
+
+            }
+
+            await CleanupMockDocumentFromSharedDocuments(2, "test_irm_effective_settings.docx");
+        }
 
         #region Get file versions
         [TestMethod]

@@ -3,13 +3,14 @@ using System;
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
-    /// Internal class representing a EffectiveInformationRightsManagementSettings object
+    /// Internal class representing a InformationRightsManagementSettings object
     /// 
     /// Note: this class is generated, please don't modify this code by hand!
     /// 
     /// </summary>
-    internal partial class EffectiveInformationRightsManagementSettings : BaseDataModel<IEffectiveInformationRightsManagementSettings>, IEffectiveInformationRightsManagementSettings
+    internal partial class InformationRightsManagementSettings : BaseDataModel<IInformationRightsManagementSettings>, IInformationRightsManagementSettings
     {
+
         public bool AllowPrint { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool AllowScript { get => GetValue<bool>(); set => SetValue(value); }
@@ -32,15 +33,11 @@ namespace PnP.Core.Model.SharePoint
 
         public string GroupName { get => GetValue<string>(); set => SetValue(value); }
 
-        public bool IrmEnabled { get => GetValue<bool>(); set => SetValue(value); }
-
         public int LicenseCacheExpireDays { get => GetValue<int>(); set => SetValue(value); }
 
         public string PolicyDescription { get => GetValue<string>(); set => SetValue(value); }
 
         public string PolicyTitle { get => GetValue<string>(); set => SetValue(value); }
-
-        public SPEffectiveInformationRightsManagementSettingsSource SettingSource { get => GetValue<SPEffectiveInformationRightsManagementSettingsSource>(); set => SetValue(value); }
 
         public string TemplateId { get => GetValue<string>(); set => SetValue(value); }
 
