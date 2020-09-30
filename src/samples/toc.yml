@@ -1,0 +1,15 @@
+- name: List of Samples
+  href: readme.md
+  items:
+  - name: ASP.NET Core
+    href: Demo.ASPNetCore/readme.md
+  - name: Azure Function
+    href: Demo.AzureFunction/readme.md
+  - name: Blazor App
+    href: Demo.Blazor/readme.md
+  - name: Console App
+    href: Demo.Console/readme.md
+  - name: Raspberry Pi
+    href: Demo.RPi/readme.md
+  - name: WPF App
+    href: Demo.WPF/readme.md

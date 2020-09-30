@@ -33,12 +33,22 @@
           "toc.yml",
           "*.md"
         ]
+      },
+      {
+        "files": [
+          "demos/**.md",
+          "demos/**/**.md",
+          "demos/**/toc.yml",
+          "toc.yml",
+          "*.md"
+        ]
       }
     ],
     "resource": [
       {
         "files": [
-          "images/**"
+          "images/**",
+          "demos/**/*.png"
         ]
       }
     ],
