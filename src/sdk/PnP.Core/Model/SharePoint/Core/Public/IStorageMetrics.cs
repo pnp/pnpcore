@@ -26,6 +26,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the total size of the storage resource.
         /// </summary>
-        public long TotalSize { get; set; }
+        public long TotalSize { get; }
     }
 }
