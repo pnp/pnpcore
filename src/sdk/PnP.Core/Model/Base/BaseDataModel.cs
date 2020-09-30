@@ -1852,8 +1852,14 @@ namespace PnP.Core.Model
 
         private ApiCall PrefixApiCall(ApiCall apiCall, EntityInfo entityInfo)
         {
-            if (!string.IsNullOrEmpty(entityInfo.SharePointType) && !apiCall.Request.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
+            if (!string.IsNullOrEmpty(entityInfo.SharePointType))
             {
+                // The request is populated and already has a fully qualified url
+                if (apiCall.Request != null && apiCall.Request.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return apiCall;
+                }
+
                 // Prefix API request with context url
                 apiCall.Request = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiCall.Request}";
             }
