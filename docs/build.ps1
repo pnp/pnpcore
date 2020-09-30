@@ -26,10 +26,3 @@ Remove-Item ./gh-pages/api/* -Recurse -Force
 Remove-Item ./gh-pages/articles/* -Recurse -Force
 Remove-Item ./gh-pages/images/* -Recurse -Force
 copy-item -Force -Recurse ./dev/docs/_site/* -Destination ./gh-pages
-
-
-Get-item ./src/samples/* | % { 
-    if($_.PSIsContainer){
-        Copy-Item *.md -Destination $_.FullName
-    }
-}
