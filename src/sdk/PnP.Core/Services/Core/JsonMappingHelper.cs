@@ -707,6 +707,7 @@ namespace PnP.Core.Services
 
         private static void MapJsonToComplexTypePropertyRecursive(TransientObject pnpObject, IDataModelWithContext contextAwareObject, JsonProperty property, EntityFieldInfo entityField)
         {
+
             // Do we still need to instantiate this object
             if (!pnpObject.HasValue(entityField.Name))
             {
@@ -720,6 +721,12 @@ namespace PnP.Core.Services
             var typedModel = propertyToSetValue as IDataModelMappingHandler;
             var metadataExtensible = propertyToSetValue as IMetadataExtensible;
             var expandoComplexType = propertyToSetValue as IExpandoComplexType;
+
+            // Mark object as not requested before the load
+            if (propertyToSetValue.GetType().ImplementsInterface(typeof(IRequestable)))
+            {
+                ((IRequestable)propertyToSetValue).Requested = false;
+            }
 
             // Set the batch request id property
             SetBatchRequestId(propertyToSetValue as TransientObject, pnpObject.BatchRequestId);
@@ -799,6 +806,13 @@ namespace PnP.Core.Services
                         expandoComplexType[childProperty.Name] = GetJsonPropertyValue(childProperty);
                     }
                 }
+            }
+
+            // Mark object as requested, as long as it is an IRequestable object
+            // Mark object as not requested before the load
+            if (propertyToSetValue.GetType().ImplementsInterface(typeof(IRequestable)))
+            {
+                ((IRequestable)propertyToSetValue).Requested = true;
             }
         }
 

@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// 
     /// </summary>
     [SharePointType("SP.InformationRightsManagementFileSettings")]
-    internal partial class InformationRightsManagementFileSettings : BaseComplexType<IInformationRightsManagementFileSettings>, IInformationRightsManagementFileSettings
+    internal partial class InformationRightsManagementFileSettings : BaseDataModel<IInformationRightsManagementFileSettings>, IInformationRightsManagementFileSettings
     {
         public bool AllowPrint { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -38,5 +38,8 @@ namespace PnP.Core.Model.SharePoint
         public string PolicyTitle { get => GetValue<string>(); set => SetValue(value); }
 
         public string TemplateId { get => GetValue<string>(); set => SetValue(value); }
+
+        [KeyProperty("PolicyTitle")]
+        public override object Key { get => this.PolicyTitle; set => this.PolicyTitle = value.ToString(); }
     }
 }

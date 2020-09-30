@@ -1516,6 +1516,21 @@ namespace PnP.Core.Model
                             ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
                         }
                     }
+                    else if (JsonMappingHelper.IsComplexType(changedField.PropertyInfo.PropertyType))
+                    {
+                        // Build a new dynamic object that will hold the changed properties of the complex type
+                        dynamic updateMessageComplexType = new ExpandoObject();
+                        var complexObject = this.GetValue(changedField.Name) as TransientObject;
+
+                        // Get the properties that have changed in the complex type
+                        foreach (string changedProp in complexObject.ChangedProperties)
+                        {
+                            ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp, complexObject.GetValue(changedProp));
+                        }
+
+                        // Add this as value to the original changed property
+                        ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, updateMessageComplexType as object);
+                    }
                     else
                     {
                         // Let's set its value into the update message
@@ -1837,7 +1852,7 @@ namespace PnP.Core.Model
 
         private ApiCall PrefixApiCall(ApiCall apiCall, EntityInfo entityInfo)
         {
-            if (!string.IsNullOrEmpty(entityInfo.SharePointType))
+            if (!string.IsNullOrEmpty(entityInfo.SharePointType) && !apiCall.Request.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase))
             {
                 // Prefix API request with context url
                 apiCall.Request = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiCall.Request}";

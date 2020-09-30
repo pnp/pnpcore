@@ -502,5 +502,121 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+
+        [TestMethod]
+        public async Task GetListIRMSettingsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "GetListIRMSettingsTest";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                }
+
+                // Enable IRM on the library
+                await myList.GetAsync();
+                myList.IrmEnabled = true;
+                await myList.UpdateAsync();
+
+                // Load IRM settings
+                await myList.InformationRightsManagementSettings.GetAsync();
+
+                // Verify default IRM list settings are returned
+                Assert.IsTrue(myList.InformationRightsManagementSettings.Requested);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.AllowPrint == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.AllowScript == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.AllowWriteCopy == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.DisableDocumentBrowserView == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentAccessExpireDays == 90);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentLibraryProtectionExpireDate > DateTime.Today);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.EnableDocumentAccessExpire == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.EnableDocumentBrowserPublishingView == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.EnableGroupProtection == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.EnableLicenseCacheExpire == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.GroupName == "");
+                Assert.IsTrue(myList.InformationRightsManagementSettings.LicenseCacheExpireDays == 30);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.PolicyDescription == "");
+                Assert.IsTrue(myList.InformationRightsManagementSettings.PolicyTitle == "");
+                Assert.IsTrue(myList.InformationRightsManagementSettings.TemplateId == "");
+
+                // turn off IRM again
+                myList.IrmEnabled = false;
+                await myList.UpdateAsync();
+
+                // delete the list
+                await myList.DeleteAsync();
+
+            }
+        }
+
+        [TestMethod]
+        public async Task GetListIRMSettingsBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = "GetListIRMSettingsBatchTest";
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.DocumentLibrary);
+                }
+
+                // Enable IRM on the library
+                await myList.GetAsync();
+                myList.IrmEnabled = true;
+                await myList.UpdateAsync();
+
+                // Load IRM settings
+                await myList.InformationRightsManagementSettings.GetBatchAsync();
+                await context.ExecuteAsync();
+
+                // Verify default IRM list settings are returned
+                Assert.IsTrue(myList.InformationRightsManagementSettings.Requested);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.AllowPrint == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.AllowScript == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.AllowWriteCopy == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.DisableDocumentBrowserView == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentAccessExpireDays == 90);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.DocumentLibraryProtectionExpireDate > DateTime.Today);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.EnableDocumentAccessExpire == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.EnableDocumentBrowserPublishingView == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.EnableGroupProtection == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.EnableLicenseCacheExpire == false);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.GroupName == "");
+                Assert.IsTrue(myList.InformationRightsManagementSettings.LicenseCacheExpireDays == 30);
+                Assert.IsTrue(myList.InformationRightsManagementSettings.PolicyDescription == "");
+                Assert.IsTrue(myList.InformationRightsManagementSettings.PolicyTitle == "");
+                Assert.IsTrue(myList.InformationRightsManagementSettings.TemplateId == "");
+
+                // turn off IRM again
+                myList.IrmEnabled = false;
+                await myList.UpdateAsync();
+
+                // delete the list
+                await myList.DeleteAsync();
+
+            }
+        }
+
     }
 }
