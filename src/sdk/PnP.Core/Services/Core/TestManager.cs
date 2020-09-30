@@ -35,10 +35,10 @@ namespace PnP.Core.Services
 
             // Construct filename for storing this request
             string fileName = GetRequestFile(context, /*hash,*/ orderPrefix);
-            
+
             // Write request to a file, overwrites the existing file
             File.WriteAllText(fileName, request);
-            
+
             // Construct filename for storing this request
             string debugFileName = GetDebugFile(context, /*hash,*/ orderPrefix);
 
@@ -55,11 +55,31 @@ namespace PnP.Core.Services
         internal static void RecordResponse(PnPContext context, string requestKey, string response)
         {
             //requestKey = GeneralizeRequestKey(requestKey, context);
-            
+
             string fileName = GetResponseFile(context, /*SHA256(requestKey),*/ GetOrderPrefix(requestKey));
 
             // Write request to a file, overwrites the existing file
             File.WriteAllText(fileName, response);
+        }
+
+        /// <summary>
+        /// Record the response of a request
+        /// </summary>
+        /// <param name="context">Current PnPContext</param>
+        /// <param name="requestKey">Key we used to calculate the hash used to identify this request</param>
+        /// <param name="response">Response that came back from the server</param>
+        internal static void RecordResponse(PnPContext context, string requestKey, Stream response)
+        {
+            //requestKey = GeneralizeRequestKey(requestKey, context);
+
+            string fileName = GetResponseFile(context, /*SHA256(requestKey),*/ GetOrderPrefix(requestKey));
+
+            // Write request to a file, overwrites the existing file
+            using (var memStream = new MemoryStream())
+            {
+                response.CopyTo(memStream);
+                File.WriteAllBytes(fileName, memStream.ToArray());
+            }
         }
 
         /// <summary>
@@ -80,7 +100,7 @@ namespace PnP.Core.Services
         /// <param name="context">Current PnPContext</param>
         /// <param name="requestKey">Key we used to calculate the hash, used to identify the response to return</param>
         /// <returns>Server response from the mock response</returns>
-        internal static string MockResponse(PnPContext context, string requestKey)
+        internal static Stream MockResponseAsStream(PnPContext context, string requestKey)
         {
             //requestKey = GeneralizeRequestKey(requestKey, context);
 
@@ -88,11 +108,26 @@ namespace PnP.Core.Services
 
             if (File.Exists(fileName))
             {
-                return File.ReadAllText(fileName);
+                return File.OpenRead(fileName);
             }
             else
             {
                 throw new ClientException(ErrorType.OfflineDataError, string.Format(PnPCoreResources.Exception_Test_MissingResponseFile, context.TestName, fileName, requestKey));
+            }
+        }
+
+        /// <summary>
+        /// Mocks the response for a given request
+        /// </summary>
+        /// <param name="context">Current PnPContext</param>
+        /// <param name="requestKey">Key we used to calculate the hash, used to identify the response to return</param>
+        /// <returns>Server response from the mock response</returns>
+        internal static string MockResponse(PnPContext context, string requestKey)
+        {
+            var mockResponseStream = MockResponseAsStream(context, requestKey);
+            using (var reader = new StreamReader(mockResponseStream))
+            {
+                return reader.ReadToEnd();
             }
         }
 
@@ -123,7 +158,7 @@ namespace PnP.Core.Services
             string body;
             if (File.Exists(fileName))
             {
-                 body = File.ReadAllText(fileName);
+                body = File.ReadAllText(fileName);
             }
             else
             {
@@ -145,7 +180,7 @@ namespace PnP.Core.Services
 
             if (File.Exists(fileName))
             {
-                File.Delete(fileName);                
+                File.Delete(fileName);
             }
         }
 
@@ -251,7 +286,7 @@ namespace PnP.Core.Services
                 requestKey = requestKey.Replace(context.TestUris[NoGroupTestSite].PathAndQuery, "/sites/testsitenogroup");
             }
 
-            requestKey =  requestKey.Replace(context.Uri.DnsSafeHost, "pnprocks.sharepoint.com");
+            requestKey = requestKey.Replace(context.Uri.DnsSafeHost, "pnprocks.sharepoint.com");
 
             return requestKey;
         }

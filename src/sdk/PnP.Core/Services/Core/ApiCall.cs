@@ -16,6 +16,7 @@
             Commit = false;
             Interactive = false;
             BinaryBody = null;
+            ExpectBinaryResponse = false;
         }
 
         internal ApiCall(string xmlBody, string receivingProperty = null)
@@ -29,6 +30,7 @@
             Commit = false;
             Interactive = false;
             BinaryBody = null;
+            ExpectBinaryResponse = false;
         }
 
         /// <summary>
@@ -79,5 +81,10 @@
         /// Binary content for this API call
         /// </summary>
         internal byte[] BinaryBody { get; set; }
+
+        /// <summary>
+        /// Indicates whether the call expects a binary response
+        /// </summary>
+        internal bool ExpectBinaryResponse { get; set; }
     }
 }

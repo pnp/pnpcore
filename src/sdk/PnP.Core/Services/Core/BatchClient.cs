@@ -5,6 +5,7 @@ using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -29,7 +30,7 @@ namespace PnP.Core.Services
         // Collection of current batches
         private readonly Dictionary<Guid, Batch> batches = new Dictionary<Guid, Batch>();
 
-    #region Embedded classes
+        #region Embedded classes
 
         #region Classes used for Graph batch (de)serialization
 
@@ -71,7 +72,7 @@ namespace PnP.Core.Services
         #endregion
 
         #region Classes used to support REST batch handling
-        
+
         internal class SPORestBatch
         {
             public SPORestBatch(Uri site)
@@ -251,7 +252,7 @@ namespace PnP.Core.Services
             {
                 if (batch.Requests.Count > 1)
                 {
-                    throw new ClientException(ErrorType.Unsupported, 
+                    throw new ClientException(ErrorType.Unsupported,
                         PnPCoreResources.Exception_Unsupported_InteractiveRequestBatch);
                 }
 
@@ -378,7 +379,7 @@ namespace PnP.Core.Services
                     if (!success)
                     {
                         // We passed the max retries...time to throw an error
-                        throw new ServiceException(ErrorType.TooManyBatchRetries, 0, 
+                        throw new ServiceException(ErrorType.TooManyBatchRetries, 0,
                             string.Format(PnPCoreResources.Exception_ServiceException_BatchMaxRetries, retryCount));
                     }
                 }
@@ -467,7 +468,7 @@ namespace PnP.Core.Services
                             {
                                 batchResponse = MockingFileRewriteHandler(batchResponse);
                             }
-                            
+
                             // Write response
                             TestManager.RecordResponse(PnPContext, requestKey, batchResponse);
                         }
@@ -603,7 +604,7 @@ namespace PnP.Core.Services
         {
             // See
             // - https://docs.microsoft.com/en-us/graph/json-batching?context=graph%2Fapi%2F1.0&view=graph-rest-1.0
-            
+
             StringBuilder batchKey = new StringBuilder();
 
 #if DEBUG
@@ -669,15 +670,15 @@ namespace PnP.Core.Services
             return new Tuple<string, string>(stringContent, batchKey.ToString());
         }
 
-#endregion
+        #endregion
 
         #region SharePoint REST batching
 
         private static List<SPORestBatch> SharePointRestBatchSplitting(Batch batch)
         {
             List<SPORestBatch> batches = new List<SPORestBatch>();
-            
-            foreach(var request in batch.Requests.OrderBy(p => p.Value.Order))
+
+            foreach (var request in batch.Requests.OrderBy(p => p.Value.Order))
             {
                 // Group batched based up on the site url, a single batch must be scoped to a single web
                 Uri site = new Uri(request.Value.ApiCall.Request.Substring(0, request.Value.ApiCall.Request.IndexOf("/_api/", 0)));
@@ -703,7 +704,7 @@ namespace PnP.Core.Services
 
             return batches;
         }
-       
+
         private async Task ExecuteSharePointRestBatchAsync(Batch batch)
         {
             // A batch can only combine requests for the same web, if needed we need to split the incoming batch in batches per web
@@ -979,7 +980,7 @@ namespace PnP.Core.Services
 
                         counter++;
                         httpStatusCode = 0;
-                        responseContentOpen = false; 
+                        responseContentOpen = false;
                         responseContent = new StringBuilder();
                     }
                 }
@@ -1045,6 +1046,12 @@ namespace PnP.Core.Services
                         request.Content = binaryContent;
                     }
 
+                    if (restRequest.ApiCall.ExpectBinaryResponse)
+                    {
+                        // Add the batch binarystringresponsebody header
+                        request.Headers.Add($"binarystringresponsebody", "true");
+                    }
+
                     telemetryManager?.LogServiceRequest(batch, restRequest, PnPContext);
 
 #if DEBUG
@@ -1077,7 +1084,7 @@ namespace PnP.Core.Services
                         if (response.IsSuccessStatusCode)
                         {
                             // Get the response string
-                            string requestResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            Stream requestResponseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
 #if DEBUG
                             if (PnPContext.Mode == TestMode.Record)
@@ -1085,14 +1092,17 @@ namespace PnP.Core.Services
                                 // Call out to the rewrite handler if that one is connected
                                 if (MockingFileRewriteHandler != null)
                                 {
-                                    requestResponse = MockingFileRewriteHandler(requestResponse);
+                                    var mockedRewrittenFileString = MockingFileRewriteHandler(requestResponseStream.CopyAsString());
+                                    requestResponseStream = mockedRewrittenFileString.AsStream();
                                 }
 
                                 // Write response
-                                TestManager.RecordResponse(PnPContext, batchKey, requestResponse);
+                                TestManager.RecordResponse(PnPContext, batchKey, requestResponseStream);
                             }
 #endif
-                            await ProcessSharePointRestInteractiveResponse(restRequest, response.StatusCode, requestResponse).ConfigureAwait(false);
+
+                            await ProcessSharePointRestInteractiveResponse(restRequest, response.StatusCode, requestResponseStream).ConfigureAwait(false);
+
                         }
                         else
                         {
@@ -1104,10 +1114,11 @@ namespace PnP.Core.Services
                     }
                     else
                     {
-                        string requestResponse = TestManager.MockResponse(PnPContext, batchKey);
-
-                        // TODO: get status code from recorded response file
-                        await ProcessSharePointRestInteractiveResponse(restRequest, HttpStatusCode.OK, requestResponse).ConfigureAwait(false);
+                        using (var requestResponseStream = TestManager.MockResponseAsStream(PnPContext, batchKey))
+                        {
+                            // TODO: get status code from recorded response file
+                            await ProcessSharePointRestInteractiveResponse(restRequest, HttpStatusCode.OK, requestResponseStream).ConfigureAwait(false);
+                        }
                     }
 #endif
 
@@ -1128,15 +1139,27 @@ namespace PnP.Core.Services
             }
         }
 
-        private static async Task ProcessSharePointRestInteractiveResponse(BatchRequest restRequest, HttpStatusCode responseCode, string requestResponse)
+        private static async Task ProcessSharePointRestInteractiveResponse(BatchRequest restRequest, HttpStatusCode responseCode, Stream responseContent)
         {
+            // If a binary response content is expected
+            if (restRequest.ApiCall.ExpectBinaryResponse)
+            {
+                // Add it to the request and stop processing the response
+                restRequest.AddResponse(responseContent, responseCode);
+                return;
+            }
+
             if (responseCode == HttpStatusCode.NoContent)
             {
                 restRequest.AddResponse("", responseCode);
             }
             else
             {
-                restRequest.AddResponse(requestResponse, responseCode);
+                using (var streamReader = new StreamReader(responseContent))
+                {
+                    string requestResponse = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                    restRequest.AddResponse(requestResponse, responseCode);
+                }
             }
 
             // Commit succesful updates in our model
@@ -1213,7 +1236,7 @@ namespace PnP.Core.Services
                         }
 
                         // If we are not mocking or if there is no mock data
-                        if (PnPContext.Mode != TestMode.Mock) 
+                        if (PnPContext.Mode != TestMode.Mock)
                         {
 #endif
                             // Ensure the request contains authentication information
@@ -1341,12 +1364,12 @@ namespace PnP.Core.Services
         /// <param name="batch"></param>
         private static void CheckForUnresolvedTokens(Batch batch)
         {
-            foreach(var request in batch.Requests)
+            foreach (var request in batch.Requests)
             {
                 var unresolvedTokens = TokenHandler.UnresolvedTokens(request.Value.ApiCall.Request);
                 if (unresolvedTokens.Count > 0)
                 {
-                    throw new ClientException(ErrorType.UnresolvedTokens, 
+                    throw new ClientException(ErrorType.UnresolvedTokens,
                         string.Format(PnPCoreResources.Exception_UnresolvedTokens, request.Value.ApiCall.Request));
                 }
             }
@@ -1363,7 +1386,7 @@ namespace PnP.Core.Services
             Batch graphBatch = new Batch();
             Batch csomBatch = new Batch();
 
-            foreach(var request in input.Requests)
+            foreach (var request in input.Requests)
             {
                 var br = request.Value;
                 if (br.ApiCall.Type == ApiType.SPORest)
@@ -1425,7 +1448,7 @@ namespace PnP.Core.Services
 
             // Consolidate GET requests
             List<BatchResultMerge> getConsolidation = new List<BatchResultMerge>();
-            
+
             // Step 1: group the requests that have values with the same id (=keyfield) value
             foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Get))
             {
@@ -1490,7 +1513,7 @@ namespace PnP.Core.Services
         {
             // See https://restfulapi.net/http-status-codes/
             // For now let's fail all except the 200 range
-            return (httpStatusCode >= HttpStatusCode.OK && 
+            return (httpStatusCode >= HttpStatusCode.OK &&
                 httpStatusCode < HttpStatusCode.Ambiguous);
         }
 
@@ -1503,7 +1526,7 @@ namespace PnP.Core.Services
             var keysToRemove = (from b in batches
                                 where b.Value.Executed
                                 select b.Key).ToList();
-            
+
             // And remove them from the current collection
             foreach (var key in keysToRemove)
             {

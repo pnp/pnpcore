@@ -6,6 +6,7 @@ using PnP.Core.QueryModel;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -1800,6 +1801,138 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(default, addedFile.UniqueId);
 
                 await addedFile.DeleteAsync();
+            }
+        }
+        #endregion
+
+        #region Get file content
+        [TestMethod]
+        public async Task GetFileContentAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                string fileContent = "PnP Rocks !!!";
+                var contentStream = new MemoryStream(Encoding.UTF8.GetBytes("PnP Rocks !!!"));
+                string fileName = $"{nameof(GetFileContentAsyncTest)}.txt";
+                IFile testFile = await folder.Files.AddAsync(fileName, contentStream);
+
+                // Test the created object
+                Assert.IsNotNull(testFile);
+
+                // Get the file to download 
+                // TODO This is needed because the API URL tokens are not resolved on file from AddAsync(), it would be nice not to need to refetch the file
+                string fileUrl = $"{sharedDocumentsFolderUrl}/{fileName}";
+                IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync(fileUrl);
+
+                // Download the content
+                Stream downloadedContentStream = await fileToDownload.GetContentAsync();
+                downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                // Get string from the content stream
+                string downloadedContent = new StreamReader(downloadedContentStream).ReadToEnd();
+
+                Assert.AreEqual(fileContent, downloadedContent);
+
+                await fileToDownload.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileContentTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                string fileContent = "PnP Rocks !!!";
+                var contentStream = new MemoryStream(Encoding.UTF8.GetBytes("PnP Rocks !!!"));
+                string fileName = $"{nameof(GetFileContentTest)}.txt";
+                IFile testFile = await folder.Files.AddAsync(fileName, contentStream);
+
+                // Test the created object
+                Assert.IsNotNull(testFile);
+
+                // Get the file to download 
+                // TODO This is needed because the API URL tokens are not resolved on file from AddAsync(), it would be nice not to need to refetch the file
+                string fileUrl = $"{sharedDocumentsFolderUrl}/{fileName}";
+                IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync(fileUrl);
+
+                // Download the content
+                Stream downloadedContentStream = fileToDownload.GetContent();
+                downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                // Get string from the content stream
+                string downloadedContent = new StreamReader(downloadedContentStream).ReadToEnd();
+
+                Assert.AreEqual(fileContent, downloadedContent);
+
+                await fileToDownload.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileContentBytesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                string fileContent = "PnP Rocks !!!";
+                var contentStream = new MemoryStream(Encoding.UTF8.GetBytes("PnP Rocks !!!"));
+                string fileName = $"{nameof(GetFileContentBytesAsyncTest)}.txt";
+                IFile testFile = await folder.Files.AddAsync(fileName, contentStream);
+
+                // Test the created object
+                Assert.IsNotNull(testFile);
+
+                // Get the file to download 
+                // TODO This is needed because the API URL tokens are not resolved on file from AddAsync(), it would be nice not to need to refetch the file
+                string fileUrl = $"{sharedDocumentsFolderUrl}/{fileName}";
+                IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync(fileUrl);
+
+                // Download the content
+                byte[] downloadedContentBytes = await fileToDownload.GetContentBytesAsync();
+                // Get string from the content stream
+                string downloadedContent = Encoding.UTF8.GetString(downloadedContentBytes);
+
+                Assert.AreEqual(fileContent, downloadedContent);
+
+                await fileToDownload.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileContentBytesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                string fileContent = "PnP Rocks !!!";
+                var contentStream = new MemoryStream(Encoding.UTF8.GetBytes("PnP Rocks !!!"));
+                string fileName = $"{nameof(GetFileContentBytesTest)}.txt";
+                IFile testFile = await folder.Files.AddAsync(fileName, contentStream);
+
+                // Test the created object
+                Assert.IsNotNull(testFile);
+
+                // Get the file to download 
+                // TODO This is needed because the API URL tokens are not resolved on file from AddAsync(), it would be nice not to need to refetch the file
+                string fileUrl = $"{sharedDocumentsFolderUrl}/{fileName}";
+                IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync(fileUrl);
+
+                // Download the content
+                byte[] downloadedContentBytes = fileToDownload.GetContentBytes();
+                // Get string from the content stream
+                string downloadedContent = Encoding.UTF8.GetString(downloadedContentBytes);
+
+                Assert.AreEqual(fileContent, downloadedContent);
+
+                await fileToDownload.DeleteAsync();
             }
         }
         #endregion

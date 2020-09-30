@@ -2,6 +2,7 @@ using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -168,14 +169,40 @@ namespace PnP.Core.Model.SharePoint
         public ISharePointUser CheckedOutByUser { get; }
 
         /// <summary>
-        /// To update...
+        /// Gets a value that returns the user who has locked the file.
         /// </summary>
         public ISharePointUser LockedByUser { get; }
 
         /// <summary>
-        /// To update...
+        /// Gets a value that returns the last user who has modified the file.
         /// </summary>
         public ISharePointUser ModifiedBy { get; }
+
+        #region GetContent
+        /// <summary>
+        /// Get the content of the file.
+        /// </summary>
+        /// <returns>Stream containing the binary content of the file</returns>
+        Task<Stream> GetContentAsync();
+
+        /// <summary>
+        /// Get the content of the file.
+        /// </summary>
+        /// <returns>Stream containing the binary content of the file</returns>
+        Stream GetContent();
+
+        /// <summary>
+        /// Get the content of the file.
+        /// </summary>
+        /// <returns>The binary content of the file</returns>
+        Task<byte[]> GetContentBytesAsync();
+
+        /// <summary>
+        /// Get the content of the file.
+        /// </summary>
+        /// <returns>The binary content of the file</returns>
+        byte[] GetContentBytes();
+        #endregion
 
         #region Publish
         /// <summary>
