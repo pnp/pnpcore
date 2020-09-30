@@ -1757,11 +1757,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
-                IFile addedFile = await parentFolder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                string fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
+                IFile addedFile = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
 
                 // Test the created object
                 Assert.IsNotNull(addedFile);
-                Assert.AreEqual("test_added.docx", addedFile.Name);
+                Assert.AreEqual(fileName, addedFile.Name);
                 Assert.AreNotEqual(default, addedFile.UniqueId);
 
                 await addedFile.DeleteAsync();
@@ -1776,11 +1777,13 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
-                IFile addedFile = await parentFolder.Files.AddAsync("testchunked_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}testchunked.docx"));
+                string fileName = TestCommon.GetPnPSdkTestAssetName("testchunked_added.docx");
+
+                IFile addedFile = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}testchunked.docx"));
 
                 // Test the created object
                 Assert.IsNotNull(addedFile);
-                Assert.AreEqual("testchunked_added.docx", addedFile.Name);
+                Assert.AreEqual(fileName, addedFile.Name);
                 Assert.AreNotEqual(default, addedFile.UniqueId);
 
                 await addedFile.DeleteAsync();
@@ -2647,6 +2650,8 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         #region testing asset documents/libraries helpers
+      
+
         private async Task<Tuple<string, string, string>> AddMockDocumentToMinorVersioningEnabledLibrary(int contextId,
             [System.Runtime.CompilerServices.CallerMemberName] string libraryName = null,
             [System.Runtime.CompilerServices.CallerMemberName] string fileName = null,
@@ -2657,8 +2662,8 @@ namespace PnP.Core.Test.SharePoint
                 fileName += ".docx";
             }
 
-            fileName = $"PNP_SDK_TEST_{fileName}";
-            libraryName = $"PNP_SDK_TEST_{libraryName}";
+            fileName = TestCommon.GetPnPSdkTestAssetName(fileName);
+            libraryName = TestCommon.GetPnPSdkTestAssetName(libraryName);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
@@ -2676,7 +2681,7 @@ namespace PnP.Core.Test.SharePoint
             [System.Runtime.CompilerServices.CallerMemberName] string libraryName = null,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
         {
-            libraryName = $"PNP_SDK_TEST_{libraryName}";
+            libraryName = TestCommon.GetPnPSdkTestAssetName(libraryName);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
@@ -2694,7 +2699,7 @@ namespace PnP.Core.Test.SharePoint
                 fileName += ".docx";
             }
 
-            fileName = fileName.StartsWith("PNP_SDK_TEST_") ? fileName : $"PNP_SDK_TEST_{fileName}";
+            fileName = TestCommon.GetPnPSdkTestAssetName(fileName);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
@@ -2714,7 +2719,7 @@ namespace PnP.Core.Test.SharePoint
                 fileName += ".docx";
             }
 
-            fileName = fileName.StartsWith("PNP_SDK_TEST_") ? fileName : $"PNP_SDK_TEST_{fileName}";
+            fileName = TestCommon.GetPnPSdkTestAssetName(fileName);
             using (var context = await TestCommon.Instance.GetContextAsync(contextConfig, contextId, testName))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{fileName}";

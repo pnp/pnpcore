@@ -102,18 +102,7 @@ namespace PnP.Core.Services
         /// <returns>Server response from the mock response</returns>
         internal static Stream MockResponseAsStream(PnPContext context, string requestKey)
         {
-            //requestKey = GeneralizeRequestKey(requestKey, context);
-
-            string fileName = GetResponseFile(context, /*SHA256(requestKey),*/ GetOrderPrefix(requestKey));
-
-            if (File.Exists(fileName))
-            {
-                return File.OpenRead(fileName);
-            }
-            else
-            {
-                throw new ClientException(ErrorType.OfflineDataError, string.Format(PnPCoreResources.Exception_Test_MissingResponseFile, context.TestName, fileName, requestKey));
-            }
+            return MockResponse(context, requestKey).AsStream();
         }
 
         /// <summary>
@@ -124,10 +113,17 @@ namespace PnP.Core.Services
         /// <returns>Server response from the mock response</returns>
         internal static string MockResponse(PnPContext context, string requestKey)
         {
-            var mockResponseStream = MockResponseAsStream(context, requestKey);
-            using (var reader = new StreamReader(mockResponseStream))
+            //requestKey = GeneralizeRequestKey(requestKey, context);
+
+            string fileName = GetResponseFile(context, /*SHA256(requestKey),*/ GetOrderPrefix(requestKey));
+
+            if (File.Exists(fileName))
             {
-                return reader.ReadToEnd();
+                return File.ReadAllText(fileName);
+            }
+            else
+            {
+                throw new ClientException(ErrorType.OfflineDataError, string.Format(PnPCoreResources.Exception_Test_MissingResponseFile, context.TestName, fileName, requestKey));
             }
         }
 

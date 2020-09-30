@@ -51,6 +51,12 @@ Connect-PnPOnline -Url $targetSiteUrl -Credentials $credentials
 # Remove lists
 Remove-PnPList -Identity AddListItemViaBatchRest -Force
 Remove-PnPList -Identity AddListItemViaRest -Force
+Remove-PnPList -Identity AddListItemViaRestExceptionTest -Force
+Remove-PnPList -Identity AddListItemViaRestNonAsync -Force
+Remove-PnPList -Identity AddListItemViaSpecificBatchNonAsyncTest -Force
+Remove-PnPList -Identity AddListViaBatchAsyncRest -Force
+Remove-PnPList -Identity AddListViaExplicitBatchAsyncRest -Force
+Remove-PnPList -Identity AddListViaRestAsync -Force
 Remove-PnPList -Identity AddListViaBatchRest -Force
 Remove-PnPList -Identity AddListViaExplicitBatchRest -Force
 Remove-PnPList -Identity AddListViaRest -Force

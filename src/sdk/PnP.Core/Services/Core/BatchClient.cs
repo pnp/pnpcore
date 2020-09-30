@@ -1093,7 +1093,9 @@ namespace PnP.Core.Services
                                 if (MockingFileRewriteHandler != null)
                                 {
                                     var mockedRewrittenFileString = MockingFileRewriteHandler(requestResponseStream.CopyAsString());
+#pragma warning disable CA2000 // Dispose objects before losing scope
                                     requestResponseStream = mockedRewrittenFileString.AsStream();
+#pragma warning restore CA2000 // Dispose objects before losing scope
                                 }
 
                                 // Write response
@@ -1114,11 +1116,12 @@ namespace PnP.Core.Services
                     }
                     else
                     {
-                        using (var requestResponseStream = TestManager.MockResponseAsStream(PnPContext, batchKey))
-                        {
-                            // TODO: get status code from recorded response file
-                            await ProcessSharePointRestInteractiveResponse(restRequest, HttpStatusCode.OK, requestResponseStream).ConfigureAwait(false);
-                        }
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                        var requestResponseStream = TestManager.MockResponseAsStream(PnPContext, batchKey);
+#pragma warning restore CA2000 // Dispose objects before losing scope
+
+                        // TODO: get status code from recorded response file
+                        await ProcessSharePointRestInteractiveResponse(restRequest, HttpStatusCode.OK, requestResponseStream).ConfigureAwait(false);
                     }
 #endif
 
@@ -1157,6 +1160,7 @@ namespace PnP.Core.Services
             {
                 using (var streamReader = new StreamReader(responseContent))
                 {
+                    responseContent.Seek(0, SeekOrigin.Begin);
                     string requestResponse = await streamReader.ReadToEndAsync().ConfigureAwait(false);
                     restRequest.AddResponse(requestResponse, responseCode);
                 }

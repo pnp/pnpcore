@@ -274,5 +274,11 @@ namespace PnP.Core.Test.Utilities
                 return false;
             }
         }
+
+        internal const string PnPCoreSDKTestPrefix = "PNP_SDK_TEST_";
+        internal static string GetPnPSdkTestAssetName(string name)
+        {
+            return name.StartsWith(PnPCoreSDKTestPrefix) ? name : $"{PnPCoreSDKTestPrefix}{name}";
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace PnP.Core
 {
@@ -12,10 +13,7 @@ namespace PnP.Core
 
         internal static Stream AsStream(this string source)
         {
-            var newStream = new MemoryStream();
-            using (var writer = new StreamWriter(newStream))
-                writer.Write(source);
-            return newStream;
+            return new MemoryStream(Encoding.UTF8.GetBytes(source));
         }
     }
 }
