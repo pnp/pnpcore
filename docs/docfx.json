@@ -33,7 +33,18 @@
           "toc.yml",
           "*.md"
         ]
+      },
+      {
+        "files": [
+          "*.md",
+          "toc.yml",
+          "/**/*.md"
+        ],
+        "src":"../src/samples",
+        "exclude": [ "**/wwwroot/**"],
+        "dest":"demos"
       }
+
     ],
     "resource": [
       {
