@@ -7965,6 +7965,58 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.Exists
   nameWithType: IFile.Exists
+- uid: PnP.Core.Model.SharePoint.IFile.GetContent
+  name: GetContent()
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContent
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetContent
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContent()
+  nameWithType: IFile.GetContent()
+- uid: PnP.Core.Model.SharePoint.IFile.GetContent*
+  name: GetContent
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContent_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.GetContent
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContent
+  nameWithType: IFile.GetContent
+- uid: PnP.Core.Model.SharePoint.IFile.GetContentAsync
+  name: GetContentAsync()
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetContentAsync
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContentAsync()
+  nameWithType: IFile.GetContentAsync()
+- uid: PnP.Core.Model.SharePoint.IFile.GetContentAsync*
+  name: GetContentAsync
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.GetContentAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContentAsync
+  nameWithType: IFile.GetContentAsync
+- uid: PnP.Core.Model.SharePoint.IFile.GetContentBytes
+  name: GetContentBytes()
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentBytes
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetContentBytes
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContentBytes()
+  nameWithType: IFile.GetContentBytes()
+- uid: PnP.Core.Model.SharePoint.IFile.GetContentBytes*
+  name: GetContentBytes
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentBytes_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.GetContentBytes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContentBytes
+  nameWithType: IFile.GetContentBytes
+- uid: PnP.Core.Model.SharePoint.IFile.GetContentBytesAsync
+  name: GetContentBytesAsync()
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentBytesAsync
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetContentBytesAsync
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContentBytesAsync()
+  nameWithType: IFile.GetContentBytesAsync()
+- uid: PnP.Core.Model.SharePoint.IFile.GetContentBytesAsync*
+  name: GetContentBytesAsync
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentBytesAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.GetContentBytesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContentBytesAsync
+  nameWithType: IFile.GetContentBytesAsync
 - uid: PnP.Core.Model.SharePoint.IFile.InformationRightsManagementSettings
   name: InformationRightsManagementSettings
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_InformationRightsManagementSettings
