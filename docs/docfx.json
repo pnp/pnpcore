@@ -36,20 +36,19 @@
       },
       {
         "files": [
-          "*.md",
+          "demos/**.md",
+          "demos/**/**.md",
+          "demos/**/toc.yml",
           "toc.yml",
-          "/**/*.md"
-        ],
-        "src":"../src/samples",
-        "exclude": [ "**/wwwroot/**"],
-        "dest":"demos"
+          "*.md"
+        ]
       }
-
     ],
     "resource": [
       {
         "files": [
-          "images/**"
+          "images/**",
+          "demos/**/*.png"
         ]
       }
     ],
