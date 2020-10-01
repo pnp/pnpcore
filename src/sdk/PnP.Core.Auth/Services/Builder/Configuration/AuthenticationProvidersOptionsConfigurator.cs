@@ -57,6 +57,9 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
                         authenticationProviderFactory.CreateDefault();
                 }
             }
+
+            // Configure the default IAuthenticationProvider instance
+            options.DefaultAuthenticationProvider = authenticationProviderFactory.CreateDefault();
         }
     }
 }

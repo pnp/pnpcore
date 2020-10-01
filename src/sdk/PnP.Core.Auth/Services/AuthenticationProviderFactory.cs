@@ -53,7 +53,7 @@ namespace PnP.Core.Auth.Services
         {
             if (string.IsNullOrEmpty(this.options.Credentials.DefaultConfiguration))
             {
-                throw new ConfigurationErrorsException("Missing default configuration for Authentication Provider Factory");
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.Exception_MissingDefaultAuthenticationProvider);
             }
 
             // Return the Authentication Provider based on the default configuration

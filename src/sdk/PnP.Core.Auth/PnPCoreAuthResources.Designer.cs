@@ -124,6 +124,15 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Missing default configuration for Authentication Provider Factory.
+        /// </summary>
+        internal static string Exception_MissingDefaultAuthenticationProvider {
+            get {
+                return ResourceManager.GetString("Exception_MissingDefaultAuthenticationProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid configuration for InteractiveAuthenticationProvider.
         /// </summary>
         internal static string InteractiveAuthenticationProvider_InvalidConfiguration {

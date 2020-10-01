@@ -138,6 +138,9 @@
   <data name="CredentialManagerAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized CredentialManagerAuthenticationProvider with credential manager item name {0}</value>
   </data>
+  <data name="Exception_MissingDefaultAuthenticationProvider" xml:space="preserve">
+    <value>Missing default configuration for Authentication Provider Factory</value>
+  </data>
   <data name="InteractiveAuthenticationProvider_InvalidConfiguration" xml:space="preserve">
     <value>Invalid configuration for InteractiveAuthenticationProvider</value>
   </data>
