@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PnP Core SDK - Azure Function v3 Sample | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="PnP Core SDK - Azure Function v3 Sample | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/demos/Demo.AzureFunction/README.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="pnp-core-sdk---azure-function-v3-sample">PnP Core SDK - Azure Function v3 Sample</h1>
+
+<p>This solution demonstrates how to build a simple backend API in the form of an HTTP Trigger Azure Function</p>
+<ul>
+<li>A GetSiteDocuments() function that returns the list of documents in the Shared Documents library of the configured site.
+it uses an App-Only context authenticated with a self signed certificate</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong>
+this sample was created with Visual Studio 2019 (v16.7.3) and has been tested with a Windows Azure Function v3.</p>
+</blockquote>
+<h2 id="quickstart">Quickstart</h2>
+<h3 id="setup">Setup</h3>
+<blockquote>
+<p><strong>Note</strong>
+For the quickstart setup, you will need to have a recent version (&gt; 3.24) of PnP PowerShell installed on your machine.</p>
+</blockquote>
+<p>From the solution folder execute the following PowerShell.
+(Make sure you set the values of the variables according to your environment and preferences)</p>
+<pre><code class="lang-PowerShell">$site = &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;
+$tenant = &quot;contoso.onmicrosoft.com&quot;
+$pwd = &quot;pwd&quot;
+.\Configure.ps1 -SiteUrl $site -Tenant $pwd -CertificatePassword $pwd
+</code></pre>
+<p>This script will:</p>
+<ul>
+<li>register a new Azure AD application</li>
+<li>grant it the permissions to allow the use of all PnP Core SDK features</li>
+<li>Create a self signed certificate, save it to your local store and export it as .cer and .pfx files</li>
+<li>Pre-fill your local.settings.json file with the needed information from operations above</li>
+</ul>
+<p>Feel free to have a look at the Configure.ps1 to check what it does.</p>
+<p>The settings of the Azure Function will contain the following</p>
+<pre><code class="lang-json">{
+  &quot;IsEncrypted&quot;: false,
+  &quot;Values&quot;: {
+    &quot;AzureWebJobsStorage&quot;: &quot;UseDevelopmentStorage=true&quot;,
+    &quot;FUNCTIONS_WORKER_RUNTIME&quot;: &quot;dotnet&quot;,
+
+    &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;,
+    &quot;TenantId&quot;: &quot;[TENANT ID]&quot;,
+    &quot;ClientId&quot;: &quot;[CLIENT ID]&quot;,
+    &quot;CertificateThumbPrint&quot;: &quot;[CERTIFICATE THUMBPRINT]&quot;,
+    &quot;WEBSITE_LOAD_CERTIFICATES&quot;: &quot;[CERTIFICATE THUMBPRINT]&quot;
+  }
+}
+</code></pre>
+<p>The settings above are mostly necessary for authentication.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SiteUrl</td>
+<td>This parameter allows you to configure the URL of the Site to use for your Default configuration.</td>
+</tr>
+<tr>
+<td>TenantId</td>
+<td>The ID (GUID) of your tenant. Used by the PnP Core authentication provider.</td>
+</tr>
+<tr>
+<td>ClientId</td>
+<td>The Client ID of your Azure AD app. Used by the PnP Core authentication provider.</td>
+</tr>
+<tr>
+<td>CertificateThumbPrint</td>
+<td>The Thumbprint of the certificate. Used by the PnP Core authentication provider.</td>
+</tr>
+<tr>
+<td>WEBSITE_LOAD_CERTIFICATES</td>
+<td>The Thumbprint of the certificate. Indicates the Azure Function runtime to load the certificate from its registered certificates.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note</strong>
+For more information about configuring authentication, please visit <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions">https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions</a></p>
+</blockquote>
+<h3 id="try-it-locally">Try it locally</h3>
+<p>Open the solution in Visual Studio and hit F5 to launch the Azure Function emulator</p>
+<p>When you see the following your local Azure Function is up and running</p>
+<pre><code class="lang-console">Azure Functions Core Tools (3.0.2912 Commit hash: bfcbbe48ed6fdacdf9b309261ecc8093df3b83f2)
+Function Runtime Version: 3.0.14287.0
+Hosting environment: Production
+Content root path: C:\wrk\pnp\pnpcore\src\samples\Demo.AzureFunction\bin\Debug\netcoreapp3.1
+Now listening on: http://0.0.0.0:7071
+Application started. Press Ctrl+C to shut down.
+
+Functions:
+
+        GetSiteDocuments: [GET] http://localhost:7071/api/GetSiteDocuments
+</code></pre>
+<p>To test the API, you can open the above URL in a browser
+or by typing the following command in a console:</p>
+<pre><code class="lang-console">curl http://localhost:7071/api/GetSiteDocuments
+</code></pre>
+<h2 id="try-it-on-azure">Try it on Azure</h2>
+<p>If you followed all the steps above and the Function is working well locally, you can publish your Azure Function on Azure.
+For the sake of simplicity, in this sample, we will use the <strong>Publish</strong> feature from Visual Studio.</p>
+<p>The extra steps consist in:</p>
+<ul>
+<li>Make sure the app settings are specified in the Azure Function App</li>
+<li>Make sure the Certificate we use for authentication is uploaded to the Azure Function App</li>
+</ul>
+<p>To publish the Azure Function:</p>
+<ul>
+<li>In the Visual Studio Solution Explorer, right-click the <strong>Demo.AzureFunction</strong> project and click <strong>Publish</strong></li>
+<li>Create or Import a publishing profile to an Azure Function App</li>
+<li>Click <strong>Publish</strong></li>
+<li>Click the <strong>Manage Azure App Service settings</strong> link</li>
+</ul>
+<p><img src="docs-images/vs-publishprofile01.png" alt="Publish profile in Visual Studio"></p>
+<ul>
+<li>For each setting for which a Remote value is not yet specified, click the <strong>Insert value from Local</strong> link</li>
+</ul>
+<p><img src="docs-images/vs-appsettings-remote.png" alt="Specify remote app settings from Visual Studio"></p>
+<ul>
+<li>Click the <strong>Manage in Azure Portal</strong> link</li>
+<li>In the <strong>TLS/SSL settings</strong> tab, choose <strong>Private Key Certificates (.pfx)</strong> and click <strong>Upload Certificate</strong></li>
+</ul>
+<p><img src="docs-images/azfunc-tlsssl-tab.png" alt="Azure Portal - Azure Functions TLS/SSL settings">
+<img src="docs-images/azfunc-cert.png" alt="Azure Portal - Private Key Certificate settings">
+<img src="docs-images/azfunc-upload-cert.png" alt="Azure Portal - Upload certificate"></p>
+<ul>
+<li>Browse your computer and select the .pfx certificate we created earlier, enter the password chosen earlier and click <strong>Upload</strong></li>
+</ul>
+<p>To Make sure the Azure Function is working properly,
+On the Azure Portal, on your Function App blade:</p>
+<ul>
+<li>Go to the <strong>Functions</strong> tab</li>
+<li>Select the <strong>GetSiteDocuments</strong> function</li>
+<li>On the <strong>Code + Test</strong> tab, click the <strong>Test/Run</strong> button</li>
+<li>Make sure the chosen <strong>Method</strong> is <strong>GET</strong></li>
+<li>Click <strong>Run</strong></li>
+</ul>
+<p><img src="docs-images/azfunc-testrun1.png" alt="Azure Portal - Azure Function Test Run">
+<img src="docs-images/azfunc-testrun2.png" alt="Azure Portal - Azure Function Test Run - Output"></p>
+<p>Alternatively, from <strong>Code + Test</strong> tab mentioned aboved you can click the <strong>Get Function URL</strong> button and copy the URL.
+Then paste it in your browser or using curl in a terminal (see example here below)</p>
+<pre><code class="lang-console"># On Windows 10
+curl https://pnpcoresdk-demo.azurewebsites.net/api/GetSiteDocuments?code=gqyZ4H259HbYfk7axxxxxxxxxxxxxxxaqmtleLUHISazg/FDvSbLtYaw==
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : {&quot;documents&quot;:[{&quot;name&quot;:&quot;test.docx&quot;,&quot;timeLastModified&quot;:&quot;2020-08-31T21:29:56Z&quot;,&quot;uniqueId&quot;:&quot;fbc3c372-c1
+                   36-45ee-8341-1e768c973182&quot;}]}
+RawContent        : HTTP/1.1 200 OK
+                   Content-Length: 128
+                   Content-Type: application/json; charset=utf-8
+                   Date: Sun, 27 Sep 2020 15:52:36 GMT
+
+                   {&quot;documents&quot;:[{&quot;name&quot;:&quot;test.docx&quot;,&quot;timeLastModified&quot;:&quot;2020-08-31T21:29:56Z&quot;,...
+Forms             : {}
+Headers           : {[Content-Length, 128], [Content-Type, application/json; charset=utf-8], [Date, Sun, 27 Sep 2020
+                   15:52:36 GMT]}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : mshtml.HTMLDocumentClass
+RawContentLength  : 128
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>  </body>
+</html>
