@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a EffectiveInformationRightsManagementSettings object
     /// </summary>
     [ConcreteType(typeof(EffectiveInformationRightsManagementSettings))]
-    public interface IEffectiveInformationRightsManagementSettings : IComplexType
+    public interface IEffectiveInformationRightsManagementSettings : IDataModel<IEffectiveInformationRightsManagementSettings>
     {
         /// <summary>
         /// Gets whether print is allowed for this file.

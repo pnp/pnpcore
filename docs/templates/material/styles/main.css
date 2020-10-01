@@ -445,6 +445,28 @@ pre {
   margin-left:5px;
 }
 
+/* Mobile */
+@media (max-width: 767px) {
+  #search .glyphicon-search{
+    top: 70px;
+  }
+
+  #search-results>.search-list,
+  #search-results{
+    margin-top: 0;
+    margin-bottom:0;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1440px){
+  .container {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+
 code {
   color: #7f0000;
   background-color: #f1f2f3;

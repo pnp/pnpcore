@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Note: this class is generated, please don't modify this code by hand!
     /// 
     /// </summary>
-    internal partial class EffectiveInformationRightsManagementSettings : BaseComplexType<IEffectiveInformationRightsManagementSettings>, IEffectiveInformationRightsManagementSettings
+    internal partial class EffectiveInformationRightsManagementSettings : BaseDataModel<IEffectiveInformationRightsManagementSettings>, IEffectiveInformationRightsManagementSettings
     {
         public bool AllowPrint { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -43,5 +43,8 @@ namespace PnP.Core.Model.SharePoint
         public SPEffectiveInformationRightsManagementSettingsSource SettingSource { get => GetValue<SPEffectiveInformationRightsManagementSettingsSource>(); set => SetValue(value); }
 
         public string TemplateId { get => GetValue<string>(); set => SetValue(value); }
+
+        [KeyProperty("PolicyTitle")]
+        public override object Key { get => this.PolicyTitle; set => this.PolicyTitle = value.ToString(); }
     }
 }

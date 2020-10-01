@@ -4,7 +4,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a InformationRightsManagementFileSettings object
     /// </summary>
     [ConcreteType(typeof(InformationRightsManagementFileSettings))]
-    public interface IInformationRightsManagementFileSettings : IComplexType
+    public interface IInformationRightsManagementFileSettings : IDataModel<IInformationRightsManagementFileSettings>
     {
         /// <summary>
         /// Gets or sets whether print is allowed for this file.

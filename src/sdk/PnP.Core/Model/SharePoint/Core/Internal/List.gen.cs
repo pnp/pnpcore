@@ -79,6 +79,8 @@ namespace PnP.Core.Model.SharePoint
 
         public bool IrmReject { get => GetValue<bool>(); set => SetValue(value); }
 
+        public bool IrmEnabled { get => GetValue<bool>(); set => SetValue(value); }
+        
         public bool IsApplicationList { get => GetValue<bool>(); set => SetValue(value); }
 
         public int ReadSecurity { get => GetValue<int>(); set => SetValue(value); }
@@ -108,6 +110,29 @@ namespace PnP.Core.Model.SharePoint
                     InstantiateNavigationProperty();
                 }
                 return GetValue<IFolder>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        public IInformationRightsManagementSettings InformationRightsManagementSettings
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new InformationRightsManagementSettings
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IInformationRightsManagementSettings>();
             }
             set
             {

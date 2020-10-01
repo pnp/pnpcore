@@ -6,6 +6,7 @@ using PnP.Core.QueryModel;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -1756,11 +1757,12 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
-                IFile addedFile = await parentFolder.Files.AddAsync("test_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
+                string fileName = TestCommon.GetPnPSdkTestAssetName("test_added.docx");
+                IFile addedFile = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"));
 
                 // Test the created object
                 Assert.IsNotNull(addedFile);
-                Assert.AreEqual("test_added.docx", addedFile.Name);
+                Assert.AreEqual(fileName, addedFile.Name);
                 Assert.AreNotEqual(default, addedFile.UniqueId);
 
                 await addedFile.DeleteAsync();
@@ -1775,11 +1777,13 @@ namespace PnP.Core.Test.SharePoint
             {
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
-                IFile addedFile = await parentFolder.Files.AddAsync("testchunked_added.docx", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}testchunked.docx"));
+                string fileName = TestCommon.GetPnPSdkTestAssetName("testchunked_added.docx");
+
+                IFile addedFile = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}testchunked.docx"));
 
                 // Test the created object
                 Assert.IsNotNull(addedFile);
-                Assert.AreEqual("testchunked_added.docx", addedFile.Name);
+                Assert.AreEqual(fileName, addedFile.Name);
                 Assert.AreNotEqual(default, addedFile.UniqueId);
 
                 await addedFile.DeleteAsync();
@@ -1800,6 +1804,138 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(default, addedFile.UniqueId);
 
                 await addedFile.DeleteAsync();
+            }
+        }
+        #endregion
+
+        #region Get file content
+        [TestMethod]
+        public async Task GetFileContentAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                string fileContent = "PnP Rocks !!!";
+                var contentStream = new MemoryStream(Encoding.UTF8.GetBytes("PnP Rocks !!!"));
+                string fileName = $"{nameof(GetFileContentAsyncTest)}.txt";
+                IFile testFile = await folder.Files.AddAsync(fileName, contentStream);
+
+                // Test the created object
+                Assert.IsNotNull(testFile);
+
+                // Get the file to download 
+                // TODO This is needed because the API URL tokens are not resolved on file from AddAsync(), it would be nice not to need to refetch the file
+                string fileUrl = $"{sharedDocumentsFolderUrl}/{fileName}";
+                IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync(fileUrl);
+
+                // Download the content
+                Stream downloadedContentStream = await fileToDownload.GetContentAsync();
+                downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                // Get string from the content stream
+                string downloadedContent = new StreamReader(downloadedContentStream).ReadToEnd();
+
+                Assert.AreEqual(fileContent, downloadedContent);
+
+                await fileToDownload.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileContentTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                string fileContent = "PnP Rocks !!!";
+                var contentStream = new MemoryStream(Encoding.UTF8.GetBytes("PnP Rocks !!!"));
+                string fileName = $"{nameof(GetFileContentTest)}.txt";
+                IFile testFile = await folder.Files.AddAsync(fileName, contentStream);
+
+                // Test the created object
+                Assert.IsNotNull(testFile);
+
+                // Get the file to download 
+                // TODO This is needed because the API URL tokens are not resolved on file from AddAsync(), it would be nice not to need to refetch the file
+                string fileUrl = $"{sharedDocumentsFolderUrl}/{fileName}";
+                IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync(fileUrl);
+
+                // Download the content
+                Stream downloadedContentStream = fileToDownload.GetContent();
+                downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                // Get string from the content stream
+                string downloadedContent = new StreamReader(downloadedContentStream).ReadToEnd();
+
+                Assert.AreEqual(fileContent, downloadedContent);
+
+                await fileToDownload.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileContentBytesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                string fileContent = "PnP Rocks !!!";
+                var contentStream = new MemoryStream(Encoding.UTF8.GetBytes("PnP Rocks !!!"));
+                string fileName = $"{nameof(GetFileContentBytesAsyncTest)}.txt";
+                IFile testFile = await folder.Files.AddAsync(fileName, contentStream);
+
+                // Test the created object
+                Assert.IsNotNull(testFile);
+
+                // Get the file to download 
+                // TODO This is needed because the API URL tokens are not resolved on file from AddAsync(), it would be nice not to need to refetch the file
+                string fileUrl = $"{sharedDocumentsFolderUrl}/{fileName}";
+                IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync(fileUrl);
+
+                // Download the content
+                byte[] downloadedContentBytes = await fileToDownload.GetContentBytesAsync();
+                // Get string from the content stream
+                string downloadedContent = Encoding.UTF8.GetString(downloadedContentBytes);
+
+                Assert.AreEqual(fileContent, downloadedContent);
+
+                await fileToDownload.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFileContentBytesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                IFolder folder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
+                string fileContent = "PnP Rocks !!!";
+                var contentStream = new MemoryStream(Encoding.UTF8.GetBytes("PnP Rocks !!!"));
+                string fileName = $"{nameof(GetFileContentBytesTest)}.txt";
+                IFile testFile = await folder.Files.AddAsync(fileName, contentStream);
+
+                // Test the created object
+                Assert.IsNotNull(testFile);
+
+                // Get the file to download 
+                // TODO This is needed because the API URL tokens are not resolved on file from AddAsync(), it would be nice not to need to refetch the file
+                string fileUrl = $"{sharedDocumentsFolderUrl}/{fileName}";
+                IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync(fileUrl);
+
+                // Download the content
+                byte[] downloadedContentBytes = fileToDownload.GetContentBytes();
+                // Get string from the content stream
+                string downloadedContent = Encoding.UTF8.GetString(downloadedContentBytes);
+
+                Assert.AreEqual(fileContent, downloadedContent);
+
+                await fileToDownload.DeleteAsync();
             }
         }
         #endregion
@@ -2232,24 +2368,33 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
-        // TODO: Uncomment this test with live test on IRM enabled tenant
-        //[TestMethod]
-        //public async Task GetFileEffectiveIRMSettingsTest()
-        //{
-        //    //TestCommon.Instance.Mocking = false;
-        //    await AddMockDocumentToSharedDocuments(0, "test_irm_effective_settings.docx");
+        [TestMethod]
+        public async Task GetFileEffectiveIRMSettingsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            await AddMockDocumentToSharedDocuments(0, "test_irm_effective_settings.docx");
 
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
-        //    {
-        //        string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/test_irm_effective_settings.docx";
-        //        IFile documentWithEffectiveIrm = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.EffectiveInformationRightsManagementSettings);
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                // Enable IRM on the library
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.IrmEnabled, p => p.InformationRightsManagementSettings);
+                list.IrmEnabled = true;
+                await list.UpdateAsync();
+                
+                string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{TestCommon.PnPCoreSDKTestPrefix}test_irm_effective_settings.docx";
+                IFile documentWithEffectiveIrm = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.EffectiveInformationRightsManagementSettings);
 
-        //        // TODO The asserts below checks the effective IRM settings object is instantiated. More relevant tests should be done on a IRM enabled and configured tenant
-        //        Assert.IsNotNull(documentWithEffectiveIrm.EffectiveInformationRightsManagementSettings);
-        //    }
+                // TODO The asserts below checks the effective IRM settings object is instantiated. More relevant tests should be done on a IRM enabled and configured tenant
+                Assert.IsNotNull(documentWithEffectiveIrm.EffectiveInformationRightsManagementSettings);
 
-        //    await CleanupMockDocumentFromSharedDocuments(2, "test_irm_effective_settings.docx");
-        //}
+                // turn off IRM again
+                list.IrmEnabled = false;
+                await list.UpdateAsync();
+
+            }
+
+            await CleanupMockDocumentFromSharedDocuments(2, "test_irm_effective_settings.docx");
+        }
 
         #region Get file versions
         [TestMethod]
@@ -2514,6 +2659,8 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         #region testing asset documents/libraries helpers
+      
+
         private async Task<Tuple<string, string, string>> AddMockDocumentToMinorVersioningEnabledLibrary(int contextId,
             [System.Runtime.CompilerServices.CallerMemberName] string libraryName = null,
             [System.Runtime.CompilerServices.CallerMemberName] string fileName = null,
@@ -2524,8 +2671,8 @@ namespace PnP.Core.Test.SharePoint
                 fileName += ".docx";
             }
 
-            fileName = $"PNP_SDK_TEST_{fileName}";
-            libraryName = $"PNP_SDK_TEST_{libraryName}";
+            fileName = TestCommon.GetPnPSdkTestAssetName(fileName);
+            libraryName = TestCommon.GetPnPSdkTestAssetName(libraryName);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
@@ -2543,7 +2690,7 @@ namespace PnP.Core.Test.SharePoint
             [System.Runtime.CompilerServices.CallerMemberName] string libraryName = null,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
         {
-            libraryName = $"PNP_SDK_TEST_{libraryName}";
+            libraryName = TestCommon.GetPnPSdkTestAssetName(libraryName);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
@@ -2561,7 +2708,7 @@ namespace PnP.Core.Test.SharePoint
                 fileName += ".docx";
             }
 
-            fileName = fileName.StartsWith("PNP_SDK_TEST_") ? fileName : $"PNP_SDK_TEST_{fileName}";
+            fileName = TestCommon.GetPnPSdkTestAssetName(fileName);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
@@ -2581,7 +2728,7 @@ namespace PnP.Core.Test.SharePoint
                 fileName += ".docx";
             }
 
-            fileName = fileName.StartsWith("PNP_SDK_TEST_") ? fileName : $"PNP_SDK_TEST_{fileName}";
+            fileName = TestCommon.GetPnPSdkTestAssetName(fileName);
             using (var context = await TestCommon.Instance.GetContextAsync(contextConfig, contextId, testName))
             {
                 string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{fileName}";

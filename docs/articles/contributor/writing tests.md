@@ -124,6 +124,7 @@ If you follow below steps you'll be creating test cases according to the PnP Cor
 ### Do I need to recreate the sites after each live test run?
 
 You can opt to recreate the sites each time, but that will be time consuming. It's better to clean the created artifacts before launching a new live test run. The artifacts to clean obviously depend on the written test cases and it's a best practice to keep the `cleantestenv.copyme.ps1` script up to date with the needed cleaning work. You can tailor this script for your environment and save it as `cleantestenv.xxx.ps1` (xxx identifies your test environment) to add your specific cleanup instructions.
+In addition, we strongly recommend you to prefix the name of any asset or artifact created in the tests with the constant `TestCommon.PnPCoreSDKTestPrefix`. This will help identifying the assets and ease up the cleaning process. Alternatively, you can use the helper method `TestCommon.GetPnPSdkTestAssetName(string name)` to ensure any name you choose is always prefixed following our convention.
 
 ### How can I configure tests to run live versus the default offline run?
 
