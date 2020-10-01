@@ -2,6 +2,10 @@
 
 This solution demonstrates how the PnP Core SDK can be used in a console application
 
+## Source code
+
+You can find the sample source code here: [/src/samples/Demo.Console](https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.Console)
+
 # Run the sample
 
 ## Register and configure an AAD app

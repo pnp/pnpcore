@@ -2,6 +2,10 @@
 
 This solution demonstrates how the PnP Core SDK can be used in a WPF application
 
+## Source code
+
+You can find the sample source code here: [/src/samples/Demo.WPF](https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.WPF)
+
 # Run the sample
 
 ## Register and configure an AAD app

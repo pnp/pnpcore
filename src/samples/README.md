@@ -1,6 +1,6 @@
 # PnP Core Samples
 
-Samples are best way to learn how to use, hence we've some simple PnP Core SDK sample applications for you to learn. Following samples are available:
+Samples are best way to learn how to use, hence we've some example PnP Core SDK sample applications for you to learn. Following samples are available:
 
 Sample | Description | Authentication
 -------|-------------|----------------
