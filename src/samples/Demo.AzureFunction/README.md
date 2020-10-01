@@ -8,6 +8,10 @@ This solution demonstrates how to build a simple backend API in the form of an H
 > this sample was created with Visual Studio 2019 (v16.7.3) and has been tested with a Windows Azure Function v3.
 >
 
+## Source code
+
+You can find the sample source code here: [/src/samples/Demo.AzureFunction](https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.AzureFunction)
+
 ## Quickstart
 
 ### Setup
