@@ -2,7 +2,9 @@
 
 This sample demonstrates using the pnp core library running on a Raspberry Pi device.
 
-![Sample Screenshot](docs-images/screenshot_pi_example.png)
+## Source code
+
+You can find the sample source code here: [/src/samples/Demo.RPi](https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.RPi)
 
 ## Setup
 
@@ -67,3 +69,5 @@ To get running:
 - Run in Terminal **dotnet run**
 
 This will then output to the console the communications to SharePoint and the resulting details of the site.
+
+![Sample Screenshot](docs-images/screenshot_pi_example.png)
