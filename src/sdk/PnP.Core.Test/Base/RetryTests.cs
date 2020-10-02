@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -174,25 +175,32 @@ namespace PnP.Core.Test.Base
                     {
                         firstAttempt = false;
 
-                        // deserialize the mock data
-                        JsonSerializerOptions options = new JsonSerializerOptions()
+                        if (TestCommon.Instance.Mocking)
                         {
-                            IgnoreNullValues = true,
-                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                        };
-                        var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
-
-                        // Update response to contain a 429 for the first request
-                        var firstResponse = graphBatchResponses.Responses.FirstOrDefault();
-                        if (firstResponse != null)
+                            return input;
+                        }
+                        else
                         {
-                            // Update response to be an error: status, header and body are updated
-                            firstResponse.Status = (HttpStatusCode)429;
-                            firstResponse.Headers.Add(RETRY_AFTER, "5");
-                            firstResponse.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+                            // deserialize the mock data
+                            JsonSerializerOptions options = new JsonSerializerOptions()
+                            {
+                                IgnoreNullValues = true,
+                                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                            };
+                            var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
 
-                            string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
-                            return rewrittenMockData;
+                            // Update response to contain a 429 for the first request
+                            var firstResponse = graphBatchResponses.Responses.FirstOrDefault();
+                            if (firstResponse != null)
+                            {
+                                // Update response to be an error: status, header and body are updated
+                                firstResponse.Status = (HttpStatusCode)429;
+                                firstResponse.Headers.Add(RETRY_AFTER, "5");
+                                firstResponse.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+
+                                string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
+                                return rewrittenMockData;
+                            }
                         }
                     }
 
@@ -229,25 +237,32 @@ namespace PnP.Core.Test.Base
                     {
                         firstAttempt = false;
 
-                        // deserialize the mock data
-                        JsonSerializerOptions options = new JsonSerializerOptions()
+                        if (TestCommon.Instance.Mocking)
                         {
-                            IgnoreNullValues = true,
-                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                        };
-                        var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
-
-                        // Update response to contain a 429 for the first request
-                        var lastResponse = graphBatchResponses.Responses.LastOrDefault();
-                        if (lastResponse != null)
+                            return input;
+                        }
+                        else
                         {
-                            // Update response to be an error: status, header and body are updated
-                            lastResponse.Status = (HttpStatusCode)429;
-                            lastResponse.Headers.Add(RETRY_AFTER, "5");
-                            lastResponse.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+                            // deserialize the mock data
+                            JsonSerializerOptions options = new JsonSerializerOptions()
+                            {
+                                IgnoreNullValues = true,
+                                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                            };
+                            var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
 
-                            string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
-                            return rewrittenMockData;
+                            // Update response to contain a 429 for the last request
+                            var lastResponse = graphBatchResponses.Responses.LastOrDefault();
+                            if (lastResponse != null)
+                            {
+                                // Update response to be an error: status, header and body are updated
+                                lastResponse.Status = (HttpStatusCode)429;
+                                lastResponse.Headers.Add(RETRY_AFTER, "5");
+                                lastResponse.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+
+                                string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
+                                return rewrittenMockData;
+                            }
                         }
                     }
 
@@ -284,24 +299,31 @@ namespace PnP.Core.Test.Base
                     {
                         firstAttempt = false;
 
-                        // deserialize the mock data
-                        JsonSerializerOptions options = new JsonSerializerOptions()
+                        if (TestCommon.Instance.Mocking)
                         {
-                            IgnoreNullValues = true,
-                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                        };
-                        var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
-
-                        // Update response to contain a 429 for the first request
-                        foreach (var response in graphBatchResponses.Responses)
-                        {
-                            // Update response to be an error: status, header and body are updated
-                            response.Status = (HttpStatusCode)429;
-                            response.Headers.Add(RETRY_AFTER, "5");
-                            response.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+                            return input;
                         }
-                        string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
-                        return rewrittenMockData;
+                        else
+                        {
+                            // deserialize the mock data
+                            JsonSerializerOptions options = new JsonSerializerOptions()
+                            {
+                                IgnoreNullValues = true,
+                                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                            };
+                            var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
+
+                            // Update response to contain a 429 for the first request
+                            foreach (var response in graphBatchResponses.Responses)
+                            {
+                                // Update response to be an error: status, header and body are updated
+                                response.Status = (HttpStatusCode)429;
+                                response.Headers.Add(RETRY_AFTER, "5");
+                                response.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+                            }
+                            string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
+                            return rewrittenMockData;
+                        }
                     }
 
                     return input;
@@ -329,25 +351,32 @@ namespace PnP.Core.Test.Base
                     // Keep on returning 429 for the first request in the batch...
                     if (TestManager.IsMicrosoftGraphMockData(input))
                     {
-                        // deserialize the mock data
-                        JsonSerializerOptions options = new JsonSerializerOptions()
+                        if (TestCommon.Instance.Mocking)
                         {
-                            IgnoreNullValues = true,
-                            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                        };
-                        var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
-
-                        // Update response to contain a 429 for the first request
-                        var firstResponse = graphBatchResponses.Responses.FirstOrDefault();
-                        if (firstResponse != null)
+                            return input;
+                        }
+                        else
                         {
-                            // Update response to be an error: status, header and body are updated
-                            firstResponse.Status = (HttpStatusCode)429;
-                            firstResponse.Headers.Add(RETRY_AFTER, "5");
-                            firstResponse.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+                            // deserialize the mock data
+                            JsonSerializerOptions options = new JsonSerializerOptions()
+                            {
+                                IgnoreNullValues = true,
+                                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                            };
+                            var graphBatchResponses = JsonSerializer.Deserialize<BatchClient.GraphBatchResponses>(input, options);
 
-                            string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
-                            return rewrittenMockData;
+                            // Update response to contain a 429 for the first request
+                            var firstResponse = graphBatchResponses.Responses.FirstOrDefault();
+                            if (firstResponse != null)
+                            {
+                                // Update response to be an error: status, header and body are updated
+                                firstResponse.Status = (HttpStatusCode)429;
+                                firstResponse.Headers.Add(RETRY_AFTER, "5");
+                                firstResponse.Body["body"] = JsonSerializer.Deserialize<JsonElement>(graphRetryError);
+
+                                string rewrittenMockData = JsonSerializer.Serialize(graphBatchResponses, options);
+                                return rewrittenMockData;
+                            }
                         }
                     }
 

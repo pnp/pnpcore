@@ -490,7 +490,14 @@ namespace PnP.Core.Services
                 }
                 else
                 {
+
                     string batchResponse = TestManager.MockResponse(PnPContext, requestKey);
+
+                    // Call out to the rewrite handler if that one is connected
+                    if (MockingFileRewriteHandler != null)
+                    {
+                        batchResponse = MockingFileRewriteHandler(batchResponse);
+                    }
 
                     var ready = await ProcessGraphRestBatchResponse(batch, batchResponse).ConfigureAwait(false);
                     if (!ready)
