@@ -25,7 +25,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task QueryFileInFolderTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -39,7 +39,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(documentUrl, documentToFind.ServerRelativeUrl);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
         #endregion
 
@@ -49,7 +49,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -60,7 +60,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreNotEqual(0, testDocument.Author.Id);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
         #endregion
 
@@ -70,7 +70,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -81,7 +81,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(documentUrl, testDocument.ServerRelativeUrl);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -100,7 +100,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(documentUrl, testDocument.ServerRelativeUrl);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
@@ -108,7 +108,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -120,7 +120,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(documentUrl, testDocument.ServerRelativeUrl);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -140,7 +140,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(documentUrl, testDocument.ServerRelativeUrl);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
@@ -148,7 +148,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -161,7 +161,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(documentUrl, testDocument.ServerRelativeUrl);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
@@ -169,7 +169,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -182,7 +182,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(documentUrl, testDocument.ServerRelativeUrl);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
         #endregion
 
@@ -193,7 +193,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -232,7 +232,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -240,7 +240,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -266,7 +266,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -274,7 +274,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -301,7 +301,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -309,7 +309,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -336,14 +336,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
         public async Task PublishFileBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -371,7 +371,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -379,7 +379,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -407,7 +407,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
         #endregion
 
@@ -417,7 +417,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -442,7 +442,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -450,7 +450,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -475,7 +475,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -483,7 +483,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -509,7 +509,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -517,7 +517,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -543,7 +543,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -551,7 +551,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -578,7 +578,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -586,7 +586,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -613,7 +613,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(CheckOutType.None, testDocument.CheckOutType);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
         #endregion
 
@@ -623,7 +623,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -644,7 +644,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.UndoCheckoutAsync();
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -652,7 +652,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -673,7 +673,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.UndoCheckoutAsync();
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -681,7 +681,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -703,7 +703,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.UndoCheckoutAsync();
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -711,7 +711,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -733,7 +733,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.UndoCheckoutAsync();
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -741,7 +741,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -764,7 +764,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.UndoCheckoutAsync();
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -772,7 +772,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -795,7 +795,7 @@ namespace PnP.Core.Test.SharePoint
                 await testDocument.UndoCheckoutAsync();
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
         #endregion
 
@@ -805,7 +805,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -829,7 +829,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -837,7 +837,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -861,7 +861,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -869,7 +869,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -894,7 +894,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -902,7 +902,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -927,7 +927,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -935,7 +935,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -961,7 +961,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -969,7 +969,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -995,7 +995,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
         #endregion
 
@@ -1005,7 +1005,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -1030,7 +1030,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -1038,7 +1038,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -1064,7 +1064,7 @@ namespace PnP.Core.Test.SharePoint
 
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -1072,7 +1072,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -1097,7 +1097,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(initialMinorVersion, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
@@ -1105,7 +1105,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, _, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             int initialMajorVersion;
             int initialMinorVersion;
@@ -1131,7 +1131,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(0, testDocument.MinorVersion);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
         #endregion
 
@@ -1141,7 +1141,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1172,7 +1172,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1203,7 +1203,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1233,7 +1233,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1263,7 +1263,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1294,7 +1294,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1327,7 +1327,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string copyFileName = $"{originalFileNameWithoutExt}_COPY{Path.GetExtension(documentName)}";
@@ -1344,8 +1344,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(copyFileName, foundCopiedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, documentName);
-            await CleanupMockDocumentFromSharedDocuments(2, copyFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: copyFileName);
         }
 
         [TestMethod]
@@ -1353,7 +1353,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string copyFileName = $"{originalFileNameWithoutExt}_COPY{Path.GetExtension(documentName)}";
@@ -1370,8 +1370,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(copyFileName, foundCopiedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, documentName);
-            await CleanupMockDocumentFromSharedDocuments(2, copyFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: copyFileName);
         }
 
         [TestMethod]
@@ -1379,7 +1379,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string copyFileName = $"{originalFileNameWithoutExt}_COPY{Path.GetExtension(documentName)}";
@@ -1397,8 +1397,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(copyFileName, foundCopiedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, documentName);
-            await CleanupMockDocumentFromSharedDocuments(2, copyFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: copyFileName);
         }
 
         [TestMethod]
@@ -1406,7 +1406,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string copyFileName = $"{originalFileNameWithoutExt}_COPY{Path.GetExtension(documentName)}";
@@ -1424,8 +1424,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(copyFileName, foundCopiedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, documentName);
-            await CleanupMockDocumentFromSharedDocuments(2, copyFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: copyFileName);
         }
 
         [TestMethod]
@@ -1433,7 +1433,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string copyFileName = $"{originalFileNameWithoutExt}_COPY{Path.GetExtension(documentName)}";
@@ -1452,8 +1452,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(copyFileName, foundCopiedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, documentName);
-            await CleanupMockDocumentFromSharedDocuments(2, copyFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: copyFileName);
         }
 
         [TestMethod]
@@ -1461,7 +1461,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string copyFileName = $"{originalFileNameWithoutExt}_COPY{Path.GetExtension(documentName)}";
@@ -1480,8 +1480,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(copyFileName, foundCopiedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, documentName);
-            await CleanupMockDocumentFromSharedDocuments(2, copyFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: documentName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: copyFileName);
         }
 
         [TestMethod]
@@ -1489,7 +1489,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1506,8 +1506,8 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
 
-            await CleanupMockDocumentFromSharedDocuments(3);
-            await CleanupMockDocumentFromSharedDocuments(3, contextConfig: TestCommon.NoGroupTestSite);
+            await TestAssets.CleanupTestDocumentAsync(3);
+            await TestAssets.CleanupTestDocumentAsync(3, contextConfig: TestCommon.NoGroupTestSite);
         }
 
         [TestMethod]
@@ -1515,7 +1515,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1533,8 +1533,8 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
 
-            await CleanupMockDocumentFromSharedDocuments(3);
-            await CleanupMockDocumentFromSharedDocuments(3, contextConfig: TestCommon.NoGroupTestSite);
+            await TestAssets.CleanupTestDocumentAsync(3);
+            await TestAssets.CleanupTestDocumentAsync(3, contextConfig: TestCommon.NoGroupTestSite);
         }
 
         #endregion
@@ -1545,7 +1545,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string newFileName = $"{originalFileNameWithoutExt}_MOVE{Path.GetExtension(documentName)}";
@@ -1562,7 +1562,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(newFileName, foundMovedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, newFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: newFileName);
         }
 
         [TestMethod]
@@ -1570,7 +1570,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string newFileName = $"{originalFileNameWithoutExt}_MOVE{Path.GetExtension(documentName)}";
@@ -1587,7 +1587,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(newFileName, foundMovedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, newFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: newFileName);
         }
 
         [TestMethod]
@@ -1595,7 +1595,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string newFileName = $"{originalFileNameWithoutExt}_MOVE{Path.GetExtension(documentName)}";
@@ -1613,7 +1613,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(newFileName, foundMovedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, newFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: newFileName);
         }
 
         [TestMethod]
@@ -1621,7 +1621,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string newFileName = $"{originalFileNameWithoutExt}_MOVE{Path.GetExtension(documentName)}";
@@ -1639,7 +1639,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(newFileName, foundMovedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, newFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: newFileName);
         }
 
         [TestMethod]
@@ -1647,7 +1647,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string newFileName = $"{originalFileNameWithoutExt}_MOVE{Path.GetExtension(documentName)}";
@@ -1666,7 +1666,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(newFileName, foundMovedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, newFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: newFileName);
         }
 
         [TestMethod]
@@ -1674,7 +1674,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             string originalFileNameWithoutExt = Path.GetFileNameWithoutExtension(documentName);
             string newFileName = $"{originalFileNameWithoutExt}_MOVE{Path.GetExtension(documentName)}";
@@ -1693,7 +1693,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(newFileName, foundMovedDocument.Name);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, newFileName);
+            await TestAssets.CleanupTestDocumentAsync(2, fileName: newFileName);
         }
 
         [TestMethod]
@@ -1701,7 +1701,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1718,7 +1718,7 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
 
-            await CleanupMockDocumentFromSharedDocuments(3, contextConfig: TestCommon.NoGroupTestSite);
+            await TestAssets.CleanupTestDocumentAsync(3, contextConfig: TestCommon.NoGroupTestSite);
         }
 
         [TestMethod]
@@ -1726,7 +1726,7 @@ namespace PnP.Core.Test.SharePoint
         {
             //TestCommon.Instance.Mocking = false;
 
-            (string documentName, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1744,7 +1744,7 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
 
-            await CleanupMockDocumentFromSharedDocuments(3, contextConfig: TestCommon.NoGroupTestSite);
+            await TestAssets.CleanupTestDocumentAsync(3, contextConfig: TestCommon.NoGroupTestSite);
         }
         #endregion
 
@@ -1946,7 +1946,7 @@ namespace PnP.Core.Test.SharePoint
         //{
         //    //TestCommon.Instance.Mocking = false;
 
-        //    await AddMockDocumentToSharedDocuments(0, "test_update.docx");
+        //    await TestAssets.CreateTestDocument(0, "test_update.docx");
 
         //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
         //    {
@@ -1968,7 +1968,7 @@ namespace PnP.Core.Test.SharePoint
         //        await testDocument.ListItemAllFields.UpdateAsync();
         //    }
 
-        //    await CleanupMockDocumentFromSharedDocuments(2, "test_update.docx");
+        //    await TestAssets.CleanupTestDocument(2, "test_update.docx");
         //}
 
         #region Delete
@@ -1976,7 +1976,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DeleteFileAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -1999,7 +1999,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DeleteFileTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2022,7 +2022,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DeleteFileCurrentBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2046,7 +2046,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DeleteFileCurrentBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2070,7 +2070,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DeleteFileBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2095,7 +2095,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task DeleteFileBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2123,7 +2123,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFilePropertiesAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2135,14 +2135,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFilePropertiesTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2154,14 +2154,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFilePropertiesCurrentBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2174,14 +2174,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFilePropertiesCurrentBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2194,14 +2194,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFilePropertiesBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2215,14 +2215,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFilePropertiesBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2236,7 +2236,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
         #endregion
 
@@ -2245,7 +2245,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFileIRMSettingsAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2258,14 +2258,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(30, documentWithIrm.InformationRightsManagementSettings.LicenseCacheExpireDays);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFileIRMSettingsTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2278,14 +2278,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(30, documentWithIrm.InformationRightsManagementSettings.LicenseCacheExpireDays);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFileIRMSettingsCurrentBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2299,14 +2299,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(30, documentWithIrm.InformationRightsManagementSettings.LicenseCacheExpireDays);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFileIRMSettingsCurrentBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2320,14 +2320,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(30, documentWithIrm.InformationRightsManagementSettings.LicenseCacheExpireDays);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFileIRMSettingsBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2342,14 +2342,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(30, documentWithIrm.InformationRightsManagementSettings.LicenseCacheExpireDays);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         [TestMethod]
         public async Task GetFileIRMSettingsBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (_, string documentUrl) = await AddMockDocumentToSharedDocuments(0);
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2364,7 +2364,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(30, documentWithIrm.InformationRightsManagementSettings.LicenseCacheExpireDays);
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2);
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
         #endregion
 
@@ -2372,7 +2372,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFileEffectiveIRMSettingsTest()
         {
             //TestCommon.Instance.Mocking = false;
-            await AddMockDocumentToSharedDocuments(0, "test_irm_effective_settings.docx");
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2380,8 +2380,7 @@ namespace PnP.Core.Test.SharePoint
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.IrmEnabled, p => p.InformationRightsManagementSettings);
                 list.IrmEnabled = true;
                 await list.UpdateAsync();
-                
-                string documentUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{TestCommon.PnPCoreSDKTestPrefix}test_irm_effective_settings.docx";
+
                 IFile documentWithEffectiveIrm = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.EffectiveInformationRightsManagementSettings);
 
                 // TODO The asserts below checks the effective IRM settings object is instantiated. More relevant tests should be done on a IRM enabled and configured tenant
@@ -2393,7 +2392,7 @@ namespace PnP.Core.Test.SharePoint
 
             }
 
-            await CleanupMockDocumentFromSharedDocuments(2, "test_irm_effective_settings.docx");
+            await TestAssets.CleanupTestDocumentAsync(2);
         }
 
         #region Get file versions
@@ -2401,7 +2400,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFileVersionsAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string libraryName, string documentName, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (string libraryName, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2434,14 +2433,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(documentWithVersions.Versions[2].Created != DateTime.MinValue);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
         public async Task GetFileVersionsTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string libraryName, string documentName, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (string libraryName, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2468,14 +2467,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
         public async Task GetFileVersionsCurrentBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string libraryName, string documentName, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (string libraryName, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2504,14 +2503,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
         public async Task GetFileVersionsCurrentBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string libraryName, string documentName, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (string libraryName, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2540,14 +2539,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
         public async Task GetFileVersionsBatchAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string libraryName, string documentName, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (string libraryName, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2580,14 +2579,14 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         [TestMethod]
         public async Task GetFileVersionsBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string libraryName, string documentName, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (string libraryName, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2619,7 +2618,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
 
         #endregion
@@ -2629,7 +2628,7 @@ namespace PnP.Core.Test.SharePoint
         public async Task GetFileVersionEventsAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
-            (string libraryName, string documentName, string documentUrl) = await AddMockDocumentToMinorVersioningEnabledLibrary(0);
+            (string libraryName, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
@@ -2654,12 +2653,11 @@ namespace PnP.Core.Test.SharePoint
 
             }
 
-            await CleanupMockMinorVersioningEnabledLibrary(3);
+            await TestAssets.CleanupTestDedicatedListAsync(3);
         }
         #endregion
 
         #region testing asset documents/libraries helpers
-      
 
         private async Task<Tuple<string, string, string>> AddMockDocumentToMinorVersioningEnabledLibrary(int contextId,
             [System.Runtime.CompilerServices.CallerMemberName] string libraryName = null,
@@ -2686,56 +2684,6 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        private async Task CleanupMockMinorVersioningEnabledLibrary(int contextId,
-            [System.Runtime.CompilerServices.CallerMemberName] string libraryName = null,
-            [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
-        {
-            libraryName = TestCommon.GetPnPSdkTestAssetName(libraryName);
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
-            {
-                IList documentLibrary = await context.Web.Lists.GetByTitleAsync(libraryName);
-                await documentLibrary.DeleteAsync();
-            }
-        }
-
-        private async Task<Tuple<string, string>> AddMockDocumentToSharedDocuments(int contextId,
-              [System.Runtime.CompilerServices.CallerMemberName] string fileName = null,
-              [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
-        {
-            if (!fileName.EndsWith(".docx"))
-            {
-                fileName += ".docx";
-            }
-
-            fileName = TestCommon.GetPnPSdkTestAssetName(fileName);
-
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
-            {
-                IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFile mockDocument = await folder.Files.AddAsync(fileName, System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}test.docx"), true);
-                return new Tuple<string, string>(mockDocument.Name, mockDocument.ServerRelativeUrl);
-            }
-        }
-
-        private async Task CleanupMockDocumentFromSharedDocuments(int contextId,
-            [System.Runtime.CompilerServices.CallerMemberName] string fileName = null,
-            string contextConfig = null, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
-        {
-            contextConfig ??= TestCommon.TestSite;
-            if (!fileName.EndsWith(".docx"))
-            {
-                fileName += ".docx";
-            }
-
-            fileName = TestCommon.GetPnPSdkTestAssetName(fileName);
-            using (var context = await TestCommon.Instance.GetContextAsync(contextConfig, contextId, testName))
-            {
-                string testDocumentServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/{fileName}";
-                IFile mockDocument = await context.Web.GetFileByServerRelativeUrlAsync(testDocumentServerRelativeUrl);
-                await mockDocument.DeleteAsync();
-            }
-        }
         #endregion
     }
 }

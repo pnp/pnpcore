@@ -20,7 +20,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryLoadExtensionMethod()
         {
-            var expected = "$select=sharepointIds,name,description";
+            var expected = "$select=sharepointIds,displayName,description";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -84,7 +84,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryOrderBy()
         {
-            var expected = "$orderby=name";
+            var expected = "$orderby=displayName";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -100,7 +100,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryOrderByMultiple()
         {
-            var expected = "$orderby=name,sharepointIds";
+            var expected = "$orderby=displayName,sharepointIds";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -117,7 +117,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryOrderByMultipleDirections()
         {
-            var expected = "$orderby=name,sharepointIds desc";
+            var expected = "$orderby=displayName,sharepointIds desc";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -134,7 +134,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryOrderByMultipleDirectionsLINQ()
         {
-            var expected = "$orderby=name,sharepointIds desc";
+            var expected = "$orderby=displayName,sharepointIds desc";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -151,7 +151,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryWhereLINQ()
         {
-            var expected = "$filter=name eq 'Test'";
+            var expected = "$filter=displayName eq 'Test'";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -168,7 +168,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryWhereLINQWithMultipleFilters()
         {
-            var expected = "$filter=(name eq 'Test' and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))";
+            var expected = "$filter=(displayName eq 'Test' and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))";
             var filteredId = new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e");
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -186,7 +186,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryComplex()
         {
-            var expected = "$select=sharepointIds,name,description&$filter=name eq 'Test'&$top=10&$skip=5&$expand=lists";
+            var expected = "$select=sharepointIds,displayName,description&$filter=displayName eq 'Test'&$top=10&$skip=5&$expand=lists";
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
@@ -207,7 +207,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryComplexMultiWhere()
         {
-            var expected = "$select=sharepointIds,name,description&$filter=((name eq 'Test' and description eq 'Description') and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))&$top=10&$skip=5&$expand=lists";
+            var expected = "$select=sharepointIds,displayName,description&$filter=((displayName eq 'Test' and description eq 'Description') and sharepointIds eq (guid'69e8b219-d7af-4ac9-bc23-d382b7de985e'))&$top=10&$skip=5&$expand=lists";
             var filteredId = new Guid("69e8b219-d7af-4ac9-bc23-d382b7de985e");
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))

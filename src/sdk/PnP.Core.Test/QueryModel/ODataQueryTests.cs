@@ -11,7 +11,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestFlatFilters()
         {
-            var expected = "$filter=name eq 'Test 01' and description ne 'Test 02'&$top=10&$skip=5";
+            var expected = "$filter=displayName eq 'Test 01' and description ne 'Test 02'&$top=10&$skip=5";
 
             ODataQuery<IWeb> query = new ODataQuery<IWeb>();
             query.Top = 10;
@@ -42,7 +42,7 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public void TestInDepthFilters()
         {
-            var expected = "$filter=name eq 'Test 01' or (sharepointIds eq 7 or AuthorID eq 15 and ModifiedBy eq 'paolo@piasysdev.onmicrosoft.com') and description ne 'Test 02'&$top=10&$skip=5";
+            var expected = "$filter=displayName eq 'Test 01' or (sharepointIds eq 7 or AuthorID eq 15 and ModifiedBy eq 'paolo@piasysdev.onmicrosoft.com') and description ne 'Test 02'&$top=10&$skip=5";
 
             ODataQuery<IWeb> query = new ODataQuery<IWeb>();
             query.Top = 10;

@@ -93,8 +93,9 @@ namespace PnP.Core.Model.SharePoint
                 // drop the everything in front of _api as the batching logic will add that automatically
                 var baseApiCall = parentListUri.Substring(parentListUri.IndexOf("_api"));
                 // little trick here to ensure we can construct the correct list url based upon the data returned by a default load
-                var serverRelativeUrl = $"{PnPContext.Uri}/lists/{parentListTitle}";
-
+                // Ensure the underscore "_" character is not encoded in the FolderPath to use
+                var serverRelativeUrl = $"{PnPContext.Uri}/lists/{parentListTitle}".Replace("_x005f_", "_");
+                
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();
 
