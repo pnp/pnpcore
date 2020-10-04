@@ -155,7 +155,7 @@ namespace PnP.Core.Model.SharePoint
 
         public bool WebTemplatesGalleryFirstRunEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
-        [GraphProperty("name")]
+        [GraphProperty("displayName")]
         public string Title { get => GetValue<string>(); set => SetValue(value); }
 
         [GraphProperty("description")]

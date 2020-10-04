@@ -1,0 +1,9 @@
+--batchresponse_daf225bf-9585-4e50-ad11-079fb1ed7145
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"286563d2-2d3b-46e6-9fa8-ed3c9636faa9","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'0cbf5cf3-9af7-48d2-8309-5d27d59d0e85')/Items(1)","etag":"\"1\"","type":"SP.Data.PNP_x005f_SDK_x005f_TEST_x005f_TestQueryGetByIdLINQ_x005f_GraphListItem"},"Id":1,"ID":1,"Title":"PNP_SDK_TEST_TestQueryGetByIdLINQ_Graph"}]}}
+--batchresponse_daf225bf-9585-4e50-ad11-079fb1ed7145--

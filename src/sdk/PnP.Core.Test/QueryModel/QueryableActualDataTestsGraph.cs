@@ -5,6 +5,7 @@ using PnP.Core.Test.Utilities;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -58,16 +59,16 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryItems_Graph()
         {
-            //TODO: when we have document upload funcionality then the test should ensure a document with the requested title is uploaded
-            var expectedListItemTitle = "Sample Document 01";
-
             //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            
+            (string listName, int id, string itemTitle) = await TestAssets.CreateTestListItemAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 context.GraphFirst = true;
 
-                var query = (from i in context.Web.Lists.GetByTitle("Documents").Items
-                             where i.Title == expectedListItemTitle
+                var query = (from i in context.Web.Lists.GetByTitle(listName).Items
+                             where i.Title == itemTitle
                              select i)
                              .Load(l => l.Id, l => l.Title);
 
@@ -79,8 +80,10 @@ namespace PnP.Core.Test.QueryModel
                 // Ensure that we have 1 item in the result and that its title is the expected one
                 Assert.IsNotNull(queryResult);
                 Assert.AreEqual(1, queryResult.Count);
-                Assert.AreEqual(expectedListItemTitle, queryResult[0].Title);
+                Assert.AreEqual(itemTitle, queryResult[0].Title);
             }
+
+            await TestAssets.CleanupTestDedicatedListAsync(2);
         }
 
         [TestMethod]
@@ -177,23 +180,25 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryGetByIdLINQ_Graph()
         {
-            var targetListTitle = "Documents";
-            var expectedTitle = "General";
+            //TestCommon.Instance.Mocking = false;
 
-            // TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            (string listName, int id, string itemTitle) = await TestAssets.CreateTestListItemAsync();
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 context.GraphFirst = true;
 
-                var library = context.Web.Lists.GetByTitle(targetListTitle);
+                var library = context.Web.Lists.GetByTitle(listName);
                 var firstItem = library.Items.GetById(1, 
                     i => i.Id, 
                     i => i.Title);
 
                 Assert.IsNotNull(firstItem);
-                Assert.AreEqual(1, firstItem.Id);
-                Assert.AreEqual(firstItem.Title, expectedTitle);
+                Assert.AreEqual(id, firstItem.Id);
+                Assert.AreEqual(firstItem.Title, itemTitle);
             }
+
+            await TestAssets.CleanupTestDedicatedListAsync(2);
         }
     }
 }

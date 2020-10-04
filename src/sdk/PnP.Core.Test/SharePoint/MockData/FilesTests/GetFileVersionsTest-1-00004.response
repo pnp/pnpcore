@@ -1,4 +1,4 @@
---batchresponse_05b8c4c2-a702-4521-9030-068eeb684c74
+--batchresponse_5c6e629d-a8b3-4f0c-911f-2602be907893
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"CheckIn":null}}
---batchresponse_05b8c4c2-a702-4521-9030-068eeb684c74--
+--batchresponse_5c6e629d-a8b3-4f0c-911f-2602be907893--
