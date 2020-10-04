@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PnP.Core.Model
 {
     /// <summary>
-    /// Holds information that describes how a fields is expanded. Is populated when .Include() is used 
+    /// Holds information that describes how a fields is expanded. Is populated when .LoadProperties() is used 
     /// </summary>
     internal class EntityFieldExpandInfo
     {
