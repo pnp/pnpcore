@@ -211,6 +211,20 @@ Open the `appsettings.yourname.json` file, it will look like the following one.
           "Interactive": {
             "RedirectUri": "http://localhost"
           }
+        },
+        "deviceCode": {
+          "ClientId": "{PnP.Core.Test-ClientId}",
+          "TenantId": "{TenantId}",
+          "DeviceCode": {
+            "RedirectUri": "http://localhost"
+          }
+        },
+        "externalRealProvider": {
+          "ClientId": "{PnP.Core.Test-ClientId}",
+          "TenantId": "{TenantId}",
+          "CredentialManager": {
+            "CredentialManagerName": "{Credential-Manager}"
+          }
         }
       }
     },
@@ -234,6 +248,10 @@ Open the `appsettings.yourname.json` file, it will look like the following one.
       "TestSiteX509Certificate": {
         "SiteUrl": "https://contoso.sharepoint.com/sites/pnpcoresdktestgroup",
         "AuthenticationProviderName": "x509Certificate"
+      },
+      "TestSiteDeviceCode": {
+        "SiteUrl": "https://contoso.sharepoint.com/sites/pnpcoresdktestgroup",
+        "AuthenticationProviderName": "deviceCode"
       }
     }
   },
