@@ -214,6 +214,143 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.CredentialManagerAuthenticationProvider.GetAccessTokenAsync
   nameWithType: CredentialManagerAuthenticationProvider.GetAccessTokenAsync
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider
+  name: DeviceCodeAuthenticationProvider
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html
+  commentId: T:PnP.Core.Auth.DeviceCodeAuthenticationProvider
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider
+  nameWithType: DeviceCodeAuthenticationProvider
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
+  name: DeviceCodeAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
+  commentId: M:PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
+  name.vb: DeviceCodeAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>)
+  fullName.vb: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
+  nameWithType: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
+  nameWithType.vb: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(System.String,System.String,Uri,Action{PnP.Core.Auth.DeviceCodeNotification})
+  name: DeviceCodeAuthenticationProvider(String, String, Uri, Action<DeviceCodeNotification>)
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_System_String_System_String_Uri_Action_PnP_Core_Auth_DeviceCodeNotification__
+  commentId: M:PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor(System.String,System.String,Uri,Action{PnP.Core.Auth.DeviceCodeNotification})
+  name.vb: DeviceCodeAuthenticationProvider(String, String, Uri, Action(Of DeviceCodeNotification))
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(System.String, System.String, Uri, Action<PnP.Core.Auth.DeviceCodeNotification>)
+  fullName.vb: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(System.String, System.String, Uri, Action(Of PnP.Core.Auth.DeviceCodeNotification))
+  nameWithType: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(String, String, Uri, Action<DeviceCodeNotification>)
+  nameWithType.vb: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider(String, String, Uri, Action(Of DeviceCodeNotification))
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor*
+  name: DeviceCodeAuthenticationProvider
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider__ctor_
+  commentId: Overload:PnP.Core.Auth.DeviceCodeAuthenticationProvider.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider
+  nameWithType: DeviceCodeAuthenticationProvider.DeviceCodeAuthenticationProvider
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync(Uri,HttpRequestMessage)
+  name: AuthenticateRequestAsync(Uri, HttpRequestMessage)
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_
+  commentId: M:PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync(Uri,HttpRequestMessage)
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync(Uri, HttpRequestMessage)
+  nameWithType: DeviceCodeAuthenticationProvider.AuthenticateRequestAsync(Uri, HttpRequestMessage)
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync*
+  name: AuthenticateRequestAsync
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider_AuthenticateRequestAsync_
+  commentId: Overload:PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync
+  isSpec: "True"
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.AuthenticateRequestAsync
+  nameWithType: DeviceCodeAuthenticationProvider.AuthenticateRequestAsync
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeVerification
+  name: DeviceCodeVerification
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider_DeviceCodeVerification
+  commentId: P:PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeVerification
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeVerification
+  nameWithType: DeviceCodeAuthenticationProvider.DeviceCodeVerification
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeVerification*
+  name: DeviceCodeVerification
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider_DeviceCodeVerification_
+  commentId: Overload:PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeVerification
+  isSpec: "True"
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.DeviceCodeVerification
+  nameWithType: DeviceCodeAuthenticationProvider.DeviceCodeVerification
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri)
+  name: GetAccessTokenAsync(Uri)
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_Uri_
+  commentId: M:PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri)
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri)
+  nameWithType: DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri)
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri,System.String[])
+  name: GetAccessTokenAsync(Uri, String[])
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___
+  commentId: M:PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri,System.String[])
+  name.vb: GetAccessTokenAsync(Uri, String())
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri, System.String[])
+  fullName.vb: PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri, System.String())
+  nameWithType: DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri, String[])
+  nameWithType.vb: DeviceCodeAuthenticationProvider.GetAccessTokenAsync(Uri, String())
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync*
+  name: GetAccessTokenAsync
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider_GetAccessTokenAsync_
+  commentId: Overload:PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync
+  isSpec: "True"
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.GetAccessTokenAsync
+  nameWithType: DeviceCodeAuthenticationProvider.GetAccessTokenAsync
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.RedirectUri
+  name: RedirectUri
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider_RedirectUri
+  commentId: P:PnP.Core.Auth.DeviceCodeAuthenticationProvider.RedirectUri
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.RedirectUri
+  nameWithType: DeviceCodeAuthenticationProvider.RedirectUri
+- uid: PnP.Core.Auth.DeviceCodeAuthenticationProvider.RedirectUri*
+  name: RedirectUri
+  href: api/PnP.Core.Auth.DeviceCodeAuthenticationProvider.html#PnP_Core_Auth_DeviceCodeAuthenticationProvider_RedirectUri_
+  commentId: Overload:PnP.Core.Auth.DeviceCodeAuthenticationProvider.RedirectUri
+  isSpec: "True"
+  fullName: PnP.Core.Auth.DeviceCodeAuthenticationProvider.RedirectUri
+  nameWithType: DeviceCodeAuthenticationProvider.RedirectUri
+- uid: PnP.Core.Auth.DeviceCodeNotification
+  name: DeviceCodeNotification
+  href: api/PnP.Core.Auth.DeviceCodeNotification.html
+  commentId: T:PnP.Core.Auth.DeviceCodeNotification
+  fullName: PnP.Core.Auth.DeviceCodeNotification
+  nameWithType: DeviceCodeNotification
+- uid: PnP.Core.Auth.DeviceCodeNotification.Message
+  name: Message
+  href: api/PnP.Core.Auth.DeviceCodeNotification.html#PnP_Core_Auth_DeviceCodeNotification_Message
+  commentId: P:PnP.Core.Auth.DeviceCodeNotification.Message
+  fullName: PnP.Core.Auth.DeviceCodeNotification.Message
+  nameWithType: DeviceCodeNotification.Message
+- uid: PnP.Core.Auth.DeviceCodeNotification.Message*
+  name: Message
+  href: api/PnP.Core.Auth.DeviceCodeNotification.html#PnP_Core_Auth_DeviceCodeNotification_Message_
+  commentId: Overload:PnP.Core.Auth.DeviceCodeNotification.Message
+  isSpec: "True"
+  fullName: PnP.Core.Auth.DeviceCodeNotification.Message
+  nameWithType: DeviceCodeNotification.Message
+- uid: PnP.Core.Auth.DeviceCodeNotification.UserCode
+  name: UserCode
+  href: api/PnP.Core.Auth.DeviceCodeNotification.html#PnP_Core_Auth_DeviceCodeNotification_UserCode
+  commentId: P:PnP.Core.Auth.DeviceCodeNotification.UserCode
+  fullName: PnP.Core.Auth.DeviceCodeNotification.UserCode
+  nameWithType: DeviceCodeNotification.UserCode
+- uid: PnP.Core.Auth.DeviceCodeNotification.UserCode*
+  name: UserCode
+  href: api/PnP.Core.Auth.DeviceCodeNotification.html#PnP_Core_Auth_DeviceCodeNotification_UserCode_
+  commentId: Overload:PnP.Core.Auth.DeviceCodeNotification.UserCode
+  isSpec: "True"
+  fullName: PnP.Core.Auth.DeviceCodeNotification.UserCode
+  nameWithType: DeviceCodeNotification.UserCode
+- uid: PnP.Core.Auth.DeviceCodeNotification.VerificationUrl
+  name: VerificationUrl
+  href: api/PnP.Core.Auth.DeviceCodeNotification.html#PnP_Core_Auth_DeviceCodeNotification_VerificationUrl
+  commentId: P:PnP.Core.Auth.DeviceCodeNotification.VerificationUrl
+  fullName: PnP.Core.Auth.DeviceCodeNotification.VerificationUrl
+  nameWithType: DeviceCodeNotification.VerificationUrl
+- uid: PnP.Core.Auth.DeviceCodeNotification.VerificationUrl*
+  name: VerificationUrl
+  href: api/PnP.Core.Auth.DeviceCodeNotification.html#PnP_Core_Auth_DeviceCodeNotification_VerificationUrl_
+  commentId: Overload:PnP.Core.Auth.DeviceCodeNotification.VerificationUrl
+  isSpec: "True"
+  fullName: PnP.Core.Auth.DeviceCodeNotification.VerificationUrl
+  nameWithType: DeviceCodeNotification.VerificationUrl
 - uid: PnP.Core.Auth.InteractiveAuthenticationProvider
   name: InteractiveAuthenticationProvider
   href: api/PnP.Core.Auth.InteractiveAuthenticationProvider.html
@@ -652,6 +789,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.CredentialManager
   nameWithType: PnPCoreAuthenticationCredentialConfigurationOptions.CredentialManager
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode
+  name: DeviceCode
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialConfigurationOptions_DeviceCode
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode
+  nameWithType: PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode*
+  name: DeviceCode
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialConfigurationOptions_DeviceCode_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode
+  nameWithType: PnPCoreAuthenticationCredentialConfigurationOptions.DeviceCode
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.Interactive
   name: Interactive
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialConfigurationOptions_Interactive
@@ -774,6 +924,25 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialsOptions.DefaultConfiguration
   nameWithType: PnPCoreAuthenticationCredentialsOptions.DefaultConfiguration
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions
+  name: PnPCoreAuthenticationDeviceCodeOptions
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.html
+  commentId: T:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions
+  nameWithType: PnPCoreAuthenticationDeviceCodeOptions
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
+  name: RedirectUri
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_RedirectUri
+  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
+  nameWithType: PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
+- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri*
+  name: RedirectUri
+  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationDeviceCodeOptions_RedirectUri_
+  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
+  isSpec: "True"
+  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
+  nameWithType: PnPCoreAuthenticationDeviceCodeOptions.RedirectUri
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions
   name: PnPCoreAuthenticationInteractiveOptions
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationInteractiveOptions.html
