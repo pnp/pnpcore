@@ -128,6 +128,10 @@ namespace PnP.Core.Auth.Services
             {
                 providerType = typeof(InteractiveAuthenticationProvider);
             }
+            else if (option.DeviceCode != null)
+            {
+                providerType = typeof(DeviceCodeAuthenticationProvider);
+            }
 
             return providerType;
         }
@@ -173,6 +177,11 @@ namespace PnP.Core.Auth.Services
                     interactive.ClientId = option.ClientId;
                     interactive.TenantId = option.TenantId;
                     interactive.RedirectUri = option.Interactive.RedirectUri;
+                    break;
+                case DeviceCodeAuthenticationProvider deviceCode:
+                    deviceCode.ClientId = option.ClientId;
+                    deviceCode.TenantId = option.TenantId;
+                    deviceCode.RedirectUri = option.Interactive.RedirectUri;
                     break;
             }
         }

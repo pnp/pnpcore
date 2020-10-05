@@ -74,6 +74,10 @@ namespace Microsoft.Extensions.DependencyInjection
             // Add the service for X509CertificateAuthenticationProvider
             collection.AddTransient<IAuthenticationProvider, X509CertificateAuthenticationProvider>();
             collection.AddTransient<X509CertificateAuthenticationProvider, X509CertificateAuthenticationProvider>();
+
+            // Add the service for DeviceCodeAuthenticationProvider
+            collection.AddTransient<IAuthenticationProvider, DeviceCodeAuthenticationProvider>();
+            collection.AddTransient<DeviceCodeAuthenticationProvider, DeviceCodeAuthenticationProvider>();
         }
     }
 

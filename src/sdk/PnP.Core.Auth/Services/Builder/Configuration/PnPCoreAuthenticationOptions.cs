@@ -105,6 +105,11 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// The options for the Interactive Authentication Provider
         /// </summary>
         public PnPCoreAuthenticationInteractiveOptions Interactive { get; set; }
+
+        /// <summary>
+        /// The options for the Device Code Provider
+        /// </summary>
+        public PnPCoreAuthenticationDeviceCodeOptions DeviceCode { get; set; }
     }
 
     /// <summary>
@@ -193,6 +198,17 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
     /// Options for the UsernamePasswordAuthenticationProvider
     /// </summary>
     public class PnPCoreAuthenticationInteractiveOptions
+    {
+        /// <summary>
+        /// The Redirect URI for the authentication flow
+        /// </summary>
+        public Uri RedirectUri { get; set; }
+    }
+
+    /// <summary>
+    /// Options for the DeviceCodeAuthenticationProvider
+    /// </summary>
+    public class PnPCoreAuthenticationDeviceCodeOptions
     {
         /// <summary>
         /// The Redirect URI for the authentication flow

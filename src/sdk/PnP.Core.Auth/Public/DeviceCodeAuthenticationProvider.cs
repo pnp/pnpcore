@@ -6,29 +6,25 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Auth
 {
     /// <summary>
-    /// Authentication Provider that uses a Resource Owner Password Credentials (ROCP) credential flow
+    /// Authentication Provider that uses a device code flow for authentication
     /// </summary>
-    /// <remarks>
-    /// You can find further details about ROPC here: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth-ropc
-    /// </remarks>
-    public sealed class UsernamePasswordAuthenticationProvider : OAuthAuthenticationProvider
+    public class DeviceCodeAuthenticationProvider : OAuthAuthenticationProvider
     {
         /// <summary>
-        /// The username for authenticating
+        /// The Redirect URI for the authentication flow
         /// </summary>
-        public string Username { get; set; }
+        public Uri RedirectUri { get; set; }
 
         /// <summary>
-        /// The password for authenticating
+        /// Action to notify the end user about the device code request
         /// </summary>
-        public SecureString Password { get; set; }
-        
+        public Action<DeviceCodeNotification> DeviceCodeVerification { get; set; }
+
         // Instance private member, to keep the token cache at service instance level
         private IPublicClientApplication publicClientApplication;
 
@@ -37,20 +33,20 @@ namespace PnP.Core.Auth
         /// </summary>
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
         /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
-        /// <param name="username">The Username for authentication</param>
-        /// <param name="password">The Password for authentication</param>
-        public UsernamePasswordAuthenticationProvider(string clientId, string tenantId,
-            string username, SecureString password)
+        /// <param name="redirectUri">The Redirect URI for the authentication flow</param>
+        /// <param name="deviceCodeVerification">External action to manage the Device Code verification</param>
+        public DeviceCodeAuthenticationProvider(string clientId, string tenantId, 
+            Uri redirectUri, Action<DeviceCodeNotification> deviceCodeVerification)
             : this(null)
         {
+            DeviceCodeVerification = deviceCodeVerification;
             this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
-                UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
+                DeviceCode = new PnPCoreAuthenticationDeviceCodeOptions
                 {
-                    Username = username,
-                    Password = password?.ToInsecureString()
+                    RedirectUri = redirectUri
                 }
             });
         }
@@ -59,7 +55,7 @@ namespace PnP.Core.Auth
         /// Public constructor leveraging DI to initialize the ILogger interfafce
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
-        public UsernamePasswordAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
+        public DeviceCodeAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
             : base(logger)
         {
         }
@@ -71,28 +67,21 @@ namespace PnP.Core.Auth
         internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
             // We need the UsernamePassword options
-            if (options.UsernamePassword == null)
+            if (options.DeviceCode == null)
             {
                 throw new ConfigurationErrorsException(
-                    PnPCoreAuthResources.UsernamePasswordAuthenticationProvider_InvalidConfiguration);
+                    PnPCoreAuthResources.DeviceCodeAuthenticationProvider_InvalidConfiguration);
             }
 
-            // We need the Username
-            if (string.IsNullOrEmpty(options.UsernamePassword.Username))
+            // We need the RedirectUri
+            if (options.DeviceCode.RedirectUri == null)
             {
-                throw new ConfigurationErrorsException(PnPCoreAuthResources.UsernamePasswordAuthenticationProvider_InvalidUsername);
-            }
-
-            // We need the Password
-            if (string.IsNullOrEmpty(options.UsernamePassword.Password))
-            {
-                throw new ConfigurationErrorsException(PnPCoreAuthResources.UsernamePasswordAuthenticationProvider_InvalidPassword);
+                throw new ConfigurationErrorsException(PnPCoreAuthResources.DeviceCodeAuthenticationProvider_InvalidRedirectUri);
             }
 
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
-            Username = options.UsernamePassword.Username;
-            Password = options.UsernamePassword.Password.ToSecureString();
+            RedirectUri = options.DeviceCode.RedirectUri;
 
             // Define the authority for the current security context
             var authority = new Uri(String.Format(System.Globalization.CultureInfo.InvariantCulture,
@@ -103,11 +92,11 @@ namespace PnP.Core.Auth
             publicClientApplication = PublicClientApplicationBuilder
                 .Create(ClientId)
                 .WithAuthority(authority)
+                .WithRedirectUri(RedirectUri.ToString())
                 .Build();
 
             // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.UsernamePasswordAuthenticationProvider_LogInit,
-                options.UsernamePassword.Username);
+            this.Log?.LogInformation(PnPCoreAuthResources.DeviceCodeAuthenticationProvider_LogInit);
         }
 
         /// <summary>
@@ -128,7 +117,7 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(resource));
             }
 
-            request.Headers.Authorization = new AuthenticationHeaderValue("bearer", 
+            request.Headers.Authorization = new AuthenticationHeaderValue("bearer",
                 await GetAccessTokenAsync(resource).ConfigureAwait(false));
         }
 
@@ -162,7 +151,15 @@ namespace PnP.Core.Auth
             catch (MsalUiRequiredException)
             {
                 // Try to get the token directly through AAD if it is not available in the tokens cache
-                tokenResult = publicClientApplication.AcquireTokenByUsernamePassword(scopes, Username, Password)
+                tokenResult = publicClientApplication.AcquireTokenWithDeviceCode(scopes,
+                    deviceCodeResult => {
+                        DeviceCodeVerification.Invoke(new DeviceCodeNotification { 
+                            UserCode = deviceCodeResult.UserCode,
+                            Message = deviceCodeResult.Message,
+                            VerificationUrl = new Uri(deviceCodeResult.VerificationUrl)
+                        });
+                        return Task.FromResult(0);
+                    })
                     .ExecuteAsync().GetAwaiter().GetResult();
             }
 
@@ -189,8 +186,30 @@ namespace PnP.Core.Auth
             }
 
             // Use the .default scope if the scopes are not provided
-            return await GetAccessTokenAsync(resource, 
+            return await GetAccessTokenAsync(resource,
                 new string[] { $"{resource.Scheme}://{resource.Authority}/.default" }).ConfigureAwait(false);
         }
+    }
+
+    /// <summary>
+    /// Provides information about the Device Code authentication request
+    /// </summary>
+    public class DeviceCodeNotification
+    {
+        /// <summary>
+        /// User friendly text response that can be used for display purpose.
+        /// </summary>
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Verification URL where the user must navigate to authenticate using the device code and credentials
+        /// </summary>
+        public Uri VerificationUrl { get; set; }
+
+        /// <summary>
+        /// Device code returned by the service
+        /// </summary>
+        public string UserCode { get; set; }
+
     }
 }
