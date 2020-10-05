@@ -63,6 +63,11 @@ namespace PnP.Core.Auth.Test.Utilities
         internal static string TestSiteInteractive { get { return "TestSiteInteractive"; } }
 
         /// <summary>
+        /// Name of the default test site configuration with Device Code authentication
+        /// </summary>
+        internal static string TestSiteDeviceCode { get { return "TestSiteDeviceCode"; } }
+
+        /// <summary>
         /// Private constructor since this is a singleton
         /// </summary>
         private TestCommon()
