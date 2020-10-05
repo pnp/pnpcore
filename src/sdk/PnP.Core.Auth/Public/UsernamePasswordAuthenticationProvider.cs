@@ -156,12 +156,10 @@ namespace PnP.Core.Auth
             try
             {
                 // Try to get the token from the tokens cache
-                tokenResult = publicClientApplication.AcquireTokenSilent(scopes, account.First())
+                tokenResult = publicClientApplication.AcquireTokenSilent(scopes, account.FirstOrDefault())
                     .ExecuteAsync().GetAwaiter().GetResult();
             }
-#pragma warning disable CA1031 // Do not catch general exception types
-            catch
-#pragma warning restore CA1031 // Do not catch general exception types
+            catch (MsalUiRequiredException)
             {
                 // Try to get the token directly through AAD if it is not available in the tokens cache
                 tokenResult = publicClientApplication.AcquireTokenByUsernamePassword(scopes, Username, Password)
