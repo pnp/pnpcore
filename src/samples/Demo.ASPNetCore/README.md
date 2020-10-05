@@ -21,8 +21,8 @@ In order for the user to authenticate on the App, A new app registration should 
 - Under __Implicit grant__ section, check __ID tokens__
 
 - Go to __API permissions__ section , click __Add a permission__
--- Select __Microsoft Graph__ > __Delegated permissions__ > select __Directory.Read.All__
--- Select __Microsoft Graph__ > __Delegated permissions__ > select __User.Read__
+  - Select __Microsoft Graph__ > __Delegated permissions__ > select __Directory.Read.All__
+  - Select __Microsoft Graph__ > __Delegated permissions__ > select __User.Read__
 
 - Click __Grant admin consent for {tenant}__
 
