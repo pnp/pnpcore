@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Implemented PnP.Core.Auth [PaoloPia - Paolo Pialorsi]
 - Issue templates (#34) [ypcode - Yannick Plennevaux] / [jansenbe - Bert Jansen]
 - Enable PnPContext creation from a Microsoft 365 Group id (#39) [jansenbe - Bert Jansen]
 - Added the Group model, represents a Microsoft 365 group (#48) [jansenbe - Bert Jansen]
