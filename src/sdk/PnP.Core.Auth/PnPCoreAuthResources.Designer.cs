@@ -124,6 +124,33 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid configuration for DeviceCodeAuthenticationProvider.
+        /// </summary>
+        internal static string DeviceCodeAuthenticationProvider_InvalidConfiguration {
+            get {
+                return ResourceManager.GetString("DeviceCodeAuthenticationProvider_InvalidConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid or missing value for RedirectUri in DeviceCodeAuthenticationProvider configuration.
+        /// </summary>
+        internal static string DeviceCodeAuthenticationProvider_InvalidRedirectUri {
+            get {
+                return ResourceManager.GetString("DeviceCodeAuthenticationProvider_InvalidRedirectUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initialized DeviceCodeAuthenticationProvider.
+        /// </summary>
+        internal static string DeviceCodeAuthenticationProvider_LogInit {
+            get {
+                return ResourceManager.GetString("DeviceCodeAuthenticationProvider_LogInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing default configuration for Authentication Provider Factory.
         /// </summary>
         internal static string Exception_MissingDefaultAuthenticationProvider {
