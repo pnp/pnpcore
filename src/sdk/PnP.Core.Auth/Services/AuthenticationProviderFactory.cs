@@ -108,10 +108,6 @@ namespace PnP.Core.Auth.Services
             {
                 providerType = typeof(X509CertificateAuthenticationProvider);
             }
-            else if (option.AspNetCore != null)
-            {
-                providerType = typeof(AspNetCoreAuthenticationProvider);
-            }
             else if (option.CredentialManager != null)
             {
                 providerType = typeof(CredentialManagerAuthenticationProvider);
@@ -131,6 +127,10 @@ namespace PnP.Core.Auth.Services
             else if (option.DeviceCode != null)
             {
                 providerType = typeof(DeviceCodeAuthenticationProvider);
+            }
+            else
+            {
+                providerType = typeof(ExternalAuthenticationProvider);
             }
 
             return providerType;
@@ -153,7 +153,7 @@ namespace PnP.Core.Auth.Services
                         option.X509Certificate.StoreLocation,
                         option.X509Certificate.Thumbprint);
                     break;
-                case AspNetCoreAuthenticationProvider aspNetCore:
+                case ExternalAuthenticationProvider aspNetCore:
                     aspNetCore.ClientId = option.ClientId;
                     aspNetCore.TenantId = option.TenantId;
                     break;

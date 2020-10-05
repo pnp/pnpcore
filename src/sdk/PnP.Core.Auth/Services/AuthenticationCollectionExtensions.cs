@@ -51,10 +51,6 @@ namespace Microsoft.Extensions.DependencyInjection
             collection.AddTransient<IAuthenticationProviderFactory, AuthenticationProviderFactory>();
             collection.AddTransient<AuthenticationProviderFactory, AuthenticationProviderFactory>();
 
-            // Add the service for AspNetCoreAuthenticationProvider
-            collection.AddTransient<IAuthenticationProvider, AspNetCoreAuthenticationProvider>();
-            collection.AddTransient<AspNetCoreAuthenticationProvider, AspNetCoreAuthenticationProvider>();
-
             // Add the service for CredentialManagerAuthenticationProvider
             collection.AddTransient<IAuthenticationProvider, CredentialManagerAuthenticationProvider>();
             collection.AddTransient<CredentialManagerAuthenticationProvider, CredentialManagerAuthenticationProvider>();
@@ -78,6 +74,10 @@ namespace Microsoft.Extensions.DependencyInjection
             // Add the service for DeviceCodeAuthenticationProvider
             collection.AddTransient<IAuthenticationProvider, DeviceCodeAuthenticationProvider>();
             collection.AddTransient<DeviceCodeAuthenticationProvider, DeviceCodeAuthenticationProvider>();
+
+            // Add the service for ExternalAuthenticationProvider
+            collection.AddTransient<IAuthenticationProvider, ExternalAuthenticationProvider>();
+            collection.AddTransient<ExternalAuthenticationProvider, ExternalAuthenticationProvider>();
         }
     }
 
