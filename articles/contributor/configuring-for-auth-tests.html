@@ -307,6 +307,20 @@ Open the <code>appsettings.yourname.json</code> file, it will look like the foll
           &quot;Interactive&quot;: {
             &quot;RedirectUri&quot;: &quot;http://localhost&quot;
           }
+        },
+        &quot;deviceCode&quot;: {
+          &quot;ClientId&quot;: &quot;{PnP.Core.Test-ClientId}&quot;,
+          &quot;TenantId&quot;: &quot;{TenantId}&quot;,
+          &quot;DeviceCode&quot;: {
+            &quot;RedirectUri&quot;: &quot;http://localhost&quot;
+          }
+        },
+        &quot;externalRealProvider&quot;: {
+          &quot;ClientId&quot;: &quot;{PnP.Core.Test-ClientId}&quot;,
+          &quot;TenantId&quot;: &quot;{TenantId}&quot;,
+          &quot;CredentialManager&quot;: {
+            &quot;CredentialManagerName&quot;: &quot;{Credential-Manager}&quot;
+          }
         }
       }
     },
@@ -330,6 +344,10 @@ Open the <code>appsettings.yourname.json</code> file, it will look like the foll
       &quot;TestSiteX509Certificate&quot;: {
         &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;,
         &quot;AuthenticationProviderName&quot;: &quot;x509Certificate&quot;
+      },
+      &quot;TestSiteDeviceCode&quot;: {
+        &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;,
+        &quot;AuthenticationProviderName&quot;: &quot;deviceCode&quot;
       }
     }
   },

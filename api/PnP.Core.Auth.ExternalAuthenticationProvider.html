@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class AspNetCoreAuthenticationProvider
+    <title>Class ExternalAuthenticationProvider
    | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class AspNetCoreAuthenticationProvider
+    <meta name="title" content="Class ExternalAuthenticationProvider
    | PnP Core SDK ">
     <meta name="generator" content="docfx 2.51.0.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
@@ -78,14 +78,14 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/AspNetCoreAuthenticationProvider.cs/#L13" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
-                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_AspNetCoreAuthenticationProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.AspNetCoreAuthenticationProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Others/ExternalAuthenticationProvider.cs/#L16" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_ExternalAuthenticationProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.ExternalAuthenticationProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                      <h1 id="PnP_Core_Auth_AspNetCoreAuthenticationProvider" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider">Class AspNetCoreAuthenticationProvider
+                      <h1 id="PnP_Core_Auth_ExternalAuthenticationProvider" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider">Class ExternalAuthenticationProvider
   </h1>
-  <div class="markdown level0 summary"><p>Authentication Provider that uses the context of an ASP.NET Core web application</p>
+  <div class="markdown level0 summary"><p>Authentication Provider that relies on an external token provider</p>
 </div>
   <div class="markdown level0 conceptual"></div>
 
@@ -93,7 +93,7 @@
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><a class="xref" href="PnP.Core.Auth.OAuthAuthenticationProvider.html">OAuthAuthenticationProvider</a></div>
-    <div class="level2"><span class="xref">AspNetCoreAuthenticationProvider</span></div>
+    <div class="level2"><span class="xref">ExternalAuthenticationProvider</span></div>
   </div>
   
   
@@ -116,9 +116,9 @@
   <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Auth.html">PnP.Core.Auth</a></h6>
   <h6><strong>Assembly</strong>: PnP.Core.Auth.dll</h6>
   
-  <h5 id="PnP_Core_Auth_AspNetCoreAuthenticationProvider_syntax">Syntax</h5>
+  <h5 id="PnP_Core_Auth_ExternalAuthenticationProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class AspNetCoreAuthenticationProvider : OAuthAuthenticationProvider, IAuthenticationProvider</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class ExternalAuthenticationProvider : OAuthAuthenticationProvider, IAuthenticationProvider</code></pre>
   </div>
 
   
@@ -130,24 +130,70 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.AspNetCoreAuthenticationProvider.%23ctor(ILogger%7BPnP.Core.Auth.OAuthAuthenticationProvider%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_ExternalAuthenticationProvider__ctor_Func_Uri_System_String___System_String__.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.ExternalAuthenticationProvider.%23ctor(Func%7BUri%2CSystem.String%5B%5D%2CSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/AspNetCoreAuthenticationProvider.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Others/ExternalAuthenticationProvider.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor*"></a>
+  <a id="PnP_Core_Auth_ExternalAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.#ctor*"></a>
   
-  <h4 id="PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})"><a href="#collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__" class="expander" data-toggle="collapse">AspNetCoreAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt;)</a></h4>
+  <h4 id="PnP_Core_Auth_ExternalAuthenticationProvider__ctor_Func_Uri_System_String___System_String__" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.#ctor(Func{Uri,System.String[],System.String})"><a href="#collapsible-PnP_Core_Auth_ExternalAuthenticationProvider__ctor_Func_Uri_System_String___System_String__" class="expander" data-toggle="collapse">ExternalAuthenticationProvider(Func&lt;Uri, String[], String&gt;)</a></h4>
   
-  <div id="collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__" class="collapse in">
+  <div id="collapsible-PnP_Core_Auth_ExternalAuthenticationProvider__ctor_Func_Uri_System_String___System_String__" class="collapse in">
+  <div class="markdown level1 summary"><p>Public constructor for external consumers of the library</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExternalAuthenticationProvider(Func&lt;Uri, string[], string&gt; accessTokenProvider)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><span class="xref">Func</span>&lt;<span class="xref">Uri</span>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>[], <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;</span>
+        <span class="parametername">accessTokenProvider</span>
+        <p><p>A function providing the access token to use</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_ExternalAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.ExternalAuthenticationProvider.%23ctor(ILogger%7BPnP.Core.Auth.OAuthAuthenticationProvider%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Others/ExternalAuthenticationProvider.cs/#L37" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Auth_ExternalAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.#ctor*"></a>
+  
+  <h4 id="PnP_Core_Auth_ExternalAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})"><a href="#collapsible-PnP_Core_Auth_ExternalAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__" class="expander" data-toggle="collapse">ExternalAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt;)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Auth_ExternalAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__" class="collapse in">
   <div class="markdown level1 summary"><p>Public constructor leveraging DI to initialize the ILogger interfafce</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public AspNetCoreAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt; logger)</code></pre>
+    <pre><code class="lang-csharp hljs">public ExternalAuthenticationProvider(ILogger&lt;OAuthAuthenticationProvider&gt; logger)</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -173,52 +219,44 @@
   
   
   </div>
+  <h3 id="properties">Properties
+  </h3>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_System_String_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.AspNetCoreAuthenticationProvider.%23ctor(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_ExternalAuthenticationProvider_AccessTokenProvider.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.ExternalAuthenticationProvider.AccessTokenProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/AspNetCoreAuthenticationProvider.cs/#L20" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Others/ExternalAuthenticationProvider.cs/#L21" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor*"></a>
+  <a id="PnP_Core_Auth_ExternalAuthenticationProvider_AccessTokenProvider_" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.AccessTokenProvider*"></a>
   
-  <h4 id="PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_System_String_System_String_" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor(System.String,System.String)"><a href="#collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_System_String_System_String_" class="expander" data-toggle="collapse">AspNetCoreAuthenticationProvider(String, String)</a></h4>
+  <h4 id="PnP_Core_Auth_ExternalAuthenticationProvider_AccessTokenProvider" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.AccessTokenProvider"><a href="#collapsible-PnP_Core_Auth_ExternalAuthenticationProvider_AccessTokenProvider" class="expander" data-toggle="collapse">AccessTokenProvider</a></h4>
   
-  <div id="collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_System_String_System_String_" class="collapse in">
-  <div class="markdown level1 summary"><p>Public constructor for external consumers of the library</p>
+  <div id="collapsible-PnP_Core_Auth_ExternalAuthenticationProvider_AccessTokenProvider" class="collapse in">
+  <div class="markdown level1 summary"><p>A function providing the access token to use</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public AspNetCoreAuthenticationProvider(string clientId, string tenantId)</code></pre>
+    <pre><code class="lang-csharp hljs">public Func&lt;Uri, string[], string&gt; AccessTokenProvider { get; set; }</code></pre>
   </div>
 
-  <h5 class="parameters">Parameters</h5>
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
   <table>
     <tr>
       <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">clientId</span>
-        <p><p>The Client ID for the Authentication Provider</p>
-</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
-        <span class="parametername">tenantId</span>
-        <p><p>The Tenand ID for the Authentication Provider</p>
-</p>
+        <span class="xref">Func</span>&lt;<span class="xref">Uri</span>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>[], <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>&gt;
+        <p>
       </td>
     </tr>
   </table>
-  
-  
-  
-  
   
   
   
@@ -232,17 +270,17 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_AspNetCoreAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.AspNetCoreAuthenticationProvider.AuthenticateRequestAsync(Uri%2CHttpRequestMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_ExternalAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.ExternalAuthenticationProvider.AuthenticateRequestAsync(Uri%2CHttpRequestMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/AspNetCoreAuthenticationProvider.cs/#L67" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Others/ExternalAuthenticationProvider.cs/#L58" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Auth_AspNetCoreAuthenticationProvider_AuthenticateRequestAsync_" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.AuthenticateRequestAsync*"></a>
+  <a id="PnP_Core_Auth_ExternalAuthenticationProvider_AuthenticateRequestAsync_" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.AuthenticateRequestAsync*"></a>
   
-  <h4 id="PnP_Core_Auth_AspNetCoreAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.AuthenticateRequestAsync(Uri,HttpRequestMessage)"><a href="#collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_" class="expander" data-toggle="collapse">AuthenticateRequestAsync(Uri, HttpRequestMessage)</a></h4>
+  <h4 id="PnP_Core_Auth_ExternalAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.AuthenticateRequestAsync(Uri,HttpRequestMessage)"><a href="#collapsible-PnP_Core_Auth_ExternalAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_" class="expander" data-toggle="collapse">AuthenticateRequestAsync(Uri, HttpRequestMessage)</a></h4>
   
-  <div id="collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_" class="collapse in">
+  <div id="collapsible-PnP_Core_Auth_ExternalAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_" class="collapse in">
   <div class="markdown level1 summary"><p>Authenticates the specified request message.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -298,17 +336,17 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/AspNetCoreAuthenticationProvider.cs/#L92" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Others/ExternalAuthenticationProvider.cs/#L113" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync*"></a>
+  <a id="PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync*"></a>
   
-  <h4 id="PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri)"><a href="#collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_" class="expander" data-toggle="collapse">GetAccessTokenAsync(Uri)</a></h4>
+  <h4 id="PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri)"><a href="#collapsible-PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_" class="expander" data-toggle="collapse">GetAccessTokenAsync(Uri)</a></h4>
   
-  <div id="collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_" class="collapse in">
+  <div id="collapsible-PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_" class="collapse in">
   <div class="markdown level1 summary"><p>Gets an access token for the requested resource</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -356,17 +394,17 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri%2CSystem.String%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___.md&amp;value=---%0Auid%3A%20PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri%2CSystem.String%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Public/AspNetCoreAuthenticationProvider.cs/#L78" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core.Auth/Others/ExternalAuthenticationProvider.cs/#L80" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync*"></a>
+  <a id="PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync*"></a>
   
-  <h4 id="PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___" data-uid="PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri,System.String[])"><a href="#collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___" class="expander" data-toggle="collapse">GetAccessTokenAsync(Uri, String[])</a></h4>
+  <h4 id="PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___" data-uid="PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri,System.String[])"><a href="#collapsible-PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___" class="expander" data-toggle="collapse">GetAccessTokenAsync(Uri, String[])</a></h4>
   
-  <div id="collapsible-PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___" class="collapse in">
+  <div id="collapsible-PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___" class="collapse in">
   <div class="markdown level1 summary"><p>Gets an access token for the requested resource and scope</p>
 </div>
   <div class="markdown level1 conceptual"></div>

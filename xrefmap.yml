@@ -75,69 +75,6 @@ references:
   commentId: N:PnP.Core.Auth
   fullName: PnP.Core.Auth
   nameWithType: PnP.Core.Auth
-- uid: PnP.Core.Auth.AspNetCoreAuthenticationProvider
-  name: AspNetCoreAuthenticationProvider
-  href: api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html
-  commentId: T:PnP.Core.Auth.AspNetCoreAuthenticationProvider
-  fullName: PnP.Core.Auth.AspNetCoreAuthenticationProvider
-  nameWithType: AspNetCoreAuthenticationProvider
-- uid: PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name: AspNetCoreAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  href: api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html#PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
-  commentId: M:PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
-  name.vb: AspNetCoreAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-  fullName: PnP.Core.Auth.AspNetCoreAuthenticationProvider.AspNetCoreAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>)
-  fullName.vb: PnP.Core.Auth.AspNetCoreAuthenticationProvider.AspNetCoreAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
-  nameWithType: AspNetCoreAuthenticationProvider.AspNetCoreAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
-  nameWithType.vb: AspNetCoreAuthenticationProvider.AspNetCoreAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
-- uid: PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor(System.String,System.String)
-  name: AspNetCoreAuthenticationProvider(String, String)
-  href: api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html#PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_System_String_System_String_
-  commentId: M:PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor(System.String,System.String)
-  fullName: PnP.Core.Auth.AspNetCoreAuthenticationProvider.AspNetCoreAuthenticationProvider(System.String, System.String)
-  nameWithType: AspNetCoreAuthenticationProvider.AspNetCoreAuthenticationProvider(String, String)
-- uid: PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor*
-  name: AspNetCoreAuthenticationProvider
-  href: api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html#PnP_Core_Auth_AspNetCoreAuthenticationProvider__ctor_
-  commentId: Overload:PnP.Core.Auth.AspNetCoreAuthenticationProvider.#ctor
-  isSpec: "True"
-  fullName: PnP.Core.Auth.AspNetCoreAuthenticationProvider.AspNetCoreAuthenticationProvider
-  nameWithType: AspNetCoreAuthenticationProvider.AspNetCoreAuthenticationProvider
-- uid: PnP.Core.Auth.AspNetCoreAuthenticationProvider.AuthenticateRequestAsync(Uri,HttpRequestMessage)
-  name: AuthenticateRequestAsync(Uri, HttpRequestMessage)
-  href: api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html#PnP_Core_Auth_AspNetCoreAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_
-  commentId: M:PnP.Core.Auth.AspNetCoreAuthenticationProvider.AuthenticateRequestAsync(Uri,HttpRequestMessage)
-  fullName: PnP.Core.Auth.AspNetCoreAuthenticationProvider.AuthenticateRequestAsync(Uri, HttpRequestMessage)
-  nameWithType: AspNetCoreAuthenticationProvider.AuthenticateRequestAsync(Uri, HttpRequestMessage)
-- uid: PnP.Core.Auth.AspNetCoreAuthenticationProvider.AuthenticateRequestAsync*
-  name: AuthenticateRequestAsync
-  href: api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html#PnP_Core_Auth_AspNetCoreAuthenticationProvider_AuthenticateRequestAsync_
-  commentId: Overload:PnP.Core.Auth.AspNetCoreAuthenticationProvider.AuthenticateRequestAsync
-  isSpec: "True"
-  fullName: PnP.Core.Auth.AspNetCoreAuthenticationProvider.AuthenticateRequestAsync
-  nameWithType: AspNetCoreAuthenticationProvider.AuthenticateRequestAsync
-- uid: PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri)
-  name: GetAccessTokenAsync(Uri)
-  href: api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html#PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_
-  commentId: M:PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri)
-  fullName: PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri)
-  nameWithType: AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri)
-- uid: PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri,System.String[])
-  name: GetAccessTokenAsync(Uri, String[])
-  href: api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html#PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___
-  commentId: M:PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri,System.String[])
-  name.vb: GetAccessTokenAsync(Uri, String())
-  fullName: PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri, System.String[])
-  fullName.vb: PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri, System.String())
-  nameWithType: AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri, String[])
-  nameWithType.vb: AspNetCoreAuthenticationProvider.GetAccessTokenAsync(Uri, String())
-- uid: PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync*
-  name: GetAccessTokenAsync
-  href: api/PnP.Core.Auth.AspNetCoreAuthenticationProvider.html#PnP_Core_Auth_AspNetCoreAuthenticationProvider_GetAccessTokenAsync_
-  commentId: Overload:PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync
-  isSpec: "True"
-  fullName: PnP.Core.Auth.AspNetCoreAuthenticationProvider.GetAccessTokenAsync
-  nameWithType: AspNetCoreAuthenticationProvider.GetAccessTokenAsync
 - uid: PnP.Core.Auth.CredentialManagerAuthenticationProvider
   name: CredentialManagerAuthenticationProvider
   href: api/PnP.Core.Auth.CredentialManagerAuthenticationProvider.html
@@ -351,6 +288,85 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.DeviceCodeNotification.VerificationUrl
   nameWithType: DeviceCodeNotification.VerificationUrl
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider
+  name: ExternalAuthenticationProvider
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html
+  commentId: T:PnP.Core.Auth.ExternalAuthenticationProvider
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider
+  nameWithType: ExternalAuthenticationProvider
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.#ctor(Func{Uri,System.String[],System.String})
+  name: ExternalAuthenticationProvider(Func<Uri, String[], String>)
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider__ctor_Func_Uri_System_String___System_String__
+  commentId: M:PnP.Core.Auth.ExternalAuthenticationProvider.#ctor(Func{Uri,System.String[],System.String})
+  name.vb: ExternalAuthenticationProvider(Func(Of Uri, String(), String))
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.ExternalAuthenticationProvider(Func<Uri, System.String[], System.String>)
+  fullName.vb: PnP.Core.Auth.ExternalAuthenticationProvider.ExternalAuthenticationProvider(Func(Of Uri, System.String(), System.String))
+  nameWithType: ExternalAuthenticationProvider.ExternalAuthenticationProvider(Func<Uri, String[], String>)
+  nameWithType.vb: ExternalAuthenticationProvider.ExternalAuthenticationProvider(Func(Of Uri, String(), String))
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
+  name: ExternalAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider__ctor_ILogger_PnP_Core_Auth_OAuthAuthenticationProvider__
+  commentId: M:PnP.Core.Auth.ExternalAuthenticationProvider.#ctor(ILogger{PnP.Core.Auth.OAuthAuthenticationProvider})
+  name.vb: ExternalAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.ExternalAuthenticationProvider(ILogger<PnP.Core.Auth.OAuthAuthenticationProvider>)
+  fullName.vb: PnP.Core.Auth.ExternalAuthenticationProvider.ExternalAuthenticationProvider(ILogger(Of PnP.Core.Auth.OAuthAuthenticationProvider))
+  nameWithType: ExternalAuthenticationProvider.ExternalAuthenticationProvider(ILogger<OAuthAuthenticationProvider>)
+  nameWithType.vb: ExternalAuthenticationProvider.ExternalAuthenticationProvider(ILogger(Of OAuthAuthenticationProvider))
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.#ctor*
+  name: ExternalAuthenticationProvider
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider__ctor_
+  commentId: Overload:PnP.Core.Auth.ExternalAuthenticationProvider.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.ExternalAuthenticationProvider
+  nameWithType: ExternalAuthenticationProvider.ExternalAuthenticationProvider
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.AccessTokenProvider
+  name: AccessTokenProvider
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider_AccessTokenProvider
+  commentId: P:PnP.Core.Auth.ExternalAuthenticationProvider.AccessTokenProvider
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.AccessTokenProvider
+  nameWithType: ExternalAuthenticationProvider.AccessTokenProvider
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.AccessTokenProvider*
+  name: AccessTokenProvider
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider_AccessTokenProvider_
+  commentId: Overload:PnP.Core.Auth.ExternalAuthenticationProvider.AccessTokenProvider
+  isSpec: "True"
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.AccessTokenProvider
+  nameWithType: ExternalAuthenticationProvider.AccessTokenProvider
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.AuthenticateRequestAsync(Uri,HttpRequestMessage)
+  name: AuthenticateRequestAsync(Uri, HttpRequestMessage)
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider_AuthenticateRequestAsync_Uri_HttpRequestMessage_
+  commentId: M:PnP.Core.Auth.ExternalAuthenticationProvider.AuthenticateRequestAsync(Uri,HttpRequestMessage)
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.AuthenticateRequestAsync(Uri, HttpRequestMessage)
+  nameWithType: ExternalAuthenticationProvider.AuthenticateRequestAsync(Uri, HttpRequestMessage)
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.AuthenticateRequestAsync*
+  name: AuthenticateRequestAsync
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider_AuthenticateRequestAsync_
+  commentId: Overload:PnP.Core.Auth.ExternalAuthenticationProvider.AuthenticateRequestAsync
+  isSpec: "True"
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.AuthenticateRequestAsync
+  nameWithType: ExternalAuthenticationProvider.AuthenticateRequestAsync
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri)
+  name: GetAccessTokenAsync(Uri)
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_
+  commentId: M:PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri)
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri)
+  nameWithType: ExternalAuthenticationProvider.GetAccessTokenAsync(Uri)
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri,System.String[])
+  name: GetAccessTokenAsync(Uri, String[])
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_Uri_System_String___
+  commentId: M:PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri,System.String[])
+  name.vb: GetAccessTokenAsync(Uri, String())
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri, System.String[])
+  fullName.vb: PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync(Uri, System.String())
+  nameWithType: ExternalAuthenticationProvider.GetAccessTokenAsync(Uri, String[])
+  nameWithType.vb: ExternalAuthenticationProvider.GetAccessTokenAsync(Uri, String())
+- uid: PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync*
+  name: GetAccessTokenAsync
+  href: api/PnP.Core.Auth.ExternalAuthenticationProvider.html#PnP_Core_Auth_ExternalAuthenticationProvider_GetAccessTokenAsync_
+  commentId: Overload:PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync
+  isSpec: "True"
+  fullName: PnP.Core.Auth.ExternalAuthenticationProvider.GetAccessTokenAsync
+  nameWithType: ExternalAuthenticationProvider.GetAccessTokenAsync
 - uid: PnP.Core.Auth.InteractiveAuthenticationProvider
   name: InteractiveAuthenticationProvider
   href: api/PnP.Core.Auth.InteractiveAuthenticationProvider.html
@@ -738,31 +754,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Auth.Services.Builder.Configuration.AuthenticationProvidersOptionsConfigurator.Configure
   nameWithType: AuthenticationProvidersOptionsConfigurator.Configure
-- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationAspNetCoreOptions
-  name: PnPCoreAuthenticationAspNetCoreOptions
-  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationAspNetCoreOptions.html
-  commentId: T:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationAspNetCoreOptions
-  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationAspNetCoreOptions
-  nameWithType: PnPCoreAuthenticationAspNetCoreOptions
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions
   name: PnPCoreAuthenticationCredentialConfigurationOptions
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html
   commentId: T:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions
   fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions
   nameWithType: PnPCoreAuthenticationCredentialConfigurationOptions
-- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.AspNetCore
-  name: AspNetCore
-  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialConfigurationOptions_AspNetCore
-  commentId: P:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.AspNetCore
-  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.AspNetCore
-  nameWithType: PnPCoreAuthenticationCredentialConfigurationOptions.AspNetCore
-- uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.AspNetCore*
-  name: AspNetCore
-  href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialConfigurationOptions_AspNetCore_
-  commentId: Overload:PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.AspNetCore
-  isSpec: "True"
-  fullName: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.AspNetCore
-  nameWithType: PnPCoreAuthenticationCredentialConfigurationOptions.AspNetCore
 - uid: PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.ClientId
   name: ClientId
   href: api/PnP.Core.Auth.Services.Builder.Configuration.PnPCoreAuthenticationCredentialConfigurationOptions.html#PnP_Core_Auth_Services_Builder_Configuration_PnPCoreAuthenticationCredentialConfigurationOptions_ClientId
