@@ -140,8 +140,8 @@ namespace PnP.Core.Auth.Test.Providers
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var username = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Username");
-            var password = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Password");
+            var username = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Username");
+            var password = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Password");
 
             var provider = new UsernamePasswordAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -201,8 +201,8 @@ namespace PnP.Core.Auth.Test.Providers
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var username = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Username");
-            var password = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Password");
+            var username = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Username");
+            var password = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{usernamePasswordConfigurationPath}:UsernamePassword:Password");
 
             var provider = new UsernamePasswordAuthenticationProvider(
                 AuthGlobals.DefaultClientId,

@@ -160,6 +160,24 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initialized ExternalAuthenticationProvider.
+        /// </summary>
+        internal static string ExternalAuthenticationProvider_LogInit {
+            get {
+                return ResourceManager.GetString("ExternalAuthenticationProvider_LogInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing value for function AccessTokenProvider in ExternalAuthenticationProvider.
+        /// </summary>
+        internal static string ExternalAuthenticationProvider_MissingAccessTokenProvider {
+            get {
+                return ResourceManager.GetString("ExternalAuthenticationProvider_MissingAccessTokenProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid configuration for InteractiveAuthenticationProvider.
         /// </summary>
         internal static string InteractiveAuthenticationProvider_InvalidConfiguration {

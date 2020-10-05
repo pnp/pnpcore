@@ -65,9 +65,9 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:TenantId");
-            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:Interactive:RedirectUri");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{interactiveConfigurationPath}:TenantId");
+            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.CredentialsConfigurationBasePath}:{interactiveConfigurationPath}:Interactive:RedirectUri");
 
             var provider = new InteractiveAuthenticationProvider(
                 clientId,
@@ -87,8 +87,8 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:TenantId");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{interactiveConfigurationPath}:TenantId");
 
             var provider = new InteractiveAuthenticationProvider(
                 clientId,
@@ -171,9 +171,9 @@ namespace PnP.Core.Auth.Test.Providers
         private static InteractiveAuthenticationProvider PrepareInteractiveAuthenticationProvider()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:TenantId");
-            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{interactiveConfigurationPath}:Interactive:RedirectUri");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{interactiveConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{interactiveConfigurationPath}:TenantId");
+            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.CredentialsConfigurationBasePath}:{interactiveConfigurationPath}:Interactive:RedirectUri");
 
             var provider = new InteractiveAuthenticationProvider(
                 clientId,

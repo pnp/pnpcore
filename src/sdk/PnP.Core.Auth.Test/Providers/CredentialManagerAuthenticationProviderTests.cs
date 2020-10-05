@@ -67,7 +67,7 @@ namespace PnP.Core.Auth.Test.Providers
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var credentialManagerName = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:CredentialManager:CredentialManagerName");
+            var credentialManagerName = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:CredentialManager:CredentialManagerName");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 null,
@@ -87,8 +87,8 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:TenantId");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:TenantId");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,
@@ -103,8 +103,8 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:TenantId");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:TenantId");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,
@@ -199,9 +199,9 @@ namespace PnP.Core.Auth.Test.Providers
         private static CredentialManagerAuthenticationProvider PrepareCredentialManagerAuthenticationProvider()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:TenantId");
-            var credentialManagerName = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{credentialManagerConfigurationPath}:CredentialManager:CredentialManagerName");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:TenantId");
+            var credentialManagerName = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{credentialManagerConfigurationPath}:CredentialManager:CredentialManagerName");
 
             var provider = new CredentialManagerAuthenticationProvider(
                 clientId,

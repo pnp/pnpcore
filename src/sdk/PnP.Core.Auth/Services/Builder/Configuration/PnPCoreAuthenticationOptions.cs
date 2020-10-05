@@ -82,11 +82,6 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         public PnPCoreAuthenticationX509CertificateOptions X509Certificate { get; set; }
 
         /// <summary>
-        /// The options for the AspNetCore Authentication Provider
-        /// </summary>
-        public PnPCoreAuthenticationAspNetCoreOptions AspNetCore { get; set; }
-
-        /// <summary>
         /// The options for the Credential Manager Authentication Provider
         /// </summary>
         public PnPCoreAuthenticationCredentialManagerOptions CredentialManager { get; set; }
@@ -131,14 +126,6 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
         /// The thumbprint of the certificate
         /// </summary>
         public string Thumbprint { get; set; }
-    }
-
-    /// <summary>
-    /// Options for the AspNetCoreAuthenticationProvider
-    /// </summary>
-    public class PnPCoreAuthenticationAspNetCoreOptions
-    {
-
     }
 
     /// <summary>

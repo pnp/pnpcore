@@ -50,7 +50,7 @@ namespace PnP.Core.Auth.Test.Utilities
         /// <summary>
         /// Name of the default test site configuration with AspNetCore delegated authentication
         /// </summary>
-        internal static string TestSiteAspNetCore { get { return "TestSiteAspNetCore"; } }
+        internal static string TestSiteExternal { get { return "TestSiteExternal"; } }
 
         /// <summary>
         /// Name of the default test site configuration with X.509 Certificate app-only authentication
@@ -96,6 +96,22 @@ namespace PnP.Core.Auth.Test.Utilities
             }
 
             return await factory.CreateAsync(configurationName).ConfigureAwait(false);
+        }
+
+        public async Task<PnPContext> GetContextAsync(Uri url, IAuthenticationProvider authenticationProvider,
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+        {
+            // Obtain factory (cached)
+            var factory = BuildContextFactory();
+
+            // Remove Async suffix
+            if (testName.EndsWith(AsyncSuffix))
+            {
+                testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
+            }
+
+            return await factory.CreateAsync(url, authenticationProvider).ConfigureAwait(false);
         }
 
         public PnPContext GetContext(Guid groupId, int id = 0,
@@ -203,7 +219,7 @@ namespace PnP.Core.Auth.Test.Utilities
         internal static string GetX509CertificateThumbprint()
         {
             var configuration = GetConfigurationSettings();
-            return configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:x509Certificate:X509Certificate:Thumbprint");
+            return configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:x509Certificate:X509Certificate:Thumbprint");
         }
 
         private static string LoadTestEnvironment()

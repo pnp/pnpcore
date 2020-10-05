@@ -21,9 +21,9 @@ namespace PnP.Core.Auth.Test.Providers
         private static Lazy<InteractiveAuthenticationProvider> frontendProvider =
             new Lazy<InteractiveAuthenticationProvider>(() => {
                 var configuration = TestCommon.GetConfigurationSettings();
-                var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:ClientId");
-                var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:TenantId");
-                var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:Interactive:RedirectUri");
+                var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:ClientId");
+                var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:TenantId");
+                var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:Interactive:RedirectUri");
 
                 var provider = new InteractiveAuthenticationProvider(
                     clientId,
@@ -146,9 +146,9 @@ namespace PnP.Core.Auth.Test.Providers
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
-            var thumbprint = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:Thumbprint");
+            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
+            var thumbprint = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:Thumbprint");
 
             var provider = new OnBehalfOfAuthenticationProvider(
                 null,
@@ -173,7 +173,7 @@ namespace PnP.Core.Auth.Test.Providers
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientSecret = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:ClientSecret");
+            var clientSecret = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:ClientSecret");
 
             var provider = new OnBehalfOfAuthenticationProvider(
                 null,
@@ -195,8 +195,8 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
+            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
 
             var provider = new OnBehalfOfAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -215,8 +215,8 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
+            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
 
             var provider = new OnBehalfOfAuthenticationProvider(
                 AuthGlobals.DefaultClientId,
@@ -367,11 +367,11 @@ namespace PnP.Core.Auth.Test.Providers
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:TenantId");
-            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
-            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
-            var thumbprint = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:Thumbprint");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:TenantId");
+            var storeName = configuration.GetValue<StoreName>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreName");
+            var storeLocation = configuration.GetValue<StoreLocation>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:StoreLocation");
+            var thumbprint = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:Thumbprint");
 
             var provider = new OnBehalfOfAuthenticationProvider(
                 clientId,
@@ -390,9 +390,9 @@ namespace PnP.Core.Auth.Test.Providers
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping test because we're running inside a GitHub action and we don't have access to the certificate store");
 
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:TenantId");
-            var clientSecret = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:ClientSecret");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:TenantId");
+            var clientSecret = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfConfigurationPath}:OnBehalfOf:ClientSecret");
 
             var provider = new OnBehalfOfAuthenticationProvider(
                 clientId,

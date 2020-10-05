@@ -69,9 +69,9 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:TenantId");
-            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:DeviceCode:RedirectUri");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:TenantId");
+            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:DeviceCode:RedirectUri");
 
             var provider = new DeviceCodeAuthenticationProvider(
                 clientId,
@@ -93,8 +93,8 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:TenantId");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:TenantId");
 
             var provider = new DeviceCodeAuthenticationProvider(
                 clientId,
@@ -110,9 +110,9 @@ namespace PnP.Core.Auth.Test.Providers
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:TenantId");
-            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:Interactive:RedirectUri");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:TenantId");
+            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:Interactive:RedirectUri");
 
             var provider = new DeviceCodeAuthenticationProvider(
                 clientId,
@@ -196,9 +196,9 @@ namespace PnP.Core.Auth.Test.Providers
         private static DeviceCodeAuthenticationProvider PrepareDeviceCodeAuthenticationProvider()
         {
             var configuration = TestCommon.GetConfigurationSettings();
-            var clientId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:ClientId");
-            var tenantId = configuration.GetValue<string>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:TenantId");
-            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.ConfigurationBasePath}:{deviceCodeConfigurationPath}:DeviceCode:RedirectUri");
+            var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:ClientId");
+            var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:TenantId");
+            var redirectUri = configuration.GetValue<Uri>($"{TestGlobals.CredentialsConfigurationBasePath}:{deviceCodeConfigurationPath}:DeviceCode:RedirectUri");
 
             var provider = new DeviceCodeAuthenticationProvider(
                 clientId,
