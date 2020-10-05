@@ -628,6 +628,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The unary operator &apos;{0}&apos; is not supported.
+        /// </summary>
+        internal static string Exception_Unsupported_UnaryOperator {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_UnaryOperator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot do a batch add of a model to a modelcollection that was not yet requested. Common reasons are adding an item and using that same item in a single batch.
         /// </summary>
         internal static string Exception_Unsupported_ViaBatch {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
@@ -1178,7 +1177,7 @@ namespace PnP.Core.Services
             {
                 if (restRequest.Model is TransientObject)
                 {
-                    (restRequest.Model as TransientObject).Commit();
+                    restRequest.Model.Commit();
                 }
             }
 

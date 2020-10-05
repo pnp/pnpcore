@@ -5,13 +5,12 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace PnP.Core.QueryModel
 {
     internal class DataModelQueryTranslator<TModel> : ExpressionVisitor
     {
-        private ODataQuery<TModel> query = new ODataQuery<TModel>();
+        private readonly ODataQuery<TModel> query = new ODataQuery<TModel>();
         private readonly List<List<ODataFilter>> filtersStack = new List<List<ODataFilter>>();
 
         internal DataModelQueryTranslator()
@@ -459,8 +458,7 @@ namespace PnP.Core.QueryModel
         protected override Expression VisitUnary(UnaryExpression u)
         {
             throw new NotSupportedException(
-                string.Format(
-                    "The unary operator '{0}' is not supported",
+                string.Format(PnPCoreResources.Exception_Unsupported_UnaryOperator,
                     u.NodeType));
         }
 

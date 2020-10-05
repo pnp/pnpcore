@@ -306,6 +306,9 @@
   <data name="Exception_Unsupported_SharePointUserOnGraph" xml:space="preserve">
     <value>You can't call AsSharePointUserAsync on a Graph user without the UserPrincipalProperty requested and populated</value>
   </data>
+  <data name="Exception_Unsupported_UnaryOperator" xml:space="preserve">
+    <value>The unary operator '{0}' is not supported</value>
+  </data>
   <data name="Exception_Unsupported_ViaBatch" xml:space="preserve">
     <value>You cannot do a batch add of a model to a modelcollection that was not yet requested. Common reasons are adding an item and using that same item in a single batch</value>
   </data>
