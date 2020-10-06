@@ -2,6 +2,7 @@
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
+using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
@@ -675,11 +676,11 @@ namespace PnP.Core.Test.Base
             var entityInfo = EntityManager.GetClassInfo(instance.GetType(), instance, testExpression);
             var expandProperty = entityInfo.Fields.FirstOrDefault(p => p.ExpandFieldInfo != null);
             StringBuilder sb = new StringBuilder();
-            instance.AddExpandableSelectGraph(true, sb, expandProperty, null, "");
+            QueryClient.AddExpandableSelectGraph(true, sb, expandProperty, null, "");
             var newQuery = sb.ToString();
 
             sb = new StringBuilder();
-            instance.AddExpandableSelectGraph(false, sb, expandProperty, null, "");
+            QueryClient.AddExpandableSelectGraph(false, sb, expandProperty, null, "");
             var query = sb.ToString();
 
             return new Tuple<string, string>(newQuery, query);

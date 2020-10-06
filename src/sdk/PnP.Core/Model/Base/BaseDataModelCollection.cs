@@ -18,6 +18,23 @@ namespace PnP.Core.Model
     {
         private const string GraphNextLink = "@odata.nextLink";
         private const string SharePointRestListItemNextLink = "__next";
+        private QueryClient query;
+
+        /// <summary>
+        /// Connected query client
+        /// </summary>
+        internal QueryClient Query
+        {
+            get
+            {
+                if (query == null)
+                {
+                    query = new QueryClient();
+                }
+
+                return query;
+            }
+        }
 
         #region Core properties
 
@@ -295,7 +312,7 @@ namespace PnP.Core.Model
             }
 
             // Build the API Get request, we'll require the LinqGet decoration to be set
-            var apiCallRequest = await (concreteEntity as BaseDataModel<TModel>).BuildGetAPICallAsync(concreteEntityClassInfo, default, useLinqGet: true).ConfigureAwait(false);
+            var apiCallRequest = await Query.BuildGetAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo, default, useLinqGet: true).ConfigureAwait(false);
 
             string nextLink = apiCallRequest.ApiCall.Request;
             ApiType nextLinkApiType = apiCallRequest.ApiCall.Type;

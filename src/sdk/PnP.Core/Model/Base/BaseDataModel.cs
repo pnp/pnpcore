@@ -3,15 +3,11 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -51,6 +47,8 @@ namespace PnP.Core.Model
     /// <typeparam name="TModel">Model class</typeparam>
     internal class BaseDataModel<TModel> : TransientObject, IDataModel<TModel>, IRequestable, IMetadataExtensible, IDataModelWithKey, IDataModelMappingHandler
     {
+        private QueryClient query;
+
         #region Core properties
 
         /// <summary>
@@ -80,6 +78,23 @@ namespace PnP.Core.Model
             get
             {
                 return PnPContext.Logger;
+            }
+        }
+
+        /// <summary>
+        /// Connected query client
+        /// </summary>
+        [SystemProperty]
+        internal QueryClient Query
+        {
+            get
+            {
+                if (query == null)
+                {
+                    query = new QueryClient();
+                }
+
+                return query;
             }
         }
 
@@ -483,7 +498,7 @@ namespace PnP.Core.Model
             else
             {
                 // Construct the API call to make
-                var api = await BuildGetAPICallAsync(entityInfo, apiOverride).ConfigureAwait(false);
+                var api = await Query.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
 
                 if (api.Cancelled)
                 {
@@ -498,7 +513,7 @@ namespace PnP.Core.Model
                 // Let's ensure these additional API calls's are included in a single batch
                 if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
                 {
-                    await AddGraphBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+                    await Query.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
                 }
 
                 await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
@@ -518,7 +533,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to load
             var entityInfo = GetClassInfo(expressions);
             // Construct the API call to make
-            var api = await BuildGetAPICallAsync(entityInfo, apiOverride).ConfigureAwait(false);
+            var api = await Query.BuildGetAPICallAsync(this, entityInfo, apiOverride).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -532,7 +547,7 @@ namespace PnP.Core.Model
             if ((api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta) && !string.IsNullOrEmpty(entityInfo.SharePointType))
             {
                 // Try to get the API call, but this time using rest
-                apiRestBackup = await BuildGetAPICallAsync(entityInfo, apiOverride, true).ConfigureAwait(false);
+                apiRestBackup = await Query.BuildGetAPICallAsync(this, entityInfo, apiOverride, true).ConfigureAwait(false);
             }
 
             batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson);
@@ -541,595 +556,13 @@ namespace PnP.Core.Model
             // Let's ensure these additional API calls's are included in a single batch
             if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
-                await AddGraphBatchRequestsForNonExpandableCollectionsAsync(batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
-            }
-        }
-
-        internal async Task<ApiCallRequest> BuildGetAPICallAsync(EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false)
-        {
-            // Usefull links:
-            // - https://www.odata.org/documentation/odata-version-3-0/
-            // - https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.Web
-            // - https://github.com/koltyakov/sp-metadata
-            // - http://anomepani.github.io
-            // - https://platinumdogs.me/2013/03/14/sharepoint-adventures-with-the-rest-api-part-1/#columns
-            // - https://platinumdogs.me/2013/05/14/client-and-server-driven-paging-with-the-sharepoint-rest-api/
-
-            // Can we use Microsoft Graph for this GET request?
-
-            bool useGraph = PnPContext.GraphFirst &&    // See if Graph First is enabled/configured
-                !forceSPORest &&                        // and if we are not forced to use SPO REST
-                entity.CanUseGraphGet;                  // and if the entity supports GET via Graph 
-
-            // If entity cannot be surfaced with SharePoint Rest then force graph
-            if (string.IsNullOrEmpty(entity.SharePointType))
-            {
-                useGraph = true;
-            }
-            // Else if we've overriden the query then simply take what was set in the query override
-            else if (!apiOverride.Equals(default(ApiCall)))
-            {
-                useGraph = apiOverride.Type == ApiType.Graph;
-            }
-
-            if (useGraph)
-            {
-                return await BuildGetAPICallGraphAsync(entity, apiOverride, useLinqGet).ConfigureAwait(false);
-            }
-            else
-            {
-                return await BuildGetAPICallRestAsync(entity, apiOverride, useLinqGet).ConfigureAwait(false);
+                await Query.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);                
             }
         }
 
         private void ApiCancellationMessage(ApiCallRequest api)
         {
             Log.LogInformation(PnPCoreResources.Log_Information_ApiCallCancelled, api.ApiCall.Request, api.CancellationReason);
-        }
-
-        private async Task<ApiCallRequest> BuildGetAPICallRestAsync(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
-        {
-            string getApi = useLinqGet ? entity.SharePointLinqGet : entity.SharePointGet;
-
-            IEnumerable<EntityFieldInfo> fields = entity.Fields.Where(p => p.Load);
-
-            Dictionary<string, string> urlParameters = new Dictionary<string, string>(2);
-
-            StringBuilder sb = new StringBuilder();
-
-            // Only add select statement whenever there was a filter specified
-            if (entity.SharePointFieldsLoadedViaExpression)
-            {
-                // $select
-                foreach (var field in fields)
-                {
-                    // If there was a selection on which fields to include in an expand (via the LoadProperties() option) then add those fields
-                    if (field.SharePointExpandable && field.ExpandFieldInfo != null)
-                    {
-                        AddExpandableSelectRest(sb, field, null, "");
-                    }
-                    else
-                    {
-                        sb.Append($"{JsonMappingHelper.GetRestField(field)},");
-                    }
-                }
-
-                urlParameters.Add("$select", sb.ToString().TrimEnd(new char[] { ',' }));
-                sb.Clear();
-            }
-
-            // $expand
-            foreach (var field in fields.Where(p => p.SharePointExpandable))
-            {
-                if (entity.SharePointFieldsLoadedViaExpression)
-                {
-                    sb.Append($"{JsonMappingHelper.GetRestField(field)},");
-
-                    // If there was a selection on which fields to include in an expand (via the Include() option) and the included field was expandable itself then add it 
-                    if (field.ExpandFieldInfo != null)
-                    {
-                        string path = "";
-                        AddExpandableExpandRest(sb, field, null, path);
-                    }
-                }
-                else
-                {
-                    if (field.ExpandableByDefault)
-                    {
-                        sb.Append($"{JsonMappingHelper.GetRestField(field)},");
-                    }
-                }
-            }
-            urlParameters.Add("$expand", sb.ToString().TrimEnd(new char[] { ',' }));
-            sb.Clear();
-
-            // Build the API call
-            string baseApiCall = "";
-            if (apiOverride.Equals(default(ApiCall)))
-            {
-                baseApiCall = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{getApi}";
-            }
-            else
-            {
-                baseApiCall = $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{apiOverride.Request}";
-            }
-
-            // Parse tokens in the base api call
-            baseApiCall = await ApiHelper.ParseApiCallAsync(this, baseApiCall).ConfigureAwait(false);
-
-            sb.Append(baseApiCall);
-
-            // Build the querystring parameters
-            NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
-            foreach (var urlParameter in urlParameters.Where(i => !string.IsNullOrEmpty(i.Value)))
-            {
-                // Add key and value, which will be automatically URL-encoded, if needed
-                queryString.Add(urlParameter.Key, urlParameter.Value);
-            }
-
-            // Build the whole URL
-            if (queryString.AllKeys.Length > 0)
-            {
-                sb.Append($"?{queryString}");
-            }
-
-            // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(sb.ToString(), ApiType.SPORest));
-            if (GetApiCallOverrideHandler != null)
-            {
-                call = await GetApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
-            }
-
-            return call;
-        }
-
-        private static void AddExpandableExpandRest(StringBuilder sb, EntityFieldInfo field, EntityFieldExpandInfo expandFields, string path)
-        {
-            EntityInfo collectionEntityInfo = null;
-            if (expandFields == null)
-            {
-                collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(field.ExpandFieldInfo.Type);
-                expandFields = field.ExpandFieldInfo;
-            }
-            else
-            {
-                collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(expandFields.Type);
-            }
-
-            foreach (var expandableField in expandFields.Fields.OrderBy(p => p.Expandable))
-            {
-                var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == expandableField.Name);
-
-                if (expandableFieldInfo.SharePointExpandable)
-                {
-                    path = path + "/" + JsonMappingHelper.GetRestField(expandableFieldInfo);
-                    sb.Append($"{JsonMappingHelper.GetRestField(field)}{path},");
-                    if (expandableField.Fields.Any())
-                    {
-                        AddExpandableExpandRest(sb, field, expandableField, path);
-                    }
-                }
-            }
-        }
-
-        private static void AddExpandableSelectRest(StringBuilder sb, EntityFieldInfo field, EntityFieldExpandInfo expandFields, string path)
-        {
-            EntityInfo collectionEntityInfo = null;
-
-            if (expandFields == null)
-            {
-                collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(field.ExpandFieldInfo.Type);
-                expandFields = field.ExpandFieldInfo;
-            }
-            else
-            {
-                if (expandFields.Type != null)
-                {
-                    collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(expandFields.Type);
-                }
-            }
-
-            if (collectionEntityInfo != null)
-            {
-                foreach (var expandableField in expandFields.Fields.OrderBy(p => p.Expandable))
-                {
-                    var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == expandableField.Name);
-                    if (!expandableFieldInfo.SharePointExpandable)
-                    {
-                        sb.Append($"{JsonMappingHelper.GetRestField(field)}{path}/{JsonMappingHelper.GetRestField(expandableFieldInfo)},");
-                    }
-                    else
-                    {
-                        path = path + "/" + JsonMappingHelper.GetRestField(expandableFieldInfo);
-                        AddExpandableSelectRest(sb, field, expandableField, path);
-                    }
-                }
-            }
-        }
-
-        private async Task<ApiCallRequest> BuildGetAPICallGraphAsync(EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
-        {
-            string getApi = useLinqGet ? entity.GraphLinqGet : entity.GraphGet;
-
-            ApiType apiType = ApiType.Graph;
-
-            if (entity.GraphBeta)
-            {
-                if (CanUseGraphBeta(entity))
-                {
-                    apiType = ApiType.GraphBeta;
-                }
-                else
-                {
-                    // we can't make this request
-                    var cancelledApiCallRequest = new ApiCallRequest(default);
-                    cancelledApiCallRequest.CancelRequest($"Getting {getApi} requires the Graph Beta endpoint which was not configured to be allowed");
-                    return cancelledApiCallRequest;
-                }
-            }
-
-            IEnumerable<EntityFieldInfo> fields = entity.Fields.Where(p => p.Load);
-
-            Dictionary<string, string> urlParameters = new Dictionary<string, string>(2);
-
-            StringBuilder sb = new StringBuilder();
-
-            // Only add select statement whenever there was a filter specified
-            if (entity.GraphFieldsLoadedViaExpression)
-            {
-                // $select
-                bool graphIdFieldAdded = false;
-                foreach (var field in fields.Where(p => p.ExpandFieldInfo == null))
-                {
-                    // Don't add the field in the select if it will be added as expandable field
-                    if (!string.IsNullOrEmpty(field.GraphName))
-                    {
-                        bool addExpand = true;
-                        if (field.GraphBeta)
-                        {
-                            if (CanUseGraphBeta(field))
-                            {
-                                apiType = ApiType.GraphBeta;
-                            }
-                            else
-                            {
-                                // Field will be skipped as we're forced to use v1
-                                addExpand = false;
-                            }
-                        }
-                        else
-                        {
-                            // What if the complex type we're loading contains a beta property
-                            apiType = VerifyIfUsedComplexTypeRequiresBeta(apiType, field);
-                        }
-
-                        if (addExpand)
-                        {
-                            sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
-                        }
-                    }
-
-                    if (!graphIdFieldAdded && !string.IsNullOrEmpty(entity.GraphId))
-                    {
-                        if (JsonMappingHelper.GetGraphField(field) == entity.GraphId)
-                        {
-                            graphIdFieldAdded = true;
-                        }
-                    }
-                }
-
-                if (!graphIdFieldAdded && !string.IsNullOrEmpty(entity.GraphId))
-                {
-                    sb.Append($"{entity.GraphId},");
-                }
-
-                urlParameters.Add("$select", sb.ToString().TrimEnd(new char[] { ',' }));
-                sb.Clear();
-            }
-
-            // $expand
-            foreach (var field in fields.Where(p => p.GraphExpandable && string.IsNullOrEmpty(p.GraphGet)))
-            {
-                if (!string.IsNullOrEmpty(field.GraphName))
-                {
-                    if (entity.GraphFieldsLoadedViaExpression)
-                    {
-                        bool addExpand = true;
-
-                        if (field.GraphBeta)
-                        {
-                            if (CanUseGraphBeta(field))
-                            {
-                                apiType = ApiType.GraphBeta;
-                            }
-                            else
-                            {
-                                // Expand will be skipped since we're bound to v1 graph
-                                addExpand = false;
-                            }
-                        }
-
-                        if (addExpand)
-                        {
-                            if (field.ExpandFieldInfo != null)
-                            {
-                                StringBuilder sbExpand = new StringBuilder();
-                                AddExpandableSelectGraph(false, sbExpand, field, null, "");
-                                sb.Append($"{JsonMappingHelper.GetGraphField(field)}{sbExpand}");
-                            }
-                            else
-                            {
-                                sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (field.ExpandableByDefault)
-                        {
-                            bool addExpand = true;
-
-                            if (field.GraphBeta)
-                            {
-                                if (CanUseGraphBeta(field))
-                                {
-                                    apiType = ApiType.GraphBeta;
-                                }
-                                else
-                                {
-                                    // Expand will be skipped since we're bound to v1 graph
-                                    addExpand = false;
-                                }
-                            }
-
-                            if (addExpand)
-                            {
-                                sb.Append($"{JsonMappingHelper.GetGraphField(field)},");
-                            }
-                        }
-                    }
-                }
-            }
-            urlParameters.Add("$expand", sb.ToString().TrimEnd(new char[] { ',' }));
-            sb.Clear();
-
-            // Build the API call
-            string baseApiCall = "";
-            if (apiOverride.Equals(default(ApiCall)))
-            {
-                if (string.IsNullOrEmpty(getApi))
-                {
-                    throw new ClientException(ErrorType.ModelMetadataIncorrect,
-                        PnPCoreResources.Exception_ModelMetadataIncorrect_MissingGetMapping);
-                }
-
-                // Ensure tokens in the base url are replaced
-                baseApiCall = await TokenHandler.ResolveTokensAsync(this, getApi, PnPContext).ConfigureAwait(false);
-            }
-            else
-            {
-                // Ensure tokens in the base url are replaced
-                baseApiCall = await TokenHandler.ResolveTokensAsync(this, apiOverride.Request, PnPContext).ConfigureAwait(false);
-            }
-
-            // Parse tokens in the base api call
-            baseApiCall = await ApiHelper.ParseApiCallAsync(this, baseApiCall).ConfigureAwait(false);
-
-            sb.Append(baseApiCall);
-
-            // Build the querystring parameters
-            NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
-            foreach (var urlParameter in urlParameters.Where(i => !string.IsNullOrEmpty(i.Value)))
-            {
-                // Add key and value, which will be automatically URL-encoded, if needed
-                queryString.Add(urlParameter.Key, urlParameter.Value);
-            }
-
-            // Build the whole URL
-            if (queryString.AllKeys.Length > 0)
-            {
-                sb.Append($"?{queryString}");
-            }
-
-            // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(sb.ToString(), apiType));
-            if (GetApiCallOverrideHandler != null)
-            {
-                call = await GetApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
-            }
-
-            return call;
-        }
-
-        internal void AddExpandableSelectGraph(bool newQuery, StringBuilder sb, EntityFieldInfo field, EntityFieldExpandInfo expandFields, string path)
-        {
-            if (path == null)
-            {
-                path = "";
-            }
-
-            EntityInfo collectionEntityInfo = null;
-
-            if (expandFields == null)
-            {
-                collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(field.ExpandFieldInfo.Type);
-                expandFields = field.ExpandFieldInfo;
-            }
-            else
-            {
-                if (expandFields.Type != null)
-                {
-                    collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(expandFields.Type);
-                }
-            }
-
-            if (collectionEntityInfo != null)
-            {
-                bool first = true;
-                foreach (var expandableField in expandFields.Fields.OrderBy(p => p.Expandable))
-                {
-                    var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == expandableField.Name);
-                    if (!expandableFieldInfo.GraphExpandable)
-                    {
-                        if (first)
-                        {
-                            sb.Append($"{path}{(newQuery ? "" : "(")}$select{(newQuery ? "=" : "%3D")}");
-                        }
-
-                        sb.Append($"{(first ? "" : ",")}{(!string.IsNullOrEmpty(expandableFieldInfo.GraphJsonPath) ? expandableFieldInfo.GraphJsonPath : JsonMappingHelper.GetGraphField(expandableFieldInfo))}");
-                        first = false;
-                        path = "";
-                    }
-                    else
-                    {
-                        path = $";$expand%3D{JsonMappingHelper.GetGraphField(expandableFieldInfo)}";
-                        AddExpandableSelectGraph(false, sb, field, expandableField, path);
-                    }
-                }
-
-                if (!newQuery)
-                {
-                    sb.Append(')');
-                }
-            }
-        }
-
-        private async Task AddGraphBatchRequestsForNonExpandableCollectionsAsync(Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
-        {
-            ApiType apiType = ApiType.Graph;
-
-            var nonExpandableFields = entityInfo.GraphNonExpandableCollections;
-            if (nonExpandableFields.Any())
-            {
-                foreach (var nonExpandableField in nonExpandableFields)
-                {
-                    // Was this non expandable field requested?
-                    bool needed = nonExpandableField.ExpandableByDefault;
-
-                    if (!needed)
-                    {
-                        // Check passed in expressions
-                        needed = IsDefinedInExpression(expressions, nonExpandableField.Name) || nonExpandableField.ExpandFieldInfo != null;
-                    }
-
-                    if (needed)
-                    {
-                        bool addExpandableCollection = true;
-                        if (nonExpandableField.GraphBeta)
-                        {
-                            if (CanUseGraphBeta(nonExpandableField))
-                            {
-                                apiType = ApiType.GraphBeta;
-                            }
-                            else
-                            {
-                                // Can't add this non expanable collection request since we're bound to Graph v1
-                                addExpandableCollection = false;
-                            }
-                        }
-
-                        if (addExpandableCollection)
-                        {
-                            string graphGet = nonExpandableField.GraphGet;
-                            if (nonExpandableField.ExpandFieldInfo != null)
-                            {
-                                bool graphGetHasExpand = false;
-                                var uriBuilder = new UriBuilder(graphGet);
-
-                                // Check if the model we're expanding uses JsonPath
-                                bool usesJsonPath = false;
-                                var collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(nonExpandableField.ExpandFieldInfo.Type);
-                                foreach (var fieldToExpand in nonExpandableField.ExpandFieldInfo.Fields)
-                                {
-                                    var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == fieldToExpand.Name);
-
-                                    if (!string.IsNullOrEmpty(expandableFieldInfo.GraphGet))
-                                    {
-                                        throw new ClientException(ErrorType.Unsupported,
-                                            string.Format(PnPCoreResources.Exception_Unsupported_ExtraGet,
-                                            expandableFieldInfo.Name,
-                                            expandableFieldInfo.GraphGet));
-                                    }
-
-                                    if (!string.IsNullOrEmpty(expandableFieldInfo.GraphJsonPath))
-                                    {
-                                        usesJsonPath = true;
-                                    }
-                                }
-
-                                NameValueCollection queryParameters = HttpUtility.ParseQueryString(uriBuilder.Query.ToLowerInvariant());
-                                string value = queryParameters["$expand"];
-                                if (!string.IsNullOrWhiteSpace(value))
-                                {
-                                    // we've an $expand url parameter in the GET query
-                                    var currentExpandValues = value.Split(new char[] { ',' });
-
-                                    if (usesJsonPath)
-                                    {
-                                        // JsonPath usage will be handled as an existing expand, so we append the extra $select via ($select%3D...)
-                                        graphGetHasExpand = true;
-                                    }
-                                    else
-                                    {
-                                        // do we have an $expand for our property we're applying the expandable select on?
-                                        foreach (var expandValue in currentExpandValues)
-                                        {
-                                            if (expandValue.Equals(nonExpandableField.GraphName, StringComparison.InvariantCultureIgnoreCase))
-                                            {
-                                                graphGetHasExpand = true;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-
-                                StringBuilder sb = new StringBuilder();
-
-                                AddExpandableSelectGraph(!graphGetHasExpand, sb, nonExpandableField, null, "");
-
-                                // Since the URL listed for a graph get can already have url parameters we need to "merge" them together
-                                var urlComplement = sb.ToString();
-                                if (graphGetHasExpand)
-                                {
-                                    // We append the extra $select via ($select%3D...)
-                                    graphGet += urlComplement;
-                                }
-                                else
-                                {
-                                    // We combine an $select=id,field,... with the existing url
-                                    graphGet = UrlUtility.CombineRelativeUrlWithUrlParameters(graphGet, urlComplement);
-                                }
-                            }
-
-                            var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(this, graphGet).ConfigureAwait(false);
-
-                            ApiCall extraApiCall = new ApiCall(parsedApiRequest, apiType, receivingProperty: nonExpandableField.GraphName);
-                            batch.Add(this, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson);
-                        }
-                    }
-                }
-            }
-        }
-
-        private static bool IsDefinedInExpression(Expression<Func<TModel, object>>[] expressions, string field)
-        {
-            foreach (var expression in expressions)
-            {
-                if (expression.Body.NodeType == ExpressionType.Call && expression.Body is MethodCallExpression)
-                {
-                    // Future use? (includes)                    
-                }
-                else
-                {
-                    var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
-                    if (body != null && body.Member.Name.Equals(field, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
 
         async Task IMetadataExtensible.SetGraphToRestMetadataAsync()
@@ -1298,7 +731,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await BuildUpdateAPICallAsync(entityInfo).ConfigureAwait(false);
+            var api = await Query.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -1319,7 +752,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await BuildUpdateAPICallAsync(entityInfo).ConfigureAwait(false);
+            var api = await Query.BuildUpdateAPICallAsync(this, entityInfo).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -1331,246 +764,6 @@ namespace PnP.Core.Model
             var batch = PnPContext.BatchClient.EnsureBatch();
             batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson);
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
-        }
-
-        internal async Task<ApiCallRequest> BuildUpdateAPICallAsync(EntityInfo entity)
-        {
-            bool useGraph = false;
-
-            // If entity cannot be surfaced with SharePoint Rest then force graph
-            if (string.IsNullOrEmpty(entity.SharePointType))
-            {
-                useGraph = true;
-            }
-
-            if (useGraph)
-            {
-                return await BuildUpdateAPICallGraphAsync(entity).ConfigureAwait(false);
-            }
-            else
-            {
-                return await BuildUpdateAPICallRestAsync(entity).ConfigureAwait(false);
-            }
-        }
-
-        internal async Task<ApiCallRequest> BuildUpdateAPICallGraphAsync(EntityInfo entity)
-        {
-            ApiType apiType = ApiType.Graph;
-
-            if (entity.GraphBeta)
-            {
-                if (CanUseGraphBeta(entity))
-                {
-                    apiType = ApiType.GraphBeta;
-                }
-                else
-                {
-                    // we can't make this request
-                    var cancelledApiCallRequest = new ApiCallRequest(default);
-                    cancelledApiCallRequest.CancelRequest($"Updating {entity.GraphUpdate} requires the Graph Beta endpoint which was not configured to be allowed");
-                    return cancelledApiCallRequest;
-                }
-            }
-
-            IEnumerable<EntityFieldInfo> fields = entity.Fields;
-
-            // Define the JSON body of the update request based on the actual changes
-            dynamic updateMessage = new ExpandoObject();
-
-            var changedProperties = this.GetChangedProperties();
-            foreach (PropertyDescriptor cp in changedProperties)
-            {
-                // Look for the corresponding property in the type
-                var changedField = fields.FirstOrDefault(f => f.Name == cp.Name);
-
-                // If we found a field 
-                if (changedField != null)
-                {
-                    bool addField = true;
-                    if (changedField.GraphBeta)
-                    {
-                        if (CanUseGraphBeta(changedField))
-                        {
-                            apiType = ApiType.GraphBeta;
-                        }
-                        else
-                        {
-                            addField = false;
-                        }
-                    }
-                    else
-                    {
-                        // What if the complex type we're updating contains a beta property
-                        if (ComplexTypeHasBetaProperty(changedField) && !PnPContext.GraphCanUseBeta)
-                        {
-                            addField = false;
-                        }
-                    }
-
-                    if (addField)
-                    {
-                        if (changedField.DataType.FullName == typeof(TransientDictionary).FullName)
-                        {
-                            // Get the changed properties in the dictionary
-                            var dictionaryObject = (TransientDictionary)cp.GetValue(this);
-                            foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
-                            {
-                                // Let's set its value into the update message
-                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
-                            }
-                        }
-                        else if (JsonMappingHelper.IsComplexType(changedField.PropertyInfo.PropertyType))
-                        {
-                            // Build a new dynamic object that will hold the changed properties of the complex type
-                            dynamic updateMessageComplexType = new ExpandoObject();
-                            var complexObject = this.GetValue(changedField.Name) as TransientObject;
-
-                            // Get the properties that have changed in the complex type
-                            foreach (string changedProp in complexObject.ChangedProperties)
-                            {
-                                ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp, complexObject.GetValue(changedProp));
-                            }
-                            // Add this as value to the original changed property
-                            ((ExpandoObject)updateMessage).SetProperty(changedField.GraphName, updateMessageComplexType as object);
-                        }
-                        else
-                        {
-                            // Let's set its value into the update message
-                            ((ExpandoObject)updateMessage).SetProperty(changedField.GraphName, this.GetValue(changedField.Name));
-                        }
-                    }
-                }
-            }
-
-            // Get the corresponding JSON text content
-            var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
-                typeof(ExpandoObject),
-                new JsonSerializerOptions
-                {
-                    Converters = { new JsonStringEnumConverter() },
-                    WriteIndented = false,
-                    // For some reason the naming policy is not applied on ExpandoObjects
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                });
-
-            // Prepare the variable to contain the target URL for the update operation
-            var updateUrl = await ApiHelper.ParseApiCallAsync(this, entity.GraphUpdate).ConfigureAwait(false);
-
-            // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(updateUrl, apiType, jsonUpdateMessage)
-            {
-                Commit = true
-            });
-            if (UpdateApiCallOverrideHandler != null)
-            {
-                call = await UpdateApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
-            }
-            // If the call was cancelled by the override then bail out
-            if (call.Cancelled)
-            {
-                return call;
-            }
-
-            // If a field validation prevented updating a field it might mean there's nothing to update, if so then don't do a server request
-            if (string.IsNullOrEmpty(call.ApiCall.JsonBody) || call.ApiCall.JsonBody == "{}")
-            {
-                call.CancelRequest("No changes (empty body), so nothing to update");
-            }
-
-            return call;
-        }
-
-
-        internal async Task<ApiCallRequest> BuildUpdateAPICallRestAsync(EntityInfo entity)
-        {
-            IEnumerable<EntityFieldInfo> fields = entity.Fields;
-
-            // Define the JSON body of the update request based on the actual changes
-            dynamic updateMessage = new ExpandoObject();
-
-            // Configure the metadata section of the update request
-            if (Metadata.ContainsKey(PnPConstants.MetaDataType))
-            {
-                updateMessage.__metadata = new
-                {
-                    type = Metadata[PnPConstants.MetaDataType]
-                };
-            }
-
-            var changedProperties = this.GetChangedProperties();
-            foreach (PropertyDescriptor cp in changedProperties)
-            {
-                // Look for the corresponding property in the type
-                var changedField = fields.FirstOrDefault(f => f.Name == cp.Name);
-
-                // If we found a field 
-                if (changedField != null)
-                {
-                    if (changedField.DataType.FullName == typeof(TransientDictionary).FullName)
-                    {
-                        // Get the changed properties in the dictionary
-                        var dictionaryObject = (TransientDictionary)cp.GetValue(this);
-                        foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
-                        {
-                            // Let's set its value into the update message
-                            ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
-                        }
-                    }
-                    else if (JsonMappingHelper.IsComplexType(changedField.PropertyInfo.PropertyType))
-                    {
-                        // Build a new dynamic object that will hold the changed properties of the complex type
-                        dynamic updateMessageComplexType = new ExpandoObject();
-                        var complexObject = this.GetValue(changedField.Name) as TransientObject;
-
-                        // Get the properties that have changed in the complex type
-                        foreach (string changedProp in complexObject.ChangedProperties)
-                        {
-                            ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp, complexObject.GetValue(changedProp));
-                        }
-
-                        // Add this as value to the original changed property
-                        ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, updateMessageComplexType as object);
-                    }
-                    else
-                    {
-                        // Let's set its value into the update message
-                        ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, this.GetValue(changedField.Name));
-                    }
-                }
-            }
-
-            // Get the corresponding JSON text content
-            var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
-                typeof(ExpandoObject),
-                new JsonSerializerOptions { WriteIndented = true });
-
-            // Prepare the variable to contain the target URL for the update operation
-            var updateUrl = await ApiHelper.ParseApiCallAsync(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointUpdate}").ConfigureAwait(false);
-
-            // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage)
-            {
-                Commit = true
-            });
-
-            if (UpdateApiCallOverrideHandler != null)
-            {
-                call = await UpdateApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
-            }
-
-            // If the call was cancelled by the override then bail out
-            if (call.Cancelled)
-            {
-                return call;
-            }
-
-            // If a field validation prevented updating a field it might mean there's nothing to update, if so then don't do a server request
-            if (string.IsNullOrEmpty(call.ApiCall.JsonBody) || call.ApiCall.JsonBody == "{}")
-            {
-                call.CancelRequest("No changes (empty body), so nothing to update");
-            }
-
-            return call;
         }
         #endregion
 
@@ -1603,7 +796,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await BuildDeleteAPICallAsync(entityInfo).ConfigureAwait(false);
+            var api = await Query.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
 
             if (api.Cancelled)
             {
@@ -1625,7 +818,7 @@ namespace PnP.Core.Model
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
             // Construct the API call to make
-            var api = await BuildDeleteAPICallAsync(entityInfo).ConfigureAwait(false);
+            var api = await Query.BuildDeleteAPICallAsync(this, entityInfo).ConfigureAwait(false);
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
@@ -1638,73 +831,6 @@ namespace PnP.Core.Model
 
             batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson);
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
-        }
-
-        internal async Task<ApiCallRequest> BuildDeleteAPICallAsync(EntityInfo entity)
-        {
-            bool useGraph = false;
-
-            // If entity cannot be surfaced with SharePoint Rest then force graph
-            if (string.IsNullOrEmpty(entity.SharePointType))
-            {
-                useGraph = true;
-            }
-
-            if (useGraph)
-            {
-                return await BuildDeleteAPICallGraphAsync(entity).ConfigureAwait(false);
-            }
-            else
-            {
-                return await BuildDeleteAPICallRestAsync(entity).ConfigureAwait(false);
-            }
-        }
-
-        internal async Task<ApiCallRequest> BuildDeleteAPICallGraphAsync(EntityInfo entity)
-        {
-            ApiType apiType = ApiType.Graph;
-
-            if (entity.GraphBeta)
-            {
-                if (CanUseGraphBeta(entity))
-                {
-                    apiType = ApiType.GraphBeta;
-                }
-                else
-                {
-                    // we can't make this request
-                    var cancelledApiCallRequest = new ApiCallRequest(default);
-                    cancelledApiCallRequest.CancelRequest($"Deleting {entity.GraphDelete} requires the Graph Beta endpoint which was not configured to be allowed");
-                    return cancelledApiCallRequest;
-                }
-            }
-
-            // Prepare the variable to contain the target URL for the delete operation
-            var deleteUrl = await ApiHelper.ParseApiCallAsync(this, entity.GraphDelete).ConfigureAwait(false);
-
-            // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(deleteUrl, apiType));
-            if (DeleteApiCallOverrideHandler != null)
-            {
-                call = await DeleteApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
-            }
-
-            return call;
-        }
-
-        internal async Task<ApiCallRequest> BuildDeleteAPICallRestAsync(EntityInfo entity)
-        {
-            // Prepare the variable to contain the target URL for the delete operation
-            var deleteUrl = await ApiHelper.ParseApiCallAsync(this, $"{PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{entity.SharePointDelete}").ConfigureAwait(false);
-
-            // Create ApiCall instance and call the override option if needed
-            var call = new ApiCallRequest(new ApiCall(deleteUrl, ApiType.SPORest));
-            if (DeleteApiCallOverrideHandler != null)
-            {
-                call = await DeleteApiCallOverrideHandler.Invoke(call).ConfigureAwait(false);
-            }
-
-            return call;
         }
         #endregion
 
