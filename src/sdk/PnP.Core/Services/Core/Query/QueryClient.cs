@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
@@ -598,6 +599,92 @@ namespace PnP.Core.Services
         }
 
         #endregion
+
+        #region Paging 
+
+        internal static string AddTopUrlParameter(string url, ApiType nextLinkApiType, int pageSize)
+        {
+            // prefix the relative url with a host so it can be properly processed
+            if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)
+            {
+                url = $"https://removeme.com/{url}";
+            }
+
+            if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
+            {
+                NameValueCollection queryString = HttpUtility.ParseQueryString(uri.Query);
+                if (queryString["$top"] != null)
+                {
+                    queryString["$top"] = pageSize.ToString(CultureInfo.CurrentCulture);
+                }
+                else
+                {
+                    queryString.Add("$top", pageSize.ToString(CultureInfo.CurrentCulture));
+                }
+
+                var updatedUrl = $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
+
+                if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)
+                {
+                    updatedUrl = updatedUrl.Replace("https://removeme.com/", "");
+                }
+
+                return updatedUrl;
+            }
+
+            return null;
+        }
+
+#pragma warning disable CA1822 // Mark members as static
+        internal Tuple<string, ApiType> BuildNextPageLink<TModel>(BaseDataModelCollection<TModel> collection)
+#pragma warning restore CA1822 // Mark members as static
+        {
+            string nextLink;
+            ApiType nextLinkApiType;
+
+            // important: the skiptoken is case sensitive, so ensure to keep it the way is was provided to you by Graph/SharePoint (for listitem paging)
+            if (collection.Metadata.ContainsKey(PnPConstants.GraphNextLink) && collection.Metadata[PnPConstants.GraphNextLink].Contains($"/{PnPConstants.GraphBetaEndpoint}/", StringComparison.InvariantCultureIgnoreCase))
+            {
+                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphBetaEndpoint}/", "");
+                nextLinkApiType = ApiType.GraphBeta;
+            }
+            else if (collection.Metadata.ContainsKey(PnPConstants.GraphNextLink) && collection.Metadata[PnPConstants.GraphNextLink].Contains($"/{PnPConstants.GraphV1Endpoint}/", StringComparison.InvariantCultureIgnoreCase))
+            {
+                nextLink = collection.Metadata[PnPConstants.GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphV1Endpoint}/", "");
+                nextLinkApiType = ApiType.Graph;
+            }
+            else if (!string.IsNullOrEmpty(collection.Metadata[PnPConstants.SharePointRestListItemNextLink]))
+            {
+                nextLink = CleanUpUrlParameters(collection.Metadata[PnPConstants.SharePointRestListItemNextLink]);
+                nextLinkApiType = ApiType.SPORest;
+            }
+            else
+            {
+                throw new ClientException(ErrorType.Unsupported,
+                    PnPCoreResources.Exception_InvalidNextPage);
+            }
+
+            return new Tuple<string, ApiType>(nextLink, nextLinkApiType);
+        }
+
+        private static string CleanUpUrlParameters(string url)
+        {
+            if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri))
+            {
+                NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(uri.Query);
+                if (queryString["$skiptoken"] != null && queryString["$skip"] != null)
+                {
+                    // $skiptoken and $skip cannot be combined, removing $skip in this case
+                    queryString.Remove("$skip");
+                    return $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
+                }
+            }
+
+            return url;
+        }
+
+        #endregion
+
 
         #endregion
 

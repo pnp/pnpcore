@@ -66,5 +66,15 @@ namespace PnP.Core
         /// The name of the Entity Type Name metadata attribute
         /// </summary>
         public const string MetaDataRestEntityTypeName = "EntityTypeName";
+
+        /// <summary>
+        /// Next link in Microsoft Graph
+        /// </summary>
+        public const string GraphNextLink = "@odata.nextLink";
+
+        /// <summary>
+        /// Next link in SharePoint REST
+        /// </summary>
+        public const string SharePointRestListItemNextLink = "__next";
     }
 }
