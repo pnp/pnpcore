@@ -23,8 +23,21 @@ types of devices, just a description of the hard used for the project.
 The operating system installed on the Raspberry Pi device is: "Raspbian GNU/Linux 10 (buster)"
 
 Before, ASP.NET core application can execute, you must install the ASP.NET Core 3.1 Runtime and SDK.
-[https://dotnet.microsoft.com/download/dotnet-core/3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
-specifically the ARM-32 bit edition.
+
+```bash
+# Download the script from Microsoft
+wget https://dotnet.microsoft.com/download/dotnet-core/scripts/v1/dotnet-install.sh
+chmod +x dotnet-install.sh
+
+# Ignore warnings
+./dotnet-install.sh --channel LTS --architecture arm --install-dir ~/cli
+
+# Allows running dotnet anywhere - thanks to 
+# this article https://edi.wang/post/2019/9/29/setup-net-core-30-runtime-and-sdk-on-raspberry-pi-4
+sudo nano .profile
+export DOTNET_ROOT=$HOME/cli
+export PATH=$PATH:$HOME/cli
+```
 
 ## Running the app
 
@@ -56,8 +69,6 @@ In order for the user to authenticate on the App, A new app registration should 
 
 Update **appsettings.json** with the connection details to a demo SharePoint site:
 
-- Configure the Tenant ID of your app as the value of `CustomSettings:TenantId` in appsettings.json setting
-- Configure the Client ID of your app as the value of `CustomSettings:ClientId` in appsettings.json setting
 - Configure the user name to use as the value of `CustomSettings:UserPrincipalName` in appsettings.json setting
 - Configure the password to use as the value of `CustomSettings:Password` in appsettings.json setting
 - Configure the URL of a target Microsoft SharePoint Online modern team site collection as the value of `CustomSettings:DemoSiteUrl` in appsettings.json setting
