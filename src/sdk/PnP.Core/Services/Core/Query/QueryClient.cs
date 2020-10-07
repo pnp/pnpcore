@@ -579,6 +579,11 @@ namespace PnP.Core.Services
 
         private static bool IsDefinedInExpression<TModel>(Expression<Func<TModel, object>>[] expressions, string field)
         {
+            if (expressions == null)
+            {
+                return false;
+            }
+
             foreach (var expression in expressions)
             {
                 if (expression.Body.NodeType == ExpressionType.Call && expression.Body is MethodCallExpression)
