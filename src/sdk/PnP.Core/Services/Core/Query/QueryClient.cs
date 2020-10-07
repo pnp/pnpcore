@@ -123,7 +123,7 @@ namespace PnP.Core.Services
             sb.Append(baseApiCall);
 
             // Build the querystring parameters
-            NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
+            NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
             foreach (var urlParameter in urlParameters.Where(i => !string.IsNullOrEmpty(i.Value)))
             {
                 // Add key and value, which will be automatically URL-encoded, if needed
@@ -602,7 +602,7 @@ namespace PnP.Core.Services
 
         #region Paging 
 
-        internal static string AddTopUrlParameter(string url, ApiType nextLinkApiType, int pageSize)
+        internal static string EnsureTopUrlParameter(string url, ApiType nextLinkApiType, int pageSize)
         {
             // prefix the relative url with a host so it can be properly processed
             if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)

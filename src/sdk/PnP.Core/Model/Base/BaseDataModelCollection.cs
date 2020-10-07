@@ -320,7 +320,7 @@ namespace PnP.Core.Model
             }
 
             // Ensure $top is added/updated to reflect the page size
-            nextLink = QueryClient.AddTopUrlParameter(nextLink, nextLinkApiType, pageSize);
+            nextLink = QueryClient.EnsureTopUrlParameter(nextLink, nextLinkApiType, pageSize);
 
             // Make the server request
             PnPContext.CurrentBatch.Add(
@@ -360,10 +360,7 @@ namespace PnP.Core.Model
                 }
 
                 // Prepare api call
-                string nextLink;
-                ApiType nextLinkApiType;
-
-                (nextLink, nextLinkApiType) = Query.BuildNextPageLink(this);
+                (var nextLink, var nextLinkApiType) = Query.BuildNextPageLink(this);
 
                 PnPContext.CurrentBatch.Add(
                     this.Parent as TransientObject,
