@@ -2,8 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
@@ -16,8 +14,23 @@ namespace PnP.Core.Model
     /// </summary>
     internal abstract class BaseDataModelCollection<TModel> : IDataModelCollection<TModel>, IManageableCollection<TModel>, ISupportPaging<TModel>, IMetadataExtensible
     {
-        private const string GraphNextLink = "@odata.nextLink";
-        private const string SharePointRestListItemNextLink = "__next";
+        private QueryClient query;
+
+        /// <summary>
+        /// Connected query client
+        /// </summary>
+        internal QueryClient Query
+        {
+            get
+            {
+                if (query == null)
+                {
+                    query = new QueryClient();
+                }
+
+                return query;
+            }
+        }
 
         #region Core properties
 
@@ -262,7 +275,7 @@ namespace PnP.Core.Model
         {
             get
             {
-                return Metadata.ContainsKey(GraphNextLink) || Metadata.ContainsKey(SharePointRestListItemNextLink);
+                return Metadata.ContainsKey(PnPConstants.GraphNextLink) || Metadata.ContainsKey(PnPConstants.SharePointRestListItemNextLink);
             }
         }
 
@@ -295,7 +308,7 @@ namespace PnP.Core.Model
             }
 
             // Build the API Get request, we'll require the LinqGet decoration to be set
-            var apiCallRequest = await (concreteEntity as BaseDataModel<TModel>).BuildGetAPICallAsync(concreteEntityClassInfo, default, useLinqGet: true).ConfigureAwait(false);
+            var apiCallRequest = await Query.BuildGetAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo, default, useLinqGet: true).ConfigureAwait(false);
 
             string nextLink = apiCallRequest.ApiCall.Request;
             ApiType nextLinkApiType = apiCallRequest.ApiCall.Type;
@@ -307,7 +320,7 @@ namespace PnP.Core.Model
             }
 
             // Ensure $top is added/updated to reflect the page size
-            nextLink = AddTopUrlParameter(nextLink, nextLinkApiType, pageSize);
+            nextLink = QueryClient.EnsureTopUrlParameter(nextLink, nextLinkApiType, pageSize);
 
             // Make the server request
             PnPContext.CurrentBatch.Add(
@@ -342,40 +355,18 @@ namespace PnP.Core.Model
                 var receivingProperty = GetReceivingProperty(parentEntityInfo);
                 if (string.IsNullOrEmpty(receivingProperty))
                 {
-                    throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect,
                         PnPCoreResources.Exception_ModelMetadataIncorrect_ModelOutOfSync);
                 }
 
                 // Prepare api call
-                string nextLink;
-                ApiType nextLinkApiType;
-                // important: the skiptoken is case sensitive, so ensure to keep it the way is was provided to you by Graph/SharePoint (for listitem paging)
-                if (Metadata.ContainsKey(GraphNextLink) && Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphBetaEndpoint}/", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphBetaEndpoint}/", "");
-                    nextLinkApiType = ApiType.GraphBeta;
-                }
-                else if (Metadata.ContainsKey(GraphNextLink) && Metadata[GraphNextLink].Contains($"/{PnPConstants.GraphV1Endpoint}/", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    nextLink = Metadata[GraphNextLink].Replace($"{PnPConstants.MicrosoftGraphBaseUrl}{PnPConstants.GraphV1Endpoint}/", "");
-                    nextLinkApiType = ApiType.Graph;
-                }
-                else if (!string.IsNullOrEmpty(Metadata[SharePointRestListItemNextLink]))
-                {
-                    nextLink = CleanUpUrlParameters(Metadata[SharePointRestListItemNextLink]);
-                    nextLinkApiType = ApiType.SPORest;
-                }
-                else
-                {
-                    throw new ClientException(ErrorType.Unsupported, 
-                        PnPCoreResources.Exception_InvalidNextPage);
-                }
+                (var nextLink, var nextLinkApiType) = Query.BuildNextPageLink(this);
 
                 PnPContext.CurrentBatch.Add(
                     this.Parent as TransientObject,
                     parentEntityInfo,
                     HttpMethod.Get,
-                    new ApiCall 
+                    new ApiCall
                     {
                         Type = nextLinkApiType,
                         ReceivingProperty = receivingProperty,
@@ -410,13 +401,13 @@ namespace PnP.Core.Model
                     loadNextPage = false;
 
                     // Clear the MetaData paging links to avoid loading the collection again via paging
-                    if (Metadata.ContainsKey(GraphNextLink))
+                    if (Metadata.ContainsKey(PnPConstants.GraphNextLink))
                     {
-                        Metadata.Remove(GraphNextLink);
+                        Metadata.Remove(PnPConstants.GraphNextLink);
                     }
-                    else if (Metadata.ContainsKey(SharePointRestListItemNextLink))
+                    else if (Metadata.ContainsKey(PnPConstants.SharePointRestListItemNextLink))
                     {
-                        Metadata.Remove(SharePointRestListItemNextLink);
+                        Metadata.Remove(PnPConstants.SharePointRestListItemNextLink);
                     }
                 }
                 else
@@ -434,55 +425,6 @@ namespace PnP.Core.Model
             var propertyInParent = parentEntityInfo.Fields.FirstOrDefault(p => p.DataType == publicCollectionType);
 
             return propertyInParent?.Name;
-        }
-
-        private static string CleanUpUrlParameters(string url)
-        {
-            if (Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri))
-            {
-                NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(uri.Query);
-                if (queryString["$skiptoken"] != null && queryString["$skip"] != null)
-                {
-                    // $skiptoken and $skip cannot be combined, removing $skip in this case
-                    queryString.Remove("$skip");
-                    return $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
-                }
-            }
-
-            return url;
-        }
-
-        private static string AddTopUrlParameter(string url, ApiType nextLinkApiType, int pageSize)
-        {
-            // prefix the relative url with a host so it can be properly processed
-            if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)
-            {
-                url = $"https://removeme.com/{url}";
-            }
-
-            if (Uri.TryCreate(url, UriKind.Absolute, out Uri uri))
-            {
-                NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(uri.Query);
-                if (queryString["$top"] != null)
-                {
-                    queryString["$top"] = pageSize.ToString(CultureInfo.CurrentCulture);
-                }
-                else
-                {
-                    queryString.Add("$top", pageSize.ToString(CultureInfo.CurrentCulture));
-                }
-
-                var updatedUrl = $"{uri.Scheme}://{uri.DnsSafeHost}{uri.AbsolutePath}?{queryString}";
-
-                if (nextLinkApiType == ApiType.Graph || nextLinkApiType == ApiType.GraphBeta)
-                {
-                    updatedUrl = updatedUrl.Replace("https://removeme.com/", "");
-                }
-
-                return updatedUrl;
-            }
-
-            return null;
         }
         #endregion
 
