@@ -18699,6 +18699,12 @@ references:
   commentId: F:PnP.Core.PnPConstants.GraphBetaEndpoint
   fullName: PnP.Core.PnPConstants.GraphBetaEndpoint
   nameWithType: PnPConstants.GraphBetaEndpoint
+- uid: PnP.Core.PnPConstants.GraphNextLink
+  name: GraphNextLink
+  href: api/PnP.Core.PnPConstants.html#PnP_Core_PnPConstants_GraphNextLink
+  commentId: F:PnP.Core.PnPConstants.GraphNextLink
+  fullName: PnP.Core.PnPConstants.GraphNextLink
+  nameWithType: PnPConstants.GraphNextLink
 - uid: PnP.Core.PnPConstants.GraphV1Endpoint
   name: GraphV1Endpoint
   href: api/PnP.Core.PnPConstants.html#PnP_Core_PnPConstants_GraphV1Endpoint
@@ -18765,6 +18771,12 @@ references:
   commentId: F:PnP.Core.PnPConstants.MicrosoftGraphBaseUrl
   fullName: PnP.Core.PnPConstants.MicrosoftGraphBaseUrl
   nameWithType: PnPConstants.MicrosoftGraphBaseUrl
+- uid: PnP.Core.PnPConstants.SharePointRestListItemNextLink
+  name: SharePointRestListItemNextLink
+  href: api/PnP.Core.PnPConstants.html#PnP_Core_PnPConstants_SharePointRestListItemNextLink
+  commentId: F:PnP.Core.PnPConstants.SharePointRestListItemNextLink
+  fullName: PnP.Core.PnPConstants.SharePointRestListItemNextLink
+  nameWithType: PnPConstants.SharePointRestListItemNextLink
 - uid: PnP.Core.PnPException
   name: PnPException
   href: api/PnP.Core.PnPException.html
