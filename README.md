@@ -18,16 +18,12 @@ For more details on how to use this SDK and how to contribute checkout https://a
 
 This is a community effort, hence we cannot guarantee below roadmap but rest assure, we're working hard to stick to plan :-) If you want to join our team and help realize this, then checkout the [How can I help](https://pnp.github.io/pnpcore/#how-can-you-help) section in our docs.
 
-- Preview 3: September 2020
+- Preview 3: September 2020 (shipped)
 - Beta 1: October 2020
 - Beta 2: November 2020
 - V1: December 2020
 
 ## Frequently Asked Questions
-
-### What's the relationship with the existing PnP Sites Core library
-
-The [PnP Sites Core library](https://github.com/PnP/PnP-Sites-Core) is very popular library that extends SharePoint using mainly CSOM. This library contains the PnP Provisioning engine, tons of extension methods, a modern page API, etc...but this library has also organically grown into a complex and hard to maintain code base. One of the reasons why the PnP Core SDK development started is to provide a new clean basis for the PnP Sites Core library with a strong focus on quality (test coverage above 80%, automation). As this transition will take quite some time and effort we plan to gradually move things over from PnP Sites Core to the PnP Core SDK.
 
 ### Will this work in modern .Net
 
@@ -43,6 +39,12 @@ Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit in
   - Mobile: [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
   
 - The library internally uses [dependency injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1) and you can consume it via dependency injection in your applications
+
+### What's the relationship with the existing PnP Sites Core library
+
+The [PnP Sites Core library](https://github.com/PnP/PnP-Sites-Core) is very popular library that extends SharePoint using mainly CSOM. This library contains the PnP Provisioning engine, tons of extension methods, a modern page API, etc...but this library has also organically grown into a complex and hard to maintain code base. One of the reasons why the PnP Core SDK development started is to provide a new clean basis for the PnP Sites Core library with a strong focus on quality (test coverage above 80%, automation). As this transition will take quite some time and effort we plan to gradually move things over from PnP Sites Core to the PnP Core SDK. The first step in this transition is releasing a .Net Standard 2.0 version of PnP Sites Core, called PnP Framework. Going forward PnP Framework features will move to the PnP Core SDK in a phased approach. At this moment we've shipped our first PnP Framework preview version and preview 3 of the [PnP Core SDK](https://github.com/pnp/pnpcore).
+
+![PnP dotnet roadmap](PnP%20dotnet%20Roadmap%20-%20October%20status.png)
 
 ### What underlying API's are used
 
