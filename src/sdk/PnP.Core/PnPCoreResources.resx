@@ -138,6 +138,9 @@
   <data name="Exception_Feature_CannotDeactivateNotActive" xml:space="preserve">
     <value>Feature was not activated, nothing to deactive</value>
   </data>
+  <data name="Exception_GetListByServerRelativeUrl_ServerRelativeUrl" xml:space="preserve">
+    <value>You need to provide a value for the ServerRelativeUrl parameter</value>
+  </data>
   <data name="Exception_GraphBetaNotAllowed" xml:space="preserve">
     <value>Adding this entity requires the use of the Graph beta endpoint</value>
   </data>

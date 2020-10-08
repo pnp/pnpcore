@@ -1,4 +1,5 @@
 ﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -149,6 +150,57 @@ namespace PnP.Core.Model.SharePoint
             return await BaseDataModelExtensions.BaseLinqGetAsync(source, l => l.Id == id, selectors).ConfigureAwait(false);
         }
 
+        #endregion
+
+        #region GetByServerRelativeUrl implementation
+        /// <summary>
+        /// Extension method to select a list (IList) by server relative url
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="serverRelativeUrl">The server relative url of the list to return</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static async Task<IList> GetByServerRelativeUrlAsync(this IQueryable<IList> source, string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (serverRelativeUrl == null)
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (string.IsNullOrEmpty(serverRelativeUrl))
+            {
+                throw new ArgumentException(PnPCoreResources.Exception_GetListByServerRelativeUrl_ServerRelativeUrl);
+            }
+
+            return await BaseDataModelExtensions.BaseGetAsync(source, new ApiCall($"_api/web/getlist('{serverRelativeUrl}')", ApiType.SPORest), selectors).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Extension method to select a list (IList) by server relative url
+        /// </summary>
+        /// <param name="source">The collection of lists to get the list by title from</param>
+        /// <param name="serverRelativeUrl">The server relative url of the list to return</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public static IList GetByServerRelativeUrl(this IQueryable<IList> source, string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (serverRelativeUrl == null)
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            return GetByServerRelativeUrlAsync(source, serverRelativeUrl, selectors).GetAwaiter().GetResult();
+        }
         #endregion
 
     }

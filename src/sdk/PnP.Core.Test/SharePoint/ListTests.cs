@@ -618,5 +618,61 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetListByServerRelativeUrl()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.LocalPath}/shared%20documents", p => p.Title, p => p.ListExperience);
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+
+            }
+        }
+
+        [TestMethod]
+        public async Task GetListByServerRelativeUrlSync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByServerRelativeUrl($"{context.Uri.LocalPath}/shared%20documents", p => p.Title, p => p.ListExperience);
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+
+            }
+        }
+
+        [TestMethod]
+        public async Task GetListByTitle()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience);
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+
+            }
+        }
+
+        [TestMethod]
+        public async Task GetListByTitleSync()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Documents", p => p.Title, p => p.ListExperience);
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+
+            }
+        }
+
     }
 }

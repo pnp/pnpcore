@@ -1,6 +1,9 @@
-﻿using System;
+﻿using PnP.Core.Model;
+using PnP.Core.Services;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -249,5 +252,31 @@ namespace PnP.Core.QueryModel
         }
 
         #endregion
+
+        #region Internal base methods for model specific extension methods
+        internal static async Task<T> BaseGetAsync<T>(
+                    IQueryable<T> source,
+                    ApiCall apiCall,
+                    params Expression<Func<T, object>>[] selectors)
+        {
+            // Instantiate a new concrete entity
+            var concreteEntity = (source as IManageableCollection<T>).CreateNew();
+
+            // Grab entity information using the provided selectors
+            var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), (concreteEntity as BaseDataModel<T>), selectors);
+            
+            // Build the default get query but pass in our given API call as override
+            var query = await new QueryClient().BuildGetAPICallAsync(concreteEntity as BaseDataModel<T>, entityInfo, apiCall).ConfigureAwait(false);
+                        
+            // Trigger the get request
+            await (concreteEntity as BaseDataModel<T>).RequestAsync(query.ApiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            // Add/update the result in the parent collection
+            (source as IManageableCollection<T>).AddOrUpdate(concreteEntity, i => ((IDataModelWithKey)i).Key.Equals((concreteEntity as IDataModelWithKey).Key));
+
+            return concreteEntity;
+        }
+        #endregion
+
     }
 }

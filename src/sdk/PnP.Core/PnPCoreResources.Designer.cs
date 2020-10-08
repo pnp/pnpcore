@@ -124,6 +124,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to provide a value for the ServerRelativeUrl parameter.
+        /// </summary>
+        internal static string Exception_GetListByServerRelativeUrl_ServerRelativeUrl {
+            get {
+                return ResourceManager.GetString("Exception_GetListByServerRelativeUrl_ServerRelativeUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding this entity requires the use of the Graph beta endpoint.
         /// </summary>
         internal static string Exception_GraphBetaNotAllowed {
