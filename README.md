@@ -53,3 +53,5 @@ The SDK provides an object model that's API agnostic, when you as a developer fo
 As [Microsoft Graph](https://docs.microsoft.com/en-us/graph/) is our recommended API to work with Microsoft 365, the SDK will always use Microsoft Graph whenever possible, the "fall back" to SharePoint REST only happens when Microsoft Graph can't provide the needed data.
 
 **Community rocks, sharing is caring!**
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
