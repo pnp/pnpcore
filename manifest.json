@@ -1770,7 +1770,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ListExtensions.html",
-          "hash": "wwb/H42uM+XKPuKAxU2EGg=="
+          "hash": "YyDe8KrZ1k1hwUVVJwtdaQ=="
         }
       },
       "is_incremental": false,
@@ -2502,7 +2502,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.QueryModel.BaseDataModelExtensions.html",
-          "hash": "5LhEhSsec7ZgxrDXFfV7yQ=="
+          "hash": "BTg/vLhAo35I4CNuWrcslg=="
         }
       },
       "is_incremental": false,

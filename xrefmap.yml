@@ -14811,6 +14811,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync
   nameWithType: ListExtensions.GetByIdAsync
+- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByServerRelativeUrl(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByServerRelativeUrl_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByServerRelativeUrl(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl(IQueryable<PnP.Core.Model.SharePoint.IList>, System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl(IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: ListExtensions.GetByServerRelativeUrl(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: ListExtensions.GetByServerRelativeUrl(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl*
+  name: GetByServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByServerRelativeUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl
+  nameWithType: ListExtensions.GetByServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByServerRelativeUrlAsync(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByServerRelativeUrlAsync_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByServerRelativeUrlAsync(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync(IQueryable<PnP.Core.Model.SharePoint.IList>, System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync(IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: ListExtensions.GetByServerRelativeUrlAsync(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: ListExtensions.GetByServerRelativeUrlAsync(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync*
+  name: GetByServerRelativeUrlAsync
+  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByServerRelativeUrlAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync
+  nameWithType: ListExtensions.GetByServerRelativeUrlAsync
 - uid: PnP.Core.Model.SharePoint.ListExtensions.GetByTitle(IQueryable{PnP.Core.Model.SharePoint.IList},System.String)
   name: GetByTitle(IQueryable<IList>, String)
   href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitle_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_
