@@ -137,14 +137,14 @@ namespace PnP.Core.Auth
             try
             {
                 // Try to get the token from the tokens cache
-                tokenResult = publicClientApplication.AcquireTokenSilent(scopes, account.FirstOrDefault())
-                    .ExecuteAsync().GetAwaiter().GetResult();
+                tokenResult = await publicClientApplication.AcquireTokenSilent(scopes, account.FirstOrDefault())
+                    .ExecuteAsync().ConfigureAwait(false);
             }
             catch (MsalUiRequiredException)
             {
                 // Try to get the token directly through AAD if it is not available in the tokens cache
-                tokenResult = publicClientApplication.AcquireTokenInteractive(scopes)
-                    .ExecuteAsync().GetAwaiter().GetResult();
+                tokenResult = await publicClientApplication.AcquireTokenInteractive(scopes)
+                    .ExecuteAsync().ConfigureAwait(false);
             }
 
             // Log the access token retrieval action

@@ -145,22 +145,24 @@ namespace PnP.Core.Auth
             try
             {
                 // Try to get the token from the tokens cache
-                tokenResult = publicClientApplication.AcquireTokenSilent(scopes, account.FirstOrDefault())
-                    .ExecuteAsync().GetAwaiter().GetResult();
+                tokenResult = await publicClientApplication.AcquireTokenSilent(scopes, account.FirstOrDefault())
+                    .ExecuteAsync().ConfigureAwait(false);
             }
             catch (MsalUiRequiredException)
             {
                 // Try to get the token directly through AAD if it is not available in the tokens cache
-                tokenResult = publicClientApplication.AcquireTokenWithDeviceCode(scopes,
-                    deviceCodeResult => {
-                        DeviceCodeVerification.Invoke(new DeviceCodeNotification { 
+                tokenResult = await publicClientApplication.AcquireTokenWithDeviceCode(scopes,
+                    deviceCodeResult =>
+                    {
+                        DeviceCodeVerification.Invoke(new DeviceCodeNotification
+                        {
                             UserCode = deviceCodeResult.UserCode,
                             Message = deviceCodeResult.Message,
                             VerificationUrl = new Uri(deviceCodeResult.VerificationUrl)
                         });
                         return Task.FromResult(0);
                     })
-                    .ExecuteAsync().GetAwaiter().GetResult();
+                    .ExecuteAsync().ConfigureAwait(false);
             }
 
             // Log the access token retrieval action
