@@ -6,6 +6,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Model.Teams;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -361,7 +362,28 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone()
         {
-            return Clone(null);
+            return Clone(Uri);
+        }
+
+        /// <summary>
+        /// Clones this context for another SharePoint site provided as configuration
+        /// </summary>
+        /// <param name="name">The name of the SPOContext configuration to use</param>
+        /// <returns>New <see cref="PnPContext"/> for the request config</returns>
+        public PnPContext Clone(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_EmptyConfiguration, nameof(name)));
+            }
+
+            var configuration = contextOptions.Configurations.FirstOrDefault(c => c.Name == name);
+            if (configuration == null)
+            {
+                throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_InvalidConfiguration, name));
+            }
+
+            return Clone(configuration.SiteUrl);
         }
 
         /// <summary>
@@ -382,13 +404,6 @@ namespace PnP.Core.Services
             if (uri != null)
             {
                 clonedContext.Uri = uri;
-            }
-            else
-            {
-                if (Uri != null)
-                {
-                    clonedContext.Uri = Uri;
-                }
             }
 
             return clonedContext;

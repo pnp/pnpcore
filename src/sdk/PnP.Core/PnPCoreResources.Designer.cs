@@ -340,6 +340,24 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please provide a configuration value via the {0} parameter.
+        /// </summary>
+        internal static string Exception_PnPContext_EmptyConfiguration {
+            get {
+                return ResourceManager.GetString("Exception_PnPContext_EmptyConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The passed configuration &apos;{0}&apos; does not exist.
+        /// </summary>
+        internal static string Exception_PnPContext_InvalidConfiguration {
+            get {
+                return ResourceManager.GetString("Exception_PnPContext_InvalidConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Property {0} does not exist in this entity.
         /// </summary>
         internal static string Exception_PropertyDoesNotExist {

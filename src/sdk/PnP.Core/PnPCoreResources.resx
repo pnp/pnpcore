@@ -210,6 +210,12 @@
   <data name="Exception_ModelMetadataIncorrect_ModelOutOfSync" xml:space="preserve">
     <value>Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming</value>
   </data>
+  <data name="Exception_PnPContext_EmptyConfiguration" xml:space="preserve">
+    <value>Please provide a configuration value via the {0} parameter</value>
+  </data>
+  <data name="Exception_PnPContext_InvalidConfiguration" xml:space="preserve">
+    <value>The passed configuration '{0}' does not exist</value>
+  </data>
   <data name="Exception_PropertyDoesNotExist" xml:space="preserve">
     <value>Property {0} does not exist in this entity</value>
   </data>
