@@ -393,18 +393,20 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone(Uri uri)
         {
+            if (uri == null)
+            {
+                throw new ArgumentNullException(nameof(uri));
+            }
+
             PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, contextOptions, globalOptions, telemetry)
             {
                 // Take over graph settings
                 GraphCanUseBeta = graphCanUseBeta,
                 GraphAlwaysUseBeta = GraphAlwaysUseBeta,
-                GraphFirst = GraphFirst
+                GraphFirst = GraphFirst,
+                // Set the Uri for which this context was cloned
+                Uri = uri
             };
-
-            if (uri != null)
-            {
-                clonedContext.Uri = uri;
-            }
 
             return clonedContext;
         }
