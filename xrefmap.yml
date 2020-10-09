@@ -20167,6 +20167,12 @@ references:
   commentId: M:PnP.Core.Services.PnPContext.Clone
   fullName: PnP.Core.Services.PnPContext.Clone()
   nameWithType: PnPContext.Clone()
+- uid: PnP.Core.Services.PnPContext.Clone(System.String)
+  name: Clone(String)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Clone_System_String_
+  commentId: M:PnP.Core.Services.PnPContext.Clone(System.String)
+  fullName: PnP.Core.Services.PnPContext.Clone(System.String)
+  nameWithType: PnPContext.Clone(String)
 - uid: PnP.Core.Services.PnPContext.Clone(Uri)
   name: Clone(Uri)
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Clone_Uri_
