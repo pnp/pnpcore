@@ -148,7 +148,6 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        // NOTE Specific methods MUST ALWAYS CALL the generic AddAsync with appropriate arguments, only the specific methods are test covered for each type of field
         [TestMethod]
         public async Task AddNewWebFieldTextSpecificTest()
         {
@@ -169,6 +168,47 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(100, addedField.MaxLength);
 
                 await addedField.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddFieldWithFieldCustomizerTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            string fieldName = TestCommon.GetPnPSdkTestAssetName("FieldWithCustomizer");
+            string groupName = TestCommon.GetPnPSdkTestAssetName("FieldGroup");
+            Guid clientSideComponentId = new Guid(TestAssets.TestFieldCustomizerClientSideComponentId);
+            string clientSideComponentProperties = $@"{{""message"":""Added from AddFieldWithFieldCustomizerTest"" }}";
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 0))
+            {
+                IField field = await context.Web.Fields.AddTextAsync(fieldName, new FieldTextOptions()
+                {
+                    Group = groupName,
+                    MaxLength = 100
+                });
+
+                // Test the created object
+                Assert.IsNotNull(field);
+                Assert.AreEqual(fieldName, field.Title);
+                Assert.AreEqual(groupName, field.Group);
+
+                field.ClientSideComponentId = clientSideComponentId;
+                field.ClientSideComponentProperties = clientSideComponentProperties;
+                await field.UpdateAsync();
+            }
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+            {
+                IField field = (from f in context.Web.Fields
+                                where f.Title == fieldName
+                                select f).FirstOrDefault();
+
+                Assert.IsNotNull(field);
+                Assert.AreEqual(clientSideComponentId, field.ClientSideComponentId);
+                Assert.AreEqual(clientSideComponentProperties, field.ClientSideComponentProperties);
+
+                await field.DeleteAsync();
             }
         }
 
@@ -512,7 +552,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
                 // TODO Must be tested when support for SharePoint groups is implemented
                 //Assert.AreEqual(addedField.SelectionGroup, 1);
-                
+
                 await addedField.DeleteAsync();
             }
         }
