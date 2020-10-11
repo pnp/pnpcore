@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
@@ -465,55 +464,6 @@ namespace PnP.Core.Test.SharePoint
 
                 IUserCustomAction foundCustomAction = web.UserCustomActions.FirstOrDefault(uca => uca.Id == customActionId);
                 Assert.IsNull(foundCustomAction);
-            }
-        }
-
-        [TestMethod]
-        public async Task ContentTypesUpdateTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                IContentType contentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST UPDATE", "TESTING", "TESTING");
-
-                // Test if the content type is created
-                Assert.IsNotNull(contentType);
-
-                // Update the content type
-                contentType.Name = "UPDATED";
-                await contentType.UpdateAsync();
-
-                // Test if the updated content type is still found
-                IContentType contentTypeToFind = (from ct in context.Web.ContentTypes
-                                                  where ct.Name == "UPDATED"
-                                                  select ct).FirstOrDefault();
-
-                Assert.IsNotNull(contentTypeToFind);
-
-                await contentType.DeleteAsync();
-            }
-        }
-
-        [TestMethod]
-        public async Task ContentTypesDeleteTest()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                IContentType contentType = await context.Web.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST DELETE", "TESTING", "TESTING");
-
-                // Test if the content type is created
-                Assert.IsNotNull(contentType);
-
-                // Delete the content type again
-                await contentType.DeleteAsync();
-
-                // Test if the content type is still found
-                IContentType contentTypeToFind = (from ct in context.Web.ContentTypes
-                                                  where ct.Name == "TEST DELETE"
-                                                  select ct).FirstOrDefault();
-
-                Assert.IsNull(contentTypeToFind);
             }
         }
     }

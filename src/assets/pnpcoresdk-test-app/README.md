@@ -21,6 +21,10 @@ npm i -g gulp
 gulp
 ```
 
+## Testing the app locally
+
+Update the tokens **[yourtenant]** in *config/serve.json* and run `gulp serve --config=<the appropriate config>`
+
 This package produces the following:
 
 * lib/* - intermediate-stage commonjs build artifacts
