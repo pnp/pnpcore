@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Model.Teams;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
@@ -86,7 +87,7 @@ namespace PnP.Core.Test.Base
 
         #endregion
 
-        #region Basic GET tests using Web 
+        #region Basic GET tests for SharePoint REST + Graph using the Web object
 
         [TestMethod]
         public async Task GetWebGraphFirstDefault()
@@ -202,6 +203,138 @@ namespace PnP.Core.Test.Base
             Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists&$expand=Lists", true);
         }
 
+        [TestMethod]
+        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesSimple()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[] 
+            { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
+                p=>p.Title, p=>p.TemplateType) 
+            }));
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId&$expand=Lists", true);
+        }
+
+        [TestMethod]
+        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesSimplePlusKeyProperty()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
+            { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
+                p=>p.Title, p=>p.TemplateType, p=>p.Id)
+            }));
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId&$expand=Lists", true);
+        }
+
+        [TestMethod]
+        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesRecursive()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
+            { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
+                p => p.Title, p => p.TemplateType, p=>p.ContentTypes.LoadProperties(
+                    p=>p.Name, p=>p.FieldLinks.LoadProperties(
+                        p=> p.Name, p=> p.Hidden)))
+            }));
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId%2cLists%2fContentTypes%2fName%2cLists%2fContentTypes%2fStringId%2cLists%2fContentTypes%2fFieldLinks%2fName%2cLists%2fContentTypes%2fFieldLinks%2fHidden%2cLists%2fContentTypes%2fFieldLinks%2fId&$expand=Lists%2cLists%2fContentTypes%2cLists%2fContentTypes%2fFieldLinks", true);
+        }
+
+        [TestMethod]
+        public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesRecursivePlusKeyProperties()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[] 
+            { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
+                p => p.Title, p => p.TemplateType, p=>p.Id, p=>p.ContentTypes.LoadProperties(
+                    p=>p.Name, p=>p.StringId, p=>p.FieldLinks.LoadProperties( 
+                        p=>p.Id, p=> p.Name, p=> p.Hidden))) 
+            }));
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId%2cLists%2fContentTypes%2fName%2cLists%2fContentTypes%2fStringId%2cLists%2fContentTypes%2fFieldLinks%2fId%2cLists%2fContentTypes%2fFieldLinks%2fName%2cLists%2fContentTypes%2fFieldLinks%2fHidden&$expand=Lists%2cLists%2fContentTypes%2cLists%2fContentTypes%2fFieldLinks", true);
+        }
+
+        #endregion
+
+        #region Graph only tests using the Taxonomy model
+
+        [TestMethod]
+        public async Task GetTermStoreDefault()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>());
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "termstore", true);
+        }
+
+        [TestMethod]
+        public async Task GetTeamExpressionSingleSimpleProperty()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p=>p.DefaultLanguage }));
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "termstore?$select=id%2cdefaultLanguageTag", true);
+        }
+
+        [TestMethod]
+        public async Task GetTeamExpressionKeyProperty()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id }));
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "termstore?$select=id", true);
+        }
+
+        [TestMethod]
+        public async Task GetTeamExpressionSingleSimplePropertyPlusKeyProperty()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.DefaultLanguage, p=>p.Id }));
+            Assert.IsTrue(requests.Count == 1);
+            Assert.AreEqual(requests[0], "termstore?$select=id%2cdefaultLanguageTag", true);
+        }
+
+        [TestMethod]
+        public async Task GetTeamExpressionExpandable()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Groups }));
+            Assert.IsTrue(requests.Count == 2);
+            Assert.AreEqual(requests[0], "termstore?$select=id%2cgroups", true);
+            Assert.AreEqual(requests[1], "termstore/groups", true);
+        }
+
+        [TestMethod]
+        public async Task GetTeamExpressionExpandableKeyProperty()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Groups, p=>p.Id }));
+            Assert.IsTrue(requests.Count == 2);
+            Assert.AreEqual(requests[0], "termstore?$select=id%2cgroups", true);
+            Assert.AreEqual(requests[1], "termstore/groups", true);
+        }
+
+        [TestMethod]
+        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadProperties()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.LoadProperties(
+                p=>p.Name )
+            }));
+            Assert.IsTrue(requests.Count == 2);
+            Assert.AreEqual(requests[0], "termstore?$select=id", true);
+            Assert.AreEqual(requests[1], "termstore/groups?$select=displayname,id", true);
+        }
+
+        [TestMethod]
+        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPropertiesPlusKeyProperty()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.LoadProperties(
+                p=>p.Name, p=>p.Id )
+            }));
+            Assert.IsTrue(requests.Count == 2);
+            Assert.AreEqual(requests[0], "termstore?$select=id", true);
+            Assert.AreEqual(requests[1], "termstore/groups?$select=displayname,id", true);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientException))]
+        public async Task GetTeamExpressionExpandableKeyPropertyPlusLoadPropertiesPlusExpandKeyProperty()
+        {
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.LoadProperties(
+                p=>p.Name, p=>p.Id, p=>p.Sets )
+            }));
+        }        
         #endregion
 
     }
