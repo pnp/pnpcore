@@ -48,13 +48,16 @@ $tenantUrl = "https://$tenantName.sharepoint.com"
 
 $tenantContext = Connect-PnPOnline -Url $tenantUrl -Credentials $credentials -Verbose -ReturnConnection
 
+# Add test Client Side app package
+$app = Add-PnPApp -Path .\TestAssets\pnpcoresdk-test-app.sppkg
+
+
 # Create test site without a group 
 $pnpTestSite = New-PnPSite -Type CommunicationSite -Title "PnP Microsoft 365 library test" -Url  "https://$tenantName.sharepoint.com/sites/pnpcoresdktest"  -Wait -Connection $tenantContext
 # Connect to created site
 Connect-PnPOnline -Url $pnpTestSite -Credentials $credentials
 # Add sub site 
 New-PnPWeb -Title "Sub site" -Url "subsite" -Locale 1033 -Template "STS#3"
-
 
 # Create test site with group
 $pnpTestSiteWithGroup = New-PnPSite -Type TeamSite -Title "PnP Microsoft 365 library test with group" -Alias pnpcoresdktestgroup -IsPublic -Wait -Connection $tenantContext
@@ -66,6 +69,9 @@ Add-PnPTeamsTeam
 Add-PnPFile -Path .\TestAssets\test.docx -Folder "Shared Documents"  
 # Add sub site 
 New-PnPWeb -Title "Sub site" -Url "subsite" -Locale 1033 -Template "STS#3"
+# TODO: When ALM support is implemented, remove this from here and move to TestAssets helper
+# Install the client side app to the site
+Install-PnPApp -Identity $app.Id 
 
 Write-Host "All sites are created, next step is updating your test configuration file with the created urls"
 

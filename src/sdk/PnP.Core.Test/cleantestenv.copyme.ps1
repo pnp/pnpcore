@@ -90,6 +90,10 @@ Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
 Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
 Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
 
+# TODO: When ALM support is implemented, remove this from here and move to TestAssets helper
+$app = Get-PnPApp pnpcoresdk-test-app-client-side-solution
+Uninstall-PnPApp -Identity $app.Id
+
 
 Disable-PnPFeature -Identity 3bae86a2-776d-499d-9db8-fa4cdc7884f8 -Scope Site
 Disable-PnPFeature -Identity fa6a1bcc-fb4b-446b-8460-f4de5f7411d5 -Scope Web

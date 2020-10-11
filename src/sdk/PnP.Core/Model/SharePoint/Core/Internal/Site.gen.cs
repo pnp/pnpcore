@@ -83,10 +83,6 @@ namespace PnP.Core.Model.SharePoint
         /* Not directly a field in the Site object*/
         public string SearchCenterUrl { get => GetValue<string>(); set => SetValue(value); }
 
-
-
-        // ==================== TO TEST ==================================
-
         public bool AllowCreateDeclarativeWorkflow { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool AllowDesigner { get => GetValue<bool>(); set => SetValue(value); }
@@ -196,6 +192,20 @@ namespace PnP.Core.Model.SharePoint
         public DateTime UpgradeScheduledDate { get => GetValue<DateTime>(); set => SetValue(value); }
 
         public bool Upgrading { get => GetValue<bool>(); set => SetValue(value); }
+
+        [SharePointProperty("UserCustomActions", Expandable = true)]
+        public IUserCustomActionCollection UserCustomActions
+        {
+            get
+            {
+                if (!HasValue(nameof(UserCustomActions)))
+                {
+                    var userCustomActions = new UserCustomActionCollection(this.PnPContext, this, nameof(UserCustomActions));
+                    SetValue(userCustomActions);
+                }
+                return GetValue<IUserCustomActionCollection>();
+            }
+        }
 
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }

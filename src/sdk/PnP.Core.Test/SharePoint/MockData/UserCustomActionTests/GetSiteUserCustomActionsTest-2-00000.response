@@ -1,0 +1,9 @@
+--batchresponse_38f026b0-e10d-4b11-8b79-7f02827903ea
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"UserCustomActions":{"results":[{"__metadata":{"id":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/UserCustomActions(guid'c11b43d9-6e8c-4fd1-ad10-1cd9017e79f8')","uri":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/UserCustomActions(guid'c11b43d9-6e8c-4fd1-ad10-1cd9017e79f8')","type":"SP.UserCustomAction"},"DescriptionResource":{"__deferred":{"uri":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/UserCustomActions(guid'c11b43d9-6e8c-4fd1-ad10-1cd9017e79f8')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site/UserCustomActions(guid'c11b43d9-6e8c-4fd1-ad10-1cd9017e79f8')/TitleResource"}},"ClientSideComponentId":"a54612b1-e5cb-4a43-80ae-3b5fb6ce1e35","ClientSideComponentProperties":"{\"message\":\"Added from Test GetSiteUserCustomActionsTest\"}","CommandUIExtension":null,"Description":"PNP_SDK_TEST_GetSiteUserCustomActionsTest","Group":null,"HostProperties":"","Id":"c11b43d9-6e8c-4fd1-ad10-1cd9017e79f8","ImageUrl":null,"Location":"ClientSideExtension.ApplicationCustomizer","Name":"PNP_SDK_TEST_GetSiteUserCustomActionsTest","RegistrationId":null,"RegistrationType":0,"Rights":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"0"},"Scope":2,"ScriptBlock":null,"ScriptSrc":null,"Sequence":100,"Title":"PNP_SDK_TEST_GetSiteUserCustomActionsTest","Url":null,"VersionOfUserCustomAction":"16.0.1.0"}]},"Id":"0b211cb0-cb78-4138-9c98-ad475425877e"}}
+--batchresponse_38f026b0-e10d-4b11-8b79-7f02827903ea--
