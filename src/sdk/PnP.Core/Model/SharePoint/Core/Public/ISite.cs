@@ -321,6 +321,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool Upgrading { get; }
 
+        /// <summary>
+        /// Gets a value that specifies the collection of user custom actions for the site collection.
+        /// </summary>
+        public IUserCustomActionCollection UserCustomActions { get; }
+
         ///// <summary>
         ///// To update...
         ///// </summary>
@@ -350,10 +355,5 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IUser SecondaryContact { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUserCustomActionCollection UserCustomActions { get; }
     }
 }

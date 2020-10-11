@@ -52,30 +52,6 @@ namespace PnP.Core
                 .SetValue(source, value);
         }
 
-        /// <summary>
-        /// Indicates whether 2 types are compatible for mapping
-        /// </summary>
-        /// <param name="sourceType">The type of the property to map the value from</param>
-        /// <param name="targetType">The type of the property to map the value to</param>
-        /// <returns><c>true</c> if the types are compatible, <c>false</c> otherwise</returns>
-        private static bool AreMappingCompatible(Type sourceType, Type targetType)
-        {
-            if (!targetType.IsAssignableFrom(sourceType))
-            {
-                // Enum <=> int is supported
-                if ((targetType.IsEnum && sourceType == typeof(int)) || (sourceType.IsEnum && targetType == typeof(int)))
-                    return true;
-
-                // Nullable<T> <=> T is supported (null => default)
-                if (Nullable.GetUnderlyingType(targetType) == sourceType || Nullable.GetUnderlyingType(sourceType) == targetType)
-                    return true;
-
-                return false;
-            }
-
-            return true;
-        }
-
         internal static Dictionary<string, object> AsKeyValues(this object obj,
                     BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase,
                     string[] ignoreProperties = null,
