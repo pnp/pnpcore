@@ -1,0 +1,10 @@
+--batchresponse_d4c1afb1-f10e-4839-bf75-a357b10c6cf4
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'e42e992d-b022-4b43-9ce4-1fca2ba379ae')
+
+{"d":{"__metadata":{"id":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'e42e992d-b022-4b43-9ce4-1fca2ba379ae')","uri":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'e42e992d-b022-4b43-9ce4-1fca2ba379ae')","type":"SP.UserCustomAction"},"DescriptionResource":{"__deferred":{"uri":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'e42e992d-b022-4b43-9ce4-1fca2ba379ae')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://yppvx.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/UserCustomActions(guid'e42e992d-b022-4b43-9ce4-1fca2ba379ae')/TitleResource"}},"ClientSideComponentId":"d2480b66-32cb-4e94-87eb-75895fd3dcc6","ClientSideComponentProperties":"{\"message\":\"Added from AddWebUserCustomActionListViewCommandSetContextMenuAsyncTest\"}","CommandUIExtension":null,"Description":"TESTING","Group":null,"HostProperties":"","Id":"e42e992d-b022-4b43-9ce4-1fca2ba379ae","ImageUrl":null,"Location":"ClientSideExtension.ListViewCommandSet.ContextMenu","Name":"UCA_CustomCommand","RegistrationId":"101","RegistrationType":1,"Rights":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"0"},"Scope":3,"ScriptBlock":null,"ScriptSrc":null,"Sequence":100,"Title":"Custom Command","Url":null,"VersionOfUserCustomAction":"16.0.1.0"}}
+--batchresponse_d4c1afb1-f10e-4839-bf75-a357b10c6cf4--

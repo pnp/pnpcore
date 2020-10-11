@@ -6,21 +6,7 @@
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
-    "isDomainIsolated": false,
-    "features": [
-      {
-        "title": "Application Extension - Deployment of custom action.",
-        "description": "Deploys a custom action with ClientSideComponentId association",
-        "id": "9f36d9d9-e571-451e-b24e-0976690df2e9",
-        "version": "1.0.0.0",
-        "assets": {
-          "elementManifests": [
-            "elements.xml",
-            "ClientSideInstance.xml"
-          ]
-        }
-      }
-    ]
+    "isDomainIsolated": false
   },
   "paths": {
     "zippedPackage": "solution/pnpcoresdk-test-app.sppkg"
