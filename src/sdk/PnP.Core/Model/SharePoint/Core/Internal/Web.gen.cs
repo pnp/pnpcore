@@ -450,6 +450,29 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        public IBasePermissions EffectiveBasePermissions
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new BasePermissions
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IBasePermissions>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }

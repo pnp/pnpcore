@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Model.SharePoint.Core.Public.Extensions;
 using PnP.Core.Test.Utilities;
-using PnP.Core.Utilities;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -46,6 +45,7 @@ namespace PnP.Core.Test.SharePoint
                     p => p.DesignPackageId,
                     p => p.DisableRecommendedItems,
                     p => p.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled,
+                    p => p.EffectiveBasePermissions,
                     p => p.EnableMinimalDownload,
                     p => p.FooterEmphasis,
                     p => p.FooterEnabled,
@@ -75,6 +75,12 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(default, web.DesignPackageId);
                 Assert.IsFalse(web.DisableRecommendedItems);
                 Assert.IsFalse(web.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled);
+
+                // EffectiveBasePermissions returns a BasePermissions model
+                Assert.IsTrue(web.EffectiveBasePermissions.Requested);
+                Assert.IsTrue(web.EffectiveBasePermissions.High > 0);
+                Assert.IsTrue(web.EffectiveBasePermissions.Low > 0);
+
                 Assert.IsFalse(web.EnableMinimalDownload);
                 Assert.AreEqual(FooterVariantThemeType.Strong, web.FooterEmphasis);
                 Assert.IsFalse(web.FooterEnabled);
@@ -289,5 +295,34 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetWebBasePermissionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IWeb web = await context.Web.GetAsync(p => p.EffectiveBasePermissions);
+
+                Assert.IsNotNull(web);
+                Assert.IsTrue(web.EffectiveBasePermissions.Requested);
+                Assert.IsTrue(web.EffectiveBasePermissions.Low > 0);
+                Assert.IsTrue(web.EffectiveBasePermissions.High > 0);
+                Assert.IsTrue(web.EffectiveBasePermissions.Has(PermissionKind.AddListItems));
+                Assert.IsTrue(web.EffectiveBasePermissions.HasPermissions(2147483647, 4294705151));
+                Assert.IsTrue(web.EffectiveBasePermissions.Has(PermissionKind.EmptyMask));
+                Assert.IsFalse(web.EffectiveBasePermissions.Has(PermissionKind.FullMask));
+            }
+        }
+
+        [TestMethod]
+        public async Task IsNoScriptTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
+                Assert.IsTrue(isNoScript);
+            }
+        }
     }
 }

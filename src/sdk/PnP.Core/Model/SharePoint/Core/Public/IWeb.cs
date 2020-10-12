@@ -530,6 +530,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IUserCustomActionCollection UserCustomActions { get; }
 
+        /// <summary>
+        /// Get's the permission levels set on this web
+        /// </summary>
+        public IBasePermissions EffectiveBasePermissions { get; }
+
         #region Methods
 
         #region GetFolderByServerRelativeUrl
