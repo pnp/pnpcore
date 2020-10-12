@@ -525,6 +525,16 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public ISharePointGroupCollection SiteGroups { get; }
 
+        /// <summary>
+        /// Gets a value that specifies the collection of user custom actions for the site.
+        /// </summary>
+        public IUserCustomActionCollection UserCustomActions { get; }
+
+        /// <summary>
+        /// Get's the permission levels set on this web
+        /// </summary>
+        public IBasePermissions EffectiveBasePermissions { get; }
+
         #region Methods
 
         #region GetFolderByServerRelativeUrl
@@ -658,8 +668,6 @@ namespace PnP.Core.Model.SharePoint
         ///// </summary>
         //public IAlertCollection Alerts { get; }
 
-
-
         ///// <summary>
         ///// To update...
         ///// </summary>
@@ -769,11 +777,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IUserResource TitleResource { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUserCustomActionCollection UserCustomActions { get; }
 
         ///// <summary>
         ///// To update...

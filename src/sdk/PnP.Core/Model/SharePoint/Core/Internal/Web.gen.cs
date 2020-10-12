@@ -164,8 +164,6 @@ namespace PnP.Core.Model.SharePoint
         [GraphProperty("webUrl")]
         public Uri Url { get => GetValue<Uri>(); set => SetValue(value); }
 
-        // Below attribute was used as sample to test the UseCustomMapping feature
-        //[SharePointFieldMapping(FieldName = "NoCrawl", UseCustomMapping = true)]
         public bool NoCrawl { get => GetValue<bool>(); set => SetValue(value); }
 
         public string RequestAccessEmail { get => GetValue<string>(); set => SetValue(value); }
@@ -435,6 +433,43 @@ namespace PnP.Core.Model.SharePoint
                     SetValue(groups);
                 }
                 return GetValue<ISharePointGroupCollection>();
+            }
+        }
+
+        [SharePointProperty("UserCustomActions", Expandable = true)]
+        public IUserCustomActionCollection UserCustomActions
+        {
+            get
+            {
+                if (!HasValue(nameof(UserCustomActions)))
+                {
+                    var userCustomActions = new UserCustomActionCollection(this.PnPContext, this, nameof(UserCustomActions));
+                    SetValue(userCustomActions);
+                }
+                return GetValue<IUserCustomActionCollection>();
+            }
+        }
+
+        public IBasePermissions EffectiveBasePermissions
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var propertyValue = new BasePermissions
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(propertyValue);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<IBasePermissions>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
             }
         }
 
