@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Identity.Web;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services.Builder.Configuration;
 
@@ -29,8 +30,16 @@ namespace Demo.ASPNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
-                .AddAzureAD(options => Configuration.Bind("AzureAd", options));
+            // Add Microsoft.Identity.Web services
+            services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
+                    .EnableTokenAcquisitionToCallDownstreamApi(new string[] { "User.Read" })
+                    .AddInMemoryTokenCaches();
+
+            // Add the PnP Core SDK library
+            services.AddPnPCore();
+            services.Configure<PnPCoreOptions>(Configuration.GetSection("PnPCore"));
+            services.AddPnPCoreAuthentication();
+            services.Configure<PnPCoreAuthenticationOptions>(Configuration.GetSection("PnPCore"));
 
             services.AddControllersWithViews(options =>
             {
@@ -40,12 +49,6 @@ namespace Demo.ASPNetCore
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
             services.AddRazorPages();
-
-            // Add the PnP Core SDK library
-            services.AddPnPCore();
-            services.Configure<PnPCoreOptions>(Configuration.GetSection("PnPCore"));
-            services.AddPnPCoreAuthentication();
-            services.Configure<PnPCoreAuthenticationOptions>(Configuration.GetSection("PnPCore"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

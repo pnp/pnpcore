@@ -11,6 +11,10 @@ using PnP.Core.Services;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using Microsoft.Identity.Web;
+using PnP.Core.Auth;
+using Microsoft.Extensions.Options;
+using PnP.Core.Services.Builder.Configuration;
 
 namespace Demo.ASPNetCore.Controllers
 {
@@ -19,11 +23,18 @@ namespace Demo.ASPNetCore.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IPnPContextFactory _pnpContextFactory;
+        private readonly ITokenAcquisition _tokenAcquisition;
+        private readonly PnPCoreOptions _pnpCoreOptions;
 
-        public HomeController(IPnPContextFactory pnpContextFactory, ILogger<HomeController> logger)
+        public HomeController(IPnPContextFactory pnpContextFactory, 
+            ILogger<HomeController> logger,
+            ITokenAcquisition tokenAcquisition,
+            IOptions<PnPCoreOptions> pnpCoreOptions)
         {
             _pnpContextFactory = pnpContextFactory;
             _logger = logger;
+            _tokenAcquisition = tokenAcquisition;
+            _pnpCoreOptions = pnpCoreOptions?.Value;
         }
 
         public IActionResult Index()
@@ -31,11 +42,12 @@ namespace Demo.ASPNetCore.Controllers
             return View();
         }
 
+        [AuthorizeForScopes(Scopes = new[] { "https://officedevpnp.sharepoint.com/.default" })]
         public async Task<IActionResult> SiteInfo()
         {
             var model = new SiteInfoViewModel();
 
-            using (var context = await _pnpContextFactory.CreateAsync("DemoSite"))
+            using (var context = await createSiteContext())
             {
                 // Retrieving web with lists and masterpageurl loaded ==> SharePoint REST query
                 var web = await context.Web.GetAsync(w => w.Title, w => w.Description, w => w.MasterUrl);
@@ -52,7 +64,7 @@ namespace Demo.ASPNetCore.Controllers
         {
             var model = new ListInfoViewModel();
 
-            using (var context = await _pnpContextFactory.CreateAsync("DemoSite"))
+            using (var context = await createSiteContext())
             {
                 // Retrieving lists of the target web using Microsoft Graph
                 var web = await context.Web.GetAsync(w => w.Title);
@@ -77,7 +89,7 @@ namespace Demo.ASPNetCore.Controllers
         {
             var model = new ListItemsViewModel();
 
-            using (var context = await _pnpContextFactory.CreateAsync("DemoSite"))
+            using (var context = await createSiteContext())
             {
                 // Retrieving lists of the target web
                 var items = (from i in context.Web.Lists.GetByTitle(listTitle).Items
@@ -100,7 +112,7 @@ namespace Demo.ASPNetCore.Controllers
         {
             var model = new TeamInfoViewModel();
 
-            using (var context = await _pnpContextFactory.CreateAsync("DemoSite"))
+            using (var context = await createSiteContext())
             {
                 // Retrieving lists of the target web
                 var team = await context.Team.GetAsync(t => t.DisplayName,
@@ -118,6 +130,18 @@ namespace Demo.ASPNetCore.Controllers
             }
 
             return View("TeamInfo", model);
+        }
+
+        private async Task<PnPContext> createSiteContext()
+        {
+            var siteUrl = new Uri(_pnpCoreOptions.Sites["DemoSite"].SiteUrl);
+
+            return await _pnpContextFactory.CreateAsync(siteUrl,
+                            new ExternalAuthenticationProvider((resourceUri, scopes) =>
+                            {
+                                return _tokenAcquisition.GetAccessTokenForUserAsync(scopes).GetAwaiter().GetResult();
+                            }
+                            ));
         }
 
         [AllowAnonymous]
