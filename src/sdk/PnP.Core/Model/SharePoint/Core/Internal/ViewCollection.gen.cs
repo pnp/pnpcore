@@ -1,5 +1,6 @@
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -12,6 +13,16 @@ namespace PnP.Core.Model.SharePoint
         {
             this.PnPContext = context;
             this.Parent = parent;
+        }
+        
+        /// <summary>
+        /// Adds a new view to the collection
+        /// </summary>
+        /// <param name="viewOptions"></param>
+        /// <returns></returns>
+        public Task<IView> Add(ViewOptions viewOptions)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

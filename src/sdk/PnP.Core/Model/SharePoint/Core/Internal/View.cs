@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
+using System.Text.Json;
+using System.Dynamic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -11,6 +13,9 @@ namespace PnP.Core.Model.SharePoint
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class View
     {
+
+        internal const string ViewOptionsAdditionalInformationKey = "ViewOptions";
+
         public View()
         {
             // Starting Point: https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.View
@@ -29,6 +34,41 @@ namespace PnP.Core.Model.SharePoint
             //
             //return null;
             //};
+
+
+            AddApiCallHandler = async (additionalInformation) =>
+            {
+                var viewOptions = (ViewOptions)additionalInformation[ViewOptionsAdditionalInformationKey];
+                var entity = EntityManager.GetClassInfo(GetType(), this);
+                             
+                // Build body
+                var viewCreationInformation = new
+                {
+                    parameters = new
+                    {
+                        __metadata = new { type = "SP.ViewCreationInformation" },
+                        viewOptions.AssociatedContentTypeId,
+                        viewOptions.BaseViewId,
+                        viewOptions.CalendarViewStyles,
+                        viewOptions.Paged,
+                        viewOptions.PersonalView,
+                        viewOptions.Query,
+                        viewOptions.RowLimit,
+                        viewOptions.SetAsDefaultView,
+                        viewOptions.Title,
+                        viewOptions.ViewData,
+                        viewOptions.ViewFields,
+                        viewOptions.ViewTypeKind,
+                        viewOptions.ViewType2
+                    }
+                }.AsExpando();
+
+                string body = JsonSerializer.Serialize(viewCreationInformation, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+
+                return new ApiCall($"{entity.SharePointGet}/Add", ApiType.SPORest, body);
+            };
         }
+
+        
     }
 }
