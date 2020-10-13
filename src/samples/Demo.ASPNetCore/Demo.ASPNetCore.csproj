@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.8" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.19.0" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.0.0" />
-    <PackageReference Include="PnP.Core.Auth" Version="0.3.11-preview3" />
+    <PackageReference Include="PnP.Core.Auth" Version="0.3.12-preview3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
   </ItemGroup>
 
