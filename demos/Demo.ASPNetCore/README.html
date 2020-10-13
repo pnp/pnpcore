@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>PnP Core SDK - ASP.NET Core Sample | PnP Core SDK </title>
+    <title>Source code | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="PnP Core SDK - ASP.NET Core Sample | PnP Core SDK ">
+    <meta name="title" content="Source code | PnP Core SDK ">
     <meta name="generator" content="docfx 2.51.0.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -80,8 +80,8 @@
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/pnpcore/blob/dev/docs/demos/Demo.ASPNetCore/README.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="pnp-core-sdk---aspnet-core-sample">PnP Core SDK - ASP.NET Core Sample</h1>
-
+                    
+<p>git p# PnP Core SDK - ASP.NET Core Sample</p>
 <p>This solution demonstrates how the PnP Core SDK can be used in a ASP.NET Core web application</p>
 <h2 id="source-code">Source code</h2>
 <p>You can find the sample source code here: <a href="https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.ASPNetCore">/src/samples/Demo.ASPNetCore</a></p>
@@ -104,9 +104,13 @@
 <li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Sites.Read.All</strong></li>
 <li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Files.Read.All</strong></li>
 <li>Select <strong>SharePoint</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>AllSites.Read</strong></li>
+<li>Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Directory.Read.All</strong></li>
+<li>Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>User.Read</strong></li>
 </ul>
 </li>
 <li><p>Click <strong>Grant admin consent for {tenant}</strong></p>
+</li>
+<li><p>Go to <strong>Certificates &amp; Secrets</strong> and register a new client secret.</p>
 </li>
 <li><p>From <strong>Overview</strong>,
 -- copy the value of <strong>Directory (tenant) ID</strong>
@@ -118,11 +122,8 @@
 <li>Configure the name of your tenant as the value of <code>AzureAd:Domain</code> in appsettings.json setting</li>
 <li>Configure the Tenant ID of your app as the value of <code>AzureAd:TenantId</code> in appsettings.json setting</li>
 <li>Configure the Client ID of your app as the value of <code>AzureAd:ClientId</code> in appsettings.json setting</li>
-</ul>
-<p>Configure a set of credentials (username and password) for your target Microsoft SharePoint Online/Microsoft Teams environment in the Credential Manager of your Windows machine under the <strong>Windows Credentials</strong> &gt; <strong>Generic Credentials</strong> group.</p>
-<ul>
-<li>Configure the name of the created credentials as the value of <code>PnPCore:Credentials:CredentialManagerAuthentication:CredentialManagerName</code> in appsettings.json setting</li>
-<li>Configure the URL of a target Microsoft SharePoint Online modern team site collection as the value of <code>PnPCore:Credentials:Sites:DemoSite:SiteUrl</code> in appsettings.json setting</li>
+<li>Configure the Client Secret of your app as the value of <code>AzureAd:ClientSecret</code> in appsettings.json setting</li>
+<li>Configure the URL of the target &quot;modern&quot; team site as the value of <code>PnPCore:Sites:DemoSite:SiteUrl</code> in appsettings.json setting</li>
 </ul>
 <p>Be sure to have a Team in Microsoft Teams backing the modern team site in the above site collection</p>
 <h2 id="execute">Execute</h2>
