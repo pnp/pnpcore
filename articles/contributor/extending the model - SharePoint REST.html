@@ -168,25 +168,6 @@ internal partial class ContentType
 [SharePointProperty(&quot;DocumentTemplateUrl&quot;)]
 public string DocumentTemplate { get =&gt; GetValue&lt;string&gt;(); set =&gt; SetValue(value); }
 
-// Define a collection as expandable
-[SharePointProperty(&quot;Items&quot;, Expandable = true)]
-public IListItemCollection Items
-{
-    get
-    {
-        if (!HasValue(nameof(Items)))
-        {
-            var items = new ListItemCollection
-            {
-                PnPContext = this.PnPContext,
-                Parent = this
-            };
-            SetValue(items);
-        }
-        return GetValue&lt;IListItemCollection&gt;();
-    }
-}
-
 // Set the keyfield for this model class
 [KeyProperty(&quot;Id&quot;)]
 public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(value.ToString()); }
@@ -210,11 +191,6 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 <td>JsonPath</td>
 <td>No</td>
 <td>When the information returned from SharePoint REST is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild).</td>
-</tr>
-<tr>
-<td>Expandable</td>
-<td>No</td>
-<td>Defines that a collection is expandable, meaning it can be loaded via the $expand query parameter and used in the lambda expression in <code>Get</code> and <code>GetAsync</code> operations.</td>
 </tr>
 <tr>
 <td>ExpandByDefault</td>
