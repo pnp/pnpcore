@@ -81,7 +81,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        // TODO: Shouldn't ComplexType enforce expand without the need to mark it here?
         [SharePointProperty("EffectiveInformationRightsManagementSettings", Expandable = true)]
         public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings
         {
@@ -122,7 +121,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        // TODO: Shouldn't ComplexType enforce expand without the need to mark it here?
         [SharePointProperty("Properties", Expandable = true)]
         public IPropertyValues Properties
         {

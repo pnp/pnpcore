@@ -95,6 +95,7 @@ namespace PnP.Core.Model.SharePoint
         [GraphProperty("name", UseCustomMapping = false)]
         public string NameToConstructEntityType { get => GetValue<string>(); set => SetValue(value); }
 
+        [SharePointProperty("RootFolder", Expandable = true)]
         public IFolder RootFolder
         {
             get
@@ -118,6 +119,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        [SharePointProperty("InformationRightsManagementSettings", Expandable = true)]
         public IInformationRightsManagementSettings InformationRightsManagementSettings
         {
             get

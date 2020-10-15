@@ -450,6 +450,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        [SharePointProperty("EffectiveBasePermissions", Expandable = true)]
         public IBasePermissions EffectiveBasePermissions
         {
             get
