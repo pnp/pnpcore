@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,7 +119,6 @@ namespace PnP.Core.Model
                                     {
                                         classField = EnsureClassField(type, property, classInfo);
                                         classField.SharePointName = !string.IsNullOrEmpty(sharePointPropertyAttribute.FieldName) ? sharePointPropertyAttribute.FieldName : property.Name;
-                                        classField.SharePointExpandable = sharePointPropertyAttribute.Expandable;
                                         classField.ExpandableByDefault = sharePointPropertyAttribute.ExpandByDefault;
                                         classField.SharePointUseCustomMapping = sharePointPropertyAttribute.UseCustomMapping;
                                         classField.SharePointJsonPath = sharePointPropertyAttribute.JsonPath;
@@ -150,19 +150,36 @@ namespace PnP.Core.Model
                             }
                         }
 
-                        if (classField == null && !skipField)
+                        if (!skipField)
                         {
-                            classField = EnsureClassField(type, property, classInfo);
-                            // Property was not decorated with attributes
-                            if (!classInfo.SharePointTargets.Any())
+                            if (classField == null)
                             {
-                                // This is a Graph only property
-                                classField.GraphName = ToCamelCase(property.Name);
+                                classField = EnsureClassField(type, property, classInfo);
+                                // Property was not decorated with attributes
+                                if (!classInfo.SharePointTargets.Any())
+                                {
+                                    // This is a Graph only property
+                                    classField.GraphName = ToCamelCase(property.Name);
+                                }
+                                else
+                                {
+                                    // This is SharePoint/Graph property, we're not setting the GraphName here because in "mixed" objects the Graph properties must be explicitely marked with the GraphProperty attribute
+                                    classField.SharePointName = property.Name;
+                                }
                             }
-                            else
+
+                            // Automatically determine "expand" value for SharePoint properties
+                            if (!string.IsNullOrEmpty(classField.SharePointName))
                             {
-                                // This is SharePoint/Graph property, we're not setting the GraphName here because in "mixed" objects the Graph properties must be explicitely marked with the GraphProperty attribute
-                                classField.SharePointName = property.Name;
+
+                                if (JsonMappingHelper.IsModelCollection(classField.PropertyInfo.PropertyType) ||
+                                    JsonMappingHelper.IsModelType(classField.PropertyInfo.PropertyType) ||
+                                    JsonMappingHelper.IsComplexType(classField.PropertyInfo.PropertyType) ||
+                                    JsonMappingHelper.IsExpandoComplexType(classField.PropertyInfo.PropertyType) ||
+                                    JsonMappingHelper.IsComplexTypeList(classField.PropertyInfo.PropertyType))
+                                {
+                                    classField.SharePointExpandable = true;
+                                }
                             }
                         }
                     }

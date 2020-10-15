@@ -1451,6 +1451,11 @@ namespace PnP.Core.Services
             return propertyType.ImplementsInterface(typeof(IComplexType));
         }
 
+        internal static bool IsExpandoComplexType(Type propertyType)
+        {
+            return propertyType.ImplementsInterface(typeof(IExpandoComplexType));
+        }
+
         internal static bool IsModelCollection(Type propertyType)
         {
             return propertyType.ImplementsInterface(typeof(IDataModelCollection<>));

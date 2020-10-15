@@ -95,7 +95,6 @@ namespace PnP.Core.Model.SharePoint
         [GraphProperty("name", UseCustomMapping = false)]
         public string NameToConstructEntityType { get => GetValue<string>(); set => SetValue(value); }
 
-        [SharePointProperty("RootFolder", Expandable = true)]
         public IFolder RootFolder
         {
             get
@@ -119,7 +118,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("InformationRightsManagementSettings", Expandable = true)]
         public IInformationRightsManagementSettings InformationRightsManagementSettings
         {
             get
@@ -143,7 +141,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Items", Expandable = true)]
         [GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
         public IListItemCollection Items
         {
@@ -158,7 +155,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("ContentTypes", Expandable = true)]
         public IContentTypeCollection ContentTypes
         {
             get
@@ -172,7 +168,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Fields", Expandable = true)]
         public IFieldCollection Fields
         {
             get

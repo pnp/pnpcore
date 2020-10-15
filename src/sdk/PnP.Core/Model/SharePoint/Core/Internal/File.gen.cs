@@ -81,7 +81,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("EffectiveInformationRightsManagementSettings", Expandable = true)]
         public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings
         {
             get
@@ -101,7 +100,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("InformationRightsManagementSettings", Expandable = true)]
         public IInformationRightsManagementFileSettings InformationRightsManagementSettings
         {
             get
@@ -121,7 +119,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Properties", Expandable = true)]
         public IPropertyValues Properties
         {
             get
@@ -141,7 +138,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("VersionEvents", Expandable = true)]
         public List<IFileVersionEvent> VersionEvents
         {
             get
@@ -155,7 +151,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Versions", Expandable = true)]
         public List<IFileVersion> Versions
         {
             get
@@ -169,7 +164,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Author", Expandable = true)]
         public ISharePointUser Author
         {
             get
@@ -193,7 +187,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("CheckedOutByUser", Expandable = true)]
         public ISharePointUser CheckedOutByUser
         {
             get
@@ -217,7 +210,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("LockedByUser", Expandable = true)]
         public ISharePointUser LockedByUser
         {
             get
@@ -241,7 +233,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("ModifiedBy", Expandable = true)]
         public ISharePointUser ModifiedBy
         {
             get

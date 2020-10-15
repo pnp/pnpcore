@@ -19,7 +19,6 @@ namespace PnP.Core.Model.SharePoint
 
         public string Classification { get => GetValue<string>(); set => SetValue(value); }
 
-        [SharePointProperty("RootWeb", Expandable = true)]
         public IWeb RootWeb
         {
             get
@@ -45,6 +44,8 @@ namespace PnP.Core.Model.SharePoint
 
         private IWebCollection allWebs;
 
+        // Note: AllWebs is no real property in SharePoint, so expand/select do not return a thing...
+        // TODO: evaluate why we need this
         public IWebCollection AllWebs
         {
             get
@@ -64,7 +65,6 @@ namespace PnP.Core.Model.SharePoint
 
         public bool SocialBarOnSitePagesDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
-        [SharePointProperty("Features", Expandable = true)]
         public IFeatureCollection Features
         {
             get
@@ -143,7 +143,6 @@ namespace PnP.Core.Model.SharePoint
 
         public Guid RelatedGroupId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        [SharePointProperty("RecycleBin", Expandable = true)]
         public IRecycleBinItemCollection RecycleBin
         {
             get
@@ -193,7 +192,6 @@ namespace PnP.Core.Model.SharePoint
 
         public bool Upgrading { get => GetValue<bool>(); set => SetValue(value); }
 
-        [SharePointProperty("UserCustomActions", Expandable = true)]
         public IUserCustomActionCollection UserCustomActions
         {
             get

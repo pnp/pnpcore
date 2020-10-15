@@ -11,6 +11,11 @@
         }
 
         /// <summary>
+        /// Is this property an expandable property?
+        /// </summary>
+        public bool Expandable { get; set; }
+
+        /// <summary>
         /// Url to get this field, needed in case the field cannot be loaded via an expand
         /// </summary>
         public string Get { get; set; }

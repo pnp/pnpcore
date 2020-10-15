@@ -101,7 +101,6 @@ namespace PnP.Core.Model.SharePoint
 
         public string PrimaryColor { get => GetValue<string>(); set => SetValue(value); }
 
-        [SharePointProperty("RecycleBin", Expandable = true)]
         public IRecycleBinItemCollection RecycleBin
         {
             get
@@ -201,7 +200,6 @@ namespace PnP.Core.Model.SharePoint
         // Not in Web object, requires extra work to load
         public string SearchCenterUrl { get => GetValue<string>(); set => SetValue(value); }
 
-        [SharePointProperty("Fields", Expandable = true)]
         public IFieldCollection Fields
         {
             get
@@ -215,7 +213,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("AvailableFields", Expandable = true)]
         public IFieldCollection AvailableFields
         {
             get
@@ -229,7 +226,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Lists", Expandable = true)]
         // A special approach is needed to load all lists, comes down to adding the "system" facet to the select
         [GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
         public IListCollection Lists
@@ -245,7 +241,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("ContentTypes", Expandable = true)]
         public IContentTypeCollection ContentTypes
         {
             get
@@ -259,7 +254,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("AvailableContentTypes", Expandable = true)]
         public IContentTypeCollection AvailableContentTypes
         {
             get
@@ -273,7 +267,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Webs", Expandable = true)]
         public IWebCollection Webs
         {
             get
@@ -287,7 +280,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("SiteUserInfoList", Expandable = true)]
         public IList SiteUserInfoList
         {
             get
@@ -311,7 +303,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Features", Expandable = true)]
         public IFeatureCollection Features
         {
             get
@@ -325,8 +316,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-
-        [SharePointProperty("RootFolder", Expandable = true)]
         public IFolder RootFolder
         {
             get
@@ -350,7 +339,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Folders", Expandable = true)]
         public IFolderCollection Folders
         {
             get
@@ -364,7 +352,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("AllProperties", Expandable = true)]
         public IPropertyValues AllProperties
         {
             get
@@ -384,7 +371,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("CurrentUser", Expandable = true)]
         public ISharePointUser CurrentUser
         {
             get
@@ -408,7 +394,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("SiteUsers", Expandable = true)]
         public ISharePointUserCollection SiteUsers
         {
             get
@@ -422,7 +407,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("SiteGroups", Expandable = true)]
         public ISharePointGroupCollection SiteGroups
         {
             get
@@ -436,7 +420,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("UserCustomActions", Expandable = true)]
         public IUserCustomActionCollection UserCustomActions
         {
             get
@@ -450,7 +433,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("EffectiveBasePermissions", Expandable = true)]
         public IBasePermissions EffectiveBasePermissions
         {
             get

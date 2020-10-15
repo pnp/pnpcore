@@ -37,7 +37,6 @@ namespace PnP.Core.Model.SharePoint
 
         public long Size { get => GetValue<long>(); set => SetValue(value); }
 
-        [SharePointProperty("Author", Expandable = true)]
         public ISharePointUser Author
         {
             get
@@ -61,7 +60,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("DeletedBy", Expandable = true)]
         public ISharePointUser DeletedBy
         {
             get

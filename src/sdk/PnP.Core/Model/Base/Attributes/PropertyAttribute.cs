@@ -14,11 +14,6 @@ namespace PnP.Core.Model
         public string FieldName { get; set; }
 
         /// <summary>
-        /// Is this property an expandable property?
-        /// </summary>
-        public bool Expandable { get; set; }
-
-        /// <summary>
         /// Expand this property when there's a default get (a get without specifying the fields to load)
         /// </summary>
         public bool ExpandByDefault { get; set; }
