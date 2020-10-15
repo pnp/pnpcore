@@ -66,25 +66,6 @@ Whereas the `KeyProperty` attribute is always there once in each model class, th
 [SharePointProperty("DocumentTemplateUrl")]
 public string DocumentTemplate { get => GetValue<string>(); set => SetValue(value); }
 
-// Define a collection as expandable
-[SharePointProperty("Items", Expandable = true)]
-public IListItemCollection Items
-{
-    get
-    {
-        if (!HasValue(nameof(Items)))
-        {
-            var items = new ListItemCollection
-            {
-                PnPContext = this.PnPContext,
-                Parent = this
-            };
-            SetValue(items);
-        }
-        return GetValue<IListItemCollection>();
-    }
-}
-
 // Set the keyfield for this model class
 [KeyProperty("Id")]
 public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
@@ -96,7 +77,6 @@ Property | Required | Description
 ---------|----------|------------
 FieldName | Yes | Use this property when the SharePoint REST fieldname differs from the model property name, since the field name is required by the default constructor you always need to provide this value when you add this property.
 JsonPath | No | When the information returned from SharePoint REST is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild).
-Expandable | No | Defines that a collection is expandable, meaning it can be loaded via the $expand query parameter and used in the lambda expression in `Get` and `GetAsync` operations.
 ExpandByDefault | No | When the model contains a collection of other model objects then setting this attribute to true will automatically result in the population of that collection. This can negatively impact performance, so only set this when the collection is almost always needed.
 UseCustomMapping | No | Allows you to force a callout to the model's `MappingHandler` event handler whenever this property is populated. See the [Event Handlers](event%20handlers.md) article to learn more.
 
