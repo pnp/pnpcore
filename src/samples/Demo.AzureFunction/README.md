@@ -27,7 +27,7 @@ From the solution folder execute the following PowerShell.
 $site = "https://contoso.sharepoint.com/sites/pnpcoresdktestgroup"
 $tenant = "contoso.onmicrosoft.com"
 $pwd = "pwd"
-.\Configure.ps1 -SiteUrl $site -Tenant $pwd -CertificatePassword $pwd
+.\Configure.ps1 -SiteUrl $site -Tenant $tenant -CertificatePassword $pwd
 ```
 
 This script will:
