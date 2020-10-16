@@ -68,18 +68,21 @@ namespace PnP.Core.QueryModel
                 Guid batchRequestId = Guid.Empty;
 
                 // Build the needed API call
-                var apiCall = await QueryClient.BuildODataGetQueryAsync(concreteEntity, entityInfo, context, query, memberName).ConfigureAwait(false);
+                var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, entityInfo, context, query, memberName).ConfigureAwait(false);
 
-                // Add the request to the current batch
-                batchRequestId = context.CurrentBatch.Add(
-                    parent as TransientObject,
-                    parentEntityInfo,
-                    HttpMethod.Get,
-                    apiCall,
-                    default,
-                    parentEntityWithMappingHandlers.MappingHandler,
-                    parentEntityWithMappingHandlers.PostMappingHandler
-                    );
+                foreach (var apiCall in apiCalls)
+                {
+                    // Add the request to the current batch
+                    batchRequestId = context.CurrentBatch.Add(
+                        parent as TransientObject,
+                        parentEntityInfo,
+                        HttpMethod.Get,
+                        apiCall,
+                        default,
+                        parentEntityWithMappingHandlers.MappingHandler,
+                        parentEntityWithMappingHandlers.PostMappingHandler
+                        );
+                }
 
                 // and execute the request
                 await context.ExecuteAsync().ConfigureAwait(false);

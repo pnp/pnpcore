@@ -205,20 +205,12 @@ namespace PnP.Core.QueryModel
                 Expression<Func<T, bool>> predicate,
                 params Expression<Func<T, object>>[] selectors)
         {
-            IQueryable<T> selectionTarget = source;
-
-            if (selectors != null)
-            {
-                foreach (var s in selectors)
-                {
-                    selectionTarget = selectionTarget.Load(s);
-                }
-            }
-
             if (!(source.Provider is IAsyncQueryProvider asyncQueryProvider))
             {
                 throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
             }
+
+            IQueryable<T> selectionTarget = QueryClient.ProcessExpression(source, selectors);
 
             return await asyncQueryProvider.ExecuteAsync<Task<T>>(
                 Expression.Call(
@@ -233,15 +225,7 @@ namespace PnP.Core.QueryModel
                 Expression<Func<T, bool>> predicate,
                 params Expression<Func<T, object>>[] selectors)
         {
-            IQueryable<T> selectionTarget = source;
-
-            if (selectors != null)
-            {
-                foreach (var s in selectors)
-                {
-                    selectionTarget = selectionTarget.Load(s);
-                }
-            }
+            IQueryable<T> selectionTarget = QueryClient.ProcessExpression(source, selectors);
 
             return source.Provider.Execute<T>(
                 Expression.Call(

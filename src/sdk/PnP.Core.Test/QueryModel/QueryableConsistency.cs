@@ -57,6 +57,24 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        public async Task TestQuerySystemListWithExpandableProperty()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // this will use Graph under the covers!
+                var sitePages = context.Web.Lists.GetByTitle("Site Pages", p=>p.Title, p=>p.Description, p => p.Items);
+                Assert.IsTrue(sitePages.Requested);
+                Assert.IsTrue(sitePages.Title == "Site Pages");
+                Assert.IsTrue(sitePages.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(sitePages.Items.Requested == true);
+                Assert.IsTrue(sitePages.Items.Count() > 0);
+                // Since no select was provided all properties should have been loaded
+                Assert.IsFalse(sitePages.IsPropertyAvailable(p => p.TemplateType));
+            }
+        }
+
+        [TestMethod]
         public async Task TestQuerySystemListWithSelectToList()
         {
             //TestCommon.Instance.Mocking = false;

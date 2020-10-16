@@ -1,12 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.Model.Teams;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
@@ -67,6 +69,73 @@ namespace PnP.Core.Test.Base
             foreach(var request in batch.Requests)
             {
                 requests.Add(CleanRequestUrl((input.Item1 as IDataModelWithContext).PnPContext, request.Value.ApiCall.Request));
+            }
+
+            return requests;
+        }
+
+        private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input, ODataQuery<TModelInterface> query)
+        {
+            // Instantiate the relevant collection class
+            var assembly = Assembly.GetAssembly(typeof(IWeb));
+            var collectionType = assembly.GetType(typeof(TModel).FullName + "Collection");
+            var modelCollection = Activator.CreateInstance(collectionType, (input.Item1 as IDataModelWithContext).PnPContext, null, null);
+
+            // Process the input expressions
+            IQueryable<TModelInterface> selectionTarget = modelCollection as IQueryable<TModelInterface>;
+            if (input.Item3 != null)
+            {
+                selectionTarget = QueryClient.ProcessExpression(selectionTarget, input.Item3);
+            }
+
+            // Translate the expressions to a query
+            var query2 = DataModelQueryProvider<TModelInterface>.Translate(selectionTarget.Expression);
+
+            // Unite with the provided query
+            if (query.Top.HasValue)
+            {
+                query2.Top = query.Top;
+            }
+
+            if (query.Skip.HasValue)
+            {
+                query2.Skip = query.Skip;
+            }
+
+            query2.Filters.AddRange(query.Filters);
+
+            query2.OrderBy.AddRange(query.OrderBy);
+
+            if (query.Select.Count > 0)
+            {
+                foreach(var select in query.Select)
+                {
+                    if (!query2.Select.Contains(select))
+                    {
+                        query2.Select.Add(select);
+                    }
+                }
+            }
+
+            if (query.Expand.Count > 0)
+            {
+                foreach (var expand in query.Expand)
+                {
+                    if (!query2.Expand.Contains(expand))
+                    {
+                        query2.Expand.Add(expand);
+                    }
+                }
+            }
+
+            List<string> requests = new List<string>();
+
+            // Build the proper ApiCall
+            var apiCalls = await QueryClient.BuildODataGetQueryAsync(input.Item1, input.Item2, (input.Item1 as IDataModelWithContext).PnPContext, query2, null);
+
+            foreach(var apiCall in apiCalls)
+            {
+                requests.Add(CleanRequestUrl((input.Item1 as IDataModelWithContext).PnPContext, apiCall.Request));
             }
 
             return requests;
@@ -334,7 +403,87 @@ namespace PnP.Core.Test.Base
             var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Id, p => p.Groups.LoadProperties(
                 p=>p.Name, p=>p.Id, p=>p.Sets )
             }));
-        }        
+        }
+        #endregion
+
+        #region Linq query tests
+
+        [TestMethod]
+        public async Task GetLinqListGraph()
+        {
+            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(), new ODataQuery<IList> { Top = 10, Skip = 5 });
+            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list&$top=10&$skip=5", true);
+        }
+
+        [TestMethod]
+        public async Task GetLinqListGraphSingleSimpleProperty()
+        {
+            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+            var requests = await GetODataAPICallTestAsync(
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }), 
+                new ODataQuery<IList> { Top = 10, Skip = 5 });
+            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=displayName,id,system&$top=10&$skip=5", true);
+        }
+
+        [TestMethod]
+        public async Task GetLinqListGraphMultipleSimpleProperty()
+        {
+            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+            var requests = await GetODataAPICallTestAsync(
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p=>p.Description }), 
+                new ODataQuery<IList> { Top = 10, Skip = 5 });
+            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=displayName,description,id,system&$top=10&$skip=5", true);
+        }
+
+        [TestMethod]
+        public async Task GetLinqListSingleSimpleProperty()
+        {
+            var requests = await GetODataAPICallTestAsync(
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }), 
+                new ODataQuery<IList> { Top = 10, Skip = 5 });
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=ListExperienceOptions,Id&$top=10&$skip=5", true);
+        }
+
+        [TestMethod]
+        public async Task GetLinqListMultipleSimpleProperty()
+        {
+            var requests = await GetODataAPICallTestAsync(
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Description }), 
+                new ODataQuery<IList> { Top = 10, Skip = 5 });
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=ListExperienceOptions,Description,Id&$top=10&$skip=5", true);
+        }
+
+        [TestMethod]
+        public async Task GetLinqListSingleSimpleExpandProperty()
+        {
+            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+            var requests = await GetODataAPICallTestAsync(
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.InformationRightsManagementSettings }),
+                new ODataQuery<IList> { Top = 10, Skip = 5 });
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=Id&$top=10&$skip=5&$expand=InformationRightsManagementSettings", true);
+        }
+
+        [TestMethod]
+        public async Task GetLinqListSingleSimpleNormalAndExpandProperty()
+        {
+            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+            var requests = await GetODataAPICallTestAsync(
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.InformationRightsManagementSettings }),
+                new ODataQuery<IList> { Top = 10, Skip = 5 });
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=Title,Id&$top=10&$skip=5&$expand=InformationRightsManagementSettings", true);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientException))]
+        public async Task GetLinqTermStoreSingleSimpleNormalAndExpandProperty()
+        {
+            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+            var requests = await GetODataAPICallTestAsync(
+                BuildModel<TermSet, ITermSet>(new Expression<Func<ITermSet, object>>[] { p => p.Id, p=>p.Terms }),
+                new ODataQuery<ITermSet> { Top = 10, Skip = 5 });
+        }
+
         #endregion
 
     }

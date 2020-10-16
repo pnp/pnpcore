@@ -698,14 +698,15 @@ namespace PnP.Core.Services
 
         #region LINQ data get
 
-        internal static async Task<ApiCall> BuildODataGetQueryAsync<TModel>(object concreteEntity, EntityInfo entityInfo, PnPContext pnpContext, ODataQuery<TModel> query, string memberName)
+        internal static async Task<List<ApiCall>> BuildODataGetQueryAsync<TModel>(object concreteEntity, EntityInfo entityInfo, PnPContext pnpContext, ODataQuery<TModel> query, string memberName)
         {
+            List<ApiCall> response = new List<ApiCall>();
 
             // Verify if we're not asking fields which anyhow cannot (yet) be served via Graph
             bool canUseGraph = true;
             // Ensure the model's keyfield was requested, this is needed to ensure the loaded model can be added/merged into an existing collection
             // Only do this when there was no field filtering, without filtering all default fields are anyhow returned
-            if (query.Select.Any())
+            if (query.Select.Any() || query.Expand.Any())
             {
                 if (!query.Select.Contains(entityInfo.ActualKeyFieldName))
                 {
@@ -716,6 +717,23 @@ namespace PnP.Core.Services
                 {
                     var field = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
                     if (string.IsNullOrEmpty(field.GraphName))
+                    {
+                        canUseGraph = false;
+                        break;
+                    }
+                }
+
+                foreach (var expandProperty in query.Expand)
+                {
+                    var field = entityInfo.Fields.FirstOrDefault(p => p.Name == expandProperty);
+                    if (string.IsNullOrEmpty(field.GraphName))
+                    {
+                        canUseGraph = false;
+                        break;
+                    }
+
+                    // fall back to REST if we have an expand with a separate get...only works if we support REST
+                    if (!string.IsNullOrEmpty(field.GraphGet) && !string.IsNullOrEmpty(field.SharePointName))
                     {
                         canUseGraph = false;
                         break;
@@ -753,16 +771,26 @@ namespace PnP.Core.Services
                     }
                 }
 
+                foreach (var selectProperty in query.Expand.ToList())
+                {
+                    var prop = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
+                    if (prop != null && !string.IsNullOrEmpty(prop.GraphName) && !string.IsNullOrEmpty(prop.GraphGet))
+                    {
+                        throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Unsupported_LinqExpandOfPropertyWithOwnGet, selectProperty));
+                    }
+                }
+
                 // Build the Graph request URL
                 var requestUrl = $"{entityInfo.GraphLinqGet}?{query.ToQueryString(ODataTargetPlatform.Graph, urlEncode: false)}";
                 requestUrl = await TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, pnpContext).ConfigureAwait(false);
 
-                return new ApiCall 
+                response.Add(new ApiCall 
                 {
                     Type = entityInfo.GraphBeta ? ApiType.GraphBeta : ApiType.Graph,
                     ReceivingProperty = memberName,
                     Request = requestUrl
-                };
+                });
+
             }
             else
             {
@@ -780,13 +808,51 @@ namespace PnP.Core.Services
                 var requestUrl = $"{pnpContext.Uri.ToString().TrimEnd('/')}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
                 requestUrl = await TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).ConfigureAwait(false);
 
-                return new ApiCall 
+                response.Add(new ApiCall 
                 {
                     Type = ApiType.SPORest,
                     ReceivingProperty = memberName,
                     Request = requestUrl
-                };
+                });
             }
+
+            return response;
+        }
+
+        internal static IQueryable<TModel> ProcessExpression<TModel>(IQueryable<TModel> source, params Expression<Func<TModel, object>>[] selectors)
+        {
+            IQueryable<TModel> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                var model = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel));
+
+                (model as IDataModelWithContext).PnPContext = (source as IDataModelWithContext).PnPContext;
+
+                var entityInfo = EntityManager.GetClassInfo(typeof(TModel), model as BaseDataModel<TModel>, selectors);
+
+                IEnumerable<EntityFieldInfo> fields = entityInfo.Fields.Where(p => p.Load);
+
+                foreach (var s in selectors)
+                {
+                    var fieldToLoad = EntityManager.GetFieldToLoad(entityInfo, s);
+
+                    var field = fields.FirstOrDefault(p => p.Name == fieldToLoad);
+                    if (field != null)
+                    {
+                        if (field.SharePointExpandable || field.GraphExpandable || !string.IsNullOrEmpty(field.GraphGet))
+                        {
+                            selectionTarget = selectionTarget.Include(s);
+                        }
+                        else
+                        {
+                            selectionTarget = selectionTarget.Load(s);
+                        }
+                    }
+                }
+            }
+
+            return selectionTarget;
         }
 
         #endregion

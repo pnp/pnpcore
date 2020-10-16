@@ -265,23 +265,6 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Creates a concrete instance of a domain model type based on the reference type
-        /// </summary>
-        /// <param name="type">The reference model type, can be an interface or a class</param>
-        /// <returns>Entity model class describing this model instance</returns>
-        internal static TransientObject GetEntityConcreteInstance(Type type)
-        {
-            if (type is null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            type = GetEntityConcreteType(type);
-
-            return (TransientObject)Activator.CreateInstance(type);
-        }
-
-        /// <summary>
         /// Translates model into a set of classes that are used to drive CRUD operations, this takes into account the passed expressions
         /// </summary>
         /// <param name="modelType">The Type of the model object to process</param>
@@ -306,27 +289,7 @@ namespace PnP.Core.Model
                 List<string> sharePointFieldsToLoad = new List<string>();
                 foreach (Expression<Func<TModel, object>> expression in expressions)
                 {
-                    string fieldToLoad = null;
-                    if (expression.Body is MemberExpression)
-                    {
-                        fieldToLoad = ((MemberExpression)expression.Body).Member.Name;
-
-                    }
-                    else if (expression.Body is UnaryExpression)
-                    {
-                        var a = (expression.Body as UnaryExpression).Operand;
-                        if (a is MemberExpression)
-                        {
-                            fieldToLoad = (a as MemberExpression).Member.Name;
-                        }
-                    }
-                    else if (expression.Body is MethodCallExpression)
-                    {
-                        if ((expression.Body as MethodCallExpression).Method.Name == "LoadProperties")
-                        {
-                            fieldToLoad = ParseInclude(entityInfo, expression as LambdaExpression, null);
-                        }
-                    }
+                    string fieldToLoad = GetFieldToLoad(entityInfo, expression);
 
                     if (fieldToLoad != null)
                     {
@@ -399,6 +362,34 @@ namespace PnP.Core.Model
             }
 
             return entityInfo;
+        }
+
+        internal static string GetFieldToLoad<TModel>(EntityInfo entityInfo, Expression<Func<TModel, object>> expression)
+        {
+            string fieldToLoad = null;
+
+            if (expression.Body is MemberExpression)
+            {
+                fieldToLoad = ((MemberExpression)expression.Body).Member.Name;
+
+            }
+            else if (expression.Body is UnaryExpression)
+            {
+                var a = (expression.Body as UnaryExpression).Operand;
+                if (a is MemberExpression)
+                {
+                    fieldToLoad = (a as MemberExpression).Member.Name;
+                }
+            }
+            else if (expression.Body is MethodCallExpression)
+            {
+                if ((expression.Body as MethodCallExpression).Method.Name == "LoadProperties")
+                {
+                    fieldToLoad = ParseInclude(entityInfo, expression as LambdaExpression, null);
+                }
+            }
+
+            return fieldToLoad;
         }
 
         private static string ParseInclude(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)
