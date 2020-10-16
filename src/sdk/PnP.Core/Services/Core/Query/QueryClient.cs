@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
@@ -697,7 +698,7 @@ namespace PnP.Core.Services
 
         #region LINQ data get
 
-        internal static async Task<ApiCall> BuildODataGetQuery<TModel>(object concreteEntity, EntityInfo entityInfo, PnPContext pnpContext, ODataQuery<TModel> query, string memberName)
+        internal static async Task<ApiCall> BuildODataGetQueryAsync<TModel>(object concreteEntity, EntityInfo entityInfo, PnPContext pnpContext, ODataQuery<TModel> query, string memberName)
         {
 
             // Verify if we're not asking fields which anyhow cannot (yet) be served via Graph
@@ -725,6 +726,23 @@ namespace PnP.Core.Services
             // We try to use Graph First, if selected by the user and if the query is supported by Graph
             if (canUseGraph && pnpContext.GraphFirst && !string.IsNullOrEmpty(entityInfo.GraphLinqGet))
             {
+                if (concreteEntity is IList)
+                {
+                    if (query.Select.Count == 0)
+                    {
+                        // We need to load the system facet to get all lists, hence we also need to load all other properties since no specific fields were requested
+                        query.Select.AddRange(List.DefaultGraphFieldsToLoad.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+                    }
+                    else
+                    {
+                        // Specific fields where requested, ensure the system field is present
+                        if (!query.Select.Contains(List.SystemFacet))
+                        {
+                            query.Select.Add(List.SystemFacet);
+                        }
+                    }
+                }                
+                
                 // Ensure that selected properties which are marked as expandable are also used in that manner
                 foreach (var selectProperty in query.Select)
                 {

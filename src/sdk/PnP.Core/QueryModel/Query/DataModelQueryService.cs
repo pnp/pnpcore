@@ -68,7 +68,7 @@ namespace PnP.Core.QueryModel
                 Guid batchRequestId = Guid.Empty;
 
                 // Build the needed API call
-                var apiCall = await QueryClient.BuildODataGetQuery(concreteEntity, entityInfo, context, query, memberName).ConfigureAwait(false);
+                var apiCall = await QueryClient.BuildODataGetQueryAsync(concreteEntity, entityInfo, context, query, memberName).ConfigureAwait(false);
 
                 // Add the request to the current batch
                 batchRequestId = context.CurrentBatch.Add(

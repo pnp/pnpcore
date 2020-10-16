@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using PnP.Core.Model;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,64 @@ namespace PnP.Core.Test.QueryModel
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
         }
+
+        /// <summary>
+        /// GetByTitle on a list is a special case as it automatically adds the "system" facet to the query
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod]
+        public async Task TestQuerySystemList()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // this will use Graph under the covers!
+                var sitePages = context.Web.Lists.GetByTitle("Site Pages");
+                Assert.IsTrue(sitePages.Requested);
+                Assert.IsTrue(sitePages.Title == "Site Pages");
+                // Since no select was provided all properties should have been loaded
+                Assert.IsTrue(sitePages.IsPropertyAvailable(p => p.Description));
+                Assert.IsTrue(sitePages.IsPropertyAvailable(p => p.TemplateType));
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQuerySystemListWithSelect()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // this will use Graph under the covers!
+                var sitePages = context.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.Description);
+                Assert.IsTrue(sitePages.Requested);
+                Assert.IsTrue(sitePages.Title == "Site Pages");
+                Assert.IsTrue(sitePages.IsPropertyAvailable(p => p.Description));
+                // Since no select was provided all properties should have been loaded
+                Assert.IsFalse(sitePages.IsPropertyAvailable(p => p.TemplateType));
+            }
+        }
+
+        [TestMethod]
+        public async Task TestQuerySystemListWithSelectToList()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Get the whole set of lists via LINQ - shoudl use Graph and should contain the "Site Pages" system list
+                var query = (from l in context.Web.Lists
+                             select l)
+                            .Load(l => l.Id, l => l.Title, l => l.Description);
+
+                // Save the count of retrieved lists
+                var queryResult = query.ToList();
+                
+                Assert.IsTrue(queryResult.Count >= 5);
+                Assert.IsTrue(queryResult.Count(l => l.Title == "Site Pages") == 1);
+                Assert.IsTrue(context.Web.Lists.Length >= 5);
+                Assert.IsTrue(context.Web.Lists.Count(l => l.Title == "Site Pages") == 1);
+            }
+        }
+
 
         [TestMethod]
         public async Task TestQueryListsConsistency()
