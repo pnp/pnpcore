@@ -3,7 +3,7 @@
     /// <summary>
     /// Key/Value term property
     /// </summary>
-    public interface ITermProperty : IComplexType
+    public interface ITermProperty : IComplexType<ITermProperty>
     {
         /// <summary>
         /// Property key

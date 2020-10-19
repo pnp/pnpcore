@@ -88,7 +88,7 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             // Logic to set the EntityType metadata property
-            if (this.IsPropertyAvailable(p => p.NameToConstructEntityType) && this.IsPropertyAvailable(p => p.TemplateType) && !Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
+            if (this.HasValue(nameof(NameToConstructEntityType)) && this.IsPropertyAvailable(p => p.TemplateType) && !Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
             {
                 if (!string.IsNullOrEmpty(NameToConstructEntityType))
                 {

@@ -2429,7 +2429,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("0.1", documentWithVersions.Versions[0].VersionLabel);
                 Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
 
-                Assert.AreEqual(3, documentWithVersions.Versions[2].ID);
+                Assert.AreEqual(3, documentWithVersions.Versions[2].Id);
                 Assert.IsTrue(documentWithVersions.Versions[2].Created != DateTime.MinValue);
             }
 

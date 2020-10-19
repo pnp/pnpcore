@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Note: this class is generated, please don't modify this code by hand!
     /// 
     /// </summary>
-    internal partial class FileVersionEvent : BaseDataModel<IFileVersionEvent>, IFileVersionEvent
+    internal partial class FileVersionEvent : BaseComplexType<IFileVersionEvent>, IFileVersionEvent
     {
         public string Editor { get => GetValue<string>(); set => SetValue(value); }
 

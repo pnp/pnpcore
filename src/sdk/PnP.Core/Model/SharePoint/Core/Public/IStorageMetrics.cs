@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a StorageMetrics object
     /// </summary>
     [ConcreteType(typeof(StorageMetrics))]
-    public interface IStorageMetrics : IComplexType
+    public interface IStorageMetrics : IComplexType<IStorageMetrics>
     {
         /// <summary>
         /// Gets the last modified date and time of the storage resource.

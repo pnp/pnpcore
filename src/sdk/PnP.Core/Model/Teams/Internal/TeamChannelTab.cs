@@ -31,19 +31,19 @@ namespace PnP.Core.Model.Teams
                         {
                             tab.Configuration = new ExpandoObject();
 
-                            if (Configuration.IsPropertyAvailable<ITeamChannelTabConfiguration>(p=>p.EntityId))
+                            if (Configuration.IsPropertyAvailable(p=>p.EntityId))
                             {
                                 tab.Configuration.EntityId = Configuration.EntityId;
                             }
-                            if (Configuration.IsPropertyAvailable<ITeamChannelTabConfiguration>(p => p.ContentUrl))
+                            if (Configuration.IsPropertyAvailable(p => p.ContentUrl))
                             {
                                 tab.Configuration.ContentUrl = Configuration.ContentUrl;
                             }
-                            if (Configuration.IsPropertyAvailable<ITeamChannelTabConfiguration>(p => p.RemoveUrl))
+                            if (Configuration.IsPropertyAvailable(p => p.RemoveUrl))
                             {
                                 tab.Configuration.RemoveUrl = Configuration.RemoveUrl;
                             }
-                            if (Configuration.IsPropertyAvailable<ITeamChannelTabConfiguration>(p => p.WebsiteUrl))
+                            if (Configuration.IsPropertyAvailable(p => p.WebsiteUrl))
                             {
                                 tab.Configuration.WebsiteUrl = Configuration.WebsiteUrl;
                             }

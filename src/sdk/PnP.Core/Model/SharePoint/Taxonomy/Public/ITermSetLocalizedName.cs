@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents the localized name used in the term store, which identifies the name in the localized language.
     /// </summary>
-    public interface ITermSetLocalizedName : IComplexType
+    public interface ITermSetLocalizedName : IComplexType<ITermSetLocalizedName>
     {
         /// <summary>
         /// The language for the label.

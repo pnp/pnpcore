@@ -3,7 +3,7 @@
     /// <summary>
     /// Public interface to define the messaging settings for a Team
     /// </summary>
-    public interface ITeamMessagingSettings: IComplexType
+    public interface ITeamMessagingSettings: IComplexType<ITeamMessagingSettings>
     {
         /// <summary>
         /// Defines whether users can edit messages

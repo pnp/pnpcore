@@ -5,7 +5,7 @@ namespace PnP.Core.Model.Teams
     /// <summary>
     /// Identity information about a Teams element
     /// </summary>
-    public interface ITeamIdentitySet : IComplexType
+    public interface ITeamIdentitySet : IComplexType<ITeamIdentitySet>
     {
         /// <summary>
         /// Optional. The application associated with this action.

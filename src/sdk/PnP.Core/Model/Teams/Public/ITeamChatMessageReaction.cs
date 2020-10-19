@@ -5,7 +5,7 @@ namespace PnP.Core.Model.Teams
     /// <summary>
     /// Represents a reaction to a chatMessage entity.
     /// </summary>
-    public interface ITeamChatMessageReaction : IComplexType
+    public interface ITeamChatMessageReaction : IComplexType<ITeamChatMessageReaction>
     {
         /// <summary>
         /// The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. 

@@ -3,7 +3,7 @@
     /// <summary>
     /// Public interface to define the guest settings for a Team
     /// </summary>
-    public interface ITeamGuestSettings: IComplexType
+    public interface ITeamGuestSettings: IComplexType<ITeamGuestSettings>
     {
         /// <summary>
         /// Defines whether the guests can create or update channels
