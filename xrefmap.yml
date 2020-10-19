@@ -4339,44 +4339,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ValidationMessage
   nameWithType: CommonFieldOptions.ValidationMessage
-- uid: PnP.Core.Model.SharePoint.Core.Public.Extensions
-  name: PnP.Core.Model.SharePoint.Core.Public.Extensions
-  href: api/PnP.Core.Model.SharePoint.Core.Public.Extensions.html
-  commentId: N:PnP.Core.Model.SharePoint.Core.Public.Extensions
-  fullName: PnP.Core.Model.SharePoint.Core.Public.Extensions
-  nameWithType: PnP.Core.Model.SharePoint.Core.Public.Extensions
-- uid: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions
-  name: WebExtensions
-  href: api/PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.html
-  commentId: T:PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions
-  fullName: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions
-  nameWithType: WebExtensions
-- uid: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSite(PnP.Core.Model.SharePoint.IWeb)
-  name: IsNoScriptSite(IWeb)
-  href: api/PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.html#PnP_Core_Model_SharePoint_Core_Public_Extensions_WebExtensions_IsNoScriptSite_PnP_Core_Model_SharePoint_IWeb_
-  commentId: M:PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSite(PnP.Core.Model.SharePoint.IWeb)
-  fullName: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSite(PnP.Core.Model.SharePoint.IWeb)
-  nameWithType: WebExtensions.IsNoScriptSite(IWeb)
-- uid: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSite*
-  name: IsNoScriptSite
-  href: api/PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.html#PnP_Core_Model_SharePoint_Core_Public_Extensions_WebExtensions_IsNoScriptSite_
-  commentId: Overload:PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSite
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSite
-  nameWithType: WebExtensions.IsNoScriptSite
-- uid: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSiteAsync(PnP.Core.Model.SharePoint.IWeb)
-  name: IsNoScriptSiteAsync(IWeb)
-  href: api/PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.html#PnP_Core_Model_SharePoint_Core_Public_Extensions_WebExtensions_IsNoScriptSiteAsync_PnP_Core_Model_SharePoint_IWeb_
-  commentId: M:PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSiteAsync(PnP.Core.Model.SharePoint.IWeb)
-  fullName: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSiteAsync(PnP.Core.Model.SharePoint.IWeb)
-  nameWithType: WebExtensions.IsNoScriptSiteAsync(IWeb)
-- uid: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSiteAsync*
-  name: IsNoScriptSiteAsync
-  href: api/PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.html#PnP_Core_Model_SharePoint_Core_Public_Extensions_WebExtensions_IsNoScriptSiteAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSiteAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.Core.Public.Extensions.WebExtensions.IsNoScriptSiteAsync
-  nameWithType: WebExtensions.IsNoScriptSiteAsync
 - uid: PnP.Core.Model.SharePoint.CustomizedPageStatus
   name: CustomizedPageStatus
   href: api/PnP.Core.Model.SharePoint.CustomizedPageStatus.html
@@ -10912,6 +10874,102 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListCollection.AddBatchAsync
   nameWithType: IListCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetById(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetById(Guid, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetById_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetById(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetById(Guid, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetById(Guid, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetById(Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetById(Guid, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetById(Guid, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetById*
+  name: GetById
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetById_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetById
+  nameWithType: IListCollection.GetById
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByIdAsync(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByIdAsync(Guid, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByIdAsync_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByIdAsync(Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByIdAsync(Guid, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByIdAsync(Guid, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByIdAsync(Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByIdAsync(Guid, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByIdAsync(Guid, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByIdAsync
+  nameWithType: IListCollection.GetByIdAsync
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrl(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByServerRelativeUrl(String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrl_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrl(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByServerRelativeUrl(String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrl(System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrl(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByServerRelativeUrl(String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByServerRelativeUrl(String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrl*
+  name: GetByServerRelativeUrl
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrl_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrl
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrl
+  nameWithType: IListCollection.GetByServerRelativeUrl
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByServerRelativeUrlAsync(String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrlAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByServerRelativeUrlAsync(String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlAsync(System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlAsync(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByServerRelativeUrlAsync(String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByServerRelativeUrlAsync(String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlAsync*
+  name: GetByServerRelativeUrlAsync
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrlAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByServerRelativeUrlAsync
+  nameWithType: IListCollection.GetByServerRelativeUrlAsync
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByTitle(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByTitle(String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitle_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByTitle(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByTitle(String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByTitle(System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByTitle(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByTitle(String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByTitle(String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByTitle*
+  name: GetByTitle
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitle_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByTitle
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByTitle
+  nameWithType: IListCollection.GetByTitle
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name: GetByTitleAsync(String, Expression<Func<IList, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitleAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
+  name.vb: GetByTitleAsync(String, Expression(Of Func(Of IList, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync(System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
+  nameWithType: IListCollection.GetByTitleAsync(String, Expression<Func<IList, Object>>[])
+  nameWithType.vb: IListCollection.GetByTitleAsync(String, Expression(Of Func(Of IList, Object))())
+- uid: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync*
+  name: GetByTitleAsync
+  href: api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitleAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListCollection.GetByTitleAsync
+  nameWithType: IListCollection.GetByTitleAsync
 - uid: PnP.Core.Model.SharePoint.IListItem
   name: IListItem
   href: api/PnP.Core.Model.SharePoint.IListItem.html
@@ -11186,6 +11244,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.Contains
   nameWithType: IListItemCollection.Contains
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: GetById(Int32, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetById_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: GetById(Int32, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IListItemCollection.GetById(Int32, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IListItemCollection.GetById(Int32, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetById*
+  name: GetById
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetById_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemCollection.GetById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetById
+  nameWithType: IListItemCollection.GetById
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name: GetByIdAsync(Int32, Expression<Func<IListItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
+  name.vb: GetByIdAsync(Int32, Expression(Of Func(Of IListItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
+  nameWithType: IListItemCollection.GetByIdAsync(Int32, Expression<Func<IListItem, Object>>[])
+  nameWithType.vb: IListItemCollection.GetByIdAsync(Int32, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync
+  nameWithType: IListItemCollection.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.IPropertyValues
   name: IPropertyValues
   href: api/PnP.Core.Model.SharePoint.IPropertyValues.html
@@ -11655,6 +11745,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync
   nameWithType: IRecycleBinItemCollection.DeleteAllSecondStageItemsBatchAsync
+- uid: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById(Guid,Expression{Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])
+  name: GetById(Guid, Expression<Func<IRecycleBinItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html#PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetById_Guid_Expression_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById(Guid,Expression{Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])
+  name.vb: GetById(Guid, Expression(Of Func(Of IRecycleBinItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById(Guid, Expression<Func<PnP.Core.Model.SharePoint.IRecycleBinItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById(Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IRecycleBinItem, System.Object))())
+  nameWithType: IRecycleBinItemCollection.GetById(Guid, Expression<Func<IRecycleBinItem, Object>>[])
+  nameWithType.vb: IRecycleBinItemCollection.GetById(Guid, Expression(Of Func(Of IRecycleBinItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById*
+  name: GetById
+  href: api/PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html#PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetById_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetById
+  nameWithType: IRecycleBinItemCollection.GetById
+- uid: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync(Guid,Expression{Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])
+  name: GetByIdAsync(Guid, Expression<Func<IRecycleBinItem, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html#PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetByIdAsync_Guid_Expression_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync(Guid,Expression{Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])
+  name.vb: GetByIdAsync(Guid, Expression(Of Func(Of IRecycleBinItem, Object))())
+  fullName: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync(Guid, Expression<Func<PnP.Core.Model.SharePoint.IRecycleBinItem, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync(Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IRecycleBinItem, System.Object))())
+  nameWithType: IRecycleBinItemCollection.GetByIdAsync(Guid, Expression<Func<IRecycleBinItem, Object>>[])
+  nameWithType.vb: IRecycleBinItemCollection.GetByIdAsync(Guid, Expression(Of Func(Of IRecycleBinItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html#PnP_Core_Model_SharePoint_IRecycleBinItemCollection_GetByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.GetByIdAsync
+  nameWithType: IRecycleBinItemCollection.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.MoveAllToSecondStage
   name: MoveAllToSecondStage()
   href: api/PnP.Core.Model.SharePoint.IRecycleBinItemCollection.html#PnP_Core_Model_SharePoint_IRecycleBinItemCollection_MoveAllToSecondStage
@@ -13026,6 +13148,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.AddBatchAsync
   nameWithType: ITermGroupCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.GetById(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name: GetById(String, Expression<Func<ITermGroup, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_GetById_System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.GetById(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name.vb: GetById(String, Expression(Of Func(Of ITermGroup, Object))())
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.GetById(System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.ITermGroupCollection.GetById(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
+  nameWithType: ITermGroupCollection.GetById(String, Expression<Func<ITermGroup, Object>>[])
+  nameWithType.vb: ITermGroupCollection.GetById(String, Expression(Of Func(Of ITermGroup, Object))())
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.GetById*
+  name: GetById
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_GetById_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroupCollection.GetById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.GetById
+  nameWithType: ITermGroupCollection.GetById
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByIdAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name: GetByIdAsync(String, Expression<Func<ITermGroup, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_GetByIdAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.GetByIdAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name.vb: GetByIdAsync(String, Expression(Of Func(Of ITermGroup, Object))())
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByIdAsync(System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByIdAsync(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
+  nameWithType: ITermGroupCollection.GetByIdAsync(String, Expression<Func<ITermGroup, Object>>[])
+  nameWithType.vb: ITermGroupCollection.GetByIdAsync(String, Expression(Of Func(Of ITermGroup, Object))())
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_GetByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroupCollection.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByIdAsync
+  nameWithType: ITermGroupCollection.GetByIdAsync
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByName(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name: GetByName(String, Expression<Func<ITermGroup, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_GetByName_System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.GetByName(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name.vb: GetByName(String, Expression(Of Func(Of ITermGroup, Object))())
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByName(System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByName(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
+  nameWithType: ITermGroupCollection.GetByName(String, Expression<Func<ITermGroup, Object>>[])
+  nameWithType.vb: ITermGroupCollection.GetByName(String, Expression(Of Func(Of ITermGroup, Object))())
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByName*
+  name: GetByName
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_GetByName_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroupCollection.GetByName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByName
+  nameWithType: ITermGroupCollection.GetByName
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByNameAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name: GetByNameAsync(String, Expression<Func<ITermGroup, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_GetByNameAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.ITermGroupCollection.GetByNameAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
+  name.vb: GetByNameAsync(String, Expression(Of Func(Of ITermGroup, Object))())
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByNameAsync(System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByNameAsync(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
+  nameWithType: ITermGroupCollection.GetByNameAsync(String, Expression<Func<ITermGroup, Object>>[])
+  nameWithType.vb: ITermGroupCollection.GetByNameAsync(String, Expression(Of Func(Of ITermGroup, Object))())
+- uid: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByNameAsync*
+  name: GetByNameAsync
+  href: api/PnP.Core.Model.SharePoint.ITermGroupCollection.html#PnP_Core_Model_SharePoint_ITermGroupCollection_GetByNameAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermGroupCollection.GetByNameAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermGroupCollection.GetByNameAsync
+  nameWithType: ITermGroupCollection.GetByNameAsync
 - uid: PnP.Core.Model.SharePoint.ITermLocalizedDescription
   name: ITermLocalizedDescription
   href: api/PnP.Core.Model.SharePoint.ITermLocalizedDescription.html
@@ -13469,6 +13655,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermSetCollection.AddBatchAsync
   nameWithType: ITermSetCollection.AddBatchAsync
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.GetById(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
+  name: GetById(String, Expression<Func<ITermSet, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_GetById_System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.ITermSetCollection.GetById(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
+  name.vb: GetById(String, Expression(Of Func(Of ITermSet, Object))())
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.GetById(System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermSet, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.ITermSetCollection.GetById(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermSet, System.Object))())
+  nameWithType: ITermSetCollection.GetById(String, Expression<Func<ITermSet, Object>>[])
+  nameWithType.vb: ITermSetCollection.GetById(String, Expression(Of Func(Of ITermSet, Object))())
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.GetById*
+  name: GetById
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_GetById_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetCollection.GetById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.GetById
+  nameWithType: ITermSetCollection.GetById
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.GetByIdAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
+  name: GetByIdAsync(String, Expression<Func<ITermSet, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_GetByIdAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.ITermSetCollection.GetByIdAsync(System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
+  name.vb: GetByIdAsync(String, Expression(Of Func(Of ITermSet, Object))())
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.GetByIdAsync(System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermSet, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.ITermSetCollection.GetByIdAsync(System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermSet, System.Object))())
+  nameWithType: ITermSetCollection.GetByIdAsync(String, Expression<Func<ITermSet, Object>>[])
+  nameWithType.vb: ITermSetCollection.GetByIdAsync(String, Expression(Of Func(Of ITermSet, Object))())
+- uid: PnP.Core.Model.SharePoint.ITermSetCollection.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/PnP.Core.Model.SharePoint.ITermSetCollection.html#PnP_Core_Model_SharePoint_ITermSetCollection_GetByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetCollection.GetByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITermSetCollection.GetByIdAsync
+  nameWithType: ITermSetCollection.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.ITermSetLocalizedName
   name: ITermSetLocalizedName
   href: api/PnP.Core.Model.SharePoint.ITermSetLocalizedName.html
@@ -14695,6 +14913,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.IsMultilingual
   nameWithType: IWeb.IsMultilingual
+- uid: PnP.Core.Model.SharePoint.IWeb.IsNoScriptSite
+  name: IsNoScriptSite()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsNoScriptSite
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsNoScriptSite
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsNoScriptSite()
+  nameWithType: IWeb.IsNoScriptSite()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsNoScriptSite*
+  name: IsNoScriptSite
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsNoScriptSite_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsNoScriptSite
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsNoScriptSite
+  nameWithType: IWeb.IsNoScriptSite
+- uid: PnP.Core.Model.SharePoint.IWeb.IsNoScriptSiteAsync
+  name: IsNoScriptSiteAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsNoScriptSiteAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.IsNoScriptSiteAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsNoScriptSiteAsync()
+  nameWithType: IWeb.IsNoScriptSiteAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.IsNoScriptSiteAsync*
+  name: IsNoScriptSiteAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsNoScriptSiteAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.IsNoScriptSiteAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.IsNoScriptSiteAsync
+  nameWithType: IWeb.IsNoScriptSiteAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.IsProvisioningComplete
   name: IsProvisioningComplete
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_IsProvisioningComplete
@@ -15427,200 +15671,6 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.ListExperience.NewExperience
   fullName: PnP.Core.Model.SharePoint.ListExperience.NewExperience
   nameWithType: ListExperience.NewExperience
-- uid: PnP.Core.Model.SharePoint.ListExtensions
-  name: ListExtensions
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html
-  commentId: T:PnP.Core.Model.SharePoint.ListExtensions
-  fullName: PnP.Core.Model.SharePoint.ListExtensions
-  nameWithType: ListExtensions
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IList},Guid)
-  name: GetById(IQueryable<IList>, Guid)
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_IList__Guid_
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IList},Guid)
-  name.vb: GetById(IQueryable(Of IList), Guid)
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.IList>, Guid)
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.IList), Guid)
-  nameWithType: ListExtensions.GetById(IQueryable<IList>, Guid)
-  nameWithType.vb: ListExtensions.GetById(IQueryable(Of IList), Guid)
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IList},Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: GetById(IQueryable<IList>, Guid, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_IList__Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IList},Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: GetById(IQueryable(Of IList), Guid, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.IList>, Guid, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.IList), Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: ListExtensions.GetById(IQueryable<IList>, Guid, Expression<Func<IList, Object>>[])
-  nameWithType.vb: ListExtensions.GetById(IQueryable(Of IList), Guid, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetById*
-  name: GetById
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetById_
-  commentId: Overload:PnP.Core.Model.SharePoint.ListExtensions.GetById
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetById
-  nameWithType: ListExtensions.GetById
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IList},Guid)
-  name: GetByIdAsync(IQueryable<IList>, Guid)
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_IList__Guid_
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IList},Guid)
-  name.vb: GetByIdAsync(IQueryable(Of IList), Guid)
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.IList>, Guid)
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.IList), Guid)
-  nameWithType: ListExtensions.GetByIdAsync(IQueryable<IList>, Guid)
-  nameWithType.vb: ListExtensions.GetByIdAsync(IQueryable(Of IList), Guid)
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IList},Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: GetByIdAsync(IQueryable<IList>, Guid, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_IList__Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IList},Guid,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: GetByIdAsync(IQueryable(Of IList), Guid, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.IList>, Guid, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.IList), Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: ListExtensions.GetByIdAsync(IQueryable<IList>, Guid, Expression<Func<IList, Object>>[])
-  nameWithType.vb: ListExtensions.GetByIdAsync(IQueryable(Of IList), Guid, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync*
-  name: GetByIdAsync
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByIdAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByIdAsync
-  nameWithType: ListExtensions.GetByIdAsync
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: GetByServerRelativeUrl(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByServerRelativeUrl_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: GetByServerRelativeUrl(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl(IQueryable<PnP.Core.Model.SharePoint.IList>, System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl(IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: ListExtensions.GetByServerRelativeUrl(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
-  nameWithType.vb: ListExtensions.GetByServerRelativeUrl(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl*
-  name: GetByServerRelativeUrl
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByServerRelativeUrl_
-  commentId: Overload:PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrl
-  nameWithType: ListExtensions.GetByServerRelativeUrl
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: GetByServerRelativeUrlAsync(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByServerRelativeUrlAsync_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: GetByServerRelativeUrlAsync(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync(IQueryable<PnP.Core.Model.SharePoint.IList>, System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync(IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: ListExtensions.GetByServerRelativeUrlAsync(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
-  nameWithType.vb: ListExtensions.GetByServerRelativeUrlAsync(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync*
-  name: GetByServerRelativeUrlAsync
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByServerRelativeUrlAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByServerRelativeUrlAsync
-  nameWithType: ListExtensions.GetByServerRelativeUrlAsync
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByTitle(IQueryable{PnP.Core.Model.SharePoint.IList},System.String)
-  name: GetByTitle(IQueryable<IList>, String)
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitle_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByTitle(IQueryable{PnP.Core.Model.SharePoint.IList},System.String)
-  name.vb: GetByTitle(IQueryable(Of IList), String)
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByTitle(IQueryable<PnP.Core.Model.SharePoint.IList>, System.String)
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByTitle(IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String)
-  nameWithType: ListExtensions.GetByTitle(IQueryable<IList>, String)
-  nameWithType.vb: ListExtensions.GetByTitle(IQueryable(Of IList), String)
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByTitle(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: GetByTitle(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitle_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByTitle(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: GetByTitle(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByTitle(IQueryable<PnP.Core.Model.SharePoint.IList>, System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByTitle(IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: ListExtensions.GetByTitle(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
-  nameWithType.vb: ListExtensions.GetByTitle(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByTitle*
-  name: GetByTitle
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitle_
-  commentId: Overload:PnP.Core.Model.SharePoint.ListExtensions.GetByTitle
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByTitle
-  nameWithType: ListExtensions.GetByTitle
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync(IQueryable{PnP.Core.Model.SharePoint.IList},System.String)
-  name: GetByTitleAsync(IQueryable<IList>, String)
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitleAsync_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync(IQueryable{PnP.Core.Model.SharePoint.IList},System.String)
-  name.vb: GetByTitleAsync(IQueryable(Of IList), String)
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync(IQueryable<PnP.Core.Model.SharePoint.IList>, System.String)
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync(IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String)
-  nameWithType: ListExtensions.GetByTitleAsync(IQueryable<IList>, String)
-  nameWithType.vb: ListExtensions.GetByTitleAsync(IQueryable(Of IList), String)
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name: GetByTitleAsync(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitleAsync_IQueryable_PnP_Core_Model_SharePoint_IList__System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync(IQueryable{PnP.Core.Model.SharePoint.IList},System.String,Expression{Func{PnP.Core.Model.SharePoint.IList,System.Object}}[])
-  name.vb: GetByTitleAsync(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync(IQueryable<PnP.Core.Model.SharePoint.IList>, System.String, Expression<Func<PnP.Core.Model.SharePoint.IList, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync(IQueryable(Of PnP.Core.Model.SharePoint.IList), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.IList, System.Object))())
-  nameWithType: ListExtensions.GetByTitleAsync(IQueryable<IList>, String, Expression<Func<IList, Object>>[])
-  nameWithType.vb: ListExtensions.GetByTitleAsync(IQueryable(Of IList), String, Expression(Of Func(Of IList, Object))())
-- uid: PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync*
-  name: GetByTitleAsync
-  href: api/PnP.Core.Model.SharePoint.ListExtensions.html#PnP_Core_Model_SharePoint_ListExtensions_GetByTitleAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ListExtensions.GetByTitleAsync
-  nameWithType: ListExtensions.GetByTitleAsync
-- uid: PnP.Core.Model.SharePoint.ListItemExtensions
-  name: ListItemExtensions
-  href: api/PnP.Core.Model.SharePoint.ListItemExtensions.html
-  commentId: T:PnP.Core.Model.SharePoint.ListItemExtensions
-  fullName: PnP.Core.Model.SharePoint.ListItemExtensions
-  nameWithType: ListItemExtensions
-- uid: PnP.Core.Model.SharePoint.ListItemExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32)
-  name: GetById(IQueryable<IListItem>, Int32)
-  href: api/PnP.Core.Model.SharePoint.ListItemExtensions.html#PnP_Core_Model_SharePoint_ListItemExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_
-  commentId: M:PnP.Core.Model.SharePoint.ListItemExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32)
-  name.vb: GetById(IQueryable(Of IListItem), Int32)
-  fullName: PnP.Core.Model.SharePoint.ListItemExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.IListItem>, System.Int32)
-  fullName.vb: PnP.Core.Model.SharePoint.ListItemExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.IListItem), System.Int32)
-  nameWithType: ListItemExtensions.GetById(IQueryable<IListItem>, Int32)
-  nameWithType.vb: ListItemExtensions.GetById(IQueryable(Of IListItem), Int32)
-- uid: PnP.Core.Model.SharePoint.ListItemExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
-  name: GetById(IQueryable<IListItem>, Int32, Expression<Func<IListItem, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.ListItemExtensions.html#PnP_Core_Model_SharePoint_ListItemExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.ListItemExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
-  name.vb: GetById(IQueryable(Of IListItem), Int32, Expression(Of Func(Of IListItem, Object))())
-  fullName: PnP.Core.Model.SharePoint.ListItemExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.IListItem>, System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.ListItemExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.IListItem), System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
-  nameWithType: ListItemExtensions.GetById(IQueryable<IListItem>, Int32, Expression<Func<IListItem, Object>>[])
-  nameWithType.vb: ListItemExtensions.GetById(IQueryable(Of IListItem), Int32, Expression(Of Func(Of IListItem, Object))())
-- uid: PnP.Core.Model.SharePoint.ListItemExtensions.GetById*
-  name: GetById
-  href: api/PnP.Core.Model.SharePoint.ListItemExtensions.html#PnP_Core_Model_SharePoint_ListItemExtensions_GetById_
-  commentId: Overload:PnP.Core.Model.SharePoint.ListItemExtensions.GetById
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ListItemExtensions.GetById
-  nameWithType: ListItemExtensions.GetById
-- uid: PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32)
-  name: GetByIdAsync(IQueryable<IListItem>, Int32)
-  href: api/PnP.Core.Model.SharePoint.ListItemExtensions.html#PnP_Core_Model_SharePoint_ListItemExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_
-  commentId: M:PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32)
-  name.vb: GetByIdAsync(IQueryable(Of IListItem), Int32)
-  fullName: PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.IListItem>, System.Int32)
-  fullName.vb: PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.IListItem), System.Int32)
-  nameWithType: ListItemExtensions.GetByIdAsync(IQueryable<IListItem>, Int32)
-  nameWithType.vb: ListItemExtensions.GetByIdAsync(IQueryable(Of IListItem), Int32)
-- uid: PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
-  name: GetByIdAsync(IQueryable<IListItem>, Int32, Expression<Func<IListItem, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.ListItemExtensions.html#PnP_Core_Model_SharePoint_ListItemExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_IListItem__System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IListItem},System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
-  name.vb: GetByIdAsync(IQueryable(Of IListItem), Int32, Expression(Of Func(Of IListItem, Object))())
-  fullName: PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.IListItem>, System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.IListItem), System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
-  nameWithType: ListItemExtensions.GetByIdAsync(IQueryable<IListItem>, Int32, Expression<Func<IListItem, Object>>[])
-  nameWithType.vb: ListItemExtensions.GetByIdAsync(IQueryable(Of IListItem), Int32, Expression(Of Func(Of IListItem, Object))())
-- uid: PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync*
-  name: GetByIdAsync
-  href: api/PnP.Core.Model.SharePoint.ListItemExtensions.html#PnP_Core_Model_SharePoint_ListItemExtensions_GetByIdAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ListItemExtensions.GetByIdAsync
-  nameWithType: ListItemExtensions.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.ListPageRenderType
   name: ListPageRenderType
   href: api/PnP.Core.Model.SharePoint.ListPageRenderType.html
@@ -16602,62 +16652,6 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.PermissionKind.ViewVersions
   fullName: PnP.Core.Model.SharePoint.PermissionKind.ViewVersions
   nameWithType: PermissionKind.ViewVersions
-- uid: PnP.Core.Model.SharePoint.RecycleBinItemExtensions
-  name: RecycleBinItemExtensions
-  href: api/PnP.Core.Model.SharePoint.RecycleBinItemExtensions.html
-  commentId: T:PnP.Core.Model.SharePoint.RecycleBinItemExtensions
-  fullName: PnP.Core.Model.SharePoint.RecycleBinItemExtensions
-  nameWithType: RecycleBinItemExtensions
-- uid: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IRecycleBinItem},Guid)
-  name: GetById(IQueryable<IRecycleBinItem>, Guid)
-  href: api/PnP.Core.Model.SharePoint.RecycleBinItemExtensions.html#PnP_Core_Model_SharePoint_RecycleBinItemExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_IRecycleBinItem__Guid_
-  commentId: M:PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IRecycleBinItem},Guid)
-  name.vb: GetById(IQueryable(Of IRecycleBinItem), Guid)
-  fullName: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.IRecycleBinItem>, Guid)
-  fullName.vb: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.IRecycleBinItem), Guid)
-  nameWithType: RecycleBinItemExtensions.GetById(IQueryable<IRecycleBinItem>, Guid)
-  nameWithType.vb: RecycleBinItemExtensions.GetById(IQueryable(Of IRecycleBinItem), Guid)
-- uid: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IRecycleBinItem},Guid,Expression{Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])
-  name: GetById(IQueryable<IRecycleBinItem>, Guid, Expression<Func<IRecycleBinItem, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.RecycleBinItemExtensions.html#PnP_Core_Model_SharePoint_RecycleBinItemExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_IRecycleBinItem__Guid_Expression_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.IRecycleBinItem},Guid,Expression{Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])
-  name.vb: GetById(IQueryable(Of IRecycleBinItem), Guid, Expression(Of Func(Of IRecycleBinItem, Object))())
-  fullName: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.IRecycleBinItem>, Guid, Expression<Func<PnP.Core.Model.SharePoint.IRecycleBinItem, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.IRecycleBinItem), Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IRecycleBinItem, System.Object))())
-  nameWithType: RecycleBinItemExtensions.GetById(IQueryable<IRecycleBinItem>, Guid, Expression<Func<IRecycleBinItem, Object>>[])
-  nameWithType.vb: RecycleBinItemExtensions.GetById(IQueryable(Of IRecycleBinItem), Guid, Expression(Of Func(Of IRecycleBinItem, Object))())
-- uid: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById*
-  name: GetById
-  href: api/PnP.Core.Model.SharePoint.RecycleBinItemExtensions.html#PnP_Core_Model_SharePoint_RecycleBinItemExtensions_GetById_
-  commentId: Overload:PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetById
-  nameWithType: RecycleBinItemExtensions.GetById
-- uid: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IRecycleBinItem},Guid)
-  name: GetByIdAsync(IQueryable<IRecycleBinItem>, Guid)
-  href: api/PnP.Core.Model.SharePoint.RecycleBinItemExtensions.html#PnP_Core_Model_SharePoint_RecycleBinItemExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_IRecycleBinItem__Guid_
-  commentId: M:PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IRecycleBinItem},Guid)
-  name.vb: GetByIdAsync(IQueryable(Of IRecycleBinItem), Guid)
-  fullName: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.IRecycleBinItem>, Guid)
-  fullName.vb: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.IRecycleBinItem), Guid)
-  nameWithType: RecycleBinItemExtensions.GetByIdAsync(IQueryable<IRecycleBinItem>, Guid)
-  nameWithType.vb: RecycleBinItemExtensions.GetByIdAsync(IQueryable(Of IRecycleBinItem), Guid)
-- uid: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IRecycleBinItem},Guid,Expression{Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])
-  name: GetByIdAsync(IQueryable<IRecycleBinItem>, Guid, Expression<Func<IRecycleBinItem, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.RecycleBinItemExtensions.html#PnP_Core_Model_SharePoint_RecycleBinItemExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_IRecycleBinItem__Guid_Expression_Func_PnP_Core_Model_SharePoint_IRecycleBinItem_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.IRecycleBinItem},Guid,Expression{Func{PnP.Core.Model.SharePoint.IRecycleBinItem,System.Object}}[])
-  name.vb: GetByIdAsync(IQueryable(Of IRecycleBinItem), Guid, Expression(Of Func(Of IRecycleBinItem, Object))())
-  fullName: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.IRecycleBinItem>, Guid, Expression<Func<PnP.Core.Model.SharePoint.IRecycleBinItem, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.IRecycleBinItem), Guid, Expression(Of Func(Of PnP.Core.Model.SharePoint.IRecycleBinItem, System.Object))())
-  nameWithType: RecycleBinItemExtensions.GetByIdAsync(IQueryable<IRecycleBinItem>, Guid, Expression<Func<IRecycleBinItem, Object>>[])
-  nameWithType.vb: RecycleBinItemExtensions.GetByIdAsync(IQueryable(Of IRecycleBinItem), Guid, Expression(Of Func(Of IRecycleBinItem, Object))())
-- uid: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync*
-  name: GetByIdAsync
-  href: api/PnP.Core.Model.SharePoint.RecycleBinItemExtensions.html#PnP_Core_Model_SharePoint_RecycleBinItemExtensions_GetByIdAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.RecycleBinItemExtensions.GetByIdAsync
-  nameWithType: RecycleBinItemExtensions.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.RecycleBinItemState
   name: RecycleBinItemState
   href: api/PnP.Core.Model.SharePoint.RecycleBinItemState.html
@@ -17196,112 +17190,6 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   nameWithType: SPEffectiveInformationRightsManagementSettingsSource.Rule
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions
-  name: TermGroupExtensions
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html
-  commentId: T:PnP.Core.Model.SharePoint.TermGroupExtensions
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions
-  nameWithType: TermGroupExtensions
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
-  name: GetById(IQueryable<ITermGroup>, String)
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_
-  commentId: M:PnP.Core.Model.SharePoint.TermGroupExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
-  name.vb: GetById(IQueryable(Of ITermGroup), String)
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String)
-  fullName.vb: PnP.Core.Model.SharePoint.TermGroupExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String)
-  nameWithType: TermGroupExtensions.GetById(IQueryable<ITermGroup>, String)
-  nameWithType.vb: TermGroupExtensions.GetById(IQueryable(Of ITermGroup), String)
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
-  name: GetById(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.TermGroupExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
-  name.vb: GetById(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.TermGroupExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
-  nameWithType: TermGroupExtensions.GetById(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
-  nameWithType.vb: TermGroupExtensions.GetById(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetById*
-  name: GetById
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetById_
-  commentId: Overload:PnP.Core.Model.SharePoint.TermGroupExtensions.GetById
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetById
-  nameWithType: TermGroupExtensions.GetById
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
-  name: GetByIdAsync(IQueryable<ITermGroup>, String)
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_
-  commentId: M:PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
-  name.vb: GetByIdAsync(IQueryable(Of ITermGroup), String)
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String)
-  fullName.vb: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String)
-  nameWithType: TermGroupExtensions.GetByIdAsync(IQueryable<ITermGroup>, String)
-  nameWithType.vb: TermGroupExtensions.GetByIdAsync(IQueryable(Of ITermGroup), String)
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
-  name: GetByIdAsync(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
-  name.vb: GetByIdAsync(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
-  nameWithType: TermGroupExtensions.GetByIdAsync(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
-  nameWithType.vb: TermGroupExtensions.GetByIdAsync(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync*
-  name: GetByIdAsync
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetByIdAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByIdAsync
-  nameWithType: TermGroupExtensions.GetByIdAsync
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
-  name: GetByName(IQueryable<ITermGroup>, String)
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetByName_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_
-  commentId: M:PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
-  name.vb: GetByName(IQueryable(Of ITermGroup), String)
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName(IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String)
-  fullName.vb: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName(IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String)
-  nameWithType: TermGroupExtensions.GetByName(IQueryable<ITermGroup>, String)
-  nameWithType.vb: TermGroupExtensions.GetByName(IQueryable(Of ITermGroup), String)
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
-  name: GetByName(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetByName_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
-  name.vb: GetByName(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName(IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName(IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
-  nameWithType: TermGroupExtensions.GetByName(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
-  nameWithType.vb: TermGroupExtensions.GetByName(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName*
-  name: GetByName
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetByName_
-  commentId: Overload:PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByName
-  nameWithType: TermGroupExtensions.GetByName
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
-  name: GetByNameAsync(IQueryable<ITermGroup>, String)
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetByNameAsync_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_
-  commentId: M:PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String)
-  name.vb: GetByNameAsync(IQueryable(Of ITermGroup), String)
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync(IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String)
-  fullName.vb: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync(IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String)
-  nameWithType: TermGroupExtensions.GetByNameAsync(IQueryable<ITermGroup>, String)
-  nameWithType.vb: TermGroupExtensions.GetByNameAsync(IQueryable(Of ITermGroup), String)
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
-  name: GetByNameAsync(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetByNameAsync_IQueryable_PnP_Core_Model_SharePoint_ITermGroup__System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermGroup_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync(IQueryable{PnP.Core.Model.SharePoint.ITermGroup},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermGroup,System.Object}}[])
-  name.vb: GetByNameAsync(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync(IQueryable<PnP.Core.Model.SharePoint.ITermGroup>, System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermGroup, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync(IQueryable(Of PnP.Core.Model.SharePoint.ITermGroup), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermGroup, System.Object))())
-  nameWithType: TermGroupExtensions.GetByNameAsync(IQueryable<ITermGroup>, String, Expression<Func<ITermGroup, Object>>[])
-  nameWithType.vb: TermGroupExtensions.GetByNameAsync(IQueryable(Of ITermGroup), String, Expression(Of Func(Of ITermGroup, Object))())
-- uid: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync*
-  name: GetByNameAsync
-  href: api/PnP.Core.Model.SharePoint.TermGroupExtensions.html#PnP_Core_Model_SharePoint_TermGroupExtensions_GetByNameAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TermGroupExtensions.GetByNameAsync
-  nameWithType: TermGroupExtensions.GetByNameAsync
 - uid: PnP.Core.Model.SharePoint.TermGroupScope
   name: TermGroupScope
   href: api/PnP.Core.Model.SharePoint.TermGroupScope.html
@@ -17344,62 +17232,6 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.TermRelationType.Reuse
   fullName: PnP.Core.Model.SharePoint.TermRelationType.Reuse
   nameWithType: TermRelationType.Reuse
-- uid: PnP.Core.Model.SharePoint.TermSetExtensions
-  name: TermSetExtensions
-  href: api/PnP.Core.Model.SharePoint.TermSetExtensions.html
-  commentId: T:PnP.Core.Model.SharePoint.TermSetExtensions
-  fullName: PnP.Core.Model.SharePoint.TermSetExtensions
-  nameWithType: TermSetExtensions
-- uid: PnP.Core.Model.SharePoint.TermSetExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String)
-  name: GetById(IQueryable<ITermSet>, String)
-  href: api/PnP.Core.Model.SharePoint.TermSetExtensions.html#PnP_Core_Model_SharePoint_TermSetExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_ITermSet__System_String_
-  commentId: M:PnP.Core.Model.SharePoint.TermSetExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String)
-  name.vb: GetById(IQueryable(Of ITermSet), String)
-  fullName: PnP.Core.Model.SharePoint.TermSetExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.ITermSet>, System.String)
-  fullName.vb: PnP.Core.Model.SharePoint.TermSetExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.ITermSet), System.String)
-  nameWithType: TermSetExtensions.GetById(IQueryable<ITermSet>, String)
-  nameWithType.vb: TermSetExtensions.GetById(IQueryable(Of ITermSet), String)
-- uid: PnP.Core.Model.SharePoint.TermSetExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
-  name: GetById(IQueryable<ITermSet>, String, Expression<Func<ITermSet, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.TermSetExtensions.html#PnP_Core_Model_SharePoint_TermSetExtensions_GetById_IQueryable_PnP_Core_Model_SharePoint_ITermSet__System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.TermSetExtensions.GetById(IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
-  name.vb: GetById(IQueryable(Of ITermSet), String, Expression(Of Func(Of ITermSet, Object))())
-  fullName: PnP.Core.Model.SharePoint.TermSetExtensions.GetById(IQueryable<PnP.Core.Model.SharePoint.ITermSet>, System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermSet, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.TermSetExtensions.GetById(IQueryable(Of PnP.Core.Model.SharePoint.ITermSet), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermSet, System.Object))())
-  nameWithType: TermSetExtensions.GetById(IQueryable<ITermSet>, String, Expression<Func<ITermSet, Object>>[])
-  nameWithType.vb: TermSetExtensions.GetById(IQueryable(Of ITermSet), String, Expression(Of Func(Of ITermSet, Object))())
-- uid: PnP.Core.Model.SharePoint.TermSetExtensions.GetById*
-  name: GetById
-  href: api/PnP.Core.Model.SharePoint.TermSetExtensions.html#PnP_Core_Model_SharePoint_TermSetExtensions_GetById_
-  commentId: Overload:PnP.Core.Model.SharePoint.TermSetExtensions.GetById
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TermSetExtensions.GetById
-  nameWithType: TermSetExtensions.GetById
-- uid: PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String)
-  name: GetByIdAsync(IQueryable<ITermSet>, String)
-  href: api/PnP.Core.Model.SharePoint.TermSetExtensions.html#PnP_Core_Model_SharePoint_TermSetExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_ITermSet__System_String_
-  commentId: M:PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String)
-  name.vb: GetByIdAsync(IQueryable(Of ITermSet), String)
-  fullName: PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.ITermSet>, System.String)
-  fullName.vb: PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.ITermSet), System.String)
-  nameWithType: TermSetExtensions.GetByIdAsync(IQueryable<ITermSet>, String)
-  nameWithType.vb: TermSetExtensions.GetByIdAsync(IQueryable(Of ITermSet), String)
-- uid: PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
-  name: GetByIdAsync(IQueryable<ITermSet>, String, Expression<Func<ITermSet, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.TermSetExtensions.html#PnP_Core_Model_SharePoint_TermSetExtensions_GetByIdAsync_IQueryable_PnP_Core_Model_SharePoint_ITermSet__System_String_Expression_Func_PnP_Core_Model_SharePoint_ITermSet_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync(IQueryable{PnP.Core.Model.SharePoint.ITermSet},System.String,Expression{Func{PnP.Core.Model.SharePoint.ITermSet,System.Object}}[])
-  name.vb: GetByIdAsync(IQueryable(Of ITermSet), String, Expression(Of Func(Of ITermSet, Object))())
-  fullName: PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync(IQueryable<PnP.Core.Model.SharePoint.ITermSet>, System.String, Expression<Func<PnP.Core.Model.SharePoint.ITermSet, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync(IQueryable(Of PnP.Core.Model.SharePoint.ITermSet), System.String, Expression(Of Func(Of PnP.Core.Model.SharePoint.ITermSet, System.Object))())
-  nameWithType: TermSetExtensions.GetByIdAsync(IQueryable<ITermSet>, String, Expression<Func<ITermSet, Object>>[])
-  nameWithType.vb: TermSetExtensions.GetByIdAsync(IQueryable(Of ITermSet), String, Expression(Of Func(Of ITermSet, Object))())
-- uid: PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync*
-  name: GetByIdAsync
-  href: api/PnP.Core.Model.SharePoint.TermSetExtensions.html#PnP_Core_Model_SharePoint_TermSetExtensions_GetByIdAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TermSetExtensions.GetByIdAsync
-  nameWithType: TermSetExtensions.GetByIdAsync
 - uid: PnP.Core.Model.SharePoint.UrlFieldFormatType
   name: UrlFieldFormatType
   href: api/PnP.Core.Model.SharePoint.UrlFieldFormatType.html
@@ -18248,6 +18080,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChannelCollection.AddBatchAsync
   nameWithType: ITeamChannelCollection.AddBatchAsync
+- uid: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayName(System.String,Expression{Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
+  name: GetByDisplayName(String, Expression<Func<ITeamChannel, Object>>[])
+  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_GetByDisplayName_System_String_Expression_Func_PnP_Core_Model_Teams_ITeamChannel_System_Object_____
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayName(System.String,Expression{Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
+  name.vb: GetByDisplayName(String, Expression(Of Func(Of ITeamChannel, Object))())
+  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayName(System.String, Expression<Func<PnP.Core.Model.Teams.ITeamChannel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayName(System.String, Expression(Of Func(Of PnP.Core.Model.Teams.ITeamChannel, System.Object))())
+  nameWithType: ITeamChannelCollection.GetByDisplayName(String, Expression<Func<ITeamChannel, Object>>[])
+  nameWithType.vb: ITeamChannelCollection.GetByDisplayName(String, Expression(Of Func(Of ITeamChannel, Object))())
+- uid: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayName*
+  name: GetByDisplayName
+  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_GetByDisplayName_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayName
+  nameWithType: ITeamChannelCollection.GetByDisplayName
+- uid: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayNameAsync(System.String,Expression{Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
+  name: GetByDisplayNameAsync(String, Expression<Func<ITeamChannel, Object>>[])
+  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_GetByDisplayNameAsync_System_String_Expression_Func_PnP_Core_Model_Teams_ITeamChannel_System_Object_____
+  commentId: M:PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayNameAsync(System.String,Expression{Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
+  name.vb: GetByDisplayNameAsync(String, Expression(Of Func(Of ITeamChannel, Object))())
+  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayNameAsync(System.String, Expression<Func<PnP.Core.Model.Teams.ITeamChannel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayNameAsync(System.String, Expression(Of Func(Of PnP.Core.Model.Teams.ITeamChannel, System.Object))())
+  nameWithType: ITeamChannelCollection.GetByDisplayNameAsync(String, Expression<Func<ITeamChannel, Object>>[])
+  nameWithType.vb: ITeamChannelCollection.GetByDisplayNameAsync(String, Expression(Of Func(Of ITeamChannel, Object))())
+- uid: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayNameAsync*
+  name: GetByDisplayNameAsync
+  href: api/PnP.Core.Model.Teams.ITeamChannelCollection.html#PnP_Core_Model_Teams_ITeamChannelCollection_GetByDisplayNameAsync_
+  commentId: Overload:PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayNameAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Teams.ITeamChannelCollection.GetByDisplayNameAsync
+  nameWithType: ITeamChannelCollection.GetByDisplayNameAsync
 - uid: PnP.Core.Model.Teams.ITeamChannelTab
   name: ITeamChannelTab
   href: api/PnP.Core.Model.Teams.ITeamChannelTab.html
@@ -19433,62 +19297,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamMessagingSettings.AllowUserEditMessages
   nameWithType: ITeamMessagingSettings.AllowUserEditMessages
-- uid: PnP.Core.Model.Teams.TeamChannelExtensions
-  name: TeamChannelExtensions
-  href: api/PnP.Core.Model.Teams.TeamChannelExtensions.html
-  commentId: T:PnP.Core.Model.Teams.TeamChannelExtensions
-  fullName: PnP.Core.Model.Teams.TeamChannelExtensions
-  nameWithType: TeamChannelExtensions
-- uid: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName(IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String)
-  name: GetByDisplayName(IQueryable<ITeamChannel>, String)
-  href: api/PnP.Core.Model.Teams.TeamChannelExtensions.html#PnP_Core_Model_Teams_TeamChannelExtensions_GetByDisplayName_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_
-  commentId: M:PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName(IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String)
-  name.vb: GetByDisplayName(IQueryable(Of ITeamChannel), String)
-  fullName: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName(IQueryable<PnP.Core.Model.Teams.ITeamChannel>, System.String)
-  fullName.vb: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName(IQueryable(Of PnP.Core.Model.Teams.ITeamChannel), System.String)
-  nameWithType: TeamChannelExtensions.GetByDisplayName(IQueryable<ITeamChannel>, String)
-  nameWithType.vb: TeamChannelExtensions.GetByDisplayName(IQueryable(Of ITeamChannel), String)
-- uid: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName(IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String,Expression{Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
-  name: GetByDisplayName(IQueryable<ITeamChannel>, String, Expression<Func<ITeamChannel, Object>>[])
-  href: api/PnP.Core.Model.Teams.TeamChannelExtensions.html#PnP_Core_Model_Teams_TeamChannelExtensions_GetByDisplayName_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_Expression_Func_PnP_Core_Model_Teams_ITeamChannel_System_Object_____
-  commentId: M:PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName(IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String,Expression{Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
-  name.vb: GetByDisplayName(IQueryable(Of ITeamChannel), String, Expression(Of Func(Of ITeamChannel, Object))())
-  fullName: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName(IQueryable<PnP.Core.Model.Teams.ITeamChannel>, System.String, Expression<Func<PnP.Core.Model.Teams.ITeamChannel, System.Object>>[])
-  fullName.vb: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName(IQueryable(Of PnP.Core.Model.Teams.ITeamChannel), System.String, Expression(Of Func(Of PnP.Core.Model.Teams.ITeamChannel, System.Object))())
-  nameWithType: TeamChannelExtensions.GetByDisplayName(IQueryable<ITeamChannel>, String, Expression<Func<ITeamChannel, Object>>[])
-  nameWithType.vb: TeamChannelExtensions.GetByDisplayName(IQueryable(Of ITeamChannel), String, Expression(Of Func(Of ITeamChannel, Object))())
-- uid: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName*
-  name: GetByDisplayName
-  href: api/PnP.Core.Model.Teams.TeamChannelExtensions.html#PnP_Core_Model_Teams_TeamChannelExtensions_GetByDisplayName_
-  commentId: Overload:PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName
-  isSpec: "True"
-  fullName: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayName
-  nameWithType: TeamChannelExtensions.GetByDisplayName
-- uid: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync(IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String)
-  name: GetByDisplayNameAsync(IQueryable<ITeamChannel>, String)
-  href: api/PnP.Core.Model.Teams.TeamChannelExtensions.html#PnP_Core_Model_Teams_TeamChannelExtensions_GetByDisplayNameAsync_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_
-  commentId: M:PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync(IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String)
-  name.vb: GetByDisplayNameAsync(IQueryable(Of ITeamChannel), String)
-  fullName: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync(IQueryable<PnP.Core.Model.Teams.ITeamChannel>, System.String)
-  fullName.vb: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync(IQueryable(Of PnP.Core.Model.Teams.ITeamChannel), System.String)
-  nameWithType: TeamChannelExtensions.GetByDisplayNameAsync(IQueryable<ITeamChannel>, String)
-  nameWithType.vb: TeamChannelExtensions.GetByDisplayNameAsync(IQueryable(Of ITeamChannel), String)
-- uid: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync(IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String,Expression{Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
-  name: GetByDisplayNameAsync(IQueryable<ITeamChannel>, String, Expression<Func<ITeamChannel, Object>>[])
-  href: api/PnP.Core.Model.Teams.TeamChannelExtensions.html#PnP_Core_Model_Teams_TeamChannelExtensions_GetByDisplayNameAsync_IQueryable_PnP_Core_Model_Teams_ITeamChannel__System_String_Expression_Func_PnP_Core_Model_Teams_ITeamChannel_System_Object_____
-  commentId: M:PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync(IQueryable{PnP.Core.Model.Teams.ITeamChannel},System.String,Expression{Func{PnP.Core.Model.Teams.ITeamChannel,System.Object}}[])
-  name.vb: GetByDisplayNameAsync(IQueryable(Of ITeamChannel), String, Expression(Of Func(Of ITeamChannel, Object))())
-  fullName: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync(IQueryable<PnP.Core.Model.Teams.ITeamChannel>, System.String, Expression<Func<PnP.Core.Model.Teams.ITeamChannel, System.Object>>[])
-  fullName.vb: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync(IQueryable(Of PnP.Core.Model.Teams.ITeamChannel), System.String, Expression(Of Func(Of PnP.Core.Model.Teams.ITeamChannel, System.Object))())
-  nameWithType: TeamChannelExtensions.GetByDisplayNameAsync(IQueryable<ITeamChannel>, String, Expression<Func<ITeamChannel, Object>>[])
-  nameWithType.vb: TeamChannelExtensions.GetByDisplayNameAsync(IQueryable(Of ITeamChannel), String, Expression(Of Func(Of ITeamChannel, Object))())
-- uid: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync*
-  name: GetByDisplayNameAsync
-  href: api/PnP.Core.Model.Teams.TeamChannelExtensions.html#PnP_Core_Model_Teams_TeamChannelExtensions_GetByDisplayNameAsync_
-  commentId: Overload:PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.Teams.TeamChannelExtensions.GetByDisplayNameAsync
-  nameWithType: TeamChannelExtensions.GetByDisplayNameAsync
 - uid: PnP.Core.Model.Teams.TeamChannelMembershipType
   name: TeamChannelMembershipType
   href: api/PnP.Core.Model.Teams.TeamChannelMembershipType.html
