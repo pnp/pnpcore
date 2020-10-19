@@ -1,4 +1,4 @@
-﻿git p# PnP Core SDK - ASP.NET Core Sample
+﻿# PnP Core SDK - ASP.NET Core Sample
 
 This solution demonstrates how the PnP Core SDK can be used in a ASP.NET Core web application
 
