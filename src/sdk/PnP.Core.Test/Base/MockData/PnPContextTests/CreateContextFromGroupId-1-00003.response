@@ -1,9 +1,9 @@
---batchresponse_e0552d03-49b3-45b1-bdde-e8beba9396d7
+--batchresponse_42ae8974-b5fd-45e0-9bc8-5ff5b3f0811e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"GroupId":"1632cc1e-f563-4b61-becb-6d3a102fccfe","Id":"69b508c9-7aae-4c31-9dc6-0c46b3d8c5f2"}}
---batchresponse_e0552d03-49b3-45b1-bdde-e8beba9396d7--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
+--batchresponse_42ae8974-b5fd-45e0-9bc8-5ff5b3f0811e--
