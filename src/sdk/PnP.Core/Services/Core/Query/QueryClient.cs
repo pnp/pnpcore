@@ -837,18 +837,12 @@ namespace PnP.Core.Services
             return response;
         }
 
-        internal static IQueryable<TModel> ProcessExpression<TModel>(IQueryable<TModel> source, params Expression<Func<TModel, object>>[] selectors)
+        internal static IQueryable<TModel> ProcessExpression<TModel>(IQueryable<TModel> source, EntityInfo entityInfo, params Expression<Func<TModel, object>>[] selectors)
         {
             IQueryable<TModel> selectionTarget = source;
 
             if (selectors != null)
             {
-                var model = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel));
-
-                (model as IDataModelWithContext).PnPContext = (source as IDataModelWithContext).PnPContext;
-
-                var entityInfo = EntityManager.GetClassInfo(typeof(TModel), model as BaseDataModel<TModel>, selectors);
-
                 IEnumerable<EntityFieldInfo> fields = entityInfo.Fields.Where(p => p.Load);
 
                 foreach (var s in selectors)

@@ -678,21 +678,59 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        //[TestMethod]
-        //public async Task GetListByTitleWithLoadProperties()
-        //{
-        //    TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
-        //        var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p=>p.ContentTypes.LoadProperties(p=>p.Id, p=>p.Name));
+        [TestMethod]
+        public async Task GetListByTitleWithExpand()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Documents", p => p.Title, p => p.ContentTypes);
 
-        //        Assert.IsTrue(list.Requested);
-        //        Assert.AreEqual(list.Title, "documents", true);
-        //        Assert.IsTrue(list.ContentTypes.Requested);
-        //        Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
-        //        Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Name));
-        //    }
-        //}
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+                Assert.IsTrue(list.ContentTypes.Requested);
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Description));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetListByTitleWithLoadProperties()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name));
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+                Assert.IsTrue(list.ContentTypes.Requested);
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Name));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetListByTitleWithLoadPropertiesRecursive()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, 
+                    p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name, 
+                        p=>p.FieldLinks.LoadProperties(p=>p.Id, p=>p.Name)));
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+                Assert.IsTrue(list.ContentTypes.Requested);
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(list.ContentTypes.First().FieldLinks.Requested);
+                Assert.IsTrue(list.ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(!string.IsNullOrEmpty(list.ContentTypes.First().FieldLinks.First().Name));
+            }
+        }
 
 
     }

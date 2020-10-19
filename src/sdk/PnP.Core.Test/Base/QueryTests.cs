@@ -82,10 +82,11 @@ namespace PnP.Core.Test.Base
             var modelCollection = Activator.CreateInstance(collectionType, (input.Item1 as IDataModelWithContext).PnPContext, null, null);
 
             // Process the input expressions
+
             IQueryable<TModelInterface> selectionTarget = modelCollection as IQueryable<TModelInterface>;
             if (input.Item3 != null)
             {
-                selectionTarget = QueryClient.ProcessExpression(selectionTarget, input.Item3);
+                selectionTarget = QueryClient.ProcessExpression(selectionTarget,input.Item2, input.Item3);
             }
 
             // Translate the expressions to a query

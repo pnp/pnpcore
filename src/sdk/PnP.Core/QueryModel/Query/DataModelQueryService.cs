@@ -13,6 +13,7 @@ namespace PnP.Core.QueryModel
         private readonly PnPContext context;
         private readonly IDataModelParent parent;
         private readonly string memberName;
+        
 
         /// <summary>
         /// Protected default constructor, to force creation using
@@ -35,6 +36,8 @@ namespace PnP.Core.QueryModel
             this.memberName = memberName;
         }
 
+        internal EntityInfo EntityInfo { get; set; }
+
         public async Task<object> ExecuteQueryAsync(Type expressionType, ODataQuery<TModel> query)
         {
             if (string.IsNullOrEmpty(memberName))
@@ -46,14 +49,17 @@ namespace PnP.Core.QueryModel
             // At this point in time we support querying collections for which the model implements IQueryableModel
             if (typeof(TModel).ImplementsInterface(typeof(IQueryableDataModel)))
             {
-                // Get the entity info
-                var entityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null);
+                // Get the entity info, depending on how we enter EntityInfo was already created
+                if (EntityInfo == null)
+                {
+                    EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null);
+                }
 
                 // In case a model can be used from different contexts (e.g. ContentType can be used from Web, but also from List)
                 // it's required to let the entity know this context so that it can provide the correct information when requested
                 if (parent != null)
                 {
-                    entityInfo.Target = parent.GetType();
+                    EntityInfo.Target = parent.GetType();
                 }
 
                 // and its concrete instance
@@ -68,7 +74,7 @@ namespace PnP.Core.QueryModel
                 Guid batchRequestId = Guid.Empty;
 
                 // Build the needed API call
-                var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, entityInfo, context, query, memberName).ConfigureAwait(false);
+                var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, EntityInfo, context, query, memberName).ConfigureAwait(false);
 
                 foreach (var apiCall in apiCalls)
                 {
