@@ -182,12 +182,12 @@ namespace PnP.Core.Test.Base
                 Guid currentBatchId = context.CurrentBatch.Id;
                 var batchToExecute = context.BatchClient.GetBatchById(currentBatchId);
                 // We added 2 requests to the the current batch, but since we're also loading the Teams channels by default we have 3 requests in our queue
-                Assert.IsTrue(batchToExecute.Requests.Count == 3);
+                Assert.IsTrue(batchToExecute.Requests.Count == 2);
 
                 // The first (and second due to Teams Channels load) call in the batch are graph calls
                 Assert.IsTrue(batchToExecute.Requests[0].ApiCall.Type == ApiType.Graph);
                 // The third one is rest
-                Assert.IsTrue(batchToExecute.Requests[2].ApiCall.Type == ApiType.SPORest);
+                Assert.IsTrue(batchToExecute.Requests[1].ApiCall.Type == ApiType.SPORest);
                 // For the first one there's no backup rest call available
                 Assert.IsTrue(batchToExecute.Requests[0].BackupApiCall.Equals(default(ApiCall)));
                 // Execute the batch, this will result in 2 individual batches being executed, one rest and one graph

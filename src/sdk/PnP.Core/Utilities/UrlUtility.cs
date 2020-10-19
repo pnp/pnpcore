@@ -168,7 +168,7 @@ namespace PnP.Core
             var uriBuilder = new UriBuilder(baseRelativeUri);
             // Input url parameters
             NameValueCollection main = HttpUtility.ParseQueryString(uriBuilder.Query.ToLowerInvariant());
-            NameValueCollection parameters = HttpUtility.ParseQueryString(urlParameters.ToLowerInvariant());
+            NameValueCollection parameters = HttpUtility.ParseQueryString(urlParameters);
             // Collection of merged parameters
             NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
 
@@ -179,7 +179,7 @@ namespace PnP.Core
             {
                 if (string.IsNullOrWhiteSpace(mainKey)) continue;
 
-                string[] originalValues = main.GetValues(mainKey);
+                string[] originalValues = main.GetValues(mainKey)[0].Split(new char[] { ',' });
                 string[] newValues = null;
                 if (originalValues == null) continue;
 
@@ -195,7 +195,7 @@ namespace PnP.Core
                 string[] combinedValues;
                 if (newValues != null)
                 {
-                    combinedValues = originalValues.Union(newValues).ToArray();
+                    combinedValues = originalValues.Union(newValues, StringComparer.OrdinalIgnoreCase).ToArray();
                 }
                 else
                 {
@@ -213,7 +213,7 @@ namespace PnP.Core
                 string[] originalValues = parameters.GetValues(parameterKey);
                 if (originalValues == null) continue;
 
-                if (processedParameters.Contains(parameterKey)) continue;
+                if (processedParameters.FindIndex(x => x.Equals(parameterKey, StringComparison.OrdinalIgnoreCase)) != -1) continue;
 
                 queryString.Add(parameterKey, string.Join(",", originalValues));
             }

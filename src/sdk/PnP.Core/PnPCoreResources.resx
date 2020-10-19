@@ -300,6 +300,9 @@
   <data name="Exception_Unsupported_InteractiveRequestBatch" xml:space="preserve">
     <value>Interactive requests cannot be grouped together, execute them one by one</value>
   </data>
+  <data name="Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties" xml:space="preserve">
+    <value>You can't use the LoadProperties method for Microsoft Graph queries</value>
+  </data>
   <data name="Exception_Unsupported_LinqExpandOfPropertyWithOwnGet" xml:space="preserve">
     <value>The property '{0}' cannot be included here because it's underlying depending on a separate query</value>
   </data>

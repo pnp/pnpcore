@@ -423,7 +423,7 @@ namespace PnP.Core.Test.Base
             var requests = await GetODataAPICallTestAsync(
                 BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }), 
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=displayName,id,system&$top=10&$skip=5", true);
+            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayName,system&$top=10&$skip=5", true);
         }
 
         [TestMethod]
@@ -433,7 +433,7 @@ namespace PnP.Core.Test.Base
             var requests = await GetODataAPICallTestAsync(
                 BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p=>p.Description }), 
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=displayName,description,id,system&$top=10&$skip=5", true);
+            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayName,description,system&$top=10&$skip=5", true);
         }
 
         [TestMethod]
@@ -442,7 +442,7 @@ namespace PnP.Core.Test.Base
             var requests = await GetODataAPICallTestAsync(
                 BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }), 
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=ListExperienceOptions,Id&$top=10&$skip=5", true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=Id,ListExperienceOptions&$top=10&$skip=5", true);
         }
 
         [TestMethod]
@@ -451,7 +451,7 @@ namespace PnP.Core.Test.Base
             var requests = await GetODataAPICallTestAsync(
                 BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Description }), 
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=ListExperienceOptions,Description,Id&$top=10&$skip=5", true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,description,listexperienceoptions&$top=10&$skip=5", true);
         }
 
         [TestMethod]
@@ -461,7 +461,7 @@ namespace PnP.Core.Test.Base
             var requests = await GetODataAPICallTestAsync(
                 BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.InformationRightsManagementSettings }),
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=Id&$top=10&$skip=5&$expand=InformationRightsManagementSettings", true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,informationrightsmanagementsettings&$expand=informationrightsmanagementsettings&$top=10&$skip=5", true);
         }
 
         [TestMethod]
@@ -471,18 +471,38 @@ namespace PnP.Core.Test.Base
             var requests = await GetODataAPICallTestAsync(
                 BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.InformationRightsManagementSettings }),
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "_api/web/lists?$select=Title,Id&$top=10&$skip=5&$expand=InformationRightsManagementSettings", true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,informationrightsmanagementsettings&$expand=informationrightsmanagementsettings&$top=10&$skip=5", true);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ClientException))]
         public async Task GetLinqTermStoreSingleSimpleNormalAndExpandProperty()
         {
-            //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
+            // Throws exception since expand via a separate query (like for loading the Terms) is not possible
             var requests = await GetODataAPICallTestAsync(
                 BuildModel<TermSet, ITermSet>(new Expression<Func<ITermSet, object>>[] { p => p.Id, p=>p.Terms }),
                 new ODataQuery<ITermSet> { Top = 10, Skip = 5 });
         }
+
+        [TestMethod]
+        public async Task GetLinqListPlusLoadProperties()
+        {
+            var requests = await GetODataAPICallTestAsync(
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Fields.LoadProperties(p => p.Id, p => p.InternalName) }),
+                new ODataQuery<IList> { Top = 10, Skip = 5 });
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions,fields%2fid,fields%2finternalname&$expand=fields&$top=10&$skip=5", true);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientException))]
+        public async Task GetLinqTermStorePlusLoadProperties()
+        {
+            // Throws exception since expand via a separate query (like for loading the Terms) is not possible
+            var requests = await GetODataAPICallTestAsync(
+                BuildModel<TermSet, ITermSet>(new Expression<Func<ITermSet, object>>[] { p => p.Id, p => p.Terms.LoadProperties(p=>p.Id )}),
+                new ODataQuery<ITermSet> { Top = 10, Skip = 5 });
+        }
+
 
         #endregion
 

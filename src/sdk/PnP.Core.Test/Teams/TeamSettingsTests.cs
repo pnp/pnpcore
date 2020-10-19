@@ -114,6 +114,7 @@ namespace PnP.Core.Test.Teams
             }
         }
 
+        /* TEMP IN COMMENTS
         [TestMethod]
         public async Task UpdateDiscoverySettings()
         {
@@ -131,6 +132,7 @@ namespace PnP.Core.Test.Teams
                 Assert.IsTrue(team.DiscoverySettings.ShowInTeamsSearchAndSuggestions);
             }
         }
+        */
 
         [TestMethod]
         public async Task UpdateMessagingSettings()

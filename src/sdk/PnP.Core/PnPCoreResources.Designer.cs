@@ -610,6 +610,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t use the LoadProperties method for Microsoft Graph queries.
+        /// </summary>
+        internal static string Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The property &apos;{0}&apos; cannot be included here because it&apos;s underlying depending on a separate query.
         /// </summary>
         internal static string Exception_Unsupported_LinqExpandOfPropertyWithOwnGet {

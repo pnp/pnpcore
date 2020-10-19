@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel;
+using PnP.Core.Model;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -675,9 +675,25 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
-
             }
         }
+
+        //[TestMethod]
+        //public async Task GetListByTitleWithLoadProperties()
+        //{
+        //    TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p=>p.ContentTypes.LoadProperties(p=>p.Id, p=>p.Name));
+
+        //        Assert.IsTrue(list.Requested);
+        //        Assert.AreEqual(list.Title, "documents", true);
+        //        Assert.IsTrue(list.ContentTypes.Requested);
+        //        Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
+        //        Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Name));
+        //    }
+        //}
+
 
     }
 }
