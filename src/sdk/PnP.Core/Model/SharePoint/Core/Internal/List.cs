@@ -3,6 +3,7 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text.Json;
@@ -104,6 +105,7 @@ namespace PnP.Core.Model.SharePoint
                         TemplateType == ListTemplateType.HelpLibrary ||
                         TemplateType == ListTemplateType.HomePageLibrary ||
                         TemplateType == ListTemplateType.MySiteDocumentLibrary ||
+                        TemplateType == ListTemplateType.SharingLinks ||
                         // IWConvertedForms
                         TemplateType == (ListTemplateType)10102)
                     {
@@ -123,7 +125,9 @@ namespace PnP.Core.Model.SharePoint
                     }
                     else
                     {
-                        Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, $"{entityName.ToString().Replace(" ", "")}{(isList ? "List" : "")}");
+                        string entityNameToUse = $"{entityName.ToString().Replace(" ", "")}{(isList ? "List" : "")}";
+                        entityNameToUse = entityNameToUse.First().ToString().ToUpper() + entityNameToUse.Substring(1);
+                        Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, entityNameToUse);
                     }
                 }
             }
