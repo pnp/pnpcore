@@ -1,1 +1,11 @@
-{"responses": [{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('b32780e9-df70-4548-a735-4e7f055415a1')/channels","@odata.count":1,"value":[{"id":"19:9f4c089b2a87472ebd357031a7c11be9@thread.tacv2","displayName":"General","description":"prov-1","email":"","webUrl":"https://teams.microsoft.com/l/channel/19%3a9f4c089b2a87472ebd357031a7c11be9%40thread.tacv2/General?groupId=b32780e9-df70-4548-a735-4e7f055415a1&tenantId=d8623c9e-30c7-473a-83bc-d907df44a26e"}]}}]}
+{"responses": [{"id": "1","status":400,"body":{
+  "error": {
+    "code": "BadRequest",
+    "message": "Bad Request",
+    "innerError": {
+      "date": "2020-10-19T13:02:44",
+      "request-id": "4a1265af-5f9a-41e0-915a-e2121d193a5c",
+      "client-request-id": "4a1265af-5f9a-41e0-915a-e2121d193a5c"
+    }
+  }
+}}]}
