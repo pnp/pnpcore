@@ -94,6 +94,9 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
+      <a class="xref" href="PnP.Core.Model.IComplexType-1.html#PnP_Core_Model_IComplexType_1_IsPropertyAvailable_Expression_Func__0_System_Object___">IComplexType&lt;IPropertyValues&gt;.IsPropertyAvailable(Expression&lt;Func&lt;IPropertyValues, Object&gt;&gt;)</a>
+    </div>
+    <div>
       <a class="xref" href="PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Item_System_String_">IExpandoComplexType.Item[String]</a>
     </div>
     <div>
@@ -109,7 +112,7 @@
   
   <h5 id="PnP_Core_Model_SharePoint_IPropertyValues_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IPropertyValues : IExpandoComplexType, IComplexType</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IPropertyValues : IExpandoComplexType&lt;IPropertyValues&gt;, IComplexType&lt;IPropertyValues&gt;, IComplexType, IExpandoComplexType</code></pre>
   </div>
 
   
@@ -117,10 +120,6 @@
   
   
   
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1___0_Expression_Func___0_System_Object___">DataModelExtensions.IsPropertyAvailable&lt;TModel&gt;(TModel, Expression&lt;Func&lt;TModel, Object&gt;&gt;)</a>
-  </div>
   
 </article>
           </div>

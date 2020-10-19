@@ -1985,63 +1985,6 @@ references:
   commentId: T:PnP.Core.Model.DataModelExtensions
   fullName: PnP.Core.Model.DataModelExtensions
   nameWithType: DataModelExtensions
-- uid: PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable*
-  name: ArePropertiesAvailable
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_ArePropertiesAvailable_
-  commentId: Overload:PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable
-  isSpec: "True"
-  fullName: PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable
-  nameWithType: DataModelExtensions.ArePropertiesAvailable
-- uid: PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable``1(PnP.Core.Model.IDataModel{``0},Expression{Func{``0,System.Object}}[])
-  name: ArePropertiesAvailable<TModel>(IDataModel<TModel>, Expression<Func<TModel, Object>>[])
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_ArePropertiesAvailable__1_PnP_Core_Model_IDataModel___0__Expression_Func___0_System_Object_____
-  commentId: M:PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable``1(PnP.Core.Model.IDataModel{``0},Expression{Func{``0,System.Object}}[])
-  name.vb: ArePropertiesAvailable(Of TModel)(IDataModel(Of TModel), Expression(Of Func(Of TModel, Object))())
-  fullName: PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable<TModel>(PnP.Core.Model.IDataModel<TModel>, Expression<Func<TModel, System.Object>>[])
-  fullName.vb: PnP.Core.Model.DataModelExtensions.ArePropertiesAvailable(Of TModel)(PnP.Core.Model.IDataModel(Of TModel), Expression(Of Func(Of TModel, System.Object))())
-  nameWithType: DataModelExtensions.ArePropertiesAvailable<TModel>(IDataModel<TModel>, Expression<Func<TModel, Object>>[])
-  nameWithType.vb: DataModelExtensions.ArePropertiesAvailable(Of TModel)(IDataModel(Of TModel), Expression(Of Func(Of TModel, Object))())
-- uid: PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync*
-  name: EnsurePropertiesAsync
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsurePropertiesAsync_
-  commentId: Overload:PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync
-  nameWithType: DataModelExtensions.EnsurePropertiesAsync
-- uid: PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync``1(PnP.Core.Model.IDataModel{``0},Expression{Func{``0,System.Object}}[])
-  name: EnsurePropertiesAsync<TModel>(IDataModel<TModel>, Expression<Func<TModel, Object>>[])
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_EnsurePropertiesAsync__1_PnP_Core_Model_IDataModel___0__Expression_Func___0_System_Object_____
-  commentId: M:PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync``1(PnP.Core.Model.IDataModel{``0},Expression{Func{``0,System.Object}}[])
-  name.vb: EnsurePropertiesAsync(Of TModel)(IDataModel(Of TModel), Expression(Of Func(Of TModel, Object))())
-  fullName: PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync<TModel>(PnP.Core.Model.IDataModel<TModel>, Expression<Func<TModel, System.Object>>[])
-  fullName.vb: PnP.Core.Model.DataModelExtensions.EnsurePropertiesAsync(Of TModel)(PnP.Core.Model.IDataModel(Of TModel), Expression(Of Func(Of TModel, System.Object))())
-  nameWithType: DataModelExtensions.EnsurePropertiesAsync<TModel>(IDataModel<TModel>, Expression<Func<TModel, Object>>[])
-  nameWithType.vb: DataModelExtensions.EnsurePropertiesAsync(Of TModel)(IDataModel(Of TModel), Expression(Of Func(Of TModel, Object))())
-- uid: PnP.Core.Model.DataModelExtensions.IsPropertyAvailable*
-  name: IsPropertyAvailable
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable_
-  commentId: Overload:PnP.Core.Model.DataModelExtensions.IsPropertyAvailable
-  isSpec: "True"
-  fullName: PnP.Core.Model.DataModelExtensions.IsPropertyAvailable
-  nameWithType: DataModelExtensions.IsPropertyAvailable
-- uid: PnP.Core.Model.DataModelExtensions.IsPropertyAvailable``1(``0,Expression{Func{``0,System.Object}})
-  name: IsPropertyAvailable<TModel>(TModel, Expression<Func<TModel, Object>>)
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1___0_Expression_Func___0_System_Object___
-  commentId: M:PnP.Core.Model.DataModelExtensions.IsPropertyAvailable``1(``0,Expression{Func{``0,System.Object}})
-  name.vb: IsPropertyAvailable(Of TModel)(TModel, Expression(Of Func(Of TModel, Object)))
-  fullName: PnP.Core.Model.DataModelExtensions.IsPropertyAvailable<TModel>(TModel, Expression<Func<TModel, System.Object>>)
-  fullName.vb: PnP.Core.Model.DataModelExtensions.IsPropertyAvailable(Of TModel)(TModel, Expression(Of Func(Of TModel, System.Object)))
-  nameWithType: DataModelExtensions.IsPropertyAvailable<TModel>(TModel, Expression<Func<TModel, Object>>)
-  nameWithType.vb: DataModelExtensions.IsPropertyAvailable(Of TModel)(TModel, Expression(Of Func(Of TModel, Object)))
-- uid: PnP.Core.Model.DataModelExtensions.IsPropertyAvailable``1(PnP.Core.Model.IDataModel{``0},Expression{Func{``0,System.Object}})
-  name: IsPropertyAvailable<TModel>(IDataModel<TModel>, Expression<Func<TModel, Object>>)
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_IsPropertyAvailable__1_PnP_Core_Model_IDataModel___0__Expression_Func___0_System_Object___
-  commentId: M:PnP.Core.Model.DataModelExtensions.IsPropertyAvailable``1(PnP.Core.Model.IDataModel{``0},Expression{Func{``0,System.Object}})
-  name.vb: IsPropertyAvailable(Of TModel)(IDataModel(Of TModel), Expression(Of Func(Of TModel, Object)))
-  fullName: PnP.Core.Model.DataModelExtensions.IsPropertyAvailable<TModel>(PnP.Core.Model.IDataModel<TModel>, Expression<Func<TModel, System.Object>>)
-  fullName.vb: PnP.Core.Model.DataModelExtensions.IsPropertyAvailable(Of TModel)(PnP.Core.Model.IDataModel(Of TModel), Expression(Of Func(Of TModel, System.Object)))
-  nameWithType: DataModelExtensions.IsPropertyAvailable<TModel>(IDataModel<TModel>, Expression<Func<TModel, Object>>)
-  nameWithType.vb: DataModelExtensions.IsPropertyAvailable(Of TModel)(IDataModel(Of TModel), Expression(Of Func(Of TModel, Object)))
 - uid: PnP.Core.Model.DataModelExtensions.LoadProperties*
   name: LoadProperties
   href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_LoadProperties_
@@ -2064,6 +2007,33 @@ references:
   commentId: T:PnP.Core.Model.IComplexType
   fullName: PnP.Core.Model.IComplexType
   nameWithType: IComplexType
+- uid: PnP.Core.Model.IComplexType`1
+  name: IComplexType<TModel>
+  href: api/PnP.Core.Model.IComplexType-1.html
+  commentId: T:PnP.Core.Model.IComplexType`1
+  name.vb: IComplexType(Of TModel)
+  fullName: PnP.Core.Model.IComplexType<TModel>
+  fullName.vb: PnP.Core.Model.IComplexType(Of TModel)
+  nameWithType: IComplexType<TModel>
+  nameWithType.vb: IComplexType(Of TModel)
+- uid: PnP.Core.Model.IComplexType`1.IsPropertyAvailable(Expression{Func{`0,System.Object}})
+  name: IsPropertyAvailable(Expression<Func<TModel, Object>>)
+  href: api/PnP.Core.Model.IComplexType-1.html#PnP_Core_Model_IComplexType_1_IsPropertyAvailable_Expression_Func__0_System_Object___
+  commentId: M:PnP.Core.Model.IComplexType`1.IsPropertyAvailable(Expression{Func{`0,System.Object}})
+  name.vb: IsPropertyAvailable(Expression(Of Func(Of TModel, Object)))
+  fullName: PnP.Core.Model.IComplexType<TModel>.IsPropertyAvailable(Expression<Func<TModel, System.Object>>)
+  fullName.vb: PnP.Core.Model.IComplexType(Of TModel).IsPropertyAvailable(Expression(Of Func(Of TModel, System.Object)))
+  nameWithType: IComplexType<TModel>.IsPropertyAvailable(Expression<Func<TModel, Object>>)
+  nameWithType.vb: IComplexType(Of TModel).IsPropertyAvailable(Expression(Of Func(Of TModel, Object)))
+- uid: PnP.Core.Model.IComplexType`1.IsPropertyAvailable*
+  name: IsPropertyAvailable
+  href: api/PnP.Core.Model.IComplexType-1.html#PnP_Core_Model_IComplexType_1_IsPropertyAvailable_
+  commentId: Overload:PnP.Core.Model.IComplexType`1.IsPropertyAvailable
+  isSpec: "True"
+  fullName: PnP.Core.Model.IComplexType<TModel>.IsPropertyAvailable
+  fullName.vb: PnP.Core.Model.IComplexType(Of TModel).IsPropertyAvailable
+  nameWithType: IComplexType<TModel>.IsPropertyAvailable
+  nameWithType.vb: IComplexType(Of TModel).IsPropertyAvailable
 - uid: PnP.Core.Model.IDataModel`1
   name: IDataModel<TModel>
   href: api/PnP.Core.Model.IDataModel-1.html
@@ -2073,6 +2043,42 @@ references:
   fullName.vb: PnP.Core.Model.IDataModel(Of TModel)
   nameWithType: IDataModel<TModel>
   nameWithType.vb: IDataModel(Of TModel)
+- uid: PnP.Core.Model.IDataModel`1.ArePropertiesAvailable(Expression{Func{`0,System.Object}}[])
+  name: ArePropertiesAvailable(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModel`1.ArePropertiesAvailable(Expression{Func{`0,System.Object}}[])
+  name.vb: ArePropertiesAvailable(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModel<TModel>.ArePropertiesAvailable(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ArePropertiesAvailable(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModel<TModel>.ArePropertiesAvailable(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModel(Of TModel).ArePropertiesAvailable(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModel`1.ArePropertiesAvailable*
+  name: ArePropertiesAvailable
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_
+  commentId: Overload:PnP.Core.Model.IDataModel`1.ArePropertiesAvailable
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModel<TModel>.ArePropertiesAvailable
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ArePropertiesAvailable
+  nameWithType: IDataModel<TModel>.ArePropertiesAvailable
+  nameWithType.vb: IDataModel(Of TModel).ArePropertiesAvailable
+- uid: PnP.Core.Model.IDataModel`1.EnsurePropertiesAsync(Expression{Func{`0,System.Object}}[])
+  name: EnsurePropertiesAsync(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModel`1.EnsurePropertiesAsync(Expression{Func{`0,System.Object}}[])
+  name.vb: EnsurePropertiesAsync(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModel<TModel>.EnsurePropertiesAsync(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).EnsurePropertiesAsync(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModel<TModel>.EnsurePropertiesAsync(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModel(Of TModel).EnsurePropertiesAsync(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModel`1.EnsurePropertiesAsync*
+  name: EnsurePropertiesAsync
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_
+  commentId: Overload:PnP.Core.Model.IDataModel`1.EnsurePropertiesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModel<TModel>.EnsurePropertiesAsync
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).EnsurePropertiesAsync
+  nameWithType: IDataModel<TModel>.EnsurePropertiesAsync
+  nameWithType.vb: IDataModel(Of TModel).EnsurePropertiesAsync
 - uid: PnP.Core.Model.IDataModel`1.HasChanged(System.String)
   name: HasChanged(String)
   href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasChanged_System_String_
@@ -2107,6 +2113,24 @@ references:
   fullName.vb: PnP.Core.Model.IDataModel(Of TModel).HasValue
   nameWithType: IDataModel<TModel>.HasValue
   nameWithType.vb: IDataModel(Of TModel).HasValue
+- uid: PnP.Core.Model.IDataModel`1.IsPropertyAvailable(Expression{Func{`0,System.Object}})
+  name: IsPropertyAvailable(Expression<Func<TModel, Object>>)
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_IsPropertyAvailable_Expression_Func__0_System_Object___
+  commentId: M:PnP.Core.Model.IDataModel`1.IsPropertyAvailable(Expression{Func{`0,System.Object}})
+  name.vb: IsPropertyAvailable(Expression(Of Func(Of TModel, Object)))
+  fullName: PnP.Core.Model.IDataModel<TModel>.IsPropertyAvailable(Expression<Func<TModel, System.Object>>)
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).IsPropertyAvailable(Expression(Of Func(Of TModel, System.Object)))
+  nameWithType: IDataModel<TModel>.IsPropertyAvailable(Expression<Func<TModel, Object>>)
+  nameWithType.vb: IDataModel(Of TModel).IsPropertyAvailable(Expression(Of Func(Of TModel, Object)))
+- uid: PnP.Core.Model.IDataModel`1.IsPropertyAvailable*
+  name: IsPropertyAvailable
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_IsPropertyAvailable_
+  commentId: Overload:PnP.Core.Model.IDataModel`1.IsPropertyAvailable
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModel<TModel>.IsPropertyAvailable
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).IsPropertyAvailable
+  nameWithType: IDataModel<TModel>.IsPropertyAvailable
+  nameWithType.vb: IDataModel(Of TModel).IsPropertyAvailable
 - uid: PnP.Core.Model.IDataModel`1.Requested
   name: Requested
   href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested
@@ -2633,6 +2657,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IExpandoComplexType.Item
   nameWithType: IExpandoComplexType.Item
+- uid: PnP.Core.Model.IExpandoComplexType`1
+  name: IExpandoComplexType<TModel>
+  href: api/PnP.Core.Model.IExpandoComplexType-1.html
+  commentId: T:PnP.Core.Model.IExpandoComplexType`1
+  name.vb: IExpandoComplexType(Of TModel)
+  fullName: PnP.Core.Model.IExpandoComplexType<TModel>
+  fullName.vb: PnP.Core.Model.IExpandoComplexType(Of TModel)
+  nameWithType: IExpandoComplexType<TModel>
+  nameWithType.vb: IExpandoComplexType(Of TModel)
 - uid: PnP.Core.Model.IExpandoDataModel
   name: IExpandoDataModel
   href: api/PnP.Core.Model.IExpandoDataModel.html
@@ -9151,19 +9184,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFileVersion.Created
   nameWithType: IFileVersion.Created
-- uid: PnP.Core.Model.SharePoint.IFileVersion.ID
-  name: ID
-  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_ID
-  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.ID
-  fullName: PnP.Core.Model.SharePoint.IFileVersion.ID
-  nameWithType: IFileVersion.ID
-- uid: PnP.Core.Model.SharePoint.IFileVersion.ID*
-  name: ID
-  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_ID_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.ID
+- uid: PnP.Core.Model.SharePoint.IFileVersion.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_Id
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.Id
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.Id
+  nameWithType: IFileVersion.Id
+- uid: PnP.Core.Model.SharePoint.IFileVersion.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.Id
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFileVersion.ID
-  nameWithType: IFileVersion.ID
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.Id
+  nameWithType: IFileVersion.Id
 - uid: PnP.Core.Model.SharePoint.IFileVersion.IsCurrentVersion
   name: IsCurrentVersion
   href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_IsCurrentVersion
