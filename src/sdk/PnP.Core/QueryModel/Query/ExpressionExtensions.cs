@@ -6,7 +6,7 @@ namespace System.Linq
 {
     internal static class ExpressionExtensions
     {
-        public static object GetConstantValue(this Expression expression)
+        internal static object GetConstantValue(this Expression expression)
         {
             expression = StripQuotes(expression);
             switch (expression)
@@ -21,7 +21,7 @@ namespace System.Linq
             throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_ExpressionConstantOnlyTypes, expression, typeof(ConstantExpression), typeof(MemberExpression)));
         }
 
-        public static Expression StripQuotes(this Expression e)
+        internal static Expression StripQuotes(this Expression e)
         {
             while (e is UnaryExpression ue)
             {
