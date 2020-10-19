@@ -396,17 +396,18 @@ namespace PnP.Core.Test.QueryModel
                     i => i.Id,
                     i => i.Title);
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    IListItemCollection fakeLibraryColl = null;
-                    fakeLibraryColl.GetById(1,
-                        i => i.Id,
-                        i => i.Title);
-                });
+                // Not relevant now that GetById is a regular method instead of an extension method
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    IListItemCollection fakeLibraryColl = null;
+                //    fakeLibraryColl.GetById(1,
+                //        i => i.Id,
+                //        i => i.Title);
+                //});
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
-                    IListItemCollection fakeLibraryColl = null;
-                    await fakeLibraryColl.GetByIdAsync(1);
-                });
+                //await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                //    IListItemCollection fakeLibraryColl = null;
+                //    await fakeLibraryColl.GetByIdAsync(1);
+                //});
             }
         }
 

@@ -2,12 +2,14 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {
     internal partial class ListCollection
     {
+        #region Add methods
 
         public async Task<IList> AddBatchAsync(string title, ListTemplateType templateType)
         {
@@ -68,6 +70,85 @@ namespace PnP.Core.Model.SharePoint
         {
             return AddAsync(title, templateType).GetAwaiter().GetResult();
         }
+
+        #endregion
+
+        #region GetByTitle methods
+
+        public IList GetByTitle(string title, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (title == null)
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Title == title, selectors);
+        }
+
+        public async Task<IList> GetByTitleAsync(string title, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (title == null)
+            {
+                throw new ArgumentNullException(nameof(title));
+            }
+
+            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Title == title, selectors).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region GetById methods
+
+        public IList GetById(Guid id, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Id == id, selectors);
+        }
+
+        public async Task<IList> GetByIdAsync(Guid id, params Expression<Func<IList, object>>[] selectors)
+        {
+
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id, selectors).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region GetByServerRelativeUrl methods
+        public async Task<IList> GetByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (serverRelativeUrl == null)
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            if (string.IsNullOrEmpty(serverRelativeUrl))
+            {
+                throw new ArgumentException(PnPCoreResources.Exception_GetListByServerRelativeUrl_ServerRelativeUrl);
+            }
+
+            return await BaseDataModelExtensions.BaseGetAsync(this, new ApiCall($"_api/web/getlist('{serverRelativeUrl}')", ApiType.SPORest), selectors).ConfigureAwait(false);
+        }
+
+        public IList GetByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors)
+        {
+            if (serverRelativeUrl == null)
+            {
+                throw new ArgumentNullException(nameof(serverRelativeUrl));
+            }
+
+            return GetByServerRelativeUrlAsync(serverRelativeUrl, selectors).GetAwaiter().GetResult();
+        }
+        #endregion
+
 
 #if DEBUG
         #region Only used for test purposes, hence marked as internal

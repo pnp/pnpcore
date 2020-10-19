@@ -1,7 +1,9 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -14,6 +16,8 @@ namespace PnP.Core.Model.SharePoint
             this.PnPContext = context;
             this.Parent = parent;
         }
+
+        #region Add methods
 
         public async Task<IListItem> AddBatchAsync(Dictionary<string, object> values)
         {
@@ -65,6 +69,10 @@ namespace PnP.Core.Model.SharePoint
             return AddAsync(values).GetAwaiter().GetResult();
         }
 
+        #endregion
+
+        #region Contains method
+
         public bool Contains(int id)
         {
             if (this.items.FirstOrDefault(p => p.Id == id) != null)
@@ -76,6 +84,22 @@ namespace PnP.Core.Model.SharePoint
                 return false;
             }
         }
+
+        #endregion
+
+        #region GetById methods
+
+        public IListItem GetById(int id, params Expression<Func<IListItem, object>>[] selectors)
+        {
+            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Id == id, selectors);
+        }
+
+        public async Task<IListItem> GetByIdAsync(int id, params Expression<Func<IListItem, object>>[] selectors)
+        {
+            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id, selectors).ConfigureAwait(false);
+        }
+
+        #endregion        
 
         public override void Replace(int itemIndex, IListItem newItem)
         {

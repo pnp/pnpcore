@@ -647,6 +647,20 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region IsNoScriptSite 
+        /// <summary>
+        /// Checks if this web is configured for NoScript
+        /// </summary>
+        /// <returns>True if set to NoScript, false otherwise</returns>
+        public Task<bool> IsNoScriptSiteAsync();
+
+        /// <summary>
+        /// Checks if this web is configured for NoScript
+        /// </summary>
+        /// <returns>True if set to NoScript, false otherwise</returns>
+        public bool IsNoScriptSite();
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

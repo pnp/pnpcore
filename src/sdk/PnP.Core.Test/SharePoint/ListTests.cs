@@ -223,42 +223,47 @@ namespace PnP.Core.Test.SharePoint
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
-                            IListCollection list = null;
-                            await list.GetByIdAsync(listGuid);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                        //    IListCollection list = null;
+                        //    await list.GetByIdAsync(listGuid);
+                        //});
 
                         await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
                             await context2.Web.Lists.GetByIdAsync(Guid.Empty, p => p.TemplateType, p => p.Title);
                         });
 
-                        Assert.ThrowsException<ArgumentNullException>(() => {
-                            IListCollection list = null;
-                            list.GetById(listGuid);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //Assert.ThrowsException<ArgumentNullException>(() => {
+                        //    IListCollection list = null;
+                        //    list.GetById(listGuid);
+                        //});
 
                         Assert.ThrowsException<ArgumentNullException>(() => {
                             context2.Web.Lists.GetById(Guid.Empty, p => p.TemplateType, p => p.Title);
                         });
 
-                        Assert.ThrowsException<ArgumentNullException>(() => {
-                            IListCollection list = null;
-                            list.GetByTitle(listTitle);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //Assert.ThrowsException<ArgumentNullException>(() => {
+                        //    IListCollection list = null;
+                        //    list.GetByTitle(listTitle);
+                        //});
 
                         Assert.ThrowsException<ArgumentNullException>(() => {
                             context2.Web.Lists.GetByTitle(null);
                         });
 
-                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
-                            IListCollection list = null;
-                            await list.GetByTitleAsync(listTitle);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                        //    IListCollection list = null;
+                        //    await list.GetByTitleAsync(listTitle);
+                        //});
 
-                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
-                            IListCollection list = null;
-                            await list.GetByTitleAsync(null);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                        //    IListCollection list = null;
+                        //    await list.GetByTitleAsync(null);
+                        //});
 
                     }
                 }

@@ -1,11 +1,15 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
     internal partial class TermSetCollection
     {
+        #region Add methods
+
         public async Task<ITermSet> AddAsync(string name, string description = null)
         {
             if (string.IsNullOrEmpty(name))
@@ -67,5 +71,31 @@ namespace PnP.Core.Model.SharePoint
         {
             return AddBatchAsync(name, description).GetAwaiter().GetResult();
         }
+
+        #endregion
+
+        #region GetById methods
+
+        public ITermSet GetById(string id, params Expression<Func<ITermSet, object>>[] selectors)
+        {
+            if (id is null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return BaseDataModelExtensions.BaseLinqGet(this, c => c.Id == id, selectors);
+        }
+
+        public async Task<ITermSet> GetByIdAsync(string id, params Expression<Func<ITermSet, object>>[] selectors)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id, selectors).ConfigureAwait(false);
+        }
+        #endregion
+
     }
 }

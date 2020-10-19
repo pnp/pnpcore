@@ -1,5 +1,7 @@
 ﻿using PnP.Core.Services;
+using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -9,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, ISupportPaging<IList>
     {
-        #region Extension Methods
+        #region Add Methods
         /// <summary>
         /// Adds a new list
         /// </summary>
@@ -60,5 +62,60 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>Newly added list</returns>
         public IList AddBatch(string title, ListTemplateType templateType);
         #endregion
+
+        #region GetByTitle methods
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByTitle(string title, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Select a list by title
+        /// </summary>
+        /// <param name="title">The title to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByTitleAsync(string title, params Expression<Func<IList, object>>[] selectors);
+        #endregion
+
+        #region GetById methods
+        /// <summary>
+        /// Method to select a list by id
+        /// </summary>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetById(Guid id, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by id
+        /// </summary>
+        /// <param name="id">The id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByIdAsync(Guid id, params Expression<Func<IList, object>>[] selectors);
+        #endregion
+
+        #region GetByServerRelativeUrl implementation
+        /// <summary>
+        /// Method to select a list by server relative url
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative url of the list to return</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public IList GetByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a list by server relative url
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative url of the list to return</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting list instance, if any</returns>
+        public Task<IList> GetByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IList, object>>[] selectors);
+        #endregion
+
     }
 }

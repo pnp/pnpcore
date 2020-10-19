@@ -199,25 +199,25 @@ namespace PnP.Core.Test.SharePoint
                     termStoreUpdated.Groups.GetById(string.Empty);
                 });
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    ITermGroupCollection groups = null;
-                    groups.GetByName(string.Empty);
-                });
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    ITermGroupCollection groups = null;
+                //    groups.GetByName(string.Empty);
+                //});
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    ITermGroupCollection groups = null;
-                    groups.GetByName(null);
-                });
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    ITermGroupCollection groups = null;
+                //    groups.GetByName(null);
+                //});
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    ITermGroupCollection groups = null;
-                    groups.GetById(string.Empty);
-                });
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    ITermGroupCollection groups = null;
+                //    groups.GetById(string.Empty);
+                //});
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    ITermGroupCollection groups = null;
-                    groups.GetById(null);
-                });
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    ITermGroupCollection groups = null;
+                //    groups.GetById(null);
+                //});
 
                 // Delete the group again
                 await newGroup.DeleteAsync();
