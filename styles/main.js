@@ -167,3 +167,15 @@ $(function () {
         populateOptions($('#navbar'), pkgName)
     }
 })
+
+// For the demos section that is generated at runtime, 
+// fix for the pencil referencing section that does not yet exist
+$(function (){
+    $("a.improve-doc-lg").each(function () {
+        var link = $(this).attr('href');
+        if(link.indexOf("/dev/docs/demos/") > -1){
+            link = link.replace("/dev/docs/demos/","/dev/src/samples/");
+            $(this).attr('href', link);
+        }
+    });
+});
