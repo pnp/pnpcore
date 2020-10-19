@@ -59,7 +59,7 @@ namespace PnP.Core.Model.Teams
             }
         }
 
-        [GraphProperty("channels", ExpandByDefault = true, Get = "teams/{Site.GroupId}/channels")]
+        [GraphProperty("channels", Get = "teams/{Site.GroupId}/channels")]
         public ITeamChannelCollection Channels
         {
             get

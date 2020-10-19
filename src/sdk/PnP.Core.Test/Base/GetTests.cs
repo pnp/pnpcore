@@ -530,21 +530,22 @@ namespace PnP.Core.Test.Base
             }
         }
 
-        [TestMethod]
-        public async Task GetExpandedByDefaultCollectionViaGraphOnly()
-        {
-            // TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var team = await context.Team.GetAsync();
+        // we don't have by default expandable collections at this point
+        //[TestMethod]
+        //public async Task GetExpandedByDefaultCollectionViaGraphOnly()
+        //{
+        //    // TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        var team = await context.Team.GetAsync();
 
-                // Are collections available and populated
-                Assert.IsTrue(team.IsPropertyAvailable(p => p.Channels));
-                Assert.IsTrue(team.Channels.Length > 0);
-                // Are other collections not loaded
-                Assert.IsFalse(team.IsPropertyAvailable(p => p.Owners));
-            }
-        }
+        //        // Are collections available and populated
+        //        Assert.IsTrue(team.IsPropertyAvailable(p => p.Channels));
+        //        Assert.IsTrue(team.Channels.Length > 0);
+        //        // Are other collections not loaded
+        //        Assert.IsFalse(team.IsPropertyAvailable(p => p.Owners));
+        //    }
+        //}
 
         [TestMethod]
         public async Task LoadPropertiesViaGraph()
