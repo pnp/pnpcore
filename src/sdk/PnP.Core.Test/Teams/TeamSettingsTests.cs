@@ -115,6 +115,7 @@ namespace PnP.Core.Test.Teams
         }
 
         /* TEMP IN COMMENTS
+         * This also does not work anymore via Graph Explorer...
         [TestMethod]
         public async Task UpdateDiscoverySettings()
         {

@@ -163,7 +163,8 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(web);
                 Assert.IsFalse(web.NavAudienceTargetingEnabled);
-                Assert.IsTrue(web.NextStepsFirstRunEnabled);
+                //This is not consistent, not good for use in tests
+                //Assert.IsTrue(web.NextStepsFirstRunEnabled);
                 Assert.IsTrue(web.NotificationsInOneDriveForBusinessEnabled);
                 Assert.IsTrue(web.NotificationsInSharePointEnabled);
                 Assert.IsFalse(web.ObjectCacheEnabled);
@@ -229,7 +230,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(webWithAllProperties);
                 Assert.IsTrue(webWithAllProperties.AllProperties.Count > 0);
-                Assert.AreEqual("Public", (string)webWithAllProperties.AllProperties["GroupType"]);
+                Assert.IsTrue((string)webWithAllProperties.AllProperties["GroupType"] == "Private" || (string)webWithAllProperties.AllProperties["GroupType"] == "Public");
                 Assert.AreEqual("Shared Documents", webWithAllProperties.AllProperties.AsDynamic().GroupDocumentsUrl);
             }
         }
