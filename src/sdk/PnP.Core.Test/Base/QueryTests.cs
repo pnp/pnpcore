@@ -494,17 +494,6 @@ namespace PnP.Core.Test.Base
             Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions,fields%2fid,fields%2finternalname&$expand=fields&$top=10&$skip=5", true);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ClientException))]
-        public async Task GetLinqTermStorePlusLoadProperties()
-        {
-            // Throws exception since expand via a separate query (like for loading the Terms) is not possible
-            var requests = await GetODataAPICallTestAsync(
-                BuildModel<TermSet, ITermSet>(new Expression<Func<ITermSet, object>>[] { p => p.Id, p => p.Terms.LoadProperties(p=>p.Id )}),
-                new ODataQuery<ITermSet> { Top = 10, Skip = 5 });
-        }
-
-
         #endregion
 
     }
