@@ -1,9 +1,9 @@
---batchresponse_4e2089fa-ba8d-4cb7-8a01-c5f9e97fdf72
+--batchresponse_9648c93a-e8a3-49ac-91a3-8cb69d9837a7
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"5d7bb091-4141-4d0c-98b4-1ae3f4b71cd7","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')/Items(71)","etag":"\"2\"","type":"SP.Data.Shared_x0020_DocumentsItem"},"Id":71,"Title":"Sample Document 01","ID":71}]}}
---batchresponse_4e2089fa-ba8d-4cb7-8a01-c5f9e97fdf72--
+{"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"PNP_SDK_TEST_TestQueryItems_Graph","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
+--batchresponse_9648c93a-e8a3-49ac-91a3-8cb69d9837a7--

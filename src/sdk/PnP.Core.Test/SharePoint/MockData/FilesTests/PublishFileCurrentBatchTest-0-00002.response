@@ -1,9 +1,10 @@
---batchresponse_4edc8d57-25a8-479d-8f04-795e6b57559f
+--batchresponse_c877fe32-a7e6-4152-8322-332c1431fe33
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
 
-{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_PublishFileCurrentBatchTest')","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_PublishFileCurrentBatchTest')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_PublishFileCurrentBatchTest')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_PublishFileCurrentBatchTest')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_PublishFileCurrentBatchTest')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_PublishFileCurrentBatchTest')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_PublishFileCurrentBatchTest')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_PublishFileCurrentBatchTest')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"PNP_SDK_TEST_PublishFileCurrentBatchTest","ProgID":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup/PNP_SDK_TEST_PublishFileCurrentBatchTest","TimeCreated":"2020-10-03T01:01:46Z","TimeLastModified":"2020-10-03T01:01:46Z","UniqueId":"84810b6c-22f5-4c70-965c-c6ae1f51bcfa","WelcomePage":""}}
---batchresponse_4edc8d57-25a8-479d-8f04-795e6b57559f--
+
+--batchresponse_c877fe32-a7e6-4152-8322-332c1431fe33--

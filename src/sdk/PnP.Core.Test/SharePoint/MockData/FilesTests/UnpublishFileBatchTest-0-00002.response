@@ -1,9 +1,10 @@
---batchresponse_de4c6cac-0438-4234-98c8-66103d35a054
+--batchresponse_2a2b18a4-da68-49c7-bde3-ecf830a62d48
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
 
-{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileBatchTest')","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileBatchTest')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileBatchTest')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileBatchTest')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileBatchTest')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileBatchTest')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileBatchTest')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileBatchTest')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"PNP_SDK_TEST_UnpublishFileBatchTest","ProgID":null,"ServerRelativeUrl":"/sites/pnpcoresdktestgroup/PNP_SDK_TEST_UnpublishFileBatchTest","TimeCreated":"2020-10-03T01:02:13Z","TimeLastModified":"2020-10-03T01:02:14Z","UniqueId":"f27847ad-fb87-436b-bbaa-3ebdb33768ea","WelcomePage":""}}
---batchresponse_de4c6cac-0438-4234-98c8-66103d35a054--
+
+--batchresponse_2a2b18a4-da68-49c7-bde3-ecf830a62d48--

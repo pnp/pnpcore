@@ -1,9 +1,9 @@
---batchresponse_07eaba15-82c3-469c-bd9a-82974277f730
+--batchresponse_e493a1a9-5964-40e3-aa20-d91fb71162f8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'97b31d71-576c-4800-9640-2b712814a35f')","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'97b31d71-576c-4800-9640-2b712814a35f')","etag":"\"1348\"","type":"SP.List"},"InformationRightsManagementSettings":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'97b31d71-576c-4800-9640-2b712814a35f')/InformationRightsManagementSettings"}},"Id":"97b31d71-576c-4800-9640-2b712814a35f","IrmEnabled":false}]}}
---batchresponse_07eaba15-82c3-469c-bd9a-82974277f730--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')","etag":"\"2083\"","type":"SP.List"},"InformationRightsManagementSettings":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')/InformationRightsManagementSettings","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f90d07e0-bbea-4464-9611-f695d0b7b3e4')/InformationRightsManagementSettings","type":"SP.InformationRightsManagementSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"DocumentLibraryProtectionExpireDate":"2020-11-19T02:30:05-08:00","EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","TemplateId":""},"Id":"f90d07e0-bbea-4464-9611-f695d0b7b3e4","IrmEnabled":false}]}}
+--batchresponse_e493a1a9-5964-40e3-aa20-d91fb71162f8--
