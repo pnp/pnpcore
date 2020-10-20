@@ -43,17 +43,26 @@ namespace PnP.Core.Model
                     gettableParent != null &&
                     !requestableParent.Requested)
                 {
-                    // If not, make an explicit request for its basic properties
-                    var ensureParentBatch = contextAwareParent.PnPContext.NewBatch();
+                    var entityInfo = EntityManager.Instance.GetStaticClassInfo(parent.GetType());
+                    if (parent is TransientObject && (parent as TransientObject).HasValue(entityInfo.ActualKeyFieldName))
+                    {
+                        // Seems as we already have a key...skip the extra query to request it again. This
+                        // situation can happen as Requested is only set to true at the end of the JSON parsing
+                    }
+                    else
+                    {
+                        // If not, make an explicit request for its basic properties
+                        var ensureParentBatch = contextAwareParent.PnPContext.NewBatch();
 
-                    // Define the lambda to retrieve the ID only
-                    var expressions = EntityManager.Instance.GetEntityKeyExpressions(parent);
+                        // Define the lambda to retrieve the ID only
+                        var expressions = EntityManager.Instance.GetEntityKeyExpressions(parent);
 
-                    // Enqueue the actual request in the dedicated batch
-                    await gettableParent.GetBatchAsync(ensureParentBatch, expressions).ConfigureAwait(false);
+                        // Enqueue the actual request in the dedicated batch
+                        await gettableParent.GetBatchAsync(ensureParentBatch, expressions).ConfigureAwait(false);
 
-                    // Make the actual request
-                    await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(true);
+                        // Make the actual request
+                        await contextAwareParent.PnPContext.BatchClient.ExecuteBatch(ensureParentBatch).ConfigureAwait(true);
+                    }
                 }
             }
         }

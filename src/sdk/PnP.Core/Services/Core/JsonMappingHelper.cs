@@ -339,28 +339,35 @@ namespace PnP.Core.Services
                 Metadata.Add(PnPConstants.MetaDataRestId, idFieldValue);
             }
             // Store graph ID for transition to graph when needed. No point in doing this when we've disabled graph first behaviour or when the entity does not support rest + graph
-            if (pnpContext.GraphFirst && entity.SupportsGraphAndRest && !Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
+            if (entity.SupportsGraphAndRest && !Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
             {
+
+                // Ensure site and web id's are loaded, use batching to load them both in one go in case that would be needed.
+                // Do this for all SharePoint types, but skip SP.Site as otherwise will processing the SP.Site response we again will request
+                // the SP.Web id...which is an unneeded server request
+                if (!entity.SharePointType.Equals("SP.Site"))
+                {
+                    if (!pnpContext.Site.IsPropertyAvailable(p => p.Id) || !pnpContext.Web.IsPropertyAvailable(p => p.Id))
+                    {
+                        var idBatch = pnpContext.NewBatch();
+                        if (!pnpContext.Site.IsPropertyAvailable(p => p.Id))
+                        {
+                            await pnpContext.Site.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
+                        }
+                        if (!pnpContext.Web.IsPropertyAvailable(p => p.Id))
+                        {
+                            await pnpContext.Web.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
+                        }
+                        await pnpContext.ExecuteAsync(idBatch).ConfigureAwait(false);
+
+                    }
+                }
+
                 // SP.Web requires a special id value
                 if (entity.SharePointType.Equals("SP.Web"))
                 {
                     if (!Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
                     {
-                        // Ensure site and web id's are loaded, use batching to load them both in one go in case that would be needed
-                        if (!pnpContext.Site.IsPropertyAvailable(p => p.Id) || !pnpContext.Web.IsPropertyAvailable(p => p.Id))
-                        {
-                            var idBatch = pnpContext.NewBatch();
-                            if (!pnpContext.Site.IsPropertyAvailable(p => p.Id))
-                            {
-                                await pnpContext.Site.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
-                            }
-                            if (!pnpContext.Web.IsPropertyAvailable(p => p.Id))
-                            {
-                                await pnpContext.Web.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
-                            }
-                            await pnpContext.ExecuteAsync(idBatch).ConfigureAwait(false);
-                        }
-
                         if (pnpContext.Site.IsPropertyAvailable(p => p.Id) && pnpContext.Web.IsPropertyAvailable(p => p.Id))
                         {
                             // Check again here due to the recursive nature of this code

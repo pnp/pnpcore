@@ -536,9 +536,6 @@ namespace PnP.Core.Test.QueryModel
             }
         }
 
-        /*
-         * Does not work anymore now that the GetBy methods have moved from extension methods to actual methods on the ListCollection class
-         * 
         [TestMethod]
         public async Task TestQueryListWithItemsFollowedByGraphQueryConsistency()
         {
@@ -548,7 +545,9 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 // Load list via Linq query --> this should now ensure the GraphId property of the web model is populated
-                var list = context.Web.Lists.Include(l => l.Items).GetByTitle("Site Pages", l => l.Id, l => l.Title, l => l.Description);
+                var list = context.Web.Lists.GetByTitle("Site Pages", l => l.Id, l => l.Title, l => l.Description, p => p.Items);
+
+                context.GraphFirst = true;
 
                 // Get the list items -- will happen via Graph
                 await list.GetAsync(p => p.Items);
@@ -557,7 +556,6 @@ namespace PnP.Core.Test.QueryModel
                 Assert.AreEqual(1, list.Items.Length);
             }
         }
-        */
 
         [TestMethod]
         public async Task TestMultipleQueriesInSingleContext()
