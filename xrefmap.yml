@@ -11277,15 +11277,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.Contains
   nameWithType: IListItemCollection.Contains
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
-  name: GetById(Int32, Expression<Func<IListItem, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetById_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
-  name.vb: GetById(Int32, Expression(Of Func(Of IListItem, Object))())
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
-  nameWithType: IListItemCollection.GetById(Int32, Expression<Func<IListItem, Object>>[])
-  nameWithType.vb: IListItemCollection.GetById(Int32, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32)
+  name: GetById(Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetById_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32)
+  nameWithType: IListItemCollection.GetById(Int32)
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.GetById*
   name: GetById
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetById_
@@ -11293,15 +11290,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetById
   nameWithType: IListItemCollection.GetById
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
-  name: GetByIdAsync(Int32, Expression<Func<IListItem, Object>>[])
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_System_Int32_Expression_Func_PnP_Core_Model_SharePoint_IListItem_System_Object_____
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32,Expression{Func{PnP.Core.Model.SharePoint.IListItem,System.Object}}[])
-  name.vb: GetByIdAsync(Int32, Expression(Of Func(Of IListItem, Object))())
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32, Expression<Func<PnP.Core.Model.SharePoint.IListItem, System.Object>>[])
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32, Expression(Of Func(Of PnP.Core.Model.SharePoint.IListItem, System.Object))())
-  nameWithType: IListItemCollection.GetByIdAsync(Int32, Expression<Func<IListItem, Object>>[])
-  nameWithType.vb: IListItemCollection.GetByIdAsync(Int32, Expression(Of Func(Of IListItem, Object))())
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32)
+  name: GetByIdAsync(Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32)
+  nameWithType: IListItemCollection.GetByIdAsync(Int32)
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync*
   name: GetByIdAsync
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_
