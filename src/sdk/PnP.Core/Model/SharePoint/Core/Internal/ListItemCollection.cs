@@ -89,14 +89,14 @@ namespace PnP.Core.Model.SharePoint
 
         #region GetById methods
 
-        public IListItem GetById(int id, params Expression<Func<IListItem, object>>[] selectors)
+        public IListItem GetById(int id)
         {
-            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Id == id, selectors);
+            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Id == id);
         }
 
-        public async Task<IListItem> GetByIdAsync(int id, params Expression<Func<IListItem, object>>[] selectors)
+        public async Task<IListItem> GetByIdAsync(int id)
         {
-            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id, selectors).ConfigureAwait(false);
+            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id).ConfigureAwait(false);
         }
 
         #endregion        

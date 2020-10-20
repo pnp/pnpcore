@@ -704,27 +704,48 @@ namespace PnP.Core.Services
 
             // Verify if we're not asking fields which anyhow cannot (yet) be served via Graph
             bool canUseGraph = true;
-            foreach (var selectProperty in query.Select)
+
+            // Ensure the model's keyfield was requested, this is needed to ensure the loaded model can be added/merged into an existing collection
+            // Only do this when there was no field filtering, without filtering all default fields are anyhow returned
+            if (query.Select.Any() || query.Expand.Any())
             {
-                var field = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
-                if (string.IsNullOrEmpty(field.GraphName))
+                // Add keyfield if not yet present
+                if (query.Select.FindIndex(x => x.Equals(entityInfo.ActualKeyFieldName, StringComparison.InvariantCultureIgnoreCase)) == -1)
                 {
-                    canUseGraph = false;
-                    break;
+                    query.Select.Add(entityInfo.ActualKeyFieldName);
                 }
+
+                foreach (var selectProperty in query.Select)
+                {
+                    var field = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
+                    if (string.IsNullOrEmpty(field.GraphName))
+                    {
+                        canUseGraph = false;
+                        break;
+                    }
+                }
+
+                foreach (var expandProperty in query.Expand)
+                {
+                    var field = entityInfo.Fields.FirstOrDefault(p => p.Name == expandProperty);
+                    if (string.IsNullOrEmpty(field.GraphName))
+                    {
+                        canUseGraph = false;
+                        break;
+                    }
+
+                    // fall back to REST if we have an expand with a separate get...only works if we support REST
+                    if (!string.IsNullOrEmpty(field.GraphGet) && !string.IsNullOrEmpty(field.SharePointName))
+                    {
+                        canUseGraph = false;
+                        break;
+                    }
+                }                
             }
 
-            foreach (var expandProperty in query.Expand)
+            if (canUseGraph)
             {
-                var field = entityInfo.Fields.FirstOrDefault(p => p.Name == expandProperty);
-                if (string.IsNullOrEmpty(field.GraphName))
-                {
-                    canUseGraph = false;
-                    break;
-                }
-
-                // fall back to REST if we have an expand with a separate get...only works if we support REST
-                if (!string.IsNullOrEmpty(field.GraphGet) && !string.IsNullOrEmpty(field.SharePointName))
+                foreach (var field in entityInfo.Fields.Where(p => p.Load && field.ExpandFieldInfo != null))
                 {
                     canUseGraph = false;
                     break;
@@ -755,12 +776,6 @@ namespace PnP.Core.Services
                             query.Select.Add(List.SystemFacet);
                         }
                     }
-                }
-
-                // Add keyfield if not yet present
-                if (query.Select.FindIndex(x=>x.Equals(entityInfo.ActualKeyFieldName, StringComparison.InvariantCultureIgnoreCase)) == -1)
-                {
-                    query.Select.Add(entityInfo.ActualKeyFieldName);
                 }
 
                 // Ensure that selected properties which are marked as expandable are also used in that manner
@@ -814,11 +829,6 @@ namespace PnP.Core.Services
                     (concreteEntity as IDataModelWithContext).PnPContext = pnpContext;
                 }
 
-                // Add keyfield if not yet present
-                if (query.Select.FindIndex(x => x.Equals(entityInfo.ActualKeyFieldName, StringComparison.InvariantCultureIgnoreCase)) == -1)
-                {
-                    query.Select.Add(entityInfo.ActualKeyFieldName);
-                }
 
                 // call the REST API building logic, this also handles token resolving
                 var result = await BuildGetAPICallRestAsync(concreteEntity as BaseDataModel<TModel>, entityInfo, default, true).ConfigureAwait(false);

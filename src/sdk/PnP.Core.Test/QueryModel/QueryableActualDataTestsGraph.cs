@@ -1,11 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using System;
-using PnP.Core.Test.Utilities;
-using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using PnP.Core.Test.Utilities;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -189,9 +187,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = true;
 
                 var library = context.Web.Lists.GetByTitle(listName);
-                var firstItem = library.Items.GetById(1, 
-                    i => i.Id, 
-                    i => i.Title);
+                var firstItem = library.Items.GetById(1);
 
                 Assert.IsNotNull(firstItem);
                 Assert.AreEqual(id, firstItem.Id);

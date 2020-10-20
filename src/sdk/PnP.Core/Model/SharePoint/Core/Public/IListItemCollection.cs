@@ -76,17 +76,15 @@ namespace PnP.Core.Model.SharePoint
         /// Method to select a list item by Id
         /// </summary>
         /// <param name="id">The Id to search for</param>
-        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list item instance, if any</returns>
-        public IListItem GetById(int id, params Expression<Func<IListItem, object>>[] selectors);
+        public IListItem GetById(int id);
 
         /// <summary>
         /// Method to select a list item by Id asynchronously
         /// </summary>
         /// <param name="id">The Id to search for</param>
-        /// <param name="selectors">The expressions declaring the fields to select</param>
         /// <returns>The resulting list item instance, if any</returns>
-        public Task<IListItem> GetByIdAsync(int id, params Expression<Func<IListItem, object>>[] selectors);
+        public Task<IListItem> GetByIdAsync(int id);
 
         #endregion
     }
