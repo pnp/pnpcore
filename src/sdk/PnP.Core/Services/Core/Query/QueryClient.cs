@@ -745,7 +745,7 @@ namespace PnP.Core.Services
 
             if (canUseGraph)
             {
-                foreach (var field in entityInfo.Fields.Where(p => p.Load && field.ExpandFieldInfo != null))
+                foreach (var field in entityInfo.Fields.Where(p => p.Load && p.ExpandFieldInfo != null))
                 {
                     canUseGraph = false;
                     break;
