@@ -15,6 +15,8 @@ namespace PnP.Core.Model.SharePoint
             this.Parent = parent;
         }
 
+        #region Add
+
         public async Task<IView> AddAsync(ViewOptions viewOptions)
         {
             if (viewOptions == null)
@@ -38,12 +40,21 @@ namespace PnP.Core.Model.SharePoint
         {
             return AddAsync(viewOptions).GetAwaiter().GetResult();
         }
-        
+
+        #endregion
+
+        #region Add Batch
+
         public async Task<IView> AddBatchAsync(Batch batch, ViewOptions viewOptions)
         {
             if (viewOptions == null)
             {
                 throw new ArgumentNullException(nameof(viewOptions));
+            }
+
+            if (batch == null)
+            {
+                throw new ArgumentNullException(nameof(batch));
             }
 
             var view = CreateNewAndAdd() as View;
@@ -73,6 +84,10 @@ namespace PnP.Core.Model.SharePoint
             return AddBatchAsync(batch, viewOptions).GetAwaiter().GetResult();
         }
 
+        #endregion
+
+        #region Remove
+
         public async Task RemoveAsync(Guid id)
         {
             if (id == null)
@@ -95,5 +110,59 @@ namespace PnP.Core.Model.SharePoint
                 this.items.Remove(vw);
             }
         }
+
+        public void Remove(Guid id)
+        {
+            RemoveAsync(id).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region Remove Batch
+
+        public async Task RemoveBatchAsync(Batch batch, Guid id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (batch == null)
+            {
+                throw new ArgumentNullException(nameof(batch));
+            }
+
+            if (!this.items.Any(o => o.Id == id))
+            {
+                throw new ArgumentOutOfRangeException(nameof(id),
+                    PnPCoreResources.Exception_View_ViewNotFoundInCollection);
+            }
+
+            var view = this.items.FirstOrDefault(o => o.Id == id);
+
+            if (view != default)
+            {
+                var vw = view as View;
+                await vw.DeleteBatchAsync(batch).ConfigureAwait(false);
+                this.items.Remove(vw);
+            }
+        }
+
+        public async Task RemoveBatchAsync(Guid id)
+        {
+            await RemoveBatchAsync(PnPContext.CurrentBatch, id).ConfigureAwait(false);
+        }
+
+        public void RemoveBatch(Guid id)
+        {
+            RemoveBatchAsync(PnPContext.CurrentBatch, id).GetAwaiter().GetResult();
+        }
+
+        public void RemoveBatch(Batch batch, Guid id)
+        {
+            RemoveBatchAsync(batch, id).GetAwaiter().GetResult();
+        }
+
+        #endregion
     }
 }
