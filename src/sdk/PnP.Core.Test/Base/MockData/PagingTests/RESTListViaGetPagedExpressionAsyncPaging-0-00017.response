@@ -1,9 +1,9 @@
---batchresponse_1810e44c-11ff-4cb9-867a-679c3b1aad27
+--batchresponse_46c4ee06-ca1f-49ff-b99d-a23a24deb0c0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_1810e44c-11ff-4cb9-867a-679c3b1aad27--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c09976f0-1ab8-4ecd-a330-0b41b9acdd2d')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c09976f0-1ab8-4ecd-a330-0b41b9acdd2d')","etag":"\"1\"","type":"SP.List"},"Id":"c09976f0-1ab8-4ecd-a330-0b41b9acdd2d","Title":"RESTListItemPaging"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'53b384b0-59ea-4729-a643-fc7ffa94efff')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'53b384b0-59ea-4729-a643-fc7ffa94efff')","etag":"\"3\"","type":"SP.List"},"Id":"53b384b0-59ea-4729-a643-fc7ffa94efff","Title":"Sharing Links"}]}}
+--batchresponse_46c4ee06-ca1f-49ff-b99d-a23a24deb0c0--

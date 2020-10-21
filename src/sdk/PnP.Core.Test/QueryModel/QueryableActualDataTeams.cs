@@ -36,11 +36,12 @@ namespace PnP.Core.Test.QueryModel
         }
 
         [TestMethod]
+        [ExpectedException(typeof(MicrosoftGraphServiceException))]
         public async Task TestQueryTeamChannelMessages()
         {
             var expectedDisplayName = "General";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var query = context.Team.Channels.GetByDisplayName(expectedDisplayName).Messages;

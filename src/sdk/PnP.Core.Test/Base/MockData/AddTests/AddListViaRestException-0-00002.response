@@ -1,9 +1,0 @@
---batchresponse_6ca73198-a764-4dbe-8149-6f351be2beaa
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 400 Bad Request
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"error":{"code":"-2147024809, System.ArgumentException","message":{"lang":"en-US","value":"Passing in an empty or null value of parameter 'strTitle'"}}}
---batchresponse_6ca73198-a764-4dbe-8149-6f351be2beaa--

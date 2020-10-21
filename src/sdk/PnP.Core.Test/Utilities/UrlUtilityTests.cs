@@ -171,9 +171,11 @@ namespace PnP.Core.Utilities.Tests
 
             mergedUrl = UrlUtility.CombineRelativeUrlWithUrlParameters("teams/{Site.GroupId}/installedapps?$expand=TeamsApp", "$select=displayName,id");
             Assert.IsTrue(mergedUrl.Equals("teams/{Site.GroupId}/installedapps?$expand=TeamsApp&$select=displayname,id", StringComparison.InvariantCultureIgnoreCase));
+
+            // Case sensitive test on list name!
+            mergedUrl = UrlUtility.CombineRelativeUrlWithUrlParameters("https://bertonline.sharepoint.com/sites/prov-1/_api/web/lists", "$select=Title,ListExperienceOptions&$filter=Title%20eq%20%27Documents%27&$top=1");
+            Assert.IsTrue(mergedUrl.Equals("bertonline.sharepoint.com/sites/prov-1/_api/web/lists?$select=Title,ListExperienceOptions&$filter=Title+eq+%27Documents%27&$top=1"));
         }
-
-
 
     }
 }

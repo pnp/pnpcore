@@ -339,15 +339,13 @@ namespace PnP.Core.Test.QueryModel
             var targetListTitle = "Site Pages";
             var expectedTitle = "Home";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
 
                 var library = context.Web.Lists.GetByTitle(targetListTitle);
-                var firstItem = library.Items.GetById(1, 
-                    i => i.Id, 
-                    i => i.Title);
+                var firstItem = library.Items.GetById(1);
 
                 Assert.IsNotNull(firstItem);
                 Assert.AreEqual(1, firstItem.Id);
@@ -367,9 +365,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var library = await context.Web.Lists.GetByTitleAsync(targetListTitle);
-                var firstItem = await library.Items.GetByIdAsync(1,
-                    i => i.Id,
-                    i => i.Title);
+                var firstItem = await library.Items.GetByIdAsync(1);
 
                 Assert.IsNotNull(firstItem);
                 Assert.AreEqual(1, firstItem.Id);
@@ -392,21 +388,20 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var library = await context.Web.Lists.GetByTitleAsync(targetListTitle);
-                var firstItem = await library.Items.GetByIdAsync(1,
-                    i => i.Id,
-                    i => i.Title);
+                var firstItem = await library.Items.GetByIdAsync(1);
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    IListItemCollection fakeLibraryColl = null;
-                    fakeLibraryColl.GetById(1,
-                        i => i.Id,
-                        i => i.Title);
-                });
+                // Not relevant now that GetById is a regular method instead of an extension method
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    IListItemCollection fakeLibraryColl = null;
+                //    fakeLibraryColl.GetById(1,
+                //        i => i.Id,
+                //        i => i.Title);
+                //});
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
-                    IListItemCollection fakeLibraryColl = null;
-                    await fakeLibraryColl.GetByIdAsync(1);
-                });
+                //await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                //    IListItemCollection fakeLibraryColl = null;
+                //    await fakeLibraryColl.GetByIdAsync(1);
+                //});
             }
         }
 

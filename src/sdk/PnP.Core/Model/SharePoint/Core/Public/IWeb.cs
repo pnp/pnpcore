@@ -530,6 +530,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IUserCustomActionCollection UserCustomActions { get; }
 
+        /// <summary>
+        /// Get's the permission levels set on this web
+        /// </summary>
+        public IBasePermissions EffectiveBasePermissions { get; }
+
         #region Methods
 
         #region GetFolderByServerRelativeUrl
@@ -640,6 +645,20 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The file to get</returns>
         public IFile GetFileByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IFile, object>>[] expressions);
 
+        #endregion
+
+        #region IsNoScriptSite 
+        /// <summary>
+        /// Checks if this web is configured for NoScript
+        /// </summary>
+        /// <returns>True if set to NoScript, false otherwise</returns>
+        public Task<bool> IsNoScriptSiteAsync();
+
+        /// <summary>
+        /// Checks if this web is configured for NoScript
+        /// </summary>
+        /// <returns>True if set to NoScript, false otherwise</returns>
+        public bool IsNoScriptSite();
         #endregion
 
         #endregion

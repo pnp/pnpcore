@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,7 +119,6 @@ namespace PnP.Core.Model
                                     {
                                         classField = EnsureClassField(type, property, classInfo);
                                         classField.SharePointName = !string.IsNullOrEmpty(sharePointPropertyAttribute.FieldName) ? sharePointPropertyAttribute.FieldName : property.Name;
-                                        classField.SharePointExpandable = sharePointPropertyAttribute.Expandable;
                                         classField.ExpandableByDefault = sharePointPropertyAttribute.ExpandByDefault;
                                         classField.SharePointUseCustomMapping = sharePointPropertyAttribute.UseCustomMapping;
                                         classField.SharePointJsonPath = sharePointPropertyAttribute.JsonPath;
@@ -150,19 +150,36 @@ namespace PnP.Core.Model
                             }
                         }
 
-                        if (classField == null && !skipField)
+                        if (!skipField)
                         {
-                            classField = EnsureClassField(type, property, classInfo);
-                            // Property was not decorated with attributes
-                            if (!classInfo.SharePointTargets.Any())
+                            if (classField == null)
                             {
-                                // This is a Graph only property
-                                classField.GraphName = ToCamelCase(property.Name);
+                                classField = EnsureClassField(type, property, classInfo);
+                                // Property was not decorated with attributes
+                                if (!classInfo.SharePointTargets.Any())
+                                {
+                                    // This is a Graph only property
+                                    classField.GraphName = ToCamelCase(property.Name);
+                                }
+                                else
+                                {
+                                    // This is SharePoint/Graph property, we're not setting the GraphName here because in "mixed" objects the Graph properties must be explicitely marked with the GraphProperty attribute
+                                    classField.SharePointName = property.Name;
+                                }
                             }
-                            else
+
+                            // Automatically determine "expand" value for SharePoint properties
+                            if (!string.IsNullOrEmpty(classField.SharePointName))
                             {
-                                // This is SharePoint/Graph property, we're not setting the GraphName here because in "mixed" objects the Graph properties must be explicitely marked with the GraphProperty attribute
-                                classField.SharePointName = property.Name;
+
+                                if (JsonMappingHelper.IsModelCollection(classField.PropertyInfo.PropertyType) ||
+                                    JsonMappingHelper.IsModelType(classField.PropertyInfo.PropertyType) ||
+                                    JsonMappingHelper.IsComplexType(classField.PropertyInfo.PropertyType) ||
+                                    JsonMappingHelper.IsExpandoComplexType(classField.PropertyInfo.PropertyType) ||
+                                    JsonMappingHelper.IsComplexTypeList(classField.PropertyInfo.PropertyType))
+                                {
+                                    classField.SharePointExpandable = true;
+                                }
                             }
                         }
                     }
@@ -248,23 +265,6 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
-        /// Creates a concrete instance of a domain model type based on the reference type
-        /// </summary>
-        /// <param name="type">The reference model type, can be an interface or a class</param>
-        /// <returns>Entity model class describing this model instance</returns>
-        internal static TransientObject GetEntityConcreteInstance(Type type)
-        {
-            if (type is null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            type = GetEntityConcreteType(type);
-
-            return (TransientObject)Activator.CreateInstance(type);
-        }
-
-        /// <summary>
         /// Translates model into a set of classes that are used to drive CRUD operations, this takes into account the passed expressions
         /// </summary>
         /// <param name="modelType">The Type of the model object to process</param>
@@ -289,27 +289,7 @@ namespace PnP.Core.Model
                 List<string> sharePointFieldsToLoad = new List<string>();
                 foreach (Expression<Func<TModel, object>> expression in expressions)
                 {
-                    string fieldToLoad = null;
-                    if (expression.Body is MemberExpression)
-                    {
-                        fieldToLoad = ((MemberExpression)expression.Body).Member.Name;
-
-                    }
-                    else if (expression.Body is UnaryExpression)
-                    {
-                        var a = (expression.Body as UnaryExpression).Operand;
-                        if (a is MemberExpression)
-                        {
-                            fieldToLoad = (a as MemberExpression).Member.Name;
-                        }
-                    }
-                    else if (expression.Body is MethodCallExpression)
-                    {
-                        if ((expression.Body as MethodCallExpression).Method.Name == "LoadProperties")
-                        {
-                            fieldToLoad = ParseInclude(entityInfo, expression as LambdaExpression, null);
-                        }
-                    }
+                    string fieldToLoad = GetFieldToLoad(entityInfo, expression);
 
                     if (fieldToLoad != null)
                     {
@@ -382,6 +362,34 @@ namespace PnP.Core.Model
             }
 
             return entityInfo;
+        }
+
+        internal static string GetFieldToLoad<TModel>(EntityInfo entityInfo, Expression<Func<TModel, object>> expression)
+        {
+            string fieldToLoad = null;
+
+            if (expression.Body is MemberExpression)
+            {
+                fieldToLoad = ((MemberExpression)expression.Body).Member.Name;
+
+            }
+            else if (expression.Body is UnaryExpression)
+            {
+                var a = (expression.Body as UnaryExpression).Operand;
+                if (a is MemberExpression)
+                {
+                    fieldToLoad = (a as MemberExpression).Member.Name;
+                }
+            }
+            else if (expression.Body is MethodCallExpression)
+            {
+                if ((expression.Body as MethodCallExpression).Method.Name == "LoadProperties")
+                {
+                    fieldToLoad = ParseInclude(entityInfo, expression as LambdaExpression, null);
+                }
+            }
+
+            return fieldToLoad;
         }
 
         private static string ParseInclude(EntityInfo entityInfo, LambdaExpression expression, EntityFieldExpandInfo entityFieldExpandInfo)

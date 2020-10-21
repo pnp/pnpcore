@@ -8,13 +8,13 @@ namespace PnP.Core.Model.SharePoint
     /// Note: this class is generated, please don't modify this code by hand!
     /// 
     /// </summary>
-    internal partial class FileVersion : BaseDataModel<IFileVersion>, IFileVersion
+    internal partial class FileVersion : BaseComplexType<IFileVersion>, IFileVersion
     {
         public string CheckInComment { get => GetValue<string>(); set => SetValue(value); }
 
         public DateTime Created { get => GetValue<DateTime>(); set => SetValue(value); }
 
-        public int ID { get => GetValue<int>(); set => SetValue(value); }
+        public int Id { get => GetValue<int>(); set => SetValue(value); }
 
         public bool IsCurrentVersion { get => GetValue<bool>(); set => SetValue(value); }
 

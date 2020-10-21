@@ -1,9 +1,0 @@
---batchresponse_56251023-e070-424a-99c7-c8e253d7c0eb
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-
-HTTP/1.1 200 OK
-CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
-
-{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web","type":"SP.Web"},"Author":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Author","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Author","type":"SP.User"},"Alerts":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Author/Alerts"}},"Groups":{"__deferred":{"uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Author/Groups"}},"Id":7,"IsHiddenInUI":true,"LoginName":"c:0o.c|federateddirectoryclaimprovider|d40f31cc-3876-40f4-bb39-fad5407d9ad4_o","Title":"PnP Microsoft 365 library test with group Owners","PrincipalType":4,"Email":"pnpcoresdktestgroup@pvxdev.onmicrosoft.com","Expiration":"","IsEmailAuthenticationGuestUser":false,"IsShareByEmailGuestUser":false,"IsSiteAdmin":true,"UserId":null,"UserPrincipalName":null},"Id":"debb4230-758e-4649-aca8-d1cf0796684b"}}
---batchresponse_56251023-e070-424a-99c7-c8e253d7c0eb--

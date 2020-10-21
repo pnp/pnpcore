@@ -51,7 +51,6 @@
 
         public bool Sealed { get => GetValue<bool>(); set => SetValue(value); }
 
-        [SharePointProperty("FieldLinks", Expandable = true)]
         public IFieldLinkCollection FieldLinks
         {
             get

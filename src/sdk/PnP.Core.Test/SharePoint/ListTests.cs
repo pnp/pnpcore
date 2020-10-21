@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel;
+using PnP.Core.Model;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -223,42 +223,47 @@ namespace PnP.Core.Test.SharePoint
                     var list2 = context2.Web.Lists.GetByTitle(listTitle);
                     if (list2 != null)
                     {
-                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
-                            IListCollection list = null;
-                            await list.GetByIdAsync(listGuid);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                        //    IListCollection list = null;
+                        //    await list.GetByIdAsync(listGuid);
+                        //});
 
                         await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
                             await context2.Web.Lists.GetByIdAsync(Guid.Empty, p => p.TemplateType, p => p.Title);
                         });
 
-                        Assert.ThrowsException<ArgumentNullException>(() => {
-                            IListCollection list = null;
-                            list.GetById(listGuid);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //Assert.ThrowsException<ArgumentNullException>(() => {
+                        //    IListCollection list = null;
+                        //    list.GetById(listGuid);
+                        //});
 
                         Assert.ThrowsException<ArgumentNullException>(() => {
                             context2.Web.Lists.GetById(Guid.Empty, p => p.TemplateType, p => p.Title);
                         });
 
-                        Assert.ThrowsException<ArgumentNullException>(() => {
-                            IListCollection list = null;
-                            list.GetByTitle(listTitle);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //Assert.ThrowsException<ArgumentNullException>(() => {
+                        //    IListCollection list = null;
+                        //    list.GetByTitle(listTitle);
+                        //});
 
                         Assert.ThrowsException<ArgumentNullException>(() => {
                             context2.Web.Lists.GetByTitle(null);
                         });
 
-                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
-                            IListCollection list = null;
-                            await list.GetByTitleAsync(listTitle);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                        //    IListCollection list = null;
+                        //    await list.GetByTitleAsync(listTitle);
+                        //});
 
-                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
-                            IListCollection list = null;
-                            await list.GetByTitleAsync(null);
-                        });
+                        // Commented now that the GetBy methods are actual methods on the interface versus extention methods
+                        //await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                        //    IListCollection list = null;
+                        //    await list.GetByTitleAsync(null);
+                        //});
 
                     }
                 }
@@ -670,7 +675,38 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);
+            }
+        }
 
+        [TestMethod]
+        public async Task GetListByTitleWithExpand()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Documents", p => p.Title, p => p.ContentTypes);
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+                Assert.IsTrue(list.ContentTypes.Requested);
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Description));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetListByTitleWithLoadProperties()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name));
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+                Assert.IsTrue(list.ContentTypes.Requested);
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Name));
             }
         }
 
@@ -709,6 +745,29 @@ namespace PnP.Core.Test.SharePoint
 
             }
         }
+
+        [TestMethod]
+        public async Task GetListByTitleWithLoadPropertiesRecursive()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, 
+                    p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name, 
+                        p=>p.FieldLinks.LoadProperties(p=>p.Id, p=>p.Name)));
+
+                Assert.IsTrue(list.Requested);
+                Assert.AreEqual(list.Title, "documents", true);
+                Assert.IsTrue(list.ContentTypes.Requested);
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.First().IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(list.ContentTypes.First().FieldLinks.Requested);
+                Assert.IsTrue(list.ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(list.ContentTypes.First().FieldLinks.First().IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(!string.IsNullOrEmpty(list.ContentTypes.First().FieldLinks.First().Name));
+            }
+        }
+
 
     }
 }

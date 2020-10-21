@@ -385,11 +385,11 @@ namespace PnP.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only the &apos;Include&apos; method is supported.
+        ///   Looks up a localized string similar to Only the &apos;LoadProperties&apos; method is supported.
         /// </summary>
-        internal static string Exception_PropertyNotLoaded_OnlyIncludeSupported {
+        internal static string Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported {
             get {
-                return ResourceManager.GetString("Exception_PropertyNotLoaded_OnlyIncludeSupported", resourceCulture);
+                return ResourceManager.GetString("Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported", resourceCulture);
             }
         }
         
@@ -606,6 +606,24 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_InteractiveRequestBatch {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_InteractiveRequestBatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t use the LoadProperties method for Microsoft Graph queries.
+        /// </summary>
+        internal static string Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The property &apos;{0}&apos; cannot be included here because it&apos;s underlying depending on a separate query.
+        /// </summary>
+        internal static string Exception_Unsupported_LinqExpandOfPropertyWithOwnGet {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_LinqExpandOfPropertyWithOwnGet", resourceCulture);
             }
         }
         

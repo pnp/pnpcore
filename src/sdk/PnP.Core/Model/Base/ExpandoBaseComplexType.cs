@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace PnP.Core.Model
@@ -16,7 +17,7 @@ namespace PnP.Core.Model
     /// https://weblog.west-wind.com/posts/2012/feb/08/creating-a-dynamic-extensible-c-expando-object
     /// </remarks>
     /// <typeparam name="TModel">The actual type of the entity of the Domain Model</typeparam>
-    internal class ExpandoBaseComplexType<TModel> : TransientObject, IExpandoComplexType
+    internal class ExpandoBaseComplexType<TModel> : TransientObject, IExpandoComplexType<TModel>
     {
         /// <summary>
         /// Type of the instance object
@@ -285,6 +286,30 @@ namespace PnP.Core.Model
         public dynamic AsDynamic()
         {
             return TransientObject.AsDynamic(this);
+        }
+
+        public bool IsPropertyAvailable<T>(Expression<Func<T, object>> expression)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
+
+            return HasValue(body.Member.Name);
+        }
+
+        public bool IsPropertyAvailable(Expression<Func<TModel, object>> expression)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
+
+            return HasValue(body.Member.Name);
         }
     }
 }

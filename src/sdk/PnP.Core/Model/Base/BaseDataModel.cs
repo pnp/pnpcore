@@ -2,14 +2,11 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace PnP.Core.Model
 {
@@ -1164,5 +1161,152 @@ namespace PnP.Core.Model
             }
         }
         #endregion
+
+
+        public bool IsPropertyAvailable(Expression<Func<TModel, object>> expression)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
+
+            return HasValue(body.Member.Name);
+        }
+
+
+        public async Task EnsurePropertiesAsync(params Expression<Func<TModel, object>>[] expressions)
+        {
+            var dirty = false;
+            List<Expression<Func<TModel, object>>> expressionsToLoad = VerifyProperties(this, expressions, ref dirty);
+
+            if (dirty)
+            {
+                await GetAsync(default, expressionsToLoad.ToArray()).ConfigureAwait(false);
+            }
+        }
+
+        public bool ArePropertiesAvailable(params Expression<Func<TModel, object>>[] expressions)
+        {
+            var dirty = false;
+            VerifyProperties(this, expressions, ref dirty);
+
+            return !dirty;
+        }
+
+        private static List<Expression<Func<TModel, object>>> VerifyProperties(IDataModel<TModel> model, Expression<Func<TModel, object>>[] expressions, ref bool dirty)
+        {
+            List<Expression<Func<TModel, object>>> expressionsToLoad = new List<Expression<Func<TModel, object>>>();
+            foreach (Expression<Func<TModel, object>> expression in expressions)
+            {
+                if (expression.Body.NodeType == ExpressionType.Call && expression.Body is MethodCallExpression)
+                {
+                    // Future use? (includes)
+                    var body = (MethodCallExpression)expression.Body;
+                    if (body.Method.IsGenericMethod && body.Method.Name == "LoadProperties")
+                    {
+                        if (body.Arguments.Count != 2)
+                        {
+                            throw new Exception(PnPCoreResources.Exception_InvalidArgumentsNumber);
+                        }
+
+                        // Parse the expressions and get the relevant entity information
+                        var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModel>), expressions);
+
+                        string fieldToLoad = (body.Arguments[0] as MemberExpression).Member.Name;
+
+                        var collectionToCheck = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
+                        if (collectionToCheck != null)
+                        {
+                            var collection = model.GetPublicInstancePropertyValue(fieldToLoad);
+                            if (collection is IRequestableCollection)
+                            {
+                                if (!(collection as IRequestableCollection).Requested)
+                                {
+                                    // Collection was not requested at all, so let's load it again
+                                    expressionsToLoad.Add(expression);
+                                    dirty = true;
+                                }
+                                else
+                                {
+                                    if (collectionToCheck.ExpandFieldInfo != null && (collection as IRequestableCollection).Length > 0)
+                                    {
+                                        // Collection was requested and there's at least one item to check, let's see if we can figure out if all needed properties were loaded as well
+                                        if (!WereFieldsRequested(collectionToCheck, collectionToCheck.ExpandFieldInfo, collection as IRequestableCollection))
+                                        {
+                                            expressionsToLoad.Add(expression);
+                                            dirty = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        expressionsToLoad.Add(expression);
+                                        dirty = true;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            expressionsToLoad.Add(expression);
+                            dirty = true;
+                        }
+                    }
+                    else
+                    {
+                        throw new ClientException(ErrorType.PropertyNotLoaded,
+                            PnPCoreResources.Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported);
+                    }
+                }
+                else if (!model.IsPropertyAvailable(expression))
+                {
+                    // Property was not available, add it the expressions to load
+                    expressionsToLoad.Add(expression);
+                    dirty = true;
+                }
+            }
+
+            return expressionsToLoad;
+        }
+
+        private static bool WereFieldsRequested(EntityFieldInfo collectionToCheck, EntityFieldExpandInfo expandFields, IRequestableCollection collection)
+        {
+            var enumerator = collection.RequestedItems.GetEnumerator();
+
+            enumerator.Reset();
+            enumerator.MoveNext();
+
+            // If no item available or collection was not requested then we need to reload
+            if (!collection.Requested || enumerator.Current == null)
+            {
+                return false;
+            }
+
+            TransientObject itemToCheck = enumerator.Current as TransientObject;
+
+            foreach (var fieldInExpression in expandFields.Fields)
+            {
+                if (!fieldInExpression.Fields.Any())
+                {
+                    if (!itemToCheck.HasValue(fieldInExpression.Name))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    // this is another collection, so perform a recursive check
+                    var collectionRecursive = itemToCheck.GetPublicInstancePropertyValue(fieldInExpression.Name) as IRequestableCollection;
+                    if (!WereFieldsRequested(collectionToCheck, fieldInExpression, collectionRecursive))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
     }
 }

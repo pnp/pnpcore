@@ -26,23 +26,23 @@ In order for the user to authenticate on the App, A new app registration should 
   - Select __Microsoft Graph__ > __Delegated permissions__ > select __Sites.Read.All__
   - Select __Microsoft Graph__ > __Delegated permissions__ > select __Files.Read.All__
   - Select __SharePoint__ > __Delegated permissions__ > select __AllSites.Read__
+  - Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __Directory.Read.All__
+  - Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __User.Read__
 
 - Click __Grant admin consent for {tenant}__
+
+- Go to __Certificates & Secrets__ and register a new client secret.
 
 - From __Overview__,
 -- copy the value of __Directory (tenant) ID__
 -- copy the value of __Application (client) ID__
 
 ## Configure your application
-
 - Configure the name of your tenant as the value of `AzureAd:Domain` in appsettings.json setting
 - Configure the Tenant ID of your app as the value of `AzureAd:TenantId` in appsettings.json setting
 - Configure the Client ID of your app as the value of `AzureAd:ClientId` in appsettings.json setting
-
-Configure a set of credentials (username and password) for your target Microsoft SharePoint Online/Microsoft Teams environment in the Credential Manager of your Windows machine under the __Windows Credentials__ > __Generic Credentials__ group.
-
-- Configure the name of the created credentials as the value of `PnPCore:Credentials:CredentialManagerAuthentication:CredentialManagerName` in appsettings.json setting
-- Configure the URL of a target Microsoft SharePoint Online modern team site collection as the value of `PnPCore:Credentials:Sites:DemoSite:SiteUrl` in appsettings.json setting
+- Configure the Client Secret of your app as the value of `AzureAd:ClientSecret` in appsettings.json setting
+- Configure the URL of the target "modern" team site as the value of `PnPCore:Sites:DemoSite:SiteUrl` in appsettings.json setting
 
 Be sure to have a Team in Microsoft Teams backing the modern team site in the above site collection
 

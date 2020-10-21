@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NuGet.Frameworks;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
@@ -200,25 +199,25 @@ namespace PnP.Core.Test.SharePoint
                     termStoreUpdated.Groups.GetById(string.Empty);
                 });
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    ITermGroupCollection groups = null;
-                    groups.GetByName(string.Empty);
-                });
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    ITermGroupCollection groups = null;
+                //    groups.GetByName(string.Empty);
+                //});
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    ITermGroupCollection groups = null;
-                    groups.GetByName(null);
-                });
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    ITermGroupCollection groups = null;
+                //    groups.GetByName(null);
+                //});
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    ITermGroupCollection groups = null;
-                    groups.GetById(string.Empty);
-                });
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    ITermGroupCollection groups = null;
+                //    groups.GetById(string.Empty);
+                //});
 
-                Assert.ThrowsException<ArgumentNullException>(() => {
-                    ITermGroupCollection groups = null;
-                    groups.GetById(null);
-                });
+                //Assert.ThrowsException<ArgumentNullException>(() => {
+                //    ITermGroupCollection groups = null;
+                //    groups.GetById(null);
+                //});
 
                 // Delete the group again
                 await newGroup.DeleteAsync();

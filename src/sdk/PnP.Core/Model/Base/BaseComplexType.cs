@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Text.Json;
 using PnP.Core.Services;
 
@@ -53,6 +54,18 @@ namespace PnP.Core.Model
                 }
             }
             return default;
+        }
+
+        public bool IsPropertyAvailable(Expression<Func<TModel, object>> expression)
+        {
+            if (expression == null)
+            {
+                throw new ArgumentNullException(nameof(expression));
+            }
+
+            var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
+
+            return HasValue(body.Member.Name);
         }
     }
 }

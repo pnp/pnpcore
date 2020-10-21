@@ -5,6 +5,8 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PnP.Core.Model;
+
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -28,7 +30,7 @@ namespace PnP.Core.Test.SharePoint
                 IContentType contentType = (from ct in context.Web.ContentTypes
                                             where ct.Name == "Document"
                                             select ct)
-                                            .Load(ct => ct.FieldLinks)
+                                            .Include(ct => ct.FieldLinks)
                                             .FirstOrDefault();
 
                 Assert.IsTrue(contentType.FieldLinks.Count() > 0);
@@ -49,11 +51,15 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get existing content type
-                IContentType contentType = (from ct in context.Web.Lists.GetByTitle("Documents").ContentTypes
-                                            where ct.Name == "Document"
-                                            select ct)
-                                            .Load(ct => ct.FieldLinks)
-                                            .FirstOrDefault();
+
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.ContentTypes.LoadProperties(p=>p.Name, p => p.FieldLinks));
+                var contentType = list.ContentTypes.FirstOrDefault(p => p.Name == "Document");
+
+                //IContentType contentType = (from ct in context.Web.Lists.GetByTitle("Documents").ContentTypes
+                //                            where ct.Name == "Document"
+                //                            select ct)
+                //                            .Include(ct => ct.FieldLinks)
+                //                            .FirstOrDefault();
 
                 Assert.IsTrue(contentType.FieldLinks.Count() > 0);
                 Assert.IsNotNull(contentType);

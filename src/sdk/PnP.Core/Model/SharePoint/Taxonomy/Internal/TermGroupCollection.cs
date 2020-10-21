@@ -1,11 +1,15 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
     internal partial class TermGroupCollection
     {
+        #region Add methods
+
         public async Task<ITermGroup> AddAsync(string name, string description = null, TermGroupScope scope = TermGroupScope.Global)
         {
             if (string.IsNullOrEmpty(name))
@@ -75,6 +79,57 @@ namespace PnP.Core.Model.SharePoint
         {
             return AddBatchAsync(name, description).GetAwaiter().GetResult();
         }
+
+        #endregion
+
+        #region GetById methods
+
+        public ITermGroup GetById(string id, params Expression<Func<ITermGroup, object>>[] selectors)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return BaseDataModelExtensions.BaseLinqGet(this, c => c.Id == id, selectors);
+        }
+
+        public async Task<ITermGroup> GetByIdAsync(string id, params Expression<Func<ITermGroup, object>>[] selectors)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id, selectors).ConfigureAwait(false);
+        }
+
+        #endregion
+
+        #region GetByName methods
+
+        public ITermGroup GetByName(string name, params Expression<Func<ITermGroup, object>>[] selectors)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return BaseDataModelExtensions.BaseLinqGet(this, c => c.Name == name, selectors);
+        }
+
+        public async Task<ITermGroup> GetByNameAsync(string name, params Expression<Func<ITermGroup, object>>[] selectors)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Name == name, selectors).ConfigureAwait(false);
+        }
+
+        #endregion
+
 
     }
 }

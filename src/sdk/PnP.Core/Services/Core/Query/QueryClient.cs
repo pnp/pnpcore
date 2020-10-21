@@ -1,4 +1,6 @@
 ﻿using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -19,6 +21,8 @@ namespace PnP.Core.Services
     internal class QueryClient
     {
         #region GET
+
+        #region Model data get
 
 #pragma warning disable CA1822 // Mark members as static
         internal async Task<ApiCallRequest> BuildGetAPICallAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ApiCall apiOverride, bool forceSPORest = false, bool useLinqGet = false)
@@ -457,6 +461,8 @@ namespace PnP.Core.Services
             }
         }
 
+        #endregion
+
         #region API Calls for non expandable collections
 
 #pragma warning disable CA1822 // Mark members as static
@@ -690,6 +696,188 @@ namespace PnP.Core.Services
 
         #endregion
 
+        #region LINQ data get
+
+        internal static async Task<List<ApiCall>> BuildODataGetQueryAsync<TModel>(object concreteEntity, EntityInfo entityInfo, PnPContext pnpContext, ODataQuery<TModel> query, string memberName)
+        {
+            List<ApiCall> response = new List<ApiCall>();
+
+            // Verify if we're not asking fields which anyhow cannot (yet) be served via Graph
+            bool canUseGraph = true;
+
+            // Ensure the model's keyfield was requested, this is needed to ensure the loaded model can be added/merged into an existing collection
+            // Only do this when there was no field filtering, without filtering all default fields are anyhow returned
+            if (query.Select.Any() || query.Expand.Any())
+            {
+                // Add keyfield if not yet present
+                if (query.Select.FindIndex(x => x.Equals(entityInfo.ActualKeyFieldName, StringComparison.InvariantCultureIgnoreCase)) == -1)
+                {
+                    query.Select.Add(entityInfo.ActualKeyFieldName);
+                }
+
+                foreach (var selectProperty in query.Select)
+                {
+                    var field = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
+                    if (string.IsNullOrEmpty(field.GraphName))
+                    {
+                        canUseGraph = false;
+                        break;
+                    }
+                }
+
+                foreach (var expandProperty in query.Expand)
+                {
+                    var field = entityInfo.Fields.FirstOrDefault(p => p.Name == expandProperty);
+                    if (string.IsNullOrEmpty(field.GraphName))
+                    {
+                        canUseGraph = false;
+                        break;
+                    }
+
+                    // fall back to REST if we have an expand with a separate get...only works if we support REST
+                    if (!string.IsNullOrEmpty(field.GraphGet) && !string.IsNullOrEmpty(field.SharePointName))
+                    {
+                        canUseGraph = false;
+                        break;
+                    }
+                }                
+            }
+
+            if (canUseGraph)
+            {
+                foreach (var field in entityInfo.Fields.Where(p => p.Load && p.ExpandFieldInfo != null))
+                {
+                    canUseGraph = false;
+                    break;
+                }
+            }
+
+            // Using LoadProperties in combination with a Graph query is not supported
+            if (canUseGraph && entityInfo.Fields.Any(p => p.ExpandFieldInfo != null))
+            {
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_LinqExpandOfPropertyWithLoadProperties);
+            }
+
+            // We try to use Graph First, if selected by the user and if the query is supported by Graph
+            if (canUseGraph && pnpContext.GraphFirst && !string.IsNullOrEmpty(entityInfo.GraphLinqGet))
+            {
+                if (concreteEntity is IList)
+                {
+                    if (query.Select.Count == 0)
+                    {
+                        // We need to load the system facet to get all lists, hence we also need to load all other properties since no specific fields were requested
+                        query.Select.AddRange(List.DefaultGraphFieldsToLoad.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+                    }
+                    else
+                    {
+                        // Specific fields where requested, ensure the system field is present
+                        if (!query.Select.Contains(List.SystemFacet))
+                        {
+                            query.Select.Add(List.SystemFacet);
+                        }
+                    }
+                }
+
+                // Ensure that selected properties which are marked as expandable are also used in that manner
+                foreach (var selectProperty in query.Select)
+                {
+                    var prop = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
+                    if (prop != null && !string.IsNullOrEmpty(prop.GraphName) && prop.GraphExpandable && !query.Expand.Contains(prop.GraphName))
+                    {
+                        query.Expand.Add(prop.GraphName);
+                    }
+                }
+
+                foreach (var selectProperty in query.Expand)
+                {
+                    var prop = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
+
+                    if (prop != null)
+                    {
+                        if (!string.IsNullOrEmpty(prop.GraphName) && !string.IsNullOrEmpty(prop.GraphGet))
+                        {
+                            throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Unsupported_LinqExpandOfPropertyWithOwnGet, selectProperty));
+                        }
+                    }
+                }
+
+                // Ensure the passed model has a PnPContext set
+                if ((concreteEntity as IDataModelWithContext).PnPContext == null)
+                {
+                    (concreteEntity as IDataModelWithContext).PnPContext = pnpContext;
+                }
+
+                // call the REST API building logic, this also handles token resolving
+                var result = await BuildGetAPICallGraphAsync(concreteEntity as BaseDataModel<TModel>, entityInfo, default, true).ConfigureAwait(false);
+
+                // Merge the created REST url with the additioanal parameters coming from the OData Query
+                var requestUrl = UrlUtility.CombineRelativeUrlWithUrlParameters(result.ApiCall.Request, query.ToQueryString(ODataTargetPlatform.Graph));
+
+                response.Add(new ApiCall
+                {
+                    Type = entityInfo.GraphBeta ? ApiType.GraphBeta : ApiType.Graph,
+                    ReceivingProperty = memberName,
+                    Request = requestUrl
+                });
+
+            }
+            else
+            {
+                // Ensure the passed model has a PnPContext set
+                if ((concreteEntity as IDataModelWithContext).PnPContext == null)
+                {
+                    (concreteEntity as IDataModelWithContext).PnPContext = pnpContext;
+                }
+
+
+                // call the REST API building logic, this also handles token resolving
+                var result = await BuildGetAPICallRestAsync(concreteEntity as BaseDataModel<TModel>, entityInfo, default, true).ConfigureAwait(false);
+
+                // Merge the created REST url with the additioanal parameters coming from the OData Query
+                var requestUrl = $"https://{UrlUtility.CombineRelativeUrlWithUrlParameters(result.ApiCall.Request, query.ToQueryString(ODataTargetPlatform.SPORest))}";
+
+                response.Add(new ApiCall
+                {
+                    Type = ApiType.SPORest,
+                    ReceivingProperty = memberName,
+                    Request = requestUrl
+                });
+            }
+
+            return response;
+        }
+
+        internal static IQueryable<TModel> ProcessExpression<TModel>(IQueryable<TModel> source, EntityInfo entityInfo, params Expression<Func<TModel, object>>[] selectors)
+        {
+            IQueryable<TModel> selectionTarget = source;
+
+            if (selectors != null)
+            {
+                IEnumerable<EntityFieldInfo> fields = entityInfo.Fields.Where(p => p.Load);
+
+                foreach (var s in selectors)
+                {
+                    var fieldToLoad = EntityManager.GetFieldToLoad(entityInfo, s);
+
+                    var field = fields.FirstOrDefault(p => p.Name == fieldToLoad);
+                    if (field != null)
+                    {
+                        if (field.SharePointExpandable || field.GraphExpandable || !string.IsNullOrEmpty(field.GraphGet))
+                        {
+                            selectionTarget = selectionTarget.Include(s);
+                        }                        
+                        else
+                        {
+                            selectionTarget = selectionTarget.Load(s);
+                        }
+                    }
+                }
+            }
+
+            return selectionTarget;
+        }
+
+        #endregion
 
         #endregion
 

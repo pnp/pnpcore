@@ -3,6 +3,7 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text.Json;
@@ -20,6 +21,7 @@ namespace PnP.Core.Model.SharePoint
     {
         // List of fields that loaded when the Lists collection is requested. This approach is needed as 
         // Graph requires the "system" field to be loaded as trigger to return all lists 
+        internal const string SystemFacet = "system";
         internal const string DefaultGraphFieldsToLoad = "system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list";
         internal static Expression<Func<IList, object>>[] GetListDataAsStreamExpression = new Expression<Func<IList, object>>[] { p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind) };
 
@@ -87,7 +89,7 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             // Logic to set the EntityType metadata property
-            if (this.IsPropertyAvailable(p => p.NameToConstructEntityType) && this.IsPropertyAvailable(p => p.TemplateType) && !Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
+            if (this.HasValue(nameof(NameToConstructEntityType)) && this.IsPropertyAvailable(p => p.TemplateType) && !Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
             {
                 if (!string.IsNullOrEmpty(NameToConstructEntityType))
                 {
@@ -103,6 +105,7 @@ namespace PnP.Core.Model.SharePoint
                         TemplateType == ListTemplateType.HelpLibrary ||
                         TemplateType == ListTemplateType.HomePageLibrary ||
                         TemplateType == ListTemplateType.MySiteDocumentLibrary ||
+                        TemplateType == ListTemplateType.SharingLinks ||
                         // IWConvertedForms
                         TemplateType == (ListTemplateType)10102)
                     {
@@ -122,7 +125,9 @@ namespace PnP.Core.Model.SharePoint
                     }
                     else
                     {
-                        Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, $"{entityName.ToString().Replace(" ", "")}{(isList ? "List" : "")}");
+                        string entityNameToUse = $"{entityName.ToString().Replace(" ", "")}{(isList ? "List" : "")}";
+                        entityNameToUse = entityNameToUse.First().ToString().ToUpper() + entityNameToUse.Substring(1);
+                        Metadata.Add(PnPConstants.MetaDataRestEntityTypeName, entityNameToUse);
                     }
                 }
             }

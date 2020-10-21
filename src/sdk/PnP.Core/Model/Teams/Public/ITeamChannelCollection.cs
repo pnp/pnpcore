@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using PnP.Core.Services;
 
@@ -9,6 +11,7 @@ namespace PnP.Core.Model.Teams
     /// </summary>
     public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCollection<ITeamChannel>, ISupportPaging<ITeamChannel>
     {
+        #region Add methods
 
         /// <summary>
         /// Adds a new channel
@@ -59,5 +62,29 @@ namespace PnP.Core.Model.Teams
         /// <param name="description">Optional description of the channel</param>
         /// <returns>Newly added channel</returns>
         public ITeamChannel AddBatch(string name, string description = null);
+
+        #endregion
+
+        #region GetByDisplayName implementation
+
+        /// <summary>
+        /// Method to select a channel by displayName
+        /// </summary>
+        /// <param name="displayName">The displayName to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting channel instance, if any</returns>
+        public ITeamChannel GetByDisplayName(string displayName, params Expression<Func<ITeamChannel, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a channel by displayName asynchronously
+        /// </summary>
+        /// <param name="displayName">The displayName to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting channel instance, if any</returns>
+        public Task<ITeamChannel> GetByDisplayNameAsync(string displayName, params Expression<Func<ITeamChannel, object>>[] selectors);
+
+        #endregion
+
+
     }
 }

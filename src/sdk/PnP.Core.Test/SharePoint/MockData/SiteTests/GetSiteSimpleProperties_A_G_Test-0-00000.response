@@ -1,9 +1,9 @@
---batchresponse_91111b2a-743f-4e03-8684-fe39038e49eb
+--batchresponse_57ca3cd4-3272-407b-a9db-06ff952dfb48
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"AllowCreateDeclarativeWorkflow":true,"AllowDesigner":true,"AllowExternalEmbeddingWrapper":1,"AllowMasterPageEditing":false,"AllowRevertFromTemplate":false,"AllowSaveDeclarativeWorkflowAsTemplate":true,"AllowSavePublishDeclarativeWorkflow":true,"AllowSelfServiceUpgrade":true,"AllowSelfServiceUpgradeEvaluation":true,"AuditLogTrimmingRetention":90,"CanSyncHubSitePermissions":false,"CanUpgrade":true,"ChannelGroupId":"00000000-0000-0000-0000-000000000000","Classification":"","CommentsOnSitePagesDisabled":false,"CompatibilityLevel":15,"ComplianceAttribute":"","DisableAppViews":false,"DisableCompanyWideSharingLinks":false,"DisableFlows":false,"ExternalSharingTipsEnabled":false,"ExternalUserExpirationInDays":0,"GeoLocation":"EUR","GroupId":"d40f31cc-3876-40f4-bb39-fad5407d9ad4","Id":"e52f882f-72c5-4d16-b0ee-0401cdbd2601"}}
---batchresponse_91111b2a-743f-4e03-8684-fe39038e49eb--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"AllowCreateDeclarativeWorkflow":true,"AllowDesigner":true,"AllowExternalEmbeddingWrapper":1,"AllowMasterPageEditing":false,"AllowRevertFromTemplate":false,"AllowSaveDeclarativeWorkflowAsTemplate":true,"AllowSavePublishDeclarativeWorkflow":true,"AllowSelfServiceUpgrade":true,"AllowSelfServiceUpgradeEvaluation":true,"AuditLogTrimmingRetention":90,"CanSyncHubSitePermissions":false,"CanUpgrade":true,"ChannelGroupId":"00000000-0000-0000-0000-000000000000","Classification":"","CommentsOnSitePagesDisabled":false,"CompatibilityLevel":15,"ComplianceAttribute":"","DisableAppViews":false,"DisableCompanyWideSharingLinks":false,"DisableFlows":false,"ExternalSharingTipsEnabled":false,"ExternalUserExpirationInDays":0,"GeoLocation":"EUR","GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
+--batchresponse_57ca3cd4-3272-407b-a9db-06ff952dfb48--

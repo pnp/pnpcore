@@ -1,9 +1,9 @@
---batchresponse_423d8c8c-5d07-491e-9a5e-72ab67d5160d
+--batchresponse_dca7c748-ab2f-494d-a56d-9d1e6bd3233c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'8e1191f7-4a34-4711-b0a8-ddbf130a1753')","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'8e1191f7-4a34-4711-b0a8-ddbf130a1753')","etag":"\"1\"","type":"SP.List"},"BaseTemplate":100,"Id":"8e1191f7-4a34-4711-b0a8-ddbf130a1753","Title":"ListLinqGetMethods"}]}}
---batchresponse_423d8c8c-5d07-491e-9a5e-72ab67d5160d--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c7961d4e-c491-4055-bc16-70b87b758d70')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c7961d4e-c491-4055-bc16-70b87b758d70')","etag":"\"1\"","type":"SP.List"},"BaseTemplate":100,"Id":"c7961d4e-c491-4055-bc16-70b87b758d70","Title":"ListLinqGetMethods"}]}}
+--batchresponse_dca7c748-ab2f-494d-a56d-9d1e6bd3233c--

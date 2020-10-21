@@ -173,6 +173,26 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region IsNoScriptSite 
+        public async Task<bool> IsNoScriptSiteAsync()
+        {
+            await this.EnsurePropertiesAsync(w => w.EffectiveBasePermissions).ConfigureAwait(false);
+
+            // Definition of no-script is not having the AddAndCustomizePages permission
+            if (!EffectiveBasePermissions.Has(PermissionKind.AddAndCustomizePages))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool IsNoScriptSite()
+        {
+            return IsNoScriptSiteAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
     }
 }

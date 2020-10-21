@@ -141,7 +141,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Items", Expandable = true)]
         [GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
         public IListItemCollection Items
         {
@@ -156,7 +155,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("ContentTypes", Expandable = true)]
         public IContentTypeCollection ContentTypes
         {
             get
@@ -170,7 +168,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Fields", Expandable = true)]
         public IFieldCollection Fields
         {
             get

@@ -32,7 +32,6 @@ namespace PnP.Core.Model.SharePoint
 
         public string WelcomePage { get => GetValue<string>(); set => SetValue(value); }
 
-        [SharePointProperty("Files", Expandable = true)]
         public IFileCollection Files
         {
             get
@@ -46,7 +45,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("ListItemAllFields", Expandable = true)]
         public IListItem ListItemAllFields
         {
             get
@@ -70,7 +68,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("ParentFolder", Expandable = true)]
         public IFolder ParentFolder
         {
             get
@@ -94,7 +91,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("Properties", Expandable = true)]
         public IPropertyValues Properties
         {
             get
@@ -114,7 +110,6 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        [SharePointProperty("StorageMetrics", Expandable = true)]
         public IStorageMetrics StorageMetrics
         {
             get
@@ -135,7 +130,6 @@ namespace PnP.Core.Model.SharePoint
         }
 
 
-        [SharePointProperty("Folders", Expandable = true)]
         public IFolderCollection Folders
         {
             get

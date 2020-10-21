@@ -13,6 +13,7 @@ namespace PnP.Core.QueryModel
         private readonly PnPContext context;
         private readonly IDataModelParent parent;
         private readonly string memberName;
+        
 
         /// <summary>
         /// Protected default constructor, to force creation using
@@ -35,6 +36,8 @@ namespace PnP.Core.QueryModel
             this.memberName = memberName;
         }
 
+        internal EntityInfo EntityInfo { get; set; }
+
         public async Task<object> ExecuteQueryAsync(Type expressionType, ODataQuery<TModel> query)
         {
             if (string.IsNullOrEmpty(memberName))
@@ -46,14 +49,17 @@ namespace PnP.Core.QueryModel
             // At this point in time we support querying collections for which the model implements IQueryableModel
             if (typeof(TModel).ImplementsInterface(typeof(IQueryableDataModel)))
             {
-                // Get the entity info
-                var entityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null);
+                // Get the entity info, depending on how we enter EntityInfo was already created
+                if (EntityInfo == null)
+                {
+                    EntityInfo = EntityManager.GetClassInfo<TModel>(typeof(TModel), null);
+                }
 
                 // In case a model can be used from different contexts (e.g. ContentType can be used from Web, but also from List)
                 // it's required to let the entity know this context so that it can provide the correct information when requested
                 if (parent != null)
                 {
-                    entityInfo.Target = parent.GetType();
+                    EntityInfo.Target = parent.GetType();
                 }
 
                 // and its concrete instance
@@ -67,88 +73,17 @@ namespace PnP.Core.QueryModel
                 // Prepare a variable to hold tha batch request ID
                 Guid batchRequestId = Guid.Empty;
 
-                // Verify if we're not asking fields which anyhow cannot (yet) be served via Graph
-                bool canUseGraph = true;
-                // Ensure the model's keyfield was requested, this is needed to ensure the loaded model can be added/merged into an existing collection
-                // Only do this when there was no field filtering, without filtering all default fields are anyhow returned
-                if (query.Select.Any())
+                // Build the needed API call
+                var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, EntityInfo, context, query, memberName).ConfigureAwait(false);
+
+                foreach (var apiCall in apiCalls)
                 {
-                    if (!query.Select.Contains(entityInfo.ActualKeyFieldName))
-                    {
-                        query.Select.Add(entityInfo.ActualKeyFieldName);
-                    }
-                    
-                    foreach (var selectProperty in query.Select)
-                    {
-                        var field = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
-                        if (string.IsNullOrEmpty(field.GraphName))
-                        {
-                            canUseGraph = false;
-                            break;
-                        }
-                    }
-                }
-
-                // We try to use Graph First, if selected by the user and if the query is supported by Graph
-                if (canUseGraph && context.GraphFirst && !string.IsNullOrEmpty(entityInfo.GraphLinqGet))
-                {
-                    // Ensure that selected properties which are marked as expandable are also used in that manner
-                    foreach (var selectProperty in query.Select)
-                    {
-                        var prop = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
-                        if (prop != null && !string.IsNullOrEmpty(prop.GraphName) && prop.GraphExpandable && !query.Expand.Contains(prop.GraphName))
-                        {
-                            query.Expand.Add(prop.GraphName);
-                        }
-                    }
-
-                    // Build the Graph request URL
-                    var requestUrl = $"{entityInfo.GraphLinqGet}?{query.ToQueryString(ODataTargetPlatform.Graph, urlEncode: false)}";
-                    requestUrl = await TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl, context).ConfigureAwait(false);
-
                     // Add the request to the current batch
                     batchRequestId = context.CurrentBatch.Add(
                         parent as TransientObject,
                         parentEntityInfo,
                         HttpMethod.Get,
-                        new ApiCall // First option is Graph
-                        {
-                            Type = entityInfo.GraphBeta ? ApiType.GraphBeta : ApiType.Graph,
-                            ReceivingProperty = memberName,
-                            Request = requestUrl
-                        },
-                        default,
-                        parentEntityWithMappingHandlers.MappingHandler,
-                        parentEntityWithMappingHandlers.PostMappingHandler
-                        );
-                }
-                else
-                {
-                    // Ensure that selected properties which are marked as expandable are also used in that manner
-                    foreach (var selectProperty in query.Select)
-                    {
-                        var prop = entityInfo.Fields.FirstOrDefault(p => p.Name == selectProperty);
-                        if (prop != null && !string.IsNullOrEmpty(prop.SharePointName) && prop.SharePointExpandable && !query.Expand.Contains(prop.SharePointName))
-                        {
-                            query.Expand.Add(prop.SharePointName);
-                        }
-                    }
-
-                    // Build the SPO REST request URL
-                    var requestUrl = $"{context.Uri.ToString().TrimEnd('/')}/{entityInfo.SharePointLinqGet}?{query.ToQueryString(ODataTargetPlatform.SPORest)}";
-                    requestUrl = await TokenHandler.ResolveTokensAsync(concreteEntity as IMetadataExtensible, requestUrl).ConfigureAwait(false);
-
-                    // Add the request to the current batch
-                    batchRequestId = context.CurrentBatch.Add(
-                        parent as TransientObject,
-                        parentEntityInfo,
-                        HttpMethod.Get,
-                        new ApiCall // Secondo option is SPO REST
-                        {
-                            Type = ApiType.SPORest,
-                            ReceivingProperty = memberName,
-                            Request = requestUrl
-                        },
+                        apiCall,
                         default,
                         parentEntityWithMappingHandlers.MappingHandler,
                         parentEntityWithMappingHandlers.PostMappingHandler

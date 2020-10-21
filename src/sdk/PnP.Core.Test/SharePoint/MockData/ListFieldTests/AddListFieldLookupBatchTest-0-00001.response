@@ -1,9 +1,17 @@
---batchresponse_9a3ab0e0-fa24-4151-aa19-2e6b3a8507ac
+--batchresponse_90254be3-ea62-4ad6-841c-9a907802f33f
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'41e4f874-8d5b-46fe-9cd5-1ddef3571ade')/Fields(guid'8989c9b7-28c5-4c69-ab1c-b403e516beff')","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'41e4f874-8d5b-46fe-9cd5-1ddef3571ade')/Fields(guid'8989c9b7-28c5-4c69-ab1c-b403e516beff')","type":"SP.FieldLookup"},"DescriptionResource":{"__deferred":{"uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'41e4f874-8d5b-46fe-9cd5-1ddef3571ade')/Fields(guid'8989c9b7-28c5-4c69-ab1c-b403e516beff')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/Lists(guid'41e4f874-8d5b-46fe-9cd5-1ddef3571ade')/Fields(guid'8989c9b7-28c5-4c69-ab1c-b403e516beff')/TitleResource"}},"AutoIndexed":false,"CanBeDeleted":true,"ClientSideComponentId":"00000000-0000-0000-0000-000000000000","ClientSideComponentProperties":null,"ClientValidationFormula":null,"ClientValidationMessage":null,"CustomFormatter":null,"DefaultFormula":null,"DefaultValue":null,"Description":"","Direction":"none","EnforceUniqueValues":false,"EntityPropertyName":"ADDED_x0020_FIELD","Filterable":true,"FromBaseType":false,"Group":"Custom Columns","Hidden":false,"Id":"8989c9b7-28c5-4c69-ab1c-b403e516beff","Indexed":false,"IndexStatus":0,"InternalName":"ADDED_x0020_FIELD","JSLink":"clienttemplates.js","PinnedToFiltersPane":false,"ReadOnlyField":false,"Required":true,"SchemaXml":"<Field DisplayName=\"ADDED FIELD\" Type=\"Lookup\" Required=\"TRUE\" List=\"{F60177A5-70E6-4676-9327-38DA0AAB6AEB}\" WebId=\"30bcdefb-48bd-41d6-9f8b-7dad726c6b23\" ID=\"{8989c9b7-28c5-4c69-ab1c-b403e516beff}\" SourceID=\"{41e4f874-8d5b-46fe-9cd5-1ddef3571ade}\" StaticName=\"ADDED_x0020_FIELD\" Name=\"ADDED_x0020_FIELD\" ColName=\"int1\" RowOrdinal=\"0\" ShowField=\"Title\" Version=\"1\" />","Scope":"/sites/pnpcoresdktestgroup/Shared Documents","Sealed":false,"ShowInFiltersPane":0,"Sortable":true,"StaticName":"ADDED_x0020_FIELD","Title":"ADDED FIELD","FieldTypeKind":7,"TypeAsString":"Lookup","TypeDisplayName":"Lookup","TypeShortDescription":"Lookup (information already on this site)","ValidationFormula":null,"ValidationMessage":null,"AllowMultipleValues":false,"DependentLookupInternalNames":{"__metadata":{"type":"Collection(Edm.String)"},"results":[]},"IsDependentLookup":false,"IsRelationship":true,"LookupField":"Title","LookupList":"{F60177A5-70E6-4676-9327-38DA0AAB6AEB}","LookupWebId":"30bcdefb-48bd-41d6-9f8b-7dad726c6b23","PrimaryFieldId":null,"RelationshipDeleteBehavior":0,"UnlimitedLengthInDocumentLibrary":false}}
---batchresponse_9a3ab0e0-fa24-4151-aa19-2e6b3a8507ac--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
+--batchresponse_90254be3-ea62-4ad6-841c-9a907802f33f
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2"}}
+--batchresponse_90254be3-ea62-4ad6-841c-9a907802f33f--

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,7 +28,7 @@ namespace PnP.Core.Test.Base
         public static void TestFixtureSetup(TestContext context)
         {
             // Configure mocking default for all tests in this class, unless override by a specific test
-            //TestCommon.Instance.Mocking = false;
+            // TestCommon.Instance.Mocking = false;
         }
 
         [TestMethod]
@@ -207,7 +206,7 @@ namespace PnP.Core.Test.Base
                     return input;
                 };
 
-                var team = await context.Team.GetAsync();
+                var team = await context.Team.GetAsync(p => p.DisplayName, p => p.Channels);
 
                 Assert.IsTrue(team.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
@@ -269,7 +268,7 @@ namespace PnP.Core.Test.Base
                     return input;
                 };
 
-                var team = await context.Team.GetAsync();
+                var team = await context.Team.GetAsync(p => p.DisplayName, p => p.Channels);
 
                 Assert.IsTrue(team.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
@@ -329,7 +328,7 @@ namespace PnP.Core.Test.Base
                     return input;
                 };
 
-                var team = await context.Team.GetAsync();
+                var team = await context.Team.GetAsync(p => p.DisplayName, p => p.Channels);
 
                 Assert.IsTrue(team.Requested);
                 Assert.IsTrue(!string.IsNullOrEmpty(team.DisplayName));
@@ -386,7 +385,7 @@ namespace PnP.Core.Test.Base
                 bool serviceExceptionThrown = false;
                 try
                 {
-                    var team = await context.Team.GetAsync();
+                    var team = await context.Team.GetAsync(p => p.DisplayName, p => p.Channels);
                 }
                 catch(Exception ex)
                 {

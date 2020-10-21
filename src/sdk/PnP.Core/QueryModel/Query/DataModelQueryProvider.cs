@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -14,7 +15,21 @@ namespace PnP.Core.QueryModel
         /// <summary>
         /// The internal Query Service used to execute the actual queries
         /// </summary>
-        private DataModelQueryService<TModel> queryService;
+        private readonly DataModelQueryService<TModel> queryService;
+
+        private EntityInfo entityInfo;
+        internal EntityInfo EntityInfo
+        {
+            get
+            {
+                return entityInfo;
+            }
+            set
+            {
+                entityInfo = value;
+                queryService.EntityInfo = entityInfo;
+            }
+        }
 
         #region Constructors
 

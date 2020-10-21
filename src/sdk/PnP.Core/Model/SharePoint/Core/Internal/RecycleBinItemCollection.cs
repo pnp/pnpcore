@@ -1,3 +1,4 @@
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Linq.Expressions;
@@ -222,6 +223,20 @@ namespace PnP.Core.Model.SharePoint
         {
             RestoreAllBatchAsync().GetAwaiter().GetResult();
         }
+        #endregion
+
+        #region GetById
+
+        public IRecycleBinItem GetById(Guid id, params Expression<Func<IRecycleBinItem, object>>[] selectors)
+        {
+            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Id == id, selectors);
+        }
+
+        public async Task<IRecycleBinItem> GetByIdAsync(Guid id, params Expression<Func<IRecycleBinItem, object>>[] selectors)
+        {
+            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id, selectors).ConfigureAwait(false);
+        }
+
         #endregion
     }
 }

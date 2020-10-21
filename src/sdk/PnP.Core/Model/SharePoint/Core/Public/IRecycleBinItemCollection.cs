@@ -1,5 +1,7 @@
 using PnP.Core.Services;
+using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -141,6 +143,26 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         // TODO Should DeleteByIds(), MoveToSecondStageByIds() and RestoreByIds() be implemented since our Batch internal approach ? 
+
+        #region GetById methods
+
+        /// <summary>
+        /// Method to select a recycle bin item (<c>IRecycleBinItem</c>) by id
+        /// </summary>
+        /// <param name="id">The Id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting recycle bin item instance, if any</returns>
+        public IRecycleBinItem GetById(Guid id, params Expression<Func<IRecycleBinItem, object>>[] selectors);
+
+        /// <summary>
+        /// Method to select a recycle bin item (<c>IRecycleBinItem</c>) by id asynchronously
+        /// </summary>
+        /// <param name="id">The Id to search for</param>
+        /// <param name="selectors">The expressions declaring the fields to select</param>
+        /// <returns>The resulting recycle bin item instance, if any</returns>
+        public Task<IRecycleBinItem> GetByIdAsync(Guid id, params Expression<Func<IRecycleBinItem, object>>[] selectors);
+
+        #endregion
 
         #endregion
     }

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams
 {
     internal partial class TeamChannelCollection
     {
+        #region Add methods
+
         /// <summary>
         /// Adds a new channel
         /// </summary>
@@ -97,6 +101,33 @@ namespace PnP.Core.Model.Teams
         {
             return AddBatchAsync(name, description).GetAwaiter().GetResult();
         }
+
+        #endregion
+
+        #region GetByDisplayName methods
+
+        public ITeamChannel GetByDisplayName(string displayName, params Expression<Func<ITeamChannel, object>>[] selectors)
+        {
+            if (displayName == null)
+            {
+                throw new ArgumentNullException(nameof(displayName));
+            }
+
+            return BaseDataModelExtensions.BaseLinqGet(this, c => c.DisplayName == displayName, selectors);
+        }
+
+        public async Task<ITeamChannel> GetByDisplayNameAsync(string displayName, params Expression<Func<ITeamChannel, object>>[] selectors)
+        {
+            if (displayName == null)
+            {
+                throw new ArgumentNullException(nameof(displayName));
+            }
+
+            return await BaseDataModelExtensions.BaseLinqGetAsync(this, c => c.DisplayName == displayName, selectors).ConfigureAwait(false);
+        }
+
+        #endregion
+
 
     }
 }

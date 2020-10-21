@@ -1,1 +1,10 @@
-{"responses": [{"id": "1","status":200,"headers" : {"Cache-Control":"no-cache","OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8","ETag":"\"a5e9869b-5296-4a8d-aee6-bbf1a20b4b76,2\""},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#sites('bertonline.sharepoint.com%2Cb56adf79-ff6a-4964-a63a-ff1fa23be9f8%2C8c8e101c-1b0d-4253-85e7-c30039bf46e2')/lists(id)/$entity","@odata.etag":"\"a5e9869b-5296-4a8d-aee6-bbf1a20b4b76,2\"","id":"a5e9869b-5296-4a8d-aee6-bbf1a20b4b76"}}]}
+--batchresponse_56a72233-d774-42b1-b865-cb5238f98116
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 204 No Content
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "28cd944a-b359-4b28-8375-6cb5997081b2,3"
+
+
+--batchresponse_56a72233-d774-42b1-b865-cb5238f98116--

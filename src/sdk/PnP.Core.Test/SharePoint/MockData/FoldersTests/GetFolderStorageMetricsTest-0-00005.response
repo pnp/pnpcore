@@ -1,9 +1,9 @@
---batchresponse_0564d3e5-4b1e-4ffb-91e5-5cf97a6f1782
+--batchresponse_a321e321-a0fc-43c6-b796-5b608fdd77de
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/TEST_STORAGE_METRICS')","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/TEST_STORAGE_METRICS')","type":"SP.Folder"},"StorageMetrics":{"__metadata":{"id":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared Documents/TEST_STORAGE_METRICS')/StorageMetrics","uri":"https://pvxdev.sharepoint.com/sites/pnpcoresdktestgroup/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/pnpcoresdktestgroup/Shared%20Documents/TEST_STORAGE_METRICS')/StorageMetrics","type":"SP.StorageMetrics"},"LastModified":"2020-08-30T21:26:18Z","TotalFileCount":"0","TotalFileStreamSize":"0","TotalSize":"152"},"UniqueId":"b448c33c-e00b-421b-9e68-cdbc405f6255"}}
---batchresponse_0564d3e5-4b1e-4ffb-91e5-5cf97a6f1782--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_STORAGE_METRICS')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_STORAGE_METRICS')","type":"SP.Folder"},"StorageMetrics":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_STORAGE_METRICS')/StorageMetrics","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_STORAGE_METRICS')/StorageMetrics","type":"SP.StorageMetrics"},"LastModified":"2020-10-20T10:32:58Z","TotalFileCount":"0","TotalFileStreamSize":"0","TotalSize":"152"},"UniqueId":"13b4eaf9-10ce-4cdb-8e7a-f2e5abae43c6"}}
+--batchresponse_a321e321-a0fc-43c6-b796-5b608fdd77de--

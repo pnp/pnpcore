@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using PnP.Core.Services;
 
 namespace PnP.Core.Model
 {
@@ -87,6 +87,7 @@ namespace PnP.Core.Model
                 }
                 // Also commit the changes in the ComplexTypeModel classes
                 else if (a[pair.Key] is IComplexType)
+                //else if (JsonMappingHelper.IsComplexType(a[pair.Key].GetType()))
                 {
                     (a[pair.Key] as TransientObject).Commit();
                 }
@@ -211,7 +212,7 @@ namespace PnP.Core.Model
 
             return false;
         }
-
+        
         public bool HasChanged(string propertyName = "")
         {
             if (changes.Contains(propertyName))
