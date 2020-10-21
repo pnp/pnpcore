@@ -711,42 +711,6 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
-        public async Task GetListViewAsync()
-        {
-            TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                context.GraphFirst = false;
-
-                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
-
-                Assert.IsNotNull(list.Views);
-
-            }
-        }
-
-        [TestMethod]
-        public async Task AddListViewAsync()
-        {
-            TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                context.GraphFirst = false;
-
-                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
-
-                var result = await list.Views.AddAsync(new ViewOptions()
-                {
-                    Title = "PnPCoreTest",
-                    RowLimit = 3
-                });
-
-                Assert.IsNotNull(result);
-
-            }
-        }
-
-        [TestMethod]
         public async Task GetListByTitleWithLoadPropertiesRecursive()
         {
             //TestCommon.Instance.Mocking = false;
