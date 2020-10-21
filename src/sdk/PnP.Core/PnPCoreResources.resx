@@ -327,6 +327,9 @@
   <data name="Exception_Unsupported_ViaBatch" xml:space="preserve">
     <value>You cannot do a batch add of a model to a modelcollection that was not yet requested. Common reasons are adding an item and using that same item in a single batch</value>
   </data>
+  <data name="Exception_View_ViewNotFoundInCollection" xml:space="preserve">
+    <value>The view cannot be be found in the collection</value>
+  </data>
   <data name="Exception_Xml_InvalidXmlCharacter" xml:space="preserve">
     <value>Invalid character in Xml String. Chr {0} is illegal</value>
   </data>

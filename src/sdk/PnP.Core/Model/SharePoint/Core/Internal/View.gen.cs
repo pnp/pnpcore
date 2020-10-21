@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     internal partial class View : BaseDataModel<IView>, IView
     {
 
-        #region New properties
+        #region Properties
 
         public string Aggregations { get => GetValue<string>(); set => SetValue(value); }
 
