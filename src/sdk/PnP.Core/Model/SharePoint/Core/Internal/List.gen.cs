@@ -181,7 +181,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
         
-        [SharePointProperty("Views", Expandable = true)]
+        [SharePointProperty("Views")]
         public IViewCollection Views
         {
             get
