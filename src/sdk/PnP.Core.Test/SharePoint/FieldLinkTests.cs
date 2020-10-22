@@ -47,19 +47,19 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetListContentTypeFieldLinksTest()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // Get existing content type
 
-                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.ContentTypes.LoadProperties(p=>p.Name, p => p.FieldLinks));
-                var contentType = list.ContentTypes.FirstOrDefault(p => p.Name == "Document");
+                //var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.ContentTypes.LoadProperties(p=>p.Name, p => p.FieldLinks));
+                //var contentType = list.ContentTypes.FirstOrDefault(p => p.Name == "Document");
 
-                //IContentType contentType = (from ct in context.Web.Lists.GetByTitle("Documents").ContentTypes
-                //                            where ct.Name == "Document"
-                //                            select ct)
-                //                            .Include(ct => ct.FieldLinks)
-                //                            .FirstOrDefault();
+                IContentType contentType = (from ct in context.Web.Lists.GetByTitle("Documents").ContentTypes
+                                            where ct.Name == "Document"
+                                            select ct)
+                                            .Include(ct => ct.FieldLinks)
+                                            .FirstOrDefault();
 
                 Assert.IsTrue(contentType.FieldLinks.Count() > 0);
                 Assert.IsNotNull(contentType);
