@@ -411,13 +411,14 @@ if (document != null)
                           );
 </code></pre>
 <p>The <code>LoadProperties()</code> method can also be combined with the various <code>GetBy</code> methods: below call will load the list with as title &quot;Documents&quot; and for that list all <code>ContentTypes</code> are loaded with all their respective <code>FieldLinks</code>.</p>
-<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;,
-                                                   p =&gt; p.Title,
-                                                   p =&gt; p.ListExperience,
-                                                   p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Id,
-                                                                                      p =&gt; p.Name,
-                                                                                      p=&gt;p.FieldLinks.LoadProperties(p=&gt;p.Id,
-                                                                                                                     p=&gt;p.Name)));
+<pre><code class="lang-csharp">var web = context.Web;
+var list = web.Lists.GetByTitleAsync(&quot;Documents&quot;,
+                                    p =&gt; p.Title,
+                                    p =&gt; p.ListExperience,
+                                    p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Id,
+                                                                      p =&gt; p.Name,
+                                                                      p=&gt;p.FieldLinks.LoadProperties(p=&gt;p.Id,
+                                                                                                      p=&gt;p.Name)));
 </code></pre>
 </article>
           </div>
