@@ -13,6 +13,10 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 - Generated code to speed up contribution of new model logic in the `src\generated` folder
 - The source of the documentation you are reading right now in the `docs` folder
 
+## Setting up your environment for building the PnP Core SDK
+
+Starting to code is simple, pull down the code from GitHub and then use either Visual Studio 2019 or Visual Studio Code. More details can be found in our [setup](setup.md) article.
+
 ## General model principles
 
 The model design principles are agnostic to whether the model will be populated via a SharePoint REST or Microsoft Graph call, and therefore starting here to understand the general model principles is advised. Once you understand the model design principles you can learn more about how to decorate the model to work with either SharePoint REST and/or Microsoft Graph. Below picture gives an overview of the used classes in the model based on the Team model implementation:
