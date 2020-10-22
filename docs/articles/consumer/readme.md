@@ -310,8 +310,7 @@ When you see an asynchronous call being used, it means that the call is executed
 However, you can easily group multiple requests in a batch and send them in one call to the server via the built in batching support:
 
 ```csharp
-var web = await context.Web.GetAsync();
-var myList = await web.Lists.GetByTitleAsync("TestList");
+var myList = await context.Web.Lists.GetByTitleAsync("TestList");
 if (myList != null)
 {
     // Create three list items and add them via single server request
@@ -332,8 +331,7 @@ if (myList != null)
 To update Microsoft 365 you simply update the needed properties in your model and then call `UpdateAsync` or `UpdateBatchAsync` (used for batching):
 
 ```csharp
-var web = await context.Web.GetAsync(p => p.Lists);
-var myList = await web.Lists.GetByTitleAsync("Documents");
+var myList = await context.Web.Lists.GetByTitleAsync("Documents");
 
 if (myList != null)
 {
@@ -345,8 +343,7 @@ if (myList != null)
 Deleting follows a similar pattern, but now you use `DeleteAsync` or `Delete`:
 
 ```csharp
-var web = await context.Web.GetAsync(p => p.Lists);
-var myList = await web.Lists.GetByTitleAsync("ListToDelete");
+var myList = await context.Web.Lists.GetByTitleAsync("ListToDelete");
 
 if (myList != null)
 {
@@ -357,10 +354,11 @@ if (myList != null)
 If you like, you can also leverage a fluent syntax enriched with LINQ (Language Integrated Query). For example, in the following code excerpt you can see how to write a query for the items of a list.
 
 ```csharp
-var document = (await context.Web.Lists.GetByTitleAsync("Documents")).Items
+var document = await((await context.Web.Lists.GetByTitleAsync("Documents")).Items
                             .Where(i => i.Title == "Sample Document")
-                            .Load(i => i.Id, i => i.Title)
-                            .FirstOrDefault();
+                            .Load(i => i.Id,
+                                  i => i.Title))
+                            .FirstOrDefaultAsync();
 
 if (document != null)
 {
@@ -373,8 +371,22 @@ Another approach to mainly limit the data that's being pulled from Microsoft 365
 ```csharp
 await context.Web.GetAsync(p => p.Title,
                            p => p.ContentTypes.LoadProperties(p => p.Name),
-                           p => p.Lists.LoadProperties(p => p.Id, p => p.Title, p => p.DocumentTemplate,
+                           p => p.Lists.LoadProperties(p => p.Id,
+                                                       p => p.Title,
+                                                       p => p.DocumentTemplate,
                                p => p.ContentTypes.LoadProperties(p => p.Name,
                                     p => p.FieldLinks.LoadProperties(p => p.Name)))
                           );
+```
+
+The `LoadProperties()` method can also be combined with the various `GetBy` methods: below call will load the list with as title "Documents" and for that list all `ContentTypes` are loaded with all their respective `FieldLinks`.
+
+```csharp
+var list = await context.Web.Lists.GetByTitleAsync("Documents",
+                                                   p => p.Title,
+                                                   p => p.ListExperience,
+                                                   p => p.ContentTypes.LoadProperties(p => p.Id,
+                                                                                      p => p.Name,
+                                                                                      p=>p.FieldLinks.LoadProperties(p=>p.Id,
+                                                                                                                     p=>p.Name)));
 ```

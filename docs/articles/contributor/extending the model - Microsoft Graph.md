@@ -50,7 +50,7 @@ The property level decoration is done using the `GraphProperty` and `KeyProperty
 Whereas the `KeyProperty` attribute is always there once in each model class, the usage of the `GraphProperty` attribute is only required for special cases. Since the properties are defined in the generated model class (e.g. Web.gen.cs and Teams.gen.cs) the decoration via attributes needs to happen in this class as well.
 
 ```csharp
-// In graph the fieldname is "name", whereas in the model the name is "Title"
+// In graph the fieldname is "name" whereas in the model the name is "Title"
 [GraphProperty("name")]
 public string Title { get => GetValue<string>(); set => SetValue(value); }
 
@@ -79,7 +79,7 @@ public IListCollection Lists
     }
 }
 
-// Configure an additional query to load this model class, this is a non expandable collection
+// Configure an additional query to load this model class this is a non expandable collection
 [GraphProperty("channels", ExpandByDefault = true, Get = "teams/{Site.GroupId}/channels")]
 public ITeamChannelCollection Channels
 {
