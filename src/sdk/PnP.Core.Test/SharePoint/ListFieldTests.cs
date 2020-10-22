@@ -2398,7 +2398,7 @@ namespace PnP.Core.Test.SharePoint
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                 });
-                await context.ExecuteAsync();
+                context.Execute();
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
@@ -2462,7 +2462,7 @@ namespace PnP.Core.Test.SharePoint
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                 });
-                await context.ExecuteAsync(newBatch);
+                context.Execute(newBatch);
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
