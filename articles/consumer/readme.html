@@ -354,8 +354,7 @@ host.Dispose();
 </code></pre>
 <p>When you see an asynchronous call being used, it means that the call is executed immediately.
 However, you can easily group multiple requests in a batch and send them in one call to the server via the built in batching support:</p>
-<pre><code class="lang-csharp">var web = await context.Web.GetAsync();
-var myList = await web.Lists.GetByTitleAsync(&quot;TestList&quot;);
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;TestList&quot;);
 if (myList != null)
 {
     // Create three list items and add them via single server request
@@ -373,8 +372,7 @@ if (myList != null)
 }
 </code></pre>
 <p>To update Microsoft 365 you simply update the needed properties in your model and then call <code>UpdateAsync</code> or <code>UpdateBatchAsync</code> (used for batching):</p>
-<pre><code class="lang-csharp">var web = await context.Web.GetAsync(p =&gt; p.Lists);
-var myList = await web.Lists.GetByTitleAsync(&quot;Documents&quot;);
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;);
 
 if (myList != null)
 {
@@ -383,8 +381,7 @@ if (myList != null)
 }
 </code></pre>
 <p>Deleting follows a similar pattern, but now you use <code>DeleteAsync</code> or <code>Delete</code>:</p>
-<pre><code class="lang-csharp">var web = await context.Web.GetAsync(p =&gt; p.Lists);
-var myList = await web.Lists.GetByTitleAsync(&quot;ListToDelete&quot;);
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;ListToDelete&quot;);
 
 if (myList != null)
 {
@@ -392,10 +389,11 @@ if (myList != null)
 }
 </code></pre>
 <p>If you like, you can also leverage a fluent syntax enriched with LINQ (Language Integrated Query). For example, in the following code excerpt you can see how to write a query for the items of a list.</p>
-<pre><code class="lang-csharp">var document = (await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;)).Items
+<pre><code class="lang-csharp">var document = await((await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;)).Items
                             .Where(i =&gt; i.Title == &quot;Sample Document&quot;)
-                            .Load(i =&gt; i.Id, i =&gt; i.Title)
-                            .FirstOrDefault();
+                            .Load(i =&gt; i.Id,
+                                  i =&gt; i.Title))
+                            .FirstOrDefaultAsync();
 
 if (document != null)
 {
@@ -405,10 +403,21 @@ if (document != null)
 <p>Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the <code>LoadProperties()</code> method on the properties specified in the lambda expression(s), below example shows using <code>LoadProperties()</code> in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection, the Name and FieldLinks properties of each content type are loaded and, in turn, for ContentType FieldLinks, the Name property is loaded.</p>
 <pre><code class="lang-csharp">await context.Web.GetAsync(p =&gt; p.Title,
                            p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name),
-                           p =&gt; p.Lists.LoadProperties(p =&gt; p.Id, p =&gt; p.Title, p =&gt; p.DocumentTemplate,
+                           p =&gt; p.Lists.LoadProperties(p =&gt; p.Id,
+                                                       p =&gt; p.Title,
+                                                       p =&gt; p.DocumentTemplate,
                                p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name,
                                     p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)))
                           );
+</code></pre>
+<p>The <code>LoadProperties()</code> method can also be combined with the various <code>GetBy</code> methods: below call will load the list with as title &quot;Documents&quot; and for that list all <code>ContentTypes</code> are loaded with all their respective <code>FieldLinks</code>.</p>
+<pre><code class="lang-csharp">var list = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;,
+                                                   p =&gt; p.Title,
+                                                   p =&gt; p.ListExperience,
+                                                   p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Id,
+                                                                                      p =&gt; p.Name,
+                                                                                      p=&gt;p.FieldLinks.LoadProperties(p=&gt;p.Id,
+                                                                                                                     p=&gt;p.Name)));
 </code></pre>
 </article>
           </div>
