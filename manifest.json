@@ -3222,7 +3222,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/readme.html",
-          "hash": "+PjQwPbeVlvc1RPkPS+F2Q=="
+          "hash": "5rNBqnOgk8YS3jt6ncllYg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/contributor/setup.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/contributor/setup.html",
+          "hash": "wwBAW2uya0tf5HYRcN4Gug=="
         }
       },
       "is_incremental": false,
@@ -3573,6 +3585,17 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/pullrequest.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/pullrequest.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/sdk overview.png",
       "output": {
         "resource": {
@@ -3644,7 +3667,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 26,
+          "total_file_count": 27,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
