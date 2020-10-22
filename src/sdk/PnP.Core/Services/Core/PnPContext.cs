@@ -357,6 +357,25 @@ namespace PnP.Core.Services
         }
 
         /// <summary>
+        /// Method to execute the current batch
+        /// </summary>
+        /// <returns>The asynchronous task that will be executed</returns>
+        public void Execute()
+        {
+            ExecuteAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Method to execute a given batch
+        /// </summary>
+        /// <param name="batch">Batch to execute</param>
+        /// <returns>The asynchronous task that will be executed</returns>
+        public void Execute(Batch batch)
+        {
+            ExecuteAsync(batch).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
         /// Clones this context into a new context for the same SharePoint site
         /// </summary>
         /// <returns>New <see cref="PnPContext"/></returns>
