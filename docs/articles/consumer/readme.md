@@ -382,11 +382,12 @@ await context.Web.GetAsync(p => p.Title,
 The `LoadProperties()` method can also be combined with the various `GetBy` methods: below call will load the list with as title "Documents" and for that list all `ContentTypes` are loaded with all their respective `FieldLinks`.
 
 ```csharp
-var list = await context.Web.Lists.GetByTitleAsync("Documents",
-                                                   p => p.Title,
-                                                   p => p.ListExperience,
-                                                   p => p.ContentTypes.LoadProperties(p => p.Id,
-                                                                                      p => p.Name,
-                                                                                      p=>p.FieldLinks.LoadProperties(p=>p.Id,
-                                                                                                                     p=>p.Name)));
+var web = context.Web;
+var list = web.Lists.GetByTitleAsync("Documents",
+                                    p => p.Title,
+                                    p => p.ListExperience,
+                                    p => p.ContentTypes.LoadProperties(p => p.Id,
+                                                                      p => p.Name,
+                                                                      p=>p.FieldLinks.LoadProperties(p=>p.Id,
+                                                                                                      p=>p.Name)));
 ```
