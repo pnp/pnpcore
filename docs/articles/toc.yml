@@ -17,8 +17,10 @@
     href: consumer/pnp%20core%20settings.md
 - name: Contributor documentation
   items:
-  - name: The PnP Core SDK model
+  - name: Getting started
     href: contributor/readme.md
+  - name: Setting up your environment
+    href: contributor/setup.md
   - name: Extending the model - step by step
     href: contributor/extending%20the%20model.md 
   - name: Extending the model for Microsoft Graph
