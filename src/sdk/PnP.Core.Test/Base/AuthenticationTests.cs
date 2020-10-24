@@ -46,7 +46,7 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
-                    context.Uri, null).ConfigureAwait(true);
+                    context.Uri, new string[] { "AllSites.FullControl" }).ConfigureAwait(true);
 
                 Assert.IsNotNull(accessToken);
             }
