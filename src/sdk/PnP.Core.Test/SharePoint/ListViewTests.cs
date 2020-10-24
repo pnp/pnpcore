@@ -56,6 +56,32 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddListViewWithCaml()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
+
+                var viewTitle = "PnPCoreTestWithCaml";
+                var result = list.Views.Add(new ViewOptions()
+                {
+                    Title = viewTitle,
+                    RowLimit = 3,
+                    Query = "<Where><Eq><FieldRef Name='LinkFilename' /><Value Type='Text'>General</Value></Eq></Where>"
+
+                });
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(viewTitle, result.Title);
+
+                // Removes the view
+                list.Views.Remove(result.Id);
+
+            }
+        }
+
+        [TestMethod]
         public async Task AddListView()
         {
             //TestCommon.Instance.Mocking = false;
