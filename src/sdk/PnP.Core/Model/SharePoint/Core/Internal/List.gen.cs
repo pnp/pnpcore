@@ -180,6 +180,20 @@ namespace PnP.Core.Model.SharePoint
                 return GetValue<IFieldCollection>();
             }
         }
+        
+        [SharePointProperty("Views")]
+        public IViewCollection Views
+        {
+            get
+            {
+                if (!HasValue(nameof(Views)))
+                {
+                    var views = new ViewCollection(this.PnPContext, this);
+                    SetValue(views);
+                }
+                return GetValue<IViewCollection>();
+            }
+        }
 
         [KeyProperty("Id")]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }

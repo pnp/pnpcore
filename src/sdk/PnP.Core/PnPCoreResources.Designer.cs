@@ -691,6 +691,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The view cannot be be found in the collection.
+        /// </summary>
+        internal static string Exception_View_ViewNotFoundInCollection {
+            get {
+                return ResourceManager.GetString("Exception_View_ViewNotFoundInCollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid character in Xml String. Chr {0} is illegal.
         /// </summary>
         internal static string Exception_Xml_InvalidXmlCharacter {

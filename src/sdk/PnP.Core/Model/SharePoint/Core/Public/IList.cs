@@ -212,6 +212,12 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get; }
 
+
+        /// <summary>
+        /// Get a list of the views
+        /// </summary>
+        public IViewCollection Views { get; }
+
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
@@ -318,5 +324,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="renderOptions"><see cref="RenderListDataOptions"/> defining the query to execute</param>
         /// <returns></returns>
         public Dictionary<string, object> GetListDataAsStream(RenderListDataOptions renderOptions);
+
+
     }
 }
