@@ -65,7 +65,11 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }.AsExpando();
 
-                string body = JsonSerializer.Serialize(viewCreationInformation, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+                // To handle the serialization of string collections
+                var serializerOptions = new JsonSerializerOptions() { IgnoreNullValues = true };
+                serializerOptions.Converters.Add(new SharePointRestCollectionJsonConverter<string>());
+
+                string body = JsonSerializer.Serialize(viewCreationInformation, typeof(ExpandoObject), serializerOptions);
 
                 return new ApiCall($"{entity.SharePointGet}/Add", ApiType.SPORest, body);
             };
