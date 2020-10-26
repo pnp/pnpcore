@@ -23,20 +23,6 @@ namespace PnP.Core.Model.SharePoint
 
         public File()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                // implement custom mapping logic
-                switch (input.TargetType.Name)
-                {
-                    case nameof(CustomizedPageStatus): return JsonMappingHelper.ToEnum<CustomizedPageStatus>(input.JsonElement);
-                    case nameof(PageRenderType): return JsonMappingHelper.ToEnum<ListPageRenderType>(input.JsonElement);
-                    case nameof(CheckOutType): return JsonMappingHelper.ToEnum<CheckOutType>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
         }
 
         #region Methods

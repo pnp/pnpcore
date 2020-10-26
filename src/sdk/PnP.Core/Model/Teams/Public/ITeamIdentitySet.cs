@@ -5,36 +5,37 @@ namespace PnP.Core.Model.Teams
     /// <summary>
     /// Identity information about a Teams element
     /// </summary>
-    public interface ITeamIdentitySet : IComplexType<ITeamIdentitySet>
+    [ConcreteType(typeof(TeamIdentitySet))]
+    public interface ITeamIdentitySet : IDataModel<ITeamIdentitySet>
     {
         /// <summary>
         /// Optional. The application associated with this action.
         /// </summary>
-        public IIdentity Application { get; set; }
+        public IIdentity Application { get; }
 
         /// <summary>
         /// Optional. The team or channel associated with this action.
         /// </summary>
-        public IIdentity Conversation { get; set; }
+        public IIdentity Conversation { get; }
 
         /// <summary>
         /// Optional. Indicates whether the conversation property identifies a team or channel.
         /// </summary>
-        public IIdentity ConversationIdentityType { get; set; }
+        public IIdentity ConversationIdentityType { get; }
 
         /// <summary>
         /// Optional. The device associated with this action.
         /// </summary>
-        public IIdentity Device { get; set; }
+        public IIdentity Device { get; }
 
         /// <summary>
         /// Optional. The phone number associated with this action.
         /// </summary>
-        public IIdentity Phone { get; set; }
+        public IIdentity Phone { get; }
 
         /// <summary>
         /// Optional. The user associated with this action.
         /// </summary>
-        public IIdentity User { get; set; }
+        public IIdentity User { get; }
     }
 }

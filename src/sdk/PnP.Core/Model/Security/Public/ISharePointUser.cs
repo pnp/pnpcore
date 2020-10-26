@@ -6,7 +6,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a SharePoint User 
     /// </summary>
     [ConcreteType(typeof(SharePointUser))]
-    public interface ISharePointUser : IDataModel<ISharePointUser>, ISharePointPrincipal, IQueryableDataModel
+    public interface ISharePointUser : IDataModel<ISharePointUser>, IDataModelGet<ISharePointUser>, ISharePointPrincipal, IQueryableDataModel
     {
         /// <summary>
         /// Id of the underlying graph object (if any)

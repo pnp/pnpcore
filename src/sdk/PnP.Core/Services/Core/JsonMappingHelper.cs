@@ -239,14 +239,6 @@ namespace PnP.Core.Services
 
                         await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
                     }
-                    else if (IsComplexType(entityField.PropertyInfo.PropertyType))
-                    {
-                        MapJsonToComplexTypePropertyRecursive(pnpObject, contextAwareObject, property, entityField);
-                    }
-                    else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
-                    {
-                        MapJsonToComplexTypeItemListRecursive(pnpObject, contextAwareObject, apiResponse, property, entityField);
-                    }
                     else // Simple property mapping
                     {
                         // Keep the id value aside when seeing it for later usage
@@ -538,16 +530,6 @@ namespace PnP.Core.Services
 
                             await ((IDataModelGet)propertyToSetValue).GetAsync(new ApiResponse(apiResponse.ApiCall, property.Value, apiResponse.BatchRequestId)).ConfigureAwait(false);
                         }
-                        // Are we loading a complex type
-                        else if (IsComplexType(entityField.PropertyInfo.PropertyType))
-                        {
-                            MapJsonToComplexTypePropertyRecursive(pnpObject, contextAwareObject, property, entityField);
-                        }
-                        // Are we loading a list of complex types
-                        else if (IsComplexTypeList(entityField.PropertyInfo.PropertyType))
-                        {
-                            MapJsonToComplexTypeItemListRecursive(pnpObject, contextAwareObject, apiResponse, property, entityField);
-                        }
                         else
                         {
                             // Regular field loaded
@@ -555,7 +537,8 @@ namespace PnP.Core.Services
                             // Grab id field, should be present in all graph objects
                             if (string.IsNullOrEmpty(idFieldValue) && property.Name.Equals(entity.GraphId))
                             {
-                                idFieldValue = property.Value.GetString();
+
+                                idFieldValue = GetJsonPropertyValue(property).ToString();
                             }
 
                             if (useOverflowField && entityField.Name.Equals(ExpandoBaseDataModel<IExpandoDataModel>.OverflowFieldName))
@@ -712,226 +695,6 @@ namespace PnP.Core.Services
             await targetMetadataObject.SetGraphToRestMetadataAsync().ConfigureAwait(false);
         }
 
-        private static void MapJsonToComplexTypePropertyRecursive(TransientObject pnpObject, IDataModelWithContext contextAwareObject, JsonProperty property, EntityFieldInfo entityField)
-        {
-
-            // Do we still need to instantiate this object
-            if (!pnpObject.HasValue(entityField.Name))
-            {
-                // entityField.PropertyInfo.PropertyType.Namespace = PnP.Core.Model.Teams
-                // entityField.PropertyInfo.PropertyType.Name = ITeamDiscoverySettings
-                entityField.PropertyInfo.SetValue(pnpObject, Activator.CreateInstance(Type.GetType($"{entityField.PropertyInfo.PropertyType.Namespace}.{entityField.PropertyInfo.PropertyType.Name.Substring(1)}")));
-            }
-
-            // Get instance of the model property
-            var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
-            var typedModel = propertyToSetValue as IDataModelMappingHandler;
-            var metadataExtensible = propertyToSetValue as IMetadataExtensible;
-            var expandoComplexType = propertyToSetValue as IExpandoComplexType;
-
-            // Mark object as not requested before the load
-            if (propertyToSetValue.GetType().ImplementsInterface(typeof(IRequestable)))
-            {
-                ((IRequestable)propertyToSetValue).Requested = false;
-            }
-
-            // Set the batch request id property
-            SetBatchRequestId(propertyToSetValue as TransientObject, pnpObject.BatchRequestId);
-
-            // Get class info
-            var complexModelEntity = EntityManager.Instance.GetStaticClassInfo(propertyToSetValue.GetType());
-
-            // Map returned fields
-            foreach (var childProperty in property.Value.EnumerateObject())
-            {
-                EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>)
-                                            .FirstOrDefault(p => p.Name.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)
-                                            || (!string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase))
-                                            || (!string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)));
-                if (entityChildField != null)
-                {
-                    // if the complex type contains another complex type and there's a value provided then let's recursively call this method again
-                    if (IsComplexType(entityChildField.PropertyInfo.PropertyType) && childProperty.Value.ValueKind != JsonValueKind.Null)
-                    {
-                        MapJsonToComplexTypePropertyRecursive(propertyToSetValue as TransientObject, propertyToSetValue as IDataModelWithContext, childProperty, entityChildField);
-                    }
-                    else
-                    {
-                        if (!string.IsNullOrEmpty(entityChildField.GraphJsonPath))
-                        {
-                            var jsonPathFields = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(entityChildField.GraphName));
-                            if (jsonPathFields.Any())
-                            {
-                                foreach (var jsonPathField in jsonPathFields)
-                                {
-                                    var jsonElement = GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath);
-                                    
-                                    // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
-                                    // a json object returned that does have all properties loaded (e.g. a TeamsApp object with only id and distributionMethod loaded)
-                                    if (!jsonElement.Equals(property.Value))
-                                    {
-                                        jsonPathField.PropertyInfo?.SetValue(propertyToSetValue, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
-                                        jsonElement, jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
-                                    }
-                                }
-                            }
-                        }
-                        // TODO: Test this case when some domain models require it
-                        //else if (!string.IsNullOrEmpty(entityChildField.SharePointJsonPath))
-                        //{
-                        //    var jsonPathFields = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(entityChildField.SharePointName));
-                        //    if (jsonPathFields.Any())
-                        //    {
-                        //        foreach (var jsonPathField in jsonPathFields)
-                        //        {
-                        //            jsonPathField.PropertyInfo?.SetValue(propertyToSetValue,
-                        //                GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
-                        //                GetJsonElementFromPath(childProperty.Value, jsonPathField.SharePointJsonPath), jsonPathField.DataType, jsonPathField.SharePointUseCustomMapping, typedModel?.MappingHandler));
-                        //        }
-                        //    }
-                        //}
-                        else
-                        {
-                            // We only map fields that exist
-                            entityChildField.PropertyInfo?.SetValue(propertyToSetValue, GetJsonFieldValue(contextAwareObject, entityChildField.Name, childProperty.Value, entityChildField.DataType, entityChildField.GraphUseCustomMapping, typedModel?.MappingHandler));
-                        }
-                    }
-                }
-                else if (expandoComplexType != null)
-                {
-                    if (childProperty.Name == "__metadata")
-                    {
-                        // If the current property is metadata extensible
-                        if (metadataExtensible != null)
-                        {
-                            TrackSharePointMetaData(metadataExtensible, childProperty);
-                        }
-                    }
-                    else
-                    {
-                        // If a strongly typed property is not found in the current object, and the current object support extensible properties (is expando complex type)
-                        expandoComplexType[childProperty.Name] = GetJsonPropertyValue(childProperty);
-                    }
-                }
-            }
-
-            // Mark object as requested, as long as it is an IRequestable object
-            // Mark object as not requested before the load
-            if (propertyToSetValue.GetType().ImplementsInterface(typeof(IRequestable)))
-            {
-                ((IRequestable)propertyToSetValue).Requested = true;
-            }
-        }
-
-        private static void MapJsonToComplexTypeItemListRecursive(TransientObject pnpObject, IDataModelWithContext contextAwareObject, ApiResponse apiResponse, JsonProperty property, EntityFieldInfo entityField)
-        {
-            JsonElement jsonArray = apiResponse.ApiCall.Type == ApiType.SPORest
-                    ? TryGetRestComplexTypeArray(property)
-                    : property.Value;
-
-            // If property is not a valid array, skip the mapping process
-            if (jsonArray.ValueKind != JsonValueKind.Array)
-                return;
-
-            // Get the actual current value of the property we're setting...as that allows to detect it's type
-            var propertyToSetValue = entityField.PropertyInfo.GetValue(pnpObject);
-
-            // Always clear the list on load
-            (propertyToSetValue as System.Collections.IList).Clear();
-
-            // Load each child as a complex type class in the list
-            foreach (var childJson in jsonArray.EnumerateArray())
-            {
-                // create the list item 
-                var typeToCreate = Type.GetType($"{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Namespace}.{entityField.PropertyInfo.PropertyType.GenericTypeArguments[0].Name.Substring(1)}");
-                var complexTypeInstance = Activator.CreateInstance(typeToCreate);
-
-                // Set the batch request id property
-                SetBatchRequestId(complexTypeInstance as TransientObject, apiResponse.BatchRequestId);
-
-                (propertyToSetValue as System.Collections.IList).Add(complexTypeInstance);
-
-                // Get the complex model metadata
-                var complexModelEntity = EntityManager.Instance.GetStaticClassInfo(typeToCreate);
-
-                // Map returned fields
-                foreach (var childProperty in childJson.EnumerateObject())
-                {
-                    EntityFieldInfo entityChildField = (complexModelEntity.Fields as List<EntityFieldInfo>)
-                                            .FirstOrDefault(p => p.Name.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)
-                                            || (!string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase))
-                                            || (!string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(childProperty.Name, StringComparison.InvariantCultureIgnoreCase)));
-                    if (entityChildField != null)
-                    {
-                        // if the complex type contains another complex type and there's a value provided then let's recursively call this method again
-                        if (IsComplexType(entityChildField.PropertyInfo.PropertyType) && childProperty.Value.ValueKind != JsonValueKind.Null)
-                        {
-                            MapJsonToComplexTypePropertyRecursive(complexTypeInstance as TransientObject, complexTypeInstance as IDataModelWithContext, childProperty, entityChildField);
-                        }
-                        else
-                        {
-                            var typedModel = complexTypeInstance as IDataModelMappingHandler;
-
-                            if (!string.IsNullOrEmpty(entityChildField.GraphJsonPath))
-                            {
-                                var jsonPathFields = (complexModelEntity.Fields as List<EntityFieldInfo>).Where(p => !string.IsNullOrEmpty(p.GraphName) && p.GraphName.Equals(entityChildField.GraphName));
-                                if (jsonPathFields.Any())
-                                {
-                                    foreach (var jsonPathField in jsonPathFields)
-                                    {
-                                        var jsonElement = GetJsonElementFromPath(childProperty.Value, jsonPathField.GraphJsonPath);
-
-                                        // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
-                                        // a json object returned that does have all properties loaded (e.g. a TeamsApp object with only id and distributionMethod loaded)
-                                        if (!jsonElement.Equals(property.Value))
-                                        {
-                                            jsonPathField.PropertyInfo?.SetValue(complexTypeInstance, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
-                                            jsonElement, jsonPathField.DataType, jsonPathField.GraphUseCustomMapping, typedModel?.MappingHandler));
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                // We only map fields that exist
-                                entityChildField.PropertyInfo?.SetValue(complexTypeInstance, GetJsonFieldValue(contextAwareObject, entityChildField.Name, childProperty.Value, entityChildField.DataType, entityChildField.GraphUseCustomMapping, typedModel?.MappingHandler));
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private static JsonElement TryGetRestComplexTypeArray(JsonProperty property)
-        {
-            if (property.Value.ValueKind == JsonValueKind.Array)
-            {
-                return property.Value;
-            }
-            else
-            {
-                if (property.Value.ValueKind == JsonValueKind.Object)
-                {
-                    if (property.Value.TryGetProperty("results", out JsonElement resultsProperty))
-                    {
-                        // If found "results" property
-                        if (resultsProperty.ValueKind == JsonValueKind.Array)
-                        {
-                            // And is an array, it is the array to iterate through
-                            return resultsProperty;
-                        }
-                    }
-
-                    // Otherwise, the mapped property should have default value
-                    return default;
-                }
-
-                // The JSON property type is not expected
-                throw new ClientException(ErrorType.UnexpectedMappingType, 
-                    string.Format(PnPCoreResources.Exception_UnexpectedMappingType_NotArray, property.Name, property.Value.ValueKind));
-            }
-        }
-
         internal static object GetJsonPropertyValue(JsonProperty property)
         {
             if (property.Value.ValueKind == JsonValueKind.Number)
@@ -1047,26 +810,7 @@ namespace PnP.Core.Services
             {
                 dictionary.SystemAdd(key, value);
             }
-        }
-
-        internal static T ToEnum<T>(JsonElement jsonElement) where T : struct
-        {
-            if (jsonElement.ValueKind == JsonValueKind.Number && jsonElement.TryGetInt64(out long enumNumericValue))
-            {
-                if (Enum.TryParse(enumNumericValue.ToString(CultureInfo.InvariantCulture), out T enumValue))
-                {
-                    return enumValue;
-                }
-            }
-            else if (jsonElement.ValueKind == JsonValueKind.String && !string.IsNullOrEmpty(jsonElement.GetString()))
-            {
-                if (Enum.TryParse(jsonElement.GetString(), true, out T enumValue))
-                {
-                    return enumValue;
-                }
-            }
-            return default;
-        }
+        }        
 
         internal static object ParseStringValueToTyped(string input, Type propertyType)
         {
@@ -1134,294 +878,315 @@ namespace PnP.Core.Services
                 return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger));
             }
 
-            switch (propertyType.Name)
+            if (propertyType.IsEnum)
             {
-                case "String":
-                    {
-                        return jsonElement.GetString();
-                    }
-                case "String[]":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Array)
-                        {
-                            return Array.Empty<string>();
-                        }
-                        else
-                        {
-                            return jsonElement.EnumerateArray().Select(item => item.GetString()).ToArray();
-                        }
-                    }
-                case "List`1":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Array)
-                        {
-                            return null;
-                        }
-                        else
-                        {
-                            // Generic list does have a type, we support the types that can be delivered by the parser
-                            switch (propertyType.GenericTypeArguments[0].Name)
-                            {
-                                case "String":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetString()).ToList();
-                                    }
-                                case "Int32":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetInt32()).ToList();
-                                    }
-                                case "Int16":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetInt16()).ToList();
-                                    }
-                                case "Int64":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetInt64()).ToList();
-                                    }
-                                case "UInt32":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetUInt32()).ToList();
-                                    }
-                                case "UInt16":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetUInt16()).ToList();
-                                    }
-                                case "UInt64":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetUInt64()).ToList();
-                                    }
-                                case "Double":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetDouble()).ToList();
-                                    }
-                                case "Guid":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetGuid()).ToList();
-                                    }
-                                case "Boolean":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetBoolean()).ToList();
-                                    }
-                                case "DateTime":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetDateTime()).ToList();
-                                    }
-                                case "DateTimeOffset":
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetDateTimeOffset()).ToList();
-                                    }
-                                default:
-                                    {
-                                        return jsonElement.EnumerateArray().Select(item => item.GetString()).ToList();
-                                    }
-                            }
-                        }
-                    }
-                case "Boolean":
-                    {
-                        if (jsonElement.ValueKind == JsonValueKind.True || jsonElement.ValueKind == JsonValueKind.False)
-                        {
-                            return jsonElement.GetBoolean();
-                        }
-                        else if (jsonElement.ValueKind == JsonValueKind.String)
-                        {
-                            if (bool.TryParse(jsonElement.GetString(), out bool parsedBool))
-                            {
-                                return parsedBool;
-                            }
-                        }
-                        else if (jsonElement.ValueKind == JsonValueKind.Number)
-                        {
-                            var number = jsonElement.GetInt32();
+                if (jsonElement.ValueKind == JsonValueKind.Number && jsonElement.TryGetInt64(out long enumNumericValue))
+                {
+                    return Enum.Parse(propertyType, enumNumericValue.ToString());
+                }
+                else if (jsonElement.ValueKind == JsonValueKind.String && !string.IsNullOrEmpty(jsonElement.GetString()))
+                {
+                    return Enum.Parse(propertyType, jsonElement.GetString(), true);
+                }  
+                else
+                {
+                    // Return the default value
+                    return Enum.Parse(propertyType, "0");
+                }
+            }
+            else
+            {
 
-                            if (number == 1)
+                switch (propertyType.Name)
+                {
+                    case "String":
+                        {
+                            return jsonElement.GetString();
+                        }
+                    case "String[]":
+                        {
+                            if (jsonElement.ValueKind != JsonValueKind.Array)
                             {
-                                return true;
+                                return Array.Empty<string>();
                             }
-                            else if (number == 0)
+                            else
                             {
-                                return false;
+                                return jsonElement.EnumerateArray().Select(item => item.GetString()).ToArray();
                             }
                         }
+                    // Used on TermStore model (and maybe more in future)
+                    case "List`1":
+                        {
+                            if (jsonElement.ValueKind != JsonValueKind.Array)
+                            {
+                                return null;
+                            }
+                            else
+                            {
+                                // Generic list does have a type, we support the types that can be delivered by the parser
+                                switch (propertyType.GenericTypeArguments[0].Name)
+                                {
+                                    case "String":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetString()).ToList();
+                                        }
+                                    case "Int32":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetInt32()).ToList();
+                                        }
+                                    case "Int16":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetInt16()).ToList();
+                                        }
+                                    case "Int64":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetInt64()).ToList();
+                                        }
+                                    case "UInt32":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetUInt32()).ToList();
+                                        }
+                                    case "UInt16":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetUInt16()).ToList();
+                                        }
+                                    case "UInt64":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetUInt64()).ToList();
+                                        }
+                                    case "Double":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetDouble()).ToList();
+                                        }
+                                    case "Guid":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetGuid()).ToList();
+                                        }
+                                    case "Boolean":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetBoolean()).ToList();
+                                        }
+                                    case "DateTime":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetDateTime()).ToList();
+                                        }
+                                    case "DateTimeOffset":
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetDateTimeOffset()).ToList();
+                                        }
+                                    default:
+                                        {
+                                            return jsonElement.EnumerateArray().Select(item => item.GetString()).ToList();
+                                        }
+                                }
+                            }
+                        }
+                    case "Boolean":
+                        {
+                            if (jsonElement.ValueKind == JsonValueKind.True || jsonElement.ValueKind == JsonValueKind.False)
+                            {
+                                return jsonElement.GetBoolean();
+                            }
+                            else if (jsonElement.ValueKind == JsonValueKind.String)
+                            {
+                                if (bool.TryParse(jsonElement.GetString(), out bool parsedBool))
+                                {
+                                    return parsedBool;
+                                }
+                            }
+                            else if (jsonElement.ValueKind == JsonValueKind.Number)
+                            {
+                                var number = jsonElement.GetInt32();
 
-                        // last result, return default bool value
-                        return false;
-                    }
-                case "Guid":
-                    {
-                        return jsonElement.GetGuid();
-                    }
-                case "Int16":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Number)
+                                if (number == 1)
+                                {
+                                    return true;
+                                }
+                                else if (number == 0)
+                                {
+                                    return false;
+                                }
+                            }
+
+                            // last result, return default bool value
+                            return false;
+                        }
+                    case "Guid":
                         {
-                            // Override parsing in case it's not a number, assume string
-                            if (short.TryParse(jsonElement.GetString(), out short shortValue))
+                            return jsonElement.GetGuid();
+                        }
+                    case "Int16":
+                        {
+                            if (jsonElement.ValueKind != JsonValueKind.Number)
                             {
-                                return shortValue;
+                                // Override parsing in case it's not a number, assume string
+                                if (short.TryParse(jsonElement.GetString(), out short shortValue))
+                                {
+                                    return shortValue;
+                                }
+                                else
+                                {
+                                    return 0;
+                                }
                             }
                             else
                             {
-                                return 0;
+                                return jsonElement.GetInt16();
                             }
                         }
-                        else
+                    case "Int32":
                         {
-                            return jsonElement.GetInt16();
-                        }
-                    }
-                case "Int32":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Number)
-                        {
-                            // Override parsing in case it's not a number, assume string
-                            if (int.TryParse(jsonElement.GetString(), out int intValue))
+                            if (jsonElement.ValueKind != JsonValueKind.Number)
                             {
-                                return intValue;
+                                // Override parsing in case it's not a number, assume string
+                                if (int.TryParse(jsonElement.GetString(), out int intValue))
+                                {
+                                    return intValue;
+                                }
+                                else
+                                {
+                                    return 0;
+                                }
                             }
                             else
                             {
-                                return 0;
+                                return jsonElement.GetInt32();
                             }
                         }
-                        else
+                    case "Int64":
                         {
-                            return jsonElement.GetInt32();
-                        }
-                    }
-                case "Int64":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Number)
-                        {
-                            // Override parsing in case it's not a number, assume string
-                            if (long.TryParse(jsonElement.GetString(), out long longValue))
+                            if (jsonElement.ValueKind != JsonValueKind.Number)
                             {
-                                return longValue;
+                                // Override parsing in case it's not a number, assume string
+                                if (long.TryParse(jsonElement.GetString(), out long longValue))
+                                {
+                                    return longValue;
+                                }
+                                else
+                                {
+                                    return 0;
+                                }
                             }
                             else
                             {
-                                return 0;
+                                return jsonElement.GetInt64();
                             }
                         }
-                        else
+                    case "UInt16":
                         {
-                            return jsonElement.GetInt64();
-                        }
-                    }
-                case "UInt16":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Number)
-                        {
-                            // Override parsing in case it's not a number, assume string
-                            if (short.TryParse(jsonElement.GetString(), out short shortValue))
+                            if (jsonElement.ValueKind != JsonValueKind.Number)
                             {
-                                return shortValue;
+                                // Override parsing in case it's not a number, assume string
+                                if (short.TryParse(jsonElement.GetString(), out short shortValue))
+                                {
+                                    return shortValue;
+                                }
+                                else
+                                {
+                                    return 0;
+                                }
                             }
                             else
                             {
-                                return 0;
+                                return jsonElement.GetUInt16();
                             }
                         }
-                        else
+                    case "UInt32":
                         {
-                            return jsonElement.GetUInt16();
-                        }
-                    }
-                case "UInt32":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Number)
-                        {
-                            // Override parsing in case it's not a number, assume string
-                            if (int.TryParse(jsonElement.GetString(), out int intValue))
+                            if (jsonElement.ValueKind != JsonValueKind.Number)
                             {
-                                return intValue;
+                                // Override parsing in case it's not a number, assume string
+                                if (int.TryParse(jsonElement.GetString(), out int intValue))
+                                {
+                                    return intValue;
+                                }
+                                else
+                                {
+                                    return 0;
+                                }
                             }
                             else
                             {
-                                return 0;
+                                return jsonElement.GetUInt32();
                             }
                         }
-                        else
+                    case "UInt64":
                         {
-                            return jsonElement.GetUInt32();
-                        }
-                    }
-                case "UInt64":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Number)
-                        {
-                            // Override parsing in case it's not a number, assume string
-                            if (long.TryParse(jsonElement.GetString(), out long longValue))
+                            if (jsonElement.ValueKind != JsonValueKind.Number)
                             {
-                                return longValue;
+                                // Override parsing in case it's not a number, assume string
+                                if (long.TryParse(jsonElement.GetString(), out long longValue))
+                                {
+                                    return longValue;
+                                }
+                                else
+                                {
+                                    return 0;
+                                }
                             }
                             else
                             {
-                                return 0;
+                                return jsonElement.GetUInt64();
                             }
                         }
-                        else
+                    case "Double":
                         {
-                            return jsonElement.GetUInt64();
-                        }
-                    }
-                case "Double":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Number)
-                        {
-                            if (double.TryParse(jsonElement.GetString(), out double doubleValue))
+                            if (jsonElement.ValueKind != JsonValueKind.Number)
                             {
-                                return doubleValue;
+                                if (double.TryParse(jsonElement.GetString(), out double doubleValue))
+                                {
+                                    return doubleValue;
+                                }
+                                else
+                                {
+                                    return 0.0d;
+                                }
                             }
                             else
                             {
-                                return 0.0d;
+                                return jsonElement.GetDouble();
                             }
                         }
-                        else
+                    case "Uri":
                         {
-                            return jsonElement.GetDouble();
-                        }
-                    }
-                case "Uri":
-                    {
-                        var s = jsonElement.GetString();
-                        if (!string.IsNullOrEmpty(s))
-                        {
-                            if (Uri.TryCreate(s, UriKind.RelativeOrAbsolute, out Uri result))
+                            var s = jsonElement.GetString();
+                            if (!string.IsNullOrEmpty(s))
                             {
-                                return result;
+                                if (Uri.TryCreate(s, UriKind.RelativeOrAbsolute, out Uri result))
+                                {
+                                    return result;
+                                }
                             }
-                        }
-                        return null;
-                    }
-                case "DateTime":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Null)
-                        {
-                            return jsonElement.GetDateTime();
-                        }
-                        else
-                        {
                             return null;
                         }
-                    }
-                case "DateTimeOffset":
-                    {
-                        if (jsonElement.ValueKind != JsonValueKind.Null)
+                    case "DateTime":
                         {
-                            return jsonElement.GetDateTimeOffset();
+                            if (jsonElement.ValueKind != JsonValueKind.Null)
+                            {
+                                return jsonElement.GetDateTime();
+                            }
+                            else
+                            {
+                                return null;
+                            }
                         }
-                        else
+                    case "DateTimeOffset":
                         {
-                            return null;
+                            if (jsonElement.ValueKind != JsonValueKind.Null)
+                            {
+                                return jsonElement.GetDateTimeOffset();
+                            }
+                            else
+                            {
+                                return null;
+                            }
                         }
-                    }
-                default:
-                    {
-                        // Do a call back for the cases where we don't have a default mapping
-                        return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger));
-                    }
+                    default:
+                        {
+                            // Do a call back for the cases where we don't have a default mapping
+                            return fromJsonCasting?.Invoke(new FromJson(fieldName, jsonElement, propertyType, pnpObject?.PnPContext.Logger));
+                        }
+                }
             }
         }
 
@@ -1453,24 +1218,14 @@ namespace PnP.Core.Services
             return propertyType.ImplementsInterface(typeof(IDataModel<>));
         }
 
-        internal static bool IsComplexType(Type propertyType)
+        internal static bool IsTypeWithoutGet(Type propertyType)
         {
-            return propertyType.ImplementsInterface(typeof(IComplexType));
-        }
-
-        internal static bool IsExpandoComplexType(Type propertyType)
-        {
-            return propertyType.ImplementsInterface(typeof(IExpandoComplexType));
+            return propertyType.ImplementsInterface(typeof(IDataModel<>)) && !propertyType.ImplementsInterface(typeof(IDataModelGet<>));
         }
 
         internal static bool IsModelCollection(Type propertyType)
         {
             return propertyType.ImplementsInterface(typeof(IDataModelCollection<>));
-        }
-
-        internal static bool IsComplexTypeList(Type propertyType)
-        {
-            return (propertyType.IsGenericType && (propertyType.GetGenericTypeDefinition() == typeof(List<>)) && propertyType.GetGenericArguments()[0].ImplementsInterface(typeof(IComplexType)));
         }
 
         internal static void TrackAndUpdateMetaData(IMetadataExtensible target, JsonProperty property)

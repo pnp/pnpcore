@@ -15,18 +15,6 @@ namespace PnP.Core.Model.SharePoint
 
         public TermGroup()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                // Handle the mapping from json to the domain model for the cases which are not generically handled
-                switch (input.TargetType.Name)
-                {
-                    case "TermGroupScope": return JsonMappingHelper.ToEnum<TermGroupScope>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
 
             // Handler to construct the Add request for this group
             AddApiCallHandler = async (keyValuePairs) =>

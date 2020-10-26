@@ -18,19 +18,6 @@ namespace PnP.Core.Model.SharePoint
 
         public UserCustomAction()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                // implement custom mapping logic
-                switch (input.TargetType.Name)
-                {
-                    case "UserCustomActionScope": return JsonMappingHelper.ToEnum<UserCustomActionScope>(input.JsonElement);
-                    case "UserCustomActionRegistrationType": return JsonMappingHelper.ToEnum<UserCustomActionRegistrationType>(input.JsonElement);
-                }
-
-                input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-
-                return null;
-            };
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (additionalInformation) =>

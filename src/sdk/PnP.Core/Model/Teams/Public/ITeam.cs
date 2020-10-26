@@ -8,7 +8,7 @@ namespace PnP.Core.Model.Teams
     /// Public interface to define a Team object of Microsoft Teams
     /// </summary>
     [ConcreteType(typeof(Team))]
-    public interface ITeam : IDataModel<ITeam>, IDataModelUpdate
+    public interface ITeam : IDataModel<ITeam>, IDataModelGet<ITeam>, IDataModelUpdate
     {
         /// <summary>
         /// The Unique ID of the Team/Group

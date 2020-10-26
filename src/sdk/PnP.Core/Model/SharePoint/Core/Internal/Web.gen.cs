@@ -101,18 +101,7 @@ namespace PnP.Core.Model.SharePoint
 
         public string PrimaryColor { get => GetValue<string>(); set => SetValue(value); }
 
-        public IRecycleBinItemCollection RecycleBin
-        {
-            get
-            {
-                if (!HasValue(nameof(RecycleBin)))
-                {
-                    var recycleBin = new RecycleBinItemCollection(this.PnPContext, this, nameof(RecycleBin));
-                    SetValue(recycleBin);
-                }
-                return GetValue<IRecycleBinItemCollection>();
-            }
-        }
+        public IRecycleBinItemCollection RecycleBin { get => GetModelCollectionValue<IRecycleBinItemCollection>(); }
 
         public bool RecycleBinEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -200,263 +189,41 @@ namespace PnP.Core.Model.SharePoint
         // Not in Web object, requires extra work to load
         public string SearchCenterUrl { get => GetValue<string>(); set => SetValue(value); }
 
-        public IFieldCollection Fields
-        {
-            get
-            {
-                if (!HasValue(nameof(Fields)))
-                {
-                    var fields = new FieldCollection(this.PnPContext, this, nameof(Fields));
-                    SetValue(fields);
-                }
-                return GetValue<IFieldCollection>();
-            }
-        }
+        public IFieldCollection Fields { get => GetModelCollectionValue<IFieldCollection>(); }
 
-        public IFieldCollection AvailableFields
-        {
-            get
-            {
-                if (!HasValue(nameof(AvailableFields)))
-                {
-                    var fields = new FieldCollection(this.PnPContext, this, nameof(AvailableFields));
-                    SetValue(fields);
-                }
-                return GetValue<IFieldCollection>();
-            }
-        }
+        public IFieldCollection AvailableFields { get => GetModelCollectionValue<IFieldCollection>(); }
 
         // A special approach is needed to load all lists, comes down to adding the "system" facet to the select
         [GraphProperty("lists", Get = "sites/{hostname}:{serverrelativepath}:/lists?$select=" + List.DefaultGraphFieldsToLoad, Expandable = true)]
-        public IListCollection Lists
-        {
-            get
-            {
-                if (!HasValue(nameof(Lists)))
-                {
-                    var lists = new ListCollection(this.PnPContext, this, nameof(Lists));
-                    SetValue(lists);
-                }
-                return GetValue<IListCollection>();
-            }
-        }
+        public IListCollection Lists { get => GetModelCollectionValue<IListCollection>(); }
 
-        public IContentTypeCollection ContentTypes
-        {
-            get
-            {
-                if (!HasValue(nameof(ContentTypes)))
-                {
-                    var contentTypes = new ContentTypeCollection(this.PnPContext, this, nameof(ContentTypes));
-                    SetValue(contentTypes);
-                }
-                return GetValue<IContentTypeCollection>();
-            }
-        }
+        public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
 
-        public IContentTypeCollection AvailableContentTypes
-        {
-            get
-            {
-                if (!HasValue(nameof(AvailableContentTypes)))
-                {
-                    var contentTypes = new ContentTypeCollection(this.PnPContext, this, nameof(AvailableContentTypes));
-                    SetValue(contentTypes);
-                }
-                return GetValue<IContentTypeCollection>();
-            }
-        }
+        public IContentTypeCollection AvailableContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
 
-        public IWebCollection Webs
-        {
-            get
-            {
-                if (!HasValue(nameof(Webs)))
-                {
-                    var webs = new WebCollection(this.PnPContext, this);
-                    SetValue(webs);
-                }
-                return GetValue<IWebCollection>();
-            }
-        }
+        public IWebCollection Webs { get => GetModelCollectionValue<IWebCollection>(); }
 
-        public IList SiteUserInfoList
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new List
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IList>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IList SiteUserInfoList { get => GetModelValue<IList>(); }
 
-        public IFeatureCollection Features
-        {
-            get
-            {
-                if (!HasValue(nameof(Features)))
-                {
-                    var features = new FeatureCollection(this.PnPContext, this, nameof(Features));
-                    SetValue(features);
-                }
-                return GetValue<IFeatureCollection>();
-            }
-        }
+        public IFeatureCollection Features { get => GetModelCollectionValue<IFeatureCollection>(); }
 
-        public IFolder RootFolder
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new Folder
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IFolder>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IFolder RootFolder { get => GetModelValue<IFolder>(); }
 
-        public IFolderCollection Folders
-        {
-            get
-            {
-                if (!HasValue(nameof(Folders)))
-                {
-                    var folders = new FolderCollection(this.PnPContext, this, nameof(Folders));
-                    SetValue(folders);
-                }
-                return GetValue<IFolderCollection>();
-            }
-        }
+        public IFolderCollection Folders { get => GetModelCollectionValue<IFolderCollection>(); }
 
-        public IPropertyValues AllProperties
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new PropertyValues();
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IPropertyValues>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IPropertyValues AllProperties { get => GetModelValue<IPropertyValues>(); }
 
-        public ISharePointUser CurrentUser
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new SharePointUser
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ISharePointUser>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public ISharePointUser CurrentUser { get => GetModelValue<ISharePointUser>(); }
 
-        public ISharePointUserCollection SiteUsers
-        {
-            get
-            {
-                if (!HasValue(nameof(SiteUsers)))
-                {
-                    var users = new SharePointUserCollection(this.PnPContext, this, nameof(SiteUsers));
-                    SetValue(users);
-                }
-                return GetValue<ISharePointUserCollection>();
-            }
-        }
+        public ISharePointUserCollection SiteUsers { get => GetModelCollectionValue<ISharePointUserCollection>(); }
 
-        public ISharePointGroupCollection SiteGroups
-        {
-            get
-            {
-                if (!HasValue(nameof(SiteGroups)))
-                {
-                    var groups = new SharePointGroupCollection(this.PnPContext, this, nameof(SiteGroups));
-                    SetValue(groups);
-                }
-                return GetValue<ISharePointGroupCollection>();
-            }
-        }
+        public ISharePointGroupCollection SiteGroups { get => GetModelCollectionValue<ISharePointGroupCollection>(); }
 
-        public IUserCustomActionCollection UserCustomActions
-        {
-            get
-            {
-                if (!HasValue(nameof(UserCustomActions)))
-                {
-                    var userCustomActions = new UserCustomActionCollection(this.PnPContext, this, nameof(UserCustomActions));
-                    SetValue(userCustomActions);
-                }
-                return GetValue<IUserCustomActionCollection>();
-            }
-        }
+        public IUserCustomActionCollection UserCustomActions { get => GetModelCollectionValue<IUserCustomActionCollection>(); }
 
-        public IBasePermissions EffectiveBasePermissions
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new BasePermissions
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IBasePermissions>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IBasePermissions EffectiveBasePermissions { get => GetModelValue<IBasePermissions>(); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

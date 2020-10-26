@@ -1,7 +1,4 @@
 ﻿using PnP.Core.Services;
-using System;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -9,6 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Collection of terms
     /// </summary>
+    [ConcreteType(typeof(TermCollection))]
     public interface ITermCollection : IDataModelCollection<ITerm>, ISupportPaging<ITerm>
     {
         /// <summary>

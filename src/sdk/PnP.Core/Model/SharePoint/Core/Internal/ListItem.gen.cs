@@ -8,7 +8,7 @@
         
         public string Title { get => (string)this.Values["Title"]; set => this.Values["Title"] = value; }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = (int)value; }
     }
 }

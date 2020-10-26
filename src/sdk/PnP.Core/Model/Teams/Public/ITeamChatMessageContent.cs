@@ -3,7 +3,8 @@
     /// <summary>
     /// Public interface to define the content of a chat message
     /// </summary>
-    public interface ITeamChatMessageContent : IComplexType<ITeamChatMessageContent>
+    [ConcreteType(typeof(TeamChatMessageContent))]
+    public interface ITeamChatMessageContent : IDataModel<ITeamChatMessageContent>
     {
         /// <summary>
         /// The content of the item.

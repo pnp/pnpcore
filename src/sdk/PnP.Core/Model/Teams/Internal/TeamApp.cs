@@ -9,17 +9,6 @@ namespace PnP.Core.Model.Teams
     {
         public TeamApp()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                switch (input.TargetType.Name)
-                {
-                    case "TeamsAppDistributionMethod": return JsonMappingHelper.ToEnum<TeamsAppDistributionMethod>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
         }
     }
 }

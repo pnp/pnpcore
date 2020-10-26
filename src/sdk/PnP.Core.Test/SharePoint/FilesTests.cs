@@ -2131,6 +2131,7 @@ namespace PnP.Core.Test.SharePoint
 
                 Assert.IsNotNull(documentWithProperties.Properties);
                 Assert.IsTrue(documentWithProperties.Properties.AsDynamic().ContentTypeId.StartsWith("0x0101"));
+
                 Assert.AreEqual(1, (int)documentWithProperties.Properties["vti_x005f_level"]);
                 Assert.AreEqual("100", documentWithProperties.Properties["vti_x005f_genericcontenttempnextbsnalloc"]);
             }
@@ -2425,12 +2426,12 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
                 Assert.AreEqual(3, documentWithVersions.Versions.Count());
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions[0].Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions[0].VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
 
-                Assert.AreEqual(3, documentWithVersions.Versions[2].Id);
-                Assert.IsTrue(documentWithVersions.Versions[2].Created != DateTime.MinValue);
+                Assert.AreEqual(3, documentWithVersions.Versions.ElementAt(2).Id);
+                Assert.IsTrue(documentWithVersions.Versions.ElementAt(2).Created != DateTime.MinValue);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2462,9 +2463,9 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
                 Assert.AreEqual(2, documentWithVersions.Versions.Count());
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions[0].Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions[0].VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2498,9 +2499,9 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
                 Assert.AreEqual(2, documentWithVersions.Versions.Count());
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions[0].Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions[0].VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2534,9 +2535,9 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
                 Assert.AreEqual(2, documentWithVersions.Versions.Count());
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions[0].Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions[0].VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2574,9 +2575,9 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
                 Assert.AreEqual(2, documentWithVersions.Versions.Count());
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions[0].Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions[0].VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);
@@ -2613,9 +2614,9 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(documentWithVersions.Versions);
                 // The versions history contains 2 versions
                 Assert.AreEqual(2, documentWithVersions.Versions.Count());
-                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions[0].Url);
-                Assert.AreEqual("0.1", documentWithVersions.Versions[0].VersionLabel);
-                Assert.AreEqual("0.2", documentWithVersions.Versions[1].VersionLabel);
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
             }
 
             await TestAssets.CleanupTestDedicatedListAsync(3);

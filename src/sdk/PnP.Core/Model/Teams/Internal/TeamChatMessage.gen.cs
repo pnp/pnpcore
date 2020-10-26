@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PnP.Core.Model.Teams
 {
@@ -9,7 +8,7 @@ namespace PnP.Core.Model.Teams
 
         public string ReplyToId { get => GetValue<string>(); set => SetValue(value); }
 
-        public ITeamIdentitySet From { get => GetValue<ITeamIdentitySet>(); set => SetValue(value); }
+        public ITeamIdentitySet From { get => GetModelValue<ITeamIdentitySet>(); }
 
         public string Etag { get => GetValue<string>(); set => SetValue(value); }
 
@@ -23,7 +22,7 @@ namespace PnP.Core.Model.Teams
 
         public string Subject { get => GetValue<string>(); set => SetValue(value); }
 
-        public ITeamChatMessageContent Body { get => GetValue<ITeamChatMessageContent>(); set => SetValue(value); }
+        public ITeamChatMessageContent Body { get => GetModelValue<ITeamChatMessageContent>(); set => SetModelValue(value); }
 
         public string Summary { get => GetValue<string>(); set => SetValue(value); }
 
@@ -33,43 +32,13 @@ namespace PnP.Core.Model.Teams
 
         public ChatMessageImportance Importance { get => GetValue<ChatMessageImportance>(); set => SetValue(value); }
 
-        public List<ITeamChatMessageReaction> Reactions
-        {
-            get
-            {
-                if (!HasValue(nameof(Reactions)))
-                {
-                    SetValue(new List<ITeamChatMessageReaction>());
-                }
-                return GetValue<List<ITeamChatMessageReaction>>();
-            }
-        }
+        public ITeamChatMessageReactionCollection Reactions { get => GetModelCollectionValue<ITeamChatMessageReactionCollection>(); }
 
-        public List<ITeamChatMessageMention> Mentions
-        {
-            get
-            {
-                if (!HasValue(nameof(Mentions)))
-                {
-                    SetValue(new List<ITeamChatMessageMention>());
-                }
-                return GetValue<List<ITeamChatMessageMention>>();
-            }
-        }
+        public ITeamChatMessageMentionCollection Mentions { get => GetModelCollectionValue<ITeamChatMessageMentionCollection>(); }
 
-        public List<ITeamChatMessageAttachment> Attachments
-        {
-            get
-            {
-                if (!HasValue(nameof(Attachments)))
-                {
-                    SetValue(new List<ITeamChatMessageAttachment>());
-                }
-                return GetValue<List<ITeamChatMessageAttachment>>();
-            }
-        }
+        public ITeamChatMessageAttachmentCollection Attachments { get => GetModelCollectionValue<ITeamChatMessageAttachmentCollection>(); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = value.ToString(); }
     }
 }

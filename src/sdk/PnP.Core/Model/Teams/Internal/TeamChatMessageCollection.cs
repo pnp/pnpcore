@@ -23,8 +23,10 @@ namespace PnP.Core.Model.Teams
             // Assign field values
             newChannelChatMessage.Body = new TeamChatMessageContent
             {
+                PnPContext = newChannelChatMessage.PnPContext,
+                Parent = newChannelChatMessage,
                 Content = body,
-                ContentType = ChatMessageContentType.Text
+                ContentType = ChatMessageContentType.Text,
             };
 
 
@@ -59,6 +61,8 @@ namespace PnP.Core.Model.Teams
             // Assign field values
             newChannelChatMessage.Body = new TeamChatMessageContent
             {
+                PnPContext = newChannelChatMessage.PnPContext,
+                Parent = newChannelChatMessage,
                 Content = body,
                 ContentType = ChatMessageContentType.Text
             };

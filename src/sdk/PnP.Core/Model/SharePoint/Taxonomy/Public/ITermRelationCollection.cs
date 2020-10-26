@@ -6,6 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Collection of terms
     /// </summary>
+    [ConcreteType(typeof(TermRelationCollection))]
     public interface ITermRelationCollection : IDataModelCollection<ITermRelation>, ISupportPaging<ITermRelation>
     {
         /// <summary>

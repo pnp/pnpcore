@@ -86,8 +86,7 @@ namespace PnP.Core.Model
                     (a[pair.Key] as TransientDictionary).Commit();
                 }
                 // Also commit the changes in the ComplexTypeModel classes
-                else if (a[pair.Key] is IComplexType)
-                //else if (JsonMappingHelper.IsComplexType(a[pair.Key].GetType()))
+                else if (a[pair.Key] != null && JsonMappingHelper.IsTypeWithoutGet(a[pair.Key].GetType()))
                 {
                     (a[pair.Key] as TransientObject).Commit();
                 }
@@ -237,6 +236,7 @@ namespace PnP.Core.Model
                 }
 
                 // Always assume generic lists have changed
+                // Used on TermStore model (and maybe more in future)
                 // TODO: built custom list that handles change tracking
                 if (value.GetType().Name == "List`1")
                 {

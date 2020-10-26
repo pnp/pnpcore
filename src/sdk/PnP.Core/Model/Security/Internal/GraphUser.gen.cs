@@ -10,7 +10,7 @@
 
         public string Mail { get => GetValue<string>(); set => SetValue(value); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = value.ToString(); }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
-using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {

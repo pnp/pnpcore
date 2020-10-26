@@ -183,7 +183,6 @@ namespace PnP.Core.Test.Base
                 
                 // collection should not be available
                 Assert.IsFalse(team.PrimaryChannel.IsPropertyAvailable(p => p.Messages));
-                Assert.IsFalse(team.PrimaryChannel.Messages.Requested);
 
                 bool exceptionThrown = false;
                 try

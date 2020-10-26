@@ -19,24 +19,6 @@ namespace PnP.Core.Model.SharePoint
 
         public Field()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                // Handle the mapping from json to the domain model for the cases which are not generically handled
-                switch (input.TargetType.Name)
-                {
-                    case nameof(FieldType): return JsonMappingHelper.ToEnum<FieldType>(input.JsonElement);
-                    case nameof(CalendarType): return JsonMappingHelper.ToEnum<CalendarType>(input.JsonElement);
-                    case nameof(ChoiceFormatType): return JsonMappingHelper.ToEnum<ChoiceFormatType>(input.JsonElement);
-                    case nameof(DateTimeFieldFormatType): return JsonMappingHelper.ToEnum<DateTimeFieldFormatType>(input.JsonElement);
-                    case nameof(DateTimeFieldFriendlyFormatType): return JsonMappingHelper.ToEnum<DateTimeFieldFriendlyFormatType>(input.JsonElement);
-                    case nameof(FieldUserSelectionMode): return JsonMappingHelper.ToEnum<FieldUserSelectionMode>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
-
             // Handler to construct the Add request for this list
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (additionalInformation) =>

@@ -3,7 +3,8 @@
     /// <summary>
     /// Public interface to define the fun settings for a Team
     /// </summary>
-    public interface ITeamFunSettings: IComplexType<ITeamFunSettings>
+    [ConcreteType(typeof(TeamFunSettings))]
+    public interface ITeamFunSettings: IDataModel<ITeamFunSettings>
     {
         /// <summary>
         /// Defines whether the Giphy are allowed in the Team

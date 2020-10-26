@@ -4,7 +4,7 @@
     /// Public interface to define a SharePoint Group
     /// </summary>
     [ConcreteType(typeof(SharePointGroup))]
-    public interface ISharePointGroup: IDataModel<ISharePointGroup>, ISharePointPrincipal, IQueryableDataModel
+    public interface ISharePointGroup: IDataModel<ISharePointGroup>, IDataModelGet<ISharePointGroup>, ISharePointPrincipal, IQueryableDataModel
     {
         /// <summary>
         /// Allow members to edit the group members

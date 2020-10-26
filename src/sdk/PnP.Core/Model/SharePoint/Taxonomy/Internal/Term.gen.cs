@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -7,29 +6,9 @@ namespace PnP.Core.Model.SharePoint
     {
         public string Id { get => GetValue<string>(); set => SetValue(value); }
 
-        public List<ITermLocalizedLabel> Labels
-        {
-            get
-            {
-                if (!HasValue(nameof(Labels)))
-                {
-                    SetValue(new List<ITermLocalizedLabel>());
-                }
-                return GetValue<List<ITermLocalizedLabel>>();
-            }
-        }
+        public ITermLocalizedLabelCollection Labels { get => GetModelCollectionValue<ITermLocalizedLabelCollection>(); }
 
-        public List<ITermLocalizedDescription> Descriptions
-        {
-            get
-            {
-                if (!HasValue(nameof(Descriptions)))
-                {
-                    SetValue(new List<ITermLocalizedDescription>());
-                }
-                return GetValue<List<ITermLocalizedDescription>>();
-            }
-        }
+        public ITermLocalizedDescriptionCollection Descriptions { get => GetModelCollectionValue<ITermLocalizedDescriptionCollection>(); }
 
         public DateTimeOffset LastModifiedDateTime { get => GetValue<DateTimeOffset>(); set => SetValue(value); }
 
@@ -49,71 +28,41 @@ namespace PnP.Core.Model.SharePoint
                     return GetValue<ITermSet>();
                 }
 
-                if (!NavigationPropertyInstantiated())
-                {
-                    var termSet = new TermSet
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(termSet);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ITermSet>();
+                return GetModelValue<ITermSet>();
+
+                //if (!NavigationPropertyInstantiated())
+                //{
+                //    var termSet = new TermSet
+                //    {
+                //        PnPContext = this.PnPContext,
+                //        Parent = this,
+                //    };
+                //    SetValue(termSet);
+                //    InstantiateNavigationProperty();
+                //}
+                //return GetValue<ITermSet>();
             }
-            set
-            {
-                // Only set if there was no proper parent 
-                if (GetParentByType(typeof(TermSet)) == null)
-                {
-                    InstantiateNavigationProperty();
-                    SetValue(value);
-                }
-            }
+            //set
+            //{
+            //    // Only set if there was no proper parent 
+            //    if (GetParentByType(typeof(TermSet)) == null)
+            //    {
+            //        InstantiateNavigationProperty();
+            //        SetValue(value);
+            //    }
+            //}
         }
 
 
         [GraphProperty("children", Get = "termstore/sets/{Parent.GraphId}/terms/{GraphId}/children", Beta = true)]
-        public ITermCollection Terms
-        {
-            get
-            {
-                if (!HasValue(nameof(Terms)))
-                {
-                    var children = new TermCollection(this.PnPContext, this);
-                    SetValue(children);
-                }
-                return GetValue<ITermCollection>();
-            }
-        }
+        public ITermCollection Terms { get => GetModelCollectionValue<ITermCollection>(); }        
 
-        public List<ITermProperty> Properties
-        {
-            get
-            {
-                if (!HasValue(nameof(Properties)))
-                {
-                    SetValue(new List<ITermProperty>());
-                }
-                return GetValue<List<ITermProperty>>();
-            }
-        }
+        public ITermPropertyCollection Properties { get => GetModelCollectionValue<ITermPropertyCollection>(); }        
 
         [GraphProperty("relations", Get = "termstore/sets/{Parent.GraphId}/terms/{GraphId}/relations?$expand=fromTerm,set,toTerm", Beta = true)]
-        public ITermRelationCollection Relations
-        {
-            get
-            {
-                if (!HasValue(nameof(Relations)))
-                {
-                    var relations = new TermRelationCollection(this.PnPContext, this);
-                    SetValue(relations);
-                }
-                return GetValue<ITermRelationCollection>();
-            }
-        }
+        public ITermRelationCollection Relations { get => GetModelCollectionValue<ITermRelationCollection>(); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = value.ToString(); }
     }
 }

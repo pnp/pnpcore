@@ -9,6 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Collection of term sets
     /// </summary>
+    [ConcreteType(typeof(TermSetCollection))]
     public interface ITermSetCollection : IQueryable<ITermSet>, IDataModelCollection<ITermSet>, ISupportPaging<ITermSet>
     {
 

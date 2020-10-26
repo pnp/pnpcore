@@ -9,18 +9,6 @@ namespace PnP.Core.Model.Security
     {
         public SharePointGroup()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                // implement custom mapping logic
-                switch (input.TargetType.Name)
-                {
-                    case nameof(PrincipalType): return JsonMappingHelper.ToEnum<PrincipalType>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
         }
     }
 }

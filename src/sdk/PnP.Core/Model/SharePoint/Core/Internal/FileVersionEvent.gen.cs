@@ -8,12 +8,15 @@ namespace PnP.Core.Model.SharePoint
     /// Note: this class is generated, please don't modify this code by hand!
     /// 
     /// </summary>
-    internal partial class FileVersionEvent : BaseComplexType<IFileVersionEvent>, IFileVersionEvent
+    internal partial class FileVersionEvent : BaseDataModel<IFileVersionEvent>, IFileVersionEvent
     {
         public string Editor { get => GetValue<string>(); set => SetValue(value); }
 
         public string EditorEmail { get => GetValue<string>(); set => SetValue(value); }
 
         public DateTime Time { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        [KeyProperty(nameof(Time))]
+        public override object Key { get => this.Time; set => this.Time = DateTime.Parse(value.ToString()); }
     }
 }

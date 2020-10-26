@@ -14,17 +14,6 @@ namespace PnP.Core.Model.Teams
 
         public TeamChannel()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                switch (input.TargetType.Name)
-                {
-                    case "TeamChannelMembershipType": return JsonMappingHelper.ToEnum<TeamChannelMembershipType>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
 
             // Handler to construct the Add request for this channel
             AddApiCallHandler = async (keyValuePairs) =>

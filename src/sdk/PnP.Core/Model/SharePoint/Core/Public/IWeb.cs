@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Web object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Web))]
-    public interface IWeb : IDataModel<IWeb>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// The Unique ID of the Web object

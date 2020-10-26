@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -7,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Represents the set used in a term store. The set represents a unit which contains a collection of hierarchical terms. A group can contain multiple sets.
     /// </summary>
     [ConcreteType(typeof(TermSet))]
-    public interface ITermSet : IDataModel<ITermSet>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface ITermSet : IDataModel<ITermSet>, IDataModelGet<ITermSet>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// The Unique ID of the term set.
@@ -17,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Name of the term set for each language.
         /// </summary>
-        public List<ITermSetLocalizedName> LocalizedNames { get; }
+        public ITermSetLocalizedNameCollection LocalizedNames { get; }
 
         /// <summary>
         /// Description giving details on the term set.
@@ -42,7 +41,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Properties on this term set
         /// </summary>
-        public List<ITermSetProperty> Properties { get; }
+        public ITermSetPropertyCollection Properties { get; }
 
         /// <summary>
         /// Collection of terms relations

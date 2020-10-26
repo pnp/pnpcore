@@ -3,7 +3,8 @@
     /// <summary>
     /// The Identity resource represents an identity of an actor. For example, an actor can be a user, device, or application.
     /// </summary>
-    public interface IIdentity : IComplexType<IIdentity>
+    [ConcreteType(typeof(Identity))]
+    public interface IIdentity : IDataModel<IIdentity>
     {
         /// <summary>
         /// Unique identifier for the identity.

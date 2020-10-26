@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -7,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Represents a term used in a term store. A term can be used to represent an object which can then be used as a metadata to tag conent. Multiple terms can be organized in a hierarchical manner within a set.
     /// </summary>
     [ConcreteType(typeof(Term))]
-    public interface ITerm : IDataModel<ITerm>, IDataModelUpdate, IDataModelDelete
+    public interface ITerm : IDataModel<ITerm>, IDataModelGet<ITerm>, IDataModelUpdate, IDataModelDelete
     {
         /// <summary>
         /// The Unique ID of the term.
@@ -17,12 +16,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Name of the term set for each language.
         /// </summary>
-        public List<ITermLocalizedLabel> Labels { get; }
+        public ITermLocalizedLabelCollection Labels { get; }
 
         /// <summary>
         /// Name of the term set for each language.
         /// </summary>
-        public List<ITermLocalizedDescription> Descriptions { get; }
+        public ITermLocalizedDescriptionCollection Descriptions { get; }
 
         /// <summary>
         /// Last date and time of term modification. Read-only.
@@ -48,7 +47,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Properties on this term set
         /// </summary>
-        public List<ITermProperty> Properties { get; }
+        public ITermPropertyCollection Properties { get; }
 
         /// <summary>
         /// Collection of terms relations

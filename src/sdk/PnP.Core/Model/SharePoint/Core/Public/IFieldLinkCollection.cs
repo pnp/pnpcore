@@ -7,6 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Public interface to define a collection of FieldLink objects of SharePoint Online
     /// </summary>
+    [ConcreteType(typeof(FieldLinkCollection))]
     public interface IFieldLinkCollection : IQueryable<IFieldLink>, IDataModelCollection<IFieldLink>
     {
         /// <summary>

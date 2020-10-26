@@ -264,11 +264,6 @@ namespace PnP.Core.Services
                                 addExpand = false;
                             }
                         }
-                        else
-                        {
-                            // What if the complex type we're loading contains a beta property
-                            apiType = VerifyIfUsedComplexTypeRequiresBeta(model, apiType, field);
-                        }
 
                         if (addExpand)
                         {
@@ -952,7 +947,7 @@ namespace PnP.Core.Services
                     else
                     {
                         // What if the complex type we're updating contains a beta property
-                        if (ComplexTypeHasBetaProperty(changedField) && !model.PnPContext.GraphCanUseBeta)
+                        if (/*ComplexTypeHasBetaProperty(changedField) &&*/ !model.PnPContext.GraphCanUseBeta)
                         {
                             addField = false;
                         }
@@ -970,7 +965,7 @@ namespace PnP.Core.Services
                                 ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
                             }
                         }
-                        else if (JsonMappingHelper.IsComplexType(changedField.PropertyInfo.PropertyType))
+                        else if (JsonMappingHelper.IsTypeWithoutGet(changedField.PropertyInfo.PropertyType))
                         {
                             // Build a new dynamic object that will hold the changed properties of the complex type
                             dynamic updateMessageComplexType = new ExpandoObject();
@@ -1066,7 +1061,7 @@ namespace PnP.Core.Services
                             ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
                         }
                     }
-                    else if (JsonMappingHelper.IsComplexType(changedField.PropertyInfo.PropertyType))
+                    else if (JsonMappingHelper.IsTypeWithoutGet(changedField.PropertyInfo.PropertyType))
                     {
                         // Build a new dynamic object that will hold the changed properties of the complex type
                         dynamic updateMessageComplexType = new ExpandoObject();
@@ -1198,34 +1193,6 @@ namespace PnP.Core.Services
         #endregion
 
         #region Helper methods
-
-        private static ApiType VerifyIfUsedComplexTypeRequiresBeta<TModel>(BaseDataModel<TModel> model, ApiType apiType, EntityFieldInfo field)
-        {
-            if (ComplexTypeHasBetaProperty(field))
-            {
-                // Note: if we find one field that requires beta the complex type will trigger to use beta, assuming beta is allowed
-                if (model.PnPContext.GraphCanUseBeta)
-                {
-                    apiType = ApiType.GraphBeta;
-                }
-            }
-
-            // If a complex type also contains another complex type then we're ignoring the potential need to switch to beta
-
-            return apiType;
-        }
-
-        private static bool ComplexTypeHasBetaProperty(EntityFieldInfo field)
-        {
-            if (JsonMappingHelper.IsComplexType(field.PropertyInfo.PropertyType))
-            {
-                var typeToCheck = Type.GetType($"{field.PropertyInfo.PropertyType.Namespace}.{field.PropertyInfo.PropertyType.Name.Substring(1)}");
-                var complexTypeEntityInfo = EntityManager.Instance.GetStaticClassInfo(typeToCheck);
-                return complexTypeEntityInfo.Fields.Any(p => p.GraphBeta);
-            }
-
-            return false;
-        }
 
         private static bool CanUseGraphBeta<TModel>(BaseDataModel<TModel> model, EntityFieldInfo field)
         {

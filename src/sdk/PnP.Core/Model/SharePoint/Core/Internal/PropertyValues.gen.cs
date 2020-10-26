@@ -1,3 +1,5 @@
+using System;
+
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
@@ -7,7 +9,11 @@ namespace PnP.Core.Model.SharePoint
     /// 
     /// </summary>
     [SharePointType("SP.PropertyValues")]
-    internal partial class PropertyValues : ExpandoBaseComplexType<IPropertyValues>, IPropertyValues
+    internal partial class PropertyValues : ExpandoBaseDataModel<IPropertyValues>, IPropertyValues
     {
+        public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

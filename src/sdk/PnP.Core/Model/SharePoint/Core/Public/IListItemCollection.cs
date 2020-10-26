@@ -1,15 +1,14 @@
-﻿using System;
+﻿using PnP.Core.Services;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Public interface to define a collection of ListItem objects of SharePoint Online
     /// </summary>
+    [ConcreteType(typeof(ListItemCollection))]
     public interface IListItemCollection : IQueryable<IListItem>, IDataModelCollection<IListItem>, ISupportPaging<IListItem>
     {
         #region Add methods

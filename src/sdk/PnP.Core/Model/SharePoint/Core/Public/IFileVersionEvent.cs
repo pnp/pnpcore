@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FileVersionEvent object
     /// </summary>
     [ConcreteType(typeof(FileVersionEvent))]
-    public interface IFileVersionEvent : IComplexType<IFileVersionEvent>
+    public interface IFileVersionEvent : IDataModel<IFileVersionEvent>
     {
         /// <summary>
         /// Gets the editor of this version of the file.

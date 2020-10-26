@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Site object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(Site))]
-    public interface ISite : IDataModel<ISite>, IDataModelUpdate
+    public interface ISite : IDataModel<ISite>, IDataModelGet<ISite>, IDataModelUpdate
     {
         /// <summary>
         /// The Unique ID of the Site object

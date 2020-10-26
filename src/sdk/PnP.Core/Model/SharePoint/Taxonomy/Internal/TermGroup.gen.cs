@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -18,20 +16,9 @@ namespace PnP.Core.Model.SharePoint
         public TermGroupScope Scope { get => GetValue<TermGroupScope>(); set => SetValue(value); }
 
         [GraphProperty("sets", Get = "termstore/groups/{GraphId}/sets")]
-        public ITermSetCollection Sets
-        {
-            get
-            {
-                if (!HasValue(nameof(Sets)))
-                {
-                    var termSets = new TermSetCollection(this.PnPContext, this, "Sets");
-                    SetValue(termSets);
-                }
-                return GetValue<ITermSetCollection>();
-            }
-        }
+        public ITermSetCollection Sets { get => GetModelCollectionValue<ITermSetCollection>(); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = value.ToString(); }
     }
 }
