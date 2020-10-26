@@ -9,18 +9,6 @@ namespace PnP.Core.Model.Teams
 
         public TeamFunSettings()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                switch (input.TargetType.Name)
-                {
-                    //case "TeamGiphyContentRating": return ToEnum<TeamGiphyContentRating>(input.JsonElement);
-                    case "TeamGiphyContentRating": return JsonMappingHelper.ToEnum<TeamGiphyContentRating>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
         }
 
         public bool AllowGiphy { get => GetValue<bool>(); set => SetValue(value); }

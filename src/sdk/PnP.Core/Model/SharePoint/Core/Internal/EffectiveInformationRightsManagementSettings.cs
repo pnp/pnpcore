@@ -11,18 +11,6 @@ namespace PnP.Core.Model.SharePoint
     {
         public EffectiveInformationRightsManagementSettings()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                // implement custom mapping logic
-                switch (input.TargetType.Name)
-                {
-                    case "SettingSource": return JsonMappingHelper.ToEnum<SPEffectiveInformationRightsManagementSettingsSource>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
         }
     }
 }

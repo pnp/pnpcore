@@ -25,7 +25,7 @@ namespace PnP.Core.Model.SharePoint
         public bool OnQuickLaunch { get => GetValue<bool>(); set => SetValue(value); }
 
         [SharePointProperty("BaseTemplate")]
-        [GraphProperty("list", JsonPath = "template", UseCustomMapping = true)]
+        [GraphProperty("list", JsonPath = "template")]
         public ListTemplateType TemplateType { get => GetValue<ListTemplateType>(); set => SetValue(value); }
 
         public string Url { get => GetValue<string>(); set => SetValue(value); }

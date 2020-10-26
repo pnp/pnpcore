@@ -8,17 +8,6 @@ namespace PnP.Core.Model.Security
     {
         internal GraphGroup()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                switch (input.TargetType.Name)
-                {
-                    case "GroupVisibility": return JsonMappingHelper.ToEnum<GroupVisibility>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
         }
     }
 }

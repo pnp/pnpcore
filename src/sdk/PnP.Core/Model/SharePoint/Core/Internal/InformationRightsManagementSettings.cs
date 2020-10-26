@@ -11,28 +11,6 @@ namespace PnP.Core.Model.SharePoint
     {
         public InformationRightsManagementSettings()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-            //// implement custom mapping logic
-            //switch (input.TargetType.Name)
-            //{
-            //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-            //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-            //}
-            //
-            //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-            //
-            //return null;
-            //};
-
-            //UpdateApiCallOverrideHandler = async (ApiCallRequest input) =>
-            //{
-            //    await this.RequestAsync(input.ApiCall, HttpMethod.Post).ConfigureAwait(false);
-
-            //    input.CancelRequest();
-            //    return input;
-            //};
-
         }
     }
 }

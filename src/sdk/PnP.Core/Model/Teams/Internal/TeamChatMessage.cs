@@ -31,18 +31,6 @@ namespace PnP.Core.Model.Teams
                 return new ApiCall(parsedApiCall, ApiType.GraphBeta, bodyContent);
             };
 
-            MappingHandler = (FromJson input) =>
-            {
-                switch (input.TargetType.Name)
-                {
-                    case "ChatMessageType": return JsonMappingHelper.ToEnum<ChatMessageType>(input.JsonElement);
-                    case "ChatMessageImportance": return JsonMappingHelper.ToEnum<ChatMessageImportance>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
         }
     }
 }

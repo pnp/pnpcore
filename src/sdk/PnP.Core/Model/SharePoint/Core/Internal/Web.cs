@@ -31,18 +31,7 @@ namespace PnP.Core.Model.SharePoint
                 //    return true;
                 //}
 
-                switch (input.TargetType.Name)
-                {
-                    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScope>(input.JsonElement);
-                    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);
-                    case "LogoAlignment": return JsonMappingHelper.ToEnum<LogoAlignment>(input.JsonElement);
-                    case "HeaderLayout": return JsonMappingHelper.ToEnum<HeaderLayoutType>(input.JsonElement);
-                    case "HeaderEmphasis": return JsonMappingHelper.ToEnum<VariantThemeType>(input.JsonElement);
-                    case "FooterLayout": return JsonMappingHelper.ToEnum<FooterLayoutType>(input.JsonElement);
-                    case "FooterEmphasis": return JsonMappingHelper.ToEnum<FooterVariantThemeType>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
+                //input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
 
                 return null;
             };

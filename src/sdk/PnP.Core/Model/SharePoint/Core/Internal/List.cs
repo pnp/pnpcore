@@ -27,20 +27,19 @@ namespace PnP.Core.Model.SharePoint
 
         public List()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                // Handle the mapping from json to the domain model for the cases which are not generically handled
-                switch (input.TargetType.Name)
-                {
-                    case "ListExperience": return JsonMappingHelper.ToEnum<ListExperience>(input.JsonElement);
-                    case "ListReadingDirection": return JsonMappingHelper.ToEnum<ListReadingDirection>(input.JsonElement);
-                    case "ListTemplateType": return JsonMappingHelper.ToEnum<ListTemplateType>(input.JsonElement);
-                }
+            //MappingHandler = (FromJson input) =>
+            //{
+            //    // Handle the mapping from json to the domain model for the cases which are not generically handled
+            //    switch (input.TargetType.Name)
+            //    {
+            //        // Special case, needed because we force a callout out to the mapping handler in case we load TemplateType via a Graph query
+            //        case "ListTemplateType": return JsonMappingHelper.ToEnum<ListTemplateType>(input.JsonElement);
+            //    }
 
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
+            //    input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
 
-                return null;
-            };
+            //    return null;
+            //};
 
             // Handler to construct the Add request for this list
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously

@@ -7,17 +7,6 @@ namespace PnP.Core.Model.Teams
     {
         public TeamChatMessageReaction()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                switch (input.TargetType.Name)
-                {
-                    case "ChatMessageReactionType": return JsonMappingHelper.ToEnum<ChatMessageReactionType>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
         }
     }
 }

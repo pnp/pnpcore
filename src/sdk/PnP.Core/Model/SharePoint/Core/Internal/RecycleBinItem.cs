@@ -16,19 +16,6 @@ namespace PnP.Core.Model.SharePoint
     {
         public RecycleBinItem()
         {
-            MappingHandler = (FromJson input) =>
-            {
-                // implement custom mapping logic
-                switch (input.TargetType.Name)
-                {
-                    case nameof(RecycleBinItemType): return JsonMappingHelper.ToEnum<RecycleBinItemType>(input.JsonElement);
-                    case nameof(RecycleBinItemState): return JsonMappingHelper.ToEnum<RecycleBinItemState>(input.JsonElement);
-                }
-
-                input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);
-
-                return null;
-            };
         }
 
 
