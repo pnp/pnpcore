@@ -106,6 +106,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IFieldCollection Fields { get => GetModelCollectionValue<IFieldCollection>(); }
 
+        public IViewCollection Views { get => GetModelCollectionValue<IViewCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }

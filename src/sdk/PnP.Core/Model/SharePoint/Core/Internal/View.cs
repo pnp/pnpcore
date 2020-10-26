@@ -1,8 +1,6 @@
-using Microsoft.Extensions.Logging;
-using System;
 using PnP.Core.Services;
-using System.Text.Json;
 using System.Dynamic;
+using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -20,24 +18,6 @@ namespace PnP.Core.Model.SharePoint
 
         public View()
         {
-            // Starting Point: https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.View
-
-
-            //MappingHandler = (FromJson input) =>
-            //{
-            //// implement custom mapping logic
-            //switch (input.TargetType.Name)
-            //{
-            //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-            //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-            //}
-            //
-            //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-            //
-            //return null;
-            //};
-
-
             AddApiCallHandler = async (additionalInformation) =>
             {
                 var viewOptions = (ViewOptions)additionalInformation[ViewOptionsAdditionalInformationKey];

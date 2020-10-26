@@ -1,8 +1,6 @@
 using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Permissions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -10,6 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Public interface to define a collection of View objects
     /// </summary>
+    [ConcreteType(typeof(ViewCollection))]
     public interface IViewCollection : IQueryable<IView>, IDataModelCollection<IView>
     {
         /// <summary>

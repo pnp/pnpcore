@@ -8,7 +8,6 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(View))]
     public interface IView : IDataModel<IView>, IDataModelUpdate, IDataModelDelete
     {
-
         #region Properties
 
         /// <summary>

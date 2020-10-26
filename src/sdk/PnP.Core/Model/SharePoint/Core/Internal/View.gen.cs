@@ -103,33 +103,11 @@ namespace PnP.Core.Model.SharePoint
 
         public string ViewType2 { get => GetValue<string>(); set => SetValue(value); }
 
-        public IViewFieldCollection ViewFields
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new ViewFieldCollection
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IViewFieldCollection>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);                
-            }
-        }
-
+        public IViewFieldCollection ViewFields { get => GetModelCollectionValue<IViewFieldCollection>(); }
 
         #endregion
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
 
 
