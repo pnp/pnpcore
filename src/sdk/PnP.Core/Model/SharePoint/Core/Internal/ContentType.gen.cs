@@ -51,20 +51,9 @@
 
         public bool Sealed { get => GetValue<bool>(); set => SetValue(value); }
 
-        public IFieldLinkCollection FieldLinks
-        {
-            get
-            {
-                if (!HasValue(nameof(FieldLinks)))
-                {
-                    var fields = new FieldLinkCollection(this.PnPContext, this, nameof(FieldLinks));
-                    SetValue(fields);
-                }
-                return GetValue<IFieldLinkCollection>();
-            }
-        }
+        public IFieldLinkCollection FieldLinks { get => GetModelCollectionValue<IFieldLinkCollection>(); }
 
-        [KeyProperty("StringId")]
+        [KeyProperty(nameof(StringId))]
         public override object Key { get => this.StringId; set => this.StringId = value.ToString(); }
 
     }

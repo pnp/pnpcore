@@ -12,54 +12,11 @@ namespace PnP.Core.Model.Teams
 
         public string SortOrderIndex { get => GetValue<string>(); set => SetValue(value); }
 
-        //public ITeamChannelTabConfiguration Configuration { get => GetValue<ITeamChannelTabConfiguration>(); set => SetValue(value); }
-        public ITeamChannelTabConfiguration Configuration
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var teamChannelTabConfiguration = new TeamChannelTabConfiguration
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(teamChannelTabConfiguration);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ITeamChannelTabConfiguration>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public ITeamChannelTabConfiguration Configuration { get => GetModelValue<ITeamChannelTabConfiguration>(); set => SetModelValue(value); }
 
-        public ITeamApp TeamsApp 
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var teamApp = new TeamApp
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(teamApp);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ITeamApp>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public ITeamApp TeamsApp { get => GetModelValue<ITeamApp>(); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

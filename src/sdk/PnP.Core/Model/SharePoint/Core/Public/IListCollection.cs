@@ -9,6 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Public interface to define a collection of List objects of SharePoint Online
     /// </summary>
+    [ConcreteType(typeof(ListCollection))]
     public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, ISupportPaging<IList>
     {
         #region Add Methods

@@ -13,7 +13,7 @@
         [GraphProperty("teamsApp", JsonPath = "distributionMethod")]
         public TeamsAppDistributionMethod DistributionMethod { get => GetValue<TeamsAppDistributionMethod>(); set => SetValue(value); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = (string)value; }
     }
 }

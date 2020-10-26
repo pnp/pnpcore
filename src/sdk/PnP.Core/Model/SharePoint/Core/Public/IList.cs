@@ -70,7 +70,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets the root folder of the list.
         /// </summary>
-        public IFolder RootFolder { get; set; }
+        public IFolder RootFolder { get; }
 
         /// <summary>
         /// Gets or sets the MinorVersionLimit  for versioning, just in case it is enabled on the list

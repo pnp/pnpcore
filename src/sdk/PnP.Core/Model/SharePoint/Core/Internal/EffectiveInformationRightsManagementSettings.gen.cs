@@ -44,7 +44,7 @@ namespace PnP.Core.Model.SharePoint
 
         public string TemplateId { get => GetValue<string>(); set => SetValue(value); }
 
-        [KeyProperty("PolicyTitle")]
+        [KeyProperty(nameof(PolicyTitle))]
         public override object Key { get => this.PolicyTitle; set => this.PolicyTitle = value.ToString(); }
     }
 }

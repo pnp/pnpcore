@@ -7,28 +7,9 @@
 
         public string MentionText { get => GetValue<string>(); set => SetValue(value); }
 
-        //public ITeamIdentitySet Mentioned { get => GetValue<ITeamIdentitySet>(); set => SetValue(value); }
-        public ITeamIdentitySet Mentioned
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var teamIdentitySet = new TeamIdentitySet
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(teamIdentitySet);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ITeamIdentitySet>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public ITeamIdentitySet Mentioned { get => GetModelValue<ITeamIdentitySet>(); }
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => this.Id; set => this.Id = int.Parse(value.ToString()); }
     }
 }

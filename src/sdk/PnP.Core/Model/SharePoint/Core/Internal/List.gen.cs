@@ -95,93 +95,18 @@ namespace PnP.Core.Model.SharePoint
         [GraphProperty("name", UseCustomMapping = false)]
         public string NameToConstructEntityType { get => GetValue<string>(); set => SetValue(value); }
 
-        public IFolder RootFolder
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var rootFolder = new Folder
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(rootFolder);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IFolder>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IFolder RootFolder { get => GetModelValue<IFolder>(); }
 
-        public IInformationRightsManagementSettings InformationRightsManagementSettings
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new InformationRightsManagementSettings
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IInformationRightsManagementSettings>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IInformationRightsManagementSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementSettings>(); }
 
         [GraphProperty("items", Get = "/sites/{Web.GraphId}/lists/{GraphId}/items?expand=fields")]
-        public IListItemCollection Items
-        {
-            get
-            {
-                if (!HasValue(nameof(Items)))
-                {
-                    var items = new ListItemCollection(this.PnPContext, this, nameof(Items));
-                    SetValue(items);
-                }
-                return GetValue<IListItemCollection>();
-            }
-        }
+        public IListItemCollection Items { get => GetModelCollectionValue<IListItemCollection>(); }
 
-        public IContentTypeCollection ContentTypes
-        {
-            get
-            {
-                if (!HasValue(nameof(ContentTypes)))
-                {
-                    var webs = new ContentTypeCollection(this.PnPContext, this, nameof(ContentTypes));
-                    SetValue(webs);
-                }
-                return GetValue<IContentTypeCollection>();
-            }
-        }
+        public IContentTypeCollection ContentTypes { get => GetModelCollectionValue<IContentTypeCollection>(); }
 
-        public IFieldCollection Fields
-        {
-            get
-            {
-                if (!HasValue(nameof(Fields)))
-                {
-                    var fields = new FieldCollection(this.PnPContext, this, nameof(Fields));
-                    SetValue(fields);
-                }
-                return GetValue<IFieldCollection>();
-            }
-        }
+        public IFieldCollection Fields { get => GetModelCollectionValue<IFieldCollection>(); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

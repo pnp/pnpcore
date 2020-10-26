@@ -95,7 +95,7 @@ namespace PnP.Core.Model.SharePoint
         //    }
         //}
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
 
 

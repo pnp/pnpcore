@@ -187,6 +187,8 @@ namespace PnP.Core.Model.Teams
 
             newTab.Configuration = new TeamChannelTabConfiguration
             {
+                PnPContext = this.PnPContext,
+                Parent = this,
                 EntityId = "",
                 ContentUrl = documentLibraryUri.ToString()
             };

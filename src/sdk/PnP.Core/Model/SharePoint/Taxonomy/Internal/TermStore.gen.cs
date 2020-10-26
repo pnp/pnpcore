@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -14,20 +13,9 @@ namespace PnP.Core.Model.SharePoint
         public List<string> Languages { get => GetValue<List<string>>(); set => SetValue(value); }
 
         [GraphProperty("groups", Get = "termstore/groups")]
-        public ITermGroupCollection Groups
-        {
-            get
-            {
-                if (!HasValue(nameof(Groups)))
-                {
-                    var termGroups = new TermGroupCollection(this.PnPContext, this, "Groups");
-                    SetValue(termGroups);
-                }
-                return GetValue<ITermGroupCollection>();
-            }
-        }
+        public ITermGroupCollection Groups { get => GetModelCollectionValue<ITermGroupCollection>(); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = value.ToString(); }
     }
 }

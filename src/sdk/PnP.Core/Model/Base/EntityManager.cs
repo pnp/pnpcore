@@ -251,11 +251,44 @@ namespace PnP.Core.Model
             }
 
             type = GetEntityConcreteType(type);
+
             var result = (TModel)Activator.CreateInstance(type);
 
             if (result is IDataModelParent modelWithParent)
             {
                 modelWithParent.Parent = parent;
+            }
+
+            return result;
+        }
+
+        internal static object GetEntityCollectionConcreteInstance<TModel>(Type type, PnPContext context, IDataModelParent parent, string propertyName)
+        {
+            if (type is null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            type = GetEntityConcreteType(type);
+
+            TModel result;
+
+            if (type.ImplementsInterface(typeof(IQueryable<>)))
+            {
+                result = (TModel)Activator.CreateInstance(type, context, parent, propertyName);
+            }
+            else
+            {
+                result = (TModel)Activator.CreateInstance(type);
+                if (result is IDataModelParent modelWithParent)
+                {
+                    modelWithParent.Parent = parent;
+                }
+
+                if (result is IDataModelWithContext modelWithContext)
+                {
+                    modelWithContext.PnPContext = context;
+                }
             }
 
             return result;

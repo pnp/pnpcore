@@ -32,118 +32,19 @@ namespace PnP.Core.Model.SharePoint
 
         public string WelcomePage { get => GetValue<string>(); set => SetValue(value); }
 
-        public IFileCollection Files
-        {
-            get
-            {
-                if (!HasValue(nameof(Files)))
-                {
-                    var collection = new FileCollection(this.PnPContext, this, nameof(Files));
-                    SetValue(collection);
-                }
-                return GetValue<IFileCollection>();
-            }
-        }
+        public IFileCollection Files { get => GetModelCollectionValue<IFileCollection>(); }
 
-        public IListItem ListItemAllFields
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new ListItem
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IListItem>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IListItem ListItemAllFields { get => GetModelValue<IListItem>(); }
 
-        public IFolder ParentFolder
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new Folder
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IFolder>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IFolder ParentFolder { get => GetModelValue<IFolder>(); }
 
-        public IPropertyValues Properties
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new PropertyValues();
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IPropertyValues>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IPropertyValues Properties { get => GetModelValue<IPropertyValues>(); }
 
-        public IStorageMetrics StorageMetrics
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new StorageMetrics();
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IStorageMetrics>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IStorageMetrics StorageMetrics { get => GetModelValue<IStorageMetrics>(); }
 
+        public IFolderCollection Folders { get => GetModelCollectionValue<IFolderCollection>(); }
 
-        public IFolderCollection Folders
-        {
-            get
-            {
-                if (!HasValue(nameof(Folders)))
-                {
-                    var collection = new FolderCollection(this.PnPContext, this, nameof(Folders));
-                    SetValue(collection);
-                }
-                return GetValue<IFolderCollection>();
-            }
-        }
-
-        [KeyProperty("UniqueId")]
+        [KeyProperty(nameof(UniqueId))]
         public override object Key { get => this.UniqueId; set => this.UniqueId = Guid.Parse(value.ToString()); }
     }
 }

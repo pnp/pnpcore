@@ -914,6 +914,73 @@ namespace PnP.Core.Services
                             return jsonElement.EnumerateArray().Select(item => item.GetString()).ToArray();
                         }
                     }
+                // Used on TermStore model (and maybe more in future)
+                case "List`1":
+                    {
+                        if (jsonElement.ValueKind != JsonValueKind.Array)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            // Generic list does have a type, we support the types that can be delivered by the parser
+                            switch (propertyType.GenericTypeArguments[0].Name)
+                            {
+                                case "String":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetString()).ToList();
+                                    }
+                                case "Int32":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetInt32()).ToList();
+                                    }
+                                case "Int16":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetInt16()).ToList();
+                                    }
+                                case "Int64":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetInt64()).ToList();
+                                    }
+                                case "UInt32":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetUInt32()).ToList();
+                                    }
+                                case "UInt16":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetUInt16()).ToList();
+                                    }
+                                case "UInt64":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetUInt64()).ToList();
+                                    }
+                                case "Double":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetDouble()).ToList();
+                                    }
+                                case "Guid":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetGuid()).ToList();
+                                    }
+                                case "Boolean":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetBoolean()).ToList();
+                                    }
+                                case "DateTime":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetDateTime()).ToList();
+                                    }
+                                case "DateTimeOffset":
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetDateTimeOffset()).ToList();
+                                    }
+                                default:
+                                    {
+                                        return jsonElement.EnumerateArray().Select(item => item.GetString()).ToList();
+                                    }
+                            }
+                        }
+                    }
                 case "Boolean":
                     {
                         if (jsonElement.ValueKind == JsonValueKind.True || jsonElement.ValueKind == JsonValueKind.False)

@@ -1086,6 +1086,36 @@ namespace PnP.Core.Model
                 navigationPropertyInstantiated.Add(propertyName, true);
             }
         }
+
+        internal protected T GetModelValue<T>([CallerMemberName] string propertyName = "")
+        {
+            if (!NavigationPropertyInstantiated(propertyName))
+            {
+                var propertyValue = EntityManager.GetEntityConcreteInstance<T>(typeof(T), this);
+                (propertyValue as IDataModelWithContext).PnPContext = this.PnPContext;
+
+                SetValue(propertyValue, propertyName);
+                InstantiateNavigationProperty(propertyName);
+            }
+            return GetValue<T>(propertyName);
+        }
+
+        internal protected void SetModelValue<T>(T value, [CallerMemberName] string propertyName = "")
+        {
+            InstantiateNavigationProperty(propertyName);
+            SetValue(value, propertyName);
+        }
+
+        internal protected T GetModelCollectionValue<T>([CallerMemberName] string propertyName = "")
+        {
+            if (!HasValue(propertyName))
+            {
+                var collection = EntityManager.GetEntityCollectionConcreteInstance<T>(typeof(T), PnPContext, this, propertyName);
+                SetValue(collection, propertyName);
+            }
+            return GetValue<T>(propertyName);
+        }
+
         #endregion
 
         #region Parent traversal logic

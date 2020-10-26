@@ -11,8 +11,8 @@ namespace PnP.Core.Model.SharePoint
         public WebCollection(PnPContext context, IDataModelParent parent)
             : base(context, parent)
         {
-            this.PnPContext = context;
-            this.Parent = parent;
+            PnPContext = context;
+            Parent = parent;
         }
 
     }

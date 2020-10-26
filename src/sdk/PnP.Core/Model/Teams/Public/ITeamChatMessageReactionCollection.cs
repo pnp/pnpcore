@@ -3,6 +3,7 @@
     /// <summary>
     /// Reactions on this chat
     /// </summary>
+    [ConcreteType(typeof(TeamChatMessageReactionCollection))]
     public interface ITeamChatMessageReactionCollection: IDataModelCollection<ITeamChatMessageReaction>
     {
     }

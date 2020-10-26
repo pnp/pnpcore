@@ -9,28 +9,9 @@ namespace PnP.Core.Model.Teams
 
         public ChatMessageReactionType ReactionType { get => GetValue<ChatMessageReactionType>(); set => SetValue(value); }
 
-        //public ITeamIdentitySet User { get => GetValue<ITeamIdentitySet>(); set => SetValue(value); }
-        public ITeamIdentitySet User
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var teamIdentitySet = new TeamIdentitySet
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(teamIdentitySet);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ITeamIdentitySet>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public ITeamIdentitySet User { get => GetModelValue<ITeamIdentitySet>(); set => SetModelValue(value); }
+
+        [KeyProperty(nameof(CreatedDateTime))]
+        public override object Key { get => this.CreatedDateTime; set => this.CreatedDateTime = DateTime.Parse(value.ToString()); }
     }
 }

@@ -7,6 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Public interface to define a collection of Field objects of SharePoint Online
     /// </summary>
+    [ConcreteType(typeof(FieldCollection))]
     public interface IFieldCollection : IQueryable<IField>, IDataModelCollection<IField>
     {
         // For FieldType

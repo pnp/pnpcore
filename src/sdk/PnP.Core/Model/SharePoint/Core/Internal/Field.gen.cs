@@ -151,7 +151,7 @@ namespace PnP.Core.Model.SharePoint
 
         public RelationshipDeleteBehaviorType RelationshipDeleteBehavior { get => GetValue<RelationshipDeleteBehaviorType>(); set => SetValue(value); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
         
     }

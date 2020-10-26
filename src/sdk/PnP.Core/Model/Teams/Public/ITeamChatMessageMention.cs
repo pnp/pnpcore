@@ -21,6 +21,6 @@
         /// the identitySet contains a conversation property giving the ID of the team/channel, and a conversationIdentityType 
         /// property that represents either the team or channel.
         /// </summary>
-        public ITeamIdentitySet Mentioned { get; set; }
+        public ITeamIdentitySet Mentioned { get; }
     }
 }

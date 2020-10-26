@@ -3,6 +3,7 @@
     /// <summary>
     /// Public interface to define the configuration settings for a Team tab
     /// </summary>
+    [ConcreteType(typeof(TeamChannelTabConfiguration))]
     public interface ITeamChannelTabConfiguration : IDataModel<ITeamChannelTabConfiguration>
     {
         /// <summary>

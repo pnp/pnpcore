@@ -20,38 +20,12 @@ namespace PnP.Core.Model.Teams
         public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
 
         [GraphProperty("tabs", Get = "teams/{Site.GroupId}/channels/{GraphId}/tabs?$expand=teamsApp")]
-        public ITeamChannelTabCollection Tabs
-        {
-            get
-            {
-                if (!HasValue(nameof(Tabs)))
-                {
-                    var channelTabs = new TeamChannelTabCollection
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(channelTabs);
-                }
-                return GetValue<ITeamChannelTabCollection>();
-            }
-        }
+        public ITeamChannelTabCollection Tabs { get => GetModelCollectionValue<ITeamChannelTabCollection>(); }
 
         [GraphProperty("messages", Get = "teams/{Site.GroupId}/channels/{GraphId}/messages", Beta = true)]
-        public ITeamChatMessageCollection Messages
-        {
-            get
-            {
-                if (!HasValue(nameof(Messages)))
-                {
-                    var chatMessages = new TeamChatMessageCollection(this.PnPContext, this, "Messages");
-                    SetValue(chatMessages);
-                }
-                return GetValue<ITeamChatMessageCollection>();
-            }
-        }
+        public ITeamChatMessageCollection Messages { get => GetModelCollectionValue<ITeamChatMessageCollection>(); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = (string)value; }
 
     }

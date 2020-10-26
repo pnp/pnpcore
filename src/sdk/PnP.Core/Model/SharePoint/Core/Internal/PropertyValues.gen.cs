@@ -13,7 +13,7 @@ namespace PnP.Core.Model.SharePoint
     {
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

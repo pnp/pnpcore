@@ -58,237 +58,27 @@ namespace PnP.Core.Model.SharePoint
 
         public Guid WebId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        public IListItem ListItemAllFields
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new ListItem
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IListItem>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IListItem ListItemAllFields { get => GetModelValue<IListItem>(); }
 
-        public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new EffectiveInformationRightsManagementSettings();
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IEffectiveInformationRightsManagementSettings>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings { get => GetModelValue<IEffectiveInformationRightsManagementSettings>(); }
+        
+        public IInformationRightsManagementFileSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementFileSettings>(); }        
 
-        public IInformationRightsManagementFileSettings InformationRightsManagementSettings
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new InformationRightsManagementFileSettings();
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IInformationRightsManagementFileSettings>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IPropertyValues Properties { get => GetModelValue<IPropertyValues>(); }
 
-        public IPropertyValues Properties
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new PropertyValues();
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IPropertyValues>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public IFileVersionEventCollection VersionEvents { get => GetModelCollectionValue<IFileVersionEventCollection>(); }
+       
+        public IFileVersionCollection Versions { get => GetModelCollectionValue<IFileVersionCollection>(); }
 
-        //public List<IFileVersionEvent> VersionEvents
-        //{
-        //    get
-        //    {
-        //        if (!HasValue(nameof(VersionEvents)))
-        //        {
-        //            var collection = new List<IFileVersionEvent>();
-        //            SetValue(collection);
-        //        }
-        //        return GetValue<List<IFileVersionEvent>>();
-        //    }
-        //}
-        public IFileVersionEventCollection VersionEvents
-        {
-            get
-            {
-                if (!HasValue(nameof(VersionEvents)))
-                {
-                    var fileVersionEventCollection = new FileVersionEventCollection
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(fileVersionEventCollection);
-                }
-                return GetValue<IFileVersionEventCollection>();
-            }
-        }
+        public ISharePointUser Author { get => GetModelValue<ISharePointUser>(); }
+        
+        public ISharePointUser CheckedOutByUser { get => GetModelValue<ISharePointUser>(); }
 
-        //public List<IFileVersion> Versions
-        //{
-        //    get
-        //    {
-        //        if (!HasValue(nameof(Versions)))
-        //        {
-        //            var collection = new List<IFileVersion>();
-        //            SetValue(collection);
-        //        }
-        //        return GetValue<List<IFileVersion>>();
-        //    }
-        //}
-        public IFileVersionCollection Versions
-        {
-            get
-            {
-                if (!HasValue(nameof(Versions)))
-                {
-                    var fileVersionCollection = new FileVersionCollection
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(fileVersionCollection);
-                }
-                return GetValue<IFileVersionCollection>();
-            }
-        }
+        public ISharePointUser LockedByUser { get => GetModelValue<ISharePointUser>(); }
 
-        public ISharePointUser Author
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new SharePointUser
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ISharePointUser>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
+        public ISharePointUser ModifiedBy { get => GetModelValue<ISharePointUser>(); }
 
-        public ISharePointUser CheckedOutByUser
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new SharePointUser
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ISharePointUser>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
-
-        public ISharePointUser LockedByUser
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new SharePointUser
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ISharePointUser>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
-
-        public ISharePointUser ModifiedBy
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new SharePointUser
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<ISharePointUser>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);
-            }
-        }
-
-        [KeyProperty("UniqueId")]
+        [KeyProperty(nameof(UniqueId))]
         public override object Key { get => this.UniqueId; set => this.UniqueId = Guid.Parse(value.ToString()); }
     }
 }

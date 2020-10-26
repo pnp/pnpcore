@@ -19,28 +19,7 @@ namespace PnP.Core.Model.SharePoint
 
         public string Classification { get => GetValue<string>(); set => SetValue(value); }
 
-        public IWeb RootWeb
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var rootWeb = new Web
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(rootWeb);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<IWeb>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);                
-            }
-        }
+        public IWeb RootWeb { get => GetModelValue<IWeb>(); set => SetModelValue(value); }
 
         private IWebCollection allWebs;
 
@@ -65,18 +44,7 @@ namespace PnP.Core.Model.SharePoint
 
         public bool SocialBarOnSitePagesDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
-        public IFeatureCollection Features
-        {
-            get
-            {
-                if (!HasValue(nameof(Features)))
-                {
-                    var features = new FeatureCollection(this.PnPContext, this, nameof(Features));
-                    SetValue(features);
-                }
-                return GetValue<IFeatureCollection>();
-            }
-        }
+        public IFeatureCollection Features { get => GetModelCollectionValue<IFeatureCollection>(); }
 
         public SearchBoxInNavBar SearchBoxInNavBar { get => GetValue<SearchBoxInNavBar>(); set => SetValue(value); }
 
@@ -143,18 +111,7 @@ namespace PnP.Core.Model.SharePoint
 
         public Guid RelatedGroupId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        public IRecycleBinItemCollection RecycleBin
-        {
-            get
-            {
-                if (!HasValue(nameof(RecycleBin)))
-                {
-                    var folders = new RecycleBinItemCollection(this.PnPContext, this, nameof(RecycleBin));
-                    SetValue(folders);
-                }
-                return GetValue<IRecycleBinItemCollection>();
-            }
-        }
+        public IRecycleBinItemCollection RecycleBin { get => GetModelCollectionValue<IRecycleBinItemCollection>(); }
 
         public string RequiredDesignerVersion { get => GetValue<string>(); set => SetValue(value); }
 
@@ -192,20 +149,9 @@ namespace PnP.Core.Model.SharePoint
 
         public bool Upgrading { get => GetValue<bool>(); set => SetValue(value); }
 
-        public IUserCustomActionCollection UserCustomActions
-        {
-            get
-            {
-                if (!HasValue(nameof(UserCustomActions)))
-                {
-                    var userCustomActions = new UserCustomActionCollection(this.PnPContext, this, nameof(UserCustomActions));
-                    SetValue(userCustomActions);
-                }
-                return GetValue<IUserCustomActionCollection>();
-            }
-        }
+        public IUserCustomActionCollection UserCustomActions { get => GetModelCollectionValue<IUserCustomActionCollection>(); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
     }
 }

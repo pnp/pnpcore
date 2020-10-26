@@ -25,7 +25,7 @@ namespace PnP.Core.Model.Security
 
         public GroupVisibility Visibility { get => GetValue<GroupVisibility>(); set => SetValue(value); }
 
-        [KeyProperty("Id")]
+        [KeyProperty(nameof(Id))]
         public override object Key { get => this.Id; set => this.Id = value.ToString(); }
     }
 }

@@ -9,6 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Collection of term groups
     /// </summary>
+    [ConcreteType(typeof(TermGroupCollection))]
     public interface ITermGroupCollection : IQueryable<ITermGroup>, IDataModelCollection<ITermGroup>, ISupportPaging<ITermGroup>
     {
         #region Add methods
