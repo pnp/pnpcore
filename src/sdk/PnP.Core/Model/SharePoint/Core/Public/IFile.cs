@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a File object
     /// </summary>
     [ConcreteType(typeof(File))]
-    public interface IFile : IDataModel<IFile>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
+    public interface IFile : IDataModel<IFile>, IDataModelGet<IFile>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
         /// Gets a value that returns the comment used when a document is checked into a document library.
@@ -151,12 +151,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets a value that returns a collection of file version event objects that represent the version events of the file.
         /// </summary>
-        public List<IFileVersionEvent> VersionEvents { get; }
+        public IFileVersionEventCollection VersionEvents { get; }
 
         /// <summary>
         /// Gets a value that returns a collection of file version objects that represent the versions of the file.
         /// </summary>
-        public List<IFileVersion> Versions { get; }
+        public IFileVersionCollection Versions { get; }
 
         /// <summary>
         /// Gets a value that specifies the user who added the file.

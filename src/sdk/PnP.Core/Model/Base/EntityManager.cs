@@ -173,10 +173,7 @@ namespace PnP.Core.Model
                             {
 
                                 if (JsonMappingHelper.IsModelCollection(classField.PropertyInfo.PropertyType) ||
-                                    JsonMappingHelper.IsModelType(classField.PropertyInfo.PropertyType) ||
-                                    JsonMappingHelper.IsComplexType(classField.PropertyInfo.PropertyType) ||
-                                    JsonMappingHelper.IsExpandoComplexType(classField.PropertyInfo.PropertyType) ||
-                                    JsonMappingHelper.IsComplexTypeList(classField.PropertyInfo.PropertyType))
+                                    JsonMappingHelper.IsModelType(classField.PropertyInfo.PropertyType))
                                 {
                                     classField.SharePointExpandable = true;
                                 }

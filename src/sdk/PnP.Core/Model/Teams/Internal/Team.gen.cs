@@ -22,19 +22,151 @@ namespace PnP.Core.Model.Teams
         public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
         
         public bool IsArchived { get => GetValue<bool>(); set => SetValue(value); }
-        
-        public ITeamMembersSettings MemberSettings { get => GetValue<ITeamMembersSettings>(); set => SetValue(value); }
-        
-        public ITeamGuestSettings GuestSettings { get => GetValue<ITeamGuestSettings>(); set => SetValue(value); }
-        
-        public ITeamMessagingSettings MessagingSettings { get => GetValue<ITeamMessagingSettings>(); set => SetValue(value); }
-        
-        public ITeamFunSettings FunSettings { get => GetValue<ITeamFunSettings>(); set => SetValue(value); }
-        
-        public ITeamDiscoverySettings DiscoverySettings { get => GetValue<ITeamDiscoverySettings>(); set => SetValue(value); }
-        
-        public ITeamClassSettings ClassSettings { get => GetValue<ITeamClassSettings>(); set => SetValue(value); }
-        
+
+        //public ITeamMembersSettings MemberSettings { get => GetValue<ITeamMembersSettings>(); set => SetValue(value); }
+        public ITeamMembersSettings MemberSettings
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var memberSettings = new TeamMembersSettings
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(memberSettings);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<ITeamMembersSettings>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        //public ITeamGuestSettings GuestSettings { get => GetValue<ITeamGuestSettings>(); set => SetValue(value); }
+        public ITeamGuestSettings GuestSettings
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var guestSettings = new TeamGuestSettings
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(guestSettings);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<ITeamGuestSettings>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        //public ITeamMessagingSettings MessagingSettings { get => GetValue<ITeamMessagingSettings>(); set => SetValue(value); }
+        public ITeamMessagingSettings MessagingSettings
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var teamMessagingSettings = new TeamMessagingSettings
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(teamMessagingSettings);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<ITeamMessagingSettings>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        //public ITeamFunSettings FunSettings { get => GetValue<ITeamFunSettings>(); set => SetValue(value); }
+        public ITeamFunSettings FunSettings
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var teamFunSettings = new TeamFunSettings
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(teamFunSettings);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<ITeamFunSettings>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        //public ITeamDiscoverySettings DiscoverySettings { get => GetValue<ITeamDiscoverySettings>(); set => SetValue(value); }
+        public ITeamDiscoverySettings DiscoverySettings
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var teamDiscoverySettings = new TeamDiscoverySettings
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(teamDiscoverySettings);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<ITeamDiscoverySettings>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
+        //public ITeamClassSettings ClassSettings { get => GetValue<ITeamClassSettings>(); set => SetValue(value); }
+        public ITeamClassSettings ClassSettings
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var teamClassSettings = new TeamClassSettings
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(teamClassSettings);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<ITeamClassSettings>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
+
         [GraphProperty("primaryChannel", Expandable = true)]
         public ITeamChannel PrimaryChannel 
         {

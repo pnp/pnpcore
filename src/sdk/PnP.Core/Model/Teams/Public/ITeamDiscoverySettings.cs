@@ -3,7 +3,7 @@
     /// <summary>
     /// Public interface to define the discovery settings for a Team
     /// </summary>
-    public interface ITeamDiscoverySettings: IComplexType<ITeamDiscoverySettings>
+    public interface ITeamDiscoverySettings: IDataModel<ITeamDiscoverySettings>
     {
         /// <summary>
         /// Show team in Teams search and suggestions?

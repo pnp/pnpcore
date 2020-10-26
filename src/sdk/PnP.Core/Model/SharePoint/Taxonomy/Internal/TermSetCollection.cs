@@ -30,7 +30,7 @@ namespace PnP.Core.Model.SharePoint
             var newSet = CreateNewAndAdd() as TermSet;
 
             // Assign field values
-            newSet.LocalizedNames.Add(new TermSetLocalizedName() { Name = name, LanguageTag = PnPContext.TermStore.DefaultLanguage });
+            (newSet.LocalizedNames as TermSetLocalizedNameCollection).Add(new TermSetLocalizedName() { Name = name, LanguageTag = PnPContext.TermStore.DefaultLanguage });
 
             if (description != null)
             {

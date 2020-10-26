@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FileVersion object
     /// </summary>
     [ConcreteType(typeof(FileVersion))]
-    public interface IFileVersion : IComplexType<IFileVersion>
+    public interface IFileVersion : IDataModel<IFileVersion>
     {
         /// <summary>
         /// Gets a value that specifies the check-in comment.

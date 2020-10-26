@@ -3,7 +3,7 @@
 namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal partial class TeamChatMessageAttachment : BaseComplexType<ITeamChatMessageAttachment>, ITeamChatMessageAttachment
+    internal partial class TeamChatMessageAttachment : BaseDataModel<ITeamChatMessageAttachment>, ITeamChatMessageAttachment
     {
         public string Id { get => GetValue<string>(); set => SetValue(value); }
 

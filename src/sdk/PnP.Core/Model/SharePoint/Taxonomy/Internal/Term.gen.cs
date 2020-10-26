@@ -7,27 +7,59 @@ namespace PnP.Core.Model.SharePoint
     {
         public string Id { get => GetValue<string>(); set => SetValue(value); }
 
-        public List<ITermLocalizedLabel> Labels
+        //public List<ITermLocalizedLabel> Labels
+        //{
+        //    get
+        //    {
+        //        if (!HasValue(nameof(Labels)))
+        //        {
+        //            SetValue(new List<ITermLocalizedLabel>());
+        //        }
+        //        return GetValue<List<ITermLocalizedLabel>>();
+        //    }
+        //}
+        public ITermLocalizedLabelCollection Labels
         {
             get
             {
                 if (!HasValue(nameof(Labels)))
                 {
-                    SetValue(new List<ITermLocalizedLabel>());
+                    var termLocalizedLabels = new TermLocalizedLabelCollection
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(termLocalizedLabels);
                 }
-                return GetValue<List<ITermLocalizedLabel>>();
+                return GetValue<ITermLocalizedLabelCollection>();
             }
         }
 
-        public List<ITermLocalizedDescription> Descriptions
+        //public List<ITermLocalizedDescription> Descriptions
+        //{
+        //    get
+        //    {
+        //        if (!HasValue(nameof(Descriptions)))
+        //        {
+        //            SetValue(new List<ITermLocalizedDescription>());
+        //        }
+        //        return GetValue<List<ITermLocalizedDescription>>();
+        //    }
+        //}
+        public ITermLocalizedDescriptionCollection Descriptions
         {
             get
             {
                 if (!HasValue(nameof(Descriptions)))
                 {
-                    SetValue(new List<ITermLocalizedDescription>());
+                    var termLocalizedLabels = new TermLocalizedDescriptionCollection
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(termLocalizedLabels);
                 }
-                return GetValue<List<ITermLocalizedDescription>>();
+                return GetValue<ITermLocalizedDescriptionCollection>();
             }
         }
 
@@ -87,15 +119,31 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public List<ITermProperty> Properties
+        //public List<ITermProperty> Properties
+        //{
+        //    get
+        //    {
+        //        if (!HasValue(nameof(Properties)))
+        //        {
+        //            SetValue(new List<ITermProperty>());
+        //        }
+        //        return GetValue<List<ITermProperty>>();
+        //    }
+        //}
+        public ITermPropertyCollection Properties
         {
             get
             {
                 if (!HasValue(nameof(Properties)))
                 {
-                    SetValue(new List<ITermProperty>());
+                    var termLocalizedLabels = new TermPropertyCollection
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(termLocalizedLabels);
                 }
-                return GetValue<List<ITermProperty>>();
+                return GetValue<ITermPropertyCollection>();
             }
         }
 

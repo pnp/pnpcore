@@ -1,5 +1,4 @@
-﻿using PnP.Core.QueryModel;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {

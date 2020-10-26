@@ -63,7 +63,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(value));
             }
 
-            var property = Properties.FirstOrDefault(p => p.Key == key);
+            var property = Properties.FirstOrDefault(p => p.KeyField == key);
             if (property != null)
             {
                 // update
@@ -72,7 +72,7 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 // add
-                Properties.Add(new TermSetProperty() { Key = key, Value = value });
+                (Properties as TermSetPropertyCollection).Add(new TermSetProperty() { KeyField = key, Value = value });
             }
         }
 

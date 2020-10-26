@@ -42,7 +42,7 @@ namespace PnP.Core.Model
     /// Base class for all model classes
     /// </summary>
     /// <typeparam name="TModel">Model class</typeparam>
-    internal class BaseDataModel<TModel> : TransientObject, IDataModel<TModel>, IRequestable, IMetadataExtensible, IDataModelWithKey, IDataModelMappingHandler
+    internal class BaseDataModel<TModel> : TransientObject, IDataModel<TModel>, IDataModelGet, IRequestable, IMetadataExtensible, IDataModelWithKey, IDataModelMappingHandler
     {
         private QueryClient query;
 
@@ -1004,47 +1004,6 @@ namespace PnP.Core.Model
             {
                 return true;
             }
-        }
-        #endregion
-
-        #region Graph vs GraphBeta handling
-
-        private bool CanUseGraphBeta(EntityFieldInfo field)
-        {
-            return PnPContext.GraphCanUseBeta && field.GraphBeta;
-        }
-
-        private bool CanUseGraphBeta(EntityInfo entity)
-        {
-            return PnPContext.GraphCanUseBeta && entity.GraphBeta;
-        }
-
-        private ApiType VerifyIfUsedComplexTypeRequiresBeta(ApiType apiType, EntityFieldInfo field)
-        {
-            if (ComplexTypeHasBetaProperty(field))
-            {
-                // Note: if we find one field that requires beta the complex type will trigger to use beta, assuming beta is allowed
-                if (PnPContext.GraphCanUseBeta)
-                {
-                    apiType = ApiType.GraphBeta;
-                }
-            }
-
-            // If a complex type also contains another complex type then we're ignoring the potential need to switch to beta
-
-            return apiType;
-        }
-
-        private static bool ComplexTypeHasBetaProperty(EntityFieldInfo field)
-        {
-            if (JsonMappingHelper.IsComplexType(field.PropertyInfo.PropertyType))
-            {
-                var typeToCheck = Type.GetType($"{field.PropertyInfo.PropertyType.Namespace}.{field.PropertyInfo.PropertyType.Name.Substring(1)}");
-                var complexTypeEntityInfo = EntityManager.Instance.GetStaticClassInfo(typeToCheck);
-                return complexTypeEntityInfo.Fields.Any(p => p.GraphBeta);
-            }
-
-            return false;
         }
         #endregion
 

@@ -3,7 +3,8 @@
     /// <summary>
     /// Represents a mention in a chatMessage entity. The mention can be to a user, team, bot, or channel.
     /// </summary>
-    public interface ITeamChatMessageMention: IComplexType<ITeamChatMessageMention>
+    [ConcreteType(typeof(TeamChatMessageMention))]
+    public interface ITeamChatMessageMention: IDataModel<ITeamChatMessageMention>
     {
         /// <summary>
         /// Index of an entity being mentioned in the specified chatMessage. 

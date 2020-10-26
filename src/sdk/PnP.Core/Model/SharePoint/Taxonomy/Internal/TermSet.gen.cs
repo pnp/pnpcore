@@ -8,15 +8,31 @@ namespace PnP.Core.Model.SharePoint
     {
         public string Id { get => GetValue<string>(); set => SetValue(value); }
 
-        public List<ITermSetLocalizedName> LocalizedNames
+        //public List<ITermSetLocalizedName> LocalizedNames
+        //{
+        //    get
+        //    {
+        //        if (!HasValue(nameof(LocalizedNames)))
+        //        {
+        //            SetValue(new List<ITermSetLocalizedName>());
+        //        }
+        //        return GetValue<List<ITermSetLocalizedName>>();
+        //    }
+        //}
+        public ITermSetLocalizedNameCollection LocalizedNames
         {
             get
             {
                 if (!HasValue(nameof(LocalizedNames)))
                 {
-                    SetValue(new List<ITermSetLocalizedName>());
+                    var termSetLocalizedNames = new TermSetLocalizedNameCollection
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(termSetLocalizedNames);
                 }
-                return GetValue<List<ITermSetLocalizedName>>();
+                return GetValue<ITermSetLocalizedNameCollection>();
             }
         }
 
@@ -75,15 +91,31 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public List<ITermSetProperty> Properties
+        //public List<ITermSetProperty> Properties
+        //{
+        //    get
+        //    {
+        //        if (!HasValue(nameof(Properties)))
+        //        {
+        //            SetValue(new List<ITermSetProperty>());
+        //        }
+        //        return GetValue<List<ITermSetProperty>>();
+        //    }
+        //}
+        public ITermSetPropertyCollection Properties
         {
             get
             {
                 if (!HasValue(nameof(Properties)))
                 {
-                    SetValue(new List<ITermSetProperty>());
+                    var termSetProperties = new TermSetPropertyCollection
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(termSetProperties);
                 }
-                return GetValue<List<ITermSetProperty>>();
+                return GetValue<ITermSetPropertyCollection>();
             }
         }
 

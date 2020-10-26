@@ -35,7 +35,7 @@ namespace PnP.Core.Model.SharePoint
                 dynamic body = new ExpandoObject();
                 body.labels = localizedLabels;
 
-                if (this.IsPropertyAvailable(p => p.Descriptions) && Descriptions.Count > 0)
+                if (this.IsPropertyAvailable(p => p.Descriptions) && (Descriptions as TermLocalizedDescriptionCollection).Count > 0)
                 {
                     dynamic localizedDescriptions = new List<dynamic>();
                     foreach (var localizedDescription in Descriptions)
@@ -55,12 +55,12 @@ namespace PnP.Core.Model.SharePoint
                 string termApi;
                 if (Parent != null && Parent.GetType() == typeof(TermCollection) && (Parent.Parent != null && !(Parent.Parent.GetType() == typeof(Term))))
                 {
-                    // we're adding a term to an existing term
+                    // we're adding a root level term
                     termApi = $"termstore/sets/{Set.Id}/children";
                 }
                 else
                 {
-                    // we're adding a root level term
+                    // we're adding a term to an existing term
                     termApi = $"termstore/sets/{Set.Id}/terms/{{Parent.GraphId}}/children";
                 }
 
@@ -101,7 +101,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(value));
             }
 
-            var property = Properties.FirstOrDefault(p => p.Key == key);
+            var property = Properties.FirstOrDefault(p => p.KeyField == key);
             if (property != null)
             {
                 // update
@@ -110,7 +110,7 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 // add
-                Properties.Add(new TermProperty() { Key = key, Value = value });
+                (Properties as TermPropertyCollection).Add(new TermProperty() { KeyField = key, Value = value });
             }
         }
 
@@ -141,7 +141,7 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 // Add
-                Labels.Add(new TermLocalizedLabel() { Name = label, LanguageTag = languageTag, IsDefault = isDefault });
+                (Labels as TermLocalizedLabelCollection).Add(new TermLocalizedLabel() { Name = label, LanguageTag = languageTag, IsDefault = isDefault });
                 if (description != null)
                 {
                     AddDescription(languageTag, description);
@@ -158,7 +158,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                Descriptions.Add(new TermLocalizedDescription() { Description = description, LanguageTag = languageTag });
+                (Descriptions as TermLocalizedDescriptionCollection).Add(new TermLocalizedDescription() { Description = description, LanguageTag = languageTag });
             }
         }
 

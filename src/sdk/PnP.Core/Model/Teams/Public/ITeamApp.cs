@@ -4,7 +4,7 @@
     /// Defines a Microsoft Teams App installation
     /// </summary>
     [ConcreteType(typeof(TeamApp))]
-    public interface ITeamApp : IDataModel<ITeamApp>
+    public interface ITeamApp : IDataModel<ITeamApp>, IDataModelGet<ITeamApp>
     {
         /// <summary>
         /// The unique Id of the Team App in the current app catalog

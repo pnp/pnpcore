@@ -6,9 +6,9 @@ using PnP.Core.Services;
 namespace PnP.Core.Model
 {
     /// <summary>
-    /// Defines the basic untyped read interface for Domain Model objects that can be read.
+    /// Defines the basic untyped read interface for Domain Model objects that can be read, only used internally
     /// </summary>
-    public interface IDataModelGet
+    internal interface IDataModelGet
     {
         /// <summary>
         /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
@@ -78,7 +78,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Defines the read interface for Domain Model objects that can be read.
     /// </summary>
-    public interface IDataModelGet<TModel> : IDataModelGet
+    public interface IDataModelGet<TModel> 
     {
         /// <summary>
         /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties

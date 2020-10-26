@@ -26,11 +26,11 @@ namespace PnP.Core.Model.SharePoint
             var newTerm = CreateNewAndAdd() as Term;
 
             // Assign field values
-            newTerm.Labels.Add(new TermLocalizedLabel() { Name = name, LanguageTag = PnPContext.TermStore.DefaultLanguage, IsDefault = true });
+            (newTerm.Labels as TermLocalizedLabelCollection).Add(new TermLocalizedLabel() { Name = name, LanguageTag = PnPContext.TermStore.DefaultLanguage, IsDefault = true });
 
             if (description != null)
             {
-                newTerm.Descriptions.Add(new TermLocalizedDescription() { Description = description, LanguageTag = PnPContext.TermStore.DefaultLanguage });
+                (newTerm.Descriptions as TermLocalizedDescriptionCollection).Add(new TermLocalizedDescription() { Description = description, LanguageTag = PnPContext.TermStore.DefaultLanguage });
             }
 
             return newTerm;

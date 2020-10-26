@@ -4,7 +4,7 @@ using PnP.Core.Services;
 namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal partial class TeamFunSettings : BaseComplexType<ITeamFunSettings>, ITeamFunSettings
+    internal partial class TeamFunSettings : BaseDataModel<ITeamFunSettings>, ITeamFunSettings
     {
 
         public TeamFunSettings()
@@ -13,7 +13,8 @@ namespace PnP.Core.Model.Teams
             {
                 switch (input.TargetType.Name)
                 {
-                    case "TeamGiphyContentRating": return ToEnum<TeamGiphyContentRating>(input.JsonElement);
+                    //case "TeamGiphyContentRating": return ToEnum<TeamGiphyContentRating>(input.JsonElement);
+                    case "TeamGiphyContentRating": return JsonMappingHelper.ToEnum<TeamGiphyContentRating>(input.JsonElement);
                 }
 
                 input.Log.LogDebug(PnPCoreResources.Log_Debug_JsonCannotMapField, input.FieldName);

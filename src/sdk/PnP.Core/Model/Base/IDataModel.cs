@@ -9,7 +9,7 @@ namespace PnP.Core.Model
     /// Add methods are implemented in their respective model interfaces
     /// </summary>
     /// <typeparam name="TModel">The actual type of the Domain Model object</typeparam>
-    public interface IDataModel<TModel> : IDataModelParent, IDataModelWithContext, IDataModelGet<TModel>
+    public interface IDataModel<TModel> : IDataModelParent, IDataModelWithContext
     {
         /// <summary>
         /// Was this model requested from the back-end

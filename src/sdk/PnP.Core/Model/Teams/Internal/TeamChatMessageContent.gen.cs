@@ -4,7 +4,7 @@ using PnP.Core.Services;
 namespace PnP.Core.Model.Teams
 {
     [GraphType]
-    internal partial class TeamChatMessageContent : BaseComplexType<ITeamChatMessageContent>, ITeamChatMessageContent
+    internal partial class TeamChatMessageContent : BaseDataModel<ITeamChatMessageContent>, ITeamChatMessageContent
     {        
         public TeamChatMessageContent()
         {

@@ -12,7 +12,29 @@ namespace PnP.Core.Model.Teams
 
         public string SortOrderIndex { get => GetValue<string>(); set => SetValue(value); }
 
-        public ITeamChannelTabConfiguration Configuration { get => GetValue<ITeamChannelTabConfiguration>(); set => SetValue(value); }
+        //public ITeamChannelTabConfiguration Configuration { get => GetValue<ITeamChannelTabConfiguration>(); set => SetValue(value); }
+        public ITeamChannelTabConfiguration Configuration
+        {
+            get
+            {
+                if (!NavigationPropertyInstantiated())
+                {
+                    var teamChannelTabConfiguration = new TeamChannelTabConfiguration
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(teamChannelTabConfiguration);
+                    InstantiateNavigationProperty();
+                }
+                return GetValue<ITeamChannelTabConfiguration>();
+            }
+            set
+            {
+                InstantiateNavigationProperty();
+                SetValue(value);
+            }
+        }
 
         public ITeamApp TeamsApp 
         {

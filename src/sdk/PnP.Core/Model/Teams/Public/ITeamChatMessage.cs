@@ -8,7 +8,7 @@ namespace PnP.Core.Model.Teams
     /// part of a reply thread that is defined by the replyToId property in the chat message.
     /// </summary>
     [ConcreteType(typeof(TeamChatMessage))]
-    public interface ITeamChatMessage : IDataModel<ITeamChatMessage>, IQueryableDataModel
+    public interface ITeamChatMessage : IDataModel<ITeamChatMessage>, IDataModelGet<ITeamChatMessage>, IQueryableDataModel
     {
 
         /// <summary>
@@ -86,17 +86,18 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Reactions for this chat message (for example, Like).
         /// </summary>
-        public List<ITeamChatMessageReaction> Reactions { get; }
+        public ITeamChatMessageReactionCollection Reactions { get; }
 
         /// <summary>
         /// List of entities mentioned in the chat message. Currently supports user, bot, team, channel.
         /// </summary>
-        public List<ITeamChatMessageMention> Mentions { get; }
+        public ITeamChatMessageMentionCollection Mentions { get; }
 
         /// <summary>
         /// Attached files. Attachments are currently read-only – sending attachments is not supported.
         /// </summary>
-        public List<ITeamChatMessageAttachment> Attachments { get; }
+        //public List<ITeamChatMessageAttachment> Attachments { get; }
+        public ITeamChatMessageAttachmentCollection Attachments { get; }
 
     }
 }

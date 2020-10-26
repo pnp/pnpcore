@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldLink object
     /// </summary>
     [ConcreteType(typeof(FieldLink))]
-    public interface IFieldLink : IDataModel<IFieldLink>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldLink : IDataModel<IFieldLink>, IDataModelGet<IFieldLink>, IDataModelUpdate, IDataModelDelete
     {
         /// <summary>
         /// Gets or sets the display name of the field in the field link.

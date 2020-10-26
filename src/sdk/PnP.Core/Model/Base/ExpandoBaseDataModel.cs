@@ -54,6 +54,10 @@ namespace PnP.Core.Model
             }
         }
 
+        /// <summary>
+        /// Gets the count of properties of the current expando complex type object
+        /// </summary>
+        public int Count => Values?.Count ?? 0;
 
         /// <summary>
         /// Creates an instance of the Expando object based on the

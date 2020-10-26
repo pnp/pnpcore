@@ -138,29 +138,61 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public List<IFileVersionEvent> VersionEvents
+        //public List<IFileVersionEvent> VersionEvents
+        //{
+        //    get
+        //    {
+        //        if (!HasValue(nameof(VersionEvents)))
+        //        {
+        //            var collection = new List<IFileVersionEvent>();
+        //            SetValue(collection);
+        //        }
+        //        return GetValue<List<IFileVersionEvent>>();
+        //    }
+        //}
+        public IFileVersionEventCollection VersionEvents
         {
             get
             {
                 if (!HasValue(nameof(VersionEvents)))
                 {
-                    var collection = new List<IFileVersionEvent>();
-                    SetValue(collection);
+                    var fileVersionEventCollection = new FileVersionEventCollection
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(fileVersionEventCollection);
                 }
-                return GetValue<List<IFileVersionEvent>>();
+                return GetValue<IFileVersionEventCollection>();
             }
         }
 
-        public List<IFileVersion> Versions
+        //public List<IFileVersion> Versions
+        //{
+        //    get
+        //    {
+        //        if (!HasValue(nameof(Versions)))
+        //        {
+        //            var collection = new List<IFileVersion>();
+        //            SetValue(collection);
+        //        }
+        //        return GetValue<List<IFileVersion>>();
+        //    }
+        //}
+        public IFileVersionCollection Versions
         {
             get
             {
                 if (!HasValue(nameof(Versions)))
                 {
-                    var collection = new List<IFileVersion>();
-                    SetValue(collection);
+                    var fileVersionCollection = new FileVersionCollection
+                    {
+                        PnPContext = this.PnPContext,
+                        Parent = this,
+                    };
+                    SetValue(fileVersionCollection);
                 }
-                return GetValue<List<IFileVersion>>();
+                return GetValue<IFileVersionCollection>();
             }
         }
 

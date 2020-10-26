@@ -3,12 +3,13 @@
     /// <summary>
     /// Key/Value term property
     /// </summary>
-    public interface ITermProperty : IComplexType<ITermProperty>
+    [ConcreteType(typeof(TermProperty))]
+    public interface ITermProperty : IDataModel<ITermProperty>
     {
         /// <summary>
         /// Property key
         /// </summary>
-        public string Key { get; set; }
+        public string KeyField { get; set; }
 
         /// <summary>
         /// Property value

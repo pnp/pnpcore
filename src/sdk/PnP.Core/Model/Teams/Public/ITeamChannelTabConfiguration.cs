@@ -3,7 +3,7 @@
     /// <summary>
     /// Public interface to define the configuration settings for a Team tab
     /// </summary>
-    public interface ITeamChannelTabConfiguration : IComplexType<ITeamChannelTabConfiguration>
+    public interface ITeamChannelTabConfiguration : IDataModel<ITeamChannelTabConfiguration>
     {
         /// <summary>
         /// Identifier for the entity hosted by the tab provider.
