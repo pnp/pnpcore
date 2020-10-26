@@ -94,7 +94,28 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="PnP.Core.Model.IComplexType-1.html#PnP_Core_Model_IComplexType_1_IsPropertyAvailable_Expression_Func__0_System_Object___">IComplexType&lt;ITermProperty&gt;.IsPropertyAvailable(Expression&lt;Func&lt;ITermProperty, Object&gt;&gt;)</a>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_Requested">IDataModel&lt;ITermProperty&gt;.Requested</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasValue_System_String_">IDataModel&lt;ITermProperty&gt;.HasValue(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_HasChanged_System_String_">IDataModel&lt;ITermProperty&gt;.HasChanged(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_IsPropertyAvailable_Expression_Func__0_System_Object___">IDataModel&lt;ITermProperty&gt;.IsPropertyAvailable(Expression&lt;Func&lt;ITermProperty, Object&gt;&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_ArePropertiesAvailable_Expression_Func__0_System_Object_____">IDataModel&lt;ITermProperty&gt;.ArePropertiesAvailable(Expression&lt;Func&lt;ITermProperty, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_Expression_Func__0_System_Object_____">IDataModel&lt;ITermProperty&gt;.EnsurePropertiesAsync(Expression&lt;Func&lt;ITermProperty, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelParent.html#PnP_Core_Model_IDataModelParent_Parent">IDataModelParent.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelWithContext.html#PnP_Core_Model_IDataModelWithContext_PnPContext">IDataModelWithContext.PnPContext</a>
     </div>
   </div>
   
@@ -103,7 +124,7 @@
   
   <h5 id="PnP_Core_Model_SharePoint_ITermProperty_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface ITermProperty : IComplexType&lt;ITermProperty&gt;, IComplexType</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ITermProperty : IDataModel&lt;ITermProperty&gt;, IDataModelParent, IDataModelWithContext</code></pre>
   </div>
 
   
@@ -115,24 +136,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermProperty_Key.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermProperty.Key%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermProperty_KeyField.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermProperty.KeyField%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermProperty.cs/#L11" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermProperty.cs/#L12" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
-  <a id="PnP_Core_Model_SharePoint_ITermProperty_Key_" data-uid="PnP.Core.Model.SharePoint.ITermProperty.Key*"></a>
+  <a id="PnP_Core_Model_SharePoint_ITermProperty_KeyField_" data-uid="PnP.Core.Model.SharePoint.ITermProperty.KeyField*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_ITermProperty_Key" data-uid="PnP.Core.Model.SharePoint.ITermProperty.Key"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermProperty_Key" class="expander" data-toggle="collapse">Key</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_ITermProperty_KeyField" data-uid="PnP.Core.Model.SharePoint.ITermProperty.KeyField"><a href="#collapsible-PnP_Core_Model_SharePoint_ITermProperty_KeyField" class="expander" data-toggle="collapse">KeyField</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_ITermProperty_Key" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_ITermProperty_KeyField" class="collapse in">
   <div class="markdown level1 summary"><p>Property key</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">string Key { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">string KeyField { get; set; }</code></pre>
   </div>
 
   
@@ -162,7 +183,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_ITermProperty_Value.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.ITermProperty.Value%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermProperty.cs/#L16" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Taxonomy/Public/ITermProperty.cs/#L17" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_ITermProperty_Value_" data-uid="PnP.Core.Model.SharePoint.ITermProperty.Value*"></a>

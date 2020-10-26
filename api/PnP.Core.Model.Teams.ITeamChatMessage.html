@@ -142,30 +142,6 @@ part of a reply thread that is defined by the replyToId property in the chat mes
     <div>
       <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_ApiResponse_Expression_Func__0_System_Object_____">IDataModelGet&lt;ITeamChatMessage&gt;.Get(ApiResponse, Expression&lt;Func&lt;ITeamChatMessage, Object&gt;&gt;[])</a>
     </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_PnP_Core_Services_Batch_Expression_Func_System_Object_System_Object_____">IDataModelGet.GetBatchAsync(Batch, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_Expression_Func_System_Object_System_Object_____">IDataModelGet.GetBatchAsync(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatch_PnP_Core_Services_Batch_Expression_Func_System_Object_System_Object_____">IDataModelGet.GetBatch(Batch, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatch_Expression_Func_System_Object_System_Object_____">IDataModelGet.GetBatch(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_Expression_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_PnP_Core_Services_ApiResponse_Expression_Func_System_Object_System_Object_____">IDataModelGet.GetAsync(ApiResponse, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_Expression_Func_System_Object_System_Object_____">IDataModelGet.Get(Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
-    </div>
-    <div>
-      <a class="xref" href="PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_PnP_Core_Services_ApiResponse_Expression_Func_System_Object_System_Object_____">IDataModelGet.Get(ApiResponse, Expression&lt;Func&lt;Object, Object&gt;&gt;[])</a>
-    </div>
   </div>
   
   <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.Teams.html">PnP.Core.Model.Teams</a></h6>
@@ -173,7 +149,7 @@ part of a reply thread that is defined by the replyToId property in the chat mes
   
   <h5 id="PnP_Core_Model_Teams_ITeamChatMessage_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface ITeamChatMessage : IDataModel&lt;ITeamChatMessage&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;ITeamChatMessage&gt;, IDataModelGet, IQueryableDataModel</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ITeamChatMessage : IDataModel&lt;ITeamChatMessage&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;ITeamChatMessage&gt;, IQueryableDataModel</code></pre>
   </div>
 
   
@@ -188,7 +164,7 @@ part of a reply thread that is defined by the replyToId property in the chat mes
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_Teams_ITeamChatMessage_Attachments.md&amp;value=---%0Auid%3A%20PnP.Core.Model.Teams.ITeamChatMessage.Attachments%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessage.cs/#L99" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/Teams/Public/ITeamChatMessage.cs/#L100" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_Teams_ITeamChatMessage_Attachments_" data-uid="PnP.Core.Model.Teams.ITeamChatMessage.Attachments*"></a>
@@ -202,7 +178,7 @@ part of a reply thread that is defined by the replyToId property in the chat mes
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">List&lt;ITeamChatMessageAttachment&gt; Attachments { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">ITeamChatMessageAttachmentCollection Attachments { get; }</code></pre>
   </div>
 
   
@@ -213,7 +189,7 @@ part of a reply thread that is defined by the replyToId property in the chat mes
   <table>
     <tr>
       <td>
-        <span class="xref">List</span>&lt;<a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachment.html">ITeamChatMessageAttachment</a>&gt;
+        <a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html">ITeamChatMessageAttachmentCollection</a>
         <p>
       </td>
     </tr>
@@ -643,7 +619,7 @@ The content is always in HTML if the chat message contains a chatMessageMention.
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">List&lt;ITeamChatMessageMention&gt; Mentions { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">ITeamChatMessageMentionCollection Mentions { get; }</code></pre>
   </div>
 
   
@@ -654,7 +630,7 @@ The content is always in HTML if the chat message contains a chatMessageMention.
   <table>
     <tr>
       <td>
-        <span class="xref">List</span>&lt;<a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageMention.html">ITeamChatMessageMention</a>&gt;
+        <a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageMentionCollection.html">ITeamChatMessageMentionCollection</a>
         <p>
       </td>
     </tr>
@@ -731,7 +707,7 @@ The content is always in HTML if the chat message contains a chatMessageMention.
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">List&lt;ITeamChatMessageReaction&gt; Reactions { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">ITeamChatMessageReactionCollection Reactions { get; }</code></pre>
   </div>
 
   
@@ -742,7 +718,7 @@ The content is always in HTML if the chat message contains a chatMessageMention.
   <table>
     <tr>
       <td>
-        <span class="xref">List</span>&lt;<a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReaction.html">ITeamChatMessageReaction</a>&gt;
+        <a class="xref" href="PnP.Core.Model.Teams.ITeamChatMessageReactionCollection.html">ITeamChatMessageReactionCollection</a>
         <p>
       </td>
     </tr>

@@ -2001,39 +2001,6 @@ references:
   fullName.vb: PnP.Core.Model.DataModelExtensions.LoadProperties(Of TModel)(PnP.Core.Model.IDataModelCollection(Of TModel), Expression(Of Func(Of TModel, System.Object))())
   nameWithType: DataModelExtensions.LoadProperties<TModel>(IDataModelCollection<TModel>, Expression<Func<TModel, Object>>[])
   nameWithType.vb: DataModelExtensions.LoadProperties(Of TModel)(IDataModelCollection(Of TModel), Expression(Of Func(Of TModel, Object))())
-- uid: PnP.Core.Model.IComplexType
-  name: IComplexType
-  href: api/PnP.Core.Model.IComplexType.html
-  commentId: T:PnP.Core.Model.IComplexType
-  fullName: PnP.Core.Model.IComplexType
-  nameWithType: IComplexType
-- uid: PnP.Core.Model.IComplexType`1
-  name: IComplexType<TModel>
-  href: api/PnP.Core.Model.IComplexType-1.html
-  commentId: T:PnP.Core.Model.IComplexType`1
-  name.vb: IComplexType(Of TModel)
-  fullName: PnP.Core.Model.IComplexType<TModel>
-  fullName.vb: PnP.Core.Model.IComplexType(Of TModel)
-  nameWithType: IComplexType<TModel>
-  nameWithType.vb: IComplexType(Of TModel)
-- uid: PnP.Core.Model.IComplexType`1.IsPropertyAvailable(Expression{Func{`0,System.Object}})
-  name: IsPropertyAvailable(Expression<Func<TModel, Object>>)
-  href: api/PnP.Core.Model.IComplexType-1.html#PnP_Core_Model_IComplexType_1_IsPropertyAvailable_Expression_Func__0_System_Object___
-  commentId: M:PnP.Core.Model.IComplexType`1.IsPropertyAvailable(Expression{Func{`0,System.Object}})
-  name.vb: IsPropertyAvailable(Expression(Of Func(Of TModel, Object)))
-  fullName: PnP.Core.Model.IComplexType<TModel>.IsPropertyAvailable(Expression<Func<TModel, System.Object>>)
-  fullName.vb: PnP.Core.Model.IComplexType(Of TModel).IsPropertyAvailable(Expression(Of Func(Of TModel, System.Object)))
-  nameWithType: IComplexType<TModel>.IsPropertyAvailable(Expression<Func<TModel, Object>>)
-  nameWithType.vb: IComplexType(Of TModel).IsPropertyAvailable(Expression(Of Func(Of TModel, Object)))
-- uid: PnP.Core.Model.IComplexType`1.IsPropertyAvailable*
-  name: IsPropertyAvailable
-  href: api/PnP.Core.Model.IComplexType-1.html#PnP_Core_Model_IComplexType_1_IsPropertyAvailable_
-  commentId: Overload:PnP.Core.Model.IComplexType`1.IsPropertyAvailable
-  isSpec: "True"
-  fullName: PnP.Core.Model.IComplexType<TModel>.IsPropertyAvailable
-  fullName.vb: PnP.Core.Model.IComplexType(Of TModel).IsPropertyAvailable
-  nameWithType: IComplexType<TModel>.IsPropertyAvailable
-  nameWithType.vb: IComplexType(Of TModel).IsPropertyAvailable
 - uid: PnP.Core.Model.IDataModel`1
   name: IDataModel<TModel>
   href: api/PnP.Core.Model.IDataModel-1.html
@@ -2227,112 +2194,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IDataModelDelete.DeleteBatchAsync
   nameWithType: IDataModelDelete.DeleteBatchAsync
-- uid: PnP.Core.Model.IDataModelGet
-  name: IDataModelGet
-  href: api/PnP.Core.Model.IDataModelGet.html
-  commentId: T:PnP.Core.Model.IDataModelGet
-  fullName: PnP.Core.Model.IDataModelGet
-  nameWithType: IDataModelGet
-- uid: PnP.Core.Model.IDataModelGet.Get(Expression{Func{System.Object,System.Object}}[])
-  name: Get(Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_Expression_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.Get(Expression{Func{System.Object,System.Object}}[])
-  name.vb: Get(Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.Get(Expression<Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.Get(Expression(Of Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.Get(Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.Get(Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.Get(PnP.Core.Services.ApiResponse,Expression{Func{System.Object,System.Object}}[])
-  name: Get(ApiResponse, Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_PnP_Core_Services_ApiResponse_Expression_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.Get(PnP.Core.Services.ApiResponse,Expression{Func{System.Object,System.Object}}[])
-  name.vb: Get(ApiResponse, Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.Get(PnP.Core.Services.ApiResponse, Expression<Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.Get(PnP.Core.Services.ApiResponse, Expression(Of Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.Get(ApiResponse, Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.Get(ApiResponse, Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.Get*
-  name: Get
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_Get_
-  commentId: Overload:PnP.Core.Model.IDataModelGet.Get
-  isSpec: "True"
-  fullName: PnP.Core.Model.IDataModelGet.Get
-  nameWithType: IDataModelGet.Get
-- uid: PnP.Core.Model.IDataModelGet.GetAsync(Expression{Func{System.Object,System.Object}}[])
-  name: GetAsync(Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_Expression_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.GetAsync(Expression{Func{System.Object,System.Object}}[])
-  name.vb: GetAsync(Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.GetAsync(Expression<Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.GetAsync(Expression(Of Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.GetAsync(Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.GetAsync(Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.GetAsync(PnP.Core.Services.ApiResponse,Expression{Func{System.Object,System.Object}}[])
-  name: GetAsync(ApiResponse, Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_PnP_Core_Services_ApiResponse_Expression_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.GetAsync(PnP.Core.Services.ApiResponse,Expression{Func{System.Object,System.Object}}[])
-  name.vb: GetAsync(ApiResponse, Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.GetAsync(PnP.Core.Services.ApiResponse, Expression<Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.GetAsync(PnP.Core.Services.ApiResponse, Expression(Of Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.GetAsync(ApiResponse, Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.GetAsync(ApiResponse, Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.GetAsync*
-  name: GetAsync
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetAsync_
-  commentId: Overload:PnP.Core.Model.IDataModelGet.GetAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.IDataModelGet.GetAsync
-  nameWithType: IDataModelGet.GetAsync
-- uid: PnP.Core.Model.IDataModelGet.GetBatch(Expression{Func{System.Object,System.Object}}[])
-  name: GetBatch(Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatch_Expression_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.GetBatch(Expression{Func{System.Object,System.Object}}[])
-  name.vb: GetBatch(Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.GetBatch(Expression<Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.GetBatch(Expression(Of Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.GetBatch(Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.GetBatch(Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.GetBatch(PnP.Core.Services.Batch,Expression{Func{System.Object,System.Object}}[])
-  name: GetBatch(Batch, Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatch_PnP_Core_Services_Batch_Expression_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.GetBatch(PnP.Core.Services.Batch,Expression{Func{System.Object,System.Object}}[])
-  name.vb: GetBatch(Batch, Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.GetBatch(PnP.Core.Services.Batch, Expression<Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.GetBatch(PnP.Core.Services.Batch, Expression(Of Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.GetBatch(Batch, Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.GetBatch(Batch, Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.GetBatch*
-  name: GetBatch
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatch_
-  commentId: Overload:PnP.Core.Model.IDataModelGet.GetBatch
-  isSpec: "True"
-  fullName: PnP.Core.Model.IDataModelGet.GetBatch
-  nameWithType: IDataModelGet.GetBatch
-- uid: PnP.Core.Model.IDataModelGet.GetBatchAsync(Expression{Func{System.Object,System.Object}}[])
-  name: GetBatchAsync(Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_Expression_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.GetBatchAsync(Expression{Func{System.Object,System.Object}}[])
-  name.vb: GetBatchAsync(Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.GetBatchAsync(Expression<Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.GetBatchAsync(Expression(Of Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.GetBatchAsync(Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.GetBatchAsync(Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.GetBatchAsync(PnP.Core.Services.Batch,Expression{Func{System.Object,System.Object}}[])
-  name: GetBatchAsync(Batch, Expression<Func<Object, Object>>[])
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_PnP_Core_Services_Batch_Expression_Func_System_Object_System_Object_____
-  commentId: M:PnP.Core.Model.IDataModelGet.GetBatchAsync(PnP.Core.Services.Batch,Expression{Func{System.Object,System.Object}}[])
-  name.vb: GetBatchAsync(Batch, Expression(Of Func(Of Object, Object))())
-  fullName: PnP.Core.Model.IDataModelGet.GetBatchAsync(PnP.Core.Services.Batch, Expression<Func<System.Object, System.Object>>[])
-  fullName.vb: PnP.Core.Model.IDataModelGet.GetBatchAsync(PnP.Core.Services.Batch, Expression(Of Func(Of System.Object, System.Object))())
-  nameWithType: IDataModelGet.GetBatchAsync(Batch, Expression<Func<Object, Object>>[])
-  nameWithType.vb: IDataModelGet.GetBatchAsync(Batch, Expression(Of Func(Of Object, Object))())
-- uid: PnP.Core.Model.IDataModelGet.GetBatchAsync*
-  name: GetBatchAsync
-  href: api/PnP.Core.Model.IDataModelGet.html#PnP_Core_Model_IDataModelGet_GetBatchAsync_
-  commentId: Overload:PnP.Core.Model.IDataModelGet.GetBatchAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.IDataModelGet.GetBatchAsync
-  nameWithType: IDataModelGet.GetBatchAsync
 - uid: PnP.Core.Model.IDataModelGet`1
   name: IDataModelGet<TModel>
   href: api/PnP.Core.Model.IDataModelGet-1.html
@@ -2609,63 +2470,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IDataModelWithKey.Key
   nameWithType: IDataModelWithKey.Key
-- uid: PnP.Core.Model.IExpandoComplexType
-  name: IExpandoComplexType
-  href: api/PnP.Core.Model.IExpandoComplexType.html
-  commentId: T:PnP.Core.Model.IExpandoComplexType
-  fullName: PnP.Core.Model.IExpandoComplexType
-  nameWithType: IExpandoComplexType
-- uid: PnP.Core.Model.IExpandoComplexType.AsDynamic
-  name: AsDynamic()
-  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_AsDynamic
-  commentId: M:PnP.Core.Model.IExpandoComplexType.AsDynamic
-  fullName: PnP.Core.Model.IExpandoComplexType.AsDynamic()
-  nameWithType: IExpandoComplexType.AsDynamic()
-- uid: PnP.Core.Model.IExpandoComplexType.AsDynamic*
-  name: AsDynamic
-  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_AsDynamic_
-  commentId: Overload:PnP.Core.Model.IExpandoComplexType.AsDynamic
-  isSpec: "True"
-  fullName: PnP.Core.Model.IExpandoComplexType.AsDynamic
-  nameWithType: IExpandoComplexType.AsDynamic
-- uid: PnP.Core.Model.IExpandoComplexType.Count
-  name: Count
-  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Count
-  commentId: P:PnP.Core.Model.IExpandoComplexType.Count
-  fullName: PnP.Core.Model.IExpandoComplexType.Count
-  nameWithType: IExpandoComplexType.Count
-- uid: PnP.Core.Model.IExpandoComplexType.Count*
-  name: Count
-  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Count_
-  commentId: Overload:PnP.Core.Model.IExpandoComplexType.Count
-  isSpec: "True"
-  fullName: PnP.Core.Model.IExpandoComplexType.Count
-  nameWithType: IExpandoComplexType.Count
-- uid: PnP.Core.Model.IExpandoComplexType.Item(System.String)
-  name: Item[String]
-  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Item_System_String_
-  commentId: P:PnP.Core.Model.IExpandoComplexType.Item(System.String)
-  name.vb: Item(String)
-  fullName: PnP.Core.Model.IExpandoComplexType.Item[System.String]
-  fullName.vb: PnP.Core.Model.IExpandoComplexType.Item(System.String)
-  nameWithType: IExpandoComplexType.Item[String]
-  nameWithType.vb: IExpandoComplexType.Item(String)
-- uid: PnP.Core.Model.IExpandoComplexType.Item*
-  name: Item
-  href: api/PnP.Core.Model.IExpandoComplexType.html#PnP_Core_Model_IExpandoComplexType_Item_
-  commentId: Overload:PnP.Core.Model.IExpandoComplexType.Item
-  isSpec: "True"
-  fullName: PnP.Core.Model.IExpandoComplexType.Item
-  nameWithType: IExpandoComplexType.Item
-- uid: PnP.Core.Model.IExpandoComplexType`1
-  name: IExpandoComplexType<TModel>
-  href: api/PnP.Core.Model.IExpandoComplexType-1.html
-  commentId: T:PnP.Core.Model.IExpandoComplexType`1
-  name.vb: IExpandoComplexType(Of TModel)
-  fullName: PnP.Core.Model.IExpandoComplexType<TModel>
-  fullName.vb: PnP.Core.Model.IExpandoComplexType(Of TModel)
-  nameWithType: IExpandoComplexType<TModel>
-  nameWithType.vb: IExpandoComplexType(Of TModel)
 - uid: PnP.Core.Model.IExpandoDataModel
   name: IExpandoDataModel
   href: api/PnP.Core.Model.IExpandoDataModel.html
@@ -2685,6 +2489,35 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.IExpandoDataModel.AsDynamic
   nameWithType: IExpandoDataModel.AsDynamic
+- uid: PnP.Core.Model.IExpandoDataModel.Count
+  name: Count
+  href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_Count
+  commentId: P:PnP.Core.Model.IExpandoDataModel.Count
+  fullName: PnP.Core.Model.IExpandoDataModel.Count
+  nameWithType: IExpandoDataModel.Count
+- uid: PnP.Core.Model.IExpandoDataModel.Count*
+  name: Count
+  href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_Count_
+  commentId: Overload:PnP.Core.Model.IExpandoDataModel.Count
+  isSpec: "True"
+  fullName: PnP.Core.Model.IExpandoDataModel.Count
+  nameWithType: IExpandoDataModel.Count
+- uid: PnP.Core.Model.IExpandoDataModel.Item(System.String)
+  name: Item[String]
+  href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_Item_System_String_
+  commentId: P:PnP.Core.Model.IExpandoDataModel.Item(System.String)
+  name.vb: Item(String)
+  fullName: PnP.Core.Model.IExpandoDataModel.Item[System.String]
+  fullName.vb: PnP.Core.Model.IExpandoDataModel.Item(System.String)
+  nameWithType: IExpandoDataModel.Item[String]
+  nameWithType.vb: IExpandoDataModel.Item(String)
+- uid: PnP.Core.Model.IExpandoDataModel.Item*
+  name: Item
+  href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_Item_
+  commentId: Overload:PnP.Core.Model.IExpandoDataModel.Item
+  isSpec: "True"
+  fullName: PnP.Core.Model.IExpandoDataModel.Item
+  nameWithType: IExpandoDataModel.Item
 - uid: PnP.Core.Model.IExpandoDataModel.Values
   name: Values
   href: api/PnP.Core.Model.IExpandoDataModel.html#PnP_Core_Model_IExpandoDataModel_Values
@@ -9249,6 +9082,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFileVersion.VersionLabel
   nameWithType: IFileVersion.VersionLabel
+- uid: PnP.Core.Model.SharePoint.IFileVersionCollection
+  name: IFileVersionCollection
+  href: api/PnP.Core.Model.SharePoint.IFileVersionCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.IFileVersionCollection
+  fullName: PnP.Core.Model.SharePoint.IFileVersionCollection
+  nameWithType: IFileVersionCollection
 - uid: PnP.Core.Model.SharePoint.IFileVersionEvent
   name: IFileVersionEvent
   href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html
@@ -9294,6 +9133,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.Time
   nameWithType: IFileVersionEvent.Time
+- uid: PnP.Core.Model.SharePoint.IFileVersionEventCollection
+  name: IFileVersionEventCollection
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEventCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.IFileVersionEventCollection
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEventCollection
+  nameWithType: IFileVersionEventCollection
 - uid: PnP.Core.Model.SharePoint.IFolder
   name: IFolder
   href: api/PnP.Core.Model.SharePoint.IFolder.html
@@ -13284,6 +13129,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermLocalizedDescription.LanguageTag
   nameWithType: ITermLocalizedDescription.LanguageTag
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedDescriptionCollection
+  name: ITermLocalizedDescriptionCollection
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedDescriptionCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermLocalizedDescriptionCollection
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedDescriptionCollection
+  nameWithType: ITermLocalizedDescriptionCollection
 - uid: PnP.Core.Model.SharePoint.ITermLocalizedLabel
   name: ITermLocalizedLabel
   href: api/PnP.Core.Model.SharePoint.ITermLocalizedLabel.html
@@ -13329,25 +13180,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabel.Name
   nameWithType: ITermLocalizedLabel.Name
+- uid: PnP.Core.Model.SharePoint.ITermLocalizedLabelCollection
+  name: ITermLocalizedLabelCollection
+  href: api/PnP.Core.Model.SharePoint.ITermLocalizedLabelCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermLocalizedLabelCollection
+  fullName: PnP.Core.Model.SharePoint.ITermLocalizedLabelCollection
+  nameWithType: ITermLocalizedLabelCollection
 - uid: PnP.Core.Model.SharePoint.ITermProperty
   name: ITermProperty
   href: api/PnP.Core.Model.SharePoint.ITermProperty.html
   commentId: T:PnP.Core.Model.SharePoint.ITermProperty
   fullName: PnP.Core.Model.SharePoint.ITermProperty
   nameWithType: ITermProperty
-- uid: PnP.Core.Model.SharePoint.ITermProperty.Key
-  name: Key
-  href: api/PnP.Core.Model.SharePoint.ITermProperty.html#PnP_Core_Model_SharePoint_ITermProperty_Key
-  commentId: P:PnP.Core.Model.SharePoint.ITermProperty.Key
-  fullName: PnP.Core.Model.SharePoint.ITermProperty.Key
-  nameWithType: ITermProperty.Key
-- uid: PnP.Core.Model.SharePoint.ITermProperty.Key*
-  name: Key
-  href: api/PnP.Core.Model.SharePoint.ITermProperty.html#PnP_Core_Model_SharePoint_ITermProperty_Key_
-  commentId: Overload:PnP.Core.Model.SharePoint.ITermProperty.Key
+- uid: PnP.Core.Model.SharePoint.ITermProperty.KeyField
+  name: KeyField
+  href: api/PnP.Core.Model.SharePoint.ITermProperty.html#PnP_Core_Model_SharePoint_ITermProperty_KeyField
+  commentId: P:PnP.Core.Model.SharePoint.ITermProperty.KeyField
+  fullName: PnP.Core.Model.SharePoint.ITermProperty.KeyField
+  nameWithType: ITermProperty.KeyField
+- uid: PnP.Core.Model.SharePoint.ITermProperty.KeyField*
+  name: KeyField
+  href: api/PnP.Core.Model.SharePoint.ITermProperty.html#PnP_Core_Model_SharePoint_ITermProperty_KeyField_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermProperty.KeyField
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ITermProperty.Key
-  nameWithType: ITermProperty.Key
+  fullName: PnP.Core.Model.SharePoint.ITermProperty.KeyField
+  nameWithType: ITermProperty.KeyField
 - uid: PnP.Core.Model.SharePoint.ITermProperty.Value
   name: Value
   href: api/PnP.Core.Model.SharePoint.ITermProperty.html#PnP_Core_Model_SharePoint_ITermProperty_Value
@@ -13361,6 +13218,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermProperty.Value
   nameWithType: ITermProperty.Value
+- uid: PnP.Core.Model.SharePoint.ITermPropertyCollection
+  name: ITermPropertyCollection
+  href: api/PnP.Core.Model.SharePoint.ITermPropertyCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermPropertyCollection
+  fullName: PnP.Core.Model.SharePoint.ITermPropertyCollection
+  nameWithType: ITermPropertyCollection
 - uid: PnP.Core.Model.SharePoint.ITermRelation
   name: ITermRelation
   href: api/PnP.Core.Model.SharePoint.ITermRelation.html
@@ -13759,25 +13622,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermSetLocalizedName.Name
   nameWithType: ITermSetLocalizedName.Name
+- uid: PnP.Core.Model.SharePoint.ITermSetLocalizedNameCollection
+  name: ITermSetLocalizedNameCollection
+  href: api/PnP.Core.Model.SharePoint.ITermSetLocalizedNameCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermSetLocalizedNameCollection
+  fullName: PnP.Core.Model.SharePoint.ITermSetLocalizedNameCollection
+  nameWithType: ITermSetLocalizedNameCollection
 - uid: PnP.Core.Model.SharePoint.ITermSetProperty
   name: ITermSetProperty
   href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html
   commentId: T:PnP.Core.Model.SharePoint.ITermSetProperty
   fullName: PnP.Core.Model.SharePoint.ITermSetProperty
   nameWithType: ITermSetProperty
-- uid: PnP.Core.Model.SharePoint.ITermSetProperty.Key
-  name: Key
-  href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html#PnP_Core_Model_SharePoint_ITermSetProperty_Key
-  commentId: P:PnP.Core.Model.SharePoint.ITermSetProperty.Key
-  fullName: PnP.Core.Model.SharePoint.ITermSetProperty.Key
-  nameWithType: ITermSetProperty.Key
-- uid: PnP.Core.Model.SharePoint.ITermSetProperty.Key*
-  name: Key
-  href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html#PnP_Core_Model_SharePoint_ITermSetProperty_Key_
-  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetProperty.Key
+- uid: PnP.Core.Model.SharePoint.ITermSetProperty.KeyField
+  name: KeyField
+  href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html#PnP_Core_Model_SharePoint_ITermSetProperty_KeyField
+  commentId: P:PnP.Core.Model.SharePoint.ITermSetProperty.KeyField
+  fullName: PnP.Core.Model.SharePoint.ITermSetProperty.KeyField
+  nameWithType: ITermSetProperty.KeyField
+- uid: PnP.Core.Model.SharePoint.ITermSetProperty.KeyField*
+  name: KeyField
+  href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html#PnP_Core_Model_SharePoint_ITermSetProperty_KeyField_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITermSetProperty.KeyField
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ITermSetProperty.Key
-  nameWithType: ITermSetProperty.Key
+  fullName: PnP.Core.Model.SharePoint.ITermSetProperty.KeyField
+  nameWithType: ITermSetProperty.KeyField
 - uid: PnP.Core.Model.SharePoint.ITermSetProperty.Value
   name: Value
   href: api/PnP.Core.Model.SharePoint.ITermSetProperty.html#PnP_Core_Model_SharePoint_ITermSetProperty_Value
@@ -13791,6 +13660,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermSetProperty.Value
   nameWithType: ITermSetProperty.Value
+- uid: PnP.Core.Model.SharePoint.ITermSetPropertyCollection
+  name: ITermSetPropertyCollection
+  href: api/PnP.Core.Model.SharePoint.ITermSetPropertyCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITermSetPropertyCollection
+  fullName: PnP.Core.Model.SharePoint.ITermSetPropertyCollection
+  nameWithType: ITermSetPropertyCollection
 - uid: PnP.Core.Model.SharePoint.ITermStore
   name: ITermStore
   href: api/PnP.Core.Model.SharePoint.ITermStore.html
@@ -19710,6 +19585,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessageAttachment.ThumbnailUrl
   nameWithType: ITeamChatMessageAttachment.ThumbnailUrl
+- uid: PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection
+  name: ITeamChatMessageAttachmentCollection
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection.html
+  commentId: T:PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageAttachmentCollection
+  nameWithType: ITeamChatMessageAttachmentCollection
 - uid: PnP.Core.Model.Teams.ITeamChatMessageCollection
   name: ITeamChatMessageCollection
   href: api/PnP.Core.Model.Teams.ITeamChatMessageCollection.html
@@ -19857,6 +19738,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessageMention.MentionText
   nameWithType: ITeamChatMessageMention.MentionText
+- uid: PnP.Core.Model.Teams.ITeamChatMessageMentionCollection
+  name: ITeamChatMessageMentionCollection
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageMentionCollection.html
+  commentId: T:PnP.Core.Model.Teams.ITeamChatMessageMentionCollection
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageMentionCollection
+  nameWithType: ITeamChatMessageMentionCollection
 - uid: PnP.Core.Model.Teams.ITeamChatMessageReaction
   name: ITeamChatMessageReaction
   href: api/PnP.Core.Model.Teams.ITeamChatMessageReaction.html
@@ -19902,6 +19789,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Teams.ITeamChatMessageReaction.User
   nameWithType: ITeamChatMessageReaction.User
+- uid: PnP.Core.Model.Teams.ITeamChatMessageReactionCollection
+  name: ITeamChatMessageReactionCollection
+  href: api/PnP.Core.Model.Teams.ITeamChatMessageReactionCollection.html
+  commentId: T:PnP.Core.Model.Teams.ITeamChatMessageReactionCollection
+  fullName: PnP.Core.Model.Teams.ITeamChatMessageReactionCollection
+  nameWithType: ITeamChatMessageReactionCollection
 - uid: PnP.Core.Model.Teams.ITeamClassSettings
   name: ITeamClassSettings
   href: api/PnP.Core.Model.Teams.ITeamClassSettings.html
