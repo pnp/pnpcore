@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PnP.Core.Auth.Services;
 using PnP.Core.Services;
 using PnP.M365.DomainModelGenerator.CodeAnalyzer;
 using PnP.M365.DomainModelGenerator.Mappings;

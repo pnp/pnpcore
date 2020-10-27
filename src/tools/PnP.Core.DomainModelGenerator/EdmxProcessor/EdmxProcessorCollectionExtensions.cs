@@ -27,7 +27,7 @@ namespace PnP.M365.DomainModelGenerator
         private static IServiceCollection AddEdmxProcessorServices(this IServiceCollection collection)
         {
             return collection
-                .AddOAuthAuthenticationProvider()
+                //.AddOAuthAuthenticationProvider()
                 .AddScoped<IEdmxProcessor, EdmxProcessor>();
         }
     }

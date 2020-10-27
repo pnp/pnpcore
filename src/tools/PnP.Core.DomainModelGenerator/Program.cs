@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PnP.Core.Services;
+using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.M365.DomainModelGenerator.CodeAnalyzer;
 using System.Threading.Tasks;
 
@@ -40,17 +40,22 @@ namespace PnP.M365.DomainModelGenerator
                 var generatorSettings = new GeneratorSettings();
                 hostingContext.Configuration.Bind("GeneratorSettings", generatorSettings);
 
-                services
-                .AddAuthenticationProviderFactory(options =>
-                {
-                    options.Configurations.Add(new OAuthCredentialManagerConfiguration
-                    {
-                        Name = "CredentialManagerAuthentication",
-                        CredentialManagerName = metadataSettings.CredentialManager,
-                    });
+                services.AddPnPCoreAuthentication(
+                      options => {
+                                // Configure an Authentication Provider relying on the interactive authentication
+                                options.Credentials.Configurations.Add("credman",
+                                    new PnPCoreAuthenticationCredentialConfigurationOptions
+                                    {
+                                        CredentialManager = new PnPCoreAuthenticationCredentialManagerOptions()
+                                        {
+                                            CredentialManagerName = metadataSettings.CredentialManager
+                                        }
+                                    });
 
-                    options.DefaultConfiguration = "CredentialManagerAuthentication";
-                })
+                                // Configure the default authentication provider
+                                options.Credentials.DefaultConfiguration = "credman";
+                            }
+                  )
                 .AddEdmxProcessor(options =>
                 {
                     options.MappingFilePath = metadataSettings.MappingFilePath;
@@ -61,7 +66,7 @@ namespace PnP.M365.DomainModelGenerator
                     {
                         EdmxProviderName = "SPO",
                         MetadataUri = metadataSettings.SPRestMetadataUri,
-                        AuthenticationProviderName = "CredentialManagerAuthentication",
+                        AuthenticationProviderName = "credman",
                     });
                     options.EdmxProviders.Add(new EdmxProviderOptions
                     {
