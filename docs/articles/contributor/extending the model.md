@@ -3,7 +3,7 @@
 Extending the model is a very common type of work, especially in the early days of this SDK. This page will walk you through the needed steps, but before engaging it's recommended that you've read this article: [The PnP Core SDK model](readme.md).
 
 > [!Important]
-> In order to speed up the model development the needed SharePoint REST model classes are for the most part pre created, these classes can be copied over and modified to suit your needs. You can find the pre-generated classes in https://github.com/pnp/pnpcore/tree/dev/src/generated. If you're not able to find your model classes then please create an issue in the issue list so we can update the generation logic to include those.
+> In order to **speed up the model development** the needed SharePoint REST model classes are for the most part pre created, these classes can be copied over and modified to suit your needs. You can find the pre-generated classes in https://github.com/pnp/pnpcore/tree/dev/src/generated. If you're not able to find your model classes then please create an issue in the issue list so we can update the generation logic to include those.
 
 ## Step 1: Define the public model
 
@@ -104,6 +104,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Public interface to define a {Model2} object of SharePoint Online
     /// </summary>
+    [ConcreteType(typeof(Model2))]
     public interface IModel2 : IDataModel<IModel>
     {
          /// <summary>
@@ -118,11 +119,7 @@ namespace PnP.Core.Model.SharePoint
 
 Once you've defined the public interface the next step is defining the internal classes that implement the created interface(s). These internal classes live at the same level as your interface classes but then in the `Internal` folder instead of the `Public` folder. So if the interface lives in the `Model\SharePoint\Core\Public` folder then the respective internal class lives in the `Model\SharePoint\Core\Internal` folder.
 
-At this moment the internal classes are split into 2 partial classes: there's a `model.cs` and a `model.gen.cs` class. Overtime we might opt to combine these classes into a single class, but for now it's recommended to implement 2 classes.
-
-### Step 2.1: Create the model.gen.cs class
-
-The `model.gen.cs` class contains the code that in the future could be generated, which are the properties. Key things to check are:
+The `model.cs` class contains the internal code, key things to check are:
 
 - It's an internal partial class, e.g. `internal partial class Web`
 - The class name is aligned to the interface name (e.g. `IWeb` and `Web`)
@@ -143,16 +140,8 @@ public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
 // Implement they Key property to use the guid ID:
 [KeyProperty(nameof(Id))]
-public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 ```
-
-### Step 2.2: Create the model.cs class
-
-The `model.cs` contains the **custom** code, so code that could not be generated. Key things to check are:
-
-- It's an internal partial class, e.g. `internal partial class Web`
-- The class name is aligned to the interface name (e.g. `IWeb` and `Web`)
-- The namespace is the same as the one used for the interface
 
 ## Step 3: Decorate the model to enable create/read/update/delete functionality
 

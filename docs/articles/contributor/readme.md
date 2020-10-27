@@ -96,16 +96,31 @@ public ITeamFunSettings FunSettings { get; set; }
 
 #### Internal implementation
 
-The internal model implementation is what brings the public model to life: this split approach ensures that library consumers only work with the public model, and as such the library implementation can be updated without breaking the public contract with library consumers. For the internal model class implementation we've opted to use internal partial classes:
-
-- A `Model.gen.cs` class for semi-generated model class code containing the model properties
-- A `Model.cs` class for coded model class code (the methods)
-
-Here's a snippet of the `List.gen.cs` class:
+The internal model implementation is what brings the public model to life: this split approach ensures that library consumers only work with the public model, and as such the library implementation can be updated without breaking the public contract with library consumers. Here's a snippet of the `List.cs` class:
 
 ```csharp
+[SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
+[GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
 internal partial class List : BaseDataModel<IList>, IList
 {
+    public List()
+    {
+        // Handler to construct the Add request for this list
+        AddApiCallHandler = () =>
+        {
+            var entity = EntityManager.GetClassInfo(GetType(), this);
+
+            var addParameters = new
+            {
+                __metadata = new { type = entity.SharePointType },
+                BaseTemplate = TemplateType,
+                Title
+            }.AsExpando();
+            string body = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject));
+            return new ApiCall($"_api/web/lists", ApiType.SPORest, body);
+        };
+    }
+
     public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
     [GraphProperty("displayName")]
@@ -126,10 +141,19 @@ internal partial class List : BaseDataModel<IList>, IList
 }
 ```
 
-Each generated model class:
+Each model class:
 
 - Inherits from the `BaseDataModel<TModel>` class and implements `TModel`
 - Is an **internal**, **partial** class
+- Does have a public default constructor
+- Can implement event handlers which are used to (see the [Event Handlers](event%20handlers.md) page for more details):
+
+  - Optionally customize the JSON to Model mapping via the `MappingHandler = (FromJson input)` handler
+  - Implement the API call for doing an Add operation via the `AddApiCallHandler = async ()` handler
+  - Optionally implement API call overrides that allow you to update the generated API call before it's send off to the server. There are these handlers: `GetApiCallOverrideHandler = async (ApiCall apiCall)`, `UpdateApiCallOverrideHandler = async (ApiCall apiCall)` and `DeleteApiCallOverrideHandler = async (ApiCall apiCall)`
+  - Optionally implement property validation (prevent property updates, alter values) via the `ValidateUpdateHandler = (ref FieldUpdateRequest fieldUpdateRequest)` handler
+
+- Contains class level attributes that are used to define the requests to Microsoft 365 and serialization of the received data. These attributes are explained in more detail in their respective chapters later on
 - Has public properties that:
   
   - Use the `GetValue` and `SetValue` inherited methods to get and set simple property values
@@ -138,47 +162,6 @@ Each generated model class:
   
 - Has a `Key` property override which can be used to set/get the key value. The Key is used to organize objects in collections
 - Has property attributes that are used to define the requests to Microsoft 365 and serialization of the received data. These attributes are explained in more detail in their respective chapters later on
-
-Here's a snippet of the `List.cs` class:
-
-```csharp
-[SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
-[GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
-internal partial class List
-{
-    public List()
-    {
-        // Handler to construct the Add request for this list
-        AddApiCallHandler = () =>
-        {
-            var entity = EntityManager.GetClassInfo(GetType(), this);
-
-            var addParameters = new
-            {
-                __metadata = new { type = entity.SharePointType },
-                BaseTemplate = TemplateType,
-                Title
-            }.AsExpando();
-            string body = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject));
-            return new ApiCall($"_api/web/lists", ApiType.SPORest, body);
-        };
-    }
-}
-```
-
-Each coded model class:
-
-- Is an **internal**, **partial** class
-- Does have a public default constructor
-- Does not inherit from another class (the inheriting is done in the `Model.gen.cs` partial class)
-- Contains class level attributes that are used to define the requests to Microsoft 365 and serialization of the received data. These attributes are explained in more detail in their respective chapters later on
-- Can implement event handlers which are used to (see the [Event Handlers](event%20handlers.md) page for more details):
-
-  - Optionally customize the JSON to Model mapping via the `MappingHandler = (FromJson input)` handler
-  - Implement the API call for doing an Add operation via the `AddApiCallHandler = async ()` handler
-  - Optionally implement API call overrides that allow you to update the generated API call before it's send off to the server. There are these handlers: `GetApiCallOverrideHandler = async (ApiCall apiCall)`, `UpdateApiCallOverrideHandler = async (ApiCall apiCall)` and `DeleteApiCallOverrideHandler = async (ApiCall apiCall)`
-  - Optionally implement property validation (prevent property updates, alter values) via the `ValidateUpdateHandler = (ref FieldUpdateRequest fieldUpdateRequest)` handler
-
 - Model specific methods can be foreseen. These methods provide additional operations on the model class
 
 ### Collection classes
@@ -230,12 +213,7 @@ Optionally a collection interface defines methods which add behavior to the coll
 
 #### Internal implementation
 
-For the internal collection class implementation we've opted to use internal partial classes:
-
-- A `Collection.gen.cs` class for semi-generated collection class code
-- A `Collection.cs` class for coded collection class code
-
-Here's a snippet of the `ListCollection.gen.cs` class, which is linq queriable:
+For the internal collection class implementation we've opted to use internal partial classes. Here's a snippet of the `ListCollection.cs` class, which is linq queriable:
 
 ```csharp
 internal partial class ListCollection : QueryableDataModelCollection<IList>, IListCollection
@@ -246,26 +224,7 @@ internal partial class ListCollection : QueryableDataModelCollection<IList>, ILi
         this.PnPContext = context;
         this.Parent = parent;
     }
-}
-```
 
-If the collection is not linq queriable the generated collection class is very simple:
-
-```csharp
-internal partial class TeamAppCollection : BaseDataModelCollection<ITeamApp>, ITeamAppCollection
-{ }
-```
-
-Each generated collection class:
-
-- Inherits from either the `BaseDataModelCollection<TModel>` for regular collections or from the `QueryableDataModelCollection<TModel>` class for linq queriable collections and implements the previously created collection interface (e.g. `IListCollection`)
-- Is an **internal**, **partial** class
-
-Here's a snippet of the `ListCollection.cs` class:
-
-```csharp
-internal partial class ListCollection
-{
     // Other methods omitted for brevity
 
     public async Task<IList> AddAsync(string title, int templateType)
@@ -302,10 +261,18 @@ internal partial class ListCollection
 }
 ```
 
-Each coded collection class:
+If the collection is not linq queriable the collection class is very simple:
 
+```csharp
+internal partial class TeamAppCollection : BaseDataModelCollection<ITeamApp>, ITeamAppCollection
+{ }
+```
+
+Each collection class:
+
+- Inherits from either the `BaseDataModelCollection<TModel>` for regular collections or from the `QueryableDataModelCollection<TModel>` class for linq queriable collections and implements the previously created collection interface (e.g. `IListCollection`)
 - Is an **internal**, **partial** class
-- Does not inherit from another class (the inheriting is done in the `Collection.gen.cs` partial class)
+- Implements a specific constructor in case the class inherits from `QueryableDataModelCollection<TModel>`
 - Can use the `CreateNewAndAdd` collection base class method to create a new instance and add it to the collection
 
 ## Decorating the model

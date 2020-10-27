@@ -1,4 +1,3 @@
-
 # Extending the model for Microsoft Graph
 
 The PnP Core SDK model contains model, collection, and complex type classes which are populated via either Microsoft Graph or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the Microsoft Graph API.
@@ -19,11 +18,11 @@ public interface ITeamChannel : IDataModel<ITeamChannel>, IDataModelUpdate, IDat
 
 ### Class decoration
 
-Each model class that uses Microsoft Graph needs to have at least one `GraphType` attribute which is defined on the coded model class (e.g. Team.cs):
+Each model class that uses Microsoft Graph needs to have at least one `GraphType` attribute:
 
 ```csharp
 [GraphType(Uri = "teams/{Site.GroupId}")]
-internal partial class Team
+internal partial class Team : BaseDataModel<ITeam>, ITeam
 {
     // Ommitted for brevity
 }
@@ -47,7 +46,7 @@ Beta | No | Defines that a model can only be handled using the Microsoft Graph b
 
 The property level decoration is done using the `GraphProperty` and `KeyProperty` attributes. Each model instance requires to have an override of the `Key` property and that `Key` property **must** be decorated with the `KeyProperty` attribute which specifies which of the actual fields in the model must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.
 
-Whereas the `KeyProperty` attribute is always there once in each model class, the usage of the `GraphProperty` attribute is only required for special cases. Since the properties are defined in the generated model class (e.g. Web.gen.cs and Teams.gen.cs) the decoration via attributes needs to happen in this class as well.
+Whereas the `KeyProperty` attribute is always there once in each model class, the usage of the `GraphProperty` attribute is only required for special cases.
 
 ```csharp
 // In graph the fieldname is "name" whereas in the model the name is "Title"
@@ -70,7 +69,7 @@ public ITeamChannelCollection Channels { get => GetModelCollectionValue<ITeamCha
 
 // Set the keyfield for this model class
 [KeyProperty(nameof(Id))]
-public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 ```
 
 You can set following properties on this attribute:
@@ -176,11 +175,18 @@ public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCo
 }
 ```
 
-Implementation of the interface in the coded collection class (e.g. TeamChannelCollection.cs):
+Implementation of the interface in the collection class (e.g. TeamChannelCollection.cs):
 
 ```csharp
-internal partial class TeamChannelCollection
+internal partial class TeamChannelCollection : QueryableDataModelCollection<ITeamChannel>, ITeamChannelCollection
 {
+    public TeamChannelCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+        : base(context, parent, memberName)
+    {
+        this.PnPContext = context;
+        this.Parent = parent;
+    }
+
     /// <summary>
     /// Adds a new channel
     /// </summary>
@@ -275,10 +281,10 @@ internal partial class TeamChannelCollection
 }
 ```
 
-And finally you'll see the actual add logic being implemented in the coded model class (e.g. TeamChannel.cs) via implementing the `AddApiCallHandler`:
+And finally you'll see the actual add logic being implemented in the model class (e.g. TeamChannel.cs) via implementing the `AddApiCallHandler`:
 
 ```csharp
-internal partial class TeamChannel
+internal partial class TeamChannel : BaseDataModel<ITeamChannel>, ITeamChannel
 {
     private const string baseUri = "teams/{Parent.GraphId}/channels";
 

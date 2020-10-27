@@ -19,11 +19,11 @@ public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
 
 ### Class decoration
 
-Each model class that uses SharePoint REST does need to have at least one `SharePointType` attribute which is defined on the coded model class (e.g. List.cs):
+Each model class that uses SharePoint REST does need to have at least one `SharePointType` attribute:
 
 ```csharp
 [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
-internal partial class List
+internal partial class List : BaseDataModel<IList>, IList
 {
     // Omitted for brevity
 }
@@ -49,7 +49,7 @@ Below sample shows how a model can be decorated for multiple scopes:
 ```csharp
 [SharePointType("SP.ContentType", Target = typeof(Web), Uri = "_api/Web/ContentTypes('{Id}')", Get = "_api/web/contenttypes", LinqGet = "_api/web/contenttypes")]
 [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", Get = "_api/Web/Lists(guid'{Parent.Id}')/contenttypes", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/contenttypes")]
-internal partial class ContentType
+internal partial class ContentType : BaseDataModel<IContentType>, IContentType
 {
     // Omitted for brevity
 }
@@ -59,7 +59,7 @@ internal partial class ContentType
 
 The property level decoration is done using the `SharePointProperty` and `KeyProperty` attributes. Each model instance does require to have a override of the `Key` property and that `Key` property **must** be decorated with the `KeyProperty` attribute, which specifies the actual fields in the model that must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.
 
-Whereas the `KeyProperty` attribute is always there once in each model class, the usage of the `SharePointProperty` attribute is only needed whenever it makes sense. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. List.gen.cs) the decoration via attributes needs to happen in this class as well.
+Whereas the `KeyProperty` attribute is always there once in each model class, the usage of the `SharePointProperty` attribute is only needed whenever it makes sense. For most properties you do not need to set this attribute, it's only required for special cases.
 
 ```csharp
 // Configure the SharePoint REST field used to populate this model property
@@ -67,8 +67,8 @@ Whereas the `KeyProperty` attribute is always there once in each model class, th
 public string DocumentTemplate { get => GetValue<string>(); set => SetValue(value); }
 
 // Set the keyfield for this model class
-[KeyProperty("Id")]
-public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+[KeyProperty(nameof(Id))]
+public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 ```
 
 You can set following properties on this attribute:
@@ -171,11 +171,18 @@ public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList
 }
 ```
 
-Implementation of the interface in the coded collection class (e.g. ListCollection.cs):
+Implementation of the interface in the collection class (e.g. ListCollection.cs):
 
 ```csharp
-internal partial class ListCollection
+internal partial class ListCollection : QueryableDataModelCollection<IList>, IListCollection
 {
+    public ListCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+        : base(context, parent, memberName)
+    {
+        this.PnPContext = context;
+        this.Parent = parent;
+    }
+
     public async Task<IList> AddBatchAsync(string title, ListTemplateType templateType)
     {
         return await AddBatchAsync(PnPContext.CurrentBatch, title, templateType).ConfigureAwait(false);
@@ -238,10 +245,11 @@ internal partial class ListCollection
 }
 ```
 
-And finally you'll see the actual add logic being implemented in the coded model class (e.g. List.cs) via implementing the `AddApiCallHandler`:
+And finally you'll see the actual add logic being implemented in the model class (e.g. List.cs) via implementing the `AddApiCallHandler`:
 
 ```csharp
-internal partial class List
+[SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
+internal partial class List : BaseDataModel<IList>, IList
 {
     internal List()
     {
