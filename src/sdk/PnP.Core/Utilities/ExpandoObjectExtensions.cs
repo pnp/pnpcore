@@ -18,16 +18,6 @@ namespace PnP.Core
                 expandoDictionary.Add(propertyName, propertyValue);
         }
 
-        internal static TProperty GetProperty<TProperty>(this ExpandoObject expando, string propertyName)
-        {
-            // We use the IDictionary interface implemented by the ExpandoObject
-            var expandoDictionary = expando as IDictionary<string, object>;
-            if (expandoDictionary.ContainsKey(propertyName))
-                return (TProperty)expandoDictionary[propertyName];
-            else
-                return default(TProperty);
-        }
-
         /// <summary>
         /// Merge several expando objects together
         /// The same properties are overridden with the value of the last specified expando
