@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamChannelTabCollection
+    internal partial class TeamChannelTabCollection : BaseDataModelCollection<ITeamChannelTab>, ITeamChannelTabCollection
     {
 
         #region Wiki tab

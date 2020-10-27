@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamChatMessageCollection
+    internal partial class TeamChatMessageCollection : QueryableDataModelCollection<ITeamChatMessage>, ITeamChatMessageCollection
     {
+        public TeamChatMessageCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
+
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>

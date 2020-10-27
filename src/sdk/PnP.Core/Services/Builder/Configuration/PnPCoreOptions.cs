@@ -11,7 +11,7 @@ namespace PnP.Core.Services.Builder.Configuration
         /// <summary>
         /// Turns on/off telemetry, can be customized via configuration. Defaults to false.
         /// </summary>
-        public bool DisableTelemetry { get; set; } = false;
+        public bool DisableTelemetry { get; set; }
 
         /// <summary>
         /// AAD tenant id, used for telemetry purposes. Can be customized via configuration

@@ -1,4 +1,5 @@
-﻿using System.Dynamic;
+﻿using System;
+using System.Dynamic;
 using System.Text.Json;
 using PnP.Core.Services;
 
@@ -6,11 +7,12 @@ namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = V)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TeamChannelTab
+    internal partial class TeamChannelTab : BaseDataModel<ITeamChannelTab>, ITeamChannelTab
     {
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/tabs";
         private const string V = baseUri + "/{GraphId}";
 
+        #region Construction
         public TeamChannelTab()
         {
             // Handler to construct the Add request for this channel
@@ -58,5 +60,23 @@ namespace PnP.Core.Model.Teams
                 return new ApiCall(parsedApiCall, ApiType.GraphBeta, bodyContent);
             };
         }
+        #endregion
+
+        #region Properties
+        public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
+
+        public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
+
+        public string SortOrderIndex { get => GetValue<string>(); set => SetValue(value); }
+
+        public ITeamChannelTabConfiguration Configuration { get => GetModelValue<ITeamChannelTabConfiguration>(); set => SetModelValue(value); }
+
+        public ITeamApp TeamsApp { get => GetModelValue<ITeamApp>(); }
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
+        #endregion
     }
 }

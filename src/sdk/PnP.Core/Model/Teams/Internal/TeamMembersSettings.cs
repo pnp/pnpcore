@@ -3,6 +3,7 @@
     [GraphType]
     internal partial class TeamMembersSettings : BaseDataModel<ITeamMembersSettings>, ITeamMembersSettings
     {
+        #region Properties
         public bool AllowCreateUpdateChannels { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool AllowCreatePrivateChannels { get => GetValue<bool>(); set => SetValue(value); }
@@ -14,5 +15,6 @@
         public bool AllowCreateUpdateRemoveTabs { get => GetValue<bool>(); set => SetValue(value); }
         
         public bool AllowCreateUpdateRemoveConnectors { get => GetValue<bool>(); set => SetValue(value); }
+        #endregion
     }
 }

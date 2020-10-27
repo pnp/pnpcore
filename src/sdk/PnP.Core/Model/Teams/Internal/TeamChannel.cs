@@ -1,17 +1,18 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using PnP.Core.Services;
+using System;
 using System.Dynamic;
 using System.Text.Json;
-using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = V, LinqGet = baseUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TeamChannel
+    internal partial class TeamChannel : BaseDataModel<ITeamChannel>, ITeamChannel
     {
         private const string baseUri = "teams/{Parent.GraphId}/channels";
         private const string V = baseUri + "/{GraphId}";
 
+        #region Construction
         public TeamChannel()
         {
 
@@ -70,5 +71,32 @@ namespace PnP.Core.Model.Teams
             };
 
         }
+        #endregion
+
+        #region Properties
+        public string Id { get => GetValue<string>(); set => SetValue(value); }
+
+        public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
+
+        public string Description { get => GetValue<string>(); set => SetValue(value); }
+
+        [GraphProperty("isFavoriteByDefault", Beta = true)]
+        public bool IsFavoriteByDefault { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string Email { get => GetValue<string>(); set => SetValue(value); }
+
+        public TeamChannelMembershipType MembershipType { get => GetValue<TeamChannelMembershipType>(); set => SetValue(value); }
+
+        public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
+
+        [GraphProperty("tabs", Get = "teams/{Site.GroupId}/channels/{GraphId}/tabs?$expand=teamsApp")]
+        public ITeamChannelTabCollection Tabs { get => GetModelCollectionValue<ITeamChannelTabCollection>(); }
+
+        [GraphProperty("messages", Get = "teams/{Site.GroupId}/channels/{GraphId}/messages", Beta = true)]
+        public ITeamChatMessageCollection Messages { get => GetModelCollectionValue<ITeamChatMessageCollection>(); }
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => Id; set => Id = (string)value; }
+        #endregion
     }
 }

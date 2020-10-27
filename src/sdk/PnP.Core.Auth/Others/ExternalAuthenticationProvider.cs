@@ -77,7 +77,9 @@ namespace PnP.Core.Auth
         /// <param name="resource">Resource to request an access token for</param>
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (resource == null)
             {

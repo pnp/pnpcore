@@ -1,6 +1,6 @@
 ﻿namespace PnP.Core.Model.Teams
 {
-    internal partial class TeamAppCollection
+    internal partial class TeamAppCollection : BaseDataModelCollection<ITeamApp>, ITeamAppCollection
     {
     }
 }

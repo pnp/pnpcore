@@ -5,6 +5,7 @@ namespace PnP.Core.Model.Teams
     [GraphType]
     internal partial class TeamIdentitySet : BaseDataModel<ITeamIdentitySet>, ITeamIdentitySet
     {
+        #region Properties
         public IIdentity Application { get => GetModelValue<IIdentity>(); }
 
         public IIdentity Conversation { get => GetModelValue<IIdentity>(); }        
@@ -16,5 +17,6 @@ namespace PnP.Core.Model.Teams
         public IIdentity Phone { get => GetModelValue<IIdentity>(); }
 
         public IIdentity User { get => GetModelValue<IIdentity>(); }
+        #endregion
     }
 }
