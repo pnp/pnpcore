@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SPHubSitesUtility object
     /// </summary>
     [ConcreteType(typeof(SPHubSitesUtility))]
-    public interface ISPHubSitesUtility : IDataModel<ISPHubSitesUtility>, IDataModelUpdate, IDataModelDelete
+    public interface ISPHubSitesUtility : IDataModel<ISPHubSitesUtility>, IDataModelGet<ISPHubSitesUtility>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

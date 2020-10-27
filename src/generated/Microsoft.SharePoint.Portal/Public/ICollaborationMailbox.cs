@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a CollaborationMailbox object
     /// </summary>
     [ConcreteType(typeof(CollaborationMailbox))]
-    public interface ICollaborationMailbox : IDataModel<ICollaborationMailbox>, IDataModelUpdate, IDataModelDelete
+    public interface ICollaborationMailbox : IDataModel<ICollaborationMailbox>, IDataModelGet<ICollaborationMailbox>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

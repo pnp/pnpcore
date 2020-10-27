@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FlowSynchronizationResult object
     /// </summary>
     [ConcreteType(typeof(FlowSynchronizationResult))]
-    public interface IFlowSynchronizationResult : IDataModel<IFlowSynchronizationResult>, IDataModelUpdate, IDataModelDelete
+    public interface IFlowSynchronizationResult : IDataModel<IFlowSynchronizationResult>, IDataModelGet<IFlowSynchronizationResult>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

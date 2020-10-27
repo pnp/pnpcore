@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Attachment object
     /// </summary>
     [ConcreteType(typeof(Attachment))]
-    public interface IAttachment : IDataModel<IAttachment>, IDataModelUpdate, IDataModelDelete
+    public interface IAttachment : IDataModel<IAttachment>, IDataModelGet<IAttachment>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

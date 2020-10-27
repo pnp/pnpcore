@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a UserSolution object
     /// </summary>
     [ConcreteType(typeof(UserSolution))]
-    public interface IUserSolution : IDataModel<IUserSolution>, IDataModelUpdate, IDataModelDelete
+    public interface IUserSolution : IDataModel<IUserSolution>, IDataModelGet<IUserSolution>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

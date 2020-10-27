@@ -6,15 +6,15 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FileVersionEvent object
     /// </summary>
     [ConcreteType(typeof(FileVersionEvent))]
-    public interface IFileVersionEvent : IDataModel<IFileVersionEvent>, IDataModelUpdate, IDataModelDelete
+    public interface IFileVersionEvent : IDataModel<IFileVersionEvent>, IDataModelGet<IFileVersionEvent>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string Editor { get; set; }
+        public string Editor { get; }
 
         /// <summary>
         /// To update...
@@ -25,6 +25,10 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public DateTime Time { get; set; }
+
+        #endregion
+
+        #region New properties
 
         #endregion
 

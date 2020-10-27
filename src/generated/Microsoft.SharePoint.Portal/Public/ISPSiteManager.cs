@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SPSiteManager object
     /// </summary>
     [ConcreteType(typeof(SPSiteManager))]
-    public interface ISPSiteManager : IDataModel<ISPSiteManager>, IDataModelUpdate, IDataModelDelete
+    public interface ISPSiteManager : IDataModel<ISPSiteManager>, IDataModelGet<ISPSiteManager>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

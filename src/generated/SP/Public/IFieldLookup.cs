@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldLookup object
     /// </summary>
     [ConcreteType(typeof(FieldLookup))]
-    public interface IFieldLookup : IDataModel<IFieldLookup>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldLookup : IDataModel<IFieldLookup>, IDataModelGet<IFieldLookup>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a MountedFolderInfo object
     /// </summary>
     [ConcreteType(typeof(MountedFolderInfo))]
-    public interface IMountedFolderInfo : IDataModel<IMountedFolderInfo>, IDataModelUpdate, IDataModelDelete
+    public interface IMountedFolderInfo : IDataModel<IMountedFolderInfo>, IDataModelGet<IMountedFolderInfo>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

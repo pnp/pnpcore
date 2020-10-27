@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharingPermissionInformation object
     /// </summary>
     [ConcreteType(typeof(SharingPermissionInformation))]
-    public interface ISharingPermissionInformation : IDataModel<ISharingPermissionInformation>, IDataModelUpdate, IDataModelDelete
+    public interface ISharingPermissionInformation : IDataModel<ISharingPermissionInformation>, IDataModelGet<ISharingPermissionInformation>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

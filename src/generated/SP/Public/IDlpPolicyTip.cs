@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a DlpPolicyTip object
     /// </summary>
     [ConcreteType(typeof(DlpPolicyTip))]
-    public interface IDlpPolicyTip : IDataModel<IDlpPolicyTip>, IDataModelUpdate, IDataModelDelete
+    public interface IDlpPolicyTip : IDataModel<IDlpPolicyTip>, IDataModelGet<IDlpPolicyTip>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

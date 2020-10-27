@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Form object
     /// </summary>
     [ConcreteType(typeof(Form))]
-    public interface IForm : IDataModel<IForm>, IDataModelUpdate, IDataModelDelete
+    public interface IForm : IDataModel<IForm>, IDataModelGet<IForm>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

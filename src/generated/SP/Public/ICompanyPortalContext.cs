@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a CompanyPortalContext object
     /// </summary>
     [ConcreteType(typeof(CompanyPortalContext))]
-    public interface ICompanyPortalContext : IDataModel<ICompanyPortalContext>, IDataModelUpdate, IDataModelDelete
+    public interface ICompanyPortalContext : IDataModel<ICompanyPortalContext>, IDataModelGet<ICompanyPortalContext>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

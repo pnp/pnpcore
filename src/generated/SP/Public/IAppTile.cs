@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a AppTile object
     /// </summary>
     [ConcreteType(typeof(AppTile))]
-    public interface IAppTile : IDataModel<IAppTile>, IDataModelUpdate, IDataModelDelete
+    public interface IAppTile : IDataModel<IAppTile>, IDataModelGet<IAppTile>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

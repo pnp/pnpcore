@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,27 @@ namespace PnP.Core.Model.SharePoint
     /// TenantSettings class, write your custom code here
     /// </summary>
     [SharePointType("SP.TenantSettings", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class TenantSettings
+    internal partial class TenantSettings : BaseDataModel<ITenantSettings>, ITenantSettings
     {
+        #region Construction
         public TenantSettings()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public string CorporateCatalogUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public ITenantSettings Current { get => GetModelValue<ITenantSettings>(); }
+
+
+        #endregion
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a TranslationStatusCollection object
     /// </summary>
     [ConcreteType(typeof(TranslationStatusCollection))]
-    public interface ITranslationStatusCollection : IDataModel<ITranslationStatusCollection>, IDataModelUpdate, IDataModelDelete
+    public interface ITranslationStatusCollection : IDataModel<ITranslationStatusCollection>, IDataModelGet<ITranslationStatusCollection>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

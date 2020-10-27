@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,46 @@ namespace PnP.Core.Model.SharePoint
     /// WebTemplate class, write your custom code here
     /// </summary>
     [SharePointType("SP.WebTemplate", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class WebTemplate
+    internal partial class WebTemplate : BaseDataModel<IWebTemplate>, IWebTemplate
     {
+        #region Construction
         public WebTemplate()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public string Description { get => GetValue<string>(); set => SetValue(value); }
+
+        public string DisplayCategory { get => GetValue<string>(); set => SetValue(value); }
+
+        public int Id { get => GetValue<int>(); set => SetValue(value); }
+
+        public string ImageUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool IsHidden { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsRootWebOnly { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsSubWebOnly { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int Lcid { get => GetValue<int>(); set => SetValue(value); }
+
+        public string Name { get => GetValue<string>(); set => SetValue(value); }
+
+        public string Title { get => GetValue<string>(); set => SetValue(value); }
+
+        #endregion
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => Id; set => Id = (int)value; }
+
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

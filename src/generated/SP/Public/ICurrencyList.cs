@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a CurrencyList object
     /// </summary>
     [ConcreteType(typeof(CurrencyList))]
-    public interface ICurrencyList : IDataModel<ICurrencyList>, IDataModelUpdate, IDataModelDelete
+    public interface ICurrencyList : IDataModel<ICurrencyList>, IDataModelGet<ICurrencyList>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

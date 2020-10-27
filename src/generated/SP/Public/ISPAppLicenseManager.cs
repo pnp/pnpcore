@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SPAppLicenseManager object
     /// </summary>
     [ConcreteType(typeof(SPAppLicenseManager))]
-    public interface ISPAppLicenseManager : IDataModel<ISPAppLicenseManager>, IDataModelUpdate, IDataModelDelete
+    public interface ISPAppLicenseManager : IDataModel<ISPAppLicenseManager>, IDataModelGet<ISPAppLicenseManager>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

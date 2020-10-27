@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,24 @@ namespace PnP.Core.Model.SharePoint
     /// FieldText class, write your custom code here
     /// </summary>
     [SharePointType("SP.FieldText", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class FieldText
+    internal partial class FieldText : BaseDataModel<IFieldText>, IFieldText
     {
+        #region Construction
         public FieldText()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public int MaxLength { get => GetValue<int>(); set => SetValue(value); }
+
+        #endregion
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

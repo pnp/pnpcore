@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ClientWebPart object
     /// </summary>
     [ConcreteType(typeof(ClientWebPart))]
-    public interface IClientWebPart : IDataModel<IClientWebPart>, IDataModelUpdate, IDataModelDelete
+    public interface IClientWebPart : IDataModel<IClientWebPart>, IDataModelGet<IClientWebPart>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

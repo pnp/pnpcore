@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RecentListCollection object
     /// </summary>
     [ConcreteType(typeof(RecentListCollection))]
-    public interface IRecentListCollection : IDataModel<IRecentListCollection>, IDataModelUpdate, IDataModelDelete
+    public interface IRecentListCollection : IDataModel<IRecentListCollection>, IDataModelGet<IRecentListCollection>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

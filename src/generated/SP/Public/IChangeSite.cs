@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeSite object
     /// </summary>
     [ConcreteType(typeof(ChangeSite))]
-    public interface IChangeSite : IDataModel<IChangeSite>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeSite : IDataModel<IChangeSite>, IDataModelGet<IChangeSite>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

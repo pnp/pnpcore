@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RemoteWeb object
     /// </summary>
     [ConcreteType(typeof(RemoteWeb))]
-    public interface IRemoteWeb : IDataModel<IRemoteWeb>, IDataModelUpdate, IDataModelDelete
+    public interface IRemoteWeb : IDataModel<IRemoteWeb>, IDataModelGet<IRemoteWeb>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

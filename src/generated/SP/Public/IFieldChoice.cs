@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldChoice object
     /// </summary>
     [ConcreteType(typeof(FieldChoice))]
-    public interface IFieldChoice : IDataModel<IFieldChoice>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldChoice : IDataModel<IFieldChoice>, IDataModelGet<IFieldChoice>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

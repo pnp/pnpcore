@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SiteLinkingManager object
     /// </summary>
     [ConcreteType(typeof(SiteLinkingManager))]
-    public interface ISiteLinkingManager : IDataModel<ISiteLinkingManager>, IDataModelUpdate, IDataModelDelete
+    public interface ISiteLinkingManager : IDataModel<ISiteLinkingManager>, IDataModelGet<ISiteLinkingManager>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

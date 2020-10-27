@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,32 @@ namespace PnP.Core.Model.SharePoint
     /// ListBloomFilter class, write your custom code here
     /// </summary>
     [SharePointType("SP.ListBloomFilter", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class ListBloomFilter
+    internal partial class ListBloomFilter : BaseDataModel<IListBloomFilter>, IListBloomFilter
     {
+        #region Construction
         public ListBloomFilter()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public int BloomFilterSize { get => GetValue<int>(); set => SetValue(value); }
+
+        public int ItemProcessedCount { get => GetValue<int>(); set => SetValue(value); }
+
+        public int K { get => GetValue<int>(); set => SetValue(value); }
+
+        public int LastListItemIdProcessed { get => GetValue<int>(); set => SetValue(value); }
+
+        public int MaxItemCount { get => GetValue<int>(); set => SetValue(value); }
+
+        #endregion
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a MultilingualSettings object
     /// </summary>
     [ConcreteType(typeof(MultilingualSettings))]
-    public interface IMultilingualSettings : IDataModel<IMultilingualSettings>, IDataModelUpdate, IDataModelDelete
+    public interface IMultilingualSettings : IDataModel<IMultilingualSettings>, IDataModelGet<IMultilingualSettings>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

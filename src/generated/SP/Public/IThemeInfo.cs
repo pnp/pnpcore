@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ThemeInfo object
     /// </summary>
     [ConcreteType(typeof(ThemeInfo))]
-    public interface IThemeInfo : IDataModel<IThemeInfo>, IDataModelUpdate, IDataModelDelete
+    public interface IThemeInfo : IDataModel<IThemeInfo>, IDataModelGet<IThemeInfo>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

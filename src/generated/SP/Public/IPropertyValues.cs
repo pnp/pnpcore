@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a PropertyValues object
     /// </summary>
     [ConcreteType(typeof(PropertyValues))]
-    public interface IPropertyValues : IDataModel<IPropertyValues>, IDataModelUpdate, IDataModelDelete
+    public interface IPropertyValues : IDataModel<IPropertyValues>, IDataModelGet<IPropertyValues>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

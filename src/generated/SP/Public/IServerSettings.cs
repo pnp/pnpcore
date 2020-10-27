@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ServerSettings object
     /// </summary>
     [ConcreteType(typeof(ServerSettings))]
-    public interface IServerSettings : IDataModel<IServerSettings>, IDataModelUpdate, IDataModelDelete
+    public interface IServerSettings : IDataModel<IServerSettings>, IDataModelGet<IServerSettings>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

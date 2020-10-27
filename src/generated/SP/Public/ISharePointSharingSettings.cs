@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharePointSharingSettings object
     /// </summary>
     [ConcreteType(typeof(SharePointSharingSettings))]
-    public interface ISharePointSharingSettings : IDataModel<ISharePointSharingSettings>, IDataModelUpdate, IDataModelDelete
+    public interface ISharePointSharingSettings : IDataModel<ISharePointSharingSettings>, IDataModelGet<ISharePointSharingSettings>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

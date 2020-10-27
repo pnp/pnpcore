@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a KnowledgeHub object
     /// </summary>
     [ConcreteType(typeof(KnowledgeHub))]
-    public interface IKnowledgeHub : IDataModel<IKnowledgeHub>, IDataModelUpdate, IDataModelDelete
+    public interface IKnowledgeHub : IDataModel<IKnowledgeHub>, IDataModelGet<IKnowledgeHub>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

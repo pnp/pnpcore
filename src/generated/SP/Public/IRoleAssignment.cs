@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RoleAssignment object
     /// </summary>
     [ConcreteType(typeof(RoleAssignment))]
-    public interface IRoleAssignment : IDataModel<IRoleAssignment>, IDataModelUpdate, IDataModelDelete
+    public interface IRoleAssignment : IDataModel<IRoleAssignment>, IDataModelGet<IRoleAssignment>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

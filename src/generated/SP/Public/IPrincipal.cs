@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Principal object
     /// </summary>
     [ConcreteType(typeof(Principal))]
-    public interface IPrincipal : IDataModel<IPrincipal>, IDataModelUpdate, IDataModelDelete
+    public interface IPrincipal : IDataModel<IPrincipal>, IDataModelGet<IPrincipal>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

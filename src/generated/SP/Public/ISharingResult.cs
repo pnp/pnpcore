@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharingResult object
     /// </summary>
     [ConcreteType(typeof(SharingResult))]
-    public interface ISharingResult : IDataModel<ISharingResult>, IDataModelUpdate, IDataModelDelete
+    public interface ISharingResult : IDataModel<ISharingResult>, IDataModelGet<ISharingResult>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

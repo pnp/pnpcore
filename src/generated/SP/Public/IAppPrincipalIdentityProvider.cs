@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a AppPrincipalIdentityProvider object
     /// </summary>
     [ConcreteType(typeof(AppPrincipalIdentityProvider))]
-    public interface IAppPrincipalIdentityProvider : IDataModel<IAppPrincipalIdentityProvider>, IDataModelUpdate, IDataModelDelete
+    public interface IAppPrincipalIdentityProvider : IDataModel<IAppPrincipalIdentityProvider>, IDataModelGet<IAppPrincipalIdentityProvider>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

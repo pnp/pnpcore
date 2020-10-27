@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldUrl object
     /// </summary>
     [ConcreteType(typeof(FieldUrl))]
-    public interface IFieldUrl : IDataModel<IFieldUrl>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldUrl : IDataModel<IFieldUrl>, IDataModelGet<IFieldUrl>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

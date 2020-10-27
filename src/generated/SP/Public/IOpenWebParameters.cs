@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a OpenWebParameters object
     /// </summary>
     [ConcreteType(typeof(OpenWebParameters))]
-    public interface IOpenWebParameters : IDataModel<IOpenWebParameters>, IDataModelUpdate, IDataModelDelete
+    public interface IOpenWebParameters : IDataModel<IOpenWebParameters>, IDataModelGet<IOpenWebParameters>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

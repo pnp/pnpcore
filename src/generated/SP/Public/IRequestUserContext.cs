@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RequestUserContext object
     /// </summary>
     [ConcreteType(typeof(RequestUserContext))]
-    public interface IRequestUserContext : IDataModel<IRequestUserContext>, IDataModelUpdate, IDataModelDelete
+    public interface IRequestUserContext : IDataModel<IRequestUserContext>, IDataModelGet<IRequestUserContext>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

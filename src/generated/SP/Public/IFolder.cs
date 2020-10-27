@@ -6,55 +6,55 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Folder object
     /// </summary>
     [ConcreteType(typeof(Folder))]
-    public interface IFolder : IDataModel<IFolder>, IDataModelUpdate, IDataModelDelete
+    public interface IFolder : IDataModel<IFolder>, IDataModelGet<IFolder>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool Exists { get; set; }
+        public bool Exists { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool IsWOPIEnabled { get; set; }
+        public bool IsWOPIEnabled { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int ItemCount { get; set; }
+        public int ItemCount { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string ProgID { get; set; }
+        public string ProgID { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string ServerRelativeUrl { get; set; }
+        public string ServerRelativeUrl { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public DateTime TimeCreated { get; set; }
+        public DateTime TimeCreated { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public DateTime TimeLastModified { get; set; }
+        public DateTime TimeLastModified { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid UniqueId { get; set; }
+        public Guid UniqueId { get; }
 
         /// <summary>
         /// To update...
@@ -90,6 +90,10 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public IFolderCollection Folders { get; }
+
+        #endregion
+
+        #region New properties
 
         #endregion
 

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Audit object
     /// </summary>
     [ConcreteType(typeof(Audit))]
-    public interface IAudit : IDataModel<IAudit>, IDataModelUpdate, IDataModelDelete
+    public interface IAudit : IDataModel<IAudit>, IDataModelGet<IAudit>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

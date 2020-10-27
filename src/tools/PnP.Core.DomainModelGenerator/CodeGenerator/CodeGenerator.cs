@@ -104,22 +104,18 @@ namespace PnP.M365.DomainModelGenerator
 
         private void GenerateModelCollectionFiles(CollectionInformation collectionInformation)
         {
-            var classFileGen = LoadFile(ModelCollectionGenInternal);
             var classFile = LoadFile(ModelCollectionInternal);
             var interfaceFile = LoadFile(ModelCollectionPublic);
 
-            Replace(ref classFileGen, NamespaceKey, collectionInformation.Namespace);
             Replace(ref classFile, NamespaceKey, collectionInformation.Namespace);
             Replace(ref interfaceFile, NamespaceKey, collectionInformation.Namespace);
 
-            Replace(ref classFileGen, CollectionNameKey, collectionInformation.Name);
             Replace(ref classFile, CollectionNameKey, collectionInformation.Name);
             Replace(ref interfaceFile, CollectionNameKey, collectionInformation.Name);
 
-            Replace(ref classFileGen, CollectionTypeNameKey, collectionInformation.ModelType);
+            Replace(ref classFile, CollectionTypeNameKey, collectionInformation.ModelType);
             Replace(ref interfaceFile, CollectionTypeNameKey, collectionInformation.ModelType);
 
-            SaveFile(classFileGen, $"{collectionInformation.Name}.gen.cs", collectionInformation.Folder, false);
             SaveFile(classFile, $"{collectionInformation.Name}.cs", collectionInformation.Folder, false);
             SaveFile(interfaceFile, $"I{collectionInformation.Name}.cs", collectionInformation.Folder, true);
         }
@@ -127,12 +123,10 @@ namespace PnP.M365.DomainModelGenerator
 
         private void GenerateModelFiles(UnifiedModelEntity entity)
         {
-            var classFileGen = LoadFile(ModelClassGenInternal);
+            //var classFileGen = LoadFile(ModelClassGenInternal);
             var classFile = LoadFile(ModelClassInternal);
             var interfaceFile = LoadFile(ModelClassPublic);
 
-            Replace(ref classFileGen, TypeKey, entity.TypeName);
-            Replace(ref classFileGen, NamespaceKey, entity.Namespace);
             Replace(ref classFile, TypeKey, entity.TypeName);
             Replace(ref classFile, NamespaceKey, entity.Namespace);
             Replace(ref classFile, RestTypeKey, entity.SPRestType);
@@ -240,10 +234,9 @@ namespace PnP.M365.DomainModelGenerator
 
             AddKeyPropertyToClassFile(entity, splitExistingPropertiesImplementation?.Item1, classPropertiesString);
 
-            Replace(ref classFileGen, PropertiesKey, classPropertiesString.ToString());
+            Replace(ref classFile, PropertiesKey, classPropertiesString.ToString());
             Replace(ref interfaceFile, PropertiesKey, interfacePropertiesString.ToString());
 
-            SaveFile(classFileGen, $"{entity.TypeName}.gen.cs", entity.Folder, false);
             SaveFile(classFile, $"{entity.TypeName}.cs", entity.Folder, false);
             SaveFile(interfaceFile, $"I{entity.TypeName}.cs", entity.Folder, true);
         }
@@ -445,10 +438,10 @@ namespace PnP.M365.DomainModelGenerator
             if (!navigationPropertyAttributesAdded)
             {
                 // Add properties we know have to be there
-                if (property.NavigationPropertyIsCollection)
-                {
-                    propertyAttributesString = AddAttribute("SharePointProperty", $"\"{property.Name}\"", "Expandable = true");
-                }
+                //if (property.NavigationPropertyIsCollection)
+                //{
+                //    propertyAttributesString = AddAttribute("SharePointProperty", $"\"{property.Name}\"", "Expandable = true");
+                //}
             }
 
             if (!string.IsNullOrEmpty(propertyAttributesString))

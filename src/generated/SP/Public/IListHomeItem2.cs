@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ListHomeItem2 object
     /// </summary>
     [ConcreteType(typeof(ListHomeItem2))]
-    public interface IListHomeItem2 : IDataModel<IListHomeItem2>, IDataModelUpdate, IDataModelDelete
+    public interface IListHomeItem2 : IDataModel<IListHomeItem2>, IDataModelGet<IListHomeItem2>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties
@@ -90,6 +90,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public string SiteUrl { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string WebId { get; set; }
 
         /// <summary>
         /// To update...

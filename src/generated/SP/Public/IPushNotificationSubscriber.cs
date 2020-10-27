@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a PushNotificationSubscriber object
     /// </summary>
     [ConcreteType(typeof(PushNotificationSubscriber))]
-    public interface IPushNotificationSubscriber : IDataModel<IPushNotificationSubscriber>, IDataModelUpdate, IDataModelDelete
+    public interface IPushNotificationSubscriber : IDataModel<IPushNotificationSubscriber>, IDataModelGet<IPushNotificationSubscriber>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

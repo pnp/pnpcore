@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ObjectSharingSettings object
     /// </summary>
     [ConcreteType(typeof(ObjectSharingSettings))]
-    public interface IObjectSharingSettings : IDataModel<IObjectSharingSettings>, IDataModelUpdate, IDataModelDelete
+    public interface IObjectSharingSettings : IDataModel<IObjectSharingSettings>, IDataModelGet<IObjectSharingSettings>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

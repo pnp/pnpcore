@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ContentType object
     /// </summary>
     [ConcreteType(typeof(ContentType))]
-    public interface IContentType : IDataModel<IContentType>, IDataModelUpdate, IDataModelDelete
+    public interface IContentType : IDataModel<IContentType>, IDataModelGet<IContentType>, IDataModelUpdate, IDataModelDelete
     {
 
         #region Existing properties
@@ -14,46 +14,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string Description { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string Group { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool Hidden { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string JSLink { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string SchemaXml { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string Scope { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool Sealed { get; set; }
-
-        #endregion
-
-        #region New properties
-
-        /// <summary>
-        /// To update...
-        /// </summary>
         public string ClientFormCustomFormatter { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// To update...
@@ -84,6 +50,21 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public string EditFormUrl { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string Group { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool Hidden { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string JSLink { get; set; }
 
         /// <summary>
         /// To update...
@@ -123,22 +104,41 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public string SchemaXml { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public string SchemaXmlWithResourceTokens { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string StringId { get; set; }
+        public string Scope { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public IUserResource DescriptionResource { get; }
+        public bool Sealed { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string StringId { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
         public IFieldLinkCollection FieldLinks { get; }
+
+        #endregion
+
+        #region New properties
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUserResource DescriptionResource { get; }
 
         /// <summary>
         /// To update...

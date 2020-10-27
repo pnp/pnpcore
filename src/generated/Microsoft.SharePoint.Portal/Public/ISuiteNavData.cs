@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SuiteNavData object
     /// </summary>
     [ConcreteType(typeof(SuiteNavData))]
-    public interface ISuiteNavData : IDataModel<ISuiteNavData>, IDataModelUpdate, IDataModelDelete
+    public interface ISuiteNavData : IDataModel<ISuiteNavData>, IDataModelGet<ISuiteNavData>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

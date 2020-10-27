@@ -6,45 +6,45 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a File object
     /// </summary>
     [ConcreteType(typeof(File))]
-    public interface IFile : IDataModel<IFile>, IDataModelUpdate, IDataModelDelete
+    public interface IFile : IDataModel<IFile>, IDataModelGet<IFile>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string CheckInComment { get; set; }
+        public string CheckInComment { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int CheckOutType { get; set; }
+        public int CheckOutType { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string ContentTag { get; set; }
+        public string ContentTag { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int CustomizedPageStatus { get; set; }
+        public int CustomizedPageStatus { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid ListId { get; set; }
+        public Guid ListId { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string ETag { get; set; }
+        public string ETag { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool Exists { get; set; }
+        public bool Exists { get; }
 
         /// <summary>
         /// To update...
@@ -54,77 +54,77 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string LinkingUri { get; set; }
+        public string LinkingUri { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string LinkingUrl { get; set; }
+        public string LinkingUrl { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int MajorVersion { get; set; }
+        public int MajorVersion { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int MinorVersion { get; set; }
+        public int MinorVersion { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int PageRenderType { get; set; }
+        public int PageRenderType { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string ServerRelativeUrl { get; set; }
+        public string ServerRelativeUrl { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid SiteId { get; set; }
+        public Guid SiteId { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public DateTime TimeCreated { get; set; }
+        public DateTime TimeCreated { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public DateTime TimeLastModified { get; set; }
+        public DateTime TimeLastModified { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int UIVersion { get; set; }
+        public int UIVersion { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string UIVersionLabel { get; set; }
+        public string UIVersionLabel { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid UniqueId { get; set; }
+        public Guid UniqueId { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid WebId { get; set; }
+        public Guid WebId { get; }
 
         /// <summary>
         /// To update...
@@ -175,6 +175,20 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public IFileVersionCollection Versions { get; }
+
+        #endregion
+
+        #region New properties
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string VroomDriveID { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string VroomItemID { get; set; }
 
         #endregion
 

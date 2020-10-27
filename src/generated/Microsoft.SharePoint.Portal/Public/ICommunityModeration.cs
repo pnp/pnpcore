@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a CommunityModeration object
     /// </summary>
     [ConcreteType(typeof(CommunityModeration))]
-    public interface ICommunityModeration : IDataModel<ICommunityModeration>, IDataModelUpdate, IDataModelDelete
+    public interface ICommunityModeration : IDataModel<ICommunityModeration>, IDataModelGet<ICommunityModeration>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

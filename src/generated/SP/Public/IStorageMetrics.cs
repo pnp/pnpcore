@@ -6,15 +6,19 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a StorageMetrics object
     /// </summary>
     [ConcreteType(typeof(StorageMetrics))]
-    public interface IStorageMetrics : IDataModel<IStorageMetrics>, IDataModelUpdate, IDataModelDelete
+    public interface IStorageMetrics : IDataModel<IStorageMetrics>, IDataModelGet<IStorageMetrics>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
         /// </summary>
-        public DateTime LastModified { get; set; }
+        public DateTime LastModified { get; }
+
+        #endregion
+
+        #region New properties
 
         #endregion
 

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ScriptSafeDomain object
     /// </summary>
     [ConcreteType(typeof(ScriptSafeDomain))]
-    public interface IScriptSafeDomain : IDataModel<IScriptSafeDomain>, IDataModelUpdate, IDataModelDelete
+    public interface IScriptSafeDomain : IDataModel<IScriptSafeDomain>, IDataModelGet<IScriptSafeDomain>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

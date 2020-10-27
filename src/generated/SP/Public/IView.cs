@@ -6,10 +6,10 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a View object
     /// </summary>
     [ConcreteType(typeof(View))]
-    public interface IView : IDataModel<IView>, IDataModelUpdate, IDataModelDelete
+    public interface IView : IDataModel<IView>, IDataModelGet<IView>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
@@ -240,6 +240,10 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public IViewFieldCollection ViewFields { get; }
+
+        #endregion
+
+        #region New properties
 
         #endregion
 

@@ -1,23 +1,2 @@
 ﻿%%PropertyAttributes%%
-        public I%%NavigationType%% %%PropertyName%%
-        {
-            get
-            {
-                if (!NavigationPropertyInstantiated())
-                {
-                    var propertyValue = new %%NavigationType%%
-                    {
-                        PnPContext = this.PnPContext,
-                        Parent = this,
-                    };
-                    SetValue(propertyValue);
-                    InstantiateNavigationProperty();
-                }
-                return GetValue<I%%NavigationType%%>();
-            }
-            set
-            {
-                InstantiateNavigationProperty();
-                SetValue(value);                
-            }
-        }
+        public I%%NavigationType%% %%PropertyName%% { get => GetModelValue<I%%NavigationType%%>(); }

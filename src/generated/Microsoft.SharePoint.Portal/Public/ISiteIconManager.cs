@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SiteIconManager object
     /// </summary>
     [ConcreteType(typeof(SiteIconManager))]
-    public interface ISiteIconManager : IDataModel<ISiteIconManager>, IDataModelUpdate, IDataModelDelete
+    public interface ISiteIconManager : IDataModel<ISiteIconManager>, IDataModelGet<ISiteIconManager>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

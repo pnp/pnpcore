@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a WebProxy object
     /// </summary>
     [ConcreteType(typeof(WebProxy))]
-    public interface IWebProxy : IDataModel<IWebProxy>, IDataModelUpdate, IDataModelDelete
+    public interface IWebProxy : IDataModel<IWebProxy>, IDataModelGet<IWebProxy>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

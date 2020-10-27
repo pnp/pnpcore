@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeContentType object
     /// </summary>
     [ConcreteType(typeof(ChangeContentType))]
-    public interface IChangeContentType : IDataModel<IChangeContentType>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeContentType : IDataModel<IChangeContentType>, IDataModelGet<IChangeContentType>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

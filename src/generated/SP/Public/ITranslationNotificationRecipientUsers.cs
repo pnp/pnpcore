@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a TranslationNotificationRecipientUsers object
     /// </summary>
     [ConcreteType(typeof(TranslationNotificationRecipientUsers))]
-    public interface ITranslationNotificationRecipientUsers : IDataModel<ITranslationNotificationRecipientUsers>, IDataModelUpdate, IDataModelDelete
+    public interface ITranslationNotificationRecipientUsers : IDataModel<ITranslationNotificationRecipientUsers>, IDataModelGet<ITranslationNotificationRecipientUsers>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

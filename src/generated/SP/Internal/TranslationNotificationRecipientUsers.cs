@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,27 @@ namespace PnP.Core.Model.SharePoint
     /// TranslationNotificationRecipientUsers class, write your custom code here
     /// </summary>
     [SharePointType("SP.TranslationNotificationRecipientUsers", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class TranslationNotificationRecipientUsers
+    internal partial class TranslationNotificationRecipientUsers : BaseDataModel<ITranslationNotificationRecipientUsers>, ITranslationNotificationRecipientUsers
     {
+        #region Construction
         public TranslationNotificationRecipientUsers()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public string LanguageCode { get => GetValue<string>(); set => SetValue(value); }
+
+        public IUserCollection Recipients { get => GetModelCollectionValue<IUserCollection>(); }
+
+
+        #endregion
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

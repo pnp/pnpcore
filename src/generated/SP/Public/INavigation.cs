@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Navigation object
     /// </summary>
     [ConcreteType(typeof(Navigation))]
-    public interface INavigation : IDataModel<INavigation>, IDataModelUpdate, IDataModelDelete
+    public interface INavigation : IDataModel<INavigation>, IDataModelGet<INavigation>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

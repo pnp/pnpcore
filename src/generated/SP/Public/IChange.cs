@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Change object
     /// </summary>
     [ConcreteType(typeof(Change))]
-    public interface IChange : IDataModel<IChange>, IDataModelUpdate, IDataModelDelete
+    public interface IChange : IDataModel<IChange>, IDataModelGet<IChange>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

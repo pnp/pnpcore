@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PnP.Core.Services;
 using System;
 
 namespace PnP.M365.DomainModelGenerator
@@ -27,7 +26,6 @@ namespace PnP.M365.DomainModelGenerator
         private static IServiceCollection AddEdmxProcessorServices(this IServiceCollection collection)
         {
             return collection
-                //.AddOAuthAuthenticationProvider()
                 .AddScoped<IEdmxProcessor, EdmxProcessor>();
         }
     }

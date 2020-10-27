@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,49 @@ namespace PnP.Core.Model.SharePoint
     /// SharePointSharingSettings class, write your custom code here
     /// </summary>
     [SharePointType("SP.SharePointSharingSettings", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class SharePointSharingSettings
+    internal partial class SharePointSharingSettings : BaseDataModel<ISharePointSharingSettings>, ISharePointSharingSettings
     {
+        #region Construction
         public SharePointSharingSettings()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public string AddToGroupModeName { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool IsMobileView { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool PanelGivePermissionsVisible { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool PanelShowHideMoreOptionsVisible { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool PanelSimplifiedRoleSelectorVisible { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string SelectedGroup { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool SharedWithEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string SharingCssLink { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool TabbedDialogEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public int TabToShow { get => GetValue<int>(); set => SetValue(value); }
+
+        public string TxtEmailSubjectText { get => GetValue<string>(); set => SetValue(value); }
+
+        public string UserDisplayUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public IPickerSettings PickerProperties { get => GetModelValue<IPickerSettings>(); }
+
+
+        #endregion
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

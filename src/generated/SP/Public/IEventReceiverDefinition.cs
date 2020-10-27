@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a EventReceiverDefinition object
     /// </summary>
     [ConcreteType(typeof(EventReceiverDefinition))]
-    public interface IEventReceiverDefinition : IDataModel<IEventReceiverDefinition>, IDataModelUpdate, IDataModelDelete
+    public interface IEventReceiverDefinition : IDataModel<IEventReceiverDefinition>, IDataModelGet<IEventReceiverDefinition>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

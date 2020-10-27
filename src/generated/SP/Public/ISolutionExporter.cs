@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SolutionExporter object
     /// </summary>
     [ConcreteType(typeof(SolutionExporter))]
-    public interface ISolutionExporter : IDataModel<ISolutionExporter>, IDataModelUpdate, IDataModelDelete
+    public interface ISolutionExporter : IDataModel<ISolutionExporter>, IDataModelGet<ISolutionExporter>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

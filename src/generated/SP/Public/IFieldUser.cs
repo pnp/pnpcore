@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldUser object
     /// </summary>
     [ConcreteType(typeof(FieldUser))]
-    public interface IFieldUser : IDataModel<IFieldUser>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldUser : IDataModel<IFieldUser>, IDataModelGet<IFieldUser>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties
@@ -30,6 +30,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public int SelectionMode { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string UserDisplayOptions { get; set; }
 
         #endregion
 

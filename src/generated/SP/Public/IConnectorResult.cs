@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ConnectorResult object
     /// </summary>
     [ConcreteType(typeof(ConnectorResult))]
-    public interface IConnectorResult : IDataModel<IConnectorResult>, IDataModelUpdate, IDataModelDelete
+    public interface IConnectorResult : IDataModel<IConnectorResult>, IDataModelGet<IConnectorResult>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

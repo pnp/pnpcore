@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a TypeInformation object
     /// </summary>
     [ConcreteType(typeof(TypeInformation))]
-    public interface ITypeInformation : IDataModel<ITypeInformation>, IDataModelUpdate, IDataModelDelete
+    public interface ITypeInformation : IDataModel<ITypeInformation>, IDataModelGet<ITypeInformation>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RelatedItemManager object
     /// </summary>
     [ConcreteType(typeof(RelatedItemManager))]
-    public interface IRelatedItemManager : IDataModel<IRelatedItemManager>, IDataModelUpdate, IDataModelDelete
+    public interface IRelatedItemManager : IDataModel<IRelatedItemManager>, IDataModelGet<IRelatedItemManager>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

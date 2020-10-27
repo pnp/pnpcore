@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SPMigrationJobStatus object
     /// </summary>
     [ConcreteType(typeof(SPMigrationJobStatus))]
-    public interface ISPMigrationJobStatus : IDataModel<ISPMigrationJobStatus>, IDataModelUpdate, IDataModelDelete
+    public interface ISPMigrationJobStatus : IDataModel<ISPMigrationJobStatus>, IDataModelGet<ISPMigrationJobStatus>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

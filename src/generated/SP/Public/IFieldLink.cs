@@ -6,10 +6,10 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldLink object
     /// </summary>
     [ConcreteType(typeof(FieldLink))]
-    public interface IFieldLink : IDataModel<IFieldLink>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldLink : IDataModel<IFieldLink>, IDataModelGet<IFieldLink>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
@@ -29,12 +29,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; }
 
         /// <summary>
         /// To update...
@@ -50,6 +50,10 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public bool ShowInDisplayForm { get; set; }
+
+        #endregion
+
+        #region New properties
 
         #endregion
 

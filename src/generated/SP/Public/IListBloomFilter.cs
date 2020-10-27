@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ListBloomFilter object
     /// </summary>
     [ConcreteType(typeof(ListBloomFilter))]
-    public interface IListBloomFilter : IDataModel<IListBloomFilter>, IDataModelUpdate, IDataModelDelete
+    public interface IListBloomFilter : IDataModel<IListBloomFilter>, IDataModelGet<IListBloomFilter>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

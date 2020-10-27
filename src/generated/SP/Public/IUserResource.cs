@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a UserResource object
     /// </summary>
     [ConcreteType(typeof(UserResource))]
-    public interface IUserResource : IDataModel<IUserResource>, IDataModelUpdate, IDataModelDelete
+    public interface IUserResource : IDataModel<IUserResource>, IDataModelGet<IUserResource>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a LanguageCollection object
     /// </summary>
     [ConcreteType(typeof(LanguageCollection))]
-    public interface ILanguageCollection : IDataModel<ILanguageCollection>, IDataModelUpdate, IDataModelDelete
+    public interface ILanguageCollection : IDataModel<ILanguageCollection>, IDataModelGet<ILanguageCollection>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

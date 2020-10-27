@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldCurrency object
     /// </summary>
     [ConcreteType(typeof(FieldCurrency))]
-    public interface IFieldCurrency : IDataModel<IFieldCurrency>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldCurrency : IDataModel<IFieldCurrency>, IDataModelGet<IFieldCurrency>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,30 @@ namespace PnP.Core.Model.SharePoint
     /// TimeZone class, write your custom code here
     /// </summary>
     [SharePointType("SP.TimeZone", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class TimeZone
+    internal partial class TimeZone : BaseDataModel<ITimeZone>, ITimeZone
     {
+        #region Construction
         public TimeZone()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public string Description { get => GetValue<string>(); set => SetValue(value); }
+
+        public int Id { get => GetValue<int>(); set => SetValue(value); }
+
+        #endregion
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => Id; set => Id = (int)value; }
+
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

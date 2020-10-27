@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SiteUrl object
     /// </summary>
     [ConcreteType(typeof(SiteUrl))]
-    public interface ISiteUrl : IDataModel<ISiteUrl>, IDataModelUpdate, IDataModelDelete
+    public interface ISiteUrl : IDataModel<ISiteUrl>, IDataModelGet<ISiteUrl>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

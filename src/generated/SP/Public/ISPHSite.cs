@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SPHSite object
     /// </summary>
     [ConcreteType(typeof(SPHSite))]
-    public interface ISPHSite : IDataModel<ISPHSite>, IDataModelUpdate, IDataModelDelete
+    public interface ISPHSite : IDataModel<ISPHSite>, IDataModelGet<ISPHSite>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

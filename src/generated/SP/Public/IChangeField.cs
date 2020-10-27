@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeField object
     /// </summary>
     [ConcreteType(typeof(ChangeField))]
-    public interface IChangeField : IDataModel<IChangeField>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeField : IDataModel<IChangeField>, IDataModelGet<IChangeField>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

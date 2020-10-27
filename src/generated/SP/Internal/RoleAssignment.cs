@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,30 @@ namespace PnP.Core.Model.SharePoint
     /// RoleAssignment class, write your custom code here
     /// </summary>
     [SharePointType("SP.RoleAssignment", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class RoleAssignment
+    internal partial class RoleAssignment : BaseDataModel<IRoleAssignment>, IRoleAssignment
     {
+        #region Construction
         public RoleAssignment()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public int PrincipalId { get => GetValue<int>(); set => SetValue(value); }
+
+        public IPrincipal Member { get => GetModelValue<IPrincipal>(); }
+
+
+        public IRoleDefinitionCollection RoleDefinitionBindings { get => GetModelCollectionValue<IRoleDefinitionCollection>(); }
+
+
+        #endregion
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

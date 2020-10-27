@@ -6,10 +6,10 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a InformationRightsManagementSettings object
     /// </summary>
     [ConcreteType(typeof(InformationRightsManagementSettings))]
-    public interface IInformationRightsManagementSettings : IDataModel<IInformationRightsManagementSettings>, IDataModelUpdate, IDataModelDelete
+    public interface IInformationRightsManagementSettings : IDataModel<IInformationRightsManagementSettings>, IDataModelGet<IInformationRightsManagementSettings>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
@@ -85,6 +85,10 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public string TemplateId { get; set; }
+
+        #endregion
+
+        #region New properties
 
         #endregion
 

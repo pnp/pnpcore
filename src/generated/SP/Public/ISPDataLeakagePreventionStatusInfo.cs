@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SPDataLeakagePreventionStatusInfo object
     /// </summary>
     [ConcreteType(typeof(SPDataLeakagePreventionStatusInfo))]
-    public interface ISPDataLeakagePreventionStatusInfo : IDataModel<ISPDataLeakagePreventionStatusInfo>, IDataModelUpdate, IDataModelDelete
+    public interface ISPDataLeakagePreventionStatusInfo : IDataModel<ISPDataLeakagePreventionStatusInfo>, IDataModelGet<ISPDataLeakagePreventionStatusInfo>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

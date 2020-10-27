@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeList object
     /// </summary>
     [ConcreteType(typeof(ChangeList))]
-    public interface IChangeList : IDataModel<IChangeList>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeList : IDataModel<IChangeList>, IDataModelGet<IChangeList>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

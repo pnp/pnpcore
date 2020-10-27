@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ListHomeItemCollection object
     /// </summary>
     [ConcreteType(typeof(ListHomeItemCollection))]
-    public interface IListHomeItemCollection : IDataModel<IListHomeItemCollection>, IDataModelUpdate, IDataModelDelete
+    public interface IListHomeItemCollection : IDataModel<IListHomeItemCollection>, IDataModelGet<IListHomeItemCollection>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

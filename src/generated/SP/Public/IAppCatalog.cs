@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a AppCatalog object
     /// </summary>
     [ConcreteType(typeof(AppCatalog))]
-    public interface IAppCatalog : IDataModel<IAppCatalog>, IDataModelUpdate, IDataModelDelete
+    public interface IAppCatalog : IDataModel<IAppCatalog>, IDataModelGet<IAppCatalog>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

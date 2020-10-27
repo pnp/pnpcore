@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldRatingScale object
     /// </summary>
     [ConcreteType(typeof(FieldRatingScale))]
-    public interface IFieldRatingScale : IDataModel<IFieldRatingScale>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldRatingScale : IDataModel<IFieldRatingScale>, IDataModelGet<IFieldRatingScale>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

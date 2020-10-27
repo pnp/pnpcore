@@ -6,7 +6,7 @@ namespace %%Namespace%%
     /// Public interface to define a %%Type%% object
     /// </summary>
     [ConcreteType(typeof(%%Type%%))]
-    public interface I%%Type%% : IDataModel<I%%Type%%>, IDataModelUpdate, IDataModelDelete
+    public interface I%%Type%% : IDataModel<I%%Type%%>, IDataModelGet<I%%Type%%>, IDataModelUpdate, IDataModelDelete
     {
 
 %%Properties%%

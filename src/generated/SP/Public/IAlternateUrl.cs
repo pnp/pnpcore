@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a AlternateUrl object
     /// </summary>
     [ConcreteType(typeof(AlternateUrl))]
-    public interface IAlternateUrl : IDataModel<IAlternateUrl>, IDataModelUpdate, IDataModelDelete
+    public interface IAlternateUrl : IDataModel<IAlternateUrl>, IDataModelGet<IAlternateUrl>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

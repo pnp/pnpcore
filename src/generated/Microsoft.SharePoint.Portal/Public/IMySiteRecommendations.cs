@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a MySiteRecommendations object
     /// </summary>
     [ConcreteType(typeof(MySiteRecommendations))]
-    public interface IMySiteRecommendations : IDataModel<IMySiteRecommendations>, IDataModelUpdate, IDataModelDelete
+    public interface IMySiteRecommendations : IDataModel<IMySiteRecommendations>, IDataModelGet<IMySiteRecommendations>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

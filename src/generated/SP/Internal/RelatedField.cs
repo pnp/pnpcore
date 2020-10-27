@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,33 @@ namespace PnP.Core.Model.SharePoint
     /// RelatedField class, write your custom code here
     /// </summary>
     [SharePointType("SP.RelatedField", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class RelatedField
+    internal partial class RelatedField : BaseDataModel<IRelatedField>, IRelatedField
     {
+        #region Construction
         public RelatedField()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public Guid FieldId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public Guid ListId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public int RelationshipDeleteBehavior { get => GetValue<int>(); set => SetValue(value); }
+
+        public Guid WebId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public IList LookupList { get => GetModelValue<IList>(); }
+
+
+        #endregion
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

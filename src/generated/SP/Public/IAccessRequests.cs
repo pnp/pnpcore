@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a AccessRequests object
     /// </summary>
     [ConcreteType(typeof(AccessRequests))]
-    public interface IAccessRequests : IDataModel<IAccessRequests>, IDataModelUpdate, IDataModelDelete
+    public interface IAccessRequests : IDataModel<IAccessRequests>, IDataModelGet<IAccessRequests>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharingUtility object
     /// </summary>
     [ConcreteType(typeof(SharingUtility))]
-    public interface ISharingUtility : IDataModel<ISharingUtility>, IDataModelUpdate, IDataModelDelete
+    public interface ISharingUtility : IDataModel<ISharingUtility>, IDataModelGet<ISharingUtility>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

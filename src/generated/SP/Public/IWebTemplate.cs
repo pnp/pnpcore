@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a WebTemplate object
     /// </summary>
     [ConcreteType(typeof(WebTemplate))]
-    public interface IWebTemplate : IDataModel<IWebTemplate>, IDataModelUpdate, IDataModelDelete
+    public interface IWebTemplate : IDataModel<IWebTemplate>, IDataModelGet<IWebTemplate>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

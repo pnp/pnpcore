@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a TeamChannelManager object
     /// </summary>
     [ConcreteType(typeof(TeamChannelManager))]
-    public interface ITeamChannelManager : IDataModel<ITeamChannelManager>, IDataModelUpdate, IDataModelDelete
+    public interface ITeamChannelManager : IDataModel<ITeamChannelManager>, IDataModelGet<ITeamChannelManager>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharePointHomeServiceContext object
     /// </summary>
     [ConcreteType(typeof(SharePointHomeServiceContext))]
-    public interface ISharePointHomeServiceContext : IDataModel<ISharePointHomeServiceContext>, IDataModelUpdate, IDataModelDelete
+    public interface ISharePointHomeServiceContext : IDataModel<ISharePointHomeServiceContext>, IDataModelGet<ISharePointHomeServiceContext>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties
@@ -20,6 +20,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public string Payload { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public ITokenResponse DWEngineToken { get; }
 
         /// <summary>
         /// To update...

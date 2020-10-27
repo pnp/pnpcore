@@ -3,10 +3,10 @@ using System;
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
-    /// Public interface to define a FavoriteListsDeprecated object
+    /// Public interface to define a FavoriteListsSubstrate object
     /// </summary>
-    [ConcreteType(typeof(FavoriteListsDeprecated))]
-    public interface IFavoriteListsDeprecated : IDataModel<IFavoriteListsDeprecated>, IDataModelUpdate, IDataModelDelete
+    [ConcreteType(typeof(FavoriteListsSubstrate))]
+    public interface IFavoriteListsSubstrate : IDataModel<IFavoriteListsSubstrate>, IDataModelGet<IFavoriteListsSubstrate>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

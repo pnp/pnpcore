@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldMultiLineText object
     /// </summary>
     [ConcreteType(typeof(FieldMultiLineText))]
-    public interface IFieldMultiLineText : IDataModel<IFieldMultiLineText>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldMultiLineText : IDataModel<IFieldMultiLineText>, IDataModelGet<IFieldMultiLineText>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

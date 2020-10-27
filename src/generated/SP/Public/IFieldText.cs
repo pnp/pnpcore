@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldText object
     /// </summary>
     [ConcreteType(typeof(FieldText))]
-    public interface IFieldText : IDataModel<IFieldText>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldText : IDataModel<IFieldText>, IDataModelGet<IFieldText>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

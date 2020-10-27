@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RecentList object
     /// </summary>
     [ConcreteType(typeof(RecentList))]
-    public interface IRecentList : IDataModel<IRecentList>, IDataModelUpdate, IDataModelDelete
+    public interface IRecentList : IDataModel<IRecentList>, IDataModelGet<IRecentList>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties
@@ -90,6 +90,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public string SiteUrl { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string WebId { get; set; }
 
         /// <summary>
         /// To update...

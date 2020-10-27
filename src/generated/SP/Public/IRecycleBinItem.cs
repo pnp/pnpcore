@@ -6,70 +6,70 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RecycleBinItem object
     /// </summary>
     [ConcreteType(typeof(RecycleBinItem))]
-    public interface IRecycleBinItem : IDataModel<IRecycleBinItem>, IDataModelUpdate, IDataModelDelete
+    public interface IRecycleBinItem : IDataModel<IRecycleBinItem>, IDataModelGet<IRecycleBinItem>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string AuthorEmail { get; set; }
+        public string AuthorEmail { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string AuthorName { get; set; }
+        public string AuthorName { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string DeletedByEmail { get; set; }
+        public string DeletedByEmail { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string DeletedByName { get; set; }
+        public string DeletedByName { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public DateTime DeletedDate { get; set; }
+        public DateTime DeletedDate { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string DeletedDateLocalFormatted { get; set; }
+        public string DeletedDateLocalFormatted { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string DirName { get; set; }
+        public string DirName { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int ItemState { get; set; }
+        public int ItemState { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int ItemType { get; set; }
+        public int ItemType { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string LeafName { get; set; }
+        public string LeafName { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string Title { get; set; }
+        public string Title { get; }
 
         /// <summary>
         /// To update...
@@ -80,6 +80,10 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public IUser DeletedBy { get; }
+
+        #endregion
+
+        #region New properties
 
         #endregion
 

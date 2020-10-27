@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,31 @@ namespace PnP.Core.Model.SharePoint
     /// RemoteWeb class, write your custom code here
     /// </summary>
     [SharePointType("SP.RemoteWeb", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class RemoteWeb
+    internal partial class RemoteWeb : BaseDataModel<IRemoteWeb>, IRemoteWeb
     {
+        #region Construction
         public RemoteWeb()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public bool CanSendEmail { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool ShareByEmailEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool ShareByLinkEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public IWeb Web { get => GetModelValue<IWeb>(); }
+
+
+        #endregion
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

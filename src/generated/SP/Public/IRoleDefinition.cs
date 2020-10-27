@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RoleDefinition object
     /// </summary>
     [ConcreteType(typeof(RoleDefinition))]
-    public interface IRoleDefinition : IDataModel<IRoleDefinition>, IDataModelUpdate, IDataModelDelete
+    public interface IRoleDefinition : IDataModel<IRoleDefinition>, IDataModelGet<IRoleDefinition>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

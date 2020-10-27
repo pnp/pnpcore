@@ -6,10 +6,10 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a UserCustomAction object
     /// </summary>
     [ConcreteType(typeof(UserCustomAction))]
-    public interface IUserCustomAction : IDataModel<IUserCustomAction>, IDataModelUpdate, IDataModelDelete
+    public interface IUserCustomAction : IDataModel<IUserCustomAction>, IDataModelGet<IUserCustomAction>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
@@ -44,7 +44,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// To update...
@@ -74,7 +74,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public int Scope { get; set; }
+        public int Scope { get; }
 
         /// <summary>
         /// To update...
@@ -104,7 +104,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string VersionOfUserCustomAction { get; set; }
+        public string VersionOfUserCustomAction { get; }
+
+        #endregion
+
+        #region New properties
 
         /// <summary>
         /// To update...

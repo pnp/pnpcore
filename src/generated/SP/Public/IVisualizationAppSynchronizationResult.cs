@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a VisualizationAppSynchronizationResult object
     /// </summary>
     [ConcreteType(typeof(VisualizationAppSynchronizationResult))]
-    public interface IVisualizationAppSynchronizationResult : IDataModel<IVisualizationAppSynchronizationResult>, IDataModelUpdate, IDataModelDelete
+    public interface IVisualizationAppSynchronizationResult : IDataModel<IVisualizationAppSynchronizationResult>, IDataModelGet<IVisualizationAppSynchronizationResult>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

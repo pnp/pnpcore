@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeUser object
     /// </summary>
     [ConcreteType(typeof(ChangeUser))]
-    public interface IChangeUser : IDataModel<IChangeUser>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeUser : IDataModel<IChangeUser>, IDataModelGet<IChangeUser>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

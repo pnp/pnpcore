@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldCalculated object
     /// </summary>
     [ConcreteType(typeof(FieldCalculated))]
-    public interface IFieldCalculated : IDataModel<IFieldCalculated>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldCalculated : IDataModel<IFieldCalculated>, IDataModelGet<IFieldCalculated>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

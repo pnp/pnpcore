@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a CreatablesInfo object
     /// </summary>
     [ConcreteType(typeof(CreatablesInfo))]
-    public interface ICreatablesInfo : IDataModel<ICreatablesInfo>, IDataModelUpdate, IDataModelDelete
+    public interface ICreatablesInfo : IDataModel<ICreatablesInfo>, IDataModelGet<ICreatablesInfo>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

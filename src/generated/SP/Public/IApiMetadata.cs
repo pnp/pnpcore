@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ApiMetadata object
     /// </summary>
     [ConcreteType(typeof(ApiMetadata))]
-    public interface IApiMetadata : IDataModel<IApiMetadata>, IDataModelUpdate, IDataModelDelete
+    public interface IApiMetadata : IDataModel<IApiMetadata>, IDataModelGet<IApiMetadata>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -1,13 +1,2 @@
 ﻿%%PropertyAttributes%%
-        public I%%CollectionName%% %%PropertyName%%
-        {
-            get
-            {
-                if (!HasValue(nameof(%%PropertyName%%)))
-                {
-                    var collection = new %%CollectionName%%(this.PnPContext, this, nameof(%%PropertyName%%));
-                    SetValue(collection);
-                }
-                return GetValue<I%%CollectionName%%>();
-            }
-        }
+        public I%%CollectionName%% %%PropertyName%% { get => GetModelCollectionValue<I%%CollectionName%%>(); }

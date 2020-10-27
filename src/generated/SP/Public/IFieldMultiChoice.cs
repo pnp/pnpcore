@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldMultiChoice object
     /// </summary>
     [ConcreteType(typeof(FieldMultiChoice))]
-    public interface IFieldMultiChoice : IDataModel<IFieldMultiChoice>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldMultiChoice : IDataModel<IFieldMultiChoice>, IDataModelGet<IFieldMultiChoice>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

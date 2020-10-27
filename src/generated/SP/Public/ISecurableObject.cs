@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SecurableObject object
     /// </summary>
     [ConcreteType(typeof(SecurableObject))]
-    public interface ISecurableObject : IDataModel<ISecurableObject>, IDataModelUpdate, IDataModelDelete
+    public interface ISecurableObject : IDataModel<ISecurableObject>, IDataModelGet<ISecurableObject>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

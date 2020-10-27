@@ -6,49 +6,10 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Site object
     /// </summary>
     [ConcreteType(typeof(Site))]
-    public interface ISite : IDataModel<ISite>, IDataModelUpdate, IDataModelDelete
+    public interface ISite : IDataModel<ISite>, IDataModelGet<ISite>, IDataModelUpdate, IDataModelDelete
     {
 
         #region Existing properties
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string Classification { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public Guid GroupId { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public Guid Id { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public int SearchBoxInNavBar { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool SocialBarOnSitePagesDisabled { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string Url { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IWeb RootWeb { get; }
-
-        #endregion
-
-        #region New properties
 
         /// <summary>
         /// To update...
@@ -103,17 +64,22 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool CanSyncHubSitePermissions { get; set; }
+        public bool CanSyncHubSitePermissions { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool CanUpgrade { get; set; }
+        public bool CanUpgrade { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid ChannelGroupId { get; set; }
+        public Guid ChannelGroupId { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string Classification { get; set; }
 
         /// <summary>
         /// To update...
@@ -123,7 +89,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public int CompatibilityLevel { get; set; }
+        public int CompatibilityLevel { get; }
 
         /// <summary>
         /// To update...
@@ -148,7 +114,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool ExternalSharingTipsEnabled { get; set; }
+        public bool ExternalSharingTipsEnabled { get; }
 
         /// <summary>
         /// To update...
@@ -158,12 +124,22 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string GeoLocation { get; set; }
+        public string GeoLocation { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid HubSiteId { get; set; }
+        public Guid GroupId { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public Guid HubSiteId { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public Guid Id { get; }
 
         /// <summary>
         /// To update...
@@ -178,7 +154,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool IsHubSite { get; set; }
+        public bool IsHubSite { get; }
 
         /// <summary>
         /// To update...
@@ -188,7 +164,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public int MaxItemsPerThrottledOperation { get; set; }
+        public int MaxItemsPerThrottledOperation { get; }
 
         /// <summary>
         /// To update...
@@ -198,7 +174,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string PrimaryUri { get; set; }
+        public string PrimaryUri { get; }
 
         /// <summary>
         /// To update...
@@ -208,17 +184,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid RelatedGroupId { get; set; }
+        public Guid RelatedGroupId { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string RequiredDesignerVersion { get; set; }
+        public string RequiredDesignerVersion { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public int SandboxedCodeActivationCapability { get; set; }
+        public int SearchBoxInNavBar { get; set; }
 
         /// <summary>
         /// To update...
@@ -228,7 +204,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string ServerRelativeUrl { get; set; }
+        public string ServerRelativeUrl { get; }
 
         /// <summary>
         /// To update...
@@ -238,7 +214,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool ShareByLinkEnabled { get; set; }
+        public bool ShareByLinkEnabled { get; }
 
         /// <summary>
         /// To update...
@@ -253,6 +229,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool SocialBarOnSitePagesDisabled { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public string StatusBarLink { get; set; }
 
         /// <summary>
@@ -263,7 +244,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool ThicketSupportDisabled { get; set; }
+        public bool ThicketSupportDisabled { get; }
 
         /// <summary>
         /// To update...
@@ -293,7 +274,41 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool Upgrading { get; set; }
+        public bool Upgrading { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string Url { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IFeatureCollection Features { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IRecycleBinItemCollection RecycleBin { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IWeb RootWeb { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUserCustomActionCollection UserCustomActions { get; }
+
+        #endregion
+
+        #region New properties
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public int SandboxedCodeActivationCapability { get; set; }
 
         /// <summary>
         /// To update...
@@ -313,11 +328,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public IFeatureCollection Features { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
         public IGroup HubSiteSynchronizableVisitorGroup { get; }
 
         /// <summary>
@@ -328,17 +338,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public IRecycleBinItemCollection RecycleBin { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
         public IUser SecondaryContact { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IUserCustomActionCollection UserCustomActions { get; }
 
         #endregion
 

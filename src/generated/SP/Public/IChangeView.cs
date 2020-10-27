@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeView object
     /// </summary>
     [ConcreteType(typeof(ChangeView))]
-    public interface IChangeView : IDataModel<IChangeView>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeView : IDataModel<IChangeView>, IDataModelGet<IChangeView>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

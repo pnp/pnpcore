@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a AppPrincipalManager object
     /// </summary>
     [ConcreteType(typeof(AppPrincipalManager))]
-    public interface IAppPrincipalManager : IDataModel<IAppPrincipalManager>, IDataModelUpdate, IDataModelDelete
+    public interface IAppPrincipalManager : IDataModel<IAppPrincipalManager>, IDataModelGet<IAppPrincipalManager>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a AppSiteContextUtility object
     /// </summary>
     [ConcreteType(typeof(AppSiteContextUtility))]
-    public interface IAppSiteContextUtility : IDataModel<IAppSiteContextUtility>, IDataModelUpdate, IDataModelDelete
+    public interface IAppSiteContextUtility : IDataModel<IAppSiteContextUtility>, IDataModelGet<IAppSiteContextUtility>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

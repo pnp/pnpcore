@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Alert object
     /// </summary>
     [ConcreteType(typeof(Alert))]
-    public interface IAlert : IDataModel<IAlert>, IDataModelUpdate, IDataModelDelete
+    public interface IAlert : IDataModel<IAlert>, IDataModelGet<IAlert>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

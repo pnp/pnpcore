@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeItem object
     /// </summary>
     [ConcreteType(typeof(ChangeItem))]
-    public interface IChangeItem : IDataModel<IChangeItem>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeItem : IDataModel<IChangeItem>, IDataModelGet<IChangeItem>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties
@@ -70,6 +70,16 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public string ListTitle { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool MoveWasForRecycle { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool MoveWasForRestore { get; set; }
 
         /// <summary>
         /// To update...

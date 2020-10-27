@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a OrganizationNews object
     /// </summary>
     [ConcreteType(typeof(OrganizationNews))]
-    public interface IOrganizationNews : IDataModel<IOrganizationNews>, IDataModelUpdate, IDataModelDelete
+    public interface IOrganizationNews : IDataModel<IOrganizationNews>, IDataModelGet<IOrganizationNews>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

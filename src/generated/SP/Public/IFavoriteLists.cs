@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FavoriteLists object
     /// </summary>
     [ConcreteType(typeof(FavoriteLists))]
-    public interface IFavoriteLists : IDataModel<IFavoriteLists>, IDataModelUpdate, IDataModelDelete
+    public interface IFavoriteLists : IDataModel<IFavoriteLists>, IDataModelGet<IFavoriteLists>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,46 @@ namespace PnP.Core.Model.SharePoint
     /// FieldLink class, write your custom code here
     /// </summary>
     [SharePointType("SP.FieldLink", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class FieldLink
+    internal partial class FieldLink : BaseDataModel<IFieldLink>, IFieldLink
     {
+        #region Construction
         public FieldLink()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region Existing properties
+
+        public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
+
+        public string FieldInternalName { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool Hidden { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string Name { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool ReadOnly { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool Required { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool ShowInDisplayForm { get => GetValue<bool>(); set => SetValue(value); }
+
+        #endregion
+
+        #region New properties
+
+        #endregion
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
+
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

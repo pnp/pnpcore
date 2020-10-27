@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharePointHomeServiceContextBuilder object
     /// </summary>
     [ConcreteType(typeof(SharePointHomeServiceContextBuilder))]
-    public interface ISharePointHomeServiceContextBuilder : IDataModel<ISharePointHomeServiceContextBuilder>, IDataModelUpdate, IDataModelDelete
+    public interface ISharePointHomeServiceContextBuilder : IDataModel<ISharePointHomeServiceContextBuilder>, IDataModelGet<ISharePointHomeServiceContextBuilder>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

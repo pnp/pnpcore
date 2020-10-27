@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a GroupService object
     /// </summary>
     [ConcreteType(typeof(GroupService))]
-    public interface IGroupService : IDataModel<IGroupService>, IDataModelUpdate, IDataModelDelete
+    public interface IGroupService : IDataModel<IGroupService>, IDataModelGet<IGroupService>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

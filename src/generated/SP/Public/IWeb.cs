@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Web object
     /// </summary>
     [ConcreteType(typeof(Web))]
-    public interface IWeb : IDataModel<IWeb>, IDataModelUpdate, IDataModelDelete
+    public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelUpdate, IDataModelDelete
     {
 
         #region Existing properties
@@ -14,121 +14,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool CommentsOnSitePagesDisabled { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string Description { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool DisableAppViews { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool DisableFlows { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool ExcludeFromOfflineClient { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool HorizontalQuickLaunch { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public Guid Id { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool IsMultilingual { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool MembersCanShare { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool NoCrawl { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool OverwriteTranslationsOnChange { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool QuickLaunchEnabled { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string RequestAccessEmail { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public int SearchBoxInNavBar { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public int SearchScope { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string Title { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string Url { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string WelcomePage { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IContentTypeCollection ContentTypes { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IFieldCollection Fields { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IListCollection Lists { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IWebCollection Webs { get; }
-
-        #endregion
-
-        #region New properties
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public string AccessRequestListUrl { get; set; }
+        public string AccessRequestListUrl { get; }
 
         /// <summary>
         /// To update...
@@ -138,7 +24,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool AllowAutomaticASPXPageIndexing { get; set; }
+        public bool AllowAutomaticASPXPageIndexing { get; }
 
         /// <summary>
         /// To update...
@@ -153,27 +39,27 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool AllowMasterPageEditingForCurrentUser { get; set; }
+        public bool AllowMasterPageEditingForCurrentUser { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool AllowRevertFromTemplateForCurrentUser { get; set; }
+        public bool AllowRevertFromTemplateForCurrentUser { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool AllowRssFeeds { get; set; }
+        public bool AllowRssFeeds { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser { get; set; }
+        public bool AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool AllowSavePublishDeclarativeWorkflowForCurrentUser { get; set; }
+        public bool AllowSavePublishDeclarativeWorkflowForCurrentUser { get; }
 
         /// <summary>
         /// To update...
@@ -183,7 +69,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid AppInstanceId { get; set; }
+        public Guid AppInstanceId { get; }
 
         /// <summary>
         /// To update...
@@ -193,12 +79,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool CommentsOnSitePagesDisabled { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool ContainsConfidentialInfo { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public DateTime Created { get; set; }
+        public DateTime Created { get; }
 
         /// <summary>
         /// To update...
@@ -218,7 +109,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string DesignerDownloadUrlForCurrentUser { get; set; }
+        public string Description { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string DesignerDownloadUrlForCurrentUser { get; }
 
         /// <summary>
         /// To update...
@@ -228,17 +124,32 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool DisableAppViews { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool DisableFlows { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool DisableRecommendedItems { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool DocumentLibraryCalloutOfficeWebAppPreviewersDisabled { get; set; }
+        public bool DocumentLibraryCalloutOfficeWebAppPreviewersDisabled { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
         public bool EnableMinimalDownload { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool ExcludeFromOfflineClient { get; set; }
 
         /// <summary>
         /// To update...
@@ -273,12 +184,27 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool IsHomepageModernized { get; set; }
+        public bool HorizontalQuickLaunch { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool IsProvisioningComplete { get; set; }
+        public Guid Id { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool IsHomepageModernized { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool IsMultilingual { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool IsProvisioningComplete { get; }
 
         /// <summary>
         /// To update...
@@ -288,17 +214,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public int Language { get; set; }
+        public int Language { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public DateTime LastItemModifiedDate { get; set; }
+        public DateTime LastItemModifiedDate { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public DateTime LastItemUserModifiedDate { get; set; }
+        public DateTime LastItemUserModifiedDate { get; }
 
         /// <summary>
         /// To update...
@@ -318,6 +244,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool MembersCanShare { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool NavAudienceTargetingEnabled { get; set; }
 
         /// <summary>
@@ -328,12 +259,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool NotificationsInOneDriveForBusinessEnabled { get; set; }
+        public bool NoCrawl { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool NotificationsInSharePointEnabled { get; set; }
+        public bool NotificationsInOneDriveForBusinessEnabled { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool NotificationsInSharePointEnabled { get; }
 
         /// <summary>
         /// To update...
@@ -343,7 +279,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool PreviewFeaturesEnabled { get; set; }
+        public bool OverwriteTranslationsOnChange { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool PreviewFeaturesEnabled { get; }
 
         /// <summary>
         /// To update...
@@ -353,7 +294,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool QuickLaunchEnabled { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool RecycleBinEnabled { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string RequestAccessEmail { get; set; }
 
         /// <summary>
         /// To update...
@@ -363,17 +314,27 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public int SearchBoxInNavBar { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public string SearchBoxPlaceholderText { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string ServerRelativeUrl { get; set; }
+        public int SearchScope { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool ShowUrlStructureForCurrentUser { get; set; }
+        public string ServerRelativeUrl { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool ShowUrlStructureForCurrentUser { get; }
 
         /// <summary>
         /// To update...
@@ -398,22 +359,27 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool TenantTagPolicyEnabled { get; set; }
+        public bool TenantTagPolicyEnabled { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string ThemeData { get; set; }
+        public string ThemeData { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string ThemedCssFolderUrl { get; set; }
+        public string ThemedCssFolderUrl { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool ThirdPartyMdmEnabled { get; set; }
+        public bool ThirdPartyMdmEnabled { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string Title { get; set; }
 
         /// <summary>
         /// To update...
@@ -433,22 +399,121 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public string Url { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool UseAccessRequestDefault { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string WebTemplate { get; set; }
+        public string WebTemplate { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public string WebTemplateConfiguration { get; set; }
+        public string WebTemplateConfiguration { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool WebTemplatesGalleryFirstRunEnabled { get; set; }
+        public bool WebTemplatesGalleryFirstRunEnabled { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string WelcomePage { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IPropertyValues AllProperties { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IContentTypeCollection AvailableContentTypes { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IFieldCollection AvailableFields { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IContentTypeCollection ContentTypes { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUser CurrentUser { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IFeatureCollection Features { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IFieldCollection Fields { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IFolderCollection Folders { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IListCollection Lists { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IRecycleBinItemCollection RecycleBin { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IFolder RootFolder { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IGroupCollection SiteGroups { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IList SiteUserInfoList { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUserCollection SiteUsers { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUserCustomActionCollection UserCustomActions { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IWebCollection Webs { get; }
+
+        #endregion
+
+        #region New properties
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IList AccessRequestsList { get; }
 
         /// <summary>
         /// To update...
@@ -464,11 +529,6 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public IAlertCollection Alerts { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IPropertyValues AllProperties { get; }
 
         /// <summary>
         /// To update...
@@ -498,27 +558,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public IContentTypeCollection AvailableContentTypes { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IFieldCollection AvailableFields { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
         public IModernizeHomepageResult CanModernizeHomepage { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
         public IClientWebPartCollection ClientWebParts { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IUser CurrentUser { get; }
 
         /// <summary>
         /// To update...
@@ -534,16 +579,6 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public IEventReceiverDefinitionCollection EventReceivers { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IFeatureCollection Features { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IFolderCollection Folders { get; }
 
         /// <summary>
         /// To update...
@@ -583,11 +618,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public IRecycleBinItemCollection RecycleBin { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
         public IRegionalSettings RegionalSettings { get; }
 
         /// <summary>
@@ -598,27 +628,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public IFolder RootFolder { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
         public ISiteCollectionCorporateCatalogAccessor SiteCollectionAppCatalog { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IGroupCollection SiteGroups { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IList SiteUserInfoList { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IUserCollection SiteUsers { get; }
 
         /// <summary>
         /// To update...
@@ -634,11 +644,6 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public IUserResource TitleResource { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IUserCustomActionCollection UserCustomActions { get; }
 
         /// <summary>
         /// To update...

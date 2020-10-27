@@ -6,10 +6,10 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a Field object
     /// </summary>
     [ConcreteType(typeof(Field))]
-    public interface IField : IDataModel<IField>, IDataModelUpdate, IDataModelDelete
+    public interface IField : IDataModel<IField>, IDataModelGet<IField>, IDataModelUpdate, IDataModelDelete
     {
 
-        #region New properties
+        #region Existing properties
 
         /// <summary>
         /// To update...
@@ -99,7 +99,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// To update...
@@ -114,17 +114,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string InternalName { get; set; }
+        public string InternalName { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
         public string JSLink { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public bool NoCrawl { get; set; }
 
         /// <summary>
         /// To update...
@@ -149,11 +144,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string SchemaXmlWithResourceTokens { get; set; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
         public string Scope { get; set; }
 
         /// <summary>
@@ -174,7 +164,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public string StaticName { get; set; }
+        public string StaticName { get; }
 
         /// <summary>
         /// To update...
@@ -184,7 +174,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public int FieldTypeKind { get; set; }
+        public int FieldTypeKind { get; }
 
         /// <summary>
         /// To update...
@@ -210,6 +200,20 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public string ValidationMessage { get; set; }
+
+        #endregion
+
+        #region New properties
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool NoCrawl { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public string SchemaXmlWithResourceTokens { get; set; }
 
         /// <summary>
         /// To update...

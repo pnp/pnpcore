@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a CheckedOutFile object
     /// </summary>
     [ConcreteType(typeof(CheckedOutFile))]
-    public interface ICheckedOutFile : IDataModel<ICheckedOutFile>, IDataModelUpdate, IDataModelDelete
+    public interface ICheckedOutFile : IDataModel<ICheckedOutFile>, IDataModelGet<ICheckedOutFile>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

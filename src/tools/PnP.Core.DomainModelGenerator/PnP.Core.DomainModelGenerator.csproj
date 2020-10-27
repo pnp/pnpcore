@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="CodeGenerator\Templates\Model.Class.Gen.Internal.txt" />
     <None Remove="CodeGenerator\Templates\Model.Class.Internal.txt" />
     <None Remove="CodeGenerator\Templates\Model.Class.Public.txt" />
-    <None Remove="CodeGenerator\Templates\Model.Collection.Gen.Internal.txt" />
     <None Remove="CodeGenerator\Templates\Model.Collection.Internal.txt" />
     <None Remove="CodeGenerator\Templates\Model.Collection.Public.txt" />
     <None Remove="CodeGenerator\Templates\Model.KeyProperty.Internal.txt" />
@@ -22,10 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="CodeGenerator\Templates\Model.Class.Gen.Internal.txt" />
     <EmbeddedResource Include="CodeGenerator\Templates\Model.Class.Internal.txt" />
     <EmbeddedResource Include="CodeGenerator\Templates\Model.Class.Public.txt" />
-    <EmbeddedResource Include="CodeGenerator\Templates\Model.Collection.Gen.Internal.txt" />
     <EmbeddedResource Include="CodeGenerator\Templates\Model.Collection.Internal.txt" />
     <EmbeddedResource Include="CodeGenerator\Templates\Model.Collection.Public.txt" />
     <EmbeddedResource Include="CodeGenerator\Templates\Model.KeyProperty.Internal.txt" />

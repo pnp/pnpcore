@@ -4,13 +4,13 @@ using PnP.Core.Services;
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
-    /// SharingUtility class, write your custom code here
+    /// PinnedItems class, write your custom code here
     /// </summary>
-    [SharePointType("SP.SharingUtility", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class SharingUtility : BaseDataModel<ISharingUtility>, ISharingUtility
+    [SharePointType("SP.PinnedItems", Uri = "_api/xxx", LinqGet = "_api/xxx")]
+    internal partial class PinnedItems : BaseDataModel<IPinnedItems>, IPinnedItems
     {
         #region Construction
-        public SharingUtility()
+        public PinnedItems()
         {
         }
         #endregion

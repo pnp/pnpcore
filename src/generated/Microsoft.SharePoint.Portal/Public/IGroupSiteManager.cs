@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a GroupSiteManager object
     /// </summary>
     [ConcreteType(typeof(GroupSiteManager))]
-    public interface IGroupSiteManager : IDataModel<IGroupSiteManager>, IDataModelUpdate, IDataModelDelete
+    public interface IGroupSiteManager : IDataModel<IGroupSiteManager>, IDataModelGet<IGroupSiteManager>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

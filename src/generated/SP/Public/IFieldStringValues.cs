@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldStringValues object
     /// </summary>
     [ConcreteType(typeof(FieldStringValues))]
-    public interface IFieldStringValues : IDataModel<IFieldStringValues>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldStringValues : IDataModel<IFieldStringValues>, IDataModelGet<IFieldStringValues>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

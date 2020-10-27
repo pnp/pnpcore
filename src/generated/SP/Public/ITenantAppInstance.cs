@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a TenantAppInstance object
     /// </summary>
     [ConcreteType(typeof(TenantAppInstance))]
-    public interface ITenantAppInstance : IDataModel<ITenantAppInstance>, IDataModelUpdate, IDataModelDelete
+    public interface ITenantAppInstance : IDataModel<ITenantAppInstance>, IDataModelGet<ITenantAppInstance>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

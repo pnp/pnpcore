@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldComputed object
     /// </summary>
     [ConcreteType(typeof(FieldComputed))]
-    public interface IFieldComputed : IDataModel<IFieldComputed>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldComputed : IDataModel<IFieldComputed>, IDataModelGet<IFieldComputed>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

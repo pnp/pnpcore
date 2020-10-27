@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeFile object
     /// </summary>
     [ConcreteType(typeof(ChangeFile))]
-    public interface IChangeFile : IDataModel<IChangeFile>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeFile : IDataModel<IChangeFile>, IDataModelGet<IChangeFile>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

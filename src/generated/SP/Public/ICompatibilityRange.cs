@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a CompatibilityRange object
     /// </summary>
     [ConcreteType(typeof(CompatibilityRange))]
-    public interface ICompatibilityRange : IDataModel<ICompatibilityRange>, IDataModelUpdate, IDataModelDelete
+    public interface ICompatibilityRange : IDataModel<ICompatibilityRange>, IDataModelGet<ICompatibilityRange>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

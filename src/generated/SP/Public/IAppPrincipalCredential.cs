@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a AppPrincipalCredential object
     /// </summary>
     [ConcreteType(typeof(AppPrincipalCredential))]
-    public interface IAppPrincipalCredential : IDataModel<IAppPrincipalCredential>, IDataModelUpdate, IDataModelDelete
+    public interface IAppPrincipalCredential : IDataModel<IAppPrincipalCredential>, IDataModelGet<IAppPrincipalCredential>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

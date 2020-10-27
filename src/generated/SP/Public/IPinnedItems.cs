@@ -3,10 +3,10 @@ using System;
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
-    /// Public interface to define a HashtagStoreManager object
+    /// Public interface to define a PinnedItems object
     /// </summary>
-    [ConcreteType(typeof(HashtagStoreManager))]
-    public interface IHashtagStoreManager : IDataModel<IHashtagStoreManager>, IDataModelUpdate, IDataModelDelete
+    [ConcreteType(typeof(PinnedItems))]
+    public interface IPinnedItems : IDataModel<IPinnedItems>, IDataModelGet<IPinnedItems>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a FieldGeolocation object
     /// </summary>
     [ConcreteType(typeof(FieldGeolocation))]
-    public interface IFieldGeolocation : IDataModel<IFieldGeolocation>, IDataModelUpdate, IDataModelDelete
+    public interface IFieldGeolocation : IDataModel<IFieldGeolocation>, IDataModelGet<IFieldGeolocation>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

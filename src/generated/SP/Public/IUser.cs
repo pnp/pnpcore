@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a User object
     /// </summary>
     [ConcreteType(typeof(User))]
-    public interface IUser : IDataModel<IUser>, IDataModelUpdate, IDataModelDelete
+    public interface IUser : IDataModel<IUser>, IDataModelGet<IUser>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

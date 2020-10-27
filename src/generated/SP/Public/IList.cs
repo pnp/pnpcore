@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a List object
     /// </summary>
     [ConcreteType(typeof(List))]
-    public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
+    public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelUpdate, IDataModelDelete
     {
 
         #region Existing properties
@@ -94,6 +94,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool IrmEnabled { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public bool IrmExpire { get; set; }
 
         /// <summary>
@@ -154,7 +159,27 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public IFieldCollection Fields { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IInformationRightsManagementSettings InformationRightsManagementSettings { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public IListItemCollection Items { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IFolder RootFolder { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IViewCollection Views { get; }
 
         #endregion
 
@@ -209,6 +234,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public Guid DefaultContentApprovalWorkflowId { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool DefaultItemOpenInBrowser { get; set; }
 
         /// <summary>
         /// To update...
@@ -273,12 +303,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public bool IrmEnabled { get; set; }
+        public bool IsCatalog { get; set; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public bool IsCatalog { get; set; }
+        public bool IsDefaultDocumentLibrary { get; set; }
 
         /// <summary>
         /// To update...
@@ -328,7 +358,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public bool ListFormCustomized { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public string ListItemEntityTypeFullName { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public int ListSchemaVersion { get; set; }
 
         /// <summary>
         /// To update...
@@ -373,6 +413,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
+        public string TemplateTypeId { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
         public IUser Author { get; }
 
         /// <summary>
@@ -398,27 +443,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// To update...
         /// </summary>
-        public IFieldCollection Fields { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
         public IFormCollection Forms { get; }
 
         /// <summary>
         /// To update...
         /// </summary>
-        public IInformationRightsManagementSettings InformationRightsManagementSettings { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
         public IWeb ParentWeb { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IFolder RootFolder { get; }
 
         /// <summary>
         /// To update...
@@ -434,11 +464,6 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public IUserCustomActionCollection UserCustomActions { get; }
-
-        /// <summary>
-        /// To update...
-        /// </summary>
-        public IViewCollection Views { get; }
 
         /// <summary>
         /// To update...

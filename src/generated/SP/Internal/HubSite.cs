@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using System;
 using PnP.Core.Services;
 
@@ -8,23 +7,50 @@ namespace PnP.Core.Model.SharePoint
     /// HubSite class, write your custom code here
     /// </summary>
     [SharePointType("SP.HubSite", Uri = "_api/xxx", LinqGet = "_api/xxx")]
-    internal partial class HubSite
+    internal partial class HubSite : BaseDataModel<IHubSite>, IHubSite
     {
+        #region Construction
         public HubSite()
         {
-            //MappingHandler = (FromJson input) =>
-            //{
-                //// implement custom mapping logic
-                //switch (input.TargetType.Name)
-                //{
-                //    case "SearchScopes": return JsonMappingHelper.ToEnum<SearchScopes>(input.JsonElement);
-                //    case "SearchBoxInNavBar": return JsonMappingHelper.ToEnum<SearchBoxInNavBar>(input.JsonElement);                    
-                //}
-                //
-                //input.Log.LogDebug($"Field {input.FieldName} could not be mapped when converting from JSON");
-                //
-                //return null;
-            //};
         }
+        #endregion
+
+        #region Properties
+        #region New properties
+
+        public string Description { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool EnablePermissionsSync { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string EnforcedECTs { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool HideNameInNavigation { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Guid ID { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string LogoUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public Guid ParentHubSiteId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public bool RequiresJoinApproval { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Guid SiteDesignId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public Guid SiteId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string SiteUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public string Targets { get => GetValue<string>(); set => SetValue(value); }
+
+        public Guid TenantInstanceId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string Title { get => GetValue<string>(); set => SetValue(value); }
+
+        #endregion
+
+        #endregion
+
+        #region Extension methods
+        #endregion
     }
 }

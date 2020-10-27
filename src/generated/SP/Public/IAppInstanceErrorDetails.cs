@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a AppInstanceErrorDetails object
     /// </summary>
     [ConcreteType(typeof(AppInstanceErrorDetails))]
-    public interface IAppInstanceErrorDetails : IDataModel<IAppInstanceErrorDetails>, IDataModelUpdate, IDataModelDelete
+    public interface IAppInstanceErrorDetails : IDataModel<IAppInstanceErrorDetails>, IDataModelGet<IAppInstanceErrorDetails>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

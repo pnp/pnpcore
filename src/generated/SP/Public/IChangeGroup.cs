@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeGroup object
     /// </summary>
     [ConcreteType(typeof(ChangeGroup))]
-    public interface IChangeGroup : IDataModel<IChangeGroup>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeGroup : IDataModel<IChangeGroup>, IDataModelGet<IChangeGroup>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

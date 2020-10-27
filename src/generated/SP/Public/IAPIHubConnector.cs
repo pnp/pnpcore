@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a APIHubConnector object
     /// </summary>
     [ConcreteType(typeof(APIHubConnector))]
-    public interface IAPIHubConnector : IDataModel<IAPIHubConnector>, IDataModelUpdate, IDataModelDelete
+    public interface IAPIHubConnector : IDataModel<IAPIHubConnector>, IDataModelGet<IAPIHubConnector>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

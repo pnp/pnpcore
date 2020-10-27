@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a MountPointInfo object
     /// </summary>
     [ConcreteType(typeof(MountPointInfo))]
-    public interface IMountPointInfo : IDataModel<IMountPointInfo>, IDataModelUpdate, IDataModelDelete
+    public interface IMountPointInfo : IDataModel<IMountPointInfo>, IDataModelGet<IMountPointInfo>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

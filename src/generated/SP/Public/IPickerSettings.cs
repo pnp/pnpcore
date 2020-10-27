@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a PickerSettings object
     /// </summary>
     [ConcreteType(typeof(PickerSettings))]
-    public interface IPickerSettings : IDataModel<IPickerSettings>, IDataModelUpdate, IDataModelDelete
+    public interface IPickerSettings : IDataModel<IPickerSettings>, IDataModelGet<IPickerSettings>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties
@@ -30,6 +30,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public int PrincipalSource { get; set; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public bool UseSubstrateSearch { get; set; }
 
         /// <summary>
         /// To update...

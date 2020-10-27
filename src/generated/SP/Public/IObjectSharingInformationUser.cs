@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ObjectSharingInformationUser object
     /// </summary>
     [ConcreteType(typeof(ObjectSharingInformationUser))]
-    public interface IObjectSharingInformationUser : IDataModel<IObjectSharingInformationUser>, IDataModelUpdate, IDataModelDelete
+    public interface IObjectSharingInformationUser : IDataModel<IObjectSharingInformationUser>, IDataModelGet<IObjectSharingInformationUser>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

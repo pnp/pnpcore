@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a TenantSettings object
     /// </summary>
     [ConcreteType(typeof(TenantSettings))]
-    public interface ITenantSettings : IDataModel<ITenantSettings>, IDataModelUpdate, IDataModelDelete
+    public interface ITenantSettings : IDataModel<ITenantSettings>, IDataModelGet<ITenantSettings>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

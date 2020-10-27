@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ChangeAlert object
     /// </summary>
     [ConcreteType(typeof(ChangeAlert))]
-    public interface IChangeAlert : IDataModel<IChangeAlert>, IDataModelUpdate, IDataModelDelete
+    public interface IChangeAlert : IDataModel<IChangeAlert>, IDataModelGet<IChangeAlert>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

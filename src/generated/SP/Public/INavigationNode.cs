@@ -6,10 +6,15 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a NavigationNode object
     /// </summary>
     [ConcreteType(typeof(NavigationNode))]
-    public interface INavigationNode : IDataModel<INavigationNode>, IDataModelUpdate, IDataModelDelete
+    public interface INavigationNode : IDataModel<INavigationNode>, IDataModelGet<INavigationNode>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public int CurrentLCID { get; set; }
 
         /// <summary>
         /// To update...
@@ -50,6 +55,11 @@ namespace PnP.Core.Model.SharePoint
         /// To update...
         /// </summary>
         public INavigationNodeCollection Children { get; }
+
+        /// <summary>
+        /// To update...
+        /// </summary>
+        public IUserResource TitleResource { get; }
 
         #endregion
 

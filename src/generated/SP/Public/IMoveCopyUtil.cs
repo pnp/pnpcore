@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a MoveCopyUtil object
     /// </summary>
     [ConcreteType(typeof(MoveCopyUtil))]
-    public interface IMoveCopyUtil : IDataModel<IMoveCopyUtil>, IDataModelUpdate, IDataModelDelete
+    public interface IMoveCopyUtil : IDataModel<IMoveCopyUtil>, IDataModelGet<IMoveCopyUtil>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

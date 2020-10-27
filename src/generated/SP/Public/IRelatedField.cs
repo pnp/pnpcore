@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a RelatedField object
     /// </summary>
     [ConcreteType(typeof(RelatedField))]
-    public interface IRelatedField : IDataModel<IRelatedField>, IDataModelUpdate, IDataModelDelete
+    public interface IRelatedField : IDataModel<IRelatedField>, IDataModelGet<IRelatedField>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ModernizeHomepageResult object
     /// </summary>
     [ConcreteType(typeof(ModernizeHomepageResult))]
-    public interface IModernizeHomepageResult : IDataModel<IModernizeHomepageResult>, IDataModelUpdate, IDataModelDelete
+    public interface IModernizeHomepageResult : IDataModel<IModernizeHomepageResult>, IDataModelGet<IModernizeHomepageResult>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a HubSite object
     /// </summary>
     [ConcreteType(typeof(HubSite))]
-    public interface IHubSite : IDataModel<IHubSite>, IDataModelUpdate, IDataModelDelete
+    public interface IHubSite : IDataModel<IHubSite>, IDataModelGet<IHubSite>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

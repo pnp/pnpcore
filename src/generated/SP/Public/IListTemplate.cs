@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ListTemplate object
     /// </summary>
     [ConcreteType(typeof(ListTemplate))]
-    public interface IListTemplate : IDataModel<IListTemplate>, IDataModelUpdate, IDataModelDelete
+    public interface IListTemplate : IDataModel<IListTemplate>, IDataModelGet<IListTemplate>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties

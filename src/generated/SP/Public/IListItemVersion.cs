@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ListItemVersion object
     /// </summary>
     [ConcreteType(typeof(ListItemVersion))]
-    public interface IListItemVersion : IDataModel<IListItemVersion>, IDataModelUpdate, IDataModelDelete
+    public interface IListItemVersion : IDataModel<IListItemVersion>, IDataModelGet<IListItemVersion>, IDataModelUpdate, IDataModelDelete
     {
 
         #region New properties
