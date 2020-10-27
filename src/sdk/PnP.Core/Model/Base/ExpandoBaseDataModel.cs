@@ -66,7 +66,7 @@ namespace PnP.Core.Model
         public ExpandoBaseDataModel()
         {
             // Get the reference type for the current instance
-            instanceType = this.GetType();
+            instanceType = GetType();
 
             // Get all the public typed properties for the current type
             instanceProperties = instanceType.GetProperties(
@@ -248,13 +248,13 @@ namespace PnP.Core.Model
             // Return the instance typed properties, if requested
             if (includeInstanceProperties)
             {
-                foreach (var prop in this.instanceProperties)
+                foreach (var prop in instanceProperties)
                     yield return new KeyValuePair<string, object>(prop.Name, prop.GetValue(this, null));
             }
 
             // Always return the custom properties
-            foreach (var key in this.Values.Keys)
-                yield return new KeyValuePair<string, object>(key, this.Values[key]);
+            foreach (var key in Values.Keys)
+                yield return new KeyValuePair<string, object>(key, Values[key]);
         }
 
 

@@ -13,7 +13,7 @@ namespace PnP.Core.QueryModel
         private readonly PnPContext context;
         private readonly IDataModelParent parent;
         private readonly string memberName;
-        
+
 
         /// <summary>
         /// Protected default constructor, to force creation using
@@ -42,7 +42,7 @@ namespace PnP.Core.QueryModel
         {
             if (string.IsNullOrEmpty(memberName))
             {
-                throw new ClientException(ErrorType.LinqError, 
+                throw new ClientException(ErrorType.LinqError,
                     string.Format(PnPCoreResources.Exception_LinqError_MissingValue, nameof(memberName), GetType().Name));
             }
 

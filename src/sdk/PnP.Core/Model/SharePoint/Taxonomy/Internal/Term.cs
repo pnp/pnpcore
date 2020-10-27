@@ -36,7 +36,7 @@ namespace PnP.Core.Model.SharePoint
                 dynamic body = new ExpandoObject();
                 body.labels = localizedLabels;
 
-                if (this.IsPropertyAvailable(p => p.Descriptions) && (Descriptions as TermLocalizedDescriptionCollection).Count > 0)
+                if (IsPropertyAvailable(p => p.Descriptions) && (Descriptions as TermLocalizedDescriptionCollection).Count > 0)
                 {
                     dynamic localizedDescriptions = new List<dynamic>();
                     foreach (var localizedDescription in Descriptions)
@@ -144,7 +144,7 @@ namespace PnP.Core.Model.SharePoint
         public ITermRelationCollection Relations { get => GetModelCollectionValue<ITermRelationCollection>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = value.ToString(); }
+        public override object Key { get => Id; set => Id = value.ToString(); }
 
         #endregion
 

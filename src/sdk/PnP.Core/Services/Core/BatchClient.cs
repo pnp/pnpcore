@@ -577,7 +577,7 @@ namespace PnP.Core.Services
                             {
                                 if (batchRequest.Model is TransientObject)
                                 {
-                                    (batchRequest.Model as TransientObject).Commit();
+                                    batchRequest.Model.Commit();
                                 }
                             }
                         }
@@ -980,7 +980,7 @@ namespace PnP.Core.Services
                         {
                             if (currentBatchRequest.Model is TransientObject)
                             {
-                                (currentBatchRequest.Model as TransientObject).Commit();
+                                currentBatchRequest.Model.Commit();
                             }
                         }
 
@@ -1465,7 +1465,7 @@ namespace PnP.Core.Services
                 EntityFieldInfo keyField = useGraphBatch ? request.EntityInfo.GraphKeyField : request.EntityInfo.SharePointKeyField;
 
                 // Consolidation can only happen when there's a keyfield set in the model
-                if (keyField != null && (request.Model as TransientObject).HasValue(keyField.Name))
+                if (keyField != null && request.Model.HasValue(keyField.Name))
                 {
                     // Get the value of the model's keyfield property, since we always ask to load the keyfield property this should work
                     var keyFieldValue = GetDynamicProperty(request.Model, keyField.Name);
@@ -1500,10 +1500,10 @@ namespace PnP.Core.Services
                     if (!first)
                     {
                         // Merge properties/collections
-                        (firstRequest.Model as TransientObject).Merge(request.Model as TransientObject);
+                        firstRequest.Model.Merge(request.Model);
 
                         // Mark deleted objects as deleted and remove from their respective parent collection
-                        (request.Model as TransientObject).RemoveFromParentCollection();
+                        request.Model.RemoveFromParentCollection();
                     }
                     else
                     {
@@ -1515,7 +1515,7 @@ namespace PnP.Core.Services
             // Mark deleted objects as deleted and remove from their respective parent collection
             foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Delete))
             {
-                (request.Model as TransientObject).RemoveFromParentCollection();
+                request.Model.RemoveFromParentCollection();
             }
         }
 

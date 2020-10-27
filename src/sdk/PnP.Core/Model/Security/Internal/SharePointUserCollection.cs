@@ -7,8 +7,8 @@ namespace PnP.Core.Model.Security
     {
         public SharePointUserCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)
         {
-            this.PnPContext = context;
-            this.Parent = parent;
+            PnPContext = context;
+            Parent = parent;
         }
     }
 }

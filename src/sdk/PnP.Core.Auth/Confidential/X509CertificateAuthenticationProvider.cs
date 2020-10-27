@@ -36,7 +36,7 @@ namespace PnP.Core.Auth
             StoreName storeName, StoreLocation storeLocation, string thumbprint)
             : this(null)
         {
-            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
@@ -103,7 +103,7 @@ namespace PnP.Core.Auth
             }
 
             // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit,
+            Log?.LogInformation(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit,
                 options.X509Certificate.Thumbprint,
                 options.X509Certificate.StoreName,
                 options.X509Certificate.StoreLocation);
@@ -163,8 +163,8 @@ namespace PnP.Core.Auth
             }
 
             // Log the access token retrieval action
-            this.Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
-                this.GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
+            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+                GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it
             // In case of any exception while retrieving the access token, 

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.Teams
     /// Attachments connected to a chat message
     /// </summary>
     [ConcreteType(typeof(TeamChatMessageAttachment))]
-    public interface ITeamChatMessageAttachment: IDataModel<ITeamChatMessageAttachment>
+    public interface ITeamChatMessageAttachment : IDataModel<ITeamChatMessageAttachment>
     {
         /// <summary>
         /// Read-only. Unique id of the attachment.

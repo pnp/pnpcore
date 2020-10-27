@@ -35,12 +35,12 @@ namespace PnP.Core.Auth
         /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
         /// <param name="redirectUri">The Redirect URI for the authentication flow</param>
         /// <param name="deviceCodeVerification">External action to manage the Device Code verification</param>
-        public DeviceCodeAuthenticationProvider(string clientId, string tenantId, 
+        public DeviceCodeAuthenticationProvider(string clientId, string tenantId,
             Uri redirectUri, Action<DeviceCodeNotification> deviceCodeVerification)
             : this(null)
         {
             DeviceCodeVerification = deviceCodeVerification;
-            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
@@ -96,7 +96,7 @@ namespace PnP.Core.Auth
                 .Build();
 
             // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.DeviceCodeAuthenticationProvider_LogInit);
+            Log?.LogInformation(PnPCoreAuthResources.DeviceCodeAuthenticationProvider_LogInit);
         }
 
         /// <summary>
@@ -166,8 +166,8 @@ namespace PnP.Core.Auth
             }
 
             // Log the access token retrieval action
-            this.Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
-                this.GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
+            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+                GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it
             // In case of any exception while retrieving the access token, 

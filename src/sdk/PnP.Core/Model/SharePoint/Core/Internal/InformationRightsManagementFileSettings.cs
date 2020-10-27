@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     internal partial class InformationRightsManagementFileSettings : BaseDataModel<IInformationRightsManagementFileSettings>, IInformationRightsManagementFileSettings
     {
         #region Construction
-        public InformationRightsManagementFileSettings() {}
+        public InformationRightsManagementFileSettings() { }
         #endregion
 
         #region Properties
@@ -42,7 +42,7 @@ namespace PnP.Core.Model.SharePoint
         public string TemplateId { get => GetValue<string>(); set => SetValue(value); }
 
         [KeyProperty(nameof(PolicyTitle))]
-        public override object Key { get => this.PolicyTitle; set => this.PolicyTitle = value.ToString(); }
+        public override object Key { get => PolicyTitle; set => PolicyTitle = value.ToString(); }
         #endregion
     }
 }

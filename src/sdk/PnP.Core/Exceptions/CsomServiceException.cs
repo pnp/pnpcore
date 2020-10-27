@@ -6,7 +6,7 @@ namespace PnP.Core
     /// <summary>
     /// CSOM Service exception
     /// </summary>
-    public class CsomServiceException: ServiceException
+    public class CsomServiceException : ServiceException
     {
         #region Default exception constructors
         internal CsomServiceException(string message) : base(message)
@@ -31,7 +31,7 @@ namespace PnP.Core
         /// <param name="response">JSON response of the executed CSOM request</param>
         public CsomServiceException(ErrorType type, int httpResponseCode, JsonElement response) : base("CSOM service exception")
         {
-            Error = new CsomError(type, httpResponseCode, response);            
+            Error = new CsomError(type, httpResponseCode, response);
         }
         #endregion
 

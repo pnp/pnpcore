@@ -42,15 +42,15 @@ namespace PnP.Core.Model.SharePoint
                 {
                     parentTerm = Parent.Parent as Term;
                 }
-                
+
                 if (parentTerm == null)
                 {
-                    throw new ClientException(ErrorType.Unsupported, 
+                    throw new ClientException(ErrorType.Unsupported,
                         PnPCoreResources.Exception_Unsupported_FailedAddingTermRelation);
                 }
 
                 string termApi = $"termstore/sets/{parentTerm.Set.Id}/terms/{parentTerm.Id}/relations";
-                
+
                 var apiCall = await ApiHelper.ParseApiRequestAsync(this, termApi).ConfigureAwait(false);
 
                 return new ApiCall(apiCall, ApiType.GraphBeta, bodyContent);
@@ -70,7 +70,7 @@ namespace PnP.Core.Model.SharePoint
         public ITerm ToTerm { get => GetModelValue<ITerm>(); set => SetModelValue(value); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = value.ToString(); }
+        public override object Key { get => Id; set => Id = value.ToString(); }
         #endregion
     }
 }

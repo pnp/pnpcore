@@ -19,7 +19,7 @@ namespace PnP.Core.Services
             int nextActionId = 1;
             var responseJson = JsonSerializer.Deserialize<JsonElement>(jsonResponse);
 
-            foreach(var response in responseJson.EnumerateArray())
+            foreach (var response in responseJson.EnumerateArray())
             {
                 if (first)
                 {

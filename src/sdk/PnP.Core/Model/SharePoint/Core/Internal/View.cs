@@ -8,8 +8,8 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// View class, write your custom code here
     /// </summary>
-    [SharePointType("SP.View", Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/Views({Id})", 
-            Get = "_api/web/lists(guid'{Parent.Id}')/Views", LinqGet = "_api/web/lists(guid'{Parent.Id}')/Views", 
+    [SharePointType("SP.View", Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/Views({Id})",
+            Get = "_api/web/lists(guid'{Parent.Id}')/Views", LinqGet = "_api/web/lists(guid'{Parent.Id}')/Views",
             Delete = "_api/web/lists(guid'{Parent.Id}')/Views(guid'{Id}')/DeleteObject")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class View : BaseDataModel<IView>, IView
@@ -25,7 +25,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 var viewOptions = (ViewOptions)additionalInformation[ViewOptionsAdditionalInformationKey];
                 var entity = EntityManager.GetClassInfo(GetType(), this);
-                             
+
                 // Build body
                 var viewCreationInformation = new
                 {
@@ -153,7 +153,7 @@ namespace PnP.Core.Model.SharePoint
         public IViewFieldCollection ViewFields { get => GetModelCollectionValue<IViewFieldCollection>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
     }
 }

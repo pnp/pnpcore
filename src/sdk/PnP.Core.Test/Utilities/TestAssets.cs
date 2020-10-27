@@ -1,10 +1,8 @@
 ﻿using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Utilities

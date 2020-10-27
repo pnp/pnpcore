@@ -1,9 +1,9 @@
+using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
-using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -97,19 +97,19 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            if (!this.items.Any(o => o.Id == id))
+            if (!items.Any(o => o.Id == id))
             {
                 throw new ArgumentOutOfRangeException(nameof(id),
                     PnPCoreResources.Exception_View_ViewNotFoundInCollection);
             }
 
-            var view = this.items.FirstOrDefault(o => o.Id == id);
+            var view = items.FirstOrDefault(o => o.Id == id);
 
             if (view != default)
             {
                 var vw = view as View;
                 await vw.DeleteAsync().ConfigureAwait(false);
-                this.items.Remove(vw);
+                items.Remove(vw);
             }
         }
 
@@ -134,19 +134,19 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(batch));
             }
 
-            if (!this.items.Any(o => o.Id == id))
+            if (!items.Any(o => o.Id == id))
             {
                 throw new ArgumentOutOfRangeException(nameof(id),
                     PnPCoreResources.Exception_View_ViewNotFoundInCollection);
             }
 
-            var view = this.items.FirstOrDefault(o => o.Id == id);
+            var view = items.FirstOrDefault(o => o.Id == id);
 
             if (view != default)
             {
                 var vw = view as View;
                 await vw.DeleteBatchAsync(batch).ConfigureAwait(false);
-                this.items.Remove(vw);
+                items.Remove(vw);
             }
         }
 

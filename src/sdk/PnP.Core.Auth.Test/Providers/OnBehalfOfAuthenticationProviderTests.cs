@@ -15,11 +15,12 @@ namespace PnP.Core.Auth.Test.Providers
     [TestClass]
     public class OnBehalfOfAuthenticationProviderTests
     {
-        private static string onBehalfOfConfigurationPath = "onBehalfOf";
-        private static string onBehalfOfFrontEndConfigurationPath = "onBehalfFrontEnd";
+        private static readonly string onBehalfOfConfigurationPath = "onBehalfOf";
+        private static readonly string onBehalfOfFrontEndConfigurationPath = "onBehalfFrontEnd";
 
-        private static Lazy<InteractiveAuthenticationProvider> frontendProvider =
-            new Lazy<InteractiveAuthenticationProvider>(() => {
+        private static readonly Lazy<InteractiveAuthenticationProvider> frontendProvider =
+            new Lazy<InteractiveAuthenticationProvider>(() =>
+            {
                 var configuration = TestCommon.GetConfigurationSettings();
                 var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:ClientId");
                 var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{onBehalfOfFrontEndConfigurationPath}:TenantId");

@@ -1,8 +1,8 @@
-﻿using PnP.Core.Services;
-using System;
-using PnP.Core.Auth;
+﻿using PnP.Core.Auth;
 using PnP.Core.Auth.Services;
 using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Services;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

@@ -57,7 +57,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// Number of items in the collection
         /// </summary>
-        public int Count => this.items.Count;
+        public int Count => items.Count;
 
         /// <summary>
         /// Was this collectioned loaded with data from a server request
@@ -67,12 +67,12 @@ namespace PnP.Core.Model
         /// <summary>
         /// Number of items in the collection
         /// </summary>
-        public int Length => this.items.Count;
+        public int Length => items.Count;
 
         /// <summary>
         /// Items in the collection
         /// </summary>
-        public IEnumerable RequestedItems { get => this.items; }
+        public IEnumerable RequestedItems { get => items; }
 
         #endregion
 
@@ -96,17 +96,17 @@ namespace PnP.Core.Model
 
         public virtual void Clear()
         {
-            this.items.Clear();
+            items.Clear();
         }
 
         public virtual bool Contains(TModel item)
         {
-            return this.items.Contains(item);
+            return items.Contains(item);
         }
 
         public virtual void CopyTo(TModel[] array, int arrayIndex)
         {
-            this.items.CopyTo(array, arrayIndex);
+            items.CopyTo(array, arrayIndex);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace PnP.Core.Model
         /// <returns>Enumerator for this collection</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace PnP.Core.Model
         public TModel CreateNew()
         {
             TModel newModel = (TModel)EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), this);
-            (newModel as BaseDataModel<TModel>).PnPContext = this.PnPContext;
+            (newModel as BaseDataModel<TModel>).PnPContext = PnPContext;
             return newModel;
         }
 
@@ -188,7 +188,7 @@ namespace PnP.Core.Model
         /// <returns>Model entity</returns>
         object IManageableCollection.CreateNew()
         {
-            return this.CreateNew();
+            return CreateNew();
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace PnP.Core.Model
         /// <returns>Model entity</returns>
         object IManageableCollection.CreateNewAndAdd()
         {
-            return this.CreateNewAndAdd();
+            return CreateNewAndAdd();
         }
 
         public void Add(object item)
@@ -217,7 +217,7 @@ namespace PnP.Core.Model
             }
 
             // And if it is correct, add it through the typed method
-            this.Add((TModel)item);
+            Add((TModel)item);
         }
 
         public void AddOrUpdate(TModel newItem, Predicate<TModel> selector)
@@ -227,7 +227,7 @@ namespace PnP.Core.Model
 
         public void AddOrUpdate(object newItem, Predicate<object> selector)
         {
-            this.AddOrUpdateInternal((TModel)newItem, p => selector.Invoke(p));
+            AddOrUpdateInternal((TModel)newItem, p => selector.Invoke(p));
         }
 
         public void AddOrUpdateInternal(TModel newItem, Predicate<TModel> selector)
@@ -264,7 +264,7 @@ namespace PnP.Core.Model
         /// <param name="item">Model to remove</param>
         public virtual bool Remove(object item)
         {
-            return this.Remove((TModel)item);
+            return Remove((TModel)item);
         }
 
         #endregion
@@ -287,15 +287,15 @@ namespace PnP.Core.Model
             }
 
             // Get the parent (container) entity info (e.g. for Lists this is Web)
-            var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.Parent.GetType());
+            var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(Parent.GetType());
 
             // and cast it to the IDataModelMappingHandler interface
-            var parentEntityWithMappingHandlers = (IDataModelMappingHandler)this.Parent;
+            var parentEntityWithMappingHandlers = (IDataModelMappingHandler)Parent;
 
             // Create a concrete entity of what we expect to get back (e.g. for Lists this is List)
-            var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), this.Parent);
+            var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), Parent);
             (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
-            
+
             // Get class info for the given concrete entity and the passed expressions
             var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, expressions);
 
@@ -303,7 +303,7 @@ namespace PnP.Core.Model
             var receivingProperty = GetReceivingProperty(parentEntityInfo);
             if (string.IsNullOrEmpty(receivingProperty))
             {
-                throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                throw new ClientException(ErrorType.ModelMetadataIncorrect,
                     PnPCoreResources.Exception_ModelMetadataIncorrect_ModelOutOfSync);
             }
 
@@ -315,7 +315,7 @@ namespace PnP.Core.Model
 
             if (string.IsNullOrEmpty(nextLink))
             {
-                throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                throw new ClientException(ErrorType.ModelMetadataIncorrect,
                     PnPCoreResources.Exception_ModelMetadataIncorrect_MissingLinqGet);
             }
 
@@ -324,10 +324,10 @@ namespace PnP.Core.Model
 
             // Make the server request
             PnPContext.CurrentBatch.Add(
-                this.Parent as TransientObject,
+                Parent as TransientObject,
                 parentEntityInfo,
                 HttpMethod.Get,
-                new ApiCall 
+                new ApiCall
                 {
                     Type = nextLinkApiType,
                     ReceivingProperty = receivingProperty,
@@ -347,9 +347,9 @@ namespace PnP.Core.Model
             if (CanPage)
             {
                 // Get the parent (container) entity info
-                var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(this.Parent.GetType());
+                var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(Parent.GetType());
                 // and cast it to the IDataModelMappingHandler interface
-                var parentEntityWithMappingHandlers = (IDataModelMappingHandler)this.Parent;
+                var parentEntityWithMappingHandlers = (IDataModelMappingHandler)Parent;
 
                 // Determine the receiving property
                 var receivingProperty = GetReceivingProperty(parentEntityInfo);
@@ -363,7 +363,7 @@ namespace PnP.Core.Model
                 (var nextLink, var nextLinkApiType) = Query.BuildNextPageLink(this);
 
                 PnPContext.CurrentBatch.Add(
-                    this.Parent as TransientObject,
+                    Parent as TransientObject,
                     parentEntityInfo,
                     HttpMethod.Get,
                     new ApiCall
@@ -381,7 +381,7 @@ namespace PnP.Core.Model
             }
             else
             {
-                throw new ClientException(ErrorType.CollectionNotLoaded, 
+                throw new ClientException(ErrorType.CollectionNotLoaded,
                     PnPCoreResources.Exception_CollectionNotLoaded);
             }
 
@@ -419,7 +419,7 @@ namespace PnP.Core.Model
 
         private string GetReceivingProperty(EntityInfo parentEntityInfo)
         {
-            var internalCollectionType = this.GetType();
+            var internalCollectionType = GetType();
             var publicCollectionType = Type.GetType($"{internalCollectionType.Namespace}.I{internalCollectionType.Name}");
 
             var propertyInParent = parentEntityInfo.Fields.FirstOrDefault(p => p.DataType == publicCollectionType);
@@ -432,7 +432,7 @@ namespace PnP.Core.Model
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         async Task IMetadataExtensible.SetGraphToRestMetadataAsync()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-        {            
+        {
         }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously

@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model.Teams;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Threading.Tasks;
@@ -122,7 +121,7 @@ namespace PnP.Core.Test.Base
                 // get the primary channel again, but now explicitely request the beta property IsFavoriteByDefault
                 await team.PrimaryChannel.GetAsync(p => p.MembershipType, p => p.DisplayName, p => p.IsFavoriteByDefault);
                 Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
-                
+
                 // Beta property should still be unavailable as we're not allowed to use the beta endpoint
                 Assert.IsFalse(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
                 // v1 props should be loaded
@@ -148,7 +147,7 @@ namespace PnP.Core.Test.Base
 
                 // Get the beta property messages
                 await team.PrimaryChannel.GetAsync(p => p.Messages);
-                
+
                 // messages collection should be available and loaded
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.Messages));
                 Assert.IsTrue(team.PrimaryChannel.Messages.Requested);
@@ -180,7 +179,7 @@ namespace PnP.Core.Test.Base
 
                 // Try to get the beta property messages, this is a collection
                 await team.PrimaryChannel.GetAsync(p => p.Messages);
-                
+
                 // collection should not be available
                 Assert.IsFalse(team.PrimaryChannel.IsPropertyAvailable(p => p.Messages));
 
@@ -190,7 +189,7 @@ namespace PnP.Core.Test.Base
                     // Add message, this shouldn't work if we don't allow beta to be used
                     var addedMessage = await team.PrimaryChannel.Messages.AddAsync("PnP Rocks!");
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     exceptionThrown = true;
                 }
@@ -211,7 +210,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(context.GraphAlwaysUseBeta);
 
                 // Get the team, explicitely request membersettings as membersettings has a beta property that otherwise would not be loaded
-                var team = await context.Team.GetAsync(p=>p.MemberSettings);
+                var team = await context.Team.GetAsync(p => p.MemberSettings);
 
                 // AllowCreatePrivateChannels property should be available
                 Assert.IsTrue(team.MemberSettings.IsPropertyAvailable(p => p.AllowCreatePrivateChannels));

@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Test.Utilities;
-using System.Threading.Tasks;
 using PnP.Core.Model;
+using PnP.Core.Test.Utilities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
 {
@@ -219,7 +219,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(web.Lists.First().IsPropertyAvailable(p => p.TemplateFeatureId));
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.Title));
                 Assert.IsFalse(web.Lists.First().Fields.First().IsPropertyAvailable(p => p.SchemaXml));
-            }        
+            }
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
             {

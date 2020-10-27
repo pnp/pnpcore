@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 
 namespace PnP.Core.Model
 {
     /// <summary>
     /// Class tracks Dictionary changes 
     /// </summary>
-    public class TransientDictionary: Dictionary<string, object>
+    public class TransientDictionary : Dictionary<string, object>
     {
         private readonly HashSet<string> changes = new HashSet<string>();
 
         /// <summary>
         /// Returns a list of changed properties
         /// </summary>
-        internal Dictionary<string, object> ChangedProperties 
+        internal Dictionary<string, object> ChangedProperties
         {
             get
             {
@@ -33,7 +32,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// Default constructor
         /// </summary>
-        public TransientDictionary(): 
+        public TransientDictionary() :
             base(StringComparer.InvariantCultureIgnoreCase)
         {
         }
@@ -42,7 +41,7 @@ namespace PnP.Core.Model
         /// Constructor that initializes based upon an existing Dictionary
         /// </summary>
         /// <param name="input"><see cref="Dictionary{TKey, TValue}"/> holding the key value pairs to add</param>
-        public TransientDictionary(Dictionary<string, object> input): 
+        public TransientDictionary(Dictionary<string, object> input) :
             base(new Dictionary<string, object>(input, StringComparer.OrdinalIgnoreCase))
         {
         }
@@ -60,7 +59,7 @@ namespace PnP.Core.Model
             }
             set
             {
-                if (this.TryGetValue(key, out object oldValue))
+                if (TryGetValue(key, out object oldValue))
                 {
                     if (object.Equals(oldValue, value))
                     {
@@ -91,8 +90,8 @@ namespace PnP.Core.Model
         internal void Merge(TransientDictionary input)
         {
             changes.Clear();
-            this.Clear();
-            foreach(var value in input)
+            Clear();
+            foreach (var value in input)
             {
                 SystemAdd(value.Key, value.Value);
             }
@@ -127,7 +126,7 @@ namespace PnP.Core.Model
         {
             foreach (var v in values)
             {
-                this.SystemAdd(v.Key, v.Value);
+                SystemAdd(v.Key, v.Value);
             }
         }
     }

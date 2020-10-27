@@ -98,11 +98,11 @@ namespace PnP.Core.Model
         /// <summary>
         /// Scope the expand to a set of fields
         /// </summary>
-        public EntityFieldExpandInfo ExpandFieldInfo { get; set; } 
+        public EntityFieldExpandInfo ExpandFieldInfo { get; set; }
 
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
 
     }

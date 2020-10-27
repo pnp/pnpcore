@@ -620,7 +620,7 @@ namespace PnP.Core.Test.Base
                 // Expand for a property that is implemented using it's own graph query which has url parameters defined and which uses a JsonPath
                 // Url for loading installed apps is teams/{Site.GroupId}/installedapps?$expand=TeamsApp
                 await context.Team.GetAsync(p => p.InstalledApps.LoadProperties(p => p.DistributionMethod));
-                foreach(var installedApp in context.Team.InstalledApps)
+                foreach (var installedApp in context.Team.InstalledApps)
                 {
                     Assert.IsTrue(installedApp.IsPropertyAvailable(p => p.DistributionMethod));
                     Assert.IsFalse(installedApp.IsPropertyAvailable(p => p.DisplayName));
@@ -640,7 +640,7 @@ namespace PnP.Core.Test.Base
                 // Special case since the listed url is teams/{Site.GroupId}/channels/{GraphId}/tabs?$expand=teamsApp
                 await context.Team.PrimaryChannel.GetAsync(p => p.Tabs.LoadProperties(p => p.WebUrl));
 
-                foreach(var tab in context.Team.PrimaryChannel.Tabs)
+                foreach (var tab in context.Team.PrimaryChannel.Tabs)
                 {
                     Assert.IsTrue(tab.IsPropertyAvailable(p => p.WebUrl));
                     Assert.IsFalse(tab.IsPropertyAvailable(p => p.DisplayName));
@@ -659,7 +659,7 @@ namespace PnP.Core.Test.Base
                 {
                     await context.Team.GetAsync(p => p.Channels.LoadProperties(p => p.Messages.LoadProperties(p => p.Body)));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     if (ex is ClientException && (ex as ClientException).Error.Type == ErrorType.Unsupported)
                     {

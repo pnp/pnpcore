@@ -49,14 +49,14 @@ namespace PnP.Core
             errorString.AppendLine($"Message: {Message}");
             errorString.AppendLine($"ClientRequestId: {ClientRequestId}");
 
-            if(AdditionalData != null)
+            if (AdditionalData != null)
             {
                 foreach (var property in AdditionalData)
                 {
                     errorString.AppendLine($"{property.Key}: {property.Value}");
                 }
             }
-            
+
             return errorString.ToString();
         }
 
@@ -86,7 +86,7 @@ namespace PnP.Core
                 }
                 else if (errorField.Name == "message")
                 {
-                    Message = errorField.Value.GetProperty("value").ToString();                   
+                    Message = errorField.Value.GetProperty("value").ToString();
                 }
             }
         }

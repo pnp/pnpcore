@@ -16,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
     [GraphType(Get = "sites/{Parent.GraphId}/lists/{GraphId}", LinqGet = "sites/{Parent.GraphId}/lists")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class List: BaseDataModel<IList>, IList
+    internal partial class List : BaseDataModel<IList>, IList
     {
         // List of fields that loaded when the Lists collection is requested. This approach is needed as 
         // Graph requires the "system" field to be loaded as trigger to return all lists 
@@ -182,7 +182,7 @@ namespace PnP.Core.Model.SharePoint
         public IViewCollection Views { get => GetModelCollectionValue<IViewCollection>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
 
         #region Methods
@@ -192,7 +192,7 @@ namespace PnP.Core.Model.SharePoint
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             // Logic to set the EntityType metadata property
-            if (this.HasValue(nameof(NameToConstructEntityType)) && this.IsPropertyAvailable(p => p.TemplateType) && !Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
+            if (HasValue(nameof(NameToConstructEntityType)) && IsPropertyAvailable(p => p.TemplateType) && !Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName))
             {
                 if (!string.IsNullOrEmpty(NameToConstructEntityType))
                 {
@@ -386,7 +386,7 @@ namespace PnP.Core.Model.SharePoint
             int requestToUse = 0;
             var batch = PnPContext.BatchClient.EnsureBatch();
 
-            if (!this.ArePropertiesAvailable(GetListDataAsStreamExpression))
+            if (!ArePropertiesAvailable(GetListDataAsStreamExpression))
             {
                 // Get field information via batch
                 await GetBatchAsync(batch, GetListDataAsStreamExpression).ConfigureAwait(false);

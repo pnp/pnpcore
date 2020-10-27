@@ -263,7 +263,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Property that indicates whether users will be able to share links to documents that can be accessed without logging in.
         /// </summary>
-        public bool ShareByLinkEnabled { get;  }
+        public bool ShareByLinkEnabled { get; }
 
         /// <summary>
         /// Gets or sets a value that specifies whether guest users should be displayed as suggestions in people picker on this site collection.
@@ -289,7 +289,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets a value that indicates whether thicket support is disabled on this site collection.
         /// </summary>
-        public bool ThicketSupportDisabled { get;  }
+        public bool ThicketSupportDisabled { get; }
 
         /// <summary>
         /// Gets or sets a value that specifies whether audit log is trimmed.

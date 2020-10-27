@@ -9,7 +9,7 @@ namespace PnP.Core.Services
     internal struct ApiCallResponse
     {
         internal ApiCallResponse(ApiCall apiCall, string json, HttpStatusCode statusCode,
-            Guid batchRequestId, Dictionary<string, string> headers, 
+            Guid batchRequestId, Dictionary<string, string> headers,
             Dictionary<int, JsonElement> csomResponseJson = null, Stream binaryContent = null)
         {
             ApiCall = apiCall;

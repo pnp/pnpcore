@@ -70,7 +70,7 @@ namespace PnP.Core.Auth.Test.Base
         public void SecurityExtSecureEmptyStringTest()
         {
             var sampleText = "";
-            Assert.ThrowsException<ArgumentException>(() => sampleText.ToSecureString());          
+            Assert.ThrowsException<ArgumentException>(() => sampleText.ToSecureString());
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace PnP.Core.Auth.Test.Base
         {
             // Disable test in GitHub, Reason availability of certificate in Linux environments
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
-            
+
             var result = "decryptthisstring".Decrypt("3e69491285a9a26efea5c3aeddc75b0148040000"); //Fake
             Assert.IsTrue(string.IsNullOrEmpty(result));
         }
@@ -112,9 +112,9 @@ namespace PnP.Core.Auth.Test.Base
         {
             // Disable test in GitHub, Reason availability of certificate in Linux environments
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
-            
+
             Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.GetPublicKey(null));
-            
+
         }
 
         [TestMethod]
@@ -124,8 +124,8 @@ namespace PnP.Core.Auth.Test.Base
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             var certificate = X509CertificateUtility.LoadCertificate(StoreName.My, StoreLocation.CurrentUser, TestCommon.GetX509CertificateThumbprint());
-                Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Decrypt(null, true, certificate));
-            
+            Assert.ThrowsException<ArgumentNullException>(() => X509CertificateUtility.Decrypt(null, true, certificate));
+
         }
 
         [TestMethod]

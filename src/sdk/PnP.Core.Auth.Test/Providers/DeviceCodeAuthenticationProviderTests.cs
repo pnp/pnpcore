@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Test.Utilities;
-using PnP.Core.Model;
-using PnP.Core.Services;
 using System;
 using System.Configuration;
 using System.Net.Http;
@@ -16,7 +14,7 @@ namespace PnP.Core.Auth.Test.Providers
     [TestClass]
     public class DeviceCodeAuthenticationProviderTests
     {
-        private static string deviceCodeConfigurationPath = "deviceCode";
+        private static readonly string deviceCodeConfigurationPath = "deviceCode";
 
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)

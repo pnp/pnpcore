@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Dynamic;
 using System.Text.Json;
-using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams
 {
@@ -29,11 +29,11 @@ namespace PnP.Core.Model.Teams
                 {
                     case "com.microsoft.teamspace.tab.wiki": // Wiki, no configuration possible
                         break;
-                    default: 
+                    default:
                         {
                             tab.Configuration = new ExpandoObject();
 
-                            if (Configuration.IsPropertyAvailable(p=>p.EntityId))
+                            if (Configuration.IsPropertyAvailable(p => p.EntityId))
                             {
                                 tab.Configuration.EntityId = Configuration.EntityId;
                             }

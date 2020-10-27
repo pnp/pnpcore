@@ -36,7 +36,7 @@ namespace PnP.Core.Auth.Services.Builder.Configuration
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (authenticationOptions != null 
+            if (authenticationOptions != null
                 && authenticationOptions.Credentials != null
                 && authenticationOptions.Credentials.Configurations.Count > 0)
             {

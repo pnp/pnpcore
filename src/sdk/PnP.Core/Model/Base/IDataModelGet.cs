@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using PnP.Core.Services;
 
 namespace PnP.Core.Model
 {
@@ -78,7 +78,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Defines the read interface for Domain Model objects that can be read.
     /// </summary>
-    public interface IDataModelGet<TModel> 
+    public interface IDataModelGet<TModel>
     {
         /// <summary>
         /// Batches the retrieval of a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties

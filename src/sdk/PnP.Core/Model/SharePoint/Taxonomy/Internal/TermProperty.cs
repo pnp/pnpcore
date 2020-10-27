@@ -10,7 +10,7 @@
         public string Value { get => GetValue<string>(); set => SetValue(value); }
 
         [KeyProperty(nameof(KeyField))]
-        public override object Key { get => this.KeyField; set => this.KeyField = value.ToString(); }
+        public override object Key { get => KeyField; set => KeyField = value.ToString(); }
         #endregion
     }
 }

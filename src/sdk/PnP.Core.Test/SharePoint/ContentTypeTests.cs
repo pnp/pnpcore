@@ -66,13 +66,13 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(contentType.Name, "Item");
                 Assert.AreEqual(contentType.NewFormTemplateName, "ListForm");
                 Assert.AreEqual(contentType.NewFormUrl, "");
-                Assert.AreEqual(contentType.ReadOnly,false);
+                Assert.AreEqual(contentType.ReadOnly, false);
                 Assert.IsTrue(!string.IsNullOrEmpty(contentType.SchemaXml));
                 // Testing on site names is not possible as this will fail when the tests are running live again 
                 //Assert.AreEqual(contentType.Scope, "/sites/pnpcoresdktestgroup");
                 Assert.AreEqual(contentType.Sealed, false);
                 Assert.AreEqual(contentType.StringId, "0x01");
-                
+
                 // Test a boolean property
                 Assert.IsFalse(contentType.Hidden);
             }
@@ -266,7 +266,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync(newBatch);
 
                 // Add existing content type (contact)
-                var addedContentType = await myList.ContentTypes.AddAvailableContentTypeBatchAsync(newBatch,"0x0106");
+                var addedContentType = await myList.ContentTypes.AddAvailableContentTypeBatchAsync(newBatch, "0x0106");
 
                 // send batch to server
                 await context.ExecuteAsync(newBatch);
@@ -308,7 +308,7 @@ namespace PnP.Core.Test.SharePoint
                 await context.ExecuteAsync();
 
                 // Add existing content type (contact)
-                var addedContentType = myList.ContentTypes.AddAvailableContentTypeBatch( "0x0106");
+                var addedContentType = myList.ContentTypes.AddAvailableContentTypeBatch("0x0106");
 
                 // send batch to server
                 await context.ExecuteAsync();
@@ -516,7 +516,7 @@ namespace PnP.Core.Test.SharePoint
                     // Add new content type as list content type
                     IContentType newContentType = await myList.ContentTypes.AddAsync("0x0100302EF0D1F1DB4C4EBF58251BCCF5968F", "TEST ADD", "TESTING", "TESTING");
                 }
-                catch(ClientException)
+                catch (ClientException)
                 {
                     clientExceptionThrown = true;
                 }

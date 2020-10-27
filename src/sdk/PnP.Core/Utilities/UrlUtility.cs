@@ -189,7 +189,7 @@ namespace PnP.Core
                 string value = parameters[mainKey];
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                   newValues = value.Split(new char[] { ',' });
+                    newValues = value.Split(new char[] { ',' });
                 }
 
                 string[] combinedValues;

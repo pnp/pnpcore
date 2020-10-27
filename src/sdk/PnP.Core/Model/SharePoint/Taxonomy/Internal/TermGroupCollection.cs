@@ -11,8 +11,8 @@ namespace PnP.Core.Model.SharePoint
         public TermGroupCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
         {
-            this.PnPContext = context;
-            this.Parent = parent;
+            PnPContext = context;
+            Parent = parent;
         }
 
         #region Add methods
@@ -28,7 +28,7 @@ namespace PnP.Core.Model.SharePoint
 
             // Assign field values
             newGroup.Name = name;
-            
+
             if (scope != TermGroupScope.Global)
             {
                 newGroup.Scope = scope;

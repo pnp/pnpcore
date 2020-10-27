@@ -1,16 +1,15 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PnP.Core.Test.Services;
+using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services;
+using PnP.Core.Services.Builder.Configuration;
+using PnP.Core.Test.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using PnP.Core.Auth;
-using PnP.Core.Auth.Services.Builder.Configuration;
-using PnP.Core.Services.Builder.Configuration;
 
 namespace PnP.Core.Test.Utilities
 {
@@ -192,7 +191,7 @@ namespace PnP.Core.Test.Utilities
 
             // The settings file is stored in the root of the test project, no need to configure the file to be copied over the bin folder
             var jsonSettingsFile = Path.GetFullPath($"..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}appsettings.{environmentName}.json");
-            
+
             var configuration = new ConfigurationBuilder()
             .AddJsonFile(jsonSettingsFile, optional: true, reloadOnChange: true)
             .AddEnvironmentVariables()

@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model.SharePoint;
-using PnP.Core.Test.Utilities;
-using PnP.Core.QueryModel;
 using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
+using PnP.Core.Test.Utilities;
 using System;
 using System.IO;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -64,7 +64,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
             {
                 // Load the recycle bin
-                await context.Web.GetAsync(w => w.RecycleBin.LoadProperties(p => p.Author, p =>p.Id, p=>p.Title));
+                await context.Web.GetAsync(w => w.RecycleBin.LoadProperties(p => p.Author, p => p.Id, p => p.Title));
 
                 // Still convinced the FirstOrDefaultAsync should load the RecycleBin without the need to load it previously...
                 IRecycleBinItem recycleBinItem = context.Web.RecycleBin.FirstOrDefault(item => item.Id == recycleBinItemId);

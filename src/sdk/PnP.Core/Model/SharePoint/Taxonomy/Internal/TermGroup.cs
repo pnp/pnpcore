@@ -23,11 +23,11 @@ namespace PnP.Core.Model.SharePoint
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();
                 body.displayName = Name;
-                if (this.IsPropertyAvailable(p => p.Description))
+                if (IsPropertyAvailable(p => p.Description))
                 {
                     body.description = Description;
                 }
-                if (this.IsPropertyAvailable(p => p.Scope))
+                if (IsPropertyAvailable(p => p.Scope))
                 {
                     body.scope = Scope;
                 }
@@ -35,7 +35,7 @@ namespace PnP.Core.Model.SharePoint
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
 
-                var apiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);                
+                var apiCall = await ApiHelper.ParseApiRequestAsync(this, baseUri).ConfigureAwait(false);
 
                 return new ApiCall(apiCall, ApiType.GraphBeta, bodyContent);
             };
@@ -58,7 +58,7 @@ namespace PnP.Core.Model.SharePoint
         public ITermSetCollection Sets { get => GetModelCollectionValue<ITermSetCollection>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = value.ToString(); }
+        public override object Key { get => Id; set => Id = value.ToString(); }
         #endregion
     }
 }

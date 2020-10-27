@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
@@ -905,7 +904,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddDateTimeBatchAsync(newBatch,"ADDED FIELD", new FieldDateTimeOptions()
+                IField addedField = await documents.Fields.AddDateTimeBatchAsync(newBatch, "ADDED FIELD", new FieldDateTimeOptions()
                 {
                     Group = "TEST GROUP",
                     DateTimeCalendarType = CalendarType.GregorianXLITFrench,
@@ -1123,7 +1122,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddMultiChoiceBatch(newBatch,"ADDED FIELD", new FieldMultiChoiceOptions()
+                IField addedField = documents.Fields.AddMultiChoiceBatch(newBatch, "ADDED FIELD", new FieldMultiChoiceOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -1214,7 +1213,7 @@ namespace PnP.Core.Test.SharePoint
                 await addedField.DeleteAsync();
             }
         }
-        
+
         [TestMethod]
         public async Task AddListFieldChoiceBatchAsyncTest()
         {
@@ -1289,7 +1288,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddChoiceBatchAsync(newBatch,"ADDED FIELD", new FieldChoiceOptions()
+                IField addedField = await documents.Fields.AddChoiceBatchAsync(newBatch, "ADDED FIELD", new FieldChoiceOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -1323,7 +1322,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddChoiceBatch(newBatch,"ADDED FIELD", new FieldChoiceOptions()
+                IField addedField = documents.Fields.AddChoiceBatch(newBatch, "ADDED FIELD", new FieldChoiceOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -1522,7 +1521,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddNumberBatch(newBatch,"ADDED FIELD", new FieldNumberOptions()
+                IField addedField = documents.Fields.AddNumberBatch(newBatch, "ADDED FIELD", new FieldNumberOptions()
                 {
                     Group = "TEST GROUP",
                     MaximumValue = 100,
@@ -1717,7 +1716,7 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     DisplayFormat = UrlFieldFormatType.Image
                 });
-                
+
                 // Test the created object
                 Assert.IsNotNull(addedField);
                 Assert.AreEqual("ADDED FIELD", addedField.Title);
@@ -1741,7 +1740,7 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     DisplayFormat = UrlFieldFormatType.Image
                 });
-                
+
                 // Test the created object
                 Assert.IsNotNull(addedField);
                 Assert.AreEqual("ADDED FIELD", addedField.Title);
@@ -1840,7 +1839,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddUrlBatch(newBatch,"ADDED FIELD", new FieldUrlOptions()
+                IField addedField = documents.Fields.AddUrlBatch(newBatch, "ADDED FIELD", new FieldUrlOptions()
                 {
                     Group = "TEST GROUP",
                     DisplayFormat = UrlFieldFormatType.Image
@@ -2229,7 +2228,7 @@ namespace PnP.Core.Test.SharePoint
                 IWeb currentWeb = await context.Web.GetAsync(w => w.Id, w => w.Lists);
                 IList sitePages = context.Web.Lists.FirstOrDefault(p => p.Title == "Site Pages");
                 IList documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddLookupBatchAsync(newBatch,"ADDED FIELD", new FieldLookupOptions()
+                IField addedField = await documents.Fields.AddLookupBatchAsync(newBatch, "ADDED FIELD", new FieldLookupOptions()
                 {
                     Required = true,
                     LookupFieldName = "Title",
@@ -2421,7 +2420,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddUserBatchAsync(newBatch,"ADDED FIELD", new FieldUserOptions()
+                IField addedField = await documents.Fields.AddUserBatchAsync(newBatch, "ADDED FIELD", new FieldUserOptions()
                 {
                     Group = "TEST GROUP",
                     Required = true,
@@ -2453,7 +2452,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddUserBatch(newBatch,"ADDED FIELD", new FieldUserOptions()
+                IField addedField = documents.Fields.AddUserBatch(newBatch, "ADDED FIELD", new FieldUserOptions()
                 {
                     Group = "TEST GROUP",
                     Required = true,

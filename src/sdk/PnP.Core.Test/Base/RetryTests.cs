@@ -387,7 +387,7 @@ namespace PnP.Core.Test.Base
                 {
                     var team = await context.Team.GetAsync(p => p.DisplayName, p => p.Channels);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     if (ex is ServiceException)
                     {

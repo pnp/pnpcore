@@ -176,7 +176,7 @@ namespace PnP.Core.Services
                                     if (keyField != null)
                                     {
                                         // There was a key, so that property should exist
-                                        string key = (keyField as EntityFieldInfo).Name;
+                                        string key = keyField.Name;
                                         pnpChildIdProperty = pnpChild.GetType().GetProperty(key);
                                     }
                                 }
@@ -488,7 +488,7 @@ namespace PnP.Core.Services
                                     if (keyField != null)
                                     {
                                         // There was a key, so that property should exist
-                                        string key = (keyField as EntityFieldInfo).Name;
+                                        string key = keyField.Name;
                                         pnpChildIdProperty = pnpChild.GetType().GetProperty(key);
                                     }
                                 }
@@ -756,7 +756,7 @@ namespace PnP.Core.Services
                                 throw new IndexOutOfRangeException(PnPCoreResources.Exception_Json_EmptyArray);
                             }
 
-                            if (index > arrayLength-1)
+                            if (index > arrayLength - 1)
                             {
                                 throw new IndexOutOfRangeException(PnPCoreResources.Exception_Json_ArrayOutOfBoundaries);
                             }
@@ -810,7 +810,7 @@ namespace PnP.Core.Services
             {
                 dictionary.SystemAdd(key, value);
             }
-        }        
+        }
 
         internal static object ParseStringValueToTyped(string input, Type propertyType)
         {
@@ -887,7 +887,7 @@ namespace PnP.Core.Services
                 else if (jsonElement.ValueKind == JsonValueKind.String && !string.IsNullOrEmpty(jsonElement.GetString()))
                 {
                     return Enum.Parse(propertyType, jsonElement.GetString(), true);
-                }  
+                }
                 else
                 {
                     // Return the default value
@@ -1209,7 +1209,7 @@ namespace PnP.Core.Services
                 return field.GraphName;
             }
 
-            throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+            throw new ClientException(ErrorType.ModelMetadataIncorrect,
                 PnPCoreResources.Exception_ModelMetadataIncorrect_MissingGraphName);
         }
 

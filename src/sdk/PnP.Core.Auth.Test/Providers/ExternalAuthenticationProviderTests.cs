@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Test.Utilities;
-using PnP.Core.Model;
 using PnP.Core.Services;
 using System;
 using System.Configuration;
@@ -16,10 +15,11 @@ namespace PnP.Core.Auth.Test.Providers
     [TestClass]
     public class ExternalAuthenticationProviderTests
     {
-        private static string externalRealProviderConfigurationPath = "externalRealProvider";
+        private static readonly string externalRealProviderConfigurationPath = "externalRealProvider";
 
-        private static Lazy<CredentialManagerAuthenticationProvider> realProvider =
-            new Lazy<CredentialManagerAuthenticationProvider>(() => {
+        private static readonly Lazy<CredentialManagerAuthenticationProvider> realProvider =
+            new Lazy<CredentialManagerAuthenticationProvider>(() =>
+            {
                 var configuration = TestCommon.GetConfigurationSettings();
                 var clientId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{externalRealProviderConfigurationPath}:ClientId");
                 var tenantId = configuration.GetValue<string>($"{TestGlobals.CredentialsConfigurationBasePath}:{externalRealProviderConfigurationPath}:TenantId");

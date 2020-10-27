@@ -259,7 +259,7 @@ namespace PnP.Core.Model.SharePoint
         public IBasePermissions EffectiveBasePermissions { get => GetModelValue<IBasePermissions>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
 
         #region Extension methods
@@ -270,7 +270,7 @@ namespace PnP.Core.Model.SharePoint
             // Instantiate a folder, link it the Web as parent and provide it a context. This folder will not be included in the current model
             Folder folder = new Folder()
             {
-                PnPContext = this.PnPContext,
+                PnPContext = PnPContext,
                 Parent = this
             };
 
@@ -291,7 +291,7 @@ namespace PnP.Core.Model.SharePoint
             // Instantiate a folder, link it the Web as parent and provide it a context. This folder will not be included in the current model
             Folder folder = new Folder()
             {
-                PnPContext = this.PnPContext,
+                PnPContext = PnPContext,
                 Parent = this
             };
 
@@ -336,7 +336,7 @@ namespace PnP.Core.Model.SharePoint
             // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
             File file = new File()
             {
-                PnPContext = this.PnPContext,
+                PnPContext = PnPContext,
                 Parent = this
             };
 
@@ -359,7 +359,7 @@ namespace PnP.Core.Model.SharePoint
             // Instantiate a file, link it the Web as parent and provide it a context. This folder will not be included in the current model
             File file = new File()
             {
-                PnPContext = this.PnPContext,
+                PnPContext = PnPContext,
                 Parent = this
             };
 
@@ -384,7 +384,7 @@ namespace PnP.Core.Model.SharePoint
         #region IsNoScriptSite 
         public async Task<bool> IsNoScriptSiteAsync()
         {
-            await this.EnsurePropertiesAsync(w => w.EffectiveBasePermissions).ConfigureAwait(false);
+            await EnsurePropertiesAsync(w => w.EffectiveBasePermissions).ConfigureAwait(false);
 
             // Definition of no-script is not having the AddAndCustomizePages permission
             if (!EffectiveBasePermissions.Has(PermissionKind.AddAndCustomizePages))

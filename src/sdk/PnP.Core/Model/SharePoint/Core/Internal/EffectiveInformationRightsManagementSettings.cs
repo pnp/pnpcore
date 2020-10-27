@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// EffectiveInformationRightsManagementSettings class, write your custom code here
     /// </summary>
     [SharePointType("SP.EffectiveInformationRightsManagementSettings", Target = typeof(IFile))]
-    internal partial class EffectiveInformationRightsManagementSettings: BaseDataModel<IEffectiveInformationRightsManagementSettings>, IEffectiveInformationRightsManagementSettings
+    internal partial class EffectiveInformationRightsManagementSettings : BaseDataModel<IEffectiveInformationRightsManagementSettings>, IEffectiveInformationRightsManagementSettings
     {
         #region Construction
         public EffectiveInformationRightsManagementSettings()
@@ -50,7 +50,7 @@ namespace PnP.Core.Model.SharePoint
         public string TemplateId { get => GetValue<string>(); set => SetValue(value); }
 
         [KeyProperty(nameof(PolicyTitle))]
-        public override object Key { get => this.PolicyTitle; set => this.PolicyTitle = value.ToString(); }
+        public override object Key { get => PolicyTitle; set => PolicyTitle = value.ToString(); }
         #endregion
 
     }

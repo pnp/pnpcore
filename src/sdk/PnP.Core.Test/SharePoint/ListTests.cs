@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model.SharePoint;
 using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace PnP.Core.Test.SharePoint
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
         }
-        
+
         [TestMethod]
         public async Task GetListDataByRenderListDataAsStream()
         {
@@ -83,7 +83,7 @@ namespace PnP.Core.Test.SharePoint
                 await myList.DeleteAsync();
             }
         }
-        
+
 
         [TestMethod]
         public async Task ListLinqGetMethods()
@@ -121,7 +121,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     context3.GraphFirst = false;
 
-                    var list3 = context3.Web.Lists.GetById(listGuid, p=>p.TemplateType, p=>p.Title);
+                    var list3 = context3.Web.Lists.GetById(listGuid, p => p.TemplateType, p => p.Title);
                     if (list3 != null)
                     {
                         Assert.IsTrue(list3.Title == listTitle);
@@ -144,7 +144,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
-            } 
+            }
         }
 
         [TestMethod]
@@ -229,7 +229,8 @@ namespace PnP.Core.Test.SharePoint
                         //    await list.GetByIdAsync(listGuid);
                         //});
 
-                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                        await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                        {
                             await context2.Web.Lists.GetByIdAsync(Guid.Empty, p => p.TemplateType, p => p.Title);
                         });
 
@@ -239,7 +240,8 @@ namespace PnP.Core.Test.SharePoint
                         //    list.GetById(listGuid);
                         //});
 
-                        Assert.ThrowsException<ArgumentNullException>(() => {
+                        Assert.ThrowsException<ArgumentNullException>(() =>
+                        {
                             context2.Web.Lists.GetById(Guid.Empty, p => p.TemplateType, p => p.Title);
                         });
 
@@ -249,7 +251,8 @@ namespace PnP.Core.Test.SharePoint
                         //    list.GetByTitle(listTitle);
                         //});
 
-                        Assert.ThrowsException<ArgumentNullException>(() => {
+                        Assert.ThrowsException<ArgumentNullException>(() =>
+                        {
                             context2.Web.Lists.GetByTitle(null);
                         });
 
@@ -267,7 +270,7 @@ namespace PnP.Core.Test.SharePoint
 
                     }
                 }
-                 
+
                 // Cleanup the created list
                 await myList.DeleteAsync();
             }
@@ -324,7 +327,7 @@ namespace PnP.Core.Test.SharePoint
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                             DatesInUtc = true
-                        }) ;
+                        });
                         Assert.IsTrue(list3.Items.Count() == 10);
                     }
                 }
@@ -445,7 +448,7 @@ namespace PnP.Core.Test.SharePoint
                         {
                             ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>",
                         });
-                        context5.ExecuteAsync(newBatch).GetAwaiter().GetResult(); 
+                        context5.ExecuteAsync(newBatch).GetAwaiter().GetResult();
 
                         Assert.IsTrue(list5.Items.Count() == 10);
                     }
@@ -716,9 +719,9 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, 
-                    p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name, 
-                        p=>p.FieldLinks.LoadProperties(p=>p.Id, p=>p.Name)));
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience,
+                    p => p.ContentTypes.LoadProperties(p => p.Id, p => p.Name,
+                        p => p.FieldLinks.LoadProperties(p => p.Id, p => p.Name)));
 
                 Assert.IsTrue(list.Requested);
                 Assert.AreEqual(list.Title, "documents", true);

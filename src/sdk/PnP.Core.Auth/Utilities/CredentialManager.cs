@@ -135,17 +135,19 @@ namespace PnP.Core.Auth
                         throw new ArgumentOutOfRangeException("password", "The password has exceeded 2560 bytes.");
                 }
 
-                NativeCredential credential = new NativeCredential();
-                credential.AttributeCount = 0;
-                credential.Attributes = IntPtr.Zero;
-                credential.Comment = IntPtr.Zero;
-                credential.TargetAlias = IntPtr.Zero;
-                credential.Type = CRED_TYPE.GENERIC;
-                credential.Persist = (uint)3;
-                credential.CredentialBlobSize = (uint)(byteArray == null ? 0 : byteArray.Length);
-                credential.TargetName = Marshal.StringToCoTaskMemUni(applicationName);
-                credential.CredentialBlob = Marshal.StringToCoTaskMemUni(password);
-                credential.UserName = Marshal.StringToCoTaskMemUni(userName ?? Environment.UserName);
+                NativeCredential credential = new NativeCredential
+                {
+                    AttributeCount = 0,
+                    Attributes = IntPtr.Zero,
+                    Comment = IntPtr.Zero,
+                    TargetAlias = IntPtr.Zero,
+                    Type = CRED_TYPE.GENERIC,
+                    Persist = 3,
+                    CredentialBlobSize = (uint)(byteArray == null ? 0 : byteArray.Length),
+                    TargetName = Marshal.StringToCoTaskMemUni(applicationName),
+                    CredentialBlob = Marshal.StringToCoTaskMemUni(password),
+                    UserName = Marshal.StringToCoTaskMemUni(userName ?? Environment.UserName)
+                };
 
                 bool written = CredWrite(ref credential, 0);
                 Marshal.FreeCoTaskMem(credential.TargetName);
@@ -218,17 +220,19 @@ namespace PnP.Core.Auth
 
             internal static NativeCredential GetNativeCredential(Credential cred)
             {
-                NativeCredential ncred = new NativeCredential();
-                ncred.AttributeCount = 0;
-                ncred.Attributes = IntPtr.Zero;
-                ncred.Comment = IntPtr.Zero;
-                ncred.TargetAlias = IntPtr.Zero;
-                ncred.Type = CRED_TYPE.GENERIC;
-                ncred.Persist = (UInt32)1;
-                ncred.CredentialBlobSize = (UInt32)cred.CredentialBlobSize;
-                ncred.TargetName = Marshal.StringToCoTaskMemUni(cred.TargetName);
-                ncred.CredentialBlob = Marshal.StringToCoTaskMemUni(cred.CredentialBlob);
-                ncred.UserName = Marshal.StringToCoTaskMemUni(Environment.UserName);
+                NativeCredential ncred = new NativeCredential
+                {
+                    AttributeCount = 0,
+                    Attributes = IntPtr.Zero,
+                    Comment = IntPtr.Zero,
+                    TargetAlias = IntPtr.Zero,
+                    Type = CRED_TYPE.GENERIC,
+                    Persist = 1,
+                    CredentialBlobSize = cred.CredentialBlobSize,
+                    TargetName = Marshal.StringToCoTaskMemUni(cred.TargetName),
+                    CredentialBlob = Marshal.StringToCoTaskMemUni(cred.CredentialBlob),
+                    UserName = Marshal.StringToCoTaskMemUni(Environment.UserName)
+                };
                 return ncred;
             }
         }
@@ -284,16 +288,18 @@ namespace PnP.Core.Auth
                 {
                     NativeCredential ncred = (NativeCredential)Marshal.PtrToStructure(handle,
                           typeof(NativeCredential));
-                    Credential cred = new Credential();
-                    cred.CredentialBlobSize = ncred.CredentialBlobSize;
-                    cred.CredentialBlob = Marshal.PtrToStringUni(ncred.CredentialBlob,
-                          (int)ncred.CredentialBlobSize / 2);
-                    cred.UserName = Marshal.PtrToStringUni(ncred.UserName);
-                    cred.TargetName = Marshal.PtrToStringUni(ncred.TargetName);
-                    cred.TargetAlias = Marshal.PtrToStringUni(ncred.TargetAlias);
-                    cred.Type = ncred.Type;
-                    cred.Flags = ncred.Flags;
-                    cred.Persist = ncred.Persist;
+                    Credential cred = new Credential
+                    {
+                        CredentialBlobSize = ncred.CredentialBlobSize,
+                        CredentialBlob = Marshal.PtrToStringUni(ncred.CredentialBlob,
+                          (int)ncred.CredentialBlobSize / 2),
+                        UserName = Marshal.PtrToStringUni(ncred.UserName),
+                        TargetName = Marshal.PtrToStringUni(ncred.TargetName),
+                        TargetAlias = Marshal.PtrToStringUni(ncred.TargetAlias),
+                        Type = ncred.Type,
+                        Flags = ncred.Flags,
+                        Persist = ncred.Persist
+                    };
                     return cred;
                 }
                 else

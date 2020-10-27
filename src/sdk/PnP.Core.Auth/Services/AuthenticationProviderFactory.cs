@@ -40,7 +40,7 @@ namespace PnP.Core.Auth.Services
             }
 
             // Store logger and options locally
-            this.log = logger;
+            log = logger;
             this.serviceProvider = serviceProvider;
             this.options = options.CurrentValue;
         }
@@ -51,13 +51,13 @@ namespace PnP.Core.Auth.Services
         /// <returns>An object that implements IAuthenticationProvider based on the configuration</returns>
         public IAuthenticationProvider CreateDefault()
         {
-            if (string.IsNullOrEmpty(this.options.Credentials.DefaultConfiguration))
+            if (string.IsNullOrEmpty(options.Credentials.DefaultConfiguration))
             {
                 throw new ConfigurationErrorsException(PnPCoreAuthResources.Exception_MissingDefaultAuthenticationProvider);
             }
 
             // Return the Authentication Provider based on the default configuration
-            return Create(this.options.Credentials.DefaultConfiguration);
+            return Create(options.Credentials.DefaultConfiguration);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace PnP.Core.Auth.Services
             PnPCoreAuthenticationCredentialConfigurationOptions options;
             if (!this.options.Credentials.Configurations.TryGetValue(name, out options))
             {
-                throw new ClientException(ErrorType.ConfigurationError, 
+                throw new ClientException(ErrorType.ConfigurationError,
                     string.Format(System.Globalization.CultureInfo.InvariantCulture,
                         PnPCoreAuthResources.InvalidConfigurationName, name));
             }
@@ -79,7 +79,7 @@ namespace PnP.Core.Auth.Services
             Type providerType = ResolveAuthenticationProviderType(options);
 
             // Use the configuration to create a new instance of IAuthenticationProvider
-            var provider = this.serviceProvider.GetService(providerType) as OAuthAuthenticationProvider;
+            var provider = serviceProvider.GetService(providerType) as OAuthAuthenticationProvider;
 
             // Initialize the Authentication Provider instance accordingly to the current configuration
             if (provider != null)

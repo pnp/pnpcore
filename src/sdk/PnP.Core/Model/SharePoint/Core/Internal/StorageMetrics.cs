@@ -26,7 +26,7 @@ namespace PnP.Core.Model.SharePoint
         public long TotalSize { get => GetValue<long>(); set => SetValue(value); }
 
         [KeyProperty(nameof(LastModified))]
-        public override object Key { get => this.LastModified; set => this.LastModified = DateTime.Parse(value.ToString()); }
+        public override object Key { get => LastModified; set => LastModified = DateTime.Parse(value.ToString()); }
         #endregion
     }
 }

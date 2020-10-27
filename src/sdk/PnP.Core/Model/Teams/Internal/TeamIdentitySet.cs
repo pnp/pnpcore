@@ -8,7 +8,7 @@ namespace PnP.Core.Model.Teams
         #region Properties
         public IIdentity Application { get => GetModelValue<IIdentity>(); }
 
-        public IIdentity Conversation { get => GetModelValue<IIdentity>(); }        
+        public IIdentity Conversation { get => GetModelValue<IIdentity>(); }
 
         public IIdentity ConversationIdentityType { get => GetModelValue<IIdentity>(); }
 

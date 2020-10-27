@@ -18,7 +18,7 @@ namespace PnP.Core.Model.SharePoint
         public ITermGroupCollection Groups { get => GetModelCollectionValue<ITermGroupCollection>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = value.ToString(); }
+        public override object Key { get => Id; set => Id = value.ToString(); }
         #endregion
     }
 }

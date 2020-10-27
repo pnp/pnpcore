@@ -32,7 +32,7 @@ namespace PnP.Core.QueryModel
         public Expression Expression { get; protected set; }
 
         // This is the LINQ Query Provider object instance
-        public IQueryProvider Provider => this.provider;
+        public IQueryProvider Provider => provider;
 
         #endregion
 
@@ -41,13 +41,13 @@ namespace PnP.Core.QueryModel
         // Provides the IEnumerable<T> implementation
         public override IEnumerator<TModel> GetEnumerator()
         {
-            if (this.provider != null && this.Expression != null && !this.Requested)
+            if (provider != null && Expression != null && !Requested)
             {
-                return ((IEnumerable<TModel>)this.provider.Execute(this.Expression)).GetEnumerator();
+                return ((IEnumerable<TModel>)provider.Execute(Expression)).GetEnumerator();
             }
             else
             {
-                return this.items.GetEnumerator();
+                return items.GetEnumerator();
             }
         }
 
@@ -58,13 +58,13 @@ namespace PnP.Core.QueryModel
         // Provides the IEnumerable implementation
         IEnumerator IEnumerable.GetEnumerator()
         {
-            if (this.provider != null & this.Expression != null && !this.Requested)
+            if (provider != null & Expression != null && !Requested)
             {
-                return ((IEnumerable)this.provider.Execute(this.Expression)).GetEnumerator();
+                return ((IEnumerable)provider.Execute(Expression)).GetEnumerator();
             }
             else
             {
-                return ((IEnumerable)this.items).GetEnumerator();
+                return ((IEnumerable)items).GetEnumerator();
             }
         }
 
@@ -74,9 +74,9 @@ namespace PnP.Core.QueryModel
 
         public IAsyncEnumerator<TModel> GetAsyncEnumerator(CancellationToken cancellationToken = default)
         {
-            if (this.provider != null & this.Expression != null && !this.Requested)
+            if (provider != null & Expression != null && !Requested)
             {
-                return this.provider.ExecuteAsync<IAsyncEnumerable<TModel>>(this.Expression, cancellationToken).GetAsyncEnumerator(cancellationToken);
+                return provider.ExecuteAsync<IAsyncEnumerable<TModel>>(Expression, cancellationToken).GetAsyncEnumerator(cancellationToken);
             }
             else
             {
@@ -87,7 +87,7 @@ namespace PnP.Core.QueryModel
             async IAsyncEnumerator<TModel> GetAsyncEnumerator()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             {
-                foreach (TModel model in this.items)
+                foreach (TModel model in items)
                 {
                     yield return model;
                 }

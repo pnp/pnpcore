@@ -14,17 +14,17 @@
         /// Education Standard
         /// </summary>
         EducationStandard = 1,
-        
+
         /// <summary>
         /// Education class
         /// </summary>
         EducationClass = 2,
-        
+
         /// <summary>
         /// Education professional learning community
         /// </summary>
         EducationProfessionalLearningCommunity = 3,
-        
+
         /// <summary>
         /// Education staff
         /// </summary>

@@ -4,7 +4,7 @@
     /// Public interface to define the messaging settings for a Team
     /// </summary>
     [ConcreteType(typeof(TeamMessagingSettings))]
-    public interface ITeamMessagingSettings: IDataModel<ITeamMessagingSettings>
+    public interface ITeamMessagingSettings : IDataModel<ITeamMessagingSettings>
     {
         /// <summary>
         /// Defines whether users can edit messages

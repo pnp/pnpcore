@@ -33,12 +33,12 @@ namespace PnP.Core.Model.SharePoint
 
                 dynamic body = new ExpandoObject();
                 body.localizedNames = localizedNames;
-                body.parentGroup = new 
+                body.parentGroup = new
                 {
                     id = Group.Id
                 };
 
-                if (this.IsPropertyAvailable(p => p.Description))
+                if (IsPropertyAvailable(p => p.Description))
                 {
                     body.description = Description;
                 }
@@ -109,7 +109,7 @@ namespace PnP.Core.Model.SharePoint
         public ITermRelationCollection Relations { get => GetModelCollectionValue<ITermRelationCollection>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = value.ToString(); }
+        public override object Key { get => Id; set => Id = value.ToString(); }
         #endregion
 
         #region Methods

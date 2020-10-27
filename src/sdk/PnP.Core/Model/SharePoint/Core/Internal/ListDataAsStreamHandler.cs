@@ -26,8 +26,8 @@ namespace PnP.Core.Model.SharePoint
             var document = JsonSerializer.Deserialize<JsonElement>(json);
 
             // Process "non-rows" data
-            foreach(var property in document.EnumerateObject())
-            { 
+            foreach (var property in document.EnumerateObject())
+            {
                 // The rows are handled seperately
                 if (property.Name != "Row")
                 {
@@ -58,7 +58,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     return result;
                 }
-                
+
                 // Load the fields if not yet loaded
                 await list.EnsurePropertiesAsync(List.GetListDataAsStreamExpression).ConfigureAwait(false);
 
@@ -75,12 +75,12 @@ namespace PnP.Core.Model.SharePoint
                         var itemToUpdate = list.Items.FirstOrDefault(p => p.Id == listItemId);
                         if (itemToUpdate == null)
                         {
-                            itemToUpdate = (list.Items as ListItemCollection).CreateNewAndAdd();                            
+                            itemToUpdate = (list.Items as ListItemCollection).CreateNewAndAdd();
                         }
 
                         itemToUpdate = itemToUpdate as ListItem;
                         itemToUpdate.SetSystemProperty(p => p.Id, listItemId);
-                        
+
                         var overflowDictionary = itemToUpdate.Values;
 
                         foreach (var property in row.EnumerateObject())
@@ -213,9 +213,9 @@ namespace PnP.Core.Model.SharePoint
                             return null;
                         }
                     }
-                default: 
-                    { 
-                        return propertyValue.GetString(); 
+                default:
+                    {
+                        return propertyValue.GetString();
                     }
             }
         }

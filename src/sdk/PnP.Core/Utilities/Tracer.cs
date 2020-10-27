@@ -27,8 +27,8 @@ namespace PnP.Core
 
         public void Dispose()
         {
-            this.Stopwatch.Stop();
-            this.StopwatchStop = DateTime.UtcNow;
+            Stopwatch.Stop();
+            StopwatchStop = DateTime.UtcNow;
             LogMetrics();
         }
 

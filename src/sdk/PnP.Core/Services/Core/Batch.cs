@@ -1,8 +1,8 @@
-﻿using System;
+﻿using PnP.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using PnP.Core.Model;
 
 namespace PnP.Core.Services
 {
@@ -99,7 +99,7 @@ namespace PnP.Core.Services
         {
             get
             {
-                return !Requests.Any(r => 
+                return !Requests.Any(r =>
                     (r.Value.ApiCall.Type != ApiType.SPORest) &&
                     (r.Value.BackupApiCall.Equals(default(ApiCall)) ||
                     r.Value.BackupApiCall.Type != ApiType.SPORest));

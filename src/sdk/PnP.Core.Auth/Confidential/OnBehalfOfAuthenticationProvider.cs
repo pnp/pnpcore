@@ -1,17 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
-using PnP.Core.Auth.Services;
 using PnP.Core.Auth.Services.Builder.Configuration;
-using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Auth
@@ -55,7 +51,7 @@ namespace PnP.Core.Auth
             : this(null)
         {
             UserTokenProvider = userTokenProvider;
-            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
@@ -81,7 +77,7 @@ namespace PnP.Core.Auth
             : this(null)
         {
             UserTokenProvider = userTokenProvider;
-            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
@@ -179,7 +175,7 @@ namespace PnP.Core.Auth
             }
 
             // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.OnBehalfOfAuthenticationProvider_LogInit);
+            Log?.LogInformation(PnPCoreAuthResources.OnBehalfOfAuthenticationProvider_LogInit);
         }
 
         /// <summary>
@@ -233,7 +229,7 @@ namespace PnP.Core.Auth
             try
             {
                 // Define the user assertion based on the consumer access token
-                var assertion = new UserAssertion(this.UserTokenProvider.Invoke());
+                var assertion = new UserAssertion(UserTokenProvider.Invoke());
 
                 // Try to get the token from the tokens cache
                 tokenResult = await confidentialClientApplication
@@ -247,8 +243,8 @@ namespace PnP.Core.Auth
             }
 
             // Log the access token retrieval action
-            this.Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
-                this.GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
+            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+                GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it
             // In case of any exception while retrieving the access token, 

@@ -28,7 +28,7 @@ namespace PnP.Core.Auth
         /// The password for authenticating
         /// </summary>
         public SecureString Password { get; set; }
-        
+
         // Instance private member, to keep the token cache at service instance level
         private IPublicClientApplication publicClientApplication;
 
@@ -43,7 +43,7 @@ namespace PnP.Core.Auth
             string username, SecureString password)
             : this(null)
         {
-            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
@@ -106,7 +106,7 @@ namespace PnP.Core.Auth
                 .Build();
 
             // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.UsernamePasswordAuthenticationProvider_LogInit,
+            Log?.LogInformation(PnPCoreAuthResources.UsernamePasswordAuthenticationProvider_LogInit,
                 options.UsernamePassword.Username);
         }
 
@@ -128,7 +128,7 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(resource));
             }
 
-            request.Headers.Authorization = new AuthenticationHeaderValue("bearer", 
+            request.Headers.Authorization = new AuthenticationHeaderValue("bearer",
                 await GetAccessTokenAsync(resource).ConfigureAwait(false));
         }
 
@@ -167,8 +167,8 @@ namespace PnP.Core.Auth
             }
 
             // Log the access token retrieval action
-            this.Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
-                this.GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
+            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+                GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it
             // In case of any exception while retrieving the access token, 
@@ -189,7 +189,7 @@ namespace PnP.Core.Auth
             }
 
             // Use the .default scope if the scopes are not provided
-            return await GetAccessTokenAsync(resource, 
+            return await GetAccessTokenAsync(resource,
                 new string[] { $"{resource.Scheme}://{resource.Authority}/.default" }).ConfigureAwait(false);
         }
     }

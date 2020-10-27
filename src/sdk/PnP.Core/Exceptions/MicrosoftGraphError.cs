@@ -6,7 +6,7 @@ namespace PnP.Core
     /// <summary>
     /// Microsoft Graph service error
     /// </summary>
-    public class MicrosoftGraphError: ServiceError
+    public class MicrosoftGraphError : ServiceError
     {
         /// <summary>
         /// Default constructor for the <see cref="MicrosoftGraphError"/> error
@@ -47,7 +47,7 @@ namespace PnP.Core
             errorString.AppendLine($"Message: {Message}");
             errorString.AppendLine($"ClientRequestId: {ClientRequestId}");
 
-            foreach(var property in AdditionalData)
+            foreach (var property in AdditionalData)
             {
                 errorString.AppendLine($"{property.Key}: {property.Value}");
             }
@@ -58,9 +58,9 @@ namespace PnP.Core
         private void ParseError(JsonElement error)
         {
             var errorData = error.GetProperty("error");
-            
+
             // enumerate the properties in the error 
-            foreach(var errorField in errorData.EnumerateObject())
+            foreach (var errorField in errorData.EnumerateObject())
             {
                 if (errorField.Name == "code")
                 {

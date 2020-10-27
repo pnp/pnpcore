@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using System.Collections.Generic;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -13,10 +13,12 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=displayName eq 'Test 01' and description ne 'Test 02'&$top=10&$skip=5";
 
-            ODataQuery<IWeb> query = new ODataQuery<IWeb>();
-            query.Top = 10;
-            query.Skip = 5;
-            
+            ODataQuery<IWeb> query = new ODataQuery<IWeb>
+            {
+                Top = 10,
+                Skip = 5
+            };
+
             // Add one filter
             query.Filters.Add(new FilterItem
             {
@@ -44,9 +46,11 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "$filter=displayName eq 'Test 01' or (sharepointIds eq 7 or AuthorID eq 15 and ModifiedBy eq 'paolo@piasysdev.onmicrosoft.com') and description ne 'Test 02'&$top=10&$skip=5";
 
-            ODataQuery<IWeb> query = new ODataQuery<IWeb>();
-            query.Top = 10;
-            query.Skip = 5;
+            ODataQuery<IWeb> query = new ODataQuery<IWeb>
+            {
+                Top = 10,
+                Skip = 5
+            };
 
             // Add one filter
             query.Filters.Add(new FilterItem

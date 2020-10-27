@@ -60,7 +60,7 @@ namespace PnP.Core.Test.Base
                     // Rest id must be populated
                     Assert.IsTrue((documentsViaRest as List).Metadata.ContainsKey(PnPConstants.MetaDataRestId));
                     Assert.IsTrue((documentsViaRest as List).Metadata[PnPConstants.MetaDataRestId] == documentsViaRest.Id.ToString());
-                    
+
                     // Rest entity type was automatically filled since this was a rest call
                     Assert.IsTrue((documentsViaRest as List).Metadata.ContainsKey(PnPConstants.MetaDataRestEntityTypeName));
                     Assert.IsTrue(!string.IsNullOrEmpty((documentsViaRest as List).Metadata[PnPConstants.MetaDataRestEntityTypeName]));

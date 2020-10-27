@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PnP.Core
+﻿namespace PnP.Core
 {
     /// <summary>
     /// Error information for a service error

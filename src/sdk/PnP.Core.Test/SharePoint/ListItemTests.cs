@@ -1,12 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -20,7 +18,7 @@ namespace PnP.Core.Test.SharePoint
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
         }
-               
+
         [TestMethod]
         public async Task SystemUpdate()
         {
@@ -76,7 +74,7 @@ namespace PnP.Core.Test.SharePoint
                 await myList2.GetAsync(p => p.Items);
 
                 var first2 = myList2.Items.First();
-                    
+
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
                 Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
@@ -293,7 +291,7 @@ namespace PnP.Core.Test.SharePoint
 
                 #region Test Setup
 
-                
+
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (!TestCommon.Instance.Mocking && myList != null)
@@ -468,7 +466,7 @@ namespace PnP.Core.Test.SharePoint
                 // verify the list item was updated and that we're still at version 1.0
                 Assert.IsTrue(first2.Title == "blabla");
                 Assert.IsTrue(first2.Values["_UIVersionString"].ToString() == "1.0");
-            } 
+            }
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 var web = await contextFinal.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
@@ -492,7 +490,7 @@ namespace PnP.Core.Test.SharePoint
                 var web = await context.Web.GetAsync(p => p.Lists.LoadProperties(p => p.Title, p => p.Items));
 
                 int listCount = web.Lists.Count();
-                
+
                 #region Test Setup
 
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
@@ -707,7 +705,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(first4.Title == "blabla");
                 Assert.IsTrue(first4.Values["_UIVersionString"].ToString() == "1.0");
             }
-                        
+
             using (var contextFinal = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 4))
             {
                 // Create a new list

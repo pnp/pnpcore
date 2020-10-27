@@ -65,7 +65,7 @@ namespace PnP.Core.Test.Base
                     int itemCount = myList.Items.Count();
 
                     await firstItem.DeleteAsync();
-                    
+
                     // Using the deleted item should result in an error
                     bool exceptionThrown = false;
                     try
@@ -94,7 +94,7 @@ namespace PnP.Core.Test.Base
                     await myList.GetAsync(p => p.Items);
 
                     Assert.IsTrue(myList.Items.Count() == itemCount - 1);
-                }                
+                }
             }
         }
 
@@ -172,7 +172,7 @@ namespace PnP.Core.Test.Base
                     await context.ExecuteAsync();
 
                     Assert.IsTrue(myList.Items.Count() == itemCount - 1);
-                }                
+                }
             }
         }
         #endregion

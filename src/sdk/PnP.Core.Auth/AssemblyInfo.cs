@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 
 #if DEBUG
-[assembly:InternalsVisibleTo("PnP.Core.Auth.Test")]
+[assembly: InternalsVisibleTo("PnP.Core.Auth.Test")]
 #endif
 
 [assembly: NeutralResourcesLanguage("en")]

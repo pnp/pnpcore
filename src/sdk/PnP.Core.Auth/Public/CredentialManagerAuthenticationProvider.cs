@@ -18,7 +18,7 @@ namespace PnP.Core.Auth
         public string CredentialManagerName { get; set; }
 
         // Internally we use a Username and Password Authentication Provider
-        private UsernamePasswordAuthenticationProvider usernamePasswordProvider;
+        private readonly UsernamePasswordAuthenticationProvider usernamePasswordProvider;
 
         /// <summary>
         /// Public constructor for external consumers of the library
@@ -30,7 +30,7 @@ namespace PnP.Core.Auth
             string credentialManagerName)
             : this(null)
         {
-            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
@@ -78,15 +78,16 @@ namespace PnP.Core.Auth
 
             if (credentials == null)
             {
-                throw new ConfigurationErrorsException(string.Format(System.Globalization.CultureInfo.InvariantCulture, 
-                                                                    PnPCoreAuthResources.CredentialManagerAuthenticationProvider_CredentialManagerEntryDoesNotExist, 
+                throw new ConfigurationErrorsException(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                                                                    PnPCoreAuthResources.CredentialManagerAuthenticationProvider_CredentialManagerEntryDoesNotExist,
                                                                     CredentialManagerName));
             }
 
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
 
-            var usernamePasswordOptions = new PnPCoreAuthenticationCredentialConfigurationOptions {
+            var usernamePasswordOptions = new PnPCoreAuthenticationCredentialConfigurationOptions
+            {
                 ClientId = ClientId,
                 TenantId = TenantId,
                 UsernamePassword = new PnPCoreAuthenticationUsernamePasswordOptions
@@ -100,7 +101,7 @@ namespace PnP.Core.Auth
             usernamePasswordProvider.Init(usernamePasswordOptions);
 
             // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.CredentialManagerAuthenticationProvider_LogInit,
+            Log?.LogInformation(PnPCoreAuthResources.CredentialManagerAuthenticationProvider_LogInit,
                 options.CredentialManager.CredentialManagerName);
         }
 

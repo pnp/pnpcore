@@ -553,7 +553,7 @@ namespace PnP.Core.Model
             // Let's ensure these additional API calls's are included in a single batch
             if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
-                await Query.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);                
+                await Query.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
         }
 
@@ -1092,7 +1092,7 @@ namespace PnP.Core.Model
             if (!NavigationPropertyInstantiated(propertyName))
             {
                 var propertyValue = EntityManager.GetEntityConcreteInstance<T>(typeof(T), this);
-                (propertyValue as IDataModelWithContext).PnPContext = this.PnPContext;
+                (propertyValue as IDataModelWithContext).PnPContext = PnPContext;
 
                 SetValue(propertyValue, propertyName);
                 InstantiateNavigationProperty(propertyName);

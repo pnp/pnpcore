@@ -4,7 +4,7 @@
     /// Public interface to define the fun settings for a Team
     /// </summary>
     [ConcreteType(typeof(TeamFunSettings))]
-    public interface ITeamFunSettings: IDataModel<ITeamFunSettings>
+    public interface ITeamFunSettings : IDataModel<ITeamFunSettings>
     {
         /// <summary>
         /// Defines whether the Giphy are allowed in the Team

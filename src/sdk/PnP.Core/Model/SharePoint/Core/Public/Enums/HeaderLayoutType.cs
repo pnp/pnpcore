@@ -4,7 +4,7 @@
     /// Available header layouts for modern sites
     /// </summary>
     public enum HeaderLayoutType
-    { 
+    {
         /// <summary>
         /// use the original header [deprecated, now reverts to large/standard] ( Value = 0 )
         /// </summary>

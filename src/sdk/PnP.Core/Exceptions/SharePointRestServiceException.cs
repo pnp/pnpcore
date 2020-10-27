@@ -28,7 +28,7 @@ namespace PnP.Core
         /// <param name="type">Type of the error</param>
         /// <param name="httpResponseCode">Http response code of the service request</param>
         /// <param name="response">Response of the service request that errored out</param>
-        public SharePointRestServiceException(ErrorType type, int httpResponseCode, string response): base("SharePoint Rest service exception")
+        public SharePointRestServiceException(ErrorType type, int httpResponseCode, string response) : base("SharePoint Rest service exception")
         {
             Error = new SharePointRestError(type, httpResponseCode, response);
         }

@@ -1,12 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.QueryModel;
-using System.Collections.Generic;
-using System;
-using System.IO;
 
 namespace PnP.Core.Test.SharePoint
 {
@@ -320,12 +319,14 @@ namespace PnP.Core.Test.SharePoint
                 // This works
                 IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     IFolder newFolder = await parentFolder.Folders.AddBatchAsync(newBatch, string.Empty);
                     await context.ExecuteAsync(newBatch);
                 });
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     IFolder newFolder = await parentFolder.Folders.AddAsync(string.Empty);
                 });
             }
@@ -819,7 +820,7 @@ namespace PnP.Core.Test.SharePoint
                 var newBatch = context.NewBatch();
 
                 string destinationServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents/TEST_MOVED_FOLDER_BATCH_NO_OPTIONS";
-                await folderToMove.MoveToBatchAsync(newBatch,destinationServerRelativeUrl);
+                await folderToMove.MoveToBatchAsync(newBatch, destinationServerRelativeUrl);
                 await context.ExecuteAsync(newBatch);
 
                 IFolder foundMovedFolder = await context.Web.GetFolderByServerRelativeUrlAsync(destinationServerRelativeUrl);

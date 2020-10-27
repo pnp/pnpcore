@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.FieldLink", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks')", Get = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks", LinqGet = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks")]
     // TODO A special target should be achieve to support List Content Types
     //[SharePointType("SP.FieldLink", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks')", Get = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks", LinqGet = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks")]
-    internal partial class FieldLink: BaseDataModel<IFieldLink>, IFieldLink
+    internal partial class FieldLink : BaseDataModel<IFieldLink>, IFieldLink
     {
         #region Construction
         public FieldLink()
@@ -62,7 +62,7 @@ namespace PnP.Core.Model.SharePoint
         public bool ShowInDisplayForm { get => GetValue<bool>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
     }
 }

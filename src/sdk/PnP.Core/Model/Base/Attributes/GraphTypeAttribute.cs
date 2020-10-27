@@ -6,7 +6,7 @@ namespace PnP.Core.Model
     /// Attribute used to decorate model classes that can be loaded via Microsoft Graph
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    internal class GraphTypeAttribute: Attribute
+    internal class GraphTypeAttribute : Attribute
     {
         /// <summary>
         /// Defines the field that serves as the id field in Graph, typically this is the "id" field

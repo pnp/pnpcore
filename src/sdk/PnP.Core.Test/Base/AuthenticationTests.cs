@@ -1,10 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Test.Utilities;
-using PnP.Core.Model;
 using System.Threading.Tasks;
-using System.Linq.Expressions;
-using PnP.Core.Services;
-using System.Collections.Generic;
 
 namespace PnP.Core.Test.Base
 {
@@ -30,7 +26,7 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var accessToken = await context.AuthenticationProvider.GetAccessTokenAsync(
-                    PnPConstants.MicrosoftGraphBaseUri, 
+                    PnPConstants.MicrosoftGraphBaseUri,
                     new string[] { "Group.ReadWrite.All" }).ConfigureAwait(true);
 
                 Assert.IsNotNull(accessToken);

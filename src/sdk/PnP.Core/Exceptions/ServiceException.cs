@@ -5,7 +5,7 @@ namespace PnP.Core
     /// <summary>
     /// Abstract class representing service errors
     /// </summary>
-    public class ServiceException: PnPException
+    public class ServiceException : PnPException
     {
         /// <summary>
         /// Creates a service request exception

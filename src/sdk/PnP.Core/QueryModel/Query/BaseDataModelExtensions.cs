@@ -232,7 +232,7 @@ namespace PnP.Core.QueryModel
                 Expression.Call(
                     null,
                     GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
-                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }                    
+                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
                     ));
         }
 
@@ -261,10 +261,10 @@ namespace PnP.Core.QueryModel
 
             // Grab entity information using the provided selectors
             var entityInfo = EntityManager.GetClassInfo(concreteEntity.GetType(), (concreteEntity as BaseDataModel<T>), selectors);
-            
+
             // Build the default get query but pass in our given API call as override
             var query = await new QueryClient().BuildGetAPICallAsync(concreteEntity as BaseDataModel<T>, entityInfo, apiCall).ConfigureAwait(false);
-                        
+
             // Trigger the get request
             await (concreteEntity as BaseDataModel<T>).RequestAsync(query.ApiCall, HttpMethod.Get).ConfigureAwait(false);
 

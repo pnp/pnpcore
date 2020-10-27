@@ -5,7 +5,7 @@ namespace PnP.Core.Services
     /// <summary>
     /// Retry handler for Microsoft Graph requests
     /// </summary>
-    internal class MicrosoftGraphRetryHandler: RetryHandlerBase
+    internal class MicrosoftGraphRetryHandler : RetryHandlerBase
     {
         #region Construction
         public MicrosoftGraphRetryHandler(IOptions<PnPGlobalSettingsOptions> globalSettings) : base(globalSettings?.Value)

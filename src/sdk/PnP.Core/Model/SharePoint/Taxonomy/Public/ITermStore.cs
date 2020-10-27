@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -7,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Microsoft 365 Term store
     /// </summary>
     [ConcreteType(typeof(TermStore))]
-    public interface ITermStore: IDataModel<ITermStore>, IDataModelGet<ITermStore>, IDataModelUpdate
+    public interface ITermStore : IDataModel<ITermStore>, IDataModelGet<ITermStore>, IDataModelUpdate
     {
         /// <summary>
         /// The Unique ID of the Term Store

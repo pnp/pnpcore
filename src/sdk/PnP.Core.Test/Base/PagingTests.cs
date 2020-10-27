@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
@@ -133,7 +132,7 @@ namespace PnP.Core.Test.Base
                     Assert.Fail("No @odata.nextLink property returned and paging is not possible");
                 }
 
-            }  
+            }
         }
 
         [TestMethod]
@@ -178,7 +177,7 @@ namespace PnP.Core.Test.Base
 
                 // We should have loaded 2 lists
                 Assert.IsTrue(context.Web.Lists.Count() == 2);
-                
+
                 // We only request the Title property, verify its loaded while others are not loaded
                 foreach (var list in context.Web.Lists)
                 {
@@ -265,7 +264,7 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.Web.Lists.Count() == 2);
 
                 // We only request the Title property, verify its loaded while others are not loaded
-                foreach(var list in context.Web.Lists)
+                foreach (var list in context.Web.Lists)
                 {
                     Assert.IsTrue(list.IsPropertyAvailable(p => p.Title));
                     Assert.IsTrue(!string.IsNullOrEmpty(list.Title));

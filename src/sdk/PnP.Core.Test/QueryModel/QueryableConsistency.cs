@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
-using PnP.Core.Model;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
@@ -63,7 +62,7 @@ namespace PnP.Core.Test.QueryModel
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 // this will use Graph under the covers!
-                var sitePages = context.Web.Lists.GetByTitle("Site Pages", p=>p.Title, p=>p.Description, p => p.Items);
+                var sitePages = context.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.Description, p => p.Items);
                 Assert.IsTrue(sitePages.Requested);
                 Assert.IsTrue(sitePages.Title == "Site Pages");
                 Assert.IsTrue(sitePages.IsPropertyAvailable(p => p.Description));
@@ -87,7 +86,7 @@ namespace PnP.Core.Test.QueryModel
 
                 // Save the count of retrieved lists
                 var queryResult = query.ToList();
-                
+
                 Assert.IsTrue(queryResult.Count >= 5);
                 Assert.IsTrue(queryResult.Count(l => l.Title == "Site Pages") == 1);
                 Assert.IsTrue(context.Web.Lists.Length >= 5);

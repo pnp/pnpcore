@@ -47,7 +47,7 @@ namespace PnP.Core
         private void ParseError(JsonElement error)
         {
             ClientRequestId = error.GetProperty("TraceCorrelationId").GetGuid().ToString();
-         
+
             var errorInfo = error.GetProperty("ErrorInfo");
             if (errorInfo.ValueKind != JsonValueKind.Null)
             {

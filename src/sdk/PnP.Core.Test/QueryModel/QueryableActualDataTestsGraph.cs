@@ -58,7 +58,7 @@ namespace PnP.Core.Test.QueryModel
         public async Task TestQueryItems_Graph()
         {
             //TestCommon.Instance.Mocking = false;
-            
+
             (string listName, int id, string itemTitle) = await TestAssets.CreateTestListItemAsync(0);
 
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))

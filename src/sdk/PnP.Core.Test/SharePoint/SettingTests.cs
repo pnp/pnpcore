@@ -34,7 +34,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(web.Features.Length > 0);
             }
         }
-        
+
         [TestMethod]
         public async Task GetFeaturesSiteAsync()
         {
@@ -52,7 +52,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                
+
                 IWeb web = await context.Web.GetAsync(p => p.Features);
 
                 var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
@@ -169,8 +169,9 @@ namespace PnP.Core.Test.SharePoint
                 IWeb web = await context.Web.GetAsync(p => p.Features);
 
                 var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f740000"); // Fake
-               
-                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () => {
+
+                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
+                {
                     await web.Features.EnableBatchAsync(id);
                     await web.Features.EnableBatchAsync(id);
                     await context.ExecuteAsync(); //Trigger Batch
@@ -189,8 +190,8 @@ namespace PnP.Core.Test.SharePoint
                 IWeb web = await context.Web.GetAsync(p => p.Features);
 
                 var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f7411d5"); // SharePoint Viewers - Web Scoped
-                
-                if(web.Features.Any(o=>o.DefinitionId == id))
+
+                if (web.Features.Any(o => o.DefinitionId == id))
                 {
                     // Already Activated
                 }
@@ -203,9 +204,10 @@ namespace PnP.Core.Test.SharePoint
                     Assert.IsNotNull(feature.DefinitionId);
                     Assert.IsTrue(feature.DefinitionId != Guid.Empty);
                 }
-                
-                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () => {
-                     await web.Features.EnableAsync(id);
+
+                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
+                {
+                    await web.Features.EnableAsync(id);
                 });
 
                 // Deactivate again
@@ -223,7 +225,8 @@ namespace PnP.Core.Test.SharePoint
 
                 var id = new Guid("fa6a1bcc-fb4b-446b-8460-f4de5f700000"); // fake
 
-                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
+                {
                     await web.Features.DisableAsync(id);
                 });
             }
@@ -245,7 +248,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(feature);
                 Assert.IsNotNull(feature.DefinitionId);
                 Assert.IsTrue(feature.DefinitionId != Guid.Empty);
-                
+
 
                 web.Features.Disable(id);
 
@@ -300,14 +303,14 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 ISite site = await context.Site.GetAsync(p => p.Features);
-                
+
                 var id = new Guid("3bae86a2-776d-499d-9db8-fa4cdc7884f8"); // Document Sets - Site Scoped
                 // first enable
                 await site.Features.EnableAsync(id);
 
 
                 await site.Features.DisableAsync(id);
-                
+
                 Assert.IsTrue(!site.Features.Any(o => o.DefinitionId == id));
             }
         }

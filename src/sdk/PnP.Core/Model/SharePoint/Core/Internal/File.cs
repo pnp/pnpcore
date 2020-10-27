@@ -95,7 +95,7 @@ namespace PnP.Core.Model.SharePoint
         public ISharePointUser ModifiedBy { get => GetModelValue<ISharePointUser>(); }
 
         [KeyProperty(nameof(UniqueId))]
-        public override object Key { get => this.UniqueId; set => this.UniqueId = Guid.Parse(value.ToString()); }
+        public override object Key { get => UniqueId; set => UniqueId = Guid.Parse(value.ToString()); }
         #endregion
 
         #region Extension methods

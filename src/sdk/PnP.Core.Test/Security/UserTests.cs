@@ -3,7 +3,6 @@ using PnP.Core.Model.Security;
 using PnP.Core.Test.Utilities;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.Model;
 
 namespace PnP.Core.Test.Security
 {
@@ -24,7 +23,7 @@ namespace PnP.Core.Test.Security
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var web = await context.Web.GetAsync(p => p.SiteUsers);
-                
+
                 Assert.IsTrue(web.SiteUsers.Length > 0);
             }
         }

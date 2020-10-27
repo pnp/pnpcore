@@ -341,7 +341,7 @@ namespace PnP.Core.QueryModel
                     var validMembers = FunctionMapping.SupportedMembers.Where(m => !(m is MethodInfo)).Select(m => $"{m.DeclaringType.Name}.{m.Name}");
                     var validMembersString = string.Join(", ", validMembers);
                     throw new NotSupportedException(
-                        string.Format(PnPCoreResources.Exception_Unsupported_ExpressionOnlyMembers, 
+                        string.Format(PnPCoreResources.Exception_Unsupported_ExpressionOnlyMembers,
                         expression, validMembersString));
 
                 case MethodCallExpression methodCall:

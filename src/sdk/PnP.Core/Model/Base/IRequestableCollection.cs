@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Model
+﻿namespace PnP.Core.Model
 {
     /// <summary>
     /// Defines the very basic interface for every collection that is somehow requestable

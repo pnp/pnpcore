@@ -8,7 +8,7 @@
         public long High { get => GetValue<long>(); set => SetValue(value); }
 
         [KeyProperty(nameof(High))]
-        public override object Key { get => this.High; set => this.High = long.Parse(value.ToString()); }
+        public override object Key { get => High; set => High = long.Parse(value.ToString()); }
         #endregion
 
         #region Extension methods

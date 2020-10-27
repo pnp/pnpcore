@@ -22,19 +22,19 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            if (!this.items.Any(o => o.DefinitionId == id))
+            if (!items.Any(o => o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), 
+                throw new ArgumentOutOfRangeException(nameof(id),
                     PnPCoreResources.Exception_Feature_CannotDeactivateNotActive);
             }
 
-            var feature = this.items.FirstOrDefault(o => o.DefinitionId == id);
+            var feature = items.FirstOrDefault(o => o.DefinitionId == id);
 
             if (feature != default)
             {
                 var ftr = feature as Feature;
                 await ftr.RemoveAsync().ConfigureAwait(false);
-                this.items.Remove(feature);
+                items.Remove(feature);
             }
         }
 
@@ -60,19 +60,19 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            if (!this.items.Any(o => o.DefinitionId == id))
+            if (!items.Any(o => o.DefinitionId == id))
             {
                 throw new ArgumentOutOfRangeException(nameof(id),
                     PnPCoreResources.Exception_Feature_CannotDeactivateNotActive);
             }
 
-            var feature = this.items.FirstOrDefault(o => o.DefinitionId == id);
+            var feature = items.FirstOrDefault(o => o.DefinitionId == id);
 
             if (feature != default)
             {
                 var ftr = feature as Feature;
                 await ftr.RemoveBatchAsync(batch).ConfigureAwait(false);
-                this.items.Remove(feature);
+                items.Remove(feature);
             }
         }
 
@@ -88,9 +88,9 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            if (this.items.Any(o => o.DefinitionId == id))
+            if (items.Any(o => o.DefinitionId == id))
             {
-                throw new ArgumentOutOfRangeException(nameof(id), 
+                throw new ArgumentOutOfRangeException(nameof(id),
                     PnPCoreResources.Exception_Feature_AlreadyActivated);
             }
 
@@ -123,7 +123,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            if (this.items.Any(o => o.DefinitionId == id))
+            if (items.Any(o => o.DefinitionId == id))
             {
                 throw new ArgumentOutOfRangeException(nameof(id),
                     PnPCoreResources.Exception_Feature_AlreadyActivated);

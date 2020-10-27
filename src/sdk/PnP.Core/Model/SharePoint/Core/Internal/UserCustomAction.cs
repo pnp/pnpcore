@@ -32,7 +32,7 @@ namespace PnP.Core.Model.SharePoint
                     __metadata = new { type = entity.SharePointType }
                 }.AsExpando();
 
-                dynamic addParameters = baseAddPayload.MergeWith(addOptions.AsExpando(ignoreNullValues:true));
+                dynamic addParameters = baseAddPayload.MergeWith(addOptions.AsExpando(ignoreNullValues: true));
                 string json = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject),
                     new JsonSerializerOptions()
                     {
@@ -88,7 +88,7 @@ namespace PnP.Core.Model.SharePoint
         //public IUserResource TitleResource { get => GetModelValue<IUserResource>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
 
         #endregion
     }

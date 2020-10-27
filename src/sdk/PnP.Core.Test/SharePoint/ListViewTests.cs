@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.Model;
 using PnP.Core.Test.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,7 +15,7 @@ namespace PnP.Core.Test.SharePoint
             // Configure mocking default for all tests in this class, unless override by a specific test
             //TestCommon.Instance.Mocking = false;
         }
-      
+
         [TestMethod]
         public async Task GetListViewAsync()
         {
@@ -95,7 +92,7 @@ namespace PnP.Core.Test.SharePoint
                     Title = viewTitle,
                     RowLimit = 3,
                     Query = "<Where><Eq><FieldRef Name='LinkFilename' /><Value Type='Text'>General</Value></Eq></Where>",
-                    ViewFields = new string[]{ "DocIcon","LinkFilenameNoMenu", "Modified" }
+                    ViewFields = new string[] { "DocIcon", "LinkFilenameNoMenu", "Modified" }
                 });
 
                 Assert.IsNotNull(result);
@@ -232,7 +229,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Removes the view
                 var removeBatch = context.NewBatch();
-                list.Views.RemoveBatch(removeBatch,result.Id);
+                list.Views.RemoveBatch(removeBatch, result.Id);
                 await context.ExecuteAsync(removeBatch);
 
             }

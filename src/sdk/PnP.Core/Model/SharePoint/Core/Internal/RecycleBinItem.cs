@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// RecycleBinItem class, write your custom code here
     /// </summary>
-    [SharePointType("SP.RecycleBinItem", Target = typeof(Web),  
+    [SharePointType("SP.RecycleBinItem", Target = typeof(Web),
         Uri = "_api/Web/RecycleBin(guid'{Id}')", Get = "_api/Web/RecycleBin", LinqGet = "_api/Web/RecycleBin")]
     [SharePointType("SP.RecycleBinItem", Target = typeof(Site),
         Uri = "_api/Site/RecycleBin(guid'{Id}')", Get = "_api/Site/RecycleBin", LinqGet = "_api/Site/RecycleBin")]
@@ -53,7 +53,7 @@ namespace PnP.Core.Model.SharePoint
         public ISharePointUser DeletedBy { get => GetModelValue<ISharePointUser>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+        public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
 
         #region Extension methods
@@ -133,7 +133,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task MoveToSecondStageBatchAsync()
         {
-           await MoveToSecondStageBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+            await MoveToSecondStageBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
         }
 
         public void MoveToSecondStageBatch()

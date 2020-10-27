@@ -571,11 +571,11 @@ namespace PnP.Core.Services
 
                             var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(model, graphGet).ConfigureAwait(false);
                             ApiCall extraApiCall = new ApiCall(parsedApiRequest, apiType, receivingProperty: nonExpandableField.GraphName);
-                            batch.Add(model, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson);                            
+                            batch.Add(model, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson);
                         }
                     }
                 }
-            }           
+            }
         }
 
         private static bool IsDefinedInExpression<TModel>(Expression<Func<TModel, object>>[] expressions, string field)
@@ -735,7 +735,7 @@ namespace PnP.Core.Services
                         canUseGraph = false;
                         break;
                     }
-                }                
+                }
             }
 
             if (canUseGraph)
@@ -860,7 +860,7 @@ namespace PnP.Core.Services
                         if (field.SharePointExpandable || field.GraphExpandable || !string.IsNullOrEmpty(field.GraphGet))
                         {
                             selectionTarget = selectionTarget.Include(s);
-                        }                        
+                        }
                         else
                         {
                             selectionTarget = selectionTarget.Load(s);
@@ -891,7 +891,7 @@ namespace PnP.Core.Services
 
             if (useGraph)
             {
-                return await BuildUpdateAPICallGraphAsync(model,entity).ConfigureAwait(false);
+                return await BuildUpdateAPICallGraphAsync(model, entity).ConfigureAwait(false);
             }
             else
             {
@@ -1135,7 +1135,7 @@ namespace PnP.Core.Services
 
             if (useGraph)
             {
-                return await BuildDeleteAPICallGraphAsync(model,entity).ConfigureAwait(false);
+                return await BuildDeleteAPICallGraphAsync(model, entity).ConfigureAwait(false);
             }
             else
             {

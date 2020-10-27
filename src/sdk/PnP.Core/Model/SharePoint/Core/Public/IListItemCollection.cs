@@ -59,7 +59,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Contains method
-        
+
         /// <summary>
         /// Checks if the collection contains a listitem with a given id
         /// </summary>

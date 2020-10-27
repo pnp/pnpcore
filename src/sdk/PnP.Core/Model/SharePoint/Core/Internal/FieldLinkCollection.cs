@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using PnP.Core.QueryModel;
+﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -68,7 +68,7 @@ namespace PnP.Core.Model.SharePoint
         }
 
         public IFieldLink Add(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
-        { 
+        {
             return AddAsync(fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).GetAwaiter().GetResult();
         }
 

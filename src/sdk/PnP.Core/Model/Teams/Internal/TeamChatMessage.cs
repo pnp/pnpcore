@@ -7,7 +7,7 @@ namespace PnP.Core.Model.Teams
 {
     [GraphType(Uri = V, Beta = true, LinqGet = baseUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage  
+    internal partial class TeamChatMessage : BaseDataModel<ITeamChatMessage>, ITeamChatMessage
     {
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/messages";
         private const string V = baseUri + "/{GraphId}";
@@ -70,7 +70,7 @@ namespace PnP.Core.Model.Teams
         public ITeamChatMessageAttachmentCollection Attachments { get => GetModelCollectionValue<ITeamChatMessageAttachmentCollection>(); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = value.ToString(); }
+        public override object Key { get => Id; set => Id = value.ToString(); }
         #endregion
     }
 }

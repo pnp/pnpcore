@@ -1,10 +1,10 @@
-﻿using System;
+﻿using PnP.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
-using PnP.Core.Model;
 
 namespace PnP.Core.Services
 {
@@ -91,7 +91,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Stream containing the response binary content
         /// </summary>
-        internal Stream ResponseBinaryContent { get; private set; } 
+        internal Stream ResponseBinaryContent { get; private set; }
 
         /// <summary>
         /// Dictionary with the json responses for the requests defined in the CSOM XML

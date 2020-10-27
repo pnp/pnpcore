@@ -1,12 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model.SharePoint;
-using PnP.Core.Test.Utilities;
-using System;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
 {
@@ -16,9 +10,9 @@ namespace PnP.Core.Test.Base
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)
         {
-            
+
         }
-        
+
         [TestMethod]
         public void OperatingSystemTests()
         {
@@ -53,7 +47,7 @@ namespace PnP.Core.Test.Base
                 // Simple test
                 var result = Shell.Bat("whoami");
                 Assert.IsTrue(result.Any());
-            }   
+            }
         }
     }
 }

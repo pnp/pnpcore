@@ -5,7 +5,6 @@ using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using PnP.Core.Model;
 
 
 namespace PnP.Core.Test.SharePoint
@@ -115,7 +114,7 @@ namespace PnP.Core.Test.SharePoint
                     IFieldLink newFieldLink = await newContentType.FieldLinks.AddAsync(null, "My Title");
 
                 });
-                
+
                 await newContentType.DeleteAsync();
             }
         }
@@ -221,7 +220,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                await Assert.ThrowsExceptionAsync<ClientException>(async () => {
+                await Assert.ThrowsExceptionAsync<ClientException>(async () =>
+                {
 
                     var newBatch = context.NewBatch();
 

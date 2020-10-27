@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
@@ -43,7 +42,7 @@ namespace PnP.Core.Test.Base
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
                 else
-                {      
+                {
                     myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
                 }
 
@@ -67,7 +66,7 @@ namespace PnP.Core.Test.Base
 
                 // Load the list again, include extra list property
                 await myList.GetAsync(p => p.Items);
-                
+
                 // Should still have the same amount of items
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
                 // Additional list item fields should be available
@@ -292,13 +291,15 @@ namespace PnP.Core.Test.Base
                     { "Title", ItemTitleValue }
                 };
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     batch = context.BatchClient.EnsureBatch();
                     var item = myList.Items.AddBatch(batch, null);
                     await context.ExecuteAsync(batch);
                 });
 
-                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => {
+                await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
+                {
                     var item = await myList.Items.AddAsync(null);
                 });
 

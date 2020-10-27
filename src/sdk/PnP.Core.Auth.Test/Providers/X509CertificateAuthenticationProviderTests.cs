@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Auth.Test.Utilities;
-using PnP.Core.Model;
-using PnP.Core.Services;
 using System;
 using System.Configuration;
 using System.Net.Http;
@@ -17,7 +15,7 @@ namespace PnP.Core.Auth.Test.Providers
     [TestClass]
     public class X509CertificateAuthenticationProviderTests
     {
-        private static string x509CertificateConfigurationPath = "x509Certificate";
+        private static readonly string x509CertificateConfigurationPath = "x509Certificate";
 
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)

@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of site or web scoped features
     /// </summary>
     [ConcreteType(typeof(FeatureCollection))]
-    public interface IFeatureCollection : IQueryable<IFeature>,IDataModelCollection<IFeature>
+    public interface IFeatureCollection : IQueryable<IFeature>, IDataModelCollection<IFeature>
     {
         /// <summary>
         /// Enable a feature

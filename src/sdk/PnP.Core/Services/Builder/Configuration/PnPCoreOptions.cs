@@ -6,7 +6,7 @@ namespace PnP.Core.Services.Builder.Configuration
     /// <summary>
     /// Options for configuring PnP Core SDK
     /// </summary>
-    public class PnPCoreOptions 
+    public class PnPCoreOptions
     {
         /// <summary>
         /// Turns on/off telemetry, can be customized via configuration. Defaults to false.

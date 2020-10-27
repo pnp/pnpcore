@@ -24,25 +24,25 @@
         public bool AllowMembersEditMembership { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool AllowRequestToJoinLeave { get => GetValue<bool>(); set => SetValue(value); }
-        
+
         public bool AutoAcceptRequestToJoinLeave { get => GetValue<bool>(); set => SetValue(value); }
-        
+
         public bool CanCurrentUserEditMembership { get => GetValue<bool>(); set => SetValue(value); }
-        
+
         public bool CanCurrentUserManageGroup { get => GetValue<bool>(); set => SetValue(value); }
-        
+
         public bool CanCurrentUserViewMembership { get => GetValue<bool>(); set => SetValue(value); }
-        
+
         public string Description { get => GetValue<string>(); set => SetValue(value); }
-        
+
         public bool OnlyAllowMembersViewMembership { get => GetValue<bool>(); set => SetValue(value); }
-        
+
         public string OwnerTitle { get => GetValue<string>(); set => SetValue(value); }
-        
+
         public bool RequestToJoinLeaveEmailSetting { get => GetValue<bool>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = int.Parse(value.ToString()); }
+        public override object Key { get => Id; set => Id = int.Parse(value.ToString()); }
 
         #endregion
     }

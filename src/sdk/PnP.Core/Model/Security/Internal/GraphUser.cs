@@ -8,7 +8,7 @@ namespace PnP.Core.Model.Security
 {
     [GraphType(Get = "users/{GraphId}")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class GraphUser: BaseDataModel<IGraphUser>, IGraphUser
+    internal partial class GraphUser : BaseDataModel<IGraphUser>, IGraphUser
     {
         #region Construction
         public GraphUser()
@@ -26,7 +26,7 @@ namespace PnP.Core.Model.Security
         public string Mail { get => GetValue<string>(); set => SetValue(value); }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = value.ToString(); }
+        public override object Key { get => Id; set => Id = value.ToString(); }
         #endregion
 
         #region Methods
@@ -42,9 +42,9 @@ namespace PnP.Core.Model.Security
 
         public async Task<ISharePointUser> AsSharePointUserAsync()
         {
-            if (!this.IsPropertyAvailable(p=>p.UserPrincipalName) || string.IsNullOrEmpty(UserPrincipalName))
+            if (!IsPropertyAvailable(p => p.UserPrincipalName) || string.IsNullOrEmpty(UserPrincipalName))
             {
-                throw new ClientException(ErrorType.Unsupported, 
+                throw new ClientException(ErrorType.Unsupported,
                     PnPCoreResources.Exception_Unsupported_SharePointUserOnGraph);
             }
 

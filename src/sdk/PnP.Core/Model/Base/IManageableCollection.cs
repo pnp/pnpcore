@@ -47,7 +47,7 @@ namespace PnP.Core.Model
     /// Defines the behavior of a collection that can be managed
     /// with fully typed prototype methods
     /// </summary>
-    public interface IManageableCollection<TModel>: IManageableCollection
+    public interface IManageableCollection<TModel> : IManageableCollection
     {
         /// <summary>
         /// Method to create a new typed item of the collection,

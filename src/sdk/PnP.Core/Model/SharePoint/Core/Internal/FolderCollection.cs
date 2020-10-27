@@ -9,8 +9,8 @@ namespace PnP.Core.Model.SharePoint
     {
         public FolderCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)
         {
-            this.PnPContext = context;
-            this.Parent = parent;
+            PnPContext = context;
+            Parent = parent;
         }
 
         #region Add

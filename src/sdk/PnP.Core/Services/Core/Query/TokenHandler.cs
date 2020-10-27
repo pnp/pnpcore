@@ -197,7 +197,7 @@ namespace PnP.Core.Services
 
             // Iterate over the tokens and replace them
             foreach (Match match in matches)
-            { 
+            {
                 if (match.Value.Equals("{Id}") ||
                     match.Value.Equals("{Parent.Id}") ||
                     match.Value.Equals("{GraphId}") ||

@@ -38,7 +38,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (allWebs == null)
                 {
-                    allWebs = new WebCollection(this.PnPContext, this, "AllWebs");
+                    allWebs = new WebCollection(PnPContext, this, "AllWebs");
                 }
 
                 return allWebs;

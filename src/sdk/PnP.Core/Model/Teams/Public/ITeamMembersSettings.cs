@@ -4,7 +4,7 @@
     /// Public interface to define the memebers settings for a Team
     /// </summary>
     [ConcreteType(typeof(TeamMembersSettings))]
-    public interface ITeamMembersSettings: IDataModel<ITeamMembersSettings>
+    public interface ITeamMembersSettings : IDataModel<ITeamMembersSettings>
     {
         /// <summary>
         /// Defines whether the team members can update channels

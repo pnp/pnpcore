@@ -1,14 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Test.Utilities;
-using PnP.Core.Model;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
-using PnP.Core.QueryModel;
+using PnP.Core.Test.Utilities;
+using System;
+using System.Linq;
 using System.Net.Http;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
 {
@@ -220,7 +217,7 @@ namespace PnP.Core.Test.Base
                 // The properties from both loads should available on the first loaded model
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.Title));
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.NoCrawl));
-                
+
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.EnableVersioning));
                 Assert.IsTrue(list1.IsPropertyAvailable(p => p.Items));
                 // Site Assets should have items
@@ -318,7 +315,7 @@ namespace PnP.Core.Test.Base
                 {
                     var apiResponse = await (context.Web as Web).RequestAsync(api, HttpMethod.Get);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     if (ex is ClientException && (ex as ClientException).Error.Type == ErrorType.UnresolvedTokens)
                     {

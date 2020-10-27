@@ -6,7 +6,7 @@ namespace PnP.Core
     /// <summary>
     /// Microsoft Graph Service exception
     /// </summary>
-    public class MicrosoftGraphServiceException: ServiceException
+    public class MicrosoftGraphServiceException : ServiceException
     {
         #region Default exception constructors
         internal MicrosoftGraphServiceException(string message) : base(message)
@@ -29,9 +29,9 @@ namespace PnP.Core
         /// <param name="type">Type of the error</param>
         /// <param name="httpResponseCode">Http response code of the executed Graph request</param>
         /// <param name="response">Response of the executed Graph request</param>
-        public MicrosoftGraphServiceException(ErrorType type, int httpResponseCode, string response): base("Microsoft Graph service exception")
-        {            
-            Error = new MicrosoftGraphError(type, httpResponseCode, response);            
+        public MicrosoftGraphServiceException(ErrorType type, int httpResponseCode, string response) : base("Microsoft Graph service exception")
+        {
+            Error = new MicrosoftGraphError(type, httpResponseCode, response);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace PnP.Core
         /// <param name="type">Type of the error</param>
         /// <param name="httpResponseCode">Http response code of the executed Graph request</param>
         /// <param name="error">Json error coming from the executed Graph request</param>
-        public MicrosoftGraphServiceException(ErrorType type, int httpResponseCode, JsonElement error): base("Microsoft Graph service exception")
+        public MicrosoftGraphServiceException(ErrorType type, int httpResponseCode, JsonElement error) : base("Microsoft Graph service exception")
         {
             Error = new MicrosoftGraphError(type, httpResponseCode, error);
         }
@@ -52,7 +52,7 @@ namespace PnP.Core
         /// <returns>String representation</returns>
         public override string ToString()
         {
-            return $"{Error?.ToString()}{Environment.NewLine}{base.ToString()}"; 
+            return $"{Error?.ToString()}{Environment.NewLine}{base.ToString()}";
         }
     }
 }

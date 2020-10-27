@@ -30,7 +30,7 @@ namespace PnP.Core.Auth
         // Microsoft SharePoint Online Management Shell client id
         // private static readonly string aadAppId = "9bc3ab49-b65d-410a-85ad-de819febfddc";
         // PnP Office 365 Management Shell 
-        
+
         /// <summary>
         /// Default Azure AD application id (PnP Management Shell)
         /// </summary>

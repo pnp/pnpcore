@@ -31,7 +31,7 @@ namespace PnP.Core.Model.Teams
             {
                 if (retries >= maxRetries)
                 {
-                    throw new ServiceException(ErrorType.TeamsAsyncOperationError, 0, 
+                    throw new ServiceException(ErrorType.TeamsAsyncOperationError, 0,
                         string.Format(PnPCoreResources.Exception_TeamsAsyncOperationError_MaxRetries, maxRetries, Location));
                 }
 

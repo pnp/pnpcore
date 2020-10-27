@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class ListItemCollection: QueryableDataModelCollection<IListItem>, IListItemCollection
+    internal partial class ListItemCollection : QueryableDataModelCollection<IListItem>, IListItemCollection
     {
         public ListItemCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
         {
-            this.PnPContext = context;
-            this.Parent = parent;
+            PnPContext = context;
+            Parent = parent;
         }
 
         #region Add methods
@@ -74,7 +74,7 @@ namespace PnP.Core.Model.SharePoint
 
         public bool Contains(int id)
         {
-            if (this.items.FirstOrDefault(p => p.Id == id) != null)
+            if (items.FirstOrDefault(p => p.Id == id) != null)
             {
                 return true;
             }

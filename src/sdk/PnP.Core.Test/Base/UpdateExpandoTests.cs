@@ -80,7 +80,7 @@ namespace PnP.Core.Test.Base
                     dynamic dynamicFirstItem = firstItem;
                     dynamicFirstItem.Title = "Yes";
                     await dynamicFirstItem.UpdateAsync();
-                }             
+                }
             }
         }
 

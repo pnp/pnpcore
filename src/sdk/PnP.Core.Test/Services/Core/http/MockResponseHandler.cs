@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Services
 {
-    internal class MockResponseHandler: HttpMessageHandler
+    internal class MockResponseHandler : HttpMessageHandler
     {
         private HttpResponseMessage Response1 { get; set; }
         private HttpResponseMessage Response2 { get; set; }
@@ -29,9 +29,9 @@ namespace PnP.Core.Test.Services
 
         public void SetHttpResponse(HttpResponseMessage response1, HttpResponseMessage response2 = null)
         {
-            this.response1Sent = false;
-            this.Response1 = response1;
-            this.Response2 = response2;
+            response1Sent = false;
+            Response1 = response1;
+            Response2 = response2;
         }
     }
 }

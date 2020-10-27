@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Options for creating a view
     /// </summary>
     public class ViewOptions
     {
-        
+
         /// <summary>
         /// Gets or sets the associated content type id
         /// </summary>
         public string AssociatedContentTypeId { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the base view Id
         /// </summary>
-        [SharePointProperty("BaseViewId", JsonPath="baseViewId")]
+        [SharePointProperty("BaseViewId", JsonPath = "baseViewId")]
         public int? BaseViewId { get; set; }
-        
+
         /// <summary>
         /// Gets of sets the Calendar view styles
         /// </summary>
@@ -55,7 +51,7 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets the value that specifies the display name of the new list view.
         /// </summary>
         public string Title { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the view data
         /// </summary>
@@ -71,7 +67,7 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets a value that specifies the type of the new list view.
         /// </summary>
         public int? ViewTypeKind { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the View Type 2 information
         /// </summary>

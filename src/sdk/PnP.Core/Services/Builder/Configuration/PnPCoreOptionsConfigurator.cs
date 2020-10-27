@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using System;
-using System.Linq;
 
 namespace PnP.Core.Services.Builder.Configuration
 {
-    internal class PnPCoreOptionsConfigurator: 
+    internal class PnPCoreOptionsConfigurator :
         IConfigureOptions<PnPContextFactoryOptions>,
         IConfigureOptions<PnPGlobalSettingsOptions>
     {
@@ -24,7 +22,8 @@ namespace PnP.Core.Services.Builder.Configuration
                 var optionKey = siteOption.Key;
                 var optionValue = siteOption.Value;
 
-                options.Configurations.Add(new PnPContextFactoryOptionsConfiguration { 
+                options.Configurations.Add(new PnPContextFactoryOptionsConfiguration
+                {
                     Name = optionKey,
                     SiteUrl = new Uri(optionValue.SiteUrl),
                     AuthenticationProvider = optionValue.AuthenticationProvider

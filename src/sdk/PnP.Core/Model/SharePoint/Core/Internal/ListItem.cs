@@ -82,7 +82,7 @@ namespace PnP.Core.Model.SharePoint
                 var parentListUri = parentList.GetMetadata(PnPConstants.MetaDataUri);
                 // sample parent list entity type name: DemolistList
                 //var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)[0..^4] : null;
-                var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Substring(0, parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Length - 4)  : null;
+                var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Substring(0, parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Length - 4) : null;
 
                 // If this list we're adding items to was not fetched from the server than throw an error
                 if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri))
@@ -96,7 +96,7 @@ namespace PnP.Core.Model.SharePoint
                 // little trick here to ensure we can construct the correct list url based upon the data returned by a default load
                 // Ensure the underscore "_" character is not encoded in the FolderPath to use
                 var serverRelativeUrl = $"{PnPContext.Uri}/lists/{parentListTitle}".Replace("_x005f_", "_");
-                
+
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();
 
@@ -135,10 +135,10 @@ namespace PnP.Core.Model.SharePoint
 
         public bool CommentsDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
-        public string Title { get => (string)this.Values["Title"]; set => this.Values["Title"] = value; }
+        public string Title { get => (string)Values["Title"]; set => Values["Title"] = value; }
 
         [KeyProperty(nameof(Id))]
-        public override object Key { get => this.Id; set => this.Id = (int)value; }
+        public override object Key { get => Id; set => Id = (int)value; }
         #endregion
 
         #region Methods
@@ -147,7 +147,7 @@ namespace PnP.Core.Model.SharePoint
         internal async override Task GraphToRestMetadataAsync()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            if (this.IsPropertyAvailable(p => p.Id) && Id > 0)
+            if (IsPropertyAvailable(p => p.Id) && Id > 0)
             {
                 if (!Metadata.ContainsKey(PnPConstants.MetaDataRestId))
                 {
@@ -299,7 +299,7 @@ namespace PnP.Core.Model.SharePoint
             var entity = EntityManager.GetClassInfo(GetType(), this);
             IEnumerable<EntityFieldInfo> fields = entity.Fields;
 
-            var changedProperties = this.GetChangedProperties();
+            var changedProperties = GetChangedProperties();
 
             bool changeFound = false;
             foreach (PropertyDescriptor cp in changedProperties)
@@ -324,7 +324,7 @@ namespace PnP.Core.Model.SharePoint
                     else
                     {
                         // Let's set its value into the update message
-                        fieldValues.AppendLine(SetFieldValueXml(changedField.SharePointName, this.GetValue(changedField.Name), changedField.DataType.Name, ref counter));
+                        fieldValues.AppendLine(SetFieldValueXml(changedField.SharePointName, GetValue(changedField.Name), changedField.DataType.Name, ref counter));
                     }
                 }
             }

@@ -31,7 +31,7 @@ namespace PnP.Core.Model.SharePoint
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
 
         [KeyProperty(nameof(DefinitionId))]
-        public override object Key { get => this.DefinitionId; set => this.DefinitionId = Guid.Parse(value.ToString()); }
+        public override object Key { get => DefinitionId; set => DefinitionId = Guid.Parse(value.ToString()); }
         #endregion
 
         #region Extension methods

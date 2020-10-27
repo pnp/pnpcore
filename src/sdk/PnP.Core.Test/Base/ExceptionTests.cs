@@ -428,7 +428,7 @@ namespace PnP.Core.Test.Base
         public void GraphServiceExceptionTestStringParam()
         {
             bool microsoftGraphServiceExceptionThrown = false;
-            
+
             try
             {
                 throw new MicrosoftGraphServiceException(sampleGraphError);
@@ -437,7 +437,7 @@ namespace PnP.Core.Test.Base
             {
                 if (ex is MicrosoftGraphServiceException)
                 {
-                    
+
                     microsoftGraphServiceExceptionThrown = true;
                     Assert.IsTrue(!string.IsNullOrEmpty(ex.Message));
                 }
@@ -450,7 +450,7 @@ namespace PnP.Core.Test.Base
         public void GraphServiceExceptionTestWithExceptionParam()
         {
             bool microsoftGraphServiceExceptionThrown = false;
-            
+
             try
             {
                 throw new MicrosoftGraphServiceException(sampleGraphError, new Exception("test"));
@@ -459,7 +459,7 @@ namespace PnP.Core.Test.Base
             {
                 if (ex is MicrosoftGraphServiceException)
                 {
-                    
+
                     microsoftGraphServiceExceptionThrown = true;
                 }
 

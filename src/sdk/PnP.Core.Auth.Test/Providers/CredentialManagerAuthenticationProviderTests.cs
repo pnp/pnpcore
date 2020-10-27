@@ -14,7 +14,7 @@ namespace PnP.Core.Auth.Test.Providers
     [TestClass]
     public class CredentialManagerAuthenticationProviderTests
     {
-        private static string credentialManagerConfigurationPath = "credentialManager";
+        private static readonly string credentialManagerConfigurationPath = "credentialManager";
 
         [ClassInitialize]
         public static void TestFixtureSetup(TestContext context)

@@ -116,7 +116,7 @@ namespace PnP.Core.Test.Base
                 Assert.AreEqual(20, myListToCheck.MinorVersionLimit);
                 Assert.AreEqual(400, myListToCheck.MaxVersionLimit);
                 Assert.AreEqual(new Guid("00bfea71-de22-43b2-a848-c05709900100"), myListToCheck.TemplateFeatureId);
-                
+
                 // Load the list again
                 await context.Web.GetAsync(p => p.Lists);
 
@@ -178,11 +178,13 @@ namespace PnP.Core.Test.Base
 
                 var listCount = web.Lists.Count();
                 // Add a new list
-                Assert.ThrowsException<ArgumentNullException>(() => {
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
                     myList = web.Lists.Add(null, ListTemplateType.GenericList);
                 });
 
-                Assert.ThrowsException<ArgumentException>(() => {
+                Assert.ThrowsException<ArgumentException>(() =>
+                {
                     myList = web.Lists.Add(listTitle, ListTemplateType.NoListTemplate);
                 });
             }
@@ -206,11 +208,13 @@ namespace PnP.Core.Test.Base
 
                 var listCount = web.Lists.Count();
                 // Add a new list
-                Assert.ThrowsException<ArgumentNullException>(() => {
+                Assert.ThrowsException<ArgumentNullException>(() =>
+                {
                     myList = web.Lists.AddBatch(null, ListTemplateType.GenericList);
                 });
 
-                Assert.ThrowsException<ArgumentException>(() => {
+                Assert.ThrowsException<ArgumentException>(() =>
+                {
                     myList = web.Lists.AddBatch(listTitle, ListTemplateType.NoListTemplate);
                 });
             }

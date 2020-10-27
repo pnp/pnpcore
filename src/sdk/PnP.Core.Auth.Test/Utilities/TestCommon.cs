@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PnP.Core.Auth.Services;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using PnP.Core.Services;
 using PnP.Core.Services.Builder.Configuration;
@@ -10,7 +9,6 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using PnP.Core.Model;
 
 namespace PnP.Core.Auth.Test.Utilities
 {

@@ -79,8 +79,8 @@ namespace PnP.Core.Test.Services
             {
                 if (!globalOptionsService.Value.DisableTelemetry && !TestCommon.RunningInGitHubWorkflow())
                 {
-                        // Test AppInsights
-                        options.InstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
+                    // Test AppInsights
+                    options.InstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
                 }
             });
 

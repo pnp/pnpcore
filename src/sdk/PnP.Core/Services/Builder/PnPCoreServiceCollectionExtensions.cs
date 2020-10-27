@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The collection of services in an <see cref="IServiceCollection" /></param>
         /// <param name="options">An Action to configure the Authentication options</param>
         /// <returns>A PnPCoreBuilder instance</returns>
-        public static IPnPCoreBuilder AddPnPCore(this IServiceCollection services, 
+        public static IPnPCoreBuilder AddPnPCore(this IServiceCollection services,
             Action<PnPCoreOptions> options)
         {
             if (services == null)

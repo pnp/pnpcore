@@ -68,13 +68,13 @@ namespace PnP.Core.Services
                            MicrosoftGraphClient microsoftGraphClient,
                            IOptions<PnPContextFactoryOptions> contextOptions,
                            IOptions<PnPGlobalSettingsOptions> globalOptions,
-                           TelemetryClient telemetryClient):
-            this(logger, 
-                authenticationProvider, 
-                sharePointRestClient, 
-                microsoftGraphClient, 
-                contextOptions?.Value, 
-                globalOptions?.Value, 
+                           TelemetryClient telemetryClient) :
+            this(logger,
+                authenticationProvider,
+                sharePointRestClient,
+                microsoftGraphClient,
+                contextOptions?.Value,
+                globalOptions?.Value,
                 telemetryClient)
         {
         }

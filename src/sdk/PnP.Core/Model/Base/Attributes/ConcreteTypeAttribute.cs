@@ -10,7 +10,7 @@ namespace PnP.Core.Model
     {
         public ConcreteTypeAttribute(Type type)
         {
-            this.Type = type;
+            Type = type;
         }
 
         /// <summary>

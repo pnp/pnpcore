@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Test.Utilities;
-using PnP.Core.Model;
-using System.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Base
 {
@@ -128,7 +127,7 @@ namespace PnP.Core.Test.Base
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
             {
                 var team = await context.Team.GetAsync();
-                
+
                 // Requested stays false as there's no group connected to this site, so also no team
                 Assert.IsFalse(context.Team.Requested);
             }
@@ -163,7 +162,7 @@ namespace PnP.Core.Test.Base
                     Assert.IsTrue(site.IsPropertyAvailable(p => p.GroupId));
                     Assert.IsTrue(site.GroupId == context.Site.GroupId);
 
-                    var team = await context2.Team.GetAsync(p=>p.DisplayName);
+                    var team = await context2.Team.GetAsync(p => p.DisplayName);
 
                     Assert.IsTrue(team.Requested);
                     Assert.IsTrue(team.IsPropertyAvailable(p => p.DisplayName));

@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model
 {

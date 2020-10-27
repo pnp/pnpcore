@@ -104,7 +104,7 @@ namespace PnP.Core.Model
                 return value;
             }
 
-            throw new ClientException(ErrorType.PropertyNotLoaded, 
+            throw new ClientException(ErrorType.PropertyNotLoaded,
                 string.Format(PnPCoreResources.Exception_PropertyNotLoaded, propertyName));
         }
 
@@ -134,9 +134,9 @@ namespace PnP.Core.Model
             }
 
             if (// Property was populated previously, this is a change 
-                (current.ContainsKey(propertyName)) 
+                (current.ContainsKey(propertyName))
                 // Property was never loaded, but since the model was requested we consider this as a changed property
-                || (this is IRequestable && (this as IRequestable).Requested && !(typeof(T).ImplementsInterface(typeof(IManageableCollection))))                
+                || (this is IRequestable && (this as IRequestable).Requested && !(typeof(T).ImplementsInterface(typeof(IManageableCollection))))
                 )
             {
                 // Call ValidateHandler in case of an update
@@ -151,7 +151,7 @@ namespace PnP.Core.Model
                     {
                         value = (T)fieldUpdateRequest.Value;
                     }
-                    else                    
+                    else
                     {
                         updateField = false;
                         if (!string.IsNullOrEmpty(fieldUpdateRequest.CancellationReason))
@@ -211,7 +211,7 @@ namespace PnP.Core.Model
 
             return false;
         }
-        
+
         public bool HasChanged(string propertyName = "")
         {
             if (changes.Contains(propertyName))
@@ -222,14 +222,14 @@ namespace PnP.Core.Model
             if (current.TryGetValue(propertyName, out object value) && value != null)
             {
                 // If the property is a TransientDictionary then check for changes in the dictionary
-                if (value is TransientDictionary transientDictionary && 
+                if (value is TransientDictionary transientDictionary &&
                     transientDictionary.HasChanges)
                 {
                     return true;
                 }
 
                 // If the property is a TransientObject then check for changes in the complex object
-                if (value is TransientObject transientObject && 
+                if (value is TransientObject transientObject &&
                     transientObject.HasChanges)
                 {
                     return true;
@@ -247,7 +247,7 @@ namespace PnP.Core.Model
             return false;
         }
 
-       
+
         /// <summary>
         /// Merges the results from one object with the other. Will be typically used when:
         /// - The same object was requested twice in a batch
@@ -257,7 +257,7 @@ namespace PnP.Core.Model
         internal void Merge(TransientObject input)
         {
             // Copy the basic properties
-            foreach(var prop in input.current)
+            foreach (var prop in input.current)
             {
                 if (prop.Value is TransientDictionary)
                 {
@@ -279,7 +279,7 @@ namespace PnP.Core.Model
             // Update the BatchRequestId, too in order to
             // refresh the object in the collection with
             // the latest requested one
-            this.BatchRequestId = input.BatchRequestId;
+            BatchRequestId = input.BatchRequestId;
         }
 
         /// <summary>

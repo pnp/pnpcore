@@ -54,7 +54,7 @@ namespace PnP.Core.Test.Base
             {
                 var nonExpandableRequests = await GetNonExpandableTestAsync(input);
                 requests.AddRange(nonExpandableRequests);
-            }            
+            }
 
             return requests;
         }
@@ -66,7 +66,7 @@ namespace PnP.Core.Test.Base
             await new QueryClient().AddGraphBatchRequestsForNonExpandableCollectionsAsync(input.Item1 as BaseDataModel<TModelInterface>, batch, input.Item2, input.Item3, null, null);
 
             List<string> requests = new List<string>();
-            foreach(var request in batch.Requests)
+            foreach (var request in batch.Requests)
             {
                 requests.Add(CleanRequestUrl((input.Item1 as IDataModelWithContext).PnPContext, request.Value.ApiCall.Request));
             }
@@ -86,7 +86,7 @@ namespace PnP.Core.Test.Base
             IQueryable<TModelInterface> selectionTarget = modelCollection as IQueryable<TModelInterface>;
             if (input.Item3 != null)
             {
-                selectionTarget = QueryClient.ProcessExpression(selectionTarget,input.Item2, input.Item3);
+                selectionTarget = QueryClient.ProcessExpression(selectionTarget, input.Item2, input.Item3);
             }
 
             // Translate the expressions to a query
@@ -109,7 +109,7 @@ namespace PnP.Core.Test.Base
 
             if (query.Select.Count > 0)
             {
-                foreach(var select in query.Select)
+                foreach (var select in query.Select)
                 {
                     if (!query2.Select.Contains(select))
                     {
@@ -134,7 +134,7 @@ namespace PnP.Core.Test.Base
             // Build the proper ApiCall
             var apiCalls = await QueryClient.BuildODataGetQueryAsync(input.Item1, input.Item2, (input.Item1 as IDataModelWithContext).PnPContext, query2, null);
 
-            foreach(var apiCall in apiCalls)
+            foreach (var apiCall in apiCalls)
             {
                 requests.Add(CleanRequestUrl((input.Item1 as IDataModelWithContext).PnPContext, apiCall.Request));
             }
@@ -245,7 +245,7 @@ namespace PnP.Core.Test.Base
             var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[] { p => p.Lists }));
             Assert.IsTrue(requests.Count == 2);
             Assert.AreEqual(requests[0], "sites/{hostname}:{serverrelativepath}?$select=sharepointIds%2clists%2cid", true);
-            Assert.AreEqual(requests[1], "sites/{hostname}:{serverrelativepath}:/lists?$select=system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list", true);            
+            Assert.AreEqual(requests[1], "sites/{hostname}:{serverrelativepath}:/lists?$select=system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list", true);
         }
 
         [TestMethod]
@@ -276,9 +276,9 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesSimple()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[] 
+            var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
             { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
-                p=>p.Title, p=>p.TemplateType) 
+                p=>p.Title, p=>p.TemplateType)
             }));
             Assert.IsTrue(requests.Count == 1);
             Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId&$expand=Lists", true);
@@ -311,11 +311,11 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task GetWebGraphFirstExpressionExpandablePlusSimplePropertiesPlusLoadPropertiesRecursivePlusKeyProperties()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[] 
+            var requests = await GetAPICallTestAsync(BuildModel<Web, IWeb>(new Expression<Func<IWeb, object>>[]
             { p => p.Title, p => p.Description, p => p.Lists.LoadProperties(
                 p => p.Title, p => p.TemplateType, p=>p.Id, p=>p.ContentTypes.LoadProperties(
-                    p=>p.Name, p=>p.StringId, p=>p.FieldLinks.LoadProperties( 
-                        p=>p.Id, p=> p.Name, p=> p.Hidden))) 
+                    p=>p.Name, p=>p.StringId, p=>p.FieldLinks.LoadProperties(
+                        p=>p.Id, p=> p.Name, p=> p.Hidden)))
             }));
             Assert.IsTrue(requests.Count == 1);
             Assert.AreEqual(requests[0], "_api/web?$select=Id%2cTitle%2cDescription%2cLists%2fTitle%2cLists%2fBaseTemplate%2cLists%2fId%2cLists%2fContentTypes%2fName%2cLists%2fContentTypes%2fStringId%2cLists%2fContentTypes%2fFieldLinks%2fId%2cLists%2fContentTypes%2fFieldLinks%2fName%2cLists%2fContentTypes%2fFieldLinks%2fHidden&$expand=Lists%2cLists%2fContentTypes%2cLists%2fContentTypes%2fFieldLinks", true);
@@ -336,7 +336,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task GetTeamExpressionSingleSimpleProperty()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p=>p.DefaultLanguage }));
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.DefaultLanguage }));
             Assert.IsTrue(requests.Count == 1);
             Assert.AreEqual(requests[0], "termstore?$select=id%2cdefaultLanguageTag", true);
         }
@@ -352,7 +352,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task GetTeamExpressionSingleSimplePropertyPlusKeyProperty()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.DefaultLanguage, p=>p.Id }));
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.DefaultLanguage, p => p.Id }));
             Assert.IsTrue(requests.Count == 1);
             Assert.AreEqual(requests[0], "termstore?$select=id%2cdefaultLanguageTag", true);
         }
@@ -369,7 +369,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task GetTeamExpressionExpandableKeyProperty()
         {
-            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Groups, p=>p.Id }));
+            var requests = await GetAPICallTestAsync(BuildModel<TermStore, ITermStore>(new Expression<Func<ITermStore, object>>[] { p => p.Groups, p => p.Id }));
             Assert.IsTrue(requests.Count == 2);
             Assert.AreEqual(requests[0], "termstore?$select=id%2cgroups", true);
             Assert.AreEqual(requests[1], "termstore/groups", true);
@@ -422,7 +422,7 @@ namespace PnP.Core.Test.Base
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
             var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }), 
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }),
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
             Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayName,system&$top=10&$skip=5", true);
         }
@@ -432,7 +432,7 @@ namespace PnP.Core.Test.Base
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
             var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p=>p.Description }), 
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.Description }),
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
             Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayName,description,system&$top=10&$skip=5", true);
         }
@@ -441,7 +441,7 @@ namespace PnP.Core.Test.Base
         public async Task GetLinqListSingleSimpleProperty()
         {
             var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }), 
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }),
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
             Assert.AreEqual(requests[0], "_api/web/lists?$select=Id,ListExperienceOptions&$top=10&$skip=5", true);
         }
@@ -450,7 +450,7 @@ namespace PnP.Core.Test.Base
         public async Task GetLinqListMultipleSimpleProperty()
         {
             var requests = await GetODataAPICallTestAsync(
-                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Description }), 
+                BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience, p => p.Description }),
                 new ODataQuery<IList> { Top = 10, Skip = 5 });
             Assert.AreEqual(requests[0], "_api/web/lists?$select=id,description,listexperienceoptions&$top=10&$skip=5", true);
         }
@@ -481,7 +481,7 @@ namespace PnP.Core.Test.Base
         {
             // Throws exception since expand via a separate query (like for loading the Terms) is not possible
             var requests = await GetODataAPICallTestAsync(
-                BuildModel<TermSet, ITermSet>(new Expression<Func<ITermSet, object>>[] { p => p.Id, p=>p.Terms }),
+                BuildModel<TermSet, ITermSet>(new Expression<Func<ITermSet, object>>[] { p => p.Id, p => p.Terms }),
                 new ODataQuery<ITermSet> { Top = 10, Skip = 5 });
         }
 

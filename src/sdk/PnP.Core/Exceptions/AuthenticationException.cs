@@ -5,7 +5,7 @@ namespace PnP.Core
     /// <summary>
     /// Authentication exception
     /// </summary>
-    public class AuthenticationException: PnPException
+    public class AuthenticationException : PnPException
     {
         #region Default exception constructors
         internal AuthenticationException()

@@ -6,7 +6,7 @@
     public enum ErrorType
     {
         // Service errors
-        
+
         /// <summary>
         /// Graph service request returned an error
         /// </summary>

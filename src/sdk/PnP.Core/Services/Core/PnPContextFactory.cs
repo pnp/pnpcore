@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Model.Security;
-using PnP.Core.Services.Builder.Configuration;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -98,7 +97,7 @@ namespace PnP.Core.Services
             var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
             if (configuration == null)
             {
-                throw new ClientException(ErrorType.ConfigurationError, 
+                throw new ClientException(ErrorType.ConfigurationError,
                     string.Format(PnPCoreResources.Exception_ConfigurationError_InvalidPnPContextConfigurationName, name));
             }
 
@@ -123,7 +122,7 @@ namespace PnP.Core.Services
         public async virtual Task<PnPContext> CreateAsync(Uri url)
         {
             // Use the default settings to create a new instance of SPOContext
-            return await CreateAsync(url, this.ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
+            return await CreateAsync(url, ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -207,7 +206,7 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Guid groupId)
         {
-            return await CreateAsync(groupId, this.ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
+            return await CreateAsync(groupId, ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
         }
 
         internal static async Task ConfigureForGroup(PnPContext context, Guid groupId)

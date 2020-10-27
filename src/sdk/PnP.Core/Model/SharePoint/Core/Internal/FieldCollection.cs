@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FieldCollection: QueryableDataModelCollection<IField>, IFieldCollection
+    internal partial class FieldCollection : QueryableDataModelCollection<IField>, IFieldCollection
     {
         public FieldCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
@@ -34,7 +34,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentException(string.Format(PnPCoreResources.Exception_Invalid_FieldType, nameof(fieldType)));
 
             if (!ValidateFieldOptions(fieldType, options))
-                throw new ClientException(ErrorType.InvalidParameters, 
+                throw new ClientException(ErrorType.InvalidParameters,
                     string.Format(PnPCoreResources.Exception_Invalid_ForFieldType, nameof(options), fieldType));
 
             var newField = CreateNewAndAdd() as Field;

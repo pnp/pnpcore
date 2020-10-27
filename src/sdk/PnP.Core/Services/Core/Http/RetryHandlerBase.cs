@@ -13,7 +13,7 @@ namespace PnP.Core.Services
     /// Retry handler for http requests
     /// Based upon: https://github.com/microsoftgraph/msgraph-sdk-dotnet-core/blob/dev/src/Microsoft.Graph.Core/Extensions/HttpRequestMessageExtensions.cs
     /// </summary>
-    internal abstract class RetryHandlerBase: DelegatingHandler
+    internal abstract class RetryHandlerBase : DelegatingHandler
     {
         private const string RETRY_AFTER = "Retry-After";
         private const string RETRY_ATTEMPT = "Retry-Attempt";
@@ -89,7 +89,7 @@ namespace PnP.Core.Services
 
             }
 
-            throw new ServiceException(ErrorType.TooManyRetries, (int)response.StatusCode, 
+            throw new ServiceException(ErrorType.TooManyRetries, (int)response.StatusCode,
                 string.Format(PnPCoreResources.Exception_ServiceException_MaxRetries, retryCount));
         }
 

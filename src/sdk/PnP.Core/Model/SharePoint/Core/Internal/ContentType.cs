@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [SharePointType("SP.ContentType", Target = typeof(Web),  
+    [SharePointType("SP.ContentType", Target = typeof(Web),
         Uri = "_api/Web/ContentTypes('{Id}')", Get = "_api/web/ContentTypes", LinqGet = "_api/web/ContentTypes")]
-    [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", 
+    [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')",
         Get = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class ContentType: BaseDataModel<IContentType>, IContentType
+    internal partial class ContentType : BaseDataModel<IContentType>, IContentType
     {
         #region Construction
         public ContentType()
@@ -44,7 +44,7 @@ namespace PnP.Core.Model.SharePoint
                 // Adding new content types on a list is not something we should allow
                 if (entity.Target == typeof(List))
                 {
-                    throw new ClientException(ErrorType.Unsupported, 
+                    throw new ClientException(ErrorType.Unsupported,
                         PnPCoreResources.Exception_Unsupported_AddingContentTypeToList);
                 }
 
@@ -118,7 +118,7 @@ $@"<Request xmlns=""http://schemas.microsoft.com/sharepoint/clientquery/2009"" A
         public IFieldLinkCollection FieldLinks { get => GetModelCollectionValue<IFieldLinkCollection>(); }
 
         [KeyProperty(nameof(StringId))]
-        public override object Key { get => this.StringId; set => this.StringId = value.ToString(); }
+        public override object Key { get => StringId; set => StringId = value.ToString(); }
         #endregion
 
         #region Extension methods

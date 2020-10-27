@@ -34,13 +34,13 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(prop2 == property2Value);
 
                 TestManager.DeleteProperties(context);
-                
+
                 bool exceptionThrown = false;
                 try
                 {
                     var loadedProperties2 = TestManager.GetProperties(context);
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     exceptionThrown = true;
                 }

@@ -5,7 +5,7 @@ namespace PnP.Core
     /// <summary>
     /// PnP Client exception
     /// </summary>
-    public class ClientException: PnPException
+    public class ClientException : PnPException
     {
         #region Default exception constructors
 

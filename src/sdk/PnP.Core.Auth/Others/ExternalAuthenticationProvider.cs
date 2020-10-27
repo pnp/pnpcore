@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using System;
 using System.Configuration;
@@ -46,7 +45,7 @@ namespace PnP.Core.Auth
         internal override void Init(PnPCoreAuthenticationCredentialConfigurationOptions options)
         {
             // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.ExternalAuthenticationProvider_LogInit);
+            Log?.LogInformation(PnPCoreAuthResources.ExternalAuthenticationProvider_LogInit);
         }
 
         /// <summary>
@@ -97,11 +96,11 @@ namespace PnP.Core.Auth
                     PnPCoreAuthResources.ExternalAuthenticationProvider_MissingAccessTokenProvider);
             }
 
-            var accessToken = this.AccessTokenProvider.Invoke(resource, scopes);
+            var accessToken = AccessTokenProvider.Invoke(resource, scopes);
 
             // Log the access token retrieval action
-            this.Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
-                this.GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
+            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+                GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it
             return accessToken;

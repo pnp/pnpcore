@@ -1,10 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using System;
-using System.Threading.Tasks;
-using PnP.Core.Test.Utilities;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
+using PnP.Core.Test.Utilities;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Test.QueryModel
 {
@@ -131,8 +131,8 @@ namespace PnP.Core.Test.QueryModel
 
                 IList list = await context.Web.Lists.GetByTitleAsync("Site Pages");
                 var query = (from i in list.Items
-                        where i.Title == expectedListItemTitle
-                        select i)
+                             where i.Title == expectedListItemTitle
+                             select i)
                     .Load(l => l.Id, l => l.Title);
 
                 var queryResult = await query.ToListAsync();
@@ -206,7 +206,7 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var actual = await (from l in context.Web.Lists
-                              select l)
+                                    select l)
                              .Load(l => l.Id, l => l.Title)
                              .FirstOrDefaultAsync(l => l.Title == expected);
 
@@ -245,8 +245,8 @@ namespace PnP.Core.Test.QueryModel
                 context.GraphFirst = false;
 
                 var actual = await (from l in context.Web.Lists
-                              where l.Title == expected
-                              select l).FirstOrDefaultAsync();
+                                    where l.Title == expected
+                                    select l).FirstOrDefaultAsync();
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);

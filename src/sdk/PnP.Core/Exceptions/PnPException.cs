@@ -5,7 +5,7 @@ namespace PnP.Core
     /// <summary>
     /// Base class for the pnp core sdk exceptions
     /// </summary>
-    public abstract class PnPException: Exception
+    public abstract class PnPException : Exception
     {
         #region Default constuctors
 

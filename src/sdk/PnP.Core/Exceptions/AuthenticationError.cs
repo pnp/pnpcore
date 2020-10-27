@@ -8,7 +8,7 @@ namespace PnP.Core
     /// <summary>
     /// Error class for authentication errors
     /// </summary>
-    public class AuthenticationError: BaseError
+    public class AuthenticationError : BaseError
     {
         /// <summary>
         /// Constructs an <see cref="AuthenticationError"/> instance
@@ -119,7 +119,7 @@ namespace PnP.Core
                 }
                 else if (errorField.Name == "error_codes")
                 {
-                    foreach(var errorCode in errorField.Value.EnumerateArray())
+                    foreach (var errorCode in errorField.Value.EnumerateArray())
                     {
                         if (errorCode.TryGetInt64(out long errorCodeValue))
                         {

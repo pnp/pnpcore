@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using PnP.Core.QueryModel;
+﻿using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Teams
 {

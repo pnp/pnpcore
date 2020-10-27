@@ -19,8 +19,8 @@ namespace PnP.Core.QueryModel
         protected QueryableDataModelCollection(PnPContext context, IDataModelParent parent, string memberName = null)
         {
             var queryService = new DataModelQueryService<TModel>(context, parent, memberName);
-            this.provider = new DataModelQueryProvider<TModel>(queryService);
-            this.Expression = Expression.Constant(this);
+            provider = new DataModelQueryProvider<TModel>(queryService);
+            Expression = Expression.Constant(this);
         }
 
         // Public constructor that accepts a LINQ Query Provider object instance
@@ -28,7 +28,7 @@ namespace PnP.Core.QueryModel
         public QueryableDataModelCollection(DataModelQueryProvider<TModel> provider)
         {
             this.provider = provider ?? throw new ArgumentNullException(nameof(provider));
-            this.Expression = Expression.Constant(this);
+            Expression = Expression.Constant(this);
         }
 
         // Public constructor that accepts a LINQ Query Provider object instance
@@ -36,7 +36,7 @@ namespace PnP.Core.QueryModel
         public QueryableDataModelCollection(DataModelQueryProvider<TModel> provider, Expression expression)
         {
             this.provider = provider ?? throw new ArgumentNullException(nameof(provider));
-            this.Expression = expression;
+            Expression = expression;
         }
 
         #endregion

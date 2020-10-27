@@ -32,7 +32,7 @@ namespace PnP.Core.Auth
         public InteractiveAuthenticationProvider(string clientId, string tenantId, Uri redirectUri)
             : this(null)
         {
-            this.Init(new PnPCoreAuthenticationCredentialConfigurationOptions
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
@@ -88,7 +88,7 @@ namespace PnP.Core.Auth
                 .Build();
 
             // Log the initialization information
-            this.Log?.LogInformation(PnPCoreAuthResources.InteractiveAuthenticationProvider_LogInit);
+            Log?.LogInformation(PnPCoreAuthResources.InteractiveAuthenticationProvider_LogInit);
         }
 
         /// <summary>
@@ -148,8 +148,8 @@ namespace PnP.Core.Auth
             }
 
             // Log the access token retrieval action
-            this.Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
-                this.GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
+            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+                GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
             // Return the Access Token, if we've got it
             // In case of any exception while retrieving the access token, 

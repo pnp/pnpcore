@@ -1,6 +1,6 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Threading.Tasks;
-using PnP.Core.Services;
 
 namespace PnP.Core.Model.Teams
 {

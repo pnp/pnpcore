@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
-using PnP.Core.Utilities;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint

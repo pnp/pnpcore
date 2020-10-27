@@ -10,77 +10,77 @@
         /// Specifies if required fields should be returned or not
         /// </summary>
         public bool? AddRequiredFields { get; set; }
-        
+
         /// <summary>
         /// Specifies if multi value filtering is allowed for taxonomy fields or not
         /// </summary>
         public bool? AllowMultipleValueFilterForTaxonomyFields { get; set; }
-        
+
         /// <summary>
         /// Audience to use while processing this request
         /// </summary>
         public bool? AudienceTarget { get; set; }
-        
+
         /// <summary>
         /// Specifies if we return DateTime field in UTC or local time
         /// </summary>
         public bool? DatesInUtc { get; set; }
-        
+
         /// <summary>
         /// Use a deferred render?
         /// </summary>
         public bool? DeferredRender { get; set; }
-        
+
         /// <summary>
         /// Specifies if the grouping should be expanded or not
         /// </summary>
         public bool? ExpandGroups { get; set; }
-        
+
         /// <summary>
         /// Specifies if only the first group should be returned or not (regardless of view schema)
         /// </summary>
         public bool? FirstGroupOnly { get; set; }
-        
+
         /// <summary>
         /// Specifies the url to the folder from which to return items
         /// </summary>
         public string FolderServerRelativeUrl { get; set; }
-        
+
         /// <summary>
         /// Comma-separated list of field names whose values should be rewritten to CDN URLs
         /// </summary>
         public string ImageFieldsToTryRewriteToCdnUrls { get; set; }
-        
+
         /// <summary>
         /// Merge with the default view?
         /// </summary>
         public bool? MergeDefaultView { get; set; }
-        
+
         /// <summary>
         /// Return the original date?
         /// </summary>
         public bool? OriginalDate { get; set; }
-        
+
         /// <summary>
         /// Specifies the override XML to be combined with the View CAML. Applies only to the Query/Where part of the View CAML
         /// </summary>
         public string OverrideViewXml { get; set; }
-        
+
         /// <summary>
         /// Specifies the paging information
         /// </summary>
         public string Paging { get; set; }
-        
+
         /// <summary>
         /// Specifies if the grouping should be replaced or not to deal with GroupBy throttling
         /// </summary>
         public bool? ReplaceGroup { get; set; }
-        
+
         /// <summary>
         /// Specifies the type of output to return
         /// </summary>
         public RenderListDataOptionsFlags? RenderOptions { get; set; }
-        
+
         /// <summary>
         /// Specifies the CAML view XML
         /// </summary>

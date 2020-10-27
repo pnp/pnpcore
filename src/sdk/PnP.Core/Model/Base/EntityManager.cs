@@ -65,7 +65,7 @@ namespace PnP.Core.Model
 
                     if (sharePointTypeAttributes.Any())
                     {
-                        foreach(var sharePointTypeAttribute in sharePointTypeAttributes)
+                        foreach (var sharePointTypeAttribute in sharePointTypeAttributes)
                         {
                             var sharePointTargetToAdd = new EntitySharePointTypeInfo
                             {
@@ -231,12 +231,12 @@ namespace PnP.Core.Model
                 }
                 else
                 {
-                    throw new ClientException(ErrorType.ModelMetadataIncorrect, 
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect,
                         PnPCoreResources.Exception_ModelMetadataIncorrect_MissingClassMapping);
                 }
             }
         }
-        
+
         /// <summary>
         /// Creates a concrete instance of a domain model type based on the reference type
         /// </summary>
@@ -415,7 +415,7 @@ namespace PnP.Core.Model
             {
                 if ((expression.Body as MethodCallExpression).Method.Name == "LoadProperties")
                 {
-                    fieldToLoad = ParseInclude(entityInfo, expression as LambdaExpression, null);
+                    fieldToLoad = ParseInclude(entityInfo, expression, null);
                 }
             }
 
@@ -471,7 +471,7 @@ namespace PnP.Core.Model
                             var fld = expr.Member.Name;
                             var publicTypeRecursive = GetCollectionPublicType(expr.Type);
                             var entityInfoRecursive = EntityManager.Instance.GetStaticClassInfo(publicTypeRecursive);
-                            
+
                             var expandedEntityField = new EntityFieldExpandInfo() { Name = fld, Type = publicTypeRecursive, Expandable = true };
                             ParseInclude(entityInfo, (includeFieldExpression as UnaryExpression).Operand as LambdaExpression, expandedEntityField);
 
@@ -484,7 +484,7 @@ namespace PnP.Core.Model
 
                             entityFieldExpandInfo.Fields.Add(expandedEntityField);
                         }
-                    }                    
+                    }
                 }
             }
 
@@ -511,7 +511,7 @@ namespace PnP.Core.Model
         internal Expression<Func<object, object>>[] GetEntityKeyExpressions(IDataModelParent entity)
         {
             var entityType = entity.GetType();
-            var entityInfo = this.GetStaticClassInfo(entityType);
+            var entityInfo = GetStaticClassInfo(entityType);
 
             if (string.IsNullOrEmpty(entityInfo.ActualKeyFieldName))
             {
