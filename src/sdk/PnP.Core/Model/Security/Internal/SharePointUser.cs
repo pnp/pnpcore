@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using PnP.Core.Services;
+﻿using PnP.Core.Services;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -7,11 +6,46 @@ namespace PnP.Core.Model.Security
 {
     [SharePointType("SP.User", Uri = "_api/Web/GetUserById({Id})", LinqGet = "_api/Web/SiteUsers")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class SharePointUser
+    internal partial class SharePointUser: BaseDataModel<ISharePointUser>, ISharePointUser
     {
+        #region Construction
         public SharePointUser()
         {
         }
+        #endregion
+
+        #region Properties
+        public int Id { get => GetValue<int>(); set => SetValue(value); }
+
+        [SharePointProperty("AadObjectId", JsonPath = "NameId")]
+        public string AadObjectId { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool IsHiddenInUI { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string LoginName { get => GetValue<string>(); set => SetValue(value); }
+
+        public string Title { get => GetValue<string>(); set => SetValue(value); }
+
+        public PrincipalType PrincipalType { get => GetValue<PrincipalType>(); set => SetValue(value); }
+
+        public string Department { get => GetValue<string>(); set => SetValue(value); }
+
+        [SharePointProperty("Email")]
+        public string Mail { get => GetValue<string>(); set => SetValue(value); }
+
+        public string UserPrincipalName { get => GetValue<string>(); set => SetValue(value); }
+
+        public string Expiration { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool IsEmailAuthenticationGuestUser { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsShareByEmailGuestUser { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IsSiteAdmin { get => GetValue<bool>(); set => SetValue(value); }
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => this.Id; set => this.Id = int.Parse(value.ToString()); }
+        #endregion
 
         #region Extension methods
         public async Task<IGraphUser> AsGraphUserAsync()
