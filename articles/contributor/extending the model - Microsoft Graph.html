@@ -93,9 +93,9 @@ public interface ITeamChannel : IDataModel&lt;ITeamChannel&gt;, IDataModelUpdate
 }
 </code></pre>
 <h3 id="class-decoration">Class decoration</h3>
-<p>Each model class that uses Microsoft Graph needs to have at least one <code>GraphType</code> attribute which is defined on the coded model class (e.g. Team.cs):</p>
+<p>Each model class that uses Microsoft Graph needs to have at least one <code>GraphType</code> attribute:</p>
 <pre><code class="lang-csharp">[GraphType(Uri = &quot;teams/{Site.GroupId}&quot;)]
-internal partial class Team
+internal partial class Team : BaseDataModel&lt;ITeam&gt;, ITeam
 {
     // Ommitted for brevity
 }
@@ -159,7 +159,7 @@ internal partial class Team
 </table>
 <h3 id="property-decoration">Property decoration</h3>
 <p>The property level decoration is done using the <code>GraphProperty</code> and <code>KeyProperty</code> attributes. Each model instance requires to have an override of the <code>Key</code> property and that <code>Key</code> property <strong>must</strong> be decorated with the <code>KeyProperty</code> attribute which specifies which of the actual fields in the model must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.</p>
-<p>Whereas the <code>KeyProperty</code> attribute is always there once in each model class, the usage of the <code>GraphProperty</code> attribute is only required for special cases. Since the properties are defined in the generated model class (e.g. Web.gen.cs and Teams.gen.cs) the decoration via attributes needs to happen in this class as well.</p>
+<p>Whereas the <code>KeyProperty</code> attribute is always there once in each model class, the usage of the <code>GraphProperty</code> attribute is only required for special cases.</p>
 <pre><code class="lang-csharp">// In graph the fieldname is &quot;name&quot; whereas in the model the name is &quot;Title&quot;
 [GraphProperty(&quot;name&quot;)]
 public string Title { get =&gt; GetValue&lt;string&gt;(); set =&gt; SetValue(value); }
@@ -180,7 +180,7 @@ public ITeamChannelCollection Channels { get =&gt; GetModelCollectionValue&lt;IT
 
 // Set the keyfield for this model class
 [KeyProperty(nameof(Id))]
-public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(value.ToString()); }
+public override object Key { get =&gt; Id; set =&gt; Id = Guid.Parse(value.ToString()); }
 </code></pre>
 <p>You can set following properties on this attribute:</p>
 <table>
@@ -314,9 +314,16 @@ public interface ITeamChannelCollection : IQueryable&lt;ITeamChannel&gt;, IDataM
     public ITeamChannel AddBatch(string name, string description = null);
 }
 </code></pre>
-<p>Implementation of the interface in the coded collection class (e.g. TeamChannelCollection.cs):</p>
-<pre><code class="lang-csharp">internal partial class TeamChannelCollection
+<p>Implementation of the interface in the collection class (e.g. TeamChannelCollection.cs):</p>
+<pre><code class="lang-csharp">internal partial class TeamChannelCollection : QueryableDataModelCollection&lt;ITeamChannel&gt;, ITeamChannelCollection
 {
+    public TeamChannelCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+        : base(context, parent, memberName)
+    {
+        this.PnPContext = context;
+        this.Parent = parent;
+    }
+
     /// &lt;summary&gt;
     /// Adds a new channel
     /// &lt;/summary&gt;
@@ -410,8 +417,8 @@ public interface ITeamChannelCollection : IQueryable&lt;ITeamChannel&gt;, IDataM
     }
 }
 </code></pre>
-<p>And finally you'll see the actual add logic being implemented in the coded model class (e.g. TeamChannel.cs) via implementing the <code>AddApiCallHandler</code>:</p>
-<pre><code class="lang-csharp">internal partial class TeamChannel
+<p>And finally you'll see the actual add logic being implemented in the model class (e.g. TeamChannel.cs) via implementing the <code>AddApiCallHandler</code>:</p>
+<pre><code class="lang-csharp">internal partial class TeamChannel : BaseDataModel&lt;ITeamChannel&gt;, ITeamChannel
 {
     private const string baseUri = &quot;teams/{Parent.GraphId}/channels&quot;;
 

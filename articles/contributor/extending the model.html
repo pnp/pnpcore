@@ -85,7 +85,7 @@
 <p>Extending the model is a very common type of work, especially in the early days of this SDK. This page will walk you through the needed steps, but before engaging it's recommended that you've read this article: <a href="readme.html">The PnP Core SDK model</a>.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>In order to speed up the model development the needed SharePoint REST model classes are for the most part pre created, these classes can be copied over and modified to suit your needs. You can find the pre-generated classes in <a href="https://github.com/pnp/pnpcore/tree/dev/src/generated">https://github.com/pnp/pnpcore/tree/dev/src/generated</a>. If you're not able to find your model classes then please create an issue in the issue list so we can update the generation logic to include those.</p>
+<p>In order to <strong>speed up the model development</strong> the needed SharePoint REST model classes are for the most part pre created, these classes can be copied over and modified to suit your needs. You can find the pre-generated classes in <a href="https://github.com/pnp/pnpcore/tree/dev/src/generated">https://github.com/pnp/pnpcore/tree/dev/src/generated</a>. If you're not able to find your model classes then please create an issue in the issue list so we can update the generation logic to include those.</p>
 </div>
 <h2 id="step-1-define-the-public-model">Step 1: Define the public model</h2>
 <h3 id="step-11-create-the-interfaces">Step 1.1: Create the interface(s)</h3>
@@ -169,6 +169,7 @@
     /// &lt;summary&gt;
     /// Public interface to define a {Model2} object of SharePoint Online
     /// &lt;/summary&gt;
+    [ConcreteType(typeof(Model2))]
     public interface IModel2 : IDataModel&lt;IModel&gt;
     {
          /// &lt;summary&gt;
@@ -180,9 +181,7 @@
 </code></pre>
 <h2 id="step-2-define-the-internal-model">Step 2: Define the internal model</h2>
 <p>Once you've defined the public interface the next step is defining the internal classes that implement the created interface(s). These internal classes live at the same level as your interface classes but then in the <code>Internal</code> folder instead of the <code>Public</code> folder. So if the interface lives in the <code>Model\SharePoint\Core\Public</code> folder then the respective internal class lives in the <code>Model\SharePoint\Core\Internal</code> folder.</p>
-<p>At this moment the internal classes are split into 2 partial classes: there's a <code>model.cs</code> and a <code>model.gen.cs</code> class. Overtime we might opt to combine these classes into a single class, but for now it's recommended to implement 2 classes.</p>
-<h3 id="step-21-create-the-modelgencs-class">Step 2.1: Create the model.gen.cs class</h3>
-<p>The <code>model.gen.cs</code> class contains the code that in the future could be generated, which are the properties. Key things to check are:</p>
+<p>The <code>model.cs</code> class contains the internal code, key things to check are:</p>
 <ul>
 <li>It's an internal partial class, e.g. <code>internal partial class Web</code></li>
 <li>The class name is aligned to the interface name (e.g. <code>IWeb</code> and <code>Web</code>)</li>
@@ -208,15 +207,8 @@ public Guid Id { get =&gt; GetValue&lt;Guid&gt;(); set =&gt; SetValue(value); }
 
 // Implement they Key property to use the guid ID:
 [KeyProperty(nameof(Id))]
-public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(value.ToString()); }
+public override object Key { get =&gt; Id; set =&gt; Id = Guid.Parse(value.ToString()); }
 </code></pre>
-<h3 id="step-22-create-the-modelcs-class">Step 2.2: Create the model.cs class</h3>
-<p>The <code>model.cs</code> contains the <strong>custom</strong> code, so code that could not be generated. Key things to check are:</p>
-<ul>
-<li>It's an internal partial class, e.g. <code>internal partial class Web</code></li>
-<li>The class name is aligned to the interface name (e.g. <code>IWeb</code> and <code>Web</code>)</li>
-<li>The namespace is the same as the one used for the interface</li>
-</ul>
 <h2 id="step-3-decorate-the-model-to-enable-createreadupdatedelete-functionality">Step 3: Decorate the model to enable create/read/update/delete functionality</h2>
 <p>With step 1 and 2 done you've a model definition, but there's no behaviour yet. To bring the model to life, you'll need to <strong>decorate</strong> it with class and property attributes. Depending on whether you're targeting SharePoint REST API's or Microsoft Graph API's you would use different attributes to decorate the model:</p>
 <ul>

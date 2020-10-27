@@ -93,9 +93,9 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDe
 }
 </code></pre>
 <h3 id="class-decoration">Class decoration</h3>
-<p>Each model class that uses SharePoint REST does need to have at least one <code>SharePointType</code> attribute which is defined on the coded model class (e.g. List.cs):</p>
+<p>Each model class that uses SharePoint REST does need to have at least one <code>SharePointType</code> attribute:</p>
 <pre><code class="lang-csharp">[SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
-internal partial class List
+internal partial class List : BaseDataModel&lt;IList&gt;, IList
 {
     // Omitted for brevity
 }
@@ -156,21 +156,21 @@ internal partial class List
 <p>Below sample shows how a model can be decorated for multiple scopes:</p>
 <pre><code class="lang-csharp">[SharePointType(&quot;SP.ContentType&quot;, Target = typeof(Web), Uri = &quot;_api/Web/ContentTypes('{Id}')&quot;, Get = &quot;_api/web/contenttypes&quot;, LinqGet = &quot;_api/web/contenttypes&quot;)]
 [SharePointType(&quot;SP.ContentType&quot;, Target = typeof(List), Uri = &quot;_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')&quot;, Get = &quot;_api/Web/Lists(guid'{Parent.Id}')/contenttypes&quot;, LinqGet = &quot;_api/Web/Lists(guid'{Parent.Id}')/contenttypes&quot;)]
-internal partial class ContentType
+internal partial class ContentType : BaseDataModel&lt;IContentType&gt;, IContentType
 {
     // Omitted for brevity
 }
 </code></pre>
 <h3 id="property-decoration">Property decoration</h3>
 <p>The property level decoration is done using the <code>SharePointProperty</code> and <code>KeyProperty</code> attributes. Each model instance does require to have a override of the <code>Key</code> property and that <code>Key</code> property <strong>must</strong> be decorated with the <code>KeyProperty</code> attribute, which specifies the actual fields in the model that must be selected as key. The key is for example used to ensure there are no duplicate model class instances in a single collection.</p>
-<p>Whereas the <code>KeyProperty</code> attribute is always there once in each model class, the usage of the <code>SharePointProperty</code> attribute is only needed whenever it makes sense. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. List.gen.cs) the decoration via attributes needs to happen in this class as well.</p>
+<p>Whereas the <code>KeyProperty</code> attribute is always there once in each model class, the usage of the <code>SharePointProperty</code> attribute is only needed whenever it makes sense. For most properties you do not need to set this attribute, it's only required for special cases.</p>
 <pre><code class="lang-csharp">// Configure the SharePoint REST field used to populate this model property
 [SharePointProperty(&quot;DocumentTemplateUrl&quot;)]
 public string DocumentTemplate { get =&gt; GetValue&lt;string&gt;(); set =&gt; SetValue(value); }
 
 // Set the keyfield for this model class
-[KeyProperty(&quot;Id&quot;)]
-public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(value.ToString()); }
+[KeyProperty(nameof(Id))]
+public override object Key { get =&gt; Id; set =&gt; Id = Guid.Parse(value.ToString()); }
 </code></pre>
 <p>You can set following properties on this attribute:</p>
 <table>
@@ -289,9 +289,16 @@ public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection
     public IList AddBatch(string title, ListTemplateType templateType);
 }
 </code></pre>
-<p>Implementation of the interface in the coded collection class (e.g. ListCollection.cs):</p>
-<pre><code class="lang-csharp">internal partial class ListCollection
+<p>Implementation of the interface in the collection class (e.g. ListCollection.cs):</p>
+<pre><code class="lang-csharp">internal partial class ListCollection : QueryableDataModelCollection&lt;IList&gt;, IListCollection
 {
+    public ListCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+        : base(context, parent, memberName)
+    {
+        this.PnPContext = context;
+        this.Parent = parent;
+    }
+
     public async Task&lt;IList&gt; AddBatchAsync(string title, ListTemplateType templateType)
     {
         return await AddBatchAsync(PnPContext.CurrentBatch, title, templateType).ConfigureAwait(false);
@@ -353,8 +360,9 @@ public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection
     }
 }
 </code></pre>
-<p>And finally you'll see the actual add logic being implemented in the coded model class (e.g. List.cs) via implementing the <code>AddApiCallHandler</code>:</p>
-<pre><code class="lang-csharp">internal partial class List
+<p>And finally you'll see the actual add logic being implemented in the model class (e.g. List.cs) via implementing the <code>AddApiCallHandler</code>:</p>
+<pre><code class="lang-csharp">[SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
+internal partial class List : BaseDataModel&lt;IList&gt;, IList
 {
     internal List()
     {
