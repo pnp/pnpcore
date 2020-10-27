@@ -85,7 +85,7 @@
 <p>The PnP Core SDK model contains model, collection, and complex type classes which are populated via either Microsoft Graph or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the Microsoft Graph API.</p>
 <h2 id="configuring-model-classes">Configuring model classes</h2>
 <h3 id="public-model-interface-decoration">Public model (interface) decoration</h3>
-<p>For model classes that <strong>are linq queriable</strong> one needs to link the concrete (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
+<p>All model classes need to link their concrete type (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
 <pre><code class="lang-csharp">[ConcreteType(typeof(TeamChannel))]
 public interface ITeamChannel : IDataModel&lt;ITeamChannel&gt;, IDataModelUpdate, IDataModelDelete
 {
@@ -93,7 +93,7 @@ public interface ITeamChannel : IDataModel&lt;ITeamChannel&gt;, IDataModelUpdate
 }
 </code></pre>
 <h3 id="class-decoration">Class decoration</h3>
-<p>Each model class needs to have at least one <code>GraphType</code> attribute which is defined on the coded model class (e.g. Team.cs):</p>
+<p>Each model class that uses Microsoft Graph needs to have at least one <code>GraphType</code> attribute which is defined on the coded model class (e.g. Team.cs):</p>
 <pre><code class="lang-csharp">[GraphType(Uri = &quot;teams/{Site.GroupId}&quot;)]
 internal partial class Team
 {
@@ -112,7 +112,7 @@ internal partial class Team
 <tbody>
 <tr>
 <td>Uri</td>
-<td>Yes</td>
+<td>No</td>
 <td>Defines the URI that uniquely identifies this object. See <a href="model%20tokens.html">model tokens</a> to learn more about the possible tokens you can use.</td>
 </tr>
 <tr>
@@ -172,44 +172,14 @@ public Guid Id { get =&gt; GetValue&lt;Guid&gt;(); set =&gt; SetValue(value); }
 
 // Define a collection as expandable
 [GraphProperty(&quot;lists&quot;, Expandable = true)]
-public IListCollection Lists
-{
-    get
-    {
-        if (!HasValue(nameof(Lists)))
-        {
-            var lists = new ListCollection
-            {
-                PnPContext = this.PnPContext,
-                Parent = this,
-            };
-            SetValue(lists);
-        }
-        return GetValue&lt;IListCollection&gt;();
-    }
-}
+public IListCollection Lists { get =&gt; GetModelCollectionValue&lt;IListCollection&gt;(); }
 
 // Configure an additional query to load this model class this is a non expandable collection
 [GraphProperty(&quot;channels&quot;, ExpandByDefault = true, Get = &quot;teams/{Site.GroupId}/channels&quot;)]
-public ITeamChannelCollection Channels
-{
-    get
-    {
-        if (!HasValue(nameof(Channels)))
-        {
-            var channels = new TeamChannelCollection
-            {
-                PnPContext = this.PnPContext,
-                Parent = this,
-            };
-            SetValue(channels);
-        }
-        return GetValue&lt;ITeamChannelCollection&gt;();
-    }
-}
+public ITeamChannelCollection Channels { get =&gt; GetModelCollectionValue&lt;ITeamChannelCollection&gt;(); }
 
 // Set the keyfield for this model class
-[KeyProperty(&quot;Id&quot;)]
+[KeyProperty(nameof(Id))]
 public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(value.ToString()); }
 </code></pre>
 <p>You can set following properties on this attribute:</p>
@@ -259,51 +229,15 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 </tr>
 </tbody>
 </table>
-<h2 id="configuring-complex-type-classes">Configuring complex type classes</h2>
-<h3 id="class-decoration-1">Class decoration</h3>
-<p>Each complex type class does require a <code>GraphType</code> attribute which is defined on the generated complex type class (e.g. TeamFunSettings.gen.cs):</p>
-<pre><code class="lang-csharp">[GraphType]
-internal partial class TeamFunSettings : BaseComplexType&lt;ITeamFunSettings&gt;, ITeamFunSettings
+<h2 id="configuring-collection-classes">Configuring collection classes</h2>
+<h3 id="public-model-interface-decoration-1">Public model (interface) decoration</h3>
+<p>All model collection classes need to link their concrete type (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
+<pre><code class="lang-csharp">[ConcreteType(typeof(TeamChannelCollection))]
+public interface ITeamChannelCollection : IQueryable&lt;ITeamChannel&gt;, IDataModelCollection&lt;ITeamChannel&gt;, ISupportPaging&lt;ITeamChannel&gt;
 {
-    // Ommitted for brevity
+    // Omitted for brevity
 }
 </code></pre>
-<p>Since the complex type class is not queried independently, there is no need to further define properties on the <code>GraphType</code> attribute.</p>
-<h3 id="property-decoration-1">Property decoration</h3>
-<p>The property level decoration is done using the <code>GraphProperty</code> attribute. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. TeamFunSettings.gen.cs) the decoration via attributes needs to happen in this class as well. Since complex types are not directly queried and are not used in collections only a few of the <code>GraphProperty</code> properties make sense to be used.</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FieldName</td>
-<td>Yes</td>
-<td>Use this property when the Microsoft Graph fieldname differs from the model property name. Since the field name is required by the default constructor you always need to provide this value when you add this property.</td>
-</tr>
-<tr>
-<td>JsonPath</td>
-<td>No</td>
-<td>When the information returned from Microsoft Graph is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild).</td>
-</tr>
-<tr>
-<td>UseCustomMapping</td>
-<td>No</td>
-<td>Allows you to force a callout to the model's <code>MappingHandler</code> event handler whenever this property is populated. See the <a href="event%20handlers.html">Event Handlers</a> article to learn more.</td>
-</tr>
-<tr>
-<td>Beta</td>
-<td>No</td>
-<td>Defines that a model property can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint, then this model property will not be populated.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="configuring-collection-classes">Configuring collection classes</h2>
-<p>Collection classes <strong>do not</strong> have attribute based decoration.</p>
 <h2 id="implementing-add-functionality">Implementing &quot;Add&quot; functionality</h2>
 <p>In contradiction with get, update, and delete which are fully handled by decorating classes and properties using attributes, you'll need to write actual code to implement add. Adding is implemented as follows:</p>
 <ul>
@@ -326,7 +260,8 @@ internal partial class TeamFunSettings : BaseComplexType&lt;ITeamFunSettings&gt;
 <pre><code class="lang-csharp">/// &lt;summary&gt;
 /// Public interface to define a collection of Team Channels
 /// &lt;/summary&gt;
-public interface ITeamChannelCollection : IDataModelCollection&lt;ITeamChannel&gt;
+[ConcreteType(typeof(TeamChannelCollection))]
+public interface ITeamChannelCollection : IQueryable&lt;ITeamChannel&gt;, IDataModelCollection&lt;ITeamChannel&gt;, ISupportPaging&lt;ITeamChannel&gt;
 {
     /// &lt;summary&gt;
     /// Adds a new channel

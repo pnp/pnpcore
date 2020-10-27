@@ -85,7 +85,7 @@
 <p>The PnP Core SDK model contains model, collection, and complex type classes which are populated via either Microsoft Graph and/or SharePoint REST. In this chapter you'll learn more on how to decorate your classes and their properties to interact with Microsoft 365 via the SharePoint REST API.</p>
 <h2 id="configuring-model-classes">Configuring model classes</h2>
 <h3 id="public-model-interface-decoration">Public model (interface) decoration</h3>
-<p>For model classes that <strong>are linq queriable</strong> one needs to link the concrete (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
+<p>All model classes need to link their concrete type (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
 <pre><code class="lang-csharp">[ConcreteType(typeof(List))]
 public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDelete
 {
@@ -94,7 +94,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDe
 </code></pre>
 <h3 id="class-decoration">Class decoration</h3>
 <p>Each model class that uses SharePoint REST does need to have at least one <code>SharePointType</code> attribute which is defined on the coded model class (e.g. List.cs):</p>
-<pre><code class="lang-csharp">[SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Get = &quot;_api/web/lists&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
+<pre><code class="lang-csharp">[SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
 internal partial class List
 {
     // Omitted for brevity
@@ -204,10 +204,15 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 </tr>
 </tbody>
 </table>
-<h2 id="configuring-complex-type-classes">Configuring complex type classes</h2>
-<p>Complex type classes are not used when the model is populated via SharePoint REST.</p>
 <h2 id="configuring-collection-classes">Configuring collection classes</h2>
-<p>Collection classes <strong>do not</strong> have attribute based decoration.</p>
+<h3 id="public-model-interface-decoration-1">Public model (interface) decoration</h3>
+<p>All model collection classes need to link their concrete type (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
+<pre><code class="lang-csharp">[ConcreteType(typeof(ListCollection))]
+public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable&lt;IList&gt;, ISupportPaging&lt;IList&gt;
+{
+    // Omitted for brevity
+}
+</code></pre>
 <h2 id="implementing-add-functionality">Implementing &quot;Add&quot; functionality</h2>
 <p>In contradiction with get, update, and delete which are fully handled by decorating classes and properties using attributes, you'll need to write actual code to implement add. Adding is implemented as follows:</p>
 <ul>
@@ -230,6 +235,7 @@ public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(v
 <pre><code class="lang-csharp">/// &lt;summary&gt;
 /// Public interface to define a collection of List objects of SharePoint Online
 /// &lt;/summary&gt;
+[ConcreteType(typeof(ListCollection))]
 public interface IListCollection : IQueryable&lt;IList&gt;, IDataModelCollection&lt;IList&gt;, ISupportPaging&lt;IList&gt;
 {
     /// &lt;summary&gt;

@@ -116,6 +116,7 @@
     /// &lt;summary&gt;
     /// Public interface to define a collection of {Model} object of SharePoint Online
     /// &lt;/summary&gt;
+    [ConcreteType(typeof(ModelCollection))]
     public interface IModelCollection : IDataModelCollection&lt;IModel&gt;
     {
     }
@@ -135,6 +136,7 @@
     /// &lt;summary&gt;
     /// Public interface to define a {Model} object of SharePoint Online
     /// &lt;/summary&gt;
+    [ConcreteType(typeof(Model))]
     public interface IModel : IDataModel&lt;IModel&gt;
     {
         /// &lt;summary&gt;
@@ -146,13 +148,8 @@
         /// Gets or Sets the FieldA of the {Model}
         /// &lt;/summary&gt;
         public string FieldA { get; set; }
-
-        /// &lt;summary&gt;
-        /// Gets or Sets whether the Model is &quot;FieldB&quot;
-        /// &lt;/summary&gt;
-        public bool FieldB { get; set; }
     }
-}    
+}
 </code></pre>
 <h4 id="sample-of-a-modelcollection-interface-and-a-model2-interface-that-uses-it">Sample of a ModelCollection interface and a Model2 interface that uses it</h4>
 <pre><code class="lang-csharp">namespace PnP.Core.Model.SharePoint
@@ -160,6 +157,7 @@
     /// &lt;summary&gt;
     /// Public interface to define a collection of {Model} object of SharePoint Online
     /// &lt;/summary&gt;
+    [ConcreteType(typeof(ModelCollection))]
     public interface IModelCollection : IDataModelCollection&lt;IModel&gt;
     {
 
@@ -198,9 +196,9 @@
 <li>The used interface needs to be implemented, which means all the properties defined in the interface will be added:
 <ul>
 <li>Properties are public</li>
-<li>Properties use the <code>GetValue&lt;&gt;</code> base class method for getting</li>
-<li>Properties use the <code>SetValue</code> base class method for setting</li>
-<li>Collection properties have specific get implementations, check <a href="readme.html">The PnP Core SDK model</a>) for more details</li>
+<li>Properties use the <code>GetValue&lt;&gt;</code> base class method for getting and the <code>SetValue</code> base class method for setting of simple properties</li>
+<li>Properties use the <code>GetModelValue&lt;&gt;</code> base class method for getting and the <code>SetModelValue</code> base class method for setting of Model properties</li>
+<li>Properties use the <code>GetModelCollectionValue&lt;&gt;</code> base class method for getting of Model Collection properties</li>
 </ul>
 </li>
 <li>You've added the <code>Key</code> property and it points to the property that uniquely identifies your model instance. Ensure you've also updated the <code>KeyProperty</code> value to match how you've implemented the <code>Key</code> property:</li>
@@ -209,7 +207,7 @@
 public Guid Id { get =&gt; GetValue&lt;Guid&gt;(); set =&gt; SetValue(value); }
 
 // Implement they Key property to use the guid ID:
-[KeyProperty(&quot;Id&quot;)]
+[KeyProperty(nameof(Id))]
 public override object Key { get =&gt; this.Id; set =&gt; this.Id = Guid.Parse(value.ToString()); }
 </code></pre>
 <h3 id="step-22-create-the-modelcs-class">Step 2.2: Create the model.cs class</h3>
