@@ -7,7 +7,7 @@ The PnP Core SDK model contains model, collection, and complex type classes whic
 
 ### Public model (interface) decoration
 
-For model classes that **are linq queriable** one needs to link the concrete (so the implementation) to the public interface via the `ConcreteType` class attribute:
+All model classes need to link their concrete type (so the implementation) to the public interface via the `ConcreteType` class attribute:
 
 ```csharp
 [ConcreteType(typeof(List))]
@@ -22,7 +22,7 @@ public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
 Each model class that uses SharePoint REST does need to have at least one `SharePointType` attribute which is defined on the coded model class (e.g. List.cs):
 
 ```csharp
-[SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Get = "_api/web/lists", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
+[SharePointType("SP.List", Uri = "_api/Web/Lists(guid'{Id}')", Update = "_api/web/lists/getbyid(guid'{Id}')", LinqGet = "_api/web/lists")]
 internal partial class List
 {
     // Omitted for brevity
@@ -80,13 +80,19 @@ JsonPath | No | When the information returned from SharePoint REST is a complex 
 ExpandByDefault | No | When the model contains a collection of other model objects then setting this attribute to true will automatically result in the population of that collection. This can negatively impact performance, so only set this when the collection is almost always needed.
 UseCustomMapping | No | Allows you to force a callout to the model's `MappingHandler` event handler whenever this property is populated. See the [Event Handlers](event%20handlers.md) article to learn more.
 
-## Configuring complex type classes
-
-Complex type classes are not used when the model is populated via SharePoint REST.
-
 ## Configuring collection classes
 
-Collection classes **do not** have attribute based decoration.
+### Public model (interface) decoration
+
+All model collection classes need to link their concrete type (so the implementation) to the public interface via the `ConcreteType` class attribute:
+
+```csharp
+[ConcreteType(typeof(ListCollection))]
+public interface IListCollection : IDataModelCollection<IList>, IQueryable<IList>, ISupportPaging<IList>
+{
+    // Omitted for brevity
+}
+```
 
 ## Implementing "Add" functionality
 
@@ -110,6 +116,7 @@ Below code snippets show the above three concepts. First one shows the collectio
 /// <summary>
 /// Public interface to define a collection of List objects of SharePoint Online
 /// </summary>
+[ConcreteType(typeof(ListCollection))]
 public interface IListCollection : IQueryable<IList>, IDataModelCollection<IList>, ISupportPaging<IList>
 {
     /// <summary>

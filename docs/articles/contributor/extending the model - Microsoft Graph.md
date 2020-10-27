@@ -7,7 +7,7 @@ The PnP Core SDK model contains model, collection, and complex type classes whic
 
 ### Public model (interface) decoration
 
-For model classes that **are linq queriable** one needs to link the concrete (so the implementation) to the public interface via the `ConcreteType` class attribute:
+All model classes need to link their concrete type (so the implementation) to the public interface via the `ConcreteType` class attribute:
 
 ```csharp
 [ConcreteType(typeof(TeamChannel))]
@@ -19,7 +19,7 @@ public interface ITeamChannel : IDataModel<ITeamChannel>, IDataModelUpdate, IDat
 
 ### Class decoration
 
-Each model class needs to have at least one `GraphType` attribute which is defined on the coded model class (e.g. Team.cs):
+Each model class that uses Microsoft Graph needs to have at least one `GraphType` attribute which is defined on the coded model class (e.g. Team.cs):
 
 ```csharp
 [GraphType(Uri = "teams/{Site.GroupId}")]
@@ -33,7 +33,7 @@ When configuring the `GraphType` attribute for Microsoft Graph you need to set t
 
 Property | Required | Description
 ---------|----------|------------
-Uri | Yes | Defines the URI that uniquely identifies this object. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use.
+Uri | No | Defines the URI that uniquely identifies this object. See [model tokens](model%20tokens.md) to learn more about the possible tokens you can use.
 Target | No | A model can be used from multiple scope and if so the `Target` property defines the scope of the `GraphType` attribute.
 Id | No | Defines the Microsoft graph object field which serves as unique id for the object. Typically this field is called `id` and that's also the default value, but you can provide another value if needed.
 Get | No | Overrides the Uri property for **get** operations.
@@ -62,44 +62,14 @@ public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
 // Define a collection as expandable
 [GraphProperty("lists", Expandable = true)]
-public IListCollection Lists
-{
-    get
-    {
-        if (!HasValue(nameof(Lists)))
-        {
-            var lists = new ListCollection
-            {
-                PnPContext = this.PnPContext,
-                Parent = this,
-            };
-            SetValue(lists);
-        }
-        return GetValue<IListCollection>();
-    }
-}
+public IListCollection Lists { get => GetModelCollectionValue<IListCollection>(); }
 
 // Configure an additional query to load this model class this is a non expandable collection
 [GraphProperty("channels", ExpandByDefault = true, Get = "teams/{Site.GroupId}/channels")]
-public ITeamChannelCollection Channels
-{
-    get
-    {
-        if (!HasValue(nameof(Channels)))
-        {
-            var channels = new TeamChannelCollection
-            {
-                PnPContext = this.PnPContext,
-                Parent = this,
-            };
-            SetValue(channels);
-        }
-        return GetValue<ITeamChannelCollection>();
-    }
-}
+public ITeamChannelCollection Channels { get => GetModelCollectionValue<ITeamChannelCollection>(); }
 
 // Set the keyfield for this model class
-[KeyProperty("Id")]
+[KeyProperty(nameof(Id))]
 public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
 ```
 
@@ -115,36 +85,19 @@ Get | No | Sometimes it is not possible to load the complete model via a single 
 UseCustomMapping | No | Allows you to force a callout to the model's `MappingHandler` event handler whenever this property is populated. See the [Event Handlers](event%20handlers.md) article to learn more.
 Beta | No | Defines that a model property can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint, then this model property will not be populated.
 
-## Configuring complex type classes
-
-### Class decoration
-
-Each complex type class does require a `GraphType` attribute which is defined on the generated complex type class (e.g. TeamFunSettings.gen.cs):
-
-```csharp
-[GraphType]
-internal partial class TeamFunSettings : BaseComplexType<ITeamFunSettings>, ITeamFunSettings
-{
-    // Ommitted for brevity
-}
-```
-
-Since the complex type class is not queried independently, there is no need to further define properties on the `GraphType` attribute.
-
-### Property decoration
-
-The property level decoration is done using the `GraphProperty` attribute. For most properties you do not need to set this attribute, it's only required for special cases. Since the properties are defined in the generated model class (e.g. TeamFunSettings.gen.cs) the decoration via attributes needs to happen in this class as well. Since complex types are not directly queried and are not used in collections only a few of the `GraphProperty` properties make sense to be used.
-
-Property | Required | Description
----------|----------|------------
-FieldName | Yes | Use this property when the Microsoft Graph fieldname differs from the model property name. Since the field name is required by the default constructor you always need to provide this value when you add this property.
-JsonPath | No | When the information returned from Microsoft Graph is a complex type and you only need a single value from it, then you can specify the JsonPath for that value. E.g. when you get sharePointIds.webId as response you tell the model that the fieldname is sharePointIds and the path to get there is webId. The path can be more complex, using a point to define property you need (e.g. property.child.childofchild).
-UseCustomMapping | No | Allows you to force a callout to the model's `MappingHandler` event handler whenever this property is populated. See the [Event Handlers](event%20handlers.md) article to learn more.
-Beta | No | Defines that a model property can only be handled using the Microsoft Graph beta endpoint. If a user opted out of using the Microsoft Graph beta endpoint, then this model property will not be populated.
-
 ## Configuring collection classes
 
-Collection classes **do not** have attribute based decoration.
+### Public model (interface) decoration
+
+All model collection classes need to link their concrete type (so the implementation) to the public interface via the `ConcreteType` class attribute:
+
+```csharp
+[ConcreteType(typeof(TeamChannelCollection))]
+public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCollection<ITeamChannel>, ISupportPaging<ITeamChannel>
+{
+    // Omitted for brevity
+}
+```
 
 ## Implementing "Add" functionality
 
@@ -168,7 +121,8 @@ Below code snippets show the above three concepts. First one shows the collectio
 /// <summary>
 /// Public interface to define a collection of Team Channels
 /// </summary>
-public interface ITeamChannelCollection : IDataModelCollection<ITeamChannel>
+[ConcreteType(typeof(TeamChannelCollection))]
+public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCollection<ITeamChannel>, ISupportPaging<ITeamChannel>
 {
     /// <summary>
     /// Adds a new channel
