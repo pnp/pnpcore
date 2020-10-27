@@ -17,8 +17,9 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.ListItem", Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})", LinqGet = "_api/web/lists(guid'{Parent.Id}')/items")]
     [GraphType(OverflowProperty = "fields")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class ListItem
+    internal partial class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
     {
+        #region Construction
         public ListItem()
         {
             MappingHandler = (FromJson input) =>
@@ -127,7 +128,20 @@ namespace PnP.Core.Model.SharePoint
                 return new ApiCall($"{baseApiCall}/AddValidateUpdateItemUsingPath", ApiType.SPORest, bodyContent);
             };
         }
+        #endregion
 
+        #region Properties
+        public int Id { get => GetValue<int>(); set => SetValue(value); }
+
+        public bool CommentsDisabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string Title { get => (string)this.Values["Title"]; set => this.Values["Title"] = value; }
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => this.Id; set => this.Id = (int)value; }
+        #endregion
+
+        #region Methods
         #region Graph/Rest interoperability overrides
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         internal async override Task GraphToRestMetadataAsync()
@@ -147,6 +161,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        #endregion
         #endregion
 
         #region Extension methods

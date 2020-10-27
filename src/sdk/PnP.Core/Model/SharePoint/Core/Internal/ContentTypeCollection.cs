@@ -1,11 +1,19 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class ContentTypeCollection
+    internal partial class ContentTypeCollection : QueryableDataModelCollection<IContentType>, IContentTypeCollection
     {
+        public ContentTypeCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
+
         #region Add
         public async Task<IContentType> AddBatchAsync(string id, string name, string description = null, string group = null)
         {

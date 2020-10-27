@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class RecycleBinItemCollection
+    internal partial class RecycleBinItemCollection : QueryableDataModelCollection<IRecycleBinItem>, IRecycleBinItemCollection
     {
+
+        public RecycleBinItemCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
+
         #region DeleteAll
         public async Task DeleteAllAsync()
         {

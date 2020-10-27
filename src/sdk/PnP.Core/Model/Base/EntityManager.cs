@@ -552,6 +552,11 @@ namespace PnP.Core.Model
                 {
                     type = concreteType.Type;
                 }
+                else
+                {
+                    throw new ClientException(ErrorType.ModelMetadataIncorrect, string.Format(
+                        PnPCoreResources.Exception_ModelMetadataIncorrect_MissingConcreteTypeAttribute, type.Name));
+                }
             }
 
             return type;

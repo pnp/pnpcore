@@ -198,6 +198,9 @@
   <data name="Exception_ModelMetadataIncorrect_MissingClassMapping" xml:space="preserve">
     <value>Each domain model object must be decorated with a ClassMapping attribute</value>
   </data>
+  <data name="Exception_ModelMetadataIncorrect_MissingConcreteTypeAttribute" xml:space="preserve">
+    <value>There was no instantiatable ConcreteType defined on the {0} interface</value>
+  </data>
   <data name="Exception_ModelMetadataIncorrect_MissingGetMapping" xml:space="preserve">
     <value>Specify the GraphGet/GraphGetLinq field of the ClassMapping property</value>
   </data>

@@ -1,12 +1,20 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FieldCollection
+    internal partial class FieldCollection: QueryableDataModelCollection<IField>, IFieldCollection
     {
+        public FieldCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
+
         public async Task<IField> AddBatchAsync(string title, FieldType fieldType, FieldOptions options)
         {
             return await AddBatchAsync(PnPContext.CurrentBatch, title, fieldType, options).ConfigureAwait(false);

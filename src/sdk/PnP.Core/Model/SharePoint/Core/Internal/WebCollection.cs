@@ -1,18 +1,15 @@
-﻿using PnP.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class WebCollection
+    internal partial class WebCollection : QueryableDataModelCollection<IWeb>, IWebCollection
     {
         public WebCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)
         {
-            this.PnPContext = context;
-            this.Parent = parent;
+            PnPContext = context;
+            Parent = parent;
         }
     }
 }

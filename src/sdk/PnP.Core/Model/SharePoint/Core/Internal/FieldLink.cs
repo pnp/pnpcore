@@ -1,4 +1,5 @@
 using PnP.Core.Services;
+using System;
 using System.Dynamic;
 using System.Text.Json;
 
@@ -10,8 +11,9 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.FieldLink", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks')", Get = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks", LinqGet = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks")]
     // TODO A special target should be achieve to support List Content Types
     //[SharePointType("SP.FieldLink", Target = typeof(ContentType), Uri = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks')", Get = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks", LinqGet = "_api/Web/ContentTypes('{Parent.Id}')/FieldLinks")]
-    internal partial class FieldLink
+    internal partial class FieldLink: BaseDataModel<IFieldLink>, IFieldLink
     {
+        #region Construction
         public FieldLink()
         {
             // Handler to construct the Add request for this content type
@@ -40,5 +42,27 @@ namespace PnP.Core.Model.SharePoint
                 return new ApiCall(entity.SharePointGet, ApiType.SPORest, JsonSerializer.Serialize(addParameters, typeof(ExpandoObject)));
             };
         }
+        #endregion
+
+        #region Properties
+        public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
+
+        public string FieldInternalName { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool Hidden { get => GetValue<bool>(); set => SetValue(value); }
+
+        public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string Name { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool ReadOnly { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool Required { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool ShowInDisplayForm { get => GetValue<bool>(); set => SetValue(value); }
+
+        [KeyProperty(nameof(Id))]
+        public override object Key { get => this.Id; set => this.Id = Guid.Parse(value.ToString()); }
+        #endregion
     }
 }

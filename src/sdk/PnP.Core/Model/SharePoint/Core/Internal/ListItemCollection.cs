@@ -3,12 +3,11 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class ListItemCollection
+    internal partial class ListItemCollection: QueryableDataModelCollection<IListItem>, IListItemCollection
     {
         public ListItemCollection(PnPContext context, IDataModelParent parent, string memberName = null)
             : base(context, parent, memberName)

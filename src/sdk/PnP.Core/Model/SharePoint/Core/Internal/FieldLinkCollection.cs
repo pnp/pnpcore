@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FieldLinkCollection
+    internal partial class FieldLinkCollection : QueryableDataModelCollection<IFieldLink>, IFieldLinkCollection
     {
+        public FieldLinkCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
+
         public async Task<IFieldLink> AddBatchAsync(string fieldInternalName, string displayName = null, bool hidden = false, bool required = false, bool readOnly = false, bool showInDisplayForm = true)
         {
             return await AddBatchAsync(PnPContext.CurrentBatch, fieldInternalName, displayName, hidden, required, readOnly, showInDisplayForm).ConfigureAwait(false);

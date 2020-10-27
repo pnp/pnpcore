@@ -304,6 +304,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was no instantiatable ConcreteType defined on the {0} interface.
+        /// </summary>
+        internal static string Exception_ModelMetadataIncorrect_MissingConcreteTypeAttribute {
+            get {
+                return ResourceManager.GetString("Exception_ModelMetadataIncorrect_MissingConcreteTypeAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specify the GraphGet/GraphGetLinq field of the ClassMapping property.
         /// </summary>
         internal static string Exception_ModelMetadataIncorrect_MissingGetMapping {

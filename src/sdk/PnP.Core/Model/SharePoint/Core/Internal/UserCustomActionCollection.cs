@@ -1,12 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class UserCustomActionCollection
+    internal partial class UserCustomActionCollection : QueryableDataModelCollection<IUserCustomAction>, IUserCustomActionCollection
     {
+        public UserCustomActionCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)
+        {
+            this.PnPContext = context;
+            this.Parent = parent;
+        }
+
         #region Add
         public IUserCustomAction Add(AddUserCustomActionOptions options)
         {

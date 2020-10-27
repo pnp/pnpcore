@@ -1,3 +1,4 @@
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.IO;
@@ -6,10 +7,18 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FileCollection
+    internal partial class FileCollection : QueryableDataModelCollection<IFile>, IFileCollection
     {
         // smaller max size with a chunked upload is probably more performing? (5 MB)
         private const int maxFileSizeForRegularUpload = 5 * 1024 * 1024;
+
+        #region Construction
+        public FileCollection(PnPContext context, IDataModelParent parent, string memberName) : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
+        #endregion
 
         #region Add
         public async Task<IFile> AddAsync(string name, Stream content, bool overwrite = false)
@@ -40,6 +49,7 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region File upload
         private static async Task<File> FileUpload(File newFile, Stream content, bool overwrite)
         {
             string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/add(url='{newFile.Name}',overwrite={overwrite.ToString().ToLowerInvariant()})";
@@ -125,6 +135,6 @@ namespace PnP.Core.Model.SharePoint
                 return memoryStream.ToArray();
             }
         }
-
+        #endregion
     }
 }

@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Logging;
+using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Dynamic;
@@ -16,16 +16,89 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.File", Target = typeof(Folder), Uri = "_api/Web/getFileById('{Id}')", Get = "_api/Web/getFolderById('{Parent.Id}')/Files", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Files")]
     // TODO To implement when a token can be used to identify the parent list
     //[GraphType(Get = "sites/{hostname}:{serverrelativepath}/lists/{ParentList.Id}/items/{Id}")]
-    internal partial class File
+    internal partial class File : BaseDataModel<IFile>, IFile
     {
         internal const string AddFileContentAdditionalInformationKey = "Content";
         internal const string AddFileOverwriteAdditionalInformationKey = "Overwrite";
 
+        #region Construction
         public File()
         {
         }
+        #endregion
 
-        #region Methods
+        #region Properties
+        public string CheckInComment { get => GetValue<string>(); set => SetValue(value); }
+
+        public CheckOutType CheckOutType { get => GetValue<CheckOutType>(); set => SetValue(value); }
+
+        public string ContentTag { get => GetValue<string>(); set => SetValue(value); }
+
+        public CustomizedPageStatus CustomizedPageStatus { get => GetValue<CustomizedPageStatus>(); set => SetValue(value); }
+
+        public Guid ListId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public string ETag { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool Exists { get => GetValue<bool>(); set => SetValue(value); }
+
+        public bool IrmEnabled { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string LinkingUri { get => GetValue<string>(); set => SetValue(value); }
+
+        public string LinkingUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public int MajorVersion { get => GetValue<int>(); set => SetValue(value); }
+
+        public int MinorVersion { get => GetValue<int>(); set => SetValue(value); }
+
+        public string Name { get => GetValue<string>(); set => SetValue(value); }
+
+        public ListPageRenderType PageRenderType { get => GetValue<ListPageRenderType>(); set => SetValue(value); }
+
+        public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public Guid SiteId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public DateTime TimeCreated { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        public DateTime TimeLastModified { get => GetValue<DateTime>(); set => SetValue(value); }
+
+        public string Title { get => GetValue<string>(); set => SetValue(value); }
+
+        public int UIVersion { get => GetValue<int>(); set => SetValue(value); }
+
+        public string UIVersionLabel { get => GetValue<string>(); set => SetValue(value); }
+
+        public Guid UniqueId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public Guid WebId { get => GetValue<Guid>(); set => SetValue(value); }
+
+        public IListItem ListItemAllFields { get => GetModelValue<IListItem>(); }
+
+        public IEffectiveInformationRightsManagementSettings EffectiveInformationRightsManagementSettings { get => GetModelValue<IEffectiveInformationRightsManagementSettings>(); }
+
+        public IInformationRightsManagementFileSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementFileSettings>(); }
+
+        public IPropertyValues Properties { get => GetModelValue<IPropertyValues>(); }
+
+        public IFileVersionEventCollection VersionEvents { get => GetModelCollectionValue<IFileVersionEventCollection>(); }
+
+        public IFileVersionCollection Versions { get => GetModelCollectionValue<IFileVersionCollection>(); }
+
+        public ISharePointUser Author { get => GetModelValue<ISharePointUser>(); }
+
+        public ISharePointUser CheckedOutByUser { get => GetModelValue<ISharePointUser>(); }
+
+        public ISharePointUser LockedByUser { get => GetModelValue<ISharePointUser>(); }
+
+        public ISharePointUser ModifiedBy { get => GetModelValue<ISharePointUser>(); }
+
+        [KeyProperty(nameof(UniqueId))]
+        public override object Key { get => this.UniqueId; set => this.UniqueId = Guid.Parse(value.ToString()); }
+        #endregion
+
+        #region Extension methods
 
         #region GetContent
         public async Task<Stream> GetContentAsync()

@@ -1,12 +1,18 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FolderCollection
+    internal partial class FolderCollection : QueryableDataModelCollection<IFolder>, IFolderCollection
     {
+        public FolderCollection(PnPContext context, IDataModelParent parent, string memberName = null) : base(context, parent, memberName)
+        {
+            this.PnPContext = context;
+            this.Parent = parent;
+        }
+
         #region Add
         public async Task<IFolder> AddBatchAsync(string name)
         {

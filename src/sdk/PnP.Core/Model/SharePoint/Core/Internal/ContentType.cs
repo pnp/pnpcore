@@ -11,8 +11,9 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.ContentType", Target = typeof(List), Uri = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes('{Id}')", 
         Get = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes", LinqGet = "_api/Web/Lists(guid'{Parent.Id}')/ContentTypes")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class ContentType
+    internal partial class ContentType: BaseDataModel<IContentType>, IContentType
     {
+        #region Construction
         public ContentType()
         {
             PostMappingHandler = (json) =>
@@ -62,7 +63,65 @@ $@"<Request xmlns=""http://schemas.microsoft.com/sharepoint/clientquery/2009"" A
                 return new ApiCall(xml);
             };
         }
+        #endregion
 
+        #region Properties
+        public string StringId { get => GetValue<string>(); set => SetValue(value); }
+
+        [SharePointProperty("Id", JsonPath = "StringValue")]
+        public string Id { get => GetValue<string>(); set => SetValue(value); }
+
+        public string ClientFormCustomFormatter { get => GetValue<string>(); set => SetValue(value); }
+
+        public string Description { get => GetValue<string>(); set => SetValue(value); }
+
+        public string DisplayFormTemplateName { get => GetValue<string>(); set => SetValue(value); }
+
+        public string DisplayFormUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public string DocumentTemplate { get => GetValue<string>(); set => SetValue(value); }
+
+        public string DocumentTemplateUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public string EditFormTemplateName { get => GetValue<string>(); set => SetValue(value); }
+
+        public string EditFormUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public string Group { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool Hidden { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string JSLink { get => GetValue<string>(); set => SetValue(value); }
+
+        public string MobileDisplayFormUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public string MobileEditFormUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public string MobileNewFormUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public string Name { get => GetValue<string>(); set => SetValue(value); }
+
+        public string NewFormTemplateName { get => GetValue<string>(); set => SetValue(value); }
+
+        public string NewFormUrl { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool ReadOnly { get => GetValue<bool>(); set => SetValue(value); }
+
+        public string SchemaXml { get => GetValue<string>(); set => SetValue(value); }
+
+        public string SchemaXmlWithResourceTokens { get => GetValue<string>(); set => SetValue(value); }
+
+        public string Scope { get => GetValue<string>(); set => SetValue(value); }
+
+        public bool Sealed { get => GetValue<bool>(); set => SetValue(value); }
+
+        public IFieldLinkCollection FieldLinks { get => GetModelCollectionValue<IFieldLinkCollection>(); }
+
+        [KeyProperty(nameof(StringId))]
+        public override object Key { get => this.StringId; set => this.StringId = value.ToString(); }
+        #endregion
+
+        #region Extension methods
         #region AddAvailableContentType
         private ApiCall AddAvailableContentTypeApiCall(string id)
         {
@@ -91,6 +150,7 @@ $@"<Request xmlns=""http://schemas.microsoft.com/sharepoint/clientquery/2009"" A
             await RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
             return this;
         }
+        #endregion
         #endregion
     }
 }

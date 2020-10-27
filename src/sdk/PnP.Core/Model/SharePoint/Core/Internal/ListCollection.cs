@@ -7,8 +7,15 @@ using PnP.Core.Services;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class ListCollection
+    internal partial class ListCollection : QueryableDataModelCollection<IList>, IListCollection
     {
+        public ListCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
+        {
+            this.PnPContext = context;
+            this.Parent = parent;
+        }
+
         #region Add methods
 
         public async Task<IList> AddBatchAsync(string title, ListTemplateType templateType)
