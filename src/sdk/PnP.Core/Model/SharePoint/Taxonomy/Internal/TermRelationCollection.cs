@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class TermRelationCollection
+    internal partial class TermRelationCollection : BaseDataModelCollection<ITermRelation>, ITermRelationCollection
     {
         public async Task<ITermRelation> AddAsync(TermRelationType relationship, ITermSet targetSet, ITerm fromTerm = null)
         {

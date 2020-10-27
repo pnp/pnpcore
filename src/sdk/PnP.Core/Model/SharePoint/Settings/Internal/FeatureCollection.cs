@@ -1,12 +1,20 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class FeatureCollection
+    internal partial class FeatureCollection : QueryableDataModelCollection<IFeature>, IFeatureCollection
     {
+        public FeatureCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+           : base(context, parent, memberName)
+        {
+            PnPContext = context;
+            Parent = parent;
+        }
+
         public async Task DisableAsync(Guid id)
         {
             if (id == null)

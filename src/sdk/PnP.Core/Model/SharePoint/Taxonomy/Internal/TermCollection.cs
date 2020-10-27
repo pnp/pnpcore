@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class TermCollection
+    internal partial class TermCollection : BaseDataModelCollection<ITerm>, ITermCollection
     {
         public async Task<ITerm> AddAsync(string name, string description = null)
         {

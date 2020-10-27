@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal partial class TermGroupCollection
+    internal partial class TermGroupCollection : QueryableDataModelCollection<ITermGroup>, ITermGroupCollection
     {
+        public TermGroupCollection(PnPContext context, IDataModelParent parent, string memberName = null)
+            : base(context, parent, memberName)
+        {
+            this.PnPContext = context;
+            this.Parent = parent;
+        }
+
         #region Add methods
 
         public async Task<ITermGroup> AddAsync(string name, string description = null, TermGroupScope scope = TermGroupScope.Global)
