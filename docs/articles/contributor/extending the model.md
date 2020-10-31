@@ -55,7 +55,7 @@ Once the interface is created you need to add properties to it, the properties y
 
 - The added properties are public properties
 - The added properties have a getter and a setter, unless the property is model collection (e.g. `public IListCollection Lists { get; }` in `IWeb.cs`)
-- The properties are simple .Net types, enums (see below), complex types or collections of already defined model classes or complex types. See [The PnP Core SDK model](./readme.md) for more details
+- The properties are simple .Net types, Enums (see below), complex types or collections of already defined model classes or complex types. See [The PnP Core SDK model](./readme.md) for more details
 - Properties have triple slash comments explaining their purpose
 
 #### Sample of a Model interface with properties
@@ -145,7 +145,7 @@ public override object Key { get => Id; set => Id = Guid.Parse(value.ToString())
 
 ## Step 3: Decorate the model to enable create/read/update/delete functionality
 
-With step 1 and 2 done you've a model definition, but there's no behaviour yet. To bring the model to life, you'll need to **decorate** it with class and property attributes. Depending on whether you're targeting SharePoint REST API's or Microsoft Graph API's you would use different attributes to decorate the model:
+With step 1 and 2 done you've a model definition, but there's no behavior yet. To bring the model to life, you'll need to **decorate** it with class and property attributes. Depending on whether you're targeting SharePoint REST API's or Microsoft Graph API's you would use different attributes to decorate the model:
 
 - [Decorating the model for SharePoint REST API's](extending%20the%20model%20-%20SharePoint%20REST.md)
 - [Decorating the model for Microsoft Graph API's](extending%20the%20model%20-%20Microsoft%20Graph.md)
@@ -155,7 +155,7 @@ With step 1 and 2 done you've a model definition, but there's no behaviour yet. 
 
 ## Step 4: Add additional functionality
 
-At this point you should have a working model that can be used to read data and depending on the implementation also supports adding, updating and deleting. The power of the SDK however will not just be the model, but also the "rich" extensions on top of it. The extensions can be implemented as methods on the model, e.g. you could imagine an `UploadFile` method on the `ITeamChannel` model. For implementing this additional functions you quite often will need to execute API calls and optionally have the resulting json response loaded into the model. For doing that there are the `RequestAsync` and `Request` base class methods in case you want the resulting json be processed or the `RawRequestAsync` method in case you want to process the resulting json as part of your implementation. You'll find more details on this on the pages that explain the model decoration for Graph/REST:
+At this point you should have a working model that can be used to read data and depending on the implementation also supports adding, updating and deleting. The power of the SDK however will not just be the model, but also the "rich" extensions on top of it. The extensions can be implemented as methods on the model, e.g. you could imagine an `UploadFile` method on the `ITeamChannel` model. For implementing this additional functions you quite often will need to execute API calls and optionally have the resulting JSON response loaded into the model. For doing that there are the `RequestAsync` and `Request` base class methods in case you want the resulting JSON be processed or the `RawRequestAsync` method in case you want to process the resulting JSON as part of your implementation. You'll find more details on this on the pages that explain the model decoration for Graph/REST:
 
 - [Decorating the model for SharePoint REST API's](extending%20the%20model%20-%20SharePoint%20REST.md)
 - [Decorating the model for Microsoft Graph API's](extending%20the%20model%20-%20Microsoft%20Graph.md)

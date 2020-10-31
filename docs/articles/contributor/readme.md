@@ -73,7 +73,7 @@ Each public model:
 - Optionally implements the `IDataModelGet<TModel>` interface whenever **get** functionality is needed on this model class (most of the models have this)
 - Optionally implements the `IDataModelUpdate` interface whenever **update** functionality in needed on this model class
 - Optionally implements the `IDataModelDelete` interface whenever **delete** functionality is needed on this model class
-- Optionally implements the `IQueryableDataModel` interface whenerver the model supports LINQ querying. This goes hand in hand with using the `QueryableDataModelCollection` base class for the model's collection class
+- Optionally implements the `IQueryableDataModel` interface whenever the model supports LINQ querying. This goes hand in hand with using the `QueryableDataModelCollection` base class for the model's collection class
 
 The properties in the model use either basic .Net data types, enumerations, other model/collection types or so called complex types:
 
@@ -213,7 +213,7 @@ Optionally a collection interface defines methods which add behavior to the coll
 
 #### Internal implementation
 
-For the internal collection class implementation we've opted to use internal partial classes. Here's a snippet of the `ListCollection.cs` class, which is linq queriable:
+For the internal collection class implementation we've opted to use internal partial classes. Here's a snippet of the `ListCollection.cs` class, which is linq queryable:
 
 ```csharp
 internal partial class ListCollection : QueryableDataModelCollection<IList>, IListCollection
@@ -261,7 +261,7 @@ internal partial class ListCollection : QueryableDataModelCollection<IList>, ILi
 }
 ```
 
-If the collection is not linq queriable the collection class is very simple:
+If the collection is not linq queryable the collection class is very simple:
 
 ```csharp
 internal partial class TeamAppCollection : BaseDataModelCollection<ITeamApp>, ITeamAppCollection
@@ -270,7 +270,7 @@ internal partial class TeamAppCollection : BaseDataModelCollection<ITeamApp>, IT
 
 Each collection class:
 
-- Inherits from either the `BaseDataModelCollection<TModel>` for regular collections or from the `QueryableDataModelCollection<TModel>` class for linq queriable collections and implements the previously created collection interface (e.g. `IListCollection`)
+- Inherits from either the `BaseDataModelCollection<TModel>` for regular collections or from the `QueryableDataModelCollection<TModel>` class for linq queryable collections and implements the previously created collection interface (e.g. `IListCollection`)
 - Is an **internal**, **partial** class
 - Implements a specific constructor in case the class inherits from `QueryableDataModelCollection<TModel>`
 - Can use the `CreateNewAndAdd` collection base class method to create a new instance and add it to the collection
