@@ -140,7 +140,7 @@ public interface IList : IDataModel&lt;IList&gt;, IDataModelGet&lt;IList&gt;, ID
 <li>Optionally implements the <code>IDataModelGet&lt;TModel&gt;</code> interface whenever <strong>get</strong> functionality is needed on this model class (most of the models have this)</li>
 <li>Optionally implements the <code>IDataModelUpdate</code> interface whenever <strong>update</strong> functionality in needed on this model class</li>
 <li>Optionally implements the <code>IDataModelDelete</code> interface whenever <strong>delete</strong> functionality is needed on this model class</li>
-<li>Optionally implements the <code>IQueryableDataModel</code> interface whenerver the model supports LINQ querying. This goes hand in hand with using the <code>QueryableDataModelCollection</code> base class for the model's collection class</li>
+<li>Optionally implements the <code>IQueryableDataModel</code> interface whenever the model supports LINQ querying. This goes hand in hand with using the <code>QueryableDataModelCollection</code> base class for the model's collection class</li>
 </ul>
 <p>The properties in the model use either basic .Net data types, enumerations, other model/collection types or so called complex types:</p>
 <pre><code class="lang-csharp">// Simple .Net type
@@ -275,7 +275,7 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
 </ul>
 <p>Optionally a collection interface defines methods which add behavior to the collection.</p>
 <h4 id="internal-implementation-1">Internal implementation</h4>
-<p>For the internal collection class implementation we've opted to use internal partial classes. Here's a snippet of the <code>ListCollection.cs</code> class, which is linq queriable:</p>
+<p>For the internal collection class implementation we've opted to use internal partial classes. Here's a snippet of the <code>ListCollection.cs</code> class, which is linq queryable:</p>
 <pre><code class="lang-csharp">internal partial class ListCollection : QueryableDataModelCollection&lt;IList&gt;, IListCollection
 {
     public ListCollection(PnPContext context, IDataModelParent parent, string memberName = null)
@@ -320,13 +320,13 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
     // Other methods omitted for brevity
 }
 </code></pre>
-<p>If the collection is not linq queriable the collection class is very simple:</p>
+<p>If the collection is not linq queryable the collection class is very simple:</p>
 <pre><code class="lang-csharp">internal partial class TeamAppCollection : BaseDataModelCollection&lt;ITeamApp&gt;, ITeamAppCollection
 { }
 </code></pre>
 <p>Each collection class:</p>
 <ul>
-<li>Inherits from either the <code>BaseDataModelCollection&lt;TModel&gt;</code> for regular collections or from the <code>QueryableDataModelCollection&lt;TModel&gt;</code> class for linq queriable collections and implements the previously created collection interface (e.g. <code>IListCollection</code>)</li>
+<li>Inherits from either the <code>BaseDataModelCollection&lt;TModel&gt;</code> for regular collections or from the <code>QueryableDataModelCollection&lt;TModel&gt;</code> class for linq queryable collections and implements the previously created collection interface (e.g. <code>IListCollection</code>)</li>
 <li>Is an <strong>internal</strong>, <strong>partial</strong> class</li>
 <li>Implements a specific constructor in case the class inherits from <code>QueryableDataModelCollection&lt;TModel&gt;</code></li>
 <li>Can use the <code>CreateNewAndAdd</code> collection base class method to create a new instance and add it to the collection</li>

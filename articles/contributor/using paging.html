@@ -108,7 +108,7 @@
 </code></pre>
 <div class="IMPORTANT">
 <h5>Important</h5>
-<p>Since paging depends on the ODATA $top operator you also need to make your class linq queriable (by implementing <code>IQueryable&lt;&gt;</code>, next to the default <code>IDataModelCollection&lt;&gt;</code>). If for some reason you cannot make your collection class linq quariable, then ensure that you've decorated your model class (<code>List</code> in this case) with <code>LinqGet</code> as shown below</p>
+<p>Since paging depends on the ODATA $top operator you also need to make your class linq queryable (by implementing <code>IQueryable&lt;&gt;</code>, next to the default <code>IDataModelCollection&lt;&gt;</code>). If for some reason you cannot make your collection class linq queryable, then ensure that you've decorated your model class (<code>List</code> in this case) with <code>LinqGet</code> as shown below</p>
 <pre><code class="lang-csharp">   [SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
    [GraphType(Get = &quot;sites/{Parent.GraphId}/lists/{GraphId}&quot;, LinqGet = &quot;sites/{Parent.GraphId}/lists&quot;)]
    internal partial class List
