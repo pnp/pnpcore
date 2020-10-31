@@ -7,7 +7,7 @@ The PnP Core SDK source code lives in the https://github.com/pnp/pnpcore reposit
 - Click on the **Fork** button (top right on the https://github.com/pnp/pnpcore home page)
 - Create a fork in your account or organization of choice
 - Pull down your forked version via:
-  - Clicking on the greeen **Code** button and copy the git url
+  - Clicking on the green **Code** button and copy the git URL
   - Ensure you've installed a Git client (e.g. https://git-scm.com/downloads)
   - Open your command prompt and navigate to the folder where you want to pull down the source code (e.g. c:\github)
   - Pull down your forked repo via `git clone <the copied git url>`
@@ -35,7 +35,7 @@ Using Visual Studio Code requires you to:
 
 ## Making changes and testing them
 
-The recommended approach for making changes and testing them is by writing the appropiate unit tests (see the [Writing tests](writing%20tests.md) article).
+The recommended approach for making changes and testing them is by writing the appropriate unit tests (see the [Writing tests](writing%20tests.md) article).
 
 ## Create a PR with your changes
 
