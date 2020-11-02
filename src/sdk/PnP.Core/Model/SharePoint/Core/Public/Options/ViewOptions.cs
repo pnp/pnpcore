@@ -71,6 +71,6 @@
         /// <summary>
         /// Gets or sets the View Type 2 information
         /// </summary>
-        public string ViewType2 { get; set; }
+        public ViewType2 ViewType2 { get; set; }
     }
 }

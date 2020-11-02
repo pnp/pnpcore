@@ -2,6 +2,7 @@ using PnP.Core.Services;
 using System;
 using System.Dynamic;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -51,6 +52,7 @@ namespace PnP.Core.Model.SharePoint
                 // To handle the serialization of string collections
                 var serializerOptions = new JsonSerializerOptions() { IgnoreNullValues = true };
                 serializerOptions.Converters.Add(new SharePointRestCollectionJsonConverter<string>());
+                serializerOptions.Converters.Add(new JsonStringEnumConverter());
 
                 string body = JsonSerializer.Serialize(viewCreationInformation, typeof(ExpandoObject), serializerOptions);
 
@@ -148,7 +150,7 @@ namespace PnP.Core.Model.SharePoint
 
         public string ViewData { get => GetValue<string>(); set => SetValue(value); }
 
-        public string ViewType2 { get => GetValue<string>(); set => SetValue(value); }
+        public ViewType2 ViewType2 { get => GetValue<ViewType2>(); set => SetValue(value); }
 
         public IViewFieldCollection ViewFields { get => GetModelCollectionValue<IViewFieldCollection>(); }
 

@@ -19,7 +19,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetListViewAsync()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
@@ -210,7 +210,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListViewSpecificBatch()
         {
-            //TestCommon.Instance.Mocking = false;
+            TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
@@ -231,6 +231,37 @@ namespace PnP.Core.Test.SharePoint
                 var removeBatch = context.NewBatch();
                 list.Views.RemoveBatch(removeBatch, result.Id);
                 await context.ExecuteAsync(removeBatch);
+
+            }
+        }
+
+
+        [TestMethod]
+        public async Task AddListViewType2CompactList()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
+
+                var viewTitle = "PnPCoreTestViewType2CompactList";
+                var result = list.Views.Add(new ViewOptions()
+                {
+                    Title = viewTitle,
+                    RowLimit = 3,
+                    ViewType2 = ViewType2.COMPACTLIST
+                });
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(viewTitle, result.Title);
+
+                var list2 = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
+                var newView = list2.Views.FirstOrDefault(o=>o.Title == viewTitle);
+                Assert.IsNotNull(newView);
+                Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
+
+                // Removes the view
+                list.Views.Remove(result.Id);
 
             }
         }
