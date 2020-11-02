@@ -249,7 +249,8 @@ namespace PnP.Core.Test.SharePoint
                 {
                     Title = viewTitle,
                     RowLimit = 3,
-                    ViewType2 = ViewType2.COMPACTLIST
+                    ViewType2 = ViewType2.COMPACTLIST,
+                    ViewTypeKind = ViewTypeKind.Html
                 });
 
                 Assert.IsNotNull(result);

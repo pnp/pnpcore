@@ -223,7 +223,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets View Type
         /// </summary>
-        public string ViewType { get; set; }
+        public ViewType ViewType { get; set; }
 
         /// <summary>
         /// Gets or sets 
