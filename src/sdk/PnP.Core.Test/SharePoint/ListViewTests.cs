@@ -19,7 +19,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task GetListViewAsync()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
@@ -210,7 +210,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListViewSpecificBatch()
         {
-            TestCommon.Instance.Mocking = false;
+           //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.ListExperience, p => p.Views);
@@ -239,7 +239,7 @@ namespace PnP.Core.Test.SharePoint
         [TestMethod]
         public async Task AddListViewType2CompactList()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var list = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Title, p => p.Views);
