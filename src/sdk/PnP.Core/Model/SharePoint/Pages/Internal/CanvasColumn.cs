@@ -12,11 +12,7 @@ namespace PnP.Core.Model.SharePoint
         internal const string CanvasControlAttribute = "data-sp-canvascontrol";
         internal const string CanvasDataVersionAttribute = "data-sp-canvasdataversion";
         internal const string ControlDataAttribute = "data-sp-controldata";
-
-        private int columnFactor;
-        private readonly int layoutIndex;
         private int? zoneEmphasis;
-        private ICanvasSection section;
         private readonly string DataVersion = "1.0";
         #endregion
 
@@ -29,10 +25,10 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(section));
             }
 
-            this.section = section;
-            this.columnFactor = 12;
+            this.Section = section;
+            this.ColumnFactor = 12;
             this.Order = 0;
-            this.layoutIndex = 1;
+            this.LayoutIndex = 1;
         }
 
         internal CanvasColumn(CanvasSection section, int order)
@@ -42,9 +38,9 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(section));
             }
 
-            this.section = section;
+            this.Section = section;
             this.Order = order;
-            this.layoutIndex = 1;
+            this.LayoutIndex = 1;
         }
 
         internal CanvasColumn(CanvasSection section, int order, int? sectionFactor)
@@ -54,10 +50,10 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(section));
             }
 
-            this.section = section;
+            this.Section = section;
             this.Order = order;
-            this.columnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
-            this.layoutIndex = 1;
+            this.ColumnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
+            this.LayoutIndex = 1;
         }
 
         internal CanvasColumn(CanvasSection section, int order, int? sectionFactor, int? layoutIndex)
@@ -67,10 +63,10 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(section));
             }
 
-            this.section = section;
+            this.Section = section;
             this.Order = order;
-            this.columnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
-            this.layoutIndex = layoutIndex.HasValue ? layoutIndex.Value : 1;
+            this.ColumnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
+            this.LayoutIndex = layoutIndex.HasValue ? layoutIndex.Value : 1;
         }
         #endregion
 
@@ -80,35 +76,17 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// <see cref="ICanvasSection"/> this section belongs to
         /// </summary>
-        public ICanvasSection Section
-        {
-            get
-            {
-                return this.section;
-            }
-        }
+        public ICanvasSection Section { get; private set; }
 
         /// <summary>
         /// Column size factor. Max value is 12 (= one column), other options are 8,6,4 or 0
         /// </summary>
-        public int ColumnFactor
-        {
-            get
-            {
-                return this.columnFactor;
-            }
-        }
+        public int ColumnFactor { get; private set; }
 
         /// <summary>
         /// Returns the layout index. Defaults to 1, except for the vertical section column this is 2
         /// </summary>
-        public int LayoutIndex
-        {
-            get
-            {
-                return this.layoutIndex;
-            }
-        }
+        public int LayoutIndex { get; }
 
         /// <summary>
         /// List of <see cref="ICanvasControl"/> instances that are hosted in this section
@@ -217,13 +195,13 @@ namespace PnP.Core.Model.SharePoint
         public void ResetColumn(int order, int columnFactor)
         {
             this.Order = order;
-            this.columnFactor = columnFactor;
+            this.ColumnFactor = columnFactor;
         }
 
         #region Internal and helper methods
         internal void MoveTo(CanvasSection section)
         {
-            this.section = section;
+            this.Section = section;
         }
         #endregion
 

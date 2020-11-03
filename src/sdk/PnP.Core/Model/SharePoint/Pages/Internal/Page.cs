@@ -992,13 +992,17 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Create and Save page
+
+        #endregion
+
         #region Get client side web parts methods
-        public IEnumerable<ClientSideComponent> AvailableClientSideComponents(string name)
+        public IEnumerable<IClientSideComponent> AvailableClientSideComponents(string name)
         {
             return AvailableClientSideComponentsAsync(name).GetAwaiter().GetResult();
         }
 
-        public async Task<IEnumerable<ClientSideComponent>> AvailableClientSideComponentsAsync(string name)
+        public async Task<IEnumerable<IClientSideComponent>> AvailableClientSideComponentsAsync(string name)
         {
             var apiCall = new ApiCall($"_api/web/GetClientSideWebParts", ApiType.SPORest);
 
@@ -1007,7 +1011,7 @@ namespace PnP.Core.Model.SharePoint
             if (!string.IsNullOrEmpty(response.Json))
             {
                 var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-                var clientSideComponents = (IEnumerable<ClientSideComponent>)JsonSerializer.Deserialize<AvailableClientSideComponents>(response.Json, jsonSerializerSettings).value;
+                var clientSideComponents = (IEnumerable<IClientSideComponent>)JsonSerializer.Deserialize<AvailableClientSideComponents>(response.Json, jsonSerializerSettings).value;
 
                 if (!clientSideComponents.Any())
                 {

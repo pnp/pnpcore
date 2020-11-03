@@ -1,8 +1,6 @@
 ﻿using AngleSharp.Dom;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
@@ -13,9 +11,9 @@ namespace PnP.Core.Model.SharePoint
     internal abstract class CanvasControl : ICanvasControl
     {
         #region variables
-        public const string CanvasControlAttribute = "data-sp-canvascontrol";
-        public const string CanvasDataVersionAttribute = "data-sp-canvasdataversion";
-        public const string ControlDataAttribute = "data-sp-controldata";
+        internal const string CanvasControlAttribute = "data-sp-canvascontrol";
+        internal const string CanvasDataVersionAttribute = "data-sp-canvasdataversion";
+        internal const string ControlDataAttribute = "data-sp-controldata";
 
         internal int order;
         internal int controlType;
@@ -32,7 +30,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Constructs the canvas control
         /// </summary>
-        public CanvasControl()
+        internal CanvasControl()
         {
             this.dataVersion = "1.0";
             this.canvasDataVersion = "1.0";
@@ -240,7 +238,7 @@ namespace PnP.Core.Model.SharePoint
         /// Moves the control to another section and column while keeping it's current position
         /// </summary>
         /// <param name="newColumn">New column that will host the control</param>
-        public void MovePosition(CanvasColumn newColumn)
+        public void MovePosition(ICanvasColumn newColumn)
         {
             var currentColumn = this.Column;
             this.section = newColumn.Section;
@@ -254,7 +252,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="newColumn">New column that will host the control</param>
         /// <param name="position">New position for the control in the new column</param>
-        public void MovePosition(CanvasColumn newColumn, int position)
+        public void MovePosition(ICanvasColumn newColumn, int position)
         {
             var currentColumn = this.Column;
             MovePosition(newColumn);
@@ -314,7 +312,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="controlDataJson">data-sp-controldata json string</param>
         /// <returns>Type of the control represented by the json string</returns>
-        public static Type GetType(string controlDataJson)
+        internal static Type GetType(string controlDataJson)
         {
             if (controlDataJson == null)
             {

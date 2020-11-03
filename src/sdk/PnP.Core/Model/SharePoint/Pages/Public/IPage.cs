@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// A modern SharePoint Page
     /// </summary>
     [ConcreteType(typeof(Page))]
-    public interface IPage : IDataModel<IPage>, IDataModelGet<IPage>, IListItemBase, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel
+    public interface IPage : IDataModel<IPage>, IListItemBase /*, IDataModelGet<IPage>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel*/
     {
         /// <summary>
         /// List of sections on this page
@@ -42,14 +42,14 @@ namespace PnP.Core.Model.SharePoint
         /// Gets a list of available client side web parts to use having a given name
         /// </summary>
         /// <param name="name">Name of the web part to retrieve</param>
-        /// <returns>List of available <see cref="ClientSideComponent"/></returns>
-        Task<IEnumerable<ClientSideComponent>> AvailableClientSideComponentsAsync(string name);
+        /// <returns>List of available <see cref="IClientSideComponent"/></returns>
+        Task<IEnumerable<IClientSideComponent>> AvailableClientSideComponentsAsync(string name);
 
         /// <summary>
         /// Gets a list of available client side web parts to use having a given name
         /// </summary>
         /// <param name="name">Name of the web part to retrieve</param>
-        /// <returns>List of available <see cref="ClientSideComponent"/></returns>
-        IEnumerable<ClientSideComponent> AvailableClientSideComponents(string name);
+        /// <returns>List of available <see cref="IClientSideComponent"/></returns>
+        IEnumerable<IClientSideComponent> AvailableClientSideComponents(string name);
     }
 }

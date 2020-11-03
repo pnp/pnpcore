@@ -56,5 +56,68 @@ namespace PnP.Core.Model.SharePoint
         /// Type if the control (<see cref="IClientSideText"/> or <see cref="IClientSideWebPart"/>)
         /// </summary>
         Type Type { get; }
+
+        /// <summary>
+        /// Removes the control from the page
+        /// </summary>
+        void Delete();
+
+        /// <summary>
+        /// Moves the control to another section and column
+        /// </summary>
+        /// <param name="newSection">New section that will host the control</param>
+        void Move(ICanvasSection newSection);
+
+        /// <summary>
+        /// Moves the control to another section and column
+        /// </summary>
+        /// <param name="newSection">New section that will host the control</param>
+        /// <param name="order">New order for the control in the new section</param>
+        void Move(ICanvasSection newSection, int order);
+
+        /// <summary>
+        /// Moves the control to another section and column
+        /// </summary>
+        /// <param name="newColumn">New column that will host the control</param>
+        void Move(ICanvasColumn newColumn);
+
+        /// <summary>
+        /// Moves the control to another section and column
+        /// </summary>
+        /// <param name="newColumn">New column that will host the control</param>
+        /// <param name="order">New order for the control in the new column</param>
+        void Move(ICanvasColumn newColumn, int order);
+
+        /// <summary>
+        /// Moves the control to another section and column while keeping it's current position
+        /// </summary>
+        /// <param name="newSection">New section that will host the control</param>
+        void MovePosition(ICanvasSection newSection);
+
+        /// <summary>
+        /// Moves the control to another section and column in the given position
+        /// </summary>
+        /// <param name="newSection">New section that will host the control</param>
+        /// <param name="position">New position for the control in the new section</param>
+        void MovePosition(ICanvasSection newSection, int position);
+
+        /// <summary>
+        /// Moves the control to another section and column while keeping it's current position
+        /// </summary>
+        /// <param name="newColumn">New column that will host the control</param>
+        void MovePosition(ICanvasColumn newColumn);
+
+        /// <summary>
+        /// Moves the control to another section and column in the given position
+        /// </summary>
+        /// <param name="newColumn">New column that will host the control</param>
+        /// <param name="position">New position for the control in the new column</param>
+        void MovePosition(ICanvasColumn newColumn, int position);
+
+        /// <summary>
+        /// Moves the control inside the current column to a new position
+        /// </summary>
+        /// <param name="position">New position for this control</param>
+        void MovePosition(int position);
     }
 }
