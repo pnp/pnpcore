@@ -258,6 +258,9 @@ namespace PnP.Core.Model.SharePoint
 
         public IBasePermissions EffectiveBasePermissions { get => GetModelValue<IBasePermissions>(); }
 
+        [SharePointProperty("Pages", Get = "_api/web/lists/getbytitle('Site Pages')/items")]
+        public IPageCollection Pages { get => GetModelCollectionValue<IPageCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion

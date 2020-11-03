@@ -89,12 +89,8 @@ namespace PnP.Core.Model.SharePoint
                             var field = list.Fields.FirstOrDefault(p => p.InternalName == property.Name);
                             if (field != null)
                             {
-                                // Handle the regular fields
-                                if (property.Name == "Title")
-                                {
-                                    itemToUpdate.SetSystemProperty(p => p.Title, row.GetProperty(property.Name).GetString());
-                                }
-                                else if (property.Name == "ID")
+                                // Handle the regular fields, Title is handled as an overflow field
+                                if (property.Name == "ID")
                                 {
                                     // already handled, so continue
                                 }

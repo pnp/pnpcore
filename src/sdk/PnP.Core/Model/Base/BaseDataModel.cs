@@ -512,6 +512,10 @@ namespace PnP.Core.Model
                 {
                     await Query.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
                 }
+                else if (api.ApiCall.Type == ApiType.SPORest)
+                {
+                    await Query.AddRestBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+                }
 
                 await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
             }
@@ -554,6 +558,10 @@ namespace PnP.Core.Model
             if (api.ApiCall.Type == ApiType.Graph || api.ApiCall.Type == ApiType.GraphBeta)
             {
                 await Query.AddGraphBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
+            }
+            else if (api.ApiCall.Type == ApiType.SPORest)
+            {
+                await Query.AddRestBatchRequestsForNonExpandableCollectionsAsync(this, batch, entityInfo, expressions, fromJsonCasting, postMappingJson).ConfigureAwait(false);
             }
         }
 

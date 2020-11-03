@@ -535,6 +535,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IBasePermissions EffectiveBasePermissions { get; }
 
+        /// <summary>
+        /// Collection of modern pages added to this web
+        /// </summary>
+        public IPageCollection Pages { get; }
+
         #region Methods
 
         #region GetFolderByServerRelativeUrl

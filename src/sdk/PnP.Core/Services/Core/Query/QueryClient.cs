@@ -68,7 +68,7 @@ namespace PnP.Core.Services
             if (entity.SharePointFieldsLoadedViaExpression)
             {
                 // $select
-                foreach (var field in fields)
+                foreach (var field in fields.Where(p=> string.IsNullOrEmpty(p.SharePointGet)))
                 {
                     // If there was a selection on which fields to include in an expand (via the LoadProperties() option) then add those fields
                     if (field.SharePointExpandable && field.ExpandFieldInfo != null)
@@ -86,7 +86,7 @@ namespace PnP.Core.Services
             }
 
             // $expand
-            foreach (var field in fields.Where(p => p.SharePointExpandable))
+            foreach (var field in fields.Where(p => p.SharePointExpandable && string.IsNullOrEmpty(p.SharePointGet)))
             {
                 if (entity.SharePointFieldsLoadedViaExpression)
                 {
@@ -213,6 +213,111 @@ namespace PnP.Core.Services
                 }
             }
         }
+
+#pragma warning disable CA1822 // Mark members as static
+        internal async Task AddRestBatchRequestsForNonExpandableCollectionsAsync<TModel>(BaseDataModel<TModel> model, Batch batch, EntityInfo entityInfo, Expression<Func<TModel, object>>[] expressions, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson)
+#pragma warning restore CA1822 // Mark members as static
+        {
+            ApiType apiType = ApiType.SPORest;
+
+            var nonExpandableFields = entityInfo.SharePointNonExpandableCollections;
+            if (nonExpandableFields.Any())
+            {
+                foreach (var nonExpandableField in nonExpandableFields)
+                {
+                    // Was this non expandable field requested?
+                    bool needed = nonExpandableField.ExpandableByDefault;
+
+                    if (!needed)
+                    {
+                        // Check passed in expressions
+                        needed = IsDefinedInExpression(expressions, nonExpandableField.Name) || nonExpandableField.ExpandFieldInfo != null;
+                    }
+
+                    if (needed)
+                    {
+                        string sharePointGet = nonExpandableField.SharePointGet;
+                        if (nonExpandableField.ExpandFieldInfo != null)
+                        {
+                            bool sharePointGetHasExpand = false;
+                            var uriBuilder = new UriBuilder(sharePointGet);
+
+                            // Check if the model we're expanding uses JsonPath
+                            bool usesJsonPath = false;
+                            var collectionEntityInfo = EntityManager.Instance.GetStaticClassInfo(nonExpandableField.ExpandFieldInfo.Type);
+                            foreach (var fieldToExpand in nonExpandableField.ExpandFieldInfo.Fields)
+                            {
+                                var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == fieldToExpand.Name);
+
+                                if (!string.IsNullOrEmpty(expandableFieldInfo.SharePointGet))
+                                {
+                                    throw new ClientException(ErrorType.Unsupported,
+                                        string.Format(PnPCoreResources.Exception_Unsupported_ExtraGet,
+                                        expandableFieldInfo.Name,
+                                        expandableFieldInfo.SharePointGet));
+                                }
+
+                                if (!string.IsNullOrEmpty(expandableFieldInfo.SharePointJsonPath))
+                                {
+                                    usesJsonPath = true;
+                                }
+                            }
+
+                            NameValueCollection queryParameters = HttpUtility.ParseQueryString(uriBuilder.Query.ToLowerInvariant());
+                            string value = queryParameters["$expand"];
+                            if (!string.IsNullOrWhiteSpace(value))
+                            {
+                                // we've an $expand url parameter in the GET query
+                                var currentExpandValues = value.Split(new char[] { ',' });
+
+                                if (usesJsonPath)
+                                {
+                                    // JsonPath usage will be handled as an existing expand, so we append the extra $select via ($select%3D...)
+                                    sharePointGetHasExpand = true;
+                                }
+                                else
+                                {
+                                    // do we have an $expand for our property we're applying the expandable select on?
+                                    foreach (var expandValue in currentExpandValues)
+                                    {
+                                        if (expandValue.Equals(nonExpandableField.GraphName, StringComparison.InvariantCultureIgnoreCase))
+                                        {
+                                            sharePointGetHasExpand = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            StringBuilder sb = new StringBuilder();
+
+                            // TODO
+                            //AddExpandableSelectGraph(!sharePointGetHasExpand, sb, nonExpandableField, null, "");
+
+                            // Since the URL listed for a graph get can already have url parameters we need to "merge" them together
+                            var urlComplement = sb.ToString();
+                            if (sharePointGetHasExpand)
+                            {
+                                // We append the extra $select via ($select%3D...)
+                                sharePointGet += urlComplement;
+                            }
+                            else
+                            {
+                                // We combine an $select=id,field,... with the existing url
+                                sharePointGet = UrlUtility.CombineRelativeUrlWithUrlParameters(sharePointGet, urlComplement);
+                            }
+                        }
+
+                        var parsedApiRequest = await ApiHelper.ParseApiRequestAsync(model, sharePointGet).ConfigureAwait(false);
+                        parsedApiRequest = $"{model.PnPContext.Uri.ToString().TrimEnd(new char[] { '/' })}/{parsedApiRequest}";
+
+                        ApiCall extraApiCall = new ApiCall(parsedApiRequest, apiType, receivingProperty: nonExpandableField.SharePointName);
+                        batch.Add(model, entityInfo, HttpMethod.Get, extraApiCall, default, fromJsonCasting, postMappingJson);
+                    }
+                }
+            }
+        }
+
 
         private static async Task<ApiCallRequest> BuildGetAPICallGraphAsync<TModel>(BaseDataModel<TModel> model, EntityInfo entity, ApiCall apiOverride, bool useLinqGet)
         {
@@ -857,7 +962,7 @@ namespace PnP.Core.Services
                     var field = fields.FirstOrDefault(p => p.Name == fieldToLoad);
                     if (field != null)
                     {
-                        if (field.SharePointExpandable || field.GraphExpandable || !string.IsNullOrEmpty(field.GraphGet))
+                        if (field.SharePointExpandable || field.GraphExpandable || !string.IsNullOrEmpty(field.GraphGet) || !string.IsNullOrEmpty(field.SharePointGet))
                         {
                             selectionTarget = selectionTarget.Include(s);
                         }

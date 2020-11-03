@@ -290,7 +290,7 @@ namespace PnP.Core.Model
             }
         }
 
-        private EntityFieldInfo _graphKeyField;
+        private EntityFieldInfo graphKeyField;
 
         /// <summary>
         /// Gets the first field marked as IsKey
@@ -299,29 +299,48 @@ namespace PnP.Core.Model
         {
             get
             {
-                if (_graphKeyField == null)
+                if (graphKeyField == null)
                 {
-                    _graphKeyField = Fields.FirstOrDefault(f => f.IsGraphKey);
+                    graphKeyField = Fields.FirstOrDefault(f => f.IsGraphKey);
                 }
-                return _graphKeyField;
+                return graphKeyField;
             }
         }
 
-        private List<EntityFieldInfo> _graphNonExpandableCollections;
+        private List<EntityFieldInfo> sharePointNonExpandableCollections;
 
         /// <summary>
-        /// Returns a list of fields in this entity which do require a separate query (they can't be expanded)
+        /// Returns a list of fields in this entity which do require a separate query (they can't be expanded via SharePoint REST)
+        /// </summary>
+        internal List<EntityFieldInfo> SharePointNonExpandableCollections
+        {
+            get
+            {
+                if (sharePointNonExpandableCollections == null)
+                {
+                    sharePointNonExpandableCollections =
+                        Fields.Where(f => !string.IsNullOrEmpty(f.SharePointGet)).ToList();
+                }
+                return sharePointNonExpandableCollections;
+            }
+        }
+
+
+        private List<EntityFieldInfo> graphNonExpandableCollections;
+
+        /// <summary>
+        /// Returns a list of fields in this entity which do require a separate query (they can't be expanded via Microsoft Graph)
         /// </summary>
         internal List<EntityFieldInfo> GraphNonExpandableCollections
         {
             get
             {
-                if (_graphNonExpandableCollections == null)
+                if (graphNonExpandableCollections == null)
                 {
-                    _graphNonExpandableCollections =
+                    graphNonExpandableCollections =
                         Fields.Where(f => !string.IsNullOrEmpty(f.GraphGet)).ToList();
                 }
-                return _graphNonExpandableCollections;
+                return graphNonExpandableCollections;
             }
         }
 
