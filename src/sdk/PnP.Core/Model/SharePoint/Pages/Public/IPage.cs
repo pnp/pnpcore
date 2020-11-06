@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -6,9 +7,28 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// A modern SharePoint Page
     /// </summary>
-    [ConcreteType(typeof(Page))]
-    public interface IPage : IDataModel<IPage>, IListItemBase /*, IDataModelGet<IPage>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel*/
+    public interface IPage
     {
+        /// <summary>
+        /// Title of the client side page
+        /// </summary>
+        string PageTitle { get; }
+
+        /// <summary>
+        /// Layout type of the client side page
+        /// </summary>
+        public PageLayoutType LayoutType { get; set; }
+
+        /// <summary>
+        /// Thumbnail url for the page
+        /// </summary>
+        public string ThumbnailUrl { get; set; }
+
+        /// <summary>
+        /// When a page of type Home is created you can opt to only keep the default client side web parts by setting this to true. This also is a way to reset your home page back the the stock one.
+        /// </summary>
+        public bool KeepDefaultWebParts { get; set; }
+
         /// <summary>
         /// List of sections on this page
         /// </summary>
@@ -20,9 +40,265 @@ namespace PnP.Core.Model.SharePoint
         List<ICanvasControl> Controls { get; }
 
         /// <summary>
-        /// Loads the page object model
+        /// Returns the page header for this page
         /// </summary>
-        Task LoadAsync();
+        IClientSidePageHeader PageHeader { get; }
+
+        /// <summary>
+        /// Space content field (JSON) for spaces pages
+        /// </summary>
+        string SpaceContent { get; set; }
+
+        /// <summary>
+        /// Entity id field for topic pages
+        /// </summary>
+        string EntityId { get; set; }
+
+        /// <summary>
+        /// Entity relations field for topic pages
+        /// </summary>
+        string EntityRelations { get; set; }
+
+        /// <summary>
+        /// Entity type field for topic pages
+        /// </summary>
+        string EntityType { get; set; }
+
+        /// <summary>
+        /// PnPContext to work with
+        /// </summary>
+        PnPContext PnPContext { get; }
+
+        /// <summary>
+        /// Pages library
+        /// </summary>
+        IList PagesLibrary { get; }
+
+        /// <summary>
+        /// ID value of the page (only available when the page was saved)
+        /// </summary>
+        public int? PageId { get; }
+
+        /// <summary>
+        /// The default section of the client side page
+        /// </summary>
+        public ICanvasSection DefaultSection { get; }
+
+        /// <summary>
+        /// Does this page have comments disabled
+        /// </summary>
+        public bool CommentsDisabled { get; }
+
+        /// <summary>
+        /// List the languages this page possibly can be translated into
+        /// </summary>
+        public List<int> SupportedUILanguages { get; }
+
+        /// <summary>
+        /// Adds a new section to your client side page
+        /// </summary>
+        /// <param name="sectionTemplate">The <see cref="CanvasSectionTemplate"/> type of the section</param>
+        /// <param name="order">Controls the order of the new section</param>
+        /// <param name="zoneEmphasis">Zone emphasis (section background)</param>
+        /// <param name="verticalSectionZoneEmphasis">Vertical Section Zone emphasis (section background)</param>
+        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, VariantThemeType zoneEmphasis, VariantThemeType verticalSectionZoneEmphasis = VariantThemeType.None);
+
+        /// <summary>
+        /// Adds a new section to your client side page
+        /// </summary>
+        /// <param name="sectionTemplate">The <see cref="CanvasSectionTemplate"/> type of the section</param>
+        /// <param name="order">Controls the order of the new section</param>
+        /// <param name="zoneEmphasis">Zone emphasis (section background)</param>
+        /// <param name="verticalSectionZoneEmphasis">Vertical Section Zone emphasis (section background)</param>
+        public void AddSection(CanvasSectionTemplate sectionTemplate, float order, int zoneEmphasis, int? verticalSectionZoneEmphasis = null);
+
+        /// <summary>
+        /// Adds a new section to your client side page
+        /// </summary>
+        /// <param name="sectionTemplate">The <see cref="CanvasSectionTemplate"/> type of the section</param>
+        /// <param name="order">Controls the order of the new section</param>
+        public void AddSection(CanvasSectionTemplate sectionTemplate, float order);
+
+        /// <summary>
+        /// Adds a new section to your client side page
+        /// </summary>
+        /// <param name="section"><see cref="ICanvasSection"/> object describing the section to add</param>
+        public void AddSection(ICanvasSection section);
+
+        /// <summary>
+        /// Adds a new section to your client side page with a given order
+        /// </summary>
+        /// <param name="section"><see cref="ICanvasSection"/> object describing the section to add</param>
+        /// <param name="order">Controls the order of the new section</param>
+        public void AddSection(ICanvasSection section, float order);
+
+        /// <summary>
+        /// Adds a new control to your client side page using the default <see cref="ICanvasSection"/>
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        public void AddControl(ICanvasControl control);
+
+        /// <summary>
+        /// Adds a new control to your client side page using the default <see cref="ICanvasSection"/> using a given order
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="order">Order of the control in the default section</param>
+        public void AddControl(ICanvasControl control, int order);
+
+        /// <summary>
+        /// Adds a new control to your client side page in the given section with a given order
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="section"><see cref="ICanvasSection"/> that will hold the control. Control will end up in the <see cref="ICanvasSection.DefaultColumn"/>.</param>
+        /// <param name="order">Order of the control in the given section</param>
+        public void AddControl(ICanvasControl control, ICanvasSection section, int order);
+
+        /// <summary>
+        /// Adds a new control to your client side page in the given section
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="column"><see cref="ICanvasColumn"/> that will hold the control</param>    
+        public void AddControl(ICanvasControl control, ICanvasColumn column);
+
+        /// <summary>
+        /// Adds a new control to your client side page in the given section with a given order
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="column"><see cref="ICanvasColumn"/> that will hold the control</param>    
+        /// <param name="order">Order of the control in the given section</param>
+        public void AddControl(ICanvasControl control, ICanvasColumn column, int order);
+
+        /// <summary>
+        /// Adds a new header control to your client side page with a given order
+        /// </summary>
+        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
+        /// <param name="order">Order of the control in the given section</param>
+        public void AddHeaderControl(ICanvasControl control, int order);
+
+        /// <summary>
+        /// Removes the set page header 
+        /// </summary>
+        public void RemovePageHeader();
+
+        /// <summary>
+        /// Sets page header back to the default page header
+        /// </summary>
+        public void SetDefaultPageHeader();
+
+        /// <summary>
+        /// Sets page header with custom focal point
+        /// </summary>
+        /// <param name="serverRelativeImageUrl">Server relative page header image url</param>
+        /// <param name="translateX">X focal point for image</param>
+        /// <param name="translateY">Y focal point for image</param>
+        public void SetCustomPageHeader(string serverRelativeImageUrl, double? translateX = null, double? translateY = null);
+
+        /// <summary>
+        /// Creates a new text part which can be configured and added to the page
+        /// </summary>
+        /// <param name="text">Optionally provide the text for the text part</param>
+        /// <returns>The created text part</returns>
+        public IClientSideText NewTextPart(string text = null);
+
+        /// <summary>
+        /// Creates a new web part
+        /// </summary>
+        /// <param name="clientSideComponent">The base component to use for this web part</param>
+        /// <returns>The created web part</returns>
+        public IClientSideWebPart NewWebPart(IClientSideComponent clientSideComponent = null);
+
+        /// <summary>
+        /// Clears the sections and controls from the page
+        /// </summary>
+        public void ClearPage();
+
+        /// <summary>
+        /// Returns the name of the templates folder, and creates if it doesn't exist.
+        /// </summary>        
+        public Task<string> GetTemplatesFolderAsync();
+
+        /// <summary>
+        /// Returns the name of the templates folder, and creates if it doesn't exist.
+        /// </summary>        
+        public string GetTemplatesFolder();
+
+        /// <summary>
+        /// Saves the page to the pages library
+        /// </summary>
+        /// <param name="pageName">Page name to use</param>
+        /// <returns></returns>
+        Task SaveAsync(string pageName);
+
+        /// <summary>
+        /// Saves the page to the pages library
+        /// </summary>
+        /// <param name="pageName">Page name to use</param>
+        /// <returns></returns>
+        void Save(string pageName);
+
+        /// <summary>
+        /// Saves the page as a template page
+        /// </summary>
+        /// <param name="pageName">Page name to use</param>
+        public void SaveAsTemplate(string pageName);
+
+        /// <summary>
+        /// Saves the page as a template page
+        /// </summary>
+        /// <param name="pageName">Page name to use</param>
+        public Task SaveAsTemplateAsync(string pageName);
+
+        /// <summary>
+        /// Deletes the created page
+        /// </summary>
+        /// <returns></returns>
+        Task DeleteAsync();
+
+        /// <summary>
+        /// Deletes the created page
+        /// </summary>
+        /// <returns></returns>
+        void Delete();
+
+        /// <summary>
+        /// Publishes a client side page
+        /// </summary>
+        public void Publish();
+
+        /// <summary>
+        /// Publishes a client side page
+        /// </summary>
+        public Task PublishAsync();
+
+        /// <summary>
+        /// Demotes an client side <see cref="PageLayoutType.Article"/> news page as a regular client side page
+        /// </summary>
+        public void DemoteNewsArticle();
+
+        /// <summary>
+        /// Demotes an client side <see cref="PageLayoutType.Article"/> news page as a regular client side page
+        /// </summary>
+        public Task DemoteNewsArticleAsync();
+
+        /// <summary>
+        /// Promotes a regular <see cref="PageLayoutType.Article"/> client side page as a news page
+        /// </summary>
+        public void PromoteAsNewsArticle();
+
+        /// <summary>
+        /// Promotes a regular <see cref="PageLayoutType.Article"/> client side page as a news page
+        /// </summary>
+        public Task PromoteAsNewsArticleAsync();
+
+        /// <summary>
+        /// Sets the current <see cref="IPage"/> as home page for the current site
+        /// </summary>
+        public void PromoteAsHomePage();
+
+        /// <summary>
+        /// Sets the current <see cref="IPage"/> as home page for the current site
+        /// </summary>
+        public Task PromoteAsHomePageAsync();
 
         /// <summary>
         /// Translated a given web part id to a <see cref="DefaultWebPart"/> enum. Non default web parts will be returned as <see cref="DefaultWebPart.ThirdParty"/>
@@ -39,17 +315,17 @@ namespace PnP.Core.Model.SharePoint
         string DefaultWebPartToWebPartId(DefaultWebPart webPart);
 
         /// <summary>
-        /// Gets a list of available client side web parts to use having a given name
+        /// Gets a list of available client side web parts to use, optionally filtered by a given name
         /// </summary>
         /// <param name="name">Name of the web part to retrieve</param>
         /// <returns>List of available <see cref="IClientSideComponent"/></returns>
-        Task<IEnumerable<IClientSideComponent>> AvailableClientSideComponentsAsync(string name);
+        Task<IEnumerable<IClientSideComponent>> AvailableClientSideComponentsAsync(string name = null);
 
         /// <summary>
-        /// Gets a list of available client side web parts to use having a given name
+        /// Gets a list of available client side web parts to use, optionally filtered by a given name
         /// </summary>
         /// <param name="name">Name of the web part to retrieve</param>
         /// <returns>List of available <see cref="IClientSideComponent"/></returns>
-        IEnumerable<IClientSideComponent> AvailableClientSideComponents(string name);
+        IEnumerable<IClientSideComponent> AvailableClientSideComponents(string name = null);
     }
 }

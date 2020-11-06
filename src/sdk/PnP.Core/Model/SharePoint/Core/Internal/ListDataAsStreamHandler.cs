@@ -53,6 +53,9 @@ namespace PnP.Core.Model.SharePoint
             // Process rows
             if (document.TryGetProperty("Row", out JsonElement dataRows))
             {
+                // Mark collection as requested to avoid our linq integration to actually execute this as a query to SharePoint
+                list.Items.Requested = true;
+
                 // No data returned, stop processing
                 if (dataRows.GetArrayLength() == 0)
                 {
@@ -70,8 +73,6 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (int.TryParse(row.GetProperty("ID").GetString(), out int listItemId))
                     {
-                        // Mark collection as requested to avoid our linq integration to actually execute this as a query to SharePoint
-                        list.Items.Requested = true;
                         var itemToUpdate = list.Items.FirstOrDefault(p => p.Id == listItemId);
                         if (itemToUpdate == null)
                         {
@@ -80,6 +81,9 @@ namespace PnP.Core.Model.SharePoint
 
                         itemToUpdate = itemToUpdate as ListItem;
                         itemToUpdate.SetSystemProperty(p => p.Id, listItemId);
+
+                        // Ensure metadata handling when list items are read using this method
+                        await (itemToUpdate as ListItem).GraphToRestMetadataAsync().ConfigureAwait(false);
 
                         var overflowDictionary = itemToUpdate.Values;
 
@@ -111,7 +115,7 @@ namespace PnP.Core.Model.SharePoint
                                     }
                                     else
                                     {
-                                        overflowDictionary[property.Name] = row.GetProperty(property.Name).GetString();
+                                        overflowDictionary.SystemUpdate(property.Name, fieldValue);
                                     }
                                 }
                             }

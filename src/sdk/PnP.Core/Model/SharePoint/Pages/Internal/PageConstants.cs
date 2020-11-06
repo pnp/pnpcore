@@ -16,6 +16,8 @@
         internal const string BannerImageUrl = "BannerImageUrl";
         internal const string FirstPublishedDate = "FirstPublishedDate";
         internal const string FileLeafRef = "FileLeafRef";
+        internal const string FileType = "File_x0020_Type";
+        internal const string FileDirRef = "FileDirRef";
         internal const string DescriptionField = "Description";
         internal const string _AuthorByline = "_AuthorByline";
         internal const string _TopicHeader = "_TopicHeader";
@@ -45,6 +47,13 @@
         internal const string TopicEntityId = "_EntityId";
         internal const string TopicEntityRelations = "_EntityRelations";
         internal const string TopicEntityType = "_EntityType";
+
+        /// <summary>
+        /// Contains the content identifier (ID) for content types used in the modern page infrastructure
+        /// </summary>
+        public const string ModernArticlePage = "0x0101009D1CB255DA76424F860D91F20E6C4118";
+        public const string RepostPage = "0x0101009D1CB255DA76424F860D91F20E6C4118002A50BFCFB7614729B56886FADA02339B";
+        public const string SpacesPage = "0x0101009D1CB255DA76424F860D91F20E6C41180043153F945E98468297E67C3EEE43AB70";
         #endregion
     }
 }

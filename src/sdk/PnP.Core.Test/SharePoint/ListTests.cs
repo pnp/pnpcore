@@ -4,6 +4,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -735,6 +736,44 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task ListPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.RootFolder);
+
+                var properties = (await list.RootFolder.GetAsync(p => p.Properties)).Properties;
+
+                var propertyKey = "ListPropertiesTest123";
+                var myProperty = properties.GetString(propertyKey, null);
+                if (myProperty == null)
+                {
+                    properties.Values[propertyKey] = "test123";
+                    await properties.UpdateAsync();
+                }
+                
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    list = context2.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.RootFolder);
+                    properties = (await list.RootFolder.GetAsync(p => p.Properties)).Properties;
+                    myProperty = properties.GetString(propertyKey, null);
+                    Assert.IsTrue(myProperty == "test123");
+
+                    properties.Values[propertyKey] = null;
+                    await properties.UpdateAsync();
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    list = context3.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.RootFolder);
+                    properties = (await list.RootFolder.GetAsync(p => p.Properties)).Properties;
+                    myProperty = properties.GetString(propertyKey, null);
+                    Assert.IsTrue(myProperty == null);
+                }
+            }
+        }
 
     }
 }

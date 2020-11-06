@@ -1,6 +1,7 @@
 using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -534,13 +535,39 @@ namespace PnP.Core.Model.SharePoint
         /// Get's the permission levels set on this web
         /// </summary>
         public IBasePermissions EffectiveBasePermissions { get; }
+      
+        #region Methods
+
+        #region Pages API
 
         /// <summary>
-        /// Collection of modern pages added to this web
+        /// Gets the modern pages of this site, optionally scoped down via a filter
         /// </summary>
-        public IPageCollection Pages { get; }
+        /// <param name="pageName">Page name to filter on, uses a "starts with" filter</param>
+        /// <returns>One of more modern pages</returns>
+        public Task<List<IPage>> GetPagesAsync(string pageName = null);
 
-        #region Methods
+        /// <summary>
+        /// Gets the modern pages of this site, optionally scoped down via a filter
+        /// </summary>
+        /// <param name="pageName">Page name to filter on, uses a "starts with" filter</param>
+        /// <returns>One of more modern pages</returns>
+        public List<IPage> GetPages(string pageName = null);
+
+        /// <summary>
+        /// Creates a new modern page
+        /// </summary>
+        /// <param name="pageLayoutType">Optionally specify the page type, defaults to <see cref="PageLayoutType.Article"/></param>
+        /// <returns>Created modern page</returns>
+        public Task<IPage> NewPageAsync(PageLayoutType pageLayoutType = PageLayoutType.Article);
+
+        /// <summary>
+        /// Creates a new modern page
+        /// </summary>
+        /// <param name="pageLayoutType">Optionally specify the page type, defaults to <see cref="PageLayoutType.Article"/></param>
+        /// <returns>Created modern page</returns>
+        public IPage NewPage(PageLayoutType pageLayoutType = PageLayoutType.Article);
+        #endregion
 
         #region GetFolderByServerRelativeUrl
 
@@ -595,6 +622,59 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The folder to get</returns>
         public IFolder GetFolderByServerRelativeUrlBatch(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions);
 
+        #endregion
+
+        #region GetFolderById
+        /// <summary>
+        /// Get a folder in the current web from its id.
+        /// </summary>
+        /// <param name="folderId">The id of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <returns>The folder to get</returns>
+        public Task<IFolder> GetFolderByIdAsync(Guid folderId, params Expression<Func<IFolder, object>>[] expressions);
+
+
+        /// <summary>
+        /// Get a folder in the current web from its id.
+        /// </summary>
+        /// <param name="folderId">The id of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <returns>The folder to get</returns>
+        public IFolder GetFolderById(Guid folderId, params Expression<Func<IFolder, object>>[] expressions);
+
+        /// <summary>
+        /// Get a folder in the current web from its id via batch.
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="folderId">The id of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <returns>The folder to get</returns>
+        public Task<IFolder> GetFolderByIdBatchAsync(Batch batch, Guid folderId, params Expression<Func<IFolder, object>>[] expressions);
+
+        /// <summary>
+        /// Get a folder in the current web from its id via batch.
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="folderId">The id of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <returns>The folder to get</returns>
+        public IFolder GetFolderByIdBatch(Batch batch, Guid folderId, params Expression<Func<IFolder, object>>[] expressions);
+
+        /// <summary>
+        /// Get a folder in the current web from its id via batch.
+        /// </summary>
+        /// <param name="folderId">The id of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <returns>The folder to get</returns>
+        public Task<IFolder> GetFolderByIdBatchAsync(Guid folderId, params Expression<Func<IFolder, object>>[] expressions);
+
+        /// <summary>
+        /// Get a folder in the current web from its id via batch.
+        /// </summary>
+        /// <param name="folderId">The id of the folder to get.</param>
+        /// <param name="expressions">Expressions needed to create the request</param>
+        /// <returns>The folder to get</returns>
+        public IFolder GetFolderByIdBatch(Guid folderId, params Expression<Func<IFolder, object>>[] expressions);
         #endregion
 
         #region GetFileByServerRelativeUrl

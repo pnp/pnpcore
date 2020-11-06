@@ -66,6 +66,24 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetFolderByIdTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                string sitePagesFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/SitePages";
+
+                IFolder sitePagesfolder = await context.Web.GetFolderByServerRelativeUrlAsync(sitePagesFolderServerRelativeUrl);
+
+                IFolder sitePagesFolder2 = await context.Web.GetFolderByIdAsync(sitePagesfolder.UniqueId);
+
+                Assert.IsNotNull(sitePagesFolder2);
+                Assert.AreEqual("SitePages", sitePagesFolder2.Name);
+            }
+        }
+
+        [TestMethod]
         public async Task GetFolderByServerRelativeUrlBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -84,6 +102,25 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Shared Documents", sharedDocumentsfolder.Name);
                 Assert.IsNotNull(sitePagesfolder);
                 Assert.AreEqual("SitePages", sitePagesfolder.Name);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFolderByIdBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sitePagesFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/SitePages";
+
+                IFolder sitePagesfolder = await context.Web.GetFolderByServerRelativeUrlAsync(sitePagesFolderServerRelativeUrl);
+
+                IFolder sitePagesFolder2 = await context.Web.GetFolderByIdBatchAsync(sitePagesfolder.UniqueId);
+                // Execute the requests in the batch
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(sitePagesFolder2);
+                Assert.AreEqual("SitePages", sitePagesFolder2.Name);
             }
         }
 
@@ -487,6 +524,89 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        #endregion
+
+        #region EnsureFolder tests
+        [TestMethod]
+        public async Task EnsureListFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2");
+                Assert.IsTrue(addedFolder != null);
+                Assert.IsTrue(addedFolder.Name == "sub2");
+
+                var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsTrue(folderToDelete != null);
+                Assert.IsTrue(folderToDelete.Name == "sub1");
+
+                await folderToDelete.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsureListFolderSingleLevelTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsTrue(addedFolder != null);
+                Assert.IsTrue(addedFolder.Name == "sub1");
+
+                await addedFolder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsureListFolderDeepTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2/sub3/sub4/sub5");
+                Assert.IsTrue(addedFolder != null);
+                Assert.IsTrue(addedFolder.Name == "sub5");
+
+                var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsTrue(folderToDelete != null);
+                Assert.IsTrue(folderToDelete.Name == "sub1");
+
+                await folderToDelete.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsureListFolderInExistingHiarchyTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2/sub3a/sub4a");
+                Assert.IsTrue(addedFolder != null);
+                Assert.IsTrue(addedFolder.Name == "sub4a");
+
+                var addedFolder2 = await parentFolder.EnsureFolderAsync("sub1/sub2/sub3b/sub4b");
+                Assert.IsTrue(addedFolder2 != null);
+                Assert.IsTrue(addedFolder2.Name == "sub4b");
+
+
+                var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsTrue(folderToDelete != null);
+                Assert.IsTrue(folderToDelete.Name == "sub1");
+
+                await folderToDelete.DeleteAsync();
+            }
+        }
         #endregion
 
         [TestMethod]

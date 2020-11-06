@@ -10,25 +10,21 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Controls of type 4 ( = text control)
     /// </summary>
-    internal class ClientSideText : CanvasControl
+    internal class ClientSideText : CanvasControl, IClientSideText
     {
         #region variables
-        public const string TextRteAttribute = "data-sp-rte";
-
-        private string rte;
-        private ClientSideTextControlData spControlData;
-        private string previewText;
+        internal const string TextRteAttribute = "data-sp-rte";
         #endregion
 
         #region construction
         /// <summary>
         /// Creates a <see cref="ClientSideText"/> instance
         /// </summary>
-        public ClientSideText() : base()
+        internal ClientSideText() : base()
         {
             this.controlType = 4;
-            this.rte = "";
-            this.previewText = "";
+            this.Rte = "";
+            this.PreviewText = "";
         }
         #endregion
 
@@ -41,24 +37,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Value of the "data-sp-rte" attribute
         /// </summary>
-        public string Rte
-        {
-            get
-            {
-                return this.rte;
-            }
-        }
+        public string Rte { get; private set; }
 
         /// <summary>
         /// Text used in page preview in news web part
         /// </summary>
-        public string PreviewText
-        {
-            get
-            {
-                return this.previewText;
-            }
-        }
+        public string PreviewText { get; private set; }
 
         /// <summary>
         /// Type of the control (= <see cref="ClientSideText"/>)
@@ -74,13 +58,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Deserialized value of the "data-sp-controldata" attribute
         /// </summary>
-        public ClientSideTextControlData SpControlData
-        {
-            get
-            {
-                return this.spControlData;
-            }
-        }
+        internal ClientSideTextControlData SpControlData { get; private set; }
         #endregion
 
         #region public methods
@@ -132,7 +110,7 @@ namespace PnP.Core.Model.SharePoint
             try
             {
                 var nodeList = new HtmlParser().ParseFragment(this.Text, null);
-                this.previewText = string.Concat(nodeList.Select(x => x.Text()));
+                this.PreviewText = string.Concat(nodeList.Select(x => x.Text()));
             }
             catch { }
 
@@ -162,12 +140,12 @@ namespace PnP.Core.Model.SharePoint
 
             if (div != null)
             {
-                this.rte = div.GetAttribute(TextRteAttribute);
+                this.Rte = div.GetAttribute(TextRteAttribute);
             }
             else
             {
                 // supporting updated rendering of Text controls, no nested DIV tag with the data-sp-rte attribute...so HTML content is embedded at the root
-                this.rte = "";
+                this.Rte = "";
                 div = element;
             }
 
@@ -191,8 +169,8 @@ namespace PnP.Core.Model.SharePoint
             var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
 
             //this.spControlData = JsonConvert.DeserializeObject<ClientSideTextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), jsonSerializerSettings);
-            this.spControlData = JsonSerializer.Deserialize<ClientSideTextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), jsonSerializerSettings);
-            this.controlType = this.spControlData.ControlType;
+            this.SpControlData = JsonSerializer.Deserialize<ClientSideTextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), jsonSerializerSettings);
+            this.controlType = this.SpControlData.ControlType;
         }
         #endregion
     }

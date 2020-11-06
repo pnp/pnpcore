@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
@@ -258,16 +259,37 @@ namespace PnP.Core.Model.SharePoint
 
         public IBasePermissions EffectiveBasePermissions { get => GetModelValue<IBasePermissions>(); }
 
-        [SharePointProperty("Pages", Get = "_api/web/lists/getbytitle('Site Pages')/items")]
-        public IPageCollection Pages { get => GetModelCollectionValue<IPageCollection>(); }
-
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
 
         #region Extension methods
 
+        #region Modern Pages
+        public async Task<List<IPage>> GetPagesAsync(string pageName = null)
+        {
+            return await Page.LoadPagesAsync(PnPContext, pageName).ConfigureAwait(false);
+        }
+
+        public List<IPage> GetPages(string pageName = null)
+        {
+            return GetPagesAsync(pageName).GetAwaiter().GetResult();
+        }
+
+        public async Task<IPage> NewPageAsync(PageLayoutType pageLayoutType = PageLayoutType.Article)
+        {
+            return await Page.NewPageAsync(PnPContext, pageLayoutType).ConfigureAwait(false);
+        }
+
+        public IPage NewPage(PageLayoutType pageLayoutType = PageLayoutType.Article)
+        {
+            return NewPageAsync(pageLayoutType).GetAwaiter().GetResult();
+        }
+        #endregion
+
         #region Folders
+
+        #region GetFolderByServerRelativeUrl
         public async Task<IFolder> GetFolderByServerRelativeUrlAsync(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
             // Instantiate a folder, link it the Web as parent and provide it a context. This folder will not be included in the current model
@@ -281,8 +303,6 @@ namespace PnP.Core.Model.SharePoint
 
             return folder;
         }
-
-
 
         public IFolder GetFolderByServerRelativeUrl(string serverRelativeUrl, params Expression<Func<IFolder, object>>[] expressions)
         {
@@ -325,6 +345,63 @@ namespace PnP.Core.Model.SharePoint
             var apiCall = new ApiCall($"_api/Web/getFolderByServerRelativeUrl('{encodedServerRelativeUrl}')", ApiType.SPORest);
             return apiCall;
         }
+        #endregion
+
+        #region GetFolderById
+        public async Task<IFolder> GetFolderByIdAsync(Guid folderId, params Expression<Func<IFolder, object>>[] expressions)
+        {
+            // Instantiate a folder, link it the Web as parent and provide it a context. This folder will not be included in the current model
+            Folder folder = new Folder()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            await folder.BaseGet(apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+
+            return folder;
+        }
+
+        public IFolder GetFolderById(Guid folderId, params Expression<Func<IFolder, object>>[] expressions)
+        {
+            return GetFolderByIdAsync(folderId, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFolder> GetFolderByIdBatchAsync(Batch batch, Guid folderId, params Expression<Func<IFolder, object>>[] expressions)
+        {
+            // Instantiate a folder, link it the Web as parent and provide it a context. This folder will not be included in the current model
+            Folder folder = new Folder()
+            {
+                PnPContext = PnPContext,
+                Parent = this
+            };
+
+            await folder.BaseBatchGetAsync(batch, apiOverride: BuildGetFolderByIdApiCall(folderId), fromJsonCasting: folder.MappingHandler, postMappingJson: folder.PostMappingHandler, expressions: expressions).ConfigureAwait(false);
+
+            return folder;
+        }
+
+        public IFolder GetFolderByIdBatch(Batch batch, Guid folderId, params Expression<Func<IFolder, object>>[] expressions)
+        {
+            return GetFolderByIdBatchAsync(batch, folderId, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFolder> GetFolderByIdBatchAsync(Guid folderId, params Expression<Func<IFolder, object>>[] expressions)
+        {
+            return await GetFolderByIdBatchAsync(PnPContext.CurrentBatch, folderId, expressions).ConfigureAwait(false);
+        }
+
+        public IFolder GetFolderByIdBatch(Guid folderId, params Expression<Func<IFolder, object>>[] expressions)
+        {
+            return GetFolderByIdBatchAsync(folderId, expressions).GetAwaiter().GetResult();
+        }
+
+        private static ApiCall BuildGetFolderByIdApiCall(Guid folderId)
+        {
+            return new ApiCall($"_api/Web/getFolderById(guid'{folderId}')", ApiType.SPORest);
+        }
+        #endregion
+
 
         #endregion
 

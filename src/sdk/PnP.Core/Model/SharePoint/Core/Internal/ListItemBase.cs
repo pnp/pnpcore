@@ -176,7 +176,7 @@ namespace PnP.Core.Model.SharePoint
                         foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
                         {
                             // Let's set its value into the update message
-                            fieldValues.AppendLine(SetFieldValueXml(changedProp.Key, changedProp.Value, changedProp.Value.GetType().Name, ref counter));
+                            fieldValues.AppendLine(SetFieldValueXml(changedProp.Key, changedProp.Value, changedProp.Value?.GetType().Name, ref counter));
                         }
                     }
                     else
@@ -209,8 +209,8 @@ namespace PnP.Core.Model.SharePoint
             xml = xml.Replace("{Counter}", counter.ToString());
             xml = xml.Replace("{FieldName}", fieldName);
             // TODO: verify complex fieldtypes
-            xml = xml.Replace("{FieldValue}", CsomHelper.XmlString(fieldValue.ToString(), false));
-            xml = xml.Replace("{FieldType}", fieldType);
+            xml = xml.Replace("{FieldValue}", fieldValue == null ? "" : CsomHelper.XmlString(fieldValue.ToString(), false));
+            xml = xml.Replace("{FieldType}", fieldType ?? "Null");
 
             counter++;
             return xml;

@@ -13,12 +13,15 @@ namespace PnP.Core.Model.SharePoint
 
         public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            object initialValue = reader.GetString();
-            int result = 0;
-
-            if (initialValue != null)
+            if (reader.TryGetInt32(out int intValue))
             {
-                var stringValue = initialValue.ToString();
+                return intValue;
+            }
+            else
+            {
+                var stringValue = reader.GetString();
+                
+                int result;
                 if (!string.IsNullOrEmpty(stringValue) &&
                     stringValue.Equals("undefined", StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -28,9 +31,9 @@ namespace PnP.Core.Model.SharePoint
                 {
                     result = 0;
                 }
-            }
 
-            return (result);
+                return (result);
+            }
         }
 
         public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)

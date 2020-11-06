@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
@@ -6,5 +8,23 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(PropertyValues))]
     public interface IPropertyValues : IDataModel<IPropertyValues>, IExpandoDataModel
     {
+        /// <summary>
+        /// Get string typed property bag value. If does not contain, returns given default value.
+        /// </summary>
+        /// <param name="key">Key of the property bag entry to return</param>
+        /// <param name="defaultValue">Default value of the property bag</param>
+        /// <returns>Value of the property bag entry as string</returns>        
+        string GetString(string key, string defaultValue);
+
+        /// <summary>
+        /// Update the property bag
+        /// </summary>
+        /// <returns></returns>
+        Task UpdateAsync();
+
+        /// <summary>
+        /// Update the property bag
+        /// </summary>
+        void Update();
     }
 }

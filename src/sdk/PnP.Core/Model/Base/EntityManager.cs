@@ -122,7 +122,6 @@ namespace PnP.Core.Model
                                         classField.ExpandableByDefault = sharePointPropertyAttribute.ExpandByDefault;
                                         classField.SharePointUseCustomMapping = sharePointPropertyAttribute.UseCustomMapping;
                                         classField.SharePointJsonPath = sharePointPropertyAttribute.JsonPath;
-                                        classField.SharePointGet = sharePointPropertyAttribute.Get;
                                         break;
                                     }
                                 case GraphPropertyAttribute graphPropertyAttribute:

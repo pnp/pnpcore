@@ -1940,6 +1940,29 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Add Template file
+
+        [TestMethod]
+        public async Task AddTemplateFileTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                string fileName = TestCommon.GetPnPSdkTestAssetName("page1.aspx");
+                IFile addedFile = await parentFolder.Files.AddTemplateFileAsync($"{parentFolder.ServerRelativeUrl}/{fileName}", TemplateFileType.ClientSidePage);
+
+                // Test the created object
+                Assert.IsNotNull(addedFile);
+                Assert.AreEqual(fileName, addedFile.Name);
+                Assert.AreNotEqual(default, addedFile.UniqueId);
+
+                await addedFile.DeleteAsync();
+            }
+        }
+        #endregion
+
         // TODO Implement the update metadata test when the list item Graph identifier can be resolved from the file object
         //[TestMethod]
         //public async Task UpdateFileMetadataTest()

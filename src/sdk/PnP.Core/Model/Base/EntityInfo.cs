@@ -273,7 +273,7 @@ namespace PnP.Core.Model
             }
         }
 
-        private EntityFieldInfo _sharePointKeyField;
+        private EntityFieldInfo sharePointKeyField;
 
         /// <summary>
         /// Gets the first field marked as IsKey
@@ -282,11 +282,11 @@ namespace PnP.Core.Model
         {
             get
             {
-                if (_sharePointKeyField == null)
+                if (sharePointKeyField == null)
                 {
-                    _sharePointKeyField = Fields.FirstOrDefault(f => f.IsSharePointKey);
+                    sharePointKeyField = Fields.FirstOrDefault(f => f.IsSharePointKey);
                 }
-                return _sharePointKeyField;
+                return sharePointKeyField;
             }
         }
 
@@ -307,29 +307,10 @@ namespace PnP.Core.Model
             }
         }
 
-        private List<EntityFieldInfo> sharePointNonExpandableCollections;
-
-        /// <summary>
-        /// Returns a list of fields in this entity which do require a separate query (they can't be expanded via SharePoint REST)
-        /// </summary>
-        internal List<EntityFieldInfo> SharePointNonExpandableCollections
-        {
-            get
-            {
-                if (sharePointNonExpandableCollections == null)
-                {
-                    sharePointNonExpandableCollections =
-                        Fields.Where(f => !string.IsNullOrEmpty(f.SharePointGet)).ToList();
-                }
-                return sharePointNonExpandableCollections;
-            }
-        }
-
-
         private List<EntityFieldInfo> graphNonExpandableCollections;
 
         /// <summary>
-        /// Returns a list of fields in this entity which do require a separate query (they can't be expanded via Microsoft Graph)
+        /// Returns a list of fields in this entity which do require a separate query (they can't be expanded)
         /// </summary>
         internal List<EntityFieldInfo> GraphNonExpandableCollections
         {

@@ -45,8 +45,7 @@ namespace PnP.Core.Model.SharePoint
                                     // this item without having to read it again from the server
                                     var parentList = Parent.Parent as List;
                                     AddMetadata(PnPConstants.MetaDataRestId, $"{id}");
-                                    AddMetadata(PnPConstants.MetaDataUri, $"{parentList.GetMetadata(PnPConstants.MetaDataUri)}/Items({id})");
-                                    AddMetadata(PnPConstants.MetaDataType, $"SP.Data.{parentList.GetMetadata("EntityTypeName")}Item");
+                                    MetadataSetup();
 
                                     // We're currently only interested in the Id property
                                     continue;
@@ -144,8 +143,35 @@ namespace PnP.Core.Model.SharePoint
                     Metadata.Add(PnPConstants.MetaDataGraphId, Id.ToString());
                 }
             }
+
+            MetadataSetup();
         }
 
+        internal void MetadataSetup()
+        {
+            if (Parent != null && Parent.Parent != null && Parent.Parent is IList)
+            {
+                if (!Metadata.ContainsKey(PnPConstants.MetaDataUri))
+                {
+                    AddMetadata(PnPConstants.MetaDataUri, $"{(Parent.Parent as List).GetMetadata(PnPConstants.MetaDataUri)}/Items({Id})");
+                }
+                if (!Metadata.ContainsKey(PnPConstants.MetaDataType))
+                {
+                    if ((Parent.Parent as List).IsPropertyAvailable(p => p.ListItemEntityTypeFullName))
+                    {
+                        AddMetadata(PnPConstants.MetaDataType, (Parent.Parent as List).ListItemEntityTypeFullName);
+                    }
+                    else if (!string.IsNullOrEmpty((Parent.Parent as List).GetMetadata(PnPConstants.MetaDataRestEntityTypeName)))
+                    {
+                        AddMetadata(PnPConstants.MetaDataType, $"SP.Data.{(Parent.Parent as List).GetMetadata(PnPConstants.MetaDataRestEntityTypeName)}Item");
+                    }
+                    else
+                    {
+                        AddMetadata(PnPConstants.MetaDataType, $"SP.Data.ListItem");
+                    }
+                }
+            }
+        }
         #endregion
         #endregion
     }
