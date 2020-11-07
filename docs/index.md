@@ -18,7 +18,7 @@ This is a community effort, hence we cannot guarantee below roadmap but rest ass
 
 ## Getting started using this library
 
-Using the PnP Core SDK is simple, check out the [getting started](articles/consumer/readme.md) guide.
+Using the PnP Core SDK is simple, check out the [getting started](~/articles/consumer/readme.md) guide.
 
 ## Where is the code?
 
@@ -28,10 +28,10 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 
 The model implemented in the preview only covers a small part of what's possible and what's needed. We're asking the community to help us expand the model by:
 
-- **Extending the model** via the creation of new model, complex type and collection classes. Check out the [Extending the model](articles/contributor/readme.md) article to learn how to do this.
-- **Adding "functionalities"** to the model: after extending the model, the typical CRUD functionality is there, but for some parts of the model it makes sense to add functionalities by adding methods on top of the model classes. Check out the [Extending the model](articles/contributor/readme.md) article to learn how to do this.
-- **Writing sample programs** that use this library: since this is a .Net Standard library, it doesn't target Windows only, but also macOS and Linux, as well as  mobile OS's like Android and iOS. With the rise of [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor), this library can also be used to build .Net based apps running in the browser. Samples can be added in the **src\samples** folder.
-- **Working on documentation**: good documentation is critical to help developers work with this library, either by using it or by extending it. See the [Writing documentation](articles/contributor/writing%20documentation.md) article for more details.
+- **Extending the model** via the creation of new model, complex type and collection classes. Check out the [Extending the model](~/articles/contributor/readme.md) article to learn how to do this.
+- **Adding "functionalities"** to the model: after extending the model, the typical CRUD functionality is there, but for some parts of the model it makes sense to add functionalities by adding methods on top of the model classes. Check out the [Extending the model](~/articles/contributor/readme.md) article to learn how to do this.
+- **Writing sample programs** that use this library: since this is a .Net Standard library, it doesn't target Windows only, but also macOS and Linux, as well as  mobile OS's like Android and iOS. With the rise of [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor), this library can also be used to build .Net based apps running in the browser. Samples can be added in the [src\samples](https://github.com/pnp/pnpcore/tree/dev/src/samples) folder.
+- **Working on documentation**: good documentation is critical to help developers work with this library, either by using it or by extending it. See the [Writing documentation](~/articles/contributor/writing%20documentation.md) article for more details.
 
 ### Best practices when contributing
 
