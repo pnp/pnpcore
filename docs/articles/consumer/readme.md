@@ -95,6 +95,9 @@ And you will also need to provide the configuration in the `appsettings.json` fi
 }
 ```
 
+> [!Important]
+> The defined url's are case sensitive. The PnP Core SDK internally does a lot of batching to optimize performance and in SharePoint REST batching the case of the used url's needs to be correct.
+
 You should provide the `ClientId` and `TenantId` for an application registered in Azure Active Directory and configured with proper permissions, accordingly to your needs. For example, you could register an app in Azure Active Directory with delegated permission for:
 
 - Microsoft Graph: `Group.ReadWrite.All`
@@ -287,6 +290,9 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     }
 }
 ```
+
+> [!Important]
+> The defined url's are case sensitive. The PnP Core SDK internally does a lot of batching to optimize performance and in SharePoint REST batching the case of the used url's needs to be correct.
 
 ## Using the PnPContext for operations on Microsoft 365
 
