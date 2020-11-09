@@ -1,0 +1,905 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IClientSideWebPart
+   | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IClientSideWebPart
+   | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.51.0.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L10" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                      <h1 id="PnP_Core_Model_SharePoint_IClientSideWebPart" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart">Interface IClientSideWebPart
+  </h1>
+  <div class="markdown level0 summary"><p>This class is used to instantiate modern web parts. Using this class you can instantiate a control and
+add it on a <a class="xref" href="PnP.Core.Model.SharePoint.IPage.html">IPage</a>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+
+  
+  
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_Section">ICanvasControl.Section</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_Column">ICanvasControl.Column</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_DataVersion">ICanvasControl.DataVersion</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_CanvasDataVersion">ICanvasControl.CanvasDataVersion</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_CanvasControlData">ICanvasControl.CanvasControlData</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_ControlType">ICanvasControl.ControlType</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_JsonControlData">ICanvasControl.JsonControlData</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_InstanceId">ICanvasControl.InstanceId</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_Order">ICanvasControl.Order</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_Delete">ICanvasControl.Delete()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_Move_PnP_Core_Model_SharePoint_ICanvasSection_">ICanvasControl.Move(ICanvasSection)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_Move_PnP_Core_Model_SharePoint_ICanvasSection_System_Int32_">ICanvasControl.Move(ICanvasSection, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_Move_PnP_Core_Model_SharePoint_ICanvasColumn_">ICanvasControl.Move(ICanvasColumn)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_Move_PnP_Core_Model_SharePoint_ICanvasColumn_System_Int32_">ICanvasControl.Move(ICanvasColumn, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_MovePosition_PnP_Core_Model_SharePoint_ICanvasSection_">ICanvasControl.MovePosition(ICanvasSection)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_MovePosition_PnP_Core_Model_SharePoint_ICanvasSection_System_Int32_">ICanvasControl.MovePosition(ICanvasSection, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_MovePosition_PnP_Core_Model_SharePoint_ICanvasColumn_">ICanvasControl.MovePosition(ICanvasColumn)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_MovePosition_PnP_Core_Model_SharePoint_ICanvasColumn_System_Int32_">ICanvasControl.MovePosition(ICanvasColumn, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.ICanvasControl.html#PnP_Core_Model_SharePoint_ICanvasControl_MovePosition_System_Int32_">ICanvasControl.MovePosition(Int32)</a>
+    </div>
+  </div>
+  
+  <h6><strong>Namespace</strong>: <a class="xref" href="PnP.Core.Model.SharePoint.html">PnP.Core.Model.SharePoint</a></h6>
+  <h6><strong>Assembly</strong>: PnP.Core.dll</h6>
+  
+  <h5 id="PnP_Core_Model_SharePoint_IClientSideWebPart_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IClientSideWebPart : ICanvasControl</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h3 id="properties">Properties
+  </h3>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_Description.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.Description%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L50" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_Description_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.Description*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_Description" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.Description"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_Description" class="expander" data-toggle="collapse">Description</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_Description" class="collapse in">
+  <div class="markdown level1 summary"><p>Description of the web part</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Description { get; set; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataPaths.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.DynamicDataPaths%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L78" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataPaths_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.DynamicDataPaths*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataPaths" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.DynamicDataPaths"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataPaths" class="expander" data-toggle="collapse">DynamicDataPaths</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataPaths" class="collapse in">
+  <div class="markdown level1 summary"><p>DynamicDataPaths json node</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">JsonElement DynamicDataPaths { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">JsonElement</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataValues.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.DynamicDataValues%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L83" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataValues_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.DynamicDataValues*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataValues" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.DynamicDataValues"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataValues" class="expander" data-toggle="collapse">DynamicDataValues</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_DynamicDataValues" class="collapse in">
+  <div class="markdown level1 summary"><p>DynamicDataValues json node</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">JsonElement DynamicDataValues { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">JsonElement</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlProperties.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.HtmlProperties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L25" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlProperties_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.HtmlProperties*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlProperties" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.HtmlProperties"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlProperties" class="expander" data-toggle="collapse">HtmlProperties</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlProperties" class="collapse in">
+  <div class="markdown level1 summary"><p>Value of the &quot;data-sp-htmlproperties&quot; attribute</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string HtmlProperties { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlPropertiesData.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.HtmlPropertiesData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L20" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlPropertiesData_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.HtmlPropertiesData*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlPropertiesData" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.HtmlPropertiesData"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlPropertiesData" class="expander" data-toggle="collapse">HtmlPropertiesData</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_HtmlPropertiesData" class="collapse in">
+  <div class="markdown level1 summary"><p>Value of the &quot;data-sp-htmlproperties&quot; element</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string HtmlPropertiesData { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_IsHeaderControl.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.IsHeaderControl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L93" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_IsHeaderControl_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.IsHeaderControl*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_IsHeaderControl" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.IsHeaderControl"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_IsHeaderControl" class="expander" data-toggle="collapse">IsHeaderControl</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_IsHeaderControl" class="collapse in">
+  <div class="markdown level1 summary"><p>This control lives in the page header (not removable control)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsHeaderControl { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_JsonWebPartData.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.JsonWebPartData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L15" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_JsonWebPartData_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.JsonWebPartData*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_JsonWebPartData" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.JsonWebPartData"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_JsonWebPartData" class="expander" data-toggle="collapse">JsonWebPartData</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_JsonWebPartData" class="collapse in">
+  <div class="markdown level1 summary"><p>Value of the &quot;data-sp-webpartdata&quot; attribute</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string JsonWebPartData { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_Properties.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.Properties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L68" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_Properties_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.Properties*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_Properties" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.Properties"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_Properties" class="expander" data-toggle="collapse">Properties</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_Properties" class="collapse in">
+  <div class="markdown level1 summary"><p>Web properties as configurable <see cref="!:JsonElement"></see></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">JsonElement Properties { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">JsonElement</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_PropertiesJson.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.PropertiesJson%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L62" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_PropertiesJson_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.PropertiesJson*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_PropertiesJson" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.PropertiesJson"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_PropertiesJson" class="expander" data-toggle="collapse">PropertiesJson</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_PropertiesJson" class="collapse in">
+  <div class="markdown level1 summary"><p>Json serialized web part information. For 1st party web parts this ideally is the <em>full</em> JSON string
+fetch via workbench or via copying it from an existing page. It's important that the serverProcessedContent
+element is included here!</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string PropertiesJson { get; set; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_ServerProcessedContent.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.ServerProcessedContent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L73" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_ServerProcessedContent_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.ServerProcessedContent*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_ServerProcessedContent" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.ServerProcessedContent"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_ServerProcessedContent" class="expander" data-toggle="collapse">ServerProcessedContent</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_ServerProcessedContent" class="collapse in">
+  <div class="markdown level1 summary"><p>ServerProcessedContent json node</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">JsonElement ServerProcessedContent { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">JsonElement</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_SupportsFullBleed.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.SupportsFullBleed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L35" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_SupportsFullBleed_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.SupportsFullBleed*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_SupportsFullBleed" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.SupportsFullBleed"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_SupportsFullBleed" class="expander" data-toggle="collapse">SupportsFullBleed</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_SupportsFullBleed" class="collapse in">
+  <div class="markdown level1 summary"><p>Supports full bleed display experience</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool SupportsFullBleed { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_Title.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L45" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_Title_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.Title*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_Title" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.Title"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_Title" class="expander" data-toggle="collapse">Title</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_Title" class="collapse in">
+  <div class="markdown level1 summary"><p>Title of the web part</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Title { get; set; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_Type.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.Type%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L88" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_Type_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.Type*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_Type" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.Type"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_Type" class="expander" data-toggle="collapse">Type</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_Type" class="collapse in">
+  <div class="markdown level1 summary"><p>Return <a class="xref" href="PnP.Core.Model.SharePoint.IClientSideWebPart.html#PnP_Core_Model_SharePoint_IClientSideWebPart_Type">Type</a> of the client side web part</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Type Type { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Type</span>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartData.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.WebPartData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L40" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartData_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.WebPartData*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartData" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.WebPartData"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartData" class="expander" data-toggle="collapse">WebPartData</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartData" class="collapse in">
+  <div class="markdown level1 summary"><p>Value of the &quot;data-sp-webpart&quot; attribute</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string WebPartData { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartId.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.WebPartId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L30" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartId_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.WebPartId*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartId" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.WebPartId"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartId" class="expander" data-toggle="collapse">WebPartId</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartId" class="collapse in">
+  <div class="markdown level1 summary"><p>ID of the client side web part</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string WebPartId { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartPreviewImage.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IClientSideWebPart.WebPartPreviewImage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Pages/Public/IClientSideWebPart.cs/#L55" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartPreviewImage_" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.WebPartPreviewImage*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartPreviewImage" data-uid="PnP.Core.Model.SharePoint.IClientSideWebPart.WebPartPreviewImage"><a href="#collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartPreviewImage" class="expander" data-toggle="collapse">WebPartPreviewImage</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IClientSideWebPart_WebPartPreviewImage" class="collapse in">
+  <div class="markdown level1 summary"><p>Preview image that can serve as page preview image when the page holding this web part is promoted to a news page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string WebPartPreviewImage { get; }</code></pre>
+  </div>
+
+  
+  
+  
+  
+  <h5 class="propertyValue">Property Value</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
+        <p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

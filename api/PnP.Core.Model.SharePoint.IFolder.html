@@ -1621,6 +1621,118 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFolder_EnsureFolder_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFolder.EnsureFolder(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFolder.cs/#L244" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFolder_EnsureFolder_" data-uid="PnP.Core.Model.SharePoint.IFolder.EnsureFolder*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFolder_EnsureFolder_System_String_" data-uid="PnP.Core.Model.SharePoint.IFolder.EnsureFolder(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFolder_EnsureFolder_System_String_" class="expander" data-toggle="collapse">EnsureFolder(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFolder_EnsureFolder_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Ensures a (hiarchy) of folders exists on a given folder</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IFolder EnsureFolder(string folderRelativeUrl)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">folderRelativeUrl</span>
+        <p><p>a (hiarchy) of folders (e.g. folderA/folderB/FolderC)</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.SharePoint.IFolder.html">IFolder</a>
+        <p><p>The <a class="xref" href="PnP.Core.Model.SharePoint.IFolder.html">IFolder</a> representing the final folder in the hiarchy (e.g. FolderC)</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFolder.EnsureFolderAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IFolder.cs/#L237" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_" data-uid="PnP.Core.Model.SharePoint.IFolder.EnsureFolderAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IFolder.EnsureFolderAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_System_String_" class="expander" data-toggle="collapse">EnsureFolderAsync(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Ensures a (hiarchy) of folders exists on a given folder</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;IFolder&gt; EnsureFolderAsync(string folderRelativeUrl)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">folderRelativeUrl</span>
+        <p><p>a (hiarchy) of folders (e.g. folderA/folderB/FolderC)</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.SharePoint.IFolder.html">IFolder</a>&gt;
+        <p><p>The <a class="xref" href="PnP.Core.Model.SharePoint.IFolder.html">IFolder</a> representing the final folder in the hiarchy (e.g. FolderC)</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IFolder_MoveTo_System_String_PnP_Core_Model_SharePoint_MoveCopyOptions_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IFolder.MoveTo(System.String%2CPnP.Core.Model.SharePoint.MoveCopyOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">

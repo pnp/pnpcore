@@ -80,7 +80,7 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="PnP.Core.Model.SharePoint.IListItem">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L9" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L6" title="View Source" class="view-source-lg"><i class="fa fa-code"></i></a>
                       <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                       <h1 id="PnP_Core_Model_SharePoint_IListItem" data-uid="PnP.Core.Model.SharePoint.IListItem">Interface IListItem
@@ -142,6 +142,51 @@
       <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_ApiResponse_Expression_Func__0_System_Object_____">IDataModelGet&lt;IListItem&gt;.Get(ApiResponse, Expression&lt;Func&lt;IListItem, Object&gt;&gt;[])</a>
     </div>
     <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_Id">IListItemBase.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_CommentsDisabled">IListItemBase.CommentsDisabled</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_Title">IListItemBase.Title</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateAsync">IListItemBase.SystemUpdateAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdate">IListItemBase.SystemUpdate()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatchAsync">IListItemBase.SystemUpdateBatchAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatch">IListItemBase.SystemUpdateBatch()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatchAsync_PnP_Core_Services_Batch_">IListItemBase.SystemUpdateBatchAsync(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatch_PnP_Core_Services_Batch_">IListItemBase.SystemUpdateBatch(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionAsync">IListItemBase.UpdateOverwriteVersionAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersion">IListItemBase.UpdateOverwriteVersion()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatchAsync">IListItemBase.UpdateOverwriteVersionBatchAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatch">IListItemBase.UpdateOverwriteVersionBatch()</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatchAsync_PnP_Core_Services_Batch_">IListItemBase.UpdateOverwriteVersionBatchAsync(Batch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatch_PnP_Core_Services_Batch_">IListItemBase.UpdateOverwriteVersionBatch(Batch)</a>
+    </div>
+    <div>
       <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatchAsync">IDataModelUpdate.UpdateBatchAsync()</a>
     </div>
     <div>
@@ -196,667 +241,13 @@
   
   <h5 id="PnP_Core_Model_SharePoint_IListItem_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IListItem : IDataModel&lt;IListItem&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;IListItem&gt;, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IListItem : IDataModel&lt;IListItem&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;IListItem&gt;, IListItemBase, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel</code></pre>
   </div>
 
   
   
   
   
-  <h3 id="properties">Properties
-  </h3>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_CommentsDisabled.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.CommentsDisabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L20" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_CommentsDisabled_" data-uid="PnP.Core.Model.SharePoint.IListItem.CommentsDisabled*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_CommentsDisabled" data-uid="PnP.Core.Model.SharePoint.IListItem.CommentsDisabled"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_CommentsDisabled" class="expander" data-toggle="collapse">CommentsDisabled</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_CommentsDisabled" class="collapse in">
-  <div class="markdown level1 summary"><p>Can comments be added to this list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool CommentsDisabled { get; set; }</code></pre>
-  </div>
-
-  
-  
-  
-  
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_Id.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L15" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_Id_" data-uid="PnP.Core.Model.SharePoint.IListItem.Id*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_Id" data-uid="PnP.Core.Model.SharePoint.IListItem.Id"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_Id" class="expander" data-toggle="collapse">Id</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_Id" class="collapse in">
-  <div class="markdown level1 summary"><p>Id of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">int Id { get; }</code></pre>
-  </div>
-
-  
-  
-  
-  
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_Title.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L25" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_Title_" data-uid="PnP.Core.Model.SharePoint.IListItem.Title*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_Title" data-uid="PnP.Core.Model.SharePoint.IListItem.Title"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_Title" class="expander" data-toggle="collapse">Title</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_Title" class="collapse in">
-  <div class="markdown level1 summary"><p>Title value of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">string Title { get; set; }</code></pre>
-  </div>
-
-  
-  
-  
-  
-  <h5 class="propertyValue">Property Value</h5>
-  <table>
-    <tr>
-      <td>
-        <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  <h3 id="methods">Methods
-  </h3>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdate.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L39" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdate_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdate*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_SystemUpdate" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdate"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdate" class="expander" data-toggle="collapse">SystemUpdate()</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdate" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a system update of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void SystemUpdate()</code></pre>
-  </div>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L34" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync" class="expander" data-toggle="collapse">SystemUpdateAsync()</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a system update of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task SystemUpdateAsync()</code></pre>
-  </div>
-
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L49" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch" class="expander" data-toggle="collapse">SystemUpdateBatch()</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a system update of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void SystemUpdateBatch()</code></pre>
-  </div>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L61" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">SystemUpdateBatch(Batch)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a system update of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void SystemUpdateBatch(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the systemupdate request to</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L44" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync" class="expander" data-toggle="collapse">SystemUpdateBatchAsync()</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a system update of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task SystemUpdateBatchAsync()</code></pre>
-  </div>
-
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L55" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">SystemUpdateBatchAsync(Batch)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a system update of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task SystemUpdateBatchAsync(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the systemupdate request to</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L75" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion" class="expander" data-toggle="collapse">UpdateOverwriteVersion()</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a UpdateOverwriteVersion of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void UpdateOverwriteVersion()</code></pre>
-  </div>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L70" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync" class="expander" data-toggle="collapse">UpdateOverwriteVersionAsync()</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a UpdateOverwriteVersion of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task UpdateOverwriteVersionAsync()</code></pre>
-  </div>
-
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L85" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch" class="expander" data-toggle="collapse">UpdateOverwriteVersionBatch()</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a UpdateOverwriteVersion of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void UpdateOverwriteVersionBatch()</code></pre>
-  </div>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L97" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">UpdateOverwriteVersionBatch(Batch)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a UpdateOverwriteVersion of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void UpdateOverwriteVersionBatch(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the UpdateOverwriteVersion request to</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L80" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync" class="expander" data-toggle="collapse">UpdateOverwriteVersionBatchAsync()</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a UpdateOverwriteVersion of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task UpdateOverwriteVersionBatchAsync()</code></pre>
-  </div>
-
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
-  
-  <span class="small pull-right mobile-hide">
-    <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItem.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
-  </span>
-  
-  <a id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync*"></a>
-  
-  <h4 id="PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">UpdateOverwriteVersionBatchAsync(Batch)</a></h4>
-  
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
-  <div class="markdown level1 summary"><p>Performs a UpdateOverwriteVersion of the list item</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task UpdateOverwriteVersionBatchAsync(Batch batch)</code></pre>
-  </div>
-
-  <h5 class="parameters">Parameters</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
-        <span class="parametername">batch</span>
-        <p><p>Batch to add the UpdateOverwriteVersion request to</p>
-</p>
-      </td>
-    </tr>
-  </table>
-  
-  <h5 class="returns">Returns</h5>
-  <table>
-    <tr>
-      <td>
-        <span class="xref">Task</span>
-        <p>
-      </td>
-    </tr>
-  </table>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </div>
   
   
 </article>
