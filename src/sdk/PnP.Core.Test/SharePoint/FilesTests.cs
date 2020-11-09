@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using AngleSharp.Html;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
@@ -183,6 +184,62 @@ namespace PnP.Core.Test.SharePoint
             }
 
             await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        [TestMethod]
+        public async Task GetNonExistingFileByServerRelativeUrlAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                bool exceptionThrown = false;
+                try
+                {
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync($"{TestCommon.Instance.TestUris[TestCommon.TestSite].LocalPath}/Shared%20Documents/IdontExist.pdf");
+
+                    Assert.IsNotNull(testDocument);                
+                }
+                catch(SharePointRestServiceException ex)
+                {
+                    var error = ex.Error as SharePointRestError;
+                    // Indicates the file did not exist
+                    if (error.HttpResponseCode == 404 && error.ServerErrorCode == -2130575338)
+                    {
+                        exceptionThrown = true;
+                    }
+                }
+
+                Assert.IsTrue(exceptionThrown);
+            }
+
+        }
+
+        [TestMethod]
+        public async Task GetExistingFileInOtherSiteByServerRelativeUrlAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                bool exceptionThrown = false;
+                try
+                {
+                    IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync($"{TestCommon.Instance.TestUris[TestCommon.NoGroupTestSite].LocalPath}/Shared%20Documents/IdontExist.pdf");
+
+                    Assert.IsNotNull(testDocument);
+                }
+                catch (SharePointRestServiceException ex)
+                {
+                    var error = ex.Error as SharePointRestError;
+                    // Indicates the file check was for a file in another site collection
+                    if (error.Message.Contains("SPWeb.ServerRelativeUrl"))
+                    {
+                        exceptionThrown = true;
+                    }
+                }
+
+                Assert.IsTrue(exceptionThrown);
+            }
+
         }
         #endregion
 

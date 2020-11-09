@@ -338,9 +338,11 @@ namespace PnP.Core.Test.SharePoint
         //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
         //    {
 
-        //        var pages = await context.Web.GetPagesAsync("Ber");
+        //        var pages = await context.Web.GetPagesAsync("Bert1");
 
         //        Assert.IsTrue(pages.Count > 0);
+
+        //        await pages.First().SaveAsync("Bert1Clone.aspx");
 
         //    }
         //}

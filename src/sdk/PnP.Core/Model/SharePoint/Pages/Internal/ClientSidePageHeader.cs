@@ -1,9 +1,11 @@
 ﻿using AngleSharp.Html.Parser;
+using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
 using System;
 using System.Linq;
 using System.Net;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -99,6 +101,14 @@ namespace PnP.Core.Model.SharePoint
         /// Id of the page author
         /// </summary>
         public int AuthorByLineId { get; set; }
+
+        internal Guid HeaderImageId
+        {
+            get
+            {
+                return uniqueId;    
+            }
+        }
 
         #region construction
         /// <summary>
@@ -344,7 +354,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="pageTitle">Title of the page</param>
         /// <returns>Header html value</returns>
-        public string ToHtml(string pageTitle)
+        public async Task<string> ToHtmlAsync(string pageTitle)
         {
             if (pageTitle == null)
             {
@@ -360,7 +370,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (!headerImageResolved)
                 {
-                    ResolvePageHeaderImage();
+                    await ResolvePageHeaderImageAsync().ConfigureAwait(false);
                 }
 
                 if (headerImageResolved)
@@ -375,7 +385,7 @@ namespace PnP.Core.Model.SharePoint
                     }
 
                     // Populate default properties
-                    var header = FillDefaultProperties(CustomPageHeader);
+                    var header = await FillDefaultPropertiesAsync(CustomPageHeader).ConfigureAwait(false);
                     // Populate custom header specific properties
                     return header.Replace("@@siteId@@", siteId.ToString()).Replace("@@webId@@", webId.ToString()).Replace("@@listId@@", listId.ToString()).Replace("@@uniqueId@@", uniqueId.ToString()).Replace("@@focalPoints@@", focalPoints).Replace("@@title@@", pageTitle).Replace("@@imageSource@@", ImageServerRelativeUrl).Replace("@@alternativetext@@", AlternativeText == null ? "" : AlternativeText);
                 }
@@ -383,12 +393,12 @@ namespace PnP.Core.Model.SharePoint
 
             // in case nothing worked out...
             // Populate default properties
-            var defaultHeader = FillDefaultProperties(DefaultPageHeader);
+            var defaultHeader = await FillDefaultPropertiesAsync(DefaultPageHeader).ConfigureAwait(false);
             // Populate title
             return defaultHeader.Replace("@@title@@", pageTitle);
         }
 
-        private string FillDefaultProperties(string header)
+        private async Task<string> FillDefaultPropertiesAsync(string header)
         {
             if (!string.IsNullOrEmpty(Authors))
             {
@@ -410,14 +420,12 @@ namespace PnP.Core.Model.SharePoint
                 int userId = -1;
                 try
                 {
-                    /* TODO
-                    var user = this.clientContext.Web.EnsureUser(data.Replace("\"", "").Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries)[2]);
-                    this.clientContext.Load(user);
-                    this.clientContext.ExecuteQueryRetry();
+                    var user = await clientContext.Web.EnsureUserAsync(data.Replace("\"", "").Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries)[0]).ConfigureAwait(false);
                     userId = user.Id;
-                    */
                 }
+#pragma warning disable CA1031 // Do not catch general exception types
                 catch (Exception)
+#pragma warning restore CA1031 // Do not catch general exception types
                 {
 
                 }
@@ -449,49 +457,44 @@ namespace PnP.Core.Model.SharePoint
             return result;
         }
 
-        private void ResolvePageHeaderImage()
+        private async Task ResolvePageHeaderImageAsync()
         {
-            /* TODO
             try
             {
-                this.siteId = this.clientContext.Site.EnsureProperty(p => p.Id);
-                this.webId = this.clientContext.Web.EnsureProperty(p => p.Id);
+                await clientContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                await clientContext.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                siteId = clientContext.Site.Id;
+                webId = clientContext.Web.Id;
 
                 if (!ImageServerRelativeUrl.StartsWith("/_LAYOUTS", StringComparison.OrdinalIgnoreCase))
                 {
-                    var pageHeaderImage = this.clientContext.Web.GetFileByServerRelativePath(ResourcePath.FromDecodedUrl(ImageServerRelativeUrl));
-                    this.clientContext.Load(pageHeaderImage, p => p.UniqueId, p => p.ListId);
-                    this.clientContext.ExecuteQueryRetry();
+                    var pageHeaderImage = await clientContext.Web.GetFileByServerRelativeUrlAsync(ImageServerRelativeUrl, p => p.UniqueId, p => p.ListId).ConfigureAwait(false);
 
-                    this.listId = pageHeaderImage.ListId;
-                    this.uniqueId = pageHeaderImage.UniqueId;
+                    listId = pageHeaderImage.ListId;
+                    uniqueId = pageHeaderImage.UniqueId;
                 }
 
-                this.headerImageResolved = true;
+                headerImageResolved = true;
             }
-            catch (ServerException ex)
+            catch(SharePointRestServiceException ex)
             {
-                if (ex.ServerErrorTypeName == "System.IO.FileNotFoundException")
+                var error = ex.Error as SharePointRestError;
+
+                if (error.HttpResponseCode == 404 && error.ServerErrorCode == -2130575338)
                 {
-                    // provided file link does not exist...we're eating the exception and the page will end up with a default page header
-                    Log.Warning(Constants.LOGGING_SOURCE, CoreResources.ClientSidePageHeader_ImageNotFound, ImageServerRelativeUrl);
+                    clientContext.Logger.LogInformation("Provided file link does not exist...we're eating the exception and the page will end up with a default page header");
                 }
-                else if (ex.Message.Contains("SPWeb.ServerRelativeUrl"))
+                else if (error.Message.Contains("SPWeb.ServerRelativeUrl"))
                 {
-                    // image resides in a different site collection context, we will simply allow it to be referred in the page header section.                    
-                    Log.Warning(Constants.LOGGING_SOURCE, CoreResources.ClientSidePageHeader_ImageInDifferentWeb, imageServerRelativeUrl);
-                    this.headerImageResolved = true;
+                    headerImageResolved = true;
+                    clientContext.Logger.LogInformation("Image resides in a different site collection context, we will simply allow it to be referred in the page header section");
                 }
                 else
                 {
-                    // the image can also refer to a path outside SharePoint, that is also allowed, so we will mark it as resolved and move ahead.
-                    Log.Warning(Constants.LOGGING_SOURCE, CoreResources.ClientSidePageHeader_ImageInDifferentWeb, imageServerRelativeUrl);
-                    this.headerImageResolved = true;
-                    //throw;
+                    headerImageResolved = true;
+                    clientContext.Logger.LogInformation("The image can also refer to a path outside SharePoint, that is also allowed, so we will mark it as resolved and move ahead");
                 }
             }
-            */
         }
-
     }
 }

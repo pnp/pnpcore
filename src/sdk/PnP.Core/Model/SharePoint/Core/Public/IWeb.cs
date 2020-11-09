@@ -746,6 +746,24 @@ namespace PnP.Core.Model.SharePoint
         public bool IsNoScriptSite();
         #endregion
 
+        #region Users
+
+        /// <summary>
+        /// Ensures the given users exists
+        /// </summary>
+        /// <param name="userPrincipalName">UserPrincipalName value of the user to verify</param>
+        /// <returns>The ensured <see cref="ISharePointUser"/></returns>
+        public Task<ISharePointUser> EnsureUserAsync(string userPrincipalName);
+
+        /// <summary>
+        /// Ensures the given users exists
+        /// </summary>
+        /// <param name="userPrincipalName">UserPrincipalName value of the user to verify</param>
+        /// <returns>The ensured <see cref="ISharePointUser"/></returns>
+        public ISharePointUser EnsureUser(string userPrincipalName);
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

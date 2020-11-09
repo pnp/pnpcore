@@ -316,6 +316,8 @@ namespace PnP.Core.Model.SharePoint
                     <FieldRef Name='{PageConstants.TopicEntityRelations}' />
                     <FieldRef Name='{PageConstants.CanvasField}' />
                     <FieldRef Name='{PageConstants.PageLayoutContentField}' />
+                    <FieldRef Name='{PageConstants.BannerImageUrl}' />
+                    <FieldRef Name='{PageConstants.PromotedStateField}' />
                   </ViewFields>
                   <Query>
                     <Where>
@@ -1288,7 +1290,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // this triggers resolving of the header image which has to be done early as otherwise there will be version conflicts
                 // (see here: https://github.com/SharePoint/PnP-Sites-Core/issues/2203)
-                pageHeaderHtml = pageHeader.ToHtml(PageTitle);
+                pageHeaderHtml = await pageHeader.ToHtmlAsync(PageTitle).ConfigureAwait(false);
             }
 
             if (LayoutType == PageLayoutType.Topic)
@@ -1374,9 +1376,6 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 PageListItem[PageConstants.PromotedStateField] = (int)PromotedState.NotPromoted;
-
-                //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
-                //await PageListItem.UpdateAsync().ConfigureAwait(false);
             }
             else
             {
@@ -1424,17 +1423,6 @@ namespace PnP.Core.Model.SharePoint
                 {
                     PageListItem[PageConstants.BannerImageUrl] = ThumbnailUrl;
                 }
-
-                //// The page must first be saved, otherwise the page contents gets erased
-                //if (updatingExistingPage)
-                //{
-                //    item.Update();
-                //}
-                //else
-                //{
-                //    item.UpdateOverwriteVersion();
-                //}
-                //this.Context.Web.Context.Load(item);
             }
 
             // Persist the page header
@@ -1457,7 +1445,7 @@ namespace PnP.Core.Model.SharePoint
                 // AuthorByline depends on a field holding the author values
                 if (pageHeader.AuthorByLineId > -1)
                 {
-                    throw new Exception("TODO!!");
+                    //throw new Exception("TODO!!");
                     // TODO
                     //FieldUserValue[] userValueCollection = new FieldUserValue[1];
                     //FieldUserValue fieldUserVal = new FieldUserValue
@@ -1475,40 +1463,28 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            //item.UpdateOverwriteVersion();
-            //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
-            //this.Context.Web.Context.Load(item);
-            //this.Context.ExecuteQueryRetry();
-
             if (int.TryParse(PageListItem[PageConstants.IdField].ToString(), out int pageIdValue))
             {
                 pageId = pageIdValue;
             }
 
 
-            // Try to set the page banner image url if not yet set
-            bool isDirty = false;
-            /*
-            if ((this.layoutType == PageLayoutType.Article
-                || this.LayoutType == PageLayoutType.Spaces) &&
-                PageListItem[PageConstants.BannerImageUrl] != null)
+            if ((layoutType == PageLayoutType.Article || LayoutType == PageLayoutType.Spaces) && PageListItem[PageConstants.BannerImageUrl] != null)
             {
-                if (string.IsNullOrEmpty((PageListItem[PageConstants.BannerImageUrl] as FieldUrlValue).Url) || (PageListItem[ClientSidePage.BannerImageUrl] as FieldUrlValue).Url.IndexOf("/_layouts/15/images/sitepagethumbnail.png", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                if (string.IsNullOrEmpty(PageListItem[PageConstants.BannerImageUrl].ToString()) || PageListItem[PageConstants.BannerImageUrl].ToString().IndexOf("/_layouts/15/images/sitepagethumbnail.png", StringComparison.InvariantCultureIgnoreCase) >= 0)
                 {
                     string previewImageServerRelativeUrl = "";
-                    if (this.pageHeader.Type == PageHeaderType.Custom && !string.IsNullOrEmpty(this.pageHeader.ImageServerRelativeUrl))
+                    if (pageHeader.Type == PageHeaderType.Custom && !string.IsNullOrEmpty(pageHeader.ImageServerRelativeUrl))
                     {
-                        previewImageServerRelativeUrl = this.pageHeader.ImageServerRelativeUrl;
+                        previewImageServerRelativeUrl = pageHeader.ImageServerRelativeUrl;
                     }
                     else
                     {
                         // iterate the web parts...if we find an unique id then let's grab that information
                         foreach (var control in this.Controls)
                         {
-                            if (control is ClientSideWebPart)
+                            if (control is ClientSideWebPart webPart)
                             {
-                                var webPart = (ClientSideWebPart)control;
-
                                 if (!string.IsNullOrEmpty(webPart.WebPartPreviewImage))
                                 {
                                     previewImageServerRelativeUrl = webPart.WebPartPreviewImage;
@@ -1522,50 +1498,33 @@ namespace PnP.Core.Model.SharePoint
                     if (!string.IsNullOrEmpty(previewImageServerRelativeUrl) &&
                         !previewImageServerRelativeUrl.StartsWith("/_LAYOUTS", StringComparison.OrdinalIgnoreCase))
                     {
-                        try
-                        {
-                            this.Context.Site.EnsureProperties(p => p.Id);
-                            this.Context.Web.EnsureProperties(p => p.Id, p => p.Url);
+                        await PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
+                        await PnPContext.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
 
-                            var previewImage = this.Context.Web.GetFileByServerRelativePath(ResourcePath.FromDecodedUrl(previewImageServerRelativeUrl));
-                            this.Context.Load(previewImage, p => p.UniqueId);
-                            this.Context.ExecuteQueryRetry();
-
-                            Uri rootUri = new Uri(this.Context.Web.Url);
-                            rootUri = new Uri(rootUri, "/");
-
-                            PageListItem[PageConstants.BannerImageUrl] = $"{rootUri}_layouts/15/getpreview.ashx?guidSite={this.Context.Site.Id.ToString()}&guidWeb={this.Context.Web.Id.ToString()}&guidFile={previewImage.UniqueId.ToString()}";
-                            isDirty = true;
-                        }
-                        catch { }
+                        PageListItem[PageConstants.BannerImageUrl] = $"{PnPContext.Uri}/_layouts/15/getpreview.ashx?guidSite={PnPContext.Site.Id}&guidWeb={PnPContext.Web.Id}&guidFile={pageHeader.HeaderImageId}";
                     }
                 }
             }
-            */
+            
 
             if (LayoutType != PageLayoutType.Spaces)
             {
                 if (PageListItem[PageConstants.PageLayoutType] as string != layoutType.ToString())
                 {
                     PageListItem[PageConstants.PageLayoutType] = layoutType.ToString();
-                    isDirty = true;
                 }
             }
 
             // Try to set the page description if not yet set
-            if ((layoutType == PageLayoutType.Article
-                || LayoutType == PageLayoutType.Spaces) &&
-                PageListItem.Values.ContainsKey(PageConstants.DescriptionField))
+            if ((layoutType == PageLayoutType.Article || LayoutType == PageLayoutType.Spaces) && PageListItem.Values.ContainsKey(PageConstants.DescriptionField))
             {
                 if (PageListItem[PageConstants.DescriptionField] == null || string.IsNullOrEmpty(PageListItem[PageConstants.DescriptionField].ToString()))
                 {
                     string previewText = "";
                     foreach (var control in Controls)
                     {
-                        if (control is ClientSideText)
+                        if (control is ClientSideText textPart)
                         {
-                            var textPart = (ClientSideText)control;
-
                             if (!string.IsNullOrEmpty(textPart.PreviewText))
                             {
                                 previewText = textPart.PreviewText;
@@ -1576,29 +1535,11 @@ namespace PnP.Core.Model.SharePoint
 
                     // Don't store more than 300 characters
                     PageListItem[PageConstants.DescriptionField] = previewText.Length > 300 ? previewText.Substring(0, 300) : previewText;
-                    isDirty = true;
                 }
 
             }
 
-            //if (isDirty)
-            //{
-            //item.UpdateOverwriteVersion();
-            //if (!updatingExistingPage)
-            //{
-
             await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
-            //}
-            //else
-            //{
-            //await PageListItem.UpdateAsync().ConfigureAwait(false);
-            //}
-
-            //this.Context.Web.Context.Load(item);
-            //this.Context.ExecuteQueryRetry();
-            //}
-
-            //this.pageListItem = item;
         }
 
         private async Task EnsurePageListItemAsync(string pageName)
@@ -1607,6 +1548,7 @@ namespace PnP.Core.Model.SharePoint
 
             await GetPagesListData(pageName, PagesLibrary).ConfigureAwait(false);
 
+            PageListItem = null;
             // Get the relevant list item
             foreach (var page in PagesLibrary.Items)
             {

@@ -1,4 +1,4 @@
---batchresponse_4f17561c-1447-4042-9f0c-5ebca119c911
+--batchresponse_11576c76-07a6-47a3-9f2a-894fb18c913c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "122",
+"ID": "135",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{FB34CA9A-809B-4E18-B2A0-DB751179B454}",
+"UniqueId": "{4F85C55D-AC8E-433B-8FB4-FC9B07469E3A}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
@@ -42,6 +42,10 @@ CONTENT-TYPE: application/json; charset=utf-8
 "PageLayoutType": "",
 "CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
 "LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
+"BannerImageUrl": "",
+"BannerImageUrl.desc": "",
+"PromotedState": "",
+"PromotedState.": "",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
@@ -61,4 +65,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_4f17561c-1447-4042-9f0c-5ebca119c911--
+--batchresponse_11576c76-07a6-47a3-9f2a-894fb18c913c--

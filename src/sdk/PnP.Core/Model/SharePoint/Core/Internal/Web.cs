@@ -2,8 +2,11 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq.Expressions;
 using System.Net;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -478,6 +481,35 @@ namespace PnP.Core.Model.SharePoint
         public bool IsNoScriptSite()
         {
             return IsNoScriptSiteAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
+        #region Users
+        public ISharePointUser EnsureUser(string userPrincipalName)
+        {
+            return EnsureUserAsync(userPrincipalName).GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> EnsureUserAsync(string userPrincipalName)
+        {
+            // Build the API call to ensure this graph user as a SharePoint User in this site collection
+            var parameters = new
+            {
+                logonName = $"i:0#.f|membership|{userPrincipalName}"
+            }.AsExpando();
+
+            string body = JsonSerializer.Serialize(parameters, typeof(ExpandoObject));
+
+            var apiCall = new ApiCall("_api/Web/EnsureUser", ApiType.SPORest, body);
+
+            SharePointUser sharePointUser = new SharePointUser
+            {
+                PnPContext = PnPContext
+            };
+
+            await sharePointUser.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return sharePointUser;
         }
         #endregion
 
