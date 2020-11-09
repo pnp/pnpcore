@@ -66,6 +66,24 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task GetFolderByIdTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sharedDocumentsFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
+                string sitePagesFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/SitePages";
+
+                IFolder sitePagesfolder = await context.Web.GetFolderByServerRelativeUrlAsync(sitePagesFolderServerRelativeUrl);
+
+                IFolder sitePagesFolder2 = await context.Web.GetFolderByIdAsync(sitePagesfolder.UniqueId);
+
+                Assert.IsNotNull(sitePagesFolder2);
+                Assert.AreEqual("SitePages", sitePagesFolder2.Name);
+            }
+        }
+
+        [TestMethod]
         public async Task GetFolderByServerRelativeUrlBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -84,6 +102,25 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Shared Documents", sharedDocumentsfolder.Name);
                 Assert.IsNotNull(sitePagesfolder);
                 Assert.AreEqual("SitePages", sitePagesfolder.Name);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetFolderByIdBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string sitePagesFolderServerRelativeUrl = $"{context.Uri.PathAndQuery}/SitePages";
+
+                IFolder sitePagesfolder = await context.Web.GetFolderByServerRelativeUrlAsync(sitePagesFolderServerRelativeUrl);
+
+                IFolder sitePagesFolder2 = await context.Web.GetFolderByIdBatchAsync(sitePagesfolder.UniqueId);
+                // Execute the requests in the batch
+                await context.ExecuteAsync();
+
+                Assert.IsNotNull(sitePagesFolder2);
+                Assert.AreEqual("SitePages", sitePagesFolder2.Name);
             }
         }
 
@@ -124,6 +161,45 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("true", (object)folderWithProperties.Properties.AsDynamic().vti_x005f_isbrowsable);
                 Assert.AreEqual(1, folderWithProperties.Properties["vti_x005f_level"]);
                 Assert.AreEqual(1, (object)folderWithProperties.Properties.AsDynamic().vti_x005f_level);
+            }
+        }
+
+        [TestMethod]
+        public async Task SetFolderPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = context.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.RootFolder);
+
+                var properties = (await list.RootFolder.GetAsync(p => p.Properties)).Properties;
+
+                var propertyKey = "ListPropertiesTest123";
+                var myProperty = properties.GetString(propertyKey, null);
+                if (myProperty == null)
+                {
+                    properties.Values[propertyKey] = "test123";
+                    await properties.UpdateAsync();
+                }
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    list = context2.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.RootFolder);
+                    properties = (await list.RootFolder.GetAsync(p => p.Properties)).Properties;
+                    myProperty = properties.GetString(propertyKey, null);
+                    Assert.IsTrue(myProperty == "test123");
+
+                    properties.Values[propertyKey] = null;
+                    await properties.UpdateAsync();
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    list = context3.Web.Lists.GetByTitle("Site Pages", p => p.Title, p => p.RootFolder);
+                    properties = (await list.RootFolder.GetAsync(p => p.Properties)).Properties;
+                    myProperty = properties.GetString(propertyKey, null);
+                    Assert.IsTrue(myProperty == null);
+                }
             }
         }
 
@@ -487,6 +563,89 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        #endregion
+
+        #region EnsureFolder tests
+        [TestMethod]
+        public async Task EnsureListFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2");
+                Assert.IsTrue(addedFolder != null);
+                Assert.IsTrue(addedFolder.Name == "sub2");
+
+                var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsTrue(folderToDelete != null);
+                Assert.IsTrue(folderToDelete.Name == "sub1");
+
+                await folderToDelete.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsureListFolderSingleLevelTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsTrue(addedFolder != null);
+                Assert.IsTrue(addedFolder.Name == "sub1");
+
+                await addedFolder.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsureListFolderDeepTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2/sub3/sub4/sub5");
+                Assert.IsTrue(addedFolder != null);
+                Assert.IsTrue(addedFolder.Name == "sub5");
+
+                var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsTrue(folderToDelete != null);
+                Assert.IsTrue(folderToDelete.Name == "sub1");
+
+                await folderToDelete.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsureListFolderInExistingHiarchyTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.RootFolder)).RootFolder;
+
+                var addedFolder = await parentFolder.EnsureFolderAsync("sub1/sub2/sub3a/sub4a");
+                Assert.IsTrue(addedFolder != null);
+                Assert.IsTrue(addedFolder.Name == "sub4a");
+
+                var addedFolder2 = await parentFolder.EnsureFolderAsync("sub1/sub2/sub3b/sub4b");
+                Assert.IsTrue(addedFolder2 != null);
+                Assert.IsTrue(addedFolder2.Name == "sub4b");
+
+
+                var folderToDelete = await parentFolder.EnsureFolderAsync("sub1");
+                Assert.IsTrue(folderToDelete != null);
+                Assert.IsTrue(folderToDelete.Name == "sub1");
+
+                await folderToDelete.DeleteAsync();
+            }
+        }
         #endregion
 
         [TestMethod]

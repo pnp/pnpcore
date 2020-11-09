@@ -349,6 +349,123 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can only promote home pages as site home page.
+        /// </summary>
+        internal static string Exception_Page_CanOnlyPromoteHomePagesAsSiteHomePage {
+            get {
+                return ResourceManager.GetString("Exception_Page_CanOnlyPromoteHomePagesAsSiteHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t promote a home page as news article.
+        /// </summary>
+        internal static string Exception_Page_CantPromoteHomePageAsNews {
+            get {
+                return ResourceManager.GetString("Exception_Page_CantPromoteHomePageAsNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t use a OneColumnFullWidth section in this site template ({0}).
+        /// </summary>
+        internal static string Exception_Page_CantUseFullWidthSection {
+            get {
+                return ResourceManager.GetString("Exception_Page_CantUseFullWidthSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot host text controls inside a one column full width section, only an image web part or hero web part are allowed.
+        /// </summary>
+        internal static string Exception_Page_ControlNotAllowedInFullWidthSection {
+            get {
+                return ResourceManager.GetString("Exception_Page_ControlNotAllowedInFullWidthSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The zoneEmphasis value needs to be between 0 and 3.
+        /// </summary>
+        internal static string Exception_Page_InvalidZoneEmphasis {
+            get {
+                return ResourceManager.GetString("Exception_Page_InvalidZoneEmphasis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page layout type could not be determined for this page.
+        /// </summary>
+        internal static string Exception_Page_LayoutUndetermined {
+            get {
+                return ResourceManager.GetString("Exception_Page_LayoutUndetermined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You first need to save the page before you check for the &apos;{0}&apos; property.
+        /// </summary>
+        internal static string Exception_Page_ListItemNotLoaded {
+            get {
+                return ResourceManager.GetString("Exception_Page_ListItemNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No client side components could be returned for this web...should not happen but it did....
+        /// </summary>
+        internal static string Exception_Page_NoClientSideComponentsRetrieved {
+            get {
+                return ResourceManager.GetString("Exception_Page_NoClientSideComponentsRetrieved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can only promote article and repost pages as news article.
+        /// </summary>
+        internal static string Exception_Page_PageCannotBePromotedAsNews {
+            get {
+                return ResourceManager.GetString("Exception_Page_PageCannotBePromotedAsNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page {0} was not loaded/saved to SharePoint and therefore can&apos;t be deleted.
+        /// </summary>
+        internal static string Exception_Page_PageWasNotSaved {
+            get {
+                return ResourceManager.GetString("Exception_Page_PageWasNotSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You already have a full width section on this page, you can&apos;t add a section with vertical column.
+        /// </summary>
+        internal static string Exception_Page_VerticalColumnFullWidthSectionExists {
+            get {
+                return ResourceManager.GetString("Exception_Page_VerticalColumnFullWidthSectionExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can only have one section with a vertical column on a page.
+        /// </summary>
+        internal static string Exception_Page_VerticalColumnSectionExists {
+            get {
+                return ResourceManager.GetString("Exception_Page_VerticalColumnSectionExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You already have a section with vertical column on this page, you can&apos;t add a full width section.
+        /// </summary>
+        internal static string Exception_Page_VerticalColumnSectionExistsNoFullWidth {
+            get {
+                return ResourceManager.GetString("Exception_Page_VerticalColumnSectionExistsNoFullWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide a configuration value via the {0} parameter.
         /// </summary>
         internal static string Exception_PnPContext_EmptyConfiguration {
@@ -588,6 +705,15 @@ namespace PnP.Core {
         internal static string Exception_Unsupported_FailedAddingTermRelation {
             get {
                 return ResourceManager.GetString("Exception_Unsupported_FailedAddingTermRelation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ensure you&apos;ve requested the &apos;FileServerRelativeUrl&apos; property before you call UpdateAsync() on a file&apos;s properties.
+        /// </summary>
+        internal static string Exception_Unsupported_FileServerRelativeUrlNotLoaded {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_FileServerRelativeUrlNotLoaded", resourceCulture);
             }
         }
         

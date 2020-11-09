@@ -48,24 +48,7 @@ namespace PnP.Core.Model.Security
                     PnPCoreResources.Exception_Unsupported_SharePointUserOnGraph);
             }
 
-            // Build the API call to ensure this graph user as a SharePoint User in this site collection
-            var parameters = new
-            {
-                logonName = $"i:0#.f|membership|{UserPrincipalName}"
-            }.AsExpando();
-
-            string body = JsonSerializer.Serialize(parameters, typeof(ExpandoObject));
-
-            var apiCall = new ApiCall("_api/Web/EnsureUser", ApiType.SPORest, body);
-
-            SharePointUser sharePointUser = new SharePointUser
-            {
-                PnPContext = PnPContext
-            };
-
-            await sharePointUser.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-
-            return sharePointUser;
+            return await PnPContext.Web.EnsureUserAsync(UserPrincipalName).ConfigureAwait(false);
         }
 
         public ISharePointUser AsSharePointUser()

@@ -228,5 +228,20 @@ namespace PnP.Core.Model.SharePoint
         void MoveToBatch(Batch batch, string destinationUrl, MoveCopyOptions options = null);
         #endregion
 
+        #region EnsureFolder
+        /// <summary>
+        /// Ensures a (hiarchy) of folders exists on a given folder
+        /// </summary>
+        /// <param name="folderRelativeUrl">a (hiarchy) of folders (e.g. folderA/folderB/FolderC) </param>
+        /// <returns>The <see cref="IFolder"/> representing the final folder in the hiarchy (e.g. FolderC)</returns>
+        public Task<IFolder> EnsureFolderAsync(string folderRelativeUrl);
+
+        /// <summary>
+        /// Ensures a (hiarchy) of folders exists on a given folder
+        /// </summary>
+        /// <param name="folderRelativeUrl">a (hiarchy) of folders (e.g. folderA/folderB/FolderC) </param>
+        /// <returns>The <see cref="IFolder"/> representing the final folder in the hiarchy (e.g. FolderC)</returns>
+        public IFolder EnsureFolder(string folderRelativeUrl);
+        #endregion
     }
 }

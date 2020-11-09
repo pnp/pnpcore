@@ -735,6 +735,5 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-
     }
 }

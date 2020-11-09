@@ -1,0 +1,68 @@
+--batchresponse_27914395-2a3c-410b-a5e7-d953f37bfeea
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json; charset=utf-8
+
+{ "Row" : 
+[{
+"ID": "134",
+"PermMask": "0x7ffffffffffbffff",
+"FSObjType": "0",
+"HTML_x0020_File_x0020_Type": "",
+"UniqueId": "{55B8F71C-D3C2-4D48-A8D0-643F8042523B}",
+"ProgId": "",
+"NoExecute": "0",
+"ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
+"FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_folder1\u002fPNP_SDK_TEST_folder2\u002fPNP_SDK_TEST_folder3\u002fPNP_SDK_TEST_LoadPagesInNestedFolder.aspx",
+"FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5Ffolder1%2FPNP%5FSDK%5FTEST%5Ffolder2%2FPNP%5FSDK%5FTEST%5Ffolder3%2FPNP%5FSDK%5FTEST%5FLoadPagesInNestedFolder%2Easpx",
+"FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_folder1\u002fPNP_SDK_TEST_folder2\u002fPNP_SDK_TEST_folder3\u002fPNP_SDK_TEST_LoadPagesInNestedFolder.aspx",
+"FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_folder1\u002fPNP_SDK_TEST_folder2\u002fPNP_SDK_TEST_folder3\u002fPNP_SDK_TEST_LoadPagesInNestedFolder.aspx",
+"FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_folder1\\u002fPNP_SDK_TEST_folder2\\u002fPNP_SDK_TEST_folder3\\u002fPNP_SDK_TEST_LoadPagesInNestedFolder.aspx",
+"_UIVersion": "1",
+"SMTotalSize": "932",
+"File_x0020_Size": "780",
+"_CommentFlags": "",
+"File_x0020_Type": "aspx",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapcon": "SharePoint.OpenDocuments",
+"HTML_x0020_File_x0020_Type.File_x0020_Type.mapico": "ichtm.gif",
+"serverurl.progid": "",
+"ServerRedirectedEmbedUrl": "",
+"File_x0020_Type.progid": "",
+"File_x0020_Type.url": "FALSE",
+"FileLeafRef": "PNP_SDK_TEST_LoadPagesInNestedFolder.aspx",
+"FileLeafRef.Name": "PNP_SDK_TEST_LoadPagesInNestedFolder",
+"FileLeafRef.Suffix": "aspx",
+"FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_folder1\u002fPNP_SDK_TEST_folder2\u002fPNP_SDK_TEST_folder3",
+"Description": "",
+"Title": "",
+"ClientSideApplicationId": "",
+"PageLayoutType": "",
+"CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
+"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
+"BannerImageUrl": "",
+"BannerImageUrl.desc": "",
+"PromotedState": "",
+"PromotedState.": "",
+"ItemChildCount": "0",
+"FolderChildCount": "0",
+"A2ODMountCount": "",
+"owshiddenversion": "1",
+"ContentVersion": "0",
+"DocConcurrencyNumber": "1",
+"_VirusStatus": "",
+"ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
+}
+],"FirstRow" : 1,
+"FolderPermissions" : "0x7ffffffffffbffff"
+,"LastRow" : 1,
+"RowLimit" : 30
+,"FilterLink" : "?"
+,"ForceNoHierarchy" : "1"
+,"HierarchyHasIndention" : ""
+,"CurrentFolderSpItemUrl" : ""
+
+}
+--batchresponse_27914395-2a3c-410b-a5e7-d953f37bfeea--

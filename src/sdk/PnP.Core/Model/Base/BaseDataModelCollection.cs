@@ -166,7 +166,7 @@ namespace PnP.Core.Model
         public TModel CreateNew()
         {
             TModel newModel = (TModel)EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), this);
-            (newModel as BaseDataModel<TModel>).PnPContext = PnPContext;
+            (newModel as IDataModelWithContext).PnPContext = PnPContext;
             return newModel;
         }
 

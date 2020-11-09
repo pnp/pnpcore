@@ -47,6 +47,25 @@ namespace PnP.Core.Model.SharePoint
         {
             return AddAsync(name, content, overwrite).GetAwaiter().GetResult();
         }
+
+        public async Task<IFile> AddTemplateFileAsync(string serverRelativePageName, TemplateFileType templateFileType)
+        {
+            if (string.IsNullOrEmpty(serverRelativePageName))
+            {
+                throw new ArgumentNullException(nameof(serverRelativePageName));
+            }
+
+            var newFile = CreateNewAndAdd() as File;
+            string fileCreateRequest = $"_api/web/getFolderById('{{Parent.Id}}')/files/AddTemplateFile(urlOfFile='{serverRelativePageName}',templateFileType={(int)templateFileType})";
+            var api = new ApiCall(fileCreateRequest, ApiType.SPORest);
+            await newFile.RequestAsync(api, HttpMethod.Post).ConfigureAwait(false);
+            return newFile;
+        }
+
+        public IFile AddTemplateFile(string serverRelativePageName, TemplateFileType templateFileType)
+        {
+            return AddTemplateFileAsync(serverRelativePageName, templateFileType).GetAwaiter().GetResult();
+        }
         #endregion
 
         #region File upload

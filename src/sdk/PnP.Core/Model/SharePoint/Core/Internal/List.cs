@@ -168,6 +168,8 @@ namespace PnP.Core.Model.SharePoint
         [GraphProperty("name", UseCustomMapping = false)]
         public string NameToConstructEntityType { get => GetValue<string>(); set => SetValue(value); }
 
+        public string ListItemEntityTypeFullName { get => GetValue<string>(); set => SetValue(value); }
+
         public IFolder RootFolder { get => GetModelValue<IFolder>(); }
 
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get => GetModelValue<IInformationRightsManagementSettings>(); }

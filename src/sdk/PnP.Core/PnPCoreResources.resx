@@ -213,6 +213,45 @@
   <data name="Exception_ModelMetadataIncorrect_ModelOutOfSync" xml:space="preserve">
     <value>Receiving property could not be determined, most likely the internal implemenation is not aligned with the interface naming</value>
   </data>
+  <data name="Exception_Page_CanOnlyPromoteHomePagesAsSiteHomePage" xml:space="preserve">
+    <value>You can only promote home pages as site home page</value>
+  </data>
+  <data name="Exception_Page_CantPromoteHomePageAsNews" xml:space="preserve">
+    <value>You can't promote a home page as news article</value>
+  </data>
+  <data name="Exception_Page_CantUseFullWidthSection" xml:space="preserve">
+    <value>You can't use a OneColumnFullWidth section in this site template ({0})</value>
+  </data>
+  <data name="Exception_Page_ControlNotAllowedInFullWidthSection" xml:space="preserve">
+    <value>You cannot host text controls inside a one column full width section, only an image web part or hero web part are allowed</value>
+  </data>
+  <data name="Exception_Page_InvalidZoneEmphasis" xml:space="preserve">
+    <value>The zoneEmphasis value needs to be between 0 and 3</value>
+  </data>
+  <data name="Exception_Page_LayoutUndetermined" xml:space="preserve">
+    <value>Page layout type could not be determined for this page</value>
+  </data>
+  <data name="Exception_Page_ListItemNotLoaded" xml:space="preserve">
+    <value>You first need to save the page before you check for the '{0}' property</value>
+  </data>
+  <data name="Exception_Page_NoClientSideComponentsRetrieved" xml:space="preserve">
+    <value>No client side components could be returned for this web...should not happen but it did...</value>
+  </data>
+  <data name="Exception_Page_PageCannotBePromotedAsNews" xml:space="preserve">
+    <value>You can only promote article and repost pages as news article</value>
+  </data>
+  <data name="Exception_Page_PageWasNotSaved" xml:space="preserve">
+    <value>Page {0} was not loaded/saved to SharePoint and therefore can't be deleted</value>
+  </data>
+  <data name="Exception_Page_VerticalColumnFullWidthSectionExists" xml:space="preserve">
+    <value>You already have a full width section on this page, you can't add a section with vertical column</value>
+  </data>
+  <data name="Exception_Page_VerticalColumnSectionExists" xml:space="preserve">
+    <value>You can only have one section with a vertical column on a page</value>
+  </data>
+  <data name="Exception_Page_VerticalColumnSectionExistsNoFullWidth" xml:space="preserve">
+    <value>You already have a section with vertical column on this page, you can't add a full width section</value>
+  </data>
   <data name="Exception_PnPContext_EmptyConfiguration" xml:space="preserve">
     <value>Please provide a configuration value via the {0} parameter</value>
   </data>
@@ -293,6 +332,9 @@
   </data>
   <data name="Exception_Unsupported_FailedAddingTermRelation" xml:space="preserve">
     <value>Adding a relationship can only be done starting from a term</value>
+  </data>
+  <data name="Exception_Unsupported_FileServerRelativeUrlNotLoaded" xml:space="preserve">
+    <value>Ensure you've requested the 'FileServerRelativeUrl' property before you call UpdateAsync() on a file's properties</value>
   </data>
   <data name="Exception_Unsupported_GraphUserOnSharePoint" xml:space="preserve">
     <value>You can't call AsGraphUserAsync on a SharePoint user with principal type different than User or SecurityGroup</value>

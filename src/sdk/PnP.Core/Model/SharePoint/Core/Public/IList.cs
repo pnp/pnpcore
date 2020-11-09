@@ -193,6 +193,11 @@ namespace PnP.Core.Model.SharePoint
         public string ValidationMessage { get; set; }
 
         /// <summary>
+        /// The entity needed when updating list items
+        /// </summary>
+        string ListItemEntityTypeFullName { get; }
+
+        /// <summary>
         /// Collection of list items in the current List object
         /// </summary>
         public IListItemCollection Items { get; }

@@ -1,6 +1,7 @@
 using PnP.Core.Services;
 using System;
 using System.Dynamic;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -290,6 +291,61 @@ namespace PnP.Core.Model.SharePoint
             MoveToBatchAsync(destinationUrl, options).GetAwaiter().GetResult();
         }
         #endregion
+
+        #region EnsureFolder
+        public async Task<IFolder> EnsureFolderAsync(string folderRelativeUrl)
+        {
+            if (string.IsNullOrEmpty(folderRelativeUrl))
+            {
+                throw new ArgumentNullException(nameof(folderRelativeUrl));
+            }
+
+            var currentFolder = this;
+
+            var childFolderNames = folderRelativeUrl.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            bool currentFolderWasCreated = false;
+            foreach (var folderName in childFolderNames)
+            {
+                Folder nextFolder = null;
+
+                // Find next part of the path
+                if (!currentFolderWasCreated)
+                {
+                    await currentFolder.GetAsync(p => p.Folders).ConfigureAwait(false);
+
+                    var folderCollection = Folders;
+
+                    foreach (Folder existingFolder in folderCollection)
+                    {
+                        if (string.Equals(existingFolder.Name, WebUtility.UrlDecode(folderName), StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            nextFolder = existingFolder;
+                            break;
+                        }
+                    }
+                }
+
+                // Or create it
+                if (nextFolder == null)
+                {
+                    currentFolder = await currentFolder.AddFolderAsync(folderName).ConfigureAwait(false) as Folder;
+                    currentFolderWasCreated = true;
+                }
+                else
+                {
+                    currentFolder = nextFolder;
+                }
+            }
+
+            return currentFolder;
+        }
+
+        public IFolder EnsureFolder(string folderRelativeUrl)
+        {
+            return EnsureFolderAsync(folderRelativeUrl).GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
     }
 }

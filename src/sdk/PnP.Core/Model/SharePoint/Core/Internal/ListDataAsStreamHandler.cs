@@ -53,6 +53,9 @@ namespace PnP.Core.Model.SharePoint
             // Process rows
             if (document.TryGetProperty("Row", out JsonElement dataRows))
             {
+                // Mark collection as requested to avoid our linq integration to actually execute this as a query to SharePoint
+                list.Items.Requested = true;
+
                 // No data returned, stop processing
                 if (dataRows.GetArrayLength() == 0)
                 {
@@ -70,8 +73,6 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (int.TryParse(row.GetProperty("ID").GetString(), out int listItemId))
                     {
-                        // Mark collection as requested to avoid our linq integration to actually execute this as a query to SharePoint
-                        list.Items.Requested = true;
                         var itemToUpdate = list.Items.FirstOrDefault(p => p.Id == listItemId);
                         if (itemToUpdate == null)
                         {
@@ -81,6 +82,9 @@ namespace PnP.Core.Model.SharePoint
                         itemToUpdate = itemToUpdate as ListItem;
                         itemToUpdate.SetSystemProperty(p => p.Id, listItemId);
 
+                        // Ensure metadata handling when list items are read using this method
+                        await (itemToUpdate as ListItem).GraphToRestMetadataAsync().ConfigureAwait(false);
+
                         var overflowDictionary = itemToUpdate.Values;
 
                         foreach (var property in row.EnumerateObject())
@@ -89,12 +93,8 @@ namespace PnP.Core.Model.SharePoint
                             var field = list.Fields.FirstOrDefault(p => p.InternalName == property.Name);
                             if (field != null)
                             {
-                                // Handle the regular fields
-                                if (property.Name == "Title")
-                                {
-                                    itemToUpdate.SetSystemProperty(p => p.Title, row.GetProperty(property.Name).GetString());
-                                }
-                                else if (property.Name == "ID")
+                                // Handle the regular fields, Title is handled as an overflow field
+                                if (property.Name == "ID")
                                 {
                                     // already handled, so continue
                                 }
@@ -115,7 +115,7 @@ namespace PnP.Core.Model.SharePoint
                                     }
                                     else
                                     {
-                                        overflowDictionary[property.Name] = row.GetProperty(property.Name).GetString();
+                                        overflowDictionary.SystemUpdate(property.Name, fieldValue);
                                     }
                                 }
                             }

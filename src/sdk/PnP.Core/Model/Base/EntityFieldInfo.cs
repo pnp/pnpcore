@@ -76,7 +76,7 @@ namespace PnP.Core.Model
         internal string GraphJsonPath { get; set; }
 
         /// <summary>
-        /// Query to get a specific field, needed when a simple expand does not work
+        /// Query to get a specific field, needed when a simple expand does not work (Microsoft Graph)
         /// </summary>
         internal string GraphGet { get; set; }
 

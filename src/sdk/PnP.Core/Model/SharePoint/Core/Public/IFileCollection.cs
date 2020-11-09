@@ -28,6 +28,22 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="overwrite">Indicates whether the file should be overwritten if already existing.</param>
         /// <returns>The added file object.</returns>
         IFile Add(string name, Stream content, bool overwrite = false);
+
+        /// <summary>
+        /// Adds a file based upon an out of the box template
+        /// </summary>
+        /// <param name="serverRelativePageName">Server relative url of the page to add</param>
+        /// <param name="templateFileType">Type of template file to add</param>
+        /// <returns>The added <see cref="IFile"/></returns>
+        Task<IFile> AddTemplateFileAsync(string serverRelativePageName, TemplateFileType templateFileType);
+
+        /// <summary>
+        /// Adds a file based upon an out of the box template
+        /// </summary>
+        /// <param name="serverRelativePageName">Server relative url of the page to add</param>
+        /// <param name="templateFileType">Type of template file to add</param>
+        /// <returns>The added <see cref="IFile"/></returns>
+        IFile AddTemplateFile(string serverRelativePageName, TemplateFileType templateFileType);
         #endregion
     }
 }

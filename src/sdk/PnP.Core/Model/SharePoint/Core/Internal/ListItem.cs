@@ -1,11 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Dynamic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -17,7 +13,7 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.ListItem", Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})", LinqGet = "_api/web/lists(guid'{Parent.Id}')/items")]
     [GraphType(OverflowProperty = "fields")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
-    internal partial class ListItem : ExpandoBaseDataModel<IListItem>, IListItem
+    internal partial class ListItem : ListItemBase<IListItem>, IListItem
     {
         #region Construction
         public ListItem()
@@ -49,8 +45,7 @@ namespace PnP.Core.Model.SharePoint
                                     // this item without having to read it again from the server
                                     var parentList = Parent.Parent as List;
                                     AddMetadata(PnPConstants.MetaDataRestId, $"{id}");
-                                    AddMetadata(PnPConstants.MetaDataUri, $"{parentList.GetMetadata(PnPConstants.MetaDataUri)}/Items({id})");
-                                    AddMetadata(PnPConstants.MetaDataType, $"SP.Data.{parentList.GetMetadata("EntityTypeName")}Item");
+                                    MetadataSetup();
 
                                     // We're currently only interested in the Id property
                                     continue;
@@ -130,17 +125,6 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
-        #region Properties
-        public int Id { get => GetValue<int>(); set => SetValue(value); }
-
-        public bool CommentsDisabled { get => GetValue<bool>(); set => SetValue(value); }
-
-        public string Title { get => (string)Values["Title"]; set => Values["Title"] = value; }
-
-        [KeyProperty(nameof(Id))]
-        public override object Key { get => Id; set => Id = (int)value; }
-        #endregion
-
         #region Methods
         #region Graph/Rest interoperability overrides
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -159,207 +143,36 @@ namespace PnP.Core.Model.SharePoint
                     Metadata.Add(PnPConstants.MetaDataGraphId, Id.ToString());
                 }
             }
+
+            MetadataSetup();
         }
 
-        #endregion
-        #endregion
-
-        #region Extension methods
-
-        #region UpdateOverwriteVersion
-
-        public async Task UpdateOverwriteVersionAsync()
+        internal void MetadataSetup()
         {
-            var xmlPayload = BuildXmlPayload(true);
-            if (!string.IsNullOrEmpty(xmlPayload))
+            if (Parent != null && Parent.Parent != null && Parent.Parent is IList)
             {
-                var apiCall = new ApiCall(xmlPayload)
+                if (!Metadata.ContainsKey(PnPConstants.MetaDataUri))
                 {
-                    Commit = true
-                };
-                await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-            }
-            else
-            {
-                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
-            }
-        }
-
-        public void UpdateOverwriteVersion()
-        {
-            UpdateOverwriteVersionAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task UpdateOverwriteVersionBatchAsync()
-        {
-            await UpdateOverwriteVersionBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
-        }
-
-        public void UpdateOverwriteVersionBatch()
-        {
-            UpdateOverwriteVersionBatchAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task UpdateOverwriteVersionBatchAsync(Batch batch)
-        {
-            var xmlPayload = BuildXmlPayload(true);
-            if (!string.IsNullOrEmpty(xmlPayload))
-            {
-                var apiCall = new ApiCall(xmlPayload)
+                    AddMetadata(PnPConstants.MetaDataUri, $"{(Parent.Parent as List).GetMetadata(PnPConstants.MetaDataUri)}/Items({Id})");
+                }
+                if (!Metadata.ContainsKey(PnPConstants.MetaDataType))
                 {
-                    Commit = true
-                };
-                await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-            }
-            else
-            {
-                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
-            }
-        }
-
-        public void UpdateOverwriteVersionBatch(Batch batch)
-        {
-            UpdateOverwriteVersionBatchAsync(batch).GetAwaiter().GetResult();
-        }
-
-        #endregion
-
-        #region SystemUpdate
-
-        public async Task SystemUpdateAsync()
-        {
-            var xmlPayload = BuildXmlPayload(false);
-            if (!string.IsNullOrEmpty(xmlPayload))
-            {
-                var apiCall = new ApiCall(xmlPayload)
-                {
-                    Commit = true
-                };
-                await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-            }
-            else
-            {
-                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
-            }
-        }
-
-        public void SystemUpdate()
-        {
-            SystemUpdateAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task SystemUpdateBatchAsync()
-        {
-            await SystemUpdateBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
-        }
-
-        public void SystemUpdateBatch()
-        {
-            SystemUpdateBatchAsync().GetAwaiter().GetResult();
-        }
-
-        public async Task SystemUpdateBatchAsync(Batch batch)
-        {
-            var xmlPayload = BuildXmlPayload(false);
-            if (!string.IsNullOrEmpty(xmlPayload))
-            {
-                var apiCall = new ApiCall(xmlPayload)
-                {
-                    Commit = true
-                };
-                await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
-            }
-            else
-            {
-                PnPContext.Logger.LogInformation(PnPCoreResources.Log_Information_NoChangesSkipSystemUpdate);
-            }
-        }
-
-        public void SystemUpdateBatch(Batch batch)
-        {
-            SystemUpdateBatchAsync(batch).GetAwaiter().GetResult();
-        }
-
-        private string BuildXmlPayload(bool updateOverwriteVersion)
-        {
-            string xml;
-
-            if (updateOverwriteVersion)
-            {
-                xml = CsomHelper.ListItemUpdateOverwriteVersion;
-            }
-            else
-            {
-                xml = CsomHelper.ListItemSystemUpdate;
-            }
-
-            int counter = 1;
-            StringBuilder fieldValues = new StringBuilder();
-
-            var entity = EntityManager.GetClassInfo(GetType(), this);
-            IEnumerable<EntityFieldInfo> fields = entity.Fields;
-
-            var changedProperties = GetChangedProperties();
-
-            bool changeFound = false;
-            foreach (PropertyDescriptor cp in changedProperties)
-            {
-                changeFound = true;
-                // Look for the corresponding property in the type
-                var changedField = fields.FirstOrDefault(f => f.Name == cp.Name);
-
-                // If we found a field 
-                if (changedField != null)
-                {
-                    if (changedField.DataType.FullName == typeof(TransientDictionary).FullName)
+                    if ((Parent.Parent as List).IsPropertyAvailable(p => p.ListItemEntityTypeFullName))
                     {
-                        // Get the changed properties in the dictionary
-                        var dictionaryObject = (TransientDictionary)cp.GetValue(this);
-                        foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
-                        {
-                            // Let's set its value into the update message
-                            fieldValues.AppendLine(SetFieldValueXml(changedProp.Key, changedProp.Value, changedProp.Value.GetType().Name, ref counter));
-                        }
+                        AddMetadata(PnPConstants.MetaDataType, (Parent.Parent as List).ListItemEntityTypeFullName);
+                    }
+                    else if (!string.IsNullOrEmpty((Parent.Parent as List).GetMetadata(PnPConstants.MetaDataRestEntityTypeName)))
+                    {
+                        AddMetadata(PnPConstants.MetaDataType, $"SP.Data.{(Parent.Parent as List).GetMetadata(PnPConstants.MetaDataRestEntityTypeName)}Item");
                     }
                     else
                     {
-                        // Let's set its value into the update message
-                        fieldValues.AppendLine(SetFieldValueXml(changedField.SharePointName, GetValue(changedField.Name), changedField.DataType.Name, ref counter));
+                        AddMetadata(PnPConstants.MetaDataType, $"SP.Data.ListItem");
                     }
                 }
             }
-
-            // No changes, so bail out
-            if (!changeFound)
-            {
-                return null;
-            }
-
-            // update field values
-            xml = xml.Replace("{FieldValues}", fieldValues.ToString());
-
-            // update counter
-            xml = xml.Replace("{Counter}", counter.ToString());
-
-            return xml;
-        }
-
-        private static string SetFieldValueXml(string fieldName, object fieldValue, string fieldType, ref int counter)
-        {
-            string xml = CsomHelper.ListItemSystemUpdateSetFieldValue;
-
-            xml = xml.Replace("{Counter}", counter.ToString());
-            xml = xml.Replace("{FieldName}", fieldName);
-            // TODO: verify complex fieldtypes
-            xml = xml.Replace("{FieldValue}", CsomHelper.XmlString(fieldValue.ToString(), false));
-            xml = xml.Replace("{FieldType}", fieldType);
-
-            counter++;
-            return xml;
         }
         #endregion
-
         #endregion
-
     }
 }

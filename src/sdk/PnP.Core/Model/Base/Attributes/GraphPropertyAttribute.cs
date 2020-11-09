@@ -16,13 +16,13 @@
         public bool Expandable { get; set; }
 
         /// <summary>
-        /// Url to get this field, needed in case the field cannot be loaded via an expand
-        /// </summary>
-        public string Get { get; set; }
-
-        /// <summary>
         /// Model property to define that a property can only be handled using the Microsoft Graph beta endpoint
         /// </summary>
         public bool Beta { get; set; }
+
+        /// <summary>
+        /// Url to get this field, needed in case the field cannot be loaded via an expand
+        /// </summary>
+        public string Get { get; set; }
     }
 }

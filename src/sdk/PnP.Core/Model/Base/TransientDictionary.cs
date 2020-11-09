@@ -119,6 +119,16 @@ namespace PnP.Core.Model
         }
 
         /// <summary>
+        /// System update, does not mark the updated property as changed
+        /// </summary>
+        /// <param name="key">Key of the item to update</param>
+        /// <param name="value">Value of the item to update</param>
+        internal void SystemUpdate(string key, object value)
+        {
+            base[key] = value;
+        }
+
+        /// <summary>
         /// System add, does not mark the added property as changed
         /// </summary>
         /// <param name="values">Collection of key/value pairs to add</param>
