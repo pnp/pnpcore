@@ -2,6 +2,7 @@ using PnP.Core.Services;
 using System;
 using System.Dynamic;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -26,6 +27,9 @@ namespace PnP.Core.Model.SharePoint
                 var viewOptions = (ViewOptions)additionalInformation[ViewOptionsAdditionalInformationKey];
                 var entity = EntityManager.GetClassInfo(GetType(), this);
 
+                // Works around an issue with the serialiser of string and integer values
+                var ViewTypeKind = (int)viewOptions.ViewTypeKind;
+
                 // Build body
                 var viewCreationInformation = new
                 {
@@ -43,7 +47,7 @@ namespace PnP.Core.Model.SharePoint
                         viewOptions.Title,
                         viewOptions.ViewData,
                         viewOptions.ViewFields,
-                        viewOptions.ViewTypeKind,
+                        ViewTypeKind,
                         viewOptions.ViewType2
                     }
                 }.AsExpando();
@@ -51,6 +55,7 @@ namespace PnP.Core.Model.SharePoint
                 // To handle the serialization of string collections
                 var serializerOptions = new JsonSerializerOptions() { IgnoreNullValues = true };
                 serializerOptions.Converters.Add(new SharePointRestCollectionJsonConverter<string>());
+                serializerOptions.Converters.Add(new JsonStringEnumConverter(allowIntegerValues:false));
 
                 string body = JsonSerializer.Serialize(viewCreationInformation, typeof(ExpandoObject), serializerOptions);
 
@@ -144,11 +149,11 @@ namespace PnP.Core.Model.SharePoint
 
         public string ToolbarTemplateName { get => GetValue<string>(); set => SetValue(value); }
 
-        public string ViewType { get => GetValue<string>(); set => SetValue(value); }
+        public ViewType ViewType { get => GetValue<ViewType>(); set => SetValue(value); }
 
         public string ViewData { get => GetValue<string>(); set => SetValue(value); }
 
-        public string ViewType2 { get => GetValue<string>(); set => SetValue(value); }
+        public ViewType2 ViewType2 { get => GetValue<ViewType2>(); set => SetValue(value); }
 
         public IViewFieldCollection ViewFields { get => GetModelCollectionValue<IViewFieldCollection>(); }
 
