@@ -27,6 +27,6 @@ namespace PnP.Core.Model
         /// <summary>
         /// Force a call out to the custom mapping handler for this field / the default mapping logic will not be applied
         /// </summary>
-        public bool UseCustomMapping { get; set; }        
+        public bool UseCustomMapping { get; set; }
     }
 }

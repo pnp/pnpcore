@@ -535,7 +535,7 @@ namespace PnP.Core.Model.SharePoint
         /// Get's the permission levels set on this web
         /// </summary>
         public IBasePermissions EffectiveBasePermissions { get; }
-      
+
         #region Methods
 
         #region Pages API

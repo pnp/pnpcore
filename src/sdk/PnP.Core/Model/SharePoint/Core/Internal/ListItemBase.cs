@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class ListItemBase<TModel>: ExpandoBaseDataModel<TModel>
+    internal class ListItemBase<TModel> : ExpandoBaseDataModel<TModel>
     {
         #region Properties
         public int Id { get => GetValue<int>(); set => SetValue(value); }
@@ -209,11 +209,21 @@ namespace PnP.Core.Model.SharePoint
             xml = xml.Replace("{Counter}", counter.ToString());
             xml = xml.Replace("{FieldName}", fieldName);
             // TODO: verify complex fieldtypes
-            xml = xml.Replace("{FieldValue}", fieldValue == null ? "" : CsomHelper.XmlString(fieldValue.ToString(), false));
+            xml = xml.Replace("{FieldValue}", fieldValue == null ? "" : CsomHelper.XmlString(TypeSpecificHandling(fieldValue.ToString(), fieldType), false));
             xml = xml.Replace("{FieldType}", fieldType ?? "Null");
 
             counter++;
             return xml;
+        }
+
+        private static string TypeSpecificHandling(string value, string fieldType)
+        {
+            if (!string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(fieldType) && fieldType.Equals("Boolean"))
+            {
+                return value.ToLowerInvariant();
+            }
+
+            return value;
         }
         #endregion
 

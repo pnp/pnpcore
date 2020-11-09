@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class CanvasColumn :  ICanvasColumn
+    internal class CanvasColumn : ICanvasColumn
     {
         #region variables
         internal const string CanvasControlAttribute = "data-sp-canvascontrol";
@@ -25,10 +25,10 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(section));
             }
 
-            this.Section = section;
-            this.ColumnFactor = 12;
-            this.Order = 0;
-            this.LayoutIndex = 1;
+            Section = section;
+            ColumnFactor = 12;
+            Order = 0;
+            LayoutIndex = 1;
         }
 
         internal CanvasColumn(CanvasSection section, int order)
@@ -38,9 +38,9 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(section));
             }
 
-            this.Section = section;
-            this.Order = order;
-            this.LayoutIndex = 1;
+            Section = section;
+            Order = order;
+            LayoutIndex = 1;
         }
 
         internal CanvasColumn(CanvasSection section, int order, int? sectionFactor)
@@ -50,10 +50,10 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(section));
             }
 
-            this.Section = section;
-            this.Order = order;
-            this.ColumnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
-            this.LayoutIndex = 1;
+            Section = section;
+            Order = order;
+            ColumnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
+            LayoutIndex = 1;
         }
 
         internal CanvasColumn(CanvasSection section, int order, int? sectionFactor, int? layoutIndex)
@@ -63,10 +63,10 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(section));
             }
 
-            this.Section = section;
-            this.Order = order;
-            this.ColumnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
-            this.LayoutIndex = layoutIndex.HasValue ? layoutIndex.Value : 1;
+            Section = section;
+            Order = order;
+            ColumnFactor = sectionFactor.HasValue ? sectionFactor.Value : 12;
+            LayoutIndex = layoutIndex.HasValue ? layoutIndex.Value : 1;
         }
         #endregion
 
@@ -95,7 +95,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.Section.Page.Controls.Where(p => p.Section == this.Section && p.Column == this).ToList();
+                return Section.Page.Controls.Where(p => p.Section == Section && p.Column == this).ToList();
             }
         }
 
@@ -106,7 +106,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.LayoutIndex == 2;
+                return LayoutIndex == 2;
             }
         }
 
@@ -117,9 +117,9 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                if (this.LayoutIndex == 2)
+                if (LayoutIndex == 2)
                 {
-                    return this.zoneEmphasis;
+                    return zoneEmphasis;
                 }
                 else
                 {
@@ -128,14 +128,14 @@ namespace PnP.Core.Model.SharePoint
             }
             set
             {
-                if (this.LayoutIndex == 2)
+                if (LayoutIndex == 2)
                 {
                     if (value < 0 || value > 3)
                     {
-                        throw new ArgumentException($"The zoneEmphasis value needs to be between 0 and 3. See the Microsoft.SharePoint.Client.SPVariantThemeType values for the why.");
+                        throw new ArgumentException(PnPCoreResources.Exception_Page_InvalidZoneEmphasis);
                     }
 
-                    this.zoneEmphasis = value;
+                    zoneEmphasis = value;
                 }
             }
         }
@@ -151,7 +151,7 @@ namespace PnP.Core.Model.SharePoint
             StringBuilder html = new StringBuilder(100);
             bool controlWrittenToSection = false;
             int controlIndex = 0;
-            foreach (var control in this.Section.Page.Controls.Where(p => p.Section == this.Section && p.Column == this).OrderBy(z => z.Order))
+            foreach (var control in Section.Page.Controls.Where(p => p.Section == Section && p.Column == this).OrderBy(z => z.Order))
             {
                 controlIndex++;
                 html.Append((control as CanvasControl).ToHtml(controlIndex));
@@ -166,22 +166,21 @@ namespace PnP.Core.Model.SharePoint
                 {
                     Position = new ClientSideCanvasPosition()
                     {
-                        ZoneIndex = this.Section.Order,
-                        SectionIndex = this.Order,
-                        SectionFactor = this.ColumnFactor,
-                        LayoutIndex = this.LayoutIndex,
+                        ZoneIndex = Section.Order,
+                        SectionIndex = Order,
+                        SectionFactor = ColumnFactor,
+                        LayoutIndex = LayoutIndex,
                     },
 
                     Emphasis = new ClientSideSectionEmphasis()
                     {
-                        ZoneEmphasis = this.Section.ZoneEmphasis,
+                        ZoneEmphasis = Section.ZoneEmphasis,
                     }
                 };
 
-                //var jsonControlData = JsonConvert.SerializeObject(clientSideCanvasPosition);
                 var jsonControlData = JsonSerializer.Serialize(clientSideCanvasPosition);
 
-                html.Append($@"<div {CanvasControlAttribute}="""" {CanvasDataVersionAttribute}=""{this.DataVersion}"" {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}""></div>");
+                html.Append($@"<div {CanvasControlAttribute}="""" {CanvasDataVersionAttribute}=""{DataVersion}"" {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}""></div>");
             }
 
             return html.ToString();
@@ -194,14 +193,14 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="columnFactor">Column factor to set</param>
         public void ResetColumn(int order, int columnFactor)
         {
-            this.Order = order;
-            this.ColumnFactor = columnFactor;
+            Order = order;
+            ColumnFactor = columnFactor;
         }
 
         #region Internal and helper methods
         internal void MoveTo(CanvasSection section)
         {
-            this.Section = section;
+            Section = section;
         }
         #endregion
 

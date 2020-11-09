@@ -17,7 +17,7 @@ namespace PnP.Core.Model.SharePoint
     internal partial class PropertyValues : ExpandoBaseDataModel<IPropertyValues>, IPropertyValues
     {
         #region Construction
-        public PropertyValues() 
+        public PropertyValues()
         {
         }
         #endregion
@@ -48,6 +48,29 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
+        public int GetInteger(string key, int defaultValue)
+        {
+            if (Values.ContainsKey(key))
+            {
+                return int.Parse(Values[key].ToString());
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
+
+        public bool GetBoolean(string key, bool defaultValue)
+        {
+            if (Values.ContainsKey(key))
+            {
+                return bool.Parse(Values[key].ToString());
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
 
         public new void Update()
         {
@@ -72,6 +95,32 @@ namespace PnP.Core.Model.SharePoint
         private string BuildXmlPayload()
         {
             string xml = CsomHelper.PropertyBagUpdate;
+
+            if ((this as IDataModelParent).Parent is IFolder)
+            {
+                xml = xml.Replace(CsomHelper.ObjectId, CsomHelper.PropertyBagFolderObjectId);
+                xml = xml.Replace(CsomHelper.PropertyName, CsomHelper.PropertyBagFileFolderPropertyName);
+            }
+            else if ((this as IDataModelParent).Parent is IFile)
+            {
+                xml = xml.Replace(CsomHelper.PropertyName, CsomHelper.PropertyBagFileFolderPropertyName);
+
+                var fileObjectId = CsomHelper.PropertyBagFileObjectId;
+                if (((this as IDataModelParent).Parent as IFile).IsPropertyAvailable(p => p.ServerRelativeUrl))
+                {
+                    fileObjectId = fileObjectId.Replace("{Parent.Id}", ((this as IDataModelParent).Parent as IFile).ServerRelativeUrl);
+                    xml = xml.Replace(CsomHelper.ObjectId, fileObjectId);
+                }
+                else
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_FileServerRelativeUrlNotLoaded);
+                }
+            }
+            else
+            {
+                xml = xml.Replace(CsomHelper.ObjectId, "");
+                xml = xml.Replace(CsomHelper.PropertyName, CsomHelper.PropertyBagWebPropertyName);
+            }
 
             int counter = 1;
             StringBuilder fieldValues = new StringBuilder();
@@ -131,11 +180,21 @@ namespace PnP.Core.Model.SharePoint
             xml = xml.Replace("{Counter}", counter.ToString());
             xml = xml.Replace("{FieldName}", fieldName);
             // TODO: verify complex fieldtypes
-            xml = xml.Replace("{FieldValue}", fieldValue == null ? "" : CsomHelper.XmlString(fieldValue.ToString(), false));
+            xml = xml.Replace("{FieldValue}", fieldValue == null ? "" : CsomHelper.XmlString(TypeSpecificHandling(fieldValue.ToString(), fieldType), false));
             xml = xml.Replace("{FieldType}", fieldType ?? "Null");
 
             counter++;
             return xml;
+        }
+
+        private static string TypeSpecificHandling(string value, string fieldType)
+        {
+            if (!string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(fieldType) && fieldType.Equals("Boolean"))
+            {
+                return value.ToLowerInvariant();
+            }
+
+            return value;
         }
         #endregion
 

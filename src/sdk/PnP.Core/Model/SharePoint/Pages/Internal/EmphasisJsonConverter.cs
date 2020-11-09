@@ -20,7 +20,7 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 var stringValue = reader.GetString();
-                
+
                 int result;
                 if (!string.IsNullOrEmpty(stringValue) &&
                     stringValue.Equals("undefined", StringComparison.InvariantCultureIgnoreCase))

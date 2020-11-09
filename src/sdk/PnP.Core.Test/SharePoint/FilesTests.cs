@@ -2262,6 +2262,84 @@ namespace PnP.Core.Test.SharePoint
 
             await TestAssets.CleanupTestDocumentAsync(2);
         }
+
+        #region Set File Properties
+        [TestMethod]
+        public async Task SetFilePropertiesAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile documentWithProperties = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.Properties, f => f.ServerRelativeUrl);
+                var propertyKey = "SetFilePropertiesAsyncTest";
+                var myProperty = documentWithProperties.Properties.GetBoolean(propertyKey, false);
+                if (myProperty == false)
+                {
+                    documentWithProperties.Properties[propertyKey] = true;
+                    await documentWithProperties.Properties.UpdateAsync();
+                }
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    documentWithProperties = await context2.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.Properties, f => f.ServerRelativeUrl);
+                    myProperty = documentWithProperties.Properties.GetBoolean(propertyKey, false); ;
+                    Assert.IsTrue(myProperty == true);
+
+                    documentWithProperties.Properties[propertyKey] = null;
+                    await documentWithProperties.Properties.UpdateAsync();
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                {
+                    documentWithProperties = await context3.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.Properties, f => f.ServerRelativeUrl);
+                    myProperty = documentWithProperties.Properties.GetBoolean(propertyKey, false);
+                    Assert.IsTrue(myProperty == false);
+                }
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(4);
+        }
+
+        [TestMethod]
+        public async Task SetFilePropertiesAsyncWithoutLoadingServerRelativeUrlTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (_, _, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            bool errorThrown = false;
+            try
+            {
+                using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    IFile documentWithProperties = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.Properties);
+                    var propertyKey = "SetFilePropertiesAsyncTest";
+                    var myProperty = documentWithProperties.Properties.GetBoolean(propertyKey, false);
+                    if (myProperty == false)
+                    {
+                        documentWithProperties.Properties[propertyKey] = true;
+                        await documentWithProperties.Properties.UpdateAsync();
+                    }
+                }
+            }
+            catch (ClientException ex)
+            {
+                if (ex.Error.Type == ErrorType.Unsupported)
+                {
+                    errorThrown = true;
+                }
+            }
+            finally
+            {
+                await TestAssets.CleanupTestDocumentAsync(2);
+            }
+
+            Assert.IsTrue(errorThrown);
+        }
+
+        #endregion
+
         #endregion
 
         #region TODO: TESTS TO REVIEW WITH IRM ENABLED TENANT -  Get File IRM

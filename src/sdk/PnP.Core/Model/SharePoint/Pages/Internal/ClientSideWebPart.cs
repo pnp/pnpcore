@@ -30,23 +30,19 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public ClientSideWebPart() : base()
         {
-            this.controlType = 3;
-            this.WebPartData = "";
-            this.HtmlPropertiesData = "";
-            this.HtmlProperties = "";
-            this.Title = "";
-            this.Description = "";
-            this.SupportsFullBleed = false;
-            //this.SetPropertiesJson("{}");
-            this.SetPropertiesJson(JsonDocument.Parse("{}").RootElement);
-            this.WebPartPreviewImage = "";
-            this.UsingSpControlDataOnly = false;
-            //this.dynamicDataPaths = JObject.Parse("{}");
-            //this.dynamicDataValues = JObject.Parse("{}");
-            //this.serverProcessedContent = JObject.Parse("{}");
-            this.DynamicDataPaths = JsonDocument.Parse("{}").RootElement;
-            this.DynamicDataValues = JsonDocument.Parse("{}").RootElement;
-            this.ServerProcessedContent = JsonDocument.Parse("{}").RootElement;
+            controlType = 3;
+            WebPartData = "";
+            HtmlPropertiesData = "";
+            HtmlProperties = "";
+            Title = "";
+            Description = "";
+            SupportsFullBleed = false;
+            SetPropertiesJson(JsonDocument.Parse("{}").RootElement);
+            WebPartPreviewImage = "";
+            UsingSpControlDataOnly = false;
+            DynamicDataPaths = JsonDocument.Parse("{}").RootElement;
+            DynamicDataValues = JsonDocument.Parse("{}").RootElement;
+            ServerProcessedContent = JsonDocument.Parse("{}").RootElement;
         }
 
         /// <summary>
@@ -59,7 +55,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 throw new ArgumentNullException(nameof(component));
             }
-            this.Import(component as ClientSideComponent);
+            Import(component as ClientSideComponent);
         }
         #endregion
 
@@ -118,25 +114,22 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.Properties.ToString(/*Formatting.None*/);
+                return Properties.ToString();
             }
             set
             {
-                //this.SetPropertiesJson(value);
-                this.SetPropertiesJson(JsonDocument.Parse(value).RootElement);
+                SetPropertiesJson(JsonDocument.Parse(value).RootElement);
             }
         }
 
         /// <summary>
         /// Web properties as configurable <see cref="JsonElement"/>
         /// </summary>
-        //public JObject Properties
         public JsonElement Properties { get; private set; }
 
         /// <summary>
         /// ServerProcessedContent json node
         /// </summary>
-        //public JObject ServerProcessedContent
         public JsonElement ServerProcessedContent { get; private set; }
 
         //public JObject DynamicDataPaths
@@ -182,41 +175,29 @@ namespace PnP.Core.Model.SharePoint
         public void Import(ClientSideComponent component, Func<String, String> clientSideWebPartPropertiesUpdater = null)
         {
             // Sometimes the id guid is encoded with curly brackets, so let's drop those
-            this.WebPartId = new Guid(component.Id).ToString("D");
+            WebPartId = new Guid(component.Id).ToString("D");
 
             // Parse the manifest json blob as we need some data from it
-            //JObject wpJObject = JObject.Parse(component.Manifest);
             var wpJObject = JsonDocument.Parse(component.Manifest).RootElement;
 
-            //this.title = wpJObject["preconfiguredEntries"][0]["title"]["default"].Value<string>();
-            this.Title = wpJObject.GetProperty("preconfiguredEntries").EnumerateArray().First().GetProperty("title").GetProperty("default").GetString();
+            Title = wpJObject.GetProperty("preconfiguredEntries").EnumerateArray().First().GetProperty("title").GetProperty("default").GetString();
 
-            //this.description = wpJObject["preconfiguredEntries"][0]["title"]["default"].Value<string>();
-            this.Description = wpJObject.GetProperty("preconfiguredEntries").EnumerateArray().First().GetProperty("title").GetProperty("default").GetString();
+            Description = wpJObject.GetProperty("preconfiguredEntries").EnumerateArray().First().GetProperty("title").GetProperty("default").GetString();
 
-            //if (wpJObject["supportsFullBleed"] != null)
-            //{
-            //    this.supportsFullBleed = wpJObject["supportsFullBleed"].Value<bool>();
-            //}
-            //else
-            //{
-            //    this.supportsFullBleed = false;
-            //}
             if (wpJObject.TryGetProperty("supportsFullBleed", out JsonElement supportsFullBleed))
             {
-                this.SupportsFullBleed = supportsFullBleed.GetBoolean();
+                SupportsFullBleed = supportsFullBleed.GetBoolean();
             }
             else
             {
-                this.SupportsFullBleed = false;
+                SupportsFullBleed = false;
             }
 
-            //this.SetPropertiesJson(wpJObject["preconfiguredEntries"][0]["properties"].ToString(/*Formatting.None*/));
-            this.SetPropertiesJson(wpJObject.GetProperty("preconfiguredEntries").EnumerateArray().First().GetProperty("properties"));
+            SetPropertiesJson(wpJObject.GetProperty("preconfiguredEntries").EnumerateArray().First().GetProperty("properties"));
 
             if (clientSideWebPartPropertiesUpdater != null)
             {
-                this.propertiesJson = clientSideWebPartPropertiesUpdater(this.propertiesJson);
+                propertiesJson = clientSideWebPartPropertiesUpdater(propertiesJson);
             }
         }
 
@@ -230,16 +211,16 @@ namespace PnP.Core.Model.SharePoint
             if (!IsHeaderControl)
             {
                 // Can this control be hosted in this section type?
-                if (this.Section.Type == CanvasSectionTemplate.OneColumnFullWidth)
+                if (Section.Type == CanvasSectionTemplate.OneColumnFullWidth)
                 {
-                    if (!this.SupportsFullBleed)
+                    if (!SupportsFullBleed)
                     {
-                        throw new Exception("You cannot host this web part inside a one column full width section, only webparts that support full bleed are allowed");
+                        throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_ControlNotAllowedInFullWidthSection);
                     }
                 }
 
-                ClientSideWebPartControlData controlData = null;
-                if (this.UsingSpControlDataOnly)
+                ClientSideWebPartControlData controlData;
+                if (UsingSpControlDataOnly)
                 {
                     controlData = new ClientSideWebPartControlDataOnly();
                 }
@@ -249,21 +230,21 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 // Obtain the json data
-                controlData.ControlType = this.ControlType;
-                controlData.Id = this.InstanceId.ToString("D");
-                controlData.WebPartId = this.WebPartId;
+                controlData.ControlType = ControlType;
+                controlData.Id = InstanceId.ToString("D");
+                controlData.WebPartId = WebPartId;
                 controlData.Position = new ClientSideCanvasControlPosition()
                 {
-                    ZoneIndex = this.Section.Order,
-                    SectionIndex = this.Column.Order,
-                    SectionFactor = this.Column.ColumnFactor,
-                    LayoutIndex = this.Column.LayoutIndex,
+                    ZoneIndex = Section.Order,
+                    SectionIndex = Column.Order,
+                    SectionFactor = Column.ColumnFactor,
+                    LayoutIndex = Column.LayoutIndex,
                     ControlIndex = controlIndex,
                 };
 
-                if (this.section.Type == CanvasSectionTemplate.OneColumnVerticalSection)
+                if (section.Type == CanvasSectionTemplate.OneColumnVerticalSection)
                 {
-                    if (this.section.Columns.First().Equals(this.Column))
+                    if (section.Columns.First().Equals(Column))
                     {
                         controlData.Position.SectionFactor = 12;
                     }
@@ -271,108 +252,100 @@ namespace PnP.Core.Model.SharePoint
 
                 controlData.Emphasis = new ClientSideSectionEmphasis()
                 {
-                    ZoneEmphasis = this.Column.VerticalSectionEmphasis.HasValue ? this.Column.VerticalSectionEmphasis.Value : this.Section.ZoneEmphasis,
+                    ZoneEmphasis = Column.VerticalSectionEmphasis.HasValue ? Column.VerticalSectionEmphasis.Value : Section.ZoneEmphasis,
                 };
 
                 // Set the control's data version to the latest version...default was 1.0, but some controls use a higher version
-                //var webPartType = ClientSidePage.NameToClientSideWebPartEnum(controlData.WebPartId);
                 var webPartType = Page.IdToDefaultWebPart(controlData.WebPartId);
 
                 // if we read the control from the page then the value might already be set to something different than 1.0...if so, leave as is
-                if (this.DataVersion == "1.0")
+                if (DataVersion == "1.0")
                 {
                     if (webPartType == DefaultWebPart.Image)
                     {
-                        this.dataVersion = "1.8";
+                        dataVersion = "1.8";
                     }
                     else if (webPartType == DefaultWebPart.ImageGallery)
                     {
-                        this.dataVersion = "1.6";
+                        dataVersion = "1.6";
                     }
                     else if (webPartType == DefaultWebPart.People)
                     {
-                        this.dataVersion = "1.2";
+                        dataVersion = "1.2";
                     }
                     else if (webPartType == DefaultWebPart.DocumentEmbed)
                     {
-                        this.dataVersion = "1.1";
+                        dataVersion = "1.1";
                     }
                     else if (webPartType == DefaultWebPart.ContentRollup)
                     {
-                        this.dataVersion = "2.1";
+                        dataVersion = "2.1";
                     }
                     else if (webPartType == DefaultWebPart.QuickLinks)
                     {
-                        this.dataVersion = "2.0";
+                        dataVersion = "2.0";
                     }
                 }
 
                 // Set the web part preview image url
-                //if (this.ServerProcessedContent != null && this.ServerProcessedContent["imageSources"] != null)
-                if (this.ServerProcessedContent.TryGetProperty("imageSources", out JsonElement imageSources))
+                if (ServerProcessedContent.TryGetProperty("imageSources", out JsonElement imageSources))
                 {
-                    //foreach (JProperty property in this.ServerProcessedContent["imageSources"])
-                    foreach(var property in imageSources.EnumerateObject())
+                    foreach (var property in imageSources.EnumerateObject())
                     {
                         if (!string.IsNullOrEmpty(property.Value.ToString()))
                         {
-                            this.WebPartPreviewImage = property.Value.ToString().ToLower();
+                            WebPartPreviewImage = property.Value.ToString().ToLower();
                             break;
                         }
                     }
                 }
 
-                ClientSideWebPartData webpartData = new ClientSideWebPartData() { Id = controlData.WebPartId, InstanceId = controlData.Id, Title = this.Title, Description = this.Description, DataVersion = this.DataVersion, Properties = "jsonPropsToReplacePnPRules", DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules", DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules", ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules" };
+                ClientSideWebPartData webpartData = new ClientSideWebPartData() { Id = controlData.WebPartId, InstanceId = controlData.Id, Title = Title, Description = Description, DataVersion = DataVersion, Properties = "jsonPropsToReplacePnPRules", DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules", DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules", ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules" };
 
-                if (this.UsingSpControlDataOnly)
+                if (UsingSpControlDataOnly)
                 {
                     (controlData as ClientSideWebPartControlDataOnly).WebPartData = "jsonWebPartDataToReplacePnPRules";
-                    //this.jsonControlData = JsonConvert.SerializeObject(controlData);
-                    this.jsonControlData = JsonSerializer.Serialize(controlData);
-                    //this.jsonWebPartData = JsonConvert.SerializeObject(webpartData);
-                    this.JsonWebPartData = JsonSerializer.Serialize(webpartData);
-                    this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonPropsToReplacePnPRules\"", this.Properties.ToString(/*Formatting.None*/));
-                    this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonServerProcessedContentToReplacePnPRules\"", this.ServerProcessedContent.ToString(/*Formatting.None*/));
-                    this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonDynamicDataPathsToReplacePnPRules\"", this.DynamicDataPaths.ToString(/*Formatting.None*/));
-                    this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonDynamicDataValuesToReplacePnPRules\"", this.DynamicDataValues.ToString(/*Formatting.None*/));
-                    this.jsonControlData = this.jsonControlData.Replace("\"jsonWebPartDataToReplacePnPRules\"", this.JsonWebPartData);
+                    jsonControlData = JsonSerializer.Serialize(controlData);
+                    JsonWebPartData = JsonSerializer.Serialize(webpartData);
+                    JsonWebPartData = JsonWebPartData.Replace("\"jsonPropsToReplacePnPRules\"", Properties.ToString());
+                    JsonWebPartData = JsonWebPartData.Replace("\"jsonServerProcessedContentToReplacePnPRules\"", ServerProcessedContent.ToString());
+                    JsonWebPartData = JsonWebPartData.Replace("\"jsonDynamicDataPathsToReplacePnPRules\"", DynamicDataPaths.ToString());
+                    JsonWebPartData = JsonWebPartData.Replace("\"jsonDynamicDataValuesToReplacePnPRules\"", DynamicDataValues.ToString());
+                    jsonControlData = jsonControlData.Replace("\"jsonWebPartDataToReplacePnPRules\"", JsonWebPartData);
                 }
                 else
                 {
-                    //this.jsonControlData = JsonConvert.SerializeObject(controlData);
-                    this.jsonControlData = JsonSerializer.Serialize(controlData);
-                    //this.jsonWebPartData = JsonConvert.SerializeObject(webpartData);
-                    this.JsonWebPartData = JsonSerializer.Serialize(webpartData);
-                    this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonPropsToReplacePnPRules\"", this.Properties.ToString(/*Formatting.None*/));
-                    this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonServerProcessedContentToReplacePnPRules\"", this.ServerProcessedContent.ToString(/*Formatting.None*/));
-                    this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonDynamicDataPathsToReplacePnPRules\"", this.DynamicDataPaths.ToString(/*Formatting.None*/));
-                    this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonDynamicDataValuesToReplacePnPRules\"", this.DynamicDataValues.ToString(/*Formatting.None*/));
+                    jsonControlData = JsonSerializer.Serialize(controlData);
+                    JsonWebPartData = JsonSerializer.Serialize(webpartData);
+                    JsonWebPartData = JsonWebPartData.Replace("\"jsonPropsToReplacePnPRules\"", Properties.ToString());
+                    JsonWebPartData = JsonWebPartData.Replace("\"jsonServerProcessedContentToReplacePnPRules\"", ServerProcessedContent.ToString());
+                    JsonWebPartData = JsonWebPartData.Replace("\"jsonDynamicDataPathsToReplacePnPRules\"", DynamicDataPaths.ToString());
+                    JsonWebPartData = JsonWebPartData.Replace("\"jsonDynamicDataValuesToReplacePnPRules\"", DynamicDataValues.ToString());
                 }
             }
             else
             {
-                HeaderControlData webpartData = new HeaderControlData() { Id = this.WebPartId, InstanceId = this.InstanceId.ToString("D"), Title = this.Title, Description = this.Description, DataVersion = this.DataVersion, Properties = "jsonPropsToReplacePnPRules", ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules" };
-                this.canvasDataVersion = this.DataVersion;
-                //this.jsonWebPartData = JsonConvert.SerializeObject(webpartData);
-                this.JsonWebPartData = JsonSerializer.Serialize(webpartData);
-                this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonPropsToReplacePnPRules\"", this.Properties.ToString(/*Formatting.None*/));
-                this.JsonWebPartData = this.JsonWebPartData.Replace("\"jsonServerProcessedContentToReplacePnPRules\"", this.ServerProcessedContent.ToString(/*Formatting.None*/));
-                this.jsonControlData = this.JsonWebPartData;
+                HeaderControlData webpartData = new HeaderControlData() { Id = WebPartId, InstanceId = InstanceId.ToString("D"), Title = Title, Description = Description, DataVersion = DataVersion, Properties = "jsonPropsToReplacePnPRules", ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules" };
+                canvasDataVersion = DataVersion;
+                JsonWebPartData = JsonSerializer.Serialize(webpartData);
+                JsonWebPartData = JsonWebPartData.Replace("\"jsonPropsToReplacePnPRules\"", Properties.ToString());
+                JsonWebPartData = JsonWebPartData.Replace("\"jsonServerProcessedContentToReplacePnPRules\"", ServerProcessedContent.ToString());
+                jsonControlData = JsonWebPartData;
             }
 
             StringBuilder html = new StringBuilder(100);
-            if (this.UsingSpControlDataOnly || IsHeaderControl)
+            if (UsingSpControlDataOnly || IsHeaderControl)
             {
-                html.Append($@"<div {CanvasControlAttribute}=""{this.CanvasControlData}"" {CanvasDataVersionAttribute}=""{this.DataVersion}"" {ControlDataAttribute}=""{this.JsonControlData.Replace("\"", "&quot;")}""></div>");
+                html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}""></div>");
             }
             else
             {
-                html.Append($@"<div {CanvasControlAttribute}=""{this.CanvasControlData}"" {CanvasDataVersionAttribute}=""{this.DataVersion}"" {ControlDataAttribute}=""{this.JsonControlData.Replace("\"", "&quot;")}"">");
-                html.Append($@"<div {WebPartAttribute}=""{this.WebPartData}"" {WebPartDataVersionAttribute}=""{this.DataVersion}"" {WebPartDataAttribute}=""{this.JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
+                html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{DataVersion}"" {ControlDataAttribute}=""{JsonControlData.Replace("\"", "&quot;")}"">");
+                html.Append($@"<div {WebPartAttribute}=""{WebPartData}"" {WebPartDataVersionAttribute}=""{DataVersion}"" {WebPartDataAttribute}=""{JsonWebPartData.Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")}"">");
                 html.Append($@"<div {WebPartComponentIdAttribute}="""">");
-                html.Append(this.WebPartId);
+                html.Append(WebPartId);
                 html.Append("</div>");
-                html.Append($@"<div {WebPartHtmlPropertiesAttribute}=""{this.HtmlProperties}"">");
+                html.Append($@"<div {WebPartHtmlPropertiesAttribute}=""{HtmlProperties}"">");
                 RenderHtmlProperties(ref html);
                 html.Append("</div>");
                 html.Append("</div>");
@@ -387,13 +360,10 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="htmlWriter">Reference to the html renderer used</param>
         protected virtual void RenderHtmlProperties(ref StringBuilder htmlWriter)
         {
-            //if (this.ServerProcessedContent != null)
-            if (!this.ServerProcessedContent.Equals(default))
+            if (!ServerProcessedContent.Equals(default))
             {
-                //if (this.ServerProcessedContent["searchablePlainTexts"] != null)
-                if (this.ServerProcessedContent.TryGetProperty("searchablePlainTexts", out JsonElement searchablePlainTexts))
+                if (ServerProcessedContent.TryGetProperty("searchablePlainTexts", out JsonElement searchablePlainTexts))
                 {
-                    //foreach (JProperty property in this.ServerProcessedContent["searchablePlainTexts"])
                     foreach (var property in searchablePlainTexts.EnumerateObject())
                     {
                         htmlWriter.Append($@"<div data-sp-prop-name=""{property.Name}"" data-sp-searchableplaintext=""true"">");
@@ -402,48 +372,39 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                //if (this.ServerProcessedContent["imageSources"] != null)
-                if (this.ServerProcessedContent.TryGetProperty("imageSources", out JsonElement imageSources))
+                if (ServerProcessedContent.TryGetProperty("imageSources", out JsonElement imageSources))
                 {
-                    //foreach (JProperty property in this.ServerProcessedContent["imageSources"])
                     foreach (var property in imageSources.EnumerateObject())
                     {
                         htmlWriter.Append($@"<img data-sp-prop-name=""{property.Name}""");
 
                         if (!string.IsNullOrEmpty(property.Value.ToString()))
                         {
-                            //htmlWriter.Append($@" src=""{property.Value.Value<string>()}""");
                             htmlWriter.Append($@" src=""{property.Value.GetString()}""");
                         }
                         htmlWriter.Append("></img>");
                     }
                 }
 
-                //if (this.ServerProcessedContent["links"] != null)
-                if (this.ServerProcessedContent.TryGetProperty("links", out JsonElement links))
+                if (ServerProcessedContent.TryGetProperty("links", out JsonElement links))
                 {
-                    //foreach (JProperty property in this.ServerProcessedContent["links"])
                     foreach (var property in links.EnumerateObject())
                     {
-                        //htmlWriter.Append($@"<a data-sp-prop-name=""{property.Name}"" href=""{property.Value.Value<string>()}""></a>");
                         htmlWriter.Append($@"<a data-sp-prop-name=""{property.Name}"" href=""{property.Value.GetString()}""></a>");
                     }
                 }
 
-                //if (this.ServerProcessedContent["htmlStrings"] != null)
-                if (this.ServerProcessedContent.TryGetProperty("htmlStrings", out JsonElement htmlStrings))
+                if (ServerProcessedContent.TryGetProperty("htmlStrings", out JsonElement htmlStrings))
                 {
-                    //foreach (JProperty property in this.ServerProcessedContent["htmlStrings"])
                     foreach (var property in htmlStrings.EnumerateObject())
                     {
-                        //htmlWriter.Append($@"<div data-sp-prop-name=""{property.Name}"">{property.Value.ToString()}</div>");
                         htmlWriter.Append($@"<div data-sp-prop-name=""{property.Name}"">{property.Value.GetString()}</div>");
                     }
                 }
             }
             else
             {
-                htmlWriter.Append(this.HtmlPropertiesData);
+                htmlWriter.Append(HtmlPropertiesData);
             }
         }
         #endregion
@@ -457,241 +418,96 @@ namespace PnP.Core.Model.SharePoint
             var webPartDataVersion = element.GetAttribute(WebPartDataVersionAttribute);
             if (!string.IsNullOrEmpty(webPartDataVersion))
             {
-                this.dataVersion = element.GetAttribute(WebPartDataVersionAttribute);
+                dataVersion = element.GetAttribute(WebPartDataVersionAttribute);
             }
 
-            // load data from the data-sp-controldata attribute
-            //var jsonSerializerSettings = new JsonSerializerSettings()
-            //{
-            //    MissingMemberHandling = MissingMemberHandling.Ignore
-            //};
-            var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-            //this.spControlData = JsonConvert.DeserializeObject<ClientSideWebPartControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), jsonSerializerSettings);
-            this.SpControlData = JsonSerializer.Deserialize<ClientSideWebPartControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), jsonSerializerSettings);
-            this.controlType = this.SpControlData.ControlType;
+            SpControlData = JsonSerializer.Deserialize<ClientSideWebPartControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            controlType = SpControlData.ControlType;
 
-            var wpDiv = element.GetElementsByTagName("div").Where(a => a.HasAttribute(ClientSideWebPart.WebPartDataAttribute)).FirstOrDefault();
+            var wpDiv = element.GetElementsByTagName("div").Where(a => a.HasAttribute(WebPartDataAttribute)).FirstOrDefault();
 
             // Some components on the page (e.g. web parts configured with isDomainIsolated = true) are rendered differently in the HTML
             if (wpDiv == null)
             {
-                throw new Exception("Oops...seems we end up here anyway");
-                /* DON'T THINK WE STILL NEED THIS
-                JObject wpJObject = JObject.Parse(element.GetAttribute(CanvasControl.ControlDataAttribute));
-                if (wpJObject["webPartData"] != null)
-                {
-                    if (wpJObject["webPartData"] != null && wpJObject["webPartData"]["title"] != null)
-                    {
-                        this.title = wpJObject["webPartData"]["title"].Value<string>();
-                    }
-                    if (wpJObject["webPartData"] != null && wpJObject["webPartData"]["description"] != null)
-                    {
-                        this.description = wpJObject["webPartData"]["description"].Value<string>();
-                    }
-                    if (wpJObject["webPartData"] != null && wpJObject["webPartData"]["properties"] != null)
-                    {
-                        this.PropertiesJson = wpJObject["webPartData"]["properties"].ToString(Formatting.None);
-                    }
-                    // Check for fullbleed supporting web parts
-                    if (wpJObject["webPartData"] != null && wpJObject["webPartData"]["properties"] != null && wpJObject["webPartData"]["properties"]["isFullWidth"] != null)
-                    {
-                        this.supportsFullBleed = wpJObject["webPartData"]["properties"]["isFullWidth"].Value<Boolean>();
-                    }
-
-                    // Store the server processed content as that's needed for full fidelity
-                    if (wpJObject["webPartData"] != null && wpJObject["webPartData"]["serverProcessedContent"] != null && wpJObject["webPartData"]["serverProcessedContent"].ToString() != "")
-                    {
-                        this.serverProcessedContent = (JObject)wpJObject["webPartData"]["serverProcessedContent"];
-                    }
-
-                    if (wpJObject["webPartData"] != null && wpJObject["webPartData"]["dynamicDataPaths"] != null)
-                    {
-                        this.dynamicDataPaths = (JObject)wpJObject["webPartData"]["dynamicDataPaths"];
-                    }
-
-                    if (wpJObject["webPartData"] != null && wpJObject["webPartData"]["dynamicDataValues"] != null)
-                    {
-                        this.dynamicDataValues = (JObject)wpJObject["webPartData"]["dynamicDataValues"];
-                    }
-
-                    if (wpJObject["webPartData"] != null && wpJObject["webPartData"]["id"] != null)
-                    {
-                        this.webPartId = wpJObject["webPartData"]["id"].Value<string>();
-                    }
-                }
-                else
-                {
-                    // Header controls (like in topic pages)
-                    if (wpJObject["title"] != null)
-                    {
-                        this.title = wpJObject["title"].Value<string>();
-                    }
-                    if (wpJObject["description"] != null)
-                    {
-                        this.description = wpJObject["description"].Value<string>();
-                    }
-                    if (wpJObject["properties"] != null)
-                    {
-                        this.PropertiesJson = wpJObject["properties"].ToString(Formatting.None);
-                    }
-                    // Check for fullbleed supporting web parts
-                    if (wpJObject["properties"] != null && wpJObject["properties"]["isFullWidth"] != null)
-                    {
-                        this.supportsFullBleed = wpJObject["properties"]["isFullWidth"].Value<Boolean>();
-                    }
-
-                    // Store the server processed content as that's needed for full fidelity
-                    if (wpJObject["serverProcessedContent"] != null && wpJObject["serverProcessedContent"].ToString() != "")
-                    {
-                        this.serverProcessedContent = (JObject)wpJObject["serverProcessedContent"];
-                    }
-
-                    // Set/update dataVersion if it was set in the json data
-                    if (wpJObject["dataVersion"] != null && !string.IsNullOrEmpty(wpJObject["dataVersion"].ToString(Formatting.None)))
-                    {
-                        this.dataVersion = wpJObject["dataVersion"].ToString(Formatting.None).Trim('"');
-                    }
-
-                    if (wpJObject["id"] != null)
-                    {
-                        this.webPartId = wpJObject["id"].Value<string>();
-                    }
-
-                    if (wpJObject["instanceId"] != null)
-                    {
-                        if (Guid.TryParse(wpJObject["instanceId"].Value<string>(), out Guid instanceGuid))
-                        {
-                            this.instanceId = instanceGuid;
-                        }
-                    }
-                }
-                this.usingSpControlDataOnly = true;
-                */
+                throw new Exception("Oops...seems we end up here anyway...check PnP.Framework code to understand what was here");
             }
             else
             {
-                this.WebPartData = wpDiv.GetAttribute(ClientSideWebPart.WebPartAttribute);
+                WebPartData = wpDiv.GetAttribute(WebPartAttribute);
 
                 // Decode the html encoded string
-                var decoded = WebUtility.HtmlDecode(wpDiv.GetAttribute(ClientSideWebPart.WebPartDataAttribute));
-                //JObject wpJObject = JObject.Parse(decoded);
+                var decoded = WebUtility.HtmlDecode(wpDiv.GetAttribute(WebPartDataAttribute));
                 var wpJObject = JsonDocument.Parse(decoded).RootElement;
 
-                //this.title = wpJObject["title"] != null ? wpJObject["title"].Value<string>() : "";
                 if (wpJObject.TryGetProperty("title", out JsonElement titleProperty))
                 {
-                    this.Title = titleProperty.GetString();
+                    Title = titleProperty.GetString();
                 }
                 else
                 {
-                    this.Title = "";
+                    Title = "";
                 }
 
-                //this.description = wpJObject["description"] != null ? wpJObject["description"].Value<string>() : "";
                 if (wpJObject.TryGetProperty("description", out JsonElement descriptionProperty))
                 {
-                    this.Description = descriptionProperty.GetString();
+                    Description = descriptionProperty.GetString();
                 }
                 else
                 {
-                    this.Description = "";
+                    Description = "";
                 }
 
                 // Set property to trigger correct loading of properties 
-                //this.PropertiesJson = wpJObject["properties"].ToString(Formatting.None);
-                this.PropertiesJson = wpJObject.GetProperty("properties").ToString();
+                PropertiesJson = wpJObject.GetProperty("properties").ToString();
 
                 // Set/update dataVersion if it was set in the json data
-                //if (!string.IsNullOrEmpty(wpJObject["dataVersion"].ToString(/*Formatting.None*/)))
-                //{
-                //    this.dataVersion = wpJObject["dataVersion"].ToString(/*Formatting.None*/).Trim('"');
-                //}
                 if (wpJObject.TryGetProperty("dataVersion", out JsonElement dataVersion))
                 {
                     this.dataVersion = dataVersion.GetString();
                 }
 
                 // Check for fullbleed supporting web parts
-                //if (wpJObject["properties"] != null && wpJObject["properties"]["isFullWidth"] != null)
-                //{
-                //    this.supportsFullBleed = wpJObject["properties"]["isFullWidth"].Value<Boolean>();
-                //}
                 if (wpJObject.TryGetProperty("properties", out JsonElement properties))
                 {
                     if (properties.TryGetProperty("isFullWidth", out JsonElement isFullWidth))
                     {
-                        this.SupportsFullBleed = isFullWidth.GetBoolean();
+                        SupportsFullBleed = isFullWidth.GetBoolean();
                     }
                 }
 
                 // Store the server processed content as that's needed for full fidelity
-                //if (wpJObject["serverProcessedContent"] != null && wpJObject["serverProcessedContent"].ToString() != "")
-                //{
-                //    this.serverProcessedContent = (JObject)wpJObject["serverProcessedContent"];
-                //}
-
                 if (wpJObject.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
                 {
-                    this.ServerProcessedContent = serverProcessedContent;
+                    ServerProcessedContent = serverProcessedContent;
                 }
 
-                //if (wpJObject["dynamicDataPaths"] != null)
-                //{
-                //    this.dynamicDataPaths = (JObject)wpJObject["dynamicDataPaths"];
-                //}
                 if (wpJObject.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
                 {
-                    this.DynamicDataPaths = dynamicDataPaths;
+                    DynamicDataPaths = dynamicDataPaths;
                 }
 
-                //if (wpJObject["dynamicDataValues"] != null)
-                //{
-                //    this.dynamicDataValues = (JObject)wpJObject["dynamicDataValues"];
-                //}
                 if (wpJObject.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
                 {
-                    this.DynamicDataValues = dynamicDataValues;
+                    DynamicDataValues = dynamicDataValues;
                 }
 
-                //this.webPartId = wpJObject["id"].Value<string>();
-                this.WebPartId = wpJObject.GetProperty("id").GetString();
+                WebPartId = wpJObject.GetProperty("id").GetString();
 
-                var wpHtmlProperties = wpDiv.GetElementsByTagName("div").Where(a => a.HasAttribute(ClientSideWebPart.WebPartHtmlPropertiesAttribute)).FirstOrDefault();
-                this.HtmlPropertiesData = wpHtmlProperties.InnerHtml;
-                this.HtmlProperties = wpHtmlProperties.GetAttribute(ClientSideWebPart.WebPartHtmlPropertiesAttribute);
+                var wpHtmlProperties = wpDiv.GetElementsByTagName("div").Where(a => a.HasAttribute(WebPartHtmlPropertiesAttribute)).FirstOrDefault();
+                HtmlPropertiesData = wpHtmlProperties.InnerHtml;
+                HtmlProperties = wpHtmlProperties.GetAttribute(WebPartHtmlPropertiesAttribute);
             }
         }
 
-        private void SetPropertiesJson(/*string json*/JsonElement parsedJson)
+        private void SetPropertiesJson(JsonElement parsedJson)
         {
-            //if (String.IsNullOrEmpty(json))
-            //{
-            //    json = "{}";
-            //}
-
-            this.propertiesJson = parsedJson.ToString();
-
-            //var parsedJson = JObject.Parse(json);
-
-            // If the passed structure is the top level JSON structure, which it typically is, then grab the properties from it
-            //if (parsedJson["webPartData"] != null && parsedJson["webPartData"]["properties"] != null)
-            //{
-            //    this.properties = (JObject)parsedJson["webPartData"]["properties"];
-            //}
-            //else if (parsedJson["properties"] != null)
-            //{
-            //    this.properties = (JObject)parsedJson["properties"];
-            //}
-            //else
-            //{
-            //    this.properties = parsedJson;
-            //}
+            propertiesJson = parsedJson.ToString();
 
             if (parsedJson.TryGetProperty("webPartData", out JsonElement webPartData))
             {
                 if (webPartData.TryGetProperty("properties", out JsonElement properties))
                 {
-                    this.Properties = properties;
+                    Properties = properties;
                 }
 
                 if (webPartData.TryGetProperty("dataVersion", out JsonElement dataVersion))
@@ -701,28 +517,28 @@ namespace PnP.Core.Model.SharePoint
 
                 if (webPartData.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
                 {
-                    this.ServerProcessedContent = serverProcessedContent;
+                    ServerProcessedContent = serverProcessedContent;
                 }
 
                 if (webPartData.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
                 {
-                    this.DynamicDataPaths = dynamicDataPaths;
+                    DynamicDataPaths = dynamicDataPaths;
                 }
 
                 if (webPartData.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
                 {
-                    this.DynamicDataValues = dynamicDataValues;
+                    DynamicDataValues = dynamicDataValues;
                 }
             }
             else
             {
                 if (parsedJson.TryGetProperty("properties", out JsonElement properties))
                 {
-                    this.Properties = properties;
+                    Properties = properties;
                 }
                 else
                 {
-                    this.Properties = parsedJson;
+                    Properties = parsedJson;
                 }
 
                 if (parsedJson.TryGetProperty("dataVersion", out JsonElement dataVersion))
@@ -732,58 +548,19 @@ namespace PnP.Core.Model.SharePoint
 
                 if (parsedJson.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
                 {
-                    this.ServerProcessedContent = serverProcessedContent;
+                    ServerProcessedContent = serverProcessedContent;
                 }
 
                 if (parsedJson.TryGetProperty("dynamicDataPaths", out JsonElement dynamicDataPaths))
                 {
-                    this.DynamicDataPaths = dynamicDataPaths;
+                    DynamicDataPaths = dynamicDataPaths;
                 }
 
                 if (parsedJson.TryGetProperty("dynamicDataValues", out JsonElement dynamicDataValues))
                 {
-                    this.DynamicDataValues = dynamicDataValues;
+                    DynamicDataValues = dynamicDataValues;
                 }
             }
-
-            // Get the web part data version if supplied by the web part json properties
-            //if (parsedJson["webPartData"] != null && parsedJson["webPartData"]["dataVersion"] != null)
-            //{
-            //    this.dataVersion = parsedJson["webPartData"]["dataVersion"].ToString(/*Formatting.None*/).Trim('"');
-
-            //}
-            //else if (parsedJson["dataVersion"] != null)
-            //{
-            //    this.dataVersion = parsedJson["dataVersion"].ToString(/*Formatting.None*/).Trim('"');
-            //}
-
-            // If the web part has the serverProcessedContent property then keep this one as it might be needed as input to render the web part HTML later on
-            //if (parsedJson["webPartData"] != null && parsedJson["webPartData"]["serverProcessedContent"] != null)
-            //{
-            //    this.serverProcessedContent = (JObject)parsedJson["webPartData"]["serverProcessedContent"];
-            //}
-            //else if (parsedJson["serverProcessedContent"] != null)
-            //{
-            //    this.serverProcessedContent = (JObject)parsedJson["serverProcessedContent"];
-            //}
-
-            //if (parsedJson["webPartData"] != null && parsedJson["webPartData"]["dynamicDataPaths"] != null)
-            //{
-            //    this.dynamicDataPaths = (JObject)parsedJson["webPartData"]["dynamicDataPaths"];
-            //}
-            //else if (parsedJson["dynamicDataPaths"] != null)
-            //{
-            //    this.dynamicDataPaths = (JObject)parsedJson["dynamicDataPaths"];
-            //}
-
-            //if (parsedJson["webPartData"] != null && parsedJson["webPartData"]["dynamicDataValues"] != null)
-            //{
-            //    this.dynamicDataValues = (JObject)parsedJson["webPartData"]["dynamicDataValues"];
-            //}
-            //else if (parsedJson["dynamicDataValues"] != null)
-            //{
-            //    this.dynamicDataValues = (JObject)parsedJson["dynamicDataValues"];
-            //}
         }
         #endregion
     }

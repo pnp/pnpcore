@@ -1160,8 +1160,6 @@ namespace PnP.Core.Model
 
             var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
 
-            //return HasValue(body.Member.Name);
-
             if (HasValue(body.Member.Name))
             {
                 if (GetValue(body.Member.Name) is IRequestable)

@@ -45,6 +45,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Color emphasis of the section 
         /// </summary>
-        int ZoneEmphasis { get; }        
+        int ZoneEmphasis { get; }
     }
 }

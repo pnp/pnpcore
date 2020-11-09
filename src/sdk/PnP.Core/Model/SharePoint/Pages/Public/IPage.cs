@@ -90,6 +90,11 @@ namespace PnP.Core.Model.SharePoint
         public bool CommentsDisabled { get; }
 
         /// <summary>
+        /// Folder the page lives in
+        /// </summary>
+        public string Folder { get; }
+
+        /// <summary>
         /// List the languages this page possibly can be translated into
         /// </summary>
         public List<int> SupportedUILanguages { get; }

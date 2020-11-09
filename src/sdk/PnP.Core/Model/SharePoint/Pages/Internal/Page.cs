@@ -2,26 +2,22 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
-    [SharePointType("SP.ListItem", Uri = "_api/web/lists/getbytitle('Site Pages')/items({Id})", LinqGet = "_api/web/lists/getbytitle('Site Pages')/items")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class Page : IPage
     {
         private bool isDefaultDescription;
         private string pageTitle;
-        private string pageName;
-        private static Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] { p => p.EnableFolderCreation,
+        private readonly string pageName;
+        private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] { p => p.EnableFolderCreation,
             p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p=>p.ListItemEntityTypeFullName };
 
         #region Construction
@@ -32,7 +28,7 @@ namespace PnP.Core.Model.SharePoint
             PagesLibrary = pagesLibrary;
             PageListItem = pageListItem;
             layoutType = pageLayoutType;
-            this.pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.Default, null);
+            pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.Default, null);
         }
 
         #endregion
@@ -45,18 +41,18 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.pageTitle;
+                return pageTitle;
             }
             set
             {
                 if (!string.IsNullOrEmpty(value) && value.IndexOf('"') > 0)
                 {
                     // Escape double quotes used in page title
-                    this.pageTitle = value.Replace('"', '\"');
+                    pageTitle = value.Replace('"', '\"');
                 }
                 else
                 {
-                    this.pageTitle = value;
+                    pageTitle = value;
                 }
             }
         }
@@ -69,33 +65,13 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.sections.Cast<ICanvasSection>().ToList();
+                return sections.Cast<ICanvasSection>().ToList();
             }
         }
 
-        /// <summary>
-        /// Collection of all control that exist on this client side page
-        /// </summary>
-        private readonly List<ICanvasControl> controls = new List<ICanvasControl>(5);
-        public List<ICanvasControl> Controls
-        {
-            get
-            {
-                return this.controls;
-            }
-        }
+        public List<ICanvasControl> Controls { get; } = new List<ICanvasControl>(5);
 
-        /// <summary>
-        /// Collection of all header control that exist on this client side page
-        /// </summary>
-        private readonly List<ICanvasControl> headerControls = new List<ICanvasControl>();
-        public List<ICanvasControl> HeaderControls
-        {
-            get
-            {
-                return this.headerControls;
-            }
-        }
+        public List<ICanvasControl> HeaderControls { get; } = new List<ICanvasControl>();
 
         /// <summary>
         /// Layout type of the client side page
@@ -105,31 +81,17 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.layoutType;
+                return layoutType;
             }
             set
             {
-                this.layoutType = value;
+                layoutType = value;
             }
         }
 
         public string ThumbnailUrl { get; set; }
 
-        /// <summary>
-        /// When a page of type Home is created you can opt to only keep the default client side web parts by setting this to true. This also is a way to reset your home page back the the stock one.
-        /// </summary>
-        private bool keepDefaultWebParts;
-        public bool KeepDefaultWebParts
-        {
-            get
-            {
-                return this.keepDefaultWebParts;
-            }
-            set
-            {
-                this.keepDefaultWebParts = value;
-            }
-        }
+        public bool KeepDefaultWebParts { get; set; }
 
         /// <summary>
         /// The default section of the client side page
@@ -138,15 +100,15 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                if (this.sections.Count > 0)
+                if (sections.Count > 0)
                 {
                     return sections.First();
                 }
                 else
                 {
-                    if (this.sections.Count == 0)
+                    if (sections.Count == 0)
                     {
-                        this.sections.Add(new CanvasSection(this, CanvasSectionTemplate.OneColumn, 0));
+                        sections.Add(new CanvasSection(this, CanvasSectionTemplate.OneColumn, 0));
                     }
 
                     return sections.First();
@@ -170,7 +132,26 @@ namespace PnP.Core.Model.SharePoint
                 }
                 else
                 {
-                    throw new InvalidOperationException("You first need to save the page before you check for CommentsEnabled status");
+                    throw new ClientException(ErrorType.PropertyNotLoaded, string.Format(PnPCoreResources.Exception_Page_ListItemNotLoaded, nameof(CommentsDisabled)));
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Folder the page lives in
+        /// </summary>
+        public string Folder
+        {
+            get
+            {
+                if (PageListItem != null)
+                {
+                    return PageListItem[PageConstants.FileDirRef].ToString().Replace($"{PagesLibrary.RootFolder.ServerRelativeUrl}/", "");
+                }
+                else
+                {
+                    throw new ClientException(ErrorType.PropertyNotLoaded, string.Format(PnPCoreResources.Exception_Page_ListItemNotLoaded, nameof(Folder)));
                 }
             }
         }
@@ -183,7 +164,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.pageHeader;
+                return pageHeader;
             }
         }
 
@@ -195,7 +176,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.pageId;
+                return pageId;
             }
         }
 
@@ -433,9 +414,9 @@ namespace PnP.Core.Model.SharePoint
                     var templateFolder = await PnPContext.Web.GetFolderByIdAsync(Guid.Parse(folderGuid.ToString()), p => p.Name).ConfigureAwait(false);
                     templateFolderName = templateFolder.Name;
                 }
-                catch(SharePointRestServiceException)
-                {                    
-                    templateFolderName = await EnsureTemplatesFolderAsync(pagesLibrary).ConfigureAwait(false); 
+                catch (SharePointRestServiceException)
+                {
+                    templateFolderName = await EnsureTemplatesFolderAsync(pagesLibrary).ConfigureAwait(false);
                 }
                 return templateFolderName;
             }
@@ -445,7 +426,7 @@ namespace PnP.Core.Model.SharePoint
         {
             var templateFolder = await pagesLibrary.RootFolder.EnsureFolderAsync(PageConstants.DefaultTemplatesFolder).ConfigureAwait(false);
             pagesLibrary.RootFolder.Properties[PageConstants.TemplatesFolderGuid] = templateFolder.UniqueId.ToString();
-            await pagesLibrary.RootFolder.UpdateAsync().ConfigureAwait(false);
+            await pagesLibrary.RootFolder.Properties.UpdateAsync().ConfigureAwait(false);
             return templateFolder.Name;
         }
 
@@ -471,7 +452,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 webPart = new ClientSideWebPart();
             }
-            
+
             return webPart;
         }
         #endregion
@@ -482,7 +463,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public void ClearPage()
         {
-            foreach (var section in this.sections)
+            foreach (var section in sections)
             {
                 foreach (var control in section.Controls)
                 {
@@ -490,7 +471,7 @@ namespace PnP.Core.Model.SharePoint
                 }
             }
 
-            this.sections.Clear();
+            sections.Clear();
         }
 
         /// <summary>
@@ -549,7 +530,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (CanThisSectionBeAdded(section as CanvasSection))
             {
-                this.sections.Add(section as CanvasSection);
+                sections.Add(section as CanvasSection);
             }
         }
 
@@ -568,13 +549,13 @@ namespace PnP.Core.Model.SharePoint
             if (CanThisSectionBeAdded(section as CanvasSection))
             {
                 section.Order = order;
-                this.sections.Add(section as CanvasSection);
+                sections.Add(section as CanvasSection);
             }
         }
 
         private bool CanThisSectionBeAdded(CanvasSection section)
         {
-            if (this.Sections.Count == 0)
+            if (Sections.Count == 0)
             {
                 return true;
             }
@@ -582,23 +563,23 @@ namespace PnP.Core.Model.SharePoint
             if (section.VerticalSectionColumn != null)
             {
                 // we're adding a section that has a vertical column. This can not be combined with either another section with a vertical column or a full width section
-                if (this.Sections.Where(p => p.VerticalSectionColumn != null).Any())
+                if (Sections.Where(p => p.VerticalSectionColumn != null).Any())
                 {
-                    throw new Exception("You can only have one section with a vertical column on a page");
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_VerticalColumnSectionExists);
                 }
 
-                if (this.Sections.Where(p => p.Type == CanvasSectionTemplate.OneColumnFullWidth).Any())
+                if (Sections.Where(p => p.Type == CanvasSectionTemplate.OneColumnFullWidth).Any())
                 {
-                    throw new Exception("You already have a full width section on this page, you can't add a section with vertical column");
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_VerticalColumnFullWidthSectionExists);
                 }
             }
 
             if (section.Type == CanvasSectionTemplate.OneColumnFullWidth)
             {
                 // we're adding a full width section. This can not be combined with either a vertical column section
-                if (this.Sections.Where(p => p.VerticalSectionColumn != null).Any())
+                if (Sections.Where(p => p.VerticalSectionColumn != null).Any())
                 {
-                    throw new Exception("You already have a section with vertical column on this page, you can't add a full width section");
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_VerticalColumnSectionExistsNoFullWidth);
                 }
             }
 
@@ -619,14 +600,14 @@ namespace PnP.Core.Model.SharePoint
             // add to defaultsection and column
             if (control.Section == null)
             {
-                (control as CanvasControl).section = this.DefaultSection;
+                (control as CanvasControl).section = DefaultSection;
             }
             if (control.Column == null)
             {
-                (control as CanvasControl).column = this.DefaultSection.DefaultColumn;
+                (control as CanvasControl).column = DefaultSection.DefaultColumn;
             }
 
-            this.controls.Add(control);
+            Controls.Add(control);
         }
 
         /// <summary>
@@ -644,15 +625,15 @@ namespace PnP.Core.Model.SharePoint
             // add to default section and column
             if (control.Section == null)
             {
-                (control as CanvasControl).section = this.DefaultSection;
+                (control as CanvasControl).section = DefaultSection;
             }
             if (control.Column == null)
             {
-                (control as CanvasControl).column = this.DefaultSection.DefaultColumn;
+                (control as CanvasControl).column = DefaultSection.DefaultColumn;
             }
             control.Order = order;
 
-            this.controls.Add(control);
+            Controls.Add(control);
         }
 
         /// <summary>
@@ -674,7 +655,7 @@ namespace PnP.Core.Model.SharePoint
             (control as CanvasControl).section = section;
             (control as CanvasControl).column = section.DefaultColumn;
 
-            this.controls.Add(control);
+            Controls.Add(control);
         }
 
         /// <summary>
@@ -698,7 +679,7 @@ namespace PnP.Core.Model.SharePoint
             (control as CanvasControl).column = section.DefaultColumn;
             control.Order = order;
 
-            this.controls.Add(control);
+            Controls.Add(control);
         }
 
         /// <summary>
@@ -720,7 +701,7 @@ namespace PnP.Core.Model.SharePoint
             (control as CanvasControl).section = column.Section;
             (control as CanvasControl).column = column;
 
-            this.controls.Add(control);
+            Controls.Add(control);
         }
 
         /// <summary>
@@ -744,7 +725,7 @@ namespace PnP.Core.Model.SharePoint
             (control as CanvasControl).column = column;
             control.Order = order;
 
-            this.controls.Add(control);
+            Controls.Add(control);
         }
 
         /// <summary>
@@ -759,11 +740,11 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(control));
             }
 
-            (control as CanvasControl).section = this.DefaultSection;
-            (control as CanvasControl).column = this.DefaultSection.DefaultColumn;
+            (control as CanvasControl).section = DefaultSection;
+            (control as CanvasControl).column = DefaultSection.DefaultColumn;
             control.Order = order;
 
-            this.headerControls.Add(control);
+            HeaderControls.Add(control);
         }
         #endregion
 
@@ -773,7 +754,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public void RemovePageHeader()
         {
-            this.pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.None, null);
+            pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.None, null);
         }
 
         /// <summary>
@@ -781,7 +762,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public void SetDefaultPageHeader()
         {
-            this.pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.Default, null);
+            pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.Default, null);
         }
 
         /// <summary>
@@ -792,7 +773,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="translateY">Y focal point for image</param>
         public void SetCustomPageHeader(string serverRelativeImageUrl, double? translateX = null, double? translateY = null)
         {
-            this.pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.Custom, serverRelativeImageUrl)
+            pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.Custom, serverRelativeImageUrl)
             {
                 ImageServerRelativeUrl = serverRelativeImageUrl,
                 TranslateX = translateX,
@@ -805,12 +786,12 @@ namespace PnP.Core.Model.SharePoint
         #region To Html
         internal string HeaderControlsToHtml()
         {
-            if (headerControls.Any())
+            if (HeaderControls.Any())
             {
                 StringBuilder html = new StringBuilder();
 
                 float order = 1;
-                foreach (var headerControl in headerControls)
+                foreach (var headerControl in HeaderControls)
                 {
                     html.Append((headerControl as CanvasControl).ToHtml(order));
                 }
@@ -831,11 +812,11 @@ namespace PnP.Core.Model.SharePoint
         {
             StringBuilder html = new StringBuilder(100);
 
-            if (this.sections.Count == 0) return string.Empty;
+            if (sections.Count == 0) return string.Empty;
 
             html.Append($@"<div>");
             // Normalize section order by starting from 1, users could have started from 0 or left gaps in the numbering
-            var sectionsToOrder = this.sections.OrderBy(p => p.Order).ToList();
+            var sectionsToOrder = sections.OrderBy(p => p.Order).ToList();
             int i = 1;
             foreach (var section in sectionsToOrder)
             {
@@ -843,13 +824,13 @@ namespace PnP.Core.Model.SharePoint
                 i++;
             }
 
-            foreach (var section in this.sections.OrderBy(p => p.Order))
+            foreach (var section in sections.OrderBy(p => p.Order))
             {
                 html.Append(section.ToHtml());
 
             }
             // Thumbnail
-            var thumbnailData = new { controlType = 0, pageSettingsSlice = new { isDefaultDescription = this.isDefaultDescription, isDefaultThumbnail = string.IsNullOrEmpty(ThumbnailUrl) } };
+            var thumbnailData = new { controlType = 0, pageSettingsSlice = new { isDefaultDescription = isDefaultDescription, isDefaultThumbnail = string.IsNullOrEmpty(ThumbnailUrl) } };
             html.Append($@"<div data-sp-canvascontrol="""" data-sp-canvasdataversion=""1.0"" data-sp-controldata=""{JsonSerializer.Serialize(thumbnailData).Replace("\"", "&quot;")}""></div>");
 
             html.Append("</div>");
@@ -859,7 +840,9 @@ namespace PnP.Core.Model.SharePoint
 
         #region From Html        
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         internal async static Task<Page> LoadPageAsync(IList pagesLibrary, IListItem item)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
             if (item.Values.ContainsKey(PageConstants.ClientSideApplicationId) && item.Values[PageConstants.ClientSideApplicationId] != null && item.Values[PageConstants.ClientSideApplicationId].ToString().Equals(PageConstants.SitePagesFeatureId, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -868,7 +851,7 @@ namespace PnP.Core.Model.SharePoint
                     pageTitle = Convert.ToString(item.Values[PageConstants.Title]),
                     pageId = item.Id
                 };
-                
+
                 // set layout type
                 if (item.Values.ContainsKey(PageConstants.PageLayoutType) && item.Values[PageConstants.PageLayoutType] != null && !string.IsNullOrEmpty(item.Values[PageConstants.PageLayoutType].ToString()))
                 {
@@ -887,7 +870,7 @@ namespace PnP.Core.Model.SharePoint
                 }
                 else
                 {
-                    throw new Exception($"Page layout type could not be determined for page");
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_LayoutUndetermined);
                 }
 
                 if (loadedPage.LayoutType == PageLayoutType.Spaces)
@@ -937,9 +920,9 @@ namespace PnP.Core.Model.SharePoint
 
         private void LoadFromHtml(string html, string pageHeaderHtml)
         {
-            if (String.IsNullOrEmpty(html))
+            if (string.IsNullOrEmpty(html))
             {
-                throw new ArgumentException("Passed html cannot be null or empty");
+                throw new ArgumentNullException(nameof(pageHeaderHtml));
             }
 
             HtmlParser parser = new HtmlParser(new HtmlParserOptions() { IsEmbedded = true });
@@ -968,7 +951,7 @@ namespace PnP.Core.Model.SharePoint
                         // Handle control positioning in sections and columns
                         ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis);
 
-                        this.AddControl(control);
+                        AddControl(control);
                     }
                     else if (controlType == typeof(ClientSideWebPart))
                     {
@@ -981,7 +964,7 @@ namespace PnP.Core.Model.SharePoint
                         // Handle control positioning in sections and columns
                         ApplySectionAndColumn(control, control.SpControlData.Position, control.SpControlData.Emphasis);
 
-                        this.AddControl(control);
+                        AddControl(control);
                     }
                     else if (controlType == typeof(CanvasColumn))
                     {
@@ -997,15 +980,15 @@ namespace PnP.Core.Model.SharePoint
                         CanvasSection currentSection = null;
                         if (sectionData.Position != null)
                         {
-                            currentSection = this.sections.Where(p => p.Order == sectionData.Position.ZoneIndex).FirstOrDefault();
+                            currentSection = sections.Where(p => p.Order == sectionData.Position.ZoneIndex).FirstOrDefault();
                         }
 
                         if (currentSection == null)
                         {
                             if (sectionData.Position != null)
                             {
-                                this.AddSection(new CanvasSection(this) { ZoneEmphasis = sectionData.Emphasis != null ? sectionData.Emphasis.ZoneEmphasis : 0 }, sectionData.Position.ZoneIndex);
-                                currentSection = this.sections.Where(p => p.Order == sectionData.Position.ZoneIndex).First();
+                                AddSection(new CanvasSection(this) { ZoneEmphasis = sectionData.Emphasis != null ? sectionData.Emphasis.ZoneEmphasis : 0 }, sectionData.Position.ZoneIndex);
+                                currentSection = sections.Where(p => p.Order == sectionData.Position.ZoneIndex).First();
                             }
                         }
 
@@ -1032,12 +1015,12 @@ namespace PnP.Core.Model.SharePoint
                                 {
                                     // TODO
                                     //this.thumbnailUrl = Values[PageConstants.BannerImageUrlField] != null ? ((FieldUrlValue)this.PageListItem[BannerImageUrlField]).Url : string.Empty;
-                                    this.ThumbnailUrl = PageListItem.Values[PageConstants.BannerImageUrlField] != null ? PageListItem.Values[PageConstants.BannerImageUrlField].ToString() : string.Empty;
+                                    ThumbnailUrl = PageListItem.Values[PageConstants.BannerImageUrlField] != null ? PageListItem.Values[PageConstants.BannerImageUrlField].ToString() : string.Empty;
                                 }
                             }
                             if (sectionData.PageSettingsSlice.IsDefaultDescription.HasValue)
                             {
-                                this.isDefaultDescription = sectionData.PageSettingsSlice.IsDefaultDescription.Value;
+                                isDefaultDescription = sectionData.PageSettingsSlice.IsDefaultDescription.Value;
                             }
                         }
                     }
@@ -1047,24 +1030,24 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Perform vertical section column matchup if that did not happen yet
-            var verticalSectionColumn = this.sections.Where(p => p.VerticalSectionColumn != null).FirstOrDefault();
+            var verticalSectionColumn = sections.Where(p => p.VerticalSectionColumn != null).FirstOrDefault();
             // Only continue if the vertical section column we found was "standalone" and not yet matched with other columns
             if (verticalSectionColumn != null && verticalSectionColumn.Columns.Count == 1)
             {
                 // find another, non vertical section, column with the same zoneindex
-                var matchedUpSection = this.sections.Where(p => p.VerticalSectionColumn == null && p.Order == verticalSectionColumn.Order).FirstOrDefault();
+                var matchedUpSection = sections.Where(p => p.VerticalSectionColumn == null && p.Order == verticalSectionColumn.Order).FirstOrDefault();
                 if (matchedUpSection == null)
                 {
                     // matchup did not yet happen, so let's handle it now
                     // Get the top section
-                    var topSection = this.sections.Where(p => p.VerticalSectionColumn == null).OrderBy(p => p.Order).FirstOrDefault();
+                    var topSection = sections.Where(p => p.VerticalSectionColumn == null).OrderBy(p => p.Order).FirstOrDefault();
                     if (topSection != null)
                     {
                         // Add the "standalone" vertical section column to this section
-                        (topSection as CanvasSection).MergeVerticalSectionColumn(verticalSectionColumn.Columns[0] as CanvasColumn);
+                        topSection.MergeVerticalSectionColumn(verticalSectionColumn.Columns[0] as CanvasColumn);
 
                         // Move the controls to the new section/column
-                        var controlsToMove = this.controls.Where(p => p.Section == verticalSectionColumn);
+                        var controlsToMove = Controls.Where(p => p.Section == verticalSectionColumn);
                         if (controlsToMove.Any())
                         {
                             foreach (var controlToMove in controlsToMove)
@@ -1074,13 +1057,13 @@ namespace PnP.Core.Model.SharePoint
                         }
 
                         // Remove the "standalone" vertical section column section
-                        this.sections.Remove(verticalSectionColumn);
+                        sections.Remove(verticalSectionColumn);
                     }
                 }
             }
 
             // Perform section type detection
-            foreach (var section in this.sections)
+            foreach (var section in sections)
             {
                 if (section.VerticalSectionColumn == null)
                 {
@@ -1168,7 +1151,7 @@ namespace PnP.Core.Model.SharePoint
                         };
                         control.FromHtml(clientSideHeaderControl);
 
-                        headerControls.Add(control);
+                        HeaderControls.Add(control);
                         headerControlOrder++;
                     }
                 }
@@ -1176,13 +1159,13 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 // Load the page header
-                this.pageHeader.FromHtml(pageHeaderHtml);
+                pageHeader.FromHtml(pageHeaderHtml);
             }
         }
 
         private void ReIndex()
         {
-            foreach (var section in this.sections.OrderBy(s => s.Order))
+            foreach (var section in sections.OrderBy(s => s.Order))
             {
                 foreach (var column in section.Columns.OrderBy(c => c.Order))
                 {
@@ -1200,11 +1183,11 @@ namespace PnP.Core.Model.SharePoint
         {
             if (position == null)
             {
-                var currentSection = this.sections.FirstOrDefault();
+                var currentSection = sections.FirstOrDefault();
                 if (currentSection == null)
                 {
-                    this.AddSection(new CanvasSection(this) { ZoneEmphasis = 0 }, 0);
-                    currentSection = this.sections.FirstOrDefault();
+                    AddSection(new CanvasSection(this) { ZoneEmphasis = 0 }, 0);
+                    currentSection = sections.FirstOrDefault();
                 }
 
                 var currentColumn = currentSection.Columns.FirstOrDefault();
@@ -1219,11 +1202,11 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                var currentSection = this.sections.Where(p => p.Order == position.ZoneIndex).FirstOrDefault();
+                var currentSection = sections.Where(p => p.Order == position.ZoneIndex).FirstOrDefault();
                 if (currentSection == null)
                 {
-                    this.AddSection(new CanvasSection(this) { ZoneEmphasis = emphasis != null ? emphasis.ZoneEmphasis : 0 }, position.ZoneIndex);
-                    currentSection = this.sections.Where(p => p.Order == position.ZoneIndex).First();
+                    AddSection(new CanvasSection(this) { ZoneEmphasis = emphasis != null ? emphasis.ZoneEmphasis : 0 }, position.ZoneIndex);
+                    currentSection = sections.Where(p => p.Order == position.ZoneIndex).First();
                 }
 
                 var currentColumn = currentSection.Columns.Where(p => p.Order == position.SectionIndex).FirstOrDefault();
@@ -1300,18 +1283,18 @@ namespace PnP.Core.Model.SharePoint
             }
 
             var pageHeaderHtml = "";
-            if (this.pageHeader != null && this.pageHeader.Type != PageHeaderType.None && LayoutType != PageLayoutType.RepostPage
-                && this.LayoutType != PageLayoutType.Topic)
+            if (pageHeader != null && pageHeader.Type != PageHeaderType.None && LayoutType != PageLayoutType.RepostPage
+                && LayoutType != PageLayoutType.Topic)
             {
                 // this triggers resolving of the header image which has to be done early as otherwise there will be version conflicts
                 // (see here: https://github.com/SharePoint/PnP-Sites-Core/issues/2203)
-                pageHeaderHtml = this.pageHeader.ToHtml(this.PageTitle);
+                pageHeaderHtml = pageHeader.ToHtml(PageTitle);
             }
 
-            if (this.LayoutType == PageLayoutType.Topic)
+            if (LayoutType == PageLayoutType.Topic)
             {
                 // If we have extra header controls (e.g. with topic pages) then we need to persist those controls to a html snippet that will need to be embedded in the header
-                if (this.headerControls.Any())
+                if (HeaderControls.Any())
                 {
                     pageHeaderHtml = $"<div>{HeaderControlsToHtml()}</div>";
                 }
@@ -1362,20 +1345,20 @@ namespace PnP.Core.Model.SharePoint
                 PageListItem[PageConstants.Title] = string.IsNullOrWhiteSpace(pageTitle) ? Path.GetFileNameWithoutExtension(pageName) : pageTitle;
                 PageListItem[PageConstants.ClientSideApplicationId] = PageConstants.SitePagesFeatureId;
 
-                if (this.LayoutType == PageLayoutType.Spaces)
+                if (LayoutType == PageLayoutType.Spaces)
                 {
                     PageListItem[PageConstants.PageLayoutType] = PageConstants.SpacesLayoutType;
-                    if (!string.IsNullOrEmpty(this.SpaceContent))
+                    if (!string.IsNullOrEmpty(SpaceContent))
                     {
-                        PageListItem[PageConstants.SpaceContentField] = this.SpaceContent;
+                        PageListItem[PageConstants.SpaceContentField] = SpaceContent;
                     }
                 }
-                else if (this.LayoutType == PageLayoutType.Topic)
+                else if (LayoutType == PageLayoutType.Topic)
                 {
                     PageListItem[PageConstants.PageLayoutType] = PageConstants.TopicLayoutType;
-                    PageListItem[PageConstants.TopicEntityId] = this.EntityId;
-                    PageListItem[PageConstants.TopicEntityRelations] = this.EntityRelations;
-                    PageListItem[PageConstants.TopicEntityType] = this.EntityType;
+                    PageListItem[PageConstants.TopicEntityId] = EntityId;
+                    PageListItem[PageConstants.TopicEntityRelations] = EntityRelations;
+                    PageListItem[PageConstants.TopicEntityType] = EntityType;
 
                     // Set the _SPSitePageFlags field
                     PageListItem[PageConstants._SPSitePageFlags] = ";#TopicPage;#";
@@ -1383,9 +1366,9 @@ namespace PnP.Core.Model.SharePoint
                 }
                 else
                 {
-                    PageListItem[PageConstants.PageLayoutType] = this.layoutType.ToString();
+                    PageListItem[PageConstants.PageLayoutType] = layoutType.ToString();
                 }
-                if (this.layoutType == PageLayoutType.Article || this.LayoutType == PageLayoutType.Spaces)
+                if (layoutType == PageLayoutType.Article || LayoutType == PageLayoutType.Spaces)
                 {
                     PageListItem[PageConstants.BannerImageUrl] = "/_layouts/15/images/sitepagethumbnail.png";
                 }
@@ -1399,21 +1382,21 @@ namespace PnP.Core.Model.SharePoint
             {
                 // We're updating an existing page
                 updatingExistingPage = true;
-                if (!string.IsNullOrWhiteSpace(this.pageTitle))
+                if (!string.IsNullOrWhiteSpace(pageTitle))
                 {
-                    PageListItem[PageConstants.Title] = this.pageTitle;
+                    PageListItem[PageConstants.Title] = pageTitle;
                 }
             }
 
             // Persist to page field
-            if (this.LayoutType == PageLayoutType.RepostPage)
+            if (LayoutType == PageLayoutType.RepostPage)
             {
                 PageListItem[PageConstants.ContentTypeId] = PageConstants.RepostPage;
                 PageListItem[PageConstants.CanvasField] = "";
                 PageListItem[PageConstants.PageLayoutContentField] = "";
-                if (!string.IsNullOrEmpty(this.ThumbnailUrl))
+                if (!string.IsNullOrEmpty(ThumbnailUrl))
                 {
-                    PageListItem[PageConstants.BannerImageUrl] = this.ThumbnailUrl;
+                    PageListItem[PageConstants.BannerImageUrl] = ThumbnailUrl;
                 }
                 if (updatingExistingPage)
                 {
@@ -1428,18 +1411,18 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                if (this.layoutType == PageLayoutType.Home && this.KeepDefaultWebParts)
+                if (layoutType == PageLayoutType.Home && KeepDefaultWebParts)
                 {
                     PageListItem[PageConstants.CanvasField] = "";
                 }
                 else
                 {
-                    PageListItem[PageConstants.CanvasField] = this.ToHtml();
+                    PageListItem[PageConstants.CanvasField] = ToHtml();
                 }
 
-                if (!string.IsNullOrEmpty(this.ThumbnailUrl))
+                if (!string.IsNullOrEmpty(ThumbnailUrl))
                 {
-                    PageListItem[PageConstants.BannerImageUrl] = this.ThumbnailUrl;
+                    PageListItem[PageConstants.BannerImageUrl] = ThumbnailUrl;
                 }
 
                 //// The page must first be saved, otherwise the page contents gets erased
@@ -1455,9 +1438,9 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Persist the page header
-            if (this.pageHeader.Type == PageHeaderType.None)
+            if (pageHeader.Type == PageHeaderType.None)
             {
-                PageListItem[PageConstants.PageLayoutContentField] = ClientSidePageHeader.NoHeader(this.pageTitle);
+                PageListItem[PageConstants.PageLayoutContentField] = ClientSidePageHeader.NoHeader(pageTitle);
                 if (PageListItem.Values.ContainsKey(PageConstants._AuthorByline))
                 {
                     PageListItem[PageConstants._AuthorByline] = null;
@@ -1472,7 +1455,7 @@ namespace PnP.Core.Model.SharePoint
                 PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
 
                 // AuthorByline depends on a field holding the author values
-                if (this.pageHeader.AuthorByLineId > -1)
+                if (pageHeader.AuthorByLineId > -1)
                 {
                     throw new Exception("TODO!!");
                     // TODO
@@ -1486,9 +1469,9 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 // Topic header needs to be persisted in a field
-                if (!string.IsNullOrEmpty(this.pageHeader.TopicHeader))
+                if (!string.IsNullOrEmpty(pageHeader.TopicHeader))
                 {
-                    PageListItem[PageConstants._TopicHeader] = this.PageHeader.TopicHeader;
+                    PageListItem[PageConstants._TopicHeader] = PageHeader.TopicHeader;
                 }
             }
 
@@ -1499,10 +1482,10 @@ namespace PnP.Core.Model.SharePoint
 
             if (int.TryParse(PageListItem[PageConstants.IdField].ToString(), out int pageIdValue))
             {
-                this.pageId = pageIdValue;
+                pageId = pageIdValue;
             }
 
-            
+
             // Try to set the page banner image url if not yet set
             bool isDirty = false;
             /*
@@ -1560,24 +1543,24 @@ namespace PnP.Core.Model.SharePoint
             }
             */
 
-            if (this.LayoutType != PageLayoutType.Spaces)
+            if (LayoutType != PageLayoutType.Spaces)
             {
-                if (PageListItem[PageConstants.PageLayoutType] as string != this.layoutType.ToString())
+                if (PageListItem[PageConstants.PageLayoutType] as string != layoutType.ToString())
                 {
-                    PageListItem[PageConstants.PageLayoutType] = this.layoutType.ToString();
+                    PageListItem[PageConstants.PageLayoutType] = layoutType.ToString();
                     isDirty = true;
                 }
             }
 
             // Try to set the page description if not yet set
-            if ((this.layoutType == PageLayoutType.Article
-                || this.LayoutType == PageLayoutType.Spaces) &&
+            if ((layoutType == PageLayoutType.Article
+                || LayoutType == PageLayoutType.Spaces) &&
                 PageListItem.Values.ContainsKey(PageConstants.DescriptionField))
             {
                 if (PageListItem[PageConstants.DescriptionField] == null || string.IsNullOrEmpty(PageListItem[PageConstants.DescriptionField].ToString()))
                 {
                     string previewText = "";
-                    foreach (var control in this.Controls)
+                    foreach (var control in Controls)
                     {
                         if (control is ClientSideText)
                         {
@@ -1604,15 +1587,15 @@ namespace PnP.Core.Model.SharePoint
             //if (!updatingExistingPage)
             //{
 
-                await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
+            await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
             //}
             //else
             //{
-                //await PageListItem.UpdateAsync().ConfigureAwait(false);
+            //await PageListItem.UpdateAsync().ConfigureAwait(false);
             //}
 
-                //this.Context.Web.Context.Load(item);
-                //this.Context.ExecuteQueryRetry();
+            //this.Context.Web.Context.Load(item);
+            //this.Context.ExecuteQueryRetry();
             //}
 
             //this.pageListItem = item;
@@ -1657,7 +1640,7 @@ namespace PnP.Core.Model.SharePoint
         private async Task ValidateOneColumnFullWidthSectionUsageAsync()
         {
             bool hasOneColumnFullWidthSection = false;
-            foreach (var section in this.sections)
+            foreach (var section in sections)
             {
                 if (section.Type == CanvasSectionTemplate.OneColumnFullWidth)
                 {
@@ -1670,7 +1653,7 @@ namespace PnP.Core.Model.SharePoint
                 await PnPContext.Web.EnsurePropertiesAsync(p => p.WebTemplate).ConfigureAwait(true);
                 if (!PnPContext.Web.WebTemplate.Equals("SITEPAGEPUBLISHING", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    throw new Exception($"You can't use a OneColumnFullWidth section in this site template ({PnPContext.Web.WebTemplate})");
+                    throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Page_CantUseFullWidthSection, PnPContext.Web.WebTemplate));
                 }
             }
         }
@@ -1717,9 +1700,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public async Task DemoteNewsArticleAsync()
         {
-            if (this.LayoutType != PageLayoutType.Article)
+            if (LayoutType != PageLayoutType.Article)
             {
-                throw new Exception("You can't promote a home page as news article");
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_CantPromoteHomePageAsNews);
             }
 
             // ensure we do have the page list item loaded
@@ -1740,9 +1723,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public async Task PromoteAsNewsArticleAsync()
         {
-            if (this.LayoutType == PageLayoutType.Home || this.layoutType == PageLayoutType.SingleWebPartAppPage)
+            if (LayoutType == PageLayoutType.Home || layoutType == PageLayoutType.SingleWebPartAppPage)
             {
-                throw new Exception("You can only promote article and repost pages as news article");
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_PageCannotBePromotedAsNews);
             }
 
             // ensure we do have the page list item loaded
@@ -1765,9 +1748,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public async Task PromoteAsHomePageAsync()
         {
-            if (this.LayoutType != PageLayoutType.Home)
+            if (LayoutType != PageLayoutType.Home)
             {
-                throw new Exception("You can only promote home pages as site home page");
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_CanOnlyPromoteHomePagesAsSiteHomePage);
             }
 
             // ensure we do have the page list item loaded
@@ -1788,7 +1771,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (PageListItem == null)
             {
-                throw new ArgumentException($"Page {this.pageName} was not loaded/saved to SharePoint and therefore can't be deleted");
+                throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Page_PageWasNotSaved, pageName));
             }
 
             await PageListItem.DeleteAsync().ConfigureAwait(false);
@@ -1821,7 +1804,7 @@ namespace PnP.Core.Model.SharePoint
 
                 if (!clientSideComponents.Any())
                 {
-                    throw new ArgumentException("No client side components could be returned for this web...should not happen but it did...");
+                    throw new ClientException(PnPCoreResources.Exception_Page_NoClientSideComponentsRetrieved);
                 }
 
                 if (!string.IsNullOrEmpty(name))
@@ -1833,7 +1816,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                throw new ArgumentException("No client side components could be returned for this web...should not happen but it did...");
+                throw new ClientException(PnPCoreResources.Exception_Page_NoClientSideComponentsRetrieved);
             }
 
         }

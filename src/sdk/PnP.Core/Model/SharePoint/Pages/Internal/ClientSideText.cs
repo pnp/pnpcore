@@ -22,9 +22,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         internal ClientSideText() : base()
         {
-            this.controlType = 4;
-            this.Rte = "";
-            this.PreviewText = "";
+            controlType = 4;
+            Rte = "";
+            PreviewText = "";
         }
         #endregion
 
@@ -70,60 +70,61 @@ namespace PnP.Core.Model.SharePoint
         public override string ToHtml(float controlIndex)
         {
             // Can this control be hosted in this section type?
-            if (this.Section.Type == CanvasSectionTemplate.OneColumnFullWidth)
+            if (Section.Type == CanvasSectionTemplate.OneColumnFullWidth)
             {
-                throw new Exception("You cannot host text controls inside a one column full width section, only an image web part or hero web part are allowed");
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_ControlNotAllowedInFullWidthSection);
             }
 
             // Obtain the json data
             ClientSideTextControlData controlData = new ClientSideTextControlData()
             {
-                ControlType = this.ControlType,
-                Id = this.InstanceId.ToString("D"),
+                ControlType = ControlType,
+                Id = InstanceId.ToString("D"),
                 Position = new ClientSideCanvasControlPosition()
                 {
-                    ZoneIndex = this.Section.Order,
-                    SectionIndex = this.Column.Order,
-                    SectionFactor = this.Column.ColumnFactor,
-                    LayoutIndex = this.Column.LayoutIndex,
+                    ZoneIndex = Section.Order,
+                    SectionIndex = Column.Order,
+                    SectionFactor = Column.ColumnFactor,
+                    LayoutIndex = Column.LayoutIndex,
                     ControlIndex = controlIndex,
                 },
                 Emphasis = new ClientSideSectionEmphasis()
                 {
-                    ZoneEmphasis = this.Column.VerticalSectionEmphasis.HasValue ? this.Column.VerticalSectionEmphasis.Value : this.Section.ZoneEmphasis,
+                    ZoneEmphasis = Column.VerticalSectionEmphasis.HasValue ? Column.VerticalSectionEmphasis.Value : Section.ZoneEmphasis,
                 },
                 EditorType = "CKEditor"
             };
 
 
-            if (this.section.Type == CanvasSectionTemplate.OneColumnVerticalSection)
+            if (section.Type == CanvasSectionTemplate.OneColumnVerticalSection)
             {
-                if (this.section.Columns.First().Equals(this.Column))
+                if (section.Columns.First().Equals(Column))
                 {
                     controlData.Position.SectionFactor = 12;
                 }
             }
 
-            //jsonControlData = JsonConvert.SerializeObject(controlData);
             jsonControlData = JsonSerializer.Serialize(controlData);
 
             try
             {
-                var nodeList = new HtmlParser().ParseFragment(this.Text, null);
-                this.PreviewText = string.Concat(nodeList.Select(x => x.Text()));
+                var nodeList = new HtmlParser().ParseFragment(Text, null);
+                PreviewText = string.Concat(nodeList.Select(x => x.Text()));
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch { }
+#pragma warning restore CA1031 // Do not catch general exception types
 
             StringBuilder html = new StringBuilder(100);
-            html.Append($@"<div {CanvasControlAttribute}=""{this.CanvasControlData}"" {CanvasDataVersionAttribute}=""{ this.DataVersion}""  {ControlDataAttribute}=""{this.jsonControlData.Replace("\"", "&quot;")}"">");
-            html.Append($@"<div {TextRteAttribute}=""{this.Rte}"">");
-            if (this.Text.Trim().StartsWith("<p>", StringComparison.InvariantCultureIgnoreCase))
+            html.Append($@"<div {CanvasControlAttribute}=""{CanvasControlData}"" {CanvasDataVersionAttribute}=""{ DataVersion}""  {ControlDataAttribute}=""{jsonControlData.Replace("\"", "&quot;")}"">");
+            html.Append($@"<div {TextRteAttribute}=""{Rte}"">");
+            if (Text.Trim().StartsWith("<p>", StringComparison.InvariantCultureIgnoreCase))
             {
-                html.Append(this.Text);
+                html.Append(Text);
             }
             else
             {
-                html.Append($@"<p>{this.Text}</p>");
+                html.Append($@"<p>{Text}</p>");
             }
             html.Append("</div>");
             html.Append("</div>");
@@ -140,12 +141,12 @@ namespace PnP.Core.Model.SharePoint
 
             if (div != null)
             {
-                this.Rte = div.GetAttribute(TextRteAttribute);
+                Rte = div.GetAttribute(TextRteAttribute);
             }
             else
             {
                 // supporting updated rendering of Text controls, no nested DIV tag with the data-sp-rte attribute...so HTML content is embedded at the root
-                this.Rte = "";
+                Rte = "";
                 div = element;
             }
 
@@ -154,23 +155,15 @@ namespace PnP.Core.Model.SharePoint
             if ((div.FirstChild != null && (div.FirstChild as IElement) != null && (div.FirstChild as IElement).TagName.Equals("P", StringComparison.InvariantCultureIgnoreCase)) &&
                 (div.ChildElementCount == 1))
             {
-                this.Text = (div.FirstChild as IElement).InnerHtml;
+                Text = (div.FirstChild as IElement).InnerHtml;
             }
             else
             {
-                this.Text = div.InnerHtml;
+                Text = div.InnerHtml;
             }
 
-            // load data from the data-sp-controldata attribute
-            //var jsonSerializerSettings = new JsonSerializerSettings()
-            //{
-            //    MissingMemberHandling = MissingMemberHandling.Ignore
-            //};
-            var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-
-            //this.spControlData = JsonConvert.DeserializeObject<ClientSideTextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), jsonSerializerSettings);
-            this.SpControlData = JsonSerializer.Deserialize<ClientSideTextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), jsonSerializerSettings);
-            this.controlType = this.SpControlData.ControlType;
+            SpControlData = JsonSerializer.Deserialize<ClientSideTextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            controlType = SpControlData.ControlType;
         }
         #endregion
     }

@@ -9,7 +9,7 @@
         /// Layout using a full width image as header background with a title
         /// </summary>
         FullWidthImage,
-        
+
         /// <summary>
         /// No image in the header background, only a title
         /// </summary>

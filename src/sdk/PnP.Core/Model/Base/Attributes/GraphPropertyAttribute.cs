@@ -13,7 +13,7 @@
         /// <summary>
         /// Is this property an expandable property?
         /// </summary>
-        public bool Expandable { get; set; }        
+        public bool Expandable { get; set; }
 
         /// <summary>
         /// Model property to define that a property can only be handled using the Microsoft Graph beta endpoint

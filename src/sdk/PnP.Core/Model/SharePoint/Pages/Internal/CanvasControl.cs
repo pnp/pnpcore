@@ -32,11 +32,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         internal CanvasControl()
         {
-            this.dataVersion = "1.0";
-            this.canvasDataVersion = "1.0";
-            this.instanceId = Guid.NewGuid();
-            this.canvasControlData = "";
-            this.order = 0;
+            dataVersion = "1.0";
+            canvasDataVersion = "1.0";
+            instanceId = Guid.NewGuid();
+            canvasControlData = "";
+            order = 0;
         }
         #endregion
 
@@ -48,7 +48,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.section;
+                return section;
             }
         }
 
@@ -59,7 +59,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.column;
+                return column;
             }
         }
 
@@ -136,11 +136,11 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.order;
+                return order;
             }
             set
             {
-                this.order = value;
+                order = value;
             }
         }
 
@@ -163,7 +163,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public void Delete()
         {
-            this.Column.Section.Page.Controls.Remove(this);
+            Column.Section.Page.Controls.Remove(this);
         }
 
         /// <summary>
@@ -172,8 +172,8 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="newSection">New section that will host the control</param>
         public void Move(ICanvasSection newSection)
         {
-            this.section = newSection;
-            this.column = newSection.DefaultColumn;
+            section = newSection;
+            column = newSection.DefaultColumn;
         }
 
         /// <summary>
@@ -193,8 +193,8 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="newColumn">New column that will host the control</param>
         public void Move(ICanvasColumn newColumn)
         {
-            this.section = newColumn.Section;
-            this.column = newColumn;
+            section = newColumn.Section;
+            column = newColumn;
         }
 
         /// <summary>
@@ -214,11 +214,11 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="newSection">New section that will host the control</param>
         public void MovePosition(ICanvasSection newSection)
         {
-            var currentSection = this.Section;
-            this.section = newSection;
-            this.column = newSection.DefaultColumn;
+            var currentSection = Section;
+            section = newSection;
+            column = newSection.DefaultColumn;
             ReindexSection(currentSection);
-            ReindexSection(this.Section);
+            ReindexSection(Section);
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="position">New position for the control in the new section</param>
         public void MovePosition(ICanvasSection newSection, int position)
         {
-            var currentSection = this.Section;
+            var currentSection = Section;
             MovePosition(newSection);
             ReindexSection(currentSection);
             MovePosition(position);
@@ -240,11 +240,11 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="newColumn">New column that will host the control</param>
         public void MovePosition(ICanvasColumn newColumn)
         {
-            var currentColumn = this.Column;
-            this.section = newColumn.Section;
-            this.column = newColumn;
+            var currentColumn = Column;
+            section = newColumn.Section;
+            column = newColumn;
             ReindexColumn(currentColumn);
-            ReindexColumn(this.Column);
+            ReindexColumn(Column);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="position">New position for the control in the new column</param>
         public void MovePosition(ICanvasColumn newColumn, int position)
         {
-            var currentColumn = this.Column;
+            var currentColumn = Column;
             MovePosition(newColumn);
             ReindexColumn(currentColumn);
             MovePosition(position);
@@ -269,16 +269,16 @@ namespace PnP.Core.Model.SharePoint
             // Ensure we're having a clean sequence before starting
             ReindexColumn();
 
-            if (position > this.Order)
+            if (position > Order)
             {
                 position++;
             }
 
-            foreach (var control in this.section.Page.Controls.Where(c => c.Section == this.section && c.Column == this.column && c.Order >= position).OrderBy(p => p.Order))
+            foreach (var control in section.Page.Controls.Where(c => c.Section == section && c.Column == column && c.Order >= position).OrderBy(p => p.Order))
             {
                 control.Order = control.Order + 1;
             }
-            this.Order = position;
+            Order = position;
 
             // Ensure we're having a clean sequence to return
             ReindexColumn();
@@ -286,7 +286,7 @@ namespace PnP.Core.Model.SharePoint
 
         private void ReindexColumn()
         {
-            ReindexColumn(this.Column);
+            ReindexColumn(Column);
         }
 
         private void ReindexColumn(ICanvasColumn column)
@@ -320,14 +320,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Deserialize the json string
-            //var jsonSerializerSettings = new JsonSerializerSettings()
-            //{
-            //    MissingMemberHandling = MissingMemberHandling.Ignore
-            //};
-            var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-
-            //var controlData = JsonConvert.DeserializeObject<ClientSideCanvasControlData>(controlDataJson, jsonSerializerSettings);
-            var controlData = JsonSerializer.Deserialize<ClientSideCanvasControlData>(controlDataJson, jsonSerializerSettings);
+            var controlData = JsonSerializer.Deserialize<ClientSideCanvasControlData>(controlDataJson, new JsonSerializerOptions() { IgnoreNullValues = true });
 
             if (controlData.ControlType == 3)
             {
@@ -349,27 +342,19 @@ namespace PnP.Core.Model.SharePoint
         #region Internal and private methods
         internal virtual void FromHtml(IElement element)
         {
-            // deserialize control data
-            //var jsonSerializerSettings = new JsonSerializerSettings()
-            //{
-            //    MissingMemberHandling = MissingMemberHandling.Ignore
-            //};
-            var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-
-            //var controlData = JsonConvert.DeserializeObject<ClientSideCanvasControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), jsonSerializerSettings);
-            var controlData = JsonSerializer.Deserialize<ClientSideCanvasControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), jsonSerializerSettings);
+            var controlData = JsonSerializer.Deserialize<ClientSideCanvasControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
 
             // populate base object
-            this.canvasDataVersion = element.GetAttribute(CanvasControl.CanvasDataVersionAttribute);
-            this.canvasControlData = element.GetAttribute(CanvasControl.CanvasControlAttribute);
-            this.controlType = controlData.ControlType;
-            this.instanceId = new Guid(controlData.Id);
+            canvasDataVersion = element.GetAttribute(CanvasDataVersionAttribute);
+            canvasControlData = element.GetAttribute(CanvasControlAttribute);
+            controlType = controlData.ControlType;
+            instanceId = new Guid(controlData.Id);
         }
 
         internal void MoveTo(ICanvasSection newSection, ICanvasColumn newColumn)
         {
-            this.section = newSection;
-            this.column = newColumn;
+            section = newSection;
+            column = newColumn;
         }
 
         #endregion

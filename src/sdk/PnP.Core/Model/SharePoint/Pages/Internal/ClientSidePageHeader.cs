@@ -15,7 +15,6 @@ namespace PnP.Core.Model.SharePoint
         private const string NoPageHeader = "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;@@title@@&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;NoImage&quot;,&quot;textAlignment&quot;&#58;&quot;@@textalignment@@&quot;,&quot;showTopicHeader&quot;&#58;@@showtopicheader@@,&quot;showPublishDate&quot;&#58;@@showpublishdate@@,&quot;topicHeader&quot;&#58;&quot;@@topicheader@@&quot;&#125;&#125;\"></div></div>";
         private const string DefaultPageHeader = "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;@@title@@&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;@@layouttype@@&quot;,&quot;textAlignment&quot;&#58;&quot;@@textalignment@@&quot;,&quot;showTopicHeader&quot;&#58;@@showtopicheader@@,&quot;showPublishDate&quot;&#58;@@showpublishdate@@,&quot;topicHeader&quot;&#58;&quot;@@topicheader@@&quot;,&quot;authorByline&quot;&#58;[@@authorbyline@@],&quot;authors&quot;&#58;[@@authors@@]&#125;&#125;\"></div></div>";
         private const string CustomPageHeader = "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&quot;imageSource&quot;&#58;&quot;@@imageSource@@&quot;&#125;,&quot;links&quot;&#58;&#123;&#125;,&quot;customMetadata&quot;&#58;&#123;&quot;imageSource&quot;&#58;&#123;&quot;siteId&quot;&#58;&quot;@@siteId@@&quot;,&quot;webId&quot;&#58;&quot;@@webId@@&quot;,&quot;listId&quot;&#58;&quot;@@listId@@&quot;,&quot;uniqueId&quot;&#58;&quot;@@uniqueId@@&quot;&#125;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;@@title@@&quot;,&quot;imageSourceType&quot;&#58;2,&quot;layoutType&quot;&#58;&quot;@@layouttype@@&quot;,&quot;textAlignment&quot;&#58;&quot;@@textalignment@@&quot;,&quot;showTopicHeader&quot;&#58;@@showtopicheader@@,&quot;showPublishDate&quot;&#58;@@showpublishdate@@,&quot;topicHeader&quot;&#58;&quot;@@topicheader@@&quot;,&quot;authorByline&quot;&#58;[@@authorbyline@@],&quot;authors&quot;&#58;[@@authors@@],&quot;altText&quot;&#58;&quot;@@alternativetext@@&quot;,&quot;webId&quot;&#58;&quot;@@webId@@&quot;,&quot;siteId&quot;&#58;&quot;@@siteId@@&quot;,&quot;listId&quot;&#58;&quot;@@listId@@&quot;,&quot;uniqueId&quot;&#58;&quot;@@uniqueId@@&quot;@@focalPoints@@&#125;&#125;\"></div></div>";
-        private PageHeaderType pageHeaderType;
         private string imageServerRelativeUrl;
         private readonly PnPContext clientContext;
         private bool headerImageResolved;
@@ -27,13 +26,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Returns the type of header
         /// </summary>
-        public PageHeaderType Type
-        {
-            get
-            {
-                return this.pageHeaderType;
-            }
-        }
+        public PageHeaderType Type { get; private set; }
 
         /// <summary>
         /// Server relative link to page header image, set to null for default header image.
@@ -43,12 +36,12 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.imageServerRelativeUrl;
+                return imageServerRelativeUrl;
             }
             set
             {
-                this.imageServerRelativeUrl = value;
-                this.headerImageResolved = false;
+                imageServerRelativeUrl = value;
+                headerImageResolved = false;
             }
         }
 
@@ -117,16 +110,16 @@ namespace PnP.Core.Model.SharePoint
         public ClientSidePageHeader(PnPContext cc, PageHeaderType pageHeaderType, string imageServerRelativeUrl)
         {
             this.imageServerRelativeUrl = imageServerRelativeUrl;
-            this.clientContext = cc;
-            this.pageHeaderType = pageHeaderType;
-            this.LayoutType = PageHeaderLayoutType.FullWidthImage;
-            this.TextAlignment = PageHeaderTitleAlignment.Left;
-            this.ShowTopicHeader = false;
-            this.TopicHeader = "";
-            this.Authors = "";
-            this.AlternativeText = "";
-            this.ShowPublishDate = false;
-            this.AuthorByLineId = -1;
+            clientContext = cc;
+            this.Type = pageHeaderType;
+            LayoutType = PageHeaderLayoutType.FullWidthImage;
+            TextAlignment = PageHeaderTitleAlignment.Left;
+            ShowTopicHeader = false;
+            TopicHeader = "";
+            Authors = "";
+            AlternativeText = "";
+            ShowPublishDate = false;
+            AuthorByLineId = -1;
         }
 
         /// <summary>
@@ -183,9 +176,9 @@ namespace PnP.Core.Model.SharePoint
         public void FromHtml(string pageHeaderHtml)
         {
             // select all control div's
-            if (String.IsNullOrEmpty(pageHeaderHtml))
+            if (string.IsNullOrEmpty(pageHeaderHtml))
             {
-                this.pageHeaderType = PageHeaderType.Default;
+                Type = PageHeaderType.Default;
                 return;
             }
 
@@ -195,7 +188,7 @@ namespace PnP.Core.Model.SharePoint
                 var pageHeaderControl = document.All.Where(m => m.HasAttribute(CanvasControl.ControlDataAttribute)).FirstOrDefault();
                 if (pageHeaderControl != null)
                 {
-                    string pageHeaderData = pageHeaderControl.GetAttribute(ClientSideWebPart.ControlDataAttribute);
+                    string pageHeaderData = pageHeaderControl.GetAttribute(CanvasControl.ControlDataAttribute);
                     string decoded = "";
 
                     if (pageHeaderData.Contains("%7B") && pageHeaderData.Contains("%22") && pageHeaderData.Contains("%7D"))
@@ -207,139 +200,88 @@ namespace PnP.Core.Model.SharePoint
                         decoded = WebUtility.HtmlDecode(pageHeaderData);
                     }
 
-                    //JObject wpJObject = JObject.Parse(decoded);
                     var wpJObject = JsonDocument.Parse(decoded).RootElement;
 
                     // Store the server processed content as that's needed for full fidelity
-                    //if (wpJObject["serverProcessedContent"] != null)
                     if (wpJObject.TryGetProperty("serverProcessedContent", out JsonElement serverProcessedContent))
                     {
-                        //if (wpJObject["serverProcessedContent"]["imageSources"] != null && wpJObject["serverProcessedContent"]["imageSources"]["imageSource"] != null)
-                        //{
-                        //    this.imageServerRelativeUrl = wpJObject["serverProcessedContent"]["imageSources"]["imageSource"].ToString();
-                        //}
-
                         if (serverProcessedContent.TryGetProperty("imageSources", out JsonElement imageSources) && imageSources.TryGetProperty("imageSource", out JsonElement imageSource))
                         {
-                            this.imageServerRelativeUrl = imageSource.GetString();
+                            imageServerRelativeUrl = imageSource.GetString();
                         }
 
                         // Properties that apply to all header configurations
                         if (wpJObject.TryGetProperty("properties", out JsonElement properties))
                         {
-                            //if (wpJObject["properties"]["layoutType"] != null)
-                            //{
-                            //    this.LayoutType = (PageHeaderLayoutType)Enum.Parse(typeof(PageHeaderLayoutType), wpJObject["properties"]["layoutType"].ToString());
-                            //}
                             if (properties.TryGetProperty("layoutType", out JsonElement layoutType))
                             {
-                                this.LayoutType = (PageHeaderLayoutType)Enum.Parse(typeof(PageHeaderLayoutType), layoutType.GetString());
+                                LayoutType = (PageHeaderLayoutType)Enum.Parse(typeof(PageHeaderLayoutType), layoutType.GetString());
                             }
-                            //if (wpJObject["properties"]["textAlignment"] != null)
-                            //{
-                            //    this.TextAlignment = (PageHeaderTitleAlignment)Enum.Parse(typeof(PageHeaderTitleAlignment), wpJObject["properties"]["textAlignment"].ToString());
-                            //}
+
                             if (properties.TryGetProperty("textAlignment", out JsonElement textAlignment))
                             {
-                                this.TextAlignment = (PageHeaderTitleAlignment)Enum.Parse(typeof(PageHeaderTitleAlignment), textAlignment.GetString());
+                                TextAlignment = (PageHeaderTitleAlignment)Enum.Parse(typeof(PageHeaderTitleAlignment), textAlignment.GetString());
                             }
-                            //if (wpJObject["properties"]["showTopicHeader"] != null)
-                            //{
-                            //    bool showTopicHeader = false;
-                            //    bool.TryParse(wpJObject["properties"]["showTopicHeader"].ToString(), out showTopicHeader);
-                            //    this.ShowTopicHeader = showTopicHeader;
-                            //}
+
                             if (properties.TryGetProperty("showTopicHeader", out JsonElement showTopicHeader))
                             {
-                                this.ShowTopicHeader = showTopicHeader.GetBoolean();
+                                ShowTopicHeader = showTopicHeader.GetBoolean();
                             }
-                            //if (wpJObject["properties"]["showPublishDate"] != null)
-                            //{
-                            //    bool showPublishDate = false;
-                            //    bool.TryParse(wpJObject["properties"]["showPublishDate"].ToString(), out showPublishDate);
-                            //    this.ShowPublishDate = showPublishDate;
-                            //}
+
                             if (properties.TryGetProperty("showPublishDate", out JsonElement showPublishDate))
                             {
-                                this.ShowPublishDate = showPublishDate.GetBoolean();
+                                ShowPublishDate = showPublishDate.GetBoolean();
                             }
-                            //if (wpJObject["properties"]["topicHeader"] != null)
-                            //{
-                            //    this.TopicHeader = wpJObject["properties"]["topicHeader"].ToString();
-                            //}
+
                             if (properties.TryGetProperty("topicHeader", out JsonElement topicHeader))
                             {
-                                this.TopicHeader = topicHeader.GetString();
+                                TopicHeader = topicHeader.GetString();
                             }
-                            //if (wpJObject["properties"]["authors"] != null)
-                            //{
-                            //    this.Authors = wpJObject["properties"]["authors"].ToString();
-                            //}
+
                             if (properties.TryGetProperty("authors", out JsonElement authors))
                             {
-                                this.Authors = authors.ToString();
+                                Authors = authors.ToString();
                             }
-                            //if (wpJObject["properties"]["authorByline"] != null)
-                            //{
-                            //    this.AuthorByLine = wpJObject["properties"]["authorByline"].ToString();
-                            //}
+
                             if (properties.TryGetProperty("authorByline", out JsonElement authorByline))
                             {
-                                this.AuthorByLine = authorByline.ToString();
+                                AuthorByLine = authorByline.ToString();
                             }
 
                             // Specific properties that only apply when the header has a custom image
-                            if (!string.IsNullOrEmpty(this.imageServerRelativeUrl))
+                            if (!string.IsNullOrEmpty(imageServerRelativeUrl))
                             {
-                                this.pageHeaderType = PageHeaderType.Custom;
-                                //if (wpJObject["properties"] != null)
-                                //{
-                                Guid result = new Guid();
-                                //if (wpJObject["properties"]["siteId"] != null && Guid.TryParse(wpJObject["properties"]["siteId"].ToString(), out result))
-                                //{
-                                //    this.siteId = result;
-                                //}
+                                Type = PageHeaderType.Custom;
+
                                 if (properties.TryGetProperty("siteId", out JsonElement siteId) && siteId.TryGetGuid(out Guid siteIdGuid))
                                 {
                                     this.siteId = siteIdGuid;
                                 }
-                                //if (wpJObject["properties"]["webId"] != null && Guid.TryParse(wpJObject["properties"]["webId"].ToString(), out result))
-                                //{
-                                //    this.webId = result;
-                                //}
+
                                 if (properties.TryGetProperty("webId", out JsonElement webId) && webId.TryGetGuid(out Guid webIdGuid))
                                 {
                                     this.webId = webIdGuid;
                                 }
-                                //if (wpJObject["properties"]["listId"] != null && Guid.TryParse(wpJObject["properties"]["listId"].ToString(), out result))
-                                //{
-                                //    this.listId = result;
-                                //}
+
                                 if (properties.TryGetProperty("listId", out JsonElement listId) && listId.TryGetGuid(out Guid listIdGuid))
                                 {
                                     this.listId = listIdGuid;
                                 }
-                                //if (wpJObject["properties"]["uniqueId"] != null && Guid.TryParse(wpJObject["properties"]["uniqueId"].ToString(), out result))
-                                //{
-                                //    this.uniqueId = result;
-                                //}
+
                                 if (properties.TryGetProperty("uniqueId", out JsonElement uniqueId) && uniqueId.TryGetGuid(out Guid uniqueIdGuid))
                                 {
                                     this.uniqueId = uniqueIdGuid;
                                 }
                                 if (this.siteId != Guid.Empty && this.webId != Guid.Empty && this.listId != Guid.Empty && this.uniqueId != Guid.Empty)
                                 {
-                                    this.headerImageResolved = true;
+                                    headerImageResolved = true;
                                 }
-                                //}
 
                                 System.Globalization.CultureInfo usCulture = new System.Globalization.CultureInfo("en-US");
                                 System.Globalization.CultureInfo europeanCulture = new System.Globalization.CultureInfo("nl-BE");
 
-                                //if (wpJObject["properties"]["translateX"] != null)
                                 if (properties.TryGetProperty("translateX", out JsonElement translateXElement))
                                 {
-                                    //var translateXEN = wpJObject["properties"]["translateX"].ToString();
                                     var translateXEN = translateXElement.GetDecimal().ToString();
 
                                     System.Globalization.CultureInfo cultureToUse;
@@ -357,12 +299,11 @@ namespace PnP.Core.Model.SharePoint
                                     }
 
                                     double.TryParse(translateXEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateX);
-                                    this.TranslateX = translateX;
+                                    TranslateX = translateX;
                                 }
-                                //if (wpJObject["properties"]["translateY"] != null)
+
                                 if (properties.TryGetProperty("translateY", out JsonElement translateYElement))
                                 {
-                                    //var translateYEN = wpJObject["properties"]["translateY"].ToString();
                                     var translateYEN = translateYElement.GetDecimal().ToString();
 
                                     System.Globalization.CultureInfo cultureToUse;
@@ -380,18 +321,17 @@ namespace PnP.Core.Model.SharePoint
                                     }
 
                                     double.TryParse(translateYEN, System.Globalization.NumberStyles.Float, cultureToUse, out double translateY);
-                                    this.TranslateY = translateY;
+                                    TranslateY = translateY;
                                 }
-                                //if (wpJObject["properties"]["altText"] != null)
+                                
                                 if (properties.TryGetProperty("altText", out JsonElement altText))
                                 {
-                                    //this.AlternativeText = wpJObject["properties"]["altText"].ToString();
-                                    this.AlternativeText = altText.GetString();
+                                    AlternativeText = altText.GetString();
                                 }
                             }
                             else
                             {
-                                this.pageHeaderType = PageHeaderType.Default;
+                                Type = PageHeaderType.Default;
                             }
                         }
                     }
@@ -416,7 +356,7 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Get the web part properties
-            if (!string.IsNullOrEmpty(this.ImageServerRelativeUrl) && this.clientContext != null)
+            if (!string.IsNullOrEmpty(ImageServerRelativeUrl) && clientContext != null)
             {
                 if (!headerImageResolved)
                 {
@@ -437,7 +377,7 @@ namespace PnP.Core.Model.SharePoint
                     // Populate default properties
                     var header = FillDefaultProperties(CustomPageHeader);
                     // Populate custom header specific properties
-                    return header.Replace("@@siteId@@", this.siteId.ToString()).Replace("@@webId@@", this.webId.ToString()).Replace("@@listId@@", this.listId.ToString()).Replace("@@uniqueId@@", this.uniqueId.ToString()).Replace("@@focalPoints@@", focalPoints).Replace("@@title@@", pageTitle).Replace("@@imageSource@@", this.ImageServerRelativeUrl).Replace("@@alternativetext@@", this.AlternativeText == null ? "" : this.AlternativeText);
+                    return header.Replace("@@siteId@@", siteId.ToString()).Replace("@@webId@@", webId.ToString()).Replace("@@listId@@", listId.ToString()).Replace("@@uniqueId@@", uniqueId.ToString()).Replace("@@focalPoints@@", focalPoints).Replace("@@title@@", pageTitle).Replace("@@imageSource@@", ImageServerRelativeUrl).Replace("@@alternativetext@@", AlternativeText == null ? "" : AlternativeText);
                 }
             }
 
@@ -450,9 +390,9 @@ namespace PnP.Core.Model.SharePoint
 
         private string FillDefaultProperties(string header)
         {
-            if (!string.IsNullOrEmpty(this.Authors))
+            if (!string.IsNullOrEmpty(Authors))
             {
-                string data = this.Authors.Replace("\r", "").Replace("\n", "").TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
+                string data = Authors.Replace("\r", "").Replace("\n", "").TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
                 var jsonencoded = WebUtility.HtmlEncode(data).Replace(":", "&#58;"); //.Replace("@", "%40");
                 header = header.Replace("@@authors@@", jsonencoded);
             }
@@ -461,9 +401,9 @@ namespace PnP.Core.Model.SharePoint
                 header = header.Replace("@@authors@@", "");
             }
 
-            if (!string.IsNullOrEmpty(this.AuthorByLine))
+            if (!string.IsNullOrEmpty(AuthorByLine))
             {
-                string data = this.AuthorByLine.Replace("\r", "").Replace("\n", "").Replace(" ", "").TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
+                string data = AuthorByLine.Replace("\r", "").Replace("\n", "").Replace(" ", "").TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
                 var jsonencoded = WebUtility.HtmlEncode(data).Replace(":", "&#58;");
                 header = header.Replace("@@authorbyline@@", jsonencoded);
 
@@ -482,14 +422,14 @@ namespace PnP.Core.Model.SharePoint
 
                 }
 
-                this.AuthorByLineId = userId;
+                AuthorByLineId = userId;
             }
             else
             {
                 header = header.Replace("@@authorbyline@@", "");
             }
 
-            return header.Replace("@@showtopicheader@@", this.ShowTopicHeader.ToString().ToLower()).Replace("@@showpublishdate@@", this.ShowPublishDate.ToString().ToLower()).Replace("@@topicheader@@", this.TopicHeader == null ? "" : this.TopicHeader).Replace("@@textalignment@@", this.TextAlignment.ToString()).Replace("@@layouttype@@", this.LayoutType.ToString());
+            return header.Replace("@@showtopicheader@@", ShowTopicHeader.ToString().ToLower()).Replace("@@showpublishdate@@", ShowPublishDate.ToString().ToLower()).Replace("@@topicheader@@", TopicHeader == null ? "" : TopicHeader).Replace("@@textalignment@@", TextAlignment.ToString()).Replace("@@layouttype@@", LayoutType.ToString());
         }
 
         private static string Replace1point4Defaults(string header)

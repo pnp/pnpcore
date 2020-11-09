@@ -324,5 +324,41 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(isNoScript);
             }
         }
+
+        [TestMethod]
+        public async Task SetWebPropertiesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            // Using nogroup test site here as for other modern sites the NoScript option is enabled which prevents property bag updates
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var web = await context.Web.GetAsync(p => p.AllProperties);
+
+                var propertyKey = "SetWebPropertiesTest";
+                var myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                if (myProperty == 0)
+                {
+                    web.AllProperties[propertyKey] = 55;
+                    await web.AllProperties.UpdateAsync();
+                }
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    web = await context2.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 55);
+
+                    web.AllProperties[propertyKey] = null;
+                    await web.AllProperties.UpdateAsync();
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 3))
+                {
+                    web = await context3.Web.GetAsync(p => p.AllProperties);
+                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    Assert.IsTrue(myProperty == 0);
+                }
+            }
+        }
     }
 }

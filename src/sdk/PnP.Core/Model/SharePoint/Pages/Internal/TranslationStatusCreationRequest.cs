@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Class that defines the languages for which a translation must be generated
     /// </summary>
-    public sealed class TranslationStatusCreationRequest
+    internal class TranslationStatusCreationRequest
     {
         /// <summary>
         /// List of languages to generate a translation for

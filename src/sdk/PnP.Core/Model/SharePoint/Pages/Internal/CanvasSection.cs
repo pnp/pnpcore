@@ -12,8 +12,6 @@ namespace PnP.Core.Model.SharePoint
     {
 
         #region variables
-        private readonly List<ICanvasColumn> columns = new List<ICanvasColumn>(3);
-        private readonly IPage page;
         private int zoneEmphasis;
         #endregion
 
@@ -25,8 +23,8 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(page));
             }
 
-            this.page = page;
-            this.zoneEmphasis = 0;
+            Page = page;
+            zoneEmphasis = 0;
             Order = 0;
         }
 
@@ -43,8 +41,8 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(page));
             }
 
-            this.page = page;
-            this.zoneEmphasis = 0;
+            Page = page;
+            zoneEmphasis = 0;
             Type = canvasSectionTemplate;
             Order = order;
 
@@ -53,52 +51,52 @@ namespace PnP.Core.Model.SharePoint
                 case CanvasSectionTemplate.OneColumn:
                     goto default;
                 case CanvasSectionTemplate.OneColumnFullWidth:
-                    this.columns.Add(new CanvasColumn(this, 1, 0));
+                    Columns.Add(new CanvasColumn(this, 1, 0));
                     break;
                 case CanvasSectionTemplate.OneColumnVerticalSection:
-                    this.columns.Add(new CanvasColumn(this, 1, 0, 1));
-                    this.columns.Add(new CanvasColumn(this, 1, 12, 2));
+                    Columns.Add(new CanvasColumn(this, 1, 0, 1));
+                    Columns.Add(new CanvasColumn(this, 1, 12, 2));
                     break;
                 case CanvasSectionTemplate.TwoColumn:
-                    this.columns.Add(new CanvasColumn(this, 1, 6));
-                    this.columns.Add(new CanvasColumn(this, 2, 6));
+                    Columns.Add(new CanvasColumn(this, 1, 6));
+                    Columns.Add(new CanvasColumn(this, 2, 6));
                     break;
                 case CanvasSectionTemplate.TwoColumnVerticalSection:
-                    this.columns.Add(new CanvasColumn(this, 1, 6, 1));
-                    this.columns.Add(new CanvasColumn(this, 2, 6, 1));
-                    this.columns.Add(new CanvasColumn(this, 1, 12, 2));
+                    Columns.Add(new CanvasColumn(this, 1, 6, 1));
+                    Columns.Add(new CanvasColumn(this, 2, 6, 1));
+                    Columns.Add(new CanvasColumn(this, 1, 12, 2));
                     break;
                 case CanvasSectionTemplate.ThreeColumn:
-                    this.columns.Add(new CanvasColumn(this, 1, 4));
-                    this.columns.Add(new CanvasColumn(this, 2, 4));
-                    this.columns.Add(new CanvasColumn(this, 3, 4));
+                    Columns.Add(new CanvasColumn(this, 1, 4));
+                    Columns.Add(new CanvasColumn(this, 2, 4));
+                    Columns.Add(new CanvasColumn(this, 3, 4));
                     break;
                 case CanvasSectionTemplate.ThreeColumnVerticalSection:
-                    this.columns.Add(new CanvasColumn(this, 1, 4, 1));
-                    this.columns.Add(new CanvasColumn(this, 2, 4, 1));
-                    this.columns.Add(new CanvasColumn(this, 3, 4, 1));
-                    this.columns.Add(new CanvasColumn(this, 1, 12, 2));
+                    Columns.Add(new CanvasColumn(this, 1, 4, 1));
+                    Columns.Add(new CanvasColumn(this, 2, 4, 1));
+                    Columns.Add(new CanvasColumn(this, 3, 4, 1));
+                    Columns.Add(new CanvasColumn(this, 1, 12, 2));
                     break;
                 case CanvasSectionTemplate.TwoColumnLeft:
-                    this.columns.Add(new CanvasColumn(this, 1, 8));
-                    this.columns.Add(new CanvasColumn(this, 2, 4));
+                    Columns.Add(new CanvasColumn(this, 1, 8));
+                    Columns.Add(new CanvasColumn(this, 2, 4));
                     break;
                 case CanvasSectionTemplate.TwoColumnLeftVerticalSection:
-                    this.columns.Add(new CanvasColumn(this, 1, 8, 1));
-                    this.columns.Add(new CanvasColumn(this, 2, 4, 1));
-                    this.columns.Add(new CanvasColumn(this, 1, 12, 2));
+                    Columns.Add(new CanvasColumn(this, 1, 8, 1));
+                    Columns.Add(new CanvasColumn(this, 2, 4, 1));
+                    Columns.Add(new CanvasColumn(this, 1, 12, 2));
                     break;
                 case CanvasSectionTemplate.TwoColumnRight:
-                    this.columns.Add(new CanvasColumn(this, 1, 4));
-                    this.columns.Add(new CanvasColumn(this, 2, 8));
+                    Columns.Add(new CanvasColumn(this, 1, 4));
+                    Columns.Add(new CanvasColumn(this, 2, 8));
                     break;
                 case CanvasSectionTemplate.TwoColumnRightVerticalSection:
-                    this.columns.Add(new CanvasColumn(this, 1, 4, 1));
-                    this.columns.Add(new CanvasColumn(this, 2, 8, 1));
-                    this.columns.Add(new CanvasColumn(this, 1, 12, 2));
+                    Columns.Add(new CanvasColumn(this, 1, 4, 1));
+                    Columns.Add(new CanvasColumn(this, 2, 8, 1));
+                    Columns.Add(new CanvasColumn(this, 1, 12, 2));
                     break;
                 default:
-                    this.columns.Add(new CanvasColumn(this, 1, 12));
+                    Columns.Add(new CanvasColumn(this, 1, 12));
                     break;
             }
         }
@@ -118,24 +116,12 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// <see cref="CanvasColumn"/> instances that are part of this section
         /// </summary>
-        public List<ICanvasColumn> Columns
-        {
-            get
-            {
-                return this.columns;
-            }
-        }
+        public List<ICanvasColumn> Columns { get; } = new List<ICanvasColumn>(3);
 
         /// <summary>
         /// The <see cref="IPage"/> instance holding this section
         /// </summary>
-        public IPage Page
-        {
-            get
-            {
-                return this.page;
-            }
-        }
+        public IPage Page { get; }
 
         /// <summary>
         /// Controls hosted in this section
@@ -144,7 +130,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.Page.Controls.Where(p => p.Section == this).ToList();
+                return Page.Controls.Where(p => p.Section == this).ToList();
             }
         }
 
@@ -155,12 +141,12 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                if (this.columns.Count == 0)
+                if (Columns.Count == 0)
                 {
-                    this.columns.Add(new CanvasColumn(this));
+                    Columns.Add(new CanvasColumn(this));
                 }
 
-                return this.columns.First();
+                return Columns.First();
             }
         }
 
@@ -171,7 +157,7 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.columns.Where(p => p.LayoutIndex == 2).FirstOrDefault();
+                return Columns.Where(p => p.LayoutIndex == 2).FirstOrDefault();
             }
         }
 
@@ -182,16 +168,16 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return this.zoneEmphasis;
+                return zoneEmphasis;
             }
             set
             {
                 if (value < 0 || value > 3)
                 {
-                    throw new ArgumentException($"The zoneEmphasis value needs to be between 0 and 3. See the Microsoft.SharePoint.Client.SPVariantThemeType values for the why.");
+                    throw new ArgumentException(PnPCoreResources.Exception_Page_InvalidZoneEmphasis);
                 }
 
-                this.zoneEmphasis = value;
+                zoneEmphasis = value;
             }
         }
 
@@ -205,7 +191,7 @@ namespace PnP.Core.Model.SharePoint
         internal string ToHtml()
         {
             StringBuilder html = new StringBuilder(100);
-            foreach (var column in this.columns.OrderBy(z => z.LayoutIndex).ThenBy(z => z.Order))
+            foreach (var column in Columns.OrderBy(z => z.LayoutIndex).ThenBy(z => z.Order))
             {
                 html.Append((column as CanvasColumn).ToHtml());
             }
@@ -219,14 +205,14 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(column));
             }
 
-            this.columns.Add(column);
+            Columns.Add(column);
         }
 
         internal void MergeVerticalSectionColumn(CanvasColumn column)
         {
             // What was the highest order
             int order = 1;
-            var lastColumn = this.columns.OrderBy(p => p.Order).FirstOrDefault();
+            var lastColumn = Columns.OrderBy(p => p.Order).FirstOrDefault();
             if (lastColumn != null)
             {
                 order = lastColumn.Order + 1;
@@ -236,7 +222,7 @@ namespace PnP.Core.Model.SharePoint
             column.MoveTo(this);
             column.Order = order;
 
-            this.AddColumn(column);
+            AddColumn(column);
         }
 
         #endregion
