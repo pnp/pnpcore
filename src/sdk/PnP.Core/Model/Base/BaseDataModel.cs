@@ -1151,7 +1151,6 @@ namespace PnP.Core.Model
         }
         #endregion
 
-
         public bool IsPropertyAvailable(Expression<Func<TModel, object>> expression)
         {
             if (expression == null)
@@ -1161,7 +1160,24 @@ namespace PnP.Core.Model
 
             var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
 
-            return HasValue(body.Member.Name);
+            //return HasValue(body.Member.Name);
+
+            if (HasValue(body.Member.Name))
+            {
+                if (GetValue(body.Member.Name) is IRequestable)
+                {
+                    if ((GetValue(body.Member.Name) as IRequestable).Requested)
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
 

@@ -66,24 +66,27 @@ namespace PnP.Core.Services
                 ((IRequestable)pnpObject).Requested = false;
             }
 
+            bool requested = false;
             if (apiResponse.ApiCall.Type == ApiType.SPORest)
             {
-                await FromJsonRest(pnpObject, entity, apiResponse, fromJsonCasting).ConfigureAwait(false);
+                requested = await FromJsonRest(pnpObject, entity, apiResponse, fromJsonCasting).ConfigureAwait(false);
             }
             else if (apiResponse.ApiCall.Type == ApiType.Graph || apiResponse.ApiCall.Type == ApiType.GraphBeta)
             {
-                await FromJsonGraph(pnpObject, entity, apiResponse, fromJsonCasting).ConfigureAwait(false);
+                requested = await FromJsonGraph(pnpObject, entity, apiResponse, fromJsonCasting).ConfigureAwait(false);
             }
 
             // Mark object as requested, as long as it is an IRequestable object
-            if (pnpObject.GetType().ImplementsInterface(typeof(IRequestable)))
+            if (pnpObject.GetType().ImplementsInterface(typeof(IRequestable)) && requested)
             {
                 ((IRequestable)pnpObject).Requested = true;
             }
         }
 
-        internal static async Task FromJsonRest(TransientObject pnpObject, EntityInfo entity, ApiResponse apiResponse, Func<FromJson, object> fromJsonCasting = null)
+        private static async Task<bool> FromJsonRest(TransientObject pnpObject, EntityInfo entity, ApiResponse apiResponse, Func<FromJson, object> fromJsonCasting = null)
         {
+            bool requested = false;
+
             // Get the type of the domain model we're populating
             var pnpObjectType = pnpObject.GetType();
             var metadataBasedObject = pnpObject as IMetadataExtensible;
@@ -206,6 +209,8 @@ namespace PnP.Core.Services
                             {
                                 ((IRequestableCollection)typedCollection).Requested = true;
                             }
+
+                            requested = true;
                         }
                         else if (property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty))
                         {
@@ -250,6 +255,8 @@ namespace PnP.Core.Services
                         // Set the object property value taken from the JSON payload
                         entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name,
                             GetJsonElementFromPath(property.Value, entityField.SharePointJsonPath), entityField.DataType, entityField.SharePointUseCustomMapping, fromJsonCasting));
+
+                        requested = true;
                     }
                 }
                 else
@@ -300,6 +307,8 @@ namespace PnP.Core.Services
                                 // Default mapping to dictionary can handle simple types, more complex types require custom logic
                                 AddToDictionary(dictionaryPropertyToAddValueTo, property.Name, GetJsonPropertyValue(property));
                             }
+
+                            requested = true;
                         }
                     }
                 }
@@ -317,6 +326,8 @@ namespace PnP.Core.Services
                     TrackAndUpdateMetaData(parent as IMetadataExtensible, "__next", BuildNextPageRestUrl(apiResponse.ApiCall.Request));
                 }
             }
+
+            return requested;
         }
 
 
@@ -391,8 +402,10 @@ namespace PnP.Core.Services
         /// <param name="apiResponse">Response of the API call</param>
         /// <param name="fromJsonCasting">Delegate to be called for type conversion</param>
         /// <returns></returns>
-        internal static async Task FromJsonGraph(TransientObject pnpObject, EntityInfo entity, ApiResponse apiResponse, Func<FromJson, object> fromJsonCasting = null)
+        private static async Task<bool> FromJsonGraph(TransientObject pnpObject, EntityInfo entity, ApiResponse apiResponse, Func<FromJson, object> fromJsonCasting = null)
         {
+            bool requested = false;
+
             // Get the type of the domain model we're populating
             var pnpObjectType = pnpObject.GetType();
             var metadataBasedObject = pnpObject as IMetadataExtensible;
@@ -518,6 +531,8 @@ namespace PnP.Core.Services
                             {
                                 ((IRequestableCollection)typedCollection).Requested = true;
                             }
+
+                            requested = true;
                         }
                         // Are we loading a another model type (e.g. Site.RootWeb)?
                         else if (IsModelType(entityField.PropertyInfo.PropertyType))
@@ -596,6 +611,8 @@ namespace PnP.Core.Services
                                     entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name, property.Value, entityField.DataType, entityField.GraphUseCustomMapping, fromJsonCasting));
                                 }
                             }
+
+                            requested = true;
                         }
                     }
                     else
@@ -625,6 +642,8 @@ namespace PnP.Core.Services
             {
                 metadataBasedObject.Metadata.Add(PnPConstants.MetaDataGraphId, idFieldValue);
             }
+
+            return requested;
         }
 
         private static async Task TryPopulatePnPObjectMetadataFromGraph(TransientObject pnpObject, IDataModelWithContext contextAwareObject, IMetadataExtensible targetMetadataObject, EntityInfo entity, string idFieldValue)
