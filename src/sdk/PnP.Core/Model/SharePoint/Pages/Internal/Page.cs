@@ -1109,15 +1109,15 @@ namespace PnP.Core.Model.SharePoint
                     }
                     else if (section.Columns.Count == 3)
                     {
-                        if (section.Columns[1].ColumnFactor == 6)
+                        if (section.Columns[0].ColumnFactor == 6)
                         {
                             section.Type = CanvasSectionTemplate.TwoColumnVerticalSection;
                         }
-                        else if (section.Columns[1].ColumnFactor == 4)
+                        else if (section.Columns[0].ColumnFactor == 4)
                         {
                             section.Type = CanvasSectionTemplate.TwoColumnRightVerticalSection;
                         }
-                        else if (section.Columns[1].ColumnFactor == 8)
+                        else if (section.Columns[0].ColumnFactor == 8)
                         {
                             section.Type = CanvasSectionTemplate.TwoColumnLeftVerticalSection;
                         }
