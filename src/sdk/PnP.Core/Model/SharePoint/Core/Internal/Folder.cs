@@ -317,7 +317,9 @@ namespace PnP.Core.Model.SharePoint
 
                     foreach (Folder existingFolder in folderCollection)
                     {
-                        if (string.Equals(existingFolder.Name, WebUtility.UrlDecode(folderName), StringComparison.InvariantCultureIgnoreCase))
+                        // Compare both with Url decoded as regular. See https://github.com/pnp/PnP-Sites-Core/pull/2803
+                        if (string.Equals(existingFolder.Name, WebUtility.UrlDecode(folderName), StringComparison.InvariantCultureIgnoreCase) ||
+                            string.Equals(existingFolder.Name, folderName, StringComparison.InvariantCultureIgnoreCase))
                         {
                             nextFolder = existingFolder;
                             break;
