@@ -1,10 +1,12 @@
 ﻿using PnP.Core.Model;
+using PnP.Core.Model.SharePoint;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -298,9 +300,18 @@ namespace PnP.Core.Services
                             // Add to overflow dictionary
                             if (property.Value.ValueKind == JsonValueKind.Object)
                             {
-                                // Handling of complex type via calling out to custom handler, no value is returned as the custom
-                                // handler can update multiple fields based upon what json result came back
-                                fromJsonCasting?.Invoke(new FromJson(property.Name, property.Value, Type.GetType("System.Object"), contextAwareObject.PnPContext.Logger));
+                                // Verify if we can map the received json to a supported field type
+                                var fieldType = DetectRestFieldType(property.Name, dictionaryPropertyToAddValueTo, property.Value);
+                                if (fieldType != null)
+                                {
+                                    AddToDictionary(dictionaryPropertyToAddValueTo, property.Name, fieldType.FromJson(property.Value));
+                                }
+                                else
+                                {
+                                    // Handling of complex type via calling out to custom handler, no value is returned as the custom
+                                    // handler can update multiple fields based upon what json result came back
+                                    fromJsonCasting?.Invoke(new FromJson(property.Name, property.Value, Type.GetType("System.Object"), contextAwareObject.PnPContext.Logger));
+                                }
                             }
                             else
                             {
@@ -312,6 +323,12 @@ namespace PnP.Core.Services
                         }
                     }
                 }
+            }
+
+            // Ensure all changes are reset (as setting Title on the ListItem will trigger a change)
+            if (useOverflowField)
+            {
+                dictionaryPropertyToAddValueTo.Commit();
             }
 
             // Try populate the PnP Object metadata from the mapped info
@@ -328,6 +345,23 @@ namespace PnP.Core.Services
             }
 
             return requested;
+        }
+
+        private static FieldValue DetectRestFieldType(string propertyName, TransientDictionary dictionaryPropertyToAddValueTo, JsonElement json)
+        {
+            if (json.TryGetProperty(PnPConstants.SharePointRestMetadata, out JsonElement metadata) && metadata.TryGetProperty(PnPConstants.MetaDataType, out JsonElement type))
+            {
+                switch (type.GetString())
+                {
+                    case "SP.FieldUrlValue": return new FieldUrlValue(propertyName, dictionaryPropertyToAddValueTo);
+                    default:
+                        {
+                            return null;
+                        }
+                }
+            }
+
+            return null;
         }
 
 

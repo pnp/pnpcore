@@ -1057,8 +1057,15 @@ namespace PnP.Core.Services
                         var dictionaryObject = (TransientDictionary)cp.GetValue(model);
                         foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
                         {
-                            // Let's set its value into the update message
-                            ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
+                            if (changedProp.Value is FieldValue)
+                            {
+                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, (changedProp.Value as FieldValue).ToJson());
+                            }
+                            else
+                            {
+                                // Let's set its value into the update message
+                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
+                            }
                         }
                     }
                     else if (JsonMappingHelper.IsTypeWithoutGet(changedField.PropertyInfo.PropertyType))

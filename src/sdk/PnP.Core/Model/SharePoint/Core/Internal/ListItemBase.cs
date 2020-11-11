@@ -175,8 +175,15 @@ namespace PnP.Core.Model.SharePoint
                         var dictionaryObject = (TransientDictionary)cp.GetValue(this);
                         foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
                         {
-                            // Let's set its value into the update message
-                            fieldValues.AppendLine(SetFieldValueXml(changedProp.Key, changedProp.Value, changedProp.Value?.GetType().Name, ref counter));
+                            if (changedProp.Value is FieldValue)
+                            {
+                                fieldValues.AppendLine(SetSpecialFieldValueXml(changedProp.Key, changedProp.Value as FieldValue, ref counter));
+                            }
+                            else
+                            {
+                                // Let's set its value into the update message
+                                fieldValues.AppendLine(SetFieldValueXml(changedProp.Key, changedProp.Value, changedProp.Value?.GetType().Name, ref counter));
+                            }
                         }
                     }
                     else
@@ -194,11 +201,52 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // update field values
-            xml = xml.Replace("{FieldValues}", fieldValues.ToString());
+            xml = xml.Replace(CsomHelper.FieldValues, fieldValues.ToString());
 
             // update counter
             xml = xml.Replace("{Counter}", counter.ToString());
 
+            return xml;
+        }
+
+        private static string SetSpecialFieldValueXml(string fieldName, FieldValue fieldValue, ref int counter)
+        {
+            /* Sample XML snippet for Url field
+            <Method Name="SetFieldValue" Id="17" ObjectPathId="13" Version="8">
+                <Parameters>
+                    <Parameter Type="String">Url</Parameter>
+                    <Parameter TypeId="{fa8b44af-7b43-43f2-904a-bd319497011e}">
+                        <Property Name="Description" Type="String">fdmslkfqmsl</Property>
+                        <Property Name="Url" Type="String">https://bla1</Property>
+                    </Parameter>
+                </Parameters>
+            </Method>
+
+
+            Sample snippet for an array of User fields    
+            <Method Name="SetFieldValue" Id="55" ObjectPathId="41">
+                <Parameters>
+                    <Parameter Type="String">_AuthorByline</Parameter>
+                    <Parameter Type="Array">
+                        <Object TypeId="{c956ab54-16bd-4c18-89d2-996f57282a6f}">
+                            <Property Name="Email" Type="Null" />
+                            <Property Name="LookupId" Type="Int32">14</Property>
+                            <Property Name="LookupValue" Type="Null" />
+                        </Object>
+                    </Parameter>
+                </Parameters>
+            </Method>
+
+            */
+            string xml = CsomHelper.ListItemSpecialField;
+
+            xml = xml.Replace("{Counter}", counter.ToString());
+            xml = xml.Replace(CsomHelper.ObjectId, $"{{{fieldValue.CsomType}}}");
+            xml = xml.Replace(CsomHelper.FieldName, fieldName);
+            xml = xml.Replace(CsomHelper.FieldValues, fieldValue.ToCsomXml());
+            xml = xml.Replace(CsomHelper.FieldType, "String");
+
+            counter++;
             return xml;
         }
 
@@ -207,10 +255,9 @@ namespace PnP.Core.Model.SharePoint
             string xml = CsomHelper.ListItemSystemUpdateSetFieldValue;
 
             xml = xml.Replace("{Counter}", counter.ToString());
-            xml = xml.Replace("{FieldName}", fieldName);
-            // TODO: verify complex fieldtypes
-            xml = xml.Replace("{FieldValue}", fieldValue == null ? "" : CsomHelper.XmlString(TypeSpecificHandling(fieldValue.ToString(), fieldType), false));
-            xml = xml.Replace("{FieldType}", fieldType ?? "Null");
+            xml = xml.Replace(CsomHelper.FieldName, fieldName);
+            xml = xml.Replace(CsomHelper.FieldValue, fieldValue == null ? "" : CsomHelper.XmlString(TypeSpecificHandling(fieldValue.ToString(), fieldType), false));
+            xml = xml.Replace(CsomHelper.FieldType, fieldType ?? "Null");
 
             counter++;
             return xml;

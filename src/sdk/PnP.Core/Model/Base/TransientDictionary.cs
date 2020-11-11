@@ -139,5 +139,13 @@ namespace PnP.Core.Model
                 SystemAdd(v.Key, v.Value);
             }
         }
+
+        internal void MarkAsChanged(string key)
+        {
+            if (!changes.Contains(key))
+            {
+                changes.Add(key);
+            }
+        }
     }
 }

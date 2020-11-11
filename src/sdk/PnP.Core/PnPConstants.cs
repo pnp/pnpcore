@@ -76,5 +76,10 @@ namespace PnP.Core
         /// Next link in SharePoint REST
         /// </summary>
         public const string SharePointRestListItemNextLink = "__next";
+
+        /// <summary>
+        /// Metadata property in SharePoint REST
+        /// </summary>
+        public const string SharePointRestMetadata = "__metadata";
     }
 }

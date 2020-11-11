@@ -716,5 +716,33 @@ namespace PnP.Core.Test.SharePoint
                 await myList.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task FieldTypeReadUrl()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var list = await context.Web.Lists.GetByTitleAsync("FieldTypes", p => p.Title, p => p.Items);
+
+                var item = list.Items.FirstOrDefault(p => p.Title == "Item1");
+
+                Assert.IsTrue(item != null);
+                Assert.IsTrue(item["Url"] != null);
+                Assert.IsTrue(item["Url"] is IFieldUrlValue);
+
+                // Update field
+                (item["Url"] as IFieldUrlValue).Url = "https://pnp.com/3";
+                (item["Url"] as IFieldUrlValue).Description = "something3";
+
+                // save update back
+                //await item.UpdateAsync();
+
+                await item.UpdateOverwriteVersionAsync();
+
+            }
+        }
+
+
     }
 }
