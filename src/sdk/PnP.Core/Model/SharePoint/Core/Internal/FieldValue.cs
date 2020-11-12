@@ -30,6 +30,8 @@ namespace PnP.Core.Model.SharePoint
 
         internal abstract IFieldValue FromJson(JsonElement json);
 
+        internal abstract IFieldValue FromListDataAsStream(Dictionary<string, string> properties);
+
         internal abstract object ToJson();
 
         internal abstract string ToCsomXml();

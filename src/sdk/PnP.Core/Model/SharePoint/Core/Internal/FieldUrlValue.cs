@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
@@ -32,6 +33,21 @@ namespace PnP.Core.Model.SharePoint
             if (json.TryGetProperty(nameof(Description), out JsonElement description))
             {
                 Description = description.GetString();
+            }
+
+            return this;
+        }
+
+        internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
+        {
+            if (properties.ContainsKey("Url"))
+            {
+                Url = properties["Url"];
+            }
+
+            if (properties.ContainsKey("desc"))
+            {
+                Description = properties["desc"];
             }
 
             return this;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AngleSharp.Html;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -8,7 +9,6 @@ namespace PnP.Core.Model.SharePoint
 {
     internal static class ListDataAsStreamHandler
     {
-
         internal static async Task<Dictionary<string, object>> Deserialize(string json, List list)
         {
             if (list == null)
@@ -87,6 +87,59 @@ namespace PnP.Core.Model.SharePoint
 
                         var overflowDictionary = itemToUpdate.Values;
 
+                        // Translate this row first into an object model for easier consumption
+                        var rowToProcess = TransformRowData(row, list.Fields, overflowDictionary);
+
+                        foreach (var property in rowToProcess)
+                        {
+                            if (property.Name == "ID")
+                            {
+                                // already handled, so continue
+                            }
+                            else if (property.Name == "_CommentsFlags")
+                            {
+                                string commentsFlags = row.GetProperty("_CommentsFlags").GetString();
+                                // TODO: translate to model
+                            }
+                            // Handle the overflow fields
+                            else
+                            {
+                                object fieldValue = null;
+                                if (!property.Values.Any())
+                                {
+                                    // simple property
+                                    fieldValue = GetJsonPropertyValue(property.Value, property.Type);
+                                }
+                                else
+                                {
+                                    // Special field
+                                    if (!property.IsArray)
+                                    {
+                                        var listDataAsStreamPropertyValue = property.Values.First();
+                                        fieldValue = listDataAsStreamPropertyValue.FieldValue.FromListDataAsStream(listDataAsStreamPropertyValue.Properties);
+                                    }
+                                    else
+                                    {
+                                        fieldValue = new List<IFieldValue>();
+                                        foreach(var xx in property.Values)
+                                        {
+                                            (fieldValue as List<IFieldValue>).Add(xx.FieldValue.FromListDataAsStream(xx.Properties));
+                                        }
+                                    }
+                                }
+
+                                if (!overflowDictionary.ContainsKey(property.Name))
+                                {
+                                    overflowDictionary.SystemAdd(property.Name, fieldValue);
+                                }
+                                else
+                                {
+                                    overflowDictionary.SystemUpdate(property.Name, fieldValue);
+                                }
+                            }
+                        }
+
+                        /*
                         foreach (var property in row.EnumerateObject())
                         {
                             //var entityField = entityInfo.Fields.FirstOrDefault(p => p.Name == property.Name);
@@ -124,11 +177,262 @@ namespace PnP.Core.Model.SharePoint
                                 // TODO: figure out how to present the other returned information
                             }
                         }
+                        */
                     }
                 }
             }
 
             return result;
+        }
+
+        private static List<ListDataAsStreamProperty> TransformRowData(JsonElement row, IFieldCollection fields, TransientDictionary overflowDictionary)
+        {
+            List<ListDataAsStreamProperty> properties = new List<ListDataAsStreamProperty>();
+
+            foreach (var property in row.EnumerateObject())
+            {                
+                var field = fields.FirstOrDefault(p => p.InternalName == property.Name);
+                if (field != null)
+                {
+                    var streamProperty = new ListDataAsStreamProperty()
+                    {
+                        TypeAsString = field.TypeAsString,
+                        Type = field.FieldTypeKind,
+                        Name = property.Name
+                    };
+
+                    var specialField = DetectSpecialFieldType(streamProperty.TypeAsString, streamProperty.Name, overflowDictionary);
+                    if (specialField != null)
+                    {
+                        streamProperty.IsArray = specialField.Item2;
+
+                        if (property.Value.ValueKind == JsonValueKind.Array)
+                        {
+                            #region Sample json responses
+                            /*
+                            "PersonSingle": [
+                                {
+                                    "id": "15",
+                                    "title": "Kevin Cook",
+                                    "email": "KevinC@bertonline.onmicrosoft.com",
+                                    "sip": "KevinC@bertonline.onmicrosoft.com",
+                                    "picture": ""
+                                }
+                            ],
+
+                            "PersonMultiple": [
+                                {
+                                    "id": "14",
+                                    "value": "Anna Lidman",
+                                    "title": "Anna Lidman",
+                                    "email": "AnnaL@bertonline.onmicrosoft.com",
+                                    "sip": "AnnaL@bertonline.onmicrosoft.com",
+                                    "picture": ""
+                                },
+                                {
+                                    "id": "6",
+                                    "value": "Bert Jansen (Cloud)",
+                                    "title": "Bert Jansen (Cloud)",
+                                    "email": "bert.jansen@bertonline.onmicrosoft.com",
+                                    "sip": "bert.jansen@bertonline.onmicrosoft.com",
+                                    "picture": ""
+                                }
+                            ],
+
+                            "MMSingle": {
+                                "__type": "TaxonomyFieldValue:#Microsoft.SharePoint.Taxonomy",
+                                "Label": "LBI",
+                                "TermID": "ed5449ec-4a4f-4102-8f07-5a207c438571"
+                            },
+
+                            "MMMultiple": [
+                                {
+                                    "Label": "LBI",
+                                    "TermID": "ed5449ec-4a4f-4102-8f07-5a207c438571"
+                                },
+                                {
+                                    "Label": "MBI",
+                                    "TermID": "1824510b-00e1-40ac-8294-528b1c9421e0"
+                                },
+                                {
+                                    "Label": "HBI",
+                                    "TermID": "0b709a34-a74e-4d07-b493-48041424a917"
+                                }
+                            ],
+                             
+                            "LookupSingle": [
+                                {
+                                    "lookupId": 71,
+                                    "lookupValue": "Sample Document 01",
+                                    "isSecretFieldValue": false
+                                }
+                            ],
+
+                            "LookupMultiple": [
+                                {
+                                    "lookupId": 1,
+                                    "lookupValue": "General",
+                                    "isSecretFieldValue": false
+                                },
+                                {
+                                    "lookupId": 71,
+                                    "lookupValue": "Sample Document 01",
+                                    "isSecretFieldValue": false
+                                }
+                            ],
+                             
+                            "Location": {
+                                "DisplayName": null,
+                                "LocationUri": "https://www.bingapis.com/api/v6/addresses/QWRkcmVzcy83MDA5ODMwODI3MTUyMzc1ODA5JTdjMT9hbHRRdWVyeT1hbCU1ZURpcml4c3RyYWF0KzElN2NsYyU1ZUJlZWslN2NhMiU1ZUxpbWJ1cmclN2NhMSU1ZVZsYWFuZGVyZW4lN2NjciU1ZUJlbGdpdW0lN2Npc28lNWVCRQ%3d%3d?setLang=en",
+                                "EntityType": null,
+                                "Address": {
+                                    "Street": "Somewhere",
+                                    "City": "XYZ",
+                                    "State": "Vlaanderen",
+                                    "CountryOrRegion": "Belgium",
+                                    "PostalCode": "9999"
+                                },
+                                "Coordinates": {
+                                    "Latitude": null,
+                                    "Longitude": null
+                                }
+                            },                             
+                            */
+                            #endregion
+
+                            foreach(var streamPropertyElement in property.Value.EnumerateArray())
+                            {
+                                (var fieldValue, var isArray) = DetectSpecialFieldType(streamProperty.TypeAsString, streamProperty.Name, overflowDictionary);
+                                var listDataAsStreamPropertyValue = new ListDataAsStreamPropertyValue()
+                                {
+                                    FieldValue = fieldValue
+                                };
+
+                                foreach (var streamPropertyElementValue in streamPropertyElement.EnumerateObject())
+                                {
+                                    listDataAsStreamPropertyValue.Properties.Add(streamPropertyElementValue.Name, GetJsonPropertyValueAsString(streamPropertyElementValue.Value));
+                                }
+
+                                streamProperty.Values.Add(listDataAsStreamPropertyValue);
+                            }
+                        }
+                        else
+                        {
+                            /*
+                             "Url": "https:\u002f\u002fpnp.com\u002f3",
+                             "Url.desc": "something3",
+                            */
+
+                            var listDataAsStreamPropertyValue = new ListDataAsStreamPropertyValue()
+                            {
+                                FieldValue = specialField.Item1
+                            };
+
+                            if (property.Value.ValueKind == JsonValueKind.Object)
+                            {
+                                foreach (var streamPropertyElementValue in property.Value.EnumerateObject())
+                                {
+                                    if (streamPropertyElementValue.Value.ValueKind == JsonValueKind.Object)
+                                    {
+                                        foreach (var streamPropertyElementValueLevel2 in streamPropertyElementValue.Value.EnumerateObject())
+                                        {
+                                            listDataAsStreamPropertyValue.Properties.Add(streamPropertyElementValueLevel2.Name, GetJsonPropertyValueAsString(streamPropertyElementValueLevel2.Value));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        listDataAsStreamPropertyValue.Properties.Add(streamPropertyElementValue.Name, GetJsonPropertyValueAsString(streamPropertyElementValue.Value));
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                listDataAsStreamPropertyValue.Properties.Add(property.Name, GetJsonPropertyValueAsString(property.Value));
+                            }
+
+                            streamProperty.Values.Add(listDataAsStreamPropertyValue);
+                        }
+                    }
+                    else
+                    {
+                        // Add as single property
+
+                        /*
+                         "Title": "Item1",
+                         */
+                        streamProperty.Value = property.Value;
+                    }
+
+                    properties.Add(streamProperty);
+                }
+                else
+                {
+                    /*
+                     "Url.desc": "something3",
+                    */
+
+                    if (property.Name.Contains("."))
+                    {
+                        string[] nameParts = property.Name.Split(new char[] { '.' });
+
+                        var propertyToUpdate = properties.FirstOrDefault(p => p.Name == nameParts[0]);
+                        if (propertyToUpdate != null && propertyToUpdate.Values.Count == 1 && !string.IsNullOrEmpty(nameParts[1]))
+                        {
+                            var valueToUpdate = propertyToUpdate.Values.FirstOrDefault();
+                            if (valueToUpdate == null)
+                            {
+                                valueToUpdate = new ListDataAsStreamPropertyValue();
+                                propertyToUpdate.Values.Add(valueToUpdate);
+                            }
+                            if (!valueToUpdate.Properties.ContainsKey(nameParts[1]))
+                            {
+                                valueToUpdate.Properties.Add(nameParts[1], GetJsonPropertyValueAsString(property.Value));
+                            }
+                        }
+                    }
+                }
+            }
+
+            return properties;
+        }
+
+        private static Tuple<FieldValue, bool> DetectSpecialFieldType(string fieldType, string name, TransientDictionary dictionary)
+        { 
+            switch (fieldType)
+                {
+                case "URL": return new Tuple<FieldValue, bool>(new FieldUrlValue(name, dictionary), false);
+                case "UserMulti": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary), true);
+                case "User": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary), false);
+                case "LookupMulti": return new Tuple<FieldValue, bool>(new FieldLookupValue(name, dictionary), true);
+                case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue(name, dictionary), false);
+                case "TaxonomyFieldTypeMulti": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary), true);
+                case "TaxonomyFieldType": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary), false);
+
+                default:
+                    {
+                        return null;
+                    }
+            }
+        }
+
+        private static string GetJsonPropertyValueAsString(JsonElement propertyValue)
+        {
+            if (propertyValue.ValueKind == JsonValueKind.True || propertyValue.ValueKind == JsonValueKind.False)
+            {
+                return propertyValue.GetBoolean().ToString();
+            }
+            else if (propertyValue.ValueKind == JsonValueKind.Number)
+            {
+                return propertyValue.GetInt32().ToString();
+            }
+            else if (propertyValue.ValueKind == JsonValueKind.Undefined)
+            {
+                return "Null";
+            }
+            else
+            {
+                return propertyValue.GetString();
+            }
         }
 
         private static object GetJsonPropertyValue(JsonElement propertyValue, FieldType fieldType)
@@ -206,7 +510,25 @@ namespace PnP.Core.Model.SharePoint
                     {
                         if (propertyValue.ValueKind != JsonValueKind.Null)
                         {
-                            return propertyValue.GetDateTime();
+                            if (propertyValue.TryGetDateTime(out DateTime dateTime))
+                            {
+                                return dateTime;
+                            }
+                            else
+                            {
+                                if (DateTime.TryParseExact(propertyValue.GetString(),
+                                                           new string[] { "MM/dd/yyyy" },
+                                                           System.Globalization.CultureInfo.InvariantCulture,
+                                                           System.Globalization.DateTimeStyles.None,
+                                                           out DateTime dateTime2))
+                                {
+                                    return dateTime2;
+                                }
+                                else
+                                {
+                                    return null;
+                                }
+                            }
                         }
                         else
                         {
