@@ -11,10 +11,10 @@ The PnP Core SDK is an SDK designed to work for Microsoft 365. Its aim is to pro
 
 This is a community effort, hence we cannot guarantee below roadmap but rest assure, we're working hard to stick to plan 😀 If you want to join our team and help realize this, then checkout the [How can I help](https://pnp.github.io/pnpcore/#how-can-you-help) section in our docs.
 
-- Preview 3: September 2020
-- Beta 1: October 2020
-- Beta 2: November 2020
-- V1: December 2020
+- Preview 3: September 2020 (shipped)
+- Beta 1: November 2020
+- Beta 2: December 2020
+- V1: January 2021
 
 ## Getting started using this library
 
