@@ -87,6 +87,11 @@ namespace PnP.Core.Model
             changes.Clear();
         }
 
+        internal virtual void RemoveTitleFieldChange()
+        {
+            changes.Remove("Title");
+        }
+
         internal void Merge(TransientDictionary input)
         {
             changes.Clear();

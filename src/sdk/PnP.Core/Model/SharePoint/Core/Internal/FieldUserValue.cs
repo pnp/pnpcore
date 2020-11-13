@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal class FieldUserValue : FieldValue, IFieldUserValue
+    internal class FieldUserValue : FieldLookupValue, IFieldUserValue
     {
         internal FieldUserValue(string propertyName, TransientDictionary parent) : base(propertyName, parent)
         {
@@ -18,8 +18,6 @@ namespace PnP.Core.Model.SharePoint
 
         public string Email { get => GetValue<string>(); set => SetValue(value); }
 
-        public int Id { get => GetValue<int>(); set => SetValue(value); }
-
         public string Title { get => GetValue<string>(); set => SetValue(value); }
 
         public string Sip { get => GetValue<string>(); set => SetValue(value); }
@@ -28,16 +26,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromJson(JsonElement json)
         {
-            if (json.TryGetProperty(nameof(Email), out JsonElement email))
-            {
-                Email = email.GetString();
-            }
-
-            if (json.TryGetProperty(nameof(Id), out JsonElement lookupId))
-            {
-                Id = lookupId.GetInt32();
-            }
-
+            LookupId = int.Parse(json.GetString());
             return this;
         }
 
@@ -45,7 +34,7 @@ namespace PnP.Core.Model.SharePoint
         {
             if (properties.ContainsKey("id"))
             {
-                Id = int.Parse(properties["id"]);
+                LookupId = int.Parse(properties["id"]);
             }
 
             if (properties.ContainsKey("email"))
@@ -76,9 +65,7 @@ namespace PnP.Core.Model.SharePoint
             var updateMessage = new
             {
                 __metadata = new { type = SharePointRestType },
-                //Email,
-                Id,
-                //LookupValue
+                LookupId,
             };
 
             return updateMessage;
@@ -95,7 +82,7 @@ namespace PnP.Core.Model.SharePoint
              */
             StringBuilder sb = new StringBuilder();
             sb.Append(CsomHelper.ListItemSpecialFieldProperty.Replace(CsomHelper.FieldName, nameof(Email)).Replace(CsomHelper.FieldType, "Null").Replace(CsomHelper.FieldValue, ""));
-            sb.Append(CsomHelper.ListItemSpecialFieldProperty.Replace(CsomHelper.FieldName, nameof(Id)).Replace(CsomHelper.FieldType, Id.GetType().Name).Replace(CsomHelper.FieldValue, Id.ToString()));
+            sb.Append(CsomHelper.ListItemSpecialFieldProperty.Replace(CsomHelper.FieldName, nameof(LookupId)).Replace(CsomHelper.FieldType, LookupId.GetType().Name).Replace(CsomHelper.FieldValue, LookupId.ToString()));
             sb.Append(CsomHelper.ListItemSpecialFieldProperty.Replace(CsomHelper.FieldName, nameof(Title)).Replace(CsomHelper.FieldType, "Null").Replace(CsomHelper.FieldValue, ""));
             return sb.ToString();
         }

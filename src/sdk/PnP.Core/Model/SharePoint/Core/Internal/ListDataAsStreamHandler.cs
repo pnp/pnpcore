@@ -1,5 +1,4 @@
-﻿using AngleSharp.Html;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -63,7 +62,7 @@ namespace PnP.Core.Model.SharePoint
                 }
 
                 // Load the fields if not yet loaded
-                await list.EnsurePropertiesAsync(List.GetListDataAsStreamExpression).ConfigureAwait(false);
+                await list.EnsurePropertiesAsync(List.LoadFieldsExpression).ConfigureAwait(false);
 
                 // Grab the list entity information
                 var entityInfo = EntityManager.Instance.GetStaticClassInfo(list.GetType());
@@ -107,8 +106,20 @@ namespace PnP.Core.Model.SharePoint
                                 object fieldValue = null;
                                 if (!property.Values.Any())
                                 {
-                                    // simple property
-                                    fieldValue = GetJsonPropertyValue(property.Value, property.Type);
+                                    if (property.Value.ValueKind == JsonValueKind.Array)
+                                    {
+                                        // MultiChoice property
+                                        fieldValue = new List<string>();
+                                        foreach(var prop in property.Value.EnumerateArray())
+                                        {
+                                            (fieldValue as List<string>).Add(prop.GetString());
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // simple property
+                                        fieldValue = GetJsonPropertyValue(property.Value, property.Type);
+                                    }
                                 }
                                 else
                                 {
@@ -117,13 +128,16 @@ namespace PnP.Core.Model.SharePoint
                                     {
                                         var listDataAsStreamPropertyValue = property.Values.First();
                                         fieldValue = listDataAsStreamPropertyValue.FieldValue.FromListDataAsStream(listDataAsStreamPropertyValue.Properties);
+                                        (fieldValue as FieldValue).IsArray = false;
                                     }
                                     else
                                     {
-                                        fieldValue = new List<IFieldValue>();
+                                        fieldValue = new FieldValueCollection(property.TypeAsString, property.Name, overflowDictionary);
                                         foreach(var xx in property.Values)
                                         {
-                                            (fieldValue as List<IFieldValue>).Add(xx.FieldValue.FromListDataAsStream(xx.Properties));
+                                            var yy = xx.FieldValue.FromListDataAsStream(xx.Properties);
+                                            (yy as FieldValue).IsArray = true;
+                                            (fieldValue as FieldValueCollection).Values.Add(yy);
                                         }
                                     }
                                 }
@@ -138,46 +152,6 @@ namespace PnP.Core.Model.SharePoint
                                 }
                             }
                         }
-
-                        /*
-                        foreach (var property in row.EnumerateObject())
-                        {
-                            //var entityField = entityInfo.Fields.FirstOrDefault(p => p.Name == property.Name);
-                            var field = list.Fields.FirstOrDefault(p => p.InternalName == property.Name);
-                            if (field != null)
-                            {
-                                // Handle the regular fields, Title is handled as an overflow field
-                                if (property.Name == "ID")
-                                {
-                                    // already handled, so continue
-                                }
-                                else if (property.Name == "_CommentsFlags")
-                                {
-                                    string commentsFlags = row.GetProperty("_CommentsFlags").GetString();
-                                    // TODO: translate to model
-                                }
-                                // Handle the overflow fields
-                                else
-                                {
-                                    var fieldValue = GetJsonPropertyValue(property.Value, field.FieldTypeKind);
-
-                                    // all properties are returned as string
-                                    if (!overflowDictionary.ContainsKey(property.Name))
-                                    {
-                                        overflowDictionary.SystemAdd(property.Name, fieldValue);
-                                    }
-                                    else
-                                    {
-                                        overflowDictionary.SystemUpdate(property.Name, fieldValue);
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                // TODO: figure out how to present the other returned information
-                            }
-                        }
-                        */
                     }
                 }
             }
@@ -201,7 +175,8 @@ namespace PnP.Core.Model.SharePoint
                         Name = property.Name
                     };
 
-                    var specialField = DetectSpecialFieldType(streamProperty.TypeAsString, streamProperty.Name, overflowDictionary);
+                    // Is this a field that needs to be wrapped into a special field type?
+                    var specialField = DetectSpecialFieldType(streamProperty.TypeAsString, streamProperty.Name, overflowDictionary, field);
                     if (specialField != null)
                     {
                         streamProperty.IsArray = specialField.Item2;
@@ -283,7 +258,7 @@ namespace PnP.Core.Model.SharePoint
                              
                             "Location": {
                                 "DisplayName": null,
-                                "LocationUri": "https://www.bingapis.com/api/v6/addresses/QWRkcmVzcy83MDA5ODMwODI3MTUyMzc1ODA5JTdjMT9hbHRRdWVyeT1hbCU1ZURpcml4c3RyYWF0KzElN2NsYyU1ZUJlZWslN2NhMiU1ZUxpbWJ1cmclN2NhMSU1ZVZsYWFuZGVyZW4lN2NjciU1ZUJlbGdpdW0lN2Npc28lNWVCRQ%3d%3d?setLang=en",
+                                "LocationUri": "https://www.bingapis.com/api/v6/addresses/QWRkcmVzcy83MDA5ODMwODI3MTUyMzc1ODA5JTdjMT9h%3d%3d?setLang=en",
                                 "EntityType": null,
                                 "Address": {
                                     "Street": "Somewhere",
@@ -302,7 +277,7 @@ namespace PnP.Core.Model.SharePoint
 
                             foreach(var streamPropertyElement in property.Value.EnumerateArray())
                             {
-                                (var fieldValue, var isArray) = DetectSpecialFieldType(streamProperty.TypeAsString, streamProperty.Name, overflowDictionary);
+                                (var fieldValue, var isArray) = DetectSpecialFieldType(streamProperty.TypeAsString, streamProperty.Name, overflowDictionary, field);
                                 var listDataAsStreamPropertyValue = new ListDataAsStreamPropertyValue()
                                 {
                                     FieldValue = fieldValue
@@ -355,10 +330,16 @@ namespace PnP.Core.Model.SharePoint
                     }
                     else
                     {
-                        // Add as single property
+                        // Add as single property or simple choice collection
 
                         /*
-                         "Title": "Item1",
+                        "Title": "Item1",
+
+                        "ChoiceMultiple": [
+                            "Choice 1",
+                            "Choice 3",
+                            "Choice 4"
+                        ],
                          */
                         streamProperty.Value = property.Value;
                     }
@@ -396,17 +377,17 @@ namespace PnP.Core.Model.SharePoint
             return properties;
         }
 
-        private static Tuple<FieldValue, bool> DetectSpecialFieldType(string fieldType, string name, TransientDictionary dictionary)
+        private static Tuple<FieldValue, bool> DetectSpecialFieldType(string fieldType, string name, TransientDictionary dictionary, IField field)
         { 
             switch (fieldType)
                 {
-                case "URL": return new Tuple<FieldValue, bool>(new FieldUrlValue(name, dictionary), false);
-                case "UserMulti": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary), true);
-                case "User": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary), false);
-                case "LookupMulti": return new Tuple<FieldValue, bool>(new FieldLookupValue(name, dictionary), true);
-                case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue(name, dictionary), false);
-                case "TaxonomyFieldTypeMulti": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary), true);
-                case "TaxonomyFieldType": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary), false);
+                case "URL": return new Tuple<FieldValue, bool>(new FieldUrlValue(name, dictionary) { Field = field }, false);
+                case "UserMulti": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary) { Field = field }, true);
+                case "User": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary) { Field = field }, false);
+                case "LookupMulti": return new Tuple<FieldValue, bool>(new FieldLookupValue(name, dictionary) { Field = field }, true);
+                case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue(name, dictionary) { Field = field }, false);
+                case "TaxonomyFieldTypeMulti": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary) { Field = field }, true);
+                case "TaxonomyFieldType": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary) { Field = field }, false);
 
                 default:
                     {

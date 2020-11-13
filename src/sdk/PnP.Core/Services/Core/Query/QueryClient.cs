@@ -1059,7 +1059,47 @@ namespace PnP.Core.Services
                         {
                             if (changedProp.Value is FieldValue)
                             {
-                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, (changedProp.Value as FieldValue).ToJson());
+                                if (changedProp.Value is FieldLookupValue)
+                                {
+                                    ((ExpandoObject)updateMessage).SetProperty($"{changedProp.Key}Id", (changedProp.Value as FieldLookupValue).LookupId);
+                                }
+                                else
+                                {
+                                    ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, (changedProp.Value as FieldValue).ToJson());
+                                }
+                            }
+                            else if (changedProp.Value is FieldValueCollection)
+                            {
+                                var collection = changedProp.Value as FieldValueCollection;
+
+                                string typeAsString = collection.TypeAsString;
+                                if (string.IsNullOrEmpty(typeAsString))
+                                {
+                                    var firstElement = collection.Values.FirstOrDefault();
+                                    if (firstElement is FieldLookupValue)
+                                    {
+                                        typeAsString = "LookupMulti";
+                                    }
+                                    else if (firstElement is FieldTaxonomyValue)
+                                    {
+                                        typeAsString = "TaxonomyFieldTypeMulti";
+                                    }
+                                }
+
+                                if (typeAsString == "LookupMulti" || typeAsString == "Lookup" || typeAsString == "UserMulti")
+                                {
+                                    ((ExpandoObject)updateMessage).SetProperty($"{changedProp.Key}Id", collection.LookupMultiToJson());
+                                }                                
+                                else
+                                {
+                                    // TODO
+                                    //((ExpandoObject)updateMessage).SetProperty($"{changedProp.Key}", collection.TaxonomyFieldTypeMultiToJson());
+                                }
+                            }
+                            else if (changedProp.Value is List<string>)
+                            {
+                                // multi value choice field
+                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, FieldValueCollection.ChoiceMultiToJson(changedProp.Value as List<string>));
                             }
                             else
                             {

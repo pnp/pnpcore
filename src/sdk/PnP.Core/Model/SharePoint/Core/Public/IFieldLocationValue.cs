@@ -13,7 +13,7 @@
         /// <summary>
         /// Uri identifying this location
         /// </summary>
-        public string LocationUri { get; set; }
+        public string LocationUri { get; }
 
         /// <summary>
         /// Streetname
@@ -43,11 +43,11 @@
         /// <summary>
         /// Latitude of the location
         /// </summary>
-        public double Latitude { get; set; }
+        public double Latitude { get; }
 
         /// <summary>
         /// Longitude of the location
         /// </summary>
-        public double Longitude { get; set; }
+        public double Longitude { get; }
     }
 }

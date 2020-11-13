@@ -25,12 +25,16 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromJson(JsonElement json)
         {
-            if (json.TryGetProperty(nameof(Url), out JsonElement url))
+#pragma warning disable CA1507 // Use nameof to express symbol names
+            if (json.TryGetProperty("Url", out JsonElement url))
+#pragma warning restore CA1507 // Use nameof to express symbol names
             {
                 Url = url.GetString();
             }
 
-            if (json.TryGetProperty(nameof(Description), out JsonElement description))
+#pragma warning disable CA1507 // Use nameof to express symbol names
+            if (json.TryGetProperty("Description", out JsonElement description))
+#pragma warning restore CA1507 // Use nameof to express symbol names
             {
                 Description = description.GetString();
             }

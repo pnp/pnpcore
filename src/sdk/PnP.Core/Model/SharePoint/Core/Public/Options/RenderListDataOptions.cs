@@ -1,4 +1,9 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Options to configure the rendering of list data via the RenderListDataAsStream method of IList
@@ -85,6 +90,43 @@
         /// Specifies the CAML view XML
         /// </summary>
         public string ViewXml { get; set; }
+
+        /// <summary>
+        /// Populates the needed ViewXml based upon the passed field names
+        /// </summary>
+        /// <param name="fieldInternalNames">List of fields specified via their internal name</param>
+        public void SetViewXmlFromFields(List<string> fieldInternalNames)
+        {
+            if (fieldInternalNames == null)
+            {
+                throw new ArgumentNullException(nameof(fieldInternalNames));
+            }
+
+            if (fieldInternalNames.Any())
+            {
+                bool fieldAdded = false;
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("<View Scope='Recursive'>");
+                sb.AppendLine("<ViewFields>");
+
+                foreach(var field in fieldInternalNames)
+                {
+                    if (!string.IsNullOrEmpty(field))
+                    {
+                        sb.AppendLine($"<FieldRef Name='{field}' />");
+                        fieldAdded = true;
+                    }
+                }
+
+                sb.AppendLine("</ViewFields>");
+                sb.AppendLine("</View>");
+
+                if (fieldAdded)
+                {
+                    ViewXml = sb.ToString();
+                }
+            }
+        }
 
     }
 }

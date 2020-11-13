@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
         {
         }
 
-        internal override string SharePointRestType => "";
+        internal override string SharePointRestType => "SP.FieldGeolocationValue";
 
         internal override Guid CsomType => Guid.Parse("97650aff-7e7b-44be-ac6e-d559f7f897a2");
 
@@ -35,7 +35,76 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromJson(JsonElement json)
         {
-            throw new NotImplementedException();
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+            if (json.TryGetProperty("LocationUri", out JsonElement locationUri))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+            {
+                LocationUri = locationUri.GetString();
+            }
+
+            if (json.TryGetProperty("Address", out JsonElement address))
+            {
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                if (address.TryGetProperty("Street", out JsonElement street))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                {
+                    Street = street.GetString();
+                }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                if (address.TryGetProperty("City", out JsonElement city))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                {
+                    City = city.GetString();
+                }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                if (address.TryGetProperty("State", out JsonElement state))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                {
+                    State = state.GetString();
+                }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                if (address.TryGetProperty("CountryOrRegion", out JsonElement countryOrRegion))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                {
+                    CountryOrRegion = countryOrRegion.GetString();
+                }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                if (address.TryGetProperty("PostalCode", out JsonElement postalCode))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                {
+                    PostalCode = postalCode.GetString();
+                }
+            }
+
+            if (json.TryGetProperty("Coordinates", out JsonElement coordinates))
+            {
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                if (coordinates.TryGetProperty("Latitude", out JsonElement latitude))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                {
+                    if (latitude.ValueKind == JsonValueKind.Number)
+                    {
+                        Latitude = latitude.GetDouble();
+                    }
+                }
+
+#pragma warning disable CA1507 // Use nameof to express symbol names
+                if (coordinates.TryGetProperty("Longitude", out JsonElement longitude))
+#pragma warning restore CA1507 // Use nameof to express symbol names
+                {
+                    if (longitude.ValueKind == JsonValueKind.Number)
+                    {
+                        Longitude = longitude.GetDouble();
+                    }
+                }
+            }
+
+            return this;
         }
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
@@ -94,14 +163,25 @@ namespace PnP.Core.Model.SharePoint
             return this;
         }
 
+        internal override object ToJson()
+        {
+            var updateMessage = new
+            {
+                LocationUri,
+                Coordinates = new
+                {
+                    Latitude,
+                    Longitude
+                }
+            };
+
+            return updateMessage;
+        }
+
         internal override string ToCsomXml()
         {
             throw new NotImplementedException();
         }
 
-        internal override object ToJson()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

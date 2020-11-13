@@ -22,7 +22,8 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromJson(JsonElement json)
         {
-            throw new NotImplementedException();
+            LookupId = json.GetInt32();
+            return this;
         }
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
@@ -47,7 +48,12 @@ namespace PnP.Core.Model.SharePoint
 
         internal override object ToJson()
         {
-            throw new NotImplementedException();
+            var updateMessage = new
+            {
+                LookupId
+            };
+
+            return updateMessage;
         }
 
         internal override string ToCsomXml()

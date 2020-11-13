@@ -278,9 +278,9 @@ namespace PnP.Core.Services
                     else if (property.Name == "__next")
                     {
                         // Only applies to paging on listitems
-                        if (metadataBasedObject is Model.SharePoint.List)
+                        if (metadataBasedObject is List)
                         {
-                            var listItemCollection = (metadataBasedObject as Model.SharePoint.List).Items;
+                            var listItemCollection = (metadataBasedObject as List).Items;
                             if (listItemCollection != null && listItemCollection.Requested)
                             {
                                 TrackAndUpdateMetaData(listItemCollection as IMetadataExtensible, property);
@@ -297,28 +297,27 @@ namespace PnP.Core.Services
                         // Add to overflow, skip __deferred properties
                         if (!(property.Value.ValueKind == JsonValueKind.Object && property.Value.TryGetProperty("__deferred", out JsonElement deferredProperty)))
                         {
-                            // Add to overflow dictionary
-                            if (property.Value.ValueKind == JsonValueKind.Object)
+
+                            // Verify if we can map the received json to a supported field type
+                            (object fieldType, string fieldName) = ProcessSpecialRestFieldType(property.Name, dictionaryPropertyToAddValueTo, property.Value);
+                            if (fieldType != null)
+                            {                                
+                                AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldType);
+                            }
+                            else
                             {
-                                // Verify if we can map the received json to a supported field type
-                                var fieldType = DetectRestFieldType(property.Name, dictionaryPropertyToAddValueTo, property.Value);
-                                if (fieldType != null)
-                                {
-                                    AddToDictionary(dictionaryPropertyToAddValueTo, property.Name, fieldType.FromJson(property.Value));
-                                }
-                                else
+                                if (property.Value.ValueKind == JsonValueKind.Object)
                                 {
                                     // Handling of complex type via calling out to custom handler, no value is returned as the custom
                                     // handler can update multiple fields based upon what json result came back
                                     fromJsonCasting?.Invoke(new FromJson(property.Name, property.Value, Type.GetType("System.Object"), contextAwareObject.PnPContext.Logger));
                                 }
+                                else
+                                {
+                                    // Default mapping to dictionary can handle simple types, more complex types require custom logic
+                                    AddToDictionary(dictionaryPropertyToAddValueTo, property.Name, GetJsonPropertyValue(property));
+                                }
                             }
-                            else
-                            {
-                                // Default mapping to dictionary can handle simple types, more complex types require custom logic
-                                AddToDictionary(dictionaryPropertyToAddValueTo, property.Name, GetJsonPropertyValue(property));
-                            }
-
                             requested = true;
                         }
                     }
@@ -328,7 +327,7 @@ namespace PnP.Core.Services
             // Ensure all changes are reset (as setting Title on the ListItem will trigger a change)
             if (useOverflowField)
             {
-                dictionaryPropertyToAddValueTo.Commit();
+                dictionaryPropertyToAddValueTo.RemoveTitleFieldChange();
             }
 
             // Try populate the PnP Object metadata from the mapped info
@@ -347,21 +346,212 @@ namespace PnP.Core.Services
             return requested;
         }
 
-        private static FieldValue DetectRestFieldType(string propertyName, TransientDictionary dictionaryPropertyToAddValueTo, JsonElement json)
+        private static Tuple<object, string> ProcessSpecialRestFieldType(string propertyName, TransientDictionary dictionaryPropertyToAddValueTo, JsonElement json)
         {
-            if (json.TryGetProperty(PnPConstants.SharePointRestMetadata, out JsonElement metadata) && metadata.TryGetProperty(PnPConstants.MetaDataType, out JsonElement type))
+            if (json.ValueKind == JsonValueKind.Object && json.TryGetProperty(PnPConstants.SharePointRestMetadata, out JsonElement metadata) && metadata.TryGetProperty(PnPConstants.MetaDataType, out JsonElement type))
             {
                 switch (type.GetString())
                 {
-                    case "SP.FieldUrlValue": return new FieldUrlValue(propertyName, dictionaryPropertyToAddValueTo);
+                    case "SP.FieldUrlValue": 
+                        {
+                            var fieldValue = new FieldUrlValue(propertyName, dictionaryPropertyToAddValueTo);
+                            fieldValue.FromJson(json);
+                            fieldValue.IsArray = false;
+                            return new Tuple<object, string>(fieldValue, propertyName);
+                        };
+                    case "SP.Taxonomy.TaxonomyFieldValue":
+                        {
+                            #region Sample json
+                            /*
+                              "MMSingle": {
+                                "__metadata": {
+                                  "type": "SP.Taxonomy.TaxonomyFieldValue"
+                                },
+                                "Label": "1",
+                                "TermGuid": "ed5449ec-4a4f-4102-8f07-5a207c438571",
+                                "WssId": 1
+                              },
+                            */
+                            #endregion
+
+                            var fieldValue = new FieldTaxonomyValue(propertyName, dictionaryPropertyToAddValueTo);
+                            fieldValue.FromJson(json);
+                            fieldValue.IsArray = false;
+                            return new Tuple<object, string>(fieldValue, propertyName);
+                        }
+                    case "Collection(SP.Taxonomy.TaxonomyFieldValue)":
+                        {
+                            #region Sample json
+                            /*
+                                "MMMultiple": {
+                                "__metadata": {
+                                    "type": "Collection(SP.Taxonomy.TaxonomyFieldValue)"
+                                },
+                                "results": [
+                                    {
+                                    "Label": "LBI",
+                                    "TermGuid": "ed5449ec-4a4f-4102-8f07-5a207c438571",
+                                    "WssId": 1
+                                    },
+                                    {
+                                    "Label": "MBI",
+                                    "TermGuid": "1824510b-00e1-40ac-8294-528b1c9421e0",
+                                    "WssId": 2
+                                    },
+                                    {
+                                    "Label": "HBI",
+                                    "TermGuid": "0b709a34-a74e-4d07-b493-48041424a917",
+                                    "WssId": 3
+                                    }
+                                ]
+                                },
+                            */
+                            #endregion
+
+                            if (json.TryGetProperty("results", out JsonElement results))
+                            {
+                                var values = new FieldValueCollection("", propertyName, dictionaryPropertyToAddValueTo);
+                                if (results.ValueKind == JsonValueKind.Array)
+                                {
+                                    foreach (var term in results.EnumerateArray())
+                                    {
+                                        var fieldValue = new FieldTaxonomyValue(propertyName, dictionaryPropertyToAddValueTo);
+                                        fieldValue.FromJson(term);
+                                        fieldValue.IsArray = true;
+                                        values.Values.Add(fieldValue);
+                                    }
+                                }
+                                return new Tuple<object, string>(values, propertyName);
+                            }
+
+                            return new Tuple<object, string>(null, null);
+                        }
+                    case "Collection(Edm.Int32)":
+                        {
+                            #region Sample json
+                            /*
+                              "LookupSingleId": {
+                                "__metadata": {
+                                  "type": "Collection(Edm.Int32)"
+                                },
+                                "results": [
+                                  71
+                                ]
+                              },
+                              "LookupMultipleId": {
+                                "__metadata": {
+                                  "type": "Collection(Edm.Int32)"
+                                },
+                                "results": [
+                                  1,
+                                  71
+                                ]
+                              },
+
+                              "PersonMultipleId": {
+                                "__metadata": {
+                                  "type": "Collection(Edm.Int32)"
+                                },
+                                "results": [
+                                  14,
+                                  6
+                                ]
+                              },
+                             */
+                            #endregion
+
+                            if (json.TryGetProperty("results", out JsonElement results))
+                            {
+                                var values = new FieldValueCollection("", propertyName.Substring(0, propertyName.Length - 2), dictionaryPropertyToAddValueTo);
+                                if (results.ValueKind == JsonValueKind.Array)
+                                {
+                                    foreach (var lookupId in results.EnumerateArray())
+                                    {
+                                        var fieldValue = new FieldLookupValue(propertyName.Substring(0, propertyName.Length - 2), dictionaryPropertyToAddValueTo);
+                                        fieldValue.FromJson(lookupId);
+                                        fieldValue.IsArray = true;
+                                        values.Values.Add(fieldValue);
+                                    }
+                                }
+                                return new Tuple<object, string>(values, propertyName.Substring(0, propertyName.Length - 2));
+                            }
+
+                            return new Tuple<object, string>(null, null);
+                        }
+                    case "Collection(Edm.String)":
+                        {
+                            #region Sample json
+                            /*
+                              "ChoiceMultiple": {
+                                "__metadata": {
+                                  "type": "Collection(Edm.String)"
+                                },
+                                "results": [
+                                  "Choice 1",
+                                  "Choice 3",
+                                  "Choice 4"
+                                ]
+                              }
+                             */
+                            #endregion
+
+                            // PersonMulitple fields are also listed under the same type, but have StringId appended to their name
+                            if (!(propertyName.EndsWith("StringId") && propertyName.Length > 8) && json.TryGetProperty("results", out JsonElement results))
+                            {
+                                var values = new List<string>();
+                                if (results.ValueKind == JsonValueKind.Array)
+                                {
+                                    foreach (var choice in results.EnumerateArray())
+                                    {
+                                        values.Add(choice.GetString());
+                                    }
+                                }
+                                return new Tuple<object, string>(values, propertyName);
+                            }
+
+                            return new Tuple<object, string>(null, null);
+                        }
                     default:
                         {
-                            return null;
+                            return new Tuple<object, string>(null, null);
                         }
                 }
             }
+            else
+            {
+                if (propertyName.EndsWith("StringId") && propertyName.Length > 8)
+                {
+                    #region Sample json
+                    /*
+                     "PersonSingleId": 6,
+                     "PersonSingleStringId": "6",
+                     */
+                    #endregion
 
-            return null;
+                    var fieldValue = new FieldUserValue(propertyName.Substring(0, propertyName.Length  - 8), dictionaryPropertyToAddValueTo);
+                    fieldValue.FromJson(json);
+                    fieldValue.IsArray = false;
+                    return new Tuple<object, string>(fieldValue, propertyName.Substring(0, propertyName.Length - 8));
+                } 
+                else if (json.ValueKind == JsonValueKind.String && (json.GetString().StartsWith("{") && json.GetString().Contains("LocationUri") && json.GetString().EndsWith("}")))
+                {
+                    #region Sample json
+                    /*
+                      "Location": "{\"LocationSource\":\"Bing\",\"LocationUri\":\"https://www.bingapis.com/api/v6/addresses/QWRkcmVzcy83MDA5ODM%3d%3d?setLang=en\",\"UniqueId\":\"https://www.bingapis.com/api/v6/addresses/QWRkcmVzcy83MDA5ODMwODI3MTUyMzc1%3d%3d?setLang=en\",\"Address\":{\"Street\":\"ffffffstraat 1\",\"City\":\"cccc\",\"State\":\"Vlaanderen\",\"CountryOrRegion\":\"Belgium\",\"PostalCode\":\"9999\"},\"Coordinates\":{}}",                     
+                    */
+                    #endregion
+
+                    // investigate if this can be a location field
+                    var parsedFieldContent = JsonDocument.Parse(json.GetString()).RootElement;
+                    var fieldValue = new FieldLocationValue(propertyName, dictionaryPropertyToAddValueTo);
+                    fieldValue.FromJson(parsedFieldContent);
+                    fieldValue.IsArray = false;
+                    return new Tuple<object, string>(fieldValue, propertyName);
+                }
+
+            }
+
+            return new Tuple<object, string>(null, null);
         }
 
 

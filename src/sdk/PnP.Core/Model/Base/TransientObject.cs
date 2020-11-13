@@ -236,7 +236,7 @@ namespace PnP.Core.Model
                 }
 
                 // Always assume generic lists have changed
-                // Used on TermStore model (and maybe more in future)
+                // Used on TermStore model / for overflow models (eg ListItem) this is also used for the multi... fields 
                 // TODO: built custom list that handles change tracking
                 if (value.GetType().Name == "List`1")
                 {

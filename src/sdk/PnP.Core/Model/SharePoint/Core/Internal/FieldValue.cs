@@ -4,10 +4,10 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    internal abstract class FieldValue
+    internal abstract class FieldValue : IFieldValue
     {
         private readonly Dictionary<string, object> current = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-        private readonly Dictionary<string, object> initial = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+        //private readonly Dictionary<string, object> initial = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         //private readonly HashSet<string> changes = new HashSet<string>();
 
         internal FieldValue(string propertyName, TransientDictionary parent)
@@ -27,6 +27,10 @@ namespace PnP.Core.Model.SharePoint
         internal abstract string SharePointRestType { get; }
 
         internal abstract Guid CsomType { get; }
+
+        internal bool IsArray { get; set; }
+
+        public IField Field { get; set; }
 
         internal abstract IFieldValue FromJson(JsonElement json);
 
@@ -76,10 +80,10 @@ namespace PnP.Core.Model.SharePoint
             if (current.ContainsKey(property))
             {
                 // We're changing this property
-                if (!initial.ContainsKey(property))
-                {
-                    initial[property] = value;
-                }
+                //if (!initial.ContainsKey(property))
+                //{
+                //    initial[property] = value;
+                //}
                 current[property] = value;
                 //changes.Add(property);
                 Parent.MarkAsChanged(PropertyName);

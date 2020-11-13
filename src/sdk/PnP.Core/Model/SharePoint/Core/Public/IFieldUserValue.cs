@@ -3,17 +3,12 @@
     /// <summary>
     /// Represents a user retrieved via a list item field
     /// </summary>
-    public interface IFieldUserValue : IFieldValue
+    public interface IFieldUserValue : IFieldLookupValue
     {
         /// <summary>
         /// Email of the user
         /// </summary>
         public string Email { get; }
-
-        /// <summary>
-        /// Id in the SharePoint site collection for the user
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// Title/name of the user

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Text.Json;
@@ -126,6 +127,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Methods
+
         #region Graph/Rest interoperability overrides
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         internal async override Task GraphToRestMetadataAsync()
@@ -173,6 +175,34 @@ namespace PnP.Core.Model.SharePoint
             }
         }
         #endregion
+
+        #region Special field handling
+        public IFieldUrlValue NewFieldUrlValue(string propertyName, string url, string description = null)
+        {
+            return new FieldUrlValue(propertyName, Values)
+            {
+                Url = url,
+                Description = description
+            };
+        }
+
+        public IFieldLookupValue NewFieldLookupValue(string propertyName, int lookupId)
+        {
+            return new FieldLookupValue(propertyName, Values)
+            {
+                LookupId = lookupId
+            };
+        }
+
+        public IFieldUserValue NewFieldUserValue(string propertyName, int userId)
+        {
+            return new FieldUserValue(propertyName, Values)
+            {
+                LookupId = userId
+            };
+        }
+        #endregion
+
         #endregion
     }
 }

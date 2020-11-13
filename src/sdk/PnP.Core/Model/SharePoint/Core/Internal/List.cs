@@ -22,7 +22,7 @@ namespace PnP.Core.Model.SharePoint
         // Graph requires the "system" field to be loaded as trigger to return all lists 
         internal const string SystemFacet = "system";
         internal const string DefaultGraphFieldsToLoad = "system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list";
-        internal static Expression<Func<IList, object>>[] GetListDataAsStreamExpression = new Expression<Func<IList, object>>[] { p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Hidden) };
+        internal static Expression<Func<IList, object>>[] LoadFieldsExpression = new Expression<Func<IList, object>>[] { p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Hidden) };
 
         #region Construction
         public List()
@@ -388,10 +388,10 @@ namespace PnP.Core.Model.SharePoint
             int requestToUse = 0;
             var batch = PnPContext.BatchClient.EnsureBatch();
 
-            if (!ArePropertiesAvailable(GetListDataAsStreamExpression))
+            if (!ArePropertiesAvailable(LoadFieldsExpression))
             {
                 // Get field information via batch
-                await GetBatchAsync(batch, GetListDataAsStreamExpression).ConfigureAwait(false);
+                await GetBatchAsync(batch, LoadFieldsExpression).ConfigureAwait(false);
                 requestToUse++;
             }
             // GetListDataAsStream request via batch
