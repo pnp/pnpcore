@@ -26,7 +26,15 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromJson(JsonElement json)
         {
-            LookupId = int.Parse(json.GetString());
+            if (json.ValueKind == JsonValueKind.String)
+            {
+                LookupId = int.Parse(json.GetString());
+            } 
+            else if (json.ValueKind == JsonValueKind.Number)
+            {
+                LookupId = json.GetInt32();
+            }
+
             return this;
         }
 
@@ -73,6 +81,11 @@ namespace PnP.Core.Model.SharePoint
 
         internal override string ToCsomXml()
         {
+            if (!HasValue(nameof(LookupId)))
+            {
+                return "";
+            }
+
             /*
             <Parameter TypeId="{c956ab54-16bd-4c18-89d2-996f57282a6f}">
                 <Property Name="Email" Type="Null" />
@@ -81,9 +94,16 @@ namespace PnP.Core.Model.SharePoint
             </Parameter>
              */
             StringBuilder sb = new StringBuilder();
-            sb.Append(CsomHelper.ListItemSpecialFieldProperty.Replace(CsomHelper.FieldName, nameof(Email)).Replace(CsomHelper.FieldType, "Null").Replace(CsomHelper.FieldValue, ""));
-            sb.Append(CsomHelper.ListItemSpecialFieldProperty.Replace(CsomHelper.FieldName, nameof(LookupId)).Replace(CsomHelper.FieldType, LookupId.GetType().Name).Replace(CsomHelper.FieldValue, LookupId.ToString()));
-            sb.Append(CsomHelper.ListItemSpecialFieldProperty.Replace(CsomHelper.FieldName, nameof(Title)).Replace(CsomHelper.FieldType, "Null").Replace(CsomHelper.FieldValue, ""));
+            sb.Append(CsomHelper.ListItemSpecialFieldPropertyEmpty
+                .Replace(CsomHelper.FieldName, "Email")
+                .Replace(CsomHelper.FieldType, "Null"));
+            sb.Append(CsomHelper.ListItemSpecialFieldProperty
+                .Replace(CsomHelper.FieldName, "LookupId")
+                .Replace(CsomHelper.FieldType, LookupId.GetType().Name)
+                .Replace(CsomHelper.FieldValue, LookupId.ToString()));
+            sb.Append(CsomHelper.ListItemSpecialFieldPropertyEmpty
+                .Replace(CsomHelper.FieldName, "LookupValue")
+                .Replace(CsomHelper.FieldType, "Null"));
             return sb.ToString();
         }
     }

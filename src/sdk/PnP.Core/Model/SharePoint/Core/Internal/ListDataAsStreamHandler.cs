@@ -132,7 +132,7 @@ namespace PnP.Core.Model.SharePoint
                                     }
                                     else
                                     {
-                                        fieldValue = new FieldValueCollection(property.TypeAsString, property.Name, overflowDictionary);
+                                        fieldValue = new FieldValueCollection(property.Field, property.Name, overflowDictionary);
                                         foreach(var xx in property.Values)
                                         {
                                             var yy = xx.FieldValue.FromListDataAsStream(xx.Properties);
@@ -170,13 +170,13 @@ namespace PnP.Core.Model.SharePoint
                 {
                     var streamProperty = new ListDataAsStreamProperty()
                     {
-                        TypeAsString = field.TypeAsString,
+                        Field = field,
                         Type = field.FieldTypeKind,
                         Name = property.Name
                     };
 
                     // Is this a field that needs to be wrapped into a special field type?
-                    var specialField = DetectSpecialFieldType(streamProperty.TypeAsString, streamProperty.Name, overflowDictionary, field);
+                    var specialField = DetectSpecialFieldType(streamProperty.Name, overflowDictionary, field);
                     if (specialField != null)
                     {
                         streamProperty.IsArray = specialField.Item2;
@@ -277,7 +277,7 @@ namespace PnP.Core.Model.SharePoint
 
                             foreach(var streamPropertyElement in property.Value.EnumerateArray())
                             {
-                                (var fieldValue, var isArray) = DetectSpecialFieldType(streamProperty.TypeAsString, streamProperty.Name, overflowDictionary, field);
+                                (var fieldValue, var isArray) = DetectSpecialFieldType(streamProperty.Name, overflowDictionary, field);
                                 var listDataAsStreamPropertyValue = new ListDataAsStreamPropertyValue()
                                 {
                                     FieldValue = fieldValue
@@ -377,9 +377,9 @@ namespace PnP.Core.Model.SharePoint
             return properties;
         }
 
-        private static Tuple<FieldValue, bool> DetectSpecialFieldType(string fieldType, string name, TransientDictionary dictionary, IField field)
+        private static Tuple<FieldValue, bool> DetectSpecialFieldType(string name, TransientDictionary dictionary, IField field)
         { 
-            switch (fieldType)
+            switch (field.TypeAsString)
                 {
                 case "URL": return new Tuple<FieldValue, bool>(new FieldUrlValue(name, dictionary) { Field = field }, false);
                 case "UserMulti": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary) { Field = field }, true);

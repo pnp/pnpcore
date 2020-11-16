@@ -1,4 +1,4 @@
---batchresponse_f3d570c4-4c48-410b-b505-f868f4afe3d6
+--batchresponse_45d511df-d419-4fb9-8d32-a602617f2d7c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,22 +7,22 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "128",
+"ID": "137",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{0E5F278F-526A-4F9E-85AF-34C59E4830EF}",
+"UniqueId": "{AD322AF4-1F93-43AB-9CCB-9F472C3FE12E}",
 "ProgId": "",
 "NoExecute": "0",
-"ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
+"ContentTypeId": "0x0101009D1CB255DA76424F860D91F20E6C411800BC66A1F7CEC63943B700A35FCBCF0164",
 "FileRef": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePage.aspx",
 "FileRef.urlencode": "%2Fsites%2Fprov%2D1%2FSitePages%2FPNP%5FSDK%5FTEST%5FCreateAndUpdatePage%2Easpx",
 "FileRef.urlencodeasurl": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePage.aspx",
 "FileRef.urlencoding": "\u002fsites\u002fprov-1\u002fSitePages\u002fPNP_SDK_TEST_CreateAndUpdatePage.aspx",
 "FileRef.scriptencodeasurl": "\\u002fsites\\u002fprov-1\\u002fSitePages\\u002fPNP_SDK_TEST_CreateAndUpdatePage.aspx",
 "_UIVersion": "1",
-"SMTotalSize": "932",
-"File_x0020_Size": "780",
+"SMTotalSize": "4527",
+"File_x0020_Size": "3426",
 "_CommentFlags": "",
 "File_x0020_Type": "aspx",
 "HTML_x0020_File_x0020_Type.File_x0020_Type.mapall": "ichtm.gif|Microsoft SharePoint Designer|SharePoint.OpenDocuments|",
@@ -37,21 +37,21 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FileLeafRef.Suffix": "aspx",
 "FileDirRef": "\u002fsites\u002fprov-1\u002fSitePages",
 "Description": "",
-"Title": "",
-"ClientSideApplicationId": "",
-"PageLayoutType": "",
+"Title": "PNP_SDK_TEST_CreateAndUpdatePage",
+"ClientSideApplicationId": "{B6917CB1-93A0-4B97-A84D-7CF49975D4EC}",
+"PageLayoutType": "Article",
 "CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
-"BannerImageUrl": "",
-"BannerImageUrl.desc": "",
-"PromotedState": "",
-"PromotedState.": "",
+"LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;FullWidthImage&quot;,&quot;textAlignment&quot;&#58;&quot;Left&quot;,&quot;showTopicHeader&quot;&#58;false,&quot;showPublishDate&quot;&#58;false,&quot;topicHeader&quot;&#58;&quot;&quot;,&quot;authorByline&quot;&#58;[],&quot;authors&quot;&#58;[]&#125;&#125;\"><\u002fdiv><\u002fdiv><\u002fdiv>",
+"BannerImageUrl": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
+"BannerImageUrl.desc": "\u002f_layouts\u002f15\u002fimages\u002fsitepagethumbnail.png",
+"PromotedState": "0",
+"PromotedState.": "0",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
-"owshiddenversion": "1",
-"ContentVersion": "0",
-"DocConcurrencyNumber": "1",
+"owshiddenversion": "3",
+"ContentVersion": "1",
+"DocConcurrencyNumber": "3",
 "_VirusStatus": "",
 "ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
 }
@@ -65,4 +65,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_f3d570c4-4c48-410b-b505-f868f4afe3d6--
+--batchresponse_45d511df-d419-4fb9-8d32-a602617f2d7c--

@@ -286,6 +286,24 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please ensure your list Fields are loaded before getting list data. E.g. await list.GetAsync(p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, p =&gt; p.TypeAsString, p =&gt; p.Title)).
+        /// </summary>
+        internal static string Exception_ListItemUpdate_NoFieldsLoaded {
+            get {
+                return ResourceManager.GetString("Exception_ListItemUpdate_NoFieldsLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not locate hidden taxonomy multivalue note field.
+        /// </summary>
+        internal static string Exception_ListItemUpdate_NoTaxonomyNoteField {
+            get {
+                return ResourceManager.GetString("Exception_ListItemUpdate_NoTaxonomyNoteField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adding requires the implementation of an AddApiCallHandler handler returning an add ApiCall.
         /// </summary>
         internal static string Exception_MissingAddApiHandler {

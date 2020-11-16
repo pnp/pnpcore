@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal FieldType Type { get; set; }
 
-        internal string TypeAsString { get; set; }
+        internal IField Field { get; set; }
 
         internal JsonElement Value { get; set; }
 

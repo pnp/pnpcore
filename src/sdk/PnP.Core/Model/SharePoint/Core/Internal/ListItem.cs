@@ -177,30 +177,94 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Special field handling
-        public IFieldUrlValue NewFieldUrlValue(string propertyName, string url, string description = null)
+        public IFieldUrlValue NewFieldUrlValue(IField fieldToUpdate, string url, string description = null)
         {
-            return new FieldUrlValue(propertyName, Values)
+            if (fieldToUpdate == null)
+            {
+                throw new ArgumentNullException(nameof(fieldToUpdate));
+            }
+
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
+            return new FieldUrlValue(fieldToUpdate.InternalName, Values)
             {
                 Url = url,
-                Description = description
+                Description = description ?? url,
+                Field = fieldToUpdate
             };
         }
 
-        public IFieldLookupValue NewFieldLookupValue(string propertyName, int lookupId)
+        public IFieldLookupValue NewFieldLookupValue(IField fieldToUpdate, int lookupId)
         {
-            return new FieldLookupValue(propertyName, Values)
+            if (fieldToUpdate == null)
             {
-                LookupId = lookupId
+                throw new ArgumentNullException(nameof(fieldToUpdate));
+            }
+
+            if (lookupId < -1)
+            {
+                throw new ArgumentNullException(nameof(lookupId));
+            }
+
+            return new FieldLookupValue(fieldToUpdate.InternalName, Values)
+            {
+                LookupId = lookupId,
+                Field = fieldToUpdate
             };
         }
 
-        public IFieldUserValue NewFieldUserValue(string propertyName, int userId)
+        public IFieldUserValue NewFieldUserValue(IField fieldToUpdate, int userId)
         {
-            return new FieldUserValue(propertyName, Values)
+            if (fieldToUpdate == null)
             {
-                LookupId = userId
+                throw new ArgumentNullException(nameof(fieldToUpdate));
+            }
+
+            if (userId < -1)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
+
+            return new FieldUserValue(fieldToUpdate.InternalName, Values)
+            {
+                LookupId = userId,
+                Field = fieldToUpdate
             };
         }
+
+        public IFieldTaxonomyValue NewFieldTaxonomyValue(IField fieldToUpdate, Guid termId, string label, int wssId = -1)
+        {
+            if (fieldToUpdate == null)
+            {
+                throw new ArgumentNullException(nameof(fieldToUpdate));
+            }
+
+            if (termId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(termId));
+            }
+
+            if (label == null)
+            {
+                throw new ArgumentNullException(nameof(label));
+            }
+
+            return new FieldTaxonomyValue(fieldToUpdate.InternalName, Values)
+            {
+                TermId = termId,
+                Label = label,
+                WssId = wssId,
+                Field = fieldToUpdate
+            };
+        }
+
+        public IFieldValueCollection NewFieldValueCollection(IField fieldToUpdate, TransientDictionary parent)
+        {
+            return new FieldValueCollection(fieldToUpdate, fieldToUpdate.InternalName, parent);
+        }        
         #endregion
 
         #endregion

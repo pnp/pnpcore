@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
@@ -76,14 +78,33 @@ namespace PnP.Core.Model.SharePoint
 
         internal override string ToCsomXml()
         {
-            throw new NotImplementedException();
+            if (!HasValue(nameof(TermId)) || !HasValue(nameof(Label)))
+            {
+                return "";
+            }
+
+            /*
+            <Parameter TypeId="{19e70ed0-4177-456b-8156-015e4d163ff8}">
+                <Property Name="Label" Type="String">MBI</Property>
+                <Property Name="TermGuid" Type="String">1824510b-00e1-40ac-8294-528b1c9421e0</Property>
+                <Property Name="WssId" Type="Int32">-1</Property>
+            </Parameter>
+             */
+            StringBuilder sb = new StringBuilder();
+            sb.Append(CsomHelper.ListItemSpecialFieldProperty
+                .Replace(CsomHelper.FieldName, "Label")
+                .Replace(CsomHelper.FieldType, Label.GetType().Name)
+                .Replace(CsomHelper.FieldValue, Label != null ? CsomHelper.XmlString(Label) : "Null"));
+            sb.Append(CsomHelper.ListItemSpecialFieldProperty
+                .Replace(CsomHelper.FieldName, "TermGuid")
+                .Replace(CsomHelper.FieldType, "String")
+                .Replace(CsomHelper.FieldValue, TermId.ToString()));
+            sb.Append(CsomHelper.ListItemSpecialFieldProperty
+                .Replace(CsomHelper.FieldName, "WssId")
+                .Replace(CsomHelper.FieldType, WssId.GetType().Name)
+                .Replace(CsomHelper.FieldValue, WssId.ToString()));
+            return sb.ToString();
         }
 
-        public void LoadTerm(Guid termId, string label, int wssId = -1)
-        {
-            TermId = termId;
-            Label = label;
-            WssId = wssId;
-        }
     }
 }

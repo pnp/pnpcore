@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace PnP.Core.Model.SharePoint
 {
     internal class FieldValueCollection : IFieldValueCollection
     {
-        internal FieldValueCollection(string typeAsString, string propertyName, TransientDictionary parent)
+        internal FieldValueCollection(IField field, string propertyName, TransientDictionary parent)
         {
-            TypeAsString = typeAsString;
+            TypeAsString = field != null ? field.TypeAsString : "";
+            Field = field;
             PropertyName = propertyName;
             Parent = parent;
 
@@ -23,6 +25,8 @@ namespace PnP.Core.Model.SharePoint
         internal string PropertyName { get; set; }
 
         internal string TypeAsString { get; set; }
+
+        internal IField Field { get; set; }
 
         public List<IFieldValue> Values { get; } = new List<IFieldValue>();
 
@@ -50,28 +54,42 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        internal object TaxonomyFieldTypeMultiToJson()
+        internal string TaxonomyFieldTypeMultiUpdateString()
         {
-            List<object> terms = new List<object>();
+            StringBuilder sb = new StringBuilder();
 
             foreach (var item in Values)
             {
-                terms.Add(new { Label = (item as FieldTaxonomyValue).Label,
-                                TermGuid = (item as FieldTaxonomyValue).TermId,
-                                WssId = (item as FieldTaxonomyValue).WssId });
+                sb.Append($"{(item as FieldTaxonomyValue).WssId};#{(item as FieldTaxonomyValue).Label}|{(item as FieldTaxonomyValue).TermId};#");
             }
 
-            var updateMessage = new
-            {
-                __metadata = new { type = "Collection(SP.Taxonomy.TaxonomyFieldValue)" },
-                results = terms.ToArray()
-            };
+            return sb.ToString().TrimEnd('#');
+        }
 
-            return updateMessage;
+        internal IField TaxonomyFieldTypeMultiFieldToUpdate()
+        {
+            if (Field != null)
+            {
+                var fieldCollection = Field.Parent as FieldCollection;
+                // Find the corresponding Note field (mm fieldname + _0) by title search
+                var noteField = fieldCollection.FirstOrDefault(p => p.Title == $"{Field.Title}_0");
+                if (noteField != null)
+                {
+                    return noteField;
+                }
+                else
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_ListItemUpdate_NoTaxonomyNoteField);
+                }
+            }
+            else
+            {
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_ListItemUpdate_NoFieldsLoaded);
+            }
         }
 
         public void RemoveTaxonomyFieldValue(Guid termId)
-        {
+        {            
             foreach(var valueToRemove in Values.Cast<IFieldTaxonomyValue>().Where(p => p.TermId == termId).ToList())
             {
                 Values.Remove(valueToRemove);

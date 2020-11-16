@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
@@ -58,7 +60,20 @@ namespace PnP.Core.Model.SharePoint
 
         internal override string ToCsomXml()
         {
-            throw new NotImplementedException();
+            if (!HasValue(nameof(LookupId)))
+            {
+                return "";
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append(CsomHelper.ListItemSpecialFieldProperty
+                .Replace(CsomHelper.FieldName, "LookupId")
+                .Replace(CsomHelper.FieldType, LookupId.GetType().Name)
+                .Replace(CsomHelper.FieldValue, LookupId.ToString()));
+            sb.Append(CsomHelper.ListItemSpecialFieldPropertyEmpty
+                .Replace(CsomHelper.FieldName, "LookupValue")
+                .Replace(CsomHelper.FieldType, "Null"));
+            return sb.ToString();
         }
     }
 }

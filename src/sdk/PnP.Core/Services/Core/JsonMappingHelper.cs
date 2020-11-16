@@ -299,7 +299,7 @@ namespace PnP.Core.Services
                         {
 
                             // Verify if we can map the received json to a supported field type
-                            (object fieldType, string fieldName) = ProcessSpecialRestFieldType(property.Name, dictionaryPropertyToAddValueTo, property.Value);
+                            (object fieldType, string fieldName) = ProcessSpecialRestFieldType(pnpObject, property.Name, dictionaryPropertyToAddValueTo, property.Value);
                             if (fieldType != null)
                             {                                
                                 AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldType);
@@ -346,15 +346,22 @@ namespace PnP.Core.Services
             return requested;
         }
 
-        private static Tuple<object, string> ProcessSpecialRestFieldType(string propertyName, TransientDictionary dictionaryPropertyToAddValueTo, JsonElement json)
+        private static Tuple<object, string> ProcessSpecialRestFieldType(TransientObject pnpObject, string propertyName, TransientDictionary dictionaryPropertyToAddValueTo, JsonElement json)
         {
+            // This special processing only applies to list items, property bags are excluded
+            if (pnpObject.GetType() != typeof(ListItem))
+            {
+                return new Tuple<object, string>(null, null);
+            }
+
             if (json.ValueKind == JsonValueKind.Object && json.TryGetProperty(PnPConstants.SharePointRestMetadata, out JsonElement metadata) && metadata.TryGetProperty(PnPConstants.MetaDataType, out JsonElement type))
             {
+
                 switch (type.GetString())
                 {
                     case "SP.FieldUrlValue": 
-                        {
-                            var fieldValue = new FieldUrlValue(propertyName, dictionaryPropertyToAddValueTo);
+                        {                            
+                            var fieldValue = new FieldUrlValue(propertyName, dictionaryPropertyToAddValueTo) {  Field = GetListItemField(pnpObject, propertyName) };
                             fieldValue.FromJson(json);
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
@@ -374,7 +381,7 @@ namespace PnP.Core.Services
                             */
                             #endregion
 
-                            var fieldValue = new FieldTaxonomyValue(propertyName, dictionaryPropertyToAddValueTo);
+                            var fieldValue = new FieldTaxonomyValue(propertyName, dictionaryPropertyToAddValueTo) { Field = GetListItemField(pnpObject, propertyName) };
                             fieldValue.FromJson(json);
                             fieldValue.IsArray = false;
                             return new Tuple<object, string>(fieldValue, propertyName);
@@ -410,12 +417,13 @@ namespace PnP.Core.Services
 
                             if (json.TryGetProperty("results", out JsonElement results))
                             {
-                                var values = new FieldValueCollection("", propertyName, dictionaryPropertyToAddValueTo);
+                                var field = GetListItemField(pnpObject, propertyName);
+                                var values = new FieldValueCollection(field, propertyName, dictionaryPropertyToAddValueTo);
                                 if (results.ValueKind == JsonValueKind.Array)
                                 {
                                     foreach (var term in results.EnumerateArray())
                                     {
-                                        var fieldValue = new FieldTaxonomyValue(propertyName, dictionaryPropertyToAddValueTo);
+                                        var fieldValue = new FieldTaxonomyValue(propertyName, dictionaryPropertyToAddValueTo) { Field = field };
                                         fieldValue.FromJson(term);
                                         fieldValue.IsArray = true;
                                         values.Values.Add(fieldValue);
@@ -462,18 +470,37 @@ namespace PnP.Core.Services
 
                             if (json.TryGetProperty("results", out JsonElement results))
                             {
-                                var values = new FieldValueCollection("", propertyName.Substring(0, propertyName.Length - 2), dictionaryPropertyToAddValueTo);
+                                string actualPropertyName = propertyName.Substring(0, propertyName.Length - 2);
+                                var field = GetListItemField(pnpObject, actualPropertyName);
+                                var values = new FieldValueCollection(field, actualPropertyName, dictionaryPropertyToAddValueTo);
                                 if (results.ValueKind == JsonValueKind.Array)
-                                {
+                                {                                    
                                     foreach (var lookupId in results.EnumerateArray())
                                     {
-                                        var fieldValue = new FieldLookupValue(propertyName.Substring(0, propertyName.Length - 2), dictionaryPropertyToAddValueTo);
+                                        FieldLookupValue fieldValue;
+                                        if (field != null)
+                                        {
+                                            if (field.TypeAsString == "UserMulti")
+                                            {
+                                                fieldValue = new FieldUserValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = field };
+                                            }
+                                            else
+                                            {
+                                                fieldValue = new FieldLookupValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = field };
+                                            }
+                                        }
+                                        else
+                                        {
+                                            // No field found...assume lookup value
+                                            fieldValue = new FieldLookupValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = field };
+                                        }
+
                                         fieldValue.FromJson(lookupId);
                                         fieldValue.IsArray = true;
                                         values.Values.Add(fieldValue);
                                     }
                                 }
-                                return new Tuple<object, string>(values, propertyName.Substring(0, propertyName.Length - 2));
+                                return new Tuple<object, string>(values, actualPropertyName);
                             }
 
                             return new Tuple<object, string>(null, null);
@@ -528,10 +555,11 @@ namespace PnP.Core.Services
                      */
                     #endregion
 
-                    var fieldValue = new FieldUserValue(propertyName.Substring(0, propertyName.Length  - 8), dictionaryPropertyToAddValueTo);
+                    string actualPropertyName = propertyName.Substring(0, propertyName.Length - 8);
+                    var fieldValue = new FieldUserValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = GetListItemField(pnpObject, actualPropertyName) };
                     fieldValue.FromJson(json);
                     fieldValue.IsArray = false;
-                    return new Tuple<object, string>(fieldValue, propertyName.Substring(0, propertyName.Length - 8));
+                    return new Tuple<object, string>(fieldValue, actualPropertyName);
                 } 
                 else if (json.ValueKind == JsonValueKind.String && (json.GetString().StartsWith("{") && json.GetString().Contains("LocationUri") && json.GetString().EndsWith("}")))
                 {
@@ -543,7 +571,7 @@ namespace PnP.Core.Services
 
                     // investigate if this can be a location field
                     var parsedFieldContent = JsonDocument.Parse(json.GetString()).RootElement;
-                    var fieldValue = new FieldLocationValue(propertyName, dictionaryPropertyToAddValueTo);
+                    var fieldValue = new FieldLocationValue(propertyName, dictionaryPropertyToAddValueTo) { Field = GetListItemField(pnpObject, propertyName) };
                     fieldValue.FromJson(parsedFieldContent);
                     fieldValue.IsArray = false;
                     return new Tuple<object, string>(fieldValue, propertyName);
@@ -554,6 +582,16 @@ namespace PnP.Core.Services
             return new Tuple<object, string>(null, null);
         }
 
+        private static IField GetListItemField(TransientObject pnpObject, string fieldName)
+        {
+            var parentList = (pnpObject as IDataModelParent).Parent.Parent as List;
+            if (parentList.ArePropertiesAvailable(List.LoadFieldsExpression))
+            {
+                return parentList.Fields.FirstOrDefault(p => p.InternalName == fieldName);
+            }
+
+            return null;
+        }
 
         internal static async Task TryPopuplatePnPObjectMetadataFromRest(IDataModelWithContext contextAwareObject, IMetadataExtensible targetMetadataObject, EntityInfo entity, string idFieldValue)
         {

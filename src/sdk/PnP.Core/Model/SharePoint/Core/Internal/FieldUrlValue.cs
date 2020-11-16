@@ -39,6 +39,11 @@ namespace PnP.Core.Model.SharePoint
                 Description = description.GetString();
             }
 
+            if (!HasValue(nameof(Description)))
+            {
+                Description = Url;
+            }
+
             return this;
         }
 
@@ -52,6 +57,11 @@ namespace PnP.Core.Model.SharePoint
             if (properties.ContainsKey("desc"))
             {
                 Description = properties["desc"];
+            }
+
+            if (!HasValue(nameof(Description)))
+            {
+                Description = Url;
             }
 
             return this;
@@ -71,9 +81,20 @@ namespace PnP.Core.Model.SharePoint
 
         internal override string ToCsomXml()
         {
+            if (!HasValue(nameof(Url)))
+            {
+                return "";
+            }
+
             StringBuilder sb = new StringBuilder();
-            sb.Append(CsomHelper.ListItemSpecialFieldProperty.Replace(CsomHelper.FieldName, nameof(Url)).Replace(CsomHelper.FieldType, Url.GetType().Name).Replace(CsomHelper.FieldValue, Url));
-            sb.Append(CsomHelper.ListItemSpecialFieldProperty.Replace(CsomHelper.FieldName, nameof(Description)).Replace(CsomHelper.FieldType, Description.GetType().Name).Replace(CsomHelper.FieldValue, Description));
+            sb.Append(CsomHelper.ListItemSpecialFieldProperty
+                .Replace(CsomHelper.FieldName, "Url")
+                .Replace(CsomHelper.FieldType, Url.GetType().Name)
+                .Replace(CsomHelper.FieldValue, CsomHelper.XmlString(Url)));
+            sb.Append(CsomHelper.ListItemSpecialFieldProperty
+                .Replace(CsomHelper.FieldName, "Description")
+                .Replace(CsomHelper.FieldType, Description.GetType().Name)
+                .Replace(CsomHelper.FieldValue, CsomHelper.XmlString(Description)));
             return sb.ToString();
         }
     }

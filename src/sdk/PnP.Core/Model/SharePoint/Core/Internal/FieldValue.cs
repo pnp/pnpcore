@@ -97,6 +97,11 @@ namespace PnP.Core.Model.SharePoint
             return true;
         }
 
+        internal bool HasValue([System.Runtime.CompilerServices.CallerMemberName] string property = "")
+        {
+            return current.ContainsKey(property);
+        }
+
         ///// <summary>
         ///// Sets a property value without marking it as "changed"
         ///// </summary>

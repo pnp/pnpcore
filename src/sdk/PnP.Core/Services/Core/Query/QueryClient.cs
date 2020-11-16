@@ -947,7 +947,7 @@ namespace PnP.Core.Services
                     else
                     {
                         // What if the complex type we're updating contains a beta property
-                        if (/*ComplexTypeHasBetaProperty(changedField) &&*/ !model.PnPContext.GraphCanUseBeta)
+                        if (!model.PnPContext.GraphCanUseBeta)
                         {
                             addField = false;
                         }
@@ -1092,8 +1092,11 @@ namespace PnP.Core.Services
                                 }                                
                                 else
                                 {
-                                    // TODO
-                                    //((ExpandoObject)updateMessage).SetProperty($"{changedProp.Key}", collection.TaxonomyFieldTypeMultiToJson());
+                                    // We update the hidden note field that's connected to the taxonomy multi value field
+                                    // See https://www.aerieconsulting.com/blog/update-using-rest-to-update-a-multi-value-taxonomy-field-in-sharepoint
+                                    var taxonomyMultiValueUpdateContent = collection.TaxonomyFieldTypeMultiUpdateString();
+                                    var taxonomyMultiValueFieldToUpdate = collection.TaxonomyFieldTypeMultiFieldToUpdate();
+                                    ((ExpandoObject)updateMessage).SetProperty($"{taxonomyMultiValueFieldToUpdate.InternalName}", taxonomyMultiValueUpdateContent);
                                 }
                             }
                             else if (changedProp.Value is List<string>)
