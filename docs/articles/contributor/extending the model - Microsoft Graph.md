@@ -10,13 +10,13 @@ All model classes need to link their concrete type (so the implementation) to th
 
 ```csharp
 [ConcreteType(typeof(TeamChannel))]
-public interface ITeamChannel : IDataModel<ITeamChannel>, IDataModelUpdate, IDataModelDelete
+public interface ITeamChannel : IDataModel<ITeamChannel>, IDataModelGet<ITeamChannel>, IDataModelUpdate, IDataModelDelete
 {
     // Ommitted for brevity
 }
 ```
 
-### Class decoration
+### Model class decoration
 
 Each model class that uses Microsoft Graph needs to have at least one `GraphType` attribute:
 

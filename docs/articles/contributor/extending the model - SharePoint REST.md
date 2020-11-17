@@ -11,13 +11,13 @@ All model classes need to link their concrete type (so the implementation) to th
 
 ```csharp
 [ConcreteType(typeof(List))]
-public interface IList : IDataModel<IList>, IDataModelUpdate, IDataModelDelete
+public interface IList : IDataModel<IList>, IDataModelGet<IList>, IDataModelUpdate, IDataModelDelete
 {
     // Omitted for brevity
 }
 ```
 
-### Class decoration
+### Model class decoration
 
 Each model class that uses SharePoint REST does need to have at least one `SharePointType` attribute:
 
