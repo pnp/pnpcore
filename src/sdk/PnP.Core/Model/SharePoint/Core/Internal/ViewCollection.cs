@@ -92,7 +92,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task RemoveAsync(Guid id)
         {
-            if (id == null)
+            if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(id));
             }
@@ -124,7 +124,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task RemoveBatchAsync(Batch batch, Guid id)
         {
-            if (id == null)
+            if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(id));
             }

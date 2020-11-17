@@ -17,7 +17,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task DisableAsync(Guid id)
         {
-            if (id == null)
+            if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(id));
             }
@@ -55,7 +55,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task DisableBatchAsync(Batch batch, Guid id)
         {
-            if (id == null)
+            if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(id));
             }
@@ -83,7 +83,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IFeature> EnableAsync(Guid id)
         {
-            if (id == null)
+            if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(id));
             }
@@ -118,7 +118,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IFeature> EnableBatchAsync(Batch batch, Guid id)
         {
-            if (id == null)
+            if (id == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(id));
             }
