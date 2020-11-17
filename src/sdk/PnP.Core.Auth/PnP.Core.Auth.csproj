@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+	<TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
     <RootNamespace>PnP.Core.Auth</RootNamespace>
     <AssemblyName>PnP.Core.Auth</AssemblyName>
-    <InformationalVersion>Preview 2 package</InformationalVersion>
+    <InformationalVersion>Preview 3 package</InformationalVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>PnP 2020</Copyright>
     <Company>PnP</Company>
