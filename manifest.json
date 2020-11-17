@@ -2466,7 +2466,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ViewType.html",
-          "hash": "twOJVvBgcJpqofHnDxFnmA=="
+          "hash": "5e5pQ9FElDmWvrGXewVCzQ=="
         }
       },
       "is_incremental": false,
@@ -2478,7 +2478,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ViewType2.html",
-          "hash": "iyRdLNxTP3WQkKAehGGDMg=="
+          "hash": "0940ie+lvEvbfEgHhQHVeg=="
         }
       },
       "is_incremental": false,
@@ -2490,7 +2490,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ViewTypeKind.html",
-          "hash": "owxuRHblsBk1Ur16RcRS8A=="
+          "hash": "9HrlOCrt3430zGbjY+IvJg=="
         }
       },
       "is_incremental": false,
