@@ -23,6 +23,9 @@ Using Visual Studio requires you to:
 - Download and install Visual Studio 2019: https://visualstudio.microsoft.com/free-developer-offers/
 - Navigate to the `./src/sdk` folder and open the **PnP.Core.sln** solution
 
+> [!Note]
+> November 2020: PnP Core updated to take advantage of ASP.NET 5.0, please ensure that you install at least Visual Studio 2019 version **16.8.0** upwards to open the project
+
 ### I want to use Visual Studio Code for development
 
 Using Visual Studio Code requires you to:
