@@ -29,12 +29,12 @@ This is a community effort, hence we cannot guarantee below roadmap but rest ass
 
 Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit into modern .NET development:
 
-- We currently target .NET Standard 2.0 and [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/). Use the .NET 5.0 build if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatability with .NET Framework 4.6.1+
+- We currently target .NET Standard 2.0 and [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/). Use the .NET 5.0 build if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+
 - This library will work cross platform (Windows, Linux, MacOS)
 - This library will work in all places where .NET will work (see [our samples](src/samples) to learn more):
   - Backend: e.g. [Azure functions v3](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
   - Web: e.g. [ASP.NET core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
-  - Browser (WebAssemby (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
+  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
   - Windows Client: [Windows Forms, WPF](https://docs.microsoft.com/en-us/dotnet/desktop/?view=netdesktop-5.0)
   - Mobile: [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
   
