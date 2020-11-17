@@ -87,12 +87,12 @@
 <h3 id="public-model-interface-decoration">Public model (interface) decoration</h3>
 <p>All model classes need to link their concrete type (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
 <pre><code class="lang-csharp">[ConcreteType(typeof(List))]
-public interface IList : IDataModel&lt;IList&gt;, IDataModelUpdate, IDataModelDelete
+public interface IList : IDataModel&lt;IList&gt;, IDataModelGet&lt;IList&gt;, IDataModelUpdate, IDataModelDelete
 {
     // Omitted for brevity
 }
 </code></pre>
-<h3 id="class-decoration">Class decoration</h3>
+<h3 id="model-class-decoration">Model class decoration</h3>
 <p>Each model class that uses SharePoint REST does need to have at least one <code>SharePointType</code> attribute:</p>
 <pre><code class="lang-csharp">[SharePointType(&quot;SP.List&quot;, Uri = &quot;_api/Web/Lists(guid'{Id}')&quot;, Update = &quot;_api/web/lists/getbyid(guid'{Id}')&quot;, LinqGet = &quot;_api/web/lists&quot;)]
 internal partial class List : BaseDataModel&lt;IList&gt;, IList

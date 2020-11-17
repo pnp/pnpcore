@@ -87,12 +87,12 @@
 <h3 id="public-model-interface-decoration">Public model (interface) decoration</h3>
 <p>All model classes need to link their concrete type (so the implementation) to the public interface via the <code>ConcreteType</code> class attribute:</p>
 <pre><code class="lang-csharp">[ConcreteType(typeof(TeamChannel))]
-public interface ITeamChannel : IDataModel&lt;ITeamChannel&gt;, IDataModelUpdate, IDataModelDelete
+public interface ITeamChannel : IDataModel&lt;ITeamChannel&gt;, IDataModelGet&lt;ITeamChannel&gt;, IDataModelUpdate, IDataModelDelete
 {
     // Ommitted for brevity
 }
 </code></pre>
-<h3 id="class-decoration">Class decoration</h3>
+<h3 id="model-class-decoration">Model class decoration</h3>
 <p>Each model class that uses Microsoft Graph needs to have at least one <code>GraphType</code> attribute:</p>
 <pre><code class="lang-csharp">[GraphType(Uri = &quot;teams/{Site.GroupId}&quot;)]
 internal partial class Team : BaseDataModel&lt;ITeam&gt;, ITeam
