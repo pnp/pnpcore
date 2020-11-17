@@ -432,9 +432,7 @@ namespace PnP.Core.Model.SharePoint
             return templateFolder.Name;
         }
 
-#pragma warning disable CA1822 // Mark members as static
         public IClientSideText NewTextPart(string text = null)
-#pragma warning restore CA1822 // Mark members as static
         {
             var textPart = new ClientSideText();
             if (!string.IsNullOrEmpty(text))
@@ -832,7 +830,7 @@ namespace PnP.Core.Model.SharePoint
 
             }
             // Thumbnail
-            var thumbnailData = new { controlType = 0, pageSettingsSlice = new { isDefaultDescription = isDefaultDescription, isDefaultThumbnail = string.IsNullOrEmpty(ThumbnailUrl) } };
+            var thumbnailData = new { controlType = 0, pageSettingsSlice = new { isDefaultDescription, isDefaultThumbnail = string.IsNullOrEmpty(ThumbnailUrl) } };
             html.Append($@"<div data-sp-canvascontrol="""" data-sp-canvasdataversion=""1.0"" data-sp-controldata=""{JsonSerializer.Serialize(thumbnailData).Replace("\"", "&quot;")}""></div>");
 
             html.Append("</div>");
@@ -1481,7 +1479,7 @@ namespace PnP.Core.Model.SharePoint
                     else
                     {
                         // iterate the web parts...if we find an unique id then let's grab that information
-                        foreach (var control in this.Controls)
+                        foreach (var control in Controls)
                         {
                             if (control is ClientSideWebPart webPart)
                             {

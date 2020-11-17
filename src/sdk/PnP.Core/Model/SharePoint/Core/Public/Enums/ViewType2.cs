@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PnP.Core.Model.SharePoint
+﻿namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Modern List View Types

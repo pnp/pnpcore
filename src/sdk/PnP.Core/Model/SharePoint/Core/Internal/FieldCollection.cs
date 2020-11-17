@@ -310,37 +310,27 @@ namespace PnP.Core.Model.SharePoint
         private static bool ValidateFieldOptions(FieldType fieldType, FieldOptions fieldOptions)
         {
             if (fieldOptions == null)
-                return true;
-
-            switch (fieldType)
             {
-                case FieldType.Text:
-                    return fieldOptions is FieldTextOptions;
-                case FieldType.Note:
-                    return fieldOptions is FieldMultilineTextOptions;
-                case FieldType.DateTime:
-                    return fieldOptions is FieldDateTimeOptions;
-                case FieldType.Choice:
-                    return fieldOptions is FieldChoiceOptions;
-                case FieldType.MultiChoice:
-                    return fieldOptions is FieldMultiChoiceOptions;
-                case FieldType.Lookup:
-                    return fieldOptions is FieldLookupOptions;
-                case FieldType.Number:
-                    return fieldOptions is FieldNumberOptions;
-                case FieldType.Currency:
-                    return fieldOptions is FieldCurrencyOptions;
-                case FieldType.URL:
-                    return fieldOptions is FieldUrlOptions;
-                case FieldType.Calculated:
-                    return fieldOptions is FieldCalculatedOptions;
-                case FieldType.User:
-                    return fieldOptions is FieldUserOptions;
+                return true;
+            }
+
+            return fieldType switch
+            {
+                FieldType.Text => fieldOptions is FieldTextOptions,
+                FieldType.Note => fieldOptions is FieldMultilineTextOptions,
+                FieldType.DateTime => fieldOptions is FieldDateTimeOptions,
+                FieldType.Choice => fieldOptions is FieldChoiceOptions,
+                FieldType.MultiChoice => fieldOptions is FieldMultiChoiceOptions,
+                FieldType.Lookup => fieldOptions is FieldLookupOptions,
+                FieldType.Number => fieldOptions is FieldNumberOptions,
+                FieldType.Currency => fieldOptions is FieldCurrencyOptions,
+                FieldType.URL => fieldOptions is FieldUrlOptions,
+                FieldType.Calculated => fieldOptions is FieldCalculatedOptions,
+                FieldType.User => fieldOptions is FieldUserOptions,
                 //case FieldType.GridChoice:
                 //return fieldOptions is FieldGeo;
-                default:
-                    return false;
-            }
+                _ => false,
+            };
         }
 
         public async Task<IField> AddCalculatedAsync(string title, FieldCalculatedOptions options = null)

@@ -46,7 +46,7 @@ namespace PnP.Core.Model.SharePoint
         }
 
         /// <summary>
-        /// Instantiates a client side web part based on the information that was obtain from calling the AvailableClientSideComponents methods on the <see cref="ClientSidePage"/> object.
+        /// Instantiates a client side web part based on the information that was obtain from calling the AvailableClientSideComponents methods on the <see cref="IPage"/> object.
         /// </summary>
         /// <param name="component">Component to create a ClientSideWebPart instance for</param>
         public ClientSideWebPart(IClientSideComponent component) : this()

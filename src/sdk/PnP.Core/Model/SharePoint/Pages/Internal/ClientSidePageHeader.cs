@@ -121,7 +121,7 @@ namespace PnP.Core.Model.SharePoint
         {
             this.imageServerRelativeUrl = imageServerRelativeUrl;
             clientContext = cc;
-            this.Type = pageHeaderType;
+            Type = pageHeaderType;
             LayoutType = PageHeaderLayoutType.FullWidthImage;
             TextAlignment = PageHeaderTitleAlignment.Left;
             ShowTopicHeader = false;
