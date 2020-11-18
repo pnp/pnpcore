@@ -25,16 +25,16 @@ This is a community effort, hence we cannot guarantee below roadmap but rest ass
 
 ## Frequently Asked Questions
 
-### Will this work in modern .Net
+### Will this work in modern .NET
 
-Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit into modern .Net development:
+Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit into modern .NET development:
 
-- We currently target .Net Standard 2.0, once [.Net 5.0](https://devblogs.microsoft.com/dotnet/introducing-net-5/) is available we'll also ship a [.Net 5.0](https://devblogs.microsoft.com/dotnet/introducing-net-5/) version
+- We currently target .NET Standard 2.0 and [.NET 5.0](https://devblogs.microsoft.com/dotnet/announcing-net-5-0/). Use the .NET 5.0 build if you're using a modern .NET version, use .NET Standard 2.0 for backwards compatibility with .NET Framework 4.6.1+
 - This library will work cross platform (Windows, Linux, MacOS)
-- This library will work in all places where .Net will work (see [our samples](src/samples) to learn more):
+- This library will work in all places where .NET will work (see [our samples](src/samples) to learn more):
   - Backend: e.g. [Azure functions v3](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
-  - Web: e.g. [ASP.Net core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
-  - Browser (WebAssemby (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
+  - Web: e.g. [ASP.NET core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
+  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
   - Windows Client: [Windows Forms, WPF](https://docs.microsoft.com/en-us/dotnet/desktop/?view=netdesktop-5.0)
   - Mobile: [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
   
@@ -42,7 +42,7 @@ Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit in
 
 ### What's the relationship with the existing PnP Sites Core / PnP Framework libraries
 
-The [PnP Sites Core library](https://github.com/PnP/PnP-Sites-Core) is very popular library that extends SharePoint using mainly CSOM. This library contains the PnP Provisioning engine, tons of extension methods, a modern page API, etc...but this library has also organically grown into a complex and hard to maintain code base. One of the reasons why the PnP Core SDK development started is to provide a new clean basis for the PnP Sites Core library with a strong focus on quality (test coverage above 80%, automation). As this transition will take quite some time and effort we plan to gradually move things over from PnP Sites Core to the PnP Core SDK. The first step in this transition is releasing a .Net Standard 2.0 version of PnP Sites Core, called [PnP Framework](https://github.com/pnp/pnpframework). Going forward [PnP Framework](https://github.com/pnp/pnpframework) features will move to the PnP Core SDK in a phased approach. At this moment we've shipped our first [PnP Framework](https://github.com/pnp/pnpframework) preview version and preview 3 of the [PnP Core SDK](https://github.com/pnp/pnpcore).
+The [PnP Sites Core library](https://github.com/PnP/PnP-Sites-Core) is very popular library that extends SharePoint using mainly CSOM. This library contains the PnP Provisioning engine, tons of extension methods, a modern page API, etc...but this library has also organically grown into a complex and hard to maintain code base. One of the reasons why the PnP Core SDK development started is to provide a new clean basis for the PnP Sites Core library with a strong focus on quality (test coverage above 80%, automation). As this transition will take quite some time and effort we plan to gradually move things over from PnP Sites Core to the PnP Core SDK. The first step in this transition is releasing a .NET Standard 2.0 version of PnP Sites Core, called [PnP Framework](https://github.com/pnp/pnpframework). Going forward [PnP Framework](https://github.com/pnp/pnpframework) features will move to the PnP Core SDK in a phased approach. At this moment we've shipped our first [PnP Framework](https://github.com/pnp/pnpframework) preview version and preview 3 of the [PnP Core SDK](https://github.com/pnp/pnpcore).
 
 ![PnP dotnet roadmap](PnP%20dotnet%20Roadmap%20-%20October%20status.png)
 
