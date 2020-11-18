@@ -1290,7 +1290,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ICanvasControl.html",
-          "hash": "WUc7aPNe3TiehnvMzksE1w=="
+          "hash": "ZAppH7gfC0ux6RNy2r6efw=="
         }
       },
       "is_incremental": false,
@@ -1303,54 +1303,6 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.ICanvasSection.html",
           "hash": "9pGD5l9BsMa/IkN/S121nw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.IClientSideComponent.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.IClientSideComponent.html",
-          "hash": "zaEX5+CKuLKA9sLbHcT2Cw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.IClientSidePageHeader.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.IClientSidePageHeader.html",
-          "hash": "fbgBWsSELu8v2yPsZ8AH8w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.IClientSideText.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.IClientSideText.html",
-          "hash": "xiXy4NOWqPfUOVM6wsNREQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.IClientSideWebPart.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.IClientSideWebPart.html",
-          "hash": "MTS3VVaZx/4uMI3fnWZkDw=="
         }
       },
       "is_incremental": false,
@@ -1734,7 +1686,55 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPage.html",
-          "hash": "CTdzRsx8l1PpwSxOosXiJg=="
+          "hash": "ubDdLc1FFdC9Fz3tkUWDwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IPageComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IPageComponent.html",
+          "hash": "x2YCi4yQYY3ZJc7F2m+TCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IPageHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IPageHeader.html",
+          "hash": "wuXcGFZuBGzJ36VcrDYcAg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IPageText.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IPageText.html",
+          "hash": "KSOwEY+V855cUBY2PXM9mQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IPageWebPart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IPageWebPart.html",
+          "hash": "yomx9/xmPHiff3qo2Ud21g=="
         }
       },
       "is_incremental": false,
@@ -2502,7 +2502,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "UI3qAj0cVMXvBeV5pU/qGA=="
+          "hash": "A3NU1Zw45y3OzgtpMOOCPA=="
         }
       },
       "is_incremental": false,
@@ -3522,7 +3522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "12oKUPntW8UUbOFmji0ToQ=="
+          "hash": "Z4BJFW+20irmrkEU07bnpA=="
         }
       },
       "is_incremental": false,
