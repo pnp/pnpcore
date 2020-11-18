@@ -162,9 +162,9 @@ namespace PnP.Core.Model.SharePoint
             if (!controlWrittenToSection)
             {
                 // Obtain the json data
-                var clientSideCanvasPosition = new ClientSideCanvasData()
+                var clientSideCanvasPosition = new CanvasData()
                 {
-                    Position = new ClientSideCanvasPosition()
+                    Position = new CanvasPosition()
                     {
                         ZoneIndex = Section.Order,
                         SectionIndex = Order,
@@ -172,7 +172,7 @@ namespace PnP.Core.Model.SharePoint
                         LayoutIndex = LayoutIndex,
                     },
 
-                    Emphasis = new ClientSideSectionEmphasis()
+                    Emphasis = new SectionEmphasis()
                     {
                         ZoneEmphasis = Section.ZoneEmphasis,
                     }

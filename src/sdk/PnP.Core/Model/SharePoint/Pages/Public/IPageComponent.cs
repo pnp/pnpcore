@@ -3,7 +3,7 @@
     /// <summary>
     /// Client side webpart object (retrieved via the _api/web/GetClientSideWebParts REST call)
     /// </summary>
-    public interface IClientSideComponent
+    public interface IPageComponent
     {
         /// <summary>
         /// Component type for client side webpart object

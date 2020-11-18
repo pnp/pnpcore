@@ -42,6 +42,12 @@ namespace PnP.Core.Model.SharePoint
         {
             if (properties.ContainsKey("id"))
             {
+                if (string.IsNullOrEmpty(properties["id"]))
+                {
+                    LookupId = -1;
+                    return this;
+                }
+
                 LookupId = int.Parse(properties["id"]);
             }
 
@@ -57,12 +63,12 @@ namespace PnP.Core.Model.SharePoint
 
             if (properties.ContainsKey("sip"))
             {
-                Title = properties["sip"];
+                Sip = properties["sip"];
             }
 
             if (properties.ContainsKey("picture"))
             {
-                Title = properties["picture"];
+                Picture = properties["picture"];
             }
 
             return this;

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
-    /// Class that implements the client side page header
+    /// Class that implements the page header
     /// </summary>
-    internal class ClientSidePageHeader : IClientSidePageHeader
+    internal class PageHeader : IPageHeader
     {
         private const string NoPageHeader = "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;@@title@@&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;NoImage&quot;,&quot;textAlignment&quot;&#58;&quot;@@textalignment@@&quot;,&quot;showTopicHeader&quot;&#58;@@showtopicheader@@,&quot;showPublishDate&quot;&#58;@@showpublishdate@@,&quot;topicHeader&quot;&#58;&quot;@@topicheader@@&quot;&#125;&#125;\"></div></div>";
         private const string DefaultPageHeader = "<div><div data-sp-canvascontrol=\"\" data-sp-canvasdataversion=\"1.4\" data-sp-controldata=\"&#123;&quot;id&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;instanceId&quot;&#58;&quot;cbe7b0a9-3504-44dd-a3a3-0e5cacd07788&quot;,&quot;title&quot;&#58;&quot;Title Region&quot;,&quot;description&quot;&#58;&quot;Title Region Description&quot;,&quot;serverProcessedContent&quot;&#58;&#123;&quot;htmlStrings&quot;&#58;&#123;&#125;,&quot;searchablePlainTexts&quot;&#58;&#123;&#125;,&quot;imageSources&quot;&#58;&#123;&#125;,&quot;links&quot;&#58;&#123;&#125;&#125;,&quot;dataVersion&quot;&#58;&quot;1.4&quot;,&quot;properties&quot;&#58;&#123;&quot;title&quot;&#58;&quot;@@title@@&quot;,&quot;imageSourceType&quot;&#58;4,&quot;layoutType&quot;&#58;&quot;@@layouttype@@&quot;,&quot;textAlignment&quot;&#58;&quot;@@textalignment@@&quot;,&quot;showTopicHeader&quot;&#58;@@showtopicheader@@,&quot;showPublishDate&quot;&#58;@@showpublishdate@@,&quot;topicHeader&quot;&#58;&quot;@@topicheader@@&quot;,&quot;authorByline&quot;&#58;[@@authorbyline@@],&quot;authors&quot;&#58;[@@authors@@]&#125;&#125;\"></div></div>";
@@ -117,7 +117,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="cc">ClientContext of the site hosting the image</param>
         /// <param name="pageHeaderType">Type of page header</param>
         /// <param name="imageServerRelativeUrl">Server relative image url</param>
-        public ClientSidePageHeader(PnPContext cc, PageHeaderType pageHeaderType, string imageServerRelativeUrl)
+        public PageHeader(PnPContext cc, PageHeaderType pageHeaderType, string imageServerRelativeUrl)
         {
             this.imageServerRelativeUrl = imageServerRelativeUrl;
             clientContext = cc;
@@ -140,7 +140,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="imageServerRelativeUrl">Server relative image url</param>
         /// <param name="translateX">X offset coordinate</param>
         /// <param name="translateY">Y offset coordinate</param>
-        public ClientSidePageHeader(PnPContext cc, PageHeaderType pageHeaderType, string imageServerRelativeUrl, double translateX, double translateY) : this(cc, pageHeaderType, imageServerRelativeUrl)
+        public PageHeader(PnPContext cc, PageHeaderType pageHeaderType, string imageServerRelativeUrl, double translateX, double translateY) : this(cc, pageHeaderType, imageServerRelativeUrl)
         {
             TranslateX = translateX;
             TranslateY = translateY;

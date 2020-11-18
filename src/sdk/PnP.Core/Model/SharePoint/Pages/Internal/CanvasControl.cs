@@ -145,7 +145,7 @@ namespace PnP.Core.Model.SharePoint
         }
 
         /// <summary>
-        /// Type if the control (<see cref="IClientSideText"/> or <see cref="IClientSideWebPart"/>)
+        /// Type if the control (<see cref="IPageText"/> or <see cref="IPageWebPart"/>)
         /// </summary>
         public abstract Type Type { get; }
         #endregion
@@ -320,15 +320,15 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Deserialize the json string
-            var controlData = JsonSerializer.Deserialize<ClientSideCanvasControlData>(controlDataJson, new JsonSerializerOptions() { IgnoreNullValues = true });
+            var controlData = JsonSerializer.Deserialize<CanvasControlData>(controlDataJson, new JsonSerializerOptions() { IgnoreNullValues = true });
 
             if (controlData.ControlType == 3)
             {
-                return typeof(ClientSideWebPart);
+                return typeof(PageWebPart);
             }
             else if (controlData.ControlType == 4)
             {
-                return typeof(ClientSideText);
+                return typeof(PageSideText);
             }
             else if (controlData.ControlType == 0)
             {
@@ -342,7 +342,7 @@ namespace PnP.Core.Model.SharePoint
         #region Internal and private methods
         internal virtual void FromHtml(IElement element)
         {
-            var controlData = JsonSerializer.Deserialize<ClientSideCanvasControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            var controlData = JsonSerializer.Deserialize<CanvasControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
 
             // populate base object
             canvasDataVersion = element.GetAttribute(CanvasDataVersionAttribute);

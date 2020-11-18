@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Control data for controls of type 3 (= client side web parts)
     /// </summary>
-    internal class ClientSideWebPartControlData : ClientSideCanvasControlData
+    internal class WebPartControlData : CanvasControlData
     {
         /// <summary>
         /// Gets or sets JsonProperty "webPartId"

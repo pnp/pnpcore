@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Class representing the json control data that will describe a control versus the zones and sections on a page
     /// </summary>
-    internal class ClientSideCanvasControlPosition : ClientSideCanvasPosition
+    internal class CanvasControlPosition : CanvasPosition
     {
         /// <summary>
         /// Gets or sets JsonProperty "controlIndex"

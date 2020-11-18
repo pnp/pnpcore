@@ -3,7 +3,7 @@
     /// <summary>
     /// Class that implements the modern page header
     /// </summary>
-    public interface IClientSidePageHeader
+    public interface IPageHeader
     {
         /// <summary>
         /// Returns the type of header

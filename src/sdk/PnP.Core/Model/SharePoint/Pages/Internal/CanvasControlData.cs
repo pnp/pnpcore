@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Base class representing the json control data that will be included in each client side control (de-)serialization (data-sp-controldata attribute)
     /// </summary>
-    internal class ClientSideCanvasControlData
+    internal class CanvasControlData
     {
         /// <summary>
         /// Gets or sets JsonProperty "controlType"
@@ -21,9 +21,9 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets JsonProperty "position"
         /// </summary>
         [JsonPropertyName("position")]
-        public ClientSideCanvasControlPosition Position { get; set; }
+        public CanvasControlPosition Position { get; set; }
 
         [JsonPropertyName("emphasis")]
-        public ClientSideSectionEmphasis Emphasis { get; set; }
+        public SectionEmphasis Emphasis { get; set; }
     }
 }

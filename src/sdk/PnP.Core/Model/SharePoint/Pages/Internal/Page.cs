@@ -16,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
     {
         private bool isDefaultDescription;
         private string pageTitle;
-        private readonly string pageName;
+        private string pageName;
         private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] { p => p.EnableFolderCreation,
             p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p=>p.ListItemEntityTypeFullName };
 
@@ -28,7 +28,7 @@ namespace PnP.Core.Model.SharePoint
             PagesLibrary = pagesLibrary;
             PageListItem = pageListItem;
             layoutType = pageLayoutType;
-            pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.Default, null);
+            pageHeader = new PageHeader(PnPContext, PageHeaderType.Default, null);
         }
 
         #endregion
@@ -159,8 +159,8 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Returns the page header for this page
         /// </summary>
-        private ClientSidePageHeader pageHeader;
-        public IClientSidePageHeader PageHeader
+        private PageHeader pageHeader;
+        public IPageHeader PageHeader
         {
             get
             {
@@ -315,6 +315,7 @@ namespace PnP.Core.Model.SharePoint
                     <FieldRef Name='{PageConstants.TopicEntityType}' />
                     <FieldRef Name='{PageConstants.TopicEntityRelations}' />
                     <FieldRef Name='{PageConstants.CanvasField}' />
+                    <FieldRef Name='{PageConstants._AuthorByline}' />
                     <FieldRef Name='{PageConstants.PageLayoutContentField}' />
                     <FieldRef Name='{PageConstants.BannerImageUrl}' />
                     <FieldRef Name='{PageConstants.PromotedStateField}' />
@@ -432,25 +433,25 @@ namespace PnP.Core.Model.SharePoint
             return templateFolder.Name;
         }
 
-        public IClientSideText NewTextPart(string text = null)
+        public IPageText NewTextPart(string text = null)
         {
-            var textPart = new ClientSideText();
+            var textPart = new PageSideText();
             if (!string.IsNullOrEmpty(text))
             {
                 textPart.Text = text;
             }
             return textPart;
         }
-        public IClientSideWebPart NewWebPart(IClientSideComponent clientSideComponent = null)
+        public IPageWebPart NewWebPart(IPageComponent clientSideComponent = null)
         {
-            ClientSideWebPart webPart;
+            PageWebPart webPart;
             if (clientSideComponent != null)
             {
-                webPart = new ClientSideWebPart(clientSideComponent);
+                webPart = new PageWebPart(clientSideComponent);
             }
             else
             {
-                webPart = new ClientSideWebPart();
+                webPart = new PageWebPart();
             }
 
             return webPart;
@@ -754,7 +755,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public void RemovePageHeader()
         {
-            pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.None, null);
+            pageHeader = new PageHeader(PnPContext, PageHeaderType.None, null);
         }
 
         /// <summary>
@@ -762,7 +763,7 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public void SetDefaultPageHeader()
         {
-            pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.Default, null);
+            pageHeader = new PageHeader(PnPContext, PageHeaderType.Default, null);
         }
 
         /// <summary>
@@ -773,7 +774,7 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="translateY">Y focal point for image</param>
         public void SetCustomPageHeader(string serverRelativeImageUrl, double? translateX = null, double? translateY = null)
         {
-            pageHeader = new ClientSidePageHeader(PnPContext, PageHeaderType.Custom, serverRelativeImageUrl)
+            pageHeader = new PageHeader(PnPContext, PageHeaderType.Custom, serverRelativeImageUrl)
             {
                 ImageServerRelativeUrl = serverRelativeImageUrl,
                 TranslateX = translateX,
@@ -940,9 +941,9 @@ namespace PnP.Core.Model.SharePoint
                     var controlData = clientSideControl.GetAttribute(CanvasControl.ControlDataAttribute);
                     var controlType = CanvasControl.GetType(controlData);
 
-                    if (controlType == typeof(ClientSideText))
+                    if (controlType == typeof(PageSideText))
                     {
-                        var control = new ClientSideText()
+                        var control = new PageSideText()
                         {
                             Order = controlOrder
                         };
@@ -953,9 +954,9 @@ namespace PnP.Core.Model.SharePoint
 
                         AddControl(control);
                     }
-                    else if (controlType == typeof(ClientSideWebPart))
+                    else if (controlType == typeof(PageWebPart))
                     {
-                        var control = new ClientSideWebPart()
+                        var control = new PageWebPart()
                         {
                             Order = controlOrder
                         };
@@ -975,7 +976,7 @@ namespace PnP.Core.Model.SharePoint
                         //};
                         var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
                         //var sectionData = JsonConvert.DeserializeObject<ClientSideCanvasData>(controlData, jsonSerializerSettings);
-                        var sectionData = JsonSerializer.Deserialize<ClientSideCanvasData>(controlData, jsonSerializerSettings);
+                        var sectionData = JsonSerializer.Deserialize<CanvasData>(controlData, jsonSerializerSettings);
 
                         CanvasSection currentSection = null;
                         if (sectionData.Position != null)
@@ -1144,7 +1145,7 @@ namespace PnP.Core.Model.SharePoint
                         // Process the extra header controls
                         var controlData = clientSideHeaderControl.GetAttribute(CanvasControl.ControlDataAttribute);
 
-                        var control = new ClientSideWebPart()
+                        var control = new PageWebPart()
                         {
                             Order = headerControlOrder,
                             IsHeaderControl = true,
@@ -1179,7 +1180,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        private void ApplySectionAndColumn(CanvasControl control, ClientSideCanvasControlPosition position, ClientSideSectionEmphasis emphasis)
+        private void ApplySectionAndColumn(CanvasControl control, CanvasControlPosition position, SectionEmphasis emphasis)
         {
             if (position == null)
             {
@@ -1306,6 +1307,8 @@ namespace PnP.Core.Model.SharePoint
                 pageName += ".aspx";
             }
 
+            this.pageName = pageName;
+
             await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
 
             string serverRelativePageName;
@@ -1342,7 +1345,7 @@ namespace PnP.Core.Model.SharePoint
                     PageListItem[PageConstants.ContentTypeId] = PageConstants.ModernArticlePage;
                 }
 
-                PageListItem[PageConstants.Title] = string.IsNullOrWhiteSpace(pageTitle) ? Path.GetFileNameWithoutExtension(pageName) : pageTitle;
+                PageListItem[PageConstants.Title] = string.IsNullOrWhiteSpace(this.pageTitle) ? Path.GetFileNameWithoutExtension(pageName) : pageTitle;
                 PageListItem[PageConstants.ClientSideApplicationId] = PageConstants.SitePagesFeatureId;
 
                 if (LayoutType == PageLayoutType.Spaces)
@@ -1379,9 +1382,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 // We're updating an existing page
                 updatingExistingPage = true;
-                if (!string.IsNullOrWhiteSpace(pageTitle))
+                if (!string.IsNullOrWhiteSpace(this.pageTitle))
                 {
-                    PageListItem[PageConstants.Title] = pageTitle;
+                    PageListItem[PageConstants.Title] = this.pageTitle;
                 }
             }
 
@@ -1426,7 +1429,7 @@ namespace PnP.Core.Model.SharePoint
             // Persist the page header
             if (pageHeader.Type == PageHeaderType.None)
             {
-                PageListItem[PageConstants.PageLayoutContentField] = ClientSidePageHeader.NoHeader(pageTitle);
+                PageListItem[PageConstants.PageLayoutContentField] = SharePoint.PageHeader.NoHeader(pageTitle);
                 if (PageListItem.Values.ContainsKey(PageConstants._AuthorByline))
                 {
                     PageListItem[PageConstants._AuthorByline] = null;
@@ -1443,15 +1446,10 @@ namespace PnP.Core.Model.SharePoint
                 // AuthorByline depends on a field holding the author values
                 if (pageHeader.AuthorByLineId > -1)
                 {
-                    //throw new Exception("TODO!!");
-                    // TODO
-                    //FieldUserValue[] userValueCollection = new FieldUserValue[1];
-                    //FieldUserValue fieldUserVal = new FieldUserValue
-                    //{
-                    //    LookupId = this.pageHeader.AuthorByLineId
-                    //};
-                    //userValueCollection.SetValue(fieldUserVal, 0);
-                    //PageListItem[PageConstants._AuthorByline] = userValueCollection;
+                    var authorByLineIdField = PagesLibrary.Fields.FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
+                    var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField, PageListItem.Values);
+                    fieldUsers.Values.Add(PageListItem.NewFieldUserValue(authorByLineIdField, pageHeader.AuthorByLineId));
+                    PageListItem[PageConstants._AuthorByline] = fieldUsers;
                 }
 
                 // Topic header needs to be persisted in a field
@@ -1481,7 +1479,7 @@ namespace PnP.Core.Model.SharePoint
                         // iterate the web parts...if we find an unique id then let's grab that information
                         foreach (var control in Controls)
                         {
-                            if (control is ClientSideWebPart webPart)
+                            if (control is PageWebPart webPart)
                             {
                                 if (!string.IsNullOrEmpty(webPart.WebPartPreviewImage))
                                 {
@@ -1521,7 +1519,7 @@ namespace PnP.Core.Model.SharePoint
                     string previewText = "";
                     foreach (var control in Controls)
                     {
-                        if (control is ClientSideText textPart)
+                        if (control is PageSideText textPart)
                         {
                             if (!string.IsNullOrEmpty(textPart.PreviewText))
                             {
@@ -1724,12 +1722,12 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Get client side web parts methods
-        public IEnumerable<IClientSideComponent> AvailableClientSideComponents(string name = null)
+        public IEnumerable<IPageComponent> AvailableClientSideComponents(string name = null)
         {
             return AvailableClientSideComponentsAsync(name).GetAwaiter().GetResult();
         }
 
-        public async Task<IEnumerable<IClientSideComponent>> AvailableClientSideComponentsAsync(string name = null)
+        public async Task<IEnumerable<IPageComponent>> AvailableClientSideComponentsAsync(string name = null)
         {
             var apiCall = new ApiCall($"_api/web/GetClientSideWebParts", ApiType.SPORest);
 
@@ -1740,7 +1738,7 @@ namespace PnP.Core.Model.SharePoint
                 var root = JsonDocument.Parse(response.Json).RootElement.GetProperty("d").GetProperty("GetClientSideWebParts").GetProperty("results");
 
                 var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-                var clientSideComponents = JsonSerializer.Deserialize<List<ClientSideComponent>>(root.ToString(), jsonSerializerSettings);
+                var clientSideComponents = JsonSerializer.Deserialize<List<PageComponent>>(root.ToString(), jsonSerializerSettings);
 
                 if (!clientSideComponents.Any())
                 {

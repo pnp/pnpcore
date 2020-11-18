@@ -53,7 +53,7 @@ namespace PnP.Core.Model.SharePoint
         int Order { get; set; }
 
         /// <summary>
-        /// Type if the control (<see cref="IClientSideText"/> or <see cref="IClientSideWebPart"/>)
+        /// Type if the control (<see cref="IPageText"/> or <see cref="IPageWebPart"/>)
         /// </summary>
         Type Type { get; }
 

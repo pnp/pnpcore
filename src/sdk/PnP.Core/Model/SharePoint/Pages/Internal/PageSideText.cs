@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Controls of type 4 ( = text control)
     /// </summary>
-    internal class ClientSideText : CanvasControl, IClientSideText
+    internal class PageSideText : CanvasControl, IPageText
     {
         #region variables
         internal const string TextRteAttribute = "data-sp-rte";
@@ -18,9 +18,9 @@ namespace PnP.Core.Model.SharePoint
 
         #region construction
         /// <summary>
-        /// Creates a <see cref="ClientSideText"/> instance
+        /// Creates a <see cref="PageSideText"/> instance
         /// </summary>
-        internal ClientSideText() : base()
+        internal PageSideText() : base()
         {
             controlType = 4;
             Rte = "";
@@ -45,28 +45,28 @@ namespace PnP.Core.Model.SharePoint
         public string PreviewText { get; private set; }
 
         /// <summary>
-        /// Type of the control (= <see cref="ClientSideText"/>)
+        /// Type of the control (= <see cref="PageSideText"/>)
         /// </summary>
         public override Type Type
         {
             get
             {
-                return typeof(ClientSideText);
+                return typeof(PageSideText);
             }
         }
 
         /// <summary>
         /// Deserialized value of the "data-sp-controldata" attribute
         /// </summary>
-        internal ClientSideTextControlData SpControlData { get; private set; }
+        internal TextControlData SpControlData { get; private set; }
         #endregion
 
         #region public methods
         /// <summary>
-        /// Converts this <see cref="ClientSideText"/> control to it's html representation
+        /// Converts this <see cref="PageSideText"/> control to it's html representation
         /// </summary>
         /// <param name="controlIndex">The sequence of the control inside the section</param>
-        /// <returns>Html representation of this <see cref="ClientSideText"/> control</returns>
+        /// <returns>Html representation of this <see cref="PageSideText"/> control</returns>
         public override string ToHtml(float controlIndex)
         {
             // Can this control be hosted in this section type?
@@ -76,11 +76,11 @@ namespace PnP.Core.Model.SharePoint
             }
 
             // Obtain the json data
-            ClientSideTextControlData controlData = new ClientSideTextControlData()
+            TextControlData controlData = new TextControlData()
             {
                 ControlType = ControlType,
                 Id = InstanceId.ToString("D"),
-                Position = new ClientSideCanvasControlPosition()
+                Position = new CanvasControlPosition()
                 {
                     ZoneIndex = Section.Order,
                     SectionIndex = Column.Order,
@@ -88,7 +88,7 @@ namespace PnP.Core.Model.SharePoint
                     LayoutIndex = Column.LayoutIndex,
                     ControlIndex = controlIndex,
                 },
-                Emphasis = new ClientSideSectionEmphasis()
+                Emphasis = new SectionEmphasis()
                 {
                     ZoneEmphasis = Column.VerticalSectionEmphasis.HasValue ? Column.VerticalSectionEmphasis.Value : Section.ZoneEmphasis,
                 },
@@ -162,7 +162,7 @@ namespace PnP.Core.Model.SharePoint
                 Text = div.InnerHtml;
             }
 
-            SpControlData = JsonSerializer.Deserialize<ClientSideTextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            SpControlData = JsonSerializer.Deserialize<TextControlData>(element.GetAttribute(CanvasControl.ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
             controlType = SpControlData.ControlType;
         }
         #endregion

@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Text web part
     /// </summary>
-    public interface IClientSideText : ICanvasControl
+    public interface IPageText : ICanvasControl
     {
         /// <summary>
         /// Text value of the client side text control
@@ -18,7 +18,7 @@ namespace PnP.Core.Model.SharePoint
         public string PreviewText { get; }
 
         /// <summary>
-        /// Type of the control (= <see cref="IClientSideText"/>)
+        /// Type of the control (= <see cref="IPageText"/>)
         /// </summary>
         public new Type Type { get; }
 

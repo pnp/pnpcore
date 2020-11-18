@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
     /// This class is used to instantiate controls of type 3 (= client side web parts). Using this class you can instantiate a control and 
     /// add it on a <see cref="IPage"/>.
     /// </summary>
-    internal class ClientSideWebPart : CanvasControl, IClientSideWebPart
+    internal class PageWebPart : CanvasControl, IPageWebPart
     {
         #region variables
         // Constants
@@ -28,7 +28,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Instantiates client side web part from scratch.
         /// </summary>
-        public ClientSideWebPart() : base()
+        public PageWebPart() : base()
         {
             controlType = 3;
             WebPartData = "";
@@ -49,13 +49,13 @@ namespace PnP.Core.Model.SharePoint
         /// Instantiates a client side web part based on the information that was obtain from calling the AvailableClientSideComponents methods on the <see cref="IPage"/> object.
         /// </summary>
         /// <param name="component">Component to create a ClientSideWebPart instance for</param>
-        public ClientSideWebPart(IClientSideComponent component) : this()
+        public PageWebPart(IPageComponent component) : this()
         {
             if (component == null)
             {
                 throw new ArgumentNullException(nameof(component));
             }
-            Import(component as ClientSideComponent);
+            Import(component as PageComponent);
         }
         #endregion
 
@@ -145,14 +145,14 @@ namespace PnP.Core.Model.SharePoint
         {
             get
             {
-                return typeof(ClientSideWebPart);
+                return typeof(PageWebPart);
             }
         }
 
         /// <summary>
         /// Value of the "data-sp-controldata" attribute
         /// </summary>
-        public ClientSideWebPartControlData SpControlData { get; private set; }
+        public WebPartControlData SpControlData { get; private set; }
 
         /// <summary>
         /// Indicates that this control is persisted/read using the data-sp-controldata attribute only
@@ -168,11 +168,11 @@ namespace PnP.Core.Model.SharePoint
 
         #region public methods
         /// <summary>
-        /// Imports a <see cref="ClientSideComponent"/> to use it as base for configuring the client side web part instance
+        /// Imports a <see cref="PageComponent"/> to use it as base for configuring the client side web part instance
         /// </summary>
-        /// <param name="component"><see cref="ClientSideComponent"/> to import</param>
+        /// <param name="component"><see cref="PageComponent"/> to import</param>
         /// <param name="clientSideWebPartPropertiesUpdater">Function callback that allows you to manipulate the client side web part properties after import</param>
-        public void Import(ClientSideComponent component, Func<String, String> clientSideWebPartPropertiesUpdater = null)
+        public void Import(PageComponent component, Func<String, String> clientSideWebPartPropertiesUpdater = null)
         {
             // Sometimes the id guid is encoded with curly brackets, so let's drop those
             WebPartId = new Guid(component.Id).ToString("D");
@@ -219,21 +219,21 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                ClientSideWebPartControlData controlData;
+                WebPartControlData controlData;
                 if (UsingSpControlDataOnly)
                 {
-                    controlData = new ClientSideWebPartControlDataOnly();
+                    controlData = new WebPartControlDataOnly();
                 }
                 else
                 {
-                    controlData = new ClientSideWebPartControlData();
+                    controlData = new WebPartControlData();
                 }
 
                 // Obtain the json data
                 controlData.ControlType = ControlType;
                 controlData.Id = InstanceId.ToString("D");
                 controlData.WebPartId = WebPartId;
-                controlData.Position = new ClientSideCanvasControlPosition()
+                controlData.Position = new CanvasControlPosition()
                 {
                     ZoneIndex = Section.Order,
                     SectionIndex = Column.Order,
@@ -250,7 +250,7 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                controlData.Emphasis = new ClientSideSectionEmphasis()
+                controlData.Emphasis = new SectionEmphasis()
                 {
                     ZoneEmphasis = Column.VerticalSectionEmphasis.HasValue ? Column.VerticalSectionEmphasis.Value : Section.ZoneEmphasis,
                 };
@@ -300,11 +300,11 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                ClientSideWebPartData webpartData = new ClientSideWebPartData() { Id = controlData.WebPartId, InstanceId = controlData.Id, Title = Title, Description = Description, DataVersion = DataVersion, Properties = "jsonPropsToReplacePnPRules", DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules", DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules", ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules" };
+                WebPartData webpartData = new WebPartData() { Id = controlData.WebPartId, InstanceId = controlData.Id, Title = Title, Description = Description, DataVersion = DataVersion, Properties = "jsonPropsToReplacePnPRules", DynamicDataPaths = "jsonDynamicDataPathsToReplacePnPRules", DynamicDataValues = "jsonDynamicDataValuesToReplacePnPRules", ServerProcessedContent = "jsonServerProcessedContentToReplacePnPRules" };
 
                 if (UsingSpControlDataOnly)
                 {
-                    (controlData as ClientSideWebPartControlDataOnly).WebPartData = "jsonWebPartDataToReplacePnPRules";
+                    (controlData as WebPartControlDataOnly).WebPartData = "jsonWebPartDataToReplacePnPRules";
                     jsonControlData = JsonSerializer.Serialize(controlData);
                     JsonWebPartData = JsonSerializer.Serialize(webpartData);
                     JsonWebPartData = JsonWebPartData.Replace("\"jsonPropsToReplacePnPRules\"", Properties.ToString());
@@ -421,7 +421,7 @@ namespace PnP.Core.Model.SharePoint
                 dataVersion = element.GetAttribute(WebPartDataVersionAttribute);
             }
 
-            SpControlData = JsonSerializer.Deserialize<ClientSideWebPartControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
+            SpControlData = JsonSerializer.Deserialize<WebPartControlData>(element.GetAttribute(ControlDataAttribute), new JsonSerializerOptions() { IgnoreNullValues = true });
             controlType = SpControlData.ControlType;
 
             var wpDiv = element.GetElementsByTagName("div").Where(a => a.HasAttribute(WebPartDataAttribute)).FirstOrDefault();

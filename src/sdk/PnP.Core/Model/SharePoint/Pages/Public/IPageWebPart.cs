@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// This class is used to instantiate modern web parts. Using this class you can instantiate a control and 
     /// add it on a <see cref="IPage"/>.
     /// </summary>
-    public interface IClientSideWebPart : ICanvasControl
+    public interface IPageWebPart : ICanvasControl
     {
         /// <summary>
         /// Value of the "data-sp-webpartdata" attribute

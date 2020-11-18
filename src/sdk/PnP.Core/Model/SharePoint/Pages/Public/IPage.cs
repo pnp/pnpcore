@@ -42,7 +42,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Returns the page header for this page
         /// </summary>
-        IClientSidePageHeader PageHeader { get; }
+        IPageHeader PageHeader { get; }
 
         /// <summary>
         /// Space content field (JSON) for spaces pages
@@ -203,14 +203,14 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="text">Optionally provide the text for the text part</param>
         /// <returns>The created text part</returns>
-        public IClientSideText NewTextPart(string text = null);
+        public IPageText NewTextPart(string text = null);
 
         /// <summary>
         /// Creates a new web part
         /// </summary>
         /// <param name="clientSideComponent">The base component to use for this web part</param>
         /// <returns>The created web part</returns>
-        public IClientSideWebPart NewWebPart(IClientSideComponent clientSideComponent = null);
+        public IPageWebPart NewWebPart(IPageComponent clientSideComponent = null);
 
         /// <summary>
         /// Clears the sections and controls from the page
@@ -323,14 +323,14 @@ namespace PnP.Core.Model.SharePoint
         /// Gets a list of available client side web parts to use, optionally filtered by a given name
         /// </summary>
         /// <param name="name">Name of the web part to retrieve</param>
-        /// <returns>List of available <see cref="IClientSideComponent"/></returns>
-        Task<IEnumerable<IClientSideComponent>> AvailableClientSideComponentsAsync(string name = null);
+        /// <returns>List of available <see cref="IPageComponent"/></returns>
+        Task<IEnumerable<IPageComponent>> AvailableClientSideComponentsAsync(string name = null);
 
         /// <summary>
         /// Gets a list of available client side web parts to use, optionally filtered by a given name
         /// </summary>
         /// <param name="name">Name of the web part to retrieve</param>
-        /// <returns>List of available <see cref="IClientSideComponent"/></returns>
-        IEnumerable<IClientSideComponent> AvailableClientSideComponents(string name = null);
+        /// <returns>List of available <see cref="IPageComponent"/></returns>
+        IEnumerable<IPageComponent> AvailableClientSideComponents(string name = null);
     }
 }
