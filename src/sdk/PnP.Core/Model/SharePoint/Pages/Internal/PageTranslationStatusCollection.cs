@@ -5,12 +5,10 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Translation status of a page
     /// </summary>
-    internal class TranslationStatusCollection
+    internal class PageTranslationStatusCollection : IPageTranslationStatusCollection
     {
-        //[JsonProperty]
         public List<string> UntranslatedLanguages { get; set; }
 
-        //[JsonProperty]
-        public List<TranslationStatus> Items { get; set; }
+        public List<IPageTranslationStatus> TranslatedLanguages { get; set; }
     }
 }

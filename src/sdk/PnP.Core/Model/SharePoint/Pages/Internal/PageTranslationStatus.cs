@@ -5,42 +5,36 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Translation status for a page
     /// </summary>
-    internal class TranslationStatus
+    internal class PageTranslationStatus : IPageTranslationStatus
     {
         /// <summary>
         /// The culture of this translation
         /// </summary>
-        //[JsonProperty]
-        internal string Culture { get; set; }
+        public string Culture { get; set; }
 
         /// <summary>
         /// The web-relative path to this translation
         /// </summary>
-        //[JsonProperty]
-        internal TranslationPath Path { get; set; }
+        public string Path { get; set; }
 
         /// <summary>
         /// Last modified date of this translation
         /// </summary>
-        //[JsonProperty]
-        internal DateTime LastModified { get; set; }
+        public DateTime LastModified { get; set; }
 
         /// <summary>
         /// The file status (checked out, draft, published) of this translation
         /// </summary>
-        //[JsonProperty]
-        internal FileLevel FileStatus { get; set; }
+        public FileLevel FileStatus { get; set; }
 
         /// <summary>
         /// The file status (checked out, draft, published) of this translation
         /// </summary>
-        //[JsonProperty]
-        internal bool HasPublishedVersion { get; set; }
+        public bool HasPublishedVersion { get; set; }
 
         /// <summary>
         /// The page title of this translation
         /// </summary>
-        //[JsonProperty]
-        internal string Title { get; set; }
+        public string Title { get; set; }
     }
 }

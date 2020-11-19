@@ -1599,7 +1599,116 @@ namespace PnP.Core.Model.SharePoint
 
         #region Page Translations
 
-        // TODO
+        public IPageTranslationStatusCollection GetPageTranslations()
+        {
+            return GetPageTranslationsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IPageTranslationStatusCollection> GetPageTranslationsAsync()
+        {
+            if (PageListItem == null || !PageListItem.IsPropertyAvailable(p => p.Id))
+            {
+                throw new ClientException(ErrorType.PropertyNotLoaded, string.Format(PnPCoreResources.Exception_Page_ListItemNotLoaded, nameof(PageListItem.Id)));
+            }
+
+            var apiCall = new ApiCall($"_api/sitepages/pages({PageListItem.Id})/translations", ApiType.SPORest);
+
+            var response = await (PnPContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                return DeserializeTranslationsResponse(response.Json);
+            }
+
+            return null;
+        }
+
+        private static PageTranslationStatusCollection DeserializeTranslationsResponse(string response)
+        {
+            var translationStatus = new PageTranslationStatusCollection()
+            {
+                UntranslatedLanguages = new List<string>(),
+                TranslatedLanguages = new List<IPageTranslationStatus>()
+            };
+
+            var root = JsonDocument.Parse(response).RootElement.GetProperty("d");
+
+            // Process untranslated languages
+            var untranslatedLanguages = root.GetProperty("UntranslatedLanguages").GetProperty("results");
+            foreach (var untranslatedLanguage in untranslatedLanguages.EnumerateArray())
+            {
+                translationStatus.UntranslatedLanguages.Add(untranslatedLanguage.GetString());
+            }
+
+            // Process translationstatus 
+            var translationStatusCollection = root.GetProperty("Items").GetProperty("results");
+            foreach (var status in translationStatusCollection.EnumerateArray())
+            {
+                translationStatus.TranslatedLanguages.Add(new PageTranslationStatus()
+                {
+                    Culture = status.GetProperty("Culture").GetString(),
+                    FileStatus = (FileLevel)status.GetProperty("FileStatus").GetInt32(),
+                    HasPublishedVersion = status.GetProperty("HasPublishedVersion").GetBoolean(),
+                    LastModified = status.GetProperty("LastModified").GetDateTime(),
+                    Title = status.GetProperty("Title").GetString(),
+                    Path = status.GetProperty("Path").GetProperty("DecodedUrl").GetString(),
+                });
+            }
+
+            return translationStatus;
+        }
+
+        public IPageTranslationStatusCollection TranslatePages()
+        {
+            return TranslatePagesAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IPageTranslationStatusCollection> TranslatePagesAsync()
+        {
+            return await TranslatePagesAsync(null).ConfigureAwait(false);
+        }
+
+        public IPageTranslationStatusCollection TranslatePages(PageTranslationOptions pageTranslationOptions)
+        {
+            return TranslatePagesAsync(pageTranslationOptions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IPageTranslationStatusCollection> TranslatePagesAsync(PageTranslationOptions pageTranslationOptions)
+        {
+            if (PageListItem == null || !PageListItem.IsPropertyAvailable(p => p.Id))
+            {
+                throw new ClientException(ErrorType.PropertyNotLoaded, string.Format(PnPCoreResources.Exception_Page_ListItemNotLoaded, nameof(PageListItem.Id)));
+            }
+
+            string jsonBody = null;
+            if (pageTranslationOptions != null && pageTranslationOptions.LanguageCodes.Any())
+            {
+                var body = new
+                {
+                    request = new
+                    {
+                        __metadata = new { type = "SP.TranslationStatusCreationRequest" },
+                        LanguageCodes = new
+                        {
+                            results = pageTranslationOptions.LanguageCodes
+                        }
+                    }
+                };
+
+                jsonBody = JsonSerializer.Serialize(body);
+            }
+
+            var apiCall = new ApiCall($"_api/sitepages/pages({PageListItem.Id})/translations/create", ApiType.SPORest, jsonBody);
+
+            var response = await (PnPContext.Web as Web).RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                return DeserializeTranslationsResponse(response.Json);
+            }
+
+            return null;
+        }
 
         #endregion
 
@@ -1722,12 +1831,12 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Get client side web parts methods
-        public IEnumerable<IPageComponent> AvailableClientSideComponents(string name = null)
+        public IEnumerable<IPageComponent> AvailablePageComponents(string name = null)
         {
-            return AvailableClientSideComponentsAsync(name).GetAwaiter().GetResult();
+            return AvailablePageComponentsAsync(name).GetAwaiter().GetResult();
         }
 
-        public async Task<IEnumerable<IPageComponent>> AvailableClientSideComponentsAsync(string name = null)
+        public async Task<IEnumerable<IPageComponent>> AvailablePageComponentsAsync(string name = null)
         {
             var apiCall = new ApiCall($"_api/web/GetClientSideWebParts", ApiType.SPORest);
 

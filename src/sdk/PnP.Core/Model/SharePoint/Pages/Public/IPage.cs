@@ -324,13 +324,52 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="name">Name of the web part to retrieve</param>
         /// <returns>List of available <see cref="IPageComponent"/></returns>
-        Task<IEnumerable<IPageComponent>> AvailableClientSideComponentsAsync(string name = null);
+        Task<IEnumerable<IPageComponent>> AvailablePageComponentsAsync(string name = null);
 
         /// <summary>
         /// Gets a list of available client side web parts to use, optionally filtered by a given name
         /// </summary>
         /// <param name="name">Name of the web part to retrieve</param>
         /// <returns>List of available <see cref="IPageComponent"/></returns>
-        IEnumerable<IPageComponent> AvailableClientSideComponents(string name = null);
+        IEnumerable<IPageComponent> AvailablePageComponents(string name = null);
+
+        /// <summary>
+        /// Returns the page translation status for a given page
+        /// </summary>
+        /// <returns><see cref="IPageTranslationStatusCollection"/> list containing information about this page's translations</returns>
+        Task<IPageTranslationStatusCollection> GetPageTranslationsAsync();
+
+        /// <summary>
+        /// Returns the page translation status for a given page
+        /// </summary>
+        /// <returns><see cref="IPageTranslationStatusCollection"/> list containing information about this page's translations</returns>
+        IPageTranslationStatusCollection GetPageTranslations();
+
+        /// <summary>
+        /// Creates page translations for the requested languages
+        /// </summary>
+        /// <param name="pageTranslationOptions">Options describing the languages in which a translation needs to be created</param>
+        /// <returns><see cref="IPageTranslationStatusCollection"/> list containing information about this page's translations</returns>
+        Task<IPageTranslationStatusCollection> TranslatePagesAsync(PageTranslationOptions pageTranslationOptions);
+
+        /// <summary>
+        /// Creates page translations for all the languages defined as multi-lingual languages in the site
+        /// </summary>
+        /// <returns><see cref="IPageTranslationStatusCollection"/> list containing information about this page's translations</returns>
+        Task<IPageTranslationStatusCollection> TranslatePagesAsync();
+
+        /// <summary>
+        /// Creates page translations for the requested languages
+        /// </summary>
+        /// <param name="pageTranslationOptions">Options describing the languages in which a translation needs to be created</param>
+        /// <returns><see cref="IPageTranslationStatusCollection"/> list containing information about this page's translations</returns>
+        IPageTranslationStatusCollection TranslatePages(PageTranslationOptions pageTranslationOptions);
+
+        /// <summary>
+        /// Creates page translations for all the languages defined as multi-lingual languages in the site
+        /// </summary>
+        /// <returns><see cref="IPageTranslationStatusCollection"/> list containing information about this page's translations</returns>
+        IPageTranslationStatusCollection TranslatePages();
     }
+
 }
