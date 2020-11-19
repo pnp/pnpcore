@@ -1686,7 +1686,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPage.html",
-          "hash": "ubDdLc1FFdC9Fz3tkUWDwQ=="
+          "hash": "eAtk+DATG51EvwnvvgbTjQ=="
         }
       },
       "is_incremental": false,
@@ -1723,6 +1723,30 @@
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPageText.html",
           "hash": "KSOwEY+V855cUBY2PXM9mQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IPageTranslationStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html",
+          "hash": "SYJ2ZdindM45IQR0/KKxcA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html",
+          "hash": "zmwVHyMUrkPHmbEEn87uAA=="
         }
       },
       "is_incremental": false,
@@ -2246,6 +2270,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.PageTranslationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.PageTranslationOptions.html",
+          "hash": "+z4HH1YC+13C1TwHCzut0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.PermissionKind.yml",
       "output": {
         ".html": {
@@ -2502,7 +2538,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "A3NU1Zw45y3OzgtpMOOCPA=="
+          "hash": "L8rw9bXSpag3FXTwoQDVJQ=="
         }
       },
       "is_incremental": false,
@@ -3522,7 +3558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Z4BJFW+20irmrkEU07bnpA=="
+          "hash": "HBlS2awz9+5H6tGuKAGPDA=="
         }
       },
       "is_incremental": false,
@@ -4117,7 +4153,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 291,
+          "total_file_count": 294,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

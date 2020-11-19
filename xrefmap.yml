@@ -12525,32 +12525,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.AddSection
   nameWithType: IPage.AddSection
-- uid: PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponents(System.String)
-  name: AvailableClientSideComponents(String)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailableClientSideComponents_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponents(System.String)
-  fullName: PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponents(System.String)
-  nameWithType: IPage.AvailableClientSideComponents(String)
-- uid: PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponents*
-  name: AvailableClientSideComponents
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailableClientSideComponents_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponents
+- uid: PnP.Core.Model.SharePoint.IPage.AvailablePageComponents(System.String)
+  name: AvailablePageComponents(String)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponents_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AvailablePageComponents(System.String)
+  fullName: PnP.Core.Model.SharePoint.IPage.AvailablePageComponents(System.String)
+  nameWithType: IPage.AvailablePageComponents(String)
+- uid: PnP.Core.Model.SharePoint.IPage.AvailablePageComponents*
+  name: AvailablePageComponents
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponents_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AvailablePageComponents
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponents
-  nameWithType: IPage.AvailableClientSideComponents
-- uid: PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponentsAsync(System.String)
-  name: AvailableClientSideComponentsAsync(String)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailableClientSideComponentsAsync_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponentsAsync(System.String)
-  fullName: PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponentsAsync(System.String)
-  nameWithType: IPage.AvailableClientSideComponentsAsync(String)
-- uid: PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponentsAsync*
-  name: AvailableClientSideComponentsAsync
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailableClientSideComponentsAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponentsAsync
+  fullName: PnP.Core.Model.SharePoint.IPage.AvailablePageComponents
+  nameWithType: IPage.AvailablePageComponents
+- uid: PnP.Core.Model.SharePoint.IPage.AvailablePageComponentsAsync(System.String)
+  name: AvailablePageComponentsAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AvailablePageComponentsAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IPage.AvailablePageComponentsAsync(System.String)
+  nameWithType: IPage.AvailablePageComponentsAsync(String)
+- uid: PnP.Core.Model.SharePoint.IPage.AvailablePageComponentsAsync*
+  name: AvailablePageComponentsAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AvailablePageComponentsAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.AvailableClientSideComponentsAsync
-  nameWithType: IPage.AvailableClientSideComponentsAsync
+  fullName: PnP.Core.Model.SharePoint.IPage.AvailablePageComponentsAsync
+  nameWithType: IPage.AvailablePageComponentsAsync
 - uid: PnP.Core.Model.SharePoint.IPage.ClearPage
   name: ClearPage()
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_ClearPage
@@ -12720,6 +12720,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.Folder
   nameWithType: IPage.Folder
+- uid: PnP.Core.Model.SharePoint.IPage.GetPageTranslations
+  name: GetPageTranslations()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageTranslations
+  commentId: M:PnP.Core.Model.SharePoint.IPage.GetPageTranslations
+  fullName: PnP.Core.Model.SharePoint.IPage.GetPageTranslations()
+  nameWithType: IPage.GetPageTranslations()
+- uid: PnP.Core.Model.SharePoint.IPage.GetPageTranslations*
+  name: GetPageTranslations
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageTranslations_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.GetPageTranslations
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.GetPageTranslations
+  nameWithType: IPage.GetPageTranslations
+- uid: PnP.Core.Model.SharePoint.IPage.GetPageTranslationsAsync
+  name: GetPageTranslationsAsync()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageTranslationsAsync
+  commentId: M:PnP.Core.Model.SharePoint.IPage.GetPageTranslationsAsync
+  fullName: PnP.Core.Model.SharePoint.IPage.GetPageTranslationsAsync()
+  nameWithType: IPage.GetPageTranslationsAsync()
+- uid: PnP.Core.Model.SharePoint.IPage.GetPageTranslationsAsync*
+  name: GetPageTranslationsAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageTranslationsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.GetPageTranslationsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.GetPageTranslationsAsync
+  nameWithType: IPage.GetPageTranslationsAsync
 - uid: PnP.Core.Model.SharePoint.IPage.GetTemplatesFolder
   name: GetTemplatesFolder()
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetTemplatesFolder
@@ -13087,6 +13113,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.ThumbnailUrl
   nameWithType: IPage.ThumbnailUrl
+- uid: PnP.Core.Model.SharePoint.IPage.TranslatePages
+  name: TranslatePages()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_TranslatePages
+  commentId: M:PnP.Core.Model.SharePoint.IPage.TranslatePages
+  fullName: PnP.Core.Model.SharePoint.IPage.TranslatePages()
+  nameWithType: IPage.TranslatePages()
+- uid: PnP.Core.Model.SharePoint.IPage.TranslatePages(PnP.Core.Model.SharePoint.PageTranslationOptions)
+  name: TranslatePages(PageTranslationOptions)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_TranslatePages_PnP_Core_Model_SharePoint_PageTranslationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.TranslatePages(PnP.Core.Model.SharePoint.PageTranslationOptions)
+  fullName: PnP.Core.Model.SharePoint.IPage.TranslatePages(PnP.Core.Model.SharePoint.PageTranslationOptions)
+  nameWithType: IPage.TranslatePages(PageTranslationOptions)
+- uid: PnP.Core.Model.SharePoint.IPage.TranslatePages*
+  name: TranslatePages
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_TranslatePages_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.TranslatePages
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.TranslatePages
+  nameWithType: IPage.TranslatePages
+- uid: PnP.Core.Model.SharePoint.IPage.TranslatePagesAsync
+  name: TranslatePagesAsync()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_TranslatePagesAsync
+  commentId: M:PnP.Core.Model.SharePoint.IPage.TranslatePagesAsync
+  fullName: PnP.Core.Model.SharePoint.IPage.TranslatePagesAsync()
+  nameWithType: IPage.TranslatePagesAsync()
+- uid: PnP.Core.Model.SharePoint.IPage.TranslatePagesAsync(PnP.Core.Model.SharePoint.PageTranslationOptions)
+  name: TranslatePagesAsync(PageTranslationOptions)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_TranslatePagesAsync_PnP_Core_Model_SharePoint_PageTranslationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.TranslatePagesAsync(PnP.Core.Model.SharePoint.PageTranslationOptions)
+  fullName: PnP.Core.Model.SharePoint.IPage.TranslatePagesAsync(PnP.Core.Model.SharePoint.PageTranslationOptions)
+  nameWithType: IPage.TranslatePagesAsync(PageTranslationOptions)
+- uid: PnP.Core.Model.SharePoint.IPage.TranslatePagesAsync*
+  name: TranslatePagesAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_TranslatePagesAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.TranslatePagesAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.TranslatePagesAsync
+  nameWithType: IPage.TranslatePagesAsync
 - uid: PnP.Core.Model.SharePoint.IPage.WebPartIdToDefaultWebPart(System.String)
   name: WebPartIdToDefaultWebPart(String)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_WebPartIdToDefaultWebPart_System_String_
@@ -13404,6 +13468,122 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPageText.Type
   nameWithType: IPageText.Type
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus
+  name: IPageTranslationStatus
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html
+  commentId: T:PnP.Core.Model.SharePoint.IPageTranslationStatus
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus
+  nameWithType: IPageTranslationStatus
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.Culture
+  name: Culture
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_Culture
+  commentId: P:PnP.Core.Model.SharePoint.IPageTranslationStatus.Culture
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.Culture
+  nameWithType: IPageTranslationStatus.Culture
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.Culture*
+  name: Culture
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_Culture_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageTranslationStatus.Culture
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.Culture
+  nameWithType: IPageTranslationStatus.Culture
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.FileStatus
+  name: FileStatus
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_FileStatus
+  commentId: P:PnP.Core.Model.SharePoint.IPageTranslationStatus.FileStatus
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.FileStatus
+  nameWithType: IPageTranslationStatus.FileStatus
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.FileStatus*
+  name: FileStatus
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_FileStatus_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageTranslationStatus.FileStatus
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.FileStatus
+  nameWithType: IPageTranslationStatus.FileStatus
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.HasPublishedVersion
+  name: HasPublishedVersion
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_HasPublishedVersion
+  commentId: P:PnP.Core.Model.SharePoint.IPageTranslationStatus.HasPublishedVersion
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.HasPublishedVersion
+  nameWithType: IPageTranslationStatus.HasPublishedVersion
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.HasPublishedVersion*
+  name: HasPublishedVersion
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_HasPublishedVersion_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageTranslationStatus.HasPublishedVersion
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.HasPublishedVersion
+  nameWithType: IPageTranslationStatus.HasPublishedVersion
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.LastModified
+  name: LastModified
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_LastModified
+  commentId: P:PnP.Core.Model.SharePoint.IPageTranslationStatus.LastModified
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.LastModified
+  nameWithType: IPageTranslationStatus.LastModified
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.LastModified*
+  name: LastModified
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_LastModified_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageTranslationStatus.LastModified
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.LastModified
+  nameWithType: IPageTranslationStatus.LastModified
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.Path
+  name: Path
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_Path
+  commentId: P:PnP.Core.Model.SharePoint.IPageTranslationStatus.Path
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.Path
+  nameWithType: IPageTranslationStatus.Path
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.Path*
+  name: Path
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_Path_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageTranslationStatus.Path
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.Path
+  nameWithType: IPageTranslationStatus.Path
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.Title
+  name: Title
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_Title
+  commentId: P:PnP.Core.Model.SharePoint.IPageTranslationStatus.Title
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.Title
+  nameWithType: IPageTranslationStatus.Title
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatus.Title*
+  name: Title
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html#PnP_Core_Model_SharePoint_IPageTranslationStatus_Title_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageTranslationStatus.Title
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatus.Title
+  nameWithType: IPageTranslationStatus.Title
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection
+  name: IPageTranslationStatusCollection
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.IPageTranslationStatusCollection
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection
+  nameWithType: IPageTranslationStatusCollection
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.TranslatedLanguages
+  name: TranslatedLanguages
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html#PnP_Core_Model_SharePoint_IPageTranslationStatusCollection_TranslatedLanguages
+  commentId: P:PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.TranslatedLanguages
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.TranslatedLanguages
+  nameWithType: IPageTranslationStatusCollection.TranslatedLanguages
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.TranslatedLanguages*
+  name: TranslatedLanguages
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html#PnP_Core_Model_SharePoint_IPageTranslationStatusCollection_TranslatedLanguages_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.TranslatedLanguages
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.TranslatedLanguages
+  nameWithType: IPageTranslationStatusCollection.TranslatedLanguages
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.UntranslatedLanguages
+  name: UntranslatedLanguages
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html#PnP_Core_Model_SharePoint_IPageTranslationStatusCollection_UntranslatedLanguages
+  commentId: P:PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.UntranslatedLanguages
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.UntranslatedLanguages
+  nameWithType: IPageTranslationStatusCollection.UntranslatedLanguages
+- uid: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.UntranslatedLanguages*
+  name: UntranslatedLanguages
+  href: api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html#PnP_Core_Model_SharePoint_IPageTranslationStatusCollection_UntranslatedLanguages_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.UntranslatedLanguages
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.UntranslatedLanguages
+  nameWithType: IPageTranslationStatusCollection.UntranslatedLanguages
 - uid: PnP.Core.Model.SharePoint.IPageWebPart
   name: IPageWebPart
   href: api/PnP.Core.Model.SharePoint.IPageWebPart.html
@@ -19898,6 +20078,38 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.PageLayoutType.Topic
   fullName: PnP.Core.Model.SharePoint.PageLayoutType.Topic
   nameWithType: PageLayoutType.Topic
+- uid: PnP.Core.Model.SharePoint.PageTranslationOptions
+  name: PageTranslationOptions
+  href: api/PnP.Core.Model.SharePoint.PageTranslationOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.PageTranslationOptions
+  fullName: PnP.Core.Model.SharePoint.PageTranslationOptions
+  nameWithType: PageTranslationOptions
+- uid: PnP.Core.Model.SharePoint.PageTranslationOptions.AddLanguage(System.Int32)
+  name: AddLanguage(Int32)
+  href: api/PnP.Core.Model.SharePoint.PageTranslationOptions.html#PnP_Core_Model_SharePoint_PageTranslationOptions_AddLanguage_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.PageTranslationOptions.AddLanguage(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.PageTranslationOptions.AddLanguage(System.Int32)
+  nameWithType: PageTranslationOptions.AddLanguage(Int32)
+- uid: PnP.Core.Model.SharePoint.PageTranslationOptions.AddLanguage*
+  name: AddLanguage
+  href: api/PnP.Core.Model.SharePoint.PageTranslationOptions.html#PnP_Core_Model_SharePoint_PageTranslationOptions_AddLanguage_
+  commentId: Overload:PnP.Core.Model.SharePoint.PageTranslationOptions.AddLanguage
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.PageTranslationOptions.AddLanguage
+  nameWithType: PageTranslationOptions.AddLanguage
+- uid: PnP.Core.Model.SharePoint.PageTranslationOptions.LanguageCodes
+  name: LanguageCodes
+  href: api/PnP.Core.Model.SharePoint.PageTranslationOptions.html#PnP_Core_Model_SharePoint_PageTranslationOptions_LanguageCodes
+  commentId: P:PnP.Core.Model.SharePoint.PageTranslationOptions.LanguageCodes
+  fullName: PnP.Core.Model.SharePoint.PageTranslationOptions.LanguageCodes
+  nameWithType: PageTranslationOptions.LanguageCodes
+- uid: PnP.Core.Model.SharePoint.PageTranslationOptions.LanguageCodes*
+  name: LanguageCodes
+  href: api/PnP.Core.Model.SharePoint.PageTranslationOptions.html#PnP_Core_Model_SharePoint_PageTranslationOptions_LanguageCodes_
+  commentId: Overload:PnP.Core.Model.SharePoint.PageTranslationOptions.LanguageCodes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.PageTranslationOptions.LanguageCodes
+  nameWithType: PageTranslationOptions.LanguageCodes
 - uid: PnP.Core.Model.SharePoint.PermissionKind
   name: PermissionKind
   href: api/PnP.Core.Model.SharePoint.PermissionKind.html
