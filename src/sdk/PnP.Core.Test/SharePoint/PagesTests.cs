@@ -167,7 +167,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var pages = await context.Web.GetPagesAsync("Ho");
-                var availableComponents = await pages.First().AvailableClientSideComponentsAsync();
+                var availableComponents = await pages.First().AvailablePageComponentsAsync();
                 Assert.IsTrue(availableComponents.Count() > 0);
 
                 var imageWebPartId = pages.First().DefaultWebPartToWebPartId(DefaultWebPart.Image);
@@ -184,11 +184,36 @@ namespace PnP.Core.Test.SharePoint
             {
                 var pages = await context.Web.GetPagesAsync("Ho");
                 var imageWebPartId = pages.First().DefaultWebPartToWebPartId(DefaultWebPart.Image);
-                var availableComponents = await pages.First().AvailableClientSideComponentsAsync(imageWebPartId);
+                var availableComponents = await pages.First().AvailablePageComponentsAsync(imageWebPartId);
                 Assert.IsTrue(availableComponents.Count() == 1);
                 Assert.IsTrue(availableComponents.First().Id == imageWebPartId);
             }
         }
+        #endregion
+
+        #region Multilingual tests
+        /*
+        [TestMethod]
+        public async Task GetPageTranslations()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var pages = await context.Web.GetPagesAsync("Bert2.aspx");               
+                var page = pages.First();
+
+                var translations = await page.GetPageTranslationsAsync();
+
+                var translationRequest = new PageTranslationOptions();
+                //translationRequest.AddLanguage(1043);
+                //translationRequest.AddLanguage(1036);
+                translationRequest.LanguageCodes.AddRange(translations.UntranslatedLanguages);
+
+                var status = await page.TranslatePagesAsync();
+
+            }
+        }
+        */
         #endregion
 
         #region Page deletion
@@ -279,6 +304,23 @@ namespace PnP.Core.Test.SharePoint
 
             }
         }
+
+        //[TestMethod]
+        //public async Task Bert()
+        //{
+        //    TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        var pages = await context.Web.GetPagesAsync("Bert1.aspx");
+        //        Assert.IsTrue(pages.Count == 1);
+
+        //        var page = pages.First();
+
+        //        await page.SaveAsync("Bert1Clone.aspx");
+
+        //    }
+        //}
+
 
         //[TestMethod]
         //public async Task CreateNewPage()
