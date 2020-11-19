@@ -96,11 +96,22 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        public static object ChoiceMultiToJson(List<string> choices)
+        public static object StringArrayToJson(List<string> choices)
         {
             var updateMessage = new
             {
                 __metadata = new { type = "Collection(Edm.String)" },
+                results = choices.ToArray()
+            };
+
+            return updateMessage;
+        }
+
+        public static object IntArrayToJson(List<int> choices)
+        {
+            var updateMessage = new
+            {
+                __metadata = new { type = "Collection(Edm.Int32)" },
                 results = choices.ToArray()
             };
 

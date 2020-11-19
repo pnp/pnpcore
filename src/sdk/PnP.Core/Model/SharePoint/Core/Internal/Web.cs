@@ -225,8 +225,7 @@ namespace PnP.Core.Model.SharePoint
 
         public SearchBoxInNavBar SearchBoxInNavBar { get => GetValue<SearchBoxInNavBar>(); set => SetValue(value); }
 
-        // Not in Web object, requires extra work to load
-        public string SearchCenterUrl { get => GetValue<string>(); set => SetValue(value); }
+        public List<int> SupportedUILanguageIds { get => GetValue<List<int>>(); set => SetValue(value); }
 
         public IFieldCollection Fields { get => GetModelCollectionValue<IFieldCollection>(); }
 

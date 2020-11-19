@@ -1197,6 +1197,27 @@ namespace PnP.Core.Services
                     // Used on TermStore model (and maybe more in future)
                     case "List`1":
                         {
+                            // When the call was made via SharePoint REST the list is wrapped into a collection object. E.g.
+                            //
+                            //"SupportedUILanguageIds": {
+                            //    "__metadata": {
+                            //        "type": "Collection(Edm.Int32)"
+                            //    },
+                            //"results": [
+                            //    1033,
+                            //    1043,
+                            //    1031,
+                            //    1036
+                            //    ]
+                            //}
+                            //
+                            // If so see if there's a results property and use that
+
+                            if (jsonElement.TryGetProperty("results", out JsonElement results))
+                            {
+                                jsonElement = results;
+                            }
+
                             if (jsonElement.ValueKind != JsonValueKind.Array)
                             {
                                 return null;

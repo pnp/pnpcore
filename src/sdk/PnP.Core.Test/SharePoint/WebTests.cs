@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -360,5 +361,54 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
         }
+
+        [TestMethod]
+        public async Task GetSiteLanguagesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
+            {
+                var web = await context.Web.GetAsync(p => p.SupportedUILanguageIds);
+
+                Assert.IsTrue(web.SupportedUILanguageIds != null);
+                Assert.IsTrue(web.SupportedUILanguageIds.Any());
+            }
+        }
+
+        [TestMethod]
+        public async Task AddRemoveSiteLanguagesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
+            {
+                var web = await context.Web.GetAsync(p => p.SupportedUILanguageIds);
+
+                var lastLanguage = web.SupportedUILanguageIds.Last();
+
+                // remove a language
+                web.SupportedUILanguageIds.Remove(lastLanguage);
+                await web.UpdateAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite, 2))
+                {
+                    // Verify the language was actually removed
+                    var web2 = await context2.Web.GetAsync(p => p.SupportedUILanguageIds);
+                    Assert.IsFalse(web2.SupportedUILanguageIds.Contains(lastLanguage));
+
+                    // Add the language again
+                    web2.SupportedUILanguageIds.Add(lastLanguage);
+                    await web2.UpdateAsync();
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite, 3))
+                {
+                    // Verify the language was added removed
+                    var web3 = await context3.Web.GetAsync(p => p.SupportedUILanguageIds);
+                    Assert.IsTrue(web3.SupportedUILanguageIds.Contains(lastLanguage));
+                }
+            }
+        }
+
+
     }
 }

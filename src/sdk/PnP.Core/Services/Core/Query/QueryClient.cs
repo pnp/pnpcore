@@ -1102,7 +1102,12 @@ namespace PnP.Core.Services
                             else if (changedProp.Value is List<string>)
                             {
                                 // multi value choice field
-                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, FieldValueCollection.ChoiceMultiToJson(changedProp.Value as List<string>));
+                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, FieldValueCollection.StringArrayToJson(changedProp.Value as List<string>));
+                            }
+                            else if (changedProp.Value is List<int>)
+                            {
+                                // multi value choice field
+                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, FieldValueCollection.IntArrayToJson(changedProp.Value as List<int>));
                             }
                             else
                             {
@@ -1125,6 +1130,16 @@ namespace PnP.Core.Services
 
                         // Add this as value to the original changed property
                         ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, updateMessageComplexType as object);
+                    }
+                    else if (model.GetValue(changedField.Name) is List<string>)
+                    {
+                        // multi value choice field
+                        ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, FieldValueCollection.StringArrayToJson(model.GetValue(changedField.Name) as List<string>));
+                    }
+                    else if (model.GetValue(changedField.Name) is List<int>)
+                    {
+                        // multi value choice field
+                        ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, FieldValueCollection.IntArrayToJson(model.GetValue(changedField.Name) as List<int>));
                     }
                     else
                     {

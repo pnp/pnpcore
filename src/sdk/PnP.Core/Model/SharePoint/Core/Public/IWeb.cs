@@ -447,14 +447,14 @@ namespace PnP.Core.Model.SharePoint
         public SearchBoxInNavBar SearchBoxInNavBar { get; set; }
 
         /// <summary>
-        /// Defines the Search Center URL
-        /// </summary>
-        public string SearchCenterUrl { get; set; }
-
-        /// <summary>
         /// The URL of the Web object
         /// </summary>
         public Uri Url { get; }
+
+        /// <summary>
+        /// List of languages (expressed via their id) that this site supports
+        /// </summary>
+        public List<int> SupportedUILanguageIds { get; }
 
         /// <summary>
         /// Gets the current user in the current context
