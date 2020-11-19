@@ -18824,19 +18824,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.SearchBoxPlaceholderText
   nameWithType: IWeb.SearchBoxPlaceholderText
-- uid: PnP.Core.Model.SharePoint.IWeb.SearchCenterUrl
-  name: SearchCenterUrl
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchCenterUrl
-  commentId: P:PnP.Core.Model.SharePoint.IWeb.SearchCenterUrl
-  fullName: PnP.Core.Model.SharePoint.IWeb.SearchCenterUrl
-  nameWithType: IWeb.SearchCenterUrl
-- uid: PnP.Core.Model.SharePoint.IWeb.SearchCenterUrl*
-  name: SearchCenterUrl
-  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchCenterUrl_
-  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SearchCenterUrl
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IWeb.SearchCenterUrl
-  nameWithType: IWeb.SearchCenterUrl
 - uid: PnP.Core.Model.SharePoint.IWeb.SearchScope
   name: SearchScope
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SearchScope
@@ -18941,6 +18928,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.SiteUsers
   nameWithType: IWeb.SiteUsers
+- uid: PnP.Core.Model.SharePoint.IWeb.SupportedUILanguageIds
+  name: SupportedUILanguageIds
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SupportedUILanguageIds
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.SupportedUILanguageIds
+  fullName: PnP.Core.Model.SharePoint.IWeb.SupportedUILanguageIds
+  nameWithType: IWeb.SupportedUILanguageIds
+- uid: PnP.Core.Model.SharePoint.IWeb.SupportedUILanguageIds*
+  name: SupportedUILanguageIds
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SupportedUILanguageIds_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.SupportedUILanguageIds
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.SupportedUILanguageIds
+  nameWithType: IWeb.SupportedUILanguageIds
 - uid: PnP.Core.Model.SharePoint.IWeb.SyndicationEnabled
   name: SyndicationEnabled
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_SyndicationEnabled
