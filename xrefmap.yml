@@ -17941,6 +17941,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.EnableMinimalDownload
   nameWithType: IWeb.EnableMinimalDownload
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingual(PnP.Core.Model.SharePoint.List{System.Int32})
+  name: EnsureMultilingual(List<Int32>)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureMultilingual_PnP_Core_Model_SharePoint_List_System_Int32__
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.EnsureMultilingual(PnP.Core.Model.SharePoint.List{System.Int32})
+  name.vb: EnsureMultilingual(List(Of Int32))
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingual(PnP.Core.Model.SharePoint.List<System.Int32>)
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingual(PnP.Core.Model.SharePoint.List(Of System.Int32))
+  nameWithType: IWeb.EnsureMultilingual(List<Int32>)
+  nameWithType.vb: IWeb.EnsureMultilingual(List(Of Int32))
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingual*
+  name: EnsureMultilingual
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureMultilingual_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.EnsureMultilingual
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingual
+  nameWithType: IWeb.EnsureMultilingual
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync(PnP.Core.Model.SharePoint.List{System.Int32})
+  name: EnsureMultilingualAsync(List<Int32>)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureMultilingualAsync_PnP_Core_Model_SharePoint_List_System_Int32__
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync(PnP.Core.Model.SharePoint.List{System.Int32})
+  name.vb: EnsureMultilingualAsync(List(Of Int32))
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync(PnP.Core.Model.SharePoint.List<System.Int32>)
+  fullName.vb: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync(PnP.Core.Model.SharePoint.List(Of System.Int32))
+  nameWithType: IWeb.EnsureMultilingualAsync(List<Int32>)
+  nameWithType.vb: IWeb.EnsureMultilingualAsync(List(Of Int32))
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync*
+  name: EnsureMultilingualAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureMultilingualAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync
+  nameWithType: IWeb.EnsureMultilingualAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.EnsureUser(System.String)
   name: EnsureUser(String)
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureUser_System_String_
