@@ -764,6 +764,24 @@ namespace PnP.Core.Model.SharePoint
 
         #endregion
 
+        #region Multi-lingual
+
+        /// <summary>
+        /// Ensure a site can support multilingual (pages) for the passed along languages
+        /// </summary>
+        /// <param name="requiredLanguageIds">List of langauges to support for multilingual on this site. See https://capacreative.co.uk/resources/reference-sharepoint-online-languages-ids/ for information on the language ids</param>
+        /// <returns></returns>
+        Task EnsureMultilingualAsync(List<int> requiredLanguageIds);
+
+        /// <summary>
+        /// Ensure a site can support multilingual (pages) for the passed along languages
+        /// </summary>
+        /// <param name="requiredLanguageIds">List of langauges to support for multilingual on this site. See https://capacreative.co.uk/resources/reference-sharepoint-online-languages-ids/ for information on the language ids</param>
+        /// <returns></returns>
+        void EnsureMultilingual(List<int> requiredLanguageIds);
+
+        #endregion
+
         #endregion
 
         #region TO IMPLEMENT

@@ -258,7 +258,7 @@ namespace PnP.Core.Model.SharePoint
             {
                 // Strip folder from the provided file name + path
                 (var folderName, var pageNameWithoutFolder) = PageToPageNameAndFolder(pageName);
-                var pages = pagesLibrary.Items.Where(p => p.Title.StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
+                var pages = pagesLibrary.Items.Where(p => p.Values[PageConstants.FileLeafRef].ToString().StartsWith(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase));
                 if (pages.Any())
                 {
                     pagesToLoad = pages.ToList();
@@ -1444,12 +1444,17 @@ namespace PnP.Core.Model.SharePoint
                 PageListItem[PageConstants.PageLayoutContentField] = pageHeaderHtml;
 
                 // AuthorByline depends on a field holding the author values
+                var authorByLineIdField = PagesLibrary.Fields.FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
                 if (pageHeader.AuthorByLineId > -1)
                 {
-                    var authorByLineIdField = PagesLibrary.Fields.FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
                     var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField, PageListItem.Values);
                     fieldUsers.Values.Add(PageListItem.NewFieldUserValue(authorByLineIdField, pageHeader.AuthorByLineId));
                     PageListItem[PageConstants._AuthorByline] = fieldUsers;
+                }
+                else
+                {
+                    // Ensure there's an empty collection set
+                    PageListItem[PageConstants._AuthorByline] = PageListItem.NewFieldValueCollection(authorByLineIdField, PageListItem.Values);
                 }
 
                 // Topic header needs to be persisted in a field
@@ -1467,7 +1472,7 @@ namespace PnP.Core.Model.SharePoint
 
             if ((layoutType == PageLayoutType.Article || LayoutType == PageLayoutType.Spaces) && PageListItem[PageConstants.BannerImageUrl] != null)
             {
-                if (string.IsNullOrEmpty(PageListItem[PageConstants.BannerImageUrl].ToString()) || PageListItem[PageConstants.BannerImageUrl].ToString().IndexOf("/_layouts/15/images/sitepagethumbnail.png", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                if (string.IsNullOrEmpty(PageListItem[PageConstants.BannerImageUrl].ToString()) || PageListItem[PageConstants.BannerImageUrl].ToString().Contains("/_layouts/15/images/sitepagethumbnail.png", StringComparison.InvariantCultureIgnoreCase))
                 {
                     string previewImageServerRelativeUrl = "";
                     if (pageHeader.Type == PageHeaderType.Custom && !string.IsNullOrEmpty(pageHeader.ImageServerRelativeUrl))

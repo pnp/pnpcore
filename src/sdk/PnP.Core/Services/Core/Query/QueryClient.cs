@@ -981,8 +981,13 @@ namespace PnP.Core.Services
                         }
                         else
                         {
-                            // Let's set its value into the update message
-                            ((ExpandoObject)updateMessage).SetProperty(changedField.GraphName, model.GetValue(changedField.Name));
+                            // Let's set its value into the update message, assuming it's a not a model or model collection as those have to be updated by
+                            // calling update on their respective models
+                            if (!(model.GetValue(changedField.Name) is IDataModelWithContext))
+                            {
+                                // Let's set its value into the update message
+                                ((ExpandoObject)updateMessage).SetProperty(changedField.GraphName, model.GetValue(changedField.Name));
+                            }
                         }
                     }
                 }
@@ -1143,8 +1148,12 @@ namespace PnP.Core.Services
                     }
                     else
                     {
-                        // Let's set its value into the update message
-                        ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, model.GetValue(changedField.Name));
+                        // Let's set its value into the update message, assuming it's a not a model or model collection as those have to be updated by
+                        // calling update on their respective models
+                        if (!(model.GetValue(changedField.Name) is IDataModelWithContext))
+                        {
+                            ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, model.GetValue(changedField.Name));
+                        }
                     }
                 }
             }

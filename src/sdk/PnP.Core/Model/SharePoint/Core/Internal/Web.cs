@@ -3,6 +3,7 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
@@ -18,6 +19,8 @@ namespace PnP.Core.Model.SharePoint
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
     internal partial class Web : BaseDataModel<IWeb>, IWeb
     {
+        private static readonly Guid MultilingualPagesFeature = new Guid("24611c05-ee19-45da-955f-6602264abaf8");
+
         #region Construction
         public Web()
         {
@@ -510,6 +513,52 @@ namespace PnP.Core.Model.SharePoint
 
             return sharePointUser;
         }
+        #endregion
+
+        #region Multilingual
+
+        public void EnsureMultilingual(List<int> requiredLanguageIds)
+        {
+            EnsureMultilingualAsync(requiredLanguageIds).GetAwaiter().GetResult();
+        }
+
+        public async Task EnsureMultilingualAsync(List<int> requiredLanguageIds)
+        {
+            // Ensure the needed web properties are loaded
+            await EnsurePropertiesAsync(p => p.IsMultilingual, p => p.SupportedUILanguageIds, p=>p.Features).ConfigureAwait(false);
+
+            bool updated = false;
+            // Ensure the multilingual page feature is enabled
+            if (Features.FirstOrDefault(p => p.DefinitionId == MultilingualPagesFeature) == null)
+            {
+                await Features.EnableBatchAsync(MultilingualPagesFeature).ConfigureAwait(false);
+                updated = true;
+            }
+
+            if (!IsMultilingual)
+            {
+                // Make site multi-lingual and load the available languages
+                IsMultilingual = true;
+                updated = true;
+            }
+
+            foreach(var language in requiredLanguageIds)
+            {
+                if (!SupportedUILanguageIds.Contains(language))
+                {
+                    SupportedUILanguageIds.Add(language);
+                    updated = true;
+                }
+            }
+
+            if (updated)
+            {
+                await UpdateBatchAsync().ConfigureAwait(false);
+                await GetBatchAsync(p => p.SupportedUILanguageIds).ConfigureAwait(false);
+                await PnPContext.ExecuteAsync().ConfigureAwait(false);
+            }
+        }
+
         #endregion
 
         #endregion

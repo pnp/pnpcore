@@ -10,8 +10,7 @@ namespace PnP.Core.Services
     public class PnPGlobalSettingsOptions
     {
         private const string UserAgentPrefix = "NONISV|SharePointPnP|PnPCoreSDK";
-        private readonly ILogger logger;
-
+        
         /// <summary>
         /// Turns on/off telemetry, can be customized via configuration. Defaults to false.
         /// </summary>
@@ -92,6 +91,11 @@ namespace PnP.Core.Services
         private string versionTag;
 
         /// <summary>
+        /// Connected logger
+        /// </summary>
+        internal ILogger Logger { get; set; }
+
+        /// <summary>
         /// Version tag used in telemetry
         /// </summary>
         public string VersionTag
@@ -128,7 +132,7 @@ namespace PnP.Core.Services
         /// <param name="log">Connected logger</param>
         public PnPGlobalSettingsOptions(ILogger<PnPGlobalSettingsOptions> log)
         {
-            logger = log;
+            Logger = log;
         }
 
         private static string GetVersionTag()

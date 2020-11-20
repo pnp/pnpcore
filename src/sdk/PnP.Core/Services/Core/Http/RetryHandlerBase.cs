@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -38,6 +39,11 @@ namespace PnP.Core.Services
 
             if (ShouldRetry(response.StatusCode))
             {
+                if (GlobalSettings != null && GlobalSettings.Logger != null)
+                {
+                    GlobalSettings.Logger.LogInformation($"Retrying request {request.RequestUri} due to status code {response.StatusCode}");
+                }
+
                 // Handle retry handling
                 response = await SendRetryAsync(response, cancellationToken).ConfigureAwait(false);
             }
@@ -62,7 +68,11 @@ namespace PnP.Core.Services
                 // Drain response content to free responses.
                 if (response.Content != null)
                 {
+#if NET5_0
+                    await response.Content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);
+#else
                     await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+#endif
                 }
 
                 // Call Delay method to get delay time from response's Retry-After header or by exponential backoff 

@@ -1,6 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -192,28 +195,99 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         #region Multilingual tests
-        /*
+
         [TestMethod]
-        public async Task GetPageTranslations()
+        public async Task EnsureSiteIsMultilingual()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
             {
-                var pages = await context.Web.GetPagesAsync("Bert2.aspx");               
-                var page = pages.First();
+                // Enable this site for multilingual pages
+                await context.Web.EnsureMultilingualAsync(new List<int>() { 1043, 1036 });
 
-                var translations = await page.GetPageTranslationsAsync();
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                {
+                    // Verify everythign went well
+                    await context2.Web.EnsurePropertiesAsync(p => p.Features, p => p.IsMultilingual, p => p.SupportedUILanguageIds);
 
-                var translationRequest = new PageTranslationOptions();
-                //translationRequest.AddLanguage(1043);
-                //translationRequest.AddLanguage(1036);
-                translationRequest.LanguageCodes.AddRange(translations.UntranslatedLanguages);
+                    Assert.IsTrue(context2.Web.Features.FirstOrDefault(p => p.DefinitionId == new Guid("24611c05-ee19-45da-955f-6602264abaf8")) != null);
+                    Assert.IsTrue(context2.Web.SupportedUILanguageIds.Contains(1043));
+                    Assert.IsTrue(context2.Web.SupportedUILanguageIds.Contains(1036));
 
-                var status = await page.TranslatePagesAsync();
+                    // Run ensure again on a site that was ensured previously to see also test that code path
+                    await context2.Web.EnsureMultilingualAsync(new List<int>() { 1043, 1036 });
 
+                    // Turn off multilingual pages again
+                    await DisableMultilingual(context2);
+                }
+
+                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 3))
+                {
+                    // Verify everything was turned off again
+                    await context3.Web.EnsurePropertiesAsync(p => p.Features, p => p.SupportedUILanguageIds);
+
+                    Assert.IsTrue(context3.Web.Features.FirstOrDefault(p => p.DefinitionId == new Guid("24611c05-ee19-45da-955f-6602264abaf8")) == null);
+                    Assert.IsFalse(context3.Web.SupportedUILanguageIds.Contains(1043));
+                    Assert.IsFalse(context3.Web.SupportedUILanguageIds.Contains(1036));
+                }
             }
         }
-        */
+
+        private static async Task DisableMultilingual(Core.Services.PnPContext context)
+        {
+            await context.Web.EnsurePropertiesAsync(p => p.Features, p => p.SupportedUILanguageIds);
+            await context.Web.Features.DisableBatchAsync(new Guid("24611c05-ee19-45da-955f-6602264abaf8"));
+            context.Web.SupportedUILanguageIds.Remove(1043);
+            context.Web.SupportedUILanguageIds.Remove(1036);
+            await context.Web.UpdateBatchAsync();
+            await context.ExecuteAsync();
+        }
+        
+        [TestMethod]
+        public async Task GenerateGetAndDeletePageTranslations()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                
+                // Enable this site for multilingual pages
+                await context.Web.EnsureMultilingualAsync(new List<int>() { 1043, 1036 });
+
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageToTranslate.aspx");
+
+                // Save the page with a folder in the path
+                await newPage.SaveAsync(pageName);
+
+                // Page should not yet have translations
+                var pageTranslations = await newPage.GetPageTranslationsAsync();
+
+                CultureInfo culture1043 = new CultureInfo(1043);
+                CultureInfo culture1036 = new CultureInfo(1036);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1043.Name, StringComparison.InvariantCultureIgnoreCase)) == null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1036.Name, StringComparison.InvariantCultureIgnoreCase)) == null);
+
+                // generate translation for the page
+                pageTranslations = await newPage.TranslatePagesAsync();
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1043.Name, StringComparison.InvariantCultureIgnoreCase)) != null);
+                Assert.IsTrue(pageTranslations.TranslatedLanguages.FirstOrDefault(p => p.Culture.Equals(culture1036.Name, StringComparison.InvariantCultureIgnoreCase)) != null);
+
+                // Delete the created page and it's translations
+                foreach (var translation in pageTranslations.TranslatedLanguages)
+                {
+                    var folder = translation.Culture.Split('-')[0].ToLower();
+                    var pagesToDelete = await context.Web.GetPagesAsync($"{folder}/{pageName}");
+                    await pagesToDelete.First().DeleteAsync();
+                }
+
+                var pages = await context.Web.GetPagesAsync(pageName);
+                await pages.First().DeleteAsync();
+                
+                // turn off multilingual again
+                await DisableMultilingual(context);
+            }
+        }
+        
         #endregion
 
         #region Page deletion
@@ -371,23 +445,6 @@ namespace PnP.Core.Test.SharePoint
         //}
 
         #endregion
-
-
-        //[TestMethod]
-        //public async Task Bert1()
-        //{
-        //    TestCommon.Instance.Mocking = false;
-        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-        //    {
-
-        //        var pages = await context.Web.GetPagesAsync("Bert1");
-
-        //        Assert.IsTrue(pages.Count > 0);
-
-        //        await pages.First().SaveAsync("Bert1Clone.aspx");
-
-        //    }
-        //}
 
     }
 }
