@@ -174,7 +174,7 @@ namespace PnP.Core.Model.SharePoint
 
                     Emphasis = new SectionEmphasis()
                     {
-                        ZoneEmphasis = Section.ZoneEmphasis,
+                        ZoneEmphasis = VerticalSectionEmphasis.HasValue ? VerticalSectionEmphasis.Value : Section.ZoneEmphasis,
                     }
                 };
 

@@ -435,7 +435,7 @@ namespace PnP.Core.Model.SharePoint
 
         public IPageText NewTextPart(string text = null)
         {
-            var textPart = new PageSideText();
+            var textPart = new PageText();
             if (!string.IsNullOrEmpty(text))
             {
                 textPart.Text = text;
@@ -941,9 +941,9 @@ namespace PnP.Core.Model.SharePoint
                     var controlData = clientSideControl.GetAttribute(CanvasControl.ControlDataAttribute);
                     var controlType = CanvasControl.GetType(controlData);
 
-                    if (controlType == typeof(PageSideText))
+                    if (controlType == typeof(PageText))
                     {
-                        var control = new PageSideText()
+                        var control = new PageText()
                         {
                             Order = controlOrder
                         };
@@ -970,12 +970,7 @@ namespace PnP.Core.Model.SharePoint
                     else if (controlType == typeof(CanvasColumn))
                     {
                         // Need to parse empty sections
-                        //var jsonSerializerSettings = new JsonSerializerSettings()
-                        //{
-                        //    MissingMemberHandling = MissingMemberHandling.Ignore
-                        //};
                         var jsonSerializerSettings = new JsonSerializerOptions() { IgnoreNullValues = true };
-                        //var sectionData = JsonConvert.DeserializeObject<ClientSideCanvasData>(controlData, jsonSerializerSettings);
                         var sectionData = JsonSerializer.Deserialize<CanvasData>(controlData, jsonSerializerSettings);
 
                         CanvasSection currentSection = null;
@@ -996,15 +991,36 @@ namespace PnP.Core.Model.SharePoint
                         ICanvasColumn currentColumn = null;
                         if (sectionData.Position != null)
                         {
-                            currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex).FirstOrDefault();
+                            if (sectionData.Position.LayoutIndex.HasValue)
+                            {
+                                currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex && p.LayoutIndex == sectionData.Position.LayoutIndex.Value).FirstOrDefault();
+                            }
+                            else
+                            {
+                                currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex).FirstOrDefault();
+                            }
                         }
 
                         if (currentColumn == null)
                         {
                             if (sectionData.Position != null)
                             {
-                                currentSection.AddColumn(new CanvasColumn(currentSection, sectionData.Position.SectionIndex, sectionData.Position.SectionFactor));
-                                currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex).First();
+                                if (sectionData.Position.LayoutIndex.HasValue)
+                                {
+                                    currentSection.AddColumn(new CanvasColumn(currentSection, sectionData.Position.SectionIndex, sectionData.Position.SectionFactor, sectionData.Position.LayoutIndex.Value));
+                                    currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex && p.LayoutIndex == sectionData.Position.LayoutIndex.Value).First();
+
+                                    // ZoneEmphasis on a vertical section column needs to be retained as that "overrides" the zone emphasis set on the section
+                                    if (currentColumn.IsVerticalSectionColumn)
+                                    {
+                                        (currentColumn as CanvasColumn).VerticalSectionEmphasis = sectionData.Emphasis != null ? sectionData.Emphasis.ZoneEmphasis : 0;
+                                    }
+                                }
+                                else
+                                {
+                                    currentSection.AddColumn(new CanvasColumn(currentSection, sectionData.Position.SectionIndex, sectionData.Position.SectionFactor));
+                                    currentColumn = currentSection.Columns.Where(p => p.Order == sectionData.Position.SectionIndex).First();
+                                }
                             }
                         }
 
@@ -1014,8 +1030,6 @@ namespace PnP.Core.Model.SharePoint
                             {
                                 if (sectionData.PageSettingsSlice.IsDefaultThumbnail == false)
                                 {
-                                    // TODO
-                                    //this.thumbnailUrl = Values[PageConstants.BannerImageUrlField] != null ? ((FieldUrlValue)this.PageListItem[BannerImageUrlField]).Url : string.Empty;
                                     ThumbnailUrl = PageListItem.Values[PageConstants.BannerImageUrlField] != null ? PageListItem.Values[PageConstants.BannerImageUrlField].ToString() : string.Empty;
                                 }
                             }
@@ -1524,7 +1538,7 @@ namespace PnP.Core.Model.SharePoint
                     string previewText = "";
                     foreach (var control in Controls)
                     {
-                        if (control is PageSideText textPart)
+                        if (control is PageText textPart)
                         {
                             if (!string.IsNullOrEmpty(textPart.PreviewText))
                             {

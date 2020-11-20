@@ -328,7 +328,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else if (controlData.ControlType == 4)
             {
-                return typeof(PageSideText);
+                return typeof(PageText);
             }
             else if (controlData.ControlType == 0)
             {

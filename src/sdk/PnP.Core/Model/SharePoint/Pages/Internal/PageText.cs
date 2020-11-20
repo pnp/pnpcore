@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Controls of type 4 ( = text control)
     /// </summary>
-    internal class PageSideText : CanvasControl, IPageText
+    internal class PageText : CanvasControl, IPageText
     {
         #region variables
         internal const string TextRteAttribute = "data-sp-rte";
@@ -18,9 +18,9 @@ namespace PnP.Core.Model.SharePoint
 
         #region construction
         /// <summary>
-        /// Creates a <see cref="PageSideText"/> instance
+        /// Creates a <see cref="PageText"/> instance
         /// </summary>
-        internal PageSideText() : base()
+        internal PageText() : base()
         {
             controlType = 4;
             Rte = "";
@@ -45,13 +45,13 @@ namespace PnP.Core.Model.SharePoint
         public string PreviewText { get; private set; }
 
         /// <summary>
-        /// Type of the control (= <see cref="PageSideText"/>)
+        /// Type of the control (= <see cref="PageText"/>)
         /// </summary>
         public override Type Type
         {
             get
             {
-                return typeof(PageSideText);
+                return typeof(PageText);
             }
         }
 
@@ -63,10 +63,10 @@ namespace PnP.Core.Model.SharePoint
 
         #region public methods
         /// <summary>
-        /// Converts this <see cref="PageSideText"/> control to it's html representation
+        /// Converts this <see cref="PageText"/> control to it's html representation
         /// </summary>
         /// <param name="controlIndex">The sequence of the control inside the section</param>
-        /// <returns>Html representation of this <see cref="PageSideText"/> control</returns>
+        /// <returns>Html representation of this <see cref="PageText"/> control</returns>
         public override string ToHtml(float controlIndex)
         {
             // Can this control be hosted in this section type?

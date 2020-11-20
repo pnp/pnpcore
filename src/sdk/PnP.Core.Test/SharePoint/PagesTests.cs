@@ -195,7 +195,6 @@ namespace PnP.Core.Test.SharePoint
         #endregion
 
         #region Multilingual tests
-
         [TestMethod]
         public async Task EnsureSiteIsMultilingual()
         {
@@ -286,8 +285,7 @@ namespace PnP.Core.Test.SharePoint
                 // turn off multilingual again
                 await DisableMultilingual(context);
             }
-        }
-        
+        }        
         #endregion
 
         #region Page deletion
@@ -310,6 +308,451 @@ namespace PnP.Core.Test.SharePoint
                 // Verify the page exists
                 var pages2 = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages2.Count == 0);
+            }
+        }
+
+        #endregion
+
+        #region Page content tests
+
+        [TestMethod]
+        public async Task PageSectionsCreateTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageSectionsCreateTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2);
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 3);
+                page.AddSection(CanvasSectionTemplate.TwoColumnLeft , 4);
+                page.AddSection(CanvasSectionTemplate.TwoColumnRight, 5);
+                page.AddSection(CanvasSectionTemplate.ThreeColumn, 6);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.First();
+
+                Assert.IsTrue(page.Sections.Count == 6);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumnLeft);
+                Assert.IsTrue(page.Sections[4].Type == CanvasSectionTemplate.TwoColumnRight);
+                Assert.IsTrue(page.Sections[5].Type == CanvasSectionTemplate.ThreeColumn);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task PageSectionsWithEmphasisCreateTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageSectionsWithEmphasisCreateTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1, VariantThemeType.Neutral);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2, VariantThemeType.None);
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 3, VariantThemeType.Soft);
+                page.AddSection(CanvasSectionTemplate.TwoColumnLeft, 4, VariantThemeType.Strong);
+                page.AddSection(CanvasSectionTemplate.TwoColumnRight, 5, VariantThemeType.Neutral);
+                page.AddSection(CanvasSectionTemplate.ThreeColumn, 6, VariantThemeType.None);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.First();
+
+                Assert.IsTrue(page.Sections.Count == 6);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[0].ZoneEmphasis == (int)VariantThemeType.Neutral);
+
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[1].ZoneEmphasis == (int)VariantThemeType.None);
+                
+                Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[2].ZoneEmphasis == (int)VariantThemeType.Soft);
+                
+                Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumnLeft);
+                Assert.IsTrue(page.Sections[3].ZoneEmphasis == (int)VariantThemeType.Strong);
+                
+                Assert.IsTrue(page.Sections[4].Type == CanvasSectionTemplate.TwoColumnRight);
+                Assert.IsTrue(page.Sections[4].ZoneEmphasis == (int)VariantThemeType.Neutral);
+
+                Assert.IsTrue(page.Sections[5].Type == CanvasSectionTemplate.ThreeColumn);
+                Assert.IsTrue(page.Sections[5].ZoneEmphasis == (int)VariantThemeType.None);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task PageSectionsWithEmphasisAndControlCreateTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageSectionsWithEmphasisAndControlCreateTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1, VariantThemeType.Neutral);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2, VariantThemeType.None);
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 3, VariantThemeType.Soft);
+                page.AddSection(CanvasSectionTemplate.TwoColumnLeft, 4, VariantThemeType.Strong);
+                page.AddSection(CanvasSectionTemplate.TwoColumnRight, 5, VariantThemeType.Neutral);
+                page.AddSection(CanvasSectionTemplate.ThreeColumn, 6, VariantThemeType.None);
+
+                // Add a text control in each section
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[1].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[2].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[2].Columns[1]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[3].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[3].Columns[1]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[4].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[4].Columns[1]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[5].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[5].Columns[1]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[5].Columns[2]);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.First();
+
+                Assert.IsTrue(page.Sections.Count == 6);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[0].ZoneEmphasis == (int)VariantThemeType.Neutral);
+
+
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[1].ZoneEmphasis == (int)VariantThemeType.None);
+                Assert.IsTrue(page.Sections[1].Columns[0].Controls.Count == 1);
+
+                Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[2].ZoneEmphasis == (int)VariantThemeType.Soft);
+                Assert.IsTrue(page.Sections[2].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[2].Columns[1].Controls.Count == 1);
+
+                Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumnLeft);
+                Assert.IsTrue(page.Sections[3].ZoneEmphasis == (int)VariantThemeType.Strong);
+                Assert.IsTrue(page.Sections[3].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[3].Columns[1].Controls.Count == 1);
+
+                Assert.IsTrue(page.Sections[4].Type == CanvasSectionTemplate.TwoColumnRight);
+                Assert.IsTrue(page.Sections[4].ZoneEmphasis == (int)VariantThemeType.Neutral);
+                Assert.IsTrue(page.Sections[4].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[4].Columns[1].Controls.Count == 1);
+
+                Assert.IsTrue(page.Sections[5].Type == CanvasSectionTemplate.ThreeColumn);
+                Assert.IsTrue(page.Sections[5].ZoneEmphasis == (int)VariantThemeType.None);
+                Assert.IsTrue(page.Sections[5].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[5].Columns[1].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[5].Columns[2].Controls.Count == 1);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task PageSectionsWithEmphasisAndWebPartsCreateTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageSectionsWithEmphasisAndWebPartsCreateTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1, VariantThemeType.Neutral);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2, VariantThemeType.None);
+                page.AddSection(CanvasSectionTemplate.TwoColumn, 3, VariantThemeType.Soft);
+                page.AddSection(CanvasSectionTemplate.TwoColumnLeft, 4, VariantThemeType.Strong);
+                page.AddSection(CanvasSectionTemplate.TwoColumnRight, 5, VariantThemeType.Neutral);
+                page.AddSection(CanvasSectionTemplate.ThreeColumn, 6, VariantThemeType.None);
+
+                var availableComponents = await page.AvailablePageComponentsAsync();
+                var imageWebPartComponent = availableComponents.FirstOrDefault(p => p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                // Add a text control in each section
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[1].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[2].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[2].Columns[1]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[3].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[3].Columns[1]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[4].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[4].Columns[1]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[5].Columns[0]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[5].Columns[1]);
+                page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[5].Columns[2]);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.First();
+
+                Assert.IsTrue(page.Sections.Count == 6);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[0].ZoneEmphasis == (int)VariantThemeType.Neutral);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[0].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[1].ZoneEmphasis == (int)VariantThemeType.None);
+                Assert.IsTrue(page.Sections[1].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[1].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[1].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                Assert.IsTrue(page.Sections[2].Type == CanvasSectionTemplate.TwoColumn);
+                Assert.IsTrue(page.Sections[2].ZoneEmphasis == (int)VariantThemeType.Soft);
+                Assert.IsTrue(page.Sections[2].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[2].Columns[1].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[2].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[2].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+                Assert.IsTrue(page.Sections[2].Columns[1].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[2].Columns[1].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                Assert.IsTrue(page.Sections[3].Type == CanvasSectionTemplate.TwoColumnLeft);
+                Assert.IsTrue(page.Sections[3].ZoneEmphasis == (int)VariantThemeType.Strong);
+                Assert.IsTrue(page.Sections[3].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[3].Columns[1].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[3].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[3].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+                Assert.IsTrue(page.Sections[3].Columns[1].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[3].Columns[1].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                Assert.IsTrue(page.Sections[4].Type == CanvasSectionTemplate.TwoColumnRight);
+                Assert.IsTrue(page.Sections[4].ZoneEmphasis == (int)VariantThemeType.Neutral);
+                Assert.IsTrue(page.Sections[4].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[4].Columns[1].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[4].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[4].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+                Assert.IsTrue(page.Sections[4].Columns[1].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[4].Columns[1].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                Assert.IsTrue(page.Sections[5].Type == CanvasSectionTemplate.ThreeColumn);
+                Assert.IsTrue(page.Sections[5].ZoneEmphasis == (int)VariantThemeType.None);
+                Assert.IsTrue(page.Sections[5].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[5].Columns[1].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[5].Columns[2].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[5].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[5].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+                Assert.IsTrue(page.Sections[5].Columns[1].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[5].Columns[1].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+                Assert.IsTrue(page.Sections[5].Columns[2].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[5].Columns[2].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
+        [DataRow(CanvasSectionTemplate.OneColumnVerticalSection, 1)]
+        [DataRow(CanvasSectionTemplate.TwoColumnVerticalSection, 2)]
+        [DataRow(CanvasSectionTemplate.TwoColumnLeftVerticalSection, 3)]
+        [DataRow(CanvasSectionTemplate.TwoColumnRightVerticalSection, 4)]
+        [DataRow(CanvasSectionTemplate.ThreeColumnVerticalSection, 5)]
+        public async Task VerticalPageSectionsWithEmphasisCreateTest(CanvasSectionTemplate sectionType, int id)
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, id))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("VerticalPageSectionsWithEmphasisCreateTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(sectionType, 1, VariantThemeType.Neutral, VariantThemeType.Strong);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2, VariantThemeType.Strong);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.First();
+
+                Assert.IsTrue(page.Sections.Count == 2);
+                Assert.IsTrue(page.Sections[0].Type == sectionType);
+                Assert.IsTrue(page.Sections[0].ZoneEmphasis == (int)VariantThemeType.Neutral);
+                Assert.IsTrue(page.Sections[0].VerticalSectionColumn != null);
+                Assert.IsTrue(page.Sections[0].VerticalSectionColumn.VerticalSectionEmphasis == (int)VariantThemeType.Strong);
+
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[1].ZoneEmphasis == (int)VariantThemeType.Strong);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task VerticalPageSectionsWithEmphasisAndControlsCreateTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("VerticalPageSectionsWithEmphasisAndControlsCreateTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.TwoColumnVerticalSection, 1, VariantThemeType.Neutral, VariantThemeType.Strong);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2, VariantThemeType.Strong);
+
+                // Add controls
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[1]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[2]);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[1].Columns[0]);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.First();
+
+                Assert.IsTrue(page.Sections.Count == 2);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.TwoColumnVerticalSection);
+                Assert.IsTrue(page.Sections[0].ZoneEmphasis == (int)VariantThemeType.Neutral);
+                Assert.IsTrue(page.Sections[0].VerticalSectionColumn != null);
+                Assert.IsTrue(page.Sections[0].VerticalSectionColumn.VerticalSectionEmphasis == (int)VariantThemeType.Strong);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[0].Columns[1].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[0].Columns[2].Controls.Count == 1);
+
+                Assert.IsTrue(page.Sections[1].Type == CanvasSectionTemplate.OneColumn);
+                Assert.IsTrue(page.Sections[1].ZoneEmphasis == (int)VariantThemeType.Strong);
+                Assert.IsTrue(page.Sections[1].Columns[0].Controls.Count == 1);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task PageFullWidthSectionOnNonCommunicationSiteTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageFullWidthSectionOnNonCommunicationSiteTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+                page.AddSection(CanvasSectionTemplate.OneColumn, 2);
+
+                bool exceptionThrown = false;
+                try
+                {
+                    await page.SaveAsync(pageName);
+                }
+                catch(ClientException ex)
+                {
+                    if ((ex.Error as ClientError).Type == ErrorType.Unsupported)
+                    {
+                        exceptionThrown = true;
+                    }
+                }
+
+                Assert.IsTrue(exceptionThrown);
+            }
+        }
+
+        [TestMethod]
+        [DataRow(CanvasSectionTemplate.OneColumnVerticalSection, 1)]
+        [DataRow(CanvasSectionTemplate.TwoColumnVerticalSection, 2)]
+        [DataRow(CanvasSectionTemplate.TwoColumnLeftVerticalSection, 3)]
+        [DataRow(CanvasSectionTemplate.TwoColumnRightVerticalSection, 4)]
+        [DataRow(CanvasSectionTemplate.ThreeColumnVerticalSection, 5)]
+        public async Task PageFullWidthSectionMixTest(CanvasSectionTemplate sectionType, int id)
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, id))
+            {
+                var page = await context.Web.NewPageAsync();
+
+                bool exceptionThrown = false;
+                try
+                {
+                    // Add all the possible sections 
+                    page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+                    page.AddSection(sectionType, 2);
+                }
+                catch (ClientException ex)
+                {
+                    if ((ex.Error as ClientError).Type == ErrorType.Unsupported)
+                    {
+                        exceptionThrown = true;
+                    }
+                }
+                Assert.IsTrue(exceptionThrown);
+            }
+        }
+
+        [TestMethod]
+        [DataRow(CanvasSectionTemplate.OneColumnFullWidth, 1)]
+        [DataRow(CanvasSectionTemplate.TwoColumnVerticalSection, 2)]
+        [DataRow(CanvasSectionTemplate.TwoColumnLeftVerticalSection, 3)]
+        [DataRow(CanvasSectionTemplate.TwoColumnRightVerticalSection, 4)]
+        [DataRow(CanvasSectionTemplate.ThreeColumnVerticalSection, 5)]
+        public async Task PageVerticalSectionMixTest(CanvasSectionTemplate sectionType, int id)
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, id))
+            {
+                var page = await context.Web.NewPageAsync();
+
+                bool exceptionThrown = false;
+                try
+                {
+                    // Add all the possible sections 
+                    page.AddSection(CanvasSectionTemplate.OneColumnVerticalSection, 1);
+                    page.AddSection(sectionType, 2);
+                }
+                catch (ClientException ex)
+                {
+                    if ((ex.Error as ClientError).Type == ErrorType.Unsupported)
+                    {
+                        exceptionThrown = true;
+                    }
+                }
+                Assert.IsTrue(exceptionThrown);
             }
         }
 
