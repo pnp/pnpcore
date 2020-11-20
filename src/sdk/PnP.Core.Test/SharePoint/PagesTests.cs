@@ -772,7 +772,7 @@ namespace PnP.Core.Test.SharePoint
                 await newPage.SaveAsync(pageName);
 
                 // Update the page
-                newPage.AddSection(CanvasSectionTemplate.ThreeColumnVerticalSection, 1, VariantThemeType.Soft, VariantThemeType.Strong);
+                newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
                 newPage.AddControl(newPage.NewTextPart("I"), newPage.Sections[0].Columns[0]);
                 newPage.AddControl(newPage.NewTextPart("like"), newPage.Sections[0].Columns[1]);
                 newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
