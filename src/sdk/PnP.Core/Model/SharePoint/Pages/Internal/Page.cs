@@ -181,17 +181,6 @@ namespace PnP.Core.Model.SharePoint
         }
 
         /// <summary>
-        /// List the languages this page possibly can be translated into
-        /// </summary>
-        public List<int> SupportedUILanguages
-        {
-            get
-            {
-                throw new Exception("TODO");
-            }
-        }
-
-        /// <summary>
         /// Space content field (JSON) for spaces pages
         /// </summary>
         public string SpaceContent { get; set; }
