@@ -95,11 +95,6 @@ namespace PnP.Core.Model.SharePoint
         public string Folder { get; }
 
         /// <summary>
-        /// List the languages this page possibly can be translated into
-        /// </summary>
-        public List<int> SupportedUILanguages { get; }
-
-        /// <summary>
         /// Adds a new section to your client side page
         /// </summary>
         /// <param name="sectionTemplate">The <see cref="CanvasSectionTemplate"/> type of the section</param>
