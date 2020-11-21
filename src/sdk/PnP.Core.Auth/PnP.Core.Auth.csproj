@@ -1,69 +1,83 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
-    <RootNamespace>PnP.Core.Auth</RootNamespace>
-    <AssemblyName>PnP.Core.Auth</AssemblyName>
-    <InformationalVersion>Preview 3 package</InformationalVersion>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Copyright>PnP 2020</Copyright>
-    <Company>PnP</Company>
-    <Authors>PnP</Authors>
-    <Description>The PnP Core Auth library supports the PnP Core SDK providing a set of OAuth Authentication Providers internally based on the Microsoft Authentication Library.</Description>
-    <PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <Configurations>Debug;Release</Configurations>
-    <PackageIcon>nugeticon.png</PackageIcon>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+		<LangVersion>8.0</LangVersion>
+		<RootNamespace>PnP.Core.Auth</RootNamespace>
+		<AssemblyName>PnP.Core.Auth</AssemblyName>
+		<InformationalVersion>Preview 3 package</InformationalVersion>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<Copyright>PnP 2020</Copyright>
+		<Company>PnP</Company>
+		<Authors>PnP</Authors>
+		<Description>The PnP Core Auth library supports the PnP Core SDK providing a set of OAuth Authentication Providers internally based on the Microsoft Authentication Library.</Description>
+		<PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Configurations>Debug;Release</Configurations>
+		<PackageIcon>nugeticon.png</PackageIcon>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.22.0" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.16.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
-    <PackageReference Include="System.Text.Json" Version="5.0.0" />
-  </ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+		<PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.15.0" />
+		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.8" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.8" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="3.1.8" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="3.1.8" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+		<PackageReference Include="System.Text.Json" Version="4.7.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="nugeticon.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
+		<PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.16.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.21.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="PnPCoreAuthResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PnPCoreAuthResources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="nugeticon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="PnPCoreAuthResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>PnPCoreAuthResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="PnPCoreAuthResources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>PnPCoreAuthResources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="PnPCoreAuthResources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>PnPCoreAuthResources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 
 </Project>
