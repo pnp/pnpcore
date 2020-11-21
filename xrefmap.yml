@@ -13087,19 +13087,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.SpaceContent
   nameWithType: IPage.SpaceContent
-- uid: PnP.Core.Model.SharePoint.IPage.SupportedUILanguages
-  name: SupportedUILanguages
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_SupportedUILanguages
-  commentId: P:PnP.Core.Model.SharePoint.IPage.SupportedUILanguages
-  fullName: PnP.Core.Model.SharePoint.IPage.SupportedUILanguages
-  nameWithType: IPage.SupportedUILanguages
-- uid: PnP.Core.Model.SharePoint.IPage.SupportedUILanguages*
-  name: SupportedUILanguages
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_SupportedUILanguages_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.SupportedUILanguages
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.SupportedUILanguages
-  nameWithType: IPage.SupportedUILanguages
 - uid: PnP.Core.Model.SharePoint.IPage.ThumbnailUrl
   name: ThumbnailUrl
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_ThumbnailUrl
