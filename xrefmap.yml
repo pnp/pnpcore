@@ -13397,19 +13397,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPageHeader.TranslateY
   nameWithType: IPageHeader.TranslateY
-- uid: PnP.Core.Model.SharePoint.IPageHeader.Type
-  name: Type
-  href: api/PnP.Core.Model.SharePoint.IPageHeader.html#PnP_Core_Model_SharePoint_IPageHeader_Type
-  commentId: P:PnP.Core.Model.SharePoint.IPageHeader.Type
-  fullName: PnP.Core.Model.SharePoint.IPageHeader.Type
-  nameWithType: IPageHeader.Type
-- uid: PnP.Core.Model.SharePoint.IPageHeader.Type*
-  name: Type
-  href: api/PnP.Core.Model.SharePoint.IPageHeader.html#PnP_Core_Model_SharePoint_IPageHeader_Type_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPageHeader.Type
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPageHeader.Type
-  nameWithType: IPageHeader.Type
 - uid: PnP.Core.Model.SharePoint.IPageText
   name: IPageText
   href: api/PnP.Core.Model.SharePoint.IPageText.html
@@ -18077,6 +18064,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.FooterLayout
   nameWithType: IWeb.FooterLayout
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUser
+  name: GetCurrentUser()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUser
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetCurrentUser
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUser()
+  nameWithType: IWeb.GetCurrentUser()
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUser*
+  name: GetCurrentUser
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUser_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetCurrentUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUser
+  nameWithType: IWeb.GetCurrentUser
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserAsync
+  name: GetCurrentUserAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUserAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetCurrentUserAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserAsync()
+  nameWithType: IWeb.GetCurrentUserAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserAsync*
+  name: GetCurrentUserAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUserAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetCurrentUserAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserAsync
+  nameWithType: IWeb.GetCurrentUserAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String,Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
   name: GetFileByServerRelativeUrl(String, Expression<Func<IFile, Object>>[])
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrl_System_String_Expression_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____

@@ -1710,7 +1710,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPageHeader.html",
-          "hash": "wuXcGFZuBGzJ36VcrDYcAg=="
+          "hash": "aj+Ocio86+NVB324RfHP2A=="
         }
       },
       "is_incremental": false,
@@ -2118,7 +2118,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWeb.html",
-          "hash": "ubF3eceAIWDZ4ShjVwaa8g=="
+          "hash": "T4CPM+srk4wc82sDpDBs6g=="
         }
       },
       "is_incremental": false,
