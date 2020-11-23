@@ -513,6 +513,25 @@ namespace PnP.Core.Model.SharePoint
 
             return sharePointUser;
         }
+
+        public ISharePointUser GetCurrentUser()
+        {
+            return GetCurrentUserAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> GetCurrentUserAsync()
+        {
+            var apiCall = new ApiCall("_api/Web/CurrentUser", ApiType.SPORest);
+
+            SharePointUser sharePointUser = new SharePointUser
+            {
+                PnPContext = PnPContext
+            };
+
+            await sharePointUser.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return sharePointUser;
+        }
         #endregion
 
         #region Multilingual

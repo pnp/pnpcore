@@ -744,7 +744,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public void RemovePageHeader()
         {
-            pageHeader = new PageHeader(PnPContext, PageHeaderType.None, null);
+            pageHeader = new PageHeader(PnPContext, PageHeaderType.None, null)
+            {
+                LayoutType = PageHeaderLayoutType.NoImage
+            };
         }
 
         /// <summary>
@@ -899,6 +902,17 @@ namespace PnP.Core.Model.SharePoint
                 var pageHeaderHtml = item.Values[PageConstants.PageLayoutContentField] != null ? item.Values[PageConstants.PageLayoutContentField].ToString() : "";
 
                 loadedPage.LoadFromHtml(canvasContent1Html, pageHeaderHtml);
+
+                if (item.Values.ContainsKey(PageConstants._AuthorByline) && item.Values[PageConstants._AuthorByline] != null)
+                {
+                    if (item.Values[PageConstants._AuthorByline] is FieldValueCollection userFields)
+                    {
+                        if (userFields != null && userFields.Values.Any())
+                        {
+                            loadedPage.PageHeader.AuthorByLineId = (userFields.Values.First() as FieldUserValue).LookupId;
+                        }
+                    }
+                }
 
                 return loadedPage;
             }

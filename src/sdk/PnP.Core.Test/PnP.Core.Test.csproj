@@ -41,6 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestAssets\pageheader.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestAssets\test.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -762,6 +762,17 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The ensured <see cref="ISharePointUser"/></returns>
         public ISharePointUser EnsureUser(string userPrincipalName);
 
+        /// <summary>
+        /// Get's the current logged on user making the request to SharePoint
+        /// </summary>
+        /// <returns>The current <see cref="ISharePointUser"/></returns>
+        public Task<ISharePointUser> GetCurrentUserAsync();
+
+        /// <summary>
+        /// Get's the current logged on user making the request to SharePoint
+        /// </summary>
+        /// <returns>The current <see cref="ISharePointUser"/></returns>
+        public ISharePointUser GetCurrentUser();
         #endregion
 
         #region Multi-lingual
