@@ -1506,7 +1506,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IFile.html",
-          "hash": "28eepD2JzHv5qQfRWNaq2w=="
+          "hash": "lu1AITyTuESYk13P1yR0Mg=="
         }
       },
       "is_incremental": false,
@@ -1686,7 +1686,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IPage.html",
-          "hash": "gp7sdZL3HDrkp2g/l8gzAw=="
+          "hash": "z9uz+bDe1osdYbutPKgsrA=="
         }
       },
       "is_incremental": false,
@@ -2306,6 +2306,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.PublishedStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.PublishedStatus.html",
+          "hash": "ZTWZ4qvQqq+WMPmtT/wY1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.RecycleBinItemState.yml",
       "output": {
         ".html": {
@@ -2538,7 +2550,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "L8rw9bXSpag3FXTwoQDVJQ=="
+          "hash": "nl9KrchjjS6ryCuZuuyxKw=="
         }
       },
       "is_incremental": false,
@@ -3558,7 +3570,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "HBlS2awz9+5H6tGuKAGPDA=="
+          "hash": "qcug1q7hCIe8pQJwKw5H+w=="
         }
       },
       "is_incremental": false,
@@ -4153,7 +4165,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 294,
+          "total_file_count": 295,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

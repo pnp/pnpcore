@@ -9479,6 +9479,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.IrmEnabled
   nameWithType: IFile.IrmEnabled
+- uid: PnP.Core.Model.SharePoint.IFile.Level
+  name: Level
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Level
+  commentId: P:PnP.Core.Model.SharePoint.IFile.Level
+  fullName: PnP.Core.Model.SharePoint.IFile.Level
+  nameWithType: IFile.Level
+- uid: PnP.Core.Model.SharePoint.IFile.Level*
+  name: Level
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Level_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFile.Level
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFile.Level
+  nameWithType: IFile.Level
 - uid: PnP.Core.Model.SharePoint.IFile.LinkingUri
   name: LinkingUri
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_LinkingUri
@@ -12720,6 +12733,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.Folder
   nameWithType: IPage.Folder
+- uid: PnP.Core.Model.SharePoint.IPage.GetPageFile(Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetPageFile(Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageFile_Expression_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IPage.GetPageFile(Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetPageFile(Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IPage.GetPageFile(Expression<Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IPage.GetPageFile(Expression(Of Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IPage.GetPageFile(Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IPage.GetPageFile(Expression(Of Func(Of IFile, Object))())
+- uid: PnP.Core.Model.SharePoint.IPage.GetPageFile*
+  name: GetPageFile
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageFile_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.GetPageFile
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.GetPageFile
+  nameWithType: IPage.GetPageFile
+- uid: PnP.Core.Model.SharePoint.IPage.GetPageFileAsync(Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name: GetPageFileAsync(Expression<Func<IFile, Object>>[])
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageFileAsync_Expression_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
+  commentId: M:PnP.Core.Model.SharePoint.IPage.GetPageFileAsync(Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
+  name.vb: GetPageFileAsync(Expression(Of Func(Of IFile, Object))())
+  fullName: PnP.Core.Model.SharePoint.IPage.GetPageFileAsync(Expression<Func<PnP.Core.Model.SharePoint.IFile, System.Object>>[])
+  fullName.vb: PnP.Core.Model.SharePoint.IPage.GetPageFileAsync(Expression(Of Func(Of PnP.Core.Model.SharePoint.IFile, System.Object))())
+  nameWithType: IPage.GetPageFileAsync(Expression<Func<IFile, Object>>[])
+  nameWithType.vb: IPage.GetPageFileAsync(Expression(Of Func(Of IFile, Object))())
+- uid: PnP.Core.Model.SharePoint.IPage.GetPageFileAsync*
+  name: GetPageFileAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageFileAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.GetPageFileAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.GetPageFileAsync
+  nameWithType: IPage.GetPageFileAsync
 - uid: PnP.Core.Model.SharePoint.IPage.GetPageTranslations
   name: GetPageTranslations()
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageTranslations
@@ -20394,6 +20439,24 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.PromotedState.PromoteOnPublish
   fullName: PnP.Core.Model.SharePoint.PromotedState.PromoteOnPublish
   nameWithType: PromotedState.PromoteOnPublish
+- uid: PnP.Core.Model.SharePoint.PublishedStatus
+  name: PublishedStatus
+  href: api/PnP.Core.Model.SharePoint.PublishedStatus.html
+  commentId: T:PnP.Core.Model.SharePoint.PublishedStatus
+  fullName: PnP.Core.Model.SharePoint.PublishedStatus
+  nameWithType: PublishedStatus
+- uid: PnP.Core.Model.SharePoint.PublishedStatus.Draft
+  name: Draft
+  href: api/PnP.Core.Model.SharePoint.PublishedStatus.html#PnP_Core_Model_SharePoint_PublishedStatus_Draft
+  commentId: F:PnP.Core.Model.SharePoint.PublishedStatus.Draft
+  fullName: PnP.Core.Model.SharePoint.PublishedStatus.Draft
+  nameWithType: PublishedStatus.Draft
+- uid: PnP.Core.Model.SharePoint.PublishedStatus.Published
+  name: Published
+  href: api/PnP.Core.Model.SharePoint.PublishedStatus.html#PnP_Core_Model_SharePoint_PublishedStatus_Published
+  commentId: F:PnP.Core.Model.SharePoint.PublishedStatus.Published
+  fullName: PnP.Core.Model.SharePoint.PublishedStatus.Published
+  nameWithType: PublishedStatus.Published
 - uid: PnP.Core.Model.SharePoint.RecycleBinItemState
   name: RecycleBinItemState
   href: api/PnP.Core.Model.SharePoint.RecycleBinItemState.html
