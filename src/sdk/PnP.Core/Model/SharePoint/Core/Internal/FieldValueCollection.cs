@@ -33,6 +33,7 @@ namespace PnP.Core.Model.SharePoint
         internal object LookupMultiToJson()
         {
             List<int> ids = new List<int>();
+
             foreach (var item in Values)
             {
                 ids.Add((item as FieldLookupValue).LookupId);
@@ -40,6 +41,7 @@ namespace PnP.Core.Model.SharePoint
 
             var updateMessage = new
             {
+                __metadata = new { type = "Collection(Edm.Int32)" },
                 results = ids.ToArray()
             };
 

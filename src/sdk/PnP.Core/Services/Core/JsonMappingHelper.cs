@@ -583,12 +583,13 @@ namespace PnP.Core.Services
 
         private static IField GetListItemField(TransientObject pnpObject, string fieldName)
         {
-            var parentList = (pnpObject as IDataModelParent).Parent.Parent as List;
-            if (parentList.ArePropertiesAvailable(List.LoadFieldsExpression))
+            if ((pnpObject as IDataModelParent).Parent.Parent is List parentList)
             {
-                return parentList.Fields.FirstOrDefault(p => p.InternalName == fieldName);
+                if (parentList.ArePropertiesAvailable(List.LoadFieldsExpression))
+                {
+                    return parentList.Fields.FirstOrDefault(p => p.InternalName == fieldName);
+                }
             }
-
             return null;
         }
 

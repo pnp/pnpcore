@@ -1,6 +1,7 @@
 ﻿using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -49,17 +50,20 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
-            if (properties.ContainsKey("Url"))
+            if (!properties.Any())
             {
-                Url = properties["Url"];
+                return this;
             }
+
+            // first property is the url field
+            Url = properties.First().Value;
 
             if (properties.ContainsKey("desc"))
             {
                 Description = properties["desc"];
             }
 
-            if (!HasValue(nameof(Description)))
+            if (!HasValue(nameof(Description)) && HasValue(nameof(Url)))
             {
                 Description = Url;
             }
@@ -69,6 +73,11 @@ namespace PnP.Core.Model.SharePoint
 
         internal override object ToJson()
         {
+            if (!HasValue(nameof(Url)))
+            {
+                return "";
+            }
+
             var updateMessage = new
             {
                 __metadata = new { type = SharePointRestType },

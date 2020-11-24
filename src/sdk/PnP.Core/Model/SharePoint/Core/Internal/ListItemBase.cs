@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Services;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -495,21 +496,35 @@ namespace PnP.Core.Model.SharePoint
 
             xml = xml.Replace(CsomHelper.Counter, counter.ToString());
             xml = xml.Replace(CsomHelper.FieldName, fieldName);
-            xml = xml.Replace(CsomHelper.FieldValue, fieldValue == null ? "" : CsomHelper.XmlString(TypeSpecificHandling(fieldValue.ToString(), fieldType), false));
+            xml = xml.Replace(CsomHelper.FieldValue, fieldValue == null ? "" : CsomHelper.XmlString(TypeSpecificHandling(fieldValue, fieldType), false));
             xml = xml.Replace(CsomHelper.FieldType, fieldType ?? "Null");
 
             counter++;
             return xml;
         }
 
-        private static string TypeSpecificHandling(string value, string fieldType)
+        private static string TypeSpecificHandling(object value, string fieldType)
         {
-            if (!string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(fieldType) && fieldType.Equals("Boolean"))
+            if (!string.IsNullOrEmpty(fieldType))
             {
-                return value.ToLowerInvariant();
+                if (fieldType.Equals("Boolean"))
+                {
+                    return value.ToString().ToLowerInvariant();
+                }
+                else if (fieldType.Equals("DateTime"))
+                {
+                    if (value is DateTime time)
+                    {
+                        return time.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffzzz"); 
+                    }
+                }
+                else
+                {
+                    return value.ToString();
+                }
             }
 
-            return value;
+            return value.ToString();
         }
         #endregion
 

@@ -156,6 +156,8 @@ namespace PnP.Core.Test.SharePoint
                 // Get the page with a folder in the path
                 var pages = await context.Web.GetPagesAsync(pageName);
                 Assert.IsTrue(pages.Count == 1);
+                Assert.IsTrue(pages.First().Folder == $"{TestCommon.GetPnPSdkTestAssetName("folder1")}/{TestCommon.GetPnPSdkTestAssetName("folder2")}/{TestCommon.GetPnPSdkTestAssetName("folder3")}");
+                Assert.IsTrue(pages.First().PageId.Value > 0);
 
                 // delete folder with page
                 var folderToDelete = await newPage.PagesLibrary.RootFolder.EnsureFolderAsync(TestCommon.GetPnPSdkTestAssetName("folder1"));
@@ -351,6 +353,9 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(page.Sections[4].Type == CanvasSectionTemplate.TwoColumnRight);
                 Assert.IsTrue(page.Sections[5].Type == CanvasSectionTemplate.ThreeColumn);
 
+                page.ClearPage();
+                Assert.IsTrue(page.Sections.Count == 0);
+
                 // delete the page
                 await page.DeleteAsync();
             }
@@ -473,6 +478,10 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(page.Sections[5].Columns[0].Controls.Count == 1);
                 Assert.IsTrue(page.Sections[5].Columns[1].Controls.Count == 1);
                 Assert.IsTrue(page.Sections[5].Columns[2].Controls.Count == 1);
+
+                page.ClearPage();
+                Assert.IsTrue(page.Sections.Count == 0);
+                Assert.IsTrue(page.Controls.Count == 0);
 
                 // delete the page
                 await page.DeleteAsync();
@@ -758,6 +767,70 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task DefaultPageTitleTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("DefaultPageTitleTest.aspx");
+
+                // A simple section and text control to the page                
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                // Save the page
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.First();
+
+                Assert.IsTrue(page.PageTitle == pageName.Replace(".aspx", ""));
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+
+        [TestMethod]
+        [DataRow("Custom page title", 0)]
+        [DataRow("Custom \"page\" 'title'", 1)]
+        public async Task CustomPageTitleTest(string pageTitle, int id)
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("CustomPageTitleTest.aspx");
+
+                // A simple section and text control to the page                
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                page.PageTitle = pageTitle;
+                
+                // Save the page
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.First();
+
+                Assert.IsTrue(page.PageTitle == pageTitle);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
         #endregion
 
         #region Page Header handling
@@ -995,8 +1068,7 @@ namespace PnP.Core.Test.SharePoint
                 string pageName = TestCommon.GetPnPSdkTestAssetName("CustomPageHeaderWithSiteRelativeImageFocalPointsTest.aspx");
 
                 // A simple section and text control to the page                
-                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
-                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+                page.AddControl(page.NewTextPart("PnP"), page.DefaultSection.DefaultColumn);
 
                 // Upload image to site assets library
                 IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
@@ -1104,6 +1176,155 @@ namespace PnP.Core.Test.SharePoint
                 // Delete the page
                 await templatePage.DeleteAsync();
 
+            }
+        }
+
+        #endregion
+
+        #region Page publishing and promotion/demotion
+        [TestMethod]
+        public async Task PublishPage()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PublishPage.aspx");
+
+                // A simple section and text control to the page                
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                // Save the page
+                await page.SaveAsync(pageName);
+
+                var pageFile = await page.GetPageFileAsync(p => p.Level);
+                Assert.IsTrue(pageFile.Level == PublishedStatus.Draft);
+
+                await page.PublishAsync();
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                page = pages.First();
+
+                pageFile = await page.GetPageFileAsync(p => p.Level);
+                Assert.IsTrue(pageFile.Level == PublishedStatus.Published);
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task PromoteAsNewsArticle()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PromoteAsNewsArticle.aspx");
+
+                // A simple section and text control to the page                
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                // Save the page
+                await page.SaveAsync(pageName);
+                
+                // promote as news article
+                await page.PromoteAsNewsArticleAsync();
+
+                // first publish the page
+                await page.PublishAsync();
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                page = pages.First();
+
+                Assert.IsTrue(((page as Page).PageListItem[PageConstants.PromotedStateField]).ToString() == ((int)PromotedState.Promoted).ToString());
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task DemoteAsNewsArticle()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("DemoteAsNewsArticle.aspx");
+
+                // A simple section and text control to the page                
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                // Save the page
+                await page.SaveAsync(pageName);
+
+                // first publish the page
+                await page.PublishAsync();
+
+                // promote as news article
+                await page.PromoteAsNewsArticleAsync();
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                page = pages.First();
+
+                Assert.IsTrue(((page as Page).PageListItem[PageConstants.PromotedStateField]).ToString() == ((int)PromotedState.Promoted).ToString());
+
+                // demote as news article
+                await page.DemoteNewsArticleAsync();
+
+                Assert.IsTrue(((page as Page).PageListItem[PageConstants.PromotedStateField]).ToString() == ((int)PromotedState.NotPromoted).ToString());
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task PromoteAsHomePage()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                //Load the root folder before
+                string welcomePageBefore = (await context.Web.GetAsync(p => p.WelcomePage)).WelcomePage;
+
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PromoteAsHomePage.aspx");
+
+                // A simple section and text control to the page                
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+                page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                // Save the page
+                await page.SaveAsync(pageName);
+
+                // promote as news article
+                await page.PromoteAsHomePageAsync();
+
+                // Load the page file
+                var pageFile = await page.GetPageFileAsync(p => p.ServerRelativeUrl);
+                // Load the web root folder
+                var webAfter = await context.Web.GetAsync(p => p.RootFolder);
+                string welcomePageAfter = (await context.Web.GetAsync(p => p.WelcomePage)).WelcomePage;
+
+                Assert.IsTrue(welcomePageAfter != welcomePageBefore);
+
+                // set back the original page as home page
+                webAfter.RootFolder.WelcomePage = welcomePageBefore;
+                await webAfter.RootFolder.UpdateAsync();
+
+                // delete the page
+                await page.DeleteAsync();
             }
         }
 

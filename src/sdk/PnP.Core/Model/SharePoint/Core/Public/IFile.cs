@@ -83,6 +83,11 @@ namespace PnP.Core.Model.SharePoint
         public ListPageRenderType PageRenderType { get; }
 
         /// <summary>
+        /// Level of the file (published or draft)
+        /// </summary>
+        public PublishedStatus Level { get; }
+
+        /// <summary>
         /// Gets the relative URL of the file based on the URL for the server.
         /// </summary>
         public string ServerRelativeUrl { get; }

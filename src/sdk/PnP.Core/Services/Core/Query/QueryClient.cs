@@ -1092,9 +1092,9 @@ namespace PnP.Core.Services
                                 }
 
                                 if (typeAsString == "LookupMulti" || typeAsString == "Lookup" || typeAsString == "UserMulti")
-                                {
+                                {                                    
                                     ((ExpandoObject)updateMessage).SetProperty($"{changedProp.Key}Id", collection.LookupMultiToJson());
-                                }                                
+                                }
                                 else
                                 {
                                     // We update the hidden note field that's connected to the taxonomy multi value field

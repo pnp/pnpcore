@@ -1,4 +1,4 @@
---batchresponse_254b3a92-dcd5-4536-bf5a-a18e4162d042
+--batchresponse_3eb7adca-ac3b-4733-87c4-24715796e40c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "136",
+"ID": "219",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{DCDF6241-29B1-4F86-887D-C8801BE6692D}",
+"UniqueId": "{48F8AFB9-DF52-472F-BF83-E65B2D50451D}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
@@ -41,6 +41,15 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ClientSideApplicationId": "",
 "PageLayoutType": "",
 "CanvasContent1": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
+"_AuthorByline": "",
+"_AuthorByline.id": "",
+"_AuthorByline.title": "",
+"_AuthorByline.span": "",
+"_AuthorByline.email": "",
+"_AuthorByline.sip": "",
+"_AuthorByline.jobTitle": "0",
+"_AuthorByline.department": "0",
+"_AuthorByline.picture": "",
 "LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
 "BannerImageUrl": "",
 "BannerImageUrl.desc": "",
@@ -50,6 +59,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "FolderChildCount": "0",
 "A2ODMountCount": "",
 "owshiddenversion": "1",
+"_SPTranslatedLanguages": "",
 "ContentVersion": "0",
 "DocConcurrencyNumber": "1",
 "_VirusStatus": "",
@@ -65,4 +75,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_254b3a92-dcd5-4536-bf5a-a18e4162d042--
+--batchresponse_3eb7adca-ac3b-4733-87c4-24715796e40c--

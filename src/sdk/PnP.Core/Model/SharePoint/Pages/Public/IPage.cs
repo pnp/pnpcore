@@ -1,5 +1,7 @@
 ﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -12,7 +14,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Title of the client side page
         /// </summary>
-        string PageTitle { get; }
+        string PageTitle { get; set; }
 
         /// <summary>
         /// Layout type of the client side page
@@ -259,6 +261,20 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns></returns>
         void Delete();
+
+        /// <summary>
+        /// Gets the file connected to this page
+        /// </summary>
+        /// <param name="expressions">Properties to load for the file</param>
+        /// <returns>The connected <see cref="IFile"/></returns>
+        public Task<IFile> GetPageFileAsync(params Expression<Func<IFile, object>>[] expressions);
+
+        /// <summary>
+        /// Gets the file connected to this page
+        /// </summary>
+        /// <param name="expressions">Properties to load for the file</param>
+        /// <returns>The connected <see cref="IFile"/></returns>
+        public IFile GetPageFile(params Expression<Func<IFile, object>>[] expressions);
 
         /// <summary>
         /// Publishes a client side page

@@ -136,8 +136,15 @@ namespace PnP.Core.Model.SharePoint
                                         foreach(var xx in property.Values)
                                         {
                                             var yy = xx.FieldValue.FromListDataAsStream(xx.Properties);
-                                            (yy as FieldValue).IsArray = true;
-                                            (fieldValue as FieldValueCollection).Values.Add(yy);
+                                            if (yy is FieldLookupValue yyLookup)
+                                            {
+                                                // Only add to collection when it points to a real value
+                                                if (yyLookup.LookupId > -1)
+                                                {
+                                                    yyLookup.IsArray = true;
+                                                    (fieldValue as FieldValueCollection).Values.Add(yyLookup);
+                                                }
+                                            }
                                         }
                                     }
                                 }

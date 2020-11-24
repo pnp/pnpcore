@@ -56,6 +56,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ListPageRenderType PageRenderType { get => GetValue<ListPageRenderType>(); set => SetValue(value); }
 
+        public PublishedStatus Level { get => GetValue<PublishedStatus>(); set => SetValue(value); }
+
         public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public Guid SiteId { get => GetValue<Guid>(); set => SetValue(value); }

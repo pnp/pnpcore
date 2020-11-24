@@ -842,7 +842,8 @@ namespace PnP.Core.Model.SharePoint
                 Page loadedPage = new Page(pagesLibrary.PnPContext, pagesLibrary, item)
                 {
                     pageTitle = Convert.ToString(item.Values[PageConstants.Title]),
-                    pageId = item.Id
+                    pageId = item.Id,
+                    pageName = Convert.ToString(item.Values[PageConstants.FileLeafRef])
                 };
 
                 // set layout type
@@ -1523,7 +1524,7 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
             }
-            
+
 
             if (LayoutType != PageLayoutType.Spaces)
             {
@@ -1567,6 +1568,7 @@ namespace PnP.Core.Model.SharePoint
             await GetPagesListData(pageName, PagesLibrary).ConfigureAwait(false);
 
             PageListItem = null;
+
             // Get the relevant list item
             foreach (var page in PagesLibrary.Items)
             {
@@ -1735,6 +1737,24 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Publishing, News promotion/demotion
+
+        public IFile GetPageFile(params Expression<Func<IFile, object>>[] expressions)
+        {
+            return GetPageFileAsync(expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IFile> GetPageFileAsync(params Expression<Func<IFile, object>>[] expressions)
+        {
+            if (PageListItem != null)
+            {
+                return await PnPContext.Web.GetFileByServerRelativeUrlAsync($"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}", expressions).ConfigureAwait(false);
+            }
+            else
+            {
+                throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Page_PageWasNotSaved, pageName));
+            }
+        }
+
         /// <summary>
         /// Publishes a client side page
         /// </summary>
@@ -1755,7 +1775,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                throw new InvalidOperationException("You first need to save the page before you can publish");
+                throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Page_PageWasNotSaved, pageName));
             }
         }
 
@@ -1779,7 +1799,9 @@ namespace PnP.Core.Model.SharePoint
 
             // Set promoted state
             PageListItem[PageConstants.PromotedStateField] = (int)PromotedState.NotPromoted;
-            await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
+            // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
+            // "Additions to this Web site have been blocked" error
+            await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
         }
 
         public void PromoteAsNewsArticle()
@@ -1804,7 +1826,9 @@ namespace PnP.Core.Model.SharePoint
             PageListItem[PageConstants.PromotedStateField] = (int)PromotedState.Promoted;
             // Set publication date
             PageListItem[PageConstants.FirstPublishedDate] = DateTime.UtcNow;
-            await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
+            // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
+            // "Additions to this Web site have been blocked" error
+            await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
         }
 
         public void PromoteAsHomePage()
@@ -1817,17 +1841,15 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public async Task PromoteAsHomePageAsync()
         {
-            if (LayoutType != PageLayoutType.Home)
-            {
-                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Page_CanOnlyPromoteHomePagesAsSiteHomePage);
-            }
-
             // ensure we do have the page list item loaded
-            await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
+            if (PageListItem == null)
+            {
+                await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
+            }
 
             await PnPContext.Web.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
 
-            PnPContext.Web.RootFolder.WelcomePage = $"{PageListItem[PageConstants.FileDirRef]}/{PageListItem[PageConstants.FileLeafRef]}";
+            PnPContext.Web.RootFolder.WelcomePage = $"sitepages/{PageListItem[PageConstants.FileLeafRef]}";
             await PnPContext.Web.RootFolder.UpdateAsync().ConfigureAwait(false);
         }
         #endregion
