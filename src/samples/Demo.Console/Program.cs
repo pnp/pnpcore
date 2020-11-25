@@ -200,8 +200,7 @@ namespace Consumer
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
                     // Or we can retrieve a specific item
-                    var listItem = context.Web.Lists.GetByTitle("Demo1").Items.GetById(4,
-                        i => i.Id, i => i.Title);
+                    var listItem = context.Web.Lists.GetByTitle("Demo1").Items.GetById(4);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===LINQ: Retrieve list item by id===");
