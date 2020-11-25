@@ -82,7 +82,7 @@
                   </div>
                     <h1 id="pnp-core-sdk---console-sample">PnP Core SDK - Console Sample</h1>
 
-<p>This solution demonstrates how the PnP Core SDK can be used in a console application</p>
+<p>This solution demonstrates how the PnP Core SDK can be used in a console application. In this sample we're querying a modern group connected SharePoint site which also has Teams. If you're testing this code against a modern communication site or another classic site then please comment out the &quot;teams&quot; parts.</p>
 <h2 id="source-code">Source code</h2>
 <p>You can find the sample source code here: <a href="https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.Console">/src/samples/Demo.Console</a></p>
 <h1 id="run-the-sample">Run the sample</h1>
@@ -95,11 +95,17 @@
 </li>
 <li><p>Enter a name for your new app, make sure <em>Accounts in this organizational directory only</em> is selected. As the Redirect URI, in Web platform enter <strong>http://localhost</strong> (only needed if you want use an interactive authentication flow)</p>
 </li>
-<li><p>Under <strong>Implicit grant</strong> section, check <strong>ID tokens</strong></p>
+<li><p>Under <strong>Implicit grant</strong> section, check <strong>ID tokens</strong> and <strong>Access tokens</strong></p>
+</li>
+<li><p>Under <strong>Advanced settings</strong> section, set <strong>Allow public client flows</strong> to <strong>yes</strong></p>
 </li>
 <li><p>Go to <strong>API permissions</strong> section , click <strong>Add a permission</strong>
 -- Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Directory.Read.All</strong>
--- Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>User.Read</strong></p>
+-- Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>User.Read</strong>
+-- Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>ChannelMessage.Read.All</strong>
+-- Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>ChannelMessage.Send</strong>
+-- Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>TeamSettings.ReadWrite.All</strong>
+-- Select <strong>Azure Active Directory Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>TeamsTab.ReadWrite.All</strong></p>
 </li>
 <li><p>Click <strong>Grand admin consent for {tenant}</strong></p>
 </li>
