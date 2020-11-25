@@ -1330,5 +1330,42 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region Page comments handling
+
+        [TestMethod]
+        public async Task DisableEnablePageComments()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("DisableEnablePageComments.aspx");
+                
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                var commentsDisabled = await newPage.AreCommentsDisabledAsync();
+                Assert.IsFalse(commentsDisabled);
+
+                // disable comments
+                await newPage.DisableCommentsAsync();
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                newPage = pages.First();
+
+                var commentsDisabled2 = await newPage.AreCommentsDisabledAsync();
+                Assert.IsTrue(commentsDisabled2);
+
+                // enabled comments again
+                await newPage.EnableCommentsAsync();
+
+                // Delete the page
+                await newPage.DeleteAsync();
+            }
+        }
+
+        #endregion
     }
 }

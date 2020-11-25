@@ -1,0 +1,9 @@
+--batchresponse_08ae0ecc-6b60-4b25-a795-406a8eee5fa2
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"SetCommentsDisabled":null}}
+--batchresponse_08ae0ecc-6b60-4b25-a795-406a8eee5fa2--

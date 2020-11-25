@@ -95,11 +95,14 @@ namespace PnP.Core.Model.SharePoint
                             {
                                 // already handled, so continue
                             }
-                            else if (property.Name == "_CommentsFlags")
-                            {
-                                string commentsFlags = row.GetProperty("_CommentsFlags").GetString();
-                                // TODO: translate to model
-                            }
+                            //else if (property.Name == "_CommentFlags")
+                            //{
+                            //    string commentsFlags = row.GetProperty("_CommentFlags").GetString();
+                            //    if (bool.TryParse(commentsFlags, out bool commentsEnabled))
+                            //    {
+                            //        itemToUpdate.SetSystemProperty(p => p.CommentsDisabled, commentsEnabled);
+                            //    }
+                            //}
                             // Handle the overflow fields
                             else
                             {

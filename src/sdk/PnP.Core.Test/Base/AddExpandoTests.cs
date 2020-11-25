@@ -61,8 +61,6 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(item.Requested);
                 Assert.IsTrue(item.Id >= 0);
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
-                // Besides the Id and the initially populated fields there are no other fields available
-                Assert.IsFalse(item.IsPropertyAvailable(p => p.CommentsDisabled));
 
                 // Load the list again, include extra list property
                 await myList.GetAsync(p => p.Items);
@@ -116,8 +114,6 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(myList.Items.Contains(item.Id + 1));
 
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
-                // Besides the Id and the initially populated fields there are no other fields available
-                Assert.IsFalse(item.IsPropertyAvailable(p => p.CommentsDisabled));
 
                 // Load the list again, include extra list property
                 myList.Get(p => p.Items);
@@ -175,8 +171,6 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(item.Requested);
                 Assert.IsTrue(item.Id >= 0);
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
-                // Besides the Id and the initially populated fields there are no other fields available
-                Assert.IsFalse(item.IsPropertyAvailable(p => p.CommentsDisabled));
 
                 // Load the list again, include extra list property
                 batch = context.BatchClient.EnsureBatch();
@@ -236,8 +230,6 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(item.Requested);
                 Assert.IsTrue(item.Id >= 0);
                 Assert.IsTrue(myList.Items.Count() == listItemCount + 1);
-                // Besides the Id and the initially populated fields there are no other fields available
-                Assert.IsFalse(item.IsPropertyAvailable(p => p.CommentsDisabled));
 
                 // Load the list again, include extra list property
                 batch = context.BatchClient.EnsureBatch();

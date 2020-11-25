@@ -11,12 +11,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Id of the list item
         /// </summary>
-        public int Id { get; }
-
-        /// <summary>
-        /// Can comments be added to this list item
-        /// </summary>
-        public bool CommentsDisabled { get; set; }
+        public int Id { get; }        
 
         /// <summary>
         /// Title value of the list item
@@ -95,6 +90,34 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add the UpdateOverwriteVersion request to</param>
         public void UpdateOverwriteVersionBatch(Batch batch);
 
+        #endregion
+
+        #region Comments handling
+        /// <summary>
+        /// Are comments disabled for this <see cref="IListItem"/>?
+        /// </summary>
+        /// <returns>True if disabled, false otherwise</returns>
+        public Task<bool> AreCommentsDisabledAsync();
+
+        /// <summary>
+        /// Are comments disabled for this <see cref="IListItem"/>?
+        /// </summary>
+        /// <returns>True if disabled, false otherwise</returns>
+        public bool AreCommentsDisabled();
+
+        /// <summary>
+        /// Enable/Disable comments for this list item
+        /// </summary>
+        /// <param name="commentsDisabled">Do comments need to enabled or disabled</param>
+        /// <returns></returns>
+        public Task SetCommentsDisabledAsync(bool commentsDisabled);
+
+        /// <summary>
+        /// Enable/Disable comments for this list item
+        /// </summary>
+        /// <param name="commentsDisabled">Do comments need to enabled or disabled</param>
+        /// <returns></returns>
+        public void SetCommentsDisabled(bool commentsDisabled);
         #endregion
 
         #endregion

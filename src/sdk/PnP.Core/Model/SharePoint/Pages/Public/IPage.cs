@@ -87,11 +87,6 @@ namespace PnP.Core.Model.SharePoint
         public ICanvasSection DefaultSection { get; }
 
         /// <summary>
-        /// Does this page have comments disabled
-        /// </summary>
-        public bool CommentsDisabled { get; }
-
-        /// <summary>
         /// Folder the page lives in
         /// </summary>
         public string Folder { get; }
@@ -315,6 +310,36 @@ namespace PnP.Core.Model.SharePoint
         /// Sets the current <see cref="IPage"/> as home page for the current site
         /// </summary>
         public Task PromoteAsHomePageAsync();
+
+        /// <summary>
+        /// Does this page have comments disabled
+        /// </summary>
+        public bool AreCommentsDisabled();
+
+        /// <summary>
+        /// Does this page have comments disabled
+        /// </summary>
+        public Task<bool> AreCommentsDisabledAsync();
+
+        /// <summary>
+        /// Enable commenting on this page
+        /// </summary>
+        public void EnableComments();
+
+        /// <summary>
+        /// Enable commenting on this page
+        /// </summary>
+        public Task EnableCommentsAsync();
+
+        /// <summary>
+        /// Disable commenting on this page
+        /// </summary>
+        public void DisableComments();
+
+        /// <summary>
+        /// Disable commenting on this page
+        /// </summary>
+        public Task DisableCommentsAsync();
 
         /// <summary>
         /// Translated a given web part id to a <see cref="DefaultWebPart"/> enum. Non default web parts will be returned as <see cref="DefaultWebPart.ThirdParty"/>

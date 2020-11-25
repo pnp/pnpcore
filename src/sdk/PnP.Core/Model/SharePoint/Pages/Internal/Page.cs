@@ -117,28 +117,6 @@ namespace PnP.Core.Model.SharePoint
         }
 
         /// <summary>
-        /// Does this page have comments disabled
-        /// </summary>
-        public bool CommentsDisabled
-        {
-            get
-            {
-                if (PageListItem != null)
-                {
-                    throw new Exception("TODO");
-                    // TODO
-                    //PageListItem.EnsureProperty(p => p.CommentsDisabled);
-                    //return this.PageListItem.CommentsDisabled;
-                }
-                else
-                {
-                    throw new ClientException(ErrorType.PropertyNotLoaded, string.Format(PnPCoreResources.Exception_Page_ListItemNotLoaded, nameof(CommentsDisabled)));
-                }
-            }
-        }
-
-
-        /// <summary>
         /// Folder the page lives in
         /// </summary>
         public string Folder
@@ -1851,6 +1829,69 @@ namespace PnP.Core.Model.SharePoint
 
             PnPContext.Web.RootFolder.WelcomePage = $"sitepages/{PageListItem[PageConstants.FileLeafRef]}";
             await PnPContext.Web.RootFolder.UpdateAsync().ConfigureAwait(false);
+        }
+        #endregion
+
+        #region Page comment handling
+        public bool AreCommentsDisabled()
+        {
+            return AreCommentsDisabledAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> AreCommentsDisabledAsync()
+        {
+            if (PageListItem != null)
+            {
+                return await PageListItem.AreCommentsDisabledAsync().ConfigureAwait(false);                
+            }
+            else
+            {
+                throw new ClientException(ErrorType.Unsupported, string.Format(PnPCoreResources.Exception_Page_PageWasNotSaved, pageName));
+            }
+        }
+
+        /// <summary>
+        /// Enable commenting on this page
+        /// </summary>
+        public void EnableComments()
+        {
+            EnableCommentsAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Enable commenting on this page
+        /// </summary>
+        public async Task EnableCommentsAsync()
+        {
+            // ensure we do have the page list item loaded
+            if (PageListItem == null)
+            {
+                await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
+            }
+
+            await PageListItem.SetCommentsDisabledAsync(false).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Disable commenting on this page
+        /// </summary>
+        public void DisableComments()
+        {
+            DisableCommentsAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Disable commenting on this page
+        /// </summary>
+        public async Task DisableCommentsAsync()
+        {
+            // ensure we do have the page list item loaded
+            if (PageListItem == null)
+            {
+                await EnsurePageListItemAsync(pageName).ConfigureAwait(false);
+            }
+
+            await PageListItem.SetCommentsDisabledAsync(true).ConfigureAwait(false);
         }
         #endregion
 

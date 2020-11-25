@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -15,8 +16,6 @@ namespace PnP.Core.Model.SharePoint
     {
         #region Properties
         public int Id { get => GetValue<int>(); set => SetValue(value); }
-
-        public bool CommentsDisabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public string Title { get => (string)Values["Title"]; set => Values["Title"] = value; }
 
@@ -526,6 +525,54 @@ namespace PnP.Core.Model.SharePoint
 
             return value.ToString();
         }
+        #endregion
+
+        #region Comment handling
+
+        public bool AreCommentsDisabled()
+        {
+            return AreCommentsDisabledAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> AreCommentsDisabledAsync()
+        {
+            var apiCall = new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})/CommentsDisabled", ApiType.SPORest);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+
+                if (json.TryGetProperty("CommentsDisabled", out JsonElement commentsDisabled))
+                {
+                    return commentsDisabled.GetBoolean();
+                }
+            }
+
+            return false;
+        }
+
+        public void SetCommentsDisabled(bool commentsDisabled)
+        {
+            SetCommentsDisabledAsync(commentsDisabled).GetAwaiter().GetResult();
+        }
+
+        public async Task SetCommentsDisabledAsync(bool commentsDisabled)
+        {
+            // Build the API call to ensure this graph user as a SharePoint User in this site collection
+            var parameters = new
+            {
+                value = commentsDisabled
+            };
+
+            string body = JsonSerializer.Serialize(parameters);
+
+            var apiCall = new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})/SetCommentsDisabled", ApiType.SPORest, body);
+
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);            
+        }
+
         #endregion
 
         #endregion
