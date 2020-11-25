@@ -1504,5 +1504,35 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Other page types: Spaces page
+
+        [TestMethod]
+        public async Task SpacesPageCreate()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create new "spaces" page
+                var newPage = await context.Web.NewPageAsync(PageLayoutType.Spaces);
+                string pageName = TestCommon.GetPnPSdkTestAssetName("SpacesPageCreate.aspx");
+
+                // A simple section and text control to the page                
+                newPage.AddControl(newPage.NewTextPart("PnP"), newPage.DefaultSection.DefaultColumn);
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                newPage = pages.First();
+
+                Assert.IsTrue(newPage.LayoutType == PageLayoutType.Spaces);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+            }
+        }
+        #endregion
     }
 }

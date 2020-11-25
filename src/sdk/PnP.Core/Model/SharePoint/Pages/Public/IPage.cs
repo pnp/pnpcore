@@ -196,13 +196,6 @@ namespace PnP.Core.Model.SharePoint
         public void AddControl(ICanvasControl control, ICanvasColumn column, int order);
 
         /// <summary>
-        /// Adds a new header control to your client side page with a given order
-        /// </summary>
-        /// <param name="control"><see cref="ICanvasControl"/> to add</param>
-        /// <param name="order">Order of the control in the given section</param>
-        public void AddHeaderControl(ICanvasControl control, int order);
-
-        /// <summary>
         /// Removes the set page header 
         /// </summary>
         public void RemovePageHeader();
