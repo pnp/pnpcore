@@ -23,18 +23,18 @@ In order for the user to authenticate on the App, A new app registration should 
 - Under __Advanced settings__ section, set __Allow public client flows__ to __yes__
 
 - Go to __API permissions__ section , click __Add a permission__
--- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __Directory.Read.All__
--- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __User.Read__
--- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __ChannelMessage.Read.All__
--- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __ChannelMessage.Send__
--- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __TeamSettings.ReadWrite.All__
--- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __TeamsTab.ReadWrite.All__
+  - Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __Directory.Read.All__
+  - Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __User.Read__
+  - Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __ChannelMessage.Read.All__
+  - Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __ChannelMessage.Send__
+  - Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __TeamSettings.ReadWrite.All__
+  - Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __TeamsTab.ReadWrite.All__
 
 - Click __Grand admin consent for {tenant}__
 
 - From __Overview__,
--- copy the value of __Directory (tenant) ID__
--- copy the value of __Application (client) ID__
+  - copy the value of __Directory (tenant) ID__
+  - copy the value of __Application (client) ID__
 
 ## Configure your application
 
