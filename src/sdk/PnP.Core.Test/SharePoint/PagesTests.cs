@@ -1466,5 +1466,43 @@ namespace PnP.Core.Test.SharePoint
             }
         }
         #endregion
+
+        #region Other page types: Home page
+
+        [TestMethod]
+        public async Task HomePageCreate()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Check current site home page is recognized
+                var pages = await context.Web.GetPagesAsync("home.aspx");
+                Assert.IsTrue(pages.Count == 1);
+                Assert.IsTrue(pages.First().LayoutType == PageLayoutType.Home);
+                Assert.IsTrue(pages.First().KeepDefaultWebParts);
+
+                // Create new "home" page
+                var newPage = await context.Web.NewPageAsync(PageLayoutType.Home);
+                string pageName = TestCommon.GetPnPSdkTestAssetName("HomePageCreate.aspx");
+                
+                // A simple section and text control to the page                
+                newPage.AddControl(newPage.NewTextPart("PnP"), newPage.DefaultSection.DefaultColumn);
+
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Load the page again
+                pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                newPage = pages.First();
+
+                Assert.IsTrue(newPage.LayoutType == PageLayoutType.Home);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+            }
+        }
+        #endregion
+
     }
 }

@@ -24,6 +24,12 @@ namespace PnP.Core.Model.SharePoint
 
         internal Page(PnPContext context, IList pagesLibrary, IListItem pageListItem, PageLayoutType pageLayoutType = PageLayoutType.Article)
         {
+            if (pageLayoutType == PageLayoutType.Home)
+            {
+                // By default we're assuming you want to have a customized home page, change this to true in case you want to create a home page holding the default OOB web parts
+                KeepDefaultWebParts = false;
+            }
+
             PnPContext = context;
             PagesLibrary = pagesLibrary;
             PageListItem = pageListItem;
@@ -928,13 +934,32 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
-                // default canvas content for an empty page (this field contains the page's web part properties)
-                var canvasContent1Html = @"<div><div data-sp-canvascontrol="""" data-sp-canvasdataversion=""1.0"" data-sp-controldata=""&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;""></div></div>";
+                string canvasContent1Html;
                 // If the canvasfield1 field is present and filled then let's parse it
                 if (item.Values.ContainsKey(PageConstants.CanvasField) && !(item.Values[PageConstants.CanvasField] == null || string.IsNullOrEmpty(item.Values[PageConstants.CanvasField].ToString())))
                 {
+                    if (item.Values[PageConstants.CanvasField].ToString() == "<div dir=\"\" class=\"ms-rtestate-field\"></div>" && loadedPage.LayoutType == PageLayoutType.Home)
+                    {
+                        loadedPage.KeepDefaultWebParts = true;
+                        return loadedPage;
+                    }
+
                     canvasContent1Html = item.Values[PageConstants.CanvasField].ToString();
                 }
+                else
+                {
+                    if (loadedPage.LayoutType == PageLayoutType.Home)
+                    {
+                        loadedPage.KeepDefaultWebParts = true;
+                        return loadedPage;
+                    }
+                    else
+                    {
+                        // default canvas content for an empty page (this field contains the page's web part properties)
+                        canvasContent1Html = @"<div><div data-sp-canvascontrol="""" data-sp-canvasdataversion=""1.0"" data-sp-controldata=""&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;""></div></div>";
+                    }
+                }
+
                 var pageHeaderHtml = item.Values[PageConstants.PageLayoutContentField] != null ? item.Values[PageConstants.PageLayoutContentField].ToString() : "";
 
                 loadedPage.LoadFromHtml(canvasContent1Html, pageHeaderHtml);
