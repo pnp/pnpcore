@@ -11,6 +11,17 @@
     items:
     - name: Custom Authentication Providers
       href: consumer/custom-authentication-provider.md
+  - name: Working with pages
+    href: consumer/pages-intro.md
+    items:
+      - name: Configuring the page header
+        href: consumer/pages-header.md
+      - name: Configuring web parts and text
+        href: consumer/pages-webparts.md
+      - name: Publishing and promoting pages as news
+        href: consumer/pages-promote.md
+      - name: Multi-lingual pages
+        href: consumer/pages-multilingual.md
   - name: Get data using paging
     href: consumer/using%20paging.md
   - name: Configuring the PnP Core SDK
