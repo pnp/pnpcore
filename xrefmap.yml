@@ -12524,19 +12524,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.AddControl
   nameWithType: IPage.AddControl
-- uid: PnP.Core.Model.SharePoint.IPage.AddHeaderControl(PnP.Core.Model.SharePoint.ICanvasControl,System.Int32)
-  name: AddHeaderControl(ICanvasControl, Int32)
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddHeaderControl_PnP_Core_Model_SharePoint_ICanvasControl_System_Int32_
-  commentId: M:PnP.Core.Model.SharePoint.IPage.AddHeaderControl(PnP.Core.Model.SharePoint.ICanvasControl,System.Int32)
-  fullName: PnP.Core.Model.SharePoint.IPage.AddHeaderControl(PnP.Core.Model.SharePoint.ICanvasControl, System.Int32)
-  nameWithType: IPage.AddHeaderControl(ICanvasControl, Int32)
-- uid: PnP.Core.Model.SharePoint.IPage.AddHeaderControl*
-  name: AddHeaderControl
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddHeaderControl_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AddHeaderControl
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.AddHeaderControl
-  nameWithType: IPage.AddHeaderControl
 - uid: PnP.Core.Model.SharePoint.IPage.AddSection(PnP.Core.Model.SharePoint.CanvasSectionTemplate,System.Single)
   name: AddSection(CanvasSectionTemplate, Single)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddSection_PnP_Core_Model_SharePoint_CanvasSectionTemplate_System_Single_
