@@ -1,6 +1,6 @@
 # PnP Core SDK - Console Sample
 
-This solution demonstrates how the PnP Core SDK can be used in a console application
+This solution demonstrates how the PnP Core SDK can be used in a console application. In this sample we're querying a modern group connected SharePoint site which also has Teams. If you're testing this code against a modern communication site or another classic site then please comment out the "teams" parts.
 
 ## Source code
 
@@ -18,11 +18,17 @@ In order for the user to authenticate on the App, A new app registration should 
 
 - Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected. As the Redirect URI, in Web platform enter __http://localhost__ (only needed if you want use an interactive authentication flow)
 
-- Under __Implicit grant__ section, check __ID tokens__
+- Under __Implicit grant__ section, check __ID tokens__ and __Access tokens__
+
+- Under __Advanced settings__ section, set __Allow public client flows__ to __yes__
 
 - Go to __API permissions__ section , click __Add a permission__
 -- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __Directory.Read.All__
 -- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __User.Read__
+-- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __ChannelMessage.Read.All__
+-- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __ChannelMessage.Send__
+-- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __TeamSettings.ReadWrite.All__
+-- Select __Azure Active Directory Graph__ > __Delegated permissions__ > select __TeamsTab.ReadWrite.All__
 
 - Click __Grand admin consent for {tenant}__
 
