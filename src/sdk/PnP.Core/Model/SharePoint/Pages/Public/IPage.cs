@@ -67,6 +67,36 @@ namespace PnP.Core.Model.SharePoint
         string EntityType { get; set; }
 
         /// <summary>
+        /// Url being reposted using the repost page
+        /// </summary>
+        public string RepostSourceUrl { get; set; }
+
+        /// <summary>
+        /// Description of the repost page
+        /// </summary>
+        public string RepostDescription { get; set; }
+
+        /// <summary>
+        /// Id of the SharePoint <see cref="ISite"/> containting the page being reposted
+        /// </summary>
+        public Guid RepostSourceSiteId { get; set; }
+
+        /// <summary>
+        /// Id of the SharePoint <see cref="IWeb"/> containting the page being reposted
+        /// </summary>
+        public Guid RepostSourceWebId { get; set; }
+
+        /// <summary>
+        /// Id of the SharePoint <see cref="IList"/> containting the page being reposted
+        /// </summary>
+        public Guid RepostSourceListId { get; set; }
+
+        /// <summary>
+        /// Id of the SharePoint <see cref="IListItem"/> connected to the page being reposted
+        /// </summary>
+        public Guid RepostSourceItemId { get; set; }
+        
+        /// <summary>
         /// PnPContext to work with
         /// </summary>
         PnPContext PnPContext { get; }

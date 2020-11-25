@@ -1367,5 +1367,104 @@ namespace PnP.Core.Test.SharePoint
         }
 
         #endregion
+
+        #region Other page types: Repost page
+
+        [TestMethod]
+        public async Task RePostPageCreate()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Upload image to site assets library
+                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFile previewImage = await parentFolder.Files.AddAsync("repostpreview.jpg", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}TestAssets{Path.DirectorySeparatorChar}pageheader.jpg"));
+
+                var newPage = await context.Web.NewPageAsync(PageLayoutType.RepostPage);
+                string pageName = TestCommon.GetPnPSdkTestAssetName("RePostPageCreate.aspx");
+
+                // Save the page
+                string repostUrl = "https://techcommunity.microsoft.com/t5/sharepoint/how-to-create-repost-page-modern-page-library-with-powershell/m-p/269332";
+                newPage.RepostSourceUrl = repostUrl;
+                newPage.RepostDescription = "Some description";
+                newPage.ThumbnailUrl = previewImage.ServerRelativeUrl;
+                newPage.PageTitle = "Custom page title";
+
+                await newPage.SaveAsync(pageName);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                newPage = pages.First();
+
+                Assert.IsTrue(newPage.LayoutType == PageLayoutType.RepostPage);
+                Assert.IsTrue(newPage.RepostSourceUrl == repostUrl);
+                Assert.IsTrue(newPage.RepostDescription == "Some description");
+                Assert.IsTrue(newPage.PageTitle == "Custom page title");
+                Assert.IsTrue(newPage.ThumbnailUrl == previewImage.ServerRelativeUrl);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+
+                // delete the page header image
+                await previewImage.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task RePostPageToOtherPage()
+        {
+            //TestCommon.Instance.Mocking = false;
+            Guid siteId;
+            Guid webId;
+            Guid listId;
+            Guid itemId;
+            string fileServerRelativeUrl;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var pages = await context.Web.GetPagesAsync("Home.aspx");
+                var homePage = pages.First();
+
+                var file = await homePage.GetPageFileAsync(p=>p.ListId, p=>p.UniqueId, p=>p.ServerRelativeUrl);                
+                siteId = context.Site.Id;
+                webId = context.Web.Id;
+                listId = file.ListId;
+                itemId = file.UniqueId;
+                fileServerRelativeUrl = file.ServerRelativeUrl;
+            }
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+
+                var newPage = await context.Web.NewPageAsync(PageLayoutType.RepostPage);
+                string pageName = TestCommon.GetPnPSdkTestAssetName("RePostPageToOtherPage.aspx");
+
+                // Save the page
+                newPage.RepostSourceUrl = fileServerRelativeUrl;
+                newPage.RepostSourceSiteId = siteId;
+                newPage.RepostSourceWebId = webId;
+                newPage.RepostSourceListId = listId;
+                newPage.RepostSourceItemId = itemId;
+
+                await newPage.SaveAsync(pageName);
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                newPage = pages.First();
+
+                Assert.IsTrue(newPage.LayoutType == PageLayoutType.RepostPage);
+                Assert.IsTrue(newPage.RepostSourceUrl == fileServerRelativeUrl);
+                Assert.IsTrue(newPage.RepostSourceSiteId == siteId);
+                Assert.IsTrue(newPage.RepostSourceWebId == webId);
+                Assert.IsTrue(newPage.RepostSourceListId == listId);
+                Assert.IsTrue(newPage.RepostSourceItemId == itemId);
+
+                // Delete the page
+                await newPage.DeleteAsync();
+            }
+        }
+        #endregion
     }
 }

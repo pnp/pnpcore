@@ -34,6 +34,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Page Properties
+        
         /// <summary>
         /// Title of the client side page
         /// </summary>
@@ -178,6 +179,19 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string EntityType { get; set; }
 
+        // repost page configuration
+        public string RepostSourceUrl { get; set; }
+
+        public string RepostDescription { get; set; }
+
+        public Guid RepostSourceSiteId { get; set; }
+
+        public Guid RepostSourceWebId { get; set; }
+
+        public Guid RepostSourceListId { get; set; }
+
+        public Guid RepostSourceItemId { get; set; }
+
         /// <summary>
         /// PnPContext to work with
         /// </summary>
@@ -286,6 +300,11 @@ namespace PnP.Core.Model.SharePoint
                     <FieldRef Name='{PageConstants.PageLayoutContentField}' />
                     <FieldRef Name='{PageConstants.BannerImageUrl}' />
                     <FieldRef Name='{PageConstants.PromotedStateField}' />
+                    <FieldRef Name='{PageConstants._OriginalSourceUrl}' />
+                    <FieldRef Name='{PageConstants._OriginalSourceSiteId}' />
+                    <FieldRef Name='{PageConstants._OriginalSourceWebId}' />
+                    <FieldRef Name='{PageConstants._OriginalSourceListId}' />
+                    <FieldRef Name='{PageConstants._OriginalSourceItemId}' />
                   </ViewFields>
                   <Query>
                     <Where>
@@ -871,6 +890,44 @@ namespace PnP.Core.Model.SharePoint
                     }
                 }
 
+                if (loadedPage.LayoutType == PageLayoutType.RepostPage)
+                {
+                    if (item.Values.ContainsKey(PageConstants._OriginalSourceUrl) && item.Values[PageConstants._OriginalSourceUrl] != null && !string.IsNullOrEmpty(item.Values[PageConstants._OriginalSourceUrl].ToString()))
+                    {
+                        loadedPage.RepostSourceUrl = item.Values[PageConstants._OriginalSourceUrl].ToString();
+                    }
+
+                    if (item.Values.ContainsKey(PageConstants.DescriptionField) && item.Values[PageConstants.DescriptionField] != null && !string.IsNullOrEmpty(item.Values[PageConstants.DescriptionField].ToString()))
+                    {
+                        loadedPage.RepostDescription = item.Values[PageConstants.DescriptionField].ToString();
+                    }
+
+                    if (item.Values.ContainsKey(PageConstants._OriginalSourceSiteId) && item.Values[PageConstants._OriginalSourceSiteId] != null && !string.IsNullOrEmpty(item.Values[PageConstants._OriginalSourceSiteId].ToString()))
+                    {
+                        loadedPage.RepostSourceSiteId = Guid.Parse(item.Values[PageConstants._OriginalSourceSiteId].ToString());
+                    }
+
+                    if (item.Values.ContainsKey(PageConstants._OriginalSourceWebId) && item.Values[PageConstants._OriginalSourceWebId] != null && !string.IsNullOrEmpty(item.Values[PageConstants._OriginalSourceWebId].ToString()))
+                    {
+                        loadedPage.RepostSourceWebId = Guid.Parse(item.Values[PageConstants._OriginalSourceWebId].ToString());
+                    }
+
+                    if (item.Values.ContainsKey(PageConstants._OriginalSourceListId) && item.Values[PageConstants._OriginalSourceListId] != null && !string.IsNullOrEmpty(item.Values[PageConstants._OriginalSourceListId].ToString()))
+                    {
+                        loadedPage.RepostSourceListId = Guid.Parse(item.Values[PageConstants._OriginalSourceListId].ToString());
+                    }
+
+                    if (item.Values.ContainsKey(PageConstants._OriginalSourceItemId) && item.Values[PageConstants._OriginalSourceItemId] != null && !string.IsNullOrEmpty(item.Values[PageConstants._OriginalSourceItemId].ToString()))
+                    {
+                        loadedPage.RepostSourceItemId = Guid.Parse(item.Values[PageConstants._OriginalSourceItemId].ToString());
+                    }
+
+                    if (item.Values.ContainsKey(PageConstants.BannerImageUrlField) && item.Values[PageConstants.BannerImageUrlField] != null)
+                    {
+                        loadedPage.ThumbnailUrl = (item.Values[PageConstants.BannerImageUrlField] as FieldUrlValue).Url;
+                    }
+                }
+
                 // default canvas content for an empty page (this field contains the page's web part properties)
                 var canvasContent1Html = @"<div><div data-sp-canvascontrol="""" data-sp-canvasdataversion=""1.0"" data-sp-controldata=""&#123;&quot;controlType&quot;&#58;0,&quot;pageSettingsSlice&quot;&#58;&#123;&quot;isDefaultDescription&quot;&#58;true,&quot;isDefaultThumbnail&quot;&#58;true&#125;&#125;""></div></div>";
                 // If the canvasfield1 field is present and filled then let's parse it
@@ -1012,7 +1069,21 @@ namespace PnP.Core.Model.SharePoint
                             {
                                 if (sectionData.PageSettingsSlice.IsDefaultThumbnail == false)
                                 {
-                                    ThumbnailUrl = PageListItem.Values[PageConstants.BannerImageUrlField] != null ? PageListItem.Values[PageConstants.BannerImageUrlField].ToString() : string.Empty;
+                                    if (PageListItem.Values[PageConstants.BannerImageUrlField] != null)
+                                    {
+                                        if (PageListItem.Values[PageConstants.BannerImageUrlField] is FieldUrlValue thumbnailUrlField)
+                                        {
+                                            ThumbnailUrl = thumbnailUrlField.Url;
+                                        }
+                                        else
+                                        {
+                                            ThumbnailUrl = PageListItem.Values[PageConstants.BannerImageUrlField].ToString();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        ThumbnailUrl = string.Empty;
+                                    }
                                 }
                             }
                             if (sectionData.PageSettingsSlice.IsDefaultDescription.HasValue)
@@ -1394,6 +1465,26 @@ namespace PnP.Core.Model.SharePoint
                 {
                     PageListItem[PageConstants.BannerImageUrl] = ThumbnailUrl;
                 }
+
+                if (!string.IsNullOrEmpty(RepostSourceUrl))
+                {
+                    PageListItem[PageConstants._OriginalSourceUrl] = RepostSourceUrl;
+                }
+
+                if (RepostSourceSiteId != Guid.Empty && RepostSourceWebId != Guid.Empty && RepostSourceListId != Guid.Empty && RepostSourceItemId != Guid.Empty)
+                {
+                    PageListItem[PageConstants._OriginalSourceSiteId] = RepostSourceSiteId;
+                    PageListItem[PageConstants._OriginalSourceWebId] = RepostSourceWebId;
+                    PageListItem[PageConstants._OriginalSourceListId] = RepostSourceListId;
+                    PageListItem[PageConstants._OriginalSourceItemId] = RepostSourceItemId;
+                }
+
+                if (RepostDescription != null)
+                {
+                    // Don't store more than 300 characters
+                    PageListItem[PageConstants.DescriptionField] = RepostDescription.Length > 300 ? RepostDescription.Substring(0, 300) : RepostDescription;
+                }
+
                 if (updatingExistingPage)
                 {
                     await PageListItem.UpdateAsync().ConfigureAwait(false);
