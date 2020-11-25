@@ -12148,19 +12148,32 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IListItemBase
   fullName: PnP.Core.Model.SharePoint.IListItemBase
   nameWithType: IListItemBase
-- uid: PnP.Core.Model.SharePoint.IListItemBase.CommentsDisabled
-  name: CommentsDisabled
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_CommentsDisabled
-  commentId: P:PnP.Core.Model.SharePoint.IListItemBase.CommentsDisabled
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.CommentsDisabled
-  nameWithType: IListItemBase.CommentsDisabled
-- uid: PnP.Core.Model.SharePoint.IListItemBase.CommentsDisabled*
-  name: CommentsDisabled
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_CommentsDisabled_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.CommentsDisabled
+- uid: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled
+  name: AreCommentsDisabled()
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabled
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled()
+  nameWithType: IListItemBase.AreCommentsDisabled()
+- uid: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled*
+  name: AreCommentsDisabled
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.CommentsDisabled
-  nameWithType: IListItemBase.CommentsDisabled
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled
+  nameWithType: IListItemBase.AreCommentsDisabled
+- uid: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync
+  name: AreCommentsDisabledAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabledAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync()
+  nameWithType: IListItemBase.AreCommentsDisabledAsync()
+- uid: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync*
+  name: AreCommentsDisabledAsync
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabledAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync
+  nameWithType: IListItemBase.AreCommentsDisabledAsync
 - uid: PnP.Core.Model.SharePoint.IListItemBase.Id
   name: Id
   href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_Id
@@ -12174,6 +12187,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemBase.Id
   nameWithType: IListItemBase.Id
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled(System.Boolean)
+  name: SetCommentsDisabled(Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabled_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled(System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled(System.Boolean)
+  nameWithType: IListItemBase.SetCommentsDisabled(Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled*
+  name: SetCommentsDisabled
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled
+  nameWithType: IListItemBase.SetCommentsDisabled
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync(System.Boolean)
+  name: SetCommentsDisabledAsync(Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabledAsync_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync(System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync(System.Boolean)
+  nameWithType: IListItemBase.SetCommentsDisabledAsync(Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync*
+  name: SetCommentsDisabledAsync
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabledAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync
+  nameWithType: IListItemBase.SetCommentsDisabledAsync
 - uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdate
   name: SystemUpdate()
   href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdate
@@ -12538,6 +12577,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.AddSection
   nameWithType: IPage.AddSection
+- uid: PnP.Core.Model.SharePoint.IPage.AreCommentsDisabled
+  name: AreCommentsDisabled()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AreCommentsDisabled
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AreCommentsDisabled
+  fullName: PnP.Core.Model.SharePoint.IPage.AreCommentsDisabled()
+  nameWithType: IPage.AreCommentsDisabled()
+- uid: PnP.Core.Model.SharePoint.IPage.AreCommentsDisabled*
+  name: AreCommentsDisabled
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AreCommentsDisabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AreCommentsDisabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.AreCommentsDisabled
+  nameWithType: IPage.AreCommentsDisabled
+- uid: PnP.Core.Model.SharePoint.IPage.AreCommentsDisabledAsync
+  name: AreCommentsDisabledAsync()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AreCommentsDisabledAsync
+  commentId: M:PnP.Core.Model.SharePoint.IPage.AreCommentsDisabledAsync
+  fullName: PnP.Core.Model.SharePoint.IPage.AreCommentsDisabledAsync()
+  nameWithType: IPage.AreCommentsDisabledAsync()
+- uid: PnP.Core.Model.SharePoint.IPage.AreCommentsDisabledAsync*
+  name: AreCommentsDisabledAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AreCommentsDisabledAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.AreCommentsDisabledAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.AreCommentsDisabledAsync
+  nameWithType: IPage.AreCommentsDisabledAsync
 - uid: PnP.Core.Model.SharePoint.IPage.AvailablePageComponents(System.String)
   name: AvailablePageComponents(String)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponents_System_String_
@@ -12577,19 +12642,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.ClearPage
   nameWithType: IPage.ClearPage
-- uid: PnP.Core.Model.SharePoint.IPage.CommentsDisabled
-  name: CommentsDisabled
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_CommentsDisabled
-  commentId: P:PnP.Core.Model.SharePoint.IPage.CommentsDisabled
-  fullName: PnP.Core.Model.SharePoint.IPage.CommentsDisabled
-  nameWithType: IPage.CommentsDisabled
-- uid: PnP.Core.Model.SharePoint.IPage.CommentsDisabled*
-  name: CommentsDisabled
-  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_CommentsDisabled_
-  commentId: Overload:PnP.Core.Model.SharePoint.IPage.CommentsDisabled
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IPage.CommentsDisabled
-  nameWithType: IPage.CommentsDisabled
 - uid: PnP.Core.Model.SharePoint.IPage.Controls
   name: Controls
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_Controls
@@ -12681,6 +12733,58 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.DemoteNewsArticleAsync
   nameWithType: IPage.DemoteNewsArticleAsync
+- uid: PnP.Core.Model.SharePoint.IPage.DisableComments
+  name: DisableComments()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DisableComments
+  commentId: M:PnP.Core.Model.SharePoint.IPage.DisableComments
+  fullName: PnP.Core.Model.SharePoint.IPage.DisableComments()
+  nameWithType: IPage.DisableComments()
+- uid: PnP.Core.Model.SharePoint.IPage.DisableComments*
+  name: DisableComments
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DisableComments_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.DisableComments
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.DisableComments
+  nameWithType: IPage.DisableComments
+- uid: PnP.Core.Model.SharePoint.IPage.DisableCommentsAsync
+  name: DisableCommentsAsync()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DisableCommentsAsync
+  commentId: M:PnP.Core.Model.SharePoint.IPage.DisableCommentsAsync
+  fullName: PnP.Core.Model.SharePoint.IPage.DisableCommentsAsync()
+  nameWithType: IPage.DisableCommentsAsync()
+- uid: PnP.Core.Model.SharePoint.IPage.DisableCommentsAsync*
+  name: DisableCommentsAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DisableCommentsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.DisableCommentsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.DisableCommentsAsync
+  nameWithType: IPage.DisableCommentsAsync
+- uid: PnP.Core.Model.SharePoint.IPage.EnableComments
+  name: EnableComments()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EnableComments
+  commentId: M:PnP.Core.Model.SharePoint.IPage.EnableComments
+  fullName: PnP.Core.Model.SharePoint.IPage.EnableComments()
+  nameWithType: IPage.EnableComments()
+- uid: PnP.Core.Model.SharePoint.IPage.EnableComments*
+  name: EnableComments
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EnableComments_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.EnableComments
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.EnableComments
+  nameWithType: IPage.EnableComments
+- uid: PnP.Core.Model.SharePoint.IPage.EnableCommentsAsync
+  name: EnableCommentsAsync()
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EnableCommentsAsync
+  commentId: M:PnP.Core.Model.SharePoint.IPage.EnableCommentsAsync
+  fullName: PnP.Core.Model.SharePoint.IPage.EnableCommentsAsync()
+  nameWithType: IPage.EnableCommentsAsync()
+- uid: PnP.Core.Model.SharePoint.IPage.EnableCommentsAsync*
+  name: EnableCommentsAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EnableCommentsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.EnableCommentsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.EnableCommentsAsync
+  nameWithType: IPage.EnableCommentsAsync
 - uid: PnP.Core.Model.SharePoint.IPage.EntityId
   name: EntityId
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_EntityId
