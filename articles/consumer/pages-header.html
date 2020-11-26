@@ -82,7 +82,59 @@
                   </div>
                     <h1 id="configuring-the-page-header">Configuring the page header</h1>
 
-<p>todo</p>
+<p>When you create pages you can also configure the page header. There are various options to configure a page header: you can add a nice image, change the header layout mode and more. What you can do via the SharePoint UI can also be done using the pages API, as explained in this chapter.</p>
+<h2 id="creating-a-page-without-header">Creating a page without header</h2>
+<p>Sometimes the header takes up too much space and you prefer to create a page with a minimal header. You can do this by calling the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_RemovePageHeader">RemovePageHeader method</a> on a page:</p>
+<pre><code class="lang-csharp">// Create the page
+var newPage = await context.Web.NewPageAsync();
+
+// configure the page
+newPage.RemovePageHeader();
+
+// Save the page
+await newPage.SaveAsync(&quot;PageWithMinimalHeader.aspx&quot;);
+</code></pre>
+<h2 id="configuring-the-default-page-header">Configuring the default page header</h2>
+<p>When you create a new page it will be configured to use the default page header which contains the default background image and title. If you want to switch a page to the default header you can use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SetDefaultPageHeader">SetDefaultPageHeader method</a>. The default page header can also be customized by setting the page header properties. Below is an example:</p>
+<pre><code class="lang-csharp">// Create the page
+var page = await context.Web.NewPageAsync();
+
+// Configure the page
+page.SetDefaultPageHeader();
+page.PageHeader.LayoutType = PageHeaderLayoutType.CutInShape;
+page.PageHeader.ShowTopicHeader = true;
+page.PageHeader.TopicHeader = &quot;I'm a topic header&quot;;
+page.PageHeader.TextAlignment = PageHeaderTitleAlignment.Center;
+page.PageHeader.ShowPublishDate = true;
+
+// Save the page
+await page.SaveAsync(&quot;PageWithCustomizedDefaultHeader.aspx&quot;);
+</code></pre>
+<p>Above sample will switch the header to use the Cut in Shape layout option with a topic header. We're also changing the page title alignment to be centered versus the default left alignment and we're showing the date when the page was published in the header.</p>
+<h2 id="configuring-a-custom-header">Configuring a custom header</h2>
+<p>The previous section already showed some cool page header features, but we can do better 😊 You can also use a full custom header which next to the options presented in the previous example also allows you to configure the background image of the header. To configure a header with an image you can use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SetCustomPageHeader_System_String_System_Nullable_System_Double__System_Nullable_System_Double__">SetCustomPageHeader method</a> which takes the server relative url to the image to use as input.</p>
+<pre><code class="lang-csharp">// Create the page
+var page = await context.Web.NewPageAsync();
+
+// Upload the header image to site assets library
+IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
+IFile headerImage = await parentFolder.Files.AddAsync(&quot;pageheader.jpg&quot;, System.IO.File.OpenRead($&quot;.{Path.DirectorySeparatorChar}pageheader.jpg&quot;));
+
+// Configure the page
+page.SetCustomPageHeader(headerImage.ServerRelativeUrl, 5.3, 6.2);
+page.PageHeader.LayoutType = PageHeaderLayoutType.ColorBlock;
+page.PageHeader.ShowTopicHeader = true;
+page.PageHeader.TopicHeader = &quot;I'm a topic header&quot;;
+page.PageHeader.TextAlignment = PageHeaderTitleAlignment.Center;
+page.PageHeader.ShowPublishDate = true;
+
+// Save the page
+await page.SaveAsync(&quot;PageWithCustomHeader.aspx&quot;);
+</code></pre>
+<blockquote>
+<p>[!Note:]
+Note that you can control the header image offset by providing the needed X and Y offset values whe calling the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SetCustomPageHeader_System_String_System_Nullable_System_Double__System_Nullable_System_Double__">SetCustomPageHeader method</a>.</p>
+</blockquote>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

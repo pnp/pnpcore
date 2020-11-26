@@ -3606,7 +3606,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/pages-header.html",
-          "hash": "gfjaXAe3GG0VT6vB76qZVg=="
+          "hash": "m4zCRHWRCXxZpqDAeahmKA=="
         }
       },
       "is_incremental": false,
@@ -3618,7 +3618,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/pages-intro.html",
-          "hash": "SlE6T0HyJph87Bjykw79Kw=="
+          "hash": "AXiZO6aZN0CxtM35YDxiug=="
         }
       },
       "is_incremental": false,
@@ -3654,7 +3654,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/pages-webparts.html",
-          "hash": "1rPzskv5CIdRF8DEu+7Ygg=="
+          "hash": "tbMYd2lc4A0LQPbS/K1euw=="
         }
       },
       "is_incremental": false,
@@ -3786,7 +3786,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/contributor/setup.html",
-          "hash": "IiGQZx+7iG+gRl6vYAOMRg=="
+          "hash": "f0PvpjkOxlvMTgCWymlfAQ=="
         }
       },
       "is_incremental": false,
@@ -3846,7 +3846,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "ql6xJIMMlN54hwy0yaSgTQ=="
+          "hash": "5A9GZYSuUgxkZtxVCG00QA=="
         }
       },
       "is_incremental": false,
@@ -4163,6 +4163,17 @@
       "output": {
         "resource": {
           "relative_path": "images/test explorer.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/workbench.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/workbench.png"
         }
       },
       "is_incremental": false,

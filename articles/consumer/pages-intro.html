@@ -152,6 +152,20 @@ var newPage = await context.Web.NewPageAsync();
 // Save the page
 await newPage.SaveAsync(&quot;folder1/folder2/MyPageInFolder2.aspx&quot;);
 </code></pre>
+<h3 id="saving-a-page-as-a-template">Saving a page as a template</h3>
+<p>A page can also be saved as a template, when users of the site want to create a new page they can base themselves of a template page. To save a page as a template you instead of the <code>SaveAsync()</code> use the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SaveAsTemplateAsync_System_String_">SaveAsTemplateAsync method</a>:</p>
+<pre><code class="lang-csharp">// Create the page
+var newPage = await context.Web.NewPageAsync();
+
+// configure the page
+
+// Save the page
+await newPage.SaveAsTemplateAsync(&quot;MyTemplatePage.aspx&quot;);
+</code></pre>
+<blockquote>
+<p>[!Note:]
+You do not need to specify the templates folder, the page API will ensure the templates folder does exist and automatically use it.</p>
+</blockquote>
 <h2 id="configuring-a-page">Configuring a page</h2>
 <p>Whenever you've created a new page or loaded an existing page, you often need to also configure the page by adding content to it. In this chapter you'll learn how to do so.</p>
 <h3 id="setting-up-your-page-layout">Setting up your page layout</h3>
