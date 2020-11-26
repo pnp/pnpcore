@@ -18,15 +18,10 @@ jobs:
       with: 
         ref: gh-pages
         path: gh-pages
-    # Ensure .Net is available
-    #- name: Setup .NET Core
-    #  uses: actions/setup-dotnet@v1
-    #  with:
-    #    dotnet-version: 3.1.101    
-    # Install docfx, stick with version 2.51 as higher versions result in https://github.com/dotnet/docfx/issues/5785
+    # Install docfx, stick with version 2.51 as higher versions result in https://github.com/dotnet/docfx/issues/5785 > fixed in 2.56.4+
     - name: Install dependencies
       run: |
-        wget https://github.com/dotnet/docfx/releases/download/v2.51/docfx.zip
+        wget https://github.com/dotnet/docfx/releases/download/v2.56.5/docfx.zip
         sudo unzip docfx.zip -d /usr/local/lib/docfx
         rm docfx.zip
         echo '#!/bin/sh' | sudo tee -a /usr/local/bin/docfx > /dev/null
