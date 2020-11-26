@@ -124,10 +124,10 @@ await page.SaveAsync(&quot;MyPage.aspx&quot;);
 </code></pre>
 <h2 id="working-with-web-parts">Working with web parts</h2>
 <p>Adding web parts is quite similar to adding text parts, but the configuration of web parts takes more work. When creating a web part you start from a blueprint of that web part, using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_">AvailablePageComponentsAsync method</a> you can get a list of all the possible web parts that can be added on a page. If you've installed custom web parts on the site hosting the page then these will show up as well in that list.</p>
-<blockquote>
-<p>[!Important:]
-The <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_">AvailablePageComponentsAsync method</a> is a call that takes quite some time and returns a large chunk of data. It's best to do this call only once and use the result while you configure pages in your application.</p>
-</blockquote>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_">AvailablePageComponentsAsync method</a> is a call that takes quite some time and returns a large chunk of data. It's best to do this call only once and use the result while you configure pages in your application.</p>
+</div>
 <p>Below sample shows the basics of adding an out of the box web part on a page. Note that the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DefaultWebPartToWebPartId_PnP_Core_Model_SharePoint_DefaultWebPart_">DefaultWebPartToWebPartId method</a> is used to translate out of the box web parts to their respective internal web part names (guids).</p>
 <pre><code class="lang-csharp">// Create the page
 var page = await context.Web.NewPageAsync();
@@ -167,10 +167,10 @@ page.AddControl(image, page.Sections[0].Columns[0]);
 // Save the page
 await page.SaveAsync(&quot;MyPage.aspx&quot;);
 </code></pre>
-<blockquote>
-<p>[!Note:]
-Above approach using the workbench also works for get a formatted text snippet.</p>
-</blockquote>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Above approach using the workbench also works for get a formatted text snippet.</p>
+</div>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
