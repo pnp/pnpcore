@@ -55,7 +55,7 @@ await page.SaveAsync("MyPage.aspx");
 
 Adding web parts is quite similar to adding text parts, but the configuration of web parts takes more work. When creating a web part you start from a blueprint of that web part, using the [AvailablePageComponentsAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_) you can get a list of all the possible web parts that can be added on a page. If you've installed custom web parts on the site hosting the page then these will show up as well in that list.
 
-> [!Important:]
+> [!Important]
 > The [AvailablePageComponentsAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_) is a call that takes quite some time and returns a large chunk of data. It's best to do this call only once and use the result while you configure pages in your application.
 
 Below sample shows the basics of adding an out of the box web part on a page. Note that the [DefaultWebPartToWebPartId method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DefaultWebPartToWebPartId_PnP_Core_Model_SharePoint_DefaultWebPart_) is used to translate out of the box web parts to their respective internal web part names (guids).
@@ -105,5 +105,5 @@ page.AddControl(image, page.Sections[0].Columns[0]);
 await page.SaveAsync("MyPage.aspx");
 ```
 
-> [!Note:]
+> [!Note]
 > Above approach using the workbench also works for get a formatted text snippet.

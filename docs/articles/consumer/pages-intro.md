@@ -121,7 +121,7 @@ var newPage = await context.Web.NewPageAsync();
 await newPage.SaveAsTemplateAsync("MyTemplatePage.aspx");
 ```
 
-> [!Note:]
+> [!Note]
 > You do not need to specify the templates folder, the page API will ensure the templates folder does exist and automatically use it.
 
 ## Configuring a page

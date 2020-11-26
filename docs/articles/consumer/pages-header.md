@@ -63,6 +63,5 @@ page.PageHeader.ShowPublishDate = true;
 await page.SaveAsync("PageWithCustomHeader.aspx");
 ```
 
-> [!Note:]
+> [!Note]
 > Note that you can control the header image offset by providing the needed X and Y offset values whe calling the [SetCustomPageHeader method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SetCustomPageHeader_System_String_System_Nullable_System_Double__System_Nullable_System_Double__).
-
