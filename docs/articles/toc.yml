@@ -16,7 +16,7 @@
     items:
       - name: Configuring the page header
         href: consumer/pages-header.md
-      - name: Configuring web parts and text
+      - name: Working with web parts and text parts
         href: consumer/pages-webparts.md
       - name: Publishing and promoting pages as news
         href: consumer/pages-promote.md

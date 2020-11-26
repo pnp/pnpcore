@@ -20,17 +20,16 @@ If you want to update your forked repo then you can either use the GitHub UI or 
 
 Using Visual Studio requires you to:
 
-- Download and install Visual Studio 2019: https://visualstudio.microsoft.com/free-developer-offers/
+- Download and install Visual Studio 2019: https://visualstudio.microsoft.com/free-developer-offers/, ensure that you install at least Visual Studio 2019 version **16.8.0** upwards as PnP Core depends on .NET 5.0
+- Ensure you've installed the [.NET 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
 - Navigate to the `./src/sdk` folder and open the **PnP.Core.sln** solution
-
-> [!Note]
-> November 2020: PnP Core updated to take advantage of ASP.NET 5.0, please ensure that you install at least Visual Studio 2019 version **16.8.0** upwards to open the project
 
 ### I want to use Visual Studio Code for development
 
 Using Visual Studio Code requires you to:
 
 - Download and install Visual Studio Code: https://visualstudio.microsoft.com/free-developer-offers/
+- Ensure you've installed the [.NET 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
 - Open Visual Studio Code and install these extensions (click on the **Extensions** button in the vertical toolbar and search for it, then click on the **Install** link) and close it again once done
   - The **C#** extension (mandatory): this extension brings support for compiling and debugging C#
   - The **.NET Core Test Explorer** (optional): this extension always you to easily navigate the test cases and run a group of test cases
