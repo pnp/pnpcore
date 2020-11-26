@@ -1113,6 +1113,36 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task AddFormattedText()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("AddFormattedText.aspx");
+
+                // adding sections to the page
+                page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+                // Adding text control to the first section, first column
+                page.AddControl(page.NewTextPart("PnP <span class=\"fontSizeXLargePlus\"><span class=\"fontColorRed\"><strong>rocks!</strong></span></span>"), page.Sections[0].Columns[0]);
+
+                // Save the page
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                Assert.IsTrue(pages.Count == 1);
+                page = pages.First();
+
+                Assert.IsTrue((page.Controls[0] as IPageText).Text == "PnP <span class=\"fontSizeXLargePlus\"><span class=\"fontColorRed\"><strong>rocks!</strong></span></span>");
+
+                // Delete the page
+                await page.DeleteAsync();
+            }
+        }
+
         #endregion
 
         #region Page saving
