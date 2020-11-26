@@ -1,55 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
 
-    <IsPackable>false</IsPackable>
+		<IsPackable>false</IsPackable>
 
-    <Configurations>Debug;Release;Blazor</Configurations>
-  </PropertyGroup>
+		<Configurations>Debug;Release;Blazor</Configurations>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.22.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
-    <PackageReference Include="coverlet.collector" Version="1.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.22.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+		<PackageReference Include="coverlet.collector" Version="1.3.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PnP.Core.Auth\PnP.Core.Auth.csproj" />
-    <ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PnP.Core.Auth\PnP.Core.Auth.csproj" />
+		<ProjectReference Include="..\PnP.Core\PnP.Core.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Base\MockData\GraphRestTransitionTests\" />
-    <Folder Include="QueryModel\MockData\" />
-    <Folder Include="Security\MockData\UserTests\" />
-    <Folder Include="SharePoint\MockData\FilesTests\" />
-    <Folder Include="SharePoint\MockData\SettingTests\" />
-    <Folder Include="SharePoint\MockData\UserCustomActionTests\" />
-    <Folder Include="Teams\MockData\TeamLifecycleTests\" />
-    <Folder Include="Teams\MockData\TeamSettingsTests\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Base\MockData\GraphRestTransitionTests\" />
+		<Folder Include="QueryModel\MockData\" />
+		<Folder Include="Security\MockData\UserTests\" />
+		<Folder Include="SharePoint\MockData\FilesTests\" />
+		<Folder Include="SharePoint\MockData\SettingTests\" />
+		<Folder Include="SharePoint\MockData\UserCustomActionTests\" />
+		<Folder Include="Teams\MockData\TeamLifecycleTests\" />
+		<Folder Include="Teams\MockData\TeamSettingsTests\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="TestAssets\pageheader.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="TestAssets\test.docx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="TestAssets\testchunked.docx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="TestAssets\pageheader.jpg">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="TestAssets\test.docx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="TestAssets\testchunked.docx">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>

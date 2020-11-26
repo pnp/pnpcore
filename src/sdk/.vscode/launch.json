@@ -15,7 +15,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/PnP.Core.Test/bin/Debug/netcoreapp3.1/PnP.Core.Test.dll",
+            "program": "${workspaceFolder}/PnP.Core.Test/bin/Debug/net5.0/PnP.Core.Test.dll",
             "args": [],
             "cwd": "${workspaceFolder}/PnP.Core.Test",
             "console": "internalConsole",
