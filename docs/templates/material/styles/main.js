@@ -65,12 +65,12 @@ $(function () {
 
 $(function () {
     // Inject line breaks and spaces into the code sections
-    $(".lang-csharp").each(function () {
-        var text = $(this).html();
-        text = text.replace(/, /g, ",</br>&#09;&#09");
-        text = text.replace(ATTR1, '<');
-        $(this).html(text);
-    });
+    //$(".lang-csharp").each(function () {
+    //    var text = $(this).html();
+    //    text = text.replace(/, /g, ",</br>&#09;&#09");
+    //    text = text.replace(ATTR1, '<');
+    //    $(this).html(text);
+    //});
 
     // Add text to empty links
     $("p > a").each(function () {
