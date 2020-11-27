@@ -119,7 +119,6 @@ var host = Host.CreateDefaultBuilder()
 // Set environment to use
 .UseEnvironment("demo") // you can eventually read it from environment variables
 // Configure logging
-// Configure logging
 .ConfigureServices((hostingContext, services) =>
 {
   // Add the PnP Core SDK library
@@ -142,7 +141,7 @@ var host = Host.CreateDefaultBuilder()
                   TenantId = "{your_tenant_id}",
                   Interactive = new PnPCoreAuthenticationInteractiveOptions
                   {
-                      RedirectUri = "http://localhost"
+                      RedirectUri = new Uri("http://localhost")
                   }
               });
 
