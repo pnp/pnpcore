@@ -10,7 +10,7 @@ This solution demonstrates how to build a simple backend API in the form of an H
 
 ## Source code
 
-You can find the sample source code here: [/src/samples/Demo.AzureFunction](https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.AzureFunction)
+You can find the sample source code here: [/samples/Demo.AzureFunction](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzureFunction)
 
 ## Quickstart
 

@@ -4,7 +4,7 @@ This sample demonstrates using the pnp core library running on a Raspberry Pi de
 
 ## Source code
 
-You can find the sample source code here: [/src/samples/Demo.RPi](https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.RPi)
+You can find the sample source code here: [/samples/Demo.RPi](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.RPi)
 
 ## Setup
 

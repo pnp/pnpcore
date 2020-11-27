@@ -4,7 +4,7 @@ This solution demonstrates how the PnP Core SDK can be used in a Blazor WebAssem
 
 ## Source code
 
-You can find the sample source code here: [/src/samples/Demo.Blazor](https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.Blazor)
+You can find the sample source code here: [/samples/Demo.Blazor](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.Blazor)
 
 # Run the sample
 

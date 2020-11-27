@@ -174,7 +174,7 @@ $(function (){
     $("a.improve-doc-lg").each(function () {
         var link = $(this).attr('href');
         if(link.indexOf("/dev/docs/demos/") > -1){
-            link = link.replace("/dev/docs/demos/","/dev/src/samples/");
+            link = link.replace("/dev/docs/demos/","/dev/samples/");
             $(this).attr('href', link);
         }
     });

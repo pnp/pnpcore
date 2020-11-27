@@ -4,7 +4,7 @@ This solution demonstrates how the PnP Core SDK can be used in a ASP.NET Core we
 
 ## Source code
 
-You can find the sample source code here: [/src/samples/Demo.ASPNetCore](https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.ASPNetCore)
+You can find the sample source code here: [/samples/Demo.ASPNetCore](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.ASPNetCore)
 
 # Run the sample
 

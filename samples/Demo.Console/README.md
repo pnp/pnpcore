@@ -4,7 +4,7 @@ This solution demonstrates how the PnP Core SDK can be used in a console applica
 
 ## Source code
 
-You can find the sample source code here: [/src/samples/Demo.Console](https://github.com/pnp/pnpcore/tree/dev/src/samples/Demo.Console)
+You can find the sample source code here: [/samples/Demo.Console](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.Console)
 
 # Run the sample
 
