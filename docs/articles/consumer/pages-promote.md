@@ -42,7 +42,7 @@ await page.PromoteAsNewsArticleAsync();
 await page.PublishAsync();
 ```
 
-## Demoting a news article back to a regalar page
+## Demoting a news article back to a regular page
 
 Demoting an existing news post to a regular page can be done with the [DemoteNewsArticleAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DemoteNewsArticleAsync).
 
@@ -53,7 +53,7 @@ await page.DemoteNewsArticleAsync();
 
 ## Promoting a page as site home page
 
-If you want to set your page as the site's home page you have two options: you can use the convenient [PromoteAsHomePageAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PromoteAsHomePageAsync) on page object or you can load the web's `RootFolder` and set the `WelcomePage` property to the page you want to set as home page. The first approach is the recommended manner, both or shown here:
+If you want to set your page as the site's home page you have two options: you can use the convenient [PromoteAsHomePageAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PromoteAsHomePageAsync) on the page object or you can load the web's `RootFolder` and set the `WelcomePage` property to the page you want to set as home page. The first approach is the recommended manner.
 
 ```csharp
 

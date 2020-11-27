@@ -82,8 +82,8 @@ await newPage.SaveAsync("MyPage.aspx");
 When you create a new page the default will be an **Article** page, but you can also create other types of pages. The pages API supports these common types of pages:
 
 - **Article page**: this is typical page you'd create using the SharePoint user interface
-- **Repost page**: this page is re-posting of existing content where existing content can be a link to a resource on the internet or an other page in your SharePoint environment
-- **Home page**: this is page created with as purpose to become the home page of the site, this page has no page header by design
+- **Repost page**: this page is a re-posting of existing content where existing content can be a link to a resource on the internet or an other page in your SharePoint environment
+- **Home page**: this is a page created with as purpose to become the home page of the site, this page has no page header by design and has no page commenting
 - **Spaces page**: [SharePoint Spaces](https://www.exploresharepointspaces.com/) pages can host mixed reality content
 
 To pick another page type during creation specify the type as input of the [NewPageAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NewPageAsync_PnP_Core_Model_SharePoint_PageLayoutType_):
@@ -165,7 +165,7 @@ page.AddSection(CanvasSectionTemplate.TwoColumnVerticalSection, 1, VariantThemeT
 
 ### Adding controls to the page
 
-A control is either a piece of text or a web part and can be added in one of the section columns. Below sample shows how to add the text part to an existing section column. It boils downb to two steps:
+A control is either a piece of text or a web part and can be added in one of the section columns. Below sample shows how to add the text part to an existing section column. It boils down to these two steps:
 
 - Creating a text part via the [NewTextPart method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_NewTextPart_System_String_)
 - Adding the text part into a previously created section column via the [AddControl method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasColumn_)

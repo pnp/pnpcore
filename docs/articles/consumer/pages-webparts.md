@@ -82,7 +82,7 @@ Above code adds an unconfigured image web part to the page, but what if you want
 
 ![page in maintenance mode](../../images/workbench.png)
 
-Copy the json shown in the **Modern Pages** tab **without the surrounding square brackets**. Once you've the web part configuration json you need to escape the double quotes, simply doing a replace of " with \" does the trick.
+Copy the json shown in the **Modern Pages** tab **without the surrounding square brackets**. Once you've the web part configuration json you need to escape the double quotes, simply doing a replace of " with \\" does the trick.
 
 ```csharp
 // Create the page
@@ -106,4 +106,4 @@ await page.SaveAsync("MyPage.aspx");
 ```
 
 > [!Note]
-> Above approach using the workbench also works for get a formatted text snippet.
+> Above approach using the workbench also works good for getting a formatted text snippet.

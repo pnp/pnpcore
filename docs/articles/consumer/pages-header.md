@@ -41,7 +41,7 @@ Above sample will switch the header to use the Cut in Shape layout option with a
 
 ## Configuring a custom header
 
-The previous section already showed some cool page header features, but we can do better 😊 You can also use a full custom header which next to the options presented in the previous example also allows you to configure the background image of the header. To configure a header with an image you can use the [SetCustomPageHeader method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SetCustomPageHeader_System_String_System_Nullable_System_Double__System_Nullable_System_Double__) which takes the server relative url to the image to use as input.
+The previous section already showed some cool page header features, but we can do better 😊 You can also use a full custom header, which next to the options presented in the previous example, also allows you to configure the background image of the header. To configure a header with an image you can use the [SetCustomPageHeader method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SetCustomPageHeader_System_String_System_Nullable_System_Double__System_Nullable_System_Double__) which takes the server relative url to the image to use as input.
 
 ```csharp
 // Create the page
@@ -64,4 +64,4 @@ await page.SaveAsync("PageWithCustomHeader.aspx");
 ```
 
 > [!Note]
-> Note that you can control the header image offset by providing the needed X and Y offset values whe calling the [SetCustomPageHeader method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SetCustomPageHeader_System_String_System_Nullable_System_Double__System_Nullable_System_Double__).
+> Note that you can control the header image offset by providing the needed X and Y offset values when calling the [SetCustomPageHeader method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#collapsible-PnP_Core_Model_SharePoint_IPage_SetCustomPageHeader_System_String_System_Nullable_System_Double__System_Nullable_System_Double__).

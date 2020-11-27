@@ -1,6 +1,6 @@
-# Working with multi-lingual pages
+# Working with multilingual pages
 
-SharePoint does support multi-lingual pages in communication sites and the page API has some handy methods to help with that.
+SharePoint does support multilingual pages in communication sites and the page API has some handy methods to help with that.
 
 > [!Important]
 > Multilingual pages only work on SharePoint Communication sites.
@@ -9,7 +9,7 @@ SharePoint does support multi-lingual pages in communication sites and the page 
 
 Before you use multilingual pages on a site you need to ensure the site is configured to support multilingual pages. There are 2 pre-requisites:
 
-- The page needs to to support the needed languages
+- The page needs to support the needed languages
 - The multilingual page feature must have been activated
 
 The easiest approach to ensuring a site is ready for multilingual is calling the [EnsureMultilingualAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureMultilingualAsync_PnP_Core_Model_SharePoint_List_System_Int32__) on the [web object](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html).
@@ -26,7 +26,7 @@ Above sample enables the site for Dutch (1043) and French (1036) and enables the
 
 ## Getting the available translations of an existing page
 
-If you load a page on a site you do not always now which translated versions are avaiable and in what state those translations are. Calling the [GetPageTranslationsAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageTranslationsAsync) will get you a [IPageTranslationStatusCollection object](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html) that contains a list of languages for which the page was not yet translated and for the collection of [IPageTranslationStatus objects](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html) giving you information about the existing page translations.
+If you load a page on a site you do not always know which translated versions are available and in what state those translations are. Calling the [GetPageTranslationsAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageTranslationsAsync) will get you a [IPageTranslationStatusCollection object](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html) that contains a list of languages for which the page was not yet translated and a collection of [IPageTranslationStatus objects](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html) giving you information about the existing page translations.
 
 > [!Note]
 > A page needs to be saved before you can use the multilingual API.
