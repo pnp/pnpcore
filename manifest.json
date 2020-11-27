@@ -3630,7 +3630,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/pages-multilingual.html",
-          "hash": "yWMSFDgty33zuu6Epq5/aw=="
+          "hash": "1zoTgIasPCRCsEe7j7N6Og=="
         }
       },
       "is_incremental": false,
@@ -3642,7 +3642,19 @@
       "output": {
         ".html": {
           "relative_path": "articles/consumer/pages-promote.html",
-          "hash": "tUWDweAm69V8lVBLyzyNeQ=="
+          "hash": "H42rGrkeWNdIn/tom6jnZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/consumer/pages-social.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/consumer/pages-social.html",
+          "hash": "dqkwBM96+cCI6hpMkG12qQ=="
         }
       },
       "is_incremental": false,
@@ -3846,7 +3858,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "5A9GZYSuUgxkZtxVCG00QA=="
+          "hash": "TROXOjfm2AGLSu6R4CfCTA=="
         }
       },
       "is_incremental": false,
@@ -4230,7 +4242,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 32,
+          "total_file_count": 33,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
