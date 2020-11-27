@@ -93,10 +93,6 @@
 <h2 id="referencing-the-pnp-core-sdk-in-your-project">Referencing the PnP Core SDK in your project</h2>
 <p>The recommended approach is to use the preview <a href="https://www.nuget.org/packages/PnP.Core">PnP.Core nuget package</a> together with the preview <a href="https://www.nuget.org/packages/PnP.Core.Auth">PnP.Core.Auth nuget package</a>. The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
 Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version. If you don't want to rely on the PnP.Core.Auth package, you can eventually <a href="custom-authentication-provider.html">implement your own Authentication Provider</a>.</p>
-<div class="NOTE">
-<h5>Note</h5>
-<p>There are 2 package flavors: a <code>-preview</code> version and a <code>-blazor-preview</code> version. The latter one is meant to be used in Blazor Web Assembly projects and will exist until one of the SDK's references gets supported on Blazor.</p>
-</div>
 <p>If you want to debug the SDK code you can include the PnP Core project (<code>src\PnP.Core\PnP.Core.csproj</code>) in your project as a dependency.</p>
 <h2 id="configuring-the-needed-services">Configuring the needed services</h2>
 <p>In order to configure the needed services in a .Net Core console app, you can rely on the <code>AddPnPCore</code> extension method (defined in the PnP.Core nuget package) and on the <code>AddPnPCoreAuthentication</code> method (defined in the PnP.Core.Auth nuget package), like in the following code excerpt:</p>
