@@ -3870,7 +3870,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.ASPNetCore/README.html",
-          "hash": "2TlM28upOCyH20u9Dg8psQ=="
+          "hash": "2wDtvT+xhM7dkebNkPN87w=="
         }
       },
       "is_incremental": false,
@@ -3893,7 +3893,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.AzureFunction/README.html",
-          "hash": "XtwRMY8XVlOX/I2Y922fvQ=="
+          "hash": "1vQ9xzv16e1ESsYurh3Hdw=="
         }
       },
       "is_incremental": false,
@@ -3982,7 +3982,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.Blazor/README.html",
-          "hash": "JJNvujGGdqns/fuDeb+VfA=="
+          "hash": "yzFnNgbRYFDWnwbONSSnRQ=="
         }
       },
       "is_incremental": false,
@@ -4005,7 +4005,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.Console/README.html",
-          "hash": "TAZaus6H9SQUw63H6Tgoww=="
+          "hash": "+Njb+C0ous3MHbOHTwAmig=="
         }
       },
       "is_incremental": false,
@@ -4028,7 +4028,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.RPi/README.html",
-          "hash": "YdawQ0+ynJG4ldn8gr9MpQ=="
+          "hash": "nfLeSLSjlDcMM28r5VOTAA=="
         }
       },
       "is_incremental": false,
@@ -4051,7 +4051,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.WPF/README.html",
-          "hash": "cx+LJBQshl4mQ5BoiffZ6w=="
+          "hash": "DAto103gJpBN95Kg9jcDkw=="
         }
       },
       "is_incremental": false,
