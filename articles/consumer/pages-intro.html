@@ -134,8 +134,8 @@ await newPage.SaveAsync(&quot;MyPage.aspx&quot;);
 <p>When you create a new page the default will be an <strong>Article</strong> page, but you can also create other types of pages. The pages API supports these common types of pages:</p>
 <ul>
 <li><strong>Article page</strong>: this is typical page you'd create using the SharePoint user interface</li>
-<li><strong>Repost page</strong>: this page is re-posting of existing content where existing content can be a link to a resource on the internet or an other page in your SharePoint environment</li>
-<li><strong>Home page</strong>: this is page created with as purpose to become the home page of the site, this page has no page header by design</li>
+<li><strong>Repost page</strong>: this page is a re-posting of existing content where existing content can be a link to a resource on the internet or an other page in your SharePoint environment</li>
+<li><strong>Home page</strong>: this is a page created with as purpose to become the home page of the site, this page has no page header by design and has no page commenting</li>
 <li><strong>Spaces page</strong>: <a href="https://www.exploresharepointspaces.com/">SharePoint Spaces</a> pages can host mixed reality content</li>
 </ul>
 <p>To pick another page type during creation specify the type as input of the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_NewPageAsync_PnP_Core_Model_SharePoint_PageLayoutType_">NewPageAsync method</a>:</p>
@@ -197,7 +197,7 @@ await page.SaveAsync(&quot;MyPage.aspx&quot;);
 <pre><code class="lang-csharp">page.AddSection(CanvasSectionTemplate.TwoColumnVerticalSection, 1, VariantThemeType.Neutral, VariantThemeType.Strong);
 </code></pre>
 <h3 id="adding-controls-to-the-page">Adding controls to the page</h3>
-<p>A control is either a piece of text or a web part and can be added in one of the section columns. Below sample shows how to add the text part to an existing section column. It boils downb to two steps:</p>
+<p>A control is either a piece of text or a web part and can be added in one of the section columns. Below sample shows how to add the text part to an existing section column. It boils down to these two steps:</p>
 <ul>
 <li>Creating a text part via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_NewTextPart_System_String_">NewTextPart method</a></li>
 <li>Adding the text part into a previously created section column via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AddControl_PnP_Core_Model_SharePoint_ICanvasControl_PnP_Core_Model_SharePoint_ICanvasColumn_">AddControl method</a></li>

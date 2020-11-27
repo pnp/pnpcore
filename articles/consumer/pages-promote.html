@@ -116,13 +116,13 @@ await page.PromoteAsNewsArticleAsync();
 // Publish the page (recommended after posting as news but not required)
 await page.PublishAsync();
 </code></pre>
-<h2 id="demoting-a-news-article-back-to-a-regalar-page">Demoting a news article back to a regalar page</h2>
+<h2 id="demoting-a-news-article-back-to-a-regular-page">Demoting a news article back to a regular page</h2>
 <p>Demoting an existing news post to a regular page can be done with the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DemoteNewsArticleAsync">DemoteNewsArticleAsync method</a>.</p>
 <pre><code class="lang-csharp">// demote as news article
 await page.DemoteNewsArticleAsync();
 </code></pre>
 <h2 id="promoting-a-page-as-site-home-page">Promoting a page as site home page</h2>
-<p>If you want to set your page as the site's home page you have two options: you can use the convenient <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PromoteAsHomePageAsync">PromoteAsHomePageAsync method</a> on page object or you can load the web's <code>RootFolder</code> and set the <code>WelcomePage</code> property to the page you want to set as home page. The first approach is the recommended manner, both or shown here:</p>
+<p>If you want to set your page as the site's home page you have two options: you can use the convenient <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_PromoteAsHomePageAsync">PromoteAsHomePageAsync method</a> on the page object or you can load the web's <code>RootFolder</code> and set the <code>WelcomePage</code> property to the page you want to set as home page. The first approach is the recommended manner.</p>
 <pre><code class="lang-csharp">
 // Promote as home page of the site
 

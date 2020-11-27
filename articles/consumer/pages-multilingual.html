@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Working with multi-lingual pages | PnP Core SDK </title>
+    <title>Working with multilingual pages | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Working with multi-lingual pages | PnP Core SDK ">
+    <meta name="title" content="Working with multilingual pages | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -80,9 +80,9 @@
                   <div class="contribution-panel mobile-hide pull-right">
                       <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/pages-multilingual.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="working-with-multi-lingual-pages">Working with multi-lingual pages</h1>
+                    <h1 id="working-with-multilingual-pages">Working with multilingual pages</h1>
 
-<p>SharePoint does support multi-lingual pages in communication sites and the page API has some handy methods to help with that.</p>
+<p>SharePoint does support multilingual pages in communication sites and the page API has some handy methods to help with that.</p>
 <div class="IMPORTANT">
 <h5>Important</h5>
 <p>Multilingual pages only work on SharePoint Communication sites.</p>
@@ -90,7 +90,7 @@
 <h2 id="ensuring-your-site-is-correctly-configured-for-multilingual-pages">Ensuring your site is correctly configured for multilingual pages</h2>
 <p>Before you use multilingual pages on a site you need to ensure the site is configured to support multilingual pages. There are 2 pre-requisites:</p>
 <ul>
-<li>The page needs to to support the needed languages</li>
+<li>The page needs to support the needed languages</li>
 <li>The multilingual page feature must have been activated</li>
 </ul>
 <p>The easiest approach to ensuring a site is ready for multilingual is calling the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureMultilingualAsync_PnP_Core_Model_SharePoint_List_System_Int32__">EnsureMultilingualAsync method</a> on the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">web object</a>.</p>
@@ -103,7 +103,7 @@ await context.Web.EnsureMultilingualAsync(new List&lt;int&gt;() { 1043, 1036 });
 <p>Paul Bullock's <a href="https://capacreative.co.uk/resources/reference-sharepoint-online-languages-ids/">blog article on SharePoint Online language ids</a> is a useful resource to pick the right id for the language you need.</p>
 </div>
 <h2 id="getting-the-available-translations-of-an-existing-page">Getting the available translations of an existing page</h2>
-<p>If you load a page on a site you do not always now which translated versions are avaiable and in what state those translations are. Calling the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageTranslationsAsync">GetPageTranslationsAsync method</a> will get you a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html">IPageTranslationStatusCollection object</a> that contains a list of languages for which the page was not yet translated and for the collection of <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html">IPageTranslationStatus objects</a> giving you information about the existing page translations.</p>
+<p>If you load a page on a site you do not always know which translated versions are available and in what state those translations are. Calling the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_GetPageTranslationsAsync">GetPageTranslationsAsync method</a> will get you a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageTranslationStatusCollection.html">IPageTranslationStatusCollection object</a> that contains a list of languages for which the page was not yet translated and a collection of <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageTranslationStatus.html">IPageTranslationStatus objects</a> giving you information about the existing page translations.</p>
 <div class="NOTE">
 <h5>Note</h5>
 <p>A page needs to be saved before you can use the multilingual API.</p>

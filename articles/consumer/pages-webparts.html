@@ -147,7 +147,7 @@ await page.SaveAsync(&quot;MyPage.aspx&quot;);
 </code></pre>
 <p>Above code adds an unconfigured image web part to the page, but what if you wanted to add a configured web part? The web part configuration is stored in a json blob and configuring the web part on a page and copying the json blob is often the easiest approach. The easiest approach to do this is using the <strong>WorkBench</strong>: take your site url and append <code>_layouts/15/workbench.aspx</code> and you'll see an editor opening up. Put the web part you need on the page and configure it. Once that's done click on the <strong>Web part data</strong> button on the toolbar and you should should see this:</p>
 <p><img src="../../images/workbench.png" alt="page in maintenance mode"></p>
-<p>Copy the json shown in the <strong>Modern Pages</strong> tab <strong>without the surrounding square brackets</strong>. Once you've the web part configuration json you need to escape the double quotes, simply doing a replace of &quot; with &quot; does the trick.</p>
+<p>Copy the json shown in the <strong>Modern Pages</strong> tab <strong>without the surrounding square brackets</strong>. Once you've the web part configuration json you need to escape the double quotes, simply doing a replace of &quot; with \&quot; does the trick.</p>
 <pre><code class="lang-csharp">// Create the page
 var page = await context.Web.NewPageAsync();
 
@@ -169,7 +169,7 @@ await page.SaveAsync(&quot;MyPage.aspx&quot;);
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
-<p>Above approach using the workbench also works for get a formatted text snippet.</p>
+<p>Above approach using the workbench also works good for getting a formatted text snippet.</p>
 </div>
 </article>
           </div>
