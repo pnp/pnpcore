@@ -25557,15 +25557,15 @@ references:
   commentId: T:PnP.Core.Services.PnPContextFactory
   fullName: PnP.Core.Services.PnPContextFactory
   nameWithType: PnPContextFactory
-- uid: PnP.Core.Services.PnPContextFactory.#ctor(ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions},TelemetryClient)
-  name: PnPContextFactory(ILogger<PnPContext>, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>, TelemetryClient)
-  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_ILogger_PnP_Core_Services_PnPContext__PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_IOptions_PnP_Core_Services_PnPContextFactoryOptions__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__TelemetryClient_
-  commentId: M:PnP.Core.Services.PnPContextFactory.#ctor(ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions},TelemetryClient)
-  name.vb: PnPContextFactory(ILogger(Of PnPContext), SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions), TelemetryClient)
-  fullName: PnP.Core.Services.PnPContextFactory.PnPContextFactory(ILogger<PnP.Core.Services.PnPContext>, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions<PnP.Core.Services.PnPContextFactoryOptions>, IOptions<PnP.Core.Services.PnPGlobalSettingsOptions>, TelemetryClient)
-  fullName.vb: PnP.Core.Services.PnPContextFactory.PnPContextFactory(ILogger(Of PnP.Core.Services.PnPContext), PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions(Of PnP.Core.Services.PnPContextFactoryOptions), IOptions(Of PnP.Core.Services.PnPGlobalSettingsOptions), TelemetryClient)
-  nameWithType: PnPContextFactory.PnPContextFactory(ILogger<PnPContext>, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>, TelemetryClient)
-  nameWithType.vb: PnPContextFactory.PnPContextFactory(ILogger(Of PnPContext), SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions), TelemetryClient)
+- uid: PnP.Core.Services.PnPContextFactory.#ctor(ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions})
+  name: PnPContextFactory(ILogger<PnPContext>, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_ILogger_PnP_Core_Services_PnPContext__PnP_Core_Services_SharePointRestClient_PnP_Core_Services_MicrosoftGraphClient_IOptions_PnP_Core_Services_PnPContextFactoryOptions__IOptions_PnP_Core_Services_PnPGlobalSettingsOptions__
+  commentId: M:PnP.Core.Services.PnPContextFactory.#ctor(ILogger{PnP.Core.Services.PnPContext},PnP.Core.Services.SharePointRestClient,PnP.Core.Services.MicrosoftGraphClient,IOptions{PnP.Core.Services.PnPContextFactoryOptions},IOptions{PnP.Core.Services.PnPGlobalSettingsOptions})
+  name.vb: PnPContextFactory(ILogger(Of PnPContext), SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions))
+  fullName: PnP.Core.Services.PnPContextFactory.PnPContextFactory(ILogger<PnP.Core.Services.PnPContext>, PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions<PnP.Core.Services.PnPContextFactoryOptions>, IOptions<PnP.Core.Services.PnPGlobalSettingsOptions>)
+  fullName.vb: PnP.Core.Services.PnPContextFactory.PnPContextFactory(ILogger(Of PnP.Core.Services.PnPContext), PnP.Core.Services.SharePointRestClient, PnP.Core.Services.MicrosoftGraphClient, IOptions(Of PnP.Core.Services.PnPContextFactoryOptions), IOptions(Of PnP.Core.Services.PnPGlobalSettingsOptions))
+  nameWithType: PnPContextFactory.PnPContextFactory(ILogger<PnPContext>, SharePointRestClient, MicrosoftGraphClient, IOptions<PnPContextFactoryOptions>, IOptions<PnPGlobalSettingsOptions>)
+  nameWithType.vb: PnPContextFactory.PnPContextFactory(ILogger(Of PnPContext), SharePointRestClient, MicrosoftGraphClient, IOptions(Of PnPContextFactoryOptions), IOptions(Of PnPGlobalSettingsOptions))
 - uid: PnP.Core.Services.PnPContextFactory.#ctor*
   name: PnPContextFactory
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory__ctor_
@@ -25712,19 +25712,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContextFactory.SharePointRestClient
   nameWithType: PnPContextFactory.SharePointRestClient
-- uid: PnP.Core.Services.PnPContextFactory.TelemetryClient
-  name: TelemetryClient
-  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_TelemetryClient
-  commentId: P:PnP.Core.Services.PnPContextFactory.TelemetryClient
-  fullName: PnP.Core.Services.PnPContextFactory.TelemetryClient
-  nameWithType: PnPContextFactory.TelemetryClient
-- uid: PnP.Core.Services.PnPContextFactory.TelemetryClient*
-  name: TelemetryClient
-  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_TelemetryClient_
-  commentId: Overload:PnP.Core.Services.PnPContextFactory.TelemetryClient
-  isSpec: "True"
-  fullName: PnP.Core.Services.PnPContextFactory.TelemetryClient
-  nameWithType: PnPContextFactory.TelemetryClient
 - uid: PnP.Core.Services.PnPContextFactoryCollectionExtensions
   name: PnPContextFactoryCollectionExtensions
   href: api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html
