@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using PnP.Core.Services;
 using PnP.Core.Services.Builder.Configuration;
-using PnP.Core.Test.Utilities;
 using System;
 
 namespace PnP.Core.Test.Services
@@ -39,7 +37,6 @@ namespace PnP.Core.Test.Services
 
             // Add a PnP Context Factory service instance
             return collection
-                .AddTelemetryServices()
                 .AddHttpHandlers()
                 .AddHttpClients()
                 .AddPnPServices();
@@ -67,23 +64,6 @@ namespace PnP.Core.Test.Services
         {
             return collection
                    .AddTransient<IPnPContextFactory, TestPnPContextFactory>();
-        }
-
-        private static IServiceCollection AddTelemetryServices(this IServiceCollection collection)
-        {
-            var globalOptionsService = collection.BuildServiceProvider().GetRequiredService<IOptions<PnPGlobalSettingsOptions>>();
-
-            // Setup Azure App Insights
-            // See https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/WorkerServiceSampleWithApplicationInsights as example
-            return collection.AddApplicationInsightsTelemetryWorkerService(options =>
-            {
-                if (!globalOptionsService.Value.DisableTelemetry && !TestCommon.RunningInGitHubWorkflow())
-                {
-                    // Test AppInsights
-                    options.InstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
-                }
-            });
-
         }
     }
 }

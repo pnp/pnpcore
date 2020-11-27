@@ -1,9 +1,11 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Model.Security;
 using System;
 using System.Linq;
+#if !NETSTANDARD2_0
+using System.Runtime.InteropServices;
+#endif
 using System.Threading.Tasks;
 
 namespace PnP.Core.Services
@@ -21,17 +23,12 @@ namespace PnP.Core.Services
         /// <param name="microsoftGraphClient">Microsoft Graph http client to use</param>
         /// <param name="contextOptions"><see cref="PnPContextFactory"/> options</param>
         /// <param name="globalOptions">Global options to use</param>
-        /// <param name="telemetryClient">Connected Azure AppInsights telemetry client</param>
         public PnPContextFactory(
             ILogger<PnPContext> logger,
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
             IOptions<PnPContextFactoryOptions> contextOptions,
-            IOptions<PnPGlobalSettingsOptions> globalOptions
-#if !BLAZOR
-            , TelemetryClient telemetryClient
-#endif
-            )
+            IOptions<PnPGlobalSettingsOptions> globalOptions)
         {
             // Store logger and options locally
             Log = logger;
@@ -39,11 +36,8 @@ namespace PnP.Core.Services
             MicrosoftGraphClient = microsoftGraphClient;
             ContextOptions = contextOptions?.Value;
             GlobalOptions = globalOptions?.Value;
-#if !BLAZOR
-            TelemetryClient = telemetryClient;
-#else
-            TelemetryClient = null;
-#endif
+
+            ConnectTelemetry();            
         }
 
         /// <summary>
@@ -62,9 +56,9 @@ namespace PnP.Core.Services
         protected MicrosoftGraphClient MicrosoftGraphClient { get; private set; }
 
         /// <summary>
-        /// Connected Azure AppInsights telemetry client
+        /// Connected Telemetry client
         /// </summary>
-        protected TelemetryClient TelemetryClient { get; private set; }
+        internal TelemetryManager TelemetryManager { get; private set; }
 
         /// <summary>
         /// Options used to configure this <see cref="PnPContext"/>
@@ -145,7 +139,7 @@ namespace PnP.Core.Services
         public async virtual Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider)
         {
             // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient)
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
             {
                 Uri = url
             };
@@ -180,7 +174,7 @@ namespace PnP.Core.Services
         public async virtual Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider)
         {
             // Use the provided settings to create a new instance of SPOContext
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager);
 
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
@@ -219,10 +213,32 @@ namespace PnP.Core.Services
             context.Uri = context.Group.WebUrl;
         }
 
+        internal void ConnectTelemetry()
+        {
+            bool connectTelemetry = true;
+
+            if (GlobalOptions != null && GlobalOptions.DisableTelemetry)
+            {
+                connectTelemetry = false;
+            }
+
+#if !NETSTANDARD2_0
+            if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
+            {
+               connectTelemetry = false;            
+            }
+#endif
+
+            if (connectTelemetry)
+            {
+                TelemetryManager = new TelemetryManager(GlobalOptions);
+            }
+        }
+
         internal async Task ConfigureTelemetry(PnPContext context)
         {
             // Populate the Azure AD tenant id
-            if (TelemetryClient != null && GlobalOptions != null && !GlobalOptions.DisableTelemetry)
+            if (TelemetryManager != null && GlobalOptions != null && !GlobalOptions.DisableTelemetry)
             {
                 await context.SetAADTenantId().ConfigureAwait(false);
             }

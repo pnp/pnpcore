@@ -1,5 +1,4 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
@@ -56,7 +55,7 @@ namespace PnP.Core.Services
 
         private readonly PnPGlobalSettingsOptions globalOptions;
         private readonly PnPContextFactoryOptions contextOptions;
-        private readonly TelemetryClient telemetry;
+        private readonly TelemetryManager telemetry;
         private Batch currentBatch;
 
         #endregion
@@ -68,14 +67,14 @@ namespace PnP.Core.Services
                            MicrosoftGraphClient microsoftGraphClient,
                            IOptions<PnPContextFactoryOptions> contextOptions,
                            IOptions<PnPGlobalSettingsOptions> globalOptions,
-                           TelemetryClient telemetryClient) :
+                           TelemetryManager telemetryManager) :
             this(logger,
                 authenticationProvider,
                 sharePointRestClient,
                 microsoftGraphClient,
                 contextOptions?.Value,
                 globalOptions?.Value,
-                telemetryClient)
+                telemetryManager)
         {
         }
 
@@ -85,7 +84,7 @@ namespace PnP.Core.Services
                            MicrosoftGraphClient microsoftGraphClient,
                            PnPContextFactoryOptions contextOptions,
                            PnPGlobalSettingsOptions globalOptions,
-                           TelemetryClient telemetryClient)
+                           TelemetryManager telemetryManager)
         {
             Id = Guid.NewGuid();
             Logger = logger;
@@ -98,7 +97,7 @@ namespace PnP.Core.Services
             GraphClient = microsoftGraphClient;
             this.globalOptions = globalOptions;
             this.contextOptions = contextOptions;
-            telemetry = telemetryClient;
+            telemetry = telemetryManager;
 
             if (this.contextOptions != null)
             {
@@ -107,7 +106,7 @@ namespace PnP.Core.Services
                 GraphCanUseBeta = this.contextOptions.GraphCanUseBeta;
             }
 
-            BatchClient = new BatchClient(this, this.globalOptions, telemetryClient);
+            BatchClient = new BatchClient(this, this.globalOptions, telemetryManager);
         }
         #endregion
 
@@ -485,11 +484,8 @@ namespace PnP.Core.Services
 
             if (disposing)
             {
-                // Flush telemetry
-                if (telemetry != null)
-                {
-                    telemetry.Flush();
-                }
+                // Future, lightweight, custom logic comes here
+                // Note: flushing telemetry does not belong here since apps potentially can create/dispose a log of contexts
             }
 
             disposed = true;

@@ -14,9 +14,13 @@
 		<PackageProjectUrl>https://aka.ms/pnp/coresdk</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/pnp/pnpcore</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<Configurations>Debug;Release;Blazor</Configurations>
+		<Configurations>Debug;Release</Configurations>
 		<PackageIcon>nugeticon.png</PackageIcon>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+	  <DefineConstants>TRACE</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -31,7 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-		<PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.15.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights" Version="2.13.1" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
@@ -44,7 +48,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
-		<PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.16.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights" Version="2.16.0" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />

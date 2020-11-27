@@ -1,5 +1,4 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using PnP.Core.Model;
 using System;
 using System.Collections.Generic;
@@ -121,18 +120,11 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="context">PnP Context</param>
         /// <param name="globalOptions">Global settings to use</param>
-        /// <param name="telemetryClient">Azure AppInsihgts telemetry client to use</param>
-        internal BatchClient(PnPContext context, PnPGlobalSettingsOptions globalOptions, TelemetryClient telemetryClient)
+        /// <param name="telemetry">Telemetry manager</param>
+        internal BatchClient(PnPContext context, PnPGlobalSettingsOptions globalOptions, TelemetryManager telemetry)
         {
             PnPContext = context;
-            if (telemetryClient != null)
-            {
-                telemetryManager = new TelemetryManager(telemetryClient, globalOptions);
-            }
-            else
-            {
-                telemetryManager = null;
-            }
+            telemetryManager = telemetry;
 
             HttpMicrosoftGraphMaxRetries = globalOptions.HttpMicrosoftGraphMaxRetries;
             HttpMicrosoftGraphDelayInSeconds = globalOptions.HttpMicrosoftGraphDelayInSeconds;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -9,10 +10,12 @@ namespace PnP.Core.Services
 {
     internal class TelemetryManager
     {
+        private readonly TelemetryConfiguration telemetryConfiguration = TelemetryConfiguration.CreateDefault();
 
-        internal TelemetryManager(TelemetryClient telemetryClient, PnPGlobalSettingsOptions globalOptions)
+        internal TelemetryManager(PnPGlobalSettingsOptions globalOptions)
         {
-            TelemetryClient = telemetryClient;
+            telemetryConfiguration.InstrumentationKey = "ffe6116a-bda0-4f0a-b0cf-d26f1b0d84eb";
+            TelemetryClient = new TelemetryClient(telemetryConfiguration);
             GlobalOptions = globalOptions;
 
             Assembly coreAssembly = Assembly.GetExecutingAssembly();
@@ -36,7 +39,6 @@ namespace PnP.Core.Services
 
         internal void LogServiceRequest(Batch batch, BatchRequest request, PnPContext context)
         {
-
             TelemetryClient.TrackEvent("PnPCoreRequest", PopulateProperties(request, batch, context));
         }
 

@@ -1,7 +1,7 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PnP.Core.Services;
+using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -48,9 +48,13 @@ namespace PnP.Core.Test.Services
             SharePointRestClient sharePointRestClient,
             MicrosoftGraphClient microsoftGraphClient,
             IOptions<PnPContextFactoryOptions> contextOptions,
-            IOptions<PnPGlobalSettingsOptions> globalOptions,
-            TelemetryClient telemetryClient) : base(logger, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions, telemetryClient)
+            IOptions<PnPGlobalSettingsOptions> globalOptions) : base(logger, sharePointRestClient, microsoftGraphClient, contextOptions, globalOptions)
         {
+            if (TelemetryManager != null && !TestCommon.RunningInGitHubWorkflow())
+            {
+                // Send telemetry to the test Azure AppInsights instance
+                TelemetryManager.TelemetryClient.InstrumentationKey = "6073339d-9e70-4004-9ff7-1345316ade97";
+            }
         }
 
         public override PnPContext Create(string name)
@@ -96,7 +100,7 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider)
         {
-            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager);
 
             ConfigurePnPContextForTesting(ref context);
 
@@ -112,7 +116,7 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(Guid groupId)
         {
-            var context = new PnPContext(Log, ContextOptions.DefaultAuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryClient);
+            var context = new PnPContext(Log, ContextOptions.DefaultAuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager);
 
             ConfigurePnPContextForTesting(ref context);
 

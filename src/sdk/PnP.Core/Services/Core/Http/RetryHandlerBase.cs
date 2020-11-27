@@ -68,7 +68,7 @@ namespace PnP.Core.Services
                 // Drain response content to free responses.
                 if (response.Content != null)
                 {
-#if NET5_0
+#if !NETSTANDARD2_0
                     await response.Content.ReadAsByteArrayAsync(cancellationToken).ConfigureAwait(false);
 #else
                     await response.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
