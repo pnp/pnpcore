@@ -22,6 +22,8 @@
         href: consumer/pages-promote.md
       - name: Multi-lingual pages
         href: consumer/pages-multilingual.md
+      - name: Page commenting
+        href: consumer/pages-social.md
   - name: Get data using paging
     href: consumer/using%20paging.md
   - name: Configuring the PnP Core SDK
