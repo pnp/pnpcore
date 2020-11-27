@@ -4,16 +4,16 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version 2.0
 
 New-Item -Path ./dev/docs -Name "demos" -ItemType "directory"
-copy-item -Force ./dev/src/samples/* -Destination ./dev/docs/demos
-Get-item ./dev/src/samples/* | Foreach-Object {
+copy-item -Force ./dev/samples/* -Destination ./dev/docs/demos
+Get-item ./dev/samples/* | Foreach-Object {
   if($_.PSIsContainer){
       $_.BaseName
-      Copy-Item "./dev/src/samples/$($_.Name)/*.md" -Destination "./dev/docs/demos/$($_.Name)" -Force
-      Copy-Item "./dev/src/samples/$($_.Name)/*.png" -Destination "./dev/docs/demos/$($_.Name)" -Force
+      Copy-Item "./dev/samples/$($_.Name)/*.md" -Destination "./dev/docs/demos/$($_.Name)" -Force
+      Copy-Item "./dev/samples/$($_.Name)/*.png" -Destination "./dev/docs/demos/$($_.Name)" -Force
 
-      if(Test-Path "./dev/src/samples/$($_.Name)/docs-images"){
+      if(Test-Path "./dev/samples/$($_.Name)/docs-images"){
         New-Item -Path "./dev/docs/demos/$($_.Name)/" -Name "docs-images" -ItemType "directory" -Force
-        Copy-Item "./dev/src/samples/$($_.Name)/docs-images/*.png" -Destination "./dev/docs/demos/$($_.Name)/docs-images" -Force
+        Copy-Item "./dev/samples/$($_.Name)/docs-images/*.png" -Destination "./dev/docs/demos/$($_.Name)/docs-images" -Force
       }
   }
 }

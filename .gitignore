@@ -351,6 +351,6 @@ MigrationBackup/
 
 # App.Config files
 [Aa]pp.[Cc]onfig
-/src/samples/Demo.ASPNetCore/appsettings.officedevpnp.json
-/src/samples/Demo.AzureFunction/Certificates
-/src/samples/Demo.AzureFunction/Properties/ServiceDependencies
+/samples/Demo.ASPNetCore/appsettings.officedevpnp.json
+/samples/Demo.AzureFunction/Certificates
+/samples/Demo.AzureFunction/Properties/ServiceDependencies
