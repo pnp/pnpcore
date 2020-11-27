@@ -18,30 +18,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PnP.Core.Auth.Test", "PnP.C
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Blazor|Any CPU = Blazor|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FF86E59F-A4CB-4DBA-9681-BB6FB2FF7596}.Blazor|Any CPU.ActiveCfg = Blazor|Any CPU
-		{FF86E59F-A4CB-4DBA-9681-BB6FB2FF7596}.Blazor|Any CPU.Build.0 = Blazor|Any CPU
 		{FF86E59F-A4CB-4DBA-9681-BB6FB2FF7596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF86E59F-A4CB-4DBA-9681-BB6FB2FF7596}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF86E59F-A4CB-4DBA-9681-BB6FB2FF7596}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF86E59F-A4CB-4DBA-9681-BB6FB2FF7596}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5FE55D6E-AFC4-4B8A-A5F7-E88EF2C92912}.Blazor|Any CPU.ActiveCfg = Blazor|Any CPU
 		{5FE55D6E-AFC4-4B8A-A5F7-E88EF2C92912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5FE55D6E-AFC4-4B8A-A5F7-E88EF2C92912}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FE55D6E-AFC4-4B8A-A5F7-E88EF2C92912}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FE55D6E-AFC4-4B8A-A5F7-E88EF2C92912}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3309B9C6-8407-4697-A534-5242B4504FD8}.Blazor|Any CPU.ActiveCfg = Release|Any CPU
-		{3309B9C6-8407-4697-A534-5242B4504FD8}.Blazor|Any CPU.Build.0 = Release|Any CPU
 		{3309B9C6-8407-4697-A534-5242B4504FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3309B9C6-8407-4697-A534-5242B4504FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3309B9C6-8407-4697-A534-5242B4504FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3309B9C6-8407-4697-A534-5242B4504FD8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D11B7FF5-DE02-4DAA-A634-62B9D6C684F8}.Blazor|Any CPU.ActiveCfg = Release|Any CPU
-		{D11B7FF5-DE02-4DAA-A634-62B9D6C684F8}.Blazor|Any CPU.Build.0 = Release|Any CPU
 		{D11B7FF5-DE02-4DAA-A634-62B9D6C684F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D11B7FF5-DE02-4DAA-A634-62B9D6C684F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D11B7FF5-DE02-4DAA-A634-62B9D6C684F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
