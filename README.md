@@ -34,7 +34,7 @@ Absolutely! One of the key reasons for building PnP Core SDK is to nicely fit in
 - This library will work in all places where .NET will work (see [our samples](src/samples) to learn more):
   - Backend: e.g. [Azure functions v3](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-class-library)
   - Web: e.g. [ASP.NET core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1), [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
-  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
+  - Browser (WebAssembly (WASM)): [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor). We only support [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) with our .NET 5.0 version
   - Windows Client: [Windows Forms, WPF](https://docs.microsoft.com/en-us/dotnet/desktop/?view=netdesktop-5.0)
   - Mobile: [Xamarin](https://dotnet.microsoft.com/apps/xamarin)
   

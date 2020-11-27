@@ -15,9 +15,6 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the preview [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
 Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version. If you don't want to rely on the PnP.Core.Auth package, you can eventually [implement your own Authentication Provider](./custom-authentication-provider.md).
 
-> [!Note]
-> There are 2 package flavors: a `-preview` version and a `-blazor-preview` version. The latter one is meant to be used in Blazor Web Assembly projects and will exist until one of the SDK's references gets supported on Blazor.
-
 If you want to debug the SDK code you can include the PnP Core project (`src\PnP.Core\PnP.Core.csproj`) in your project as a dependency.
 
 ## Configuring the needed services
