@@ -186,7 +186,6 @@ Each night these preview packages are refreshed, so you can always upgrade to th
 // Set environment to use
 .UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables
 // Configure logging
-// Configure logging
 .ConfigureServices((hostingContext, services) =&gt;
 {
   // Add the PnP Core SDK library
@@ -209,7 +208,7 @@ Each night these preview packages are refreshed, so you can always upgrade to th
                   TenantId = &quot;{your_tenant_id}&quot;,
                   Interactive = new PnPCoreAuthenticationInteractiveOptions
                   {
-                      RedirectUri = &quot;http://localhost&quot;
+                      RedirectUri = new Uri(&quot;http://localhost&quot;)
                   }
               });
 
