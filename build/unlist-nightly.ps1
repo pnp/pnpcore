@@ -20,7 +20,7 @@ function CleanPackage {
     foreach ($version in $json.versions) {
         # Only automatically unlist for preview releases
         if (($version.IndexOf("-") -gt -1) -and ($unlisted -le ($toUnlist - $VersionsToKeep))) {
-            Write-Host "Unlisting $Package, Ver $version"
+            Write-Host "Unlisting $Package, version $version using key $($key.Substring(0,5))"
             $unlisted = $unlisted + 1
             nuget delete $Package $version $key -source https://api.nuget.org/v3/index.json -NonInteractive
         }
@@ -29,5 +29,5 @@ function CleanPackage {
 
 $ApiKey = $("$env:NUGET_API_KEY")
 
-CleanPackage "PnP.Core" 10 $ApiKey
-CleanPackage "PnP.Core.Auth" 10 $ApiKey
+CleanPackage "PnP.Core" 30 $ApiKey
+CleanPackage "PnP.Core.Auth" 30 $ApiKey
