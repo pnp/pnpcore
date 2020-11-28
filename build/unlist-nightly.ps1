@@ -29,5 +29,6 @@ function CleanPackage {
 
 $ApiKey = $("$env:NUGET_API_KEY")
 
-CleanPackage "PnP.Core" 5 $ApiKey
-CleanPackage "PnP.Core.Auth" 5 $ApiKey
+CleanPackage "PnP.Core" 10 $ApiKey
+CleanPackage "PnP.Core.Auth" 10 $ApiKey
+CleanPackage "PnP.Framework" 10 $ApiKey
