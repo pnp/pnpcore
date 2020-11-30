@@ -1374,7 +1374,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IField.html",
-          "hash": "ysDR2b24lnWYCkSfzzQQ3Q=="
+          "hash": "cKG++kbkb++gPRbm2dCq9Q=="
         }
       },
       "is_incremental": false,
@@ -2982,7 +2982,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.TransientDictionary.html",
-          "hash": "Ci4ma5hqxqH9UFOiHpijNQ=="
+          "hash": "tGBJ5uf3A483JPZd0rAASw=="
         }
       },
       "is_incremental": false,

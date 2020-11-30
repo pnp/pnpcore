@@ -7376,6 +7376,71 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.MinimumValue
   nameWithType: IField.MinimumValue
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldLookupValue(System.Int32)
+  name: NewFieldLookupValue(Int32)
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldLookupValue_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldLookupValue(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldLookupValue(System.Int32)
+  nameWithType: IField.NewFieldLookupValue(Int32)
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldLookupValue*
+  name: NewFieldLookupValue
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldLookupValue_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.NewFieldLookupValue
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldLookupValue
+  nameWithType: IField.NewFieldLookupValue
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldTaxonomyValue(Guid,System.String,System.Int32)
+  name: NewFieldTaxonomyValue(Guid, String, Int32)
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldTaxonomyValue_Guid_System_String_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldTaxonomyValue(Guid,System.String,System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldTaxonomyValue(Guid, System.String, System.Int32)
+  nameWithType: IField.NewFieldTaxonomyValue(Guid, String, Int32)
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldTaxonomyValue*
+  name: NewFieldTaxonomyValue
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldTaxonomyValue_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.NewFieldTaxonomyValue
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldTaxonomyValue
+  nameWithType: IField.NewFieldTaxonomyValue
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldUrlValue(System.String,System.String)
+  name: NewFieldUrlValue(String, String)
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUrlValue_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldUrlValue(System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldUrlValue(System.String, System.String)
+  nameWithType: IField.NewFieldUrlValue(String, String)
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldUrlValue*
+  name: NewFieldUrlValue
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUrlValue_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.NewFieldUrlValue
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldUrlValue
+  nameWithType: IField.NewFieldUrlValue
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldUserValue(System.Int32)
+  name: NewFieldUserValue(Int32)
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUserValue_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldUserValue(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldUserValue(System.Int32)
+  nameWithType: IField.NewFieldUserValue(Int32)
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldUserValue*
+  name: NewFieldUserValue
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUserValue_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.NewFieldUserValue
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldUserValue
+  nameWithType: IField.NewFieldUserValue
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(PnP.Core.Model.TransientDictionary)
+  name: NewFieldValueCollection(TransientDictionary)
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldValueCollection_PnP_Core_Model_TransientDictionary_
+  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(PnP.Core.Model.TransientDictionary)
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(PnP.Core.Model.TransientDictionary)
+  nameWithType: IField.NewFieldValueCollection(TransientDictionary)
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection*
+  name: NewFieldValueCollection
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldValueCollection_
+  commentId: Overload:PnP.Core.Model.SharePoint.IField.NewFieldValueCollection
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection
+  nameWithType: IField.NewFieldValueCollection
 - uid: PnP.Core.Model.SharePoint.IField.NumberOfLines
   name: NumberOfLines
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NumberOfLines
