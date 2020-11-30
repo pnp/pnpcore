@@ -76,6 +76,16 @@ namespace PnP.Core.Model.SharePoint
             return updateMessage;
         }
 
+        internal override object ToValidateUpdateItemJson()
+        {
+            if (!HasValue(nameof(TermId)) || !HasValue(nameof(Label)))
+            {
+                return "";
+            }
+
+            return $"{Label}|{TermId};";
+        }
+
         internal override string ToCsomXml()
         {
             if (!HasValue(nameof(TermId)) || !HasValue(nameof(Label)))

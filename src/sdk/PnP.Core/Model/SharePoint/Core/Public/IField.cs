@@ -410,6 +410,48 @@ namespace PnP.Core.Model.SharePoint
         public FieldUserSelectionMode SelectionMode { get; set; }
         #endregion
 
+        #region FieldValue object creation
+        /// <summary>
+        /// Creates a new <see cref="IFieldUrlValue"/> object
+        /// </summary>
+        /// <param name="url">Url value</param>
+        /// <param name="description">Optional description value</param>
+        /// <returns>Configured <see cref="IFieldUrlValue"/> object</returns>
+        public IFieldUrlValue NewFieldUrlValue(string url, string description = null);
+
+        /// <summary>
+        /// Creates a new <see cref="IFieldLookupValue"/> object
+        /// </summary>
+        /// <param name="lookupId">Id of the lookup value</param>
+        /// <returns>Configured <see cref="IFieldLookupValue"/> object</returns>
+        public IFieldLookupValue NewFieldLookupValue(int lookupId);
+
+        /// <summary>
+        /// Creates a new <see cref="IFieldUserValue"/> object
+        /// </summary>
+        /// <param name="userId">Id of the user</param>
+        /// <returns>Configured <see cref="IFieldUserValue"/> object</returns>
+        public IFieldUserValue NewFieldUserValue(int userId);
+
+        /// <summary>
+        /// Creates a new <see cref="IFieldTaxonomyValue"/> object
+        /// </summary>
+        /// <param name="termId">Name of the term to set</param>
+        /// <param name="label">Label of the term to set</param>
+        /// <param name="wssId">Optionally provide the wssId value</param>
+        /// <returns>Configured <see cref="IFieldTaxonomyValue"/> object</returns>
+        public IFieldTaxonomyValue NewFieldTaxonomyValue(Guid termId, string label, int wssId = -1);
+
+        /// <summary>
+        /// Creates a new collection to hold <see cref="IFieldValue"/> objects
+        /// </summary>
+        /// <param name="parent">List item values collection that's being updated by this collection</param>
+        /// <returns></returns>
+        public IFieldValueCollection NewFieldValueCollection(TransientDictionary parent);
+
+        #endregion
+
+
         // TODO Add the following properties
         // ======= SP.FieldRatingScale ==========
         // https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.FieldRatingScale

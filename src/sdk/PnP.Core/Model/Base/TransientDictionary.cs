@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model.SharePoint;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -141,7 +142,17 @@ namespace PnP.Core.Model
         {
             foreach (var v in values)
             {
-                SystemAdd(v.Key, v.Value);
+                // Ensure FieldValue have their parent set if not yet done                
+                var field = v.Value;
+                if (field is FieldValue fieldValue)
+                {
+                    if (fieldValue.Parent == null)
+                    {
+                        fieldValue.Parent = this;
+                    }
+                }
+
+                SystemAdd(v.Key, field);
             }
         }
 

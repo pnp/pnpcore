@@ -1,4 +1,4 @@
---batchresponse_cba3fcfc-086c-415e-b91f-67d69f43a190
+--batchresponse_428fcf68-1b05-4d46-a947-c286243e4592
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "231",
+"ID": "285",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{34BB3517-CACA-4C66-B4F7-6210DA2A62C3}",
+"UniqueId": "{0F86A8DA-EAE2-4E3A-AF97-6A494E55037D}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
@@ -47,14 +47,19 @@ CONTENT-TYPE: application/json; charset=utf-8
 "_AuthorByline.span": "",
 "_AuthorByline.email": "",
 "_AuthorByline.sip": "",
-"_AuthorByline.jobTitle": "0",
-"_AuthorByline.department": "0",
+"_AuthorByline.jobTitle": "",
+"_AuthorByline.department": "",
 "_AuthorByline.picture": "",
 "LayoutWebpartsContent": "<div dir=\"\" class=\"ms-rtestate-field\"><\u002fdiv>",
 "BannerImageUrl": "",
 "BannerImageUrl.desc": "",
 "PromotedState": "",
 "PromotedState.": "",
+"_OriginalSourceUrl": "",
+"_OriginalSourceSiteId": "",
+"_OriginalSourceWebId": "",
+"_OriginalSourceListId": "",
+"_OriginalSourceItemId": "",
 "ItemChildCount": "0",
 "FolderChildCount": "0",
 "A2ODMountCount": "",
@@ -75,4 +80,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_cba3fcfc-086c-415e-b91f-67d69f43a190--
+--batchresponse_428fcf68-1b05-4d46-a947-c286243e4592--

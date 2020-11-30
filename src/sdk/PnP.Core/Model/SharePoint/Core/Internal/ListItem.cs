@@ -112,7 +112,16 @@ namespace PnP.Core.Model.SharePoint
                 {
                     dynamic field = new ExpandoObject();
                     field.FieldName = item.Key;
-                    field.FieldValue = item.Value;
+
+                    if (item.Value is FieldValue fieldItemValue)
+                    {
+                        field.FieldValue = fieldItemValue.ToValidateUpdateItemJson();
+                    }
+                    else
+                    {
+                        field.FieldValue = item.Value;
+                    }
+
                     itemValues.Add(field);
                 }
                 body.formValues = itemValues;

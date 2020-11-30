@@ -177,6 +177,11 @@ namespace PnP.Core.Model.SharePoint
             return updateMessage;
         }
 
+        internal override object ToValidateUpdateItemJson()
+        {
+            throw new NotImplementedException();
+        }
+
         internal override string ToCsomXml()
         {
             throw new NotImplementedException();

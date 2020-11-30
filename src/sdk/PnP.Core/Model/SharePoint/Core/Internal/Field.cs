@@ -296,6 +296,79 @@ namespace PnP.Core.Model.SharePoint
 
             return this;
         }
+
+        #region FieldValue object creation
+        public IFieldUrlValue NewFieldUrlValue(string url, string description = null)
+        {
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
+            return new FieldUrlValue(InternalName, null)
+            {
+                Url = url,
+                Description = description ?? url,
+                Field = this
+            };
+        }
+
+        public IFieldLookupValue NewFieldLookupValue(int lookupId)
+        {
+            if (lookupId < -1)
+            {
+                throw new ArgumentNullException(nameof(lookupId));
+            }
+
+            return new FieldLookupValue(InternalName, null)
+            {
+                LookupId = lookupId,
+                Field = this
+            };
+        }
+
+        public IFieldUserValue NewFieldUserValue(int userId)
+        {
+            if (userId < -1)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
+
+            return new FieldUserValue(InternalName, null)
+            {
+                LookupId = userId,
+                Field = this
+            };
+        }
+
+        public IFieldTaxonomyValue NewFieldTaxonomyValue(Guid termId, string label, int wssId = -1)
+        {
+            if (termId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(termId));
+            }
+
+            if (label == null)
+            {
+                throw new ArgumentNullException(nameof(label));
+            }
+
+            return new FieldTaxonomyValue(InternalName, null)
+            {
+                TermId = termId,
+                Label = label,
+                WssId = wssId,
+                Field = this
+            };
+        }
+
+        public IFieldValueCollection NewFieldValueCollection(TransientDictionary parent)
+        {
+            return new FieldValueCollection(this, InternalName, parent);
+        }
+
+        #endregion
+
         #endregion
     }
 }

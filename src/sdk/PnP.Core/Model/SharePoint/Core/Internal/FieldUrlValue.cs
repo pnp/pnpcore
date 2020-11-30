@@ -50,9 +50,10 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
-            if (!properties.Any())
+            // empty url value => return null. Needed to have the same behaviour as when doing a GetAsync() call
+            if (!properties.Any() || string.IsNullOrEmpty(properties.First().Value))
             {
-                return this;
+                return null;
             }
 
             // first property is the url field
@@ -86,6 +87,22 @@ namespace PnP.Core.Model.SharePoint
             };
 
             return updateMessage;
+        }
+
+        internal override object ToValidateUpdateItemJson()
+        {
+            if (!HasValue(nameof(Url)))
+            {
+                return "";
+            }
+
+            string fieldValue = $"{Url}";
+            if (HasValue(nameof(Description)) && !string.IsNullOrEmpty(Description))
+            {
+                fieldValue += $", {Description}";
+            }
+
+            return fieldValue;
         }
 
         internal override string ToCsomXml()

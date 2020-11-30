@@ -131,7 +131,10 @@ namespace PnP.Core.Model.SharePoint
                                     {
                                         var listDataAsStreamPropertyValue = property.Values.First();
                                         fieldValue = listDataAsStreamPropertyValue.FieldValue.FromListDataAsStream(listDataAsStreamPropertyValue.Properties);
-                                        (fieldValue as FieldValue).IsArray = false;
+                                        if (fieldValue != null)
+                                        {
+                                            (fieldValue as FieldValue).IsArray = false;
+                                        }
                                     }
                                     else
                                     {

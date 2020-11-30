@@ -38,6 +38,8 @@ namespace PnP.Core.Model.SharePoint
 
         internal abstract object ToJson();
 
+        internal abstract object ToValidateUpdateItemJson();
+
         internal abstract string ToCsomXml();
 
         //internal virtual void Commit()

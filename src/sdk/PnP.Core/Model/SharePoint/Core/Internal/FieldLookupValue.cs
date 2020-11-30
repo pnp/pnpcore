@@ -58,6 +58,11 @@ namespace PnP.Core.Model.SharePoint
             return updateMessage;
         }
 
+        internal override object ToValidateUpdateItemJson()
+        {
+            return $"{LookupId};#";
+        }
+
         internal override string ToCsomXml()
         {
             if (!HasValue(nameof(LookupId)))

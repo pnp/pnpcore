@@ -717,6 +717,173 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        #region URL field type tests
+
+        [TestMethod]
+        public async Task SpecialFieldCsomTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Step 1: Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("SpecialFieldCsomTest");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                //==========================================================
+                // Step 2: Add special fields
+                string fieldGroup = "TEST GROUP";
+
+                // URL field
+                string fldUrl1 = "URLField1";
+                IField addedField = await myList.Fields.AddUrlAsync(fldUrl1, new FieldUrlOptions()
+                {
+                    Group = fieldGroup,
+                    DisplayFormat = UrlFieldFormatType.Hyperlink
+                });
+
+                //==========================================================
+                // Step 3: Add a list item
+                Dictionary<string, object> item = new Dictionary<string, object>()
+                {
+                    { "Title", "Item1" }
+                };
+
+                // URL field
+                string fldUrl1_Url = "https://pnp.com";
+                string fldUrl1_Desc = "PnP Rocks";
+                item.Add(fldUrl1, addedField.NewFieldUrlValue(fldUrl1_Url, fldUrl1_Desc));
+
+                var addedItem = await myList.Items.AddAsync(item);
+
+                //==========================================================
+                // Step 4: validate returned list item
+                Assert.IsTrue(addedItem.Requested);
+                Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
+
+                // URL field
+                Assert.IsTrue(addedItem[fldUrl1] is IFieldUrlValue);
+                Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Url == fldUrl1_Url);
+                Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Description == fldUrl1_Desc);
+
+                //==========================================================
+                // Step 5: Read list item using GetAsync approach and verify data was written correctly
+                await VerifyListItemViaUpdateAsync(2, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+
+                //==========================================================
+                // Step 6: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                await VerifyListItemViaGetListDataAsStreamAsync(3, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+
+                //==========================================================
+                // Step 7: Update item using CSOM UpdateOverwriteVersionAsync 
+                fldUrl1_Url = $"{fldUrl1_Url}/rocks";
+                fldUrl1_Desc = $"{fldUrl1_Desc}A";
+                (addedItem[fldUrl1] as IFieldUrlValue).Url = fldUrl1_Url;
+                (addedItem[fldUrl1] as IFieldUrlValue).Description = fldUrl1_Desc;
+                await addedItem.UpdateOverwriteVersionAsync();
+
+                //==========================================================
+                // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                await VerifyListItemViaUpdateAsync(4, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+
+                //==========================================================
+                // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                await VerifyListItemViaGetListDataAsStreamAsync(5, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+
+                //==========================================================
+                // Step 10: Blank item using CSOM UpdateOverwriteVersionAsync 
+                fldUrl1_Url = "";
+                fldUrl1_Desc = "";
+                (addedItem[fldUrl1] as IFieldUrlValue).Url = fldUrl1_Url;
+                (addedItem[fldUrl1] as IFieldUrlValue).Description = fldUrl1_Desc;
+                await addedItem.UpdateOverwriteVersionAsync();
+
+                //==========================================================
+                // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                await VerifyListItemViaUpdateAsync(6, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+
+                //==========================================================
+                // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                await VerifyListItemViaGetListDataAsStreamAsync(7, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
+        private static async Task<IListItem> VerifyListItemViaGetListDataAsStreamAsync(int id, string listTitle, string fieldName, string url, string desc, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
+            {
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+                var itemViaGetAsync = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+
+                var listDataOptions = new RenderListDataOptions()
+                {
+                    RenderOptions = RenderListDataOptionsFlags.ListData,
+                };
+                listDataOptions.SetViewXmlFromFields(new List<string>() { "Title", fieldName });
+
+                await myList.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
+                var addedItem = myList.Items.First();
+
+                Assert.IsTrue(addedItem.Requested);
+                Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
+
+                // URL field
+                if (url == "")
+                {
+                    Assert.IsTrue(addedItem[fieldName] == null);
+                }
+                else
+                {
+                    Assert.IsTrue(addedItem[fieldName] is IFieldUrlValue);
+                    Assert.IsTrue((addedItem[fieldName] as IFieldUrlValue).Url == url);
+                    Assert.IsTrue((addedItem[fieldName] as IFieldUrlValue).Description == desc);
+                }
+
+                return addedItem;
+            }
+        }
+
+        private static async Task<IListItem> VerifyListItemViaUpdateAsync(int id, string listTitle, string fieldName, string url, string desc, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
+            {
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+                var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+                Assert.IsTrue(addedItem.Requested);
+                Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
+
+                // URL field
+                if (url == "")
+                {
+                    Assert.IsTrue(addedItem[fieldName] == null);
+                }
+                else
+                {
+                    Assert.IsTrue(addedItem[fieldName] is IFieldUrlValue);
+                    Assert.IsTrue((addedItem[fieldName] as IFieldUrlValue).Url == url);
+                    Assert.IsTrue((addedItem[fieldName] as IFieldUrlValue).Description == desc);
+                }
+
+                return addedItem;
+            }
+
+        }
+
+        #endregion
+
+
         //[TestMethod]
         //public async Task FieldTypeReadUrl()
         //{
@@ -739,8 +906,8 @@ namespace PnP.Core.Test.SharePoint
 
         //        var item = list.Items.First();
         //        */
-                
-                
+
+
         //        var list = await context.Web.Lists.GetByTitleAsync("FieldTypes", p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
 
         //        var item = list.Items.FirstOrDefault(p => p.Title == "Item1");
