@@ -4,6 +4,7 @@ Set-StrictMode -Version 2.0
 function CleanPackage {
     param([string] $Package , [int] $VersionsToKeep, [string] $key)
 
+    # See https://docs.microsoft.com/en-us/nuget/api/search-autocomplete-service-resource for API details
     $json = Invoke-WebRequest -Uri "https://api-v2v3search-0.nuget.org/autocomplete?id=$Package&prerelease=true" | ConvertFrom-Json
 
     # Count the packages to unlist
@@ -19,7 +20,7 @@ function CleanPackage {
     $unlisted = 0;
     foreach ($version in $json.data) {
         # Only automatically unlist for preview releases
-        if (($version.IndexOf("-") -gt -1) -and ($unlisted -le ($toUnlist - $VersionsToKeep))) {
+        if (($version.IndexOf("-") -gt -1) -and ($unlisted -lt ($toUnlist - $VersionsToKeep))) {
             Write-Host "Unlisting $Package, version $version using key $($key.Substring(0,5))"
             $unlisted = $unlisted + 1
             nuget delete $Package $version $key -source https://api.nuget.org/v3/index.json -NonInteractive
