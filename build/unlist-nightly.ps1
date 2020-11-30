@@ -4,11 +4,11 @@ Set-StrictMode -Version 2.0
 function CleanPackage {
     param([string] $Package , [int] $VersionsToKeep, [string] $key)
 
-    $json = Invoke-WebRequest -Uri "https://api.nuget.org/v3-flatcontainer/$Package/index.json" | ConvertFrom-Json
+    $json = Invoke-WebRequest -Uri "https://api-v2v3search-0.nuget.org/autocomplete?id=$Package&prerelease=true" | ConvertFrom-Json
 
     # Count the packages to unlist
     $toUnlist = 0;
-    foreach ($version in $json.versions) {
+    foreach ($version in $json.data) {
         # Only automatically unlist for preview releases
         if ($version.IndexOf("-") -gt -1) {
             $toUnlist = $toUnlist + 1;
@@ -17,7 +17,7 @@ function CleanPackage {
 
     # Delete nightly versions
     $unlisted = 0;
-    foreach ($version in $json.versions) {
+    foreach ($version in $json.data) {
         # Only automatically unlist for preview releases
         if (($version.IndexOf("-") -gt -1) -and ($unlisted -le ($toUnlist - $VersionsToKeep))) {
             Write-Host "Unlisting $Package, version $version using key $($key.Substring(0,5))"
