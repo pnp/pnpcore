@@ -210,6 +210,22 @@ namespace PnP.Core.Model.SharePoint
         IField AddUserBatch(string title, FieldUserOptions options = null);
 
         /// <summary>
+        /// Adds a new User Multi field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddUserMultiBatchAsync(string title, FieldUserOptions options = null);
+
+        /// <summary>
+        /// Adds a new User Multi field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddUserMultiBatch(string title, FieldUserOptions options = null);
+
+        /// <summary>
         /// Adds a new field to the collection
         /// </summary>
         /// <param name="batch">Batch to use</param>
@@ -428,6 +444,24 @@ namespace PnP.Core.Model.SharePoint
         IField AddUserBatch(Batch batch, string title, FieldUserOptions options = null);
 
         /// <summary>
+        /// Adds a new User Multi field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddUserMultiBatchAsync(Batch batch, string title, FieldUserOptions options = null);
+
+        /// <summary>
+        /// Adds a new User Multi field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddUserMultiBatch(Batch batch, string title, FieldUserOptions options = null);
+
+        /// <summary>
         /// Adds a new field to the collection
         /// </summary>
         /// <param name="title">The title of the field</param>
@@ -612,6 +646,22 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
         Task<IField> AddUserAsync(string title, FieldUserOptions options = null);
+
+        /// <summary>
+        /// Adds a new Multi User field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddUserMulti(string title, FieldUserOptions options = null);
+
+        /// <summary>
+        /// Adds a new Multi User field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddUserMultiAsync(string title, FieldUserOptions options = null);
 
         /// <summary>
         /// Adds a new User field to the collection

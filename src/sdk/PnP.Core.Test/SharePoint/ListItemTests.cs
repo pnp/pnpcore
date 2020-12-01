@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
+using PnP.Core.Model.Security;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System;
@@ -719,12 +720,31 @@ namespace PnP.Core.Test.SharePoint
 
         #region URL field type tests
 
+        internal class FieldData
+        {
+            internal FieldData(string type)
+            {
+                FieldType = type;
+                Properties = new Dictionary<string, object>();
+            }
+
+            internal string FieldType { get; set; }
+            internal Dictionary<string, object> Properties { get; set; }
+        }
+
         [TestMethod]
         public async Task SpecialFieldCsomTest()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                // Step 0: Data needed for the test run
+                // Get current user
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                // Get the principal representing two claims which are always available
+                var userTwo = await context.Web.EnsureUserAsync("Everyone except external users");
+
+                //==========================================================
                 // Step 1: Create a new list
                 string listTitle = TestCommon.GetPnPSdkTestAssetName("SpecialFieldCsomTest");
                 var myList = context.Web.Lists.GetByTitle(listTitle);
@@ -743,12 +763,38 @@ namespace PnP.Core.Test.SharePoint
                 // Step 2: Add special fields
                 string fieldGroup = "TEST GROUP";
 
-                // URL field
+                // URL field 1
                 string fldUrl1 = "URLField1";
-                IField addedField = await myList.Fields.AddUrlAsync(fldUrl1, new FieldUrlOptions()
+                IField addedUrlField1 = await myList.Fields.AddUrlAsync(fldUrl1, new FieldUrlOptions()
                 {
                     Group = fieldGroup,
                     DisplayFormat = UrlFieldFormatType.Hyperlink
+                });
+
+                // URL field 2
+                string fldUrl2 = "URLField2";
+                IField addedUrlField2 = await myList.Fields.AddUrlAsync(fldUrl2, new FieldUrlOptions()
+                {
+                    Group = fieldGroup,
+                    DisplayFormat = UrlFieldFormatType.Hyperlink
+                });
+
+                // User Single field 1
+                string fldUserSingle1 = "UserSingleField1";
+                IField addedUserSingleField1 = await myList.Fields.AddUserAsync(fldUserSingle1, new FieldUserOptions()
+                {
+                    Group = fieldGroup,
+                    AllowMultipleValues = false, 
+                    SelectionMode = FieldUserSelectionMode.PeopleAndGroups
+                });
+
+                // User Multi field 1
+                string fldUserMulti1 = "UserMultiField1";
+                IField addedUserMultiField1 = await myList.Fields.AddUserMultiAsync(fldUserMulti1, new FieldUserOptions()
+                {
+                    Group = fieldGroup,
+                    AllowMultipleValues = true,
+                    SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                 });
 
                 //==========================================================
@@ -758,10 +804,38 @@ namespace PnP.Core.Test.SharePoint
                     { "Title", "Item1" }
                 };
 
-                // URL field
-                string fldUrl1_Url = "https://pnp.com";
-                string fldUrl1_Desc = "PnP Rocks";
-                item.Add(fldUrl1, addedField.NewFieldUrlValue(fldUrl1_Url, fldUrl1_Desc));
+                Dictionary<string, FieldData> fieldData = new Dictionary<string, FieldData>
+                {
+                    // URL field 1
+                    { fldUrl1, new FieldData("URL") },
+                    // URL field 2
+                    { fldUrl2, new FieldData("URL") },
+                    // User single field 1
+                    { fldUserSingle1, new FieldData("UserSingle") },
+                    // User multi field 1
+                    { fldUserMulti1, new FieldData("UserMulti") },
+                };
+
+                // URL field 1
+                fieldData[fldUrl1].Properties.Add("Url", "https://pnp.com");
+                fieldData[fldUrl1].Properties.Add("Description", "PnP Rocks");
+                item.Add(fldUrl1, addedUrlField1.NewFieldUrlValue(fieldData[fldUrl1].Properties["Url"].ToString(), fieldData[fldUrl1].Properties["Description"].ToString()));
+
+                // URL field 2 -  no description value set on create
+                fieldData[fldUrl2].Properties.Add("Url", "https://pnp.com");
+                // set the expected data equal to the url field as that's what we expect
+                fieldData[fldUrl2].Properties.Add("Description", fieldData[fldUrl2].Properties["Url"]);
+                item.Add(fldUrl2, addedUrlField2.NewFieldUrlValue(fieldData[fldUrl2].Properties["Url"].ToString()));
+
+                // User single field 1
+                fieldData[fldUserSingle1].Properties.Add("Principal", currentUser);
+                item.Add(fldUserSingle1, addedUserSingleField1.NewFieldUserValue(currentUser));
+
+                // User multi field 1
+                var userCollection = addedUserMultiField1.NewFieldValueCollection();
+                userCollection.Values.Add(addedUserMultiField1.NewFieldUserValue(currentUser));
+                fieldData[fldUserMulti1].Properties.Add("Collection", userCollection);
+                item.Add(fldUserMulti1, userCollection);
 
                 var addedItem = await myList.Items.AddAsync(item);
 
@@ -770,57 +844,162 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(addedItem.Requested);
                 Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
 
-                // URL field
+                // URL field 1
                 Assert.IsTrue(addedItem[fldUrl1] is IFieldUrlValue);
-                Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Url == fldUrl1_Url);
-                Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Description == fldUrl1_Desc);
+                Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Url == fieldData[fldUrl1].Properties["Url"].ToString());
+                Assert.IsTrue((addedItem[fldUrl1] as IFieldUrlValue).Description == fieldData[fldUrl1].Properties["Description"].ToString());
+
+                // URL field 2
+                Assert.IsTrue(addedItem[fldUrl2] is IFieldUrlValue);
+                Assert.IsTrue((addedItem[fldUrl2] as IFieldUrlValue).Url == fieldData[fldUrl2].Properties["Url"].ToString());
+                Assert.IsTrue((addedItem[fldUrl2] as IFieldUrlValue).Description == fieldData[fldUrl2].Properties["Description"].ToString());
+
+                // User single field 1
+                Assert.IsTrue(addedItem[fldUserSingle1] is IFieldUserValue);
+                Assert.IsTrue((addedItem[fldUserSingle1] as IFieldUserValue).LookupId == (fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal).Id);
+
+                // User multi field 1
+                Assert.IsTrue(addedItem[fldUserMulti1] is IFieldValueCollection);
+                Assert.IsTrue((addedItem[fldUserMulti1] as IFieldValueCollection).Values[0] == (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values[0]);
 
                 //==========================================================
                 // Step 5: Read list item using GetAsync approach and verify data was written correctly
-                await VerifyListItemViaUpdateAsync(2, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+                await VerifyListItemViaUpdateAsync(2, listTitle, fieldData);
 
                 //==========================================================
                 // Step 6: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
-                await VerifyListItemViaGetListDataAsStreamAsync(3, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+                await VerifyListItemViaGetListDataAsStreamAsync(3, listTitle, fieldData);
 
                 //==========================================================
                 // Step 7: Update item using CSOM UpdateOverwriteVersionAsync 
-                fldUrl1_Url = $"{fldUrl1_Url}/rocks";
-                fldUrl1_Desc = $"{fldUrl1_Desc}A";
-                (addedItem[fldUrl1] as IFieldUrlValue).Url = fldUrl1_Url;
-                (addedItem[fldUrl1] as IFieldUrlValue).Description = fldUrl1_Desc;
+
+                // URL field 1
+                fieldData[fldUrl1].Properties["Url"] = $"{fieldData[fldUrl1].Properties["Url"]}/rocks";
+                fieldData[fldUrl1].Properties["Description"] = $"{fieldData[fldUrl1].Properties["Description"]}A";
+                (addedItem[fldUrl1] as IFieldUrlValue).Url = fieldData[fldUrl1].Properties["Url"].ToString();
+                (addedItem[fldUrl1] as IFieldUrlValue).Description = fieldData[fldUrl1].Properties["Description"].ToString();
+
+                // URL field 2
+                fieldData[fldUrl2].Properties["Url"] = $"{fieldData[fldUrl2].Properties["Url"]}/rocks";
+                (addedItem[fldUrl2] as IFieldUrlValue).Url = fieldData[fldUrl2].Properties["Url"].ToString();
+                (addedItem[fldUrl2] as IFieldUrlValue).Description = fieldData[fldUrl2].Properties["Description"].ToString();
+
+                // User single field 1
+                fieldData[fldUserSingle1].Properties["Principal"] = userTwo;
+                (addedItem[fldUserSingle1] as IFieldUserValue).Principal = fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal;
+
+                // User multi field2
+                (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Add(addedUserMultiField1.NewFieldUserValue(userTwo));
+                addedItem[fldUserMulti1] = fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection;
+
                 await addedItem.UpdateOverwriteVersionAsync();
 
                 //==========================================================
                 // Step 8: Read list item using GetAsync approach and verify data was written correctly
-                await VerifyListItemViaUpdateAsync(4, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+                await VerifyListItemViaUpdateAsync(4, listTitle, fieldData);
 
                 //==========================================================
                 // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
-                await VerifyListItemViaGetListDataAsStreamAsync(5, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+                await VerifyListItemViaGetListDataAsStreamAsync(5, listTitle, fieldData);
 
                 //==========================================================
                 // Step 10: Blank item using CSOM UpdateOverwriteVersionAsync 
-                fldUrl1_Url = "";
-                fldUrl1_Desc = "";
-                (addedItem[fldUrl1] as IFieldUrlValue).Url = fldUrl1_Url;
-                (addedItem[fldUrl1] as IFieldUrlValue).Description = fldUrl1_Desc;
+
+                // URL field 1
+                fieldData[fldUrl1].Properties["Url"] = "";
+                fieldData[fldUrl1].Properties["Description"] = "";
+                (addedItem[fldUrl1] as IFieldUrlValue).Url = fieldData[fldUrl1].Properties["Url"].ToString();
+                (addedItem[fldUrl1] as IFieldUrlValue).Description = fieldData[fldUrl1].Properties["Description"].ToString();
+
+                // URL field 2
+                fieldData[fldUrl2].Properties["Url"] = "";
+                fieldData[fldUrl2].Properties["Description"] = "";
+                (addedItem[fldUrl2] as IFieldUrlValue).Url = fieldData[fldUrl2].Properties["Url"].ToString();
+                (addedItem[fldUrl2] as IFieldUrlValue).Description = fieldData[fldUrl2].Properties["Description"].ToString();
+
+                // User single field 1
+                fieldData[fldUserSingle1].Properties["Principal"] = null;
+                (addedItem[fldUserSingle1] as IFieldUserValue).Principal = fieldData[fldUserSingle1].Properties["Principal"] as ISharePointPrincipal;
+
+                // User multi field2
+                (fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection).Values.Clear();
+                addedItem[fldUserMulti1] = fieldData[fldUserMulti1].Properties["Collection"] as IFieldValueCollection;
+
                 await addedItem.UpdateOverwriteVersionAsync();
 
                 //==========================================================
                 // Step 8: Read list item using GetAsync approach and verify data was written correctly
-                await VerifyListItemViaUpdateAsync(6, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+                await VerifyListItemViaUpdateAsync(6, listTitle, fieldData);
 
                 //==========================================================
                 // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
-                await VerifyListItemViaGetListDataAsStreamAsync(7, listTitle, fldUrl1, fldUrl1_Url, fldUrl1_Desc);
+                await VerifyListItemViaGetListDataAsStreamAsync(7, listTitle, fieldData);
 
                 // Cleanup the created list
                 await myList.DeleteAsync();
             }
         }
 
-        private static async Task<IListItem> VerifyListItemViaGetListDataAsStreamAsync(int id, string listTitle, string fieldName, string url, string desc, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        private static void AssertListItemProperties(Dictionary<string, FieldData> fieldData, IListItem addedItem)
+        {
+            Assert.IsTrue(addedItem.Requested);
+            Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
+
+            foreach (var field in fieldData)
+            {
+                if (field.Value.FieldType == "URL")
+                {
+                    if (field.Value.Properties["Url"].ToString() == "")
+                    {
+                        Assert.IsTrue(addedItem[field.Key] == null);
+                    }
+                    else
+                    {
+                        Assert.IsTrue(addedItem[field.Key] is IFieldUrlValue);
+                        Assert.IsTrue((addedItem[field.Key] as IFieldUrlValue).Url == field.Value.Properties["Url"].ToString());
+                        Assert.IsTrue((addedItem[field.Key] as IFieldUrlValue).Description == field.Value.Properties["Description"].ToString());
+                    }
+                }
+                else if (field.Value.FieldType == "UserSingle")
+                {
+                    Assert.IsTrue(addedItem[field.Key] is IFieldUserValue);
+                    int idToCheck;
+                    if (field.Value.Properties.ContainsKey("Principal"))
+                    {
+                        if ((field.Value.Properties["Principal"] as ISharePointPrincipal) == null)
+                        {
+                            idToCheck = -1;
+                        }
+                        else
+                        {
+                            idToCheck = (field.Value.Properties["Principal"] as ISharePointPrincipal).Id;
+                        }
+                    }
+                    else
+                    {
+                        idToCheck = (int)field.Value.Properties["UserId"];
+                    }
+                    Assert.IsTrue((addedItem[field.Key] as IFieldUserValue).LookupId == idToCheck);
+                }
+                else if (field.Value.FieldType == "UserMulti")
+                {
+                    Assert.IsTrue(addedItem[field.Key] is IFieldValueCollection);
+
+                    var expectedUsers = (field.Value.Properties["Collection"] as IFieldValueCollection).Values.Cast<IFieldUserValue>();
+
+                    foreach (var user in (addedItem[field.Key] as IFieldValueCollection).Values)
+                    {
+                        Assert.IsTrue(user is IFieldUserValue);
+                        // is this user in the list of expected users
+                        var expectedUser = expectedUsers.FirstOrDefault(p => p.LookupId == (user as IFieldUserValue).LookupId);
+                        Assert.IsTrue(expectedUser != null);
+                    }
+
+                }
+            }
+        }
+
+        private static async Task<IListItem> VerifyListItemViaGetListDataAsStreamAsync(int id, string listTitle, Dictionary<string, FieldData> fieldData, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
@@ -831,56 +1010,36 @@ namespace PnP.Core.Test.SharePoint
                 {
                     RenderOptions = RenderListDataOptionsFlags.ListData,
                 };
-                listDataOptions.SetViewXmlFromFields(new List<string>() { "Title", fieldName });
+
+                var fieldsToLoad = new List<string>() { "Title" };
+                foreach (var field in fieldData)
+                {
+                    fieldsToLoad.Add(field.Key);
+                }
+
+                listDataOptions.SetViewXmlFromFields(fieldsToLoad);
 
                 await myList.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
                 var addedItem = myList.Items.First();
 
-                Assert.IsTrue(addedItem.Requested);
-                Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
-
-                // URL field
-                if (url == "")
-                {
-                    Assert.IsTrue(addedItem[fieldName] == null);
-                }
-                else
-                {
-                    Assert.IsTrue(addedItem[fieldName] is IFieldUrlValue);
-                    Assert.IsTrue((addedItem[fieldName] as IFieldUrlValue).Url == url);
-                    Assert.IsTrue((addedItem[fieldName] as IFieldUrlValue).Description == desc);
-                }
+                AssertListItemProperties(fieldData, addedItem);
 
                 return addedItem;
             }
         }
 
-        private static async Task<IListItem> VerifyListItemViaUpdateAsync(int id, string listTitle, string fieldName, string url, string desc, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        private static async Task<IListItem> VerifyListItemViaUpdateAsync(int id, string listTitle, Dictionary<string, FieldData> fieldData, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
             {
-                var myList = context.Web.Lists.GetByTitle(listTitle);
+                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
                 var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
-                Assert.IsTrue(addedItem.Requested);
-                Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
 
-                // URL field
-                if (url == "")
-                {
-                    Assert.IsTrue(addedItem[fieldName] == null);
-                }
-                else
-                {
-                    Assert.IsTrue(addedItem[fieldName] is IFieldUrlValue);
-                    Assert.IsTrue((addedItem[fieldName] as IFieldUrlValue).Url == url);
-                    Assert.IsTrue((addedItem[fieldName] as IFieldUrlValue).Description == desc);
-                }
+                AssertListItemProperties(fieldData, addedItem);
 
                 return addedItem;
             }
-
         }
-
         #endregion
 
 

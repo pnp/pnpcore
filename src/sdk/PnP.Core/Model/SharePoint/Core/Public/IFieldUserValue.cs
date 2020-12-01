@@ -1,10 +1,17 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿using PnP.Core.Model.Security;
+
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Represents a user retrieved via a list item field
     /// </summary>
     public interface IFieldUserValue : IFieldLookupValue
     {
+        /// <summary>
+        /// Principal describing the user or group
+        /// </summary>
+        public ISharePointPrincipal Principal { get; set; }
+        
         /// <summary>
         /// Email of the user
         /// </summary>

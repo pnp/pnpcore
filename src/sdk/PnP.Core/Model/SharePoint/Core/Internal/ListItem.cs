@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -116,6 +117,13 @@ namespace PnP.Core.Model.SharePoint
                     if (item.Value is FieldValue fieldItemValue)
                     {
                         field.FieldValue = fieldItemValue.ToValidateUpdateItemJson();
+                    }
+                    else if (item.Value is FieldValueCollection fieldValueCollection)
+                    {
+                        if (fieldValueCollection.Field.TypeAsString == "UserMulti")
+                        {
+                            field.FieldValue = fieldValueCollection.UserMultiToValidateUpdateItemJson();
+                        }
                     }
                     else
                     {
@@ -240,6 +248,25 @@ namespace PnP.Core.Model.SharePoint
             return new FieldUserValue(fieldToUpdate.InternalName, Values)
             {
                 LookupId = userId,
+                Field = fieldToUpdate
+            };
+        }
+
+        public IFieldUserValue NewFieldUserValue(IField fieldToUpdate, ISharePointPrincipal principal)
+        {
+            if (fieldToUpdate == null)
+            {
+                throw new ArgumentNullException(nameof(fieldToUpdate));
+            }
+
+            if (principal == null)
+            {
+                throw new ArgumentNullException(nameof(principal));
+            }
+
+            return new FieldUserValue(fieldToUpdate.InternalName, Values)
+            {
+                Principal = principal,
                 Field = fieldToUpdate
             };
         }

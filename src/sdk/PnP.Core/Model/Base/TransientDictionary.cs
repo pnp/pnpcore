@@ -151,6 +151,14 @@ namespace PnP.Core.Model
                         fieldValue.Parent = this;
                     }
                 }
+                else if (field is FieldValueCollection fieldValueCollection)
+                {
+                    if (fieldValueCollection.Parent == null)
+                    {
+                        fieldValueCollection.Parent = this;
+                        MarkAsChanged(v.Key);
+                    }
+                }
 
                 SystemAdd(v.Key, field);
             }

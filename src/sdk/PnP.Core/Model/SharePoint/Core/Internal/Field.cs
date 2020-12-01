@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using System;
 using System.Dynamic;
 using System.Net.Http;
@@ -341,6 +342,20 @@ namespace PnP.Core.Model.SharePoint
             };
         }
 
+        public IFieldUserValue NewFieldUserValue(ISharePointPrincipal principal)
+        {
+            if (principal == null)
+            {
+                throw new ArgumentNullException(nameof(principal));
+            }
+
+            return new FieldUserValue(InternalName, null)
+            {
+                Principal = principal,
+                Field = this
+            };
+        }
+
         public IFieldTaxonomyValue NewFieldTaxonomyValue(Guid termId, string label, int wssId = -1)
         {
             if (termId == Guid.Empty)
@@ -362,9 +377,9 @@ namespace PnP.Core.Model.SharePoint
             };
         }
 
-        public IFieldValueCollection NewFieldValueCollection(TransientDictionary parent)
+        public IFieldValueCollection NewFieldValueCollection()
         {
-            return new FieldValueCollection(this, InternalName, parent);
+            return new FieldValueCollection(this, InternalName, null);
         }
 
         #endregion

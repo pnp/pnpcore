@@ -551,15 +551,29 @@ namespace PnP.Core.Services
                     /*
                      "PersonSingleId": 6,
                      "PersonSingleStringId": "6",
+                     "UserSingleField1Id": null,
+                     "UserSingleField1StringId": null,
+                     "UserMultiField1Id": null,
+                     "UserMultiField1StringId": null,
                      */
                     #endregion
 
                     string actualPropertyName = propertyName.Substring(0, propertyName.Length - 8);
-                    var fieldValue = new FieldUserValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = GetListItemField(pnpObject, actualPropertyName) };
-                    fieldValue.FromJson(json);
-                    fieldValue.IsArray = false;
-                    return new Tuple<object, string>(fieldValue, actualPropertyName);
-                } 
+                    var field = GetListItemField(pnpObject, actualPropertyName);
+                    if (json.ValueKind == JsonValueKind.Null && field != null && field.TypeAsString == "UserMulti")
+                    {
+                        // Add empty value collection
+                        var values = new FieldValueCollection(field, actualPropertyName, dictionaryPropertyToAddValueTo);
+                        return new Tuple<object, string>(values, actualPropertyName);
+                    }
+                    else
+                    {
+                        var fieldValue = new FieldUserValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = GetListItemField(pnpObject, actualPropertyName) };
+                        fieldValue.FromJson(json);
+                        fieldValue.IsArray = false;
+                        return new Tuple<object, string>(fieldValue, actualPropertyName);
+                    }
+                }
                 else if (json.ValueKind == JsonValueKind.String && (json.GetString().StartsWith("{") && json.GetString().Contains("LocationUri") && json.GetString().EndsWith("}")))
                 {
                     #region Sample json

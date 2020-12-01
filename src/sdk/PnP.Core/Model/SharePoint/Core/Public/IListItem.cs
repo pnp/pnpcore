@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model.Security;
+using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -32,6 +33,14 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="userId">Id of the user</param>
         /// <returns>Configured <see cref="IFieldUserValue"/> object</returns>
         public IFieldUserValue NewFieldUserValue(IField fieldToUpdate, int userId);
+
+        /// <summary>
+        /// Creates a new <see cref="IFieldUserValue"/> object
+        /// </summary>
+        /// <param name="fieldToUpdate"><see cref="IField"/> representing the field to set</param>
+        /// <param name="principal"><see cref="ISharePointUser"/> or <see cref="ISharePointGroup"/></param>
+        /// <returns>Configured <see cref="IFieldUserValue"/> object</returns>
+        public IFieldUserValue NewFieldUserValue(IField fieldToUpdate, ISharePointPrincipal principal);
 
         /// <summary>
         /// Creates a new <see cref="IFieldTaxonomyValue"/> object

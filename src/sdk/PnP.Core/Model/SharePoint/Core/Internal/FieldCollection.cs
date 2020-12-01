@@ -271,10 +271,39 @@ namespace PnP.Core.Model.SharePoint
             return await AddBatchAsync(batch, title, FieldType.User, options).ConfigureAwait(false);
         }
 
+        public IField AddUserMultiBatch(Batch batch, string title, FieldUserOptions options = null)
+        {
+            return AddUserMultiBatchAsync(batch, title, options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IField> AddUserMultiBatchAsync(string title, FieldUserOptions options = null)
+        {
+            return await AddUserMultiBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
+        }
+
+        public IField AddUserMultiBatch(string title, FieldUserOptions options = null)
+        {
+            return AddUserMultiBatchAsync(title, options).GetAwaiter().GetResult();
+        }
+        
+        public async Task<IField> AddUserMultiBatchAsync(Batch batch, string title, FieldUserOptions options = null)
+        {
+            string schemaXml = UserMultiSchemaXml(title, options);
+            var newField = CreateNewAndAdd() as Field;
+            await newField.AddAsXmlBatchAsync(batch, schemaXml, AddFieldOptionsFlags.DefaultValue).ConfigureAwait(false);
+            return newField;
+        }
+
+        private static string UserMultiSchemaXml(string title, FieldUserOptions options)
+        {
+            return $"<Field DisplayName='{title}' Format='Dropdown' IsModern='TRUE' List='UserInfo' Mult='TRUE' Name='{title}' Title='{title}' Type='UserMulti' UserSelectionMode='{(int)options.SelectionMode}' UserSelectionScope='0'></Field>";
+        }
+
         public IField AddUserBatch(Batch batch, string title, FieldUserOptions options = null)
         {
             return AddUserBatchAsync(batch, title, options).GetAwaiter().GetResult();
         }
+
 
         public async Task<IField> AddAsync(string title, FieldType fieldType, FieldOptions options)
         {
@@ -391,6 +420,19 @@ namespace PnP.Core.Model.SharePoint
         public IField AddUser(string title, FieldUserOptions options = null)
         {
             return AddUserAsync(title, options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IField> AddUserMultiAsync(string title, FieldUserOptions options = null)
+        {
+            string schemaXml = UserMultiSchemaXml(title, options);
+            var newField = CreateNewAndAdd() as Field;
+            await newField.AddAsXmlAsync(schemaXml, AddFieldOptionsFlags.DefaultValue).ConfigureAwait(false);
+            return newField;
+        }
+
+        public IField AddUserMulti(string title, FieldUserOptions options = null)
+        {
+            return AddUserMultiAsync(title, options).GetAwaiter().GetResult();
         }
 
         public async Task<IField> AddMultiChoiceAsync(string title, FieldMultiChoiceOptions options = null)
