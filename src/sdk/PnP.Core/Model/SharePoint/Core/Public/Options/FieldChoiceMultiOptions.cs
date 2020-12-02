@@ -3,12 +3,17 @@
     /// <summary>
     /// Available options for SharePoint Multi Choice fields
     /// </summary>
-    public class FieldMultiChoiceOptions : CommonFieldOptions
+    public class FieldChoiceMultiOptions : CommonFieldOptions
     {
         /// <summary>
         /// Gets or sets a value that specifies whether the field can accept values other than those specified in Choices.
         /// </summary>
         public bool? FillInChoice { get; set; }
+
+        /// <summary>
+        /// Gets or sets the default choice value 
+        /// </summary>
+        public string DefaultChoice { get; set; }
 
         /// <summary>
         /// Gets or sets a value that specifies values that are available for selection in the field.

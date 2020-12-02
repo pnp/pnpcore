@@ -16,6 +16,16 @@
         */
 
         /// <summary>
+        /// How many decimals to show
+        /// </summary>
+        public int? Decimals { get; set; }
+
+        /// <summary>
+        /// Default value set on the field
+        /// </summary>
+        public double? DefaultValue { get; set; }
+
+        /// <summary>
         /// Gets or sets a value that specifies the maximum allowed value for the field.
         /// </summary>
         public double? MaximumValue { get; set; }

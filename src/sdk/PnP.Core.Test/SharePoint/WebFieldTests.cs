@@ -58,7 +58,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions());
+                IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD", new FieldTextOptions());
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
@@ -75,7 +75,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD2", new FieldTextOptions()
                 {
                     Description = "TEST DESCRIPTION",
                     Group = "TEST GROUP",
@@ -84,14 +84,13 @@ namespace PnP.Core.Test.SharePoint
                     Indexed = true,
                     EnforceUniqueValues = true,
                     Required = true,
-                    // TODO Check validation formula format
-                    //ValidationFormula = 
+                    ValidationFormula = @"=ISNUMBER(5)",
                     ValidationMessage = "Invalid Value"
                 });
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD2", addedField.Title);
                 Assert.AreEqual("TEST DESCRIPTION", addedField.Description);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(@"=""DEFAULT""", addedField.DefaultFormula);
@@ -100,6 +99,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(addedField.EnforceUniqueValues);
                 Assert.IsTrue(addedField.Required);
                 Assert.AreEqual("Invalid Value", addedField.ValidationMessage);
+                Assert.AreEqual(@"=ISNUMBER(5)", addedField.ValidationFormula);
 
                 await addedField.DeleteAsync();
             }
@@ -130,7 +130,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD", new FieldTextOptions()
                 {
                     Group = "TEST GROUP",
                     MaxLength = 100
@@ -277,7 +277,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddMultiChoiceAsync("ADDED FIELD", new FieldMultiChoiceOptions()
+                IField addedField = await context.Web.Fields.AddChoiceMultiAsync("ADDED FIELD", new FieldChoiceMultiOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -534,7 +534,6 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     Required = true,
                     AllowDisplay = true,
-                    AllowMultipleValues = true,
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                     // TODO Must be tested when support for SharePoint groups is implemented
@@ -547,7 +546,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.Required);
                 Assert.IsTrue(addedField.AllowDisplay);
-                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.IsFalse(addedField.AllowMultipleValues);
                 Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
                 // TODO Must be tested when support for SharePoint groups is implemented
                 //Assert.AreEqual(addedField.SelectionGroup, 1);
@@ -562,7 +561,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField field = await context.Web.Fields.AddAsync("TO UPDATE FIELD", FieldType.Text, new FieldTextOptions());
+                IField field = await context.Web.Fields.AddTextAsync("TO UPDATE FIELD", new FieldTextOptions());
 
                 // Test if the content type is created
                 Assert.IsNotNull(field);
@@ -588,7 +587,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField field = await context.Web.Fields.AddAsync("TO DELETE FIELD", FieldType.Text);
+                IField field = await context.Web.Fields.AddTextAsync("TO DELETE FIELD");
 
                 // Test if the content type is created
                 Assert.IsNotNull(field);

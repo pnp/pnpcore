@@ -21,43 +21,6 @@ namespace PnP.Core.Model.SharePoint
         #region Construction
         public Field()
         {
-            // Handler to construct the Add request for this list
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            AddApiCallHandler = async (additionalInformation) =>
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            {
-                var fieldOptions = (FieldOptions)additionalInformation[FieldOptionsAdditionalInformationKey];
-
-                // Given this method can apply on both Web.Fields as List.Fields we're getting the entity info which will 
-                // automatically provide the correct 'parent'
-                // entity.SharePointGet contains the correct endpoint (e.g. _api/web or _api/lists(id) )
-                var entity = EntityManager.GetClassInfo(GetType(), this);
-
-                string endpointUrl = entity.SharePointGet;
-                dynamic addParameters = null;
-                if (FieldTypeKind == FieldType.Lookup)
-                {
-                    if (!(fieldOptions is FieldLookupOptions fieldLookupOptions))
-                    {
-                        throw new ClientException(ErrorType.InvalidParameters,
-                            PnPCoreResources.Exception_Invalid_LookupFields);
-                    }
-
-                    endpointUrl += "/AddField";
-                    addParameters = GetFieldLookupAddParameters(fieldLookupOptions);
-                }
-                else
-                {
-                    addParameters = GetFieldGenericAddParameters(fieldOptions);
-                }
-
-                // To handle the serialization of string collections
-                var serializerOptions = new JsonSerializerOptions() { IgnoreNullValues = true };
-                serializerOptions.Converters.Add(new SharePointRestCollectionJsonConverter<string>());
-
-                string json = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject), serializerOptions);
-                return new ApiCall(endpointUrl, ApiType.SPORest, json);
-            };
         }
         #endregion
 
@@ -214,39 +177,6 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Extension methods
-        private dynamic GetFieldGenericAddParameters(FieldOptions fieldOptions)
-        {
-            ExpandoObject baseAddPayload = new
-            {
-                __metadata = new { type = SharePointFieldType.GetEntityTypeFromFieldType(FieldTypeKind) },
-                FieldTypeKind,
-                Title
-            }.AsExpando();
-
-            // Merge the base add payload with options if any
-            dynamic fieldAddParameters = fieldOptions != null
-                ? fieldOptions.AsExpando(ignoreNullValues: true).MergeWith(baseAddPayload)
-                : baseAddPayload;
-
-            return fieldAddParameters;
-        }
-
-        private dynamic GetFieldLookupAddParameters(FieldLookupOptions fieldOptions)
-        {
-            ExpandoObject baseAddPayload = new
-            {
-                __metadata = new { type = SharePointFieldType.FieldCreationInformation },
-                FieldTypeKind,
-                Title
-            }.AsExpando();
-
-            // Merge the base add payload with options if any
-            dynamic parameters = fieldOptions != null
-                ? fieldOptions.AsExpando().MergeWith(baseAddPayload)
-                : baseAddPayload;
-
-            return new { parameters }.AsExpando();
-        }
 
         internal async Task<IField> AddAsXmlBatchAsync(Batch batch, string schemaXml, AddFieldOptionsFlags options)
         {

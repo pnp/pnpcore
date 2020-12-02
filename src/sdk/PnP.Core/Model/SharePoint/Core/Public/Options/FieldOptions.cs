@@ -1,4 +1,6 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿using System;
+
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Available options for all SharePoint fields
@@ -6,9 +8,24 @@
     public abstract class FieldOptions
     {
         /// <summary>
+        /// Guid of the field
+        /// </summary>
+        public Guid? Id { get; set; }
+        
+        /// <summary>
         /// Sets whether the field is required
         /// </summary>
         public bool? Required { get; set; }
+
+        /// <summary>
+        /// Add this field to the default view
+        /// </summary>
+        public bool AddToDefaultView { get; set; }
+
+        /// <summary>
+        /// An <see cref="AddFieldOptionsFlags"/> flag that specifies the field options to be applied during add
+        /// </summary>
+        public AddFieldOptionsFlags Options { get; set; }
     }
 
     #region NOT (YET) SUPPORTED

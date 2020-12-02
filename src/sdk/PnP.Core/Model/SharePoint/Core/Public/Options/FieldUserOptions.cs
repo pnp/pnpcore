@@ -6,11 +6,6 @@
     public class FieldUserOptions : CommonFieldOptions
     {
         /// <summary>
-        /// Gets or sets a value that specifies whether to allow multiple values.
-        /// </summary>
-        public bool? AllowMultipleValues { get; set; }
-
-        /// <summary>
         /// Gets or sets a value that specifies whether to display the name of the user in a survey list.
         /// </summary>
         public bool? AllowDisplay { get; set; }
