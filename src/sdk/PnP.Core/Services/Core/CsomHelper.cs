@@ -39,10 +39,16 @@ namespace PnP.Core.Services
         internal static string PropertyBagFolderObjectId = ":folder:{Parent.Id}";
         internal static string PropertyBagFileObjectId = ":file:{Parent.Id}";
 
+        // Taxonomy field creation
+        internal static string TaxonomyFieldUpdate = "<Request AddExpandoFieldTypeSuffix=\"true\" SchemaVersion=\"15.0.0.0\" LibraryVersion=\"16.0.0.0\" ApplicationName=\"pnp core sdk\" xmlns=\"http://schemas.microsoft.com/sharepoint/clientquery/2009\"><Actions><SetProperty Id=\"{Counter}\" ObjectPathId=\"15\" Name=\"SspId\"><Parameter Type=\"Guid\">{TermStoreId}</Parameter></SetProperty><SetProperty Id=\"{Counter2}\" ObjectPathId=\"15\" Name=\"TermSetId\"><Parameter Type=\"Guid\">{TermSetId}</Parameter></SetProperty><SetProperty Id=\"{Counter3}\" ObjectPathId=\"15\" Name=\"TargetTemplate\"><Parameter Type=\"String\"></Parameter></SetProperty><SetProperty Id=\"{Counter4}\" ObjectPathId=\"15\" Name=\"AnchorId\"><Parameter Type=\"Guid\">{00000000-0000-0000-0000-000000000000}</Parameter></SetProperty><Method Name=\"Update\" Id=\"{Counter5}\" ObjectPathId=\"15\" /></Actions><ObjectPaths><Identity Id=\"15\" Name=\"1e1a939f-60b2-2000-98a6-d25d3d400a3a|740c6a0b-85e2-48a0-a494-e0f1759d4aa7:site:{Site.Id}:web:{Web.Id}{ListFieldId}:field:{Id}\" /></ObjectPaths></Request>";
+        internal static string TaxonomyFieldListObjectId = ":list:{Parent.Id}";
+
         // Properties to replace in above XML snippets
         internal static string Counter = "{Counter}";
         internal static string Counter2 = "{Counter2}";
         internal static string Counter3 = "{Counter3}";
+        internal static string Counter4 = "{Counter4}";
+        internal static string Counter5 = "{Counter5}";
         internal static string FieldValues = "{FieldValues}";
         internal static string ArrayValues = "{ArrayValues}";
         internal static string FieldName = "{FieldName}";
@@ -55,6 +61,9 @@ namespace PnP.Core.Services
         internal static string TaxonomyFieldId = "{TaxonomyFieldId}";
         internal static string TaxonomyMultiValueIdentities = "{TaxonomyMultiValueIdentities}";
         internal static string TaxonomyMultiValueObjectPaths = "{TaxonomyMultiValueObjectPaths}";
+        internal static string TermStoreId = "{TermStoreId}";
+        internal static string TermSetId = "{TermSetId}";
+        internal static string ListFieldId = "{ListFieldId}";
 
 
     internal static Dictionary<int, JsonElement> ParseResponse(string jsonResponse)

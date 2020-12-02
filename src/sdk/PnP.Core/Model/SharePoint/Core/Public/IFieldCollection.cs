@@ -648,6 +648,14 @@ namespace PnP.Core.Model.SharePoint
         Task<IField> AddUserAsync(string title, FieldUserOptions options = null);
 
         /// <summary>
+        /// Adds a new User field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddUser(string title, FieldUserOptions options = null);
+
+        /// <summary>
         /// Adds a new Multi User field to the collection
         /// </summary>
         /// <param name="title">The title of the field</param>
@@ -664,12 +672,36 @@ namespace PnP.Core.Model.SharePoint
         Task<IField> AddUserMultiAsync(string title, FieldUserOptions options = null);
 
         /// <summary>
-        /// Adds a new User field to the collection
+        /// Adds a new Taxonomy field to the collection
         /// </summary>
         /// <param name="title">The title of the field</param>
         /// <param name="options">The specific options for field creation</param>
         /// <returns>The added field</returns>
-        IField AddUser(string title, FieldUserOptions options = null);
+        IField AddTaxonomy(string title, FieldTaxonomyOptions options);
+
+        /// <summary>
+        /// Adds a new Taxonomy field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddTaxonomyAsync(string title, FieldTaxonomyOptions options);
+
+        /// <summary>
+        /// Adds a new Taxonomy Multi field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddTaxonomyMulti(string title, FieldTaxonomyOptions options);
+
+        /// <summary>
+        /// Adds a new Taxonomy Multi field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddTaxonomyMultiAsync(string title, FieldTaxonomyOptions options);
 
         /// <summary>
         /// Adds a new field from its XML schema

@@ -2,6 +2,7 @@
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
@@ -433,6 +434,93 @@ namespace PnP.Core.Model.SharePoint
         public IField AddUserMulti(string title, FieldUserOptions options = null)
         {
             return AddUserMultiAsync(title, options).GetAwaiter().GetResult();
+        }
+
+        private static string TaxonomySchemaXml(string title, bool multi)
+        {
+            string fieldType = "TaxonomyFieldType";
+            string multiple = "FALSE";
+            if (multi)
+            {
+                fieldType = "TaxonomyFieldTypeMulti";
+                multiple = "TRUE";
+            }
+
+            return $"<Field DisplayName='{title}' Name='{title}' Title='{title}' Type='{fieldType}' Mult='{multiple}'></Field>";
+        }
+
+        private static string BuildTaxonomyFieldUpdateXmlPayload(FieldTaxonomyOptions options, IDataModelParent parent)
+        {
+            string xml = CsomHelper.TaxonomyFieldUpdate;
+
+            xml = xml.Replace(CsomHelper.ListFieldId, (parent is IList) ? CsomHelper.TaxonomyFieldListObjectId : "");
+            xml = xml.Replace(CsomHelper.TermStoreId, $"{{{options.TermStoreId}}}");
+            xml = xml.Replace(CsomHelper.TermSetId, $"{{{options.TermSetId}}}");
+
+            int counter = 10;
+            xml = xml.Replace(CsomHelper.Counter, counter.ToString());
+            counter++;
+            xml = xml.Replace(CsomHelper.Counter2, counter.ToString());
+            counter++;
+            xml = xml.Replace(CsomHelper.Counter3, counter.ToString());
+            counter++;
+            xml = xml.Replace(CsomHelper.Counter4, counter.ToString());
+            counter++;
+            xml = xml.Replace(CsomHelper.Counter5, counter.ToString());
+
+            return xml;
+        }
+
+        public async Task<IField> AddTaxonomyAsync(string title, FieldTaxonomyOptions options)
+        {
+            // Step 1: create the field
+            string schemaXml = TaxonomySchemaXml(title, false);
+            var newField = CreateNewAndAdd() as Field;
+            await newField.AddAsXmlAsync(schemaXml, AddFieldOptionsFlags.DefaultValue).ConfigureAwait(false);
+
+            // Step 2: make it a taxonomy field (depends on CSOM)
+            var xmlPayload = BuildTaxonomyFieldUpdateXmlPayload(options, (this as IDataModelParent).Parent);
+            if (!string.IsNullOrEmpty(xmlPayload))
+            {
+                var apiCall = new ApiCall(xmlPayload)
+                {
+                    Commit = true
+                };
+                await newField.RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+
+            return newField;
+        }
+
+        public IField AddTaxonomy(string title, FieldTaxonomyOptions options)
+        {
+            return AddTaxonomyAsync(title, options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IField> AddTaxonomyMultiAsync(string title, FieldTaxonomyOptions options)
+        {
+            // Step 1: create the field
+            string schemaXml = TaxonomySchemaXml(title, true);
+            var newField = CreateNewAndAdd() as Field;
+            await newField.AddAsXmlAsync(schemaXml, AddFieldOptionsFlags.DefaultValue).ConfigureAwait(false);
+
+            // Step 2: make it a taxonomy field (depends on CSOM)
+            var xmlPayload = BuildTaxonomyFieldUpdateXmlPayload(options, (this as IDataModelParent).Parent);
+            if (!string.IsNullOrEmpty(xmlPayload))
+            {
+                var apiCall = new ApiCall(xmlPayload)
+                {
+                    Commit = true
+                };
+                await newField.RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            }
+
+            return newField;
+        }
+
+        public IField AddTaxonomyMulti(string title, FieldTaxonomyOptions options)
+        {
+            return AddTaxonomyMultiAsync(title, options).GetAwaiter().GetResult();
         }
 
         public async Task<IField> AddMultiChoiceAsync(string title, FieldMultiChoiceOptions options = null)
