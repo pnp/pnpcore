@@ -48,6 +48,11 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
+            if (!properties.ContainsKey("TermID"))
+            {
+                return null;
+            }
+            
             if (properties.ContainsKey("Label"))
             {
                 Label = properties["Label"];

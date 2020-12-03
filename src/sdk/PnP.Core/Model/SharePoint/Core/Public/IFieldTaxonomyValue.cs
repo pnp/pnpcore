@@ -10,11 +10,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Taxonomy label
         /// </summary>
-        public string Label { get; }
+        public string Label { get; set; }
 
         /// <summary>
         /// Taxonomy term id
         /// </summary>
-        public Guid TermId { get; }
+        public Guid TermId { get; set; }
     }
 }

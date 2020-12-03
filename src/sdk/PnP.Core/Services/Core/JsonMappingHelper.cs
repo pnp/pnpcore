@@ -298,10 +298,10 @@ namespace PnP.Core.Services
                         {
 
                             // Verify if we can map the received json to a supported field type
-                            (object fieldType, string fieldName) = ProcessSpecialRestFieldType(pnpObject, property.Name, dictionaryPropertyToAddValueTo, property.Value);
-                            if (fieldType != null)
+                            (object fieldValue, string fieldName) = ProcessSpecialRestFieldType(pnpObject, property.Name, dictionaryPropertyToAddValueTo, property.Value);
+                            if (fieldName != null)
                             {                                
-                                AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldType);
+                                AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldValue);
                             }
                             else
                             {
@@ -437,14 +437,6 @@ namespace PnP.Core.Services
                         {
                             #region Sample json
                             /*
-                              "LookupSingleId": {
-                                "__metadata": {
-                                  "type": "Collection(Edm.Int32)"
-                                },
-                                "results": [
-                                  71
-                                ]
-                              },
                               "LookupMultipleId": {
                                 "__metadata": {
                                   "type": "Collection(Edm.Int32)"
@@ -549,6 +541,7 @@ namespace PnP.Core.Services
                 {
                     #region Sample json
                     /*
+                     "LookupSingleField1Id": 1
                      "PersonSingleId": 6,
                      "PersonSingleStringId": "6",
                      "UserSingleField1Id": null,
@@ -572,6 +565,25 @@ namespace PnP.Core.Services
                         fieldValue.FromJson(json);
                         fieldValue.IsArray = false;
                         return new Tuple<object, string>(fieldValue, actualPropertyName);
+                    }
+                }
+                else if (propertyName.EndsWith("Id") && propertyName.Length > 2)
+                {
+                    string actualPropertyName = propertyName.Substring(0, propertyName.Length - 2);
+                    var field = GetListItemField(pnpObject, actualPropertyName);
+                    if (field != null && field.TypeAsString == "Lookup")
+                    {
+                        if (json.ValueKind == JsonValueKind.Null)
+                        {
+                            return new Tuple<object, string>(null, actualPropertyName);
+                        }
+                        else
+                        {
+                            var fieldValue = new FieldLookupValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = field };
+                            fieldValue.FromJson(json);
+                            fieldValue.IsArray = false;
+                            return new Tuple<object, string>(fieldValue, actualPropertyName);
+                        }
                     }
                 }
                 else if (json.ValueKind == JsonValueKind.String && (json.GetString().StartsWith("{") && json.GetString().Contains("LocationUri") && json.GetString().EndsWith("}")))

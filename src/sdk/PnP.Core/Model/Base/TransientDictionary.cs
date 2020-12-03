@@ -62,7 +62,7 @@ namespace PnP.Core.Model
             {
                 if (TryGetValue(key, out object oldValue))
                 {
-                    if (object.Equals(oldValue, value))
+                    if (object.Equals(oldValue, value) && !(value is FieldValueCollection))
                     {
                         // no change
                         return;

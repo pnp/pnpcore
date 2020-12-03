@@ -107,7 +107,8 @@ namespace PnP.Core.Model.SharePoint
                             else
                             {
                                 object fieldValue = null;
-                                if (!property.Values.Any())
+                                // Empty array's need to be treated as special fields
+                                if (!property.Values.Any() && !property.IsArray)
                                 {
                                     if (property.Value.ValueKind == JsonValueKind.Array)
                                     {
@@ -150,6 +151,10 @@ namespace PnP.Core.Model.SharePoint
                                                     yyLookup.IsArray = true;
                                                     (fieldValue as FieldValueCollection).Values.Add(yyLookup);
                                                 }
+                                            }
+                                            else 
+                                            {
+                                                (fieldValue as FieldValueCollection).Values.Add(yy);
                                             }
                                         }
                                     }
@@ -288,6 +293,7 @@ namespace PnP.Core.Model.SharePoint
                             */
                             #endregion
 
+                            // Add values that will become part of a FieldValueCollection later on
                             foreach(var streamPropertyElement in property.Value.EnumerateArray())
                             {
                                 (var fieldValue, var isArray) = DetectSpecialFieldType(streamProperty.Name, overflowDictionary, field);
@@ -309,6 +315,9 @@ namespace PnP.Core.Model.SharePoint
                             /*
                              "Url": "https:\u002f\u002fpnp.com\u002f3",
                              "Url.desc": "something3",
+
+                             "LookupSingleField1": "",
+                             "LookupSingleField1.": "",
                             */
 
                             var listDataAsStreamPropertyValue = new ListDataAsStreamPropertyValue()
@@ -392,15 +401,22 @@ namespace PnP.Core.Model.SharePoint
 
         private static Tuple<FieldValue, bool> DetectSpecialFieldType(string name, TransientDictionary dictionary, IField field)
         { 
+            // Some system fields are of type lookup but should not be processed as lookup
+            if (BuiltInFields.Contains(name))
+            {
+                return null;
+            }
+
             switch (field.TypeAsString)
                 {
                 case "URL": return new Tuple<FieldValue, bool>(new FieldUrlValue(name, dictionary) { Field = field }, false);
                 case "UserMulti": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary) { Field = field }, true);
                 case "User": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary) { Field = field }, false);
                 case "LookupMulti": return new Tuple<FieldValue, bool>(new FieldLookupValue(name, dictionary) { Field = field }, true);
-                case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue(name, dictionary) { Field = field }, false);
+                case "Lookup": return new Tuple<FieldValue, bool>(new FieldLookupValue(name, dictionary) { Field = field }, false);
                 case "TaxonomyFieldTypeMulti": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary) { Field = field }, true);
                 case "TaxonomyFieldType": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary) { Field = field }, false);
+                case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue(name, dictionary) { Field = field }, false);
 
                 default:
                     {
@@ -531,7 +547,14 @@ namespace PnP.Core.Model.SharePoint
                     }
                 default:
                     {
-                        return propertyValue.GetString();
+                        if (propertyValue.ValueKind == JsonValueKind.Undefined)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return propertyValue.GetString();
+                        }
                     }
             }
         }

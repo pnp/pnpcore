@@ -115,7 +115,8 @@ namespace PnP.Core.Model.SharePoint
         {
             if (Principal == null)
             {
-                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_MissingSharePointPrincipal);
+                //throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_MissingSharePointPrincipal);
+                return JsonSerializer.Serialize(new List<object>());
             }
 
             var users = new List<object>

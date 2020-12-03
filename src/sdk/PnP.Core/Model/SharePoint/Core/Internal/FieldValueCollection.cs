@@ -50,6 +50,30 @@ namespace PnP.Core.Model.SharePoint
             return JsonSerializer.Serialize(users.ToArray());
         }
 
+        internal object TaxonomyMultiToValidateUpdateItemJson()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var item in Values)
+            {
+                sb.Append($"{(item as FieldTaxonomyValue).ToValidateUpdateItemJson()}");
+            }
+
+            return sb.ToString();
+        }
+
+        internal object LookupMultiToValidateUpdateItemJson()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var item in Values)
+            {
+                sb.Append($"{(item as FieldLookupValue).ToValidateUpdateItemJson()};#");
+            }
+
+            return sb.ToString();
+        }
+
         internal object LookupMultiToJson()
         {
             List<int> ids = new List<int>();
