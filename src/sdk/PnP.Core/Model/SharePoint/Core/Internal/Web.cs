@@ -264,6 +264,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IBasePermissions EffectiveBasePermissions { get => GetModelValue<IBasePermissions>(); }
 
+        public IRegionalSettings RegionalSettings { get => GetModelValue<IRegionalSettings>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion

@@ -253,10 +253,31 @@ namespace PnP.Core.Services
                             idFieldValue = GetJsonPropertyValue(property).ToString();
                         }
 
-                        // Set the object property value taken from the JSON payload
-                        entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name,
-                            GetJsonElementFromPath(property.Value, entityField.SharePointJsonPath), entityField.DataType, entityField.SharePointUseCustomMapping, fromJsonCasting));
+                        if (!string.IsNullOrEmpty(entityField.SharePointJsonPath))
+                        {
+                            var jsonPathFields = entity.Fields.Where(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(entityField.SharePointName));
+                            if (jsonPathFields.Any())
+                            {
+                                foreach (var jsonPathField in jsonPathFields)
+                                {
+                                    var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.SharePointJsonPath);
 
+                                    // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                    // a json object returned that does have all properties loaded 
+                                    if (!jsonElement.Equals(property.Value))
+                                    {
+                                        jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                            jsonElement, jsonPathField.DataType, jsonPathField.SharePointUseCustomMapping, fromJsonCasting));
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Set the object property value taken from the JSON payload
+                            entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name,
+                                property.Value, entityField.DataType, entityField.SharePointUseCustomMapping, fromJsonCasting));
+                        }
                         requested = true;
                     }
                 }

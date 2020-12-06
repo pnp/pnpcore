@@ -536,6 +536,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IBasePermissions EffectiveBasePermissions { get; }
 
+        /// <summary>
+        /// Regional settings configured for this web
+        /// </summary>
+        public IRegionalSettings RegionalSettings { get; }
+
         #region Methods
 
         #region Pages API
@@ -893,11 +898,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IPushNotificationSubscriberCollection PushNotificationSubscribers { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IRegionalSettings RegionalSettings { get; }
 
         ///// <summary>
         ///// To update...
