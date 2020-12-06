@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -132,6 +133,8 @@ namespace PnP.Core.Model.SharePoint
 
         #region Methods
 
+        #region Item updates
+
         internal override async Task BaseUpdate(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Get entity information for the entity to update
@@ -227,11 +230,40 @@ namespace PnP.Core.Model.SharePoint
                     field.FieldValue = null;
                 }
             }
+            else if (changedProp.Value is List<string> stringList)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach(var choice in stringList)
+                {
+                    sb.Append($"{choice};#");
+                }
+                field.FieldValue = sb.ToString();
+            }
+            else if (changedProp.Value is DateTime dateValue)
+            {
+                // Send date in below format
+                field.FieldValue = dateValue.ToString("yyyy-MM-dd hh:mm:ss");
+            }
+            else if (changedProp.Value != null && (changedProp.Value is int))
+            {
+                field.FieldValue = changedProp.Value.ToString();
+            }
+            else if (changedProp.Value != null && (changedProp.Value is double doubleValue))
+            {
+                System.Globalization.CultureInfo usCulture = new System.Globalization.CultureInfo("en-US");
+                field.FieldValue = doubleValue.ToString(usCulture);
+            }
+            else if (changedProp.Value != null && (changedProp.Value is bool boolValue))
+            {
+                field.FieldValue = $"{(boolValue ? "1" : "0")}";
+            }
             else
             {
                 field.FieldValue = changedProp.Value;
             }
         }
+
+        #endregion
 
         #region Graph/Rest interoperability overrides
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously

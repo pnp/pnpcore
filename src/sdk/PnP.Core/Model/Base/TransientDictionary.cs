@@ -62,7 +62,8 @@ namespace PnP.Core.Model
             {
                 if (TryGetValue(key, out object oldValue))
                 {
-                    if (object.Equals(oldValue, value) && !(value is FieldValueCollection))
+                    // Always handle updates to FieldValueCollection and List<string> as changes on ListItems
+                    if (object.Equals(oldValue, value) && !((value is FieldValueCollection) || (value is List<string>)))
                     {
                         // no change
                         return;

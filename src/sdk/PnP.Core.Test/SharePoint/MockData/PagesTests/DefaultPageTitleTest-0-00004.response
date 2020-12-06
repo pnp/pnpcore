@@ -1,4 +1,4 @@
---batchresponse_e5943576-b705-42a8-b09f-0c2e3e95030e
+--batchresponse_bb7d9f2c-3f15-45b6-a565-a0d4739ca4fe
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "328",
+"ID": "356",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{DC2DD1F9-8278-4482-8AF8-218327A61550}",
+"UniqueId": "{25A67148-B744-47EC-B96E-0496ED41D1B0}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
@@ -68,6 +68,7 @@ CONTENT-TYPE: application/json; charset=utf-8
 "ContentVersion": "0",
 "DocConcurrencyNumber": "1",
 "_VirusStatus": "",
+"Restricted": "",
 "ecb.dispex": "return DispEx(this,event,'TRUE','FALSE','FALSE','','1','SharePoint.OpenDocuments','','','','6','0','','0x7ffffffffffbffff','','')"
 }
 ],"FirstRow" : 1,
@@ -80,4 +81,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_e5943576-b705-42a8-b09f-0c2e3e95030e--
+--batchresponse_bb7d9f2c-3f15-45b6-a565-a0d4739ca4fe--

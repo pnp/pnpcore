@@ -169,6 +169,58 @@ namespace PnP.Core.Model.SharePoint
         IField AddNumber(string title, FieldNumberOptions options);
         #endregion
 
+        #region Boolean fields
+        /// <summary>
+        /// Adds a new Boolean field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddBooleanBatchAsync(string title, FieldBooleanOptions options);
+
+        /// <summary>
+        /// Adds a new Boolean field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddBooleanBatch(string title, FieldBooleanOptions options);
+
+        /// <summary>
+        /// Adds a new Boolean field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddBooleanBatchAsync(Batch batch, string title, FieldBooleanOptions options);
+
+        /// <summary>
+        /// Adds a new Boolean field to the collection
+        /// </summary>
+        /// <param name="batch">Batch to use</param>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddBooleanBatch(Batch batch, string title, FieldBooleanOptions options);
+
+        /// <summary>
+        /// Adds a new Boolean field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        Task<IField> AddBooleanAsync(string title, FieldBooleanOptions options);
+
+        /// <summary>
+        /// Adds a new Boolean field to the collection
+        /// </summary>
+        /// <param name="title">The title of the field</param>
+        /// <param name="options">The specific options for field creation</param>
+        /// <returns>The added field</returns>
+        IField AddBoolean(string title, FieldBooleanOptions options);
+        #endregion
+
         #region DateTime fields
         /// <summary>
         /// Adds a new DateTime field to the collection

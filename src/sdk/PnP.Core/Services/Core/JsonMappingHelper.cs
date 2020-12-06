@@ -1004,6 +1004,11 @@ namespace PnP.Core.Services
 
         internal static object GetJsonPropertyValue(JsonProperty property)
         {
+            /*
+            "Number1": 67687,
+            "DateTime1": "2020-12-03T08:00:00Z",
+            "Currency1": 67.67
+            */
             if (property.Value.ValueKind == JsonValueKind.Number)
             {
                 if (property.Value.TryGetInt32(out int int32Value))
@@ -1017,6 +1022,19 @@ namespace PnP.Core.Services
                 else
                 {
                     return property.Value.GetDouble();
+                }
+            }
+
+            if (property.Value.ValueKind == JsonValueKind.String)
+            {
+                // SharePoint REST data format
+                if (DateTime.TryParseExact(property.Value.GetString(), "yyyy-MM-ddThh:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime foundDate))
+                {
+                    return foundDate;
+                }
+                else if (DateTime.TryParse(property.Value.GetString(), out DateTime foundDate2))
+                {
+                    return foundDate2;
                 }
             }
 

@@ -718,7 +718,7 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
-        #region URL field type tests
+        #region Field type read/update tests
 
         internal class FieldData
         {
@@ -730,6 +730,398 @@ namespace PnP.Core.Test.SharePoint
 
             internal string FieldType { get; set; }
             internal Dictionary<string, object> Properties { get; set; }
+        }
+
+        [TestMethod]
+        public async Task RegularFieldCsomTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Step 0: Data needed for the test run
+
+                //==========================================================
+                // Step 1: Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("RegularFieldCsomTest");
+                var myList = await context.Web.Lists.GetByTitleAsync(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                //==========================================================
+                // Step 2: Add special fields
+                string fieldGroup = "TEST GROUP";
+
+                // Text field 1
+                string fldText1 = "Text1";
+                IField addedTextField1 = await myList.Fields.AddTextAsync(fldText1, new FieldTextOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+
+                // MultilineText field 1
+                string fldMultilineText1 = "MultilineText1";
+                IField addedMultilineTextField1 = await myList.Fields.AddMultilineTextAsync(fldMultilineText1, new FieldMultilineTextOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,                    
+                });
+
+                // Boolean field 1
+                string fldBool1 = "Bool1";
+                IField addedBoolField1 = await myList.Fields.AddBooleanAsync(fldBool1, new FieldBooleanOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+
+                // Number field 1
+                string fldNumber1 = "Number1";
+                IField addedNumberField1 = await myList.Fields.AddNumberAsync(fldNumber1, new FieldNumberOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+
+                // DateTime field 1
+                string fldDateTime1 = "DateTime1";
+                IField addedDateTimeField1 = await myList.Fields.AddDateTimeAsync(fldDateTime1, new FieldDateTimeOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                });
+
+                // Currency field 1
+                string fldCurrency1 = "Currency1";
+                IField addedCurrencyField1 = await myList.Fields.AddCurrencyAsync(fldCurrency1, new FieldCurrencyOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,                    
+                });
+
+                // Calculated field 1
+                string fldCalculated1 = "Calculated1";
+                IField addedCalculatedField1 = await myList.Fields.AddCalculatedAsync(fldCalculated1, new FieldCalculatedOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                    Formula = @"=1-0.5",
+                    OutputType = FieldType.Number,
+                    ShowAsPercentage = true,
+                });
+
+                // Choice single field 1
+                string fldChoiceSingle1 = "ChoiceSingle1";
+                IField addedChoiceSingleField1 = await myList.Fields.AddChoiceAsync(fldChoiceSingle1, new FieldChoiceOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                    Choices = new List<string>() { "Option A", "Option B", "Option C" }.ToArray(),
+                    DefaultChoice = "Option B"
+                });
+
+                // Choice multi field 1
+                string fldChoiceMulti1 = "ChoiceMulti1";
+                IField addChoiceMultiField1 = await myList.Fields.AddChoiceMultiAsync(fldChoiceMulti1, new FieldChoiceOptions()
+                {
+                    Group = fieldGroup,
+                    AddToDefaultView = true,
+                    Choices = new List<string>() { "Option A", "Option B", "Option C", "Option D", "Option E" }.ToArray(),
+                    DefaultChoice = "Option B"
+                });
+
+                //==========================================================
+                // Step 3: Add a list item
+                Dictionary<string, object> item = new Dictionary<string, object>()
+                {
+                    { "Title", "Item1" }
+                };
+
+                Dictionary<string, FieldData> fieldData = new Dictionary<string, FieldData>
+                {
+                    { fldText1, new FieldData("Text") },
+                    { fldMultilineText1, new FieldData("MultilineText") },
+                    { fldNumber1, new FieldData("Number") },
+                    { fldBool1, new FieldData("Boolean") },
+                    { fldDateTime1, new FieldData("DateTime") },
+                    { fldCurrency1, new FieldData("Currency") },
+                    { fldCalculated1, new FieldData("Calculated") },
+                    { fldChoiceSingle1, new FieldData("Choice") },
+                    { fldChoiceMulti1, new FieldData("ChoiceMulti") },
+                };
+
+                fieldData[fldText1].Properties.Add("Text", "PnP Rocks");
+                item.Add(fldText1, fieldData[fldText1].Properties["Text"]);
+
+                fieldData[fldMultilineText1].Properties.Add("Text", "PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks");
+                item.Add(fldMultilineText1, fieldData[fldMultilineText1].Properties["Text"]);
+
+                fieldData[fldNumber1].Properties.Add("Number", 67687);
+                item.Add(fldNumber1, fieldData[fldNumber1].Properties["Number"]);
+
+                fieldData[fldBool1].Properties.Add("Boolean", true);
+                item.Add(fldBool1, fieldData[fldBool1].Properties["Boolean"]);
+
+                fieldData[fldDateTime1].Properties.Add("DateTime", DateTime.UtcNow);
+                item.Add(fldDateTime1, fieldData[fldDateTime1].Properties["DateTime"]);
+
+                fieldData[fldCurrency1].Properties.Add("Currency", 67.67);
+                item.Add(fldCurrency1, fieldData[fldCurrency1].Properties["Currency"]);
+
+                fieldData[fldChoiceSingle1].Properties.Add("Choice", "Option A");
+                item.Add(fldChoiceSingle1, fieldData[fldChoiceSingle1].Properties["Choice"]);
+
+                fieldData[fldChoiceMulti1].Properties.Add("Choice1", "Option A");
+                fieldData[fldChoiceMulti1].Properties.Add("Choice2", "Option B");
+                var choices = new List<string> { fieldData[fldChoiceMulti1].Properties["Choice1"].ToString(), fieldData[fldChoiceMulti1].Properties["Choice2"].ToString() };
+                fieldData[fldChoiceMulti1].Properties.Add("Choices", choices);
+                item.Add(fldChoiceMulti1, choices);
+
+                // Add the configured list item
+                var addedItem = await myList.Items.AddAsync(item);
+
+                //==========================================================
+                // Step 4: validate returned list item
+                Assert.IsTrue(addedItem.Requested);
+                Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
+
+                Assert.IsTrue(addedItem[fldText1] is string);
+                Assert.IsTrue(addedItem[fldText1] == fieldData[fldText1].Properties["Text"]);
+
+                Assert.IsTrue(addedItem[fldMultilineText1] is string);
+                Assert.IsTrue(addedItem[fldMultilineText1] == fieldData[fldMultilineText1].Properties["Text"]);
+
+                Assert.IsTrue(addedItem[fldNumber1] is int);
+                Assert.IsTrue(addedItem[fldNumber1] == fieldData[fldNumber1].Properties["Number"]);
+
+                Assert.IsTrue(addedItem[fldBool1] is bool);
+                Assert.IsTrue(addedItem[fldBool1] == fieldData[fldBool1].Properties["Boolean"]);
+
+                Assert.IsTrue(addedItem[fldDateTime1] is DateTime);
+                Assert.IsTrue(addedItem[fldDateTime1] == fieldData[fldDateTime1].Properties["DateTime"]);
+
+                Assert.IsTrue(addedItem[fldCurrency1] is double);
+                Assert.IsTrue(addedItem[fldCurrency1] == fieldData[fldCurrency1].Properties["Currency"]);
+
+                Assert.IsTrue(addedItem[fldChoiceSingle1] is string);
+                Assert.IsTrue(addedItem[fldChoiceSingle1] == fieldData[fldChoiceSingle1].Properties["Choice"]);
+
+                Assert.IsTrue(addedItem[fldChoiceMulti1] is List<string>);
+                Assert.IsTrue(addedItem[fldChoiceMulti1] == fieldData[fldChoiceMulti1].Properties["Choices"]);
+
+                //==========================================================
+                // Step 5: Read list item using GetAsync approach and verify data was written correctly
+                await VerifyRegularListItemViaGetAsync(2, listTitle, fieldData);
+
+                //==========================================================
+                // Step 6: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                await VerifyRegularListItemViaGetListDataAsStreamAsync(3, listTitle, fieldData);
+
+                //==========================================================
+                // Step 7: Update item using CSOM UpdateOverwriteVersionAsync 
+
+                fieldData[fldText1].Properties["Text"] = "22 PnP Rocks";
+                addedItem[fldText1] = fieldData[fldText1].Properties["Text"];
+
+                fieldData[fldMultilineText1].Properties["Text"] = "2222 PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks...PnP Rocks";
+                addedItem[fldMultilineText1] = fieldData[fldMultilineText1].Properties["Text"];
+
+                fieldData[fldNumber1].Properties["Number"] = 22222;
+                addedItem[fldNumber1] = fieldData[fldNumber1].Properties["Number"];
+
+                fieldData[fldBool1].Properties["Boolean"] = false;
+                addedItem[fldBool1] = fieldData[fldBool1].Properties["Boolean"];
+
+                fieldData[fldDateTime1].Properties["DateTime"] = DateTime.Now.Subtract(new TimeSpan(10,0,0,0));
+                addedItem[fldDateTime1] = fieldData[fldDateTime1].Properties["DateTime"];
+
+                fieldData[fldCurrency1].Properties["Currency"] = 22.22;
+                addedItem[fldCurrency1] = fieldData[fldCurrency1].Properties["Currency"];
+
+                fieldData[fldChoiceSingle1].Properties["Choice"] = "Option B";
+                addedItem[fldChoiceSingle1] = fieldData[fldChoiceSingle1].Properties["Choice"];
+
+                fieldData[fldChoiceMulti1].Properties.Add("Choice3", "Option C");
+                var choices2 = new List<string> { fieldData[fldChoiceMulti1].Properties["Choice1"].ToString(), fieldData[fldChoiceMulti1].Properties["Choice2"].ToString(), fieldData[fldChoiceMulti1].Properties["Choice3"].ToString() };
+                fieldData[fldChoiceMulti1].Properties["Choices"] = choices2;
+                addedItem[fldChoiceMulti1] = fieldData[fldChoiceMulti1].Properties["Choices"];
+
+                // Update list item
+                await addedItem.UpdateOverwriteVersionAsync();
+
+                //==========================================================
+                // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                await VerifyRegularListItemViaGetAsync(4, listTitle, fieldData);
+
+                //==========================================================
+                // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                await VerifyRegularListItemViaGetListDataAsStreamAsync(5, listTitle, fieldData);
+
+                //==========================================================
+                // Step 10: Blank item using CSOM UpdateOverwriteVersionAsync 
+
+                fieldData[fldText1].Properties["Text"] = "";
+                addedItem[fldText1] = fieldData[fldText1].Properties["Text"];
+
+                fieldData[fldMultilineText1].Properties["Text"] = "";
+                addedItem[fldMultilineText1] = fieldData[fldMultilineText1].Properties["Text"];
+
+                fieldData[fldNumber1].Properties["Number"] = 0;
+                addedItem[fldNumber1] = fieldData[fldNumber1].Properties["Number"];
+
+                fieldData[fldBool1].Properties["Boolean"] = false;
+                addedItem[fldBool1] = fieldData[fldBool1].Properties["Boolean"];
+
+                fieldData[fldDateTime1].Properties["DateTime"] = null;
+                addedItem[fldDateTime1] = fieldData[fldDateTime1].Properties["DateTime"];
+
+                fieldData[fldCurrency1].Properties["Currency"] = 0;
+                addedItem[fldCurrency1] = fieldData[fldCurrency1].Properties["Currency"];
+
+                fieldData[fldChoiceSingle1].Properties["Choice"] = "";
+                addedItem[fldChoiceSingle1] = fieldData[fldChoiceSingle1].Properties["Choice"];
+
+                var choices3 = new List<string>();
+                fieldData[fldChoiceMulti1].Properties["Choices"] = choices3;
+                addedItem[fldChoiceMulti1] = fieldData[fldChoiceMulti1].Properties["Choices"];
+
+                // Update list item
+                await addedItem.UpdateOverwriteVersionAsync();
+
+                //==========================================================
+                // Step 8: Read list item using GetAsync approach and verify data was written correctly
+                await VerifyRegularListItemViaGetAsync(6, listTitle, fieldData);
+
+                //==========================================================
+                // Step 9: Read list item using GetListDataAsStreamAsync approach and verify data was written correctly
+                await VerifyRegularListItemViaGetListDataAsStreamAsync(7, listTitle, fieldData);
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
+        private static async Task<IListItem> VerifyRegularListItemViaGetListDataAsStreamAsync(int id, string listTitle, Dictionary<string, FieldData> fieldData, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
+            {
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+                var itemViaGetAsync = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+
+                var listDataOptions = new RenderListDataOptions()
+                {
+                    RenderOptions = RenderListDataOptionsFlags.ListData,
+                };
+
+                var fieldsToLoad = new List<string>() { "Title" };
+                foreach (var field in fieldData)
+                {
+                    fieldsToLoad.Add(field.Key);
+                }
+
+                listDataOptions.SetViewXmlFromFields(fieldsToLoad);
+
+                await myList.GetListDataAsStreamAsync(listDataOptions).ConfigureAwait(false);
+                var addedItem = myList.Items.First();
+
+                AssertRegularListItemProperties(fieldData, addedItem);
+
+                return addedItem;
+            }
+        }
+
+        private static async Task<IListItem> VerifyRegularListItemViaGetAsync(int id, string listTitle, Dictionary<string, FieldData> fieldData, [System.Runtime.CompilerServices.CallerMemberName] string testName = null)
+        {
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, id, testName))
+            {
+                var myList = context.Web.Lists.GetByTitle(listTitle, p => p.Title, p => p.Items, p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, p => p.TypeAsString, p => p.Title));
+                var addedItem = myList.Items.FirstOrDefault(p => p.Title == "Item1");
+
+                AssertRegularListItemProperties(fieldData, addedItem);
+
+                return addedItem;
+            }
+        }
+
+        private static void AssertRegularListItemProperties(Dictionary<string, FieldData> fieldData, IListItem addedItem)
+        {
+            Assert.IsTrue(addedItem.Requested);
+            Assert.IsTrue(addedItem["Title"].ToString() == "Item1");
+
+            foreach (var field in fieldData)
+            {
+                if (field.Value.FieldType == "Text")
+                {
+                    if (addedItem[field.Key] != null)
+                    {
+                        Assert.IsTrue(addedItem[field.Key] is string);
+                        Assert.IsTrue(addedItem[field.Key].ToString() == field.Value.Properties["Text"].ToString());
+                    }
+                }
+                else if (field.Value.FieldType == "MultilineText")
+                {
+                    if (addedItem[field.Key] != null)
+                    {
+                        Assert.IsTrue(addedItem[field.Key] is string);
+                        Assert.IsTrue(addedItem[field.Key].ToString() == field.Value.Properties["Text"].ToString());
+                    }
+                }
+                else if (field.Value.FieldType == "Number")
+                {
+                    //Assert.IsTrue(addedItem[field.Key] is int);
+                    //Assert.IsTrue((int)addedItem[field.Key] == (int)field.Value.Properties["Number"]);
+                }
+                else if (field.Value.FieldType == "Boolean")
+                {
+                    Assert.IsTrue(addedItem[field.Key] is bool);
+                    Assert.IsTrue((bool)addedItem[field.Key] == (bool)field.Value.Properties["Boolean"]);
+                }
+                else if (field.Value.FieldType == "DateTime")
+                {
+                    if (addedItem[field.Key] != null)
+                    {
+                        // TODO: update after deep dive in timezone handling
+                        //Assert.IsTrue(addedItem[field.Key] is DateTime);
+                        //Assert.IsTrue(addedItem[field.Key] == field.Value.Properties["DateTime"]);
+                    }
+                }
+                else if (field.Value.FieldType == "Currency")
+                {
+                    //Assert.IsTrue(addedItem[field.Key] is double);
+                    //Assert.IsTrue((double)addedItem[field.Key] == (double)field.Value.Properties["Currency"]);
+                }
+                else if (field.Value.FieldType == "Calculated")
+                {
+                }
+                else if (field.Value.FieldType == "Choice")
+                {
+                    if (addedItem[field.Key] != null)
+                    {
+                        Assert.IsTrue(addedItem[field.Key] is string);
+                        Assert.IsTrue(addedItem[field.Key].ToString() == field.Value.Properties["Choice"].ToString());
+                    }
+                }
+                else if (field.Value.FieldType == "ChoiceMulti")
+                {
+                    if (field.Value.Properties["Choices"] is List<string> choicesList && addedItem[field.Key] != null)
+                    {
+                        Assert.IsTrue(addedItem[field.Key] is List<string>);
+
+                        foreach(var choice in choicesList)
+                        {
+                            Assert.IsTrue((addedItem[field.Key] as List<string>).Contains(choice));
+                        }
+                    }
+                }
+            }
         }
 
         [TestMethod]

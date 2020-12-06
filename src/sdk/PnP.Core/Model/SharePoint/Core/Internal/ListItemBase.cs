@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -517,6 +518,13 @@ namespace PnP.Core.Model.SharePoint
                         return time.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffzzz"); 
                     }
                 }
+                else if (fieldType.Equals("Double"))
+                {
+                    if (value is double doubleValue)
+                    {
+                        return doubleValue.ToString("G", CultureInfo.InvariantCulture);
+                    }
+                }   
                 else
                 {
                     return value.ToString();

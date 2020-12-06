@@ -140,9 +140,8 @@ namespace PnP.Core.Model.SharePoint
             return creationOptions;
         }
         #endregion
-
+        
         #region Number fields
-
         public async Task<IField> AddNumberBatchAsync(string title, FieldNumberOptions options)
         {
             return await AddNumberBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
@@ -213,6 +212,56 @@ namespace PnP.Core.Model.SharePoint
                 creationOptions.SetAttribute("Percentage", options.ShowAsPercentage.ToString().ToUpper());
             }
 
+            return creationOptions;
+        }
+
+        #endregion
+
+        #region Boolean fields
+        public async Task<IField> AddBooleanBatchAsync(string title, FieldBooleanOptions options)
+        {
+            return await AddBooleanBatchAsync(PnPContext.CurrentBatch, title, options).ConfigureAwait(false);
+        }
+
+        public IField AddBooleanBatch(string title, FieldBooleanOptions options)
+        {
+            return AddBooleanBatchAsync(title, options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IField> AddBooleanBatchAsync(Batch batch, string title, FieldBooleanOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            return await AddFieldBatchAsync(batch, FieldBooleanOptionsToCreation(title, options)).ConfigureAwait(false);
+        }
+
+        public IField AddBooleanBatch(Batch batch, string title, FieldBooleanOptions options)
+        {
+            return AddBooleanBatchAsync(batch, title, options).GetAwaiter().GetResult();
+        }
+
+        public async Task<IField> AddBooleanAsync(string title, FieldBooleanOptions options)
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            return await AddFieldAsync(FieldBooleanOptionsToCreation(title, options)).ConfigureAwait(false);
+        }
+
+        public IField AddBoolean(string title, FieldBooleanOptions options)
+        {
+            return AddBooleanAsync(title, options).GetAwaiter().GetResult();
+        }
+
+        private static FieldCreationOptions FieldBooleanOptionsToCreation(string title, FieldBooleanOptions options)
+        {
+            FieldCreationOptions creationOptions = new FieldCreationOptions(FieldType.Boolean);
+            creationOptions.ImportFromCommonFieldOptions(title, options);
             return creationOptions;
         }
         #endregion
