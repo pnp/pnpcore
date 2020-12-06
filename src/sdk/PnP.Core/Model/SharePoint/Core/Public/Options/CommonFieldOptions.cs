@@ -1,11 +1,33 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿using System;
+
+namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
     /// Available options for adding most of SharePoint fields
     /// (Excepted Lookup fields)
     /// </summary>
-    public abstract class CommonFieldOptions : FieldOptions
+    public abstract class CommonFieldOptions
     {
+        /// <summary>
+        /// Guid of the field
+        /// </summary>
+        public Guid? Id { get; set; }
+
+        /// <summary>
+        /// Sets whether the field is required
+        /// </summary>
+        public bool? Required { get; set; }
+
+        /// <summary>
+        /// Add this field to the default view
+        /// </summary>
+        public bool AddToDefaultView { get; set; }
+
+        /// <summary>
+        /// An <see cref="AddFieldOptionsFlags"/> flag that specifies the field options to be applied during add
+        /// </summary>
+        public AddFieldOptionsFlags Options { get; set; }
+
         /// <summary>
         /// Sets the description of the field
         /// </summary>
@@ -45,5 +67,20 @@
         /// Sets the validation message of the field
         /// </summary>
         public string ValidationMessage { get; set; }
+
+        /// <summary>
+        /// Show this field on the list's edit form
+        /// </summary>
+        public bool? ShowInEditForm { get; set; }
+
+        /// <summary>
+        /// Show this field on the list's view forms
+        /// </summary>
+        public bool? ShowInViewForms { get; set; }
+
+        /// <summary>
+        /// Show this field on the list's new form
+        /// </summary>
+        public bool? ShowInNewForm { get; set; }
     }
 }

@@ -158,6 +158,21 @@ namespace PnP.Core.Model.SharePoint
             {
                 SetChildXmlNode("Validation", $"<Validation Message=\"{CsomHelper.XmlString(common.ValidationMessage, true)}\">{CsomHelper.XmlString(common.ValidationFormula)}</Validation>");
             }
+
+            if (common.ShowInEditForm.HasValue)
+            {
+                SetAttribute("ShowInEditForm", common.ShowInEditForm.Value.ToString().ToUpper());
+            }
+
+            if (common.ShowInViewForms.HasValue)
+            {
+                SetAttribute("ShowInViewForms", common.ShowInViewForms.Value.ToString().ToUpper());
+            }
+
+            if (common.ShowInNewForm.HasValue)
+            {
+                SetAttribute("ShowInNewForm", common.ShowInNewForm.Value.ToString().ToUpper());
+            }
         }
 
         internal void SetAttribute(string key, string value)
