@@ -4173,6 +4173,19 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.CommonFieldOptions
   fullName: PnP.Core.Model.SharePoint.CommonFieldOptions
   nameWithType: CommonFieldOptions
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.AddToDefaultView
+  name: AddToDefaultView
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_AddToDefaultView
+  commentId: P:PnP.Core.Model.SharePoint.CommonFieldOptions.AddToDefaultView
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.AddToDefaultView
+  nameWithType: CommonFieldOptions.AddToDefaultView
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.AddToDefaultView*
+  name: AddToDefaultView
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_AddToDefaultView_
+  commentId: Overload:PnP.Core.Model.SharePoint.CommonFieldOptions.AddToDefaultView
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.AddToDefaultView
+  nameWithType: CommonFieldOptions.AddToDefaultView
 - uid: PnP.Core.Model.SharePoint.CommonFieldOptions.DefaultFormula
   name: DefaultFormula
   href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_DefaultFormula
@@ -4238,6 +4251,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.Hidden
   nameWithType: CommonFieldOptions.Hidden
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_Id
+  commentId: P:PnP.Core.Model.SharePoint.CommonFieldOptions.Id
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.Id
+  nameWithType: CommonFieldOptions.Id
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.CommonFieldOptions.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.Id
+  nameWithType: CommonFieldOptions.Id
 - uid: PnP.Core.Model.SharePoint.CommonFieldOptions.Indexed
   name: Indexed
   href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_Indexed
@@ -4251,6 +4277,71 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.Indexed
   nameWithType: CommonFieldOptions.Indexed
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.Options
+  name: Options
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_Options
+  commentId: P:PnP.Core.Model.SharePoint.CommonFieldOptions.Options
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.Options
+  nameWithType: CommonFieldOptions.Options
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.Options*
+  name: Options
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_Options_
+  commentId: Overload:PnP.Core.Model.SharePoint.CommonFieldOptions.Options
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.Options
+  nameWithType: CommonFieldOptions.Options
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.Required
+  name: Required
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_Required
+  commentId: P:PnP.Core.Model.SharePoint.CommonFieldOptions.Required
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.Required
+  nameWithType: CommonFieldOptions.Required
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.Required*
+  name: Required
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_Required_
+  commentId: Overload:PnP.Core.Model.SharePoint.CommonFieldOptions.Required
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.Required
+  nameWithType: CommonFieldOptions.Required
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInEditForm
+  name: ShowInEditForm
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_ShowInEditForm
+  commentId: P:PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInEditForm
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInEditForm
+  nameWithType: CommonFieldOptions.ShowInEditForm
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInEditForm*
+  name: ShowInEditForm
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_ShowInEditForm_
+  commentId: Overload:PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInEditForm
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInEditForm
+  nameWithType: CommonFieldOptions.ShowInEditForm
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInNewForm
+  name: ShowInNewForm
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_ShowInNewForm
+  commentId: P:PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInNewForm
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInNewForm
+  nameWithType: CommonFieldOptions.ShowInNewForm
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInNewForm*
+  name: ShowInNewForm
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_ShowInNewForm_
+  commentId: Overload:PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInNewForm
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInNewForm
+  nameWithType: CommonFieldOptions.ShowInNewForm
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInViewForms
+  name: ShowInViewForms
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_ShowInViewForms
+  commentId: P:PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInViewForms
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInViewForms
+  nameWithType: CommonFieldOptions.ShowInViewForms
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInViewForms*
+  name: ShowInViewForms
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_ShowInViewForms_
+  commentId: Overload:PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInViewForms
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.ShowInViewForms
+  nameWithType: CommonFieldOptions.ShowInViewForms
 - uid: PnP.Core.Model.SharePoint.CommonFieldOptions.ValidationFormula
   name: ValidationFormula
   href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_ValidationFormula
@@ -4601,6 +4692,12 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.DefaultWebPart.YouTube
   fullName: PnP.Core.Model.SharePoint.DefaultWebPart.YouTube
   nameWithType: DefaultWebPart.YouTube
+- uid: PnP.Core.Model.SharePoint.FieldBooleanOptions
+  name: FieldBooleanOptions
+  href: api/PnP.Core.Model.SharePoint.FieldBooleanOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.FieldBooleanOptions
+  fullName: PnP.Core.Model.SharePoint.FieldBooleanOptions
+  nameWithType: FieldBooleanOptions
 - uid: PnP.Core.Model.SharePoint.FieldCalculatedOptions
   name: FieldCalculatedOptions
   href: api/PnP.Core.Model.SharePoint.FieldCalculatedOptions.html
@@ -4672,6 +4769,51 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.FieldCalculatedOptions.ShowAsPercentage
   nameWithType: FieldCalculatedOptions.ShowAsPercentage
+- uid: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions
+  name: FieldChoiceMultiOptions
+  href: api/PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.FieldChoiceMultiOptions
+  fullName: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions
+  nameWithType: FieldChoiceMultiOptions
+- uid: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.Choices
+  name: Choices
+  href: api/PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.html#PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_Choices
+  commentId: P:PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.Choices
+  fullName: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.Choices
+  nameWithType: FieldChoiceMultiOptions.Choices
+- uid: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.Choices*
+  name: Choices
+  href: api/PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.html#PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_Choices_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.Choices
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.Choices
+  nameWithType: FieldChoiceMultiOptions.Choices
+- uid: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.DefaultChoice
+  name: DefaultChoice
+  href: api/PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.html#PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_DefaultChoice
+  commentId: P:PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.DefaultChoice
+  fullName: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.DefaultChoice
+  nameWithType: FieldChoiceMultiOptions.DefaultChoice
+- uid: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.DefaultChoice*
+  name: DefaultChoice
+  href: api/PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.html#PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_DefaultChoice_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.DefaultChoice
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.DefaultChoice
+  nameWithType: FieldChoiceMultiOptions.DefaultChoice
+- uid: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.FillInChoice
+  name: FillInChoice
+  href: api/PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.html#PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_FillInChoice
+  commentId: P:PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.FillInChoice
+  fullName: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.FillInChoice
+  nameWithType: FieldChoiceMultiOptions.FillInChoice
+- uid: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.FillInChoice*
+  name: FillInChoice
+  href: api/PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.html#PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_FillInChoice_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.FillInChoice
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldChoiceMultiOptions.FillInChoice
+  nameWithType: FieldChoiceMultiOptions.FillInChoice
 - uid: PnP.Core.Model.SharePoint.FieldChoiceOptions
   name: FieldChoiceOptions
   href: api/PnP.Core.Model.SharePoint.FieldChoiceOptions.html
@@ -4691,6 +4833,187 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.FieldChoiceOptions.EditFormat
   nameWithType: FieldChoiceOptions.EditFormat
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions
+  name: FieldCreationOptions
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.FieldCreationOptions
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions
+  nameWithType: FieldCreationOptions
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor(PnP.Core.Model.SharePoint.FieldType)
+  name: FieldCreationOptions(FieldType)
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions__ctor_PnP_Core_Model_SharePoint_FieldType_
+  commentId: M:PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor(PnP.Core.Model.SharePoint.FieldType)
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldCreationOptions(PnP.Core.Model.SharePoint.FieldType)
+  nameWithType: FieldCreationOptions.FieldCreationOptions(FieldType)
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor(System.String)
+  name: FieldCreationOptions(String)
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions__ctor_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor(System.String)
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldCreationOptions(System.String)
+  nameWithType: FieldCreationOptions.FieldCreationOptions(String)
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor*
+  name: FieldCreationOptions
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions__ctor_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldCreationOptions
+  nameWithType: FieldCreationOptions.FieldCreationOptions
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
+  name: AdditionalAttributes
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AdditionalAttributes
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
+  nameWithType: FieldCreationOptions.AdditionalAttributes
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes*
+  name: AdditionalAttributes
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AdditionalAttributes_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
+  nameWithType: FieldCreationOptions.AdditionalAttributes
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
+  name: AdditionalChildNodes
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AdditionalChildNodes
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
+  nameWithType: FieldCreationOptions.AdditionalChildNodes
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes*
+  name: AdditionalChildNodes
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AdditionalChildNodes_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
+  nameWithType: FieldCreationOptions.AdditionalChildNodes
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
+  name: AddToDefaultView
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AddToDefaultView
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
+  nameWithType: FieldCreationOptions.AddToDefaultView
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView*
+  name: AddToDefaultView
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AddToDefaultView_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
+  nameWithType: FieldCreationOptions.AddToDefaultView
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
+  name: ClientSideComponentId
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_ClientSideComponentId
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
+  nameWithType: FieldCreationOptions.ClientSideComponentId
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId*
+  name: ClientSideComponentId
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_ClientSideComponentId_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
+  nameWithType: FieldCreationOptions.ClientSideComponentId
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
+  name: ClientSideComponentProperties
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_ClientSideComponentProperties
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
+  nameWithType: FieldCreationOptions.ClientSideComponentProperties
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties*
+  name: ClientSideComponentProperties
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_ClientSideComponentProperties_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
+  nameWithType: FieldCreationOptions.ClientSideComponentProperties
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_DisplayName
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
+  nameWithType: FieldCreationOptions.DisplayName
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName*
+  name: DisplayName
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_DisplayName_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
+  nameWithType: FieldCreationOptions.DisplayName
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
+  name: FieldType
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_FieldType
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
+  nameWithType: FieldCreationOptions.FieldType
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType*
+  name: FieldType
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_FieldType_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
+  nameWithType: FieldCreationOptions.FieldType
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Group
+  name: Group
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Group
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.Group
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Group
+  nameWithType: FieldCreationOptions.Group
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Group*
+  name: Group
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Group_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.Group
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Group
+  nameWithType: FieldCreationOptions.Group
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Id
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.Id
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Id
+  nameWithType: FieldCreationOptions.Id
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Id
+  nameWithType: FieldCreationOptions.Id
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
+  name: InternalName
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_InternalName
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
+  nameWithType: FieldCreationOptions.InternalName
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName*
+  name: InternalName
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_InternalName_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
+  nameWithType: FieldCreationOptions.InternalName
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Options
+  name: Options
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Options
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.Options
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Options
+  nameWithType: FieldCreationOptions.Options
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Options*
+  name: Options
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Options_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.Options
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Options
+  nameWithType: FieldCreationOptions.Options
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Required
+  name: Required
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Required
+  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.Required
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Required
+  nameWithType: FieldCreationOptions.Required
+- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Required*
+  name: Required
+  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Required_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.Required
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Required
+  nameWithType: FieldCreationOptions.Required
 - uid: PnP.Core.Model.SharePoint.FieldCurrencyOptions
   name: FieldCurrencyOptions
   href: api/PnP.Core.Model.SharePoint.FieldCurrencyOptions.html
@@ -4710,6 +5033,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.FieldCurrencyOptions.CurrencyLocaleId
   nameWithType: FieldCurrencyOptions.CurrencyLocaleId
+- uid: PnP.Core.Model.SharePoint.FieldCurrencyOptions.Decimals
+  name: Decimals
+  href: api/PnP.Core.Model.SharePoint.FieldCurrencyOptions.html#PnP_Core_Model_SharePoint_FieldCurrencyOptions_Decimals
+  commentId: P:PnP.Core.Model.SharePoint.FieldCurrencyOptions.Decimals
+  fullName: PnP.Core.Model.SharePoint.FieldCurrencyOptions.Decimals
+  nameWithType: FieldCurrencyOptions.Decimals
+- uid: PnP.Core.Model.SharePoint.FieldCurrencyOptions.Decimals*
+  name: Decimals
+  href: api/PnP.Core.Model.SharePoint.FieldCurrencyOptions.html#PnP_Core_Model_SharePoint_FieldCurrencyOptions_Decimals_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldCurrencyOptions.Decimals
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldCurrencyOptions.Decimals
+  nameWithType: FieldCurrencyOptions.Decimals
 - uid: PnP.Core.Model.SharePoint.FieldDateTimeOptions
   name: FieldDateTimeOptions
   href: api/PnP.Core.Model.SharePoint.FieldDateTimeOptions.html
@@ -4800,38 +5136,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.FieldLookupOptions.LookupWebId
   nameWithType: FieldLookupOptions.LookupWebId
-- uid: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions
-  name: FieldMultiChoiceOptions
-  href: api/PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html
-  commentId: T:PnP.Core.Model.SharePoint.FieldMultiChoiceOptions
-  fullName: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions
-  nameWithType: FieldMultiChoiceOptions
-- uid: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.Choices
-  name: Choices
-  href: api/PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html#PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_Choices
-  commentId: P:PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.Choices
-  fullName: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.Choices
-  nameWithType: FieldMultiChoiceOptions.Choices
-- uid: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.Choices*
-  name: Choices
-  href: api/PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html#PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_Choices_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.Choices
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.Choices
-  nameWithType: FieldMultiChoiceOptions.Choices
-- uid: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.FillInChoice
-  name: FillInChoice
-  href: api/PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html#PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_FillInChoice
-  commentId: P:PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.FillInChoice
-  fullName: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.FillInChoice
-  nameWithType: FieldMultiChoiceOptions.FillInChoice
-- uid: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.FillInChoice*
-  name: FillInChoice
-  href: api/PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.html#PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_FillInChoice_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.FillInChoice
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldMultiChoiceOptions.FillInChoice
-  nameWithType: FieldMultiChoiceOptions.FillInChoice
 - uid: PnP.Core.Model.SharePoint.FieldMultilineTextOptions
   name: FieldMultilineTextOptions
   href: api/PnP.Core.Model.SharePoint.FieldMultilineTextOptions.html
@@ -4922,6 +5226,32 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.FieldNumberOptions
   fullName: PnP.Core.Model.SharePoint.FieldNumberOptions
   nameWithType: FieldNumberOptions
+- uid: PnP.Core.Model.SharePoint.FieldNumberOptions.Decimals
+  name: Decimals
+  href: api/PnP.Core.Model.SharePoint.FieldNumberOptions.html#PnP_Core_Model_SharePoint_FieldNumberOptions_Decimals
+  commentId: P:PnP.Core.Model.SharePoint.FieldNumberOptions.Decimals
+  fullName: PnP.Core.Model.SharePoint.FieldNumberOptions.Decimals
+  nameWithType: FieldNumberOptions.Decimals
+- uid: PnP.Core.Model.SharePoint.FieldNumberOptions.Decimals*
+  name: Decimals
+  href: api/PnP.Core.Model.SharePoint.FieldNumberOptions.html#PnP_Core_Model_SharePoint_FieldNumberOptions_Decimals_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldNumberOptions.Decimals
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldNumberOptions.Decimals
+  nameWithType: FieldNumberOptions.Decimals
+- uid: PnP.Core.Model.SharePoint.FieldNumberOptions.DefaultValue
+  name: DefaultValue
+  href: api/PnP.Core.Model.SharePoint.FieldNumberOptions.html#PnP_Core_Model_SharePoint_FieldNumberOptions_DefaultValue
+  commentId: P:PnP.Core.Model.SharePoint.FieldNumberOptions.DefaultValue
+  fullName: PnP.Core.Model.SharePoint.FieldNumberOptions.DefaultValue
+  nameWithType: FieldNumberOptions.DefaultValue
+- uid: PnP.Core.Model.SharePoint.FieldNumberOptions.DefaultValue*
+  name: DefaultValue
+  href: api/PnP.Core.Model.SharePoint.FieldNumberOptions.html#PnP_Core_Model_SharePoint_FieldNumberOptions_DefaultValue_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldNumberOptions.DefaultValue
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldNumberOptions.DefaultValue
+  nameWithType: FieldNumberOptions.DefaultValue
 - uid: PnP.Core.Model.SharePoint.FieldNumberOptions.MaximumValue
   name: MaximumValue
   href: api/PnP.Core.Model.SharePoint.FieldNumberOptions.html#PnP_Core_Model_SharePoint_FieldNumberOptions_MaximumValue
@@ -4961,25 +5291,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.FieldNumberOptions.ShowAsPercentage
   nameWithType: FieldNumberOptions.ShowAsPercentage
-- uid: PnP.Core.Model.SharePoint.FieldOptions
-  name: FieldOptions
-  href: api/PnP.Core.Model.SharePoint.FieldOptions.html
-  commentId: T:PnP.Core.Model.SharePoint.FieldOptions
-  fullName: PnP.Core.Model.SharePoint.FieldOptions
-  nameWithType: FieldOptions
-- uid: PnP.Core.Model.SharePoint.FieldOptions.Required
-  name: Required
-  href: api/PnP.Core.Model.SharePoint.FieldOptions.html#PnP_Core_Model_SharePoint_FieldOptions_Required
-  commentId: P:PnP.Core.Model.SharePoint.FieldOptions.Required
-  fullName: PnP.Core.Model.SharePoint.FieldOptions.Required
-  nameWithType: FieldOptions.Required
-- uid: PnP.Core.Model.SharePoint.FieldOptions.Required*
-  name: Required
-  href: api/PnP.Core.Model.SharePoint.FieldOptions.html#PnP_Core_Model_SharePoint_FieldOptions_Required_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldOptions.Required
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions
+  name: FieldTaxonomyOptions
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.FieldTaxonomyOptions
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions
+  nameWithType: FieldTaxonomyOptions
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermSetId
+  name: TermSetId
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_TermSetId
+  commentId: P:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermSetId
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermSetId
+  nameWithType: FieldTaxonomyOptions.TermSetId
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermSetId*
+  name: TermSetId
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_TermSetId_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermSetId
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldOptions.Required
-  nameWithType: FieldOptions.Required
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermSetId
+  nameWithType: FieldTaxonomyOptions.TermSetId
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermStoreId
+  name: TermStoreId
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_TermStoreId
+  commentId: P:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermStoreId
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermStoreId
+  nameWithType: FieldTaxonomyOptions.TermStoreId
+- uid: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermStoreId*
+  name: TermStoreId
+  href: api/PnP.Core.Model.SharePoint.FieldTaxonomyOptions.html#PnP_Core_Model_SharePoint_FieldTaxonomyOptions_TermStoreId_
+  commentId: Overload:PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermStoreId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.FieldTaxonomyOptions.TermStoreId
+  nameWithType: FieldTaxonomyOptions.TermStoreId
 - uid: PnP.Core.Model.SharePoint.FieldTextOptions
   name: FieldTextOptions
   href: api/PnP.Core.Model.SharePoint.FieldTextOptions.html
@@ -5235,19 +5578,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.FieldUserOptions.AllowDisplay
   nameWithType: FieldUserOptions.AllowDisplay
-- uid: PnP.Core.Model.SharePoint.FieldUserOptions.AllowMultipleValues
-  name: AllowMultipleValues
-  href: api/PnP.Core.Model.SharePoint.FieldUserOptions.html#PnP_Core_Model_SharePoint_FieldUserOptions_AllowMultipleValues
-  commentId: P:PnP.Core.Model.SharePoint.FieldUserOptions.AllowMultipleValues
-  fullName: PnP.Core.Model.SharePoint.FieldUserOptions.AllowMultipleValues
-  nameWithType: FieldUserOptions.AllowMultipleValues
-- uid: PnP.Core.Model.SharePoint.FieldUserOptions.AllowMultipleValues*
-  name: AllowMultipleValues
-  href: api/PnP.Core.Model.SharePoint.FieldUserOptions.html#PnP_Core_Model_SharePoint_FieldUserOptions_AllowMultipleValues_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldUserOptions.AllowMultipleValues
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldUserOptions.AllowMultipleValues
-  nameWithType: FieldUserOptions.AllowMultipleValues
 - uid: PnP.Core.Model.SharePoint.FieldUserOptions.Presence
   name: Presence
   href: api/PnP.Core.Model.SharePoint.FieldUserOptions.html#PnP_Core_Model_SharePoint_FieldUserOptions_Presence
@@ -7415,6 +7745,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.NewFieldUrlValue
   nameWithType: IField.NewFieldUrlValue
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldUserValue(PnP.Core.Model.Security.ISharePointPrincipal)
+  name: NewFieldUserValue(ISharePointPrincipal)
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUserValue_PnP_Core_Model_Security_ISharePointPrincipal_
+  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldUserValue(PnP.Core.Model.Security.ISharePointPrincipal)
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldUserValue(PnP.Core.Model.Security.ISharePointPrincipal)
+  nameWithType: IField.NewFieldUserValue(ISharePointPrincipal)
 - uid: PnP.Core.Model.SharePoint.IField.NewFieldUserValue(System.Int32)
   name: NewFieldUserValue(Int32)
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldUserValue_System_Int32_
@@ -7428,12 +7764,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.NewFieldUserValue
   nameWithType: IField.NewFieldUserValue
-- uid: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(PnP.Core.Model.TransientDictionary)
-  name: NewFieldValueCollection(TransientDictionary)
-  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldValueCollection_PnP_Core_Model_TransientDictionary_
-  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(PnP.Core.Model.TransientDictionary)
-  fullName: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection(PnP.Core.Model.TransientDictionary)
-  nameWithType: IField.NewFieldValueCollection(TransientDictionary)
+- uid: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection
+  name: NewFieldValueCollection()
+  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldValueCollection
+  commentId: M:PnP.Core.Model.SharePoint.IField.NewFieldValueCollection
+  fullName: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection()
+  nameWithType: IField.NewFieldValueCollection()
 - uid: PnP.Core.Model.SharePoint.IField.NewFieldValueCollection*
   name: NewFieldValueCollection
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_NewFieldValueCollection_
@@ -7785,70 +8121,70 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IFieldCollection
   fullName: PnP.Core.Model.SharePoint.IFieldCollection
   nameWithType: IFieldCollection
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  name: Add(String, FieldType, FieldOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_Add_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.Add(System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
-  nameWithType: IFieldCollection.Add(String, FieldType, FieldOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.Add*
-  name: Add
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_Add_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.Add
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBoolean(System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  name: AddBoolean(String, FieldBooleanOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBoolean_System_String_PnP_Core_Model_SharePoint_FieldBooleanOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBoolean(System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBoolean(System.String, PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  nameWithType: IFieldCollection.AddBoolean(String, FieldBooleanOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBoolean*
+  name: AddBoolean
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBoolean_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddBoolean
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.Add
-  nameWithType: IFieldCollection.Add
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  name: AddAsync(String, FieldType, FieldOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddAsync(System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
-  nameWithType: IFieldCollection.AddAsync(String, FieldType, FieldOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddAsync*
-  name: AddAsync
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddAsync
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBoolean
+  nameWithType: IFieldCollection.AddBoolean
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanAsync(System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  name: AddBooleanAsync(String, FieldBooleanOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBooleanAsync_System_String_PnP_Core_Model_SharePoint_FieldBooleanOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanAsync(System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanAsync(System.String, PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  nameWithType: IFieldCollection.AddBooleanAsync(String, FieldBooleanOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanAsync*
+  name: AddBooleanAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBooleanAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddAsync
-  nameWithType: IFieldCollection.AddAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  name: AddBatch(Batch, String, FieldType, FieldOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
-  nameWithType: IFieldCollection.AddBatch(Batch, String, FieldType, FieldOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBatch(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  name: AddBatch(String, FieldType, FieldOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBatch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBatch(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatch(System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
-  nameWithType: IFieldCollection.AddBatch(String, FieldType, FieldOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBatch*
-  name: AddBatch
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBatch_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddBatch
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanAsync
+  nameWithType: IFieldCollection.AddBooleanAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  name: AddBooleanBatch(Batch, String, FieldBooleanOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBooleanBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldBooleanOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  nameWithType: IFieldCollection.AddBooleanBatch(Batch, String, FieldBooleanOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatch(System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  name: AddBooleanBatch(String, FieldBooleanOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBooleanBatch_System_String_PnP_Core_Model_SharePoint_FieldBooleanOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatch(System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatch(System.String, PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  nameWithType: IFieldCollection.AddBooleanBatch(String, FieldBooleanOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatch*
+  name: AddBooleanBatch
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBooleanBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatch
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatch
-  nameWithType: IFieldCollection.AddBatch
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  name: AddBatchAsync(Batch, String, FieldType, FieldOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
-  nameWithType: IFieldCollection.AddBatchAsync(Batch, String, FieldType, FieldOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  name: AddBatchAsync(String, FieldType, FieldOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldType_PnP_Core_Model_SharePoint_FieldOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldType,PnP.Core.Model.SharePoint.FieldOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldType, PnP.Core.Model.SharePoint.FieldOptions)
-  nameWithType: IFieldCollection.AddBatchAsync(String, FieldType, FieldOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync*
-  name: AddBatchAsync
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBatchAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatch
+  nameWithType: IFieldCollection.AddBooleanBatch
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  name: AddBooleanBatchAsync(Batch, String, FieldBooleanOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBooleanBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldBooleanOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  nameWithType: IFieldCollection.AddBooleanBatchAsync(Batch, String, FieldBooleanOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  name: AddBooleanBatchAsync(String, FieldBooleanOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBooleanBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldBooleanOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldBooleanOptions)
+  nameWithType: IFieldCollection.AddBooleanBatchAsync(String, FieldBooleanOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatchAsync*
+  name: AddBooleanBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddBooleanBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBatchAsync
-  nameWithType: IFieldCollection.AddBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddBooleanBatchAsync
+  nameWithType: IFieldCollection.AddBooleanBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCalculated(System.String,PnP.Core.Model.SharePoint.FieldCalculatedOptions)
   name: AddCalculated(String, FieldCalculatedOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCalculated_System_String_PnP_Core_Model_SharePoint_FieldCalculatedOptions_
@@ -7977,6 +8313,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceBatchAsync
   nameWithType: IFieldCollection.AddChoiceBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMulti(System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  name: AddChoiceMulti(String, FieldChoiceMultiOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMulti_System_String_PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMulti(System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMulti(System.String, PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  nameWithType: IFieldCollection.AddChoiceMulti(String, FieldChoiceMultiOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMulti*
+  name: AddChoiceMulti
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMulti_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMulti
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMulti
+  nameWithType: IFieldCollection.AddChoiceMulti
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiAsync(System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  name: AddChoiceMultiAsync(String, FieldChoiceMultiOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMultiAsync_System_String_PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiAsync(System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiAsync(System.String, PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  nameWithType: IFieldCollection.AddChoiceMultiAsync(String, FieldChoiceMultiOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiAsync*
+  name: AddChoiceMultiAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMultiAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiAsync
+  nameWithType: IFieldCollection.AddChoiceMultiAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  name: AddChoiceMultiBatch(Batch, String, FieldChoiceMultiOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMultiBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  nameWithType: IFieldCollection.AddChoiceMultiBatch(Batch, String, FieldChoiceMultiOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatch(System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  name: AddChoiceMultiBatch(String, FieldChoiceMultiOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMultiBatch_System_String_PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatch(System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatch(System.String, PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  nameWithType: IFieldCollection.AddChoiceMultiBatch(String, FieldChoiceMultiOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatch*
+  name: AddChoiceMultiBatch
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMultiBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatch
+  nameWithType: IFieldCollection.AddChoiceMultiBatch
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  name: AddChoiceMultiBatchAsync(Batch, String, FieldChoiceMultiOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMultiBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  nameWithType: IFieldCollection.AddChoiceMultiBatchAsync(Batch, String, FieldChoiceMultiOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  name: AddChoiceMultiBatchAsync(String, FieldChoiceMultiOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMultiBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldChoiceMultiOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldChoiceMultiOptions)
+  nameWithType: IFieldCollection.AddChoiceMultiBatchAsync(String, FieldChoiceMultiOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatchAsync*
+  name: AddChoiceMultiBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddChoiceMultiBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddChoiceMultiBatchAsync
+  nameWithType: IFieldCollection.AddChoiceMultiBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddCurrency(System.String,PnP.Core.Model.SharePoint.FieldCurrencyOptions)
   name: AddCurrency(String, FieldCurrencyOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddCurrency_System_String_PnP_Core_Model_SharePoint_FieldCurrencyOptions_
@@ -8105,6 +8505,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync
   nameWithType: IFieldCollection.AddDateTimeBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddField(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  name: AddField(FieldCreationOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddField_PnP_Core_Model_SharePoint_FieldCreationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddField(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddField(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  nameWithType: IFieldCollection.AddField(FieldCreationOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddField*
+  name: AddField
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddField_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddField
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddField
+  nameWithType: IFieldCollection.AddField
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
   name: AddFieldAsXml(String, Boolean, AddFieldOptionsFlags)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXml_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
@@ -8169,6 +8582,57 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync
   nameWithType: IFieldCollection.AddFieldAsXmlBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  name: AddFieldAsync(FieldCreationOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsync_PnP_Core_Model_SharePoint_FieldCreationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  nameWithType: IFieldCollection.AddFieldAsync(FieldCreationOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync*
+  name: AddFieldAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync
+  nameWithType: IFieldCollection.AddFieldAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  name: AddFieldBatch(FieldCreationOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatch_PnP_Core_Model_SharePoint_FieldCreationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  nameWithType: IFieldCollection.AddFieldBatch(FieldCreationOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.FieldCreationOptions)
+  name: AddFieldBatch(Batch, FieldCreationOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_FieldCreationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.FieldCreationOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.FieldCreationOptions)
+  nameWithType: IFieldCollection.AddFieldBatch(Batch, FieldCreationOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch*
+  name: AddFieldBatch
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch
+  nameWithType: IFieldCollection.AddFieldBatch
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  name: AddFieldBatchAsync(FieldCreationOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatchAsync_PnP_Core_Model_SharePoint_FieldCreationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
+  nameWithType: IFieldCollection.AddFieldBatchAsync(FieldCreationOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.FieldCreationOptions)
+  name: AddFieldBatchAsync(Batch, FieldCreationOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_FieldCreationOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.FieldCreationOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.FieldCreationOptions)
+  nameWithType: IFieldCollection.AddFieldBatchAsync(Batch, FieldCreationOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync*
+  name: AddFieldBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync
+  nameWithType: IFieldCollection.AddFieldBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
   name: AddLookup(String, FieldLookupOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
@@ -8233,70 +8697,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupBatchAsync
   nameWithType: IFieldCollection.AddLookupBatchAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  name: AddMultiChoice(String, FieldMultiChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice(System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  nameWithType: IFieldCollection.AddMultiChoice(String, FieldMultiChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice*
-  name: AddMultiChoice
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoice_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMulti(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  name: AddLookupMulti(String, FieldLookupOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMulti_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMulti(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMulti(System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
+  nameWithType: IFieldCollection.AddLookupMulti(String, FieldLookupOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMulti*
+  name: AddLookupMulti
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMulti_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMulti
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoice
-  nameWithType: IFieldCollection.AddMultiChoice
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  name: AddMultiChoiceAsync(String, FieldMultiChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceAsync_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync(System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  nameWithType: IFieldCollection.AddMultiChoiceAsync(String, FieldMultiChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync*
-  name: AddMultiChoiceAsync
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMulti
+  nameWithType: IFieldCollection.AddLookupMulti
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiAsync(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  name: AddLookupMultiAsync(String, FieldLookupOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMultiAsync_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiAsync(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiAsync(System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
+  nameWithType: IFieldCollection.AddLookupMultiAsync(String, FieldLookupOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiAsync*
+  name: AddLookupMultiAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMultiAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceAsync
-  nameWithType: IFieldCollection.AddMultiChoiceAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  name: AddMultiChoiceBatch(Batch, String, FieldMultiChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  nameWithType: IFieldCollection.AddMultiChoiceBatch(Batch, String, FieldMultiChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatch(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  name: AddMultiChoiceBatch(String, FieldMultiChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceBatch_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatch(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatch(System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  nameWithType: IFieldCollection.AddMultiChoiceBatch(String, FieldMultiChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatch*
-  name: AddMultiChoiceBatch
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceBatch_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatch
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiAsync
+  nameWithType: IFieldCollection.AddLookupMultiAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  name: AddLookupMultiBatch(Batch, String, FieldLookupOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMultiBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
+  nameWithType: IFieldCollection.AddLookupMultiBatch(Batch, String, FieldLookupOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatch(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  name: AddLookupMultiBatch(String, FieldLookupOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMultiBatch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatch(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatch(System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
+  nameWithType: IFieldCollection.AddLookupMultiBatch(String, FieldLookupOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatch*
+  name: AddLookupMultiBatch
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMultiBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatch
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatch
-  nameWithType: IFieldCollection.AddMultiChoiceBatch
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  name: AddMultiChoiceBatchAsync(Batch, String, FieldMultiChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  nameWithType: IFieldCollection.AddMultiChoiceBatchAsync(Batch, String, FieldMultiChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  name: AddMultiChoiceBatchAsync(String, FieldMultiChoiceOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldMultiChoiceOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldMultiChoiceOptions)
-  nameWithType: IFieldCollection.AddMultiChoiceBatchAsync(String, FieldMultiChoiceOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync*
-  name: AddMultiChoiceBatchAsync
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultiChoiceBatchAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatch
+  nameWithType: IFieldCollection.AddLookupMultiBatch
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  name: AddLookupMultiBatchAsync(Batch, String, FieldLookupOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMultiBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
+  nameWithType: IFieldCollection.AddLookupMultiBatchAsync(Batch, String, FieldLookupOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  name: AddLookupMultiBatchAsync(String, FieldLookupOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMultiBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldLookupOptions)
+  nameWithType: IFieldCollection.AddLookupMultiBatchAsync(String, FieldLookupOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatchAsync*
+  name: AddLookupMultiBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookupMultiBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddMultiChoiceBatchAsync
-  nameWithType: IFieldCollection.AddMultiChoiceBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddLookupMultiBatchAsync
+  nameWithType: IFieldCollection.AddLookupMultiBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddMultilineText(System.String,PnP.Core.Model.SharePoint.FieldMultilineTextOptions)
   name: AddMultilineText(String, FieldMultilineTextOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddMultilineText_System_String_PnP_Core_Model_SharePoint_FieldMultilineTextOptions_
@@ -8425,6 +8889,58 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddNumberBatchAsync
   nameWithType: IFieldCollection.AddNumberBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomy(System.String,PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  name: AddTaxonomy(String, FieldTaxonomyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTaxonomy_System_String_PnP_Core_Model_SharePoint_FieldTaxonomyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomy(System.String,PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomy(System.String, PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  nameWithType: IFieldCollection.AddTaxonomy(String, FieldTaxonomyOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomy*
+  name: AddTaxonomy
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTaxonomy_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomy
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomy
+  nameWithType: IFieldCollection.AddTaxonomy
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyAsync(System.String,PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  name: AddTaxonomyAsync(String, FieldTaxonomyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTaxonomyAsync_System_String_PnP_Core_Model_SharePoint_FieldTaxonomyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyAsync(System.String,PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyAsync(System.String, PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  nameWithType: IFieldCollection.AddTaxonomyAsync(String, FieldTaxonomyOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyAsync*
+  name: AddTaxonomyAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTaxonomyAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyAsync
+  nameWithType: IFieldCollection.AddTaxonomyAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMulti(System.String,PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  name: AddTaxonomyMulti(String, FieldTaxonomyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTaxonomyMulti_System_String_PnP_Core_Model_SharePoint_FieldTaxonomyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMulti(System.String,PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMulti(System.String, PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  nameWithType: IFieldCollection.AddTaxonomyMulti(String, FieldTaxonomyOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMulti*
+  name: AddTaxonomyMulti
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTaxonomyMulti_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMulti
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMulti
+  nameWithType: IFieldCollection.AddTaxonomyMulti
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMultiAsync(System.String,PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  name: AddTaxonomyMultiAsync(String, FieldTaxonomyOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTaxonomyMultiAsync_System_String_PnP_Core_Model_SharePoint_FieldTaxonomyOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMultiAsync(System.String,PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMultiAsync(System.String, PnP.Core.Model.SharePoint.FieldTaxonomyOptions)
+  nameWithType: IFieldCollection.AddTaxonomyMultiAsync(String, FieldTaxonomyOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMultiAsync*
+  name: AddTaxonomyMultiAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddTaxonomyMultiAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMultiAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddTaxonomyMultiAsync
+  nameWithType: IFieldCollection.AddTaxonomyMultiAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddText(System.String,PnP.Core.Model.SharePoint.FieldTextOptions)
   name: AddText(String, FieldTextOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddText_System_String_PnP_Core_Model_SharePoint_FieldTextOptions_
@@ -8617,6 +9133,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserBatchAsync
   nameWithType: IFieldCollection.AddUserBatchAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMulti(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  name: AddUserMulti(String, FieldUserOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMulti_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMulti(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMulti(System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
+  nameWithType: IFieldCollection.AddUserMulti(String, FieldUserOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMulti*
+  name: AddUserMulti
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMulti_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMulti
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMulti
+  nameWithType: IFieldCollection.AddUserMulti
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiAsync(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  name: AddUserMultiAsync(String, FieldUserOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMultiAsync_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiAsync(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiAsync(System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
+  nameWithType: IFieldCollection.AddUserMultiAsync(String, FieldUserOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiAsync*
+  name: AddUserMultiAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMultiAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiAsync
+  nameWithType: IFieldCollection.AddUserMultiAsync
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  name: AddUserMultiBatch(Batch, String, FieldUserOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMultiBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
+  nameWithType: IFieldCollection.AddUserMultiBatch(Batch, String, FieldUserOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatch(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  name: AddUserMultiBatch(String, FieldUserOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMultiBatch_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatch(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatch(System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
+  nameWithType: IFieldCollection.AddUserMultiBatch(String, FieldUserOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatch*
+  name: AddUserMultiBatch
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMultiBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatch
+  nameWithType: IFieldCollection.AddUserMultiBatch
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  name: AddUserMultiBatchAsync(Batch, String, FieldUserOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMultiBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
+  nameWithType: IFieldCollection.AddUserMultiBatchAsync(Batch, String, FieldUserOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  name: AddUserMultiBatchAsync(String, FieldUserOptions)
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMultiBatchAsync_System_String_PnP_Core_Model_SharePoint_FieldUserOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatchAsync(System.String,PnP.Core.Model.SharePoint.FieldUserOptions)
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatchAsync(System.String, PnP.Core.Model.SharePoint.FieldUserOptions)
+  nameWithType: IFieldCollection.AddUserMultiBatchAsync(String, FieldUserOptions)
+- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatchAsync*
+  name: AddUserMultiBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddUserMultiBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddUserMultiBatchAsync
+  nameWithType: IFieldCollection.AddUserMultiBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldLink
   name: IFieldLink
   href: api/PnP.Core.Model.SharePoint.IFieldLink.html
@@ -9061,6 +9641,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldUserValue.Picture
   nameWithType: IFieldUserValue.Picture
+- uid: PnP.Core.Model.SharePoint.IFieldUserValue.Principal
+  name: Principal
+  href: api/PnP.Core.Model.SharePoint.IFieldUserValue.html#PnP_Core_Model_SharePoint_IFieldUserValue_Principal
+  commentId: P:PnP.Core.Model.SharePoint.IFieldUserValue.Principal
+  fullName: PnP.Core.Model.SharePoint.IFieldUserValue.Principal
+  nameWithType: IFieldUserValue.Principal
+- uid: PnP.Core.Model.SharePoint.IFieldUserValue.Principal*
+  name: Principal
+  href: api/PnP.Core.Model.SharePoint.IFieldUserValue.html#PnP_Core_Model_SharePoint_IFieldUserValue_Principal_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFieldUserValue.Principal
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFieldUserValue.Principal
+  nameWithType: IFieldUserValue.Principal
 - uid: PnP.Core.Model.SharePoint.IFieldUserValue.Sip
   name: Sip
   href: api/PnP.Core.Model.SharePoint.IFieldUserValue.html#PnP_Core_Model_SharePoint_IFieldUserValue_Sip
@@ -12181,6 +12774,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.NewFieldUrlValue
   nameWithType: IListItem.NewFieldUrlValue
+- uid: PnP.Core.Model.SharePoint.IListItem.NewFieldUserValue(PnP.Core.Model.SharePoint.IField,PnP.Core.Model.Security.ISharePointPrincipal)
+  name: NewFieldUserValue(IField, ISharePointPrincipal)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_PnP_Core_Model_SharePoint_IField_PnP_Core_Model_Security_ISharePointPrincipal_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.NewFieldUserValue(PnP.Core.Model.SharePoint.IField,PnP.Core.Model.Security.ISharePointPrincipal)
+  fullName: PnP.Core.Model.SharePoint.IListItem.NewFieldUserValue(PnP.Core.Model.SharePoint.IField, PnP.Core.Model.Security.ISharePointPrincipal)
+  nameWithType: IListItem.NewFieldUserValue(IField, ISharePointPrincipal)
 - uid: PnP.Core.Model.SharePoint.IListItem.NewFieldUserValue(PnP.Core.Model.SharePoint.IField,System.Int32)
   name: NewFieldUserValue(IField, Int32)
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldUserValue_PnP_Core_Model_SharePoint_IField_System_Int32_
@@ -14745,6 +15344,311 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IRecycleBinItemCollection.RestoreAllBatchAsync
   nameWithType: IRecycleBinItemCollection.RestoreAllBatchAsync
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings
+  name: IRegionalSettings
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html
+  commentId: T:PnP.Core.Model.SharePoint.IRegionalSettings
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings
+  nameWithType: IRegionalSettings
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.AM
+  name: AM
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_AM
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.AM
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.AM
+  nameWithType: IRegionalSettings.AM
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.AM*
+  name: AM
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_AM_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.AM
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.AM
+  nameWithType: IRegionalSettings.AM
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.CollationLCID
+  name: CollationLCID
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_CollationLCID
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.CollationLCID
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.CollationLCID
+  nameWithType: IRegionalSettings.CollationLCID
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.CollationLCID*
+  name: CollationLCID
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_CollationLCID_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.CollationLCID
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.CollationLCID
+  nameWithType: IRegionalSettings.CollationLCID
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.DateFormat
+  name: DateFormat
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_DateFormat
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.DateFormat
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.DateFormat
+  nameWithType: IRegionalSettings.DateFormat
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.DateFormat*
+  name: DateFormat
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_DateFormat_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.DateFormat
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.DateFormat
+  nameWithType: IRegionalSettings.DateFormat
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.DateSeparator
+  name: DateSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_DateSeparator
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.DateSeparator
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.DateSeparator
+  nameWithType: IRegionalSettings.DateSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.DateSeparator*
+  name: DateSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_DateSeparator_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.DateSeparator
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.DateSeparator
+  nameWithType: IRegionalSettings.DateSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.DecimalSeparator
+  name: DecimalSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_DecimalSeparator
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.DecimalSeparator
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.DecimalSeparator
+  nameWithType: IRegionalSettings.DecimalSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.DecimalSeparator*
+  name: DecimalSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_DecimalSeparator_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.DecimalSeparator
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.DecimalSeparator
+  nameWithType: IRegionalSettings.DecimalSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.DigitGrouping
+  name: DigitGrouping
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_DigitGrouping
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.DigitGrouping
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.DigitGrouping
+  nameWithType: IRegionalSettings.DigitGrouping
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.DigitGrouping*
+  name: DigitGrouping
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_DigitGrouping_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.DigitGrouping
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.DigitGrouping
+  nameWithType: IRegionalSettings.DigitGrouping
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.FirstDayOfWeek
+  name: FirstDayOfWeek
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_FirstDayOfWeek
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.FirstDayOfWeek
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.FirstDayOfWeek
+  nameWithType: IRegionalSettings.FirstDayOfWeek
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.FirstDayOfWeek*
+  name: FirstDayOfWeek
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_FirstDayOfWeek_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.FirstDayOfWeek
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.FirstDayOfWeek
+  nameWithType: IRegionalSettings.FirstDayOfWeek
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.IsEastAsia
+  name: IsEastAsia
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_IsEastAsia
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.IsEastAsia
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.IsEastAsia
+  nameWithType: IRegionalSettings.IsEastAsia
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.IsEastAsia*
+  name: IsEastAsia
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_IsEastAsia_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.IsEastAsia
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.IsEastAsia
+  nameWithType: IRegionalSettings.IsEastAsia
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.IsRightToLeft
+  name: IsRightToLeft
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_IsRightToLeft
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.IsRightToLeft
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.IsRightToLeft
+  nameWithType: IRegionalSettings.IsRightToLeft
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.IsRightToLeft*
+  name: IsRightToLeft
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_IsRightToLeft_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.IsRightToLeft
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.IsRightToLeft
+  nameWithType: IRegionalSettings.IsRightToLeft
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.IsUIRightToLeft
+  name: IsUIRightToLeft
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_IsUIRightToLeft
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.IsUIRightToLeft
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.IsUIRightToLeft
+  nameWithType: IRegionalSettings.IsUIRightToLeft
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.IsUIRightToLeft*
+  name: IsUIRightToLeft
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_IsUIRightToLeft_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.IsUIRightToLeft
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.IsUIRightToLeft
+  nameWithType: IRegionalSettings.IsUIRightToLeft
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.ListSeparator
+  name: ListSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_ListSeparator
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.ListSeparator
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.ListSeparator
+  nameWithType: IRegionalSettings.ListSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.ListSeparator*
+  name: ListSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_ListSeparator_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.ListSeparator
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.ListSeparator
+  nameWithType: IRegionalSettings.ListSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.LocaleId
+  name: LocaleId
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_LocaleId
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.LocaleId
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.LocaleId
+  nameWithType: IRegionalSettings.LocaleId
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.LocaleId*
+  name: LocaleId
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_LocaleId_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.LocaleId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.LocaleId
+  nameWithType: IRegionalSettings.LocaleId
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.NegativeSign
+  name: NegativeSign
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_NegativeSign
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.NegativeSign
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.NegativeSign
+  nameWithType: IRegionalSettings.NegativeSign
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.NegativeSign*
+  name: NegativeSign
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_NegativeSign_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.NegativeSign
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.NegativeSign
+  nameWithType: IRegionalSettings.NegativeSign
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.NegNumberMode
+  name: NegNumberMode
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_NegNumberMode
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.NegNumberMode
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.NegNumberMode
+  nameWithType: IRegionalSettings.NegNumberMode
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.NegNumberMode*
+  name: NegNumberMode
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_NegNumberMode_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.NegNumberMode
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.NegNumberMode
+  nameWithType: IRegionalSettings.NegNumberMode
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.PM
+  name: PM
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_PM
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.PM
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.PM
+  nameWithType: IRegionalSettings.PM
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.PM*
+  name: PM
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_PM_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.PM
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.PM
+  nameWithType: IRegionalSettings.PM
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.PositiveSign
+  name: PositiveSign
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_PositiveSign
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.PositiveSign
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.PositiveSign
+  nameWithType: IRegionalSettings.PositiveSign
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.PositiveSign*
+  name: PositiveSign
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_PositiveSign_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.PositiveSign
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.PositiveSign
+  nameWithType: IRegionalSettings.PositiveSign
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.ShowWeeks
+  name: ShowWeeks
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_ShowWeeks
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.ShowWeeks
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.ShowWeeks
+  nameWithType: IRegionalSettings.ShowWeeks
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.ShowWeeks*
+  name: ShowWeeks
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_ShowWeeks_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.ShowWeeks
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.ShowWeeks
+  nameWithType: IRegionalSettings.ShowWeeks
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.ThousandSeparator
+  name: ThousandSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_ThousandSeparator
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.ThousandSeparator
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.ThousandSeparator
+  nameWithType: IRegionalSettings.ThousandSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.ThousandSeparator*
+  name: ThousandSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_ThousandSeparator_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.ThousandSeparator
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.ThousandSeparator
+  nameWithType: IRegionalSettings.ThousandSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.Time24
+  name: Time24
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_Time24
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.Time24
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.Time24
+  nameWithType: IRegionalSettings.Time24
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.Time24*
+  name: Time24
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_Time24_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.Time24
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.Time24
+  nameWithType: IRegionalSettings.Time24
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.TimeMarkerPosition
+  name: TimeMarkerPosition
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_TimeMarkerPosition
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.TimeMarkerPosition
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.TimeMarkerPosition
+  nameWithType: IRegionalSettings.TimeMarkerPosition
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.TimeMarkerPosition*
+  name: TimeMarkerPosition
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_TimeMarkerPosition_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.TimeMarkerPosition
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.TimeMarkerPosition
+  nameWithType: IRegionalSettings.TimeMarkerPosition
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.TimeSeparator
+  name: TimeSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_TimeSeparator
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.TimeSeparator
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.TimeSeparator
+  nameWithType: IRegionalSettings.TimeSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.TimeSeparator*
+  name: TimeSeparator
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_TimeSeparator_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.TimeSeparator
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.TimeSeparator
+  nameWithType: IRegionalSettings.TimeSeparator
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.TimeZone
+  name: TimeZone
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_TimeZone
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.TimeZone
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.TimeZone
+  nameWithType: IRegionalSettings.TimeZone
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.TimeZone*
+  name: TimeZone
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_TimeZone_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.TimeZone
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.TimeZone
+  nameWithType: IRegionalSettings.TimeZone
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.TimeZones
+  name: TimeZones
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_TimeZones
+  commentId: P:PnP.Core.Model.SharePoint.IRegionalSettings.TimeZones
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.TimeZones
+  nameWithType: IRegionalSettings.TimeZones
+- uid: PnP.Core.Model.SharePoint.IRegionalSettings.TimeZones*
+  name: TimeZones
+  href: api/PnP.Core.Model.SharePoint.IRegionalSettings.html#PnP_Core_Model_SharePoint_IRegionalSettings_TimeZones_
+  commentId: Overload:PnP.Core.Model.SharePoint.IRegionalSettings.TimeZones
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IRegionalSettings.TimeZones
+  nameWithType: IRegionalSettings.TimeZones
 - uid: PnP.Core.Model.SharePoint.ISite
   name: ISite
   href: api/PnP.Core.Model.SharePoint.ISite.html
@@ -16679,6 +17583,83 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ITermStore.Languages
   nameWithType: ITermStore.Languages
+- uid: PnP.Core.Model.SharePoint.ITimeZone
+  name: ITimeZone
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html
+  commentId: T:PnP.Core.Model.SharePoint.ITimeZone
+  fullName: PnP.Core.Model.SharePoint.ITimeZone
+  nameWithType: ITimeZone
+- uid: PnP.Core.Model.SharePoint.ITimeZone.Bias
+  name: Bias
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_Bias
+  commentId: P:PnP.Core.Model.SharePoint.ITimeZone.Bias
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.Bias
+  nameWithType: ITimeZone.Bias
+- uid: PnP.Core.Model.SharePoint.ITimeZone.Bias*
+  name: Bias
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_Bias_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITimeZone.Bias
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.Bias
+  nameWithType: ITimeZone.Bias
+- uid: PnP.Core.Model.SharePoint.ITimeZone.DaylightBias
+  name: DaylightBias
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_DaylightBias
+  commentId: P:PnP.Core.Model.SharePoint.ITimeZone.DaylightBias
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.DaylightBias
+  nameWithType: ITimeZone.DaylightBias
+- uid: PnP.Core.Model.SharePoint.ITimeZone.DaylightBias*
+  name: DaylightBias
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_DaylightBias_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITimeZone.DaylightBias
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.DaylightBias
+  nameWithType: ITimeZone.DaylightBias
+- uid: PnP.Core.Model.SharePoint.ITimeZone.Description
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_Description
+  commentId: P:PnP.Core.Model.SharePoint.ITimeZone.Description
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.Description
+  nameWithType: ITimeZone.Description
+- uid: PnP.Core.Model.SharePoint.ITimeZone.Description*
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_Description_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITimeZone.Description
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.Description
+  nameWithType: ITimeZone.Description
+- uid: PnP.Core.Model.SharePoint.ITimeZone.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_Id
+  commentId: P:PnP.Core.Model.SharePoint.ITimeZone.Id
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.Id
+  nameWithType: ITimeZone.Id
+- uid: PnP.Core.Model.SharePoint.ITimeZone.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITimeZone.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.Id
+  nameWithType: ITimeZone.Id
+- uid: PnP.Core.Model.SharePoint.ITimeZone.StandardBias
+  name: StandardBias
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_StandardBias
+  commentId: P:PnP.Core.Model.SharePoint.ITimeZone.StandardBias
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.StandardBias
+  nameWithType: ITimeZone.StandardBias
+- uid: PnP.Core.Model.SharePoint.ITimeZone.StandardBias*
+  name: StandardBias
+  href: api/PnP.Core.Model.SharePoint.ITimeZone.html#PnP_Core_Model_SharePoint_ITimeZone_StandardBias_
+  commentId: Overload:PnP.Core.Model.SharePoint.ITimeZone.StandardBias
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ITimeZone.StandardBias
+  nameWithType: ITimeZone.StandardBias
+- uid: PnP.Core.Model.SharePoint.ITimeZoneCollection
+  name: ITimeZoneCollection
+  href: api/PnP.Core.Model.SharePoint.ITimeZoneCollection.html
+  commentId: T:PnP.Core.Model.SharePoint.ITimeZoneCollection
+  fullName: PnP.Core.Model.SharePoint.ITimeZoneCollection
+  nameWithType: ITimeZoneCollection
 - uid: PnP.Core.Model.SharePoint.IUserCustomAction
   name: IUserCustomAction
   href: api/PnP.Core.Model.SharePoint.IUserCustomAction.html
@@ -19070,6 +20051,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.RecycleBinEnabled
   nameWithType: IWeb.RecycleBinEnabled
+- uid: PnP.Core.Model.SharePoint.IWeb.RegionalSettings
+  name: RegionalSettings
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RegionalSettings
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.RegionalSettings
+  fullName: PnP.Core.Model.SharePoint.IWeb.RegionalSettings
+  nameWithType: IWeb.RegionalSettings
+- uid: PnP.Core.Model.SharePoint.IWeb.RegionalSettings*
+  name: RegionalSettings
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RegionalSettings_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.RegionalSettings
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.RegionalSettings
+  nameWithType: IWeb.RegionalSettings
 - uid: PnP.Core.Model.SharePoint.IWeb.RequestAccessEmail
   name: RequestAccessEmail
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RequestAccessEmail
@@ -21245,6 +22239,64 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   nameWithType: SPEffectiveInformationRightsManagementSettingsSource.Rule
+- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions
+  name: TaxonomyFieldCreationOptions
+  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions
+  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions
+  nameWithType: TaxonomyFieldCreationOptions
+- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.#ctor
+  name: TaxonomyFieldCreationOptions()
+  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions__ctor
+  commentId: M:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.#ctor
+  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TaxonomyFieldCreationOptions()
+  nameWithType: TaxonomyFieldCreationOptions.TaxonomyFieldCreationOptions()
+- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.#ctor*
+  name: TaxonomyFieldCreationOptions
+  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions__ctor_
+  commentId: Overload:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.#ctor
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TaxonomyFieldCreationOptions
+  nameWithType: TaxonomyFieldCreationOptions.TaxonomyFieldCreationOptions
+- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
+  name: MultiValue
+  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_MultiValue
+  commentId: P:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
+  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
+  nameWithType: TaxonomyFieldCreationOptions.MultiValue
+- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue*
+  name: MultiValue
+  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_MultiValue_
+  commentId: Overload:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
+  nameWithType: TaxonomyFieldCreationOptions.MultiValue
+- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
+  name: TermSetId
+  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_TermSetId
+  commentId: P:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
+  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
+  nameWithType: TaxonomyFieldCreationOptions.TermSetId
+- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId*
+  name: TermSetId
+  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_TermSetId_
+  commentId: Overload:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
+  nameWithType: TaxonomyFieldCreationOptions.TermSetId
+- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
+  name: TermStoreId
+  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_TermStoreId
+  commentId: P:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
+  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
+  nameWithType: TaxonomyFieldCreationOptions.TermStoreId
+- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId*
+  name: TermStoreId
+  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_TermStoreId_
+  commentId: Overload:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
+  nameWithType: TaxonomyFieldCreationOptions.TermStoreId
 - uid: PnP.Core.Model.SharePoint.TemplateFileType
   name: TemplateFileType
   href: api/PnP.Core.Model.SharePoint.TemplateFileType.html
