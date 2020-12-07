@@ -1,3 +1,6 @@
+using System;
+using System.Linq.Expressions;
+
 namespace PnP.Core.Model.SharePoint
 {
     /// <summary>
@@ -6,6 +9,8 @@ namespace PnP.Core.Model.SharePoint
     [SharePointType("SP.RegionalSettings", Uri = "_api/web/regionalsettings", LinqGet = "_api/web/regionalsettings")]
     internal partial class RegionalSettings : BaseDataModel<IRegionalSettings>, IRegionalSettings
     {
+        internal static Expression<Func<IRegionalSettings, object>>[] LocaleSettingsExpression = new Expression<Func<IRegionalSettings, object>>[] { p => p.DecimalSeparator, p => p.DateSeparator, p => p.TimeZone };
+
         #region Construction
         public RegionalSettings()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -548,7 +549,8 @@ namespace PnP.Core.Model.SharePoint
                             {
                                 return intValue;
                             }
-                            else if(double.TryParse(propertyValue.GetString(), out double doubleValue))
+                            // Numbers and currency are provided in US format
+                            else if(double.TryParse(propertyValue.GetString(), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double doubleValue))
                             {
                                 return doubleValue;
                             }
@@ -566,24 +568,17 @@ namespace PnP.Core.Model.SharePoint
                     {
                         if (propertyValue.ValueKind != JsonValueKind.Null)
                         {
-                            if (propertyValue.TryGetDateTime(out DateTime dateTime))
+                            if (DateTime.TryParseExact(propertyValue.GetString(), "yyyy-MM-ddThh:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime2))
+                            {
+                                return dateTime2;
+                            }
+                            else if (DateTime.TryParse(propertyValue.GetString(), out DateTime dateTime))
                             {
                                 return dateTime;
                             }
                             else
                             {
-                                if (DateTime.TryParseExact(propertyValue.GetString(),
-                                                           new string[] { "yyyy-MM-ddThh:mm:ssZ" },
-                                                           System.Globalization.CultureInfo.InvariantCulture,
-                                                           System.Globalization.DateTimeStyles.None,
-                                                           out DateTime dateTime2))
-                                {
-                                    return dateTime2;
-                                }
-                                else
-                                {
-                                    return null;
-                                }
+                                return null;
                             }
                         }
                         else
@@ -602,7 +597,8 @@ namespace PnP.Core.Model.SharePoint
                                 var match = currencyRegex.Match(currencyString);
                                 if (match.Success)
                                 {
-                                    if (double.TryParse(match.Groups[1].Value, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double parsedCurrency))
+                                    // Numbers and currency are provided in US format
+                                    if (double.TryParse(match.Groups[1].Value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double parsedCurrency))
                                     {
                                         return parsedCurrency;
                                     }

@@ -670,6 +670,14 @@ namespace PnP.Core.Services
                         {
                             await pnpContext.Web.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
                         }
+                        // We need regional settings and timezone information when working with list items...given we anyhow go the server it's best to 
+                        // add this request to the batch to safe a server roundtrip
+                        if (!pnpContext.Web.IsPropertyAvailable(p=>p.RegionalSettings) || 
+                            (pnpContext.Web.IsPropertyAvailable(p => p.RegionalSettings) && !pnpContext.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone)))
+                        {
+                            await pnpContext.Web.RegionalSettings.GetBatchAsync(RegionalSettings.LocaleSettingsExpression).ConfigureAwait(false);
+                        }
+
                         await pnpContext.ExecuteAsync(idBatch).ConfigureAwait(false);
 
                     }

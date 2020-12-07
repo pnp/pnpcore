@@ -4,6 +4,7 @@ using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -109,6 +110,12 @@ namespace PnP.Core.Model.SharePoint
                 };
                 body.bNewDocumentUpdate = false;
 
+                if (Values.Any())
+                {
+                    // Verify the needed locale settings are loaded
+                    await EnsureRegionalSettingsAsync(PnPContext).ConfigureAwait(false);
+                }
+
                 // Add fields to the payload
                 dynamic itemValues = new List<dynamic>();
                 foreach (var item in Values)
@@ -116,7 +123,7 @@ namespace PnP.Core.Model.SharePoint
                     dynamic field = new ExpandoObject();
                     field.FieldName = item.Key;
 
-                    BuildValidateUpdateItemPayload(item, field);
+                    BuildValidateUpdateItemPayload(PnPContext, item, field);
 
                     itemValues.Add(field);
                 }
@@ -140,7 +147,7 @@ namespace PnP.Core.Model.SharePoint
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
 
-            var api = await BuildUpdateApiCallAsync().ConfigureAwait(false);
+            var api = await BuildUpdateApiCallAsync(PnPContext).ConfigureAwait(false);
 
             // Add the request to the batch and execute the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
@@ -153,15 +160,16 @@ namespace PnP.Core.Model.SharePoint
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
 
-            var api = await BuildUpdateApiCallAsync().ConfigureAwait(false);
+            var api = await BuildUpdateApiCallAsync(PnPContext).ConfigureAwait(false);
 
             // Add the request to the batch
             batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null);
         }
 
-        private async Task<ApiCall> BuildUpdateApiCallAsync()
+        private async Task<ApiCall> BuildUpdateApiCallAsync(PnPContext context)
         {
-            // Construct the API call to make
+            // Verify the needed locale settings are loaded
+            await EnsureRegionalSettingsAsync(context).ConfigureAwait(false);
 
             // Define the JSON body of the update request based on the actual changes
             dynamic updateMessage = new ExpandoObject();
@@ -176,7 +184,7 @@ namespace PnP.Core.Model.SharePoint
                 dynamic field = new ExpandoObject();
                 field.FieldName = changedProp.Key;
 
-                BuildValidateUpdateItemPayload(changedProp, field);
+                BuildValidateUpdateItemPayload(context, changedProp, field);
 
                 itemValues.Add(field);
             }
@@ -202,7 +210,30 @@ namespace PnP.Core.Model.SharePoint
             return api;
         }
 
-        private static void BuildValidateUpdateItemPayload(KeyValuePair<string, object> changedProp, dynamic field)
+        private static async Task EnsureRegionalSettingsAsync(PnPContext context)
+        {
+            bool loadRegionalSettings = false;
+            if (context.Web.IsPropertyAvailable(p => p.RegionalSettings))
+            {
+                if (!context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone) ||
+                    !context.Web.RegionalSettings.IsPropertyAvailable(p => p.DecimalSeparator) ||
+                    !context.Web.RegionalSettings.IsPropertyAvailable(p => p.DateSeparator))
+                {
+                    loadRegionalSettings = true;
+                }
+            }
+            else
+            {
+                loadRegionalSettings = true;
+            }
+
+            if (loadRegionalSettings)
+            {
+                await context.Web.RegionalSettings.EnsurePropertiesAsync(RegionalSettings.LocaleSettingsExpression).ConfigureAwait(false);
+            }
+        }
+
+        private static void BuildValidateUpdateItemPayload(PnPContext context, KeyValuePair<string, object> changedProp, dynamic field)
         {
             if (changedProp.Value is FieldValue fieldItemValue)
             {
@@ -241,8 +272,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else if (changedProp.Value is DateTime dateValue)
             {
-                // Send date in below format
-                field.FieldValue = dateValue.ToString("yyyy-MM-dd hh:mm:ss");
+                field.FieldValue = DateTimeToSharePointString(context, dateValue);
             }
             else if (changedProp.Value != null && (changedProp.Value is int))
             {
@@ -250,8 +280,7 @@ namespace PnP.Core.Model.SharePoint
             }
             else if (changedProp.Value != null && (changedProp.Value is double doubleValue))
             {
-                System.Globalization.CultureInfo usCulture = new System.Globalization.CultureInfo("en-US");
-                field.FieldValue = doubleValue.ToString(usCulture);
+                field.FieldValue = DoubleToSharePointString(context, doubleValue);
             }
             else if (changedProp.Value != null && (changedProp.Value is bool boolValue))
             {
@@ -261,6 +290,29 @@ namespace PnP.Core.Model.SharePoint
             {
                 field.FieldValue = changedProp.Value;
             }
+        }
+
+        private static string DateTimeToSharePointString(PnPContext context, DateTime input)
+        {
+            // Convert incoming date to UTC
+            DateTime inputInUTC = input.ToUniversalTime();
+
+            // Convert to the time zone used by the SharePoint site, take in account the daylight savings delta
+            bool isDaylight = TimeZoneInfo.Local.IsDaylightSavingTime(input);
+            TimeSpan utcDelta = new TimeSpan(0, context.Web.RegionalSettings.TimeZone.Bias + (isDaylight ? context.Web.RegionalSettings.TimeZone.DaylightBias : context.Web.RegionalSettings.TimeZone.StandardBias), 0);
+            
+            // Apply the delta from UTC to get the date used by the site and apply formatting 
+            return (inputInUTC - utcDelta).ToString("yyyy-MM-dd hh:mm:ss");
+        }
+
+        private static string DoubleToSharePointString(PnPContext context, double input)
+        {
+            NumberFormatInfo nfi = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = context.Web.RegionalSettings.DecimalSeparator
+            };
+
+            return input.ToString(nfi);
         }
 
         #endregion
