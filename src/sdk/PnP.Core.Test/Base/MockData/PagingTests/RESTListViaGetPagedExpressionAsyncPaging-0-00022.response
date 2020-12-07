@@ -1,9 +1,9 @@
---batchresponse_37eda247-65a9-48ae-b8a7-b8a4501c4b89
+--batchresponse_e137ce0b-b437-48d1-95a1-1be3f2533c74
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[]}}
---batchresponse_37eda247-65a9-48ae-b8a7-b8a4501c4b89--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'84c17956-a17c-4cad-b772-52abde4f2a79')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'84c17956-a17c-4cad-b772-52abde4f2a79')","etag":"\"0\"","type":"SP.List"},"Id":"84c17956-a17c-4cad-b772-52abde4f2a79","Title":"Theme Gallery"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteUserInfoList","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/SiteUserInfoList","etag":"\"46\"","type":"SP.List"},"Id":"024de170-f043-4105-b938-b2b7686a6f26","Title":"User Information List"}]}}
+--batchresponse_e137ce0b-b437-48d1-95a1-1be3f2533c74--

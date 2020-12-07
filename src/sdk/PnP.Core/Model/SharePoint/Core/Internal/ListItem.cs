@@ -1,8 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.Security;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
+using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -77,7 +82,6 @@ namespace PnP.Core.Model.SharePoint
                 // sample parent list uri: https://bertonline.sharepoint.com/sites/modern/_api/Web/Lists(guid'b2d52a36-52f1-48a4-b499-629063c6a38c')
                 var parentListUri = parentList.GetMetadata(PnPConstants.MetaDataUri);
                 // sample parent list entity type name: DemolistList
-                //var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)[0..^4] : null;
                 var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Substring(0, parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Length - 4) : null;
 
                 // If this list we're adding items to was not fetched from the server than throw an error
@@ -106,6 +110,12 @@ namespace PnP.Core.Model.SharePoint
                 };
                 body.bNewDocumentUpdate = false;
 
+                if (Values.Any())
+                {
+                    // Verify the needed locale settings are loaded
+                    await EnsureRegionalSettingsAsync(PnPContext).ConfigureAwait(false);
+                }
+
                 // Add fields to the payload
                 dynamic itemValues = new List<dynamic>();
                 foreach (var item in Values)
@@ -113,14 +123,7 @@ namespace PnP.Core.Model.SharePoint
                     dynamic field = new ExpandoObject();
                     field.FieldName = item.Key;
 
-                    if (item.Value is FieldValue fieldItemValue)
-                    {
-                        field.FieldValue = fieldItemValue.ToValidateUpdateItemJson();
-                    }
-                    else
-                    {
-                        field.FieldValue = item.Value;
-                    }
+                    BuildValidateUpdateItemPayload(PnPContext, item, field);
 
                     itemValues.Add(field);
                 }
@@ -136,6 +139,183 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Methods
+
+        #region Item updates
+
+        internal override async Task BaseUpdate(Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            // Get entity information for the entity to update
+            var entityInfo = GetClassInfo();
+
+            var api = await BuildUpdateApiCallAsync(PnPContext).ConfigureAwait(false);
+
+            // Add the request to the batch and execute the batch
+            var batch = PnPContext.BatchClient.EnsureBatch();
+            batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null);
+            await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
+        }
+
+        internal override async Task BaseBatchUpdateAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            // Get entity information for the entity to update
+            var entityInfo = GetClassInfo();
+
+            var api = await BuildUpdateApiCallAsync(PnPContext).ConfigureAwait(false);
+
+            // Add the request to the batch
+            batch.Add(this, entityInfo, HttpMethod.Post, api, default, null, null);
+        }
+
+        private async Task<ApiCall> BuildUpdateApiCallAsync(PnPContext context)
+        {
+            // Verify the needed locale settings are loaded
+            await EnsureRegionalSettingsAsync(context).ConfigureAwait(false);
+
+            // Define the JSON body of the update request based on the actual changes
+            dynamic updateMessage = new ExpandoObject();
+
+            // increment version
+            updateMessage.bNewDocumentUpdate = false;
+
+            dynamic itemValues = new List<dynamic>();
+
+            foreach (KeyValuePair<string, object> changedProp in Values.ChangedProperties)
+            {
+                dynamic field = new ExpandoObject();
+                field.FieldName = changedProp.Key;
+
+                BuildValidateUpdateItemPayload(context, changedProp, field);
+
+                itemValues.Add(field);
+            }
+
+            updateMessage.formValues = itemValues;
+
+            // Get the corresponding JSON text content
+            var jsonUpdateMessage = JsonSerializer.Serialize(updateMessage,
+                typeof(ExpandoObject),
+                new JsonSerializerOptions { WriteIndented = true });
+
+            var itemUri = GetMetadata(PnPConstants.MetaDataUri);
+
+            // If this list we're adding items to was not fetched from the server than throw an error
+            if (string.IsNullOrEmpty(itemUri))
+            {
+                throw new ClientException(ErrorType.PropertyNotLoaded, PnPCoreResources.Exception_PropertyNotLoaded_List);
+            }
+
+            // Prepare the variable to contain the target URL for the update operation
+            var updateUrl = await ApiHelper.ParseApiCallAsync(this, $"{itemUri}/ValidateUpdateListItem").ConfigureAwait(false);
+            var api = new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage);
+            return api;
+        }
+
+        private static async Task EnsureRegionalSettingsAsync(PnPContext context)
+        {
+            bool loadRegionalSettings = false;
+            if (context.Web.IsPropertyAvailable(p => p.RegionalSettings))
+            {
+                if (!context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone) ||
+                    !context.Web.RegionalSettings.IsPropertyAvailable(p => p.DecimalSeparator) ||
+                    !context.Web.RegionalSettings.IsPropertyAvailable(p => p.DateSeparator))
+                {
+                    loadRegionalSettings = true;
+                }
+            }
+            else
+            {
+                loadRegionalSettings = true;
+            }
+
+            if (loadRegionalSettings)
+            {
+                await context.Web.RegionalSettings.EnsurePropertiesAsync(RegionalSettings.LocaleSettingsExpression).ConfigureAwait(false);
+            }
+        }
+
+        private static void BuildValidateUpdateItemPayload(PnPContext context, KeyValuePair<string, object> changedProp, dynamic field)
+        {
+            if (changedProp.Value is FieldValue fieldItemValue)
+            {
+                field.FieldValue = fieldItemValue.ToValidateUpdateItemJson();
+            }
+            else if (changedProp.Value is FieldValueCollection fieldValueCollection)
+            {
+                if (fieldValueCollection.Values.Any())
+                {
+                    if (fieldValueCollection.Field.TypeAsString == "UserMulti")
+                    {
+                        field.FieldValue = fieldValueCollection.UserMultiToValidateUpdateItemJson();
+                    }
+                    else if (fieldValueCollection.Field.TypeAsString == "TaxonomyFieldTypeMulti")
+                    {
+                        field.FieldValue = fieldValueCollection.TaxonomyMultiToValidateUpdateItemJson();
+                    }
+                    else if (fieldValueCollection.Field.TypeAsString == "LookupMulti")
+                    {
+                        field.FieldValue = fieldValueCollection.LookupMultiToValidateUpdateItemJson();
+                    }
+                }
+                else
+                {
+                    field.FieldValue = null;
+                }
+            }
+            else if (changedProp.Value is List<string> stringList)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach(var choice in stringList)
+                {
+                    sb.Append($"{choice};#");
+                }
+                field.FieldValue = sb.ToString();
+            }
+            else if (changedProp.Value is DateTime dateValue)
+            {
+                field.FieldValue = DateTimeToSharePointString(context, dateValue);
+            }
+            else if (changedProp.Value != null && (changedProp.Value is int))
+            {
+                field.FieldValue = changedProp.Value.ToString();
+            }
+            else if (changedProp.Value != null && (changedProp.Value is double doubleValue))
+            {
+                field.FieldValue = DoubleToSharePointString(context, doubleValue);
+            }
+            else if (changedProp.Value != null && (changedProp.Value is bool boolValue))
+            {
+                field.FieldValue = $"{(boolValue ? "1" : "0")}";
+            }
+            else
+            {
+                field.FieldValue = changedProp.Value;
+            }
+        }
+
+        private static string DateTimeToSharePointString(PnPContext context, DateTime input)
+        {
+            // Convert incoming date to UTC
+            DateTime inputInUTC = input.ToUniversalTime();
+
+            // Convert to the time zone used by the SharePoint site, take in account the daylight savings delta
+            bool isDaylight = TimeZoneInfo.Local.IsDaylightSavingTime(input);
+            TimeSpan utcDelta = new TimeSpan(0, context.Web.RegionalSettings.TimeZone.Bias + (isDaylight ? context.Web.RegionalSettings.TimeZone.DaylightBias : context.Web.RegionalSettings.TimeZone.StandardBias), 0);
+
+            // Apply the delta from UTC to get the date used by the site and apply formatting 
+            return (inputInUTC - utcDelta).ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
+        }
+
+        private static string DoubleToSharePointString(PnPContext context, double input)
+        {
+            NumberFormatInfo nfi = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = context.Web.RegionalSettings.DecimalSeparator
+            };
+
+            return input.ToString(nfi);
+        }
+
+        #endregion
 
         #region Graph/Rest interoperability overrides
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -240,6 +420,25 @@ namespace PnP.Core.Model.SharePoint
             return new FieldUserValue(fieldToUpdate.InternalName, Values)
             {
                 LookupId = userId,
+                Field = fieldToUpdate
+            };
+        }
+
+        public IFieldUserValue NewFieldUserValue(IField fieldToUpdate, ISharePointPrincipal principal)
+        {
+            if (fieldToUpdate == null)
+            {
+                throw new ArgumentNullException(nameof(fieldToUpdate));
+            }
+
+            if (principal == null)
+            {
+                throw new ArgumentNullException(nameof(principal));
+            }
+
+            return new FieldUserValue(fieldToUpdate.InternalName, Values)
+            {
+                Principal = principal,
                 Field = fieldToUpdate
             };
         }

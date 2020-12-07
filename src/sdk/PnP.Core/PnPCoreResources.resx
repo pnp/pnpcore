@@ -363,6 +363,9 @@
   <data name="Exception_Unsupported_Method" xml:space="preserve">
     <value>The method '{0}' is not supported</value>
   </data>
+  <data name="Exception_Unsupported_MissingSharePointPrincipal" xml:space="preserve">
+    <value>You need to provide the user via it's principal when adding a new item</value>
+  </data>
   <data name="Exception_Unsupported_NodeType" xml:space="preserve">
     <value>Node of type {0} of expression {1} is not supported</value>
   </data>

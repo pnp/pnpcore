@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System.Linq;
@@ -207,7 +208,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(0, web.TenantAdminMembersCanShare);
                 // TODO Review this one, it causes SP REST to return an error
                 //Assert.AreNotEqual("", web.ThemeData);
-                Assert.IsNull(web.ThemedCssFolderUrl);
+                // Not validating this property ~ this could have been manipulated on test sites causing false positives
+                //Assert.IsNull(web.ThemedCssFolderUrl);
                 Assert.IsFalse(web.ThirdPartyMdmEnabled);
                 Assert.IsFalse(web.TreeViewEnabled);
                 Assert.AreNotEqual(0, web.UIVersion);
@@ -330,34 +332,39 @@ namespace PnP.Core.Test.SharePoint
         public async Task SetWebPropertiesTest()
         {
             //TestCommon.Instance.Mocking = false;
-            // Using nogroup test site here as for other modern sites the NoScript option is enabled which prevents property bag updates
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
             {
-                var web = await context.Web.GetAsync(p => p.AllProperties);
+                // Test safety - sites typically are noscript sites
+                bool isNoScript = await context.Web.IsNoScriptSiteAsync();
 
-                var propertyKey = "SetWebPropertiesTest";
-                var myProperty = web.AllProperties.GetInteger(propertyKey, 0);
-                if (myProperty == 0)
+                if (!isNoScript)
                 {
-                    web.AllProperties[propertyKey] = 55;
-                    await web.AllProperties.UpdateAsync();
-                }
+                    var web = await context.Web.GetAsync(p => p.AllProperties);
 
-                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
-                {
-                    web = await context2.Web.GetAsync(p => p.AllProperties);
-                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
-                    Assert.IsTrue(myProperty == 55);
+                    var propertyKey = "SetWebPropertiesTest";
+                    var myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                    if (myProperty == 0)
+                    {
+                        web.AllProperties[propertyKey] = 55;
+                        await web.AllProperties.UpdateAsync();
+                    }
 
-                    web.AllProperties[propertyKey] = null;
-                    await web.AllProperties.UpdateAsync();
-                }
+                    using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 2))
+                    {
+                        web = await context2.Web.GetAsync(p => p.AllProperties);
+                        myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                        Assert.IsTrue(myProperty == 55);
 
-                using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 3))
-                {
-                    web = await context3.Web.GetAsync(p => p.AllProperties);
-                    myProperty = web.AllProperties.GetInteger(propertyKey, 0);
-                    Assert.IsTrue(myProperty == 0);
+                        web.AllProperties[propertyKey] = null;
+                        await web.AllProperties.UpdateAsync();
+                    }
+
+                    using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite, 3))
+                    {
+                        web = await context3.Web.GetAsync(p => p.AllProperties);
+                        myProperty = web.AllProperties.GetInteger(propertyKey, 0);
+                        Assert.IsTrue(myProperty == 0);
+                    }
                 }
             }
         }
@@ -406,6 +413,76 @@ namespace PnP.Core.Test.SharePoint
                     var web3 = await context3.Web.GetAsync(p => p.SupportedUILanguageIds);
                     Assert.IsTrue(web3.SupportedUILanguageIds.Contains(lastLanguage));
                 }
+            }
+        }
+
+        [TestMethod]
+        public async Task GetRegionalSettingsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
+            {
+                var web = await context.Web.GetAsync(p => p.RegionalSettings);
+
+                Assert.IsTrue(web.RegionalSettings.Requested);
+                Assert.IsTrue(!string.IsNullOrEmpty(web.RegionalSettings.DateSeparator));
+                Assert.IsTrue(!string.IsNullOrEmpty(web.RegionalSettings.DecimalSeparator));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTimeZoneSettingsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
+            {
+                var web = await context.Web.GetAsync(p => p.RegionalSettings);
+                var timeZone = await web.RegionalSettings.TimeZone.GetAsync();
+
+                Assert.IsTrue(timeZone.Requested);
+                Assert.IsTrue(!string.IsNullOrEmpty(timeZone.Description));
+                Assert.IsTrue(timeZone.Id >= 0);
+                Assert.IsTrue(timeZone.IsPropertyAvailable(p => p.Bias));
+                Assert.IsTrue(timeZone.IsPropertyAvailable(p => p.DaylightBias));
+                Assert.IsTrue(timeZone.IsPropertyAvailable(p => p.StandardBias));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetTimeZonesSettingsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
+            {
+                var web = await context.Web.GetAsync(p => p.RegionalSettings);
+                var timeZones = (await web.RegionalSettings.GetAsync(p=>p.TimeZones)).TimeZones;
+
+                Assert.IsTrue(timeZones.Requested);
+                Assert.IsTrue(timeZones.Any());
+                Assert.IsTrue(!string.IsNullOrEmpty(timeZones.First().Description));
+                Assert.IsTrue(timeZones.First().IsPropertyAvailable(p => p.Bias));
+                Assert.IsTrue(timeZones.First().IsPropertyAvailable(p => p.DaylightBias));
+                Assert.IsTrue(timeZones.First().IsPropertyAvailable(p => p.StandardBias));
+                Assert.IsTrue(!string.IsNullOrEmpty(timeZones.Last().Description));
+                Assert.IsTrue(timeZones.Last().IsPropertyAvailable(p => p.Bias));
+                Assert.IsTrue(timeZones.Last().IsPropertyAvailable(p => p.DaylightBias));
+                Assert.IsTrue(timeZones.Last().IsPropertyAvailable(p => p.StandardBias));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetRegionalSettingsPlusTimeZoneTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSubSite))
+            {
+                await context.Web.RegionalSettings.GetAsync(p=>p.DecimalSeparator, p => p.TimeZone);
+
+                Assert.IsTrue(context.Web.RegionalSettings.Requested);
+                Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.DecimalSeparator));
+                Assert.IsTrue(context.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone));
+                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.Requested);
+                Assert.IsTrue(context.Web.RegionalSettings.TimeZone.IsPropertyAvailable(p=>p.Bias));
             }
         }
 

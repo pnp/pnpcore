@@ -1036,7 +1036,7 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="expressions">Data load expressions</param>
         /// <returns>Entity model class describing this model instance</returns>
-        private EntityInfo GetClassInfo(params Expression<Func<TModel, object>>[] expressions)
+        internal EntityInfo GetClassInfo(params Expression<Func<TModel, object>>[] expressions)
         {
             return EntityManager.GetClassInfo(GetType(), this, expressions);
         }

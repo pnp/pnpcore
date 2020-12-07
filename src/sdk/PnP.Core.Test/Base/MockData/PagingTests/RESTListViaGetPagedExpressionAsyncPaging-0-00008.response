@@ -1,9 +1,9 @@
---batchresponse_304d3a48-7ad7-46cc-b66d-4eab3938bbb5
+--batchresponse_032fbc03-6014-4585-8572-b1f7fbbf2386
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'484cd94d-76b9-4851-8efc-4352402601e2')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'484cd94d-76b9-4851-8efc-4352402601e2')","etag":"\"0\"","type":"SP.List"},"Id":"484cd94d-76b9-4851-8efc-4352402601e2","Title":"Composed Looks"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'60116bac-f5f0-4ca6-b133-ed93670d638f')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'60116bac-f5f0-4ca6-b133-ed93670d638f')","etag":"\"6\"","type":"SP.List"},"Id":"60116bac-f5f0-4ca6-b133-ed93670d638f","Title":"Content type publishing error log"}]}}
---batchresponse_304d3a48-7ad7-46cc-b66d-4eab3938bbb5--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'91bb170e-0ef0-4062-86f9-e5dbe8d047bd')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'91bb170e-0ef0-4062-86f9-e5dbe8d047bd')","etag":"\"43\"","type":"SP.List"},"Id":"91bb170e-0ef0-4062-86f9-e5dbe8d047bd","Title":"bla"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'484cd94d-76b9-4851-8efc-4352402601e2')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'484cd94d-76b9-4851-8efc-4352402601e2')","etag":"\"0\"","type":"SP.List"},"Id":"484cd94d-76b9-4851-8efc-4352402601e2","Title":"Composed Looks"}]}}
+--batchresponse_032fbc03-6014-4585-8572-b1f7fbbf2386--

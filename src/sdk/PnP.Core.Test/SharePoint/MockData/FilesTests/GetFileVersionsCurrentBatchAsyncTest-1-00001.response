@@ -1,4 +1,4 @@
---batchresponse_7ec4b059-f123-4480-9a71-63c84957adfa
+--batchresponse_3b06d666-99e3-44e3-8c4e-ac9a2de3f514
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,7 +6,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"CheckOut":null}}
---batchresponse_7ec4b059-f123-4480-9a71-63c84957adfa
+--batchresponse_3b06d666-99e3-44e3-8c4e-ac9a2de3f514
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -14,7 +14,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"CheckIn":null}}
---batchresponse_7ec4b059-f123-4480-9a71-63c84957adfa
+--batchresponse_3b06d666-99e3-44e3-8c4e-ac9a2de3f514
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -22,7 +22,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"CheckOut":null}}
---batchresponse_7ec4b059-f123-4480-9a71-63c84957adfa
+--batchresponse_3b06d666-99e3-44e3-8c4e-ac9a2de3f514
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -30,4 +30,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"CheckIn":null}}
---batchresponse_7ec4b059-f123-4480-9a71-63c84957adfa--
+--batchresponse_3b06d666-99e3-44e3-8c4e-ac9a2de3f514--

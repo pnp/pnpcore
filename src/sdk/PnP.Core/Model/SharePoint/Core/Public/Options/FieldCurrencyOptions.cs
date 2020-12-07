@@ -9,5 +9,10 @@
         /// Gets or sets a value that specifies the language code identifier (LCID) used to format the value of the field.
         /// </summary>
         public int? CurrencyLocaleId { get; set; }
+
+        /// <summary>
+        /// How many decimals to show
+        /// </summary>
+        public int? Decimals { get; set; }
     }
 }

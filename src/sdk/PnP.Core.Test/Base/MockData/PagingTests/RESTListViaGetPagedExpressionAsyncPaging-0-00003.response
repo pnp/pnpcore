@@ -1,9 +1,9 @@
---batchresponse_a218379d-8a76-43ad-88ca-772197f4bdda
+--batchresponse_40006afd-431d-490f-9cda-ffb1ceb7aa73
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'cabf5d12-c309-4a70-bd57-ee4105399355')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'cabf5d12-c309-4a70-bd57-ee4105399355')","etag":"\"1\"","type":"SP.List"},"Id":"cabf5d12-c309-4a70-bd57-ee4105399355","Title":"AddListItemViaRestNonAsync"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f05d1453-08dc-4bc7-bc94-fd1e6faf12aa')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f05d1453-08dc-4bc7-bc94-fd1e6faf12aa')","etag":"\"1\"","type":"SP.List"},"Id":"f05d1453-08dc-4bc7-bc94-fd1e6faf12aa","Title":"AddListItemViaSpecificBatchNonAsyncTest"}]}}
---batchresponse_a218379d-8a76-43ad-88ca-772197f4bdda--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b683238b-d52d-4fb0-906c-25bdd2b2bd65')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b683238b-d52d-4fb0-906c-25bdd2b2bd65')","etag":"\"1\"","type":"SP.List"},"Id":"b683238b-d52d-4fb0-906c-25bdd2b2bd65","Title":"AddListItemViaRestNonAsync"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c503c984-e9da-4b0f-916c-65e0b8e31f47')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c503c984-e9da-4b0f-916c-65e0b8e31f47')","etag":"\"1\"","type":"SP.List"},"Id":"c503c984-e9da-4b0f-916c-65e0b8e31f47","Title":"AddListItemViaSpecificBatchNonAsyncTest"}]}}
+--batchresponse_40006afd-431d-490f-9cda-ffb1ceb7aa73--

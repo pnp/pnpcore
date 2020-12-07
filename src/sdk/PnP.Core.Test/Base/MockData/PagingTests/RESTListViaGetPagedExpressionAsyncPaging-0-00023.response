@@ -1,0 +1,9 @@
+--batchresponse_d63d5709-6f75-4205-a0be-267d5bce0245
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c9e952f8-1e13-45a8-8da1-3b308d0b5b32')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c9e952f8-1e13-45a8-8da1-3b308d0b5b32')","etag":"\"0\"","type":"SP.List"},"Id":"c9e952f8-1e13-45a8-8da1-3b308d0b5b32","Title":"Web Part Gallery"}]}}
+--batchresponse_d63d5709-6f75-4205-a0be-267d5bce0245--

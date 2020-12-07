@@ -799,6 +799,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to provide the user via it&apos;s principal when adding a new item.
+        /// </summary>
+        internal static string Exception_Unsupported_MissingSharePointPrincipal {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_MissingSharePointPrincipal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Node of type {0} of expression {1} is not supported.
         /// </summary>
         internal static string Exception_Unsupported_NodeType {

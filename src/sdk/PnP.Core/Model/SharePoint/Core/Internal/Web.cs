@@ -264,6 +264,8 @@ namespace PnP.Core.Model.SharePoint
 
         public IBasePermissions EffectiveBasePermissions { get => GetModelValue<IBasePermissions>(); }
 
+        public IRegionalSettings RegionalSettings { get => GetModelValue<IRegionalSettings>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
@@ -494,10 +496,50 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<ISharePointUser> EnsureUserAsync(string userPrincipalName)
         {
-            // Build the API call to ensure this graph user as a SharePoint User in this site collection
+            // Possible inputs
+            // i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com
+            // bert.jansen@bertonline.onmicrosoft.com
+            // Bert Jansen (Cloud)
+            // Everyone except external users
+
+            if (string.IsNullOrEmpty(userPrincipalName))
+            {
+                throw new ArgumentNullException(nameof(userPrincipalName));
+            }
+
+            int count = 0;
+            foreach (char c in userPrincipalName)
+            {
+                if (c == '|')
+                {
+                    count++;
+                }
+            }
+
+            string logonNameValue;
+            if (count < 2)
+            {
+                if (userPrincipalName.Contains("@"))
+                {
+                    //bert.jansen@bertonline.onmicrosoft.com
+                    logonNameValue = $"i:0#.f|membership|{userPrincipalName}";
+                }
+                else
+                {
+                    // Bert Jansen (Cloud)
+                    // Everyone except external users
+                    logonNameValue = userPrincipalName;
+                }
+            }
+            else
+            {
+                // i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com
+                logonNameValue = userPrincipalName;
+            }
+
             var parameters = new
             {
-                logonName = $"i:0#.f|membership|{userPrincipalName}"
+                logonName = logonNameValue
             }.AsExpando();
 
             string body = JsonSerializer.Serialize(parameters, typeof(ExpandoObject));

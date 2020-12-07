@@ -5,7 +5,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Available options for SharePoint lookup fields
     /// </summary>
-    public class FieldLookupOptions : FieldOptions
+    public class FieldLookupOptions : CommonFieldOptions
     {
         /// <summary>
         /// Gets or sets a value that specifies the internal field name of the field used as the lookup values.

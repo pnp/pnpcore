@@ -24,12 +24,24 @@ namespace PnP.Core.Model.SharePoint
 
         internal override IFieldValue FromJson(JsonElement json)
         {
-            LookupId = json.GetInt32();
-            return this;
+            if (json.ValueKind == JsonValueKind.Number)
+            {
+                LookupId = json.GetInt32();
+                return this;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         internal override IFieldValue FromListDataAsStream(Dictionary<string, string> properties)
         {
+            if (!properties.ContainsKey("lookupId"))
+            {
+                return null;
+            }
+
             if (properties.ContainsKey("lookupId"))
             {
                 LookupId = int.Parse(properties["lookupId"]);
@@ -60,7 +72,7 @@ namespace PnP.Core.Model.SharePoint
 
         internal override object ToValidateUpdateItemJson()
         {
-            return $"{LookupId};#";
+            return $"{LookupId}";
         }
 
         internal override string ToCsomXml()

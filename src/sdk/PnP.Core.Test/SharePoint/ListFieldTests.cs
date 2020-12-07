@@ -54,7 +54,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Title", field.Title);
             }
         }
-
+        
         [TestMethod]
         public async Task AddListFieldNoOptionTest()
         {
@@ -62,7 +62,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions());
+                IField addedField = await documents.Fields.AddTextAsync("ADDED FIELD", new FieldTextOptions());
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
@@ -80,7 +80,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = await documents.Fields.AddTextAsync("ADDED FIELD", new FieldTextOptions()
                 {
                     Description = "TEST DESCRIPTION",
                     Group = "TEST GROUP",
@@ -88,13 +88,12 @@ namespace PnP.Core.Test.SharePoint
                     Indexed = true,
                     EnforceUniqueValues = true,
                     Required = true,
-                    // TODO Check validation formula format
-                    //ValidationFormula = 
+                    ValidationFormula = @"=ISNUMBER(5)",
                     ValidationMessage = "Invalid Value",
                     // TODO Check why hidden list fields cannot be deleted the regular way
                     //{"error":{"code":"-2130575214, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"You cannot delete a hidden column."}}}
                     //Hidden = true,
-                });
+                }); ;
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
@@ -106,6 +105,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(addedField.EnforceUniqueValues);
                 Assert.IsTrue(addedField.Required);
                 Assert.AreEqual("Invalid Value", addedField.ValidationMessage);
+                Assert.AreEqual(@"=ISNUMBER(5)", addedField.ValidationFormula);
 
                 await addedField.DeleteAsync();
             }
@@ -252,7 +252,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = await documents.Fields.AddTextAsync("ADDED FIELD", new FieldTextOptions()
                 {
                     Group = "TEST GROUP",
                     MaxLength = 100
@@ -383,7 +383,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.Add("ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = documents.Fields.AddText("ADDED FIELD", new FieldTextOptions()
                 {
                     Group = "TEST GROUP",
                     MaxLength = 100
@@ -408,7 +408,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddBatch(newBatch, "ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = documents.Fields.AddTextBatch(newBatch, "ADDED FIELD", new FieldTextOptions()
                 {
                     Group = "TEST GROUP",
                     MaxLength = 100
@@ -433,7 +433,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddBatch("ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = documents.Fields.AddTextBatch("ADDED FIELD", new FieldTextOptions()
                 {
                     Group = "TEST GROUP",
                     MaxLength = 100
@@ -458,7 +458,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddBatchAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = await documents.Fields.AddTextBatchAsync("ADDED FIELD", new FieldTextOptions()
                 {
                     Group = "TEST GROUP",
                     MaxLength = 100
@@ -487,30 +487,7 @@ namespace PnP.Core.Test.SharePoint
                 // Empty Title Test
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
                 {
-                    IField addedField = await documents.Fields.AddBatchAsync(string.Empty, FieldType.Text, new FieldTextOptions()
-                    {
-                        Group = "TEST GROUP",
-                        MaxLength = 100
-                    });
-                    await context.ExecuteAsync();
-                });
-
-                // Invalid Type Test
-                await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
-                {
-                    IField addedField = await documents.Fields.AddBatchAsync("ADDED FIELD", FieldType.Invalid, new FieldTextOptions()
-                    {
-                        Group = "TEST GROUP",
-                        MaxLength = 100
-                    });
-                    await context.ExecuteAsync();
-                });
-
-                // Invalid Options
-                // Invalid Type Test
-                await Assert.ThrowsExceptionAsync<ClientException>(async () =>
-                {
-                    IField addedField = await documents.Fields.AddBatchAsync("ADDED FIELD", FieldType.User, new FieldTextOptions()
+                    IField addedField = await documents.Fields.AddTextBatchAsync(string.Empty, new FieldTextOptions()
                     {
                         Group = "TEST GROUP",
                         MaxLength = 100
@@ -520,7 +497,6 @@ namespace PnP.Core.Test.SharePoint
 
             }
         }
-
 
         [TestMethod]
         public async Task AddNewListFieldExceptionsAsyncTests()
@@ -533,34 +509,12 @@ namespace PnP.Core.Test.SharePoint
                 // Empty Title Test
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
                 {
-                    IField addedField = await documents.Fields.AddAsync(string.Empty, FieldType.Text, new FieldTextOptions()
+                    IField addedField = await documents.Fields.AddTextAsync(string.Empty, new FieldTextOptions()
                     {
                         Group = "TEST GROUP",
                         MaxLength = 100
                     });
                 });
-
-                // Invalid Type Test
-                await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
-                {
-                    IField addedField = await documents.Fields.AddAsync("ADDED FIELD", FieldType.Invalid, new FieldTextOptions()
-                    {
-                        Group = "TEST GROUP",
-                        MaxLength = 100
-                    });
-                });
-
-                // Invalid Options
-                // Invalid Type Test
-                await Assert.ThrowsExceptionAsync<ClientException>(async () =>
-                {
-                    IField addedField = await documents.Fields.AddAsync("ADDED FIELD", FieldType.User, new FieldTextOptions()
-                    {
-                        Group = "TEST GROUP",
-                        MaxLength = 100
-                    });
-                });
-
             }
         }
 
@@ -967,7 +921,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddMultiChoiceAsync("ADDED FIELD", new FieldMultiChoiceOptions()
+                IField addedField = await documents.Fields.AddChoiceMultiAsync("ADDED FIELD", new FieldChoiceMultiOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -997,7 +951,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddMultiChoice("ADDED FIELD", new FieldMultiChoiceOptions()
+                IField addedField = documents.Fields.AddChoiceMulti("ADDED FIELD", new FieldChoiceMultiOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -1027,7 +981,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddMultiChoiceBatchAsync("ADDED FIELD", new FieldMultiChoiceOptions()
+                IField addedField = await documents.Fields.AddChoiceMultiBatchAsync("ADDED FIELD", new FieldChoiceMultiOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -1058,7 +1012,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddMultiChoiceBatch("ADDED FIELD", new FieldMultiChoiceOptions()
+                IField addedField = documents.Fields.AddChoiceMultiBatch("ADDED FIELD", new FieldChoiceMultiOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -1090,7 +1044,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = await documents.Fields.AddMultiChoiceBatchAsync(newBatch, "ADDED FIELD", new FieldMultiChoiceOptions()
+                IField addedField = await documents.Fields.AddChoiceMultiBatchAsync(newBatch, "ADDED FIELD", new FieldChoiceMultiOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -1122,7 +1076,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var newBatch = context.NewBatch();
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField addedField = documents.Fields.AddMultiChoiceBatch(newBatch, "ADDED FIELD", new FieldMultiChoiceOptions()
+                IField addedField = documents.Fields.AddChoiceMultiBatch(newBatch, "ADDED FIELD", new FieldChoiceMultiOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -1872,7 +1826,8 @@ namespace PnP.Core.Test.SharePoint
                 IField addedField = await documents.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
                 {
                     Group = "TEST GROUP",
-                    CurrencyLocaleId = 1033,
+                    // Don't test locale as it's dependent on the locale settings of the test site
+                    //CurrencyLocaleId = 1033,
                     DateFormat = DateTimeFieldFormatType.DateTime,
                     Formula = @"=TODAY()",
                     OutputType = FieldType.DateTime
@@ -1883,7 +1838,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("ADDED FIELD", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
-                Assert.AreEqual(1033, addedField.CurrencyLocaleId);
+                // Don't test locale as it's dependent on the locale settings of the test site
+                //Assert.AreEqual(1033, addedField.CurrencyLocaleId);
                 Assert.AreEqual(DateTimeFieldFormatType.DateTime, addedField.DateFormat);
                 Assert.AreEqual(@"=TODAY()", addedField.Formula);
                 Assert.AreEqual(FieldType.DateTime, addedField.OutputType);
@@ -1902,7 +1858,8 @@ namespace PnP.Core.Test.SharePoint
                 IField addedField = await documents.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
                 {
                     Group = "TEST GROUP",
-                    Formula = @"=1-0.5",
+                    // Don't use decimals in the formula to remove the test dependency on the site's locale
+                    Formula = @"=3-2",
                     OutputType = FieldType.Number,
                     ShowAsPercentage = true,
                     // Althought in the docs as usable parameters, DisplayFormat is always -1 in response for number fields
@@ -1914,7 +1871,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("ADDED FIELD", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
-                Assert.AreEqual(@"=1-0.5", addedField.Formula);
+                // Don't use decimals in the formula to remove the test dependency on the site's locale
+                Assert.AreEqual(@"=3-2", addedField.Formula);
                 Assert.AreEqual(FieldType.Number, addedField.OutputType);
                 Assert.IsTrue(addedField.ShowAsPercentage);
                 // Althought in the docs as usable parameters, DisplayFormat is always -1 in response for number fields
@@ -2106,7 +2064,7 @@ namespace PnP.Core.Test.SharePoint
                     Required = true,
                     LookupFieldName = "Title",
                     LookupListId = sitePages.Id,
-                    LookupWebId = currentWeb.Id
+                    //LookupWebId = currentWeb.Id
                 });
 
                 // Test the created object
@@ -2137,7 +2095,7 @@ namespace PnP.Core.Test.SharePoint
                     Required = true,
                     LookupFieldName = "Title",
                     LookupListId = sitePages.Id,
-                    LookupWebId = currentWeb.Id
+                    //LookupWebId = currentWeb.Id
                 });
 
                 // Test the created object
@@ -2168,7 +2126,7 @@ namespace PnP.Core.Test.SharePoint
                     Required = true,
                     LookupFieldName = "Title",
                     LookupListId = sitePages.Id,
-                    LookupWebId = currentWeb.Id
+                    //LookupWebId = currentWeb.Id
                 });
                 await context.ExecuteAsync();
 
@@ -2200,7 +2158,7 @@ namespace PnP.Core.Test.SharePoint
                     Required = true,
                     LookupFieldName = "Title",
                     LookupListId = sitePages.Id,
-                    LookupWebId = currentWeb.Id
+                    //LookupWebId = currentWeb.Id
                 });
                 await context.ExecuteAsync();
 
@@ -2233,7 +2191,7 @@ namespace PnP.Core.Test.SharePoint
                     Required = true,
                     LookupFieldName = "Title",
                     LookupListId = sitePages.Id,
-                    LookupWebId = currentWeb.Id
+                    //LookupWebId = currentWeb.Id
                 });
                 await context.ExecuteAsync(newBatch);
 
@@ -2266,7 +2224,7 @@ namespace PnP.Core.Test.SharePoint
                     Required = true,
                     LookupFieldName = "Title",
                     LookupListId = sitePages.Id,
-                    LookupWebId = currentWeb.Id
+                    //LookupWebId = currentWeb.Id
                 });
                 await context.ExecuteAsync(newBatch);
 
@@ -2298,7 +2256,6 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     Required = true,
                     AllowDisplay = true,
-                    AllowMultipleValues = true,
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                     // TODO Must be tested when support for SharePoint groups is implemented
@@ -2311,7 +2268,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.Required);
                 Assert.IsTrue(addedField.AllowDisplay);
-                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.IsFalse(addedField.AllowMultipleValues);
                 Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
                 // TODO Must be tested when support for SharePoint groups is implemented
                 //Assert.AreEqual(addedField.SelectionGroup, 1);
@@ -2332,7 +2289,6 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     Required = true,
                     AllowDisplay = true,
-                    AllowMultipleValues = true,
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                 });
@@ -2343,7 +2299,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.Required);
                 Assert.IsTrue(addedField.AllowDisplay);
-                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.IsFalse(addedField.AllowMultipleValues);
                 Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
 
                 await addedField.DeleteAsync();
@@ -2362,7 +2318,6 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     Required = true,
                     AllowDisplay = true,
-                    AllowMultipleValues = true,
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                 });
@@ -2374,7 +2329,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.Required);
                 Assert.IsTrue(addedField.AllowDisplay);
-                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.IsFalse(addedField.AllowMultipleValues);
                 Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
 
                 await addedField.DeleteAsync();
@@ -2393,7 +2348,6 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     Required = true,
                     AllowDisplay = true,
-                    AllowMultipleValues = true,
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                 });
@@ -2405,7 +2359,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.Required);
                 Assert.IsTrue(addedField.AllowDisplay);
-                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.IsFalse(addedField.AllowMultipleValues);
                 Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
 
                 await addedField.DeleteAsync();
@@ -2425,7 +2379,6 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     Required = true,
                     AllowDisplay = true,
-                    AllowMultipleValues = true,
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                 });
@@ -2437,7 +2390,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.Required);
                 Assert.IsTrue(addedField.AllowDisplay);
-                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.IsFalse(addedField.AllowMultipleValues);
                 Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
 
                 await addedField.DeleteAsync();
@@ -2457,7 +2410,6 @@ namespace PnP.Core.Test.SharePoint
                     Group = "TEST GROUP",
                     Required = true,
                     AllowDisplay = true,
-                    AllowMultipleValues = true,
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                 });
@@ -2469,14 +2421,12 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.Required);
                 Assert.IsTrue(addedField.AllowDisplay);
-                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.IsFalse(addedField.AllowMultipleValues);
                 Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
 
                 await addedField.DeleteAsync();
             }
         }
-
-
         #endregion
 
         [TestMethod]
@@ -2486,7 +2436,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField field = await documents.Fields.AddAsync("TO UPDATE FIELD", FieldType.Text, new FieldTextOptions());
+                IField field = await documents.Fields.AddTextAsync("TO UPDATE FIELD", new FieldTextOptions());
 
                 // Test if the content type is created
                 Assert.IsNotNull(field);
@@ -2513,7 +2463,7 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var documents = context.Web.Lists.FirstOrDefault(p => p.Title == "Documents");
-                IField field = await documents.Fields.AddAsync("TO DELETE FIELD", FieldType.Text);
+                IField field = await documents.Fields.AddTextAsync("TO DELETE FIELD");
 
                 // Test if the content type is created
                 Assert.IsNotNull(field);

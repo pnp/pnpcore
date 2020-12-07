@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,11 +17,32 @@ namespace PnP.Core.Model.SharePoint
 
         internal override Guid CsomType { get => Guid.Parse("c956ab54-16bd-4c18-89d2-996f57282a6f"); }
 
+        public ISharePointPrincipal Principal
+        {
+            get
+            {
+                return GetValue<ISharePointPrincipal>();
+            }
+            set
+            { 
+                SetValue(value);
+
+                if (value != null)
+                {
+                    SetValue(value.Id, nameof(LookupId));
+                }
+                else
+                {
+                    SetValue(-1, nameof(LookupId));
+                }
+            }
+        }
+
+        public string Sip { get => GetValue<string>(); set => SetValue(value); }
+
         public string Email { get => GetValue<string>(); set => SetValue(value); }
 
         public string Title { get => GetValue<string>(); set => SetValue(value); }
-
-        public string Sip { get => GetValue<string>(); set => SetValue(value); }
 
         public string Picture { get => GetValue<string>(); set => SetValue(value); }
 
@@ -33,6 +55,10 @@ namespace PnP.Core.Model.SharePoint
             else if (json.ValueKind == JsonValueKind.Number)
             {
                 LookupId = json.GetInt32();
+            }
+            else
+            {
+                LookupId = -1;
             }
 
             return this;
@@ -83,6 +109,22 @@ namespace PnP.Core.Model.SharePoint
             };
 
             return updateMessage;
+        }
+
+        internal override object ToValidateUpdateItemJson()
+        {
+            if (Principal == null)
+            {
+                //throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_MissingSharePointPrincipal);
+                return JsonSerializer.Serialize(new List<object>());
+            }
+
+            var users = new List<object>
+            {
+                new { Key = Principal.LoginName }
+            };
+
+            return JsonSerializer.Serialize(users.ToArray());
         }
 
         internal override string ToCsomXml()

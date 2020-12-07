@@ -3,7 +3,7 @@
     /// <summary>
     /// Available options for SharePoint Choice fields
     /// </summary>
-    public class FieldChoiceOptions : FieldMultiChoiceOptions
+    public class FieldChoiceOptions : FieldChoiceMultiOptions
     {
         /// <summary>
         /// Determines whether to display the choice field as option buttons (also known as “radio buttons”) or as a drop-down list.

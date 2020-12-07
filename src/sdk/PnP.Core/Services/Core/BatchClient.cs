@@ -338,6 +338,12 @@ namespace PnP.Core.Services
 
         private async Task ExecuteMicrosoftGraphBatchAsync(Batch batch)
         {
+            // Due to previous splitting we can see empty batches...
+            if (!batch.Requests.Any())
+            {
+                return;
+            }
+
             // Split the provided batch in multiple batches if needed. Possible split reasons are:
             // - too many requests
             var graphBatches = MicrosoftGraphBatchSplitting(batch);
@@ -705,6 +711,12 @@ namespace PnP.Core.Services
 
         private async Task ExecuteSharePointRestBatchAsync(Batch batch)
         {
+            // Due to previous splitting we can see empty batches...
+            if (!batch.Requests.Any())
+            {
+                return;
+            }
+
             // A batch can only combine requests for the same web, if needed we need to split the incoming batch in batches per web
             var restBatches = SharePointRestBatchSplitting(batch);
 
@@ -1194,6 +1206,12 @@ namespace PnP.Core.Services
         /// <returns></returns>
         private async Task ExecuteCsomBatchAsync(Batch batch)
         {
+            // Due to previous splitting we can see empty batches...
+            if (!batch.Requests.Any())
+            {
+                return;
+            }
+
             // A batch can only combine requests for the same web, if needed we need to split the incoming batch in batches per web
             var csomBatches = CsomBatchSplitting(batch);
 

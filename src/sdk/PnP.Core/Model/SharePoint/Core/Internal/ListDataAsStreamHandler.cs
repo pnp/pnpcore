@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
     internal static class ListDataAsStreamHandler
     {
+        internal static readonly Regex currencyRegex = new Regex(@"([\d,.]+)", RegexOptions.Compiled);
+
         internal static async Task<Dictionary<string, object>> Deserialize(string json, List list)
         {
             if (list == null)
@@ -107,8 +111,10 @@ namespace PnP.Core.Model.SharePoint
                             else
                             {
                                 object fieldValue = null;
-                                if (!property.Values.Any())
+                                // Empty array's need to be treated as special fields
+                                if (!property.Values.Any() && !property.IsArray)
                                 {
+                                    // regular fields
                                     if (property.Value.ValueKind == JsonValueKind.Array)
                                     {
                                         // MultiChoice property
@@ -120,8 +126,24 @@ namespace PnP.Core.Model.SharePoint
                                     }
                                     else
                                     {
-                                        // simple property
-                                        fieldValue = GetJsonPropertyValue(property.Value, property.Type);
+                                        // Handle empty regular field value so that they're the same as with a regular Get call
+                                        if ((property.Field.FieldTypeKind == FieldType.Text || property.Field.FieldTypeKind == FieldType.Note || property.Field.FieldTypeKind == FieldType.MultiChoice || property.Field.FieldTypeKind == FieldType.Choice ) &&
+                                            property.Value.ValueKind == JsonValueKind.String &&
+                                            string.IsNullOrEmpty(property.Value.GetString()))
+                                        {
+                                            fieldValue = null;
+                                        }
+                                        else if ((property.Field.FieldTypeKind == FieldType.Number || property.Field.FieldTypeKind == FieldType.Currency || property.Field.FieldTypeKind == FieldType.Integer) &&
+                                                 property.Value.ValueKind == JsonValueKind.Number &&
+                                                 property.Value.GetDouble() == 0d)
+                                        {
+                                            fieldValue = 0;
+                                        }
+                                        else
+                                        {
+                                            // simple property
+                                            fieldValue = GetJsonPropertyValue(property.Value, property.Type);
+                                        }
                                     }
                                 }
                                 else
@@ -150,6 +172,10 @@ namespace PnP.Core.Model.SharePoint
                                                     yyLookup.IsArray = true;
                                                     (fieldValue as FieldValueCollection).Values.Add(yyLookup);
                                                 }
+                                            }
+                                            else 
+                                            {
+                                                (fieldValue as FieldValueCollection).Values.Add(yy);
                                             }
                                         }
                                     }
@@ -288,7 +314,8 @@ namespace PnP.Core.Model.SharePoint
                             */
                             #endregion
 
-                            foreach(var streamPropertyElement in property.Value.EnumerateArray())
+                            // Add values that will become part of a FieldValueCollection later on
+                            foreach (var streamPropertyElement in property.Value.EnumerateArray())
                             {
                                 (var fieldValue, var isArray) = DetectSpecialFieldType(streamProperty.Name, overflowDictionary, field);
                                 var listDataAsStreamPropertyValue = new ListDataAsStreamPropertyValue()
@@ -309,6 +336,9 @@ namespace PnP.Core.Model.SharePoint
                             /*
                              "Url": "https:\u002f\u002fpnp.com\u002f3",
                              "Url.desc": "something3",
+
+                             "LookupSingleField1": "",
+                             "LookupSingleField1.": "",
                             */
 
                             var listDataAsStreamPropertyValue = new ListDataAsStreamPropertyValue()
@@ -363,12 +393,14 @@ namespace PnP.Core.Model.SharePoint
                 {
                     /*
                      "Url.desc": "something3",
+                     "DateTime1.": "2020-12-04T11:15:15Z",
                     */
 
                     if (property.Name.Contains("."))
                     {
                         string[] nameParts = property.Name.Split(new char[] { '.' });
 
+                        var field2 = fields.FirstOrDefault(p => p.InternalName == nameParts[0]);
                         var propertyToUpdate = properties.FirstOrDefault(p => p.Name == nameParts[0]);
                         if (propertyToUpdate != null && propertyToUpdate.Values.Count == 1 && !string.IsNullOrEmpty(nameParts[1]))
                         {
@@ -383,7 +415,23 @@ namespace PnP.Core.Model.SharePoint
                                 valueToUpdate.Properties.Add(nameParts[1], GetJsonPropertyValueAsString(property.Value));
                             }
                         }
+                        else if (propertyToUpdate != null && !string.IsNullOrEmpty(nameParts[1]))
+                        {
+                            //"Bool1.value": "1",
+
+                            // Extra properties on "regular" fields
+                            if (field2 != null && field2.FieldTypeKind == FieldType.Boolean && nameParts[1] == "value")
+                            {
+                                propertyToUpdate.Value = property.Value;
+                            }
+                        }
+                        else if (propertyToUpdate != null && string.IsNullOrEmpty(nameParts[1]))
+                        {
+                            // override the set Value
+                            propertyToUpdate.Value = property.Value;
+                        }
                     }
+                
                 }
             }
 
@@ -392,15 +440,22 @@ namespace PnP.Core.Model.SharePoint
 
         private static Tuple<FieldValue, bool> DetectSpecialFieldType(string name, TransientDictionary dictionary, IField field)
         { 
+            // Some system fields are of type lookup but should not be processed as lookup
+            if (BuiltInFields.Contains(name))
+            {
+                return null;
+            }
+
             switch (field.TypeAsString)
                 {
                 case "URL": return new Tuple<FieldValue, bool>(new FieldUrlValue(name, dictionary) { Field = field }, false);
                 case "UserMulti": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary) { Field = field }, true);
                 case "User": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary) { Field = field }, false);
                 case "LookupMulti": return new Tuple<FieldValue, bool>(new FieldLookupValue(name, dictionary) { Field = field }, true);
-                case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue(name, dictionary) { Field = field }, false);
+                case "Lookup": return new Tuple<FieldValue, bool>(new FieldLookupValue(name, dictionary) { Field = field }, false);
                 case "TaxonomyFieldTypeMulti": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary) { Field = field }, true);
                 case "TaxonomyFieldType": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary) { Field = field }, false);
+                case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue(name, dictionary) { Field = field }, false);
 
                 default:
                     {
@@ -431,6 +486,13 @@ namespace PnP.Core.Model.SharePoint
 
         private static object GetJsonPropertyValue(JsonElement propertyValue, FieldType fieldType)
         {
+            /* US formats
+            "Number1": "67,687",
+            "Currency1": "$67.67",
+
+            "Number1": "67.687",
+
+            */
             switch (fieldType)
             {
                 case FieldType.Boolean:
@@ -441,10 +503,7 @@ namespace PnP.Core.Model.SharePoint
                         }
                         else if (propertyValue.ValueKind == JsonValueKind.String)
                         {
-                            if (bool.TryParse(propertyValue.GetString(), out bool parsedBool))
-                            {
-                                return parsedBool;
-                            }
+                            return StringToBool(propertyValue.GetString());                            
                         }
                         else if (propertyValue.ValueKind == JsonValueKind.Number)
                         {
@@ -486,7 +545,12 @@ namespace PnP.Core.Model.SharePoint
                     {
                         if (propertyValue.ValueKind != JsonValueKind.Number)
                         {
-                            if (double.TryParse(propertyValue.GetString(), out double doubleValue))
+                            if (int.TryParse(propertyValue.GetString(), out int intValue))
+                            {
+                                return intValue;
+                            }
+                            // Numbers and currency are provided in US format
+                            else if(double.TryParse(propertyValue.GetString(), NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double doubleValue))
                             {
                                 return doubleValue;
                             }
@@ -504,24 +568,13 @@ namespace PnP.Core.Model.SharePoint
                     {
                         if (propertyValue.ValueKind != JsonValueKind.Null)
                         {
-                            if (propertyValue.TryGetDateTime(out DateTime dateTime))
+                            if (DateTime.TryParse(propertyValue.GetString(), out DateTime dateTime))
                             {
                                 return dateTime;
                             }
                             else
                             {
-                                if (DateTime.TryParseExact(propertyValue.GetString(),
-                                                           new string[] { "MM/dd/yyyy" },
-                                                           System.Globalization.CultureInfo.InvariantCulture,
-                                                           System.Globalization.DateTimeStyles.None,
-                                                           out DateTime dateTime2))
-                                {
-                                    return dateTime2;
-                                }
-                                else
-                                {
-                                    return null;
-                                }
+                                return null;
                             }
                         }
                         else
@@ -529,12 +582,45 @@ namespace PnP.Core.Model.SharePoint
                             return null;
                         }
                     }
+                case FieldType.Currency:
+                    {
+                        if (propertyValue.ValueKind != JsonValueKind.Null)
+                        {
+                            string currencyString = propertyValue.GetString();
+                            if (!string.IsNullOrEmpty(currencyString))
+                            {
+                                // trim currency chars
+                                var match = currencyRegex.Match(currencyString);
+                                if (match.Success)
+                                {
+                                    // Numbers and currency are provided in US format
+                                    if (double.TryParse(match.Groups[1].Value, NumberStyles.Number, CultureInfo.CreateSpecificCulture("en-US"), out double parsedCurrency))
+                                    {
+                                        return parsedCurrency;
+                                    }
+                                }
+                            }
+                        }
+                        return 0.0d;
+                    }
                 default:
                     {
-                        return propertyValue.GetString();
+                        if (propertyValue.ValueKind == JsonValueKind.Undefined)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return propertyValue.GetString();
+                        }
                     }
             }
         }
+
+        private static bool StringToBool(string value) =>
+            value.Equals("yes", StringComparison.CurrentCultureIgnoreCase) ||
+            value.Equals(bool.TrueString, StringComparison.CurrentCultureIgnoreCase) ||
+            value.Equals("1");
 
     }
 }

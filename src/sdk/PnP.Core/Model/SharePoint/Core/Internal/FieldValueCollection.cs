@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -29,6 +30,49 @@ namespace PnP.Core.Model.SharePoint
         internal IField Field { get; set; }
 
         public List<IFieldValue> Values { get; } = new List<IFieldValue>();
+
+        internal object UserMultiToValidateUpdateItemJson()
+        {
+            var users = new List<object>();
+            foreach (var item in Values)
+            {
+                if (item is FieldUserValue fieldUserValue)
+                {
+                    if (fieldUserValue.Principal == null)
+                    {
+                        throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_MissingSharePointPrincipal);
+                    }
+
+                    users.Add(new { Key = fieldUserValue.Principal.LoginName });
+                }
+            }
+
+            return JsonSerializer.Serialize(users.ToArray());
+        }
+
+        internal object TaxonomyMultiToValidateUpdateItemJson()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var item in Values)
+            {
+                sb.Append($"{(item as FieldTaxonomyValue).ToValidateUpdateItemJson()}");
+            }
+
+            return sb.ToString();
+        }
+
+        internal object LookupMultiToValidateUpdateItemJson()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var item in Values)
+            {
+                sb.Append($"{(item as FieldLookupValue).ToValidateUpdateItemJson()};#");
+            }
+
+            return sb.ToString();
+        }
 
         internal object LookupMultiToJson()
         {

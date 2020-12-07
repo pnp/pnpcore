@@ -253,10 +253,31 @@ namespace PnP.Core.Services
                             idFieldValue = GetJsonPropertyValue(property).ToString();
                         }
 
-                        // Set the object property value taken from the JSON payload
-                        entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name,
-                            GetJsonElementFromPath(property.Value, entityField.SharePointJsonPath), entityField.DataType, entityField.SharePointUseCustomMapping, fromJsonCasting));
+                        if (!string.IsNullOrEmpty(entityField.SharePointJsonPath))
+                        {
+                            var jsonPathFields = entity.Fields.Where(p => !string.IsNullOrEmpty(p.SharePointName) && p.SharePointName.Equals(entityField.SharePointName));
+                            if (jsonPathFields.Any())
+                            {
+                                foreach (var jsonPathField in jsonPathFields)
+                                {
+                                    var jsonElement = GetJsonElementFromPath(property.Value, jsonPathField.SharePointJsonPath);
 
+                                    // Don't assume that the requested json path was also loaded. When using the LoadProperties model there can be 
+                                    // a json object returned that does have all properties loaded 
+                                    if (!jsonElement.Equals(property.Value))
+                                    {
+                                        jsonPathField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, jsonPathField.Name,
+                                            jsonElement, jsonPathField.DataType, jsonPathField.SharePointUseCustomMapping, fromJsonCasting));
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Set the object property value taken from the JSON payload
+                            entityField.PropertyInfo?.SetValue(pnpObject, GetJsonFieldValue(contextAwareObject, entityField.Name,
+                                property.Value, entityField.DataType, entityField.SharePointUseCustomMapping, fromJsonCasting));
+                        }
                         requested = true;
                     }
                 }
@@ -298,10 +319,10 @@ namespace PnP.Core.Services
                         {
 
                             // Verify if we can map the received json to a supported field type
-                            (object fieldType, string fieldName) = ProcessSpecialRestFieldType(pnpObject, property.Name, dictionaryPropertyToAddValueTo, property.Value);
-                            if (fieldType != null)
+                            (object fieldValue, string fieldName) = ProcessSpecialRestFieldType(pnpObject, property.Name, dictionaryPropertyToAddValueTo, property.Value);
+                            if (fieldName != null)
                             {                                
-                                AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldType);
+                                AddToDictionary(dictionaryPropertyToAddValueTo, fieldName, fieldValue);
                             }
                             else
                             {
@@ -437,14 +458,6 @@ namespace PnP.Core.Services
                         {
                             #region Sample json
                             /*
-                              "LookupSingleId": {
-                                "__metadata": {
-                                  "type": "Collection(Edm.Int32)"
-                                },
-                                "results": [
-                                  71
-                                ]
-                              },
                               "LookupMultipleId": {
                                 "__metadata": {
                                   "type": "Collection(Edm.Int32)"
@@ -549,17 +562,51 @@ namespace PnP.Core.Services
                 {
                     #region Sample json
                     /*
+                     "LookupSingleField1Id": 1
                      "PersonSingleId": 6,
                      "PersonSingleStringId": "6",
+                     "UserSingleField1Id": null,
+                     "UserSingleField1StringId": null,
+                     "UserMultiField1Id": null,
+                     "UserMultiField1StringId": null,
                      */
                     #endregion
 
                     string actualPropertyName = propertyName.Substring(0, propertyName.Length - 8);
-                    var fieldValue = new FieldUserValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = GetListItemField(pnpObject, actualPropertyName) };
-                    fieldValue.FromJson(json);
-                    fieldValue.IsArray = false;
-                    return new Tuple<object, string>(fieldValue, actualPropertyName);
-                } 
+                    var field = GetListItemField(pnpObject, actualPropertyName);
+                    if (json.ValueKind == JsonValueKind.Null && field != null && field.TypeAsString == "UserMulti")
+                    {
+                        // Add empty value collection
+                        var values = new FieldValueCollection(field, actualPropertyName, dictionaryPropertyToAddValueTo);
+                        return new Tuple<object, string>(values, actualPropertyName);
+                    }
+                    else
+                    {
+                        var fieldValue = new FieldUserValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = GetListItemField(pnpObject, actualPropertyName) };
+                        fieldValue.FromJson(json);
+                        fieldValue.IsArray = false;
+                        return new Tuple<object, string>(fieldValue, actualPropertyName);
+                    }
+                }
+                else if (propertyName.EndsWith("Id") && propertyName.Length > 2)
+                {
+                    string actualPropertyName = propertyName.Substring(0, propertyName.Length - 2);
+                    var field = GetListItemField(pnpObject, actualPropertyName);
+                    if (field != null && field.TypeAsString == "Lookup")
+                    {
+                        if (json.ValueKind == JsonValueKind.Null)
+                        {
+                            return new Tuple<object, string>(null, actualPropertyName);
+                        }
+                        else
+                        {
+                            var fieldValue = new FieldLookupValue(actualPropertyName, dictionaryPropertyToAddValueTo) { Field = field };
+                            fieldValue.FromJson(json);
+                            fieldValue.IsArray = false;
+                            return new Tuple<object, string>(fieldValue, actualPropertyName);
+                        }
+                    }
+                }
                 else if (json.ValueKind == JsonValueKind.String && (json.GetString().StartsWith("{") && json.GetString().Contains("LocationUri") && json.GetString().EndsWith("}")))
                 {
                     #region Sample json
@@ -623,6 +670,14 @@ namespace PnP.Core.Services
                         {
                             await pnpContext.Web.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
                         }
+                        // We need regional settings and timezone information when working with list items...given we anyhow go the server it's best to 
+                        // add this request to the batch to safe a server roundtrip
+                        if (!pnpContext.Web.IsPropertyAvailable(p=>p.RegionalSettings) || 
+                            (pnpContext.Web.IsPropertyAvailable(p => p.RegionalSettings) && !pnpContext.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone)))
+                        {
+                            await pnpContext.Web.RegionalSettings.GetBatchAsync(RegionalSettings.LocaleSettingsExpression).ConfigureAwait(false);
+                        }
+
                         await pnpContext.ExecuteAsync(idBatch).ConfigureAwait(false);
 
                     }
@@ -978,6 +1033,11 @@ namespace PnP.Core.Services
 
         internal static object GetJsonPropertyValue(JsonProperty property)
         {
+            /*
+            "Number1": 67687,
+            "DateTime1": "2020-12-03T08:00:00Z",
+            "Currency1": 67.67
+            */
             if (property.Value.ValueKind == JsonValueKind.Number)
             {
                 if (property.Value.TryGetInt32(out int int32Value))
@@ -991,6 +1051,15 @@ namespace PnP.Core.Services
                 else
                 {
                     return property.Value.GetDouble();
+                }
+            }
+
+            if (property.Value.ValueKind == JsonValueKind.String)
+            {
+                // SharePoint REST data format
+                if (DateTime.TryParse(property.Value.GetString(), out DateTime foundDate2))
+                {
+                    return foundDate2;
                 }
             }
 

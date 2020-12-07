@@ -62,7 +62,8 @@ namespace PnP.Core.Model
             {
                 if (TryGetValue(key, out object oldValue))
                 {
-                    if (object.Equals(oldValue, value))
+                    // Always handle updates to FieldValueCollection and List<string> as changes on ListItems
+                    if (object.Equals(oldValue, value) && !((value is FieldValueCollection) || (value is List<string>)))
                     {
                         // no change
                         return;
@@ -149,6 +150,14 @@ namespace PnP.Core.Model
                     if (fieldValue.Parent == null)
                     {
                         fieldValue.Parent = this;
+                    }
+                }
+                else if (field is FieldValueCollection fieldValueCollection)
+                {
+                    if (fieldValueCollection.Parent == null)
+                    {
+                        fieldValueCollection.Parent = this;
+                        MarkAsChanged(v.Key);
                     }
                 }
 

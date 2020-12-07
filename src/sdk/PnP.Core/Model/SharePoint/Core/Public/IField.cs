@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model.Security;
+using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -434,6 +435,13 @@ namespace PnP.Core.Model.SharePoint
         public IFieldUserValue NewFieldUserValue(int userId);
 
         /// <summary>
+        /// Creates a new <see cref="IFieldUserValue"/> object
+        /// </summary>
+        /// <param name="principal"><see cref="ISharePointUser"/> or <see cref="ISharePointGroup"/></param>
+        /// <returns>Configured <see cref="IFieldUserValue"/> object</returns>
+        public IFieldUserValue NewFieldUserValue(ISharePointPrincipal principal);
+
+        /// <summary>
         /// Creates a new <see cref="IFieldTaxonomyValue"/> object
         /// </summary>
         /// <param name="termId">Name of the term to set</param>
@@ -445,9 +453,8 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Creates a new collection to hold <see cref="IFieldValue"/> objects
         /// </summary>
-        /// <param name="parent">List item values collection that's being updated by this collection</param>
         /// <returns></returns>
-        public IFieldValueCollection NewFieldValueCollection(TransientDictionary parent);
+        public IFieldValueCollection NewFieldValueCollection();
 
         #endregion
 

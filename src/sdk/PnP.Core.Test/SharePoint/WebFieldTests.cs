@@ -58,11 +58,11 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions());
+                IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD1", new FieldTextOptions());
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD1", addedField.Title);
                 Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
 
                 await addedField.DeleteAsync();
@@ -75,7 +75,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD2", new FieldTextOptions()
                 {
                     Description = "TEST DESCRIPTION",
                     Group = "TEST GROUP",
@@ -84,14 +84,13 @@ namespace PnP.Core.Test.SharePoint
                     Indexed = true,
                     EnforceUniqueValues = true,
                     Required = true,
-                    // TODO Check validation formula format
-                    //ValidationFormula = 
+                    ValidationFormula = @"=ISNUMBER(5)",
                     ValidationMessage = "Invalid Value"
                 });
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD2", addedField.Title);
                 Assert.AreEqual("TEST DESCRIPTION", addedField.Description);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(@"=""DEFAULT""", addedField.DefaultFormula);
@@ -100,6 +99,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(addedField.EnforceUniqueValues);
                 Assert.IsTrue(addedField.Required);
                 Assert.AreEqual("Invalid Value", addedField.ValidationMessage);
+                Assert.AreEqual(@"=ISNUMBER(5)", addedField.ValidationFormula);
 
                 await addedField.DeleteAsync();
             }
@@ -111,12 +111,12 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddFieldAsXmlAsync(@"<Field Type=""Text"" Name=""ADDEDFIELD"" DisplayName=""ADDED FIELD""/>");
+                IField addedField = await context.Web.Fields.AddFieldAsXmlAsync(@"<Field Type=""Text"" Name=""ADDED FIELD3"" DisplayName=""ADDED FIELD3""/>");
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
-                Assert.AreEqual("ADDEDFIELD", addedField.InternalName);
+                Assert.AreEqual("ADDED FIELD3", addedField.Title);
+                Assert.AreEqual("ADDED FIELD3", addedField.InternalName);
                 Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
 
                 await addedField.DeleteAsync();
@@ -130,7 +130,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddAsync("ADDED FIELD", FieldType.Text, new FieldTextOptions()
+                IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD4", new FieldTextOptions()
                 {
                     Group = "TEST GROUP",
                     MaxLength = 100
@@ -138,7 +138,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD4", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
                 Assert.AreEqual(100, addedField.MaxLength);
@@ -153,7 +153,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD", new FieldTextOptions()
+                IField addedField = await context.Web.Fields.AddTextAsync("ADDED FIELD5", new FieldTextOptions()
                 {
                     Group = "TEST GROUP",
                     MaxLength = 100
@@ -161,7 +161,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD5", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Text, addedField.FieldTypeKind);
                 Assert.AreEqual(100, addedField.MaxLength);
@@ -217,7 +217,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddMultilineTextAsync("ADDED FIELD", new FieldMultilineTextOptions()
+                IField addedField = await context.Web.Fields.AddMultilineTextAsync("ADDED FIELD6", new FieldMultilineTextOptions()
                 {
                     Group = "TEST GROUP",
                     AllowHyperlink = true,
@@ -230,7 +230,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD6", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Note, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.AllowHyperlink);
@@ -250,7 +250,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddDateTimeAsync("ADDED FIELD", new FieldDateTimeOptions()
+                IField addedField = await context.Web.Fields.AddDateTimeAsync("ADDED FIELD7", new FieldDateTimeOptions()
                 {
                     Group = "TEST GROUP",
                     DateTimeCalendarType = CalendarType.GregorianXLITFrench,
@@ -260,7 +260,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD7", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.DateTime, addedField.FieldTypeKind);
                 Assert.AreEqual(CalendarType.GregorianXLITFrench, addedField.DateTimeCalendarType);
@@ -277,7 +277,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddMultiChoiceAsync("ADDED FIELD", new FieldMultiChoiceOptions()
+                IField addedField = await context.Web.Fields.AddChoiceMultiAsync("ADDED FIELD8", new FieldChoiceMultiOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -286,7 +286,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD8", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.MultiChoice, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.FillInChoice);
@@ -306,7 +306,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddChoiceAsync("ADDED FIELD", new FieldChoiceOptions()
+                IField addedField = await context.Web.Fields.AddChoiceAsync("ADDED FIELD9", new FieldChoiceOptions()
                 {
                     Group = "TEST GROUP",
                     FillInChoice = true,
@@ -316,7 +316,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD9", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Choice, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.FillInChoice);
@@ -337,7 +337,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddNumberAsync("ADDED FIELD", new FieldNumberOptions()
+                IField addedField = await context.Web.Fields.AddNumberAsync("ADDED FIELD10", new FieldNumberOptions()
                 {
                     Group = "TEST GROUP",
                     MaximumValue = 100,
@@ -349,7 +349,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD10", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Number, addedField.FieldTypeKind);
                 Assert.AreEqual(0, addedField.MinimumValue);
@@ -369,7 +369,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddCurrencyAsync("ADDED FIELD", new FieldCurrencyOptions()
+                IField addedField = await context.Web.Fields.AddCurrencyAsync("ADDED FIELD11", new FieldCurrencyOptions()
                 {
                     Group = "TEST GROUP",
                     CurrencyLocaleId = 1033
@@ -377,7 +377,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD11", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Currency, addedField.FieldTypeKind);
                 Assert.AreEqual(1033, addedField.CurrencyLocaleId);
@@ -392,7 +392,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddUrlAsync("ADDED FIELD", new FieldUrlOptions()
+                IField addedField = await context.Web.Fields.AddUrlAsync("ADDED FIELD12", new FieldUrlOptions()
                 {
                     Group = "TEST GROUP",
                     DisplayFormat = UrlFieldFormatType.Image
@@ -400,7 +400,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD12", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.URL, addedField.FieldTypeKind);
                 Assert.AreEqual((int)UrlFieldFormatType.Image, addedField.DisplayFormat);
@@ -415,10 +415,11 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
+                IField addedField = await context.Web.Fields.AddCalculatedAsync("ADDED FIELD13", new FieldCalculatedOptions()
                 {
                     Group = "TEST GROUP",
-                    CurrencyLocaleId = 1033,
+                    // The test site does not always have 1033 as locale, hence this might fail
+                    //CurrencyLocaleId = 1033,
                     DateFormat = DateTimeFieldFormatType.DateTime,
                     Formula = @"=TODAY()",
                     OutputType = FieldType.DateTime
@@ -426,10 +427,11 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD13", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
-                Assert.AreEqual(1033, addedField.CurrencyLocaleId);
+                // The test site does not always have 1033 as locale, hence this might fail
+                //Assert.AreEqual(1033, addedField.CurrencyLocaleId);
                 Assert.AreEqual(DateTimeFieldFormatType.DateTime, addedField.DateFormat);
                 Assert.AreEqual(@"=TODAY()", addedField.Formula);
                 Assert.AreEqual(FieldType.DateTime, addedField.OutputType);
@@ -444,7 +446,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
+                IField addedField = await context.Web.Fields.AddCalculatedAsync("ADDED FIELD14", new FieldCalculatedOptions()
                 {
                     Group = "TEST GROUP",
                     Formula = @"=1-0.5",
@@ -456,7 +458,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD14", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
                 Assert.AreEqual(@"=1-0.5", addedField.Formula);
@@ -475,7 +477,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
+                IField addedField = await context.Web.Fields.AddCalculatedAsync("ADDED FIELD15", new FieldCalculatedOptions()
                 {
                     Group = "TEST GROUP",
                     Formula = @"=""HELLO""",
@@ -484,7 +486,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD15", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
                 Assert.AreEqual(@"=""HELLO""", addedField.Formula);
@@ -503,7 +505,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 IWeb currentWeb = await context.Web.GetAsync();
                 IList documents = currentWeb.Lists.GetByTitle("Documents", l => l.Id);
-                IField addedField = await context.Web.Fields.AddLookupAsync("ADDED FIELD", new FieldLookupOptions()
+                IField addedField = await context.Web.Fields.AddLookupAsync("ADDED FIELD16", new FieldLookupOptions()
                 {
                     Required = true,
                     LookupFieldName = "Title",
@@ -513,7 +515,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD16", addedField.Title);
                 Assert.AreEqual(FieldType.Lookup, addedField.FieldTypeKind);
                 Assert.AreEqual("Title", addedField.LookupField);
                 Assert.AreEqual(documents.Id, Guid.Parse(addedField.LookupList));
@@ -529,12 +531,11 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField addedField = await context.Web.Fields.AddUserAsync("ADDED FIELD", new FieldUserOptions()
+                IField addedField = await context.Web.Fields.AddUserAsync("ADDED FIELD17", new FieldUserOptions()
                 {
                     Group = "TEST GROUP",
                     Required = true,
                     AllowDisplay = true,
-                    AllowMultipleValues = true,
                     Presence = true,
                     SelectionMode = FieldUserSelectionMode.PeopleAndGroups
                     // TODO Must be tested when support for SharePoint groups is implemented
@@ -543,11 +544,11 @@ namespace PnP.Core.Test.SharePoint
 
                 // Test the created object
                 Assert.IsNotNull(addedField);
-                Assert.AreEqual("ADDED FIELD", addedField.Title);
+                Assert.AreEqual("ADDED FIELD17", addedField.Title);
                 Assert.AreEqual(FieldType.User, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.Required);
                 Assert.IsTrue(addedField.AllowDisplay);
-                Assert.IsTrue(addedField.AllowMultipleValues);
+                Assert.IsFalse(addedField.AllowMultipleValues);
                 Assert.AreEqual(addedField.SelectionMode, FieldUserSelectionMode.PeopleAndGroups);
                 // TODO Must be tested when support for SharePoint groups is implemented
                 //Assert.AreEqual(addedField.SelectionGroup, 1);
@@ -562,7 +563,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField field = await context.Web.Fields.AddAsync("TO UPDATE FIELD", FieldType.Text, new FieldTextOptions());
+                IField field = await context.Web.Fields.AddTextAsync("TO UPDATE FIELD", new FieldTextOptions());
 
                 // Test if the content type is created
                 Assert.IsNotNull(field);
@@ -588,7 +589,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IField field = await context.Web.Fields.AddAsync("TO DELETE FIELD", FieldType.Text);
+                IField field = await context.Web.Fields.AddTextAsync("TO DELETE FIELD");
 
                 // Test if the content type is created
                 Assert.IsNotNull(field);
