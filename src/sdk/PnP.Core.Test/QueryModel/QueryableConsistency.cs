@@ -531,7 +531,8 @@ namespace PnP.Core.Test.QueryModel
                 await list.GetAsync(p => p.Items);
 
                 Assert.IsNotNull(list);
-                Assert.AreEqual(1, list.Items.Length);
+                // It's hard to enforce only one page in the test site (especially now that we have page tests)...making the check more reliable
+                Assert.IsTrue(list.Items.Length >= 1);
             }
         }
 
@@ -552,7 +553,8 @@ namespace PnP.Core.Test.QueryModel
                 await list.GetAsync(p => p.Items);
 
                 Assert.IsNotNull(list);
-                Assert.AreEqual(1, list.Items.Length);
+                // It's hard to enforce only one page in the test site (especially now that we have page tests)...making the check more reliable
+                Assert.IsTrue(list.Items.Length >= 1);
             }
         }
 
@@ -580,7 +582,8 @@ namespace PnP.Core.Test.QueryModel
                 Assert.IsTrue(listsQueryResult.Count > 5);
                 Assert.IsNotNull(list);
                 Assert.AreEqual(listTitle, list.Title);
-                Assert.AreEqual(1, list.Items.Length);
+                // It's hard to enforce only one page in the test site (especially now that we have page tests)...making the check more reliable
+                Assert.IsTrue(list.Items.Length >= 1);
             }
         }
 

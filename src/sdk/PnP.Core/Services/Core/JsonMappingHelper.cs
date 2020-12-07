@@ -1057,11 +1057,7 @@ namespace PnP.Core.Services
             if (property.Value.ValueKind == JsonValueKind.String)
             {
                 // SharePoint REST data format
-                if (DateTime.TryParseExact(property.Value.GetString(), "yyyy-MM-ddThh:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime foundDate))
-                {
-                    return foundDate;
-                }
-                else if (DateTime.TryParse(property.Value.GetString(), out DateTime foundDate2))
+                if (DateTime.TryParse(property.Value.GetString(), out DateTime foundDate2))
                 {
                     return foundDate2;
                 }

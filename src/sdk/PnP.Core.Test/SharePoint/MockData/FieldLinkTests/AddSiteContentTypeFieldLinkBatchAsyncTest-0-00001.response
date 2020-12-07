@@ -1,4 +1,4 @@
---batchresponse_a647ad9d-d6db-43a7-9db9-9108e9f816c3
+--batchresponse_c6e54dd3-636c-438d-8e20-7ad3a73f2ffa
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,4 +7,4 @@ CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 LOCATION: https://bertonline.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x0100302EF0D1F1DB4C4EBF58251BCCF5968C')/FieldLinks(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x0100302EF0D1F1DB4C4EBF58251BCCF5968C')/FieldLinks(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/ContentTypes('0x0100302EF0D1F1DB4C4EBF58251BCCF5968C')/FieldLinks(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')","type":"SP.FieldLink"},"FieldInternalName":"Title","Hidden":false,"Id":"fa564e0f-0c70-4ab9-b863-0177e6ddd247","Name":"Title","Required":false}}
---batchresponse_a647ad9d-d6db-43a7-9db9-9108e9f816c3--
+--batchresponse_c6e54dd3-636c-438d-8e20-7ad3a73f2ffa--

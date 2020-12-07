@@ -1826,7 +1826,8 @@ namespace PnP.Core.Test.SharePoint
                 IField addedField = await documents.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
                 {
                     Group = "TEST GROUP",
-                    CurrencyLocaleId = 1033,
+                    // Don't test locale as it's dependent on the locale settings of the test site
+                    //CurrencyLocaleId = 1033,
                     DateFormat = DateTimeFieldFormatType.DateTime,
                     Formula = @"=TODAY()",
                     OutputType = FieldType.DateTime
@@ -1837,7 +1838,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("ADDED FIELD", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
-                Assert.AreEqual(1033, addedField.CurrencyLocaleId);
+                // Don't test locale as it's dependent on the locale settings of the test site
+                //Assert.AreEqual(1033, addedField.CurrencyLocaleId);
                 Assert.AreEqual(DateTimeFieldFormatType.DateTime, addedField.DateFormat);
                 Assert.AreEqual(@"=TODAY()", addedField.Formula);
                 Assert.AreEqual(FieldType.DateTime, addedField.OutputType);
@@ -1856,7 +1858,8 @@ namespace PnP.Core.Test.SharePoint
                 IField addedField = await documents.Fields.AddCalculatedAsync("ADDED FIELD", new FieldCalculatedOptions()
                 {
                     Group = "TEST GROUP",
-                    Formula = @"=1-0.5",
+                    // Don't use decimals in the formula to remove the test dependency on the site's locale
+                    Formula = @"=3-2",
                     OutputType = FieldType.Number,
                     ShowAsPercentage = true,
                     // Althought in the docs as usable parameters, DisplayFormat is always -1 in response for number fields
@@ -1868,7 +1871,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("ADDED FIELD", addedField.Title);
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Calculated, addedField.FieldTypeKind);
-                Assert.AreEqual(@"=1-0.5", addedField.Formula);
+                // Don't use decimals in the formula to remove the test dependency on the site's locale
+                Assert.AreEqual(@"=3-2", addedField.Formula);
                 Assert.AreEqual(FieldType.Number, addedField.OutputType);
                 Assert.IsTrue(addedField.ShowAsPercentage);
                 // Althought in the docs as usable parameters, DisplayFormat is always -1 in response for number fields

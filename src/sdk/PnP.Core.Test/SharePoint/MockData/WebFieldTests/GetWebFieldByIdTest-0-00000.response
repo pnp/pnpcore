@@ -1,4 +1,4 @@
---batchresponse_6e75ff4d-307d-476f-909e-f220d8dfa1c4
+--batchresponse_1a235ad0-bd12-4381-bf1a-9b3a856be05b
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')","type":"SP.FieldText"},"DescriptionResource":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')/DescriptionResource"}},"TitleResource":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/AvailableFields(guid'fa564e0f-0c70-4ab9-b863-0177e6ddd247')/TitleResource"}},"AutoIndexed":false,"CanBeDeleted":false,"ClientSideComponentId":"00000000-0000-0000-0000-000000000000","ClientSideComponentProperties":null,"ClientValidationFormula":null,"ClientValidationMessage":null,"CustomFormatter":null,"DefaultFormula":null,"DefaultValue":null,"Description":"","Direction":"none","EnforceUniqueValues":false,"EntityPropertyName":"Title","Filterable":true,"FromBaseType":true,"Group":"_Hidden","Hidden":false,"Id":"fa564e0f-0c70-4ab9-b863-0177e6ddd247","Indexed":false,"IndexStatus":0,"InternalName":"Title","IsModern":false,"JSLink":"clienttemplates.js","PinnedToFiltersPane":false,"ReadOnlyField":false,"Required":true,"SchemaXml":"<Field ID=\"{fa564e0f-0c70-4ab9-b863-0177e6ddd247}\" Name=\"Title\" SourceID=\"http://schemas.microsoft.com/sharepoint/v3\" StaticName=\"Title\" Group=\"_Hidden\" Type=\"Text\" DisplayName=\"Title\" Required=\"TRUE\" FromBaseType=\"TRUE\" DelayActivateTemplateBinding=\"GROUP,SPSPERS,SITEPAGEPUBLISHING\" />","Scope":"/sites/prov-1","Sealed":false,"ShowInFiltersPane":0,"Sortable":true,"StaticName":"Title","Title":"Title","FieldTypeKind":2,"TypeAsString":"Text","TypeDisplayName":"Single line of text","TypeShortDescription":"Single line of text","ValidationFormula":null,"ValidationMessage":null,"MaxLength":255}]}}
---batchresponse_6e75ff4d-307d-476f-909e-f220d8dfa1c4--
+--batchresponse_1a235ad0-bd12-4381-bf1a-9b3a856be05b--

@@ -300,9 +300,9 @@ namespace PnP.Core.Model.SharePoint
             // Convert to the time zone used by the SharePoint site, take in account the daylight savings delta
             bool isDaylight = TimeZoneInfo.Local.IsDaylightSavingTime(input);
             TimeSpan utcDelta = new TimeSpan(0, context.Web.RegionalSettings.TimeZone.Bias + (isDaylight ? context.Web.RegionalSettings.TimeZone.DaylightBias : context.Web.RegionalSettings.TimeZone.StandardBias), 0);
-            
+
             // Apply the delta from UTC to get the date used by the site and apply formatting 
-            return (inputInUTC - utcDelta).ToString("yyyy-MM-dd hh:mm:ss");
+            return (inputInUTC - utcDelta).ToString("yyyy-MM-dd hh:mm:ss", CultureInfo.InvariantCulture);
         }
 
         private static string DoubleToSharePointString(PnPContext context, double input)

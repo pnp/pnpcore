@@ -67,8 +67,10 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.Id));
 
+                // !! MembershipType and IsFavoriteByDefault are now GA !!
+
                 // Are other properties still not available: IsFavoriteByDefault is a beta property on a teamchannel, so it should not be available at this point
-                Assert.IsFalse(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
+                Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
 
                 // get the primary channel again, but now explicitely request the beta properties MembershipType and IsFavoriteByDefault
                 await team.PrimaryChannel.GetAsync(p => p.MembershipType, p => p.DisplayName, p => p.IsFavoriteByDefault);
@@ -115,15 +117,17 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.Id));
 
+                // !! MembershipType and IsFavoriteByDefault are now GA !!
+
                 // Are other properties still not available: IsFavoriteByDefault is a beta property on a teamchannel, so it should not be available at this point
-                Assert.IsFalse(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
+                Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
 
                 // get the primary channel again, but now explicitely request the beta property IsFavoriteByDefault
                 await team.PrimaryChannel.GetAsync(p => p.MembershipType, p => p.DisplayName, p => p.IsFavoriteByDefault);
                 Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
 
                 // Beta property should still be unavailable as we're not allowed to use the beta endpoint
-                Assert.IsFalse(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
+                Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.IsFavoriteByDefault));
                 // v1 props should be loaded
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.DisplayName));
             }

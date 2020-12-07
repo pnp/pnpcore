@@ -1,4 +1,4 @@
---batchresponse_7a58e0b2-a431-4715-b068-4ec5dfdad376
+--batchresponse_aa259625-2f34-497e-a601-462af800f0ff
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"DeleteAllSecondStageItems":null}}
---batchresponse_7a58e0b2-a431-4715-b068-4ec5dfdad376--
+--batchresponse_aa259625-2f34-497e-a601-462af800f0ff--

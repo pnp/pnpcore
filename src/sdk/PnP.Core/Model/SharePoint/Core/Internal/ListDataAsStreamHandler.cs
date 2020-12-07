@@ -568,11 +568,7 @@ namespace PnP.Core.Model.SharePoint
                     {
                         if (propertyValue.ValueKind != JsonValueKind.Null)
                         {
-                            if (DateTime.TryParseExact(propertyValue.GetString(), "yyyy-MM-ddThh:mm:ssZ", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateTime2))
-                            {
-                                return dateTime2;
-                            }
-                            else if (DateTime.TryParse(propertyValue.GetString(), out DateTime dateTime))
+                            if (DateTime.TryParse(propertyValue.GetString(), out DateTime dateTime))
                             {
                                 return dateTime;
                             }

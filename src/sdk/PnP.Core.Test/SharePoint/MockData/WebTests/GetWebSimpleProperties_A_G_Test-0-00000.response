@@ -1,4 +1,4 @@
---batchresponse_57440288-4b19-4f86-a63b-a271242910fe
+--batchresponse_a45b389e-3cbc-4f51-886f-4986a9f73a42
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"AccessRequestListUrl":null,"AccessRequestSiteDescription":"","AllowCreateDeclarativeWorkflowForCurrentUser":true,"AllowDesignerForCurrentUser":true,"AllowMasterPageEditingForCurrentUser":false,"AllowRevertFromTemplateForCurrentUser":true,"AllowRssFeeds":true,"AllowSaveDeclarativeWorkflowAsTemplateForCurrentUser":true,"AllowSavePublishDeclarativeWorkflowForCurrentUser":true,"AlternateCssUrl":"","AppInstanceId":"00000000-0000-0000-0000-000000000000","ClassicWelcomePage":null,"ContainsConfidentialInfo":false,"Created":"2018-10-05T19:16:44.01","CustomMasterUrl":"/sites/prov-1/_catalogs/masterpage/seattle.master","CustomSiteActionsDisabled":false,"DesignerDownloadUrlForCurrentUser":"https://go.microsoft.com/fwlink/?LinkId=328584&clcid=0x409","DesignPackageId":"00000000-0000-0000-0000-000000000000","DisableRecommendedItems":false,"DocumentLibraryCalloutOfficeWebAppPreviewersDisabled":false,"EffectiveBasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"2147483647","Low":"4294705151"},"EnableMinimalDownload":false,"FooterEmphasis":0,"FooterEnabled":false,"FooterLayout":0,"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2"}}
---batchresponse_57440288-4b19-4f86-a63b-a271242910fe--
+--batchresponse_a45b389e-3cbc-4f51-886f-4986a9f73a42--
