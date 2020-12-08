@@ -10,7 +10,7 @@ PnP.Core.Auth | The authentication provider for the PnP Core SDK | [![PnP.Core.A
 The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called. Currently the library is in **preview**, see our roadmap for more details. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
 
 > **Important**
-> The PnP Core SDK is in preview: it's targeting developers that want to either test or extend it. It's **not yet** ready to be used in production scenarios, mainly because it still lacks some of the model definitions and the object model might still have breaking changes.
+> The PnP Core SDK is in beta: it's ready for developers to start using in real life scenarios. Between now and GA there might be small breaking changes, but we try to minimize those as much as possible, focus will be on finalizing our GA scope, stabilizing and documenting it.
 
 For more details on how to use this SDK and how to contribute checkout https://aka.ms/pnp/coresdk/docs.
 
