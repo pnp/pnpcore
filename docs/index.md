@@ -2,10 +2,10 @@
 
 ## Intro
 
-The PnP Core SDK is an SDK designed to work for Microsoft 365. Its aim is to provide a unified object model to work with the Microsoft 365 ecosystem. At the moment the supported workloads are SharePoint Online and Microsoft Teams. Currently the library is a **preview** in which the focus is on coding the basics, so that in a next step the actual extending of the library can go smooth. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but obviously we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
+The PnP Core SDK is an SDK designed to work for Microsoft 365. It provides a unified object model for working with SharePoint Online and Teams which is agnostic to the underlying API's being called. Currently the library is in **beta**, see our roadmap for more details. The initial goal for this library will be to cover the needs of developers working with either SharePoint Online or Teams, but we're also open to extend this library further towards other Microsoft 365 workloads if there's community demand for doing so.
 
 > [!Important]
-> The PnP Core SDK is in preview: it's targeting developers that want to either test or extend it. It's **not** yet ready to be used in production scenarios, mainly because it still lacks some of the model definitions.
+> The PnP Core SDK is in beta: it's ready for developers to start using in real life scenarios. Between now and GA there might be small breaking changes, but we try to minimize those as much as possible, focus will be on finalizing our GA scope, stabilizing and documenting it.
 
 ## Roadmap
 
