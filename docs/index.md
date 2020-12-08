@@ -1,4 +1,4 @@
-# PnP Core SDK - preview
+# PnP Core SDK
 
 ## Intro
 
