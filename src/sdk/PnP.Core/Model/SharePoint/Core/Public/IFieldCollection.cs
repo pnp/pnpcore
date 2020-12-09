@@ -860,52 +860,6 @@ namespace PnP.Core.Model.SharePoint
         IField AddFieldAsXml(string schemaXml, bool addToDefaultView = false, AddFieldOptionsFlags options = AddFieldOptionsFlags.DefaultValue);
         #endregion
 
-        #region Generic field creation
-        /// <summary>
-        /// Generic batch field add option based upon information specified in a <see cref="FieldCreationOptions"/> object
-        /// </summary>
-        /// <param name="fieldCreationOptions">The <see cref="FieldCreationOptions"/> object containing information used to add the field</param>
-        /// <returns>The added field</returns>
-        IField AddFieldBatch(FieldCreationOptions fieldCreationOptions);
-
-        /// <summary>
-        /// Generic batch field add option based upon information specified in a <see cref="FieldCreationOptions"/> object
-        /// </summary>
-        /// <param name="fieldCreationOptions">The <see cref="FieldCreationOptions"/> object containing information used to add the field</param>
-        /// <returns>The added field</returns>
-        Task<IField> AddFieldBatchAsync(FieldCreationOptions fieldCreationOptions);
-
-        /// <summary>
-        /// Generic batch field add option based upon information specified in a <see cref="FieldCreationOptions"/> object
-        /// </summary>
-        /// <param name="batch">Batch to use</param>
-        /// <param name="fieldCreationOptions">The <see cref="FieldCreationOptions"/> object containing information used to add the field</param>
-        /// <returns>The added field</returns>
-        IField AddFieldBatch(Batch batch, FieldCreationOptions fieldCreationOptions);
-
-        /// <summary>
-        /// Generic batch field add option based upon information specified in a <see cref="FieldCreationOptions"/> object
-        /// </summary>
-        /// <param name="batch">Batch to use</param>
-        /// <param name="fieldCreationOptions">The <see cref="FieldCreationOptions"/> object containing information used to add the field</param>
-        /// <returns>The added field</returns>
-        Task<IField> AddFieldBatchAsync(Batch batch, FieldCreationOptions fieldCreationOptions);
-
-        /// <summary>
-        /// Generic field add option based upon information specified in a <see cref="FieldCreationOptions"/> object
-        /// </summary>
-        /// <param name="fieldCreationOptions">The <see cref="FieldCreationOptions"/> object containing information used to add the field</param>
-        /// <returns>The added field</returns>
-        IField AddField(FieldCreationOptions fieldCreationOptions);
-
-        /// <summary>
-        /// Generic field add option based upon information specified in a <see cref="FieldCreationOptions"/> object
-        /// </summary>
-        /// <param name="fieldCreationOptions">The <see cref="FieldCreationOptions"/> object containing information used to add the field</param>
-        /// <returns>The added field</returns>
-        Task<IField> AddFieldAsync(FieldCreationOptions fieldCreationOptions);
-        #endregion
-
         #endregion
     }
 }
