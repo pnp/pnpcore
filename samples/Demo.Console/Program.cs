@@ -3,14 +3,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PnP.Core.Auth;
-using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 using System.Threading.Tasks;
 
 namespace Consumer
@@ -39,7 +37,7 @@ namespace Consumer
                 //var authenticationProvider = new CredentialManagerAuthenticationProvider(
                 //                customSettings.ClientId,
                 //                customSettings.TenantId,
-                //                customSettings.CredentialManager);                
+                //                customSettings.CredentialManager);
 
                 var authenticationProvider = new InteractiveAuthenticationProvider(
                                 customSettings.ClientId,
@@ -173,7 +171,7 @@ namespace Consumer
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
                     // Or we can easily get a specific list
-                    var demo1List = context.Web.Lists.GetByTitle("Demo1", l => l.Id, l => l.Title, l => l.Description);
+                    var demo1List = context.Web.Lists.GetByTitle("Site Assets", l => l.Id, l => l.Title, l => l.Description);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===LINQ: Retrieve specific list===");
@@ -185,7 +183,7 @@ namespace Consumer
                 {
                     // We can retrieve items of a specific list 
                     // eventually partitioning the results
-                    var itemsQuery = (from i in context.Web.Lists.GetByTitle("Demo1").Items
+                    var itemsQuery = (from i in context.Web.Lists.GetByTitle("Site Assets").Items
                                       select i).Take(2).Skip(1);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -200,7 +198,7 @@ namespace Consumer
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
                     // Or we can retrieve a specific item
-                    var listItem = context.Web.Lists.GetByTitle("Demo1").Items.GetById(4);
+                    var listItem = context.Web.Lists.GetByTitle("Site Assets").Items.GetById(1);
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("===LINQ: Retrieve list item by id===");
@@ -211,8 +209,8 @@ namespace Consumer
                 using (var context = pnpContextFactory.Create("DemoSite"))
                 {
                     // Or we can retrieve a specific document from a library
-                    var document = context.Web.Lists.GetByTitle("Documents").Items
-                            .Where(i => i.Title == "Sample-File-03")
+                    var document = context.Web.Lists.GetByTitle("Site Assets").Items
+                            .Where(i => i.Title == "__siteIcon__.png")
                             .Load(i => i.Id, i => i.Title)
                             .FirstOrDefault();
 
@@ -352,17 +350,6 @@ namespace Consumer
             }
 
             host.Dispose();
-        }
-
-        private static SecureString StringToSecureString(string inputString)
-        {
-            var securityString = new SecureString();
-            char[] chars = inputString.ToCharArray();
-            foreach (var c in chars)
-            {
-                securityString.AppendChar(c);
-            }
-            return securityString;
-        }
+        }       
     }
 }
