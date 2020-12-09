@@ -45,7 +45,8 @@ namespace Demo.WPF
                             .Load(l => l.Id, l => l.Title, l => l.Description);
 
                 StringBuilder sb = new StringBuilder();
-                foreach(var list in lists)
+                // Need to use Async here to avoid getting deadlocked
+                foreach(var list in await lists.ToListAsync())
                 {
                     sb.AppendLine($"Id: {list.Id} Title: {list.Title} Description: {list.Description}");
                 }
