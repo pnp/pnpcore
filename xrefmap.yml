@@ -4186,6 +4186,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.AddToDefaultView
   nameWithType: CommonFieldOptions.AddToDefaultView
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.CustomFormatter
+  name: CustomFormatter
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_CustomFormatter
+  commentId: P:PnP.Core.Model.SharePoint.CommonFieldOptions.CustomFormatter
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.CustomFormatter
+  nameWithType: CommonFieldOptions.CustomFormatter
+- uid: PnP.Core.Model.SharePoint.CommonFieldOptions.CustomFormatter*
+  name: CustomFormatter
+  href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_CustomFormatter_
+  commentId: Overload:PnP.Core.Model.SharePoint.CommonFieldOptions.CustomFormatter
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.CommonFieldOptions.CustomFormatter
+  nameWithType: CommonFieldOptions.CustomFormatter
 - uid: PnP.Core.Model.SharePoint.CommonFieldOptions.DefaultFormula
   name: DefaultFormula
   href: api/PnP.Core.Model.SharePoint.CommonFieldOptions.html#PnP_Core_Model_SharePoint_CommonFieldOptions_DefaultFormula
@@ -4833,187 +4846,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.FieldChoiceOptions.EditFormat
   nameWithType: FieldChoiceOptions.EditFormat
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions
-  name: FieldCreationOptions
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html
-  commentId: T:PnP.Core.Model.SharePoint.FieldCreationOptions
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions
-  nameWithType: FieldCreationOptions
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor(PnP.Core.Model.SharePoint.FieldType)
-  name: FieldCreationOptions(FieldType)
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions__ctor_PnP_Core_Model_SharePoint_FieldType_
-  commentId: M:PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor(PnP.Core.Model.SharePoint.FieldType)
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldCreationOptions(PnP.Core.Model.SharePoint.FieldType)
-  nameWithType: FieldCreationOptions.FieldCreationOptions(FieldType)
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor(System.String)
-  name: FieldCreationOptions(String)
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions__ctor_System_String_
-  commentId: M:PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor(System.String)
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldCreationOptions(System.String)
-  nameWithType: FieldCreationOptions.FieldCreationOptions(String)
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor*
-  name: FieldCreationOptions
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions__ctor_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.#ctor
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldCreationOptions
-  nameWithType: FieldCreationOptions.FieldCreationOptions
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
-  name: AdditionalAttributes
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AdditionalAttributes
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
-  nameWithType: FieldCreationOptions.AdditionalAttributes
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes*
-  name: AdditionalAttributes
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AdditionalAttributes_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalAttributes
-  nameWithType: FieldCreationOptions.AdditionalAttributes
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
-  name: AdditionalChildNodes
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AdditionalChildNodes
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
-  nameWithType: FieldCreationOptions.AdditionalChildNodes
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes*
-  name: AdditionalChildNodes
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AdditionalChildNodes_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AdditionalChildNodes
-  nameWithType: FieldCreationOptions.AdditionalChildNodes
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
-  name: AddToDefaultView
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AddToDefaultView
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
-  nameWithType: FieldCreationOptions.AddToDefaultView
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView*
-  name: AddToDefaultView
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_AddToDefaultView_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.AddToDefaultView
-  nameWithType: FieldCreationOptions.AddToDefaultView
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
-  name: ClientSideComponentId
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_ClientSideComponentId
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
-  nameWithType: FieldCreationOptions.ClientSideComponentId
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId*
-  name: ClientSideComponentId
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_ClientSideComponentId_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentId
-  nameWithType: FieldCreationOptions.ClientSideComponentId
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
-  name: ClientSideComponentProperties
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_ClientSideComponentProperties
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
-  nameWithType: FieldCreationOptions.ClientSideComponentProperties
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties*
-  name: ClientSideComponentProperties
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_ClientSideComponentProperties_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.ClientSideComponentProperties
-  nameWithType: FieldCreationOptions.ClientSideComponentProperties
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
-  name: DisplayName
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_DisplayName
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
-  nameWithType: FieldCreationOptions.DisplayName
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName*
-  name: DisplayName
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_DisplayName_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.DisplayName
-  nameWithType: FieldCreationOptions.DisplayName
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
-  name: FieldType
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_FieldType
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
-  nameWithType: FieldCreationOptions.FieldType
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType*
-  name: FieldType
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_FieldType_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.FieldType
-  nameWithType: FieldCreationOptions.FieldType
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Group
-  name: Group
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Group
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.Group
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Group
-  nameWithType: FieldCreationOptions.Group
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Group*
-  name: Group
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Group_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.Group
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Group
-  nameWithType: FieldCreationOptions.Group
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Id
-  name: Id
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Id
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.Id
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Id
-  nameWithType: FieldCreationOptions.Id
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Id*
-  name: Id
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Id_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.Id
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Id
-  nameWithType: FieldCreationOptions.Id
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
-  name: InternalName
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_InternalName
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
-  nameWithType: FieldCreationOptions.InternalName
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName*
-  name: InternalName
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_InternalName_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.InternalName
-  nameWithType: FieldCreationOptions.InternalName
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Options
-  name: Options
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Options
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.Options
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Options
-  nameWithType: FieldCreationOptions.Options
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Options*
-  name: Options
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Options_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.Options
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Options
-  nameWithType: FieldCreationOptions.Options
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Required
-  name: Required
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Required
-  commentId: P:PnP.Core.Model.SharePoint.FieldCreationOptions.Required
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Required
-  nameWithType: FieldCreationOptions.Required
-- uid: PnP.Core.Model.SharePoint.FieldCreationOptions.Required*
-  name: Required
-  href: api/PnP.Core.Model.SharePoint.FieldCreationOptions.html#PnP_Core_Model_SharePoint_FieldCreationOptions_Required_
-  commentId: Overload:PnP.Core.Model.SharePoint.FieldCreationOptions.Required
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.FieldCreationOptions.Required
-  nameWithType: FieldCreationOptions.Required
 - uid: PnP.Core.Model.SharePoint.FieldCurrencyOptions
   name: FieldCurrencyOptions
   href: api/PnP.Core.Model.SharePoint.FieldCurrencyOptions.html
@@ -8505,19 +8337,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddDateTimeBatchAsync
   nameWithType: IFieldCollection.AddDateTimeBatchAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddField(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  name: AddField(FieldCreationOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddField_PnP_Core_Model_SharePoint_FieldCreationOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddField(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddField(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  nameWithType: IFieldCollection.AddField(FieldCreationOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddField*
-  name: AddField
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddField_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddField
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddField
-  nameWithType: IFieldCollection.AddField
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXml(System.String,System.Boolean,PnP.Core.Model.SharePoint.AddFieldOptionsFlags)
   name: AddFieldAsXml(String, Boolean, AddFieldOptionsFlags)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsXml_System_String_System_Boolean_PnP_Core_Model_SharePoint_AddFieldOptionsFlags_
@@ -8582,57 +8401,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsXmlBatchAsync
   nameWithType: IFieldCollection.AddFieldAsXmlBatchAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  name: AddFieldAsync(FieldCreationOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsync_PnP_Core_Model_SharePoint_FieldCreationOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  nameWithType: IFieldCollection.AddFieldAsync(FieldCreationOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync*
-  name: AddFieldAsync
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldAsync
-  nameWithType: IFieldCollection.AddFieldAsync
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  name: AddFieldBatch(FieldCreationOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatch_PnP_Core_Model_SharePoint_FieldCreationOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  nameWithType: IFieldCollection.AddFieldBatch(FieldCreationOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.FieldCreationOptions)
-  name: AddFieldBatch(Batch, FieldCreationOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_FieldCreationOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.FieldCreationOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.FieldCreationOptions)
-  nameWithType: IFieldCollection.AddFieldBatch(Batch, FieldCreationOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch*
-  name: AddFieldBatch
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatch_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatch
-  nameWithType: IFieldCollection.AddFieldBatch
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  name: AddFieldBatchAsync(FieldCreationOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatchAsync_PnP_Core_Model_SharePoint_FieldCreationOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Model.SharePoint.FieldCreationOptions)
-  nameWithType: IFieldCollection.AddFieldBatchAsync(FieldCreationOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.FieldCreationOptions)
-  name: AddFieldBatchAsync(Batch, FieldCreationOptions)
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_FieldCreationOptions_
-  commentId: M:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.FieldCreationOptions)
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.FieldCreationOptions)
-  nameWithType: IFieldCollection.AddFieldBatchAsync(Batch, FieldCreationOptions)
-- uid: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync*
-  name: AddFieldBatchAsync
-  href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddFieldBatchAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IFieldCollection.AddFieldBatchAsync
-  nameWithType: IFieldCollection.AddFieldBatchAsync
 - uid: PnP.Core.Model.SharePoint.IFieldCollection.AddLookup(System.String,PnP.Core.Model.SharePoint.FieldLookupOptions)
   name: AddLookup(String, FieldLookupOptions)
   href: api/PnP.Core.Model.SharePoint.IFieldCollection.html#PnP_Core_Model_SharePoint_IFieldCollection_AddLookup_System_String_PnP_Core_Model_SharePoint_FieldLookupOptions_
@@ -22239,64 +22007,6 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   fullName: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.Rule
   nameWithType: SPEffectiveInformationRightsManagementSettingsSource.Rule
-- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions
-  name: TaxonomyFieldCreationOptions
-  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html
-  commentId: T:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions
-  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions
-  nameWithType: TaxonomyFieldCreationOptions
-- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.#ctor
-  name: TaxonomyFieldCreationOptions()
-  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions__ctor
-  commentId: M:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.#ctor
-  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TaxonomyFieldCreationOptions()
-  nameWithType: TaxonomyFieldCreationOptions.TaxonomyFieldCreationOptions()
-- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.#ctor*
-  name: TaxonomyFieldCreationOptions
-  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions__ctor_
-  commentId: Overload:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.#ctor
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TaxonomyFieldCreationOptions
-  nameWithType: TaxonomyFieldCreationOptions.TaxonomyFieldCreationOptions
-- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
-  name: MultiValue
-  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_MultiValue
-  commentId: P:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
-  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
-  nameWithType: TaxonomyFieldCreationOptions.MultiValue
-- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue*
-  name: MultiValue
-  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_MultiValue_
-  commentId: Overload:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.MultiValue
-  nameWithType: TaxonomyFieldCreationOptions.MultiValue
-- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
-  name: TermSetId
-  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_TermSetId
-  commentId: P:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
-  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
-  nameWithType: TaxonomyFieldCreationOptions.TermSetId
-- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId*
-  name: TermSetId
-  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_TermSetId_
-  commentId: Overload:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermSetId
-  nameWithType: TaxonomyFieldCreationOptions.TermSetId
-- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
-  name: TermStoreId
-  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_TermStoreId
-  commentId: P:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
-  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
-  nameWithType: TaxonomyFieldCreationOptions.TermStoreId
-- uid: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId*
-  name: TermStoreId
-  href: api/PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.html#PnP_Core_Model_SharePoint_TaxonomyFieldCreationOptions_TermStoreId_
-  commentId: Overload:PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.TaxonomyFieldCreationOptions.TermStoreId
-  nameWithType: TaxonomyFieldCreationOptions.TermStoreId
 - uid: PnP.Core.Model.SharePoint.TemplateFileType
   name: TemplateFileType
   href: api/PnP.Core.Model.SharePoint.TemplateFileType.html
