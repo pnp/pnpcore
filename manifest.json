@@ -3674,6 +3674,30 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "articles/consumer/fields-add.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/consumer/fields-add.html",
+          "hash": "rTf3QzXuwSwO+L3Z/fBx+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/consumer/fields-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/consumer/fields-intro.html",
+          "hash": "/Kpx56BqX145NbsuFr8Kog=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "articles/consumer/pages-header.md",
       "output": {
         ".html": {
@@ -3930,7 +3954,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "/yZslH4h/JcTXR7oLabTyw=="
+          "hash": "dDxtC2LYQiPpz+nNwLPKKg=="
         }
       },
       "is_incremental": false,
@@ -4314,7 +4338,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 33,
+          "total_file_count": 35,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
