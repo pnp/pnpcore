@@ -11,7 +11,12 @@
     items:
     - name: Custom Authentication Providers
       href: consumer/custom-authentication-provider.md
-  - name: Working with pages
+  - name: Site and List fields
+    href: consumer/fields-intro.md
+    items:
+      - name: Adding fields
+        href: consumer/fields-add.md
+  - name: Working with Pages
     href: consumer/pages-intro.md
     items:
       - name: Configuring the page header
