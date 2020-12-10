@@ -7,7 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Class that describes the field creation options
     /// </summary>
-    public class FieldCreationOptions
+    internal class FieldCreationOptions
     {
         /// <summary>
         /// Guid of the field
@@ -172,6 +172,11 @@ namespace PnP.Core.Model.SharePoint
             if (common.ShowInNewForm.HasValue)
             {
                 SetAttribute("ShowInNewForm", common.ShowInNewForm.Value.ToString().ToUpper());
+            }
+
+            if (!string.IsNullOrEmpty(common.CustomFormatter))
+            {
+                SetAttribute("CustomFormatter", common.CustomFormatter);
             }
         }
 

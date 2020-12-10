@@ -82,5 +82,10 @@ namespace PnP.Core.Model.SharePoint
         /// Show this field on the list's new form
         /// </summary>
         public bool? ShowInNewForm { get; set; }
+
+        /// <summary>
+        /// Allows you to set custom formatting JSON (https://docs.microsoft.com/en-us/sharepoint/dev/declarative-customization/column-formatting#supported-column-types) on the field
+        /// </summary>
+        public string CustomFormatter { get; set; }
     }
 }

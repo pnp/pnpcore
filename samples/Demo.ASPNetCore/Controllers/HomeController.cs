@@ -115,9 +115,8 @@ namespace Demo.ASPNetCore.Controllers
             using (var context = await createSiteContext())
             {
                 // Retrieving lists of the target web
-                var team = await context.Team.GetAsync(t => t.DisplayName,
-                    t => t.Description,
-                    t => t.Channels.Include(c => c.Id, c => c.DisplayName));
+                var team = await context.Team.GetAsync(t => t.DisplayName, t => t.Description, 
+                    t => t.Channels.LoadProperties(p => p.Id, p => p.DisplayName));
 
                 model.DisplayName = team.DisplayName;
                 model.Description = team.Description;
