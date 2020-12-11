@@ -4690,7 +4690,7 @@ A 32-bit integer between 0 and 127 that specifies the UI version.</p>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_EnsureMultilingual_PnP_Core_Model_SharePoint_List_System_Int32__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.EnsureMultilingual(PnP.Core.Model.SharePoint.List%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L797" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L853" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IWeb_EnsureMultilingual_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureMultilingual*"></a>
@@ -4736,7 +4736,7 @@ A 32-bit integer between 0 and 127 that specifies the UI version.</p>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_EnsureMultilingualAsync_PnP_Core_Model_SharePoint_List_System_Int32__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync(PnP.Core.Model.SharePoint.List%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L790" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L846" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IWeb_EnsureMultilingualAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureMultilingualAsync*"></a>
@@ -4900,10 +4900,250 @@ A 32-bit integer between 0 and 127 that specifies the UI version.</p>
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L798" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">EnsureUserBatch(Batch, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_PnP_Core_Services_Batch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Ensures the given users exists</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ISharePointUser EnsureUserBatch(Batch batch, string userPrincipalName)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">userPrincipalName</span>
+        <p><p>UserPrincipalName value of the user to verify</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>
+        <p><p>The ensured <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L782" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_System_String_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_System_String_" class="expander" data-toggle="collapse">EnsureUserBatch(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Ensures the given users exists</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ISharePointUser EnsureUserBatch(string userPrincipalName)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">userPrincipalName</span>
+        <p><p>UserPrincipalName value of the user to verify</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>
+        <p><p>The ensured <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_PnP_Core_Services_Batch_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(PnP.Core.Services.Batch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L790" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_PnP_Core_Services_Batch_System_String_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(PnP.Core.Services.Batch,System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_PnP_Core_Services_Batch_System_String_" class="expander" data-toggle="collapse">EnsureUserBatchAsync(Batch, String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_PnP_Core_Services_Batch_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Ensures the given users exists</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ISharePointUser&gt; EnsureUserBatchAsync(Batch batch, string userPrincipalName)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">userPrincipalName</span>
+        <p><p>UserPrincipalName value of the user to verify</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>&gt;
+        <p><p>The ensured <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_System_String_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L775" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_System_String_" data-uid="PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(System.String)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_System_String_" class="expander" data-toggle="collapse">EnsureUserBatchAsync(String)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_System_String_" class="collapse in">
+  <div class="markdown level1 summary"><p>Ensures the given users exists</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ISharePointUser&gt; EnsureUserBatchAsync(string userPrincipalName)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">userPrincipalName</span>
+        <p><p>UserPrincipalName value of the user to verify</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>&gt;
+        <p><p>The ensured <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetCurrentUser.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetCurrentUser%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L780" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L810" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUser_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUser*"></a>
@@ -4948,7 +5188,7 @@ A 32-bit integer between 0 and 127 that specifies the UI version.</p>
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetCurrentUserAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetCurrentUserAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L774" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L804" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUserAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUserAsync*"></a>
@@ -4965,6 +5205,208 @@ A 32-bit integer between 0 and 127 that specifies the UI version.</p>
     <pre><code class="lang-csharp hljs">Task&lt;ISharePointUser&gt; GetCurrentUserAsync()</code></pre>
   </div>
 
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>&gt;
+        <p><p>The current <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L822" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch" class="expander" data-toggle="collapse">GetCurrentUserBatch()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch" class="collapse in">
+  <div class="markdown level1 summary"><p>Get's the current logged on user making the request to SharePoint</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ISharePointUser GetCurrentUserBatch()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>
+        <p><p>The current <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L836" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">GetCurrentUserBatch(Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch_PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Get's the current logged on user making the request to SharePoint</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ISharePointUser GetCurrentUserBatch(Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>
+        <p><p>The current <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L816" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync" class="expander" data-toggle="collapse">GetCurrentUserBatchAsync()</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync" class="collapse in">
+  <div class="markdown level1 summary"><p>Get's the current logged on user making the request to SharePoint</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ISharePointUser&gt; GetCurrentUserBatchAsync()</code></pre>
+  </div>
+
+  
+  <h5 class="returns">Returns</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="xref">Task</span>&lt;<a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a>&gt;
+        <p><p>The current <a class="xref" href="PnP.Core.Model.Security.ISharePointUser.html">ISharePointUser</a></p>
+</p>
+      </td>
+    </tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </div>
+  
+  <span class="small pull-right mobile-hide">
+    <span class="divider"> </span>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync_PnP_Core_Services_Batch_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync(PnP.Core.Services.Batch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IWeb.cs/#L829" title="View Source"><i class="fa fa-code"></i></a>
+  </span>
+  
+  <a id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync*"></a>
+  
+  <h4 id="PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync_PnP_Core_Services_Batch_" data-uid="PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync(PnP.Core.Services.Batch)"><a href="#collapsible-PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync_PnP_Core_Services_Batch_" class="expander" data-toggle="collapse">GetCurrentUserBatchAsync(Batch)</a></h4>
+  
+  <div id="collapsible-PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync_PnP_Core_Services_Batch_" class="collapse in">
+  <div class="markdown level1 summary"><p>Get's the current logged on user making the request to SharePoint</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ISharePointUser&gt; GetCurrentUserBatchAsync(Batch batch)</code></pre>
+  </div>
+
+  <h5 class="parameters">Parameters</h5>
+  <table>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Services.Batch.html">Batch</a></span>
+        <span class="parametername">batch</span>
+        <p><p>Batch to add this request to</p>
+</p>
+      </td>
+    </tr>
+  </table>
   
   <h5 class="returns">Returns</h5>
   <table>

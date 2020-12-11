@@ -19001,6 +19001,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.EnsureUserAsync
   nameWithType: IWeb.EnsureUserAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(PnP.Core.Services.Batch,System.String)
+  name: EnsureUserBatch(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: IWeb.EnsureUserBatch(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(System.String)
+  name: EnsureUserBatch(String)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(System.String)
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch(System.String)
+  nameWithType: IWeb.EnsureUserBatch(String)
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch*
+  name: EnsureUserBatch
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureUserBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatch
+  nameWithType: IWeb.EnsureUserBatch
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: EnsureUserBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: IWeb.EnsureUserBatchAsync(Batch, String)
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(System.String)
+  name: EnsureUserBatchAsync(String)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(System.String)
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync(System.String)
+  nameWithType: IWeb.EnsureUserBatchAsync(String)
+- uid: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync*
+  name: EnsureUserBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_EnsureUserBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.EnsureUserBatchAsync
+  nameWithType: IWeb.EnsureUserBatchAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.ExcludeFromOfflineClient
   name: ExcludeFromOfflineClient
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_ExcludeFromOfflineClient
@@ -19118,6 +19156,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserAsync
   nameWithType: IWeb.GetCurrentUserAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch
+  name: GetCurrentUserBatch()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch()
+  nameWithType: IWeb.GetCurrentUserBatch()
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch(PnP.Core.Services.Batch)
+  name: GetCurrentUserBatch(Batch)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch(PnP.Core.Services.Batch)
+  nameWithType: IWeb.GetCurrentUserBatch(Batch)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch*
+  name: GetCurrentUserBatch
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatch
+  nameWithType: IWeb.GetCurrentUserBatch
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync
+  name: GetCurrentUserBatchAsync()
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync()
+  nameWithType: IWeb.GetCurrentUserBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync(PnP.Core.Services.Batch)
+  name: GetCurrentUserBatchAsync(Batch)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IWeb.GetCurrentUserBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync*
+  name: GetCurrentUserBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetCurrentUserBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetCurrentUserBatchAsync
+  nameWithType: IWeb.GetCurrentUserBatchAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.GetFileByServerRelativeUrl(System.String,Expression{Func{PnP.Core.Model.SharePoint.IFile,System.Object}}[])
   name: GetFileByServerRelativeUrl(String, Expression<Func<IFile, Object>>[])
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetFileByServerRelativeUrl_System_String_Expression_Func_PnP_Core_Model_SharePoint_IFile_System_Object_____
