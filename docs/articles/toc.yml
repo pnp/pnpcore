@@ -6,38 +6,44 @@
   items:
   - name: Getting started
     href: consumer/readme.md
-  - name: Configuring authentication
-    href: consumer/configuring%20authentication.md
+  - name: Authentication  
     items:
+    - name: Configuration
+      href: consumer/configuring%20authentication.md
     - name: Custom Authentication Providers
       href: consumer/custom-authentication-provider.md
   - name: Site and List fields
-    href: consumer/fields-intro.md
     items:
-      - name: Adding fields
-        href: consumer/fields-add.md
+    - name: Overview
+      href: consumer/fields-intro.md
+    - name: Adding fields
+      href: consumer/fields-add.md
   - name: List Items
-    href: consumer/listitems-intro.md
     items:
-      - name: Field handling
-        href: consumer/listitems-fields.md
+    - name: Overview
+      href: consumer/listitems-intro.md
+    - name: Field handling
+      href: consumer/listitems-fields.md
   - name: Pages
-    href: consumer/pages-intro.md
     items:
-      - name: Configuring the page header
-        href: consumer/pages-header.md
-      - name: Working with web parts and text parts
-        href: consumer/pages-webparts.md
-      - name: Publishing and promoting pages as news
-        href: consumer/pages-promote.md
-      - name: Multilingual pages
-        href: consumer/pages-multilingual.md
-      - name: Page commenting
-        href: consumer/pages-social.md
-  - name: Get data using paging
-    href: consumer/using%20paging.md
-  - name: Configuring the PnP Core SDK
-    href: consumer/pnp%20core%20settings.md
+    - name: Overview
+      href: consumer/pages-intro.md
+    - name: Configuring the page header
+      href: consumer/pages-header.md
+    - name: Working with web parts and text parts
+      href: consumer/pages-webparts.md
+    - name: Publishing and promoting pages as news
+      href: consumer/pages-promote.md
+    - name: Multilingual pages
+      href: consumer/pages-multilingual.md
+    - name: Page commenting
+      href: consumer/pages-social.md
+  - name: Miscellaneous
+    items:
+    - name: Get data using paging
+      href: consumer/using%20paging.md
+    - name: Configuring the PnP Core SDK
+      href: consumer/pnp%20core%20settings.md
 - name: Contributor documentation
   items:
   - name: Getting started
