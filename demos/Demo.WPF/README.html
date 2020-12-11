@@ -95,15 +95,18 @@
 </li>
 <li><p>Enter a name for your new app, make sure <em>Accounts in this organizational directory only</em> is selected. As the Redirect URI, in Web platform enter <strong>http://localhost</strong> (only needed if you want use an interactive authentication flow)</p>
 </li>
-<li><p>Under <strong>Implicit grant</strong> section, check <strong>ID tokens</strong></p>
+<li><p>Under <strong>Implicit grant</strong> section, check <strong>ID tokens</strong> and <strong>Access tokens</strong></p>
+</li>
+<li><p>Under <strong>Advanced settings</strong> section, set <strong>Allow public client flows</strong> to <strong>yes</strong></p>
 </li>
 <li><p>Go to <strong>API permissions</strong> section , click <strong>Add a permission</strong></p>
 <ul>
 <li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Directory.Read.All</strong></li>
 <li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>User.Read</strong></li>
-<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Sites.Read.All</strong></li>
-<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>Files.Read.All</strong></li>
-<li>Select <strong>SharePoint</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>AllSites.Read</strong></li>
+<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>ChannelMessage.Read.All</strong></li>
+<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>ChannelMessage.Send</strong></li>
+<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>TeamSettings.ReadWrite.All</strong></li>
+<li>Select <strong>Microsoft Graph</strong> &gt; <strong>Delegated permissions</strong> &gt; select <strong>TeamsTab.ReadWrite.All</strong></li>
 </ul>
 </li>
 <li><p>Click <strong>Grand admin consent for {tenant}</strong></p>
