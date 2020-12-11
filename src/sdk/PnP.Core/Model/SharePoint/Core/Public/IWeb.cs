@@ -768,6 +768,36 @@ namespace PnP.Core.Model.SharePoint
         public ISharePointUser EnsureUser(string userPrincipalName);
 
         /// <summary>
+        /// Ensures the given users exists
+        /// </summary>
+        /// <param name="userPrincipalName">UserPrincipalName value of the user to verify</param>
+        /// <returns>The ensured <see cref="ISharePointUser"/></returns>
+        public Task<ISharePointUser> EnsureUserBatchAsync(string userPrincipalName);
+
+        /// <summary>
+        /// Ensures the given users exists
+        /// </summary>
+        /// <param name="userPrincipalName">UserPrincipalName value of the user to verify</param>
+        /// <returns>The ensured <see cref="ISharePointUser"/></returns>
+        public ISharePointUser EnsureUserBatch(string userPrincipalName);
+
+        /// <summary>
+        /// Ensures the given users exists
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="userPrincipalName">UserPrincipalName value of the user to verify</param>
+        /// <returns>The ensured <see cref="ISharePointUser"/></returns>
+        public Task<ISharePointUser> EnsureUserBatchAsync(Batch batch, string userPrincipalName);
+
+        /// <summary>
+        /// Ensures the given users exists
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="userPrincipalName">UserPrincipalName value of the user to verify</param>
+        /// <returns>The ensured <see cref="ISharePointUser"/></returns>
+        public ISharePointUser EnsureUserBatch(Batch batch, string userPrincipalName);
+
+        /// <summary>
         /// Get's the current logged on user making the request to SharePoint
         /// </summary>
         /// <returns>The current <see cref="ISharePointUser"/></returns>
@@ -778,6 +808,32 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <returns>The current <see cref="ISharePointUser"/></returns>
         public ISharePointUser GetCurrentUser();
+
+        /// <summary>
+        /// Get's the current logged on user making the request to SharePoint
+        /// </summary>
+        /// <returns>The current <see cref="ISharePointUser"/></returns>
+        public Task<ISharePointUser> GetCurrentUserBatchAsync();
+
+        /// <summary>
+        /// Get's the current logged on user making the request to SharePoint
+        /// </summary>
+        /// <returns>The current <see cref="ISharePointUser"/></returns>
+        public ISharePointUser GetCurrentUserBatch();
+
+        /// <summary>
+        /// Get's the current logged on user making the request to SharePoint
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The current <see cref="ISharePointUser"/></returns>
+        public Task<ISharePointUser> GetCurrentUserBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Get's the current logged on user making the request to SharePoint
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <returns>The current <see cref="ISharePointUser"/></returns>
+        public ISharePointUser GetCurrentUserBatch(Batch batch);
         #endregion
 
         #region Multi-lingual

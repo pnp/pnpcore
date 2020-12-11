@@ -496,6 +496,49 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<ISharePointUser> EnsureUserAsync(string userPrincipalName)
         {
+            ApiCall apiCall = BuildEnsureUserApiCall(userPrincipalName);
+
+            SharePointUser sharePointUser = new SharePointUser
+            {
+                PnPContext = PnPContext
+            };
+
+            await sharePointUser.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return sharePointUser;
+        }
+
+        public ISharePointUser EnsureUserBatch(string userPrincipalName)
+        {
+            return EnsureUserBatchAsync(PnPContext.CurrentBatch, userPrincipalName).GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> EnsureUserBatchAsync(string userPrincipalName)
+        {
+            return await EnsureUserBatchAsync(PnPContext.CurrentBatch, userPrincipalName).ConfigureAwait(false);
+        }
+
+        public ISharePointUser EnsureUserBatch(Batch batch, string userPrincipalName)
+        {
+            return EnsureUserBatchAsync(batch, userPrincipalName).GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> EnsureUserBatchAsync(Batch batch, string userPrincipalName)
+        {
+            ApiCall apiCall = BuildEnsureUserApiCall(userPrincipalName);
+
+            SharePointUser sharePointUser = new SharePointUser
+            {
+                PnPContext = PnPContext
+            };
+
+            await sharePointUser.RequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            return sharePointUser;
+        }
+
+        private static ApiCall BuildEnsureUserApiCall(string userPrincipalName)
+        {
             // Possible inputs
             // i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com
             // bert.jansen@bertonline.onmicrosoft.com
@@ -545,15 +588,7 @@ namespace PnP.Core.Model.SharePoint
             string body = JsonSerializer.Serialize(parameters, typeof(ExpandoObject));
 
             var apiCall = new ApiCall("_api/Web/EnsureUser", ApiType.SPORest, body);
-
-            SharePointUser sharePointUser = new SharePointUser
-            {
-                PnPContext = PnPContext
-            };
-
-            await sharePointUser.RequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
-
-            return sharePointUser;
+            return apiCall;
         }
 
         public ISharePointUser GetCurrentUser()
@@ -563,7 +598,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<ISharePointUser> GetCurrentUserAsync()
         {
-            var apiCall = new ApiCall("_api/Web/CurrentUser", ApiType.SPORest);
+            ApiCall apiCall = BuildGetCurrentUserApiCall();
 
             SharePointUser sharePointUser = new SharePointUser
             {
@@ -573,6 +608,40 @@ namespace PnP.Core.Model.SharePoint
             await sharePointUser.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
             return sharePointUser;
+        }
+
+        public ISharePointUser GetCurrentUserBatch()
+        {
+            return GetCurrentUserBatchAsync(PnPContext.CurrentBatch).GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> GetCurrentUserBatchAsync()
+        {
+            return await GetCurrentUserBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public ISharePointUser GetCurrentUserBatch(Batch batch)
+        {
+            return GetCurrentUserBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> GetCurrentUserBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = BuildGetCurrentUserApiCall();
+
+            SharePointUser sharePointUser = new SharePointUser
+            {
+                PnPContext = PnPContext
+            };
+
+            await sharePointUser.RequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return sharePointUser;
+        }
+
+        private static ApiCall BuildGetCurrentUserApiCall()
+        {
+            return new ApiCall("_api/Web/CurrentUser", ApiType.SPORest);
         }
         #endregion
 

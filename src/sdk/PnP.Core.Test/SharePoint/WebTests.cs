@@ -3,6 +3,7 @@ using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -486,6 +487,65 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetWebCurrentUserTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                Assert.IsTrue(currentUser.Requested);
+                Assert.IsTrue(currentUser is Model.Security.ISharePointUser);
+            }
+        }
 
+        [TestMethod]
+        public async Task GetWebCurrentUserBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser1 = await context.Web.GetCurrentUserBatchAsync();
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(currentUser1.Requested);
+                Assert.IsTrue(currentUser1 is Model.Security.ISharePointUser);
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsureUserTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                var ensuredUser = await context.Web.EnsureUserAsync(currentUser.UserPrincipalName);
+
+                Assert.IsTrue(ensuredUser.Requested);
+                Assert.IsTrue(ensuredUser is Model.Security.ISharePointUser);
+                Assert.IsTrue(ensuredUser.UserPrincipalName == currentUser.UserPrincipalName);
+            }
+        }
+
+        [TestMethod]
+        public async Task EnsureUserBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                var ensuredUser1 = await context.Web.EnsureUserBatchAsync(currentUser.UserPrincipalName);
+                var ensuredUser2 = await context.Web.EnsureUserBatchAsync("Everyone except external users");
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(ensuredUser1.Requested);
+                Assert.IsTrue(ensuredUser1 is Model.Security.ISharePointUser);
+                Assert.IsTrue(ensuredUser2.Requested);
+                Assert.IsTrue(ensuredUser2 is Model.Security.ISharePointUser);
+                Assert.IsTrue(ensuredUser1.UserPrincipalName == currentUser.UserPrincipalName);
+                Assert.IsTrue(ensuredUser1.Id != ensuredUser2.Id);
+            }
+        }
     }
 }
