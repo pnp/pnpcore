@@ -8,6 +8,7 @@ using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace Consumer
 
             // Ensure you do consent to the PnP App when using another tenant (update below url to match your aad domain): 
             // https://login.microsoftonline.com/a830edad9050849523e17050400.onmicrosoft.com/adminconsent?client_id=31359c7f-bd7e-475c-86db-fdb8c937548e&state=12345&redirect_uri=https://www.pnp.com
-            //.UseEnvironment("officedevpnp")
+            // .UseEnvironment("officedevpnp")
             .ConfigureLogging((hostingContext, logging) =>
             {
                 logging.AddEventSourceLogger();
@@ -347,6 +348,60 @@ namespace Consumer
                 }
                 #endregion
 
+                #region Pages API
+
+                var pageName = $"Page-{Guid.NewGuid().ToString("N")}.aspx";
+
+                // Create a modern page
+                using (var context = await pnpContextFactory.CreateAsync("DemoSite"))
+                {
+                    var page = await context.Web.NewPageAsync();
+
+                    // A simple section and text control to the page
+                    page.AddSection(CanvasSectionTemplate.TwoColumnRight, 1);
+                    page.AddControl(page.NewTextPart("PnP"), page.Sections[0].Columns[0]);
+
+                    // and a countdown web part
+                    var availableComponents = await page.AvailablePageComponentsAsync();
+                    var countdownWebPartComponent = availableComponents.FirstOrDefault(p => p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.CountDown));
+                    var countdownWebPart = page.NewWebPart(countdownWebPartComponent);
+
+                    // Read the json settings for the countdown web part
+                    countdownWebPart.PropertiesJson = await new StreamReader(@"..\..\..\countdownWebPart.json").ReadToEndAsync();
+                    page.AddControl(countdownWebPart, page.Sections[0].Columns[1]);
+
+                    // Set the page title
+                    page.PageTitle = "Modern Page created with PnP Core SDK";
+
+                    // Save the page
+                    await page.SaveAsync(pageName);
+                    
+                    // And publish it
+                    await page.PublishAsync();
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("===Modern Pages API (REST)===");
+                    Console.WriteLine($"Page Title: {page.PageTitle}");
+                    Console.WriteLine($"# Page Name: {pageName}");
+                    Console.ResetColor();
+                }
+
+                // Inspect a modern page
+                using (var context = await pnpContextFactory.CreateAsync("DemoSite"))
+                {
+                    var page = (await context.Web.GetPagesAsync(pageName)).FirstOrDefault();
+
+                    // Read the Countdown Web Part Configuration
+                    var countdownWebPartJson = page.Sections[0].Controls[1].JsonControlData;
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("===Modern Pages API (REST)===");
+                    Console.WriteLine($"Image Web Part Configuraiton");
+                    Console.WriteLine(countdownWebPartJson);
+                    Console.ResetColor();
+                }
+
+                #endregion
             }
 
             host.Dispose();

@@ -1,0 +1,23 @@
+{
+  "id": "62cac389-787f-495d-beca-e11786162ef4",
+  "title": "Countdown Timer",
+  "description": "Count down or count up to an important event.",
+  "serverProcessedContent": {
+    "htmlStrings": {},
+    "searchablePlainTexts": {
+      "title": "Countdown to New Year's Eve"
+    },
+    "imageSources": {},
+    "links": {}
+  },
+  "dataVersion": "2.1",
+  "properties": {
+    "showButton": false,
+    "countDate": "Fri Jan 01 2021 09:00:00 GMT+0100 (Central European Standard Time)",
+    "description": "Happy New Year!",
+    "countDirection": "COUNT_DOWN",
+    "dateDisplay": "DAY_HOUR_MINUTE_SECOND",
+    "buttonText": "Happy New Year!",
+    "buttonURL": ""
+  }
+}
