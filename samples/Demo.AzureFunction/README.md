@@ -1,24 +1,23 @@
 ﻿# PnP Core SDK - Azure Function v3 Sample
 
-This solution demonstrates how to build a simple backend API in the form of an HTTP Trigger Azure Function 
- - A GetSiteDocuments() function that returns the list of documents in the Shared Documents library of the configured site.
-  it uses an App-Only context authenticated with a self signed certificate
+This solution demonstrates how to build a simple backend API in the form of an HTTP Trigger Azure Function. A GetSiteDocuments() function that returns the list of documents in the Shared Documents library of the configured site via using an App-Only context authenticated with a self signed certificate.
 
-> **Note**
-> this sample was created with Visual Studio 2019 (v16.7.3) and has been tested with a Windows Azure Function v3.
->
+> [!Important]
+> Another very useful Azure Functions sample is described Sergei Sergeev's blog [How to access SharePoint data from Azure Function with SPFx and PnP Core SDK](https://spblog.net/post/2020/12/10/how-to-access-sharepoint-data-from-azure-function-with-spfx-and-pnp-core). It shows how to setup an Azure Function using a on-behalf-of auth flow via the [OnBehalfOfAuthenticationProvider](https://pnp.github.io/pnpcore/api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html) and then calls this Azure Function from a [SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview) web part.
 
 ## Source code
 
 You can find the sample source code here: [/samples/Demo.AzureFunction](https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzureFunction)
 
+> [!Note]
+> This sample was created with Visual Studio 2019 (v16.7.3) and has been tested with a Windows Azure Function v3.
+
 ## Quickstart
 
 ### Setup
 
-> **Note**
+> [!Note]
 > For the quickstart setup, you will need to have a recent version (> 3.24) of PnP PowerShell installed on your machine.
->
 
 From the solution folder execute the following PowerShell.
 (Make sure you set the values of the variables according to your environment and preferences)
@@ -31,6 +30,7 @@ $pwd = "pwd"
 ```
 
 This script will:
+
  - register a new Azure AD application
  - grant it the permissions to allow the use of all PnP Core SDK features
  - Create a self signed certificate, save it to your local store and export it as .cer and .pfx files
@@ -66,15 +66,15 @@ The settings above are mostly necessary for authentication.
 | CertificateThumbPrint     | The Thumbprint of the certificate. Used by the PnP Core authentication provider.
 | WEBSITE_LOAD_CERTIFICATES | The Thumbprint of the certificate. Indicates the Azure Function runtime to load the certificate from its registered certificates.
 
-> **Note**
+> [!Note]
 > For more information about configuring authentication, please visit https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions
->
 
 ### Try it locally
 
 Open the solution in Visual Studio and hit F5 to launch the Azure Function emulator
 
 When you see the following your local Azure Function is up and running
+
 ```console
 Azure Functions Core Tools (3.0.2912 Commit hash: bfcbbe48ed6fdacdf9b309261ecc8093df3b83f2)
 Function Runtime Version: 3.0.14287.0
@@ -101,10 +101,12 @@ If you followed all the steps above and the Function is working well locally, yo
 For the sake of simplicity, in this sample, we will use the **Publish** feature from Visual Studio.
 
 The extra steps consist in:
+
 - Make sure the app settings are specified in the Azure Function App
 - Make sure the Certificate we use for authentication is uploaded to the Azure Function App
 
 To publish the Azure Function:
+
 - In the Visual Studio Solution Explorer, right-click the **Demo.AzureFunction** project and click **Publish**
 - Create or Import a publishing profile to an Azure Function App
 - Click **Publish**
@@ -125,8 +127,8 @@ To publish the Azure Function:
 
 - Browse your computer and select the .pfx certificate we created earlier, enter the password chosen earlier and click **Upload**
 
-To Make sure the Azure Function is working properly, 
-On the Azure Portal, on your Function App blade:
+To Make sure the Azure Function is working properly, on the Azure Portal go to your Function App blade:
+
  - Go to the **Functions** tab
  - Select the **GetSiteDocuments** function
  - On the **Code + Test** tab, click the **Test/Run** button
