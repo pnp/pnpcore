@@ -18,14 +18,17 @@ In order for the user to authenticate on the App, A new app registration should 
 
 - Enter a name for your new app, make sure *Accounts in this organizational directory only* is selected. As the Redirect URI, in Web platform enter __http://localhost__ (only needed if you want use an interactive authentication flow)
 
-- Under __Implicit grant__ section, check __ID tokens__
+- Under __Implicit grant__ section, check __ID tokens__ and __Access tokens__
+
+- Under __Advanced settings__ section, set __Allow public client flows__ to __yes__
 
 - Go to __API permissions__ section , click __Add a permission__
   - Select __Microsoft Graph__ > __Delegated permissions__ > select __Directory.Read.All__
   - Select __Microsoft Graph__ > __Delegated permissions__ > select __User.Read__
-  - Select __Microsoft Graph__ > __Delegated permissions__ > select __Sites.Read.All__
-  - Select __Microsoft Graph__ > __Delegated permissions__ > select __Files.Read.All__
-  - Select __SharePoint__ > __Delegated permissions__ > select __AllSites.Read__
+  - Select __Microsoft Graph__ > __Delegated permissions__ > select __ChannelMessage.Read.All__
+  - Select __Microsoft Graph__ > __Delegated permissions__ > select __ChannelMessage.Send__
+  - Select __Microsoft Graph__ > __Delegated permissions__ > select __TeamSettings.ReadWrite.All__
+  - Select __Microsoft Graph__ > __Delegated permissions__ > select __TeamsTab.ReadWrite.All__
 
 - Click __Grand admin consent for {tenant}__
 
