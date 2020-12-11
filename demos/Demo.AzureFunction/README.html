@@ -82,23 +82,23 @@
                   </div>
                     <h1 id="pnp-core-sdk---azure-function-v3-sample">PnP Core SDK - Azure Function v3 Sample</h1>
 
-<p>This solution demonstrates how to build a simple backend API in the form of an HTTP Trigger Azure Function</p>
-<ul>
-<li>A GetSiteDocuments() function that returns the list of documents in the Shared Documents library of the configured site.
-it uses an App-Only context authenticated with a self signed certificate</li>
-</ul>
-<blockquote>
-<p><strong>Note</strong>
-this sample was created with Visual Studio 2019 (v16.7.3) and has been tested with a Windows Azure Function v3.</p>
-</blockquote>
+<p>This solution demonstrates how to build a simple backend API in the form of an HTTP Trigger Azure Function. A GetSiteDocuments() function that returns the list of documents in the Shared Documents library of the configured site via using an App-Only context authenticated with a self signed certificate.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Another very useful Azure Functions sample is described Sergei Sergeev's blog <a href="https://spblog.net/post/2020/12/10/how-to-access-sharepoint-data-from-azure-function-with-spfx-and-pnp-core">How to access SharePoint data from Azure Function with SPFx and PnP Core SDK</a>. It shows how to setup an Azure Function using a on-behalf-of auth flow via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Auth.OnBehalfOfAuthenticationProvider.html">OnBehalfOfAuthenticationProvider</a> and then calls this Azure Function from a <a href="https://docs.microsoft.com/en-us/sharepoint/dev/spfx/sharepoint-framework-overview">SharePoint Framework</a> web part.</p>
+</div>
 <h2 id="source-code">Source code</h2>
 <p>You can find the sample source code here: <a href="https://github.com/pnp/pnpcore/tree/dev/samples/Demo.AzureFunction">/samples/Demo.AzureFunction</a></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This sample was created with Visual Studio 2019 (v16.7.3) and has been tested with a Windows Azure Function v3.</p>
+</div>
 <h2 id="quickstart">Quickstart</h2>
 <h3 id="setup">Setup</h3>
-<blockquote>
-<p><strong>Note</strong>
-For the quickstart setup, you will need to have a recent version (&gt; 3.24) of PnP PowerShell installed on your machine.</p>
-</blockquote>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For the quickstart setup, you will need to have a recent version (&gt; 3.24) of PnP PowerShell installed on your machine.</p>
+</div>
 <p>From the solution folder execute the following PowerShell.
 (Make sure you set the values of the variables according to your environment and preferences)</p>
 <pre><code class="lang-PowerShell">$site = &quot;https://contoso.sharepoint.com/sites/pnpcoresdktestgroup&quot;
@@ -160,10 +160,10 @@ $pwd = &quot;pwd&quot;
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p><strong>Note</strong>
-For more information about configuring authentication, please visit <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions">https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions</a></p>
-</blockquote>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more information about configuring authentication, please visit <a href="https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions">https://github.com/pnp/pnpcore/blob/dev/docs/articles/consumer/configuring%20authentication.md#application-permissions-acting-as-an-app-account-with-app-only-permissions</a></p>
+</div>
 <h3 id="try-it-locally">Try it locally</h3>
 <p>Open the solution in Visual Studio and hit F5 to launch the Azure Function emulator</p>
 <p>When you see the following your local Azure Function is up and running</p>
@@ -212,8 +212,7 @@ For the sake of simplicity, in this sample, we will use the <strong>Publish</str
 <ul>
 <li>Browse your computer and select the .pfx certificate we created earlier, enter the password chosen earlier and click <strong>Upload</strong></li>
 </ul>
-<p>To Make sure the Azure Function is working properly,
-On the Azure Portal, on your Function App blade:</p>
+<p>To Make sure the Azure Function is working properly, on the Azure Portal go to your Function App blade:</p>
 <ul>
 <li>Go to the <strong>Functions</strong> tab</li>
 <li>Select the <strong>GetSiteDocuments</strong> function</li>

@@ -3674,6 +3674,30 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "articles/consumer/listitems-fields.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/consumer/listitems-fields.html",
+          "hash": "jOEGjmzz4TSppfgxl7AC9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/consumer/listitems-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/consumer/listitems-intro.html",
+          "hash": "rMiK3Oyn335cknfrr0vb+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "articles/consumer/pages-header.md",
       "output": {
         ".html": {
@@ -3965,7 +3989,7 @@
       "output": {
         ".html": {
           "relative_path": "demos/Demo.AzureFunction/README.html",
-          "hash": "1vQ9xzv16e1ESsYurh3Hdw=="
+          "hash": "vVpmfG+QqZhMyu6lfyhj2w=="
         }
       },
       "is_incremental": false,
@@ -4314,7 +4338,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 35,
+          "total_file_count": 37,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
