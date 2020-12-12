@@ -1,3 +1,4 @@
+using PnP.Core.Model.Security;
 using System;
 
 namespace PnP.Core.Model.SharePoint
@@ -43,10 +44,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string VersionLabel { get; }
 
-        //// TODO: To implement...
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUser CreatedBy { get; }
+        /// <summary>
+        /// The <see cref="ISharePointUser"/> that created this version
+        /// </summary>
+        public ISharePointUser CreatedBy { get; }
     }
 }

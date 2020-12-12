@@ -1,3 +1,4 @@
+using PnP.Core.Model.Security;
 using System;
 
 namespace PnP.Core.Model.SharePoint
@@ -24,7 +25,7 @@ namespace PnP.Core.Model.SharePoint
 
         public string VersionLabel { get => GetValue<string>(); set => SetValue(value); }
 
-        //public IUser CreatedBy { get => GetModelValue<IUser>(); }
+        public ISharePointUser CreatedBy { get => GetModelValue<ISharePointUser>(); }
 
         [KeyProperty(nameof(Created))]
         public override object Key { get => Created; set => Created = DateTime.Parse(value.ToString()); }
