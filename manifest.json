@@ -506,18 +506,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.DataModelExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.DataModelExtensions.html",
-          "hash": "n4/BB/WvCtDGQ8XWcUlAxw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.IDataModel-1.yml",
       "output": {
         ".html": {
@@ -3030,7 +3018,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.TransientDictionary.html",
-          "hash": "YyxPnrOVBEn/N1DI25kPyA=="
+          "hash": "+shmccCEQtsWuBTcDobOiQ=="
         }
       },
       "is_incremental": false,
@@ -3042,7 +3030,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.html",
-          "hash": "otSbXdYxNdUUCwVycg5ZVQ=="
+          "hash": "tFvX8dyTEpUpa96v8Qj21Q=="
         }
       },
       "is_incremental": false,
@@ -3618,7 +3606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "+LxycOljhm1/sNPiw6Xc4g=="
+          "hash": "2MYyfHAZvrVWQsA1w9cE8Q=="
         }
       },
       "is_incremental": false,
@@ -4344,7 +4332,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 299,
+          "total_file_count": 298,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

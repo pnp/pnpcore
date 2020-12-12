@@ -1979,12 +1979,6 @@ references:
   commentId: N:PnP.Core.Model
   fullName: PnP.Core.Model
   nameWithType: PnP.Core.Model
-- uid: PnP.Core.Model.DataModelExtensions
-  name: DataModelExtensions
-  href: api/PnP.Core.Model.DataModelExtensions.html
-  commentId: T:PnP.Core.Model.DataModelExtensions
-  fullName: PnP.Core.Model.DataModelExtensions
-  nameWithType: DataModelExtensions
 - uid: PnP.Core.Model.IDataModel`1
   name: IDataModel<TModel>
   href: api/PnP.Core.Model.IDataModel-1.html
@@ -24667,28 +24661,6 @@ references:
   commentId: T:PnP.Core.Model.TransientDictionary
   fullName: PnP.Core.Model.TransientDictionary
   nameWithType: TransientDictionary
-- uid: PnP.Core.Model.TransientDictionary.#ctor
-  name: TransientDictionary()
-  href: api/PnP.Core.Model.TransientDictionary.html#PnP_Core_Model_TransientDictionary__ctor
-  commentId: M:PnP.Core.Model.TransientDictionary.#ctor
-  fullName: PnP.Core.Model.TransientDictionary.TransientDictionary()
-  nameWithType: TransientDictionary.TransientDictionary()
-- uid: PnP.Core.Model.TransientDictionary.#ctor(Dictionary{System.String,System.Object})
-  name: TransientDictionary(Dictionary<String, Object>)
-  href: api/PnP.Core.Model.TransientDictionary.html#PnP_Core_Model_TransientDictionary__ctor_Dictionary_System_String_System_Object__
-  commentId: M:PnP.Core.Model.TransientDictionary.#ctor(Dictionary{System.String,System.Object})
-  name.vb: TransientDictionary(Dictionary(Of String, Object))
-  fullName: PnP.Core.Model.TransientDictionary.TransientDictionary(Dictionary<System.String, System.Object>)
-  fullName.vb: PnP.Core.Model.TransientDictionary.TransientDictionary(Dictionary(Of System.String, System.Object))
-  nameWithType: TransientDictionary.TransientDictionary(Dictionary<String, Object>)
-  nameWithType.vb: TransientDictionary.TransientDictionary(Dictionary(Of String, Object))
-- uid: PnP.Core.Model.TransientDictionary.#ctor*
-  name: TransientDictionary
-  href: api/PnP.Core.Model.TransientDictionary.html#PnP_Core_Model_TransientDictionary__ctor_
-  commentId: Overload:PnP.Core.Model.TransientDictionary.#ctor
-  isSpec: "True"
-  fullName: PnP.Core.Model.TransientDictionary.TransientDictionary
-  nameWithType: TransientDictionary.TransientDictionary
 - uid: PnP.Core.Model.TransientDictionary.Add(System.String,System.Object)
   name: Add(String, Object)
   href: api/PnP.Core.Model.TransientDictionary.html#PnP_Core_Model_TransientDictionary_Add_System_String_System_Object_
