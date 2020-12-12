@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -8,7 +7,7 @@ namespace PnP.Core.Model
     /// <summary>
     /// Data model extension methods for public use
     /// </summary>
-    public static class DataModelExtensions
+    internal static class DataModelExtensions
     {
         /// <summary>
         /// Ensures the basic properties (mainly IDs) of the parent of the current domain model object

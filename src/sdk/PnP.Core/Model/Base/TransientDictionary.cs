@@ -6,7 +6,7 @@ using System.Linq;
 namespace PnP.Core.Model
 {
     /// <summary>
-    /// Class tracks Dictionary changes 
+    /// Class for tracking Dictionary changes 
     /// </summary>
     public class TransientDictionary : Dictionary<string, object>
     {
@@ -33,7 +33,7 @@ namespace PnP.Core.Model
         /// <summary>
         /// Default constructor
         /// </summary>
-        public TransientDictionary() :
+        internal TransientDictionary() :
             base(StringComparer.InvariantCultureIgnoreCase)
         {
         }
@@ -42,7 +42,7 @@ namespace PnP.Core.Model
         /// Constructor that initializes based upon an existing Dictionary
         /// </summary>
         /// <param name="input"><see cref="Dictionary{TKey, TValue}"/> holding the key value pairs to add</param>
-        public TransientDictionary(Dictionary<string, object> input) :
+        internal TransientDictionary(Dictionary<string, object> input) :
             base(new Dictionary<string, object>(input, StringComparer.OrdinalIgnoreCase))
         {
         }
