@@ -10610,6 +10610,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFileVersion.Created
   nameWithType: IFileVersion.Created
+- uid: PnP.Core.Model.SharePoint.IFileVersion.CreatedBy
+  name: CreatedBy
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_CreatedBy
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersion.CreatedBy
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.CreatedBy
+  nameWithType: IFileVersion.CreatedBy
+- uid: PnP.Core.Model.SharePoint.IFileVersion.CreatedBy*
+  name: CreatedBy
+  href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_CreatedBy_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersion.CreatedBy
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersion.CreatedBy
+  nameWithType: IFileVersion.CreatedBy
 - uid: PnP.Core.Model.SharePoint.IFileVersion.Id
   name: Id
   href: api/PnP.Core.Model.SharePoint.IFileVersion.html#PnP_Core_Model_SharePoint_IFileVersion_Id
