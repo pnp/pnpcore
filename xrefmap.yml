@@ -1985,22 +1985,6 @@ references:
   commentId: T:PnP.Core.Model.DataModelExtensions
   fullName: PnP.Core.Model.DataModelExtensions
   nameWithType: DataModelExtensions
-- uid: PnP.Core.Model.DataModelExtensions.LoadProperties*
-  name: LoadProperties
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_LoadProperties_
-  commentId: Overload:PnP.Core.Model.DataModelExtensions.LoadProperties
-  isSpec: "True"
-  fullName: PnP.Core.Model.DataModelExtensions.LoadProperties
-  nameWithType: DataModelExtensions.LoadProperties
-- uid: PnP.Core.Model.DataModelExtensions.LoadProperties``1(PnP.Core.Model.IDataModelCollection{``0},Expression{Func{``0,System.Object}}[])
-  name: LoadProperties<TModel>(IDataModelCollection<TModel>, Expression<Func<TModel, Object>>[])
-  href: api/PnP.Core.Model.DataModelExtensions.html#PnP_Core_Model_DataModelExtensions_LoadProperties__1_PnP_Core_Model_IDataModelCollection___0__Expression_Func___0_System_Object_____
-  commentId: M:PnP.Core.Model.DataModelExtensions.LoadProperties``1(PnP.Core.Model.IDataModelCollection{``0},Expression{Func{``0,System.Object}}[])
-  name.vb: LoadProperties(Of TModel)(IDataModelCollection(Of TModel), Expression(Of Func(Of TModel, Object))())
-  fullName: PnP.Core.Model.DataModelExtensions.LoadProperties<TModel>(PnP.Core.Model.IDataModelCollection<TModel>, Expression<Func<TModel, System.Object>>[])
-  fullName.vb: PnP.Core.Model.DataModelExtensions.LoadProperties(Of TModel)(PnP.Core.Model.IDataModelCollection(Of TModel), Expression(Of Func(Of TModel, System.Object))())
-  nameWithType: DataModelExtensions.LoadProperties<TModel>(IDataModelCollection<TModel>, Expression<Func<TModel, Object>>[])
-  nameWithType.vb: DataModelExtensions.LoadProperties(Of TModel)(IDataModelCollection(Of TModel), Expression(Of Func(Of TModel, Object))())
 - uid: PnP.Core.Model.IDataModel`1
   name: IDataModel<TModel>
   href: api/PnP.Core.Model.IDataModel-1.html
@@ -2124,6 +2108,24 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel)
   nameWithType: IDataModelCollection<TModel>
   nameWithType.vb: IDataModelCollection(Of TModel)
+- uid: PnP.Core.Model.IDataModelCollection`1.LoadProperties(Expression{Func{`0,System.Object}}[])
+  name: LoadProperties(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_LoadProperties_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.LoadProperties(Expression{Func{`0,System.Object}}[])
+  name.vb: LoadProperties(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.LoadProperties(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).LoadProperties(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.LoadProperties(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).LoadProperties(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.LoadProperties*
+  name: LoadProperties
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_LoadProperties_
+  commentId: Overload:PnP.Core.Model.IDataModelCollection`1.LoadProperties
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.LoadProperties
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).LoadProperties
+  nameWithType: IDataModelCollection<TModel>.LoadProperties
+  nameWithType.vb: IDataModelCollection(Of TModel).LoadProperties
 - uid: PnP.Core.Model.IDataModelDelete
   name: IDataModelDelete
   href: api/PnP.Core.Model.IDataModelDelete.html
