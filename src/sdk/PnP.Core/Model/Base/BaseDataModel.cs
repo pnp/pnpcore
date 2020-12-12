@@ -1207,9 +1207,9 @@ namespace PnP.Core.Model
                 {
                     // Future use? (includes)
                     var body = (MethodCallExpression)expression.Body;
-                    if (body.Method.IsGenericMethod && body.Method.Name == "LoadProperties")
+                    if (body.Method.Name == "LoadProperties")
                     {
-                        if (body.Arguments.Count != 2)
+                        if (body.Arguments.Count != 1)
                         {
                             throw new Exception(PnPCoreResources.Exception_InvalidArgumentsNumber);
                         }
@@ -1217,7 +1217,7 @@ namespace PnP.Core.Model
                         // Parse the expressions and get the relevant entity information
                         var entityInfo = EntityManager.GetClassInfo(model.GetType(), (model as BaseDataModel<TModel>), expressions);
 
-                        string fieldToLoad = (body.Arguments[0] as MemberExpression).Member.Name;
+                        string fieldToLoad = ((expression.Body as MethodCallExpression).Object as MemberExpression).Member.Name;
 
                         var collectionToCheck = entityInfo.Fields.FirstOrDefault(p => p.Name == fieldToLoad);
                         if (collectionToCheck != null)

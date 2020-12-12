@@ -442,5 +442,16 @@ namespace PnP.Core.Model
         }
         #endregion
 
+        #region LoadProperties
+        /// <summary>
+        /// Enables using the .LoadProperties lambda expression syntax on a collection
+        /// </summary>
+        /// <param name="expressions">Expression</param>
+        /// <returns>Null...return value is not needed</returns>
+        public IQueryable<TModel> LoadProperties(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return null;
+        }
+        #endregion
     }
 }

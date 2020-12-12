@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace PnP.Core.Model
 {
@@ -9,5 +12,11 @@ namespace PnP.Core.Model
 
     public interface IDataModelCollection<TModel> : IEnumerable<TModel>, IDataModelParent, IDataModelWithContext, IRequestableCollection
     {
+        /// <summary>
+        /// Enables using the .LoadProperties lambda expression syntax on a collection
+        /// </summary>
+        /// <param name="expressions">Expression</param>
+        /// <returns>Null...return value is not needed</returns>
+        public IQueryable<TModel> LoadProperties(params Expression<Func<TModel, object>>[] expressions);
     }
 }
