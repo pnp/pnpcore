@@ -1437,7 +1437,7 @@ namespace PnP.Core.Model.SharePoint
                     PageListItem[PageConstants.ContentTypeId] = PageConstants.ModernArticlePage;
                 }
 
-                PageListItem[PageConstants.Title] = string.IsNullOrWhiteSpace(this.pageTitle) ? Path.GetFileNameWithoutExtension(pageName) : pageTitle;
+                PageListItem[PageConstants.Title] = string.IsNullOrWhiteSpace(pageTitle) ? Path.GetFileNameWithoutExtension(pageName) : pageTitle;
                 PageListItem[PageConstants.ClientSideApplicationId] = PageConstants.SitePagesFeatureId;
 
                 if (LayoutType == PageLayoutType.Spaces)
@@ -1474,9 +1474,9 @@ namespace PnP.Core.Model.SharePoint
             {
                 // We're updating an existing page
                 updatingExistingPage = true;
-                if (!string.IsNullOrWhiteSpace(this.pageTitle))
+                if (!string.IsNullOrWhiteSpace(pageTitle))
                 {
-                    PageListItem[PageConstants.Title] = this.pageTitle;
+                    PageListItem[PageConstants.Title] = pageTitle;
                 }
             }
 
