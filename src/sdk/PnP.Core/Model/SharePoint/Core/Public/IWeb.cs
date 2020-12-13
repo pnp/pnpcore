@@ -13,6 +13,7 @@ namespace PnP.Core.Model.SharePoint
     [ConcreteType(typeof(Web))]
     public interface IWeb : IDataModel<IWeb>, IDataModelGet<IWeb>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
+        #region Properties
         /// <summary>
         /// The Unique ID of the Web object
         /// </summary>
@@ -541,6 +542,23 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IRegionalSettings RegionalSettings { get; }
 
+        /// <summary>
+        /// Associated SharePoint Member group
+        /// </summary>
+        public ISharePointGroup AssociatedMemberGroup { get; }
+
+        /// <summary>
+        /// Associated SharePoint owner group
+        /// </summary>
+        public ISharePointGroup AssociatedOwnerGroup { get; }
+
+        /// <summary>
+        /// Associated SharePoint Visitor group
+        /// </summary>
+        public ISharePointGroup AssociatedVisitorGroup { get; }
+
+        #endregion
+
         #region Methods
 
         #region Pages API
@@ -834,6 +852,51 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="batch">Batch to add this request to</param>
         /// <returns>The current <see cref="ISharePointUser"/></returns>
         public ISharePointUser GetCurrentUserBatch(Batch batch);
+
+        /// <summary>
+        /// Get's a user by it's id in this site. The user needs to exist, use <see cref="EnsureUser(string)"/> if you want to create the user if it does not yet exist
+        /// </summary>
+        /// <param name="userId">Id of the user to get</param>
+        /// <returns>The found user as <see cref="ISharePointPrincipal"/></returns>
+        public ISharePointUser GetUserById(int userId);
+
+        /// <summary>
+        /// Get's a user by it's id in this site. The user needs to exist, use <see cref="EnsureUserAsync(string)"/> if you want to create the user if it does not yet exist
+        /// </summary>
+        /// <param name="userId">Id of the user to get</param>
+        /// <returns>The found user as <see cref="ISharePointPrincipal"/></returns>
+        public Task<ISharePointUser> GetUserByIdAsync(int userId);
+
+        /// <summary>
+        /// Get's a user by it's id in this site. The user needs to exist, use <see cref="EnsureUserBatch(string)"/> if you want to create the user if it does not yet exist
+        /// </summary>
+        /// <param name="userId">Id of the user to get</param>
+        /// <returns>The found user as <see cref="ISharePointPrincipal"/></returns>
+        public ISharePointUser GetUserByIdBatch(int userId);
+
+        /// <summary>
+        /// Get's a user by it's id in this site. The user needs to exist, use <see cref="EnsureUserBatchAsync(string)"/> if you want to create the user if it does not yet exist
+        /// </summary>
+        /// <param name="userId">Id of the user to get</param>
+        /// <returns>The found user as <see cref="ISharePointPrincipal"/></returns>
+        public Task<ISharePointUser> GetUserByIdBatchAsync(int userId);
+
+        /// <summary>
+        /// Get's a user by it's id in this site. The user needs to exist, use <see cref="EnsureUserBatch(string)"/> if you want to create the user if it does not yet exist
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="userId">Id of the user to get</param>
+        /// <returns>The found user as <see cref="ISharePointPrincipal"/></returns>
+        public ISharePointUser GetUserByIdBatch(Batch batch, int userId);
+
+        /// <summary>
+        /// Get's a user by it's id in this site. The user needs to exist, use <see cref="EnsureUserBatchAsync(string)"/> if you want to create the user if it does not yet exist
+        /// </summary>
+        /// <param name="batch">Batch to add this request to</param>
+        /// <param name="userId">Id of the user to get</param>
+        /// <returns>The found user as <see cref="ISharePointPrincipal"/></returns>
+        public Task<ISharePointUser> GetUserByIdBatchAsync(Batch batch, int userId);
+
         #endregion
 
         #region Multi-lingual

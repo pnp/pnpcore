@@ -266,6 +266,13 @@ namespace PnP.Core.Model.SharePoint
 
         public IRegionalSettings RegionalSettings { get => GetModelValue<IRegionalSettings>(); }
 
+        public ISharePointGroup AssociatedMemberGroup { get => GetModelValue<ISharePointGroup>(); }
+
+        public ISharePointGroup AssociatedOwnerGroup { get => GetModelValue<ISharePointGroup>(); }
+
+        public ISharePointGroup AssociatedVisitorGroup { get => GetModelValue<ISharePointGroup>(); }
+
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
@@ -642,6 +649,60 @@ namespace PnP.Core.Model.SharePoint
         private static ApiCall BuildGetCurrentUserApiCall()
         {
             return new ApiCall("_api/Web/CurrentUser", ApiType.SPORest);
+        }
+
+        public ISharePointUser GetUserById(int userId)
+        {
+            return GetUserByIdAsync(userId).GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> GetUserByIdAsync(int userId)
+        {
+            ApiCall apiCall = BuildGetUserByIdApiCall(userId);
+
+            SharePointUser sharePointUser = new SharePointUser
+            {
+                PnPContext = PnPContext
+            };
+
+            await sharePointUser.RequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return sharePointUser;
+        }
+
+        public ISharePointUser GetUserByIdBatch(int userId)
+        {
+            return GetUserByIdBatchAsync(PnPContext.CurrentBatch, userId).GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> GetUserByIdBatchAsync(int userId)
+        {
+            return await GetUserByIdBatchAsync(PnPContext.CurrentBatch, userId).ConfigureAwait(false);
+        }
+
+        public ISharePointUser GetUserByIdBatch(Batch batch, int userId)
+        {
+            return GetUserByIdBatchAsync(batch, userId).GetAwaiter().GetResult();
+        }
+
+        public async Task<ISharePointUser> GetUserByIdBatchAsync(Batch batch, int userId)
+        {
+            ApiCall apiCall = BuildGetUserByIdApiCall(userId);
+
+            SharePointUser sharePointUser = new SharePointUser
+            {
+                PnPContext = PnPContext
+            };
+
+            await sharePointUser.RequestBatchAsync(batch, apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            return sharePointUser;
+        }
+
+
+        private static ApiCall BuildGetUserByIdApiCall(int userId)
+        {
+            return new ApiCall($"_api/Web/GetUserById({userId})", ApiType.SPORest);
         }
         #endregion
 

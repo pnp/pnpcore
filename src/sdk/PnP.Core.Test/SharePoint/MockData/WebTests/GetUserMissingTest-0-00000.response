@@ -1,0 +1,9 @@
+--batchresponse_3c2b3fe0-459c-468b-8133-e0e258e3eac5
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 500 Internal Server Error
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"error":{"code":"-2146232832, Microsoft.SharePoint.SPException","message":{"lang":"en-US","value":"User cannot be found."}}}
+--batchresponse_3c2b3fe0-459c-468b-8133-e0e258e3eac5--

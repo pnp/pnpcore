@@ -545,5 +545,75 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(ensuredUser1.Id != ensuredUser2.Id);
             }
         }
+
+        [TestMethod]
+        public async Task GetUserTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                var foundUser = await context.Web.GetUserByIdAsync(currentUser.Id);
+
+                Assert.IsTrue(foundUser.Requested);
+                Assert.IsTrue(foundUser is Model.Security.ISharePointUser);
+                Assert.IsTrue(foundUser.UserPrincipalName == currentUser.UserPrincipalName);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(SharePointRestServiceException))]
+        public async Task GetUserMissingTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var foundUser = await context.Web.GetUserByIdAsync(890879070);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetUserBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // First ensure we have the needed users
+                var currentUser = await context.Web.GetCurrentUserAsync();
+                var ensuredUser1 = await context.Web.EnsureUserBatchAsync(currentUser.UserPrincipalName);
+                var ensuredUser2 = await context.Web.EnsureUserBatchAsync("Everyone except external users");
+                await context.ExecuteAsync();
+
+                // Now retrieve them again in batch
+                var foundUser1 = await context.Web.GetUserByIdBatchAsync(ensuredUser1.Id);
+                var foundUser2 = await context.Web.GetUserByIdBatchAsync(ensuredUser2.Id);
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(foundUser1.Requested);
+                Assert.IsTrue(foundUser1 is Model.Security.ISharePointUser);
+                Assert.IsTrue(foundUser2.Requested);
+                Assert.IsTrue(foundUser2 is Model.Security.ISharePointUser);
+                Assert.IsTrue(foundUser1.UserPrincipalName == currentUser.UserPrincipalName);
+                Assert.IsTrue(foundUser1.Id != foundUser2.Id);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetAssociatedGroups()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = await context.Web.GetAsync(p => p.AssociatedMemberGroup, p => p.AssociatedOwnerGroup, p => p.AssociatedVisitorGroup);
+                Assert.IsTrue(web.IsPropertyAvailable(p => p.AssociatedMemberGroup));
+                Assert.IsTrue(web.IsPropertyAvailable(p => p.AssociatedOwnerGroup));
+                Assert.IsTrue(web.IsPropertyAvailable(p => p.AssociatedVisitorGroup));
+
+                Assert.IsTrue(web.AssociatedMemberGroup.Id != 0);
+                Assert.IsTrue(web.AssociatedOwnerGroup.Id != 0);
+                Assert.IsTrue(web.AssociatedVisitorGroup.Id != 0);
+            }
+        }
+
     }
 }
