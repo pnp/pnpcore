@@ -18692,6 +18692,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.AppInstanceId
   nameWithType: IWeb.AppInstanceId
+- uid: PnP.Core.Model.SharePoint.IWeb.AssociatedMemberGroup
+  name: AssociatedMemberGroup
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AssociatedMemberGroup
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AssociatedMemberGroup
+  fullName: PnP.Core.Model.SharePoint.IWeb.AssociatedMemberGroup
+  nameWithType: IWeb.AssociatedMemberGroup
+- uid: PnP.Core.Model.SharePoint.IWeb.AssociatedMemberGroup*
+  name: AssociatedMemberGroup
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AssociatedMemberGroup_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AssociatedMemberGroup
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AssociatedMemberGroup
+  nameWithType: IWeb.AssociatedMemberGroup
+- uid: PnP.Core.Model.SharePoint.IWeb.AssociatedOwnerGroup
+  name: AssociatedOwnerGroup
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AssociatedOwnerGroup
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AssociatedOwnerGroup
+  fullName: PnP.Core.Model.SharePoint.IWeb.AssociatedOwnerGroup
+  nameWithType: IWeb.AssociatedOwnerGroup
+- uid: PnP.Core.Model.SharePoint.IWeb.AssociatedOwnerGroup*
+  name: AssociatedOwnerGroup
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AssociatedOwnerGroup_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AssociatedOwnerGroup
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AssociatedOwnerGroup
+  nameWithType: IWeb.AssociatedOwnerGroup
+- uid: PnP.Core.Model.SharePoint.IWeb.AssociatedVisitorGroup
+  name: AssociatedVisitorGroup
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AssociatedVisitorGroup
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.AssociatedVisitorGroup
+  fullName: PnP.Core.Model.SharePoint.IWeb.AssociatedVisitorGroup
+  nameWithType: IWeb.AssociatedVisitorGroup
+- uid: PnP.Core.Model.SharePoint.IWeb.AssociatedVisitorGroup*
+  name: AssociatedVisitorGroup
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AssociatedVisitorGroup_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.AssociatedVisitorGroup
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.AssociatedVisitorGroup
+  nameWithType: IWeb.AssociatedVisitorGroup
 - uid: PnP.Core.Model.SharePoint.IWeb.AvailableContentTypes
   name: AvailableContentTypes
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_AvailableContentTypes
@@ -19475,6 +19514,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.GetPagesAsync
   nameWithType: IWeb.GetPagesAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserById(System.Int32)
+  name: GetUserById(Int32)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserById_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetUserById(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserById(System.Int32)
+  nameWithType: IWeb.GetUserById(Int32)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserById*
+  name: GetUserById
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserById_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetUserById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserById
+  nameWithType: IWeb.GetUserById
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserByIdAsync(System.Int32)
+  name: GetUserByIdAsync(Int32)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserByIdAsync_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetUserByIdAsync(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdAsync(System.Int32)
+  nameWithType: IWeb.GetUserByIdAsync(Int32)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserByIdAsync*
+  name: GetUserByIdAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetUserByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdAsync
+  nameWithType: IWeb.GetUserByIdAsync
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatch(PnP.Core.Services.Batch,System.Int32)
+  name: GetUserByIdBatch(Batch, Int32)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserByIdBatch_PnP_Core_Services_Batch_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatch(PnP.Core.Services.Batch,System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatch(PnP.Core.Services.Batch, System.Int32)
+  nameWithType: IWeb.GetUserByIdBatch(Batch, Int32)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatch(System.Int32)
+  name: GetUserByIdBatch(Int32)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserByIdBatch_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatch(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatch(System.Int32)
+  nameWithType: IWeb.GetUserByIdBatch(Int32)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatch*
+  name: GetUserByIdBatch
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserByIdBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatch
+  nameWithType: IWeb.GetUserByIdBatch
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)
+  name: GetUserByIdBatchAsync(Batch, Int32)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync(PnP.Core.Services.Batch, System.Int32)
+  nameWithType: IWeb.GetUserByIdBatchAsync(Batch, Int32)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync(System.Int32)
+  name: GetUserByIdBatchAsync(Int32)
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserByIdBatchAsync_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync(System.Int32)
+  nameWithType: IWeb.GetUserByIdBatchAsync(Int32)
+- uid: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync*
+  name: GetUserByIdBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_GetUserByIdBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.GetUserByIdBatchAsync
+  nameWithType: IWeb.GetUserByIdBatchAsync
 - uid: PnP.Core.Model.SharePoint.IWeb.HeaderEmphasis
   name: HeaderEmphasis
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_HeaderEmphasis
