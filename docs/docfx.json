@@ -28,8 +28,8 @@
       },
       {
         "files": [
-          "consumer/**.md",
-          "consumer/toc.yml",
+          "using-the-sdk/**.md",
+          "using-the-sdk/toc.yml",
           "contributing/**.md",
           "contributing/toc.yml",
           "toc.yml",
