@@ -30,8 +30,8 @@
         "files": [
           "consumer/**.md",
           "consumer/toc.yml",
-          "contributor/**.md",
-          "contributor/toc.yml",
+          "contributing/**.md",
+          "contributing/toc.yml",
           "toc.yml",
           "*.md"
         ]
