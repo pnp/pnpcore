@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Creating a custom Authentication Provider for PnP.Core | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Creating a custom Authentication Provider for PnP.Core | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/custom-authentication-provider.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="creating-a-custom-authentication-provider-for-pnpcore">Creating a custom Authentication Provider for PnP.Core</h1>
+
+<p>There might be implementations where the default provided authentication providers do not offer the needed features (e.g. when authenticating Blazor WebAssembly applications). If that's the case, you always have the option to write your own authentication provider and use that when working with the PnP Core SDK.</p>
+<h2 id="creating-a-custom-authentication-provider">Creating a custom authentication provider</h2>
+<p>When using Blazor WebAssembly applications we want to ask the Blazor framework to deliver us an access token for the logged on user and then use that access token in the PnP Core SDK. There's no default authentication provider in PnP.Core.Auth for that, so let's roll our own. Writing an authentication provider comes down to implementing the <code>IAuthenticationProvider</code> interface defined in the <code>PnP.Core.Services</code> namespace (in the <code>PnP.Core</code> assembly). This interface requires 3 methods to be implemented:</p>
+<ul>
+<li><code>Task AuthenticateRequestAsync(Uri resource, HttpRequestMessage request)</code> : authenticates a web requests by adding an access token to it</li>
+<li><code>Task&lt;string&gt; GetAccessTokenAsync(Uri resource, String[] scopes)</code> : gets an access token for the requested resource and scope</li>
+<li><code>Task&lt;string&gt; GetAccessTokenAsync(Uri resource)</code> : gets an access token for the requested resource and its default scopes</li>
+</ul>
+<p>Below sample shows a custom authentication provider that can be used in Blazor WebAssembly applications:</p>
+<pre><code class="lang-csharp">using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using PnP.Core.Services;
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+
+namespace Demo.Blazor
+{
+    /// &lt;summary&gt;
+    /// Custom authentication provider that uses the WebAssembly access token provider to obtain an access token
+    /// &lt;/summary&gt;
+    public class MsalWrappedTokenProvider : IAuthenticationProvider
+    {
+        private readonly IAccessTokenProvider _accessTokenProvider;
+
+        /// &lt;summary&gt;
+        /// Default constructor
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;accessTokenProvider&quot;&gt;WebAssembly access token provider instance&lt;/param&gt;
+        public MsalWrappedTokenProvider(IAccessTokenProvider accessTokenProvider)
+        {
+            _accessTokenProvider = accessTokenProvider;
+        }
+
+        private const string MicrosoftGraphScope = &quot;Sites.FullControl.All&quot;;
+        private const string SharePointOnlineScope = &quot;AllSites.FullControl&quot;;
+
+        private string[] GetRelevantScopes(Uri resourceUri)
+        {
+            if (resourceUri.ToString() == &quot;https://graph.microsoft.com&quot;)
+            {
+                return new[] { $&quot;{resourceUri}/{MicrosoftGraphScope}&quot; };
+            }
+            else
+            {
+                string resource = $&quot;{resourceUri.Scheme}://{resourceUri.DnsSafeHost}&quot;;
+                return new[] { $&quot;{resource}/{SharePointOnlineScope}&quot; };
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Authenticate the web request
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;resource&quot;&gt;Resource to get an access token for&lt;/param&gt;
+        /// &lt;param name=&quot;request&quot;&gt;Request to add the access token on&lt;/param&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
+        public async Task AuthenticateRequestAsync(Uri resource, HttpRequestMessage request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
+            request.Headers.Authorization = new AuthenticationHeaderValue(&quot;bearer&quot;,
+                await GetAccessTokenAsync(resource).ConfigureAwait(false));
+        }
+
+        /// &lt;summary&gt;
+        /// Gets an access token for the requested resource and scopes
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;resource&quot;&gt;Resource to get access token for&lt;/param&gt;
+        /// &lt;param name=&quot;scopes&quot;&gt;Scopes to use when getting the access token&lt;/param&gt;
+        /// &lt;returns&gt;Obtained access token&lt;/returns&gt;
+        public async Task&lt;string&gt; GetAccessTokenAsync(Uri resource, string[] scopes)
+        {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
+            if (scopes == null)
+            {
+                throw new ArgumentNullException(nameof(scopes));
+            }
+
+            var tokenResult = await _accessTokenProvider.RequestAccessToken(new AccessTokenRequestOptions()
+            {
+                // The scopes must specify the needed permissions for the app to work
+                Scopes = scopes,
+            }).ConfigureAwait(false);
+
+            if (!tokenResult.TryGetToken(out AccessToken accessToken))
+            {
+                throw new Exception(&quot;An error occured while trying to acquire the access token...&quot;);
+            }
+
+            return accessToken.Value;
+        }
+
+        /// &lt;summary&gt;
+        /// Gets an access token for the requested resource
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;resource&quot;&gt;Resource to get access token for&lt;/param&gt;
+        /// &lt;returns&gt;Obtained access token&lt;/returns&gt;
+        public async Task&lt;string&gt; GetAccessTokenAsync(Uri resource)
+        {
+            if (resource == null)
+            {
+                throw new ArgumentNullException(nameof(resource));
+            }
+
+            return await GetAccessTokenAsync(resource, GetRelevantScopes(resource));
+        }
+    }
+}
+</code></pre>
+<h2 id="using-a-custom-authentication-provider">Using a custom authentication provider</h2>
+<p>Once you've added the custom authentication provider to your project, you need to configure it in the pipeline of PnP Core SDK. This is done by passing an authentication provider instance to the <code>CreateAsync</code> or <code>Create</code> <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContextFactory.html#methods">methods of the <code>IPnPContextFactory</code> you're using</a>.</p>
+<pre><code class="lang-csharp">using(var context = await pnpContextFactory.CreateAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/siteA&quot;), myCustomAuthProvider))
+{
+    // use context to read/update Microsoft 365 data
+}
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

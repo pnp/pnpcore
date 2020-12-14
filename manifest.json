@@ -3614,11 +3614,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/consumer/configuring authentication.md",
+      "source_relative_path": "contributing/configuring-for-auth-tests.md",
       "output": {
         ".html": {
-          "relative_path": "articles/consumer/configuring authentication.html",
-          "hash": "1RH0CmV5v0XgvaKqCDd9wA=="
+          "relative_path": "contributing/configuring-for-auth-tests.html",
+          "hash": "EZ7rKyH3J8lgfiBTu5ZjXQ=="
         }
       },
       "is_incremental": false,
@@ -3626,11 +3626,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/consumer/custom-authentication-provider.md",
+      "source_relative_path": "contributing/event handlers.md",
       "output": {
         ".html": {
-          "relative_path": "articles/consumer/custom-authentication-provider.html",
-          "hash": "bln2AQX9o6z1/u6SC79BGA=="
+          "relative_path": "contributing/event handlers.html",
+          "hash": "FEnR+oteA8Xn2Rx21gE5Ag=="
         }
       },
       "is_incremental": false,
@@ -3638,11 +3638,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/consumer/fields-add.md",
+      "source_relative_path": "contributing/extending the model - Microsoft Graph.md",
       "output": {
         ".html": {
-          "relative_path": "articles/consumer/fields-add.html",
-          "hash": "rTf3QzXuwSwO+L3Z/fBx+g=="
+          "relative_path": "contributing/extending the model - Microsoft Graph.html",
+          "hash": "NAe57ozhOi2XHDjmZb2ofg=="
         }
       },
       "is_incremental": false,
@@ -3650,11 +3650,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/consumer/fields-intro.md",
+      "source_relative_path": "contributing/extending the model - SharePoint REST.md",
       "output": {
         ".html": {
-          "relative_path": "articles/consumer/fields-intro.html",
-          "hash": "/Kpx56BqX145NbsuFr8Kog=="
+          "relative_path": "contributing/extending the model - SharePoint REST.html",
+          "hash": "zNfjXdxIeBX6n/fwEba95w=="
         }
       },
       "is_incremental": false,
@@ -3662,11 +3662,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/consumer/files-intro.md",
+      "source_relative_path": "contributing/extending the model.md",
       "output": {
         ".html": {
-          "relative_path": "articles/consumer/files-intro.html",
-          "hash": "ZZ/lVeTRI4DgKqK98MnLaQ=="
+          "relative_path": "contributing/extending the model.html",
+          "hash": "P+8NU3xFSXnEV5LQi7aPHQ=="
         }
       },
       "is_incremental": false,
@@ -3674,11 +3674,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/consumer/files-large.md",
+      "source_relative_path": "contributing/model tokens.md",
       "output": {
         ".html": {
-          "relative_path": "articles/consumer/files-large.html",
-          "hash": "dJN7HHCVRIAIroG79Rqe0A=="
+          "relative_path": "contributing/model tokens.html",
+          "hash": "jII7vcX55TbUkIfLvEvVmw=="
         }
       },
       "is_incremental": false,
@@ -3686,11 +3686,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/consumer/listitems-fields.md",
+      "source_relative_path": "contributing/readme.md",
       "output": {
         ".html": {
-          "relative_path": "articles/consumer/listitems-fields.html",
-          "hash": "kUiJEisEEW06zrbzLxDXHQ=="
+          "relative_path": "contributing/readme.html",
+          "hash": "VFee4P04FZKXD/mWjkAB/A=="
         }
       },
       "is_incremental": false,
@@ -3698,263 +3698,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/consumer/listitems-intro.md",
+      "source_relative_path": "contributing/setup.md",
       "output": {
         ".html": {
-          "relative_path": "articles/consumer/listitems-intro.html",
-          "hash": "rMiK3Oyn335cknfrr0vb+g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/consumer/pages-header.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/consumer/pages-header.html",
-          "hash": "Djts6aFWiP3eyy0Oy17kTQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/consumer/pages-intro.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/consumer/pages-intro.html",
-          "hash": "6PCXF9eCjFdmfwp9j9Zi8w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/consumer/pages-multilingual.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/consumer/pages-multilingual.html",
-          "hash": "/QYurzU7HX2umj+N7IdTbg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/consumer/pages-promote.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/consumer/pages-promote.html",
-          "hash": "FqfGBzX9yHGyXapn/AhHfA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/consumer/pages-social.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/consumer/pages-social.html",
-          "hash": "51OSmL9Iaea7/CrQ9NLW+Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/consumer/pages-webparts.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/consumer/pages-webparts.html",
-          "hash": "wrK3m4TrL2PFGkFB0YC3zw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/consumer/pnp core settings.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/consumer/pnp core settings.html",
-          "hash": "sBx61gHNEurzDPBnzXaoYg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/consumer/readme.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/consumer/readme.html",
-          "hash": "m/SpJdGZTgQVCqeKzCIkAQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/consumer/using paging.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/consumer/using paging.html",
-          "hash": "eHDWAeY3yEkYi/akm/6Pkw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/configuring-for-auth-tests.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/configuring-for-auth-tests.html",
-          "hash": "mkLILGpGjl8+qjBOwyJKsw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/event handlers.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/event handlers.html",
-          "hash": "EdMFCitm5xinDEedL47U6A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/extending the model - Microsoft Graph.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/extending the model - Microsoft Graph.html",
-          "hash": "peBZCTAwTFGok3IUCPEq2w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/extending the model - SharePoint REST.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/extending the model - SharePoint REST.html",
-          "hash": "t2t5sDiYaoNYL/lLkgOZdw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/extending the model.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/extending the model.html",
-          "hash": "ylCBznQFSJ8hlogpLOc1Yw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/model tokens.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/model tokens.html",
-          "hash": "dpiSQXySsy3BymnWt8j8uQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/readme.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/readme.html",
-          "hash": "SVqduY33Ub0SPCuH5mjRKQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/setup.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/setup.html",
-          "hash": "f0PvpjkOxlvMTgCWymlfAQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/using paging.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/using paging.html",
-          "hash": "vLxW/UDLR/Uj1Usdjj4Zdw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/writing documentation.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/writing documentation.html",
-          "hash": "AqFvKjpsj6rkms5c6mf+Dw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributor/writing tests.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributor/writing tests.html",
-          "hash": "PVwhyjy46CrcTBmF7tFpUA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/intro.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/intro.html",
-          "hash": "r8tu6lQ6mYyQX8IuDpQLfg=="
+          "relative_path": "contributing/setup.html",
+          "hash": "KTC3msO+tSKrFn+Eg6b/og=="
         }
       },
       "is_incremental": false,
@@ -3962,11 +3710,47 @@
     },
     {
       "type": "Toc",
-      "source_relative_path": "articles/toc.yml",
+      "source_relative_path": "contributing/toc.yml",
       "output": {
         ".html": {
-          "relative_path": "articles/toc.html",
-          "hash": "guvakykMCc/qYq5bEZc9ew=="
+          "relative_path": "contributing/toc.html",
+          "hash": "b4Lu6hU7fMLQMhLIUCvUlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "contributing/using paging.md",
+      "output": {
+        ".html": {
+          "relative_path": "contributing/using paging.html",
+          "hash": "XTHvpKerx6EuGNSn+wp9zA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "contributing/writing documentation.md",
+      "output": {
+        ".html": {
+          "relative_path": "contributing/writing documentation.html",
+          "hash": "OyTo2nea5b9oJxB8C8VpJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "contributing/writing tests.md",
+      "output": {
+        ".html": {
+          "relative_path": "contributing/writing tests.html",
+          "hash": "KKNGxSugLMaKEmb5Ul9Sog=="
         }
       },
       "is_incremental": false,
@@ -4305,7 +4089,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "QmrY6zvAGTIyExVCgKQz5Q=="
+          "hash": "Pbs/PVRjas6L3/YmB264Ag=="
         }
       },
       "is_incremental": false,
@@ -4329,7 +4113,223 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "WPLsPBvUZWuZlTTGOA1L1g=="
+          "hash": "o9PNSQ63xfQgEf4Y87V0oA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/configuring authentication.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/configuring authentication.html",
+          "hash": "JuivqFpK5N+lZtw1Zq3cWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/custom-authentication-provider.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/custom-authentication-provider.html",
+          "hash": "EHfG+Tr5/0M2QdL2myieKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/fields-add.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/fields-add.html",
+          "hash": "xfN+yPUhymF6XTWR0TpIsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/fields-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/fields-intro.html",
+          "hash": "cJBqeMs6ytzecNOAXBxqCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/files-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/files-intro.html",
+          "hash": "P26bZdKOQHuSJ4MImtYKvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/files-large.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/files-large.html",
+          "hash": "ZekUgW7c+61ipTQRNE1/xQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/listitems-fields.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/listitems-fields.html",
+          "hash": "/++tCtSUZwy0AxLOm3cC/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/listitems-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/listitems-intro.html",
+          "hash": "WW5udTESyGdXB7eQ8AQQBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/pages-header.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/pages-header.html",
+          "hash": "UO1bm8lBDkVKpNS7UaavXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/pages-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/pages-intro.html",
+          "hash": "LQqaVUM9uPTnXY56jS/2Pw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/pages-multilingual.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/pages-multilingual.html",
+          "hash": "sPwEYU9z2U/7aHX7jFUsMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/pages-promote.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/pages-promote.html",
+          "hash": "6RWkkfEY4o0vlfraUmaAkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/pages-social.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/pages-social.html",
+          "hash": "U74T51ndVyBgrnN8tVp7dw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/pages-webparts.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/pages-webparts.html",
+          "hash": "WkNiveBmJBW0aEYQ/nezsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/pnp core settings.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/pnp core settings.html",
+          "hash": "5RWBdC7RP5JzTq5Y10YEDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/readme.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/readme.html",
+          "hash": "EdjVj8wv9dA/LBGcCt4ypg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "using-the-sdk/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/toc.html",
+          "hash": "J/v7/YPzPEoWEdipZdoUYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/using paging.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/using paging.html",
+          "hash": "nfm/+/cbW9uOtjm1j75lNw=="
         }
       },
       "is_incremental": false,
@@ -4350,7 +4350,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 39,
+          "total_file_count": 38,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

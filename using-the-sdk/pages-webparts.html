@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with web parts and text parts | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with web parts and text parts | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/pages-webparts.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-web-parts-and-text-parts">Working with web parts and text parts</h1>
+
+<p>A page is a canvas with a layout (the sections and columns) and on that canvas you can add controls: simple text parts or more complex web parts. This chapter shows how you can create, configure and add a control on a page.</p>
+<h2 id="working-with-text-parts">Working with text parts</h2>
+<p>When you need to put (formatted) text on a page you need to create a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPageText.html">text part</a>, configure it and add it to a column of a section on the page. Below sample shows how a simple text can be added to a page with a one column section.</p>
+<pre><code class="lang-csharp">// Create the page
+var page = await context.Web.NewPageAsync();
+
+// adding sections to the page
+page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+// Adding text control to the first section, first column
+page.AddControl(page.NewTextPart(&quot;PnP Rocks!&quot;), page.Sections[0].Columns[0]);
+
+// Save the page
+await page.SaveAsync(&quot;MyPage.aspx&quot;);
+</code></pre>
+<p>The modern page text part however also supports formatted text, for that you need to &quot;reverse engineer&quot; the needed html syntax. The easiest approach is using simply configuring the formatted text on a page (e.g. named &quot;sample&quot;) and then use <a href="https://github.com/pnp/powershell">PnP PowerShell</a> to read the raw text value.</p>
+<pre><code class="lang-PowerShell">Connect-PnPOnline -url https://contoso.sharepoint.com/sites/demo -PnPManagementShell
+
+// show the components on the page
+Get-PnPClientSideComponent -Page &quot;sample&quot;
+
+// get a reference to the component you want to inspect
+$text = Get-PnPClientSideComponent -Page &quot;sample&quot; -InstanceId 1ae36bd9-1635-447e-a77c-87621e2016c3
+
+// output the text value to the clipboard
+$text.Text | clip
+</code></pre>
+<p>Below sample shows formatted text being added</p>
+<pre><code class="lang-csharp">// Create the page
+var page = await context.Web.NewPageAsync();
+
+// adding sections to the page
+page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+// Adding formatted text control to the first section, first column
+page.AddControl(page.NewTextPart(&quot;PnP &lt;span class=\&quot;fontSizeXLargePlus\&quot;&gt;&lt;span class=\&quot;fontColorRed\&quot;&gt;&lt;strong&gt;rocks!&lt;/strong&gt;&lt;/span&gt;&lt;/span&gt;&quot;), page.Sections[0].Columns[0]);
+
+// Save the page
+await page.SaveAsync(&quot;MyPage.aspx&quot;);
+</code></pre>
+<h2 id="working-with-web-parts">Working with web parts</h2>
+<p>Adding web parts is quite similar to adding text parts, but the configuration of web parts takes more work. When creating a web part you start from a blueprint of that web part, using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_">AvailablePageComponentsAsync method</a> you can get a list of all the possible web parts that can be added on a page. If you've installed custom web parts on the site hosting the page then these will show up as well in that list.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_">AvailablePageComponentsAsync method</a> is a call that takes quite some time and returns a large chunk of data. It's best to do this call only once and use the result while you configure pages in your application.</p>
+</div>
+<p>Below sample shows the basics of adding an out of the box web part on a page. Note that the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_DefaultWebPartToWebPartId_PnP_Core_Model_SharePoint_DefaultWebPart_">DefaultWebPartToWebPartId method</a> is used to translate out of the box web parts to their respective internal web part names (guids).</p>
+<pre><code class="lang-csharp">// Create the page
+var page = await context.Web.NewPageAsync();
+
+// adding sections to the page
+page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+// get the web part 'blueprint'
+var availableComponents = await page.AvailablePageComponentsAsync();
+var imageWebPartComponent = availableComponents.FirstOrDefault(p =&gt; p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+// add the web part to the first column of the first section
+page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[0].Columns[0]);
+
+// Save the page
+await page.SaveAsync(&quot;MyPage.aspx&quot;);
+</code></pre>
+<p>Above code adds an unconfigured image web part to the page, but what if you wanted to add a configured web part? The web part configuration is stored in a json blob and configuring the web part on a page and copying the json blob is often the easiest approach. The easiest approach to do this is using the <strong>WorkBench</strong>: take your site url and append <code>_layouts/15/workbench.aspx</code> and you'll see an editor opening up. Put the web part you need on the page and configure it. Once that's done click on the <strong>Web part data</strong> button on the toolbar and you should should see this:</p>
+<p><img src="../images/workbench.png" alt="page in maintenance mode"></p>
+<p>Copy the json shown in the <strong>Modern Pages</strong> tab <strong>without the surrounding square brackets</strong>. Once you've the web part configuration json you need to escape the double quotes, simply doing a replace of &quot; with \&quot; does the trick.</p>
+<pre><code class="lang-csharp">// Create the page
+var page = await context.Web.NewPageAsync();
+
+// adding sections to the page
+page.AddSection(CanvasSectionTemplate.OneColumn, 1);
+
+// get the web part 'blueprint'
+var availableComponents = await page.AvailablePageComponentsAsync();
+var imageWebPartComponent = availableComponents.FirstOrDefault(p =&gt; p.Id == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+var image = page.NewWebPart(imageWebPartComponent);
+image.PropertiesJson = &quot;{\&quot;controlType\&quot;:3,\&quot;id\&quot;:\&quot;86a83e35-2cc1-4f62-9771-0e8b8acc6c65\&quot;,...dropped for clarity...,\&quot;addedFromPersistedData\&quot;:true}&quot;;
+
+// add the web part to the first column of the first section
+page.AddControl(image, page.Sections[0].Columns[0]);
+
+// Save the page
+await page.SaveAsync(&quot;MyPage.aspx&quot;);
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Above approach using the workbench also works good for getting a formatted text snippet.</p>
+</div>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

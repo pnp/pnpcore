@@ -1,0 +1,454 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Getting started with the PnP Core SDK | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Getting started with the PnP Core SDK | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/readme.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="getting-started-with-the-pnp-core-sdk">Getting started with the PnP Core SDK</h1>
+
+<p>The PnP Core SDK is designed to be used in modern .Net development, hence it relies on dependency injection (<a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1">generic host</a>) for its core services. This implies that before you can actually use the PnP Core SDK you need to configure the needed services. Once that's done you can obtain a <code>PnPContext</code> from the <code>PnPContextFactory</code> and start using the library.</p>
+<h2 id="where-is-the-code">Where is the code?</h2>
+<p>The PnP Core SDK is maintained in the PnP GitHub repository: <a href="https://github.com/pnp/pnpcore">https://github.com/pnp/pnpcore</a>. You'll find:</p>
+<ul>
+<li>The code of the PnP Core SDK in the <code>src\sdk</code> folder</li>
+<li>Examples of how to use the PnP Core SDK in the <code>src\samples</code> folder</li>
+<li>The source of the documentation you are reading right now in the <code>docs</code> folder</li>
+</ul>
+<h2 id="referencing-the-pnp-core-sdk-in-your-project">Referencing the PnP Core SDK in your project</h2>
+<p>The recommended approach is to use the preview <a href="https://www.nuget.org/packages/PnP.Core">PnP.Core nuget package</a> together with the preview <a href="https://www.nuget.org/packages/PnP.Core.Auth">PnP.Core.Auth nuget package</a>. The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
+Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version. If you don't want to rely on the PnP.Core.Auth package, you can eventually <a href="custom-authentication-provider.html">implement your own Authentication Provider</a>.</p>
+<p>If you want to debug the SDK code you can include the PnP Core project (<code>src\PnP.Core\PnP.Core.csproj</code>) in your project as a dependency.</p>
+<h2 id="configuring-the-needed-services">Configuring the needed services</h2>
+<p>In order to configure the needed services in a .Net Core console app, you can rely on the <code>AddPnPCore</code> extension method (defined in the PnP.Core nuget package) and on the <code>AddPnPCoreAuthentication</code> method (defined in the PnP.Core.Auth nuget package), like in the following code excerpt:</p>
+<pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
+// Set environment to use
+.UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables
+// Configure logging
+// Configure logging
+.ConfigureServices((hostingContext, services) =&gt;
+{
+    // Add the PnP Core SDK library services
+    services.AddPnPCore();
+    // Add the PnP Core SDK library services configuration from the appsettings.json file
+    services.Configure&lt;PnPCoreOptions&gt;(Configuration.GetSection(&quot;PnPCore&quot;));
+    // Add the PnP Core SDK Authentication Providers
+    services.AddPnPCoreAuthentication();
+    // Add the PnP Core SDK Authentication Providers configuration from the appsettings.json file
+    services.Configure&lt;PnPCoreAuthenticationOptions&gt;(Configuration.GetSection(&quot;PnPCore&quot;));
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+</code></pre>
+<p>And you will also need to provide the configuration in the <code>appsettings.json</code> file, using a configuration section like the following one:</p>
+<pre><code class="lang-json">{
+  &quot;PnPCore&quot;: {
+    &quot;DisableTelemetry&quot;: &quot;false&quot;,
+    &quot;HttpRequests&quot;: {
+      &quot;UserAgent&quot;: &quot;ISV|Contoso|ProductX&quot;,
+      &quot;Timeout&quot;: &quot;100&quot;,
+      &quot;SharePointRest&quot;: {
+        &quot;UseRetryAfterHeader&quot;: &quot;false&quot;,
+        &quot;MaxRetries&quot;: &quot;10&quot;,
+        &quot;DelayInSeconds&quot;: &quot;3&quot;,
+        &quot;UseIncrementalDelay&quot;: &quot;true&quot;
+      },
+      &quot;MicrosoftGraph&quot;: {
+        &quot;UseRetryAfterHeader&quot;: &quot;true&quot;,
+        &quot;MaxRetries&quot;: &quot;10&quot;,
+        &quot;DelayInSeconds&quot;: &quot;3&quot;,
+        &quot;UseIncrementalDelay&quot;: &quot;true&quot;
+      }
+    },
+    &quot;PnPContext&quot;: {
+      &quot;GraphFirst&quot;: &quot;true&quot;,
+      &quot;GraphCanUseBeta&quot;: &quot;true&quot;,
+      &quot;GraphAlwaysUseBeta&quot;: &quot;false&quot;
+    },
+    &quot;Credentials&quot;: {
+      &quot;DefaultConfiguration&quot;: &quot;interactive&quot;,
+      &quot;Configurations&quot;: {
+        &quot;interactive&quot;: {
+          &quot;ClientId&quot;: &quot;{your_client_id}&quot;,
+          &quot;TenantId&quot;: &quot;{your_tenant_id}&quot;,
+          &quot;Interactive&quot;: {
+            &quot;RedirectUri&quot;: &quot;http://localhost&quot;
+          }
+        }
+      }
+    },
+    &quot;Sites&quot;: {
+      &quot;SiteToWorkWith&quot;: {
+        &quot;SiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnp&quot;,
+        &quot;AuthenticationProviderName&quot;: &quot;interactive&quot;
+      },
+    }
+  }
+}
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The defined url's are case sensitive. The PnP Core SDK internally does a lot of batching to optimize performance and in SharePoint REST batching the case of the used url's needs to be correct.</p>
+</div>
+<p>You should provide the <code>ClientId</code> and <code>TenantId</code> for an application registered in Azure Active Directory and configured with proper permissions, accordingly to your needs. For example, you could register an app in Azure Active Directory with delegated permission for:</p>
+<ul>
+<li>Microsoft Graph: <code>Group.ReadWrite.All</code></li>
+<li>Microsoft Graph: <code>User.ReadWrite.All</code></li>
+<li>SharePoint Online: <code>AllSites.FullControl</code></li>
+<li>SharePoint Online: <code>TermStore.ReadWrite.All</code></li>
+<li>SharePoint Online: <code>User.ReadWrite.All</code></li>
+</ul>
+<p>As the Redirect URI, in Web platform enter <strong>http://localhost</strong>.</p>
+<p>If you don't want to register a custom app in your target Azure Active Directory, you can skip the <code>ClientId</code> and <code>TenantId</code> properties and the PnP Core SDK will rely on a multi-tenant application that will be registered on your tenant, upon admin consent.</p>
+<p>In the above example, the authentication will rely on the <code>InteractiveAuthenticationProvider</code> (defined in the PnP.Core.Auth nuget package) so that you will simply need to authenticate with a set of valid credentials for your target tenant.</p>
+<p>If you like to configure the .Net Core console app in code, without relying on the <code>appsettings.json</code> file, you can also use the following syntax:</p>
+<pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
+// Set environment to use
+.UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables
+// Configure logging
+.ConfigureServices((hostingContext, services) =&gt;
+{
+  // Add the PnP Core SDK library
+  services.AddPnPCore(options =&gt; {
+      options.PnPContext.GraphFirst = true;
+      options.HttpRequests.UserAgent = &quot;ISV|Contoso|ProductX&quot;;
+
+      options.Sites.Add(&quot;SiteToWorkWith&quot;, new PnPCoreSiteOptions
+      {
+          SiteUrl = &quot;https://contoso.sharepoint.com/sites/pnp&quot;
+      });
+  });
+  services.AddPnPCoreAuthentication(
+      options =&gt; {
+          // Configure an Authentication Provider relying on the interactive authentication
+          options.Credentials.Configurations.Add(&quot;interactive&quot;,
+              new PnPCoreAuthenticationCredentialConfigurationOptions
+              {
+                  ClientId = &quot;{your_client_id}&quot;,
+                  TenantId = &quot;{your_tenant_id}&quot;,
+                  Interactive = new PnPCoreAuthenticationInteractiveOptions
+                  {
+                      RedirectUri = new Uri(&quot;http://localhost&quot;)
+                  }
+              });
+
+          // Configure the default authentication provider
+          options.Credentials.DefaultConfiguration = &quot;interactive&quot;;
+
+          // Map the site defined in AddPnPCore with the 
+          // Authentication Provider configured in this action
+          options.Sites.Add(&quot;SiteToWorkWith&quot;,
+              new PnPCoreAuthenticationSiteOptions
+              {
+                  AuthenticationProviderName = &quot;interactive&quot;
+              });
+    }
+  );
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+</code></pre>
+<p>In advanced scenarios, you can consider using code-based configuration of registered services, like in the following code excerpt. Typically you would also include logging as well.</p>
+<pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
+// Set environment to use
+.UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables
+// Configure logging
+.ConfigureServices((hostingContext, services) =&gt;
+{
+  // Read the custom configuration from the appsettings.&lt;environment&gt;.json file
+  var customSettings = new CustomSettings();
+  hostingContext.Configuration.Bind(&quot;CustomSettings&quot;, customSettings);
+
+  // Create an instance of the Interactive Authentication Provider
+  var authenticationProvider = new InteractiveAuthenticationProvider(
+                  customSettings.ClientId,
+                  customSettings.TenantId,
+                  customSettings.RedirectUri);
+
+  // Add the PnP Core SDK services
+  services
+  .AddPnPCore(options =&gt; {
+
+      // You can explicitly configure all the settings, or you can
+      // simply use the default values
+      options.PnPContext.GraphFirst = true;
+      options.PnPContext.GraphCanUseBeta = true;
+      options.PnPContext.GraphAlwaysUseBeta = false;
+
+      options.HttpRequests.UserAgent = &quot;NONISV|SharePointPnP|PnPCoreSDK&quot;;
+      options.HttpRequests.MicrosoftGraph = new PnPCoreHttpRequestsGraphOptions
+      {
+         UseRetryAfterHeader = true,
+         MaxRetries = 10,
+         DelayInSeconds = 3,
+         UseIncrementalDelay = true,
+      };
+      options.HttpRequests.SharePointRest = new PnPCoreHttpRequestsSharePointRestOptions
+      {
+         UseRetryAfterHeader = true,
+         MaxRetries = 10,
+         DelayInSeconds = 3,
+         UseIncrementalDelay = true,
+      };
+
+      options.DefaultAuthenticationProvider = authenticationProvider;
+
+      options.Sites.Add(&quot;DemoSite&quot;,
+          new PnP.Core.Services.Builder.Configuration.PnPCoreSiteOptions
+          {
+              SiteUrl = customSettings.DemoSiteUrl,
+              AuthenticationProvider = authenticationProvider
+          });
+  });
+})
+// Let the builder know we're running in a console
+.UseConsoleLifetime()
+// Add services to the container
+.Build();
+</code></pre>
+<p>In above sample the following configuration file is used: <code>appsettings.demo.json</code></p>
+<pre><code class="lang-json">{
+  &quot;CustomSettings&quot;: {
+    &quot;ClientId&quot;: &quot;{client_id}&quot;,
+    &quot;TenantId&quot;: &quot;{tenant_id}&quot;,
+    &quot;DemoSiteUrl&quot;: &quot;https://contoso.sharepoint.com/sites/pnp&quot;,
+    &quot;RedirectUri&quot;: &quot;http://localhost&quot;
+  },
+  &quot;Logging&quot;: {
+    &quot;LogLevel&quot;: {
+      &quot;Default&quot;: &quot;Information&quot;
+    }
+  }
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>To learn more about how to setup authentication check the <a href="configuring%20authentication.html">Configuring authentication</a> article.</p>
+</div>
+<h2 id="obtaining-a-pnpcontext">Obtaining a PnPContext</h2>
+<p>The <code>PnPContext</code> is the entry point for using the PnP Core SDK, you can create a <code>PnPContext</code> from either a SharePoint site URL or the id of a Microsoft 365 group.</p>
+<pre><code class="lang-csharp">// Start console host
+await host.StartAsync();
+
+using (var scope = host.Services.CreateScope())
+{
+    // Obtain a PnP Context factory
+    var pnpContextFactory = scope.ServiceProvider.GetRequiredService&lt;IPnPContextFactory&gt;();
+    // Use the PnP Context factory to get a PnPContext for the given configuration
+    using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+    {
+        // See next chapter on how to use the PnPContext
+    }
+
+    using (var context = await pnpContextFactory.CreateAsync(&quot;Microsoft 365 Group guid&quot;))
+    {
+        // See next chapter on how to use the PnPContext
+    }
+}
+
+// Cleanup console host
+host.Dispose();
+</code></pre>
+<p>Next to creating a new <code>PnPContext</code> you can also clone an existing one, cloning is very convenient if you for example created a context for the root web of your site collection but now want to work with a sub site. Below snippet shows how to use cloning:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    var web = await context.Web.GetAsync();
+    Console.WriteLine($&quot;Title: {web.Title}&quot;);
+
+    using (var subSiteContext = context.Clone(new Uri(&quot;https://contoso.sharepoint.com/sites/siteA/subsite&quot;)))
+    {
+        var subWeb = await subSiteContext.Web.GetAsync();
+        Console.WriteLine($&quot;Sub site title: {subWeb.Title}&quot;);
+    }
+}
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The defined url's are case sensitive. The PnP Core SDK internally does a lot of batching to optimize performance and in SharePoint REST batching the case of the used url's needs to be correct.</p>
+</div>
+<h2 id="using-the-pnpcontext-for-operations-on-microsoft-365">Using the PnPContext for operations on Microsoft 365</h2>
+<p>All operations on Microsoft 365 start from the <code>PnPContext</code> instance you've obtained from the <code>PnPContextFactory</code>. Below sample shows a simple get operation that requests data from Microsoft 365 and outputs it to the console:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    var web = await context.Web.GetAsync();
+    Console.WriteLine($&quot;Title: {web.Title}&quot;);
+}
+</code></pre>
+<p>Here follows another example that shows how to define which properties need to be loaded while executing the request:</p>
+<pre><code class="lang-csharp">var team = await context.Team.GetAsync(p =&gt; p.Description, p =&gt; p.FunSettings, p =&gt; p.DiscoverySettings, p =&gt; p.Members);
+</code></pre>
+<p>When you see an asynchronous call being used, it means that the call is executed immediately.
+However, you can easily group multiple requests in a batch and send them in one call to the server via the built in batching support:</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;TestList&quot;);
+if (myList != null)
+{
+    // Create three list items and add them via single server request
+    Dictionary&lt;string, object&gt; values = new Dictionary&lt;string, object&gt;
+    {
+        { &quot;Title&quot;, &quot;PnP Rocks!&quot; }
+    };
+
+    await myList.Items.AddBatchAsync(values);
+    await myList.Items.AddBatchAsync(values);
+    await myList.Items.AddBatchAsync(values);
+
+    // Send batch to the server
+    await context.ExecuteAsync();
+}
+</code></pre>
+<p>To update Microsoft 365 you simply update the needed properties in your model and then call <code>UpdateAsync</code> or <code>UpdateBatchAsync</code> (used for batching):</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;);
+
+if (myList != null)
+{
+    myList.Description = $&quot;Updated on UTC {DateTime.UtcNow}&quot;;
+    await myList.UpdateAsync();
+}
+</code></pre>
+<p>Deleting follows a similar pattern, but now you use <code>DeleteAsync</code> or <code>Delete</code>:</p>
+<pre><code class="lang-csharp">var myList = await context.Web.Lists.GetByTitleAsync(&quot;ListToDelete&quot;);
+
+if (myList != null)
+{
+    await myList.DeleteAsync();
+}
+</code></pre>
+<p>If you like, you can also leverage a fluent syntax enriched with LINQ (Language Integrated Query). For example, in the following code excerpt you can see how to write a query for the items of a list.</p>
+<pre><code class="lang-csharp">var document = await((await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;)).Items
+                            .Where(i =&gt; i.Title == &quot;Sample Document&quot;)
+                            .Load(i =&gt; i.Id,
+                                  i =&gt; i.Title))
+                            .FirstOrDefaultAsync();
+
+if (document != null)
+{
+    Console.WriteLine($&quot;Document Title: {document.Title}&quot;);
+}
+</code></pre>
+<p>Another approach to mainly limit the data that's being pulled from Microsoft 365 is using the <code>LoadProperties()</code> method on the properties specified in the lambda expression(s), below example shows using <code>LoadProperties()</code> in a recursive manner: next to the Title property of the Web this request also loads the Lists for the Web and for each List it loads the Id, Title, DocumentTemplate and ContentTypes property. Given List ContentTypes is a collection, the Name and FieldLinks properties of each content type are loaded and, in turn, for ContentType FieldLinks, the Name property is loaded.</p>
+<pre><code class="lang-csharp">await context.Web.GetAsync(p =&gt; p.Title,
+                           p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name),
+                           p =&gt; p.Lists.LoadProperties(p =&gt; p.Id,
+                                                       p =&gt; p.Title,
+                                                       p =&gt; p.DocumentTemplate,
+                               p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name,
+                                    p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)))
+                          );
+</code></pre>
+<p>The <code>LoadProperties()</code> method can also be combined with the various <code>GetBy</code> methods: below call will load the list with as title &quot;Documents&quot; and for that list all <code>ContentTypes</code> are loaded with all their respective <code>FieldLinks</code>.</p>
+<pre><code class="lang-csharp">var web = context.Web;
+var list = web.Lists.GetByTitleAsync(&quot;Documents&quot;,
+                                    p =&gt; p.Title,
+                                    p =&gt; p.ListExperience,
+                                    p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Id,
+                                                                      p =&gt; p.Name,
+                                                                      p=&gt;p.FieldLinks.LoadProperties(p=&gt;p.Id,
+                                                                                                      p=&gt;p.Name)));
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>
