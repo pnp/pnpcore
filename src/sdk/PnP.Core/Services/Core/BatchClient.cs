@@ -1036,6 +1036,8 @@ namespace PnP.Core.Services
             {
                 using (var request = new HttpRequestMessage(restRequest.Method, restRequest.ApiCall.Request))
                 {
+                    PnPContext.Logger.LogDebug($"{restRequest.Method} {restRequest.ApiCall.Request}");
+
                     if (!string.IsNullOrEmpty(restRequest.ApiCall.JsonBody))
                     {
                         content = new StringContent(restRequest.ApiCall.JsonBody, Encoding.UTF8, "application/json");
@@ -1084,7 +1086,17 @@ namespace PnP.Core.Services
                     {
 #endif
                         // Ensure the request contains authentication information
-                        Uri site = new Uri(restRequest.ApiCall.Request.Substring(0, restRequest.ApiCall.Request.IndexOf("/_api/", 0)));
+                        Uri site;
+                        if (restRequest.ApiCall.Request.IndexOf("/_api/", 0) > -1)
+                        {
+                            site = new Uri(restRequest.ApiCall.Request.Substring(0, restRequest.ApiCall.Request.IndexOf("/_api/", 0)));
+                        }
+                        else
+                        {
+                            // We need this as we use _layouts/15/download.aspx to download files 
+                            site = new Uri(restRequest.ApiCall.Request.Substring(0, restRequest.ApiCall.Request.IndexOf("/_layouts/", 0)));
+                        }
+
                         await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(site, request).ConfigureAwait(false);
 
                         // Send the request

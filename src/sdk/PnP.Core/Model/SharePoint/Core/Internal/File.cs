@@ -105,10 +105,9 @@ namespace PnP.Core.Model.SharePoint
         #region GetContent
         public async Task<Stream> GetContentAsync()
         {
-            var entity = EntityManager.GetClassInfo(GetType(), this);
-            string valueEndpoint = $"{entity.SharePointUri}/$value";
+            string downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?UniqueId={UniqueId}";
 
-            var apiCall = new ApiCall(valueEndpoint, ApiType.SPORest)
+            var apiCall = new ApiCall(downloadUrl, ApiType.SPORest)
             {
                 Interactive = true,
                 ExpectBinaryResponse = true,
