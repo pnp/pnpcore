@@ -1055,7 +1055,7 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
-        #region TESTS TO REVIEW - Checkin() variants
+        #region Checkin() variants
         [TestMethod]
         public async Task CheckinFileMajorVersionTest()
         {
@@ -2032,7 +2032,7 @@ namespace PnP.Core.Test.SharePoint
 
         //        // Download the content
         //        Stream downloadedContentStream = await fileToDownload.GetContentAsync(true);
-                
+
         //        var bufferSize = 2 * 1024 * 1024;  // 2 MB buffer
         //        using (var content = System.IO.File.Create("d:\\temp\\largetestfiles\\2gb.test.downloaded"))
         //        {
@@ -2040,12 +2040,11 @@ namespace PnP.Core.Test.SharePoint
         //            int read;
         //            while ((read = await downloadedContentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
         //            {
-        //                content.Write(buffer, 0, read);                        
+        //                content.Write(buffer, 0, read);
         //            }
         //        }
         //    }
         //}
-
         #endregion
 
         #region Add Template file
@@ -2450,7 +2449,7 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
-        #region TODO: TESTS TO REVIEW WITH IRM ENABLED TENANT -  Get File IRM
+        #region Get File IRM
         [TestMethod]
         public async Task GetFileIRMSettingsAsyncTest()
         {
@@ -2576,7 +2575,6 @@ namespace PnP.Core.Test.SharePoint
 
             await TestAssets.CleanupTestDocumentAsync(2);
         }
-        #endregion
 
         [TestMethod]
         public async Task GetFileEffectiveIRMSettingsTest()
@@ -2604,6 +2602,7 @@ namespace PnP.Core.Test.SharePoint
 
             await TestAssets.CleanupTestDocumentAsync(2);
         }
+        #endregion
 
         #region Get file versions
         [TestMethod]
