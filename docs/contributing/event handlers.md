@@ -18,7 +18,7 @@ Event handler | Delegate | Description
 
 Event handlers fire in a certain order when triggered by an action on the model. In below example a Team is loaded requiring a get request, as such the `GetApiCallOverrideHandler` fires. Unless the get request is cancelled in the event handler, the server is queried and JSON results are returned. During mapping of the JSON results to the model the `MappingHandler` is fired for each property for which there's no default mapping. Finally the full JSON to model mapping is done and the `PostMappingHandler` fires allowing you to perform extra processing if needed.
 
-![Event handler firing](../../images/eventhandler.png)
+![Event handler firing](../images/eventhandler.png)
 
 ### AddApiCallHandler
 
