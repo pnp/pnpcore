@@ -1,4 +1,4 @@
---batchresponse_84405a87-7c0c-48fd-a83f-8bd8aa9a164c
+--batchresponse_e3215151-8fce-4d17-9fe4-08cc7dc7e9f5
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","uri":"https://capadevtest.sharepoint.com/sites/pnpcoresdktestgroup/_api/Site","type":"SP.Site"},"GroupId":"9d1aef4b-f974-433e-a3ac-26d29fc6719c","Id":"a24405b9-c457-4548-875c-09c5b23339d5"}}
---batchresponse_84405a87-7c0c-48fd-a83f-8bd8aa9a164c--
+--batchresponse_e3215151-8fce-4d17-9fe4-08cc7dc7e9f5--

@@ -55,11 +55,40 @@ namespace PnP.Core.Test.Teams
         [TestMethod]
         public async Task GetChannelsAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(o => o.Channels);
                 Assert.IsTrue(team.Channels.Length > 0);
+            }
+        }
+
+        [TestMethod]
+        public void GetChannelsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+            }
+        }
+
+
+        [TestMethod]
+        public async Task GetGeneralChannelAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = await team.Channels.GetByDisplayNameAsync("General");
+
+                Assert.AreEqual(channel.MembershipType, TeamChannelMembershipType.Standard);
+                Assert.IsNotNull(channel.WebUrl);
+
             }
         }
     }
