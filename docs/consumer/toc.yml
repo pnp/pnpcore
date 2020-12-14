@@ -1,0 +1,46 @@
+- name: Getting started
+  href: readme.md
+- name: Authentication  
+  items:
+  - name: Configuration
+    href: configuring%20authentication.md
+  - name: Custom Authentication Providers
+    href: custom-authentication-provider.md
+- name: Site and List fields
+  items:
+  - name: Overview
+    href: fields-intro.md
+  - name: Adding fields
+    href: fields-add.md
+- name: List Items
+  items:
+  - name: Overview
+    href: listitems-intro.md
+  - name: Field handling
+    href: listitems-fields.md
+- name: Files
+  items:
+  - name: Overview
+    href: files-intro.md
+  - name: Large files
+    href: files-large.md
+- name: Pages
+  items:
+  - name: Overview
+    href: pages-intro.md
+  - name: Configuring the page header
+    href: pages-header.md
+  - name: Working with web parts and text parts
+    href: pages-webparts.md
+  - name: Publishing and promoting pages as news
+    href: pages-promote.md
+  - name: Multilingual pages
+    href: pages-multilingual.md
+  - name: Page commenting
+    href: pages-social.md
+- name: Miscellaneous
+  items:
+  - name: Get data using paging
+    href: using%20paging.md
+  - name: Configuring the PnP Core SDK
+    href: pnp%20core%20settings.md

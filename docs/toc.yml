@@ -1,7 +1,9 @@
-- name: Documentation
-  href: articles/
+- name: Using the SDK
+  href: consumer/
 - name: API Documentation
   href: api/
   homepage: api/index.md
+- name: Contributing
+  href: contributor/
 - name: Samples
   href: demos/README.md
