@@ -58,6 +58,7 @@ namespace PnP.Core.Services.Builder.Configuration
                     options.HttpSharePointRestUseRetryAfterHeader = pnpCoreOptions.Value.HttpRequests.SharePointRest.UseRetryAfterHeader;
                 }
                 options.HttpUserAgent = pnpCoreOptions.Value.HttpRequests.UserAgent;
+                options.HttpTimeout = pnpCoreOptions.Value.HttpRequests.Timeout;
             }
         }
     }

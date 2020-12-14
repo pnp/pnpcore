@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Reflection;
+using System.Threading;
 
 namespace PnP.Core.Services
 {
@@ -43,6 +44,11 @@ namespace PnP.Core.Services
                 httpUserAgent = value;
             }
         }
+
+        /// <summary>
+        /// Max duration of a http request in seconds. Defaults to 100 seconds, set to value -1 for an infinite timeout
+        /// </summary>
+        public int HttpTimeout { get; set; } = 100;
 
         /// <summary>
         /// Use the Retry-After header for calculating the delay in case of a retry. Defaults to false
@@ -142,5 +148,18 @@ namespace PnP.Core.Services
             // logger.LogInformation(PnPCoreResources.Log_Information_VersionTag, versionTag);
             return versionTag;
         }
+
+        internal TimeSpan GetHttpTimeout()
+        {
+            if (HttpTimeout == -1)
+            {
+                return Timeout.InfiniteTimeSpan;
+            }
+            else
+            {
+                return new TimeSpan(0, 0, HttpTimeout);
+            }
+        }
+
     }
 }

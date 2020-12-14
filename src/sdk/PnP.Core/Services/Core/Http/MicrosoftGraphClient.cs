@@ -41,6 +41,7 @@ namespace PnP.Core.Services
 
             client.BaseAddress = PnPConstants.MicrosoftGraphBaseUri;
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=true");
+            client.Timeout = globalSettings.GetHttpTimeout();
 
             if (!string.IsNullOrEmpty(globalSettings.HttpUserAgent))
             {

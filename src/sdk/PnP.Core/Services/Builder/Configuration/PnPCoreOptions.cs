@@ -50,6 +50,11 @@ namespace PnP.Core.Services.Builder.Configuration
         public string UserAgent { get; set; }
 
         /// <summary>
+        /// HTTP request timeout in seconds to use when making calls to SharePoint or Microsoft Graph
+        /// </summary>
+        public int Timeout { get; set; } = 100;
+
+        /// <summary>
         /// SharePoint Online REST options
         /// </summary>
         public PnPCoreHttpRequestsSharePointRestOptions SharePointRest { get; set; } = new PnPCoreHttpRequestsSharePointRestOptions();

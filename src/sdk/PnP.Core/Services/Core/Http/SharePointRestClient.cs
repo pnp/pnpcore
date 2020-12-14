@@ -40,6 +40,7 @@ namespace PnP.Core.Services
             }
 
             client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
+            client.Timeout = globalSettings.GetHttpTimeout();
 
             if (!string.IsNullOrEmpty(globalSettings.HttpUserAgent))
             {
