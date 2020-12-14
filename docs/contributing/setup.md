@@ -46,7 +46,7 @@ Once you've coded and tested your contribution you'll need to create a pull requ
 - Go to **Pull requests** in your fork and click on the green **New pull request** button
 - Ensure you've configured the base repository to be the `pnp/pnpcore` repo using the `dev` branch
 
-![pr](../../images/pullrequest.png)
+![pr](../images/pullrequest.png)
 
 - Click on **Create pull request**, provide a descriptive title and description and click on **Create pull request**
 - Ensure all **checks** have passed

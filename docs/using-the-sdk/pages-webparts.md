@@ -80,7 +80,7 @@ await page.SaveAsync("MyPage.aspx");
 
 Above code adds an unconfigured image web part to the page, but what if you wanted to add a configured web part? The web part configuration is stored in a json blob and configuring the web part on a page and copying the json blob is often the easiest approach. The easiest approach to do this is using the **WorkBench**: take your site url and append `_layouts/15/workbench.aspx` and you'll see an editor opening up. Put the web part you need on the page and configure it. Once that's done click on the **Web part data** button on the toolbar and you should should see this:
 
-![page in maintenance mode](../../images/workbench.png)
+![page in maintenance mode](../images/workbench.png)
 
 Copy the json shown in the **Modern Pages** tab **without the surrounding square brackets**. Once you've the web part configuration json you need to escape the double quotes, simply doing a replace of " with \\" does the trick.
 

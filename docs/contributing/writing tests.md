@@ -16,14 +16,14 @@ If you want to use and extend these unit tests then you'll need to do a simple o
 4. Open env.txt and put as content the value **xxx** (xxx identifies your test environment)
 5. Ensure that you have the **PnP O365 Management Shell** multi-tenant app registered in Azure AD and Consented - this is used for the Graph and SharePoint tests. Quickest way to set this up, is to either:
     * Use PnP PowerShell to connect to a site using the '-PnPO365ManagementShell' parameter see reference: [https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/connect-pnponline?view=sharepoint-ps](https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/connect-pnponline?view=sharepoint-ps)
-    * Refer to the User documentation article [Using the multi-tenant PnP Azure AD application](../consumer/configuring%20authentication.md)
+    * Refer to the User documentation article [Using the multi-tenant PnP Azure AD application](../using-the-sdk/configuring%20authentication.md)
 6. That should be it. Happy testing!
 
 ## Running the existing tests in offline mode
 
 The test model runs tests by default in an offline modus. This means that tests run really quick and that they should always work, even if you are offline (not connected to the Internet network). There are just few tests that forcibly require to be executed online, and those will fail when you are offline. After you've setup your environment for testing you should open the Visual Studio Test Explorer and click on the **Run all tests** button to verify that all tests run successfully on your computer.
 
-![Test explorer](../../images/test%20explorer.png)
+![Test explorer](../images/test%20explorer.png)
 
 ## Authoring new test cases
 
