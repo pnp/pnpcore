@@ -173,7 +173,7 @@ await testDocument.PublishAsync(&quot;Optional publish message&quot;);
 // Un-publish the file
 await testDocument.UnpublishAsync(&quot;Optional un-publish message&quot;);
 </code></pre>
-<h2 id="checking-out-undoing-a-checked-out-and-checking-in-files">Checking out, undoing a checked out and checking in files</h2>
+<h2 id="checking-out-undoing-check-out-and-checking-in-files">Checking out, undoing check out and checking in files</h2>
 <p>In SharePoint a file can be checked out by a user to &quot;lock&quot; the file and then later on checked in again. The same can be done using code, including undoing a checked out of another user via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CheckoutAsync">CheckoutAsync</a>, <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_CheckinAsync_System_String_PnP_Core_Model_SharePoint_CheckinType_">CheckinAsync</a> and <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_UndoCheckoutAsync">UndoCheckout</a> methods.</p>
 <div class="NOTE">
 <h5>Note</h5>
