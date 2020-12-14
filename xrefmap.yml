@@ -9823,12 +9823,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.Exists
   nameWithType: IFile.Exists
-- uid: PnP.Core.Model.SharePoint.IFile.GetContent
-  name: GetContent()
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContent
-  commentId: M:PnP.Core.Model.SharePoint.IFile.GetContent
-  fullName: PnP.Core.Model.SharePoint.IFile.GetContent()
-  nameWithType: IFile.GetContent()
+- uid: PnP.Core.Model.SharePoint.IFile.GetContent(System.Boolean)
+  name: GetContent(Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContent_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetContent(System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContent(System.Boolean)
+  nameWithType: IFile.GetContent(Boolean)
 - uid: PnP.Core.Model.SharePoint.IFile.GetContent*
   name: GetContent
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContent_
@@ -9836,12 +9836,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFile.GetContent
   nameWithType: IFile.GetContent
-- uid: PnP.Core.Model.SharePoint.IFile.GetContentAsync
-  name: GetContentAsync()
-  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync
-  commentId: M:PnP.Core.Model.SharePoint.IFile.GetContentAsync
-  fullName: PnP.Core.Model.SharePoint.IFile.GetContentAsync()
-  nameWithType: IFile.GetContentAsync()
+- uid: PnP.Core.Model.SharePoint.IFile.GetContentAsync(System.Boolean)
+  name: GetContentAsync(Boolean)
+  href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IFile.GetContentAsync(System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IFile.GetContentAsync(System.Boolean)
+  nameWithType: IFile.GetContentAsync(Boolean)
 - uid: PnP.Core.Model.SharePoint.IFile.GetContentAsync*
   name: GetContentAsync
   href: api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync_
@@ -25842,6 +25842,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.SharePointRest
   nameWithType: PnPCoreHttpRequestsOptions.SharePointRest
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.Timeout
+  name: Timeout
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_Timeout
+  commentId: P:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.Timeout
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.Timeout
+  nameWithType: PnPCoreHttpRequestsOptions.Timeout
+- uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.Timeout*
+  name: Timeout
+  href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_Timeout_
+  commentId: Overload:PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.Timeout
+  isSpec: "True"
+  fullName: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.Timeout
+  nameWithType: PnPCoreHttpRequestsOptions.Timeout
 - uid: PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.UserAgent
   name: UserAgent
   href: api/PnP.Core.Services.Builder.Configuration.PnPCoreHttpRequestsOptions.html#PnP_Core_Services_Builder_Configuration_PnPCoreHttpRequestsOptions_UserAgent
@@ -27007,6 +27020,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader
   nameWithType: PnPGlobalSettingsOptions.HttpSharePointRestUseRetryAfterHeader
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout
+  name: HttpTimeout
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpTimeout
+  commentId: P:PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout
+  nameWithType: PnPGlobalSettingsOptions.HttpTimeout
+- uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout*
+  name: HttpTimeout
+  href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpTimeout_
+  commentId: Overload:PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPGlobalSettingsOptions.HttpTimeout
+  nameWithType: PnPGlobalSettingsOptions.HttpTimeout
 - uid: PnP.Core.Services.PnPGlobalSettingsOptions.HttpUserAgent
   name: HttpUserAgent
   href: api/PnP.Core.Services.PnPGlobalSettingsOptions.html#PnP_Core_Services_PnPGlobalSettingsOptions_HttpUserAgent

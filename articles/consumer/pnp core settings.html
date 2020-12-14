@@ -94,6 +94,7 @@
     &quot;DisableTelemetry&quot;: &quot;false&quot;,
     &quot;HttpRequests&quot;: {
       &quot;UserAgent&quot;: &quot;ISV|Contoso|ProductX&quot;,
+      &quot;Timeout&quot;: &quot;100&quot;,
       &quot;SharePointRest&quot;: {
         &quot;UseRetryAfterHeader&quot;: &quot;false&quot;,
         &quot;MaxRetries&quot;: &quot;10&quot;,
@@ -167,6 +168,11 @@
 <td>PnPCore:HttpRequests:UserAgent</td>
 <td>NONISV|SharePointPnP|PnPCoreSDK</td>
 <td>Value set as user agent when the request is sent to Microsoft 365.</td>
+</tr>
+<tr>
+<td>PnPCore:HttpRequests:Timeout</td>
+<td>100</td>
+<td>Timeout in seconds for HTTP requests. Set higher if you need to for example download large files. Setting to -1 will result in an infinite timeout.</td>
 </tr>
 <tr>
 <td>PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader</td>
