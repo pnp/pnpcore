@@ -186,14 +186,16 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Get the content of the file.
         /// </summary>
+        /// <param name="streamContent">Already return the content before all bytes are read, needed for large file downloads</param>
         /// <returns>Stream containing the binary content of the file</returns>
-        Task<Stream> GetContentAsync();
+        Task<Stream> GetContentAsync(bool streamContent = false);
 
         /// <summary>
         /// Get the content of the file.
         /// </summary>
+        /// <param name="streamContent">Already return the content before all bytes are read, needed for large file downloads</param>
         /// <returns>Stream containing the binary content of the file</returns>
-        Stream GetContent();
+        Stream GetContent(bool streamContent = false);
 
         /// <summary>
         /// Get the content of the file.

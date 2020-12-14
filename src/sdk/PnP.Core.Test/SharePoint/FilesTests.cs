@@ -1996,6 +1996,58 @@ namespace PnP.Core.Test.SharePoint
         }
         #endregion
 
+        #region Work with very large files
+        //[TestMethod]
+        //public async Task AddVeryLargeFileTest()
+        //{
+        //    TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+
+        //        string fileName = TestCommon.GetPnPSdkTestAssetName("2gb.test");
+
+        //        IFile addedFile = await parentFolder.Files.AddAsync(fileName, System.IO.File.OpenRead($"d:\\temp\\largetestfiles\\2gb.test"));
+        //        // Test the created object
+        //        Assert.IsNotNull(addedFile);
+        //        Assert.AreEqual(fileName, addedFile.Name);
+        //        Assert.AreNotEqual(default, addedFile.UniqueId);
+
+        //        //await addedFile.DeleteAsync();
+        //    }
+        //}
+
+        //[TestMethod]
+        //public async Task DownloadVeryLargeFileTest()
+        //{
+        //    TestCommon.Instance.Mocking = false;
+        //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+        //    {
+        //        IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+
+        //        string fileName = TestCommon.GetPnPSdkTestAssetName("2gb.test");
+
+        //        string fileUrl = $"{parentFolder.ServerRelativeUrl}/{fileName}";
+        //        IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync(fileUrl);
+
+        //        // Download the content
+        //        Stream downloadedContentStream = await fileToDownload.GetContentAsync(true);
+                
+        //        var bufferSize = 2 * 1024 * 1024;  // 2 MB buffer
+        //        using (var content = System.IO.File.Create("d:\\temp\\largetestfiles\\2gb.test.downloaded"))
+        //        {
+        //            var buffer = new byte[bufferSize];
+        //            int read;
+        //            while ((read = await downloadedContentStream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+        //            {
+        //                content.Write(buffer, 0, read);                        
+        //            }
+        //        }
+        //    }
+        //}
+
+        #endregion
+
         #region Add Template file
 
         [TestMethod]

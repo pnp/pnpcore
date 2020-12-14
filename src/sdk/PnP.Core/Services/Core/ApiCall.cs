@@ -17,6 +17,7 @@
             Interactive = false;
             BinaryBody = null;
             ExpectBinaryResponse = false;
+            StreamResponse = false;
         }
 
         internal ApiCall(string xmlBody, string receivingProperty = null)
@@ -31,6 +32,7 @@
             Interactive = false;
             BinaryBody = null;
             ExpectBinaryResponse = false;
+            StreamResponse = false;
         }
 
         /// <summary>
@@ -86,5 +88,10 @@
         /// Indicates whether the call expects a binary response
         /// </summary>
         internal bool ExpectBinaryResponse { get; set; }
+
+        /// <summary>
+        /// Indicates whether the response will be streamed, meaning we'll return the first bytes before all the content was downloaded
+        /// </summary>
+        internal bool StreamResponse { get; set; }
     }
 }

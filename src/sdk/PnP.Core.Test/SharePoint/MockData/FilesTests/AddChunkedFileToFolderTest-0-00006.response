@@ -1,1 +1,9 @@
-{"d":{"ContinueUpload":"8388608"}}
+--batchresponse_507e8354-dea0-4461-b504-f52daa485a33
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+
+--batchresponse_507e8354-dea0-4461-b504-f52daa485a33--

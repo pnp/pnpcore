@@ -1097,10 +1097,17 @@ namespace PnP.Core.Services
                             site = new Uri(restRequest.ApiCall.Request.Substring(0, restRequest.ApiCall.Request.IndexOf("/_layouts/", 0)));
                         }
 
+                        // Do we need a streaming download?
+                        HttpCompletionOption httpCompletionOption = HttpCompletionOption.ResponseContentRead;
+                        if (restRequest.ApiCall.StreamResponse)
+                        {
+                            httpCompletionOption = HttpCompletionOption.ResponseHeadersRead;
+                        }
+
                         await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(site, request).ConfigureAwait(false);
 
                         // Send the request
-                        HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
+                        HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, httpCompletionOption).ConfigureAwait(false);
 
                         // Process the request response
                         if (response.IsSuccessStatusCode)
@@ -1109,7 +1116,7 @@ namespace PnP.Core.Services
                             Stream requestResponseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
 #if DEBUG
-                            if (PnPContext.Mode == TestMode.Record)
+                            if (PnPContext.Mode == TestMode.Record && !restRequest.ApiCall.StreamResponse)
                             {
                                 // Call out to the rewrite handler if that one is connected
                                 if (MockingFileRewriteHandler != null)

@@ -83,8 +83,8 @@ namespace PnP.Core.Model.SharePoint
 
         private static async Task<File> ChunkedFileUpload(File newFile, Stream content, bool overwrite)
         {
-            // 2 MB chunks
-            int chunkSizeBytes = 2 * 1024 * 1024;
+            // 10 MB chunks
+            int chunkSizeBytes = 10 * 1024 * 1024;
 
             // Upload the files in chunks
             var firstChunk = true;

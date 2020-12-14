@@ -103,7 +103,7 @@ namespace PnP.Core.Model.SharePoint
         #region Extension methods
 
         #region GetContent
-        public async Task<Stream> GetContentAsync()
+        public async Task<Stream> GetContentAsync(bool streamContent = false)
         {
             string downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?UniqueId={UniqueId}";
 
@@ -111,15 +111,16 @@ namespace PnP.Core.Model.SharePoint
             {
                 Interactive = true,
                 ExpectBinaryResponse = true,
+                StreamResponse = streamContent
             };
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
             return response.BinaryContent;
         }
 
-        public Stream GetContent()
+        public Stream GetContent(bool streamContent = false)
         {
-            return GetContentAsync().GetAwaiter().GetResult();
+            return GetContentAsync(streamContent).GetAwaiter().GetResult();
         }
 
 
