@@ -6,12 +6,22 @@
     href: configuring%20authentication.md
   - name: Custom Authentication Providers
     href: custom-authentication-provider.md
-- name: Site and List fields
+- name: Lists
+  items:
+  - name: Overview
+    href: lists-intro.md
+  - name: working with views
+    href: lists-views.md
+- name: Fields
   items:
   - name: Overview
     href: fields-intro.md
   - name: Adding fields
     href: fields-add.md
+- name: Content types
+  items:
+  - name: Overview
+    href: contenttypes-intro.md
 - name: List Items
   items:
   - name: Overview
@@ -38,6 +48,10 @@
     href: pages-multilingual.md
   - name: Page commenting
     href: pages-social.md
+- name: Folders
+  items:
+  - name: Overview
+    href: folders-intro.md
 - name: Miscellaneous
   items:
   - name: Get data using paging
