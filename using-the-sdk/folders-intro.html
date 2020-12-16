@@ -82,7 +82,86 @@
                   </div>
                     <h1 id="working-with-folders">Working with folders</h1>
 
-<p>todo</p>
+<p>A list or library can use folders to build a structure to manage the list items or files. Folders can also exist at the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a> level, so outside the context of a list or library.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with lists
+}
+</code></pre>
+<h2 id="getting-folders">Getting folders</h2>
+<p>Lists and libraries do have a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RootFolder">RootFolder property</a> allowing you to enumerate content inside, but also the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a> has a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Folders">collection of Folders</a>, a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_RootFolder">RootFolder</a> and <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByIdAsync_Guid_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____">GetFolderByIdAsync</a> and <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____">GetFolderByServerRelativeUrlAsync</a> methods. All of these approach either give you an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html">IFolder</a> or an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolderCollection.html">IFolderCollection</a> that you can use to work with.</p>
+<pre><code class="lang-csharp">// Get a folder by loading it via it's server relative url
+var folder = await context.Web.GetFolderByServerRelativeUrlAsync($&quot;{context.Uri.PathAndQuery}/SiteAssets&quot;); 
+
+// Get a folder by id
+var folder = await context.Web.GetFolderByIdAsync(new Guid(&quot;d50ec969-cb27-4a49-839f-3c25d1d607d5&quot;)); 
+
+// Get a folder via the list
+var folder = (await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, p =&gt; p.RootFolder)).RootFolder;
+
+// Get root folder of a library via a LINQ query
+IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
+
+// Get root folder of the web (for files living outside of a document library)
+IFolder folder = (await context.Web.GetAsync(p =&gt; p.RootFolder)).RootFolder;
+
+// Get folder collection of a web and pick the SiteAssets folder
+await context.Web.GetAsync(p =&gt; p.Folders);
+var folder = context.Web.Folders.FirstOrDefault(p=&gt;p.Name == &quot;SiteAssets&quot;);
+</code></pre>
+<h3 id="the-folder-property-bag">The Folder property bag</h3>
+<p>Each folder also has a so called property bag, a list key/value pairs providing more information about the folder. You can read this property bag, provided via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_Properties">IFolder Properties property</a>, and add new key/value pairs to it.</p>
+<pre><code class="lang-csharp">// Get a folder by loading it via it's server relative url, also load the properties (= property bag)
+var folder = await context.Web.GetFolderByServerRelativeUrlAsync($&quot;{context.Uri.PathAndQuery}/SiteAssets&quot;, f =&gt; f.Properties); 
+
+// Enumerate the folder property bag
+foreach(var property in folder.Properties)
+{
+    // Do something with the property
+}
+
+// Add a new property
+folder[&quot;myPropertyKey&quot;] = &quot;Some value&quot;;
+await folder.Properties.UpdateAsync();
+</code></pre>
+<h2 id="adding-folders">Adding folders</h2>
+<p>When working with folders there always is a root folder or folder collection present, a web has a root folder and folders collection and lists and libraries have a root folder. Adding folders implies adding folder as sub folder of an existing folder and this can be done by adding a new IFolder into an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolderCollection.html">IFolderCollection</a> by using the Add methods or using <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_System_String_">EnsureFolderAsync</a>.</p>
+<pre><code class="lang-csharp">// Get the root folder of the Documents library
+var folder = (await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, p =&gt; p.RootFolder)).RootFolder;
+
+// Add a folder 
+var subFolder = await folder.Folders.AddAsync(&quot;My folder&quot;);
+</code></pre>
+<h3 id="ensure-a-folder-path">Ensure a folder path</h3>
+<p>When adding folders a very convenient method to use is the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_System_String_">EnsureFolderAsync</a> method as this one can take a folder path and verify each part of the path and create it if needed.</p>
+<pre><code class="lang-csharp">// Get the root folder of the Site Pages library
+IFolder folder = (await context.Web.Lists.GetByTitleAsync(&quot;Site Pages&quot;, p =&gt; p.RootFolder)).RootFolder;
+
+// Below command will result in a folder hierarchy sub1/sub2/sub3/sub4/sub5, 5 levels deep
+var subFolder = await folder.EnsureFolderAsync(&quot;sub1/sub2/sub3/sub4/sub5&quot;);
+</code></pre>
+<h2 id="adding-content-in-folders">Adding content in folders</h2>
+<p>Folders can contain other folders, but the common use case for folders is to hold files, see the <a href="files-intro.html">Files documentation</a> to learn how to add a file into a folder.</p>
+<h2 id="updating-folders">Updating folders</h2>
+<p>All but one IFolder properties are readonly, the only one that can be set is the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html#collapsible-PnP_Core_Model_SharePoint_IFolder_WelcomePage">WelcomePage property</a> and setting this property only makes sense on the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_RootFolder">web's RootFolder</a> as that property determines the web's home page to load.</p>
+<pre><code class="lang-csharp">// Check if the RootFolder property was loaded, if not request it from the server
+await context.Web.EnsurePropertiesAsync(p =&gt; p.RootFolder);
+
+// Set the WelcomePage and update the folder
+context.Web.RootFolder.WelcomePage = &quot;sitepages/myhomepage.aspx&quot;;
+await context.Web.RootFolder.UpdateAsync();
+</code></pre>
+<h2 id="deleting-folders">Deleting folders</h2>
+<pre><code class="lang-csharp">// Get the root folder of the Site Pages library
+IFolder folder = (await context.Web.Lists.GetByTitleAsync(&quot;Site Pages&quot;, p =&gt; p.RootFolder)).RootFolder;
+
+// Add a folder 
+var subFolder = await folder.Folders.AddAsync(&quot;My folder&quot;);
+
+// Delete the folder again
+await subFolder.DeleteAsync();
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">
