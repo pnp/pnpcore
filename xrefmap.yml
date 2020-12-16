@@ -12210,6 +12210,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.ReadSecurity
   nameWithType: IList.ReadSecurity
+- uid: PnP.Core.Model.SharePoint.IList.Recycle
+  name: Recycle()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Recycle
+  commentId: M:PnP.Core.Model.SharePoint.IList.Recycle
+  fullName: PnP.Core.Model.SharePoint.IList.Recycle()
+  nameWithType: IList.Recycle()
+- uid: PnP.Core.Model.SharePoint.IList.Recycle*
+  name: Recycle
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Recycle_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.Recycle
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.Recycle
+  nameWithType: IList.Recycle
 - uid: PnP.Core.Model.SharePoint.IList.RecycleAsync
   name: RecycleAsync()
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RecycleAsync
