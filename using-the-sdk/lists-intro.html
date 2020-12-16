@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with lists | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with lists | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/lists-intro.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-lists">Working with lists</h1>
+
+<p>All data in SharePoint lives in lists: list items belong is lists and documents belong in document libraries which are based upon lists. Being able to find a list is needed to work with the list content (items, documents) and adding/updating lists is often used by apps working with SharePoint.</p>
+<p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with lists
+}
+</code></pre>
+<p>Since a list can be seen as a container defining a schema (fields) and having content (list items, documents, folders or pages) most of the relevant documentation lives elsewhere:</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>List property/method</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List schema: fields</td>
+<td><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Fields">Fields</a></td>
+<td><a href="fields-intro.html">Fields documentation</a></td>
+</tr>
+<tr>
+<td>List schema: views</td>
+<td><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Views">Views</a></td>
+<td><a href="lists-views.html">List view documentation</a></td>
+</tr>
+<tr>
+<td>List schema: content types</td>
+<td><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ContentTypes">ContentTypes</a></td>
+<td><a href="contenttypes-intro.html">Content types documentation</a></td>
+</tr>
+<tr>
+<td>Content: items</td>
+<td><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items">Items</a></td>
+<td><a href="listitems-intro.html">List item documentation</a></td>
+</tr>
+<tr>
+<td>Content: files</td>
+<td><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items">Items</a></td>
+<td><a href="files-intro.html">Files documentation</a></td>
+</tr>
+<tr>
+<td>Content: pages</td>
+<td><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items">Items</a></td>
+<td><a href="pages-intro.html">Pages documentation</a></td>
+</tr>
+<tr>
+<td>Content: folders</td>
+<td><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Items">Items</a></td>
+<td><a href="folders-intro.html">Folders documentation</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="getting-lists">Getting lists</h2>
+<p>Lists live inside an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a> and you can either get a specific list or enumerate the available lists.</p>
+<h3 id="getting-a-specific-list">Getting a specific list</h3>
+<p>To get a specific list you can use multiple methods on the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetById_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____">IListCollection</a>: <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListCollection.html#collapsible-PnP_Core_Model_SharePoint_IListCollection_GetByServerRelativeUrlAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____">GetByServerRelativeUrlAsync</a>, <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByTitleAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____">GetByTitleAsync</a> or <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_GetByIdAsync_Guid_Expression_Func_PnP_Core_Model_SharePoint_IList_System_Object_____">GetByIdAsync</a>. Alternatively you can also write a LINQ query. Mentioned approaches are shown in below sample code.</p>
+<pre><code class="lang-csharp">// Get Documents list via title
+var myList = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;);
+
+// Get Documents list via title
+var myList = await context.Web.Lists.GetByServerRelativeUrlAsync($&quot;{context.Uri.PathAndQuery}/Shared Documents&quot;);
+
+// Get Documents list via id, only load the needed properties
+var myList = await context.Web.Lists.GetByIdAsync(new Guid(&quot;d50ec969-cb27-4a49-839f-3c25d1d607d5&quot;), p =&gt; p.TemplateType, p =&gt; p.Title);
+
+// LINQ query
+var myList = await (from l in context.Web.Lists where l.Title == &quot;Documents&quot; select l).FirstOrDefaultAsync();
+</code></pre>
+<h3 id="enumerating-lists">Enumerating lists</h3>
+<p>Loading all lists is needed when you don't upfront know which list you want to process, or maybe you want to run over all lists of a given type. Doing an enumeration can be done by requesting the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Lists">Lists property</a> of an IWeb or via a LINQ query.</p>
+<pre><code class="lang-csharp">// Sample 1: Load all lists in the web with their default properties
+await context.Web.GetAsync(p =&gt; p.Lists);
+
+// Sample 2: Load the web content types + all lists with their content types and the content type field links
+await context.Web.GetAsync(p =&gt; p.Title,
+                           p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name),
+                           p =&gt; p.Lists.LoadProperties(p =&gt; p.Id,
+                                                       p =&gt; p.TemplateType,
+                                                       p =&gt; p.Title,
+                                                       p =&gt; p.DocumentTemplate,
+                               p =&gt; p.ContentTypes.LoadProperties(p =&gt; p.Name,
+                                    p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)))
+                          );
+
+// Process the document libraries
+foreach(var list in context.Web.Lists.Where(p =&gt; TemplateType == ListTemplateType.DocumentLibrary))
+{
+    // Use the list
+}
+</code></pre>
+<p>Using LINQ to load multiple lists is also possible:</p>
+<pre><code class="lang-csharp">// Turning off the Graph first feature (temp fix, will be not be needed by GA)
+context.GraphFirst = false;
+
+// Option 1 to write the LINQ query
+var query = (from i in context.Web.Lists
+                where i.TemplateType == ListTemplateType.DocumentLibrary
+                select i).Load(p =&gt; p.Title, p =&gt; p.Id);                             
+
+// Option 2 to write the LINQ query
+var query = context.Web.Lists.Where(p =&gt; p.TemplateType == ListTemplateType.DocumentLibrary)
+                             .Load(p =&gt; p.Title, p =&gt; p.Id);
+
+// Execute the LINQ query                
+var lists = await query.ToListAsync();
+
+foreach(var list in lists)
+{
+    // Use the list
+}
+</code></pre>
+<h2 id="adding-lists">Adding lists</h2>
+<p>Adding lists comes down to adding a new list to the Web's <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Lists">IListCollection</a> using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListCollection.html#PnP_Core_Model_SharePoint_IListCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_ListTemplateType_">AddAsync method</a>.</p>
+<pre><code class="lang-csharp">// Add a list
+var myList = await context.Web.Lists.AddAsync(&quot;MyList&quot;, ListTemplateType.GenericList);
+
+// Add a document library
+var myDocumentLibrary = await context.Web.Lists.AddAsync(&quot;myDocumentLibrary&quot;, ListTemplateType.DocumentLibrary);
+</code></pre>
+<h2 id="updating-lists">Updating lists</h2>
+<p>A list has a lot of properties to update and updating them comes down to setting the new property value and then calling one of the update methods like UpdateAsync.</p>
+<pre><code class="lang-csharp">// Get the list to update
+var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to update&quot;);
+
+// Update a list property
+myList.Description = &quot;PnP Rocks!&quot;;
+
+// Send update to the server
+await myList.UpdateAsync();
+</code></pre>
+<h2 id="deleting-lists">Deleting lists</h2>
+<p>To delete a list you can either permanently delete the list using the DeleteAsync method or you can move the list into the site's recycle bin using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#collapsible-PnP_Core_Model_SharePoint_IList_RecycleAsync">RecycleAsync method</a>.</p>
+<pre><code class="lang-csharp">// Get the list to delete
+var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to delete&quot;);
+
+// Delete the list
+await myList.DeleteAsync();
+
+// Recycle the list
+await myList.RecycleAsync();
+</code></pre>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

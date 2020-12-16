@@ -2118,7 +2118,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IView.html",
-          "hash": "mWxVrmTq4BWVE4C8Rvhn9g=="
+          "hash": "Lx7xkT1AbUpMTtRrsMDDSg=="
         }
       },
       "is_incremental": false,
@@ -4133,6 +4133,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/contenttypes-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/contenttypes-intro.html",
+          "hash": "qeVgOj65tI+8yAkiKM3cqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/custom-authentication-provider.md",
       "output": {
         ".html": {
@@ -4193,6 +4205,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/folders-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/folders-intro.html",
+          "hash": "x8VRcsRgFkjVTgUM+M3ejQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/listitems-fields.md",
       "output": {
         ".html": {
@@ -4210,6 +4234,30 @@
         ".html": {
           "relative_path": "using-the-sdk/listitems-intro.html",
           "hash": "WW5udTESyGdXB7eQ8AQQBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/lists-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/lists-intro.html",
+          "hash": "vgG8hbWCmI4g4CZzOz+l8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/lists-views.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/lists-views.html",
+          "hash": "pmcoRAGhIIhLThrjdDtDSw=="
         }
       },
       "is_incremental": false,
@@ -4317,7 +4365,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "J/v7/YPzPEoWEdipZdoUYA=="
+          "hash": "9asH/srwIjQt3422mygPbA=="
         }
       },
       "is_incremental": false,
@@ -4350,7 +4398,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 38,
+          "total_file_count": 42,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
