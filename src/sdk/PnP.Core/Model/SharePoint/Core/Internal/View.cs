@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// View class, write your custom code here
     /// </summary>
-    [SharePointType("SP.View", Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/Views({Id})",
+    [SharePointType("SP.View", Uri = "_api/web/lists/getbyid(guid'{Parent.Id}')/Views(guid'{Id}')",
             Get = "_api/web/lists(guid'{Parent.Id}')/Views", LinqGet = "_api/web/lists(guid'{Parent.Id}')/Views",
             Delete = "_api/web/lists(guid'{Parent.Id}')/Views(guid'{Id}')/DeleteObject")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]

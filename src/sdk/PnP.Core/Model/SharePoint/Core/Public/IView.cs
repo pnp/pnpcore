@@ -76,14 +76,14 @@ namespace PnP.Core.Model.SharePoint
         public bool Hidden { get; set; }
 
         /// <summary>
-        /// Gets or sets Html Schema Xml
+        /// Gets the Html Schema Xml
         /// </summary>
-        public string HtmlSchemaXml { get; set; }
+        public string HtmlSchemaXml { get;  }
 
         /// <summary>
-        /// Gets or sets Id
+        /// Gets the Id
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         /// <summary>
         /// Gets or sets Image Url
