@@ -226,6 +226,13 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
         /// </summary>
+        /// <returns>Id of the recycle bin item</returns>
+        public Guid Recycle();
+
+        /// <summary>
+        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
+        /// </summary>
+        /// <returns>Id of the recycle bin item</returns>
         public Task<Guid> RecycleAsync();
 
         /// <summary>
