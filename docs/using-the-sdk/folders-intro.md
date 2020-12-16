@@ -7,7 +7,7 @@ In the remainder of this article you'll see a lot of `context` use: in this case
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // See next chapter on how to use the PnPContext for working with lists
+    // See next chapter on how to use the PnPContext for working with folders
 }
 ```
 
@@ -58,6 +58,9 @@ await folder.Properties.UpdateAsync();
 ## Adding folders
 
 When working with folders there always is a root folder or folder collection present, a web has a root folder and folders collection and lists and libraries have a root folder. Adding folders implies adding folder as sub folder of an existing folder and this can be done by adding a new IFolder into an [IFolderCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolderCollection.html) by using the Add methods or using [EnsureFolderAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html#PnP_Core_Model_SharePoint_IFolder_EnsureFolderAsync_System_String_).
+
+>[!Note]
+> Before you can add folders to a list the list needs to be enabled for folder creation by setting the [EnableFolderCreation property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_EnableFolderCreation) to true.
 
 ```csharp
 // Get the root folder of the Documents library
