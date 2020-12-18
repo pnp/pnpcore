@@ -375,7 +375,7 @@ namespace PnP.Core.Test.Base
         #region Tests that use Graph to hit SharePoint
 
         [TestMethod]
-        public async Task AddTeamChannelViaGraph()
+        public async Task AddTeamChannelViaGraphAsync()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -391,6 +391,37 @@ namespace PnP.Core.Test.Base
                     int channelCount = team.Channels.Count();
                     // Add a new channel
                     channelFound = await team.Channels.AddAsync(channelName, "Test channel, will be deleted in 21 days");
+
+                    Assert.IsNotNull(channelFound);
+                    Assert.IsTrue(channelFound.Requested);
+                    Assert.IsTrue(!string.IsNullOrEmpty(channelFound.Id));
+                    Assert.IsTrue(team.Channels.Count() == channelCount + 1);
+
+                }
+                else
+                {
+                    Assert.Inconclusive($"Channel {channelName} already exists...channels can't be immediately deleted");
+                }
+            }
+        }
+
+        [TestMethod]
+        public void AddTeamChannelViaGraph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(p => p.Channels);
+
+                // Channel names have to be unique
+                string channelName = $"Channel test {new Random().Next()}";
+                // Check if the channel exists
+                var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                if (channelFound == null)
+                {
+                    int channelCount = team.Channels.Count();
+                    // Add a new channel
+                    channelFound = team.Channels.Add(channelName, "Test channel, will be deleted in 21 days");
 
                     Assert.IsNotNull(channelFound);
                     Assert.IsTrue(channelFound.Requested);

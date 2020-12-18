@@ -113,6 +113,12 @@ namespace PnP.Core.Model.Teams
 
         #region GetByDisplayName methods
 
+        /// <summary>
+        /// Get channel by display name
+        /// </summary>
+        /// <param name="displayName"></param>
+        /// <param name="selectors"></param>
+        /// <returns></returns>
         public ITeamChannel GetByDisplayName(string displayName, params Expression<Func<ITeamChannel, object>>[] selectors)
         {
             if (displayName == null)
@@ -123,6 +129,13 @@ namespace PnP.Core.Model.Teams
             return BaseDataModelExtensions.BaseLinqGet(this, c => c.DisplayName == displayName, selectors);
         }
 
+        /// <summary>
+        /// Asynchronously Get channel by display name
+        /// </summary>
+        /// <param name="displayName"></param>
+        /// <param name="selectors"></param>
+        /// <returns></returns>
+        /// <remarks>This does not work due with a $top=1 limitation in the graph when calling tests</remarks>
         public async Task<ITeamChannel> GetByDisplayNameAsync(string displayName, params Expression<Func<ITeamChannel, object>>[] selectors)
         {
             if (displayName == null)
