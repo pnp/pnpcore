@@ -2,7 +2,7 @@
 
 The model in PnP Core SDK is what the SDK users use to interact with Microsoft 365: it defines the model classes (e.g. List), their fields (Title, Description,...) and their operations (e.g. GetAsync or Get). This model has a public part (interfaces) and an implementation (internal, partial classes). In order to translate the model into respective SharePoint REST and/or Microsoft Graph v1.0 or beta queries the model needs to be decorated with attributes. These attributes drive the needed API calls to Microsoft 365 and the serialization of returned responses (JSON) into the model. **As a contributor, extending and enriching the model is how you provide functionality to the developers that will be using this SDK**.
 
-![SDK overview](../../images/sdk%20overview.png)
+![SDK overview](../images/sdk%20overview.png)
 
 ## Where is the code?
 
@@ -21,7 +21,7 @@ Starting to code is simple, pull down the code from GitHub and then use either V
 
 The model design principles are agnostic to whether the model will be populated via a SharePoint REST or Microsoft Graph call, and therefore starting here to understand the general model principles is advised. Once you understand the model design principles you can learn more about how to decorate the model to work with either SharePoint REST and/or Microsoft Graph. Below picture gives an overview of the used classes in the model based on the Team model implementation:
 
-![Model overview](../../images/model%20overview.png)
+![Model overview](../images/model%20overview.png)
 
 In the model there are 2 types of classes:
 

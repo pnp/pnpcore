@@ -7,7 +7,7 @@ In the remainder of this article you'll see a lot of `context` use: in this case
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // See next chapter on how to use the PnPContext for working with pages
+    // See next chapter on how to use the PnPContext for working with list items
 }
 ```
 

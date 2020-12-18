@@ -1,0 +1,22 @@
+- name: Getting started
+  href: readme.md
+- name: Setting up your environment
+  href: setup.md
+- name: Extending the model - step by step
+  href: extending%20the%20model.md 
+- name: Extending the model for Microsoft Graph
+  href: extending%20the%20model%20-%20Microsoft%20Graph.md 
+- name: Extending the model for SharePoint REST
+  href: extending%20the%20model%20-%20SharePoint%20REST.md 
+- name: Implement paging
+  href: using%20paging.md
+- name: Using event handlers
+  href: event%20handlers.md 
+- name: Using model tokens
+  href: model%20tokens.md 
+- name: Writing tests
+  href: writing%20tests.md 
+- name: Configuring for authentication tests
+  href: configuring-for-auth-tests.md 
+- name: Authoring documentation
+  href: writing%20documentation.md 

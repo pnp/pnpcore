@@ -262,7 +262,12 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
-        #region RecycleAsync
+        #region Recycle
+        public Guid Recycle()
+        {
+            return RecycleAsync().GetAwaiter().GetResult();
+        }
+
         public async Task<Guid> RecycleAsync()
         {
             var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/recycle", ApiType.SPORest);

@@ -184,7 +184,7 @@ https://login.microsoftonline.com/contoso.onmicrosoft.com/adminconsent?client_id
 
 Login to your Microsoft 365 tenant (e.g. by browsing to SharePoint Online), open a new browser tab and paste the URL you've just created. Azure AD will eventually ask you to login, and then it will prompt you to consent permissions to the app:
 
-![PnP Multi-tenant app admin consent](../../images/PnP%20admin%20consent.png)
+![PnP Multi-tenant app admin consent](../images/PnP%20admin%20consent.png)
 
 Click on **Accept** to accept the requested permissions. At that point you will be redirected to the PnP Site (https://aka.ms/sppnp). You've now successfully registered the PnP multi-tenant application in your Azure AD environment and you can use it with the PnP Core SDK. The PnP Core SDK defaults to this application, so if you're not specifying any Azure AD application details when setting up authentication for the application, then the PnP Core SDK automatically uses the PnP application (application id 31359c7f-bd7e-475c-86db-fdb8c937548e).
 
