@@ -377,7 +377,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task AddTeamChannelViaGraphAsync()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(p => p.Channels);
@@ -408,7 +408,7 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public void AddTeamChannelViaGraph()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
             {
                 var team = context.Team.Get(p => p.Channels);
