@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.Teams;
 using PnP.Core.Test.Utilities;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Teams
@@ -76,6 +77,7 @@ namespace PnP.Core.Test.Teams
 
 
         [TestMethod]
+        [ExpectedException(typeof(MicrosoftGraphServiceException))]
         public async Task GetGeneralChannelAsyncTest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -86,6 +88,24 @@ namespace PnP.Core.Test.Teams
 
                 var channel = await team.Channels.GetByDisplayNameAsync("General");
 
+                Assert.AreEqual(channel.MembershipType, TeamChannelMembershipType.Standard);
+                Assert.IsNotNull(channel.WebUrl);
+
+            }
+        }
+
+        [TestMethod]
+        public async Task GetGeneralChannelAlteratveAsyncTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General"); ;
+
+                Assert.IsNotNull(channel);
                 Assert.AreEqual(channel.MembershipType, TeamChannelMembershipType.Standard);
                 Assert.IsNotNull(channel.WebUrl);
 
