@@ -97,7 +97,7 @@ namespace PnP.Core.Test.Teams
         [TestMethod]
         public async Task GetGeneralChannelAlteratveAsyncTest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var team = await context.Team.GetAsync(o => o.Channels);
