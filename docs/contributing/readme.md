@@ -150,15 +150,15 @@ Each model class:
 
   - Optionally customize the JSON to Model mapping via the `MappingHandler = (FromJson input)` handler
   - Implement the API call for doing an Add operation via the `AddApiCallHandler = async ()` handler
-  - Optionally implement API call overrides that allow you to update the generated API call before it's send off to the server. There are these handlers: `GetApiCallOverrideHandler = async (ApiCall apiCall)`, `UpdateApiCallOverrideHandler = async (ApiCall apiCall)` and `DeleteApiCallOverrideHandler = async (ApiCall apiCall)`
+  - Optionally implement API call overrides that allow you to update the generated API call before it's sent off to the server. There are these handlers: `GetApiCallOverrideHandler = async (ApiCall apiCall)`, `UpdateApiCallOverrideHandler = async (ApiCall apiCall)` and `DeleteApiCallOverrideHandler = async (ApiCall apiCall)`
   - Optionally implement property validation (prevent property updates, alter values) via the `ValidateUpdateHandler = (ref FieldUpdateRequest fieldUpdateRequest)` handler
 
 - Contains class level attributes that are used to define the requests to Microsoft 365 and serialization of the received data. These attributes are explained in more detail in their respective chapters later on
 - Has public properties that:
   
   - Use the `GetValue` and `SetValue` inherited methods to get and set simple property values
-  - Use the `GetModelValue` and optionally `SetModelValue` base class methods to get an set model property values (e.g. `IFolder`)
-  - Use the `GetModelCollectionValue` base class method to set a model collection property value (e.g. `IListItemCollection`)
+  - Use the `GetModelValue` and optionally `SetModelValue` base class methods to get and set model property values (e.g. `IFolder`)
+  - Use the `GetModelCollectionValue` base class method to get a model collection property value (e.g. `IListItemCollection`)
   
 - Has a `Key` property override which can be used to set/get the key value. The Key is used to organize objects in collections
 - Has property attributes that are used to define the requests to Microsoft 365 and serialization of the received data. These attributes are explained in more detail in their respective chapters later on
@@ -213,7 +213,7 @@ Optionally a collection interface defines methods which add behavior to the coll
 
 #### Internal implementation
 
-For the internal collection class implementation we've opted to use internal partial classes. Here's a snippet of the `ListCollection.cs` class, which is linq queryable:
+For the internal collection class implementation, we've opted to use internal partial classes. Here's a snippet of the `ListCollection.cs` class, which is linq queryable:
 
 ```csharp
 internal partial class ListCollection : QueryableDataModelCollection<IList>, IListCollection
