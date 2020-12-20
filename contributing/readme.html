@@ -214,7 +214,7 @@ internal partial class List : BaseDataModel&lt;IList&gt;, IList
 <ul>
 <li>Optionally customize the JSON to Model mapping via the <code>MappingHandler = (FromJson input)</code> handler</li>
 <li>Implement the API call for doing an Add operation via the <code>AddApiCallHandler = async ()</code> handler</li>
-<li>Optionally implement API call overrides that allow you to update the generated API call before it's send off to the server. There are these handlers: <code>GetApiCallOverrideHandler = async (ApiCall apiCall)</code>, <code>UpdateApiCallOverrideHandler = async (ApiCall apiCall)</code> and <code>DeleteApiCallOverrideHandler = async (ApiCall apiCall)</code></li>
+<li>Optionally implement API call overrides that allow you to update the generated API call before it's sent off to the server. There are these handlers: <code>GetApiCallOverrideHandler = async (ApiCall apiCall)</code>, <code>UpdateApiCallOverrideHandler = async (ApiCall apiCall)</code> and <code>DeleteApiCallOverrideHandler = async (ApiCall apiCall)</code></li>
 <li>Optionally implement property validation (prevent property updates, alter values) via the <code>ValidateUpdateHandler = (ref FieldUpdateRequest fieldUpdateRequest)</code> handler</li>
 </ul>
 </li>
@@ -223,8 +223,8 @@ internal partial class List : BaseDataModel&lt;IList&gt;, IList
 <li><p>Has public properties that:</p>
 <ul>
 <li>Use the <code>GetValue</code> and <code>SetValue</code> inherited methods to get and set simple property values</li>
-<li>Use the <code>GetModelValue</code> and optionally <code>SetModelValue</code> base class methods to get an set model property values (e.g. <code>IFolder</code>)</li>
-<li>Use the <code>GetModelCollectionValue</code> base class method to set a model collection property value (e.g. <code>IListItemCollection</code>)</li>
+<li>Use the <code>GetModelValue</code> and optionally <code>SetModelValue</code> base class methods to get and set model property values (e.g. <code>IFolder</code>)</li>
+<li>Use the <code>GetModelCollectionValue</code> base class method to get a model collection property value (e.g. <code>IListItemCollection</code>)</li>
 </ul>
 </li>
 <li><p>Has a <code>Key</code> property override which can be used to set/get the key value. The Key is used to organize objects in collections</p>
@@ -275,7 +275,7 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
 </ul>
 <p>Optionally a collection interface defines methods which add behavior to the collection.</p>
 <h4 id="internal-implementation-1">Internal implementation</h4>
-<p>For the internal collection class implementation we've opted to use internal partial classes. Here's a snippet of the <code>ListCollection.cs</code> class, which is linq queryable:</p>
+<p>For the internal collection class implementation, we've opted to use internal partial classes. Here's a snippet of the <code>ListCollection.cs</code> class, which is linq queryable:</p>
 <pre><code class="lang-csharp">internal partial class ListCollection : QueryableDataModelCollection&lt;IList&gt;, IListCollection
 {
     public ListCollection(PnPContext context, IDataModelParent parent, string memberName = null)
