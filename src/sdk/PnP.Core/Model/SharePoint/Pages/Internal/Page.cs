@@ -1652,7 +1652,14 @@ namespace PnP.Core.Model.SharePoint
 
             }
 
-            await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
+            if (updatingExistingPage)
+            {
+                await PageListItem.UpdateAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
+            }
         }
 
         private async Task EnsurePageListItemAsync(string pageName)
