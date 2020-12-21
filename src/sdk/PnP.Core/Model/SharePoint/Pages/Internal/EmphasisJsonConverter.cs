@@ -13,7 +13,7 @@ namespace PnP.Core.Model.SharePoint
 
         public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            if (reader.TryGetInt32(out int intValue))
+            if (reader.TokenType == JsonTokenType.Number && reader.TryGetInt32(out int intValue))
             {
                 return intValue;
             }
