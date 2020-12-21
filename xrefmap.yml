@@ -13388,6 +13388,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.LayoutType
   nameWithType: IPage.LayoutType
+- uid: PnP.Core.Model.SharePoint.IPage.Name
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_Name
+  commentId: P:PnP.Core.Model.SharePoint.IPage.Name
+  fullName: PnP.Core.Model.SharePoint.IPage.Name
+  nameWithType: IPage.Name
+- uid: PnP.Core.Model.SharePoint.IPage.Name*
+  name: Name
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_Name_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.Name
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.Name
+  nameWithType: IPage.Name
 - uid: PnP.Core.Model.SharePoint.IPage.NewTextPart(System.String)
   name: NewTextPart(String)
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_NewTextPart_System_String_
