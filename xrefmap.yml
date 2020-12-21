@@ -13362,6 +13362,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IPage.GetTemplatesFolderAsync
   nameWithType: IPage.GetTemplatesFolderAsync
+- uid: PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPart(PnP.Core.Model.SharePoint.DefaultWebPart)
+  name: InstantiateDefaultWebPart(DefaultWebPart)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_InstantiateDefaultWebPart_PnP_Core_Model_SharePoint_DefaultWebPart_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPart(PnP.Core.Model.SharePoint.DefaultWebPart)
+  fullName: PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPart(PnP.Core.Model.SharePoint.DefaultWebPart)
+  nameWithType: IPage.InstantiateDefaultWebPart(DefaultWebPart)
+- uid: PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPart*
+  name: InstantiateDefaultWebPart
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_InstantiateDefaultWebPart_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPart
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPart
+  nameWithType: IPage.InstantiateDefaultWebPart
+- uid: PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPartAsync(PnP.Core.Model.SharePoint.DefaultWebPart)
+  name: InstantiateDefaultWebPartAsync(DefaultWebPart)
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_InstantiateDefaultWebPartAsync_PnP_Core_Model_SharePoint_DefaultWebPart_
+  commentId: M:PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPartAsync(PnP.Core.Model.SharePoint.DefaultWebPart)
+  fullName: PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPartAsync(PnP.Core.Model.SharePoint.DefaultWebPart)
+  nameWithType: IPage.InstantiateDefaultWebPartAsync(DefaultWebPart)
+- uid: PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPartAsync*
+  name: InstantiateDefaultWebPartAsync
+  href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_InstantiateDefaultWebPartAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPartAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IPage.InstantiateDefaultWebPartAsync
+  nameWithType: IPage.InstantiateDefaultWebPartAsync
 - uid: PnP.Core.Model.SharePoint.IPage.KeepDefaultWebParts
   name: KeepDefaultWebParts
   href: api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_KeepDefaultWebParts
