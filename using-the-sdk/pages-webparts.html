@@ -145,7 +145,11 @@ page.AddControl(page.NewWebPart(imageWebPartComponent), page.Sections[0].Columns
 // Save the page
 await page.SaveAsync(&quot;MyPage.aspx&quot;);
 </code></pre>
-<p>An alternative approach to above is using the InstantiateDefaultWebPart method which internally handles the available component loading and enum mapping:</p>
+<p>An alternative approach to above is using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_InstantiateDefaultWebPartAsync_PnP_Core_Model_SharePoint_DefaultWebPart_">InstantiateDefaultWebPart</a> method which internally handles the available component loading and enum mapping.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Each call to <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_InstantiateDefaultWebPartAsync_PnP_Core_Model_SharePoint_DefaultWebPart_">InstantiateDefaultWebPart</a> will result in the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_">AvailablePageComponentsAsync method</a> being called, performance wise it's better to use the above approach as that will limit the number of <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IPage.html#PnP_Core_Model_SharePoint_IPage_AvailablePageComponentsAsync_System_String_">AvailablePageComponentsAsync</a> calls.</p>
+</div>
 <pre><code class="lang-csharp">// Create the page
 var page = await context.Web.NewPageAsync();
 
