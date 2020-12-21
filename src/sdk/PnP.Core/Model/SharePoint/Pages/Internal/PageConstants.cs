@@ -36,7 +36,7 @@
         internal const string DefaultTemplatesFolder = "Templates";
 
         // Properties
-        internal const string TemplatesFolderGuid = "vti_x005f_TemplatesFolderGuid";
+        internal const string TemplatesFolderGuid = "vti_TemplatesFolderGuid";
 
         // Spaces
         internal const string SpacesLayoutType = "d39ad2cb-84bd-48a0-9daa-4aea9f644cd4";
