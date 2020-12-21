@@ -1362,6 +1362,15 @@ namespace PnP.Core.Services
                     var firstRequest = csomBatch.Batch.Requests.First().Value;
                     firstRequest.AddResponse(responses, statusCode);
 
+                    // Commit succesful updates in our model
+                    if (firstRequest.ApiCall.Commit)
+                    {
+                        if (firstRequest.Model is TransientObject)
+                        {
+                            firstRequest.Model.Commit();
+                        }
+                    }
+
                     // Execute post mapping handler (even though, there is no actual mapping in this case)
                     firstRequest.PostMappingJson?.Invoke(batchResponse);
                 }
