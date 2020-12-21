@@ -1184,6 +1184,47 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task CreateAndUpdatePageWithReload()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("CreateAndUpdatePageWithReload.aspx");
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    newPage = (await context2.Web.GetPagesAsync(pageName)).FirstOrDefault();
+
+                    // Update the page
+                    newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
+                    newPage.AddControl(newPage.NewTextPart("I"), newPage.Sections[0].Columns[0]);
+                    newPage.AddControl(newPage.NewTextPart("like"), newPage.Sections[0].Columns[1]);
+                    newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
+
+                    // Update the page
+                    await newPage.SaveAsync(pageName);
+
+                    // Load the page again
+                    var pages = await context2.Web.GetPagesAsync(pageName);
+                    var updatedPage = pages.First();
+
+                    Assert.IsTrue(updatedPage.Sections.Count == 1);
+                    Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
+                    Assert.IsTrue(updatedPage.Sections[0].Controls.Count == 3);
+
+                    // Delete the page
+                    await updatedPage.DeleteAsync();
+                    // Verify the page exists
+                    var pages2 = await context2.Web.GetPagesAsync(pageName);
+                    Assert.IsTrue(pages2.Count == 0);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task SavePageAsTemplate()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1269,14 +1310,22 @@ namespace PnP.Core.Test.SharePoint
                 await page.PublishAsync();
 
                 // load page again
-                var pages = await context.Web.GetPagesAsync(pageName);
-                Assert.IsTrue(pages.Count == 1);
-                page = pages.First();
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    var pages = await context2.Web.GetPagesAsync(pageName);
+                    Assert.IsTrue(pages.Count == 1);
+                    page = pages.First();
 
-                Assert.IsTrue(((page as Page).PageListItem[PageConstants.PromotedStateField]).ToString() == ((int)PromotedState.Promoted).ToString());
+                    Assert.IsTrue(((page as Page).PageListItem[PageConstants.PromotedStateField]).ToString() == ((int)PromotedState.Promoted).ToString());
 
-                // delete the page
-                await page.DeleteAsync();
+                    Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumn);
+                    Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 1);
+                    Assert.IsTrue(page.Sections[0].Columns[0].Controls[0] is IPageText);
+                    Assert.IsTrue((page.Sections[0].Columns[0].Controls[0] as IPageText).Text == "PnP");
+
+                    // delete the page
+                    await page.DeleteAsync();
+                }
             }
         }
 

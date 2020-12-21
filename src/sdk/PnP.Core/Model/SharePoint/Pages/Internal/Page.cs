@@ -1512,7 +1512,8 @@ namespace PnP.Core.Model.SharePoint
 
                 if (updatingExistingPage)
                 {
-                    await PageListItem.UpdateAsync().ConfigureAwait(false);
+                    await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
+                    //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
                 }
                 else
                 {
@@ -1655,6 +1656,7 @@ namespace PnP.Core.Model.SharePoint
             if (updatingExistingPage)
             {
                 await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
+                //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
             }
             else
             {
@@ -1674,7 +1676,7 @@ namespace PnP.Core.Model.SharePoint
             foreach (var page in PagesLibrary.Items)
             {
                 var fileDirRef = PagesLibrary.RootFolder.ServerRelativeUrl + (!string.IsNullOrEmpty(folderName) ? $"/{folderName}" : "");
-                if (page[PageConstants.FileLeafRef].ToString().Equals(pageNameWithoutFolder) && page[PageConstants.FileDirRef].ToString().Equals(fileDirRef))
+                if (page[PageConstants.FileLeafRef].ToString().Equals(pageNameWithoutFolder, StringComparison.InvariantCultureIgnoreCase) && page[PageConstants.FileDirRef].ToString().Equals(fileDirRef, StringComparison.InvariantCultureIgnoreCase))
                 {
                     PageListItem = page;
                     continue;
@@ -1903,6 +1905,7 @@ namespace PnP.Core.Model.SharePoint
             // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
             // "Additions to this Web site have been blocked" error
             await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
+            //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
         }
 
         public void PromoteAsNewsArticle()
@@ -1930,6 +1933,7 @@ namespace PnP.Core.Model.SharePoint
             // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
             // "Additions to this Web site have been blocked" error
             await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
+            //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
         }
 
         public void PromoteAsHomePage()

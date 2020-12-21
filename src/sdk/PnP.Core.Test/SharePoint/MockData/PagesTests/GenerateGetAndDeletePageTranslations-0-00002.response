@@ -1,4 +1,4 @@
---batchresponse_1c8dffcc-dba4-41fd-a785-3c91156ddea2
+--batchresponse_1ccf1bdb-2283-4365-a16f-a38cb2365f7c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,7 +6,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/web/regionalsettings","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/web/regionalsettings","type":"SP.RegionalSettings"},"TimeZone":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/web/regionalsettings/TimeZone","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/web/regionalsettings/TimeZone","type":"SP.TimeZone"},"Description":"(UTC-08:00) Pacific Time (US and Canada)","Id":13,"Information":{"__metadata":{"type":"SP.TimeZoneInformation"},"Bias":480,"DaylightBias":-60,"StandardBias":0}},"DateFormat":0,"DateSeparator":"/","DecimalSeparator":"."}}
---batchresponse_1c8dffcc-dba4-41fd-a785-3c91156ddea2
+--batchresponse_1ccf1bdb-2283-4365-a16f-a38cb2365f7c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -14,7 +14,7 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/Features/GetById(guid'24611c05-ee19-45da-955f-6602264abaf8')","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web/Features/GetById(guid'24611c05-ee19-45da-955f-6602264abaf8')","type":"SP.Feature"},"DefinitionId":"24611c05-ee19-45da-955f-6602264abaf8"}}
---batchresponse_1c8dffcc-dba4-41fd-a785-3c91156ddea2
+--batchresponse_1ccf1bdb-2283-4365-a16f-a38cb2365f7c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -22,7 +22,7 @@ HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 
---batchresponse_1c8dffcc-dba4-41fd-a785-3c91156ddea2
+--batchresponse_1ccf1bdb-2283-4365-a16f-a38cb2365f7c
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -30,4 +30,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","uri":"https://bertonline.sharepoint.com/sites/pnpcoresdktest/_api/Web","type":"SP.Web"},"Id":"bc3f47bc-6313-43a4-b21d-ffe6200c0436","SupportedUILanguageIds":{"__metadata":{"type":"Collection(Edm.Int32)"},"results":[1033,1043,1036]}}}
---batchresponse_1c8dffcc-dba4-41fd-a785-3c91156ddea2--
+--batchresponse_1ccf1bdb-2283-4365-a16f-a38cb2365f7c--
