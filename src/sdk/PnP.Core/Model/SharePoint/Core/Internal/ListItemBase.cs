@@ -30,7 +30,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task UpdateOverwriteVersionAsync()
         {
-            var xmlPayload = BuildXmlPayload(true);
+            var xmlPayload = await BuildXmlPayloadAsync(true).ConfigureAwait(false);
             if (!string.IsNullOrEmpty(xmlPayload))
             {
                 var apiCall = new ApiCall(xmlPayload)
@@ -62,7 +62,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task UpdateOverwriteVersionBatchAsync(Batch batch)
         {
-            var xmlPayload = BuildXmlPayload(true);
+            var xmlPayload = await BuildXmlPayloadAsync(true).ConfigureAwait(false);
             if (!string.IsNullOrEmpty(xmlPayload))
             {
                 var apiCall = new ApiCall(xmlPayload)
@@ -88,7 +88,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task SystemUpdateAsync()
         {
-            var xmlPayload = BuildXmlPayload(false);
+            var xmlPayload = await BuildXmlPayloadAsync(false).ConfigureAwait(false);
             if (!string.IsNullOrEmpty(xmlPayload))
             {
                 var apiCall = new ApiCall(xmlPayload)
@@ -120,7 +120,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task SystemUpdateBatchAsync(Batch batch)
         {
-            var xmlPayload = BuildXmlPayload(false);
+            var xmlPayload = await BuildXmlPayloadAsync(false).ConfigureAwait(false);
             if (!string.IsNullOrEmpty(xmlPayload))
             {
                 var apiCall = new ApiCall(xmlPayload)
@@ -140,7 +140,7 @@ namespace PnP.Core.Model.SharePoint
             SystemUpdateBatchAsync(batch).GetAwaiter().GetResult();
         }
 
-        private string BuildXmlPayload(bool updateOverwriteVersion)
+        private async Task<string> BuildXmlPayloadAsync(bool updateOverwriteVersion)
         {
             string xml;
 
@@ -151,6 +151,14 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 xml = CsomHelper.ListItemSystemUpdate;
+            }
+
+            if ((this as IDataModelParent).Parent is IFile file)
+            {
+                // When it's a file then we need to resolve the {Parent.Id} token manually as otherwise this 
+                // will point to the File id while we need to list Id here
+                await file.EnsurePropertiesAsync(p => p.ListId).ConfigureAwait(false);
+                xml = xml.Replace("{Parent.Id}", file.ListId.ToString());
             }
 
             int counter = 1;

@@ -1306,6 +1306,43 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task CreateAndUpdatePageViaPageFile()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("CreateAndUpdatePageViaPageFile.aspx");
+
+                newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
+                newPage.AddControl(newPage.NewTextPart("I"), newPage.Sections[0].Columns[0]);
+                newPage.AddControl(newPage.NewTextPart("like"), newPage.Sections[0].Columns[1]);
+                newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
+                
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                // Load the Page File
+                var pageFile = await newPage.GetPageFileAsync(p=>p.UniqueId, p=>p.ListId, p=>p.ListItemAllFields);
+
+                pageFile.ListItemAllFields["ContentTypeId"] = PageConstants.ModernArticlePage;
+                await pageFile.ListItemAllFields.SystemUpdateAsync();
+
+
+                // Load the page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+                var updatedPage = pages.First();
+
+                Assert.IsTrue(updatedPage.Sections.Count == 1);
+                Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
+                Assert.IsTrue(updatedPage.Sections[0].Controls.Count == 3);
+
+                // Delete the page
+                await updatedPage.DeleteAsync();
+            }
+        }
+
 
         [TestMethod]
         public async Task SavePageAsTemplate()
