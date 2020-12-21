@@ -1654,7 +1654,7 @@ namespace PnP.Core.Model.SharePoint
 
             if (updatingExistingPage)
             {
-                await PageListItem.UpdateAsync().ConfigureAwait(false);
+                await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
             }
             else
             {
