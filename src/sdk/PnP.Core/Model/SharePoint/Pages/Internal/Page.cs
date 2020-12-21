@@ -132,11 +132,34 @@ namespace PnP.Core.Model.SharePoint
             {
                 if (PageListItem != null)
                 {
-                    return PageListItem[PageConstants.FileDirRef].ToString().Replace($"{PagesLibrary.RootFolder.ServerRelativeUrl}/", "");
+                    string folder = PageListItem[PageConstants.FileDirRef].ToString().Replace($"{PagesLibrary.RootFolder.ServerRelativeUrl}", "");
+                    if (folder.StartsWith("/"))
+                    {
+                        folder = folder.Substring(1);
+                    }
+                    return folder;
                 }
                 else
                 {
                     throw new ClientException(ErrorType.PropertyNotLoaded, string.Format(PnPCoreResources.Exception_Page_ListItemNotLoaded, nameof(Folder)));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Name of the page
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                if (PageListItem != null)
+                {
+                    return PageListItem[PageConstants.FileLeafRef].ToString();
+                }
+                else
+                {
+                    throw new ClientException(ErrorType.PropertyNotLoaded, string.Format(PnPCoreResources.Exception_Page_ListItemNotLoaded, nameof(Name)));
                 }
             }
         }
@@ -1337,12 +1360,24 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Create and Save page
-        public void SaveAsTemplate(string pageName)
+        public void SaveAsTemplate(string pageName = null)
         {
+            if (string.IsNullOrEmpty(pageName))
+            {
+                if (PageListItem != null)
+                {
+                    pageName = Name;
+                }
+                else
+                {
+                    throw new ArgumentNullException(nameof(pageName));
+                }
+            }
+
             SaveAsTemplateAsync(pageName).GetAwaiter().GetResult();
         }
 
-        public async Task SaveAsTemplateAsync(string pageName)
+        public async Task SaveAsTemplateAsync(string pageName = null)
         {
             string pageUrl = $"{(await GetTemplatesFolderAsync().ConfigureAwait(false))}/{pageName}";
 
@@ -1350,16 +1385,30 @@ namespace PnP.Core.Model.SharePoint
             await SaveAsync(pageUrl).ConfigureAwait(false);
         }
 
-        public void Save(string pageName)
+        public void Save(string pageName = null)
         {
             SaveAsync(pageName).GetAwaiter().GetResult();
         }
 
-        public async Task SaveAsync(string pageName)
+        public async Task SaveAsync(string pageName = null)
         {
             if (string.IsNullOrEmpty(pageName))
             {
-                throw new ArgumentNullException(nameof(pageName));
+                if (PageListItem != null)
+                {
+                    if (!string.IsNullOrEmpty(Folder))
+                    {
+                        pageName = $"{Folder}/{Name}";
+                    }
+                    else
+                    {
+                        pageName = Name;
+                    }
+                }
+                else
+                {
+                    throw new ArgumentNullException(nameof(pageName));
+                }
             }
 
             // Validate we're not using "wrong" layouts for the given site type

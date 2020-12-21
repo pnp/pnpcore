@@ -1225,6 +1225,52 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task CreateAndUpdatePageWithReloadWithoutPageName()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("CreateAndUpdatePageWithReloadWithoutPageName.aspx");
+                // Save the page
+                await newPage.SaveAsync(pageName);
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    newPage = (await context2.Web.GetPagesAsync(pageName)).FirstOrDefault();
+
+                    // Update the page
+                    newPage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
+                    newPage.AddControl(newPage.NewTextPart("I"), newPage.Sections[0].Columns[0]);
+                    newPage.AddControl(newPage.NewTextPart("like"), newPage.Sections[0].Columns[1]);
+                    newPage.AddControl(newPage.NewTextPart("PnP"), newPage.Sections[0].Columns[2]);
+
+                    // Check Folder and Name properties
+                    Assert.IsTrue(newPage.Name == pageName);
+                    Assert.IsTrue(newPage.Folder == "");
+
+                    // Update the page without passing the filename on save
+                    await newPage.SaveAsync();
+
+                    // Load the page again
+                    var pages = await context2.Web.GetPagesAsync(pageName);
+                    var updatedPage = pages.First();
+
+                    Assert.IsTrue(updatedPage.Sections.Count == 1);
+                    Assert.IsTrue(updatedPage.Sections[0].Columns.Count == 3);
+                    Assert.IsTrue(updatedPage.Sections[0].Controls.Count == 3);
+
+                    // Delete the page
+                    await updatedPage.DeleteAsync();
+                    // Verify the page exists
+                    var pages2 = await context2.Web.GetPagesAsync(pageName);
+                    Assert.IsTrue(pages2.Count == 0);
+                }
+            }
+        }
+
+
+        [TestMethod]
         public async Task SavePageAsTemplate()
         {
             //TestCommon.Instance.Mocking = false;

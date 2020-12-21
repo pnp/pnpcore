@@ -117,9 +117,14 @@ namespace PnP.Core.Model.SharePoint
         public ICanvasSection DefaultSection { get; }
 
         /// <summary>
-        /// Folder the page lives in
+        /// Folder the page lives in (available after saving the page)
         /// </summary>
         public string Folder { get; }
+
+        /// <summary>
+        /// The name of this page (available after saving the page)
+        /// </summary>
+        public string Name { get; }
 
         /// <summary>
         /// Adds a new section to your client side page
@@ -247,26 +252,26 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="pageName">Page name to use</param>
         /// <returns></returns>
-        Task SaveAsync(string pageName);
+        Task SaveAsync(string pageName = null);
 
         /// <summary>
         /// Saves the page to the pages library
         /// </summary>
         /// <param name="pageName">Page name to use</param>
         /// <returns></returns>
-        void Save(string pageName);
+        void Save(string pageName = null);
 
         /// <summary>
         /// Saves the page as a template page
         /// </summary>
         /// <param name="pageName">Page name to use</param>
-        public void SaveAsTemplate(string pageName);
+        public void SaveAsTemplate(string pageName = null);
 
         /// <summary>
         /// Saves the page as a template page
         /// </summary>
         /// <param name="pageName">Page name to use</param>
-        public Task SaveAsTemplateAsync(string pageName);
+        public Task SaveAsTemplateAsync(string pageName = null);
 
         /// <summary>
         /// Deletes the created page
