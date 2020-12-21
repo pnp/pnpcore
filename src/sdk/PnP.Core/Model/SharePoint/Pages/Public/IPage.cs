@@ -398,6 +398,20 @@ namespace PnP.Core.Model.SharePoint
         IEnumerable<IPageComponent> AvailablePageComponents(string name = null);
 
         /// <summary>
+        /// Instantiates a new web part with default data and returns it
+        /// </summary>
+        /// <param name="webPart">Default web part to instantiate</param>
+        /// <returns>Instantiated web part</returns>
+        public Task<IPageWebPart> InstantiateDefaultWebPartAsync(DefaultWebPart webPart);
+
+        /// <summary>
+        /// Instantiates a new web part with default data and returns it
+        /// </summary>
+        /// <param name="webPart">Default web part to instantiate</param>
+        /// <returns>Instantiated web part</returns>
+        public IPageWebPart InstantiateDefaultWebPart(DefaultWebPart webPart);
+
+        /// <summary>
         /// Returns the page translation status for a given page
         /// </summary>
         /// <returns><see cref="IPageTranslationStatusCollection"/> list containing information about this page's translations</returns>

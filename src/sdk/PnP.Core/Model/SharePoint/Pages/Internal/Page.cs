@@ -2092,6 +2092,24 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region Get client side web parts methods
+        public IPageWebPart InstantiateDefaultWebPart(DefaultWebPart webPart)
+        {
+            return InstantiateDefaultWebPartAsync(webPart).GetAwaiter().GetResult();
+        }
+
+        public async Task<IPageWebPart> InstantiateDefaultWebPartAsync(DefaultWebPart webPart)
+        {
+            var webPartName = WebPartEnumToId(webPart);
+            var webParts = await AvailablePageComponentsAsync(webPartName).ConfigureAwait(false);
+
+            if (webParts.Count() == 1)
+            {
+                return NewWebPart(webParts.First());
+            }
+
+            return null;
+        }
+
         public IEnumerable<IPageComponent> AvailablePageComponents(string name = null)
         {
             return AvailablePageComponentsAsync(name).GetAwaiter().GetResult();

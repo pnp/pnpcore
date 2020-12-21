@@ -587,6 +587,43 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task PageSectionsAndWebPartsCreateTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.NoGroupTestSite))
+            {
+                var page = await context.Web.NewPageAsync();
+                string pageName = TestCommon.GetPnPSdkTestAssetName("PageSectionsAndWebPartsCreateTest.aspx");
+
+                // Add all the possible sections 
+                page.AddSection(CanvasSectionTemplate.OneColumnFullWidth, 1);
+
+                // Instantiate a default web part
+                var imageWebPartComponent = await page.InstantiateDefaultWebPartAsync(DefaultWebPart.Image);
+
+                // Add a text control in each section
+                page.AddControl(imageWebPartComponent, page.Sections[0].Columns[0]);
+
+                await page.SaveAsync(pageName);
+
+                // load page again
+                var pages = await context.Web.GetPagesAsync(pageName);
+
+                Assert.IsTrue(pages.Count == 1);
+
+                page = pages.First();
+
+                Assert.IsTrue(page.Sections.Count == 1);
+                Assert.IsTrue(page.Sections[0].Type == CanvasSectionTemplate.OneColumnFullWidth);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls.Count == 1);
+                Assert.IsTrue(page.Sections[0].Columns[0].Controls[0] is IPageWebPart);
+                Assert.IsTrue((page.Sections[0].Columns[0].Controls[0] as IPageWebPart).WebPartId == page.DefaultWebPartToWebPartId(DefaultWebPart.Image));
+
+                // delete the page
+                await page.DeleteAsync();
+            }
+        }
 
         [TestMethod]
         [DataRow(CanvasSectionTemplate.OneColumnVerticalSection, 1)]
