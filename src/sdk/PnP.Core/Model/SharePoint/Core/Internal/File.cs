@@ -14,6 +14,7 @@ namespace PnP.Core.Model.SharePoint
     /// File class, write your custom code here
     /// </summary>
     [SharePointType("SP.File", Target = typeof(Folder), Uri = "_api/Web/getFileById('{Id}')", Get = "_api/Web/getFolderById('{Parent.Id}')/Files", LinqGet = "_api/Web/getFolderById('{Parent.Id}')/Files")]
+    [SharePointType("SP.File", Target = typeof(Web), Uri = "_api/Web/getFileById('{Id}')")]
     // TODO To implement when a token can be used to identify the parent list
     //[GraphType(Get = "sites/{hostname}:{serverrelativepath}/lists/{ParentList.Id}/items/{Id}")]
     internal partial class File : BaseDataModel<IFile>, IFile

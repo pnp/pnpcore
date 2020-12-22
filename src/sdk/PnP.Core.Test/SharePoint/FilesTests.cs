@@ -2832,6 +2832,40 @@ namespace PnP.Core.Test.SharePoint
 
         #endregion
 
+        #region File <-> ListItem handling
+        [TestMethod]
+        public async Task GetFileByServerRelativeUrlListItemUpdatesTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            (_, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentAsync(0);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, p=>p.Name, p=>p.ServerRelativeUrl, p => p.ListItemAllFields);
+
+                Assert.IsNotNull(testDocument);
+                Assert.AreEqual(documentName, testDocument.Name);
+                Assert.AreEqual(documentUrl, testDocument.ServerRelativeUrl);
+
+                // Ensure list item properties, since the ListItem model's parent is a File this is a special case
+                await testDocument.ListItemAllFields.EnsurePropertiesAsync(p => p.Title, p=>p.Id);
+                Assert.IsTrue(testDocument.ListItemAllFields.IsPropertyAvailable(p => p.Id));
+
+                // Update title
+                testDocument.ListItemAllFields.Title = "NewTitle";
+                await testDocument.ListItemAllFields.UpdateAsync();
+
+
+                await testDocument.GetAsync(p => p.ListId);
+                Assert.IsTrue(testDocument.ListId != Guid.Empty);
+            }
+
+            await TestAssets.CleanupTestDocumentAsync(2);
+        }
+
+        #endregion
+
         #region TESTS TO REVIEW - Get file versionevents
         [TestMethod]
         public async Task GetFileVersionEventsAsyncTest()
