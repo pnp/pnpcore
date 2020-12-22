@@ -233,6 +233,12 @@ namespace PnP.Core.Services
                 return;
             }
 
+            // If a batch was already executed then let's not execute it again
+            if (batch.Executed)
+            {
+                return;
+            }
+
             // Remove duplicate batch requests
             DedupBatchRequests(batch);
 
