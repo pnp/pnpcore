@@ -54,43 +54,5 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="viewOptions">View options</param>
         /// <returns>View</returns>
         public IView AddBatch(Batch batch, ViewOptions viewOptions);
-
-        /// <summary>
-        /// Removes a view asynchroniously
-        /// </summary>
-        /// <param name="id">ID of the View</param>
-        public Task RemoveAsync(Guid id);
-
-        /// <summary>
-        /// Removes a view
-        /// </summary>
-        /// <param name="id">ID of the View</param>
-        public void Remove(Guid id);
-
-        /// <summary>
-        /// Removes a view batch asynchroniously
-        /// </summary>
-        /// <param name="id">ID of the View</param>
-        public Task RemoveBatchAsync(Guid id);
-
-        /// <summary>
-        /// Removes a view in a specific batch asynchroniously
-        /// </summary>
-        /// <param name="id">ID of the View</param>
-        /// <param name="batch">The batch</param>
-        public Task RemoveBatchAsync(Batch batch, Guid id);
-
-        /// <summary>
-        /// Removes a view batch asynchroniously
-        /// </summary>
-        /// <param name="id">ID of the View</param>
-        public void RemoveBatch(Guid id);
-
-        /// <summary>
-        /// Removes a view in a specific batch asynchroniously
-        /// </summary>
-        /// <param name="id">ID of the View</param>
-        /// <param name="batch">The batch</param>
-        public void RemoveBatch(Batch batch, Guid id);
     }
 }

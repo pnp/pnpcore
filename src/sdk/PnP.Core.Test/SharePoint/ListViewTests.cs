@@ -47,8 +47,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 // Removes the view
-                await list.Views.RemoveAsync(result.Id);
-
+                await result.DeleteAsync();
             }
         }
 
@@ -73,7 +72,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 // Removes the view
-                list.Views.Remove(result.Id);
+                await result.DeleteAsync();
 
             }
         }
@@ -99,7 +98,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 // Removes the view
-                list.Views.Remove(result.Id);
+                await result.DeleteAsync();
 
             }
         }
@@ -123,7 +122,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 // Removes the view
-                list.Views.Remove(result.Id);
+                await result.DeleteAsync();
 
             }
         }
@@ -149,7 +148,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 // Removes the view
-                await list.Views.RemoveBatchAsync(result.Id);
+                await result.DeleteBatchAsync();
                 await context.ExecuteAsync();
             }
         }
@@ -174,7 +173,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual(viewTitle, result.Title);
 
                 // Removes the view
-                list.Views.RemoveBatch(result.Id);
+                await result.DeleteBatchAsync();
                 await context.ExecuteAsync();
 
             }
@@ -202,7 +201,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Removes the view
                 var removeBatch = context.NewBatch();
-                await list.Views.RemoveBatchAsync(removeBatch, result.Id);
+                await result.DeleteBatchAsync(removeBatch);
                 await context.ExecuteAsync(removeBatch);
             }
         }
@@ -229,7 +228,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // Removes the view
                 var removeBatch = context.NewBatch();
-                list.Views.RemoveBatch(removeBatch, result.Id);
+                await result.DeleteBatchAsync(removeBatch);
                 await context.ExecuteAsync(removeBatch);
 
             }
@@ -262,7 +261,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(newView.ViewType2 == ViewType2.COMPACTLIST);
 
                 // Removes the view
-                list.Views.Remove(result.Id);
+                await result.DeleteAsync();
 
             }
         }

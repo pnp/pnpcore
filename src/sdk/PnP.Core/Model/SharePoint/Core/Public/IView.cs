@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a View object
     /// </summary>
     [ConcreteType(typeof(View))]
-    public interface IView : IDataModel<IView>, IDataModelUpdate, IDataModelDelete
+    public interface IView : IDataModel<IView>, IDataModelGet<IView>, IDataModelUpdate, IDataModelDelete
     {
         #region Properties
 
@@ -188,7 +188,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Gets or sets Server Relative Url
         /// </summary>
-        public string ServerRelativeUrl { get; set; }
+        public string ServerRelativeUrl { get; }
 
         /// <summary>
         /// Gets or sets Style Id
