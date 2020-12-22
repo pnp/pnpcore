@@ -126,14 +126,14 @@ viewToUpdate.Title = &quot;All&quot;;
 await viewToUpdate.UpdateAsync();
 </code></pre>
 <h2 id="deleting-a-view">Deleting a view</h2>
-<p>Deleting a view can be done using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IViewCollection.html#PnP_Core_Model_SharePoint_IViewCollection_RemoveAsync_Guid_">RemoveAsync method on a view collection</a>.</p>
+<p>Deleting a view can be done using the regular Delete methods.</p>
 <pre><code class="lang-csharp">// Get Documents list with views via title
 var myList = await context.Web.Lists.GetByTitleAsync(&quot;Documents&quot;, p =&gt; p.Views);
 
 // Get the view to update
 var viewToDelete = myList.Views.FirstOrDefault(p =&gt; p.Title == &quot;View to delete&quot;);
 
-await myList.Views.RemoveAsync(viewToDelete.Id);
+await viewToDelete.DeleteAsync();
 </code></pre>
 </article>
           </div>
