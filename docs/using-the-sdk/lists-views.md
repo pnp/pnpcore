@@ -58,7 +58,7 @@ await viewToUpdate.UpdateAsync();
 
 ## Deleting a view
 
-Deleting a view can be done using the [RemoveAsync method on a view collection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IViewCollection.html#PnP_Core_Model_SharePoint_IViewCollection_RemoveAsync_Guid_).
+Deleting a view can be done using the regular Delete methods.
 
 ```csharp
 // Get Documents list with views via title
@@ -67,5 +67,5 @@ var myList = await context.Web.Lists.GetByTitleAsync("Documents", p => p.Views);
 // Get the view to update
 var viewToDelete = myList.Views.FirstOrDefault(p => p.Title == "View to delete");
 
-await myList.Views.RemoveAsync(viewToDelete.Id);
+await viewToDelete.DeleteAsync();
 ```
