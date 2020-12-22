@@ -118,6 +118,30 @@
       <a class="xref" href="PnP.Core.Model.IDataModelWithContext.html#PnP_Core_Model_IDataModelWithContext_PnPContext">IDataModelWithContext.PnPContext</a>
     </div>
     <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____">IDataModelGet&lt;IView&gt;.GetBatchAsync(Batch, Expression&lt;Func&lt;IView, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatchAsync_Expression_Func__0_System_Object_____">IDataModelGet&lt;IView&gt;.GetBatchAsync(Expression&lt;Func&lt;IView, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatch_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____">IDataModelGet&lt;IView&gt;.GetBatch(Batch, Expression&lt;Func&lt;IView, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetBatch_Expression_Func__0_System_Object_____">IDataModelGet&lt;IView&gt;.GetBatch(Expression&lt;Func&lt;IView, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_Expression_Func__0_System_Object_____">IDataModelGet&lt;IView&gt;.GetAsync(Expression&lt;Func&lt;IView, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_GetAsync_PnP_Core_Services_ApiResponse_Expression_Func__0_System_Object_____">IDataModelGet&lt;IView&gt;.GetAsync(ApiResponse, Expression&lt;Func&lt;IView, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_Expression_Func__0_System_Object_____">IDataModelGet&lt;IView&gt;.Get(Expression&lt;Func&lt;IView, Object&gt;&gt;[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_Get_PnP_Core_Services_ApiResponse_Expression_Func__0_System_Object_____">IDataModelGet&lt;IView&gt;.Get(ApiResponse, Expression&lt;Func&lt;IView, Object&gt;&gt;[])</a>
+    </div>
+    <div>
       <a class="xref" href="PnP.Core.Model.IDataModelUpdate.html#PnP_Core_Model_IDataModelUpdate_UpdateBatchAsync">IDataModelUpdate.UpdateBatchAsync()</a>
     </div>
     <div>
@@ -160,7 +184,7 @@
   
   <h5 id="PnP_Core_Model_SharePoint_IView_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IView : IDataModel&lt;IView&gt;, IDataModelParent, IDataModelWithContext, IDataModelUpdate, IDataModelDelete</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IView : IDataModel&lt;IView&gt;, IDataModelParent, IDataModelWithContext, IDataModelGet&lt;IView&gt;, IDataModelUpdate, IDataModelDelete</code></pre>
   </div>
 
   
@@ -1597,7 +1621,7 @@
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">string ServerRelativeUrl { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">string ServerRelativeUrl { get; }</code></pre>
   </div>
 
   
