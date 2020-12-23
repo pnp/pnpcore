@@ -1,1 +1,9 @@
-{"responses":[{"id":"1","status":429,"headers":{"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8","Retry-After":"5"},"body":{"error":{"code":"activityLimitReached","message":"Application has been throttled."}}},{"id":"2","status":429,"headers":{"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8","Retry-After":"5"},"body":{"error":{"code":"activityLimitReached","message":"Application has been throttled."}}}]}
+--batchresponse_57846d2a-f192-4e74-b7b9-ba72dd50ad83
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
+--batchresponse_57846d2a-f192-4e74-b7b9-ba72dd50ad83--

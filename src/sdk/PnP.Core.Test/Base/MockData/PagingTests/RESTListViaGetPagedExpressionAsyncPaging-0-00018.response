@@ -1,9 +1,9 @@
---batchresponse_d58e7f89-b590-4d97-be93-a6921ca9a02d
+--batchresponse_7651d99a-dc7e-4eda-8512-8fe57634acac
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7deacba3-a99c-45af-b58b-d745330d9eb0')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7deacba3-a99c-45af-b58b-d745330d9eb0')","etag":"\"1\"","type":"SP.List"},"Id":"7deacba3-a99c-45af-b58b-d745330d9eb0","Title":"RESTListItemPaging"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'8464228d-21c9-4338-9f6c-2af99939b7cb')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'8464228d-21c9-4338-9f6c-2af99939b7cb')","etag":"\"5\"","type":"SP.List"},"Id":"8464228d-21c9-4338-9f6c-2af99939b7cb","Title":"SharePointHomeCacheList"}]}}
---batchresponse_d58e7f89-b590-4d97-be93-a6921ca9a02d--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'66d3ebf5-c2a6-4fa4-8d4a-d1c921ecfce7')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'66d3ebf5-c2a6-4fa4-8d4a-d1c921ecfce7')","etag":"\"2\"","type":"SP.List"},"Id":"66d3ebf5-c2a6-4fa4-8d4a-d1c921ecfce7","Title":"PNP_SDK_TEST_PublishFileCurrentBatchAsyncTest"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'41eb19d2-aa49-4bd5-95ed-ec0a7f6f2572')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'41eb19d2-aa49-4bd5-95ed-ec0a7f6f2572')","etag":"\"2\"","type":"SP.List"},"Id":"41eb19d2-aa49-4bd5-95ed-ec0a7f6f2572","Title":"PNP_SDK_TEST_PublishFileCurrentBatchTest"}]}}
+--batchresponse_7651d99a-dc7e-4eda-8512-8fe57634acac--

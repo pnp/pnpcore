@@ -1,8 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PnP.Core.Model;
 using PnP.Core.Model.Security;
+using PnP.Core.Model.SharePoint;
 using System;
 using System.Linq;
+using System.Net.Http;
 #if !NETSTANDARD2_0
 using System.Runtime.InteropServices;
 #endif
@@ -144,6 +147,9 @@ namespace PnP.Core.Services
                 Uri = url
             };
 
+            // Perform context initialization
+            await InitializeContextAsync(context).ConfigureAwait(false);
+
             // Configure the global Microsoft Graph settings
             context.GraphFirst = ContextOptions.GraphFirst;
             context.GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
@@ -178,6 +184,9 @@ namespace PnP.Core.Services
 
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
+            // Perform context initialization
+            await InitializeContextAsync(context).ConfigureAwait(false);
+
             await ConfigureTelemetry(context).ConfigureAwait(false);
 
             return context;
@@ -201,6 +210,31 @@ namespace PnP.Core.Services
         public async virtual Task<PnPContext> CreateAsync(Guid groupId)
         {
             return await CreateAsync(groupId, ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// When using REST batch requests the URL needs to be correctly cased, so we're loading the web url while doing an interactive request.
+        /// Also loading the default needed properties to save additional loads for missing key properties
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        internal static async Task InitializeContextAsync(PnPContext context)
+        {
+            // Load required web properties
+            var api = new ApiCall($"{context.Uri}/_api/Web?$select=Id,Url,RegionalSettings&$expand=RegionalSettings/TimeZone", ApiType.SPORest)
+            {
+                Interactive = true
+            };
+            await (context.Web as Web).RequestAsync(api, HttpMethod.Get).ConfigureAwait(false);
+            
+            // Replace the context URI with the value using the correct casing
+            context.Uri = context.Web.Url;
+
+            // Request the Site Id
+            await context.Site.GetAsync(p => p.Id, p=>p.GroupId).ConfigureAwait(false);
+
+            // Ensure the Graph ID is set
+            (context.Web as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, $"{context.Uri.DnsSafeHost},{context.Site.Id},{context.Web.Id}");
         }
 
         internal static async Task ConfigureForGroup(PnPContext context, Guid groupId)

@@ -1,9 +1,9 @@
---batchresponse_33305d5a-a7de-40ba-9e6d-0893cbd971dd
+--batchresponse_7d21ac11-e6e7-4781-96a8-3353e90a14f8
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"MoveAllToSecondStage":null}}
---batchresponse_33305d5a-a7de-40ba-9e6d-0893cbd971dd--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web","type":"SP.Web"},"RecycleBin":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RecycleBin(guid'22a9c609-457c-4a2d-8a38-599172bf5257')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RecycleBin(guid'22a9c609-457c-4a2d-8a38-599172bf5257')","type":"SP.RecycleBinItem"},"Author":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RecycleBin(guid'22a9c609-457c-4a2d-8a38-599172bf5257')/Author"}},"DeletedBy":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/RecycleBin(guid'22a9c609-457c-4a2d-8a38-599172bf5257')/DeletedBy"}},"AuthorEmail":"bert.jansen@bertonline.onmicrosoft.com","AuthorName":"Bert Jansen (Cloud)","DeletedByEmail":"bert.jansen@bertonline.onmicrosoft.com","DeletedByName":"Bert Jansen (Cloud)","DeletedDate":"2020-12-23T19:15:21Z","DeletedDateLocalFormatted":"23/12/2020 20:15","DirName":"sites/prov-1/Shared Documents","DirNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"sites/prov-1/Shared Documents"},"Id":"22a9c609-457c-4a2d-8a38-599172bf5257","ItemState":1,"ItemType":1,"LeafName":"PNP_SDK_TEST_MoveAllToSecondStageBatchTest.docx","LeafNamePath":{"__metadata":{"type":"SP.ResourcePath"},"DecodedUrl":"PNP_SDK_TEST_MoveAllToSecondStageBatchTest.docx"},"Size":"18657","Title":"PNP_SDK_TEST_MoveAllToSecondStageBatchTest.docx"}]},"Id":"8c8e101c-1b0d-4253-85e7-c30039bf46e2"}}
+--batchresponse_7d21ac11-e6e7-4781-96a8-3353e90a14f8--

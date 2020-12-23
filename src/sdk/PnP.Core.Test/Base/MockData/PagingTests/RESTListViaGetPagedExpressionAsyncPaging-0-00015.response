@@ -1,9 +1,9 @@
---batchresponse_b08229ea-debd-4c65-841f-b5e54869592b
+--batchresponse_e821a136-2292-43da-bbf5-55bd0d6c521d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'9c973490-7a51-4400-baae-ea38f93df947')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'9c973490-7a51-4400-baae-ea38f93df947')","etag":"\"7\"","type":"SP.List"},"Id":"9c973490-7a51-4400-baae-ea38f93df947","Title":"graph"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b232f626-80b7-4dc6-8547-73bb092c5c49')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'b232f626-80b7-4dc6-8547-73bb092c5c49')","etag":"\"1\"","type":"SP.List"},"Id":"b232f626-80b7-4dc6-8547-73bb092c5c49","Title":"InteractivePostRequest"}]}}
---batchresponse_b08229ea-debd-4c65-841f-b5e54869592b--
+{"d":{"results":[]}}
+--batchresponse_e821a136-2292-43da-bbf5-55bd0d6c521d--

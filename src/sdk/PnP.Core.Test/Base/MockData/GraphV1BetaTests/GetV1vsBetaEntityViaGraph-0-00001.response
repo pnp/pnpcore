@@ -1,1 +1,9 @@
-{"responses": [{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams(id,primaryChannel,primaryChannel())/$entity","id":"b32780e9-df70-4548-a735-4e7f055415a1","primaryChannel@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams('b32780e9-df70-4548-a735-4e7f055415a1')/primaryChannel/$entity","primaryChannel":{"id":"19:9f4c089b2a87472ebd357031a7c11be9@thread.tacv2","displayName":"General","description":"prov-1","isFavoriteByDefault":null,"email":"","webUrl":"https://teams.microsoft.com/l/channel/19%3a9f4c089b2a87472ebd357031a7c11be9%40thread.tacv2/General?groupId=b32780e9-df70-4548-a735-4e7f055415a1&tenantId=d8623c9e-30c7-473a-83bc-d907df44a26e","membershipType":"standard"}}}]}
+--batchresponse_a8bc3492-3405-4776-9b0b-c29e2f14bc77
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Site","type":"SP.Site"},"GroupId":"b32780e9-df70-4548-a735-4e7f055415a1","Id":"b56adf79-ff6a-4964-a63a-ff1fa23be9f8"}}
+--batchresponse_a8bc3492-3405-4776-9b0b-c29e2f14bc77--

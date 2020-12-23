@@ -1,9 +1,10 @@
---batchresponse_fafe0947-bc22-4b2f-9433-89bc10960599
+--batchresponse_02458db6-90c3-4c25-9d61-82f390dccb2e
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileAsyncTest')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileAsyncTest')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileAsyncTest')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileAsyncTest')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileAsyncTest')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileAsyncTest')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileAsyncTest')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileAsyncTest')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"PNP_SDK_TEST_UndoCheckoutFileAsyncTest","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileAsyncTest","TimeCreated":"2020-12-07T09:00:29Z","TimeLastModified":"2020-12-07T09:00:29Z","UniqueId":"b29a9ca3-bd8e-48fc-88a9-1e87c184f8e7","WelcomePage":""}}
---batchresponse_fafe0947-bc22-4b2f-9433-89bc10960599--
+
+--batchresponse_02458db6-90c3-4c25-9d61-82f390dccb2e--

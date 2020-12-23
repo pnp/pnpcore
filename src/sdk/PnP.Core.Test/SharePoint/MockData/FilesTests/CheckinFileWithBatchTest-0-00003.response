@@ -1,9 +1,10 @@
---batchresponse_db50ebeb-9180-450e-b557-c92c7b7e81c8
+--batchresponse_6e705d7e-8643-46c8-ac73-db8c00a7df52
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_CheckinFileWithBatchTest')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_CheckinFileWithBatchTest')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_CheckinFileWithBatchTest')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_CheckinFileWithBatchTest')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_CheckinFileWithBatchTest')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_CheckinFileWithBatchTest')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_CheckinFileWithBatchTest')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_CheckinFileWithBatchTest')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"PNP_SDK_TEST_CheckinFileWithBatchTest","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/PNP_SDK_TEST_CheckinFileWithBatchTest","TimeCreated":"2020-12-07T08:58:55Z","TimeLastModified":"2020-12-07T08:58:56Z","UniqueId":"d65ae50e-dda4-49cc-8b05-c090f04372c5","WelcomePage":""}}
---batchresponse_db50ebeb-9180-450e-b557-c92c7b7e81c8--
+
+--batchresponse_6e705d7e-8643-46c8-ac73-db8c00a7df52--

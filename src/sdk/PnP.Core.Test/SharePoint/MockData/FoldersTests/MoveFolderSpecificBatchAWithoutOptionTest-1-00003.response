@@ -1,0 +1,9 @@
+--batchresponse_8956b092-8d93-4f62-a783-219b76e8d8b9
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"MoveFolder":null}}
+--batchresponse_8956b092-8d93-4f62-a783-219b76e8d8b9--

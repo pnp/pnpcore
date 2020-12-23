@@ -1,9 +1,10 @@
---batchresponse_256b498d-b984-4bd5-8004-ff5da4e639aa
+--batchresponse_2f692c54-0dc6-4785-81b1-1ffb9b47adc6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_GetFileVersionsAsyncTest')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_GetFileVersionsAsyncTest')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_GetFileVersionsAsyncTest')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_GetFileVersionsAsyncTest')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_GetFileVersionsAsyncTest')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_GetFileVersionsAsyncTest')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_GetFileVersionsAsyncTest')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_GetFileVersionsAsyncTest')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"PNP_SDK_TEST_GetFileVersionsAsyncTest","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/PNP_SDK_TEST_GetFileVersionsAsyncTest","TimeCreated":"2020-12-07T08:59:44Z","TimeLastModified":"2020-12-07T08:59:45Z","UniqueId":"c49ebbbe-e72b-4bb0-976c-9848626a8b61","WelcomePage":""}}
---batchresponse_256b498d-b984-4bd5-8004-ff5da4e639aa--
+
+--batchresponse_2f692c54-0dc6-4785-81b1-1ffb9b47adc6--

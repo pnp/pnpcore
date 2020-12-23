@@ -4,6 +4,7 @@ using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.Services
@@ -64,9 +65,15 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(string name)
         {
-            var context = await base.CreateAsync(name).ConfigureAwait(false);
-            ConfigurePnPContextForTesting(ref context);
-            return context;
+            // Search for the provided configuration
+            var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
+            if (configuration == null)
+            {
+                throw new ClientException(ErrorType.ConfigurationError,
+                    string.Format(PnPCoreResources.Exception_ConfigurationError_InvalidPnPContextConfigurationName, name));
+            }
+
+            return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider).ConfigureAwait(false);
         }
 
         public override PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider)
@@ -76,8 +83,24 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider)
         {
-            var context = await base.CreateAsync(url, authenticationProvider).ConfigureAwait(false);
+            // Use the provided settings to create a new instance of SPOContext
+            var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
+            {
+                Uri = url
+            };
+
             ConfigurePnPContextForTesting(ref context);
+
+            // Perform context initialization
+            await InitializeContextAsync(context).ConfigureAwait(false);
+
+            // Configure the global Microsoft Graph settings
+            context.GraphFirst = ContextOptions.GraphFirst;
+            context.GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
+            context.GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
+
+            await ConfigureTelemetry(context).ConfigureAwait(false);
+
             return context;
         }
 
@@ -88,9 +111,8 @@ namespace PnP.Core.Test.Services
 
         public async override Task<PnPContext> CreateAsync(Uri url)
         {
-            var context = await base.CreateAsync(url).ConfigureAwait(false);
-            ConfigurePnPContextForTesting(ref context);
-            return context;
+            // Use the default settings to create a new instance of SPOContext
+            return await CreateAsync(url, ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
         }
 
         public override PnPContext Create(Guid groupId, IAuthenticationProvider authenticationProvider)
@@ -121,6 +143,9 @@ namespace PnP.Core.Test.Services
             ConfigurePnPContextForTesting(ref context);
 
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);
+
+            // Perform context initialization
+            await InitializeContextAsync(context).ConfigureAwait(false);
 
             return context;
         }

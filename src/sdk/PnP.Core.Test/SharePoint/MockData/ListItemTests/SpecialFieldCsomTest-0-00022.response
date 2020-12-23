@@ -1,1 +1,9 @@
-[{"SchemaVersion":"15.0.0.0","LibraryVersion":"16.0.20725.12000","ErrorInfo":null,"TraceCorrelationId":"dee9949f-a022-2000-9c6e-737ba89ebaee"},7,{"IsNull":false}]
+--batchresponse_64cd02b9-53dd-40a2-bd85-7a82125992a1
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+
+--batchresponse_64cd02b9-53dd-40a2-bd85-7a82125992a1--

@@ -1,0 +1,9 @@
+--batchresponse_4ed45312-1b93-4c14-8102-fd9eef979894
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'941440ae-8553-4879-a7df-78749f9dec60')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'941440ae-8553-4879-a7df-78749f9dec60')","etag":"\"2\"","type":"SP.List"},"Id":"941440ae-8553-4879-a7df-78749f9dec60","Title":"PNP_SDK_TEST_UnpublishFileBatchAsyncTest"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'773f69ea-1bda-49c1-8eeb-b2400981131a')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'773f69ea-1bda-49c1-8eeb-b2400981131a')","etag":"\"2\"","type":"SP.List"},"Id":"773f69ea-1bda-49c1-8eeb-b2400981131a","Title":"PNP_SDK_TEST_UnpublishFileBatchTest"}]}}
+--batchresponse_4ed45312-1b93-4c14-8102-fd9eef979894--

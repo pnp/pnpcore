@@ -1,0 +1,9 @@
+--batchresponse_2da758e8-7d84-4f8c-9e7d-e62c14a72b8a
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'3a519ef8-ad14-4a6a-92f5-c39f68195be4')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'3a519ef8-ad14-4a6a-92f5-c39f68195be4')","etag":"\"1\"","type":"SP.List"},"Id":"3a519ef8-ad14-4a6a-92f5-c39f68195be4","Title":"RESTListItemPaging"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'8464228d-21c9-4338-9f6c-2af99939b7cb')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'8464228d-21c9-4338-9f6c-2af99939b7cb')","etag":"\"5\"","type":"SP.List"},"Id":"8464228d-21c9-4338-9f6c-2af99939b7cb","Title":"SharePointHomeCacheList"}]}}
+--batchresponse_2da758e8-7d84-4f8c-9e7d-e62c14a72b8a--

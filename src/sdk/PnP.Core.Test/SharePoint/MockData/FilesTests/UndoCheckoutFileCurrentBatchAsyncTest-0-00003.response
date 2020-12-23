@@ -1,9 +1,10 @@
---batchresponse_123d38df-5de4-466c-8721-1cd46f416345
+--batchresponse_741d021c-62af-49e7-a2ef-8870261a41f0
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/PNP_SDK_TEST_UndoCheckoutFileCurrentBatchAsyncTest","TimeCreated":"2020-12-07T09:00:35Z","TimeLastModified":"2020-12-07T09:00:36Z","UniqueId":"e2ad48ae-2de8-4774-ba40-cc17f360b4ab","WelcomePage":""}}
---batchresponse_123d38df-5de4-466c-8721-1cd46f416345--
+
+--batchresponse_741d021c-62af-49e7-a2ef-8870261a41f0--

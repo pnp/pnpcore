@@ -1,0 +1,9 @@
+--batchresponse_758ea647-65f6-49cb-a7e4-29fd38bfae46
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'bc1898a1-ef69-44d4-a936-d29c5660a4fa')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'bc1898a1-ef69-44d4-a936-d29c5660a4fa')","etag":"\"2\"","type":"SP.List"},"Id":"bc1898a1-ef69-44d4-a936-d29c5660a4fa","Title":"PNP_SDK_TEST_UnpublishFileTest"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'1a90aae6-3899-42ab-a5db-59055b1dcecb')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'1a90aae6-3899-42ab-a5db-59055b1dcecb')","etag":"\"1\"","type":"SP.List"},"Id":"1a90aae6-3899-42ab-a5db-59055b1dcecb","Title":"RESTListItemGetPagedAsyncPaging"}]}}
+--batchresponse_758ea647-65f6-49cb-a7e4-29fd38bfae46--

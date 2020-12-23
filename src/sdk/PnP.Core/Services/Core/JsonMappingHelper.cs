@@ -654,35 +654,6 @@ namespace PnP.Core.Services
             if (entity.SupportsGraphAndRest && !Metadata.ContainsKey(PnPConstants.MetaDataGraphId))
             {
 
-                // Ensure site and web id's are loaded, use batching to load them both in one go in case that would be needed.
-                // Do this for all SharePoint types, but skip SP.Site as otherwise will processing the SP.Site response we again will request
-                // the SP.Web id...which is an unneeded server request
-                if (!entity.SharePointType.Equals("SP.Site"))
-                {
-                    if (!pnpContext.Site.IsPropertyAvailable(p => p.Id) || !pnpContext.Web.IsPropertyAvailable(p => p.Id))
-                    {
-                        var idBatch = pnpContext.NewBatch();
-                        if (!pnpContext.Site.IsPropertyAvailable(p => p.Id))
-                        {
-                            await pnpContext.Site.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
-                        }
-                        if (!pnpContext.Web.IsPropertyAvailable(p => p.Id))
-                        {
-                            await pnpContext.Web.GetBatchAsync(idBatch, p => p.Id).ConfigureAwait(false);
-                        }
-                        // We need regional settings and timezone information when working with list items...given we anyhow go the server it's best to 
-                        // add this request to the batch to safe a server roundtrip
-                        if (!pnpContext.Web.IsPropertyAvailable(p=>p.RegionalSettings) || 
-                            (pnpContext.Web.IsPropertyAvailable(p => p.RegionalSettings) && !pnpContext.Web.RegionalSettings.IsPropertyAvailable(p => p.TimeZone)))
-                        {
-                            await pnpContext.Web.RegionalSettings.GetBatchAsync(RegionalSettings.LocaleSettingsExpression).ConfigureAwait(false);
-                        }
-
-                        await pnpContext.ExecuteAsync(idBatch).ConfigureAwait(false);
-
-                    }
-                }
-
                 // SP.Web requires a special id value
                 if (entity.SharePointType.Equals("SP.Web"))
                 {
@@ -991,9 +962,6 @@ namespace PnP.Core.Services
                         metadata.Add(PnPConstants.MetaDataRestId, id);
                         ((IDataModelWithKey)pnpObject).Key = Guid.Parse(id);
                     }
-
-                    // Call EnsurePropertiesAsync to ensure Site.Id is loaded if it was not yet the case
-                    await contextAwareObject.PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
                 }
                 else if (entity.SharePointType.Equals("SP.Site"))
                 {

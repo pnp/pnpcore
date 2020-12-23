@@ -91,6 +91,15 @@ Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
 Remove-PnPList -Identity "TestQueryListsUpdateConsistency - Updated" -Force
 Remove-PnPList -Identity UpdateOverwriteVersionBatch -Force
 
+$lists = Get-PnPList
+foreach($list in $lists)
+{
+    if ($list.Title.StartsWith("PNP_SDK_TEST_"))
+    {
+        Remove-PnPList -Identity $list.Id -Force
+    }
+}
+
 # TODO: When ALM support is implemented, remove this from here and move to TestAssets helper
 $app = Get-PnPApp pnpcoresdk-test-app-client-side-solution
 Uninstall-PnPApp -Identity $app.Id

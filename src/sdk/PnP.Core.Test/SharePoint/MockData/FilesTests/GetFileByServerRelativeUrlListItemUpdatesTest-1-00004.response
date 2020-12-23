@@ -1,9 +1,9 @@
---batchresponse_093854b4-cb82-4ead-915d-447b5f8cecb0
+--batchresponse_27bce1e8-e151-400d-9d00-cb703178d6ea
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/PNP_SDK_TEST_GetFileByServerRelativeUrlListItemUpdatesTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_GetFileByServerRelativeUrlListItemUpdatesTest.docx')","type":"SP.File"},"ListId":"f90d07e0-bbea-4464-9611-f695d0b7b3e4","UniqueId":"109ee820-8cd2-490b-9e3d-f5ada6dd3c37"}}
---batchresponse_093854b4-cb82-4ead-915d-447b5f8cecb0--
+{"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"NewTitle","HasException":false,"ItemId":2081}]}}}
+--batchresponse_27bce1e8-e151-400d-9d00-cb703178d6ea--

@@ -89,12 +89,12 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // first get
-                var web = await context.Web.GetBatchAsync(p => p.Title);
+                // first get, check on Lists as web is loaded by default + force REST call by adding a REST specific property
+                var web = await context.Web.GetBatchAsync(p => p.Lists, p => p.AlternateCssUrl);
                 // second get
-                var web2 = await context.Web.GetBatchAsync(p => p.Title);
+                var web2 = await context.Web.GetBatchAsync(p => p.Lists, p => p.AlternateCssUrl);
                 // third get
-                var web3 = await context.Web.GetBatchAsync(p => p.Title);
+                var web3 = await context.Web.GetBatchAsync(p => p.Lists, p => p.AlternateCssUrl);
 
                 // Grab the id of the current batch so we can later on find it back
                 Guid currentBatchId = context.CurrentBatch.Id;
@@ -103,16 +103,16 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(context.CurrentBatch.Requests.Count == 3);
 
                 // The model was not yet requested
-                Assert.IsFalse(web.Requested);
-                Assert.IsFalse(web2.Requested);
-                Assert.IsFalse(web3.Requested);
+                Assert.IsFalse(web.Lists.Requested);
+                Assert.IsFalse(web2.Lists.Requested);
+                Assert.IsFalse(web3.Lists.Requested);
 
                 await context.ExecuteAsync();
 
                 // all variables should point to the same model, so all should be requested
-                Assert.IsTrue(web.Requested);
-                Assert.IsTrue(web2.Requested);
-                Assert.IsTrue(web3.Requested);
+                Assert.IsTrue(web.Lists.Requested);
+                Assert.IsTrue(web2.Lists.Requested);
+                Assert.IsTrue(web3.Lists.Requested);
 
                 var executedBatch = context.BatchClient.GetBatchById(currentBatchId);
                 // Batch should be marked as executed
@@ -305,7 +305,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                var api = new ApiCall($"_api/web?$select={{GraphId}}%2cWelcomePage", ApiType.SPORest)
+                var api = new ApiCall($"_api/web?$select={{Parent.GraphId}}%2cWelcomePage", ApiType.SPORest)
                 {
                     Interactive = true
                 };

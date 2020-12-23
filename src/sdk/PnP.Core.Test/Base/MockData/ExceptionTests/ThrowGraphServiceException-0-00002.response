@@ -1,11 +1,1 @@
-{"responses": [{"id": "1","status":400,"body":{
-  "error": {
-    "code": "BadRequest",
-    "message": "Channel name already existed, please use other name",
-    "innerError": {
-      "date": "2020-12-07T08:55:09",
-      "request-id": "67bb6442-2449-48a5-9cdd-9f787cac1068",
-      "client-request-id": "67bb6442-2449-48a5-9cdd-9f787cac1068"
-    }
-  }
-}}]}
+{"responses": [{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams(id)/$entity","id":"b32780e9-df70-4548-a735-4e7f055415a1"}}]}

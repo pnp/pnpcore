@@ -1,0 +1,9 @@
+--batchresponse_5a1888a4-e831-4e6d-8f81-74180164b598
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7d6c0e99-a12e-4ea2-9f99-504b29e0f794')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7d6c0e99-a12e-4ea2-9f99-504b29e0f794')","etag":"\"1\"","type":"SP.List"},"Id":"7d6c0e99-a12e-4ea2-9f99-504b29e0f794","Title":"TestQueryListItemsAddConsistency"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'432ff50b-4a08-47a7-ace0-b015fad6d1a7')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'432ff50b-4a08-47a7-ace0-b015fad6d1a7')","etag":"\"1\"","type":"SP.List"},"Id":"432ff50b-4a08-47a7-ace0-b015fad6d1a7","Title":"TestQueryListItemsDeleteConsistency"}]}}
+--batchresponse_5a1888a4-e831-4e6d-8f81-74180164b598--

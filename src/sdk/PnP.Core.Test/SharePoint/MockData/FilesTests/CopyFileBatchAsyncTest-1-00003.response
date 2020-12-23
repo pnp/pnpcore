@@ -1,0 +1,9 @@
+--batchresponse_ca92f9bd-1599-405e-a99b-0fe389da9c6b
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"CopyTo":null}}
+--batchresponse_ca92f9bd-1599-405e-a99b-0fe389da9c6b--

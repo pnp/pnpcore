@@ -1,9 +1,9 @@
---batchresponse_0a4238e4-bc77-43c0-b2de-2f90751c6150
+--batchresponse_79cd687d-1629-4160-b2c1-82affb5d7184
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'60116bac-f5f0-4ca6-b133-ed93670d638f')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'60116bac-f5f0-4ca6-b133-ed93670d638f')","etag":"\"6\"","type":"SP.List"},"Id":"60116bac-f5f0-4ca6-b133-ed93670d638f","Title":"Content type publishing error log"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'98190d78-44d8-44d9-af15-521cf4717b8d')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'98190d78-44d8-44d9-af15-521cf4717b8d')","etag":"\"1\"","type":"SP.List"},"Id":"98190d78-44d8-44d9-af15-521cf4717b8d","Title":"Converted Forms"}]}}
---batchresponse_0a4238e4-bc77-43c0-b2de-2f90751c6150--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c0b497d8-0ea4-4ced-b9d9-a8e8f02c6932')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c0b497d8-0ea4-4ced-b9d9-a8e8f02c6932')","etag":"\"0\"","type":"SP.List"},"Id":"c0b497d8-0ea4-4ced-b9d9-a8e8f02c6932","Title":"Maintenance Log Library"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7b723861-e5ce-4058-8df4-bc2ff27ec012')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7b723861-e5ce-4058-8df4-bc2ff27ec012')","etag":"\"12\"","type":"SP.List"},"Id":"7b723861-e5ce-4058-8df4-bc2ff27ec012","Title":"Master Page Gallery"}]}}
+--batchresponse_79cd687d-1629-4160-b2c1-82affb5d7184--

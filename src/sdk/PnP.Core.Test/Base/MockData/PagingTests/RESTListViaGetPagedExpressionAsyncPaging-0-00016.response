@@ -1,9 +1,9 @@
---batchresponse_8d2d8018-13ec-4f84-983c-0a5a8540cc60
+--batchresponse_c1e02f06-f3e3-4ced-b7f4-ffcf273aa908
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'1cdcbf9f-1f17-45c5-9325-7c01b00edb02')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'1cdcbf9f-1f17-45c5-9325-7c01b00edb02')","etag":"\"0\"","type":"SP.List"},"Id":"1cdcbf9f-1f17-45c5-9325-7c01b00edb02","Title":"List Template Gallery"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c0b497d8-0ea4-4ced-b9d9-a8e8f02c6932')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'c0b497d8-0ea4-4ced-b9d9-a8e8f02c6932')","etag":"\"0\"","type":"SP.List"},"Id":"c0b497d8-0ea4-4ced-b9d9-a8e8f02c6932","Title":"Maintenance Log Library"}]}}
---batchresponse_8d2d8018-13ec-4f84-983c-0a5a8540cc60--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f7c9ad31-8318-4cf3-8bed-fa60c583ec8a')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'f7c9ad31-8318-4cf3-8bed-fa60c583ec8a')","etag":"\"2\"","type":"SP.List"},"Id":"f7c9ad31-8318-4cf3-8bed-fa60c583ec8a","Title":"PNP_SDK_TEST_GetFileVersionsTest"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'0d0f6d38-c89c-4d71-b3de-d9a8dde46254')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'0d0f6d38-c89c-4d71-b3de-d9a8dde46254')","etag":"\"2\"","type":"SP.List"},"Id":"0d0f6d38-c89c-4d71-b3de-d9a8dde46254","Title":"PNP_SDK_TEST_PublishFileAsyncTest"}]}}
+--batchresponse_c1e02f06-f3e3-4ced-b7f4-ffcf273aa908--

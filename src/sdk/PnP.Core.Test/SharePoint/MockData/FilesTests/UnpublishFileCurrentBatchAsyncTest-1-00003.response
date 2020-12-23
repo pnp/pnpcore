@@ -1,0 +1,9 @@
+--batchresponse_026db649-0fac-4339-a4eb-d11e0662c292
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"Publish":null}}
+--batchresponse_026db649-0fac-4339-a4eb-d11e0662c292--

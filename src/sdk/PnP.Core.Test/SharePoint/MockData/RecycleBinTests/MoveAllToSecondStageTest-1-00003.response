@@ -1,0 +1,9 @@
+--batchresponse_b0e0d41f-484c-4e75-86db-4fb221c09bc1
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"MoveAllToSecondStage":null}}
+--batchresponse_b0e0d41f-484c-4e75-86db-4fb221c09bc1--

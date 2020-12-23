@@ -1,0 +1,9 @@
+--batchresponse_ac0c6ac2-5962-4bf0-9c04-1c8629ff7faa
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"MoveFileByPath":null}}
+--batchresponse_ac0c6ac2-5962-4bf0-9c04-1c8629ff7faa--

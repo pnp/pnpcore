@@ -1,9 +1,10 @@
---batchresponse_e0a36b01-c5ec-4116-a888-11690ae11994
+--batchresponse_b2ceb9f6-53b1-425e-9b2b-9b7357a5e6c1
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
-HTTP/1.1 200 OK
+HTTP/1.1 204 No Content
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "4546"
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/PNP_SDK_TEST_GetFileEffectiveIRMSettingsTest.docx')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_GetFileEffectiveIRMSettingsTest.docx')","type":"SP.File"},"EffectiveInformationRightsManagementSettings":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/PNP_SDK_TEST_GetFileEffectiveIRMSettingsTest.docx')/EffectiveInformationRightsManagementSettings","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFileByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/PNP_SDK_TEST_GetFileEffectiveIRMSettingsTest.docx')/EffectiveInformationRightsManagementSettings","type":"SP.EffectiveInformationRightsManagementSettings"},"AllowPrint":false,"AllowScript":false,"AllowWriteCopy":false,"DisableDocumentBrowserView":false,"DocumentAccessExpireDays":90,"DocumentLibraryProtectionExpireDate":"2021-01-06T01:28:20-08:00","EnableDocumentAccessExpire":false,"EnableDocumentBrowserPublishingView":false,"EnableGroupProtection":false,"EnableLicenseCacheExpire":false,"GroupName":"","IrmEnabled":true,"LicenseCacheExpireDays":30,"PolicyDescription":"","PolicyTitle":"","SettingSource":2,"TemplateId":""},"UniqueId":"428a8c04-6cfa-41b3-994b-547024ae5bd8"}}
---batchresponse_e0a36b01-c5ec-4116-a888-11690ae11994--
+
+--batchresponse_b2ceb9f6-53b1-425e-9b2b-9b7357a5e6c1--
