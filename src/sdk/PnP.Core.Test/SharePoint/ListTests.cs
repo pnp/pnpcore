@@ -734,5 +734,61 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task GetListByIdFollowedByAdd()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("GetListByIdWithAdd");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                Guid listId = myList.Id;
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    // Get list without root folder - will trigger rootfolder load
+                    var list = await context2.Web.Lists.GetByIdAsync(listId,
+                        l => l.Fields.LoadProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
+
+                    // Add a list item
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                    {
+                        { "Title", "Yes" }
+                    };
+
+                    await list.Items.AddAsync(values);
+
+                    // Get list with roorfolder, more optimized
+                    list = await context2.Web.Lists.GetByIdAsync(listId,
+                        l => l.RootFolder, l => l.Fields.LoadProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
+                    
+                    await list.Items.AddAsync(values);
+
+                    using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
+                    {
+                        // We should have 2 list items
+                        var list3 = await context2.Web.Lists.GetByIdAsync(listId, p => p.Items);
+
+                        Assert.IsTrue(list3.Items.Count() == 2);
+                    }
+
+                    // delete the list again
+                    await list.DeleteAsync();
+                }
+            }
+        }
+
     }
 }

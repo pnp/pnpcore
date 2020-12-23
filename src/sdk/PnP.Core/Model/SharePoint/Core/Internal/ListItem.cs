@@ -86,17 +86,23 @@ namespace PnP.Core.Model.SharePoint
                 var parentListTitle = !string.IsNullOrEmpty(parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName)) ? parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Substring(0, parentList.GetMetadata(PnPConstants.MetaDataRestEntityTypeName).Length - 4) : null;
 
                 // If this list we're adding items to was not fetched from the server than throw an error
+                string serverRelativeUrl = null;
                 if (string.IsNullOrEmpty(parentListTitle) || string.IsNullOrEmpty(parentListUri))
                 {
-                    throw new ClientException(ErrorType.PropertyNotLoaded,
-                        PnPCoreResources.Exception_PropertyNotLoaded_List);
+                    // Fall back to loading the rootfolder propery if we can't determine the list name
+                    await parentList.EnsurePropertiesAsync(p => p.RootFolder).ConfigureAwait(false);
+                    serverRelativeUrl = parentList.RootFolder.ServerRelativeUrl;
+                }
+                else
+                {
+                    // little trick here to ensure we can construct the correct list url based upon the data returned by a default load
+                    // Ensure the underscore "_" character is not encoded in the FolderPath to use
+                    serverRelativeUrl = $"{PnPContext.Uri}/lists/{parentListTitle}".Replace("_x005f_", "_");
                 }
 
                 // drop the everything in front of _api as the batching logic will add that automatically
                 var baseApiCall = parentListUri.Substring(parentListUri.IndexOf("_api"));
-                // little trick here to ensure we can construct the correct list url based upon the data returned by a default load
-                // Ensure the underscore "_" character is not encoded in the FolderPath to use
-                var serverRelativeUrl = $"{PnPContext.Uri}/lists/{parentListTitle}".Replace("_x005f_", "_");
+                
 
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();
