@@ -144,8 +144,8 @@ namespace PnP.Core.Services
         private static string GetVersionTag()
         {
             Assembly coreAssembly = Assembly.GetExecutingAssembly();
-            var versionTag = $"PnPSDK:{((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version.Split('.')[2]}";
-            // logger.LogInformation(PnPCoreResources.Log_Information_VersionTag, versionTag);
+            var version = ((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version.Split('.');
+            var versionTag = $"PnPSDK:{version[0]}.{version[1]}";
             return versionTag;
         }
 
