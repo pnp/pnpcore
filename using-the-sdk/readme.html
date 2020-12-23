@@ -163,10 +163,6 @@ Each night these preview packages are refreshed, so you can always upgrade to th
   }
 }
 </code></pre>
-<div class="IMPORTANT">
-<h5>Important</h5>
-<p>The defined url's are case sensitive. The PnP Core SDK internally does a lot of batching to optimize performance and in SharePoint REST batching the case of the used url's needs to be correct.</p>
-</div>
 <p>You should provide the <code>ClientId</code> and <code>TenantId</code> for an application registered in Azure Active Directory and configured with proper permissions, accordingly to your needs. For example, you could register an app in Azure Active Directory with delegated permission for:</p>
 <ul>
 <li>Microsoft Graph: <code>Group.ReadWrite.All</code></li>
@@ -341,10 +337,6 @@ host.Dispose();
     }
 }
 </code></pre>
-<div class="IMPORTANT">
-<h5>Important</h5>
-<p>The defined url's are case sensitive. The PnP Core SDK internally does a lot of batching to optimize performance and in SharePoint REST batching the case of the used url's needs to be correct.</p>
-</div>
 <h2 id="using-the-pnpcontext-for-operations-on-microsoft-365">Using the PnPContext for operations on Microsoft 365</h2>
 <p>All operations on Microsoft 365 start from the <code>PnPContext</code> instance you've obtained from the <code>PnPContextFactory</code>. Below sample shows a simple get operation that requests data from Microsoft 365 and outputs it to the console:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
