@@ -26158,6 +26158,15 @@ references:
   commentId: M:PnP.Core.Services.IPnPContextFactory.Create(System.String)
   fullName: PnP.Core.Services.IPnPContextFactory.Create(System.String)
   nameWithType: IPnPContextFactory.Create(String)
+- uid: PnP.Core.Services.IPnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider})
+  name: Create(String, Action<IAuthenticationProvider>)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_System_String_Action_PnP_Core_Services_IAuthenticationProvider__
+  commentId: M:PnP.Core.Services.IPnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider})
+  name.vb: Create(String, Action(Of IAuthenticationProvider))
+  fullName: PnP.Core.Services.IPnPContextFactory.Create(System.String, Action<PnP.Core.Services.IAuthenticationProvider>)
+  fullName.vb: PnP.Core.Services.IPnPContextFactory.Create(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider))
+  nameWithType: IPnPContextFactory.Create(String, Action<IAuthenticationProvider>)
+  nameWithType.vb: IPnPContextFactory.Create(String, Action(Of IAuthenticationProvider))
 - uid: PnP.Core.Services.IPnPContextFactory.Create(Uri)
   name: Create(Uri)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_Create_Uri_
@@ -26195,6 +26204,15 @@ references:
   commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String)
   fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String)
   nameWithType: IPnPContextFactory.CreateAsync(String)
+- uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider})
+  name: CreateAsync(String, Action<IAuthenticationProvider>)
+  href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_System_String_Action_PnP_Core_Services_IAuthenticationProvider__
+  commentId: M:PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider})
+  name.vb: CreateAsync(String, Action(Of IAuthenticationProvider))
+  fullName: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String, Action<PnP.Core.Services.IAuthenticationProvider>)
+  fullName.vb: PnP.Core.Services.IPnPContextFactory.CreateAsync(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider))
+  nameWithType: IPnPContextFactory.CreateAsync(String, Action<IAuthenticationProvider>)
+  nameWithType.vb: IPnPContextFactory.CreateAsync(String, Action(Of IAuthenticationProvider))
 - uid: PnP.Core.Services.IPnPContextFactory.CreateAsync(Uri)
   name: CreateAsync(Uri)
   href: api/PnP.Core.Services.IPnPContextFactory.html#PnP_Core_Services_IPnPContextFactory_CreateAsync_Uri_
@@ -26598,6 +26616,15 @@ references:
   commentId: M:PnP.Core.Services.PnPContextFactory.Create(System.String)
   fullName: PnP.Core.Services.PnPContextFactory.Create(System.String)
   nameWithType: PnPContextFactory.Create(String)
+- uid: PnP.Core.Services.PnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider})
+  name: Create(String, Action<IAuthenticationProvider>)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_System_String_Action_PnP_Core_Services_IAuthenticationProvider__
+  commentId: M:PnP.Core.Services.PnPContextFactory.Create(System.String,Action{PnP.Core.Services.IAuthenticationProvider})
+  name.vb: Create(String, Action(Of IAuthenticationProvider))
+  fullName: PnP.Core.Services.PnPContextFactory.Create(System.String, Action<PnP.Core.Services.IAuthenticationProvider>)
+  fullName.vb: PnP.Core.Services.PnPContextFactory.Create(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider))
+  nameWithType: PnPContextFactory.Create(String, Action<IAuthenticationProvider>)
+  nameWithType.vb: PnPContextFactory.Create(String, Action(Of IAuthenticationProvider))
 - uid: PnP.Core.Services.PnPContextFactory.Create(Uri)
   name: Create(Uri)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_Create_Uri_
@@ -26635,6 +26662,15 @@ references:
   commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.String)
   fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String)
   nameWithType: PnPContextFactory.CreateAsync(String)
+- uid: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider})
+  name: CreateAsync(String, Action<IAuthenticationProvider>)
+  href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_System_String_Action_PnP_Core_Services_IAuthenticationProvider__
+  commentId: M:PnP.Core.Services.PnPContextFactory.CreateAsync(System.String,Action{PnP.Core.Services.IAuthenticationProvider})
+  name.vb: CreateAsync(String, Action(Of IAuthenticationProvider))
+  fullName: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String, Action<PnP.Core.Services.IAuthenticationProvider>)
+  fullName.vb: PnP.Core.Services.PnPContextFactory.CreateAsync(System.String, Action(Of PnP.Core.Services.IAuthenticationProvider))
+  nameWithType: PnPContextFactory.CreateAsync(String, Action<IAuthenticationProvider>)
+  nameWithType.vb: PnPContextFactory.CreateAsync(String, Action(Of IAuthenticationProvider))
 - uid: PnP.Core.Services.PnPContextFactory.CreateAsync(Uri)
   name: CreateAsync(Uri)
   href: api/PnP.Core.Services.PnPContextFactory.html#PnP_Core_Services_PnPContextFactory_CreateAsync_Uri_
