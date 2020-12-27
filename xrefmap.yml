@@ -15575,32 +15575,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.AllowSavePublishDeclarativeWorkflow
   nameWithType: ISite.AllowSavePublishDeclarativeWorkflow
-- uid: PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgrade
-  name: AllowSelfServiceUpgrade
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_AllowSelfServiceUpgrade
-  commentId: P:PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgrade
-  fullName: PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgrade
-  nameWithType: ISite.AllowSelfServiceUpgrade
-- uid: PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgrade*
-  name: AllowSelfServiceUpgrade
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_AllowSelfServiceUpgrade_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgrade
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgrade
-  nameWithType: ISite.AllowSelfServiceUpgrade
-- uid: PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgradeEvaluation
-  name: AllowSelfServiceUpgradeEvaluation
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_AllowSelfServiceUpgradeEvaluation
-  commentId: P:PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgradeEvaluation
-  fullName: PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgradeEvaluation
-  nameWithType: ISite.AllowSelfServiceUpgradeEvaluation
-- uid: PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgradeEvaluation*
-  name: AllowSelfServiceUpgradeEvaluation
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_AllowSelfServiceUpgradeEvaluation_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgradeEvaluation
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.AllowSelfServiceUpgradeEvaluation
-  nameWithType: ISite.AllowSelfServiceUpgradeEvaluation
 - uid: PnP.Core.Model.SharePoint.ISite.AllWebs
   name: AllWebs
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_AllWebs
@@ -15640,19 +15614,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.CanSyncHubSitePermissions
   nameWithType: ISite.CanSyncHubSitePermissions
-- uid: PnP.Core.Model.SharePoint.ISite.CanUpgrade
-  name: CanUpgrade
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_CanUpgrade
-  commentId: P:PnP.Core.Model.SharePoint.ISite.CanUpgrade
-  fullName: PnP.Core.Model.SharePoint.ISite.CanUpgrade
-  nameWithType: ISite.CanUpgrade
-- uid: PnP.Core.Model.SharePoint.ISite.CanUpgrade*
-  name: CanUpgrade
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_CanUpgrade_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.CanUpgrade
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.CanUpgrade
-  nameWithType: ISite.CanUpgrade
 - uid: PnP.Core.Model.SharePoint.ISite.ChannelGroupId
   name: ChannelGroupId
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_ChannelGroupId
@@ -15692,32 +15653,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.CommentsOnSitePagesDisabled
   nameWithType: ISite.CommentsOnSitePagesDisabled
-- uid: PnP.Core.Model.SharePoint.ISite.CompatibilityLevel
-  name: CompatibilityLevel
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_CompatibilityLevel
-  commentId: P:PnP.Core.Model.SharePoint.ISite.CompatibilityLevel
-  fullName: PnP.Core.Model.SharePoint.ISite.CompatibilityLevel
-  nameWithType: ISite.CompatibilityLevel
-- uid: PnP.Core.Model.SharePoint.ISite.CompatibilityLevel*
-  name: CompatibilityLevel
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_CompatibilityLevel_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.CompatibilityLevel
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.CompatibilityLevel
-  nameWithType: ISite.CompatibilityLevel
-- uid: PnP.Core.Model.SharePoint.ISite.ComplianceAttribute
-  name: ComplianceAttribute
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_ComplianceAttribute
-  commentId: P:PnP.Core.Model.SharePoint.ISite.ComplianceAttribute
-  fullName: PnP.Core.Model.SharePoint.ISite.ComplianceAttribute
-  nameWithType: ISite.ComplianceAttribute
-- uid: PnP.Core.Model.SharePoint.ISite.ComplianceAttribute*
-  name: ComplianceAttribute
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_ComplianceAttribute_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.ComplianceAttribute
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.ComplianceAttribute
-  nameWithType: ISite.ComplianceAttribute
 - uid: PnP.Core.Model.SharePoint.ISite.DisableAppViews
   name: DisableAppViews
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_DisableAppViews
@@ -15835,6 +15770,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.HubSiteId
   nameWithType: ISite.HubSiteId
+- uid: PnP.Core.Model.SharePoint.ISite.HubSiteSynchronizableVisitorGroup
+  name: HubSiteSynchronizableVisitorGroup
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_HubSiteSynchronizableVisitorGroup
+  commentId: P:PnP.Core.Model.SharePoint.ISite.HubSiteSynchronizableVisitorGroup
+  fullName: PnP.Core.Model.SharePoint.ISite.HubSiteSynchronizableVisitorGroup
+  nameWithType: ISite.HubSiteSynchronizableVisitorGroup
+- uid: PnP.Core.Model.SharePoint.ISite.HubSiteSynchronizableVisitorGroup*
+  name: HubSiteSynchronizableVisitorGroup
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_HubSiteSynchronizableVisitorGroup_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.HubSiteSynchronizableVisitorGroup
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.ISite.HubSiteSynchronizableVisitorGroup
+  nameWithType: ISite.HubSiteSynchronizableVisitorGroup
 - uid: PnP.Core.Model.SharePoint.ISite.Id
   name: Id
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_Id
@@ -15887,32 +15835,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.MaxItemsPerThrottledOperation
   nameWithType: ISite.MaxItemsPerThrottledOperation
-- uid: PnP.Core.Model.SharePoint.ISite.NeedsB2BUpgrade
-  name: NeedsB2BUpgrade
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_NeedsB2BUpgrade
-  commentId: P:PnP.Core.Model.SharePoint.ISite.NeedsB2BUpgrade
-  fullName: PnP.Core.Model.SharePoint.ISite.NeedsB2BUpgrade
-  nameWithType: ISite.NeedsB2BUpgrade
-- uid: PnP.Core.Model.SharePoint.ISite.NeedsB2BUpgrade*
-  name: NeedsB2BUpgrade
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_NeedsB2BUpgrade_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.NeedsB2BUpgrade
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.NeedsB2BUpgrade
-  nameWithType: ISite.NeedsB2BUpgrade
-- uid: PnP.Core.Model.SharePoint.ISite.PrimaryUri
-  name: PrimaryUri
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_PrimaryUri
-  commentId: P:PnP.Core.Model.SharePoint.ISite.PrimaryUri
-  fullName: PnP.Core.Model.SharePoint.ISite.PrimaryUri
-  nameWithType: ISite.PrimaryUri
-- uid: PnP.Core.Model.SharePoint.ISite.PrimaryUri*
-  name: PrimaryUri
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_PrimaryUri_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.PrimaryUri
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.PrimaryUri
-  nameWithType: ISite.PrimaryUri
 - uid: PnP.Core.Model.SharePoint.ISite.ReadOnly
   name: ReadOnly
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_ReadOnly
@@ -15952,19 +15874,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.RelatedGroupId
   nameWithType: ISite.RelatedGroupId
-- uid: PnP.Core.Model.SharePoint.ISite.RequiredDesignerVersion
-  name: RequiredDesignerVersion
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_RequiredDesignerVersion
-  commentId: P:PnP.Core.Model.SharePoint.ISite.RequiredDesignerVersion
-  fullName: PnP.Core.Model.SharePoint.ISite.RequiredDesignerVersion
-  nameWithType: ISite.RequiredDesignerVersion
-- uid: PnP.Core.Model.SharePoint.ISite.RequiredDesignerVersion*
-  name: RequiredDesignerVersion
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_RequiredDesignerVersion_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.RequiredDesignerVersion
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.RequiredDesignerVersion
-  nameWithType: ISite.RequiredDesignerVersion
 - uid: PnP.Core.Model.SharePoint.ISite.RootWeb
   name: RootWeb
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_RootWeb
@@ -16004,19 +15913,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.SearchBoxPlaceholderText
   nameWithType: ISite.SearchBoxPlaceholderText
-- uid: PnP.Core.Model.SharePoint.ISite.SearchCenterUrl
-  name: SearchCenterUrl
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_SearchCenterUrl
-  commentId: P:PnP.Core.Model.SharePoint.ISite.SearchCenterUrl
-  fullName: PnP.Core.Model.SharePoint.ISite.SearchCenterUrl
-  nameWithType: ISite.SearchCenterUrl
-- uid: PnP.Core.Model.SharePoint.ISite.SearchCenterUrl*
-  name: SearchCenterUrl
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_SearchCenterUrl_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.SearchCenterUrl
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.SearchCenterUrl
-  nameWithType: ISite.SearchCenterUrl
 - uid: PnP.Core.Model.SharePoint.ISite.SensitivityLabel
   name: SensitivityLabel
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_SensitivityLabel
@@ -16095,19 +15991,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.ShowPeoplePickerSuggestionsForGuestUsers
   nameWithType: ISite.ShowPeoplePickerSuggestionsForGuestUsers
-- uid: PnP.Core.Model.SharePoint.ISite.ShowUrlStructure
-  name: ShowUrlStructure
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_ShowUrlStructure
-  commentId: P:PnP.Core.Model.SharePoint.ISite.ShowUrlStructure
-  fullName: PnP.Core.Model.SharePoint.ISite.ShowUrlStructure
-  nameWithType: ISite.ShowUrlStructure
-- uid: PnP.Core.Model.SharePoint.ISite.ShowUrlStructure*
-  name: ShowUrlStructure
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_ShowUrlStructure_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.ShowUrlStructure
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.ShowUrlStructure
-  nameWithType: ISite.ShowUrlStructure
 - uid: PnP.Core.Model.SharePoint.ISite.SocialBarOnSitePagesDisabled
   name: SocialBarOnSitePagesDisabled
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_SocialBarOnSitePagesDisabled
@@ -16173,71 +16056,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.TrimAuditLog
   nameWithType: ISite.TrimAuditLog
-- uid: PnP.Core.Model.SharePoint.ISite.UIVersionConfigurationEnabled
-  name: UIVersionConfigurationEnabled
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UIVersionConfigurationEnabled
-  commentId: P:PnP.Core.Model.SharePoint.ISite.UIVersionConfigurationEnabled
-  fullName: PnP.Core.Model.SharePoint.ISite.UIVersionConfigurationEnabled
-  nameWithType: ISite.UIVersionConfigurationEnabled
-- uid: PnP.Core.Model.SharePoint.ISite.UIVersionConfigurationEnabled*
-  name: UIVersionConfigurationEnabled
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UIVersionConfigurationEnabled_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.UIVersionConfigurationEnabled
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.UIVersionConfigurationEnabled
-  nameWithType: ISite.UIVersionConfigurationEnabled
-- uid: PnP.Core.Model.SharePoint.ISite.UpgradeReminderDate
-  name: UpgradeReminderDate
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UpgradeReminderDate
-  commentId: P:PnP.Core.Model.SharePoint.ISite.UpgradeReminderDate
-  fullName: PnP.Core.Model.SharePoint.ISite.UpgradeReminderDate
-  nameWithType: ISite.UpgradeReminderDate
-- uid: PnP.Core.Model.SharePoint.ISite.UpgradeReminderDate*
-  name: UpgradeReminderDate
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UpgradeReminderDate_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.UpgradeReminderDate
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.UpgradeReminderDate
-  nameWithType: ISite.UpgradeReminderDate
-- uid: PnP.Core.Model.SharePoint.ISite.UpgradeScheduled
-  name: UpgradeScheduled
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UpgradeScheduled
-  commentId: P:PnP.Core.Model.SharePoint.ISite.UpgradeScheduled
-  fullName: PnP.Core.Model.SharePoint.ISite.UpgradeScheduled
-  nameWithType: ISite.UpgradeScheduled
-- uid: PnP.Core.Model.SharePoint.ISite.UpgradeScheduled*
-  name: UpgradeScheduled
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UpgradeScheduled_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.UpgradeScheduled
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.UpgradeScheduled
-  nameWithType: ISite.UpgradeScheduled
-- uid: PnP.Core.Model.SharePoint.ISite.UpgradeScheduledDate
-  name: UpgradeScheduledDate
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UpgradeScheduledDate
-  commentId: P:PnP.Core.Model.SharePoint.ISite.UpgradeScheduledDate
-  fullName: PnP.Core.Model.SharePoint.ISite.UpgradeScheduledDate
-  nameWithType: ISite.UpgradeScheduledDate
-- uid: PnP.Core.Model.SharePoint.ISite.UpgradeScheduledDate*
-  name: UpgradeScheduledDate
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_UpgradeScheduledDate_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.UpgradeScheduledDate
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.UpgradeScheduledDate
-  nameWithType: ISite.UpgradeScheduledDate
-- uid: PnP.Core.Model.SharePoint.ISite.Upgrading
-  name: Upgrading
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_Upgrading
-  commentId: P:PnP.Core.Model.SharePoint.ISite.Upgrading
-  fullName: PnP.Core.Model.SharePoint.ISite.Upgrading
-  nameWithType: ISite.Upgrading
-- uid: PnP.Core.Model.SharePoint.ISite.Upgrading*
-  name: Upgrading
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_Upgrading_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.Upgrading
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.Upgrading
-  nameWithType: ISite.Upgrading
 - uid: PnP.Core.Model.SharePoint.ISite.Url
   name: Url
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_Url
