@@ -34,14 +34,9 @@ namespace PnP.Core.Test.SharePoint
                     p => p.AllowSavePublishDeclarativeWorkflowForCurrentUser,
                     p => p.AlternateCssUrl,
                     p => p.AppInstanceId,
-                    p => p.ClassicWelcomePage,
                     p => p.ContainsConfidentialInfo,
                     p => p.Created,
                     p => p.CustomMasterUrl,
-                    p => p.CustomSiteActionsDisabled,
-                    // TODO Test this in Targeted Release
-                    //p => p.DefaultNewPageTemplateId,
-                    p => p.DesignerDownloadUrlForCurrentUser,
                     p => p.DesignPackageId,
                     p => p.DisableRecommendedItems,
                     p => p.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled,
@@ -65,13 +60,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("", web.AlternateCssUrl);
                 // TODO: This one should be tested with an addin web to be relevant
                 Assert.AreEqual(default, web.AppInstanceId);
-                Assert.IsNull(web.ClassicWelcomePage);
                 Assert.IsFalse(web.ContainsConfidentialInfo);
                 Assert.IsTrue(web.CustomMasterUrl.EndsWith("/_catalogs/masterpage/seattle.master"));
-                Assert.IsFalse(web.CustomSiteActionsDisabled);
-                // TODO Test this in Targeted Release
-                //Assert.AreNotEqual(default, web.DefaultNewPageTemplateId);
-                Assert.AreEqual("https://go.microsoft.com/fwlink/?LinkId=328584&clcid=0x409", web.DesignerDownloadUrlForCurrentUser);
                 Assert.AreEqual(default, web.DesignPackageId);
                 Assert.IsFalse(web.DisableRecommendedItems);
                 Assert.IsFalse(web.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled);
@@ -156,7 +146,6 @@ namespace PnP.Core.Test.SharePoint
                     p => p.SaveSiteAsTemplateEnabled,
                     p => p.SearchBoxPlaceholderText,
                     p => p.ServerRelativeUrl,
-                    p => p.ShowUrlStructureForCurrentUser,
                     p => p.SiteLogoDescription,
                     p => p.SiteLogoUrl,
                     p => p.SyndicationEnabled
@@ -175,7 +164,6 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(web.SaveSiteAsTemplateEnabled);
                 Assert.IsNull(web.SearchBoxPlaceholderText);
                 Assert.AreNotEqual("", web.ServerRelativeUrl);
-                Assert.IsTrue(web.ShowUrlStructureForCurrentUser);
                 Assert.AreEqual("", web.SiteLogoDescription);
                 Assert.AreNotEqual("", web.SiteLogoUrl);
             }
@@ -189,35 +177,26 @@ namespace PnP.Core.Test.SharePoint
             {
                 IWeb web = await context.Web.GetAsync(
                     p => p.TenantAdminMembersCanShare,
-                    p => p.TenantTagPolicyEnabled,
                     // TODO Review this one, it causes SP REST to return an error
                     //p => p.ThemeData,
-                    p => p.ThemedCssFolderUrl,
                     p => p.ThirdPartyMdmEnabled,
                     p => p.TreeViewEnabled,
-                    p => p.UIVersion,
-                    p => p.UIVersionConfigurationEnabled,
                     p => p.UseAccessRequestDefault,
                     p => p.WebTemplate,
-                    p => p.WebTemplateConfiguration,
-                    p => p.WebTemplatesGalleryFirstRunEnabled
+                    p => p.WebTemplateConfiguration
                     );
 
                 Assert.IsNotNull(web);
-                Assert.AreEqual(0, web.TenantAdminMembersCanShare);
+                Assert.AreEqual(SharingState.Unspecified, web.TenantAdminMembersCanShare);
                 // TODO Review this one, it causes SP REST to return an error
                 //Assert.AreNotEqual("", web.ThemeData);
                 // Not validating this property ~ this could have been manipulated on test sites causing false positives
                 //Assert.IsNull(web.ThemedCssFolderUrl);
                 Assert.IsFalse(web.ThirdPartyMdmEnabled);
                 Assert.IsFalse(web.TreeViewEnabled);
-                Assert.AreNotEqual(0, web.UIVersion);
-                Assert.IsFalse(web.UIVersionConfigurationEnabled);
                 Assert.IsTrue(web.UseAccessRequestDefault);
-                Assert.AreNotEqual(0, web.UIVersion);
                 Assert.AreEqual("GROUP", web.WebTemplate);
                 Assert.AreEqual("GROUP#0", web.WebTemplateConfiguration);
-                Assert.IsFalse(web.WebTemplatesGalleryFirstRunEnabled);
             }
         }
 

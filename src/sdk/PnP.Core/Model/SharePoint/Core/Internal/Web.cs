@@ -56,7 +56,6 @@ namespace PnP.Core.Model.SharePoint
         [GraphProperty("sharepointIds", JsonPath = "webId")]
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
-        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
         public string AccessRequestListUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public string AccessRequestSiteDescription { get => GetValue<string>(); set => SetValue(value); }
@@ -79,17 +78,11 @@ namespace PnP.Core.Model.SharePoint
 
         public Guid AppInstanceId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        public string ClassicWelcomePage { get => GetValue<string>(); set => SetValue(value); }
-
         public bool ContainsConfidentialInfo { get => GetValue<bool>(); set => SetValue(value); }
 
         public DateTime Created { get => GetValue<DateTime>(); set => SetValue(value); }
 
-        public bool CustomSiteActionsDisabled { get => GetValue<bool>(); set => SetValue(value); }
-
         public Guid DefaultNewPageTemplateId { get => GetValue<Guid>(); set => SetValue(value); }
-
-        public string DesignerDownloadUrlForCurrentUser { get => GetValue<string>(); set => SetValue(value); }
 
         public Guid DesignPackageId { get => GetValue<Guid>(); set => SetValue(value); }
 
@@ -153,37 +146,25 @@ namespace PnP.Core.Model.SharePoint
 
         public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
 
-        public bool ShowUrlStructureForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
-
         public string SiteLogoDescription { get => GetValue<string>(); set => SetValue(value); }
 
         public string SiteLogoUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public bool SyndicationEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
-        public int TenantAdminMembersCanShare { get => GetValue<int>(); set => SetValue(value); }
-
-        public bool TenantTagPolicyEnabled { get => GetValue<bool>(); set => SetValue(value); }
+        public SharingState TenantAdminMembersCanShare { get => GetValue<SharingState>(); set => SetValue(value); }
 
         public string ThemeData { get => GetValue<string>(); set => SetValue(value); }
-
-        public string ThemedCssFolderUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public bool ThirdPartyMdmEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool TreeViewEnabled { get => GetValue<bool>(); set => SetValue(value); }
-
-        public int UIVersion { get => GetValue<int>(); set => SetValue(value); }
-
-        public bool UIVersionConfigurationEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool UseAccessRequestDefault { get => GetValue<bool>(); set => SetValue(value); }
 
         public string WebTemplate { get => GetValue<string>(); set => SetValue(value); }
 
         public string WebTemplateConfiguration { get => GetValue<string>(); set => SetValue(value); }
-
-        public bool WebTemplatesGalleryFirstRunEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         [GraphProperty("displayName")]
         public string Title { get => GetValue<string>(); set => SetValue(value); }
