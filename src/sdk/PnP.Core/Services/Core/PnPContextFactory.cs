@@ -74,21 +74,43 @@ namespace PnP.Core.Services
         protected PnPGlobalSettingsOptions GlobalOptions { get; private set; }
 
         /// <summary>
-        /// Creates a new instance of SPOContext based on a provided configuration name
+        /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
-        /// <param name="name">The name of the SPOContext configuration to use</param>
-        /// <returns>A SPOContext object based on the provided configuration name</returns>
+        /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <param name="initializeAuthenticationProvider">The function to initialize the authentication provider</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public virtual PnPContext Create(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider)
+        {
+            return CreateAsync(name, initializeAuthenticationProvider).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(string name)
         {
             return CreateAsync(name).GetAwaiter().GetResult();
         }
 
         /// <summary>
-        /// Creates a new instance of SPOContext based on a provided configuration name
+        /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
-        /// <param name="name">The name of the SPOContext configuration to use</param>
-        /// <returns>A SPOContext object based on the provided configuration name</returns>
+        /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(string name)
+        {
+            return CreateAsync(name, null).GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name
+        /// </summary>
+        /// <param name="name">The name of the PnPContext configuration to use</param>
+        /// <param name="initializeAuthenticationProvider">The function to initialize the authentication provider</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public async virtual Task<PnPContext> CreateAsync(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider)
         {
             // Search for the provided configuration
             var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
@@ -98,50 +120,56 @@ namespace PnP.Core.Services
                     string.Format(PnPCoreResources.Exception_ConfigurationError_InvalidPnPContextConfigurationName, name));
             }
 
+            // Process the Authentication Provider initialization code, if any
+            if (initializeAuthenticationProvider != null)
+            {
+                initializeAuthenticationProvider(configuration.AuthenticationProvider);
+            }
+
             return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Creates a new instance of SPOContext based on a provided configuration name
+        /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
-        /// <param name="url">The URL of the SPOContext as a URI</param>
-        /// <returns>A SPOContext object based on the provided configuration name</returns>
+        /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(Uri url)
         {
             return CreateAsync(url).GetAwaiter().GetResult();
         }
 
         /// <summary>
-        /// Creates a new instance of SPOContext based on a provided configuration name
+        /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
-        /// <param name="url">The URL of the SPOContext as a URI</param>
-        /// <returns>A SPOContext object based on the provided configuration name</returns>
+        /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Uri url)
         {
-            // Use the default settings to create a new instance of SPOContext
+            // Use the default settings to create a new instance of PnPContext
             return await CreateAsync(url, ContextOptions.DefaultAuthenticationProvider).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Creates a new instance of SPOContext based on a provided configuration name
+        /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
-        /// <param name="url">The URL of the SPOContext as a URI</param>
-        /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the SPOContext</param>
-        /// <returns>A SPOContext object based on the provided configuration name</returns>
+        /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
         public virtual PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider)
         {
             return CreateAsync(url, authenticationProvider).GetAwaiter().GetResult();
         }
 
         /// <summary>
-        /// Creates a new instance of SPOContext based on a provided configuration name
+        /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
-        /// <param name="url">The URL of the SPOContext as a URI</param>
-        /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the SPOContext</param>
-        /// <returns>A SPOContext object based on the provided configuration name</returns>
+        /// <param name="url">The URL of the PnPContext as a URI</param>
+        /// <param name="authenticationProvider">The Authentication Provider to use to authenticate within the PnPContext</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Uri url, IAuthenticationProvider authenticationProvider)
         {
-            // Use the provided settings to create a new instance of SPOContext
+            // Use the provided settings to create a new instance of PnPContext
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
             {
                 Uri = url
@@ -179,7 +207,7 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(Guid groupId, IAuthenticationProvider authenticationProvider)
         {
-            // Use the provided settings to create a new instance of SPOContext
+            // Use the provided settings to create a new instance of PnPContext
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager);
 
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);

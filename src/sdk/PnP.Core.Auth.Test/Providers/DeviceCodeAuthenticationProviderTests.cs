@@ -27,11 +27,13 @@ namespace PnP.Core.Auth.Test.Providers
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteDeviceCode))
+            using (var context = await TestCommon.Instance.GetContextAsync(
+                TestCommon.TestSiteDeviceCode,
+                (authProvider) => {
+                    ((DeviceCodeAuthenticationProvider)authProvider)
+                        .DeviceCodeVerification = DeviceCodeVerificationCallback;
+                }))
             {
-                ((DeviceCodeAuthenticationProvider)context.AuthenticationProvider)
-                    .DeviceCodeVerification = DeviceCodeVerificationCallback;
-
                 await TestCommon.CheckAccessToTargetResource(context);
             }
         }
@@ -41,7 +43,12 @@ namespace PnP.Core.Auth.Test.Providers
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteDeviceCode))
+            using (var context = await TestCommon.Instance.GetContextAsync(
+                TestCommon.TestSiteDeviceCode,
+                (authProvider) => {
+                    ((DeviceCodeAuthenticationProvider)authProvider)
+                        .DeviceCodeVerification = DeviceCodeVerificationCallback;
+                }))
             {
                 await TestCommon.CheckAccessToTargetResource(context, false);
             }

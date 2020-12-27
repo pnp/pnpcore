@@ -139,6 +139,12 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(scopes));
             }
 
+            if (DeviceCodeVerification == null)
+            {
+                throw new ConfigurationErrorsException(
+                    PnPCoreAuthResources.DeviceCodeAuthenticationProvider_MissingDeviceCodeVerification);
+            }
+
             AuthenticationResult tokenResult = null;
 
             var account = await publicClientApplication.GetAccountsAsync().ConfigureAwait(false);

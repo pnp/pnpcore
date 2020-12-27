@@ -151,6 +151,15 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Missing value for function DeviceCodeVerification in DeviceCodeAuthenticationProvider.
+        /// </summary>
+        internal static string DeviceCodeAuthenticationProvider_MissingDeviceCodeVerification {
+            get {
+                return ResourceManager.GetString("DeviceCodeAuthenticationProvider_MissingDeviceCodeVerification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Missing default configuration for Authentication Provider Factory.
         /// </summary>
         internal static string Exception_MissingDefaultAuthenticationProvider {

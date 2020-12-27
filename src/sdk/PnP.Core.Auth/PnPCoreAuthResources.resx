@@ -147,6 +147,9 @@
   <data name="DeviceCodeAuthenticationProvider_LogInit" xml:space="preserve">
     <value>Initialized DeviceCodeAuthenticationProvider</value>
   </data>
+  <data name="DeviceCodeAuthenticationProvider_MissingDeviceCodeVerification" xml:space="preserve">
+    <value>Missing value for function DeviceCodeVerification in DeviceCodeAuthenticationProvider</value>
+  </data>
   <data name="Exception_MissingDefaultAuthenticationProvider" xml:space="preserve">
     <value>Missing default configuration for Authentication Provider Factory</value>
   </data>

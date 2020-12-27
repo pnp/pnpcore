@@ -69,6 +69,22 @@ namespace PnP.Core.Services
         public Task<PnPContext> CreateAsync(Guid groupId);
 
         /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name and on a custom initialization function for the IAuthenticationProvider reference instance
+        /// </summary>
+        /// <param name="name">The name of the configuration to use</param>
+        /// <param name="initializeAuthenticationProvider">The function to initialize the context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public PnPContext Create(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider);
+
+        /// <summary>
+        /// Creates a new instance of PnPContext based on a provided configuration name and on a custom initialization function for the IAuthenticationProvider reference instance
+        /// </summary>
+        /// <param name="name">The name of the configuration to use</param>
+        /// <param name="initializeAuthenticationProvider">The function to initialize the context</param>
+        /// <returns>A PnPContext object based on the provided configuration name</returns>
+        public Task<PnPContext> CreateAsync(string name, Action<IAuthenticationProvider> initializeAuthenticationProvider);
+
+        /// <summary>
         /// Creates a new instance of PnPContext based on a provided configuration name
         /// </summary>
         /// <param name="name">The name of the configuration to use</param>

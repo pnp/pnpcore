@@ -73,14 +73,18 @@ namespace PnP.Core.Auth.Test.Utilities
 
         }
 
-        public PnPContext GetContext(string configurationName, int id = 0,
+        public PnPContext GetContext(string configurationName,
+            Action<IAuthenticationProvider> initializeAuthenticationProvider = null,
+            int id = 0,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
             [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
         {
-            return GetContextAsync(configurationName, id, testName, sourceFilePath).GetAwaiter().GetResult();
+            return GetContextAsync(configurationName, initializeAuthenticationProvider, id, testName, sourceFilePath).GetAwaiter().GetResult();
         }
 
-        public async Task<PnPContext> GetContextAsync(string configurationName, int id = 0,
+        public async Task<PnPContext> GetContextAsync(string configurationName,
+            Action<IAuthenticationProvider> initializeAuthenticationProvider = null,
+            int id = 0,
             [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
             [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
         {
@@ -93,7 +97,7 @@ namespace PnP.Core.Auth.Test.Utilities
                 testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
             }
 
-            return await factory.CreateAsync(configurationName).ConfigureAwait(false);
+            return await factory.CreateAsync(configurationName, initializeAuthenticationProvider).ConfigureAwait(false);
         }
 
         public async Task<PnPContext> GetContextAsync(Uri url, IAuthenticationProvider authenticationProvider,

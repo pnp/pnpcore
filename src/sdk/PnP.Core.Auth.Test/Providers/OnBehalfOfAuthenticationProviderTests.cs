@@ -52,11 +52,13 @@ namespace PnP.Core.Auth.Test.Providers
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteOnBehalfOf))
+            using (var context = await TestCommon.Instance.GetContextAsync(
+                TestCommon.TestSiteOnBehalfOf,
+                (authProvider) => {
+                    ((OnBehalfOfAuthenticationProvider)authProvider)
+                        .UserTokenProvider = () => GetUserAccessToken().GetAwaiter().GetResult();
+                }))
             {
-                ((OnBehalfOfAuthenticationProvider)context.AuthenticationProvider)
-                    .UserTokenProvider = () => GetUserAccessToken().GetAwaiter().GetResult();
-
                 await TestCommon.CheckAccessToTargetResource(context);
             }
         }
@@ -66,11 +68,12 @@ namespace PnP.Core.Auth.Test.Providers
         {
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteOnBehalfOf))
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSiteOnBehalfOf,
+                (authProvider) => {
+                    ((OnBehalfOfAuthenticationProvider)authProvider)
+                        .UserTokenProvider = () => GetUserAccessToken().GetAwaiter().GetResult();
+                }))
             {
-                ((OnBehalfOfAuthenticationProvider)context.AuthenticationProvider)
-                    .UserTokenProvider = () => GetUserAccessToken().GetAwaiter().GetResult();
-
                 await TestCommon.CheckAccessToTargetResource(context, false);
             }
         }
