@@ -35,7 +35,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Add a view part of a specific batch asynchroniously
         /// </summary>
-        /// <param name="batch"></param>
+        /// <param name="batch">Batch to use</param>
         /// <param name="viewOptions">View options</param>
         /// <returns>View</returns>
         public Task<IView> AddBatchAsync(Batch batch, ViewOptions viewOptions);
@@ -50,7 +50,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Add a view part of a specific batch asynchroniously
         /// </summary>
-        /// <param name="batch"></param>
+        /// <param name="batch">Batch to use</param>
         /// <param name="viewOptions">View options</param>
         /// <returns>View</returns>
         public IView AddBatch(Batch batch, ViewOptions viewOptions);

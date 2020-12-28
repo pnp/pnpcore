@@ -1204,6 +1204,15 @@ namespace PnP.Core.Services
                 }
             }
 
+            // Update our model by processing the "delete"
+            if (restRequest.Method == HttpMethod.Delete)
+            {
+                if (restRequest.Model is TransientObject)
+                {
+                    restRequest.Model.RemoveFromParentCollection();
+                }
+            }
+
             if (!string.IsNullOrEmpty(restRequest.ResponseJson))
             {
                 // A raw request does not require loading of the response into the model
