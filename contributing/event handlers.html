@@ -95,7 +95,7 @@
 <tbody>
 <tr>
 <td><code>AddApiCallHandler</code></td>
-<td><code>Task&lt;ApiCall&gt; AddApiCall();</code></td>
+<td><code>Task&lt;ApiCall&gt; AddApiCall(Dictionary&lt;string, object&gt; additionalInformation);</code></td>
 <td>When you want to implement <strong>Add</strong> on a model class you need to use this event handler</td>
 </tr>
 <tr>
@@ -142,7 +142,7 @@
     internal TeamChannel()
     {
         // Handler to construct the Add request for this channel
-        AddApiCallHandler = async () =&gt;
+        AddApiCallHandler = async (additionalInformation) =&gt;
         {
             // Define the JSON body of the update request based on the actual changes
             dynamic body = new ExpandoObject();

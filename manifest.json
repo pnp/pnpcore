@@ -2130,7 +2130,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IViewCollection.html",
-          "hash": "KPLFLCslet0mDQ6QVx8oEQ=="
+          "hash": "MRoAt7a4+F9q8d3/Z3K1lg=="
         }
       },
       "is_incremental": false,
@@ -2166,7 +2166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IWebCollection.html",
-          "hash": "8Sv9b9ocyccbLkSoA47wUw=="
+          "hash": "DlWsMoazeCYpfVlwJkTlyQ=="
         }
       },
       "is_incremental": false,
@@ -2594,11 +2594,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Model.SharePoint.WebOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Model.SharePoint.WebOptions.html",
+          "hash": "PN8cqtMQyXjSMV8IYn0eZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/PnP.Core.Model.SharePoint.yml",
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "yk2nEkmxamsEZ4c/m4aG0A=="
+          "hash": "3R1LL9Bf5HdutBZ5YwH1hw=="
         }
       },
       "is_incremental": false,
@@ -3618,7 +3630,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "l7Mq9CSwVZEWv8tMS8DHEw=="
+          "hash": "JrgSpgrPUJnav/tqaZajxA=="
         }
       },
       "is_incremental": false,
@@ -3642,7 +3654,7 @@
       "output": {
         ".html": {
           "relative_path": "contributing/event handlers.html",
-          "hash": "FEnR+oteA8Xn2Rx21gE5Ag=="
+          "hash": "Eei3MJzZJlLp+284E3BGDA=="
         }
       },
       "is_incremental": false,
@@ -3654,7 +3666,7 @@
       "output": {
         ".html": {
           "relative_path": "contributing/extending the model - Microsoft Graph.html",
-          "hash": "NAe57ozhOi2XHDjmZb2ofg=="
+          "hash": "ck7XOV4CgT+roc6WWi4M3Q=="
         }
       },
       "is_incremental": false,
@@ -3666,7 +3678,7 @@
       "output": {
         ".html": {
           "relative_path": "contributing/extending the model - SharePoint REST.html",
-          "hash": "zNfjXdxIeBX6n/fwEba95w=="
+          "hash": "JDtrB49V6TCv9/hVXzazEw=="
         }
       },
       "is_incremental": false,
@@ -4401,7 +4413,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/webs-intro.html",
-          "hash": "O9SMkcV1/TrkCF6RqtzWqw=="
+          "hash": "UpEFpKEJtzUI43inck5EcA=="
         }
       },
       "is_incremental": false,
@@ -4428,7 +4440,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 299,
+          "total_file_count": 300,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

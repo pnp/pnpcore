@@ -113,6 +113,11 @@ foreach (var subWeb in context.Web.Webs)
     // Do something with the web
 }
 </code></pre>
+<h2 id="adding-a-web">Adding a web</h2>
+<p>Adding a web can be done using one of the Add methods in combination with specifying the information for the new web via the WebOptions class.</p>
+<pre><code class="lang-csharp">// add a new web to the current web, uses default web template (STS#3) and default language (1033)
+var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = &quot;My web&quot;, Url = &quot;myweb&quot; });
+</code></pre>
 <h2 id="updating-a-web">Updating a web</h2>
 <p>To update a web you can set the relevant web properties and call one of the update methods:</p>
 <pre><code class="lang-csharp">// Load the web title
@@ -139,6 +144,21 @@ await web.AllProperties.UpdateAsync();
 // Clear a property
 web.AllProperties[&quot;myPropertyKey&quot;] = null;
 await web.AllProperties.UpdateAsync();
+</code></pre>
+<h2 id="deleting-a-web">Deleting a web</h2>
+<p>Deleting a web is a different compared to other deletes in PnP Core SDK: you can't delete the &quot;current&quot; loaded web, you can however delete another web using either the Delete or DeleteAsync methods.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The batch methods (DeleteBatch and DeleteBatchAsync) cannot be used to delete a web.</p>
+</div>
+<pre><code class="lang-csharp">// add a new web to the current web, uses default web template (STS#3) and default language (1033)
+var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = &quot;My web&quot;, Url = &quot;myweb&quot; });
+
+// WORKS: delete added web
+await addedWeb.DeleteAsync();
+
+// DOES NOT WORK: deleting the current web
+await context.Web.DeleteAsync();
 </code></pre>
 </article>
           </div>

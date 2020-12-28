@@ -20131,6 +20131,70 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IWebCollection
   fullName: PnP.Core.Model.SharePoint.IWebCollection
   nameWithType: IWebCollection
+- uid: PnP.Core.Model.SharePoint.IWebCollection.Add(PnP.Core.Model.SharePoint.WebOptions)
+  name: Add(WebOptions)
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_Add_PnP_Core_Model_SharePoint_WebOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWebCollection.Add(PnP.Core.Model.SharePoint.WebOptions)
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.Add(PnP.Core.Model.SharePoint.WebOptions)
+  nameWithType: IWebCollection.Add(WebOptions)
+- uid: PnP.Core.Model.SharePoint.IWebCollection.Add*
+  name: Add
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_Add_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebCollection.Add
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.Add
+  nameWithType: IWebCollection.Add
+- uid: PnP.Core.Model.SharePoint.IWebCollection.AddAsync(PnP.Core.Model.SharePoint.WebOptions)
+  name: AddAsync(WebOptions)
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_AddAsync_PnP_Core_Model_SharePoint_WebOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWebCollection.AddAsync(PnP.Core.Model.SharePoint.WebOptions)
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.AddAsync(PnP.Core.Model.SharePoint.WebOptions)
+  nameWithType: IWebCollection.AddAsync(WebOptions)
+- uid: PnP.Core.Model.SharePoint.IWebCollection.AddAsync*
+  name: AddAsync
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_AddAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebCollection.AddAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.AddAsync
+  nameWithType: IWebCollection.AddAsync
+- uid: PnP.Core.Model.SharePoint.IWebCollection.AddBatch(PnP.Core.Model.SharePoint.WebOptions)
+  name: AddBatch(WebOptions)
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_AddBatch_PnP_Core_Model_SharePoint_WebOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWebCollection.AddBatch(PnP.Core.Model.SharePoint.WebOptions)
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.AddBatch(PnP.Core.Model.SharePoint.WebOptions)
+  nameWithType: IWebCollection.AddBatch(WebOptions)
+- uid: PnP.Core.Model.SharePoint.IWebCollection.AddBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.WebOptions)
+  name: AddBatch(Batch, WebOptions)
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_AddBatch_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_WebOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWebCollection.AddBatch(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.WebOptions)
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.AddBatch(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.WebOptions)
+  nameWithType: IWebCollection.AddBatch(Batch, WebOptions)
+- uid: PnP.Core.Model.SharePoint.IWebCollection.AddBatch*
+  name: AddBatch
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_AddBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebCollection.AddBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.AddBatch
+  nameWithType: IWebCollection.AddBatch
+- uid: PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync(PnP.Core.Model.SharePoint.WebOptions)
+  name: AddBatchAsync(WebOptions)
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_AddBatchAsync_PnP_Core_Model_SharePoint_WebOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync(PnP.Core.Model.SharePoint.WebOptions)
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync(PnP.Core.Model.SharePoint.WebOptions)
+  nameWithType: IWebCollection.AddBatchAsync(WebOptions)
+- uid: PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.WebOptions)
+  name: AddBatchAsync(Batch, WebOptions)
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_AddBatchAsync_PnP_Core_Services_Batch_PnP_Core_Model_SharePoint_WebOptions_
+  commentId: M:PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync(PnP.Core.Services.Batch,PnP.Core.Model.SharePoint.WebOptions)
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync(PnP.Core.Services.Batch, PnP.Core.Model.SharePoint.WebOptions)
+  nameWithType: IWebCollection.AddBatchAsync(Batch, WebOptions)
+- uid: PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IWebCollection.html#PnP_Core_Model_SharePoint_IWebCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWebCollection.AddBatchAsync
+  nameWithType: IWebCollection.AddBatchAsync
 - uid: PnP.Core.Model.SharePoint.ListExperience
   name: ListExperience
   href: api/PnP.Core.Model.SharePoint.ListExperience.html
@@ -22389,6 +22453,90 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.ViewTypeKind.Recurrence
   fullName: PnP.Core.Model.SharePoint.ViewTypeKind.Recurrence
   nameWithType: ViewTypeKind.Recurrence
+- uid: PnP.Core.Model.SharePoint.WebOptions
+  name: WebOptions
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html
+  commentId: T:PnP.Core.Model.SharePoint.WebOptions
+  fullName: PnP.Core.Model.SharePoint.WebOptions
+  nameWithType: WebOptions
+- uid: PnP.Core.Model.SharePoint.WebOptions.Description
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Description
+  commentId: P:PnP.Core.Model.SharePoint.WebOptions.Description
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Description
+  nameWithType: WebOptions.Description
+- uid: PnP.Core.Model.SharePoint.WebOptions.Description*
+  name: Description
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Description_
+  commentId: Overload:PnP.Core.Model.SharePoint.WebOptions.Description
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Description
+  nameWithType: WebOptions.Description
+- uid: PnP.Core.Model.SharePoint.WebOptions.InheritPermissions
+  name: InheritPermissions
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_InheritPermissions
+  commentId: P:PnP.Core.Model.SharePoint.WebOptions.InheritPermissions
+  fullName: PnP.Core.Model.SharePoint.WebOptions.InheritPermissions
+  nameWithType: WebOptions.InheritPermissions
+- uid: PnP.Core.Model.SharePoint.WebOptions.InheritPermissions*
+  name: InheritPermissions
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_InheritPermissions_
+  commentId: Overload:PnP.Core.Model.SharePoint.WebOptions.InheritPermissions
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.WebOptions.InheritPermissions
+  nameWithType: WebOptions.InheritPermissions
+- uid: PnP.Core.Model.SharePoint.WebOptions.Language
+  name: Language
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Language
+  commentId: P:PnP.Core.Model.SharePoint.WebOptions.Language
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Language
+  nameWithType: WebOptions.Language
+- uid: PnP.Core.Model.SharePoint.WebOptions.Language*
+  name: Language
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Language_
+  commentId: Overload:PnP.Core.Model.SharePoint.WebOptions.Language
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Language
+  nameWithType: WebOptions.Language
+- uid: PnP.Core.Model.SharePoint.WebOptions.Template
+  name: Template
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Template
+  commentId: P:PnP.Core.Model.SharePoint.WebOptions.Template
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Template
+  nameWithType: WebOptions.Template
+- uid: PnP.Core.Model.SharePoint.WebOptions.Template*
+  name: Template
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Template_
+  commentId: Overload:PnP.Core.Model.SharePoint.WebOptions.Template
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Template
+  nameWithType: WebOptions.Template
+- uid: PnP.Core.Model.SharePoint.WebOptions.Title
+  name: Title
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Title
+  commentId: P:PnP.Core.Model.SharePoint.WebOptions.Title
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Title
+  nameWithType: WebOptions.Title
+- uid: PnP.Core.Model.SharePoint.WebOptions.Title*
+  name: Title
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Title_
+  commentId: Overload:PnP.Core.Model.SharePoint.WebOptions.Title
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Title
+  nameWithType: WebOptions.Title
+- uid: PnP.Core.Model.SharePoint.WebOptions.Url
+  name: Url
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Url
+  commentId: P:PnP.Core.Model.SharePoint.WebOptions.Url
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Url
+  nameWithType: WebOptions.Url
+- uid: PnP.Core.Model.SharePoint.WebOptions.Url*
+  name: Url
+  href: api/PnP.Core.Model.SharePoint.WebOptions.html#PnP_Core_Model_SharePoint_WebOptions_Url_
+  commentId: Overload:PnP.Core.Model.SharePoint.WebOptions.Url
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.WebOptions.Url
+  nameWithType: WebOptions.Url
 - uid: PnP.Core.Model.Teams
   name: PnP.Core.Model.Teams
   href: api/PnP.Core.Model.Teams.html

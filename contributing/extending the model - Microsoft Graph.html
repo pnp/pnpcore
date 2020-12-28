@@ -425,7 +425,7 @@ public interface ITeamChannelCollection : IQueryable&lt;ITeamChannel&gt;, IDataM
     internal TeamChannel()
     {
         // Handler to construct the Add request for this channel
-        AddApiCallHandler = async () =&gt;
+        AddApiCallHandler = async (additionalInformation) =&gt;
         {
             // Define the JSON body of the update request based on the actual changes
             dynamic body = new ExpandoObject();
