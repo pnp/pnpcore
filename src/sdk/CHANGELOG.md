@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added support for setting the Compliance Tag on a list [erwinvanhunen - Erwin van Hunen]
+- Added support for setting the Compliance Tag on a list item [erwinvanhunen - Erwin van Hunen]
 - Added support for retrieving available site Compliance Tags / retention labels [erwinvanhunen - Erwin van Hunen]
 - Added support for retrieving the Compliance Tag set for a list [erwinvanhunen - Erwin van Hunen]
 - Implemented PnP.Core.Auth [PaoloPia - Paolo Pialorsi]

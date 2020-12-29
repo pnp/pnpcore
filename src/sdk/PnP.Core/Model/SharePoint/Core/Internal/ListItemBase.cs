@@ -589,6 +589,26 @@ namespace PnP.Core.Model.SharePoint
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);            
         }
 
+        public void SetComplianceTag(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            SetComplianceTagAsync(complianceTag, isTagPolicyHold, isTagPolicyRecord, isEventBasedTag, isTagSuperLock).GetAwaiter().GetResult();
+        }
+
+        public async Task SetComplianceTagAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            var parameters = new 
+            {
+                complianceTag = complianceTag,
+                isTagPolicyHold = isTagPolicyHold,
+                isTagPolicyRecord = isTagPolicyRecord,
+                isEventBasedTag = isEventBasedTag,
+                isTagSuperLock = isTagSuperLock
+            };
+            string body = JsonSerializer.Serialize(parameters);
+            var apiCall = new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})/SetComplianceTag", ApiType.SPORest, body);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
         #endregion
 
         #endregion

@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Id of the list item
         /// </summary>
-        public int Id { get; }        
+        public int Id { get; }
 
         /// <summary>
         /// Title value of the list item
@@ -118,6 +118,32 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="commentsDisabled">Do comments need to enabled or disabled</param>
         /// <returns></returns>
         public void SetCommentsDisabled(bool commentsDisabled);
+
+        #endregion
+
+        #region ComplianceTag / Label handling
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold"></param>
+        /// <param name="isTagPolicyRecord"></param>
+        /// <param name="isEventBasedTag"></param>
+        /// <param name="isTagSuperLock"></param>
+        /// <returns></returns>
+        public void SetComplianceTag(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold"></param>
+        /// <param name="isTagPolicyRecord"></param>
+        /// <param name="isEventBasedTag"></param>
+        /// <param name="isTagSuperLock"></param>
+        /// <returns></returns>
+        public Task SetComplianceTagAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
         #endregion
 
         #endregion
