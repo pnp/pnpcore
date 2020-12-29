@@ -13011,6 +13011,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync
   nameWithType: IListItemBase.SetComplianceTagAsync
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagBatch(Batch, String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatch_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(PnP.Core.Services.Batch, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItemBase.SetComplianceTagBatch(Batch, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagBatch(String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItemBase.SetComplianceTagBatch(String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch*
+  name: SetComplianceTagBatch
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch
+  nameWithType: IListItemBase.SetComplianceTagBatch
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagBatchAsync(Batch, String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(PnP.Core.Services.Batch, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItemBase.SetComplianceTagBatchAsync(Batch, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagBatchAsync(String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatchAsync_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItemBase.SetComplianceTagBatchAsync(String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync*
+  name: SetComplianceTagBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync
+  nameWithType: IListItemBase.SetComplianceTagBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdate
   name: SystemUpdate()
   href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdate
