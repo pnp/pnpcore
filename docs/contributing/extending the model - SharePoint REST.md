@@ -254,7 +254,7 @@ internal partial class List : BaseDataModel<IList>, IList
     internal List()
     {
         // Handler to construct the Add request for this list
-        AddApiCallHandler = async () =>
+        AddApiCallHandler = async (additionalInformation) =>
         {
             var entity = EntityManager.Instance.GetClassInfo(GetType(), this);
 

@@ -6,7 +6,7 @@ When you add/extend the model, you will have an option to use event handlers. Th
 
 Event handler | Delegate | Description
 --------------|----------|------------
-`AddApiCallHandler` | `Task<ApiCall> AddApiCall();` | When you want to implement **Add** on a model class you need to use this event handler
+`AddApiCallHandler` | `Task<ApiCall> AddApiCall(Dictionary<string, object> additionalInformation);` | When you want to implement **Add** on a model class you need to use this event handler
 `GetApiCallOverrideHandler` | `Task<ApiCallRequest> GetApiCallOverride(ApiCallRequest input);` | You can use this handler to override or cancel the **get** API call that was created based upon the model decoration
 `UpdateApiCallOverrideHandler` | `Task<ApiCallRequest> UpdateApiCallOverride(ApiCallRequest input);` | You can use this handler to override or cancel the **update** API call that was created based upon the model decoration
 `DeleteApiCallOverrideHandler` | `Task<ApiCallRequest> DeleteApiCallOverride(ApiCallRequest input);` | You can use this handler to override or cancel the **delete** API call that was created based upon the model decoration
@@ -32,7 +32,7 @@ internal partial class TeamChannel
     internal TeamChannel()
     {
         // Handler to construct the Add request for this channel
-        AddApiCallHandler = async () =>
+        AddApiCallHandler = async (additionalInformation) =>
         {
             // Define the JSON body of the update request based on the actual changes
             dynamic body = new ExpandoObject();

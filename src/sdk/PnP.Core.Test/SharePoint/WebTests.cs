@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -593,6 +594,154 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(web.AssociatedVisitorGroup.Id != 0);
             }
         }
+
+        [TestMethod]
+        public async Task AddWebWithDefaults()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "newsubweb";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle });
+                Assert.IsTrue(addedWeb != null);
+                Assert.AreEqual(addedWeb.Title, webTitle);
+                Assert.AreEqual(addedWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context2.Web.GetAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    Assert.IsTrue(createdWeb != null);
+                    Assert.AreEqual(createdWeb.Title, webTitle);
+                    Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                    // Delete the created web again
+                    await createdWeb.DeleteAsync();
+                    Assert.IsTrue((createdWeb as Web).Deleted);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebInBatchWithDefaults()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "AddWebInBatchWithDefaults";
+                var addedWeb = await context.Web.Webs.AddBatchAsync(new WebOptions { Title = webTitle, Url = webTitle });
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(addedWeb != null);
+                Assert.AreEqual(addedWeb.Title, webTitle);
+                Assert.AreEqual(addedWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context2.Web.GetAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    Assert.IsTrue(createdWeb != null);
+                    Assert.AreEqual(createdWeb.Title, webTitle);
+                    Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                    // Delete the created web again
+                    await createdWeb.DeleteAsync();
+                    Assert.IsTrue((createdWeb as Web).Deleted);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebWithCustomOptions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "AddWebWithCustomOptions";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions 
+                { 
+                    Title = webTitle, 
+                    Url = webTitle,
+                    Description = "Description of the sub web",
+                    Template = "STS#0",
+                    Language = 1043,
+                    InheritPermissions = false
+                });
+                Assert.IsTrue(addedWeb != null);
+                Assert.AreEqual(addedWeb.Title, webTitle);
+                Assert.AreEqual(addedWeb.Description, "Description of the sub web");
+                Assert.AreEqual(addedWeb.WebTemplate, "STS");
+                Assert.AreEqual(addedWeb.Language, 1043);
+                Assert.AreEqual(addedWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context2.Web.GetAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    Assert.IsTrue(createdWeb != null);
+
+                    Assert.AreEqual(createdWeb.Title, webTitle);
+                    Assert.AreEqual(createdWeb.Description, "Description of the sub web");
+                    Assert.AreEqual(createdWeb.WebTemplate, "STS");
+                    Assert.AreEqual(createdWeb.Language, 1043);
+                    Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                    // Delete the created web again
+                    await createdWeb.DeleteAsync();
+                    Assert.IsTrue((createdWeb as Web).Deleted);
+                }
+            }
+        }
+
+
+        [TestMethod]
+        public async Task BatchDelete()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "BatchDelete";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle });
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context2.Web.GetAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    Assert.IsTrue(createdWeb != null);
+
+                    await Assert.ThrowsExceptionAsync<ClientException>(async () =>
+                    {
+                        // Delete the created web again...should result in an exception
+                        await createdWeb.DeleteBatchAsync();
+                    });
+
+                    // Use supported delete method
+                    await createdWeb.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteCurrentWeb()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "DeleteCurrentWeb";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle });
+
+                using (var context2 = TestCommon.Instance.Clone(context, addedWeb.Url, 1))
+                {
+                    // This will not delete the web, the delete request will be cancelled
+                    await context2.Web.DeleteAsync();
+                }
+
+                // Use supported delete method
+                await addedWeb.DeleteAsync();
+            }
+        }
+
+
 
     }
 }
