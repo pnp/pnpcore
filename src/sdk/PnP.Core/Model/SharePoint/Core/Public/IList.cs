@@ -337,6 +337,15 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         public Dictionary<string, object> GetListDataAsStream(RenderListDataOptions renderOptions);
 
+        /// <summary>
+        /// Retrieves the compliance tag / retention label for this list
+        /// </summary>
+        public IComplianceTag GetComplianceTag();
+
+        /// <summary>
+        /// Retrieves the compliance tag / retention label for this list
+        /// </summary>
+        public Task<IComplianceTag> GetComplianceTagAsync();
 
     }
 }

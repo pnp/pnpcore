@@ -1,5 +1,10 @@
 ﻿using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -133,5 +138,37 @@ namespace PnP.Core.Model.SharePoint
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
+
+        public IEnumerable<IComplianceTag> GetAvailableTags()
+        {
+            return GetAvailableTagsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerable<IComplianceTag>> GetAvailableTagsAsync()
+        {
+            var apiCall = new ApiCall("_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetAvailableTagsForSite(siteUrl='{Site.Url}')", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+
+                if (json.TryGetProperty("GetAvailableTagsForSite", out JsonElement getAvailableTagsForSite))
+                {
+                    if (getAvailableTagsForSite.TryGetProperty("results", out JsonElement result))
+                    {
+                        var returnTags = new List<IComplianceTag>();
+                        var tags = JsonSerializer.Deserialize<IEnumerable<ComplianceTag>>(result.GetRawText(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        foreach (var tag in tags)
+                        {
+                            returnTags.Add(tag);
+                        }
+                        return returnTags;
+                    }
+                }
+            }
+
+            return new List<IComplianceTag>();
+        }
     }
 }

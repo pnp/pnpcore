@@ -455,6 +455,32 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        public IComplianceTag GetComplianceTag()
+        {
+            return GetComplianceTagAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IComplianceTag> GetComplianceTag()
+        {
+            await EnsurePropertiesAsync(l => l.RootFolder).ConfigureAwait(false);
+            await RootFolder.EnsurePropertiesAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
+            var listUrl = RootFolder.ServerRelativeUrl; 
+            var apiCall = new ApiCall($"_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetListComplianceTag(listUrl='{listUrl}')", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+
+                if (json.TryGetProperty("GetListComplianceTag", out JsonElement getAvailableTagsForSite))
+                {
+                    var tag = JsonSerializer.Deserialize<ComplianceTag>(getAvailableTagsForSite.GetRawText(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    return tag;
+                }
+            }
+
+            return null;
+        }
         #endregion
     }
 }

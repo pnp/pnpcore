@@ -1,5 +1,7 @@
 ﻿using PnP.Core.Model.Security;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -262,5 +264,15 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IEventReceiverDefinitionCollection EventReceivers { get; }
+
+        /// <summary>
+        /// Retrieves the available compliance tags / retention labels for this site
+        /// </summary>
+        public IEnumerable<IComplianceTag> GetAvailableTags();
+
+        /// <summary>
+        /// Retrieves the available compliance tags / retention labels for this site
+        /// </summary>
+        public Task<IEnumerable<IComplianceTag>> GetAvailableTagsAsync();
     }
 }
