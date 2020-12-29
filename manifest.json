@@ -1314,7 +1314,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IComplianceTag.html",
-          "hash": "k7t4prFG2R2Gdy6S3CSlpQ=="
+          "hash": "zN76KbcDBpQKNUc4wu9IQg=="
         }
       },
       "is_incremental": false,
@@ -1638,7 +1638,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "Oy4nOHTEorJKe6u1da/4qQ=="
+          "hash": "9wJZ+r1fsXyfbDouOMKMQw=="
         }
       },
       "is_incremental": false,
@@ -1674,7 +1674,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItemBase.html",
-          "hash": "PAw+oCIzYWzAFScNsti7yQ=="
+          "hash": "UpzK0JYoirQSCqwxQnNqiw=="
         }
       },
       "is_incremental": false,

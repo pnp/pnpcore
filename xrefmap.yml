@@ -12567,6 +12567,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTagAsync
   nameWithType: IList.SetComplianceTagAsync
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatch(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagBatch(Batch, String, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTagBatch_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IList.SetComplianceTagBatch(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatch(PnP.Core.Services.Batch, System.String, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IList.SetComplianceTagBatch(Batch, String, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatch(System.String,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagBatch(String, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTagBatch_System_String_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IList.SetComplianceTagBatch(System.String,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatch(System.String, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IList.SetComplianceTagBatch(String, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatch*
+  name: SetComplianceTagBatch
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTagBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.SetComplianceTagBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatch
+  nameWithType: IList.SetComplianceTagBatch
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagBatchAsync(Batch, String, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTagBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IList.SetComplianceTagBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatchAsync(PnP.Core.Services.Batch, System.String, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IList.SetComplianceTagBatchAsync(Batch, String, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatchAsync(System.String,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagBatchAsync(String, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTagBatchAsync_System_String_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IList.SetComplianceTagBatchAsync(System.String,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatchAsync(System.String, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IList.SetComplianceTagBatchAsync(String, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatchAsync*
+  name: SetComplianceTagBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTagBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.SetComplianceTagBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTagBatchAsync
+  nameWithType: IList.SetComplianceTagBatchAsync
 - uid: PnP.Core.Model.SharePoint.IList.TemplateFeatureId
   name: TemplateFeatureId
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_TemplateFeatureId
