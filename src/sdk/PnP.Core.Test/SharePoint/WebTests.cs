@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Test.Utilities;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,14 +35,9 @@ namespace PnP.Core.Test.SharePoint
                     p => p.AllowSavePublishDeclarativeWorkflowForCurrentUser,
                     p => p.AlternateCssUrl,
                     p => p.AppInstanceId,
-                    p => p.ClassicWelcomePage,
                     p => p.ContainsConfidentialInfo,
                     p => p.Created,
                     p => p.CustomMasterUrl,
-                    p => p.CustomSiteActionsDisabled,
-                    // TODO Test this in Targeted Release
-                    //p => p.DefaultNewPageTemplateId,
-                    p => p.DesignerDownloadUrlForCurrentUser,
                     p => p.DesignPackageId,
                     p => p.DisableRecommendedItems,
                     p => p.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled,
@@ -65,13 +61,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("", web.AlternateCssUrl);
                 // TODO: This one should be tested with an addin web to be relevant
                 Assert.AreEqual(default, web.AppInstanceId);
-                Assert.IsNull(web.ClassicWelcomePage);
                 Assert.IsFalse(web.ContainsConfidentialInfo);
                 Assert.IsTrue(web.CustomMasterUrl.EndsWith("/_catalogs/masterpage/seattle.master"));
-                Assert.IsFalse(web.CustomSiteActionsDisabled);
-                // TODO Test this in Targeted Release
-                //Assert.AreNotEqual(default, web.DefaultNewPageTemplateId);
-                Assert.AreEqual("https://go.microsoft.com/fwlink/?LinkId=328584&clcid=0x409", web.DesignerDownloadUrlForCurrentUser);
                 Assert.AreEqual(default, web.DesignPackageId);
                 Assert.IsFalse(web.DisableRecommendedItems);
                 Assert.IsFalse(web.DocumentLibraryCalloutOfficeWebAppPreviewersDisabled);
@@ -156,7 +147,6 @@ namespace PnP.Core.Test.SharePoint
                     p => p.SaveSiteAsTemplateEnabled,
                     p => p.SearchBoxPlaceholderText,
                     p => p.ServerRelativeUrl,
-                    p => p.ShowUrlStructureForCurrentUser,
                     p => p.SiteLogoDescription,
                     p => p.SiteLogoUrl,
                     p => p.SyndicationEnabled
@@ -175,7 +165,6 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(web.SaveSiteAsTemplateEnabled);
                 Assert.IsNull(web.SearchBoxPlaceholderText);
                 Assert.AreNotEqual("", web.ServerRelativeUrl);
-                Assert.IsTrue(web.ShowUrlStructureForCurrentUser);
                 Assert.AreEqual("", web.SiteLogoDescription);
                 Assert.AreNotEqual("", web.SiteLogoUrl);
             }
@@ -189,35 +178,26 @@ namespace PnP.Core.Test.SharePoint
             {
                 IWeb web = await context.Web.GetAsync(
                     p => p.TenantAdminMembersCanShare,
-                    p => p.TenantTagPolicyEnabled,
                     // TODO Review this one, it causes SP REST to return an error
                     //p => p.ThemeData,
-                    p => p.ThemedCssFolderUrl,
                     p => p.ThirdPartyMdmEnabled,
                     p => p.TreeViewEnabled,
-                    p => p.UIVersion,
-                    p => p.UIVersionConfigurationEnabled,
                     p => p.UseAccessRequestDefault,
                     p => p.WebTemplate,
-                    p => p.WebTemplateConfiguration,
-                    p => p.WebTemplatesGalleryFirstRunEnabled
+                    p => p.WebTemplateConfiguration
                     );
 
                 Assert.IsNotNull(web);
-                Assert.AreEqual(0, web.TenantAdminMembersCanShare);
+                Assert.AreEqual(SharingState.Unspecified, web.TenantAdminMembersCanShare);
                 // TODO Review this one, it causes SP REST to return an error
                 //Assert.AreNotEqual("", web.ThemeData);
                 // Not validating this property ~ this could have been manipulated on test sites causing false positives
                 //Assert.IsNull(web.ThemedCssFolderUrl);
                 Assert.IsFalse(web.ThirdPartyMdmEnabled);
                 Assert.IsFalse(web.TreeViewEnabled);
-                Assert.AreNotEqual(0, web.UIVersion);
-                Assert.IsFalse(web.UIVersionConfigurationEnabled);
                 Assert.IsTrue(web.UseAccessRequestDefault);
-                Assert.AreNotEqual(0, web.UIVersion);
                 Assert.AreEqual("GROUP", web.WebTemplate);
                 Assert.AreEqual("GROUP#0", web.WebTemplateConfiguration);
-                Assert.IsFalse(web.WebTemplatesGalleryFirstRunEnabled);
             }
         }
 
@@ -614,6 +594,154 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(web.AssociatedVisitorGroup.Id != 0);
             }
         }
+
+        [TestMethod]
+        public async Task AddWebWithDefaults()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "newsubweb";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle });
+                Assert.IsTrue(addedWeb != null);
+                Assert.AreEqual(addedWeb.Title, webTitle);
+                Assert.AreEqual(addedWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context2.Web.GetAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    Assert.IsTrue(createdWeb != null);
+                    Assert.AreEqual(createdWeb.Title, webTitle);
+                    Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                    // Delete the created web again
+                    await createdWeb.DeleteAsync();
+                    Assert.IsTrue((createdWeb as Web).Deleted);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebInBatchWithDefaults()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "AddWebInBatchWithDefaults";
+                var addedWeb = await context.Web.Webs.AddBatchAsync(new WebOptions { Title = webTitle, Url = webTitle });
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(addedWeb != null);
+                Assert.AreEqual(addedWeb.Title, webTitle);
+                Assert.AreEqual(addedWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context2.Web.GetAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    Assert.IsTrue(createdWeb != null);
+                    Assert.AreEqual(createdWeb.Title, webTitle);
+                    Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                    // Delete the created web again
+                    await createdWeb.DeleteAsync();
+                    Assert.IsTrue((createdWeb as Web).Deleted);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task AddWebWithCustomOptions()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "AddWebWithCustomOptions";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions 
+                { 
+                    Title = webTitle, 
+                    Url = webTitle,
+                    Description = "Description of the sub web",
+                    Template = "STS#0",
+                    Language = 1043,
+                    InheritPermissions = false
+                });
+                Assert.IsTrue(addedWeb != null);
+                Assert.AreEqual(addedWeb.Title, webTitle);
+                Assert.AreEqual(addedWeb.Description, "Description of the sub web");
+                Assert.AreEqual(addedWeb.WebTemplate, "STS");
+                Assert.AreEqual(addedWeb.Language, 1043);
+                Assert.AreEqual(addedWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context2.Web.GetAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    Assert.IsTrue(createdWeb != null);
+
+                    Assert.AreEqual(createdWeb.Title, webTitle);
+                    Assert.AreEqual(createdWeb.Description, "Description of the sub web");
+                    Assert.AreEqual(createdWeb.WebTemplate, "STS");
+                    Assert.AreEqual(createdWeb.Language, 1043);
+                    Assert.AreEqual(createdWeb.Url, new Uri($"{context.Uri}/{webTitle}"));
+
+                    // Delete the created web again
+                    await createdWeb.DeleteAsync();
+                    Assert.IsTrue((createdWeb as Web).Deleted);
+                }
+            }
+        }
+
+
+        [TestMethod]
+        public async Task BatchDelete()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "BatchDelete";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle });
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context2.Web.GetAsync(p => p.Webs);
+                    var createdWeb = context2.Web.Webs.FirstOrDefault(p => p.Title == webTitle);
+                    Assert.IsTrue(createdWeb != null);
+
+                    await Assert.ThrowsExceptionAsync<ClientException>(async () =>
+                    {
+                        // Delete the created web again...should result in an exception
+                        await createdWeb.DeleteBatchAsync();
+                    });
+
+                    // Use supported delete method
+                    await createdWeb.DeleteAsync();
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteCurrentWeb()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string webTitle = "DeleteCurrentWeb";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle });
+
+                using (var context2 = TestCommon.Instance.Clone(context, addedWeb.Url, 1))
+                {
+                    // This will not delete the web, the delete request will be cancelled
+                    await context2.Web.DeleteAsync();
+                }
+
+                // Use supported delete method
+                await addedWeb.DeleteAsync();
+            }
+        }
+
+
 
     }
 }

@@ -15,15 +15,67 @@ namespace PnP.Core.Model.SharePoint
     /// <summary>
     /// Web class, write your custom code here
     /// </summary>
-    [SharePointType("SP.Web", Uri = "_api/web", LinqGet = "_api/site/rootWeb/webinfos")]
+    [SharePointType("SP.Web", Uri = V, LinqGet = "_api/web/webinfos")]
     [GraphType(Get = "sites/{hostname}:{serverrelativepath}")]
     internal partial class Web : BaseDataModel<IWeb>, IWeb
     {
+        private const string V = "_api/web";
         private static readonly Guid MultilingualPagesFeature = new Guid("24611c05-ee19-45da-955f-6602264abaf8");
+        internal const string WebOptionsAdditionalInformationKey = "WebOptions";
 
         #region Construction
         public Web()
         {
+            // Handler to construct the Add request for this list
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            AddApiCallHandler = async (additionalInformation) =>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+            {
+                var webOptions = (WebOptions)additionalInformation[WebOptionsAdditionalInformationKey];
+
+                // Build body
+                var webCreationInformation = new
+                {
+                    parameters = new
+                    {
+                        __metadata = new { type = "SP.WebCreationInformation" },
+                        Title = webOptions.Title,
+                        Url = webOptions.Url,
+                        WebTemplate = webOptions.Template,
+                        Description = webOptions.Description,
+                        Language = webOptions.Language,
+                        UseSamePermissionsAsParentSite = webOptions.InheritPermissions
+                    }
+                }.AsExpando();
+
+                string body = JsonSerializer.Serialize(webCreationInformation, typeof(ExpandoObject), new JsonSerializerOptions() { IgnoreNullValues = true });
+
+                return new ApiCall($"{V}/Webs/Add", ApiType.SPORest, body);
+            };
+
+            DeleteApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
+            {
+                await EnsurePropertiesAsync(p => p.Url).ConfigureAwait(false);
+
+                string webRelativePath = Url.ToString().Replace(PnPContext.Web.Url.ToString(), "");
+
+                // We don't allow to delete the web loaded in the current context as that would lead to a useless context
+                if (string.IsNullOrEmpty(webRelativePath))
+                {
+                    apiCallRequest.CancelRequest("Can't delete the web of the loaded context");
+                    return apiCallRequest;
+                }
+
+                // Ensure we've the correct path to the subsite to delete, since batching always calls the batch endpoint of the site to delete we 
+                // can't delete the web calling it's batch endpoint. Using an interactive approach instead
+                ApiCall deleteApiCall = new ApiCall($"{Url}/{V}", apiCallRequest.ApiCall.Type)
+                {
+                    Interactive = true
+                };
+
+                return new ApiCallRequest(deleteApiCall);
+            };
+
             PostMappingHandler = (json) =>
             {
                 // implement post mapping handler in case you want to do extra data loading/mapping work
@@ -56,7 +108,6 @@ namespace PnP.Core.Model.SharePoint
         [GraphProperty("sharepointIds", JsonPath = "webId")]
         public Guid Id { get => GetValue<Guid>(); set => SetValue(value); }
 
-        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
         public string AccessRequestListUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public string AccessRequestSiteDescription { get => GetValue<string>(); set => SetValue(value); }
@@ -79,17 +130,11 @@ namespace PnP.Core.Model.SharePoint
 
         public Guid AppInstanceId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        public string ClassicWelcomePage { get => GetValue<string>(); set => SetValue(value); }
-
         public bool ContainsConfidentialInfo { get => GetValue<bool>(); set => SetValue(value); }
 
         public DateTime Created { get => GetValue<DateTime>(); set => SetValue(value); }
 
-        public bool CustomSiteActionsDisabled { get => GetValue<bool>(); set => SetValue(value); }
-
         public Guid DefaultNewPageTemplateId { get => GetValue<Guid>(); set => SetValue(value); }
-
-        public string DesignerDownloadUrlForCurrentUser { get => GetValue<string>(); set => SetValue(value); }
 
         public Guid DesignPackageId { get => GetValue<Guid>(); set => SetValue(value); }
 
@@ -153,37 +198,25 @@ namespace PnP.Core.Model.SharePoint
 
         public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
 
-        public bool ShowUrlStructureForCurrentUser { get => GetValue<bool>(); set => SetValue(value); }
-
         public string SiteLogoDescription { get => GetValue<string>(); set => SetValue(value); }
 
         public string SiteLogoUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public bool SyndicationEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
-        public int TenantAdminMembersCanShare { get => GetValue<int>(); set => SetValue(value); }
-
-        public bool TenantTagPolicyEnabled { get => GetValue<bool>(); set => SetValue(value); }
+        public SharingState TenantAdminMembersCanShare { get => GetValue<SharingState>(); set => SetValue(value); }
 
         public string ThemeData { get => GetValue<string>(); set => SetValue(value); }
-
-        public string ThemedCssFolderUrl { get => GetValue<string>(); set => SetValue(value); }
 
         public bool ThirdPartyMdmEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool TreeViewEnabled { get => GetValue<bool>(); set => SetValue(value); }
-
-        public int UIVersion { get => GetValue<int>(); set => SetValue(value); }
-
-        public bool UIVersionConfigurationEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool UseAccessRequestDefault { get => GetValue<bool>(); set => SetValue(value); }
 
         public string WebTemplate { get => GetValue<string>(); set => SetValue(value); }
 
         public string WebTemplateConfiguration { get => GetValue<string>(); set => SetValue(value); }
-
-        public bool WebTemplatesGalleryFirstRunEnabled { get => GetValue<bool>(); set => SetValue(value); }
 
         [GraphProperty("displayName")]
         public string Title { get => GetValue<string>(); set => SetValue(value); }
@@ -277,7 +310,17 @@ namespace PnP.Core.Model.SharePoint
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
 
-        #region Extension methods
+        #region Extension methods        
+
+        #region Delete
+
+        internal override Task BaseBatchDeleteAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
+        {
+            // Throw an exception to clarify that batch web delete is not supported
+            throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_Unsupported_WebDeleteIsInteractive);
+        }
+
+        #endregion
 
         #region Modern Pages
         public async Task<List<IPage>> GetPagesAsync(string pageName = null)

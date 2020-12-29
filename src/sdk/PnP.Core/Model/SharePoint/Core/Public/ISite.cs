@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model.Security;
+using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -14,7 +15,7 @@ namespace PnP.Core.Model.SharePoint
         public Guid Id { get; }
 
         /// <summary>
-        /// The unique ID of the connected Microsoft 365 Group (if any)
+        /// The unique ID of the associated Microsoft 365 Group (if any)
         /// </summary>
         public Guid GroupId { get; }
 
@@ -34,14 +35,9 @@ namespace PnP.Core.Model.SharePoint
         public bool SocialBarOnSitePagesDisabled { get; set; }
 
         /// <summary>
-        /// Define if the suitebar search box should show or not 
+        /// Whether suite nav search box is shown on modern and classic pages 
         /// </summary>
         public SearchBoxInNavBar SearchBoxInNavBar { get; set; }
-
-        /// <summary>
-        /// Defines the Search Center URL
-        /// </summary>
-        public string SearchCenterUrl { get; set; }
 
         /// <summary>
         /// The RootWeb of the Site object
@@ -70,6 +66,9 @@ namespace PnP.Core.Model.SharePoint
 
         /// <summary>
         /// Gets or sets a value that specifies whether external embedding wrapper is allowed on this site collection.
+        /// 0 means "Don't allow embedding any external domains"
+        /// 1 means "Only allow embedding external domains from allow-embed-domains-list"
+        /// 2 means "Allow embedding any external domains"
         /// </summary>
         public int AllowExternalEmbeddingWrapper { get; set; }
 
@@ -94,36 +93,18 @@ namespace PnP.Core.Model.SharePoint
         public bool AllowSavePublishDeclarativeWorkflow { get; set; }
 
         /// <summary>
-        /// Gets or sets a value that specifies whether version to version upgrade is allowed on this site collection.
-        /// </summary>
-        public bool AllowSelfServiceUpgrade { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value that specifies whether upgrade evaluation site collection is allowed on this site collection.
-        /// </summary>
-        public bool AllowSelfServiceUpgradeEvaluation { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value that specifies whether the audit log trimming retention on this site.
+        /// This is the number of days of audit log data to retain. If unset and
+        /// audit trimming is enabled, the retention defaults default configured schedule for trimming
         /// </summary>
         public int AuditLogTrimmingRetention { get; set; }
 
-        // TODO: Review if readonly
-        // TODO: Review this property docs
         /// <summary>
-        /// Gets a value that specifies whether the site collections has permissions to sync to hub site.
+        /// Gets or sets value if syncing hub site permissions to this associated site is allowed.
         /// </summary>
-        public bool CanSyncHubSitePermissions { get; }
+        public bool CanSyncHubSitePermissions { get; set; }
 
         /// <summary>
-        /// Property indicating whether or not this object can be upgraded.
-        /// </summary>
-        public bool CanUpgrade { get; }
-
-        // TODO: Review if readonly
-        // TODO: Review this property docs
-        /// <summary>
-        /// Gets the Id of the channel group.
+        /// Gets the ID of the Modern Group associated with this site.
         /// </summary>
         public Guid ChannelGroupId { get; }
 
@@ -133,98 +114,82 @@ namespace PnP.Core.Model.SharePoint
         public bool CommentsOnSitePagesDisabled { get; set; }
 
         /// <summary>
-        /// Gets the major version of this site collection for purposes of major version-level compatibility checks.
-        /// </summary>
-        public int CompatibilityLevel { get; }
-
-        /// <summary>
-        /// Gets or sets the compliance attribute of this site collection.
-        /// </summary>
-        public string ComplianceAttribute { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value that specifies whether the app views are disabled on this site collection.
+        /// Sets whether or not to disable app views for all child webs.
+        /// True means app views are disabled throughout the site collection; False otherwise.
         /// </summary>
         public bool DisableAppViews { get; set; }
 
         /// <summary>
-        /// Gets or sets a value that specifies whether the company-wide sharing links are disabled on this site collection.
+        /// Sets whether or not to disable company sharing links for all child webs.
+        /// True means companywide sharing links are disabled throughout the site collection, regardless of the settings on the root or child webs.
+        /// False means each web can individually decide whether to turn on or off companywide sharing links.
         /// </summary>
         public bool DisableCompanyWideSharingLinks { get; set; }
 
         /// <summary>
-        /// Gets or sets a value that specifies whether Flows are disabled on this site collection.
+        /// Sets whether or not to disable Flows for all child webs.
+        /// True means Flows are disabled throughout the site collection; False otherwise.
         /// </summary>
         public bool DisableFlows { get; set; }
 
         /// <summary>
-        /// Gets a value that indicates whether external sharing tips are enabled.
+        /// Gets a boolean value that specifies whether users will be greeted with a notification bar
+        /// telling them that the site can be shared with external users.
+        /// True - notification bar is enabled; False - otherwise
         /// </summary>
         public bool ExternalSharingTipsEnabled { get; }
 
-        // TODO: Review if readonly
         /// <summary>
-        /// Gets or sets the expiration in days for external users on this site collection.
+        /// Property that indicates the default number of days an external user will expire in.
+        /// 0 if the policy is disabled or unavailable, otherwise the number of days
         /// </summary>
-        public int ExternalUserExpirationInDays { get; set; }
+        public int ExternalUserExpirationInDays { get; }
 
         /// <summary>
-        /// Gets the geolocation of this site collection.
+        /// returns the Geo Location hosting this site collection
         /// </summary>
         public string GeoLocation { get; }
 
         /// <summary>
-        /// Gets the Id of the Hub Site this site collection is connected to.
+        /// Gets the ID of the HubSite this site is associated with.
         /// </summary>
+        /// <remarks>Use JoinHubSite method to change the value of this property.</remarks>
         public Guid HubSiteId { get; }
 
-        // TODO: Review if readonly
         /// <summary>
-        /// Gets or sets the Id (as String) of the sensitivity label of this site collection.
+        /// Gets or sets the Information Protection Label Id for an individual site collection.
         /// </summary>
         public string SensitivityLabelId { get; set; }
 
-        // TODO: Review this property docs
-        // TODO: Review if readonly
         /// <summary>
-        /// Gets or sets the Id (as Guid) of the sensitivity label of this site collection
+        /// Information Protection Label Id for an individual site collection
         /// </summary>
-        public Guid SensitivityLabel { get; set; }
+        public Guid SensitivityLabel { get; }
 
         /// <summary>
-        /// Gets a value that indicates whether this site collection is a Hub Site.
+        /// Returns whether or not this site is a HubSite. Hub sites can be associated with one or more sites.
         /// </summary>
         public bool IsHubSite { get; }
 
         /// <summary>
-        /// Gets or sets the comment that is used in locking a site collection.
+        /// Gets the comment that is used in locking a site collection.
         /// </summary>
-        public string LockIssue { get; set; }
+        public string LockIssue { get; }
 
         /// <summary>
-        /// Gets a value that specifies the maximum number of list items allowed per operation before throttling will occur.
+        /// Maximum items that will not be throttled per operation.
         /// </summary>
         public int MaxItemsPerThrottledOperation { get; }
 
         /// <summary>
-        /// Gets or sets a value that specifies whether this site collection needs a B2B upgrade.
-        /// </summary>
-        public bool NeedsB2BUpgrade { get; set; }
-
-        /// <summary>
-        /// Specifies the primary URI of this site collection, including the host name, port number, and path.
-        /// </summary>
-        public Uri PrimaryUri { get; }
-
-        /// <summary>
-        /// Gets or sets a Boolean value that specifies whether the site collection is read-only, locked, and unavailable for write access.
+        /// Gets or sets a bool value that specifies whether the site collection is read-only, locked, and unavailable for write access.
         /// </summary>
 #pragma warning disable CA1716 // Identifiers should not match keywords
         public bool ReadOnly { get; set; }
 #pragma warning restore CA1716 // Identifiers should not match keywords
 
         /// <summary>
-        /// Gets the Id of the group related to this site collection.
+        /// Gets the ID of the Modern Group related to this site.
         /// </summary>
         public Guid RelatedGroupId { get; }
 
@@ -234,18 +199,7 @@ namespace PnP.Core.Model.SharePoint
         public IRecycleBinItemCollection RecycleBin { get; }
 
         /// <summary>
-        /// Gets a value that indicates the required Designer version for this site collection.
-        /// </summary>
-        public string RequiredDesignerVersion { get; }
-
-        // TODO Probably not expecting this to be implemented, to decide whether include it or not
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public int SandboxedCodeActivationCapability { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value that specifies the placeholder text of this site collection search box.
+        /// Search placeholder text for search box in navbar - overrides default placeholder text if set.
         /// </summary>
         public string SearchBoxPlaceholderText { get; set; }
 
@@ -254,9 +208,8 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string ServerRelativeUrl { get; }
 
-        // TODO: Review if readonly
         /// <summary>
-        /// Gets or sets a value that specifies whether sharing by e-mail is enabled on this site collection.
+        /// ShareByEmailEnabled when true means that user's will be able to grant permissions to guests for resources within the site collection
         /// </summary>
         public bool ShareByEmailEnabled { get; set; }
 
@@ -271,60 +224,34 @@ namespace PnP.Core.Model.SharePoint
         public bool ShowPeoplePickerSuggestionsForGuestUsers { get; set; }
 
         /// <summary>
-        /// Gets or sets a value that specifies whether the URL structure of this site collection is viewable.
-        /// </summary>
-        public bool ShowUrlStructure { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value that specifies the status bar link on this site collection.
+        /// Gets or sets a value that specifies the status bar link on this site collection (sets the SiteStatusBarLink property on the root web).
         /// </summary>
         public string StatusBarLink { get; set; }
 
         /// <summary>
-        /// Gets or sets a value that specifies the text of the status bar on this site collection.
+        /// Gets or sets a value that specifies the text of the status bar on this site collection (sets the SiteStatusBarText property on the root web).
         /// </summary>
         public string StatusBarText { get; set; }
 
-        // TODO: Review this property docs (No clue what thicket support is)
         /// <summary>
         /// Gets a value that indicates whether thicket support is disabled on this site collection.
         /// </summary>
         public bool ThicketSupportDisabled { get; }
 
         /// <summary>
-        /// Gets or sets a value that specifies whether audit log is trimmed.
+        /// When this flag is set for the site, the audit events are trimmed periodically.
         /// </summary>
         public bool TrimAuditLog { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value that specifies whether the Visual Upgrade UI of this site collection is displayed.
-        /// </summary>
-        public bool UIVersionConfigurationEnabled { get; set; }
-
-        /// <summary>
-        /// Specifies a date, after which site collection administrators will be reminded to upgrade the site collection.
-        /// </summary>
-        public DateTime UpgradeReminderDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value that specifies if upgrade is scheduled on this site collection.
-        /// </summary>
-        public bool UpgradeScheduled { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value that specifies the scheduled date of this site colleection upgrage.
-        /// </summary>
-        public DateTime UpgradeScheduledDate { get; set; }
-
-        /// <summary>
-        /// Gets a value that indicates whether the site is currently upgrading.
-        /// </summary>
-        public bool Upgrading { get; }
 
         /// <summary>
         /// Gets a value that specifies the collection of user custom actions for the site collection.
         /// </summary>
         public IUserCustomActionCollection UserCustomActions { get; }
+
+        /// <summary>
+        /// Gets the synchronizable visitor group for a hub site
+        /// </summary>
+        public ISharePointGroup HubSiteSynchronizableVisitorGroup { get; }
 
         ///// <summary>
         ///// To update...
@@ -334,26 +261,6 @@ namespace PnP.Core.Model.SharePoint
         ///// <summary>
         ///// To update...
         ///// </summary>
-        //public IScriptSafeDomainCollection CustomScriptSafeDomains { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
         //public IEventReceiverDefinitionCollection EventReceivers { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IGroup HubSiteSynchronizableVisitorGroup { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUser Owner { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IUser SecondaryContact { get; }
     }
 }

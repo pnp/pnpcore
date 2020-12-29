@@ -381,6 +381,9 @@
   <data name="Exception_Unsupported_ViaBatch" xml:space="preserve">
     <value>You cannot do a batch add of a model to a modelcollection that was not yet requested. Common reasons are adding an item and using that same item in a single batch</value>
   </data>
+  <data name="Exception_Unsupported_WebDeleteIsInteractive" xml:space="preserve">
+    <value>You can't delete webs in batch, use the DeleteAsync() or Delete() methods</value>
+  </data>
   <data name="Exception_View_ViewNotFoundInCollection" xml:space="preserve">
     <value>The view cannot be be found in the collection</value>
   </data>

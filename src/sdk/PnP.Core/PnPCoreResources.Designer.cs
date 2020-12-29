@@ -853,6 +853,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t delete webs in batch, use the DeleteAsync() or Delete() methods.
+        /// </summary>
+        internal static string Exception_Unsupported_WebDeleteIsInteractive {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_WebDeleteIsInteractive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The view cannot be be found in the collection.
         /// </summary>
         internal static string Exception_View_ViewNotFoundInCollection {

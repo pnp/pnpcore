@@ -19,7 +19,6 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Guid Id { get; }
 
-        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
         /// <summary>
         /// Gets the URL of the access request list to the current site.
         /// </summary>
@@ -75,14 +74,9 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Guid AppInstanceId { get; }
 
-        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
         /// <summary>
-        /// Gets or sets the welcome page of the site in Classic UI mode.
-        /// </summary>
-        public string ClassicWelcomePage { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value that specifies whether this site contains confidential information.
+        /// Gets a boolean value that specifies whether the site contains highly confidential information.
+        /// If the tenant settings don't allow tagging sites as confidential, this property will always return false.
         /// </summary>
         public bool ContainsConfidentialInfo { get; set; }
 
@@ -91,29 +85,16 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public DateTime Created { get; }
 
-        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
         /// <summary>
-        /// Gets a value that specifies whether custom site actions are disabled on this site.
-        /// </summary>
-        public bool CustomSiteActionsDisabled { get; set; }
-
-        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
-        /// <summary>
-        /// Gets or sets the default new page template Id of the site.
+        /// The id of the default new page template. Use SetDefaultNewPageTemplateId to set the value.
         /// </summary>
         public Guid DefaultNewPageTemplateId { get; set; }
-
-        /// <summary>
-        /// Gets the designer download URL for current user.
-        /// </summary>
-        public string DesignerDownloadUrlForCurrentUser { get; }
 
         /// <summary>
         /// Gets or sets the design package Id of this site.
         /// </summary>
         public Guid DesignPackageId { get; set; }
 
-        // TODO: Can't find official documentation about this one, guessed it's read-only but not sure
         /// <summary>
         /// Gets or sets whether the recommended items are disabled on this site.
         /// </summary>
@@ -209,38 +190,36 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool NavAudienceTargetingEnabled { get; set; }
 
-        // TODO: Check if read-only
         /// <summary>
-        /// Gets or sets a value that specifies whether the next steps first run is enabled on the site.
+        /// Gets or sets a value that specifies if the Next steps pane should open automatically as a first run experience
+        /// when someone visits the site. You can only enable the experience for sites created on or after January 1, 2020
         /// </summary>
         public bool NextStepsFirstRunEnabled { get; set; }
 
         /// <summary>
-        /// Gets a value that indicates whether the notifications in OneDrive for Business is enabled on the site.
+        /// Returns if true if the tenant allowed to send push notifications in OneDrive for Business.
         /// </summary>
         public bool NotificationsInOneDriveForBusinessEnabled { get; }
 
         /// <summary>
-        /// Gets a value that indicates whether the notifications in SharePoint is enabled on the site.
+        /// Returns if true if the tenant allowed to send push notifications in SharePoint.
         /// </summary>
         public bool NotificationsInSharePointEnabled { get; }
 
-        // TODO: Check if read-only
         /// <summary>
         /// Gets or sets a value that specifies whether the object cache is enabled on the site.
         /// </summary>
         public bool ObjectCacheEnabled { get; set; }
 
         /// <summary>
-        /// Gets a value that indicates whether the preview features are enabled on the site.
+        /// Indicates whether the tenant administrator has chosen to disable the Preview Features. Default is true.
         /// </summary>
         public bool PreviewFeaturesEnabled { get; }
 
-        // TODO: Check if read-only
         /// <summary>
         /// Gets or sets the primary color of the site.
         /// </summary>
-        public string PrimaryColor { get; set; }
+        public string PrimaryColor { get; }
 
         /// <summary>
         /// Gets the recycle bin of the website.
@@ -258,7 +237,7 @@ namespace PnP.Core.Model.SharePoint
         public bool SaveSiteAsTemplateEnabled { get; set; }
 
         /// <summary>
-        /// Gets or sets the placeholder text in the search box of the current site.
+        /// Search placeholder text for search box in navbar - overrides default placeholder text if set, returns null if not set.
         /// </summary>
         public string SearchBoxPlaceholderText { get; set; }
 
@@ -268,17 +247,13 @@ namespace PnP.Core.Model.SharePoint
         public string ServerRelativeUrl { get; }
 
         /// <summary>
-        /// Gets a value that specifies whether the current user is able to view the file system structure of this site.
-        /// </summary>
-        public bool ShowUrlStructureForCurrentUser { get; }
-
-        /// <summary>
-        /// Gets or sets the description of the site logo.
+        /// Gets or sets the description of the Web site logo.
         /// </summary>
         public string SiteLogoDescription { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL of the site logo.
+        /// Gets or sets the server-relative URL of the Web site logo.
+        /// This can also contain an absolute URL to the logo.
         /// </summary>
         public string SiteLogoUrl { get; set; }
 
@@ -287,34 +262,18 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public bool SyndicationEnabled { get; set; }
 
-        // TODO Probably an enum type
-        // TODO: Check if read-only
-        // TODO: Review property doc
         /// <summary>
         /// Gets or sets a value that specifies how the tenant admin members can share.
         /// </summary>
-        public int TenantAdminMembersCanShare { get; set; }
+        public SharingState TenantAdminMembersCanShare { get; }
 
         /// <summary>
-        /// Gets a value that indicates whether the tenant tag policy is enabled.
-        /// </summary>
-        public bool TenantTagPolicyEnabled { get; }
-
-        // TODO: Check if read-only
-        /// <summary>
-        /// Gets or sets the theme data of the site.
+        /// Get JSON serialized ThemeData for the current web.
         /// </summary>
         public string ThemeData { get; }
 
-        // TODO: Check if read-only
         /// <summary>
-        /// Gets the theme CSS folder URL.
-        /// </summary>
-        public string ThemedCssFolderUrl { get; }
-
-        // TODO: Check what is MDM ?
-        /// <summary>
-        /// Gets a value that indicates whether third party MDM is enabled on the site.
+        /// Gets a value that indicates whether third party MDM (Mobile Device Management) is enabled on the site.
         /// </summary>
         public bool ThirdPartyMdmEnabled { get; }
 
@@ -324,23 +283,12 @@ namespace PnP.Core.Model.SharePoint
         public bool TreeViewEnabled { get; set; }
 
         /// <summary>
-        /// Gets or sets the user interface (UI) version of the Web site.
-        /// A 32-bit integer between 0 and 127 that specifies the UI version.
+        /// Determines if we need to use the default access request
+        /// If this value is True we send access requests to owner/owner's group
+        /// If this value is False we send access requests to the configured AccessRequestEmail
         /// </summary>
-        public int UIVersion { get; set; }
+        public bool UseAccessRequestDefault { get; }
 
-        /// <summary>
-        ///	Gets or sets a value that specifies whether the settings UI for visual upgrade is shown or hidden.
-        /// </summary>
-        public bool UIVersionConfigurationEnabled { get; set; }
-
-        // TODO: Check if read-only
-        /// <summary>
-        /// Gets or sets a value that specifies whether the default access request is used on the site.
-        /// </summary>
-        public bool UseAccessRequestDefault { get; set; }
-
-        #region ON GOING
         /// <summary>
         /// Gets the name of the site definition or site template that was used to create the site.
         /// </summary>
@@ -350,12 +298,6 @@ namespace PnP.Core.Model.SharePoint
         /// Gets the web template configuration of the site.
         /// </summary>
         public string WebTemplateConfiguration { get; }
-
-        /// <summary>
-        /// Gets a value that indicates whether the web templates gallery first run is enabled.
-        /// </summary>
-        public bool WebTemplatesGalleryFirstRunEnabled { get; }
-        #endregion
 
         /// <summary>
         /// Defines whether the site has to be crawled or not
@@ -368,9 +310,9 @@ namespace PnP.Core.Model.SharePoint
         public string RequestAccessEmail { get; set; }
 
         /// <summary>
-        /// Defines the Welcome Page (Home Page) of the site to which the Provisioning Template is applied.
+        /// Specifies a string that contains the site-relative URL to which users are redirected when web is browsed (typically the site's home page).
         /// </summary>
-        public string WelcomePage { get; set; }
+        public string WelcomePage { get; }
 
         /// <summary>
         /// The Title of the Site, optional attribute.
@@ -942,21 +884,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IAppTileCollection AppTiles { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IGroup AssociatedMemberGroup { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IGroup AssociatedOwnerGroup { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IGroup AssociatedVisitorGroup { get; }
 
         ///// <summary>
         ///// To update...

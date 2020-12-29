@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PnP.Core.Model.Security;
+using System;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -55,9 +56,6 @@ namespace PnP.Core.Model.SharePoint
 
         public SearchBoxInNavBar SearchBoxInNavBar { get => GetValue<SearchBoxInNavBar>(); set => SetValue(value); }
 
-        /* Not directly a field in the Site object*/
-        public string SearchCenterUrl { get => GetValue<string>(); set => SetValue(value); }
-
         public bool AllowCreateDeclarativeWorkflow { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool AllowDesigner { get => GetValue<bool>(); set => SetValue(value); }
@@ -72,23 +70,13 @@ namespace PnP.Core.Model.SharePoint
 
         public bool AllowSavePublishDeclarativeWorkflow { get => GetValue<bool>(); set => SetValue(value); }
 
-        public bool AllowSelfServiceUpgrade { get => GetValue<bool>(); set => SetValue(value); }
-
-        public bool AllowSelfServiceUpgradeEvaluation { get => GetValue<bool>(); set => SetValue(value); }
-
         public int AuditLogTrimmingRetention { get => GetValue<int>(); set => SetValue(value); }
 
         public bool CanSyncHubSitePermissions { get => GetValue<bool>(); set => SetValue(value); }
 
-        public bool CanUpgrade { get => GetValue<bool>(); set => SetValue(value); }
-
         public Guid ChannelGroupId { get => GetValue<Guid>(); set => SetValue(value); }
 
         public bool CommentsOnSitePagesDisabled { get => GetValue<bool>(); set => SetValue(value); }
-
-        public int CompatibilityLevel { get => GetValue<int>(); set => SetValue(value); }
-
-        public string ComplianceAttribute { get => GetValue<string>(); set => SetValue(value); }
 
         public bool DisableAppViews { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -110,17 +98,11 @@ namespace PnP.Core.Model.SharePoint
 
         public int MaxItemsPerThrottledOperation { get => GetValue<int>(); set => SetValue(value); }
 
-        public bool NeedsB2BUpgrade { get => GetValue<bool>(); set => SetValue(value); }
-
-        public Uri PrimaryUri { get => GetValue<Uri>(); set => SetValue(value); }
-
         public bool ReadOnly { get => GetValue<bool>(); set => SetValue(value); }
 
         public Guid RelatedGroupId { get => GetValue<Guid>(); set => SetValue(value); }
 
         public IRecycleBinItemCollection RecycleBin { get => GetModelCollectionValue<IRecycleBinItemCollection>(); }
-
-        public string RequiredDesignerVersion { get => GetValue<string>(); set => SetValue(value); }
 
         public string SearchBoxPlaceholderText { get => GetValue<string>(); set => SetValue(value); }
 
@@ -136,8 +118,6 @@ namespace PnP.Core.Model.SharePoint
 
         public bool ShowPeoplePickerSuggestionsForGuestUsers { get => GetValue<bool>(); set => SetValue(value); }
 
-        public bool ShowUrlStructure { get => GetValue<bool>(); set => SetValue(value); }
-
         public string StatusBarLink { get => GetValue<string>(); set => SetValue(value); }
 
         public string StatusBarText { get => GetValue<string>(); set => SetValue(value); }
@@ -146,17 +126,9 @@ namespace PnP.Core.Model.SharePoint
 
         public bool TrimAuditLog { get => GetValue<bool>(); set => SetValue(value); }
 
-        public bool UIVersionConfigurationEnabled { get => GetValue<bool>(); set => SetValue(value); }
-
-        public DateTime UpgradeReminderDate { get => GetValue<DateTime>(); set => SetValue(value); }
-
-        public bool UpgradeScheduled { get => GetValue<bool>(); set => SetValue(value); }
-
-        public DateTime UpgradeScheduledDate { get => GetValue<DateTime>(); set => SetValue(value); }
-
-        public bool Upgrading { get => GetValue<bool>(); set => SetValue(value); }
-
         public IUserCustomActionCollection UserCustomActions { get => GetModelCollectionValue<IUserCustomActionCollection>(); }
+
+        public ISharePointGroup HubSiteSynchronizableVisitorGroup { get => GetModelValue<ISharePointGroup>(); set => SetModelValue(value); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }

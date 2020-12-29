@@ -291,7 +291,7 @@ internal partial class TeamChannel : BaseDataModel<ITeamChannel>, ITeamChannel
     internal TeamChannel()
     {
         // Handler to construct the Add request for this channel
-        AddApiCallHandler = async () =>
+        AddApiCallHandler = async (additionalInformation) =>
         {
             // Define the JSON body of the update request based on the actual changes
             dynamic body = new ExpandoObject();
