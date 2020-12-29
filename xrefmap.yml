@@ -16036,32 +16036,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ISite.GeoLocation
   nameWithType: ISite.GeoLocation
-- uid: PnP.Core.Model.SharePoint.ISite.GetAvailableTags
-  name: GetAvailableTags()
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetAvailableTags
-  commentId: M:PnP.Core.Model.SharePoint.ISite.GetAvailableTags
-  fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableTags()
-  nameWithType: ISite.GetAvailableTags()
-- uid: PnP.Core.Model.SharePoint.ISite.GetAvailableTags*
-  name: GetAvailableTags
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetAvailableTags_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.GetAvailableTags
+- uid: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTags
+  name: GetAvailableComplianceTags()
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetAvailableComplianceTags
+  commentId: M:PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTags
+  fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTags()
+  nameWithType: ISite.GetAvailableComplianceTags()
+- uid: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTags*
+  name: GetAvailableComplianceTags
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetAvailableComplianceTags_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTags
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableTags
-  nameWithType: ISite.GetAvailableTags
-- uid: PnP.Core.Model.SharePoint.ISite.GetAvailableTagsAsync
-  name: GetAvailableTagsAsync()
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetAvailableTagsAsync
-  commentId: M:PnP.Core.Model.SharePoint.ISite.GetAvailableTagsAsync
-  fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableTagsAsync()
-  nameWithType: ISite.GetAvailableTagsAsync()
-- uid: PnP.Core.Model.SharePoint.ISite.GetAvailableTagsAsync*
-  name: GetAvailableTagsAsync
-  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetAvailableTagsAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.ISite.GetAvailableTagsAsync
+  fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTags
+  nameWithType: ISite.GetAvailableComplianceTags
+- uid: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTagsAsync
+  name: GetAvailableComplianceTagsAsync()
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetAvailableComplianceTagsAsync
+  commentId: M:PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTagsAsync
+  fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTagsAsync()
+  nameWithType: ISite.GetAvailableComplianceTagsAsync()
+- uid: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTagsAsync*
+  name: GetAvailableComplianceTagsAsync
+  href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GetAvailableComplianceTagsAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTagsAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableTagsAsync
-  nameWithType: ISite.GetAvailableTagsAsync
+  fullName: PnP.Core.Model.SharePoint.ISite.GetAvailableComplianceTagsAsync
+  nameWithType: ISite.GetAvailableComplianceTagsAsync
 - uid: PnP.Core.Model.SharePoint.ISite.GroupId
   name: GroupId
   href: api/PnP.Core.Model.SharePoint.ISite.html#PnP_Core_Model_SharePoint_ISite_GroupId
