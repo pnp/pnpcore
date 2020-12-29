@@ -460,7 +460,7 @@ namespace PnP.Core.Model.SharePoint
             return GetComplianceTagAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IComplianceTag> GetComplianceTag()
+        public async Task<IComplianceTag> GetComplianceTagAsync()
         {
             await EnsurePropertiesAsync(l => l.RootFolder).ConfigureAwait(false);
             await RootFolder.EnsurePropertiesAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
