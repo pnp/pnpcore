@@ -347,5 +347,15 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Task<IComplianceTag> GetComplianceTagAsync();
 
+
+        /// <summary>
+        /// Sets a compliance tag / retention label for this list
+        /// </summary>
+        public void SetComplianceTag(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
+        
+        /// <summary>
+        /// Sets a compliance tag / retention label for this list
+        /// </summary>
+        public Task SetComplianceTagAsync(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
     }
 }

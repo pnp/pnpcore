@@ -464,7 +464,7 @@ namespace PnP.Core.Model.SharePoint
         {
             await EnsurePropertiesAsync(l => l.RootFolder).ConfigureAwait(false);
             await RootFolder.EnsurePropertiesAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
-            var listUrl = RootFolder.ServerRelativeUrl; 
+            var listUrl = RootFolder.ServerRelativeUrl;
             var apiCall = new ApiCall($"_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetListComplianceTag(listUrl='{listUrl}')", ApiType.SPORest);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
 
@@ -481,6 +481,30 @@ namespace PnP.Core.Model.SharePoint
 
             return null;
         }
+
+        public void SetComplianceTag(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)
+        {
+            SetComplianceTagAsync(complianceTagValue, blockDelete, blockEdit, syncToItems).GetAwaiter().GetResult();
+        }
+
+        public async Task SetComplianceTagAsync(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)
+        {
+            await EnsurePropertiesAsync(l => l.RootFolder).ConfigureAwait(false);
+            await RootFolder.EnsurePropertiesAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
+            var listUrl = RootFolder.ServerRelativeUrl;
+            var parameters = new
+            {
+                listUrl= listUrl,
+                complianceTagValue = complianceTagValue,
+                blockDelete = blockDelete,
+                blockEdit = blockEdit,
+                syncToItems = syncToItems
+            };
+            string body = JsonSerializer.Serialize(parameters);
+            var apiCall = new ApiCall($"_api/SP.CompliancePolicy.SPPolicyStoreProxy.SetListComplianceTag", ApiType.SPORest, body);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
         #endregion
     }
 }
