@@ -139,12 +139,12 @@ namespace PnP.Core.Model.SharePoint
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
 
-        public IEnumerable<IComplianceTag> GetAvailableTags()
+        public IEnumerable<IComplianceTag> GetAvailableComplianceTags()
         {
-            return GetAvailableTagsAsync().GetAwaiter().GetResult();
+            return GetAvailableComplianceTagsAsync().GetAwaiter().GetResult();
         }
 
-        public async Task<IEnumerable<IComplianceTag>> GetAvailableTagsAsync()
+        public async Task<IEnumerable<IComplianceTag>> GetAvailableComplianceTagsAsync()
         {
             var apiCall = new ApiCall("_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetAvailableTagsForSite(siteUrl='{Site.Url}')", ApiType.SPORest);
             var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);

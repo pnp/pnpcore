@@ -268,11 +268,11 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Retrieves the available compliance tags / retention labels for this site
         /// </summary>
-        public IEnumerable<IComplianceTag> GetAvailableTags();
+        public IEnumerable<IComplianceTag> GetAvailableComplianceTags();
 
         /// <summary>
         /// Retrieves the available compliance tags / retention labels for this site
         /// </summary>
-        public Task<IEnumerable<IComplianceTag>> GetAvailableTagsAsync();
+        public Task<IEnumerable<IComplianceTag>> GetAvailableComplianceTagsAsync();
     }
 }
