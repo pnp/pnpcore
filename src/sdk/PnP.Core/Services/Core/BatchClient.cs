@@ -757,8 +757,9 @@ namespace PnP.Core.Services
                     if (PnPContext.Mode != TestMode.Mock) // || !TestManager.IsMockAvailable(PnPContext, requestKey))
                     {
 #endif
-                        // Ensure the request contains authentication information
-                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(restBatch.Site, request).ConfigureAwait(false);
+                        // Process the authentication headers using the currently
+                        // configured instance of IAuthenticationProvider
+                        await ProcessSharePointRestAuthentication(restBatch.Site, request).ConfigureAwait(false);
 
                         // Send the request
                         HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
@@ -1104,7 +1105,9 @@ namespace PnP.Core.Services
                             httpCompletionOption = HttpCompletionOption.ResponseHeadersRead;
                         }
 
-                        await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(site, request).ConfigureAwait(false);
+                        // Process the authentication headers using the currently
+                        // configured instance of IAuthenticationProvider
+                        await ProcessSharePointRestAuthentication(site, request).ConfigureAwait(false);
 
                         // Send the request
                         HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request, httpCompletionOption).ConfigureAwait(false);
@@ -1211,6 +1214,23 @@ namespace PnP.Core.Services
                 {
                     await JsonMappingHelper.MapJsonToModel(restRequest).ConfigureAwait(false);
                 }
+            }
+        }
+
+        private async Task ProcessSharePointRestAuthentication(Uri site, HttpRequestMessage request)
+        {
+            if (PnPContext.AuthenticationProvider.GetType().ImplementsInterface(typeof(ILegacyAuthenticationProvider)))
+            {
+                // If the AuthenticationProvider is a legacy one
+                var legacyAuthenticationProvider = PnPContext.AuthenticationProvider as ILegacyAuthenticationProvider;
+
+                // Let's set the cookie header for legacy authentication
+                request.Headers.Add("Cookie", legacyAuthenticationProvider.GetCookieHeader(site));
+            }
+            else
+            {
+                // Ensure the request contains authentication information
+                await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(site, request).ConfigureAwait(false);
             }
         }
 
