@@ -122,6 +122,7 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region ComplianceTag / Label handling
+
         /// <summary>
         /// Sets a compliancetag / retention label for this list item
         /// </summary>
@@ -143,6 +144,54 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="isTagSuperLock"></param>
         /// <returns></returns>
         public Task SetComplianceTagAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold"></param>
+        /// <param name="isTagPolicyRecord"></param>
+        /// <param name="isEventBasedTag"></param>
+        /// <param name="isTagSuperLock"></param>
+        /// <returns></returns>
+        public void SetComplianceTagBatch(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold"></param>
+        /// <param name="isTagPolicyRecord"></param>
+        /// <param name="isEventBasedTag"></param>
+        /// <param name="isTagSuperLock"></param>
+        /// <returns></returns>
+        public Task SetComplianceTagBatchAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold"></param>
+        /// <param name="isTagPolicyRecord"></param>
+        /// <param name="isEventBasedTag"></param>
+        /// <param name="isTagSuperLock"></param>
+        /// <returns></returns>
+        public void SetComplianceTagBatch(Batch batch, string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold"></param>
+        /// <param name="isTagPolicyRecord"></param>
+        /// <param name="isEventBasedTag"></param>
+        /// <param name="isTagSuperLock"></param>
+        /// <returns></returns>
+        public Task SetComplianceTagBatchAsync(Batch batch, string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
 
         #endregion
 
