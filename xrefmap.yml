@@ -12541,6 +12541,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.RootFolder
   nameWithType: IList.RootFolder
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTag(System.String,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTag(String, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTag_System_String_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IList.SetComplianceTag(System.String,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTag(System.String, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IList.SetComplianceTag(String, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTag*
+  name: SetComplianceTag
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTag_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.SetComplianceTag
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTag
+  nameWithType: IList.SetComplianceTag
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTagAsync(System.String,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagAsync(String, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTagAsync_System_String_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IList.SetComplianceTagAsync(System.String,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTagAsync(System.String, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IList.SetComplianceTagAsync(String, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IList.SetComplianceTagAsync*
+  name: SetComplianceTagAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_SetComplianceTagAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.SetComplianceTagAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.SetComplianceTagAsync
+  nameWithType: IList.SetComplianceTagAsync
 - uid: PnP.Core.Model.SharePoint.IList.TemplateFeatureId
   name: TemplateFeatureId
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_TemplateFeatureId
@@ -12959,6 +12985,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync
   nameWithType: IListItemBase.SetCommentsDisabledAsync
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTag(String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTag_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItemBase.SetComplianceTag(String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag*
+  name: SetComplianceTag
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTag_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag
+  nameWithType: IListItemBase.SetComplianceTag
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  name: SetComplianceTagAsync(String, Boolean, Boolean, Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagAsync_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItemBase.SetComplianceTagAsync(String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync*
+  name: SetComplianceTagAsync
+  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync
+  nameWithType: IListItemBase.SetComplianceTagAsync
 - uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdate
   name: SystemUpdate()
   href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdate
