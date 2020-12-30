@@ -380,7 +380,18 @@ namespace PnP.Core.Services
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone()
         {
-            return Clone(Uri);
+#pragma warning disable CA2000 // Dispose objects before losing scope
+            return CloneAsync().GetAwaiter().GetResult();
+#pragma warning restore CA2000 // Dispose objects before losing scope
+        }
+
+        /// <summary>
+        /// Clones this context into a new context for the same SharePoint site
+        /// </summary>
+        /// <returns>New <see cref="PnPContext"/></returns>
+        public async Task<PnPContext> CloneAsync()
+        {
+            return await CloneAsync(Uri).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -389,6 +400,18 @@ namespace PnP.Core.Services
         /// <param name="name">The name of the SPOContext configuration to use</param>
         /// <returns>New <see cref="PnPContext"/> for the request config</returns>
         public PnPContext Clone(string name)
+        {
+#pragma warning disable CA2000 // Dispose objects before losing scope
+            return CloneAsync(name).GetAwaiter().GetResult();
+#pragma warning restore CA2000 // Dispose objects before losing scope
+        }
+
+        /// <summary>
+        /// Clones this context for another SharePoint site provided as configuration
+        /// </summary>
+        /// <param name="name">The name of the SPOContext configuration to use</param>
+        /// <returns>New <see cref="PnPContext"/> for the request config</returns>
+        public async Task<PnPContext> CloneAsync(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -401,7 +424,7 @@ namespace PnP.Core.Services
                 throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_InvalidConfiguration, name));
             }
 
-            return Clone(configuration.SiteUrl);
+            return await CloneAsync(configuration.SiteUrl).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -410,6 +433,18 @@ namespace PnP.Core.Services
         /// <param name="uri">Uri of the other SharePoint site</param>
         /// <returns>New <see cref="PnPContext"/></returns>
         public PnPContext Clone(Uri uri)
+        {
+#pragma warning disable CA2000 // Dispose objects before losing scope
+            return CloneAsync(uri).GetAwaiter().GetResult();
+#pragma warning restore CA2000 // Dispose objects before losing scope
+        }
+
+        /// <summary>
+        /// Clones this context for another SharePoint site
+        /// </summary>
+        /// <param name="uri">Uri of the other SharePoint site</param>
+        /// <returns>New <see cref="PnPContext"/></returns>
+        public async Task<PnPContext> CloneAsync(Uri uri)
         {
             if (uri == null)
             {
@@ -426,6 +461,8 @@ namespace PnP.Core.Services
                 Uri = uri
             };
 
+            await PnPContextFactory.InitializeContextAsync(clonedContext).ConfigureAwait(false);
+
             return clonedContext;
         }
 
@@ -434,6 +471,54 @@ namespace PnP.Core.Services
 #if DEBUG
 
         #region Internal methods to support unit testing
+
+        internal async Task<PnPContext> CloneForTestingAsync(PnPContext source, Uri uri, string name, int id)
+        {
+            if (uri == null)
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_EmptyConfiguration, nameof(name)));
+                    }
+
+                    var configuration = contextOptions.Configurations.FirstOrDefault(c => c.Name == name);
+                    if (configuration == null)
+                    {
+                        throw new ArgumentException(string.Format(PnPCoreResources.Exception_PnPContext_InvalidConfiguration, name));
+                    }
+                    uri = configuration.SiteUrl;
+                }
+                else if (uri == null)
+                {
+                    uri = Uri;
+                }
+            }
+
+            PnPContext clonedContext = new PnPContext(Logger, AuthenticationProvider, RestClient, GraphClient, contextOptions, globalOptions, telemetry)
+            {
+                // Take over graph settings
+                GraphCanUseBeta = graphCanUseBeta,
+                GraphAlwaysUseBeta = GraphAlwaysUseBeta,
+                GraphFirst = GraphFirst,
+                // Set the Uri for which this context was cloned
+                Uri = uri,               
+            };
+
+            if (source.Mode == TestMode.Mock)
+            {
+                clonedContext.SetMockMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
+            }
+            else
+            {
+                clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
+            }
+
+            await PnPContextFactory.InitializeContextAsync(clonedContext).ConfigureAwait(false);
+
+            return clonedContext;
+        }
 
         internal void SetRecordingMode(int id, string testName, string sourceFilePath, bool generateTestMockingDebugFiles, Dictionary<string, Uri> testUris)
         {
