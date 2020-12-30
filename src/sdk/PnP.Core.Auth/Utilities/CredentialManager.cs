@@ -66,10 +66,14 @@ namespace PnP.Core.Auth
             bool success = CredRead(applicationName, CRED_TYPE.GENERIC, 0, out IntPtr credPtr);
             if (success)
             {
+#pragma warning disable CA2000 // Dispose objects before losing scope
                 var critCred = new CriticalCredentialHandle(credPtr);
+#pragma warning restore CA2000 // Dispose objects before losing scope
                 var cred = critCred.GetCredential();
                 var username = cred.UserName;
+#pragma warning disable CA2000 // Dispose objects before losing scope
                 var securePassword = StringToSecureString(cred.CredentialBlob);
+#pragma warning restore CA2000 // Dispose objects before losing scope
                 return new NetworkCredential(username, securePassword);
             }
             return null;
@@ -195,7 +199,9 @@ namespace PnP.Core.Auth
             }
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
+#pragma warning disable CA2000 // Dispose objects before losing scope
                 return new NetworkCredential(username, StringToSecureString(password));
+#pragma warning restore CA2000 // Dispose objects before losing scope
             }
             return null;
         }

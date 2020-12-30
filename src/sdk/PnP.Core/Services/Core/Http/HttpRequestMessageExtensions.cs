@@ -24,8 +24,12 @@ namespace PnP.Core.Services
                 newRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
 
             // Copy request properties.
+#pragma warning disable CS0618 // Type or member is obsolete
             foreach (var property in originalRequest.Properties)
+            {
                 newRequest.Properties.Add(property);
+            }
+#pragma warning restore CS0618 // Type or member is obsolete
 
             // Set Content if previous request had one.
             if (originalRequest.Content != null)
