@@ -101,7 +101,7 @@ namespace PnP.Core.Services
         /// <returns>A PnPContext object based on the provided configuration name</returns>
         public async virtual Task<PnPContext> CreateAsync(string name)
         {
-            return CreateAsync(name, null).GetAwaiter().GetResult();
+            return await CreateAsync(name, null).ConfigureAwait(false);
         }
 
         /// <summary>
