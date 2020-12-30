@@ -45,6 +45,7 @@ namespace PnP.Core.Test.Teams
             {
                 var team = await context.Team.GetAsync(x => x.Classification);
                 Assert.IsTrue(team.IsPropertyAvailable(t => t.Classification));
+                Assert.IsNull(team.Classification); // Does not return value even when set
             }
         }
 
