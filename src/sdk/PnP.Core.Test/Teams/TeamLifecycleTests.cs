@@ -15,7 +15,7 @@ namespace PnP.Core.Test.Teams
         }
 
         [TestMethod]
-        public async Task ArchiveUnarchiveTeam()
+        public async Task ArchiveUnarchiveTeamAsync()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -48,5 +48,42 @@ namespace PnP.Core.Test.Teams
             }
 
         }
+
+        [TestMethod]
+        public void ArchiveUnarchiveTeam()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get();
+
+                var archiveOperation = team.Archive();
+                // We already updated the model
+                Assert.IsTrue(team.IsArchived);
+
+                // lets wait for the operation to complete
+                archiveOperation.WaitForCompletion();
+
+                // reload from the server
+                context.Team.Get();
+                // Server side should be archived as well now
+                Assert.IsTrue(team.IsArchived);
+
+                // unarchive again
+                var unarchiveOperation = team.Unarchive();
+                // We already updated the model
+                Assert.IsFalse(team.IsArchived);
+
+                unarchiveOperation.WaitForCompletion();
+
+                // reload from the server
+                context.Team.Get();
+                // Server side should be archived as well now
+                Assert.IsFalse(team.IsArchived);
+            }
+
+        }
+
+       
     }
 }
