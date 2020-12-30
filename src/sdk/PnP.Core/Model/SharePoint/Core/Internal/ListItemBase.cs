@@ -600,16 +600,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task SetComplianceTagAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
         {
-            var parameters = new
-            {
-                complianceTag = complianceTag,
-                isTagPolicyHold = isTagPolicyHold,
-                isTagPolicyRecord = isTagPolicyRecord,
-                isEventBasedTag = isEventBasedTag,
-                isTagSuperLock = isTagSuperLock
-            };
-            string body = JsonSerializer.Serialize(parameters);
-            var apiCall = new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})/SetComplianceTag", ApiType.SPORest, body);
+            ApiCall apiCall = SetComplianceTagApiCall(complianceTag, isTagPolicyHold, isTagPolicyRecord, isEventBasedTag, isTagSuperLock);
             await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
@@ -630,19 +621,24 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task SetComplianceTagBatchAsync(Batch batch, string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
         {
-            var parameters = new
-            {
-                complianceTag = complianceTag,
-                isTagPolicyHold = isTagPolicyHold,
-                isTagPolicyRecord = isTagPolicyRecord,
-                isEventBasedTag = isEventBasedTag,
-                isTagSuperLock = isTagSuperLock
-            };
-            string body = JsonSerializer.Serialize(parameters);
-            var apiCall = new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})/SetComplianceTag", ApiType.SPORest, body);
+            ApiCall apiCall = SetComplianceTagApiCall(complianceTag, isTagPolicyHold, isTagPolicyRecord, isEventBasedTag, isTagSuperLock);
             await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
+        private static ApiCall SetComplianceTagApiCall(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            var parameters = new
+            {
+                complianceTag,
+                isTagPolicyHold,
+                isTagPolicyRecord,
+                isEventBasedTag,
+                isTagSuperLock
+            };
+            string body = JsonSerializer.Serialize(parameters);
+            var apiCall = new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})/SetComplianceTag", ApiType.SPORest, body);
+            return apiCall;
+        }
         #endregion
 
         #endregion

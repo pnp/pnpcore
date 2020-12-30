@@ -127,10 +127,10 @@ namespace PnP.Core.Model.SharePoint
         /// Sets a compliancetag / retention label for this list item
         /// </summary>
         /// <param name="complianceTag">The tag/label to set for this list item</param>
-        /// <param name="isTagPolicyHold"></param>
-        /// <param name="isTagPolicyRecord"></param>
-        /// <param name="isEventBasedTag"></param>
-        /// <param name="isTagSuperLock"></param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
         /// <returns></returns>
         public void SetComplianceTag(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
 
@@ -138,10 +138,10 @@ namespace PnP.Core.Model.SharePoint
         /// Sets a compliancetag / retention label for this list item
         /// </summary>
         /// <param name="complianceTag">The tag/label to set for this list item</param>
-        /// <param name="isTagPolicyHold"></param>
-        /// <param name="isTagPolicyRecord"></param>
-        /// <param name="isEventBasedTag"></param>
-        /// <param name="isTagSuperLock"></param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
         /// <returns></returns>
         public Task SetComplianceTagAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
 
@@ -149,10 +149,10 @@ namespace PnP.Core.Model.SharePoint
         /// Sets a compliancetag / retention label for this list item
         /// </summary>
         /// <param name="complianceTag">The tag/label to set for this list item</param>
-        /// <param name="isTagPolicyHold"></param>
-        /// <param name="isTagPolicyRecord"></param>
-        /// <param name="isEventBasedTag"></param>
-        /// <param name="isTagSuperLock"></param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
         /// <returns></returns>
         public void SetComplianceTagBatch(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
 
@@ -160,10 +160,10 @@ namespace PnP.Core.Model.SharePoint
         /// Sets a compliancetag / retention label for this list item
         /// </summary>
         /// <param name="complianceTag">The tag/label to set for this list item</param>
-        /// <param name="isTagPolicyHold"></param>
-        /// <param name="isTagPolicyRecord"></param>
-        /// <param name="isEventBasedTag"></param>
-        /// <param name="isTagSuperLock"></param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
         /// <returns></returns>
         public Task SetComplianceTagBatchAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
 
@@ -172,10 +172,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="complianceTag">The tag/label to set for this list item</param>
-        /// <param name="isTagPolicyHold"></param>
-        /// <param name="isTagPolicyRecord"></param>
-        /// <param name="isEventBasedTag"></param>
-        /// <param name="isTagSuperLock"></param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
         /// <returns></returns>
         public void SetComplianceTagBatch(Batch batch, string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
 
@@ -184,10 +184,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="complianceTag">The tag/label to set for this list item</param>
-        /// <param name="isTagPolicyHold"></param>
-        /// <param name="isTagPolicyRecord"></param>
-        /// <param name="isEventBasedTag"></param>
-        /// <param name="isTagSuperLock"></param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
         /// <returns></returns>
         public Task SetComplianceTagBatchAsync(Batch batch, string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
 

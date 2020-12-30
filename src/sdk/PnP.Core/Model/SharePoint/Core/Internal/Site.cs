@@ -139,6 +139,10 @@ namespace PnP.Core.Model.SharePoint
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
         #endregion
 
+        #region Extension methods
+
+        #region Get compliance tags
+
         public IEnumerable<IComplianceTag> GetAvailableComplianceTags()
         {
             return GetAvailableComplianceTagsAsync().GetAwaiter().GetResult();
@@ -170,5 +174,9 @@ namespace PnP.Core.Model.SharePoint
 
             return new List<IComplianceTag>();
         }
+
+        #endregion
+
+        #endregion
     }
 }
