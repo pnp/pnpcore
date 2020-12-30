@@ -26630,6 +26630,31 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContext.Clone
   nameWithType: PnPContext.Clone
+- uid: PnP.Core.Services.PnPContext.CloneAsync
+  name: CloneAsync()
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_CloneAsync
+  commentId: M:PnP.Core.Services.PnPContext.CloneAsync
+  fullName: PnP.Core.Services.PnPContext.CloneAsync()
+  nameWithType: PnPContext.CloneAsync()
+- uid: PnP.Core.Services.PnPContext.CloneAsync(System.String)
+  name: CloneAsync(String)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_CloneAsync_System_String_
+  commentId: M:PnP.Core.Services.PnPContext.CloneAsync(System.String)
+  fullName: PnP.Core.Services.PnPContext.CloneAsync(System.String)
+  nameWithType: PnPContext.CloneAsync(String)
+- uid: PnP.Core.Services.PnPContext.CloneAsync(Uri)
+  name: CloneAsync(Uri)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_CloneAsync_Uri_
+  commentId: M:PnP.Core.Services.PnPContext.CloneAsync(Uri)
+  fullName: PnP.Core.Services.PnPContext.CloneAsync(Uri)
+  nameWithType: PnPContext.CloneAsync(Uri)
+- uid: PnP.Core.Services.PnPContext.CloneAsync*
+  name: CloneAsync
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_CloneAsync_
+  commentId: Overload:PnP.Core.Services.PnPContext.CloneAsync
+  isSpec: "True"
+  fullName: PnP.Core.Services.PnPContext.CloneAsync
+  nameWithType: PnPContext.CloneAsync
 - uid: PnP.Core.Services.PnPContext.CurrentBatch
   name: CurrentBatch
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_CurrentBatch

@@ -330,7 +330,7 @@ host.Dispose();
     var web = await context.Web.GetAsync();
     Console.WriteLine($&quot;Title: {web.Title}&quot;);
 
-    using (var subSiteContext = context.Clone(new Uri(&quot;https://contoso.sharepoint.com/sites/siteA/subsite&quot;)))
+    using (var subSiteContext = await context.CloneAsync(new Uri(&quot;https://contoso.sharepoint.com/sites/siteA/subsite&quot;)))
     {
         var subWeb = await subSiteContext.Web.GetAsync();
         Console.WriteLine($&quot;Sub site title: {subWeb.Title}&quot;);
