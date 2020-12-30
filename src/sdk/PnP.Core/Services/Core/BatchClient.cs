@@ -1235,6 +1235,10 @@ namespace PnP.Core.Services
             {
                 // Let's set the cookie header for legacy authentication
                 request.Headers.Add("Cookie", legacyAuthenticationProvider.GetCookieHeader(site));
+                if (request.Method != HttpMethod.Get)
+                {
+                    request.Headers.Add("X-RequestDigest", legacyAuthenticationProvider.GetRequestDigest());
+                }
             }
             else
             {

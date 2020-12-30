@@ -18,6 +18,12 @@ namespace PnP.Core.Services
         string GetCookieHeader(Uri targetUrl);
 
         /// <summary>
+        /// Provides the value of the Request Digest header for legacy cookie-based authentication
+        /// </summary>
+        /// <returns>The string value of the Request Digest header to use for cookie authentication</returns>
+        string GetRequestDigest();
+
+        /// <summary>
         /// Allows to see if the authentication provider should prioritize the cookie authentication
         /// </summary>
         public bool RequiresCookieAuthentication { get; }
