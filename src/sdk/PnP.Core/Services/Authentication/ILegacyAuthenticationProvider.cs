@@ -16,5 +16,10 @@ namespace PnP.Core.Services
         /// <param name="targetUrl">The URL of the target API</param>
         /// <returns>The string value of the Cookie header to use for cookie authentication</returns>
         string GetCookieHeader(Uri targetUrl);
+
+        /// <summary>
+        /// Allows to see if the authentication provider should prioritize the cookie authentication
+        /// </summary>
+        public bool RequiresCookieAuthentication { get; }
     }
 }

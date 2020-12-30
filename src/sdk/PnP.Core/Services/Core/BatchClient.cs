@@ -1228,11 +1228,11 @@ namespace PnP.Core.Services
 
         private async Task ProcessSharePointRestAuthentication(Uri site, HttpRequestMessage request)
         {
-            if (PnPContext.AuthenticationProvider.GetType().ImplementsInterface(typeof(ILegacyAuthenticationProvider)))
-            {
-                // If the AuthenticationProvider is a legacy one
-                var legacyAuthenticationProvider = PnPContext.AuthenticationProvider as ILegacyAuthenticationProvider;
+            // If the AuthenticationProvider is a legacy one
+            var legacyAuthenticationProvider = PnPContext.AuthenticationProvider as ILegacyAuthenticationProvider;
 
+            if (legacyAuthenticationProvider != null && legacyAuthenticationProvider.RequiresCookieAuthentication)
+            {
                 // Let's set the cookie header for legacy authentication
                 request.Headers.Add("Cookie", legacyAuthenticationProvider.GetCookieHeader(site));
             }
