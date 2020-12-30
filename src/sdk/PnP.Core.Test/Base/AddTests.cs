@@ -437,7 +437,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task AddTeamChannelViaBatchGraph()
+        public async Task AddTeamChannelViaAsyncBatchGraph()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -472,7 +472,7 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task AddTeamChannelViaExplicitBatchGraph()
+        public async Task AddTeamChannelViaExplicitAsyncBatchGraph()
         {
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
@@ -490,6 +490,74 @@ namespace PnP.Core.Test.Base
                     // Add a new channel
                     channelFound = await team.Channels.AddBatchAsync(channelName, "Test channel, will be deleted in 21 days");
                     await context.ExecuteAsync();
+
+                    Assert.IsNotNull(channelFound);
+                    Assert.IsTrue(channelFound.Requested);
+                    Assert.IsTrue(!string.IsNullOrEmpty(channelFound.Id));
+                    Assert.IsTrue(team.Channels.Count() == channelCount + 1);
+
+                }
+                else
+                {
+                    Assert.Inconclusive($"Channel {channelName} already exists...channels can't be immediately deleted");
+                }
+            }
+        }
+
+        [TestMethod]
+        public void AddTeamChannelViaBatchGraph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var batch = context.BatchClient.EnsureBatch();
+                var team = context.Team.GetBatch(batch, p => p.Channels);
+                context.Execute(batch);
+
+                // Channel names have to be unique
+                string channelName = $"Channel test {new Random().Next()}";
+                // Check if the channel exists
+                var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                if (channelFound == null)
+                {
+                    int channelCount = team.Channels.Count();
+                    // Add a new channel
+                    batch = context.BatchClient.EnsureBatch();
+                    channelFound = team.Channels.AddBatch(batch, channelName, "Test channel, will be deleted in 21 days");
+                    context.Execute(batch);
+
+                    Assert.IsNotNull(channelFound);
+                    Assert.IsTrue(channelFound.Requested);
+                    Assert.IsTrue(!string.IsNullOrEmpty(channelFound.Id));
+                    Assert.IsTrue(team.Channels.Count() == channelCount + 1);
+
+                }
+                else
+                {
+                    Assert.Inconclusive($"Channel {channelName} already exists...channels can't be immediately deleted");
+                }
+            }
+        }
+
+        [TestMethod]
+        public void AddTeamChannelViaExplicitBatchGraph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.GetBatch(p => p.Channels);
+                context.Execute();
+
+                // Channel names have to be unique
+                string channelName = $"Channel test {new Random().Next()}";
+                // Check if the channel exists
+                var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+                if (channelFound == null)
+                {
+                    int channelCount = team.Channels.Count();
+                    // Add a new channel
+                    channelFound = team.Channels.AddBatch(channelName, "Test channel, will be deleted in 21 days");
+                    context.Execute();
 
                     Assert.IsNotNull(channelFound);
                     Assert.IsTrue(channelFound.Requested);

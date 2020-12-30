@@ -27,6 +27,84 @@ namespace PnP.Core.Test.Teams
         }
 
         [TestMethod]
+        public async Task GetClassSettings()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(x => x.ClassSettings);
+                Assert.IsNotNull(team.ClassSettings);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetClassificationSettings()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(x => x.Classification);
+                Assert.IsTrue(team.IsPropertyAvailable(t => t.Classification));
+                Assert.IsNull(team.Classification); // Does not return value even when set
+            }
+        }
+
+        [TestMethod]
+        public async Task GetDescriptionSettings()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(x => x.Description);
+                Assert.IsNotNull(team.Description);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetInternalIdSettings()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(x => x.InternalId);
+                Assert.IsNotNull(team.InternalId);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetSpecializationSettings()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(x => x.Specialization);
+                Assert.IsNotNull(team.Specialization);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetVisibilitySettings()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(x => x.Visibility);
+                Assert.IsNotNull(team.Visibility);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetWebUrlSettings()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(x => x.WebUrl);
+                Assert.IsNotNull(team.WebUrl);
+            }
+        }
+
+        [TestMethod]
         public async Task GetGuestSettings()
         {
             //TestCommon.Instance.Mocking = false;

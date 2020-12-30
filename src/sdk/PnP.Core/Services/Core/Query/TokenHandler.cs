@@ -130,6 +130,15 @@ namespace PnP.Core.Services
                                 }
                                 break;
                             }
+                        case "Url":
+                        {
+                                await context.Site.EnsurePropertiesAsync(p => p.Url).ConfigureAwait(false);
+                                if(context.Site.HasValue(propertyToLoad))
+                                {
+                                    result = result.Replace(match.Value, context.Site.Url.ToString());
+                                }
+                                break;
+                        }
                     }
                 }
                 // Replace tokens coming from the Site object connected to the current PnPContext

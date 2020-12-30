@@ -337,6 +337,70 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         public Dictionary<string, object> GetListDataAsStream(RenderListDataOptions renderOptions);
 
+        /// <summary>
+        /// Retrieves the compliance tag / retention label for this list
+        /// </summary>
+        public IComplianceTag GetComplianceTag();
 
+        /// <summary>
+        /// Retrieves the compliance tag / retention label for this list
+        /// </summary>
+        public Task<IComplianceTag> GetComplianceTagAsync();
+
+        /// <summary>
+        /// Sets a compliance tag / retention label for this list
+        /// </summary>
+        /// <param name="complianceTagValue">Compliance tag</param>
+        /// <param name="blockDelete">Prevent deletion of the list (Hold)</param>
+        /// <param name="blockEdit">Prevent editing of the list (Record)</param>
+        /// <param name="syncToItems">If true the compliance tag is synced to the list items in this list</param>
+        public void SetComplianceTag(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
+
+        /// <summary>
+        /// Sets a compliance tag / retention label for this list
+        /// </summary>
+        /// <param name="complianceTagValue">Compliance tag</param>
+        /// <param name="blockDelete">Prevent deletion of the list (Hold)</param>
+        /// <param name="blockEdit">Prevent editing of the list (Record)</param>
+        /// <param name="syncToItems">If true the compliance tag is synced to the list items in this list</param>
+        public Task SetComplianceTagAsync(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
+
+        /// <summary>
+        /// Sets a compliance tag / retention label for this list
+        /// </summary>
+        /// <param name="complianceTagValue">Compliance tag</param>
+        /// <param name="blockDelete">Prevent deletion of the list (Hold)</param>
+        /// <param name="blockEdit">Prevent editing of the list (Record)</param>
+        /// <param name="syncToItems">If true the compliance tag is synced to the list items in this list</param>
+        public void SetComplianceTagBatch(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
+
+        /// <summary>
+        /// Sets a compliance tag / retention label for this list
+        /// </summary>
+        /// <param name="complianceTagValue">Compliance tag</param>
+        /// <param name="blockDelete">Prevent deletion of the list (Hold)</param>
+        /// <param name="blockEdit">Prevent editing of the list (Record)</param>
+        /// <param name="syncToItems">If true the compliance tag is synced to the list items in this list</param>
+        public Task SetComplianceTagBatchAsync(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
+
+        /// <summary>
+        /// Sets a compliance tag / retention label for this list
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <param name="complianceTagValue">Compliance tag</param>
+        /// <param name="blockDelete">Prevent deletion of the list (Hold)</param>
+        /// <param name="blockEdit">Prevent editing of the list (Record)</param>
+        /// <param name="syncToItems">If true the compliance tag is synced to the list items in this list</param>
+        public void SetComplianceTagBatch(Batch batch, string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
+
+        /// <summary>
+        /// Sets a compliance tag / retention label for this list
+        /// </summary>
+        /// <param name="batch">Batch to add this request to </param>
+        /// <param name="complianceTagValue">Compliance tag</param>
+        /// <param name="blockDelete">Prevent deletion of the list (Hold)</param>
+        /// <param name="blockEdit">Prevent editing of the list (Record)</param>
+        /// <param name="syncToItems">If true the compliance tag is synced to the list items in this list</param>
+        public Task SetComplianceTagBatchAsync(Batch batch, string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
     }
 }

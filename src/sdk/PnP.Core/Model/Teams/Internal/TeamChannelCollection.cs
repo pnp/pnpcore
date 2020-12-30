@@ -121,7 +121,7 @@ namespace PnP.Core.Model.Teams
         /// <returns></returns>
         public ITeamChannel GetByDisplayName(string displayName, params Expression<Func<ITeamChannel, object>>[] selectors)
         {
-            if (displayName == null)
+            if (string.IsNullOrEmpty(displayName))
             {
                 throw new ArgumentNullException(nameof(displayName));
             }
@@ -138,7 +138,7 @@ namespace PnP.Core.Model.Teams
         /// <remarks>This does not work due with a $top=1 limitation in the graph when calling tests</remarks>
         public async Task<ITeamChannel> GetByDisplayNameAsync(string displayName, params Expression<Func<ITeamChannel, object>>[] selectors)
         {
-            if (displayName == null)
+            if (string.IsNullOrEmpty(displayName))
             {
                 throw new ArgumentNullException(nameof(displayName));
             }

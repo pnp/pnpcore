@@ -282,8 +282,8 @@ namespace PnP.Core.Model.SharePoint
             return xml;
         }
 
-        private static string SetManagedMetadataMultiValueXml(string fieldName, FieldValueCollection fieldValueCollection, 
-            StringBuilder taxonomyMultiValueObjectPaths, StringBuilder taxonomyMultiValueIdentities,  
+        private static string SetManagedMetadataMultiValueXml(string fieldName, FieldValueCollection fieldValueCollection,
+            StringBuilder taxonomyMultiValueObjectPaths, StringBuilder taxonomyMultiValueIdentities,
             ref int counter, ref int taxFieldObjectId, ref int taxFieldIdentityObjectId)
         {
             #region Sample XML snippets
@@ -474,7 +474,7 @@ namespace PnP.Core.Model.SharePoint
             xml = xml.Replace(CsomHelper.FieldName, fieldName);
 
             StringBuilder sb = new StringBuilder();
-            foreach(var item in fieldValue)
+            foreach (var item in fieldValue)
             {
                 sb.Append(CsomHelper.ListItemArrayFieldProperty
                     .Replace(CsomHelper.FieldType, item.GetType().Name))
@@ -523,7 +523,7 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (value is DateTime time)
                     {
-                        return time.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffzzz"); 
+                        return time.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffzzz");
                     }
                 }
                 else if (fieldType.Equals("Double"))
@@ -532,7 +532,7 @@ namespace PnP.Core.Model.SharePoint
                     {
                         return doubleValue.ToString("G", CultureInfo.InvariantCulture);
                     }
-                }   
+                }
                 else
                 {
                     return value.ToString();
@@ -586,9 +586,59 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})/SetCommentsDisabled", ApiType.SPORest, body);
 
-            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);            
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
+        #endregion
+
+        #region Compliance Tag handling
+
+        public void SetComplianceTag(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            SetComplianceTagAsync(complianceTag, isTagPolicyHold, isTagPolicyRecord, isEventBasedTag, isTagSuperLock).GetAwaiter().GetResult();
+        }
+
+        public async Task SetComplianceTagAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            ApiCall apiCall = SetComplianceTagApiCall(complianceTag, isTagPolicyHold, isTagPolicyRecord, isEventBasedTag, isTagSuperLock);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetComplianceTagBatch(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            SetComplianceTagBatchAsync(PnPContext.CurrentBatch, complianceTag, isTagPolicyHold, isTagPolicyRecord, isEventBasedTag, isTagSuperLock).GetAwaiter().GetResult();
+        }
+
+        public async Task SetComplianceTagBatchAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            await SetComplianceTagBatchAsync(PnPContext.CurrentBatch, complianceTag, isTagPolicyHold, isTagPolicyRecord, isEventBasedTag, isTagSuperLock).ConfigureAwait(false);
+        }
+
+        public void SetComplianceTagBatch(Batch batch, string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            SetComplianceTagBatchAsync(batch, complianceTag, isTagPolicyHold, isTagPolicyRecord, isEventBasedTag, isTagSuperLock).GetAwaiter().GetResult();
+        }
+
+        public async Task SetComplianceTagBatchAsync(Batch batch, string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            ApiCall apiCall = SetComplianceTagApiCall(complianceTag, isTagPolicyHold, isTagPolicyRecord, isEventBasedTag, isTagSuperLock);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private static ApiCall SetComplianceTagApiCall(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock)
+        {
+            var parameters = new
+            {
+                complianceTag,
+                isTagPolicyHold,
+                isTagPolicyRecord,
+                isEventBasedTag,
+                isTagSuperLock
+            };
+            string body = JsonSerializer.Serialize(parameters);
+            var apiCall = new ApiCall("_api/web/lists/getbyid(guid'{Parent.Id}')/items({Id})/SetComplianceTag", ApiType.SPORest, body);
+            return apiCall;
+        }
         #endregion
 
         #endregion

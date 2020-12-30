@@ -455,6 +455,87 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Get and Set compliance tags
+
+        public IComplianceTag GetComplianceTag()
+        {
+            return GetComplianceTagAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IComplianceTag> GetComplianceTagAsync()
+        {
+            await EnsurePropertiesAsync(l => l.RootFolder).ConfigureAwait(false);
+            await RootFolder.EnsurePropertiesAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
+            var listUrl = RootFolder.ServerRelativeUrl;
+            var apiCall = new ApiCall($"_api/SP.CompliancePolicy.SPPolicyStoreProxy.GetListComplianceTag(listUrl='{listUrl}')", ApiType.SPORest);
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var json = JsonDocument.Parse(response.Json).RootElement.GetProperty("d");
+
+                if (json.TryGetProperty("GetListComplianceTag", out JsonElement getAvailableTagsForSite))
+                {
+                    var tag = JsonSerializer.Deserialize<ComplianceTag>(getAvailableTagsForSite.GetRawText(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    return tag;
+                }
+            }
+
+            return null;
+        }
+
+        public void SetComplianceTag(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)
+        {
+            SetComplianceTagAsync(complianceTagValue, blockDelete, blockEdit, syncToItems).GetAwaiter().GetResult();
+        }
+
+        public async Task SetComplianceTagAsync(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)
+        {
+            ApiCall apiCall = await SetComplianceTagApiCall(complianceTagValue, blockDelete, blockEdit, syncToItems).ConfigureAwait(false);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void SetComplianceTagBatch(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)
+        {
+            SetComplianceTagBatchAsync(complianceTagValue, blockDelete, blockEdit, syncToItems).GetAwaiter().GetResult();
+        }
+
+        public async Task SetComplianceTagBatchAsync(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)
+        {
+            await SetComplianceTagBatchAsync(PnPContext.CurrentBatch, complianceTagValue, blockDelete, blockEdit, syncToItems).ConfigureAwait(false);
+        }
+
+        public void SetComplianceTagBatch(Batch batch, string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)
+        {
+            SetComplianceTagBatchAsync(batch, complianceTagValue, blockDelete, blockEdit, syncToItems).GetAwaiter().GetResult();
+        }
+
+        public async Task SetComplianceTagBatchAsync(Batch batch, string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)
+        {
+            ApiCall apiCall = await SetComplianceTagApiCall(complianceTagValue, blockDelete, blockEdit, syncToItems).ConfigureAwait(false);
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private async Task<ApiCall> SetComplianceTagApiCall(string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems)
+        {
+            await EnsurePropertiesAsync(l => l.RootFolder).ConfigureAwait(false);
+            await RootFolder.EnsurePropertiesAsync(f => f.ServerRelativeUrl).ConfigureAwait(false);
+            var listUrl = RootFolder.ServerRelativeUrl;
+            var parameters = new
+            {
+                listUrl,
+                complianceTagValue,
+                blockDelete,
+                blockEdit,
+                syncToItems
+            };
+            string body = JsonSerializer.Serialize(parameters);
+            var apiCall = new ApiCall($"_api/SP.CompliancePolicy.SPPolicyStoreProxy.SetListComplianceTag", ApiType.SPORest, body);
+            return apiCall;
+        }
+
+        #endregion
+
         #endregion
     }
 }
