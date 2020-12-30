@@ -148,7 +148,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Sets a compliancetag / retention label for this list item
         /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
         /// <param name="complianceTag">The tag/label to set for this list item</param>
         /// <param name="isTagPolicyHold"></param>
         /// <param name="isTagPolicyRecord"></param>
@@ -160,7 +159,6 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// Sets a compliancetag / retention label for this list item
         /// </summary>
-        /// <param name="batch">Batch to add the request to</param>
         /// <param name="complianceTag">The tag/label to set for this list item</param>
         /// <param name="isTagPolicyHold"></param>
         /// <param name="isTagPolicyRecord"></param>

@@ -7,6 +7,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a ComplianceTag / Retention label object of SharePoint Online
     /// </summary>
     [ConcreteType(typeof(ComplianceTag))]
+#pragma warning disable CS1591
     public interface IComplianceTag
     {
         bool AcceptMessagesOnlyFromSendersOrMembers { get; set; }
@@ -30,4 +31,5 @@ namespace PnP.Core.Model.SharePoint
         string TagName { get; set; }
         string TagRetentionBasedOn { get; set; }
     }
+#pragma warning restore CS1591
 }
