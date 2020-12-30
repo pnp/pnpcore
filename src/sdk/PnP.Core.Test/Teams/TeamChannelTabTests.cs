@@ -86,7 +86,7 @@ namespace PnP.Core.Test.Teams
 
                 var testSiteLib = $"{context.Uri.OriginalString}/Shared%20Documents";
                 var testTabName = "DocLibTab";
-                var result = channel.Tabs.AddDocumentLibraryTab(testTabName, new Uri(testSiteLib));
+                var result = channel.Tabs.AddDocumentLibraryTabBatch(testTabName, new Uri(testSiteLib));
 
                 context.Execute();
 

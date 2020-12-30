@@ -1,0 +1,1 @@
+{"responses": [{"id": "1","status":200,"headers" : {"OData-Version":"4.0","Content-Type":"application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8"},"body":{"@odata.context":"https://graph.microsoft.com/v1.0/$metadata#teams(id,classSettings)/$entity","id":"9d1aef4b-f974-433e-a3ac-26d29fc6719c"}}]}
