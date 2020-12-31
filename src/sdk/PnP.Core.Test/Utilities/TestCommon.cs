@@ -134,46 +134,19 @@ namespace PnP.Core.Test.Utilities
             return await factory.CreateAsync(groupId).ConfigureAwait(false);
         }
 
-        public PnPContext Clone(PnPContext source, int id)
+        public async Task<PnPContext> CloneAsync(PnPContext source, int id)
         {
-            var clonedContext = source.Clone();
-            if (source.Mode == TestMode.Mock)
-            {
-                clonedContext.SetMockMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
-            }
-            else
-            {
-                clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
-            }
-            return clonedContext;
+            return await source.CloneForTestingAsync(source, null, null, id);
         }
 
-        public PnPContext Clone(PnPContext source, Uri uri, int id)
+        public async Task<PnPContext> CloneAsync(PnPContext source, Uri uri, int id)
         {
-            var clonedContext = source.Clone(uri);
-            if (source.Mode == TestMode.Mock)
-            {
-                clonedContext.SetMockMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
-            }
-            else
-            {
-                clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
-            }
-            return clonedContext;
+            return await source.CloneForTestingAsync(source, uri, null, id);
         }
 
-        public PnPContext Clone(PnPContext source, string configuration, int id)
+        public async Task<PnPContext> CloneAsync(PnPContext source, string configuration, int id)
         {
-            var clonedContext = source.Clone(configuration);
-            if (source.Mode == TestMode.Mock)
-            {
-                clonedContext.SetMockMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
-            }
-            else
-            {
-                clonedContext.SetRecordingMode(id, source.TestName, source.TestFilePath, source.GenerateTestMockingDebugFiles, source.TestUris);
-            }
-            return clonedContext;
+            return await source.CloneForTestingAsync(source, null, configuration, id);
         }
 
         public static IConfigurationRoot GetConfigurationSettings()

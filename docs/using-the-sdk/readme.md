@@ -277,7 +277,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
     var web = await context.Web.GetAsync();
     Console.WriteLine($"Title: {web.Title}");
 
-    using (var subSiteContext = context.Clone(new Uri("https://contoso.sharepoint.com/sites/siteA/subsite")))
+    using (var subSiteContext = await context.CloneAsync(new Uri("https://contoso.sharepoint.com/sites/siteA/subsite")))
     {
         var subWeb = await subSiteContext.Web.GetAsync();
         Console.WriteLine($"Sub site title: {subWeb.Title}");

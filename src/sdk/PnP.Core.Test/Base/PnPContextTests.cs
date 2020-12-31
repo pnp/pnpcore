@@ -178,7 +178,7 @@ namespace PnP.Core.Test.Base
             {
                 await context.Web.GetAsync(p => p.Title);
 
-                using (var clonedContext = context.Clone())
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, 2))
                 {
                     Assert.AreEqual(context.Uri, clonedContext.Uri);
                     Assert.AreEqual(context.AuthenticationProvider, clonedContext.AuthenticationProvider);
@@ -196,7 +196,7 @@ namespace PnP.Core.Test.Base
 
                 // Since test cases work with mocking data we need to use a custom Clone method, this one will use
                 // the PnPContext.Clone method and additionally will copy of the "test" settings
-                using (var clonedContext = TestCommon.Instance.Clone(context, 1))
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, 1))
                 {
                     await clonedContext.Web.GetAsync(p => p.Title);
 
@@ -215,7 +215,7 @@ namespace PnP.Core.Test.Base
 
                 var otherSite = TestCommon.Instance.TestUris[TestCommon.TestSubSite];
 
-                using (var clonedContext = context.Clone(otherSite))
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, otherSite, 2))
                 {
                     Assert.AreNotEqual(context.Uri, clonedContext.Uri);
                     Assert.AreEqual(context.AuthenticationProvider, clonedContext.AuthenticationProvider);
@@ -234,7 +234,7 @@ namespace PnP.Core.Test.Base
 
                 // Since test cases work with mocking data we need to use a custom Clone method, this one will use
                 // the PnPContext.Clone method and additionally will copy of the "test" settings
-                using (var clonedContext = TestCommon.Instance.Clone(context, otherSite, 1))
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, otherSite, 1))
                 {
                     await clonedContext.Web.GetAsync(p => p.Title);
 
@@ -251,7 +251,7 @@ namespace PnP.Core.Test.Base
             {
                 await context.Web.GetAsync(p => p.Title);
 
-                using (var clonedContext = context.Clone(TestCommon.TestSubSite))
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, TestCommon.TestSubSite, 2))
                 {
                     Assert.AreNotEqual(context.Uri, clonedContext.Uri);
                     Assert.AreEqual(context.AuthenticationProvider, clonedContext.AuthenticationProvider);
@@ -270,7 +270,7 @@ namespace PnP.Core.Test.Base
 
                 // Since test cases work with mocking data we need to use a custom Clone method, this one will use
                 // the PnPContext.Clone method and additionally will copy of the "test" settings
-                using (var clonedContext = TestCommon.Instance.Clone(context, TestCommon.TestSubSite, 1))
+                using (var clonedContext = await TestCommon.Instance.CloneAsync(context, TestCommon.TestSubSite, 1))
                 {
                     await clonedContext.Web.GetAsync(p => p.Title);
 

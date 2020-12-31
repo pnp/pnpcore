@@ -730,7 +730,7 @@ namespace PnP.Core.Test.SharePoint
                 string webTitle = "DeleteCurrentWeb";
                 var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle });
 
-                using (var context2 = TestCommon.Instance.Clone(context, addedWeb.Url, 1))
+                using (var context2 = await TestCommon.Instance.CloneAsync(context, addedWeb.Url, 1))
                 {
                     // This will not delete the web, the delete request will be cancelled
                     await context2.Web.DeleteAsync();

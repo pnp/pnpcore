@@ -29,11 +29,6 @@
 		<None Remove="Services\Authentication\ToRemove\**" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Model\SharePoint\Navigation\" />
-		<Folder Include="Model\SharePoint\UI\" />
-	</ItemGroup>
-
 	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
 		<PackageReference Include="Microsoft.ApplicationInsights" Version="2.13.1" />
 		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.1" />
