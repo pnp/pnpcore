@@ -67,7 +67,11 @@ namespace PnP.Core.Services
         private static IServiceCollection AddHttpClients(this IServiceCollection collection)
         {
             collection.AddHttpClient<SharePointRestClient>()
-                .AddHttpMessageHandler<SharePointRestRetryHandler>().ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
+                .AddHttpMessageHandler<SharePointRestRetryHandler>()
+                // We use cookies by adding them to the header which works great when used from Core framework,
+                // however when running the .NET Standard 2.0 version from .NET Framework we explicetely have to
+                // tell the http client to not use the default (empty) cookie container
+                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                 {
                     UseCookies = false
                 });
