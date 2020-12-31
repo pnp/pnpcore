@@ -1314,7 +1314,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IComplianceTag.html",
-          "hash": "OZXBGTESk8eBya0+AcB23g=="
+          "hash": "zN76KbcDBpQKNUc4wu9IQg=="
         }
       },
       "is_incremental": false,
@@ -3510,7 +3510,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContextFactoryCollectionExtensions.html",
-          "hash": "e2hYQtDmf4RIZKuMZ3k8Dg=="
+          "hash": "7yeIb3W/fdkUrmTwd2d2ww=="
         }
       },
       "is_incremental": false,
