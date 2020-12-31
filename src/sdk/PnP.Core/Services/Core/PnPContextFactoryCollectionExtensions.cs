@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Net.Http;
 
 namespace PnP.Core.Services
 {
@@ -65,8 +66,12 @@ namespace PnP.Core.Services
 
         private static IServiceCollection AddHttpClients(this IServiceCollection collection)
         {
+            var client = new HttpClient();
             collection.AddHttpClient<SharePointRestClient>()
-                .AddHttpMessageHandler<SharePointRestRetryHandler>();
+                .AddHttpMessageHandler<SharePointRestRetryHandler>().ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
+                {
+                    UseCookies = false
+                });
             collection.AddHttpClient<MicrosoftGraphClient>()
                 .AddHttpMessageHandler<MicrosoftGraphRetryHandler>();
 
