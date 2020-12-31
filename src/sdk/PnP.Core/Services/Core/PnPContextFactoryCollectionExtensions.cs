@@ -66,7 +66,6 @@ namespace PnP.Core.Services
 
         private static IServiceCollection AddHttpClients(this IServiceCollection collection)
         {
-            var client = new HttpClient();
             collection.AddHttpClient<SharePointRestClient>()
                 .AddHttpMessageHandler<SharePointRestRetryHandler>().ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
                 {
