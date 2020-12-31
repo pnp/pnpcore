@@ -1315,9 +1315,6 @@ namespace PnP.Core.Services
                             // configured instance of IAuthenticationProvider
                             await ProcessSharePointRestAuthentication(csomBatch.Site, request).ConfigureAwait(false);
 
-                            // Ensure the request contains authentication information
-                            //await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(csomBatch.Site, request).ConfigureAwait(false);
-
                             // Send the request
                             HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
 
