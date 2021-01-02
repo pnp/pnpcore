@@ -153,5 +153,30 @@ namespace PnP.Core.Test.Teams
             }
         }
 
+        [TestMethod]
+        public async Task AddWikiTabAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Tabs);
+                
+                var testTabName = "WikiTestTab";
+                var result = await channel.Tabs.AddWikiTabAsync(testTabName);
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(testTabName, result.DisplayName);
+
+                //Clean up tab
+                await result.DeleteAsync();
+            }
+        }
+
     }
 }
