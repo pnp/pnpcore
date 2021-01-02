@@ -121,5 +121,35 @@ namespace PnP.Core.Test.Teams
 
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddChannelNameExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.Add("");
+
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddChannelNameBatchExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.AddBatch("");
+
+            }
+        }
     }
 }
