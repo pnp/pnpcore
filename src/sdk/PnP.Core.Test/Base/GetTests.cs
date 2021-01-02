@@ -341,41 +341,238 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
-        public async Task GetCollectionPropertyWithFilterViaRest()
+        public async Task GetCollectionFilterExpressionViaRest()
         {
-            TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
 
-                // Works
-                //var foundLists = await context.Web.Lists.GetWithFilterAsync(p => p.TemplateType == ListTemplateType.GenericList,
-                //                                           p => p.Title, p => p.TemplateType,
-                //                                           p => p.ContentTypes.LoadProperties(
-                //                                               p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+                // Do a get with filter and custom properties specifying the data to load
+                var foundLists = await context.Web.Lists.GetAsync(p => p.TemplateType == ListTemplateType.GenericList,
+                                                                  p => p.Title, p => p.TemplateType,
+                                                                  p => p.ContentTypes.LoadProperties(
+                                                                       p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+                Assert.IsTrue(foundLists.Any());
+                Assert.IsTrue(foundLists.Count() == context.Web.Lists.Length);
+                Assert.IsTrue(context.Web.Lists.Requested);
+                var firstList = context.Web.Lists.First();
+                Assert.IsTrue(firstList.Requested);
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(firstList.ContentTypes.Requested);
+                Assert.IsTrue(firstList.ContentTypes.Any());
+                var firstContentType = firstList.ContentTypes.First();
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
+                var firstFieldLink = firstContentType.FieldLinks.First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
+            }
+        }
 
-                // Works
-                //await context.Web.Lists.GetWithFilterBatchAsync(p => p.TemplateType == ListTemplateType.GenericList,
-                //                                           p => p.Title, p => p.TemplateType,
-                //                                           p => p.ContentTypes.LoadProperties(
-                //                                               p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
-                //await context.ExecuteAsync();
+        [TestMethod]
+        public async Task GetCollectionFilterExpressionViaRestBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
 
-                // Works
-                //var foundLists = await context.Web.Lists.GetWithFilterAsync(p => p.TemplateType == ListTemplateType.GenericList);
-
-                // Works
-                //var foundLists = await context.Web.Lists.GetWithFilterAsync(null, p => p.Title, p => p.TemplateType,
-                //                                                                   p => p.ContentTypes.LoadProperties(
-                //                                                                       p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
-
-                //var foundLists = await context.Web.Lists.GetWithFilterAsync(null);
-
-
-                await context.Web.Lists.GetFirstOrDefaultBatchAsync(p => p.Title == "Site Assets");
+                // Do a get with filter and custom properties specifying the data to load
+                await context.Web.Lists.GetBatchAsync(p => p.TemplateType == ListTemplateType.GenericList,
+                                                           p => p.Title, p => p.TemplateType,
+                                                           p => p.ContentTypes.LoadProperties(
+                                                                p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
 
                 await context.ExecuteAsync();
 
+                Assert.IsTrue(context.Web.Lists.Requested);
+                var firstList = context.Web.Lists.First();
+                Assert.IsTrue(firstList.Requested);
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(firstList.ContentTypes.Requested);
+                Assert.IsTrue(firstList.ContentTypes.Any());
+                var firstContentType = firstList.ContentTypes.First();
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
+                var firstFieldLink = firstContentType.FieldLinks.First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetCollectionFilterViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Do a get with filter and custom properties specifying the data to load
+                var foundLists = await context.Web.Lists.GetAsync(p => p.TemplateType == ListTemplateType.GenericList);
+                Assert.IsTrue(foundLists.Any());
+                Assert.IsTrue(foundLists.Count() == context.Web.Lists.Length);
+                Assert.IsTrue(context.Web.Lists.Requested);
+                var firstList = context.Web.Lists.First();
+                Assert.IsTrue(firstList.Requested);
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetCollectionExpressionViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Do a get with filter and custom properties specifying the data to load
+                var foundLists = await context.Web.Lists.GetAsync(p => p.Title, p => p.TemplateType,
+                                                                  p => p.ContentTypes.LoadProperties(
+                                                                       p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+                Assert.IsTrue(foundLists.Any());
+                Assert.IsTrue(foundLists.Count() == context.Web.Lists.Length);
+                Assert.IsTrue(context.Web.Lists.Requested);
+                var firstList = context.Web.Lists.First();
+                Assert.IsTrue(firstList.Requested);
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(firstList.ContentTypes.Requested);
+                Assert.IsTrue(firstList.ContentTypes.Any());
+                var firstContentType = firstList.ContentTypes.First();
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
+                var firstFieldLink = firstContentType.FieldLinks.First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetCollectionFirstFilterExpressionViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Do a get with filter and custom properties specifying the data to load
+                var foundList = await context.Web.Lists.GetFirstOrDefaultAsync(p => p.Title == "Site Assets",
+                                                                               p => p.Title, p => p.TemplateType,
+                                                                               p => p.ContentTypes.LoadProperties(
+                                                                                    p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+                Assert.IsTrue(foundList != null);
+                Assert.IsTrue(foundList.Title == "Site Assets");
+                Assert.IsTrue(context.Web.Lists.Length == 1);
+                Assert.IsTrue(context.Web.Lists.Requested);
+                var firstList = context.Web.Lists.First();
+                Assert.IsTrue(firstList.Id == foundList.Id);
+                Assert.IsTrue(firstList.Requested);
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(firstList.ContentTypes.Requested);
+                Assert.IsTrue(firstList.ContentTypes.Any());
+                var firstContentType = firstList.ContentTypes.First();
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
+                var firstFieldLink = firstContentType.FieldLinks.First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetCollectionFirstFilterExpressionViaRestBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Do a get with filter and custom properties specifying the data to load
+                await context.Web.Lists.GetFirstOrDefaultBatchAsync(p => p.Title == "Site Assets",
+                                                                    p => p.Title, p => p.TemplateType,
+                                                                    p => p.ContentTypes.LoadProperties(
+                                                                         p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+                await context.Web.Lists.GetFirstOrDefaultBatchAsync(p => p.Title == "Site Pages",
+                                                                    p => p.Title, p => p.TemplateType,
+                                                                    p => p.ContentTypes.LoadProperties(
+                                                                         p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+                await context.ExecuteAsync();
+
+                Assert.IsTrue(context.Web.Lists.Length == 2);
+                Assert.IsTrue(context.Web.Lists.Requested);
+                var firstList = context.Web.Lists.First();
+                Assert.IsTrue(firstList.Requested);
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(firstList.ContentTypes.Requested);
+                Assert.IsTrue(firstList.ContentTypes.Any());
+                var firstContentType = firstList.ContentTypes.First();
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
+                var firstFieldLink = firstContentType.FieldLinks.First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetCollectionFirstFilterViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Do a get with filter and custom properties specifying the data to load
+                var foundList = await context.Web.Lists.GetFirstOrDefaultAsync(p => p.Title == "Site Assets");
+                Assert.IsTrue(foundList != null);
+                Assert.IsTrue(foundList.Title == "Site Assets");
+                Assert.IsTrue(context.Web.Lists.Length == 1);
+                Assert.IsTrue(context.Web.Lists.Requested);
+                var firstList = context.Web.Lists.First();
+                Assert.IsTrue(firstList.Id == foundList.Id);
+                Assert.IsTrue(firstList.Requested);
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+            }
+        }
+
+        [TestMethod]
+        public async Task GetCollectionFirstExpressionViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Do a get with filter and custom properties specifying the data to load
+                var foundList = await context.Web.Lists.GetFirstOrDefaultAsync(null,
+                                                                               p => p.Title, p => p.TemplateType,
+                                                                               p => p.ContentTypes.LoadProperties(
+                                                                                    p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+                Assert.IsTrue(foundList != null);
+                Assert.IsTrue(context.Web.Lists.Length == 1);
+                Assert.IsTrue(context.Web.Lists.Requested);
+                var firstList = context.Web.Lists.First();
+                Assert.IsTrue(firstList.Id == foundList.Id);
+                Assert.IsTrue(firstList.Requested);
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.TemplateType));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(firstList.IsPropertyAvailable(p => p.ContentTypes));
+                Assert.IsTrue(firstList.ContentTypes.Requested);
+                Assert.IsTrue(firstList.ContentTypes.Any());
+                var firstContentType = firstList.ContentTypes.First();
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.Name));
+                Assert.IsTrue(firstContentType.IsPropertyAvailable(p => p.FieldLinks));
+                var firstFieldLink = firstContentType.FieldLinks.First();
+                Assert.IsTrue(firstFieldLink.IsPropertyAvailable(p => p.Name));
             }
         }
         #endregion
