@@ -178,5 +178,88 @@ namespace PnP.Core.Test.Teams
             }
         }
 
+        [TestMethod]
+        public void AddWikiTabTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var testTabName = "WikiTestTab";
+                var result = channel.Tabs.AddWikiTab(testTabName);
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(testTabName, result.DisplayName);
+
+                //Clean up tab
+                result.Delete();
+            }
+        }
+
+        [TestMethod]
+        public void AddWikiTabBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.GetBatch(o => o.Channels);
+                context.Execute();
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.GetBatch(o => o.Tabs);
+                context.Execute();
+
+                var testTabName = "WikiTestTab";
+                var result = channel.Tabs.AddWikiTabBatch(testTabName);
+                context.Execute();
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(testTabName, result.DisplayName);
+
+                //Clean up tab
+                result.DeleteBatch();
+                context.Execute();
+            }
+        }
+
+        [TestMethod]
+        public void AddWikiTabSpecificBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+                var team = context.Team.GetBatch(batch, o => o.Channels);
+                context.Execute(batch);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.GetBatch(batch, o => o.Tabs);
+                context.Execute(batch);
+
+                var testTabName = "WikiTestTab";
+                var result = channel.Tabs.AddWikiTabBatch(batch,testTabName);
+                context.Execute(batch);
+
+                Assert.IsNotNull(result);
+                Assert.AreEqual(testTabName, result.DisplayName);
+
+                //Clean up tab
+                result.DeleteBatch(batch);
+                context.Execute(batch);
+            }
+        }
     }
 }
