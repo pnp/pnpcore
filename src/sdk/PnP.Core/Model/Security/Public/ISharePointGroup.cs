@@ -1,4 +1,7 @@
-﻿namespace PnP.Core.Model.Security
+﻿using PnP.Core.Services;
+using System.Threading.Tasks;
+
+namespace PnP.Core.Model.Security
 {
     /// <summary>
     /// Public interface to define a SharePoint Group
@@ -55,5 +58,70 @@
         /// Email configuration for the group join or leave operations
         /// </summary>
         public bool RequestToJoinLeaveEmailSetting { get; set; }
+
+        /// <summary>
+        /// Members of this group
+        /// </summary>
+        public ISharePointUserCollection Users { get; }
+
+        /// <summary>
+        /// Adds a user to this group. Specify the full username, e.g. "i:0#.f|membership|user@domain.com"
+        /// </summary>
+        public void AddUser(string loginName);
+
+        /// <summary>
+        /// Adds a user to this group. Specify the full username, e.g. "i:0#.f|membership|user@domain.com"
+        /// </summary>
+        public Task AddUserAsync(string loginName);
+
+        /// <summary>
+        /// Adds a user to this group. Specify the full username, e.g. "i:0#.f|membership|user@domain.com"
+        /// </summary>
+        public void AddUserBatch(string loginName);
+
+        /// <summary>
+        /// Adds a user to this group. Specify the full username, e.g. "i:0#.f|membership|user@domain.com"
+        /// </summary>
+        public Task AddUserBatchAsync(string loginName);
+
+        /// <summary>
+        /// Adds a user to this group. Specify the full username, e.g. "i:0#.f|membership|user@domain.com"
+        /// </summary>
+        public void AddUserBatch(Batch batch, string loginName);
+
+        /// <summary>
+        /// Adds a user to this group. Specify the full username, e.g. "i:0#.f|membership|user@domain.com"
+        /// </summary>
+        public Task AddUserBatchAsync(Batch batch, string loginName);
+
+        /// <summary>
+        /// Removes a user given its id from a group.
+        /// </summary>
+        public void RemoveUser(int userId);
+
+        /// <summary>
+        /// Removes a user given its id from a group.
+        /// </summary>
+        public Task RemoveUserAsync(int userId);
+
+        /// <summary>
+        /// Removes a user given its id from a group.
+        /// </summary>
+        public void RemoveUserBatch(int userId);
+
+        /// <summary>
+        /// Removes a user given its id from a group.
+        /// </summary>
+        public Task RemoveUserBatchAsync(int userId);
+
+        /// <summary>
+        /// Removes a user given its id from a group.
+        /// </summary>
+        public void RemoveUserBatch(Batch batch, int userId);
+
+        /// <summary>
+        /// Removes a user given its id from a group.
+        /// </summary>
+        public Task RemoveUserBatchAsync(Batch batch, int userId);
     }
 }
