@@ -7,7 +7,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a SharePoint Group
     /// </summary>
     [ConcreteType(typeof(SharePointGroup))]
-    public interface ISharePointGroup : IDataModel<ISharePointGroup>, IDataModelGet<ISharePointGroup>, ISharePointPrincipal, IQueryableDataModel
+    public interface ISharePointGroup : IDataModel<ISharePointGroup>, IDataModelGet<ISharePointGroup>, IDataModelDelete, ISharePointPrincipal, IQueryableDataModel
     {
         /// <summary>
         /// Allow members to edit the group members
@@ -123,5 +123,17 @@ namespace PnP.Core.Model.Security
         /// Removes a user given its id from a group.
         /// </summary>
         public Task RemoveUserBatchAsync(Batch batch, int userId);
+
+        // public void Delete();
+
+        // public Task DeleteAsync();
+
+        // public void DeleteBatch();
+
+        // public Task DeleteBatchAsync();
+
+        // public void DeleteBatch(Batch batch);
+
+        // public void DeleteBatchAsync(Batch batch);
     }
 }

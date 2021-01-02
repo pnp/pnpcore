@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added support for deleting SharePoint groups [erwinvanhunen - Erwin van Hunen]
 - Added support for adding and removing users from ISharePointGroup [erwinvanhunen - Erwin van Hunen]
 - Added support for setting the Compliance Tag on a list [erwinvanhunen - Erwin van Hunen]
 - Added support for setting the Compliance Tag on a list item [erwinvanhunen - Erwin van Hunen]
