@@ -261,5 +261,125 @@ namespace PnP.Core.Test.Teams
                 context.Execute(batch);
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddWikiTabExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+                
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddWikiTab(string.Empty);
+                Assert.IsNull(result);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddWikiTabBatchExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddWikiTabBatch(string.Empty);
+                Assert.IsNull(result);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddDocLibraryTabBatchExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddDocumentLibraryTabBatch(string.Empty, new Uri($"{context.Uri.OriginalString}/Shared%20Documents"));
+                Assert.IsNull(result);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddDocLibraryTabBatchNullUriExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddDocumentLibraryTabBatch("DocLibTab", null);
+                Assert.IsNull(result);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddDocLibraryTabExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddDocumentLibraryTab(string.Empty, new Uri($"{context.Uri.OriginalString}/Shared%20Documents"));
+                Assert.IsNull(result);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddDocLibraryTabNullUriExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Tabs);
+
+                var result = channel.Tabs.AddDocumentLibraryTab("DocLibTab", null);
+                Assert.IsNull(result);
+            }
+        }
     }
 }
