@@ -59,6 +59,8 @@ namespace PnP.Core.Test.Teams
 
                 Assert.IsTrue(config.IsPropertyAvailable(o => o.WebsiteUrl));
                 Assert.IsTrue(config.IsPropertyAvailable(o => o.RemoveUrl));
+                Assert.IsTrue(config.IsPropertyAvailable(o => o.HasContent));
+                Assert.IsFalse(config.HasContent); // This could fail if developer adds content in the wiki
                 Assert.IsNull(config.WebsiteUrl);
                 Assert.IsNull(config.RemoveUrl);
                 Assert.IsNotNull(config.WikiDefaultTab);
