@@ -3199,6 +3199,70 @@ references:
   commentId: T:PnP.Core.Model.Security.ISharePointGroup
   fullName: PnP.Core.Model.Security.ISharePointGroup
   nameWithType: ISharePointGroup
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUser(System.String)
+  name: AddUser(String)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUser_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.AddUser(System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUser(System.String)
+  nameWithType: ISharePointGroup.AddUser(String)
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUser*
+  name: AddUser
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUser_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.AddUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUser
+  nameWithType: ISharePointGroup.AddUser
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUserAsync(System.String)
+  name: AddUserAsync(String)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUserAsync_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.AddUserAsync(System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUserAsync(System.String)
+  nameWithType: ISharePointGroup.AddUserAsync(String)
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUserAsync*
+  name: AddUserAsync
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUserAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.AddUserAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUserAsync
+  nameWithType: ISharePointGroup.AddUserAsync
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(PnP.Core.Services.Batch,System.String)
+  name: AddUserBatch(Batch, String)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: ISharePointGroup.AddUserBatch(Batch, String)
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(System.String)
+  name: AddUserBatch(String)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUserBatch(System.String)
+  nameWithType: ISharePointGroup.AddUserBatch(String)
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUserBatch*
+  name: AddUserBatch
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUserBatch_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.AddUserBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUserBatch
+  nameWithType: ISharePointGroup.AddUserBatch
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddUserBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ISharePointGroup.AddUserBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(System.String)
+  name: AddUserBatchAsync(String)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync(System.String)
+  nameWithType: ISharePointGroup.AddUserBatchAsync(String)
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync*
+  name: AddUserBatchAsync
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUserBatchAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddUserBatchAsync
+  nameWithType: ISharePointGroup.AddUserBatchAsync
 - uid: PnP.Core.Model.Security.ISharePointGroup.AllowMembersEditMembership
   name: AllowMembersEditMembership
   href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AllowMembersEditMembership
@@ -3316,6 +3380,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Security.ISharePointGroup.OwnerTitle
   nameWithType: ISharePointGroup.OwnerTitle
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUser(System.Int32)
+  name: RemoveUser(Int32)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUser_System_Int32_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.RemoveUser(System.Int32)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUser(System.Int32)
+  nameWithType: ISharePointGroup.RemoveUser(Int32)
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUser*
+  name: RemoveUser
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUser_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.RemoveUser
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUser
+  nameWithType: ISharePointGroup.RemoveUser
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync(System.Int32)
+  name: RemoveUserAsync(Int32)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUserAsync_System_Int32_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync(System.Int32)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync(System.Int32)
+  nameWithType: ISharePointGroup.RemoveUserAsync(Int32)
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync*
+  name: RemoveUserAsync
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUserAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUserAsync
+  nameWithType: ISharePointGroup.RemoveUserAsync
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(PnP.Core.Services.Batch,System.Int32)
+  name: RemoveUserBatch(Batch, Int32)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_PnP_Core_Services_Batch_System_Int32_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(PnP.Core.Services.Batch,System.Int32)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(PnP.Core.Services.Batch, System.Int32)
+  nameWithType: ISharePointGroup.RemoveUserBatch(Batch, Int32)
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(System.Int32)
+  name: RemoveUserBatch(Int32)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_System_Int32_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(System.Int32)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch(System.Int32)
+  nameWithType: ISharePointGroup.RemoveUserBatch(Int32)
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch*
+  name: RemoveUserBatch
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatch_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatch
+  nameWithType: ISharePointGroup.RemoveUserBatch
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(PnP.Core.Services.Batch,System.Int32)
+  name: RemoveUserBatchAsync(Batch, Int32)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_PnP_Core_Services_Batch_System_Int32_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(PnP.Core.Services.Batch,System.Int32)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(PnP.Core.Services.Batch, System.Int32)
+  nameWithType: ISharePointGroup.RemoveUserBatchAsync(Batch, Int32)
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(System.Int32)
+  name: RemoveUserBatchAsync(Int32)
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_System_Int32_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(System.Int32)
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync(System.Int32)
+  nameWithType: ISharePointGroup.RemoveUserBatchAsync(Int32)
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync*
+  name: RemoveUserBatchAsync
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUserBatchAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveUserBatchAsync
+  nameWithType: ISharePointGroup.RemoveUserBatchAsync
 - uid: PnP.Core.Model.Security.ISharePointGroup.RequestToJoinLeaveEmailSetting
   name: RequestToJoinLeaveEmailSetting
   href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RequestToJoinLeaveEmailSetting
@@ -3329,6 +3457,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Security.ISharePointGroup.RequestToJoinLeaveEmailSetting
   nameWithType: ISharePointGroup.RequestToJoinLeaveEmailSetting
+- uid: PnP.Core.Model.Security.ISharePointGroup.Users
+  name: Users
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_Users
+  commentId: P:PnP.Core.Model.Security.ISharePointGroup.Users
+  fullName: PnP.Core.Model.Security.ISharePointGroup.Users
+  nameWithType: ISharePointGroup.Users
+- uid: PnP.Core.Model.Security.ISharePointGroup.Users*
+  name: Users
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_Users_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.Users
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.Users
+  nameWithType: ISharePointGroup.Users
 - uid: PnP.Core.Model.Security.ISharePointGroupCollection
   name: ISharePointGroupCollection
   href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html
