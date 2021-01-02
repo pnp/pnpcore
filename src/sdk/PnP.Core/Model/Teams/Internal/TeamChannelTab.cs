@@ -5,12 +5,12 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.Teams
 {
-    [GraphType(Uri = V)]
+    [GraphType(Uri = tabUri, Beta = true)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TeamChannelTab : BaseDataModel<ITeamChannelTab>, ITeamChannelTab
     {
         private const string baseUri = "teams/{Site.GroupId}/channels/{Parent.GraphId}/tabs";
-        private const string V = baseUri + "/{GraphId}";
+        private const string tabUri = baseUri + "/{GraphId}";
 
         #region Construction
         public TeamChannelTab()
@@ -69,6 +69,7 @@ namespace PnP.Core.Model.Teams
 
         public Uri WebUrl { get => GetValue<Uri>(); set => SetValue(value); }
 
+        // Beta only property
         public string SortOrderIndex { get => GetValue<string>(); set => SetValue(value); }
 
         public ITeamChannelTabConfiguration Configuration { get => GetModelValue<ITeamChannelTabConfiguration>(); set => SetModelValue(value); }
