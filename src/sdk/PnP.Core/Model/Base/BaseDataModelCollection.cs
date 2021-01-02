@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.QueryModel;
+using PnP.Core.Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -268,6 +269,200 @@ namespace PnP.Core.Model
         }
 
         #endregion
+
+        #region Get
+
+        public async Task<IEnumerable<TModel>> GetAsync(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return await GetAsync(null, expressions).ConfigureAwait(false);
+        }
+
+        public IEnumerable<TModel> Get(params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetAsync(expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task GetBatchAsync(params Expression<Func<TModel, object>>[] expressions)
+        {
+            await GetBatchAsync(PnPContext.CurrentBatch, expressions).ConfigureAwait(false);
+        }
+
+        public void GetBatch(params Expression<Func<TModel, object>>[] expressions)
+        {
+            GetBatchAsync(expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task GetBatchAsync(Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        {
+            await GetBatchAsync(batch, null, expressions).ConfigureAwait(false);
+        }
+
+        public void GetBatch(Batch batch, params Expression<Func<TModel, object>>[] expressions)
+        {
+            GetBatchAsync(batch, expressions).GetAwaiter().GetResult();
+        }
+
+        #endregion
+
+        #region Get with filter
+
+        public IEnumerable<TModel> Get(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetAsync(predicate, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerable<TModel>> GetAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            (Guid batchRequestId, string receivingProperty) = await GetImplementationAsync(PnPContext.CurrentBatch, predicate, expressions, false).ConfigureAwait(false);
+
+            // and execute the request
+            await PnPContext.ExecuteAsync().ConfigureAwait(false);
+
+            // Get the resulting property from the parent object
+            var resultValue = Parent.GetPublicInstancePropertyValue(receivingProperty) as IEnumerable<TModel>;
+
+            return resultValue.Where(p => (p as TransientObject).BatchRequestId == batchRequestId);
+        }
+
+        public void GetBatch(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            GetBatchAsync(predicate, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task GetBatchAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            await GetBatchAsync(PnPContext.CurrentBatch, predicate, expressions).ConfigureAwait(false);
+        }
+
+        public void GetBatch(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            GetBatchAsync(batch, predicate, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task GetBatchAsync(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            await GetImplementationAsync(batch, predicate, expressions, false).ConfigureAwait(false);
+        }
+
+        private async Task<Tuple<Guid, string>> GetImplementationAsync(Batch batch, Expression<Func<TModel, bool>> predicate, Expression<Func<TModel, object>>[] expressions, bool firstOrDefault)
+        {
+            if (!(this is IQueryable<TModel>))
+            {
+                throw new ClientException(PnPCoreResources.Exception_Unsupported_CollectionModelIsNotQueryable);
+            }
+
+            // Get the parent (container) entity info (e.g. for Lists this is Web)
+            var parentEntityInfo = EntityManager.Instance.GetStaticClassInfo(Parent.GetType());
+
+            // and cast it to the IDataModelMappingHandler interface
+            var parentEntityWithMappingHandlers = (IDataModelMappingHandler)Parent;
+
+            // Create a concrete entity of what we expect to get back (e.g. for Lists this is List)
+            var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), Parent);
+            (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
+
+            // Get class info for the given concrete entity and the passed expressions
+            var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, expressions);
+
+            // Determine the receiving property
+            var receivingProperty = GetReceivingProperty(parentEntityInfo);
+            if (string.IsNullOrEmpty(receivingProperty))
+            {
+                throw new ClientException(ErrorType.ModelMetadataIncorrect,
+                    PnPCoreResources.Exception_ModelMetadataIncorrect_ModelOutOfSync);
+            }
+
+            // Build the query
+            IQueryable<TModel> selectionTarget = this as IQueryable<TModel>;
+
+            //if (expressions != null)
+            //{
+            //    selectionTarget = QueryClient.ProcessExpression(selectionTarget, concreteEntityClassInfo, expressions);
+            //}
+
+            if (predicate != null)
+            {
+                selectionTarget = selectionTarget.Where(predicate);
+            }
+
+            if (firstOrDefault)
+            {
+                selectionTarget = selectionTarget.Take(1);
+            }
+
+            var query = DataModelQueryProvider<TModel>.Translate(selectionTarget.Expression);
+
+            var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, concreteEntityClassInfo, PnPContext, query, receivingProperty).ConfigureAwait(false);
+
+            // Prepare a variable to hold tha batch request ID
+            Guid batchRequestId = Guid.Empty;
+
+            foreach (var apiCall in apiCalls)
+            {
+                // Add the request to the current batch
+                var id = batch.Add(
+                    Parent as TransientObject,
+                    parentEntityInfo,
+                    HttpMethod.Get,
+                    apiCall,
+                    default,
+                    parentEntityWithMappingHandlers.MappingHandler,
+                    parentEntityWithMappingHandlers.PostMappingHandler
+                    );
+
+                if (batchRequestId == Guid.Empty)
+                {
+                    batchRequestId = id;
+                }
+            }
+
+            return new Tuple<Guid, string>(batchRequestId, receivingProperty);
+        }
+
+        #endregion
+
+        #region Get first or default with filter
+
+        public TModel GetFirstOrDefault(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetFirstOrDefaultAsync(predicate, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<TModel> GetFirstOrDefaultAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            (Guid batchRequestId, string receivingProperty) = await GetImplementationAsync(PnPContext.CurrentBatch, predicate, expressions, true).ConfigureAwait(false);
+
+            // and execute the request
+            await PnPContext.ExecuteAsync().ConfigureAwait(false);
+
+            // Get the resulting property from the parent object
+            var resultValue = Parent.GetPublicInstancePropertyValue(receivingProperty) as IEnumerable<TModel>;
+
+            return resultValue.FirstOrDefault(p => (p as TransientObject).BatchRequestId == batchRequestId);
+        }
+
+        public void GetFirstOrDefaultBatch(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            GetFirstOrDefaultBatchAsync(predicate, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task GetFirstOrDefaultBatchAsync(Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            await GetFirstOrDefaultBatchAsync(PnPContext.CurrentBatch, predicate, expressions).ConfigureAwait(false);
+        }
+
+        public void GetFirstOrDefaultBatch(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            GetFirstOrDefaultBatchAsync(batch, predicate, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task GetFirstOrDefaultBatchAsync(Batch batch, Expression<Func<TModel, bool>> predicate, params Expression<Func<TModel, object>>[] expressions)
+        {
+            await GetImplementationAsync(batch, predicate, expressions, true).ConfigureAwait(false);
+        }
+
+        #endregion
+
 
         #region Paging (ISupportPaging implementation)
 

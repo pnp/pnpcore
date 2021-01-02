@@ -164,12 +164,12 @@ namespace PnP.Core.Test.QueryModel
         [TestMethod]
         public async Task TestQueryFirstOrDefaultNoPredicateLINQ_REST_Async()
         {
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
 
-                var actual = await context.Web.Lists.FirstOrDefaultAsync();
+                var actual = (await context.Web.Lists.GetAsync()).FirstOrDefault();
 
                 Assert.IsNotNull(actual);
             }
@@ -200,15 +200,12 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "Documents";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
 
-                var actual = await (from l in context.Web.Lists
-                                    select l)
-                             .Load(l => l.Id, l => l.Title)
-                             .FirstOrDefaultAsync(l => l.Title == expected);
+                var actual = await context.Web.Lists.GetFirstOrDefaultAsync(l => l.Title == expected, l => l.Id, l => l.Title);
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);
@@ -239,14 +236,12 @@ namespace PnP.Core.Test.QueryModel
         {
             var expected = "Documents";
 
-            // TestCommon.Instance.Mocking = false;
+            //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 context.GraphFirst = false;
 
-                var actual = await (from l in context.Web.Lists
-                                    where l.Title == expected
-                                    select l).FirstOrDefaultAsync();
+                var actual = await context.Web.Lists.GetFirstOrDefaultAsync(l => l.Title == expected);
 
                 Assert.IsNotNull(actual);
                 Assert.AreEqual(expected, actual.Title);

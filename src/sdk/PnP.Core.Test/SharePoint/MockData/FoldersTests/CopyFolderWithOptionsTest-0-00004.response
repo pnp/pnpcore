@@ -1,4 +1,4 @@
---batchresponse_f78709f0-00c5-47d1-a007-7ea97414f5f2
+--batchresponse_3dcd4d64-26a3-4697-898c-bbe3227bda7d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_COPY2_OPTIONS')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_OPTIONS')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_OPTIONS')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_OPTIONS')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_OPTIONS')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_OPTIONS')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_OPTIONS')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_COPY2_OPTIONS')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"TEST_COPY2_OPTIONS","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/Shared Documents/TEST_COPY2_OPTIONS","TimeCreated":"2020-12-07T09:32:08Z","TimeLastModified":"2020-12-07T09:32:08Z","UniqueId":"7c520863-28b7-4fe3-9389-1b189873a129","WelcomePage":""}}
---batchresponse_f78709f0-00c5-47d1-a007-7ea97414f5f2--
+--batchresponse_3dcd4d64-26a3-4697-898c-bbe3227bda7d--

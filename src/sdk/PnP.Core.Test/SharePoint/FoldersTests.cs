@@ -4,7 +4,6 @@ using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Test.SharePoint
@@ -25,7 +24,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder folder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
                 Assert.IsNotNull(folder);
             }
         }
@@ -36,7 +35,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder folder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
                 Assert.IsNotNull(folder);
                 Assert.IsTrue(folder.Exists);
                 Assert.IsFalse(folder.IsWOPIEnabled);
@@ -209,7 +208,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+                IFolder parentFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
                 IFolder newFolder = await parentFolder.Folders.AddAsync("TEST");
 
@@ -265,7 +264,7 @@ namespace PnP.Core.Test.SharePoint
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
                 IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFolder foundFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == "TEST_QUERY");
+                IFolder foundFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == "TEST_QUERY");
 
                 Assert.IsNotNull(foundFolder);
                 Assert.AreNotEqual(default, foundFolder.UniqueId);
@@ -683,9 +682,8 @@ namespace PnP.Core.Test.SharePoint
                 await folderToDelete.DeleteAsync();
 
                 // Test if the folder is still found
-                IFolder folderToFind = await (from ct in context.Web.Lists.GetByTitle("Documents").RootFolder.Folders
-                                              where ct.Name == "TO DELETE FOLDER"
-                                              select ct).FirstOrDefaultAsync();
+                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders
+                                        .GetFirstOrDefaultAsync(ct => ct.Name == "TO DELETE FOLDER");
 
                 Assert.IsNull(folderToFind);
             }
@@ -835,7 +833,7 @@ namespace PnP.Core.Test.SharePoint
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
                 IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundCopiedFolder);
             }
 
@@ -867,7 +865,7 @@ namespace PnP.Core.Test.SharePoint
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
                 IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundCopiedFolder);
             }
 
@@ -1038,7 +1036,7 @@ namespace PnP.Core.Test.SharePoint
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
                 IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundMovedFolder);
             }
 
@@ -1071,7 +1069,7 @@ namespace PnP.Core.Test.SharePoint
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
                 IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
-                IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.FirstOrDefaultAsync(f => f.Name == folderToFindName);
+                IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundMovedFolder);
             }
 

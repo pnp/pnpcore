@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model.SharePoint;
-using PnP.Core.QueryModel;
 using PnP.Core.Test.Utilities;
 using System;
 using System.IO;
@@ -115,7 +114,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -143,7 +142,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -173,7 +172,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -203,7 +202,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -232,7 +231,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -261,7 +260,7 @@ namespace PnP.Core.Test.SharePoint
 
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1001,7 +1000,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1031,7 +1030,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1063,7 +1062,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1095,7 +1094,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1126,7 +1125,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);
@@ -1157,7 +1156,7 @@ namespace PnP.Core.Test.SharePoint
                 // The mock file has been restored
                 string sharedDocumentsFolderUrl = $"{context.Uri.PathAndQuery}/Shared Documents";
                 IFolder sharedDocumentsFolder = await context.Web.GetFolderByServerRelativeUrlAsync(sharedDocumentsFolderUrl);
-                IFile documentToFind = await sharedDocumentsFolder.Files.FirstOrDefaultAsync(f => f.Name == fileName);
+                IFile documentToFind = await sharedDocumentsFolder.Files.GetFirstOrDefaultAsync(f => f.Name == fileName);
 
                 Assert.IsNotNull(documentToFind);
                 Assert.AreEqual(fileName, documentToFind.Name);

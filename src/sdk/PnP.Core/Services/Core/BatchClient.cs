@@ -267,7 +267,7 @@ namespace PnP.Core.Services
                     {
                         // implement logic to split batch in a rest batch and a graph batch
                         (Batch spoRestBatch, Batch graphBatch, Batch csomBatch) = SplitIntoBatchesPerApiType(batch);
-                        // execute the 2 batches
+                        // execute the 3 batches
                         await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
                         await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
                         await ExecuteCsomBatchAsync(csomBatch).ConfigureAwait(false);
@@ -1311,8 +1311,9 @@ namespace PnP.Core.Services
                         if (PnPContext.Mode != TestMode.Mock)
                         {
 #endif
-                            // Ensure the request contains authentication information
-                            await PnPContext.AuthenticationProvider.AuthenticateRequestAsync(csomBatch.Site, request).ConfigureAwait(false);
+                            // Process the authentication headers using the currently
+                            // configured instance of IAuthenticationProvider
+                            await ProcessSharePointRestAuthentication(csomBatch.Site, request).ConfigureAwait(false);
 
                             // Send the request
                             HttpResponseMessage response = await PnPContext.RestClient.Client.SendAsync(request).ConfigureAwait(false);
