@@ -339,6 +339,45 @@ namespace PnP.Core.Test.Base
                 Assert.IsFalse(web.ContentTypes.First().IsPropertyAvailable(p => p.SchemaXml));
             }
         }
+
+        [TestMethod]
+        public async Task GetCollectionPropertyWithFilterViaRest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                context.GraphFirst = false;
+
+                // Works
+                //var foundLists = await context.Web.Lists.GetWithFilterAsync(p => p.TemplateType == ListTemplateType.GenericList,
+                //                                           p => p.Title, p => p.TemplateType,
+                //                                           p => p.ContentTypes.LoadProperties(
+                //                                               p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+
+                // Works
+                //await context.Web.Lists.GetWithFilterBatchAsync(p => p.TemplateType == ListTemplateType.GenericList,
+                //                                           p => p.Title, p => p.TemplateType,
+                //                                           p => p.ContentTypes.LoadProperties(
+                //                                               p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+                //await context.ExecuteAsync();
+
+                // Works
+                //var foundLists = await context.Web.Lists.GetWithFilterAsync(p => p.TemplateType == ListTemplateType.GenericList);
+
+                // Works
+                //var foundLists = await context.Web.Lists.GetWithFilterAsync(null, p => p.Title, p => p.TemplateType,
+                //                                                                   p => p.ContentTypes.LoadProperties(
+                //                                                                       p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+
+                //var foundLists = await context.Web.Lists.GetWithFilterAsync(null);
+
+
+                await context.Web.Lists.GetFirstOrDefaultBatchAsync(p => p.Title == "Site Assets");
+
+                await context.ExecuteAsync();
+
+            }
+        }
         #endregion
 
         #region Tests that use Graph to hit SharePoint

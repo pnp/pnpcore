@@ -619,6 +619,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The model in the queried collection does not implement the IQueryableDataModel interface.
+        /// </summary>
+        internal static string Exception_Unsupported_CollectionModelIsNotQueryable {
+            get {
+                return ResourceManager.GetString("Exception_Unsupported_CollectionModelIsNotQueryable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Criteria {0} is not supported.
         /// </summary>
         internal static string Exception_Unsupported_Criteria {

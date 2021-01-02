@@ -303,6 +303,9 @@
   <data name="Exception_Unsupported_AddingContentTypeToList" xml:space="preserve">
     <value>Adding new content types on a list is not possible, use the AddAvailableContentType method to add an existing site content type</value>
   </data>
+  <data name="Exception_Unsupported_CollectionModelIsNotQueryable" xml:space="preserve">
+    <value>The model in the queried collection does not implement the IQueryableDataModel interface</value>
+  </data>
   <data name="Exception_Unsupported_Criteria" xml:space="preserve">
     <value>Criteria {0} is not supported</value>
   </data>
