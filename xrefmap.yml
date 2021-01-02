@@ -2102,6 +2102,240 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel)
   nameWithType: IDataModelCollection<TModel>
   nameWithType.vb: IDataModelCollection(Of TModel)
+- uid: PnP.Core.Model.IDataModelCollection`1.Get(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: Get(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_Get_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.Get(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: Get(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.Get(Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).Get(Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.Get(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).Get(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.Get(Expression{Func{`0,System.Object}}[])
+  name: Get(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_Get_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.Get(Expression{Func{`0,System.Object}}[])
+  name.vb: Get(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.Get(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).Get(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.Get(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).Get(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.Get*
+  name: Get
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_Get_
+  commentId: Overload:PnP.Core.Model.IDataModelCollection`1.Get
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.Get
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).Get
+  nameWithType: IDataModelCollection<TModel>.Get
+  nameWithType.vb: IDataModelCollection(Of TModel).Get
+- uid: PnP.Core.Model.IDataModelCollection`1.GetAsync(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetAsync(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetAsync_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetAsync(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetAsync(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetAsync(Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetAsync(Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetAsync(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetAsync(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetAsync(Expression{Func{`0,System.Object}}[])
+  name: GetAsync(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetAsync_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetAsync(Expression{Func{`0,System.Object}}[])
+  name.vb: GetAsync(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetAsync(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetAsync(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetAsync(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetAsync(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetAsync*
+  name: GetAsync
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollection`1.GetAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetAsync
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetAsync
+  nameWithType: IDataModelCollection<TModel>.GetAsync
+  nameWithType.vb: IDataModelCollection(Of TModel).GetAsync
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatch(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetBatch(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatch_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetBatch(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatch(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatch(Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatch(Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetBatch(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatch(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatch(Expression{Func{`0,System.Object}}[])
+  name: GetBatch(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatch_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetBatch(Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatch(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatch(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatch(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetBatch(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatch(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetBatch(Batch, Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatch_PnP_Core_Services_Batch_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatch(Batch, Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatch(PnP.Core.Services.Batch, Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatch(PnP.Core.Services.Batch, Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetBatch(Batch, Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatch(Batch, Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
+  name: GetBatch(Batch, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatch_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatch(Batch, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatch(PnP.Core.Services.Batch, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatch(PnP.Core.Services.Batch, Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetBatch(Batch, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatch(Batch, Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatch*
+  name: GetBatch
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatch_
+  commentId: Overload:PnP.Core.Model.IDataModelCollection`1.GetBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatch
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatch
+  nameWithType: IDataModelCollection<TModel>.GetBatch
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatch
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatchAsync(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetBatchAsync(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatchAsync_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetBatchAsync(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatchAsync(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatchAsync(Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatchAsync(Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetBatchAsync(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatchAsync(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatchAsync(Expression{Func{`0,System.Object}}[])
+  name: GetBatchAsync(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatchAsync_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetBatchAsync(Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatchAsync(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatchAsync(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatchAsync(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetBatchAsync(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatchAsync(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatchAsync(PnP.Core.Services.Batch,Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetBatchAsync(Batch, Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatchAsync_PnP_Core_Services_Batch_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetBatchAsync(PnP.Core.Services.Batch,Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatchAsync(Batch, Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatchAsync(PnP.Core.Services.Batch, Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatchAsync(PnP.Core.Services.Batch, Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetBatchAsync(Batch, Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatchAsync(Batch, Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatchAsync(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
+  name: GetBatchAsync(Batch, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatchAsync_PnP_Core_Services_Batch_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetBatchAsync(PnP.Core.Services.Batch,Expression{Func{`0,System.Object}}[])
+  name.vb: GetBatchAsync(Batch, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatchAsync(PnP.Core.Services.Batch, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatchAsync(PnP.Core.Services.Batch, Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetBatchAsync(Batch, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatchAsync(Batch, Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetBatchAsync*
+  name: GetBatchAsync
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollection`1.GetBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetBatchAsync
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetBatchAsync
+  nameWithType: IDataModelCollection<TModel>.GetBatchAsync
+  nameWithType.vb: IDataModelCollection(Of TModel).GetBatchAsync
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefault(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetFirstOrDefault(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefault_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefault(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetFirstOrDefault(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefault(Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefault(Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefault(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefault(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefault*
+  name: GetFirstOrDefault
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefault_
+  commentId: Overload:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefault
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefault
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefault
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefault
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefault
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultAsync(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetFirstOrDefaultAsync(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultAsync_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultAsync(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetFirstOrDefaultAsync(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefaultAsync(Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefaultAsync(Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefaultAsync(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefaultAsync(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultAsync*
+  name: GetFirstOrDefaultAsync
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefaultAsync
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefaultAsync
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefaultAsync
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefaultAsync
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatch(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetFirstOrDefaultBatch(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultBatch_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatch(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetFirstOrDefaultBatch(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefaultBatch(Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefaultBatch(Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefaultBatch(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefaultBatch(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetFirstOrDefaultBatch(Batch, Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultBatch_PnP_Core_Services_Batch_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatch(PnP.Core.Services.Batch,Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetFirstOrDefaultBatch(Batch, Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefaultBatch(PnP.Core.Services.Batch, Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefaultBatch(PnP.Core.Services.Batch, Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefaultBatch(Batch, Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefaultBatch(Batch, Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatch*
+  name: GetFirstOrDefaultBatch
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultBatch_
+  commentId: Overload:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefaultBatch
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefaultBatch
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefaultBatch
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefaultBatch
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatchAsync(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetFirstOrDefaultBatchAsync(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultBatchAsync_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatchAsync(Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetFirstOrDefaultBatchAsync(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefaultBatchAsync(Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefaultBatchAsync(Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefaultBatchAsync(Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefaultBatchAsync(Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatchAsync(PnP.Core.Services.Batch,Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name: GetFirstOrDefaultBatchAsync(Batch, Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultBatchAsync_PnP_Core_Services_Batch_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatchAsync(PnP.Core.Services.Batch,Expression{Func{`0,System.Boolean}},Expression{Func{`0,System.Object}}[])
+  name.vb: GetFirstOrDefaultBatchAsync(Batch, Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefaultBatchAsync(PnP.Core.Services.Batch, Expression<Func<TModel, System.Boolean>>, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefaultBatchAsync(PnP.Core.Services.Batch, Expression(Of Func(Of TModel, System.Boolean)), Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefaultBatchAsync(Batch, Expression<Func<TModel, Boolean>>, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefaultBatchAsync(Batch, Expression(Of Func(Of TModel, Boolean)), Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatchAsync*
+  name: GetFirstOrDefaultBatchAsync
+  href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollection`1.GetFirstOrDefaultBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollection<TModel>.GetFirstOrDefaultBatchAsync
+  fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).GetFirstOrDefaultBatchAsync
+  nameWithType: IDataModelCollection<TModel>.GetFirstOrDefaultBatchAsync
+  nameWithType.vb: IDataModelCollection(Of TModel).GetFirstOrDefaultBatchAsync
 - uid: PnP.Core.Model.IDataModelCollection`1.LoadProperties(Expression{Func{`0,System.Object}}[])
   name: LoadProperties(Expression<Func<TModel, Object>>[])
   href: api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_LoadProperties_Expression_Func__0_System_Object_____
@@ -25847,56 +26081,6 @@ references:
   fullName.vb: PnP.Core.QueryModel.QueryableExtensions.AsAsyncEnumerable(Of TSource)(IQueryable(Of TSource))
   nameWithType: QueryableExtensions.AsAsyncEnumerable<TSource>(IQueryable<TSource>)
   nameWithType.vb: QueryableExtensions.AsAsyncEnumerable(Of TSource)(IQueryable(Of TSource))
-- uid: PnP.Core.QueryModel.QueryableExtensions.FirstAsync*
-  name: FirstAsync
-  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstAsync_
-  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.FirstAsync
-  isSpec: "True"
-  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstAsync
-  nameWithType: QueryableExtensions.FirstAsync
-- uid: PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(IQueryable{``0},CancellationToken)
-  name: FirstAsync<TSource>(IQueryable<TSource>, CancellationToken)
-  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_IQueryable___0__CancellationToken_
-  commentId: M:PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(IQueryable{``0},CancellationToken)
-  name.vb: FirstAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
-  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstAsync<TSource>(IQueryable<TSource>, CancellationToken)
-  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.FirstAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
-  nameWithType: QueryableExtensions.FirstAsync<TSource>(IQueryable<TSource>, CancellationToken)
-  nameWithType.vb: QueryableExtensions.FirstAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
-- uid: PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(IQueryable{``0},Expression{Func{``0,System.Boolean}},CancellationToken)
-  name: FirstAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, CancellationToken)
-  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstAsync__1_IQueryable___0__Expression_Func___0_System_Boolean___CancellationToken_
-  commentId: M:PnP.Core.QueryModel.QueryableExtensions.FirstAsync``1(IQueryable{``0},Expression{Func{``0,System.Boolean}},CancellationToken)
-  name.vb: FirstAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), CancellationToken)
-  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, System.Boolean>>, CancellationToken)
-  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.FirstAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, System.Boolean)), CancellationToken)
-  nameWithType: QueryableExtensions.FirstAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, CancellationToken)
-  nameWithType.vb: QueryableExtensions.FirstAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), CancellationToken)
-- uid: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync*
-  name: FirstOrDefaultAsync
-  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync_
-  commentId: Overload:PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync
-  isSpec: "True"
-  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync
-  nameWithType: QueryableExtensions.FirstOrDefaultAsync
-- uid: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(IQueryable{``0},CancellationToken)
-  name: FirstOrDefaultAsync<TSource>(IQueryable<TSource>, CancellationToken)
-  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_IQueryable___0__CancellationToken_
-  commentId: M:PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(IQueryable{``0},CancellationToken)
-  name.vb: FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
-  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync<TSource>(IQueryable<TSource>, CancellationToken)
-  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
-  nameWithType: QueryableExtensions.FirstOrDefaultAsync<TSource>(IQueryable<TSource>, CancellationToken)
-  nameWithType.vb: QueryableExtensions.FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), CancellationToken)
-- uid: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(IQueryable{``0},Expression{Func{``0,System.Boolean}},CancellationToken)
-  name: FirstOrDefaultAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, CancellationToken)
-  href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_FirstOrDefaultAsync__1_IQueryable___0__Expression_Func___0_System_Boolean___CancellationToken_
-  commentId: M:PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync``1(IQueryable{``0},Expression{Func{``0,System.Boolean}},CancellationToken)
-  name.vb: FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), CancellationToken)
-  fullName: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, System.Boolean>>, CancellationToken)
-  fullName.vb: PnP.Core.QueryModel.QueryableExtensions.FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, System.Boolean)), CancellationToken)
-  nameWithType: QueryableExtensions.FirstOrDefaultAsync<TSource>(IQueryable<TSource>, Expression<Func<TSource, Boolean>>, CancellationToken)
-  nameWithType.vb: QueryableExtensions.FirstOrDefaultAsync(Of TSource)(IQueryable(Of TSource), Expression(Of Func(Of TSource, Boolean)), CancellationToken)
 - uid: PnP.Core.QueryModel.QueryableExtensions.ForEachAsync*
   name: ForEachAsync
   href: api/PnP.Core.QueryModel.QueryableExtensions.html#PnP_Core_QueryModel_QueryableExtensions_ForEachAsync_
