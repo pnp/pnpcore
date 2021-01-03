@@ -252,7 +252,6 @@ namespace PnP.Core.Test.Teams
             }
         }
 
-        //TODO Exception tests...
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void AddChatMessageExceptionTest()
@@ -278,5 +277,32 @@ namespace PnP.Core.Test.Teams
                 
             }
         }
+
+        //TODO: There is no option to add reactions within a chat message in the SDK therefore cannot automate the testing for this at this time.
+        //[TestMethod]
+        //public void AddChatMessageReactionTest()
+        //{
+        //    //TestCommon.Instance.Mocking = false;
+        //    using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+        //    {
+        //        var team = context.Team.Get(o => o.Channels);
+        //        Assert.IsTrue(team.Channels.Length > 0);
+
+        //        var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+        //        Assert.IsNotNull(channel);
+
+        //        channel = channel.Get(o => o.Messages);
+        //        var chatMessages = channel.Messages;
+
+        //        Assert.IsNotNull(chatMessages);
+
+        //        // assume as if there are no chat messages
+        //        // There appears to be no remove option yet in this feature - so add a recognisable message
+        //        var body = $"Hello, this is a unit test (AddChatMessageReactionTest) posting a message - PnP Rocks! - Woah...";
+        //        var result = chatMessages.Add(body);
+
+                
+        //    }
+        //}
     }
 }
