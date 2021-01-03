@@ -83,11 +83,9 @@ namespace PnP.Core.Test.Teams
 
                 Assert.IsNotNull(chatMessages);
 
-                var dateTimeSuffix = DateTime.Now.ToString();
-
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
-                var body = $"Hello, this is a unit test (AddChatMessageTest) posting a message - PnP Rocks! {dateTimeSuffix} - Woah...";
+                var body = $"Hello, this is a unit test (AddChatMessageTest) posting a message - PnP Rocks! - Woah...";
                 if (!chatMessages.Any(o => o.Body.Content == body))
                 {
                     chatMessages.Add(body);
@@ -134,12 +132,10 @@ namespace PnP.Core.Test.Teams
                 var chatMessages = channel.Messages;
 
                 Assert.IsNotNull(chatMessages);
-
-                var dateTimeSuffix = DateTime.Now.ToString();
-
+                                
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
-                var body = $"Hello, this is a unit test (AddChatMessageBatchTest) posting a message - PnP Rocks! {dateTimeSuffix} - Woah...";
+                var body = $"Hello, this is a unit test (AddChatMessageBatchTest) posting a message - PnP Rocks! - Woah...";
                 if (!chatMessages.Any(o => o.Body.Content == body))
                 {
                     chatMessages.AddBatch(body);
@@ -150,7 +146,9 @@ namespace PnP.Core.Test.Teams
                 context.Execute();
                 var updateMessages = channel.Messages;
 
-                var message = updateMessages.First(o => o.Body.Content == body);
+                var message = updateMessages.FirstOrDefault(o => o.Body.Content == body);
+
+                Assert.IsFalse(message == default);
                 Assert.IsNotNull(message.CreatedDateTime);
                 Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
                 Assert.IsNotNull(message.Etag);
@@ -190,11 +188,9 @@ namespace PnP.Core.Test.Teams
 
                 Assert.IsNotNull(chatMessages);
 
-                var dateTimeSuffix = DateTime.Now.ToString();
-
                 // assume as if there are no chat messages
                 // There appears to be no remove option yet in this feature - so add a recognisable message
-                var body = $"Hello, this is a unit test (AddChatMessageSpecificBatchTest) posting a message - PnP Rocks! {dateTimeSuffix} - Woah...";
+                var body = $"Hello, this is a unit test (AddChatMessageSpecificBatchTest) posting a message - PnP Rocks! - Woah...";
                 if (!chatMessages.Any(o => o.Body.Content == body))
                 {
                     chatMessages.AddBatch(batch, body);
@@ -225,5 +221,7 @@ namespace PnP.Core.Test.Teams
 
             }
         }
+
+        //TODO Exception tests...
     }
 }
