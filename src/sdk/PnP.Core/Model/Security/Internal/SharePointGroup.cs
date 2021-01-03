@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {
-    [SharePointType("SP.Group", Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/SiteGroups")]
+    [SharePointType("SP.Group", Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/SiteGroups", Delete ="_api/Web/SiteGroups/RemoveById({Id})")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class SharePointGroup : BaseDataModel<ISharePointGroup>, ISharePointGroup
     {
