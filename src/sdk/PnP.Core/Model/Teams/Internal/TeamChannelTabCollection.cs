@@ -100,6 +100,11 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(name));
             }
 
+            if(documentLibraryUri == null)
+            {
+                throw new ArgumentNullException(nameof(documentLibraryUri));
+            }
+
             (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelDocumentLibraryTab(name, documentLibraryUri);
 
             return await newTab.AddAsync(keyValuePairs).ConfigureAwait(false) as TeamChannelTab;
@@ -128,6 +133,11 @@ namespace PnP.Core.Model.Teams
             if (string.IsNullOrEmpty(name))
             {
                 throw new ArgumentNullException(nameof(name));
+            }
+
+            if (documentLibraryUri == null)
+            {
+                throw new ArgumentNullException(nameof(documentLibraryUri));
             }
 
             (TeamChannelTab newTab, Dictionary<string, object> keyValuePairs) = CreateTeamChannelDocumentLibraryTab(name, documentLibraryUri);

@@ -5,12 +5,12 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.Teams
 {
-    [GraphType(Uri = V, LinqGet = baseUri)]
+    [GraphType(Uri = channelUri, LinqGet = baseUri)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TeamChannel : BaseDataModel<ITeamChannel>, ITeamChannel
     {
         private const string baseUri = "teams/{Parent.GraphId}/channels";
-        private const string V = baseUri + "/{GraphId}";
+        private const string channelUri = baseUri + "/{GraphId}";
 
         #region Construction
         public TeamChannel()
