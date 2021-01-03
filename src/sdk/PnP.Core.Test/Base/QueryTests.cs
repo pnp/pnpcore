@@ -28,7 +28,7 @@ namespace PnP.Core.Test.Base
 
         private Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> BuildModel<TModel, TModelInterface>(Expression<Func<TModelInterface, object>>[] expression = null, bool graphFirst = true) where TModel : new()
         {
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite).GetAwaiter().GetResult())
             {
                 context.GraphFirst = graphFirst;
 
@@ -74,8 +74,13 @@ namespace PnP.Core.Test.Base
             return requests;
         }
 
-        private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input, ODataQuery<TModelInterface> query)
+        private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input, ODataQuery<TModelInterface> query, bool? graphFirst = null)
         {
+            if (graphFirst != null && graphFirst.HasValue)
+            {
+                (input.Item1 as IDataModelWithContext).PnPContext.GraphFirst = graphFirst.Value;
+            }
+
             // Instantiate the relevant collection class
             var assembly = Assembly.GetAssembly(typeof(IWeb));
             var collectionType = assembly.GetType(typeof(TModel).FullName + "Collection");
