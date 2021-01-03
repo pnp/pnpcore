@@ -222,6 +222,61 @@ namespace PnP.Core.Test.Teams
             }
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddChatMessageBatchExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var batch = context.NewBatch();
+                var team = context.Team.GetBatch(batch, o => o.Channels);
+                context.Execute(batch);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.GetBatch(batch, o => o.Messages);
+                context.Execute(batch);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = string.Empty;
+                chatMessages.AddBatch(batch, body);
+                context.Execute(batch);
+                
+            }
+        }
+
         //TODO Exception tests...
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddChatMessageExceptionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+                Assert.IsTrue(team.Channels.Length > 0);
+
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+                Assert.IsNotNull(channel);
+
+                channel = channel.Get(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = string.Empty;
+                chatMessages.Add(body);
+                
+            }
+        }
     }
 }
