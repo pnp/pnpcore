@@ -28,7 +28,7 @@ namespace PnP.Core.Test.Base
 
         private Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> BuildModel<TModel, TModelInterface>(Expression<Func<TModelInterface, object>>[] expression = null, bool graphFirst = true) where TModel : new()
         {
-            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            using (var context = TestCommon.Instance.GetContextWithoutInitializationAsync(TestCommon.TestSite).GetAwaiter().GetResult())
             {
                 context.GraphFirst = graphFirst;
 
@@ -74,8 +74,13 @@ namespace PnP.Core.Test.Base
             return requests;
         }
 
-        private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input, ODataQuery<TModelInterface> query)
+        private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input, ODataQuery<TModelInterface> query, bool? graphFirst = null)
         {
+            if (graphFirst != null && graphFirst.HasValue)
+            {
+                (input.Item1 as IDataModelWithContext).PnPContext.GraphFirst = graphFirst.Value;
+            }
+
             // Instantiate the relevant collection class
             var assembly = Assembly.GetAssembly(typeof(IWeb));
             var collectionType = assembly.GetType(typeof(TModel).FullName + "Collection");
@@ -410,11 +415,12 @@ namespace PnP.Core.Test.Base
         #region Linq query tests
 
         [TestMethod]
-        public async Task GetLinqListGraph()
+        public async Task GetLinqListRest()
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
             var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(), new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list&$top=10&$skip=5", true);
+            // Using default load without specifying fields or filter will use REST
+            Assert.AreEqual(requests[0], "_api/web/lists?$top=10&$skip=5", true);
         }
 
         [TestMethod]

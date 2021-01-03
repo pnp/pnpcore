@@ -1,9 +1,9 @@
---batchresponse_5337c61f-7569-484e-8703-2cc3ba5b92e4
+--batchresponse_ccb610ad-6a28-499c-b9c0-7ac3fa2528fd
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST')","type":"SP.Folder"},"Files":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST')/Files"}},"ListItemAllFields":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST')/ListItemAllFields"}},"ParentFolder":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST')/ParentFolder"}},"Properties":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST')/Properties"}},"StorageMetrics":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST')/StorageMetrics"}},"Folders":{"__deferred":{"uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST')/Folders"}},"Exists":true,"IsWOPIEnabled":false,"ItemCount":0,"Name":"TEST","ProgID":null,"ServerRelativeUrl":"/sites/prov-1/Shared Documents/TEST","TimeCreated":"2021-01-02T17:02:37Z","TimeLastModified":"2021-01-02T17:02:37Z","UniqueId":"f3322f5a-5be7-4a8b-8193-071590f8208c","WelcomePage":""}}
---batchresponse_5337c61f-7569-484e-8703-2cc3ba5b92e4--
+
+--batchresponse_ccb610ad-6a28-499c-b9c0-7ac3fa2528fd--

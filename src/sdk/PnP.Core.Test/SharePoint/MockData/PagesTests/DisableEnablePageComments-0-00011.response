@@ -1,4 +1,4 @@
---batchresponse_b0591e03-2b21-4c22-b765-e165d46d0a46
+--batchresponse_f0b03572-a942-4846-ae03-970130038091
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"CommentsDisabled":true}}
---batchresponse_b0591e03-2b21-4c22-b765-e165d46d0a46--
+--batchresponse_f0b03572-a942-4846-ae03-970130038091--

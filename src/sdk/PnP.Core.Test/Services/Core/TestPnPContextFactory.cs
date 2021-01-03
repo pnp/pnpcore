@@ -12,7 +12,7 @@ namespace PnP.Core.Test.Services
     /// <summary>
     /// Test context factory, delivering PnPContext objects that can be used in testing (with Mocking/Recording enabled)
     /// </summary>
-    public class TestPnPContextFactory : PnPContextFactory
+    public class TestPnPContextFactory : PnPContextFactory, IPnPTestContextFactory
     {
         /// <summary>
         /// Generate a context configured for mocking mode or recording mode
@@ -74,6 +74,35 @@ namespace PnP.Core.Test.Services
             }
 
             return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider).ConfigureAwait(false);
+        }
+
+        public async Task<PnPContext> CreateWithoutInitializationAsync(string name)
+        {
+            // Search for the provided configuration
+            var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
+            if (configuration == null)
+            {
+                throw new ClientException(ErrorType.ConfigurationError,
+                    string.Format(PnPCoreResources.Exception_ConfigurationError_InvalidPnPContextConfigurationName, name));
+            }
+
+            // Use the provided settings to create a new instance of SPOContext
+            var context = new PnPContext(Log, configuration.AuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager)
+            {
+                Uri = configuration.SiteUrl
+            };
+
+            ConfigurePnPContextForTesting(ref context);
+
+            // Configure the global Microsoft Graph settings
+            context.GraphFirst = ContextOptions.GraphFirst;
+            context.GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
+            context.GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
+
+            await ConfigureTelemetry(context).ConfigureAwait(false);
+
+            return context;
+
         }
 
         public override PnPContext Create(Uri url, IAuthenticationProvider authenticationProvider)
@@ -161,5 +190,6 @@ namespace PnP.Core.Test.Services
                 context.SetRecordingMode(Id, TestName, SourceFilePath, GenerateTestMockingDebugFiles, TestUris);
             }
         }
+
     }
 }

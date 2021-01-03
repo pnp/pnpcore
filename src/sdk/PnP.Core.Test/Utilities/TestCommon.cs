@@ -17,7 +17,7 @@ namespace PnP.Core.Test.Utilities
     {
         private const string AsyncSuffix = "_Async";
         private static readonly Lazy<TestCommon> _lazyInstance = new Lazy<TestCommon>(() => new TestCommon(), true);
-        private IPnPContextFactory pnpContextFactoryCache;
+        private IPnPTestContextFactory pnpContextFactoryCache;
         private static readonly SemaphoreSlim semaphoreSlimFactory = new SemaphoreSlim(1);
 
         /// <summary>
@@ -107,6 +107,30 @@ namespace PnP.Core.Test.Utilities
             return await factory.CreateAsync(configurationName).ConfigureAwait(false);
         }
 
+        public async Task<PnPContext> GetContextWithoutInitializationAsync(string configurationName, int id = 0,
+            [System.Runtime.CompilerServices.CallerMemberName] string testName = null,
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = null)
+        {
+            // Obtain factory (cached)
+            var factory = BuildContextFactory();
+
+            // Remove Async suffix
+            if (testName.EndsWith(AsyncSuffix))
+            {
+                testName = testName.Substring(0, testName.Length - AsyncSuffix.Length);
+            }
+
+            // Configure the factory for our testing mode
+            var testPnPContextFactory = factory as TestPnPContextFactory;
+            testPnPContextFactory.Mocking = Mocking;
+            testPnPContextFactory.Id = id;
+            testPnPContextFactory.TestName = testName;
+            testPnPContextFactory.SourceFilePath = sourceFilePath;
+            testPnPContextFactory.GenerateTestMockingDebugFiles = GenerateMockingDebugFiles;
+            testPnPContextFactory.TestUris = TestUris;
+
+            return await factory.CreateWithoutInitializationAsync(configurationName).ConfigureAwait(false);
+        }
 
 
         public PnPContext GetContext(Guid groupId, int id = 0,
@@ -173,7 +197,7 @@ namespace PnP.Core.Test.Utilities
             return configuration;
         }
 
-        public IPnPContextFactory BuildContextFactory()
+        public IPnPTestContextFactory BuildContextFactory()
         {
             try
             {
@@ -223,7 +247,7 @@ namespace PnP.Core.Test.Utilities
                     { NoGroupTestSite, new Uri(noGroupSiteUrl) }
                 };
 
-                var pnpContextFactory = serviceProvider.GetRequiredService<IPnPContextFactory>();
+                var pnpContextFactory = serviceProvider.GetRequiredService<IPnPTestContextFactory>();
 
                 if (pnpContextFactoryCache == null)
                 {

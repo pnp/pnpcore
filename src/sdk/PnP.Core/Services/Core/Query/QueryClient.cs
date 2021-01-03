@@ -704,6 +704,7 @@ namespace PnP.Core.Services
             // Only do this when there was no field filtering, without filtering all default fields are anyhow returned
             if (query.Select.Any() || query.Expand.Any())
             {
+
                 // Add keyfield if not yet present
                 if (query.Select.FindIndex(x => x.Equals(entityInfo.ActualKeyFieldName, StringComparison.InvariantCultureIgnoreCase)) == -1)
                 {
@@ -737,6 +738,20 @@ namespace PnP.Core.Services
                     }
                 }
             }
+            else
+            {
+                // The collection Getxxx methods end up here as they use the entity model for field selection
+                canUseGraph = entityInfo.CanUseGraphGet;
+
+                // fall back to REST if we have an expand with a separate get...only works if we support REST
+                if (canUseGraph)
+                {
+                    if (entityInfo.Fields.Any(p => p.Load && !string.IsNullOrEmpty(p.GraphGet)))
+                    {
+                        canUseGraph = false;
+                    }
+                }
+            }
 
             if (canUseGraph)
             {
@@ -745,6 +760,12 @@ namespace PnP.Core.Services
                     canUseGraph = false;
                     break;
                 }
+            }
+
+            // If entity cannot be surfaced with SharePoint Rest then force graph
+            if (string.IsNullOrEmpty(entityInfo.SharePointType))
+            {
+                canUseGraph = true;
             }
 
             // Using LoadProperties in combination with a Graph query is not supported
@@ -1062,63 +1083,7 @@ namespace PnP.Core.Services
                         var dictionaryObject = (TransientDictionary)cp.GetValue(model);
                         foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
                         {
-                            //if (changedProp.Value is FieldValue)
-                            //{
-                            //    if (changedProp.Value is FieldLookupValue)
-                            //    {
-                            //        ((ExpandoObject)updateMessage).SetProperty($"{changedProp.Key}Id", (changedProp.Value as FieldLookupValue).LookupId);
-                            //    }
-                            //    else
-                            //    {
-                            //        ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, (changedProp.Value as FieldValue).ToJson());
-                            //    }
-                            //}
-                            //else if (changedProp.Value is FieldValueCollection)
-                            //{
-                            //    var collection = changedProp.Value as FieldValueCollection;
-
-                            //    string typeAsString = collection.TypeAsString;
-                            //    if (string.IsNullOrEmpty(typeAsString))
-                            //    {
-                            //        var firstElement = collection.Values.FirstOrDefault();
-                            //        if (firstElement is FieldLookupValue)
-                            //        {
-                            //            typeAsString = "LookupMulti";
-                            //        }
-                            //        else if (firstElement is FieldTaxonomyValue)
-                            //        {
-                            //            typeAsString = "TaxonomyFieldTypeMulti";
-                            //        }
-                            //    }
-
-                            //    if (typeAsString == "LookupMulti" || typeAsString == "Lookup" || typeAsString == "UserMulti")
-                            //    {                                    
-                            //        ((ExpandoObject)updateMessage).SetProperty($"{changedProp.Key}Id", collection.LookupMultiToJson());
-                            //    }
-                            //    else
-                            //    {
-                            //        // We update the hidden note field that's connected to the taxonomy multi value field
-                            //        // See https://www.aerieconsulting.com/blog/update-using-rest-to-update-a-multi-value-taxonomy-field-in-sharepoint
-                            //        var taxonomyMultiValueUpdateContent = collection.TaxonomyFieldTypeMultiUpdateString();
-                            //        var taxonomyMultiValueFieldToUpdate = collection.TaxonomyFieldTypeMultiFieldToUpdate();
-                            //        ((ExpandoObject)updateMessage).SetProperty($"{taxonomyMultiValueFieldToUpdate.InternalName}", taxonomyMultiValueUpdateContent);
-                            //    }
-                            //}
-                            //else if (changedProp.Value is List<string>)
-                            //{
-                            //    // multi value choice field
-                            //    ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, FieldValueCollection.StringArrayToJson(changedProp.Value as List<string>));
-                            //}
-                            //else if (changedProp.Value is List<int>)
-                            //{
-                            //    // multi value choice field
-                            //    ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, FieldValueCollection.IntArrayToJson(changedProp.Value as List<int>));
-                            //}
-                            //else
-                            //{
-                                // Let's set its value into the update message
-                                ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
-                            //}
+                            ((ExpandoObject)updateMessage).SetProperty(changedProp.Key, changedProp.Value);
                         }
                     }
                     else if (JsonMappingHelper.IsTypeWithoutGet(changedField.PropertyInfo.PropertyType))

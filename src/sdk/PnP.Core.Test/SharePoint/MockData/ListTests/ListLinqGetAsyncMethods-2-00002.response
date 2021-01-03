@@ -1,9 +1,9 @@
---batchresponse_d05af288-9489-4c60-872c-522a6c55de38
+--batchresponse_6feb3212-cbf6-4c9c-b7ca-5a71c3796231
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'd9181a6e-c93c-48fe-a847-ac94bbd9050a')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'd9181a6e-c93c-48fe-a847-ac94bbd9050a')","etag":"\"1\"","type":"SP.List"},"BaseTemplate":100,"Id":"d9181a6e-c93c-48fe-a847-ac94bbd9050a","Title":"ListLinqGetAsyncMethods"}]}}
---batchresponse_d05af288-9489-4c60-872c-522a6c55de38--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7369c97c-91a7-4d7d-811f-6228d6009593')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7369c97c-91a7-4d7d-811f-6228d6009593')","etag":"\"1\"","type":"SP.List"},"BaseTemplate":100,"Id":"7369c97c-91a7-4d7d-811f-6228d6009593","Title":"ListLinqGetAsyncMethods"}]}}
+--batchresponse_6feb3212-cbf6-4c9c-b7ca-5a71c3796231--

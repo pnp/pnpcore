@@ -1,9 +1,9 @@
---batchresponse_8e250424-2f52-4afa-991b-8f08bab5e37e
+--batchresponse_cddc8fce-8449-4421-96e6-22e59450ae1d
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_STORAGE_METRICS')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_STORAGE_METRICS')","type":"SP.Folder"},"StorageMetrics":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_STORAGE_METRICS')/StorageMetrics","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_STORAGE_METRICS')/StorageMetrics","type":"SP.StorageMetrics"},"LastModified":"2021-01-02T17:02:58Z","TotalFileCount":"0","TotalFileStreamSize":"0","TotalSize":"152"},"UniqueId":"d6fdf269-2004-4001-aeec-8f9032e246e1"}}
---batchresponse_8e250424-2f52-4afa-991b-8f08bab5e37e--
+{"d":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_STORAGE_METRICS')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_STORAGE_METRICS')","type":"SP.Folder"},"StorageMetrics":{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared Documents/TEST_STORAGE_METRICS')/StorageMetrics","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/GetFolderByServerRelativePath(decodedurl='/sites/prov-1/Shared%20Documents/TEST_STORAGE_METRICS')/StorageMetrics","type":"SP.StorageMetrics"},"LastModified":"2021-01-03T00:55:53Z","TotalFileCount":"0","TotalFileStreamSize":"0","TotalSize":"152"},"UniqueId":"1170975c-1aff-482c-b1f5-75dd36ce8af2"}}
+--batchresponse_cddc8fce-8449-4421-96e6-22e59450ae1d--

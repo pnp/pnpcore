@@ -198,58 +198,6 @@ namespace PnP.Core.QueryModel
 
         #endregion
 
-        #region Internal base methods for model specific linq extension methods
-
-        internal static async Task<T> BaseLinqGetAsync<T>(
-                IQueryable<T> source,
-                Expression<Func<T, bool>> predicate,
-                params Expression<Func<T, object>>[] selectors)
-        {
-            if (!(source.Provider is IAsyncQueryProvider asyncQueryProvider))
-            {
-                throw new InvalidOperationException(PnPCoreResources.Exception_InvalidOperation_NotAsyncQueryableSource);
-            }
-
-            IQueryable<T> selectionTarget = PrepareExecution(source, selectors);
-
-            return await asyncQueryProvider.ExecuteAsync<Task<T>>(
-                Expression.Call(
-                    null,
-                    GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
-                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
-                    )).ConfigureAwait(false);
-        }
-
-        internal static T BaseLinqGet<T>(
-                IQueryable<T> source,
-                Expression<Func<T, bool>> predicate,
-                params Expression<Func<T, object>>[] selectors)
-        {
-
-            IQueryable<T> selectionTarget = PrepareExecution(source, selectors);
-
-            return source.Provider.Execute<T>(
-                Expression.Call(
-                    null,
-                    GetMethodInfo(Queryable.FirstOrDefault, selectionTarget, predicate),
-                    new Expression[] { selectionTarget.Expression, Expression.Quote(predicate) }
-                    ));
-        }
-
-        private static IQueryable<T> PrepareExecution<T>(IQueryable<T> source, Expression<Func<T, object>>[] selectors)
-        {
-            var model = EntityManager.GetEntityConcreteInstance<T>(typeof(T));
-            (model as IDataModelWithContext).PnPContext = (source as IDataModelWithContext).PnPContext;
-
-            var entityInfo = EntityManager.GetClassInfo(typeof(T), model as BaseDataModel<T>, selectors);
-
-            IQueryable<T> selectionTarget = QueryClient.ProcessExpression(source, entityInfo, selectors);
-
-            (source.Provider as DataModelQueryProvider<T>).EntityInfo = entityInfo;
-            return selectionTarget;
-        }
-        #endregion
-
         #region Internal base methods for model specific extension methods
         internal static async Task<T> BaseGetAsync<T>(
                     IQueryable<T> source,

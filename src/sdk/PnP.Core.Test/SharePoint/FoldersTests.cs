@@ -227,7 +227,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                //IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder folder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
 
                 Assert.IsNotNull(folder);
                 Assert.AreEqual("Shared Documents", folder.Name);
@@ -241,10 +242,11 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                //IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder mockFolder = await parentFolder.Folders.AddAsync("TEST");
 
-                List<IFolder> folders = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.ToListAsync();
+                List<IFolder> folders = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders.ToListAsync();
 
                 Assert.AreNotEqual(0, folders.Count);
 
@@ -263,7 +265,9 @@ namespace PnP.Core.Test.SharePoint
             {
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
-                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                //IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
+
                 IFolder foundFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == "TEST_QUERY");
 
                 Assert.IsNotNull(foundFolder);
@@ -281,11 +285,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
-
-                // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p=>p.RootFolder)).RootFolder;
                 IFolder newFolder = await parentFolder.Folders.AddAsync("TEST");
 
                 // Test the created object
@@ -301,11 +301,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
-
-                // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = parentFolder.Folders.Add("TEST");
 
                 // Test the created object
@@ -321,11 +317,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
-
-                // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = await parentFolder.Folders.AddBatchAsync("TEST");
                 await context.ExecuteAsync();
 
@@ -342,11 +334,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
-
-                // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = parentFolder.Folders.AddBatch("TEST");
                 await context.ExecuteAsync();
 
@@ -363,13 +351,10 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
-
                 var newBatch = context.NewBatch();
 
                 // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = await parentFolder.Folders.AddBatchAsync(newBatch, "TEST");
                 await context.ExecuteAsync(newBatch);
 
@@ -386,13 +371,10 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
-
                 var newBatch = context.NewBatch();
 
                 // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
 
                 await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
                 {
@@ -413,13 +395,10 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders.AddAsync("TEST");
-
                 var newBatch = context.NewBatch();
 
                 // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = parentFolder.Folders.AddBatch(newBatch, "TEST");
                 await context.ExecuteAsync(newBatch);
 
@@ -440,11 +419,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.AddSubFolderAsync("TEST");
-
                 // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = await parentFolder.AddFolderAsync("TEST");
 
                 // Test the created object
@@ -460,11 +436,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.AddSubFolderAsync("TEST");
-
                 // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = parentFolder.AddFolder("TEST");
 
                 // Test the created object
@@ -480,11 +453,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.AddSubFolderAsync("TEST");
-
                 // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = await parentFolder.AddFolderBatchAsync("TEST");
                 await context.ExecuteAsync();
 
@@ -501,11 +471,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.AddSubFolderAsync("TEST");
-
                 // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = parentFolder.AddFolderBatch("TEST");
                 await context.ExecuteAsync();
 
@@ -522,13 +489,10 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.AddSubFolderAsync("TEST");
-
                 var newBatch = context.NewBatch();
 
                 // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = await parentFolder.AddFolderBatchAsync(newBatch, "TEST");
                 await context.ExecuteAsync(newBatch);
 
@@ -545,13 +509,10 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // NOTE: To be truly fluent, this should work but UniqueId of RootFolder is not populated
-                //IFolder newFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.AddSubFolderAsync("TEST");
-
                 var newBatch = context.NewBatch();
 
                 // This works
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder newFolder = parentFolder.AddFolderBatch(newBatch, "TEST");
                 await context.ExecuteAsync(newBatch);
 
@@ -653,7 +614,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder folderToUpdate = await parentFolder.Folders.AddAsync("TEST");
 
                 // NOTE: WelcomePage is currently the only supported updatable property of Folder
@@ -673,7 +634,7 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                IFolder parentFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder parentFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder folderToDelete = await parentFolder.Folders.AddAsync("TO DELETE FOLDER");
 
                 // Test if the folder is created
@@ -682,7 +643,7 @@ namespace PnP.Core.Test.SharePoint
                 await folderToDelete.DeleteAsync();
 
                 // Test if the folder is still found
-                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents").RootFolder.Folders
+                IFolder folderToFind = await context.Web.Lists.GetByTitle("Documents", p => p.RootFolder).RootFolder.Folders
                                         .GetFirstOrDefaultAsync(ct => ct.Name == "TO DELETE FOLDER");
 
                 Assert.IsNull(folderToFind);
@@ -832,7 +793,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
-                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundCopiedFolder);
             }
@@ -864,7 +825,7 @@ namespace PnP.Core.Test.SharePoint
 
                 // NOTE: 
                 // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
-                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder foundCopiedFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundCopiedFolder);
             }
@@ -1033,9 +994,7 @@ namespace PnP.Core.Test.SharePoint
                     //ShouldBypassSharedLocks = false
                 });
 
-                // NOTE: 
-                // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
-                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundMovedFolder);
             }
@@ -1066,9 +1025,7 @@ namespace PnP.Core.Test.SharePoint
                 });
                 await context.ExecuteAsync();
 
-                // NOTE: 
-                // Currently linq query on folders (with the fluent syntax below) is working only if the RootFolder is previously loaded
-                IFolder sharedDocsRootFolder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder sharedDocsRootFolder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder foundMovedFolder = await sharedDocsRootFolder.Folders.GetFirstOrDefaultAsync(f => f.Name == folderToFindName);
                 Assert.IsNotNull(foundMovedFolder);
             }
@@ -1082,7 +1039,7 @@ namespace PnP.Core.Test.SharePoint
         {
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, contextId, testName))
             {
-                IFolder folder = await context.Web.Lists.GetByTitle("Documents").RootFolder.GetAsync();
+                IFolder folder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
                 IFolder subFolder = await folder.AddFolderAsync(folderName);
                 return subFolder.ServerRelativeUrl;
             }

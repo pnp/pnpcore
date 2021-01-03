@@ -236,12 +236,12 @@ namespace PnP.Core.Model.SharePoint
 
         public IRecycleBinItem GetById(Guid id, params Expression<Func<IRecycleBinItem, object>>[] selectors)
         {
-            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Id == id, selectors);
+            return GetByIdAsync(id, selectors).GetAwaiter().GetResult();
         }
 
         public async Task<IRecycleBinItem> GetByIdAsync(Guid id, params Expression<Func<IRecycleBinItem, object>>[] selectors)
         {
-            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id, selectors).ConfigureAwait(false);
+            return await GetFirstOrDefaultAsync(l => l.Id == id, selectors).ConfigureAwait(false);
         }
 
         #endregion

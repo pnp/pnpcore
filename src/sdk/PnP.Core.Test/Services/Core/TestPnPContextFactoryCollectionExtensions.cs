@@ -63,7 +63,7 @@ namespace PnP.Core.Test.Services
         private static IServiceCollection AddPnPServices(this IServiceCollection collection)
         {
             return collection
-                   .AddTransient<IPnPContextFactory, TestPnPContextFactory>();
+                   .AddTransient<IPnPTestContextFactory, TestPnPContextFactory>();
         }
     }
 }

@@ -1,4 +1,4 @@
---batchresponse_69e426b6-08f9-4b6a-a12b-6d35c55254b8
+--batchresponse_470e5544-9df9-488f-a0c2-5dd6091955aa
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"ValidateUpdateListItem":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Text1","FieldValue":"","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"MultilineText1","FieldValue":"","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Number1","FieldValue":"0","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Bool1","FieldValue":"0","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"DateTime1","FieldValue":null,"HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Currency1","FieldValue":"0","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"ChoiceSingle1","FieldValue":"","HasException":false,"ItemId":1},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"ChoiceMulti1","FieldValue":"","HasException":false,"ItemId":1}]}}}
---batchresponse_69e426b6-08f9-4b6a-a12b-6d35c55254b8--
+--batchresponse_470e5544-9df9-488f-a0c2-5dd6091955aa--
