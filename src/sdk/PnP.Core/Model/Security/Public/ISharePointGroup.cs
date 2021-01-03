@@ -124,16 +124,5 @@ namespace PnP.Core.Model.Security
         /// </summary>
         public Task RemoveUserBatchAsync(Batch batch, int userId);
 
-        // public void Delete();
-
-        // public Task DeleteAsync();
-
-        // public void DeleteBatch();
-
-        // public Task DeleteBatchAsync();
-
-        // public void DeleteBatch(Batch batch);
-
-        // public void DeleteBatchAsync(Batch batch);
     }
 }

@@ -144,16 +144,5 @@ namespace PnP.Core.Model.Security
             string endpointUrl = $"{entity.SharePointGet}/Users/GetById({userId})";
             return new ApiCall(endpointUrl, ApiType.SPORest);
         }
-
-        // public void Delete()
-        // {
-
-        // }
-
-        // public ApiCall GetRemoveGroupApiCall()
-        // {
-        //     EntityInfo entity = EntityManager.GetClassInfo(typeof(SharePointGroup),this);
-            
-        // }
     }
 }
