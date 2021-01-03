@@ -90,12 +90,12 @@ namespace PnP.Core.Model.SharePoint
 
         public IListItem GetById(int id)
         {
-            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Id == id);
+            return GetByIdAsync(id).GetAwaiter().GetResult();
         }
 
         public async Task<IListItem> GetByIdAsync(int id)
         {
-            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id).ConfigureAwait(false);
+            return await GetFirstOrDefaultAsync(l => l.Id == id).ConfigureAwait(false);
         }
 
         #endregion        

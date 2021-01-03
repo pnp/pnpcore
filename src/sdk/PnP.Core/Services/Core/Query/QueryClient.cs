@@ -704,6 +704,7 @@ namespace PnP.Core.Services
             // Only do this when there was no field filtering, without filtering all default fields are anyhow returned
             if (query.Select.Any() || query.Expand.Any())
             {
+
                 // Add keyfield if not yet present
                 if (query.Select.FindIndex(x => x.Equals(entityInfo.ActualKeyFieldName, StringComparison.InvariantCultureIgnoreCase)) == -1)
                 {
@@ -737,6 +738,20 @@ namespace PnP.Core.Services
                     }
                 }
             }
+            else
+            {
+                // The collection Getxxx methods end up here as they use the entity model for field selection
+                canUseGraph = entityInfo.CanUseGraphGet;
+
+                // fall back to REST if we have an expand with a separate get...only works if we support REST
+                if (canUseGraph)
+                {
+                    if (entityInfo.Fields.Any(p => p.Load && !string.IsNullOrEmpty(p.GraphGet)))
+                    {
+                        canUseGraph = false;
+                    }
+                }
+            }
 
             if (canUseGraph)
             {
@@ -745,6 +760,12 @@ namespace PnP.Core.Services
                     canUseGraph = false;
                     break;
                 }
+            }
+
+            // If entity cannot be surfaced with SharePoint Rest then force graph
+            if (string.IsNullOrEmpty(entityInfo.SharePointType))
+            {
+                canUseGraph = true;
             }
 
             // Using LoadProperties in combination with a Graph query is not supported

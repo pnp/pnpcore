@@ -89,7 +89,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(title));
             }
 
-            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Title == title, selectors);
+            return GetByTitleAsync(title, selectors).GetAwaiter().GetResult();
         }
 
         public async Task<IList> GetByTitleAsync(string title, params Expression<Func<IList, object>>[] selectors)
@@ -99,7 +99,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(title));
             }
 
-            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Title == title, selectors).ConfigureAwait(false);
+            return await GetFirstOrDefaultAsync(l => l.Title == title, selectors).ConfigureAwait(false);
         }
 
         #endregion
@@ -113,7 +113,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return BaseDataModelExtensions.BaseLinqGet(this, l => l.Id == id, selectors);
+            return GetByIdAsync(id, selectors).GetAwaiter().GetResult();
         }
 
         public async Task<IList> GetByIdAsync(Guid id, params Expression<Func<IList, object>>[] selectors)
@@ -124,7 +124,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id, selectors).ConfigureAwait(false);
+            return await GetFirstOrDefaultAsync(l => l.Id == id, selectors).ConfigureAwait(false);
         }
 
         #endregion

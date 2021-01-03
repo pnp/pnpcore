@@ -1,4 +1,5 @@
-﻿using PnP.Core.QueryModel;
+﻿using PnP.Core.Model.Teams;
+using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
 using System.Collections;
@@ -385,7 +386,8 @@ namespace PnP.Core.Model
                 selectionTarget = selectionTarget.Where(predicate);
             }
 
-            if (firstOrDefault)
+            // Team Channel querying will not work with $top...let's rely on client side filtering instead
+            if (firstOrDefault && typeof(TModel) != typeof(ITeamChannel))
             {
                 selectionTarget = selectionTarget.Take(1);
             }

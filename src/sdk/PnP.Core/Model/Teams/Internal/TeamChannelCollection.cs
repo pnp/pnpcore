@@ -126,7 +126,7 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(displayName));
             }
 
-            return BaseDataModelExtensions.BaseLinqGet(this, c => c.DisplayName == displayName, selectors);
+            return GetByDisplayNameAsync(displayName, selectors).GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace PnP.Core.Model.Teams
                 throw new ArgumentNullException(nameof(displayName));
             }
 
-            return await BaseDataModelExtensions.BaseLinqGetAsync(this, c => c.DisplayName == displayName, selectors).ConfigureAwait(false);
+            return await GetFirstOrDefaultAsync(c => c.DisplayName == displayName, selectors).ConfigureAwait(false);
         }
 
         #endregion

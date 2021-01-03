@@ -90,7 +90,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return BaseDataModelExtensions.BaseLinqGet(this, c => c.Id == id, selectors);
+            return GetByIdAsync(id, selectors).GetAwaiter().GetResult();
         }
 
         public async Task<ITermSet> GetByIdAsync(string id, params Expression<Func<ITermSet, object>>[] selectors)
@@ -100,7 +100,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(id));
             }
 
-            return await BaseDataModelExtensions.BaseLinqGetAsync(this, l => l.Id == id, selectors).ConfigureAwait(false);
+            return await GetFirstOrDefaultAsync(l => l.Id == id, selectors).ConfigureAwait(false);
         }
         #endregion
 

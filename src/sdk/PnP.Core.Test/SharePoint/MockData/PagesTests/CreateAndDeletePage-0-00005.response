@@ -1,4 +1,4 @@
---batchresponse_1be3ceff-ca6d-4605-b4b2-6407233aa9cd
+--batchresponse_ba0d4f82-4113-4110-867b-5fbc4dc1ed75
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -7,11 +7,11 @@ CONTENT-TYPE: application/json; charset=utf-8
 
 { "Row" : 
 [{
-"ID": "693",
+"ID": "752",
 "PermMask": "0x7ffffffffffbffff",
 "FSObjType": "0",
 "HTML_x0020_File_x0020_Type": "",
-"UniqueId": "{DF53D24A-6358-4EDF-A86A-1DA51E90A2BE}",
+"UniqueId": "{F5EC0986-895D-462B-86FC-83DCEA4FF9CA}",
 "ProgId": "",
 "NoExecute": "0",
 "ContentTypeId": "0x01010800B3B2A1451E70B6458A757AC0CBA6DAEF",
@@ -81,4 +81,4 @@ CONTENT-TYPE: application/json; charset=utf-8
 ,"CurrentFolderSpItemUrl" : ""
 
 }
---batchresponse_1be3ceff-ca6d-4605-b4b2-6407233aa9cd--
+--batchresponse_ba0d4f82-4113-4110-867b-5fbc4dc1ed75--

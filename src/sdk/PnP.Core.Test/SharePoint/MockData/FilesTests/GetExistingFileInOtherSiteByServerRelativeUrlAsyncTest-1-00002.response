@@ -1,4 +1,4 @@
---batchresponse_f16d57ce-4392-462e-82a7-a3bc7f05e8f6
+--batchresponse_8d6c134b-d46b-4780-958a-a2f40458b129
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 400 Bad Request
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"error":{"code":"-2147024809, System.ArgumentException","message":{"lang":"en-US","value":"Server relative urls must start with SPWeb.ServerRelativeUrl"}}}
---batchresponse_f16d57ce-4392-462e-82a7-a3bc7f05e8f6--
+--batchresponse_8d6c134b-d46b-4780-958a-a2f40458b129--

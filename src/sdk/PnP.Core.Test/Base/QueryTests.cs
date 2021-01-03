@@ -410,11 +410,12 @@ namespace PnP.Core.Test.Base
         #region Linq query tests
 
         [TestMethod]
-        public async Task GetLinqListGraph()
+        public async Task GetLinqListRest()
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
             var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(), new ODataQuery<IList> { Top = 10, Skip = 5 });
-            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=system,createdDateTime,description,eTag,id,lastModifiedDateTime,name,webUrl,displayName,createdBy,lastModifiedBy,parentReference,list&$top=10&$skip=5", true);
+            // Using default load without specifying fields or filter will use REST
+            Assert.AreEqual(requests[0], "_api/web/lists?$top=10&$skip=5", true);
         }
 
         [TestMethod]
