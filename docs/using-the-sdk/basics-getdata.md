@@ -178,9 +178,10 @@ In the domain model you quite often see a GetByxxx method (e.g. GetByTitleAsync 
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
     // Using this GetByTitle method is 
-    await context.Web.Lists.GetByTitleAsync("Site Pages", p => p.Title, p => p.TemplateType,
-                                                          p => p.ContentTypes.LoadProperties(
-                                                               p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+    await context.Web.Lists.GetByTitleAsync("Site Pages", 
+                                            p => p.Title, p => p.TemplateType,
+                                            p => p.ContentTypes.LoadProperties(
+                                                 p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
 
     // Is identical to this GetFirstOrDefaultAsync call
     await context.Web.Lists.GetFirstOrDefaultAsync(p => p.Title == "Site Pages",
