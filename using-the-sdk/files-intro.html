@@ -103,8 +103,8 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 </code></pre>
 <h3 id="enumerating-files">Enumerating files</h3>
 <p>Files do live in an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html">IFolder</a>, document libraries do have a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RootFolder">RootFolder property</a> allowing you to enumerate files, but also the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a> has a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Folders">collection of Folders</a>, a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_RootFolder">RootFolder</a> and <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByIdAsync_Guid_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____">GetFolderByIdAsync</a> and <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____">GetFolderByServerRelativeUrlAsync</a> methods. Once you've a folder you can enumerate the files inside it.</p>
-<pre><code class="lang-csharp">// Get root folder of a library via a LINQ query
-IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
+<pre><code class="lang-csharp">// Get root folder of a library
+IFolder folder = await context.Web.Folders.GetFirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
 
 // Get root folder of the web (for files living outside of a document library)
 IFolder folder = (await context.Web.GetAsync(p =&gt; p.RootFolder)).RootFolder;
@@ -220,7 +220,7 @@ await testDocument.DeleteAsync();
 <p>See the <a href="files-large.html">working with large files</a> page for some more complete file upload/download samples.</p>
 </div>
 <pre><code class="lang-csharp">// Get a reference to a folder
-IFolder siteAssetsFolder = await context.Web.Folders.FirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
+IFolder siteAssetsFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
 
 // Upload a file by adding it to the folder's files collection
 IFile addedFile = await siteAssetsFolder.Files.AddAsync(&quot;test.docx&quot;, 

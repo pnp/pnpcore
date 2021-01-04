@@ -117,7 +117,7 @@ await page.SaveAsync(&quot;PageWithCustomizedDefaultHeader.aspx&quot;);
 var page = await context.Web.NewPageAsync();
 
 // Upload the header image to site assets library
-IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
+IFolder parentFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
 IFile headerImage = await parentFolder.Files.AddAsync(&quot;pageheader.jpg&quot;, System.IO.File.OpenRead($&quot;.{Path.DirectorySeparatorChar}pageheader.jpg&quot;));
 
 // Configure the page
