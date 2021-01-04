@@ -16,7 +16,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 Let's start with two code snippets which both result in a list item being loaded. The first snippet shows a sync way of loading a list via it's title followed by getting the item with id 1 from that list:
 
 ```csharp
-using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
+using (var context = pnpContextFactory.Create("SiteToWorkWith"))
 {
     IItem item = context.Web.Lists.GetByTitle("Site Pages").Items.GetById(1);
 }
@@ -32,7 +32,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-Both approaches are comparable from a coding point of view: the difference is in the method names and the `await` keyword. You also notice that for the sync approach the code is more fluent as there's no need for `await` statements, but a similar thing can be done with async via one of these two models:
+Both approaches are comparable from a coding point of view: the difference is in the method names and the `await` keyword. You also notice that for the sync approach the code is more fluent as there's no need for `await` statements, but a similar thing can be done with async via using the [AndThen](https://pnp.github.io/pnpcore/api/PnP.Core.QueryModel.BaseDataModelExtensions.html#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_Task___0__Func___0_Task___1___) method to chain async method calls or via nesting each async call with it's corresponding `await` keyword:
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
