@@ -90,9 +90,7 @@ To update a field you simply update it's value and call the Update or UpdateAsyn
 ```csharp
 // Find a field with a given id
 Guid titleFieldId = new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247");
-IField field = await (from f in context.Web.Fields
-                where f.Id == titleFieldId
-                select f).FirstOrDefaultAsync();
+IField field = await context.Web.Fields.GetFirstOrDefaultAsync(f => f.Id == titleFieldId);
 
 if (field != null)
 {
@@ -108,9 +106,7 @@ Deleting a field can be done using the Delete or DeleteAsync methods:
 ```csharp
 // Find a field with a given id
 Guid titleFieldId = new Guid("fa564e0f-0c70-4ab9-b863-0177e6ddd247");
-IField field = await (from f in context.Web.Fields
-                where f.Id == titleFieldId
-                select f).FirstOrDefaultAsync();
+IField field = await context.Web.Fields.GetFirstOrDefaultAsync(f => f.Id == titleFieldId);
 
 if (field != null)
 {

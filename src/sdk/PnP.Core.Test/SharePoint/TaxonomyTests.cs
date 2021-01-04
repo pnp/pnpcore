@@ -733,7 +733,7 @@ namespace PnP.Core.Test.SharePoint
                 using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
                 {
                     // Use linq provider to get a group by name
-                    var group2 = await context2.TermStore.Groups.Where(p => p.Name == newGroupName).FirstOrDefaultAsync();
+                    var group2 = await context2.TermStore.Groups.GetFirstOrDefaultAsync(p => p.Name == newGroupName);
                     if (group2 != null)
                     {
                         var groupWithSets = await group2.GetAsync(p => p.Sets);

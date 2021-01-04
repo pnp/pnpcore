@@ -1,5 +1,11 @@
-- name: Getting started
-  href: readme.md
+- name: SDK basics
+  items:
+  - name: Getting started
+    href: readme.md
+  - name: Getting data
+    href: basics-getdata.md
+  - name: Batching requests
+    href: basics-batching.md
 - name: Authentication  
   items:
   - name: Configuration

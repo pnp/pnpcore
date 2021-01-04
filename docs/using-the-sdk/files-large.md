@@ -8,7 +8,7 @@ Uploading of files is done via the [AddAsync method on a Files collection](https
 
 ```csharp
 // Get a reference to a folder
-IFolder siteAssetsFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+IFolder siteAssetsFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
 // Upload a file by adding it to the folder's files collection, the file will be uploaded in chunks of 10MB
 IFile addedFile = await siteAssetsFolder.Files.AddAsync("2gbfile.test", 
@@ -23,7 +23,7 @@ If you want to download a large file you do need to use the [GetContentAsync met
 > The default HTTP timeout is 100 seconds, which is not enough for large file downloads. You can increase this time out in the [PnP Core SDK configuration](https://pnp.github.io/pnpcore/using-the-sdk/pnp%20core%20settings.html#settings-overview) up to an infinite timeout.
 
 ```csharp
-IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+IFolder parentFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
 // Get a reference to the file to download
 IFile fileToDownload = await context.Web.GetFileByServerRelativeUrlAsync($"{parentFolder.ServerRelativeUrl}/2gbfile.test");

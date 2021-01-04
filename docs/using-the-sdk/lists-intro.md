@@ -41,8 +41,8 @@ var myList = await context.Web.Lists.GetByServerRelativeUrlAsync($"{context.Uri.
 // Get Documents list via id, only load the needed properties
 var myList = await context.Web.Lists.GetByIdAsync(new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5"), p => p.TemplateType, p => p.Title);
 
-// LINQ query
-var myList = await (from l in context.Web.Lists where l.Title == "Documents" select l).FirstOrDefaultAsync();
+// Query on the collection
+var myList = await context.Web.Lists.GetFirstOrDefaultAsync(p=>p.Title == "Documents");
 ```
 
 ### Enumerating lists

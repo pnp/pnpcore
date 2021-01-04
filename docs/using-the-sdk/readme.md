@@ -355,7 +355,20 @@ var document = await((await context.Web.Lists.GetByTitleAsync("Documents")).Item
                             .Where(i => i.Title == "Sample Document")
                             .Load(i => i.Id,
                                   i => i.Title))
-                            .FirstOrDefaultAsync();
+                            .ToListAsync();
+
+if (document != null)
+{
+    Console.WriteLine($"Document Title: {document.Title}");
+}
+```
+
+The same query can also be written using the collection Get methods (both examples will result in 2 queries being sent to Microsoft 365):
+
+```csharp
+
+var list = await context.Web.Lists.GetByTitleAsync("Documents");
+var document = await list.Items.GetAsync(i => i.Title == "Sample Document", i => i.Id, i => i.Title);
 
 if (document != null)
 {

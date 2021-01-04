@@ -304,8 +304,6 @@ namespace PnP.Core.Test.Utilities
                             where uca.Name == customActionName
                             select uca;
                 }
-                // TODO: To Review - The linq async gets an "EmptyPartition" and cannot case to IUserCustomAction
-                //IUserCustomAction foundUserCustomAction = await query.FirstOrDefaultAsync();
                 IUserCustomAction foundUserCustomAction = query.FirstOrDefault();
                 if (null == foundUserCustomAction)
                     throw new Exception($"A User Custom Action could not be found with name {customActionName}");

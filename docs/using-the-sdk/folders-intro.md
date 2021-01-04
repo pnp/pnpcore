@@ -25,8 +25,8 @@ var folder = await context.Web.GetFolderByIdAsync(new Guid("d50ec969-cb27-4a49-8
 // Get a folder via the list
 var folder = (await context.Web.Lists.GetByTitleAsync("Documents", p => p.RootFolder)).RootFolder;
 
-// Get root folder of a library via a LINQ query
-IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+// Get root folder of a library
+IFolder folder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
 // Get root folder of the web (for files living outside of a document library)
 IFolder folder = (await context.Web.GetAsync(p => p.RootFolder)).RootFolder;

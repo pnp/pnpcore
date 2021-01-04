@@ -48,7 +48,7 @@ The previous section already showed some cool page header features, but we can d
 var page = await context.Web.NewPageAsync();
 
 // Upload the header image to site assets library
-IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+IFolder parentFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
 IFile headerImage = await parentFolder.Files.AddAsync("pageheader.jpg", System.IO.File.OpenRead($".{Path.DirectorySeparatorChar}pageheader.jpg"));
 
 // Configure the page

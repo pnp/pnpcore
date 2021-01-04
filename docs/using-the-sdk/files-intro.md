@@ -34,8 +34,8 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 Files do live in an [IFolder](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFolder.html), document libraries do have a [RootFolder property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RootFolder) allowing you to enumerate files, but also the [IWeb](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html) has a [collection of Folders](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_Folders), a [RootFolder](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_RootFolder) and [GetFolderByIdAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByIdAsync_Guid_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____) and [GetFolderByServerRelativeUrlAsync](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_GetFolderByServerRelativeUrlAsync_System_String_Expression_Func_PnP_Core_Model_SharePoint_IFolder_System_Object_____) methods. Once you've a folder you can enumerate the files inside it.
 
 ```csharp
-// Get root folder of a library via a LINQ query
-IFolder folder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+// Get root folder of a library
+IFolder folder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
 // Get root folder of the web (for files living outside of a document library)
 IFolder folder = (await context.Web.GetAsync(p => p.RootFolder)).RootFolder;
@@ -175,7 +175,7 @@ Adding a file comes down to create a file reference and uploading the file's byt
 
 ```csharp
 // Get a reference to a folder
-IFolder siteAssetsFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+IFolder siteAssetsFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
 // Upload a file by adding it to the folder's files collection
 IFile addedFile = await siteAssetsFolder.Files.AddAsync("test.docx", 

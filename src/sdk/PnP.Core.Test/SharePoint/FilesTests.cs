@@ -2002,7 +2002,7 @@ namespace PnP.Core.Test.SharePoint
         //    TestCommon.Instance.Mocking = false;
         //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
         //    {
-        //        IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+        //        IFolder parentFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
         //        string fileName = TestCommon.GetPnPSdkTestAssetName("2gb.test");
 
@@ -2022,7 +2022,7 @@ namespace PnP.Core.Test.SharePoint
         //    TestCommon.Instance.Mocking = false;
         //    using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
         //    {
-        //        IFolder parentFolder = await context.Web.Folders.FirstOrDefaultAsync(f => f.Name == "SiteAssets");
+        //        IFolder parentFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");
 
         //        string fileName = TestCommon.GetPnPSdkTestAssetName("2gb.test");
 
