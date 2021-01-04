@@ -1,11 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PnP.Core.Model;
 using PnP.Core.Model.SharePoint;
+using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -74,13 +76,10 @@ namespace PnP.Core.Test.Base
             return requests;
         }
 
-        private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input, ODataQuery<TModelInterface> query, bool? graphFirst = null)
+        private async Task<List<string>> GetODataAPICallTestAsync<TModel, TModelInterface>(Tuple<TModel, EntityInfo, Expression<Func<TModelInterface, object>>[]> input, 
+                                                                                           ODataQuery<TModelInterface> query, 
+                                                                                           bool? collectionMode = false, Expression<Func<TModelInterface, bool>>[] filter = null, bool firstOrDefaultMode = false)
         {
-            if (graphFirst != null && graphFirst.HasValue)
-            {
-                (input.Item1 as IDataModelWithContext).PnPContext.GraphFirst = graphFirst.Value;
-            }
-
             // Instantiate the relevant collection class
             var assembly = Assembly.GetAssembly(typeof(IWeb));
             var collectionType = assembly.GetType(typeof(TModel).FullName + "Collection");
@@ -98,39 +97,65 @@ namespace PnP.Core.Test.Base
             var query2 = DataModelQueryProvider<TModelInterface>.Translate(selectionTarget.Expression);
 
             // Unite with the provided query
-            if (query.Top.HasValue)
+            if (collectionMode == null || (collectionMode.HasValue && collectionMode.Value == false))
             {
-                query2.Top = query.Top;
-            }
-
-            if (query.Skip.HasValue)
-            {
-                query2.Skip = query.Skip;
-            }
-
-            query2.Filters.AddRange(query.Filters);
-
-            query2.OrderBy.AddRange(query.OrderBy);
-
-            if (query.Select.Count > 0)
-            {
-                foreach (var select in query.Select)
+                if (query != null)
                 {
-                    if (!query2.Select.Contains(select))
+                    if (query.Top.HasValue)
                     {
-                        query2.Select.Add(select);
+                        query2.Top = query.Top;
+                    }
+
+                    if (query.Skip.HasValue)
+                    {
+                        query2.Skip = query.Skip;
+                    }
+
+                    query2.Filters.AddRange(query.Filters);
+
+                    query2.OrderBy.AddRange(query.OrderBy);
+
+                    if (query.Select.Count > 0)
+                    {
+                        foreach (var select in query.Select)
+                        {
+                            if (!query2.Select.Contains(select))
+                            {
+                                query2.Select.Add(select);
+                            }
+                        }
+                    }
+
+                    if (query.Expand.Count > 0)
+                    {
+                        foreach (var expand in query.Expand)
+                        {
+                            if (!query2.Expand.Contains(expand))
+                            {
+                                query2.Expand.Add(expand);
+                            }
+                        }
                     }
                 }
             }
-
-            if (query.Expand.Count > 0)
+            else
             {
-                foreach (var expand in query.Expand)
+                // In collection mode we rely on the expression parsing by the entity system but do use the linq query for filtering
+                if (filter != null)
                 {
-                    if (!query2.Expand.Contains(expand))
+                    selectionTarget = selectionTarget.Where(filter[0]);
+
+                    // Team Channel querying will not work with $top...let's rely on client side filtering instead
+                    if (firstOrDefaultMode && typeof(TModelInterface) != typeof(ITeamChannel))
                     {
-                        query2.Expand.Add(expand);
+                        selectionTarget = selectionTarget.Take(1);
                     }
+
+                    query2 = DataModelQueryProvider<TModelInterface>.Translate(selectionTarget.Expression);
+                }
+                else
+                {
+                    query2 = DataModelQueryProvider<TModelInterface>.Translate(null);
                 }
             }
 
@@ -415,7 +440,7 @@ namespace PnP.Core.Test.Base
         #region Linq query tests
 
         [TestMethod]
-        public async Task GetLinqListRest()
+        public async Task GetLinqListGraph()
         {
             //NOTE: $skip does not work ~ should result in exception once we've the needed metadata to check for that
             var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(), new ODataQuery<IList> { Top = 10, Skip = 5 });
@@ -500,6 +525,145 @@ namespace PnP.Core.Test.Base
             Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions,fields%2fid,fields%2finternalname&$expand=fields&$top=10&$skip=5", true);
         }
 
+        #endregion
+
+        #region Combined tests: expression + linq based filter (like used in the collection Get methods)
+
+        [TestMethod]
+        public async Task GetCombinedNoExpressionNoFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode:true);
+            Assert.AreEqual(requests[0], "_api/web/lists", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedExpressionGraphPropertyNoFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }), null, collectionMode: true);
+            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayname,system,createdDateTime,description,eTag,lastModifiedDateTime,name,webUrl,createdBy,lastModifiedBy,parentReference,list", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNotGraphFirstExpressionGraphPropertyNoFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }, graphFirst: false), null, collectionMode: true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedExpressionGraphExpandableViaExtraQueryNoFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p=>p.Items }), null, collectionMode: true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,items&$expand=items", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNotGraphFirstExpressionGraphExpandableViaExtraQueryNoFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.Items }, graphFirst: false), null, collectionMode: true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,items&$expand=items", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedExpressionNonGraphPropertyNoFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }), null, collectionMode: true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNotGraphFirstExpressionNonGraphPropertyNoFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.ListExperience }, graphFirst: false), null, collectionMode: true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,listexperienceoptions", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedExpressionMixedPropertyNoFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p=>p.Title, p => p.ListExperience }), null, collectionMode: true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,listexperienceoptions", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNotGraphFirstExpressionMixedPropertyNoFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title, p => p.ListExperience }, graphFirst: false), null, collectionMode: true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title,listexperienceoptions", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNoExpressionGraphPropertyFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true, 
+                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
+            Assert.AreEqual(requests[0], "_api/web/lists?$filter=Title+eq+%27bla%27", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNoExpressionGraphPropertyFilterForFirstOrDefault()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
+                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: true);
+            Assert.AreEqual(requests[0], "_api/web/lists?$filter=Title+eq+%27bla%27&$top=1", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNotGraphFirstNoExpressionGraphPropertyFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null, graphFirst: false), null, collectionMode: true,
+                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
+            Assert.AreEqual(requests[0], "_api/web/lists?$filter=Title+eq+%27bla%27", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNoExpressionNonGraphPropertyFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
+                                                          filter: new Expression<Func<IList, bool>>[] { p => p.ListExperience == ListExperience.ClassicExperience}, firstOrDefaultMode: false);
+            Assert.AreEqual(requests[0], "_api/web/lists?$filter=ListExperienceOptions+eq+1", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNotGraphFirstNoExpressionNonGraphPropertyFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null, graphFirst: false), null, collectionMode: true,
+                                                          filter: new Expression<Func<IList, bool>>[] { p => p.ListExperience == ListExperience.ClassicExperience }, firstOrDefaultMode: false);
+            Assert.AreEqual(requests[0], "_api/web/lists?$filter=ListExperienceOptions+eq+1", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNoExpressionNonGraphPropertyWithMappingFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
+                                                          filter: new Expression<Func<IList, bool>>[] { p => p.DocumentTemplate == "bla" }, firstOrDefaultMode: false);
+            // Note that we used DocumentTemplate in the filter expression while the query uses DocumentTemplateUrl
+            Assert.AreEqual(requests[0], "_api/web/lists?$filter=DocumentTemplateUrl+eq+%27bla%27", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNoExpressionMixedPropertyFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(null), null, collectionMode: true,
+                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" && p.DocumentTemplate == "bla" }, firstOrDefaultMode: false);
+            Assert.AreEqual(requests[0], "_api/web/lists?$filter=(Title+eq+%27bla%27+and+DocumentTemplateUrl+eq+%27bla%27)", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedGraphExpressionGraphPropertyFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }), null, collectionMode: true,
+                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
+            Assert.AreEqual(requests[0], "sites/{Parent.GraphId}/lists?$select=id,displayname,system&$filter=displayName+eq+%27bla%27", true);
+        }
+
+        [TestMethod]
+        public async Task GetCombinedNotGraphFirstGraphExpressionGraphPropertyFilter()
+        {
+            var requests = await GetODataAPICallTestAsync(BuildModel<List, IList>(new Expression<Func<IList, object>>[] { p => p.Title }, graphFirst: false), null, collectionMode: true,
+                                                          filter: new Expression<Func<IList, bool>>[] { p => p.Title == "bla" }, firstOrDefaultMode: false);
+            Assert.AreEqual(requests[0], "_api/web/lists?$select=id,title&$filter=Title+eq+%27bla%27", true);
+        }
         #endregion
 
     }

@@ -380,7 +380,7 @@ namespace PnP.Core.Services
             sb.Append(baseApiCall);
 
             // Build the querystring parameters
-            NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
+            NameValueCollection queryString = HttpUtility.ParseQueryString(string.Empty);
             foreach (var urlParameter in urlParameters.Where(i => !string.IsNullOrEmpty(i.Value)))
             {
                 // Add key and value, which will be automatically URL-encoded, if needed
@@ -741,7 +741,8 @@ namespace PnP.Core.Services
             else
             {
                 // The collection Getxxx methods end up here as they use the entity model for field selection
-                canUseGraph = entityInfo.CanUseGraphGet;
+                canUseGraph = pnpContext.GraphFirst &&    // See if Graph First is enabled/configured
+                              entityInfo.CanUseGraphGet;  // and if the entity supports GET via Graph 
 
                 // fall back to REST if we have an expand with a separate get...only works if we support REST
                 if (canUseGraph)
@@ -753,16 +754,16 @@ namespace PnP.Core.Services
                 }
             }
 
+            // If we've expandable fields to load (via LoadProperties) then fall back to REST
             if (canUseGraph)
             {
-                foreach (var field in entityInfo.Fields.Where(p => p.Load && p.ExpandFieldInfo != null))
+                if (entityInfo.Fields.Any(p => p.Load && p.ExpandFieldInfo != null))
                 {
                     canUseGraph = false;
-                    break;
                 }
             }
 
-            // If entity cannot be surfaced with SharePoint Rest then force graph
+            // If entity cannot be surfaced with SharePoint REST then force graph anyway
             if (string.IsNullOrEmpty(entityInfo.SharePointType))
             {
                 canUseGraph = true;
@@ -844,7 +845,6 @@ namespace PnP.Core.Services
                 {
                     (concreteEntity as IDataModelWithContext).PnPContext = pnpContext;
                 }
-
 
                 // call the REST API building logic, this also handles token resolving
                 var result = await BuildGetAPICallRestAsync(concreteEntity as BaseDataModel<TModel>, entityInfo, default, true).ConfigureAwait(false);
