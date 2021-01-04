@@ -4157,6 +4157,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-async.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-async.html",
+          "hash": "SKxqq5vm3ksaN18vhGr8AQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/basics-batching.md",
       "output": {
         ".html": {
@@ -4173,7 +4185,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-getdata.html",
-          "hash": "JJeSVmR6jORDVjYQzB+KSg=="
+          "hash": "svhG4SMD5AKNm4AFt3nrHA=="
         }
       },
       "is_incremental": false,
@@ -4425,7 +4437,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "CTP877kpYLhsjNYCFtzr3g=="
+          "hash": "2Gyo7VOcs7oy9dSJg7nt/A=="
         }
       },
       "is_incremental": false,
@@ -4470,7 +4482,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 45,
+          "total_file_count": 46,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

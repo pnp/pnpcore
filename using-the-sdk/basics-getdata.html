@@ -238,9 +238,10 @@
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Using this GetByTitle method is 
-    await context.Web.Lists.GetByTitleAsync(&quot;Site Pages&quot;, p =&gt; p.Title, p =&gt; p.TemplateType,
-                                                          p =&gt; p.ContentTypes.LoadProperties(
-                                                               p =&gt; p.Name, p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
+    await context.Web.Lists.GetByTitleAsync(&quot;Site Pages&quot;, 
+                                            p =&gt; p.Title, p =&gt; p.TemplateType,
+                                            p =&gt; p.ContentTypes.LoadProperties(
+                                                 p =&gt; p.Name, p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
 
     // Is identical to this GetFirstOrDefaultAsync call
     await context.Web.Lists.GetFirstOrDefaultAsync(p =&gt; p.Title == &quot;Site Pages&quot;,
