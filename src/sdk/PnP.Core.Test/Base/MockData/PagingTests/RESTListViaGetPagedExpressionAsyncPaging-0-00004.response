@@ -1,4 +1,4 @@
---batchresponse_c568169a-5159-40b1-8bc2-26e407135198
+--batchresponse_ed4c7a96-ece7-48ef-b7db-f1661a624b67
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'91bb170e-0ef0-4062-86f9-e5dbe8d047bd')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'91bb170e-0ef0-4062-86f9-e5dbe8d047bd')","etag":"\"43\"","type":"SP.List"},"Id":"91bb170e-0ef0-4062-86f9-e5dbe8d047bd","Title":"bla"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'484cd94d-76b9-4851-8efc-4352402601e2')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'484cd94d-76b9-4851-8efc-4352402601e2')","etag":"\"0\"","type":"SP.List"},"Id":"484cd94d-76b9-4851-8efc-4352402601e2","Title":"Composed Looks"}]}}
---batchresponse_c568169a-5159-40b1-8bc2-26e407135198--
+--batchresponse_ed4c7a96-ece7-48ef-b7db-f1661a624b67--

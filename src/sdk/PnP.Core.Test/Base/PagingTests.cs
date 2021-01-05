@@ -183,7 +183,6 @@ namespace PnP.Core.Test.Base
                 {
                     Assert.IsTrue(list.IsPropertyAvailable(p => p.Title));
                     Assert.IsTrue(!string.IsNullOrEmpty(list.Title));
-                    Assert.IsFalse(list.IsPropertyAvailable(p => p.Description));
                 }
 
                 // Since we only asked 2 lists Graph will return a nextLink odata property 
@@ -197,7 +196,6 @@ namespace PnP.Core.Test.Base
                     {
                         Assert.IsTrue(list.IsPropertyAvailable(p => p.Title));
                         Assert.IsTrue(!string.IsNullOrEmpty(list.Title));
-                        Assert.IsFalse(list.IsPropertyAvailable(p => p.Description));
                     }
 
                     await context.Web.Lists.GetAllPagesAsync();
@@ -211,7 +209,7 @@ namespace PnP.Core.Test.Base
                     Assert.Fail("No __next property returned and paging is not possible");
                 }
             }
-        }
+        }        
         #endregion
 
         #region REST paging
@@ -235,6 +233,77 @@ namespace PnP.Core.Test.Base
                 {
                     await context.Web.Lists.GetNextPageAsync();
                     Assert.IsTrue(context.Web.Lists.Count() == 4);
+
+                    await context.Web.Lists.GetAllPagesAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+
+                    // Once we've loaded all lists we can't page anymore
+                    Assert.IsFalse(context.Web.Lists.CanPage);
+                }
+                else
+                {
+                    Assert.Fail("No __next property returned and paging is not possible");
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task RESTListViaGetPagedWithFilterAsyncPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                await context.Web.Lists.GetPagedAsync(p=>p.TemplateType == ListTemplateType.GenericList, 2);
+
+                // We should have loaded 2 lists
+                Assert.IsTrue(context.Web.Lists.Count() == 2);
+
+                // Since we only asked 2 lists Graph will return a nextLink odata property 
+                if (context.Web.Lists.CanPage)
+                {
+                    await context.Web.Lists.GetNextPageAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+
+                    await context.Web.Lists.GetAllPagesAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() >= 4);
+
+                    // Once we've loaded all lists we can't page anymore
+                    Assert.IsFalse(context.Web.Lists.CanPage);
+                }
+                else
+                {
+                    Assert.Fail("No __next property returned and paging is not possible");
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task RESTListViaGetPagedWithFilterAndPropertiesAsyncPaging()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Force rest
+                context.GraphFirst = false;
+
+                var lists = await context.Web.Lists.GetPagedAsync(p => p.TemplateType == ListTemplateType.GenericList, 2,
+                                                      p => p.Title, p => p.TemplateType,
+                                                                    p => p.ContentTypes.LoadProperties(
+                                                                         p => p.Name, p => p.FieldLinks.LoadProperties(p => p.Name)));
+
+                // We should have loaded 2 lists
+                Assert.IsTrue(context.Web.Lists.Count() == 2);
+                Assert.IsTrue(lists.Count() == 2);
+
+                // Since we only asked 2 lists Graph will return a nextLink odata property 
+                if (context.Web.Lists.CanPage)
+                {
+                    var nextLists = await context.Web.Lists.GetNextPageAsync();
+                    Assert.IsTrue(context.Web.Lists.Count() == 4);
+                    Assert.IsTrue(nextLists.Count() == 2);                    
 
                     await context.Web.Lists.GetAllPagesAsync();
                     Assert.IsTrue(context.Web.Lists.Count() >= 4);

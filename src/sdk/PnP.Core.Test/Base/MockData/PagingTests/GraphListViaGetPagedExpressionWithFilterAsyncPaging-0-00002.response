@@ -1,0 +1,11 @@
+{"responses": [{"id": "1","status":400,"headers" : {"Cache-Control":"no-cache","Content-Type":"application/json"},"body":{
+  "error": {
+    "code": "invalidRequest",
+    "message": "The provided filter statement is not supported",
+    "innerError": {
+      "date": "2021-01-05T16:36:05",
+      "request-id": "e9c4b865-99fc-4e23-b452-37a8aef58463",
+      "client-request-id": "e9c4b865-99fc-4e23-b452-37a8aef58463"
+    }
+  }
+}}]}

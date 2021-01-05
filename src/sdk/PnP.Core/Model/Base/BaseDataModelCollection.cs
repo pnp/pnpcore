@@ -476,7 +476,22 @@ namespace PnP.Core.Model
             }
         }
 
-        public async Task GetPagedAsync(int pageSize, params Expression<Func<TModel, object>>[] expressions)
+        public IEnumerable<TModel> GetPaged(int pageSize, params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetPagedAsync(pageSize, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerable<TModel>> GetPagedAsync(int pageSize, params Expression<Func<TModel, object>>[] expressions)
+        {
+            return await GetPagedAsync(null, pageSize, expressions).ConfigureAwait(false);
+        }
+
+        public IEnumerable<TModel> GetPaged(Expression<Func<TModel, bool>> predicate, int pageSize, params Expression<Func<TModel, object>>[] expressions)
+        {
+            return GetPagedAsync(predicate, pageSize, expressions).GetAwaiter().GetResult();
+        }
+
+        public async Task<IEnumerable<TModel>> GetPagedAsync(Expression<Func<TModel, bool>> predicate, int pageSize, params Expression<Func<TModel, object>>[] expressions)
         {
             if (pageSize < 1)
             {
@@ -504,11 +519,27 @@ namespace PnP.Core.Model
                     PnPCoreResources.Exception_ModelMetadataIncorrect_ModelOutOfSync);
             }
 
-            // Build the API Get request, we'll require the LinqGet decoration to be set
-            var apiCallRequest = await Query.BuildGetAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo, default, useLinqGet: true).ConfigureAwait(false);
+            // Build the query
+            ODataQuery<TModel> query;
+            if (predicate != null)
+            {
+                IQueryable<TModel> selectionTarget = this as IQueryable<TModel>;
+                selectionTarget = selectionTarget.Where(predicate);
+                query = DataModelQueryProvider<TModel>.Translate(selectionTarget.Expression);
+            }
+            else
+            {
+                query = DataModelQueryProvider<TModel>.Translate(null);
+            }
 
-            string nextLink = apiCallRequest.ApiCall.Request;
-            ApiType nextLinkApiType = apiCallRequest.ApiCall.Type;
+            var apiCalls = await QueryClient.BuildODataGetQueryAsync(concreteEntity, concreteEntityClassInfo, PnPContext, query, receivingProperty).ConfigureAwait(false);
+            string nextLink = apiCalls[0].Request;
+            ApiType nextLinkApiType = apiCalls[0].Type;
+
+            // Build the API Get request, we'll require the LinqGet decoration to be set
+            //var apiCallRequest = await Query.BuildGetAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo, default, useLinqGet: true).ConfigureAwait(false);
+            //string nextLink = apiCallRequest.ApiCall.Request;
+            //ApiType nextLinkApiType = apiCallRequest.ApiCall.Type;
 
             if (string.IsNullOrEmpty(nextLink))
             {
@@ -520,7 +551,7 @@ namespace PnP.Core.Model
             nextLink = QueryClient.EnsureTopUrlParameter(nextLink, nextLinkApiType, pageSize);
 
             // Make the server request
-            PnPContext.CurrentBatch.Add(
+            var batchRequestId = PnPContext.CurrentBatch.Add(
                 Parent as TransientObject,
                 parentEntityInfo,
                 HttpMethod.Get,
@@ -536,11 +567,20 @@ namespace PnP.Core.Model
                 );
 
             await PnPContext.ExecuteAsync().ConfigureAwait(false);
+
+            // Get the resulting property from the parent object
+            var resultValue = Parent.GetPublicInstancePropertyValue(receivingProperty) as IEnumerable<TModel>;
+
+            return resultValue.Where(p => (p as TransientObject).BatchRequestId == batchRequestId);
         }
 
-        public async Task GetNextPageAsync()
+        public IEnumerable<TModel> GetNextPage()
         {
+            return GetNextPageAsync().GetAwaiter().GetResult();
+        }
 
+        public async Task<IEnumerable<TModel>> GetNextPageAsync()
+        {
             if (CanPage)
             {
                 // Get the parent (container) entity info
@@ -559,7 +599,7 @@ namespace PnP.Core.Model
                 // Prepare api call
                 (var nextLink, var nextLinkApiType) = Query.BuildNextPageLink(this);
 
-                PnPContext.CurrentBatch.Add(
+                var batchRequestId = PnPContext.CurrentBatch.Add(
                     Parent as TransientObject,
                     parentEntityInfo,
                     HttpMethod.Get,
@@ -575,13 +615,22 @@ namespace PnP.Core.Model
                     );
 
                 await PnPContext.ExecuteAsync().ConfigureAwait(false);
+
+                // Get the resulting property from the parent object
+                var resultValue = Parent.GetPublicInstancePropertyValue(receivingProperty) as IEnumerable<TModel>;
+
+                return resultValue.Where(p => (p as TransientObject).BatchRequestId == batchRequestId);
             }
             else
             {
                 throw new ClientException(ErrorType.CollectionNotLoaded,
                     PnPCoreResources.Exception_CollectionNotLoaded);
             }
+        }
 
+        public void GetAllPages()
+        {
+            GetAllPagesAsync().GetAwaiter().GetResult();
         }
 
         public async Task GetAllPagesAsync()

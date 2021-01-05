@@ -1,0 +1,9 @@
+--batchresponse_65ce3eba-0a6d-4c0f-9cc2-0f0ed13b584f
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[]}}
+--batchresponse_65ce3eba-0a6d-4c0f-9cc2-0f0ed13b584f--

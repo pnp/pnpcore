@@ -1,9 +1,9 @@
---batchresponse_02c279b0-7a63-4181-a542-aa94cc22e3e1
+--batchresponse_b974f1f7-faef-4d22-b09f-23f90676e2c6
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
-{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7d644d41-d86e-4594-99de-479594a68fd9')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'7d644d41-d86e-4594-99de-479594a68fd9')","etag":"\"38\"","type":"SP.List"},"Id":"7d644d41-d86e-4594-99de-479594a68fd9","Title":"FieldTypes"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'af6f0bee-6133-432a-8f49-b1a7b317eef5')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'af6f0bee-6133-432a-8f49-b1a7b317eef5')","etag":"\"15\"","type":"SP.List"},"Id":"af6f0bee-6133-432a-8f49-b1a7b317eef5","Title":"Form Templates"}]}}
---batchresponse_02c279b0-7a63-4181-a542-aa94cc22e3e1--
+{"d":{"results":[{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'af6f0bee-6133-432a-8f49-b1a7b317eef5')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'af6f0bee-6133-432a-8f49-b1a7b317eef5')","etag":"\"15\"","type":"SP.List"},"Id":"af6f0bee-6133-432a-8f49-b1a7b317eef5","Title":"Form Templates"},{"__metadata":{"id":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'9c973490-7a51-4400-baae-ea38f93df947')","uri":"https://bertonline.sharepoint.com/sites/prov-1/_api/Web/Lists(guid'9c973490-7a51-4400-baae-ea38f93df947')","etag":"\"7\"","type":"SP.List"},"Id":"9c973490-7a51-4400-baae-ea38f93df947","Title":"graph"}]}}
+--batchresponse_b974f1f7-faef-4d22-b09f-23f90676e2c6--
