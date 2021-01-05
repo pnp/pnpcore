@@ -3093,6 +3093,23 @@ references:
   fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).CanPage
   nameWithType: ISupportPaging<TModel>.CanPage
   nameWithType.vb: ISupportPaging(Of TModel).CanPage
+- uid: PnP.Core.Model.ISupportPaging`1.GetAllPages
+  name: GetAllPages()
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetAllPages
+  commentId: M:PnP.Core.Model.ISupportPaging`1.GetAllPages
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetAllPages()
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetAllPages()
+  nameWithType: ISupportPaging<TModel>.GetAllPages()
+  nameWithType.vb: ISupportPaging(Of TModel).GetAllPages()
+- uid: PnP.Core.Model.ISupportPaging`1.GetAllPages*
+  name: GetAllPages
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetAllPages_
+  commentId: Overload:PnP.Core.Model.ISupportPaging`1.GetAllPages
+  isSpec: "True"
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetAllPages
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetAllPages
+  nameWithType: ISupportPaging<TModel>.GetAllPages
+  nameWithType.vb: ISupportPaging(Of TModel).GetAllPages
 - uid: PnP.Core.Model.ISupportPaging`1.GetAllPagesAsync
   name: GetAllPagesAsync()
   href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetAllPagesAsync
@@ -3110,6 +3127,23 @@ references:
   fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetAllPagesAsync
   nameWithType: ISupportPaging<TModel>.GetAllPagesAsync
   nameWithType.vb: ISupportPaging(Of TModel).GetAllPagesAsync
+- uid: PnP.Core.Model.ISupportPaging`1.GetNextPage
+  name: GetNextPage()
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetNextPage
+  commentId: M:PnP.Core.Model.ISupportPaging`1.GetNextPage
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetNextPage()
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetNextPage()
+  nameWithType: ISupportPaging<TModel>.GetNextPage()
+  nameWithType.vb: ISupportPaging(Of TModel).GetNextPage()
+- uid: PnP.Core.Model.ISupportPaging`1.GetNextPage*
+  name: GetNextPage
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetNextPage_
+  commentId: Overload:PnP.Core.Model.ISupportPaging`1.GetNextPage
+  isSpec: "True"
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetNextPage
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetNextPage
+  nameWithType: ISupportPaging<TModel>.GetNextPage
+  nameWithType.vb: ISupportPaging(Of TModel).GetNextPage
 - uid: PnP.Core.Model.ISupportPaging`1.GetNextPageAsync
   name: GetNextPageAsync()
   href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetNextPageAsync
@@ -3127,6 +3161,42 @@ references:
   fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetNextPageAsync
   nameWithType: ISupportPaging<TModel>.GetNextPageAsync
   nameWithType.vb: ISupportPaging(Of TModel).GetNextPageAsync
+- uid: PnP.Core.Model.ISupportPaging`1.GetPaged(Expression{Func{`0,System.Boolean}},System.Int32,Expression{Func{`0,System.Object}}[])
+  name: GetPaged(Expression<Func<TModel, Boolean>>, Int32, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPaged_Expression_Func__0_System_Boolean___System_Int32_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.ISupportPaging`1.GetPaged(Expression{Func{`0,System.Boolean}},System.Int32,Expression{Func{`0,System.Object}}[])
+  name.vb: GetPaged(Expression(Of Func(Of TModel, Boolean)), Int32, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetPaged(Expression<Func<TModel, System.Boolean>>, System.Int32, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetPaged(Expression(Of Func(Of TModel, System.Boolean)), System.Int32, Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: ISupportPaging<TModel>.GetPaged(Expression<Func<TModel, Boolean>>, Int32, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: ISupportPaging(Of TModel).GetPaged(Expression(Of Func(Of TModel, Boolean)), Int32, Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.ISupportPaging`1.GetPaged(System.Int32,Expression{Func{`0,System.Object}}[])
+  name: GetPaged(Int32, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPaged_System_Int32_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.ISupportPaging`1.GetPaged(System.Int32,Expression{Func{`0,System.Object}}[])
+  name.vb: GetPaged(Int32, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetPaged(System.Int32, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetPaged(System.Int32, Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: ISupportPaging<TModel>.GetPaged(Int32, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: ISupportPaging(Of TModel).GetPaged(Int32, Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.ISupportPaging`1.GetPaged*
+  name: GetPaged
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPaged_
+  commentId: Overload:PnP.Core.Model.ISupportPaging`1.GetPaged
+  isSpec: "True"
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetPaged
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetPaged
+  nameWithType: ISupportPaging<TModel>.GetPaged
+  nameWithType.vb: ISupportPaging(Of TModel).GetPaged
+- uid: PnP.Core.Model.ISupportPaging`1.GetPagedAsync(Expression{Func{`0,System.Boolean}},System.Int32,Expression{Func{`0,System.Object}}[])
+  name: GetPagedAsync(Expression<Func<TModel, Boolean>>, Int32, Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPagedAsync_Expression_Func__0_System_Boolean___System_Int32_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.ISupportPaging`1.GetPagedAsync(Expression{Func{`0,System.Boolean}},System.Int32,Expression{Func{`0,System.Object}}[])
+  name.vb: GetPagedAsync(Expression(Of Func(Of TModel, Boolean)), Int32, Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.ISupportPaging<TModel>.GetPagedAsync(Expression<Func<TModel, System.Boolean>>, System.Int32, Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.ISupportPaging(Of TModel).GetPagedAsync(Expression(Of Func(Of TModel, System.Boolean)), System.Int32, Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: ISupportPaging<TModel>.GetPagedAsync(Expression<Func<TModel, Boolean>>, Int32, Expression<Func<TModel, Object>>[])
+  nameWithType.vb: ISupportPaging(Of TModel).GetPagedAsync(Expression(Of Func(Of TModel, Boolean)), Int32, Expression(Of Func(Of TModel, Object))())
 - uid: PnP.Core.Model.ISupportPaging`1.GetPagedAsync(System.Int32,Expression{Func{`0,System.Object}}[])
   name: GetPagedAsync(Int32, Expression<Func<TModel, Object>>[])
   href: api/PnP.Core.Model.ISupportPaging-1.html#PnP_Core_Model_ISupportPaging_1_GetPagedAsync_System_Int32_Expression_Func__0_System_Object_____
