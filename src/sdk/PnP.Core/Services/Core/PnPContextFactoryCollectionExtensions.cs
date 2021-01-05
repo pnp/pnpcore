@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
+#if !NETSTANDARD2_0
+using System.Runtime.InteropServices;
+#endif
 
 namespace PnP.Core.Services
 {
@@ -66,6 +69,25 @@ namespace PnP.Core.Services
 
         private static IServiceCollection AddHttpClients(this IServiceCollection collection)
         {
+#if !NETSTANDARD2_0
+            if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
+            {
+                collection.AddHttpClient<SharePointRestClient>()
+                    .AddHttpMessageHandler<SharePointRestRetryHandler>();
+            }
+            else
+            {
+                collection.AddHttpClient<SharePointRestClient>()
+                    .AddHttpMessageHandler<SharePointRestRetryHandler>()
+                    // We use cookies by adding them to the header which works great when used from Core framework,
+                    // however when running the .NET Standard 2.0 version from .NET Framework we explicetely have to
+                    // tell the http client to not use the default (empty) cookie container
+                    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
+                    {
+                        UseCookies = false
+                    });
+            }
+#else
             collection.AddHttpClient<SharePointRestClient>()
                 .AddHttpMessageHandler<SharePointRestRetryHandler>()
                 // We use cookies by adding them to the header which works great when used from Core framework,
@@ -75,6 +97,8 @@ namespace PnP.Core.Services
                 {
                     UseCookies = false
                 });
+#endif
+
             collection.AddHttpClient<MicrosoftGraphClient>()
                 .AddHttpMessageHandler<MicrosoftGraphRetryHandler>();
 
