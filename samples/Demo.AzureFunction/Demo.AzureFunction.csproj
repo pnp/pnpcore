@@ -10,10 +10,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.8" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.21.1" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\sdk\PnP.Core.Auth\PnP.Core.Auth.csproj" />
-    <ProjectReference Include="..\..\src\sdk\PnP.Core\PnP.Core.csproj" />
+    <PackageReference Include="PnP.Core.Auth" Version="0.4.33-beta1" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
