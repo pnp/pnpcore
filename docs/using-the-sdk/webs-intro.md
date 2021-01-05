@@ -42,7 +42,10 @@ await context.Web.GetAsync(p => p.Webs);
 
 foreach (var subWeb in context.Web.Webs)
 {
-    // Do something with the web
+    using (var contextSubWeb = await pnpContextFactory.CreateAsync(subWeb.Url))
+    {
+        // Work with the found web
+    }
 }
 ```
 
@@ -53,6 +56,11 @@ Adding a web can be done using one of the Add methods in combination with specif
 ```csharp
 // add a new web to the current web, uses default web template (STS#3) and default language (1033)
 var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = "My web", Url = "myweb" });
+
+using (var contextAddedWeb = await pnpContextFactory.CreateAsync(addedWeb.Url))
+{
+    // Work with the added web
+}
 ```
 
 ## Updating a web
