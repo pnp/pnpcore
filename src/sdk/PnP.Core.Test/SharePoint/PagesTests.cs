@@ -1185,6 +1185,49 @@ namespace PnP.Core.Test.SharePoint
         #region Page saving
 
         [TestMethod]
+        public async Task OverwriteHomePage()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new sub site to test as we don't want to break the main site home page
+                string webTitle = "OverwriteHomePage";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle });
+
+                // Create a context for the newly created web
+                using (var context2 = await TestCommon.Instance.CloneAsync(context, addedWeb.Url, 1))
+                {
+                    // Read the current home page
+                    string pageName = "Home.aspx";
+                    var pages = await context2.Web.GetPagesAsync(pageName);
+                    var homePage = pages.First();
+
+                    // Update the home page
+                    homePage.ClearPage();
+                    homePage.AddSection(CanvasSectionTemplate.ThreeColumn, 1, VariantThemeType.Soft, VariantThemeType.Strong);
+                    homePage.AddControl(homePage.NewTextPart("I"), homePage.Sections[0].Columns[0]);
+                    homePage.AddControl(homePage.NewTextPart("like"), homePage.Sections[0].Columns[1]);
+                    homePage.AddControl(homePage.NewTextPart("PnP"), homePage.Sections[0].Columns[2]);
+
+                    // Save the home page
+                    await homePage.SaveAsync(pageName);
+
+                    // Load the page again
+                    pages = await context2.Web.GetPagesAsync(pageName);
+                    var updatedHomePage = pages.First();
+
+                    // Verify the home page was updated
+                    Assert.IsTrue(updatedHomePage.Sections.Count == 1);
+                    Assert.IsTrue(updatedHomePage.Sections[0].Columns.Count == 3);
+                    Assert.IsTrue(updatedHomePage.Sections[0].Controls.Count == 3);
+                }
+
+                // Delete the web to cleanup the test artefacts
+                await addedWeb.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task CreateAndUpdatePage()
         {
             //TestCommon.Instance.Mocking = false;

@@ -1562,7 +1562,6 @@ namespace PnP.Core.Model.SharePoint
                 if (updatingExistingPage)
                 {
                     await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
-                    //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
                 }
                 else
                 {
@@ -1573,7 +1572,8 @@ namespace PnP.Core.Model.SharePoint
             }
             else
             {
-                if (layoutType == PageLayoutType.Home && KeepDefaultWebParts)
+                // if it's a home page and we've no added any content then consider this 
+                if (layoutType == PageLayoutType.Home && KeepDefaultWebParts && Sections.Count == 0)
                 {
                     PageListItem[PageConstants.CanvasField] = "";
                 }
@@ -1705,7 +1705,6 @@ namespace PnP.Core.Model.SharePoint
             if (updatingExistingPage)
             {
                 await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
-                //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
             }
             else
             {
@@ -1954,7 +1953,6 @@ namespace PnP.Core.Model.SharePoint
             // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
             // "Additions to this Web site have been blocked" error
             await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
-            //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
         }
 
         public void PromoteAsNewsArticle()
@@ -1982,7 +1980,6 @@ namespace PnP.Core.Model.SharePoint
             // Don't use UpdateOverWriteVersion here as the page can already be checked in, doing so will give an 
             // "Additions to this Web site have been blocked" error
             await PageListItem.SystemUpdateAsync().ConfigureAwait(false);
-            //await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
         }
 
         public void PromoteAsHomePage()
