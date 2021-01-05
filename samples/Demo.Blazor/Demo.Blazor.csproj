@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" PrivateAssets="all" />
-    <PackageReference Include="PnP.Core" Version="0.4.2-beta1" />
+    <PackageReference Include="PnP.Core" Version="0.4.34-beta1" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
     <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" Version="5.0.0" />
   </ItemGroup>
