@@ -29,18 +29,6 @@ namespace PnP.Core.Test.Security
         }
 
         [TestMethod]
-        public async Task GetSharePointGroups()
-        {
-            //TestCommon.Instance.Mocking = false;
-            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
-            {
-                var web = await context.Web.GetAsync(p => p.SiteGroups);
-
-                Assert.IsTrue(web.SiteGroups.Length > 0);
-            }
-        }
-
-        [TestMethod]
         public async Task GetCurrentUser()
         {
             //TestCommon.Instance.Mocking = false;
@@ -107,7 +95,6 @@ namespace PnP.Core.Test.Security
                 Assert.IsTrue(sharePointUser != null);
                 Assert.IsTrue(sharePointUser.Id > 0);
                 Assert.IsTrue(sharePointUser.UserPrincipalName == graphUser.UserPrincipalName);
-
             }
         }
     }

@@ -1,0 +1,9 @@
+--batchresponse_74b3cae5-3393-4e9a-833b-a866cd0be0ee
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"results":[{"__metadata":{"id":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/RoleDefinitions(1073741826)","uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/RoleDefinitions(1073741826)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"176","Low":"138612833"},"Description":"Can view pages and list items and download documents.","Hidden":false,"Id":1073741826,"Name":"Read","Order":128,"RoleTypeKind":2}]}}
+--batchresponse_74b3cae5-3393-4e9a-833b-a866cd0be0ee--

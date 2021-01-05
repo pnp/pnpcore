@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -217,11 +218,21 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public IInformationRightsManagementSettings InformationRightsManagementSettings { get; }
 
+        /// <summary>
+        /// Collection of role assignments for this list
+        /// </summary>
+        public IRoleAssignmentCollection RoleAssignments { get; }
+
 
         /// <summary>
         /// Get a list of the views
         /// </summary>
         public IViewCollection Views { get; }
+
+        /// <summary>
+        /// Returns if the list has unique role assignments
+        /// </summary>
+        public bool HasUniqueRoleAssignments { get; }
 
         /// <summary>
         /// Moves this list into the site collection recycle bin, returns the recyle bin item id
@@ -402,5 +413,30 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="blockEdit">Prevent editing of the list (Record)</param>
         /// <param name="syncToItems">If true the compliance tag is synced to the list items in this list</param>
         public Task SetComplianceTagBatchAsync(Batch batch, string complianceTagValue, bool blockDelete, bool blockEdit, bool syncToItems);
+
+        /// <summary>
+        /// Creates unique role assignments for the list.
+        /// </summary>
+        /// <param name="copyRoleAssignments">Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</param>
+        /// <param name="clearSubscopes">If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</param>
+        public void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
+        /// Creates unique role assignments for the list.
+        /// </summary>
+        /// <param name="copyRoleAssignments">Specifies whether to copy the role assignments from the parent securable object. If the value is false, the collection of role assignments must contain only 1 role assignment containing the current user after the operation.</param>
+        /// <param name="clearSubscopes">If the securable object is a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects in the current site and in the sites which inherit role assignments from the current site must be cleared and those securable objects will inherit role assignments from the current site after this call. If the securable object is a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged. If the securable object is not a site, and the clearsubscopes parameter is true, the role assignments for all child securable objects must be cleared and those securable objects will inherit role assignments from the current securable object after this call. If the securable object is not a site, and the clearsubscopes parameter is false, the role assignments for all child securable objects which do not inherit role assignments from their parent object must remain unchanged.</param>
+        public Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes);
+
+        /// <summary>
+        /// Removes the local role assignments so that the list, and all its descendant objects, re-inherit role assignments from the parent object.
+        /// </summary>
+        public void ResetRoleInheritance();
+
+        /// <summary>
+        /// Removes the local role assignments so that the list, and all its descendant objects, re-inherit role assignments from the parent object.
+        /// </summary>
+        public Task ResetRoleInheritanceAsync();
+
     }
 }

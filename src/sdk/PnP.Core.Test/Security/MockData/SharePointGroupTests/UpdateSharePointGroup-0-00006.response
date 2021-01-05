@@ -1,0 +1,9 @@
+--batchresponse_9c01dc80-4bc0-4534-9960-fe34c7b60457
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"RemoveById":null}}
+--batchresponse_9c01dc80-4bc0-4534-9960-fe34c7b60457--

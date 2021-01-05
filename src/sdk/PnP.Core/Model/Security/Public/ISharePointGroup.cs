@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
@@ -7,7 +8,7 @@ namespace PnP.Core.Model.Security
     /// Public interface to define a SharePoint Group
     /// </summary>
     [ConcreteType(typeof(SharePointGroup))]
-    public interface ISharePointGroup : IDataModel<ISharePointGroup>, IDataModelGet<ISharePointGroup>, IDataModelDelete, ISharePointPrincipal, IQueryableDataModel
+    public interface ISharePointGroup : IDataModel<ISharePointGroup>, IDataModelGet<ISharePointGroup>, IDataModelUpdate, IDataModelDelete, ISharePointPrincipal, IQueryableDataModel
     {
         /// <summary>
         /// Allow members to edit the group members
@@ -124,5 +125,42 @@ namespace PnP.Core.Model.Security
         /// </summary>
         public Task RemoveUserBatchAsync(Batch batch, int userId);
 
+        /// <summary>
+        /// Retrieves the role definitions for this group
+        /// </summary>
+        public IRoleDefinitionCollection GetRoleDefinitions();
+
+        /// <summary>
+        /// Retrieves the role definitions for this group
+        /// </summary>
+        public Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync();
+
+        /// <summary>
+        /// Adds role definitions for this group
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool AddRoleDefinitions(params string[] names);
+
+        /// <summary>
+        /// Adds role definitions for this group
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> AddRoleDefinitionsAsync(params string[] names);
+
+        /// <summary>
+        /// Removes role definitions for this group
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool RemoveRoleDefinitions(params string[] names);
+
+        /// <summary>
+        /// Removes role definitions for this group
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> RemoveRoleDefinitionsAsync(params string[] names);
     }
 }

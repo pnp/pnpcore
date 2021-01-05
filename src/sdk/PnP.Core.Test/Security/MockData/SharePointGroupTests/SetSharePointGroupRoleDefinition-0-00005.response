@@ -1,0 +1,9 @@
+--batchresponse_351d42b2-0b5e-4c7d-ab18-0c2616872f31
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 400 Bad Request
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"error":{"code":"-1, Microsoft.SharePoint.Client.InvalidClientQueryException","message":{"lang":"en-US","value":"The expression \"web/roleassignments/addroleassignment(principalid=5,roledefid=1073741826\" is not valid."}}}
+--batchresponse_351d42b2-0b5e-4c7d-ab18-0c2616872f31--

@@ -43,6 +43,60 @@
             }
         }
 
+        public void Clear(PermissionKind permissionKind)
+        {
+            int num = (int)permissionKind;
+            num--;
+            uint num2 = 1;
+            if (num >= 0 && num < 32)
+            {
+                num2 <<= num;
+                num2 = ~num2;
+                Low &= num2;
+            }
+            else if (num >= 32 && num < 64)
+            {
+                num2 <<= num - 32;
+                num2 = ~num2;
+                High &= num2;
+            }
+        }
+
+        public void ClearAll()
+        {
+            High = 0;
+            Low = 0;
+        }
+
+        public void Set(PermissionKind permissionKind)
+        {
+            switch (permissionKind)
+            {
+                case PermissionKind.FullMask:
+                    Low = 65535;
+                    High = 32767;
+                    return;
+                case PermissionKind.EmptyMask:
+                    Low = 0;
+                    High = 0;
+                    return;
+            }
+            int num = (int)permissionKind;
+            num--;
+            uint num2 = 1;
+            if (num >= 0 && num < 32)
+            {
+                num2 <<= num;
+                Low |= num2;
+            }
+            else if (num >= 32 && num < 64)
+            {
+                num2 <<= num - 32;
+                High |= num2;
+            }
+        }
+
+
         public bool HasPermissions(uint high, uint low)
         {
             if ((High & high) == high)

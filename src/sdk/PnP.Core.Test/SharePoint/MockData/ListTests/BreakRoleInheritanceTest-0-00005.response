@@ -1,0 +1,10 @@
+--batchresponse_2e391c21-6aa0-445c-9953-afd4d8335b98
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+ETAG: "2"
+
+{"d":{"__metadata":{"id":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/Lists(guid'a0b139dc-8f15-4d74-a74d-458f4d6c2d15')","uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/Lists(guid'a0b139dc-8f15-4d74-a74d-458f4d6c2d15')","etag":"\"2\"","type":"SP.List"},"HasUniqueRoleAssignments":true,"Id":"a0b139dc-8f15-4d74-a74d-458f4d6c2d15"}}
+--batchresponse_2e391c21-6aa0-445c-9953-afd4d8335b98--

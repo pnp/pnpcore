@@ -773,7 +773,7 @@ namespace PnP.Core.Test.SharePoint
                     // Get list with roorfolder, more optimized
                     list = await context2.Web.Lists.GetByIdAsync(listId,
                         l => l.RootFolder, l => l.Fields.LoadProperties(f => f.Id, f => f.Title, f => f.InternalName, f => f.TypeAsString));
-                    
+
                     await list.Items.AddAsync(values);
 
                     using (var context3 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 3))
@@ -789,6 +789,68 @@ namespace PnP.Core.Test.SharePoint
                 }
             }
         }
+
+        [TestMethod]
+        public async Task BreakRoleInheritanceTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = context.Web.Get(p => p.Lists);
+
+                string listTitle = $"List-{Guid.NewGuid()}";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+              
+                myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
+
+                await myList.BreakRoleInheritanceAsync(false, false);
+
+                await myList.EnsurePropertiesAsync(l => l.HasUniqueRoleAssignments);
+
+                Assert.IsTrue(myList.HasUniqueRoleAssignments);
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task ResetRoleInheritanceTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = context.Web.Get(p => p.Lists);
+
+                string listTitle = $"List-{Guid.NewGuid()}";
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+
+                myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
+
+                await myList.BreakRoleInheritanceAsync(false, false);
+
+                await myList.ResetRoleInheritanceAsync();
+
+                await myList.EnsurePropertiesAsync(l => l.HasUniqueRoleAssignments);
+
+                Assert.IsFalse(myList.HasUniqueRoleAssignments);
+
+                await myList.DeleteAsync();
+            }
+        }
+
 
     }
 }

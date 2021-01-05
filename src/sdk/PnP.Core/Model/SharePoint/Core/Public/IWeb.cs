@@ -501,6 +501,17 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public ISharePointGroup AssociatedVisitorGroup { get; }
 
+        /// <summary>
+        /// Role Definitions defined in this web
+        /// </summary>
+        public IRoleDefinitionCollection RoleDefinitions { get; }
+
+        /// <summary>
+        /// Role Assignments defined in this web
+        /// </summary>
+        public IRoleAssignmentCollection RoleAssignments { get; }
+
+
         #endregion
 
         #region Methods
@@ -946,11 +957,6 @@ namespace PnP.Core.Model.SharePoint
         ///// To update...
         ///// </summary>
         //public IPushNotificationSubscriberCollection PushNotificationSubscribers { get; }
-
-        ///// <summary>
-        ///// To update...
-        ///// </summary>
-        //public IRoleDefinitionCollection RoleDefinitions { get; }
 
         ///// <summary>
         ///// To update...

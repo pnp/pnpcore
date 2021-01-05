@@ -1,4 +1,5 @@
-﻿using PnP.Core.Services;
+﻿using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -183,8 +184,14 @@ namespace PnP.Core.Model.SharePoint
 
         public IViewCollection Views { get => GetModelCollectionValue<IViewCollection>(); }
 
+        public bool HasUniqueRoleAssignments { get => GetValue<bool>(); set => SetValue(value); }
+
+        public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
+
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
+
         #endregion
 
         #region Methods
@@ -476,7 +483,7 @@ namespace PnP.Core.Model.SharePoint
 
                 if (json.TryGetProperty("GetListComplianceTag", out JsonElement getAvailableTagsForSite))
                 {
-                    var tag = JsonSerializer.Deserialize<ComplianceTag>(getAvailableTagsForSite.GetRawText(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    var tag = getAvailableTagsForSite.ToObject<ComplianceTag>(new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                     return tag;
                 }
             }
@@ -534,6 +541,31 @@ namespace PnP.Core.Model.SharePoint
             return apiCall;
         }
 
+        #endregion
+
+        #region Security
+
+        public void BreakRoleInheritance(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            BreakRoleInheritanceAsync(copyRoleAssignments, clearSubscopes).GetAwaiter().GetResult();
+        }
+
+        public async Task BreakRoleInheritanceAsync(bool copyRoleAssignments, bool clearSubscopes)
+        {
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/breakroleinheritance(copyRoleAssignments={copyRoleAssignments.ToString().ToLower()},clearSubscopes={clearSubscopes.ToString().ToLower()})", ApiType.SPORest);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        public void ResetRoleInheritance()
+        {
+            ResetRoleInheritanceAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task ResetRoleInheritanceAsync()
+        {
+            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/resetroleinheritance", ApiType.SPORest);
+            await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
         #endregion
 
         #endregion

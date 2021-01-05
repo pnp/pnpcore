@@ -10,6 +10,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added support to add and remove roledefinitions to a SharePoint group [erwinvanhunen - Erwin van Hunen]
+- Added support for breaking role inheritance and resetting role inheritance for a list [erwinvanhunen - Erwin van Hunen]
+- Added support for creating and deleting roledefinitions [erwinvanhunen - Erwin van Hunen]
 - Added support for deleting SharePoint groups [erwinvanhunen - Erwin van Hunen]
 - Added support for adding and removing users from ISharePointGroup [erwinvanhunen - Erwin van Hunen]
 - Added support for setting the Compliance Tag on a list [erwinvanhunen - Erwin van Hunen]

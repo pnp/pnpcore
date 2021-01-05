@@ -305,6 +305,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ISharePointGroup AssociatedVisitorGroup { get => GetModelValue<ISharePointGroup>(); }
 
+        public IRoleAssignmentCollection RoleAssignments { get => GetModelCollectionValue<IRoleAssignmentCollection>(); }
+        public IRoleDefinitionCollection RoleDefinitions { get => GetModelCollectionValue<IRoleDefinitionCollection>(); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = Guid.Parse(value.ToString()); }
@@ -759,7 +761,7 @@ namespace PnP.Core.Model.SharePoint
         public async Task EnsureMultilingualAsync(List<int> requiredLanguageIds)
         {
             // Ensure the needed web properties are loaded
-            await EnsurePropertiesAsync(p => p.IsMultilingual, p => p.SupportedUILanguageIds, p=>p.Features).ConfigureAwait(false);
+            await EnsurePropertiesAsync(p => p.IsMultilingual, p => p.SupportedUILanguageIds, p => p.Features).ConfigureAwait(false);
 
             bool updated = false;
             // Ensure the multilingual page feature is enabled
@@ -776,7 +778,7 @@ namespace PnP.Core.Model.SharePoint
                 updated = true;
             }
 
-            foreach(var language in requiredLanguageIds)
+            foreach (var language in requiredLanguageIds)
             {
                 if (!SupportedUILanguageIds.Contains(language))
                 {

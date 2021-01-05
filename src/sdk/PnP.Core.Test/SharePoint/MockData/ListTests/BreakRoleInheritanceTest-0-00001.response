@@ -1,0 +1,9 @@
+--batchresponse_1f1ec37f-7f25-4f2d-ae0e-4c9f9592563e
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+
+{"d":{"__metadata":{"id":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Site","uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Site","type":"SP.Site"},"GroupId":"5a73aa20-9b95-4749-ae32-54dd913fad2d","Id":"d56c51f2-eba3-477f-9688-54eb1684ba79"}}
+--batchresponse_1f1ec37f-7f25-4f2d-ae0e-4c9f9592563e--

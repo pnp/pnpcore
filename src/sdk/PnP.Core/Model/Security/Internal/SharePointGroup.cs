@@ -1,17 +1,36 @@
 ﻿using PnP.Core.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
 {
-    [SharePointType("SP.Group", Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/SiteGroups", Delete ="_api/Web/SiteGroups/RemoveById({Id})")]
+    [SharePointType("SP.Group", Uri = "_api/Web/sitegroups/getbyid({Id})", LinqGet = "_api/Web/SiteGroups", Delete = "_api/Web/SiteGroups/RemoveById({Id})")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class SharePointGroup : BaseDataModel<ISharePointGroup>, ISharePointGroup
     {
         #region Construction
         public SharePointGroup()
         {
+            AddApiCallHandler = async (keyValuePairs) =>
+            {
+                return await Task.Run(() =>
+                {
+                    var endPointUri = $"_api/web/sitegroups";
+
+                    var body = new
+                    {
+                        __metadata = new { type = "SP.Group" },
+                        this.Title,
+                    };
+                    var jsonBody = JsonSerializer.Serialize(body);
+                    return new ApiCall(endPointUri, ApiType.SPORest, jsonBody);
+
+                }).ConfigureAwait(false);
+            };
         }
         #endregion
 
@@ -46,12 +65,13 @@ namespace PnP.Core.Model.Security
 
         public bool RequestToJoinLeaveEmailSetting { get => GetValue<bool>(); set => SetValue(value); }
 
+        public ISharePointUserCollection Users { get => GetModelCollectionValue<ISharePointUserCollection>(); }
+
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = int.Parse(value.ToString()); }
-
         #endregion
 
-        public ISharePointUserCollection Users { get => GetModelCollectionValue<ISharePointUserCollection>(); }
+        #region Methods
 
         public void AddUser(string loginName)
         {
@@ -144,5 +164,70 @@ namespace PnP.Core.Model.Security
             string endpointUrl = $"{entity.SharePointGet}/Users/GetById({userId})";
             return new ApiCall(endpointUrl, ApiType.SPORest);
         }
+
+        public IRoleDefinitionCollection GetRoleDefinitions()
+        {
+            return GetRoleDefinitionsAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync()
+        {
+            var roleAssignment = await PnPContext.Web.RoleAssignments.GetFirstOrDefaultAsync(p => p.PrincipalId == Id, r => r.RoleDefinitions).ConfigureAwait(false);
+            return roleAssignment?.RoleDefinitions;
+        }
+
+        public bool AddRoleDefinitions(params string[] names)
+        {
+            return AddRoleDefinitionsAsync(names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> AddRoleDefinitionsAsync(params string[] names)
+        {
+            var result = false;
+            foreach (var name in names)
+            {
+                var roleDefinition = await PnPContext.Web.RoleDefinitions.GetFirstOrDefaultAsync(d => d.Name == name).ConfigureAwait(false);
+                if (roleDefinition != null)
+                {
+                    var apiCall = new ApiCall($"_api/web/roleassignments/addroleassignment(principalid={Id},roledefid={roleDefinition.Id})", ApiType.SPORest);
+                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                }
+                else
+                {
+                    throw new ArgumentException($"Role definition '{name}' not found.");
+                }
+            }
+            return result;
+        }
+
+        public bool RemoveRoleDefinitions(params string[] names)
+        {
+            return RemoveRoleDefinitionsAsync(names).GetAwaiter().GetResult();
+        }
+
+        public async Task<bool> RemoveRoleDefinitionsAsync(params string[] names)
+        {
+            var result = false;
+            foreach (var name in names)
+            {
+                var roleDefinitions = await GetRoleDefinitionsAsync().ConfigureAwait(false);
+
+                var roleDefinition = roleDefinitions.FirstOrDefault(r => r.Name == name);
+                if (roleDefinition != null)
+                {
+                    var apiCall = new ApiCall($"_api/web/roleassignments/removeroleassignment(principalid={Id},roledefid={roleDefinition.Id})", ApiType.SPORest);
+                    var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+                    result = response.StatusCode == System.Net.HttpStatusCode.OK;
+                }
+                else
+                {
+                    throw new ArgumentException($"Role definition '{name}' not found for this group.");
+                }
+            }
+            return result;
+        }
+
+        #endregion
     }
 }

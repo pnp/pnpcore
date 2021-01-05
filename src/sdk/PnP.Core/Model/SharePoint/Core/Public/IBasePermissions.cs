@@ -20,6 +20,16 @@
         #region methods
 
         /// <summary>
+        /// Clears the specified permission for the current instance.
+        /// </summary>
+        void Clear(PermissionKind permissionKind);
+        
+        /// <summary>
+        /// Clears all permissions for the current instance.
+        /// </summary>
+        void ClearAll();
+
+        /// <summary>
         /// Is this requested <see cref="PermissionKind"/> include?
         /// </summary>
         /// <param name="perm"><see cref="PermissionKind"/> permisson</param>
@@ -34,7 +44,16 @@
         /// <returns>True if included, false otherwise</returns>
         public bool HasPermissions(uint high, uint low);
 
+        /// <summary>
+        /// Sets the specified permission for the current instance.
+        /// </summary>
+        /// <param name="permissionKind"></param>
+#pragma warning disable CA1716 // override reserved keywork Set
+        void Set(PermissionKind permissionKind);
+#pragma warning restore CA1716
+
         #endregion
+
 
     }
 }
