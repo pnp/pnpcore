@@ -10,6 +10,8 @@
     href: basics-batching.md
   - name: Async or not
     href: basics-async.md
+  - name: API configuration
+    href: basics-apis.md
 - name: Authentication  
   items:
   - name: Configuration
