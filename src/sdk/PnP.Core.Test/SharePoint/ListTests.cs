@@ -799,7 +799,7 @@ namespace PnP.Core.Test.SharePoint
             {
                 var web = context.Web.Get(p => p.Lists);
 
-                string listTitle = $"List-{Guid.NewGuid()}";
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("BreakRoleInheritanceTest");
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
@@ -828,14 +828,13 @@ namespace PnP.Core.Test.SharePoint
             {
                 var web = context.Web.Get(p => p.Lists);
 
-                string listTitle = $"List-{Guid.NewGuid()}";
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("ResetRoleInheritanceTest");
                 var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
 
                 if (myList != null)
                 {
                     Assert.Inconclusive("Test data set should be setup to not have the list available.");
                 }
-
 
                 myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
 
@@ -848,6 +847,115 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsFalse(myList.HasUniqueRoleAssignments);
 
                 await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task GetRoleDefinitionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = context.Web.Get(p => p.Lists, p => p.CurrentUser);
+
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("GetRoleDefinitionsTest");
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
+
+                await myList.BreakRoleInheritanceAsync(false, false);
+
+                var roleDefinitions = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
+
+                Assert.IsTrue(roleDefinitions.Length > 0);
+
+                await myList.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddRoleDefinitionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("AddRoleDefinitionsTest");
+                string roleDefName = TestCommon.GetPnPSdkTestAssetName("AddRoleDefinitionsTest");
+
+                var web = context.Web.Get(p => p.Lists, p => p.CurrentUser);
+
+                var roleDefinition = web.RoleDefinitions.Add(roleDefName, RoleType.Administrator, new PermissionKind[] { PermissionKind.AddAndCustomizePages });
+                                
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
+
+                await myList.BreakRoleInheritanceAsync(false, false);
+
+                myList.AddRoleDefinitions(web.CurrentUser.Id, roleDefName);
+
+                var roleDefinitions = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
+
+                Assert.IsTrue(roleDefinitions.Length > 1 && roleDefinitions.FirstOrDefault(r => r.Name == roleDefName) != null);
+
+                await myList.DeleteAsync();
+
+                await roleDefinition.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task RemoveRoleDefinitionsTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("RemoveRoleDefinitionsTest");
+                string roleDefName = TestCommon.GetPnPSdkTestAssetName("RemoveRoleDefinitionsTest");
+
+                var web = context.Web.Get(p => p.Lists, p => p.CurrentUser);
+
+                var roleDefinition = web.RoleDefinitions.Add(roleDefName, RoleType.Administrator, new PermissionKind[] { PermissionKind.AddAndCustomizePages });
+
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                myList = web.Lists.Add(listTitle, ListTemplateType.GenericList);
+
+                await myList.BreakRoleInheritanceAsync(false, false);
+
+                myList.AddRoleDefinitions(web.CurrentUser.Id, roleDefName);
+
+                var roleDefinitionsBefore = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
+
+                Assert.IsTrue(roleDefinitionsBefore.Length > 0 && roleDefinitionsBefore.FirstOrDefault(r => r.Name == roleDefName) != null);
+
+                myList.RemoveRoleDefinitions(web.CurrentUser.Id, roleDefName);
+
+                var roleDefinitionsAfter = await myList.GetRoleDefinitionsAsync(web.CurrentUser.Id);
+
+                Assert.IsTrue(roleDefinitionsAfter.Length != roleDefinitionsBefore.Length && roleDefinitionsAfter.FirstOrDefault(r => r.Name == roleDefName) == null);
+
+                await myList.DeleteAsync();
+
+                await roleDefinition.DeleteAsync();
             }
         }
 

@@ -438,5 +438,51 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public Task ResetRoleInheritanceAsync();
 
+        /// <summary>
+        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <returns></returns>
+        public IRoleDefinitionCollection GetRoleDefinitions(int principalId);
+
+        /// <summary>
+        /// Returns the role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <returns></returns>
+        public Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId);
+
+        /// <summary>
+        /// Add role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool AddRoleDefinitions(int principalId, params string[] names);
+
+        /// <summary>
+        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> AddRoleDefinitionsAsync(int principalId, params string[] names);
+
+        /// <summary>
+        /// Adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public bool RemoveRoleDefinitions(int principalId, params string[] names);
+
+        /// <summary>
+        /// adds role definitions for a specific principal id (IUser.Id or ISharePointGroup.Id)
+        /// </summary>
+        /// <param name="principalId"></param>
+        /// <param name="names"></param>
+        /// <returns></returns>
+        public Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names);
+
     }
 }

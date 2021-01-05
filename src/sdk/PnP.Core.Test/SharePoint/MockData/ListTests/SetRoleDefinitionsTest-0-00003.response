@@ -1,0 +1,10 @@
+--batchresponse_23fab7de-53ee-45ac-8f3b-6af219d1d91e
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
+LOCATION: https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/RoleDefinitions(1073741958)
+
+{"d":{"__metadata":{"id":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/RoleDefinitions(1073741958)","uri":"https://erwinmcm.sharepoint.com/sites/demo1/_api/Web/RoleDefinitions(1073741958)","type":"SP.RoleDefinition"},"BasePermissions":{"__metadata":{"type":"SP.BasePermissions"},"High":"0","Low":"262144"},"Description":null,"Hidden":false,"Id":1073741958,"Name":"PNP_SDK_TEST_SetRoleDefinitionsTest","Order":0,"RoleTypeKind":0}}
+--batchresponse_23fab7de-53ee-45ac-8f3b-6af219d1d91e--
