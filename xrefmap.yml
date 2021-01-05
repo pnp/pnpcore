@@ -1897,6 +1897,37 @@ references:
   commentId: F:PnP.Core.ErrorType.UnsupportedViaBatch
   fullName: PnP.Core.ErrorType.UnsupportedViaBatch
   nameWithType: ErrorType.UnsupportedViaBatch
+- uid: PnP.Core.JsonExtensions
+  name: JsonExtensions
+  href: api/PnP.Core.JsonExtensions.html
+  commentId: T:PnP.Core.JsonExtensions
+  fullName: PnP.Core.JsonExtensions
+  nameWithType: JsonExtensions
+- uid: PnP.Core.JsonExtensions.ToObject*
+  name: ToObject
+  href: api/PnP.Core.JsonExtensions.html#PnP_Core_JsonExtensions_ToObject_
+  commentId: Overload:PnP.Core.JsonExtensions.ToObject
+  isSpec: "True"
+  fullName: PnP.Core.JsonExtensions.ToObject
+  nameWithType: JsonExtensions.ToObject
+- uid: PnP.Core.JsonExtensions.ToObject``1(JsonDocument,JsonSerializerOptions)
+  name: ToObject<T>(JsonDocument, JsonSerializerOptions)
+  href: api/PnP.Core.JsonExtensions.html#PnP_Core_JsonExtensions_ToObject__1_JsonDocument_JsonSerializerOptions_
+  commentId: M:PnP.Core.JsonExtensions.ToObject``1(JsonDocument,JsonSerializerOptions)
+  name.vb: ToObject(Of T)(JsonDocument, JsonSerializerOptions)
+  fullName: PnP.Core.JsonExtensions.ToObject<T>(JsonDocument, JsonSerializerOptions)
+  fullName.vb: PnP.Core.JsonExtensions.ToObject(Of T)(JsonDocument, JsonSerializerOptions)
+  nameWithType: JsonExtensions.ToObject<T>(JsonDocument, JsonSerializerOptions)
+  nameWithType.vb: JsonExtensions.ToObject(Of T)(JsonDocument, JsonSerializerOptions)
+- uid: PnP.Core.JsonExtensions.ToObject``1(JsonElement,JsonSerializerOptions)
+  name: ToObject<T>(JsonElement, JsonSerializerOptions)
+  href: api/PnP.Core.JsonExtensions.html#PnP_Core_JsonExtensions_ToObject__1_JsonElement_JsonSerializerOptions_
+  commentId: M:PnP.Core.JsonExtensions.ToObject``1(JsonElement,JsonSerializerOptions)
+  name.vb: ToObject(Of T)(JsonElement, JsonSerializerOptions)
+  fullName: PnP.Core.JsonExtensions.ToObject<T>(JsonElement, JsonSerializerOptions)
+  fullName.vb: PnP.Core.JsonExtensions.ToObject(Of T)(JsonElement, JsonSerializerOptions)
+  nameWithType: JsonExtensions.ToObject<T>(JsonElement, JsonSerializerOptions)
+  nameWithType.vb: JsonExtensions.ToObject(Of T)(JsonElement, JsonSerializerOptions)
 - uid: PnP.Core.MicrosoftGraphError
   name: MicrosoftGraphError
   href: api/PnP.Core.MicrosoftGraphError.html
@@ -3427,12 +3458,267 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Security.IIdentity.UserIdentityType
   nameWithType: IIdentity.UserIdentityType
+- uid: PnP.Core.Model.Security.IRoleAssignment
+  name: IRoleAssignment
+  href: api/PnP.Core.Model.Security.IRoleAssignment.html
+  commentId: T:PnP.Core.Model.Security.IRoleAssignment
+  fullName: PnP.Core.Model.Security.IRoleAssignment
+  nameWithType: IRoleAssignment
+- uid: PnP.Core.Model.Security.IRoleAssignment.PrincipalId
+  name: PrincipalId
+  href: api/PnP.Core.Model.Security.IRoleAssignment.html#PnP_Core_Model_Security_IRoleAssignment_PrincipalId
+  commentId: P:PnP.Core.Model.Security.IRoleAssignment.PrincipalId
+  fullName: PnP.Core.Model.Security.IRoleAssignment.PrincipalId
+  nameWithType: IRoleAssignment.PrincipalId
+- uid: PnP.Core.Model.Security.IRoleAssignment.PrincipalId*
+  name: PrincipalId
+  href: api/PnP.Core.Model.Security.IRoleAssignment.html#PnP_Core_Model_Security_IRoleAssignment_PrincipalId_
+  commentId: Overload:PnP.Core.Model.Security.IRoleAssignment.PrincipalId
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleAssignment.PrincipalId
+  nameWithType: IRoleAssignment.PrincipalId
+- uid: PnP.Core.Model.Security.IRoleAssignment.RoleDefinitions
+  name: RoleDefinitions
+  href: api/PnP.Core.Model.Security.IRoleAssignment.html#PnP_Core_Model_Security_IRoleAssignment_RoleDefinitions
+  commentId: P:PnP.Core.Model.Security.IRoleAssignment.RoleDefinitions
+  fullName: PnP.Core.Model.Security.IRoleAssignment.RoleDefinitions
+  nameWithType: IRoleAssignment.RoleDefinitions
+- uid: PnP.Core.Model.Security.IRoleAssignment.RoleDefinitions*
+  name: RoleDefinitions
+  href: api/PnP.Core.Model.Security.IRoleAssignment.html#PnP_Core_Model_Security_IRoleAssignment_RoleDefinitions_
+  commentId: Overload:PnP.Core.Model.Security.IRoleAssignment.RoleDefinitions
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleAssignment.RoleDefinitions
+  nameWithType: IRoleAssignment.RoleDefinitions
+- uid: PnP.Core.Model.Security.IRoleAssignmentCollection
+  name: IRoleAssignmentCollection
+  href: api/PnP.Core.Model.Security.IRoleAssignmentCollection.html
+  commentId: T:PnP.Core.Model.Security.IRoleAssignmentCollection
+  fullName: PnP.Core.Model.Security.IRoleAssignmentCollection
+  nameWithType: IRoleAssignmentCollection
+- uid: PnP.Core.Model.Security.IRoleDefinition
+  name: IRoleDefinition
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html
+  commentId: T:PnP.Core.Model.Security.IRoleDefinition
+  fullName: PnP.Core.Model.Security.IRoleDefinition
+  nameWithType: IRoleDefinition
+- uid: PnP.Core.Model.Security.IRoleDefinition.BasePermissions
+  name: BasePermissions
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_BasePermissions
+  commentId: P:PnP.Core.Model.Security.IRoleDefinition.BasePermissions
+  fullName: PnP.Core.Model.Security.IRoleDefinition.BasePermissions
+  nameWithType: IRoleDefinition.BasePermissions
+- uid: PnP.Core.Model.Security.IRoleDefinition.BasePermissions*
+  name: BasePermissions
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_BasePermissions_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinition.BasePermissions
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinition.BasePermissions
+  nameWithType: IRoleDefinition.BasePermissions
+- uid: PnP.Core.Model.Security.IRoleDefinition.Description
+  name: Description
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Description
+  commentId: P:PnP.Core.Model.Security.IRoleDefinition.Description
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Description
+  nameWithType: IRoleDefinition.Description
+- uid: PnP.Core.Model.Security.IRoleDefinition.Description*
+  name: Description
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Description_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinition.Description
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Description
+  nameWithType: IRoleDefinition.Description
+- uid: PnP.Core.Model.Security.IRoleDefinition.Hidden
+  name: Hidden
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Hidden
+  commentId: P:PnP.Core.Model.Security.IRoleDefinition.Hidden
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Hidden
+  nameWithType: IRoleDefinition.Hidden
+- uid: PnP.Core.Model.Security.IRoleDefinition.Hidden*
+  name: Hidden
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Hidden_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinition.Hidden
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Hidden
+  nameWithType: IRoleDefinition.Hidden
+- uid: PnP.Core.Model.Security.IRoleDefinition.Id
+  name: Id
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Id
+  commentId: P:PnP.Core.Model.Security.IRoleDefinition.Id
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Id
+  nameWithType: IRoleDefinition.Id
+- uid: PnP.Core.Model.Security.IRoleDefinition.Id*
+  name: Id
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Id_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinition.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Id
+  nameWithType: IRoleDefinition.Id
+- uid: PnP.Core.Model.Security.IRoleDefinition.Name
+  name: Name
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Name
+  commentId: P:PnP.Core.Model.Security.IRoleDefinition.Name
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Name
+  nameWithType: IRoleDefinition.Name
+- uid: PnP.Core.Model.Security.IRoleDefinition.Name*
+  name: Name
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Name_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinition.Name
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Name
+  nameWithType: IRoleDefinition.Name
+- uid: PnP.Core.Model.Security.IRoleDefinition.Order
+  name: Order
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Order
+  commentId: P:PnP.Core.Model.Security.IRoleDefinition.Order
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Order
+  nameWithType: IRoleDefinition.Order
+- uid: PnP.Core.Model.Security.IRoleDefinition.Order*
+  name: Order
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_Order_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinition.Order
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinition.Order
+  nameWithType: IRoleDefinition.Order
+- uid: PnP.Core.Model.Security.IRoleDefinition.RoleTypeKind
+  name: RoleTypeKind
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_RoleTypeKind
+  commentId: P:PnP.Core.Model.Security.IRoleDefinition.RoleTypeKind
+  fullName: PnP.Core.Model.Security.IRoleDefinition.RoleTypeKind
+  nameWithType: IRoleDefinition.RoleTypeKind
+- uid: PnP.Core.Model.Security.IRoleDefinition.RoleTypeKind*
+  name: RoleTypeKind
+  href: api/PnP.Core.Model.Security.IRoleDefinition.html#PnP_Core_Model_Security_IRoleDefinition_RoleTypeKind_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinition.RoleTypeKind
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinition.RoleTypeKind
+  nameWithType: IRoleDefinition.RoleTypeKind
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection
+  name: IRoleDefinitionCollection
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html
+  commentId: T:PnP.Core.Model.Security.IRoleDefinitionCollection
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection
+  nameWithType: IRoleDefinitionCollection
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.Add(System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name: Add(String, RoleType, PermissionKind[], String, Boolean, Int32)
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_Add_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_
+  commentId: M:PnP.Core.Model.Security.IRoleDefinitionCollection.Add(System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name.vb: Add(String, RoleType, PermissionKind(), String, Boolean, Int32)
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.Add(System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind[], System.String, System.Boolean, System.Int32)
+  fullName.vb: PnP.Core.Model.Security.IRoleDefinitionCollection.Add(System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind(), System.String, System.Boolean, System.Int32)
+  nameWithType: IRoleDefinitionCollection.Add(String, RoleType, PermissionKind[], String, Boolean, Int32)
+  nameWithType.vb: IRoleDefinitionCollection.Add(String, RoleType, PermissionKind(), String, Boolean, Int32)
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.Add*
+  name: Add
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_Add_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinitionCollection.Add
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.Add
+  nameWithType: IRoleDefinitionCollection.Add
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.AddAsync(System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name: AddAsync(String, RoleType, PermissionKind[], String, Boolean, Int32)
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_AddAsync_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_
+  commentId: M:PnP.Core.Model.Security.IRoleDefinitionCollection.AddAsync(System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name.vb: AddAsync(String, RoleType, PermissionKind(), String, Boolean, Int32)
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.AddAsync(System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind[], System.String, System.Boolean, System.Int32)
+  fullName.vb: PnP.Core.Model.Security.IRoleDefinitionCollection.AddAsync(System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind(), System.String, System.Boolean, System.Int32)
+  nameWithType: IRoleDefinitionCollection.AddAsync(String, RoleType, PermissionKind[], String, Boolean, Int32)
+  nameWithType.vb: IRoleDefinitionCollection.AddAsync(String, RoleType, PermissionKind(), String, Boolean, Int32)
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.AddAsync*
+  name: AddAsync
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_AddAsync_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinitionCollection.AddAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.AddAsync
+  nameWithType: IRoleDefinitionCollection.AddAsync
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name: AddBatch(Batch, String, RoleType, PermissionKind[], String, Boolean, Int32)
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatch_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_
+  commentId: M:PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name.vb: AddBatch(Batch, String, RoleType, PermissionKind(), String, Boolean, Int32)
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind[], System.String, System.Boolean, System.Int32)
+  fullName.vb: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind(), System.String, System.Boolean, System.Int32)
+  nameWithType: IRoleDefinitionCollection.AddBatch(Batch, String, RoleType, PermissionKind[], String, Boolean, Int32)
+  nameWithType.vb: IRoleDefinitionCollection.AddBatch(Batch, String, RoleType, PermissionKind(), String, Boolean, Int32)
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name: AddBatch(String, RoleType, PermissionKind[], String, Boolean, Int32)
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatch_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_
+  commentId: M:PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name.vb: AddBatch(String, RoleType, PermissionKind(), String, Boolean, Int32)
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind[], System.String, System.Boolean, System.Int32)
+  fullName.vb: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch(System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind(), System.String, System.Boolean, System.Int32)
+  nameWithType: IRoleDefinitionCollection.AddBatch(String, RoleType, PermissionKind[], String, Boolean, Int32)
+  nameWithType.vb: IRoleDefinitionCollection.AddBatch(String, RoleType, PermissionKind(), String, Boolean, Int32)
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch*
+  name: AddBatch
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatch_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatch
+  nameWithType: IRoleDefinitionCollection.AddBatch
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name: AddBatchAsync(Batch, String, RoleType, PermissionKind[], String, Boolean, Int32)
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_
+  commentId: M:PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name.vb: AddBatchAsync(Batch, String, RoleType, PermissionKind(), String, Boolean, Int32)
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind[], System.String, System.Boolean, System.Int32)
+  fullName.vb: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind(), System.String, System.Boolean, System.Int32)
+  nameWithType: IRoleDefinitionCollection.AddBatchAsync(Batch, String, RoleType, PermissionKind[], String, Boolean, Int32)
+  nameWithType.vb: IRoleDefinitionCollection.AddBatchAsync(Batch, String, RoleType, PermissionKind(), String, Boolean, Int32)
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name: AddBatchAsync(String, RoleType, PermissionKind[], String, Boolean, Int32)
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatchAsync_System_String_PnP_Core_Model_SharePoint_RoleType_PnP_Core_Model_SharePoint_PermissionKind___System_String_System_Boolean_System_Int32_
+  commentId: M:PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(System.String,PnP.Core.Model.SharePoint.RoleType,PnP.Core.Model.SharePoint.PermissionKind[],System.String,System.Boolean,System.Int32)
+  name.vb: AddBatchAsync(String, RoleType, PermissionKind(), String, Boolean, Int32)
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind[], System.String, System.Boolean, System.Int32)
+  fullName.vb: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync(System.String, PnP.Core.Model.SharePoint.RoleType, PnP.Core.Model.SharePoint.PermissionKind(), System.String, System.Boolean, System.Int32)
+  nameWithType: IRoleDefinitionCollection.AddBatchAsync(String, RoleType, PermissionKind[], String, Boolean, Int32)
+  nameWithType.vb: IRoleDefinitionCollection.AddBatchAsync(String, RoleType, PermissionKind(), String, Boolean, Int32)
+- uid: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.Security.IRoleDefinitionCollection.html#PnP_Core_Model_Security_IRoleDefinitionCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.IRoleDefinitionCollection.AddBatchAsync
+  nameWithType: IRoleDefinitionCollection.AddBatchAsync
 - uid: PnP.Core.Model.Security.ISharePointGroup
   name: ISharePointGroup
   href: api/PnP.Core.Model.Security.ISharePointGroup.html
   commentId: T:PnP.Core.Model.Security.ISharePointGroup
   fullName: PnP.Core.Model.Security.ISharePointGroup
   nameWithType: ISharePointGroup
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions(System.String[])
+  name: AddRoleDefinitions(String[])
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitions_System_String___
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions(System.String[])
+  name.vb: AddRoleDefinitions(String())
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions(System.String[])
+  fullName.vb: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions(System.String())
+  nameWithType: ISharePointGroup.AddRoleDefinitions(String[])
+  nameWithType.vb: ISharePointGroup.AddRoleDefinitions(String())
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions*
+  name: AddRoleDefinitions
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitions_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitions
+  nameWithType: ISharePointGroup.AddRoleDefinitions
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync(System.String[])
+  name: AddRoleDefinitionsAsync(String[])
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitionsAsync_System_String___
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync(System.String[])
+  name.vb: AddRoleDefinitionsAsync(String())
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync(System.String[])
+  fullName.vb: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync(System.String())
+  nameWithType: ISharePointGroup.AddRoleDefinitionsAsync(String[])
+  nameWithType.vb: ISharePointGroup.AddRoleDefinitionsAsync(String())
+- uid: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync*
+  name: AddRoleDefinitionsAsync
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddRoleDefinitionsAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.AddRoleDefinitionsAsync
+  nameWithType: ISharePointGroup.AddRoleDefinitionsAsync
 - uid: PnP.Core.Model.Security.ISharePointGroup.AddUser(System.String)
   name: AddUser(String)
   href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_AddUser_System_String_
@@ -3588,6 +3874,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Security.ISharePointGroup.Description
   nameWithType: ISharePointGroup.Description
+- uid: PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions
+  name: GetRoleDefinitions()
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitions
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions
+  fullName: PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions()
+  nameWithType: ISharePointGroup.GetRoleDefinitions()
+- uid: PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions*
+  name: GetRoleDefinitions
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitions_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitions
+  nameWithType: ISharePointGroup.GetRoleDefinitions
+- uid: PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync
+  name: GetRoleDefinitionsAsync()
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitionsAsync
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync
+  fullName: PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync()
+  nameWithType: ISharePointGroup.GetRoleDefinitionsAsync()
+- uid: PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync*
+  name: GetRoleDefinitionsAsync
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_GetRoleDefinitionsAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.GetRoleDefinitionsAsync
+  nameWithType: ISharePointGroup.GetRoleDefinitionsAsync
 - uid: PnP.Core.Model.Security.ISharePointGroup.OnlyAllowMembersViewMembership
   name: OnlyAllowMembersViewMembership
   href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_OnlyAllowMembersViewMembership
@@ -3614,6 +3926,38 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.Security.ISharePointGroup.OwnerTitle
   nameWithType: ISharePointGroup.OwnerTitle
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions(System.String[])
+  name: RemoveRoleDefinitions(String[])
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitions_System_String___
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions(System.String[])
+  name.vb: RemoveRoleDefinitions(String())
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions(System.String[])
+  fullName.vb: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions(System.String())
+  nameWithType: ISharePointGroup.RemoveRoleDefinitions(String[])
+  nameWithType.vb: ISharePointGroup.RemoveRoleDefinitions(String())
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions*
+  name: RemoveRoleDefinitions
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitions_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitions
+  nameWithType: ISharePointGroup.RemoveRoleDefinitions
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync(System.String[])
+  name: RemoveRoleDefinitionsAsync(String[])
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitionsAsync_System_String___
+  commentId: M:PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync(System.String[])
+  name.vb: RemoveRoleDefinitionsAsync(String())
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync(System.String[])
+  fullName.vb: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync(System.String())
+  nameWithType: ISharePointGroup.RemoveRoleDefinitionsAsync(String[])
+  nameWithType.vb: ISharePointGroup.RemoveRoleDefinitionsAsync(String())
+- uid: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync*
+  name: RemoveRoleDefinitionsAsync
+  href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveRoleDefinitionsAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroup.RemoveRoleDefinitionsAsync
+  nameWithType: ISharePointGroup.RemoveRoleDefinitionsAsync
 - uid: PnP.Core.Model.Security.ISharePointGroup.RemoveUser(System.Int32)
   name: RemoveUser(Int32)
   href: api/PnP.Core.Model.Security.ISharePointGroup.html#PnP_Core_Model_Security_ISharePointGroup_RemoveUser_System_Int32_
@@ -3710,6 +4054,70 @@ references:
   commentId: T:PnP.Core.Model.Security.ISharePointGroupCollection
   fullName: PnP.Core.Model.Security.ISharePointGroupCollection
   nameWithType: ISharePointGroupCollection
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.Add(System.String)
+  name: Add(String)
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_Add_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroupCollection.Add(System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.Add(System.String)
+  nameWithType: ISharePointGroupCollection.Add(String)
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.Add*
+  name: Add
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_Add_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroupCollection.Add
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.Add
+  nameWithType: ISharePointGroupCollection.Add
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.AddAsync(System.String)
+  name: AddAsync(String)
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_AddAsync_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroupCollection.AddAsync(System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.AddAsync(System.String)
+  nameWithType: ISharePointGroupCollection.AddAsync(String)
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.AddAsync*
+  name: AddAsync
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_AddAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroupCollection.AddAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.AddAsync
+  nameWithType: ISharePointGroupCollection.AddAsync
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatch(PnP.Core.Services.Batch,System.String)
+  name: AddBatch(Batch, String)
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_AddBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroupCollection.AddBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: ISharePointGroupCollection.AddBatch(Batch, String)
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatch(System.String)
+  name: AddBatch(String)
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_AddBatch_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroupCollection.AddBatch(System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatch(System.String)
+  nameWithType: ISharePointGroupCollection.AddBatch(String)
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatch*
+  name: AddBatch
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_AddBatch_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroupCollection.AddBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatch
+  nameWithType: ISharePointGroupCollection.AddBatch
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: AddBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_AddBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroupCollection.AddBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: ISharePointGroupCollection.AddBatchAsync(Batch, String)
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatchAsync(System.String)
+  name: AddBatchAsync(String)
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_AddBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.Security.ISharePointGroupCollection.AddBatchAsync(System.String)
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatchAsync(System.String)
+  nameWithType: ISharePointGroupCollection.AddBatchAsync(String)
+- uid: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatchAsync*
+  name: AddBatchAsync
+  href: api/PnP.Core.Model.Security.ISharePointGroupCollection.html#PnP_Core_Model_Security_ISharePointGroupCollection_AddBatchAsync_
+  commentId: Overload:PnP.Core.Model.Security.ISharePointGroupCollection.AddBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.Security.ISharePointGroupCollection.AddBatchAsync
+  nameWithType: ISharePointGroupCollection.AddBatchAsync
 - uid: PnP.Core.Model.Security.ISharePointPrincipal
   name: ISharePointPrincipal
   href: api/PnP.Core.Model.Security.ISharePointPrincipal.html
@@ -5958,6 +6366,32 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IBasePermissions
   fullName: PnP.Core.Model.SharePoint.IBasePermissions
   nameWithType: IBasePermissions
+- uid: PnP.Core.Model.SharePoint.IBasePermissions.Clear(PnP.Core.Model.SharePoint.PermissionKind)
+  name: Clear(PermissionKind)
+  href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_Clear_PnP_Core_Model_SharePoint_PermissionKind_
+  commentId: M:PnP.Core.Model.SharePoint.IBasePermissions.Clear(PnP.Core.Model.SharePoint.PermissionKind)
+  fullName: PnP.Core.Model.SharePoint.IBasePermissions.Clear(PnP.Core.Model.SharePoint.PermissionKind)
+  nameWithType: IBasePermissions.Clear(PermissionKind)
+- uid: PnP.Core.Model.SharePoint.IBasePermissions.Clear*
+  name: Clear
+  href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_Clear_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBasePermissions.Clear
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBasePermissions.Clear
+  nameWithType: IBasePermissions.Clear
+- uid: PnP.Core.Model.SharePoint.IBasePermissions.ClearAll
+  name: ClearAll()
+  href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_ClearAll
+  commentId: M:PnP.Core.Model.SharePoint.IBasePermissions.ClearAll
+  fullName: PnP.Core.Model.SharePoint.IBasePermissions.ClearAll()
+  nameWithType: IBasePermissions.ClearAll()
+- uid: PnP.Core.Model.SharePoint.IBasePermissions.ClearAll*
+  name: ClearAll
+  href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_ClearAll_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBasePermissions.ClearAll
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBasePermissions.ClearAll
+  nameWithType: IBasePermissions.ClearAll
 - uid: PnP.Core.Model.SharePoint.IBasePermissions.Has(PnP.Core.Model.SharePoint.PermissionKind)
   name: Has(PermissionKind)
   href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_Has_PnP_Core_Model_SharePoint_PermissionKind_
@@ -6010,6 +6444,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IBasePermissions.Low
   nameWithType: IBasePermissions.Low
+- uid: PnP.Core.Model.SharePoint.IBasePermissions.Set(PnP.Core.Model.SharePoint.PermissionKind)
+  name: Set(PermissionKind)
+  href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_Set_PnP_Core_Model_SharePoint_PermissionKind_
+  commentId: M:PnP.Core.Model.SharePoint.IBasePermissions.Set(PnP.Core.Model.SharePoint.PermissionKind)
+  fullName: PnP.Core.Model.SharePoint.IBasePermissions.Set(PnP.Core.Model.SharePoint.PermissionKind)
+  nameWithType: IBasePermissions.Set(PermissionKind)
+- uid: PnP.Core.Model.SharePoint.IBasePermissions.Set*
+  name: Set
+  href: api/PnP.Core.Model.SharePoint.IBasePermissions.html#PnP_Core_Model_SharePoint_IBasePermissions_Set_
+  commentId: Overload:PnP.Core.Model.SharePoint.IBasePermissions.Set
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IBasePermissions.Set
+  nameWithType: IBasePermissions.Set
 - uid: PnP.Core.Model.SharePoint.ICanvasColumn
   name: ICanvasColumn
   href: api/PnP.Core.Model.SharePoint.ICanvasColumn.html
@@ -12296,6 +12743,32 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IList
   fullName: PnP.Core.Model.SharePoint.IList
   nameWithType: IList
+- uid: PnP.Core.Model.SharePoint.IList.BreakRoleInheritance(System.Boolean,System.Boolean)
+  name: BreakRoleInheritance(Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_BreakRoleInheritance_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IList.BreakRoleInheritance(System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IList.BreakRoleInheritance(System.Boolean, System.Boolean)
+  nameWithType: IList.BreakRoleInheritance(Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IList.BreakRoleInheritance*
+  name: BreakRoleInheritance
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_BreakRoleInheritance_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.BreakRoleInheritance
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.BreakRoleInheritance
+  nameWithType: IList.BreakRoleInheritance
+- uid: PnP.Core.Model.SharePoint.IList.BreakRoleInheritanceAsync(System.Boolean,System.Boolean)
+  name: BreakRoleInheritanceAsync(Boolean, Boolean)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_BreakRoleInheritanceAsync_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IList.BreakRoleInheritanceAsync(System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IList.BreakRoleInheritanceAsync(System.Boolean, System.Boolean)
+  nameWithType: IList.BreakRoleInheritanceAsync(Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IList.BreakRoleInheritanceAsync*
+  name: BreakRoleInheritanceAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_BreakRoleInheritanceAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.BreakRoleInheritanceAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.BreakRoleInheritanceAsync
+  nameWithType: IList.BreakRoleInheritanceAsync
 - uid: PnP.Core.Model.SharePoint.IList.ContentTypes
   name: ContentTypes
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ContentTypes
@@ -12669,6 +13142,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.GetListDataAsStreamAsync
   nameWithType: IList.GetListDataAsStreamAsync
+- uid: PnP.Core.Model.SharePoint.IList.HasUniqueRoleAssignments
+  name: HasUniqueRoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_HasUniqueRoleAssignments
+  commentId: P:PnP.Core.Model.SharePoint.IList.HasUniqueRoleAssignments
+  fullName: PnP.Core.Model.SharePoint.IList.HasUniqueRoleAssignments
+  nameWithType: IList.HasUniqueRoleAssignments
+- uid: PnP.Core.Model.SharePoint.IList.HasUniqueRoleAssignments*
+  name: HasUniqueRoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_HasUniqueRoleAssignments_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.HasUniqueRoleAssignments
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.HasUniqueRoleAssignments
+  nameWithType: IList.HasUniqueRoleAssignments
 - uid: PnP.Core.Model.SharePoint.IList.Hidden
   name: Hidden
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_Hidden
@@ -12903,6 +13389,45 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.RecycleAsync
   nameWithType: IList.RecycleAsync
+- uid: PnP.Core.Model.SharePoint.IList.ResetRoleInheritance
+  name: ResetRoleInheritance()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ResetRoleInheritance
+  commentId: M:PnP.Core.Model.SharePoint.IList.ResetRoleInheritance
+  fullName: PnP.Core.Model.SharePoint.IList.ResetRoleInheritance()
+  nameWithType: IList.ResetRoleInheritance()
+- uid: PnP.Core.Model.SharePoint.IList.ResetRoleInheritance*
+  name: ResetRoleInheritance
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ResetRoleInheritance_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.ResetRoleInheritance
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.ResetRoleInheritance
+  nameWithType: IList.ResetRoleInheritance
+- uid: PnP.Core.Model.SharePoint.IList.ResetRoleInheritanceAsync
+  name: ResetRoleInheritanceAsync()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ResetRoleInheritanceAsync
+  commentId: M:PnP.Core.Model.SharePoint.IList.ResetRoleInheritanceAsync
+  fullName: PnP.Core.Model.SharePoint.IList.ResetRoleInheritanceAsync()
+  nameWithType: IList.ResetRoleInheritanceAsync()
+- uid: PnP.Core.Model.SharePoint.IList.ResetRoleInheritanceAsync*
+  name: ResetRoleInheritanceAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_ResetRoleInheritanceAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.ResetRoleInheritanceAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.ResetRoleInheritanceAsync
+  nameWithType: IList.ResetRoleInheritanceAsync
+- uid: PnP.Core.Model.SharePoint.IList.RoleAssignments
+  name: RoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RoleAssignments
+  commentId: P:PnP.Core.Model.SharePoint.IList.RoleAssignments
+  fullName: PnP.Core.Model.SharePoint.IList.RoleAssignments
+  nameWithType: IList.RoleAssignments
+- uid: PnP.Core.Model.SharePoint.IList.RoleAssignments*
+  name: RoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RoleAssignments_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.RoleAssignments
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.RoleAssignments
+  nameWithType: IList.RoleAssignments
 - uid: PnP.Core.Model.SharePoint.IList.RootFolder
   name: RootFolder
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RootFolder
@@ -20621,6 +21146,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IWeb.RequestAccessEmail
   nameWithType: IWeb.RequestAccessEmail
+- uid: PnP.Core.Model.SharePoint.IWeb.RoleAssignments
+  name: RoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RoleAssignments
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.RoleAssignments
+  fullName: PnP.Core.Model.SharePoint.IWeb.RoleAssignments
+  nameWithType: IWeb.RoleAssignments
+- uid: PnP.Core.Model.SharePoint.IWeb.RoleAssignments*
+  name: RoleAssignments
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RoleAssignments_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.RoleAssignments
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.RoleAssignments
+  nameWithType: IWeb.RoleAssignments
+- uid: PnP.Core.Model.SharePoint.IWeb.RoleDefinitions
+  name: RoleDefinitions
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RoleDefinitions
+  commentId: P:PnP.Core.Model.SharePoint.IWeb.RoleDefinitions
+  fullName: PnP.Core.Model.SharePoint.IWeb.RoleDefinitions
+  nameWithType: IWeb.RoleDefinitions
+- uid: PnP.Core.Model.SharePoint.IWeb.RoleDefinitions*
+  name: RoleDefinitions
+  href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RoleDefinitions_
+  commentId: Overload:PnP.Core.Model.SharePoint.IWeb.RoleDefinitions
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IWeb.RoleDefinitions
+  nameWithType: IWeb.RoleDefinitions
 - uid: PnP.Core.Model.SharePoint.IWeb.RootFolder
   name: RootFolder
   href: api/PnP.Core.Model.SharePoint.IWeb.html#PnP_Core_Model_SharePoint_IWeb_RootFolder
@@ -22679,6 +23230,78 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.Visualization
   fullName: PnP.Core.Model.SharePoint.RenderListDataOptionsFlags.Visualization
   nameWithType: RenderListDataOptionsFlags.Visualization
+- uid: PnP.Core.Model.SharePoint.RoleType
+  name: RoleType
+  href: api/PnP.Core.Model.SharePoint.RoleType.html
+  commentId: T:PnP.Core.Model.SharePoint.RoleType
+  fullName: PnP.Core.Model.SharePoint.RoleType
+  nameWithType: RoleType
+- uid: PnP.Core.Model.SharePoint.RoleType.Administrator
+  name: Administrator
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_Administrator
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.Administrator
+  fullName: PnP.Core.Model.SharePoint.RoleType.Administrator
+  nameWithType: RoleType.Administrator
+- uid: PnP.Core.Model.SharePoint.RoleType.Contributor
+  name: Contributor
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_Contributor
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.Contributor
+  fullName: PnP.Core.Model.SharePoint.RoleType.Contributor
+  nameWithType: RoleType.Contributor
+- uid: PnP.Core.Model.SharePoint.RoleType.Editor
+  name: Editor
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_Editor
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.Editor
+  fullName: PnP.Core.Model.SharePoint.RoleType.Editor
+  nameWithType: RoleType.Editor
+- uid: PnP.Core.Model.SharePoint.RoleType.Guest
+  name: Guest
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_Guest
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.Guest
+  fullName: PnP.Core.Model.SharePoint.RoleType.Guest
+  nameWithType: RoleType.Guest
+- uid: PnP.Core.Model.SharePoint.RoleType.None
+  name: None
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_None
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.None
+  fullName: PnP.Core.Model.SharePoint.RoleType.None
+  nameWithType: RoleType.None
+- uid: PnP.Core.Model.SharePoint.RoleType.Reader
+  name: Reader
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_Reader
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.Reader
+  fullName: PnP.Core.Model.SharePoint.RoleType.Reader
+  nameWithType: RoleType.Reader
+- uid: PnP.Core.Model.SharePoint.RoleType.RestrictedGuest
+  name: RestrictedGuest
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_RestrictedGuest
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.RestrictedGuest
+  fullName: PnP.Core.Model.SharePoint.RoleType.RestrictedGuest
+  nameWithType: RoleType.RestrictedGuest
+- uid: PnP.Core.Model.SharePoint.RoleType.RestrictedReader
+  name: RestrictedReader
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_RestrictedReader
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.RestrictedReader
+  fullName: PnP.Core.Model.SharePoint.RoleType.RestrictedReader
+  nameWithType: RoleType.RestrictedReader
+- uid: PnP.Core.Model.SharePoint.RoleType.Reviewer
+  name: Reviewer
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_Reviewer
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.Reviewer
+  fullName: PnP.Core.Model.SharePoint.RoleType.Reviewer
+  nameWithType: RoleType.Reviewer
+- uid: PnP.Core.Model.SharePoint.RoleType.System
+  name: System
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_System
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.System
+  fullName: PnP.Core.Model.SharePoint.RoleType.System
+  nameWithType: RoleType.System
+- uid: PnP.Core.Model.SharePoint.RoleType.WebDesigner
+  name: WebDesigner
+  href: api/PnP.Core.Model.SharePoint.RoleType.html#PnP_Core_Model_SharePoint_RoleType_WebDesigner
+  commentId: F:PnP.Core.Model.SharePoint.RoleType.WebDesigner
+  fullName: PnP.Core.Model.SharePoint.RoleType.WebDesigner
+  nameWithType: RoleType.WebDesigner
 - uid: PnP.Core.Model.SharePoint.SearchBoxInNavBar
   name: SearchBoxInNavBar
   href: api/PnP.Core.Model.SharePoint.SearchBoxInNavBar.html
