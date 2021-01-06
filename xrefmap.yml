@@ -2572,6 +2572,24 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).GetBatchAsync
   nameWithType: IDataModelGet<TModel>.GetBatchAsync
   nameWithType.vb: IDataModelGet(Of TModel).GetBatchAsync
+- uid: PnP.Core.Model.IDataModelGet`1.LoadProperties(Expression{Func{`0,System.Object}}[])
+  name: LoadProperties(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_LoadProperties_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModelGet`1.LoadProperties(Expression{Func{`0,System.Object}}[])
+  name.vb: LoadProperties(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.LoadProperties(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).LoadProperties(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModelGet<TModel>.LoadProperties(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModelGet(Of TModel).LoadProperties(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModelGet`1.LoadProperties*
+  name: LoadProperties
+  href: api/PnP.Core.Model.IDataModelGet-1.html#PnP_Core_Model_IDataModelGet_1_LoadProperties_
+  commentId: Overload:PnP.Core.Model.IDataModelGet`1.LoadProperties
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelGet<TModel>.LoadProperties
+  fullName.vb: PnP.Core.Model.IDataModelGet(Of TModel).LoadProperties
+  nameWithType: IDataModelGet<TModel>.LoadProperties
+  nameWithType.vb: IDataModelGet(Of TModel).LoadProperties
 - uid: PnP.Core.Model.IDataModelMappingHandler
   name: IDataModelMappingHandler
   href: api/PnP.Core.Model.IDataModelMappingHandler.html
