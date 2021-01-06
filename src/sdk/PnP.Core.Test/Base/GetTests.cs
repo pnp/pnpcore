@@ -223,6 +223,30 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task GetSingleModelPropertyWithExpandViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var site = await context.Site.GetAsync(p => p.RootWeb.LoadProperties(p => p.Title, p => p.NoCrawl,
+                                                                                     p => p.Lists.LoadProperties(p=>p.Title)));
+
+                // Was the rootweb model property loaded
+                Assert.IsTrue(context.Site.IsPropertyAvailable(p => p.RootWeb));
+                // Do we we have the key property loaded on the model property
+                Assert.IsTrue(site.IsPropertyAvailable(p => p.Id));
+                Assert.IsTrue(site.Id != Guid.Empty);
+
+                // Check the root web properties
+                Assert.IsTrue(site.RootWeb.IsPropertyAvailable(p => p.Title));
+                Assert.IsTrue(site.RootWeb.IsPropertyAvailable(p => p.NoCrawl));
+                Assert.IsTrue(site.RootWeb.IsPropertyAvailable(p => p.Lists));
+                Assert.IsTrue(site.RootWeb.Lists.Any());
+                Assert.IsTrue(site.RootWeb.Lists.First().IsPropertyAvailable(p => p.Title));
+            }
+        }
+
+        [TestMethod]
         public async Task ExpandWithIncludeViaRest()
         {
             //TestCommon.Instance.Mocking = false;
@@ -795,7 +819,7 @@ namespace PnP.Core.Test.Base
 
                 string newQuery = "";
                 string query = "";
-
+                
                 // Selecting one regular property on expand
                 (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<ITeamChannel, object>>[] { p => p.Tabs.LoadProperties(p => p.DisplayName) },
                                                new TeamChannel() { PnPContext = context });
@@ -820,6 +844,12 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(query.Equals("($select%3DdisplayName,weburl,configuration,teamsapp,id)", StringComparison.InvariantCultureIgnoreCase));
                 Assert.IsTrue(newQuery.Equals("$select=displayName,weburl,configuration,teamsapp,id", StringComparison.InvariantCultureIgnoreCase));
 
+                // Selecting multiple regular properties on expand including a complex type and DataModel type (non expandable)
+                (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<ITeam, object>>[] { p => p.PrimaryChannel.LoadProperties(p => p.DisplayName) },
+                                               new Team() { PnPContext = context });
+                Assert.IsTrue(query.Equals("($select%3DdisplayName,id)", StringComparison.InvariantCultureIgnoreCase));
+                Assert.IsTrue(newQuery.Equals("$select=displayName,id", StringComparison.InvariantCultureIgnoreCase));
+
                 /* commenting out as Lists are loaded via an additional query in the batch 
                 // Selecting expandable property on expand
                 (newQuery, query) = BuildGraphExpandSelect(new Expression<Func<IWeb, object>>[] { p => p.Lists.LoadProperties(p => p.Title, p=>p.Items.LoadProperties(p=>p.Id)) },
@@ -835,7 +865,6 @@ namespace PnP.Core.Test.Base
                 */
             }
         }
-
 
         [TestMethod]
         public async Task LoadTeamPropertiesViaGraph()
@@ -861,6 +890,21 @@ namespace PnP.Core.Test.Base
                     Assert.IsTrue(installedApp.IsPropertyAvailable(p => p.DistributionMethod));
                     Assert.IsFalse(installedApp.IsPropertyAvailable(p => p.DisplayName));
                 }
+            }
+        }
+
+        [TestMethod]
+        public async Task LoadTeamPropertiesWithExpandViaGraph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Expand for a property that is implemented using it's own graph query
+                // Url for loading channels is teams/{Site.GroupId}/channels
+                var team = await context.Team.GetAsync(p => p.PrimaryChannel.LoadProperties(p => p.DisplayName));
+
+                Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
+                Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.DisplayName));
             }
         }
 

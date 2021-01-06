@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -126,7 +127,6 @@ namespace PnP.Core.Model
         /// <returns>The Domain Model object</returns>
         Task<TModel> GetAsync(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions);
 
-
         /// <summary>
         /// Retrieves a Domain Model object from the remote data source, eventually selecting custom properties or using a default set of properties
         /// </summary>
@@ -144,5 +144,13 @@ namespace PnP.Core.Model
         /// <returns>The Domain Model object</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "I prefer Get over Read :-)")]
         TModel Get(ApiResponse apiResponse, params Expression<Func<TModel, object>>[] expressions);
+
+        /// <summary>
+        /// Enables using the .LoadProperties lambda expression syntax on a model
+        /// </summary>
+        /// <param name="expressions">Expression</param>
+        /// <returns>Null...return value is not needed</returns>
+        public IQueryable<TModel> LoadProperties(params Expression<Func<TModel, object>>[] expressions);
+
     }
 }

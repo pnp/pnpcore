@@ -384,7 +384,8 @@ namespace PnP.Core.Services
             foreach (var urlParameter in urlParameters.Where(i => !string.IsNullOrEmpty(i.Value)))
             {
                 // Add key and value, which will be automatically URL-encoded, if needed
-                queryString.Add(urlParameter.Key, urlParameter.Value);
+                // as = already might have been encoded as %3D we need to undo that as otherwise we get a double encoding resulting in %253D
+                queryString.Add(urlParameter.Key, urlParameter.Value.Replace("%3D", "="));
             }
 
             // Build the whole URL

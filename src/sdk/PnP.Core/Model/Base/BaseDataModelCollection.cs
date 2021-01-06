@@ -465,7 +465,6 @@ namespace PnP.Core.Model
 
         #endregion
 
-
         #region Paging (ISupportPaging implementation)
 
         public bool CanPage
