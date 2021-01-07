@@ -62,9 +62,11 @@ Like with updating you first need to have the model instance to delete available
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
 var myList = await context.Web.Lists.GetByTitleAsync("My List", 
-                                                     p => p.Title, p => p.Items, 
-                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, 
-                                                                                  p => p.TypeAsString, p => p.Title));
+                                                    p => p.Title, p => p.Items, 
+                                                    p => p.Fields.LoadProperties(p => p.InternalName, 
+                                                        p => p.FieldTypeKind,
+                                                        p => p.TypeAsString, 
+                                                        p => p.Title));
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items)
 {
