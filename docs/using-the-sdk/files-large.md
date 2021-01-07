@@ -20,7 +20,7 @@ IFile addedFile = await siteAssetsFolder.Files.AddAsync("2gbfile.test",
 If you want to download a large file you do need to use the [GetContentAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync_System_Boolean_) as that method allows you to specify you want to use a streamed download by specifying this in the [GetContentAsync method](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_GetContentAsync_System_Boolean_). In a streamed download the API will return the call whenever the first bytes have arrived from the server allowing you to process the file in chunks without the full file being loaded in the process's memory.
 
 >[!Important]
-> The default HTTP timeout is 100 seconds, which is not enough for large file downloads. You can increase this time out in the [PnP Core SDK configuration](https://pnp.github.io/pnpcore/using-the-sdk/pnp%20core%20settings.html#settings-overview) up to an infinite timeout.
+> The default HTTP timeout is 100 seconds, which is not enough for large file downloads. You can increase this time out in the [PnP Core SDK configuration](basics-settings.md) up to an infinite timeout.
 
 ```csharp
 IFolder parentFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f => f.Name == "SiteAssets");

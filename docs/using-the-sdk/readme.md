@@ -13,9 +13,12 @@ The PnP Core SDK is maintained in the PnP GitHub repository: https://github.com/
 ## Referencing the PnP Core SDK in your project
 
 The recommended approach is to use the preview [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) together with the preview [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth). The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
-Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version. If you don't want to rely on the PnP.Core.Auth package, you can eventually [implement your own Authentication Provider](./custom-authentication-provider.md).
+Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.
 
-If you want to debug the SDK code you can include the PnP Core project (`src\PnP.Core\PnP.Core.csproj`) in your project as a dependency.
+> [!Note]
+>
+> - If you want to use the PnP Core SDK authentication providers then simply add the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth), the correct [PnP.Core nuget package](https://www.nuget.org/packages/PnP.Core) will be automatically added as it's a dependency of the [PnP.Core.Auth nuget package](https://www.nuget.org/packages/PnP.Core.Auth).
+> - If you want to debug the SDK code you can include the PnP Core project (`src\PnP.Core\PnP.Core.csproj`) in your project as a dependency.
 
 ## Configuring the needed services
 
@@ -23,9 +26,6 @@ In order to configure the needed services in a .Net Core console app, you can re
 
 ```csharp
 var host = Host.CreateDefaultBuilder()
-// Set environment to use
-.UseEnvironment("demo") // you can eventually read it from environment variables
-// Configure logging
 // Configure logging
 .ConfigureServices((hostingContext, services) =>
 {
@@ -111,8 +111,6 @@ If you like to configure the .Net Core console app in code, without relying on t
 
 ```csharp
 var host = Host.CreateDefaultBuilder()
-// Set environment to use
-.UseEnvironment("demo") // you can eventually read it from environment variables
 // Configure logging
 .ConfigureServices((hostingContext, services) =>
 {

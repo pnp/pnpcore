@@ -1,6 +1,6 @@
 # Using paging
 
-Being able to retrieve data in a paged manner is important when you want to use the first data rows while you're loading still additional data, but also when you're loading large data sets. When you page data you can start from either a `GetPagedAsync()` method call or from a linq query that uses the `Take()` method. Once you've done one of these calls to Microsoft 365 can use the paging methods to get additional pages.
+Being able to retrieve data in a paged manner is important when you want to use the first data rows while you're loading still additional data, but also when you're loading large data sets. When you page data you can start from either a `GetPagedAsync()` method call or from a LINQ query that uses the `Take()` method. Once you've done one of these calls to Microsoft 365 you can use the paging methods to get additional pages.
 
 In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
 
@@ -18,8 +18,8 @@ Method/Attribute | Description
 `GetPagedAsync(filter, pageSize, expression)` | Loads the first page of a given size with a filter scoping down the pages to request. Optionally an expression can be specified to only return the properties you need
 `GetPagedAsync(pageSize, expression)` | Loads the first page of a given size. Optionally an expression can be specified to only return the properties you need
 `CanPage` | This attribute indicates whether you can use the paging API's to request a next page or to request all remaining pages
-`GetNextPageAsync()` | Get's the next page, this method assumes you've already loaded a first page using either the `GetPagedAsync()` method or via a linq query that included the `Take()` method
-`GetAllPagesAsync()` | Loads all the pages in a collection until there's no new data returned anymore. This method assumes you've already loaded a first page using either the `GetPagedAsync()` method or via a linq query that included the `Take()` method
+`GetNextPageAsync()` | Gets the next page, this method assumes you've already loaded a first page using either the `GetPagedAsync()` method or via a LINQ query that included the `Take()` method
+`GetAllPagesAsync()` | Loads all the pages in a collection until there's no new data returned anymore. This method assumes you've already loaded a first page using either the `GetPagedAsync()` method or via a LINQ query that included the `Take()` method
 
 > [!Note]
 > For all these methods there's also a synchronous equivalent (just drop `Async` from the method name).
@@ -85,14 +85,14 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-### Starting via a linq query with Take()
+### Starting via a LINQ query with Take()
 
-In this example a linq query is executed first using the `Take()` method. Once the linq query was execution was triggered (in this case by calling `ToListAsync()`), you can using the paging methods to get additional pages of data.
+In this example a LINQ query is executed first using the `Take()` method. Once the linq query was execution was triggered (in this case by calling `ToListAsync()`), you can using the paging methods to get additional pages of data.
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 {
-    // Issue a linq query
+    // Issue a LINQ query
     var lists = context.Web.Lists.Take(2);
     var queryResult = await lists.ToListAsync();
 
