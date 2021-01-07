@@ -13,7 +13,7 @@ Although the SDK can use these 4 API endpoints, for you as a developer there's n
 
 ### SharePoint REST versus Microsoft Graph
 
-The PnP Core SDK by default is configured to favor the Microsoft Graph API when you're reading SharePoint data assuming the requested properties are available via Graph. Let's give a simple example showing two similar PnP Core SDK method calls which under the covers result in different API's being called.
+The PnP Core SDK by default is configured to favor the Microsoft Graph API when you're reading SharePoint data assuming the requested properties are available via Graph. Let's give a simple example showing two similar PnP Core SDK method calls which under the covers result in different APIs being called.
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))

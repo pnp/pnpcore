@@ -1,7 +1,7 @@
 ﻿namespace PnP.Core.Services
 {
     /// <summary>
-    /// Possible API's used to talk to data stores
+    /// Possible APIs used to talk to data stores
     /// </summary>
     internal enum ApiType
     {

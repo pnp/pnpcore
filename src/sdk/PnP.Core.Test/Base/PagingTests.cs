@@ -26,7 +26,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // This rest requires beta api's, so bail out if that's not enabled
+                // This rest requires beta APIs, so bail out if that's not enabled
                 if (!context.GraphCanUseBeta)
                 {
                     Assert.Inconclusive("This test requires Graph beta to be allowed.");

@@ -3,7 +3,7 @@
 Once a page has been created it sits in draft status and it will not be seen as news on the site's home page. You can publish a page and promote it by posting the page as news or you can make the page the home page of your site.
 
 > [!Note]
-> A page needs to be saved before you can use any of the "promotion" API's.
+> A page needs to be saved before you can use any of the "promotion" APIs.
 
 ## Publishing a page
 

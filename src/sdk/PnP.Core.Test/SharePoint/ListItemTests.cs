@@ -1432,7 +1432,7 @@ namespace PnP.Core.Test.SharePoint
                 var userTwo = await context.Web.EnsureUserAsync("Everyone except external users");
                 // Site pages library for lookup of the home page
                 IList sitePages = await context.Web.Lists.GetByTitleAsync("Site Pages");
-                // Taxonomy data ~ replace by creating term set once taxonomy API's work again
+                // Taxonomy data ~ replace by creating term set once taxonomy APIs work again
                 Guid termStore = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c");
                 Guid termSet = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5");
                 Guid term1 = new Guid("108b34b1-87af-452d-be13-881a29477965");
@@ -1808,7 +1808,7 @@ namespace PnP.Core.Test.SharePoint
                 var userTwo = await context.Web.EnsureUserAsync("Everyone except external users");
                 // Site pages library for lookup of the home page
                 IList sitePages = await context.Web.Lists.GetByTitleAsync("Site Pages");
-                // Taxonomy data ~ replace by creating term set once taxonomy API's work again
+                // Taxonomy data ~ replace by creating term set once taxonomy APIs work again
                 Guid termStore = new Guid("437b86fc-1258-45a9-85ea-87a29156ce3c");
                 Guid termSet = new Guid("d50ec969-cb27-4a49-839f-3c25d1d607d5");
                 Guid term1 = new Guid("108b34b1-87af-452d-be13-881a29477965");

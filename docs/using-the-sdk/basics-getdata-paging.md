@@ -17,7 +17,7 @@ Method/Attribute | Description
 -----------------| -----------
 `GetPagedAsync(filter, pageSize, expression)` | Loads the first page of a given size with a filter scoping down the pages to request. Optionally an expression can be specified to only return the properties you need
 `GetPagedAsync(pageSize, expression)` | Loads the first page of a given size. Optionally an expression can be specified to only return the properties you need
-`CanPage` | This attribute indicates whether you can use the paging API's to request a next page or to request all remaining pages
+`CanPage` | This attribute indicates whether you can use the paging APIs to request a next page or to request all remaining pages
 `GetNextPageAsync()` | Gets the next page, this method assumes you've already loaded a first page using either the `GetPagedAsync()` method or via a LINQ query that included the `Take()` method
 `GetAllPagesAsync()` | Loads all the pages in a collection until there's no new data returned anymore. This method assumes you've already loaded a first page using either the `GetPagedAsync()` method or via a LINQ query that included the `Take()` method
 
