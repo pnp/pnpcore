@@ -109,7 +109,7 @@ IFile addedFile = await siteAssetsFolder.Files.AddAsync(&quot;test.docx&quot;,
                   System.IO.File.OpenRead($&quot;.{Path.DirectorySeparatorChar}TestFilesFolder{Path.DirectorySeparatorChar}test.docx&quot;));
 </code></pre>
 <h2 id="updating-data">Updating data</h2>
-<p>To update data you first need to get the data to update, see <a href="basics-getdata.html">Get data</a> to learn more on getting data. Once you've data for example (you did get a list) you can update the list by changing one of it's properties and then call one of the update methods (e.g. UpdateAsync). You can perform multiple updates to the model and only when you're done with updating the properties you need to call one of the update methods, the PnP Core SDK will keep track of the changes and will only use the actually changed properties in the update request.</p>
+<p>To update data you first need to get the data to update, see <a href="basics-getdata.html">Get data</a> to learn more on getting data. Once you've data (e.g. you did get a list) you can update the list by changing one of it's properties and then call one of the update methods (e.g. UpdateAsync). You can perform multiple updates to the model and only when you're done with updating the properties you need to call one of the update methods, the PnP Core SDK will keep track of the changes and will only use the actually changed properties in the update request.</p>
 <pre><code class="lang-csharp">// Get the list to update
 var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to update&quot;);
 
@@ -125,9 +125,10 @@ await myList.UpdateAsync();
 <h2 id="deleting-data">Deleting data</h2>
 <p>Like with updating you first need to have the model instance to delete available, see <a href="basics-getdata.html">Get data</a> to learn more on getting data. Once you have the model to delete available (e.g. a list item) you can use one of the delete methods to perform the delete. Below example uses the DeleteBatchAsync method to delete all items of a list with a single network request.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
-var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
-                                                                p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, 
-                                                                                             p =&gt; p.TypeAsString, p =&gt; p.Title));
+var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;, 
+                                                     p =&gt; p.Title, p =&gt; p.Items, 
+                                                     p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, 
+                                                                                  p =&gt; p.TypeAsString, p =&gt; p.Title));
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items)
 {
