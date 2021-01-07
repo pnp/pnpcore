@@ -39,7 +39,7 @@ IFile addedFile = await siteAssetsFolder.Files.AddAsync("test.docx",
 
 ## Updating data
 
-To update data you first need to get the data to update, see [Get data](basics-getdata.md) to learn more on getting data. Once you've data for example (you did get a list) you can update the list by changing one of it's properties and then call one of the update methods (e.g. UpdateAsync). You can perform multiple updates to the model and only when you're done with updating the properties you need to call one of the update methods, the PnP Core SDK will keep track of the changes and will only use the actually changed properties in the update request.
+To update data you first need to get the data to update, see [Get data](basics-getdata.md) to learn more on getting data. Once you've data (e.g. you did get a list) you can update the list by changing one of it's properties and then call one of the update methods (e.g. UpdateAsync). You can perform multiple updates to the model and only when you're done with updating the properties you need to call one of the update methods, the PnP Core SDK will keep track of the changes and will only use the actually changed properties in the update request.
 
 ```csharp
 // Get the list to update
@@ -61,9 +61,10 @@ Like with updating you first need to have the model instance to delete available
 
 ```csharp
 // Assume the fields where not yet loaded, so loading them with the list
-var myList = await context.Web.Lists.GetByTitleAsync("My List", p => p.Title, p => p.Items, 
-                                                                p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, 
-                                                                                             p => p.TypeAsString, p => p.Title));
+var myList = await context.Web.Lists.GetByTitleAsync("My List", 
+                                                     p => p.Title, p => p.Items, 
+                                                     p => p.Fields.LoadProperties(p => p.InternalName, p => p.FieldTypeKind, 
+                                                                                  p => p.TypeAsString, p => p.Title));
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items)
 {
