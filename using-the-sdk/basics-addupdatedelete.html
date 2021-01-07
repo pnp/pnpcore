@@ -126,9 +126,11 @@ await myList.UpdateAsync();
 <p>Like with updating you first need to have the model instance to delete available, see <a href="basics-getdata.html">Get data</a> to learn more on getting data. Once you have the model to delete available (e.g. a list item) you can use one of the delete methods to perform the delete. Below example uses the DeleteBatchAsync method to delete all items of a list with a single network request.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
 var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;, 
-                                                     p =&gt; p.Title, p =&gt; p.Items, 
-                                                     p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, 
-                                                                                  p =&gt; p.TypeAsString, p =&gt; p.Title));
+                                                    p =&gt; p.Title, p =&gt; p.Items, 
+                                                    p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, 
+                                                        p =&gt; p.FieldTypeKind,
+                                                        p =&gt; p.TypeAsString, 
+                                                        p =&gt; p.Title));
 // Iterate over the retrieved list items
 foreach (var listItem in myList.Items)
 {
