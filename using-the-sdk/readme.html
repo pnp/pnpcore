@@ -92,14 +92,17 @@
 </ul>
 <h2 id="referencing-the-pnp-core-sdk-in-your-project">Referencing the PnP Core SDK in your project</h2>
 <p>The recommended approach is to use the preview <a href="https://www.nuget.org/packages/PnP.Core">PnP.Core nuget package</a> together with the preview <a href="https://www.nuget.org/packages/PnP.Core.Auth">PnP.Core.Auth nuget package</a>. The former is the actual PnP Core SDK library, while the latter is an helper library that provides a useful set of Authentication Providers to authenticate against Azure Active Directory.
-Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version. If you don't want to rely on the PnP.Core.Auth package, you can eventually <a href="custom-authentication-provider.html">implement your own Authentication Provider</a>.</p>
-<p>If you want to debug the SDK code you can include the PnP Core project (<code>src\PnP.Core\PnP.Core.csproj</code>) in your project as a dependency.</p>
+Each night these preview packages are refreshed, so you can always upgrade to the latest dev bits by upgrading your nuget package to the latest version.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<ul>
+<li>If you want to use the PnP Core SDK authentication providers then simply add the <a href="https://www.nuget.org/packages/PnP.Core.Auth">PnP.Core.Auth nuget package</a>, the correct <a href="https://www.nuget.org/packages/PnP.Core">PnP.Core nuget package</a> will be automatically added as it's a dependency of the <a href="https://www.nuget.org/packages/PnP.Core.Auth">PnP.Core.Auth nuget package</a>.</li>
+<li>If you want to debug the SDK code you can include the PnP Core project (<code>src\PnP.Core\PnP.Core.csproj</code>) in your project as a dependency.</li>
+</ul>
+</div>
 <h2 id="configuring-the-needed-services">Configuring the needed services</h2>
 <p>In order to configure the needed services in a .Net Core console app, you can rely on the <code>AddPnPCore</code> extension method (defined in the PnP.Core nuget package) and on the <code>AddPnPCoreAuthentication</code> method (defined in the PnP.Core.Auth nuget package), like in the following code excerpt:</p>
 <pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
-// Set environment to use
-.UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables
-// Configure logging
 // Configure logging
 .ConfigureServices((hostingContext, services) =&gt;
 {
@@ -176,8 +179,6 @@ Each night these preview packages are refreshed, so you can always upgrade to th
 <p>In the above example, the authentication will rely on the <code>InteractiveAuthenticationProvider</code> (defined in the PnP.Core.Auth nuget package) so that you will simply need to authenticate with a set of valid credentials for your target tenant.</p>
 <p>If you like to configure the .Net Core console app in code, without relying on the <code>appsettings.json</code> file, you can also use the following syntax:</p>
 <pre><code class="lang-csharp">var host = Host.CreateDefaultBuilder()
-// Set environment to use
-.UseEnvironment(&quot;demo&quot;) // you can eventually read it from environment variables
 // Configure logging
 .ConfigureServices((hostingContext, services) =&gt;
 {

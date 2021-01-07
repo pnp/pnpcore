@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Asynchronous versus synchronous | PnP Core SDK </title>
+    <title>Adding, updating or deleting data from Microsoft 365 | PnP Core SDK </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Asynchronous versus synchronous | PnP Core SDK ">
+    <meta name="title" content="Adding, updating or deleting data from Microsoft 365 | PnP Core SDK ">
     <meta name="generator" content="docfx 2.56.5.0">
     <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
     <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
@@ -78,61 +78,66 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-async.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-addupdatedelete.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
-                    <h1 id="asynchronous-versus-synchronous">Asynchronous versus synchronous</h1>
+                    <h1 id="adding-updating-or-deleting-data-from-microsoft-365">Adding, updating or deleting data from Microsoft 365</h1>
 
-<p>Loading data (e.g. a SharePoint list or a Teams channel), updating, adding or deleting...all of these operations can be done either asynchronously (=async) or synchronously (=sync). In this chapter we explain the pro's and con's of each approach and provide some best practices.</p>
+<p>Adding, updating or deleting data (e.g. a SharePoint list item or a Teams channel message) is usually needed when you write applications using the PnP Core SDK and in this article you'll get a brief overview on how to add, update or delete data.</p>
 <p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
-    // See next chapter on how to use the PnPContext
+    // See next chapter on how to use the PnPContext for adding, updating and deleting data
 }
 </code></pre>
-<h2 id="async-or-sync">Async or sync?</h2>
-<p>Let's start with two code snippets which both result in a list item being loaded. The first snippet shows a sync way of loading a list via it's title followed by getting the item with id 1 from that list:</p>
-<pre><code class="lang-csharp">using (var context = pnpContextFactory.Create(&quot;SiteToWorkWith&quot;))
+<h2 id="adding-data">Adding data</h2>
+<p>Adding of data is usually done via an Add method on the collection to which you want to add data, so if you want to add an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItem.html">IListItem</a> you would use one of the Add methods (e.g. <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemCollection.html#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__">AddAsync</a>) on the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListItemCollection.html">IListItemCollection</a> collection. Given that each model (List Item, File, TeamChannel,..) requires different input for doing an add you'll see different add method signatures.</p>
+<pre><code class="lang-csharp">Dictionary&lt;string, object&gt; item = new Dictionary&lt;string, object&gt;()
 {
-    IItem item = context.Web.Lists.GetByTitle(&quot;Site Pages&quot;).Items.GetById(1);
-}
-</code></pre>
-<p>In the second example we do the same but then async:</p>
-<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
-{
-    IList list = await context.Web.Lists.GetByTitleAsync(&quot;Site Pages&quot;);
-    IItem item = await list.Items.GetByIdAsync(1);
-}
-</code></pre>
-<div class="NOTE">
-<h5>Note</h5>
-<p>Both approaches use 2 queries, there's no difference between async and sync when it comes to query efficiency.</p>
-</div>
-<p>Both approaches are comparable from a coding point of view: the difference is in the method names and the <code>await</code> keyword. You might also notice that for the sync approach the code is more fluent as there's no need for <code>await</code> statements, but a similar thing can be done with async via using the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.QueryModel.BaseDataModelExtensions.html#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_Task___0__Func___0_Task___1___">AndThen</a> method to chain async method calls or via nesting each async call with it's corresponding <code>await</code> keyword:</p>
-<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
-{
-    // Option A: Using AndThen() to chain async method calls
-    IItem item = await context.Web.Lists.GetByTitleAsync(&quot;Site Pages&quot;).AndThen(p =&gt; p.Items.GetByIdAsync(1));
+    { &quot;Title&quot;, &quot;Item1&quot; },
+    { &quot;Field A&quot;, 25 }
+};
 
-    // Option B: using multiple awaits
-    IItem item = await (await context.Web.Lists.GetByTitleAsync(&quot;Site Pages&quot;)).Items.GetByIdAsync(1);
-}
+// Add the item
+var addedItem = await myList.Items.AddAsync(item);
 </code></pre>
-<p>In general the recommendation is to use the async methods because:</p>
-<ul>
-<li>They result in better performing code</li>
-<li>Improved application responsiveness (the UI thread is not blocked when a data retrieval is ongoing)</li>
-<li>Prevents deadlocks when using the PnP Core SDK from WPF apps and <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a></li>
-</ul>
-<p>Internally in the PnP Core SDK everything always happens async, the sync methods you see are wrappers over their async counterparts with a <code>GetAwaiter().GetResult()</code> to force the code to wait for the outcome.</p>
-<div class="IMPORTANT">
-<h5>Important</h5>
-<p>Using the async methods is strongly recommended. Use the sync methods if you're using the PnP Core SDK in an already sync code base, if not use async.</p>
-</div>
-<p>If you want to learn more about async programming checkout these resources:</p>
-<ul>
-<li><a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/">Asynchronous programming with async and await</a></li>
-<li><a href="https://medium.com/@deep_blue_day/long-story-short-async-await-best-practices-in-net-1f39d7d84050">Long Story Short: Async/Await Best Practices in .NET</a></li>
-</ul>
+<p>Another add example is adding (= uploading) a file to a document library:</p>
+<pre><code class="lang-csharp">// Get a reference to a folder
+IFolder siteAssetsFolder = await context.Web.Folders.GetFirstOrDefaultAsync(f =&gt; f.Name == &quot;SiteAssets&quot;);
+
+// Upload a file by adding it to the folder's files collection
+IFile addedFile = await siteAssetsFolder.Files.AddAsync(&quot;test.docx&quot;, 
+                  System.IO.File.OpenRead($&quot;.{Path.DirectorySeparatorChar}TestFilesFolder{Path.DirectorySeparatorChar}test.docx&quot;));
+</code></pre>
+<h2 id="updating-data">Updating data</h2>
+<p>To update data you first need to get the data to update, see <a href="basics-getdata.html">Get data</a> to learn more on getting data. Once you've data for example (you did get a list) you can update the list by changing one of it's properties and then call one of the update methods (e.g. UpdateAsync). You can perform multiple updates to the model and only when you're done with updating the properties you need to call one of the update methods, the PnP Core SDK will keep track of the changes and will only use the actually changed properties in the update request.</p>
+<pre><code class="lang-csharp">// Get the list to update
+var myList = await context.Web.Lists.GetByTitleAsync(&quot;List to update&quot;);
+
+// Update a list property
+myList.Description = &quot;PnP Rocks!&quot;;
+
+// Update another list property
+myList.EnableVersioning = true;
+
+// Send update to the server
+await myList.UpdateAsync();
+</code></pre>
+<h2 id="deleting-data">Deleting data</h2>
+<p>Like with updating you first need to have the model instance to delete available, see <a href="basics-getdata.html">Get data</a> to learn more on getting data. Once you have the model to delete available (e.g. a list item) you can use one of the delete methods to perform the delete. Below example uses the DeleteBatchAsync method to delete all items of a list with a single network request.</p>
+<pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
+var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;, p =&gt; p.Title, p =&gt; p.Items, 
+                                                                p =&gt; p.Fields.LoadProperties(p =&gt; p.InternalName, p =&gt; p.FieldTypeKind, 
+                                                                                             p =&gt; p.TypeAsString, p =&gt; p.Title));
+// Iterate over the retrieved list items
+foreach (var listItem in myList.Items)
+{
+    // Delete all the items in &quot;My List&quot; by adding them to a batch
+    await listItem.DeleteBatchAsync();
+}
+
+// Execute the batch
+await context.ExecuteAsync();
+</code></pre>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

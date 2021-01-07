@@ -78,11 +78,11 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
                   <div class="contribution-panel mobile-hide pull-right">
-                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/using paging.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/basics-getdata-paging.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
                   </div>
                     <h1 id="using-paging">Using paging</h1>
 
-<p>Being able to retrieve data in a paged manner is important when you want to use the first data rows while you're loading still additional data, but also when you're loading large data sets. When you page data you can start from either a <code>GetPagedAsync()</code> method call or from a linq query that uses the <code>Take()</code> method. Once you've done one of these calls to Microsoft 365 can use the paging methods to get additional pages.</p>
+<p>Being able to retrieve data in a paged manner is important when you want to use the first data rows while you're loading still additional data, but also when you're loading large data sets. When you page data you can start from either a <code>GetPagedAsync()</code> method call or from a LINQ query that uses the <code>Take()</code> method. Once you've done one of these calls to Microsoft 365 you can use the paging methods to get additional pages.</p>
 <p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
@@ -108,15 +108,15 @@
 </tr>
 <tr>
 <td><code>CanPage</code></td>
-<td>This attribute indicates whether you can use the paging API's to request a next page or to request all remaining pages</td>
+<td>This attribute indicates whether you can use the paging APIs to request a next page or to request all remaining pages</td>
 </tr>
 <tr>
 <td><code>GetNextPageAsync()</code></td>
-<td>Get's the next page, this method assumes you've already loaded a first page using either the <code>GetPagedAsync()</code> method or via a linq query that included the <code>Take()</code> method</td>
+<td>Gets the next page, this method assumes you've already loaded a first page using either the <code>GetPagedAsync()</code> method or via a LINQ query that included the <code>Take()</code> method</td>
 </tr>
 <tr>
 <td><code>GetAllPagesAsync()</code></td>
-<td>Loads all the pages in a collection until there's no new data returned anymore. This method assumes you've already loaded a first page using either the <code>GetPagedAsync()</code> method or via a linq query that included the <code>Take()</code> method</td>
+<td>Loads all the pages in a collection until there's no new data returned anymore. This method assumes you've already loaded a first page using either the <code>GetPagedAsync()</code> method or via a LINQ query that included the <code>Take()</code> method</td>
 </tr>
 </tbody>
 </table>
@@ -177,11 +177,11 @@
     }
 }
 </code></pre>
-<h3 id="starting-via-a-linq-query-with-take">Starting via a linq query with Take()</h3>
-<p>In this example a linq query is executed first using the <code>Take()</code> method. Once the linq query was execution was triggered (in this case by calling <code>ToListAsync()</code>), you can using the paging methods to get additional pages of data.</p>
+<h3 id="starting-via-a-linq-query-with-take">Starting via a LINQ query with Take()</h3>
+<p>In this example a LINQ query is executed first using the <code>Take()</code> method. Once the linq query was execution was triggered (in this case by calling <code>ToListAsync()</code>), you can using the paging methods to get additional pages of data.</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
-    // Issue a linq query
+    // Issue a LINQ query
     var lists = context.Web.Lists.Take(2);
     var queryResult = await lists.ToListAsync();
 

@@ -3774,7 +3774,7 @@
       "output": {
         ".html": {
           "relative_path": "contributing/extending the model.html",
-          "hash": "P+8NU3xFSXnEV5LQi7aPHQ=="
+          "hash": "6Rw/FaJYeFs7bBDAGEOiJQ=="
         }
       },
       "is_incremental": false,
@@ -4197,7 +4197,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "Pbs/PVRjas6L3/YmB264Ag=="
+          "hash": "nacZPDEfvvha3Z994JQtqA=="
         }
       },
       "is_incremental": false,
@@ -4229,11 +4229,23 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-addupdatedelete.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-addupdatedelete.html",
+          "hash": "Dip7FtlwyW3ZWOi+T/PxjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/basics-apis.md",
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-apis.html",
-          "hash": "uBdXQgopOOJzSQhKw6YvoA=="
+          "hash": "z6D+sUNniS6zGs0SLvcggw=="
         }
       },
       "is_incremental": false,
@@ -4245,7 +4257,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-async.html",
-          "hash": "DzZH5F/44gWMtTboisumeA=="
+          "hash": "dPsjgc07V0F56z1csJqV7Q=="
         }
       },
       "is_incremental": false,
@@ -4257,7 +4269,19 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-batching.html",
-          "hash": "eQLxMfDtJuIEYaiTKBQvvQ=="
+          "hash": "THtBnKeURth15VFFcOlhDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-getdata-paging.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-getdata-paging.html",
+          "hash": "op41fnkKYIiFjo/X/XidYg=="
         }
       },
       "is_incremental": false,
@@ -4269,7 +4293,19 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/basics-getdata.html",
-          "hash": "svhG4SMD5AKNm4AFt3nrHA=="
+          "hash": "mK7E31sVxiHyBmw4oU55bA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-settings.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-settings.html",
+          "hash": "rqmAu58VpS8uCFzp3nEp0g=="
         }
       },
       "is_incremental": false,
@@ -4353,7 +4389,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/files-large.html",
-          "hash": "NA0GmmKxcv3fu8a7tz8ibQ=="
+          "hash": "crj1PgT6SFOWpYThjjr9hg=="
         }
       },
       "is_incremental": false,
@@ -4389,7 +4425,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/listitems-intro.html",
-          "hash": "dBNXidv/BY5l8muwkNykfQ=="
+          "hash": "ObkUsx+K9aQ5/CI3Sy6zHw=="
         }
       },
       "is_incremental": false,
@@ -4461,7 +4497,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/pages-promote.html",
-          "hash": "6RWkkfEY4o0vlfraUmaAkw=="
+          "hash": "4ENauN8VDvq5PZgXgpbTGg=="
         }
       },
       "is_incremental": false,
@@ -4493,23 +4529,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "using-the-sdk/pnp core settings.md",
-      "output": {
-        ".html": {
-          "relative_path": "using-the-sdk/pnp core settings.html",
-          "hash": "5RWBdC7RP5JzTq5Y10YEDw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/readme.md",
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/readme.html",
-          "hash": "DOxwyManOyxhzz6mSkkKKA=="
+          "hash": "hTTmt2jm5xjDHaw6RNXM3A=="
         }
       },
       "is_incremental": false,
@@ -4521,19 +4545,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "Jwfq+ITaK29OgrTUmAwwJw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "using-the-sdk/using paging.md",
-      "output": {
-        ".html": {
-          "relative_path": "using-the-sdk/using paging.html",
-          "hash": "KDnHqalTt4tX0kffT5JZkw=="
+          "hash": "/PnLcdLUdMEBpcCHZ33DVQ=="
         }
       },
       "is_incremental": false,
@@ -4566,7 +4578,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 47,
+          "total_file_count": 48,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

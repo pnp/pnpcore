@@ -123,7 +123,7 @@
 }
 </code></pre>
 <h3 id="step-12-add-the-properties">Step 1.2: Add the properties</h3>
-<p>Once the interface is created you need to add properties to it, the properties you want to add are quite often inspired by what the called API's return. So if the API you plan to call to populate this model returns a string field with name FieldA you would want to add a property for it: <code>public string FieldA { get; set; }</code>. Key things to check are:</p>
+<p>Once the interface is created you need to add properties to it, the properties you want to add are quite often inspired by what the called APIs return. So if the API you plan to call to populate this model returns a string field with name FieldA you would want to add a property for it: <code>public string FieldA { get; set; }</code>. Key things to check are:</p>
 <ul>
 <li>The added properties are public properties</li>
 <li>The added properties have a getter and a setter, unless the property is model collection (e.g. <code>public IListCollection Lists { get; }</code> in <code>IWeb.cs</code>)</li>
@@ -210,10 +210,10 @@ public Guid Id { get =&gt; GetValue&lt;Guid&gt;(); set =&gt; SetValue(value); }
 public override object Key { get =&gt; Id; set =&gt; Id = Guid.Parse(value.ToString()); }
 </code></pre>
 <h2 id="step-3-decorate-the-model-to-enable-createreadupdatedelete-functionality">Step 3: Decorate the model to enable create/read/update/delete functionality</h2>
-<p>With step 1 and 2 done you've a model definition, but there's no behavior yet. To bring the model to life, you'll need to <strong>decorate</strong> it with class and property attributes. Depending on whether you're targeting SharePoint REST API's or Microsoft Graph API's you would use different attributes to decorate the model:</p>
+<p>With step 1 and 2 done you've a model definition, but there's no behavior yet. To bring the model to life, you'll need to <strong>decorate</strong> it with class and property attributes. Depending on whether you're targeting SharePoint REST APIs or Microsoft Graph APIs you would use different attributes to decorate the model:</p>
 <ul>
-<li><a href="extending%20the%20model%20-%20SharePoint%20REST.html">Decorating the model for SharePoint REST API's</a></li>
-<li><a href="extending%20the%20model%20-%20Microsoft%20Graph.html">Decorating the model for Microsoft Graph API's</a></li>
+<li><a href="extending%20the%20model%20-%20SharePoint%20REST.html">Decorating the model for SharePoint REST APIs</a></li>
+<li><a href="extending%20the%20model%20-%20Microsoft%20Graph.html">Decorating the model for Microsoft Graph APIs</a></li>
 </ul>
 <div class="IMPORTANT">
 <h5>Important</h5>
@@ -222,8 +222,8 @@ public override object Key { get =&gt; Id; set =&gt; Id = Guid.Parse(value.ToStr
 <h2 id="step-4-add-additional-functionality">Step 4: Add additional functionality</h2>
 <p>At this point you should have a working model that can be used to read data and depending on the implementation also supports adding, updating and deleting. The power of the SDK however will not just be the model, but also the &quot;rich&quot; extensions on top of it. The extensions can be implemented as methods on the model, e.g. you could imagine an <code>UploadFile</code> method on the <code>ITeamChannel</code> model. For implementing this additional functions you quite often will need to execute API calls and optionally have the resulting JSON response loaded into the model. For doing that there are the <code>RequestAsync</code> and <code>Request</code> base class methods in case you want the resulting JSON be processed or the <code>RawRequestAsync</code> method in case you want to process the resulting JSON as part of your implementation. You'll find more details on this on the pages that explain the model decoration for Graph/REST:</p>
 <ul>
-<li><a href="extending%20the%20model%20-%20SharePoint%20REST.html">Decorating the model for SharePoint REST API's</a></li>
-<li><a href="extending%20the%20model%20-%20Microsoft%20Graph.html">Decorating the model for Microsoft Graph API's</a></li>
+<li><a href="extending%20the%20model%20-%20SharePoint%20REST.html">Decorating the model for SharePoint REST APIs</a></li>
+<li><a href="extending%20the%20model%20-%20Microsoft%20Graph.html">Decorating the model for Microsoft Graph APIs</a></li>
 </ul>
 <h2 id="step-5-write-test-cases">Step 5: Write test cases</h2>
 <p>Quality is key aspect of this library and test cases do help to guarantee quality. See the <a href="writing%20tests.html">Writing test cases</a> article to learn more about how to do that.</p>

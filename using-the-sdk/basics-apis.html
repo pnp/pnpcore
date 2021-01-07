@@ -82,17 +82,17 @@
                   </div>
                     <h1 id="apis-used-by-the-pnp-core-sdk">APIs used by the PnP Core SDK</h1>
 
-<p>The PnP Core SDK is an SDK that when developing with abstracts away the actual API calls being made to Microsoft 365. When looking at the type of API calls the SDK uses there are 4 possible API endpoints being used:</p>
+<p>The PnP Core SDK is an SDK that provides an abstraction over the actual API calls being made to Microsoft 365. When looking at the type of API calls the SDK uses there are 4 possible API endpoints being used:</p>
 <ul>
 <li><strong>Microsoft Graph production endpoint (v1)</strong>: for all queries that require Graph and are available on the v1 endpoint.</li>
-<li><strong>Microsoft Graph beta endpoint (v1)</strong>: for all queries that require Graph and are not currently available on the v1 endpoint.</li>
-<li><strong>SharePoint REST endpoint</strong>: for all SharePoint specific queries, not that by default the SDK favors uses Microsoft Graph for some of the SharePoint needs</li>
-<li><strong>SharePoint client.svc endpoint (CSOM)</strong>: only called in cases where there's no other suitable API that can fulfill the needs</li>
+<li><strong>Microsoft Graph beta endpoint (beta)</strong>: for all queries that require Graph and are currently not available on the v1 endpoint.</li>
+<li><strong>SharePoint REST endpoint</strong>: for all SharePoint specific queries, note that by default the SDK favors uses Microsoft Graph for some of the SharePoint needs (see the <strong>SharePoint REST versus Microsoft Graph</strong> chapter to change that)</li>
+<li><strong>SharePoint client.svc endpoint (CSOM)</strong>: only called in a few cases when there's no other suitable API that can fulfill the needs</li>
 </ul>
-<p>Although the SDK can use these 4 API endpoints, for you as a developer there's no difference in how you write your code, but there might be cases you want to influence the SDK's API selection behavior as explained in the next chapter.</p>
+<p>Although the SDK can use these 4 API endpoints, for you as a developer there's no difference in how you write your code, but there might be cases where you want to influence the SDK's API selection behavior as explained in the next chapter.</p>
 <h2 id="influencing-the-sdk-api-selection">Influencing the SDK API selection</h2>
 <h3 id="sharepoint-rest-versus-microsoft-graph">SharePoint REST versus Microsoft Graph</h3>
-<p>The SDK by default is configured to favor the Microsoft Graph API when you're reading SharePoint data if the requested properties are available via Graph. Let's give a simple example showing two similar PnP Core SDK method calls which under the covers result in different API's being called.</p>
+<p>The PnP Core SDK by default is configured to favor the Microsoft Graph API when you're reading SharePoint data assuming the requested properties are available via Graph. Let's give a simple example showing two similar PnP Core SDK method calls which under the covers result in different APIs being called.</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Uses a Graph API call
@@ -115,9 +115,9 @@
     await context.Web.GetAsync(p =&gt; p.NoCrawl);
 }
 </code></pre>
-<p>Above code snippet showed how to turn off GraphFirst for a single PnPContext, but you can also turn off GraphFirst for all contexts being created via the configuration system, see <a href="pnp%20core%20settings.html">Configuring the PnP Core SDK</a> for more information.</p>
+<p>Above code snippet showed how to turn off GraphFirst for a single PnPContext, but you can also turn off GraphFirst for all contexts being created via the configuration system, see <a href="basics-settings.html">Configuring the PnP Core SDK</a> for more information.</p>
 <h3 id="graph-v1-versus-graph-beta">Graph V1 versus Graph Beta</h3>
-<p>In the PnP Core SDK we try to limit the usage of Microsoft Graph Beta endpoints, but in some cases we do rely on Graph Beta endpoints. By default using Graph Beta is turned on, but if you don't want to use Graph Beta you can tell the SDK to not use it via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html#collapsible-PnP_Core_Services_PnPContext_GraphCanUseBeta">GraphCanUseBeta</a> property. This obviously results in certain SDK features not working anymore. Depending on the solution you're building using the Graph beta endpoint might be perfect and you want to standardize on always using Graph Beta, which is an option as well via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html#collapsible-PnP_Core_Services_PnPContext_GraphAlwaysUseBeta">GraphAlwaysUsesBeta</a> property.</p>
+<p>In the PnP Core SDK we limit the usage of Microsoft Graph Beta endpoint, but in some cases we do have to use the Graph Beta endpoint. By default using Graph Beta is turned on, but if you don't want to use Graph Beta you can tell the SDK to not use it via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html#collapsible-PnP_Core_Services_PnPContext_GraphCanUseBeta">GraphCanUseBeta</a> property. This obviously results in certain SDK features not working anymore. Depending on the solution you're building using the Graph beta endpoint might be perfect and you want to standardize on always using Graph Beta, which is an option as well via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html#collapsible-PnP_Core_Services_PnPContext_GraphAlwaysUseBeta">GraphAlwaysUsesBeta</a> property.</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // turn off the option to use Graph Beta
@@ -127,7 +127,7 @@
     context.GraphAlwaysUsesBeta = true;
 }
 </code></pre>
-<p>Above code snippet showed how to configure the Microsoft Graph behavior for a single PnPContext, but you can also configure for all contexts being created via the configuration system, see <a href="pnp%20core%20settings.html">Configuring the PnP Core SDK</a> for more information.</p>
+<p>Above code snippet showed how to configure the Microsoft Graph behavior for a single PnPContext, but you can also configure this behavior for all contexts being created using the configuration system, see <a href="basics-settings.html">Configuring the PnP Core SDK</a> for more information.</p>
 </article>
           </div>
           <div class="hidden-sm col-md-2" role="complementary">

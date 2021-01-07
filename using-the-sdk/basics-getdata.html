@@ -82,7 +82,7 @@
                   </div>
                     <h1 id="getting-data-from-microsoft-365">Getting data from Microsoft 365</h1>
 
-<p>Loading data (e.g. a SharePoint list or a Teams channel) is always needed when you write applications using the PnP Core SDK. There are different methods to load data, ones that work to load data from a given model instance (e.g. an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html">IList</a>), but also ones that populate a collection of model instances (e.g. an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListCollection.html">IListCollection</a>)</p>
+<p>Loading data (e.g. a SharePoint list or a Teams channel) is usually needed when you write applications using the PnP Core SDK. There are different methods to load data, ones that data for a given model instance (e.g. an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html">IList</a>), but also ones that populate a collection of model instances (e.g. an <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IListCollection.html">IListCollection</a>)</p>
 <p>In the remainder of this article you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
@@ -102,7 +102,7 @@
 <h5>Note</h5>
 <ul>
 <li>When loading data the SDK will automatically load the primary key property of a model, even if you've not requested that when doing a controlled load.</li>
-<li>When you've created a <code>PnPContext</code> th SDK already loaded the relevant <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a> and <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html">ISite</a> properties of the <code>PnPContext</code>. When loading IWeb and ISite only some properties of IWeb and some properties of ISite are loaded as they're needed to support the internal workings of the SDK.</li>
+<li>When you create a <code>PnPContext</code> the SDK already loads the relevant <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a> and <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html">ISite</a> properties of the <code>PnPContext</code>. When loading these <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a> and <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.ISite.html">ISite</a> properties, a controlled load is done to only retrieve what's needed to support the internal workings of the SDK.</li>
 </ul>
 </div>
 <p>Below sample shows some of the above discussed data loads.</p>
@@ -126,7 +126,7 @@
     }
 }
 </code></pre>
-<p>When you're loading data for a model then the domain model is populated with the loaded data, but you'll also get a reference back to the domain model instance effectively giving you two ways to work with the loaded data:</p>
+<p>When you're loading data then the domain model is populated with the loaded data, but you'll also get a reference back to the domain model instance effectively giving you two ways to work with the loaded data:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Option A: use the domain model
@@ -147,7 +147,7 @@
 }
 </code></pre>
 <h2 id="model-collection-load-basics">Model collection load basics</h2>
-<p>Previous chapter showed how to load data starting from a single model (e.g. loading the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_Title">Title</a> property of <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a>), but what if you need to load the lists of a web? One approach for loading a model collection is loading the full collection via loading the relevant parent domain model property (e.g. loading the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_Lists">Lists</a> property on the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a>) as also shown in previous chapter. This approach however does not allow you to apply a filter to reduce the data being returned and therefore it can be better to use one of the specific collection load methods:</p>
+<p>Previous chapter showed how to load data starting from a single model (e.g. loading the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_Title">Title</a> property of <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a>), but what if you need to load the lists of a web? One approach for loading a model collection is loading the full collection via loading the relevant parent domain model property (e.g. loading the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html#collapsible-PnP_Core_Model_SharePoint_IWeb_Lists">Lists</a> property on the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IWeb.html">IWeb</a>) as shown in previous chapter. This approach however does not allow you to apply a filter to reduce the data being returned and therefore it can be better to use one of the specific collection load methods:</p>
 <ul>
 <li><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelCollection-1.html#collapsible-PnP_Core_Model_IDataModelCollection_1_GetAsync_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____">GetAsync</a></li>
 <li><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelCollection-1.html#collapsible-PnP_Core_Model_IDataModelCollection_1_Get_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____">Get</a></li>
@@ -158,7 +158,7 @@
 <li><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelCollection-1.html#collapsible-PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultBatchAsync_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____">GetFirstOrDefaultBatchAsync</a></li>
 <li><a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelCollection-1.html#collapsible-PnP_Core_Model_IDataModelCollection_1_GetFirstOrDefaultBatch_Expression_Func__0_System_Boolean___Expression_Func__0_System_Object_____">GetFirstOrDefaultBatch</a></li>
 </ul>
-<p>These methods do allow you to perform either a default collection load or a controlled load allowing you to specify which properties of the collection model instances (e.g. IList in the IListCollection) need to be fetched and what filter must be applied to reduce the number of returned model instances. The GetFirstOrDefault methods only return a single model instance of the collection. These methods create either a direct query or add a query to a batch for a grouped execution (see the <a href="basics-batching.html">batch article</a>).</p>
+<p>These methods do allow you to perform either a default load or a controlled load allowing you to specify which properties of the collection model instances (e.g. IList instances in the IListCollection) need to be fetched and what filter must be applied to reduce the number of returned model instances. The GetFirstOrDefault methods only return a single model instance of the collection. These methods create either a direct query or add a query to a batch for a grouped execution (see the <a href="basics-batching.html">batch article</a>).</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
     // Option A: Load the Lists using a model load =&gt; no filtering option
@@ -174,11 +174,11 @@
 </code></pre>
 <div class="NOTE">
 <h5>Note</h5>
-<p>When you only need one model instance from a collection it's recommended to use the GetFirstOrDefault methods as they only return the data for one model instance.</p>
+<p>When you only need one model instance from a collection it's recommended to use the GetFirstOrDefault methods as they only return the data for one model instance and offer better performance.</p>
 </div>
 <p>Like with loading the model in the previous chapter you've two ways of using the data, although that for model collection loads there are some differences:</p>
 <ul>
-<li>Only non-batch data loads have a return value</li>
+<li>Only regular data loads have a return value, batch methods don't</li>
 <li>When a collection is returned (GetAsync, Get, GetBatchAsync and GetBatch) the collection is an IEnumerable</li>
 </ul>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
@@ -206,13 +206,18 @@
 <p>When you perform a model or model collection load you can do a controlled load specifying the model properties to return, but sometimes you want to also specify what to return from a returned property (e.g. you're loading a list and want to also load the content types and their field links). The PnP Core SDK supports these type of additional data loads via the <a href="https://pnp.github.io/pnpcore/api/PnP.Core.Model.IDataModelCollection-1.html#PnP_Core_Model_IDataModelCollection_1_LoadProperties_Expression_Func__0_System_Object_____">LoadProperties method</a>. This method can be used with model data loads as well as with model collection data loads as shown here:</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
+    // Load the Site with the RootWeb model populated with the Title, NoCrawl and List properties,
+    //   for each list load the the Title property
+    await context.Site.GetAsync(p =&gt; p.RootWeb.LoadProperties(p =&gt; p.Title, p =&gt; p.NoCrawl,
+                                                              p =&gt; p.Lists.LoadProperties(p =&gt; p.Title)));
+
     // Loads all lists with 
     //   their content types controlled loaded and 
     //     for each content type the field links are controlled loaded 
     //       with the name property
-    await context.Web.GetAsync(p =&gt; p.Title, p =&gt; p.TemplateType,
-                               p =&gt; p.ContentTypes.LoadProperties(
-                                    p =&gt; p.Name, p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
+    await context.Web.Lists.GetAsync(p =&gt; p.Title, p =&gt; p.TemplateType,
+                                     p =&gt; p.ContentTypes.LoadProperties(
+                                        p =&gt; p.Name, p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
 
     // Loads all document libraries
     //   their content types controlled loaded and 
@@ -233,17 +238,21 @@
                                                         p =&gt; p.Name, p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
 }
 </code></pre>
-<h2 id="what-about-those-getbyxxx-methods">What about those GetByxxx methods</h2>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>When the API uses Microsoft Graph (e.g. when working with Microsoft Teams), you cannot use nested LoadProperties statements and you can't load a given properties that depend on a separate query to work. At that point you'll see a <a href="https://pnp.github.io/pnpcore/api/PnP.Core.ClientException.html">ClientException</a> being thrown with as <a href="https://pnp.github.io/pnpcore/api/PnP.Core.ErrorType.html#PnP_Core_ErrorType_Unsupported">ErrorType Unsupported</a>.</p>
+</div>
+<h2 id="what-about-those-getbyxxx-methods">What about those GetByxxx methods?</h2>
 <p>In the domain model you quite often see a GetByxxx method (e.g. GetByTitleAsync and GetByIdAsync on an IList): these methods are simply shorthands for their respective GetFirstOrDefaultAsync method calls. There's no functional difference between both approaches and you can use whatever &quot;feels&quot; the best for you.</p>
 <pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
 {
-    // Using this GetByTitle method is 
+    // Using this GetByTitle method is... 
     await context.Web.Lists.GetByTitleAsync(&quot;Site Pages&quot;, 
                                             p =&gt; p.Title, p =&gt; p.TemplateType,
                                             p =&gt; p.ContentTypes.LoadProperties(
                                                  p =&gt; p.Name, p =&gt; p.FieldLinks.LoadProperties(p =&gt; p.Name)));
 
-    // Is identical to this GetFirstOrDefaultAsync call
+    // ...identical to this GetFirstOrDefaultAsync call
     await context.Web.Lists.GetFirstOrDefaultAsync(p =&gt; p.Title == &quot;Site Pages&quot;,
                                                    p =&gt; p.Title, p =&gt; p.TemplateType,
                                                    p =&gt; p.ContentTypes.LoadProperties(
