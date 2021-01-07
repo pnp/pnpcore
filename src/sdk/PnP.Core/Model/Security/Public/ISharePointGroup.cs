@@ -1,5 +1,4 @@
 ﻿using PnP.Core.Services;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security

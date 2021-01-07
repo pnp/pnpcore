@@ -1,5 +1,3 @@
-using PnP.Core.Model.SharePoint;
-
 namespace PnP.Core.Model.Security
 {
 

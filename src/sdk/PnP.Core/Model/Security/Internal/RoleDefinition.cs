@@ -1,7 +1,6 @@
 using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PnP.Core.Model.Security
@@ -25,11 +24,11 @@ namespace PnP.Core.Model.Security
                         var body = new
                         {
                             __metadata = new { type = "SP.RoleDefinition" },
-                            this.Name,
-                            this.Description,
-                            this.Hidden,
-                            this.Order,
-                            RoleTypeKind = (int)this.RoleTypeKind,
+                            Name,
+                            Description,
+                            Hidden,
+                            Order,
+                            RoleTypeKind = (int)RoleTypeKind,
                             BasePermissions = new
                             {
                                 __metadata = new { type = "SP.BasePermissions" },

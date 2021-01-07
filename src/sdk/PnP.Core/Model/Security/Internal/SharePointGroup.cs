@@ -1,6 +1,5 @@
 ﻿using PnP.Core.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
@@ -24,7 +23,7 @@ namespace PnP.Core.Model.Security
                     var body = new
                     {
                         __metadata = new { type = "SP.Group" },
-                        this.Title,
+                        Title,
                     };
                     var jsonBody = JsonSerializer.Serialize(body);
                     return new ApiCall(endPointUri, ApiType.SPORest, jsonBody);

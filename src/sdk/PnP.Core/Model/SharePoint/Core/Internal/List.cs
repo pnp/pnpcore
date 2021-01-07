@@ -574,7 +574,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<IRoleDefinitionCollection> GetRoleDefinitionsAsync(int principalId)
         {
-            await this.EnsurePropertiesAsync(l => l.RoleAssignments).ConfigureAwait(false);
+            await EnsurePropertiesAsync(l => l.RoleAssignments).ConfigureAwait(false);
             var roleAssignment = await RoleAssignments.GetFirstOrDefaultAsync(p => p.PrincipalId == principalId, r => r.RoleDefinitions).ConfigureAwait(false);
             return roleAssignment?.RoleDefinitions;
         }
