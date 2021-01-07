@@ -810,7 +810,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.IRoleAssignment.html",
-          "hash": "vuNq8T3icaFhEsthdcipgA=="
+          "hash": "UEI5hHJXLS0rzBtUE/4eBw=="
         }
       },
       "is_incremental": false,
@@ -858,7 +858,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.Security.ISharePointGroup.html",
-          "hash": "Sc5Ci0+4hY9ZsN/Xw1zKfA=="
+          "hash": "WpYBZZKS+LZlnP+DRorHIA=="
         }
       },
       "is_incremental": false,
@@ -2202,7 +2202,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IViewCollection.html",
-          "hash": "V/4356F/WwKHRLoJAjlvmQ=="
+          "hash": "xQ5ijUUr464VIGX7W6qRbA=="
         }
       },
       "is_incremental": false,
