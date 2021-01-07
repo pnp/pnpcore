@@ -899,12 +899,24 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
-                // Expand for a property that is implemented using it's own graph query
-                // Url for loading channels is teams/{Site.GroupId}/channels
+                // Expand for an expandable property 
                 var team = await context.Team.GetAsync(p => p.PrimaryChannel.LoadProperties(p => p.DisplayName));
 
                 Assert.IsTrue(team.IsPropertyAvailable(p => p.PrimaryChannel));
                 Assert.IsTrue(team.PrimaryChannel.IsPropertyAvailable(p => p.DisplayName));
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ClientException))]
+        public async Task LoadTeamPropertiesWithExpandExceptionViaGraph()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Expand for an expandable property using a property that depends it's own graph query==> 
+                // Not supported in Graph
+                var team = await context.Team.GetAsync(p => p.PrimaryChannel.LoadProperties(p => p.DisplayName, p => p.Messages));
             }
         }
 

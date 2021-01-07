@@ -432,6 +432,15 @@ namespace PnP.Core.Services
                 foreach (var expandableField in expandFields.Fields.OrderBy(p => p.Expandable))
                 {
                     var expandableFieldInfo = collectionEntityInfo.Fields.First(p => p.Name == expandableField.Name);
+
+                    if (!string.IsNullOrEmpty(expandableFieldInfo.GraphGet))
+                    {
+                        throw new ClientException(ErrorType.Unsupported,
+                            string.Format(PnPCoreResources.Exception_Unsupported_ExtraGet,
+                            expandableFieldInfo.Name,
+                            expandableFieldInfo.GraphGet));
+                    }
+
                     if (!expandableFieldInfo.GraphExpandable)
                     {
                         if (first)
