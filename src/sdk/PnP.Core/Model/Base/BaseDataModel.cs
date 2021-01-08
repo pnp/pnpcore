@@ -1194,6 +1194,11 @@ namespace PnP.Core.Model
             return false;
         }
 
+        public void EnsureProperties(params Expression<Func<TModel, object>>[] expressions)
+        {
+            EnsurePropertiesAsync(expressions).GetAwaiter().GetResult();
+        }
+
         public async Task EnsurePropertiesAsync(params Expression<Func<TModel, object>>[] expressions)
         {
             var dirty = false;

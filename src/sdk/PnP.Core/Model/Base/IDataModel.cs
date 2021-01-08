@@ -48,6 +48,13 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="expressions">Expressions listing the properties to load</param>
         /// <returns></returns>
+        void EnsureProperties(params Expression<Func<TModel, object>>[] expressions);
+
+        /// <summary>
+        /// Checks if the requested properties are loaded for the given model, if not they're loaded via a GetAsync call
+        /// </summary>
+        /// <param name="expressions">Expressions listing the properties to load</param>
+        /// <returns></returns>
         Task EnsurePropertiesAsync(params Expression<Func<TModel, object>>[] expressions);
     }
 }
