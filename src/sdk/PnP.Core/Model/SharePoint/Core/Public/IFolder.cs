@@ -16,7 +16,7 @@ namespace PnP.Core.Model.SharePoint
         public bool Exists { get; }
 
         /// <summary>
-        /// Gets whether is WOPI enabled.
+        /// Indicate whether the folder is enabled for WOPI default action.
         /// </summary>
         public bool IsWOPIEnabled { get; }
 
@@ -31,7 +31,7 @@ namespace PnP.Core.Model.SharePoint
         public string Name { get; }
 
         /// <summary>
-        /// Gets the ProdId of the folder.
+        /// Gets a string that identifies the application in which the folder was created.
         /// </summary>
         public string ProgID { get; }
 

@@ -13,7 +13,7 @@ namespace PnP.Core.Model.SharePoint
     public interface IFile : IDataModel<IFile>, IDataModelGet<IFile>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
-        /// Gets a value that returns the comment used when a document is checked into a document library.
+        /// Returns the comment that was specified when the document was checked into the document library
         /// </summary>
         public string CheckInComment { get; }
 
