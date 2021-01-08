@@ -32,7 +32,10 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-Both approaches are comparable from a coding point of view: the difference is in the method names and the `await` keyword. You also notice that for the sync approach the code is more fluent as there's no need for `await` statements, but a similar thing can be done with async via using the [AndThen](https://pnp.github.io/pnpcore/api/PnP.Core.QueryModel.BaseDataModelExtensions.html#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_Task___0__Func___0_Task___1___) method to chain async method calls or via nesting each async call with it's corresponding `await` keyword:
+> [!Note]
+> Both approaches use 2 queries, there's no difference between async and sync when it comes to query efficiency.
+
+Both approaches are comparable from a coding point of view: the difference is in the method names and the `await` keyword. You might also notice that for the sync approach the code is more fluent as there's no need for `await` statements, but a similar thing can be done with async via using the [AndThen](https://pnp.github.io/pnpcore/api/PnP.Core.QueryModel.BaseDataModelExtensions.html#collapsible-PnP_Core_QueryModel_BaseDataModelExtensions_AndThen__2_Task___0__Func___0_Task___1___) method to chain async method calls or via nesting each async call with it's corresponding `await` keyword:
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
@@ -51,10 +54,10 @@ In general the recommendation is to use the async methods because:
 - Improved application responsiveness (the UI thread is not blocked when a data retrieval is ongoing)
 - Prevents deadlocks when using the PnP Core SDK from WPF apps and [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)
   
-Internally in the PnP Core SDK everything always happens async, the sync methods you see are wrappers over their async counterparts with an `GetAwaiter().GetResult()` to force the code to wait for the outcome. 
+Internally in the PnP Core SDK everything always happens async, the sync methods you see are wrappers over their async counterparts with a `GetAwaiter().GetResult()` to force the code to wait for the outcome.
 
 > [!Important]
-> Use the async methods is strongly recommended. Use the sync methods if you're using the PnP Core SDK in an already sync code base.
+> Using the async methods is strongly recommended. Use the sync methods if you're using the PnP Core SDK in an already sync code base, if not use async.
 
 If you want to learn more about async programming checkout these resources:
 

@@ -5,11 +5,15 @@
   - name: Get data
     href: basics-getdata.md
   - name: Get data using paging
-    href: using%20paging.md
+    href: basics-getdata-paging.md
+  - name: Adding, updating and deleting data
+    href: basics-addupdatedelete.md
   - name: Batching requests
     href: basics-batching.md
   - name: Async or not
     href: basics-async.md
+  - name: General configuration
+    href: basics-settings.md
   - name: API configuration
     href: basics-apis.md
 - name: Authentication  
@@ -68,7 +72,3 @@
   items:
   - name: Overview
     href: folders-intro.md
-- name: Miscellaneous
-  items:
-  - name: Configuring the PnP Core SDK
-    href: pnp%20core%20settings.md

@@ -9,8 +9,7 @@ namespace PnP.Core.Model.SharePoint
 {
     internal partial class FileCollection : QueryableDataModelCollection<IFile>, IFileCollection
     {
-        // smaller max size with a chunked upload is probably more performing? (5 MB)
-        private const int maxFileSizeForRegularUpload = 5 * 1024 * 1024;
+        private const int maxFileSizeForRegularUpload = 10 * 1024 * 1024;
 
         #region Construction
         public FileCollection(PnPContext context, IDataModelParent parent, string memberName) : base(context, parent, memberName)
@@ -86,7 +85,7 @@ namespace PnP.Core.Model.SharePoint
             // 10 MB chunks
             int chunkSizeBytes = 10 * 1024 * 1024;
 
-            // Upload the files in chunks
+            // Upload the file in chunks
             var firstChunk = true;
             var uploadId = Guid.NewGuid();
             var offset = 0L;

@@ -119,7 +119,7 @@ namespace PnP.Core.Model.SharePoint
 
         public bool Paged { get => GetValue<bool>(); set => SetValue(value); }
 
-        public int PageRenderType { get => GetValue<int>(); set => SetValue(value); }
+        public ListPageRenderType PageRenderType { get => GetValue<ListPageRenderType>(); set => SetValue(value); }
 
         public bool PersonalView { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -133,7 +133,7 @@ namespace PnP.Core.Model.SharePoint
 
         public int RowLimit { get => GetValue<int>(); set => SetValue(value); }
 
-        public int Scope { get => GetValue<int>(); set => SetValue(value); }
+        public ViewScope Scope { get => GetValue<ViewScope>(); set => SetValue(value); }
 
         public string ServerRelativeUrl { get => GetValue<string>(); set => SetValue(value); }
 

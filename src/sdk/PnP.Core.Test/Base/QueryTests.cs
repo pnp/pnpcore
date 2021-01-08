@@ -7,7 +7,6 @@ using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;

@@ -1,6 +1,6 @@
 # Using batching
 
-The PnP Core SDK has been built from day 1 with batching in mind, more precisely almost all operations (gets, posts, etc) are executed via the respective SharePoint REST and Microsoft Graph batch endpoints. If you for example load the Title property of an IWeb then that request is issued via the batch endpoint where the batch consists out of just one request. When you write code you can however also add more requests to a batch, effectively improving performance as you're preventing unnecessary roundtrips.
+The PnP Core SDK has been built from the ground up with batching in mind, more precisely almost all requests (gets, posts, etc) are executed via the respective SharePoint REST and Microsoft Graph batch endpoints. If you for example load the Title property of an IWeb then that request is issued via the batch endpoint where the batch consists of a single request. When you write code you can however also add more requests to a batch, effectively improving performance as you're preventing unnecessary network calls.
 
 In the remainder of this article you'll see a lot of `context` use: in this case this is a `PnPContext` which was obtained via the `PnPContextFactory` as explained in the [overview article](readme.md) and show below:
 
@@ -13,7 +13,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 
 ## A typical use case
 
-When you want to add items to a list you can do that one by one or you can group the items to add in single batch and send that batch via one of the Execute methods, the latter approach is however much faster and as easy to code.
+When you want to add items to a list you can do that one by one or you can group the items to add in a single batch and send that batch via one of the Execute methods, the latter approach is much faster and as easy to code as the first.
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
@@ -49,7 +49,7 @@ using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))
 }
 ```
 
-For most of the methods in the PnP Core SDK you'll find equivalent batch methods: the followed convention is adding the "Batch" suffix e.g. we've a Get and GetAsync but also a GetBatch and GetBatchAsync. The "batch" methods have an override that allows you to specify a batch to add the request to, if you don't specify a batch the request will be added to the "current" batch. Creating a new batch can be done using the [NewBatch method](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_NewBatch) on PnPContext.
+For most of the methods in the PnP Core SDK you'll find equivalent batch methods: the followed convention is adding the "Batch" suffix e.g. we've a Get and GetAsync but also a GetBatch and GetBatchAsync. The "batch" methods have an override that allows you to specify a batch to add the request to, if you don't specify a batch the request will be added to the "current" batch. Creating a new batch can be done using the [NewBatch method](https://pnp.github.io/pnpcore/api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_NewBatch) on PnPContext. Using a dedicated batch object you can be 100% no other code path in your application adds requests to your batch.
 
 ```csharp
 using (var context = await pnpContextFactory.CreateAsync("SiteToWorkWith"))

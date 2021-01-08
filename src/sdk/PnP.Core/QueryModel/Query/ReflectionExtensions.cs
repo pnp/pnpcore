@@ -6,15 +6,12 @@ namespace System.Reflection
     {
         public static object GetValue(this MemberInfo member, object source)
         {
-            switch (member)
+            return member switch
             {
-                case PropertyInfo pi:
-                    return pi.GetValue(source);
-                case FieldInfo fi:
-                    return fi.GetValue(source);
-            }
-
-            throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_MemberType, member.GetType()));
+                PropertyInfo pi => pi.GetValue(source),
+                FieldInfo fi => fi.GetValue(source),
+                _ => throw new NotSupportedException(string.Format(PnPCoreResources.Exception_Unsupported_MemberType, member.GetType())),
+            };
         }
     }
 }

@@ -875,8 +875,8 @@ namespace PnP.Core.Model.SharePoint
         #endregion
 
         #region TO IMPLEMENT
-        // TODO: Take information from here to update documentation of this class member
-        // TODO: https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee546309(v=office.15)
+        // Take information from here to update documentation of this class member
+        // https://docs.microsoft.com/en-us/previous-versions/office/sharepoint-server/ee546309(v=office.15)
 
         ///// <summary>
         ///// To update...

@@ -1,5 +1,4 @@
 using PnP.Core.Model.SharePoint;
-using System.Text.Json.Serialization;
 
 namespace PnP.Core.Model.Security
 {

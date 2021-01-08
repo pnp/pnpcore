@@ -64,7 +64,7 @@ Logging:LogLevel:Default | Information | Allows you to change log level. See the
 PnPCore:PnPContext:GraphFirst | true | If for a given request the library can choose between a SharePoint REST or a Microsoft Graph call then it will favor the Microsoft Graph call. Settings this to false will prefer SharePoint REST for all SharePoint related API calls.
 PnPCore:PnPContext:GraphCanUseBeta | true | When you ask for data that can only be provided via the Microsoft Graph beta API the PnP Core SDK will use the beta endpoint for that specific request. All other requests will still use the v1.0 endpoint. If you set this to false, then any request that requires Microsoft Graph beta will not provide any result.
 PnPCore:PnPContext:GraphAlwaysUsesBeta | false | The library by default uses the production v1.0 Microsoft Graph API. Use this setting to default it to the beta Microsoft Graph API.
-PnPCore:HttpRequests:UserAgent | NONISV&#124;SharePointPnP&#124;PnPCoreSDK | Value set as user agent when the request is sent to Microsoft 365.
+PnPCore:HttpRequests:UserAgent | NONISV&#124;SharePointPnP<br />&#124;PnPCoreSDK | Value set as user agent when the request is sent to Microsoft 365.
 PnPCore:HttpRequests:Timeout | 100 | Timeout in seconds for HTTP requests. Set higher if you need to for example download large files. Setting to -1 will result in an infinite timeout.
 PnPCore:HttpRequests:SharePointRest:UseRetryAfterHeader | false | Use retry-after http header when calculating the wait time in seconds for SharePoint Rest request retry.
 PnPCore:HttpRequests:SharePointRest:MaxRetries | 10 | Maximum number of retries before retrying a SharePoint Rest request throws an exception.

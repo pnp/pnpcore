@@ -28,9 +28,10 @@ namespace PnP.Core.Model.Security
         /// </summary>
         public string Department { get; set; }
 
-        // TODO: Review doc and type of property
         /// <summary>
-        /// Gets the expiration value of the current user
+        /// A date/time string for which the format conforms to the ISO8601 time format YYYY-MM-DDTHH:MM:SSZ and
+        /// which represents the time and date of expiry for the user.
+        /// A null value indicates no expiry.
         /// </summary>
         public string Expiration { get; }
 

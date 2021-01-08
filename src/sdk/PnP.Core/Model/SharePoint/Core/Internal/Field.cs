@@ -63,13 +63,11 @@ namespace PnP.Core.Model.SharePoint
 
         public bool Indexed { get => GetValue<bool>(); set => SetValue(value); }
 
-        public int IndexStatus { get => GetValue<int>(); set => SetValue(value); }
+        public FieldIndexStatus IndexStatus { get => GetValue<FieldIndexStatus>(); set => SetValue(value); }
 
         public string InternalName { get => GetValue<string>(); set => SetValue(value); }
 
         public string JSLink { get => GetValue<string>(); set => SetValue(value); }
-
-        public bool PinnedToFiltersPane { get => GetValue<bool>(); set => SetValue(value); }
 
         public bool ReadOnlyField { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -81,7 +79,7 @@ namespace PnP.Core.Model.SharePoint
 
         public bool Sealed { get => GetValue<bool>(); set => SetValue(value); }
 
-        public int ShowInFiltersPane { get => GetValue<int>(); set => SetValue(value); }
+        public ShowInFiltersPaneStatus ShowInFiltersPane { get => GetValue<ShowInFiltersPaneStatus>(); set => SetValue(value); }
 
         public bool Sortable { get => GetValue<bool>(); set => SetValue(value); }
 
@@ -109,7 +107,7 @@ namespace PnP.Core.Model.SharePoint
 
         public int DisplayFormat { get => GetValue<int>(); set => SetValue(value); }
 
-        public int EditFormat { get => GetValue<int>(); set => SetValue(value); }
+        public ChoiceFormatType EditFormat { get => GetValue<ChoiceFormatType>(); set => SetValue(value); }
 
         public bool ShowAsPercentage { get => GetValue<bool>(); set => SetValue(value); }
 
