@@ -35,7 +35,5 @@
         /// </summary>
         public bool? UnlimitedLengthInDocumentLibrary { get; set; }
 
-        // READONLY - TODO Remove from options => Double check it is present and readonly in model entity
-        //public bool WikiLinking { get; }
     }
 }

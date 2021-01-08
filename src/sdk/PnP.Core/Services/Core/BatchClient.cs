@@ -247,7 +247,6 @@ namespace PnP.Core.Services
                         PnPCoreResources.Exception_Unsupported_InteractiveRequestBatch);
                 }
 
-                // TODO: Add similar approach for Graph calls (whenever that will be needed)
                 if (batch.Requests.First().Value.ApiCall.Type == ApiType.SPORest)
                 {
                     await ExecuteSharePointRestInteractiveAsync(batch).ConfigureAwait(false);
@@ -891,10 +890,6 @@ namespace PnP.Core.Services
                     sb.AppendLine($"IF-MATCH: *"); // TODO: Here we need the E-Tag or something to specify to use *
                     sb.AppendLine();
                     sb.AppendLine($"--changeset_{changesetId}--");
-                }
-                else
-                {
-                    // TODO: Figure out what to do ...
                 }
 
 #if DEBUG

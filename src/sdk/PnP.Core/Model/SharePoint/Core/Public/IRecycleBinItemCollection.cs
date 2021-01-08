@@ -143,8 +143,6 @@ namespace PnP.Core.Model.SharePoint
         public void RestoreAllBatch();
         #endregion
 
-        // TODO Should DeleteByIds(), MoveToSecondStageByIds() and RestoreByIds() be implemented since our Batch internal approach ? 
-
         #region GetById methods
 
         /// <summary>

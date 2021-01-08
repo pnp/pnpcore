@@ -29,7 +29,6 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
 
-            // TODO is in the end calling a "raw request" but does not seem very natural to use this object for that? Might need some review
             await item.RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
@@ -50,7 +49,6 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
 
-            // TODO is in the end calling a "raw request" but does not seem very natural to use this object for that? Might need some review
             await item.RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
@@ -83,7 +81,6 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
 
-            // TODO is in the end calling a "raw request" but does not seem very natural to use this object for that? Might need some review
             await item.RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
@@ -104,7 +101,6 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
 
-            // TODO is in the end calling a "raw request" but does not seem very natural to use this object for that? Might need some review
             await item.RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
@@ -137,7 +133,6 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
 
-            // TODO is in the end calling a "raw request" but does not seem very natural to use this object for that? Might need some review
             await item.RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
@@ -158,7 +153,6 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
 
-            // TODO is in the end calling a "raw request" but does not seem very natural to use this object for that? Might need some review
             await item.RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
@@ -191,7 +185,6 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
 
-            // TODO is in the end calling a "raw request" but does not seem very natural to use this object for that? Might need some review
             await item.RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
@@ -212,7 +205,6 @@ namespace PnP.Core.Model.SharePoint
 
             var apiCall = new ApiCall(deleteAllEndpointUrl, ApiType.SPORest);
 
-            // TODO is in the end calling a "raw request" but does not seem very natural to use this object for that? Might need some review
             await item.RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 

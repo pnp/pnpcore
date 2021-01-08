@@ -179,7 +179,6 @@ namespace PnP.Core.Model.SharePoint
 
             xml = xml.Replace("{Counter}", counter.ToString());
             xml = xml.Replace("{FieldName}", fieldName);
-            // TODO: verify complex fieldtypes
             xml = xml.Replace("{FieldValue}", fieldValue == null ? "" : CsomHelper.XmlString(TypeSpecificHandling(fieldValue.ToString(), fieldType), false));
             xml = xml.Replace("{FieldType}", fieldType ?? "Null");
 

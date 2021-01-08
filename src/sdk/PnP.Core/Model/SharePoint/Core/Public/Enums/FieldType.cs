@@ -137,7 +137,6 @@
         MaxItems = 35,
 
         // NOT Supported for now
-        // TODO Check the actual values
         //Geolocation = 31,
         //OutcomeChoice = 32,
         //Location = 33,

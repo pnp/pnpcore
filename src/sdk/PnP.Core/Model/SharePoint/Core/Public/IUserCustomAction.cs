@@ -33,9 +33,10 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string Group { get; set; }
 
-        //TODO: Is not in CSOM, double-check what it is used for and format
         /// <summary>
-        /// To update...
+        /// This property is only used when an application customizer is created and preallocated placeholders are specified.  
+        /// It is optional. If non-empty, the string must contain a JSON object with one or two properties for the height 
+        /// amount needed to be preallocated.
         /// </summary>
         public string HostProperties { get; set; }
 
@@ -100,7 +101,7 @@ namespace PnP.Core.Model.SharePoint
         public string Url { get; set; }
 
         /// <summary>
-        /// Gets a value that specifies an implementation specific version identifier.
+        /// Returns the version of the user custom action.
         /// </summary>
         public string VersionOfUserCustomAction { get; }
 

@@ -320,7 +320,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("TEST GROUP", addedField.Group);
                 Assert.AreEqual(FieldType.Choice, addedField.FieldTypeKind);
                 Assert.IsTrue(addedField.FillInChoice);
-                Assert.AreEqual((int)ChoiceFormatType.RadioButtons, addedField.EditFormat);
+                Assert.AreEqual(ChoiceFormatType.RadioButtons, addedField.EditFormat);
                 // Currently supports collections only for model types (JsonMappingHelper Ln 120)
                 Assert.IsNotNull(addedField.Choices);
                 Assert.AreEqual(2, addedField.Choices.Length);

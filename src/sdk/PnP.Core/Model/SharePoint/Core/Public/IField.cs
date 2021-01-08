@@ -10,14 +10,14 @@ namespace PnP.Core.Model.SharePoint
     public interface IField : IDataModel<IField>, IDataModelGet<IField>, IDataModelUpdate, IDataModelDelete, IQueryableDataModel
     {
         /// <summary>
-        /// Gets or Sets whether the field is auto indexed
+        /// Gets or sets a Boolean value that specifies whether the field is auto-indexed
         /// </summary>
         public bool AutoIndexed { get; set; }
 
         /// <summary>
-        /// Gets or Sets whether the field can be deleted
+        /// Specifies whether or not the field can be deleted
         /// </summary>
-        public bool CanBeDeleted { get; set; }
+        public bool CanBeDeleted { get; }
 
         /// <summary>
         /// Gets or Sets the client side component Id associated with the field
@@ -30,7 +30,7 @@ namespace PnP.Core.Model.SharePoint
         public string ClientSideComponentProperties { get; set; }
 
         /// <summary>
-        /// Gets or Sets the client validation formula of the field
+        /// Gets or Sets the validation formula
         /// </summary>
         public string ClientValidationFormula { get; set; }
 
@@ -45,7 +45,7 @@ namespace PnP.Core.Model.SharePoint
         public string CustomFormatter { get; set; }
 
         /// <summary>
-        /// Gets or Sets the default formula of the field
+        /// Gets or sets the default formula for a calculated field
         /// </summary>
         public string DefaultFormula { get; set; }
 
@@ -60,8 +60,8 @@ namespace PnP.Core.Model.SharePoint
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets the direction of the field
-        /// TODO use enum for this field
+        /// Specifies the direction of the reading order for the field. A string that contains LTR if the reading order is left-to-right, 
+        /// RTL if it is right-to-left or none
         /// </summary>
         public string Direction { get; set; }
 
@@ -71,20 +71,19 @@ namespace PnP.Core.Model.SharePoint
         public bool EnforceUniqueValues { get; set; }
 
         /// <summary>
-        /// Gets or Sets the entity property name of the field
+        /// Gets the name of the entity property for the list item entity that uses this field
         /// </summary>
-        public string EntityPropertyName { get; set; }
+        public string EntityPropertyName { get; }
 
         /// <summary>
-        /// Gets or Sets whether the field can be used as filter
+        /// Returns whether the field can be filtered
         /// </summary>
-        public bool Filterable { get; set; }
+        public bool Filterable { get; }
 
         /// <summary>
-        /// Gets or Sets whether the field is from base type
-        /// TODO : Review comment
+        /// Gets a Boolean value that indicates whether the field derives from a base field type.      
         /// </summary>
-        public bool FromBaseType { get; set; }
+        public bool FromBaseType { get; }
 
         /// <summary>
         /// Gets or Sets the group of the field
@@ -92,7 +91,7 @@ namespace PnP.Core.Model.SharePoint
         public string Group { get; set; }
 
         /// <summary>
-        /// Gets or Sets whether the field is hidden
+        /// Specifies whether the field is displayed in the list
         /// </summary>
         public bool Hidden { get; set; }
 
@@ -107,28 +106,23 @@ namespace PnP.Core.Model.SharePoint
         public bool Indexed { get; set; }
 
         /// <summary>
-        /// Gets or Sets the index status of the field
-        /// TODO: What should be done for read-only fields ?
+        /// Describes whether a field is indexed, and whether the data
+        /// in the index is complete
         /// </summary>
-        public int IndexStatus { get; set; }
+        public FieldIndexStatus IndexStatus { get; }
 
         /// <summary>
-        /// Gets or Sets the internal name of the field
+        /// Specifies the internal name of the field
         /// </summary>
         public string InternalName { get; }
 
         /// <summary>
-        /// Gets or Sets the JS link of the field
+        /// Gets or sets the name of an external JS file containing any client rendering logic for fields of this type
         /// </summary>
         public string JSLink { get; set; }
 
         /// <summary>
-        /// Gets or Sets whether the field is pinned to filters pane
-        /// </summary>
-        public bool PinnedToFiltersPane { get; set; }
-
-        /// <summary>
-        /// Gets or Sets whether the field is read only
+        /// Specifies whether values in the field can be modified
         /// </summary>
         public bool ReadOnlyField { get; set; }
 
@@ -138,32 +132,32 @@ namespace PnP.Core.Model.SharePoint
         public bool Required { get; set; }
 
         /// <summary>
-        /// Gets or Sets the schema XML of the field
+        /// Specifies the schema that defines the field
         /// </summary>
         public string SchemaXml { get; set; }
 
         /// <summary>
-        /// Gets or Sets the scope of the field
+        /// Specifies the ServerRelativeUrl of the of the web site folder in which the field belongs to
         /// </summary>
-        public string Scope { get; set; }
+        public string Scope { get; }
 
         /// <summary>
-        /// Gets or Sets whether the field is sealed
+        /// Specifies whether the field can be changed or deleted
         /// </summary>
         public bool Sealed { get; set; }
 
         /// <summary>
-        /// Gets or Sets whether the field is shown in filters pane
+        /// Represents status to determine whether filters pane will show the field
         /// </summary>
-        public int ShowInFiltersPane { get; set; }
+        public ShowInFiltersPaneStatus ShowInFiltersPane { get; set; }
 
         /// <summary>
-        /// Gets or Sets whether the field can be sorted
+        /// Returns whether the field can be sorted
         /// </summary>
-        public bool Sortable { get; set; }
+        public bool Sortable { get; }
 
         /// <summary>
-        /// Gets or Sets the static name of the field
+        /// Specifies the static name of the field
         /// </summary>
         public string StaticName { get; }
 
@@ -179,32 +173,32 @@ namespace PnP.Core.Model.SharePoint
         public FieldType FieldTypeKind { get; }
 
         /// <summary>
-        /// Gets or Sets the type of the field as string value
+        /// Specifies the FieldTypeKind of the field as a string value
         /// </summary>
-        public string TypeAsString { get; set; }
+        public string TypeAsString { get; }
 
         /// <summary>
-        /// Gets or Sets the display name of the type of the field
+        /// Specifies the display name for FieldTypeKind of the field
         /// </summary>
-        public string TypeDisplayName { get; set; }
+        public string TypeDisplayName { get; }
 
         /// <summary>
-        /// Gets or Sets a short description of the type of the field
+        /// Specifies the description of the FieldTypeKind of the field
         /// </summary>
-        public string TypeShortDescription { get; set; }
+        public string TypeShortDescription { get; }
 
         /// <summary>
-        /// Gets or Sets the validation formula of the field
+        /// Specifies the formula referred by the field and gets evaluated when a list item is added or updated in the list
         /// </summary>
         public string ValidationFormula { get; set; }
 
         /// <summary>
-        /// Gets or Sets the validation message of the field
+        /// Specifies the message to display if validation formula fails for the field when a list item is added or updated in the list
         /// </summary>
         public string ValidationMessage { get; set; }
 
         /// <summary>
-        /// Gets or Sets the maximum length of the field
+        /// Specifies the maximum number of characters that can be typed in the field
         /// </summary>
         public int MaxLength { get; set; }
 
@@ -232,9 +226,9 @@ namespace PnP.Core.Model.SharePoint
         public int DisplayFormat { get; set; }
 
         /// <summary>
-        /// Gets or Sets the edit format of the field
+        /// Determines whether to display the choice field as radio buttons or as a drop-down list
         /// </summary>
-        public int EditFormat { get; set; }
+        public ChoiceFormatType EditFormat { get; set; }
 
         /// <summary>
         /// Gets or Sets whether the field should be shown as percentage
@@ -287,7 +281,7 @@ namespace PnP.Core.Model.SharePoint
         #region Calculated Field
 
         /// <summary>
-        /// Gets or sets the formula of a calculated field
+        /// Specifies the formula that is used for calculation in the field
         /// </summary>
         public string Formula { get; set; }
 
@@ -346,44 +340,45 @@ namespace PnP.Core.Model.SharePoint
         public bool AllowMultipleValues { get; set; }
 
         /// <summary>
-        /// Gets or sets the dependent lookup internal names of a lookup field
+        /// Gets the dependent lookup internal names of a lookup field
         /// </summary>
 #pragma warning disable CA1819 // Properties should not return arrays
-        public string[] DependentLookupInternalNames { get; set; }
+        public string[] DependentLookupInternalNames { get; }
 #pragma warning restore CA1819 // Properties should not return arrays
 
         /// <summary>
-        /// Gets or sets whether a lookup field is dependent lookup
+        /// Check whether a lookup field is a dependent lookup field
         /// </summary>
-        public bool IsDependentLookup { get; set; }
+        public bool IsDependentLookup { get; }
 
         /// <summary>
-        /// Gets or sets whether a lookup field is a relationship
+        /// Specifies whether this Lookup field is discoverable from the List being looked up to
         /// </summary>
         public bool IsRelationship { get; set; }
 
         /// <summary>
-        /// Gets or sets the internal name of the related field
+        /// Specifies the name of the Field used as the lookup values
         /// </summary>
         public string LookupField { get; set; }
 
         /// <summary>
-        /// Gets or sets the Id of the related list
+        /// Specifies the id (GUID) of the List that contains the Field to use as the lookup values
         /// </summary>
         public string LookupList { get; set; }
 
         /// <summary>
-        /// Gets or sets the lookup web Id
+        /// Specifies the id of the Site that contains the List which contains the
+        /// Field used as the lookup values
         /// </summary>
         public Guid LookupWebId { get; set; }
 
         /// <summary>
-        /// Gets or sets the primary field Id of the lookup field
+        /// Specifies the GUID of the primary lookup field if this is a dependent lookup field. Otherwise, it is empty string
         /// </summary>
         public string PrimaryFieldId { get; set; }
 
         /// <summary>
-        /// Gets or sets the deletion behavior with the relationship of the lookup field
+        /// Specifies the Delete Behavior of the Lookup Field
         /// </summary>
         public RelationshipDeleteBehaviorType RelationshipDeleteBehavior { get; set; }
         #endregion
@@ -457,33 +452,6 @@ namespace PnP.Core.Model.SharePoint
         public IFieldValueCollection NewFieldValueCollection();
 
         #endregion
-
-
-        // TODO Add the following properties
-        // ======= SP.FieldRatingScale ==========
-        // https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.FieldRatingScale
-        //GridEndNumber Int32
-        //GridNAOptionText String
-        //GridStartNumber Int32
-        //GridTextRangeAverage String
-        //GridTextRangeHigh String
-        //GridTextRangeLow String
-        //RangeCount Int32
-
-        // ======= SP.Taxonomy.TaxonomyField ==========
-        // https://s-kainet.github.io/sp-rest-explorer/#/entity/SP.Taxonomy.TaxonomyField
-        //AnchorId Guid
-        //CreateValuesInEditForm Boolean
-        //IsAnchorValid Boolean
-        //IsKeyword Boolean
-        //IsPathRendered Boolean
-        //IsTermSetValid Boolean
-        //Open Boolean
-        //SspId Guid
-        //TargetTemplate String
-        //TermSetId Guid
-        //TextField Guid
-        //UserCreated Boolean
-        // TODO Check if nothing is missing
+        
     }
 }

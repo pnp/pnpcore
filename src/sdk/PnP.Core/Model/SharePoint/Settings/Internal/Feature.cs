@@ -27,7 +27,6 @@ namespace PnP.Core.Model.SharePoint
         #region Properties
         public Guid DefinitionId { get => GetValue<Guid>(); set => SetValue(value); }
 
-        //TODO: To get the displayname, needs to explicitly use this in select clase
         public string DisplayName { get => GetValue<string>(); set => SetValue(value); }
 
         [KeyProperty(nameof(DefinitionId))]

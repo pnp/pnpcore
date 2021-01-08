@@ -7,7 +7,6 @@ using System.Text.Json;
 
 namespace PnP.Core.Model.SharePoint
 {
-    //TODO: the delete uri needs be removed once the needed fix is deployed to Graph
     [GraphType(Uri = V, Delete = "termStore/groups/{Parent.GraphId}/sets/{GraphId}", LinqGet = "termStore/groups/{Parent.GraphId}/sets", Beta = true)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class TermSet : BaseDataModel<ITermSet>, ITermSet
