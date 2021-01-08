@@ -70,6 +70,17 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
+        public async Task EnsurePropertiesBadLamda()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.EnsurePropertiesAsync(p => p.RootFolder.ServerRelativeUrl);
+            }
+        }
+
+        [TestMethod]
         public async Task EnsurePropertiesMultiple()
         {
             //TestCommon.Instance.Mocking = false;

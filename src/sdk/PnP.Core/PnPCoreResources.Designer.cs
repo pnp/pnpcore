@@ -529,6 +529,15 @@ namespace PnP.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading nested properties (e.g. RootFolder.ServerRelativeUrl) is not supported, instead you can use RootFolder.LoadProperties(p =&gt; p.ServerRelativeUrl)..
+        /// </summary>
+        internal static string Exception_PropertyNotLoaded_NestedProperties {
+            get {
+                return ResourceManager.GetString("Exception_PropertyNotLoaded_NestedProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Only the &apos;LoadProperties&apos; method is supported.
         /// </summary>
         internal static string Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported {

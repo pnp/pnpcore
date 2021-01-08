@@ -1176,6 +1176,11 @@ namespace PnP.Core.Model
 
             var body = expression.Body as MemberExpression ?? ((UnaryExpression)expression.Body).Operand as MemberExpression;
 
+            if (body.Expression is MemberExpression)
+            {
+                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_PropertyNotLoaded_NestedProperties);
+            }
+
             if (HasValue(body.Member.Name))
             {
                 if (GetValue(body.Member.Name) is IRequestable)

@@ -46,6 +46,17 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ClientException))]
+        public async Task GetSingleBadPropertyViaRest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                await context.Web.GetAsync(p => p.RootFolder.ServerRelativeUrl);
+            }
+        }
+
+        [TestMethod]
         public async Task GetMultiplePropertiesViaRest()
         {
             //TestCommon.Instance.Mocking = false;

@@ -273,6 +273,9 @@
   <data name="Exception_PropertyNotLoaded_List" xml:space="preserve">
     <value>Please first fetch this list from SharePoint before doing operations on it</value>
   </data>
+  <data name="Exception_PropertyNotLoaded_NestedProperties" xml:space="preserve">
+    <value>Loading nested properties (e.g. RootFolder.ServerRelativeUrl) is not supported, instead you can use RootFolder.LoadProperties(p =&gt; p.ServerRelativeUrl).</value>
+  </data>
   <data name="Exception_PropertyNotLoaded_OnlyLoadPropertiesSupported" xml:space="preserve">
     <value>Only the 'LoadProperties' method is supported</value>
   </data>

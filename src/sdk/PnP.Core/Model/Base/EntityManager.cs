@@ -400,8 +400,12 @@ namespace PnP.Core.Model
 
             if (expression.Body is MemberExpression)
             {
-                fieldToLoad = ((MemberExpression)expression.Body).Member.Name;
+                if (((MemberExpression)expression.Body).Expression is MemberExpression)
+                {
+                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_PropertyNotLoaded_NestedProperties);
+                }
 
+                fieldToLoad = ((MemberExpression)expression.Body).Member.Name;
             }
             else if (expression.Body is UnaryExpression)
             {
