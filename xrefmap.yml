@@ -11919,6 +11919,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.EditorEmail
   nameWithType: IFileVersionEvent.EditorEmail
+- uid: PnP.Core.Model.SharePoint.IFileVersionEvent.EventType
+  name: EventType
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html#PnP_Core_Model_SharePoint_IFileVersionEvent_EventType
+  commentId: P:PnP.Core.Model.SharePoint.IFileVersionEvent.EventType
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.EventType
+  nameWithType: IFileVersionEvent.EventType
+- uid: PnP.Core.Model.SharePoint.IFileVersionEvent.EventType*
+  name: EventType
+  href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html#PnP_Core_Model_SharePoint_IFileVersionEvent_EventType_
+  commentId: Overload:PnP.Core.Model.SharePoint.IFileVersionEvent.EventType
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IFileVersionEvent.EventType
+  nameWithType: IFileVersionEvent.EventType
 - uid: PnP.Core.Model.SharePoint.IFileVersionEvent.Time
   name: Time
   href: api/PnP.Core.Model.SharePoint.IFileVersionEvent.html#PnP_Core_Model_SharePoint_IFileVersionEvent_Time
@@ -23996,6 +24009,36 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.ViewOptions.ViewTypeKind
   nameWithType: ViewOptions.ViewTypeKind
+- uid: PnP.Core.Model.SharePoint.ViewScope
+  name: ViewScope
+  href: api/PnP.Core.Model.SharePoint.ViewScope.html
+  commentId: T:PnP.Core.Model.SharePoint.ViewScope
+  fullName: PnP.Core.Model.SharePoint.ViewScope
+  nameWithType: ViewScope
+- uid: PnP.Core.Model.SharePoint.ViewScope.Default
+  name: Default
+  href: api/PnP.Core.Model.SharePoint.ViewScope.html#PnP_Core_Model_SharePoint_ViewScope_Default
+  commentId: F:PnP.Core.Model.SharePoint.ViewScope.Default
+  fullName: PnP.Core.Model.SharePoint.ViewScope.Default
+  nameWithType: ViewScope.Default
+- uid: PnP.Core.Model.SharePoint.ViewScope.FilesOnly
+  name: FilesOnly
+  href: api/PnP.Core.Model.SharePoint.ViewScope.html#PnP_Core_Model_SharePoint_ViewScope_FilesOnly
+  commentId: F:PnP.Core.Model.SharePoint.ViewScope.FilesOnly
+  fullName: PnP.Core.Model.SharePoint.ViewScope.FilesOnly
+  nameWithType: ViewScope.FilesOnly
+- uid: PnP.Core.Model.SharePoint.ViewScope.Recursive
+  name: Recursive
+  href: api/PnP.Core.Model.SharePoint.ViewScope.html#PnP_Core_Model_SharePoint_ViewScope_Recursive
+  commentId: F:PnP.Core.Model.SharePoint.ViewScope.Recursive
+  fullName: PnP.Core.Model.SharePoint.ViewScope.Recursive
+  nameWithType: ViewScope.Recursive
+- uid: PnP.Core.Model.SharePoint.ViewScope.RecursiveAll
+  name: RecursiveAll
+  href: api/PnP.Core.Model.SharePoint.ViewScope.html#PnP_Core_Model_SharePoint_ViewScope_RecursiveAll
+  commentId: F:PnP.Core.Model.SharePoint.ViewScope.RecursiveAll
+  fullName: PnP.Core.Model.SharePoint.ViewScope.RecursiveAll
+  nameWithType: ViewScope.RecursiveAll
 - uid: PnP.Core.Model.SharePoint.ViewType
   name: ViewType
   href: api/PnP.Core.Model.SharePoint.ViewType.html
