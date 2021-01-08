@@ -2037,6 +2037,24 @@ references:
   fullName.vb: PnP.Core.Model.IDataModel(Of TModel).ArePropertiesAvailable
   nameWithType: IDataModel<TModel>.ArePropertiesAvailable
   nameWithType.vb: IDataModel(Of TModel).ArePropertiesAvailable
+- uid: PnP.Core.Model.IDataModel`1.EnsureProperties(Expression{Func{`0,System.Object}}[])
+  name: EnsureProperties(Expression<Func<TModel, Object>>[])
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_EnsureProperties_Expression_Func__0_System_Object_____
+  commentId: M:PnP.Core.Model.IDataModel`1.EnsureProperties(Expression{Func{`0,System.Object}}[])
+  name.vb: EnsureProperties(Expression(Of Func(Of TModel, Object))())
+  fullName: PnP.Core.Model.IDataModel<TModel>.EnsureProperties(Expression<Func<TModel, System.Object>>[])
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).EnsureProperties(Expression(Of Func(Of TModel, System.Object))())
+  nameWithType: IDataModel<TModel>.EnsureProperties(Expression<Func<TModel, Object>>[])
+  nameWithType.vb: IDataModel(Of TModel).EnsureProperties(Expression(Of Func(Of TModel, Object))())
+- uid: PnP.Core.Model.IDataModel`1.EnsureProperties*
+  name: EnsureProperties
+  href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_EnsureProperties_
+  commentId: Overload:PnP.Core.Model.IDataModel`1.EnsureProperties
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModel<TModel>.EnsureProperties
+  fullName.vb: PnP.Core.Model.IDataModel(Of TModel).EnsureProperties
+  nameWithType: IDataModel<TModel>.EnsureProperties
+  nameWithType.vb: IDataModel(Of TModel).EnsureProperties
 - uid: PnP.Core.Model.IDataModel`1.EnsurePropertiesAsync(Expression{Func{`0,System.Object}}[])
   name: EnsurePropertiesAsync(Expression<Func<TModel, Object>>[])
   href: api/PnP.Core.Model.IDataModel-1.html#PnP_Core_Model_IDataModel_1_EnsurePropertiesAsync_Expression_Func__0_System_Object_____
@@ -6388,6 +6406,36 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.FileLevel.Published
   fullName: PnP.Core.Model.SharePoint.FileLevel.Published
   nameWithType: FileLevel.Published
+- uid: PnP.Core.Model.SharePoint.FileSystemObjectType
+  name: FileSystemObjectType
+  href: api/PnP.Core.Model.SharePoint.FileSystemObjectType.html
+  commentId: T:PnP.Core.Model.SharePoint.FileSystemObjectType
+  fullName: PnP.Core.Model.SharePoint.FileSystemObjectType
+  nameWithType: FileSystemObjectType
+- uid: PnP.Core.Model.SharePoint.FileSystemObjectType.File
+  name: File
+  href: api/PnP.Core.Model.SharePoint.FileSystemObjectType.html#PnP_Core_Model_SharePoint_FileSystemObjectType_File
+  commentId: F:PnP.Core.Model.SharePoint.FileSystemObjectType.File
+  fullName: PnP.Core.Model.SharePoint.FileSystemObjectType.File
+  nameWithType: FileSystemObjectType.File
+- uid: PnP.Core.Model.SharePoint.FileSystemObjectType.Folder
+  name: Folder
+  href: api/PnP.Core.Model.SharePoint.FileSystemObjectType.html#PnP_Core_Model_SharePoint_FileSystemObjectType_Folder
+  commentId: F:PnP.Core.Model.SharePoint.FileSystemObjectType.Folder
+  fullName: PnP.Core.Model.SharePoint.FileSystemObjectType.Folder
+  nameWithType: FileSystemObjectType.Folder
+- uid: PnP.Core.Model.SharePoint.FileSystemObjectType.Invalid
+  name: Invalid
+  href: api/PnP.Core.Model.SharePoint.FileSystemObjectType.html#PnP_Core_Model_SharePoint_FileSystemObjectType_Invalid
+  commentId: F:PnP.Core.Model.SharePoint.FileSystemObjectType.Invalid
+  fullName: PnP.Core.Model.SharePoint.FileSystemObjectType.Invalid
+  nameWithType: FileSystemObjectType.Invalid
+- uid: PnP.Core.Model.SharePoint.FileSystemObjectType.Web
+  name: Web
+  href: api/PnP.Core.Model.SharePoint.FileSystemObjectType.html#PnP_Core_Model_SharePoint_FileSystemObjectType_Web
+  commentId: F:PnP.Core.Model.SharePoint.FileSystemObjectType.Web
+  fullName: PnP.Core.Model.SharePoint.FileSystemObjectType.Web
+  nameWithType: FileSystemObjectType.Web
 - uid: PnP.Core.Model.SharePoint.FooterLayoutType
   name: FooterLayoutType
   href: api/PnP.Core.Model.SharePoint.FooterLayoutType.html
@@ -12861,6 +12909,32 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IList
   fullName: PnP.Core.Model.SharePoint.IList
   nameWithType: IList
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolder(System.String,System.String,System.String)
+  name: AddListFolder(String, String, String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolder_System_String_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.AddListFolder(System.String,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolder(System.String, System.String, System.String)
+  nameWithType: IList.AddListFolder(String, String, String)
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolder*
+  name: AddListFolder
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolder_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.AddListFolder
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolder
+  nameWithType: IList.AddListFolder
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolderAsync(System.String,System.String,System.String)
+  name: AddListFolderAsync(String, String, String)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolderAsync_System_String_System_String_System_String_
+  commentId: M:PnP.Core.Model.SharePoint.IList.AddListFolderAsync(System.String,System.String,System.String)
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolderAsync(System.String, System.String, System.String)
+  nameWithType: IList.AddListFolderAsync(String, String, String)
+- uid: PnP.Core.Model.SharePoint.IList.AddListFolderAsync*
+  name: AddListFolderAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddListFolderAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.AddListFolderAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.AddListFolderAsync
+  nameWithType: IList.AddListFolderAsync
 - uid: PnP.Core.Model.SharePoint.IList.AddRoleDefinitions(System.Int32,System.String[])
   name: AddRoleDefinitions(Int32, String[])
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_AddRoleDefinitions_System_Int32_System_String___
@@ -14342,15 +14416,15 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IListItemCollection
   fullName: PnP.Core.Model.SharePoint.IListItemCollection
   nameWithType: IListItemCollection
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary{System.String,System.Object})
-  name: Add(Dictionary<String, Object>)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary{System.String,System.Object})
-  name.vb: Add(Dictionary(Of String, Object))
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary<System.String, System.Object>)
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary(Of System.String, System.Object))
-  nameWithType: IListItemCollection.Add(Dictionary<String, Object>)
-  nameWithType.vb: IListItemCollection.Add(Dictionary(Of String, Object))
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name: Add(Dictionary<String, Object>, String, FileSystemObjectType)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name.vb: Add(Dictionary(Of String, Object), String, FileSystemObjectType)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary<System.String, System.Object>, System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary(Of System.String, System.Object), System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  nameWithType: IListItemCollection.Add(Dictionary<String, Object>, String, FileSystemObjectType)
+  nameWithType.vb: IListItemCollection.Add(Dictionary(Of String, Object), String, FileSystemObjectType)
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.Add*
   name: Add
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_Add_
@@ -14358,15 +14432,15 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.Add
   nameWithType: IListItemCollection.Add
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary{System.String,System.Object})
-  name: AddAsync(Dictionary<String, Object>)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary{System.String,System.Object})
-  name.vb: AddAsync(Dictionary(Of String, Object))
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary<System.String, System.Object>)
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary(Of System.String, System.Object))
-  nameWithType: IListItemCollection.AddAsync(Dictionary<String, Object>)
-  nameWithType.vb: IListItemCollection.AddAsync(Dictionary(Of String, Object))
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name: AddAsync(Dictionary<String, Object>, String, FileSystemObjectType)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name.vb: AddAsync(Dictionary(Of String, Object), String, FileSystemObjectType)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary<System.String, System.Object>, System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary(Of System.String, System.Object), System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  nameWithType: IListItemCollection.AddAsync(Dictionary<String, Object>, String, FileSystemObjectType)
+  nameWithType.vb: IListItemCollection.AddAsync(Dictionary(Of String, Object), String, FileSystemObjectType)
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync*
   name: AddAsync
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_
@@ -14374,24 +14448,24 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddAsync
   nameWithType: IListItemCollection.AddAsync
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary{System.String,System.Object})
-  name: AddBatch(Dictionary<String, Object>)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary{System.String,System.Object})
-  name.vb: AddBatch(Dictionary(Of String, Object))
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary<System.String, System.Object>)
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary(Of System.String, System.Object))
-  nameWithType: IListItemCollection.AddBatch(Dictionary<String, Object>)
-  nameWithType.vb: IListItemCollection.AddBatch(Dictionary(Of String, Object))
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch,Dictionary{System.String,System.Object})
-  name: AddBatch(Batch, Dictionary<String, Object>)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch,Dictionary{System.String,System.Object})
-  name.vb: AddBatch(Batch, Dictionary(Of String, Object))
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch, Dictionary<System.String, System.Object>)
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch, Dictionary(Of System.String, System.Object))
-  nameWithType: IListItemCollection.AddBatch(Batch, Dictionary<String, Object>)
-  nameWithType.vb: IListItemCollection.AddBatch(Batch, Dictionary(Of String, Object))
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name: AddBatch(Dictionary<String, Object>, String, FileSystemObjectType)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name.vb: AddBatch(Dictionary(Of String, Object), String, FileSystemObjectType)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary<System.String, System.Object>, System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary(Of System.String, System.Object), System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  nameWithType: IListItemCollection.AddBatch(Dictionary<String, Object>, String, FileSystemObjectType)
+  nameWithType.vb: IListItemCollection.AddBatch(Dictionary(Of String, Object), String, FileSystemObjectType)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch,Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name: AddBatch(Batch, Dictionary<String, Object>, String, FileSystemObjectType)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch,Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name.vb: AddBatch(Batch, Dictionary(Of String, Object), String, FileSystemObjectType)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch, Dictionary<System.String, System.Object>, System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch, Dictionary(Of System.String, System.Object), System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  nameWithType: IListItemCollection.AddBatch(Batch, Dictionary<String, Object>, String, FileSystemObjectType)
+  nameWithType.vb: IListItemCollection.AddBatch(Batch, Dictionary(Of String, Object), String, FileSystemObjectType)
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch*
   name: AddBatch
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_
@@ -14399,24 +14473,24 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatch
   nameWithType: IListItemCollection.AddBatch
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary{System.String,System.Object})
-  name: AddBatchAsync(Dictionary<String, Object>)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary{System.String,System.Object})
-  name.vb: AddBatchAsync(Dictionary(Of String, Object))
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary<System.String, System.Object>)
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary(Of System.String, System.Object))
-  nameWithType: IListItemCollection.AddBatchAsync(Dictionary<String, Object>)
-  nameWithType.vb: IListItemCollection.AddBatchAsync(Dictionary(Of String, Object))
-- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch,Dictionary{System.String,System.Object})
-  name: AddBatchAsync(Batch, Dictionary<String, Object>)
-  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__
-  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch,Dictionary{System.String,System.Object})
-  name.vb: AddBatchAsync(Batch, Dictionary(Of String, Object))
-  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch, Dictionary<System.String, System.Object>)
-  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch, Dictionary(Of System.String, System.Object))
-  nameWithType: IListItemCollection.AddBatchAsync(Batch, Dictionary<String, Object>)
-  nameWithType.vb: IListItemCollection.AddBatchAsync(Batch, Dictionary(Of String, Object))
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name: AddBatchAsync(Dictionary<String, Object>, String, FileSystemObjectType)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name.vb: AddBatchAsync(Dictionary(Of String, Object), String, FileSystemObjectType)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary<System.String, System.Object>, System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary(Of System.String, System.Object), System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  nameWithType: IListItemCollection.AddBatchAsync(Dictionary<String, Object>, String, FileSystemObjectType)
+  nameWithType.vb: IListItemCollection.AddBatchAsync(Dictionary(Of String, Object), String, FileSystemObjectType)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch,Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name: AddBatchAsync(Batch, Dictionary<String, Object>, String, FileSystemObjectType)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch,Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)
+  name.vb: AddBatchAsync(Batch, Dictionary(Of String, Object), String, FileSystemObjectType)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch, Dictionary<System.String, System.Object>, System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  fullName.vb: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch, Dictionary(Of System.String, System.Object), System.String, PnP.Core.Model.SharePoint.FileSystemObjectType)
+  nameWithType: IListItemCollection.AddBatchAsync(Batch, Dictionary<String, Object>, String, FileSystemObjectType)
+  nameWithType.vb: IListItemCollection.AddBatchAsync(Batch, Dictionary(Of String, Object), String, FileSystemObjectType)
 - uid: PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync*
   name: AddBatchAsync
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_

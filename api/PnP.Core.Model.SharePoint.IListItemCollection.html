@@ -211,24 +211,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary%7BSystem.String%2CSystem.Object%7D%2CSystem.String%2CPnP.Core.Model.SharePoint.FileSystemObjectType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L27" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L31" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItemCollection_Add_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.Add*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary{System.String,System.Object})"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__" class="expander" data-toggle="collapse">Add(Dictionary&lt;String, Object&gt;)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.Add(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="expander" data-toggle="collapse">Add(Dictionary&lt;String, Object&gt;, String, FileSystemObjectType)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_Add_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new list item</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IListItem Add(Dictionary&lt;string, object&gt; values)</code></pre>
+    <pre><code class="lang-csharp hljs">IListItem Add(Dictionary&lt;string, object&gt; values, string folderPath = null, FileSystemObjectType underlyingObjectType = default(FileSystemObjectType))</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -238,6 +238,22 @@
         <span class="pull-right"><span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</span>
         <span class="parametername">values</span>
         <p><p>Values to add to list item</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">folderPath</span>
+        <p><p>Optional folder path to add the item too.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FileSystemObjectType.html">FileSystemObjectType</a></span>
+        <span class="parametername">underlyingObjectType</span>
+        <p><p>Type of object to create. Defaults to File/ListItem</p>
 </p>
       </td>
     </tr>
@@ -267,24 +283,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary%7BSystem.String%2CSystem.Object%7D%2CSystem.String%2CPnP.Core.Model.SharePoint.FileSystemObjectType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L20" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L22" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary{System.String,System.Object})"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__" class="expander" data-toggle="collapse">AddAsync(Dictionary&lt;String, Object&gt;)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddAsync(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="expander" data-toggle="collapse">AddAsync(Dictionary&lt;String, Object&gt;, String, FileSystemObjectType)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new list item</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;IListItem&gt; AddAsync(Dictionary&lt;string, object&gt; values)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IListItem&gt; AddAsync(Dictionary&lt;string, object&gt; values, string folderPath = null, FileSystemObjectType underlyingObjectType = default(FileSystemObjectType))</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -294,6 +310,22 @@
         <span class="pull-right"><span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</span>
         <span class="parametername">values</span>
         <p><p>Values to add to list item</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">folderPath</span>
+        <p><p>Optional folder path to add the item too.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FileSystemObjectType.html">FileSystemObjectType</a></span>
+        <span class="parametername">underlyingObjectType</span>
+        <p><p>Type of object to create. Defaults to File/ListItem</p>
 </p>
       </td>
     </tr>
@@ -323,24 +355,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary%7BSystem.String%2CSystem.Object%7D%2CSystem.String%2CPnP.Core.Model.SharePoint.FileSystemObjectType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L57" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L69" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatch*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary{System.String,System.Object})"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__" class="expander" data-toggle="collapse">AddBatch(Dictionary&lt;String, Object&gt;)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="expander" data-toggle="collapse">AddBatch(Dictionary&lt;String, Object&gt;, String, FileSystemObjectType)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new list item</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IListItem AddBatch(Dictionary&lt;string, object&gt; values)</code></pre>
+    <pre><code class="lang-csharp hljs">IListItem AddBatch(Dictionary&lt;string, object&gt; values, string folderPath = null, FileSystemObjectType underlyingObjectType = default(FileSystemObjectType))</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -350,6 +382,22 @@
         <span class="pull-right"><span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</span>
         <span class="parametername">values</span>
         <p><p>Values to add to list item</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">folderPath</span>
+        <p><p>Optional folder path to add the item too.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FileSystemObjectType.html">FileSystemObjectType</a></span>
+        <span class="parametername">underlyingObjectType</span>
+        <p><p>Type of object to create. Defaults to File/ListItem</p>
 </p>
       </td>
     </tr>
@@ -379,24 +427,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch%2CDictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch%2CDictionary%7BSystem.String%2CSystem.Object%7D%2CSystem.String%2CPnP.Core.Model.SharePoint.FileSystemObjectType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L43" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L51" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatch*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch,Dictionary{System.String,System.Object})"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__" class="expander" data-toggle="collapse">AddBatch(Batch, Dictionary&lt;String, Object&gt;)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatch(PnP.Core.Services.Batch,Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="expander" data-toggle="collapse">AddBatch(Batch, Dictionary&lt;String, Object&gt;, String, FileSystemObjectType)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatch_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new list item</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IListItem AddBatch(Batch batch, Dictionary&lt;string, object&gt; values)</code></pre>
+    <pre><code class="lang-csharp hljs">IListItem AddBatch(Batch batch, Dictionary&lt;string, object&gt; values, string folderPath = null, FileSystemObjectType underlyingObjectType = default(FileSystemObjectType))</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -417,6 +465,22 @@
 </p>
       </td>
     </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">folderPath</span>
+        <p><p>Optional folder path to add the item too.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FileSystemObjectType.html">FileSystemObjectType</a></span>
+        <span class="parametername">underlyingObjectType</span>
+        <p><p>Type of object to create. Defaults to File/ListItem</p>
+</p>
+      </td>
+    </tr>
   </table>
   
   <h5 class="returns">Returns</h5>
@@ -443,24 +507,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary%7BSystem.String%2CSystem.Object%7D%2CSystem.String%2CPnP.Core.Model.SharePoint.FileSystemObjectType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L50" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L60" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary{System.String,System.Object})"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__" class="expander" data-toggle="collapse">AddBatchAsync(Dictionary&lt;String, Object&gt;)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="expander" data-toggle="collapse">AddBatchAsync(Dictionary&lt;String, Object&gt;, String, FileSystemObjectType)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new list item</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;IListItem&gt; AddBatchAsync(Dictionary&lt;string, object&gt; values)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IListItem&gt; AddBatchAsync(Dictionary&lt;string, object&gt; values, string folderPath = null, FileSystemObjectType underlyingObjectType = default(FileSystemObjectType))</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -470,6 +534,22 @@
         <span class="pull-right"><span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</span>
         <span class="parametername">values</span>
         <p><p>Values to add to list item</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">folderPath</span>
+        <p><p>Optional folder path to add the item too.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FileSystemObjectType.html">FileSystemObjectType</a></span>
+        <span class="parametername">underlyingObjectType</span>
+        <p><p>Type of object to create. Defaults to File/ListItem</p>
 </p>
       </td>
     </tr>
@@ -499,24 +579,24 @@
   
   <span class="small pull-right mobile-hide">
     <span class="divider"> </span>
-    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch%2CDictionary%7BSystem.String%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
+    <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch%2CDictionary%7BSystem.String%2CSystem.Object%7D%2CSystem.String%2CPnP.Core.Model.SharePoint.FileSystemObjectType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L35" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L41" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync*"></a>
   
-  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch,Dictionary{System.String,System.Object})"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__" class="expander" data-toggle="collapse">AddBatchAsync(Batch, Dictionary&lt;String, Object&gt;)</a></h4>
+  <h4 id="PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.AddBatchAsync(PnP.Core.Services.Batch,Dictionary{System.String,System.Object},System.String,PnP.Core.Model.SharePoint.FileSystemObjectType)"><a href="#collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="expander" data-toggle="collapse">AddBatchAsync(Batch, Dictionary&lt;String, Object&gt;, String, FileSystemObjectType)</a></h4>
   
-  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__" class="collapse in">
+  <div id="collapsible-PnP_Core_Model_SharePoint_IListItemCollection_AddBatchAsync_PnP_Core_Services_Batch_Dictionary_System_String_System_Object__System_String_PnP_Core_Model_SharePoint_FileSystemObjectType_" class="collapse in">
   <div class="markdown level1 summary"><p>Adds a new list item</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;IListItem&gt; AddBatchAsync(Batch batch, Dictionary&lt;string, object&gt; values)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;IListItem&gt; AddBatchAsync(Batch batch, Dictionary&lt;string, object&gt; values, string folderPath = null, FileSystemObjectType underlyingObjectType = default(FileSystemObjectType))</code></pre>
   </div>
 
   <h5 class="parameters">Parameters</h5>
@@ -534,6 +614,22 @@
         <span class="pull-right"><span class="xref">Dictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</span>
         <span class="parametername">values</span>
         <p><p>Values to add to list item</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></span>
+        <span class="parametername">folderPath</span>
+        <p><p>Optional folder path to add the item too.</p>
+</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="pull-right"><a class="xref" href="PnP.Core.Model.SharePoint.FileSystemObjectType.html">FileSystemObjectType</a></span>
+        <span class="parametername">underlyingObjectType</span>
+        <p><p>Type of object to create. Defaults to File/ListItem</p>
 </p>
       </td>
     </tr>
@@ -566,7 +662,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_Contains_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.Contains(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L68" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L80" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItemCollection_Contains_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.Contains*"></a>
@@ -622,7 +718,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_GetById_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.GetById(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L79" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L91" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItemCollection_GetById_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.GetById*"></a>
@@ -678,7 +774,7 @@
     <a href="https://github.com/pnp/pnpcore/new/dev/apiSpec/new?filename=PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_System_Int32_.md&amp;value=---%0Auid%3A%20PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" title="Improve this Doc"><i class="fa fa-pencil"></i></a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L86" title="View Source"><i class="fa fa-code"></i></a>
+    <a href="https://github.com/pnp/pnpcore/blob/dev/src/sdk/PnP.Core/Model/SharePoint/Core/Public/IListItemCollection.cs/#L98" title="View Source"><i class="fa fa-code"></i></a>
   </span>
   
   <a id="PnP_Core_Model_SharePoint_IListItemCollection_GetByIdAsync_" data-uid="PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync*"></a>
