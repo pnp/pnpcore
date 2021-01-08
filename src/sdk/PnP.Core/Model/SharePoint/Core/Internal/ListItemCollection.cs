@@ -18,17 +18,17 @@ namespace PnP.Core.Model.SharePoint
 
         #region Add methods
 
-        public async Task<IListItem> AddBatchAsync(Dictionary<string, object> values)
+        public async Task<IListItem> AddBatchAsync(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType fileSystemObjectType = FileSystemObjectType.File)
         {
-            return await AddBatchAsync(PnPContext.CurrentBatch, values).ConfigureAwait(false);
+            return await AddBatchAsync(PnPContext.CurrentBatch, values, folderPath, fileSystemObjectType).ConfigureAwait(false);
         }
 
-        public IListItem AddBatch(Dictionary<string, object> values)
+        public IListItem AddBatch(Dictionary<string, object> values, string folderPath = null,FileSystemObjectType fileSystemObjectType = FileSystemObjectType.File)
         {
-            return AddBatchAsync(values).GetAwaiter().GetResult();
+            return AddBatchAsync(values, folderPath, fileSystemObjectType).GetAwaiter().GetResult();
         }
 
-        public async Task<IListItem> AddBatchAsync(Batch batch, Dictionary<string, object> values)
+        public async Task<IListItem> AddBatchAsync(Batch batch, Dictionary<string, object> values, string folderPath = null, FileSystemObjectType fileSystemObjectType = FileSystemObjectType.File)
         {
             if (values == null)
             {
@@ -40,15 +40,15 @@ namespace PnP.Core.Model.SharePoint
             // Assign field values
             newListItem.Values.SystemAddRange(values);
 
-            return await newListItem.AddBatchAsync(batch).ConfigureAwait(false) as ListItem;
+            return await newListItem.AddBatchAsync(batch, new Dictionary<string, object> { { ListItem.FolderPath, folderPath }, { ListItem.UnderlyingObjectType, fileSystemObjectType } }).ConfigureAwait(false) as ListItem;
         }
 
-        public IListItem AddBatch(Batch batch, Dictionary<string, object> values)
+        public IListItem AddBatch(Batch batch, Dictionary<string, object> values, string folderPath = null, FileSystemObjectType fileSystemObjectType = FileSystemObjectType.File)
         {
-            return AddBatchAsync(batch, values).GetAwaiter().GetResult();
+            return AddBatchAsync(batch, values, folderPath, fileSystemObjectType).GetAwaiter().GetResult();
         }
 
-        public async Task<IListItem> AddAsync(Dictionary<string, object> values)
+        public async Task<IListItem> AddAsync(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType fileSystemObjectType = FileSystemObjectType.File)
         {
             if (values == null)
             {
@@ -60,12 +60,12 @@ namespace PnP.Core.Model.SharePoint
             // Assign field values
             newListItem.Values.SystemAddRange(values);
 
-            return await newListItem.AddAsync().ConfigureAwait(false) as ListItem;
+            return await newListItem.AddAsync(new Dictionary<string, object> { { ListItem.FolderPath, folderPath }, { ListItem.UnderlyingObjectType, fileSystemObjectType } }).ConfigureAwait(false) as ListItem;
         }
 
-        public IListItem Add(Dictionary<string, object> values)
+        public IListItem Add(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType fileSystemObjectType = FileSystemObjectType.File)
         {
-            return AddAsync(values).GetAwaiter().GetResult();
+            return AddAsync(values, folderPath, fileSystemObjectType).GetAwaiter().GetResult();
         }
 
         #endregion

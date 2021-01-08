@@ -484,5 +484,23 @@ namespace PnP.Core.Model.SharePoint
         /// <returns></returns>
         public Task<bool> RemoveRoleDefinitionsAsync(int principalId, params string[] names);
 
+        /// <summary>
+        /// Adds a folder
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="parentFolder"></param>
+        /// <param name="contentTypeId"></param>
+        /// <returns></returns>
+        public IListItem AddListFolder(string path, string parentFolder = null, string contentTypeId = "0x0120");
+
+        /// <summary>
+        /// Adds a folder
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="parentFolder"></param>
+        /// <param name="contentTypeId"></param>
+        /// <returns></returns>
+        public Task<IListItem> AddListFolderAsync(string path, string parentFolder = null, string contentTypeId = "0x0120");
+
     }
 }

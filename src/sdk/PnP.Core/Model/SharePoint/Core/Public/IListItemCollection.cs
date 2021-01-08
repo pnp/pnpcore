@@ -16,45 +16,57 @@ namespace PnP.Core.Model.SharePoint
         /// Adds a new list item
         /// </summary>
         /// <param name="values">Values to add to list item</param>
+        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
-        public Task<IListItem> AddAsync(Dictionary<string, object> values);
+        public Task<IListItem> AddAsync(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
 
         /// <summary>
         /// Adds a new list item
         /// </summary>
         /// <param name="values">Values to add to list item</param>
+        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
-        public IListItem Add(Dictionary<string, object> values);
+        public IListItem Add(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
 
         /// <summary>
         /// Adds a new list item
         /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="values">Values to add to list item</param>
+        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
-        public Task<IListItem> AddBatchAsync(Batch batch, Dictionary<string, object> values);
+        public Task<IListItem> AddBatchAsync(Batch batch, Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
 
         /// <summary>
         /// Adds a new list item
         /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="values">Values to add to list item</param>
+        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
-        public IListItem AddBatch(Batch batch, Dictionary<string, object> values);
+        public IListItem AddBatch(Batch batch, Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
 
         /// <summary>
         /// Adds a new list item
         /// </summary>
         /// <param name="values">Values to add to list item</param>
+        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
-        public Task<IListItem> AddBatchAsync(Dictionary<string, object> values);
+        public Task<IListItem> AddBatchAsync(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
 
         /// <summary>
         /// Adds a new list item
         /// </summary>
         /// <param name="values">Values to add to list item</param>
+        /// <param name="folderPath">Optional folder path to add the item too.</param>
+        /// <param name="underlyingObjectType">Type of object to create. Defaults to File/ListItem</param>
         /// <returns>Newly added list item</returns>
-        public IListItem AddBatch(Dictionary<string, object> values);
+        public IListItem AddBatch(Dictionary<string, object> values, string folderPath = null, FileSystemObjectType underlyingObjectType = FileSystemObjectType.File);
 
         #endregion
 

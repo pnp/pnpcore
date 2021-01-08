@@ -632,6 +632,29 @@ namespace PnP.Core.Model.SharePoint
         }
         #endregion
 
+        #region Folders
+
+        public IListItem AddListFolder(string path, string parentFolder = null, string contentTypeId = "0x0120")
+        {
+            return AddListFolderAsync(path, parentFolder, contentTypeId).GetAwaiter().GetResult();
+        }
+
+        public async Task<IListItem> AddListFolderAsync(string path, string parentFolder = null, string contentTypeId = "0x0120")
+        {
+            return await this.Items.AddAsync(new Dictionary<string, object>
+            {
+                {
+                    "Title",path
+                },
+                {
+                    "FileLeafRef", path
+                },
+                {
+                    "ContentTypeId", contentTypeId
+                }
+            }, parentFolder, FileSystemObjectType.Folder).ConfigureAwait(false);
+        }
+        #endregion
         #endregion
     }
 }

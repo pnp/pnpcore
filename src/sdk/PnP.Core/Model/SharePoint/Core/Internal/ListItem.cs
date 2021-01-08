@@ -22,6 +22,9 @@ namespace PnP.Core.Model.SharePoint
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2243:Attribute string literals should parse correctly", Justification = "<Pending>")]
     internal partial class ListItem : ListItemBase<IListItem>, IListItem
     {
+        internal const string FolderPath = "folderPath";
+        internal const string UnderlyingObjectType = "underlyingObjectType";
+
         #region Construction
         public ListItem()
         {
@@ -102,19 +105,47 @@ namespace PnP.Core.Model.SharePoint
 
                 // drop the everything in front of _api as the batching logic will add that automatically
                 var baseApiCall = parentListUri.Substring(parentListUri.IndexOf("_api"));
-                
+
 
                 // Define the JSON body of the update request based on the actual changes
                 dynamic body = new ExpandoObject();
+
+                var decodedUrlFolderPath = serverRelativeUrl;
+                if (keyValuePairs.ContainsKey(FolderPath))
+                {
+                    if (keyValuePairs[FolderPath] != null)
+                    {
+                        var folderPath = keyValuePairs[FolderPath].ToString();
+                        if (folderPath.ToLower().StartsWith(serverRelativeUrl))
+                        {
+                            decodedUrlFolderPath = folderPath;
+                        }
+                        else
+                        {
+                            decodedUrlFolderPath = $"{serverRelativeUrl}/{folderPath.TrimStart('/')}";
+                        }
+                    }
+                }
+
+                var underlyingObjectType = (int)FileSystemObjectType.File;
+
+                if (keyValuePairs.ContainsKey(UnderlyingObjectType))
+                {
+                    if (keyValuePairs[UnderlyingObjectType] != null)
+                    {
+                        underlyingObjectType = (int)((FileSystemObjectType)keyValuePairs[UnderlyingObjectType]);
+                    }
+                }
 
                 body.listItemCreateInfo = new
                 {
                     FolderPath = new
                     {
-                        DecodedUrl = $"{serverRelativeUrl}"
+                        DecodedUrl = decodedUrlFolderPath
                     },
-                    UnderlyingObjectType = 0,
+                    UnderlyingObjectType = underlyingObjectType
                 };
+
                 body.bNewDocumentUpdate = false;
 
                 if (Values.Any())
@@ -271,7 +302,7 @@ namespace PnP.Core.Model.SharePoint
             else if (changedProp.Value is List<string> stringList)
             {
                 StringBuilder sb = new StringBuilder();
-                foreach(var choice in stringList)
+                foreach (var choice in stringList)
                 {
                     sb.Append($"{choice};#");
                 }
@@ -479,7 +510,7 @@ namespace PnP.Core.Model.SharePoint
         public IFieldValueCollection NewFieldValueCollection(IField fieldToUpdate, TransientDictionary parent)
         {
             return new FieldValueCollection(fieldToUpdate, fieldToUpdate.InternalName, parent);
-        }        
+        }
         #endregion
 
         #endregion

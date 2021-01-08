@@ -20,6 +20,59 @@ namespace PnP.Core.Test.SharePoint
         }
 
         [TestMethod]
+        public async Task AddListItemWithFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("AddListItemWithFolderTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                list.ContentTypesEnabled = true;
+                list.EnableFolderCreation = true;
+                list.Update();
+
+                var folderItem = await list.AddListFolderAsync("Test");
+                var item = list.Items.Add(new Dictionary<string, object> { { "Title", "blabla" } }, "Test");
+                var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
+                Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+                {
+                    var newList = await context.Web.Lists.GetByTitleAsync(listTitle, l => l.RootFolder);
+
+                    var result = await newList.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileDirRef' /></ViewFields><RowLimit>1</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData, FolderServerRelativeUrl = $"{newList.RootFolder.ServerRelativeUrl}/Test" });
+
+                    
+                    Assert.IsTrue(newList.Items.FirstOrDefault() != null);
+                    
+                }
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task AddListFolderTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("AddListWithFolderTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                await list.EnsurePropertiesAsync(l => l.RootFolder);
+                list.ContentTypesEnabled = true;
+                list.EnableFolderCreation = true;
+                list.Update();
+
+                var folderItem = await list.AddListFolderAsync("Test");
+                var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
+                Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
+
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
         public async Task SystemUpdate()
         {
             //TestCommon.Instance.Mocking = false;
@@ -1049,7 +1102,7 @@ namespace PnP.Core.Test.SharePoint
                 IField addedMultilineTextField1 = await myList.Fields.AddMultilineTextAsync(fldMultilineText1, new FieldMultilineTextOptions()
                 {
                     Group = fieldGroup,
-                    AddToDefaultView = true,                    
+                    AddToDefaultView = true,
                 });
 
                 // Boolean field 1
@@ -1081,7 +1134,7 @@ namespace PnP.Core.Test.SharePoint
                 IField addedCurrencyField1 = await myList.Fields.AddCurrencyAsync(fldCurrency1, new FieldCurrencyOptions()
                 {
                     Group = fieldGroup,
-                    AddToDefaultView = true,                    
+                    AddToDefaultView = true,
                 });
 
                 // Calculated field 1
@@ -1218,7 +1271,7 @@ namespace PnP.Core.Test.SharePoint
                 fieldData[fldBool1].Properties["Boolean"] = false;
                 addedItem[fldBool1] = fieldData[fldBool1].Properties["Boolean"];
 
-                fieldData[fldDateTime1].Properties["DateTime"] = baseDate.Subtract(new TimeSpan(10,0,0,0));
+                fieldData[fldDateTime1].Properties["DateTime"] = baseDate.Subtract(new TimeSpan(10, 0, 0, 0));
                 addedItem[fldDateTime1] = fieldData[fldDateTime1].Properties["DateTime"];
 
                 fieldData[fldCurrency1].Properties["Currency"] = 22.22;
@@ -1410,7 +1463,7 @@ namespace PnP.Core.Test.SharePoint
                     {
                         Assert.IsTrue(addedItem[field.Key] is List<string>);
 
-                        foreach(var choice in choicesList)
+                        foreach (var choice in choicesList)
                         {
                             Assert.IsTrue((addedItem[field.Key] as List<string>).Contains(choice));
                         }
@@ -1899,7 +1952,7 @@ namespace PnP.Core.Test.SharePoint
                 {
                     Group = fieldGroup,
                     AddToDefaultView = true,
-                    Choices = (new List<string>() { "Option A", "Option B", "Option C"}).ToArray(),
+                    Choices = (new List<string>() { "Option A", "Option B", "Option C" }).ToArray(),
                     DefaultChoice = "Option B"
                 });
 
