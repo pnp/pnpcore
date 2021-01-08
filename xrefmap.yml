@@ -5790,6 +5790,36 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.FieldDateTimeOptions.FriendlyDisplayFormat
   nameWithType: FieldDateTimeOptions.FriendlyDisplayFormat
+- uid: PnP.Core.Model.SharePoint.FieldIndexStatus
+  name: FieldIndexStatus
+  href: api/PnP.Core.Model.SharePoint.FieldIndexStatus.html
+  commentId: T:PnP.Core.Model.SharePoint.FieldIndexStatus
+  fullName: PnP.Core.Model.SharePoint.FieldIndexStatus
+  nameWithType: FieldIndexStatus
+- uid: PnP.Core.Model.SharePoint.FieldIndexStatus.Disabling
+  name: Disabling
+  href: api/PnP.Core.Model.SharePoint.FieldIndexStatus.html#PnP_Core_Model_SharePoint_FieldIndexStatus_Disabling
+  commentId: F:PnP.Core.Model.SharePoint.FieldIndexStatus.Disabling
+  fullName: PnP.Core.Model.SharePoint.FieldIndexStatus.Disabling
+  nameWithType: FieldIndexStatus.Disabling
+- uid: PnP.Core.Model.SharePoint.FieldIndexStatus.Enabling
+  name: Enabling
+  href: api/PnP.Core.Model.SharePoint.FieldIndexStatus.html#PnP_Core_Model_SharePoint_FieldIndexStatus_Enabling
+  commentId: F:PnP.Core.Model.SharePoint.FieldIndexStatus.Enabling
+  fullName: PnP.Core.Model.SharePoint.FieldIndexStatus.Enabling
+  nameWithType: FieldIndexStatus.Enabling
+- uid: PnP.Core.Model.SharePoint.FieldIndexStatus.Indexed
+  name: Indexed
+  href: api/PnP.Core.Model.SharePoint.FieldIndexStatus.html#PnP_Core_Model_SharePoint_FieldIndexStatus_Indexed
+  commentId: F:PnP.Core.Model.SharePoint.FieldIndexStatus.Indexed
+  fullName: PnP.Core.Model.SharePoint.FieldIndexStatus.Indexed
+  nameWithType: FieldIndexStatus.Indexed
+- uid: PnP.Core.Model.SharePoint.FieldIndexStatus.None
+  name: None
+  href: api/PnP.Core.Model.SharePoint.FieldIndexStatus.html#PnP_Core_Model_SharePoint_FieldIndexStatus_None
+  commentId: F:PnP.Core.Model.SharePoint.FieldIndexStatus.None
+  fullName: PnP.Core.Model.SharePoint.FieldIndexStatus.None
+  nameWithType: FieldIndexStatus.None
 - uid: PnP.Core.Model.SharePoint.FieldLookupOptions
   name: FieldLookupOptions
   href: api/PnP.Core.Model.SharePoint.FieldLookupOptions.html
@@ -8807,19 +8837,6 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IField.OutputType
   nameWithType: IField.OutputType
-- uid: PnP.Core.Model.SharePoint.IField.PinnedToFiltersPane
-  name: PinnedToFiltersPane
-  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_PinnedToFiltersPane
-  commentId: P:PnP.Core.Model.SharePoint.IField.PinnedToFiltersPane
-  fullName: PnP.Core.Model.SharePoint.IField.PinnedToFiltersPane
-  nameWithType: IField.PinnedToFiltersPane
-- uid: PnP.Core.Model.SharePoint.IField.PinnedToFiltersPane*
-  name: PinnedToFiltersPane
-  href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_PinnedToFiltersPane_
-  commentId: Overload:PnP.Core.Model.SharePoint.IField.PinnedToFiltersPane
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IField.PinnedToFiltersPane
-  nameWithType: IField.PinnedToFiltersPane
 - uid: PnP.Core.Model.SharePoint.IField.Presence
   name: Presence
   href: api/PnP.Core.Model.SharePoint.IField.html#PnP_Core_Model_SharePoint_IField_Presence
@@ -23564,6 +23581,30 @@ references:
   commentId: F:PnP.Core.Model.SharePoint.SharingState.Unspecified
   fullName: PnP.Core.Model.SharePoint.SharingState.Unspecified
   nameWithType: SharingState.Unspecified
+- uid: PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus
+  name: ShowInFiltersPaneStatus
+  href: api/PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.html
+  commentId: T:PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus
+  fullName: PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus
+  nameWithType: ShowInFiltersPaneStatus
+- uid: PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.Auto
+  name: Auto
+  href: api/PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.html#PnP_Core_Model_SharePoint_ShowInFiltersPaneStatus_Auto
+  commentId: F:PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.Auto
+  fullName: PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.Auto
+  nameWithType: ShowInFiltersPaneStatus.Auto
+- uid: PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.Pinned
+  name: Pinned
+  href: api/PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.html#PnP_Core_Model_SharePoint_ShowInFiltersPaneStatus_Pinned
+  commentId: F:PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.Pinned
+  fullName: PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.Pinned
+  nameWithType: ShowInFiltersPaneStatus.Pinned
+- uid: PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.Removed
+  name: Removed
+  href: api/PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.html#PnP_Core_Model_SharePoint_ShowInFiltersPaneStatus_Removed
+  commentId: F:PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.Removed
+  fullName: PnP.Core.Model.SharePoint.ShowInFiltersPaneStatus.Removed
+  nameWithType: ShowInFiltersPaneStatus.Removed
 - uid: PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource
   name: SPEffectiveInformationRightsManagementSettingsSource
   href: api/PnP.Core.Model.SharePoint.SPEffectiveInformationRightsManagementSettingsSource.html
