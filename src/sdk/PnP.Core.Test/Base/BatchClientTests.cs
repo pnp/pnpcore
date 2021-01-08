@@ -3,6 +3,7 @@ using PnP.Core.Model.SharePoint;
 using PnP.Core.Services;
 using PnP.Core.Test.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -298,6 +299,54 @@ namespace PnP.Core.Test.Base
             }
         }
         */
+
+        [TestMethod]
+        public async Task HandleMaxRequestsInRestBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("HandleMaxRequestsInRestBatch");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add items to the list
+                for (int i = 0; i < 150; i++)
+                {
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                    await myList.Items.AddBatchAsync(values);
+                }
+                await context.ExecuteAsync();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = context2.Web.Lists.GetByTitle(listTitle);
+                    if (list2 != null)
+                    {
+                        var result = await list2.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /></ViewFields></View>", RenderOptions = RenderListDataOptionsFlags.ListData });
+                        Assert.IsTrue(list2.Items.Count() == 150);
+                    }
+                }
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+
 
         [TestMethod]
         public async Task UnresolvedToken()
