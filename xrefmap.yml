@@ -2403,6 +2403,216 @@ references:
   fullName.vb: PnP.Core.Model.IDataModelCollection(Of TModel).LoadProperties
   nameWithType: IDataModelCollection<TModel>.LoadProperties
   nameWithType.vb: IDataModelCollection(Of TModel).LoadProperties
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId
+  name: IDataModelCollectionDeleteByGuidId
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html
+  commentId: T:PnP.Core.Model.IDataModelCollectionDeleteByGuidId
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId
+  nameWithType: IDataModelCollectionDeleteByGuidId
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteById(Guid)
+  name: DeleteById(Guid)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteById_Guid_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteById(Guid)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteById(Guid)
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteById(Guid)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteById*
+  name: DeleteById
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteById_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteById
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteById
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteById
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdAsync(Guid)
+  name: DeleteByIdAsync(Guid)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteByIdAsync_Guid_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdAsync(Guid)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdAsync(Guid)
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteByIdAsync(Guid)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdAsync*
+  name: DeleteByIdAsync
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteByIdAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdAsync
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteByIdAsync
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatch(Guid)
+  name: DeleteByIdBatch(Guid)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteByIdBatch_Guid_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatch(Guid)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatch(Guid)
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteByIdBatch(Guid)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatch(PnP.Core.Services.Batch,Guid)
+  name: DeleteByIdBatch(Batch, Guid)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteByIdBatch_PnP_Core_Services_Batch_Guid_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatch(PnP.Core.Services.Batch,Guid)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatch(PnP.Core.Services.Batch, Guid)
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteByIdBatch(Batch, Guid)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatch*
+  name: DeleteByIdBatch
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteByIdBatch_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatch
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteByIdBatch
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync(Guid)
+  name: DeleteByIdBatchAsync(Guid)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteByIdBatchAsync_Guid_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync(Guid)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync(Guid)
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync(Guid)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync(PnP.Core.Services.Batch,Guid)
+  name: DeleteByIdBatchAsync(Batch, Guid)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteByIdBatchAsync_PnP_Core_Services_Batch_Guid_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync(PnP.Core.Services.Batch,Guid)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync(PnP.Core.Services.Batch, Guid)
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync(Batch, Guid)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync*
+  name: DeleteByIdBatchAsync
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByGuidId.html#PnP_Core_Model_IDataModelCollectionDeleteByGuidId_DeleteByIdBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync
+  nameWithType: IDataModelCollectionDeleteByGuidId.DeleteByIdBatchAsync
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId
+  name: IDataModelCollectionDeleteByIntegerId
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html
+  commentId: T:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId
+  nameWithType: IDataModelCollectionDeleteByIntegerId
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteById(System.Int32)
+  name: DeleteById(Int32)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteById_System_Int32_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteById(System.Int32)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteById(System.Int32)
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteById(Int32)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteById*
+  name: DeleteById
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteById_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteById
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteById
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteById
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdAsync(System.Int32)
+  name: DeleteByIdAsync(Int32)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdAsync_System_Int32_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdAsync(System.Int32)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdAsync(System.Int32)
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteByIdAsync(Int32)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdAsync*
+  name: DeleteByIdAsync
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdAsync
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteByIdAsync
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(PnP.Core.Services.Batch,System.Int32)
+  name: DeleteByIdBatch(Batch, Int32)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatch_PnP_Core_Services_Batch_System_Int32_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(PnP.Core.Services.Batch,System.Int32)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(PnP.Core.Services.Batch, System.Int32)
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(Batch, Int32)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(System.Int32)
+  name: DeleteByIdBatch(Int32)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatch_System_Int32_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(System.Int32)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(System.Int32)
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch(Int32)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch*
+  name: DeleteByIdBatch
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatch_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteByIdBatch
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)
+  name: DeleteByIdBatchAsync(Batch, Int32)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(PnP.Core.Services.Batch, System.Int32)
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(Batch, Int32)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(System.Int32)
+  name: DeleteByIdBatchAsync(Int32)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatchAsync_System_Int32_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(System.Int32)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(System.Int32)
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync(Int32)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync*
+  name: DeleteByIdBatchAsync
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.html#PnP_Core_Model_IDataModelCollectionDeleteByIntegerId_DeleteByIdBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync
+  nameWithType: IDataModelCollectionDeleteByIntegerId.DeleteByIdBatchAsync
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId
+  name: IDataModelCollectionDeleteByStringId
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html
+  commentId: T:PnP.Core.Model.IDataModelCollectionDeleteByStringId
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId
+  nameWithType: IDataModelCollectionDeleteByStringId
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteById(System.String)
+  name: DeleteById(String)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteById_System_String_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteById(System.String)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteById(System.String)
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteById(String)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteById*
+  name: DeleteById
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteById_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteById
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteById
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteById
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdAsync(System.String)
+  name: DeleteByIdAsync(String)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteByIdAsync_System_String_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdAsync(System.String)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdAsync(System.String)
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteByIdAsync(String)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdAsync*
+  name: DeleteByIdAsync
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteByIdAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdAsync
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteByIdAsync
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatch(PnP.Core.Services.Batch,System.String)
+  name: DeleteByIdBatch(Batch, String)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteByIdBatch_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatch(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatch(PnP.Core.Services.Batch, System.String)
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteByIdBatch(Batch, String)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatch(System.String)
+  name: DeleteByIdBatch(String)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteByIdBatch_System_String_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatch(System.String)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatch(System.String)
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteByIdBatch(String)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatch*
+  name: DeleteByIdBatch
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteByIdBatch_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatch
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteByIdBatch
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync(PnP.Core.Services.Batch,System.String)
+  name: DeleteByIdBatchAsync(Batch, String)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteByIdBatchAsync_PnP_Core_Services_Batch_System_String_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync(PnP.Core.Services.Batch,System.String)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync(PnP.Core.Services.Batch, System.String)
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync(Batch, String)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync(System.String)
+  name: DeleteByIdBatchAsync(String)
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteByIdBatchAsync_System_String_
+  commentId: M:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync(System.String)
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync(System.String)
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync(String)
+- uid: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync*
+  name: DeleteByIdBatchAsync
+  href: api/PnP.Core.Model.IDataModelCollectionDeleteByStringId.html#PnP_Core_Model_IDataModelCollectionDeleteByStringId_DeleteByIdBatchAsync_
+  commentId: Overload:PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync
+  nameWithType: IDataModelCollectionDeleteByStringId.DeleteByIdBatchAsync
 - uid: PnP.Core.Model.IDataModelDelete
   name: IDataModelDelete
   href: api/PnP.Core.Model.IDataModelDelete.html
