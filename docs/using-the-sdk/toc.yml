@@ -72,3 +72,15 @@
   items:
   - name: Overview
     href: folders-intro.md
+- name: Teams
+  items:
+  - name: Overview
+    href: teams-intro.md
+  - name: Channels
+    href: teams-channels.md
+  - name: Tabs
+    href: teams-channel-tabs.md
+  - name: Chat
+    href: teams-channel-chat.md
+  - name: Archiving
+    href: teams-archiving.md
