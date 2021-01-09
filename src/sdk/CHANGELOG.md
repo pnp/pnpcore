@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- Added support to recycle a list item to the recycle bin [erwinvanhunen - Erwin van Hunen]
+- Added support to add a folder to a SharePoint list [erwinvanhunen - Erwin van Hunen]
 - Added support to modify roledefinitions for a SharePoint list [erwinvanhunen - Erwin van Hunen]
 - Added support to add and remove roledefinitions to a SharePoint group [erwinvanhunen - Erwin van Hunen]
 - Added support for breaking role inheritance and resetting role inheritance for a list [erwinvanhunen - Erwin van Hunen]

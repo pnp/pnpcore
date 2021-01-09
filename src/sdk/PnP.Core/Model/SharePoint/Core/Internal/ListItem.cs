@@ -193,6 +193,7 @@ namespace PnP.Core.Model.SharePoint
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
+
         internal override async Task BaseBatchUpdateAsync(Batch batch, Func<FromJson, object> fromJsonCasting = null, Action<string> postMappingJson = null)
         {
             // Get entity information for the entity to update
@@ -353,6 +354,38 @@ namespace PnP.Core.Model.SharePoint
             return input.ToString(nfi);
         }
 
+        #endregion
+
+        #region Recycle
+        public Guid Recycle()
+        {
+            return RecycleAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task<Guid> RecycleAsync()
+        {
+            var apiCall = new ApiCall("_api/Web/Lists(guid'{Parent.Id}')/items({Id})/recycle", ApiType.SPORest);
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+
+            if (!string.IsNullOrEmpty(response.Json))
+            {
+                var document = JsonSerializer.Deserialize<JsonElement>(response.Json);
+                if (document.TryGetProperty("d", out JsonElement root))
+                {
+                    if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
+                    {
+                        // Remove this item from the lists collection
+                        RemoveFromParentCollection();
+
+                        // return the recyclebin item id
+                        return recycleBinItemId.GetGuid();
+                    }
+                }
+            }
+
+            return Guid.Empty;
+        }
         #endregion
 
         #region Graph/Rest interoperability overrides

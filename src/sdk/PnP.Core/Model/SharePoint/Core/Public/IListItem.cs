@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Model.Security;
 using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -59,6 +60,18 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="parent">List item values collection that's being updated by this collection</param>
         /// <returns></returns>
         public IFieldValueCollection NewFieldValueCollection(IField fieldToUpdate, TransientDictionary parent);
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <returns></returns>
+        public Guid Recycle();
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <returns></returns>
+        public Task<Guid> RecycleAsync();
 
     }
 }

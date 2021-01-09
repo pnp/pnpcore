@@ -43,9 +43,9 @@ namespace PnP.Core.Test.SharePoint
 
                     var result = await newList.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileDirRef' /></ViewFields><RowLimit>1</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData, FolderServerRelativeUrl = $"{newList.RootFolder.ServerRelativeUrl}/Test" });
 
-                    
+
                     Assert.IsTrue(newList.Items.FirstOrDefault() != null);
-                    
+
                 }
                 await list.DeleteAsync();
             }
@@ -68,6 +68,27 @@ namespace PnP.Core.Test.SharePoint
                 var newFolderItem = await list.Items.GetByIdAsync(folderItem.Id);
                 Assert.IsTrue(newFolderItem["ContentTypeId"].ToString().StartsWith("0x0120"));
 
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleListItemTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListItemTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Recycle me" } });
+                var recycledGuid = await item.RecycleAsync();
+
+                Assert.IsTrue(recycledGuid != Guid.Empty);
+                var recycleBinItem = context.Web.RecycleBin.GetById(recycledGuid);
+                Assert.IsNotNull(recycleBinItem);
+                Assert.IsTrue(recycleBinItem.Requested);
+
+                await recycleBinItem.DeleteAsync();
                 await list.DeleteAsync();
             }
         }
