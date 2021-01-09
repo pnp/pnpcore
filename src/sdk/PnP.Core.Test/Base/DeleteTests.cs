@@ -21,7 +21,7 @@ namespace PnP.Core.Test.Base
             //TestCommon.Instance.Mocking = false;
         }
 
-        #region Tests that use REST to hit SharePoint
+        #region Tests that use REST
 
         [TestMethod]
         public async Task DeleteListViaRest()
@@ -168,9 +168,81 @@ namespace PnP.Core.Test.Base
                 Assert.IsTrue(web.Lists.Count() == listCount - 1);
             }
         }
+
+        [TestMethod]
+        public async Task DeleteListViaRestId()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("DeleteListViaRestId");
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+                else
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                var listCount = web.Lists.Count();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    await context2.Web.Lists.DeleteByIdAsync(myList.Id);
+
+                    // Get the lists again
+                    await context2.Web.GetAsync(p => p.Lists);
+
+                    Assert.IsTrue(context2.Web.Lists.Count() == listCount - 1);
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteListViaRestIdBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("DeleteListViaRestIdBatch");
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+                else
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                var listCount = web.Lists.Count();
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    // Add the delete to the current batch
+                    await context2.Web.Lists.DeleteByIdBatchAsync(myList.Id);
+
+                    // Execute the current batch
+                    await context2.ExecuteAsync();
+
+                    // Get the lists again
+                    await context2.Web.GetAsync(p => p.Lists);
+
+                    Assert.IsTrue(context2.Web.Lists.Count() == listCount - 1);
+                }
+            }
+        }
         #endregion
 
-        #region Tests that use REST to hit Graph
+        #region Tests that use Graph
 
         [TestMethod]
         public async Task DeleteChannelViaGraph()

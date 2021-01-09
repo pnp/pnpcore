@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a collection of File objects
     /// </summary>
     [ConcreteType(typeof(FileCollection))]
-    public interface IFileCollection : IQueryable<IFile>, IDataModelCollection<IFile>
+    public interface IFileCollection : IQueryable<IFile>, IDataModelCollection<IFile>, IDataModelCollectionDeleteByGuidId
     {
         #region Add
         /// <summary>

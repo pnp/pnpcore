@@ -1,4 +1,5 @@
-﻿using PnP.Core.Model.Teams;
+﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Model.Teams;
 using PnP.Core.QueryModel;
 using PnP.Core.Services;
 using System;
@@ -670,6 +671,201 @@ namespace PnP.Core.Model
             var propertyInParent = parentEntityInfo.Fields.FirstOrDefault(p => p.DataType == publicCollectionType);
 
             return propertyInParent?.Name;
+        }
+        #endregion
+
+        #region Delete by id
+
+        public void DeleteById(int id)
+        {
+            DeleteByIdAsync(id).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id));
+            }
+
+            (var query, var model) = await DeleteByIdImplementationAsync(intId: id).ConfigureAwait(false);
+
+            await DeleteById(query, model).ConfigureAwait(false);
+        }
+
+        public void DeleteByIdBatch(int id)
+        {
+            DeleteByIdBatchAsync(id).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteByIdBatchAsync(int id)
+        {
+            await DeleteByIdBatchAsync(PnPContext.CurrentBatch, id).ConfigureAwait(false);
+        }
+
+        public void DeleteByIdBatch(Batch batch, int id)
+        {
+            DeleteByIdBatchAsync(batch, id).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteByIdBatchAsync(Batch batch, int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(id));
+            }
+
+            (var query, var model) = await DeleteByIdImplementationAsync(intId: id).ConfigureAwait(false);
+
+            await DeleteById(batch, query, model).ConfigureAwait(false);
+        }
+
+        public void DeleteById(string id)
+        {
+            DeleteByIdAsync(id).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteByIdAsync(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            (var query, var model) = await DeleteByIdImplementationAsync(stringId: id).ConfigureAwait(false);
+
+            await DeleteById(query, model).ConfigureAwait(false);
+        }
+
+        public void DeleteByIdBatch(string id)
+        {
+            DeleteByIdBatchAsync(id).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteByIdBatchAsync(string id)
+        {
+            await DeleteByIdBatchAsync(PnPContext.CurrentBatch, id).ConfigureAwait(false);
+        }
+
+        public void DeleteByIdBatch(Batch batch, string id)
+        {
+            DeleteByIdBatchAsync(batch, id).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteByIdBatchAsync(Batch batch, string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            (var query, var model) = await DeleteByIdImplementationAsync(stringId: id).ConfigureAwait(false);
+
+            await DeleteById(batch, query, model).ConfigureAwait(false);
+        }
+
+        public void DeleteById(Guid id)
+        {
+            DeleteByIdAsync(id).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteByIdAsync(Guid id)
+        {
+            if (id.Equals(default))
+            {
+                throw new ArgumentOutOfRangeException(nameof(id));
+            }
+
+            (var query, var model) = await DeleteByIdImplementationAsync(guidId: id).ConfigureAwait(false);
+
+            await DeleteById(query, model).ConfigureAwait(false);
+        }
+
+        public void DeleteByIdBatch(Guid id)
+        {
+            DeleteByIdBatchAsync(id).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteByIdBatchAsync(Guid id)
+        {
+            await DeleteByIdBatchAsync(PnPContext.CurrentBatch, id).ConfigureAwait(false);
+        }
+
+        public void DeleteByIdBatch(Batch batch, Guid id)
+        {
+            DeleteByIdBatchAsync(batch, id).GetAwaiter().GetResult();
+        }
+
+        public async Task DeleteByIdBatchAsync(Batch batch, Guid id)
+        {
+            if (id.Equals(default))
+            {
+                throw new ArgumentOutOfRangeException(nameof(id));
+            }
+
+            (var query, var model) = await DeleteByIdImplementationAsync(guidId: id).ConfigureAwait(false);
+
+            await DeleteById(batch, query, model).ConfigureAwait(false);
+        }
+
+        private async Task DeleteById(ApiCallRequest query, BaseDataModel<TModel> model)
+        {
+            if (query.Cancelled)
+            {
+                // If the query was cancelled via an override then stop the delete
+                PnPContext.Logger.LogWarning(query.CancellationReason);
+            }
+            else
+            {
+                // Perform an interactive delete
+                await model.RawRequestAsync(query.ApiCall, HttpMethod.Delete).ConfigureAwait(false);
+            }
+        }
+
+        private async Task DeleteById(Batch batch, ApiCallRequest query, BaseDataModel<TModel> model)
+        {
+            if (query.Cancelled)
+            {
+                // If the query was cancelled via an override then stop the delete
+                PnPContext.Logger.LogWarning(query.CancellationReason);
+            }
+            else
+            {
+                // Perform an interactive delete
+                await model.RawRequestBatchAsync(batch, query.ApiCall, HttpMethod.Delete).ConfigureAwait(false);
+            }
+        }
+
+        private async Task<Tuple<ApiCallRequest, BaseDataModel<TModel>>> DeleteByIdImplementationAsync(int intId = 0, string stringId = null, Guid guidId = default)
+        {
+            // Create a concrete entity of what we expect to delete (e.g. for Lists this is List)
+            var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), Parent);
+            (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
+
+            // Ensure the key property of the created model is populated
+            if (intId > 0)
+            {
+                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, intId.ToString());
+                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, intId.ToString());
+            }
+            else if (!guidId.Equals(default))
+            {
+                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, guidId.ToString());
+                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, guidId.ToString());
+            }
+            else if (!string.IsNullOrEmpty(stringId))
+            {
+                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, stringId);
+                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, stringId);
+            }
+
+            // Get class info for the given concrete entity
+            var concreteEntityClassInfo = EntityManager.GetClassInfo(typeof(TModel), concreteEntity as BaseDataModel<TModel>, null);
+
+            // Build the delete call
+            var query = await new QueryClient().BuildDeleteAPICallAsync(concreteEntity as BaseDataModel<TModel>, concreteEntityClassInfo).ConfigureAwait(false);
+
+            return new Tuple<ApiCallRequest, BaseDataModel<TModel>>(query, concreteEntity as BaseDataModel<TModel>);
         }
         #endregion
 
