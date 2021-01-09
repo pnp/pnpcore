@@ -14134,6 +14134,32 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection
   nameWithType: IListItem.NewFieldValueCollection
+- uid: PnP.Core.Model.SharePoint.IListItem.Recycle
+  name: Recycle()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Recycle
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.Recycle
+  fullName: PnP.Core.Model.SharePoint.IListItem.Recycle()
+  nameWithType: IListItem.Recycle()
+- uid: PnP.Core.Model.SharePoint.IListItem.Recycle*
+  name: Recycle
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Recycle_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.Recycle
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.Recycle
+  nameWithType: IListItem.Recycle
+- uid: PnP.Core.Model.SharePoint.IListItem.RecycleAsync
+  name: RecycleAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RecycleAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RecycleAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.RecycleAsync()
+  nameWithType: IListItem.RecycleAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.RecycleAsync*
+  name: RecycleAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RecycleAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RecycleAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.RecycleAsync
+  nameWithType: IListItem.RecycleAsync
 - uid: PnP.Core.Model.SharePoint.IListItemBase
   name: IListItemBase
   href: api/PnP.Core.Model.SharePoint.IListItemBase.html
