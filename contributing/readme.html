@@ -242,7 +242,7 @@ internal partial class List : BaseDataModel&lt;IList&gt;, IList
 /// Public interface to define a collection of List objects of SharePoint Online
 /// &lt;/summary&gt;
 [ConcreteType(typeof(ListCollection))]
-public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable&lt;IList&gt;, ISupportPaging&lt;IList&gt;
+public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable&lt;IList&gt;, ISupportPaging&lt;IList&gt;, IDataModelCollectionDeleteByGuidId
 {
     /// &lt;summary&gt;
     /// Adds a new list
@@ -272,6 +272,7 @@ public interface IListCollection : IDataModelCollection&lt;IList&gt;, IQueryable
 <li>Always implements the <code>IDataModelCollection&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample)</li>
 <li>Optionally implements the <code>IQueryable&lt;TModel&gt;</code> interface where <code>TModel</code> is the actual interface (e.g. <code>IList</code> in above sample) whenever the model can be queried using linq queries</li>
 <li>Optionally implements the <code>ISupportPaging&lt;TModel&gt;</code> interface whenever the data in the collection can be retrieved from the server via paging</li>
+<li>Optionally implements either the <code>IDataModelCollectionDeleteByGuidId</code>, <code>IDataModelCollectionDeleteByIntegerId</code> or <code>IDataModelCollectionDeleteByStringId</code> interface matching the data type of the collection model's key if you want to offer a <code>DeleteById</code> method on the model collection. You should only do this if you've also implemented the <code>IDataModelDelete</code> on the collection's model</li>
 </ul>
 <p>Optionally a collection interface defines methods which add behavior to the collection.</p>
 <h4 id="internal-implementation-1">Internal implementation</h4>

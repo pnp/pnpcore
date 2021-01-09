@@ -123,7 +123,7 @@ myList.EnableVersioning = true;
 await myList.UpdateAsync();
 </code></pre>
 <h2 id="deleting-data">Deleting data</h2>
-<p>Like with updating you first need to have the model instance to delete available, see <a href="basics-getdata.html">Get data</a> to learn more on getting data. Once you have the model to delete available (e.g. a list item) you can use one of the delete methods to perform the delete. Below example uses the DeleteBatchAsync method to delete all items of a list with a single network request.</p>
+<p>To delete data you do have two options, the first one is deleting the loaded model: like with updating you first need to have the model instance to delete available, see <a href="basics-getdata.html">Get data</a> to learn more on getting data. Once you have the model to delete available (e.g. a list item) you can use one of the delete methods to perform the delete. Below example uses the DeleteBatchAsync method to delete all items of a list with a single network request.</p>
 <pre><code class="lang-csharp">// Assume the fields where not yet loaded, so loading them with the list
 var myList = await context.Web.Lists.GetByTitleAsync(&quot;My List&quot;, 
                                                     p =&gt; p.Title, p =&gt; p.Items, 
@@ -139,6 +139,15 @@ foreach (var listItem in myList.Items)
 }
 
 // Execute the batch
+await context.ExecuteAsync();
+</code></pre>
+<p>The second approach does not require you to upfront load the item to delete: model collections that support this type of delete either have DeleteById methods which you simply call and provide the unique id of the item to delete. Below sample shows how to delete a list using this approach.</p>
+<pre><code class="lang-csharp">// Delete the list with the given id
+await context.Web.Lists.DeleteByIdAsync(new Guid(&quot;E623E1A0-6786-498B-99D2-EE6355851CDB&quot;));
+
+// Add the delete of the list with given if to the current batch
+await context.Web.Lists.DeleteByIdBatchAsync(new Guid(&quot;E623E1A0-6786-498B-99D2-EE6355851CDB&quot;));
+// Execute the current batch
 await context.ExecuteAsync();
 </code></pre>
 </article>
