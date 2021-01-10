@@ -838,25 +838,53 @@ namespace PnP.Core.Model
 
         private async Task<Tuple<ApiCallRequest, BaseDataModel<TModel>>> DeleteByIdImplementationAsync(int intId = 0, string stringId = null, Guid guidId = default)
         {
-            // Create a concrete entity of what we expect to delete (e.g. for Lists this is List)
-            var concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), Parent);
-            (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
 
-            // Ensure the key property of the created model is populated
+            // First check if we've a model instance loaded with the given key, if so let's use that to do the delete 
+            // as then the model instance will also automatically be removed from the collection
+            object keyValue = null;
+
             if (intId > 0)
             {
-                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, intId.ToString());
-                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, intId.ToString());
+                keyValue = intId;
             }
             else if (!guidId.Equals(default))
             {
-                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, guidId.ToString());
-                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, guidId.ToString());
+                keyValue = guidId;
             }
             else if (!string.IsNullOrEmpty(stringId))
             {
-                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, stringId);
-                (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, stringId);
+                keyValue = stringId;
+            }
+
+            object concreteEntity = null;
+            var modelToDeleteIndex = items.FindIndex(i => ((IDataModelWithKey)i).Key.Equals(keyValue));
+            if (modelToDeleteIndex >= 0)
+            {
+                // Use the existing concrete entity for the delete
+                concreteEntity = items[modelToDeleteIndex];
+            }
+            else
+            {
+                // Create a concrete entity of what we expect to delete (e.g. for Lists this is List)
+                concreteEntity = EntityManager.GetEntityConcreteInstance<TModel>(typeof(TModel), Parent);
+                (concreteEntity as BaseDataModel<TModel>).PnPContext = PnPContext;
+
+                // Ensure the key property of the created model is populated
+                if (intId > 0)
+                {
+                    (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, intId.ToString());
+                    (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, intId.ToString());
+                }
+                else if (!guidId.Equals(default))
+                {
+                    (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, guidId.ToString());
+                    (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, guidId.ToString());
+                }
+                else if (!string.IsNullOrEmpty(stringId))
+                {
+                    (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataRestId, stringId);
+                    (concreteEntity as IMetadataExtensible).Metadata.Add(PnPConstants.MetaDataGraphId, stringId);
+                }
             }
 
             // Get class info for the given concrete entity

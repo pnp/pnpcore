@@ -204,6 +204,57 @@ namespace PnP.Core.Test.Base
         }
 
         [TestMethod]
+        public async Task DeleteListViaRestIdExistsInModel()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("DeleteListViaRestIdExistsInModel");
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+                else
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                var listCount = web.Lists.Count();
+
+                // Delete the list
+                await context.Web.Lists.DeleteByIdAsync(myList.Id);
+
+                // Verify the list was removed from the model collection
+                Assert.IsTrue(web.Lists.Count() == listCount - 1);
+
+                // Using a reference to a removed list should result in a exception
+                bool exceptionThrown = false;
+                try
+                {
+                    var deletedListDescription = myList.Description;
+                }
+                catch (Exception)
+                {
+                    exceptionThrown = true;
+                }
+                Assert.IsTrue(exceptionThrown);
+
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    // Get the lists again
+                    await context2.Web.GetAsync(p => p.Lists);
+
+                    // and check if the list was deleted
+                    Assert.IsTrue(context2.Web.Lists.Count() == listCount - 1);
+                }
+            }
+        }
+
+        [TestMethod]
         public async Task DeleteListViaRestIdBatch()
         {
             //TestCommon.Instance.Mocking = false;
