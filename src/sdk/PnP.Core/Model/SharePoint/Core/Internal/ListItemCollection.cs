@@ -159,7 +159,7 @@ namespace PnP.Core.Model.SharePoint
             // Get a reference to the item to recycle
             RecycleByIdImplementation(id, out object concreteEntity, out ApiCall apiCall);
 
-            await (concreteEntity as BaseDataModel<IListItem>).RawRequestBatchAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
+            await (concreteEntity as BaseDataModel<IListItem>).RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }
 
         private void RecycleByIdImplementation(int id, out object concreteEntity, out ApiCall apiCall)
