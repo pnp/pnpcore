@@ -1,4 +1,5 @@
 ﻿using PnP.Core.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -97,6 +98,53 @@ namespace PnP.Core.Model.SharePoint
         /// <returns>The resulting list item instance, if any</returns>
         public Task<IListItem> GetByIdAsync(int id);
 
+        #endregion
+
+        #region RecycleById methods
+
+        /// <summary>
+        /// Recycle the list item
+        /// </summary>
+        /// <param name="id">Id of the item to recycle</param>
+        /// <returns></returns>
+        public Guid RecycleById(int id);
+
+        /// <summary>
+        /// Recycle the list item
+        /// </summary>
+        /// <param name="id">Id of the item to recycle</param>
+        /// <returns></returns>
+        public Task<Guid> RecycleByIdAsync(int id);
+
+        /// <summary>
+        /// Recycle the list item
+        /// </summary>
+        /// <param name="id">Id of the item to recycle</param>
+        /// <returns></returns>
+        public void RecycleByIdBatch(int id);
+
+        /// <summary>
+        /// Recycle the list item
+        /// </summary>
+        /// <param name="id">Id of the item to recycle</param>
+        /// <returns></returns>
+        public Task RecycleByIdBatchAsync(int id);
+
+        /// <summary>
+        /// Recycle the list item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="id">Id of the item to recycle</param>
+        /// <returns></returns>
+        public void RecycleByIdBatch(Batch batch, int id);
+
+        /// <summary>
+        /// Recycle the list item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="id">Id of the item to recycle</param>
+        /// <returns></returns>
+        public Task RecycleByIdBatchAsync(Batch batch, int id);
         #endregion
     }
 }

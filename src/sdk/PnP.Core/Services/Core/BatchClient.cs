@@ -1642,7 +1642,7 @@ namespace PnP.Core.Services
             }
 
             // Mark deleted objects as deleted and remove from their respective parent collection
-            foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Delete))
+            foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Delete || p.ApiCall.RemoveFromModel))
             {
                 request.Model.RemoveFromParentCollection();
             }

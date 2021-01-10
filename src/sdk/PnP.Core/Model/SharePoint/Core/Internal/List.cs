@@ -277,7 +277,7 @@ namespace PnP.Core.Model.SharePoint
 
         public async Task<Guid> RecycleAsync()
         {
-            var apiCall = new ApiCall($"_api/Web/Lists(guid'{Id}')/recycle", ApiType.SPORest);
+            ApiCall apiCall = GetRecycleApiCall();
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
@@ -288,9 +288,6 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
                     {
-                        // Remove this item from the lists collection
-                        RemoveFromParentCollection();
-
                         // return the recyclebin item id
                         return recycleBinItemId.GetGuid();
                     }
@@ -298,6 +295,36 @@ namespace PnP.Core.Model.SharePoint
             }
 
             return Guid.Empty;
+        }
+
+        public void RecycleBatch()
+        {
+            RecycleBatchAsync().GetAwaiter().GetResult();
+        }
+
+        public async Task RecycleBatchAsync()
+        {
+            await RecycleBatchAsync(PnPContext.CurrentBatch).ConfigureAwait(false);
+        }
+
+        public void RecycleBatch(Batch batch)
+        {
+            RecycleBatchAsync(batch).GetAwaiter().GetResult();
+        }
+
+        public async Task RecycleBatchAsync(Batch batch)
+        {
+            ApiCall apiCall = GetRecycleApiCall();
+
+            await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
+        }
+
+        private ApiCall GetRecycleApiCall()
+        {
+            return new ApiCall($"_api/Web/Lists(guid'{Id}')/recycle", ApiType.SPORest)
+            {
+                RemoveFromModel = true
+            };
         }
         #endregion
 

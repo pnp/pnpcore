@@ -375,7 +375,10 @@ namespace PnP.Core.Model.SharePoint
             var entity = EntityManager.GetClassInfo(GetType(), this);
             string recycleEndpointUrl = $"{entity.SharePointUri}/recycle";
 
-            var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest);
+            var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest)
+            {
+                RemoveFromModel = true
+            };
 
             var response = await RawRequestAsync(apiCall, HttpMethod.Post).ConfigureAwait(false);
 
@@ -386,9 +389,6 @@ namespace PnP.Core.Model.SharePoint
                 {
                     if (root.TryGetProperty("Recycle", out JsonElement recycleBinItemId))
                     {
-                        // Remove this item from the lists collection
-                        RemoveFromParentCollection();
-
                         // return the recyclebin item id
                         return recycleBinItemId.GetGuid();
                     }
@@ -418,7 +418,10 @@ namespace PnP.Core.Model.SharePoint
             var entity = EntityManager.GetClassInfo(GetType(), this);
             string recycleEndpointUrl = $"{entity.SharePointUri}/recycle";
 
-            var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest);
+            var apiCall = new ApiCall(recycleEndpointUrl, ApiType.SPORest)
+            {
+                RemoveFromModel = true
+            };
 
             await RawRequestBatchAsync(batch, apiCall, HttpMethod.Post).ConfigureAwait(false);
         }

@@ -247,6 +247,32 @@ namespace PnP.Core.Model.SharePoint
         public Task<Guid> RecycleAsync();
 
         /// <summary>
+        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
+        /// </summary>
+        /// <returns>Id of the recycle bin item</returns>
+        public void RecycleBatch();
+
+        /// <summary>
+        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
+        /// </summary>
+        /// <returns>Id of the recycle bin item</returns>
+        public Task RecycleBatchAsync();
+
+        /// <summary>
+        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns>Id of the recycle bin item</returns>
+        public void RecycleBatch(Batch batch);
+
+        /// <summary>
+        /// Moves this list into the site collection recycle bin, returns the recyle bin item id
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns>Id of the recycle bin item</returns>
+        public Task RecycleBatchAsync(Batch batch);
+
+        /// <summary>
         /// Loads list items based up on a CAML query
         /// </summary>
         /// <param name="query">query to execute</param>
