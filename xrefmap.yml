@@ -13849,6 +13849,44 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IList.RecycleAsync
   nameWithType: IList.RecycleAsync
+- uid: PnP.Core.Model.SharePoint.IList.RecycleBatch
+  name: RecycleBatch()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RecycleBatch
+  commentId: M:PnP.Core.Model.SharePoint.IList.RecycleBatch
+  fullName: PnP.Core.Model.SharePoint.IList.RecycleBatch()
+  nameWithType: IList.RecycleBatch()
+- uid: PnP.Core.Model.SharePoint.IList.RecycleBatch(PnP.Core.Services.Batch)
+  name: RecycleBatch(Batch)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RecycleBatch_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IList.RecycleBatch(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IList.RecycleBatch(PnP.Core.Services.Batch)
+  nameWithType: IList.RecycleBatch(Batch)
+- uid: PnP.Core.Model.SharePoint.IList.RecycleBatch*
+  name: RecycleBatch
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RecycleBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.RecycleBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.RecycleBatch
+  nameWithType: IList.RecycleBatch
+- uid: PnP.Core.Model.SharePoint.IList.RecycleBatchAsync
+  name: RecycleBatchAsync()
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RecycleBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IList.RecycleBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IList.RecycleBatchAsync()
+  nameWithType: IList.RecycleBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IList.RecycleBatchAsync(PnP.Core.Services.Batch)
+  name: RecycleBatchAsync(Batch)
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RecycleBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IList.RecycleBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IList.RecycleBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IList.RecycleBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IList.RecycleBatchAsync*
+  name: RecycleBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RecycleBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IList.RecycleBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IList.RecycleBatchAsync
+  nameWithType: IList.RecycleBatchAsync
 - uid: PnP.Core.Model.SharePoint.IList.RemoveRoleDefinitions(System.Int32,System.String[])
   name: RemoveRoleDefinitions(Int32, String[])
   href: api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_RemoveRoleDefinitions_System_Int32_System_String___
@@ -14273,6 +14311,45 @@ references:
   commentId: T:PnP.Core.Model.SharePoint.IListItem
   fullName: PnP.Core.Model.SharePoint.IListItem
   nameWithType: IListItem
+- uid: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled
+  name: AreCommentsDisabled()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabled
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled
+  fullName: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled()
+  nameWithType: IListItem.AreCommentsDisabled()
+- uid: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled*
+  name: AreCommentsDisabled
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabled
+  nameWithType: IListItem.AreCommentsDisabled
+- uid: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync
+  name: AreCommentsDisabledAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabledAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync()
+  nameWithType: IListItem.AreCommentsDisabledAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync*
+  name: AreCommentsDisabledAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_AreCommentsDisabledAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.AreCommentsDisabledAsync
+  nameWithType: IListItem.AreCommentsDisabledAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.Id
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Id
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.Id
+  fullName: PnP.Core.Model.SharePoint.IListItem.Id
+  nameWithType: IListItem.Id
+- uid: PnP.Core.Model.SharePoint.IListItem.Id*
+  name: Id
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Id_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.Id
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItem.Id
+  nameWithType: IListItem.Id
 - uid: PnP.Core.Model.SharePoint.IListItem.NewFieldLookupValue(PnP.Core.Model.SharePoint.IField,System.Int32)
   name: NewFieldLookupValue(IField, Int32)
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldLookupValue_PnP_Core_Model_SharePoint_IField_System_Int32_
@@ -14370,282 +14447,275 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.RecycleAsync
   nameWithType: IListItem.RecycleAsync
-- uid: PnP.Core.Model.SharePoint.IListItemBase
-  name: IListItemBase
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html
-  commentId: T:PnP.Core.Model.SharePoint.IListItemBase
-  fullName: PnP.Core.Model.SharePoint.IListItemBase
-  nameWithType: IListItemBase
-- uid: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled
-  name: AreCommentsDisabled()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabled
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled()
-  nameWithType: IListItemBase.AreCommentsDisabled()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled*
-  name: AreCommentsDisabled
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabled_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled
+- uid: PnP.Core.Model.SharePoint.IListItem.RecycleBatch
+  name: RecycleBatch()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RecycleBatch
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RecycleBatch
+  fullName: PnP.Core.Model.SharePoint.IListItem.RecycleBatch()
+  nameWithType: IListItem.RecycleBatch()
+- uid: PnP.Core.Model.SharePoint.IListItem.RecycleBatch(PnP.Core.Services.Batch)
+  name: RecycleBatch(Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RecycleBatch_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RecycleBatch(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.RecycleBatch(PnP.Core.Services.Batch)
+  nameWithType: IListItem.RecycleBatch(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.RecycleBatch*
+  name: RecycleBatch
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RecycleBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RecycleBatch
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabled
-  nameWithType: IListItemBase.AreCommentsDisabled
-- uid: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync
-  name: AreCommentsDisabledAsync()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabledAsync
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync()
-  nameWithType: IListItemBase.AreCommentsDisabledAsync()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync*
-  name: AreCommentsDisabledAsync
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_AreCommentsDisabledAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.RecycleBatch
+  nameWithType: IListItem.RecycleBatch
+- uid: PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync
+  name: RecycleBatchAsync()
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RecycleBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync()
+  nameWithType: IListItem.RecycleBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync(PnP.Core.Services.Batch)
+  name: RecycleBatchAsync(Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RecycleBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IListItem.RecycleBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync*
+  name: RecycleBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_RecycleBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.AreCommentsDisabledAsync
-  nameWithType: IListItemBase.AreCommentsDisabledAsync
-- uid: PnP.Core.Model.SharePoint.IListItemBase.Id
-  name: Id
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_Id
-  commentId: P:PnP.Core.Model.SharePoint.IListItemBase.Id
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.Id
-  nameWithType: IListItemBase.Id
-- uid: PnP.Core.Model.SharePoint.IListItemBase.Id*
-  name: Id
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_Id_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.Id
-  isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.Id
-  nameWithType: IListItemBase.Id
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled(System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.RecycleBatchAsync
+  nameWithType: IListItem.RecycleBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled(System.Boolean)
   name: SetCommentsDisabled(Boolean)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabled_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled(System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled(System.Boolean)
-  nameWithType: IListItemBase.SetCommentsDisabled(Boolean)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabled_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled(System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled(System.Boolean)
+  nameWithType: IListItem.SetCommentsDisabled(Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled*
   name: SetCommentsDisabled
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabled_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabled_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabled
-  nameWithType: IListItemBase.SetCommentsDisabled
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync(System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabled
+  nameWithType: IListItem.SetCommentsDisabled
+- uid: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabledAsync(System.Boolean)
   name: SetCommentsDisabledAsync(Boolean)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabledAsync_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync(System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync(System.Boolean)
-  nameWithType: IListItemBase.SetCommentsDisabledAsync(Boolean)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabledAsync_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabledAsync(System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabledAsync(System.Boolean)
+  nameWithType: IListItem.SetCommentsDisabledAsync(Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabledAsync*
   name: SetCommentsDisabledAsync
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetCommentsDisabledAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetCommentsDisabledAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabledAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetCommentsDisabledAsync
-  nameWithType: IListItemBase.SetCommentsDisabledAsync
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetCommentsDisabledAsync
+  nameWithType: IListItem.SetCommentsDisabledAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTag(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
   name: SetComplianceTag(String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTag_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IListItemBase.SetComplianceTag(String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTag_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SetComplianceTag(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTag(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItem.SetComplianceTag(String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTag*
   name: SetComplianceTag
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTag_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTag_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SetComplianceTag
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTag
-  nameWithType: IListItemBase.SetComplianceTag
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTag
+  nameWithType: IListItem.SetComplianceTag
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
   name: SetComplianceTagAsync(String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagAsync_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IListItemBase.SetComplianceTagAsync(String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTagAsync_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SetComplianceTagAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagAsync(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItem.SetComplianceTagAsync(String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagAsync*
   name: SetComplianceTagAsync
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTagAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SetComplianceTagAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagAsync
-  nameWithType: IListItemBase.SetComplianceTagAsync
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagAsync
+  nameWithType: IListItem.SetComplianceTagAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
   name: SetComplianceTagBatch(Batch, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatch_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(PnP.Core.Services.Batch, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IListItemBase.SetComplianceTagBatch(Batch, String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatch_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch(PnP.Core.Services.Batch, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItem.SetComplianceTagBatch(Batch, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
   name: SetComplianceTagBatch(String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IListItemBase.SetComplianceTagBatch(String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItem.SetComplianceTagBatch(String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch*
   name: SetComplianceTagBatch
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatch_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatch
-  nameWithType: IListItemBase.SetComplianceTagBatch
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatch
+  nameWithType: IListItem.SetComplianceTagBatch
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
   name: SetComplianceTagBatchAsync(Batch, String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(PnP.Core.Services.Batch, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IListItemBase.SetComplianceTagBatchAsync(Batch, String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatchAsync_PnP_Core_Services_Batch_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync(PnP.Core.Services.Batch,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync(PnP.Core.Services.Batch, System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItem.SetComplianceTagBatchAsync(Batch, String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
   name: SetComplianceTagBatchAsync(String, Boolean, Boolean, Boolean, Boolean)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatchAsync_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: IListItemBase.SetComplianceTagBatchAsync(String, Boolean, Boolean, Boolean, Boolean)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatchAsync_System_String_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync(System.String, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
+  nameWithType: IListItem.SetComplianceTagBatchAsync(String, Boolean, Boolean, Boolean, Boolean)
+- uid: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync*
   name: SetComplianceTagBatchAsync
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SetComplianceTagBatchAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SetComplianceTagBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SetComplianceTagBatchAsync
-  nameWithType: IListItemBase.SetComplianceTagBatchAsync
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdate
+  fullName: PnP.Core.Model.SharePoint.IListItem.SetComplianceTagBatchAsync
+  nameWithType: IListItem.SetComplianceTagBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdate
   name: SystemUpdate()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdate
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdate
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdate()
-  nameWithType: IListItemBase.SystemUpdate()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdate*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdate
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdate
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdate()
+  nameWithType: IListItem.SystemUpdate()
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdate*
   name: SystemUpdate
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdate_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdate
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdate_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SystemUpdate
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdate
-  nameWithType: IListItemBase.SystemUpdate
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdate
+  nameWithType: IListItem.SystemUpdate
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
   name: SystemUpdateAsync()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateAsync
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateAsync
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateAsync()
-  nameWithType: IListItemBase.SystemUpdateAsync()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateAsync*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync()
+  nameWithType: IListItem.SystemUpdateAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync*
   name: SystemUpdateAsync
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateAsync
-  nameWithType: IListItemBase.SystemUpdateAsync
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatch
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateAsync
+  nameWithType: IListItem.SystemUpdateAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch
   name: SystemUpdateBatch()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatch
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatch
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatch()
-  nameWithType: IListItemBase.SystemUpdateBatch()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatch(PnP.Core.Services.Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch()
+  nameWithType: IListItem.SystemUpdateBatch()
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch(PnP.Core.Services.Batch)
   name: SystemUpdateBatch(Batch)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatch_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatch(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatch(PnP.Core.Services.Batch)
-  nameWithType: IListItemBase.SystemUpdateBatch(Batch)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatch*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch(PnP.Core.Services.Batch)
+  nameWithType: IListItem.SystemUpdateBatch(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch*
   name: SystemUpdateBatch
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatch_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatch
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatch
-  nameWithType: IListItemBase.SystemUpdateBatch
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatch
+  nameWithType: IListItem.SystemUpdateBatch
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync
   name: SystemUpdateBatchAsync()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatchAsync
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatchAsync
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatchAsync()
-  nameWithType: IListItemBase.SystemUpdateBatchAsync()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatchAsync(PnP.Core.Services.Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync()
+  nameWithType: IListItem.SystemUpdateBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync(PnP.Core.Services.Batch)
   name: SystemUpdateBatchAsync(Batch)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatchAsync_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatchAsync(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatchAsync(PnP.Core.Services.Batch)
-  nameWithType: IListItemBase.SystemUpdateBatchAsync(Batch)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatchAsync*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IListItem.SystemUpdateBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync*
   name: SystemUpdateBatchAsync
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_SystemUpdateBatchAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_SystemUpdateBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.SystemUpdateBatchAsync
-  nameWithType: IListItemBase.SystemUpdateBatchAsync
-- uid: PnP.Core.Model.SharePoint.IListItemBase.Title
+  fullName: PnP.Core.Model.SharePoint.IListItem.SystemUpdateBatchAsync
+  nameWithType: IListItem.SystemUpdateBatchAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.Title
   name: Title
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_Title
-  commentId: P:PnP.Core.Model.SharePoint.IListItemBase.Title
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.Title
-  nameWithType: IListItemBase.Title
-- uid: PnP.Core.Model.SharePoint.IListItemBase.Title*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Title
+  commentId: P:PnP.Core.Model.SharePoint.IListItem.Title
+  fullName: PnP.Core.Model.SharePoint.IListItem.Title
+  nameWithType: IListItem.Title
+- uid: PnP.Core.Model.SharePoint.IListItem.Title*
   name: Title
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_Title_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.Title
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_Title_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.Title
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.Title
-  nameWithType: IListItemBase.Title
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersion
+  fullName: PnP.Core.Model.SharePoint.IListItem.Title
+  nameWithType: IListItem.Title
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
   name: UpdateOverwriteVersion()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersion
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersion
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersion()
-  nameWithType: IListItemBase.UpdateOverwriteVersion()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersion*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion()
+  nameWithType: IListItem.UpdateOverwriteVersion()
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion*
   name: UpdateOverwriteVersion
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersion_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersion
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersion_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersion
-  nameWithType: IListItemBase.UpdateOverwriteVersion
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersion
+  nameWithType: IListItem.UpdateOverwriteVersion
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
   name: UpdateOverwriteVersionAsync()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionAsync
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionAsync
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionAsync()
-  nameWithType: IListItemBase.UpdateOverwriteVersionAsync()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionAsync*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync()
+  nameWithType: IListItem.UpdateOverwriteVersionAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync*
   name: UpdateOverwriteVersionAsync
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionAsync
-  nameWithType: IListItemBase.UpdateOverwriteVersionAsync
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatch
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionAsync
+  nameWithType: IListItem.UpdateOverwriteVersionAsync
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch
   name: UpdateOverwriteVersionBatch()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatch
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatch
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatch()
-  nameWithType: IListItemBase.UpdateOverwriteVersionBatch()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatch(PnP.Core.Services.Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch()
+  nameWithType: IListItem.UpdateOverwriteVersionBatch()
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch(PnP.Core.Services.Batch)
   name: UpdateOverwriteVersionBatch(Batch)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatch_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatch(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatch(PnP.Core.Services.Batch)
-  nameWithType: IListItemBase.UpdateOverwriteVersionBatch(Batch)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatch*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch(PnP.Core.Services.Batch)
+  nameWithType: IListItem.UpdateOverwriteVersionBatch(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch*
   name: UpdateOverwriteVersionBatch
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatch_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatch
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatch
-  nameWithType: IListItemBase.UpdateOverwriteVersionBatch
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatch
+  nameWithType: IListItem.UpdateOverwriteVersionBatch
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync
   name: UpdateOverwriteVersionBatchAsync()
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatchAsync
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatchAsync
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatchAsync()
-  nameWithType: IListItemBase.UpdateOverwriteVersionBatchAsync()
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync()
+  nameWithType: IListItem.UpdateOverwriteVersionBatchAsync()
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)
   name: UpdateOverwriteVersionBatchAsync(Batch)
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatchAsync_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)
-  nameWithType: IListItemBase.UpdateOverwriteVersionBatchAsync(Batch)
-- uid: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatchAsync*
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_PnP_Core_Services_Batch_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync(PnP.Core.Services.Batch)
+  nameWithType: IListItem.UpdateOverwriteVersionBatchAsync(Batch)
+- uid: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync*
   name: UpdateOverwriteVersionBatchAsync
-  href: api/PnP.Core.Model.SharePoint.IListItemBase.html#PnP_Core_Model_SharePoint_IListItemBase_UpdateOverwriteVersionBatchAsync_
-  commentId: Overload:PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_UpdateOverwriteVersionBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync
   isSpec: "True"
-  fullName: PnP.Core.Model.SharePoint.IListItemBase.UpdateOverwriteVersionBatchAsync
-  nameWithType: IListItemBase.UpdateOverwriteVersionBatchAsync
+  fullName: PnP.Core.Model.SharePoint.IListItem.UpdateOverwriteVersionBatchAsync
+  nameWithType: IListItem.UpdateOverwriteVersionBatchAsync
 - uid: PnP.Core.Model.SharePoint.IListItemCollection
   name: IListItemCollection
   href: api/PnP.Core.Model.SharePoint.IListItemCollection.html
@@ -14773,6 +14843,70 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItemCollection.GetByIdAsync
   nameWithType: IListItemCollection.GetByIdAsync
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleById(System.Int32)
+  name: RecycleById(Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleById_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.RecycleById(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleById(System.Int32)
+  nameWithType: IListItemCollection.RecycleById(Int32)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleById*
+  name: RecycleById
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleById_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemCollection.RecycleById
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleById
+  nameWithType: IListItemCollection.RecycleById
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdAsync(System.Int32)
+  name: RecycleByIdAsync(Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleByIdAsync_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdAsync(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdAsync(System.Int32)
+  nameWithType: IListItemCollection.RecycleByIdAsync(Int32)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdAsync*
+  name: RecycleByIdAsync
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleByIdAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdAsync
+  nameWithType: IListItemCollection.RecycleByIdAsync
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatch(PnP.Core.Services.Batch,System.Int32)
+  name: RecycleByIdBatch(Batch, Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleByIdBatch_PnP_Core_Services_Batch_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatch(PnP.Core.Services.Batch,System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatch(PnP.Core.Services.Batch, System.Int32)
+  nameWithType: IListItemCollection.RecycleByIdBatch(Batch, Int32)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatch(System.Int32)
+  name: RecycleByIdBatch(Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleByIdBatch_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatch(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatch(System.Int32)
+  nameWithType: IListItemCollection.RecycleByIdBatch(Int32)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatch*
+  name: RecycleByIdBatch
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleByIdBatch_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatch
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatch
+  nameWithType: IListItemCollection.RecycleByIdBatch
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)
+  name: RecycleByIdBatchAsync(Batch, Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleByIdBatchAsync_PnP_Core_Services_Batch_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync(PnP.Core.Services.Batch,System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync(PnP.Core.Services.Batch, System.Int32)
+  nameWithType: IListItemCollection.RecycleByIdBatchAsync(Batch, Int32)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync(System.Int32)
+  name: RecycleByIdBatchAsync(Int32)
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleByIdBatchAsync_System_Int32_
+  commentId: M:PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync(System.Int32)
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync(System.Int32)
+  nameWithType: IListItemCollection.RecycleByIdBatchAsync(Int32)
+- uid: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync*
+  name: RecycleByIdBatchAsync
+  href: api/PnP.Core.Model.SharePoint.IListItemCollection.html#PnP_Core_Model_SharePoint_IListItemCollection_RecycleByIdBatchAsync_
+  commentId: Overload:PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IListItemCollection.RecycleByIdBatchAsync
+  nameWithType: IListItemCollection.RecycleByIdBatchAsync
 - uid: PnP.Core.Model.SharePoint.IPage
   name: IPage
   href: api/PnP.Core.Model.SharePoint.IPage.html

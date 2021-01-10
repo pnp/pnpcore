@@ -1758,7 +1758,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IList.html",
-          "hash": "XzrHbQtjJos0VcOW4wEOzg=="
+          "hash": "WZPRApMUrD36Fstktfzwvg=="
         }
       },
       "is_incremental": false,
@@ -1782,19 +1782,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItem.html",
-          "hash": "OxwlPZR8P3zEZVUlrr+VlA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/PnP.Core.Model.SharePoint.IListItemBase.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PnP.Core.Model.SharePoint.IListItemBase.html",
-          "hash": "UpzK0JYoirQSCqwxQnNqiw=="
+          "hash": "7V92KFvBLkYu6g2Fo8DjSQ=="
         }
       },
       "is_incremental": false,
@@ -1806,7 +1794,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IListItemCollection.html",
-          "hash": "BO21rZXiaU0PaWD1Id9WCg=="
+          "hash": "7r9YlNhgQyuuExMMztv+ww=="
         }
       },
       "is_incremental": false,
@@ -2778,7 +2766,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.html",
-          "hash": "XadupyedADFftS4bOZLrnQ=="
+          "hash": "dxg6kxw94HEuZuV0LG5V8w=="
         }
       },
       "is_incremental": false,
@@ -3798,7 +3786,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "HEfgXUjvRRAUhX0aVGsWxw=="
+          "hash": "Ixk7mLme3C7SBHHwa0qCTQ=="
         }
       },
       "is_incremental": false,
@@ -4668,7 +4656,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 314,
+          "total_file_count": 313,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
