@@ -4892,6 +4892,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.AddUserCustomActionOptions.RegistrationType
   nameWithType: AddUserCustomActionOptions.RegistrationType
+- uid: PnP.Core.Model.SharePoint.AddUserCustomActionOptions.Rights
+  name: Rights
+  href: api/PnP.Core.Model.SharePoint.AddUserCustomActionOptions.html#PnP_Core_Model_SharePoint_AddUserCustomActionOptions_Rights
+  commentId: P:PnP.Core.Model.SharePoint.AddUserCustomActionOptions.Rights
+  fullName: PnP.Core.Model.SharePoint.AddUserCustomActionOptions.Rights
+  nameWithType: AddUserCustomActionOptions.Rights
+- uid: PnP.Core.Model.SharePoint.AddUserCustomActionOptions.Rights*
+  name: Rights
+  href: api/PnP.Core.Model.SharePoint.AddUserCustomActionOptions.html#PnP_Core_Model_SharePoint_AddUserCustomActionOptions_Rights_
+  commentId: Overload:PnP.Core.Model.SharePoint.AddUserCustomActionOptions.Rights
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.AddUserCustomActionOptions.Rights
+  nameWithType: AddUserCustomActionOptions.Rights
 - uid: PnP.Core.Model.SharePoint.AddUserCustomActionOptions.ScriptBlock
   name: ScriptBlock
   href: api/PnP.Core.Model.SharePoint.AddUserCustomActionOptions.html#PnP_Core_Model_SharePoint_AddUserCustomActionOptions_ScriptBlock
@@ -19467,6 +19480,19 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IUserCustomAction.RegistrationType
   nameWithType: IUserCustomAction.RegistrationType
+- uid: PnP.Core.Model.SharePoint.IUserCustomAction.Rights
+  name: Rights
+  href: api/PnP.Core.Model.SharePoint.IUserCustomAction.html#PnP_Core_Model_SharePoint_IUserCustomAction_Rights
+  commentId: P:PnP.Core.Model.SharePoint.IUserCustomAction.Rights
+  fullName: PnP.Core.Model.SharePoint.IUserCustomAction.Rights
+  nameWithType: IUserCustomAction.Rights
+- uid: PnP.Core.Model.SharePoint.IUserCustomAction.Rights*
+  name: Rights
+  href: api/PnP.Core.Model.SharePoint.IUserCustomAction.html#PnP_Core_Model_SharePoint_IUserCustomAction_Rights_
+  commentId: Overload:PnP.Core.Model.SharePoint.IUserCustomAction.Rights
+  isSpec: "True"
+  fullName: PnP.Core.Model.SharePoint.IUserCustomAction.Rights
+  nameWithType: IUserCustomAction.Rights
 - uid: PnP.Core.Model.SharePoint.IUserCustomAction.Scope
   name: Scope
   href: api/PnP.Core.Model.SharePoint.IUserCustomAction.html#PnP_Core_Model_SharePoint_IUserCustomAction_Scope

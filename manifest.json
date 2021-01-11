@@ -990,7 +990,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.AddUserCustomActionOptions.html",
-          "hash": "j2FSWwt6wHvn5jZplCAHng=="
+          "hash": "j9xfaKrklGIPSWLDj+pNbg=="
         }
       },
       "is_incremental": false,
@@ -1386,7 +1386,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IBasePermissions.html",
-          "hash": "8tzU8xEPodfEvoOQq10j/g=="
+          "hash": "Eyqj9boLatNjW2jMtYObzA=="
         }
       },
       "is_incremental": false,
@@ -2214,7 +2214,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Model.SharePoint.IUserCustomAction.html",
-          "hash": "2L4CKb6lItUxOqetCvWvyg=="
+          "hash": "RpZf3imbx93rj5S4zl0D3Q=="
         }
       },
       "is_incremental": false,
