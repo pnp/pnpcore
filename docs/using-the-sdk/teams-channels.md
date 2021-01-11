@@ -12,14 +12,6 @@ Channels is a collection part of the ITeam interface, so when you get a team, yo
  var team = await context.Team.GetAsync(o => o.Channels);
  var channels = team.Channels;
 ```
-
-If you would like to get a specific channel you can use the extension method GetByDisplayNameAsync to get the channel by name.
-
-```csharp
- var team = await context.Team.GetAsync(o => o.Channels);
- var channel = await team.Channels.GetByDisplayNameAsync("General");
-```
-
 ## Getting Channels with specific properties
 
 When you want to load the Team and Channels with specific properties populated, you can specify which properties to include by:
@@ -27,16 +19,87 @@ When you want to load the Team and Channels with specific properties populated, 
 ```csharp
  var team = await context.Team.GetAsync(
     p => p.Channels.LoadProperties(p => p.DisplayName));
+```
+### Getting a specific Channel
 
+If you would like to get a specific channel you can use the extension method GetByDisplayNameAsync to get the channel by name.
+
+```csharp
+ var team = await context.Team.GetAsync(o => o.Channels);
+ var generalChannel = await team.Channels.GetByDisplayNameAsync("General");
+```
+
+### Getting the default channel
+
+Alternatively, if you are looking for the default channel within a Team, you can retrieve this with the following:
+
+```csharp
+ var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+ var primaryChannel = await team.PrimaryChannel;
 ```
 
 ## Creating Channels
 
+To add a new channel, call the Add method, specifying a name and optionally a description.
+
+```csharp
+var team = await context.Team.GetAsync(p => p.Channels);
+
+string channelName = $"My Cool New Channel";
+
+// Check if the channel exists
+var channelFound = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+if (channelFound == null)
+{
+    // Add a new channel
+    channelFound = await team.Channels.AddAsync(channelName, "This is my cool new Channel, check this out!");
+}
+```
+
+> [!TIP]
+> When working with channels these are some tips to help:
+> * Channel Names must be unique
+> * Check if the channel already exists, to avoid trying to add a Channel with an existing name
+
 
 ## Updating Channels
 
+You can update the channel by changing the properties you wish update and call the update method:
+
+```csharp
+var team = await context.Team.GetAsync(p => p.Channels);
+
+string channelName = $"My Cool New Channel";
+
+// Get the channel you wish to update
+var channelToUpdate = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+
+if(channelToUpdate != default){
+
+    string newChannelDescription = $"This cool channel is being updated!";
+    channelToUpdate.Description = newChannelDescription;
+    
+    await channelToUpdate.UpdateAsync();
+}
+```
 
 ## Deleting Channels
 
-[!NOTE]
-You cannot delete the General Channel. 
+You can delete the channel with the following example:
+
+```csharp
+var team = await context.Team.GetAsync(p => p.Channels);
+
+string channelName = $"My Cool New Channel";
+
+// Get the channel you wish to delete
+var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
+
+if(channelToDelete != default){
+    await channelToUpdate.DeleteAsync();
+}
+```
+
+> [!Note]
+> You cannot delete the General Channel, this operation is not supported by the service.
+Additionally, channels are soft-deleted for 30 days, before which counts towards the total limit of channels per Team, for further details on the limits, please refer to [Limits and specifications for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/limits-specifications-teams)
