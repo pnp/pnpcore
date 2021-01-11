@@ -4,7 +4,7 @@
     /// Defines the granted permission mask
     /// </summary>
     [ConcreteType(typeof(BasePermissions))]
-    public interface IBasePermissions : IDataModel<IBasePermissions>, IDataModelGet<IBasePermissions>
+    public interface IBasePermissions : IDataModel<IBasePermissions>
     {
         /// <summary>
         /// Minimal granted permission mask

@@ -1,4 +1,6 @@
-﻿namespace PnP.Core.Model.SharePoint
+﻿using PnP.Core.Services;
+
+namespace PnP.Core.Model.SharePoint
 {
     [SharePointType("SP.BasePermissions", Target = typeof(Web), Uri = "_api/Web/EffectiveBasePermissions)")]
     internal partial class BasePermissions : BaseDataModel<IBasePermissions>, IBasePermissions
@@ -10,7 +12,7 @@
         [KeyProperty(nameof(High))]
         public override object Key { get => High; set => High = long.Parse(value.ToString()); }
         #endregion
-
+        
         #region Extension methods
         public bool Has(PermissionKind perm)
         {
@@ -70,6 +72,11 @@
 
         public void Set(PermissionKind permissionKind)
         {
+            if(!IsPropertyAvailable(l => l.Low) && !IsPropertyAvailable(l => l.High))
+            {
+                Low = 0;
+                High = 0;
+            }
             switch (permissionKind)
             {
                 case PermissionKind.FullMask:
@@ -87,12 +94,12 @@
             if (num >= 0 && num < 32)
             {
                 num2 <<= num;
-                Low |= num2;
+                Low = Low | num2;
             }
             else if (num >= 32 && num < 64)
             {
                 num2 <<= num - 32;
-                High |= num2;
+                High = High | num2;
             }
         }
 
@@ -106,5 +113,10 @@
             return false;
         }
         #endregion
+
+        public BasePermissions()
+        {
+            this.ClearAll(); // initialize the values
+        }
     }
 }

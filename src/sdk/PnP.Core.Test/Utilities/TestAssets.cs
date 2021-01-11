@@ -12,6 +12,7 @@ namespace PnP.Core.Test.Utilities
         public const string TestApplicationCustomizerClientSideComponentId = "a54612b1-e5cb-4a43-80ae-3b5fb6ce1e35";
         public const string TestFieldCustomizerClientSideComponentId = "5d917ef1-ab2a-4f31-a727-d2da3374b9fa";
         public const string TestListViewCommandSetClientSideComponentId = "d2480b66-32cb-4e94-87eb-75895fd3dcc6";
+        public static readonly PermissionKind[] CustomActionPermissions = new[] { PermissionKind.AddAndCustomizePages, PermissionKind.AddListItems };
 
         private static bool IsDefaultSharePointLibraryName(string libraryName)
         {
@@ -247,6 +248,11 @@ namespace PnP.Core.Test.Utilities
 
             using (var context = await TestCommon.Instance.GetContextAsync(contextConfig, contextId, testName, sourceFilePath))
             {
+                var basePermissions = new BasePermissions();
+                foreach (var permissionKind in CustomActionPermissions)
+                {
+                    basePermissions.Set(permissionKind);
+                }
                 var ucaOptions = new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ApplicationCustomizer",
@@ -256,7 +262,8 @@ namespace PnP.Core.Test.Utilities
                     Name = customActionName,
                     Title = customActionName,
                     RegistrationType = UserCustomActionRegistrationType.None,
-                    Description = customActionName
+                    Description = customActionName,
+                    Rights = basePermissions
                 };
 
                 IUserCustomAction uca = addToSiteCollection
