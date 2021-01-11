@@ -61,9 +61,10 @@ namespace PnP.Core.Model.SharePoint
                 return new ApiCall(endpointUrl, ApiType.SPORest, json);
             };
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             UpdateApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
             {
-
+#pragma warning restore CS1998
                 var rightsEntity = EntityManager.GetClassInfo(Rights.GetType(), this);
 
                 ExpandoObject rightsPayload = new
@@ -100,6 +101,7 @@ namespace PnP.Core.Model.SharePoint
 
                 var jsonBody = JsonSerializer.Serialize(updateProps, new JsonSerializerOptions { IgnoreNullValues = true });
                 return new ApiCallRequest(new ApiCall(apiCallRequest.ApiCall.Request, apiCallRequest.ApiCall.Type, jsonBody));
+
             };
         }
         #endregion
