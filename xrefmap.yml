@@ -28464,18 +28464,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContext.Dispose
   nameWithType: PnPContext.Dispose
-- uid: PnP.Core.Services.PnPContext.Execute
-  name: Execute()
-  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Execute
-  commentId: M:PnP.Core.Services.PnPContext.Execute
-  fullName: PnP.Core.Services.PnPContext.Execute()
-  nameWithType: PnPContext.Execute()
-- uid: PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch)
-  name: Execute(Batch)
-  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Execute_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch)
-  nameWithType: PnPContext.Execute(Batch)
+- uid: PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch,System.Boolean)
+  name: Execute(Batch, Boolean)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Execute_PnP_Core_Services_Batch_System_Boolean_
+  commentId: M:PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch,System.Boolean)
+  fullName: PnP.Core.Services.PnPContext.Execute(PnP.Core.Services.Batch, System.Boolean)
+  nameWithType: PnPContext.Execute(Batch, Boolean)
+- uid: PnP.Core.Services.PnPContext.Execute(System.Boolean)
+  name: Execute(Boolean)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Execute_System_Boolean_
+  commentId: M:PnP.Core.Services.PnPContext.Execute(System.Boolean)
+  fullName: PnP.Core.Services.PnPContext.Execute(System.Boolean)
+  nameWithType: PnPContext.Execute(Boolean)
 - uid: PnP.Core.Services.PnPContext.Execute*
   name: Execute
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_Execute_
