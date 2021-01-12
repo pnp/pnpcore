@@ -235,7 +235,7 @@ namespace PnP.Core.Services
             // Batch can be empty, so bail out
             if (batch.Requests.Count == 0)
             {
-                return null;
+                return batch.Results;
             }
 
             // Clear batch result collection
