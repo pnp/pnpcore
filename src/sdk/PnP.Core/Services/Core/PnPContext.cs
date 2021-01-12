@@ -362,20 +362,22 @@ namespace PnP.Core.Services
         /// <summary>
         /// Method to execute the current batch
         /// </summary>
+        /// <param name="throwOnError">Throw an exception on the first encountered error in the batch</param>
         /// <returns>The asynchronous task that will be executed</returns>
-        public List<BatchResult> Execute()
+        public List<BatchResult> Execute(bool throwOnError = true)
         {
-            return ExecuteAsync().GetAwaiter().GetResult();
+            return ExecuteAsync(throwOnError).GetAwaiter().GetResult();
         }
 
         /// <summary>
         /// Method to execute a given batch
         /// </summary>
         /// <param name="batch">Batch to execute</param>
+        /// <param name="throwOnError">Throw an exception on the first encountered error in the batch</param>
         /// <returns>The asynchronous task that will be executed</returns>
-        public List<BatchResult> Execute(Batch batch)
+        public List<BatchResult> Execute(Batch batch, bool throwOnError = true)
         {
-            return ExecuteAsync(batch).GetAwaiter().GetResult();
+            return ExecuteAsync(batch, throwOnError).GetAwaiter().GetResult();
         }
 
         /// <summary>
