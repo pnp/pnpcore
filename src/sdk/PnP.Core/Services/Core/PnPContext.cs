@@ -334,34 +334,38 @@ namespace PnP.Core.Services
         /// <summary>
         /// Method to execute the current batch
         /// </summary>
+        /// <param name="throwOnError">Throw an exception on the first encountered error in the batch</param>
         /// <returns>The asynchronous task that will be executed</returns>
-        public async Task ExecuteAsync()
+        public async Task<List<BatchResult>> ExecuteAsync(bool throwOnError = true)
         {
-            await BatchClient.ExecuteBatch(CurrentBatch).ConfigureAwait(false);
+            CurrentBatch.ThrowOnError = throwOnError;
+            return await BatchClient.ExecuteBatch(CurrentBatch).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Method to execute a given batch
         /// </summary>
         /// <param name="batch">Batch to execute</param>
+        /// <param name="throwOnError">Throw an exception on the first encountered error in the batch</param>
         /// <returns>The asynchronous task that will be executed</returns>
-        public async Task ExecuteAsync(Batch batch)
+        public async Task<List<BatchResult>> ExecuteAsync(Batch batch, bool throwOnError = true)
         {
             if (batch == null)
             {
                 throw new ArgumentNullException(nameof(batch));
             }
 
-            await BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
+            batch.ThrowOnError = throwOnError;
+            return await BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
         /// <summary>
         /// Method to execute the current batch
         /// </summary>
         /// <returns>The asynchronous task that will be executed</returns>
-        public void Execute()
+        public List<BatchResult> Execute()
         {
-            ExecuteAsync().GetAwaiter().GetResult();
+            return ExecuteAsync().GetAwaiter().GetResult();
         }
 
         /// <summary>
@@ -369,9 +373,9 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="batch">Batch to execute</param>
         /// <returns>The asynchronous task that will be executed</returns>
-        public void Execute(Batch batch)
+        public List<BatchResult> Execute(Batch batch)
         {
-            ExecuteAsync(batch).GetAwaiter().GetResult();
+            return ExecuteAsync(batch).GetAwaiter().GetResult();
         }
 
         /// <summary>

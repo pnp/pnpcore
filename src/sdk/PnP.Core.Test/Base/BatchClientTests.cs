@@ -346,7 +346,63 @@ namespace PnP.Core.Test.Base
                 await myList.DeleteAsync();
             }
         }
+        
+        [TestMethod]
+        public async Task HandleBatchErrorsForLargeBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("HandleBatchErrorsForLargeBatch");
+                var myList = context.Web.Lists.GetByTitle(listTitle);
 
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // Add 150 items to the list
+                for (int i = 1; i <= 150; i++)
+                {
+                    Dictionary<string, object> values = new Dictionary<string, object>
+                        {
+                            { "Title", $"Item {i}" }
+                        };
+
+                    await myList.Items.AddBatchAsync(values);
+                }
+                await context.ExecuteAsync();
+
+                // Delete some items from within both 1..100 and 101..150 sets
+                await myList.Items.DeleteByIdBatchAsync(5);
+                await myList.Items.DeleteByIdBatchAsync(50);
+                await myList.Items.DeleteByIdBatchAsync(125);
+                await context.ExecuteAsync();
+
+                // Now create a batch that deletes items 1..150 ==> given we've already deleted 3 we should get back a result set with 3 errors
+                for (int i = 1; i <= 150; i++)
+                {
+                    await myList.Items.DeleteByIdBatchAsync(i);
+                }
+                // Execute the batch without throwing an error, should get a result collection back
+                var batchResponse = await context.ExecuteAsync(false);
+
+                Assert.IsTrue(batchResponse != null);
+                Assert.IsTrue(batchResponse.Count == 3);
+                var errorResults = batchResponse.Where(p => p.Error != null);
+                Assert.IsTrue(errorResults.Count() == 3);
+
+                // Cleanup the created list
+                await myList.DeleteAsync();
+            }
+        }
+        
 
         [TestMethod]
         public async Task UnresolvedToken()

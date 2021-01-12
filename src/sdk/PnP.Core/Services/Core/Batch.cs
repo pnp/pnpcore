@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 
 namespace PnP.Core.Services
@@ -34,6 +35,17 @@ namespace PnP.Core.Services
         /// List with requests 
         /// </summary>
         internal SortedList<int, BatchRequest> Requests { get; private set; } = new SortedList<int, BatchRequest>();
+
+        /// <summary>
+        /// List with batch results, will be populated when <see cref="ThrowOnError"/> is set
+        /// </summary>
+        internal List<BatchResult> Results { get; private set; } = new List<BatchResult>();
+
+        /// <summary>
+        /// Throw an exception when a batch request had an error. Defaults to true, if set to 
+        /// false then a collection of batch errors will be available as output of the Execute methods
+        /// </summary>
+        internal bool ThrowOnError { get; set; } = true;
 
         /// <summary>
         /// Was this <see cref="Batch"/> executed?
@@ -152,6 +164,18 @@ namespace PnP.Core.Services
             {
                 request.Value.ApiCall = request.Value.BackupApiCall;
             }
+        }
+
+        internal void AddBatchResult(BatchRequest request, HttpStatusCode httpStatusCode, string apiResponse, ServiceError error)
+        {
+            Results.Add(new BatchResult(
+                httpStatusCode,
+                error,
+                apiResponse,
+                request.ApiCall.Type.ToString(),
+                request.ApiCall.Request,
+                request.Method,
+                !string.IsNullOrEmpty(request.ApiCall.JsonBody) ? request.ApiCall.JsonBody : request.ApiCall.XmlBody)); 
         }
 
         /// <summary>
