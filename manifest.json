@@ -3438,7 +3438,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.Batch.html",
-          "hash": "sPpU5ihE0FFUCMEfVozqTA=="
+          "hash": "N73yT5Zkf81KB9FFH8RinQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PnP.Core.Services.BatchResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PnP.Core.Services.BatchResult.html",
+          "hash": "XcXafpjMk8RAMJv7hypXBg=="
         }
       },
       "is_incremental": false,
@@ -3630,7 +3642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.PnPContext.html",
-          "hash": "KTLOp5GzqWHK0j2f4KWLbA=="
+          "hash": "3AoaKkhfBxnTQUc1XEiA9Q=="
         }
       },
       "is_incremental": false,
@@ -3714,7 +3726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PnP.Core.Services.html",
-          "hash": "Lqb3D1/dTkqIfLNt0XSFDg=="
+          "hash": "j7qNqaKwoBRh4PN1rjmP/g=="
         }
       },
       "is_incremental": false,
@@ -3786,7 +3798,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Ixk7mLme3C7SBHHwa0qCTQ=="
+          "hash": "AFU0ZY/UwwwKHRE/N5ZY0w=="
         }
       },
       "is_incremental": false,
@@ -4668,7 +4680,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 313,
+          "total_file_count": 314,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

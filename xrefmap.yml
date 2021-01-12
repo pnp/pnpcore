@@ -27682,6 +27682,103 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.Batch.Batch
   nameWithType: Batch.Batch
+- uid: PnP.Core.Services.BatchResult
+  name: BatchResult
+  href: api/PnP.Core.Services.BatchResult.html
+  commentId: T:PnP.Core.Services.BatchResult
+  fullName: PnP.Core.Services.BatchResult
+  nameWithType: BatchResult
+- uid: PnP.Core.Services.BatchResult.ApiBody
+  name: ApiBody
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiBody
+  commentId: P:PnP.Core.Services.BatchResult.ApiBody
+  fullName: PnP.Core.Services.BatchResult.ApiBody
+  nameWithType: BatchResult.ApiBody
+- uid: PnP.Core.Services.BatchResult.ApiBody*
+  name: ApiBody
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiBody_
+  commentId: Overload:PnP.Core.Services.BatchResult.ApiBody
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchResult.ApiBody
+  nameWithType: BatchResult.ApiBody
+- uid: PnP.Core.Services.BatchResult.ApiMethod
+  name: ApiMethod
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiMethod
+  commentId: P:PnP.Core.Services.BatchResult.ApiMethod
+  fullName: PnP.Core.Services.BatchResult.ApiMethod
+  nameWithType: BatchResult.ApiMethod
+- uid: PnP.Core.Services.BatchResult.ApiMethod*
+  name: ApiMethod
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiMethod_
+  commentId: Overload:PnP.Core.Services.BatchResult.ApiMethod
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchResult.ApiMethod
+  nameWithType: BatchResult.ApiMethod
+- uid: PnP.Core.Services.BatchResult.ApiRequest
+  name: ApiRequest
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiRequest
+  commentId: P:PnP.Core.Services.BatchResult.ApiRequest
+  fullName: PnP.Core.Services.BatchResult.ApiRequest
+  nameWithType: BatchResult.ApiRequest
+- uid: PnP.Core.Services.BatchResult.ApiRequest*
+  name: ApiRequest
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiRequest_
+  commentId: Overload:PnP.Core.Services.BatchResult.ApiRequest
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchResult.ApiRequest
+  nameWithType: BatchResult.ApiRequest
+- uid: PnP.Core.Services.BatchResult.ApiResponse
+  name: ApiResponse
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiResponse
+  commentId: P:PnP.Core.Services.BatchResult.ApiResponse
+  fullName: PnP.Core.Services.BatchResult.ApiResponse
+  nameWithType: BatchResult.ApiResponse
+- uid: PnP.Core.Services.BatchResult.ApiResponse*
+  name: ApiResponse
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiResponse_
+  commentId: Overload:PnP.Core.Services.BatchResult.ApiResponse
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchResult.ApiResponse
+  nameWithType: BatchResult.ApiResponse
+- uid: PnP.Core.Services.BatchResult.ApiType
+  name: ApiType
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiType
+  commentId: P:PnP.Core.Services.BatchResult.ApiType
+  fullName: PnP.Core.Services.BatchResult.ApiType
+  nameWithType: BatchResult.ApiType
+- uid: PnP.Core.Services.BatchResult.ApiType*
+  name: ApiType
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_ApiType_
+  commentId: Overload:PnP.Core.Services.BatchResult.ApiType
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchResult.ApiType
+  nameWithType: BatchResult.ApiType
+- uid: PnP.Core.Services.BatchResult.Error
+  name: Error
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_Error
+  commentId: P:PnP.Core.Services.BatchResult.Error
+  fullName: PnP.Core.Services.BatchResult.Error
+  nameWithType: BatchResult.Error
+- uid: PnP.Core.Services.BatchResult.Error*
+  name: Error
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_Error_
+  commentId: Overload:PnP.Core.Services.BatchResult.Error
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchResult.Error
+  nameWithType: BatchResult.Error
+- uid: PnP.Core.Services.BatchResult.StatusCode
+  name: StatusCode
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_StatusCode
+  commentId: P:PnP.Core.Services.BatchResult.StatusCode
+  fullName: PnP.Core.Services.BatchResult.StatusCode
+  nameWithType: BatchResult.StatusCode
+- uid: PnP.Core.Services.BatchResult.StatusCode*
+  name: StatusCode
+  href: api/PnP.Core.Services.BatchResult.html#PnP_Core_Services_BatchResult_StatusCode_
+  commentId: Overload:PnP.Core.Services.BatchResult.StatusCode
+  isSpec: "True"
+  fullName: PnP.Core.Services.BatchResult.StatusCode
+  nameWithType: BatchResult.StatusCode
 - uid: PnP.Core.Services.Builder
   name: PnP.Core.Services.Builder
   href: api/PnP.Core.Services.Builder.html
@@ -28386,18 +28483,18 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Services.PnPContext.Execute
   nameWithType: PnPContext.Execute
-- uid: PnP.Core.Services.PnPContext.ExecuteAsync
-  name: ExecuteAsync()
-  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_ExecuteAsync
-  commentId: M:PnP.Core.Services.PnPContext.ExecuteAsync
-  fullName: PnP.Core.Services.PnPContext.ExecuteAsync()
-  nameWithType: PnPContext.ExecuteAsync()
-- uid: PnP.Core.Services.PnPContext.ExecuteAsync(PnP.Core.Services.Batch)
-  name: ExecuteAsync(Batch)
-  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_ExecuteAsync_PnP_Core_Services_Batch_
-  commentId: M:PnP.Core.Services.PnPContext.ExecuteAsync(PnP.Core.Services.Batch)
-  fullName: PnP.Core.Services.PnPContext.ExecuteAsync(PnP.Core.Services.Batch)
-  nameWithType: PnPContext.ExecuteAsync(Batch)
+- uid: PnP.Core.Services.PnPContext.ExecuteAsync(PnP.Core.Services.Batch,System.Boolean)
+  name: ExecuteAsync(Batch, Boolean)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_ExecuteAsync_PnP_Core_Services_Batch_System_Boolean_
+  commentId: M:PnP.Core.Services.PnPContext.ExecuteAsync(PnP.Core.Services.Batch,System.Boolean)
+  fullName: PnP.Core.Services.PnPContext.ExecuteAsync(PnP.Core.Services.Batch, System.Boolean)
+  nameWithType: PnPContext.ExecuteAsync(Batch, Boolean)
+- uid: PnP.Core.Services.PnPContext.ExecuteAsync(System.Boolean)
+  name: ExecuteAsync(Boolean)
+  href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_ExecuteAsync_System_Boolean_
+  commentId: M:PnP.Core.Services.PnPContext.ExecuteAsync(System.Boolean)
+  fullName: PnP.Core.Services.PnPContext.ExecuteAsync(System.Boolean)
+  nameWithType: PnPContext.ExecuteAsync(Boolean)
 - uid: PnP.Core.Services.PnPContext.ExecuteAsync*
   name: ExecuteAsync
   href: api/PnP.Core.Services.PnPContext.html#PnP_Core_Services_PnPContext_ExecuteAsync_
