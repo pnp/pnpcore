@@ -5,7 +5,7 @@
 		<LangVersion>8.0</LangVersion>
 		<RootNamespace>PnP.Core.Auth</RootNamespace>
 		<AssemblyName>PnP.Core.Auth</AssemblyName>
-		<InformationalVersion>Beta 1 package</InformationalVersion>
+		<InformationalVersion>Beta 2 package</InformationalVersion>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Copyright>PnP 2020</Copyright>
 		<Company>PnP</Company>
