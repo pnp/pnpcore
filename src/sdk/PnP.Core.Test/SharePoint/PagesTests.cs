@@ -1085,7 +1085,8 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsTrue(page.PageHeader.TopicHeader == "I'm a topic header");
                 Assert.IsTrue(page.PageHeader.TextAlignment == PageHeaderTitleAlignment.Center);
                 Assert.IsTrue(page.PageHeader.ShowPublishDate = true);
-
+                Assert.IsTrue((page as Page).PageListItem[PageConstants.BannerImageUrlField] is FieldUrlValue);
+                Assert.IsFalse(((page as Page).PageListItem[PageConstants.BannerImageUrlField] as FieldUrlValue).Url.Equals("/_layouts/15/images/sitepagethumbnail.png"));
                 // delete the page
                 await page.DeleteAsync();
 
