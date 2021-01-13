@@ -12,6 +12,8 @@
     href: basics-batching.md
   - name: Async or not
     href: basics-async.md
+  - name: Debugging
+    href: basics-debug.md
   - name: General configuration
     href: basics-settings.md
   - name: API configuration
