@@ -4255,6 +4255,28 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/sourcelink1.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/sourcelink1.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/sourcelink2.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/sourcelink2.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/test explorer.png",
       "output": {
         "resource": {
@@ -4354,6 +4376,18 @@
         ".html": {
           "relative_path": "using-the-sdk/basics-batching.html",
           "hash": "ncqEkRglUaS4zfltY2J2zQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/basics-debug.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/basics-debug.html",
+          "hash": "pQ2DmOdQIfsE40mrdl7YRQ=="
         }
       },
       "is_incremental": false,
@@ -4641,7 +4675,7 @@
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "ga4nVUa1iya/s1TbGn01pg=="
+          "hash": "DSsC8Y+xmb/ANTUl5opgNA=="
         }
       },
       "is_incremental": false,
@@ -4674,7 +4708,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 49,
+          "total_file_count": 50,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
