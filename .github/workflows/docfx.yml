@@ -8,13 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    # prevent parallel executions
+    - name: Wait for actions to finish
+      uses: softprops/turnstyle@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
     # Checks-out dev branch
-    - uses: actions/checkout@v2
+    - name: Checkout dev branch
+      uses: actions/checkout@v2
       with: 
         ref: dev
         path: dev
     # Checks-out gh-pages branch
-    - uses: actions/checkout@v2
+    - name: Checkout dev branch
+      uses: actions/checkout@v2
       with: 
         ref: gh-pages
         path: gh-pages
@@ -32,19 +39,12 @@ jobs:
       shell: pwsh
       run: |
         ./dev/docs/build.ps1
-    # Add and commit changes
-    - name: Add & Commit
-      uses: EndBug/add-and-commit@v4.2.1
+    # Add, commit and push the changes
+    - name: Add & Commit & Push
+      uses: EndBug/add-and-commit@v6
       with:
-        # Arguments for the git add command
         # The directory where your repository is located. You should use actions/checkout first to set it up
         cwd: ./gh-pages
-    # Push changes to github
-    - name: GitHub Push
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        # Destination branch to push changes
         branch: gh-pages
-        directory: ./gh-pages
+        push: true
+        token: ${{ secrets.GITHUB_TOKEN }}

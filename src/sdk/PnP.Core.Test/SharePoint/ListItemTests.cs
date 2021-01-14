@@ -43,9 +43,9 @@ namespace PnP.Core.Test.SharePoint
 
                     var result = await newList.GetListDataAsStreamAsync(new RenderListDataOptions() { ViewXml = "<View><ViewFields><FieldRef Name='Title' /><FieldRef Name='FileDirRef' /></ViewFields><RowLimit>1</RowLimit></View>", RenderOptions = RenderListDataOptionsFlags.ListData, FolderServerRelativeUrl = $"{newList.RootFolder.ServerRelativeUrl}/Test" });
 
-                    
+
                     Assert.IsTrue(newList.Items.FirstOrDefault() != null);
-                    
+
                 }
                 await list.DeleteAsync();
             }
@@ -72,6 +72,121 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task RecycleListItemTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListItemTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Recycle me" } });
+                var recycledGuid = await item.RecycleAsync();
+
+                Assert.IsTrue(recycledGuid != Guid.Empty);
+                var recycleBinItem = context.Web.RecycleBin.GetById(recycledGuid);
+                Assert.IsNotNull(recycleBinItem);
+                Assert.IsTrue(recycleBinItem.Requested);
+
+                await recycleBinItem.DeleteAsync();
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleListItemBatchTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListItemBatchTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Recycle me" } });
+                
+                await item.RecycleBatchAsync();
+                await context.ExecuteAsync();
+
+                // Verify the item was removed from the list item collection
+                Assert.IsTrue((item as ListItem).Deleted);
+                Assert.IsTrue(list.Items.Length == 0);
+
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleListItemCollectionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListItemCollectionTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Recycle me" } });
+
+                var recycledGuid = await list.Items.RecycleByIdAsync(item.Id);
+
+                // Verify the item was removed from the list item collection
+                Assert.IsTrue((item as ListItem).Deleted);
+                Assert.IsTrue(list.Items.Length == 0);
+
+                Assert.IsTrue(recycledGuid != Guid.Empty);
+                var recycleBinItem = context.Web.RecycleBin.GetById(recycledGuid);
+                Assert.IsNotNull(recycleBinItem);
+                Assert.IsTrue(recycleBinItem.Requested);
+
+                await recycleBinItem.DeleteAsync();
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleListItemCollectionNotLoadedTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListItemCollectionNotLoadedTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Recycle me" } });
+
+                Guid recycledGuid = Guid.Empty;
+                using (var context2 = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+                {
+                    var list2 = await context2.Web.Lists.GetByTitleAsync(listTitle);
+                    recycledGuid = await list2.Items.RecycleByIdAsync(item.Id);
+                }
+
+                Assert.IsTrue(recycledGuid != Guid.Empty);
+                var recycleBinItem = context.Web.RecycleBin.GetById(recycledGuid);
+                Assert.IsNotNull(recycleBinItem);
+                Assert.IsTrue(recycleBinItem.Requested);
+
+                await recycleBinItem.DeleteAsync();
+                await list.DeleteAsync();
+            }
+        }
+
+        [TestMethod]
+        public async Task RecycleListItemBatchCollectionTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListItemBatchCollectionTest");
+                var list = await context.Web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                var item = await list.Items.AddAsync(new Dictionary<string, object> { { "Title", "Recycle me" } });
+
+                await list.Items.RecycleByIdBatchAsync(item.Id);
+                await context.ExecuteAsync();
+
+                // Verify the item was removed from the list item collection
+                Assert.IsTrue((item as ListItem).Deleted);
+                Assert.IsTrue(list.Items.Length == 0);
+
+                await list.DeleteAsync();
+            }
+        }
         [TestMethod]
         public async Task SystemUpdate()
         {

@@ -105,6 +105,11 @@ namespace PnP.Core.Model.SharePoint
         /// </summary>
         public string VersionOfUserCustomAction { get; }
 
+        /// <summary>
+        /// Get or sets the base permissions of the action.
+        /// </summary>
+        public IBasePermissions Rights { get; set; }
+
         ///// <summary>
         ///// To update...
         ///// </summary>

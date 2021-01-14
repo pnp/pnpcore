@@ -509,6 +509,43 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task RecycleListBatch()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new list
+                var web = await context.Web.GetAsync(p => p.Lists);
+
+                int listCount = web.Lists.Count();
+
+                string listTitle = TestCommon.GetPnPSdkTestAssetName("RecycleListBatch");
+                var myList = web.Lists.FirstOrDefault(p => p.Title.Equals(listTitle, StringComparison.InvariantCultureIgnoreCase));
+
+                if (TestCommon.Instance.Mocking && myList != null)
+                {
+                    Assert.Inconclusive("Test data set should be setup to not have the list available.");
+                }
+
+                if (myList == null)
+                {
+                    myList = await web.Lists.AddAsync(listTitle, ListTemplateType.GenericList);
+                }
+
+                // recycle the list
+                await myList.RecycleBatchAsync();
+                // Execute the batch
+                await context.ExecuteAsync();
+
+                // The recycled list should have been deleted from the lists collection
+                Assert.IsTrue(web.Lists.Count() == listCount);
+                // Loading lists again should still result in the same original list count as the added list is in the recycle bin
+                await context.Web.GetAsync(p => p.Lists);
+                Assert.IsTrue(web.Lists.Count() == listCount);
+
+            }
+        }
 
         [TestMethod]
         public async Task GetListIRMSettingsTest()

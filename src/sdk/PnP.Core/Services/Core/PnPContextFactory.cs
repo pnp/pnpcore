@@ -6,7 +6,7 @@ using PnP.Core.Model.SharePoint;
 using System;
 using System.Linq;
 using System.Net.Http;
-#if !NETSTANDARD2_0
+#if NET5_0
 using System.Runtime.InteropServices;
 #endif
 using System.Threading.Tasks;
@@ -284,7 +284,7 @@ namespace PnP.Core.Services
                 connectTelemetry = false;
             }
 
-#if !NETSTANDARD2_0
+#if NET5_0
             if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
             {
                connectTelemetry = false;            

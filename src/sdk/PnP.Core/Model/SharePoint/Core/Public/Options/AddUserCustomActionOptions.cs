@@ -88,5 +88,10 @@ namespace PnP.Core.Model.SharePoint
         /// Gets or sets the URL, URI, or ECMAScript (JScript, JavaScript) function associated with the action.
         /// </summary>
         public string Url { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Rights for this action.
+        /// </summary>
+        public IBasePermissions Rights { get; set; } = new BasePermissions();
     }
 }

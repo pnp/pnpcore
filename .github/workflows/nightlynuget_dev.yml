@@ -13,10 +13,15 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+    - name: Wait for actions to finish
+      uses: softprops/turnstyle@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
       with: 
         ref: dev
+        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -27,14 +32,11 @@ jobs:
       shell: pwsh
       run: |
         ./build/build.ps1
-    # Add and commit changes
-    - name: Add & Commit
-      uses: EndBug/add-and-commit@v4.2.1
-    # Push changes to github
-    - name: GitHub Push
-      uses: ad-m/github-push-action@v0.6.0
+    # Add, commit and push changes
+    - name: Add & Commit & Push
+      uses: EndBug/add-and-commit@v6
       with:
-        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        # Destination branch to push changes
+        message: 'Nightly PnP Framework release'
+        push: true
         branch: dev
+        token: ${{ secrets.GITHUB_TOKEN }}    

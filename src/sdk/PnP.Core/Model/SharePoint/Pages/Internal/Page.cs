@@ -327,7 +327,7 @@ namespace PnP.Core.Model.SharePoint
                     <FieldRef Name='{PageConstants.CanvasField}' />
                     <FieldRef Name='{PageConstants._AuthorByline}' />
                     <FieldRef Name='{PageConstants.PageLayoutContentField}' />
-                    <FieldRef Name='{PageConstants.BannerImageUrl}' />
+                    <FieldRef Name='{PageConstants.BannerImageUrlField}' />
                     <FieldRef Name='{PageConstants.PromotedStateField}' />
                     <FieldRef Name='{PageConstants._OriginalSourceUrl}' />
                     <FieldRef Name='{PageConstants._OriginalSourceSiteId}' />
@@ -1512,9 +1512,10 @@ namespace PnP.Core.Model.SharePoint
                 {
                     PageListItem[PageConstants.PageLayoutType] = layoutType.ToString();
                 }
+
                 if (layoutType == PageLayoutType.Article || LayoutType == PageLayoutType.Spaces)
                 {
-                    PageListItem[PageConstants.BannerImageUrl] = "/_layouts/15/images/sitepagethumbnail.png";
+                    SetBannerImageUrlField("/_layouts/15/images/sitepagethumbnail.png");
                 }
 
                 PageListItem[PageConstants.PromotedStateField] = (int)PromotedState.NotPromoted;
@@ -1537,7 +1538,7 @@ namespace PnP.Core.Model.SharePoint
                 PageListItem[PageConstants.PageLayoutContentField] = "";
                 if (!string.IsNullOrEmpty(ThumbnailUrl))
                 {
-                    PageListItem[PageConstants.BannerImageUrl] = ThumbnailUrl;
+                    SetBannerImageUrlField(ThumbnailUrl);
                 }
 
                 if (!string.IsNullOrEmpty(RepostSourceUrl))
@@ -1584,7 +1585,7 @@ namespace PnP.Core.Model.SharePoint
 
                 if (!string.IsNullOrEmpty(ThumbnailUrl))
                 {
-                    PageListItem[PageConstants.BannerImageUrl] = ThumbnailUrl;
+                    SetBannerImageUrlField(ThumbnailUrl);
                 }
             }
 
@@ -1632,9 +1633,11 @@ namespace PnP.Core.Model.SharePoint
             }
 
 
-            if ((layoutType == PageLayoutType.Article || LayoutType == PageLayoutType.Spaces) && PageListItem[PageConstants.BannerImageUrl] != null)
+            if ((layoutType == PageLayoutType.Article || LayoutType == PageLayoutType.Spaces) && PageListItem[PageConstants.BannerImageUrlField] != null)
             {
-                if (string.IsNullOrEmpty(PageListItem[PageConstants.BannerImageUrl].ToString()) || PageListItem[PageConstants.BannerImageUrl].ToString().Contains("/_layouts/15/images/sitepagethumbnail.png", StringComparison.InvariantCultureIgnoreCase))
+                if (string.IsNullOrEmpty(PageListItem[PageConstants.BannerImageUrlField].ToString()) ||
+                    ((PageListItem[PageConstants.BannerImageUrlField] is FieldUrlValue bannerImageUrlFieldValue) && 
+                      bannerImageUrlFieldValue.Url.Contains("/_layouts/15/images/sitepagethumbnail.png", StringComparison.InvariantCultureIgnoreCase)))
                 {
                     string previewImageServerRelativeUrl = "";
                     if (pageHeader.Type == PageHeaderType.Custom && !string.IsNullOrEmpty(pageHeader.ImageServerRelativeUrl))
@@ -1664,7 +1667,7 @@ namespace PnP.Core.Model.SharePoint
                         await PnPContext.Site.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
                         await PnPContext.Web.EnsurePropertiesAsync(p => p.Id).ConfigureAwait(false);
 
-                        PageListItem[PageConstants.BannerImageUrl] = $"{PnPContext.Uri}/_layouts/15/getpreview.ashx?guidSite={PnPContext.Site.Id}&guidWeb={PnPContext.Web.Id}&guidFile={pageHeader.HeaderImageId}";
+                        SetBannerImageUrlField($"{PnPContext.Uri}/_layouts/15/getpreview.ashx?guidSite={PnPContext.Site.Id}&guidWeb={PnPContext.Web.Id}&guidFile={pageHeader.HeaderImageId}");
                     }
                 }
             }
@@ -1709,6 +1712,15 @@ namespace PnP.Core.Model.SharePoint
             else
             {
                 await PageListItem.UpdateOverwriteVersionAsync().ConfigureAwait(false);
+            }
+        }
+
+        private void SetBannerImageUrlField(string bannerImageUrl)
+        {
+            var bannerImageField = PagesLibrary.Fields.FirstOrDefault(p => p.InternalName == PageConstants.BannerImageUrlField);
+            if (bannerImageField != null)
+            {
+                PageListItem[PageConstants.BannerImageUrlField] = bannerImageField.NewFieldUrlValue(bannerImageUrl);
             }
         }
 

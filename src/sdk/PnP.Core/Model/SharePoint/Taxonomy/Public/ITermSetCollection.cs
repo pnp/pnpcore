@@ -10,7 +10,7 @@ namespace PnP.Core.Model.SharePoint
     /// Collection of term sets
     /// </summary>
     [ConcreteType(typeof(TermSetCollection))]
-    public interface ITermSetCollection : IQueryable<ITermSet>, IDataModelCollection<ITermSet>, ISupportPaging<ITermSet>
+    public interface ITermSetCollection : IQueryable<ITermSet>, IDataModelCollection<ITermSet>, ISupportPaging<ITermSet>, IDataModelCollectionDeleteByStringId
     {
 
         #region Add methods

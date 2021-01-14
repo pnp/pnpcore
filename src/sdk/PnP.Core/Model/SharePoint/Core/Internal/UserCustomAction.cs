@@ -1,5 +1,6 @@
 using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Text.Json;
 
@@ -18,7 +19,6 @@ namespace PnP.Core.Model.SharePoint
         #region Construction
         public UserCustomAction()
         {
-
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
             AddApiCallHandler = async (additionalInformation) =>
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -32,14 +32,76 @@ namespace PnP.Core.Model.SharePoint
                     __metadata = new { type = entity.SharePointType }
                 }.AsExpando();
 
-                dynamic addParameters = baseAddPayload.MergeWith(addOptions.AsExpando(ignoreNullValues: true));
+                // Skip the basemodel from merging initially as the it will render wrong JSON
+                dynamic addParameters = baseAddPayload.MergeWith(addOptions.AsExpando(ignoreProperties: new[] { "Rights" }, ignoreNullValues: true));
+
+                // Maps the BasePermissions model directly on the payload
+
+                if (addOptions.Rights != null)
+                {
+                    var rightsEntity = EntityManager.GetClassInfo(addOptions.Rights.GetType(), this);
+
+                    ExpandoObject rightsPayload = new
+                    {
+                        __metadata = new { type = rightsEntity.SharePointType },
+                        Low = addOptions.Rights.Low.ToString(),
+                        High = addOptions.Rights.High.ToString()
+                    }.AsExpando();
+
+                    addParameters.Rights = rightsPayload;
+                }
+
                 string json = JsonSerializer.Serialize(addParameters, typeof(ExpandoObject),
                     new JsonSerializerOptions()
                     {
                         IgnoreNullValues = true
                     });
 
+
                 return new ApiCall(endpointUrl, ApiType.SPORest, json);
+            };
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+            UpdateApiCallOverrideHandler = async (ApiCallRequest apiCallRequest) =>
+            {
+#pragma warning restore CS1998
+                var rightsEntity = EntityManager.GetClassInfo(Rights.GetType(), this);
+
+                ExpandoObject rightsPayload = new
+                {
+                    __metadata = new { type = rightsEntity.SharePointType },
+                    Low = Rights.Low.ToString(),
+                    High = Rights.High.ToString()
+                }.AsExpando();
+
+                var updateProps = new
+                {
+                    __metadata = new
+                    {
+                        type = "SP.UserCustomAction"
+                    },
+                    Rights = rightsPayload,
+                    ClientSideComponentId,
+                    ClientSideComponentProperties,
+                    CommandUIExtension,
+                    Description,
+                    Group,
+                    HostProperties,
+                    ImageUrl,
+                    Location,
+                    Name,
+                    RegistrationId,
+                    RegistrationType,
+                    ScriptBlock,
+                    ScriptSrc,
+                    Sequence,
+                    Title,
+                    Url
+                };
+
+                var jsonBody = JsonSerializer.Serialize(updateProps, new JsonSerializerOptions { IgnoreNullValues = true });
+                return new ApiCallRequest(new ApiCall(apiCallRequest.ApiCall.Request, apiCallRequest.ApiCall.Type, jsonBody));
+
             };
         }
         #endregion
@@ -82,6 +144,8 @@ namespace PnP.Core.Model.SharePoint
         public string Url { get => GetValue<string>(); set => SetValue(value); }
 
         public string VersionOfUserCustomAction { get => GetValue<string>(); set => SetValue(value); }
+
+        public IBasePermissions Rights { get => GetModelValue<IBasePermissions>(); set => SetModelValue(value); }
 
         //public IUserResource DescriptionResource { get => GetModelValue<IUserResource>(); }
 

@@ -13,7 +13,6 @@
         internal const string Title = "Title";
         internal const string ClientSideApplicationId = "ClientSideApplicationId";
         internal const string PromotedStateField = "PromotedState";
-        internal const string BannerImageUrl = "BannerImageUrl";
         internal const string FirstPublishedDate = "FirstPublishedDate";
         internal const string FileLeafRef = "FileLeafRef";
         internal const string FileType = "File_x0020_Type";

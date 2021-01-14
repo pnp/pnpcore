@@ -18,6 +18,7 @@
             BinaryBody = null;
             ExpectBinaryResponse = false;
             StreamResponse = false;
+            RemoveFromModel = false;
         }
 
         internal ApiCall(string xmlBody, string receivingProperty = null)
@@ -33,6 +34,7 @@
             BinaryBody = null;
             ExpectBinaryResponse = false;
             StreamResponse = false;
+            RemoveFromModel = false;
         }
 
         /// <summary>
@@ -93,5 +95,10 @@
         /// Indicates whether the response will be streamed, meaning we'll return the first bytes before all the content was downloaded
         /// </summary>
         internal bool StreamResponse { get; set; }
+
+        /// <summary>
+        /// Indicates if the model instance linked to this request needs to be removed from it's model collection after successful execution of this API call
+        /// </summary>
+        internal bool RemoveFromModel { get; set; }
     }
 }

@@ -12,6 +12,8 @@
     href: basics-batching.md
   - name: Async or not
     href: basics-async.md
+  - name: Debugging
+    href: basics-debug.md
   - name: General configuration
     href: basics-settings.md
   - name: API configuration
@@ -22,6 +24,10 @@
     href: configuring%20authentication.md
   - name: Custom Authentication Providers
     href: custom-authentication-provider.md
+- name: Sites
+  items:
+  - name: Overview
+    href: sites-intro.md
 - name: Webs
   items:
   - name: Overview

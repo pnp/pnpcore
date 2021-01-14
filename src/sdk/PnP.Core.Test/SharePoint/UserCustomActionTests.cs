@@ -35,6 +35,10 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(foundCustomAction);
                 Assert.AreEqual(customActionId, foundCustomAction.Id);
                 Assert.AreEqual(UserCustomActionScope.Web, foundCustomAction.Scope);
+                foreach (var permissionKind in TestAssets.CustomActionPermissions)
+                {
+                    Assert.IsTrue(foundCustomAction.Rights.Has(permissionKind));
+                }
             }
 
             await TestAssets.CleanupTestUserCustomActionAsync(2);
@@ -58,6 +62,10 @@ namespace PnP.Core.Test.SharePoint
                 Assert.IsNotNull(foundCustomAction);
                 Assert.AreEqual(customActionId, foundCustomAction.Id);
                 Assert.AreEqual(UserCustomActionScope.Site, foundCustomAction.Scope);
+                foreach (var permissionKind in TestAssets.CustomActionPermissions)
+                {
+                    Assert.IsTrue(foundCustomAction.Rights.Has(permissionKind));
+                }
             }
 
             await TestAssets.CleanupTestUserCustomActionAsync(2, fromSiteCollection: true);
@@ -69,6 +77,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var basePermissions = new BasePermissions();
+                basePermissions.Set(PermissionKind.AddAndCustomizePages);
                 IUserCustomAction newUserCustomAction = await context.Web.UserCustomActions.AddAsync(new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ApplicationCustomizer",
@@ -78,7 +88,8 @@ namespace PnP.Core.Test.SharePoint
                     Name = "UCA_CustomHeader",
                     Title = "Custom Header",
                     RegistrationType = UserCustomActionRegistrationType.None,
-                    Description = "TESTING"
+                    Description = "TESTING",
+                    Rights = basePermissions
                 });
 
                 // Test the created object
@@ -90,7 +101,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Custom Header", newUserCustomAction.Title);
                 Assert.AreEqual("UCA_CustomHeader", newUserCustomAction.Name);
                 Assert.AreEqual("TESTING", newUserCustomAction.Description);
-
+                Assert.IsTrue(newUserCustomAction.Rights.Has(PermissionKind.AddAndCustomizePages));
                 await newUserCustomAction.DeleteAsync();
             }
         }
@@ -101,6 +112,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var basePermissions = new BasePermissions();
+                basePermissions.Set(PermissionKind.AddAndCustomizePages);
                 IUserCustomAction newUserCustomAction = context.Web.UserCustomActions.Add(new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ApplicationCustomizer",
@@ -110,7 +123,8 @@ namespace PnP.Core.Test.SharePoint
                     Name = "UCA_CustomHeader",
                     Title = "Custom Header",
                     RegistrationType = UserCustomActionRegistrationType.None,
-                    Description = "TESTING"
+                    Description = "TESTING",
+                    Rights = basePermissions
                 });
 
                 // Test the created object
@@ -122,7 +136,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Custom Header", newUserCustomAction.Title);
                 Assert.AreEqual("UCA_CustomHeader", newUserCustomAction.Name);
                 Assert.AreEqual("TESTING", newUserCustomAction.Description);
-
+                Assert.IsTrue(newUserCustomAction.Rights.Has(PermissionKind.AddAndCustomizePages));
                 await newUserCustomAction.DeleteAsync();
             }
         }
@@ -134,6 +148,9 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var batch = context.NewBatch();
+
+                var basePermissions = new BasePermissions();
+                basePermissions.Set(PermissionKind.AddAndCustomizePages);
                 IUserCustomAction newUserCustomAction = await context.Web.UserCustomActions.AddBatchAsync(batch, new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ApplicationCustomizer",
@@ -143,7 +160,8 @@ namespace PnP.Core.Test.SharePoint
                     Name = "UCA_CustomHeader",
                     Title = "Custom Header",
                     RegistrationType = UserCustomActionRegistrationType.None,
-                    Description = "TESTING"
+                    Description = "TESTING",
+                    Rights = basePermissions
                 });
                 await context.ExecuteAsync(batch);
 
@@ -156,6 +174,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Custom Header", newUserCustomAction.Title);
                 Assert.AreEqual("UCA_CustomHeader", newUserCustomAction.Name);
                 Assert.AreEqual("TESTING", newUserCustomAction.Description);
+                Assert.IsTrue(newUserCustomAction.Rights.Has(PermissionKind.AddAndCustomizePages));
 
                 await newUserCustomAction.DeleteAsync();
             }
@@ -168,6 +187,9 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
                 var batch = context.NewBatch();
+
+                var basePermissions = new BasePermissions();
+                basePermissions.Set(PermissionKind.AddAndCustomizePages);
                 IUserCustomAction newUserCustomAction = context.Web.UserCustomActions.AddBatch(batch, new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ApplicationCustomizer",
@@ -177,7 +199,8 @@ namespace PnP.Core.Test.SharePoint
                     Name = "UCA_CustomHeader",
                     Title = "Custom Header",
                     RegistrationType = UserCustomActionRegistrationType.None,
-                    Description = "TESTING"
+                    Description = "TESTING",
+                    Rights = basePermissions
                 });
                 await context.ExecuteAsync(batch);
 
@@ -190,6 +213,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Custom Header", newUserCustomAction.Title);
                 Assert.AreEqual("UCA_CustomHeader", newUserCustomAction.Name);
                 Assert.AreEqual("TESTING", newUserCustomAction.Description);
+                Assert.IsTrue(newUserCustomAction.Rights.Has(PermissionKind.AddAndCustomizePages));
 
                 await newUserCustomAction.DeleteAsync();
             }
@@ -201,6 +225,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var basePermissions = new BasePermissions();
+                basePermissions.Set(PermissionKind.AddAndCustomizePages);
                 IUserCustomAction newUserCustomAction = await context.Web.UserCustomActions.AddBatchAsync(new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ApplicationCustomizer",
@@ -210,7 +236,8 @@ namespace PnP.Core.Test.SharePoint
                     Name = "UCA_CustomHeader",
                     Title = "Custom Header",
                     RegistrationType = UserCustomActionRegistrationType.None,
-                    Description = "TESTING"
+                    Description = "TESTING",
+                    Rights = basePermissions
                 });
                 await context.ExecuteAsync();
 
@@ -223,6 +250,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Custom Header", newUserCustomAction.Title);
                 Assert.AreEqual("UCA_CustomHeader", newUserCustomAction.Name);
                 Assert.AreEqual("TESTING", newUserCustomAction.Description);
+                Assert.IsTrue(newUserCustomAction.Rights.Has(PermissionKind.AddAndCustomizePages));
 
                 await newUserCustomAction.DeleteAsync();
             }
@@ -234,6 +262,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var basePermissions = new BasePermissions();
+                basePermissions.Set(PermissionKind.AddAndCustomizePages);
                 IUserCustomAction newUserCustomAction = context.Web.UserCustomActions.AddBatch(new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ApplicationCustomizer",
@@ -243,7 +273,8 @@ namespace PnP.Core.Test.SharePoint
                     Name = "UCA_CustomHeader",
                     Title = "Custom Header",
                     RegistrationType = UserCustomActionRegistrationType.None,
-                    Description = "TESTING"
+                    Description = "TESTING",
+                    Rights = basePermissions
                 });
                 await context.ExecuteAsync();
 
@@ -256,6 +287,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Custom Header", newUserCustomAction.Title);
                 Assert.AreEqual("UCA_CustomHeader", newUserCustomAction.Name);
                 Assert.AreEqual("TESTING", newUserCustomAction.Description);
+                Assert.IsTrue(newUserCustomAction.Rights.Has(PermissionKind.AddAndCustomizePages));
 
                 await newUserCustomAction.DeleteAsync();
             }
@@ -267,6 +299,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var basePermissions = new BasePermissions();
+                basePermissions.Set(PermissionKind.AddAndCustomizePages);
                 IUserCustomAction newUserCustomAction = await context.Web.UserCustomActions.AddAsync(new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ListViewCommandSet",
@@ -277,7 +311,8 @@ namespace PnP.Core.Test.SharePoint
                     Title = "Custom Command",
                     RegistrationType = UserCustomActionRegistrationType.List,
                     RegistrationId = "101",
-                    Description = "TESTING"
+                    Description = "TESTING",
+                    Rights = basePermissions
                 });
 
                 // Test the created object
@@ -289,6 +324,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Custom Command", newUserCustomAction.Title);
                 Assert.AreEqual("UCA_CustomCommand", newUserCustomAction.Name);
                 Assert.AreEqual("TESTING", newUserCustomAction.Description);
+                Assert.IsTrue(newUserCustomAction.Rights.Has(PermissionKind.AddAndCustomizePages));
 
                 await newUserCustomAction.DeleteAsync();
             }
@@ -300,6 +336,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var basePermissions = new BasePermissions();
+                basePermissions.Set(PermissionKind.AddAndCustomizePages);
                 IUserCustomAction newUserCustomAction = await context.Web.UserCustomActions.AddAsync(new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ListViewCommandSet.ContextMenu",
@@ -310,7 +348,8 @@ namespace PnP.Core.Test.SharePoint
                     Title = "Custom Command",
                     RegistrationType = UserCustomActionRegistrationType.List,
                     RegistrationId = "101",
-                    Description = "TESTING"
+                    Description = "TESTING",
+                    Rights = basePermissions
                 });
 
                 // Test the created object
@@ -322,6 +361,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Custom Command", newUserCustomAction.Title);
                 Assert.AreEqual("UCA_CustomCommand", newUserCustomAction.Name);
                 Assert.AreEqual("TESTING", newUserCustomAction.Description);
+                Assert.IsTrue(newUserCustomAction.Rights.Has(PermissionKind.AddAndCustomizePages));
 
                 await newUserCustomAction.DeleteAsync();
             }
@@ -333,6 +373,8 @@ namespace PnP.Core.Test.SharePoint
             //TestCommon.Instance.Mocking = false;
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
             {
+                var basePermissions = new BasePermissions();
+                basePermissions.Set(PermissionKind.AddAndCustomizePages);
                 IUserCustomAction newUserCustomAction = await context.Web.UserCustomActions.AddAsync(new AddUserCustomActionOptions()
                 {
                     Location = "ClientSideExtension.ListViewCommandSet.CommandBar",
@@ -343,7 +385,8 @@ namespace PnP.Core.Test.SharePoint
                     Title = "Custom Command",
                     RegistrationType = UserCustomActionRegistrationType.List,
                     RegistrationId = "101",
-                    Description = "TESTING"
+                    Description = "TESTING",
+                    Rights = basePermissions
                 });
 
                 // Test the created object
@@ -355,6 +398,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual("Custom Command", newUserCustomAction.Title);
                 Assert.AreEqual("UCA_CustomCommand", newUserCustomAction.Name);
                 Assert.AreEqual("TESTING", newUserCustomAction.Description);
+                Assert.IsTrue(newUserCustomAction.Rights.Has(PermissionKind.AddAndCustomizePages));
 
                 await newUserCustomAction.DeleteAsync();
             }
@@ -417,6 +461,7 @@ namespace PnP.Core.Test.SharePoint
                 foundCustomAction.Title = $"{customActionName}_UPDATED";
                 foundCustomAction.Sequence = 200;
                 foundCustomAction.Description = "UPDATED DESCRIPTION";
+                foundCustomAction.Rights.Set(PermissionKind.ApproveItems); // not in the default set which has been added during the creation of the actions
                 await foundCustomAction.UpdateAsync();
             }
 
@@ -433,6 +478,7 @@ namespace PnP.Core.Test.SharePoint
                 Assert.AreEqual($"{customActionName}_UPDATED", foundCustomAction.Title);
                 Assert.AreEqual(200, foundCustomAction.Sequence);
                 Assert.AreEqual("UPDATED DESCRIPTION", foundCustomAction.Description);
+                Assert.IsTrue(foundCustomAction.Rights.Has(PermissionKind.ApproveItems));
             }
 
             await TestAssets.CleanupTestUserCustomActionAsync(3, $"{customActionName}_UPDATED");
@@ -460,7 +506,6 @@ namespace PnP.Core.Test.SharePoint
             using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
             {
                 IWeb web = await context.Web.GetAsync(p => p.UserCustomActions);
-
 
                 IUserCustomAction foundCustomAction = web.UserCustomActions.FirstOrDefault(uca => uca.Id == customActionId);
                 Assert.IsNull(foundCustomAction);

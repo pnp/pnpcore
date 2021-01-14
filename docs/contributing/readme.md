@@ -177,7 +177,7 @@ The public model is built via public interfaces. Below sample shows the public m
 /// Public interface to define a collection of List objects of SharePoint Online
 /// </summary>
 [ConcreteType(typeof(ListCollection))]
-public interface IListCollection : IDataModelCollection<IList>, IQueryable<IList>, ISupportPaging<IList>
+public interface IListCollection : IDataModelCollection<IList>, IQueryable<IList>, ISupportPaging<IList>, IDataModelCollectionDeleteByGuidId
 {
     /// <summary>
     /// Adds a new list
@@ -208,6 +208,7 @@ Each public model interface for a Collection class:
 - Always implements the `IDataModelCollection<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample)
 - Optionally implements the `IQueryable<TModel>` interface where `TModel` is the actual interface (e.g. `IList` in above sample) whenever the model can be queried using linq queries
 - Optionally implements the `ISupportPaging<TModel>` interface whenever the data in the collection can be retrieved from the server via paging
+- Optionally implements either the `IDataModelCollectionDeleteByGuidId`, `IDataModelCollectionDeleteByIntegerId` or `IDataModelCollectionDeleteByStringId` interface matching the data type of the collection model's key if you want to offer a `DeleteById` method on the model collection. You should only do this if you've also implemented the `IDataModelDelete` on the collection's model
 
 Optionally a collection interface defines methods which add behavior to the collection.
 

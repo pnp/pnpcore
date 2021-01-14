@@ -20,7 +20,7 @@ This is a community effort, hence we cannot guarantee below roadmap but rest ass
 
 - Preview 3: September 2020 (shipped)
 - Beta 1: November 2020 (shipped)
-- Beta 2: January 2021
+- Beta 2: January 2021 (shipped)
 - V1: February 2021
 
 ## Frequently Asked Questions

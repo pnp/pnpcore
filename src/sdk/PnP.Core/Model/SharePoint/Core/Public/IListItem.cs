@@ -1,5 +1,7 @@
 ﻿using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -7,8 +9,196 @@ namespace PnP.Core.Model.SharePoint
     /// Public interface to define a SharePoint Online list item
     /// </summary>
     [ConcreteType(typeof(ListItem))]
-    public interface IListItem : IDataModel<IListItem>, IDataModelGet<IListItem>, IListItemBase, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel
+    public interface IListItem : IDataModel<IListItem>, IDataModelGet<IListItem>, IDataModelUpdate, IDataModelDelete, IExpandoDataModel, IQueryableDataModel
     {
+
+        /// <summary>
+        /// Id of the list item
+        /// </summary>
+        public int Id { get; }
+
+        /// <summary>
+        /// Title value of the list item
+        /// </summary>
+        public string Title { get; set; }
+
+        #region Extension methods
+
+        #region SystemUpdate
+
+        /// <summary>
+        /// Performs a system update of the list item
+        /// </summary>
+        public Task SystemUpdateAsync();
+
+        /// <summary>
+        /// Performs a system update of the list item
+        /// </summary>
+        public void SystemUpdate();
+
+        /// <summary>
+        /// Performs a system update of the list item
+        /// </summary>
+        public Task SystemUpdateBatchAsync();
+
+        /// <summary>
+        /// Performs a system update of the list item
+        /// </summary>
+        public void SystemUpdateBatch();
+
+        /// <summary>
+        /// Performs a system update of the list item
+        /// </summary>
+        /// <param name="batch">Batch to add the systemupdate request to</param>
+        public Task SystemUpdateBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Performs a system update of the list item
+        /// </summary>
+        /// <param name="batch">Batch to add the systemupdate request to</param>
+        public void SystemUpdateBatch(Batch batch);
+
+        #endregion
+
+        #region UpdateOverwriteVersion
+
+        /// <summary>
+        /// Performs a UpdateOverwriteVersion of the list item
+        /// </summary>
+        public Task UpdateOverwriteVersionAsync();
+
+        /// <summary>
+        /// Performs a UpdateOverwriteVersion of the list item
+        /// </summary>
+        public void UpdateOverwriteVersion();
+
+        /// <summary>
+        /// Performs a UpdateOverwriteVersion of the list item
+        /// </summary>
+        public Task UpdateOverwriteVersionBatchAsync();
+
+        /// <summary>
+        /// Performs a UpdateOverwriteVersion of the list item
+        /// </summary>
+        public void UpdateOverwriteVersionBatch();
+
+        /// <summary>
+        /// Performs a UpdateOverwriteVersion of the list item
+        /// </summary>
+        /// <param name="batch">Batch to add the UpdateOverwriteVersion request to</param>
+        public Task UpdateOverwriteVersionBatchAsync(Batch batch);
+
+        /// <summary>
+        /// Performs a UpdateOverwriteVersion of the list item
+        /// </summary>
+        /// <param name="batch">Batch to add the UpdateOverwriteVersion request to</param>
+        public void UpdateOverwriteVersionBatch(Batch batch);
+
+        #endregion
+
+        #region Comments handling
+        /// <summary>
+        /// Are comments disabled for this <see cref="IListItem"/>?
+        /// </summary>
+        /// <returns>True if disabled, false otherwise</returns>
+        public Task<bool> AreCommentsDisabledAsync();
+
+        /// <summary>
+        /// Are comments disabled for this <see cref="IListItem"/>?
+        /// </summary>
+        /// <returns>True if disabled, false otherwise</returns>
+        public bool AreCommentsDisabled();
+
+        /// <summary>
+        /// Enable/Disable comments for this list item
+        /// </summary>
+        /// <param name="commentsDisabled">Do comments need to enabled or disabled</param>
+        /// <returns></returns>
+        public Task SetCommentsDisabledAsync(bool commentsDisabled);
+
+        /// <summary>
+        /// Enable/Disable comments for this list item
+        /// </summary>
+        /// <param name="commentsDisabled">Do comments need to enabled or disabled</param>
+        /// <returns></returns>
+        public void SetCommentsDisabled(bool commentsDisabled);
+
+        #endregion
+
+        #region ComplianceTag / Label handling
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
+        /// <returns></returns>
+        public void SetComplianceTag(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
+        /// <returns></returns>
+        public Task SetComplianceTagAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
+        /// <returns></returns>
+        public void SetComplianceTagBatch(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
+        /// <returns></returns>
+        public Task SetComplianceTagBatchAsync(string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
+        /// <returns></returns>
+        public void SetComplianceTagBatch(Batch batch, string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        /// <summary>
+        /// Sets a compliancetag / retention label for this list item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <param name="complianceTag">The tag/label to set for this list item</param>
+        /// <param name="isTagPolicyHold">Whether the tag is hold</param>
+        /// <param name="isTagPolicyRecord">Whether the tag is record</param>
+        /// <param name="isEventBasedTag">Whether the tag is Event based, this is not used</param>
+        /// <param name="isTagSuperLock">Whether the tag is Sec 17 tag,no allow change even for site admin</param>
+        /// <returns></returns>
+        public Task SetComplianceTagBatchAsync(Batch batch, string complianceTag, bool isTagPolicyHold, bool isTagPolicyRecord, bool isEventBasedTag, bool isTagSuperLock);
+
+        #endregion
+
+        #region New field value
+
         /// <summary>
         /// Creates a new <see cref="IFieldUrlValue"/> object
         /// </summary>
@@ -59,6 +249,51 @@ namespace PnP.Core.Model.SharePoint
         /// <param name="parent">List item values collection that's being updated by this collection</param>
         /// <returns></returns>
         public IFieldValueCollection NewFieldValueCollection(IField fieldToUpdate, TransientDictionary parent);
+
+        #endregion
+
+        #region Recycle
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <returns></returns>
+        public Guid Recycle();
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <returns></returns>
+        public Task<Guid> RecycleAsync();
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <returns></returns>
+        public void RecycleBatch();
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <returns></returns>
+        public Task RecycleBatchAsync();
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns></returns>
+        public void RecycleBatch(Batch batch);
+
+        /// <summary>
+        /// Recycle the current item
+        /// </summary>
+        /// <param name="batch">Batch to add the request to</param>
+        /// <returns></returns>
+        public Task RecycleBatchAsync(Batch batch);
+        #endregion
+
+        #endregion
 
     }
 }

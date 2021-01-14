@@ -19,8 +19,10 @@ namespace PnP.Core.Services
     /// </summary>
     internal class BatchClient
     {
+#if DEBUG
         // Simple counter used to construct the batch key used for test mocking
         private int testUseCounter;
+#endif
 
         // Handles sending telemetry events
         private readonly TelemetryManager telemetryManager;
@@ -28,9 +30,9 @@ namespace PnP.Core.Services
         // Collection of current batches
         private readonly Dictionary<Guid, Batch> batches = new Dictionary<Guid, Batch>();
 
-        #region Embedded classes
+#region Embedded classes
 
-        #region Classes used for Graph batch (de)serialization
+#region Classes used for Graph batch (de)serialization
 
         internal class GraphBatchRequest
         {
@@ -67,9 +69,9 @@ namespace PnP.Core.Services
             public IList<GraphBatchResponse> Responses { get; set; } = new List<GraphBatchResponse>();
         }
 
-        #endregion
+#endregion
 
-        #region Classes used to support REST batch handling
+#region Classes used to support REST batch handling
 
         internal class SPORestBatch
         {
@@ -83,9 +85,9 @@ namespace PnP.Core.Services
             public Uri Site { get; set; }
         }
 
-        #endregion
+#endregion
 
-        #region Classes used to support CSOM batch handling
+#region Classes used to support CSOM batch handling
 
         internal class CsomBatch
         {
@@ -99,7 +101,7 @@ namespace PnP.Core.Services
             public Uri Site { get; set; }
         }
 
-        #endregion
+#endregion
 
 
         internal class BatchResultMerge
@@ -113,7 +115,7 @@ namespace PnP.Core.Services
             internal List<BatchRequest> Requests { get; set; } = new List<BatchRequest>();
         }
 
-        #endregion
+#endregion
 
         /// <summary>
         /// Constructor
@@ -226,7 +228,7 @@ namespace PnP.Core.Services
         /// </summary>
         /// <param name="batch">Batch to execute</param>
         /// <returns></returns>
-        internal async Task ExecuteBatch(Batch batch)
+        internal async Task<List<BatchResult>> ExecuteBatch(Batch batch)
         {
             // Before we start running this new batch let's 
             // clean previous batch execution data
@@ -235,8 +237,11 @@ namespace PnP.Core.Services
             // Batch can be empty, so bail out
             if (batch.Requests.Count == 0)
             {
-                return;
+                return batch.Results;
             }
+
+            // Clear batch result collection
+            batch.Results.Clear();
 
             // Remove duplicate batch requests
             DedupBatchRequests(batch);
@@ -275,6 +280,11 @@ namespace PnP.Core.Services
                         await ExecuteSharePointRestBatchAsync(spoRestBatch).ConfigureAwait(false);
                         await ExecuteMicrosoftGraphBatchAsync(graphBatch).ConfigureAwait(false);
                         await ExecuteCsomBatchAsync(csomBatch).ConfigureAwait(false);
+
+                        // Aggregate batch results from the executed batches
+                        batch.Results.AddRange(spoRestBatch.Results);
+                        batch.Results.AddRange(graphBatch.Results);
+                        batch.Results.AddRange(csomBatch.Results);
                     }
                 }
                 else
@@ -297,11 +307,13 @@ namespace PnP.Core.Services
                 // Getting entities can result in duplicate entities (e.g. 2 lists when getting the same list twice in a single batch)
                 // Adding entities can result in an entity in the model that does not have the proper key value set (as that value is only retrievable after the add in SharePoint)
                 // Deleting entities can result in an entity in the model that also should have been deleted
-                MergeBatchResultsWithModel(batch);
+                MergeBatchResultsWithModel(batch);                
             }
+
+            return batch.Results;
         }
 
-        #region Graph batching
+#region Graph batching
 
         private static List<Batch> MicrosoftGraphBatchSplitting(Batch batch)
         {
@@ -316,7 +328,11 @@ namespace PnP.Core.Services
 
             int counter = 0;
             int order = 0;
-            Batch currentBatch = new Batch();
+            Batch currentBatch = new Batch()
+            {
+                ThrowOnError = batch.ThrowOnError
+            };
+
             foreach (var request in batch.Requests.OrderBy(p => p.Value.Order))
             {
                 currentBatch.Requests.Add(order, request.Value);
@@ -327,7 +343,10 @@ namespace PnP.Core.Services
                 {
                     order = 0;
                     batches.Add(currentBatch);
-                    currentBatch = new Batch();
+                    currentBatch = new Batch()
+                    {
+                        ThrowOnError = batch.ThrowOnError
+                    };
                 }
             }
 
@@ -569,17 +588,28 @@ namespace PnP.Core.Services
                             // If one of the requests in the batch failed then throw an exception
                             if (!HttpRequestSucceeded(graphBatchResponse.Status))
                             {
-                                throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)graphBatchResponse.Status, bodyContent);
-                            }
-                            // All was good, connect response to the original request
-                            batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status, graphBatchResponse.Headers);
-
-                            // Commit succesful updates in our model
-                            if (batchRequest.Method == new HttpMethod("PATCH") || batchRequest.ApiCall.Commit)
-                            {
-                                if (batchRequest.Model is TransientObject)
+                                if (batch.ThrowOnError)
                                 {
-                                    batchRequest.Model.Commit();
+                                    throw new MicrosoftGraphServiceException(ErrorType.GraphServiceError, (int)graphBatchResponse.Status, bodyContent);
+                                }
+                                else
+                                {
+                                    batch.AddBatchResult(batchRequest, graphBatchResponse.Status, bodyContent.ToString(),
+                                                         new MicrosoftGraphError(ErrorType.GraphServiceError, (int)graphBatchResponse.Status, bodyContent));
+                                }
+                            }
+                            else
+                            {
+                                // All was good, connect response to the original request
+                                batchRequest.AddResponse(bodyContent.ToString(), graphBatchResponse.Status, graphBatchResponse.Headers);
+
+                                // Commit succesful updates in our model
+                                if (batchRequest.Method == new HttpMethod("PATCH") || batchRequest.ApiCall.Commit)
+                                {
+                                    if (batchRequest.Model is TransientObject)
+                                    {
+                                        batchRequest.Model.Commit();
+                                    }
                                 }
                             }
                         }
@@ -678,9 +708,9 @@ namespace PnP.Core.Services
             return new Tuple<string, string>(stringContent, batchKey.ToString());
         }
 
-        #endregion
+#endregion
 
-        #region SharePoint REST batching
+#region SharePoint REST batching
 
         private static List<SPORestBatch> SharePointRestBatchSplitting(Batch batch)
         {
@@ -699,6 +729,7 @@ namespace PnP.Core.Services
                     {
                         Batch = new Batch()
                         {
+                            ThrowOnError = batch.ThrowOnError
                         }
                     };
 
@@ -731,6 +762,7 @@ namespace PnP.Core.Services
             {
                 Batch = new Batch()
                 {
+                    ThrowOnError = batch.Batch.ThrowOnError
                 }
             };
 
@@ -748,6 +780,7 @@ namespace PnP.Core.Services
                     {
                         Batch = new Batch()
                         {
+                            ThrowOnError = batch.Batch.ThrowOnError
                         }
                     };
                 }
@@ -863,8 +896,14 @@ namespace PnP.Core.Services
 
                         // Mark batch as executed
                         splitRestBatch.Batch.Executed = true;
+
+                        // Copy the results collection to the upper batch
+                        restBatch.Batch.Results.AddRange(splitRestBatch.Batch.Results);
                     }
                 }
+
+                // Copy the results collection to the upper batch
+                batch.Results.AddRange(restBatch.Batch.Results);
             }
 
             // Mark the original (non split) batch as complete
@@ -1005,7 +1044,7 @@ namespace PnP.Core.Services
         private static void ProcessSharePointRestBatchResponseContent(Batch batch, string batchResponse)
         {
             var responseLines = batchResponse.Split(new char[] { '\n' });
-            int counter = 0;
+            int counter = -1;
             var httpStatusCode = HttpStatusCode.Continue;
 
             bool responseContentOpen = false;
@@ -1024,33 +1063,47 @@ namespace PnP.Core.Services
 
                         if (!HttpRequestSucceeded(httpStatusCode))
                         {
-                            // Todo: parsing json in line to provide a more structured error message + add to logging
-                            throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)httpStatusCode, responseContent.ToString());
-                        }
-
-                        if (httpStatusCode == HttpStatusCode.NoContent)
-                        {
-                            currentBatchRequest.AddResponse("", httpStatusCode);
+                            if (batch.ThrowOnError)
+                            {
+                                // Todo: parsing json in line to provide a more structured error message + add to logging
+                                throw new SharePointRestServiceException(ErrorType.SharePointRestServiceError, (int)httpStatusCode, responseContent.ToString());
+                            }
+                            else
+                            {
+                                // Store the batch error
+                                batch.AddBatchResult(currentBatchRequest,
+                                                     httpStatusCode,
+                                                     responseContent.ToString(),
+                                                     new SharePointRestError(ErrorType.SharePointRestServiceError, (int)httpStatusCode, responseContent.ToString()));
+                            }
                         }
                         else
                         {
-                            currentBatchRequest.AddResponse(responseContent.ToString(), httpStatusCode);
-                        }
-
-                        // Commit succesful updates in our model
-                        if (currentBatchRequest.Method == new HttpMethod("PATCH") || currentBatchRequest.ApiCall.Commit)
-                        {
-                            if (currentBatchRequest.Model is TransientObject)
+                            if (httpStatusCode == HttpStatusCode.NoContent)
                             {
-                                currentBatchRequest.Model.Commit();
+                                currentBatchRequest.AddResponse("", httpStatusCode);
+                            }
+                            else
+                            {
+                                currentBatchRequest.AddResponse(responseContent.ToString(), httpStatusCode);
+                            }
+
+                            // Commit succesful updates in our model
+                            if (currentBatchRequest.Method == new HttpMethod("PATCH") || currentBatchRequest.ApiCall.Commit)
+                            {
+                                if (currentBatchRequest.Model is TransientObject)
+                                {
+                                    currentBatchRequest.Model.Commit();
+                                }
                             }
                         }
 
-                        counter++;
                         httpStatusCode = 0;
                         responseContentOpen = false;
                         responseContent = new StringBuilder();
                     }
+
+                    counter++;
                 }
                 // Response status code
                 else if (line.StartsWith("HTTP/1.1 "))
@@ -1081,9 +1134,9 @@ namespace PnP.Core.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region SharePoint REST interactive calls
+#region SharePoint REST interactive calls
         private async Task ExecuteSharePointRestInteractiveAsync(Batch batch)
         {
             var restRequest = batch.Requests.First().Value;
@@ -1304,9 +1357,9 @@ namespace PnP.Core.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region CSOM batching
+#region CSOM batching
         /// <summary>
         /// Execute a batch with CSOM requests.
         /// See https://docs.microsoft.com/en-us/openspecs/sharepoint_protocols/ms-csom/fd645da2-fa28-4daa-b3cd-8f4e506df117 for the CSOM protocol specs
@@ -1329,8 +1382,8 @@ namespace PnP.Core.Services
             {
                 // Each csom batch only contains one request
                 string requestBody = csomBatch.Batch.Requests.First().Value.ApiCall.XmlBody;
-                string requestKey = "";
 #if DEBUG
+                string requestKey = "";
                 if (PnPContext.Mode != TestMode.Default)
                 {
                     requestKey = $"{testUseCounter}@@GET|dummy";
@@ -1444,8 +1497,17 @@ namespace PnP.Core.Services
                         var errorInfo = firstElement.GetProperty("ErrorInfo");
                         if (errorInfo.ValueKind != JsonValueKind.Null)
                         {
-                            // Oops, something went wrong
-                            throw new CsomServiceException(ErrorType.CsomServiceError, (int)statusCode, firstElement);
+                            if (csomBatch.Batch.ThrowOnError)
+                            {
+                                // Oops, something went wrong
+                                throw new CsomServiceException(ErrorType.CsomServiceError, (int)statusCode, firstElement);
+                            }
+                            else
+                            {
+                                csomBatch.Batch.AddBatchResult(csomBatch.Batch.Requests.First().Value,
+                                                              statusCode, firstElement.ToString(),
+                                                              new CsomError(ErrorType.CsomServiceError, (int)statusCode, firstElement));
+                            }
                         }
                     }
 
@@ -1482,6 +1544,7 @@ namespace PnP.Core.Services
                 {
                     Batch = new Batch()
                     {
+                        ThrowOnError = batch.ThrowOnError
                     }
                 };
 
@@ -1495,7 +1558,7 @@ namespace PnP.Core.Services
             return batches;
         }
 
-        #endregion
+#endregion
 
         /// <summary>
         /// Checks if a batch contains an API call that still has unresolved tokens...no point in sending the request at that point
@@ -1521,9 +1584,18 @@ namespace PnP.Core.Services
         /// <returns>A rest batch and graph batch</returns>
         private static Tuple<Batch, Batch, Batch> SplitIntoBatchesPerApiType(Batch input)
         {
-            Batch restBatch = new Batch();
-            Batch graphBatch = new Batch();
-            Batch csomBatch = new Batch();
+            Batch restBatch = new Batch()
+            {
+                ThrowOnError = input.ThrowOnError
+            };
+            Batch graphBatch = new Batch()
+            {
+                ThrowOnError = input.ThrowOnError
+            };
+            Batch csomBatch = new Batch()
+            {
+                ThrowOnError = input.ThrowOnError
+            };
 
             foreach (var request in input.Requests)
             {
@@ -1642,7 +1714,7 @@ namespace PnP.Core.Services
             }
 
             // Mark deleted objects as deleted and remove from their respective parent collection
-            foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Delete))
+            foreach (var request in batch.Requests.Values.Where(p => p.Method == HttpMethod.Delete || p.ApiCall.RemoveFromModel))
             {
                 request.Model.RemoveFromParentCollection();
             }

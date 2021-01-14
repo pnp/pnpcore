@@ -92,7 +92,7 @@ All model collection classes need to link their concrete type (so the implementa
 
 ```csharp
 [ConcreteType(typeof(TeamChannelCollection))]
-public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCollection<ITeamChannel>, ISupportPaging<ITeamChannel>
+public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCollection<ITeamChannel>, ISupportPaging<ITeamChannel>, IDataModelCollectionDeleteByStringId
 {
     // Omitted for brevity
 }
@@ -121,7 +121,7 @@ Below code snippets show the above three concepts. First one shows the collectio
 /// Public interface to define a collection of Team Channels
 /// </summary>
 [ConcreteType(typeof(TeamChannelCollection))]
-public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCollection<ITeamChannel>, ISupportPaging<ITeamChannel>
+public interface ITeamChannelCollection : IQueryable<ITeamChannel>, IDataModelCollection<ITeamChannel>, ISupportPaging<ITeamChannel>, IDataModelCollectionDeleteByStringId
 {
     /// <summary>
     /// Adds a new channel
