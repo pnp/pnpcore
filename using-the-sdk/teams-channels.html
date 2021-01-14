@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html lang="en">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Working with Teams: Channels | PnP Core SDK </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Working with Teams: Channels | PnP Core SDK ">
+    <meta name="generator" content="docfx 2.56.5.0">
+    <meta name="description" content="The PnP Core SDK is an SDK designed to work against Microsoft 365. Its aim is to provide a unified object model to work with the whole Microsoft 365 ecosystem. ">
+    <link rel="shortcut icon" href="https://c.s-microsoft.com/favicon.ico?v2">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    <meta property="docfx:newtab" content="true">
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <label class="glyphicon glyphicon-search" for="search-query"></label>
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+                  <div class="contribution-panel mobile-hide pull-right">
+                      <a href="https://github.com/pnp/pnpcore/blob/dev/docs/using-the-sdk/teams-channels.md/#L1" title="Improve this Doc" class="improve-doc-lg"><i class="glyphicon glyphicon-pencil"></i></a>
+                  </div>
+                    <h1 id="working-with-teams-channels">Working with Teams: Channels</h1>
+
+<p>Within Teams, you have one or more channels. This page will show you how you can Get, Create, Update and Delete channels.</p>
+<h2 id="creating-context">Creating Context</h2>
+<p>In this article, you'll see a lot of <code>context</code> use: in this case this is a <code>PnPContext</code> which was obtained via the <code>PnPContextFactory</code> as explained in the <a href="readme.html">overview article</a> and show below:</p>
+<pre><code class="lang-csharp">using (var context = await pnpContextFactory.CreateAsync(&quot;SiteToWorkWith&quot;))
+{
+    // See next chapter on how to use the PnPContext for working with Teams
+}
+</code></pre>
+<h2 id="getting-channels">Getting Channels</h2>
+<p>Channels is a collection part of the ITeam interface, so when you get a team, you can include the channels on the request.</p>
+<pre><code class="lang-csharp">// Get the Team
+ var team = await context.Team.GetAsync(o =&gt; o.Channels);
+
+// Get the Channels
+ var channels = team.Channels;
+</code></pre>
+<h2 id="getting-channels-with-specific-properties">Getting Channels with specific properties</h2>
+<p>When you want to load the Team and Channels with specific properties populated, you can specify which properties to include by:</p>
+<pre><code class="lang-csharp">// Get the Team
+ var team = await context.Team.GetAsync(
+    p =&gt; p.Channels.LoadProperties(p =&gt; p.DisplayName));
+</code></pre>
+<h3 id="getting-a-specific-channel">Getting a specific Channel</h3>
+<p>If you would like to get a specific channel you can use the extension method GetByDisplayNameAsync to get the channel by name.</p>
+<pre><code class="lang-csharp">// Get the Team
+ var team = await context.Team.GetAsync(o =&gt; o.Channels);
+
+// Get the Channel 
+var generalChannel = await team.Channels.GetByDisplayNameAsync(&quot;General&quot;);
+</code></pre>
+<h3 id="getting-the-default-channel">Getting the default channel</h3>
+<p>Alternatively, if you are looking for the default channel within a Team, you can retrieve this with the following:</p>
+<pre><code class="lang-csharp">// Get the Team
+var team = await context.Team.GetAsync(o =&gt; o.PrimaryChannel);
+ 
+// Get the primary channel
+var primaryChannel = await team.PrimaryChannel;
+</code></pre>
+<h2 id="creating-channels">Creating Channels</h2>
+<p>To add a new channel, call the Add method, specifying a name and optionally a description.</p>
+<pre><code class="lang-csharp">var team = await context.Team.GetAsync(p =&gt; p.Channels);
+
+// Get the Team
+string channelName = $&quot;My Cool New Channel&quot;;
+
+// Check if the channel exists
+var channelFound = team.Channels.FirstOrDefault(p =&gt; p.DisplayName == channelName);
+if (channelFound == null)
+{
+    // Add a new channel
+    channelFound = await team.Channels.AddAsync(channelName, &quot;This is my cool new Channel, check this out!&quot;);
+}
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>When working with channels these are some tips to help:</p>
+<ul>
+<li>Channel Names must be unique</li>
+<li>Check if the channel already exists, to avoid trying to add a Channel with an existing name</li>
+</ul>
+</div>
+<h2 id="updating-channels">Updating Channels</h2>
+<p>You can update the channel by changing the properties you wish update and call the update method:</p>
+<pre><code class="lang-csharp">
+// Get the Team
+var team = await context.Team.GetAsync(p =&gt; p.Channels);
+
+string channelName = $&quot;My Cool New Channel&quot;;
+
+// Get the channel you wish to update
+var channelToUpdate = team.Channels.FirstOrDefault(p =&gt; p.DisplayName == channelName);
+
+if(channelToUpdate != default){
+
+    string newChannelDescription = $&quot;This cool channel is being updated!&quot;;
+    channelToUpdate.Description = newChannelDescription;
+    
+    // Perform the update to the channel    
+    await channelToUpdate.UpdateAsync();
+}
+</code></pre>
+<h2 id="deleting-channels">Deleting Channels</h2>
+<p>You can delete the channel with the following example:</p>
+<pre><code class="lang-csharp">var team = await context.Team.GetAsync(p =&gt; p.Channels);
+
+string channelName = $&quot;My Cool New Channel&quot;;
+
+// Get the channel you wish to delete
+var channelToDelete = team.Channels.FirstOrDefault(p =&gt; p.DisplayName == channelName);
+
+if(channelToDelete != default){
+    
+    // Perform the delete operation
+    await channelToUpdate.DeleteAsync();
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You cannot delete the General Channel, this operation is not supported by the service.
+Additionally, channels are soft-deleted for 30 days, before which counts towards the total limit of channels per Team, for further details on the limits, please refer to <a href="https://docs.microsoft.com/en-us/microsoftteams/limits-specifications-teams">Limits and specifications for Microsoft Teams</a></p>
+</div>
+</article>
+          </div>
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              </nav>
+            </div>
+          </div>        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>PnP Core SDK<br>Generated by <strong><a href='https://dotnet.github.io/docfx' alt='Doc FX Website'>DocFX</a></strong> with <strong><a href='https://ovasquez.github.io/docfx-material' alt='DocFx Material Theme'>Material UI</a></strong></span>
+            
+            <img src="https://telemetry.sharepointpnp.com/@pnp.github.io/index/" alt="spacer">
+          </div>
+        </div>
+      </footer>    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>  </body>
+</html>

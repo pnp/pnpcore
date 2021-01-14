@@ -4527,6 +4527,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/fragments/creating-context.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/fragments/creating-context.html",
+          "hash": "1DV6LFHgrSs54KIMy/to8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "using-the-sdk/listitems-fields.md",
       "output": {
         ".html": {
@@ -4670,12 +4682,72 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/teams-archiving.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/teams-archiving.html",
+          "hash": "oJru09OlMqqOSm7ihXc9ew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/teams-channel-chat.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/teams-channel-chat.html",
+          "hash": "44aslLcoMXLYhcWEuoWUVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/teams-channel-tabs.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/teams-channel-tabs.html",
+          "hash": "KKtAHKu8AL3e704DhDcFfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/teams-channels.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/teams-channels.html",
+          "hash": "Xe7X8gCzbhgN+Afrf6gYcw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "using-the-sdk/teams-intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "using-the-sdk/teams-intro.html",
+          "hash": "8O6QZYjYUgvgvqTBPo8rBA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Toc",
       "source_relative_path": "using-the-sdk/toc.yml",
       "output": {
         ".html": {
           "relative_path": "using-the-sdk/toc.html",
-          "hash": "DSsC8Y+xmb/ANTUl5opgNA=="
+          "hash": "9F6t9x0GOEPy+pmDmJhzQQ=="
         }
       },
       "is_incremental": false,
@@ -4708,7 +4780,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 50,
+          "total_file_count": 56,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
