@@ -39,6 +39,8 @@ channel = await channel.GetAsync(o => o.Tabs);
 
 var siteDocLib = $"{context.Uri.OriginalString}/Shared%20Documents";
 var tabName = "Important Documents";
+
+// Perform the add tab operation 
 var newDocTab = channel.Tabs.AddDocumentLibraryTabAsync(tabName, new Uri(siteDocLib));
 
 ```
@@ -60,6 +62,8 @@ var tab = channel.Tabs.FirstOrDefault(i => i.DisplayName == tabName);
 
 // Update the display name of the tab
 tab.DisplayName = "Most Important Documents";
+
+// Perform the update operation
 await tab.Update();
 
 ```
@@ -79,6 +83,8 @@ var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
 channel = await channel.GetAsync(o => o.Tabs);
 var tab = channel.FirstOfDefault(i=>i.DisplayName == "Important Documents");
 if (tab != default){
+
+    // Perform the delete operation
     await tab.DeleteAsync();
 }
 ```

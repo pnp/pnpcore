@@ -9,7 +9,10 @@ Within Teams, you have one or more channels. This page will show you how you can
 Channels is a collection part of the ITeam interface, so when you get a team, you can include the channels on the request. 
 
 ```csharp
+// Get the Team
  var team = await context.Team.GetAsync(o => o.Channels);
+
+// Get the Channels
  var channels = team.Channels;
 ```
 ## Getting Channels with specific properties
@@ -17,6 +20,7 @@ Channels is a collection part of the ITeam interface, so when you get a team, yo
 When you want to load the Team and Channels with specific properties populated, you can specify which properties to include by:
 
 ```csharp
+// Get the Team
  var team = await context.Team.GetAsync(
     p => p.Channels.LoadProperties(p => p.DisplayName));
 ```
@@ -25,8 +29,11 @@ When you want to load the Team and Channels with specific properties populated, 
 If you would like to get a specific channel you can use the extension method GetByDisplayNameAsync to get the channel by name.
 
 ```csharp
+// Get the Team
  var team = await context.Team.GetAsync(o => o.Channels);
- var generalChannel = await team.Channels.GetByDisplayNameAsync("General");
+
+// Get the Channel 
+var generalChannel = await team.Channels.GetByDisplayNameAsync("General");
 ```
 
 ### Getting the default channel
@@ -34,8 +41,11 @@ If you would like to get a specific channel you can use the extension method Get
 Alternatively, if you are looking for the default channel within a Team, you can retrieve this with the following:
 
 ```csharp
- var team = await context.Team.GetAsync(o => o.PrimaryChannel);
- var primaryChannel = await team.PrimaryChannel;
+// Get the Team
+var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+ 
+// Get the primary channel
+var primaryChannel = await team.PrimaryChannel;
 ```
 
 ## Creating Channels
@@ -45,6 +55,7 @@ To add a new channel, call the Add method, specifying a name and optionally a de
 ```csharp
 var team = await context.Team.GetAsync(p => p.Channels);
 
+// Get the Team
 string channelName = $"My Cool New Channel";
 
 // Check if the channel exists
@@ -67,6 +78,8 @@ if (channelFound == null)
 You can update the channel by changing the properties you wish update and call the update method:
 
 ```csharp
+
+// Get the Team
 var team = await context.Team.GetAsync(p => p.Channels);
 
 string channelName = $"My Cool New Channel";
@@ -79,6 +92,7 @@ if(channelToUpdate != default){
     string newChannelDescription = $"This cool channel is being updated!";
     channelToUpdate.Description = newChannelDescription;
     
+    // Perform the update to the channel    
     await channelToUpdate.UpdateAsync();
 }
 ```
@@ -96,6 +110,8 @@ string channelName = $"My Cool New Channel";
 var channelToDelete = team.Channels.FirstOrDefault(p => p.DisplayName == channelName);
 
 if(channelToDelete != default){
+    
+    // Perform the delete operation
     await channelToUpdate.DeleteAsync();
 }
 ```

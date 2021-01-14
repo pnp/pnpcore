@@ -38,6 +38,8 @@ channel = await channel.GetAsync(o => o.Messages);
 var chatMessages = channel.Messages;
 
 var body = "Hello, I'm posting a message - PnP Rocks!";
+
+// Perform the add operation
 await chatMessages.AddAsync(body);
 
 ```

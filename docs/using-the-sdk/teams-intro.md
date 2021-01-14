@@ -21,6 +21,7 @@ If a Team is not set for the site referenced in the context, you will get an exc
 Each Team has settings to control which features are enabled. The following code shows examples of accessing those:
 
 ```csharp
+// Get the Team
 var team = await context.Team.GetAsync(x => x.FunSettings);
 
 var giphyRating = team.FunSettings.GiphyContentRating;
@@ -40,13 +41,15 @@ To retrieve the other properties, include the property within the expression in 
 You can update the settings of a Team, the following code example shows updating the Fun Settings for a Team, this principle can be used for the other properties.
 
 ```csharp
- var team = await context.Team.GetAsync(x => x.FunSettings);
+// Get the Team
+var team = await context.Team.GetAsync(x => x.FunSettings);
 
 team.FunSettings.GiphyContentRating = TeamGiphyContentRating.Moderate;
 team.FunSettings.AllowStickersAndMemes = true;
 team.FunSettings.AllowCustomMemes = true;
 team.FunSettings.AllowGiphy = true;
 
+// Perform the update to the Team
 await team.UpdateAsync();
 
 ```
