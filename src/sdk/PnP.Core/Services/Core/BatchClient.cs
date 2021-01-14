@@ -19,8 +19,10 @@ namespace PnP.Core.Services
     /// </summary>
     internal class BatchClient
     {
+#if DEBUG
         // Simple counter used to construct the batch key used for test mocking
         private int testUseCounter;
+#endif
 
         // Handles sending telemetry events
         private readonly TelemetryManager telemetryManager;
@@ -28,9 +30,9 @@ namespace PnP.Core.Services
         // Collection of current batches
         private readonly Dictionary<Guid, Batch> batches = new Dictionary<Guid, Batch>();
 
-        #region Embedded classes
+#region Embedded classes
 
-        #region Classes used for Graph batch (de)serialization
+#region Classes used for Graph batch (de)serialization
 
         internal class GraphBatchRequest
         {
@@ -67,9 +69,9 @@ namespace PnP.Core.Services
             public IList<GraphBatchResponse> Responses { get; set; } = new List<GraphBatchResponse>();
         }
 
-        #endregion
+#endregion
 
-        #region Classes used to support REST batch handling
+#region Classes used to support REST batch handling
 
         internal class SPORestBatch
         {
@@ -83,9 +85,9 @@ namespace PnP.Core.Services
             public Uri Site { get; set; }
         }
 
-        #endregion
+#endregion
 
-        #region Classes used to support CSOM batch handling
+#region Classes used to support CSOM batch handling
 
         internal class CsomBatch
         {
@@ -99,7 +101,7 @@ namespace PnP.Core.Services
             public Uri Site { get; set; }
         }
 
-        #endregion
+#endregion
 
 
         internal class BatchResultMerge
@@ -113,7 +115,7 @@ namespace PnP.Core.Services
             internal List<BatchRequest> Requests { get; set; } = new List<BatchRequest>();
         }
 
-        #endregion
+#endregion
 
         /// <summary>
         /// Constructor
@@ -311,7 +313,7 @@ namespace PnP.Core.Services
             return batch.Results;
         }
 
-        #region Graph batching
+#region Graph batching
 
         private static List<Batch> MicrosoftGraphBatchSplitting(Batch batch)
         {
@@ -706,9 +708,9 @@ namespace PnP.Core.Services
             return new Tuple<string, string>(stringContent, batchKey.ToString());
         }
 
-        #endregion
+#endregion
 
-        #region SharePoint REST batching
+#region SharePoint REST batching
 
         private static List<SPORestBatch> SharePointRestBatchSplitting(Batch batch)
         {
@@ -1132,9 +1134,9 @@ namespace PnP.Core.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region SharePoint REST interactive calls
+#region SharePoint REST interactive calls
         private async Task ExecuteSharePointRestInteractiveAsync(Batch batch)
         {
             var restRequest = batch.Requests.First().Value;
@@ -1355,9 +1357,9 @@ namespace PnP.Core.Services
             }
         }
 
-        #endregion
+#endregion
 
-        #region CSOM batching
+#region CSOM batching
         /// <summary>
         /// Execute a batch with CSOM requests.
         /// See https://docs.microsoft.com/en-us/openspecs/sharepoint_protocols/ms-csom/fd645da2-fa28-4daa-b3cd-8f4e506df117 for the CSOM protocol specs
@@ -1380,8 +1382,8 @@ namespace PnP.Core.Services
             {
                 // Each csom batch only contains one request
                 string requestBody = csomBatch.Batch.Requests.First().Value.ApiCall.XmlBody;
-                string requestKey = "";
 #if DEBUG
+                string requestKey = "";
                 if (PnPContext.Mode != TestMode.Default)
                 {
                     requestKey = $"{testUseCounter}@@GET|dummy";
@@ -1556,7 +1558,7 @@ namespace PnP.Core.Services
             return batches;
         }
 
-        #endregion
+#endregion
 
         /// <summary>
         /// Checks if a batch contains an API call that still has unresolved tokens...no point in sending the request at that point
