@@ -30,7 +30,11 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-	  <DefineConstants>TRACE</DefineConstants>
+	  <DefineConstants>TRACE;NETSTANDARD2_0</DefineConstants>
+	</PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net5.0|AnyCPU'">
+	  <DefineConstants>TRACE;NET5_0</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
