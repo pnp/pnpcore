@@ -150,6 +150,34 @@ namespace PnP.Core.Test.Teams
         }
 
         [TestMethod]
+        public void UpdateChannelTabTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = TestCommon.Instance.GetContext(TestCommon.TestSite))
+            {
+                var team = context.Team.Get(o => o.Channels);
+
+                // Get the Channel "General" 
+                var channel = team.Channels.FirstOrDefault(i => i.DisplayName == "General");
+
+                // Load the channel tab collection
+                channel = channel.Get(o => o.Tabs);
+
+                var siteDocLib = $"{context.Uri.OriginalString}/Shared%20Documents";
+                var tabName = "Important Documents";
+                var newDocTab = channel.Tabs.AddDocumentLibraryTab(tabName, new Uri(siteDocLib));
+
+                channel = channel.Get(o => o.Tabs);
+                var tab = channel.Tabs.FirstOrDefault(i => i.DisplayName == tabName);
+                tab.DisplayName = "Most Important Documents";
+                tab.Update();
+
+                // Cleanup
+                tab.Delete();
+            }
+        }
+
+        [TestMethod]
         public void AddChannelDocumentLibSpecificBatchTest()
         {
             //TestCommon.Instance.Mocking = false;
