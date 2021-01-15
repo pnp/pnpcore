@@ -1,5 +1,9 @@
 using PnP.Core.Model.Security;
+using PnP.Core.Services;
 using System;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -29,6 +33,48 @@ namespace PnP.Core.Model.SharePoint
 
         [KeyProperty(nameof(Created))]
         public override object Key { get => Created; set => Created = DateTime.Parse(value.ToString()); }
+        #endregion
+
+        #region Methods
+
+        #region GetContent
+        public async Task<Stream> GetContentAsync(bool streamContent = false)
+        {
+            await EnsurePropertiesAsync(p => p.Url).ConfigureAwait(false);
+
+            string downloadUrl = $"{PnPContext.Uri}/_layouts/15/download.aspx?SourceUrl={Url}";
+
+            var apiCall = new ApiCall(downloadUrl, ApiType.SPORest)
+            {
+                Interactive = true,
+                ExpectBinaryResponse = true,
+                StreamResponse = streamContent
+            };
+
+            var response = await RawRequestAsync(apiCall, HttpMethod.Get).ConfigureAwait(false);
+            return response.BinaryContent;
+        }
+
+        public Stream GetContent(bool streamContent = false)
+        {
+            return GetContentAsync(streamContent).GetAwaiter().GetResult();
+        }
+
+
+        public async Task<byte[]> GetContentBytesAsync()
+        {
+            using (var contentStream = await GetContentAsync().ConfigureAwait(false))
+            {
+                return ((MemoryStream)contentStream).ToArray();
+            }
+        }
+
+        public byte[] GetContentBytes()
+        {
+            return GetContentBytesAsync().GetAwaiter().GetResult();
+        }
+        #endregion
+
         #endregion
     }
 }

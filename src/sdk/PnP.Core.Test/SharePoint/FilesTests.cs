@@ -1993,6 +1993,52 @@ namespace PnP.Core.Test.SharePoint
                 await fileToDownload.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task GetFileVersionContentAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            (string libraryName, string documentName, string documentUrl) = await TestAssets.CreateTestDocumentInDedicatedLibraryAsync(0, parentLibraryEnableVersioning: true, parentLibraryEnableMinorVersions: true);
+
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 1))
+            {
+                IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl);
+                // Create 2 minor versions
+                await testDocument.CheckoutAsync();
+                await testDocument.CheckinAsync();
+                await testDocument.CheckoutAsync();
+                await testDocument.CheckinAsync();
+
+                await testDocument.CheckoutAsync();
+                await testDocument.CheckinAsync("TEST COMMENT", CheckinType.MajorCheckIn);
+            }
+
+            // New context to ensure reload the file
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite, 2))
+            {
+                IFile documentWithVersions = await context.Web.GetFileByServerRelativeUrlAsync(documentUrl, f => f.Versions);
+
+                Assert.IsNotNull(documentWithVersions.Versions);
+                // The versions history contains 2 versions
+                Assert.AreEqual(3, documentWithVersions.Versions.Count());
+                Assert.AreEqual($"_vti_history/1/{libraryName}/{documentName}", documentWithVersions.Versions.ElementAt(0).Url);
+                Assert.AreEqual("0.1", documentWithVersions.Versions.ElementAt(0).VersionLabel);
+                Assert.AreEqual("0.2", documentWithVersions.Versions.ElementAt(1).VersionLabel);
+
+                Assert.AreEqual(3, documentWithVersions.Versions.ElementAt(2).Id);
+                Assert.IsTrue(documentWithVersions.Versions.ElementAt(2).Created != DateTime.MinValue);
+
+                // Download document version content
+                Stream downloadedContentStream = await documentWithVersions.Versions.ElementAt(2).GetContentAsync();
+                downloadedContentStream.Seek(0, SeekOrigin.Begin);
+                // Get string from the content stream
+                string downloadedContent = new StreamReader(downloadedContentStream).ReadToEnd();
+                Assert.IsTrue(!string.IsNullOrEmpty(downloadedContent));
+            }
+
+            await TestAssets.CleanupTestDedicatedListAsync(3);
+        }
+
         #endregion
 
         #region Work with very large files

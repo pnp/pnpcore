@@ -44,3 +44,6 @@ using (var content = System.IO.File.Create("2gb.test.downloaded"))
     }
 }
 ```
+
+> [!Note]
+> The above also applies to downloading older versions of large files, the same GetContent methods exist on the [IFileVersion](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html) model.

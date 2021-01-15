@@ -1,5 +1,7 @@
 using PnP.Core.Model.Security;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -48,5 +50,33 @@ namespace PnP.Core.Model.SharePoint
         /// The <see cref="ISharePointUser"/> that created this version
         /// </summary>
         public ISharePointUser CreatedBy { get; }
+
+        #region GetContent
+        /// <summary>
+        /// Get the content of this file version.
+        /// </summary>
+        /// <param name="streamContent">Already return the content before all bytes are read, needed for large file downloads</param>
+        /// <returns>Stream containing the binary content of the file</returns>
+        Task<Stream> GetContentAsync(bool streamContent = false);
+
+        /// <summary>
+        /// Get the content of this file version.
+        /// </summary>
+        /// <param name="streamContent">Already return the content before all bytes are read, needed for large file downloads</param>
+        /// <returns>Stream containing the binary content of the file</returns>
+        Stream GetContent(bool streamContent = false);
+
+        /// <summary>
+        /// Get the content of this file version.
+        /// </summary>
+        /// <returns>The binary content of the file</returns>
+        Task<byte[]> GetContentBytesAsync();
+
+        /// <summary>
+        /// Get the content of the file version.
+        /// </summary>
+        /// <returns>The binary content of the file</returns>
+        byte[] GetContentBytes();
+        #endregion
     }
 }

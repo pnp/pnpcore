@@ -127,21 +127,6 @@ namespace PnP.Core.Model.SharePoint
         {
             using (var contentStream = await GetContentAsync().ConfigureAwait(false))
             {
-                // In case the response stream become something else than a memory stream
-                // Commented to prevent for now useless overhead
-                //if (contentStream is MemoryStream asMemoryStream)
-                //{
-                //    return asMemoryStream.ToArray();
-                //}
-                //else
-                //{
-                //    using (var memoryStream = new MemoryStream())
-                //    {
-                //        contentStream.Seek(0, SeekOrigin.Begin);
-                //        contentStream.CopyTo(memoryStream);
-                //        return memoryStream.ToArray();
-                //    }
-                //}
                 return ((MemoryStream)contentStream).ToArray();
             }
         }

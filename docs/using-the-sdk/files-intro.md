@@ -221,7 +221,7 @@ await testDocument.MoveToAsync($"{context.Uri.PathAndQuery}/MyDocuments/document
 
 ## Getting file versions
 
-When versioning on a file is enabled a file can have multiple versions and PnP Core SDK can be used to work with the older file versions. Each file version is represented via an [IFileVersion](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html) in an [IFileVersionCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersionCollection.html). Loading file versions can be done by requesting the [Versions property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Versions) of the file.
+When versioning on a file is enabled a file can have multiple versions and PnP Core SDK can be used to work with the older file versions. Each file version is represented via an [IFileVersion](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html) in an [IFileVersionCollection](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersionCollection.html). Loading file versions can be done by requesting the [Versions property](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFile.html#PnP_Core_Model_SharePoint_IFile_Versions) of the file. Once you've an [IFileVersion](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IFileVersion.html) you can also download that specific version of the file by using one of the GetContent methods as shown in the example.
 
 >[!Note]
 > For a file to have versions the library needs to be configured to support major versions and/or minor versions. See the [EnableVersioning](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_EnableVersioning) and [EnableMinorVersions](https://pnp.github.io/pnpcore/api/PnP.Core.Model.SharePoint.IList.html#PnP_Core_Model_SharePoint_IList_EnableMinorVersions) properties on the IList interface.
@@ -234,7 +234,8 @@ IFile testDocument = await context.Web.GetFileByServerRelativeUrlAsync(documentU
 
 foreach(var fileVersion in testDocument.Versions)
 {
-    // Do something with the file version
+    // Download the file version content as stream
+    Stream fileVersionContent = await fileVersion.GetContentAsync();
 }
 ```
 
