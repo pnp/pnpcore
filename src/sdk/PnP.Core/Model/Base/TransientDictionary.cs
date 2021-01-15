@@ -1,7 +1,6 @@
 ﻿using PnP.Core.Model.SharePoint;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PnP.Core.Model
 {
@@ -19,9 +18,23 @@ namespace PnP.Core.Model
         {
             get
             {
-                return this
-                    .Where(i => changes.Contains(i.Key))
-                    .ToDictionary(i => i.Key, i => i.Value);
+                Dictionary<string, object> changedProperties = new Dictionary<string, object>();
+                foreach (KeyValuePair<string, object> value in this)
+                {
+                    if (value.Value is FieldValue fieldValue && fieldValue.HasChanges)
+                    {
+                        changedProperties.Add(value.Key, value.Value);
+                    } 
+                    else if (value.Value is FieldValueCollection fieldValueCollection && fieldValueCollection.GetChangedValues() != null)
+                    {
+                        changedProperties.Add(value.Key, value.Value);
+                    }
+                    else if (changes.Contains(value.Key))
+                    {
+                        changedProperties.Add(value.Key, value.Value);
+                    }
+                }
+                return changedProperties;
             }
         }
 
@@ -86,6 +99,19 @@ namespace PnP.Core.Model
 
         internal virtual void Commit()
         {
+            foreach(var property in base.Values)
+            {
+                // If there are FieldValue or FieldValueCollection properties then they need to be committed as well
+                if (property is FieldValue propertyFieldValue)
+                {
+                    propertyFieldValue.Commit();
+                }
+                else if (property is FieldValueCollection propertyFieldValueCollection)
+                {
+                    propertyFieldValueCollection.Commit();
+                }
+            }
+
             changes.Clear();
         }
 
@@ -143,33 +169,7 @@ namespace PnP.Core.Model
         {
             foreach (var v in values)
             {
-                // Ensure FieldValue have their parent set if not yet done                
-                var field = v.Value;
-                if (field is FieldValue fieldValue)
-                {
-                    if (fieldValue.Parent == null)
-                    {
-                        fieldValue.Parent = this;
-                    }
-                }
-                else if (field is FieldValueCollection fieldValueCollection)
-                {
-                    if (fieldValueCollection.Parent == null)
-                    {
-                        fieldValueCollection.Parent = this;
-                        MarkAsChanged(v.Key);
-                    }
-                }
-
-                SystemAdd(v.Key, field);
-            }
-        }
-
-        internal void MarkAsChanged(string key)
-        {
-            if (!changes.Contains(key))
-            {
-                changes.Add(key);
+                SystemAdd(v.Key, v.Value);
             }
         }
     }

@@ -1610,14 +1610,14 @@ namespace PnP.Core.Model.SharePoint
                 var authorByLineIdField = PagesLibrary.Fields.FirstOrDefault(p => p.InternalName == PageConstants._AuthorByline);
                 if (pageHeader.AuthorByLineId > -1)
                 {
-                    var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField, PageListItem.Values);
+                    var fieldUsers = PageListItem.NewFieldValueCollection(authorByLineIdField);
                     fieldUsers.Values.Add(PageListItem.NewFieldUserValue(authorByLineIdField, pageHeader.AuthorByLineId));
                     PageListItem[PageConstants._AuthorByline] = fieldUsers;
                 }
                 else
                 {
                     // Ensure there's an empty collection set
-                    PageListItem[PageConstants._AuthorByline] = PageListItem.NewFieldValueCollection(authorByLineIdField, PageListItem.Values);
+                    PageListItem[PageConstants._AuthorByline] = PageListItem.NewFieldValueCollection(authorByLineIdField);
                 }
 
                 // Topic header needs to be persisted in a field

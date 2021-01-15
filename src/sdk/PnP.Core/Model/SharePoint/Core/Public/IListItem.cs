@@ -246,9 +246,8 @@ namespace PnP.Core.Model.SharePoint
         /// Creates a new collection to hold <see cref="IFieldValue"/> objects
         /// </summary>
         /// <param name="fieldToUpdate"><see cref="IField"/> representing the field to set</param>
-        /// <param name="parent">List item values collection that's being updated by this collection</param>
         /// <returns></returns>
-        public IFieldValueCollection NewFieldValueCollection(IField fieldToUpdate, TransientDictionary parent);
+        public IFieldValueCollection NewFieldValueCollection(IField fieldToUpdate);
 
         #endregion
 

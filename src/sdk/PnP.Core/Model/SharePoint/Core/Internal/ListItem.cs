@@ -59,6 +59,9 @@ namespace PnP.Core.Model.SharePoint
                                     AddMetadata(PnPConstants.MetaDataRestId, $"{id}");
                                     MetadataSetup();
 
+                                    // Ensure the values are committed to the model when an item is being added
+                                    Values.Commit();
+
                                     // We're currently only interested in the Id property
                                     continue;
                                 }
@@ -256,7 +259,10 @@ namespace PnP.Core.Model.SharePoint
 
             // Prepare the variable to contain the target URL for the update operation
             var updateUrl = await ApiHelper.ParseApiCallAsync(this, $"{itemUri}/ValidateUpdateListItem").ConfigureAwait(false);
-            var api = new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage);
+            var api = new ApiCall(updateUrl, ApiType.SPORest, jsonUpdateMessage)
+            {
+                Commit = true
+            };
             return api;
         }
 
@@ -285,13 +291,15 @@ namespace PnP.Core.Model.SharePoint
 
         private static void BuildValidateUpdateItemPayload(PnPContext context, KeyValuePair<string, object> changedProp, dynamic field)
         {
-            if (changedProp.Value is FieldValue fieldItemValue)
+            // Only include FieldValue properties when they signal they've changed
+            if (changedProp.Value is FieldValue fieldItemValue && fieldItemValue.HasChanges)
             {
                 field.FieldValue = fieldItemValue.ToValidateUpdateItemJson();
             }
             else if (changedProp.Value is FieldValueCollection fieldValueCollection)
             {
-                if (fieldValueCollection.Values.Any())
+                // Only process if there were changes in the field value collection
+                if (fieldValueCollection.GetChangedValues() != null)
                 {
                     if (fieldValueCollection.Field.TypeAsString == "UserMulti")
                     {
@@ -531,7 +539,8 @@ namespace PnP.Core.Model.SharePoint
                         var dictionaryObject = (TransientDictionary)cp.GetValue(this);
                         foreach (KeyValuePair<string, object> changedProp in dictionaryObject.ChangedProperties)
                         {
-                            if (changedProp.Value is FieldValue)
+                            // Only include FieldValue properties when they signal they've changed
+                            if (changedProp.Value is FieldValue changedPropAsFieldValue && changedPropAsFieldValue.HasChanges)
                             {
                                 if (changedProp.Value is FieldLookupValue && (changedProp.Value as FieldLookupValue).LookupId == -1)
                                 {
@@ -549,29 +558,33 @@ namespace PnP.Core.Model.SharePoint
                             else if (changedProp.Value is FieldValueCollection)
                             {
                                 var collection = changedProp.Value as FieldValueCollection;
-
-                                string typeAsString = collection.TypeAsString;
-                                if (string.IsNullOrEmpty(typeAsString))
+                                
+                                // Only persist these fields if there was a change detected in the FieldValueCollection
+                                if (collection.GetChangedValues() != null)
                                 {
-                                    var firstElement = collection.Values.FirstOrDefault();
-                                    if (firstElement is FieldLookupValue)
+                                    string typeAsString = collection.TypeAsString;
+                                    if (string.IsNullOrEmpty(typeAsString))
                                     {
-                                        typeAsString = "LookupMulti";
+                                        var firstElement = collection.Values.FirstOrDefault();
+                                        if (firstElement is FieldLookupValue)
+                                        {
+                                            typeAsString = "LookupMulti";
+                                        }
+                                        else if (firstElement is FieldTaxonomyValue)
+                                        {
+                                            typeAsString = "TaxonomyFieldTypeMulti";
+                                        }
                                     }
-                                    else if (firstElement is FieldTaxonomyValue)
-                                    {
-                                        typeAsString = "TaxonomyFieldTypeMulti";
-                                    }
-                                }
 
-                                if (typeAsString == "LookupMulti" || typeAsString == "Lookup" || typeAsString == "UserMulti")
-                                {
-                                    fieldValues.Append(SetArraySpecialFieldValueXml(changedProp.Key, changedProp.Value as FieldValueCollection, ref counter));
-                                }
-                                else if (typeAsString == "TaxonomyFieldTypeMulti")
-                                {
-                                    fieldValues.Append(SetManagedMetadataMultiValueXml(changedProp.Key, changedProp.Value as FieldValueCollection,
-                                        taxonomyMultiValueObjectPaths, taxonomyMultiValueIdentities, ref counter, ref taxFieldObjectId, ref taxFieldIdentityObjectId));
+                                    if (typeAsString == "LookupMulti" || typeAsString == "Lookup" || typeAsString == "UserMulti")
+                                    {
+                                        fieldValues.Append(SetArraySpecialFieldValueXml(changedProp.Key, changedProp.Value as FieldValueCollection, ref counter));
+                                    }
+                                    else if (typeAsString == "TaxonomyFieldTypeMulti")
+                                    {
+                                        fieldValues.Append(SetManagedMetadataMultiValueXml(changedProp.Key, changedProp.Value as FieldValueCollection,
+                                            taxonomyMultiValueObjectPaths, taxonomyMultiValueIdentities, ref counter, ref taxFieldObjectId, ref taxFieldIdentityObjectId));
+                                    }
                                 }
                             }
                             else if (changedProp.Value is List<string>)
@@ -1101,7 +1114,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(url));
             }
 
-            return new FieldUrlValue(fieldToUpdate.InternalName, Values)
+            return new FieldUrlValue()
             {
                 Url = url,
                 Description = description ?? url,
@@ -1121,7 +1134,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(lookupId));
             }
 
-            return new FieldLookupValue(fieldToUpdate.InternalName, Values)
+            return new FieldLookupValue()
             {
                 LookupId = lookupId,
                 Field = fieldToUpdate
@@ -1140,7 +1153,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(userId));
             }
 
-            return new FieldUserValue(fieldToUpdate.InternalName, Values)
+            return new FieldUserValue()
             {
                 LookupId = userId,
                 Field = fieldToUpdate
@@ -1159,7 +1172,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(principal));
             }
 
-            return new FieldUserValue(fieldToUpdate.InternalName, Values)
+            return new FieldUserValue()
             {
                 Principal = principal,
                 Field = fieldToUpdate
@@ -1183,7 +1196,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(label));
             }
 
-            return new FieldTaxonomyValue(fieldToUpdate.InternalName, Values)
+            return new FieldTaxonomyValue()
             {
                 TermId = termId,
                 Label = label,
@@ -1192,9 +1205,9 @@ namespace PnP.Core.Model.SharePoint
             };
         }
 
-        public IFieldValueCollection NewFieldValueCollection(IField fieldToUpdate, TransientDictionary parent)
+        public IFieldValueCollection NewFieldValueCollection(IField fieldToUpdate)
         {
-            return new FieldValueCollection(fieldToUpdate, fieldToUpdate.InternalName, parent);
+            return new FieldValueCollection(fieldToUpdate, fieldToUpdate.InternalName);
         }
         #endregion
 

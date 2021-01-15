@@ -8,7 +8,7 @@ namespace PnP.Core.Model.SharePoint
 {
     internal class FieldTaxonomyValue : FieldValue, IFieldTaxonomyValue
     {
-        internal FieldTaxonomyValue(string propertyName, TransientDictionary parent) : base(propertyName, parent)
+        internal FieldTaxonomyValue() : base()
         {
         }
 

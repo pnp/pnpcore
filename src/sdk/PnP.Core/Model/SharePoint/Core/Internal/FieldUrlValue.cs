@@ -12,7 +12,7 @@ namespace PnP.Core.Model.SharePoint
     /// </summary>
     internal class FieldUrlValue : FieldValue, IFieldUrlValue
     {
-        internal FieldUrlValue(string propertyName, TransientDictionary parent) : base(propertyName, parent)
+        internal FieldUrlValue() : base()
         {
         }
 

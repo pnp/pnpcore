@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -8,20 +9,17 @@ namespace PnP.Core.Model.SharePoint
 {
     internal class FieldValueCollection : IFieldValueCollection
     {
-        internal FieldValueCollection(IField field, string propertyName, TransientDictionary parent)
+        private bool hasChangedDueToDeleteOrAdd;
+
+        internal FieldValueCollection(IField field, string propertyName)
         {
             TypeAsString = field != null ? field.TypeAsString : "";
             Field = field;
             PropertyName = propertyName;
-            Parent = parent;
 
-            if (Parent != null && !string.IsNullOrEmpty(PropertyName))
-            {
-                Parent.MarkAsChanged(PropertyName);
-            }
+            // Track events on the observable collection
+            Values.CollectionChanged += Values_CollectionChanged;
         }
-
-        internal TransientDictionary Parent { get; set; }
 
         internal string PropertyName { get; set; }
 
@@ -29,7 +27,48 @@ namespace PnP.Core.Model.SharePoint
 
         internal IField Field { get; set; }
 
-        public List<IFieldValue> Values { get; } = new List<IFieldValue>();
+        public ObservableCollection<IFieldValue> Values { get; } = new ObservableCollection<IFieldValue>();
+
+        private void Values_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove ||
+                e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset ||
+                e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                hasChangedDueToDeleteOrAdd = true;
+
+                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+                {
+                    foreach (var item in e.NewItems)
+                    {
+                        (item as FieldValue).MarkAsChanged();
+                    }
+                }
+            }
+        }
+
+        internal List<IFieldValue> GetChangedValues()
+        {
+            // Check if there was a changed value or an added value (the changeflag for added item is set during add)
+            // or a change introduced by a delete or a collection reset If so return the current values as these need to be written back
+            if (hasChangedDueToDeleteOrAdd || Values.Any(p => (p as FieldValue).HasChanges))
+            {
+                return Values.ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        internal void Commit()
+        {
+            hasChangedDueToDeleteOrAdd = false;
+            foreach(var fieldValue in Values)
+            {
+                (fieldValue as FieldValue).Commit();
+            }
+        }
 
         internal object UserMultiToValidateUpdateItemJson()
         {
@@ -74,63 +113,12 @@ namespace PnP.Core.Model.SharePoint
             return sb.ToString();
         }
 
-        internal object LookupMultiToJson()
-        {
-            List<int> ids = new List<int>();
-
-            foreach (var item in Values)
-            {
-                ids.Add((item as FieldLookupValue).LookupId);
-            }
-
-            var updateMessage = new
-            {
-                __metadata = new { type = "Collection(Edm.Int32)" },
-                results = ids.ToArray()
-            };
-
-            return updateMessage;
-        }
 
         public void RemoveLookupValue(int lookupId)
         {
             foreach (var valueToRemove in Values.Cast<IFieldLookupValue>().Where(p => p.LookupId == lookupId).ToList())
             {
                 Values.Remove(valueToRemove);
-            }
-        }
-
-        internal string TaxonomyFieldTypeMultiUpdateString()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (var item in Values)
-            {
-                sb.Append($"{(item as FieldTaxonomyValue).WssId};#{(item as FieldTaxonomyValue).Label}|{(item as FieldTaxonomyValue).TermId};#");
-            }
-
-            return sb.ToString().TrimEnd('#');
-        }
-
-        internal IField TaxonomyFieldTypeMultiFieldToUpdate()
-        {
-            if (Field != null)
-            {
-                var fieldCollection = Field.Parent as FieldCollection;
-                // Find the corresponding Note field (mm fieldname + _0) by title search
-                var noteField = fieldCollection.FirstOrDefault(p => p.Title == $"{Field.Title}_0");
-                if (noteField != null)
-                {
-                    return noteField;
-                }
-                else
-                {
-                    throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_ListItemUpdate_NoTaxonomyNoteField);
-                }
-            }
-            else
-            {
-                throw new ClientException(ErrorType.Unsupported, PnPCoreResources.Exception_ListItemUpdate_NoFieldsLoaded);
             }
         }
 

@@ -6,7 +6,7 @@ namespace PnP.Core.Model.SharePoint
 {
     internal class FieldLocationValue : FieldValue, IFieldLocationValue
     {
-        internal FieldLocationValue(string propertyName, TransientDictionary parent) : base(propertyName, parent)
+        internal FieldLocationValue() : base()
         {
         }
 

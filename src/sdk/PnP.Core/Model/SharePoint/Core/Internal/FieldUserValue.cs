@@ -9,7 +9,7 @@ namespace PnP.Core.Model.SharePoint
 {
     internal class FieldUserValue : FieldLookupValue, IFieldUserValue
     {
-        internal FieldUserValue(string propertyName, TransientDictionary parent) : base(propertyName, parent)
+        internal FieldUserValue() : base()
         {
         }
 

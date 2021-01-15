@@ -1,4 +1,4 @@
---batchresponse_3772370e-5ad4-4d30-b61a-099d8e3f30d3
+--batchresponse_d9b21aca-23c6-4cb1-ae8d-db3da14085dc
 Content-Type: application/http
 Content-Transfer-Encoding: binary
 
@@ -6,4 +6,4 @@ HTTP/1.1 200 OK
 CONTENT-TYPE: application/json;odata=verbose;charset=utf-8
 
 {"d":{"AddValidateUpdateItemUsingPath":{"__metadata":{"type":"Collection(SP.ListItemFormUpdateValue)"},"results":[{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Title","FieldValue":"Item1","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"URLField1","FieldValue":"https://pnp.com, PnP Rocks","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"URLField2","FieldValue":"https://pnp.com, https://pnp.com","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"UserSingleField1","FieldValue":"[{\"Key\":\"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com\"}]","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"UserMultiField1","FieldValue":"[{\"Key\":\"i:0#.f|membership|bert.jansen@bertonline.onmicrosoft.com\"}]","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"TaxonomyField1","FieldValue":"Dutch|108b34b1-87af-452d-be13-881a29477965;","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"TaxonomyMultiField1","FieldValue":"Dutch|108b34b1-87af-452d-be13-881a29477965;English|8246e3c1-19ea-4b22-8ae3-df9cbc150a74;","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"LookupSingleField1","FieldValue":"1","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"LookupMultiField1","FieldValue":"1;#","HasException":false,"ItemId":0},{"ErrorCode":0,"ErrorMessage":null,"FieldName":"Id","FieldValue":"1","HasException":false,"ItemId":0}]}}}
---batchresponse_3772370e-5ad4-4d30-b61a-099d8e3f30d3--
+--batchresponse_d9b21aca-23c6-4cb1-ae8d-db3da14085dc--
