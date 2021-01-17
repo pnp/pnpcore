@@ -30,30 +30,46 @@ namespace PnP.Core.Model
         /// <summary>
         /// Returns a list of changed properties
         /// </summary>
-        [Browsable(false)]
-        [SystemProperty]
-        public IEnumerable<string> ChangedProperties => changes;
-
-        public PropertyDescriptorCollection GetChangedProperties()
+        internal PropertyDescriptorCollection ChangedProperties
         {
-            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(this);
-            PropertyDescriptorCollection result = new PropertyDescriptorCollection(Array.Empty<PropertyDescriptor>());
-            foreach (PropertyDescriptor property in properties)
+            get
             {
-                if (HasChanged(property.Name))
+                PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(this);
+                PropertyDescriptorCollection result = new PropertyDescriptorCollection(Array.Empty<PropertyDescriptor>());
+                foreach (PropertyDescriptor property in properties)
                 {
-                    result.Add(property);
+                    if (HasChanged(property.Name))
+                    {
+                        result.Add(property);
+                    }
                 }
-            }
 
-            return result;
-        }
+                return result;
+            } 
+        }        
 
         /// <summary>
         /// Are the changes done on this model instance
         /// </summary>
         [SystemProperty]
-        public bool HasChanges => changes.Count > 0;
+        public bool HasChanges
+        {
+            get
+            {
+                if (changes.Count > 0)
+                {
+                    return true;
+                }
+
+                // Also perform a "deep" check via loading the changed properties
+                if (ChangedProperties.Count > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
 
         /// <summary>
         /// Indication of logically deleted object, will be automatically removed from the collection

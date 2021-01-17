@@ -21,14 +21,16 @@ namespace PnP.Core.Model
                 Dictionary<string, object> changedProperties = new Dictionary<string, object>();
                 foreach (KeyValuePair<string, object> value in this)
                 {
+                    // FieldValue/FieldValueCollection is only used as part of the ListItem TransientDictionary field
                     if (value.Value is FieldValue fieldValue && fieldValue.HasChanges)
                     {
                         changedProperties.Add(value.Key, value.Value);
                     } 
-                    else if (value.Value is FieldValueCollection fieldValueCollection && fieldValueCollection.GetChangedValues() != null)
+                    else if (value.Value is FieldValueCollection fieldValueCollection && fieldValueCollection.HasChanges)
                     {
                         changedProperties.Add(value.Key, value.Value);
                     }
+                    // Applies to both ListItem as other places (e.g. Properties)
                     else if (changes.Contains(value.Key))
                     {
                         changedProperties.Add(value.Key, value.Value);
@@ -40,9 +42,35 @@ namespace PnP.Core.Model
 
         /// <summary>
         /// Does this model instance have changes?
-        /// </summary>
-        public bool HasChanges => changes.Count > 0;
+        /// </summary>        
+        public bool HasChanges
+        {
+            get
+            {
+                if (changes.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    foreach (KeyValuePair<string, object> value in this)
+                    {
+                        // FieldValue/FieldValueCollection is only used as part of the ListItem TransientDictionary field
+                        if (value.Value is FieldValue fieldValue && fieldValue.HasChanges)
+                        {
+                            return true;
+                        }
+                        else if (value.Value is FieldValueCollection fieldValueCollection && fieldValueCollection.HasChanges)
+                        {
+                            return true;
+                        }
+                    }
+                }
 
+                return false;
+            }
+        }
+            
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -101,7 +129,7 @@ namespace PnP.Core.Model
         {
             foreach(var property in base.Values)
             {
-                // If there are FieldValue or FieldValueCollection properties then they need to be committed as well
+                // If there are FieldValue or FieldValueCollection properties (in case of an ListItem) then they need to be committed as well
                 if (property is FieldValue propertyFieldValue)
                 {
                     propertyFieldValue.Commit();

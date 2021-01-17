@@ -29,6 +29,8 @@ namespace PnP.Core.Model.SharePoint
 
         public ObservableCollection<IFieldValue> Values { get; } = new ObservableCollection<IFieldValue>();
 
+        internal bool HasChanges => GetChangedValues() != null;
+
         private void Values_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove ||
@@ -47,7 +49,7 @@ namespace PnP.Core.Model.SharePoint
             }
         }
 
-        internal List<IFieldValue> GetChangedValues()
+        private List<IFieldValue> GetChangedValues()
         {
             // Check if there was a changed value or an added value (the changeflag for added item is set during add)
             // or a change introduced by a delete or a collection reset If so return the current values as these need to be written back

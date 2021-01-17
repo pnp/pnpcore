@@ -81,7 +81,17 @@ namespace PnP.Core.Model.SharePoint
         {
             return current.ContainsKey(property);
         }
-        
+
+        internal bool HasChanged(string propertyName = "")
+        {
+            if (changes.Contains(propertyName))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         internal void MarkAsChanged()
         {
             if (!changes.Any())

@@ -299,7 +299,7 @@ namespace PnP.Core.Model.SharePoint
             else if (changedProp.Value is FieldValueCollection fieldValueCollection)
             {
                 // Only process if there were changes in the field value collection
-                if (fieldValueCollection.GetChangedValues() != null)
+                if (fieldValueCollection.HasChanges)
                 {
                     if (fieldValueCollection.Field.TypeAsString == "UserMulti")
                     {
@@ -521,10 +521,8 @@ namespace PnP.Core.Model.SharePoint
             var entity = EntityManager.GetClassInfo(GetType(), this);
             IEnumerable<EntityFieldInfo> fields = entity.Fields;
 
-            var changedProperties = GetChangedProperties();
-
             bool changeFound = false;
-            foreach (PropertyDescriptor cp in changedProperties)
+            foreach (PropertyDescriptor cp in ChangedProperties)
             {
                 changeFound = true;
                 // Look for the corresponding property in the type
@@ -560,7 +558,7 @@ namespace PnP.Core.Model.SharePoint
                                 var collection = changedProp.Value as FieldValueCollection;
                                 
                                 // Only persist these fields if there was a change detected in the FieldValueCollection
-                                if (collection.GetChangedValues() != null)
+                                if (collection.HasChanges)
                                 {
                                     string typeAsString = collection.TypeAsString;
                                     if (string.IsNullOrEmpty(typeAsString))
