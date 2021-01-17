@@ -14473,12 +14473,12 @@ references:
   isSpec: "True"
   fullName: PnP.Core.Model.SharePoint.IListItem.NewFieldUserValue
   nameWithType: IListItem.NewFieldUserValue
-- uid: PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection(PnP.Core.Model.SharePoint.IField,PnP.Core.Model.TransientDictionary)
-  name: NewFieldValueCollection(IField, TransientDictionary)
-  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldValueCollection_PnP_Core_Model_SharePoint_IField_PnP_Core_Model_TransientDictionary_
-  commentId: M:PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection(PnP.Core.Model.SharePoint.IField,PnP.Core.Model.TransientDictionary)
-  fullName: PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection(PnP.Core.Model.SharePoint.IField, PnP.Core.Model.TransientDictionary)
-  nameWithType: IListItem.NewFieldValueCollection(IField, TransientDictionary)
+- uid: PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection(PnP.Core.Model.SharePoint.IField)
+  name: NewFieldValueCollection(IField)
+  href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldValueCollection_PnP_Core_Model_SharePoint_IField_
+  commentId: M:PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection(PnP.Core.Model.SharePoint.IField)
+  fullName: PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection(PnP.Core.Model.SharePoint.IField)
+  nameWithType: IListItem.NewFieldValueCollection(IField)
 - uid: PnP.Core.Model.SharePoint.IListItem.NewFieldValueCollection*
   name: NewFieldValueCollection
   href: api/PnP.Core.Model.SharePoint.IListItem.html#PnP_Core_Model_SharePoint_IListItem_NewFieldValueCollection_
