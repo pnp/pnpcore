@@ -128,10 +128,8 @@ namespace PnP.Core.Model.SharePoint
             var entity = EntityManager.GetClassInfo(GetType(), this);
             IEnumerable<EntityFieldInfo> fields = entity.Fields;
 
-            var changedProperties = GetChangedProperties();
-
             bool changeFound = false;
-            foreach (PropertyDescriptor cp in changedProperties)
+            foreach (PropertyDescriptor cp in ChangedProperties)
             {
                 changeFound = true;
                 // Look for the corresponding property in the type

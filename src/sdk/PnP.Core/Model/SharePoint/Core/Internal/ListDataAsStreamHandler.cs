@@ -91,7 +91,7 @@ namespace PnP.Core.Model.SharePoint
                         var overflowDictionary = itemToUpdate.Values;
 
                         // Translate this row first into an object model for easier consumption
-                        var rowToProcess = TransformRowData(row, list.Fields, overflowDictionary);
+                        var rowToProcess = TransformRowData(row, list.Fields);
 
                         foreach (var property in rowToProcess)
                         {
@@ -160,7 +160,7 @@ namespace PnP.Core.Model.SharePoint
                                     }
                                     else
                                     {
-                                        fieldValue = new FieldValueCollection(property.Field, property.Name, overflowDictionary);
+                                        fieldValue = new FieldValueCollection(property.Field, property.Name);
                                         foreach(var xx in property.Values)
                                         {
                                             var yy = xx.FieldValue.FromListDataAsStream(xx.Properties);
@@ -198,7 +198,7 @@ namespace PnP.Core.Model.SharePoint
             return result;
         }
 
-        private static List<ListDataAsStreamProperty> TransformRowData(JsonElement row, IFieldCollection fields, TransientDictionary overflowDictionary)
+        private static List<ListDataAsStreamProperty> TransformRowData(JsonElement row, IFieldCollection fields)
         {
             List<ListDataAsStreamProperty> properties = new List<ListDataAsStreamProperty>();
 
@@ -215,7 +215,7 @@ namespace PnP.Core.Model.SharePoint
                     };
 
                     // Is this a field that needs to be wrapped into a special field type?
-                    var specialField = DetectSpecialFieldType(streamProperty.Name, overflowDictionary, field);
+                    var specialField = DetectSpecialFieldType(streamProperty.Name, field);
                     if (specialField != null)
                     {
                         streamProperty.IsArray = specialField.Item2;
@@ -317,7 +317,7 @@ namespace PnP.Core.Model.SharePoint
                             // Add values that will become part of a FieldValueCollection later on
                             foreach (var streamPropertyElement in property.Value.EnumerateArray())
                             {
-                                (var fieldValue, var isArray) = DetectSpecialFieldType(streamProperty.Name, overflowDictionary, field);
+                                (var fieldValue, var isArray) = DetectSpecialFieldType(streamProperty.Name, field);
                                 var listDataAsStreamPropertyValue = new ListDataAsStreamPropertyValue()
                                 {
                                     FieldValue = fieldValue
@@ -438,7 +438,7 @@ namespace PnP.Core.Model.SharePoint
             return properties;
         }
 
-        private static Tuple<FieldValue, bool> DetectSpecialFieldType(string name, TransientDictionary dictionary, IField field)
+        private static Tuple<FieldValue, bool> DetectSpecialFieldType(string name, IField field)
         { 
             // Some system fields are of type lookup but should not be processed as lookup
             if (BuiltInFields.Contains(name))
@@ -448,14 +448,14 @@ namespace PnP.Core.Model.SharePoint
 
             switch (field.TypeAsString)
                 {
-                case "URL": return new Tuple<FieldValue, bool>(new FieldUrlValue(name, dictionary) { Field = field }, false);
-                case "UserMulti": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary) { Field = field }, true);
-                case "User": return new Tuple<FieldValue, bool>(new FieldUserValue(name, dictionary) { Field = field }, false);
-                case "LookupMulti": return new Tuple<FieldValue, bool>(new FieldLookupValue(name, dictionary) { Field = field }, true);
-                case "Lookup": return new Tuple<FieldValue, bool>(new FieldLookupValue(name, dictionary) { Field = field }, false);
-                case "TaxonomyFieldTypeMulti": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary) { Field = field }, true);
-                case "TaxonomyFieldType": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue(name, dictionary) { Field = field }, false);
-                case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue(name, dictionary) { Field = field }, false);
+                case "URL": return new Tuple<FieldValue, bool>(new FieldUrlValue() { Field = field }, false);
+                case "UserMulti": return new Tuple<FieldValue, bool>(new FieldUserValue() { Field = field }, true);
+                case "User": return new Tuple<FieldValue, bool>(new FieldUserValue() { Field = field }, false);
+                case "LookupMulti": return new Tuple<FieldValue, bool>(new FieldLookupValue() { Field = field }, true);
+                case "Lookup": return new Tuple<FieldValue, bool>(new FieldLookupValue() { Field = field }, false);
+                case "TaxonomyFieldTypeMulti": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue() { Field = field }, true);
+                case "TaxonomyFieldType": return new Tuple<FieldValue, bool>(new FieldTaxonomyValue() { Field = field }, false);
+                case "Location": return new Tuple<FieldValue, bool>(new FieldLocationValue() { Field = field }, false);
 
                 default:
                     {

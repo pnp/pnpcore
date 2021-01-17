@@ -954,8 +954,7 @@ namespace PnP.Core.Services
             // Define the JSON body of the update request based on the actual changes
             dynamic updateMessage = new ExpandoObject();
 
-            var changedProperties = model.GetChangedProperties();
-            foreach (PropertyDescriptor cp in changedProperties)
+            foreach (PropertyDescriptor cp in model.ChangedProperties)
             {
                 // Look for the corresponding property in the type
                 var changedField = fields.FirstOrDefault(f => f.Name == cp.Name);
@@ -1003,9 +1002,9 @@ namespace PnP.Core.Services
                             var complexObject = model.GetValue(changedField.Name) as TransientObject;
 
                             // Get the properties that have changed in the complex type
-                            foreach (string changedProp in complexObject.ChangedProperties)
+                            foreach (PropertyDescriptor changedProp in complexObject.ChangedProperties)
                             {
-                                ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp, complexObject.GetValue(changedProp));
+                                ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp.Name, complexObject.GetValue(changedProp.Name));
                             }
                             // Add this as value to the original changed property
                             ((ExpandoObject)updateMessage).SetProperty(changedField.GraphName, updateMessageComplexType as object);
@@ -1078,8 +1077,7 @@ namespace PnP.Core.Services
                 };
             }
 
-            var changedProperties = model.GetChangedProperties();
-            foreach (PropertyDescriptor cp in changedProperties)
+            foreach (PropertyDescriptor cp in model.ChangedProperties)
             {
                 // Look for the corresponding property in the type
                 var changedField = fields.FirstOrDefault(f => f.Name == cp.Name);
@@ -1103,9 +1101,9 @@ namespace PnP.Core.Services
                         var complexObject = model.GetValue(changedField.Name) as TransientObject;
 
                         // Get the properties that have changed in the complex type
-                        foreach (string changedProp in complexObject.ChangedProperties)
+                        foreach (PropertyDescriptor changedProp in complexObject.ChangedProperties)
                         {
-                            ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp, complexObject.GetValue(changedProp));
+                            ((ExpandoObject)updateMessageComplexType).SetProperty(changedProp.Name, complexObject.GetValue(changedProp.Name));
                         }
 
                         // Add this as value to the original changed property
@@ -1113,12 +1111,12 @@ namespace PnP.Core.Services
                     }
                     else if (model.GetValue(changedField.Name) is List<string>)
                     {
-                        // multi value choice field
+                        // multi value field
                         ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, FieldValueCollection.StringArrayToJson(model.GetValue(changedField.Name) as List<string>));
                     }
                     else if (model.GetValue(changedField.Name) is List<int>)
                     {
-                        // multi value choice field
+                        // multi value field
                         ((ExpandoObject)updateMessage).SetProperty(changedField.SharePointName, FieldValueCollection.IntArrayToJson(model.GetValue(changedField.Name) as List<int>));
                     }
                     else

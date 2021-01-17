@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace PnP.Core.Model.SharePoint
 {
@@ -11,7 +11,7 @@ namespace PnP.Core.Model.SharePoint
         /// <summary>
         /// The 'special' field values
         /// </summary>
-        public List<IFieldValue> Values { get; }
+        public ObservableCollection<IFieldValue> Values { get; }
 
         /// <summary>
         /// Removes <see cref="IFieldLookupValue"/> from the collection if found

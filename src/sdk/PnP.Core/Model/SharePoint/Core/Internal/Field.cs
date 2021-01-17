@@ -234,7 +234,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(url));
             }
 
-            return new FieldUrlValue(InternalName, null)
+            return new FieldUrlValue()
             {
                 Url = url,
                 Description = description ?? url,
@@ -249,7 +249,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(lookupId));
             }
 
-            return new FieldLookupValue(InternalName, null)
+            return new FieldLookupValue()
             {
                 LookupId = lookupId,
                 Field = this
@@ -263,7 +263,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(userId));
             }
 
-            return new FieldUserValue(InternalName, null)
+            return new FieldUserValue()
             {
                 LookupId = userId,
                 Field = this
@@ -277,7 +277,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(principal));
             }
 
-            return new FieldUserValue(InternalName, null)
+            return new FieldUserValue()
             {
                 Principal = principal,
                 Field = this
@@ -296,7 +296,7 @@ namespace PnP.Core.Model.SharePoint
                 throw new ArgumentNullException(nameof(label));
             }
 
-            return new FieldTaxonomyValue(InternalName, null)
+            return new FieldTaxonomyValue()
             {
                 TermId = termId,
                 Label = label,
@@ -307,7 +307,7 @@ namespace PnP.Core.Model.SharePoint
 
         public IFieldValueCollection NewFieldValueCollection()
         {
-            return new FieldValueCollection(this, InternalName, null);
+            return new FieldValueCollection(this, InternalName);
         }
 
         #endregion
