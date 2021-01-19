@@ -17,6 +17,15 @@ namespace PnP.Core.Model.Teams
         /// <returns>Newly added channel chat message</returns>
         public Task<ITeamChatMessage> AddAsync(string body);
 
+
+        /// <summary>
+        /// Adds a new channel chat message with more supported types
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        public Task<ITeamChatMessage> AddAsync(string body, ChatMessageContentType contentType);
+
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
@@ -25,12 +34,30 @@ namespace PnP.Core.Model.Teams
         public ITeamChatMessage Add(string body);
 
         /// <summary>
+        /// Adds a new channel chat
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        public ITeamChatMessage Add(string body, ChatMessageContentType contentType);
+
+        /// <summary>
         /// Adds a new channel chat message
         /// </summary>
         /// <param name="batch">Batch to use</param>
         /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public Task<ITeamChatMessage> AddBatchAsync(Batch batch, string body);
+
+
+        /// <summary>
+        /// Adds new channel chat message
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="body"></param>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        public Task<ITeamChatMessage> AddBatchAsync(Batch batch, string body, ChatMessageContentType contentType);
 
         /// <summary>
         /// Adds a new channel chat message
@@ -43,6 +70,16 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="body"></param>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        public ITeamChatMessage AddBatch(Batch batch, string body, ChatMessageContentType contentType);
+
+
+        /// <summary>
+        /// Adds a new channel chat message
+        /// </summary>
         /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public Task<ITeamChatMessage> AddBatchAsync(string body);
@@ -50,8 +87,24 @@ namespace PnP.Core.Model.Teams
         /// <summary>
         /// Adds a new channel chat message
         /// </summary>
+        /// <param name="body"></param>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        public Task<ITeamChatMessage> AddBatchAsync(string body, ChatMessageContentType contentType);
+
+        /// <summary>
+        /// Adds a new channel chat message
+        /// </summary>
         /// <param name="body">Body of the chat message</param>
         /// <returns>Newly added channel chat message</returns>
         public ITeamChatMessage AddBatch(string body);
+
+        /// <summary>
+        /// Adds a new channel chat message
+        /// </summary>
+        /// <param name="body"></param>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        public ITeamChatMessage AddBatch(string body, ChatMessageContentType contentType);
     }
 }

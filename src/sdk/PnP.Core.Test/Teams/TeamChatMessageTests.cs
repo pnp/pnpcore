@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PnP.Core.Model.Teams;
 using PnP.Core.Test.Utilities;
 using System;
 using System.Linq;
@@ -111,10 +112,57 @@ namespace PnP.Core.Test.Teams
                 Assert.IsNull(message.Subject);
                 Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
                 Assert.IsNull(message.Summary);
+            }
+        }
+
+        [TestMethod]
+        public async Task AddChatMessageHtmlAsyncTest()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var body = $"<h1>Hello</h1><br />This is a unit test (AddChatMessageHtmlAsyncTest) posting a message - <strong>PnP Rocks!</strong> - Woah...";
+                if (!chatMessages.Any(o => o.Body.Content == body))
+                {
+                    await chatMessages.AddAsync(body, ChatMessageContentType.Html);
+                }
+
+                channel =  await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.Last();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
 
             }
         }
 
+        
         [TestMethod]
         public void AddChatMessageBatchTest()
         {
