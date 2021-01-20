@@ -76,6 +76,38 @@ namespace PnP.Core.Test.Services
             return await CreateAsync(configuration.SiteUrl, configuration.AuthenticationProvider).ConfigureAwait(false);
         }
 
+        internal async Task<PnPContext> CreateWithTelemetryManagerAsync(string name, TelemetryManager telemetryManager)
+        {
+            // Search for the provided configuration
+            var configuration = ContextOptions.Configurations.FirstOrDefault(c => c.Name == name);
+            if (configuration == null)
+            {
+                throw new ClientException(ErrorType.ConfigurationError,
+                    string.Format(PnPCoreResources.Exception_ConfigurationError_InvalidPnPContextConfigurationName, name));
+            }
+
+            // Use the provided settings to create a new instance of SPOContext
+            var context = new PnPContext(Log, configuration.AuthenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, telemetryManager)
+            {
+                Uri = configuration.SiteUrl
+            };
+
+            ConfigurePnPContextForTesting(ref context);
+
+            await ConfigureTelemetry(context).ConfigureAwait(false);
+
+            // Perform context initialization
+            await InitializeContextAsync(context).ConfigureAwait(false);
+
+            // Configure the global Microsoft Graph settings
+            context.GraphFirst = ContextOptions.GraphFirst;
+            context.GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
+            context.GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
+
+            return context;
+
+        }
+
         public async Task<PnPContext> CreateWithoutInitializationAsync(string name)
         {
             // Search for the provided configuration
@@ -120,6 +152,8 @@ namespace PnP.Core.Test.Services
 
             ConfigurePnPContextForTesting(ref context);
 
+            await ConfigureTelemetry(context).ConfigureAwait(false);
+
             // Perform context initialization
             await InitializeContextAsync(context).ConfigureAwait(false);
 
@@ -127,8 +161,6 @@ namespace PnP.Core.Test.Services
             context.GraphFirst = ContextOptions.GraphFirst;
             context.GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
             context.GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
-
-            await ConfigureTelemetry(context).ConfigureAwait(false);
 
             return context;
         }
@@ -177,6 +209,26 @@ namespace PnP.Core.Test.Services
             await InitializeContextAsync(context).ConfigureAwait(false);
 
             return context;
+        }
+
+        internal PnPGlobalSettingsOptions GetGlobalSettingsOptions()
+        {
+            return GlobalOptions;
+        }
+
+        internal void HookupTelemetryManager()
+        {
+            TelemetryManager = new TestTelemetryManager(GetGlobalSettingsOptions());
+        }
+
+        internal void RemoveTelemetryManager()
+        {
+            TelemetryManager = null;
+        }
+
+        internal TelemetryManager GetTelemetryManager()
+        {
+            return TelemetryManager;
         }
 
         private void ConfigurePnPContextForTesting(ref PnPContext context)

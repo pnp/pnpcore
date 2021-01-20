@@ -23,8 +23,9 @@ namespace PnP.Core.Services
         /// <param name="backupApiCall">Backup rest api call, will be used in case we encounter a mixed batch</param>
         /// <param name="fromJsonCasting">Delegate for json type parsing</param>
         /// <param name="postMappingJson">Delegate for post mapping</param>
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
         /// <param name="order">Order of the request in the list of requests</param>
-        internal BatchRequest(TransientObject modelInstance, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, int order)
+        internal BatchRequest(TransientObject modelInstance, EntityInfo entityInfo, HttpMethod method, ApiCall apiCall, ApiCall backupApiCall, Func<FromJson, object> fromJsonCasting, Action<string> postMappingJson, string operationName, int order)
         {
             Id = Guid.NewGuid();
             Model = modelInstance;
@@ -34,6 +35,7 @@ namespace PnP.Core.Services
             BackupApiCall = backupApiCall;
             FromJsonCasting = fromJsonCasting;
             PostMappingJson = postMappingJson;
+            OperationName = operationName;
             Order = order;
             ExecutionNeeded = true;
         }
@@ -77,6 +79,11 @@ namespace PnP.Core.Services
         /// Backup rest api call, will be used in case we encounter a mixed <see cref="Batch"/>
         /// </summary>
         internal ApiCall BackupApiCall { get; private set; }
+
+        /// <summary>
+        /// Name of the operation, used for telemetry purposes
+        /// </summary>
+        internal string OperationName { get; private set; }
 
         /// <summary>
         /// Order of the request in the list of requests

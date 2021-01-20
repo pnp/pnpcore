@@ -504,7 +504,7 @@ namespace PnP.Core.Model
                 }
 
                 var batch = PnPContext.BatchClient.EnsureBatch();
-                batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, default, fromJsonCasting, postMappingJson);
+                batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, default, fromJsonCasting, postMappingJson, "Get");
 
                 // The domain model for Graph can have non expandable collections, hence these require an additional API call to populate. 
                 // Let's ensure these additional API calls's are included in a single batch
@@ -547,7 +547,7 @@ namespace PnP.Core.Model
                 apiRestBackup = await Query.BuildGetAPICallAsync(this, entityInfo, apiOverride, true).ConfigureAwait(false);
             }
 
-            batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, HttpMethod.Get, api.ApiCall, apiRestBackup.ApiCall, fromJsonCasting, postMappingJson, "GetBatch");
 
             // The domain model for Graph can have non expandable collections, hence these require an additional API call to populate. 
             // Let's ensure these additional API calls's are included in a single batch
@@ -638,7 +638,7 @@ namespace PnP.Core.Model
             }
 
             // Add the request to the batch
-            batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson, "AddBatch");
         }
 
         /// <summary>
@@ -667,7 +667,7 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
-            batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, HttpMethod.Post, postApiCall, default, fromJsonCasting, postMappingJson, "Add");
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
 
@@ -736,7 +736,7 @@ namespace PnP.Core.Model
                 return;
             }
 
-            batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson, "UpdateBatch");
         }
 
         /// <summary>
@@ -759,7 +759,7 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
-            batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, new HttpMethod("PATCH"), api.ApiCall, default, fromJsonCasting, postMappingJson, "Update");
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
         #endregion
@@ -802,7 +802,7 @@ namespace PnP.Core.Model
             }
 
             // Also try to build the rest equivalent, this will be used in case we encounter mixed rest/graph batches
-            batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson, "DeleteBatch");
         }
 
         /// <summary>
@@ -826,7 +826,7 @@ namespace PnP.Core.Model
                 return;
             }
 
-            batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson);
+            batch.Add(this, entityInfo, HttpMethod.Delete, api.ApiCall, default, fromJsonCasting, postMappingJson, "Delete");
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
         }
         #endregion
@@ -837,9 +837,10 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal async Task RequestBatchAsync(ApiCall apiCall, HttpMethod method)
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        internal async Task RequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
-            await RequestBatchAsync(PnPContext.CurrentBatch, apiCall, method).ConfigureAwait(false);
+            await RequestBatchAsync(PnPContext.CurrentBatch, apiCall, method, operationName).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -848,7 +849,8 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal async Task RequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method)
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        internal async Task RequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -866,7 +868,7 @@ namespace PnP.Core.Model
             apiCall.Request = await TokenHandler.ResolveTokensAsync(this, apiCall.Request, PnPContext).ConfigureAwait(false);
 
             // Add the request to the batch
-            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
+            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
         }
 
         /// <summary>
@@ -874,7 +876,8 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal async Task<Batch> RequestAsync(ApiCall apiCall, HttpMethod method)
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        internal async Task<Batch> RequestAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
             // Get entity information for the entity to update
             var entityInfo = GetClassInfo();
@@ -901,7 +904,7 @@ namespace PnP.Core.Model
 
             // Add the request to the batch
             var batch = PnPContext.BatchClient.EnsureBatch();
-            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
+            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
             await PnPContext.BatchClient.ExecuteBatch(batch).ConfigureAwait(false);
             return batch;
         }
@@ -911,9 +914,10 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal async Task RawRequestBatchAsync(ApiCall apiCall, HttpMethod method)
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        internal async Task RawRequestBatchAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
-            await RawRequestBatchAsync(PnPContext.CurrentBatch, apiCall, method).ConfigureAwait(false);
+            await RawRequestBatchAsync(PnPContext.CurrentBatch, apiCall, method, operationName).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -922,7 +926,8 @@ namespace PnP.Core.Model
         /// <param name="batch">Batch to add the request to</param>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal async Task RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method)
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        internal async Task RawRequestBatchAsync(Batch batch, ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
             // Mark request as raw
             apiCall.RawRequest = true;
@@ -950,7 +955,7 @@ namespace PnP.Core.Model
             }
 
             // Add the request to the batch
-            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler);
+            batch.Add(this, entityInfo, method, apiCall, default, fromJsonCasting: MappingHandler, postMappingJson: PostMappingHandler, CleanupOperationName(operationName));
         }
 
         /// <summary>
@@ -958,12 +963,13 @@ namespace PnP.Core.Model
         /// </summary>
         /// <param name="apiCall">Api call to execute</param>
         /// <param name="method"><see cref="HttpMethod"/> to use for this request</param>
-        internal async Task<ApiCallResponse> RawRequestAsync(ApiCall apiCall, HttpMethod method)
+        /// <param name="operationName">Name of the operation, used for telemetry purposes</param>
+        internal async Task<ApiCallResponse> RawRequestAsync(ApiCall apiCall, HttpMethod method, [CallerMemberName] string operationName = null)
         {
             // Mark request as raw
             apiCall.RawRequest = true;
 
-            var batch = await RequestAsync(apiCall, method).ConfigureAwait(false);
+            var batch = await RequestAsync(apiCall, method, CleanupOperationName(operationName)).ConfigureAwait(false);
             var batchFirstRequest = batch.Requests.First().Value;
             return new ApiCallResponse(apiCall,
                                        batchFirstRequest.ResponseJson,
@@ -972,6 +978,23 @@ namespace PnP.Core.Model
                                        batchFirstRequest.ResponseHeaders,
                                        csomResponseJson: apiCall.ExpectBinaryResponse ? null : batchFirstRequest.CsomResponseJson,
                                        binaryContent: apiCall.ExpectBinaryResponse ? batchFirstRequest.ResponseBinaryContent : null);
+        }
+
+        private static string CleanupOperationName(string operationName)
+        {
+            if (!string.IsNullOrEmpty(operationName))
+            {
+                if (operationName.EndsWith("Async"))
+                {
+                    return operationName.Substring(0, operationName.Length - 5);
+                }
+                else
+                {
+                    return operationName;
+                }
+            }
+
+            return "N/A";
         }
 
         private ApiCall PrefixApiCall(ApiCall apiCall, EntityInfo entityInfo)

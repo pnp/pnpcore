@@ -214,7 +214,7 @@ namespace PnP.Core.QueryModel
             var query = await new QueryClient().BuildGetAPICallAsync(concreteEntity as BaseDataModel<T>, entityInfo, apiCall).ConfigureAwait(false);
 
             // Trigger the get request
-            await (concreteEntity as BaseDataModel<T>).RequestAsync(query.ApiCall, HttpMethod.Get).ConfigureAwait(false);
+            await (concreteEntity as BaseDataModel<T>).RequestAsync(query.ApiCall, HttpMethod.Get, "Get").ConfigureAwait(false);
 
             // Add/update the result in the parent collection
             (source as IManageableCollection<T>).AddOrUpdate(concreteEntity, i => ((IDataModelWithKey)i).Key.Equals((concreteEntity as IDataModelWithKey).Key));

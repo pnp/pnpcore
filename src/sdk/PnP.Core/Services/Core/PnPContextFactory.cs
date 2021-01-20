@@ -61,7 +61,7 @@ namespace PnP.Core.Services
         /// <summary>
         /// Connected Telemetry client
         /// </summary>
-        internal TelemetryManager TelemetryManager { get; private set; }
+        internal TelemetryManager TelemetryManager { get; set; }
 
         /// <summary>
         /// Options used to configure this <see cref="PnPContext"/>
@@ -175,6 +175,9 @@ namespace PnP.Core.Services
                 Uri = url
             };
 
+            // Configure telemetry, if enabled
+            await ConfigureTelemetry(context).ConfigureAwait(false);
+
             // Perform context initialization
             await InitializeContextAsync(context).ConfigureAwait(false);
 
@@ -182,8 +185,6 @@ namespace PnP.Core.Services
             context.GraphFirst = ContextOptions.GraphFirst;
             context.GraphCanUseBeta = ContextOptions.GraphCanUseBeta;
             context.GraphAlwaysUseBeta = ContextOptions.GraphAlwaysUseBeta;
-
-            await ConfigureTelemetry(context).ConfigureAwait(false);
 
             return context;
         }
@@ -210,12 +211,14 @@ namespace PnP.Core.Services
             // Use the provided settings to create a new instance of PnPContext
             var context = new PnPContext(Log, authenticationProvider, SharePointRestClient, MicrosoftGraphClient, ContextOptions, GlobalOptions, TelemetryManager);
 
+            // Configure telemetry, if enabled
+            await ConfigureTelemetry(context).ConfigureAwait(false);
+
+            // Load the group to find out what the SharePoint site url is
             await ConfigureForGroup(context, groupId).ConfigureAwait(false);
 
             // Perform context initialization
             await InitializeContextAsync(context).ConfigureAwait(false);
-
-            await ConfigureTelemetry(context).ConfigureAwait(false);
 
             return context;
         }
@@ -253,7 +256,7 @@ namespace PnP.Core.Services
             {
                 Interactive = true
             };
-            await (context.Web as Web).RequestAsync(api, HttpMethod.Get).ConfigureAwait(false);
+            await (context.Web as Web).RequestAsync(api, HttpMethod.Get, "Get").ConfigureAwait(false);
             
             // Replace the context URI with the value using the correct casing
             context.Uri = context.Web.Url;
@@ -303,6 +306,9 @@ namespace PnP.Core.Services
             if (TelemetryManager != null && GlobalOptions != null && !GlobalOptions.DisableTelemetry)
             {
                 await context.SetAADTenantId().ConfigureAwait(false);
+
+                // Send a one time "Init" event
+                TelemetryManager.LogInitRequest();
             }
         }
     }

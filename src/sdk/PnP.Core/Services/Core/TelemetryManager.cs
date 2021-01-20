@@ -2,25 +2,31 @@
 using Microsoft.ApplicationInsights.Extensibility;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Net.Http;
 using System.Reflection;
+#if NET5_0
+using System.Runtime.InteropServices;
+#endif
 
 namespace PnP.Core.Services
 {
     internal class TelemetryManager
     {
-        private readonly TelemetryConfiguration telemetryConfiguration = TelemetryConfiguration.CreateDefault();
-
+        
         internal TelemetryManager(PnPGlobalSettingsOptions globalOptions)
         {
-            telemetryConfiguration.InstrumentationKey = "ffe6116a-bda0-4f0a-b0cf-d26f1b0d84eb";
-            TelemetryClient = new TelemetryClient(telemetryConfiguration);
+            TelemetryConfiguration = TelemetryConfiguration.CreateDefault();
+            TelemetryConfiguration.InstrumentationKey = "ffe6116a-bda0-4f0a-b0cf-d26f1b0d84eb";
+            TelemetryClient = new TelemetryClient(TelemetryConfiguration);
             GlobalOptions = globalOptions;
 
             Assembly coreAssembly = Assembly.GetExecutingAssembly();
             Version = ((AssemblyFileVersionAttribute)coreAssembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute))).Version;
         }
+
+        /// <summary>
+        /// Telemetry configuration
+        /// </summary>
+        internal TelemetryConfiguration TelemetryConfiguration { get; private set; }
 
         /// <summary>
         /// Azure AppInsights Telemetry client
@@ -37,12 +43,30 @@ namespace PnP.Core.Services
         /// </summary>
         internal string Version { get; private set; }
 
-        internal void LogServiceRequest(Batch batch, BatchRequest request, PnPContext context)
+        internal virtual void LogServiceRequest(BatchRequest request, PnPContext context)
         {
-            TelemetryClient.TrackEvent("PnPCoreRequest", PopulateProperties(request, batch, context));
+            TelemetryClient.TrackEvent("PnPCoreRequest", PopulateRequestProperties(request, context));
         }
 
-        private Dictionary<string, string> PopulateProperties(BatchRequest request, Batch batch, PnPContext context)
+        internal virtual void LogInitRequest()
+        {
+            TelemetryClient.TrackEvent("PnPCoreInit", PopulateInitProperties());
+        }
+
+        internal Dictionary<string, string> PopulateInitProperties()
+        {
+            Dictionary<string, string> properties = new Dictionary<string, string>(10)
+            {
+                { "PnPCoreSDKVersion", Version },
+                { "AADTenantId", GlobalOptions.AADTenantId.ToString() },
+                { "OS", GetOSVersion() },
+
+            };
+
+            return properties;
+        }
+
+        internal Dictionary<string, string> PopulateRequestProperties(BatchRequest request, PnPContext context)
         {
             Dictionary<string, string> properties = new Dictionary<string, string>(10)
             {
@@ -51,45 +75,40 @@ namespace PnP.Core.Services
                 { "Model", request.Model.GetType().FullName },
                 { "ApiType", request.ApiCall.Type.ToString() },
                 { "ApiMethod", request.Method.ToString() },
-                { "PnPContextId", context.Id.ToString() },
-                { "BatchId", batch.Id.ToString() },
-                { "BatchRequestId", request.Id.ToString() }
-
+                { "GraphFirst", context.GraphFirst.ToString() },
+                { "GraphCanUseBeta", context.GraphCanUseBeta.ToString() },
+                { "GraphAlwaysUseBeta", context.GraphAlwaysUseBeta.ToString() },
+                { "OS", GetOSVersion() },
+                { "Operation", request.OperationName },
             };
-
-            if (request.Method == HttpMethod.Get)
-            {
-                var selectProperties = GetSelectedProperties(request.ApiCall);
-                if (selectProperties != null)
-                {
-                    properties.Add("SelectedProperties", selectProperties);
-                }
-            }
-
+            
             return properties;
         }
 
-        private static string GetSelectedProperties(ApiCall apiCall)
+        private static string GetOSVersion()
         {
-            if (apiCall.Request.Contains("$select=", StringComparison.InvariantCultureIgnoreCase))
-            {
-                string queryStringToParse;
-                if (apiCall.Type == ApiType.SPORest)
-                {
-                    // REST API calls are fully qualified
-                    queryStringToParse = new Uri(apiCall.Request).Query;
-                }
-                else
-                {
-                    // Graph API calls are delivered without the graph endpoint suffix
-                    queryStringToParse = new Uri($"{PnPConstants.MicrosoftGraphBaseUrl}{apiCall.Request}").Query;
-                }
 
-                NameValueCollection queryString = System.Web.HttpUtility.ParseQueryString(queryStringToParse);
-                return queryString["$select"];
+#if NET5_0
+            if (RuntimeInformation.RuntimeIdentifier == "browser-wasm")
+            {
+               return "WASM";            
+            }
+#endif
+
+            if (OperatingSystem.IsWindows())
+            {
+                return "Windows";
+            }
+            else if (OperatingSystem.IsLinux())
+            {
+                return "Linux";
+            }
+            else if (OperatingSystem.IsMacOS())
+            {
+                return "MacOS";
             }
 
-            return null;
+            return Environment.OSVersion.Platform.ToString();
         }
     }
 }
