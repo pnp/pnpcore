@@ -200,14 +200,15 @@ namespace PnP.Core.Test.Base
         [TestMethod]
         public async Task TelemetryRoundtrip()
         {
+            //TestCommon.Instance.Mocking = false;
+
             // As there's a live API call here (to get the tenant id) let's skip this when running via a GitHub action
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
             bool initPassed= false;
             bool requestPassed = false;
             int numberOfRequestsPassed = 0;
-
-            //TestCommon.Instance.Mocking = false;
+            
             try
             {
                 // Hookup a fake TestManager class that simply returns the created telemetry properties versus sending them to AppInsights.
@@ -259,7 +260,9 @@ namespace PnP.Core.Test.Base
                 {
                     var web = await context.Web.GetAsync(p => p.WelcomePage);
 
-                    Assert.IsTrue(initPassed);
+                    // Don't verify if the init passed as when multiple tests are run other tests might have triggered this and 
+                    // since it only fires once...this test might fail
+                    //Assert.IsTrue(initPassed);
                     Assert.IsTrue(requestPassed);
                     Assert.IsTrue(numberOfRequestsPassed == 3);
                 }

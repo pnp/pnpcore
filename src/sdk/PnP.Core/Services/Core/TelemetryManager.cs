@@ -11,11 +11,12 @@ namespace PnP.Core.Services
 {
     internal class TelemetryManager
     {
-        
+        internal static string InstrumentationKey = "ffe6116a-bda0-4f0a-b0cf-d26f1b0d84eb";
+
         internal TelemetryManager(PnPGlobalSettingsOptions globalOptions)
         {
             TelemetryConfiguration = TelemetryConfiguration.CreateDefault();
-            TelemetryConfiguration.InstrumentationKey = "ffe6116a-bda0-4f0a-b0cf-d26f1b0d84eb";
+            TelemetryConfiguration.InstrumentationKey = InstrumentationKey;
             TelemetryClient = new TelemetryClient(TelemetryConfiguration);
             GlobalOptions = globalOptions;
 
