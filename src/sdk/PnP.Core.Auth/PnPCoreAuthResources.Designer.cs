@@ -61,6 +61,15 @@ namespace PnP.Core.Auth {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initialized ACSAuthenticationProvider.
+        /// </summary>
+        internal static string ACSAuthenticationProvider_LogInit {
+            get {
+                return ResourceManager.GetString("ACSAuthenticationProvider_LogInit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid configuration for AspNetCoreAuthenticationProvider.
         /// </summary>
         internal static string AspNetCoreAuthenticationProvider_InvalidConfiguration {

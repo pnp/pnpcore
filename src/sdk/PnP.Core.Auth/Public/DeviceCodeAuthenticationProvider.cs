@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Auth.Utilities;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -32,11 +33,27 @@ namespace PnP.Core.Auth
         /// Public constructor for external consumers of the library
         /// </summary>
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
-        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
         /// <param name="redirectUri">The Redirect URI for the authentication flow</param>
         /// <param name="deviceCodeVerification">External action to manage the Device Code verification</param>
         public DeviceCodeAuthenticationProvider(string clientId, string tenantId,
             Uri redirectUri, Action<DeviceCodeNotification> deviceCodeVerification)
+            : this(clientId, tenantId, new PnPCoreAuthenticationDeviceCodeOptions()
+            {
+                RedirectUri = redirectUri
+            }, deviceCodeVerification)
+        {
+        }
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="options">Options for the authentication provider</param>
+        /// <param name="deviceCodeVerification">External action to manage the Device Code verification</param>
+        public DeviceCodeAuthenticationProvider(string clientId, string tenantId,
+            PnPCoreAuthenticationDeviceCodeOptions options, Action<DeviceCodeNotification> deviceCodeVerification)
             : this(null)
         {
             DeviceCodeVerification = deviceCodeVerification;
@@ -44,10 +61,7 @@ namespace PnP.Core.Auth
             {
                 ClientId = clientId,
                 TenantId = tenantId,
-                DeviceCode = new PnPCoreAuthenticationDeviceCodeOptions
-                {
-                    RedirectUri = redirectUri
-                }
+                DeviceCode = options
             });
         }
 
@@ -83,16 +97,10 @@ namespace PnP.Core.Auth
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
             RedirectUri = options.DeviceCode.RedirectUri;
 
-            // Define the authority for the current security context
-            var authority = new Uri(String.Format(System.Globalization.CultureInfo.InvariantCulture,
-                AuthGlobals.AuthorityFormat,
-                TenantId));
-
             // Build the MSAL client
             publicClientApplication = PublicClientApplicationBuilder
                 .Create(ClientId)
-                .WithAuthority(authority)
-                .WithRedirectUri(RedirectUri.ToString())
+                .WithPnPAdditionalAuthenticationSettings(options.DeviceCode, TenantId)
                 .Build();
 
             // Log the initialization information
@@ -124,16 +132,11 @@ namespace PnP.Core.Auth
         /// <summary>
         /// Gets an access token for the requested resource and scope
         /// </summary>
-        /// <param name="resource">Resource to request an access token for</param>
+        /// <param name="resource">Resource to request an access token for (unused)</param>
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
-            if (resource == null)
-            {
-                throw new ArgumentNullException(nameof(resource));
-            }
-
             if (scopes == null)
             {
                 throw new ArgumentNullException(nameof(scopes));

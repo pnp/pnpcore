@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using PnP.Core.Auth.ACS;
+using PnP.Core.Auth.ACS.OAuth;
 using PnP.Core.Auth.Services.Builder.Configuration;
 using System;
-using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -10,30 +11,32 @@ using System.Threading.Tasks;
 namespace PnP.Core.Auth
 {
     /// <summary>
-    /// Authentication Provider that relies on an external token provider 
+    /// Authentication Provider that implements ACS token creation
     /// </summary>
-    public sealed class ExternalAuthenticationProvider : OAuthAuthenticationProvider
+    public sealed class ACSAuthenticationProvider : OAuthAuthenticationProvider
     {
-        /// <summary>
-        /// A function providing the access token to use
-        /// </summary>
-        public Func<Uri, string[], string> AccessTokenProvider { get; set; }
+        private OAuth2AccessTokenResponse lastToken;
+        private TokenHelper tokenHelper;
+        private Uri siteUrl;
 
         /// <summary>
         /// Public constructor for external consumers of the library
         /// </summary>
-        /// <param name="accessTokenProvider">A function providing the access token to use</param>
-        public ExternalAuthenticationProvider(Func<Uri, string[], string> accessTokenProvider)
+        /// <param name="siteUrl">Url of the site collection to access</param>
+        /// <param name="clientId">ClientId of the principal</param>
+        /// <param name="options">Options to use for token creation</param>
+        public ACSAuthenticationProvider(Uri siteUrl, string clientId, PnPCoreAuthenticationACSOptions options)
             : this((ILogger<OAuthAuthenticationProvider>)null)
         {
-            AccessTokenProvider = accessTokenProvider;
+            this.siteUrl = siteUrl;
+            Init(new PnPCoreAuthenticationCredentialConfigurationOptions() { ClientId = clientId, ACS = options });
         }
 
         /// <summary>
-        /// Public constructor leveraging DI to initialize the ILogger interfafce
+        /// Public constructor leveraging DI to initialize the ILogger interface
         /// </summary>
         /// <param name="logger">The instance of the logger service provided by DI</param>
-        public ExternalAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
+        public ACSAuthenticationProvider(ILogger<OAuthAuthenticationProvider> logger)
             : base(logger)
         {
         }
@@ -46,6 +49,19 @@ namespace PnP.Core.Auth
         {
             // Log the initialization information
             Log?.LogInformation(PnPCoreAuthResources.ExternalAuthenticationProvider_LogInit);
+
+            // realm is optional, determine it if not supplied
+            if (string.IsNullOrEmpty(options.ACS.Realm))
+            {
+                options.ACS.Realm = TokenHelper.GetRealmFromTargetUrl(siteUrl).GetAwaiter().GetResult();
+            }
+
+            if (string.IsNullOrEmpty(options.ACS.Realm))
+            {
+                throw new Exception($"Could not determine realm for url {siteUrl}");
+            }
+
+            this.tokenHelper = new TokenHelper(options.ClientId, options.ACS);
         }
 
         /// <summary>
@@ -76,29 +92,25 @@ namespace PnP.Core.Auth
         /// <param name="resource">Resource to request an access token for</param>
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            if (scopes == null)
+            // token request without resource are unsupported
+            if (resource == null)
             {
-                throw new ArgumentNullException(nameof(scopes));
+                return null;
             }
 
-            if (AccessTokenProvider == null)
+            // implement simple token caching
+            if (lastToken == null || lastToken.ExpiresOn >= DateTime.Now.AddMinutes(-3))
             {
-                throw new ConfigurationErrorsException(
-                    PnPCoreAuthResources.ExternalAuthenticationProvider_MissingAccessTokenProvider);
+                lastToken = await tokenHelper.GetAppOnlyAccessToken(TokenHelper.SharePointPrincipal, resource.Authority).ConfigureAwait(false);
             }
-
-            var accessToken = AccessTokenProvider.Invoke(resource, scopes);
 
             // Log the access token retrieval action
-            Log?.LogInformation(PnPCoreAuthResources.AuthenticationProvider_LogAccessTokenRetrieval,
+            Log?.LogInformation(PnPCoreAuthResources.ACSAuthenticationProvider_LogInit,
                 GetType().Name, resource, scopes.Aggregate(string.Empty, (c, n) => c + ", " + n).TrimEnd(','));
 
-            // Return the Access Token, if we've got it
-            return accessToken;
+            return lastToken.AccessToken;
         }
 
         /// <summary>
@@ -113,9 +125,8 @@ namespace PnP.Core.Auth
                 throw new ArgumentNullException(nameof(resource));
             }
 
-            // Use the .default scope if the scopes are not provided
-            return await GetAccessTokenAsync(resource,
-                new string[] { $"{resource.Scheme}://{resource.Authority}/.default" }).ConfigureAwait(false);
+            // We do net use scopes for ACS
+            return await GetAccessTokenAsync(resource, null).ConfigureAwait(false);
         }
     }
 }

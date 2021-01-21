@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
 using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Auth.Utilities;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -28,24 +29,37 @@ namespace PnP.Core.Auth
         /// Public constructor for external consumers of the library
         /// </summary>
         /// <param name="clientId">The Client ID for the Authentication Provider</param>
-        /// <param name="tenantId">The Tenand ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
         /// <param name="storeName">The Store Name to get the X.509 certificate from</param>
         /// <param name="storeLocation">The Store Location to get the X.509 certificate from</param>
         /// <param name="thumbprint">The Thumbprint of the X.509 certificate</param>
         public X509CertificateAuthenticationProvider(string clientId, string tenantId,
             StoreName storeName, StoreLocation storeLocation, string thumbprint)
+            : this(clientId, tenantId,
+                 new PnPCoreAuthenticationX509CertificateOptions
+                 {
+                     StoreName = storeName,
+                     StoreLocation = storeLocation,
+                     Thumbprint = thumbprint
+                 })
+        {
+        }
+
+
+        /// <summary>
+        /// Public constructor for external consumers of the library
+        /// </summary>
+        /// <param name="clientId">The Client ID for the Authentication Provider</param>
+        /// <param name="tenantId">The Tenant ID for the Authentication Provider</param>
+        /// <param name="options">Options for the authentication provider</param>
+        public X509CertificateAuthenticationProvider(string clientId, string tenantId, PnPCoreAuthenticationX509CertificateOptions options)
             : this(null)
         {
             Init(new PnPCoreAuthenticationCredentialConfigurationOptions
             {
                 ClientId = clientId,
                 TenantId = tenantId,
-                X509Certificate = new PnPCoreAuthenticationX509CertificateOptions
-                {
-                    StoreName = storeName,
-                    StoreLocation = storeLocation,
-                    Thumbprint = thumbprint
-                }
+                X509Certificate = options
             });
         }
 
@@ -72,35 +86,23 @@ namespace PnP.Core.Auth
             }
 
             // We need the certificate thumbprint
-            if (string.IsNullOrEmpty(options.X509Certificate.Thumbprint))
+            if (options.X509Certificate.Certificate == null && string.IsNullOrEmpty(options.X509Certificate.Thumbprint))
             {
                 throw new ConfigurationErrorsException(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit);
             }
 
             ClientId = !string.IsNullOrEmpty(options.ClientId) ? options.ClientId : AuthGlobals.DefaultClientId;
             TenantId = !string.IsNullOrEmpty(options.TenantId) ? options.TenantId : AuthGlobals.OrganizationsTenantId;
-            Certificate = X509CertificateUtility.LoadCertificate(
+            Certificate = options.X509Certificate.Certificate ?? X509CertificateUtility.LoadCertificate(
                 options.X509Certificate.StoreName,
                 options.X509Certificate.StoreLocation,
                 options.X509Certificate.Thumbprint);
 
-            // Build the MSAL client
-            if (TenantId.Equals(AuthGlobals.OrganizationsTenantId, StringComparison.InvariantCultureIgnoreCase))
-            {
-                confidentialClientApplication = ConfidentialClientApplicationBuilder
-                    .Create(ClientId)
-                    .WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs)
-                    .WithCertificate(Certificate)
-                    .Build();
-            }
-            else
-            {
-                confidentialClientApplication = ConfidentialClientApplicationBuilder
-                    .Create(ClientId)
-                    .WithTenantId(TenantId)
-                    .WithCertificate(Certificate)
-                    .Build();
-            }
+            confidentialClientApplication = ConfidentialClientApplicationBuilder
+                .Create(ClientId)
+                .WithCertificate(Certificate)
+                .WithPnPAdditionalAuthenticationSettings(options.CredentialManager, TenantId)
+                .Build();
 
             // Log the initialization information
             Log?.LogInformation(PnPCoreAuthResources.X509CertificateAuthenticationProvider_LogInit,
@@ -134,16 +136,11 @@ namespace PnP.Core.Auth
         /// <summary>
         /// Gets an access token for the requested resource and scope
         /// </summary>
-        /// <param name="resource">Resource to request an access token for</param>
+        /// <param name="resource">Resource to request an access token for (unused)</param>
         /// <param name="scopes">Scopes to request</param>
         /// <returns>An access token</returns>
         public override async Task<string> GetAccessTokenAsync(Uri resource, string[] scopes)
         {
-            if (resource == null)
-            {
-                throw new ArgumentNullException(nameof(resource));
-            }
-
             if (scopes == null)
             {
                 throw new ArgumentNullException(nameof(scopes));
