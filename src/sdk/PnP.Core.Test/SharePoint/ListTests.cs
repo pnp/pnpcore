@@ -531,7 +531,11 @@ namespace PnP.Core.Test.SharePoint
                                           </Query>
                                         </View>";
 
-                        await list2.GetItemsByCamlQueryAsync(query);
+                        await list2.GetItemsByCamlQueryAsync(new CamlQueryOptions()
+                        {
+                            ViewXml = query,
+                            DatesInUtc = true
+                        });
                         Assert.IsTrue(list2.Items.Count() == 1);
                         Assert.IsTrue(list2.Items.First()["CustomField"].ToString() == "Field6");
                     }
