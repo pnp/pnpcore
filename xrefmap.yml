@@ -3274,6 +3274,19 @@ references:
   commentId: T:PnP.Core.Model.IRequestableCollection
   fullName: PnP.Core.Model.IRequestableCollection
   nameWithType: IRequestableCollection
+- uid: PnP.Core.Model.IRequestableCollection.Clear
+  name: Clear()
+  href: api/PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Clear
+  commentId: M:PnP.Core.Model.IRequestableCollection.Clear
+  fullName: PnP.Core.Model.IRequestableCollection.Clear()
+  nameWithType: IRequestableCollection.Clear()
+- uid: PnP.Core.Model.IRequestableCollection.Clear*
+  name: Clear
+  href: api/PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Clear_
+  commentId: Overload:PnP.Core.Model.IRequestableCollection.Clear
+  isSpec: "True"
+  fullName: PnP.Core.Model.IRequestableCollection.Clear
+  nameWithType: IRequestableCollection.Clear
 - uid: PnP.Core.Model.IRequestableCollection.Length
   name: Length
   href: api/PnP.Core.Model.IRequestableCollection.html#PnP_Core_Model_IRequestableCollection_Length
