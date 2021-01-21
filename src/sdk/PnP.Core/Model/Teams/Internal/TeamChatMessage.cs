@@ -1,5 +1,6 @@
 ﻿using PnP.Core.Services;
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Text.Json;
 
@@ -23,6 +24,27 @@ namespace PnP.Core.Model.Teams
                 body.body = new ExpandoObject();
                 body.body.content = Body.Content;
                 body.body.contentType = Body.ContentType.ToString();
+
+                if(Attachments.Length > 0)
+                {
+                    dynamic attachmentList = new List<dynamic>();
+                    foreach(var attachment in Attachments)
+                    {
+                        dynamic attach = new ExpandoObject();
+                        attach.id = attachment.Id;
+                        attach.content = attachment.Content;
+                        attach.contentUrl = attachment.ContentUrl;
+                        attach.contentType = attachment.ContentType;
+                        attach.name = attachment.Name;
+                        attach.thumbnailUrl = attachment.ThumbnailUrl;
+
+                        attachmentList.Add(attach);
+                    }
+
+                    body.attachments = attachmentList;
+                }
+
+                //TODO: Add SUbject here
 
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
@@ -67,7 +89,7 @@ namespace PnP.Core.Model.Teams
 
         public ITeamChatMessageMentionCollection Mentions { get => GetModelCollectionValue<ITeamChatMessageMentionCollection>(); }
 
-        public ITeamChatMessageAttachmentCollection Attachments { get => GetModelCollectionValue<ITeamChatMessageAttachmentCollection>(); }
+        public ITeamChatMessageAttachmentCollection Attachments { get => GetModelCollectionValue<ITeamChatMessageAttachmentCollection>(); set => SetModelValue(value); }
 
         [KeyProperty(nameof(Id))]
         public override object Key { get => Id; set => Id = value.ToString(); }

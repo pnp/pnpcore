@@ -23,8 +23,9 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="body"></param>
         /// <param name="contentType"></param>
+        /// <param name="attachments"></param>
         /// <returns></returns>
-        public Task<ITeamChatMessage> AddAsync(string body, ChatMessageContentType contentType);
+        public Task<ITeamChatMessage> AddAsync(string body, ChatMessageContentType contentType, ITeamChatMessageAttachmentCollection attachments);
 
         /// <summary>
         /// Adds a new channel chat message
@@ -38,8 +39,9 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="body"></param>
         /// <param name="contentType"></param>
+        /// <param name="attachments"></param>
         /// <returns></returns>
-        public ITeamChatMessage Add(string body, ChatMessageContentType contentType);
+        public ITeamChatMessage Add(string body, ChatMessageContentType contentType, ITeamChatMessageAttachmentCollection attachments);
 
         /// <summary>
         /// Adds a new channel chat message

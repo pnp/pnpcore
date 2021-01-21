@@ -135,7 +135,8 @@ namespace PnP.Core.Test.Teams
                 var body = $"<h1>Hello</h1><br />This is a unit test (AddChatMessageHtmlAsyncTest) posting a message - <strong>PnP Rocks!</strong> - Woah...";
                 if (!chatMessages.Any(o => o.Body.Content == body))
                 {
-                    await chatMessages.AddAsync(body, ChatMessageContentType.Html);
+                    //TODO: Fix that null
+                    await chatMessages.AddAsync(body, ChatMessageContentType.Html, null);
                 }
 
                 channel =  await channel.GetAsync(o => o.Messages);
@@ -162,7 +163,67 @@ namespace PnP.Core.Test.Teams
             }
         }
 
-        
+        [TestMethod]
+        public async Task AddChatMessageAdaptiveAsyncTest()
+        {
+            TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var team = await context.Team.GetAsync(o => o.PrimaryChannel);
+                var channel = team.PrimaryChannel;
+                Assert.IsNotNull(channel);
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var chatMessages = channel.Messages;
+
+                Assert.IsNotNull(chatMessages);
+
+                // assume as if there are no chat messages
+                // There appears to be no remove option yet in this feature - so add a recognisable message
+                var attachmentId = "74d20c7f34aa4a7fb74e2b30004247c5";
+                var body = $"<attachment id=\"{attachmentId}\"></attachment>";
+                if (!chatMessages.Any(o => o.Body.Content == body))
+                {
+                    ITeamChatMessageAttachmentCollection coll = new TeamChatMessageAttachmentCollection
+                    {
+                        new TeamChatMessageAttachment
+                        {
+                           Id = attachmentId,
+                           ContentType = "application/vnd.microsoft.card.thumbnail",
+                           Content = "{\r\n  \"title\": \"Unit Test posting a card\",\r\n  \"subtitle\": \"<h3>This is the subtitle</h3>\",\r\n  \"text\": \"Here is some body text. <br>\\r\\nAnd a <a href=\\\"http://microsoft.com/\\\">hyperlink</a>. <br>\\r\\nAnd below that is some buttons:\",\r\n  \"buttons\": [\r\n    {\r\n      \"type\": \"messageBack\",\r\n      \"title\": \"Login to FakeBot\",\r\n      \"text\": \"login\",\r\n      \"displayText\": \"login\",\r\n      \"value\": \"login\"\r\n    }\r\n  ]\r\n}",
+                           ContentUrl = null,
+                           Name = null,
+                           ThumbnailUrl = null
+                        }
+                    };
+
+                    await chatMessages.AddAsync(body, ChatMessageContentType.Html, coll);
+                }
+
+                channel = await channel.GetAsync(o => o.Messages);
+                var updateMessages = channel.Messages;
+
+                var message = updateMessages.Last();
+                Assert.IsNotNull(message.CreatedDateTime);
+                // Depending on regional settings this check might fail
+                //Assert.AreEqual(message.DeletedDateTime, DateTime.MinValue);
+                Assert.IsNotNull(message.Etag);
+                Assert.IsNotNull(message.Importance);
+                Assert.IsNotNull(message.LastModifiedDateTime);
+                Assert.IsNotNull(message.Locale);
+                Assert.IsNotNull(message.MessageType);
+                Assert.IsNotNull(message.WebUrl);
+
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.ReplyToId));
+                Assert.IsNull(message.ReplyToId);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Subject));
+                Assert.IsNull(message.Subject);
+                Assert.IsTrue(message.IsPropertyAvailable(o => o.Summary));
+                Assert.IsNull(message.Summary);
+
+            }
+        }
+
         [TestMethod]
         public void AddChatMessageBatchTest()
         {

@@ -21,7 +21,7 @@ namespace PnP.Core.Model.Teams
         /// <returns>Newly added channel chat message</returns>
         public async Task<ITeamChatMessage> AddAsync(string body)
         {
-            return await AddAsync(body, ChatMessageContentType.Text).ConfigureAwait(false);
+            return await AddAsync(body, ChatMessageContentType.Text, null).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -29,8 +29,9 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="body"></param>
         /// <param name="contentType"></param>
+        /// <param name="attachments"></param>
         /// <returns></returns>
-        public async Task<ITeamChatMessage> AddAsync(string body, ChatMessageContentType contentType)
+        public async Task<ITeamChatMessage> AddAsync(string body, ChatMessageContentType contentType, ITeamChatMessageAttachmentCollection attachments = null)
         {
             if (string.IsNullOrEmpty(body))
             {
@@ -47,6 +48,11 @@ namespace PnP.Core.Model.Teams
                 Content = body,
                 ContentType = contentType,
             };
+
+            if(attachments != null && attachments.Length > 0)
+            {
+                newChannelChatMessage.Attachments = attachments;
+            }
 
 
             return await newChannelChatMessage.AddAsync().ConfigureAwait(false) as TeamChatMessage;
@@ -67,10 +73,11 @@ namespace PnP.Core.Model.Teams
         /// </summary>
         /// <param name="body"></param>
         /// <param name="contentType"></param>
+        /// <param name="attachments"></param>
         /// <returns></returns>
-        public ITeamChatMessage Add(string body, ChatMessageContentType contentType)
+        public ITeamChatMessage Add(string body, ChatMessageContentType contentType, ITeamChatMessageAttachmentCollection attachments = null)
         {
-            return AddAsync(body, contentType).GetAwaiter().GetResult();
+            return AddAsync(body, contentType, attachments).GetAwaiter().GetResult();
         }
 
         /// <summary>
