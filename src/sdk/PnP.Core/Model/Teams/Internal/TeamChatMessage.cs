@@ -44,7 +44,8 @@ namespace PnP.Core.Model.Teams
                     body.attachments = attachmentList;
                 }
 
-                //TODO: Add SUbject here
+                //TODO: Add subject
+                //body.subject = Subject;
 
                 // Serialize object to json
                 var bodyContent = JsonSerializer.Serialize(body, typeof(ExpandoObject), new JsonSerializerOptions { WriteIndented = false });
