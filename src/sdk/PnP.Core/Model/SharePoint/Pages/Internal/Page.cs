@@ -17,7 +17,7 @@ namespace PnP.Core.Model.SharePoint
         private bool isDefaultDescription;
         private string pageTitle;
         private string pageName;
-        private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p=>p.Title, p => p.EnableFolderCreation,
+        private static readonly Expression<Func<IList, object>>[] getPagesLibraryExpression = new Expression<Func<IList, object>>[] {p => p.Title, p => p.TemplateType, p => p.EnableFolderCreation,
             p => p.EnableMinorVersions, p => p.EnableModeration, p => p.EnableVersioning, p => p.RootFolder, p=>p.ListItemEntityTypeFullName };
 
         #region Construction
@@ -1380,6 +1380,10 @@ namespace PnP.Core.Model.SharePoint
         public async Task SaveAsTemplateAsync(string pageName = null)
         {
             string pageUrl = $"{(await GetTemplatesFolderAsync().ConfigureAwait(false))}/{pageName}";
+
+            // Ensure the isDefaultDescription field is set to true as that will trigger automatic description 
+            // setting for pages created from a template page. This aligns with the OOB behavior
+            isDefaultDescription = true;
 
             // Save the page as template
             await SaveAsync(pageUrl).ConfigureAwait(false);

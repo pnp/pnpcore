@@ -1441,6 +1441,41 @@ namespace PnP.Core.Test.SharePoint
             }
         }
 
+        [TestMethod]
+        public async Task SavePageWithDataAsTemplate()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                var newPage = await context.Web.NewPageAsync();
+                newPage.AddSection(CanvasSectionTemplate.TwoColumn, 1);
+                newPage.AddControl(newPage.NewTextPart("this page rocks!"), newPage.Sections[0].Columns[0]);
+
+                string templatePageName = TestCommon.GetPnPSdkTestAssetName("SavePageWithDataAsTemplate.aspx");
+                // Save the page
+                await newPage.SaveAsTemplateAsync(templatePageName);
+
+                // Load the template page again as regular page
+                var pages = await context.Web.GetPagesAsync(templatePageName);
+                var templatePage = pages.First();
+
+                // Create new page from this template
+                string pageName = TestCommon.GetPnPSdkTestAssetName("FromTemplate.aspx");
+                (templatePage.Sections[0].Controls[0] as IPageText).Text = "Updated content";
+                await templatePage.SaveAsync(pageName);                
+
+                pages = await context.Web.GetPagesAsync(TestCommon.GetPnPSdkTestAssetName(""));
+                var fromTemplatePage = pages.FirstOrDefault(p => p.Name == pageName);
+                templatePage = pages.FirstOrDefault(p => p.Name == templatePageName);
+
+                Assert.IsTrue((fromTemplatePage as Page).PageListItem["Description"].ToString() == "Updated content");
+
+                // Delete the pages
+                await templatePage.DeleteAsync();
+                await fromTemplatePage.DeleteAsync();
+            }
+        }
+
         #endregion
 
         #region Page publishing and promotion/demotion
