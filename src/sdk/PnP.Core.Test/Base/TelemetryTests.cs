@@ -205,7 +205,6 @@ namespace PnP.Core.Test.Base
             // As there's a live API call here (to get the tenant id) let's skip this when running via a GitHub action
             if (TestCommon.RunningInGitHubWorkflow()) Assert.Inconclusive("Skipping live test because we're running inside a GitHub action");
 
-            bool initPassed= false;
             bool requestPassed = false;
             int numberOfRequestsPassed = 0;
             
@@ -219,7 +218,6 @@ namespace PnP.Core.Test.Base
                 {
                     if (eventName == "Init")
                     {
-                        initPassed = true;
                         Assert.IsTrue(properties.ContainsKey("PnPCoreSDKVersion"));
                         Assert.IsTrue(!string.IsNullOrEmpty(properties["PnPCoreSDKVersion"]));
                         Assert.IsTrue(properties.ContainsKey("AADTenantId"));
@@ -262,7 +260,6 @@ namespace PnP.Core.Test.Base
 
                     // Don't verify if the init passed as when multiple tests are run other tests might have triggered this and 
                     // since it only fires once...this test might fail
-                    //Assert.IsTrue(initPassed);
                     Assert.IsTrue(requestPassed);
                     Assert.IsTrue(numberOfRequestsPassed == 3);
                 }

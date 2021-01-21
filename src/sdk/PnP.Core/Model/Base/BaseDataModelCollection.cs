@@ -99,6 +99,8 @@ namespace PnP.Core.Model
 
         public virtual void Clear()
         {
+            Requested = false;
+            Metadata.Clear();
             items.Clear();
         }
 
