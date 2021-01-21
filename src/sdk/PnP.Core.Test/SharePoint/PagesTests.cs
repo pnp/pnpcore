@@ -163,6 +163,34 @@ namespace PnP.Core.Test.SharePoint
                 await folderToDelete.DeleteAsync();
             }
         }
+
+        [TestMethod]
+        public async Task LoadPagesInNonEglishSite()
+        {
+            //TestCommon.Instance.Mocking = false;
+            using (var context = await TestCommon.Instance.GetContextAsync(TestCommon.TestSite))
+            {
+                // Create a new sub site to test as we don't want to break the main site home page
+                string webTitle = "DutchWeb";
+                var addedWeb = await context.Web.Webs.AddAsync(new WebOptions { Title = webTitle, Url = webTitle, Language = 1043 });
+
+                // Create a context for the newly created web
+                using (var context2 = await TestCommon.Instance.CloneAsync(context, addedWeb.Url, 1))
+                {
+                    // Read the current home page
+                    string pageName = "Home.aspx";
+                    var pages = await context2.Web.GetPagesAsync(pageName);
+
+                    Assert.IsTrue(pages.First() != null);
+                    Assert.IsTrue(pages.First().PagesLibrary != null);
+                    Assert.IsTrue(pages.First().PagesLibrary.Title == "Sitepagina's");
+                }
+
+                // Delete the web to cleanup the test artefacts
+                await addedWeb.DeleteAsync();
+            }
+        }
+
         #endregion
 
         #region Available web parts tests
