@@ -264,7 +264,8 @@ namespace PnP.Core.Test.Teams
                 // Useful reference - https://docs.microsoft.com/en-us/graph/api/chatmessage-post?view=graph-rest-beta&tabs=http#example-5-sending-inline-images-along-with-the-message
                 // assume as if there are no chat messages
                 
-                var body = $"<h1>Hello</h1><br />This is a unit test (AddChatMessageInlineImagesAsyncTest) posting a message with inline image <img src=\"../hostedContents/1/$value\" >";
+                var body = $"<div><div><h1>Hello</h1><p>This is a unit test (AddChatMessageInlineImagesAsyncTest) posting a message with inline image</p><div><span><img height=\"392\" src=\"../hostedContents/1/$value\" width=\"300\" style=\"vertical-align:bottom; width:300px; height:392px\"></span></div></div></div>";
+
                 if (!chatMessages.Any(o => o.Body.Content == body))
                 {
                     ITeamChatMessageHostedContentCollection coll = new TeamChatMessageHostedContentCollection
@@ -276,7 +277,6 @@ namespace PnP.Core.Test.Teams
                             ContentType = "image/png"
                         }
                     };
-
 
                     await chatMessages.AddAsync(body, ChatMessageContentType.Html, hostedContents: coll);
                 }
